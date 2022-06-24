@@ -713,6 +713,7 @@ features:
           STRIPZERO: Strip trailing zeros
           SIGN: Sign
           CROSSADD: Add
+          CROSSAVG: Average
           CROSSSUBTRACT: Subtract
           CROSSMULTIPLY: Multiply
           CROSSDIVIDEQ: Divide

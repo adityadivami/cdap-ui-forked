@@ -340,6 +340,11 @@ export default class Calculate extends Component {
         validColTypes: NUMBER_TYPES,
         expression: () => `arithmetic:min(${this.columns[0]}, ${this.columns[1]})`,
       },
+      {
+        name: 'CROSSAVG',
+        validColTypes: NUMBER_TYPES,
+        expression: () => `arithmetic:avg(${this.columns[0]}, ${this.columns[1]})`,
+      }
     ];
 
     this.SIMPLE_POPOVER_OPTIONS = [
@@ -376,6 +381,7 @@ export default class Calculate extends Component {
       'CROSSEQUAL',
       'CROSSMAX',
       'CROSSMIN',
+      'CROSSAVG',
       'DECIMALSQUARE',
       'DECIMALCUBE',
     ];
