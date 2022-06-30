@@ -44,20 +44,22 @@ export default class Calculate extends Component {
     super(props);
     this.VALID_TYPES = NUMBER_TYPES.concat(['string']);
 
-    const {isDisabled, crossColumn, multiColumn, columns, columnTypes} = this.parseColumns();
+    const {isDisabled, crossColumn, multiColumn, columns, columnTypes, areColsMixedTypes} = this.parseColumns();
 
     this.isDisabled = isDisabled;
     this.crossColumn = crossColumn;
     this.multiColumn = multiColumn;
     this.columns = columns;
     this.columnTypes = columnTypes;
+    this.areColsMixedTypes = areColsMixedTypes;
 
     this.defaultState = {
       operationPopoverOpen: null,
       operationInput: 1,
       createNewColumn: false,
       newColumnInput: this.props.column + T.translate(`${COPY_NEW_COLUMN_PREFIX}.inputSuffix`),
-      isDisabled: this.VALID_TYPES.indexOf(this.columnTypes[0]) === -1 || this.isDisabled,
+      isDisabled: !this.columnTypes.every(type => this.VALID_TYPES.includes(type)) // Check all columnTypes valid
+                  || this.isDisabled
     };
 
     this.state = Object.assign({}, this.defaultState);
@@ -301,55 +303,66 @@ export default class Calculate extends Component {
       {
         name: 'CROSSADD',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:add(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSSUBTRACT',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:minus(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSMULTIPLY',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:multiply(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSDIVIDEQ',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:divideq(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSDIVIDER',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:divider(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSLCM',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:lcm(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSEQUAL',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:equal(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSMAX',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:max(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSMIN',
         validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
         expression: () => `arithmetic:min(${this.columns[0]}, ${this.columns[1]})`,
       }
     ];
 
     // These options operate on >=2 columns at a time
+    // TODO: change to NATIVE_NUMBER_TYPES?
     this.MULTI_COLUMN_CALCULATE_OPTIONS = [
      {
        name: 'MULTIAVG',
        validColTypes: NUMBER_TYPES,
+       acceptMixedTypes: true,
        expression: () => `arithmetic:avg(${this.columns[0]}, ${this.columns[1]})`,
      }
     ];
@@ -479,7 +492,7 @@ export default class Calculate extends Component {
 
   parseColumns = () => {
     let columns = typeof this.props.column === 'string' ? [this.props.column] : this.props.column;
-    console.log(columns);
+    let columnTypes = new Set(columns.map(col => DataPrepStore.getState().dataprep.typesCheck[col]));
 
     let type1 = DataPrepStore.getState().dataprep.typesCheck[columns[0]];
     if (columns.length === 1) {
@@ -488,29 +501,28 @@ export default class Calculate extends Component {
         crossColumn: false,
         multiColumn: false,
         columns: columns[0],
-        columnTypes: [type1]
+        columnTypes: [...columnTypes],
+        areColsMixedTypes: false
       };
     }
 
     if (columns.length >= 2) {
-      let index = columns.indexOf(this.props.ddSelected);
-      if (index !== -1) {
+      if (columns.includes(this.props.ddSelected)) {
         // Add currently-selected column to front of column list
         columns = columns.filter(col => col !== this.props.ddSelected);
         columns.unshift(this.props.ddSelected);
 
-        let columnTypes = new Set(columns.map(col => DataPrepStore.getState().dataprep.typesCheck[col]));
-
-        /*
-        Disable Calculate if both numerical and String-type columns are selected.
-        This could be changed in the future if some options can operate on both at once.
-        */
         return {
-          isDisabled: (columnTypes.has('string') && columnTypes.size >= 1) ? true : false,
-          crossColumn: columns.length === 2 ? true : false,
+          /*
+          Disable Calculate if both numerical and String-type columns are selected.
+          This could be changed in the future if some options can operate on both at once.
+          */
+          isDisabled: columnTypes.has('string') && columnTypes.size >= 1,
+          crossColumn: columns.length === 2,
           multiColumn: true,
           columns: columns,
-          columnTypes: columns.map(col => DataPrepStore.getState().dataprep.typesCheck[col])
+          columnTypes: [...columnTypes],
+          areColsMixedTypes: columnTypes.size > 1
         };
       }
     }
@@ -521,7 +533,8 @@ export default class Calculate extends Component {
       crossColumn: false,
       multiColumn: false,
       columns: columns,
-      columnTypes: [type1]
+      columnTypes: [...columnTypes],
+      areColsMixedTypes: false
     };
   }
 
@@ -571,7 +584,6 @@ export default class Calculate extends Component {
       destinationColumn = this.state.newColumnInput;
     }
     let directive = `set-column :${destinationColumn} ${expression}`;
-    console.log(directive);
 
     execute([directive]).subscribe(
       () => {
@@ -591,15 +603,18 @@ export default class Calculate extends Component {
 
   renderOptions() {
     return this.getCalculateOperations().filter(
-    // TODO: adjust this whole thing to correctly work with different column types (change columnTypes[0])
-      (option) => option.name === 'label' || option.validColTypes.indexOf(this.columnTypes[0]) !== -1
+      (option) => option.name === 'label'
+                    || (!this.areColsMixedTypes && option.validColTypes.includes(this.columnTypes[0]))
+                    || (this.areColsMixedTypes
+                        && option.acceptMixedTypes
+                        && this.columnTypes.every(type => option.validColTypes.includes(type)))
     ).map((option, i) => {
       const key = `${option.name}${i}`;
       if (option.name === 'label') {
         return (
           <div key={key} className="column-type-label">
             <span>
-              {NUMBER_TYPES.indexOf(this.columnTypes[0]) !== -1
+              {NUMBER_TYPES.includes(this.columnTypes[0])
                 ? T.translate(`${PREFIX}.columnTypeLabel.numeric`)
                 : capitalize(this.columnTypes[0])}
             </span>
@@ -644,9 +659,11 @@ export default class Calculate extends Component {
       <div className="second-level-popover" onClick={preventPropagation}>
         <div className="calculate-options">
           {/* Right now don't need to use ScrollableList for string options since there's only one of them.
-            Likewise, we don't need ScrollableList when >=3 columns are selected, since there's only one option.
-            When we have more string and/or multiColumn options in the future, we can just do renderOptions() */
-          NUMBER_TYPES.indexOf(this.columnTypes[0]) !== -1 && (!this.multiColumn || this.crossColumn)
+            Likewise, we don't need ScrollableList when >=3 columns are selected, since there's only one option,
+            or when the columns are mixed types.
+            When we have more string/multiColumn/mixedType options in the future, we can just do renderOptions() */
+          NUMBER_TYPES.includes(this.columnTypes[0]) && !this.areColsMixedTypes
+            && (!this.multiColumn || this.crossColumn)
             ? this.renderOptionsWithScrollableList()
             : this.renderOptions()}
         </div>
