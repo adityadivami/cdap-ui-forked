@@ -714,7 +714,6 @@ features:
           STRIPZERO: Strip trailing zeros
           SIGN: Sign
           CROSSADD: Add
-          CROSSAVG: Average
           CROSSSUBTRACT: Subtract
           CROSSMULTIPLY: Multiply
           CROSSDIVIDEQ: Divide
@@ -723,6 +722,7 @@ features:
           CROSSEQUAL: Equal
           CROSSMAX: Max
           CROSSMIN: Min
+          MULTIAVG: Average
         title: Calculate
       ChangeDataType:
         disabledTooltip: "Change data type is not available on columns of data type 'LocalDate', 'LocalTime', or 'ZonedDateTime'"

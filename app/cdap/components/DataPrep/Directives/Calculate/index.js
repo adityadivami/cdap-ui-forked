@@ -44,19 +44,20 @@ export default class Calculate extends Component {
     super(props);
     this.VALID_TYPES = NUMBER_TYPES.concat(['string']);
 
-    const {isDisabled, crossColumn, columns, columnType} = this.parseColumns();
+    const {isDisabled, crossColumn, multiColumn, columns, columnTypes} = this.parseColumns();
 
     this.isDisabled = isDisabled;
     this.crossColumn = crossColumn;
+    this.multiColumn = multiColumn;
     this.columns = columns;
-    this.columnType = columnType;
+    this.columnTypes = columnTypes;
 
     this.defaultState = {
       operationPopoverOpen: null,
       operationInput: 1,
       createNewColumn: false,
       newColumnInput: this.props.column + T.translate(`${COPY_NEW_COLUMN_PREFIX}.inputSuffix`),
-      isDisabled: this.VALID_TYPES.indexOf(this.columnType) === -1 || this.isDisabled,
+      isDisabled: this.VALID_TYPES.indexOf(this.columnTypes[0]) === -1 || this.isDisabled,
     };
 
     this.state = Object.assign({}, this.defaultState);
@@ -67,6 +68,7 @@ export default class Calculate extends Component {
     this.toggleCreateNewColumn = this.toggleCreateNewColumn.bind(this);
     this.getExpressionAndApply = this.getExpressionAndApply.bind(this);
 
+    // These options operate on exactly one column
     this.CALCULATE_OPTIONS = [
       {
         name: 'label',
@@ -294,6 +296,7 @@ export default class Calculate extends Component {
       },
     ];
 
+    // These options operate on exactly 2 columns
     this.CROSS_COLUMN_CALCULATE_OPTIONS = [
       {
         name: 'CROSSADD',
@@ -339,12 +342,16 @@ export default class Calculate extends Component {
         name: 'CROSSMIN',
         validColTypes: NUMBER_TYPES,
         expression: () => `arithmetic:min(${this.columns[0]}, ${this.columns[1]})`,
-      },
-      {
-        name: 'CROSSAVG',
-        validColTypes: NUMBER_TYPES,
-        expression: () => `arithmetic:avg(${this.columns[0]}, ${this.columns[1]})`,
       }
+    ];
+
+    // These options operate on >=2 columns at a time
+    this.MULTI_COLUMN_CALCULATE_OPTIONS = [
+     {
+       name: 'MULTIAVG',
+       validColTypes: NUMBER_TYPES,
+       expression: () => `arithmetic:avg(${this.columns[0]}, ${this.columns[1]})`,
+     }
     ];
 
     this.SIMPLE_POPOVER_OPTIONS = [
@@ -381,7 +388,7 @@ export default class Calculate extends Component {
       'CROSSEQUAL',
       'CROSSMAX',
       'CROSSMIN',
-      'CROSSAVG',
+      'MULTIAVG',
       'DECIMALSQUARE',
       'DECIMALCUBE',
     ];
@@ -472,27 +479,31 @@ export default class Calculate extends Component {
 
   parseColumns = () => {
     let columns = typeof this.props.column === 'string' ? [this.props.column] : this.props.column;
+    console.log(columns);
 
     let type1 = DataPrepStore.getState().dataprep.typesCheck[columns[0]];
     if (columns.length === 1) {
       return {
         isDisabled: false,
         crossColumn: false,
+        multiColumn: false,
         columns: columns[0],
-        columnType: type1
+        columnTypes: [type1]
       };
     }
 
-    if (columns.length === 2) {
-      const type2 = DataPrepStore.getState().dataprep.typesCheck[columns[1]];
+    if (columns.length >= 2) {
       let index = columns.indexOf(this.props.ddSelected);
-      if (type1 === type2 && index !== -1) {
-        columns = index === 0 ? columns : [this.props.ddSelected, columns[0]];
+      if (index !== -1) {
+        // Add currently-selected column to front of column list
+        columns = columns.filter(col => col !== this.props.ddSelected);
+        columns.unshift(this.props.ddSelected);
         return {
           isDisabled: false,
-          crossColumn: true,
+          crossColumn: columns.length === 2 ? true : false,
+          multiColumn: true,
           columns: columns,
-          columnType: type1
+          columnTypes: columns.map(col => DataPrepStore.getState().dataprep.typesCheck[col])
         };
       }
     }
@@ -501,13 +512,22 @@ export default class Calculate extends Component {
     return {
       isDisabled: true,
       crossColumn: false,
+      multiColumn: false,
       columns: columns,
-      columnType: type1
+      columnTypes: [type1]
     };
   }
 
   getCalculateOperations = () => {
-    return this.crossColumn ? this.CROSS_COLUMN_CALCULATE_OPTIONS : this.CALCULATE_OPTIONS;
+    if (this.multiColumn) {
+      if (this.crossColumn) {
+        return this.CROSS_COLUMN_CALCULATE_OPTIONS.concat(this.MULTI_COLUMN_CALCULATE_OPTIONS);
+      } else {
+        return this.MULTI_COLUMN_CALCULATE_OPTIONS;
+      }
+    } else {
+      return this.CALCULATE_OPTIONS;
+    }
   }
 
   getExpressionAndApply() {
@@ -544,6 +564,7 @@ export default class Calculate extends Component {
       destinationColumn = this.state.newColumnInput;
     }
     let directive = `set-column :${destinationColumn} ${expression}`;
+    console.log(directive);
 
     execute([directive]).subscribe(
       () => {
@@ -563,16 +584,17 @@ export default class Calculate extends Component {
 
   renderOptions() {
     return this.getCalculateOperations().filter(
-      (option) => option.name === 'label' || option.validColTypes.indexOf(this.columnType) !== -1
+    // TODO: adjust this whole thing to correctly work with different column types (change columnTypes[0])
+      (option) => option.name === 'label' || option.validColTypes.indexOf(this.columnTypes[0]) !== -1
     ).map((option, i) => {
       const key = `${option.name}${i}`;
       if (option.name === 'label') {
         return (
           <div key={key} className="column-type-label">
             <span>
-              {NUMBER_TYPES.indexOf(this.columnType) !== -1
+              {NUMBER_TYPES.indexOf(this.columnTypes[0]) !== -1
                 ? T.translate(`${PREFIX}.columnTypeLabel.numeric`)
-                : capitalize(this.columnType)}
+                : capitalize(this.columnTypes[0])}
             </span>
           </div>
         );
@@ -615,9 +637,9 @@ export default class Calculate extends Component {
       <div className="second-level-popover" onClick={preventPropagation}>
         <div className="calculate-options">
           {/* Right now don't need to use ScrollableList for string options since there's only one of them.
-            When we have more string options in the future, we can just do renderOptions() */
-
-          NUMBER_TYPES.indexOf(this.columnType) !== -1
+            Likewise, we don't need ScrollableList when >=3 columns are selected, since there's only one option.
+            When we have more string and/or multiColumn options in the future, we can just do renderOptions() */
+          NUMBER_TYPES.indexOf(this.columnTypes[0]) !== -1 && (!this.multiColumn || this.crossColumn)
             ? this.renderOptionsWithScrollableList()
             : this.renderOptions()}
         </div>
