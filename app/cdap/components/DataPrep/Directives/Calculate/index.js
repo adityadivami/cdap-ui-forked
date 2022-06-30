@@ -505,17 +505,8 @@ export default class Calculate extends Component {
         Disable Calculate if both numerical and String-type columns are selected.
         This could be changed in the future if some options can operate on both at once.
         */
-        if (columnTypes.has('string') && columnTypes.size >= 1) {
-          return {
-            isDisabled: true,
-            crossColumn: columns.length === 2 ? true : false,
-            multiColumn: true,
-            columns: columns,
-            columnTypes: columnTypes
-          };
-        }
         return {
-          isDisabled: false,
+          isDisabled: (columnTypes.has('string') && columnTypes.size >= 1) ? true : false,
           crossColumn: columns.length === 2 ? true : false,
           multiColumn: true,
           columns: columns,
