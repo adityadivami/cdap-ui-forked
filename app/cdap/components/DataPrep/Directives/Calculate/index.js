@@ -341,23 +341,23 @@ export default class Calculate extends Component {
         validColTypes: NUMBER_TYPES,
         acceptMixedTypes: false,
         expression: () => `arithmetic:equal(${this.columns[0]}, ${this.columns[1]})`,
-      },
-      {
-        name: 'CROSSMAX',
-        validColTypes: NUMBER_TYPES,
-        acceptMixedTypes: false,
-        expression: () => `arithmetic:max(${this.columns[0]}, ${this.columns[1]})`,
-      },
-      {
-        name: 'CROSSMIN',
-        validColTypes: NUMBER_TYPES,
-        acceptMixedTypes: false,
-        expression: () => `arithmetic:min(${this.columns[0]}, ${this.columns[1]})`,
       }
     ];
 
     // These options operate on >=2 columns at a time
     this.MULTI_COLUMN_CALCULATE_OPTIONS = [
+      {
+        name: 'MULTIMAX',
+        validColTypes: NATIVE_NUMBER_TYPES,
+        acceptMixedTypes: false,
+        expression: () => `arithmetic:max(${this.columns})`,
+      },
+      {
+        name: 'MULTIMIN',
+        validColTypes: NATIVE_NUMBER_TYPES,
+        acceptMixedTypes: false,
+        expression: () => `arithmetic:min(${this.columns})`,
+      },
      {
        name: 'MULTIAVG',
        validColTypes: NATIVE_NUMBER_TYPES,
@@ -398,8 +398,8 @@ export default class Calculate extends Component {
       'CROSSDIVIDER',
       'CROSSLCM',
       'CROSSEQUAL',
-      'CROSSMAX',
-      'CROSSMIN',
+      'MULTIMAX',
+      'MULTIMIN',
       'MULTIAVG',
       'DECIMALSQUARE',
       'DECIMALCUBE',
@@ -490,8 +490,6 @@ export default class Calculate extends Component {
   }
 
   parseColumns = () => {
-    console.log(NUMBER_TYPES);
-    console.log(NATIVE_NUMBER_TYPES);
     let columns = typeof this.props.column === 'string' ? [this.props.column] : this.props.column;
     let columnTypes = new Set(columns.map(col => DataPrepStore.getState().dataprep.typesCheck[col]));
 

@@ -720,8 +720,8 @@ features:
           CROSSDIVIDER: Modulo
           CROSSLCM: LCM
           CROSSEQUAL: Equal
-          CROSSMAX: Max
-          CROSSMIN: Min
+          MULTIMAX: Max
+          MULTIMIN: Min
           MULTIAVG: Average
         title: Calculate
       ChangeDataType:
