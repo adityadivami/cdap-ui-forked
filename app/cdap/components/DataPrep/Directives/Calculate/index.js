@@ -332,19 +332,19 @@ export default class Calculate extends Component {
         name: 'MULTIADD',
         validColTypes: NUMBER_TYPES,
         acceptMixedTypes: false,
-        expression: () => `arithmetic:add(${this.columns[0]}, ${this.columns[1]})`,
+        expression: () => `arithmetic:add(${this.columns})`,
       },
       {
         name: 'MULTIMULTIPLY',
         validColTypes: NUMBER_TYPES,
         acceptMixedTypes: false,
-        expression: () => `arithmetic:multiply(${this.columns[0]}, ${this.columns[1]})`,
+        expression: () => `arithmetic:multiply(${this.columns})`,
       },
       {
         name: 'MULTIEQUAL',
         validColTypes: NUMBER_TYPES,
         acceptMixedTypes: false,
-        expression: () => `arithmetic:equal(${this.columns[0]}, ${this.columns[1]})`,
+        expression: () => `arithmetic:equal(${this.columns})`,
       },
       {
         name: 'MULTIMAX',
