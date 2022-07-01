@@ -301,22 +301,10 @@ export default class Calculate extends Component {
     // These options operate on exactly 2 columns
     this.CROSS_COLUMN_CALCULATE_OPTIONS = [
       {
-        name: 'CROSSADD',
-        validColTypes: NUMBER_TYPES,
-        acceptMixedTypes: false,
-        expression: () => `arithmetic:add(${this.columns[0]}, ${this.columns[1]})`,
-      },
-      {
         name: 'CROSSSUBTRACT',
         validColTypes: NUMBER_TYPES,
         acceptMixedTypes: false,
         expression: () => `arithmetic:minus(${this.columns[0]}, ${this.columns[1]})`,
-      },
-      {
-        name: 'CROSSMULTIPLY',
-        validColTypes: NUMBER_TYPES,
-        acceptMixedTypes: false,
-        expression: () => `arithmetic:multiply(${this.columns[0]}, ${this.columns[1]})`,
       },
       {
         name: 'CROSSDIVIDEQ',
@@ -335,26 +323,38 @@ export default class Calculate extends Component {
         validColTypes: NUMBER_TYPES,
         acceptMixedTypes: false,
         expression: () => `arithmetic:lcm(${this.columns[0]}, ${this.columns[1]})`,
-      },
-      {
-        name: 'CROSSEQUAL',
-        validColTypes: NUMBER_TYPES,
-        acceptMixedTypes: false,
-        expression: () => `arithmetic:equal(${this.columns[0]}, ${this.columns[1]})`,
       }
     ];
 
     // These options operate on >=2 columns at a time
     this.MULTI_COLUMN_CALCULATE_OPTIONS = [
       {
+        name: 'MULTIADD',
+        validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
+        expression: () => `arithmetic:add(${this.columns[0]}, ${this.columns[1]})`,
+      },
+      {
+        name: 'MULTIMULTIPLY',
+        validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
+        expression: () => `arithmetic:multiply(${this.columns[0]}, ${this.columns[1]})`,
+      },
+      {
+        name: 'MULTIEQUAL',
+        validColTypes: NUMBER_TYPES,
+        acceptMixedTypes: false,
+        expression: () => `arithmetic:equal(${this.columns[0]}, ${this.columns[1]})`,
+      },
+      {
         name: 'MULTIMAX',
-        validColTypes: NATIVE_NUMBER_TYPES,
+        validColTypes: NUMBER_TYPES,
         acceptMixedTypes: false,
         expression: () => `arithmetic:max(${this.columns})`,
       },
       {
         name: 'MULTIMIN',
-        validColTypes: NATIVE_NUMBER_TYPES,
+        validColTypes: NUMBER_TYPES,
         acceptMixedTypes: false,
         expression: () => `arithmetic:min(${this.columns})`,
       },

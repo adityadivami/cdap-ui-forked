@@ -713,13 +713,13 @@ features:
           NEGATE: Negate
           STRIPZERO: Strip trailing zeros
           SIGN: Sign
-          CROSSADD: Add
           CROSSSUBTRACT: Subtract
-          CROSSMULTIPLY: Multiply
           CROSSDIVIDEQ: Divide
           CROSSDIVIDER: Modulo
           CROSSLCM: LCM
-          CROSSEQUAL: Equal
+          MULTIADD: Add
+          MULTIMULTIPLY: Multiply
+          MULTIEQUAL: Equal
           MULTIMAX: Max
           MULTIMIN: Min
           MULTIAVG: Average
