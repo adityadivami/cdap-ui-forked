@@ -490,8 +490,6 @@ export default class Calculate extends Component {
   }
 
   parseColumns = () => {
-    console.log(NUMBER_TYPES);
-    console.log(NATIVE_NUMBER_TYPES);
     let columns = typeof this.props.column === 'string' ? [this.props.column] : this.props.column;
     let columnTypes = new Set(columns.map(col => DataPrepStore.getState().dataprep.typesCheck[col]));
 
