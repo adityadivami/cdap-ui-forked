@@ -245,7 +245,6 @@ features:
          description: Description
          gcp: Google cloud project
          instanceName: Instance name
-         instanceUrl: Instance URL
          region: Region
          tetheredNamespace: Tethered namespace
          cpu: CPU (# of cores)

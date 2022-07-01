@@ -42,7 +42,6 @@ export interface ITableData {
   description: string;
   gcloudProject: string;
   instanceName: string;
-  instanceUrl: string;
   region: string;
   status: string;
   allocationData: INamespaceAllocations[];
