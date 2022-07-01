@@ -363,7 +363,8 @@ export default class Calculate extends Component {
        name: 'MULTIAVG',
        validColTypes: NUMBER_TYPES,
        acceptMixedTypes: true,
-       expression: () => `arithmetic:avg(${this.columns[0]}, ${this.columns[1]})`,
+//       expression: () => `arithmetic:average(${this.columns[0]}, ${this.columns[1]})`,
+       expression: () => `arithmetic:average(${this.columns})`,
      }
     ];
 
