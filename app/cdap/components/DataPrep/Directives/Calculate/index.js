@@ -754,7 +754,7 @@ export default class Calculate extends Component {
       );
     }
 
-    if (this.SIMPLE_POPOVER_OPTIONS.indexOf(this.state.operationPopoverOpen) !== -1) {
+    if (this.SIMPLE_POPOVER_OPTIONS.includes(this.state.operationPopoverOpen)) {
       return (
         <div className="third-level-popover" onClick={preventPropagation}>
           {this.renderNewColumnNameInputWithCheckbox()}
