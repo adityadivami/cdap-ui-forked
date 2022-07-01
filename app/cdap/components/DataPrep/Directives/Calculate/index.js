@@ -357,13 +357,11 @@ export default class Calculate extends Component {
     ];
 
     // These options operate on >=2 columns at a time
-    // TODO: change to NATIVE_NUMBER_TYPES?
     this.MULTI_COLUMN_CALCULATE_OPTIONS = [
      {
        name: 'MULTIAVG',
-       validColTypes: NUMBER_TYPES,
+       validColTypes: NATIVE_NUMBER_TYPES,
        acceptMixedTypes: true,
-//       expression: () => `arithmetic:average(${this.columns[0]}, ${this.columns[1]})`,
        expression: () => `arithmetic:average(${this.columns})`,
      }
     ];
@@ -492,6 +490,8 @@ export default class Calculate extends Component {
   }
 
   parseColumns = () => {
+    console.log(NUMBER_TYPES);
+    console.log(NATIVE_NUMBER_TYPES);
     let columns = typeof this.props.column === 'string' ? [this.props.column] : this.props.column;
     let columnTypes = new Set(columns.map(col => DataPrepStore.getState().dataprep.typesCheck[col]));
 
