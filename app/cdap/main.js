@@ -64,6 +64,7 @@ import { handlePageLevelError, objectQuery, setupExperiments } from 'services/he
 import history from 'services/history';
 // See ./graphql/fragements/README.md
 import introspectionQueryResultData from '../../graphql/fragments/fragmentTypes.json';
+import Wrangler from 'components/Wrangler';
 
 require('../ui-utils/url-generator');
 require('font-awesome-sass-loader!./styles/font-awesome.config.js');
@@ -268,6 +269,11 @@ class CDAP extends Component {
               path="/ns/:namespace"
               history={history}
               render={(props) => <Home {...props} />}
+            />
+            <Route
+              path="/wrangler/ns/:namespace"
+              history={history}
+              render={(props) => <Wrangler {...props} />}
             />
             <Route exact path="/httpexecutor" render={(props) => <HttpExecutor {...props} />} />
 
