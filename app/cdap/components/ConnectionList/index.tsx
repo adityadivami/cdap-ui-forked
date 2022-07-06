@@ -1,10 +1,14 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { makeStyles, Paper } from '@material-ui/core';
-import WranglerCard from './WranglerCard';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { GetConnectionIcon, GetIcon } from './IconStore';
 import WelcomeCard from './WelcomeCard';
+import { makeStyles, Paper } from '@material-ui/core';
+import { data } from './connectionsData.js';
+import WranglerCard from './WranglerCard';
+import SearchConnection from './SearchConnection';
+import ButtonAppBar from './Header';
+import { ApiTest } from './Test.js';
 
 const ConnectionContainer = () => {
   const useStyles = makeStyles(() => ({
