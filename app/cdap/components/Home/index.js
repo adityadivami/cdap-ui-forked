@@ -28,6 +28,9 @@ import ToggleExperiment from 'components/Lab/ToggleExperiment';
 import ee from 'event-emitter';
 require('./Home.scss');
 
+import DataTableComponent from 'components/Datasets/DataTableComponent';
+// import MaterialTable from 'components/Datasets/MaterialTable';
+
 const EntityListView = Loadable({
   loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/EntityListView'),
   loading: LoadingSVGCentered,
@@ -140,6 +143,7 @@ export default class Home extends Component {
       <div>
         <Switch>
           <Route exact path="/ns/:namespace" component={HomeActions} />
+          <Route exact path="/ns/:namespace/wrangler-2" component={DataTableComponent} />
           <Route exact path="/ns/:namespace/control" component={EntityListView} />
           <Route
             exact
