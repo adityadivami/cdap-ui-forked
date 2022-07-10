@@ -17,6 +17,7 @@ import PropTypes from 'prop-types';
 
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import ConnectionTabsCaller from '../Datasets/ConnectionTabs/ConnectionTabsCaller';
 import Page404 from 'components/404';
 import Loadable from 'react-loadable';
 import NamespaceStore, { validateNamespace } from 'services/NamespaceStore';
@@ -145,6 +146,10 @@ export default class Home extends Component {
       <div>
         <Switch>
           <Route exact path="/ns/:namespace" component={HomeActions} />
+          <Route exact path="/ns/:namespace/wrangler1" component={ConnectionContainerView} />
+          <Route exact path="/ns/:namespace/wrangler-2" component={ConnectionTabsCaller} />
+          <Route exact path="/ns/:namespace/wrangler1" component={ConnectionContainerView} />
+          <Route exact path="/ns/:namespace/wrangler-2" component={ConnectionTabsCaller} />
           <Route exact path="/ns/:namespace/wrangler1" component={ConnectionContainerView} />
           <Route exact path="/ns/:namespace/control" component={EntityListView} />
           <Route
