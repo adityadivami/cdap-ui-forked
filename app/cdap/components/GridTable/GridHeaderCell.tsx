@@ -49,13 +49,17 @@ interface Props {
 
 const GridHeaderCell: React.FC<Props> = (props) => {
   const classes = useStyles();
+  
   const columnName = props.label;
   const columnTypes = props.types;
   const columnDataType = columnTypes[0].label;
+
   let columnSubDataType: any = null;
+  
   if (columnTypes.length > 1) {
     columnSubDataType = columnTypes[1].label;
   }
+  
   return (
     <Card className={classes.root} variant="outlined">
       <Typography className={classes.pos}>{columnName}</Typography>

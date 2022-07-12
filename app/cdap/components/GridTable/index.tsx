@@ -8,11 +8,11 @@ import { TableRow } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, styled } from '@material-ui/core';
 import { headerData } from './GridTableData';
-import GridHeaderCell from '../Grid/GridHeaderCell';
+import GridHeaderCell from './GridHeaderCell';
 import { metricsData } from './GridTableData';
-import GridKPICell from 'components/Grid/GridKPICell';
+import GridKPICell from 'components/GridTable/GridKPICell';
 import { rowData } from './GridTableData';
-import GridTextCell from 'components/Grid/GridTextCell';
+import GridTextCell from 'components/GridTable/GridTextCell';
 
 const useStyles = makeStyles((theme) => ({
   tableHeaderCell: {
@@ -48,8 +48,6 @@ export default function GridTable() {
               </TableCell>
             ))}
           </TableRow>
-        </TableHead>
-        <TableBody>
           <TableRow>
             {metricsData.map((each) => (
               <TableCell className={classes.tableHeaderCell} key={each.name}>
@@ -57,6 +55,8 @@ export default function GridTable() {
               </TableCell>
             ))}
           </TableRow>
+        </TableHead>
+        <TableBody>
           {rowData.map((eachRow, index) => {
             return (
               <TableRow key={index * Math.random()}>
