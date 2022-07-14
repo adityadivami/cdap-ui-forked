@@ -12,6 +12,7 @@ import { ConnectionTabSidePanel } from './interfaces/interface';
 import AllConnectionsIcon from './SVGs/AllConnectionsIcon';
 import GCSIcon from './SVGs/GCSIcon';
 import DataTable from '../DatasetListTable/DataTable';
+import { forEach } from 'vega-lite/build/src/encoding';
 
 const SelectDatasetWrapper = styled(Box)({
   display: 'flex',
@@ -26,6 +27,8 @@ const DatasetWrapper: React.FC = () => {
   const [value, setValue] = useState('All Connections');
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
+  const [connectionsList, setConnectionsList] = useState([]);
+  const listOfEntities = [];
 
   React.useEffect(() => {
     getConnectionsTabData();
@@ -77,23 +80,23 @@ const DatasetWrapper: React.FC = () => {
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string) => {
     const categorizedConnections = await getCategorizedConnections();
     const connections = categorizedConnections.get(selectedValue) || [];
+    setConnectionsList(connections);
     fetchEntities(connections);
   };
 
-  const fetchEntities = async (connections) => {
-    const connectionsUpdated = connections.map((eachConnection) =>
-      exploreConnection({
+  const fetchEntities = async (connections, url = pathFromUrl) => {
+    const connectionsUpdated = connections.map((eachConnection) => {
+      return exploreConnection({
         connectionid: eachConnection.connectionId,
-        path: pathFromUrl,
-      })
-    );
+        path: url,
+      });
+    });
 
     try {
       await Promise.all([await connectionsUpdated]).then((values) => {
         values.map((value) => {
           value.map((each) =>
             each.then((response) => {
-              console.log(response, 'entities');
               setData((prev: any) => ([...prev, response.entities] as any).flat());
             })
           );
@@ -102,9 +105,36 @@ const DatasetWrapper: React.FC = () => {
     } catch (e) {}
   };
   React.useEffect(() => {
-    console.log(data, 'this is data');
+    // console.log(data, 'this is data');
   }, [data]);
 
+  const fetchInsideEntities = async (connectionid, url = pathFromUrl) => {
+    const x = await exploreConnection({
+      connectionid,
+      path: url,
+    })
+      .then((response) => response)
+      .then((response1) => {
+        response1.entities.map((each) => {
+          if (each.canBrowse === false && each.canSample === true) {
+            listOfEntities.push(each);
+          } else {
+            fetchInsideEntities(connectionid, each.path);
+          }
+        });
+      });
+  };
+
+  connectionsList.map((eachConnection) => {
+    const flat = 0;
+    const x = fetchInsideEntities(eachConnection.connectionId);
+  });
+
+  React.useEffect(() => {
+    console.log(listOfEntities, 'Entities List');
+  }, [listOfEntities]);
+
+  // console.log(datasetsList, 'Datasets List');
   return (
     <SelectDatasetWrapper>
       <ConnectionsTabs
