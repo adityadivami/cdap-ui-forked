@@ -8,7 +8,7 @@ import { UnderLine, RightArrow } from './iconStore';
 const useStyles = makeStyles({
   rightContainerStyles: {
     minWidth: '746px',
-    borderLeft: '1px dashed #DADCE0', // Remove it later because the left container has border
+
     padding: '60px 40px 75px 60px',
   },
   dataExplorationHeader: {
