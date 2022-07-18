@@ -8,19 +8,17 @@ import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './ConnectionTabs';
 
 import DataTable from '../DatasetListTable/DataTable';
-import { IConnectionTabSidePanel } from './interfaces/interface';
+import { ConnectionTabSidePanel } from './interfaces/interface';
 import AllConnectionsIcon from './SVGs/AllConnectionsIcon';
 import GCSIcon from './SVGs/GCSIcon';
 
 const SelectDatasetWrapper = styled(Box)({
   display: 'flex',
-  marginTop: '48px',
-  borderTop: '1px solid #E0E0E0;',
 });
 
 const DatasetWrapper: React.FC = () => {
   const { dataset } = useParams() as any;
-  const [state, setState] = useState<any>({
+  const [state, setState] = useState<ConnectionTabSidePanel>({
     connectorTypes: [],
   });
   const loc = useLocation();
@@ -30,7 +28,7 @@ const DatasetWrapper: React.FC = () => {
   const pathFromUrl = queryParams.get('path') || '/';
 
   React.useEffect(() => {
-    if (['Imported Datasets', 'New Exploration'].includes(dataset)) {
+    if (dataset === 'Imported Datasets') {
       setValue('All Connections');
       getCategorizedConnectionsforSelectedTab('All Connections');
     } else {
@@ -122,21 +120,16 @@ const DatasetWrapper: React.FC = () => {
 
     try {
       await Promise.all([await connectionsUpdated]).then((values) => {
-        values.map((eachValue) => {
-          eachValue.map((each) =>
+        values.map((value) => {
+          value.map((each) =>
             each.then((response) => {
               setData((prev: any) => ([...prev, response.entities] as any).flat());
             })
           );
         });
       });
-    } catch (e) {
-      // do nothing
-    }
+    } catch (e) {}
   };
-  React.useEffect(() => {
-    // do nothing
-  }, [data]);
 
   return (
     <SelectDatasetWrapper>
@@ -145,7 +138,7 @@ const DatasetWrapper: React.FC = () => {
         handleChange={selectedTabValueHandler}
         value={value}
       />
-      <DataTable datasetList={data} selectedTab={value} />
+      <DataTable datasetList={data} />
     </SelectDatasetWrapper>
   );
 };

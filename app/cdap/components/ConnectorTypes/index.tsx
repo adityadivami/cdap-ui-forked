@@ -9,7 +9,7 @@ import WelcomeCard from './WelcomeCard';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 import { UnderLine } from './iconStore';
-
+import OngoingDataExploration from 'components/OngoingDataExploration';
 const ConnectorTypesComponent = () => {
   const classes = useConnectorTypesComponentStyles();
 
@@ -34,23 +34,28 @@ const ConnectorTypesComponent = () => {
 
   return (
     <>
-      <Paper variant="outlined" elevation={9} className={classes.dashBoard}>
-        <WelcomeCard />
-        <Typography className={classes.subTitle}>Start data exploration</Typography>
-        <Box className={classes.underLine}>{UnderLine}</Box>
-        <Paper elevation={0} className={classes.flexContainer}>
-          {connectorTypesList.map((eachConnectorType) => (
-            <Link
-              to={`/ns/${getCurrentNamespace()}/datasets-list/${eachConnectorType.name}`}
-              className={classes.linkLine}
-            >
-              <WranglerCard
-                key={eachConnectorType.name}
-                name={eachConnectorType.name}
-                image={eachConnectorType.image}
-              />
-            </Link>
-          ))}
+      <Paper style={{ display: 'flex' }}>
+        <Paper variant="outlined" elevation={9} className={classes.dashBoard}>
+          <WelcomeCard />
+          <Typography className={classes.subTitle}>Start data exploration</Typography>
+          <Box className={classes.underLine}>{UnderLine}</Box>
+          <Paper elevation={0} className={classes.flexContainer}>
+            {connectorTypesList.map((eachConnectorType) => (
+              <Link
+                to={`/ns/${getCurrentNamespace()}/datasets-list/${eachConnectorType.name}`}
+                className={classes.linkLine}
+              >
+                <WranglerCard
+                  key={eachConnectorType.name}
+                  name={eachConnectorType.name}
+                  image={eachConnectorType.image}
+                />
+              </Link>
+            ))}
+          </Paper>
+        </Paper>
+        <Paper>
+          <OngoingDataExploration />
         </Paper>
       </Paper>
     </>
