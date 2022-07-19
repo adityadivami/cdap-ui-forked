@@ -123,14 +123,15 @@ const RefreshIcon = styled(CachedIcon)({
 });
 
 const DataTable = (props) => {
-  const { selectedTab } = props;
+  const { datasetList } = props;
 
   const [rows, setSelectedRow] = useState([]);
 
   useEffect(() => {
-    if (props.datasetList) {
+    if (datasetList) {
+      console.log(datasetList, 'datasetList combined');
       setSelectedRow(
-        props.datasetList.map((dataset) => {
+        datasetList.map((dataset) => {
           return createData(
             dataset.name,
             dataset.type,
@@ -144,7 +145,7 @@ const DataTable = (props) => {
         })
       );
     }
-  }, [props.datasetList]);
+  }, [datasetList]);
 
   const classes = useStyles();
   const handleMouseLeave = (event, name) => {

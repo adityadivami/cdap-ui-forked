@@ -10,6 +10,7 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 import { UnderLine } from './iconStore';
 import './Assets/NotoSans-Regular.ttf';
+import './styles.scss';
 
 const ConnectorTypesComponent = () => {
   const classes = useConnectorTypesComponentStyles();
