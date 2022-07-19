@@ -48,7 +48,7 @@ export const mockData = [
     },
     {
       label: 'Progress Value',
-      value: 20,
+      value: 70,
       type: 'progressValue',
     },
     {
