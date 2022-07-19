@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 export const explorationCardStyles = makeStyles({
   explorationCardStyles: {
-    minHeight: '209px',
+    maxHeight: '209px',
     minWidth: '279px',
     background: 'linear-gradient(180deg, rgba(75, 175, 79, 0.08) 0%, rgba(75, 175, 79, 0) 50%)',
     boxShadow: 'none',
