@@ -2,13 +2,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import { UnderLine } from './iconStore';
 
 export const useConnectorTypesComponentStyles = makeStyles(() => ({
+  wrangleHomeContainer: {
+    display: 'flex',
+  },
+  ongoingExplorationMainContainer: {
+    boxShadow: 'none',
+  },
   flexContainer: {
     marginTop: '17px',
     paddingBottom: '17px',
     display: 'flex',
     flexWrap: 'wrap',
     width: '100%',
-    height: '100%',
+
     background: 'transparent',
     '& > :nth-child(3n+1)': {
       borderRight: '1px solid #E3E3E3',
