@@ -8,13 +8,13 @@ export const mockData = [
     {
       label: '14',
       name: 'recipeSteps',
-      subText: ' Recipe Steps',
+      subText: ' Recipe steps',
       type: 'subLabel',
     },
     {
       label: '65',
       name: 'dataQuality',
-      subText: '%  Data Quality',
+      subText: '%  Data quality',
       type: 'subLabel',
     },
     {
@@ -37,13 +37,13 @@ export const mockData = [
     {
       label: '03',
       name: 'recipeSteps',
-      subText: ' Recipe Steps',
+      subText: ' Recipe steps',
       type: 'subLabel',
     },
     {
       label: '32',
       name: 'dataQuality',
-      subText: '%  Data Quality',
+      subText: '%  Data quality',
       type: 'subLabel',
     },
     {

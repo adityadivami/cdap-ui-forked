@@ -7,6 +7,7 @@ const StyledBox = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+
   justifyContent: 'center',
 });
 
