@@ -103,14 +103,12 @@ const DatasetWrapper: React.FC = () => {
       const allConnections = [];
       console.log('categorizedConnections', categorizedConnections);
       for (const [key] of categorizedConnections) {
-        if (key !== 'Spanner' || key !== 'PostgreSQL') {
-          connections = categorizedConnections.get(key);
-          connections.forEach((item) => {
-            allConnections.push(item);
-          });
-        }
+        connections = categorizedConnections.get(key);
+        connections.forEach((item) => {
+          allConnections.push(item);
+        });
       }
-
+      console.log(allConnections);
       fetchEntities(allConnections);
     }
   };
@@ -129,9 +127,11 @@ const DatasetWrapper: React.FC = () => {
     let count = 0;
     try {
       await Promise.all([await connectionsUpdated]).then((values) => {
-        values.map((eachValue, valueIndex) => {
-          eachValue.map((each) =>
+        values.map((eachValue) => {
+          console.log(eachValue, 'eachValue from 1st map function');
+          eachValue.map((each) => {
             each.then((response) => {
+              console.log(response, 'each from 2nd map function');
               console.log(ids[count], 'count value', count, 'ids[valueIndex]');
               response.entities.map((eachEntity) => {
                 eachEntity[`connectionsName`] = ids[count];
@@ -139,8 +139,8 @@ const DatasetWrapper: React.FC = () => {
               setData((prev: any) => ([...prev, response.entities] as any).flat());
               console.log(response.entities, 'response.entities');
               count = count + 1;
-            })
-          );
+            });
+          });
         });
       });
     } catch (e) {
@@ -159,7 +159,7 @@ const DatasetWrapper: React.FC = () => {
         handleChange={selectedTabValueHandler}
         value={value}
       />
-      <DataTable datasetList={data} selectedTab={value} />
+      <DataTable datasetList={data} />
     </SelectDatasetWrapper>
   );
 };

@@ -22,8 +22,12 @@ const WelcomeCardComponent: React.FC = () => {
     <WelcomeCardContainer>
       <Box>{welcomeIcon}</Box>
       <StyledBox>
-        <Typography className={classes.welcomeText}>Hi David</Typography>
-        <Typography className={classes.welcomeText}>Welcome to Wrangler</Typography>
+        <Typography className={classes.welcomeText} style={{ fontFamily: 'noto-sans' }}>
+          Hi David
+        </Typography>
+        <Typography className={classes.welcomeText} style={{ fontFamily: 'noto-sans' }}>
+          Welcome to Wrangler
+        </Typography>
       </StyledBox>
     </WelcomeCardContainer>
   );

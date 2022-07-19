@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { UnderLine } from './iconStore';
-import './styles.scss';
 
 export const useConnectorTypesComponentStyles = makeStyles(() => ({
   dashBoard: {

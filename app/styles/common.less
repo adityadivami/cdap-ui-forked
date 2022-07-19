@@ -26,7 +26,8 @@ values in Angular apps
 :root {
   --brand-primary-color: @brand-primary-color;
   --navbar-color: @navbar-bg;
-  --font-family: @bootstrap4-font-family; // Bootstrap 4 base font
+  // --font-family: @bootstrap4-font-family; // Bootstrap 4 base font
+  --font-family: @divami-font-family; // Divami base font
 }
 
 html {
@@ -38,7 +39,7 @@ html {
 body {
   // visibility: hidden; // themes start the show
   margin-bottom: 80px;
-  font-family: var(--font-family);
+  font-family: var(--font-family) !important;
 
   .dropdown-menu {
     > li > a,
