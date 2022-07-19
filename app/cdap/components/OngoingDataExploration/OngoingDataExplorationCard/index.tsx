@@ -3,18 +3,18 @@ import { Card, CardContent, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import Box from '@material-ui/core/Box';
 import GCSIcon from 'components/Dataset/SVGs/GCSIcon';
-// import LinearProgress from '@material-ui/core/LinearProgress';
 import LinearProgressComponent from '../LinearProgressBar';
+import { mockData } from '../mock';
+import { CardContentComponent } from './CardContext';
 const useStyles = makeStyles({
   explorationCardStyles: {
     minHeight: '209px',
-    height: '209px',
-    width: '279px', // ask about this
+    minWidth: '279px',
     background: 'linear-gradient(180deg, rgba(75, 175, 79, 0.08) 0%, rgba(75, 175, 79, 0) 50%)',
     boxShadow: 'none',
     border: '1px solid #DADCE0',
     borderRadius: '4px',
-    padding: '28px 25px 19px 25px',
+    padding: '28px 25px 16px 25px',
   },
   datasetName: {
     lineHeight: '24px',
@@ -22,7 +22,8 @@ const useStyles = makeStyles({
   },
   datasetDetails: {
     color: 'rgba(95, 99, 104, 1)',
-    lineHeight: '25px',
+    lineHeight: '24px',
+    fontSize: '16px',
   },
   cardContent: {
     padding: '0px',
@@ -36,31 +37,17 @@ const useStyles = makeStyles({
   },
 });
 
-const OngoingExplorationCard = ({ ongoingExplorationData }) => {
+const OngoingExplorationCard = ({ itemData }) => {
+  const cardData = itemData;
+
   const classes = useStyles();
   return (
     <>
       <Card className={classes.explorationCardStyles}>
         <CardContent className={classes.cardContent}>
-          <Typography className={classes.datasetName}>
-            {ongoingExplorationData.datasetName}
-          </Typography>
-          <Typography className={classes.datasetDetails}>
-            {ongoingExplorationData.recipeSteps} Recipe steps
-          </Typography>
-          <Typography className={classes.datasetDetails}>
-            {ongoingExplorationData.dataQuality}% Data quality
-          </Typography>
-
-          <Box className={classes.linearProgressBarContainer}>
-            <LinearProgressComponent progressValue={ongoingExplorationData.progressValue} />
-          </Box>
-          <Box className={classes.cardFooter}>
-            <GCSIcon />
-            <Typography className={classes.datasetDetails}>
-              {ongoingExplorationData.connectionName}
-            </Typography>
-          </Box>
+          {cardData.map((eachItem) => {
+            return <CardContentComponent item={eachItem} styles={classes} />;
+          })}
         </CardContent>
       </Card>
     </>

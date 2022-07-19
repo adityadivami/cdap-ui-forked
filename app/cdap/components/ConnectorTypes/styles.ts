@@ -5,6 +5,9 @@ export const useConnectorTypesComponentStyles = makeStyles(() => ({
   wrangleHomeContainer: {
     display: 'flex',
   },
+  ongoingExplorationMainContainer: {
+    boxShadow: 'none',
+  },
   flexContainer: {
     marginTop: '17px',
     paddingBottom: '17px',

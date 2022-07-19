@@ -34,7 +34,7 @@ const ConnectorTypesComponent = () => {
 
   return (
     <>
-      <Paper style={{ display: 'flex' }}>
+      <Paper className={classes.wrangleHomeContainer}>
         <Paper variant="outlined" elevation={9} className={classes.dashBoard}>
           <WelcomeCard />
           <Typography className={classes.subTitle}>Start data exploration</Typography>
@@ -54,7 +54,7 @@ const ConnectorTypesComponent = () => {
             ))}
           </Paper>
         </Paper>
-        <Paper>
+        <Paper className={classes.ongoingExplorationMainContainer}>
           <OngoingDataExploration />
         </Paper>
       </Paper>

@@ -2,9 +2,10 @@ import React from 'react';
 import OngoingExplorationCard from './OngoingDataExplorationCard';
 import { makeStyles } from '@material-ui/styles';
 import { Box, Typography } from '@material-ui/core';
-
+import { Link } from 'react-router-dom';
 import { UnderLine, RightArrow } from './iconStore';
-
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { mockData } from './mock';
 const useStyles = makeStyles({
   rightContainerStyles: {
     minWidth: '746px',
@@ -39,25 +40,13 @@ const useStyles = makeStyles({
     marginTop: 'auto',
     marginBottom: 'auto',
   },
+  '& .MuiPaper-elevation1': {
+    boxShadow: 'none',
+  },
 });
 
 const OngoingDataExploration = () => {
-  const mockData = [
-    {
-      datasetName: 'IndiaSales_DataTable2',
-      recipeSteps: '14',
-      dataQuality: 65,
-      connectionName: 'Connection_Sales_Big',
-      progressValue: 50,
-    },
-    {
-      datasetName: 'USACustomers_DataTable1',
-      recipeSteps: '03',
-      dataQuality: 32,
-      connectionName: 'Connection_Sales_Big',
-      progressValue: 20,
-    },
-  ];
+  console.log(mockData);
   const classes = useStyles();
   return (
     <>
@@ -68,14 +57,16 @@ const OngoingDataExploration = () => {
         <Box className={classes.underLine}>{UnderLine}</Box>
         <Box className={classes.dataExplorationCardContainer}>
           {mockData.map((item, index) => {
-            return <OngoingExplorationCard ongoingExplorationData={item} key={index} />;
+            return <OngoingExplorationCard itemData={item} key={index} />;
           })}
         </Box>
+        {/* <Link to={}> */}
         <Box className={classes.viewAllOngoingWorkspaceLink}>
           <Typography>View all ongoing workspaces</Typography>
 
           <Box className={classes.rightArrowIconStyle}> {RightArrow}</Box>
         </Box>
+        {/* </Link> */}
       </Box>
     </>
   );
