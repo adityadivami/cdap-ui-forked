@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@material-ui/core';
+import { Box, Grid, Paper, Typography } from '@material-ui/core';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { defaultConnectorTypes } from 'components/WrangleHome/constants/defaultConnectorTypes';
 import React, { useEffect, useState } from 'react';
@@ -34,8 +34,8 @@ const ConnectorTypesComponent = () => {
 
   return (
     <>
-      <Paper className={classes.wrangleHomeContainer}>
-        <Paper variant="outlined" elevation={9} className={classes.dashBoard}>
+      <Grid container>
+        <Grid item xs={6} className={classes.dashBoard}>
           <WelcomeCard />
           <Typography className={classes.subTitle}>Start data exploration</Typography>
           <Box className={classes.underLine}>{UnderLine}</Box>
@@ -53,11 +53,11 @@ const ConnectorTypesComponent = () => {
               </Link>
             ))}
           </Paper>
-        </Paper>
-        <Paper className={classes.ongoingExplorationMainContainer}>
+        </Grid>
+        <Grid item xs={6}>
           <OngoingDataExploration />
-        </Paper>
-      </Paper>
+        </Grid>
+      </Grid>
     </>
   );
 };
