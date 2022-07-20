@@ -10,7 +10,7 @@ const OngoingDataExploration = () => {
   return (
     <>
       <Box className={classes.rightContainerStyles}>
-        <Typography component="div" className={classes.dataExplorationHeader}>
+        <Typography component="div" variant="body2" className={classes.dataExplorationHeader}>
           Continue ongoing data explorations, pick up where you left off
         </Typography>
         <Box className={classes.underLine}>{UnderLine}</Box>
@@ -20,7 +20,9 @@ const OngoingDataExploration = () => {
           })}
         </Box>
         <Box className={classes.viewAllOngoingWorkspaceLink}>
-          <Typography component="div">View all ongoing workspaces</Typography>
+          <Typography component="div" variant="body2">
+            View all ongoing workspaces
+          </Typography>
 
           <Box className={classes.rightArrowIconStyle}> {RightArrow}</Box>
         </Box>
