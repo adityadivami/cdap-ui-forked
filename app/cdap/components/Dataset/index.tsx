@@ -114,38 +114,67 @@ const DatasetWrapper: React.FC = () => {
   };
 
   const fetchEntities = async (connections) => {
-    const ids = [];
-    const connectionsUpdated = connections.map((eachConnection) => {
-      ids.push(eachConnection.connectionId);
-      return exploreConnection({
-        connectionid: eachConnection.connectionId,
-        path: pathFromUrl,
-      });
+    const connectionsWithConnectionName = connections.map((eachConnection) => {
+      console.log(eachConnection, 'eachConnection');
+      return {
+        id: eachConnection.connectionId,
+        promise: exploreConnection({
+          connectionid: eachConnection.connectionId,
+          path: pathFromUrl,
+        }),
+      };
     });
-
-    console.log(ids, 'list of Ids');
-    let count = 0;
-    try {
-      await Promise.all([await connectionsUpdated]).then((values) => {
-        values.map((eachValue) => {
-          console.log(eachValue, 'eachValue from 1st map function');
-          eachValue.map((each) => {
-            each.then((response) => {
-              console.log(response, 'each from 2nd map function');
-              console.log(ids[count], 'count value', count, 'ids[valueIndex]');
-              response.entities.map((eachEntity) => {
-                eachEntity[`connectionsName`] = ids[count];
-              });
-              setData((prev: any) => ([...prev, response.entities] as any).flat());
-              console.log(response.entities, 'response.entities');
-              count = count + 1;
+    const resolvePromise = async (promiseList, name) => {
+      try {
+        await Promise.all([await promiseList]).then((values) => {
+          console.log(values, 'values');
+          values.map((response) => {
+            console.log(response, 'eachValue');
+            response.entities.map((eachEntity) => {
+              eachEntity[`connectionsName`] = name;
             });
+            setData((prev: any) => ([...prev, response.entities] as any).flat());
+            console.log(response.entities, '***response after addding connection name');
           });
         });
-      });
-    } catch (e) {
-      // do nothing
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    console.log(connectionsWithConnectionName, 'connectionsWithConnectionName');
+
+    for (const each of connectionsWithConnectionName) {
+      console.log(each, 'each connections before resolved');
+      resolvePromise(each.promise, each.id);
     }
+
+    const ids = connectionsWithConnectionName.map((e) => e.id);
+    const connectionsUpdated = connectionsWithConnectionName.map(
+      (eachConnection) => eachConnection.promise
+    );
+
+    // console.log(ids, 'list of Ids');
+
+    // let count = 0;
+    // try {
+    //   await Promise.all([await connectionsUpdated]).then((values) => {
+    //     values.map((eachValue) => {
+    //       eachValue.map((each) => {
+    //         each.then((response) => {
+    //           console.log(ids[count], 'count value', count, 'ids[valueIndex]');
+    //           response.entities.map((eachEntity) => {
+    //             eachEntity[`connectionsName`] = ids[count];
+    //           });
+    //           setData((prev: any) => ([...prev, response.entities] as any).flat());
+    //           console.log(response.entities, 'response.entities');
+    //           count = count + 1;
+    //         });
+    //       });
+    //     });
+    //   });
+    // } catch (e) {
+    //   // do nothing
+    // }
   };
 
   React.useEffect(() => {

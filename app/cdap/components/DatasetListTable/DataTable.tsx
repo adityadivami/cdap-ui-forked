@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function createData(
+  id: number,
   name: string,
   fileFormat: string = 'CSV',
   schema: number = 4,
@@ -98,6 +99,7 @@ function createData(
   showWrangle: boolean = false
 ) {
   return {
+    id,
     name,
     fileFormat,
     schema,
@@ -131,8 +133,9 @@ const DataTable = (props) => {
     if (datasetList) {
       console.log(datasetList, 'datasetList combined');
       setSelectedRow(
-        datasetList.map((dataset) => {
+        datasetList.map((dataset, datasetIndex) => {
           return createData(
+            datasetIndex,
             dataset.name,
             dataset.type,
             4,
@@ -148,14 +151,14 @@ const DataTable = (props) => {
   }, [datasetList]);
 
   const classes = useStyles();
-  const handleMouseLeave = (event, name) => {
-    const selectedRowIndex = rows.findIndex((row) => row.name === name);
+  const handleMouseLeave = (event, id) => {
+    const selectedRowIndex = rows.findIndex((row) => row.id === id);
     const newRows = [...rows];
     newRows[selectedRowIndex].showWrangle = false;
     setSelectedRow(newRows);
   };
-  const handleMouseEnter = (event, name) => {
-    const selectedRowIndex = rows.findIndex((row) => row.name === name);
+  const handleMouseEnter = (event, id) => {
+    const selectedRowIndex = rows.findIndex((row) => row.id === id);
     const newRows = [...rows];
     newRows[selectedRowIndex].showWrangle = true;
     setSelectedRow(newRows);
@@ -186,8 +189,8 @@ const DataTable = (props) => {
             <TableRow
               key={idx}
               className={classes.tableRow}
-              onMouseEnter={(event) => handleMouseEnter(event, row.name)}
-              onMouseLeave={(event) => handleMouseLeave(event, row.name)}
+              onMouseEnter={(event) => handleMouseEnter(event, row.id)}
+              onMouseLeave={(event) => handleMouseLeave(event, row.id)}
             >
               <TableCell className={classes.tableRowCell}>{row.name}</TableCell>
               <TableCell className={classes.tableRowCell}>{row.fileFormat}</TableCell>
