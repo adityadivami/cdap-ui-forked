@@ -88,16 +88,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function createData(
-  name,
-  fileFormat = 'CSV',
-  schema = 4,
-  lastUpdated = 20,
-  connectionName = 'BigQ-Sales-connection',
-  connectionStatus = 'online',
-  lastAvailable = 10,
-  showWrangle = false
+  id: number,
+  name: string,
+  fileFormat: string = 'CSV',
+  schema: number = 4,
+  lastUpdated: number = 20,
+  connectionName: string = 'BigQ-Sales-connection',
+  connectionStatus: string = 'online',
+  lastAvailable: number = 10,
+  showWrangle: boolean = false
 ) {
   return {
+    id,
     name,
     fileFormat,
     schema,
@@ -130,22 +132,32 @@ const DataTable = (props) => {
   useEffect(() => {
     if (props.datasetList) {
       setSelectedRow(
-        props.datasetList.map((dataset) => {
-          return createData(dataset.name);
+        props.datasetList.map((dataset, datasetIndex) => {
+          return createData(
+            datasetIndex,
+            dataset.name,
+            'CSV',
+            4,
+            4,
+            dataset.connectionsName,
+            'online',
+            4,
+            false
+          );
         })
       );
     }
   }, [props.datasetList]);
 
   const classes = useStyles();
-  const handleMouseLeave = (event, name) => {
-    const selectedRowIndex = rows.findIndex((row) => row.name === name);
+  const handleMouseLeave = (event, id) => {
+    const selectedRowIndex = rows.findIndex((row) => row.id === id);
     const newRows = [...rows];
     newRows[selectedRowIndex].showWrangle = false;
     setSelectedRow(newRows);
   };
-  const handleMouseEnter = (event, name) => {
-    const selectedRowIndex = rows.findIndex((row) => row.name === name);
+  const handleMouseEnter = (event, id) => {
+    const selectedRowIndex = rows.findIndex((row) => row.id === id);
     const newRows = [...rows];
     newRows[selectedRowIndex].showWrangle = true;
     setSelectedRow(newRows);
@@ -176,8 +188,8 @@ const DataTable = (props) => {
             <TableRow
               key={idx}
               className={classes.tableRow}
-              onMouseEnter={(event) => handleMouseEnter(event, row.name)}
-              onMouseLeave={(event) => handleMouseLeave(event, row.name)}
+              onMouseEnter={(event) => handleMouseEnter(event, row.id)}
+              onMouseLeave={(event) => handleMouseLeave(event, row.id)}
             >
               <TableCell className={classes.tableRowCell}>{row.name}</TableCell>
               <TableCell className={classes.tableRowCell}>{row.fileFormat}</TableCell>

@@ -26,6 +26,7 @@ const DatasetWrapper: React.FC = () => {
   const loc = useLocation();
   const [data, setData] = React.useState<any>([]);
   const [value, setValue] = useState('All Connections');
+  const [datasetsWithConnectionName, setDatasetsWithConnectionName] = useState([]);
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
 
@@ -82,7 +83,6 @@ const DatasetWrapper: React.FC = () => {
     setValue(newValue);
 
     setData([]);
-    newValue !== 'All Connections' && getCategorizedConnectionsforSelectedTab(newValue);
 
     if (newValue === 'All Connections') {
       getCategorizedConnectionsforSelectedTab(newValue);
@@ -100,43 +100,53 @@ const DatasetWrapper: React.FC = () => {
       let connections = [];
       const allConnections = [];
       for (const [key] of categorizedConnections) {
-        if (key !== 'Spanner') {
-          connections = categorizedConnections.get(key);
-          connections.forEach((item, idx) => {
-            allConnections.push(item);
-          });
-        }
+        connections = categorizedConnections.get(key);
+        connections.forEach((item) => {
+          allConnections.push(item);
+        });
       }
-
       fetchEntities(allConnections);
     }
   };
 
   const fetchEntities = async (connections) => {
-    const connectionsUpdated = connections.map((eachConnection) =>
-      exploreConnection({
-        connectionid: eachConnection.connectionId,
-        path: pathFromUrl,
-      })
-    );
-
-    try {
-      await Promise.all([await connectionsUpdated]).then((values) => {
-        values.map((eachValue) => {
-          eachValue.map((each) =>
-            each.then((response) => {
-              setData((prev: any) => ([...prev, response.entities] as any).flat());
-            })
-          );
+    const connectionsWithConnectionName = connections.map((eachConnection) => {
+      return {
+        id: eachConnection.connectionId,
+        promise: exploreConnection({
+          connectionid: eachConnection.connectionId,
+          path: pathFromUrl,
+        }),
+      };
+    });
+    const resolvePromise = async (promiseList, name) => {
+      try {
+        await Promise.all([await promiseList]).then((values) => {
+          values.map((response) => {
+            response.entities.map((eachEntity) => {
+              eachEntity[`connectionsName`] = name;
+            });
+            setData((prev: any) => ([...prev, response.entities] as any).flat());
+          });
         });
-      });
-    } catch (e) {
-      // do nothing
+      } catch (error) {
+        // console.log(error);
+      }
+    };
+
+    for (const each of connectionsWithConnectionName) {
+      resolvePromise(each.promise, each.id);
     }
+
+    const ids = connectionsWithConnectionName.map((e) => e.id);
+    const connectionsUpdated = connectionsWithConnectionName.map(
+      (eachConnection) => eachConnection.promise
+    );
   };
+
   React.useEffect(() => {
-    // do nothing
-  }, [data]);
+    // nothing goes here;
+  }, [datasetsWithConnectionName]);
 
   return (
     <SelectDatasetWrapper>
@@ -145,7 +155,7 @@ const DatasetWrapper: React.FC = () => {
         handleChange={selectedTabValueHandler}
         value={value}
       />
-      <DataTable datasetList={data} selectedTab={value} />
+      <DataTable datasetList={data} />
     </SelectDatasetWrapper>
   );
 };
