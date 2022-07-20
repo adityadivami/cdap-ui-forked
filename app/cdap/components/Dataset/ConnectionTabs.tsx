@@ -2,12 +2,12 @@ import * as React from 'react';
 import Box from '@material-ui/core/Box';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { styled, Tooltip, Typography } from '@material-ui/core';
+import { styled, Tooltip, Typography, TooltipProps } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles({
   boxStyles: {
-    width: '252px',
+    width: '252px !important',
     background: 'linear-gradient(180deg, rgba(243, 246, 249, 0) -0.07%, #F3F6F9 22.66%)',
     borderRight: '1px dashed #DADCE0',
     zIndex: 1,
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     gap: '4px',
   },
   labelStyles: {
-    maxWidth: '125px',
+    maxWidth: '145px',
     fontSize: '16px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -56,6 +56,9 @@ const StyledTab = styled(Tab)({
     zIndex: 3,
     whiteSpace: 'nowrap',
   },
+  '&.MuiTab-root': {
+    width: '252px !important',
+  },
   '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
     marginBottom: '0px',
   },
@@ -65,6 +68,21 @@ const StyledTab = styled(Tab)({
   },
 });
 
+const useStylesBootstrap = makeStyles((theme) => ({
+  arrow: {
+    color: 'black',
+  },
+  tooltip: {
+    backgroundColor: 'black',
+    fontSize: '16px',
+  },
+}));
+
+function BootstrapTooltip(props: TooltipProps) {
+  const classes = useStylesBootstrap();
+
+  return <Tooltip arrow classes={classes} {...props} />;
+}
 const ConnectionsTabs = ({ connectorTypes, handleChange, value }) => {
   const classes = useStyles();
 
@@ -105,14 +123,14 @@ const TooltipLabel = ({ label, count }) => {
   const classes = useStyles();
 
   return (
-    <Tooltip title={label}>
+    <BootstrapTooltip title={label.length > 16 ? label : ''} arrow>
       <Box className={classes.labelsContainer}>
         <Typography variant="body1" className={classes.labelStyles}>
           {label}
         </Typography>
         <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
       </Box>
-    </Tooltip>
+    </BootstrapTooltip>
   );
 };
 
