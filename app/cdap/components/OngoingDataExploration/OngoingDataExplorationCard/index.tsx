@@ -2,11 +2,8 @@ import React from 'react';
 import { Card, CardContent } from '@material-ui/core';
 import { CardContentData } from './CardContent';
 import { explorationCardStyles } from './styles';
-import { IMockData } from '../mock/types';
+import { IMockData, IOngoingExplorationCardProps } from '../mock/types';
 
-interface IOngoingExplorationCardProps {
-  itemData: IMockData[];
-}
 const OngoingExplorationCard: React.FC<IOngoingExplorationCardProps> = ({ itemData }) => {
   const classes = explorationCardStyles();
 

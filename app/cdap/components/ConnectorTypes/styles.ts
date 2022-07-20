@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { UnderLine } from './iconStore';
 
 export const useConnectorTypesComponentStyles = makeStyles(() => ({
   wrangleHomeContainer: {
