@@ -1,9 +1,10 @@
+import * as React from 'react';
 import { Typography, Box } from '@material-ui/core';
 import GCSIcon from 'components/Dataset/SVGs/GCSIcon';
-import * as React from 'react';
-import LinearProgressComponent from '../LinearProgressBar';
+import LinearProgressBar from '../LinearProgressBar';
+import { ICardContentDataProps } from '../mock/types';
 
-export const CardContentComponent: React.FC<any> = ({ item, styles }) => {
+export const CardContentData: React.FC<ICardContentDataProps> = ({ item, styles }) => {
   switch (item.type) {
     case 'label':
       return (
@@ -14,7 +15,7 @@ export const CardContentComponent: React.FC<any> = ({ item, styles }) => {
     case 'subLabel':
       return (
         <Typography component="div" variant="body2" className={styles.datasetDetails}>
-          {item.label}
+          {item.label}&nbsp;
           {item.subText}
         </Typography>
       );
@@ -22,7 +23,7 @@ export const CardContentComponent: React.FC<any> = ({ item, styles }) => {
     case 'progressValue':
       return (
         <Box component="div" className={styles.linearProgressBarContainer}>
-          <LinearProgressComponent progressValue={item.value} />
+          <LinearProgressBar variant="determinate" value={item.value} />
         </Box>
       );
     case 'connectionName':

@@ -1,4 +1,6 @@
-export const mockData = [
+import { IMockData } from './types';
+
+export const mockData: IMockData[][] = [
   [
     {
       label: 'IndiaSales_DataTable2',
@@ -8,13 +10,13 @@ export const mockData = [
     {
       label: '14',
       name: 'recipeSteps',
-      subText: ' Recipe steps',
+      subText: 'Recipe steps',
       type: 'subLabel',
     },
     {
-      label: '65',
+      label: '65%',
       name: 'dataQuality',
-      subText: '%  Data quality',
+      subText: 'Data quality',
       type: 'subLabel',
     },
     {
@@ -37,13 +39,13 @@ export const mockData = [
     {
       label: '03',
       name: 'recipeSteps',
-      subText: ' Recipe steps',
+      subText: 'Recipe steps',
       type: 'subLabel',
     },
     {
-      label: '32',
+      label: '32%',
       name: 'dataQuality',
-      subText: '%  Data quality',
+      subText: 'Data quality',
       type: 'subLabel',
     },
     {

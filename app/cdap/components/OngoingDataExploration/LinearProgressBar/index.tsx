@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { StyledLinearProgress } from './styles';
 
-const LinearProgressComponent = ({ progressValue }) => {
-  return <StyledLinearProgress variant="determinate" value={progressValue} />;
+const LinearProgressComponent = (props) => {
+  return <StyledLinearProgress {...props} />;
 };
 
 export default LinearProgressComponent;

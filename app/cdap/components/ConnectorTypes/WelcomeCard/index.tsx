@@ -6,13 +6,14 @@ import { useWelcomeCardComponentStyles } from './styles';
 const WelcomeCardContainer = styled(Box)({
   display: 'flex',
   paddingTop: '18px',
+  paddingLeft: '8px',
 });
 
 const StyledBox = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-end',
-  marginLeft: '36px',
+  paddingLeft: '36px',
 });
 
 const WelcomeCardComponent: React.FC = () => {

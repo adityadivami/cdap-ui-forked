@@ -19,16 +19,13 @@ export const useConnectorTypesComponentStyles = makeStyles(() => ({
     '& > :nth-child(3n+1)': {
       borderRight: '1px solid #E3E3E3',
       borderBottom: '1px solid #E3E3E3',
-      // width: '160px',
     },
     '& > :nth-child(3n+2)': {
       borderBottom: '1px solid #E3E3E3',
-      // width: '180px',
     },
     '& > :nth-child(3n)': {
       borderLeft: '1px solid #E3E3E3',
       borderBottom: '1px solid #E3E3E3',
-      // width: '160px',
     },
     '& > :nth-last-child(1)': {
       borderBottom: '0px',
