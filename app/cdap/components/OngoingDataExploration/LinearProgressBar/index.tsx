@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { ILinearProgressBarProps } from '../mock/types';
 import { StyledLinearProgress } from './styles';
 
-const LinearProgressComponent = (props) => {
+const LinearProgressBar: React.FC<ILinearProgressBarProps> = (props) => {
   return <StyledLinearProgress {...props} />;
 };
 
-export default LinearProgressComponent;
+export default LinearProgressBar;
