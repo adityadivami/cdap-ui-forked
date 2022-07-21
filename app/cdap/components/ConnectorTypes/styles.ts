@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useConnectorTypesComponentStyles = makeStyles(() => ({
   welcomeCardContainer: {
     display: 'flex',
-    paddingTop: '18px',
   },
   welcomeTextContainer: {
     display: 'flex',
@@ -18,7 +17,6 @@ export const useConnectorTypesComponentStyles = makeStyles(() => ({
   },
   flexContainer: {
     marginTop: '17px',
-    paddingBottom: '17px',
     display: 'flex',
     flexWrap: 'wrap',
     width: '100%',
@@ -49,7 +47,7 @@ export const useConnectorTypesComponentStyles = makeStyles(() => ({
     },
   },
   dashBoard: {
-    padding: '0px 59px 0px 60px',
+    padding: '18px 59px 18px 60px',
     maxWidth: '620px',
     border: '0px',
     borderRight: '1px dashed #DADCE0',
@@ -65,7 +63,7 @@ export const useConnectorTypesComponentStyles = makeStyles(() => ({
     fontSize: '18px',
     fontWeight: 400,
     lineHeight: '27px',
-    marginTop: '63.5px',
+    marginTop: '64px',
   },
   underLine: {
     lineHeight: '2px',
