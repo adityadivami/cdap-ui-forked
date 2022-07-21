@@ -6,9 +6,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './ConnectionTabs';
-
 import DataTable from '../DatasetListTable/DataTable';
-import { IConnectionTabSidePanel } from './interfaces/interface';
 import AllConnectionsIcon from './SVGs/AllConnectionsIcon';
 import GCSIcon from './SVGs/GCSIcon';
 
@@ -26,7 +24,6 @@ const DatasetWrapper: React.FC = () => {
   const loc = useLocation();
   const [data, setData] = React.useState<any>([]);
   const [value, setValue] = useState('All Connections');
-  const [datasetsWithConnectionName, setDatasetsWithConnectionName] = useState([]);
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
 
@@ -116,15 +113,13 @@ const DatasetWrapper: React.FC = () => {
         }),
       };
     });
-    const resolvePromise = async (promiseList, name) => {
+    const resolvePromise = (entitiesPromise, name) => {
       try {
-        await Promise.all([await promiseList]).then((values) => {
-          values.map((response) => {
-            response.entities.map((eachEntity) => {
-              eachEntity[`connectionsName`] = name;
-            });
-            setData((prev: any) => ([...prev, response.entities] as any).flat());
+        entitiesPromise.then((values) => {
+          values.entities.map((eachEntity) => {
+            eachEntity[`connectionsName`] = name;
           });
+          setData((prev: any) => ([...prev, values.entities] as any).flat());
         });
       } catch (error) {
         // console.log(error);
@@ -140,10 +135,6 @@ const DatasetWrapper: React.FC = () => {
       (eachConnection) => eachConnection.promise
     );
   };
-
-  React.useEffect(() => {
-    // nothing goes here;
-  }, [datasetsWithConnectionName]);
 
   return (
     <SelectDatasetWrapper>
