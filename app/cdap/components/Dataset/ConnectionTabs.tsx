@@ -1,43 +1,12 @@
-import * as React from 'react';
+import { styled, Tooltip, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { styled, Tooltip, Typography, TooltipProps } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import Tabs from '@material-ui/core/Tabs';
+import * as React from 'react';
+import { useStyles } from './styles';
+import CustomTooltip from './CustomTooltip';
 
-const useStyles = makeStyles({
-  boxStyles: {
-    width: '252px !important',
-    background: 'linear-gradient(180deg, rgba(243, 246, 249, 0) -0.07%, #F3F6F9 22.66%)',
-    borderRight: '1px dashed #DADCE0',
-    zIndex: 1,
-  },
-  tabIndicatorStyles: {
-    backgroundColor: 'white',
-    minWidth: '257.24px',
-    borderWidth: '3px',
-    borderStyle: 'solid',
-    borderImage: 'linear-gradient(to left, #4681F4, 2%,white,white,white,white,white,white) 1',
-    zIndex: 2,
-  },
-  labelsContainer: {
-    display: 'flex',
-    gap: '4px',
-  },
-  labelStyles: {
-    maxWidth: '145px',
-    fontSize: '16px',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  iconBoxStyles: {
-    width: 30,
-    height: 30,
-    boxSizing: 'border-box',
-  },
-});
-
-const StyledTab = styled(Tab)({
+const ConnectionTab = styled(Tab)({
   minWidth: '161px',
   // maxHeight: '54px',
   padding: '15px 0px 15px 32px',
@@ -57,7 +26,7 @@ const StyledTab = styled(Tab)({
     whiteSpace: 'nowrap',
   },
   '&.MuiTab-root': {
-    width: '252px !important',
+    width: '252px',
   },
   '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
     marginBottom: '0px',
@@ -68,69 +37,47 @@ const StyledTab = styled(Tab)({
   },
 });
 
-const useStylesBootstrap = makeStyles((theme) => ({
-  arrow: {
-    color: 'black',
-  },
-  tooltip: {
-    backgroundColor: 'black',
-    fontSize: '16px',
-  },
-}));
-
-function BootstrapTooltip(props: TooltipProps) {
-  const classes = useStylesBootstrap();
-
-  return <Tooltip arrow classes={classes} {...props} />;
-}
 const ConnectionsTabs = ({ connectorTypes, handleChange, value }) => {
   const classes = useStyles();
 
   return (
     <Box className={classes.boxStyles}>
-      <TabsComponent handleChange={handleChange} value={value} connectorTypes={connectorTypes} />
+      <Tabs
+        onChange={handleChange}
+        value={value}
+        orientation="vertical"
+        variant="scrollable"
+        TabIndicatorProps={{
+          className: classes.tabIndicatorStyles,
+        }}
+      >
+        {connectorTypes.map((connectorType, connectorTypeIndex) => (
+          <ConnectionTab
+            label={<TabLabel label={connectorType.name} count={connectorType.count} />}
+            value={connectorType.name}
+            icon={<Box className={classes.iconBoxStyles}>{connectorType.SVG}</Box>}
+            disableTouchRipple
+            key={`${connectorType.name}=${connectorTypeIndex}`}
+            id={connectorType.name}
+          />
+        ))}
+      </Tabs>
     </Box>
   );
 };
 
-const TabsComponent = ({ handleChange, value, connectorTypes }) => {
-  const classes = useStyles();
-  return (
-    <Tabs
-      onChange={handleChange}
-      value={value}
-      orientation="vertical"
-      variant="scrollable"
-      TabIndicatorProps={{
-        className: classes.tabIndicatorStyles,
-      }}
-    >
-      {connectorTypes.map((connectorType, connectorTypeIndex) => (
-        <StyledTab
-          label={<TooltipLabel label={connectorType.name} count={connectorType.count} />}
-          value={connectorType.name}
-          icon={<Box className={classes.iconBoxStyles}>{connectorType.SVG}</Box>}
-          disableTouchRipple
-          key={`${connectorType.name}=${connectorTypeIndex}`}
-          id={connectorType.name}
-        />
-      ))}
-    </Tabs>
-  );
-};
-
-const TooltipLabel = ({ label, count }) => {
+const TabLabel = ({ label, count }) => {
   const classes = useStyles();
 
   return (
-    <BootstrapTooltip title={label.length > 16 ? label : ''} arrow>
+    <CustomTooltip title={label.length > 16 ? label : ''} arrow>
       <Box className={classes.labelsContainer}>
-        <Typography variant="body1" className={classes.labelStyles}>
+        <Typography variant="body1" classes={{ body1: classes.labelStyles }}>
           {label}
         </Typography>
         <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
       </Box>
-    </BootstrapTooltip>
+    </CustomTooltip>
   );
 };
 
