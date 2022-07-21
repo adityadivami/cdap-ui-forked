@@ -1,4 +1,4 @@
-import { Box, Paper, styled, Typography } from '@material-ui/core';
+import { Box, Paper, Typography } from '@material-ui/core';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { defaultConnectorTypes } from 'components/WrangleHome/constants/defaultConnectorTypes';
 import React, { useEffect, useState } from 'react';
