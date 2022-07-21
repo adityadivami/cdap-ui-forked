@@ -8,7 +8,6 @@ import CustomTooltip from './CustomTooltip';
 
 const ConnectionTab = styled(Tab)({
   minWidth: '161px',
-  // maxHeight: '54px',
   padding: '15px 0px 15px 32px',
   textTransform: 'none',
   color: 'black',
@@ -66,13 +65,13 @@ const ConnectionsTabs = ({ connectorTypes, handleChange, value }) => {
   );
 };
 
-const TabLabel = ({ label, count }) => {
+const TabLabel = ({ label, count }: { label: string; count: number }) => {
   const classes = useStyles();
 
   return (
     <CustomTooltip title={label.length > 16 ? label : ''} arrow>
       <Box className={classes.labelsContainer}>
-        <Typography variant="body1" classes={{ body1: classes.labelStyles }}>
+        <Typography variant="body1" className={classes.labelStyles}>
           {label}
         </Typography>
         <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
