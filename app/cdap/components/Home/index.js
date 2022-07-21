@@ -26,7 +26,6 @@ import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/
 import HomeActions from 'components/Home/HomeActions';
 import ToggleExperiment from 'components/Lab/ToggleExperiment';
 import ee from 'event-emitter';
-
 require('./Home.scss');
 
 const EntityListView = Loadable({
@@ -154,6 +153,7 @@ export default class Home extends Component {
         <Switch>
           <Route exact path="/ns/:namespace" component={HomeActions} />
           <Route exact path="/ns/:namespace/control" component={EntityListView} />
+
           <Route
             exact
             path="/ns/:namespace/datasets/:datasetId/fields"
