@@ -84,9 +84,7 @@ const DatasetWrapper: React.FC = () => {
 
     setData([]);
 
-    if (newValue === 'All Connections') {
-      getCategorizedConnectionsforSelectedTab(newValue);
-    }
+    getCategorizedConnectionsforSelectedTab(newValue);
   };
 
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string) => {
@@ -96,7 +94,6 @@ const DatasetWrapper: React.FC = () => {
       const connections = categorizedConnections.get(selectedValue) || [];
       fetchEntities(connections);
     } else {
-      const categorizedConnections = await getCategorizedConnections();
       let connections = [];
       const allConnections = [];
       for (const [key] of categorizedConnections) {
