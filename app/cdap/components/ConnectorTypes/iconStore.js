@@ -23,8 +23,8 @@ export const GetConnectionIcon = (connectorName) => {
   }
 };
 
-export const GetIcon = (IconName) => {
-  switch (IconName) {
+export const GetIcon = (iconName) => {
+  switch (iconName) {
     case 'welcomeIcon':
       return IconWelcome;
     case 'underlineIcon':
