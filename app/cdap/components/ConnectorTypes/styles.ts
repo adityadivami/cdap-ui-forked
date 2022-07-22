@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useConnectorTypesComponentStyles = makeStyles(() => ({
   welcomeCardContainer: {
     display: 'flex',
+    paddingLeft: '8px',
   },
   welcomeTextContainer: {
     display: 'flex',
