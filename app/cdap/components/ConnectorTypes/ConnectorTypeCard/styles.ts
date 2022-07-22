@@ -26,4 +26,7 @@ export const useConnectorTypeCardComponentStyles = makeStyles(() => ({
     textDecoration: 'none !important',
     color: '#000000',
   },
+  imageWrapper: {
+    height: '40px',
+  },
 }));

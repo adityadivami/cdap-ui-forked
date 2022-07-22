@@ -20,7 +20,7 @@ const ConnectorTypeCardComponent: React.FC<IConnectorTypeCardComponentProps> = (
   return (
     <Box className={classes.cardWrapper}>
       <StyledBox>
-        {image}
+        <Box className={classes.imageWrapper}>{image}</Box>
         <Typography variant="body1" className={classes.connectorTypeName}>
           {props.name}
         </Typography>
