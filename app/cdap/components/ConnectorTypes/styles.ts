@@ -1,10 +1,23 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { UnderLine } from './iconStore';
 
 export const useConnectorTypesComponentStyles = makeStyles(() => ({
+  welcomeCardContainer: {
+    display: 'flex',
+    paddingLeft: '8px',
+  },
+  welcomeTextContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    marginLeft: '36px',
+  },
+  welcomeText: {
+    fontSize: '24px',
+    fontWeight: 500,
+    lineHeight: '36px',
+  },
   flexContainer: {
     marginTop: '17px',
-    paddingBottom: '17px',
     display: 'flex',
     flexWrap: 'wrap',
     width: '100%',
@@ -35,7 +48,7 @@ export const useConnectorTypesComponentStyles = makeStyles(() => ({
     },
   },
   dashBoard: {
-    padding: '0px 59px 0px 60px',
+    padding: '18px 59px 18px 60px',
     maxWidth: '620px',
     border: '0px',
     borderRight: '1px dashed #DADCE0',
@@ -51,9 +64,40 @@ export const useConnectorTypesComponentStyles = makeStyles(() => ({
     fontSize: '18px',
     fontWeight: 400,
     lineHeight: '27px',
-    marginTop: '63.5px',
+    marginTop: '64px',
   },
   underLine: {
     lineHeight: '2px',
+  },
+  cardWrapper: {
+    width: '166px',
+    height: '150px',
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    borderRadius: '0px',
+    margin: '0px',
+    padding: '0px',
+    '&:hover': {
+      cursor: 'pointer',
+      backgroundColor: '#ffffff',
+      boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+    },
+  },
+  wrangleCardContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  connectorTypeName: {
+    fontSize: '14px',
+    lineHeight: '21px',
+    fontWeight: 400,
+    letterSpacing: '0.15px',
+    marginTop: '7px',
+    textDecoration: 'none !important',
+    color: '#000000',
   },
 }));
