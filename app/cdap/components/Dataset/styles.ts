@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
+import { None } from 'vega-util';
 export const useStyles = makeStyles({
   boxStyles: {
     width: '252px',
@@ -8,7 +9,7 @@ export const useStyles = makeStyles({
   },
   tabIndicatorStyles: {
     backgroundColor: 'white',
-    minWidth: '257.24px',
+    minWidth: '252.24px',
     borderWidth: '3px',
     borderStyle: 'solid',
     borderImage: 'linear-gradient(to left, #4681F4, 2%,white,white,white,white,white,white) 1',
