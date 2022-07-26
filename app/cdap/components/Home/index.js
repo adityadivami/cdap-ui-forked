@@ -25,6 +25,7 @@ import LoadingSVGCentered from 'components/shared/LoadingSVGCentered';
 import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/KitchenSync';
 import HomeActions from 'components/Home/HomeActions';
 import ToggleExperiment from 'components/Lab/ToggleExperiment';
+import OngoingDataExploration from 'components/OngoingDataExploration';
 import ee from 'event-emitter';
 
 require('./Home.scss');
@@ -165,6 +166,11 @@ export default class Home extends Component {
           <Route exact path="/ns/:namespace/rulesengine" component={RulesEngineHome} />
           <Route exact path="/ns/:namespace/wrangle-home" component={WrangleHome} />
           <Route exact path="/ns/:namespace/datasets-list/:dataset" component={DatasetsList} />
+          <Route
+            exact
+            path="/ns/:namespace/ongoing-data-exploration"
+            component={OngoingDataExploration}
+          />
           <Route
             exact
             path="/ns/:namespace/workspace-data/:workspaceid"
