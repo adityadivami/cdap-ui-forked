@@ -1,54 +1,75 @@
-import Box from '@material-ui/core/Box';
 import React from 'react';
-import Table from '@material-ui/core/Table';
-import Paper from '@material-ui/core/Paper';
-import TableBody from '@material-ui/core/TableBody';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
+import { Box, Grid, Typography } from '@material-ui/core/';
+import ExplorationCardStyles from './styles';
+import { mockData } from './data';
 
-import { makeStyles, Typography } from '@material-ui/core';
-
-const useStyles = makeStyles({
-  container: {
-    marginTop: '23px',
-    marginLeft: '23px',
-  },
-  root: {
-    width: '1204px',
-    height: '77px',
-    border: '1px solid #DADCE0',
-  },
-
-  tabelCellStyles: {
-    fontSize: '16px',
-  },
-});
 const OngoingDataExploration = () => {
-  const classes = useStyles();
+  const classes = ExplorationCardStyles();
+
   return (
-    <TableContainer className={classes.container}>
-      <Table className={classes.root}>
-        <TableBody>
-          <TableRow>
-            <TableCell>Icon</TableCell>
-            <TableCell>
-              <Typography className={classes.tabelCellStyles}>IndiaSales_DataTable2</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography className={classes.tabelCellStyles}>Connection_Sales_Big</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography className={classes.tabelCellStyles}>14 Recipe steps</Typography>
-            </TableCell>
-            <TableCell>
-              <Typography>65%</Typography>
-              <Typography className={classes.tabelCellStyles}> Data Quality</Typography>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Box className={classes.wrapperForGrid}>
+      {mockData.map((item) => {
+        return (
+          <Grid container className={classes.gridContainer}>
+            {item.map((eachItem) => {
+              switch (eachItem.type) {
+                case 'iconWithText':
+                  return (
+                    <Grid item className={classes.elementStyle}>
+                      <Box className={classes.iconStyle}> {eachItem.icon}</Box>
+
+                      <Typography variant="body1">{eachItem.label}</Typography>
+                    </Grid>
+                  );
+                case 'text':
+                  return (
+                    <Grid item className={classes.elementStyle}>
+                      <Typography variant="body1"> {eachItem.label}</Typography>
+                    </Grid>
+                  );
+                case 'percentageWithText':
+                  const percent = parseInt(eachItem.label);
+                  let customClassEvaluator = true;
+                  if (percent > 50) {
+                    customClassEvaluator = true;
+                  } else {
+                    customClassEvaluator = false;
+                  }
+                  return (
+                    <Grid item className={classes.elementStyle}>
+                      <Typography
+                        variant="body2"
+                        className={
+                          customClassEvaluator
+                            ? classes.percentageStyleGreen
+                            : classes.percentageStyleRed
+                        }
+                      >
+                        {eachItem.label}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        className={
+                          customClassEvaluator
+                            ? classes.percentageSymbolGreen
+                            : classes.percentageSymbolRed
+                        }
+                      >
+                        {eachItem.percentageSymbol}
+                      </Typography>
+
+                      <Typography variant="body1">{eachItem.subText}</Typography>
+                    </Grid>
+                  );
+
+                default:
+                  break;
+              }
+            })}
+          </Grid>
+        );
+      })}
+    </Box>
   );
 };
 export default OngoingDataExploration;
