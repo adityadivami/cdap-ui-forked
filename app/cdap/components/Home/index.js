@@ -33,6 +33,10 @@ const EntityListView = Loadable({
   loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/EntityListView'),
   loading: LoadingSVGCentered,
 });
+const selectDataset = Loadable({
+  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/SelectDatasetNew'),
+  loading: LoadingSVGCentered,
+});
 const Connections = Loadable({
   loader: () => import(/* webpackChunkName: "Connections" */ 'components/Connections'),
   loading: LoadingSVGCentered,
@@ -164,6 +168,7 @@ export default class Home extends Component {
           <Route path="/ns/:namespace/datasets/:datasetId" component={DatasetDetailedView} />
           <Route exact path="/ns/:namespace/rulesengine" component={RulesEngineHome} />
           <Route exact path="/ns/:namespace/wrangle-home" component={WrangleHome} />
+          <Route exact path="/ns/:namespace/select-dataset" component={selectDataset} />
           <Route exact path="/ns/:namespace/datasets-list/:dataset" component={DatasetsList} />
           <Route
             exact
