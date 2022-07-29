@@ -26,6 +26,7 @@ import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/
 import HomeActions from 'components/Home/HomeActions';
 import ToggleExperiment from 'components/Lab/ToggleExperiment';
 import OngoingDataExploration from 'components/OngoingDataExploration';
+import WrangleCard from 'components/WrangleCard';
 import ee from 'event-emitter';
 
 require('./Home.scss');
@@ -171,6 +172,8 @@ export default class Home extends Component {
             path="/ns/:namespace/ongoing-data-exploration"
             component={OngoingDataExploration}
           />
+          <Route exact path="/ns/:namespace/wrangle-card" component={WrangleCard} />
+
           <Route
             exact
             path="/ns/:namespace/workspace-data/:workspaceid"
