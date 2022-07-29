@@ -29,20 +29,13 @@ const OngoingDataExploration = () => {
                   );
                 case 'percentageWithText':
                   const percent = parseInt(eachItem.label);
-                  let customClassEvaluator = true;
-                  if (percent > 50) {
-                    customClassEvaluator = true;
-                  } else {
-                    customClassEvaluator = false;
-                  }
+                  const customClassEvaluator = true;
                   return (
                     <Grid item className={classes.elementStyle}>
                       <Typography
                         variant="body2"
                         className={
-                          customClassEvaluator
-                            ? classes.percentageStyleGreen
-                            : classes.percentageStyleRed
+                          percent > 50 ? classes.percentageStyleGreen : classes.percentageStyleRed
                         }
                       >
                         {eachItem.label}
