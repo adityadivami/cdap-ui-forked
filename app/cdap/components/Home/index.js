@@ -26,6 +26,7 @@ import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/
 import HomeActions from 'components/Home/HomeActions';
 import ToggleExperiment from 'components/Lab/ToggleExperiment';
 import ee from 'event-emitter';
+import GridND from 'components/GridND/index';
 
 require('./Home.scss');
 
@@ -161,6 +162,7 @@ export default class Home extends Component {
               return <FieldLevelLineage {...props} />;
             }}
           />
+          <Route exact path="/ns/:namespace/nd-grid" component={GridND} />
           <Route path="/ns/:namespace/datasets/:datasetId" component={DatasetDetailedView} />
           <Route exact path="/ns/:namespace/rulesengine" component={RulesEngineHome} />
           <Route exact path="/ns/:namespace/wrangle-home" component={WrangleHome} />
