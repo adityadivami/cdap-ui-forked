@@ -3,11 +3,8 @@ import React from 'react';
 
 export const useStyles = makeStyles({
   wrapper: {
-    marginLeft: '80px', // need to be removed
-    marginTop: '80px',
-    marginRight: '80px',
     display: 'flex',
-    gap: '40px',
+    gap: '50px',
     flexWrap: 'wrap',
   },
   card: {
