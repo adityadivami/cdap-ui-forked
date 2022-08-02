@@ -1,10 +1,6 @@
 import { makeStyles } from '@material-ui/core';
-import * as React from 'react';
 
 const ExplorationCardStyles = makeStyles({
-  wrapperForGrid: {
-    margin: '20px 80px',
-  },
   gridContainer: {
     width: '1204px',
     height: '77px',

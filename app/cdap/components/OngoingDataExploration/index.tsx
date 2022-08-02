@@ -7,7 +7,7 @@ const OngoingDataExploration = () => {
   const classes = ExplorationCardStyles();
 
   return (
-    <Box className={classes.wrapperForGrid}>
+    <Box>
       {mockData.map((item) => {
         return (
           <Grid container className={classes.gridContainer}>
@@ -29,7 +29,7 @@ const OngoingDataExploration = () => {
                   );
                 case 'percentageWithText':
                   const percent = parseInt(eachItem.label);
-                  const customClassEvaluator = true;
+
                   return (
                     <Grid item className={classes.elementStyle}>
                       <Typography
@@ -43,9 +43,7 @@ const OngoingDataExploration = () => {
                       <Typography
                         variant="body2"
                         className={
-                          customClassEvaluator
-                            ? classes.percentageSymbolGreen
-                            : classes.percentageSymbolRed
+                          percent > 50 ? classes.percentageSymbolGreen : classes.percentageSymbolRed
                         }
                       >
                         {eachItem.percentageSymbol}
