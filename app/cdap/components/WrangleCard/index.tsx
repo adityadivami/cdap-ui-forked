@@ -3,7 +3,6 @@ import { fetchConnectors } from 'components/Connections/Create/reducer';
 import React, { useEffect, useState } from 'react';
 import { GCSIcon } from './icons/GCSIcon';
 import { ImportDatasetIcon } from './icons/ImportDatasetIcon';
-import { mock } from './mock';
 import { useStyles } from './styles';
 
 const WrangleCard = () => {
@@ -12,7 +11,6 @@ const WrangleCard = () => {
   });
   const getConnectorTypesNames = async () => {
     let connectorTypes = await fetchConnectors();
-
     connectorTypes = connectorTypes.map((connectorType) => {
       return {
         ...connectorType,

@@ -47,4 +47,26 @@ export const mockData = [
       type: 'percentageWithText',
     },
   ],
+  [
+    {
+      icon: <BigTableIcon />,
+      label: 'USA_DataTable2',
+      type: 'iconWithText',
+    },
+
+    {
+      label: 'Connection_Sales_Big',
+      type: 'text',
+    },
+    {
+      label: '6 Recipe steps',
+      type: 'text',
+    },
+    {
+      label: '90',
+      percentageSymbol: '%',
+      subText: 'Data Quality',
+      type: 'percentageWithText',
+    },
+  ],
 ];
