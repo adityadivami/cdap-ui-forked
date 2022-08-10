@@ -1,14 +1,76 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core/';
 import ExplorationCardStyles from './styles';
 import { mockData } from './data';
+import { updatedData } from './utils';
+import MyDataPrepApi from 'api/dataprep';
 
 const OngoingDataExploration = () => {
   const classes = ExplorationCardStyles();
+  const [ongoingExpDatas, setOngoingExpDatas] = useState<any>([]);
+  const [finalArray, setFinalArray] = useState([]);
+  const getOngoingData = () => {
+    MyDataPrepApi.getWorkspaceList({
+      context: 'default',
+    }).subscribe((res) => {
+      console.log(res);
+      res.values.forEach((item) => {
+        const params = {
+          context: 'default',
+          workspaceId: item.workspaceId,
+        };
+        const requestBody = {
+          directives: item.directives,
+          limit: 1000,
+          insights: {
+            name: item.name,
+            workspaceName: item.workspaceName,
+            path: item?.sampleSpec?.path,
+            visualization: {},
+          },
+        };
+        MyDataPrepApi.execute(params, requestBody).subscribe((response) => {
+          console.log(`Response for ${params.workspaceId}`, response);
+          let dataQuality = 0;
+          response.headers.forEach((head) => {
+            const general = response.summary.statistics[head].general;
+            const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+            const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+            dataQuality = dataQuality + nonNull;
+          });
+
+          const totalDataQuality = dataQuality / response.headers.length;
+
+          setOngoingExpDatas((current) => [
+            ...current,
+            {
+              connectionName:
+                item?.sampleSpec?.connectionName === undefined
+                  ? 'Upload'
+                  : item?.sampleSpec?.connectionName,
+              workspaceName: item.workspaceName,
+              recipeSteps: item.directives.length,
+              dataQuality: totalDataQuality,
+            },
+          ]);
+        });
+      });
+    });
+  };
+
+  useEffect(() => {
+    getOngoingData();
+  }, []);
+
+  useEffect(() => {
+    const final = updatedData(ongoingExpDatas);
+    console.log('Final Result', final);
+    setFinalArray(final);
+  }, [ongoingExpDatas]);
 
   return (
     <Box>
-      {mockData.map((item) => {
+      {finalArray.map((item) => {
         return (
           <Grid container className={classes.gridContainer}>
             {item.map((eachItem) => {

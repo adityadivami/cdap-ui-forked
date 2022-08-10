@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  wrangleHomeWrapper: {
+  wrapper: {
     maxWidth: '1206px',
     margin: '0px 80px',
     display: 'flex',
