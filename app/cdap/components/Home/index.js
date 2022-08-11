@@ -25,6 +25,7 @@ import LoadingSVGCentered from 'components/shared/LoadingSVGCentered';
 import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/KitchenSync';
 import HomeActions from 'components/Home/HomeActions';
 import ToggleExperiment from 'components/Lab/ToggleExperiment';
+import VerticalExpandingListView from 'components/VerticalExpandingListView';
 import ee from 'event-emitter';
 
 require('./Home.scss');
@@ -174,6 +175,11 @@ export default class Home extends Component {
             exact
             path="/ns/:namespace/workspace-data/:workspaceid"
             component={WorkspaceGrid}
+          />
+          <Route
+            exact
+            path="/ns/:namespace/vertical-expanding-list"
+            component={VerticalExpandingListView}
           />
           <Route exact path="/ns/:namespace/wrangler" component={DataPrepHome} />
           <Route exact path="/ns/:namespace/wrangler/:workspaceId" component={DataPrepHome} />
