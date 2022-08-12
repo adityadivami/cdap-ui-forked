@@ -27,7 +27,10 @@ const VerticalExpandingListView = () => {
     connectorTypes.forEach((connectorType) => {
       let connectypeLength = connections.get(connectorType.name)?.length;
       connectypeLength = isNaN(connectypeLength) ? 0 : 1;
-      const obj = { name: connectorType.name, numberOfConnections: connectypeLength };
+      const obj = {
+        name: connectorType.name,
+        numberOfConnections: connectypeLength,
+      };
       connectorTypeArray.push(obj);
     });
     setExpandingList([connectorTypeArray]); // [[{name: , length : },{},{},],[],[]........]

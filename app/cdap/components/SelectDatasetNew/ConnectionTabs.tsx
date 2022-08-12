@@ -52,7 +52,25 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
                 onClick={() => {
                   handleChange(connectorType, index);
                 }}
-                label={<TabLabel label={connectorType.name} count={connectorType.count} />}
+                label={
+                  index > 1 ? (
+                    connectorType.canBrowse ? (
+                      <TabLabel
+                        label={connectorType.name}
+                        count={index === 0 ? connectorType.count : undefined}
+                        index={index}
+                      />
+                    ) : (
+                      <TabLabelCanSample label={connectorType.name} />
+                    )
+                  ) : (
+                    <TabLabel
+                      label={connectorType.name}
+                      count={index === 0 ? connectorType.count : undefined}
+                      index={index}
+                    />
+                  )
+                }
                 value={connectorType.name}
                 icon={<Box className={classes.iconBoxStyles}>{connectorType.SVG}</Box>}
                 disableTouchRipple
@@ -67,7 +85,7 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
   );
 };
 
-const TabLabel = ({ label, count }: { label: string; count: number }) => {
+const TabLabel = ({ label, count, index }: { label: string; count: number; index: number }) => {
   const classes = useStyles();
 
   return (
@@ -76,7 +94,24 @@ const TabLabel = ({ label, count }: { label: string; count: number }) => {
         <Typography variant="body1" className={classes.labelStyles}>
           {label}
         </Typography>
-        <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
+        {count && (
+          <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
+        )}
+      </Box>
+    </CustomTooltip>
+  );
+};
+
+const TabLabelCanSample = ({ label }: { label: string }) => {
+  const classes = useStyles();
+
+  return (
+    <CustomTooltip title={label.length > 16 ? label : ''} arrow>
+      <Box className={classes.labelsContainerCanSample}>
+        <Typography variant="body1" className={classes.labelStylesCanSample}>
+          {label}
+        </Typography>
+        <Typography>Wrangle</Typography>
       </Box>
     </CustomTooltip>
   );
