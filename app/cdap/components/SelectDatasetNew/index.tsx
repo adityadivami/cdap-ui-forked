@@ -63,11 +63,11 @@ const DatasetWrapper = () => {
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string, index: number) => {
     const categorizedConnections = await getCategorizedConnections();
     const connections = categorizedConnections.get(selectedValue) || [];
-    connections.map((each) => {
-      fetchEntities(each.name).then((res) => {
-        each[`count`] = res.totalCount;
-      });
-    });
+    // connections.map((each) => {
+    //   fetchEntities(each.name).then((res) => {
+    //     each[`count`] = res.totalCount;
+    //   });
+    // });
     setDataForTabs((prev): any => {
       const tempData = [...prev];
       tempData.push({ data: [], showTabs: false, selectedTab: '' });
@@ -108,16 +108,18 @@ const DatasetWrapper = () => {
           });
         });
       } else {
-        fetchEntities(dataForTabs[1].selectedTab, entity.path).then((res) => {
-          setDataForTabs((prev): any => {
-            const tempData = [...prev];
-            tempData.push({ data: [], showTabs: false, selectedTab: '' });
-            tempData[index + 1][`data`] = res.entities;
-            tempData[index + 1][`showTabs`] = true;
-            tempData[index + 1][`selectedTab`] = res.entities[0].name;
-            return tempData.slice(0, index + 2);
+        if (entity.canBrowse) {
+          fetchEntities(dataForTabs[1].selectedTab, entity.path).then((res) => {
+            setDataForTabs((prev): any => {
+              const tempData = [...prev];
+              tempData.push({ data: [], showTabs: false, selectedTab: '' });
+              tempData[index + 1][`data`] = res.entities;
+              tempData[index + 1][`showTabs`] = true;
+              tempData[index + 1][`selectedTab`] = res.entities[0].name;
+              return tempData.slice(0, index + 2);
+            });
           });
-        });
+        }
       }
       return newData;
     });

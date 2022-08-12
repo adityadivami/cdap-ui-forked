@@ -32,4 +32,17 @@ export const useStyles = makeStyles({
     backgroundColor: 'black',
     color: 'white',
   },
+  labelsContainerCanSample: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '200px',
+    gap: '4px',
+    // background: 'red',
+  },
+  labelStylesCanSample: {
+    maxWidth: '145px',
+    fontSize: '16px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
 });
