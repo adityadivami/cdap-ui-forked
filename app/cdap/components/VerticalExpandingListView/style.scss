@@ -1,0 +1,12 @@
+.vertical_container{
+    display: flex;
+  }
+  
+  .vertical_container_internal{
+    width: 300px;
+  }
+  
+  .vertical_container_internal>div{
+    border: 1px solid black;
+    padding: 10px;
+  }
