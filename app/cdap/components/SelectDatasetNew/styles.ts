@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/styles';
 import { None } from 'vega-util';
 export const useStyles = makeStyles({
   boxStyles: {
-    width: '252px',
+    width: '280px',
     background: 'linear-gradient(180deg, rgba(243, 246, 249, 0) -0.07%, #F3F6F9 22.66%)',
     borderRight: '1px dashed #DADCE0',
     zIndex: 1,
@@ -18,7 +18,7 @@ export const useStyles = makeStyles({
     gap: '4px',
   },
   labelStyles: {
-    maxWidth: '145px',
+    maxWidth: '280px',
     fontSize: '16px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -35,7 +35,6 @@ export const useStyles = makeStyles({
   labelsContainerCanSample: {
     display: 'flex',
     justifyContent: 'space-between',
-    width: '200px',
     gap: '4px',
     // background: 'red',
   },
