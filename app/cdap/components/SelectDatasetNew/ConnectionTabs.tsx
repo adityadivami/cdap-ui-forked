@@ -10,7 +10,7 @@ import { white } from 'components/ThemeWrapper/colors';
 
 const ConnectionTab = styled(Tab)({
   minWidth: '161px',
-  padding: '15px 0px 15px 0px',
+  padding: '15px 0px 15px 30px',
   textTransform: 'none',
   color: 'black',
   fontSize: '16px',

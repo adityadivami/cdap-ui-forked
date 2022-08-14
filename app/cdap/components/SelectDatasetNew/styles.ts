@@ -4,14 +4,12 @@ import { None } from 'vega-util';
 export const useStyles = makeStyles({
   boxStyles: {
     width: '280px',
-    // background: 'linear-gradient(180deg, rgba(243, 246, 249, 0) -0.07%, #F3F6F9 22.66%)',
     borderRight: '1px dashed #DADCE0',
     zIndex: 1,
   },
   tabIndicatorStyles: {
     backgroundColor: '#4681F4',
-    color: 'white !important',
-    // minWidth: '252.24px',
+    color: 'red',
     width: '280px',
     zIndex: 2,
   },
