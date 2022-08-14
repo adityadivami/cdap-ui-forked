@@ -6,6 +6,7 @@ import * as React from 'react';
 import { useStyles } from './styles';
 import CustomTooltip from './CustomTooltip';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { white } from 'components/ThemeWrapper/colors';
 
 const ConnectionTab = styled(Tab)({
   minWidth: '161px',
@@ -30,6 +31,10 @@ const ConnectionTab = styled(Tab)({
   },
   '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
     marginBottom: '0px',
+  },
+  '&.hover': {
+    color: 'red',
+    backgroundColor: 'black',
   },
 });
 
@@ -109,7 +114,7 @@ const TabLabelCanBrowse = ({
           )}
         </Box>
         <Box>
-          <ArrowForwardIosIcon />
+          <ArrowForwardIosIcon style={{ color: 'white' }} />
         </Box>
       </Box>
     </CustomTooltip>
