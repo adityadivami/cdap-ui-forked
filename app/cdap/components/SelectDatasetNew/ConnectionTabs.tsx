@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import * as React from 'react';
 import { useStyles } from './styles';
 import CustomTooltip from './CustomTooltip';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const ConnectionTab = styled(Tab)({
   minWidth: '161px',
@@ -55,7 +56,7 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
                 label={
                   index > 1 ? (
                     connectorType.canBrowse ? (
-                      <TabLabel
+                      <TabLabelCanBrowse
                         label={connectorType.name}
                         count={index === 0 ? connectorType.count : undefined}
                         index={index}
@@ -64,7 +65,7 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
                       <TabLabelCanSample label={connectorType.name} />
                     )
                   ) : (
-                    <TabLabel
+                    <TabLabelCanBrowse
                       label={connectorType.name}
                       count={index === 0 ? connectorType.count : undefined}
                       index={index}
@@ -72,7 +73,7 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
                   )
                 }
                 value={connectorType.name}
-                icon={<Box className={classes.iconBoxStyles}>{connectorType.SVG}</Box>}
+                // icon={<Box className={classes.iconBoxStyles}>{connectorType.SVG}</Box>}
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
                 id={connectorType.name}
@@ -85,18 +86,31 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
   );
 };
 
-const TabLabel = ({ label, count, index }: { label: string; count: number; index: number }) => {
+const TabLabelCanBrowse = ({
+  label,
+  count,
+  index,
+}: {
+  label: string;
+  count: number;
+  index: number;
+}) => {
   const classes = useStyles();
 
   return (
     <CustomTooltip title={label.length > 16 ? label : ''} arrow>
-      <Box className={classes.labelsContainer}>
-        <Typography variant="body1" className={classes.labelStyles}>
-          {label}
-        </Typography>
-        {count && (
-          <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
-        )}
+      <Box className={classes.tabsContainer}>
+        <Box className={classes.labelsContainer}>
+          <Typography variant="body1" className={classes.labelStyles}>
+            {label}
+          </Typography>
+          {count && (
+            <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
+          )}
+        </Box>
+        <Box>
+          <ArrowForwardIosIcon />
+        </Box>
       </Box>
     </CustomTooltip>
   );
@@ -111,7 +125,7 @@ const TabLabelCanSample = ({ label }: { label: string }) => {
         <Typography variant="body1" className={classes.labelStylesCanSample}>
           {label}
         </Typography>
-        <Typography>Wrangle</Typography>
+        <Typography> Wrangle </Typography>
       </Box>
     </CustomTooltip>
   );
