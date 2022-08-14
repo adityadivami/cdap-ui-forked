@@ -11,7 +11,7 @@ export const useStyles = makeStyles({
   tabIndicatorStyles: {
     backgroundColor: '#4681F4',
     color: 'white !important',
-    minWidth: '252.24px',
+    // minWidth: '252.24px',
     width: '280px',
     zIndex: 2,
   },

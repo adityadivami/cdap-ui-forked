@@ -32,9 +32,9 @@ const ConnectionTab = styled(Tab)({
   '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
     marginBottom: '0px',
   },
-  hover: {
-    color: 'red',
-    backgroundColor: 'black',
+  '&:hover': {
+    backgroundColor: '#4681F4',
+    color: 'white',
   },
 });
 
