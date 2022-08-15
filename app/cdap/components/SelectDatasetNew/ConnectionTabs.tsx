@@ -6,7 +6,9 @@ import * as React from 'react';
 import { useStyles } from './styles';
 import CustomTooltip from './CustomTooltip';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { white } from 'components/ThemeWrapper/colors';
+import white from '@material-ui/core/colors/common';
+import grey from '@material-ui/core/colors/grey';
+import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 const ConnectionTab = styled(Tab)({
   minWidth: '161px',
@@ -36,11 +38,14 @@ const ConnectionTab = styled(Tab)({
     backgroundColor: '#4681F4',
     color: 'white',
   },
+  '&$selected': {
+    backgroundColor: '#004C9B',
+    color: 'white',
+  },
 });
 
 const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
   const classes = useStyles();
-
   return (
     <>
       {tabsData.showTabs && (
@@ -49,6 +54,7 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
             value={value}
             orientation="vertical"
             variant="scrollable"
+            textColor="primary"
             TabIndicatorProps={{
               className: classes.tabIndicatorStyles,
             }}
