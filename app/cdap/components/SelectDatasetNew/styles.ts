@@ -9,12 +9,14 @@ export const useStyles = makeStyles({
   },
   tabIndicatorStyles: {
     backgroundColor: '#4681F4',
-    color: 'red',
+    color: 'red !important',
     width: '280px',
     zIndex: 2,
   },
   labelsContainer: {
     display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
     gap: '4px',
   },
   labelStyles: {

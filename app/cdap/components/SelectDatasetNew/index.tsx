@@ -46,11 +46,13 @@ const DatasetWrapper = () => {
         SVG: <GCSIcon />,
       };
     });
-    const firstLevelData = connectorTypes.map((each) => {
-      return {
-        name: each.name,
-        count: each.count,
-      };
+    const firstLevelData = connectorTypes.filter((each) => {
+      if (each.count > 0) {
+        return {
+          name: each.name,
+          count: each.count,
+        };
+      }
     });
     console.log(firstLevelData, 'firstLevelData');
     setDataForTabs((prev): any => {
