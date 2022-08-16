@@ -33,6 +33,12 @@ const EntityListView = Loadable({
   loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/EntityListView'),
   loading: LoadingSVGCentered,
 });
+
+const GridTableToolBarView = Loadable({
+  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/AaToolbar'),
+  loading: LoadingSVGCentered,
+});
+
 const Connections = Loadable({
   loader: () => import(/* webpackChunkName: "Connections" */ 'components/Connections'),
   loading: LoadingSVGCentered,
@@ -165,6 +171,7 @@ export default class Home extends Component {
           <Route exact path="/ns/:namespace/rulesengine" component={RulesEngineHome} />
           <Route exact path="/ns/:namespace/wrangle-home" component={WrangleHome} />
           <Route exact path="/ns/:namespace/datasets-list/:dataset" component={DatasetsList} />
+          <Route exact path="/ns/:namespace/gridToolBar" component={GridTableToolBarView} />
           <Route
             exact
             path="/ns/:namespace/workspace-data/:workspaceid"
