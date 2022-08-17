@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import Aaitems from '../Aaitems';
 import { SVG1, SVG2, SVG3, SVG4, SVG5, SVG6, SVG7, SVG12, SVG11, SVG9, SVG10 } from './images';
 import './index.scss';
+import { IconButton } from '@material-ui/core';
 
 const listItems = [
   { id: 1, imgUrl: SVG2 },
@@ -23,17 +24,15 @@ const ToolBarList = () => {
   return (
     <Box className="cont">
       <Box className="bgcont">
-        <ul className="unlist">
-          {listItems.map((eachItem) => (
-            <Aaitems details={eachItem} key={eachItem.id} />
-          ))}
-        </ul>
-        <Box>
-          {SVG1}
+        {listItems.map((eachItem) => (
+          <Aaitems details={eachItem} key={eachItem.id} />
+        ))}
+        <Box className="bgcont1">
+          <IconButton> {SVG1}</IconButton>
           <input type="search" placeholder="Search for Functions" className="searchh" />
         </Box>
       </Box>
-      <Box>{SVG12}</Box>
+      <IconButton>{SVG12}</IconButton>
     </Box>
   );
 };
