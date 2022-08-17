@@ -12,6 +12,7 @@ const SelectDatasetWrapper = styled(Box)({
   display: 'flex',
   marginTop: '48px',
   borderTop: '1px solid #E0E0E0;',
+  overflow: 'auto',
 });
 
 const DatasetWrapper = () => {
