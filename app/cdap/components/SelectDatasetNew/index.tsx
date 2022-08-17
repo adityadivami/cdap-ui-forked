@@ -5,7 +5,7 @@ import { fetchConnectors } from 'components/Connections/Create/reducer';
 import * as React from 'react';
 import { useState } from 'react';
 import ConnectionsTabs from './ConnectionTabs';
-import GCSIcon from './SVGs/GCSIcon';
+import { GCSIcon } from './SVGs/GCSIcon';
 import { useLocation, useParams } from 'react-router';
 
 const SelectDatasetWrapper = styled(Box)({
