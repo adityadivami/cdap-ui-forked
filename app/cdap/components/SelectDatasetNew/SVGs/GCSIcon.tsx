@@ -1,6 +1,6 @@
 import React from 'react';
 
-const GCSIcon = () => {
+export const GCSIcon = () => {
   return (
     <svg
       width="30"
@@ -28,5 +28,3 @@ const GCSIcon = () => {
     </svg>
   );
 };
-
-export default GCSIcon;

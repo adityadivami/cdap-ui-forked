@@ -47,7 +47,10 @@ const ConnectionTab = styled(Tab)({
 
 const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
   const classes = useStyles();
-  const [refState, setRefState] = React.useState([]);
+
+  console.log(tabsData, 'child Data');
+
+  // const [refState, setRefState] = React.useState([]);
   // const currentRef = useRef(null);
   // const executeScroll = (index) => {
   //   console.log(refState, 'ref State', currentRef, 'current Ref');
@@ -89,7 +92,6 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
                         label={connectorType.name}
                         count={index === 0 ? connectorType.count : undefined}
                         index={index}
-                        logo={connectorType.SVG ? connectorType.SVG : undefined}
                       />
                     ) : (
                       <TabLabelCanSample label={connectorType.name} />
@@ -99,6 +101,7 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
                       label={connectorType.name}
                       count={index === 0 ? connectorType.count : undefined}
                       index={index}
+                      SVG={connectorType.SVG}
                     />
                   )
                 }
@@ -120,20 +123,20 @@ const TabLabelCanBrowse = ({
   label,
   count,
   index,
-  logo,
+  SVG,
 }: {
   label: string;
   count: number;
   index: number;
-  logo?: any;
+  SVG?: any;
 }) => {
   const classes = useStyles();
-
+  console.log(SVG);
   return (
-    <CustomTooltip title={label.length > 16 ? label : ''} arrow>
+    <CustomTooltip title={label.length > 16 ? label : ''} arrow key={index}>
       <Box className={classes.labelContainerBox}>
         <Box className={classes.labelsContainer}>
-          <Box>{logo}</Box>
+          <Box>{SVG}</Box>
           <Typography variant="body1" className={classes.labelStyles}>
             {label}
           </Typography>
