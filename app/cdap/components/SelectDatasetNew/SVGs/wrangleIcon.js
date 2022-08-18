@@ -22,3 +22,28 @@ export const CanBrowseIconHover = () => (
     <path opacity="0.8" d="M1 0.5L7 7.5L1 15" stroke="white" strokeLinecap="round" />
   </svg>
 );
+
+export const DownloadIcon = () => {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M20 12L18.59 10.59L13 16.17V4H11V16.17L5.42 10.58L4 12L12 20L20 12Z"
+        fill="black"
+        fillOpacity="0.54"
+      />
+      <path d="M1.5 17.5V23H22V17.5" stroke="#757575" strokeWidth="1.5" />
+    </svg>
+  );
+};
+
+export const PrevPageIcon = () => {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M16 7H3.83L9.42 1.41L8 0L0 8L8 16L9.41 14.59L3.83 9H16V7Z"
+        fill="black"
+        fillOpacity="0.54"
+      />
+    </svg>
+  );
+};

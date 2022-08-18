@@ -7,12 +7,13 @@ import { useState } from 'react';
 import ConnectionsTabs from './ConnectionTabs';
 import { GCSIcon } from './SVGs/GCSIcon';
 import { useLocation, useParams } from 'react-router';
+import BreadCumb from './BreadCumb';
 
 const SelectDatasetWrapper = styled(Box)({
   display: 'flex',
-  marginTop: '48px',
   borderTop: '1px solid #E0E0E0;',
   overflow: 'auto',
+  height: '100%',
 });
 
 const DatasetWrapper = () => {
@@ -24,7 +25,7 @@ const DatasetWrapper = () => {
     {
       data: [],
       showTabs: true,
-      selectedTab: 'File',
+      selectedTab: null,
     },
   ]);
 
@@ -76,7 +77,8 @@ const DatasetWrapper = () => {
       tempData.push({ data: [], showTabs: false, selectedTab: '' });
       tempData[index + 1][`data`] = connections;
       tempData[index + 1][`showTabs`] = true;
-      tempData[index + 1][`selectedTab`] = connections[0].name;
+      // tempData[index + 1][`selectedTab`] = connections[0].name;
+      tempData[index + 1][`selectedTab`] = null;
       return tempData.slice(0, index + 2);
     });
   };
@@ -106,7 +108,8 @@ const DatasetWrapper = () => {
             tempData.push({ data: [], showTabs: false, selectedTab: '' });
             tempData[index + 1][`data`] = res.entities;
             tempData[index + 1][`showTabs`] = true;
-            tempData[index + 1][`selectedTab`] = res.entities[0].name;
+            tempData[index + 1][`selectedTab`] = null;
+            // tempData[index + 1][`selectedTab`] = res.entities[0].name;
             return tempData.slice(0, index + 2);
           });
         });
@@ -118,7 +121,8 @@ const DatasetWrapper = () => {
               tempData.push({ data: [], showTabs: false, selectedTab: '' });
               tempData[index + 1][`data`] = res.entities;
               tempData[index + 1][`showTabs`] = true;
-              tempData[index + 1][`selectedTab`] = res.entities[0].name;
+              // tempData[index + 1][`selectedTab`] = res.entities[0].name;
+              tempData[index + 1][`selectedTab`] = null;
               return tempData.slice(0, index + 2);
             });
           });
@@ -137,16 +141,19 @@ const DatasetWrapper = () => {
   }, []);
 
   return (
-    <SelectDatasetWrapper>
-      {dataForTabs.map((each, index) => (
-        <ConnectionsTabs
-          tabsData={each}
-          handleChange={selectedTabValueHandler}
-          value={each.selectedTab}
-          index={index}
-        />
-      ))}
-    </SelectDatasetWrapper>
+    <>
+      <BreadCumb />
+      <SelectDatasetWrapper>
+        {dataForTabs.map((each, index) => (
+          <ConnectionsTabs
+            tabsData={each}
+            handleChange={selectedTabValueHandler}
+            value={each.selectedTab}
+            index={index}
+          />
+        ))}
+      </SelectDatasetWrapper>
+    </>
   );
 };
 
