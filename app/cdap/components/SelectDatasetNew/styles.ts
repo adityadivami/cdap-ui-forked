@@ -21,31 +21,27 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     gap: '4px',
   },
-  canBrowseIconNormal: {
-    display: 'block',
+  canBrowseIconHover: {
+    // display: 'none',
   },
-
+  canBrowseIconNormal: {
+    // display: 'inline',
+  },
+  canBrowseHover: {
+    display: 'none',
+  },
   tabsContainer: {
     '& .MuiTabs-scroller': {
       '& .MuiButtonBase-root.Mui-selected': {
         color: '#fff',
+        '& .canBrowseHover': {
+          display: 'inline',
+        },
+        '& .canBrowseNormal': {
+          display: 'none',
+        },
       },
     },
-    // '& .MuiButtonBase-root.MuiTab-root:hover': {
-    //   border: '2px solid black',
-    //   '& .MuiTab-wrapper': {
-    //     border: '2px solid green',
-    //     '& .arrowIcon': {
-    //       border: '2px solid red',
-    //       '&.arrowIcon': {
-    //         '&.canBrowseIconHover': {
-    //           display: 'block',
-    //           border: '2px solid green',
-    //         },
-    //       },
-    //     },
-    //   },
-    // },
   },
   labelStyles: {
     maxWidth: '300px',
@@ -72,10 +68,16 @@ export const useStyles = makeStyles({
       '&>.MuiBox-root': {
         display: 'flex',
         justifyContent: 'space-between',
+        gap: '10px',
       },
     },
     '&>.MuiBox-root': {
       display: 'none',
+    },
+  },
+  wrangleTab: {
+    '&:hover': {
+      backgroundColor: '#EFF0F2',
     },
   },
   labelStylesCanSample: {
@@ -88,11 +90,5 @@ export const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
-  },
-  canBrowseIconHover: {
-    display: 'none',
-  },
-  arrowIcon: {
-    color: 'white',
   },
 });

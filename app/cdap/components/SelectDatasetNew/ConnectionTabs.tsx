@@ -31,15 +31,15 @@ const ConnectionTab = styled(Tab)({
   '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
     marginBottom: '0px',
   },
-  '&:hover': {
-    backgroundColor: '#3994FF',
-    color: '#ffffff',
-    pointer: 'cursor',
-    width: '100%',
-    '&.MuiBox-root-666': {
-      display: 'none',
-    },
-  },
+  // '&:hover': {
+  //   backgroundColor: '#3994FF',
+  //   color: '#ffffff',
+  //   pointer: 'cursor',
+  //   width: '100%',
+  //   '&.MuiBox-root-666': {
+  //     display: 'none',
+  //   },
+  // },
   '&.makeStyles-canBrowseIconHover': {
     border: '10px solid green',
   },
@@ -76,14 +76,16 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
               indicator: classes.indicator,
               root: classes.tabsContainer,
             }}
-            // onClick={function(index) {
-            //   executeScroll(index);
-            // }}
           >
             {tabsData.data.map((connectorType, connectorTypeIndex) => (
               <ConnectionTab
                 onClick={() => {
-                  handleChange(connectorType, index);
+                  console.log(connectorType, 'check here for aditya');
+                  if (index > 1) {
+                    connectorType.canBrowse ? handleChange(connectorType, index) : null;
+                  } else {
+                    handleChange(connectorType, index);
+                  }
                 }}
                 label={
                   index > 1 ? (
@@ -110,6 +112,7 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
                 id={connectorType.name}
+                className={connectorType.canSample ? classes.wrangleTab : 'eachConnectionStyle'}
               />
             ))}
           </Tabs>
@@ -144,12 +147,12 @@ const TabLabelCanBrowse = ({
             <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
           )}
         </Box>
-        <Box className={classes.arrowIcon}>
-          <Box className={classes.canBrowseIconHover}>
-            <CanBrowseIconHover />
-          </Box>
-          <Box className={classes.canBrowseIconNormal}>
+        <Box>
+          <Box className={`canBrowseNormal`}>
             <CanBrowseIcon />
+          </Box>
+          <Box className={`canBrowseHover`} sx={{ display: 'none' }}>
+            <CanBrowseIconHover />
           </Box>
         </Box>
       </Box>
@@ -168,7 +171,7 @@ const TabLabelCanSample = ({ label }: { label: string }) => {
         </Typography>
         <Box>
           <WrangelIcon />
-          <Typography> Wrangle </Typography>
+          <Typography>Wrangle</Typography>
         </Box>
       </Box>
     </CustomTooltip>
