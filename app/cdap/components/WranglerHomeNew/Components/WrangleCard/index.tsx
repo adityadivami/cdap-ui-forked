@@ -1,19 +1,19 @@
+import React, { useEffect, useState } from 'react';
 import { Box, Card, Typography } from '@material-ui/core';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
-import React, { useEffect, useState } from 'react';
-import { Bigquery } from './icons/Bigquery';
-import { CloudSQLMySQL } from './icons/CloudSQLMySQL';
-import { CloudSQLPostGreSQL } from './icons/CloudSQLPostGreSQL';
-import { Database } from './icons/Database';
-import { GCS } from './icons/GCS';
-import { ImportDatasetIcon } from './icons/ImportDatasetIcon';
-import { Kafka } from './icons/Kafka';
-import { MySQL } from './icons/MySQL';
-import { Oracle } from './icons/Oracle';
-import { PostGRESSQL } from './icons/PostGRESQL';
-import { S3 } from './icons/S3';
-import { Spanner } from './icons/Spanner';
-import { SQLServer } from './icons/SQLServer';
+import { Bigquery } from './iconStore/Bigquery';
+import { CloudSQLMySQL } from './iconStore/CloudSQLMySQL';
+import { CloudSQLPostGreSQL } from './iconStore/CloudSQLPostGreSQL';
+import { Database } from './iconStore/Database';
+import { GCS } from './iconStore/GCS';
+import { ImportDatasetIcon } from './iconStore/ImportDatasetIcon';
+import { Kafka } from './iconStore/Kafka';
+import { MySQL } from './iconStore/MySQL';
+import { Oracle } from './iconStore/Oracle';
+import { PostGRESSQL } from './iconStore/PostGRESQL';
+import { S3 } from './iconStore/S3';
+import { Spanner } from './iconStore/Spanner';
+import { SQLServer } from './iconStore/SQLServer';
 import { useStyles } from './styles';
 
 const WrangleCard = () => {
@@ -22,7 +22,7 @@ const WrangleCard = () => {
   });
   const getConnectorTypesNames = async () => {
     let connectorTypes = await fetchConnectors();
-    console.log(connectorTypes);
+
     connectorTypes = connectorTypes.map((connectorType) => {
       if (connectorType.name === 'S3') {
         return {
@@ -126,7 +126,6 @@ const WrangleCard = () => {
           <Card className={classes.card}>
             <Box className={classes.cardContent} key={index}>
               {item.SVG}
-
               <Typography className={classes.cardText}>{item.name}</Typography>
             </Box>
           </Card>

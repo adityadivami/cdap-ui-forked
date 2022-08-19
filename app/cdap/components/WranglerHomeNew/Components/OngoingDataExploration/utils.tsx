@@ -1,4 +1,4 @@
-import { ImportDatasetIcon } from 'components/WrangleCard/icons/ImportDatasetIcon';
+import { ImportDatasetIcon } from 'components/WrangleCard/iconStore/ImportDatasetIcon';
 
 export const updatedData = (olddata: any) => {
   const parentarr = [];

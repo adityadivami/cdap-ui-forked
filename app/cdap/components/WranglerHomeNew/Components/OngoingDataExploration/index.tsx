@@ -4,7 +4,7 @@ import ExplorationCardStyles from './styles';
 import { updatedData } from './utils';
 import MyDataPrepApi from 'api/dataprep';
 
-const OngoingDataExploration = ({ setIsLoading }) => {
+const OngoingDataExploration = () => {
   const classes = ExplorationCardStyles();
   const [ongoingExpDatas, setOngoingExpDatas] = useState<any>([]);
   const [finalArray, setFinalArray] = useState([]);
@@ -13,7 +13,6 @@ const OngoingDataExploration = ({ setIsLoading }) => {
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     }).subscribe((res) => {
-      console.log('Res', res);
       res.values.forEach((item) => {
         const params = {
           context: 'default',
