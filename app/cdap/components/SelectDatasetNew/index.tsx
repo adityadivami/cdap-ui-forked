@@ -1,19 +1,14 @@
-import { Box, Input, styled, Typography } from '@material-ui/core';
+import { Box, styled, Typography } from '@material-ui/core';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
 import * as React from 'react';
 import { useState } from 'react';
-import ConnectionsTabs from './ConnectionTabs';
-import { GCSIcon } from './SVGs/GCSIcon';
-import { useLocation, useParams } from 'react-router';
+import { useLocation } from 'react-router';
 import BreadCumb from './BreadCumb';
+import ConnectionsTabs from './ConnectionTabs';
 import { useStyles } from './styles';
-import { SearchIcon } from './SVGs/wrangleIcon';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
+import { GCSIcon } from './SVGs/GCSIcon';
 
 const SelectDatasetWrapper = styled(Box)({
   display: 'flex',
@@ -38,9 +33,6 @@ const DatasetWrapper = () => {
     },
   ]);
 
-  const [filteredDataForTabs, setFilteredDataForTabs] = useState(
-    JSON.parse(JSON.stringify(dataForTabs))
-  );
   const getConnectionsTabData = async () => {
     let connectorTypes = await fetchConnectors();
     let allConnectionsTotalLength = 0;
@@ -68,7 +60,6 @@ const DatasetWrapper = () => {
         };
       }
     });
-    console.log(firstLevelData, 'firstLevelData');
     setDataForTabs((prev): any => {
       const tempData = [...prev];
       tempData[0].data = firstLevelData;
@@ -79,11 +70,7 @@ const DatasetWrapper = () => {
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string, index: number) => {
     const categorizedConnections = await getCategorizedConnections();
     const connections = categorizedConnections.get(selectedValue) || [];
-    // connections.map((each) => {
-    //   fetchEntities(each.name).then((res) => {
-    //     each[`count`] = res.totalCount;
-    //   });
-    // });
+
     setDataForTabs((prev): any => {
       const tempData = [...prev];
       tempData.push({
@@ -94,7 +81,6 @@ const DatasetWrapper = () => {
       });
       tempData[index + 1][`data`] = connections;
       tempData[index + 1][`showTabs`] = true;
-      // tempData[index + 1][`selectedTab`] = connections[0].name;
       tempData[index + 1][`selectedTab`] = null;
       return tempData.slice(0, index + 2);
     });
@@ -107,7 +93,6 @@ const DatasetWrapper = () => {
       path: pathDesired,
     });
     return entitiesPromise.then((values) => {
-      console.log(values, 'entities fetching....');
       return values;
     });
   };
@@ -140,7 +125,6 @@ const DatasetWrapper = () => {
             tempData[index + 1][`showTabs`] = true;
             tempData[index + 1][`selectedTab`] = null;
             tempData[index + 1][`isSearching`] = false;
-            // tempData[index + 1][`selectedTab`] = res.entities[0].name;
             return tempData.slice(0, index + 2);
           });
         });
@@ -157,7 +141,6 @@ const DatasetWrapper = () => {
               });
               tempData[index + 1][`data`] = res.entities;
               tempData[index + 1][`showTabs`] = true;
-              // tempData[index + 1][`selectedTab`] = res.entities[0].name;
               tempData[index + 1][`selectedTab`] = null;
               tempData[index + 1][`isSearching`] = false;
               return tempData.slice(0, index + 2);
@@ -173,14 +156,6 @@ const DatasetWrapper = () => {
     getConnectionsTabData();
   }, []);
 
-  const searchHandler = (index: number) => {
-    setDataForTabs((prev) => {
-      const tempData = [...prev];
-      tempData[index].isSearching = true;
-      return tempData;
-    });
-  };
-
   const headerForLevelZero = () => {
     return (
       <Box className={classes.StyleForLevelZero}>
@@ -190,22 +165,6 @@ const DatasetWrapper = () => {
   };
 
   let headerContent;
-
-  const handleChange = (e: any, index: number) => {
-    console.log(e.target.value, 'this is e target value');
-    const val = e.target.value;
-    const newd = JSON.parse(JSON.stringify(dataForTabs));
-    newd.forEach((each: any, eachIndex: number) => {
-      if (eachIndex === index) {
-        each.data = each.data.filter((item: any, itemIndex: number) => item.name.includes(val));
-        each.selectedTab = each.data[0].name;
-      }
-    });
-
-    console.log(dataForTabs, 'this is dataForTabs');
-    console.log(newd, 'this is newd');
-    setDataForTabs(newd);
-  };
 
   return (
     <>
@@ -227,21 +186,6 @@ const DatasetWrapper = () => {
                     }
                   >
                     <Typography>{dataForTabs[index - 1].selectedTab}</Typography>
-                    <Box
-                      onClick={() => {
-                        return false;
-                        searchHandler(index);
-                      }}
-                    >
-                      <SearchIcon />
-                    </Box>
-                  </Box>
-                  <Box
-                    className={
-                      each.isSearching ? classes.afterSearchIconClick : classes.hideComponent
-                    }
-                  >
-                    <Input onChange={(e: any) => handleChange(e, index)} />
                   </Box>
                 </>
               );
