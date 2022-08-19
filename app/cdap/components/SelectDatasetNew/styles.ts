@@ -5,6 +5,7 @@ export const useStyles = makeStyles({
     width: '300px',
     borderRight: '1px dashed #DADCE0',
     zIndex: 1,
+    height: '100%',
   },
   tabIndicatorStyles: {
     backgroundColor: '#3994FF',
@@ -90,5 +91,40 @@ export const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  tabsContainerWithHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  tabHeaders: {
+    width: '300px',
+    backgroundColor: '#F1F8FF',
+  },
+  StyleForLevelZero: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '53px',
+    borderRight: '1px dashed #DADCE0',
+  },
+  beforeSearchIconClickDisplay: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '53px',
+    borderRight: '1px dashed #DADCE0',
+    paddingRight: '18px',
+    paddingLeft: '30px',
+  },
+  hideComponent: {
+    display: 'none',
+  },
+  // StyleForLevelsClicked:{
+  //   display:"none"
+  // }
+  afterSearchIconClick: {
+    '& .MuiFormControl-fullWidth': {
+      margin: '0px',
+    },
   },
 });

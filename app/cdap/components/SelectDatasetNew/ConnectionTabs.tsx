@@ -136,7 +136,7 @@ const TabLabelCanBrowse = ({
   const classes = useStyles();
   console.log(SVG);
   return (
-    <CustomTooltip title={label.length > 16 ? label : ''} arrow key={index}>
+    <CustomTooltip title={label.length > 16 ? label : ''} arrow key={`tooltip-${index}`}>
       <Box className={classes.labelContainerBox}>
         <Box className={classes.labelsContainer}>
           <Box>{SVG}</Box>
