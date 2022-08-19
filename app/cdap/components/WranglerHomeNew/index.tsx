@@ -15,9 +15,8 @@ const WranglerHomeNew = () => {
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
       <Box className={classes.subHeader}>
-        <Typography className={classes.welcome}>
-          {' '}
-          data Hi David, <br />
+        <Typography className={classes.welcome} data-testid="wrangler-home-new-title">
+          Hi David, <br />
           Welcome to Wrangler
         </Typography>
         <Box> {HeaderImage}</Box>

@@ -19,7 +19,9 @@ const WrangleHomeTitle = ({ title }) => {
   const classes = useStyles();
   return (
     <Box className={classes.dataExplorationWrapper}>
-      <Typography className={classes.dataExploration}>{title}</Typography>
+      <Typography className={classes.dataExploration} data-testid="wrangler-home-title-text">
+        {title}
+      </Typography>
       {UnderLine}
     </Box>
   );

@@ -13,7 +13,7 @@ const OngoingDataExploration = () => {
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     }).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       res.values.forEach((item) => {
         const params = {
           context: 'default',
@@ -30,7 +30,7 @@ const OngoingDataExploration = () => {
           },
         };
         MyDataPrepApi.execute(params, requestBody).subscribe((response) => {
-          console.log(`Response for ${params.workspaceId}`, response);
+          // console.log(`Response for ${params.workspaceId}`, response);
           let dataQuality = 0;
           response.headers.forEach((head) => {
             const general = response.summary.statistics[head].general;
@@ -64,12 +64,12 @@ const OngoingDataExploration = () => {
 
   useEffect(() => {
     const final = updatedData(ongoingExpDatas);
-    console.log('Final Result', final);
+    // console.log('Final Result', final);
     setFinalArray(final);
   }, [ongoingExpDatas]);
 
   return (
-    <Box>
+    <Box data-testid="ongoing-data-explore-parent">
       {finalArray.map((item) => {
         return (
           <Grid container className={classes.gridContainer}>

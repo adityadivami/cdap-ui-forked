@@ -1,9 +1,9 @@
-import { Box, Card, Typography } from "@material-ui/core";
-import { fetchConnectors } from "components/Connections/Create/reducer";
-import React, { useEffect, useState } from "react";
-import { GCSIcon } from "./icons/GCSIcon";
-import { ImportDatasetIcon } from "./icons/ImportDatasetIcon";
-import { useStyles } from "./styles";
+import { Box, Card, Typography } from '@material-ui/core';
+import { fetchConnectors } from 'components/Connections/Create/reducer';
+import React, { useEffect, useState } from 'react';
+import { GCSIcon } from './icons/GCSIcon';
+import { ImportDatasetIcon } from './icons/ImportDatasetIcon';
+import { useStyles } from './styles';
 
 const WrangleCard = () => {
   const [state, setState] = useState({
@@ -11,7 +11,7 @@ const WrangleCard = () => {
   });
   const getConnectorTypesNames = async () => {
     let connectorTypes = await fetchConnectors();
-    console.log(connectorTypes, "new-apiiiiiiiiiiiiiiiiiii");
+    console.log(connectorTypes, 'qqqqqwwwwwwwweeeeeerrrrrrttttttyyyyyy');
     connectorTypes = connectorTypes.map((connectorType) => {
       return {
         ...connectorType,
@@ -19,14 +19,14 @@ const WrangleCard = () => {
       };
     });
     connectorTypes.unshift({
-      name: "Imported Datasets",
-      type: "default",
-      category: "default",
-      description: "All Connections from the List",
+      name: 'Imported Datasets',
+      type: 'default',
+      category: 'default',
+      description: 'All Connections from the List',
       artifact: {
-        name: "allConnections",
-        version: "local",
-        scope: "local",
+        name: 'allConnections',
+        version: 'local',
+        scope: 'local',
       },
 
       SVG: ImportDatasetIcon,
@@ -35,7 +35,6 @@ const WrangleCard = () => {
     setState({
       connectorTypes,
     });
-    console.log(connectorTypes);
   };
   useEffect(() => {
     getConnectorTypesNames();

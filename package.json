@@ -36,12 +36,11 @@
     "cypress": "cypress run",
     "cypress-open": "node -e \"console.log('**DISABLE BEYOND CORP EXTENSION OR THIS WONT WORK**')\" && cypress open",
     "test:integration": "jest --testPathPattern=selenium/integration",
-    "test:unit": "jest --testPathPattern=app/cdap",
-    // "test": "run-p jest cypress",
-    "test": "react-scripts test",
+    "test:unit": "jest --testPathPattern=app/cdap/components/OngoingDataExploration/__test__/OngoingDataExploration.test.tsx",
+    "test": "run-p jest ",
     "ncc": "rm -rf server_dist && ncc build server.js -o server_dist",
     "build-graphql-fragment": "node ./graphql/schemaQuery.js",
-    "bower-root": "./node_modules/bower/bin/bower install --allow-root",
+    "bower-root": "./node_modules/bower/bin/bower install --allow-root"
   },
   "repository": {
     "type": "git",
