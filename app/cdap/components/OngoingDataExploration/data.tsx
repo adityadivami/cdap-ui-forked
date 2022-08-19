@@ -5,7 +5,7 @@ import React from 'react';
 export const mockData = [
   [
     {
-      icon: <GCSIconOngoingdata />,
+      icon: <BigTableIcon />,
       label: 'IndiaSales_DataTable2 Hello this is to check epplises',
       type: 'iconWithText',
     },

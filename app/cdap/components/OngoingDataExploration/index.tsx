@@ -1,19 +1,19 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core/';
 import ExplorationCardStyles from './styles';
-import { mockData } from './data';
 import { updatedData } from './utils';
 import MyDataPrepApi from 'api/dataprep';
 
-const OngoingDataExploration = () => {
+const OngoingDataExploration = ({ setIsLoading }) => {
   const classes = ExplorationCardStyles();
   const [ongoingExpDatas, setOngoingExpDatas] = useState<any>([]);
   const [finalArray, setFinalArray] = useState([]);
+
   const getOngoingData = () => {
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     }).subscribe((res) => {
-      console.log(res);
+      console.log('Res', res);
       res.values.forEach((item) => {
         const params = {
           context: 'default',
@@ -30,7 +30,6 @@ const OngoingDataExploration = () => {
           },
         };
         MyDataPrepApi.execute(params, requestBody).subscribe((response) => {
-          console.log(`Response for ${params.workspaceId}`, response);
           let dataQuality = 0;
           response.headers.forEach((head) => {
             const general = response.summary.statistics[head].general;
@@ -64,7 +63,6 @@ const OngoingDataExploration = () => {
 
   useEffect(() => {
     const final = updatedData(ongoingExpDatas);
-    console.log('Final Result', final);
     setFinalArray(final);
   }, [ongoingExpDatas]);
 
