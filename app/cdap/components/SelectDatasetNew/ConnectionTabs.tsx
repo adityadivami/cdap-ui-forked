@@ -31,15 +31,6 @@ const ConnectionTab = styled(Tab)({
   '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
     marginBottom: '0px',
   },
-  // '&:hover': {
-  //   backgroundColor: '#3994FF',
-  //   color: '#ffffff',
-  //   pointer: 'cursor',
-  //   width: '100%',
-  //   '&.MuiBox-root-666': {
-  //     display: 'none',
-  //   },
-  // },
   '&.makeStyles-canBrowseIconHover': {
     border: '10px solid green',
   },
@@ -48,17 +39,6 @@ const ConnectionTab = styled(Tab)({
 const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
   const classes = useStyles();
 
-  console.log(tabsData, 'child Data');
-
-  // const [refState, setRefState] = React.useState([]);
-  // const currentRef = useRef(null);
-  // const executeScroll = (index) => {
-  //   console.log(refState, 'ref State', currentRef, 'current Ref');
-  //   setRefState((prev: any) => {
-  //     return [...prev, currentRef];
-  //   });
-  //   currentRef.current.scrollIntoView();
-  // };
   return (
     <>
       {tabsData.showTabs && (
@@ -80,7 +60,6 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
             {tabsData.data.map((connectorType, connectorTypeIndex) => (
               <ConnectionTab
                 onClick={() => {
-                  console.log(connectorType, 'check here for aditya');
                   if (index > 1) {
                     connectorType.canBrowse ? handleChange(connectorType, index) : null;
                   } else {
@@ -134,7 +113,6 @@ const TabLabelCanBrowse = ({
   SVG?: any;
 }) => {
   const classes = useStyles();
-  console.log(SVG);
   return (
     <CustomTooltip title={label.length > 16 ? label : ''} arrow key={`tooltip-${index}`}>
       <Box className={classes.labelContainerBox}>

@@ -22,12 +22,6 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     gap: '4px',
   },
-  canBrowseIconHover: {
-    // display: 'none',
-  },
-  canBrowseIconNormal: {
-    // display: 'inline',
-  },
   canBrowseHover: {
     display: 'none',
   },
@@ -118,13 +112,5 @@ export const useStyles = makeStyles({
   },
   hideComponent: {
     display: 'none',
-  },
-  // StyleForLevelsClicked:{
-  //   display:"none"
-  // }
-  afterSearchIconClick: {
-    '& .MuiFormControl-fullWidth': {
-      margin: '0px',
-    },
   },
 });
