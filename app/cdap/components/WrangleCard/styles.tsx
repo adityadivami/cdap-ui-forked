@@ -7,6 +7,7 @@ export const useStyles = makeStyles({
     flexWrap: 'wrap',
   },
   card: {
+    padding: '0px 28px',
     height: '180px',
     width: '220px',
     border: '1px solid #E3E3E3',
@@ -15,9 +16,10 @@ export const useStyles = makeStyles({
     display: 'flex',
     '&:hover': {
       boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
-      border: 'none',
+      border: '1px solid white',
       boxSizing: 'border-box',
     },
+    cursor: 'pointer',
   },
   cardContent: {
     width: '100%',
@@ -31,7 +33,13 @@ export const useStyles = makeStyles({
   cardText: {
     marginTop: '15px',
     letterSpacing: '0.15px',
-    lineHeight: '30px',
-    fontSize: '20px',
+    lineHeight: '24px',
+    fontSize: '16px',
+    fontWeight: 400,
+    color: '#000000',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    maxWidth: '166px',
   },
 });

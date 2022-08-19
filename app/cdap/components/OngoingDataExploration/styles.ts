@@ -7,6 +7,7 @@ const ExplorationCardStyles = makeStyles({
     border: '1px solid #DADCE0',
     borderRadius: '4px',
     marginBottom: '10px',
+    cursor: 'pointer',
   },
   elementStyle: {
     width: '301px',
@@ -23,9 +24,10 @@ const ExplorationCardStyles = makeStyles({
       lineHeight: '24px',
       width: '254px',
       textOverflow: 'ellipsis',
-
+      fontWeight: 400,
       overflow: 'hidden',
       whiteSpace: 'nowrap',
+      color: '#000000',
     },
   },
   iconStyle: {
@@ -36,12 +38,14 @@ const ExplorationCardStyles = makeStyles({
   percentageStyleRed: {
     lineHeight: '30px',
     fontSize: '36px',
+    letterSpacing: '0.15px',
     color: '#EA4335',
     margin: 'auto 0px',
   },
   percentageSymbolRed: {
     fontSize: '20px',
     color: '#EA4335',
+    letterSpacing: '0.15px',
     lineHeight: '30px',
     marginRight: '6px',
     margin: 'auto 0px',
@@ -51,6 +55,7 @@ const ExplorationCardStyles = makeStyles({
     fontSize: '36px',
     color: '#4BAF4F',
     margin: 'auto 0px',
+    letterSpacing: '0.15px',
   },
   percentageSymbolGreen: {
     fontSize: '20px',
@@ -58,6 +63,7 @@ const ExplorationCardStyles = makeStyles({
     lineHeight: '30px',
     marginRight: '6px',
     margin: 'auto 0px',
+    letterSpacing: '0.15px',
   },
 });
 export default ExplorationCardStyles;

@@ -7,29 +7,40 @@ import { GradientLine } from './icons/GradientLine';
 import { HeaderImage } from './icons/HeaderImage';
 import WrangleHomeTitle from 'components/WrangleHomeTitle';
 import { useStyles } from './styles';
-import MyDataPrepApi from 'api/dataprep';
+import LoadingSVGCentered from 'components/shared/LoadingSVGCentered';
 
 const WranglerHomeNew = () => {
   const classes = useStyles();
 
-  return (
-    <Box className={classes.wrapper}>
-      <Box className={classes.subHeader}>
-        <Typography className={classes.welcome}>
-          Hi David, <br />
-          Welcome to Wrangler
-        </Typography>
-        <Box> {HeaderImage}</Box>
-      </Box>
-      {GradientLine}
+  const [isLoading, setIsLoading] = useState(false);
 
-      <Box>
-        <WrangleHomeTitle title="Start data exploration" />
-        <WrangleCard />
-        <WrangleHomeTitle title="Continue ongoing data explorations, pick up where you left off" />
-        <OngoingDataExploration />
-      </Box>
-    </Box>
+  return (
+    <div>
+      {' '}
+      {isLoading ? (
+        <div>
+          <LoadingSVGCentered />
+        </div>
+      ) : (
+        <Box className={classes.wrapper}>
+          <Box className={classes.subHeader}>
+            <Typography className={classes.welcome}>
+              Hi David, <br />
+              Welcome to Wrangler
+            </Typography>
+            <Box> {HeaderImage}</Box>
+          </Box>
+          {GradientLine}
+
+          <Box>
+            <WrangleHomeTitle title="Start data exploration" />
+            <WrangleCard />
+            <WrangleHomeTitle title="Continue ongoing data explorations, pick up where you left off" />
+            <OngoingDataExploration setIsLoading={setIsLoading} />
+          </Box>
+        </Box>
+      )}
+    </div>
   );
 };
 export default WranglerHomeNew;

@@ -1,3 +1,5 @@
+import { ImportDatasetIcon } from 'components/WrangleCard/icons/ImportDatasetIcon';
+
 export const updatedData = (olddata: any) => {
   const parentarr = [];
 
@@ -9,7 +11,7 @@ export const updatedData = (olddata: any) => {
         const obj = {} as any;
 
         if (keys === 'connectionName') {
-          obj.icon = '';
+          obj.icon = ImportDatasetIcon;
           obj.label = eachItem[keys];
           obj.type = 'iconWithText';
         } else if (keys === 'workspaceName') {
@@ -30,6 +32,6 @@ export const updatedData = (olddata: any) => {
       parentarr.push(childarr);
     });
   }
-  console.log('Parent', parentarr);
+
   return parentarr;
 };
