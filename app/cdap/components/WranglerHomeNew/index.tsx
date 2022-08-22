@@ -1,11 +1,11 @@
 import React from 'react';
-import OngoingDataExploration from 'components/OngoingDataExploration';
-import WrangleCard from 'components/WrangleCard';
+import OngoingDataExploration from 'components/WranglerHomeNew/Components/OngoingDataExploration';
+import WrangleCard from 'components/WranglerHomeNew/Components/WrangleCard';
 import Box from '@material-ui/core/Box';
 import { Typography } from '@material-ui/core';
 import { GradientLine } from './iconStore/GradientLine';
 import { HeaderImage } from './iconStore/HeaderImage';
-import WrangleHomeTitle from 'components/WrangleHomeTitle';
+import WrangleHomeTitle from 'components/WranglerHomeNew/Components/WrangleHomeTitle';
 import { useStyles } from './styles';
 
 const WranglerHomeNew = () => {

@@ -24,8 +24,8 @@ import NamespaceActions from 'services/NamespaceStore/NamespaceActions';
 import LoadingSVGCentered from 'components/shared/LoadingSVGCentered';
 import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/KitchenSync';
 import HomeActions from 'components/Home/HomeActions';
-import ToggleExperiment from 'components/Lab/ToggleExperiment';
 import WranglerHomeNew from 'components/WranglerHomeNew';
+import ToggleExperiment from 'components/Lab/ToggleExperiment';
 import ee from 'event-emitter';
 
 require('./Home.scss');
@@ -166,7 +166,7 @@ export default class Home extends Component {
           <Route exact path="/ns/:namespace/rulesengine" component={RulesEngineHome} />
           <Route exact path="/ns/:namespace/wrangle-home" component={WrangleHome} />
           <Route exact path="/ns/:namespace/datasets-list/:dataset" component={DatasetsList} />
-          <Route exact path="/ns/:namespace/wrangle-home-new" component={WranglerHomeNew} />
+          <Route exact path="/ns/:namespace/homepage" component={WranglerHomeNew} />
 
           <Route
             exact
