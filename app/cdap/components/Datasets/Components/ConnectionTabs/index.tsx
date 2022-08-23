@@ -8,6 +8,9 @@ import { useStyles } from 'components/Datasets/Components/ConnectionTabs/styles'
 import CustomTooltip from 'components/Datasets/Components/CustomTooltip';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
+import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
+import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
+import { Redirect } from 'react-router';
 
 const ConnectionTab = styled(Tab)({
   minWidth: '300px',
@@ -38,8 +41,12 @@ const ConnectionTab = styled(Tab)({
   },
 });
 
-const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
+const ConnectionsTabs = ({ tabsData, handleChange, value, index, connectionId, ...props }) => {
   const classes = useStyles();
+  const [connectionIdV, setConnectionId] = React.useState(connectionId);
+  React.useEffect(() => {
+    setConnectionId(connectionId);
+  }, []);
 
   return (
     <Box data-testid="connections-tabs-parent">
@@ -77,7 +84,12 @@ const ConnectionsTabs = ({ tabsData, handleChange, value, index }) => {
                         index={index}
                       />
                     ) : (
-                      <TabLabelCanSample label={connectorType.name} />
+                      <TabLabelCanSample
+                        label={connectorType.name}
+                        entity={connectorType}
+                        initialConnectionId={connectionIdV}
+                        toggleLoader={props.toggleLoader}
+                      />
                     )
                   ) : (
                     <TabLabelCanBrowse
@@ -139,26 +151,70 @@ const TabLabelCanBrowse = ({
   );
 };
 
-const TabLabelCanSample = ({ label }: { label: string }) => {
+const TabLabelCanSample = ({
+  label,
+  entity,
+  initialConnectionId,
+  toggleLoader,
+}: {
+  label: string;
+  entity: any;
+  initialConnectionId: string;
+  toggleLoader: () => any;
+}) => {
   const classes = useStyles();
+  const [workspaceId, setWorkspaceId] = React.useState(null);
+  const [currentConnection, setCurrentConnection] = React.useState(initialConnectionId);
+  const { onWorkspaceCreate, onEntitySelect, selectedPlugin, showParsingConfig } = React.useContext(
+    ConnectionsContext
+  );
+
+  const onExplore = (entity) => {
+    toggleLoader();
+    const { canBrowse } = entity;
+    if (!canBrowse) {
+      onCreateWorkspace(entity);
+    }
+  };
+
+  const onCreateWorkspace = async (entity, parseConfig = {}) => {
+    try {
+      createWorkspaceInternal(entity, parseConfig);
+    } catch (e) {}
+  };
+
+  const createWorkspaceInternal = async (entity, parseConfig = {}) => {
+    const wid = await createWorkspace({
+      entity,
+      connection: currentConnection,
+      properties: parseConfig,
+    });
+    if (onWorkspaceCreate) {
+      return onWorkspaceCreate(wid);
+    }
+    setWorkspaceId(wid);
+    toggleLoader();
+  };
+  if (workspaceId) {
+    return <Redirect to={`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`} />;
+  }
 
   return (
-    <CustomTooltip title={label.length > 16 ? label : ''} arrow>
-      <Box className={classes.labelsContainerCanSample}>
-        <Typography variant="body1" className={classes.labelStylesCanSample}>
-          {label}
-        </Typography>
-        <Link
-          to={`/ns/${getCurrentNamespace()}/wrangler-grid/${label}`}
-          style={{ textDecoration: 'none' }}
-        >
-          <Box className={classes.wranglingHover}>
-            <WrangelIcon />
-            <Typography color="primary">Wrangle</Typography>
-          </Box>
-        </Link>
-      </Box>
-    </CustomTooltip>
+    <>
+      <CustomTooltip title={label.length > 16 ? label : ''} arrow>
+        <Box className={classes.labelsContainerCanSample}>
+          <Typography variant="body1" className={classes.labelStylesCanSample}>
+            {label}
+          </Typography>
+          <div onClick={() => onExplore(entity)}>
+            <Box className={classes.wranglingHover} onClick={() => onExplore(entity)}>
+              <WrangelIcon />
+              <Typography color="primary">Wrangle</Typography>
+            </Box>
+          </div>
+        </Box>
+      </CustomTooltip>
+    </>
   );
 };
 
