@@ -15,7 +15,7 @@ const Footer = () => {
           <span className="spanele"> 100%</span>
           {Svg2}
         </Box>
-        <p className="cont4">Directives</p>
+        <p className="cont4"> Directives </p>
         <Box className="cont5">
           <p> Recipe Steps</p>
           <p className="spanele1"> 10</p>
