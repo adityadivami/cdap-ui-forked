@@ -45,7 +45,7 @@ export const InfoOutlined = () => {
 
 export const closeOutLine = () => {
   return (
-    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" width="25px" height="25px">
+    <svg focusable="false" viewBox="0 0 24 24" aria-hidden="true" width="30px" height="30px">
       <path
         fill="#757575"
         d="M18.3 5.71a.9959.9959 0 00-1.41 0L12 10.59 7.11 5.7a.9959.9959 0 00-1.41 0c-.39.39-.39 1.02 0 1.41L10.59 12 5.7

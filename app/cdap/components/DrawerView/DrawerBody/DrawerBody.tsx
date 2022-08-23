@@ -4,7 +4,7 @@ import { useDrawerCss } from '../styles';
 import { TaskAltOutlined, InfoOutlined } from '../iconStore';
 import { Button, FormControl, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
 
-export default function DBody(props) {
+const DrawerBody = (props) => {
   const classes = useDrawerCss();
   const [value, setValue] = React.useState('female');
 
@@ -14,7 +14,7 @@ export default function DBody(props) {
   return (
     <React.Fragment>
       {props.bodyComponent ? (
-        props.bodyComponent
+        props.bodyComponent()
       ) : (
         <div>
           <div className={classes.paddingDiv}>
@@ -65,4 +65,5 @@ export default function DBody(props) {
       )}
     </React.Fragment>
   );
-}
+};
+export default DrawerBody;

@@ -6,6 +6,10 @@ export const useDrawerCss = makeStyles({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  flexBetweenBaseLine: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
   weight400: {
     fontWeight: 400,
     fontSize: '14px',
