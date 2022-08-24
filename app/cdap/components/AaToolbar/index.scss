@@ -1,23 +1,19 @@
-.cont {
+.iconContainer {
   display: flex;
   justify-content: space-between;
   border-style: solid;
   border-color: #9b9b9b;
   height: 48px;
-  margin-top: 10px;
-  padding: 14px;
+  margin-top: 0px;
+  padding: 10px;
 }
-.bgcont {
+.container {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
 }
-.searchh {
+.searchIcon {
   border: none;
   outline: none;
-}
-.bgcont1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
