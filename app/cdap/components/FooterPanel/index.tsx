@@ -4,21 +4,21 @@ import './index.scss';
 import { Svg, Svg1, Svg2 } from './images';
 const Footer = () => {
   return (
-    <Box className="main">
+    <Box className="mainContainer">
       <Box className="cont">
-        <Box className="cont1">{Svg}</Box>
-        <Box className="cont2">
-          <p className="paraele"> Current data - 1000 rows and 30 columns</p>
+        <Box className="imgCont">{Svg}</Box>
+        <Box>
+          <p className="paraElement"> Current data - 1000 rows and 30 columns</p>
         </Box>
-        <Box className="cont3">
+        <Box className="zoomCont">
           {Svg1}
-          <span className="spanele"> 100%</span>
+          <span className="spanElement"> 100%</span>
           {Svg2}
         </Box>
-        <p className="cont4"> Directives </p>
-        <Box className="cont5">
+        <p className="directivesCont"> Directives </p>
+        <Box className="recipeCont">
           <p> Recipe Steps</p>
-          <p className="spanele1"> 10</p>
+          <p className="spanElement1"> 10</p>
         </Box>
       </Box>
     </Box>
