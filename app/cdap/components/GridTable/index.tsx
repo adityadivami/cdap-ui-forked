@@ -8,88 +8,97 @@ import { GridTextCell } from './components/GridTextCell';
 import mockJSON from './mock/apiMock';
 import metricsJSON from './mock/metrics';
 import MyDataPrepApi from 'api/dataprep';
+import DataPrepStore from 'components/DataPrep/store';
+import { objectQuery } from 'services/helpers';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 
 const GridTable = () => {
   const { datasetName } = useParams() as any;
+  const params = useParams() as any;
 
   const [headersNamesList, setHeadersNamesList] = React.useState([]);
   const [rowsDataList, setRowsDataList] = React.useState([]);
+  const [gridData, setGridData] = useState({});
 
-  const [ongoingExpDatas, setOngoingExpDatas] = useState<any>([]);
-  const [finalArray, setFinalArray] = useState([]);
+  const getWorkSpaceData = (params, workspaceId) => {
+    DataPrepStore.dispatch({
+      type: DataPrepActions.setWorkspaceId,
+      payload: {
+        workspaceId,
+        loading: true,
+      },
+    });
+    MyDataPrepApi.getWorkspace(params).subscribe((res) => {
+      const { dataprep } = DataPrepStore.getState();
+      if (dataprep.workspaceId !== workspaceId) {
+        return;
+      }
+      const directives = objectQuery(res, 'directives') || [];
+      const requestBody = directiveRequestBodyCreator(directives);
+      const sampleSpec = objectQuery(res, 'sampleSpec') || {};
+      const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
-  const getOngoingData = () => {
-    MyDataPrepApi.getWorkspaceList({
-      context: 'default',
-    }).subscribe((res) => {
-      res.values.forEach((item) => {
-        const params = {
-          context: 'default',
-          workspaceId: item.workspaceId,
-        };
-        const requestBody = {
-          directives: item.directives,
-          limit: 1000,
-          insights: {
-            name: item.name,
-            workspaceName: item.workspaceName,
-            path: item?.sampleSpec?.path,
-            visualization: {},
+      const insights = {
+        name: sampleSpec.connectionName,
+        workspaceName: res.workspaceName,
+        path: sampleSpec.path,
+        visualization,
+      };
+      requestBody.insights = insights;
+
+      const workspaceUri = objectQuery(res, 'sampleSpec', 'path');
+      const workspaceInfo = {
+        properties: insights,
+      };
+
+      MyDataPrepApi.execute(params, requestBody).subscribe((response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            headers: response.headers,
+            types: response.types,
+            directives,
+            workspaceId,
+            workspaceUri,
+            workspaceInfo,
+            insights,
           },
-        };
-        MyDataPrepApi.execute(params, requestBody).subscribe((response) => {
-          console.log('response', response);
-          let dataQuality = 0;
-          response.headers.forEach((head) => {
-            const general = response.summary.statistics[head].general;
-            const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
-            const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
-            dataQuality = dataQuality + nonNull;
-          });
-
-          const totalDataQuality = dataQuality / response.headers.length;
-
-          setOngoingExpDatas((current) => [
-            ...current,
-            {
-              connectionName:
-                item?.sampleSpec?.connectionName === undefined
-                  ? 'Upload'
-                  : item?.sampleSpec?.connectionName,
-              workspaceName: item.workspaceName,
-              recipeSteps: item.directives.length,
-              dataQuality: totalDataQuality,
-            },
-          ]);
         });
+        setGridData(response);
+        console.log('response', response);
       });
     });
   };
 
   useEffect(() => {
-    getOngoingData();
+    // -----------------Get DATA from URL paramteres to get data of workspace
+    const payload = {
+      context: params.namespace,
+      workspaceId: params.datasetName,
+    };
+    getWorkSpaceData(payload, datasetName);
   }, []);
 
   const createHeadersData = (columnNamesList, columnLabelsList, columnTypesList) => {
-    return columnNamesList
-      .map((eachColumnName) => {
-        return {
-          name: eachColumnName,
-          label: columnLabelsList[eachColumnName],
-          type: [columnTypesList[eachColumnName]],
-        };
-      })
-      .slice(1);
+    return columnNamesList.map((eachColumnName) => {
+      return {
+        name: eachColumnName,
+        label: eachColumnName,
+        type: [columnTypesList[eachColumnName]],
+      };
+    });
   };
 
   const getGridTableData = async () => {
-    const fetchedResponse = await mockJSON;
-    const rawData = fetchedResponse.response;
-
-    const headersData = createHeadersData(rawData.headers, rawData.values[0], rawData.types);
+    // const fetchedResponse = await mockJSON;
+    // const rawData = fetchedResponse.response;
+    const rawData: any = gridData;
+    const headersData = createHeadersData(rawData.headers, rawData.headers, rawData.types);
     setHeadersNamesList(headersData);
 
-    const rowData = rawData.values.slice(1).map((eachRow) => {
+    const rowData = rawData.values.map((eachRow) => {
       const { body, ...rest } = eachRow;
       return rest;
     });
@@ -99,40 +108,53 @@ const GridTable = () => {
 
   useEffect(() => {
     getGridTableData();
-  }, []);
+  }, [gridData]);
 
   return (
     <>
       <BreadCumb datasetName={datasetName} />
-      <TableContainer component={Box}>
-        <Table aria-label="simple table" className="test">
-          <TableHead>
-            <TableRow>
-              {headersNamesList.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader.label}
-                  types={eachHeader.type}
-                  key={eachHeader.name}
-                />
-              ))}
-            </TableRow>
-            <TableRow>
-              {metricsJSON.map((each) => (
-                <GridKPICell metricData={each} key={each.name} />
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rowsDataList.map((eachRow, rowIndex) => (
-              <TableRow key={`row-${rowIndex}`}>
-                {Object.keys(eachRow).map((eachKey, keyIndex) => (
-                  <GridTextCell cellValue={eachRow[eachKey]} key={`${eachKey}-${keyIndex}`} />
-                ))}
-              </TableRow>
+      {/* <TableContainer> */}
+      <Table aria-label="simple table" className="test">
+        <TableHead>
+          <TableRow>
+            {headersNamesList.map((eachHeader) => (
+              <GridHeaderCell
+                label={eachHeader.label}
+                types={eachHeader.type}
+                key={eachHeader.name}
+              />
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          </TableRow>
+          <TableRow>
+            {metricsJSON.map((each, index) => {
+              if (index <= headersNamesList.length - 1) {
+                return <GridKPICell metricData={each} key={each.name} />;
+              }
+            })}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rowsDataList.map((eachRow, rowIndex) => (
+            <TableRow key={`row-${rowIndex}`}>
+              {Object.keys(eachRow).map((eachKey, keyIndex) => {
+                const keyWithRespectToHeader =
+                  headersNamesList[keyIndex] && headersNamesList[keyIndex].name
+                    ? headersNamesList[keyIndex].name
+                    : '';
+                return (
+                  <GridTextCell
+                    cellValue={
+                      eachRow[keyWithRespectToHeader] ? eachRow[keyWithRespectToHeader] : ''
+                    }
+                    key={`${eachKey}-${keyIndex}`}
+                  />
+                );
+              })}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      {/* </TableContainer> */}
     </>
   );
 };
