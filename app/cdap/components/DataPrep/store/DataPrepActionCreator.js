@@ -91,6 +91,7 @@ export function execute(addDirective, shouldReset, hideLoading = false) {
 }
 
 function setWorkspaceRetry(params, observer, workspaceId) {
+  console.log('params, observer, workspaceId', params, observer, workspaceId);
   MyDataPrepApi.getWorkspace(params).subscribe(
     (res) => {
       let { dataprep } = DataPrepStore.getState();
@@ -218,7 +219,6 @@ export function setWorkspace(workspaceId) {
   });
 
   workspaceRetries = 0;
-
   return Observable.create((observer) => {
     setWorkspaceRetry(params, observer, workspaceId);
   });
