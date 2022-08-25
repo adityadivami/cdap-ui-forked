@@ -6,11 +6,8 @@ import {
   Checkbox,
   FormControlLabel,
   Box,
-  FormControl,
-  Select,
   MenuItem,
   FormHelperText,
-  InputLabel,
 } from '@material-ui/core';
 
 const DrawerBody = (props) => {

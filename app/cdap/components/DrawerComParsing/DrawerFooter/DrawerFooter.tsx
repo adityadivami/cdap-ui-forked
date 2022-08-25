@@ -11,13 +11,9 @@ const DFooter = (props) => {
         props.footerComponent()
       ) : (
         <div>
-          <div className={classes.paddingDiv + ' ' + classes.flexRow}>
-            {Info}
-            <p className={classes.weight400 + ' ' + classes.marginSide}>
-              {' '}
-              Once applied parsing settings cannot be changed
-            </p>
-          </div>
+          <p className={classes.weight400 + ' ' + classes.paddingDiv}>
+            {Info} &nbsp; Once applied parsing settings cannot be changed
+          </p>
 
           <div style={{ textAlign: 'right' }}>
             <Button variant="contained" className={classes.footerButton}>
