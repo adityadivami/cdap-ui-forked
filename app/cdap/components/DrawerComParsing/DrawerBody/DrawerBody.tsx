@@ -25,14 +25,14 @@ const DrawerBody = (props) => {
         <div>
           <Box width="350px" className={classes.paddingDiv}>
             <FormHelperText className={classes.weight400}> Format</FormHelperText>
-            <TextField value={format} onChange={handleChange} select fullWidth>
+            <TextField value={format} onChange={handleChange} select fullWidth variant="outlined">
               <MenuItem value="csv">csv </MenuItem>
             </TextField>
           </Box>
 
           <Box width="350px" className={classes.paddingDiv}>
             <FormHelperText className={classes.weight400}> Encoding</FormHelperText>
-            <TextField value={format} onChange={handleChange} select fullWidth>
+            <TextField value={format} onChange={handleChange} select fullWidth variant="outlined">
               <MenuItem value="csv">csv </MenuItem>
             </TextField>
           </Box>
