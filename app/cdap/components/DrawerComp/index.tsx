@@ -12,11 +12,9 @@ type Anchor = 'top' | 'left' | 'bottom' | 'right';
 interface CDrawer {
   isShowHeader: boolean | true;
   isShowFooter: boolean;
-  headerTitle: string | 'Add Transformation Step';
-  actionHead?: () => any;
-  extraActions?: () => any;
   bodyComponent: () => any;
   footerComponent?: () => any;
+  headerComponent?: () => any;
   anchor: Anchor;
   open: boolean;
 }
@@ -58,9 +56,7 @@ export default function DrawerComponent(props: CDrawer) {
                 <div>
                   <DrawerHeader
                     isShowHeader={props.isShowHeader}
-                    headerTitle={props.headerTitle || 'Add Transformation Step'}
-                    actionHead={props.actionHead}
-                    extraActions={props.extraActions}
+                    headerComponent={props.headerComponent}
                     toggleDrawer={toggleDrawer(anchor, false)}
                   />
                   <DrawerBody bodyComponent={props.bodyComponent} />
