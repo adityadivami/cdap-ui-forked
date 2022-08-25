@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDrawerCss } from '../styles';
-import { closeOutLine, UnderLine } from '../iconStore';
+import { closeOutLine, UnderLine, Arrow } from '../iconStore';
 
 const DrawerHeader = (props) => {
   const classes = useDrawerCss();
@@ -10,8 +10,9 @@ const DrawerHeader = (props) => {
         props.headerComponent()
       ) : (
         <div className={classes.flexBetweenBaseLine + ' ' + classes.paddingDiv}>
+          {Arrow}
           <div>
-            <h1 className={classes.headerTitle}>Add Transformation Step</h1>
+            <h3 className={classes.headerTitle}>Select Column(s) to Apply This Function</h3>
             {UnderLine}
           </div>
           <div onClick={props.toggleDrawer}>{closeOutLine()}</div>

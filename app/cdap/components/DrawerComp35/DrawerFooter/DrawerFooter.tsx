@@ -10,8 +10,8 @@ const DFooter = (props) => {
         props.footerComponent()
       ) : (
         <div style={{ textAlign: 'right' }}>
-          <Button variant="contained" className={classes.footerDisableButton}>
-            Apply Step
+          <Button variant="contained" className={classes.footerButton}>
+            Done
           </Button>
         </div>
       )}

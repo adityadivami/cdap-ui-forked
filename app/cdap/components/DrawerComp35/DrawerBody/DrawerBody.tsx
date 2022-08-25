@@ -1,75 +1,104 @@
 import React from 'react';
 import { Divider } from '@material-ui/core';
 import { useDrawerCss } from '../styles';
-import { TaskAltOutlined, InfoOutlined } from '../iconStore';
-import { Button, FormControl, RadioGroup, Radio, FormControlLabel } from '@material-ui/core';
+import { SearchIcon, Icon1, Icon2, Icon3, Icon4 } from '../iconStore';
+import { Checkbox } from '@material-ui/core';
 
 const DrawerBody = (props) => {
   const classes = useDrawerCss();
-  const [value, setValue] = React.useState('rowRemoval');
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
   return (
     <React.Fragment>
       {props.bodyComponent ? (
         props.bodyComponent()
       ) : (
         <div>
-          <div className={classes.paddingDiv}>
-            <p className={classes.weight400}>01 column selected</p>
+          <div className={classes.paddingDiv + ' ' + classes.flexBetweenBaseLine}>
+            <p className={classes.weight400}>No columns selected</p>
+            {SearchIcon}
           </div>
           <Divider />
-          <div className={classes.paddingDiv}>
-            <div className={classes.flexBetween}>
-              <p className={classes.weight600}>Function</p>
-              {TaskAltOutlined()}
-            </div>
-            <p>Null &nbsp; {InfoOutlined()}</p>
-          </div>
-          <Divider />
-          <div className={classes.paddingDiv}>
-            <div>
-              <div className={classes.flexBetween}>
-                <p className={classes.weight600}>Select column(s) to apply this function</p>
-                {TaskAltOutlined()}
-              </div>
 
-              <p className={classes.weight400}>
-                Quick select by clicking a column on the grid/columns panel
-              </p>
-              <p className={classes.weight40}> 1. Car Model (40 Null Values)</p>
+          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+            <div className={classes.flexOnly}>
+              <Checkbox size="medium" color="primary" />
+              <p className={classes.weight40}> Columns(30)</p>
             </div>
+            <p className={classes.weight40}> Data Quality</p>
           </div>
           <Divider />
-          <div className={classes.paddingDiv}>
-            <div className={classes.flexBetween}>
-              <p className={classes.weight600}>Select action to take</p>
-              {TaskAltOutlined()}
+
+          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+            <div className={classes.flexOnly}>
+              <Checkbox size="medium" color="primary" />
+              <div>
+                <p className={classes.weight400 + ' ' + classes.marginTopp}> Customer Name</p>
+                <p className={classes.weight400}> ABC | String</p>
+              </div>
             </div>
-            <FormControl>
-              <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                value={value}
-                onChange={handleChange}
-                className={classes.weight400}
-              >
-                <FormControlLabel
-                  value="rowRemoval"
-                  control={<Radio color="primary" />}
-                  label="Remove rows"
-                />
-                <FormControlLabel
-                  value="rowReplace"
-                  control={<Radio color="primary" />}
-                  label="Replace rows"
-                />
-              </RadioGroup>
-            </FormControl>
-            <Divider />
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon1}</p>
           </div>
+          <Divider />
+
+          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+            <div className={classes.flexOnly}>
+              <Checkbox size="medium" color="primary" />
+              <div>
+                <p className={classes.weight400}> Region</p>
+                <p className={classes.weight400}> ABC | String</p>
+              </div>
+            </div>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon2}</p>
+          </div>
+          <Divider />
+
+          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+            <div className={classes.flexOnly}>
+              <Checkbox size="medium" color="primary" />
+              <div>
+                <p className={classes.weight400}> Car Model</p>
+                <p className={classes.weight400}> ABC | String</p>
+              </div>
+            </div>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon3}</p>
+          </div>
+          <Divider />
+
+          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+            <div className={classes.flexOnly}>
+              <Checkbox size="medium" color="primary" />
+              <div>
+                <p className={classes.weight400}> CC Number</p>
+                <p className={classes.weight400}> ABC | Credit Card</p>
+              </div>
+            </div>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon3}</p>
+          </div>
+          <Divider />
+
+          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+            <div className={classes.flexOnly}>
+              <Checkbox size="medium" color="primary" />
+              <div>
+                <p className={classes.weight400}> Purchase Date</p>
+                <p className={classes.weight400}> ABC | Date and Time</p>
+              </div>
+            </div>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon3}</p>
+          </div>
+          <Divider />
+
+          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+            <div className={classes.flexOnly}>
+              <Checkbox size="medium" color="primary" />
+              <div>
+                <p className={classes.weight400}> Payment Mode</p>
+                <p className={classes.weight400}> ABC | String</p>
+              </div>
+            </div>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon4}</p>
+          </div>
+          <Divider />
         </div>
       )}
     </React.Fragment>
