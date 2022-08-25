@@ -1,0 +1,33 @@
+import React from 'react';
+import { Button } from '@material-ui/core';
+import { useDrawerCss } from '../styles';
+import { Info } from '../iconStore';
+
+const DFooter = (props) => {
+  const classes = useDrawerCss();
+  return (
+    <React.Fragment>
+      {props.isShowFooter && props.footerComponent ? (
+        props.footerComponent()
+      ) : (
+        <div>
+          <div className={classes.paddingDiv + ' ' + classes.flexRow}>
+            {Info}
+            <p className={classes.weight400 + ' ' + classes.marginSide}>
+              {' '}
+              Once applied parsing settings cannot be changed
+            </p>
+          </div>
+
+          <div style={{ textAlign: 'right' }}>
+            <Button variant="contained" className={classes.footerButton}>
+              Apply
+            </Button>
+          </div>
+        </div>
+      )}
+    </React.Fragment>
+  );
+};
+
+export default DFooter;

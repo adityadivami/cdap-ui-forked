@@ -9,6 +9,9 @@ export const useDrawerCss = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  flexRow: {
+    display: 'flex',
+  },
   weight40: {
     fontWeight: 400,
     fontSize: '16px',
@@ -35,7 +38,7 @@ export const useDrawerCss = makeStyles({
   },
   drawerContentWrapper: {
     padding: '20px 10px',
-    width: '500px',
+    width: '460px',
     marginTop: '48px',
     height: '100%',
   },
@@ -60,7 +63,11 @@ export const useDrawerCss = makeStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  footerDisableButton: {
+  marginSide: {
+    marginLeft: '10px',
+    marginRight: '10px',
+  },
+  footerButton: {
     backgroundColor: '#3994FF !important',
     boxShadow: '0px 2px 4px rgba(70, 129, 244, 0.15)',
     borderRadius: '4px',
