@@ -12,8 +12,8 @@ import {
 
 const DrawerBody = (props) => {
   const classes = useDrawerCss();
-  const [format, setFormat] = React.useState('CSV');
-  const [encoding, setEncoding] = React.useState('UTF-8');
+  const [format, setFormat] = React.useState('csv');
+  const [encoding, setEncoding] = React.useState('utf8');
   const handleChange = (event) => {
     setFormat(event.target.value);
   };
@@ -31,8 +31,8 @@ const DrawerBody = (props) => {
             <TextField
               value={format}
               onChange={handleChange}
-              className={classes.textFieldht}
               select
+              className={classes.textFieldht}
               variant="outlined"
             >
               <MenuItem value="csv">CSV </MenuItem>
@@ -44,8 +44,8 @@ const DrawerBody = (props) => {
             <TextField
               value={encoding}
               onChange={onHandleChange}
-              select
               className={classes.textFieldht}
+              select
               variant="outlined"
             >
               <MenuItem value="utf8">UTF-8 </MenuItem>
