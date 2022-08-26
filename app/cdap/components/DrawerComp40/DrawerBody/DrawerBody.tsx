@@ -1,8 +1,7 @@
 import React from 'react';
 import { Divider } from '@material-ui/core';
 import { useDrawerCss } from '../styles';
-import { SearchIcon, Icon1, Icon2, Icon3, Icon4, Icon5 } from '../iconStore';
-import { Checkbox } from '@material-ui/core';
+import { Icon1, Icon2, Icon3, Icon4, Icon5 } from '../iconStore';
 
 const DrawerBody = (props) => {
   const classes = useDrawerCss();
@@ -14,9 +13,7 @@ const DrawerBody = (props) => {
       ) : (
         <div>
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
-            <div className={classes.flexOnly}>
-              <p className={classes.weight40}> Columns(30)</p>
-            </div>
+            <p className={classes.weight40}> Columns(30)</p>
             <p className={classes.weight40}> Data Quality</p>
           </div>
           <Divider />
