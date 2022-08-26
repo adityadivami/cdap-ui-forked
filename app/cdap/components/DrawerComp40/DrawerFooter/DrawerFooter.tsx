@@ -6,7 +6,7 @@ const DFooter = (props) => {
   const classes = useDrawerCss();
   return (
     <React.Fragment>
-      {props.isShowFooter && props.footerComponent ? props.footerComponent() : <div></div>}
+      {props.isShowFooter && props.footerComponent ? props.footerComponent() : null}
     </React.Fragment>
   );
 };
