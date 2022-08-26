@@ -26,14 +26,16 @@ const DrawerBody = (props) => {
           <Box width="350px" className={classes.paddingDiv}>
             <FormHelperText className={classes.weight400}> Format</FormHelperText>
             <TextField value={format} onChange={handleChange} select fullWidth variant="outlined">
-              <MenuItem value="csv">csv </MenuItem>
+              <MenuItem value="csv">CSV </MenuItem>
+              <MenuItem value="csv">CSV </MenuItem>
             </TextField>
           </Box>
 
           <Box width="350px" className={classes.paddingDiv}>
             <FormHelperText className={classes.weight400}> Encoding</FormHelperText>
             <TextField value={format} onChange={handleChange} select fullWidth variant="outlined">
-              <MenuItem value="csv">csv </MenuItem>
+              <MenuItem value="utf8">UTF-8 </MenuItem>
+              <MenuItem value="utf7">UTF-7 </MenuItem>
             </TextField>
           </Box>
 
