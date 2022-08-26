@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 import {
   Box,
   Button,
@@ -11,19 +27,17 @@ import {
 } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import React, { useEffect, useState } from 'react';
+import { Redirect, useHistory } from 'react-router';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Divider } from '../OpenWorkspaces/iconStore';
 import { useStyles } from './styles';
 
 const OpenWorkspaces = () => {
   const classes = useStyles();
+  const [workspaceId, setWorkspaceId] = useState();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [workspaceList, setWorkspaceList] = useState([
-    'Sales_March.csv',
-    'USACustomers_DataTable1.csv',
-    'USACustomers_DataTable1.csv',
-    'USACustomers_DataTable1.csv',
-  ]);
+  const [workspaceList, setWorkspaceList] = useState([]);
   const [workspaceCount, setWorkspaceCount] = useState<number>();
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -32,18 +46,31 @@ const OpenWorkspaces = () => {
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     }).subscribe((res) => {
-      console.log('res', res);
       setWorkspaceCount(res.count);
+      res.values.forEach((workspace) => {
+        setWorkspaceList((prev) => [
+          ...prev,
+          { workspaceName: workspace.workspaceName, workspaceId: workspace.workspaceId },
+        ]);
+      });
     });
   };
-  const handleClose = (event) => {
+  const handleClose = (event, currentWorkspaceId) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+    console.log(currentWorkspaceId);
+    setWorkspaceId(currentWorkspaceId);
+    setOpen(false);
+  };
+
+  const handleCloseOnAway = (e) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
 
     setOpen(false);
   };
-
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
       event.preventDefault();
@@ -63,6 +90,13 @@ const OpenWorkspaces = () => {
   useEffect(() => {
     getWorkspaceList();
   }, []);
+  const history = useHistory();
+  const navigateTo = () =>
+    history.push(`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`);
+  React.useEffect(() => {
+    navigateTo();
+    //  <Redirect to={`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`} />;
+  }, [workspaceId]);
   return (
     <Box className={classes.openWorkspaceWrapper}>
       <Box className={classes.divider}>{Divider}</Box>
@@ -91,43 +125,37 @@ const OpenWorkspaces = () => {
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
               <Paper className={classes.menu}>
-                <ClickAwayListener onClickAway={handleClose}>
+                <ClickAwayListener onClickAway={handleCloseOnAway}>
                   <MenuList
                     autoFocusItem={open}
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
                     className={classes.menuList}
                   >
-                    {workspaceList.map((workspaceName, index) => {
-                      return (
-                        <MenuItem onClick={handleClose} className={classes.menuItem} key={index}>
-                          <Typography className={classes.menuItemtext}>{workspaceName}</Typography>
-                        </MenuItem>
-                      );
+                    {workspaceList.map((workspace, index) => {
+                      if (index <= 3) {
+                        return (
+                          <MenuItem
+                            onClick={(e) => handleClose(e, workspace.workspaceId)}
+                            className={classes.menuItem}
+                            key={index}
+                          >
+                            <Typography className={classes.menuItemtext}>
+                              {workspace.workspaceName}
+                            </Typography>
+                          </MenuItem>
+                        );
+                      }
                     })}
-                    {/* <MenuItem onClick={handleClose} className={classes.menuItem}>
-                      <Typography className={classes.menuItemtext}>Sales_March.csv</Typography>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} className={classes.menuItem}>
-                      <Typography className={classes.menuItemtext}>
-                        USACustomers_DataTable1.csvhuwdhiwjdowj
-                      </Typography>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} className={classes.menuItem}>
-                      <Typography className={classes.menuItemtext}>
-                        Customers_December 21.avro
-                      </Typography>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} className={classes.menuItem}>
-                      <Typography className={classes.menuItemtext}>
-                        Customers_Nov. 21.csv
-                      </Typography>
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} className={classes.lastMenuItem}>
+
+                    <MenuItem
+                      onClick={(e) => handleClose(e, 'openAllWorkspace')}
+                      className={classes.viewAll}
+                    >
                       <Typography className={classes.menuItemtext}>
                         View all ongoing workspaces
                       </Typography>
-                    </MenuItem> */}
+                    </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

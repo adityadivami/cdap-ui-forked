@@ -60,7 +60,7 @@ export const useStyles = makeStyles({
     paddingLeft: '20px',
     paddingRight: '20px',
   },
-  lastMenuItem: {
+  viewAll: {
     color: '#4681F4',
     marginTop: '8px',
     marginBottom: '8px',

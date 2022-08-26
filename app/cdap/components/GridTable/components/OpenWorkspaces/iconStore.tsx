@@ -17,6 +17,6 @@ import React from 'react';
 
 export const Divider = (
   <svg width="2" height="21" viewBox="0 0 2 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0.511963 0.501953V20.502" stroke="#DADCE0" stroke-linecap="round" />
+    <path d="M0.511963 0.501953V20.502" stroke="#DADCE0" strokeLinecap="round" />
   </svg>
 );
