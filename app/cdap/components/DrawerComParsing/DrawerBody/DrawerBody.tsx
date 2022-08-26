@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Divider, TextField } from '@material-ui/core';
+import React from 'react';
+import { TextField } from '@material-ui/core';
 import { useDrawerCss } from '../styles';
 import {
   FormGroup,
@@ -13,9 +13,12 @@ import {
 const DrawerBody = (props) => {
   const classes = useDrawerCss();
   const [format, setFormat] = React.useState('');
-
+  const [encoding, setEncoding] = React.useState('');
   const handleChange = (event) => {
     setFormat(event.target.value);
+  };
+  const onHandleChange = (event) => {
+    setEncoding(event.target.value);
   };
   return (
     <React.Fragment>
@@ -33,7 +36,13 @@ const DrawerBody = (props) => {
 
           <Box width="350px" className={classes.paddingDiv}>
             <FormHelperText className={classes.weight400}> Encoding</FormHelperText>
-            <TextField value={format} onChange={handleChange} select fullWidth variant="outlined">
+            <TextField
+              value={encoding}
+              onChange={onHandleChange}
+              select
+              fullWidth
+              variant="outlined"
+            >
               <MenuItem value="utf8">UTF-8 </MenuItem>
               <MenuItem value="utf7">UTF-7 </MenuItem>
             </TextField>
