@@ -13,7 +13,7 @@ const DrawerBody = (props) => {
       ) : (
         <div>
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
-            <p className={classes.weight40}> Columns(30)</p>
+            <p className={classes.weight40}> Columns (30)</p>
             <p className={classes.weight40}> Data Quality</p>
           </div>
           <Divider />
