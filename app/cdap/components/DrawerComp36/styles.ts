@@ -82,5 +82,6 @@ export const useDrawerCss = makeStyles({
     borderRadius: '4px',
     color: '#fff !important',
     width: '162px',
+    height: '36px',
   },
 });
