@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDrawerCss } from '../styles';
-import { closeOutLine, UnderLine, Arrow } from '../iconStore';
+import { closeOutLine, UnderLine, SearchIcon, Line } from '../iconStore';
+import { IconButton } from '@material-ui/core';
 
 const DrawerHeader = (props) => {
   const classes = useDrawerCss();
@@ -10,12 +11,15 @@ const DrawerHeader = (props) => {
         props.headerComponent()
       ) : (
         <div className={classes.flexBetweenBaseLine + ' ' + classes.paddingDiv}>
-          {Arrow}
           <div>
-            <h3 className={classes.headerTitle}>Select Column(s) to Apply This Function</h3>
+            <h3 className={classes.headerTitle}>Column View</h3>
             {UnderLine}
           </div>
-          <div onClick={props.toggleDrawer}>{closeOutLine()}</div>
+          <div className={classes.flexOnly}>
+            <div className={classes.paddingDivv}> {SearchIcon}</div>
+            <div className={classes.paddingDivv}> {Line} </div>
+            <div onClick={props.toggleDrawer}>{closeOutLine()}</div>
+          </div>
         </div>
       )}
     </React.Fragment>

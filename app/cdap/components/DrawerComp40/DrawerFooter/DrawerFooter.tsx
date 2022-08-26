@@ -6,15 +6,7 @@ const DFooter = (props) => {
   const classes = useDrawerCss();
   return (
     <React.Fragment>
-      {props.isShowFooter && props.footerComponent ? (
-        props.footerComponent()
-      ) : (
-        <div style={{ textAlign: 'right' }}>
-          <Button variant="contained" className={classes.footerButton}>
-            Done
-          </Button>
-        </div>
-      )}
+      {props.isShowFooter && props.footerComponent ? props.footerComponent() : <div></div>}
     </React.Fragment>
   );
 };

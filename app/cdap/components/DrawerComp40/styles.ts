@@ -54,6 +54,9 @@ export const useDrawerCss = makeStyles({
   paddingDiv: {
     padding: '10px',
   },
+  paddingDivv: {
+    padding: '5px',
+  },
   buttonOutlined: {
     borderColor: '#4681F4',
     color: '#4681F4',

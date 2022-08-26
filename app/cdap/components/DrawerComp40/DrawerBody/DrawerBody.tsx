@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider } from '@material-ui/core';
 import { useDrawerCss } from '../styles';
-import { SearchIcon, Icon1, Icon2, Icon3, Icon4 } from '../iconStore';
+import { SearchIcon, Icon1, Icon2, Icon3, Icon4, Icon5 } from '../iconStore';
 import { Checkbox } from '@material-ui/core';
 
 const DrawerBody = (props) => {
@@ -13,15 +13,8 @@ const DrawerBody = (props) => {
         props.bodyComponent()
       ) : (
         <div>
-          <div className={classes.paddingDiv + ' ' + classes.flexBetweenBaseLine}>
-            <p className={classes.weight400}>No columns selected</p>
-            {SearchIcon}
-          </div>
-          <Divider />
-
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
             <div className={classes.flexOnly}>
-              <Checkbox size="medium" color="primary" />
               <p className={classes.weight40}> Columns(30)</p>
             </div>
             <p className={classes.weight40}> Data Quality</p>
@@ -30,7 +23,6 @@ const DrawerBody = (props) => {
 
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
             <div className={classes.flexOnly}>
-              <Checkbox size="medium" color="primary" />
               <div>
                 <p className={classes.weight400 + ' ' + classes.marginTopp}> Customer Name</p>
                 <p className={classes.weight400}> ABC | String</p>
@@ -42,7 +34,6 @@ const DrawerBody = (props) => {
 
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
             <div className={classes.flexOnly}>
-              <Checkbox size="medium" color="primary" />
               <div>
                 <p className={classes.weight400}> Region</p>
                 <p className={classes.weight400}> ABC | String</p>
@@ -54,7 +45,6 @@ const DrawerBody = (props) => {
 
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
             <div className={classes.flexOnly}>
-              <Checkbox size="medium" color="primary" />
               <div>
                 <p className={classes.weight400}> Car Model</p>
                 <p className={classes.weight400}> ABC | String</p>
@@ -66,10 +56,9 @@ const DrawerBody = (props) => {
 
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
             <div className={classes.flexOnly}>
-              <Checkbox size="medium" color="primary" />
               <div>
                 <p className={classes.weight400}> CC Number</p>
-                <p className={classes.weight400}> ABC | Credit Card</p>
+                <p className={classes.weight400}> 123 | Credit Card</p>
               </div>
             </div>
             <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon3}</p>
@@ -78,7 +67,6 @@ const DrawerBody = (props) => {
 
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
             <div className={classes.flexOnly}>
-              <Checkbox size="medium" color="primary" />
               <div>
                 <p className={classes.weight400}> Purchase Date</p>
                 <p className={classes.weight400}> ABC | Date and Time</p>
@@ -90,7 +78,6 @@ const DrawerBody = (props) => {
 
           <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
             <div className={classes.flexOnly}>
-              <Checkbox size="medium" color="primary" />
               <div>
                 <p className={classes.weight400}> Payment Mode</p>
                 <p className={classes.weight400}> ABC | String</p>
@@ -99,6 +86,16 @@ const DrawerBody = (props) => {
             <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon4}</p>
           </div>
           <Divider />
+
+          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+            <div className={classes.flexOnly}>
+              <div>
+                <p className={classes.weight400}> Order amount</p>
+                <p className={classes.weight400}> 123 | String</p>
+              </div>
+            </div>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon5}</p>
+          </div>
         </div>
       )}
     </React.Fragment>
