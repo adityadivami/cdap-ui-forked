@@ -9,7 +9,8 @@ import {
   Popper,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import MyDataPrepApi from 'api/dataprep';
+import React, { useEffect, useState } from 'react';
 import { Divider } from '../OpenWorkspaces/iconStore';
 import { useStyles } from './styles';
 
@@ -23,10 +24,18 @@ const OpenWorkspaces = () => {
     'USACustomers_DataTable1.csv',
     'USACustomers_DataTable1.csv',
   ]);
+  const [workspaceCount, setWorkspaceCount] = useState<number>();
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-
+  const getWorkspaceList = () => {
+    MyDataPrepApi.getWorkspaceList({
+      context: 'default',
+    }).subscribe((res) => {
+      console.log('res', res);
+      setWorkspaceCount(res.count);
+    });
+  };
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -51,7 +60,9 @@ const OpenWorkspaces = () => {
 
     prevOpen.current = open;
   }, [open]);
-
+  useEffect(() => {
+    getWorkspaceList();
+  }, []);
   return (
     <Box className={classes.openWorkspaceWrapper}>
       <Box className={classes.divider}>{Divider}</Box>
@@ -63,7 +74,7 @@ const OpenWorkspaces = () => {
           onClick={handleToggle}
           className={classes.workspace}
         >
-          4 workspaces open
+          {workspaceCount} workspaces open
         </Typography>
 
         <Popper
@@ -87,21 +98,36 @@ const OpenWorkspaces = () => {
                     onKeyDown={handleListKeyDown}
                     className={classes.menuList}
                   >
-                    <MenuItem onClick={handleClose} className={classes.menuItem}>
-                      Sales_March.csv
+                    {workspaceList.map((workspaceName, index) => {
+                      return (
+                        <MenuItem onClick={handleClose} className={classes.menuItem} key={index}>
+                          <Typography className={classes.menuItemtext}>{workspaceName}</Typography>
+                        </MenuItem>
+                      );
+                    })}
+                    {/* <MenuItem onClick={handleClose} className={classes.menuItem}>
+                      <Typography className={classes.menuItemtext}>Sales_March.csv</Typography>
                     </MenuItem>
                     <MenuItem onClick={handleClose} className={classes.menuItem}>
-                      USACustomers_DataTable1.csv
+                      <Typography className={classes.menuItemtext}>
+                        USACustomers_DataTable1.csvhuwdhiwjdowj
+                      </Typography>
                     </MenuItem>
                     <MenuItem onClick={handleClose} className={classes.menuItem}>
-                      Customers_December 21.avro
+                      <Typography className={classes.menuItemtext}>
+                        Customers_December 21.avro
+                      </Typography>
                     </MenuItem>
                     <MenuItem onClick={handleClose} className={classes.menuItem}>
-                      Customers_Nov. 21.csv
+                      <Typography className={classes.menuItemtext}>
+                        Customers_Nov. 21.csv
+                      </Typography>
                     </MenuItem>
                     <MenuItem onClick={handleClose} className={classes.lastMenuItem}>
-                      View all ongoing workspaces
-                    </MenuItem>
+                      <Typography className={classes.menuItemtext}>
+                        View all ongoing workspaces
+                      </Typography>
+                    </MenuItem> */}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
