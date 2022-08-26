@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Box, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
@@ -26,11 +26,13 @@ import BreadCrumb from './components/Breadcrumb';
 import { GridHeaderCell } from './components/GridHeaderCell';
 import { GridKPICell } from './components/GridKPICell';
 import { GridTextCell } from './components/GridTextCell';
+import OpenWorkspaces from './components/OpenWorkspaces';
+import { useStyles } from './styles';
 
 const GridTable = () => {
   const { datasetName } = useParams() as any;
   const params = useParams() as any;
-
+  const classes = useStyles();
   const [headersNamesList, setHeadersNamesList] = React.useState([]);
   const [rowsDataList, setRowsDataList] = React.useState([]);
   const [gridData, setGridData] = useState<any>({});
@@ -213,7 +215,10 @@ const GridTable = () => {
 
   return (
     <>
-      <BreadCrumb datasetName={datasetName} />
+      <Box className={classes.header}>
+        <BreadCrumb datasetName={datasetName} />
+        <OpenWorkspaces />
+      </Box>
       <Table aria-label="simple table" className="test">
         <TableHead>
           <TableRow>
