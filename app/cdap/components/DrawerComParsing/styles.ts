@@ -67,6 +67,10 @@ export const useDrawerCss = makeStyles({
     marginLeft: '10px',
     marginRight: '10px',
   },
+  textFieldht: {
+    width: '350px',
+    height: '40.03px',
+  },
   footerButton: {
     backgroundColor: '#3994FF !important',
     boxShadow: '0px 2px 4px rgba(70, 129, 244, 0.15)',

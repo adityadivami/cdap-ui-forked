@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 import { useDrawerCss } from '../styles';
 import {
@@ -12,8 +12,8 @@ import {
 
 const DrawerBody = (props) => {
   const classes = useDrawerCss();
-  const [format, setFormat] = React.useState('');
-  const [encoding, setEncoding] = React.useState('');
+  const [format, setFormat] = React.useState('CSV');
+  const [encoding, setEncoding] = React.useState('UTF-8');
   const handleChange = (event) => {
     setFormat(event.target.value);
   };
@@ -28,8 +28,13 @@ const DrawerBody = (props) => {
         <div>
           <Box width="350px" className={classes.paddingDiv}>
             <FormHelperText className={classes.weight400}> Format</FormHelperText>
-            <TextField value={format} onChange={handleChange} select fullWidth variant="outlined">
-              <MenuItem value="csv">CSV </MenuItem>
+            <TextField
+              value={format}
+              onChange={handleChange}
+              className={classes.textFieldht}
+              select
+              variant="outlined"
+            >
               <MenuItem value="csv">CSV </MenuItem>
             </TextField>
           </Box>
@@ -40,11 +45,10 @@ const DrawerBody = (props) => {
               value={encoding}
               onChange={onHandleChange}
               select
-              fullWidth
+              className={classes.textFieldht}
               variant="outlined"
             >
               <MenuItem value="utf8">UTF-8 </MenuItem>
-              <MenuItem value="utf7">UTF-7 </MenuItem>
             </TextField>
           </Box>
 
