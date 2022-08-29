@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDrawerCss } from '../styles';
-import { closeOutLine, UnderLine, Frames, Line } from '../iconStore';
+import { closeOutLine, UnderLine, DownloadIcon, Line, Infoo } from '../iconStore';
 
 const DrawerHeader = (props) => {
   const classes = useDrawerCss();
@@ -8,13 +8,14 @@ const DrawerHeader = (props) => {
     <React.Fragment>
       <div className={classes.flexBetweenBaseLine + ' ' + classes.paddingDiv}>
         <div>
-          <h1 className={classes.headerTitle}>Parsing</h1>
+          <h1 className={classes.headerTitle}>Recipe</h1>
           {UnderLine}
         </div>
         <div className={classes.flexBetweenBaseLine + ' ' + classes.paddingDiv}>
-          {Frames}
-          <p className={classes.weight400 + ' ' + classes.marginSide}> Import Schema</p>
-          {Line}
+          <div>{DownloadIcon}</div>
+          <div className={classes.marginSide}> {Infoo}</div>
+          <div> {Line}</div>
+
           <div onClick={props.toggleDrawer} className={classes.marginSide}>
             {closeOutLine()}
           </div>

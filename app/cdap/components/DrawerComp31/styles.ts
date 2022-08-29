@@ -4,6 +4,7 @@ export const useDrawerCss = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexDirection: 'column',
   },
   flexBetweenBaseLine: {
     display: 'flex',
@@ -64,9 +65,10 @@ export const useDrawerCss = makeStyles({
     justifyContent: 'space-between',
   },
   marginSide: {
-    marginLeft: '10px',
-    marginRight: '10px',
+    marginLeft: '15px',
+    marginRight: '15px',
   },
+
   textFieldht: {
     width: '350px',
     height: '40.03px',
