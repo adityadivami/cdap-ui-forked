@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDrawerCss } from '../styles';
-import { Divider } from '@material-ui/core';
+import { Divider, IconButton } from '@material-ui/core';
 
 const DrawerBody = () => {
   const classes = useDrawerCss();
