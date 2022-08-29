@@ -10,12 +10,9 @@ export const useDrawerCss = makeStyles({
     justifyContent: 'space-between',
   },
   containerWrapper: {
-    width: '438.8px',
-    height: '56.11px',
+    width: '392.27px',
+    height: '62.96px',
     padding: '10px',
-  },
-  marginRightt: {
-    marginRight: '40px',
   },
   marginTopp: {
     marginTop: '15px',
@@ -25,6 +22,7 @@ export const useDrawerCss = makeStyles({
     fontSize: '16px',
     color: '#000000',
     marginTop: '11px',
+    marginRight: '40px',
   },
 
   weight400: {
@@ -33,6 +31,7 @@ export const useDrawerCss = makeStyles({
     color: '#5F6368',
     marginTop: '0px',
     marginBottom: '2px',
+    marginRight: '80px',
   },
   weight600: {
     fontWeight: 600,
@@ -47,7 +46,7 @@ export const useDrawerCss = makeStyles({
   },
   drawerContentWrapper: {
     padding: '20px 10px',
-    width: '500px',
+    width: '392.27px',
     marginTop: '48px',
     height: '100%',
   },
