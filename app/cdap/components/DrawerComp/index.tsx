@@ -10,11 +10,6 @@ import { useDrawerCss } from './styles';
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 interface CDrawer {
-  isShowHeader: boolean | true;
-  isShowFooter: boolean;
-  bodyComponent: () => any;
-  footerComponent?: () => any;
-  headerComponent?: () => any;
   anchor: Anchor;
   open: boolean;
 }
@@ -54,17 +49,10 @@ export default function DrawerComponent(props: CDrawer) {
             <Box className={classes.drawerContentWrapper}>
               <div className={classes.flexHeight}>
                 <div>
-                  <DrawerHeader
-                    isShowHeader={props.isShowHeader}
-                    headerComponent={props.headerComponent}
-                    toggleDrawer={toggleDrawer(anchor, false)}
-                  />
-                  <DrawerBody bodyComponent={props.bodyComponent} />
+                  <DrawerHeader toggleDrawer={toggleDrawer(anchor, false)} />
+                  <DrawerBody />
                 </div>
-                <DrawerFooter
-                  isShowFooter={props.isShowFooter}
-                  footerComponent={props.footerComponent}
-                />
+                <DrawerFooter />
               </div>
             </Box>
           </Drawer>
