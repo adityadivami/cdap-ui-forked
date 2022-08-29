@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDrawerCss } from '../styles';
-import { Divider, IconButton } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
+import { DeleteIcon } from '../iconStore';
 
 const DrawerBody = () => {
   const classes = useDrawerCss();
@@ -12,12 +13,13 @@ const DrawerBody = () => {
         </div>
 
         <Divider />
-        <div className={classes.flexRow}>
+        <div className={classes.flexRow + ' ' + classes.background}>
           <p className={classes.weight400 + ' ' + classes.margintop}>01 </p>
           <p className={classes.marginleft}>
             <span className={classes.weight600}> Parse column </span> 'Body' with delimiter <br />{' '}
             'comma' and set 'first row as header'
           </p>
+          <p className={classes.deleteIcon}> {DeleteIcon}</p>
         </div>
         <Divider />
         <div className={classes.flexRow}>

@@ -34,8 +34,8 @@ const EntityListView = Loadable({
   loading: LoadingSVGCentered,
 });
 
-const DrawerComponent32 = Loadable({
-  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/DrawerComp32'),
+const DrawerComponent33 = Loadable({
+  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/DrawerComp33'),
   loading: LoadingSVGCentered,
 });
 const Connections = Loadable({
@@ -170,7 +170,7 @@ export default class Home extends Component {
           <Route exact path="/ns/:namespace/rulesengine" component={RulesEngineHome} />
           <Route exact path="/ns/:namespace/wrangle-home" component={WrangleHome} />
           <Route exact path="/ns/:namespace/datasets-list/:dataset" component={DatasetsList} />
-          <Route exact path="/ns/:namespace/DrawerComp32" component={DrawerComponent32} />
+          <Route exact path="/ns/:namespace/DrawerComp33" component={DrawerComponent33} />
           <Route
             exact
             path="/ns/:namespace/workspace-data/:workspaceid"

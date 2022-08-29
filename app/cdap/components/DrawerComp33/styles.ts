@@ -9,9 +9,17 @@ export const useDrawerCss = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  deleteIcon: {
+    marginLeft: '95px',
+    marginTop: '4px',
+  },
   flexRow: {
     display: 'flex',
     padding: '10px',
+    width: '500px',
+  },
+  background: {
+    backgroundColor: '#EFF0F2',
   },
   weight40: {
     fontWeight: 400,
