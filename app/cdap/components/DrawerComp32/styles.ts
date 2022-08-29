@@ -11,13 +11,13 @@ export const useDrawerCss = makeStyles({
   },
   flexRow: {
     display: 'flex',
+    padding: '10px',
   },
   weight40: {
     fontWeight: 400,
     fontSize: '16px',
     color: '#5F6368',
     marginBottom: '5px',
-    marginLeft: '10px',
   },
   weight400: {
     fontWeight: 400,
@@ -25,12 +25,17 @@ export const useDrawerCss = makeStyles({
     color: '#5F6368',
     marginBottom: '5px',
   },
+  marginleft: {
+    marginLeft: '37px',
+  },
+  margintop: {
+    marginTop: '2px',
+  },
   weight600: {
     fontWeight: 600,
     fontSize: '16px',
     color: '#5F6368',
     marginBottom: '5px',
-    marginLeft: '10px',
   },
   headerTitle: {
     fontWeight: 400,
