@@ -40,19 +40,21 @@ export const useDrawerCss = makeStyles({
     height: '100%',
   },
   paddingDiv: {
-    padding: '10px',
+    padding: '5px',
   },
   buttonOutlined: {
     borderColor: '#4681F4',
     color: '#4681F4',
     marginTop: '10px',
+    marginBottom: '10px',
   },
   replaceInput: {
     display: 'block',
     border: '1px solid #DADCE0',
     borderRadius: '4px',
-    width: '100%',
+    width: '350px',
     height: '2.5rem',
+    marginBottom: '20px',
   },
   flexHeight: {
     height: '100%',
@@ -66,5 +68,6 @@ export const useDrawerCss = makeStyles({
     borderRadius: '4px',
     color: '#fff !important',
     width: '162px',
+    opacity: '0.5',
   },
 });
