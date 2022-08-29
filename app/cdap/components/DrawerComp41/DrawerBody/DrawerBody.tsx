@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider } from '@material-ui/core';
 import { useDrawerCss } from '../styles';
-import { Icon1, Icon2, Icon3, Icon4, Icon5 } from '../iconStore';
+import { Icon65, Icon74, Icon100, Icon89, Icon96, Icon6 } from '../iconStore';
 
 const DrawerBody = (props) => {
   const classes = useDrawerCss();
@@ -25,18 +25,29 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> ABC | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon1}</p>
+            <p className={classes.weight400}> {Icon65}</p>
           </div>
           <Divider />
 
-          <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
+          <div
+            className={
+              classes.flexBetweenBaseLine +
+              ' ' +
+              classes.containerWrapper +
+              ' ' +
+              classes.paddingLeftt +
+              ' ' +
+              classes.boxShadoww
+            }
+          >
             <div className={classes.flexOnly}>
+              <div className={classes.iconStyles}> {Icon6}</div>
               <div>
                 <p className={classes.weight400}> Region</p>
                 <p className={classes.weight400}> ABC | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon2}</p>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon74}</p>
           </div>
           <Divider />
 
@@ -47,7 +58,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> ABC | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon3}</p>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon100}</p>
           </div>
           <Divider />
 
@@ -58,7 +69,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> 123 | Credit Card</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon3}</p>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon100}</p>
           </div>
           <Divider />
 
@@ -69,7 +80,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> ABC | Date and Time</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon3}</p>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon100}</p>
           </div>
           <Divider />
 
@@ -80,7 +91,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> ABC | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon4}</p>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon89}</p>
           </div>
           <Divider />
 
@@ -91,7 +102,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> 123 | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon5}</p>
+            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon96}</p>
           </div>
         </div>
       )}

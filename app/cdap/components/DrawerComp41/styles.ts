@@ -10,13 +10,14 @@ export const useDrawerCss = makeStyles({
     justifyContent: 'space-between',
   },
   containerWrapper: {
-    width: '438.8px',
-    height: '56.11px',
+    height: '62.96px',
+    width: '392.27px',
     padding: '10px',
   },
-  marginRightt: {
-    marginRight: '40px',
+  paddingLeftt: {
+    paddingLeft: '0px',
   },
+
   marginTopp: {
     marginTop: '15px',
   },
@@ -25,6 +26,7 @@ export const useDrawerCss = makeStyles({
     fontSize: '16px',
     color: '#000000',
     marginTop: '11px',
+    marginRight: '25px',
   },
 
   weight400: {
@@ -33,6 +35,7 @@ export const useDrawerCss = makeStyles({
     color: '#5F6368',
     marginTop: '0px',
     marginBottom: '2px',
+    marginRight: '65px',
   },
   weight600: {
     fontWeight: 600,
@@ -47,7 +50,7 @@ export const useDrawerCss = makeStyles({
   },
   drawerContentWrapper: {
     padding: '20px 10px',
-    width: '500px',
+    width: '392.27px',
     marginTop: '48px',
     height: '100%',
   },
@@ -56,6 +59,15 @@ export const useDrawerCss = makeStyles({
   },
   paddingDivv: {
     padding: '5px',
+  },
+  iconStyles: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  boxShadoww: {
+    boxSizing: 'border-box',
+    boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
   },
   buttonOutlined: {
     borderColor: '#4681F4',
