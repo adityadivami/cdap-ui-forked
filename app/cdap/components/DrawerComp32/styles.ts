@@ -4,7 +4,6 @@ export const useDrawerCss = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexDirection: 'column',
   },
   flexBetweenBaseLine: {
     display: 'flex',
@@ -18,7 +17,7 @@ export const useDrawerCss = makeStyles({
     fontSize: '16px',
     color: '#5F6368',
     marginBottom: '5px',
-    marginTop: '20px',
+    marginLeft: '10px',
   },
   weight400: {
     fontWeight: 400,
@@ -31,6 +30,7 @@ export const useDrawerCss = makeStyles({
     fontSize: '16px',
     color: '#5F6368',
     marginBottom: '5px',
+    marginLeft: '10px',
   },
   headerTitle: {
     fontWeight: 400,
