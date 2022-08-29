@@ -90,13 +90,7 @@ const OpenWorkspaces = () => {
   useEffect(() => {
     getWorkspaceList();
   }, []);
-  const history = useHistory();
-  const navigateTo = () =>
-    history.push(`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`);
-  React.useEffect(() => {
-    navigateTo();
-    //  <Redirect to={`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`} />;
-  }, [workspaceId]);
+
   return (
     <Box className={classes.openWorkspaceWrapper}>
       <Box className={classes.divider}>{Divider}</Box>
