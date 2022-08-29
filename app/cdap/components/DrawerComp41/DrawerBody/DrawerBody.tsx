@@ -47,7 +47,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> ABC | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon74}</p>
+            <p className={classes.weight400}> {Icon74}</p>
           </div>
           <Divider />
 
@@ -58,7 +58,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> ABC | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon100}</p>
+            <p className={classes.weight400}> {Icon100}</p>
           </div>
           <Divider />
 
@@ -69,7 +69,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> 123 | Credit Card</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon100}</p>
+            <p className={classes.weight400}> {Icon100}</p>
           </div>
           <Divider />
 
@@ -80,7 +80,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> ABC | Date and Time</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon100}</p>
+            <p className={classes.weight400}> {Icon100}</p>
           </div>
           <Divider />
 
@@ -91,7 +91,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> ABC | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon89}</p>
+            <p className={classes.weight400}> {Icon89}</p>
           </div>
           <Divider />
 
@@ -102,7 +102,7 @@ const DrawerBody = (props) => {
                 <p className={classes.weight400}> 123 | String</p>
               </div>
             </div>
-            <p className={classes.weight400 + ' ' + classes.marginRightt}> {Icon96}</p>
+            <p className={classes.weight400}> {Icon96}</p>
           </div>
         </div>
       )}
