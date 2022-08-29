@@ -10,7 +10,7 @@ import {
   FormHelperText,
 } from '@material-ui/core';
 
-const DrawerBody = (props) => {
+const DrawerBody = () => {
   const classes = useDrawerCss();
   const [format, setFormat] = React.useState('csv');
   const [encoding, setEncoding] = React.useState('utf8');
@@ -22,48 +22,44 @@ const DrawerBody = (props) => {
   };
   return (
     <React.Fragment>
-      {props.bodyComponent ? (
-        props.bodyComponent()
-      ) : (
-        <div>
-          <Box width="350px" className={classes.paddingDiv}>
-            <FormHelperText className={classes.weight400}> Format</FormHelperText>
-            <TextField
-              value={format}
-              onChange={handleChange}
-              select
-              className={classes.textFieldht}
-              variant="outlined"
-            >
-              <MenuItem value="csv">CSV </MenuItem>
-            </TextField>
-          </Box>
+      <div>
+        <Box width="350px" className={classes.paddingDiv}>
+          <FormHelperText className={classes.weight400}> Format</FormHelperText>
+          <TextField
+            value={format}
+            onChange={handleChange}
+            select
+            className={classes.textFieldht}
+            variant="outlined"
+          >
+            <MenuItem value="csv">CSV </MenuItem>
+          </TextField>
+        </Box>
 
-          <Box width="350px" className={classes.paddingDiv}>
-            <FormHelperText className={classes.weight400}> Encoding</FormHelperText>
-            <TextField
-              value={encoding}
-              onChange={onHandleChange}
-              className={classes.textFieldht}
-              select
-              variant="outlined"
-            >
-              <MenuItem value="utf8">UTF-8 </MenuItem>
-            </TextField>
-          </Box>
+        <Box width="350px" className={classes.paddingDiv}>
+          <FormHelperText className={classes.weight400}> Encoding</FormHelperText>
+          <TextField
+            value={encoding}
+            onChange={onHandleChange}
+            className={classes.textFieldht}
+            select
+            variant="outlined"
+          >
+            <MenuItem value="utf8">UTF-8 </MenuItem>
+          </TextField>
+        </Box>
 
-          <FormGroup className={classes.paddingDiv}>
-            <FormControlLabel
-              control={<Checkbox color="primary" size="medium" />}
-              label="Enable Quoted Values"
-            />
-            <FormControlLabel
-              control={<Checkbox color="primary" size="medium" />}
-              label="Use first row as a header"
-            />
-          </FormGroup>
-        </div>
-      )}
+        <FormGroup className={classes.paddingDiv}>
+          <FormControlLabel
+            control={<Checkbox color="primary" size="medium" />}
+            label="Enable Quoted Values"
+          />
+          <FormControlLabel
+            control={<Checkbox color="primary" size="medium" />}
+            label="Use first row as a header"
+          />
+        </FormGroup>
+      </div>
     </React.Fragment>
   );
 };
