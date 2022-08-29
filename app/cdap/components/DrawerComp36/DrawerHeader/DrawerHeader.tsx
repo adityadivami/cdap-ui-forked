@@ -6,18 +6,14 @@ const DrawerHeader = (props) => {
   const classes = useDrawerCss();
   return (
     <React.Fragment>
-      {props.isShowHeader && props.headerComponent ? (
-        props.headerComponent()
-      ) : (
-        <div className={classes.flexBetweenBaseLine + ' ' + classes.paddingDiv}>
-          {Arrow}
-          <div>
-            <h3 className={classes.headerTitle}>Select Column(s) to Apply This Function</h3>
-            {UnderLine}
-          </div>
-          <div onClick={props.toggleDrawer}>{closeOutLine()}</div>
+      <div className={classes.flexBetweenBaseLine + ' ' + classes.paddingDiv}>
+        {Arrow}
+        <div>
+          <h3 className={classes.headerTitle}>Select Column(s) to Apply This Function</h3>
+          {UnderLine}
         </div>
-      )}
+        <div onClick={props.toggleDrawer}>{closeOutLine()}</div>
+      </div>
     </React.Fragment>
   );
 };

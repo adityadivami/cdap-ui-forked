@@ -14,9 +14,6 @@ export const useDrawerCss = makeStyles({
     height: '56.11px',
     padding: '10px',
   },
-  marginRightt: {
-    marginRight: '40px',
-  },
   marginTopp: {
     marginTop: '15px',
   },
@@ -25,6 +22,7 @@ export const useDrawerCss = makeStyles({
     fontSize: '16px',
     color: '#000000',
     marginTop: '11px',
+    marginRight: '40px',
   },
 
   weight400: {
@@ -33,6 +31,7 @@ export const useDrawerCss = makeStyles({
     color: '#5F6368',
     marginTop: '0px',
     marginBottom: '2px',
+    marginRight: '80px',
   },
   weight600: {
     fontWeight: 600,
