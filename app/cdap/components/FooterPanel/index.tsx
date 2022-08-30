@@ -1,24 +1,26 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import './index.scss';
-import { Svg, Svg1, Svg2 } from './images';
+import { useCss } from './styles';
+import { ColumnIcon, ZoomIn, Svg2 } from './images';
+
 const Footer = () => {
+  const classes = useCss();
   return (
-    <Box className="mainContainer">
-      <Box className="cont">
-        <Box className="imgCont">{Svg}</Box>
+    <Box className={classes.mainContainer}>
+      <Box className={classes.cont}>
+        <Box className={classes.imgCont}>{ColumnIcon}</Box>
         <Box>
-          <p className="paraElement"> Current data - 1000 rows and 30 columns</p>
+          <p className={classes.paraElement}> Current data - 1000 rows and 30 columns</p>
         </Box>
-        <Box className="zoomCont">
-          {Svg1}
-          <span className="spanElement"> 100%</span>
+        <Box className={classes.zoomCont}>
+          {ZoomIn}
+          <span className={classes.spanElement}> 100%</span>
           {Svg2}
         </Box>
-        <p className="directivesCont"> Directives </p>
-        <Box className="recipeCont">
+        <p className={classes.directivesCont}> Directives </p>
+        <Box className={classes.recipeCont}>
           <p> Recipe Steps</p>
-          <p className="spanElement1"> 10</p>
+          <p className={classes.spanElement1}> 10</p>
         </Box>
       </Box>
     </Box>
