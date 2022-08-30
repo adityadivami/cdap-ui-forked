@@ -28,17 +28,10 @@ const DrawerBody = () => {
 
         <div
           className={
-            classes.flexBetweenBaseLine +
-            ' ' +
-            classes.containerWrapper +
-            ' ' +
-            classes.paddingLeftt +
-            ' ' +
-            classes.boxShadoww
+            classes.flexBetweenBaseLine + ' ' + classes.containerWrapper + ' ' + classes.boxShadoww
           }
         >
           <div className={classes.flexOnly}>
-            <div className={classes.iconStyles}> {Icon6}</div>
             <div>
               <p className={classes.weight400}> Region</p>
               <p className={classes.weight400}> ABC | String</p>
