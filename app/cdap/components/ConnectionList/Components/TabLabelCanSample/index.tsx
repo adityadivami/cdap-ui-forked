@@ -24,6 +24,8 @@ import * as React from 'react';
 import { Redirect } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { useStyles } from './styles';
+import { useLocation } from 'react-router';
+import { DATASOURCES_LABEL, WRANGLE_LABEL } from './constants';
 
 const TabLabelCanSample = ({
   label,
@@ -39,6 +41,7 @@ const TabLabelCanSample = ({
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const classes = useStyles();
+  const pathName = useLocation();
 
   const myLabelRef: any = React.createRef();
   const [refValue, setRefValue] = React.useState(false);
@@ -90,8 +93,16 @@ const TabLabelCanSample = ({
       });
   };
 
+  const indexOfSelectedDataset = location.pathname.lastIndexOf('/');
+  const requiredPath = location.pathname.slice(indexOfSelectedDataset + 1);
+
   return workspaceId ? (
-    <Redirect to={`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`} />
+    <Redirect
+      to={{
+        pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
+        state: { from: DATASOURCES_LABEL, path: requiredPath },
+      }}
+    />
   ) : refValue ? (
     <CustomTooltip title={label} arrow>
       <Box className={classes.labelsContainerCanSample}>
@@ -101,7 +112,7 @@ const TabLabelCanSample = ({
         <div onClick={() => onExplore(entity)}>
           <Box className="wranglingHover">
             <WrangelIcon />
-            <Typography color="primary">Wrangle</Typography>
+            <Typography color="primary">{WRANGLE_LABEL}</Typography>
           </Box>
         </div>
       </Box>
@@ -114,7 +125,7 @@ const TabLabelCanSample = ({
       <div onClick={() => onExplore(entity)}>
         <Box className="wranglingHover">
           <WrangelIcon />
-          <Typography color="primary">Wrangle</Typography>
+          <Typography color="primary">{WRANGLE_LABEL}</Typography>
         </Box>
       </div>
     </Box>

@@ -15,6 +15,7 @@
  */
 
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
@@ -22,23 +23,26 @@ import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import If from 'components/shared/If';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { default as React, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
+import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import BreadCrumb from './components/Breadcrumb';
 import { GridHeaderCell } from './components/GridHeaderCell';
 import { GridKPICell } from './components/GridKPICell';
 import { GridTextCell } from './components/GridTextCell';
-import Box from '@material-ui/core/Box';
+import LoadToPipeLineArea from './components/LoadToPipeLine';
+import OpenWorkspaces from './components/OpenWorkspaces';
+import ToolBarList from './components/Toolbar';
 import { useStyles } from './styles';
-import { flatMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 
 const GridTable = () => {
   const { wid } = useParams() as any;
   const params = useParams() as any;
   const classes = useStyles();
+  const location = useLocation();
 
   const [loading, setLoading] = useState(false);
+  const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = React.useState([]);
   const [rowsDataList, setRowsDataList] = React.useState([]);
   const [gridData, setGridData] = useState<any>({});
@@ -64,7 +68,7 @@ const GridTable = () => {
       .pipe(
         flatMap((res: any) => {
           const { dataprep } = DataPrepStore.getState();
-          console.log(res);
+          setWorkspaceName(res.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
@@ -231,7 +235,16 @@ const GridTable = () => {
 
   return (
     <Box className={classes.wrapper}>
-      <BreadCrumb datasetName={wid} />
+      <Box className={classes.subHeaderWrapper}>
+        <Box className={classes.breadCrumbLeftArea}>
+          <BreadCrumb datasetName={workspaceName} location={location} />
+          <OpenWorkspaces />
+        </Box>
+        <Box className={classes.breadCrumbRightArea}>
+          <LoadToPipeLineArea />
+        </Box>
+      </Box>
+      <ToolBarList />
       <Table aria-label="simple table" className="test">
         <TableHead>
           <TableRow>

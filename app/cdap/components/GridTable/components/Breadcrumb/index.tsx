@@ -17,21 +17,26 @@
 import { Box, Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useStyles } from './styles';
 import React from 'react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { DATASOURCES_URL_PARAM, HOME_URL_PARAM, MATCH_SOURCE } from './constants';
+import { useStyles } from './styles';
 
-const BreadCrumb = ({ datasetName }) => {
+const BreadCrumb = ({ datasetName, location }) => {
   const classes = useStyles();
+  const sourcePath =
+    location.state.from === MATCH_SOURCE
+      ? HOME_URL_PARAM
+      : `${DATASOURCES_URL_PARAM}/${location.state.path}`;
   return (
     <Box className={classes.breadCombContainer}>
       <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
         <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
           Home
         </Link>
-        <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/${`select-dataset`}`}>
-          Select Dataset
+        <Link color="inherit" to={`/ns/${getCurrentNamespace()}/${sourcePath}`}>
+          {location.state.from}
         </Link>
         <Typography color="textPrimary">{datasetName}</Typography>
       </Breadcrumbs>
