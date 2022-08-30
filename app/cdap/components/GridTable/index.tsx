@@ -23,15 +23,16 @@ import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import If from 'components/shared/If';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { default as React, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import BreadCrumb from './components/Breadcrumb';
 import { GridHeaderCell } from './components/GridHeaderCell';
 import { GridKPICell } from './components/GridKPICell';
 import { GridTextCell } from './components/GridTextCell';
+import LoadToPipeLineArea from './components/LoadToPipeLine';
+import OpenWorkspaces from './components/OpenWorkspaces';
 import { useStyles } from './styles';
-import { useLocation } from 'react-router';
 
 const GridTable = () => {
   const { wid } = useParams() as any;
@@ -233,7 +234,16 @@ const GridTable = () => {
 
   return (
     <Box className={classes.wrapper}>
-      <BreadCrumb datasetName={workspaceName} location={location} />
+      <Box className={classes.subHeaderWrapper}>
+        <Box className={classes.breadCrumbLeftArea}>
+          <BreadCrumb datasetName={workspaceName} location={location} />
+          <OpenWorkspaces />
+        </Box>
+        <Box className={classes.breadCrumbRightArea}>
+          <LoadToPipeLineArea />
+        </Box>
+      </Box>
+
       <Table aria-label="simple table" className="test">
         <TableHead>
           <TableRow>

@@ -14,26 +14,21 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
+import { Box } from '@material-ui/core';
+import React from 'react';
+import { useStyles } from './styles';
+import Button from '@material-ui/core/Button';
 
-export const useStyles = makeStyles({
-  breadCombContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    height: '48px',
-    alignItems: 'center',
-    marginRight: '30px',
-    marginLeft: '34px',
-    '& .MuiBreadcrumbs-li': {
-      fontSize: '14px',
-    },
-    '& .MuiTypography-body1': {
-      fontSize: '14px',
-    },
-  },
-  breadCrumbLeftSide: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-});
+const LoadToPipeLineArea = () => {
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.breadCombContainer}>
+      <Button variant="contained" color="primary" size="medium" disableElevation>
+        Load to pipeline
+      </Button>
+    </Box>
+  );
+};
+
+export default LoadToPipeLineArea;

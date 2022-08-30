@@ -17,11 +17,11 @@
 import { Box, Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useStyles } from './styles';
 import React from 'react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
-import { MATCH_SOURCE, HOME_URL_PARAM, DATASOURCES_URL_PARAM } from './constants';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { DATASOURCES_URL_PARAM, HOME_URL_PARAM, MATCH_SOURCE } from './constants';
+import { useStyles } from './styles';
 
 const BreadCrumb = ({ datasetName, location }) => {
   const classes = useStyles();

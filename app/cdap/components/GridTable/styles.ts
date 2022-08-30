@@ -34,4 +34,18 @@ export const useStyles = makeStyles({
     width: '100%',
     zIndex: 2000,
   },
+  subHeaderWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingRight: '30px',
+  },
+  breadCrumbLeftArea: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  breadCrumbRightArea: {
+    display: 'flex',
+    alignItems: 'center',
+  },
 });
