@@ -32,6 +32,7 @@ import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import ToolBarList from './components/AaToolbar';
 
 const GridTable = () => {
   const { wid } = useParams() as any;
@@ -232,6 +233,7 @@ const GridTable = () => {
   return (
     <Box className={classes.wrapper}>
       <BreadCrumb datasetName={wid} />
+      <ToolBarList />
       <Table aria-label="simple table" className="test">
         <TableHead>
           <TableRow>
