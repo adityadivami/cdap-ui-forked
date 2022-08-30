@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
-import './index.scss';
+import { useCss } from './styles';
 import { IconButton } from '@material-ui/core';
 import {
   SVG1,
@@ -20,9 +20,10 @@ import {
 } from './images';
 
 const ToolBarList = () => {
+  const classes = useCss();
   return (
-    <Box className="iconContainer">
-      <Box className="container">
+    <Box className={classes.iconContainer}>
+      <Box className={classes.container}>
         <IconButton>{SVG1}</IconButton>
         <IconButton>{SVG2}</IconButton>
 
@@ -43,7 +44,7 @@ const ToolBarList = () => {
 
         {SVG3}
         <IconButton>{SVG13}</IconButton>
-        <input type="search" placeholder="Search for Functions" className="searchIcon" />
+        <input type="search" placeholder="Search for Functions" className={classes.searchIcon} />
       </Box>
 
       <IconButton>{SVG14}</IconButton>
