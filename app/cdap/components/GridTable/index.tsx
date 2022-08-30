@@ -32,6 +32,7 @@ import { GridKPICell } from './components/GridKPICell';
 import { GridTextCell } from './components/GridTextCell';
 import LoadToPipeLineArea from './components/LoadToPipeLine';
 import OpenWorkspaces from './components/OpenWorkspaces';
+import ToolBarList from './components/Toolbar';
 import { useStyles } from './styles';
 
 const GridTable = () => {
@@ -243,7 +244,7 @@ const GridTable = () => {
           <LoadToPipeLineArea />
         </Box>
       </Box>
-
+      <ToolBarList />
       <Table aria-label="simple table" className="test">
         <TableHead>
           <TableRow>

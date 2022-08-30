@@ -22,17 +22,16 @@ export const useStyles = makeStyles({
     justifyContent: 'space-between',
     height: '48px',
     alignItems: 'center',
-    marginLeft: '34px',
-    '& .MuiBreadcrumbs-li': {
-      fontSize: '14px',
-    },
-    '& .MuiTypography-body1': {
-      fontSize: '14px',
-    },
   },
   breadCrumbLeftSide: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  iconContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '6px',
+    marginRight: '41px',
   },
 });

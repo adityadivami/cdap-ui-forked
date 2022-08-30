@@ -14,16 +14,22 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, IconButton } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from './styles';
 import Button from '@material-ui/core/Button';
+import { DotsMenuSVG, CommentSVG, HelpSVG } from './icons';
 
 const LoadToPipeLineArea = () => {
   const classes = useStyles();
 
   return (
     <Box className={classes.breadCombContainer}>
+      <Box className={classes.iconContainer}>
+        <IconButton>{HelpSVG}</IconButton>
+        <IconButton>{CommentSVG}</IconButton>
+        <IconButton>{DotsMenuSVG}</IconButton>
+      </Box>
       <Button variant="contained" color="primary" size="medium" disableElevation>
         Load to pipeline
       </Button>

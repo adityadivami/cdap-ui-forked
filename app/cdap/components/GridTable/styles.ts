@@ -39,6 +39,7 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingRight: '30px',
+    width: '100%',
   },
   breadCrumbLeftArea: {
     display: 'flex',
