@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider } from '@material-ui/core';
 import { useDrawerCss } from '../styles';
-import { SearchIcon, Icon1, Icon2, Icon3, Icon4, CheckboxIcon } from '../iconStore';
+import { SearchIcon, Icon1, Icon2, Icon3, Icon4 } from '../iconStore';
 import { Checkbox } from '@material-ui/core';
 
 const DrawerBody = () => {
@@ -18,7 +18,7 @@ const DrawerBody = () => {
 
         <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
           <div className={classes.flexOnly}>
-            <Checkbox size="medium" color="primary" indeterminate />
+            <Checkbox size="medium" color="primary" />
             <p className={classes.weight40}> Columns(30)</p>
           </div>
           <p className={classes.weight40}> Data Quality</p>
@@ -51,7 +51,7 @@ const DrawerBody = () => {
 
         <div className={classes.flexBetweenBaseLine + ' ' + classes.containerWrapper}>
           <div className={classes.flexOnly}>
-            <Checkbox size="medium" color="primary" checked />
+            <Checkbox size="medium" color="primary" />
             <div>
               <p className={classes.weight400}> Car Model</p>
               <p className={classes.weight400}> ABC | String</p>
