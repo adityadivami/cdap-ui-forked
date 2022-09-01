@@ -13,15 +13,10 @@
  *  License for the specific language governing permissions and limitations under
  *  the License.
  */
+import React from 'react';
 
-import { makeStyles } from '@material-ui/styles';
-
-export const useStyles = makeStyles({
-  breadCombContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    height: '48px',
-    alignItems: 'center',
-    marginLeft: '34px',
-  },
-});
+export const Divider = (
+  <svg width="2" height="21" viewBox="0 0 2 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.511963 0.501953V20.502" stroke="#DADCE0" strokeLinecap="round" />
+  </svg>
+);

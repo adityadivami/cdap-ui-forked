@@ -32,6 +32,7 @@ import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import OpenWorkspaces from './components/OpenWorkspaces';
 
 const GridTable = () => {
   const { wid } = useParams() as any;
@@ -64,7 +65,6 @@ const GridTable = () => {
       .pipe(
         flatMap((res: any) => {
           const { dataprep } = DataPrepStore.getState();
-          console.log(res);
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
@@ -231,7 +231,10 @@ const GridTable = () => {
 
   return (
     <Box className={classes.wrapper}>
-      <BreadCrumb datasetName={wid} />
+      <Box className={classes.subHeader}>
+        <BreadCrumb datasetName={wid} />
+        <OpenWorkspaces />
+      </Box>
       <Table aria-label="simple table" className="test">
         <TableHead>
           <TableRow>
