@@ -24,7 +24,7 @@ export const useDrawerCss = makeStyles({
   weight40: {
     fontWeight: 400,
     fontSize: '16px',
-    color: '#5F6368',
+    color: '#000000',
     marginBottom: '5px',
   },
   weight400: {
@@ -77,9 +77,10 @@ export const useDrawerCss = makeStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  marginSide: {
+  marginn: {
     marginLeft: '15px',
-    marginRight: '15px',
+
+    marginTop: '10px',
   },
 
   textFieldht: {
