@@ -27,10 +27,16 @@ const BreadCrumb = ({ datasetName }) => {
   return (
     <Box className={classes.breadCombContainer}>
       <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-        <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
+        <Link
+          className={classes.weight400 + ' ' + classes.home}
+          to={`/ns/${getCurrentNamespace()}/home`}
+        >
           Home
         </Link>
-        <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/${`select-dataset`}`}>
+        <Link
+          className={classes.weight400 + ' ' + classes.dataset}
+          to={`/ns/${getCurrentNamespace()}/datasources/${`select-dataset`}`}
+        >
           Select Dataset
         </Link>
         <Typography color="textPrimary">{datasetName}</Typography>
