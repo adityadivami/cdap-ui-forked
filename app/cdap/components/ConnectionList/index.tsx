@@ -105,8 +105,7 @@ export default function ConnectionList() {
   };
 
   const setDataForTabsHelper = (res, index) => {
-    console.log(res, index);
-    setDataForTabs((prev): any => {
+    setDataForTabs((prev) => {
       const tempData = [...prev];
       tempData.push({
         data: [],
