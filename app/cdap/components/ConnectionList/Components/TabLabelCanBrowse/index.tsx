@@ -77,7 +77,7 @@ export default function TabLabelCanBrowse({
       <Box className={classes.labelsContainer}>
         {icon && <Box>{icon}</Box>}
         <Typography variant="body1" className={classes.labelStyles} ref={myLabelRef}>
-          {label}
+        {label}
         </Typography>
         {count && (
           <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
