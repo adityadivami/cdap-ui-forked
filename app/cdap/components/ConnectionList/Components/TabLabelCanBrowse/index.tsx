@@ -50,7 +50,7 @@ export default function TabLabelCanBrowse({
     setRefValue(myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth);
   }, []);
 
-  console.log(refValue, "my ref canBrowse");
+
 
   return refValue ? (
     <CustomTooltip title={label} arrow key={`tooltip-${index}`}>
