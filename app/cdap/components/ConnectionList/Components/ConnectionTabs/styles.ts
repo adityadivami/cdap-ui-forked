@@ -68,6 +68,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '16px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   },
   labelsContainerCanSample: {
     width: '100%',
