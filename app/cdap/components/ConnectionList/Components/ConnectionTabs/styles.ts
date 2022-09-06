@@ -30,6 +30,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
     zIndex: 2,
   },
+
   indicator: {
     color: '#fff',
   },
