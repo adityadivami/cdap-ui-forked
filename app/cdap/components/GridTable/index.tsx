@@ -14,11 +14,16 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow, Button } from '@material-ui/core';
+import { Button, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
+import AddTransformation from 'components/AddTransformation';
+import ColumnView from 'components/ColumnView';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import ParsingDrawer from 'components/ParsingDrawer';
+import LoadingSVG from 'components/shared/LoadingSVG';
 import { default as React, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { objectQuery } from 'services/helpers';
@@ -26,11 +31,7 @@ import BreadCrumb from './components/Breadcrumb';
 import { GridHeaderCell } from './components/GridHeaderCell';
 import { GridKPICell } from './components/GridKPICell';
 import { GridTextCell } from './components/GridTextCell';
-import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
-import ParsingDrawer from 'components/ParsingDrawer';
-import AddTransformation from 'components/AddTransformation';
-import LoadingSVG from 'components/shared/LoadingSVG';
 
 const GridTable = () => {
   const { wid } = useParams() as any;
@@ -42,6 +43,7 @@ const GridTable = () => {
   const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
   const [openTranformationPanel, setOpenTransformationPanel] = useState(false);
+  const [openColumnView, setOpenColumnView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
@@ -203,6 +205,8 @@ const GridTable = () => {
 
   const getGridTableData = async () => {
     const rawData: any = gridData;
+
+    console.log(rawData, 'raw data');
     const headersData = createHeadersData(rawData.headers, rawData.headers, rawData.types);
     setHeadersNamesList(headersData);
     if (rawData && rawData.summary && rawData.summary.statistics) {
@@ -225,10 +229,17 @@ const GridTable = () => {
     getGridTableData();
   }, [gridData]);
 
+  const closeClickHandler = () => {
+    setOpenColumnView(false);
+  };
+
+  console.log(headersNamesList, 'headers names list');
+
   return (
     <Box className={classes.wrapper}>
       <BreadCrumb datasetName={wid} />
       <Button onClick={() => setOpenTransformationPanel(true)}>Open Panel</Button>
+      <Button onClick={() => setOpenColumnView(true)}>Column View</Button>
       {connectorType === 'File' && <ParsingDrawer />}
       {openTranformationPanel && (
         <AddTransformation
@@ -236,52 +247,64 @@ const GridTable = () => {
           columnData={headersNamesList}
           callBack={(response) => {
             setGridData(response);
-            setOpenTransformationPanel(false);
+            setOpenColumnView(false);
           }}
         />
       )}
-      <Table aria-label="simple table" className="test">
-        <TableHead>
-          <TableRow>
-            {Array.isArray(headersNamesList) &&
-              headersNamesList.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader.label}
-                  types={eachHeader.type}
-                  key={eachHeader.name}
-                />
-              ))}
-          </TableRow>
-          <TableRow>
-            {Array.isArray(missingDataList) &&
-              Array.isArray(headersNamesList) &&
-              headersNamesList.map((each, index) => {
-                return missingDataList.map((item, itemIndex) => {
-                  if (item.name == each.name) {
-                    return <GridKPICell metricData={item} key={item.name} />;
-                  }
-                });
+      <Box className={classes.columnViewContainer}>
+        {openColumnView && (
+          <Box className={classes.columnViewDrawer}>
+            <ColumnView
+              setLoading={setLoading}
+              columnData={headersNamesList}
+              closeClickHandler={closeClickHandler}
+            />
+          </Box>
+        )}
+        <Table aria-label="simple table" className={classes.gridTableConatainer}>
+          <TableHead>
+            <TableRow>
+              {Array.isArray(headersNamesList) &&
+                headersNamesList.map((eachHeader) => (
+                  <GridHeaderCell
+                    label={eachHeader.label}
+                    types={eachHeader.type}
+                    key={eachHeader.name}
+                  />
+                ))}
+            </TableRow>
+            <TableRow>
+              {Array.isArray(missingDataList) &&
+                Array.isArray(headersNamesList) &&
+                headersNamesList.map((each, index) => {
+                  return missingDataList.map((item, itemIndex) => {
+                    if (item.name == each.name) {
+                      return <GridKPICell metricData={item} key={item.name} />;
+                    }
+                  });
+                })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {Array.isArray(rowsDataList) &&
+              rowsDataList.map((eachRow, rowIndex) => {
+                return (
+                  <TableRow key={`row-${rowIndex}`}>
+                    {headersNamesList.map((eachKey, eachIndex) => {
+                      return (
+                        <GridTextCell
+                          cellValue={eachRow[eachKey.name] || '--'}
+                          key={`${eachKey.name}-${eachIndex}`}
+                        />
+                      );
+                    })}
+                  </TableRow>
+                );
               })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {Array.isArray(rowsDataList) &&
-            rowsDataList.map((eachRow, rowIndex) => {
-              return (
-                <TableRow key={`row-${rowIndex}`}>
-                  {headersNamesList.map((eachKey, eachIndex) => {
-                    return (
-                      <GridTextCell
-                        cellValue={eachRow[eachKey.name] || '--'}
-                        key={`${eachKey.name}-${eachIndex}`}
-                      />
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      </Box>
+
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
