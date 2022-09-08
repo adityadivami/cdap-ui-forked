@@ -25,6 +25,35 @@
 	font-style: normal;
 }
 
+@font-face {
+  font-family: 'Noto Sans';
+  src:url('/cdap_assets/notosans/NotoSans-Black.ttf');
+
+  src:url("/cdap_assets/notosans/NotoSans-Black.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-BlackItalic.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-Bold.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-BoldItalic.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-ExtraBold.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-ExtraBoldItalic.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-ExtraLight.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-ExtraLightItalic.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-Italic.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-Light.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-LightItalic.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-Medium.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-Regular.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-SemiBold.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-SemiBoldItalic.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-Thin.ttf") format('truetype'),
+  url("/cdap_assets/notosans/NotoSans-ThinItalic.ttf") format('truetype');
+  
+      
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 [class^="icon-"], [class*=" icon-"] {
 	font-family: 'icomoon';
 	speak: none;
