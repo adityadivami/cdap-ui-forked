@@ -33,7 +33,10 @@ const ColumnInsights = (props) => {
         characterCount={`${columnDetail?.characterCount?.min}-${columnDetail?.characterCount?.max}`}
         dataTypeString={columnDetail?.dataTypeString || 'Contains Letter'}
       />
-      <ColumnDataQuality dataQuality={columnDetail?.dataQuality} />
+      <ColumnDataQuality
+        dataQuality={columnDetail?.dataQuality}
+        columnInfo={columnDetail?.dataQualityBar}
+      />
       <ColumnDataDistribution />
     </DrawerWidget>
   );

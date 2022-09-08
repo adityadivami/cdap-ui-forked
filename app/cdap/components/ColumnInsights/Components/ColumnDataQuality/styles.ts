@@ -17,5 +17,21 @@ export const useStyles = makeStyles(() => {
       marginTop: '5px',
     },
     columnDataQualityValuesButtons: {},
+    qualityBar: {},
+    filled: {
+      backgroundColor: '#4BAF4F',
+      display: 'inline-block',
+      height: '5px',
+      border: '1px solid #4BAF4F',
+      borderRadius: '10px',
+    },
+
+    empty: {
+      backgroundColor: '#E53935',
+      display: 'inline-block',
+      height: '5px',
+      border: '1px solid #E53935',
+      borderRadius: '10px',
+    },
   };
 });
