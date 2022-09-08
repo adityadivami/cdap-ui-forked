@@ -7,15 +7,7 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 
 const ColumnViewWidget = (props) => {
   const classes = useStyles();
-  const {
-    headingText,
-    openDrawer,
-    showDivider,
-    headerActionTemplate,
-    children,
-    closeClickHandler,
-    showBackIcon,
-  } = props;
+  const { headingText, children, closeClickHandler, showBackIcon } = props;
 
   return (
     <Box className={classes.drawerContainerStyles} role="presentation">

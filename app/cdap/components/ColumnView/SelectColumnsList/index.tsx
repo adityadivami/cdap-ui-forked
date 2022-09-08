@@ -10,6 +10,7 @@ import {
 import React, { useState } from 'react';
 import { COLUMNS, NULL_VALUES } from '../constants';
 import { useStyles } from '../styles';
+import { HoverDots, PlaceHolderIcon } from './icons';
 
 const SelectColumnsList = (props) => {
   const { columnData } = props;
@@ -20,26 +21,31 @@ const SelectColumnsList = (props) => {
     <section className={classes.columnsCountTextStyles}>
       <TableContainer component={Box} classes={{ root: classes.customTableContainer }}>
         <Table aria-label="recipe steps table" stickyHeader>
-          <TableHead>
+          <TableHead className={classes.tableHead}>
             <TableRow className={classes.recipeStepsTableRowStyles}>
-              <TableCell className={classes.recipeStepsTableHeadStyles}>
+              <TableCell className={classes.columnLeft}>
                 {`${COLUMNS} (${columns.length})`}
               </TableCell>
-              <TableCell className={classes.recipeStepsTableHeadStyles}>{NULL_VALUES}</TableCell>
-              <TableCell />
+              <TableCell className={classes.columnRight}>{NULL_VALUES}</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className={classes.tableBody}>
             {columns.map((eachColumn, index) => (
-              <TableRow key={index}>
-                <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
-                  <span className={classes.recipeStepsActionTypeStyles}>{eachColumn.label}</span>
-                  &nbsp;
-                  <br />
-                  {eachColumn.type}
-                </TableCell>
-                <TableCell>{`100%`}</TableCell>
-              </TableRow>
+              <>
+                <TableRow key={index} className={classes.tableRowContainer}>
+                  <TableCell className={classes.leftSideCell}>
+                    <Box>
+                      {eachColumn.label}
+                      &nbsp;
+                      <br />
+                      {eachColumn.type}
+                    </Box>
+                  </TableCell>
+                  <TableCell className={classes.nullValuesContainer}>
+                    <Box>{PlaceHolderIcon}</Box>
+                  </TableCell>
+                </TableRow>
+              </>
             ))}
           </TableBody>
         </Table>

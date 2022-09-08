@@ -5,6 +5,29 @@ export const useStyles = makeStyles(() => {
     tableNamesList: {
       border: '2px solid red',
     },
+    tableHead: {
+      marginTop: '40px',
+    },
+    tableBody: {
+      '& .MuiTableCell-root': {
+        color: '#5F6368',
+        fontSize: '14px',
+      },
+    },
+    tableRowContainer: {
+      '& .MuiTableCell-root': {
+        paddingTop: '10px',
+        paddingBottom: '10px',
+      },
+      '&:hover': {
+        boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+      },
+    },
+    headerNamesSeparator: {
+      width: '250px',
+      border: '1px solid red',
+      height: '1px',
+    },
     addTransformationBodyStyles: {
       height: 'calc(100% - 100px)',
       display: 'flex',
@@ -13,6 +36,7 @@ export const useStyles = makeStyles(() => {
     },
     customTableContainer: {
       overflowX: 'initial',
+      padding: 0,
     },
     columnsCountTextStyles: {
       width: '100%',
@@ -40,68 +64,32 @@ export const useStyles = makeStyles(() => {
     functionHeadingTextStyles: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
-      fontWeight: 600,
+      fontWeight: 400,
       fontSize: '16px',
       lineHeight: '150%',
       letterSpacing: '0.15px',
-      color: '#5F6368',
+      color: '#212121',
     },
-    functionInfoSectionStyles: {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    functionTextStyles: {
+    columnLeft: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: '16px',
       lineHeight: '150%',
       letterSpacing: '0.15px',
-      color: '#5F6368',
+      paddingLeft: '30px',
     },
-    infoIconTextStyles: {
-      marginLeft: '5px',
-      width: '20px',
-      height: '20px',
-    },
-    greenCheckIconStyles: {
-      width: '20px',
-      height: '20px',
-    },
-    quickSelectTextStyles: {
+    columnRight: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '14px',
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#5F6368',
-      marginTop: '10px',
-    },
-    selectButtonStyles: {
-      fontFamily: 'Noto Sans',
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: '15px',
-      lineHeight: '26px',
-      letterSpacing: '0.46px',
-      color: '#4681F4;',
-      textTransform: 'none',
-      marginTop: '15px',
-    },
-
-    selectColumnsHeaderStyles: {
-      display: 'flex',
-      justifyContent: 'space-between',
-    },
-    recipeStepsTableHeadStyles: {
-      fontFamily: 'Noto Sans',
-      fontStyle: 'normal',
-      fontWeight: 600,
       fontSize: '16px',
       lineHeight: '150%',
       letterSpacing: '0.15px',
-      color: '#5F6368',
+      paddingLeft: '0px',
+      // '& .MuiTableCell-root': {
+      //   padding: '10px 0px 10px 0px',
+      // },
     },
     recipeStepsTableRowStyles: {
       fontFamily: 'Noto Sans',
@@ -110,21 +98,10 @@ export const useStyles = makeStyles(() => {
       fontSize: '16px',
       lineHeight: '150%',
       letterSpacing: '0.15px',
-      color: '#5F6368',
     },
-    recipeStepsTableBodyRowStyles: {
-      '&:hover': {
-        background: '#EFF0F2',
-        '& td:last-child': {
-          visibility: 'visible',
-        },
-      },
-    },
-    recipeStepsActionTypeStyles: {
-      fontWeight: 600,
-    },
-    displayNone: {
-      visibility: 'hidden',
+    nullValuesContainer: {
+      width: '134px',
+      paddingLeft: '0px',
     },
     recipeStepsDeleteStyles: {
       width: '18px',
@@ -150,6 +127,12 @@ export const useStyles = makeStyles(() => {
       fontWeight: 400,
       fontSize: '12px',
       color: '#5F6368',
+    },
+    leftSideCell: {
+      paddingLeft: '30px',
+      '& .MuiTableCell-root': {
+        padding: '10px 0px 10px 30px',
+      },
     },
   };
 });
