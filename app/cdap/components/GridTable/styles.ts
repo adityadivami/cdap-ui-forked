@@ -21,6 +21,8 @@ export const useStyles = makeStyles({
     '& *': {
       fontFamily: "'Noto Sans', sans-serif",
     },
+    height: 'calc(100vh - 14px)',
+    overflow: 'scroll',
   },
   loadingContainer: {
     display: 'flex',
@@ -33,5 +35,15 @@ export const useStyles = makeStyles({
     top: 0,
     width: '100%',
     zIndex: 2000,
+  },
+  columnViewContainer: {
+    display: 'flex',
+    // overflow: 'scroll',
+  },
+  columnViewDrawer: {
+    height: '100%',
+  },
+  gridTableConatainer: {
+    // overflow: 'scroll',
   },
 });
