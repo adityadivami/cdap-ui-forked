@@ -24,7 +24,11 @@ const StringIndicatorBox = styled(Box)({
   display: 'flex',
 });
 
-export const GridHeaderCell: React.FC<IGridHeaderCellProps> = ({ label, types }) => {
+export const GridHeaderCell: React.FC<IGridHeaderCellProps> = ({
+  label,
+  types,
+  onColumnSelection,
+}) => {
   const classes = useGridHeaderCellStyles();
 
   const [data, setData] = React.useState<Record<string, string>>({
@@ -33,7 +37,7 @@ export const GridHeaderCell: React.FC<IGridHeaderCellProps> = ({ label, types })
   });
 
   return (
-    <TableCell className={classes.tableHeaderCell}>
+    <TableCell className={classes.tableHeaderCell} onClick={() => onColumnSelection(label)}>
       <Card className={classes.root} variant="outlined">
         <Typography className={classes.columnHeader}>{label}</Typography>
         <StringIndicatorBox>
