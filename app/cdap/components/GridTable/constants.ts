@@ -14,10 +14,10 @@
  * the License.
  */
 
-import React, { SetStateAction } from 'react';
-
-export interface IGridHeaderCellProps {
-  label: string;
-  types: string[];
-  onColumnSelection: (value: string) => void;
-}
+export const CONTAIN_LETTER_NUMBER_LEADING_TRAILING_SPACES = 'Contains letters, numbers, leading and trailing spaces';
+export const CONTAIN_LETTER_NUMBER = 'Contains Letter and Number';
+export const CONTAIN_LETTER_LEADING_TRAILING = 'Contains Letter, leading and trailing spaces';
+export const CONTAIN_LETTER_LEADING = 'Contains Letter and leading spaces';
+export const CONTAIN_LETTER_TRAILING = 'Contains Letter and trailing spaces';
+export const CONTAIN_LETTER_ONLY = 'Contains Letter';
+export const CONTAIN_NUMBER_ONLY = 'Contains Number';

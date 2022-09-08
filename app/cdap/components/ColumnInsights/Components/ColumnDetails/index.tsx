@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useStyles } from './styles';
 
 const ColumnDetails = (props) => {
-  const { columnName, characterCount, distinctValues } = props;
+  const { columnName, characterCount, distinctValues, dataTypeString } = props;
 
   const [dataTypeValue, setDataTypeValue] = useState();
 
@@ -33,9 +33,7 @@ const ColumnDetails = (props) => {
           <div className={classes.dividerLineStyles} />
           <div className={classes.columnInsightsDetailsCount}>Distinct {distinctValues}</div>
         </div>
-        <div className={classes.columnInsightsDetailsCountDescription}>
-          Contains letters, numbers, leading and trailing spaces
-        </div>
+        <div className={classes.columnInsightsDetailsCountDescription}>{dataTypeString}</div>
       </section>
     </section>
   );

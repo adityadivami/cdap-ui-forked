@@ -15,8 +15,6 @@ export const useStyles = makeStyles(() => {
       color: '#212121',
       marginTop: '5px',
     },
-    columnDataQualityValuesButtons: {
-        
-    }
+    columnDataQualityValuesButtons: {},
   };
 });

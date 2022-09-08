@@ -1,15 +1,22 @@
 import DrawerWidget from 'components/DrawerWidget';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ColumnDataDistribution from './Components/ColumnDataDistribution';
 import ColumnDataQuality from './Components/ColumnDataQuality';
 import ColumnDetails from './Components/ColumnDetails';
 import { COLUMN_INSIGHTS } from './constants';
 
-const ColumnInsights = () => {
+const ColumnInsights = (props) => {
+  const { columnData } = props;
   const [drawerStatus, setDrawerStatus] = useState(true);
+  const [columnDetail, setColumnDetail] = useState(columnData);
+
+  useEffect(() => {
+    setColumnDetail(columnData);
+  }, [columnData]);
 
   const closeClickHandler = () => {
     setDrawerStatus(false);
+    props.onClose();
   };
 
   return (
@@ -20,8 +27,13 @@ const ColumnInsights = () => {
       headerActionTemplate={undefined}
       closeClickHandler={closeClickHandler}
     >
-      <ColumnDetails columnName="Region" distinctValues="48" characterCount="4-8" />
-      <ColumnDataQuality />
+      <ColumnDetails
+        columnName={columnDetail?.columnName}
+        distinctValues={columnDetail?.distinctValues}
+        characterCount={`${columnDetail?.characterCount?.min}-${columnDetail?.characterCount?.max}`}
+        dataTypeString={columnDetail?.dataTypeString || 'Contains Letter'}
+      />
+      <ColumnDataQuality dataQuality={columnDetail?.dataQuality} />
       <ColumnDataDistribution />
     </DrawerWidget>
   );

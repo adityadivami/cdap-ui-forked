@@ -29,6 +29,13 @@ import { GridTextCell } from './components/GridTextCell';
 import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
 import ParsingDrawer from 'components/ParsingDrawer';
+import ColumnInsightDrawer from 'components/ColumnInsights';
+import {
+  calculateDistinctValues,
+  characterCount,
+  convertNonNullPercent,
+  checkAlphaNumericAndSpaces,
+} from './utils';
 
 const GridTable = () => {
   const { wid } = useParams() as any;
@@ -39,6 +46,22 @@ const GridTable = () => {
   const [rowsDataList, setRowsDataList] = React.useState([]);
   const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
+  const [insightDrawer, setInsightDrawer] = useState({
+    open: false,
+    columnName: '',
+    distinctValues: 0,
+    characterCount: {
+      min: 0,
+      max: 0,
+    },
+    dataQuality: {
+      missingNullValueCount: 0,
+      missingNullValuePercentage: 0,
+      invalidValueCount: 0,
+      invalidValuePercentage: 0,
+    },
+    dataTypeString: '',
+  });
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -117,21 +140,6 @@ const GridTable = () => {
     }
   };
 
-  const convertNonNullPercent = (key, nonNullValue) => {
-    const lengthOfData = gridData.values.length;
-    let count = 0;
-    let nonNull: any = 0;
-    let empty: any = 0;
-    let nullValue: any = 0;
-    if (lengthOfData) {
-      nonNull = nonNullValue['non-null'] ? (nonNullValue['non-null'] / 100) * lengthOfData : 0;
-      nullValue = nonNullValue.null ? (nonNullValue.null / 100) * lengthOfData : 0;
-      empty = nonNullValue.empty ? (nonNullValue.empty / 100) * lengthOfData : 0;
-      count = parseInt(nullValue + empty);
-    }
-    return count;
-  };
-
   const checkFrequentlyOccuredValues = (key) => {
     const valueOfKey = gridData.values.map((el) => el[key]);
     let mostfrequentItem = 1;
@@ -168,7 +176,7 @@ const GridTable = () => {
       valueToArray.forEach(([vKey, vValue]) => {
         tempArray.push({
           label:
-            vKey == 'general' && convertNonNullPercent(key, vValue) == 0
+            vKey == 'general' && convertNonNullPercent(gridData, key, vValue) == 0
               ? checkFrequentlyOccuredValues(key).name
               : vKey == 'general'
               ? 'Missing/Null'
@@ -178,9 +186,9 @@ const GridTable = () => {
           count:
             vKey == 'types'
               ? ''
-              : convertNonNullPercent(key, vValue) == 0
+              : convertNonNullPercent(gridData, key, vValue) == 0
               ? checkFrequentlyOccuredValues(key).count
-              : convertNonNullPercent(key, vValue),
+              : convertNonNullPercent(gridData, key, vValue),
         });
       }),
         metricArray.push({
@@ -211,6 +219,31 @@ const GridTable = () => {
     setRowsDataList(rowData);
   };
 
+  const onColumnSelection = (columnName) => {
+    const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
+    const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
+    const getMissingValueCount =
+      convertNonNullPercent(
+        gridData,
+        columnName,
+        gridData?.summary?.statistics[columnName].general
+      ) || 0;
+    const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
+    setInsightDrawer({
+      open: true,
+      columnName,
+      distinctValues: getDistinctValue,
+      characterCount: getCharacterCountOfCell,
+      dataQuality: {
+        missingNullValueCount: getMissingValueCount,
+        missingNullValuePercentage: (getMissingValueCount / rowsDataList.length) * 100,
+        invalidValueCount: 0,
+        invalidValuePercentage: 0,
+      },
+      dataTypeString: getDataTypeString,
+    });
+  };
+
   useEffect(() => {
     getGridTableData();
   }, [gridData]);
@@ -219,6 +252,26 @@ const GridTable = () => {
     <Box className={classes.wrapper}>
       <BreadCrumb datasetName={wid} />
       <ParsingDrawer />
+      {insightDrawer.open && (
+        <ColumnInsightDrawer
+          columnData={insightDrawer}
+          onClose={() =>
+            setInsightDrawer({
+              open: false,
+              columnName: '',
+              distinctValues: 0,
+              characterCount: { min: 0, max: 0 },
+              dataQuality: {
+                missingNullValueCount: 0,
+                missingNullValuePercentage: 0,
+                invalidValueCount: 0,
+                invalidValuePercentage: 0,
+              },
+              dataTypeString: '',
+            })
+          }
+        />
+      )}
       <Table aria-label="simple table" className="test">
         <TableHead>
           <TableRow>
@@ -228,6 +281,7 @@ const GridTable = () => {
                   label={eachHeader.label}
                   types={eachHeader.type}
                   key={eachHeader.name}
+                  onColumnSelection={(column) => onColumnSelection(column)}
                 />
               ))}
           </TableRow>
