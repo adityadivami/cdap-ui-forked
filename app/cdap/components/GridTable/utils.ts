@@ -26,17 +26,13 @@ import {
 
 export const convertNonNullPercent = (gridData, key, nonNullValue) => {
   const lengthOfData: number = gridData?.values.length;
-  let count: number = 0;
-  let nonNullCount: number = 0;
-  let emptyCount: number = 0;
   let nullValueCount: number = 0;
   if (lengthOfData) {
-    nonNullCount = nonNullValue['non-null'] ? (nonNullValue['non-null'] / 100) * lengthOfData : 0;
-    nullValueCount = nonNullValue.null ? (nonNullValue.null / 100) * lengthOfData : 0;
-    emptyCount = nonNullValue.empty ? (nonNullValue.empty / 100) * lengthOfData : 0;
-    count = parseInt(nullValueCount.toFixed(0) + emptyCount.toFixed(0));
+    nullValueCount = nonNullValue.null
+      ? (((nonNullValue.null || 0) + (nonNullValue.empty || 0)) / 100) * lengthOfData
+      : 0;
   }
-  return count;
+  return nullValueCount;
 };
 
 export const calculateDistinctValues = (values, columnName) => {
@@ -58,22 +54,26 @@ export const characterCount = (values, columnName) => {
   let minCount = 0;
   let maxCount = 0;
   const minElement = arrayOfColumn.reduce((a, b) => {
-    minCount = Math.min(a.length, b.length);
-    if (a.length == minCount) {
-      return a;
-    } else {
-      return b;
+    if (a || b) {
+      minCount = Math.min(a.length, b.length);
+      if (a.length == minCount) {
+        return a;
+      } else {
+        return b;
+      }
     }
   });
   const maxElement = arrayOfColumn.reduce((a, b) => {
-    maxCount = Math.max(a.length, b.length);
-    if (a.length == maxCount) {
-      return a;
-    } else {
-      return b;
+    if (a || b) {
+      maxCount = Math.max(a.length, b.length);
+      if (a.length == maxCount) {
+        return a;
+      } else {
+        return b;
+      }
     }
   });
-  return { min: minElement.length, max: maxElement.length };
+  return { min: minElement?.length || 0, max: maxElement?.length || 0 };
 };
 
 export const checkAlphaNumericAndSpaces = (values, columnName) => {

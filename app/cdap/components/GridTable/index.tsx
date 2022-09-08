@@ -60,6 +60,7 @@ const GridTable = () => {
       invalidValueCount: 0,
       invalidValuePercentage: 0,
     },
+    dataQualityBar: {},
     dataTypeString: '',
   });
   const [invalidCountArray, setInvalidCountArray] = useState([
@@ -240,6 +241,7 @@ const GridTable = () => {
         invalidValueCount: 0,
         invalidValuePercentage: 0,
       },
+      dataQualityBar: gridData?.summary?.statistics[columnName],
       dataTypeString: getDataTypeString,
     });
   };
@@ -267,6 +269,7 @@ const GridTable = () => {
                 invalidValueCount: 0,
                 invalidValuePercentage: 0,
               },
+              dataQualityBar: {},
               dataTypeString: '',
             })
           }
