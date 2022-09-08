@@ -257,6 +257,7 @@ const GridTable = () => {
             <ColumnView
               setLoading={setLoading}
               columnData={headersNamesList}
+              dataQuality={DataQuality}
               closeClickHandler={closeClickHandler}
             />
           </Box>

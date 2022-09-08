@@ -7,15 +7,23 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { COLUMNS, NULL_VALUES } from '../constants';
 import { useStyles } from '../styles';
+import { prepareDataQualtiy } from './CircularProgressBar/utils';
 import { HoverDots, PlaceHolderIcon } from './icons';
+import DataQualityProgress from './CircularProgressBar';
 
 const SelectColumnsList = (props) => {
   const { columnData } = props;
   const [columns, setColumns] = useState(columnData);
   const classes = useStyles();
+  const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
+
+  useEffect(() => {
+    const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
+    setDataQualityValue(getPreparedDataQuality);
+  }, []);
 
   return (
     <section className={classes.columnsCountTextStyles}>
@@ -42,7 +50,9 @@ const SelectColumnsList = (props) => {
                     </Box>
                   </TableCell>
                   <TableCell className={classes.nullValuesContainer}>
-                    <Box>{PlaceHolderIcon}</Box>
+                    {dataQualityValue?.length && (
+                      <DataQualityProgress value={dataQualityValue[index]?.value} />
+                    )}
                   </TableCell>
                 </TableRow>
               </>
