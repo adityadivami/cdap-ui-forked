@@ -50,8 +50,6 @@ export default function TabLabelCanBrowse({
     setRefValue(myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth);
   }, []);
 
-
-
   return refValue ? (
     <CustomTooltip title={label} arrow key={`tooltip-${index}`}>
       <Box className={classes.labelContainerBox}>
@@ -79,7 +77,7 @@ export default function TabLabelCanBrowse({
       <Box className={classes.labelsContainer}>
         {icon && <Box>{icon}</Box>}
         <Typography variant="body1" className={classes.labelStyles} ref={myLabelRef}>
-        {label}
+          {label}
         </Typography>
         {count && (
           <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
