@@ -23,7 +23,9 @@ export const useStyles = makeStyles(() => {
       display: 'inline-block',
       height: '5px',
       border: '1px solid #4BAF4F',
-      borderRadius: '10px',
+      borderRadius: 10,
+      // borderTopLeftRadius: 10,
+      // borderBottomLeftRadius: 10,
     },
 
     empty: {
@@ -31,7 +33,9 @@ export const useStyles = makeStyles(() => {
       display: 'inline-block',
       height: '5px',
       border: '1px solid #E53935',
-      borderRadius: '10px',
+      // borderTopRightRadius: 10,
+      // borderBottomRightRadius: 10,
+      borderRadius: 10,
     },
   };
 });
