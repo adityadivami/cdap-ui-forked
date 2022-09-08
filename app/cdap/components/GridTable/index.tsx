@@ -31,10 +31,11 @@ import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 
 export default function GridTable() {
-  const { wid } = useParams() as any;
-  const params = useParams() as any;
+  const { wid } = useParams() as IRecords;
+  const params = useParams() as IRecords;
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
@@ -61,7 +62,7 @@ export default function GridTable() {
     });
     MyDataPrepApi.getWorkspace(params)
       .pipe(
-        flatMap((res: any) => {
+        flatMap((res: IValues) => {
           const { dataprep } = DataPrepStore.getState();
           if (dataprep.workspaceId !== workspaceId) {
             return;
@@ -147,9 +148,9 @@ export default function GridTable() {
   // ------------@checkFrequentlyOccuredValues Function is used for checking which value appears maximum time in a column if that column doesn't have missing/null value
   const checkFrequentlyOccuredValues = (key) => {
     const valueOfKey = gridData.values.map((el) => el[key]);
-    let mostfrequentItem: number = 1;
+    let mostFrequentItem: number = 1;
     let mostFrequentItemCount: number = 0;
-    let mostfrequentItemValue: string = '';
+    let mostFrequentItemValue: string = '';
     const mostFrequentDataItem = {
       name: '',
       count: 0,
@@ -160,16 +161,16 @@ export default function GridTable() {
           if (item == value) {
             mostFrequentItemCount++;
           }
-          if (mostfrequentItem < mostFrequentItemCount) {
-            mostfrequentItem = mostFrequentItemCount;
-            mostfrequentItemValue = item;
+          if (mostFrequentItem < mostFrequentItemCount) {
+            mostFrequentItem = mostFrequentItemCount;
+            mostFrequentItemValue = item;
           }
         });
         mostFrequentItemCount = 0;
-        mostfrequentItemValue = mostfrequentItemValue == '' ? item : mostfrequentItemValue;
+        mostFrequentItemValue = mostFrequentItemValue == '' ? item : mostFrequentItemValue;
       });
     }
-    mostFrequentDataItem.name = mostfrequentItemValue;
+    mostFrequentDataItem.name = mostFrequentItemValue;
     mostFrequentDataItem.count = mostFrequentItemCount;
     return mostFrequentDataItem;
   };
