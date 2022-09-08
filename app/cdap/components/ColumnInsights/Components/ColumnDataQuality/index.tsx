@@ -18,7 +18,10 @@ const ColumnDataQuality = ({ dataQuality, columnInfo }) => {
         <Typography
           component="span"
           className={classes.empty}
-          style={{ width: `${100 - filled}%` }}
+          style={{
+            width: `${100 - filled}%`,
+            border: `${100 - filled === 0 ? 'none' : '1px solid #E53935'}`,
+          }}
         />
       </Box>
       <section>
