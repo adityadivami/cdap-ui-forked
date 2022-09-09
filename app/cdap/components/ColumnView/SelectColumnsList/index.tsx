@@ -9,14 +9,13 @@ import {
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { COLUMNS, NULL_VALUES } from '../constants';
-import { useStyles } from '../styles';
+import { useStyles } from './styles';
 import { prepareDataQualtiy } from './CircularProgressBar/utils';
-import { HoverDots, PlaceHolderIcon } from './icons';
 import DataQualityProgress from './CircularProgressBar';
 
 const SelectColumnsList = (props) => {
-  const { columnData } = props;
-  const [columns, setColumns] = useState(columnData);
+  const { columnData, dataQuality, searchTerm } = props;
+  const [filteredColumns, setFilteredColumns] = useState(columnData);
   const classes = useStyles();
   const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
 
@@ -25,6 +24,21 @@ const SelectColumnsList = (props) => {
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
+  useEffect(() => {
+    if (searchTerm) {
+      const columnValue = columnData.filter((el) =>
+        el?.label.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      if (columnValue.length) {
+        setFilteredColumns(columnValue);
+      } else {
+        setFilteredColumns([]);
+      }
+    } else {
+      setFilteredColumns(columnData);
+    }
+  }, [searchTerm]);
+
   return (
     <section className={classes.columnsCountTextStyles}>
       <TableContainer component={Box} classes={{ root: classes.customTableContainer }}>
@@ -32,13 +46,13 @@ const SelectColumnsList = (props) => {
           <TableHead className={classes.tableHead}>
             <TableRow className={classes.recipeStepsTableRowStyles}>
               <TableCell className={classes.columnLeft}>
-                {`${COLUMNS} (${columns.length})`}
+                {`${COLUMNS} (${columnData.length})`}
               </TableCell>
               <TableCell className={classes.columnRight}>{NULL_VALUES}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody className={classes.tableBody}>
-            {columns.map((eachColumn, index) => (
+            {filteredColumns.map((eachColumn, index) => (
               <>
                 <TableRow key={index} className={classes.tableRowContainer}>
                   <TableCell className={classes.leftSideCell}>

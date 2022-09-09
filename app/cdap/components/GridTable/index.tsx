@@ -38,6 +38,7 @@ const GridTable = () => {
   const params = useParams() as any;
   const classes = useStyles();
 
+  const [dataQuality, setDataQuality] = useState({});
   const [headersNamesList, setHeadersNamesList] = React.useState([]);
   const [rowsDataList, setRowsDataList] = React.useState([]);
   const [gridData, setGridData] = useState<any>({});
@@ -206,12 +207,12 @@ const GridTable = () => {
   const getGridTableData = async () => {
     const rawData: any = gridData;
 
-    console.log(rawData, 'raw data');
     const headersData = createHeadersData(rawData.headers, rawData.headers, rawData.types);
     setHeadersNamesList(headersData);
     if (rawData && rawData.summary && rawData.summary.statistics) {
       const missingData = createMissingData(gridData.summary.statistics);
       setMissingDataList(missingData);
+      setDataQuality(gridData.summary.statistics);
     }
     const rowData =
       rawData &&
@@ -232,8 +233,6 @@ const GridTable = () => {
   const closeClickHandler = () => {
     setOpenColumnView(false);
   };
-
-  console.log(headersNamesList, 'headers names list');
 
   return (
     <Box className={classes.wrapper}>
@@ -257,7 +256,7 @@ const GridTable = () => {
             <ColumnView
               setLoading={setLoading}
               columnData={headersNamesList}
-              dataQuality={DataQuality}
+              dataQuality={dataQuality}
               closeClickHandler={closeClickHandler}
             />
           </Box>
