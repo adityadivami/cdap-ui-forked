@@ -35,6 +35,7 @@ import ToolBarList from './components/AaToolbar';
 import { getDirective } from './directives';
 import ParsingDrawer from 'components/ParsingDrawer';
 import AddTransformation from 'components/AddTransformation';
+import Snackbar from 'components/SnackbarComponent';
 
 export default function GridTable() {
   const { wid } = useParams() as any;
@@ -47,6 +48,7 @@ export default function GridTable() {
   const [missingDataList, setMissingDataList] = useState([]);
   const [dataQuality, setDataQuality] = useState({});
   const [optionSelected, setOptionSelected] = useState(null);
+  const [toast, setToast] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -291,6 +293,7 @@ export default function GridTable() {
         setColumnSelected('');
       },
       (err) => {
+        setToast(true);
         setLoading(false);
       }
     );
@@ -369,6 +372,7 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
+      {toast && <Snackbar handleCloseError={() => setToast(false)} />}
     </Box>
   );
 }

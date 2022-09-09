@@ -84,16 +84,52 @@ export const MENU_OPTIONS = [
     ],
   },
   {
+    value: 'mask-data',
+    label: 'Mask Data',
+    options: [
+      { value: 'last-4', label: 'Show last 4 characters only' },
+      { value: 'last-2', label: 'Show last 2 characters only' },
+      { value: 'numbers', label: 'Custom Selection' },
+      { value: 'divider' },
+      { value: 'shuffle', label: 'By Shuffling' },
+    ],
+  },
+  {
+    value: 'encode',
+    label: 'Encode',
+    options: [
+      { value: 'encode-base64', label: 'Base64' },
+      { value: 'encode-base32', label: 'Base32' },
+      { value: 'encode-hex', label: 'Hex' },
+      { value: 'encode-url', label: 'URL' },
+    ],
+  },
+  {
+    value: 'decode',
+    label: 'Decode',
+    options: [
+      { value: 'decode-base64', label: 'Base64' },
+      { value: 'decode-base32', label: 'Base32' },
+      { value: 'decode-hex', label: 'Hex' },
+      { value: 'decode-url', label: 'URL' },
+    ],
+  },
+  {
+    value: 'explode',
+    label: 'Explode',
+    options: [
+      { value: 'delimited-text', label: 'Delimited Text' },
+      { value: 'array-flattening', label: 'Array By Flattening' },
+      { value: 'record-flattening', label: 'Record By Flattening' },
+    ],
+  },
+  {
     value: 'dateAndTime',
     label: 'Date and Time',
   },
   {
     value: 'findAndReplace',
     label: 'Find and Replace',
-  },
-  {
-    value: 'fillNullOrEmpty',
-    label: 'Fill null or empty',
   },
   {
     value: 'filter',
