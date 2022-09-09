@@ -2,9 +2,6 @@ import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
   return {
-    paper: {
-      top: '46px',
-    },
     drawerContainerStyles: {
       width: 389,
       borderTop: '1px solid #3994FF',
@@ -23,15 +20,6 @@ export const useStyles = makeStyles(() => {
     pointerStyles: {
       cursor: 'pointer',
     },
-    headingTextStyles: {
-      fontFamily: 'Noto Sans',
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 20,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#000000',
-    },
     headerRightStyles: {
       display: 'flex',
       alignItems: 'center',
@@ -47,13 +35,25 @@ export const useStyles = makeStyles(() => {
       alignItems: 'center',
       paddingLeft: '30px',
     },
-    headerBackIconStyles: {
-      width: '10px',
-      height: '20px',
-    },
-    searchIconContainer: {
+    searchFormControl: {
+      position: 'relative',
+      display: 'flex',
       marginRight: '16px',
-      fontSize: '18px',
+    },
+    searchInputAdornment: {
+      zIndex: 0,
+      cursor: 'pointer',
+      position: 'absolute',
+      right: 0,
+    },
+    isFocused: {
+      border: 'none',
+      borderBottom: '1px solid grey',
+      outline: 'none',
+    },
+    isBlurred: {
+      border: 'none',
+      borderBottom: '1px solid transparent',
     },
   };
 });

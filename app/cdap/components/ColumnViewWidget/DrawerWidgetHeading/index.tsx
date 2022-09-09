@@ -1,6 +1,6 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from '../styles';
+import { useStyles } from './styles';
 
 const DrawerWidgetHeading = (props) => {
   const { headingText } = props;

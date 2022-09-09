@@ -1,28 +1,34 @@
-import { Box, Container } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import ColumnViewWidget from 'components/ColumnViewWidget';
 import React, { Fragment, useState } from 'react';
-import { useParams } from 'react-router';
-import { HEADING_TEXT, NULL_VALUES } from './constants';
+import { HEADING_TEXT } from './constants';
 import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
 
 const ColumnView = (props) => {
-  const { columnData, closeClickHandler } = props;
-  const params = useParams() as any;
-  const [columnsPopup, setColumnsPopup] = useState(true);
-  const [selectedColumns, setSelectedColumns] = useState([]);
+  const { columnData, closeClickHandler, dataQuality } = props;
+  const [searchValue, setSearchValue] = useState('');
 
   const classes = useStyles();
+
+  const searchedTermHandler = (searchedTerm) => {
+    setSearchValue(searchedTerm);
+  };
 
   return (
     <Fragment>
       <ColumnViewWidget
         headingText={HEADING_TEXT}
-        openDrawer={columnsPopup}
         closeClickHandler={closeClickHandler}
+        columnData={columnData}
+        searchedTermHandler={searchedTermHandler}
       >
         <Box className={classes.addTransformationBodyStyles}>
-          <SelectColumnsList columnData={columnData} setSelectedColumns={setSelectedColumns} />
+          <SelectColumnsList
+            columnData={columnData}
+            dataQuality={dataQuality}
+            searchTerm={searchValue}
+          />
         </Box>
       </ColumnViewWidget>
     </Fragment>
