@@ -1914,6 +1914,10 @@ features:
       description: Explore, transform, cleanse, and enrich data using a code-free environment.
       linkLabel: Wrangler
       title: Wrangle
+    NewWrangler:
+      description: Explore, transform, cleanse, and enrich data using a code-free environment.
+      linkLabel: Wrangler
+      title: New Wrangle
 
   HttpExecutor:
     body: Body

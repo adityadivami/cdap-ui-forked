@@ -47,6 +47,17 @@ export const ActionConfig: IAction[] = [
   },
   {
     img: '/cdap_assets/img/cleanse_data.svg',
+    title: T.translate(`${PREFIX}.NewWrangler.title`).toString(),
+    description: T.translate(`${PREFIX}.NewWrangler.description`).toString(),
+    links: [
+      {
+        label: T.translate(`${PREFIX}.NewWrangler.linkLabel`).toString(),
+        url: `/cdap/ns/:namespace/home`,
+      },
+    ],
+  },
+  {
+    img: '/cdap_assets/img/cleanse_data.svg',
     title: T.translate(`${PREFIX}.Wrangler.title`).toString(),
     description: T.translate(`${PREFIX}.Wrangler.description`).toString(),
     links: [
