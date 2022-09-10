@@ -25,6 +25,7 @@ import LoadingSVGCentered from 'components/shared/LoadingSVGCentered';
 import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/KitchenSync';
 import HomeActions from 'components/Home/HomeActions';
 import ToggleExperiment from 'components/Lab/ToggleExperiment';
+import DirectivesInput from 'components/DirectivesInput';
 import ee from 'event-emitter';
 require('./Home.scss');
 
@@ -159,6 +160,7 @@ export default class Home extends Component {
             component={ConnectionList}
           />
           <Route exact path="/ns/:namespace/wrangler-grid/:wid" component={WrangleGrid} />
+          <Route exact path="/ns/:namespace/directives" component={DirectivesInput} />
           <Route exact path="/ns/:namespace/control" component={EntityListView} />
           <Route
             exact
