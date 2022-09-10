@@ -43,7 +43,7 @@ const MatchMeter: React.FC<{ value: number }> = ({ value }) => {
           ></Typography>
         </Typography>
         <Typography component="span" className={classes.value} style={{ color: getInlineStyles() }}>
-          {value.toFixed(1)}%
+          {Math.round(value)}%
         </Typography>
       </Typography>
     </>

@@ -32,7 +32,7 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { HoverDots } from './icons';
 
 const SelectColumnsList = (props) => {
-  const { columnData, dataQuality, searchTerm } = props;
+  const { columnData, dataQuality, searchTerm, modifyColumnsHandler } = props;
   const [filteredColumns, setFilteredColumns] = useState(columnData);
   const classes = useStyles();
   const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
@@ -40,7 +40,7 @@ const SelectColumnsList = (props) => {
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
-  }, []);
+  }, [filteredColumns]);
 
   useEffect(() => {
     if (searchTerm) {
@@ -64,8 +64,10 @@ const SelectColumnsList = (props) => {
     const tempData = Array.from(filteredColumns);
     const [source_data] = tempData.splice(e.source.index, 1);
     tempData.splice(e.destination.index, 0, source_data);
+    modifyColumnsHandler(e.source.index, e.destination.index);
     setFilteredColumns(tempData);
   };
+  console.log(dataQuality, 'data quality');
 
   return (
     <section className={classes.columnsCountTextStyles}>
@@ -88,7 +90,12 @@ const SelectColumnsList = (props) => {
                   {...provider.droppableProps}
                 >
                   {filteredColumns.map((eachColumn, index) => (
-                    <Draggable key={eachColumn.label} draggableId={eachColumn.label} index={index}>
+                    <Draggable
+                      key={eachColumn.label}
+                      draggableId={eachColumn.label}
+                      index={index}
+                      isDragDisabled={searchTerm ? true : false}
+                    >
                       {(provider) => (
                         <TableRow
                           key={index}
@@ -97,12 +104,16 @@ const SelectColumnsList = (props) => {
                           ref={provider.innerRef}
                         >
                           <TableCell className={classes.leftSideCell} {...provider.dragHandleProps}>
-                            <Box>
-                              {HoverDots}
-                              {eachColumn.label}
-                              &nbsp;
-                              <br />
-                              {eachColumn.type}
+                            <Box className={classes.cellContainer}>
+                              <Box className={searchTerm ? classes.hideIcon : classes.showIcon}>
+                                {HoverDots}
+                              </Box>
+                              <Box>
+                                {eachColumn.label}
+                                &nbsp;
+                                <br />
+                                {eachColumn.type}
+                              </Box>
                             </Box>
                           </TableCell>
                           <TableCell className={classes.nullValuesContainer}>
