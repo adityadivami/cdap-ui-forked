@@ -43,6 +43,8 @@ export const useStyles = makeStyles((_theme: Theme) => ({
     //    transform: rotate(63deg),
   },
   value: {
+    position: 'relative',
+    bottom: '-3px',
     fontSize: '14px !important',
     fontFamily: 'Noto Sans',
     fontStyle: 'normal',

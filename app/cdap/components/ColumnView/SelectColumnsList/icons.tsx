@@ -17,7 +17,7 @@
 import React from 'react';
 
 export const HoverDots = (
-  <svg width="11" height="19" viewBox="0 0 11 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="8" height="16" viewBox="0 0 11 19" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M2.72852 10.666C3.2808 10.666 3.72852 10.2183 3.72852 9.66602C3.72852 9.11373 3.2808 8.66602 2.72852 8.66602C2.17623 8.66602 1.72852 9.11373 1.72852 9.66602C1.72852 10.2183 2.17623 10.666 2.72852 10.666Z"
       stroke="#DADCE0"

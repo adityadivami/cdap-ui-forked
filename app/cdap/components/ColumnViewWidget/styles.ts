@@ -39,6 +39,7 @@ export const useStyles = makeStyles(() => {
     headerRightStyles: {
       display: 'flex',
       alignItems: 'center',
+      paddingRight: '20px',
     },
     dividerLineStyles: {
       width: 1,
