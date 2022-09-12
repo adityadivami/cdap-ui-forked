@@ -12,6 +12,7 @@ import {
 import CopyColumnWidget from './Components/CopyColumnAction';
 import NullFunctionWidget from './Components/NullFunctionAction';
 import HashFunctionAction from './Components/HashFunctionAction';
+import FindAndReplace from './Components/FindAndReplaceAction';
 
 const ActionsWidget = (props) => {
   const {
@@ -24,6 +25,12 @@ const ActionsWidget = (props) => {
     columnData,
     setEncode,
     encode,
+    oldValue,
+    setOldValue,
+    exactMatch,
+    setExactMatch,
+    ignoreCase,
+    setIgnoreCase,
   } = props;
   const classes = useStyles();
 
@@ -48,6 +55,18 @@ const ActionsWidget = (props) => {
         <HashFunctionAction
           setEncode={setEncode}
           encode={encode}
+          replaceValue={replaceValue}
+          setReplaceValue={setReplaceValue}
+        />
+      )}
+      {functionName === 'findAndReplace' && selectedColumns.length > 0 && (
+        <FindAndReplace
+          oldValue={oldValue}
+          setOldValue={setOldValue}
+          exactMatch={exactMatch}
+          setExactMatch={setExactMatch}
+          ignoreCase={ignoreCase}
+          setIgnoreCase={setIgnoreCase}
           replaceValue={replaceValue}
           setReplaceValue={setReplaceValue}
         />
