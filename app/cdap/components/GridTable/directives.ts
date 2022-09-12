@@ -54,6 +54,10 @@ export const getDirective = (option, column) => {
 export const getDirectiveOnMultipleInputs = (option, column, value) => {
   if (option === 'delimited-text') {
     return `split-to-rows :${column} ${value}`;
+  } else if (option === 'using-patterns') {
+    return `extract-regex-groups :${column} ${value}`;
+  } else if (option === 'using-delimiters') {
+    return `split-to-columns :${column} ${value}`;
   } else {
     null;
   }

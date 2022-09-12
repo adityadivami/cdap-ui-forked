@@ -38,6 +38,7 @@ import AddTransformation from 'components/AddTransformation';
 import Snackbar from 'components/SnackbarComponent';
 import UsingDelimiterModal from 'components/DataPrep/Directives/ExtractFields/UsingDelimiterModal';
 import { OPTION_WITH_NO_INPUT } from './constants';
+import UsingPatternsModal from './components/PatternModal';
 
 export default function GridTable() {
   const { wid } = useParams() as any;
@@ -53,8 +54,12 @@ export default function GridTable() {
   const [toast, setToast] = useState(false);
   const [openDelimiterModal, setOpenDelimiterModal] = useState({
     activeMode: false,
-    delimiter: '',
   });
+  const [openExtractModal, setOpenExtractModal] = useState({
+    isDelimiter: false,
+    isPattern: false,
+  });
+  const [extraInput, setExtraInput] = useState('');
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -249,37 +254,53 @@ export default function GridTable() {
   }, [gridData]);
 
   const applyDirective = (option, columnSelected) => {
+    setLoading(true);
     setOptionSelected(option);
     if (OPTION_WITH_NO_INPUT.includes(option)) {
-      applyDirectiveOnNoInput(option, columnSelected);
-    }
-    if (option === 'delimited-text' && !Boolean(columnSelected)) {
-      setOpenDelimiterModal({
-        activeMode: true,
-        delimiter: '',
-      });
-      return;
-    }
-    let newDirective = '';
-    if (option === 'delimited-text') {
-      newDirective = getDirectiveOnMultipleInputs(
-        option,
-        columnSelected,
-        openDelimiterModal.delimiter
-      );
+      const newDirective = getDirective(option, columnSelected);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective);
+      }
+    } else {
+      if (option === 'delimited-text' && !Boolean(columnSelected)) {
+        setOpenDelimiterModal({
+          activeMode: true,
+        });
+        setLoading(false);
+        return;
+      } else if (option === 'using-patterns' && !Boolean(columnSelected)) {
+        setOpenExtractModal({
+          ...openExtractModal,
+          isPattern: true,
+        });
+        setLoading(false);
+        return;
+      } else if (option === 'using-delimiters' && !Boolean(columnSelected)) {
+        setOpenExtractModal({
+          ...openExtractModal,
+          isDelimiter: true,
+        });
+        setLoading(false);
+        return;
+      }
+      const newDirective = getDirectiveOnMultipleInputs(option, columnSelected, extraInput);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective);
+      }
     }
   };
 
-  const applyDirectiveOnNoInput = (option, columnSelected) => {
-    const newDirective = getDirective(option, columnSelected);
+  const applyDirectiveAPICall = (newDirective) => {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
-    if (!Boolean(newDirective) || !Boolean(columnSelected)) {
-      setDirectiveFunction(option);
-      setLoading(false);
-      return;
-    }
-
     let gridParams = {};
     const updatedDirectives = directives.concat(newDirective);
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
@@ -396,23 +417,34 @@ export default function GridTable() {
         </div>
       )}
       {toast && <Snackbar handleCloseError={() => setToast(false)} />}
-      {openDelimiterModal.activeMode && (
+      {(openDelimiterModal.activeMode || openExtractModal.isDelimiter) && (
         <UsingDelimiterModal
           isOpen={true}
           onClose={() =>
             setOpenDelimiterModal({
               activeMode: false,
-              delimiter: '',
             })
           }
           onApply={(value) => {
             setOpenDelimiterModal({
               activeMode: false,
-              delimiter: value,
             });
+            setExtraInput(value);
             setDirectiveFunction(optionSelected);
             setLoading(false);
           }}
+        />
+      )}
+      {openExtractModal.isPattern && (
+        <UsingPatternsModal
+          isOpen={true}
+          column={columnSelected}
+          onComplete={(expression) => {
+            setExtraInput(expression);
+            setOpenExtractModal({ isDelimiter: false, isPattern: false });
+            setDirectiveFunction(optionSelected);
+          }}
+          onClose={() => setOpenExtractModal({ isDelimiter: false, isPattern: false })}
         />
       )}
     </Box>

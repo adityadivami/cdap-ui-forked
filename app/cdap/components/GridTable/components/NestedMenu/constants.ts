@@ -115,12 +115,12 @@ export const MENU_OPTIONS = [
     ],
   },
   {
-    value: 'explode',
-    label: 'Explode',
+    value: 'extract',
+    label: 'Extract',
     options: [
-      { value: 'delimited-text', label: 'Delimited Text' },
-      { value: 'array-flattening', label: 'Array By Flattening' },
-      { value: 'record-flattening', label: 'Record By Flattening' },
+      { value: 'using-patterns', label: 'Using Patterns' },
+      { value: 'using-delimiters', label: 'Using Delimiters' },
+      { value: 'using-positions', label: 'Using Positions' },
     ],
   },
   {
