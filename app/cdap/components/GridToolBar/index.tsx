@@ -73,6 +73,7 @@ const ToolBarList = () => {
           }}
           className={classes.searchIcon}
         />
+
         {list.length > 0 && <Search list={list} />}
       </Box>
 

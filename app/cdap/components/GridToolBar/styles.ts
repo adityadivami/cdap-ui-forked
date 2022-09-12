@@ -21,9 +21,6 @@ export const useCss = makeStyles({
   searchIcon: {
     border: 'none',
     outline: 'none',
-  },
-  se: {
-    display: 'flex',
-    flexDirection: 'column',
+    width: '100%',
   },
 });

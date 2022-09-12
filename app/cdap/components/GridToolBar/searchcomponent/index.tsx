@@ -1,6 +1,8 @@
 import React from 'react';
+import { useCss } from './styles';
 
 const Search = (props) => {
+  const classes = useCss();
   return (
     <div>
       {props.list.length > 0 &&
