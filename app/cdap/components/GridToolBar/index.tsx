@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@material-ui/core/Box';
 import { useCss } from './styles';
 import { IconButton } from '@material-ui/core';
 import { searchItems } from './constants';
+import Search from './searchcomponent';
 import {
   Undo,
   Redo,
@@ -22,6 +23,23 @@ import {
 
 const ToolBarList = () => {
   const classes = useCss();
+  const [list, setList] = useState([]);
+  const handleSearch = (event) => {
+    if (event.target.value) {
+      const getFilterVal = searchItems.filter(
+        (el) =>
+          el.option.toLowerCase().includes(event.target.value.toLowerCase()) ||
+          el.val.toLowerCase().includes(event.target.value.toLowerCase())
+      );
+      if (getFilterVal.length) {
+        setList(getFilterVal);
+      } else {
+        setList([]);
+      }
+    } else {
+      setList(searchItems);
+    }
+  };
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
@@ -44,8 +62,18 @@ const ToolBarList = () => {
         <IconButton>{GridIcon}</IconButton>
 
         {Divider}
+
         <IconButton>{SearchIconn}</IconButton>
-        <input type="search" placeholder="Search for Functions" className={classes.searchIcon} />
+
+        <input
+          type="search"
+          onChange={handleSearch}
+          onBlur={() => {
+            setList([]);
+          }}
+          className={classes.searchIcon}
+        />
+        {list.length > 0 && <Search list={list} />}
       </Box>
 
       <IconButton>{Expand}</IconButton>

@@ -22,4 +22,8 @@ export const useCss = makeStyles({
     border: 'none',
     outline: 'none',
   },
+  se: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 });
