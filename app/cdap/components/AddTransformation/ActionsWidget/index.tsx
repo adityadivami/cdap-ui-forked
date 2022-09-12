@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import CopyColumnWidget from './Components/CopyColumnAction';
 import NullFunctionWidget from './Components/NullFunctionAction';
+import HashFunctionAction from './Components/HashFunctionAction';
 
 const ActionsWidget = (props) => {
   const {
@@ -21,6 +22,8 @@ const ActionsWidget = (props) => {
     replaceValue,
     selectedColumns,
     columnData,
+    setEncode,
+    encode,
   } = props;
   const classes = useStyles();
 
@@ -37,6 +40,14 @@ const ActionsWidget = (props) => {
       {functionName === 'copy-column' && selectedColumns.length > 0 && (
         <CopyColumnWidget
           columnData={columnData}
+          replaceValue={replaceValue}
+          setReplaceValue={setReplaceValue}
+        />
+      )}
+      {functionName === 'hash' && selectedColumns.length > 0 && (
+        <HashFunctionAction
+          setEncode={setEncode}
+          encode={encode}
           replaceValue={replaceValue}
           setReplaceValue={setReplaceValue}
         />

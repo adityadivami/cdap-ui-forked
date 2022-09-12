@@ -1,5 +1,6 @@
 import { DATATYPE_OPTIONS } from './components/NestedMenu/constants';
 import DataPrepStore from 'components/DataPrep/store';
+import e from 'express';
 
 export const getDirective = (option, column) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === option)) {
@@ -51,7 +52,7 @@ export const getDirective = (option, column) => {
   }
 };
 
-export const getDirectiveOnMultipleInputs = (option, column, value) => {
+export const getDirectiveOnTwoInputs = (option, column, value) => {
   if (option === 'delimited-text') {
     return `split-to-rows :${column} ${value}`;
   } else if (option === 'using-patterns') {
@@ -62,6 +63,14 @@ export const getDirectiveOnMultipleInputs = (option, column, value) => {
     return `copy :${column} :${value} true`;
   } else {
     null;
+  }
+};
+
+export const getDirectiveOnMultipleInputs = (option, column, value_1, value_2) => {
+  if (option === 'hash') {
+    return `hash :${column} ${value_1} ${value_2}`;
+  } else {
+    return null;
   }
 };
 

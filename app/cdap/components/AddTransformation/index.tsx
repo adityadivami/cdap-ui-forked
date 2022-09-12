@@ -25,6 +25,7 @@ const AddTransformation = (props) => {
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [selectedAction, setSelectedAction] = useState('');
+  const [encode, setEncode] = useState(false);
   const [replaceValue, setReplaceValue] = useState('');
   const { dataprep } = DataPrepStore.getState();
 
@@ -66,7 +67,11 @@ const AddTransformation = (props) => {
         });
     } else {
       setLoading(false);
-      props.applyTransformation(selectedColumns[0].label, replaceValue);
+      if (functionName === 'hash') {
+        props.applyTransformation(selectedColumns[0].label, replaceValue, encode);
+      } else {
+        props.applyTransformation(selectedColumns[0].label, replaceValue);
+      }
     }
   };
 
@@ -94,17 +99,17 @@ const AddTransformation = (props) => {
               handleSelectColumn={handleSelectColumn}
               selectedColumns={selectedColumns}
             />
-            {(functionName == 'null' || functionName === 'copy-column') && (
-              <ActionsWidget
-                functionName={functionName}
-                setSelectedAction={setSelectedAction}
-                selectedAction={selectedAction}
-                setReplaceValue={setReplaceValue}
-                replaceValue={replaceValue}
-                selectedColumns={selectedColumns}
-                columnData={columnData.map(({ label }) => label)}
-              />
-            )}
+            <ActionsWidget
+              functionName={functionName}
+              setSelectedAction={setSelectedAction}
+              selectedAction={selectedAction}
+              setReplaceValue={setReplaceValue}
+              replaceValue={replaceValue}
+              selectedColumns={selectedColumns}
+              columnData={columnData.map(({ label }) => label)}
+              setEncode={setEncode}
+              encode={encode}
+            />
           </div>
           <Button
             variant="contained"

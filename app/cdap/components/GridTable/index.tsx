@@ -32,12 +32,12 @@ import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IDataTypeOfColumns, IDataOfStatistics, IParams } from './types';
 import ToolBarList from './components/AaToolbar';
-import { getDirective, getDirectiveOnMultipleInputs } from './directives';
+import { getDirective, getDirectiveOnTwoInputs, getDirectiveOnMultipleInputs } from './directives';
 import ParsingDrawer from 'components/ParsingDrawer';
 import AddTransformation from 'components/AddTransformation';
 import Snackbar from 'components/SnackbarComponent';
 import UsingDelimiterModal from 'components/DataPrep/Directives/ExtractFields/UsingDelimiterModal';
-import { OPTION_WITH_NO_INPUT } from './constants';
+import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import UsingPatternsModal from './components/PatternModal';
 
 export default function GridTable() {
@@ -253,7 +253,7 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  const applyDirective = (option, columnSelected, value) => {
+  const applyDirective = (option, columnSelected, value_1?, value_2?) => {
     setLoading(true);
     setOptionSelected(option);
     if (OPTION_WITH_NO_INPUT.includes(option)) {
@@ -265,7 +265,7 @@ export default function GridTable() {
       } else {
         applyDirectiveAPICall(newDirective);
       }
-    } else {
+    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
       if (option === 'delimited-text' && !Boolean(columnSelected)) {
         setOpenDelimiterModal({
           activeMode: true,
@@ -287,9 +287,16 @@ export default function GridTable() {
         setLoading(false);
         return;
       }
-      const newDirective = value
-        ? getDirectiveOnMultipleInputs(option, columnSelected, value)
-        : getDirectiveOnMultipleInputs(option, columnSelected, extraInput);
+      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective);
+      }
+    } else {
+      const newDirective = getDirectiveOnMultipleInputs(option, columnSelected, value_1, value_2);
       if (!Boolean(newDirective) || !Boolean(columnSelected)) {
         setDirectiveFunction(option);
         setLoading(false);
@@ -356,7 +363,7 @@ export default function GridTable() {
   return (
     <Box className={classes.wrapper}>
       <BreadCrumb datasetName={wid} />
-      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected, '')} />
+      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
       <ParsingDrawer />
       {directiveFunction && (
         <AddTransformation
@@ -364,10 +371,10 @@ export default function GridTable() {
           setLoading={setLoading}
           columnData={headersNamesList}
           missingDataList={dataQuality}
-          applyTransformation={(selectedColumn, value) => {
-            setExtraInput(value);
+          applyTransformation={(selectedColumn, value_1, value_2) => {
+            setExtraInput(value_1);
             setColumnSelected(selectedColumn);
-            applyDirective(optionSelected, selectedColumn, value);
+            applyDirective(optionSelected, selectedColumn, value_1, value_2);
           }}
           callBack={(response) => setGridData(response)}
         />

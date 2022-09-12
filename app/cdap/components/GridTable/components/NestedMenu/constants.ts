@@ -128,6 +128,10 @@ export const MENU_OPTIONS = [
     label: 'Copy column',
   },
   {
+    value: 'hash',
+    label: 'Hash',
+  },
+  {
     value: 'dateAndTime',
     label: 'Date and Time',
   },
