@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import { useCss } from './styles';
 import { IconButton } from '@material-ui/core';
+import { searchItems } from './constants';
 import {
   Undo,
   Redo,
