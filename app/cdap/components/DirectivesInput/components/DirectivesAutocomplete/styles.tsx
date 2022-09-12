@@ -20,7 +20,15 @@ import { grey } from '@material-ui/core/colors';
 export const useStyles = makeStyles({
   container: {
     padding: '0px 20px',
-    ' &:hover': {
+    '&:active &:hover': {
+      backgroundColor: '#EFF0F2',
+    },
+    '': {
+      backgroundColor: '#EFF0F2',
+    },
+  },
+  active: {
+    '&:active &:hover': {
       backgroundColor: '#EFF0F2',
     },
   },

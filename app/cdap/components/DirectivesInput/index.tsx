@@ -84,6 +84,7 @@ const DirectivesInput = () => {
     });
   };
   const toggleAutoComplete = () => {
+    setDirectiveInput('');
     setAutoCompleteOpen(!autoCompleteOpen);
   };
 

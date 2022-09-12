@@ -32,7 +32,7 @@ const DirectivesAutocomplete = ({ directiveInput, onRowClick, toggle, isOpen, ha
   const [activeResults, setActiveResults] = useState([]);
   const [input, setInput] = useState('');
   const [matched, setMatched] = useState(false);
-  const [activeSelectionIndex, setActiveSelectionIndex] = useState(null);
+  const [activeSelectionIndex, setActiveSelectionIndex] = useState(0);
   const [fuse, setFuse] = useState<any>();
 
   const getUsage = () => {
@@ -74,10 +74,10 @@ const DirectivesAutocomplete = ({ directiveInput, onRowClick, toggle, isOpen, ha
       target: { value: `${row.item.directive} ` },
     };
     onRowClick(eventObject);
-    console.log(eventObject);
   };
 
   const handleUpArrow = (e) => {
+    console.log('activeSelectionIndex inside Up', activeSelectionIndex);
     if (e.preventDefault) {
       e.preventDefault();
     } else {
@@ -86,20 +86,23 @@ const DirectivesAutocomplete = ({ directiveInput, onRowClick, toggle, isOpen, ha
     if (activeSelectionIndex === 0) {
       return;
     }
-    setActiveSelectionIndex(activeSelectionIndex - 1);
+
+    setActiveSelectionIndex((prev: any) => prev - 1);
   };
 
-  const handhandleDownArrowleUpArrow = (e) => {
-    if (e.preventDefault) {
-      e.preventDefault();
-    } else {
-      e.returnValue = false;
-    }
-    if (activeSelectionIndex === activeResults.length - 1) {
+  const handleDownArrow = (e) => {
+    console.log('activeSelectionIndex Inside Down', activeSelectionIndex);
+    e.preventDefault();
+    if (activeSelectionIndex === activeResults.length + 1) {
       return;
     }
+
     setActiveSelectionIndex(activeSelectionIndex + 1);
   };
+
+  useEffect(() => {
+    console.log('activeSelectionIndex', activeSelectionIndex);
+  }, [activeSelectionIndex]);
 
   const handleEnterKey = () => {
     if (input.length === 0) {
@@ -120,6 +123,7 @@ const DirectivesAutocomplete = ({ directiveInput, onRowClick, toggle, isOpen, ha
   };
 
   const handleTabKey = (e) => {
+    console.log('tab');
     if (input.length === 0 || input.split(' ').length !== 1) {
       return;
     }
@@ -167,9 +171,14 @@ const DirectivesAutocomplete = ({ directiveInput, onRowClick, toggle, isOpen, ha
     }
   };
   useEffect(() => {
+    console.warn(activeSelectionIndex, 'active');
     const directiveInput = document.getElementById('directive-input');
     const mousetrap = new Mousetrap(directiveInput);
     mousetrap.bind('esc', toggle);
+    mousetrap.bind('up', handleUpArrow);
+    mousetrap.bind('down', handleDownArrow);
+    mousetrap.bind('enter', handleEnterKey);
+    mousetrap.bind('tab', handleTabKey);
   }, []);
 
   if (isOpen) {
@@ -177,14 +186,17 @@ const DirectivesAutocomplete = ({ directiveInput, onRowClick, toggle, isOpen, ha
       <Box>
         {activeResults.map((row, index) => {
           return (
-            <Box key={index}>
+            <Box>
               {!(matched || activeResults.length === 1) ? (
-                <Box className={classes.container} onClick={handleRowClick} role="button">
-                  <Box
-                    className={classnames(`${classes.resultRow}`, {
-                      active: index === activeSelectionIndex,
-                    })}
-                  >
+                <Box
+                  className={classnames(`${classes.container}`, {
+                    active: index === activeSelectionIndex,
+                  })}
+                  onClick={handleRowClick}
+                  role="button"
+                  key={row.uniqueId}
+                >
+                  <Box className={classes.resultRow}>
                     <Box className={classes.suggestions}>
                       <Box className={classes.directiveTitle}>{row.item.directive}</Box>
                       <Box className={classes.directiveDescription}>{row.item.description}</Box>
