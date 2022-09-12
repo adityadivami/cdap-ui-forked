@@ -51,6 +51,14 @@ export const getDirective = (option, column) => {
   }
 };
 
+export const getDirectiveOnMultipleInputs = (option, column, value) => {
+  if (option === 'delimited-text') {
+    return `split-to-rows :${column} ${value}`;
+  } else {
+    null;
+  }
+};
+
 const maskByShuffling = (column) => {
   return `mask-shuffle :${column}`;
 };
