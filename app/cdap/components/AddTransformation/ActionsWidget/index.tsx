@@ -9,53 +9,39 @@ import {
   TextField,
   FormLabel,
 } from '@material-ui/core';
+import CopyColumnWidget from './Components/CopyColumnAction';
+import NullFunctionWidget from './Components/NullFunctionAction';
 
 const ActionsWidget = (props) => {
-  const { selectedAction, setSelectedAction, setReplaceValue, replaceValue } = props;
+  const {
+    functionName,
+    selectedAction,
+    setSelectedAction,
+    setReplaceValue,
+    replaceValue,
+    selectedColumns,
+    columnData,
+  } = props;
   const classes = useStyles();
 
   return (
-    <section className={classes.functionSectionStyles}>
-      <div className={classes.funtionSectionWrapperStyles}>
-        <div className={classes.functionHeadingTextStyles}>{SELECT_ACTION_TO_TAKE}</div>
-        <img
-          className={classes.greenCheckIconStyles}
-          src="/cdap_assets/img/green-check.svg"
-          alt="tick icon"
+    <React.Fragment>
+      {functionName === 'null' && (
+        <NullFunctionWidget
+          selectedAction={selectedAction}
+          setSelectedAction={setSelectedAction}
+          setReplaceValue={setReplaceValue}
+          replaceValue={replaceValue}
         />
-      </div>
-      <FormControl>
-        <RadioGroup
-          name="actions"
-          value={selectedAction}
-          onChange={(e) => setSelectedAction(e.target.value)}
-        >
-          <FormControlLabel
-            value="remove"
-            className={classes.radioStyles}
-            control={<Radio color="primary" />}
-            label={REMOVE_ROWS}
-          />
-          <FormControlLabel
-            value="replace"
-            className={classes.radioStyles}
-            control={<Radio color="primary" />}
-            label={REPLACE_ROWS}
-          />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      {selectedAction == 'replace' && (
-        <FormControl className={classes.replaceWithInput}>
-          <FormLabel className={classes.replaceWithText}>{REPLACE_WITH}</FormLabel>
-          <TextField
-            variant="outlined"
-            value={replaceValue}
-            onChange={(e) => setReplaceValue(e.target.value)}
-          />
-        </FormControl>
       )}
-    </section>
+      {functionName === 'copy-column' && selectedColumns.length > 0 && (
+        <CopyColumnWidget
+          columnData={columnData}
+          replaceValue={replaceValue}
+          setReplaceValue={setReplaceValue}
+        />
+      )}
+    </React.Fragment>
   );
 };
 

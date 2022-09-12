@@ -253,7 +253,7 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  const applyDirective = (option, columnSelected) => {
+  const applyDirective = (option, columnSelected, value) => {
     setLoading(true);
     setOptionSelected(option);
     if (OPTION_WITH_NO_INPUT.includes(option)) {
@@ -287,7 +287,9 @@ export default function GridTable() {
         setLoading(false);
         return;
       }
-      const newDirective = getDirectiveOnMultipleInputs(option, columnSelected, extraInput);
+      const newDirective = value
+        ? getDirectiveOnMultipleInputs(option, columnSelected, value)
+        : getDirectiveOnMultipleInputs(option, columnSelected, extraInput);
       if (!Boolean(newDirective) || !Boolean(columnSelected)) {
         setDirectiveFunction(option);
         setLoading(false);
@@ -354,7 +356,7 @@ export default function GridTable() {
   return (
     <Box className={classes.wrapper}>
       <BreadCrumb datasetName={wid} />
-      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
+      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected, '')} />
       <ParsingDrawer />
       {directiveFunction && (
         <AddTransformation
@@ -362,9 +364,10 @@ export default function GridTable() {
           setLoading={setLoading}
           columnData={headersNamesList}
           missingDataList={dataQuality}
-          applyTransformation={(selectedColumn) => {
+          applyTransformation={(selectedColumn, value) => {
+            setExtraInput(value);
             setColumnSelected(selectedColumn);
-            applyDirective(optionSelected, selectedColumn);
+            applyDirective(optionSelected, selectedColumn, value);
           }}
           callBack={(response) => setGridData(response)}
         />

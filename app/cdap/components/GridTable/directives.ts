@@ -58,6 +58,8 @@ export const getDirectiveOnMultipleInputs = (option, column, value) => {
     return `extract-regex-groups :${column} ${value}`;
   } else if (option === 'using-delimiters') {
     return `split-to-columns :${column} ${value}`;
+  } else if (option === 'copy-column') {
+    return `copy :${column} :${value} true`;
   } else {
     null;
   }
