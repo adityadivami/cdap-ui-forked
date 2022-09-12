@@ -27,4 +27,5 @@ export const OPTION_WITH_TWO_INPUT = [
   'using-patterns',
   'using-delimiters',
   'copy-column',
+  'findAndReplace',
 ];

@@ -27,6 +27,9 @@ const AddTransformation = (props) => {
   const [selectedAction, setSelectedAction] = useState('');
   const [encode, setEncode] = useState(false);
   const [replaceValue, setReplaceValue] = useState('');
+  const [oldValue, setOldValue] = useState('');
+  const [exactMatch, setExactMatch] = useState(false);
+  const [ignoreCase, setIgnoreCase] = useState(false);
   const { dataprep } = DataPrepStore.getState();
 
   const classes = useStyles();
@@ -69,6 +72,12 @@ const AddTransformation = (props) => {
       setLoading(false);
       if (functionName === 'hash') {
         props.applyTransformation(selectedColumns[0].label, replaceValue, encode);
+      } else if (functionName === 'findAndReplace') {
+        const newOldValue = exactMatch ? `^${oldValue}$` : oldValue;
+        const newValue = ignoreCase
+          ? `s/${newOldValue}/${replaceValue}/Ig`
+          : `s/${newOldValue}/${replaceValue}/g`;
+        props.applyTransformation(selectedColumns[0].label, newValue);
       } else {
         props.applyTransformation(selectedColumns[0].label, replaceValue);
       }
@@ -109,6 +118,12 @@ const AddTransformation = (props) => {
               columnData={columnData.map(({ label }) => label)}
               setEncode={setEncode}
               encode={encode}
+              oldValue={oldValue}
+              setOldValue={setOldValue}
+              exactMatch={exactMatch}
+              setExactMatch={setExactMatch}
+              ignoreCase={ignoreCase}
+              setIgnoreCase={setIgnoreCase}
             />
           </div>
           <Button

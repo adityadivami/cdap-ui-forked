@@ -61,6 +61,8 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return `split-to-columns :${column} ${value}`;
   } else if (option === 'copy-column') {
     return `copy :${column} :${value} true`;
+  } else if (option === 'findAndReplace') {
+    return `find-and-replace :${column} ${value}`;
   } else {
     null;
   }
