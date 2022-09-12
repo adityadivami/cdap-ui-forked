@@ -124,6 +124,10 @@ export const MENU_OPTIONS = [
     ],
   },
   {
+    value: 'copy-column',
+    label: 'Copy column',
+  },
+  {
     value: 'dateAndTime',
     label: 'Date and Time',
   },

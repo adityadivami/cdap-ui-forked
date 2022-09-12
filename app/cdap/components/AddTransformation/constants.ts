@@ -12,3 +12,5 @@ export const DONE_STEP = 'Done';
 export const REMOVE_ROWS = 'Remove rows';
 export const REPLACE_ROWS = 'Replace rows';
 export const REPLACE_WITH = 'Replace with';
+export const NAME_OF_COLUMN = 'Name of Column';
+export const NAME_ALREADY_TAKEN = 'This column name is already taken';

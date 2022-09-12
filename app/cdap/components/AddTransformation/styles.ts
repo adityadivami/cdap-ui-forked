@@ -217,5 +217,8 @@ export const useStyles = makeStyles(() => {
     nullValueHead: {
       width: 120,
     },
+    warningText: {
+      color: '#E97567',
+    },
   };
 });
