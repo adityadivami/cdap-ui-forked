@@ -32,10 +32,12 @@ import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IDataTypeOfColumns, IDataOfStatistics, IParams } from './types';
 import ToolBarList from './components/AaToolbar';
-import { getDirective } from './directives';
+import { getDirective, getDirectiveOnMultipleInputs } from './directives';
 import ParsingDrawer from 'components/ParsingDrawer';
 import AddTransformation from 'components/AddTransformation';
 import Snackbar from 'components/SnackbarComponent';
+import UsingDelimiterModal from 'components/DataPrep/Directives/ExtractFields/UsingDelimiterModal';
+import { OPTION_WITH_NO_INPUT } from './constants';
 
 export default function GridTable() {
   const { wid } = useParams() as any;
@@ -49,6 +51,10 @@ export default function GridTable() {
   const [dataQuality, setDataQuality] = useState({});
   const [optionSelected, setOptionSelected] = useState(null);
   const [toast, setToast] = useState(false);
+  const [openDelimiterModal, setOpenDelimiterModal] = useState({
+    activeMode: false,
+    delimiter: '',
+  });
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -244,12 +250,30 @@ export default function GridTable() {
 
   const applyDirective = (option, columnSelected) => {
     setOptionSelected(option);
-    setLoading(true);
+    if (OPTION_WITH_NO_INPUT.includes(option)) {
+      applyDirectiveOnNoInput(option, columnSelected);
+    }
+    if (option === 'delimited-text' && !Boolean(columnSelected)) {
+      setOpenDelimiterModal({
+        activeMode: true,
+        delimiter: '',
+      });
+      return;
+    }
+    let newDirective = '';
+    if (option === 'delimited-text') {
+      newDirective = getDirectiveOnMultipleInputs(
+        option,
+        columnSelected,
+        openDelimiterModal.delimiter
+      );
+    }
+  };
+
+  const applyDirectiveOnNoInput = (option, columnSelected) => {
     const newDirective = getDirective(option, columnSelected);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
-    // setOpenTransformationPanel(option);
-    console.log(newDirective, columnSelected, option);
     if (!Boolean(newDirective) || !Boolean(columnSelected)) {
       setDirectiveFunction(option);
       setLoading(false);
@@ -305,7 +329,6 @@ export default function GridTable() {
   // Redux store
   const { dataprep } = DataPrepStore.getState();
   const { data, headers, types } = dataprep;
-  console.log(columnSelected, directiveFunction);
 
   return (
     <Box className={classes.wrapper}>
@@ -373,6 +396,25 @@ export default function GridTable() {
         </div>
       )}
       {toast && <Snackbar handleCloseError={() => setToast(false)} />}
+      {openDelimiterModal.activeMode && (
+        <UsingDelimiterModal
+          isOpen={true}
+          onClose={() =>
+            setOpenDelimiterModal({
+              activeMode: false,
+              delimiter: '',
+            })
+          }
+          onApply={(value) => {
+            setOpenDelimiterModal({
+              activeMode: false,
+              delimiter: value,
+            });
+            setDirectiveFunction(optionSelected);
+            setLoading(false);
+          }}
+        />
+      )}
     </Box>
   );
 }
