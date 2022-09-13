@@ -77,6 +77,8 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return `find-and-replace :${column} ${value}`;
   } else if (option === 'concatenate') {
     return `set-column :${column} ${value}`;
+  } else if (option === 'filter') {
+    return value;
   } else {
     null;
   }

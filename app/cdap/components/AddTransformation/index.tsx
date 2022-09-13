@@ -18,6 +18,7 @@ import DataPrepStore from 'components/DataPrep/store';
 import { useStyles } from './styles';
 import MyDataPrepApi from 'api/dataprep';
 import { useParams } from 'react-router';
+import { prepareDirectiveForFilter } from './utils';
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
@@ -95,6 +96,15 @@ const AddTransformation = (props) => {
               : `'${replaceValue}' + ${selectedColumns[0].label}`;
           props.applyTransformation(selectedColumns[0].label, value);
         }
+      } else if (functionName === 'filter') {
+        const getValue = prepareDirectiveForFilter(
+          selectedAction,
+          replaceValue,
+          newColumnName,
+          ignoreCase,
+          selectedColumns[0].label
+        );
+        props.applyTransformation(selectedColumns[0].label, getValue);
       } else {
         props.applyTransformation(selectedColumns[0].label, replaceValue);
       }

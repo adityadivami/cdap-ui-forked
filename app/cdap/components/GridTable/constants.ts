@@ -35,4 +35,5 @@ export const OPTION_WITH_TWO_INPUT = [
   'copy-column',
   'findAndReplace',
   'concatenate',
+  'filter',
 ];

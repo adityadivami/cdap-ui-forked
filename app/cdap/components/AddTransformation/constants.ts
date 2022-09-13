@@ -19,3 +19,4 @@ export const AT_BEGIN = 'at the beginning';
 export const AT_END = 'at the end';
 export const OF_CONTENT_OF_EACH_ROW = 'of the content of each row';
 export const COPY_TO_NEW_COLUMN = 'Copy to a new column';
+export const KEEP_ROWS = 'Keep Rows';
