@@ -1,23 +1,7 @@
 import React, { useEffect } from 'react';
-import {
-  SELECT_ACTION_TO_TAKE,
-  NAME_OF_COLUMN,
-  REPLACE_WITH,
-  NAME_ALREADY_TAKEN,
-} from '../../../constants';
+import { SELECT_ACTION_TO_TAKE } from '../../../constants';
 import { useStyles } from '../../../styles';
-import {
-  RadioGroup,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  TextField,
-  FormLabel,
-  Typography,
-  Select,
-  MenuItem,
-  Checkbox,
-} from '@material-ui/core';
+import { FormControl, FormControlLabel, Select, MenuItem, Checkbox } from '@material-ui/core';
 
 const hashAlgorithmOptions = [
   'BLAKE2B-160',

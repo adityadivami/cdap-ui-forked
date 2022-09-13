@@ -13,6 +13,7 @@ import CopyColumnWidget from './Components/CopyColumnAction';
 import NullFunctionWidget from './Components/NullFunctionAction';
 import HashFunctionAction from './Components/HashFunctionAction';
 import FindAndReplace from './Components/FindAndReplaceAction';
+import Concatenate from './Components/ConcatenateAction';
 
 const ActionsWidget = (props) => {
   const {
@@ -31,6 +32,8 @@ const ActionsWidget = (props) => {
     setExactMatch,
     ignoreCase,
     setIgnoreCase,
+    setNewColumnName,
+    newColumnName,
   } = props;
   const classes = useStyles();
 
@@ -69,6 +72,18 @@ const ActionsWidget = (props) => {
           setIgnoreCase={setIgnoreCase}
           replaceValue={replaceValue}
           setReplaceValue={setReplaceValue}
+        />
+      )}
+      {functionName === 'concatenate' && selectedColumns.length > 0 && (
+        <Concatenate
+          setNewColumnName={setNewColumnName}
+          newColumnName={newColumnName}
+          setEncode={setEncode}
+          encode={encode}
+          replaceValue={replaceValue}
+          setReplaceValue={setReplaceValue}
+          selectedAction={selectedAction}
+          setSelectedAction={setSelectedAction}
         />
       )}
     </React.Fragment>

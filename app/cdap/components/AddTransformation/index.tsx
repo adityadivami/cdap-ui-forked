@@ -7,6 +7,8 @@ import {
   APPLY_STEP,
   SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
   DONE_STEP,
+  AT_BEGIN,
+  AT_END,
 } from './constants';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsList from './SelectColumnsList';
@@ -30,6 +32,7 @@ const AddTransformation = (props) => {
   const [oldValue, setOldValue] = useState('');
   const [exactMatch, setExactMatch] = useState(false);
   const [ignoreCase, setIgnoreCase] = useState(false);
+  const [newColumnName, setNewColumnName] = useState('');
   const { dataprep } = DataPrepStore.getState();
 
   const classes = useStyles();
@@ -78,6 +81,20 @@ const AddTransformation = (props) => {
           ? `s/${newOldValue}/${replaceValue}/Ig`
           : `s/${newOldValue}/${replaceValue}/g`;
         props.applyTransformation(selectedColumns[0].label, newValue);
+      } else if (functionName === 'concatenate') {
+        if (encode) {
+          const value =
+            selectedAction === AT_END
+              ? `${selectedColumns[0].label} + '${replaceValue}'`
+              : `'${replaceValue}' + ${selectedColumns[0].label}`;
+          props.applyTransformation(newColumnName, value);
+        } else {
+          const value =
+            selectedAction === AT_END
+              ? `${selectedColumns[0].label} + '${replaceValue}'`
+              : `'${replaceValue}' + ${selectedColumns[0].label}`;
+          props.applyTransformation(selectedColumns[0].label, value);
+        }
       } else {
         props.applyTransformation(selectedColumns[0].label, replaceValue);
       }
@@ -124,6 +141,8 @@ const AddTransformation = (props) => {
               setExactMatch={setExactMatch}
               ignoreCase={ignoreCase}
               setIgnoreCase={setIgnoreCase}
+              setNewColumnName={setNewColumnName}
+              newColumnName={newColumnName}
             />
           </div>
           <Button

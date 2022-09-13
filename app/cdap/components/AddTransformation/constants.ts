@@ -15,3 +15,7 @@ export const REPLACE_WITH = 'Replace with';
 export const NAME_OF_COLUMN = 'Name of Column';
 export const NAME_ALREADY_TAKEN = 'This column name is already taken';
 export const OLD_VALUE = 'Old Value';
+export const AT_BEGIN = 'at the beginning';
+export const AT_END = 'at the end';
+export const OF_CONTENT_OF_EACH_ROW = 'of the content of each row';
+export const COPY_TO_NEW_COLUMN = 'Copy to a new column';

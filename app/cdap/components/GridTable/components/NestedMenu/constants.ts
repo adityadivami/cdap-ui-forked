@@ -81,6 +81,7 @@ export const MENU_OPTIONS = [
       { value: 'uppercase', label: 'UPPERCASE' },
       { value: 'lowercase', label: 'Lowercase' },
       { value: 'titlecase', label: 'Title Case' },
+      { value: 'concatenate', label: 'Concatenate' },
     ],
   },
   {

@@ -34,4 +34,5 @@ export const OPTION_WITH_TWO_INPUT = [
   'using-delimiters',
   'copy-column',
   'findAndReplace',
+  'concatenate',
 ];
