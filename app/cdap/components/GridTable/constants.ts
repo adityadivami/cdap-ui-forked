@@ -20,6 +20,12 @@ export const OPTION_WITH_NO_INPUT = [
   'decode-url',
   'array-flattening',
   'record-flattening',
+  'character-encoding-utf8',
+  'character-encoding-utf16',
+  'character-encoding-us-ascii',
+  'character-encoding-iso-8859-1',
+  'character-encoding-utf16-be',
+  'character-encoding-utf16-le',
 ];
 
 export const OPTION_WITH_TWO_INPUT = [

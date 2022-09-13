@@ -47,6 +47,18 @@ export const getDirective = (option, column) => {
     return explodeByFlattening(column);
   } else if (option === 'record-flattening') {
     return explodeRecordByFlattening(column);
+  } else if (option === 'character-encoding-utf8') {
+    return `set-charset :${column} 'utf-8'`;
+  } else if (option === 'character-encoding-utf16') {
+    return `set-charset :${column} 'utf-16'`;
+  } else if (option === 'character-encoding-us-ascii') {
+    return `set-charset :${column} 'us-ascii'`;
+  } else if (option === 'character-encoding-iso-8859-1') {
+    return `set-charset :${column} 'iso-8859-1'`;
+  } else if (option === 'character-encoding-utf16-be') {
+    return `set-charset :${column} 'utf-16be'`;
+  } else if (option === 'character-encoding-utf16-le') {
+    return `set-charset :${column} 'utf-16le'`;
   } else {
     null;
   }
