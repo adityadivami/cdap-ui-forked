@@ -1,21 +1,7 @@
 import React from 'react';
-import {
-  SELECT_ACTION_TO_TAKE,
-  NAME_OF_COLUMN,
-  REPLACE_WITH,
-  NAME_ALREADY_TAKEN,
-} from '../../../constants';
+import { SELECT_ACTION_TO_TAKE, NAME_OF_COLUMN, NAME_ALREADY_TAKEN } from '../../../constants';
 import { useStyles } from '../../../styles';
-import {
-  RadioGroup,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  TextField,
-  FormLabel,
-  Typography,
-} from '@material-ui/core';
-import WarningContainer from 'components/shared/WarningContainer';
+import { FormControl, TextField, FormLabel, Typography } from '@material-ui/core';
 
 const CopyColumnWidget = (props) => {
   const { selectedAction, setSelectedAction, setReplaceValue, replaceValue, columnData } = props;

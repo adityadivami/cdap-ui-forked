@@ -171,6 +171,7 @@ export const useStyles = makeStyles(() => {
     },
     replaceWithInput: {
       width: '90%',
+      marginTop: 5,
     },
     replaceWithText: {
       fontFamily: 'Noto Sans',
