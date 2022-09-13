@@ -14,6 +14,7 @@ import NullFunctionWidget from './Components/NullFunctionAction';
 import HashFunctionAction from './Components/HashFunctionAction';
 import FindAndReplace from './Components/FindAndReplaceAction';
 import Concatenate from './Components/ConcatenateAction';
+import FilterAction from './Components/FilterAction';
 
 const ActionsWidget = (props) => {
   const {
@@ -80,6 +81,18 @@ const ActionsWidget = (props) => {
           newColumnName={newColumnName}
           setEncode={setEncode}
           encode={encode}
+          replaceValue={replaceValue}
+          setReplaceValue={setReplaceValue}
+          selectedAction={selectedAction}
+          setSelectedAction={setSelectedAction}
+        />
+      )}
+      {functionName === 'filter' && selectedColumns.length > 0 && (
+        <FilterAction
+          setNewColumnName={setNewColumnName}
+          newColumnName={newColumnName}
+          setIgnoreCase={setIgnoreCase}
+          ignoreCase={ignoreCase}
           replaceValue={replaceValue}
           setReplaceValue={setReplaceValue}
           selectedAction={selectedAction}
