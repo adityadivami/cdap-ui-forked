@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Button, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
@@ -32,6 +32,7 @@ import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import DirectiveInputDrawer from 'components/DirectiveInput';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -43,6 +44,7 @@ export default function GridTable() {
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
+  const [openDirective, setOpenDirective] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -279,6 +281,8 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
+      <Button onClick={() => setOpenDirective(true)}>Open</Button>
+      {openDirective && <DirectiveInputDrawer open={openDirective} />}
     </Box>
   );
 }
