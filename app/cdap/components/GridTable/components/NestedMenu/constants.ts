@@ -141,6 +141,10 @@ export const MENU_OPTIONS = [
     label: 'Copy column',
   },
   {
+    value: 'custom-transform',
+    label: 'Custom Transform',
+  },
+  {
     value: 'hash',
     label: 'Hash',
   },

@@ -36,4 +36,5 @@ export const OPTION_WITH_TWO_INPUT = [
   'findAndReplace',
   'concatenate',
   'filter',
+  'custom-transform',
 ];
