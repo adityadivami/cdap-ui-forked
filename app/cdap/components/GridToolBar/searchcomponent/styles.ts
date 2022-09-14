@@ -5,4 +5,12 @@ export const useCss = makeStyles({
     backgroundColor: 'white',
     zIndex: 3,
   },
+  searchResultBox: {
+    position: 'absolute',
+    top: '47px',
+    left: '0',
+    right: '0',
+    background: 'white',
+    padding: '10px',
+  },
 });

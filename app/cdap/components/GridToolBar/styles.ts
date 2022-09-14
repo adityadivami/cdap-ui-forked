@@ -25,6 +25,7 @@ export const useCss = makeStyles({
   cont: {
     display: 'flex',
     flexDirection: 'column',
+    position: 'relative'
   },
   cont1: {
     display: 'flex',

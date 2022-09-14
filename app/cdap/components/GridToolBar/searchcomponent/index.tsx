@@ -5,7 +5,7 @@ import { Divider } from '@material-ui/core';
 const Search = (props) => {
   const classes = useCss();
   return (
-    <div>
+    <div className={classes.searchResultBox}>
       <p>Search Results</p>
       {props.list.length > 0 &&
         props.list.map((item) => {
