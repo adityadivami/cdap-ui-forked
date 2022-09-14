@@ -7,7 +7,7 @@ import Search from './searchcomponent';
 import {
   Undo,
   Redo,
-  Divider,
+  DividerIcon,
   NullIcon,
   InvalidIcon,
   ColumnIcon,
@@ -46,35 +46,39 @@ const ToolBarList = () => {
         <IconButton>{Undo}</IconButton>
         <IconButton>{Redo}</IconButton>
 
-        {Divider}
+        {DividerIcon}
         <IconButton>{NullIcon}</IconButton>
         <IconButton>{InvalidIcon}</IconButton>
         <IconButton>{ColumnIcon}</IconButton>
 
-        {Divider}
+        {DividerIcon}
         <IconButton>{StructureIcon}</IconButton>
         <IconButton>{FragmentIcon}</IconButton>
         <IconButton>{MathIcon}</IconButton>
         <IconButton>{SecurityIcon}</IconButton>
         <IconButton>{OtherIcon}</IconButton>
 
-        {Divider}
+        {DividerIcon}
         <IconButton>{GridIcon}</IconButton>
 
-        {Divider}
+        {DividerIcon}
 
-        <IconButton>{SearchIconn}</IconButton>
+        <div className={classes.cont}>
+          <div className={classes.cont1}>
+            <IconButton>{SearchIconn}</IconButton>
 
-        <input
-          type="search"
-          onChange={handleSearch}
-          onBlur={() => {
-            setList([]);
-          }}
-          className={classes.searchIcon}
-        />
+            <input
+              placeholder="Search Functions"
+              onChange={handleSearch}
+              onBlur={() => {
+                setList([]);
+              }}
+              className={classes.searchIcon}
+            />
+          </div>
 
-        {list.length > 0 && <Search list={list} />}
+          {list.length > 0 && <Search list={list} />}
+        </div>
       </Box>
 
       <IconButton>{Expand}</IconButton>

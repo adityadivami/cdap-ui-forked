@@ -21,6 +21,12 @@ export const useCss = makeStyles({
   searchIcon: {
     border: 'none',
     outline: 'none',
-    width: '100%',
+  },
+  cont: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cont1: {
+    display: 'flex',
   },
 });
