@@ -54,18 +54,11 @@ const hashAlgorithmOptions = [
 ];
 
 const HashFunctionWidget = (props) => {
-  const {
-    selectedAction,
-    setSelectedAction,
-    setReplaceValue,
-    replaceValue,
-    setEncode,
-    encode,
-  } = props;
+  const { filterAction, setFilterAction, setEncode, encode } = props;
   const classes = useStyles();
 
   useEffect(() => {
-    setReplaceValue(hashAlgorithmOptions[0]);
+    setFilterAction(hashAlgorithmOptions[0]);
   }, []);
 
   return (
@@ -80,8 +73,8 @@ const HashFunctionWidget = (props) => {
       </div>
       <FormControl className={classes.replaceWithInput}>
         <Select
-          value={replaceValue}
-          onChange={(e) => setReplaceValue(e.target.value)}
+          value={filterAction}
+          onChange={(e) => setFilterAction(e.target.value)}
           variant="outlined"
         >
           {hashAlgorithmOptions.map((item) => (

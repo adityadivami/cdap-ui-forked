@@ -16,6 +16,7 @@ import FindAndReplace from './Components/FindAndReplaceAction';
 import Concatenate from './Components/ConcatenateAction';
 import FilterAction from './Components/FilterAction';
 import CustomTransform from './Components/CustomTransform';
+import DefineVariable from './Components/DefineVariable';
 
 const ActionsWidget = (props) => {
   const {
@@ -36,6 +37,12 @@ const ActionsWidget = (props) => {
     setIgnoreCase,
     setNewColumnName,
     newColumnName,
+    textValue,
+    setTextValue,
+    variableName,
+    setVariableName,
+    filterAction,
+    setFilterAction,
   } = props;
   const classes = useStyles();
 
@@ -60,8 +67,8 @@ const ActionsWidget = (props) => {
         <HashFunctionAction
           setEncode={setEncode}
           encode={encode}
-          replaceValue={replaceValue}
-          setReplaceValue={setReplaceValue}
+          filterAction={filterAction}
+          setFilterAction={setFilterAction}
         />
       )}
       {functionName === 'findAndReplace' && selectedColumns.length > 0 && (
@@ -90,14 +97,16 @@ const ActionsWidget = (props) => {
       )}
       {functionName === 'filter' && selectedColumns.length > 0 && (
         <FilterAction
-          setNewColumnName={setNewColumnName}
-          newColumnName={newColumnName}
+          textValue={textValue}
+          setTextValue={setTextValue}
           setIgnoreCase={setIgnoreCase}
           ignoreCase={ignoreCase}
           replaceValue={replaceValue}
           setReplaceValue={setReplaceValue}
           selectedAction={selectedAction}
           setSelectedAction={setSelectedAction}
+          filterAction={filterAction}
+          setFilterAction={setFilterAction}
         />
       )}
       {functionName === 'custom-transform' && selectedColumns.length > 0 && (
@@ -105,6 +114,16 @@ const ActionsWidget = (props) => {
           selectedColumns={selectedColumns}
           replaceValue={replaceValue}
           setReplaceValue={setReplaceValue}
+        />
+      )}
+      {functionName === 'define-variable' && selectedColumns.length > 0 && (
+        <DefineVariable
+          textValue={textValue}
+          setTextValue={setTextValue}
+          variableName={variableName}
+          setVariableName={setVariableName}
+          selectedAction={selectedAction}
+          setSelectedAction={setSelectedAction}
         />
       )}
     </React.Fragment>

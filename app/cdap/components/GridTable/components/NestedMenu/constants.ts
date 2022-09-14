@@ -145,6 +145,10 @@ export const MENU_OPTIONS = [
     label: 'Custom Transform',
   },
   {
+    value: 'define-variable',
+    label: 'Set Define Variable',
+  },
+  {
     value: 'hash',
     label: 'Hash',
   },

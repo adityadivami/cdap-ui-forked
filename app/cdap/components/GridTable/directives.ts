@@ -81,6 +81,8 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return `set-column :${column} ${value}`;
   } else if (option === 'filter') {
     return value;
+  } else if (option === 'define-variable') {
+    return value;
   } else {
     null;
   }

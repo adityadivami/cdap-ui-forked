@@ -22,8 +22,10 @@ const FilterAction = (props) => {
     replaceValue,
     ignoreCase,
     setIgnoreCase,
-    setNewColumnName,
-    newColumnName,
+    textValue,
+    setTextValue,
+    filterAction,
+    setFilterAction,
   } = props;
   const classes = useStyles();
 
@@ -60,8 +62,8 @@ const FilterAction = (props) => {
       <br />
       <FormControl className={classes.replaceWithInput}>
         <Select
-          value={replaceValue}
-          onChange={(e) => setReplaceValue(e.target.value)}
+          value={filterAction}
+          onChange={(e) => setFilterAction(e.target.value)}
           variant="outlined"
         >
           {OPTIONS_MAP.map((item) => (
@@ -84,8 +86,8 @@ const FilterAction = (props) => {
           <FormLabel className={classes.replaceWithText}>{'Enter Value'}</FormLabel>
           <TextField
             variant="outlined"
-            value={newColumnName}
-            onChange={(e) => setNewColumnName(e.target.value)}
+            value={textValue}
+            onChange={(e) => setTextValue(e.target.value)}
           />
         </FormControl>
       )}

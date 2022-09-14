@@ -53,3 +53,43 @@ export const prepareDirectiveForFilter = (
   }
   return directive;
 };
+
+export const prepareDirectiveForDefineVariable = (
+  variableValue,
+  textFilter,
+  selectedColumnValue,
+  selectedAction
+) => {
+  const condition = 'set-variable';
+  const column = selectedColumnValue;
+  const textValue = textFilter;
+  const variableName = variableValue;
+  const selectedColumn = selectedColumnValue;
+  let directive;
+  const selectedCondition = selectedAction;
+  if (!textValue || !variableName) {
+    return;
+  }
+
+  switch (selectedCondition) {
+    case 'TEXTCONTAINS':
+      directive = `${condition} ${variableName} ${column} =~ .*${textValue}.* ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTSTARTSWITH':
+      directive = `${condition} ${variableName} ${column} =^ "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTENDSWITH':
+      directive = `${condition} ${variableName} ${column} =$ "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTEXACTLY':
+      directive = `${condition} ${variableName} ${column} == "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTREGEX':
+      directive = `${condition} ${variableName} ${column} =~ ${textValue} ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'CUSTOMCONDITION':
+      directive = `${condition} ${variableName} ${textValue} ? ${selectedColumn} : ${variableName}`;
+      break;
+  }
+  return directive;
+};

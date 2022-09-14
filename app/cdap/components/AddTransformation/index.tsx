@@ -18,7 +18,7 @@ import DataPrepStore from 'components/DataPrep/store';
 import { useStyles } from './styles';
 import MyDataPrepApi from 'api/dataprep';
 import { useParams } from 'react-router';
-import { prepareDirectiveForFilter } from './utils';
+import { prepareDirectiveForFilter, prepareDirectiveForDefineVariable } from './utils';
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
@@ -34,6 +34,9 @@ const AddTransformation = (props) => {
   const [exactMatch, setExactMatch] = useState(false);
   const [ignoreCase, setIgnoreCase] = useState(false);
   const [newColumnName, setNewColumnName] = useState('');
+  const [textValue, setTextValue] = useState('');
+  const [variableName, setVariableName] = useState('');
+  const [filterAction, setFilterAction] = useState('');
   const { dataprep } = DataPrepStore.getState();
 
   const classes = useStyles();
@@ -75,7 +78,7 @@ const AddTransformation = (props) => {
     } else {
       setLoading(false);
       if (functionName === 'hash') {
-        props.applyTransformation(selectedColumns[0].label, replaceValue, encode);
+        props.applyTransformation(selectedColumns[0].label, filterAction, encode);
       } else if (functionName === 'findAndReplace') {
         const newOldValue = exactMatch ? `^${oldValue}$` : oldValue;
         const newValue = ignoreCase
@@ -99,10 +102,18 @@ const AddTransformation = (props) => {
       } else if (functionName === 'filter') {
         const getValue = prepareDirectiveForFilter(
           selectedAction,
-          replaceValue,
-          newColumnName,
+          filterAction,
+          textValue,
           ignoreCase,
           selectedColumns[0].label
+        );
+        props.applyTransformation(selectedColumns[0].label, getValue);
+      } else if (functionName === 'define-variable') {
+        const getValue = prepareDirectiveForDefineVariable(
+          variableName,
+          textValue,
+          selectedColumns[0].label,
+          selectedAction
         );
         props.applyTransformation(selectedColumns[0].label, getValue);
       } else {
@@ -153,6 +164,12 @@ const AddTransformation = (props) => {
               setIgnoreCase={setIgnoreCase}
               setNewColumnName={setNewColumnName}
               newColumnName={newColumnName}
+              textValue={textValue}
+              setTextValue={setTextValue}
+              variableName={variableName}
+              setVariableName={setVariableName}
+              filterAction={filterAction}
+              setFilterAction={setFilterAction}
             />
           </div>
           <Button
