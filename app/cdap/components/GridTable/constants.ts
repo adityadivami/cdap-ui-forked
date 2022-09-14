@@ -37,4 +37,5 @@ export const OPTION_WITH_TWO_INPUT = [
   'concatenate',
   'filter',
   'custom-transform',
+  'define-variable',
 ];
