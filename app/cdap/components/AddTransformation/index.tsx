@@ -19,6 +19,7 @@ import { useStyles } from './styles';
 import MyDataPrepApi from 'api/dataprep';
 import { useParams } from 'react-router';
 import { prepareDirectiveForFilter } from './utils';
+import MarkAsError from 'components/DataPrep/Directives/MarkAsError';
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
@@ -135,6 +136,8 @@ const AddTransformation = (props) => {
               handleSelectColumn={handleSelectColumn}
               selectedColumns={selectedColumns}
             />
+
+            <MarkAsError />
             <ActionsWidget
               functionName={functionName}
               setSelectedAction={setSelectedAction}
