@@ -19,13 +19,16 @@ export const useCss = makeStyles({
     marginRight: '0px',
   },
   searchIcon: {
-    border: 'none',
     outline: 'none',
+    height: '38px',
+    marginTop: '4px',
+    border: 'none',
+    width: '440px',
   },
   cont: {
     display: 'flex',
     flexDirection: 'column',
-    position: 'relative'
+    position: 'relative',
   },
   cont1: {
     display: 'flex',

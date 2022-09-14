@@ -1,34 +1,42 @@
 export const searchItems = [
   {
     option: 'Remove missing ang null',
-    val: 'remove all missing and null values in the column',
+    val: 'Remove all missing and null values in the column',
+  },
+  {
+    option: 'Square',
+    val: 'Returns the square of each value in a column',
+  },
+  {
+    option: 'Masking data',
+    val: 'Masking data based on specific criteria',
   },
   {
     option: 'Remove missing',
-    val: 'remove missing and column',
+    val: 'Remove missing and column',
+  },
+  {
+    option: 'Filter value is',
+    val: 'Keeps or removes all values with exact specified value',
+  },
+  {
+    option: 'Delete columns',
+    val: 'Delete the selected columns',
   },
   {
     option: 'Remove missing null',
-    val: 'remove all null values in the column',
+    val: 'Remove all null values in the column',
   },
   {
     option: 'Remove letters',
-    val: 'remove letters from the string',
+    val: 'Remove letters from the string',
   },
   {
     option: 'Remove numbers',
-    val: 'remove all numerical characters from the string',
+    val: 'Remove all numerical characters from the string',
   },
   {
     option: 'Remove special characters',
-    val: 'remove all numerical characters from the string',
-  },
-  {
-    option: 'delete columns',
-    val: 'delete the selected columns',
-  },
-  {
-    option: 'masking data',
-    val: 'masking data based on specific criteria',
+    val: 'Remove all numerical characters from the string',
   },
 ];

@@ -68,7 +68,8 @@ const ToolBarList = () => {
             <IconButton>{SearchIconn}</IconButton>
 
             <input
-              placeholder="Search Functions"
+              placeholder="Input a function name or description"
+              type="search"
               onChange={handleSearch}
               onBlur={() => {
                 setList([]);
@@ -76,11 +77,9 @@ const ToolBarList = () => {
               className={classes.searchIcon}
             />
           </div>
-
-          {list.length > 0 && <Search list={list} />}
+          {list.length > 0 && <Search list={list} />} 
         </div>
       </Box>
-
       <IconButton>{Expand}</IconButton>
     </Box>
   );
