@@ -15,6 +15,7 @@ import HashFunctionAction from './Components/HashFunctionAction';
 import FindAndReplace from './Components/FindAndReplaceAction';
 import Concatenate from './Components/ConcatenateAction';
 import FilterAction from './Components/FilterAction';
+import CustomTransform from './Components/CustomTransform';
 
 const ActionsWidget = (props) => {
   const {
@@ -97,6 +98,13 @@ const ActionsWidget = (props) => {
           setReplaceValue={setReplaceValue}
           selectedAction={selectedAction}
           setSelectedAction={setSelectedAction}
+        />
+      )}
+      {functionName === 'custom-transform' && selectedColumns.length > 0 && (
+        <CustomTransform
+          selectedColumns={selectedColumns}
+          replaceValue={replaceValue}
+          setReplaceValue={setReplaceValue}
         />
       )}
     </React.Fragment>
