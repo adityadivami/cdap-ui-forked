@@ -54,7 +54,7 @@ const DirectiveDrawer = (props) => {
   const toggleAutoComplete = () => {
     setAutoCompleteOn(!autoCompleteOn);
   };
-
+  console.log('directiveInput', directiveInput);
   return (
     <div>
       <Drawer anchor={'bottom'} open={open} onClose={toggleDrawer('bottom', false)}>
@@ -65,6 +65,7 @@ const DirectiveDrawer = (props) => {
           onRowClick={handleDirectiveChange}
           inputRef={directiveRef}
           getDirectiveUsage={(activeResults, value) => {
+            console.log('activeResults, value', activeResults, value);
             setOnDirectiveSelection({
               isDirectiveSelected: value,
               activeResults,
@@ -84,7 +85,7 @@ const DirectiveDrawer = (props) => {
                     <Typography className={classes.usageText} variant="body1">
                       Usage:&nbsp; {row.item.usage}
                     </Typography>
-                    <Divider />
+                    <Divider classes={{ root: classes.divider }} />
                   </Box>
                 );
               })
