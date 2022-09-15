@@ -4,6 +4,7 @@ import { CrossIcon } from './iconStore';
 import { useStyles } from './styles';
 import AutoCompleteList from './Components/AutoComplete';
 import DataPrepStore from 'components/DataPrep/store';
+import { isDirective } from 'graphql';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -11,6 +12,7 @@ const DirectiveDrawer = (props) => {
   const [open, setOpen] = useState(true);
   const [directiveInput, setDirectiveInput] = useState('');
   const [autoCompleteOn, setAutoCompleteOn] = useState(false);
+  const [isColumnSelected, setIsColumnSelected] = useState(false);
   const [onDirectiveSelection, setOnDirectiveSelection] = useState({
     isDirectiveSelected: false,
     activeResults: [],
@@ -18,7 +20,6 @@ const DirectiveDrawer = (props) => {
   const directiveRef = useRef();
   const classes = useStyles();
   const { dataprep } = DataPrepStore.getState();
-  console.log('dataprep', dataprep.directives);
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
@@ -34,6 +35,7 @@ const DirectiveDrawer = (props) => {
   };
 
   const handleDirectiveChange = (event) => {
+    console.log('event, finalEnter', event);
     setDirectiveInput(event.target.value);
     setAutoCompleteOn(true);
   };
@@ -54,7 +56,7 @@ const DirectiveDrawer = (props) => {
   const toggleAutoComplete = () => {
     setAutoCompleteOn(!autoCompleteOn);
   };
-  console.log('directiveInput', directiveInput);
+
   return (
     <div>
       <Drawer anchor={'bottom'} open={open} onClose={toggleDrawer('bottom', false)}>
@@ -62,20 +64,20 @@ const DirectiveDrawer = (props) => {
           isOpen={autoCompleteOn}
           toggle={toggleAutoComplete}
           input={directiveInput}
-          onRowClick={handleDirectiveChange}
+          onRowClick={(eventObject) => handleDirectiveChange(eventObject)}
           inputRef={directiveRef}
           getDirectiveUsage={(activeResults, value) => {
-            console.log('activeResults, value', activeResults, value);
             setOnDirectiveSelection({
               isDirectiveSelected: value,
               activeResults,
             });
           }}
-          isDirectiveSelected={onDirectiveSelection.isDirectiveSelected}
-          columnNamesList={props.columnNamesList}
-          onDirectiveInputHandler={(value) => {
-            console.log('value', value);
+          onColumnSelected={(value) => {
+            setIsColumnSelected(true);
           }}
+          isDirectiveSelected={onDirectiveSelection.isDirectiveSelected}
+          isColumnSelected={isColumnSelected}
+          columnNamesList={props.columnNamesList}
         />
         <Box className={classes.usageAndSearchWrapper}>
           {onDirectiveSelection.activeResults.length === 1
@@ -103,7 +105,11 @@ const DirectiveDrawer = (props) => {
                 onChange={handleDirectiveChange}
                 ref={directiveRef}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (
+                    e.key === 'Enter' &&
+                    isColumnSelected &&
+                    onDirectiveSelection.isDirectiveSelected
+                  ) {
                     props.onDirectiveInputHandler([directiveInput]);
                   }
                 }}
