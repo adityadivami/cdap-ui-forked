@@ -42,7 +42,6 @@ const DataPrepAutoComplete = (props) => {
     if (props.isDirectiveSelected === false) {
       const namespace = NamespaceStore.getState().selectedNamespace;
       MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
-        console.log('res', res);
         const fuseOptions = {
           includeScore: true,
           includeMatches: true,
@@ -105,22 +104,13 @@ const DataPrepAutoComplete = (props) => {
     }
 
     const selectedDirective = activeResults[activeSelectionIndex];
-
-    const inputSplit = input.split(' '),
-      directiveSplit = selectedDirective ? selectedDirective.item.directive.split(' ') : [];
-
-    const splitLengthCheck = inputSplit.length < directiveSplit.length,
-      stringLengthCheck =
-        selectedDirective && input.length <= selectedDirective.item.directive.length;
-
-    if (selectedDirective && (splitLengthCheck || stringLengthCheck)) {
+    if (selectedDirective) {
       handleRowClick(activeResults[activeSelectionIndex]);
     } else {
       const eventObject = {
         target: { value: `${input}` },
       };
-      props.onRowClick(eventObject);
-      props.onDirectiveInputHandler([input]);
+        props.onRowClick(eventObject);
     }
   };
 
@@ -191,7 +181,6 @@ const DataPrepAutoComplete = (props) => {
     setInput(query);
     setMatched(spaceIndex !== -1);
     setActiveSelectionIndex(results.length - 1);
-    console.log('props.isDirectiveSelected', props.isDirectiveSelected);
     if (props.isDirectiveSelected === false) {
       if ((spaceIndex !== -1) === true) {
         props.getDirectiveUsage(results, true);
@@ -218,12 +207,13 @@ const DataPrepAutoComplete = (props) => {
       eventObject = {
         target: { value: `${splitData[0]} ${splitData[1]}${row.item.label}` },
       };
-      console.log('eventObject', eventObject);
       setInput(`${splitData[0]} ${splitData[1]}${row.item.label}`);
       props.onRowClick(eventObject);
+      props.onColumnSelected(true);
     }
   };
 
+  console.log('activeResults', activeResults);
   return (
     <Box className={classes.listWrapper}>
       {activeResults.map((row, index) => {
