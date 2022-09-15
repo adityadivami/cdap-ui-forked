@@ -16,10 +16,33 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  resultRow: {},
-  activeRow: {},
-  directiveTitle: {},
-  directiveDescription: {},
+  resultRow: {
+    padding: 10,
+    borderBottom: '1px solid #E0E0E0',
+    '&:hover': {
+      background: '#EFF0F2',
+      cursor: 'pointer',
+    },
+  },
+  activeRow: {
+    background: '#EFF0F2',
+  },
+  directiveTitle: {
+    fontFamily: 'Noto Sans',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '16px',
+    letterSpacing: '0.15px',
+    color: '#616161',
+  },
+  directiveDescription: {
+    fontFamily: 'Noto Sans',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: '14px',
+    letterSpacing: '0.15px',
+    color: '#616161',
+  },
   directiveUsage: {},
   listWrapper: {},
 });

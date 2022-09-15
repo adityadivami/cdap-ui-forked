@@ -16,9 +16,11 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  searchBar: {
+  usageAndSearchWrapper: {
     background: '#616161',
     boxShadow: '-3px -4px 15px rgba(68, 132, 245, 0.25)',
+  },
+  searchBar: {
     padding: 10,
     display: 'flex',
     justifyContent: 'space-between',
@@ -38,4 +40,6 @@ export const useStyles = makeStyles({
     color: '#94EC98',
     fontSize: '14px',
   },
+  directiveUsage: {},
+  usageText: {},
 });
