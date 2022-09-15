@@ -26,8 +26,9 @@ import classnames from 'classnames';
 import NamespaceStore from 'services/NamespaceStore';
 import ee from 'event-emitter';
 import globalEvents from 'services/global-events';
-import {useStyles} from './styles';
-import { Box } from '@material-ui/core';
+import { useStyles } from './styles';
+import { Box, Divider, Typography } from '@material-ui/core';
+import { query } from 'express';
 
 const DataPrepAutoComplete = (props) => {
   const [activeResults, setActiveResults] = useState([]);
@@ -38,25 +39,27 @@ const DataPrepAutoComplete = (props) => {
   const [fuse, setFuse] = useState(null);
   const classes = useStyles();
   const getUsage = () => {
-    const namespace = NamespaceStore.getState().selectedNamespace;
-
-    MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
-      const fuseOptions = {
-        includeScore: true,
-        includeMatches: true,
-        caseSensitive: false,
-        threshold: 0,
-        shouldSort: true,
-        location: 0,
-        distance: 100,
-        minMatchCharLength: 1,
-        maxPatternLength: 32,
-        keys: ['directive'],
-      };
-      console.log('res', res);
-      setFuse(new Fuse(res.values, fuseOptions));
-      console.log('fuse', new Fuse(res.values, fuseOptions));
-    });
+    if (props.isDirectiveSelected === false) {
+      const namespace = NamespaceStore.getState().selectedNamespace;
+      MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
+        console.log('res', res);
+        const fuseOptions = {
+          includeScore: true,
+          includeMatches: true,
+          caseSensitive: false,
+          threshold: 0,
+          shouldSort: true,
+          location: 0,
+          distance: 100,
+          minMatchCharLength: 1,
+          maxPatternLength: 32,
+          keys: ['directive'],
+        };
+        setFuse(new Fuse(res.values, fuseOptions));
+      });
+    } else {
+      setFuse(new Fuse(props.columnNamesList));
+    }
   };
   eventEmitter.on(globalEvents.DIRECTIVEUPLOAD, getUsage);
   useEffect(() => {
@@ -66,7 +69,6 @@ const DataPrepAutoComplete = (props) => {
   useEffect(() => {
     const directiveInput = document.getElementById('directive-input-search');
     const mousetrap = new Mousetrap(directiveInput);
-    console.log('mousetrap', mousetrap);
     mousetrap.bind('esc', props.toggle);
     mousetrap.bind('up', handleUpArrow);
     mousetrap.bind('down', handleDownArrow);
@@ -94,7 +96,6 @@ const DataPrepAutoComplete = (props) => {
     if (activeSelectionIndex === activeResults.length - 1) {
       return;
     }
-
     setActiveSelectionIndex(activeSelectionIndex + 1);
   };
 
@@ -115,7 +116,11 @@ const DataPrepAutoComplete = (props) => {
     if (selectedDirective && (splitLengthCheck || stringLengthCheck)) {
       handleRowClick(activeResults[activeSelectionIndex]);
     } else {
-      props?.execute([input]);
+      const eventObject = {
+        target: { value: `${input}` },
+      };
+      props.onRowClick(eventObject);
+      props.onDirectiveInputHandler([input]);
     }
   };
 
@@ -123,85 +128,120 @@ const DataPrepAutoComplete = (props) => {
     if (input.length === 0 || input.split(' ').length !== 1) {
       return;
     }
-
     if (e.preventDefault) {
       e.preventDefault();
     } else {
       e.returnValue = false;
     }
-
     handleEnterKey();
   };
+
   useEffect(() => {
+    if (
+      (props.isDirectiveSelected === true || props.isDirectiveSelected == undefined) &&
+      props.isDirectiveSelected !== false
+    ) {
+      const fuseOptions = {
+        includeScore: true,
+        includeMatches: true,
+        caseSensitive: false,
+        threshold: 0,
+        shouldSort: true,
+        location: 0,
+        distance: 100,
+        minMatchCharLength: 1,
+        maxPatternLength: 32,
+        keys: ['label'],
+      };
+      setFuse(new Fuse(props.columnNamesList, fuseOptions));
+    }
     searchMatch(props.input);
     setInput(props.input);
   }, [props.input]);
 
   const searchMatch = (query) => {
     let results = [];
-    let input = query;
+    const input = query;
     const spaceIndex = input.indexOf(' ');
-    if (spaceIndex !== -1) {
-      input = input.slice(0, spaceIndex);
-    }
-
     if (fuse && input.length > 0) {
-      results = fuse
-        .search(input)
-        .slice(0, 3)
-        .filter((row, index) => {
-          if (spaceIndex === -1) {
-            return true;
-          }
-          return row.score === 0 && index === 0;
-        })
-        .map((row) => {
+      if (props.isDirectiveSelected === false) {
+        results = fuse
+          .search(input)
+          .slice(0, 3)
+          .filter((row, index) => {
+            if (spaceIndex === -1) {
+              return true;
+            }
+            return row.score === 0 && index === 0;
+          })
+          .map((row) => {
+            row.uniqueId = uuidV4();
+            return row;
+          });
+        reverse(results);
+      } else {
+        results = fuse.search(input.split(':')[1]).map((row) => {
           row.uniqueId = uuidV4();
           return row;
         });
-      reverse(results);
+        reverse(results);
+      }
     }
     setActiveResults(results);
     setInput(query);
     setMatched(spaceIndex !== -1);
     setActiveSelectionIndex(results.length - 1);
+    if (props.isDirectiveSelected === false) {
+      if ((spaceIndex !== -1) === true) {
+        props.getDirectiveUsage(results, true);
+      } else {
+        props.getDirectiveUsage(results, false);
+      }
+    }
   };
 
   const handleRowClick = (row) => {
     if (typeof props.onRowClick !== 'function') {
       return;
     }
-
-    const eventObject = {
-      target: { value: `${row.item.directive} ` },
-    };
-
-    props.onRowClick(eventObject);
-    props.inputRef.focus();
+    let eventObject = {};
+    if (props.isDirectiveSelected === false) {
+      eventObject = {
+        target: { value: `${row.item.directive} ` },
+      };
+      props.onRowClick(eventObject);
+      props.getDirectiveUsage(activeResults);
+      props.inputRef.focus();
+    } else {
+      const splitData = input.split(/(?=[:])|(?<=[:])/g);
+      eventObject = {
+        target: { value: `${splitData[0]} ${splitData[1]}${row.item.label}` },
+      };
+      props.onRowClick(eventObject);
+    }
   };
-
-  console.log('activeResults', activeResults, activeSelectionIndex);
 
   return (
     <Box className={classes.listWrapper}>
       {activeResults.map((row, index) => {
         return (
           <Box
-            className={index === activeSelectionIndex ? `${classes.resultRow} ${classes.activeRow}` : `${classes.resultRow}`}
+            className={
+              index === activeSelectionIndex
+                ? `${classes.resultRow} ${classes.activeRow}`
+                : `${classes.resultRow}`
+            }
             key={row.uniqueId}
             onClick={() => handleRowClick(row)}
           >
-            <Box className={classes.directiveTitle}>
-              <strong>{row.item.directive}</strong>
+            <Box>
+              <Typography className={classes.directiveTitle} variant="body1">
+                {row.item.directive || row.item.label}
+              </Typography>
+              <Typography className={classes.directiveDescription} variant="body1">
+                {row.item.description}
+              </Typography>
             </Box>
-            <Box className={classes.directiveDescription}>{row.item.description}</Box>
-
-            {matched || activeResults.length === 1 ? (
-              <Box className={classes.directiveUsage}>
-                <span>Usage: </span>
-                <pre>{row.item.usage}</pre>
-              </Box>
-            ) : null}
           </Box>
         );
       })}

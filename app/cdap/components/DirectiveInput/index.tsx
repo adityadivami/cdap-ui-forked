@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { Box, Drawer } from '@material-ui/core';
+import { Box, Drawer, Typography, Divider } from '@material-ui/core';
 import { CrossIcon } from './iconStore';
 import { useStyles } from './styles';
 import AutoCompleteList from './Components/AutoComplete';
+import DataPrepStore from 'components/DataPrep/store';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
@@ -10,8 +11,14 @@ const DirectiveDrawer = (props) => {
   const [open, setOpen] = useState(true);
   const [directiveInput, setDirectiveInput] = useState('');
   const [autoCompleteOn, setAutoCompleteOn] = useState(false);
+  const [onDirectiveSelection, setOnDirectiveSelection] = useState({
+    isDirectiveSelected: false,
+    activeResults: [],
+  });
   const directiveRef = useRef();
   const classes = useStyles();
+  const { dataprep } = DataPrepStore.getState();
+  console.log('dataprep', dataprep.directives);
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
@@ -57,27 +64,53 @@ const DirectiveDrawer = (props) => {
           input={directiveInput}
           onRowClick={handleDirectiveChange}
           inputRef={directiveRef}
-          //   hasError: PropTypes.any,
-          //   execute: PropTypes.func,
+          getDirectiveUsage={(activeResults, value) => {
+            setOnDirectiveSelection({
+              isDirectiveSelected: value,
+              activeResults,
+            });
+          }}
+          isDirectiveSelected={onDirectiveSelection.isDirectiveSelected}
+          columnNamesList={props.columnNamesList}
+          onDirectiveInputHandler={(value) => {
+            console.log('value', value);
+          }}
         />
-        <Box className={classes.searchBar}>
-          <Box className={classes.inputWrapper}>
-            <label htmlFor="directive-input-search" className={classes.label}>
-              $
-            </label>
-            <input
-              type="text"
-              id="directive-input-search"
-              className={classes.inputSearch}
-              placeholder={'Input a directive'}
-              value={directiveInput}
-              onChange={handleDirectiveChange}
-              onPaste={handlePaste}
-              ref={directiveRef}
-              //   disabled={this.props.disabled}
-            />
+        <Box className={classes.usageAndSearchWrapper}>
+          {onDirectiveSelection.activeResults.length === 1
+            ? onDirectiveSelection.activeResults.map((row) => {
+                return (
+                  <Box className={classes.directiveUsage}>
+                    <Typography className={classes.usageText} variant="body1">
+                      Usage:&nbsp; {row.item.usage}
+                    </Typography>
+                    <Divider />
+                  </Box>
+                );
+              })
+            : null}
+          <Box className={classes.searchBar}>
+            <Box className={classes.inputWrapper}>
+              <label htmlFor="directive-input-search" className={classes.label}>
+                $
+              </label>
+              <input
+                id="directive-input-search"
+                className={classes.inputSearch}
+                placeholder={'Input a directive'}
+                value={directiveInput}
+                onChange={handleDirectiveChange}
+                ref={directiveRef}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    props.onDirectiveInputHandler([directiveInput]);
+                  }
+                }}
+                //   disabled={this.props.disabled}
+              />
+            </Box>
+            <Box onClick={() => props.onClose()}>{CrossIcon}</Box>
           </Box>
-          {CrossIcon}
         </Box>
       </Drawer>
     </div>

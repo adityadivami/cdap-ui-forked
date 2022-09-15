@@ -52,7 +52,12 @@ export default function GridTable() {
     },
   ]);
 
-  const getWorkSpaceData = (params: IParams, workspaceId: string) => {
+  const getWorkSpaceData = (
+    params: IParams,
+    workspaceId: string,
+    selectedDirective?: string[] | undefined
+  ) => {
+    console.log('selectedDirective', selectedDirective);
     const gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -70,10 +75,13 @@ export default function GridTable() {
             return;
           }
           const directives = objectQuery(res, 'directives') || [];
-          const requestBody = directiveRequestBodyCreator(directives);
+          const updatedDirectives =
+            selectedDirective?.length > 0 ? directives.concat(selectedDirective) : directives;
+          const requestBody = directiveRequestBodyCreator(updatedDirectives);
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
+          console.log('directives con', directives);
           const insights = {
             name: sampleSpec.connectionName,
             workspaceName: res.workspaceName,
@@ -106,6 +114,7 @@ export default function GridTable() {
             ...gridParams,
           },
         });
+        setOpenDirective(false);
         setLoading(false);
         setGridData(response);
       });
@@ -282,7 +291,21 @@ export default function GridTable() {
         </div>
       )}
       <Button onClick={() => setOpenDirective(true)}>Open</Button>
-      {openDirective && <DirectiveInputDrawer open={openDirective} />}
+      {openDirective && (
+        <DirectiveInputDrawer
+          open={openDirective}
+          columnNamesList={headersNamesList}
+          onDirectiveInputHandler={(directives) => {
+            console.log('directives in handle', directives);
+            const payload = {
+              context: params.namespace,
+              workspaceId: params.wid,
+            };
+            getWorkSpaceData(payload, wid, directives);
+          }}
+          onClose={() => setOpenDirective(false)}
+        />
+      )}
     </Box>
   );
 }
