@@ -40,6 +40,18 @@ export const useStyles = makeStyles({
     color: '#94EC98',
     fontSize: '14px',
   },
-  directiveUsage: {},
-  usageText: {},
+  directiveUsage: {
+    padding: 10,
+  },
+  usageText: {
+    fontFamily: 'Noto Sans',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: '14px',
+    letterSpacing: '0.15px',
+    color: '#ffffff',
+  },
+  divider: {
+    backgroundColor: '#ffffff',
+  },
 });

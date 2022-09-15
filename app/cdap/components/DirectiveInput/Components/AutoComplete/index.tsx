@@ -191,6 +191,7 @@ const DataPrepAutoComplete = (props) => {
     setInput(query);
     setMatched(spaceIndex !== -1);
     setActiveSelectionIndex(results.length - 1);
+    console.log('props.isDirectiveSelected', props.isDirectiveSelected);
     if (props.isDirectiveSelected === false) {
       if ((spaceIndex !== -1) === true) {
         props.getDirectiveUsage(results, true);
@@ -210,13 +211,15 @@ const DataPrepAutoComplete = (props) => {
         target: { value: `${row.item.directive} ` },
       };
       props.onRowClick(eventObject);
-      props.getDirectiveUsage(activeResults);
+      props.getDirectiveUsage([row], true);
       props.inputRef.focus();
     } else {
       const splitData = input.split(/(?=[:])|(?<=[:])/g);
       eventObject = {
         target: { value: `${splitData[0]} ${splitData[1]}${row.item.label}` },
       };
+      console.log('eventObject', eventObject);
+      setInput(`${splitData[0]} ${splitData[1]}${row.item.label}`);
       props.onRowClick(eventObject);
     }
   };
