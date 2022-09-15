@@ -218,7 +218,7 @@ export default function GridTable() {
       rawData.values &&
       Array.isArray(rawData.values) &&
       rawData.values.map((eachRow) => {
-        if (Object.keys(eachRow).length === 1) {
+        if (Object.keys(eachRow).length === 1 && 'body' in eachRow) {
           const body = eachRow.body;
           return { body };
         } else {
