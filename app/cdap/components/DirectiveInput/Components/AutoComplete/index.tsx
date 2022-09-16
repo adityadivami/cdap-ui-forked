@@ -44,7 +44,7 @@ const DataPrepAutoComplete = (props) => {
       MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
         const fuseOptions = {
           includeScore: true,
-          includeMatches: true,
+          // includeMatches: true,
           caseSensitive: false,
           threshold: 0,
           shouldSort: true,
@@ -110,7 +110,7 @@ const DataPrepAutoComplete = (props) => {
       const eventObject = {
         target: { value: `${input}` },
       };
-        props.onRowClick(eventObject);
+      props.onRowClick(eventObject);
     }
   };
 
@@ -133,7 +133,7 @@ const DataPrepAutoComplete = (props) => {
     ) {
       const fuseOptions = {
         includeScore: true,
-        includeMatches: true,
+        // includeMatches: true,
         caseSensitive: false,
         threshold: 0,
         shouldSort: true,
