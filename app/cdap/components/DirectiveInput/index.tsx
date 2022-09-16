@@ -99,6 +99,7 @@ const DirectiveDrawer = (props) => {
               </label>
               <input
                 id="directive-input-search"
+                autoComplete="OFF"
                 className={classes.inputSearch}
                 placeholder={'Input a directive'}
                 value={directiveInput}
