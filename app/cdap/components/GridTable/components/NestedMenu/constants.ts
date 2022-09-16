@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 export const DATATYPE_OPTIONS = [
   {
     value: 'string',
@@ -163,6 +164,10 @@ export const MENU_OPTIONS = [
   {
     value: 'filter',
     label: 'Filter',
+  },
+  {
+    value: 'send-to-error',
+    label: 'Send to Error',
   },
   {
     value: 'delete',
