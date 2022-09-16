@@ -144,6 +144,10 @@ const AddTransformation = (props) => {
           ignoreCase,
           filterAction
         );
+
+        if (getValue === '') {
+          setDisableSendToError(true);
+        }
         props.applyTransformation(selectedColumns[0].label, getValue);
       } else {
         props.applyTransformation(selectedColumns[0].label, replaceValue);
@@ -203,7 +207,7 @@ const AddTransformation = (props) => {
           </div>
           <Button
             variant="contained"
-            disabled={selectedColumns.length ? false : true}
+            disabled={selectedColumns.length ? false : true && disableSendToError}
             color="primary"
             classes={{ containedPrimary: classes.buttonStyles }}
             className={classes.applyStepButtonStyles}

@@ -167,8 +167,10 @@ export const prepareDirectiveForSendToError = (
 
     case 'TEXTCONTAINS':
       if (textValue === '') {
+        // if we get no textValue
         return '';
       }
+
       if (ignoreCase) {
         textValue = `(?i).*${textValue}`;
       } else {
@@ -178,6 +180,9 @@ export const prepareDirectiveForSendToError = (
       break;
 
     case 'TEXTSTARTSWITH':
+      if (textValue === '') {
+        return '';
+      }
       equalityOperator = '=^';
       if (ignoreCase) {
         textValue = `(?i)^${textValue}.*`;
@@ -187,6 +192,9 @@ export const prepareDirectiveForSendToError = (
       break;
 
     case 'TEXTENDSWITH':
+      if (textValue === '') {
+        return '';
+      }
       equalityOperator = '=$';
       if (ignoreCase) {
         textValue = `(?i).*${textValue}$`;
@@ -195,6 +203,9 @@ export const prepareDirectiveForSendToError = (
       finalExpression = `${directive} ${column} ${equalityOperator} "${textValue}"`;
       break;
     case 'TEXTEXACTLY':
+      if (textValue === '') {
+        return '';
+      }
       if (ignoreCase) {
         textValue = `(?i)${textValue}`;
         equalityOperator = `=~`;
@@ -202,10 +213,16 @@ export const prepareDirectiveForSendToError = (
       finalExpression = `${directive} ${column} ${equalityOperator} "${textValue}"`;
       break;
     case 'TEXTREGEX':
+      if (textValue === '') {
+        return '';
+      }
       finalExpression = `${directive} ${column} =~ "${textValue}"`;
       break;
 
     case 'CUSTOMCONDITION':
+      if (textValue === '') {
+        return '';
+      }
       finalExpression = `${directive} ${textValue}`;
       break;
     case 'ISDATEFORMAT':
