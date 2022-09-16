@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@material-ui/core/Box';
 import { useCss } from './styles';
-import { IconButton } from '@material-ui/core';
+import { IconButton, TextField } from '@material-ui/core';
+import Autocomplete from '@material-ui/core';
 import { searchItems } from './constants';
 import Search from './searchcomponent';
+
 import {
   Undo,
   Redo,
@@ -21,25 +23,10 @@ import {
   Expand,
 } from './images';
 
-const ToolBarList = () => {
+export default function ToolBarList() {
   const classes = useCss();
-  const [list, setList] = useState([]);
-  const handleSearch = (event) => {
-    if (event.target.value) {
-      const getFilterVal = searchItems.filter(
-        (el) =>
-          el.option.toLowerCase().includes(event.target.value.toLowerCase()) ||
-          el.val.toLowerCase().includes(event.target.value.toLowerCase())
-      );
-      if (getFilterVal.length) {
-        setList(getFilterVal);
-      } else {
-        setList([]);
-      }
-    } else {
-      setList(searchItems);
-    }
-  };
+  const [value, setValue] = useState('');
+
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
@@ -67,22 +54,15 @@ const ToolBarList = () => {
           <div className={classes.cont1}>
             <IconButton>{SearchIconn}</IconButton>
 
-            <input
-              placeholder="Input a function name or description"
-              type="search"
-              onChange={handleSearch}
-              onBlur={() => {
-                setList([]);
-              }}
-              className={classes.searchIcon}
+            <Autocomplete
+              id="combo-box-demo"
+              options={searchItems}
+              renderInput={(params) => <TextField {...params} label="options" />}
             />
           </div>
-          {list.length > 0 && <Search list={list} />} 
         </div>
       </Box>
       <IconButton>{Expand}</IconButton>
     </Box>
   );
-};
-
-export default ToolBarList;
+}

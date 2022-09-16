@@ -32,7 +32,7 @@ import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
-import ToolBarList from 'components/GridToolBar';
+import ToolBarList from 'components/GridToolBar/index2';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
