@@ -61,3 +61,7 @@ export const parseDirective = (
     return `parse-as-fixed-length :${column} ${columnWidth} ${optionPadding}`;
   }
 };
+
+export const directiveForHash = (column, alogorithm, encode) => {
+  return `hash :${column} ${alogorithm} ${encode}`;
+};

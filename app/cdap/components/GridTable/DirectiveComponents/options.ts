@@ -160,3 +160,14 @@ export const PARSE_EXCEL_OPTIONS = [
     value: 'sheetName',
   },
 ];
+
+export const CONCATENATE_OPTIONS = [
+  {
+    label: 'at the beginning of the content of each row',
+    value: 'BEGINNING',
+  },
+  {
+    label: 'at the end of the content of each row',
+    value: 'END',
+  },
+];
