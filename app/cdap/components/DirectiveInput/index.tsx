@@ -35,7 +35,13 @@ const DirectiveDrawer = (props) => {
   };
 
   const handleDirectiveChange = (event) => {
-    console.log('event, finalEnter', event);
+    console.log('directiveInput', directiveInput, event.target);
+    if (!event.target.value) {
+      setOnDirectiveSelection({
+        isDirectiveSelected: false,
+        activeResults: [],
+      });
+    }
     setDirectiveInput(event.target.value);
     setAutoCompleteOn(true);
   };
@@ -75,6 +81,7 @@ const DirectiveDrawer = (props) => {
           onColumnSelected={(value) => {
             setIsColumnSelected(true);
           }}
+          usageArray={onDirectiveSelection.activeResults}
           isDirectiveSelected={onDirectiveSelection.isDirectiveSelected}
           isColumnSelected={isColumnSelected}
           columnNamesList={props.columnNamesList}
@@ -106,10 +113,23 @@ const DirectiveDrawer = (props) => {
                 onChange={handleDirectiveChange}
                 ref={directiveRef}
                 onKeyDown={(e) => {
+                  const usageArraySplit =
+                    onDirectiveSelection.activeResults.length > 0
+                      ? onDirectiveSelection.activeResults[0]?.item?.usage.split(' ')
+                      : [];
+                  const inputSplit = directiveInput.replace(/^\s+/g, '').split(' ');
+                  console.log(
+                    'usageArraySplit, inputSplit',
+                    usageArraySplit,
+                    inputSplit,
+                    usageArraySplit.length,
+                    inputSplit.length
+                  );
                   if (
                     e.key === 'Enter' &&
                     isColumnSelected &&
-                    onDirectiveSelection.isDirectiveSelected
+                    onDirectiveSelection.isDirectiveSelected &&
+                    usageArraySplit.length === inputSplit.length
                   ) {
                     props.onDirectiveInputHandler([directiveInput]);
                   }
