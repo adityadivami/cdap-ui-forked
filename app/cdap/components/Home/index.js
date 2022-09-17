@@ -26,6 +26,8 @@ import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/
 import HomeActions from 'components/Home/HomeActions';
 import ToggleExperiment from 'components/Lab/ToggleExperiment';
 import ee from 'event-emitter';
+import FunctionSearch from 'components/FunctionSearch';
+
 require('./Home.scss');
 
 const EntityListView = Loadable({
@@ -162,6 +164,7 @@ export default class Home extends Component {
             path="/ns/:namespace/datasources/:connectorType"
             component={ConnectionList}
           />
+          <Route exact path="/ns/:namespace/functionSearch" component={FunctionSearch} />
           <Route exact path="/ns/:namespace/workspace-list" component={WorkspaceList} />
           <Route exact path="/ns/:namespace/wrangler-grid/:wid" component={WrangleGrid} />
           <Route exact path="/ns/:namespace/control" component={EntityListView} />
