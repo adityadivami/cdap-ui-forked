@@ -37,7 +37,7 @@ const ColumnInsights = (props) => {
         dataQuality={columnDetail?.dataQuality}
         columnInfo={columnDetail?.dataQualityBar}
       />
-      <ColumnDataDistribution />
+      <ColumnDataDistribution graphData={columnDetail?.dataDistributionGraphData} />
     </DrawerWidget>
   );
 };

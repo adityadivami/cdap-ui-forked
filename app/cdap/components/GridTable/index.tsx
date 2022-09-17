@@ -35,6 +35,7 @@ import {
   characterCount,
   convertNonNullPercent,
   checkAlphaNumericAndSpaces,
+  calculateDistributionGraphData,
 } from './utils';
 
 const GridTable = () => {
@@ -62,6 +63,7 @@ const GridTable = () => {
     },
     dataQualityBar: {},
     dataTypeString: '',
+    dataDistributionGraphData: [],
   });
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
@@ -243,6 +245,7 @@ const GridTable = () => {
       },
       dataQualityBar: gridData?.summary?.statistics[columnName],
       dataTypeString: getDataTypeString,
+      dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
     });
   };
 
@@ -271,6 +274,7 @@ const GridTable = () => {
               },
               dataQualityBar: {},
               dataTypeString: '',
+              dataDistributionGraphData: [],
             })
           }
         />
