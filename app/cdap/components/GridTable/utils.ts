@@ -122,3 +122,18 @@ const isTrailingSpace = (string) => {
 const isLetter = (string) => {
   return /[a-z]/.test(string);
 };
+
+export const calculateDistributionGraphData = (values, columnName) => {
+  const arrayOfColumn = values.map((el) => el[columnName]);
+  const map = {};
+  for (let i = 0; i < arrayOfColumn.length; i++) {
+    map[arrayOfColumn[i]] = (map[arrayOfColumn[i]] || 0) + 1;
+  }
+  return Object.keys(map)
+    .sort(function(a, b) {
+      return map[b] - map[a];
+    })
+    .map((key) => {
+      return { text: key, value: map[key] };
+    });
+};

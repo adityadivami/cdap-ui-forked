@@ -3,25 +3,18 @@ import React from 'react';
 import { useStyles } from './styles';
 import BarChart from 'react-bar-chart';
 
-const data = [
-  { text: 'Man', value: 500 },
-  { text: 'Woman', value: 300 },
-  { text: 'x', value: 500 },
-  { text: 'y', value: 300 },
-  { text: 'a', value: 500 },
-  { text: 'b', value: 300 },
-  { text: 'xa', value: 500 },
-  { text: 'yb', value: 300 },
-  { text: 'ac', value: 500 },
-  { text: 'be', value: 300 },
-];
-
 const margin = { top: 20, right: 20, bottom: 70, left: 40 };
 
-const ColumnDataDistribution = () => {
+const spliceData = (data) => {
+  if (data.length >= 10) {
+    return data.slice(0, 9);
+  }
+  return data;
+};
+
+const ColumnDataDistribution = ({ graphData }) => {
   const classes = useStyles();
   const handleBarClick = () => {};
-
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
       <div className={classes.columnInsightsColumnName}>{DISTRIBUTION}</div>
@@ -32,7 +25,7 @@ const ColumnDataDistribution = () => {
           width={410}
           height={200}
           margin={margin}
-          data={data}
+          data={spliceData(graphData)}
           onBarClick={handleBarClick}
         />
       </div>
