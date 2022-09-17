@@ -18,10 +18,11 @@ import MyDataPrepApi from 'api/dataprep';
 import { useParams } from 'react-router';
 import DirectiveContent from 'components/GridTable/DirectiveComponents';
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
-import { parseDirective } from './utils';
+import { parseDirective, directiveForHash } from './utils';
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
+  console.log('columnData', columnData);
   const params = useParams() as any;
 
   const [drawerStatus, setDrawerStatus] = useState(true);
@@ -29,7 +30,6 @@ const AddTransformation = (props) => {
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [selectedAction, setSelectedAction] = useState('');
   const [replaceValue, setReplaceValue] = useState('');
-  const { dataprep } = DataPrepStore.getState();
   const [directiveComponentValues, setDirectiveComponentsValue] = useState({
     radioOption: '',
     ignoreCase: false,
@@ -46,8 +46,11 @@ const AddTransformation = (props) => {
     depth: 1,
     columnWidths: '',
     optionPaddingParam: '',
+    hashValue: '',
+    encode: false,
+    copyToNewColumn: false,
+    columnNames: columnData.map(({ label }) => label),
   });
-  console.log('directiveComponentValues', directiveComponentValues);
 
   const classes = useStyles();
 
@@ -57,35 +60,7 @@ const AddTransformation = (props) => {
 
   const handleApply = (e: React.MouseEvent<HTMLButtonElement>) => {
     setLoading(true);
-    if (functionName == 'null') {
-      const paramsData = {
-        context: params.namespace,
-        workspaceId: params.wid,
-      };
-      const directivesArray =
-        selectedAction == 'remove'
-          ? selectedColumns.map(
-              ({ label }) =>
-                `filter-rows-on condition-true ${label} == null || ${label} =~ \"^\\W*$\"`
-            )
-          : selectedColumns.map(({ label }) => `fill-null-or-empty :${label} '${replaceValue}'`);
-      const apiPayload = {
-        directives: dataprep.directives.length
-          ? dataprep.directives.concat(directivesArray)
-          : directivesArray,
-        limit: 1000,
-        insights: dataprep.insights,
-      };
-
-      MyDataPrepApi.execute(paramsData, apiPayload)
-        .subscribe((response) => {
-          props.callBack(response);
-          setLoading(false);
-        })
-        .catch((err) => {
-          setLoading(false);
-        });
-    } else if (functionName == 'parseCSV') {
+    if (functionName == 'parseCSV') {
       const getDirective = parseDirective(
         functionName,
         selectedColumns[0].label,
@@ -159,6 +134,39 @@ const AddTransformation = (props) => {
         directiveComponentValues.optionPaddingParam
       );
       props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName == 'copyColumn') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.copyColumnName);
+    } else if (functionName == 'customTransform') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+    } else if (functionName === 'concatenate') {
+      if (directiveComponentValues.copyToNewColumn) {
+        const value =
+          directiveComponentValues.radioOption === 'END'
+            ? `${selectedColumns[0].label} + '${directiveComponentValues.customInput}'`
+            : `'${directiveComponentValues.customInput}' + ${selectedColumns[0].label}`;
+        props.applyTransformation(directiveComponentValues.copyColumnName, value);
+      } else {
+        const value =
+          directiveComponentValues.radioOption === 'END'
+            ? `${selectedColumns[0].label} + '${directiveComponentValues.customInput}'`
+            : `'${directiveComponentValues.customInput}' + ${selectedColumns[0].label}`;
+        props.applyTransformation(selectedColumns[0].label, value);
+      }
+    } else if (functionName == 'hash') {
+      const hashDirective = directiveForHash(
+        selectedColumns[0].label,
+        directiveComponentValues.hashValue,
+        directiveComponentValues.encode
+      );
+      props.applyTransformation(selectedColumns[0].label, hashDirective);
+    } else if (functionName === 'findAndReplace') {
+      const makeOldValue = directiveComponentValues.exactMatch
+        ? `^${directiveComponentValues.findPreviousValue}$`
+        : directiveComponentValues.findPreviousValue;
+      const finalValue = directiveComponentValues.ignoreCase
+        ? `s/${makeOldValue}/${directiveComponentValues.findReplaceValue}/Ig`
+        : `s/${makeOldValue}/${directiveComponentValues.findReplaceValue}/g`;
+      props.applyTransformation(selectedColumns[0].label, finalValue);
     } else {
       setLoading(false);
       props.applyTransformation(selectedColumns[0].label);
