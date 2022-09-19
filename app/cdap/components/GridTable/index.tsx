@@ -314,7 +314,6 @@ export default function GridTable() {
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
       <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
       {isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
@@ -322,6 +321,7 @@ export default function GridTable() {
           setLoading={setLoading}
         />
       )}
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
       {showRecipePanel && (
         <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
       )}

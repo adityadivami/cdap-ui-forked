@@ -1,6 +1,6 @@
 import { Button, Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import ActionsWidget from './ActionsWidget';
 import {
   ADD_TRANSFORMATION_STEP,
@@ -23,6 +23,8 @@ import {
   directiveForHash,
   prepareDirectiveForFilter,
   prepareDirectiveForPattern,
+  prepareDirectiveForDefineVariable,
+  prepareDirectiveForSendToError,
 } from './utils';
 
 const AddTransformation = (props) => {
@@ -58,9 +60,22 @@ const AddTransformation = (props) => {
     startValue: '',
     endValue: '',
     nDigit: '',
+    variableName: '',
     columnNames: columnData.map(({ label }) => label),
+    selectedColumnForDefineVariable: '',
+    selectedColumn: '',
+    counter: '',
+    counterName: '',
   });
-  console.log('directiveComponentValues', directiveComponentValues);
+
+  useEffect(() => {
+    if (selectedColumns.length) {
+      setDirectiveComponentsValue({
+        ...directiveComponentValues,
+        selectedColumn: selectedColumns[0].label,
+      });
+    }
+  }, [selectedColumns]);
 
   const classes = useStyles();
 
@@ -202,6 +217,37 @@ const AddTransformation = (props) => {
         directiveComponentValues.customInput
       );
       props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName === 'define-variable') {
+      const getDirective = prepareDirectiveForDefineVariable(
+        directiveComponentValues.variableName,
+        directiveComponentValues.customInput,
+        directiveComponentValues.selectedColumnForDefineVariable,
+        directiveComponentValues.filterCondition,
+        selectedColumns[0].label
+      );
+      props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName === 'send-to-error') {
+      const getValue = prepareDirectiveForSendToError(
+        selectedColumns[0].label,
+        directiveComponentValues.customInput,
+        directiveComponentValues.ignoreCase,
+        directiveComponentValues.filterCondition
+      );
+      props.applyTransformation(selectedColumns[0].label, getValue);
+    } else if (functionName === 'set-counter') {
+      const getValue =
+        directiveComponentValues.filterCondition === 'true'
+          ? `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} true`
+          : `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} ${directiveComponentValues.filterConditionValue}`;
+      props.applyTransformation(selectedColumns[0].label, getValue);
+    } else if (functionName == 'dateTime' || functionName == 'dateTimeAsString') {
+      if (directiveComponentValues.radioOption === 'customFormat') {
+        props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+      } else {
+        props.applyTransformation(selectedColumns[0].label, directiveComponentValues.radioOption);
+      }
+    } else if (functionName === 'fillNullOrEmpty') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
     } else {
       setLoading(false);
       props.applyTransformation(selectedColumns[0].label);
