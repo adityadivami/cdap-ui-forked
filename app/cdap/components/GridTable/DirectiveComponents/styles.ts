@@ -88,5 +88,9 @@ export const useStyles = makeStyles(() => {
       width: '87%',
       marginLeft: '11px',
     },
+    additionalText: {
+      color: '#5F6368',
+      fontSize: '12px',
+    },
   };
 });
