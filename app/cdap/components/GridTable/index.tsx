@@ -44,9 +44,8 @@ import { convertNonNullPercent } from './utils';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
 import AddTransformation from 'components/AddTransformation';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import ToolBarList from './components/AaToolbar';
-import { getDirective } from './directives';
+import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import Snackbar from 'components/SnackbarComponent';
 
@@ -183,6 +182,15 @@ export default function GridTable() {
       } else {
         applyDirectiveAPICall(newDirective);
       }
+    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective);
+      }
     }
   };
 
@@ -273,7 +281,6 @@ export default function GridTable() {
     return metricArray;
   };
 
-  // ------------@getGridTableData Function is used for preparing data for entire grid-table
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
