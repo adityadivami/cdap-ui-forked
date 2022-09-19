@@ -49,4 +49,9 @@ export const OPTION_WITH_TWO_INPUT = [
   'parseDateTime',
   'parseFixedLength',
   'hash',
+  'send-to-error',
+  'set-counter',
+  'dateTime',
+  'dateTimeAsString',
+  'fillNullOrEmpty',
 ];
