@@ -14,6 +14,10 @@ import FindAndReplace from './FindAndReplace';
 import Concatenate from './ConcatenateComponent';
 import DelimiterExtractExplode from './DelimiterForExplode_Extract';
 import UsingPatternExtract from './UsingPattern_Extract';
+import DefineVariable from './DefineVariable';
+import SendToError from './SendToError';
+import SetCounter from './SetCounterAction';
+import FillNullOrEmpty from './FillNullOrEmpty';
 
 export const DIRECTIVE_COMPONENTS = [
   {
@@ -83,6 +87,30 @@ export const DIRECTIVE_COMPONENTS = [
   {
     type: 'using-patterns',
     component: UsingPatternExtract,
+  },
+  {
+    type: 'define-variable',
+    component: DefineVariable,
+  },
+  {
+    type: 'send-to-error',
+    component: SendToError,
+  },
+  {
+    type: 'set-counter',
+    component: SetCounter,
+  },
+  {
+    type: 'dateTime',
+    component: ParseSimpleDateComponent,
+  },
+  {
+    type: 'dateTimeAsString',
+    component: ParseDateTimeComponent,
+  },
+  {
+    type: 'fillNullOrEmpty',
+    component: FillNullOrEmpty,
   },
 ];
 
@@ -183,3 +211,11 @@ export const EXTRACT_NUMBERS_WITH = 'Extract numbers with';
 export const EXTRACT_TEXT_START_WITH = 'Extract text that start with';
 export const AND_END_WITH = 'and end with';
 export const WRITE_YOUR_OWN_REGEX = 'Write your own regex pattern';
+export const SET_VARIABLE_NAME = 'Set variable name';
+export const CHOOSE_VARIABLE_Value = 'Choose variable value';
+export const SELECT_ROW_WHERE = 'Select row where';
+export const SELECT_COLUMN_SELECTED_ROW = 'Select column in selected row';
+export const SEND_TO_ERROR = 'Send to error if';
+export const INCREMENT_COUNT_BY = 'Increment the count by';
+export const NAME_THIS_COUNTER = 'Name this counter';
+export const FILL_NULL_EMPTY = 'Fill null or empty cell';

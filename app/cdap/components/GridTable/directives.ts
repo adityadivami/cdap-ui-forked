@@ -102,6 +102,18 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return `split-to-columns :${column} ${value}`;
   } else if (option === 'using-patterns') {
     return value;
+  } else if (option === 'define-variable') {
+    return value;
+  } else if (option == 'send-to-error') {
+    return value;
+  } else if (option == 'set-counter') {
+    return value;
+  } else if (option == 'dateTime') {
+    return `format-date :${column} ${value}`;
+  } else if (option == 'dateTimeAsString') {
+    return `format-datetime :${column} "${value}"`;
+  } else if (option == 'fillNullOrEmpty') {
+    return `fill-null-or-empty :${column} '${value}'`;
   } else {
     null;
   }
