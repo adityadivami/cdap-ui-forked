@@ -96,6 +96,12 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return `find-and-replace :${column} ${value}`;
   } else if (option === 'concatenate') {
     return `set-column :${column} ${value}`;
+  } else if (option === 'delimited-text') {
+    return `split-to-rows :${column} ${value}`;
+  } else if (option === 'using-delimiters') {
+    return `split-to-columns :${column} ${value}`;
+  } else if (option === 'using-patterns') {
+    return value;
   } else {
     null;
   }

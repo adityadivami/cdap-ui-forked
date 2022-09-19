@@ -10,6 +10,7 @@ const BootstrapInput = styled(InputBase)(({ theme }) => ({
     marginLeft: 15,
   },
   '& .MuiInputBase-input': {
+    color: '#5F6368',
     borderRadius: 4,
     position: 'relative',
     backgroundColor: theme.palette.background.paper,
