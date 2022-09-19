@@ -14,12 +14,13 @@
  *  the License.
  */
 
-import { Box, Paper, TextField, Typography } from '@material-ui/core';
+import { Box, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import NamespaceStore from 'services/NamespaceStore';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import SearchIcon from '@material-ui/icons';
 
 const FunctionSearch = () => {
   const classes = useStyles();
@@ -62,7 +63,7 @@ const FunctionSearch = () => {
   }, [textFieldInput]);
 
   const CustomPaper = (props) => {
-    return <Paper elevation={8} {...props} classes={classes.autoComplete} />;
+    return <Paper elevation={0} {...props} className={classes.root} />;
   };
 
   const handleOptionClick = (selectedOption) => {
@@ -81,7 +82,7 @@ const FunctionSearch = () => {
   };
 
   return (
-    <Box>
+    <Box className={classes.main}>
       <Autocomplete
         id="combo-box-demo"
         options={displayRecentSearches ? recentSearches : searchResults}

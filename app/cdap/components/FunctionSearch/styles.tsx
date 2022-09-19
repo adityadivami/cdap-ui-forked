@@ -14,21 +14,54 @@
  *  the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  '.MuiAutocomplete-popper': {
-    background: 'red !important',
+  main: {
+    marginTop: '10px',
   },
+  root: {
+    border: '1px solid #DADCE0',
+    borderTop: 'none',
+    borderRadius: '0',
+    '& MuiAutocomplete-noOptions': {
+      padding: '0px',
+      margin: '0px',
+      borderRadius: '0',
+    },
+    '& ul#combo-box-demo-popup.MuiAutocomplete-listbox': {
+      padding: '0px',
+      margin: '0px',
+      background: 'white',
+      boxShadow: 'none',
+
+      borderRadius: '0px',
+    },
+    '& div.MuiAutocomplete-noOptions': {
+      background: 'white',
+    },
+  },
+
   autoComplete: {
     maxWidth: '490px',
-    borderRadius: '0px',
     border: '1px solid #DADCE0',
     boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+    borderRadius: '0px',
+    position: 'absolute',
+    left: '100px',
   },
+
   textField: {
     minHeight: '49px',
     maxWidth: '490px',
+    marginLeft: '5px',
+    boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '0px',
+    },
+    '&:hover': {
+      border: '1px solid red',
+    },
   },
   suggestions: {
     borderBottom: '1px solid #E0E0E0',
