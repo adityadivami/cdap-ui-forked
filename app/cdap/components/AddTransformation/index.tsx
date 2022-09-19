@@ -18,7 +18,7 @@ import MyDataPrepApi from 'api/dataprep';
 import { useParams } from 'react-router';
 import DirectiveContent from 'components/GridTable/DirectiveComponents';
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
-import { parseDirective } from './utils';
+import { parseDirective, directiveForHash, prepareDirectiveForFilter } from './utils';
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
@@ -46,6 +46,10 @@ const AddTransformation = (props) => {
     depth: 1,
     columnWidths: '',
     optionPaddingParam: '',
+    hashValue: '',
+    encode: false,
+    copyToNewColumn: false,
+    columnNames: columnData.map(({ label }) => label),
   });
   console.log('directiveComponentValues', directiveComponentValues);
 
@@ -129,6 +133,48 @@ const AddTransformation = (props) => {
         directiveComponentValues.firstRowAsHeader,
         directiveComponentValues.columnWidths,
         directiveComponentValues.optionPaddingParam
+      );
+      props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName == 'copyColumn') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.copyColumnName);
+    } else if (functionName == 'customTransform') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+    } else if (functionName === 'concatenate') {
+      if (directiveComponentValues.copyToNewColumn) {
+        const value =
+          directiveComponentValues.radioOption === 'END'
+            ? `${selectedColumns[0].label} + '${directiveComponentValues.customInput}'`
+            : `'${directiveComponentValues.customInput}' + ${selectedColumns[0].label}`;
+        props.applyTransformation(directiveComponentValues.copyColumnName, value);
+      } else {
+        const value =
+          directiveComponentValues.radioOption === 'END'
+            ? `${selectedColumns[0].label} + '${directiveComponentValues.customInput}'`
+            : `'${directiveComponentValues.customInput}' + ${selectedColumns[0].label}`;
+        props.applyTransformation(selectedColumns[0].label, value);
+      }
+    } else if (functionName == 'hash') {
+      const hashDirective = directiveForHash(
+        selectedColumns[0].label,
+        directiveComponentValues.hashValue,
+        directiveComponentValues.encode
+      );
+      props.applyTransformation(selectedColumns[0].label, hashDirective);
+    } else if (functionName === 'findAndReplace') {
+      const makeOldValue = directiveComponentValues.exactMatch
+        ? `^${directiveComponentValues.findPreviousValue}$`
+        : directiveComponentValues.findPreviousValue;
+      const finalValue = directiveComponentValues.ignoreCase
+        ? `s/${makeOldValue}/${directiveComponentValues.findReplaceValue}/Ig`
+        : `s/${makeOldValue}/${directiveComponentValues.findReplaceValue}/g`;
+      props.applyTransformation(selectedColumns[0].label, finalValue);
+    } else if (functionName === 'filter') {
+      const getDirective = prepareDirectiveForFilter(
+        directiveComponentValues.filterRowToKeepOrRemove,
+        directiveComponentValues.filterCondition,
+        directiveComponentValues.filterConditionValue,
+        directiveComponentValues.ignoreCase,
+        selectedColumns[0].label
       );
       props.applyTransformation(selectedColumns[0].label, getDirective);
     } else {

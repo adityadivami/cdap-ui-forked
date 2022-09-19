@@ -142,7 +142,7 @@ export const MENU_OPTIONS = [
     label: 'Calculate',
   },
   {
-    value: 'custom-transform',
+    value: 'customTransform',
     label: 'Custom Transform',
   },
   {
@@ -168,7 +168,7 @@ export const MENU_OPTIONS = [
     value: 'divider',
   },
   {
-    value: 'copy-column',
+    value: 'copyColumn',
     label: 'Copy column',
   },
   {
