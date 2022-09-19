@@ -160,3 +160,66 @@ export const PARSE_EXCEL_OPTIONS = [
     value: 'sheetName',
   },
 ];
+
+export const CONCATENATE_OPTIONS = [
+  {
+    label: 'at the beginning of the content of each row',
+    value: 'BEGINNING',
+  },
+  {
+    label: 'at the end of the content of each row',
+    value: 'END',
+  },
+];
+
+export const FILTER_RADIO_OPTION = [
+  {
+    label: 'Keep rows',
+    value: 'KEEP',
+  },
+  {
+    label: 'Remove rows',
+    value: 'REMOVE',
+  },
+];
+
+export const FILTER_OPTIONS = [
+  {
+    label: 'value is empty',
+    value: 'EMPTY',
+  },
+  {
+    label: 'value is',
+    value: 'TEXTEXACTLY',
+  },
+  {
+    label: 'value contains',
+    value: 'TEXTCONTAINS',
+  },
+  {
+    label: 'value starts with',
+    value: 'TEXTSTARTSWITH',
+  },
+  {
+    label: 'value ends with',
+    value: 'TEXTENDSWITH',
+  },
+  {
+    label: 'value contains regex',
+    value: 'TEXTREGEX',
+  },
+  {
+    label: 'custom condition',
+    value: 'CUSTOMCONDITION',
+  },
+];
+
+export const FILTER_PLACEHOLDER = {
+  EMPTY: '',
+  TEXTEXACTLY: 'Enter value',
+  TEXTCONTAINS: 'Enter contained value',
+  TEXTSTARTSWITH: 'Enter prefix',
+  TEXTENDSWITH: 'Enter suffix',
+  TEXTREGEX: 'Enter regex',
+  CUSTOMCONDITION: 'E.g. < 30 || gender == "Male"',
+};

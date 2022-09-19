@@ -61,3 +61,82 @@ export const parseDirective = (
     return `parse-as-fixed-length :${column} ${columnWidth} ${optionPadding}`;
   }
 };
+
+export const directiveForHash = (column, alogorithm, encode) => {
+  return `hash :${column} ${alogorithm} ${encode}`;
+};
+
+const FILTER_DIRECTIVES_MAP = {
+  KEEP: {
+    EMPTY: 'filter-rows-on condition-false',
+    TEXTEXACTLY: 'filter-rows-on regex-not-match',
+    TEXTCONTAINS: 'filter-rows-on regex-not-match',
+    TEXTSTARTSWITH: 'filter-rows-on condition-false',
+    TEXTENDSWITH: 'filter-rows-on condition-false',
+    TEXTREGEX: 'filter-rows-on regex-not-match',
+    CUSTOMCONDITION: 'filter-rows-on condition-false',
+  },
+  REMOVE: {
+    EMPTY: 'filter-rows-on condition-true',
+    TEXTEXACTLY: 'filter-rows-on regex-match',
+    TEXTCONTAINS: 'filter-rows-on regex-match',
+    TEXTSTARTSWITH: 'filter-rows-on condition-true',
+    TEXTENDSWITH: 'filter-rows-on condition-true',
+    TEXTREGEX: 'filter-rows-on regex-match',
+    CUSTOMCONDITION: 'filter-rows-on condition-true',
+  },
+};
+
+export const prepareDirectiveForFilter = (
+  rowFilter,
+  selectedCondition,
+  selectedConditionValue,
+  ignoreCase,
+  columnName
+) => {
+  let directive = '';
+  let column = columnName;
+  let textValue = selectedConditionValue;
+  let configuration;
+  const condition = FILTER_DIRECTIVES_MAP[rowFilter][selectedCondition];
+  switch (selectedCondition) {
+    case 'EMPTY':
+      directive = `${condition} ${column} == null || ${column} =~ "^\\W*$"`;
+      break;
+    case 'TEXTCONTAINS':
+      if (ignoreCase) {
+        textValue = `(?i)${textValue}`;
+      }
+      directive = `${condition} ${column} .*${textValue}.*`;
+      break;
+    case 'TEXTSTARTSWITH':
+      configuration = `"${textValue}"`;
+      if (ignoreCase) {
+        column = `${column}.toLowerCase()`;
+        configuration = `"${textValue}".toLowerCase()`;
+      }
+      directive = `${condition} ${column} =^ ${configuration}`;
+      break;
+    case 'TEXTENDSWITH':
+      configuration = `"${textValue}"`;
+      if (ignoreCase) {
+        column = `${column}.toLowerCase()`;
+        configuration = `"${textValue}".toLowerCase()`;
+      }
+      directive = `${condition} ${column} =$ ${configuration}`;
+      break;
+    case 'TEXTEXACTLY':
+      if (ignoreCase) {
+        textValue = `(?i)${textValue}`;
+      }
+      directive = `${condition} ${column} ^${textValue}$`;
+      break;
+    case 'TEXTREGEX':
+      directive = `${condition} ${column} ${textValue}`;
+      break;
+    case 'CUSTOMCONDITION':
+      directive = `${condition} ${column} ${textValue}`;
+      break;
+  }
+  return directive;
+};
