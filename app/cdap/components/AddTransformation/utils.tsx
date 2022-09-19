@@ -140,3 +140,68 @@ export const prepareDirectiveForFilter = (
   }
   return directive;
 };
+
+export const prepareDirectiveForPattern = (
+  column,
+  patternName,
+  startValue,
+  endValue,
+  nDigit,
+  customInput
+) => {
+  let directive;
+  switch (patternName) {
+    case 'creditcard':
+      directive = `extract-regex-groups :${column} ((?:\\d{4}[-\\s]?){4})`;
+      break;
+    case 'date':
+      directive = `extract-regex-groups :${column} ((?:(?:\\d{4}|\\d{2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))|(?:(?:(?:\\d{1,2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))|(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{4}|\\d{2})))`;
+      break;
+    case 'datetime':
+      directive = `extract-regex-groups :${column} ((?:(?:(?:\\d{4}|\\d{2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))|(?:(?:(?:\\d{1,2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))|(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{4}|\\d{2})))[T\\s](?:(?:(?:2[0-3])|(?:[01]?\\d))[h:\\s][0-5]\\d(?::(?:(?:[0-5]\\d)|(?:60)))?(?:\\s[aApP][mM])?(?:Z|(?:[+-](?:1[0-2])|(?:0?\\d):[0-5]\\d)|(?:\\s[[a-zA-Z]\\s]+))?))`;
+      break;
+    case 'email':
+      directive = `extract-regex-groups :${column} ([a-zA-Z0-9!#$%&*+/=?^_\`'{|}~-]+@(?!.*\\.{2})[a-zA-Z0-9\\.-]+(?:\\.[a-zA-Z]{2,6})?)`;
+      break;
+    case 'htmlhyperlink':
+      directive = `extract-regex-groups :${column} <[aA](?:\\s+[a-zA-Z]+=".*?")*\\s+[hH][rR][eE][fF]="(.*?)"(?:\\s+[a-zA-Z]+=".*?")*>(?:.*)<\/[aA]>`;
+      break;
+    case 'ipv4':
+      directive = `extract-regex-groups :${column} ((?:(?:0|(?:25[0-5])|(?:2[0-4][1-9])|(?:1\\d\\d)|(?:[1-9]\\d?))\\.){3}(?:(?:0|(?:25[0-5])|(?:2[0-4][1-9])|(?:1\\d\\d)|(?:[1-9]\\d?))))`;
+      break;
+    case 'isbncodes':
+      directive = `extract-regex-groups :${column} ((?:97[89]-?)?(?:\\d-?){9}[\\dxX])`;
+      break;
+    case 'macaddress':
+      directive = `extract-regex-groups :${column} ((?:\\p{XDigit}{2}[:-]){5}(?:\\p{XDigit}{2}))`;
+      break;
+    case 'ndigitnumber':
+      directive = `extract-regex-groups :${column} (\\d{${nDigit}})`;
+      break;
+    case 'phonenumber':
+      directive = `extract-regex-groups :${column} ((?:\\+\\d{1,3}[\\s-]?)?\\(?\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{4})`;
+      break;
+    case 'ssn':
+      directive = `extract-regex-groups :${column} (\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{4})`;
+      break;
+    case 'startend':
+      directive = `extract-regex-groups :${column} .*${startValue}(.*)${endValue}.*`;
+      break;
+    case 'time':
+      directive = `extract-regex-groups :${column} ((?:(?:2[0-3])|(?:[01]?\\d))[h:\\s][0-5]\\d(?::(?:(?:[0-5]\\d)|(?:60)))?(?:\\s[aApP][mM])?(?:Z|(?:[+-](?:1[0-2])|(?:0?\\d):[0-5]\\d)|(?:\\s[[a-zA-Z]\\s]+))?)`;
+      break;
+    case 'upscodes':
+      directive = `extract-regex-groups :${column} (1Z\\s?[0-9a-zA-Z]{3}\\s?[0-9a-zA-Z]{3}\\s?[0-9a-zA-Z]{2}\\s?\\d{4}\\s?\\d{4})`;
+      break;
+    case 'url':
+      directive = `extract-regex-groups :${column} ((?:(?:http[s]?|ftp):\/)?\/?(?:[^\/\\s]+)(?:(?:\/\\w+)*\/)(?:[\\w\-\.]+[^#?\\s]+)(?:.*)?)`;
+      break;
+    case 'zipcode':
+      directive = `extract-regex-groups :${column} [^\\d]?([0-9]{5}(?:-[0-9]{4})?)[^\\d]?`;
+      break;
+    case 'custom':
+      directive = `extract-regex-groups :${column} ${customInput}`;
+      break;
+  }
+  return directive;
+};
