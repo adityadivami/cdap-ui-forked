@@ -29,14 +29,11 @@ import {
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
-  const params = useParams() as any;
-
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [selectedAction, setSelectedAction] = useState('');
   const [replaceValue, setReplaceValue] = useState('');
-  const { dataprep } = DataPrepStore.getState();
   const [directiveComponentValues, setDirectiveComponentsValue] = useState({
     radioOption: '',
     ignoreCase: false,
