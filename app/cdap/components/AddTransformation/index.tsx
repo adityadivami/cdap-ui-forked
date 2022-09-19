@@ -18,7 +18,12 @@ import MyDataPrepApi from 'api/dataprep';
 import { useParams } from 'react-router';
 import DirectiveContent from 'components/GridTable/DirectiveComponents';
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
-import { parseDirective, directiveForHash, prepareDirectiveForFilter } from './utils';
+import {
+  parseDirective,
+  directiveForHash,
+  prepareDirectiveForFilter,
+  prepareDirectiveForPattern,
+} from './utils';
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
@@ -49,6 +54,10 @@ const AddTransformation = (props) => {
     hashValue: '',
     encode: false,
     copyToNewColumn: false,
+    patternName: '',
+    startValue: '',
+    endValue: '',
+    nDigit: '',
     columnNames: columnData.map(({ label }) => label),
   });
   console.log('directiveComponentValues', directiveComponentValues);
@@ -175,6 +184,22 @@ const AddTransformation = (props) => {
         directiveComponentValues.filterConditionValue,
         directiveComponentValues.ignoreCase,
         selectedColumns[0].label
+      );
+      props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName === 'delimited-text' || functionName === 'using-delimiters') {
+      const getDirective =
+        directiveComponentValues.radioOption === 'customDelimiter'
+          ? directiveComponentValues.customInput
+          : directiveComponentValues.radioOption;
+      props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName === 'using-patterns') {
+      const getDirective = prepareDirectiveForPattern(
+        selectedColumns[0].label,
+        directiveComponentValues.patternName,
+        directiveComponentValues.startValue,
+        directiveComponentValues.endValue,
+        directiveComponentValues.nDigit,
+        directiveComponentValues.customInput
       );
       props.applyTransformation(selectedColumns[0].label, getDirective);
     } else {

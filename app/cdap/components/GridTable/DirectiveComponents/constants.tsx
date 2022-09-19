@@ -12,6 +12,8 @@ import CustomExpressionComponent from './CustomTransformation';
 import HashComponent from './HashComponent';
 import FindAndReplace from './FindAndReplace';
 import Concatenate from './ConcatenateComponent';
+import DelimiterExtractExplode from './DelimiterForExplode_Extract';
+import UsingPatternExtract from './UsingPattern_Extract';
 
 export const DIRECTIVE_COMPONENTS = [
   {
@@ -69,6 +71,18 @@ export const DIRECTIVE_COMPONENTS = [
   {
     type: 'concatenate',
     component: Concatenate,
+  },
+  {
+    type: 'delimited-text',
+    component: DelimiterExtractExplode,
+  },
+  {
+    type: 'using-delimiters',
+    component: DelimiterExtractExplode,
+  },
+  {
+    type: 'using-patterns',
+    component: UsingPatternExtract,
   },
 ];
 
@@ -163,3 +177,9 @@ export const ADD = 'Add';
 export const ENTER_STRING = 'Enter string';
 export const COPY_TO_NEW_COLUMN = 'Copy to a new column';
 export const SELECT_ACTION = 'Select action to take';
+export const EXTRACT_FIELD_PATTERN = 'Extract fields using patterns';
+export const SELECT_PATTERN = 'Select a pattern to extract from the column';
+export const EXTRACT_NUMBERS_WITH = 'Extract numbers with';
+export const EXTRACT_TEXT_START_WITH = 'Extract text that start with';
+export const AND_END_WITH = 'and end with';
+export const WRITE_YOUR_OWN_REGEX = 'Write your own regex pattern';
