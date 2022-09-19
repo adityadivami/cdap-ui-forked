@@ -14,13 +14,12 @@
  *  the License.
  */
 
-import { Box, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
+import { Box, Paper, TextField, Typography } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import NamespaceStore from 'services/NamespaceStore';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import SearchIcon from '@material-ui/icons';
 
 const FunctionSearch = () => {
   const classes = useStyles();
@@ -100,9 +99,13 @@ const FunctionSearch = () => {
               role="button"
             >
               <Box className={classes.content}>
-                {option.directive}
-                <br />
-                {option.description}
+                <Typography variant="body1" className={classes.directive}>
+                  {option.directive}
+                </Typography>
+                {/* <br /> */}
+                <Typography variant="body1" className={classes.description}>
+                  {option.description}
+                </Typography>
               </Box>
             </Box>
           </>
