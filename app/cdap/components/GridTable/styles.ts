@@ -32,4 +32,7 @@ export const useStyles = makeStyles({
     height: 'calc(100vh - 192px)',
     overflow: 'scroll',
   },
+  firstRowContainer: {
+    display: 'flex',
+  },
 });

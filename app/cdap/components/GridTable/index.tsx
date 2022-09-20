@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
@@ -312,15 +312,27 @@ export default function GridTable() {
   // Redux store
   const { data, headers, types } = dataprep;
 
+  console.log(dataprep, 'before');
+
   const handleDragEnd = (e) => {
-    console.log('handler drag functions triggered');
     if (!e.destination) {
       return;
     }
-    const tempData = Array.from(data);
+    const tempData: string[] = Array.from(headers);
     const [source_data] = tempData.splice(e.source.index, 1);
     tempData.splice(e.destination.index, 0, source_data);
+    console.log('data ---> ', tempData);
+    DataPrepStore.dispatch({
+      type: DataPrepActions.setWorkspace,
+      payload: {
+        headers: tempData,
+        ...dataprep,
+      },
+    });
+    // setGridData({ ...gridData, headers: tempData });
   };
+
+  console.log(dataprep, 'after');
 
   return (
     <Box>
@@ -353,62 +365,72 @@ export default function GridTable() {
           }}
         />
       )}
-      <Table aria-label="simple table" className="test">
-        <TableHead>
-          <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId="droppable" direction="horizontal">
-              {(provider) => (
-                <TableRow ref={provider.innerRef} {...provider.droppableProps}>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Table aria-label="simple table" className="test">
+          <Droppable droppableId="droppable" direction="horizontal">
+            {(provider) => (
+              <TableHead ref={provider.innerRef} {...provider.droppableProps}>
+                <TableRow>
                   {headers.map((eachHeader, index) => (
-                    <Draggable key={eachHeader} draggableId={index} index={index}>
+                    <Draggable
+                      key={eachHeader}
+                      draggableId={index + eachHeader}
+                      index={index}
+                      isDragDisabled={false}
+                    >
                       {(provider) => (
-                        <GridHeaderCell
+                        <TableCell
                           ref={provider.innerRef}
                           {...provider.draggableProps}
                           {...provider.dragHandleProps}
-                          label={eachHeader}
-                          type={types[eachHeader]}
-                          key={eachHeader}
-                          columnSelected={columnSelected}
-                          setColumnSelected={handleColumnSelect}
-                        />
+                          key={index}
+                        >
+                          <GridHeaderCell
+                            label={eachHeader}
+                            type={types[eachHeader]}
+                            key={eachHeader}
+                            columnSelected={columnSelected}
+                            setColumnSelected={handleColumnSelect}
+                          />
+                        </TableCell>
                       )}
                     </Draggable>
                   ))}
-                  {provider.placeholder}
                 </TableRow>
-              )}
-            </Droppable>
-          </DragDropContext>
-          <TableRow>
-            {Array.isArray(missingDataList) &&
-              Array.isArray(headers) &&
-              headers.map((each, index) => {
-                return missingDataList.map((item, itemIndex) => {
-                  if (item.name === each) {
-                    return <GridKPICell metricData={item} key={item.name} />;
-                  }
-                });
-              })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((eachRow, rowIndex) => {
-            return (
-              <TableRow key={`row-${rowIndex}`}>
-                {headers.map((eachKey, eachIndex) => {
-                  return (
-                    <GridTextCell
-                      cellValue={eachRow[eachKey] || '--'}
-                      key={`${eachKey}-${eachIndex}`}
-                    />
-                  );
+                {provider.placeholder}
+              </TableHead>
+            )}
+          </Droppable>
+
+          <TableBody>
+            <TableRow>
+              {Array.isArray(missingDataList) &&
+                Array.isArray(headers) &&
+                headers.map((each, index) => {
+                  return missingDataList.map((item, itemIndex) => {
+                    if (item.name === each) {
+                      return <GridKPICell metricData={item} key={item.name} />;
+                    }
+                  });
                 })}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+            </TableRow>
+            {data.map((eachRow, rowIndex) => {
+              return (
+                <TableRow key={`row-${rowIndex}`}>
+                  {headers.map((eachKey, eachIndex) => {
+                    return (
+                      <GridTextCell
+                        cellValue={eachRow[eachKey] || '--'}
+                        key={`${eachKey}-${eachIndex}`}
+                      />
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </DragDropContext>
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
