@@ -35,4 +35,9 @@ export const useStyles = makeStyles({
   firstRowContainer: {
     display: 'flex',
   },
+  tableHeader: {
+    '& .MuiTableCell-root': {
+      padding: '0px',
+    },
+  },
 });
