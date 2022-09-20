@@ -75,6 +75,7 @@ export default function GridTable() {
   ]);
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
+  const [headersList, setHeadersList] = useState([]);
 
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
@@ -312,7 +313,9 @@ export default function GridTable() {
   // Redux store
   const { data, headers, types } = dataprep;
 
-  console.log(dataprep, 'before');
+  useEffect(() => {
+    setHeadersList(headers);
+  }, [dataprep]);
 
   const handleDragEnd = (e) => {
     if (!e.destination) {
@@ -325,14 +328,16 @@ export default function GridTable() {
     DataPrepStore.dispatch({
       type: DataPrepActions.setWorkspace,
       payload: {
-        headers: tempData,
         ...dataprep,
+        headers: tempData,
       },
     });
-    // setGridData({ ...gridData, headers: tempData });
+    setHeadersList(tempData);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
-
-  console.log(dataprep, 'after');
 
   return (
     <Box>
@@ -365,13 +370,17 @@ export default function GridTable() {
           }}
         />
       )}
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Table aria-label="simple table" className="test">
+      <Table aria-label="simple table" className="test">
+        <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="droppable" direction="horizontal">
             {(provider) => (
-              <TableHead ref={provider.innerRef} {...provider.droppableProps}>
+              <TableHead
+                ref={provider.innerRef}
+                {...provider.droppableProps}
+                className={classes.tableHeader}
+              >
                 <TableRow>
-                  {headers.map((eachHeader, index) => (
+                  {headersList.map((eachHeader, index) => (
                     <Draggable
                       key={eachHeader}
                       draggableId={index + eachHeader}
@@ -401,36 +410,36 @@ export default function GridTable() {
               </TableHead>
             )}
           </Droppable>
-
-          <TableBody>
-            <TableRow>
-              {Array.isArray(missingDataList) &&
-                Array.isArray(headers) &&
-                headers.map((each, index) => {
-                  return missingDataList.map((item, itemIndex) => {
-                    if (item.name === each) {
-                      return <GridKPICell metricData={item} key={item.name} />;
-                    }
-                  });
+        </DragDropContext>
+        <TableBody>
+          <TableRow>
+            {Array.isArray(missingDataList) &&
+              Array.isArray(headersList) &&
+              headersList.map((each, index) => {
+                return missingDataList.map((item, itemIndex) => {
+                  if (item.name === each) {
+                    return <GridKPICell metricData={item} key={item.name} />;
+                  }
+                });
+              })}
+          </TableRow>
+          {data.map((eachRow, rowIndex) => {
+            return (
+              <TableRow key={`row-${rowIndex}`}>
+                {headersList.map((eachKey, eachIndex) => {
+                  return (
+                    <GridTextCell
+                      cellValue={eachRow[eachKey] || '--'}
+                      key={`${eachKey}-${eachIndex}`}
+                    />
+                  );
                 })}
-            </TableRow>
-            {data.map((eachRow, rowIndex) => {
-              return (
-                <TableRow key={`row-${rowIndex}`}>
-                  {headers.map((eachKey, eachIndex) => {
-                    return (
-                      <GridTextCell
-                        cellValue={eachRow[eachKey] || '--'}
-                        key={`${eachKey}-${eachIndex}`}
-                      />
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </DragDropContext>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
