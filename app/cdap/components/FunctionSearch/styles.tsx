@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { makeStyles, createStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
   main: {
@@ -53,7 +53,11 @@ export const useStyles = makeStyles({
       background: 'white',
     },
   },
-
+  customTextField: {
+    '& input::placeholder': {
+      fontSize: '14px',
+    },
+  },
   autoComplete: {
     maxWidth: '490px',
     border: '1px solid #DADCE0',
@@ -117,7 +121,8 @@ export const useStyles = makeStyles({
     fontSize: 'large',
   },
   search: {
-    color: '#616161',
+    color: '#757575',
+    fontSize: 'xx-large',
   },
   optionInMUIAutocomplete: {
     height: '71px',

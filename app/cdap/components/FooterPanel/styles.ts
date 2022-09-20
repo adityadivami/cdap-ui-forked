@@ -79,7 +79,7 @@ export const useCss = makeStyles({
   },
   recipeCont: {
     '&:hover': {
-      backgroundColor: 'red',
+      // backgroundColor: 'grey',
     },
     textAlign: 'center',
     padding: '9.5px 32px',
