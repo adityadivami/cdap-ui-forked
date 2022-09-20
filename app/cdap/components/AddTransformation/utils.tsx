@@ -436,26 +436,26 @@ export const prepareDirectiveForCalculate = (
         ? `set-column :${newColumnName} math:pow(${selectedColumn}, ${inputDigit})`
         : `set-column :${selectedColumn} math:pow(${selectedColumn}, ${inputDigit})`;
       break;
-      case 'SQUARE':
-        directive = copyToNew
-          ? `set-column :${newColumnName} math:pow(${selectedColumn}, 2)`
-          : `set-column :${selectedColumn} math:pow(${selectedColumn}, 2)`;
-        break;
-        case 'SQAURE_ROOT':
-          directive = copyToNew
-            ? `set-column :${newColumnName} math:sqrt(${selectedColumn})`
-            : `set-column :${selectedColumn} math:sqrt(${selectedColumn})`;
-          break;
-          case 'CUBE':
-            directive = copyToNew
-              ? `set-column :${newColumnName} math:pow(${selectedColumn}, 3)`
-              : `set-column :${selectedColumn} math:pow(${selectedColumn}, 3)`;
-            break;
-            case 'CUBE_ROOT':
-              directive = copyToNew
-                ? `set-column :${newColumnName} math:cbrt(${selectedColumn})`
-                : `set-column :${selectedColumn} math:cbrt(${selectedColumn})`;
-              break;
+    case 'SQUARE':
+      directive = copyToNew
+        ? `set-column :${newColumnName} math:pow(${selectedColumn}, 2)`
+        : `set-column :${selectedColumn} math:pow(${selectedColumn}, 2)`;
+      break;
+    case 'SQAURE_ROOT':
+      directive = copyToNew
+        ? `set-column :${newColumnName} math:sqrt(${selectedColumn})`
+        : `set-column :${selectedColumn} math:sqrt(${selectedColumn})`;
+      break;
+    case 'CUBE':
+      directive = copyToNew
+        ? `set-column :${newColumnName} math:pow(${selectedColumn}, 3)`
+        : `set-column :${selectedColumn} math:pow(${selectedColumn}, 3)`;
+      break;
+    case 'CUBE_ROOT':
+      directive = copyToNew
+        ? `set-column :${newColumnName} math:cbrt(${selectedColumn})`
+        : `set-column :${selectedColumn} math:cbrt(${selectedColumn})`;
+      break;
   }
   return directive;
 };
