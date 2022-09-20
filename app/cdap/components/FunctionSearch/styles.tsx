@@ -24,6 +24,12 @@ export const useStyles = makeStyles({
         outline: 'none !important',
       },
     },
+    '& button.MuiAutocomplete-popupIndicator.MuiButtonBase-root.MuiIconButton-root': {
+      display: 'none',
+    },
+    '& div.MuiAutocomplete-endAdornment': {
+      paddingRight: '7px',
+    },
   },
   root: {
     border: '1px solid #DADCE0',
@@ -40,12 +46,11 @@ export const useStyles = makeStyles({
       margin: '0px',
       background: 'white',
       borderRadius: '0px',
+      boxShadow: 'inset 3px 4px 15px rgba(68, 132, 245, 0.15);',
     },
+
     '& div.MuiAutocomplete-noOptions': {
       background: 'white',
-    },
-    '& li#combo-box-demo-option.MuiAutocomplete-option': {
-      height: '71px',
     },
   },
 
@@ -81,7 +86,6 @@ export const useStyles = makeStyles({
     },
   },
 
-  // MuiInputBase-root MuiOutlinedInput-root MuiAutocomplete-inputRoot MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-adornedEnd MuiOutlinedInput-adornedEnd
   suggestions: {
     borderBottom: '1px solid #E0E0E0',
     width: '450px',
@@ -98,6 +102,10 @@ export const useStyles = makeStyles({
   },
   description: {
     color: '#616161',
+    width: '400px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
   navigate: {
     display: 'flex',
@@ -105,6 +113,12 @@ export const useStyles = makeStyles({
   },
   chevron: {
     color: '#616161',
-    fontSize: 'small',
+    fontSize: 'large',
+  },
+  search: {
+    color: '#616161',
+  },
+  optionInMUIAutocomplete: {
+    height: '71px',
   },
 });

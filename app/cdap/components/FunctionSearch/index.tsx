@@ -14,13 +14,14 @@
  *  the License.
  */
 
-import { Box, Paper, TextField, Typography } from '@material-ui/core';
+import { Box, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import NamespaceStore from 'services/NamespaceStore';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 
 const FunctionSearch = () => {
   const classes = useStyles();
@@ -32,7 +33,31 @@ const FunctionSearch = () => {
   const GetData = () => {
     const namespace = NamespaceStore.getState().selectedNamespace;
     MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
-      setSeachResults(res.values);
+      console.log(res.values, 'this is the res values');
+      setSeachResults([
+        {
+          directive: 'Search Results',
+          usage: 'uppercase :column',
+          description: '',
+          excluded: true,
+          alias: false,
+          scope: 'SYSTEM',
+          arguments: {
+            directive: 'uppercase',
+            tokens: [
+              {
+                ordinal: 0,
+                optional: false,
+                name: 'column',
+                type: 'COLUMN_NAME',
+              },
+            ],
+          },
+          categories: ['transform'],
+          disabled: true,
+        },
+        ...res.values,
+      ]);
     });
   };
 
@@ -69,13 +94,20 @@ const FunctionSearch = () => {
   const handleOptionClick = (selectedOption) => {
     const currentRecentSearch = selectedOption;
     const array = [...recentSearches];
+
+    // array = array.filter((item) => item.directive === currentRecentSearch.directive);
+    // console.log(array);
+
     if (recentSearches.length > 4) {
-      // remove the last element
       array.splice(-1);
       setRecentSearches([currentRecentSearch, ...array]);
     } else {
       setRecentSearches([currentRecentSearch, ...array]);
     }
+
+    // var index = array.findIndex((item)=>item.directive === currentRecentSearch.directive);
+    // array.splice
+
     if (textFieldInput === '') {
       setDisplayRecentSearches(false);
     }
@@ -90,6 +122,7 @@ const FunctionSearch = () => {
         autoHighlight={true}
         PaperComponent={CustomPaper}
         onClose={handleClose}
+        classes={{ option: classes.optionInMUIAutocomplete }}
         renderOption={(option) => (
           <>
             <Box
@@ -108,7 +141,7 @@ const FunctionSearch = () => {
                     {option.description}
                   </Typography>
                   <Box>
-                    <ChevronRightRoundedIcon />
+                    <ChevronRightRoundedIcon className={classes.chevron} />
                   </Box>
                 </Box>
               </Box>
@@ -124,6 +157,16 @@ const FunctionSearch = () => {
             onChange={(e) => handleInputChange(e)}
             value={textFieldInput}
             id="text-input"
+            InputProps={{
+              ...params.InputProps,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <div>
+                    <SearchOutlinedIcon className={classes.search} />
+                  </div>
+                </InputAdornment>
+              ),
+            }}
           />
         )}
       />
