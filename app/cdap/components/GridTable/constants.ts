@@ -54,4 +54,10 @@ export const OPTION_WITH_TWO_INPUT = [
   'dateTime',
   'dateTimeAsString',
   'fillNullOrEmpty',
+  'ADD',
+  'SUBTRACT',
+  'MULITPLY',
+  'DIVIDE',
+  'MODULO',
+  'POWEROF',
 ];

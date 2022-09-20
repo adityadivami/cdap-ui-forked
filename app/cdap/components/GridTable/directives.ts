@@ -1,4 +1,4 @@
-import { DATATYPE_OPTIONS } from './components/NestedMenu/constants';
+import { DATATYPE_OPTIONS, CALCULATE_OPTIONS } from './components/NestedMenu/constants';
 import DataPrepStore from 'components/DataPrep/store';
 
 export const getDirective = (option, column) => {
@@ -114,6 +114,8 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return `format-datetime :${column} "${value}"`;
   } else if (option == 'fillNullOrEmpty') {
     return `fill-null-or-empty :${column} '${value}'`;
+  } else if (CALCULATE_OPTIONS.some((item) => item.value === option)) {
+    return value;
   } else {
     null;
   }

@@ -12,10 +12,7 @@ import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsList from './SelectColumnsList';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
-import DataPrepStore from 'components/DataPrep/store';
 import { useStyles } from './styles';
-import MyDataPrepApi from 'api/dataprep';
-import { useParams } from 'react-router';
 import DirectiveContent from 'components/GridTable/DirectiveComponents';
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
 import {
@@ -25,7 +22,9 @@ import {
   prepareDirectiveForPattern,
   prepareDirectiveForDefineVariable,
   prepareDirectiveForSendToError,
+  prepareDirectiveForCalculate,
 } from './utils';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/constants';
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
@@ -245,6 +244,15 @@ const AddTransformation = (props) => {
       }
     } else if (functionName === 'fillNullOrEmpty') {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+    } else if (CALCULATE_OPTIONS.some((item) => item.value === functionName)) {
+      const getValue = prepareDirectiveForCalculate(
+        functionName,
+        selectedColumns[0].label,
+        directiveComponentValues.copyToNewColumn,
+        directiveComponentValues.copyColumnName,
+        directiveComponentValues.customInput
+      );
+      props.applyTransformation(selectedColumns[0].label, getValue);
     } else {
       setLoading(false);
       props.applyTransformation(selectedColumns[0].label);
@@ -259,7 +267,9 @@ const AddTransformation = (props) => {
     setColumnsPopup(false);
   };
 
-  const isComponentAvailable = DIRECTIVE_COMPONENTS.some((item) => item.type === functionName);
+  const isComponentAvailable =
+    DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
+    CALCULATE_OPTIONS.some((item) => item.value === functionName);
 
   return (
     <Fragment>
@@ -291,6 +301,7 @@ const AddTransformation = (props) => {
                   setDirectiveComponentsValue={setDirectiveComponentsValue}
                   directiveComponents={DIRECTIVE_COMPONENTS}
                   directiveComponentValues={directiveComponentValues}
+                  functionName={functionName}
                   {...props}
                 />
               )

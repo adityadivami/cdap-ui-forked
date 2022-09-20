@@ -396,3 +396,66 @@ export const prepareDirectiveForSendToError = (
 
   return finalExpression;
 };
+
+export const prepareDirectiveForCalculate = (
+  functionName,
+  selectedColumn,
+  copyToNew,
+  newColumnName,
+  inputDigit
+) => {
+  let directive;
+  switch (functionName) {
+    case 'ADD':
+      directive = copyToNew
+        ? `set-column :${newColumnName} ${selectedColumn} + ${inputDigit}`
+        : `set-column :${selectedColumn} ${selectedColumn} + ${inputDigit}`;
+      break;
+    case 'SUBTRACT':
+      directive = copyToNew
+        ? `set-column :${newColumnName} ${selectedColumn} - ${inputDigit}`
+        : `set-column :${selectedColumn} ${selectedColumn} - ${inputDigit}`;
+      break;
+    case 'MULTIPLY':
+      directive = copyToNew
+        ? `set-column :${newColumnName} ${selectedColumn} * ${inputDigit}`
+        : `set-column :${selectedColumn} ${selectedColumn} * ${inputDigit}`;
+      break;
+    case 'DIVIDE':
+      directive = copyToNew
+        ? `set-column :${newColumnName} ${selectedColumn} / ${inputDigit}`
+        : `set-column :${selectedColumn} ${selectedColumn} / ${inputDigit}`;
+      break;
+    case 'MODULO':
+      directive = copyToNew
+        ? `set-column :${newColumnName} ${selectedColumn} % ${inputDigit}`
+        : `set-column :${selectedColumn} ${selectedColumn} % ${inputDigit}`;
+      break;
+    case 'POWEROF':
+      directive = copyToNew
+        ? `set-column :${newColumnName} math:pow(${selectedColumn}, ${inputDigit})`
+        : `set-column :${selectedColumn} math:pow(${selectedColumn}, ${inputDigit})`;
+      break;
+      case 'SQUARE':
+        directive = copyToNew
+          ? `set-column :${newColumnName} math:pow(${selectedColumn}, 2)`
+          : `set-column :${selectedColumn} math:pow(${selectedColumn}, 2)`;
+        break;
+        case 'SQAURE_ROOT':
+          directive = copyToNew
+            ? `set-column :${newColumnName} math:sqrt(${selectedColumn})`
+            : `set-column :${selectedColumn} math:sqrt(${selectedColumn})`;
+          break;
+          case 'CUBE':
+            directive = copyToNew
+              ? `set-column :${newColumnName} math:pow(${selectedColumn}, 3)`
+              : `set-column :${selectedColumn} math:pow(${selectedColumn}, 3)`;
+            break;
+            case 'CUBE_ROOT':
+              directive = copyToNew
+                ? `set-column :${newColumnName} math:cbrt(${selectedColumn})`
+                : `set-column :${selectedColumn} math:cbrt(${selectedColumn})`;
+              break;
+  }
+  return directive;
+};
