@@ -42,6 +42,7 @@ import { IValues } from 'components/WrangleHome/Components/OngoingDataExploratio
 import { convertNonNullPercent } from './utils';
 import GridKPICell from './components/GridKPICell';
 import NoDataScreen from './components/NoRecordScreen';
+import FunctionSearch from 'components/FunctionSearch';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -190,6 +191,7 @@ export default function GridTable() {
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
+      <FunctionSearch />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
       <Table aria-label="simple table" className="test">
         <TableHead>

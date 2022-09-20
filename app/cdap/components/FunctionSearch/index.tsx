@@ -20,6 +20,7 @@ import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import NamespaceStore from 'services/NamespaceStore';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 
 const FunctionSearch = () => {
   const classes = useStyles();
@@ -88,7 +89,6 @@ const FunctionSearch = () => {
         getOptionLabel={(option) => option.directive.concat(`(${option.description})`)}
         autoHighlight={true}
         PaperComponent={CustomPaper}
-        style={{ height: '555px' }}
         onClose={handleClose}
         renderOption={(option) => (
           <>
@@ -103,9 +103,14 @@ const FunctionSearch = () => {
                   {option.directive}
                 </Typography>
                 {/* <br /> */}
-                <Typography variant="body1" className={classes.description}>
-                  {option.description}
-                </Typography>
+                <Box className={classes.navigate}>
+                  <Typography variant="body1" className={classes.description}>
+                    {option.description}
+                  </Typography>
+                  <Box>
+                    <ChevronRightRoundedIcon />
+                  </Box>
+                </Box>
               </Box>
             </Box>
           </>

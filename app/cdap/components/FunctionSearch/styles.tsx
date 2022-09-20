@@ -39,12 +39,13 @@ export const useStyles = makeStyles({
       padding: '0px',
       margin: '0px',
       background: 'white',
-
-      // boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
       borderRadius: '0px',
     },
     '& div.MuiAutocomplete-noOptions': {
       background: 'white',
+    },
+    '& li#combo-box-demo-option.MuiAutocomplete-option': {
+      height: '71px',
     },
   },
 
@@ -97,5 +98,13 @@ export const useStyles = makeStyles({
   },
   description: {
     color: '#616161',
+  },
+  navigate: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  chevron: {
+    color: '#616161',
+    fontSize: 'small',
   },
 });
