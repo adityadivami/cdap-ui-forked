@@ -37,59 +37,84 @@ const Calculate = (props) => {
     <Box className={classes.calculateWrapper}>
       {UI_INPUT.length > 0 &&
         UI_INPUT.map((item) => {
-          if (item.inputRequired) {
+          if (item.value === 'CHARCOUNT') {
             return (
               <Box className={classes.calculateFlex}>
-                {item?.sign && (
-                  <div className={`${classes.formLabelStyles} ${classes.signText}`}>
-                    {item?.sign}
-                  </div>
-                )}
                 <FormGroup>
+                  <div className={classes.formLabelStyles}>{NAME_NEW_COLUMN}</div>
                   <FormInputFieldComponent
-                    formInputValue={customInput}
+                    formInputValue={column}
                     classnames={classes.formFieldStyles}
                     inputProps={{
                       classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-                      type: 'number',
-                      value: customInput,
-                      onChange: (e) => setCustomInput(e.target.value),
+                      type: 'text',
+                      value: column,
+                      onChange: (e) => setColumnName(e.target.value),
                       color: 'primary',
-                      placeholder: 'Enter value, e.g. 3',
+                      placeholder: DESTINATION_COLUMN,
                     }}
                   />
+                  {isError && <FormHelperText error={isError}>{COLUMN_NAME_EXIST}</FormHelperText>}
                 </FormGroup>
               </Box>
             );
+          } else {
+            if (item.inputRequired) {
+              return (
+                <Box className={classes.calculateFlex}>
+                  {item?.sign && (
+                    <div className={`${classes.formLabelStyles} ${classes.signText}`}>
+                      {item?.sign}
+                    </div>
+                  )}
+                  <FormGroup>
+                    <FormInputFieldComponent
+                      formInputValue={customInput}
+                      classnames={classes.formFieldStyles}
+                      inputProps={{
+                        classes: { underline: classes.underlineStyles, input: classes.inputStyles },
+                        type: 'number',
+                        value: customInput,
+                        onChange: (e) => setCustomInput(e.target.value),
+                        color: 'primary',
+                        placeholder: 'Enter value, e.g. 3',
+                      }}
+                    />
+                  </FormGroup>
+                </Box>
+              );
+            }
           }
         })}
-      <FormGroup>
-        <InputCheckbox
-          label={COPY_TO_NEW_COLUMN}
-          value={copyToNewColumn}
-          onChange={(e) => setCopyToNew(e.target.checked)}
-          className={classes.checkboxStyles}
-        />
-        {copyToNewColumn && (
-          <>
-            <div className={classes.formLabelStyles}>{NAME_NEW_COLUMN}</div>
+      {functionName !== 'CHARCOUNT' && (
+        <FormGroup>
+          <InputCheckbox
+            label={COPY_TO_NEW_COLUMN}
+            value={copyToNewColumn}
+            onChange={(e) => setCopyToNew(e.target.checked)}
+            className={classes.checkboxStyles}
+          />
+          {copyToNewColumn && (
+            <>
+              <div className={classes.formLabelStyles}>{NAME_NEW_COLUMN}</div>
 
-            <FormInputFieldComponent
-              formInputValue={column}
-              classnames={classes.formFieldStyles}
-              inputProps={{
-                classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-                type: 'text',
-                value: column,
-                onChange: (e) => setColumnName(e.target.value),
-                color: 'primary',
-                placeholder: DESTINATION_COLUMN,
-              }}
-            />
-            {isError && <FormHelperText error={isError}>{COLUMN_NAME_EXIST}</FormHelperText>}
-          </>
-        )}
-      </FormGroup>
+              <FormInputFieldComponent
+                formInputValue={column}
+                classnames={classes.formFieldStyles}
+                inputProps={{
+                  classes: { underline: classes.underlineStyles, input: classes.inputStyles },
+                  type: 'text',
+                  value: column,
+                  onChange: (e) => setColumnName(e.target.value),
+                  color: 'primary',
+                  placeholder: DESTINATION_COLUMN,
+                }}
+              />
+              {isError && <FormHelperText error={isError}>{COLUMN_NAME_EXIST}</FormHelperText>}
+            </>
+          )}
+        </FormGroup>
+      )}
     </Box>
   );
 };
