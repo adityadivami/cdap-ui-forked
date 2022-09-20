@@ -14,7 +14,8 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
@@ -73,6 +74,7 @@ export default function GridTable() {
   ]);
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
+  const [headersList, setHeadersList] = useState([]);
 
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
@@ -328,6 +330,32 @@ export default function GridTable() {
   // Redux store
   const { data, headers, types } = dataprep;
 
+  useEffect(() => {
+    setHeadersList(headers);
+  }, [dataprep]);
+
+  const handleDragEnd = (e) => {
+    if (!e.destination) {
+      return;
+    }
+    const tempData: string[] = Array.from(headers);
+    const [source_data] = tempData.splice(e.source.index, 1);
+    tempData.splice(e.destination.index, 0, source_data);
+    console.log('data ---> ', tempData);
+    DataPrepStore.dispatch({
+      type: DataPrepActions.setWorkspace,
+      payload: {
+        ...dataprep,
+        headers: tempData,
+      },
+    });
+    setHeadersList(tempData);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
@@ -360,22 +388,51 @@ export default function GridTable() {
         />
       )}
       <Table aria-label="simple table" className="test">
-        <TableHead>
-          <TableRow>
-            {headers.map((eachHeader) => (
-              <GridHeaderCell
-                label={eachHeader}
-                type={types[eachHeader]}
-                key={eachHeader}
-                columnSelected={columnSelected}
-                setColumnSelected={handleColumnSelect}
-              />
-            ))}
-          </TableRow>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="droppable" direction="horizontal">
+            {(provider) => (
+              <TableHead
+                ref={provider.innerRef}
+                {...provider.droppableProps}
+                className={classes.tableHeader}
+              >
+                <TableRow>
+                  {headersList.map((eachHeader, index) => (
+                    <Draggable
+                      key={eachHeader}
+                      draggableId={index + eachHeader}
+                      index={index}
+                      isDragDisabled={false}
+                    >
+                      {(provider) => (
+                        <TableCell
+                          ref={provider.innerRef}
+                          {...provider.draggableProps}
+                          {...provider.dragHandleProps}
+                          key={index}
+                        >
+                          <GridHeaderCell
+                            label={eachHeader}
+                            type={types[eachHeader]}
+                            key={eachHeader}
+                            columnSelected={columnSelected}
+                            setColumnSelected={handleColumnSelect}
+                          />
+                        </TableCell>
+                      )}
+                    </Draggable>
+                  ))}
+                </TableRow>
+                {provider.placeholder}
+              </TableHead>
+            )}
+          </Droppable>
+        </DragDropContext>
+        <TableBody>
           <TableRow>
             {Array.isArray(missingDataList) &&
-              Array.isArray(headers) &&
-              headers.map((each, index) => {
+              Array.isArray(headersList) &&
+              headersList.map((each, index) => {
                 return missingDataList.map((item, itemIndex) => {
                   if (item.name === each) {
                     return <GridKPICell metricData={item} key={item.name} />;
@@ -383,12 +440,10 @@ export default function GridTable() {
                 });
               })}
           </TableRow>
-        </TableHead>
-        <TableBody>
           {data.map((eachRow, rowIndex) => {
             return (
               <TableRow key={`row-${rowIndex}`}>
-                {headers.map((eachKey, eachIndex) => {
+                {headersList.map((eachKey, eachIndex) => {
                   return (
                     <GridTextCell
                       cellValue={eachRow[eachKey] || '--'}
@@ -401,6 +456,7 @@ export default function GridTable() {
           })}
         </TableBody>
       </Table>
+
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}

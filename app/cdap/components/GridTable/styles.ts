@@ -32,16 +32,12 @@ export const useStyles = makeStyles({
     height: 'calc(100vh - 192px)',
     overflow: 'scroll',
   },
-  loadingContainer: {
+  firstRowContainer: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
+  },
+  tableHeader: {
+    '& .MuiTableCell-root': {
+      padding: '0px',
+    },
   },
 });
