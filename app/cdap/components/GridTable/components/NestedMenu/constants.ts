@@ -13,6 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import Calculate from '../../DirectiveComponents/Calculate';
+
 export const DATATYPE_OPTIONS = [
   {
     value: 'string',
@@ -95,6 +97,79 @@ export const PARSE_OPTIONS = [
   },
 ];
 
+export const CALCULATE_OPTIONS = [
+  {
+    label: 'Add',
+    value: 'ADD',
+    sign: '+',
+    inputRequired: true,
+    component: Calculate,
+  },
+  {
+    label: 'Subtract',
+    value: 'SUBTRACT',
+    sign: '-',
+    inputRequired: true,
+    component: Calculate,
+  },
+  {
+    label: 'Multiply',
+    value: 'MULTIPLE',
+    sign: 'x',
+    inputRequired: true,
+    component: Calculate,
+  },
+  {
+    label: 'Divide',
+    value: 'DIVIDE',
+    sign: '/',
+    inputRequired: true,
+    component: Calculate,
+  },
+  {
+    label: 'Modulo',
+    value: 'MOD',
+    sign: '%',
+    inputRequired: true,
+    component: Calculate,
+  },
+  {
+    label: 'Power of',
+    value: 'POWEROF',
+    sign: null,
+    inputRequired: true,
+    component: Calculate,
+  },
+  {
+    label: 'Square',
+    value: 'SQUARE',
+    sign: null,
+    inputRequired: false,
+    component: Calculate,
+  },
+  {
+    label: 'Square root',
+    value: 'SQUARE_ROOT',
+    sign: null,
+    inputRequired: false,
+    component: Calculate,
+  },
+  {
+    label: 'Cube',
+    value: 'CUBE',
+    sign: null,
+    inputRequired: false,
+    component: Calculate,
+  },
+  {
+    label: 'Cube root',
+    value: 'CUBE_ROOT',
+    sign: null,
+    inputRequired: false,
+    component: Calculate,
+  },
+];
+
 export const MENU_OPTIONS = [
   {
     value: 'parse',
@@ -142,6 +217,7 @@ export const MENU_OPTIONS = [
   {
     value: 'calculate',
     label: 'Calculate',
+    options: CALCULATE_OPTIONS,
   },
   {
     value: 'customTransform',
