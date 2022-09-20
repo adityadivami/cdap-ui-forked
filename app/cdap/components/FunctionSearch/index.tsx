@@ -131,6 +131,7 @@ const FunctionSearch = ({ transformationPanel }) => {
             onChange={(e) => handleInputChange(e)}
             value={textFieldInput}
             id="text-input"
+            classes={{ root: classes.customTextField }}
             InputProps={{
               ...params.InputProps,
               startAdornment: (
