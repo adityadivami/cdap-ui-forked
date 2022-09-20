@@ -91,4 +91,8 @@ export const OPTION_WITH_TWO_INPUT = [
   'NEGATE',
   'STRIPZERO',
   'SIGN',
+  'SQUARE',
+  'SQUARE_ROOT',
+  'CUBE',
+  'CUBE_ROOT',
 ];
