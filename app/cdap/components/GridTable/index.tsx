@@ -242,14 +242,14 @@ export default function GridTable() {
         setColumnSelected('');
         setToaster({
           open: true,
-          message: 'Step successfully added',
+          message: `${newDirective} successfully added`,
           isSuccess: true,
         });
       },
       (err) => {
         setToaster({
           open: true,
-          message: 'Transformation failed',
+          message: `Failed to transform ${newDirective}`,
           isSuccess: false,
         });
         setLoading(false);
