@@ -19,7 +19,7 @@ import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { Box, Divider, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { SUCCESS_LABEL,FAILURE_LABEL } from './constants';
+import { SUCCESS_LABEL, FAILURE_LABEL } from './constants';
 
 export const TransitionComponent = (props) => {
   const classes = useStyles();
