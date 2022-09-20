@@ -55,3 +55,5 @@ export const OPTION_WITH_TWO_INPUT = [
   'dateTimeAsString',
   'fillNullOrEmpty',
 ];
+
+export const MISSING_NULL = 'Missing/Null';

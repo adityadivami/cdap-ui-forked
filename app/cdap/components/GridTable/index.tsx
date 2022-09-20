@@ -15,6 +15,7 @@
  */
 
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
@@ -311,6 +312,16 @@ export default function GridTable() {
   // Redux store
   const { data, headers, types } = dataprep;
 
+  const handleDragEnd = (e) => {
+    console.log('handler drag functions triggered');
+    if (!e.destination) {
+      return;
+    }
+    const tempData = Array.from(data);
+    const [source_data] = tempData.splice(e.source.index, 1);
+    tempData.splice(e.destination.index, 0, source_data);
+  };
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
@@ -344,17 +355,31 @@ export default function GridTable() {
       )}
       <Table aria-label="simple table" className="test">
         <TableHead>
-          <TableRow>
-            {headers.map((eachHeader) => (
-              <GridHeaderCell
-                label={eachHeader}
-                type={types[eachHeader]}
-                key={eachHeader}
-                columnSelected={columnSelected}
-                setColumnSelected={handleColumnSelect}
-              />
-            ))}
-          </TableRow>
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId="droppable" direction="horizontal">
+              {(provider) => (
+                <TableRow ref={provider.innerRef} {...provider.droppableProps}>
+                  {headers.map((eachHeader, index) => (
+                    <Draggable key={eachHeader} draggableId={index} index={index}>
+                      {(provider) => (
+                        <GridHeaderCell
+                          ref={provider.innerRef}
+                          {...provider.draggableProps}
+                          {...provider.dragHandleProps}
+                          label={eachHeader}
+                          type={types[eachHeader]}
+                          key={eachHeader}
+                          columnSelected={columnSelected}
+                          setColumnSelected={handleColumnSelect}
+                        />
+                      )}
+                    </Draggable>
+                  ))}
+                  {provider.placeholder}
+                </TableRow>
+              )}
+            </Droppable>
+          </DragDropContext>
           <TableRow>
             {Array.isArray(missingDataList) &&
               Array.isArray(headers) &&
