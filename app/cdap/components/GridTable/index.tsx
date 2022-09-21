@@ -320,7 +320,7 @@ export default function GridTable() {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
 
   // Redux store
-  const { data, headers, types } = dataprep;
+  const { data, headers, types, directives } = dataprep;
 
   return (
     <Box>
@@ -402,6 +402,7 @@ export default function GridTable() {
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
+        recipeStepsCount={directives?.length}
       />
       {toaster.open && (
         <PositionedSnackbar
