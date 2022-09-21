@@ -35,7 +35,7 @@ import {
 } from './images';
 import { useStyles } from './styles';
 
-const ToolBarList = ({ submitMenuOption }) => {
+const ToolBarList = ({ columnType, submitMenuOption }) => {
   const classes = useStyles();
   return (
     <Box className={classes.iconContainer}>
@@ -49,7 +49,11 @@ const ToolBarList = ({ submitMenuOption }) => {
         <IconButton>{ColumnIcon}</IconButton>
 
         {Divider}
-        <NestedMenu icon={StructureIcon} submitMenuOption={submitMenuOption} />
+        <NestedMenu
+          columnType={columnType}
+          icon={StructureIcon}
+          submitMenuOption={submitMenuOption}
+        />
         <IconButton>{FragmentIcon}</IconButton>
         <IconButton>{MathIcon}</IconButton>
         <IconButton>{SecurityIcon}</IconButton>

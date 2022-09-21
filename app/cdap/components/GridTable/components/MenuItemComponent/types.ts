@@ -18,4 +18,5 @@ export interface IMenuItemComponentProps {
   item;
   index: any;
   onMenuClick: (e: any, item: any) => void;
+  columnType: string;
 }

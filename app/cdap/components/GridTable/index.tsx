@@ -74,6 +74,7 @@ export default function GridTable() {
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [columnType, setColumnType] = useState('');
 
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
@@ -324,8 +325,10 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  const handleColumnSelect = (columnName) =>
+  const handleColumnSelect = (columnName) => {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+    setColumnType(types[columnName]);
+  };
 
   // Redux store
   const { data, headers, types } = dataprep;
@@ -334,6 +337,7 @@ export default function GridTable() {
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       <ToolBarList
+        columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
       />
       {isFirstWrangle && connectorType === 'File' && (

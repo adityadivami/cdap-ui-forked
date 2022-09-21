@@ -21,4 +21,5 @@ export interface IMenuComponentProps {
   menuOptions;
   setAnchorEl;
   submitOption: (e: any, item: any) => void;
+  columnType: string;
 }
