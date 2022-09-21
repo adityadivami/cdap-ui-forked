@@ -14,43 +14,53 @@
  * the License.
  */
 import Calculate from '../../DirectiveComponents/Calculate';
+import { NUMBER_TYPES, NATIVE_NUMBER_TYPES } from 'services/global-constants';
 
 export const DATATYPE_OPTIONS = [
   {
     value: 'string',
     label: 'string',
+    supported_dataType: ['all'],
   },
   {
     value: 'boolean',
     label: 'boolean',
+    supported_dataType: ['all'],
   },
   {
     value: 'integer',
     label: 'integer',
+    supported_dataType: ['all'],
   },
   {
     value: 'long',
     label: 'long',
+    supported_dataType: ['all'],
   },
   {
     value: 'short',
     label: 'short',
+    supported_dataType: ['all'],
   },
   {
     value: 'float',
     label: 'float',
+    supported_dataType: ['all'],
   },
   {
     value: 'double',
     label: 'double',
+    supported_dataType: ['all'],
   },
   {
     value: 'decimal',
     label: 'decimal',
+    supported_dataType: ['all'],
   },
   {
     value: 'bytes',
     label: 'bytes',
+    supported_dataType: ['all'],
   },
 ];
 
@@ -58,42 +68,52 @@ export const PARSE_OPTIONS = [
   {
     value: 'parseCSV',
     label: 'CSV',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseAvro',
     label: 'Avro',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseExcel',
     label: 'Excel',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseJSON',
     label: 'JSON',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseXML',
     label: 'XML to JSON',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseLog',
     label: 'Log',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseSimpleDate',
     label: 'Simple Date',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseDateTime',
     label: 'Datetime',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseFixedLength',
     label: 'Fixed Length',
+    supported_dataType: ['all'],
   },
   {
     value: 'parseHL7',
     label: 'HL7',
+    supported_dataType: ['all'],
   },
 ];
 
@@ -104,6 +124,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['string'],
   },
   {
     label: 'Add',
@@ -111,6 +132,7 @@ export const CALCULATE_OPTIONS = [
     sign: '+',
     inputRequired: true,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Subtract',
@@ -118,6 +140,7 @@ export const CALCULATE_OPTIONS = [
     sign: '-',
     inputRequired: true,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Multiply',
@@ -125,6 +148,7 @@ export const CALCULATE_OPTIONS = [
     sign: 'x',
     inputRequired: true,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Divide',
@@ -132,6 +156,7 @@ export const CALCULATE_OPTIONS = [
     sign: '/',
     inputRequired: true,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Modulo',
@@ -139,6 +164,7 @@ export const CALCULATE_OPTIONS = [
     sign: '%',
     inputRequired: true,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Power of',
@@ -146,6 +172,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Square',
@@ -153,6 +180,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Square root',
@@ -160,6 +188,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Cube',
@@ -167,6 +196,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Cube root',
@@ -174,6 +204,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'log',
@@ -181,6 +212,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Natural log',
@@ -188,6 +220,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Absolute value',
@@ -195,6 +228,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Ceil',
@@ -202,6 +236,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Floor',
@@ -209,6 +244,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Sin',
@@ -216,6 +252,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Cos',
@@ -223,6 +260,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Tan',
@@ -230,6 +268,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'ARCSIN',
@@ -237,6 +276,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'ARCCOS',
@@ -244,6 +284,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'ARCTAN',
@@ -251,6 +292,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Round',
@@ -258,6 +300,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Random',
@@ -265,6 +308,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
     label: 'Decimal Add',
@@ -272,6 +316,7 @@ export const CALCULATE_OPTIONS = [
     sign: '+',
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal Subtract',
@@ -279,6 +324,7 @@ export const CALCULATE_OPTIONS = [
     sign: '-',
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal Multiply',
@@ -286,6 +332,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal Divide',
@@ -293,6 +340,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal Divider',
@@ -300,6 +348,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Precision',
@@ -307,6 +356,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Scale',
@@ -314,6 +364,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Unscaled',
@@ -321,6 +372,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal left',
@@ -328,6 +380,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal right',
@@ -335,6 +388,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal power of',
@@ -342,6 +396,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal absolute value',
@@ -349,6 +404,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal square',
@@ -356,6 +412,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Decimal cube',
@@ -363,6 +420,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Negate',
@@ -370,6 +428,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Strip zero',
@@ -377,6 +436,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
   {
     label: 'Sign',
@@ -384,6 +444,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
+    supported_dataType: ['bigdecimal'],
   },
 ];
 
@@ -392,6 +453,7 @@ export const MENU_OPTIONS = [
     value: 'parse',
     label: 'Parse',
     options: PARSE_OPTIONS,
+    supported_dataType: ['all'],
   },
   {
     value: 'divider',
@@ -400,18 +462,20 @@ export const MENU_OPTIONS = [
     value: 'changeDatatype',
     label: 'Change data type',
     options: DATATYPE_OPTIONS,
+    supported_dataType: ['all'],
   },
   {
     value: 'set-character-encoding',
     label: 'Set character encoding',
     options: [
-      { value: 'character-encoding-utf8', label: 'UTF-8' },
-      { value: 'character-encoding-utf16', label: 'UTF-16' },
-      { value: 'character-encoding-us-ascii', label: 'US-ASCII' },
-      { value: 'character-encoding-iso-8859-1', label: 'ISO-8859-1' },
-      { value: 'character-encoding-utf16-be', label: 'UTF-16BE' },
-      { value: 'character-encoding-utf16-le', label: 'UTF-16LE' },
+      { value: 'character-encoding-utf8', label: 'UTF-8', supported_dataType: ['byte'] },
+      { value: 'character-encoding-utf16', label: 'UTF-16', supported_dataType: ['byte'] },
+      { value: 'character-encoding-us-ascii', label: 'US-ASCII', supported_dataType: ['byte'] },
+      { value: 'character-encoding-iso-8859-1', label: 'ISO-8859-1', supported_dataType: ['byte'] },
+      { value: 'character-encoding-utf16-be', label: 'UTF-16BE', supported_dataType: ['byte'] },
+      { value: 'character-encoding-utf16-le', label: 'UTF-16LE', supported_dataType: ['byte'] },
     ],
+    supported_dataType: ['byte'],
   },
   {
     value: 'divider',
@@ -420,25 +484,28 @@ export const MENU_OPTIONS = [
     value: 'text',
     label: 'Format',
     options: [
-      { value: 'uppercase', label: 'UPPERCASE' },
-      { value: 'lowercase', label: 'Lowercase' },
-      { value: 'titlecase', label: 'Title Case' },
-      { value: 'concatenate', label: 'Concatenate' },
-      { value: 'trim', label: 'White spaces' },
-      { value: 'ltrim', label: 'Leading white spaces' },
-      { value: 'rtrim', label: 'Trailing White spaces' },
-      { value: 'dateTime', label: 'Date time' },
-      { value: 'dateTimeAsString', label: 'Date time as string' },
+      { value: 'uppercase', label: 'UPPERCASE', supported_dataType: ['string'] },
+      { value: 'lowercase', label: 'Lowercase', supported_dataType: ['string'] },
+      { value: 'titlecase', label: 'Title Case', supported_dataType: ['string'] },
+      { value: 'concatenate', label: 'Concatenate', supported_dataType: ['string'] },
+      { value: 'trim', label: 'White spaces', supported_dataType: ['string'] },
+      { value: 'ltrim', label: 'Leading white spaces', supported_dataType: ['string'] },
+      { value: 'rtrim', label: 'Trailing White spaces', supported_dataType: ['string'] },
+      { value: 'dateTime', label: 'Date time', supported_dataType: ['string'] },
+      { value: 'dateTimeAsString', label: 'Date time as string', supported_dataType: ['string'] },
     ],
+    supported_dataType: ['string'],
   },
   {
     value: 'calculate',
     label: 'Calculate',
     options: CALCULATE_OPTIONS,
+    supported_dataType: NATIVE_NUMBER_TYPES.concat(['string']),
   },
   {
     value: 'customTransform',
     label: 'Custom Transform',
+    supported_dataType: ['all'],
   },
   {
     value: 'divider',
@@ -446,18 +513,22 @@ export const MENU_OPTIONS = [
   {
     value: 'filter',
     label: 'Filter',
+    supported_dataType: ['all'],
   },
   {
     value: 'send-to-error',
     label: 'Send to error',
+    supported_dataType: ['all'],
   },
   {
     value: 'findAndReplace',
     label: 'Find and Replace',
+    supported_dataType: ['all'],
   },
   {
     value: 'fillNullOrEmpty',
     label: 'Fill null or empty',
+    supported_dataType: ['all'],
   },
   {
     value: 'divider',
@@ -465,14 +536,17 @@ export const MENU_OPTIONS = [
   {
     value: 'copyColumn',
     label: 'Copy column',
+    supported_dataType: ['all'],
   },
   {
     value: 'delete',
     label: 'Delete column',
+    supported_dataType: ['all'],
   },
   {
     value: 'keep',
     label: 'Keep column',
+    supported_dataType: ['all'],
   },
   {
     value: 'divider',
@@ -481,27 +555,29 @@ export const MENU_OPTIONS = [
     value: 'extract',
     label: 'Extract',
     options: [
-      { value: 'using-patterns', label: 'Using Patterns' },
-      { value: 'using-delimiters', label: 'Using Delimiters' },
-      { value: 'using-positions', label: 'Using Positions' },
+      { value: 'using-patterns', label: 'Using Patterns', supported_dataType: ['string'] },
+      { value: 'using-delimiters', label: 'Using Delimiters', supported_dataType: ['all'] },
+      { value: 'using-positions', label: 'Using Positions', supported_dataType: ['all'] },
     ],
   },
   {
     value: 'explode',
     label: 'Explode',
     options: [
-      { value: 'delimited-text', label: 'Delimited Text' },
-      { value: 'array-flattening', label: 'Array By Flattening' },
-      { value: 'record-flattening', label: 'Record By Flattening' },
+      { value: 'delimited-text', label: 'Delimited Text', supported_dataType: ['all'] },
+      { value: 'array-flattening', label: 'Array By Flattening', supported_dataType: ['all'] },
+      { value: 'record-flattening', label: 'Record By Flattening', supported_dataType: ['all'] },
     ],
   },
   {
     value: 'define-variable',
     label: 'Define variable',
+    supported_dataType: ['all'],
   },
   {
     value: 'set-counter',
     label: 'Set counter',
+    supported_dataType: ['all'],
   },
   {
     value: 'divider',
@@ -510,35 +586,39 @@ export const MENU_OPTIONS = [
     value: 'mask-data',
     label: 'Mask Data',
     options: [
-      { value: 'last-4', label: 'Show last 4 characters only' },
-      { value: 'last-2', label: 'Show last 2 characters only' },
-      { value: 'numbers', label: 'Custom Selection' },
+      { value: 'last-4', label: 'Show last 4 characters only', supported_dataType: ['string'] },
+      { value: 'last-2', label: 'Show last 2 characters only', supported_dataType: ['string'] },
+      { value: 'numbers', label: 'Custom Selection', supported_dataType: ['string'] },
       { value: 'divider' },
-      { value: 'shuffle', label: 'By Shuffling' },
+      { value: 'shuffle', label: 'By Shuffling', supported_dataType: ['string'] },
     ],
+    supported_dataType: ['string'],
   },
   {
     value: 'encode',
     label: 'Encode',
     options: [
-      { value: 'encode-base64', label: 'Base64' },
-      { value: 'encode-base32', label: 'Base32' },
-      { value: 'encode-hex', label: 'Hex' },
-      { value: 'encode-url', label: 'URL' },
+      { value: 'encode-base64', label: 'Base64', supported_dataType: ['all'] },
+      { value: 'encode-base32', label: 'Base32', supported_dataType: ['all'] },
+      { value: 'encode-hex', label: 'Hex', supported_dataType: ['all'] },
+      { value: 'encode-url', label: 'URL', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
   {
     value: 'decode',
     label: 'Decode',
     options: [
-      { value: 'decode-base64', label: 'Base64' },
-      { value: 'decode-base32', label: 'Base32' },
-      { value: 'decode-hex', label: 'Hex' },
-      { value: 'decode-url', label: 'URL' },
+      { value: 'decode-base64', label: 'Base64', supported_dataType: ['all'] },
+      { value: 'decode-base32', label: 'Base32', supported_dataType: ['all'] },
+      { value: 'decode-hex', label: 'Hex', supported_dataType: ['all'] },
+      { value: 'decode-url', label: 'URL', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
   {
     value: 'hash',
     label: 'Hash',
+    supported_dataType: ['string'],
   },
 ];

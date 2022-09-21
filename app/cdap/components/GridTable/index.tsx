@@ -73,6 +73,7 @@ export default function GridTable() {
   ]);
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
+  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
 
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
@@ -178,9 +179,10 @@ export default function GridTable() {
     setSshowAddTransformation((prev) => !prev);
   };
 
-  const applyDirective = (option, columnSelected, value_1?, value_2?) => {
+  const applyDirective = (option, columnSelected, supported_dataType, value_1?) => {
     setLoading(true);
     setOptionSelected(option);
+    setDirectiveFunctionSupportedDataType(supported_dataType);
     if (OPTION_WITH_NO_INPUT.includes(option)) {
       const newDirective = getDirective(option, columnSelected);
       if (!Boolean(newDirective) || !Boolean(columnSelected)) {
@@ -331,7 +333,9 @@ export default function GridTable() {
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
-      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
+      <ToolBarList
+        submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+      />
       {isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
@@ -345,15 +349,20 @@ export default function GridTable() {
       {directiveFunction && (
         <AddTransformation
           functionName={directiveFunction}
+          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
           setLoading={setLoading}
           columnData={headersNamesList}
           missingDataList={dataQuality}
           applyTransformation={(selectedColumn, value) => {
             setColumnSelected(selectedColumn);
-            applyDirective(optionSelected, selectedColumn, value);
+            applyDirective(
+              optionSelected,
+              selectedColumn,
+              directiveFunctionSupportedDataType,
+              value
+            );
           }}
           callBack={(response) => {
-            setGridData(response);
             setColumnSelected('');
             setDirectiveFunction('');
           }}
