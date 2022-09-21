@@ -79,8 +79,11 @@ export default function GridTable() {
   const [showRecipePanel, setShowRecipePanel] = useState(false);
   const [toaster, setToaster] = useState({
     open: false,
-    message: '',
+    toasterLabel: '',
     isSuccess: false,
+    directiveApplied: '',
+    currentColumnSelected: '',
+    message: '',
   });
 
   useEffect(() => {
@@ -153,8 +156,11 @@ export default function GridTable() {
         (err) => {
           setToaster({
             open: true,
-            message: 'Failed to load data',
+            toasterLabel: 'Error!',
             isSuccess: false,
+            directiveApplied: '',
+            currentColumnSelected: '',
+            message: '',
           });
           setLoading(false);
         }
@@ -189,12 +195,12 @@ export default function GridTable() {
         setLoading(false);
         return;
       } else {
-        applyDirectiveAPICall(newDirective);
+        applyDirectiveAPICall(newDirective, columnSelected, option);
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective) => {
+  const applyDirectiveAPICall = (newDirective, columnSelected, option) => {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
@@ -228,21 +234,27 @@ export default function GridTable() {
             ...gridParams,
           },
         });
+        setToaster({
+          open: true,
+          toasterLabel: 'Step successfully added!',
+          isSuccess: true,
+          directiveApplied: option,
+          currentColumnSelected: columnSelected,
+          message: '',
+        });
         setLoading(false);
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
-        setToaster({
-          open: true,
-          message: 'Step successfully added',
-          isSuccess: true,
-        });
       },
       (err) => {
         setToaster({
           open: true,
-          message: 'Transformation failed',
+          toasterLabel: 'Error adding Recipe step!',
           isSuccess: false,
+          directiveApplied: '',
+          currentColumnSelected: '',
+          message: `Error encountered while executing ${option} on ${columnSelected} column.`,
         });
         setLoading(false);
       }
@@ -407,12 +419,18 @@ export default function GridTable() {
           handleCloseError={() =>
             setToaster({
               open: false,
-              message: '',
+              toasterLabel: '',
               isSuccess: false,
+              directiveApplied: '',
+              currentColumnSelected: '',
+              message: '',
             })
           }
-          messageToDisplay={toaster.message}
+          toasterLabel={toaster.toasterLabel}
           isSuccess={toaster.isSuccess}
+          directiveApplied={toaster.directiveApplied}
+          currentColumnSelected={toaster.currentColumnSelected}
+          message={toaster.message}
         />
       )}
       {loading && (

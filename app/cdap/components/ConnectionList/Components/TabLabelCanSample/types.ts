@@ -1,4 +1,3 @@
-
 /*
  *  Copyright © 2022 Cask Data, Inc.
  *
@@ -14,10 +13,14 @@
  *  License for the specific language governing permissions and limitations under
  *  the License.
  */
+
 import React from 'react';
 
 export interface IMessageState {
   open: boolean;
-  message: string;
+  toasterLabel: string;
   isSuccess: boolean;
+  directiveApplied: string;
+  currentColumnSelected: string;
+  message: string;
 }

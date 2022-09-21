@@ -1,18 +1,19 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ *  Copyright © 2022 Cask Data, Inc.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *  use this file except in compliance with the License. You may obtain a copy of
+ *  the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *  http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *  License for the specific language governing permissions and limitations under
+ *  the License.
  */
+
 import React, { useState, useEffect } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import { useStyles } from './styles';
@@ -20,12 +21,18 @@ import TransitionComponent from './Components/TransitionComponent';
 
 const PositionedSnackbar = ({
   handleCloseError,
-  messageToDisplay,
+  toasterLabel,
   isSuccess,
+  directiveApplied,
+  currentColumnSelected,
+  message,
 }: {
   handleCloseError: () => void;
-  messageToDisplay: string;
+  toasterLabel: string;
   isSuccess: boolean;
+  directiveApplied?: any;
+  currentColumnSelected: string;
+  message: string;
 }) => {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(true);
@@ -46,16 +53,25 @@ const PositionedSnackbar = ({
     handleCloseError();
   };
 
+  const handleUndo = () => {
+    // console.log('UNDO BUTTON Was Clicked');
+  };
+
   return (
     <Snackbar
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
       open={isOpen}
       onClose={handleClose}
+      classes={{ anchorOriginTopLeft: classes.MUIanchor, root: classes.MUIRoot }}
       TransitionComponent={() => (
         <TransitionComponent
-          close={() => handleClose()}
+          handleClose={() => handleClose()}
+          handleUndo={() => handleUndo}
           isSuccess={isSuccess}
-          messageToDisplay={messageToDisplay}
+          label={toasterLabel}
+          directive={directiveApplied}
+          columnName={currentColumnSelected}
+          message={message}
         />
       )}
       className={isSuccess ? classes.success : classes.error}

@@ -64,8 +64,11 @@ export default function TabLabelCanSample({
     } else {
       setToaster({
         open: true,
-        message: 'Failed to retrieve sample data',
+        toasterLabel: 'Error!',
         isSuccess: false,
+        directiveApplied: '',
+        currentColumnSelected: '',
+        message: 'Failed to create Workspace',
       });
     }
   };
@@ -76,8 +79,11 @@ export default function TabLabelCanSample({
     } catch (e) {
       setToaster({
         open: true,
-        message: 'Failed to create workspace',
+        toasterLabel: 'Error!',
         isSuccess: false,
+        directiveApplied: '',
+        currentColumnSelected: '',
+        message: 'Failed to create workspace',
       });
     }
   };
@@ -91,11 +97,6 @@ export default function TabLabelCanSample({
     })
       .then((res) => {
         toggleLoader(false);
-        setToaster({
-          open: true,
-          message: 'Success',
-          isSuccess: true,
-        });
         setTimeout(() => {
           if (onWorkspaceCreate) {
             return onWorkspaceCreate(res);
@@ -109,8 +110,11 @@ export default function TabLabelCanSample({
         toggleLoader(false);
         setToaster({
           open: true,
-          message: 'Failed to retrieve sample data', // -----Error Message can be sent here
+          toasterLabel: 'Error!',
           isSuccess: false,
+          directiveApplied: '',
+          currentColumnSelected: '',
+          message: 'Failed to retrieve sample data',
         });
       });
   };
