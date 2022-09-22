@@ -317,16 +317,23 @@ export default function GridTable() {
         return eachRow;
       });
     setRowsDataList(rowData);
+
     const progressValues = [];
-    for (const value in gridData.summary.statistics) {
-      const { general } = gridData.summary.statistics[value] || {};
+    console.log(gridData);
+    for (const title in gridData.summary.statistics) {
+      const { general } = gridData.summary.statistics[title] || {};
       const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
       const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
-      progressValues.unshift(nonNull);
+      progressValues.push({ value: nonNull, key: title });
     }
+    // [0].value
     setProgress(progressValues);
   };
 
+  useEffect(() => {
+    headers.map((item) => progress.filter((each) => each.key === item)[0]?.value);
+    console.log('progress', progress);
+  }, [progress]);
   useEffect(() => {
     getGridTableData();
   }, [gridData]);
@@ -389,11 +396,11 @@ export default function GridTable() {
               ))}
             </TableRow>
             <TableRow>
-              {progress.map((item, index) => (
+              {headers.map((item, index) => (
                 <TableCell className={classes.progressBarRoot}>
                   <LinearProgress
                     variant="determinate"
-                    value={item}
+                    value={progress.filter((each) => each.key === item)[0]?.value}
                     key={index}
                     classes={{ root: classes.MUILinearRoot, barColorPrimary: classes.MUIBarColor }}
                     className={classes.linearProgressBarStyle}
