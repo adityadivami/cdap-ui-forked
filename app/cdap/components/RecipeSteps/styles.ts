@@ -4,6 +4,7 @@ export const useStyles = makeStyles(() => {
   return {
     importIconStyles: {
       marginRight: '20px',
+      cursor: 'pointer',
     },
     emptyScreenStyles: {
       width: '100%',
@@ -74,6 +75,9 @@ export const useStyles = makeStyles(() => {
           visibility: 'visible',
         },
       },
+    },
+    kebabMenuStyle: {
+      cursor: 'pointer',
     },
   };
 });
