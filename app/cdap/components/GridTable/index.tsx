@@ -197,6 +197,7 @@ export default function GridTable() {
         return;
       } else {
         applyDirectiveAPICall(newDirective, 'add');
+        setIsFirstWrangle(false);
       }
     }
   };
