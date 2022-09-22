@@ -29,6 +29,7 @@ import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
 interface ICardCount {
   cardCount?: number;
   fromAddress: string;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
@@ -56,7 +57,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
               directives: item.directives,
               limit: 1000,
               insights: {
-                name: item.sampleSpec.connectionName,
+                name: item?.sampleSpec?.connectionName,
                 workspaceName: item.workspaceName,
                 path: item?.sampleSpec?.path,
                 visualization: {},
@@ -89,6 +90,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
             const general = workspace.summary.statistics[element].general;
             const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
             const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+
             dataQuality = dataQuality + nonNull;
           });
           const totalDataQuality = dataQuality / workspace.headers.length;
@@ -118,7 +120,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {filteredData.map((item, index) => {
+      {filteredData.reverse().map((item, index) => {
         return (
           <Link
             to={{
