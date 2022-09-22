@@ -30,6 +30,8 @@ export default function WranglerHome() {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const cardCount = 2;
+  localStorage.setItem('newWranglerLaunched', 'True');
+
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
       <Box className={classes.subHeader}>
@@ -44,7 +46,11 @@ export default function WranglerHome() {
       <Box>
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle title="Start data exploration" />
-          <Box className={classes.viewMore}>View More</Box>
+          <Box className={classes.viewMore}>
+            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}>
+              View all
+            </Link>
+          </Box>
         </Box>
         <WrangleCard />
         <Box className={classes.headerTitle}>
@@ -52,11 +58,11 @@ export default function WranglerHome() {
 
           <Box className={classes.viewMore}>
             <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
-              View More
+              View all
             </Link>
           </Box>
         </Box>
-        <OngoingDataExploration cardCount={cardCount} />
+        <OngoingDataExploration cardCount={cardCount} fromAddress="home" />
         {loading && (
           <Box className={classes.loadingContainer}>
             <LoadingSVG />
