@@ -53,6 +53,7 @@ export const useStyles = makeStyles(() => {
       marginRight: '10px',
       width: '10px',
       height: '20px',
+      cursor: 'pointer',
     },
   };
 });
