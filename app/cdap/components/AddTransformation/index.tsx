@@ -1,18 +1,21 @@
 import { Button, Container } from '@material-ui/core';
+import DataPrepStore from 'components/DataPrep/store';
 import DrawerWidget from 'components/DrawerWidget';
+import DirectiveContent from 'components/GridTable/DirectiveComponents';
+import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
 import React, { Fragment, useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import ActionsWidget from './ActionsWidget';
 import {
   ADD_TRANSFORMATION_STEP,
   APPLY_STEP,
-  SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
   DONE_STEP,
+  SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
 } from './constants';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsList from './SelectColumnsList';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
-import DataPrepStore from 'components/DataPrep/store';
 import { useStyles } from './styles';
 import MyDataPrepApi from 'api/dataprep';
 import { useParams } from 'react-router';
