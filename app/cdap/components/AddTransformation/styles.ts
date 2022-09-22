@@ -109,6 +109,7 @@ export const useStyles = makeStyles(() => {
       marginTop: '30px',
       textTransform: 'none',
       marginBottom: '20px',
+      marginRight: '8px',
     },
     buttonStyles: {
       '&:hover': {
