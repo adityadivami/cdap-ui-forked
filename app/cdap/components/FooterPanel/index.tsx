@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@material-ui/core';
 import { useCss } from './styles';
 import { ColumnIcon, ZoomIn, ArrowIcon } from './images';
 
-const Footer = ({ showRecipePanelHandler, showAddTransformationHandler }) => {
+const Footer = ({ showRecipePanelHandler, showAddTransformationHandler, recipeStepsCount }) => {
   const classes = useCss();
 
   return (
@@ -18,13 +18,10 @@ const Footer = ({ showRecipePanelHandler, showAddTransformationHandler }) => {
           <p className={classes.spanElement}> 100%</p>
           {ArrowIcon}
         </Box>
-        <p className={classes.directivesCont} onClick={showAddTransformationHandler}>
-          Trasnformations
-        </p>
         <p className={classes.directivesCont}> Directives </p>
         <Box className={classes.recipeCont} onClick={showRecipePanelHandler}>
           <p> Recipe Steps</p>
-          <p className={classes.spanElement1}> 10</p>
+          <p className={classes.spanElement1}>{recipeStepsCount}</p>
         </Box>
       </Box>
     </Box>
