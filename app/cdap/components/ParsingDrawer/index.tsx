@@ -58,7 +58,7 @@ const ParsingDrawer = (props) => {
           fileEncoding: encodingValue,
           skipHeader: headerValueChecked,
           enableQuotedValues: quotedValuesChecked,
-          schema: JSON.stringify(schemaValue),
+          schema: schemaValue != null ? JSON.stringify(schemaValue) : null,
           _pluginName: null,
         },
         limit: 1000,

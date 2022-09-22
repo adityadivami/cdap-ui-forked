@@ -25,6 +25,7 @@ import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
 import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
+import { orderBy, find } from 'lodash';
 
 interface ICardCount {
   cardCount?: number;
@@ -48,6 +49,12 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
           } else {
             values = res.values;
           }
+          values = orderBy(
+            values,
+            [(workspace) => (workspace.workspaceName || '').toLowerCase()],
+            ['asc']
+          );
+          console.log('values', values);
           const workspaces = values.map((item) => {
             const params = {
               context: 'default',
@@ -120,7 +127,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {filteredData.reverse().map((item, index) => {
+      {filteredData.map((item, index) => {
         return (
           <Link
             to={{
