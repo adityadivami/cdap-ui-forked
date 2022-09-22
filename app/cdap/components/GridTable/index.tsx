@@ -317,23 +317,16 @@ export default function GridTable() {
         return eachRow;
       });
     setRowsDataList(rowData);
-
     const progressValues = [];
-    console.log(gridData);
     for (const title in gridData.summary.statistics) {
       const { general } = gridData.summary.statistics[title] || {};
       const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
       const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
       progressValues.push({ value: nonNull, key: title });
     }
-    // [0].value
     setProgress(progressValues);
   };
 
-  useEffect(() => {
-    headers.map((item) => progress.filter((each) => each.key === item)[0]?.value);
-    console.log('progress', progress);
-  }, [progress]);
   useEffect(() => {
     getGridTableData();
   }, [gridData]);
