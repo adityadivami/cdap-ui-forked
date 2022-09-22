@@ -224,6 +224,13 @@ export default function ConnectionList() {
       return tempData;
     });
     refs.current[index].focus();
+    refs.current[index].addEventListener('blur', () => {
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = false;
+        return tempData;
+      });
+    });
   };
 
   const handleSearch = (e: any, index: number) => {
