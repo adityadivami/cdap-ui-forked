@@ -12,10 +12,12 @@ import { RECIPE_STEPS, SERIAL_NUMBER } from '../constants';
 import { useStyles } from '../styles';
 
 const RecipeStepsTableComponent = (props) => {
-  const { recipeSteps } = props;
+  const { recipeSteps, handleDeleteRecipeSteps } = props;
   const classes = useStyles();
 
-  const handleDelete = () => {};
+  const handleDelete = (eachStep, i) => {
+    handleDeleteRecipeSteps(recipeSteps.filter((x, index) => index < i));
+  };
 
   return (
     <TableContainer component={Box}>
@@ -48,7 +50,7 @@ const RecipeStepsTableComponent = (props) => {
               >
                 <img
                   className={classes.recipeStepsDeleteStyles}
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(eachStep, index)}
                   src="/cdap_assets/img/delete.svg"
                   alt="delete"
                 />
