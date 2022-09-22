@@ -189,16 +189,16 @@ export default function GridTable() {
         setLoading(false);
         return;
       } else {
-        applyDirectiveAPICall(newDirective);
+        applyDirectiveAPICall(newDirective, 'add');
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective) => {
+  const applyDirectiveAPICall = (newDirective, action) => {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
-    const updatedDirectives = directives.concat(newDirective);
+    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
 
     requestBody.insights = insights;
@@ -235,7 +235,7 @@ export default function GridTable() {
         setColumnSelected('');
         setToaster({
           open: true,
-          message: 'Step successfully added',
+          message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
         });
       },
@@ -319,6 +319,10 @@ export default function GridTable() {
   const handleColumnSelect = (columnName) =>
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
 
+  const deleteRecipes = (new_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete');
+  };
+
   // Redux store
   const { data, headers, types, directives } = dataprep;
 
@@ -333,7 +337,11 @@ export default function GridTable() {
         />
       )}
       {showRecipePanel && (
-        <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
+        <RecipeSteps
+          setShowRecipePanel={setShowRecipePanel}
+          showRecipePanel={showRecipePanel}
+          deleteRecipes={deleteRecipes}
+        />
       )}
       {directiveFunction && (
         <AddTransformation
