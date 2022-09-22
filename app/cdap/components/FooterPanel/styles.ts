@@ -40,7 +40,7 @@ export const useCss = makeStyles({
     flexGrow: 0,
   },
   data: {
-    width: '700px',
+    width: '900px',
     padding: '8px 32px',
     height: '21px',
     textAlign: 'left',
@@ -79,7 +79,7 @@ export const useCss = makeStyles({
   },
   recipeCont: {
     '&:hover': {
-      // backgroundColor: 'grey',
+      backgroundColor: 'red',
     },
     textAlign: 'center',
     padding: '9.5px 32px',

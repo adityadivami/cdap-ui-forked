@@ -21,19 +21,21 @@ import { exploreConnection } from 'components/Connections/Browser/GenericBrowser
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { IRecords } from 'components/GridTable/types';
-import * as React from 'react';
+import LoadingSVG from 'components/shared/LoadingSVG';
+import ErrorSnackbar from 'components/SnackbarComponent';
+import React from 'react';
 import { createRef, useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
 import { useStyles } from './styles';
-import If from 'components/shared/If';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import ErrorSnackbar from 'components/SnackbarComponent';
+import PositionedSnackbar from 'components/SnackbarComponent';
 import cloneDeep from 'lodash/cloneDeep';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import ImportDatasetPanel from 'components/ImportDataset';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -58,7 +60,12 @@ export default function ConnectionList() {
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
-  const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
+  const [toaster, setToaster] = useState({
+    open: false,
+    message: '',
+    isSuccess: false,
+  });
+  const [openImportDataPanel, setOpenImportDataPanel] = useState<boolean>(false);
 
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
@@ -243,7 +250,7 @@ export default function ConnectionList() {
   };
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
-      <SubHeader />
+      <SubHeader setOpenImportDataPanel={setOpenImportDataPanel} />
       <SelectDatasetWrapper>
         {filteredData &&
           Array.isArray(filteredData) &&
@@ -309,7 +316,7 @@ export default function ConnectionList() {
                   index={index}
                   connectionId={connectionId || ''}
                   toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
-                  setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                  setToaster={setToaster}
                 />
               </Box>
             );
@@ -321,8 +328,21 @@ export default function ConnectionList() {
           <LoadingSVG />
         </div>
       )}
-      {isErrorOnNoWorkspace && (
-        <ErrorSnackbar handleCloseError={() => setIsErrorOnNoWorkSpace(false)} />
+      {toaster.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setToaster({
+              open: false,
+              message: '',
+              isSuccess: false,
+            })
+          }
+          messageToDisplay={toaster.message}
+          isSuccess={toaster.isSuccess}
+        />
+      )}
+      {openImportDataPanel && (
+        <ImportDatasetPanel handleClosePanel={() => setOpenImportDataPanel(false)} />
       )}
     </Box>
   );
