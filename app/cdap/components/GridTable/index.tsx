@@ -14,7 +14,14 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import {
+  LinearProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
@@ -48,6 +55,7 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const [progress, setProgress] = useState([]);
 
   const getWorkSpaceData = (params: IParams, workspaceId: string) => {
     const gridParams = {};
@@ -208,7 +216,7 @@ export default function GridTable() {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData.headers, rawData.types);
     setHeadersNamesList(headersData);
-    if (rawData && rawData.summary && rawData.summary.statistics) {
+    if (rawData && rawData.summary && rawData) {
       const missingData = createMissingData(gridData?.summary.statistics);
       setMissingDataList(missingData);
     }
@@ -222,6 +230,14 @@ export default function GridTable() {
       });
 
     setRowsDataList(rowData);
+    const progressValues = [];
+    for (const value in gridData.summary.statistics) {
+      const { general } = gridData.summary.statistics[value] || {};
+      const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+      const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+      progressValues.unshift(nonNull);
+    }
+    setProgress(progressValues);
   };
 
   useEffect(() => {
@@ -242,6 +258,19 @@ export default function GridTable() {
                   key={eachHeader.name}
                 />
               ))}
+          </TableRow>
+          <TableRow>
+            {progress.map((item, index) => (
+              <TableCell className={classes.progressBarRoot}>
+                <LinearProgress
+                  variant="determinate"
+                  value={item}
+                  key={index}
+                  classes={{ root: classes.MUILinearRoot, barColorPrimary: classes.MUIBarColor }}
+                  className={classes.linearProgressBarStyle}
+                />
+              </TableCell>
+            ))}
           </TableRow>
           <TableRow>
             {missingDataList?.length &&
