@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import LoadingSVG from 'components/shared/LoadingSVG';
 
 const WorkspaceList = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
   return (
     <Box className={classes.wrapper}>
