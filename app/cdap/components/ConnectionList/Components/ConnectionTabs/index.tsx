@@ -69,21 +69,21 @@ export default function ConnectionsTabs({
     setConnectionId(connectionId);
   }, []);
 
-  const messagesRef = useRef(null);
-  const scrollToBottom = () => {
-    messagesRef.current.scrollIntoView({
+  const refValue = useRef(null);
+  const scrollToRight = () => {
+    refValue.current.scrollIntoView({
       behavior: 'auto',
     });
   };
   useEffect(() => {
-    if (messagesRef.current) {
-      scrollToBottom();
+    if (refValue.current) {
+      scrollToRight();
     }
-  }, [messagesRef]);
+  }, [refValue]);
 
   return (
     <Box
-      {...({ ref: messagesRef } as any)}
+      {...({ ref: refValue } as any)}
       data-testid="connections-tabs-parent"
       className={classes.connectionsTabsParent}
     >
