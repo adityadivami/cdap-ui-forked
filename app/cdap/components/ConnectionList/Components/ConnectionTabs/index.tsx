@@ -69,8 +69,24 @@ export default function ConnectionsTabs({
     setConnectionId(connectionId);
   }, []);
 
+  const messagesRef = React.useRef(null);
+  const scrollToBottom = () => {
+    messagesRef.current.scrollIntoView({
+      behavior: 'auto',
+    });
+  };
+  React.useEffect(() => {
+    if (messagesRef.current) {
+      scrollToBottom();
+    }
+  }, [messagesRef]);
+
   return (
-    <Box data-testid="connections-tabs-parent" className={classes.connectionsTabsParent}>
+    <Box
+      {...({ ref: messagesRef } as any)}
+      data-testid="connections-tabs-parent"
+      className={classes.connectionsTabsParent}
+    >
       {tabsData.showTabs && (
         <div className={classes.boxStyles}>
           <Tabs
