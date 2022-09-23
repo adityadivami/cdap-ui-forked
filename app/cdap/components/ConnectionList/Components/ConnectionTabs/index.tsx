@@ -20,7 +20,7 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import { useStyles } from 'components/ConnectionList/Components/ConnectionTabs/styles';
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import TabLabelCanBrowse from '../TabLabelCanBrowse';
 import TabLabelCanSample from '../TabLabelCanSample';
 
@@ -69,13 +69,13 @@ export default function ConnectionsTabs({
     setConnectionId(connectionId);
   }, []);
 
-  const messagesRef = React.useRef(null);
+  const messagesRef = useRef(null);
   const scrollToBottom = () => {
     messagesRef.current.scrollIntoView({
       behavior: 'auto',
     });
   };
-  React.useEffect(() => {
+  useEffect(() => {
     if (messagesRef.current) {
       scrollToBottom();
     }
