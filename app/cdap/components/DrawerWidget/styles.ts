@@ -6,7 +6,7 @@ export const useStyles = makeStyles(() => {
       top: '46px',
     },
     drawerContainerStyles: {
-      width: 500,
+      width: 460,
       height: '100%',
       padding: '5px 20px 5px 30px',
     },
@@ -27,11 +27,11 @@ export const useStyles = makeStyles(() => {
       cursor: 'pointer',
     },
     headingTextStyles: {
-      fontFamily: 'Noto Sans',
+      fontFamily: 'Roboto',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: 20,
-      lineHeight: '150%',
+      fontSize: '20px',
+      lineHeight: '30px',
       letterSpacing: '0.15px',
       color: '#000000',
     },
