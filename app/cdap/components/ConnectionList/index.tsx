@@ -30,7 +30,6 @@ import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
 import { useStyles } from './styles';
-import LoadingSVG from 'components/shared/LoadingSVG';
 import PositionedSnackbar from 'components/SnackbarComponent';
 import cloneDeep from 'lodash/cloneDeep';
 import CloseIcon from '@material-ui/icons/Close';
@@ -242,6 +241,11 @@ export default function ConnectionList() {
     const newDataToSearch = [...newData[index].data];
     const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
     newData[index].data = [...tempData];
+    setDataForTabs((prev) => {
+      const tempData = [...prev];
+      tempData[index].isSearching = false;
+      return tempData;
+    });
     setFilteredData(cloneDeep(newData));
   };
 
@@ -295,6 +299,13 @@ export default function ConnectionList() {
                       ref={(e) => {
                         refs.current[index] = e;
                       }}
+                      onBlur={() =>
+                        setDataForTabs((prev) => {
+                          const tempData = [...prev];
+                          tempData[index].isSearching = false;
+                          return tempData;
+                        })
+                      }
                     />
                     <Box
                       className={classes.closeIcon}
