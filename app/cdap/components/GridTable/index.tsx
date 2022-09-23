@@ -65,9 +65,7 @@ export default function GridTable() {
 
   const [loading, setLoading] = useState(false);
   const [workspaceName, setWorkspaceName] = useState('');
-  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>(
-    []
-  );
+  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
@@ -118,8 +116,7 @@ export default function GridTable() {
           const directives = objectQuery(res, 'directives') || [];
           const requestBody = directiveRequestBodyCreator(directives);
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
-          const visualization =
-            objectQuery(res, 'insights', 'visualization') || {};
+          const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
           const insights = {
             name: res?.sampleSpec?.connectionName,
@@ -199,7 +196,7 @@ export default function GridTable() {
         setLoading(false);
         return;
       } else {
-        applyDirectiveAPICall(newDirective);
+        applyDirectiveAPICall(newDirective, 'add');
       }
     }
   };
@@ -208,8 +205,7 @@ export default function GridTable() {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
-    const updatedDirectives =
-      action === 'add' ? directives.concat(newDirective) : newDirective;
+    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
 
     requestBody.insights = insights;
@@ -246,10 +242,7 @@ export default function GridTable() {
         setColumnSelected('');
         setToaster({
           open: true,
-          message:
-            action === 'add'
-              ? 'Step successfully added'
-              : 'Step successfully deleted',
+          message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
         });
       },
@@ -273,10 +266,7 @@ export default function GridTable() {
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
-  const createHeadersData = (
-    columnNamesList: string[],
-    columnTypesList: IRecords
-  ) => {
+  const createHeadersData = (columnNamesList: string[], columnTypesList: IRecords) => {
     if (Array.isArray(columnNamesList)) {
       return columnNamesList.map((eachColumnName: string) => {
         return {
@@ -342,9 +332,7 @@ export default function GridTable() {
   }, [gridData]);
 
   const handleColumnSelect = (columnName) =>
-    setColumnSelected((prevColumn) =>
-      prevColumn === columnName ? '' : columnName
-    );
+    setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
 
   const deleteRecipes = (new_arr) => {
     applyDirectiveAPICall(new_arr, 'delete');
@@ -356,9 +344,7 @@ export default function GridTable() {
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
-      <ToolBarList
-        submitMenuOption={(option) => applyDirective(option, columnSelected)}
-      />
+      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
       {isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
@@ -390,11 +376,7 @@ export default function GridTable() {
       )}
       <Box className={classes.tableContainer}>
         {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
-          <Table
-            aria-label="simple table"
-            className="test"
-            data-testid="grid-table"
-          >
+          <Table aria-label="simple table" className="test" data-testid="grid-table">
             <TableHead>
               <TableRow>
                 {headers.map((eachHeader) => (
@@ -412,9 +394,7 @@ export default function GridTable() {
                   <TableCell className={classes.progressBarRoot}>
                     <LinearProgress
                       variant="determinate"
-                      value={
-                        progress.filter((each) => each.key === item)[0]?.value
-                      }
+                      value={progress.filter((each) => each.key === item)[0]?.value}
                       key={index}
                       classes={{
                         root: classes.MUILinearRoot,
@@ -431,9 +411,7 @@ export default function GridTable() {
                   headers.map((each, index) => {
                     return missingDataList.map((item, itemIndex) => {
                       if (item.name === each) {
-                        return (
-                          <GridKPICell metricData={item} key={item.name} />
-                        );
+                        return <GridKPICell metricData={item} key={item.name} />;
                       }
                     });
                   })}
