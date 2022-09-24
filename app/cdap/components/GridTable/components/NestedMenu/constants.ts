@@ -512,7 +512,7 @@ export const MENU_OPTIONS = [
     options: [
       { value: 'last-4', label: 'Show last 4 characters only' },
       { value: 'last-2', label: 'Show last 2 characters only' },
-      { value: 'numbers', label: 'Custom Selection' },
+      { value: 'custom-selection', label: 'Custom Selection' },
       { value: 'divider' },
       { value: 'shuffle', label: 'By Shuffling' },
     ],

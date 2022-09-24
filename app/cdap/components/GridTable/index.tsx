@@ -48,6 +48,12 @@ import ToolBarList from './components/AaToolbar';
 import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
+import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
+import T from 'i18n-react';
+
+const POPOVERTHETHERCLASSNAME = 'highlight-popover';
+const CELLHIGHLIGHTCLASSNAME = 'cl-highlight';
+const PREFIX = `features.DataPrep.Directives.MaskSelection`;
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -65,6 +71,7 @@ export default function GridTable() {
   const [optionSelected, setOptionSelected] = useState(null);
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
+  const [maskSelection, setMaskSelection] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -181,23 +188,43 @@ export default function GridTable() {
   const applyDirective = (option, columnSelected, value_1?, value_2?) => {
     setLoading(true);
     setOptionSelected(option);
-    if (OPTION_WITH_NO_INPUT.includes(option)) {
-      const newDirective = getDirective(option, columnSelected);
-      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
-        setDirectiveFunction(option);
-        setLoading(false);
-        return;
-      } else {
-        applyDirectiveAPICall(newDirective);
-      }
-    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+    if (
+      (option === 'custom-selection' ||
+        optionSelected === 'custom-selection' ||
+        option === 'using-positions' ||
+        optionSelected === 'using-positions') &&
+      Boolean(columnSelected) &&
+      !value_1
+    ) {
+      setDirectiveFunction('');
+      setMaskSelection(true);
+      setLoading(false);
+    } else if (
+      (option === 'custom-selection' || optionSelected === 'custom-selection') &&
+      Boolean(columnSelected) &&
+      value_1
+    ) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
-        setDirectiveFunction(option);
-        setLoading(false);
-        return;
-      } else {
-        applyDirectiveAPICall(newDirective);
+      applyDirectiveAPICall(newDirective);
+    } else {
+      if (OPTION_WITH_NO_INPUT.includes(option)) {
+        const newDirective = getDirective(option, columnSelected);
+        if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+          setDirectiveFunction(option);
+          setLoading(false);
+          return;
+        } else {
+          applyDirectiveAPICall(newDirective);
+        }
+      } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+        const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+        if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+          setDirectiveFunction(option);
+          setLoading(false);
+          return;
+        } else {
+          applyDirectiveAPICall(newDirective);
+        }
       }
     }
   };
@@ -394,6 +421,19 @@ export default function GridTable() {
                       <GridTextCell
                         cellValue={eachRow[eachKey] || '--'}
                         key={`${eachKey}-${eachIndex}`}
+                        maskSelection={eachKey === columnSelected ? maskSelection : false}
+                        rowNumber={rowIndex}
+                        columnSelected={columnSelected}
+                        optionSelected={optionSelected}
+                        headers={headers}
+                        applyTransformation={(value) => {
+                          applyDirective(optionSelected, columnSelected, value);
+                        }}
+                        cancelTransformation={() => {
+                          setColumnSelected('');
+                          setOptionSelected('');
+                          setMaskSelection(false);
+                        }}
                       />
                     );
                   })}
