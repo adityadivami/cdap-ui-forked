@@ -56,7 +56,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
               directives: item.directives,
               limit: 1000,
               insights: {
-                name: item.sampleSpec.connectionName,
+                name: item?.sampleSpec?.connectionName,
                 workspaceName: item.workspaceName,
                 path: item?.sampleSpec?.path,
                 visualization: {},

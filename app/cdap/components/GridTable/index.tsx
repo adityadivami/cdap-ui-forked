@@ -2,7 +2,7 @@
  * Copyright © 2022 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
+ * use this file except in compliance with the License. You may obtain `a` copy of
  * the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -14,7 +14,14 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import {
+  LinearProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
@@ -59,7 +66,7 @@ export default function GridTable() {
   const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
-  const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
+  const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
   const [dataQuality, setDataQuality] = useState({});
   const [optionSelected, setOptionSelected] = useState(null);
@@ -73,7 +80,7 @@ export default function GridTable() {
   ]);
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
-
+  const [progress, setProgress] = useState([]);
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
   const [toaster, setToaster] = useState({
@@ -188,7 +195,7 @@ export default function GridTable() {
         setLoading(false);
         return;
       } else {
-        applyDirectiveAPICall(newDirective);
+        applyDirectiveAPICall(newDirective, 'add');
       }
     } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
@@ -197,16 +204,16 @@ export default function GridTable() {
         setLoading(false);
         return;
       } else {
-        applyDirectiveAPICall(newDirective);
+        applyDirectiveAPICall(newDirective, 'add');
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective) => {
+  const applyDirectiveAPICall = (newDirective, action) => {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
-    const updatedDirectives = directives.concat(newDirective);
+    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
 
     requestBody.insights = insights;
@@ -243,7 +250,7 @@ export default function GridTable() {
         setColumnSelected('');
         setToaster({
           open: true,
-          message: `${newDirective} successfully added`,
+          message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
         });
       },
@@ -317,6 +324,14 @@ export default function GridTable() {
         return eachRow;
       });
     setRowsDataList(rowData);
+    const progressValues = [];
+    for (const title in gridData.summary.statistics) {
+      const { general } = gridData.summary.statistics[title] || {};
+      const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+      const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+      progressValues.push({ value: nonNull, key: title });
+    }
+    setProgress(progressValues);
   };
 
   useEffect(() => {
@@ -325,6 +340,10 @@ export default function GridTable() {
 
   const handleColumnSelect = (columnName) =>
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+
+  const deleteRecipes = (new_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete');
+  };
 
   // Redux store
   const { data, headers, types, directives } = dataprep;
@@ -341,7 +360,11 @@ export default function GridTable() {
       )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
       {showRecipePanel && (
-        <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
+        <RecipeSteps
+          setShowRecipePanel={setShowRecipePanel}
+          showRecipePanel={showRecipePanel}
+          deleteRecipes={deleteRecipes}
+        />
       )}
       {directiveFunction && (
         <AddTransformation
@@ -359,53 +382,70 @@ export default function GridTable() {
           }}
         />
       )}
-      {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
-        <Table aria-label="simple table" className="test" data-testid="grid-table">
-          <TableHead>
-            <TableRow>
-              {headers.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader}
-                  type={types[eachHeader]}
-                  key={eachHeader}
-                  columnSelected={columnSelected}
-                  setColumnSelected={handleColumnSelect}
-                />
-              ))}
-            </TableRow>
-            <TableRow>
-              {Array.isArray(missingDataList) &&
-                Array.isArray(headers) &&
-                headers.map((each, index) => {
-                  return missingDataList.map((item, itemIndex) => {
-                    if (item.name === each) {
-                      return <GridKPICell metricData={item} key={item.name} />;
-                    }
-                  });
-                })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((eachRow, rowIndex) => {
-              return (
-                <TableRow key={`row-${rowIndex}`}>
-                  {headers.map((eachKey, eachIndex) => {
-                    return (
-                      <GridTextCell
-                        cellValue={eachRow[eachKey] || '--'}
-                        key={`${eachKey}-${eachIndex}`}
-                      />
-                    );
+      <Box className={classes.tableContainer}>
+        {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+          <Table aria-label="simple table" className="test" data-testid="grid-table">
+            <TableHead>
+              <TableRow>
+                {headers.map((eachHeader) => (
+                  <GridHeaderCell
+                    label={eachHeader}
+                    type={types[eachHeader]}
+                    key={eachHeader}
+                    columnSelected={columnSelected}
+                    setColumnSelected={handleColumnSelect}
+                  />
+                ))}
+              </TableRow>
+              <TableRow>
+                {headers.map((item, index) => (
+                  <TableCell className={classes.progressBarRoot}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={progress.filter((each) => each.key === item)[0]?.value}
+                      key={index}
+                      classes={{
+                        root: classes.MUILinearRoot,
+                        barColorPrimary: classes.MUIBarColor,
+                      }}
+                      className={classes.linearProgressBarStyle}
+                    />
+                  </TableCell>
+                ))}
+              </TableRow>
+              <TableRow>
+                {Array.isArray(missingDataList) &&
+                  Array.isArray(headers) &&
+                  headers.map((each, index) => {
+                    return missingDataList.map((item, itemIndex) => {
+                      if (item.name === each) {
+                        return <GridKPICell metricData={item} key={item.name} />;
+                      }
+                    });
                   })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      ) : (
-        <NoDataScreen />
-      )}
-
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((eachRow, rowIndex) => {
+                return (
+                  <TableRow key={`row-${rowIndex}`}>
+                    {headers.map((eachKey, eachIndex) => {
+                      return (
+                        <GridTextCell
+                          cellValue={eachRow[eachKey] || '--'}
+                          key={`${eachKey}-${eachIndex}`}
+                        />
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        ) : (
+          <NoDataScreen />
+        )}
+      </Box>
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
