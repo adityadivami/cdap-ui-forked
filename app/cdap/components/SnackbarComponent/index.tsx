@@ -24,8 +24,8 @@ const PositionedSnackbar = ({
   isSuccess,
 }: {
   handleCloseError: () => void;
-  messageToDisplay: string;
-  isSuccess: boolean;
+  messageToDisplay?: string;
+  isSuccess?: boolean;
 }) => {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(true);
