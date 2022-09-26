@@ -211,6 +211,15 @@ export default function GridTable() {
       } else {
         applyDirectiveAPICall(newDirective, 'add');
       }
+    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective, 'add');
+      }
     }
   };
 
