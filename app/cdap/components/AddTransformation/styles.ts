@@ -63,6 +63,13 @@ export const useStyles = makeStyles(() => {
     greenCheckIconStyles: {
       width: '20px',
       height: '20px',
+      marginRight: '5px',
+    },
+    selectedColumnTickIcon: {
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '10px',
+      justifyContent: 'space-between',
     },
     quickSelectTextStyles: {
       fontFamily: 'Noto Sans',
@@ -102,6 +109,7 @@ export const useStyles = makeStyles(() => {
       marginTop: '30px',
       textTransform: 'none',
       marginBottom: '20px',
+      marginRight: '8px',
     },
     buttonStyles: {
       '&:hover': {
