@@ -50,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
   message: {
     color: '#000000',
     fontSize: '14px',
-    padding: '10px 30px 0px 30px',
+    padding: '10px 30px 0px 4px',
   },
   headFlex: {
     display: 'flex',
