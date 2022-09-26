@@ -44,4 +44,8 @@ export const useStyles = makeStyles({
   MUIBarColor: {
     backgroundColor: '#9CCC65',
   },
+  tableContainer: {
+    height: 'calc(100vh - 237px)',
+    overflow: 'scroll',
+  },
 });
