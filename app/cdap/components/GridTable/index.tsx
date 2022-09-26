@@ -88,6 +88,7 @@ export default function GridTable() {
     open: false,
     message: '',
     isSuccess: false,
+    actionType: '',
   });
 
   useEffect(() => {
@@ -162,6 +163,7 @@ export default function GridTable() {
             open: true,
             message: 'Failed to load data',
             isSuccess: false,
+            actionType: '',
           });
           setLoading(false);
         }
@@ -246,6 +248,7 @@ export default function GridTable() {
           open: true,
           message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
+          actionType: action === 'add' ? 'add' : 'delete',
         });
       },
       (err) => {
@@ -253,6 +256,7 @@ export default function GridTable() {
           open: true,
           message: 'Transformation failed',
           isSuccess: false,
+          actionType: '',
         });
         setLoading(false);
         setShowRecipePanel(false);
@@ -341,6 +345,13 @@ export default function GridTable() {
     applyDirectiveAPICall(new_arr, 'delete');
   };
 
+  const handleAddedUndo = () => {
+    console.log('add undo');
+  };
+
+  const handleDeletedUndo = () => {
+    console.log('delete undo');
+  };
   // Redux store
   const { data, headers, types, directives } = dataprep;
 
@@ -449,15 +460,18 @@ export default function GridTable() {
       />
       {toaster.open && (
         <PositionedSnackbar
-          handleCloseError={() =>
+          handleCloseError={() => {
             setToaster({
               open: false,
               message: '',
               isSuccess: false,
-            })
-          }
+              actionType: '',
+            });
+            toaster.actionType === 'add' ? handleAddedUndo() : handleDeletedUndo();
+          }}
           messageToDisplay={toaster.message}
           isSuccess={toaster.isSuccess}
+          actionType={toaster.actionType === 'add' ? 'add' : 'delete'}
         />
       )}
       {loading && (
