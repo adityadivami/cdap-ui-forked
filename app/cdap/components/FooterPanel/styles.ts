@@ -78,9 +78,9 @@ export const useCss = makeStyles({
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
   },
   recipeCont: {
+    padding: '10px 32px',
     cursor: 'pointer',
     textAlign: 'center',
-    padding: '9.5px 32px',
     gap: '8px',
     width: '184px',
     height: '40px',
@@ -90,9 +90,10 @@ export const useCss = makeStyles({
     display: 'flex',
   },
   spanElement1: {
-    backgroundColor: '#5F6368',
+    backgroundColor: '#757575',
     height: '21px',
     width: '20px',
     color: '#FFFFFF',
+    borderRadius: '4px',
   },
 });
