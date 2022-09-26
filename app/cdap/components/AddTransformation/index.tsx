@@ -191,6 +191,24 @@ const AddTransformation = (props) => {
           >
             {APPLY_STEP}
           </Button>
+
+          <div>
+            <SelectColumnsWidget
+              setSelectedColumns={setSelectedColumns}
+              handleSelectColumn={handleSelectColumn}
+              selectedColumns={selectedColumns}
+            />
+            <Button
+              variant="contained"
+              disabled={selectedColumns.length ? false : true}
+              color="primary"
+              classes={{ containedPrimary: classes.buttonStyles }}
+              className={classes.applyStepButtonStyles}
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
+            >
+              {APPLY_STEP}
+            </Button>
+          </div>
         </Container>
       </DrawerWidget>
       <DrawerWidget
