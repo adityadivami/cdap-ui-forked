@@ -14,7 +14,14 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import {
+  LinearProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
@@ -74,7 +81,7 @@ export default function GridTable() {
   ]);
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
-
+  const [progress, setProgress] = useState([]);
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
   const [toaster, setToaster] = useState({
@@ -189,17 +196,16 @@ export default function GridTable() {
         setLoading(false);
         return;
       } else {
-        applyDirectiveAPICall(newDirective);
-        setIsFirstWrangle(false);
+        applyDirectiveAPICall(newDirective, 'add');
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective) => {
+  const applyDirectiveAPICall = (newDirective, action) => {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
-    const updatedDirectives = directives.concat(newDirective);
+    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
 
     requestBody.insights = insights;
@@ -236,7 +242,7 @@ export default function GridTable() {
         setColumnSelected('');
         setToaster({
           open: true,
-          message: 'Step successfully added',
+          message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
         });
       },
@@ -311,6 +317,14 @@ export default function GridTable() {
         return eachRow;
       });
     setRowsDataList(rowData);
+    const progressValues = [];
+    for (const title in gridData.summary.statistics) {
+      const { general } = gridData.summary.statistics[title] || {};
+      const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+      const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+      progressValues.push({ value: nonNull, key: title });
+    }
+    setProgress(progressValues);
   };
 
   useEffect(() => {
@@ -319,6 +333,10 @@ export default function GridTable() {
 
   const handleColumnSelect = (columnName) =>
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+
+  const deleteRecipes = (new_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete');
+  };
 
   // Redux store
   const { data, headers, types, directives } = dataprep;
@@ -334,7 +352,11 @@ export default function GridTable() {
         />
       )}
       {showRecipePanel && (
-        <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
+        <RecipeSteps
+          setShowRecipePanel={setShowRecipePanel}
+          showRecipePanel={showRecipePanel}
+          deleteRecipes={deleteRecipes}
+        />
       )}
       {directiveFunction && (
         <AddTransformation
@@ -365,6 +387,22 @@ export default function GridTable() {
                     columnSelected={columnSelected}
                     setColumnSelected={handleColumnSelect}
                   />
+                ))}
+              </TableRow>
+              <TableRow>
+                {headers.map((item, index) => (
+                  <TableCell className={classes.progressBarRoot}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={progress.filter((each) => each.key === item)[0]?.value}
+                      key={index}
+                      classes={{
+                        root: classes.MUILinearRoot,
+                        barColorPrimary: classes.MUIBarColor,
+                      }}
+                      className={classes.linearProgressBarStyle}
+                    />
+                  </TableCell>
                 ))}
               </TableRow>
               <TableRow>

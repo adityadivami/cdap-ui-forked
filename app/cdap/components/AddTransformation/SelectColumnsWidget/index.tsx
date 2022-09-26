@@ -14,7 +14,16 @@ const SelectColumnsWidget = (props) => {
   return (
     <section className={classes.functionSectionStyles}>
       <div className={classes.functionHeadingTextStyles}>
-        {SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION}
+        <div className={classes.selectedColumnTickIcon}>
+          {SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION}
+          {selectedColumns.length !== 0 && (
+            <img
+              className={classes.greenCheckIconStyles}
+              src="/cdap_assets/img/green-check.svg"
+              alt="tick icon"
+            />
+          )}
+        </div>
       </div>
       <div className={classes.quickSelectTextStyles}>{QUICK_SELECT_INFO}</div>
       {selectedColumns.length ? (
