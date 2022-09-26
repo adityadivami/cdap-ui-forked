@@ -30,7 +30,6 @@ import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
 import { useStyles } from './styles';
-import LoadingSVG from 'components/shared/LoadingSVG';
 import PositionedSnackbar from 'components/SnackbarComponent';
 import cloneDeep from 'lodash/cloneDeep';
 import CloseIcon from '@material-ui/icons/Close';
@@ -225,6 +224,13 @@ export default function ConnectionList() {
       return tempData;
     });
     refs.current[index].focus();
+    refs.current[index].addEventListener('blur', () => {
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = false;
+        return tempData;
+      });
+    });
   };
 
   const handleSearch = (e: any, index: number) => {
