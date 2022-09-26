@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export interface IMessageState{
-    open: boolean;
-    message: string;
+export interface IMessageState {
+  open: boolean;
+  message: string;
 }
