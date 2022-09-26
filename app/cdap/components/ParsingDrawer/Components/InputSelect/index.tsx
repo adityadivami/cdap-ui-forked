@@ -22,6 +22,13 @@ const InputSelect = (props) => {
       onChange={onChange}
       displayEmpty={false}
       defaultValue={defaultValue}
+      MenuProps={{
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'left',
+        },
+        getContentAnchorEl: null,
+      }}
     >
       {options.map((option) => {
         return (
