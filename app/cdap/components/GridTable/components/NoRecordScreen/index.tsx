@@ -27,7 +27,7 @@ export default function() {
       <Box className={classes.innerWrapper}>
         {NoDataSVG}
         <Typography className={classes.mainHeaderMessage}>No rows left in this sample</Typography>
-        <Typography className={classes.subHeaderMessage}>
+        <Typography className={classes.subHeaderMessage} data-testid="subheader-message">
           Remove some recipe steps to view some data
         </Typography>
       </Box>

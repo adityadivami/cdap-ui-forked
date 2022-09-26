@@ -78,7 +78,7 @@ export default function GridTable() {
           const { dataprep } = DataPrepStore.getState();
           setWorkspaceName(res.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {
-            return;
+            return
           }
           const directives = objectQuery(res, 'directives') || [];
           const requestBody = directiveRequestBodyCreator(directives);
@@ -166,9 +166,10 @@ export default function GridTable() {
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
-    const headersData = createHeadersData(rawData?.headers, rawData?.types);
+    const headersData = createHeadersData(rawData[0]?.headers, rawData[0]?.types);
     setHeadersNamesList(headersData);
-    if (rawData && rawData.summary && rawData.summary?.statistics) {
+    // if (rawData && rawData?.summary && rawData?.summary?.statistics) {
+    if (rawData && rawData?.summary) {
       const missingData = createMissingData(gridData?.summary?.statistics);
       setMissingDataList(missingData);
     }
