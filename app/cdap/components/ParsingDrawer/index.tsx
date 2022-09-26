@@ -14,7 +14,7 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import { objectQuery } from 'services/helpers';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
-import Snackbar from 'components/SnackbarComponent/index';
+import PositionedSnackbar from 'components/SnackbarComponent/index';
 
 const ParsingDrawer = (props) => {
   const { setLoading } = props;
@@ -25,7 +25,6 @@ const ParsingDrawer = (props) => {
   const [headerValueChecked, setHeaderValueChecked] = useState(false);
   const [schemaValue, setSchemaValue] = useState(null);
   const { dataprep } = DataPrepStore.getState();
-  console.log('dataprep', dataprep);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
   const [errorOnTranformation, setErrorOnTransformation] = useState({
     open: false,
@@ -129,6 +128,10 @@ const ParsingDrawer = (props) => {
     }
   };
 
+  const handleClose = () => {
+    setErrorOnTransformation({ open: false, message: '' });
+  };
+
   const componentToRender = (
     <DrawerWidget
       headingText={PARSING}
@@ -171,10 +174,9 @@ const ParsingDrawer = (props) => {
         </Box>
       </Box>
       {errorOnTranformation.open && (
-        <Snackbar
-          handleCloseError={() => {
-            setErrorOnTransformation({ open: false, message: '' });
-          }}
+        <PositionedSnackbar
+          handleCloseError={handleClose}
+          messageToDisplay={errorOnTranformation.message}
         />
       )}
     </DrawerWidget>
