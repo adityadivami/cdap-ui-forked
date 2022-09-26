@@ -26,22 +26,23 @@ const ParsingHeaderActionTemplate = (props) => {
     };
   };
   return (
-    <Box className={classes.pointerStyles}>
+    <Box>
       <input
         id="file"
         type="file"
         accept=".json"
         style={{ display: 'none' }}
         onChange={handleFile}
+        className={classes.pointerStyles}
       />
-      <label htmlFor="file">
+      <label htmlFor="file" className={classes.pointerStyles}>
         <img
           className={classes.importIconStyles}
           src="/cdap_assets/img/import.svg"
           alt="import schema icon"
         />
+        <span className={classes.importSchemaTextStyles}>{IMPORT_SCHEMA}</span>
       </label>
-      <span className={classes.importSchemaTextStyles}>{IMPORT_SCHEMA}</span>
     </Box>
   );
 };
