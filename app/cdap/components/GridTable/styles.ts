@@ -32,4 +32,20 @@ export const useStyles = makeStyles({
     height: 'calc(100vh - 192px)',
     overflow: 'scroll',
   },
+  progressBarRoot: {
+    padding: '0px',
+  },
+  MUILinearRoot: {
+    height: '6px',
+  },
+  linearProgressBarStyle: {
+    backgroundColor: '#FF8A80',
+  },
+  MUIBarColor: {
+    backgroundColor: '#9CCC65',
+  },
+  tableContainer: {
+    height: 'calc(100vh - 237px)',
+    overflow: 'scroll',
+  },
 });
