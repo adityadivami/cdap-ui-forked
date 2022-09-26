@@ -69,6 +69,18 @@ export const WrangleCard = () => {
     const connectorWidgetJson = connectionDetailsData.map(
       ({ connectorWidgetJSON }) => connectorWidgetJSON
     );
+
+    let fileConnectorNotFound = true;
+    for (const eachItem in connectorWidgetJson) {
+      if (eachItem['display-name'] === 'File') {
+        fileConnectorNotFound = false;
+        break;
+      }
+    }
+    if (fileConnectorNotFound) {
+      connectorWidgetJson.unshift({ 'display-name': 'File' });
+    }
+
     connectorWidgetJson.map((item) => {
       connectorDataArray.map((connectorType) => {
         if (item['display-name'] && item['display-name'].includes(connectorType.name)) {
