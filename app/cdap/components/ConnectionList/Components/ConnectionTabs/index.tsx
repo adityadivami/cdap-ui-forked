@@ -19,7 +19,10 @@ import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import { useStyles } from 'components/ConnectionList/Components/ConnectionTabs/styles';
-import * as React from 'react';
+import DataPrepStore from 'components/DataPrep/store';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import React from 'react';
+import { useEffect, useState, useRef } from 'react';
 import TabLabelCanBrowse from '../TabLabelCanBrowse';
 import TabLabelCanSample from '../TabLabelCanSample';
 
@@ -51,31 +54,52 @@ const ConnectionTab = styled(Tab)({
   },
 });
 
-const ConnectionsTabs = ({
+export default function ConnectionsTabs({
   tabsData,
   handleChange,
   value,
   index,
   connectionId,
-  setIsErrorOnNoWorkSpace,
+  setToaster,
   ...props
-}) => {
+}) {
   const classes = useStyles();
 
-  const [connectionIdProp, setConnectionId] = React.useState(connectionId);
+  const [connectionIdProp, setConnectionId] = useState(connectionId);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setConnectionId(connectionId);
   }, []);
 
+  const refValue = useRef(null);
+  const scrollToRight = () => {
+    refValue.current.scrollIntoView({
+      behavior: 'auto',
+    });
+  };
+  useEffect(() => {
+    if (refValue.current) {
+      scrollToRight();
+    }
+  }, [refValue]);
+
+  if (index === 0) {
+    DataPrepStore.dispatch({
+      type: DataPrepActions.setConnectorType,
+      payload: {
+        connectorType: tabsData.selectedTab,
+      },
+    });
+  }
+
   return (
     <Box
+      {...({ ref: refValue } as any)}
       data-testid="connections-tabs-parent"
       className={classes.connectionsTabsParent}
-      style={{ height: 'calc(100vh - 200px)' }}
     >
       {tabsData.showTabs && (
-        <div className={classes.boxStyles}>
+        <div className={classes.boxStyles} data-testid="connection-tabs">
           <Tabs
             value={value}
             orientation="vertical"
@@ -92,6 +116,8 @@ const ConnectionsTabs = ({
           >
             {tabsData.data.map((connectorType, connectorTypeIndex) => (
               <ConnectionTab
+                role="button"
+                data-testid="connections-tab-button"
                 onClick={() => {
                   if (index > 1) {
                     connectorType.canBrowse ? handleChange(connectorType, index) : null;
@@ -104,7 +130,7 @@ const ConnectionsTabs = ({
                     connectorType.canBrowse ? (
                       <TabLabelCanBrowse
                         label={connectorType.name}
-                        count={index === 0 ? connectorType.count : undefined}
+                        count={undefined}
                         index={index}
                       />
                     ) : (
@@ -113,7 +139,7 @@ const ConnectionsTabs = ({
                         entity={connectorType}
                         initialConnectionId={connectionIdProp}
                         toggleLoader={props.toggleLoader}
-                        setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                        setToaster={setToaster}
                       />
                     )
                   ) : (
@@ -121,7 +147,7 @@ const ConnectionsTabs = ({
                       label={connectorType.name}
                       count={index === 0 ? connectorType.count : undefined}
                       index={index}
-                      SVG={connectorType.SVG}
+                      icon={connectorType.icon}
                     />
                   )
                 }
@@ -129,7 +155,7 @@ const ConnectionsTabs = ({
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
                 id={connectorType.name}
-                className={connectorType.canSample ? classes.wrangleTab : 'eachConnectionStyle'}
+                className={index > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
               />
             ))}
           </Tabs>
@@ -137,6 +163,4 @@ const ConnectionsTabs = ({
       )}
     </Box>
   );
-};
-
-export default ConnectionsTabs;
+}

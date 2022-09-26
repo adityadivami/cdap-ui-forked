@@ -24,7 +24,7 @@ import {
   CONTAIN_NUMBER_ONLY,
 } from './constants';
 
-export const convertNonNullPercent = (gridData, key, nonNullValue) => {
+export const convertNonNullPercent = (gridData, nonNullValue) => {
   const lengthOfData: number = gridData?.values.length;
   let nullValueCount: number = 0;
   if (lengthOfData) {

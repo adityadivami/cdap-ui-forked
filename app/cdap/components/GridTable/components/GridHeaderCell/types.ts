@@ -18,6 +18,7 @@ import React, { SetStateAction } from 'react';
 
 export interface IGridHeaderCellProps {
   label: string;
-  types: string[];
-  onColumnSelection: (value: string) => void;
+  type: string;
+  columnSelected: string;
+  setColumnSelected: (value: string) => void;
 }
