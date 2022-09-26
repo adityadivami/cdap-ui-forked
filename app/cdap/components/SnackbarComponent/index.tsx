@@ -22,10 +22,12 @@ const PositionedSnackbar = ({
   handleCloseError,
   messageToDisplay,
   isSuccess,
+  actionType,
 }: {
   handleCloseError: () => void;
   messageToDisplay?: string;
   isSuccess?: boolean;
+  actionType?: string;
 }) => {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(true);
@@ -46,6 +48,8 @@ const PositionedSnackbar = ({
     handleCloseError();
   };
 
+  console.log(actionType, 'actionType');
+
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
@@ -56,6 +60,7 @@ const PositionedSnackbar = ({
           close={() => handleClose()}
           isSuccess={isSuccess}
           messageToDisplay={messageToDisplay}
+          actionType={actionType}
         />
       )}
       className={isSuccess ? classes.success : classes.error}
