@@ -305,7 +305,7 @@ describe('Testing Grid Table Component', () => {
 
 
   it('Should check if the component is rendered', () => {
-    const { getByTestId } =  render(
+    const  screen =  render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -315,21 +315,10 @@ describe('Testing Grid Table Component', () => {
       </Router>
     );
     expect(render).toBeDefined();
-    expect(getByTestId('grid-table')).toBeInTheDocument();
+    const gridTable = screen.getByTestId('grid-table');
+    expect(screen.getByTestId('grid-table')).toBeInTheDocument();
   });
-  it('Should check if the component is rendered', () => {
-    const { getByTestId } =  render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <GridTable />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    expect(render).toBeDefined();
-    expect(getByTestId('grid-table')).toBeInTheDocument();
-  });
+  
 
 });
 

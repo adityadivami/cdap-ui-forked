@@ -169,7 +169,8 @@ export default function GridTable() {
     const headersData = createHeadersData(rawData[0]?.headers, rawData[0]?.types);
     setHeadersNamesList(headersData);
     // if (rawData && rawData?.summary && rawData?.summary?.statistics) {
-    if (rawData && rawData?.summary) {
+    //data should be in form of obj but the received response is an array- either type can be changed or the data can be modified
+    if (rawData &&  rawData?.summary) {
       const missingData = createMissingData(gridData?.summary?.statistics);
       setMissingDataList(missingData);
     }
