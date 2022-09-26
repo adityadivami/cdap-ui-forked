@@ -233,6 +233,7 @@ export default function GridTable() {
           type: DataPrepActions.setWorkspace,
           payload: {
             data: response.values,
+            values: response.values,
             headers: response.headers,
             types: response.types,
             ...gridParams,
@@ -328,7 +329,7 @@ export default function GridTable() {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
 
   // Redux store
-  const { data, headers, types } = dataprep;
+  const { data, headers, types, directives } = dataprep;
 
   return (
     <Box>
@@ -368,51 +369,57 @@ export default function GridTable() {
           }}
         />
       )}
-      <Table aria-label="simple table" className="test">
-        <TableHead>
-          <TableRow>
-            {headers.map((eachHeader) => (
-              <GridHeaderCell
-                label={eachHeader}
-                type={types[eachHeader]}
-                key={eachHeader}
-                columnSelected={columnSelected}
-                setColumnSelected={handleColumnSelect}
-              />
-            ))}
-          </TableRow>
-          <TableRow>
-            {Array.isArray(missingDataList) &&
-              Array.isArray(headers) &&
-              headers.map((each, index) => {
-                return missingDataList.map((item, itemIndex) => {
-                  if (item.name === each) {
-                    return <GridKPICell metricData={item} key={item.name} />;
-                  }
-                });
-              })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((eachRow, rowIndex) => {
-            return (
-              <TableRow key={`row-${rowIndex}`}>
-                {headers.map((eachKey, eachIndex) => {
-                  return (
-                    <GridTextCell
-                      cellValue={eachRow[eachKey] || '--'}
-                      key={`${eachKey}-${eachIndex}`}
-                    />
-                  );
+      {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+        <Table aria-label="simple table" className="test" data-testid="grid-table">
+          <TableHead>
+            <TableRow>
+              {headers.map((eachHeader) => (
+                <GridHeaderCell
+                  label={eachHeader}
+                  type={types[eachHeader]}
+                  key={eachHeader}
+                  columnSelected={columnSelected}
+                  setColumnSelected={handleColumnSelect}
+                />
+              ))}
+            </TableRow>
+            <TableRow>
+              {Array.isArray(missingDataList) &&
+                Array.isArray(headers) &&
+                headers.map((each, index) => {
+                  return missingDataList.map((item, itemIndex) => {
+                    if (item.name === each) {
+                      return <GridKPICell metricData={item} key={item.name} />;
+                    }
+                  });
                 })}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((eachRow, rowIndex) => {
+              return (
+                <TableRow key={`row-${rowIndex}`}>
+                  {headers.map((eachKey, eachIndex) => {
+                    return (
+                      <GridTextCell
+                        cellValue={eachRow[eachKey] || '--'}
+                        key={`${eachKey}-${eachIndex}`}
+                      />
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      ) : (
+        <NoDataScreen />
+      )}
+
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
+        recipeStepsCount={directives?.length}
       />
       {toaster.open && (
         <PositionedSnackbar
