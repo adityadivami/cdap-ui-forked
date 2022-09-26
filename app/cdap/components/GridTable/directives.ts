@@ -1,4 +1,4 @@
-import { DATATYPE_OPTIONS } from './components/NestedMenu/constants';
+import { DATATYPE_OPTIONS, CALCULATE_OPTIONS } from './components/NestedMenu/constants';
 import DataPrepStore from 'components/DataPrep/store';
 
 export const getDirective = (option, column) => {
@@ -62,6 +62,60 @@ export const getDirective = (option, column) => {
     return `parse-as-hl7 :${column}`;
   } else if (option === 'parseAvro') {
     return `parse-as-avro-file :${column}`;
+  } else {
+    null;
+  }
+};
+
+export const getDirectiveOnTwoInputs = (option, column, value) => {
+  if (option === 'parseCSV') {
+    return value;
+  } else if (option === 'parseExcel') {
+    return value;
+  } else if (option === 'parseJSON') {
+    return value;
+  } else if (option === 'parseXML') {
+    return value;
+  } else if (option === 'parseLog') {
+    return value;
+  } else if (option === 'parseSimpleDate') {
+    return value;
+  } else if (option === 'parseDateTime') {
+    return value;
+  } else if (option === 'parseFixedLength') {
+    return value;
+  } else if (option === 'hash') {
+    return value;
+  } else if (option === 'filter') {
+    return value;
+  } else if (option === 'copyColumn') {
+    return `copy :${column} :${value} true`;
+  } else if (option === 'customTransform') {
+    return `set-column :${column} ${value}`;
+  } else if (option === 'findAndReplace') {
+    return `find-and-replace :${column} ${value}`;
+  } else if (option === 'concatenate') {
+    return `set-column :${column} ${value}`;
+  } else if (option === 'delimited-text') {
+    return `split-to-rows :${column} ${value}`;
+  } else if (option === 'using-delimiters') {
+    return `split-to-columns :${column} ${value}`;
+  } else if (option === 'using-patterns') {
+    return value;
+  } else if (option === 'define-variable') {
+    return value;
+  } else if (option == 'send-to-error') {
+    return value;
+  } else if (option == 'set-counter') {
+    return value;
+  } else if (option == 'dateTime') {
+    return `format-date :${column} ${value}`;
+  } else if (option == 'dateTimeAsString') {
+    return `format-datetime :${column} "${value}"`;
+  } else if (option == 'fillNullOrEmpty') {
+    return `fill-null-or-empty :${column} '${value}'`;
+  } else if (CALCULATE_OPTIONS.some((item) => item.value === option)) {
+    return value;
   } else {
     null;
   }
