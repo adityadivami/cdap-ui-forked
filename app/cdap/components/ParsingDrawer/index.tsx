@@ -51,14 +51,14 @@ const ParsingDrawer = (props) => {
   useEffect(() => {
     setConnectionPayload({
       path: dataprep.insights.path,
-      connection: dataprep.connectorType,
+      connection: dataprep.insights.name,
       sampleRequest: {
         properties: {
           format: formatValue,
           fileEncoding: encodingValue,
           skipHeader: headerValueChecked,
           enableQuotedValues: quotedValuesChecked,
-          schema: JSON.stringify(schemaValue),
+          schema: schemaValue !== null ? JSON.stringify(schemaValue) : null,
           _pluginName: null,
         },
         limit: 1000,
