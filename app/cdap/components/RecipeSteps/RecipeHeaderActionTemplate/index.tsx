@@ -23,7 +23,11 @@ const RecipeHeaderActionTemplate = (props) => {
         alt="Download icon"
         onClick={download}
       />
-      <img src="/cdap_assets/img/more-options.svg" alt="More icon"  className={classes.kebabMenuStyle}/>
+      <img
+        src="/cdap_assets/img/more-options.svg"
+        alt="More icon"
+        className={classes.kebabMenuStyle}
+      />
     </div>
   );
 };

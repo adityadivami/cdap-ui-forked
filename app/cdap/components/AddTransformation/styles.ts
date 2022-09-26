@@ -217,5 +217,31 @@ export const useStyles = makeStyles(() => {
     nullValueHead: {
       width: 120,
     },
+    noRecordWrapper: {
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      '& *': {
+        fontFamily: "'Noto Sans', sans-serif",
+      },
+      marginTop: 30,
+    },
+    mainHeaderMessage: {
+      fontSize: '16px',
+      color: '#5F6368',
+      marginTop: '20px',
+      fontWeight: 600,
+      fontFamily: 'Noto Sans',
+    },
+    subHeaderMessage: {
+      fontSize: '14px',
+      color: '#5F6368',
+      fontWeight: 400,
+      fontFamily: 'Noto Sans',
+    },
+    innerWrapper: {
+      textAlign: 'center',
+    },
   };
 });

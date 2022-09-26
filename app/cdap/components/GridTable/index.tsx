@@ -51,9 +51,8 @@ import { convertNonNullPercent } from './utils';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
 import AddTransformation from 'components/AddTransformation';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import ToolBarList from './components/AaToolbar';
-import { getDirective } from './directives';
+import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
 
@@ -67,7 +66,7 @@ export default function GridTable() {
   const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
-  const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
+  const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
   const [dataQuality, setDataQuality] = useState({});
   const [optionSelected, setOptionSelected] = useState(null);
@@ -82,6 +81,9 @@ export default function GridTable() {
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
   const [progress, setProgress] = useState([]);
+  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [columnType, setColumnType] = useState('');
+
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
   const [toaster, setToaster] = useState({
@@ -186,9 +188,10 @@ export default function GridTable() {
     setSshowAddTransformation((prev) => !prev);
   };
 
-  const applyDirective = (option, columnSelected, value_1?, value_2?) => {
+  const applyDirective = (option, columnSelected, supported_dataType, value_1?) => {
     setLoading(true);
     setOptionSelected(option);
+    setDirectiveFunctionSupportedDataType(supported_dataType);
     if (OPTION_WITH_NO_INPUT.includes(option)) {
       const newDirective = getDirective(option, columnSelected);
       if (!Boolean(newDirective) || !Boolean(columnSelected)) {
@@ -198,6 +201,15 @@ export default function GridTable() {
       } else {
         applyDirectiveAPICall(newDirective, 'add');
         setIsFirstWrangle(false);
+      }
+    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective, 'add');
       }
     }
   };
@@ -243,14 +255,17 @@ export default function GridTable() {
         setColumnSelected('');
         setToaster({
           open: true,
-          message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
+          message:
+            action === 'add'
+              ? `${newDirective} successfully added`
+              : `${newDirective} successfully deleted`,
           isSuccess: true,
         });
       },
       (err) => {
         setToaster({
           open: true,
-          message: 'Transformation failed',
+          message: `Failed to transform ${newDirective}`,
           isSuccess: false,
         });
         setLoading(false);
@@ -300,7 +315,6 @@ export default function GridTable() {
   };
 
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
-  // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData.headers, rawData.types);
@@ -332,8 +346,10 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  const handleColumnSelect = (columnName) =>
+  const handleColumnSelect = (columnName) => {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+    setColumnType(types[columnName]);
+  };
 
   const deleteRecipes = (new_arr) => {
     applyDirectiveAPICall(new_arr, 'delete');
@@ -345,13 +361,17 @@ export default function GridTable() {
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
-      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
+      <ToolBarList
+        columnType={columnType}
+        submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+      />
       {isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
           setLoading={setLoading}
         />
       )}
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
       {showRecipePanel && (
         <RecipeSteps
           setShowRecipePanel={setShowRecipePanel}
@@ -362,12 +382,18 @@ export default function GridTable() {
       {directiveFunction && (
         <AddTransformation
           functionName={directiveFunction}
+          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
           setLoading={setLoading}
           columnData={headersNamesList}
           missingDataList={dataQuality}
           applyTransformation={(selectedColumn, value) => {
             setColumnSelected(selectedColumn);
-            applyDirective(optionSelected, selectedColumn, value);
+            applyDirective(
+              optionSelected,
+              selectedColumn,
+              directiveFunctionSupportedDataType,
+              value
+            );
           }}
           callBack={(response) => {
             setColumnSelected('');

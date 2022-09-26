@@ -1,4 +1,3 @@
-import React from 'react';
 import FilterComponent from './FilterComponent';
 import ParseCSVComponent from './ParseComponent/ParseCSVComponent';
 import ParseDateTimeComponent from './ParseComponent/ParseDateTimeComponent';
@@ -7,6 +6,17 @@ import ParseFixedLengthComponent from './ParseComponent/ParseFixedLengthComponen
 import ParseLogComponent from './ParseComponent/ParseLogComponent';
 import ParseSimpleDateComponent from './ParseComponent/ParseSimpleDateComponent';
 import ParseXMLToJSONComponent from './ParseComponent/ParseXMLToJSONComponent';
+import CopyColumnComponent from './CopyColumnComponent';
+import CustomExpressionComponent from './CustomTransformation';
+import HashComponent from './HashComponent';
+import FindAndReplace from './FindAndReplace';
+import Concatenate from './ConcatenateComponent';
+import DelimiterExtractExplode from './DelimiterForExplode_Extract';
+import UsingPatternExtract from './UsingPattern_Extract';
+import DefineVariable from './DefineVariable';
+import SendToError from './SendToError';
+import SetCounter from './SetCounterAction';
+import FillNullOrEmpty from './FillNullOrEmpty';
 
 export const DIRECTIVE_COMPONENTS = [
   {
@@ -45,6 +55,62 @@ export const DIRECTIVE_COMPONENTS = [
     type: 'parseExcel',
     component: ParseExcelComponent,
   },
+  {
+    type: 'copyColumn',
+    component: CopyColumnComponent,
+  },
+  {
+    type: 'customTransform',
+    component: CustomExpressionComponent,
+  },
+  {
+    type: 'hash',
+    component: HashComponent,
+  },
+  {
+    type: 'findAndReplace',
+    component: FindAndReplace,
+  },
+  {
+    type: 'concatenate',
+    component: Concatenate,
+  },
+  {
+    type: 'delimited-text',
+    component: DelimiterExtractExplode,
+  },
+  {
+    type: 'using-delimiters',
+    component: DelimiterExtractExplode,
+  },
+  {
+    type: 'using-patterns',
+    component: UsingPatternExtract,
+  },
+  {
+    type: 'define-variable',
+    component: DefineVariable,
+  },
+  {
+    type: 'send-to-error',
+    component: SendToError,
+  },
+  {
+    type: 'set-counter',
+    component: SetCounter,
+  },
+  {
+    type: 'dateTime',
+    component: ParseSimpleDateComponent,
+  },
+  {
+    type: 'dateTimeAsString',
+    component: ParseDateTimeComponent,
+  },
+  {
+    type: 'fillNullOrEmpty',
+    component: FillNullOrEmpty,
+  },
 ];
 
 export const PLEASE_SELECT_THE_LOGS_FORMAT = 'Please select the logs format';
@@ -70,3 +136,35 @@ export const CAP_A = '^A';
 export const CAP_D = '^D';
 export const CUSTOM_DELIMITER = 'Custom delimiter';
 export const SET_FIRST_ROW_AS_HEADER = 'Set first row as header';
+export const NAME_NEW_COLUMN = 'Name new column';
+export const DESTINATION_COLUMN = 'Destination column';
+export const COLUMN_NAME_EXIST = 'Column name already exist';
+export const TYPE_CUSTOM_EXPRESSION = 'Type the custom expression to transform';
+export const EXAMPLE_CUSTOM_EXP =
+  'E.g. math:sin(column_name), empty(arg), column_name+<column>, etc.';
+export const ENCODE = 'Encode';
+export const SELECT_HASH_ALGO = 'Select hash algorithm';
+export const FIND = 'Find';
+export const OLD_VALUE = 'Old Value';
+export const IGNORE_CASE = 'Ignore case';
+export const EXACT_MATCH = 'Exact Match';
+export const REPLACE_WITH = 'Replace with';
+export const NEW_VALUE = 'New value';
+export const ADD = 'Add';
+export const ENTER_STRING = 'Enter string';
+export const COPY_TO_NEW_COLUMN = 'Copy to a new column';
+export const SELECT_ACTION = 'Select action to take';
+export const EXTRACT_FIELD_PATTERN = 'Extract fields using patterns';
+export const SELECT_PATTERN = 'Select a pattern to extract from the column';
+export const EXTRACT_NUMBERS_WITH = 'Extract numbers with';
+export const EXTRACT_TEXT_START_WITH = 'Extract text that start with';
+export const AND_END_WITH = 'and end with';
+export const WRITE_YOUR_OWN_REGEX = 'Write your own regex pattern';
+export const SET_VARIABLE_NAME = 'Set variable name';
+export const CHOOSE_VARIABLE_Value = 'Choose variable value';
+export const SELECT_ROW_WHERE = 'Select row where';
+export const SELECT_COLUMN_SELECTED_ROW = 'Select column in selected row';
+export const SEND_TO_ERROR = 'Send to error if';
+export const INCREMENT_COUNT_BY = 'Increment the count by';
+export const NAME_THIS_COUNTER = 'Name this counter';
+export const FILL_NULL_EMPTY = 'Fill null or empty cell';
