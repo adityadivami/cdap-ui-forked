@@ -17,8 +17,6 @@ import SelectColumnsList from './SelectColumnsList';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import { useStyles } from './styles';
-import DirectiveContent from 'components/GridTable/DirectiveComponents';
-import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
 import {
   parseDirective,
   directiveForHash,
@@ -35,8 +33,10 @@ const AddTransformation = (props) => {
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
+  const [selected_column_2, setSelectedColumns_2] = useState([]);
   const [selectedAction, setSelectedAction] = useState('');
   const [replaceValue, setReplaceValue] = useState('');
+  const [is_secondSelection, setIsSecondSelection] = useState(false);
   const [directiveComponentValues, setDirectiveComponentsValue] = useState({
     radioOption: '',
     ignoreCase: false,
@@ -66,6 +66,9 @@ const AddTransformation = (props) => {
     selectedColumn: '',
     counter: '',
     counterName: '',
+    selected_column_2,
+    column_1: '',
+    column_2: '',
   });
 
   useEffect(() => {
@@ -73,9 +76,19 @@ const AddTransformation = (props) => {
       setDirectiveComponentsValue({
         ...directiveComponentValues,
         selectedColumn: selectedColumns[0].label,
+        column_1: selectedColumns[0].label,
       });
     }
   }, [selectedColumns]);
+  useEffect(() => {
+    if (selectedColumns.length) {
+      setDirectiveComponentsValue({
+        ...directiveComponentValues,
+        selected_column_2: selected_column_2[0].label,
+        column_2: selected_column_2[0].label,
+      });
+    }
+  }, [selected_column_2]);
 
   const classes = useStyles();
 
@@ -248,6 +261,9 @@ const AddTransformation = (props) => {
       }
     } else if (functionName === 'fillNullOrEmpty') {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+    } else if (functionName === 'swap-columns') {
+      const directive = `swap :${selectedColumns[0].label} :${selected_column_2[0].label}`;
+      props.applyTransformation(selectedColumns[0].label, directive);
     } else if (CALCULATE_OPTIONS.some((item) => item.value === functionName)) {
       const getValue = prepareDirectiveForCalculate(
         functionName,
@@ -263,8 +279,9 @@ const AddTransformation = (props) => {
     }
   };
 
-  const handleSelectColumn = () => {
+  const handleSelectColumn = (is_secondSelection) => {
     setColumnsPopup(true);
+    setIsSecondSelection(is_secondSelection);
   };
 
   const closeSelectColumnsPopup = () => {
@@ -287,9 +304,10 @@ const AddTransformation = (props) => {
             <SelectedColumnCountWidget selectedColumnsCount={selectedColumns.length} />
             <FunctionNameWidget functionName={functionName} />
             <SelectColumnsWidget
-              setSelectedColumns={setSelectedColumns}
               handleSelectColumn={handleSelectColumn}
               selectedColumns={selectedColumns}
+              functionName={functionName}
+              selected_column_2={selected_column_2}
             />
             {functionName == 'null' ? (
               <ActionsWidget
@@ -336,6 +354,10 @@ const AddTransformation = (props) => {
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={missingDataList}
+              is_secondSelection={is_secondSelection}
+              selectedColumns_1={selectedColumns}
+              selected_column_2={selected_column_2}
+              setSelectedColumns_2={setSelectedColumns_2}
             />
           </div>
           <Button

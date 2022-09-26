@@ -120,6 +120,8 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return value;
   } else if (option == 'using-positions') {
     return value;
+  } else if (option == 'swap-columns') {
+    return value;
   } else {
     null;
   }

@@ -97,4 +97,6 @@ export const OPTION_WITH_TWO_INPUT = [
   'CUBE_ROOT',
   'custom-selection',
   'using-positions',
+  'join-columns',
+  'swap-columns',
 ];

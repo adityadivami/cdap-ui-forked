@@ -681,3 +681,38 @@ export const hashAlgorithmOptions = [
   'Tiger',
   'WHIRLPOOL',
 ];
+
+export const JOIN_COLUMN_OPTIONS = [
+  {
+    label: 'Comma',
+    value: ',',
+  },
+  {
+    label: 'PIPE',
+    value: '|',
+  },
+  {
+    label: 'COLON',
+    value: ':',
+  },
+  {
+    label: 'PERIOD',
+    value: '.',
+  },
+  {
+    label: 'DASH',
+    value: '-',
+  },
+  {
+    label: 'UNDERSCORE',
+    value: '_',
+  },
+  {
+    label: 'SPACE',
+    value: `' '`,
+  },
+  {
+    label: 'Custom Delimiter',
+    value: 'custom',
+  },
+];

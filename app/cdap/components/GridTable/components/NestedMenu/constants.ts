@@ -507,6 +507,17 @@ export const MENU_OPTIONS = [
     value: 'divider',
   },
   {
+    value: 'join-columns',
+    label: 'Join columns',
+  },
+  {
+    value: 'swap-columns',
+    label: 'Swap columns',
+  },
+  {
+    value: 'divider',
+  },
+  {
     value: 'mask-data',
     label: 'Mask Data',
     options: [
