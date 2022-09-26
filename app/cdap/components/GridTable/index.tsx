@@ -202,6 +202,7 @@ export default function GridTable() {
   };
 
   const applyDirectiveAPICall = (newDirective, action) => {
+    setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
@@ -240,6 +241,7 @@ export default function GridTable() {
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
+        setShowRecipePanel(false);
         setToaster({
           open: true,
           message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
@@ -253,6 +255,7 @@ export default function GridTable() {
           isSuccess: false,
         });
         setLoading(false);
+        setShowRecipePanel(false);
       }
     );
   };
@@ -374,8 +377,8 @@ export default function GridTable() {
           }}
         />
       )}
-      <Box className={classes.tableContainer}>
-        {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+      {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+        <Box className={classes.gridTableWrapper}>
           <Table aria-label="simple table" className="test" data-testid="grid-table">
             <TableHead>
               <TableRow>
@@ -434,10 +437,11 @@ export default function GridTable() {
               })}
             </TableBody>
           </Table>
-        ) : (
-          <NoDataScreen />
-        )}
-      </Box>
+        </Box>
+      ) : (
+        <NoDataScreen />
+      )}
+
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
