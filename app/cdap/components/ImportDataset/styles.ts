@@ -27,6 +27,9 @@ export const useStyles = makeStyles({
     padding: 20,
     width: '400px',
   },
+  delete_cursor_pointer: {
+    cursor: 'pointer',
+  },
   dropText: {
     fontFamily: 'Noto Sans',
     fontStyle: 'normal',

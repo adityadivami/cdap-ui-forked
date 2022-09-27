@@ -4,6 +4,10 @@ export const useStyles = makeStyles(() => {
   return {
     importIconStyles: {
       marginRight: '20px',
+      cursor: 'pointer',
+    },
+    more_icon: {
+      cursor: 'pointer',
     },
     emptyScreenStyles: {
       width: '100%',
