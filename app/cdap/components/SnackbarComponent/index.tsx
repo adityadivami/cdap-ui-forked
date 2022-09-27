@@ -26,7 +26,7 @@ const PositionedSnackbar = ({
   actionType,
 }: {
   handleCloseError: () => void;
-  handleDefaultCloseSnackbar: () => void;
+  handleDefaultCloseSnackbar?: () => void;
   messageToDisplay?: string;
   isSuccess?: boolean;
   actionType?: string;
