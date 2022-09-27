@@ -20,11 +20,13 @@ import TransitionComponent from './Components/TransitionComponent';
 
 const PositionedSnackbar = ({
   handleCloseError,
+  handleDefaultCloseSnackbar,
   messageToDisplay,
   isSuccess,
   actionType,
 }: {
   handleCloseError: () => void;
+  handleDefaultCloseSnackbar: () => void;
   messageToDisplay?: string;
   isSuccess?: boolean;
   actionType?: string;
@@ -35,7 +37,8 @@ const PositionedSnackbar = ({
   useEffect(() => {
     handleClick();
     setTimeout(() => {
-      handleClose();
+      setIsOpen(false);
+      handleDefaultCloseSnackbar();
     }, 5000);
   }, []);
 
@@ -54,7 +57,6 @@ const PositionedSnackbar = ({
     <Snackbar
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       open={isOpen}
-      onClose={handleClose}
       TransitionComponent={() => (
         <TransitionComponent
           close={() => handleClose()}

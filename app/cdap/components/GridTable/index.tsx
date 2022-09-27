@@ -88,8 +88,8 @@ export default function GridTable() {
     open: false,
     message: '',
     isSuccess: false,
-    actionType: '',
   });
+  const [toastAction, setToastAction] = useState('');
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -163,7 +163,6 @@ export default function GridTable() {
             open: true,
             message: 'Failed to load data',
             isSuccess: false,
-            actionType: '',
           });
           setLoading(false);
         }
@@ -248,15 +247,18 @@ export default function GridTable() {
           open: true,
           message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
-          actionType: action === 'add' ? 'add' : 'delete',
         });
+        if (action === 'add') {
+          setToastAction('add');
+        } else if (action === 'delete') {
+          setToastAction('delete');
+        }
       },
       (err) => {
         setToaster({
           open: true,
           message: 'Transformation failed',
           isSuccess: false,
-          actionType: '',
         });
         setLoading(false);
         setShowRecipePanel(false);
@@ -354,6 +356,26 @@ export default function GridTable() {
   };
   // Redux store
   const { data, headers, types, directives } = dataprep;
+
+  const handleCloseSnackbar = () => {
+    const stepsArr = JSON.parse(JSON.stringify(directives));
+    if (toastAction === 'add') {
+      setToaster({
+        open: false,
+        message: '',
+        isSuccess: false,
+      });
+      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete');
+    }
+  };
+
+  const handleDefaultCloseSnackbar = () => {
+    setToaster({
+      open: false,
+      message: '',
+      isSuccess: false,
+    });
+  };
 
   return (
     <Box>
@@ -460,18 +482,11 @@ export default function GridTable() {
       />
       {toaster.open && (
         <PositionedSnackbar
-          handleCloseError={() => {
-            setToaster({
-              open: false,
-              message: '',
-              isSuccess: false,
-              actionType: '',
-            });
-            toaster.actionType === 'add' ? handleAddedUndo() : handleDeletedUndo();
-          }}
+          handleDefaultCloseSnackbar={handleDefaultCloseSnackbar}
+          handleCloseError={handleCloseSnackbar}
           messageToDisplay={toaster.message}
           isSuccess={toaster.isSuccess}
-          actionType={toaster.actionType === 'add' ? 'add' : 'delete'}
+          actionType={toastAction}
         />
       )}
       {loading && (
