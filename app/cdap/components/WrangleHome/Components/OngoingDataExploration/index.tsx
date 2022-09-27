@@ -121,7 +121,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
       {filteredData.map((item, index) => {
         return (
           <Link
-            data-testid="ongoing-data-explore"
+            data-testid={`ongoing-data-explore-${item[4].workspaceId}`}
             to={{
               pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
               state: { from: fromAddress, path: HOME_URL_PARAM },
