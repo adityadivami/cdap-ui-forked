@@ -211,8 +211,8 @@ const AddTransformation = (props) => {
       props.applyTransformation(selectedColumns[0].label, finalValue);
     } else if (functionName === 'filter') {
       const getDirective = prepareDirectiveForFilter(
-        directiveComponentValues.filterRowToKeepOrRemove,
-        directiveComponentValues.filterCondition,
+        directiveComponentValues.filterRowToKeepOrRemove || 'KEEP',
+        directiveComponentValues.filterCondition || 'EMPTY',
         directiveComponentValues.filterConditionValue,
         directiveComponentValues.ignoreCase,
         selectedColumns[0].label
