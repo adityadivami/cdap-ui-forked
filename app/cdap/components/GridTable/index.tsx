@@ -48,12 +48,6 @@ import ToolBarList from './components/AaToolbar';
 import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
-import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
-import T from 'i18n-react';
-
-const POPOVERTHETHERCLASSNAME = 'highlight-popover';
-const CELLHIGHLIGHTCLASSNAME = 'cl-highlight';
-const PREFIX = `features.DataPrep.Directives.MaskSelection`;
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -209,7 +203,7 @@ export default function GridTable() {
     } else {
       if (OPTION_WITH_NO_INPUT.includes(option)) {
         const newDirective = getDirective(option, columnSelected);
-        if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        if (!Boolean(newDirective) && !Boolean(columnSelected)) {
           setDirectiveFunction(option);
           setLoading(false);
           return;
@@ -218,7 +212,7 @@ export default function GridTable() {
         }
       } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
         const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-        if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        if (!Boolean(value_1)) {
           setDirectiveFunction(option);
           setLoading(false);
           return;
