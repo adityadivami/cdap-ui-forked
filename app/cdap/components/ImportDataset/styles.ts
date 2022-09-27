@@ -25,6 +25,7 @@ export const useStyles = makeStyles({
     position: 'relative',
     zIndex: 99,
     padding: 20,
+    width: '400px',
   },
   dropText: {
     fontFamily: 'Noto Sans',
@@ -81,7 +82,7 @@ export const useStyles = makeStyles({
   },
   bodyWrapper: {
     height: 'calc(100vh - 100px)',
-    paddingTop: 20,
+    paddingTop: 6,
   },
   panelbody: {
     height: 'calc(100vh - 250px)',
