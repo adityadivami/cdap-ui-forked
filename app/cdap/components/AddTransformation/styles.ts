@@ -130,6 +130,17 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#5F6368',
     },
+    recipeStepsActionTypeStyles: {
+      fontWeight: 400,
+      maxWidth: '290px',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      fontSize: '14px',
+      fontFamily: 'Noto Sans',
+      fontStyle: 'normal',
+      marginBottom: 5,
+      textTransform: 'capitalize',
+    },
     recipeStepsTableRowStyles: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
@@ -139,9 +150,10 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#5F6368',
       padding: '15px 10px',
+      marginBottom: 0,
     },
-    domm: {
-      width: '100%',
+    divStyles: {
+      width: 200,
     },
     recipeStepsTableBodyRowStyles: {
       '&:hover': {
@@ -150,17 +162,6 @@ export const useStyles = makeStyles(() => {
           visibility: 'visible',
         },
       },
-    },
-    recipeStepsActionTypeStyles: {
-      fontWeight: 400,
-      maxWidth: '190px',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      fontSize: '14px',
-      fontFamily: 'Noto Sans',
-      fontStyle: 'normal',
-      marginBottom: 5,
-      textTransform: 'capitalize',
     },
     displayNone: {
       visibility: 'hidden',
@@ -238,8 +239,7 @@ export const useStyles = makeStyles(() => {
       paddingLeft: 45,
     },
     barStyles: {
-      paddingLeft: 140,
-      paddingRight: 130,
+      paddingRight: 110,
     },
   };
 });
