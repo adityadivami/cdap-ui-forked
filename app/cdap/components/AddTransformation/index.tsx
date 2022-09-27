@@ -65,13 +65,13 @@ const AddTransformation = (props) => {
     columnNames: columnData.map(({ label }) => label),
     selectedColumnForDefineVariable: '',
     selectedColumn: '',
-    counter: '',
+    counter: 1,
     counterName: '',
     selected_column_2,
     column_1: '',
     column_2: '',
   });
-
+  console.log('directiveComponentValues', directiveComponentValues);
   useEffect(() => {
     if (selectedColumns.length) {
       setDirectiveComponentsValue({
@@ -250,9 +250,10 @@ const AddTransformation = (props) => {
       props.applyTransformation(selectedColumns[0].label, getValue);
     } else if (functionName === 'set-counter') {
       const getValue =
-        directiveComponentValues.filterCondition === 'true'
-          ? `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} true`
-          : `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} ${directiveComponentValues.filterConditionValue}`;
+        directiveComponentValues.filterConditionValue &&
+        directiveComponentValues.filterCondition != 'always'
+          ? `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} ${directiveComponentValues.filterConditionValue}`
+          : `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} true`;
       props.applyTransformation(selectedColumns[0].label, getValue);
     } else if (functionName == 'dateTime' || functionName == 'dateTimeAsString') {
       if (directiveComponentValues.radioOption === 'customFormat') {

@@ -624,7 +624,7 @@ export const SEND_TO_ERROR_OPTIONS = [
 export const SET_COUNTER_OPTION = [
   {
     label: 'Always',
-    value: 'true',
+    value: 'always',
   },
   {
     label: 'If condition is true',

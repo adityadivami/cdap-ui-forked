@@ -33,7 +33,7 @@ export const parseDirective = (
         directive = `parse-as-csv :${column} '\\t' ${booleanValue}`;
         break;
       case 'space':
-        directive = `parse-as-csv :${column} '' ${booleanValue}`;
+        directive = `parse-as-csv :${column} ' ' ${booleanValue}`;
         break;
       case 'pipe':
         directive = `parse-as-csv :${column} '\\|' ${booleanValue}`;
