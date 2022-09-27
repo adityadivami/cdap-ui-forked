@@ -97,12 +97,10 @@ describe('Should test whether handleChange function is triggered or not', () => 
         setIsErrorOnNoWorkSpace={jest.fn()}
       />
     );
-  const element = screen.getAllByTestId('connections-tab-button')
-  fireEvent.click(element[0])
-  //   const ele = screen.getAllByTestId(/connections-tab-button/i);
-  //   fireEvent.click(ele[0]);
-  //   expect(handleChange).toHaveBeenCalled();
- });
-
-
+    const element = screen.getAllByTestId('connections-tab-button');
+    fireEvent.click(element[0]);
+    //   const ele = screen.getAllByTestId(/connections-tab-button/i);
+    //   fireEvent.click(ele[0]);
+    //   expect(handleChange).toHaveBeenCalled();
+  });
 });

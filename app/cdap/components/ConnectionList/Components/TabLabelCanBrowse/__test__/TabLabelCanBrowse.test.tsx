@@ -34,12 +34,12 @@ describe('Test TabLabelCanBrowse Component', () => {
     expect(ele).toBeInTheDocument();
   });
   it('Should render CustomToolTip Component', () => {
-  jest.spyOn(React,'useEffect').mockImplementationOnce((f)=>f())
-  // jest.spyOn(React,'useRef').mockImplementationOnce(() => {
-  //   current:{
-  //       offsetWidth:""
-  //   }
-  // })
+    jest.spyOn(React, 'useEffect').mockImplementationOnce((f) => f());
+    // jest.spyOn(React,'useRef').mockImplementationOnce(() => {
+    //   current:{
+    //       offsetWidth:""
+    //   }
+    // })
 
     render(
       <TabLabelCanBrowse
