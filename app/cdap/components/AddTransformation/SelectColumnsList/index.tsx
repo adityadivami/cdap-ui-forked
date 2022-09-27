@@ -119,7 +119,7 @@ const SelectColumnsList = (props) => {
                         : false
                     }
                   />
-                  <div className={classes.col}>
+                  <div className={classes.divStyles}>
                     <Typography className={classes.recipeStepsActionTypeStyles}>
                       {eachColumn.label}
                     </Typography>
