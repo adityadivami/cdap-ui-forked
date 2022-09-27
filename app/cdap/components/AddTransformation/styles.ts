@@ -152,11 +152,8 @@ export const useStyles = makeStyles(() => {
       padding: '15px 10px',
       marginBottom: 0,
     },
-    col: {
+    divStyles: {
       width: 200,
-    },
-    domm: {
-      width: '100%',
     },
     recipeStepsTableBodyRowStyles: {
       '&:hover': {
