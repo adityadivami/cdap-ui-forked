@@ -23,6 +23,7 @@ export const mockTabsTestData = {
       name: 'File',
       type: 'connector',
       category: 'File',
+      canBrowse:false,
       description: 'Connection to browse and sample data from the local file system.',
       className: 'io.cdap.plugin.batch.connector.FileConnector',
       artifact: {
@@ -35,6 +36,7 @@ export const mockTabsTestData = {
     },
     {
       name: 'PostgreSQL',
+      canBrowse:true,
       type: 'connector',
       category: 'Database',
       description: 'Connection to access data in PostgreSQL databases using JDBC.',
