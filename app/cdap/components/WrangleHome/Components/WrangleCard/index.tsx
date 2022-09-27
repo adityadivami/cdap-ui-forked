@@ -127,6 +127,7 @@ export const WrangleCard = () => {
       {connectorTypes.map((item, index) => {
         return (
           <Link
+            data-testid="wrangle-card"
             to={`/ns/${getCurrentNamespace()}/datasources/${item.name}`}
             style={{ textDecoration: 'none' }}
           >

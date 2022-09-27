@@ -47,7 +47,11 @@ export default function WranglerHome() {
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle title="Start data exploration" />
           <Box className={classes.viewMore}>
-            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}>
+            <Link
+              data-testid="start-data-view"
+              color="inherit"
+              to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}
+            >
               View all
             </Link>
           </Box>
@@ -57,7 +61,11 @@ export default function WranglerHome() {
           <WrangleHomeTitle title="Continue ongoing data explorations, pick up where you left off" />
 
           <Box className={classes.viewMore}>
-            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
+            <Link
+              data-testid="ongoing-data-view"
+              color="inherit"
+              to={`/ns/${getCurrentNamespace()}/workspace-list`}
+            >
               View all
             </Link>
           </Box>
