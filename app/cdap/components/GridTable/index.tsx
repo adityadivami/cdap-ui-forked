@@ -203,7 +203,7 @@ export default function GridTable() {
     } else {
       if (OPTION_WITH_NO_INPUT.includes(option)) {
         const newDirective = getDirective(option, columnSelected);
-        if (!Boolean(newDirective) && !Boolean(columnSelected)) {
+        if (!columnSelected) {
           setDirectiveFunction(option);
           setLoading(false);
           return;

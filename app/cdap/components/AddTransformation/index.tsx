@@ -27,7 +27,10 @@ import {
   prepareDirectiveForCalculate,
   prepareDirectiveForMerge,
 } from './utils';
-import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/constants';
+import {
+  CALCULATE_OPTIONS,
+  DATATYPE_OPTIONS,
+} from 'components/GridTable/components/NestedMenu/constants';
 
 const AddTransformation = (props) => {
   const { functionName, columnData, setLoading, missingDataList } = props;
