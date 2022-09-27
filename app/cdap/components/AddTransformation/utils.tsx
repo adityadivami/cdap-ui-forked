@@ -426,7 +426,7 @@ export const prepareDirectiveForCalculate = (
         ? `set-column :${newColumnName} ${selectedColumn} / ${inputDigit}`
         : `set-column :${selectedColumn} ${selectedColumn} / ${inputDigit}`;
       break;
-    case 'MODULO':
+    case 'MOD':
       directive = copyToNew
         ? `set-column :${newColumnName} ${selectedColumn} % ${inputDigit}`
         : `set-column :${selectedColumn} ${selectedColumn} % ${inputDigit}`;
@@ -441,7 +441,7 @@ export const prepareDirectiveForCalculate = (
         ? `set-column :${newColumnName} math:pow(${selectedColumn}, 2)`
         : `set-column :${selectedColumn} math:pow(${selectedColumn}, 2)`;
       break;
-    case 'SQAURE_ROOT':
+    case 'SQUARE_ROOT':
       directive = copyToNew
         ? `set-column :${newColumnName} math:sqrt(${selectedColumn})`
         : `set-column :${selectedColumn} math:sqrt(${selectedColumn})`;

@@ -67,7 +67,7 @@ export const OPTION_WITH_TWO_INPUT = [
   'SUBTRACT',
   'MULTIPLY',
   'DIVIDE',
-  'MODULO',
+  'MOD',
   'POWEROF',
   'DECIMALADD',
   'DECIMALSUBTRACT',
