@@ -348,7 +348,7 @@ export default function GridTable() {
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
-      {isFirstWrangle && connectorType === 'File' && (
+      {dataprep.insights.name && isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
           setLoading={setLoading}
