@@ -65,7 +65,7 @@ export const OPTION_WITH_TWO_INPUT = [
   'fillNullOrEmpty',
   'ADD',
   'SUBTRACT',
-  'MULITPLY',
+  'MULTIPLY',
   'DIVIDE',
   'MODULO',
   'POWEROF',
