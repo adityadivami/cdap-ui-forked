@@ -25,6 +25,7 @@ import {
   prepareDirectiveForDefineVariable,
   prepareDirectiveForSendToError,
   prepareDirectiveForCalculate,
+  prepareDirectiveForMerge,
 } from './utils';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/constants';
 
@@ -263,6 +264,15 @@ const AddTransformation = (props) => {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
     } else if (functionName === 'swap-columns') {
       const directive = `swap :${selectedColumns[0].label} :${selected_column_2[0].label}`;
+      props.applyTransformation(selectedColumns[0].label, directive);
+    } else if (functionName === 'join-columns') {
+      const directive = prepareDirectiveForMerge(
+        directiveComponentValues.radioOption,
+        directiveComponentValues.column_1,
+        directiveComponentValues.column_2,
+        directiveComponentValues.copyColumnName,
+        directiveComponentValues.customInput
+      );
       props.applyTransformation(selectedColumns[0].label, directive);
     } else if (CALCULATE_OPTIONS.some((item) => item.value === functionName)) {
       const getValue = prepareDirectiveForCalculate(

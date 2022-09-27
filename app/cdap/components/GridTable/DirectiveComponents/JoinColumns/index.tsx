@@ -63,6 +63,11 @@ const JoinColumn = (props) => {
   }, [selectedParseType]);
 
   const handleChange = () => {
+    setDirectiveComponentsValue({
+      ...directiveComponentValues,
+      column_2: column_1,
+      column_1: column_2,
+    });
     setColumn_1(column_2);
     setColumn_2(column_1);
   };
@@ -83,7 +88,7 @@ const JoinColumn = (props) => {
             disabled: true,
           }}
         />
-        <Box onClick={handleChange}>
+        <Box onClick={handleChange} className={classes.exchangeIcon}>
           <SwapVertIcon />
         </Box>
         <FormInputFieldComponent

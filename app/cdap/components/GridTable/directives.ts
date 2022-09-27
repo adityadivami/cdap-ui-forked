@@ -122,6 +122,8 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return value;
   } else if (option == 'swap-columns') {
     return value;
+  } else if (option == 'join-columns') {
+    return value;
   } else {
     null;
   }

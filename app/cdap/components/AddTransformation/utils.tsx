@@ -616,3 +616,19 @@ export const prepareDirectiveForCalculate = (
   }
   return directive;
 };
+
+export const prepareDirectiveForMerge = (
+  radioOption,
+  column_1,
+  column_2,
+  newColumnName,
+  customInput
+) => {
+  let directive;
+  if (radioOption === 'custom') {
+    directive = `merge :${column_1} :${column_2} :${newColumnName} ${customInput}`;
+  } else {
+    directive = `merge :${column_1} :${column_2} :${newColumnName} ${radioOption}`;
+  }
+  return directive;
+};
