@@ -67,7 +67,9 @@ const FileDnD = ({ file, onDropHandler }) => {
         <Box>
           <Box className={classes.FlexFile}>
             <Typography className={classes.fileNameText}>{file.name}</Typography>
-            <Box onClick={handleRemoveFile}>{deleteSVG()}</Box>
+            <Box className={classes.delete_cursor_pointer} onClick={handleRemoveFile}>
+              {deleteSVG()}
+            </Box>
           </Box>
           <Divider />
         </Box>

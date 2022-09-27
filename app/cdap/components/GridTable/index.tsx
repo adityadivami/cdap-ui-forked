@@ -89,6 +89,7 @@ export default function GridTable() {
     message: '',
     isSuccess: false,
   });
+  const [toastAction, setToastAction] = useState('');
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -247,6 +248,11 @@ export default function GridTable() {
           message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
         });
+        if (action === 'add') {
+          setToastAction('add');
+        } else if (action === 'delete') {
+          setToastAction('delete');
+        }
       },
       (err) => {
         setToaster({
@@ -343,6 +349,26 @@ export default function GridTable() {
 
   // Redux store
   const { data, headers, types, directives } = dataprep;
+
+  const handleCloseSnackbar = () => {
+    const stepsArr = JSON.parse(JSON.stringify(directives));
+    if (toastAction === 'add') {
+      setToaster({
+        open: false,
+        message: '',
+        isSuccess: false,
+      });
+      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete');
+    }
+  };
+
+  const handleDefaultCloseSnackbar = () => {
+    setToaster({
+      open: false,
+      message: '',
+      isSuccess: false,
+    });
+  };
 
   return (
     <Box>
@@ -449,15 +475,11 @@ export default function GridTable() {
       />
       {toaster.open && (
         <PositionedSnackbar
-          handleCloseError={() =>
-            setToaster({
-              open: false,
-              message: '',
-              isSuccess: false,
-            })
-          }
+          handleDefaultCloseSnackbar={handleDefaultCloseSnackbar}
+          handleCloseError={handleCloseSnackbar}
           messageToDisplay={toaster.message}
           isSuccess={toaster.isSuccess}
+          actionType={toastAction}
         />
       )}
       {loading && (
