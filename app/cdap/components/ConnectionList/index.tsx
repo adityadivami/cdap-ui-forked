@@ -248,6 +248,11 @@ export default function ConnectionList() {
     const newDataToSearch = [...newData[index].data];
     const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
     newData[index].data = [...tempData];
+    setDataForTabs((prev) => {
+      const tempData = [...prev];
+      tempData[index].isSearching = false;
+      return tempData;
+    });
     setFilteredData(cloneDeep(newData));
   };
 
@@ -301,6 +306,13 @@ export default function ConnectionList() {
                       ref={(e) => {
                         refs.current[index] = e;
                       }}
+                      onBlur={() =>
+                        setDataForTabs((prev) => {
+                          const tempData = [...prev];
+                          tempData[index].isSearching = false;
+                          return tempData;
+                        })
+                      }
                     />
                     <Box
                       className={classes.closeIcon}
