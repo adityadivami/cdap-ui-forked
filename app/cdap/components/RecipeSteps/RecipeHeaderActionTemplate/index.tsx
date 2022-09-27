@@ -11,7 +11,7 @@ const RecipeHeaderActionTemplate = (props) => {
         src="/cdap_assets/img/import.svg"
         alt="Download icon"
       />
-      <img src="/cdap_assets/img/more-options.svg" alt="More icon" />
+      <img src="/cdap_assets/img/more-options.svg" alt="More icon" className={classes.more_icon}/>
     </div>
   );
 };
