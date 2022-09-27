@@ -347,13 +347,6 @@ export default function GridTable() {
     applyDirectiveAPICall(new_arr, 'delete');
   };
 
-  const handleAddedUndo = () => {
-    console.log('add undo');
-  };
-
-  const handleDeletedUndo = () => {
-    console.log('delete undo');
-  };
   // Redux store
   const { data, headers, types, directives } = dataprep;
 
