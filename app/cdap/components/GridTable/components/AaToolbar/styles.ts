@@ -36,5 +36,6 @@ export const useStyles = makeStyles({
   searchIcon: {
     border: 'none',
     outline: 'none',
+    width: '250px',
   },
 });
