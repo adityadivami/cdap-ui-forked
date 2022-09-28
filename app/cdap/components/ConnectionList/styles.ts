@@ -32,9 +32,12 @@ export const useStyles = makeStyles({
   },
   tabHeaders: {
     backgroundColor: blue[50],
+    width: 299,
     '& .MuiTypography-root': {
       fontSize: '16px',
       color: '#000000',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
     },
   },
   styleForLevelZero: {

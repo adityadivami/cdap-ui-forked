@@ -24,6 +24,7 @@ export const useStyles = makeStyles({
     marginTop: '0px',
     padding: '10px',
     paddingLeft: '18px',
+    paddingRight: '15px',
   },
   container: {
     display: 'flex',

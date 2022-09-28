@@ -139,6 +139,7 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#5F6368',
       padding: '15px 10px',
+      height: 70,
     },
     domm: {
       width: '100%',
@@ -238,8 +239,11 @@ export const useStyles = makeStyles(() => {
       paddingLeft: 45,
     },
     barStyles: {
-      paddingLeft: 140,
-      paddingRight: 130,
+      paddingRight: 110,
+      height: 70,
+    },
+    divStyles: {
+      width: 200,
     },
   };
 });
