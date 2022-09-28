@@ -30,7 +30,7 @@ const DirectiveDrawer = (props) => {
     ) {
       return;
     }
-
+    props.onClose();
     setOpen(false);
   };
 
