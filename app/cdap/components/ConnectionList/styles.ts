@@ -66,7 +66,6 @@ export const useStyles = makeStyles({
     backgroundColor: '#fff',
     alignItems: 'center',
     height: '50px',
-    borderRight: '1px dashed #DADCE0',
     paddingRight: '20px',
     paddingLeft: '18px',
     textDecoration: 'none',
