@@ -60,7 +60,11 @@ const ToolBarList = ({ submitMenuOption }) => {
 
         {Divider}
         <IconButton>{SearchIconn}</IconButton>
-        <input type="search" placeholder="Search for Functions" className={classes.searchIcon} />
+        <input
+          type="search"
+          placeholder="Input a function name or description"
+          className={classes.searchIcon}
+        />
       </Box>
 
       <IconButton>{Expand}</IconButton>
