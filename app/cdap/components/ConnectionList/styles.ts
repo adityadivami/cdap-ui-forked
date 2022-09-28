@@ -34,6 +34,7 @@ export const useStyles = makeStyles({
     backgroundColor: blue[50],
     width: 299,
     '& .MuiTypography-root': {
+      width: 209,
       fontSize: '16px',
       color: '#000000',
       textOverflow: 'ellipsis',
