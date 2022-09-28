@@ -30,7 +30,7 @@ import { useStyles } from './styles';
 import { Box, Divider, Typography } from '@material-ui/core';
 import { query } from 'express';
 
-const DataPrepAutoComplete = (props) => {
+const DataPrepAutoComplete = ({ setDirectivesList, ...props }) => {
   const [activeResults, setActiveResults] = useState([]);
   const [input, setInput] = useState('');
   const [matched, setMatched] = useState(false);
@@ -54,6 +54,8 @@ const DataPrepAutoComplete = (props) => {
           maxPatternLength: 32,
           keys: ['directive'],
         };
+        console.log(res.values);
+        setDirectivesList(res.values);
         setFuse(new Fuse(res.values, fuseOptions));
       });
     } else {

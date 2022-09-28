@@ -33,6 +33,7 @@ import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import DirectiveInputDrawer from 'components/DirectiveInput';
+import PositionedSnackbar from 'components/SnackbarComponent';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -45,6 +46,10 @@ export default function GridTable() {
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
   const [openDirective, setOpenDirective] = useState(false);
+  const [toast, setToast] = useState({
+    open: false,
+    message: '',
+  });
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -104,20 +109,29 @@ export default function GridTable() {
           return MyDataPrepApi.execute(params, requestBody);
         })
       )
-      .subscribe((response) => {
-        DataPrepStore.dispatch({
-          type: DataPrepActions.setWorkspace,
-          payload: {
-            data: response.values,
-            headers: response.headers,
-            types: response.types,
-            ...gridParams,
-          },
-        });
-        setOpenDirective(false);
-        setLoading(false);
-        setGridData(response);
-      });
+      .subscribe(
+        (response) => {
+          DataPrepStore.dispatch({
+            type: DataPrepActions.setWorkspace,
+            payload: {
+              data: response.values,
+              headers: response.headers,
+              types: response.types,
+              ...gridParams,
+            },
+          });
+          setOpenDirective(false);
+          setLoading(false);
+          setGridData(response);
+        },
+        (err) => {
+          setLoading(false);
+          setToast({
+            open: true,
+            message: 'Transformation not applied',
+          });
+        }
+      );
   };
 
   useEffect(() => {
@@ -237,9 +251,10 @@ export default function GridTable() {
   };
 
   useEffect(() => {
+    console.log('triggered', gridData);
     getGridTableData();
   }, [gridData]);
-
+  console.log('headersNamesList', headersNamesList);
   return (
     <Box>
       <BreadCrumb datasetName={wid} />
@@ -296,7 +311,6 @@ export default function GridTable() {
           open={openDirective}
           columnNamesList={headersNamesList}
           onDirectiveInputHandler={(directives) => {
-            console.log('directives in handle', directives);
             const payload = {
               context: params.namespace,
               workspaceId: params.wid,
@@ -304,6 +318,16 @@ export default function GridTable() {
             getWorkSpaceData(payload, wid, directives);
           }}
           onClose={() => setOpenDirective(false)}
+        />
+      )}
+      {toast.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setToast({
+              open: false,
+              message: '',
+            })
+          }
         />
       )}
     </Box>
