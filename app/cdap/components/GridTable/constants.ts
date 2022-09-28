@@ -1,3 +1,5 @@
+export const MISSING_NULL = 'Missing/Null';
+
 export const OPTION_WITH_NO_INPUT = [
   'delete',
   'keep',
