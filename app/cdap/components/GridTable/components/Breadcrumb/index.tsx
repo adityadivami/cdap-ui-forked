@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, IconButton, Typography, Button } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useStyles } from './styles';
@@ -61,7 +61,7 @@ const BreadCrumb = ({ datasetName, location }) => {
         <IconButton>{icon}</IconButton>
         <IconButton>{icon1}</IconButton>
         <IconButton>{otherIcon}</IconButton>
-        <Typography className={classes.pipelineStyles}> Create a Pipeline</Typography>
+        <Button className={`${classes.Button} ${classes.pipelineStyles}`}>Create a Pipeline</Button>
       </Breadcrumbs>
     </Box>
   );

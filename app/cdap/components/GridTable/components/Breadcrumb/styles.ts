@@ -57,5 +57,17 @@ export const useStyles = makeStyles({
     color: '#ffffff',
     textAlign: 'center',
     paddingTop: 6,
+    marginRight: 0,
+  },
+  Button: {
+    '&:hover': {
+      backgroundColor: blue[500],
+      boxShadow: 'none',
+      color: '#ffffff',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: blue[500],
+    },
   },
 });
