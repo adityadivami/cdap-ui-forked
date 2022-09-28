@@ -15,6 +15,7 @@
  */
 import React from 'react';
 import { IExecuteAPIResponse } from './types';
+import _ from 'lodash';
 
 /**
  *
@@ -25,15 +26,14 @@ import { IExecuteAPIResponse } from './types';
  * @returns {number} This is the calculated count of missing/null value
  */
 export const convertNonNullPercent = (gridData: IExecuteAPIResponse | undefined, nonNullValue) => {
-  console.log('nonNullValue', nonNullValue);
   const lengthOfData: number = gridData?.values.length;
   let nullValueCount: number = 0;
   if (lengthOfData) {
-    nullValueCount =
-      (((nonNullValue?.null || 0) + (nonNullValue?.empty || 0)) / 100) * lengthOfData || 0;
+    nullValueCount = nonNullValue.null
+      ? (((nonNullValue.null || 0) + (nonNullValue.empty || 0)) / 100) * lengthOfData
+      : 0;
   }
-  console.log('nonNullValue', nullValueCount);
-  return nullValueCount.toFixed(0);
+  return nullValueCount;
 };
 
 /**
@@ -56,9 +56,9 @@ export const checkFrequentlyOccuredValues = (
     name: '',
     count: 0,
   };
-  if (Array.isArray(valueOfKey) && valueOfKey.length) {
-    valueOfKey.map((item, index) => {
-      valueOfKey.map((value, valueIndex) => {
+  if (_.isArray(valueOfKey) && valueOfKey.length) {
+    valueOfKey.forEach((item, index) => {
+      valueOfKey.forEach((value, valueIndex) => {
         if (item == value) {
           mostFrequentItemCount++;
         }
