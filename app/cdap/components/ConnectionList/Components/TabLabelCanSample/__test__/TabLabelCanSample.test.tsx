@@ -17,7 +17,13 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import TabLabelCanSample from '../index';
-import { mockConnectorTypeData } from '../mock/mockConnectorTypeData';
+import * as APIModule from '../../../../../components/Connections/Browser/GenericBrowser/apiHelpers';
+// /Users/smriti/Desktop/Wrangler/cdap-ui-forked/app/cdap/components/Connections/Browser/GenericBrowser/apiHelpers.ts'
+import {
+  mockConnectorTypeData,
+  mockDataCanSampleForCatch,
+  mockDataCanSampleTest,
+} from '../mock/mockConnectorTypeData';
 
 describe('Test TabLabelCanSample Component', () => {
   it('Should render TabLabelCanSample Component', () => {
@@ -48,5 +54,36 @@ describe('Test TabLabelCanSample Component', () => {
     const ele = screen.getByTestId(/connections-tab-explore/i);
     fireEvent.click(ele);
     expect(setIsErrorOnNoWorkSpace).toHaveBeenCalled();
+  });
+
+  it('Should Trigger onCreateWorkspace(entity) inside onExplore Function', () => {
+    render(
+      <TabLabelCanSample
+        label={''}
+        entity={mockDataCanSampleTest}
+        initialConnectionId={undefined}
+        toggleLoader={() => null}
+        setIsErrorOnNoWorkSpace={jest.fn}
+      />
+    );
+    const element = screen.getByTestId(/connections-tab-explore/i);
+    fireEvent.click(element);
+    expect(element).toBeInTheDocument();
+  });
+
+  it('Should execute catch block inside onCreateWorkspace function', () => {
+    render(
+      <TabLabelCanSample
+        label={''}
+        entity={mockDataCanSampleForCatch}
+        initialConnectionId={''}
+        toggleLoader={() => null}
+        setIsErrorOnNoWorkSpace={jest.fn}
+      />
+    );
+    const element = screen.getByTestId(/connections-tab-explore/i);
+    fireEvent.click(element);
+    expect(element).toBeInTheDocument();
+    jest.spyOn(APIModule, 'createWorkspace').mockImplementation(() => undefined);
   });
 });

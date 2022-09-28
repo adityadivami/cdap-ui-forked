@@ -21,3 +21,17 @@ export const mockConnectorTypeData = {
   description: 'Connection to browse and sample data from the local file system.',
   className: 'io.cdap.plugin.batch.connector.FileConnector',
 };
+
+export const mockDataCanSampleTest = {
+  name: 'pg_aggregate_fnoid_index',
+  path: '/pg_catalog/pg_aggregate_fnoid_index',
+  type: 'system index',
+  canSample: true,
+  canBrowse: false,
+  properties: {},
+};
+
+export const mockDataCanSampleForCatch = {
+  canSample: true,
+  canBrowse: false,
+};
