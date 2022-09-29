@@ -24,7 +24,7 @@ const WorkspaceList = () => {
         </Breadcrumbs>
       </Box>
       <Box className={classes.explorationList}>
-        <OngoingDataExploration fromAddress="workspaceList" />
+        <OngoingDataExploration fromAddress="Workspaces" />
       </Box>
     </Box>
   );
