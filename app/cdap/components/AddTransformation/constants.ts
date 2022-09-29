@@ -12,3 +12,6 @@ export const DONE_STEP = 'Done';
 export const REMOVE_ROWS = 'Remove rows';
 export const REPLACE_ROWS = 'Replace rows';
 export const REPLACE_WITH = 'Replace with';
+export const SELECT_COLUMNS_1_TO_APPLY_THIS_FUNCTION = 'Select column first to apply this function';
+export const SELECT_COLUMNS_2_TO_APPLY_THIS_FUNCTION =
+  'Select column second to apply this function';

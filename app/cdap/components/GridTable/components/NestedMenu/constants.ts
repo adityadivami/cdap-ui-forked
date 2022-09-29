@@ -144,7 +144,7 @@ export const CALCULATE_OPTIONS = [
   },
   {
     label: 'Multiply',
-    value: 'MULTIPLE',
+    value: 'MULTIPLY',
     sign: 'x',
     inputRequired: true,
     component: Calculate,
@@ -577,6 +577,19 @@ export const MENU_OPTIONS = [
   {
     value: 'set-counter',
     label: 'Set counter',
+    supported_dataType: ['all'],
+  },
+  {
+    value: 'divider',
+  },
+  {
+    value: 'join-columns',
+    label: 'Join columns',
+    supported_dataType: ['all'],
+  },
+  {
+    value: 'swap-columns',
+    label: 'Swap columns',
     supported_dataType: ['all'],
   },
   {

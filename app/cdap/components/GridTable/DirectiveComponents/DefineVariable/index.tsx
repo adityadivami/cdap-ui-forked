@@ -25,7 +25,7 @@ const DefineVariable = (props) => {
   const { setDirectiveComponentsValue, directiveComponentValues } = props;
   const [filterCondition, setFilterCondition] = useState('TEXTEXACTLY');
   const [variableName, setVariableName] = useState('');
-  const [columnSelected, setColumnSelected] = useState(directiveComponentValues.columnNames[0]);
+  const [columnSelected, setColumnSelected] = useState('');
   const [customInput, setCustomInput] = useState('');
   const classes = useStyles();
 
@@ -33,9 +33,10 @@ const DefineVariable = (props) => {
     setDirectiveComponentsValue({
       ...directiveComponentValues,
       filterCondition,
-      selectedColumnForDefineVariable: columnSelected,
+      selectedColumnForDefineVariable: directiveComponentValues.selectedColumn,
     });
-  }, []);
+    setColumnSelected(directiveComponentValues.selectedColumn);
+  }, [directiveComponentValues.selectedColumn]);
 
   useEffect(() => {
     setDirectiveComponentsValue({ ...directiveComponentValues, filterCondition });

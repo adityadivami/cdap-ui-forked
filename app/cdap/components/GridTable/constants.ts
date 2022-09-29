@@ -75,9 +75,9 @@ export const OPTION_WITH_TWO_INPUT = [
   'fillNullOrEmpty',
   'ADD',
   'SUBTRACT',
-  'MULITPLY',
+  'MULTIPLY',
   'DIVIDE',
-  'MODULO',
+  'MOD',
   'POWEROF',
   'DECIMALADD',
   'DECIMALSUBTRACT',
@@ -116,4 +116,6 @@ export const OPTION_WITH_TWO_INPUT = [
   'CUBE_ROOT',
   'custom-selection',
   'using-positions',
+  'join-columns',
+  'swap-columns',
 ];

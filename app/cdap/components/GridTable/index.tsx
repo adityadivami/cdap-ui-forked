@@ -249,7 +249,7 @@ export default function GridTable() {
     }else{
       if (OPTION_WITH_NO_INPUT.includes(option)) {
         const newDirective = getDirective(option, columnSelected);
-        if (!Boolean(columnSelected)) {
+        if (!columnSelected) {
           setDirectiveFunction(option);
           setLoading(false);
           return;
@@ -259,7 +259,7 @@ export default function GridTable() {
         }
       } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
         const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-        if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        if (!Boolean(value_1)) {
           setDirectiveFunction(option);
           setLoading(false);
           return;
