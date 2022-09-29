@@ -41,10 +41,12 @@ export const generateDataForExplorationCard = (oldData) => {
         } else if (keys === 'dataQuality') {
           obj.label = parseInt(eachItem[keys]);
           obj.percentageSymbol = '%';
-          obj.subText = 'Data Quality';
+          obj.subText = 'Null values';
           obj.type = 'percentageWithText';
         } else if (keys === 'workspaceId') {
           obj.workspaceId = eachItem[keys];
+        } else if (keys === 'count') {
+          obj.count = eachItem[keys];
         }
         childArray.push(obj);
       });
@@ -52,6 +54,5 @@ export const generateDataForExplorationCard = (oldData) => {
       massagedArray.push(childArray);
     });
   }
-
   return massagedArray;
 };

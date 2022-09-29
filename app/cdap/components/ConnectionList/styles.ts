@@ -15,8 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
-import { grey } from '@material-ui/core/colors';
+import { blue, grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   canBrowseHover: {
@@ -33,9 +32,13 @@ export const useStyles = makeStyles({
   },
   tabHeaders: {
     backgroundColor: blue[50],
+    width: 299,
     '& .MuiTypography-root': {
+      width: 209,
       fontSize: '16px',
       color: '#000000',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
     },
   },
   styleForLevelZero: {
@@ -53,8 +56,31 @@ export const useStyles = makeStyles({
     paddingRight: '18px',
     paddingLeft: '30px',
   },
+  searchBar: {
+    width: '100%',
+    backgroundColor: '#fff',
+    border: 'none',
+    marginLeft: '9px',
+    height: '21px',
+    fontSize: '14px',
+    outline: 0,
+  },
+  afterSearchIconClick: {
+    display: 'flex',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    height: '50px',
+    paddingRight: '20px',
+    paddingLeft: '18px',
+    textDecoration: 'none',
+  },
   hideComponent: {
     display: 'none',
+  },
+  closeIcon: {
+    '& :hover': {
+      cursor: 'pointer',
+    },
   },
   tabsContainerWithHeader: {
     display: 'flex',

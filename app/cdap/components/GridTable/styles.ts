@@ -28,4 +28,24 @@ export const useStyles = makeStyles({
     width: '100%',
     zIndex: 2000,
   },
+  tableHeight: {
+    height: 'calc(100vh - 192px)',
+    overflow: 'scroll',
+  },
+  progressBarRoot: {
+    padding: '0px',
+  },
+  MUILinearRoot: {
+    height: '6px',
+  },
+  linearProgressBarStyle: {
+    backgroundColor: '#FF8A80',
+  },
+  MUIBarColor: {
+    backgroundColor: '#9CCC65',
+  },
+  gridTableWrapper: {
+    height: 'calc(100vh - 240px)',
+    overflowY: 'auto',
+  },
 });
