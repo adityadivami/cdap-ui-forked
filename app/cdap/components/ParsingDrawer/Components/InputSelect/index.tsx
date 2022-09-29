@@ -1,5 +1,6 @@
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
+import { useStyles } from '../../styles';
 
 const InputSelect = (props) => {
   const {
@@ -12,7 +13,7 @@ const InputSelect = (props) => {
     optionClassName,
     defaultValue,
   } = props;
-
+  const anchorClass = useStyles();
   return (
     <Select
       classes={{ ...classes }}
@@ -28,6 +29,9 @@ const InputSelect = (props) => {
           horizontal: 'left',
         },
         getContentAnchorEl: null,
+        classes: {
+          paper: anchorClass.MUIPopover,
+        },
       }}
     >
       {options.map((option) => {
