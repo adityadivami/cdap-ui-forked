@@ -51,6 +51,7 @@ const BreadCrumb = ({ datasetName, location }) => {
             color="inherit"
             to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
             className={`${classes.breadcrumbLabel}`}
+            data-testid="breadcrumb-datasources"
           >
             {location.state.from}
           </Link>
@@ -61,7 +62,7 @@ const BreadCrumb = ({ datasetName, location }) => {
         <IconButton>{icon}</IconButton>
         <IconButton>{icon1}</IconButton>
         <IconButton>{otherIcon}</IconButton>
-        <Typography className={classes.pipelineStyles}> Create a Pipeline</Typography>
+        <Typography className={classes.pipelineStyles}> Create a pipeline</Typography>
       </Breadcrumbs>
     </Box>
   );

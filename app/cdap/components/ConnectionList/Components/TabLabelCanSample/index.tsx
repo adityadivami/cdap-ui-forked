@@ -140,7 +140,12 @@ export default function TabLabelCanSample({
     </CustomTooltip>
   ) : (
     <Box className={classes.labelsContainerCanSample} data-testid="connections-tab-label-simple">
-      <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
+      <Typography
+        variant="body2"
+        data-testid={`tab-label-sample-${label}`}
+        className={classes.labelStylesCanSample}
+        ref={myLabelRef}
+      >
         {label}
       </Typography>
       <button

@@ -79,7 +79,7 @@ export default function TabLabelCanBrowse({
     </CustomTooltip>
   ) : (
     <Box className={classes.labelContainerBox} data-testid="connections-tab-label-browse">
-      <Box className={classes.labelsContainer}>
+      <Box className={classes.labelsContainer} data-testid={`tab-label-browse-${label}`}>
         {icon && <Box>{icon}</Box>}
         <Typography variant="body1" className={classes.labelStyles} ref={myLabelRef}>
           {label}
