@@ -250,17 +250,20 @@ export default function ConnectionList() {
   };
 
   const handleClearSearch = (e: any, index: number) => {
-    refs.current[index].value = '';
-    const newData = cloneDeep(dataForTabs);
-    const newDataToSearch = [...newData[index].data];
-    const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
-    newData[index].data = [...tempData];
-    // setDataForTabs((prev) => {
-    //   const tempData = [...prev];
-    //   tempData[index].isSearching = false;
-    //   return tempData;
-    // });
-    setFilteredData(cloneDeep(newData));
+    if (refs.current[index].value == '') {
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = false;
+        return tempData;
+      });
+    } else {
+      refs.current[index].value = '';
+      const newData = cloneDeep(dataForTabs);
+      const newDataToSearch = [...newData[index].data];
+      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
+      newData[index].data = [...tempData];
+      setFilteredData(cloneDeep(newData));
+    }
   };
 
   const makeCursorFocused = (index: number) => {
