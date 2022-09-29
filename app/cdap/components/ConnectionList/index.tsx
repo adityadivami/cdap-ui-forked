@@ -61,8 +61,11 @@ export default function ConnectionList() {
   const [loading, setLoading] = useState(true);
   const [toaster, setToaster] = useState({
     open: false,
-    message: '',
+    toasterLabel: '',
     isSuccess: false,
+    directiveApplied: '',
+    currentColumnSelected: '',
+    message: '',
   });
 
   const toggleLoader = (value: boolean, isError?: boolean) => {
@@ -331,12 +334,18 @@ export default function ConnectionList() {
           handleCloseError={() =>
             setToaster({
               open: false,
-              message: '',
+              toasterLabel: '',
               isSuccess: false,
+              directiveApplied: '',
+              currentColumnSelected: '',
+              message: '',
             })
           }
-          messageToDisplay={toaster.message}
+          toasterLabel={toaster.toasterLabel}
           isSuccess={toaster.isSuccess}
+          directiveApplied={toaster.directiveApplied}
+          currentColumnSelected={toaster.currentColumnSelected}
+          message={toaster.message}
         />
       )}
     </Box>

@@ -15,11 +15,11 @@
  */
 
 import React from 'react';
-import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import { Box, Divider, Typography } from '@material-ui/core';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutline';
+import { Box, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { SUCCESS_LABEL, FAILURE_LABEL } from './constants';
+import CloseIcon from '@material-ui/icons/Close';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 const TransitionComponent = (props) => {
   const classes = useStyles();
@@ -28,26 +28,31 @@ const TransitionComponent = (props) => {
       <Box className={classes.headFlex}>
         <Box className={classes.iconText}>
           {props.isSuccess ? (
-            <CheckCircleIcon fontSize="large" className={classes.successIcon} />
+            <CheckCircleOutlinedIcon className={classes.successIcon} />
           ) : (
-            <WarningRoundedIcon fontSize="large" className={classes.warningIcon} />
+            <ErrorOutlineIcon className={classes.warningIcon} />
           )}
           <Typography
             variant="body1"
             className={props.isSuccess ? classes.successLabel : classes.failureLabel}
           >
-            {props.isSuccess ? <>{SUCCESS_LABEL}</> : <>{FAILURE_LABEL}</>}
+            {props.label}
           </Typography>
         </Box>
-        <Box>
+        <Box className={classes.operations}>
           <Typography variant="body1" className={classes.dismissSpan} onClick={() => props.close()}>
-            Dismiss
+            {/* UNDO */}
           </Typography>
+          <Box>
+            <CloseIcon className={classes.cross} onClick={props.handleClose} />
+          </Box>
         </Box>
       </Box>
-      <Divider />
+
       <Typography variant="body1" className={classes.message}>
-        {props?.messageToDisplay}
+        {props.isSuccess
+          ? `"${props.directive}" applied on "${props.columnName}" column.`
+          : `${props.message}`}
       </Typography>
     </Box>
   );
