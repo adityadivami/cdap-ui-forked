@@ -16,7 +16,8 @@
 
 import {
   LinearProgress,
-  Button, Table,
+  Button,
+  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -239,14 +240,16 @@ export default function GridTable() {
       setMaskSelection(true);
       setLoading(false);
     } else if (
-      (option === 'custom-selection' || optionSelected === 'custom-selection'      ||   option === 'using-positions' ||
-      optionSelected === 'using-positions') &&
+      (option === 'custom-selection' ||
+        optionSelected === 'custom-selection' ||
+        option === 'using-positions' ||
+        optionSelected === 'using-positions') &&
       Boolean(columnSelected) &&
       value_1
     ) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
       applyDirectiveAPICall(newDirective, 'add');
-    }else{
+    } else {
       if (OPTION_WITH_NO_INPUT.includes(option)) {
         const newDirective = getDirective(option, columnSelected);
         if (!columnSelected) {
@@ -587,8 +590,13 @@ export default function GridTable() {
                           optionSelected={optionSelected}
                           headers={headers}
                           applyTransformation={(value) => {
-                            console.log('value', value)
-                            applyDirective(optionSelected, columnSelected, directiveFunctionSupportedDataType, value);
+                            console.log('value', value);
+                            applyDirective(
+                              optionSelected,
+                              columnSelected,
+                              directiveFunctionSupportedDataType,
+                              value
+                            );
                           }}
                           cancelTransformation={() => {
                             setColumnSelected('');
