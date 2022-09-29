@@ -20,7 +20,7 @@ export interface IParams {
 }
 
 export interface IRecords {
-  [key: string]: string;
+  [key: string]: any;
 }
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
@@ -42,4 +42,12 @@ export interface IHeaderNamesList {
   name: string;
   label: string;
   type: string[];
+}
+
+export interface IDataTypeOfColumns {
+  [key: string]: string;
+}
+
+export interface IDataOfStatistics {
+  [key: string]: string;
 }
