@@ -40,4 +40,16 @@ export const useStyles = makeStyles({
     letterSpacing: '0.15px',
     fontWeight: 400,
   },
+  loadingContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+    opacity: 0.5,
+    background: 'white',
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    zIndex: 2000,
+  },
 });

@@ -20,7 +20,7 @@ export interface IParams {
 }
 
 export interface IRecords {
-  [key: string]: string;
+  [key: string]: any;
 }
 export interface IPercentOfDataTypeValues {
   [key: string]: number;

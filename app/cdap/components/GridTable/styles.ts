@@ -32,16 +32,20 @@ export const useStyles = makeStyles({
     height: 'calc(100vh - 192px)',
     overflow: 'scroll',
   },
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
+  progressBarRoot: {
+    padding: '0px',
+  },
+  MUILinearRoot: {
+    height: '6px',
+  },
+  linearProgressBarStyle: {
+    backgroundColor: '#FF8A80',
+  },
+  MUIBarColor: {
+    backgroundColor: '#9CCC65',
+  },
+  gridTableWrapper: {
+    height: 'calc(100vh - 240px)',
+    overflowY: 'auto',
   },
 });
