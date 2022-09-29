@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import React, { useState, useEffect } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import { useStyles } from './styles';
@@ -58,7 +59,7 @@ const PositionedSnackbar = ({
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
       open={isOpen}
       TransitionComponent={() => (
         <TransitionComponent
