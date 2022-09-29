@@ -116,6 +116,10 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return `fill-null-or-empty :${column} '${value}'`;
   } else if (CALCULATE_OPTIONS.some((item) => item.value === option)) {
     return value;
+  } else if (option == 'custom-selection') {
+    return value;
+  } else if (option == 'using-positions') {
+    return value;
   } else {
     null;
   }
@@ -164,4 +168,22 @@ const explodeRecordByFlattening = (columnName) => {
   }
   const directive = `flatten-record ${column}`;
   return directive;
+};
+
+export const getPattern = (textSelectionRange, rowNumber, columnSelected) => {
+  const { start, end } = textSelectionRange;
+  const getMaskPattern = (N) =>
+    Array.apply(null, { length: N })
+      .map(() => 'x')
+      .join('');
+  const getAllowPattern = (N) =>
+    Array.apply(null, { length: N })
+      .map(() => '#')
+      .join('');
+  const { data } = DataPrepStore.getState().dataprep;
+  const length = data[rowNumber][columnSelected].length;
+  if (start === 0) {
+    return getMaskPattern(end) + getAllowPattern(length - end);
+  }
+  return getAllowPattern(start) + getMaskPattern(end - start) + getAllowPattern(length - end);
 };
