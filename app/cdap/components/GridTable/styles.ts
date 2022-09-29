@@ -16,11 +16,6 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  wrapper: {
-    '& *': {
-      fontFamily: "'Noto Sans', sans-serif",
-    },
-  },
   loadingContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -32,5 +27,25 @@ export const useStyles = makeStyles({
     top: 0,
     width: '100%',
     zIndex: 2000,
+  },
+  tableHeight: {
+    height: 'calc(100vh - 192px)',
+    overflow: 'scroll',
+  },
+  progressBarRoot: {
+    padding: '0px',
+  },
+  MUILinearRoot: {
+    height: '6px',
+  },
+  linearProgressBarStyle: {
+    backgroundColor: '#FF8A80',
+  },
+  MUIBarColor: {
+    backgroundColor: '#9CCC65',
+  },
+  gridTableWrapper: {
+    height: 'calc(100vh - 240px)',
+    overflowY: 'auto',
   },
 });

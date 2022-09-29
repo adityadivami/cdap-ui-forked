@@ -23,6 +23,8 @@ export const useStyles = makeStyles({
     height: '48px',
     marginTop: '0px',
     padding: '10px',
+    paddingLeft: '18px',
+    paddingRight: '15px',
   },
   container: {
     display: 'flex',
@@ -35,5 +37,6 @@ export const useStyles = makeStyles({
   searchIcon: {
     border: 'none',
     outline: 'none',
+    width: '250px',
   },
 });

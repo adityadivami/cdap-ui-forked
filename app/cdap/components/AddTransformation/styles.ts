@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
-
+import { blue } from '@material-ui/core/colors';
 export const useStyles = makeStyles(() => {
   return {
     addTransformationBodyStyles: {
@@ -45,6 +45,7 @@ export const useStyles = makeStyles(() => {
     functionInfoSectionStyles: {
       display: 'flex',
       alignItems: 'center',
+      gap: '8px',
     },
     functionTextStyles: {
       fontFamily: 'Noto Sans',
@@ -63,6 +64,13 @@ export const useStyles = makeStyles(() => {
     greenCheckIconStyles: {
       width: '20px',
       height: '20px',
+      marginRight: '5px',
+    },
+    selectedColumnTickIcon: {
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '10px',
+      justifyContent: 'space-between',
     },
     quickSelectTextStyles: {
       fontFamily: 'Noto Sans',
@@ -102,6 +110,7 @@ export const useStyles = makeStyles(() => {
       marginTop: '30px',
       textTransform: 'none',
       marginBottom: '20px',
+      marginRight: '8px',
     },
     buttonStyles: {
       '&:hover': {
@@ -131,6 +140,10 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#5F6368',
       padding: '15px 10px',
+      height: 70,
+    },
+    domm: {
+      width: '100%',
     },
     recipeStepsTableBodyRowStyles: {
       '&:hover': {
@@ -208,14 +221,65 @@ export const useStyles = makeStyles(() => {
     circularProgressRed: {
       color: '#E97567',
     },
-    radioButtonCellStyles: {
-      width: 50,
-    },
     circularBarCell: {
-      width: 70,
+      width: 90,
     },
     nullValueHead: {
-      width: 120,
+      width: 200,
+    },
+    displayStyles: {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    tabledisplayStyles: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    columnstyles: {
+      paddingRight: 130,
+      paddingLeft: 45,
+    },
+    barStyles: {
+      paddingRight: 110,
+      height: 70,
+    },
+    divStyles: {
+      width: 200,
+    },
+
+    infoIcon: {
+      color: blue[500],
+      fontSize: '20px',
+      cursor: 'pointer',
+    },
+    noRecordWrapper: {
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      '& *': {
+        fontFamily: "'Noto Sans', sans-serif",
+      },
+      marginTop: 30,
+    },
+    mainHeaderMessage: {
+      fontSize: '16px',
+      color: '#5F6368',
+      marginTop: '20px',
+      fontWeight: 600,
+      fontFamily: 'Noto Sans',
+    },
+    subHeaderMessage: {
+      fontSize: '14px',
+      color: '#5F6368',
+      fontWeight: 400,
+      fontFamily: 'Noto Sans',
+    },
+    innerWrapper: {
+      textAlign: 'center',
+    },
+    radioButtonCellStyles: {
+      width: 50,
     },
   };
 });

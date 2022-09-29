@@ -1,5 +1,6 @@
 import { Container } from '@material-ui/core';
 import DataPrepStore from 'components/DataPrep/store';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import DrawerWidget from 'components/DrawerWidget';
 import React, { useEffect, useState } from 'react';
 import { RECIPE } from './constants';
@@ -19,33 +20,39 @@ const recipes = [
   },
 ];
 
-const RecipeSteps = (props) => {
-  const [drawerStatus, setDrawerStatus] = useState(true);
+const RecipeSteps = ({ setShowRecipePanel, showRecipePanel, deleteRecipes }) => {
   const [recipeSteps, setRecipeSteps] = useState(recipes);
 
   const classes = useStyles();
 
-  useEffect(() => {
-    const { dataprep } = DataPrepStore.getState();
+  const { dataprep } = DataPrepStore.getState();
 
+  useEffect(() => {
     setRecipeSteps(dataprep.directives);
-  }, []);
+  }, [dataprep]);
 
   const closeClickHandler = () => {
-    setDrawerStatus(false);
+    setShowRecipePanel(false);
+  };
+
+  const handleDeleteRecipeSteps = (new_arr) => {
+    deleteRecipes(new_arr);
   };
 
   return (
     <DrawerWidget
       headingText={RECIPE}
-      openDrawer={drawerStatus}
+      openDrawer={showRecipePanel}
       showDivider={true}
       headerActionTemplate={<RecipeHeaderActionTemplate />}
       closeClickHandler={closeClickHandler}
     >
       <Container className={classes.RecipeStepsBodyStyles}>
         {recipeSteps.length ? (
-          <RecipeStepsTableComponent recipeSteps={recipeSteps} />
+          <RecipeStepsTableComponent
+            recipeSteps={recipeSteps}
+            handleDeleteRecipeSteps={handleDeleteRecipeSteps}
+          />
         ) : (
           <RecipeStepsEmptyScreen />
         )}
