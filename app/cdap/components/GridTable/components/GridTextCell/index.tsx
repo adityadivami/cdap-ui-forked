@@ -19,14 +19,16 @@ import React from 'react';
 import { useGridTextCellStyles } from './styles';
 import { IGridTextCellProps } from './types';
 
-export const GridTextCell: React.FC<IGridTextCellProps> = ({ cellValue }) => {
+export default function GridTextCell({ cellValue }: IGridTextCellProps) {
   const classes = useGridTextCellStyles();
 
   return (
     <TableCell className={classes.tableRowCell}>
       <Card className={classes.root} variant="outlined">
-        <Typography className={classes.cell}>{cellValue}</Typography>
+        <Typography className={classes.cell} data-testid={`grid-text-cell-${cellValue}`}>
+          {cellValue}
+        </Typography>
       </Card>
     </TableCell>
   );
-};
+}
