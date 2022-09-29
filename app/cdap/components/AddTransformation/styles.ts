@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/styles';
-
+import { blue } from '@material-ui/core/colors';
 export const useStyles = makeStyles(() => {
   return {
     addTransformationBodyStyles: {
@@ -45,6 +45,7 @@ export const useStyles = makeStyles(() => {
     functionInfoSectionStyles: {
       display: 'flex',
       alignItems: 'center',
+      gap: '8px',
     },
     functionTextStyles: {
       fontFamily: 'Noto Sans',
@@ -139,6 +140,10 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#5F6368',
       padding: '15px 10px',
+      height: 70,
+    },
+    domm: {
+      width: '100%',
     },
     recipeStepsTableBodyRowStyles: {
       '&:hover': {
@@ -216,14 +221,36 @@ export const useStyles = makeStyles(() => {
     circularProgressRed: {
       color: '#E97567',
     },
-    radioButtonCellStyles: {
-      width: 50,
-    },
     circularBarCell: {
-      width: 70,
+      width: 90,
     },
     nullValueHead: {
-      width: 120,
+      width: 200,
+    },
+    displayStyles: {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    tabledisplayStyles: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    columnstyles: {
+      paddingRight: 130,
+      paddingLeft: 45,
+    },
+    barStyles: {
+      paddingRight: 110,
+      height: 70,
+    },
+    divStyles: {
+      width: 200,
+    },
+
+    infoIcon: {
+      color: blue[500],
+      fontSize: '20px',
+      cursor: 'pointer',
     },
   };
 });
