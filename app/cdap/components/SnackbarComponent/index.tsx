@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017-2018 Cask Data, Inc.
+ * Copyright © 2022 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -13,49 +13,59 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-import { useErrorStyles } from './styles';
-import { State } from './types';
-import { TransitionComponent } from './Components/TransitionComponent';
+import { useStyles } from './styles';
+import TransitionComponent from './Components/TransitionComponent';
 
-const PositionedSnackbar = (props) => {
-  const classes = useErrorStyles();
-  const [state, setState] = React.useState<State>({
-    open: true,
-    vertical: 'bottom',
-    horizontal: 'right',
-  });
-  const { vertical, horizontal, open } = state;
+const PositionedSnackbar = ({
+  handleCloseError,
+  handleDefaultCloseSnackbar,
+  messageToDisplay,
+  isSuccess,
+  actionType,
+}: {
+  handleCloseError: () => void;
+  handleDefaultCloseSnackbar?: () => void;
+  messageToDisplay?: string;
+  isSuccess?: boolean;
+  actionType?: string;
+}) => {
+  const classes = useStyles();
+  const [isOpen, setIsOpen] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleClick();
     setTimeout(() => {
-      handleClose();
+      setIsOpen(false);
+      handleDefaultCloseSnackbar();
     }, 5000);
   }, []);
 
   const handleClick = () => () => {
-    setState({ open: true, ...state });
+    setIsOpen(true);
   };
 
   const handleClose = () => {
-    setState({ ...state, open: false });
-    props.handleCloseError();
+    setIsOpen(false);
+    handleCloseError();
   };
 
-  const properties = {
-    close: () => handleClose(),
-  };
+  console.log(actionType, 'actionType');
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical, horizontal }}
-      open={open}
-      onClose={handleClose}
-      key={vertical + horizontal}
-      TransitionComponent={() => TransitionComponent(properties)}
-      className={classes.snackBarDiv}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      open={isOpen}
+      TransitionComponent={() => (
+        <TransitionComponent
+          close={() => handleClose()}
+          isSuccess={isSuccess}
+          messageToDisplay={messageToDisplay}
+          actionType={actionType}
+        />
+      )}
+      className={isSuccess ? classes.success : classes.error}
     />
   );
 };

@@ -160,6 +160,12 @@ export const useStyles = makeStyles(() => {
       color: '#FFFFFF',
       alignSelf: 'flex-end',
       marginTop: '30px',
+      textTransform: 'none',
+    },
+    MUIPopover: {
+      left: '472px !important',
+      minWidth: '345px !important',
+      top: '253px !important',
     },
     buttonStyles: {
       '&:hover': {

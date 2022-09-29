@@ -17,37 +17,44 @@
 import { Breadcrumbs, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
-import { DownloadIcon, AddConnection } from 'components/ConnectionList/iconStore';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 
-const SubHeader = () => {
+export default function SubHeader(props) {
+  const { setOpenImportDataPanel } = props;
   const classes = useStyles();
+
+  const handleAddConnection = () => {
+    localStorage.setItem('addConnection', 'true');
+  };
+
   return (
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
-      <Box>
+      <Box className={classes.box}>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
             Home
           </Link>
-          <Typography>Data Sources</Typography>
+          <Typography className={classes.breadCrumbTyporgraphy}>Data Sources</Typography>
         </Breadcrumbs>
       </Box>
 
       <Box className={classes.importDataContainer}>
-        <Box className={classes.importData}>
-          <AddConnection />
-          <Box className={classes.breadCrumbTyporgraphy}>Add connection</Box>
-        </Box>
-        <Box className={classes.importData}>
-          <DownloadIcon />
+        <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>
+          <Box onClick={handleAddConnection} className={classes.importData}>
+            <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
+            <Box className={classes.breadCrumbTyporgraphy}>Add connection</Box>
+          </Box>
+        </Link>
+        <Box className={classes.importData} onClick={() => setOpenImportDataPanel(true)}>
+          <SaveAltRoundedIcon className={classes.subHeaderIcon} />
           <Box className={classes.breadCrumbTyporgraphy}>Import data</Box>
         </Box>
       </Box>
     </Box>
   );
-};
-
-export default SubHeader;
+}
