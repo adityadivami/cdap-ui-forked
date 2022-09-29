@@ -39,8 +39,8 @@ const GridTable = () => {
   const classes = useStyles();
 
   const [dataQuality, setDataQuality] = useState({});
-  const [headersNamesList, setHeadersNamesList] = React.useState([]);
-  const [rowsDataList, setRowsDataList] = React.useState([]);
+  const [headersNamesList, setHeadersNamesList] = useState([]);
+  const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
   const [openTranformationPanel, setOpenTransformationPanel] = useState(false);
@@ -214,6 +214,7 @@ const GridTable = () => {
       setMissingDataList(missingData);
       setDataQuality(gridData.summary.statistics);
     }
+
     const rowData =
       rawData &&
       rawData.values &&
@@ -232,6 +233,13 @@ const GridTable = () => {
 
   const closeClickHandler = () => {
     setOpenColumnView(false);
+  };
+
+  const modifyColumnsHandler = (sourceIndex, destinationIndex) => {
+    const tempData = Array.from(headersNamesList);
+    const [source_data] = tempData.splice(sourceIndex, 1);
+    tempData.splice(destinationIndex, 0, source_data);
+    setHeadersNamesList(tempData);
   };
 
   return (
@@ -258,6 +266,7 @@ const GridTable = () => {
               columnData={headersNamesList}
               dataQuality={dataQuality}
               closeClickHandler={closeClickHandler}
+              modifyColumnsHandler={modifyColumnsHandler}
             />
           </Box>
         )}

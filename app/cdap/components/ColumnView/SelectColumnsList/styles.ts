@@ -30,6 +30,19 @@ export const useStyles = makeStyles(() => {
         fontSize: '14px',
       },
     },
+    cellContainer: {
+      display: 'flex',
+      gap: 9,
+    },
+    hideIcon: {
+      visibility: 'hidden',
+    },
+    showIcon: {
+      visibility: 'visible',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     tableRowContainer: {
       '& .MuiTableCell-root': {
         paddingTop: '10px',
@@ -37,6 +50,9 @@ export const useStyles = makeStyles(() => {
       },
       '&:hover': {
         boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+        '&.leftSideCell': {
+          backgroundColor: 'green',
+        },
       },
     },
     headerNamesSeparator: {
@@ -144,7 +160,7 @@ export const useStyles = makeStyles(() => {
       maxWidth: '200px',
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      paddingLeft: '30px',
+      paddingLeft: '15px',
       '& .MuiTableCell-root': {
         padding: '10px 0px 10px 30px',
       },
