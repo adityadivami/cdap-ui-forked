@@ -88,6 +88,7 @@ export default function GridTable() {
     message: '',
     isSuccess: false,
   });
+  const [toastAction, setToastAction] = useState('');
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -190,7 +191,7 @@ export default function GridTable() {
     setOptionSelected(option);
     if (OPTION_WITH_NO_INPUT.includes(option)) {
       const newDirective = getDirective(option, columnSelected);
-      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+      if (!Boolean(columnSelected)) {
         setDirectiveFunction(option);
         setLoading(false);
         return;
@@ -210,6 +211,7 @@ export default function GridTable() {
   };
 
   const applyDirectiveAPICall = (newDirective, action) => {
+    setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
@@ -248,11 +250,17 @@ export default function GridTable() {
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
+        setShowRecipePanel(false);
         setToaster({
           open: true,
           message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
         });
+        if (action === 'add') {
+          setToastAction('add');
+        } else if (action === 'delete') {
+          setToastAction('delete');
+        }
       },
       (err) => {
         setToaster({
@@ -261,6 +269,7 @@ export default function GridTable() {
           isSuccess: false,
         });
         setLoading(false);
+        setShowRecipePanel(false);
       }
     );
   };
@@ -348,11 +357,31 @@ export default function GridTable() {
   // Redux store
   const { data, headers, types, directives } = dataprep;
 
+  const handleCloseSnackbar = () => {
+    const stepsArr = JSON.parse(JSON.stringify(directives));
+    if (toastAction === 'add') {
+      setToaster({
+        open: false,
+        message: '',
+        isSuccess: false,
+      });
+      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete');
+    }
+  };
+
+  const handleDefaultCloseSnackbar = () => {
+    setToaster({
+      open: false,
+      message: '',
+      isSuccess: false,
+    });
+  };
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
-      {isFirstWrangle && connectorType === 'File' && (
+      {dataprep.insights.name && isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
           setLoading={setLoading}
@@ -382,8 +411,8 @@ export default function GridTable() {
           }}
         />
       )}
-      <Box className={classes.tableContainer}>
-        {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+      {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+        <Box className={classes.gridTableWrapper}>
           <Table aria-label="simple table" className="test" data-testid="grid-table">
             <TableHead>
               <TableRow>
@@ -442,10 +471,11 @@ export default function GridTable() {
               })}
             </TableBody>
           </Table>
-        ) : (
-          <NoDataScreen />
-        )}
-      </Box>
+        </Box>
+      ) : (
+        <NoDataScreen />
+      )}
+
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
@@ -453,15 +483,11 @@ export default function GridTable() {
       />
       {toaster.open && (
         <PositionedSnackbar
-          handleCloseError={() =>
-            setToaster({
-              open: false,
-              message: '',
-              isSuccess: false,
-            })
-          }
+          handleDefaultCloseSnackbar={handleDefaultCloseSnackbar}
+          handleCloseError={handleCloseSnackbar}
           messageToDisplay={toaster.message}
           isSuccess={toaster.isSuccess}
+          actionType={toastAction}
         />
       )}
       {loading && (

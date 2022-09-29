@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 
 export const useCss = makeStyles({
   containerProps: {
@@ -18,6 +19,7 @@ export const useCss = makeStyles({
     backgroundColor: '#F3F6F9',
     height: '40px',
     boxShadow: '0px -2px 2px rgba(0, 0, 0, 0.1)',
+    width: '100%',
   },
   spanElement: {
     marginLeft: '2px',
@@ -31,7 +33,7 @@ export const useCss = makeStyles({
     alignItems: 'flex-start',
     padding: '8px 32px',
     gap: '8px',
-    width: '88px',
+    width: '5%',
     height: '40px',
     backgroundColor: '#F3F6F9',
     boxShadow: 'inset 0px 2px 4px rgba(0, 0, 0, 0.2)',
@@ -39,8 +41,10 @@ export const useCss = makeStyles({
     order: 0,
     flexGrow: 0,
   },
+  dataWrapper: {
+    width: '65%',
+  },
   data: {
-    width: '900px',
     padding: '8px 32px',
     height: '21px',
     textAlign: 'left',
@@ -61,7 +65,7 @@ export const useCss = makeStyles({
     alignItems: 'center',
     padding: '9.5px 32px',
     gap: '8px',
-    width: '143px',
+    width: '10%',
     height: '40px',
     background:
       'linear-gradient(180deg, rgba(70, 129, 244, 0) 0.85%, rgba(70, 129, 244, 0.2) 118.78%)',
@@ -71,16 +75,16 @@ export const useCss = makeStyles({
     textAlign: 'center',
     padding: '9.5px 32px',
     gap: '8px',
-    width: '143px',
+    width: '10%',
     height: '40px',
     background:
       'linear-gradient(180deg, rgba(70, 129, 244, 0) 0.85%, rgba(70, 129, 244, 0.2) 118.78%)',
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
   },
   recipeCont: {
+    padding: '10px 32px',
     cursor: 'pointer',
     textAlign: 'center',
-    padding: '9.5px 32px',
     gap: '8px',
     width: '184px',
     height: '40px',
@@ -90,9 +94,10 @@ export const useCss = makeStyles({
     display: 'flex',
   },
   spanElement1: {
-    backgroundColor: '#5F6368',
+    backgroundColor: grey[600],
     height: '21px',
     width: '20px',
     color: '#FFFFFF',
+    borderRadius: '4px',
   },
 });

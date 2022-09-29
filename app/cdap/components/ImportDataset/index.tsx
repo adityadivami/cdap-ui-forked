@@ -127,7 +127,7 @@ const ImportDataSet = (props) => {
     <DrawerWidget
       headingText={IMPORT_DATASET}
       openDrawer={setDrawerStatus}
-      showDivider={true}
+      showDivider={false}
       closeClickHandler={closeClickHandler}
     >
       <Box className={classes.bodyWrapper}>
