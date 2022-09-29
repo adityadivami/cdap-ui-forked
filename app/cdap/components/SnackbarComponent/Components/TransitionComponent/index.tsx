@@ -41,7 +41,7 @@ const TransitionComponent = (props) => {
         </Box>
         <Box>
           <Typography variant="body1" className={classes.dismissSpan} onClick={() => props.close()}>
-            Dismiss
+            {props.actionType === 'add' ? 'Undo' : 'Dismiss'}
           </Typography>
         </Box>
       </Box>
