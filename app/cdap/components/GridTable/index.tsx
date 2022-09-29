@@ -14,22 +14,22 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from "@material-ui/core";
-import MyDataPrepApi from "api/dataprep";
-import { directiveRequestBodyCreator } from "components/DataPrep/helper";
-import DataPrepStore from "components/DataPrep/store";
-import DataPrepActions from "components/DataPrep/store/DataPrepActions";
-import LoadingSVG from "components/shared/LoadingSVG";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { flatMap } from "rxjs/operators";
-import { objectQuery } from "services/helpers";
-import BreadCrumb from "./components/Breadcrumb";
-import GridHeaderCell from "./components/GridHeaderCell";
-import GridTextCell from "./components/GridTextCell";
-import Box from "@material-ui/core/Box";
-import { useStyles } from "./styles";
-import { useLocation } from "react-router";
+import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import MyDataPrepApi from 'api/dataprep';
+import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
+import DataPrepStore from 'components/DataPrep/store';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import LoadingSVG from 'components/shared/LoadingSVG';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { flatMap } from 'rxjs/operators';
+import { objectQuery } from 'services/helpers';
+import BreadCrumb from './components/Breadcrumb';
+import GridHeaderCell from './components/GridHeaderCell';
+import GridTextCell from './components/GridTextCell';
+import Box from '@material-ui/core/Box';
+import { useStyles } from './styles';
+import { useLocation } from 'react-router';
 import {
   IExecuteAPIResponse,
   IRecords,
@@ -37,11 +37,11 @@ import {
   IHeaderNamesList,
   IDataOfStatistics,
   IDataTypeOfColumns,
-} from "./types";
-import { IValues } from "components/WrangleHome/Components/OngoingDataExploration/types";
-import { convertNonNullPercent } from "./utils";
-import GridKPICell from "./components/GridKPICell";
-import NoDataScreen from "./components/NoRecordScreen";
+} from './types';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import { convertNonNullPercent } from './utils';
+import GridKPICell from './components/GridKPICell';
+import NoDataScreen from './components/NoRecordScreen';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -50,17 +50,15 @@ export default function GridTable() {
   const location = useLocation();
 
   const [loading, setLoading] = useState(false);
-  const [workspaceName, setWorkspaceName] = useState("");
-  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>(
-    []
-  );
+  const [workspaceName, setWorkspaceName] = useState('');
+  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
-      label: "Invalid",
-      count: "0",
+      label: 'Invalid',
+      count: '0',
     },
   ]);
 
@@ -82,11 +80,10 @@ export default function GridTable() {
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
-          const directives = objectQuery(res, "directives") || [];
+          const directives = objectQuery(res, 'directives') || [];
           const requestBody = directiveRequestBodyCreator(directives);
-          const sampleSpec = objectQuery(res, "sampleSpec") || {};
-          const visualization =
-            objectQuery(res, "insights", "visualization") || {};
+          const sampleSpec = objectQuery(res, 'sampleSpec') || {};
+          const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
           const insights = {
             name: sampleSpec.connectionName,
@@ -96,7 +93,7 @@ export default function GridTable() {
           };
           requestBody.insights = insights;
 
-          const workspaceUri = objectQuery(res, "sampleSpec", "path");
+          const workspaceUri = objectQuery(res, 'sampleSpec', 'path');
           const workspaceInfo = {
             properties: insights,
           };
@@ -134,10 +131,7 @@ export default function GridTable() {
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
-  const createHeadersData = (
-    columnNamesList: string[],
-    columnTypesList: IRecords
-  ) => {
+  const createHeadersData = (columnNamesList: string[], columnTypesList: IRecords) => {
     if (Array.isArray(columnNamesList)) {
       return columnNamesList.map((eachColumnName: string) => {
         return {
@@ -158,10 +152,8 @@ export default function GridTable() {
         const typeArrayOfMissingValue = [];
         headerKeyTypeArray.forEach(([vKey, vValue]) => {
           typeArrayOfMissingValue.push({
-            label:
-              vKey == "general" ? "Missing/Null" : vKey == "types" ? "" : "",
-            count:
-              vKey == "types" ? "" : convertNonNullPercent(gridData, vValue),
+            label: vKey == 'general' ? 'Missing/Null' : vKey == 'types' ? '' : '',
+            count: vKey == 'types' ? '' : convertNonNullPercent(gridData, vValue),
           });
         }),
           metricArray.push({
@@ -181,7 +173,7 @@ export default function GridTable() {
     const headersData = createHeadersData(obj?.headers, obj?.types);
     setHeadersNamesList(headersData);
     if (rawData && obj?.summary && obj?.summary?.statistics) {
-      //data should be in form of obj but the received response is an array- either type can be changed or the data can be modified
+      // data should be in form of obj but the received response is an array- either type can be changed or the data can be modified
       const missingData = createMissingData(gridData[0]?.summary?.statistics);
       setMissingDataList(missingData);
     }
@@ -203,14 +195,8 @@ export default function GridTable() {
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
-      {Array.isArray(gridData[0]?.headers) && gridData[0]?.headers.length === 0 && (
-        <NoDataScreen />
-      )}
-      <Table
-        aria-label="simple table"
-        className="test"
-        data-testid="grid-table"
-      >
+      {Array.isArray(gridData[0]?.headers) && gridData[0]?.headers.length === 0 && <NoDataScreen />}
+      <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
             {headersNamesList?.length > 0 &&
@@ -242,7 +228,7 @@ export default function GridTable() {
                   {headersNamesList.map((eachKey, eachIndex) => {
                     return (
                       <GridTextCell
-                        cellValue={eachRow[eachKey.name] || "--"}
+                        cellValue={eachRow[eachKey.name] || '--'}
                         key={`${eachKey.name}-${eachIndex}`}
                       />
                     );

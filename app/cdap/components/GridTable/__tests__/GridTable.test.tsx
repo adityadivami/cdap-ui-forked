@@ -302,8 +302,8 @@ describe('Testing Grid Table Component', () => {
         },
       };
     });
-   
-    const  screen =  render(
+
+    const screen = render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -316,21 +316,20 @@ describe('Testing Grid Table Component', () => {
     const gridTable = screen.getByTestId('grid-table');
     expect(screen.getByTestId('grid-table')).toBeInTheDocument();
   });
-  
+
   it('Should check if the component is rendered', () => {
     jest.spyOn(MyDataPrepApi, 'getWorkspace').mockImplementation(() => {
       return {
         pipe: () => {
           return {
             subscribe: (callback) => {
-              callback([ 
-              ]);
+              callback([]);
             },
           };
         },
       };
     });
-    const  screen =  render(
+    const screen = render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -343,7 +342,4 @@ describe('Testing Grid Table Component', () => {
     const gridTable = screen.getByTestId('grid-table');
     expect(screen.getByTestId('grid-table')).toBeInTheDocument();
   });
-  
-
 });
-
