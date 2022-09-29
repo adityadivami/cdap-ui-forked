@@ -10,7 +10,7 @@ const Footer = ({ showRecipePanelHandler, showAddTransformationHandler, recipeSt
     <Box className={classes.containerProps}>
       <Box className={classes.cont}>
         <Box className={classes.imgCont}>{ColumnIcon}</Box>
-        <Box>
+        <Box className={classes.dataWrapper}>
           <p className={classes.data}> Current data - 1000 rows and 30 columns</p>
         </Box>
         <Box className={classes.zoomCont}>

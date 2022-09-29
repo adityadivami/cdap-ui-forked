@@ -54,6 +54,7 @@ export default function ConnectionList() {
   const { connectorType } = useParams() as IRecords;
 
   const refs = useRef([]);
+  const headersRefs = useRef([]);
   const classes = useStyles();
   const loc = useLocation();
   const queryParams = new URLSearchParams(loc.search);
@@ -224,6 +225,13 @@ export default function ConnectionList() {
       return tempData;
     });
     refs.current[index].focus();
+    refs.current[index].addEventListener('blur', () => {
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = false;
+        return tempData;
+      });
+    });
   };
 
   const handleSearch = (e: any, index: number) => {
@@ -241,6 +249,11 @@ export default function ConnectionList() {
     const newDataToSearch = [...newData[index].data];
     const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
     newData[index].data = [...tempData];
+    setDataForTabs((prev) => {
+      const tempData = [...prev];
+      tempData[index].isSearching = false;
+      return tempData;
+    });
     setFilteredData(cloneDeep(newData));
   };
 
@@ -269,7 +282,29 @@ export default function ConnectionList() {
                         : classes.beforeSearchIconClickDisplay
                     }
                   >
-                    <Typography variant="body2">{filteredData[index - 1].selectedTab}</Typography>
+                    {headersRefs.current[index]?.offsetWidth <
+                    headersRefs.current[index]?.scrollWidth ? (
+                      <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+                        <Typography
+                          variant="body2"
+                          ref={(element) => {
+                            headersRefs.current[index] = element;
+                          }}
+                        >
+                          {filteredData[index - 1].selectedTab}
+                        </Typography>
+                      </CustomTooltip>
+                    ) : (
+                      <Typography
+                        variant="body2"
+                        ref={(element) => {
+                          headersRefs.current[index] = element;
+                        }}
+                      >
+                        {filteredData[index - 1].selectedTab}
+                      </Typography>
+                    )}
+
                     <Box
                       onClick={() => {
                         searchHandler(index);
@@ -294,6 +329,13 @@ export default function ConnectionList() {
                       ref={(e) => {
                         refs.current[index] = e;
                       }}
+                      onBlur={() =>
+                        setDataForTabs((prev) => {
+                          const tempData = [...prev];
+                          tempData[index].isSearching = false;
+                          return tempData;
+                        })
+                      }
                     />
                     <Box
                       className={classes.closeIcon}

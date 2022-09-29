@@ -36,8 +36,18 @@ import {
   Undo,
 } from './images';
 import { useStyles } from './styles';
+import {
+  MENU_OPTIONS,
+  NULL_MISSING_OPTIONS,
+  INVALID_ICON_OPTIONS,
+  COLUMN_OPTIONS,
+  FRAGMENT_OPTIONS,
+  MATH_OPTIONS,
+  SECURITY_OPTIONS,
+  OTHER_OPTIONS,
+} from '../NestedMenu/constants';
 
-const ToolBarList = ({ submitMenuOption }) => {
+const ToolBarList = ({ columnType, submitMenuOption }) => {
   const classes = useStyles();
   return (
     <Box className={classes.iconContainer}>
@@ -46,16 +56,56 @@ const ToolBarList = ({ submitMenuOption }) => {
         <IconButton>{Redo}</IconButton>
 
         {Divider}
-        <IconButton>{NullIcon}</IconButton>
-        <IconButton>{InvalidIcon}</IconButton>
-        <IconButton>{ColumnIcon}</IconButton>
+        <NestedMenu
+          menuOptions={NULL_MISSING_OPTIONS}
+          columnType={columnType}
+          icon={NullIcon}
+          submitMenuOption={submitMenuOption}
+        />
+        <NestedMenu
+          menuOptions={INVALID_ICON_OPTIONS}
+          columnType={columnType}
+          icon={InvalidIcon}
+          submitMenuOption={submitMenuOption}
+        />
+        <NestedMenu
+          menuOptions={COLUMN_OPTIONS}
+          columnType={columnType}
+          icon={ColumnIcon}
+          submitMenuOption={submitMenuOption}
+        />
 
         {Divider}
-        <NestedMenu icon={StructureIcon} submitMenuOption={submitMenuOption} />
-        <IconButton>{FragmentIcon}</IconButton>
-        <IconButton>{MathIcon}</IconButton>
-        <IconButton>{SecurityIcon}</IconButton>
-        <IconButton>{OtherIcon}</IconButton>
+        <NestedMenu
+          columnType={columnType}
+          icon={StructureIcon}
+          submitMenuOption={submitMenuOption}
+          menuOptions={MENU_OPTIONS}
+        />
+        <NestedMenu
+          columnType={columnType}
+          icon={FragmentIcon}
+          submitMenuOption={submitMenuOption}
+          menuOptions={FRAGMENT_OPTIONS}
+        />
+        <NestedMenu
+          columnType={columnType}
+          icon={MathIcon}
+          submitMenuOption={submitMenuOption}
+          menuOptions={MATH_OPTIONS}
+        />
+        <NestedMenu
+          columnType={columnType}
+          icon={SecurityIcon}
+          submitMenuOption={submitMenuOption}
+          menuOptions={SECURITY_OPTIONS}
+        />
+        <NestedMenu
+          columnType={columnType}
+          icon={OtherIcon}
+          submitMenuOption={submitMenuOption}
+          menuOptions={OTHER_OPTIONS}
+        />
 
         {Divider}
         <IconButton>{GridIcon}</IconButton>

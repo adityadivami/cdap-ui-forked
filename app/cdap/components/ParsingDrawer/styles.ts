@@ -162,6 +162,11 @@ export const useStyles = makeStyles(() => {
       marginTop: '30px',
       textTransform: 'none',
     },
+    MUIPopover: {
+      left: '472px !important',
+      minWidth: '345px !important',
+      top: '253px !important',
+    },
     buttonStyles: {
       '&:hover': {
         backgroundColor: '#3994FF',

@@ -33,7 +33,13 @@ import {
 } from 'components/GridTable/components/NestedMenu/constants';
 
 const AddTransformation = (props) => {
-  const { functionName, columnData, setLoading, missingDataList } = props;
+  const {
+    directiveFunctionSupportedDataType,
+    functionName,
+    columnData,
+    setLoading,
+    missingDataList,
+  } = props;
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
@@ -368,6 +374,7 @@ const AddTransformation = (props) => {
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={missingDataList}
+              directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
               is_secondSelection={is_secondSelection}
               selectedColumns_1={selectedColumns}
               selected_column_2={selected_column_2}
