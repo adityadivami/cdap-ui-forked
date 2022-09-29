@@ -17,8 +17,6 @@ import SelectColumnsList from './SelectColumnsList';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import { useStyles } from './styles';
-import DirectiveContent from 'components/GridTable/DirectiveComponents';
-import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
 import {
   parseDirective,
   directiveForHash,
@@ -31,7 +29,13 @@ import {
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/constants';
 
 const AddTransformation = (props) => {
-  const { functionName, columnData, setLoading, missingDataList } = props;
+  const {
+    directiveFunctionSupportedDataType,
+    functionName,
+    columnData,
+    setLoading,
+    missingDataList,
+  } = props;
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
@@ -336,6 +340,7 @@ const AddTransformation = (props) => {
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={missingDataList}
+              directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
             />
           </div>
           <Button

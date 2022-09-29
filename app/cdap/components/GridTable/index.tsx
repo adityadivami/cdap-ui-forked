@@ -2,7 +2,7 @@
  * Copyright © 2022 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
+ * use this file except in compliance with the License. You may obtain `a` copy of
  * the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -14,7 +14,14 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import {
+  LinearProgress,
+  Button, Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
@@ -33,14 +40,7 @@ import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
-import {
-  IDataOfStatistics,
-  IExecuteAPIResponse,
-  IHeaderNamesList,
-  IParams,
-  IRecords,
-} from './types';
-import { convertNonNullPercent } from './utils';
+import { IExecuteAPIResponse, IHeaderNamesList, IParams, IRecords } from './types';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
 import AddTransformation from 'components/AddTransformation';
@@ -48,12 +48,15 @@ import ToolBarList from './components/AaToolbar';
 import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
-import { Popover, PopoverHeader, PopoverBody } from 'reactstrap';
-import T from 'i18n-react';
-
-const POPOVERTHETHERCLASSNAME = 'highlight-popover';
-const CELLHIGHLIGHTCLASSNAME = 'cl-highlight';
-const PREFIX = `features.DataPrep.Directives.MaskSelection`;
+import ColumnInsightDrawer from 'components/ColumnInsights';
+import {
+  calculateDistinctValues,
+  characterCount,
+  convertNonNullPercent,
+  checkAlphaNumericAndSpaces,
+  calculateDistributionGraphData,
+} from './utils';
+import DirectiveInputDrawer from 'components/DirectiveInput';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -65,12 +68,35 @@ export default function GridTable() {
   const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
-  const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
+  const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
+  const [insightDrawer, setInsightDrawer] = useState({
+    open: false,
+    columnName: '',
+    distinctValues: 0,
+    characterCount: {
+      min: 0,
+      max: 0,
+    },
+    dataQuality: {
+      missingNullValueCount: 0,
+      missingNullValuePercentage: 0,
+      invalidValueCount: 0,
+      invalidValuePercentage: 0,
+    },
+    dataQualityBar: {},
+    dataTypeString: '',
+    dataDistributionGraphData: [],
+  });
   const [dataQuality, setDataQuality] = useState({});
   const [optionSelected, setOptionSelected] = useState(null);
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
+  const [openDirective, setOpenDirective] = useState(false);
+  const [toast, setToast] = useState({
+    open: false,
+    message: '',
+  });
   const [maskSelection, setMaskSelection] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
@@ -80,6 +106,9 @@ export default function GridTable() {
   ]);
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
+  const [progress, setProgress] = useState([]);
+  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [columnType, setColumnType] = useState('');
 
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
@@ -88,13 +117,19 @@ export default function GridTable() {
     message: '',
     isSuccess: false,
   });
+  const [toastAction, setToastAction] = useState('');
 
   useEffect(() => {
     setIsFirstWrangle(true);
     setConnectorType(dataprep.connectorType);
   }, []);
 
-  const getWorkSpaceData = (params: IParams, workspaceId: string) => {
+  const getWorkSpaceData = (
+    params: IParams,
+    workspaceId: string,
+    selectedDirective?: string[] | undefined
+  ) => {
+    console.log('selectedDirective', selectedDirective);
     let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -113,10 +148,13 @@ export default function GridTable() {
             return;
           }
           const directives = objectQuery(res, 'directives') || [];
-          const requestBody = directiveRequestBodyCreator(directives);
+          const updatedDirectives =
+            selectedDirective?.length > 0 ? directives.concat(selectedDirective) : directives;
+          const requestBody = directiveRequestBodyCreator(updatedDirectives);
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
+          console.log('directives con', directives);
           const insights = {
             name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
@@ -185,9 +223,10 @@ export default function GridTable() {
     setSshowAddTransformation((prev) => !prev);
   };
 
-  const applyDirective = (option, columnSelected, value_1?, value_2?) => {
+  const applyDirective = (option, columnSelected, supported_dataType, value_1?) => {
     setLoading(true);
     setOptionSelected(option);
+    setDirectiveFunctionSupportedDataType(supported_dataType);
     if (
       (option === 'custom-selection' ||
         optionSelected === 'custom-selection' ||
@@ -200,21 +239,23 @@ export default function GridTable() {
       setMaskSelection(true);
       setLoading(false);
     } else if (
-      (option === 'custom-selection' || optionSelected === 'custom-selection') &&
+      (option === 'custom-selection' || optionSelected === 'custom-selection'      ||   option === 'using-positions' ||
+      optionSelected === 'using-positions') &&
       Boolean(columnSelected) &&
       value_1
     ) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-      applyDirectiveAPICall(newDirective);
-    } else {
+      applyDirectiveAPICall(newDirective, 'add');
+    }else{
       if (OPTION_WITH_NO_INPUT.includes(option)) {
         const newDirective = getDirective(option, columnSelected);
-        if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        if (!Boolean(columnSelected)) {
           setDirectiveFunction(option);
           setLoading(false);
           return;
         } else {
-          applyDirectiveAPICall(newDirective);
+          applyDirectiveAPICall(newDirective, 'add');
+          setIsFirstWrangle(false);
         }
       } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
         const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
@@ -223,17 +264,18 @@ export default function GridTable() {
           setLoading(false);
           return;
         } else {
-          applyDirectiveAPICall(newDirective);
+          applyDirectiveAPICall(newDirective, 'add');
         }
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective) => {
+  const applyDirectiveAPICall = (newDirective, action) => {
+    setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
-    const updatedDirectives = directives.concat(newDirective);
+    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
 
     requestBody.insights = insights;
@@ -268,11 +310,20 @@ export default function GridTable() {
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
+        setShowRecipePanel(false);
         setToaster({
           open: true,
-          message: `${newDirective} successfully added`,
+          message:
+            action === 'add'
+              ? `${newDirective} successfully added`
+              : `${newDirective} successfully deleted`,
           isSuccess: true,
         });
+        if (action === 'add') {
+          setToastAction('add');
+        } else if (action === 'delete') {
+          setToastAction('delete');
+        }
       },
       (err) => {
         setToaster({
@@ -281,6 +332,7 @@ export default function GridTable() {
           isSuccess: false,
         });
         setLoading(false);
+        setShowRecipePanel(false);
       }
     );
   };
@@ -306,7 +358,7 @@ export default function GridTable() {
     }
   };
 
-  const createMissingData = (statistics: IDataOfStatistics) => {
+  const createMissingData = (statistics) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
@@ -315,7 +367,7 @@ export default function GridTable() {
       headerKeyTypeArray.forEach(([vKey, vValue]) => {
         typeArrayOfMissingValue.push({
           label: vKey == 'general' ? 'Missing/Null' : vKey == 'types' ? '' : '',
-          count: vKey == 'types' ? '' : convertNonNullPercent(gridData, vValue),
+          count: vKey == 'types' ? '' : convertNonNullPercent(gridData, key, vValue),
         });
       }),
         metricArray.push({
@@ -343,24 +395,104 @@ export default function GridTable() {
       rawData?.values.map((eachRow: {}) => {
         return eachRow;
       });
+
     setRowsDataList(rowData);
   };
 
+  const onColumnSelection = (columnName) => {
+    const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
+    const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
+    const getMissingValueCount =
+      convertNonNullPercent(
+        gridData,
+        columnName,
+        gridData?.summary?.statistics[columnName].general
+      ) || 0;
+    const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
+    setInsightDrawer({
+      open: true,
+      columnName,
+      distinctValues: getDistinctValue,
+      characterCount: getCharacterCountOfCell,
+      dataQuality: {
+        missingNullValueCount: Number(getMissingValueCount),
+        missingNullValuePercentage: (Number(getMissingValueCount) / rowsDataList.length) * 100,
+        invalidValueCount: 0,
+        invalidValuePercentage: 0,
+      },
+      dataQualityBar: gridData?.summary?.statistics[columnName],
+      dataTypeString: getDataTypeString,
+      dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
+    });
+  };
+
   useEffect(() => {
+    console.log('triggered', gridData);
     getGridTableData();
   }, [gridData]);
 
-  const handleColumnSelect = (columnName) =>
+  const handleColumnSelect = (columnName) => {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+    setColumnType(types[columnName]);
+  };
+
+  const deleteRecipes = (new_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete');
+  };
 
   // Redux store
   const { data, headers, types, directives } = dataprep;
 
+  const handleCloseSnackbar = () => {
+    const stepsArr = JSON.parse(JSON.stringify(directives));
+    if (toastAction === 'add') {
+      setToaster({
+        open: false,
+        message: '',
+        isSuccess: false,
+      });
+      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete');
+    }
+  };
+
+  const handleDefaultCloseSnackbar = () => {
+    setToaster({
+      open: false,
+      message: '',
+      isSuccess: false,
+    });
+  };
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
-      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
-      {isFirstWrangle && connectorType === 'File' && (
+      <ToolBarList
+        columnType={columnType}
+        submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+      />
+      {insightDrawer.open && (
+        <ColumnInsightDrawer
+          columnData={insightDrawer}
+          onClose={() =>
+            setInsightDrawer({
+              open: false,
+              columnName: '',
+              distinctValues: 0,
+              characterCount: { min: 0, max: 0 },
+              dataQuality: {
+                missingNullValueCount: 0,
+                missingNullValuePercentage: 0,
+                invalidValueCount: 0,
+                invalidValuePercentage: 0,
+              },
+              dataQualityBar: {},
+              dataTypeString: '',
+              dataDistributionGraphData: [],
+            })
+          }
+        />
+      )}
+      {dataprep.insights.name && isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
           setLoading={setLoading}
@@ -368,17 +500,27 @@ export default function GridTable() {
       )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
       {showRecipePanel && (
-        <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
+        <RecipeSteps
+          setShowRecipePanel={setShowRecipePanel}
+          showRecipePanel={showRecipePanel}
+          deleteRecipes={deleteRecipes}
+        />
       )}
       {directiveFunction && (
         <AddTransformation
           functionName={directiveFunction}
+          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
           setLoading={setLoading}
           columnData={headersNamesList}
           missingDataList={dataQuality}
           applyTransformation={(selectedColumn, value) => {
             setColumnSelected(selectedColumn);
-            applyDirective(optionSelected, selectedColumn, value);
+            applyDirective(
+              optionSelected,
+              selectedColumn,
+              directiveFunctionSupportedDataType,
+              value
+            );
           }}
           callBack={(response) => {
             setColumnSelected('');
@@ -387,61 +529,81 @@ export default function GridTable() {
         />
       )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
-        <Table aria-label="simple table" className="test" data-testid="grid-table">
-          <TableHead>
-            <TableRow>
-              {headers.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader}
-                  type={types[eachHeader]}
-                  key={eachHeader}
-                  columnSelected={columnSelected}
-                  setColumnSelected={handleColumnSelect}
-                />
-              ))}
-            </TableRow>
-            <TableRow>
-              {Array.isArray(missingDataList) &&
-                Array.isArray(headers) &&
-                headers.map((each, index) => {
-                  return missingDataList.map((item, itemIndex) => {
-                    if (item.name === each) {
-                      return <GridKPICell metricData={item} key={item.name} />;
-                    }
-                  });
-                })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((eachRow, rowIndex) => {
-              return (
-                <TableRow key={`row-${rowIndex}`}>
-                  {headers.map((eachKey, eachIndex) => {
-                    return (
-                      <GridTextCell
-                        cellValue={eachRow[eachKey] || '--'}
-                        key={`${eachKey}-${eachIndex}`}
-                        maskSelection={eachKey === columnSelected ? maskSelection : false}
-                        rowNumber={rowIndex}
-                        columnSelected={columnSelected}
-                        optionSelected={optionSelected}
-                        headers={headers}
-                        applyTransformation={(value) => {
-                          applyDirective(optionSelected, columnSelected, value);
-                        }}
-                        cancelTransformation={() => {
-                          setColumnSelected('');
-                          setOptionSelected('');
-                          setMaskSelection(false);
-                        }}
-                      />
-                    );
+        <Box className={classes.gridTableWrapper}>
+          <Table aria-label="simple table" className="test" data-testid="grid-table">
+            <TableHead>
+              <TableRow>
+                {headers.map((eachHeader) => (
+                  <GridHeaderCell
+                    label={eachHeader}
+                    type={types[eachHeader]}
+                    key={eachHeader}
+                    columnSelected={columnSelected}
+                    setColumnSelected={handleColumnSelect}
+                    onColumnSelection={(column) => onColumnSelection(column)}
+                  />
+                ))}
+              </TableRow>
+              <TableRow>
+                {headers.map((item, index) => (
+                  <TableCell className={classes.progressBarRoot}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={progress.filter((each) => each.key === item)[0]?.value}
+                      key={index}
+                      classes={{
+                        root: classes.MUILinearRoot,
+                        barColorPrimary: classes.MUIBarColor,
+                      }}
+                      className={classes.linearProgressBarStyle}
+                    />
+                  </TableCell>
+                ))}
+              </TableRow>
+              <TableRow>
+                {Array.isArray(missingDataList) &&
+                  Array.isArray(headers) &&
+                  headers.map((each, index) => {
+                    return missingDataList.map((item, itemIndex) => {
+                      if (item.name === each) {
+                        return <GridKPICell metricData={item} key={item.name} />;
+                      }
+                    });
                   })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((eachRow, rowIndex) => {
+                return (
+                  <TableRow key={`row-${rowIndex}`}>
+                    {headers.map((eachKey, eachIndex) => {
+                      return (
+                        <GridTextCell
+                          cellValue={eachRow[eachKey] || '--'}
+                          key={`${eachKey}-${eachIndex}`}
+                          maskSelection={eachKey === columnSelected ? maskSelection : false}
+                          rowNumber={rowIndex}
+                          columnSelected={columnSelected}
+                          optionSelected={optionSelected}
+                          headers={headers}
+                          applyTransformation={(value) => {
+                            console.log('value', value)
+                            applyDirective(optionSelected, columnSelected, directiveFunctionSupportedDataType, value);
+                          }}
+                          cancelTransformation={() => {
+                            setColumnSelected('');
+                            setOptionSelected('');
+                            setMaskSelection(false);
+                          }}
+                        />
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Box>
       ) : (
         <NoDataScreen />
       )}
@@ -453,21 +615,42 @@ export default function GridTable() {
       />
       {toaster.open && (
         <PositionedSnackbar
-          handleCloseError={() =>
-            setToaster({
-              open: false,
-              message: '',
-              isSuccess: false,
-            })
-          }
+          handleDefaultCloseSnackbar={handleDefaultCloseSnackbar}
+          handleCloseError={handleCloseSnackbar}
           messageToDisplay={toaster.message}
           isSuccess={toaster.isSuccess}
+          actionType={toastAction}
         />
       )}
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
         </div>
+      )}
+      <Button onClick={() => setOpenDirective(true)}>Open</Button>
+      {openDirective && (
+        <DirectiveInputDrawer
+          open={openDirective}
+          columnNamesList={headersNamesList}
+          onDirectiveInputHandler={(directives) => {
+            const payload = {
+              context: params.namespace,
+              workspaceId: params.wid,
+            };
+            getWorkSpaceData(payload, wid, directives);
+          }}
+          onClose={() => setOpenDirective(false)}
+        />
+      )}
+      {toast.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setToast({
+              open: false,
+              message: '',
+            })
+          }
+        />
       )}
     </Box>
   );

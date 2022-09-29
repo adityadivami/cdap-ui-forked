@@ -25,10 +25,12 @@ import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
 import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
+import { orderBy, find } from 'lodash';
 
 interface ICardCount {
   cardCount?: number;
   fromAddress: string;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
@@ -47,6 +49,12 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
           } else {
             values = res.values;
           }
+          values = orderBy(
+            values,
+            [(workspace) => (workspace.workspaceName || '').toLowerCase()],
+            ['asc']
+          );
+          console.log('values', values);
           const workspaces = values.map((item) => {
             const params = {
               context: 'default',
@@ -56,7 +64,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
               directives: item.directives,
               limit: 1000,
               insights: {
-                name: item.sampleSpec.connectionName,
+                name: item?.sampleSpec?.connectionName,
                 workspaceName: item.workspaceName,
                 path: item?.sampleSpec?.path,
                 visualization: {},
@@ -89,6 +97,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
             const general = workspace.summary.statistics[element].general;
             const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
             const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+
             dataQuality = dataQuality + nonNull;
           });
           const totalDataQuality = dataQuality / workspace.headers.length;

@@ -1,3 +1,13 @@
+export const MISSING_NULL = 'Missing/Null';
+export const CONTAIN_LETTER_NUMBER_LEADING_TRAILING_SPACES =
+  'Contains letters, numbers, leading and trailing spaces';
+export const CONTAIN_LETTER_NUMBER = 'Contains Letter and Number';
+export const CONTAIN_LETTER_LEADING_TRAILING = 'Contains Letter, leading and trailing spaces';
+export const CONTAIN_LETTER_LEADING = 'Contains Letter and leading spaces';
+export const CONTAIN_LETTER_TRAILING = 'Contains Letter and trailing spaces';
+export const CONTAIN_LETTER_ONLY = 'Contains Letter';
+export const CONTAIN_NUMBER_ONLY = 'Contains Number';
+
 export const OPTION_WITH_NO_INPUT = [
   'delete',
   'keep',
@@ -28,6 +38,15 @@ export const OPTION_WITH_NO_INPUT = [
   'character-encoding-utf16-le',
   'parseHL7',
   'parseAvro',
+  'string',
+  'boolean',
+  'integer',
+  'long',
+  'short',
+  'float',
+  'double',
+  'decimal',
+  'bytes',
 ];
 
 export const OPTION_WITH_TWO_INPUT = [
