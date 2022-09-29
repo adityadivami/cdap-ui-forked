@@ -255,17 +255,18 @@ export default function ConnectionList() {
     const newDataToSearch = [...newData[index].data];
     const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
     newData[index].data = [...tempData];
-    setDataForTabs((prev) => {
-      const tempData = [...prev];
-      tempData[index].isSearching = false;
-      return tempData;
-    });
+    // setDataForTabs((prev) => {
+    //   const tempData = [...prev];
+    //   tempData[index].isSearching = false;
+    //   return tempData;
+    // });
     setFilteredData(cloneDeep(newData));
   };
 
   const makeCursorFocused = (index: number) => {
     refs.current[index].focus();
   };
+
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader setOpenImportDataPanel={setOpenImportDataPanel} />
