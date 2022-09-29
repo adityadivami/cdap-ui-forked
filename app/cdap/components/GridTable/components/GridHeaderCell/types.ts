@@ -14,7 +14,12 @@
  * the License.
  */
 
+import React, { SetStateAction } from 'react';
+
 export interface IGridHeaderCellProps {
   label: string;
-  types: string[];
+  type: string;
+  columnSelected: string;
+  setColumnSelected: (value: string) => void;
+  onColumnSelection: (value: string) => void;
 }

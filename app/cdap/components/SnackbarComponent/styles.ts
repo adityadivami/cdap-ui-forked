@@ -16,7 +16,7 @@
 
 import { makeStyles } from '@material-ui/core';
 
-export const useErrorStyles = makeStyles({
+export const useStyles = makeStyles({
   error: {
     border: '1px solid #E97567',
     boxShadow: '-3px 4px 15px rgba(68, 132, 245, 0.25)',

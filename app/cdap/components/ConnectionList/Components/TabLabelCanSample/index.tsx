@@ -17,16 +17,20 @@
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
-import { WrangelIcon } from 'components/ConnectionList/iconStore';
+import { WrangleIcon } from 'components/ConnectionList/icons';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
-import * as React from 'react';
+import { IRecords } from 'components/GridTable/types';
+import React from 'react';
+import { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { useStyles } from './styles';
+import { useLocation } from 'react-router';
+import { DATASOURCES_LABEL, WRANGLE_LABEL } from './constants';
+import useStyles from './styles';
 import { IMessageState } from './types';
 
-const TabLabelCanSample = ({
+export default function TabLabelCanSample({
   label,
   entity,
   initialConnectionId,
@@ -34,20 +38,22 @@ const TabLabelCanSample = ({
   setToaster,
 }: {
   label: string;
-  entity: any;
+  entity: IRecords;
   initialConnectionId: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setToaster: React.Dispatch<React.SetStateAction<IMessageState>>;
-}) => {
+}) {
   const classes = useStyles();
-  const myLabelRef: any = React.createRef();
-  const [refValue, setRefValue] = React.useState(false);
-  const [workspaceId, setWorkspaceId] = React.useState(null);
-  const [currentConnection, setCurrentConnection] = React.useState(initialConnectionId);
+  const pathName = useLocation();
 
-  const { onWorkspaceCreate } = React.useContext(ConnectionsContext);
+  const myLabelRef: Ref<HTMLSpanElement> = createRef();
+  const [refValue, setRefValue] = useState(false);
+  const [workspaceId, setWorkspaceId] = useState(null);
+  const [currentConnection, setCurrentConnection] = useState(initialConnectionId);
 
-  React.useEffect(() => {
+  const { onWorkspaceCreate } = useContext(ConnectionsContext);
+
+  useEffect(() => {
     setRefValue(myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth);
   }, []);
 
@@ -100,7 +106,7 @@ const TabLabelCanSample = ({
         }, 1000);
       })
       .catch((err) => {
-        toggleLoader(false, true);
+        toggleLoader(false);
         setToaster({
           open: true,
           message: 'Failed to retrieve sample data', // -----Error Message can be sent here
@@ -109,35 +115,51 @@ const TabLabelCanSample = ({
       });
   };
 
+  const indexOfSelectedDataset = location.pathname.lastIndexOf('/');
+  const requiredPath = location.pathname.slice(indexOfSelectedDataset + 1);
+
   return workspaceId ? (
-    <Redirect to={`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`} />
+    <Redirect
+      to={{
+        pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
+        state: { from: DATASOURCES_LABEL, path: requiredPath },
+      }}
+    />
   ) : refValue ? (
-    <CustomTooltip title={label} arrow>
+    <CustomTooltip title={label} arrow data-testid="connections-tab-ref-label-simple">
       <Box className={classes.labelsContainerCanSample}>
-        <Typography variant="body1" className={classes.labelStylesCanSample} ref={myLabelRef}>
+        <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
           {label}
         </Typography>
-        <div onClick={() => onExplore(entity)}>
-          <Box className="wranglingHover">
-            <WrangelIcon />
-            <Typography color="primary">Wrangle</Typography>
-          </Box>
-        </div>
+        <button
+          className="wranglingHover"
+          data-testid="connections-tab-ref-explore"
+          onClick={() => onExplore(entity)}
+        >
+          <WrangleIcon />
+          <Typography variant="body2" className={classes.wrangleButton}>
+            Wrangle
+          </Typography>
+        </button>
       </Box>
     </CustomTooltip>
   ) : (
-    <Box className={classes.labelsContainerCanSample}>
-      <Typography variant="body1" className={classes.labelStylesCanSample} ref={myLabelRef}>
+    <Box className={classes.labelsContainerCanSample} data-testid="connections-tab-label-simple">
+      <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
         {label}
       </Typography>
-      <div onClick={() => onExplore(entity)}>
+      <button
+        className="wranglingHover"
+        data-testid="connections-tab-explore"
+        onClick={() => onExplore(entity)}
+      >
         <Box className="wranglingHover">
-          <WrangelIcon />
-          <Typography color="primary">Wrangle</Typography>
+          <WrangleIcon />
+          <Typography color="primary" variant="body2" className={classes.wrangleButton}>
+            {WRANGLE_LABEL}
+          </Typography>
         </Box>
-      </div>
+      </button>
     </Box>
   );
-};
-
-export default TabLabelCanSample;
+}

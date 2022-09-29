@@ -14,6 +14,8 @@
  * the License.
  */
 import { makeStyles } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
   warningIcon: {
