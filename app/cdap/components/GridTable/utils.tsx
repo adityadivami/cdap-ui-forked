@@ -15,6 +15,7 @@
  */
 import React from 'react';
 import { IExecuteAPIResponse } from './types';
+import _ from 'lodash';
 
 /**
  *
@@ -54,9 +55,9 @@ export const checkFrequentlyOccuredValues = (
     name: '',
     count: 0,
   };
-  if (Array.isArray(valueOfKey) && valueOfKey.length) {
-    valueOfKey.map((item, index) => {
-      valueOfKey.map((value, valueIndex) => {
+  if (_.isArray(valueOfKey) && valueOfKey.length) {
+    valueOfKey.forEach((item, index) => {
+      valueOfKey.forEach((value, valueIndex) => {
         if (item == value) {
           mostFrequentItemCount++;
         }
