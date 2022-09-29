@@ -218,10 +218,14 @@ export default function GridTable() {
       rawData.values &&
       Array.isArray(rawData.values) &&
       rawData.values.map((eachRow) => {
-        const { body, ...rest } = eachRow;
-        return rest;
+        if (Object.keys(eachRow).length === 1 && 'body' in eachRow) {
+          const body = eachRow.body;
+          return { body };
+        } else {
+          const { body, ...rest } = eachRow;
+          return rest;
+        }
       });
-
     setRowsDataList(rowData);
   };
 
