@@ -64,7 +64,7 @@ export default function TabLabelCanSample({
     } else {
       setToaster({
         open: true,
-        message: 'Failed to retrieve sample data',
+        message: `Failed to retrieve sample data for ${entity?.name}`,
         isSuccess: false,
       });
     }
@@ -76,7 +76,7 @@ export default function TabLabelCanSample({
     } catch (e) {
       setToaster({
         open: true,
-        message: 'Failed to create workspace',
+        message: `Failed to create workspace for ${entity?.name}`,
         isSuccess: false,
       });
     }
