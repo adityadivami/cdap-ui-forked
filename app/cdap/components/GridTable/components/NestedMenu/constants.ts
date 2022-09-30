@@ -1172,3 +1172,16 @@ export const OTHER_OPTIONS = [
     supported_dataType: ['string'],
   },
 ];
+
+export const KEBAB_GRID_PAGE_OPTION = [
+  {
+    label: 'Ingest Data',
+    value: 'ingest-data',
+    supported_dataType: ['all'],
+  },
+  {
+    label: 'View Schema',
+    value: 'view-schema',
+    supported_dataType: ['all'],
+  },
+];

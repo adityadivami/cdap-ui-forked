@@ -28,6 +28,8 @@ import {
   DATASOURCES_URL_PARAM,
   WORKSPACE_LIST_PARAM,
 } from './constants';
+import NestedMenu from '../NestedMenu';
+import { KEBAB_GRID_PAGE_OPTION } from '../NestedMenu/constants';
 
 const BreadCrumb = ({ datasetName, location }) => {
   const classes = useStyles();
@@ -60,7 +62,12 @@ const BreadCrumb = ({ datasetName, location }) => {
       <Breadcrumbs separator=" ">
         <IconButton>{icon}</IconButton>
         <IconButton>{icon1}</IconButton>
-        <IconButton>{otherIcon}</IconButton>
+        <NestedMenu
+          columnType={''}
+          icon={otherIcon}
+          submitMenuOption={() => console.log('')}
+          menuOptions={KEBAB_GRID_PAGE_OPTION}
+        />
         <Button className={`${classes.Button} ${classes.pipelineStyles}`}>Create a Pipeline</Button>
       </Breadcrumbs>
     </Box>
