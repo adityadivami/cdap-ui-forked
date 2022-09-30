@@ -64,7 +64,10 @@ const PositionedSnackbar = ({
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
       open={isOpen}
-      classes={{ anchorOriginTopLeft: classes.MUIanchor, root: classes.MUIRoot }}
+      classes={{
+        anchorOriginTopLeft: classes.MUIanchor,
+        root: classes.MUIRoot,
+      }}
       TransitionComponent={() => (
         <TransitionComponent
           close={() => handleClose()}
