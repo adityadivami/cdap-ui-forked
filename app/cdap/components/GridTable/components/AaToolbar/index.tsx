@@ -117,7 +117,12 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           }}
         />
       </Box>
-      <IconButton className={showBreadCrumb ? classes.openedBreadcrumb : classes.closeBreadCrumb} onClick = {()=> setShowBreadCrumb(!showBreadCrumb)}>{Expand}</IconButton>
+      <IconButton
+        className={showBreadCrumb ? classes.openedBreadcrumb : classes.closeBreadCrumb}
+        onClick={() => setShowBreadCrumb(!showBreadCrumb)}
+      >
+        {Expand}
+      </IconButton>
     </Box>
   );
 };
