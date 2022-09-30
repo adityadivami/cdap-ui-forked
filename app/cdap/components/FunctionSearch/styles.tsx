@@ -124,6 +124,11 @@ export const useStyles = makeStyles({
     color: '#757575',
     fontSize: 'xx-large',
   },
+  close: {
+    color: '#757575',
+    fontSize: 'xx-large',
+    cursor: 'pointer',
+  },
   optionInMUIAutocomplete: {
     height: '71px',
   },

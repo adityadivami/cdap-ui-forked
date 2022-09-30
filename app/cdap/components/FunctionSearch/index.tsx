@@ -15,6 +15,7 @@
  */
 
 import { Box, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
+import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 import MyDataPrepApi from 'api/dataprep';
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
@@ -30,6 +31,7 @@ const FunctionSearch = ({ transformationPanel }) => {
   const [textFieldInput, setTextFieldInput] = useState('');
   const [selectedDirective, setSelectedDirective] = useState('');
   const [recentSearches, setRecentSearches] = useState([]);
+  const textInput = React.useRef(null);
 
   const GetData = () => {
     const namespace = NamespaceStore.getState().selectedNamespace;
@@ -122,28 +124,48 @@ const FunctionSearch = ({ transformationPanel }) => {
             </Box>
           </>
         )}
-        renderInput={(params) => (
-          <TextField
-            placeholder="Input a function name or description"
-            {...params}
-            variant="outlined"
-            className={classes.textField}
-            onChange={(e) => handleInputChange(e)}
-            value={textFieldInput}
-            id="text-input"
-            classes={{ root: classes.customTextField }}
-            InputProps={{
-              ...params.InputProps,
-              startAdornment: (
-                <InputAdornment position="start">
-                  <div>
-                    <SearchOutlinedIcon className={classes.search} />
-                  </div>
-                </InputAdornment>
-              ),
-            }}
-          />
-        )}
+        renderInput={(params) => {
+          return (
+            <TextField
+              placeholder="Input a function name or description"
+              {...params}
+              variant="outlined"
+              className={classes.textField}
+              onChange={(e) => handleInputChange(e)}
+              value={textFieldInput}
+              inputRef={textInput}
+              id="text-input"
+              classes={{ root: classes.customTextField }}
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: (
+                  <>
+                    <InputAdornment position="start">
+                      <div>
+                        <SearchOutlinedIcon className={classes.search} />
+                      </div>
+                    </InputAdornment>
+                    <></>
+                  </>
+                ),
+                endAdornment: (
+                  <>
+                    <InputAdornment position="end">
+                      <div>
+                        <ClearOutlinedIcon
+                          className={classes.close}
+                          onClick={() => {
+                            textInput.current.value = '';
+                          }}
+                        />
+                      </div>
+                    </InputAdornment>
+                  </>
+                ),
+              }}
+            />
+          );
+        }}
       />
     </Box>
   );
