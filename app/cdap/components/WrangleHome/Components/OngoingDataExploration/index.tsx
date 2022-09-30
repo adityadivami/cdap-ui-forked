@@ -28,11 +28,12 @@ import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
 import { orderBy, find } from 'lodash';
 
 interface ICardCount {
+  dataExploration?: (value) => void;
   cardCount?: number;
   fromAddress: string;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
+const OngoingDataExploration = ({ cardCount, fromAddress, dataExploration }: ICardCount) => {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
   const getOngoingData = () => {
@@ -87,6 +88,7 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
             ]);
             return MyDataPrepApi.execute(params, requestBody);
           });
+          dataExploration(workspaces.length);
           return forkJoin(workspaces);
         })
       )
@@ -97,10 +99,10 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
             const general = workspace.summary.statistics[element].general;
             const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
             const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
-
             dataQuality = dataQuality + nonNull;
           });
           const totalDataQuality = dataQuality / workspace.headers.length;
+
           setOngoingExpDatas((current) => [
             ...current.slice(0, index),
             {

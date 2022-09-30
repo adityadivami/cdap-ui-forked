@@ -40,6 +40,15 @@ export const useStyles = makeStyles({
     letterSpacing: '0.15px',
     fontWeight: 400,
   },
+  noRecords: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  eleStyles: {
+    fontSize: 30,
+  },
   loadingContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -51,5 +60,27 @@ export const useStyles = makeStyles({
     top: 0,
     width: '100%',
     zIndex: 2000,
+  },
+  noRecordWrapper: {
+    height: 'calc(100vh - 244px)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '& *': {
+      fontFamily: "'Noto Sans', sans-serif",
+    },
+    marginTop: 30,
+  },
+  mainHeaderMessage: {
+    fontSize: '20px',
+    color: '#000000',
+    marginTop: '20px',
+  },
+  subHeaderMessage: {
+    fontSize: '16px',
+    color: '#000000',
+  },
+  innerWrapper: {
+    textAlign: 'center',
   },
 });

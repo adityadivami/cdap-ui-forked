@@ -19,14 +19,14 @@ import { UnderLine } from 'components/WrangleHome/icons';
 import React from 'react';
 import { useStyles } from './styles';
 
-export default function WrangleHomeTitle({ title }) {
+export default function WrangleHomeTitle({ title, showUnderline }) {
   const classes = useStyles();
   return (
     <Box className={classes.dataExplorationWrapper}>
       <Typography className={classes.dataExploration} data-testid="wrangler-home-title-text">
         {title}
       </Typography>
-      {UnderLine}
+      {showUnderline && UnderLine}
     </Box>
   );
 }

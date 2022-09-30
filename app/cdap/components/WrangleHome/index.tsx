@@ -32,6 +32,12 @@ export default function WranglerHome() {
   const cardCount = 2;
   localStorage.setItem('newWranglerLaunched', 'True');
 
+  const [state, setstate] = useState(0);
+
+  const ongoingexp = (value) => {
+    setstate(value);
+  };
+
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
       <Box className={classes.subHeader}>
@@ -45,7 +51,7 @@ export default function WranglerHome() {
 
       <Box>
         <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title="Start data exploration" />
+          <WrangleHomeTitle title="Start data exploration" showUnderline={false} />
           <Box className={classes.viewMore}>
             <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}>
               View all
@@ -53,16 +59,30 @@ export default function WranglerHome() {
           </Box>
         </Box>
         <WrangleCard />
-        <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title="Continue ongoing data explorations, pick up where you left off" />
 
-          <Box className={classes.viewMore}>
-            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
-              View all
-            </Link>
+        {state == 0 ? (
+          <Box className={classes.headerTitle}>
+            <WrangleHomeTitle title="No ongoing data explorations" showUnderline={false} />
           </Box>
-        </Box>
-        <OngoingDataExploration cardCount={cardCount} fromAddress="home" />
+        ) : (
+          <Box className={classes.headerTitle}>
+            <WrangleHomeTitle
+              title="Continue ongoing data explorations, pick up where you left off"
+              showUnderline={true}
+            />
+            <Box className={classes.viewMore}>
+              <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
+                View all
+              </Link>
+            </Box>
+          </Box>
+        )}
+
+        <OngoingDataExploration
+          dataExploration={ongoingexp}
+          cardCount={cardCount}
+          fromAddress="home"
+        />
         {loading && (
           <Box className={classes.loadingContainer}>
             <LoadingSVG />

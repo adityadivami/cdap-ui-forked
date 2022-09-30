@@ -7,10 +7,15 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { Link } from 'react-router-dom';
 import LoadingSVG from 'components/shared/LoadingSVG';
+import { NoDataSVG } from './images';
 
 const WorkspaceList = () => {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
+  const [state, setstate] = useState(0);
+  const ongoingexp = (value) => {
+    setstate(value);
+  };
   return (
     <Box className={classes.wrapper}>
       <Box className={classes.header}>
@@ -25,12 +30,26 @@ const WorkspaceList = () => {
           <Typography className={classes.text}>Workspaces</Typography>
         </Breadcrumbs>
       </Box>
+
       <Box className={classes.explorationList}>
-        <OngoingDataExploration fromAddress="workspaceList" setLoading={setLoading} />
+        <OngoingDataExploration
+          dataExploration={ongoingexp}
+          fromAddress="workspaceList"
+          setLoading={setLoading}
+        />
       </Box>
       {loading && (
         <Box className={classes.loadingContainer}>
           <LoadingSVG />
+        </Box>
+      )}
+
+      {state == 0 && (
+        <Box className={classes.noRecordWrapper}>
+          <Box className={classes.innerWrapper}>
+            {NoDataSVG}
+            <Typography className={classes.mainHeaderMessage}>No Records to show</Typography>
+          </Box>
         </Box>
       )}
     </Box>
