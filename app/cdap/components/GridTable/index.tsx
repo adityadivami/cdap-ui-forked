@@ -636,7 +636,6 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
-      <Button onClick={() => setOpenDirective(true)}>Open</Button>
       {openDirective && (
         <DirectiveInputDrawer
           open={openDirective}
