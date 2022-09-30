@@ -780,7 +780,7 @@ export const MATH_OPTIONS = [
       },
       {
         label: 'Multiply',
-        value: 'MULTIPLE',
+        value: 'MULTIPLY',
         sign: 'x',
         inputRequired: true,
         component: Calculate,
