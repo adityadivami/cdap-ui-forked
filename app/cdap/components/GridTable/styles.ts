@@ -16,6 +16,10 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
+  wrapper: {
+    height: 'calc(100vh - 100px)',
+    overflow: 'scroll',
+  },
   loadingContainer: {
     display: 'flex',
     justifyContent: 'center',

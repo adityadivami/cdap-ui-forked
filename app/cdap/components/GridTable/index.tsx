@@ -484,7 +484,7 @@ export default function GridTable() {
   };
 
   return (
-    <Box>
+    <Box className={classes.wrapper}>
       <BreadCrumb datasetName={workspaceName} location={location} />
       <ToolBarList
         columnType={columnType}
