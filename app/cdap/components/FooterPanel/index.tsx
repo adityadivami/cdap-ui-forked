@@ -8,6 +8,7 @@ const Footer = ({
   showAddTransformationHandler,
   recipeStepsCount,
   setOpenDirective,
+  setOpenColumnViewHandler,
   dataCounts,
 }) => {
   const classes = useCss();
@@ -15,7 +16,9 @@ const Footer = ({
   return (
     <Box className={classes.containerProps}>
       <Box className={classes.cont}>
-        <Box className={classes.imgCont}>{ColumnIcon}</Box>
+        <Box className={classes.imgCont} onClick={() => setOpenColumnViewHandler()}>
+          {ColumnIcon}
+        </Box>
         <Box className={classes.dataWrapper}>
           <p className={classes.data}>
             {' '}

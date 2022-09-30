@@ -25,6 +25,7 @@ import {
 } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
+import ColumnView from 'components/ColumnView';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
@@ -65,7 +66,6 @@ export default function GridTable() {
   const classes = useStyles();
   const location = useLocation();
 
-  const [loading, setLoading] = useState(false);
   const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
@@ -99,6 +99,9 @@ export default function GridTable() {
     message: '',
   });
   const [maskSelection, setMaskSelection] = useState(false);
+  const [openTranformationPanel, setOpenTransformationPanel] = useState(false);
+  const [openColumnView, setOpenColumnView] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -110,6 +113,11 @@ export default function GridTable() {
   const [progress, setProgress] = useState([]);
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
   const [columnType, setColumnType] = useState('');
+
+  useEffect(() => {
+    const { dataprep } = DataPrepStore.getState();
+    setConnectorType(dataprep.connectorType);
+  }, []);
 
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
@@ -397,6 +405,7 @@ export default function GridTable() {
       const missingData = createMissingData(gridData?.summary.statistics);
       setMissingDataList(missingData);
       setDataQuality(gridData.summary.statistics);
+      setDataQuality(gridData.summary.statistics);
     }
     const rowData =
       rawData &&
@@ -472,6 +481,14 @@ export default function GridTable() {
     });
   };
 
+  const closeClickHandler = () => {
+    setOpenColumnView(false);
+  };
+
+  const setOpenColumnViewHandler = () => {
+    setOpenColumnView((prev) => !prev);
+  };
+
   return (
     <Box>
       {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
@@ -539,96 +556,108 @@ export default function GridTable() {
           }}
         />
       )}
-      {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
-        <Box className={classes.gridTableWrapper}>
-          <Table aria-label="simple table" className="test" data-testid="grid-table">
-            <TableHead>
-              <TableRow>
-                {headers.map((eachHeader) => (
-                  <GridHeaderCell
-                    label={eachHeader}
-                    type={types[eachHeader]}
-                    key={eachHeader}
-                    columnSelected={columnSelected}
-                    setColumnSelected={handleColumnSelect}
-                    onColumnSelection={(column) => onColumnSelection(column)}
-                  />
-                ))}
-              </TableRow>
-              <TableRow>
-                {headers.map((item, index) => (
-                  <TableCell className={classes.progressBarRoot}>
-                    <LinearProgress
-                      variant="determinate"
-                      value={progress.filter((each) => each.key === item)[0]?.value}
-                      key={index}
-                      classes={{
-                        root: classes.MUILinearRoot,
-                        barColorPrimary: classes.MUIBarColor,
-                      }}
-                      className={classes.linearProgressBarStyle}
+      <Box className={classes.columnViewContainer}>
+        {openColumnView && (
+          <Box className={classes.columnViewDrawer}>
+            <ColumnView
+              setLoading={setLoading}
+              columnData={headersNamesList}
+              dataQuality={dataQuality}
+              closeClickHandler={closeClickHandler}
+            />
+          </Box>
+        )}
+        {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+          <Box className={classes.gridTableWrapper}>
+            <Table aria-label="simple table" className="test" data-testid="grid-table">
+              <TableHead>
+                <TableRow>
+                  {headers.map((eachHeader) => (
+                    <GridHeaderCell
+                      label={eachHeader}
+                      type={types[eachHeader]}
+                      key={eachHeader}
+                      columnSelected={columnSelected}
+                      setColumnSelected={handleColumnSelect}
+                      onColumnSelection={(column) => onColumnSelection(column)}
                     />
-                  </TableCell>
-                ))}
-              </TableRow>
-              <TableRow>
-                {Array.isArray(missingDataList) &&
-                  Array.isArray(headers) &&
-                  headers.map((each, index) => {
-                    return missingDataList.map((item, itemIndex) => {
-                      if (item.name === each) {
-                        return <GridKPICell metricData={item} key={item.name} />;
-                      }
-                    });
-                  })}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map((eachRow, rowIndex) => {
-                return (
-                  <TableRow key={`row-${rowIndex}`}>
-                    {headers.map((eachKey, eachIndex) => {
-                      return (
-                        <GridTextCell
-                          cellValue={eachRow[eachKey] || '--'}
-                          key={`${eachKey}-${eachIndex}`}
-                          maskSelection={eachKey === columnSelected ? maskSelection : false}
-                          rowNumber={rowIndex}
-                          columnSelected={columnSelected}
-                          optionSelected={optionSelected}
-                          headers={headers}
-                          applyTransformation={(value) => {
-                            console.log('value', value);
-                            applyDirective(
-                              optionSelected,
-                              columnSelected,
-                              directiveFunctionSupportedDataType,
-                              value
-                            );
-                          }}
-                          cancelTransformation={() => {
-                            setColumnSelected('');
-                            setOptionSelected('');
-                            setMaskSelection(false);
-                          }}
-                        />
-                      );
+                  ))}
+                </TableRow>
+                <TableRow>
+                  {headers.map((item, index) => (
+                    <TableCell className={classes.progressBarRoot}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={progress.filter((each) => each.key === item)[0]?.value}
+                        key={index}
+                        classes={{
+                          root: classes.MUILinearRoot,
+                          barColorPrimary: classes.MUIBarColor,
+                        }}
+                        className={classes.linearProgressBarStyle}
+                      />
+                    </TableCell>
+                  ))}
+                </TableRow>
+                <TableRow>
+                  {Array.isArray(missingDataList) &&
+                    Array.isArray(headers) &&
+                    headers.map((each, index) => {
+                      return missingDataList.map((item, itemIndex) => {
+                        if (item.name === each) {
+                          return <GridKPICell metricData={item} key={item.name} />;
+                        }
+                      });
                     })}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Box>
-      ) : (
-        <NoDataScreen />
-      )}
-
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.map((eachRow, rowIndex) => {
+                  return (
+                    <TableRow key={`row-${rowIndex}`}>
+                      {headers.map((eachKey, eachIndex) => {
+                        return (
+                          <GridTextCell
+                            cellValue={eachRow[eachKey] || '--'}
+                            key={`${eachKey}-${eachIndex}`}
+                            maskSelection={eachKey === columnSelected ? maskSelection : false}
+                            rowNumber={rowIndex}
+                            columnSelected={columnSelected}
+                            optionSelected={optionSelected}
+                            headers={headers}
+                            applyTransformation={(value) => {
+                              console.log('value', value);
+                              applyDirective(
+                                optionSelected,
+                                columnSelected,
+                                directiveFunctionSupportedDataType,
+                                value
+                              );
+                            }}
+                            cancelTransformation={() => {
+                              setColumnSelected('');
+                              setOptionSelected('');
+                              setMaskSelection(false);
+                            }}
+                          />
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </Box>
+        ) : (
+          <NoDataScreen />
+        )}
+      </Box>
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
         recipeStepsCount={directives?.length}
         setOpenDirective={setOpenDirective}
+        setOpenColumnViewHandler={setOpenColumnViewHandler}
         dataCounts={dataCounts}
       />
       {toaster.open && (
