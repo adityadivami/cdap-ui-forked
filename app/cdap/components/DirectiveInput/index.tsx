@@ -45,17 +45,6 @@ const DirectiveDrawer = (props) => {
     setAutoCompleteOn(true);
   };
 
-  const handlePaste = (e) => {
-    let data = e.clipboardData.getData('Text');
-    data = data.split('\n').filter((row) => {
-      return row.trim().length > 0;
-    });
-
-    if (data.length > 1) {
-      e.preventDefault();
-    }
-  };
-
   const toggleAutoComplete = () => {
     setAutoCompleteOn(!autoCompleteOn);
   };
@@ -67,7 +56,10 @@ const DirectiveDrawer = (props) => {
         ? directivesList.filter((el) => el.usage.includes(inputSplit[0]))
         : [];
     const usageArraySplit = filterUsageItem.length > 0 ? filterUsageItem[0].usage.split(' ') : [];
-    if (usageArraySplit.length === inputSplit.length) {
+    if (
+      usageArraySplit.length === inputSplit.length ||
+      inputSplit.length > usageArraySplit.length
+    ) {
       return true;
     } else {
       return false;
@@ -136,7 +128,8 @@ const DirectiveDrawer = (props) => {
                     e.key === 'Enter' &&
                     isColumnSelected &&
                     onDirectiveSelection.isDirectiveSelected &&
-                    usageArraySplit.length === inputSplit.length
+                    (usageArraySplit.length === inputSplit.length ||
+                      inputSplit.length > usageArraySplit.length)
                   ) {
                     props.onDirectiveInputHandler([directiveInput]);
                   }
