@@ -35,8 +35,8 @@ const RecipeSteps = ({ setShowRecipePanel, showRecipePanel, deleteRecipes }) => 
     setShowRecipePanel(false);
   };
 
-  const handleDeleteRecipeSteps = (new_arr) => {
-    deleteRecipes(new_arr);
+  const handleDeleteRecipeSteps = (new_arr, remaining_arr) => {
+    deleteRecipes(new_arr, remaining_arr);
   };
 
   return (

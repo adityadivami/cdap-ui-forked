@@ -16,7 +16,10 @@ const RecipeStepsTableComponent = (props) => {
   const classes = useStyles();
 
   const handleDelete = (eachStep, i) => {
-    handleDeleteRecipeSteps(recipeSteps.filter((x, index) => index < i));
+    handleDeleteRecipeSteps(
+      recipeSteps.filter((x, index) => index < i),
+      recipeSteps.filter((x, index) => index >= i)
+    );
   };
 
   return (

@@ -15,11 +15,12 @@
  */
 
 import React from 'react';
-import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import { Box, Divider, Typography } from '@material-ui/core';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutline';
+import { Box, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { SUCCESS_LABEL, FAILURE_LABEL } from './constants';
+import CloseIcon from '@material-ui/icons/Close';
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 const TransitionComponent = (props) => {
   const classes = useStyles();
@@ -28,9 +29,9 @@ const TransitionComponent = (props) => {
       <Box className={classes.headFlex}>
         <Box className={classes.iconText}>
           {props.isSuccess ? (
-            <CheckCircleIcon fontSize="large" className={classes.successIcon} />
+            <CheckCircleOutlinedIcon className={classes.successIcon} />
           ) : (
-            <WarningRoundedIcon fontSize="large" className={classes.warningIcon} />
+            <ErrorOutlineIcon className={classes.warningIcon} />
           )}
           <Typography
             variant="body1"
@@ -39,13 +40,18 @@ const TransitionComponent = (props) => {
             {props.isSuccess ? <>{SUCCESS_LABEL}</> : <>{FAILURE_LABEL}</>}
           </Typography>
         </Box>
-        <Box>
+        <Box className={classes.operations}>
           <Typography variant="body1" className={classes.dismissSpan} onClick={() => props.close()}>
-            {props.actionType === 'add' ? 'Undo' : 'Dismiss'}
+            {props.actionType === 'add' ? (
+              'Undo'
+            ) : (
+              <Box>
+                <CloseIcon className={classes.cross} onClick={props.handleClose} />
+              </Box>
+            )}
           </Typography>
         </Box>
       </Box>
-      <Divider />
       <Typography variant="body1" className={classes.message}>
         {props?.messageToDisplay}
       </Typography>
