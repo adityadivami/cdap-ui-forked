@@ -19,13 +19,11 @@ import { useStyles } from './styles';
 import TransitionComponent from './Components/TransitionComponent';
 
 const PositionedSnackbar = ({
-  handleCloseError,
   handleDefaultCloseSnackbar,
   messageToDisplay,
   isSuccess,
   actionType,
 }: {
-  handleCloseError: () => void;
   handleDefaultCloseSnackbar?: () => void;
   messageToDisplay?: string;
   isSuccess?: boolean;
@@ -48,7 +46,7 @@ const PositionedSnackbar = ({
 
   const handleClose = () => {
     setIsOpen(false);
-    handleCloseError();
+    handleDefaultCloseSnackbar();
   };
 
   const properties = {

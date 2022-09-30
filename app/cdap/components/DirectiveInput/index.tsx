@@ -35,7 +35,6 @@ const DirectiveDrawer = (props) => {
   };
 
   const handleDirectiveChange = (event) => {
-    console.log('directiveInput', directiveInput, event.target);
     if (!event.target.value) {
       setOnDirectiveSelection({
         isDirectiveSelected: false,
@@ -49,13 +48,11 @@ const DirectiveDrawer = (props) => {
   const handlePaste = (e) => {
     let data = e.clipboardData.getData('Text');
     data = data.split('\n').filter((row) => {
-      // filter out empty rows
       return row.trim().length > 0;
     });
 
     if (data.length > 1) {
       e.preventDefault();
-      // this.execute(data);
     }
   };
 
@@ -126,7 +123,6 @@ const DirectiveDrawer = (props) => {
                 placeholder={'Input a directive'}
                 value={directiveInput}
                 onChange={handleDirectiveChange}
-                onPaste={handlePaste}
                 ref={directiveRef}
                 onKeyDown={(e) => {
                   const usageArraySplit =
@@ -145,10 +141,11 @@ const DirectiveDrawer = (props) => {
                     props.onDirectiveInputHandler([directiveInput]);
                   }
                 }}
-                //   disabled={this.props.disabled}
               />
             </Box>
-            <Box onClick={() => props.onClose()}>{CrossIcon}</Box>
+            <Box className={classes.crossIcon} onClick={() => props.onClose()}>
+              {CrossIcon}
+            </Box>
           </Box>
         </Box>
       </Drawer>
