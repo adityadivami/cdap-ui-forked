@@ -8,13 +8,16 @@ const Footer = ({
   showAddTransformationHandler,
   recipeStepsCount,
   setOpenDirective,
+  setOpenColumnViewHandler,
 }) => {
   const classes = useCss();
 
   return (
     <Box className={classes.containerProps}>
       <Box className={classes.cont}>
-        <Box className={classes.imgCont}>{ColumnIcon}</Box>
+        <Box className={classes.imgCont} onClick={() => setOpenColumnViewHandler()}>
+          {ColumnIcon}
+        </Box>
         <Box className={classes.dataWrapper}>
           <p className={classes.data}> Current data - 1000 rows and 30 columns</p>
         </Box>

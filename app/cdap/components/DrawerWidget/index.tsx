@@ -30,7 +30,17 @@ const DrawerWidget = (props) => {
                 alt="Back icon"
               />
             )}
-            <DrawerWidgetHeading headingText={headingText} />
+            <div className={classes.headerTextWithBackIconStyles}>
+              {showBackIcon && (
+                <img
+                  onClick={closeClickHandler}
+                  className={classes.headerBackIconStyles}
+                  src="/cdap_assets/img/back-icon.svg"
+                  alt="Back icon"
+                />
+              )}
+              <DrawerWidgetHeading headingText={headingText} />
+            </div>
           </div>
           <Box className={classes.headerRightStyles}>
             {headerActionTemplate && <div>{headerActionTemplate}</div>}

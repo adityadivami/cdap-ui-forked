@@ -18,40 +18,23 @@ import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
   return {
-    paper: {
-      top: '46px',
-      height: 'calc(100vh - 141px)',
-    },
     drawerContainerStyles: {
-      width: 500,
-      height: '100%',
-      paddingLeft: '30px',
+      width: 389,
+      borderTop: '1px solid #3994FF',
     },
     headerStyles: {
       height: '60px',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingLeft: 0,
-      paddingRight: 0,
     },
     headingStyles: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-start',
-      alignItems: 'flex-start',
     },
     pointerStyles: {
       cursor: 'pointer',
-    },
-    headingTextStyles: {
-      fontFamily: 'Noto Sans',
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 20,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#000000',
     },
     headerRightStyles: {
       display: 'flex',
@@ -60,18 +43,33 @@ export const useStyles = makeStyles(() => {
     dividerLineStyles: {
       width: 1,
       height: 28,
+      marginRight: '12px',
       backgroundColor: '#DADCE0',
-      margin: '0 15px',
     },
     headerTextWithBackIconStyles: {
       display: 'flex',
       alignItems: 'center',
+      paddingLeft: '30px',
     },
-    headerBackIconStyles: {
-      marginRight: '10px',
-      width: '10px',
-      height: '20px',
+    searchFormControl: {
+      position: 'relative',
+      display: 'flex',
+      marginRight: '16px',
+    },
+    searchInputAdornment: {
+      zIndex: 0,
       cursor: 'pointer',
+      position: 'absolute',
+      right: 0,
+    },
+    isFocused: {
+      border: 'none',
+      borderBottom: '1px solid grey',
+      outline: 'none',
+    },
+    isBlurred: {
+      border: 'none',
+      borderBottom: '1px solid transparent',
     },
   };
 });

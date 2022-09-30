@@ -18,32 +18,12 @@ import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
   return {
-    paper: {
-      top: '46px',
-      height: 'calc(100vh - 141px)',
-    },
-    drawerContainerStyles: {
-      width: 500,
-      height: '100%',
-      paddingLeft: '30px',
-    },
-    headerStyles: {
-      height: '60px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
     headingStyles: {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-start',
-      alignItems: 'flex-start',
     },
-    pointerStyles: {
-      cursor: 'pointer',
-    },
+
     headingTextStyles: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
@@ -52,26 +32,6 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#000000',
-    },
-    headerRightStyles: {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    dividerLineStyles: {
-      width: 1,
-      height: 28,
-      backgroundColor: '#DADCE0',
-      margin: '0 15px',
-    },
-    headerTextWithBackIconStyles: {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    headerBackIconStyles: {
-      marginRight: '10px',
-      width: '10px',
-      height: '20px',
-      cursor: 'pointer',
     },
   };
 });
