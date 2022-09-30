@@ -16,7 +16,8 @@
 
 import {
   LinearProgress,
-  Button, Table,
+  Button,
+  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -239,14 +240,16 @@ export default function GridTable() {
       setMaskSelection(true);
       setLoading(false);
     } else if (
-      (option === 'custom-selection' || optionSelected === 'custom-selection'      ||   option === 'using-positions' ||
-      optionSelected === 'using-positions') &&
+      (option === 'custom-selection' ||
+        optionSelected === 'custom-selection' ||
+        option === 'using-positions' ||
+        optionSelected === 'using-positions') &&
       Boolean(columnSelected) &&
       value_1
     ) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-      applyDirectiveAPICall(newDirective, 'add');
-    }else{
+      applyDirectiveAPICall(newDirective, 'add', [], '');
+    } else {
       if (OPTION_WITH_NO_INPUT.includes(option)) {
         const newDirective = getDirective(option, columnSelected);
         if (!columnSelected) {
@@ -254,7 +257,7 @@ export default function GridTable() {
           setLoading(false);
           return;
         } else {
-          applyDirectiveAPICall(newDirective, 'add');
+          applyDirectiveAPICall(newDirective, 'add', [], '');
           setIsFirstWrangle(false);
         }
       } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
@@ -264,20 +267,20 @@ export default function GridTable() {
           setLoading(false);
           return;
         } else {
-          applyDirectiveAPICall(newDirective, 'add');
+          applyDirectiveAPICall(newDirective, 'add', [], '');
         }
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective, action) => {
+  const applyDirectiveAPICall = (newDirective, action, removed_arr, from) => {
     setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
     const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
-
+    const arr = JSON.parse(JSON.stringify(newDirective));
     requestBody.insights = insights;
 
     const workspaceInfo = {
@@ -315,8 +318,12 @@ export default function GridTable() {
           open: true,
           message:
             action === 'add'
-              ? `${newDirective} successfully added`
-              : `${newDirective} successfully deleted`,
+              ? `Transformation ${arr} successfully added`
+              : from === 'undo' || arr?.length === 0
+              ? 'Transformation successfully deleted'
+              : `${removed_arr?.length} transformation successfully deleted from ${
+                  arr[arr.length - 1]
+                }`,
           isSuccess: true,
         });
         if (action === 'add') {
@@ -436,8 +443,8 @@ export default function GridTable() {
     setColumnType(types[columnName]);
   };
 
-  const deleteRecipes = (new_arr) => {
-    applyDirectiveAPICall(new_arr, 'delete');
+  const deleteRecipes = (new_arr, remaining_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
   };
 
   // Redux store
@@ -451,7 +458,7 @@ export default function GridTable() {
         message: '',
         isSuccess: false,
       });
-      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete');
+      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete', [], 'undo');
     }
   };
 
@@ -587,8 +594,12 @@ export default function GridTable() {
                           optionSelected={optionSelected}
                           headers={headers}
                           applyTransformation={(value) => {
-                            console.log('value', value)
-                            applyDirective(optionSelected, columnSelected, directiveFunctionSupportedDataType, value);
+                            applyDirective(
+                              optionSelected,
+                              columnSelected,
+                              directiveFunctionSupportedDataType,
+                              value
+                            );
                           }}
                           cancelTransformation={() => {
                             setColumnSelected('');
