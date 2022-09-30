@@ -220,18 +220,24 @@ export default function ConnectionList() {
 
   const searchHandler = (index: number) => {
     setDataForTabs((prev) => {
-      const tempData = [...prev];
+      let tempData = [...prev];
+      tempData = tempData.map((each) => {
+        return {
+          ...each,
+          isSearching: false,
+        };
+      });
       tempData[index].isSearching = true;
       return tempData;
     });
     refs.current[index].focus();
-    refs.current[index].addEventListener('blur', () => {
+    /*  refs.current[index].addEventListener('blur', () => {
       setDataForTabs((prev) => {
         const tempData = [...prev];
         tempData[index].isSearching = false;
         return tempData;
       });
-    });
+    }); */
   };
 
   const handleSearch = (e: any, index: number) => {
@@ -244,22 +250,26 @@ export default function ConnectionList() {
   };
 
   const handleClearSearch = (e: any, index: number) => {
-    refs.current[index].value = '';
-    const newData = cloneDeep(dataForTabs);
-    const newDataToSearch = [...newData[index].data];
-    const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
-    newData[index].data = [...tempData];
-    setDataForTabs((prev) => {
-      const tempData = [...prev];
-      tempData[index].isSearching = false;
-      return tempData;
-    });
-    setFilteredData(cloneDeep(newData));
+    if (refs.current[index].value == '') {
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = false;
+        return tempData;
+      });
+    } else {
+      refs.current[index].value = '';
+      const newData = cloneDeep(dataForTabs);
+      const newDataToSearch = [...newData[index].data];
+      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
+      newData[index].data = [...tempData];
+      setFilteredData(cloneDeep(newData));
+    }
   };
 
   const makeCursorFocused = (index: number) => {
     refs.current[index].focus();
   };
+
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader setOpenImportDataPanel={setOpenImportDataPanel} />
@@ -329,13 +339,13 @@ export default function ConnectionList() {
                       ref={(e) => {
                         refs.current[index] = e;
                       }}
-                      onBlur={() =>
+                      /* onBlur={() =>
                         setDataForTabs((prev) => {
                           const tempData = [...prev];
                           tempData[index].isSearching = false;
                           return tempData;
                         })
-                      }
+                      } */
                     />
                     <Box
                       className={classes.closeIcon}
