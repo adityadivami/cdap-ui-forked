@@ -18,6 +18,7 @@ import SendToError from './SendToError';
 import SetCounter from './SetCounterAction';
 import FillNullOrEmpty from './FillNullOrEmpty';
 import JoinColumn from './JoinColumns';
+import RenameColumn from './RenameColumn';
 
 export const DIRECTIVE_COMPONENTS = [
   {
@@ -111,6 +112,14 @@ export const DIRECTIVE_COMPONENTS = [
   {
     type: 'fillNullOrEmpty',
     component: FillNullOrEmpty,
+  },
+  {
+    type: 'replace-null-missing',
+    component: FillNullOrEmpty,
+  },
+  {
+    type: 'rename-column',
+    component: RenameColumn,
   },
   {
     type: 'join-columns',

@@ -54,4 +54,7 @@ export const useStyles = makeStyles({
   divider: {
     backgroundColor: '#ffffff',
   },
+  crossIcon: {
+    cursor: 'pointer',
+  },
 });

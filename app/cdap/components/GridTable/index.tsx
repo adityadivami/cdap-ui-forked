@@ -94,10 +94,6 @@ export default function GridTable() {
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [openDirective, setOpenDirective] = useState(false);
-  const [toast, setToast] = useState({
-    open: false,
-    message: '',
-  });
   const [maskSelection, setMaskSelection] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
@@ -130,7 +126,6 @@ export default function GridTable() {
     workspaceId: string,
     selectedDirective?: string[] | undefined
   ) => {
-    console.log('selectedDirective', selectedDirective);
     let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -155,7 +150,6 @@ export default function GridTable() {
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
-          console.log('directives con', directives);
           const insights = {
             name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
@@ -194,6 +188,13 @@ export default function GridTable() {
           setGridData(response);
           setDirectiveFunction('');
           setColumnSelected('');
+          if (selectedDirective) {
+            setToaster({
+              open: true,
+              message: `${selectedDirective} added successfully`,
+              isSuccess: true,
+            });
+          }
         },
         (err) => {
           setToaster({
@@ -419,7 +420,9 @@ export default function GridTable() {
       characterCount: getCharacterCountOfCell,
       dataQuality: {
         missingNullValueCount: Number(getMissingValueCount),
-        missingNullValuePercentage: (Number(getMissingValueCount) / rowsDataList.length) * 100,
+        missingNullValuePercentage: Number(
+          ((Number(Number(getMissingValueCount).toFixed(0)) / rowsDataList.length) * 100).toFixed(0)
+        ),
         invalidValueCount: 0,
         invalidValuePercentage: 0,
       },
@@ -430,7 +433,6 @@ export default function GridTable() {
   };
 
   useEffect(() => {
-    console.log('triggered', gridData);
     getGridTableData();
   }, [gridData]);
 
@@ -590,7 +592,6 @@ export default function GridTable() {
                           optionSelected={optionSelected}
                           headers={headers}
                           applyTransformation={(value) => {
-                            console.log('value', value);
                             applyDirective(
                               optionSelected,
                               columnSelected,
@@ -620,11 +621,11 @@ export default function GridTable() {
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
         recipeStepsCount={directives?.length}
+        setOpenDirective={setOpenDirective}
       />
       {toaster.open && (
         <PositionedSnackbar
           handleDefaultCloseSnackbar={handleDefaultCloseSnackbar}
-          handleCloseError={handleCloseSnackbar}
           messageToDisplay={toaster.message}
           isSuccess={toaster.isSuccess}
           actionType={toastAction}
@@ -635,7 +636,6 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
-      <Button onClick={() => setOpenDirective(true)}>Open</Button>
       {openDirective && (
         <DirectiveInputDrawer
           open={openDirective}
@@ -646,18 +646,9 @@ export default function GridTable() {
               workspaceId: params.wid,
             };
             getWorkSpaceData(payload, wid, directives);
+            setOpenDirective(false);
           }}
           onClose={() => setOpenDirective(false)}
-        />
-      )}
-      {toast.open && (
-        <PositionedSnackbar
-          handleCloseError={() =>
-            setToast({
-              open: false,
-              message: '',
-            })
-          }
         />
       )}
     </Box>
