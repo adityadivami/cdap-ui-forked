@@ -48,4 +48,10 @@ export const useStyles = makeStyles({
     height: 'calc(100vh - 240px)',
     overflowY: 'auto',
   },
+  columnViewDrawer: {
+    height: '100%',
+  },
+  columnViewContainer: {
+    display: 'flex',
+  },
 });

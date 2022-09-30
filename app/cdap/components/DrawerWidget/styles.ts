@@ -23,7 +23,7 @@ export const useStyles = makeStyles(() => {
       height: 'calc(100vh - 141px)',
     },
     drawerContainerStyles: {
-      width: 460,
+      width: 500,
       height: '100%',
       paddingLeft: '30px',
     },
@@ -38,6 +38,7 @@ export const useStyles = makeStyles(() => {
     headingStyles: {
       display: 'flex',
       flexDirection: 'column',
+      alignItems: 'flex-start',
       alignItems: 'flex-start',
     },
     pointerStyles: {
