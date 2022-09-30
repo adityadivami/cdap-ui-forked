@@ -39,4 +39,8 @@ export const useStyles = makeStyles({
     outline: 'none',
     width: '250px',
   },
+  closeBreadCrumb: {
+    transform: 'rotate(180deg)',
+  },
+  openedBreadcrumb: {},
 });

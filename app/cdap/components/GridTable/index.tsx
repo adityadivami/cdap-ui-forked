@@ -119,6 +119,11 @@ export default function GridTable() {
     isSuccess: false,
   });
   const [toastAction, setToastAction] = useState('');
+  const [dataCounts, setDataCounts] = useState({
+    rowCount: 0,
+    columnCount: 0,
+  });
+  const [showBreadCrumb, setShowBreadCrumb] = useState(true);
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -130,7 +135,6 @@ export default function GridTable() {
     workspaceId: string,
     selectedDirective?: string[] | undefined
   ) => {
-    console.log('selectedDirective', selectedDirective);
     let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -155,7 +159,6 @@ export default function GridTable() {
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
-          console.log('directives con', directives);
           const insights = {
             name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
@@ -194,6 +197,10 @@ export default function GridTable() {
           setGridData(response);
           setDirectiveFunction('');
           setColumnSelected('');
+          setDataCounts({
+            rowCount: response.values.length,
+            columnCount: response.headers.length,
+          });
         },
         (err) => {
           setToaster({
@@ -430,7 +437,6 @@ export default function GridTable() {
   };
 
   useEffect(() => {
-    console.log('triggered', gridData);
     getGridTableData();
   }, [gridData]);
 
@@ -468,10 +474,12 @@ export default function GridTable() {
 
   return (
     <Box>
-      <BreadCrumb datasetName={workspaceName} location={location} />
+      {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
       <ToolBarList
         columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+        setShowBreadCrumb={setShowBreadCrumb}
+        showBreadCrumb={showBreadCrumb}
       />
       {insightDrawer.open && (
         <ColumnInsightDrawer
@@ -621,6 +629,7 @@ export default function GridTable() {
         showAddTransformationHandler={showAddTransformationHandler}
         recipeStepsCount={directives?.length}
         setOpenDirective={setOpenDirective}
+        dataCounts={dataCounts}
       />
       {toaster.open && (
         <PositionedSnackbar
@@ -636,7 +645,6 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
-      <Button onClick={() => setOpenDirective(true)}>Open</Button>
       {openDirective && (
         <DirectiveInputDrawer
           open={openDirective}
@@ -649,16 +657,6 @@ export default function GridTable() {
             getWorkSpaceData(payload, wid, directives);
           }}
           onClose={() => setOpenDirective(false)}
-        />
-      )}
-      {toast.open && (
-        <PositionedSnackbar
-          handleCloseError={() =>
-            setToast({
-              open: false,
-              message: '',
-            })
-          }
         />
       )}
     </Box>
