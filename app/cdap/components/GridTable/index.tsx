@@ -40,13 +40,7 @@ import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
-import {
-  IDataOfStatistics,
-  IExecuteAPIResponse,
-  IHeaderNamesList,
-  IParams,
-  IRecords,
-} from './types';
+import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
@@ -56,7 +50,7 @@ import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
 
-export default function GridTable() {
+export default function() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
@@ -214,6 +208,7 @@ export default function GridTable() {
   };
 
   const applyDirectiveAPICall = (newDirective, action) => {
+    setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
@@ -252,6 +247,7 @@ export default function GridTable() {
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
+        setShowRecipePanel(false);
         setToaster({
           open: true,
           message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
@@ -265,6 +261,7 @@ export default function GridTable() {
           isSuccess: false,
         });
         setLoading(false);
+        setShowRecipePanel(false);
       }
     );
   };
@@ -274,7 +271,7 @@ export default function GridTable() {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload, wid);
+    getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -290,7 +287,7 @@ export default function GridTable() {
     }
   };
 
-  const createMissingData = (statistics: IDataOfStatistics) => {
+  const createMissingData = (statistics: IObject) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
@@ -298,7 +295,7 @@ export default function GridTable() {
       const typeArrayOfMissingValue = [];
       headerKeyTypeArray.forEach(([vKey, vValue]) => {
         typeArrayOfMissingValue.push({
-          label: vKey == 'general' ? 'Missing/Null' : vKey == 'types' ? '' : '',
+          label: vKey == 'general' ? 'Missing/Null' : '',
           count: vKey == 'types' ? '' : convertNonNullPercent(gridData, vValue),
         });
       }),
@@ -397,8 +394,8 @@ export default function GridTable() {
           }}
         />
       )}
-      <Box className={classes.tableContainer}>
-        {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+      {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+        <Box className={classes.gridTableWrapper}>
           <Table aria-label="simple table" className="test" data-testid="grid-table">
             <TableHead>
               <TableRow>
@@ -457,10 +454,11 @@ export default function GridTable() {
               })}
             </TableBody>
           </Table>
-        ) : (
-          <NoDataScreen />
-        )}
-      </Box>
+        </Box>
+      ) : (
+        <NoDataScreen />
+      )}
+
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
