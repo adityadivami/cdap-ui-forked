@@ -14,9 +14,11 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string;
-  columnSelected: string;
-  setColumnSelected: (value: string) => void;
+import { MenuProps } from '@material-ui/core';
+
+export interface IMenuComponentProps {
+  anchorEl;
+  menuOptions;
+  setAnchorEl;
+  submitOption: (e: any, item: any) => void;
 }

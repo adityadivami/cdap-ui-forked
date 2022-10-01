@@ -14,9 +14,7 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string;
-  columnSelected: string;
-  setColumnSelected: (value: string) => void;
+export interface INestedMenuProps {
+  icon: any;
+  submitMenuOption: (value: any) => void;
 }

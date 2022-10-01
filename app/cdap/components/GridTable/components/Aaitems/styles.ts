@@ -13,10 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { makeStyles } from '@material-ui/core';
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string;
-  columnSelected: string;
-  setColumnSelected: (value: string) => void;
-}
+export const useStyles = makeStyles({
+  listitem: {
+    marginRight: '30px',
+    height: '20px',
+  },
+});

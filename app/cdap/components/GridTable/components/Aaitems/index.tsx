@@ -13,10 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { IconButton } from '@material-ui/core';
+import * as React from 'react';
+import { useStyles } from './styles';
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string;
-  columnSelected: string;
-  setColumnSelected: (value: string) => void;
-}
+const Aaitems = (props) => {
+  const classes = useStyles();
+
+  const { details } = props;
+  const { id, imgUrl } = details;
+  return <IconButton className={classes.listitem}>{imgUrl}</IconButton>;
+};
+export default Aaitems;
