@@ -23,7 +23,7 @@ import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { IRecords } from 'components/GridTable/types';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import ErrorSnackbar from 'components/SnackbarComponent';
-import * as React from 'react';
+import React from 'react';
 import { createRef, useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './Components/ConnectionTabs';
@@ -34,8 +34,7 @@ import { useStyles } from './styles';
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
   display: 'flex',
-  borderTop: '1px solid',
-  borderColor: grey[300],
+  borderTop: `1px solid ${grey[300]}`,
 
   height: '100%',
   '& > :first-child': {
@@ -160,7 +159,7 @@ export default function ConnectionList() {
         };
       });
       if (index === 0) {
-        getCategorizedConnectionsforSelectedTab(entity.name, index);
+        getCategorizedConnectionsforSelectedTab(entity.name as string, index);
       } else if (index === 1) {
         fetchEntities(entity.name).then((res) => {
           setDataForTabsHelper(res, index);
@@ -168,7 +167,7 @@ export default function ConnectionList() {
         });
       } else {
         if (entity.canBrowse) {
-          fetchEntities(dataForTabs[1].selectedTab, entity.path).then((res) => {
+          fetchEntities(dataForTabs[1].selectedTab, entity.path as string).then((res) => {
             setDataForTabsHelper(res, index);
             toggleLoader(false);
           });
@@ -188,7 +187,7 @@ export default function ConnectionList() {
       temp[0].selectedTab = connectorType;
       return temp;
     });
-    getCategorizedConnectionsforSelectedTab(connectorType, 0);
+    getCategorizedConnectionsforSelectedTab(connectorType as string, 0);
   }, [connectorType]);
 
   const headerForLevelZero = () => {
