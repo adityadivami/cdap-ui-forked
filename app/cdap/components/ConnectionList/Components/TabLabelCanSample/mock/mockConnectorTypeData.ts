@@ -14,7 +14,10 @@
  * the License.
  */
 
-import Snackbar, { SnackbarOrigin } from '@material-ui/core/Snackbar';
-export interface State extends SnackbarOrigin {
-  open: boolean;
-}
+export const mockConnectorTypeData = {
+  name: 'File',
+  type: 'connector',
+  category: 'File',
+  description: 'Connection to browse and sample data from the local file system.',
+  className: 'io.cdap.plugin.batch.connector.FileConnector',
+};

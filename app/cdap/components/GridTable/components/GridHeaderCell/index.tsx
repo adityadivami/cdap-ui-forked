@@ -14,48 +14,51 @@
  * the License.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Card, styled, TableCell, Typography } from '@material-ui/core';
-import { TypographyComponent } from '../Typography';
+import TypographyComponent from '../Typography';
 import { useGridHeaderCellStyles } from './styles';
 import { IGridHeaderCellProps } from './types';
+import { headerSelectedIcon } from './icons';
 
 const StringIndicatorBox = styled(Box)({
   display: 'flex',
 });
 
-export const GridHeaderCell: React.FC<IGridHeaderCellProps> = ({
+export default function GridHeaderCell({
   label,
-  types,
+  type,
+  columnSelected,
+  setColumnSelected,
   onColumnSelection,
-}) => {
+}: IGridHeaderCellProps) {
   const classes = useGridHeaderCellStyles();
-
-  const [data, setData] = React.useState<Record<string, string>>({
-    datatype1: types.length > 0 ? types[0] : null,
-    datatype2: types.length > 1 ? types[1] : null,
-  });
+  const isColumnHighlited = label === columnSelected;
 
   return (
-    <TableCell className={classes.tableHeaderCell} onClick={() => onColumnSelection(label)}>
-      <Card className={classes.root} variant="outlined">
-        <Typography className={classes.columnHeader}>{label}</Typography>
+    <TableCell
+      className={classes.tableHeaderCell}
+      onClick={() => setColumnSelected(label)}
+      onDoubleClick={() => onColumnSelection(label)}
+    >
+      <div
+        className={classes.headerHighlitedIcon}
+        style={isColumnHighlited ? { display: 'inline' } : { display: 'none' }}
+      >
+        {headerSelectedIcon}
+      </div>
+      <Card
+        className={classes.root}
+        style={isColumnHighlited ? { background: '#FFFFFF' } : { background: '#F1F8FF' }}
+        variant="outlined"
+      >
+        <Typography className={classes.columnHeader} data-testid={`grid-header-cell-${label}`}>
+          {label}
+        </Typography>
         <StringIndicatorBox>
-          <TypographyComponent
-            className={classes.dataTypeIndicator}
-            label={data?.datatype1 || 'Unknown'}
-          />
-          {data.datatype2 && (
-            <StringIndicatorBox>
-              <TypographyComponent className={classes.subDataTypeIndicator} label={'|'} />
-              <TypographyComponent
-                className={classes.subDataTypeIndicator}
-                label={data?.datatype2}
-              />
-            </StringIndicatorBox>
-          )}
+          <TypographyComponent className={classes.dataTypeIndicator} label={type || 'Unknown'} />
         </StringIndicatorBox>
       </Card>
     </TableCell>
   );
-};
+}
