@@ -176,7 +176,7 @@ export default function ConnectionList() {
         };
       });
       if (index === 0) {
-        getCategorizedConnectionsforSelectedTab(entity.name, index);
+        getCategorizedConnectionsforSelectedTab(entity.name as string, index);
       } else if (index === 1) {
         fetchEntities(entity.name).then((res) => {
           setDataForTabsHelper(res, index);
@@ -184,7 +184,7 @@ export default function ConnectionList() {
         });
       } else {
         if (entity.canBrowse) {
-          fetchEntities(dataForTabs[1].selectedTab, entity.path).then((res) => {
+          fetchEntities(dataForTabs[1].selectedTab, entity.path as string).then((res) => {
             setDataForTabsHelper(res, index);
             toggleLoader(false);
           });
@@ -204,7 +204,7 @@ export default function ConnectionList() {
       temp[0].selectedTab = connectorType;
       return temp;
     });
-    getCategorizedConnectionsforSelectedTab(connectorType, 0);
+    getCategorizedConnectionsforSelectedTab(connectorType as string, 0);
   }, [connectorType]);
 
   const headerForLevelZero = () => {
@@ -248,6 +248,11 @@ export default function ConnectionList() {
     const newDataToSearch = [...newData[index].data];
     const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
     newData[index].data = [...tempData];
+    setDataForTabs((prev) => {
+      const tempData = [...prev];
+      tempData[index].isSearching = false;
+      return tempData;
+    });
     setFilteredData(cloneDeep(newData));
   };
 
@@ -301,6 +306,13 @@ export default function ConnectionList() {
                       ref={(e) => {
                         refs.current[index] = e;
                       }}
+                      onBlur={() =>
+                        setDataForTabs((prev) => {
+                          const tempData = [...prev];
+                          tempData[index].isSearching = false;
+                          return tempData;
+                        })
+                      }
                     />
                     <Box
                       className={classes.closeIcon}
