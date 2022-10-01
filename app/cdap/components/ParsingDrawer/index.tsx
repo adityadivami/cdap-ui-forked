@@ -1,23 +1,35 @@
-import React, { useEffect, useState, useReducer, useContext } from 'react';
+import React, { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import { Button } from '@material-ui/core';
-import { useStyles } from './styles';
-import { APPLY_BUTTON, IMPORT_SCHEMA, PARSING, PARSING_INFO_TEXT } from './constants';
-import ParsingPopupBody from './Components/ParsingPopupBody';
-import DrawerWidget from 'components/DrawerWidget';
-import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
-import DataPrepStore from 'components/DataPrep/store';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
-import MyDataPrepApi from 'api/dataprep';
-import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
-import { objectQuery } from 'services/helpers';
-import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
-import Snackbar from 'components/SnackbarComponent/index';
+import DataPrepStore from 'components/DataPrep/store';
+import DrawerWidget from 'components/DrawerWidget';
+import PositionedSnackbar from 'components/SnackbarComponent/index';
+import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
+import ParsingPopupBody from './Components/ParsingPopupBody';
+import { APPLY_BUTTON, PARSING, PARSING_INFO_TEXT } from './constants';
+import { useStyles } from './styles';
 
-const ParsingDrawer = (props) => {
+export default function(props) {
   const { setLoading } = props;
+
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [formatValue, setFormatValue] = useState();
   const [encodingValue, setEncodingValue] = useState();
@@ -25,7 +37,6 @@ const ParsingDrawer = (props) => {
   const [headerValueChecked, setHeaderValueChecked] = useState(false);
   const [schemaValue, setSchemaValue] = useState(null);
   const { dataprep } = DataPrepStore.getState();
-  console.log('dataprep', dataprep);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
   const [errorOnTranformation, setErrorOnTransformation] = useState({
     open: false,
@@ -51,14 +62,14 @@ const ParsingDrawer = (props) => {
   useEffect(() => {
     setConnectionPayload({
       path: dataprep.insights.path,
-      connection: dataprep.connectorType,
+      connection: dataprep.insights.name,
       sampleRequest: {
         properties: {
           format: formatValue,
           fileEncoding: encodingValue,
           skipHeader: headerValueChecked,
           enableQuotedValues: quotedValuesChecked,
-          schema: JSON.stringify(schemaValue),
+          schema: schemaValue !== null ? JSON.stringify(schemaValue) : null,
           _pluginName: null,
         },
         limit: 1000,
@@ -71,21 +82,21 @@ const ParsingDrawer = (props) => {
     setDrawerStatus(false);
   };
 
-  const handleFormatChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFormatChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as any;
     setFormatValue(value);
   };
 
-  const handleEncodingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleEncodingChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as any;
     setEncodingValue(value);
   };
 
-  const handleQuoteValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleQuoteValueChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuotedValuesChecked(event.target.checked);
   };
 
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     setHeaderValueChecked(event.target.checked);
   };
 
@@ -129,6 +140,10 @@ const ParsingDrawer = (props) => {
     }
   };
 
+  const handleClose = () => {
+    setErrorOnTransformation({ open: false, message: '' });
+  };
+
   const componentToRender = (
     <DrawerWidget
       headingText={PARSING}
@@ -164,23 +179,20 @@ const ParsingDrawer = (props) => {
             color="primary"
             classes={{ containedPrimary: classes.buttonStyles }}
             className={classes.applyButtonStyles}
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => handleApply(e)}
           >
             {APPLY_BUTTON}
           </Button>
         </Box>
       </Box>
       {errorOnTranformation.open && (
-        <Snackbar
-          handleCloseError={() => {
-            setErrorOnTransformation({ open: false, message: '' });
-          }}
+        <PositionedSnackbar
+          handleCloseError={handleClose}
+          messageToDisplay={errorOnTranformation.message}
         />
       )}
     </DrawerWidget>
   );
 
   return drawerStatus && componentToRender;
-};
-
-export default ParsingDrawer;
+}
