@@ -23,18 +23,39 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationCard from '../OngoingDataExplorationCard';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { IResponseData } from './types';
+import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
+import { orderBy, find } from 'lodash';
 
-const OngoingDataExploration = (props) => {
-  const [ongoingExpDatas, setOngoingExpDatas] = useState<any>([]);
+interface ICardCount {
+  cardCount?: number;
+  fromAddress: string;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
+  const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
-
   const getOngoingData = () => {
+    // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
+    //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     })
       .pipe(
-        switchMap((res: any) => {
-          const workspaces = res.values.map((item) => {
+        switchMap((res: Record<string, unknown[]>) => {
+          let values = [];
+          if (cardCount) {
+            values = res.values.slice(0, cardCount);
+          } else {
+            values = res.values;
+          }
+          values = orderBy(
+            values,
+            [(workspace) => (workspace.workspaceName || '').toLowerCase()],
+            ['asc']
+          );
+          console.log('values', values);
+          const workspaces = values.map((item) => {
             const params = {
               context: 'default',
               workspaceId: item.workspaceId,
@@ -43,7 +64,7 @@ const OngoingDataExploration = (props) => {
               directives: item.directives,
               limit: 1000,
               insights: {
-                name: item.name,
+                name: item?.sampleSpec?.connectionName,
                 workspaceName: item.workspaceName,
                 path: item?.sampleSpec?.path,
                 visualization: {},
@@ -60,6 +81,8 @@ const OngoingDataExploration = (props) => {
                 workspaceName: item.workspaceName,
                 recipeSteps: item.directives.length,
                 dataQuality: null,
+                workspaceId: item.workspaceId,
+                count: null,
               },
             ]);
             return MyDataPrepApi.execute(params, requestBody);
@@ -67,13 +90,14 @@ const OngoingDataExploration = (props) => {
           return forkJoin(workspaces);
         })
       )
-      .subscribe((response) => {
-        response.forEach((workspace, index) => {
+      .subscribe((responses) => {
+        responses.forEach((workspace, index) => {
           let dataQuality = 0;
           workspace.headers.forEach((element) => {
             const general = workspace.summary.statistics[element].general;
             const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
             const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+
             dataQuality = dataQuality + nonNull;
           });
           const totalDataQuality = dataQuality / workspace.headers.length;
@@ -82,6 +106,7 @@ const OngoingDataExploration = (props) => {
             {
               ...current[index],
               dataQuality: totalDataQuality,
+              count: workspace.count,
             },
             ...current.slice(index + 1),
           ]);
@@ -98,15 +123,20 @@ const OngoingDataExploration = (props) => {
     setFinalArray(final);
   }, [ongoingExpDatas]);
 
+  const filteredData = finalArray.filter((eachWorkspace) => eachWorkspace[5].count !== 0);
+
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {finalArray.map((item, index) => {
+      {filteredData.map((item, index) => {
         return (
           <Link
-            to={`/ns/${getCurrentNamespace()}/wrangler-grid/:${`${'testDataset'}`}`}
+            to={{
+              pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
+              state: { from: fromAddress, path: HOME_URL_PARAM },
+            }}
             style={{ textDecoration: 'none' }}
           >
-            {index <= 1 && <OngoingDataExplorationCard item={item} />}
+            <OngoingDataExplorationCard item={item} key={index} fromAddress={fromAddress} />
           </Link>
         );
       })}
