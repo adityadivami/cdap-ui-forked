@@ -36,10 +36,7 @@ export default function GridHeaderCell({
   const isColumnHighlited = label === columnSelected;
 
   return (
-    <TableCell
-      className={classes.tableHeaderCell}
-      onClick={() => setColumnSelected(label)}
-    >
+    <TableCell className={classes.tableHeaderCell} onClick={() => setColumnSelected(label)}>
       <div
         className={classes.headerHighlitedIcon}
         style={isColumnHighlited ? { display: 'inline' } : { display: 'none' }}
@@ -48,19 +45,12 @@ export default function GridHeaderCell({
       </div>
       <Card
         className={classes.root}
-        style={
-          isColumnHighlited
-            ? { background: '#FFFFFF' }
-            : { background: '#F1F8FF' }
-        }
+        style={isColumnHighlited ? { background: '#FFFFFF' } : { background: '#F1F8FF' }}
         variant="outlined"
       >
         <Typography className={classes.columnHeader}>{label}</Typography>
         <StringIndicatorBox>
-          <TypographyComponent
-            className={classes.dataTypeIndicator}
-            label={type || 'Unknown'}
-          />
+          <TypographyComponent className={classes.dataTypeIndicator} label={type || 'Unknown'} />
         </StringIndicatorBox>
       </Card>
     </TableCell>

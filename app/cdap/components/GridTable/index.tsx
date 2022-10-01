@@ -33,13 +33,7 @@ import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
-import {
-  IExecuteAPIResponse,
-  IHeaderNamesList,
-  IObject,
-  IParams,
-  IRecords,
-} from './types';
+import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
@@ -56,9 +50,7 @@ export default function() {
 
   const [loading, setLoading] = useState(false);
   const [workspaceName, setWorkspaceName] = useState('');
-  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>(
-    []
-  );
+  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
@@ -100,8 +92,7 @@ export default function() {
           const directives = objectQuery(res, 'directives') || [];
           const requestBody = directiveRequestBodyCreator(directives);
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
-          const visualization =
-            objectQuery(res, 'insights', 'visualization') || {};
+          const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
           const insights = {
             name: res?.sampleSpec?.connectionName,
@@ -159,10 +150,7 @@ export default function() {
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
-  const createHeadersData = (
-    columnNamesList: string[],
-    columnTypesList: IRecords
-  ) => {
+  const createHeadersData = (columnNamesList: string[], columnTypesList: IRecords) => {
     if (Array.isArray(columnNamesList)) {
       return columnNamesList.map((eachColumnName: string) => {
         return {
@@ -286,12 +274,8 @@ export default function() {
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
-        <NoDataScreen />
-      )}
-      <ToolBarList
-        submitMenuOption={(option) => applyDirective(option, columnSelected)}
-      />
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
+      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
       {isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
@@ -299,10 +283,7 @@ export default function() {
         />
       )}
       {showRecipePanel && (
-        <RecipeSteps
-          setShowRecipePanel={setShowRecipePanel}
-          showRecipePanel={showRecipePanel}
-        />
+        <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
       )}
       {showAddTransformation && (
         <AddTransformation
@@ -310,11 +291,7 @@ export default function() {
           showAddTransformationHandler={showAddTransformationHandler}
         />
       )}
-      <Table
-        aria-label="simple table"
-        className="test"
-        data-testid="grid-table"
-      >
+      <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
             {headers.map((eachHeader) => (
