@@ -254,6 +254,11 @@ const dataprep = (state = defaultInitialState, action = defaultAction) => {
         targetModel: action.payload.targetModel,
       });
       break;
+    case DataPrepActions.setConnectorType:
+      stateCopy = Object.assign({}, state, {
+        connectorType: action.payload.connectorType,
+      });
+      break;
     default:
       return state;
   }

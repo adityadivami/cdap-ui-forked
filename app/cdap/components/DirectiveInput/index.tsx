@@ -19,7 +19,7 @@ const DirectiveDrawer = (props) => {
   });
   const directiveRef = useRef();
   const classes = useStyles();
-  const { dataprep } = DataPrepStore.getState();
+  const [directivesList, setDirectivesList] = useState([]);
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent
   ) => {
@@ -30,12 +30,18 @@ const DirectiveDrawer = (props) => {
     ) {
       return;
     }
-
+    props.onClose();
     setOpen(false);
   };
 
   const handleDirectiveChange = (event) => {
-    console.log('event, finalEnter', event);
+    console.log('directiveInput', directiveInput, event.target);
+    if (!event.target.value) {
+      setOnDirectiveSelection({
+        isDirectiveSelected: false,
+        activeResults: [],
+      });
+    }
     setDirectiveInput(event.target.value);
     setAutoCompleteOn(true);
   };
@@ -57,6 +63,20 @@ const DirectiveDrawer = (props) => {
     setAutoCompleteOn(!autoCompleteOn);
   };
 
+  const handlePasteDirective = () => {
+    const inputSplit = directiveInput.replace(/^\s+/g, '').split(' ');
+    const filterUsageItem =
+      directivesList.length > 0
+        ? directivesList.filter((el) => el.usage.includes(inputSplit[0]))
+        : [];
+    const usageArraySplit = filterUsageItem.length > 0 ? filterUsageItem[0].usage.split(' ') : [];
+    if (usageArraySplit.length === inputSplit.length) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div>
       <Drawer anchor={'bottom'} open={open} onClose={toggleDrawer('bottom', false)}>
@@ -66,6 +86,7 @@ const DirectiveDrawer = (props) => {
           input={directiveInput}
           onRowClick={(eventObject) => handleDirectiveChange(eventObject)}
           inputRef={directiveRef}
+          setDirectivesList={setDirectivesList}
           getDirectiveUsage={(activeResults, value) => {
             setOnDirectiveSelection({
               isDirectiveSelected: value,
@@ -75,6 +96,7 @@ const DirectiveDrawer = (props) => {
           onColumnSelected={(value) => {
             setIsColumnSelected(true);
           }}
+          usageArray={onDirectiveSelection.activeResults}
           isDirectiveSelected={onDirectiveSelection.isDirectiveSelected}
           isColumnSelected={isColumnSelected}
           columnNamesList={props.columnNamesList}
@@ -104,12 +126,21 @@ const DirectiveDrawer = (props) => {
                 placeholder={'Input a directive'}
                 value={directiveInput}
                 onChange={handleDirectiveChange}
+                onPaste={handlePaste}
                 ref={directiveRef}
                 onKeyDown={(e) => {
-                  if (
+                  const usageArraySplit =
+                    onDirectiveSelection.activeResults.length > 0
+                      ? onDirectiveSelection.activeResults[0]?.item?.usage.split(' ')
+                      : [];
+                  const inputSplit = directiveInput.replace(/^\s+/g, '').split(' ');
+                  if (e.key === 'Enter' && handlePasteDirective()) {
+                    props.onDirectiveInputHandler([directiveInput]);
+                  } else if (
                     e.key === 'Enter' &&
                     isColumnSelected &&
-                    onDirectiveSelection.isDirectiveSelected
+                    onDirectiveSelection.isDirectiveSelected &&
+                    usageArraySplit.length === inputSplit.length
                   ) {
                     props.onDirectiveInputHandler([directiveInput]);
                   }
