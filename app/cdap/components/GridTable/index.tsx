@@ -16,7 +16,8 @@
 
 import {
   LinearProgress,
-  Button, Table,
+  Button,
+  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -329,7 +330,7 @@ export default function GridTable() {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload, wid);
+    getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -610,7 +611,7 @@ export default function GridTable() {
               context: params.namespace,
               workspaceId: params.wid,
             };
-            getWorkSpaceData(payload, wid, directives);
+            getWorkSpaceData(payload as IParams, wid as string, directives);
           }}
           onClose={() => setOpenDirective(false)}
         />
