@@ -59,6 +59,8 @@ import {
   calculateDistributionGraphData,
 } from './utils';
 import DirectiveInputDrawer from 'components/DirectiveInput';
+import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
+import ViewSchemaModal from './components/Modals/ViewSchemaModal';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -94,12 +96,7 @@ export default function GridTable() {
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [openDirective, setOpenDirective] = useState(false);
-  const [toast, setToast] = useState({
-    open: false,
-    message: '',
-  });
   const [maskSelection, setMaskSelection] = useState(false);
-  const [openTranformationPanel, setOpenTransformationPanel] = useState(false);
   const [openColumnView, setOpenColumnView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
@@ -113,6 +110,8 @@ export default function GridTable() {
   const [progress, setProgress] = useState([]);
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
   const [columnType, setColumnType] = useState('');
+  const [openPipeline, setOpenPipeline] = useState(false);
+  const [openViewSchema, setOpenViewSchema] = useState(false);
 
   useEffect(() => {
     const { dataprep } = DataPrepStore.getState();
@@ -496,7 +495,14 @@ export default function GridTable() {
 
   return (
     <Box>
-      {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
+      {showBreadCrumb && (
+        <BreadCrumb
+          datasetName={workspaceName}
+          location={location}
+          setOpenPipeline={setOpenPipeline}
+          setOpenViewSchema={setOpenViewSchema}
+        />
+      )}
       <ToolBarList
         columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
@@ -559,6 +565,13 @@ export default function GridTable() {
             setColumnSelected('');
             setDirectiveFunction('');
           }}
+        />
+      )}
+      {openPipeline && <CreatePipelineModal setOpenPipeline={setOpenPipeline} />}
+      {openViewSchema && (
+        <ViewSchemaModal
+          setOpenViewSchema={setOpenViewSchema}
+          headersNamesList={headersNamesList}
         />
       )}
       <Box className={classes.columnViewContainer}>
@@ -631,7 +644,6 @@ export default function GridTable() {
                             optionSelected={optionSelected}
                             headers={headers}
                             applyTransformation={(value) => {
-                              console.log('value', value);
                               applyDirective(
                                 optionSelected,
                                 columnSelected,
