@@ -30,6 +30,9 @@ export const useStyles = makeStyles({
     '& div.MuiAutocomplete-endAdornment': {
       paddingRight: '7px',
     },
+    '& .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {
+      paddingRight: '14px',
+    },
   },
   root: {
     border: '1px solid #DADCE0',
@@ -123,6 +126,11 @@ export const useStyles = makeStyles({
   search: {
     color: '#757575',
     fontSize: 'xx-large',
+  },
+  close: {
+    color: '#757575',
+    fontSize: 'xx-large',
+    cursor: 'pointer',
   },
   optionInMUIAutocomplete: {
     height: '71px',

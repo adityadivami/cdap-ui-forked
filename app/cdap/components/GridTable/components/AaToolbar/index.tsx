@@ -47,13 +47,20 @@ import {
   OTHER_OPTIONS,
 } from '../NestedMenu/constants';
 
-const ToolBarList = ({ columnType, submitMenuOption }) => {
+const ToolBarList = ({ columnType, submitMenuOption, handleUndo, handleRedo }) => {
   const classes = useStyles();
+
+  const handlingUndo = () => {
+    handleUndo();
+  };
+  const handlingRedo = () => {
+    handleRedo();
+  };
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
-        <IconButton>{Undo}</IconButton>
-        <IconButton>{Redo}</IconButton>
+        <IconButton onClick={handlingUndo}>{Undo}</IconButton>
+        <IconButton onClick={handlingRedo}>{Redo}</IconButton>
 
         {Divider}
         <NestedMenu

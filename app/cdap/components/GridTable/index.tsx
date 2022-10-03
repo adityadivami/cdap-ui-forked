@@ -33,6 +33,7 @@ import ParsingDrawer from 'components/ParsingDrawer';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import React, { useEffect, useState } from 'react';
+import Cookies from 'universal-cookie';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
@@ -61,6 +62,7 @@ import {
 import DirectiveInputDrawer from 'components/DirectiveInput';
 
 export default function GridTable() {
+  const cookie = new Cookies();
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
@@ -131,6 +133,10 @@ export default function GridTable() {
   useEffect(() => {
     setIsFirstWrangle(true);
     setConnectorType(dataprep.connectorType);
+    // to do in progress
+    // return () => {
+    //   cookie.remove('transformations', { path: '/' });
+    // };
   }, []);
 
   const getWorkSpaceData = (
@@ -256,7 +262,7 @@ export default function GridTable() {
       value_1
     ) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-      applyDirectiveAPICall(newDirective, 'add');
+      applyDirectiveAPICall(newDirective, 'add', [], '');
     } else {
       if (OPTION_WITH_NO_INPUT.includes(option)) {
         const newDirective = getDirective(option, columnSelected);
@@ -265,7 +271,7 @@ export default function GridTable() {
           setLoading(false);
           return;
         } else {
-          applyDirectiveAPICall(newDirective, 'add');
+          applyDirectiveAPICall(newDirective, 'add', [], '');
           setIsFirstWrangle(false);
         }
       } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
@@ -275,19 +281,20 @@ export default function GridTable() {
           setLoading(false);
           return;
         } else {
-          applyDirectiveAPICall(newDirective, 'add');
+          applyDirectiveAPICall(newDirective, 'add', [], '');
         }
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective, action) => {
+  const applyDirectiveAPICall = (newDirective, action, removed_arr, from) => {
     setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
     const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
+    const arr = JSON.parse(JSON.stringify(newDirective));
 
     requestBody.insights = insights;
 
@@ -326,8 +333,12 @@ export default function GridTable() {
           open: true,
           message:
             action === 'add'
-              ? `${newDirective} successfully added`
-              : `${newDirective} successfully deleted`,
+              ? `Transformation ${arr} successfully added`
+              : from === 'undo' || arr?.length === 0
+              ? 'Transformation successfully deleted'
+              : `${removed_arr?.length} transformation successfully deleted from ${
+                  arr[arr.length - 1]
+                }`,
           isSuccess: true,
         });
         if (action === 'add') {
@@ -448,8 +459,8 @@ export default function GridTable() {
     setColumnType(types[columnName]);
   };
 
-  const deleteRecipes = (new_arr) => {
-    applyDirectiveAPICall(new_arr, 'delete');
+  const deleteRecipes = (new_arr, remaining_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
   };
 
   // Redux store
@@ -463,8 +474,24 @@ export default function GridTable() {
         message: '',
         isSuccess: false,
       });
-      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete');
+      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete', [], 'undo');
     }
+  };
+
+  const handleUndo = () => {
+    // to do in progress
+    // const stepsArr = JSON.parse(JSON.stringify(directives));
+    // console.log(stepsArr);
+    // cookie.set('transformations', stepsArr, { path: '/' });
+    // console.log(stepsArr.splice(0, stepsArr.length - 1));
+    // applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete', [], 'undo');
+  };
+
+  const handleRedo = () => {
+    // to do in progress
+    // const arr = cookie.get('transformations');
+    // const stepsArr = JSON.parse(JSON.stringify(arr));
+    // applyDirectiveAPICall(stepsArr, 'add', [], '');
   };
 
   const handleDefaultCloseSnackbar = () => {
@@ -489,6 +516,8 @@ export default function GridTable() {
       <ToolBarList
         columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+        handleUndo={handleUndo}
+        handleRedo={handleRedo}
       />
       {insightDrawer.open && (
         <ColumnInsightDrawer
