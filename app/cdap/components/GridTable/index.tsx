@@ -59,6 +59,8 @@ import {
   calculateDistributionGraphData,
 } from './utils';
 import DirectiveInputDrawer from 'components/DirectiveInput';
+import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
+import ViewSchemaModal from './components/Modals/ViewSchemaModal';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -94,12 +96,7 @@ export default function GridTable() {
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [openDirective, setOpenDirective] = useState(false);
-  const [toast, setToast] = useState({
-    open: false,
-    message: '',
-  });
   const [maskSelection, setMaskSelection] = useState(false);
-  const [openTranformationPanel, setOpenTransformationPanel] = useState(false);
   const [openColumnView, setOpenColumnView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
@@ -113,6 +110,8 @@ export default function GridTable() {
   const [progress, setProgress] = useState([]);
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
   const [columnType, setColumnType] = useState('');
+  const [openPipeline, setOpenPipeline] = useState(false);
+  const [openViewSchema, setOpenViewSchema] = useState(false);
 
   useEffect(() => {
     const { dataprep } = DataPrepStore.getState();
@@ -127,6 +126,11 @@ export default function GridTable() {
     isSuccess: false,
   });
   const [toastAction, setToastAction] = useState('');
+  const [dataCounts, setDataCounts] = useState({
+    rowCount: 0,
+    columnCount: 0,
+  });
+  const [showBreadCrumb, setShowBreadCrumb] = useState(true);
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -138,7 +142,6 @@ export default function GridTable() {
     workspaceId: string,
     selectedDirective?: string[] | undefined
   ) => {
-    console.log('selectedDirective', selectedDirective);
     let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -163,7 +166,6 @@ export default function GridTable() {
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
-          console.log('directives con', directives);
           const insights = {
             name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
@@ -202,6 +204,10 @@ export default function GridTable() {
           setGridData(response);
           setDirectiveFunction('');
           setColumnSelected('');
+          setDataCounts({
+            rowCount: response.values.length,
+            columnCount: response.headers.length,
+          });
         },
         (err) => {
           setToaster({
@@ -256,7 +262,7 @@ export default function GridTable() {
       value_1
     ) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-      applyDirectiveAPICall(newDirective, 'add');
+      applyDirectiveAPICall(newDirective, 'add', [], '');
     } else {
       if (OPTION_WITH_NO_INPUT.includes(option)) {
         const newDirective = getDirective(option, columnSelected);
@@ -265,7 +271,7 @@ export default function GridTable() {
           setLoading(false);
           return;
         } else {
-          applyDirectiveAPICall(newDirective, 'add');
+          applyDirectiveAPICall(newDirective, 'add', [], '');
           setIsFirstWrangle(false);
         }
       } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
@@ -275,20 +281,20 @@ export default function GridTable() {
           setLoading(false);
           return;
         } else {
-          applyDirectiveAPICall(newDirective, 'add');
+          applyDirectiveAPICall(newDirective, 'add', [], '');
         }
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective, action) => {
+  const applyDirectiveAPICall = (newDirective, action, removed_arr, from) => {
     setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
     const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
-
+    const arr = JSON.parse(JSON.stringify(newDirective));
     requestBody.insights = insights;
 
     const workspaceInfo = {
@@ -326,10 +332,15 @@ export default function GridTable() {
           open: true,
           message:
             action === 'add'
-              ? `${newDirective} successfully added`
-              : `${newDirective} successfully deleted`,
+              ? `Transformation ${arr} successfully added`
+              : from === 'undo' || arr?.length === 0
+              ? 'Transformation successfully deleted'
+              : `${removed_arr?.length} transformation successfully deleted from ${
+                  arr[arr.length - 1]
+                }`,
           isSuccess: true,
         });
+
         if (action === 'add') {
           setToastAction('add');
         } else if (action === 'delete') {
@@ -439,7 +450,6 @@ export default function GridTable() {
   };
 
   useEffect(() => {
-    console.log('triggered', gridData);
     getGridTableData();
   }, [gridData]);
 
@@ -448,8 +458,8 @@ export default function GridTable() {
     setColumnType(types[columnName]);
   };
 
-  const deleteRecipes = (new_arr) => {
-    applyDirectiveAPICall(new_arr, 'delete');
+  const deleteRecipes = (new_arr, remaining_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
   };
 
   // Redux store
@@ -463,7 +473,7 @@ export default function GridTable() {
         message: '',
         isSuccess: false,
       });
-      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete');
+      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete', [], 'undo');
     }
   };
 
@@ -484,11 +494,20 @@ export default function GridTable() {
   };
 
   return (
-    <Box className={classes.wrapper}>
-      <BreadCrumb datasetName={workspaceName} location={location} />
+    <Box>
+      {showBreadCrumb && (
+        <BreadCrumb
+          datasetName={workspaceName}
+          location={location}
+          setOpenPipeline={setOpenPipeline}
+          setOpenViewSchema={setOpenViewSchema}
+        />
+      )}
       <ToolBarList
         columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+        setShowBreadCrumb={setShowBreadCrumb}
+        showBreadCrumb={showBreadCrumb}
       />
       {insightDrawer.open && (
         <ColumnInsightDrawer
@@ -546,6 +565,13 @@ export default function GridTable() {
             setColumnSelected('');
             setDirectiveFunction('');
           }}
+        />
+      )}
+      {openPipeline && <CreatePipelineModal setOpenPipeline={setOpenPipeline} />}
+      {openViewSchema && (
+        <ViewSchemaModal
+          setOpenViewSchema={setOpenViewSchema}
+          headersNamesList={headersNamesList}
         />
       )}
       <Box className={classes.columnViewContainer}>
@@ -618,7 +644,6 @@ export default function GridTable() {
                             optionSelected={optionSelected}
                             headers={headers}
                             applyTransformation={(value) => {
-                              console.log('value', value);
                               applyDirective(
                                 optionSelected,
                                 columnSelected,
@@ -650,6 +675,7 @@ export default function GridTable() {
         recipeStepsCount={directives?.length}
         setOpenDirective={setOpenDirective}
         setOpenColumnViewHandler={setOpenColumnViewHandler}
+        dataCounts={dataCounts}
       />
       {toaster.open && (
         <PositionedSnackbar
@@ -677,16 +703,6 @@ export default function GridTable() {
             getWorkSpaceData(payload, wid, directives);
           }}
           onClose={() => setOpenDirective(false)}
-        />
-      )}
-      {toast.open && (
-        <PositionedSnackbar
-          handleCloseError={() =>
-            setToast({
-              open: false,
-              message: '',
-            })
-          }
         />
       )}
     </Box>

@@ -47,7 +47,7 @@ import {
   OTHER_OPTIONS,
 } from '../NestedMenu/constants';
 
-const ToolBarList = ({ columnType, submitMenuOption }) => {
+const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) => {
   const classes = useStyles();
   return (
     <Box className={classes.iconContainer}>
@@ -117,7 +117,12 @@ const ToolBarList = ({ columnType, submitMenuOption }) => {
           }}
         />
       </Box>
-      <IconButton>{Expand}</IconButton>
+      <IconButton
+        className={showBreadCrumb ? classes.openedBreadcrumb : classes.closeBreadCrumb}
+        onClick={() => setShowBreadCrumb(!showBreadCrumb)}
+      >
+        {Expand}
+      </IconButton>
     </Box>
   );
 };

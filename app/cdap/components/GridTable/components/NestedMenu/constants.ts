@@ -559,6 +559,7 @@ export const MENU_OPTIONS = [
       { value: 'using-delimiters', label: 'Using Delimiters', supported_dataType: ['all'] },
       { value: 'using-positions', label: 'Using Positions', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
   {
     value: 'explode',
@@ -568,6 +569,7 @@ export const MENU_OPTIONS = [
       { value: 'array-flattening', label: 'Array By Flattening', supported_dataType: ['all'] },
       { value: 'record-flattening', label: 'Record By Flattening', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
   {
     value: 'define-variable',
@@ -715,12 +717,12 @@ export const COLUMN_OPTIONS = [
     supported_dataType: ['all'],
   },
   {
-    value: 'join-two-column',
+    value: 'join-columns',
     label: 'Join two column',
     supported_dataType: ['all'],
   },
   {
-    value: 'swap-two-column',
+    value: 'swap-columns',
     label: 'Swap two column names',
     supported_dataType: ['all'],
   },
@@ -741,6 +743,7 @@ export const FRAGMENT_OPTIONS = [
       { value: 'using-delimiters', label: 'Using Delimiters', supported_dataType: ['all'] },
       { value: 'using-positions', label: 'Using Positions', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
   {
     value: 'explode',
@@ -750,6 +753,7 @@ export const FRAGMENT_OPTIONS = [
       { value: 'array-flattening', label: 'Array By Flattening', supported_dataType: ['all'] },
       { value: 'record-flattening', label: 'Record By Flattening', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
 ];
 
@@ -776,7 +780,7 @@ export const MATH_OPTIONS = [
       },
       {
         label: 'Multiply',
-        value: 'MULTIPLE',
+        value: 'MULTIPLY',
         sign: 'x',
         inputRequired: true,
         component: Calculate,
@@ -1166,5 +1170,18 @@ export const OTHER_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['string'],
+  },
+];
+
+export const KEBAB_GRID_PAGE_OPTION = [
+  {
+    label: 'Ingest Data',
+    value: 'ingest-data',
+    supported_dataType: ['all'],
+  },
+  {
+    label: 'View Schema',
+    value: 'view-schema',
+    supported_dataType: ['all'],
   },
 ];

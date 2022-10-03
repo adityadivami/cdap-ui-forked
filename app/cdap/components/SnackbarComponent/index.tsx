@@ -52,12 +52,8 @@ const PositionedSnackbar = ({
 
   const handleClose = () => {
     setIsOpen(false);
+    // handleDefaultCloseSnackbar();
     handleCloseError();
-  };
-
-  const properties = {
-    close: () => handleClose(),
-    messageToDisplay,
   };
 
   return (
