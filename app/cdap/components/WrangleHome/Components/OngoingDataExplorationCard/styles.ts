@@ -15,15 +15,27 @@
  */
 
 import { makeStyles } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
-  gridContainer: {
+  gridContainerHome: {
     width: '1204px',
     height: '77px',
     border: '1px solid #DADCE0',
     borderRadius: '4px',
     marginBottom: '10px',
     cursor: 'pointer',
+    margin: '10px auto',
+  },
+  gridContainerWorkspaces: {
+    width: '1306px',
+    height: '77px',
+    border: '1px solid #DADCE0',
+    borderRadius: '4px',
+    marginBottom: '10px',
+    cursor: 'pointer',
+    margin: '10px auto',
   },
   elementStyle: {
     width: '301px',
@@ -39,7 +51,7 @@ export const useStyles = makeStyles({
       margin: 'auto 0px',
       fontSize: '16px',
       lineHeight: '24px',
-      width: '254px',
+      width: '253px',
       textOverflow: 'ellipsis',
       fontWeight: 400,
       overflow: 'hidden',
@@ -66,12 +78,12 @@ export const useStyles = makeStyles({
     lineHeight: '30px',
     fontSize: '36px',
     letterSpacing: '0.15px',
-    color: '#EA4335',
+    color: red[600],
     margin: 'auto 0px',
   },
   percentageSymbolRed: {
     fontSize: '20px',
-    color: '#EA4335',
+    color: red[600],
     letterSpacing: '0.15px',
     lineHeight: '30px',
     marginRight: '6px',
@@ -81,13 +93,13 @@ export const useStyles = makeStyles({
   percentageStyleGreen: {
     lineHeight: '30px',
     fontSize: '36px',
-    color: '#4BAF4F',
+    color: green[600],
     margin: 'auto 0px',
     letterSpacing: '0.15px',
   },
   percentageSymbolGreen: {
     fontSize: '20px',
-    color: '#4BAF4F',
+    color: green[600],
     lineHeight: '30px',
     marginRight: '6px',
     margin: 'auto 0px',
@@ -96,5 +108,15 @@ export const useStyles = makeStyles({
   },
   dataQualityText: {
     paddingTop: '11px',
+  },
+  iconWithText: {
+    maxWidth: '171px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+  textWithoutIcon: {
+    maxWidth: '166px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 });
