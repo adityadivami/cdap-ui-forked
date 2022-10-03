@@ -30,6 +30,9 @@ export const useStyles = makeStyles({
     '& div.MuiAutocomplete-endAdornment': {
       paddingRight: '7px',
     },
+    '& .MuiAutocomplete-hasPopupIcon.MuiAutocomplete-hasClearIcon .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"]': {
+      paddingRight: '14px',
+    },
   },
   root: {
     border: '1px solid #DADCE0',
