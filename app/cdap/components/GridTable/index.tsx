@@ -98,6 +98,7 @@ export default function GridTable() {
     open: false,
     message: '',
   });
+  const [maskSelection, setMaskSelection] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -129,6 +130,7 @@ export default function GridTable() {
     workspaceId: string,
     selectedDirective?: string[] | undefined
   ) => {
+    console.log('selectedDirective', selectedDirective);
     let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -226,33 +228,47 @@ export default function GridTable() {
     setLoading(true);
     setOptionSelected(option);
     setDirectiveFunctionSupportedDataType(supported_dataType);
-    if (OPTION_WITH_NO_INPUT.includes(option)) {
-      const newDirective = getDirective(option, columnSelected);
-      if (!Boolean(columnSelected)) {
-        setDirectiveFunction(option);
-        setLoading(false);
-        return;
-      } else {
-        applyDirectiveAPICall(newDirective, 'add');
-        setIsFirstWrangle(false);
-      }
-    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+    if (
+      (option === 'custom-selection' ||
+        optionSelected === 'custom-selection' ||
+        option === 'using-positions' ||
+        optionSelected === 'using-positions') &&
+      Boolean(columnSelected) &&
+      !value_1
+    ) {
+      setDirectiveFunction('');
+      setMaskSelection(true);
+      setLoading(false);
+    } else if (
+      (option === 'custom-selection' ||
+        optionSelected === 'custom-selection' ||
+        option === 'using-positions' ||
+        optionSelected === 'using-positions') &&
+      Boolean(columnSelected) &&
+      value_1
+    ) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
-        setDirectiveFunction(option);
-        setLoading(false);
-        return;
-      } else {
-        applyDirectiveAPICall(newDirective, 'add');
-      }
-    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
-      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
-      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
-        setDirectiveFunction(option);
-        setLoading(false);
-        return;
-      } else {
-        applyDirectiveAPICall(newDirective, 'add');
+      applyDirectiveAPICall(newDirective, 'add');
+    } else {
+      if (OPTION_WITH_NO_INPUT.includes(option)) {
+        const newDirective = getDirective(option, columnSelected);
+        if (!Boolean(columnSelected)) {
+          setDirectiveFunction(option);
+          setLoading(false);
+          return;
+        } else {
+          applyDirectiveAPICall(newDirective, 'add');
+          setIsFirstWrangle(false);
+        }
+      } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+        const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+        if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+          setDirectiveFunction(option);
+          setLoading(false);
+          return;
+        } else {
+          applyDirectiveAPICall(newDirective, 'add');
+        }
       }
     }
   };
@@ -414,6 +430,7 @@ export default function GridTable() {
   };
 
   useEffect(() => {
+    console.log('triggered', gridData);
     getGridTableData();
   }, [gridData]);
 
@@ -448,8 +465,6 @@ export default function GridTable() {
       isSuccess: false,
     });
   };
-
-  console.log('triggered', dataprep, isFirstWrangle, connectorType);
 
   return (
     <Box>
@@ -569,6 +584,25 @@ export default function GridTable() {
                         <GridTextCell
                           cellValue={eachRow[eachKey] || '--'}
                           key={`${eachKey}-${eachIndex}`}
+                          maskSelection={eachKey === columnSelected ? maskSelection : false}
+                          rowNumber={rowIndex}
+                          columnSelected={columnSelected}
+                          optionSelected={optionSelected}
+                          headers={headers}
+                          applyTransformation={(value) => {
+                            console.log('value', value);
+                            applyDirective(
+                              optionSelected,
+                              columnSelected,
+                              directiveFunctionSupportedDataType,
+                              value
+                            );
+                          }}
+                          cancelTransformation={() => {
+                            setColumnSelected('');
+                            setOptionSelected('');
+                            setMaskSelection(false);
+                          }}
                         />
                       );
                     })}
@@ -614,6 +648,16 @@ export default function GridTable() {
             getWorkSpaceData(payload, wid, directives);
           }}
           onClose={() => setOpenDirective(false)}
+        />
+      )}
+      {toast.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setToast({
+              open: false,
+              message: '',
+            })
+          }
         />
       )}
     </Box>

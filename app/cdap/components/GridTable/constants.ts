@@ -114,4 +114,6 @@ export const OPTION_WITH_TWO_INPUT = [
   'SQUARE_ROOT',
   'CUBE',
   'CUBE_ROOT',
+  'custom-selection',
+  'using-positions',
 ];

@@ -588,7 +588,7 @@ export const MENU_OPTIONS = [
     options: [
       { value: 'last-4', label: 'Show last 4 characters only', supported_dataType: ['string'] },
       { value: 'last-2', label: 'Show last 2 characters only', supported_dataType: ['string'] },
-      { value: 'numbers', label: 'Custom Selection', supported_dataType: ['string'] },
+      { value: 'custom-selection', label: 'Custom Selection', supported_dataType: ['string'] },
       { value: 'divider' },
       { value: 'shuffle', label: 'By Shuffling', supported_dataType: ['string'] },
     ],
