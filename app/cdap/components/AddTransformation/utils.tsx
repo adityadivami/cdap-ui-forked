@@ -33,7 +33,7 @@ export const parseDirective = (
         directive = `parse-as-csv :${column} '\\t' ${booleanValue}`;
         break;
       case 'space':
-        directive = `parse-as-csv :${column} '' ${booleanValue}`;
+        directive = `parse-as-csv :${column} ' ' ${booleanValue}`;
         break;
       case 'pipe':
         directive = `parse-as-csv :${column} '\\|' ${booleanValue}`;
@@ -426,7 +426,7 @@ export const prepareDirectiveForCalculate = (
         ? `set-column :${newColumnName} ${selectedColumn} / ${inputDigit}`
         : `set-column :${selectedColumn} ${selectedColumn} / ${inputDigit}`;
       break;
-    case 'MODULO':
+    case 'MOD':
       directive = copyToNew
         ? `set-column :${newColumnName} ${selectedColumn} % ${inputDigit}`
         : `set-column :${selectedColumn} ${selectedColumn} % ${inputDigit}`;
@@ -441,7 +441,7 @@ export const prepareDirectiveForCalculate = (
         ? `set-column :${newColumnName} math:pow(${selectedColumn}, 2)`
         : `set-column :${selectedColumn} math:pow(${selectedColumn}, 2)`;
       break;
-    case 'SQAURE_ROOT':
+    case 'SQUARE_ROOT':
       directive = copyToNew
         ? `set-column :${newColumnName} math:sqrt(${selectedColumn})`
         : `set-column :${selectedColumn} math:sqrt(${selectedColumn})`;
@@ -613,6 +613,22 @@ export const prepareDirectiveForCalculate = (
         ? `set-column :${newColumnName} decimal:sign(${selectedColumn})`
         : `set-column :${selectedColumn} decimal:sign(${selectedColumn})`;
       break;
+  }
+  return directive;
+};
+
+export const prepareDirectiveForMerge = (
+  radioOption,
+  column_1,
+  column_2,
+  newColumnName,
+  customInput
+) => {
+  let directive;
+  if (radioOption === 'custom') {
+    directive = `merge :${column_1} :${column_2} :${newColumnName} ${customInput}`;
+  } else {
+    directive = `merge :${column_1} :${column_2} :${newColumnName} ${radioOption}`;
   }
   return directive;
 };

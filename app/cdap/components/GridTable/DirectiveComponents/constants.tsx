@@ -17,6 +17,7 @@ import DefineVariable from './DefineVariable';
 import SendToError from './SendToError';
 import SetCounter from './SetCounterAction';
 import FillNullOrEmpty from './FillNullOrEmpty';
+import JoinColumn from './JoinColumns';
 
 export const DIRECTIVE_COMPONENTS = [
   {
@@ -111,6 +112,10 @@ export const DIRECTIVE_COMPONENTS = [
     type: 'fillNullOrEmpty',
     component: FillNullOrEmpty,
   },
+  {
+    type: 'join-columns',
+    component: JoinColumn,
+  },
 ];
 
 export const PLEASE_SELECT_THE_LOGS_FORMAT = 'Please select the logs format';
@@ -168,3 +173,5 @@ export const SEND_TO_ERROR = 'Send to error if';
 export const INCREMENT_COUNT_BY = 'Increment the count by';
 export const NAME_THIS_COUNTER = 'Name this counter';
 export const FILL_NULL_EMPTY = 'Fill null or empty cell';
+export const SET_ORDER = 'Set order';
+export const CHOOSE_DELIMITER = 'Choose delimiter';

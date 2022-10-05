@@ -28,6 +28,10 @@ const SelectColumnsList = (props) => {
     columnData,
     setSelectedColumns,
     dataQuality,
+    is_secondSelection,
+    setSelectedColumns_2,
+    selected_column_2,
+    selectedColumns_1,
   } = props;
   const [columns, setColumns] = useState(columnData);
   const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
@@ -35,21 +39,29 @@ const SelectColumnsList = (props) => {
   const [focused, setFocused] = useState(false);
   const classes = useStyles();
   const ref = useRef(null);
-  const no_match = !directiveFunctionSupportedDataType.includes('all')
-    ? columns.filter((object1) => {
-        return directiveFunctionSupportedDataType.some((object2) => {
-          return object2.includes(object1.type[0].toLowerCase());
-        });
-      })
-    : [];
+  const no_match =
+    directiveFunctionSupportedDataType.length > 0
+      ? !directiveFunctionSupportedDataType.includes('all')
+      : false
+      ? columns.filter((object1) => {
+          return directiveFunctionSupportedDataType.some((object2) => {
+            return object2.includes(object1.type[0].toLowerCase());
+          });
+        })
+      : [];
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
   const onSelect = (event, label, column) => {
-    setSelectedColumns([column]);
-    setSelectedColumn([column]);
+    if (is_secondSelection) {
+      setSelectedColumns_2([column]);
+      setSelectedColumn([column]);
+    } else {
+      setSelectedColumns([column]);
+      setSelectedColumn([column]);
+    }
   };
 
   const handleSearch = (event) => {
@@ -127,93 +139,195 @@ const SelectColumnsList = (props) => {
             <TableBody>
               {columns.map((eachColumn, index) => {
                 if (directiveFunctionSupportedDataType.includes('all')) {
-                  return (
-                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
-                      <TableCell
-                        classes={{
-                          body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
-                        }}
-                      >
-                        <Radio
-                          color="primary"
-                          onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
-                          checked={
-                            selectedColumns.filter((el) => el.label == eachColumn.label).length
-                              ? true
-                              : false
-                          }
-                        />
-                      </TableCell>
-                      <TableCell
-                        classes={{ body: classes.recipeStepsTableRowStyles }}
-                        style={{ width: 50 }}
-                        // component="th"
-                        // scope="row"
-                      >
-                        <Typography className={classes.recipeStepsActionTypeStyles}>
-                          {eachColumn.label}
-                        </Typography>
-                        <Typography className={classes.recipeStepsActionTypeStyles}>
-                          {eachColumn.type}
-                        </Typography>
-                      </TableCell>
-                      <TableCell
-                        className={[
-                          classes.recipeStepsTableRowStyles,
-                          classes.circularBarCell,
-                        ].join(' ')}
-                      >
-                        {dataQualityValue?.length && (
-                          <DataQualityProgress value={dataQualityValue[index]?.value} />
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  );
+                  if (!is_secondSelection) {
+                    return (
+                      <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                        <TableCell
+                          classes={{
+                            body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
+                          }}
+                        >
+                          <Radio
+                            color="primary"
+                            onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
+                            checked={
+                              selectedColumns.filter((el) => el.label == eachColumn.label).length
+                                ? true
+                                : false
+                            }
+                          />
+                        </TableCell>
+                        <TableCell
+                          classes={{ body: classes.recipeStepsTableRowStyles }}
+                          style={{ width: 50 }}
+                          // component="th"
+                          // scope="row"
+                        >
+                          <Typography className={classes.recipeStepsActionTypeStyles}>
+                            {eachColumn.label}
+                          </Typography>
+                          <Typography className={classes.recipeStepsActionTypeStyles}>
+                            {eachColumn.type}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
+                          className={[
+                            classes.recipeStepsTableRowStyles,
+                            classes.circularBarCell,
+                          ].join(' ')}
+                        >
+                          {dataQualityValue?.length && (
+                            <DataQualityProgress value={dataQualityValue[index]?.value} />
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  } else if (
+                    is_secondSelection &&
+                    selectedColumns_1.length &&
+                    eachColumn.label !== selectedColumns_1[0].label
+                  ) {
+                    return (
+                      <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                        <TableCell
+                          classes={{
+                            body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
+                          }}
+                        >
+                          <Radio
+                            color="primary"
+                            onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
+                            checked={
+                              selectedColumns.filter((el) => el.label == eachColumn.label).length
+                                ? true
+                                : false
+                            }
+                          />
+                        </TableCell>
+                        <TableCell
+                          classes={{ body: classes.recipeStepsTableRowStyles }}
+                          style={{ width: 50 }}
+                          // component="th"
+                          // scope="row"
+                        >
+                          <Typography className={classes.recipeStepsActionTypeStyles}>
+                            {eachColumn.label}
+                          </Typography>
+                          <Typography className={classes.recipeStepsActionTypeStyles}>
+                            {eachColumn.type}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
+                          className={[
+                            classes.recipeStepsTableRowStyles,
+                            classes.circularBarCell,
+                          ].join(' ')}
+                        >
+                          {dataQualityValue?.length && (
+                            <DataQualityProgress value={dataQualityValue[index]?.value} />
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  }
                 } else if (
                   directiveFunctionSupportedDataType.includes(eachColumn?.type[0].toLowerCase())
                 ) {
-                  return (
-                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
-                      <TableCell
-                        classes={{
-                          body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
-                        }}
-                      >
-                        <Radio
-                          color="primary"
-                          onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
-                          checked={
-                            selectedColumns.filter((el) => el.label == eachColumn.label).length
-                              ? true
-                              : false
-                          }
-                        />
-                      </TableCell>
-                      <TableCell
-                        classes={{ body: classes.recipeStepsTableRowStyles }}
-                        style={{ width: 50 }}
-                        // component="th"
-                        // scope="row"
-                      >
-                        <Typography className={classes.recipeStepsActionTypeStyles}>
-                          {eachColumn.label}
-                        </Typography>
-                        <Typography className={classes.recipeStepsActionTypeStyles}>
-                          {eachColumn.type}
-                        </Typography>
-                      </TableCell>
-                      <TableCell
-                        className={[
-                          classes.recipeStepsTableRowStyles,
-                          classes.circularBarCell,
-                        ].join(' ')}
-                      >
-                        {dataQualityValue?.length && (
-                          <DataQualityProgress value={dataQualityValue[index]?.value} />
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  );
+                  if (!is_secondSelection) {
+                    return (
+                      <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                        <TableCell
+                          classes={{
+                            body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
+                          }}
+                        >
+                          <Radio
+                            color="primary"
+                            onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
+                            checked={
+                              selectedColumns.filter((el) => el.label == eachColumn.label).length
+                                ? true
+                                : false
+                            }
+                          />
+                        </TableCell>
+                        <TableCell
+                          classes={{ body: classes.recipeStepsTableRowStyles }}
+                          style={{ width: 50 }}
+                          // component="th"
+                          // scope="row"
+                        >
+                          <Typography className={classes.recipeStepsActionTypeStyles}>
+                            {eachColumn.label}
+                          </Typography>
+                          <Typography className={classes.recipeStepsActionTypeStyles}>
+                            {eachColumn.type}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
+                          className={[
+                            classes.recipeStepsTableRowStyles,
+                            classes.circularBarCell,
+                          ].join(' ')}
+                        >
+                          {dataQualityValue?.length && (
+                            <DataQualityProgress value={dataQualityValue[index]?.value} />
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  } else if (
+                    is_secondSelection &&
+                    selectedColumns_1.length &&
+                    eachColumn.label !== selectedColumns_1[0].label
+                  ) {
+                    return (
+                      <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                        <TableCell
+                          classes={{
+                            body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
+                          }}
+                        >
+                          <Radio
+                            color="primary"
+                            onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
+                            checked={
+                              selectedColumns.filter((el) => el.label == eachColumn.label).length
+                                ? true
+                                : false
+                            }
+                          />
+                        </TableCell>
+                        <TableCell
+                          classes={{ body: classes.recipeStepsTableRowStyles }}
+                          style={{ width: 50 }}
+                          // component="th"
+                          // scope="row"
+                        >
+                          <Typography className={classes.recipeStepsActionTypeStyles}>
+                            {eachColumn.label}
+                          </Typography>
+                          <Typography className={classes.recipeStepsActionTypeStyles}>
+                            {eachColumn.type}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
+                          className={[
+                            classes.recipeStepsTableRowStyles,
+                            classes.circularBarCell,
+                          ].join(' ')}
+                        >
+                          {dataQualityValue?.length && (
+                            <DataQualityProgress value={dataQualityValue[index]?.value} />
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  }
                 }
               })}
             </TableBody>

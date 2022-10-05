@@ -23,22 +23,36 @@ import SelectOptionComponent from '../HashComponent/SelectComponent';
 
 const SetCounterComponent = (props) => {
   const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [filterCondition, setFilterCondition] = useState('true');
+  const [filterCondition, setFilterCondition] = useState('always');
   const [filterValue, setFilterValue] = useState('');
   const [counter, setCounter] = useState(1);
   const [counterName, setCounterName] = useState('');
   const classes = useStyles();
 
   useEffect(() => {
+    console.log('useEffect', filterCondition, filterValue);
     setDirectiveComponentsValue({
       ...directiveComponentValues,
-      filterCondition: SET_COUNTER_OPTION[0].value,
+      filterCondition,
+      filterConditionValue: 'true',
       counter,
     });
   }, []);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, filterCondition });
+    if (filterCondition == 'always') {
+      setDirectiveComponentsValue({
+        ...directiveComponentValues,
+        filterCondition,
+        filterConditionValue: 'true',
+      });
+    } else {
+      setDirectiveComponentsValue({
+        ...directiveComponentValues,
+        filterCondition,
+        filterConditionValue: filterValue,
+      });
+    }
   }, [filterCondition]);
 
   useEffect(() => {
@@ -74,7 +88,7 @@ const SetCounterComponent = (props) => {
           </SelectOptionComponent>
         </FormControl>
       </FormGroup>
-      {filterCondition != 'true' && (
+      {filterCondition != 'always' && (
         <FormGroup>
           <FormInputFieldComponent
             formInputValue={filterValue}

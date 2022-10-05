@@ -624,7 +624,7 @@ export const SEND_TO_ERROR_OPTIONS = [
 export const SET_COUNTER_OPTION = [
   {
     label: 'Always',
-    value: 'true',
+    value: 'always',
   },
   {
     label: 'If condition is true',
@@ -680,4 +680,39 @@ export const hashAlgorithmOptions = [
   'SM3',
   'Tiger',
   'WHIRLPOOL',
+];
+
+export const JOIN_COLUMN_OPTIONS = [
+  {
+    label: 'Comma',
+    value: ',',
+  },
+  {
+    label: 'PIPE',
+    value: '|',
+  },
+  {
+    label: 'COLON',
+    value: ':',
+  },
+  {
+    label: 'PERIOD',
+    value: '.',
+  },
+  {
+    label: 'DASH',
+    value: '-',
+  },
+  {
+    label: 'UNDERSCORE',
+    value: '_',
+  },
+  {
+    label: 'SPACE',
+    value: `' '`,
+  },
+  {
+    label: 'Custom Delimiter',
+    value: 'custom',
+  },
 ];

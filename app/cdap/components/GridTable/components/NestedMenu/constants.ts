@@ -144,7 +144,7 @@ export const CALCULATE_OPTIONS = [
   },
   {
     label: 'Multiply',
-    value: 'MULTIPLE',
+    value: 'MULTIPLY',
     sign: 'x',
     inputRequired: true,
     component: Calculate,
@@ -583,6 +583,19 @@ export const MENU_OPTIONS = [
     value: 'divider',
   },
   {
+    value: 'join-columns',
+    label: 'Join columns',
+    supported_dataType: ['all'],
+  },
+  {
+    value: 'swap-columns',
+    label: 'Swap columns',
+    supported_dataType: ['all'],
+  },
+  {
+    value: 'divider',
+  },
+  {
     value: 'mask-data',
     label: 'Mask Data',
     options: [
@@ -702,12 +715,12 @@ export const COLUMN_OPTIONS = [
     supported_dataType: ['all'],
   },
   {
-    value: 'join-two-column',
+    value: 'join-columns',
     label: 'Join two column',
     supported_dataType: ['all'],
   },
   {
-    value: 'swap-two-column',
+    value: 'swap-columns',
     label: 'Swap two column names',
     supported_dataType: ['all'],
   },
