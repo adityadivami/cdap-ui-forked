@@ -15,24 +15,33 @@
  */
 
 import { makeStyles } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   error: {
-    border: '1px solid #E97567',
-    boxShadow: '-3px 4px 15px rgba(68, 132, 245, 0.25)',
-    width: '401px',
-    bottom: '10% !important',
-    backgroundColor: '#fff',
-    padding: '20px',
+    borderRadius: '4px',
+    width: '100%',
+    top: '48px !important',
+    backgroundColor: red[600],
+    padding: '15px 18px 14px 18px',
     display: 'block',
+    minHeight: '76px',
   },
   success: {
-    border: '1px solid #4BAF4F',
-    boxShadow: '-3px 4px 15px rgba(68, 132, 245, 0.25)',
-    width: '401px',
-    bottom: '10% !important',
-    backgroundColor: '#fff',
-    padding: '20px',
+    boxShadow: '2px 2px 8px rgba(97, 97, 97, 0.2);',
+    width: '100%',
+    top: '48px !important',
+    backgroundColor: green[600],
+    padding: '15px 18px 14px 18px',
     display: 'block',
+    borderRadius: '4px',
+    minHeight: '76px',
+  },
+  MUIanchor: {
+    left: '0px',
+  },
+  MUIRoot: {
+    left: '0px',
   },
 });
