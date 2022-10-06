@@ -23,6 +23,7 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
+import { ADD_CONNECTION_LABEL, IMPORT_DATA_LABEL } from './constants';
 
 export default function SubHeader(props) {
   const { setOpenImportDataPanel } = props;
@@ -34,7 +35,7 @@ export default function SubHeader(props) {
 
   return (
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
-      <Box className={classes.box}>
+      <Box className={classes.box} className={classes.box}>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
             Home
@@ -52,7 +53,7 @@ export default function SubHeader(props) {
         </Link>
         <Box className={classes.importData} onClick={() => setOpenImportDataPanel(true)}>
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadCrumbTyporgraphy}>Import data</Box>
+          <Box className={classes.breadcrumbTyporgraphy}>{IMPORT_DATA_LABEL}</Box>
         </Box>
       </Box>
     </Box>

@@ -15,8 +15,8 @@
  */
 
 import {
-  LinearProgress,
   Button,
+  LinearProgress,
   Table,
   TableBody,
   TableCell,
@@ -25,31 +25,32 @@ import {
 } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
+import AddTransformation from 'components/AddTransformation';
+import ColumnInsightDrawer from 'components/ColumnInsights';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import DirectiveInputDrawer from 'components/DirectiveInput';
+import FooterPanel from 'components/FooterPanel';
 import ParsingDrawer from 'components/ParsingDrawer';
+import RecipeSteps from 'components/RecipeSteps';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
+import ToolBarList from './components/AaToolbar';
 import BreadCrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import NoDataScreen from './components/NoRecordScreen';
-import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IParams, IRecords } from './types';
-import FooterPanel from 'components/FooterPanel';
-import RecipeSteps from 'components/RecipeSteps';
-import AddTransformation from 'components/AddTransformation';
-import ToolBarList from './components/AaToolbar';
-import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
+import { getDirective, getDirectiveOnTwoInputs } from './directives';
+import { useStyles } from './styles';
+import { IExecuteAPIResponse, IHeaderNamesList, IParams, IRecords, IObject } from './types';
 import PositionedSnackbar from 'components/SnackbarComponent';
-import ColumnInsightDrawer from 'components/ColumnInsights';
 import {
   calculateDistinctValues,
   characterCount,
@@ -57,9 +58,8 @@ import {
   checkAlphaNumericAndSpaces,
   calculateDistributionGraphData,
 } from './utils';
-import DirectiveInputDrawer from 'components/DirectiveInput';
 
-export default function GridTable() {
+export default function() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
@@ -345,7 +345,7 @@ export default function GridTable() {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload, wid);
+    getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -361,7 +361,7 @@ export default function GridTable() {
     }
   };
 
-  const createMissingData = (statistics) => {
+  const createMissingData = (statistics: IObject) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
@@ -398,8 +398,15 @@ export default function GridTable() {
       rawData?.values.map((eachRow: {}) => {
         return eachRow;
       });
-
     setRowsDataList(rowData);
+    const progressValues = [];
+    for (const title in gridData.summary.statistics) {
+      const { general } = gridData.summary.statistics[title] || {};
+      const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+      const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+      progressValues.push({ value: nonNull, key: title });
+    }
+    setProgress(progressValues);
   };
 
   const onColumnSelection = (columnName) => {
@@ -645,7 +652,7 @@ export default function GridTable() {
               context: params.namespace,
               workspaceId: params.wid,
             };
-            getWorkSpaceData(payload, wid, directives);
+            getWorkSpaceData(payload as IParams, wid as string, directives);
           }}
           onClose={() => setOpenDirective(false)}
         />

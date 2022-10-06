@@ -82,6 +82,11 @@ export const useStyles = makeStyles({
       cursor: 'pointer',
     },
   },
+  closeIcon: {
+    '& :hover': {
+      cursor: 'pointer',
+    },
+  },
   tabsContainerWithHeader: {
     display: 'flex',
     flexDirection: 'column',
