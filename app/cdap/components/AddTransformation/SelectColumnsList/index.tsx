@@ -49,7 +49,6 @@ const SelectColumnsList = (props) => {
           });
         })
       : [];
-
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);

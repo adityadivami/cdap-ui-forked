@@ -3,7 +3,12 @@ import { Box } from '@material-ui/core';
 import { useCss } from './styles';
 import { ColumnIcon, ZoomIn, ArrowIcon } from './images';
 
-const Footer = ({ showRecipePanelHandler, showAddTransformationHandler, recipeStepsCount }) => {
+const Footer = ({
+  showRecipePanelHandler,
+  showAddTransformationHandler,
+  recipeStepsCount,
+  setOpenDirective,
+}) => {
   const classes = useCss();
 
   return (
@@ -18,7 +23,9 @@ const Footer = ({ showRecipePanelHandler, showAddTransformationHandler, recipeSt
           <p className={classes.spanElement}> 100%</p>
           {ArrowIcon}
         </Box>
-        <p className={classes.directivesCont}> Directives </p>
+        <Box className={classes.directivesCont} onClick={() => setOpenDirective(true)}>
+          <p> Directives </p>
+        </Box>
         <Box className={classes.recipeCont} onClick={showRecipePanelHandler}>
           <p> Recipe Steps</p>
           <p className={classes.spanElement1}>{recipeStepsCount}</p>
