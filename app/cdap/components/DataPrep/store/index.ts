@@ -76,6 +76,7 @@ export interface IDataPrepState {
   dataModelList?: IDataModel[];
   targetDataModel?: IDataModel;
   targetModel?: IModel;
+  connectorType?: string;
 }
 
 const defaultInitialState: IDataPrepState = {
@@ -101,6 +102,7 @@ const defaultInitialState: IDataPrepState = {
   dataModelList: null,
   targetDataModel: null,
   targetModel: null,
+  connectorType: null,
 };
 
 const errorInitialState = {
