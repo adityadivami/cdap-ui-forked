@@ -16,13 +16,13 @@
 
 import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import React, { useState } from 'react';
-import MenuComponent from '../MenuComponent';
-import MenuItemComponent from '../MenuItemComponent';
+import { MenuComponent } from '../MenuComponent';
+import { MenuItemComponent } from '../MenuItemComponent';
 import { MENU_OPTIONS } from './constants';
 import { useNestedMenuStyles } from './styles';
 import { INestedMenuProps } from './types';
 
-const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
+export const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const open = Boolean(anchorEl);
@@ -91,5 +91,3 @@ const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
     </>
   );
 };
-
-export default NestedMenu;

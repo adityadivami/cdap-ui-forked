@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DirectiveContent: React.FC<any> = (props) => {
+export const DirectiveContent: React.FC<any> = (props) => {
   const { directiveComponents, functionName: type } = props;
   const Component = directiveComponents.find((item) => item.type === type)?.component;
 
@@ -12,5 +12,3 @@ const DirectiveContent: React.FC<any> = (props) => {
     />
   );
 };
-
-export default DirectiveContent;

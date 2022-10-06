@@ -19,7 +19,11 @@ import { menuArrowIcon } from '../AaToolbar/images';
 import { useNestedMenuStyles } from '../NestedMenu/styles';
 import { IMenuItemComponentProps } from './types';
 
-const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({ item, index, onMenuClick }) => {
+export const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({
+  item,
+  index,
+  onMenuClick,
+}) => {
   const classes = useNestedMenuStyles();
 
   if (item.value === 'divider') {
@@ -40,4 +44,3 @@ const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({ item, index, onM
     );
   }
 };
-export default MenuItemComponent;

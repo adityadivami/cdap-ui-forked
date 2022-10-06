@@ -1,12 +1,12 @@
 import React from 'react';
-import FilterComponent from './FilterComponent';
-import ParseCSVComponent from './ParseComponent/ParseCSVComponent';
-import ParseDateTimeComponent from './ParseComponent/ParseDateTimeComponent';
-import ParseExcelComponent from './ParseComponent/ParseExcelComponent';
-import ParseFixedLengthComponent from './ParseComponent/ParseFixedLengthComponent';
-import ParseLogComponent from './ParseComponent/ParseLogComponent';
-import ParseSimpleDateComponent from './ParseComponent/ParseSimpleDateComponent';
-import ParseXMLToJSONComponent from './ParseComponent/ParseXMLToJSONComponent';
+import { FilterComponent } from './FilterComponent';
+import { ParseCSVComponent } from './ParseComponent/ParseCSVComponent';
+import { ParseDateTimeComponent } from './ParseComponent/ParseDateTimeComponent';
+import { ParseExcelComponent } from './ParseComponent/ParseExcelComponent';
+import { ParseFixedLengthComponent } from './ParseComponent/ParseFixedLengthComponent';
+import { ParseLogComponent } from './ParseComponent/ParseLogComponent';
+import { ParseSimpleDateComponent } from './ParseComponent/ParseSimpleDateComponent';
+import { ParseXMLToJSONComponent } from './ParseComponent/ParseXMLToJSONComponent';
 
 export const DIRECTIVE_COMPONENTS = [
   {

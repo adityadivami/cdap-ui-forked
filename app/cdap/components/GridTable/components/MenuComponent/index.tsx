@@ -19,7 +19,7 @@ import MenuItemComponent from '../MenuItemComponent';
 import { IMenuComponentProps } from './types';
 import { useStyles } from './styles';
 
-const MenuComponent: React.FC<IMenuComponentProps> = ({
+export const MenuComponent: React.FC<IMenuComponentProps> = ({
   anchorEl,
   menuOptions,
   setAnchorEl,
@@ -54,4 +54,3 @@ const MenuComponent: React.FC<IMenuComponentProps> = ({
     </Menu>
   );
 };
-export default MenuComponent;
