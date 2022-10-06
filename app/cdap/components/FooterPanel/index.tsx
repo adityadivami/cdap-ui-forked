@@ -3,13 +3,20 @@ import { Box } from '@material-ui/core';
 import { useCss } from './styles';
 import { ColumnIcon, ZoomIn, ArrowIcon } from './images';
 
-const Footer = ({ showRecipePanelHandler, showAddTransformationHandler, recipeStepsCount }) => {
+const Footer = ({
+  showRecipePanelHandler,
+  showAddTransformationHandler,
+  recipeStepsCount,
+  setOpenColumnViewHandler,
+}) => {
   const classes = useCss();
 
   return (
     <Box className={classes.containerProps}>
       <Box className={classes.cont}>
-        <Box className={classes.imgCont}>{ColumnIcon}</Box>
+        <Box className={classes.imgCont} onClick={setOpenColumnViewHandler}>
+          {ColumnIcon}
+        </Box>
         <Box className={classes.dataWrapper}>
           <p className={classes.data}> Current data - 1000 rows and 30 columns</p>
         </Box>

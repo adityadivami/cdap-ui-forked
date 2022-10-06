@@ -58,6 +58,7 @@ import {
   checkAlphaNumericAndSpaces,
   calculateDistributionGraphData,
 } from './utils';
+import ColumnView from 'components/ColumnView';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -119,6 +120,7 @@ export default function() {
     isSuccess: false,
   });
   const [toastAction, setToastAction] = useState('');
+  const [openColumnView, setOpenColumnView] = useState(false);
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -477,6 +479,14 @@ export default function() {
     });
   };
 
+  const setOpenColumnViewHandler = () => {
+    setOpenColumnView((prev) => !prev);
+  };
+
+  const closeClickHandler = () => {
+    setOpenColumnView(false);
+  };
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
@@ -542,94 +552,108 @@ export default function() {
           }}
         />
       )}
-      {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
-        <Box className={classes.gridTableWrapper}>
-          <Table aria-label="simple table" className="test" data-testid="grid-table">
-            <TableHead>
-              <TableRow>
-                {headers.map((eachHeader) => (
-                  <GridHeaderCell
-                    label={eachHeader}
-                    type={types[eachHeader]}
-                    key={eachHeader}
-                    columnSelected={columnSelected}
-                    setColumnSelected={handleColumnSelect}
-                    onColumnSelection={(column) => onColumnSelection(column)}
-                  />
-                ))}
-              </TableRow>
-              <TableRow>
-                {headers.map((item, index) => (
-                  <TableCell className={classes.progressBarRoot}>
-                    <LinearProgress
-                      variant="determinate"
-                      value={progress.filter((each) => each.key === item)[0]?.value}
-                      key={index}
-                      classes={{
-                        root: classes.MUILinearRoot,
-                        barColorPrimary: classes.MUIBarColor,
-                      }}
-                      className={classes.linearProgressBarStyle}
-                    />
-                  </TableCell>
-                ))}
-              </TableRow>
-              <TableRow>
-                {Array.isArray(missingDataList) &&
-                  Array.isArray(headers) &&
-                  headers.map((each, index) => {
-                    return missingDataList.map((item, itemIndex) => {
-                      if (item.name === each) {
-                        return <GridKPICell metricData={item} key={item.name} />;
-                      }
-                    });
-                  })}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map((eachRow, rowIndex) => {
-                return (
-                  <TableRow key={`row-${rowIndex}`}>
-                    {headers.map((eachKey, eachIndex) => {
-                      return (
-                        <GridTextCell
-                          cellValue={eachRow[eachKey] || '--'}
-                          key={`${eachKey}-${eachIndex}`}
-                          maskSelection={eachKey === columnSelected ? maskSelection : false}
-                          rowNumber={rowIndex}
-                          columnSelected={columnSelected}
-                          optionSelected={optionSelected}
-                          headers={headers}
-                          applyTransformation={(value) => {
-                            applyDirective(
-                              optionSelected,
-                              columnSelected,
-                              directiveFunctionSupportedDataType,
-                              value
-                            );
-                          }}
-                          cancelTransformation={() => {
-                            setColumnSelected('');
-                            setOptionSelected('');
-                            setMaskSelection(false);
-                          }}
-                        />
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Box>
-      ) : (
-        <NoDataScreen />
-      )}
 
+      <Box className={classes.columnViewContainer}>
+        {openColumnView && (
+          <Box className={classes.columnViewDrawer}>
+            <ColumnView
+              setLoading={setLoading}
+              columnData={headersNamesList}
+              dataQuality={dataQuality}
+              closeClickHandler={closeClickHandler}
+            />
+          </Box>
+        )}
+
+        {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+          <Box className={classes.gridTableWrapper}>
+            <Table aria-label="simple table" className="test" data-testid="grid-table">
+              <TableHead>
+                <TableRow>
+                  {headers.map((eachHeader) => (
+                    <GridHeaderCell
+                      label={eachHeader}
+                      type={types[eachHeader]}
+                      key={eachHeader}
+                      columnSelected={columnSelected}
+                      setColumnSelected={handleColumnSelect}
+                      onColumnSelection={(column) => onColumnSelection(column)}
+                    />
+                  ))}
+                </TableRow>
+                <TableRow>
+                  {headers.map((item, index) => (
+                    <TableCell className={classes.progressBarRoot}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={progress.filter((each) => each.key === item)[0]?.value}
+                        key={index}
+                        classes={{
+                          root: classes.MUILinearRoot,
+                          barColorPrimary: classes.MUIBarColor,
+                        }}
+                        className={classes.linearProgressBarStyle}
+                      />
+                    </TableCell>
+                  ))}
+                </TableRow>
+                <TableRow>
+                  {Array.isArray(missingDataList) &&
+                    Array.isArray(headers) &&
+                    headers.map((each, index) => {
+                      return missingDataList.map((item, itemIndex) => {
+                        if (item.name === each) {
+                          return <GridKPICell metricData={item} key={item.name} />;
+                        }
+                      });
+                    })}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.map((eachRow, rowIndex) => {
+                  return (
+                    <TableRow key={`row-${rowIndex}`}>
+                      {headers.map((eachKey, eachIndex) => {
+                        return (
+                          <GridTextCell
+                            cellValue={eachRow[eachKey] || '--'}
+                            key={`${eachKey}-${eachIndex}`}
+                            maskSelection={eachKey === columnSelected ? maskSelection : false}
+                            rowNumber={rowIndex}
+                            columnSelected={columnSelected}
+                            optionSelected={optionSelected}
+                            headers={headers}
+                            applyTransformation={(value) => {
+                              applyDirective(
+                                optionSelected,
+                                columnSelected,
+                                directiveFunctionSupportedDataType,
+                                value
+                              );
+                            }}
+                            cancelTransformation={() => {
+                              setColumnSelected('');
+                              setOptionSelected('');
+                              setMaskSelection(false);
+                            }}
+                          />
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </Box>
+        ) : (
+          <NoDataScreen />
+        )}
+      </Box>
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
         recipeStepsCount={directives?.length}
+        setOpenColumnViewHandler={setOpenColumnViewHandler}
       />
       {toaster.open && (
         <PositionedSnackbar
