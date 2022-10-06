@@ -233,7 +233,7 @@ const SelectColumnsList = (props) => {
                     );
                   }
                 } else if (
-                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0].toLowerCase())
+                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   if (!is_secondSelection) {
                     return (
