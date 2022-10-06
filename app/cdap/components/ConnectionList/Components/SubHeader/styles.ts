@@ -19,6 +19,12 @@ import grey from '@material-ui/core/colors/grey';
 import { blue } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
+  box: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   breadCombContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -62,9 +68,14 @@ export const useStyles = makeStyles({
     alignItems: 'flex-end',
     fontSize: '14px',
   },
-  breadCrumbTyporgraphy: {
-    color: '#000000',
+  breadcrumbTyporgraphy: {
+    color: grey[900],
     fontSize: '14px',
     lineHeight: '21px',
+  },
+  link: {
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
 });

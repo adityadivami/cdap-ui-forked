@@ -2,7 +2,7 @@
  * Copyright © 2022 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
+ * use this file except in compliance with the License. You may obtain `a` copy of
  * the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -14,43 +14,110 @@
  * the License.
  */
 
-import { Button, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import {
+  Button,
+  LinearProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
+import AddTransformation from 'components/AddTransformation';
+import ColumnInsightDrawer from 'components/ColumnInsights';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import DirectiveInputDrawer from 'components/DirectiveInput';
+import FooterPanel from 'components/FooterPanel';
+import ParsingDrawer from 'components/ParsingDrawer';
+import RecipeSteps from 'components/RecipeSteps';
 import LoadingSVG from 'components/shared/LoadingSVG';
+import PositionedSnackbar from 'components/SnackbarComponent';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
+import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
+import ToolBarList from './components/AaToolbar';
 import BreadCrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
-import Box from '@material-ui/core/Box';
+import NoDataScreen from './components/NoRecordScreen';
+import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
+import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { useStyles } from './styles';
-import { flatMap } from 'rxjs/operators';
-import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
-import DirectiveInputDrawer from 'components/DirectiveInput';
+import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
+import {
+  calculateDistinctValues,
+  calculateDistributionGraphData,
+  characterCount,
+  checkAlphaNumericAndSpaces,
+  convertNonNullPercent,
+} from './utils';
 
-export default function GridTable() {
+export default function() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
+  const location = useLocation();
 
   const [loading, setLoading] = useState(false);
+  const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
-  const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
+  const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
   const [openDirective, setOpenDirective] = useState(false);
+  const [insightDrawer, setInsightDrawer] = useState({
+    open: false,
+    columnName: '',
+    distinctValues: 0,
+    characterCount: {
+      min: 0,
+      max: 0,
+    },
+    dataQuality: {
+      missingNullValueCount: 0,
+      missingNullValuePercentage: 0,
+      invalidValueCount: 0,
+      invalidValuePercentage: 0,
+    },
+    dataQualityBar: {},
+    dataTypeString: '',
+    dataDistributionGraphData: [],
+  });
+  const [dataQuality, setDataQuality] = useState({});
+  const [optionSelected, setOptionSelected] = useState(null);
+  const { dataprep } = DataPrepStore.getState();
+  const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
       count: '0',
     },
   ]);
+  const [columnSelected, setColumnSelected] = useState('');
+  const [directiveFunction, setDirectiveFunction] = useState('');
+  const [progress, setProgress] = useState([]);
+  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [columnType, setColumnType] = useState('');
+
+  const [connectorType, setConnectorType] = useState(null);
+  const [showRecipePanel, setShowRecipePanel] = useState(false);
+  const [toaster, setToaster] = useState({
+    open: false,
+    message: '',
+    isSuccess: false,
+  });
+
+  useEffect(() => {
+    setIsFirstWrangle(true);
+    setConnectorType(dataprep.connectorType);
+  }, []);
 
   const getWorkSpaceData = (
     params: IParams,
@@ -58,7 +125,7 @@ export default function GridTable() {
     selectedDirective?: string[] | undefined
   ) => {
     console.log('selectedDirective', selectedDirective);
-    const gridParams = {};
+    let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
       type: DataPrepActions.setWorkspaceId,
@@ -71,6 +138,7 @@ export default function GridTable() {
       .pipe(
         flatMap((res: IValues) => {
           const { dataprep } = DataPrepStore.getState();
+          setWorkspaceName(res.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
@@ -83,9 +151,9 @@ export default function GridTable() {
 
           console.log('directives con', directives);
           const insights = {
-            name: sampleSpec.connectionName,
+            name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
-            path: sampleSpec.path,
+            path: res?.sampleSpec?.path,
             visualization,
           };
           requestBody.insights = insights;
@@ -94,7 +162,7 @@ export default function GridTable() {
           const workspaceInfo = {
             properties: insights,
           };
-          const gridParams = {
+          gridParams = {
             directives,
             workspaceId,
             workspaceUri,
@@ -104,11 +172,118 @@ export default function GridTable() {
           return MyDataPrepApi.execute(params, requestBody);
         })
       )
-      .subscribe((response) => {
+      .subscribe(
+        (response) => {
+          DataPrepStore.dispatch({
+            type: DataPrepActions.setWorkspace,
+            payload: {
+              data: response.values,
+              values: response.values,
+              headers: response.headers,
+              types: response.types,
+              ...gridParams,
+            },
+          });
+          setLoading(false);
+          setGridData(response);
+          setDirectiveFunction('');
+          setColumnSelected('');
+        },
+        (err) => {
+          setToaster({
+            open: true,
+            message: 'Failed to load data',
+            isSuccess: false,
+          });
+          setLoading(false);
+        }
+      );
+  };
+
+  const updateDataTranformation = (wid: string) => {
+    const payload = {
+      context: params.namespace,
+      workspaceId: wid,
+    };
+    getWorkSpaceData(payload, wid);
+    setIsFirstWrangle(false);
+  };
+
+  const showRecipePanelHandler = () => {
+    setShowRecipePanel((prev) => !prev);
+  };
+
+  const [showAddTransformation, setSshowAddTransformation] = useState(false);
+  const showAddTransformationHandler = () => {
+    setSshowAddTransformation((prev) => !prev);
+  };
+
+  const applyDirective = (option, columnSelected, supported_dataType, value_1?) => {
+    setLoading(true);
+    setOptionSelected(option);
+    setDirectiveFunctionSupportedDataType(supported_dataType);
+    if (OPTION_WITH_NO_INPUT.includes(option)) {
+      const newDirective = getDirective(option, columnSelected);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective, 'add');
+        setIsFirstWrangle(false);
+      }
+    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective, 'add');
+      }
+    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective, 'add');
+      }
+    }
+  };
+
+  const applyDirectiveAPICall = (newDirective, action) => {
+    setLoading(true);
+    const { dataprep } = DataPrepStore.getState();
+    const { workspaceId, workspaceUri, directives, insights } = dataprep;
+    let gridParams = {};
+    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
+    const requestBody = directiveRequestBodyCreator(updatedDirectives);
+
+    requestBody.insights = insights;
+
+    const workspaceInfo = {
+      properties: insights,
+    };
+    gridParams = {
+      directives: updatedDirectives,
+      workspaceId,
+      workspaceUri,
+      workspaceInfo,
+      insights,
+    };
+    const payload = {
+      context: params.namespace,
+      workspaceId: params.wid,
+    };
+    MyDataPrepApi.execute(payload, requestBody).subscribe(
+      (response) => {
         DataPrepStore.dispatch({
           type: DataPrepActions.setWorkspace,
           payload: {
             data: response.values,
+            values: response.values,
             headers: response.headers,
             types: response.types,
             ...gridParams,
@@ -117,16 +292,36 @@ export default function GridTable() {
         setOpenDirective(false);
         setLoading(false);
         setGridData(response);
-      });
+        setDirectiveFunction('');
+        setColumnSelected('');
+        setShowRecipePanel(false);
+        setToaster({
+          open: true,
+          message:
+            action === 'add'
+              ? `${newDirective} successfully added`
+              : `${newDirective} successfully deleted`,
+          isSuccess: true,
+        });
+      },
+      (err) => {
+        setToaster({
+          open: true,
+          message: `Failed to transform ${newDirective}`,
+          isSuccess: false,
+        });
+        setLoading(false);
+        setShowRecipePanel(false);
+      }
+    );
   };
 
   useEffect(() => {
-    // Get DATA from URL paramteres to get data of workspace
     const payload = {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload, wid);
+    getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -142,74 +337,21 @@ export default function GridTable() {
     }
   };
 
-  // ------------@convertNonNullPercent Function is used for calculation of Missing/Null value
-  const convertNonNullPercent = (nonNullValue) => {
-    const lengthOfData: number = gridData?.values.length;
-    let count: number = 0;
-    let emptyCount: number = 0;
-    let nullValueCount: number = 0;
-    if (lengthOfData) {
-      nullValueCount = nonNullValue.null ? (nonNullValue.null / 100) * lengthOfData : 0;
-      emptyCount = nonNullValue.empty ? (nonNullValue.empty / 100) * lengthOfData : 0;
-      count = parseInt(nullValueCount.toFixed(0) + emptyCount.toFixed(0));
-    }
-    return count;
-  };
-
-  // ------------@checkFrequentlyOccuredValues Function is used for checking which value appears maximum time in a column if that column doesn't have missing/null value
-  const checkFrequentlyOccuredValues = (key) => {
-    const valueOfKey = gridData.values.map((el) => el[key]);
-    let mostFrequentItem: number = 1;
-    let mostFrequentItemCount: number = 0;
-    let mostFrequentItemValue: string = '';
-    const mostFrequentDataItem = {
-      name: '',
-      count: 0,
-    };
-    if (Array.isArray(valueOfKey) && valueOfKey.length) {
-      valueOfKey.map((item, index) => {
-        valueOfKey.map((value, valueIndex) => {
-          if (item == value) {
-            mostFrequentItemCount++;
-          }
-          if (mostFrequentItem < mostFrequentItemCount) {
-            mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item;
-          }
-        });
-        mostFrequentItemCount = 0;
-        mostFrequentItemValue = mostFrequentItemValue == '' ? item : mostFrequentItemValue;
-      });
-    }
-    mostFrequentDataItem.name = mostFrequentItemValue;
-    mostFrequentDataItem.count = mostFrequentItemCount;
-    return mostFrequentDataItem;
-  };
-
-  // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
-  const createMissingData = (statistics: IRecords) => {
+  const createMissingData = (statistics: IObject) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
       const headerKeyTypeArray = Object.entries(value);
-      const arrayForMissingValue = [];
+      const typeArrayOfMissingValue = [];
       headerKeyTypeArray.forEach(([vKey, vValue]) => {
-        if (vKey !== 'types') {
-          arrayForMissingValue.push({
-            label:
-              convertNonNullPercent(vValue) == 0
-                ? checkFrequentlyOccuredValues(key).name
-                : 'Missing/Null',
-            count:
-              convertNonNullPercent(vValue) == 0
-                ? checkFrequentlyOccuredValues(key).count
-                : convertNonNullPercent(vValue),
-          });
-        }
+        typeArrayOfMissingValue.push({
+          label: vKey == 'general' ? 'Missing/Null' : '',
+          count: vKey == 'types' ? '' : convertNonNullPercent(gridData, vValue),
+        });
       }),
         metricArray.push({
           name: key,
-          values: arrayForMissingValue.concat(invalidCountArray),
+          values: typeArrayOfMissingValue.concat(invalidCountArray),
         });
     });
     return metricArray;
@@ -223,68 +365,214 @@ export default function GridTable() {
     if (rawData && rawData.summary && rawData.summary.statistics) {
       const missingData = createMissingData(gridData?.summary.statistics);
       setMissingDataList(missingData);
+      setDataQuality(gridData.summary.statistics);
     }
     const rowData =
       rawData &&
       rawData.values &&
-      Array.isArray(rawData.values) &&
-      rawData.values.map((eachRow) => {
-        const { body, ...rest } = eachRow;
-        return rest;
+      Array.isArray(rawData?.values) &&
+      rawData?.values.map((eachRow: {}) => {
+        return eachRow;
       });
-
     setRowsDataList(rowData);
+    const progressValues = [];
+    for (const title in gridData.summary.statistics) {
+      const { general } = gridData.summary.statistics[title] || {};
+      const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+      const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+      progressValues.push({ value: nonNull, key: title });
+    }
+    setProgress(progressValues);
+  };
+
+  const onColumnSelection = (columnName) => {
+    const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
+    const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
+    const getMissingValueCount =
+      convertNonNullPercent(gridData, gridData?.summary?.statistics[columnName].general) || 0;
+    const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
+    setInsightDrawer({
+      open: true,
+      columnName,
+      distinctValues: getDistinctValue,
+      characterCount: getCharacterCountOfCell,
+      dataQuality: {
+        missingNullValueCount: getMissingValueCount,
+        missingNullValuePercentage: (getMissingValueCount / rowsDataList.length) * 100,
+        invalidValueCount: 0,
+        invalidValuePercentage: 0,
+      },
+      dataQualityBar: gridData?.summary?.statistics[columnName],
+      dataTypeString: getDataTypeString,
+      dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
+    });
   };
 
   useEffect(() => {
     getGridTableData();
   }, [gridData]);
 
+  const handleColumnSelect = (columnName) => {
+    setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+    setColumnType(types[columnName]);
+  };
+
+  const deleteRecipes = (new_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete');
+  };
+
+  // Redux store
+  const { data, headers, types, directives } = dataprep;
+
   return (
     <Box>
-      <BreadCrumb datasetName={wid} />
-      <Table aria-label="simple table" className="test">
-        <TableHead>
-          <TableRow>
-            {headersNamesList?.length &&
-              headersNamesList.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader.label}
-                  types={eachHeader.type}
-                  key={eachHeader.name}
-                />
-              ))}
-          </TableRow>
-          <TableRow>
-            {missingDataList?.length &&
-              headersNamesList.length &&
-              headersNamesList.map((each, index) => {
-                return missingDataList.map((item, itemIndex) => {
-                  if (item.name == each.name) {
-                    return <GridKPICell metricData={item} key={item.name} />;
-                  }
-                });
-              })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rowsDataList?.length &&
-            rowsDataList.map((eachRow, rowIndex) => {
-              return (
-                <TableRow key={`row-${rowIndex}`}>
-                  {headersNamesList.map((eachKey, eachIndex) => {
-                    return (
-                      <GridTextCell
-                        cellValue={eachRow[eachKey.name] || '--'}
-                        key={`${eachKey.name}-${eachIndex}`}
-                      />
-                    );
+      <BreadCrumb datasetName={workspaceName} location={location} />
+      <ToolBarList
+        columnType={columnType}
+        submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+      />
+      {isFirstWrangle && connectorType === 'File' && (
+        <ParsingDrawer
+          updateDataTranformation={(wid) => updateDataTranformation(wid)}
+          setLoading={setLoading}
+        />
+      )}
+      {insightDrawer.open && (
+        <ColumnInsightDrawer
+          columnData={insightDrawer}
+          onClose={() =>
+            setInsightDrawer({
+              open: false,
+              columnName: '',
+              distinctValues: 0,
+              characterCount: { min: 0, max: 0 },
+              dataQuality: {
+                missingNullValueCount: 0,
+                missingNullValuePercentage: 0,
+                invalidValueCount: 0,
+                invalidValuePercentage: 0,
+              },
+              dataQualityBar: {},
+              dataTypeString: '',
+              dataDistributionGraphData: [],
+            })
+          }
+        />
+      )}
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
+      {showRecipePanel && (
+        <RecipeSteps
+          setShowRecipePanel={setShowRecipePanel}
+          showRecipePanel={showRecipePanel}
+          deleteRecipes={deleteRecipes}
+        />
+      )}
+      {directiveFunction && (
+        <AddTransformation
+          functionName={directiveFunction}
+          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+          setLoading={setLoading}
+          columnData={headersNamesList}
+          missingDataList={dataQuality}
+          applyTransformation={(selectedColumn, value) => {
+            setColumnSelected(selectedColumn);
+            applyDirective(
+              optionSelected,
+              selectedColumn,
+              directiveFunctionSupportedDataType,
+              value
+            );
+          }}
+          callBack={(response) => {
+            setColumnSelected('');
+            setDirectiveFunction('');
+          }}
+        />
+      )}
+      {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+        <Box className={classes.gridTableWrapper}>
+          <Table aria-label="simple table" className="test" data-testid="grid-table">
+            <TableHead>
+              <TableRow>
+                {headers.map((eachHeader) => (
+                  <GridHeaderCell
+                    label={eachHeader}
+                    type={types[eachHeader]}
+                    key={eachHeader}
+                    columnSelected={columnSelected}
+                    setColumnSelected={handleColumnSelect}
+                    onColumnSelection={onColumnSelection}
+                  />
+                ))}
+              </TableRow>
+              <TableRow>
+                {headers.map((item, index) => (
+                  <TableCell className={classes.progressBarRoot}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={progress.filter((each) => each.key === item)[0]?.value}
+                      key={index}
+                      classes={{
+                        root: classes.MUILinearRoot,
+                        barColorPrimary: classes.MUIBarColor,
+                      }}
+                      className={classes.linearProgressBarStyle}
+                    />
+                  </TableCell>
+                ))}
+              </TableRow>
+              <TableRow>
+                {Array.isArray(missingDataList) &&
+                  Array.isArray(headers) &&
+                  headers.map((each, index) => {
+                    return missingDataList.map((item, itemIndex) => {
+                      if (item.name === each) {
+                        return <GridKPICell metricData={item} key={item.name} />;
+                      }
+                    });
                   })}
-                </TableRow>
-              );
-            })}
-        </TableBody>
-      </Table>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((eachRow, rowIndex) => {
+                return (
+                  <TableRow key={`row-${rowIndex}`}>
+                    {headers.map((eachKey, eachIndex) => {
+                      return (
+                        <GridTextCell
+                          cellValue={eachRow[eachKey] || '--'}
+                          key={`${eachKey}-${eachIndex}`}
+                        />
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Box>
+      ) : (
+        <NoDataScreen />
+      )}
+
+      <FooterPanel
+        showRecipePanelHandler={showRecipePanelHandler}
+        showAddTransformationHandler={showAddTransformationHandler}
+        recipeStepsCount={directives?.length}
+      />
+      {toaster.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setToaster({
+              open: false,
+              message: '',
+              isSuccess: false,
+            })
+          }
+          messageToDisplay={toaster.message}
+          isSuccess={toaster.isSuccess}
+        />
+      )}
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
@@ -301,7 +589,7 @@ export default function GridTable() {
               context: params.namespace,
               workspaceId: params.wid,
             };
-            getWorkSpaceData(payload, wid, directives);
+            getWorkSpaceData(payload as IParams, wid as string, directives);
           }}
           onClose={() => setOpenDirective(false)}
         />
