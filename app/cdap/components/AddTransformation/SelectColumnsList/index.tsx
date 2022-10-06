@@ -39,16 +39,14 @@ const SelectColumnsList = (props) => {
   const [focused, setFocused] = useState(false);
   const classes = useStyles();
   const ref = useRef(null);
-  const no_match =
-    directiveFunctionSupportedDataType.length > 0
-      ? !directiveFunctionSupportedDataType.includes('all')
-      : false
-      ? columns.filter((object1) => {
-          return directiveFunctionSupportedDataType.some((object2) => {
-            return object2.includes(object1.type[0].toLowerCase());
-          });
-        })
-      : [];
+  const no_match = directiveFunctionSupportedDataType.includes('all')
+    ? ['all']
+    : columns.filter((object1) => {
+        return directiveFunctionSupportedDataType.some((object2) => {
+          return object2.includes(object1.type[0].toLowerCase());
+        });
+      });
+
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
