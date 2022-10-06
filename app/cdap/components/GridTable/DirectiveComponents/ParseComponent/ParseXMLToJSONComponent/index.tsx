@@ -18,9 +18,9 @@ import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { DEPTH, DEPTH_PLACEHOLDER, PARSE_AS_XML_TO_JSON } from '../../constants';
 import { useStyles } from '../../styles';
-import { FormInputFieldComponent } from '../FormInputFieldComponent';
+import FormInputFieldComponent from '../FormInputFieldComponent';
 
-export const ParseXMLToJSONComponent = (props) => {
+const ParseXMLToJSONComponent = (props) => {
   const { setDirectiveComponentsValue, directiveComponentValues } = props;
   const [depth, setDepth] = useState(1);
 
@@ -50,3 +50,4 @@ export const ParseXMLToJSONComponent = (props) => {
     </ParseComponent>
   );
 };
+export default ParseXMLToJSONComponent;

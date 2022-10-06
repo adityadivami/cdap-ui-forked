@@ -17,9 +17,9 @@ import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { PLEASE_SELECT_THE_DATE_FORMAT } from '../../constants';
 import { PARSE_SIMPLE_DATE_OPTIONS } from '../../options';
-import { InputRadioWithCustomInputComponent } from '../InputRadioWithCustomInputComponent';
+import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
 
-export const ParseSimpleDateComponent = (props) => {
+const ParseSimpleDateComponent = (props) => {
   const { setDirectiveComponentsValue, directiveComponentValues } = props;
   const [customFormat, setCustomFormat] = useState('');
   const [selectedParseType, setSelectedParseType] = useState('');
@@ -45,3 +45,4 @@ export const ParseSimpleDateComponent = (props) => {
     </ParseComponent>
   );
 };
+export default ParseSimpleDateComponent;

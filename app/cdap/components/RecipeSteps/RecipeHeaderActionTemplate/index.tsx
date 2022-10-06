@@ -16,7 +16,7 @@
 import React from 'react';
 import { useStyles } from '../styles';
 
-export const RecipeHeaderActionTemplate = (props) => {
+export default function(props) {
   const classes = useStyles();
 
   return (
@@ -29,4 +29,4 @@ export const RecipeHeaderActionTemplate = (props) => {
       <img src="/cdap_assets/img/more-options.svg" alt="More icon" />
     </div>
   );
-};
+}

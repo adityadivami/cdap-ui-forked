@@ -24,9 +24,9 @@ import {
   PARSE_AS_FIXED_LENGTH,
 } from '../../constants';
 import { useStyles } from '../../styles';
-import { FormInputFieldComponent } from '../FormInputFieldComponent';
+import FormInputFieldComponent from '../FormInputFieldComponent';
 
-export const ParseFixedLengthComponent = (props) => {
+const ParseFixedLengthComponent = (props) => {
   const { setDirectiveComponentsValue, directiveComponentValues } = props;
   const [columnWidths, setColumnWidths] = useState('');
   const [padding, setPadding] = useState('');
@@ -73,3 +73,4 @@ export const ParseFixedLengthComponent = (props) => {
     </ParseComponent>
   );
 };
+export default ParseFixedLengthComponent;

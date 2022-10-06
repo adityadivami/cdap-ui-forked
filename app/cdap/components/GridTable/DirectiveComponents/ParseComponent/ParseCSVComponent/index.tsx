@@ -18,10 +18,10 @@ import React, { useState, useEffect } from 'react';
 import { PLEASE_SELECT_THE_DELIMITER, SET_FIRST_ROW_AS_HEADER } from '../../constants';
 import { PARSE_CSV_OPTIONS } from '../../options';
 import { useStyles } from '../../styles';
-import { InputRadioWithCustomInputComponent } from '../InputRadioWithCustomInputComponent';
+import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
 import ParseComponent from '..';
 
-export const ParseCSVComponent = (props) => {
+const ParseCSVComponent = (props) => {
   const { setDirectiveComponentsValue, directiveComponentValues } = props;
   const [selectedParseType, setSelectedParseType] = useState('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState(false);
@@ -59,3 +59,4 @@ export const ParseCSVComponent = (props) => {
     </ParseComponent>
   );
 };
+export default ParseCSVComponent;

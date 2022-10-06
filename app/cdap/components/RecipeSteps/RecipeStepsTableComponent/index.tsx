@@ -26,7 +26,7 @@ import React from 'react';
 import { RECIPE_STEPS, SERIAL_NUMBER } from '../constants';
 import { useStyles } from '../styles';
 
-export const RecipeStepsTableComponent = (props) => {
+export default function(props) {
   const { recipeSteps, handleDeleteRecipeSteps } = props;
   const classes = useStyles();
 
@@ -76,4 +76,4 @@ export const RecipeStepsTableComponent = (props) => {
       </Table>
     </TableContainer>
   );
-};
+}

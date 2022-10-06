@@ -17,9 +17,9 @@ import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { PLEASE_SELECT_THE_LOGS_FORMAT } from '../../constants';
 import { PARSE_LOG_OPTIONS } from '../../options';
-import { InputRadioWithCustomInputComponent } from '../InputRadioWithCustomInputComponent';
+import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
 
-export const ParseLogComponent = (props) => {
+const ParseLogComponent = (props) => {
   const { setDirectiveComponentsValue, directiveComponentValues } = props;
   const [selectedParseType, setSelectedParseType] = useState('');
   const [delimiter, setDelimiter] = useState('');
@@ -45,3 +45,4 @@ export const ParseLogComponent = (props) => {
     </ParseComponent>
   );
 };
+export default ParseLogComponent;

@@ -35,7 +35,7 @@ import {
 } from './images';
 import { useStyles } from './styles';
 
-export const ToolBarList = ({ submitMenuOption }) => {
+const ToolBarList = ({ submitMenuOption }) => {
   const classes = useStyles();
   return (
     <Box className={classes.iconContainer}>
@@ -67,3 +67,4 @@ export const ToolBarList = ({ submitMenuOption }) => {
     </Box>
   );
 };
+export default ToolBarList;

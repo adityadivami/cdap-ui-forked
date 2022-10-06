@@ -19,9 +19,9 @@ import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import DrawerWidget from 'components/DrawerWidget';
 import React, { useEffect, useState } from 'react';
 import { RECIPE } from './constants';
-import { RecipeHeaderActionTemplate } from './RecipeHeaderActionTemplate';
-import { RecipeStepsEmptyScreen } from './RecipeStepsEmptyScreen';
-import { RecipeStepsTableComponent } from './RecipeStepsTableComponent';
+import RecipeHeaderActionTemplate from './RecipeHeaderActionTemplate';
+import RecipeStepsEmptyScreen from './RecipeStepsEmptyScreen';
+import RecipeStepsTableComponent from './RecipeStepsTableComponent';
 import { useStyles } from './styles';
 
 export const recipes = [
@@ -35,7 +35,7 @@ export const recipes = [
   },
 ];
 
-export const RecipeSteps = ({ setShowRecipePanel, showRecipePanel, deleteRecipes }) => {
+export default function(setShowRecipePanel, showRecipePanel, deleteRecipes) {
   const [recipeSteps, setRecipeSteps] = useState(recipes);
 
   const classes = useStyles();
@@ -74,4 +74,4 @@ export const RecipeSteps = ({ setShowRecipePanel, showRecipePanel, deleteRecipes
       </Container>
     </DrawerWidget>
   );
-};
+}

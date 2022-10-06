@@ -16,6 +16,6 @@
 
 import React from 'react';
 
-export const FilterComponent = (props) => {
+export default function(props) {
   return <div>Filter component</div>;
-};
+}

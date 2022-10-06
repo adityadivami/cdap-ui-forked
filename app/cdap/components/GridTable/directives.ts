@@ -17,7 +17,7 @@
 import { DATATYPE_OPTIONS } from './components/NestedMenu/constants';
 import DataPrepStore from 'components/DataPrep/store';
 
-export const getDirective = (option, column) => {
+const getDirective = (option, column) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === option)) {
     return `set-type :${column} ${option}`;
   } else if (option === 'delete') {
@@ -127,3 +127,4 @@ const explodeRecordByFlattening = (columnName) => {
   const directive = `flatten-record ${column}`;
   return directive;
 };
+export default getDirective;

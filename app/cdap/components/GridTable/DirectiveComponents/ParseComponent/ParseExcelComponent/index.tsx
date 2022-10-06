@@ -33,7 +33,7 @@ import { PARSE_EXCEL_OPTIONS } from '../../options';
 import { useStyles } from '../../styles';
 import { SET_FIRST_ROW_AS_HEADER } from '../../constants';
 
-export const ParseExcelComponent = (props) => {
+const ParseExcelComponent = (props) => {
   const { setDirectiveComponentsValue, directiveComponentValues } = props;
   const [sheetRadioType, setSheetRadioType] = useState('sheetNumber');
   const [sheetValue, setSheetValue] = useState('');
@@ -99,3 +99,4 @@ export const ParseExcelComponent = (props) => {
     </ParseComponent>
   );
 };
+export default ParseExcelComponent;

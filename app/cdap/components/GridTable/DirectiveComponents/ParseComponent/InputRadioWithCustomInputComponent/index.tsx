@@ -24,7 +24,7 @@ import {
 import React from 'react';
 import { useStyles } from '../../styles';
 
-export const InputRadioWithCustomInputComponent = (props) => {
+const InputRadioWithCustomInputComponent = (props) => {
   const {
     options,
     radioValue,
@@ -75,3 +75,4 @@ export const InputRadioWithCustomInputComponent = (props) => {
     </FormGroup>
   );
 };
+export default InputRadioWithCustomInputComponent;

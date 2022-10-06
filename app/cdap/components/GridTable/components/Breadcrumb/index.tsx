@@ -23,7 +23,7 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 import { MATCH_SOURCE, HOME_URL_PARAM, DATASOURCES_URL_PARAM, HOME_LABLE } from './constants';
 
-export const BreadCrumb = ({ datasetName, location }) => {
+const BreadCrumb = ({ datasetName, location }) => {
   const classes = useStyles();
 
   const sourcePath =
@@ -54,3 +54,4 @@ export const BreadCrumb = ({ datasetName, location }) => {
     </Box>
   );
 };
+export default BreadCrumb;

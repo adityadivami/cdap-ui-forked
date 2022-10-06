@@ -16,7 +16,7 @@
 import React from 'react';
 import { useStyles } from '../styles';
 
-export const ParseComponent = (props) => {
+const ParseComponent = (props) => {
   const { sectionHeading, children } = props;
   const classes = useStyles();
   return (
@@ -33,3 +33,4 @@ export const ParseComponent = (props) => {
     </section>
   );
 };
+export default ParseComponent;

@@ -18,7 +18,7 @@ import React, { Fragment } from 'react';
 import { RECIPE_STEPS_EMPTY_INFO_TEXT, START_WRANGLING_YOUR_DATA } from '../constants';
 import { useStyles } from '../styles';
 
-export const RecipeStepsEmptyScreen = (props) => {
+export default function(props) {
   const classes = useStyles();
 
   return (
@@ -28,4 +28,4 @@ export const RecipeStepsEmptyScreen = (props) => {
       <div className={classes.emptyScreenInfoText}>{RECIPE_STEPS_EMPTY_INFO_TEXT}</div>
     </Container>
   );
-};
+}
