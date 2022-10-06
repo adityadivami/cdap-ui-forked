@@ -35,8 +35,8 @@ export default function GridHeaderCell({
   const classes = useGridHeaderCellStyles();
   const isColumnHighlited = label === columnSelected;
   const [data, setData] = useState<Record<string, string>>({
-    datatype1: type.length > 0 ? type[0] : 'Unknown',
-    datatype2: type.length > 1 ? type[1] : null,
+    datatype1: type?.length > 0 ? type[0] : 'Unknown',
+    datatype2: type?.length > 1 ? type[1] : null,
   });
 
   useEffect(() => {
