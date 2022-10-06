@@ -39,7 +39,7 @@ const SelectColumnsList = (props) => {
     ? ['all']
     : columns.filter((object1) => {
         return directiveFunctionSupportedDataType.some((object2) => {
-          return object2.includes(object1.type[0].toLowerCase());
+          return object2.includes(object1.type[0]?.toLowerCase());
         });
       });
 
@@ -171,7 +171,7 @@ const SelectColumnsList = (props) => {
                     </TableRow>
                   );
                 } else if (
-                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0].toLowerCase())
+                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   return (
                     <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
