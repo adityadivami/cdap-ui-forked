@@ -41,8 +41,8 @@ export default function GridHeaderCell({
 
   useEffect(() => {
     setData({
-      datatype1: type.length > 0 ? type[0] : 'Unknown',
-      datatype2: type.length > 1 ? type[1] : null,
+      datatype1: type?.length > 0 ? type[0] : 'Unknown',
+      datatype2: type?.length > 1 ? type[1] : null,
     });
   }, [label, type]);
 
