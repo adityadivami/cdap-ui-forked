@@ -780,7 +780,7 @@ export const MATH_OPTIONS = [
       },
       {
         label: 'Multiply',
-        value: 'MULTIPLE',
+        value: 'MULTIPLY',
         sign: 'x',
         inputRequired: true,
         component: Calculate,
@@ -1170,5 +1170,18 @@ export const OTHER_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['string'],
+  },
+];
+
+export const KEBAB_GRID_PAGE_OPTION = [
+  {
+    label: 'Ingest Data',
+    value: 'ingest-data',
+    supported_dataType: ['all'],
+  },
+  {
+    label: 'View Schema',
+    value: 'view-schema',
+    supported_dataType: ['all'],
   },
 ];

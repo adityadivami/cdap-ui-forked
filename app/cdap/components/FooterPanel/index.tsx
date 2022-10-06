@@ -7,6 +7,8 @@ const Footer = ({
   showRecipePanelHandler,
   showAddTransformationHandler,
   recipeStepsCount,
+  setOpenDirective,
+  dataCounts,
   setOpenColumnViewHandler,
 }) => {
   const classes = useCss();
@@ -18,14 +20,19 @@ const Footer = ({
           {ColumnIcon}
         </Box>
         <Box className={classes.dataWrapper}>
-          <p className={classes.data}> Current data - 1000 rows and 30 columns</p>
+          <p className={classes.data}>
+            {' '}
+            {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
+          </p>
         </Box>
         <Box className={classes.zoomCont}>
           {ZoomIn}
           <p className={classes.spanElement}> 100%</p>
           {ArrowIcon}
         </Box>
-        <p className={classes.directivesCont}> Directives </p>
+        <Box className={classes.directivesCont} onClick={() => setOpenDirective(true)}>
+          <p> Directives </p>
+        </Box>
         <Box className={classes.recipeCont} onClick={showRecipePanelHandler}>
           <p> Recipe Steps</p>
           <p className={classes.spanElement1}>{recipeStepsCount}</p>

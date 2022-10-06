@@ -47,7 +47,7 @@ import {
   OTHER_OPTIONS,
 } from '../NestedMenu/constants';
 
-const ToolBarList = ({ columnType, submitMenuOption }) => {
+const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) => {
   const classes = useStyles();
   return (
     <Box className={classes.iconContainer}>

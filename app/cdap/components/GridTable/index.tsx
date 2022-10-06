@@ -59,6 +59,8 @@ import {
   calculateDistributionGraphData,
 } from './utils';
 import ColumnView from 'components/ColumnView';
+import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
+import ViewSchemaModal from './components/Modals/ViewSchemaModal';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -95,10 +97,6 @@ export default function() {
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [openDirective, setOpenDirective] = useState(false);
-  const [toast, setToast] = useState({
-    open: false,
-    message: '',
-  });
   const [maskSelection, setMaskSelection] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
@@ -120,6 +118,13 @@ export default function() {
     isSuccess: false,
   });
   const [toastAction, setToastAction] = useState('');
+  const [openPipeline, setOpenPipeline] = useState(false);
+  const [openViewSchema, setOpenViewSchema] = useState(false);
+  const [dataCounts, setDataCounts] = useState({
+    rowCount: 0,
+    columnCount: 0,
+  });
+  const [showBreadCrumb, setShowBreadCrumb] = useState(true);
   const [openColumnView, setOpenColumnView] = useState(false);
 
   useEffect(() => {
@@ -132,7 +137,6 @@ export default function() {
     workspaceId: string,
     selectedDirective?: string[] | undefined
   ) => {
-    console.log('selectedDirective', selectedDirective);
     let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -157,7 +161,6 @@ export default function() {
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
-          console.log('directives con', directives);
           const insights = {
             name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
@@ -196,6 +199,17 @@ export default function() {
           setGridData(response);
           setDirectiveFunction('');
           setColumnSelected('');
+          if (selectedDirective) {
+            setToaster({
+              open: true,
+              message: `${selectedDirective} added successfully`,
+              isSuccess: true,
+            });
+          }
+          setDataCounts({
+            rowCount: response.values.length,
+            columnCount: response.headers.length,
+          });
         },
         (err) => {
           setToaster({
@@ -432,7 +446,9 @@ export default function() {
       characterCount: getCharacterCountOfCell,
       dataQuality: {
         missingNullValueCount: Number(getMissingValueCount),
-        missingNullValuePercentage: (Number(getMissingValueCount) / rowsDataList.length) * 100,
+        missingNullValuePercentage: Number(
+          ((Number(Number(getMissingValueCount).toFixed(0)) / rowsDataList.length) * 100).toFixed(0)
+        ),
         invalidValueCount: 0,
         invalidValuePercentage: 0,
       },
@@ -443,7 +459,6 @@ export default function() {
   };
 
   useEffect(() => {
-    console.log('triggered', gridData);
     getGridTableData();
   }, [gridData]);
 
@@ -489,10 +504,19 @@ export default function() {
 
   return (
     <Box>
-      <BreadCrumb datasetName={workspaceName} location={location} />
+      {showBreadCrumb && (
+        <BreadCrumb
+          datasetName={workspaceName}
+          location={location}
+          setOpenPipeline={setOpenPipeline}
+          setOpenViewSchema={setOpenViewSchema}
+        />
+      )}
       <ToolBarList
         columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+        setShowBreadCrumb={setShowBreadCrumb}
+        showBreadCrumb={showBreadCrumb}
       />
       {insightDrawer.open && (
         <ColumnInsightDrawer
@@ -514,6 +538,13 @@ export default function() {
               dataDistributionGraphData: [],
             })
           }
+        />
+      )}
+      {openPipeline && <CreatePipelineModal setOpenPipeline={setOpenPipeline} />}
+      {openViewSchema && (
+        <ViewSchemaModal
+          setOpenViewSchema={setOpenViewSchema}
+          headersNamesList={headersNamesList}
         />
       )}
       {dataprep.insights.name && isFirstWrangle && connectorType === 'File' && (
@@ -653,6 +684,8 @@ export default function() {
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
         recipeStepsCount={directives?.length}
+        setOpenDirective={setOpenDirective}
+        dataCounts={dataCounts}
         setOpenColumnViewHandler={setOpenColumnViewHandler}
       />
       {toaster.open && (
@@ -669,7 +702,6 @@ export default function() {
           <LoadingSVG />
         </div>
       )}
-      <Button onClick={() => setOpenDirective(true)}>Open</Button>
       {openDirective && (
         <DirectiveInputDrawer
           open={openDirective}
@@ -680,18 +712,9 @@ export default function() {
               workspaceId: params.wid,
             };
             getWorkSpaceData(payload as IParams, wid as string, directives);
+            setOpenDirective(false);
           }}
           onClose={() => setOpenDirective(false)}
-        />
-      )}
-      {toast.open && (
-        <PositionedSnackbar
-          handleCloseError={() =>
-            setToast({
-              open: false,
-              message: '',
-            })
-          }
         />
       )}
     </Box>

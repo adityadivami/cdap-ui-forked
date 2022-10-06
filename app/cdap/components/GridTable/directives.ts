@@ -62,6 +62,12 @@ export const getDirective = (option, column) => {
     return `parse-as-hl7 :${column}`;
   } else if (option === 'parseAvro') {
     return `parse-as-avro-file :${column}`;
+  } else if (option === 'remove-null-missing') {
+    return `filter-rows-on condition-true ${column} == null || ${column} =~ "^\\W*$"`;
+  } else if (option === 'remove-null') {
+    return `filter-rows-on condition-true ${column} == null`;
+  } else if (option === 'remove-missing') {
+    return `filter-rows-on condition-true ${column} =~ "^\\W*$"`;
   } else {
     null;
   }
@@ -124,6 +130,10 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return value;
   } else if (option == 'join-columns') {
     return value;
+  } else if (option == 'replace-null-missing') {
+    return `fill-null-or-empty :${column} '${value}'`;
+  } else if (option === 'rename-column') {
+    return `rename :${column} :${value}`;
   } else {
     null;
   }
