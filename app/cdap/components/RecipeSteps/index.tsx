@@ -24,7 +24,7 @@ import RecipeStepsEmptyScreen from './RecipeStepsEmptyScreen';
 import RecipeStepsTableComponent from './RecipeStepsTableComponent';
 import { useStyles } from './styles';
 
-export const recipes = [
+const recipes = [
   {
     actionType: 'Parse Column',
     description: "'Body' with delimiter 'comma' and set 'first row as header'",
