@@ -39,7 +39,6 @@ const SelectColumnsList = (props) => {
     ? ['all']
     : columns.filter((object1) => {
         return directiveFunctionSupportedDataType.some((object2) => {
-          console.log(object1, object1.type[0], object2, 'object 2');
           return object2.includes(object1.type[0]?.toLowerCase());
         });
       });
@@ -102,12 +101,9 @@ const SelectColumnsList = (props) => {
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
-            <Typography className={classes.mainHeaderMessage}>
-              No columns to show
-            </Typography>
+            <Typography className={classes.mainHeaderMessage}>No columns to show</Typography>
             <Typography className={classes.subHeaderMessage}>
-              Selected directive supported datatype does not match which the
-              column's datatype
+              Selected directive supported datatype does not match which the column's datatype
             </Typography>
           </Box>
         </Box>
@@ -116,12 +112,8 @@ const SelectColumnsList = (props) => {
           <Table aria-label="recipe steps table">
             <TableHead>
               <TableRow className={classes.recipeStepsTableRowStyles}>
-                <TableCell
-                  classes={{ head: classes.recipeStepsTableHeadStyles }}
-                ></TableCell>
-                <TableCell
-                  classes={{ head: classes.recipeStepsTableHeadStyles }}
-                >
+                <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}></TableCell>
+                <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
                   {COLUMNS}
                 </TableCell>
                 <TableCell
@@ -137,10 +129,7 @@ const SelectColumnsList = (props) => {
               {columns.map((eachColumn, index) => {
                 if (directiveFunctionSupportedDataType.includes('all')) {
                   return (
-                    <TableRow
-                      className={classes.recipeStepsTableBodyRowStyles}
-                      key={index}
-                    >
+                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
                       <TableCell
                         classes={{
                           body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
@@ -148,13 +137,9 @@ const SelectColumnsList = (props) => {
                       >
                         <Radio
                           color="primary"
-                          onChange={(e) =>
-                            onSelect(e, eachColumn.label, eachColumn)
-                          }
+                          onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
                           checked={
-                            selectedColumns.filter(
-                              (el) => el.label == eachColumn.label
-                            ).length
+                            selectedColumns.filter((el) => el.label == eachColumn.label).length
                               ? true
                               : false
                           }
@@ -166,14 +151,10 @@ const SelectColumnsList = (props) => {
                         // component="th"
                         // scope="row"
                       >
-                        <Typography
-                          className={classes.recipeStepsActionTypeStyles}
-                        >
+                        <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
                         </Typography>
-                        <Typography
-                          className={classes.recipeStepsActionTypeStyles}
-                        >
+                        <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.type}
                         </Typography>
                       </TableCell>
@@ -184,23 +165,16 @@ const SelectColumnsList = (props) => {
                         ].join(' ')}
                       >
                         {dataQualityValue?.length && (
-                          <DataQualityProgress
-                            value={dataQualityValue[index]?.value}
-                          />
+                          <DataQualityProgress value={dataQualityValue[index]?.value} />
                         )}
                       </TableCell>
                     </TableRow>
                   );
                 } else if (
-                  directiveFunctionSupportedDataType.includes(
-                    eachColumn?.type[0]?.toLowerCase()
-                  )
+                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   return (
-                    <TableRow
-                      className={classes.recipeStepsTableBodyRowStyles}
-                      key={index}
-                    >
+                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
                       <TableCell
                         classes={{
                           body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
@@ -208,13 +182,9 @@ const SelectColumnsList = (props) => {
                       >
                         <Radio
                           color="primary"
-                          onChange={(e) =>
-                            onSelect(e, eachColumn.label, eachColumn)
-                          }
+                          onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
                           checked={
-                            selectedColumns.filter(
-                              (el) => el.label == eachColumn.label
-                            ).length
+                            selectedColumns.filter((el) => el.label == eachColumn.label).length
                               ? true
                               : false
                           }
@@ -226,14 +196,10 @@ const SelectColumnsList = (props) => {
                         // component="th"
                         // scope="row"
                       >
-                        <Typography
-                          className={classes.recipeStepsActionTypeStyles}
-                        >
+                        <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
                         </Typography>
-                        <Typography
-                          className={classes.recipeStepsActionTypeStyles}
-                        >
+                        <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.type}
                         </Typography>
                       </TableCell>
@@ -244,9 +210,7 @@ const SelectColumnsList = (props) => {
                         ].join(' ')}
                       >
                         {dataQualityValue?.length && (
-                          <DataQualityProgress
-                            value={dataQualityValue[index]?.value}
-                          />
+                          <DataQualityProgress value={dataQualityValue[index]?.value} />
                         )}
                       </TableCell>
                     </TableRow>
