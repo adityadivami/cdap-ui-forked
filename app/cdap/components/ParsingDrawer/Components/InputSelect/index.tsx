@@ -56,5 +56,3 @@ export default function(props) {
     </Select>
   );
 }
-
-export default InputSelect;

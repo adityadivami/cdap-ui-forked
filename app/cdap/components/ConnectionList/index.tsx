@@ -35,6 +35,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import ImportDatasetPanel from 'components/ImportDataset';
+import { forEach } from 'vega-lite/build/src/encoding';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -221,16 +222,23 @@ export default function ConnectionList() {
     setDataForTabs((prev) => {
       const tempData = [...prev];
       tempData[index].isSearching = true;
+      tempData.forEach((each, ind) => {
+        if (ind === index) {
+          each.isSearching = true;
+        } else {
+          each.isSearching = false;
+        }
+      });
       return tempData;
     });
     refs.current[index].focus();
-    refs.current[index].addEventListener('blur', () => {
-      setDataForTabs((prev) => {
-        const tempData = [...prev];
-        tempData[index].isSearching = false;
-        return tempData;
-      });
-    });
+    // refs.current[index].addEventListener('blur', () => {
+    //   setDataForTabs((prev) => {
+    //     const tempData = [...prev];
+    //     tempData[index].isSearching = false;
+    //     return tempData;
+    //   });
+    // });
   };
 
   const handleSearch = (e: any, index: number) => {
@@ -243,17 +251,25 @@ export default function ConnectionList() {
   };
 
   const handleClearSearch = (e: any, index: number) => {
-    refs.current[index].value = '';
-    const newData = cloneDeep(dataForTabs);
-    const newDataToSearch = [...newData[index].data];
-    const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
-    newData[index].data = [...tempData];
-    setDataForTabs((prev) => {
-      const tempData = [...prev];
-      tempData[index].isSearching = false;
-      return tempData;
-    });
-    setFilteredData(cloneDeep(newData));
+    if (refs.current[index].value === '') {
+      const newData = cloneDeep(dataForTabs);
+      const newDataToSearch = [...newData[index].data];
+      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
+      newData[index].data = [...tempData];
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = false;
+        return tempData;
+      });
+      setFilteredData(cloneDeep(newData));
+    } else {
+      refs.current[index].value = '';
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = true;
+        return tempData;
+      });
+    }
   };
 
   const makeCursorFocused = (index: number) => {
@@ -306,13 +322,13 @@ export default function ConnectionList() {
                       ref={(e) => {
                         refs.current[index] = e;
                       }}
-                      onBlur={() =>
-                        setDataForTabs((prev) => {
-                          const tempData = [...prev];
-                          tempData[index].isSearching = false;
-                          return tempData;
-                        })
-                      }
+                      // onBlur={() =>
+                      //   setDataForTabs((prev) => {
+                      //     const tempData = [...prev];
+                      //     tempData[index].isSearching = false;
+                      //     return tempData;
+                      //   })
+                      // }
                     />
                     <Box
                       className={classes.closeIcon}
