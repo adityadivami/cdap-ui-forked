@@ -58,6 +58,8 @@ import {
   checkAlphaNumericAndSpaces,
   calculateDistributionGraphData,
 } from './utils';
+import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
+import ViewSchemaModal from './components/Modals/ViewSchemaModal';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -115,6 +117,13 @@ export default function() {
     isSuccess: false,
   });
   const [toastAction, setToastAction] = useState('');
+  const [openPipeline, setOpenPipeline] = useState(false);
+  const [openViewSchema, setOpenViewSchema] = useState(false);
+  const [dataCounts, setDataCounts] = useState({
+    rowCount: 0,
+    columnCount: 0,
+  });
+  const [showBreadCrumb, setShowBreadCrumb] = useState(true);
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -195,6 +204,10 @@ export default function() {
               isSuccess: true,
             });
           }
+          setDataCounts({
+            rowCount: response.values.length,
+            columnCount: response.headers.length,
+          });
         },
         (err) => {
           setToaster({
@@ -481,10 +494,19 @@ export default function() {
 
   return (
     <Box>
-      <BreadCrumb datasetName={workspaceName} location={location} />
+      {showBreadCrumb && (
+        <BreadCrumb
+          datasetName={workspaceName}
+          location={location}
+          setOpenPipeline={setOpenPipeline}
+          setOpenViewSchema={setOpenViewSchema}
+        />
+      )}
       <ToolBarList
         columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+        setShowBreadCrumb={setShowBreadCrumb}
+        showBreadCrumb={showBreadCrumb}
       />
       {insightDrawer.open && (
         <ColumnInsightDrawer
@@ -506,6 +528,13 @@ export default function() {
               dataDistributionGraphData: [],
             })
           }
+        />
+      )}
+      {openPipeline && <CreatePipelineModal setOpenPipeline={setOpenPipeline} />}
+      {openViewSchema && (
+        <ViewSchemaModal
+          setOpenViewSchema={setOpenViewSchema}
+          headersNamesList={headersNamesList}
         />
       )}
       {dataprep.insights.name && isFirstWrangle && connectorType === 'File' && (
@@ -633,6 +662,7 @@ export default function() {
         showAddTransformationHandler={showAddTransformationHandler}
         recipeStepsCount={directives?.length}
         setOpenDirective={setOpenDirective}
+        dataCounts={dataCounts}
       />
       {toaster.open && (
         <PositionedSnackbar

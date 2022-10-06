@@ -23,8 +23,11 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 import { icon, icon1, otherIcon } from './images';
 import { MATCH_SOURCE, HOME_URL_PARAM, DATASOURCES_URL_PARAM, HOME_LABLE } from './constants';
+import NestedMenu from '../NestedMenu';
+import { KEBAB_GRID_PAGE_OPTION } from '../NestedMenu/constants';
+import IngestViewSchemaDropDown from './KebabMenu';
 
-const BreadCrumb = ({ datasetName, location }) => {
+const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema }) => {
   const classes = useStyles();
 
   const sourcePath =
@@ -55,8 +58,13 @@ const BreadCrumb = ({ datasetName, location }) => {
       <Breadcrumbs separator=" ">
         <IconButton>{icon}</IconButton>
         <IconButton>{icon1}</IconButton>
-        <IconButton>{otherIcon}</IconButton>
-        <Button className={`${classes.Button} ${classes.pipelineStyles}`}>Create a Pipeline</Button>
+        <IngestViewSchemaDropDown setOpenViewSchema={setOpenViewSchema} />
+        <Button
+          className={`${classes.Button} ${classes.pipelineStyles}`}
+          onClick={() => setOpenPipeline(true)}
+        >
+          Create a Pipeline
+        </Button>
       </Breadcrumbs>
     </Box>
   );

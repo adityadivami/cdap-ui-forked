@@ -8,6 +8,7 @@ const Footer = ({
   showAddTransformationHandler,
   recipeStepsCount,
   setOpenDirective,
+  dataCounts,
 }) => {
   const classes = useCss();
 
@@ -16,7 +17,10 @@ const Footer = ({
       <Box className={classes.cont}>
         <Box className={classes.imgCont}>{ColumnIcon}</Box>
         <Box className={classes.dataWrapper}>
-          <p className={classes.data}> Current data - 1000 rows and 30 columns</p>
+          <p className={classes.data}>
+            {' '}
+            {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
+          </p>
         </Box>
         <Box className={classes.zoomCont}>
           {ZoomIn}

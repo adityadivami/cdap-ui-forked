@@ -55,11 +55,6 @@ const PositionedSnackbar = ({
     handleCloseError();
   };
 
-  const properties = {
-    close: () => handleClose(),
-    messageToDisplay,
-  };
-
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
