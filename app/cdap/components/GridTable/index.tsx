@@ -40,7 +40,7 @@ import RecipeSteps from 'components/RecipeSteps';
 import AddTransformation from 'components/AddTransformation';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import ToolBarList from './components/AaToolbar';
-import { getDirective } from './directives';
+import getDirective from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
 
