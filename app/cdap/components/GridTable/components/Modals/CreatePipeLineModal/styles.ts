@@ -52,7 +52,7 @@ export const useStyles = makeStyles({
     gridTemplateColumns: '50% 50%',
     marginTop: '20px',
   },
-  closeIcon:{
-    cursor: 'pointer'
-  }
+  closeIcon: {
+    cursor: 'pointer',
+  },
 });

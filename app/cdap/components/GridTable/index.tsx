@@ -199,6 +199,7 @@ export default function() {
           setGridData(response);
           setDirectiveFunction('');
           setColumnSelected('');
+          setColumnType('');
           if (selectedDirective) {
             setToaster({
               open: true,
@@ -329,6 +330,7 @@ export default function() {
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
+        setColumnType('');
         setShowRecipePanel(false);
         setToaster({
           open: true,
