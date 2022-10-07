@@ -85,7 +85,7 @@ export const useStyles = makeStyles(() => {
       background: '#FFFFFF',
       border: '1px solid #DADCE0',
       borderRadius: '4px',
-      padding: '5px 15px',
+      padding: '5px 15px 0px 15px',
       fontFamily: 'Noto Sans',
       fontSize: '14px',
 
@@ -99,6 +99,9 @@ export const useStyles = makeStyles(() => {
 
       '&:after': {
         display: 'none',
+      },
+      '& .MuiInputBase-input': {
+        padding: '6px 0px 11px',
       },
     },
     optionStyles: {

@@ -123,7 +123,6 @@ const ParsingDrawer = (props) => {
       await createWorkspaceInternal(connectionPayload, parseConfig);
     } catch (e) {
       setLoading(false);
-      console.log('error', e);
       setLoading(false);
     }
   };

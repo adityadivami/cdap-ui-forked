@@ -22,7 +22,13 @@ import React from 'react';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 import { icon, icon1, otherIcon } from './images';
-import { MATCH_SOURCE, HOME_URL_PARAM, DATASOURCES_URL_PARAM, HOME_LABLE } from './constants';
+import {
+  MATCH_SOURCE,
+  HOME_URL_PARAM,
+  DATASOURCES_URL_PARAM,
+  HOME_LABLE,
+  WORKSPACE_LIST,
+} from './constants';
 import NestedMenu from '../NestedMenu';
 import { KEBAB_GRID_PAGE_OPTION } from '../NestedMenu/constants';
 import IngestViewSchemaDropDown from './KebabMenu';
@@ -32,7 +38,7 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
 
   const sourcePath =
     location.state?.from === MATCH_SOURCE
-      ? HOME_URL_PARAM
+      ? WORKSPACE_LIST
       : `${DATASOURCES_URL_PARAM}/${location.state?.path}`;
   return (
     <Box className={classes.breadCombContainer}>
