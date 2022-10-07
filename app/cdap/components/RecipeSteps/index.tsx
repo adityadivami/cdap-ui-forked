@@ -23,6 +23,7 @@ import RecipeHeaderActionTemplate from './RecipeHeaderActionTemplate';
 import RecipeStepsEmptyScreen from './RecipeStepsEmptyScreen';
 import RecipeStepsTableComponent from './RecipeStepsTableComponent';
 import { useStyles } from './styles';
+import T from 'i18n-react';
 
 const recipes = [
   {
@@ -56,7 +57,7 @@ export default function(setShowRecipePanel, showRecipePanel, deleteRecipes) {
 
   return (
     <DrawerWidget
-      headingText={RECIPE}
+      headingText={T.translate('features.WranglerNewRecipeSteps.recipe')}
       openDrawer={showRecipePanel}
       showDivider={true}
       headerActionTemplate={<RecipeHeaderActionTemplate />}
