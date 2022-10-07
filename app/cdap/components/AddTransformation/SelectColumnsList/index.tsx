@@ -40,15 +40,14 @@ const SelectColumnsList = (props) => {
   const classes = useStyles();
   const ref = useRef(null);
   const no_match =
-    directiveFunctionSupportedDataType.length > 0
-      ? !directiveFunctionSupportedDataType.includes('all')
-      : false
-      ? columns.filter((object1) => {
+    directiveFunctionSupportedDataType.length > 0 &&
+    directiveFunctionSupportedDataType.includes('all')
+      ? directiveFunctionSupportedDataType.filter((el) => el == 'all')
+      : columns.filter((object1) => {
           return directiveFunctionSupportedDataType.some((object2) => {
             return object2.includes(object1.type[0].toLowerCase());
           });
-        })
-      : [];
+        });
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
