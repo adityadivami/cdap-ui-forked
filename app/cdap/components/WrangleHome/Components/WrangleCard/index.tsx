@@ -15,18 +15,22 @@
  */
 
 import { Box, Card, Typography } from '@material-ui/core';
-import { fetchConnectors } from 'components/Connections/Create/reducer';
+import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import {
+  fetchConnectionDetails,
+  fetchConnectors,
+  getCategoriesToConnectorsMap,
+} from 'components/Connections/Create/reducer';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { useStyles } from './styles';
-import { getCategoriesToConnectorsMap, getSVG } from './Components/WidgetData';
-import { fetchConnectionDetails } from 'components/Connections/Create/reducer';
+import { getSVG } from './Components/WidgetData';
 import { ImportDatasetIcon } from './iconStore/ImportDatasetIcon';
+import { getWidgetData } from './services/getWidgetData';
+import { useStyles } from './styles';
 import { IConnectorArray, IConnectorDetailPayloadArray } from './types';
-import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 
-export const WrangleCard = () => {
+export default function() {
   const [state, setState] = useState({
     connectorTypes: [],
   });
@@ -122,6 +126,15 @@ export const WrangleCard = () => {
   }, []);
   const classes = useStyles();
   const connectorTypes: IConnectorArray[] = state.connectorTypes;
+
+  const updateState = (updatedState) => {
+    setState(updatedState);
+  };
+
+  useEffect(() => {
+    getWidgetData(updateState);
+  }, []);
+
   return (
     <Box className={classes.wrapper} data-testid="wrangle-card-parent">
       {connectorTypes.map((item, index) => {
@@ -141,4 +154,4 @@ export const WrangleCard = () => {
       })}
     </Box>
   );
-};
+}
