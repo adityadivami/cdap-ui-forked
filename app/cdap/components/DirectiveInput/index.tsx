@@ -56,12 +56,15 @@ const DirectiveDrawer = (props) => {
         ? directivesList.filter((el) => el.usage.includes(inputSplit[0]))
         : [];
     const usageArraySplit = filterUsageItem.length > 0 ? filterUsageItem[0].usage.split(' ') : [];
+    console.log('inputSplit', inputSplit, usageArraySplit, filterUsageItem);
     if (
       usageArraySplit.length === inputSplit.length ||
       inputSplit.length > usageArraySplit.length
     ) {
+      console.log('inputSplit', true);
       return true;
     } else {
+      console.log('inputSplit', false);
       return false;
     }
   };
