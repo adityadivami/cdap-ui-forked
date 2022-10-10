@@ -121,5 +121,4 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
     </Box>
   );
 };
-
 export default ToolBarList;

@@ -14,25 +14,23 @@
  * the License.
  */
 
-import { Box, IconButton, Typography, Button } from '@material-ui/core';
+import { Box, Button, IconButton, Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useStyles } from './styles';
 import React from 'react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
-import { icon, icon1, otherIcon } from './images';
-import { MATCH_SOURCE, HOME_URL_PARAM, DATASOURCES_URL_PARAM, HOME_LABLE } from './constants';
-import NestedMenu from '../NestedMenu';
-import { KEBAB_GRID_PAGE_OPTION } from '../NestedMenu/constants';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { DATASOURCES_URL_PARAM, HOME_LABLE, MATCH_SOURCE, WORKSPACES_URL } from './constants';
+import { icon, icon1 } from './images';
 import IngestViewSchemaDropDown from './KebabMenu';
+import { useStyles } from './styles';
 
 const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema }) => {
   const classes = useStyles();
 
   const sourcePath =
     location.state?.from === MATCH_SOURCE
-      ? HOME_URL_PARAM
+      ? WORKSPACES_URL
       : `${DATASOURCES_URL_PARAM}/${location.state?.path}`;
   return (
     <Box className={classes.breadCombContainer}>
@@ -69,5 +67,4 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
     </Box>
   );
 };
-
 export default BreadCrumb;
