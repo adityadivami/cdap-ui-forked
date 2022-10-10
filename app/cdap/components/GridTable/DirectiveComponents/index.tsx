@@ -28,5 +28,4 @@ const DirectiveContent: React.FC<any> = (props) => {
     />
   );
 };
-
 export default DirectiveContent;

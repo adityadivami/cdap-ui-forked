@@ -60,5 +60,4 @@ const BreadCrumb = ({ datasetName, location }) => {
     </Box>
   );
 };
-
 export default BreadCrumb;
