@@ -17,7 +17,7 @@
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 
-export default function(props) {
+const InputSelect = (props) => {
   const {
     options,
     value,
@@ -46,13 +46,20 @@ export default function(props) {
         getContentAnchorEl: null,
       }}
     >
-      {options.map((option) => {
+      {options.map((option, index) => {
         return (
-          <MenuItem classes={...optionClassName} value={option.value} key={option.value}>
+          <MenuItem
+            classes={{ ...optionClassName }}
+            value={option.value}
+            key={option.value}
+            data-testid={`input-select-${index}`}
+          >
             {option.label}
           </MenuItem>
         );
       })}
     </Select>
   );
-}
+};
+
+export default InputSelect;
