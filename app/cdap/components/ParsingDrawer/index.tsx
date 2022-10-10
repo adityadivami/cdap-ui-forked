@@ -182,6 +182,7 @@ export default function(props) {
             classes={{ containedPrimary: classes.buttonStyles }}
             className={classes.applyButtonStyles}
             onClick={(e: MouseEvent<HTMLButtonElement>) => handleApply(e)}
+            data-testid="parsing-apply-button"
           >
             {T.translate('features.WranglerNewParsingDrawer.apply')}
           </Button>
