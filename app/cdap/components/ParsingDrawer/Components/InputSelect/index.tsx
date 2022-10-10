@@ -17,7 +17,7 @@
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 
-export default function(props) {
+const InputSelect = (props) => {
   const {
     options,
     value,
@@ -55,4 +55,6 @@ export default function(props) {
       })}
     </Select>
   );
-}
+};
+
+export default InputSelect;
