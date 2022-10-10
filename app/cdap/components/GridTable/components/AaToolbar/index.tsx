@@ -121,5 +121,4 @@ const ToolBarList = ({ columnType, submitMenuOption }) => {
     </Box>
   );
 };
-
 export default ToolBarList;
