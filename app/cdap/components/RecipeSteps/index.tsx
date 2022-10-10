@@ -36,7 +36,7 @@ const recipes = [
   },
 ];
 
-export default function(setShowRecipePanel, showRecipePanel, deleteRecipes) {
+export default function({ setShowRecipePanel, showRecipePanel, deleteRecipes }) {
   const [recipeSteps, setRecipeSteps] = useState(recipes);
 
   const classes = useStyles();
