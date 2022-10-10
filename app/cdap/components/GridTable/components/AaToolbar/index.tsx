@@ -71,5 +71,4 @@ const ToolBarList = ({ submitMenuOption }) => {
     </Box>
   );
 };
-
 export default ToolBarList;
