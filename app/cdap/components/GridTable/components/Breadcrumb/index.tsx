@@ -22,14 +22,20 @@ import React from 'react';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 import { icon, icon1, otherIcon } from './images';
-import { MATCH_SOURCE, HOME_URL_PARAM, DATASOURCES_URL_PARAM, HOME_LABLE } from './constants';
+import {
+  MATCH_SOURCE,
+  HOME_URL_PARAM,
+  DATASOURCES_URL_PARAM,
+  HOME_LABLE,
+  WORKSPACES_URL,
+} from './constants';
 
 const BreadCrumb = ({ datasetName, location }) => {
   const classes = useStyles();
 
   const sourcePath =
     location.state?.from === MATCH_SOURCE
-      ? HOME_URL_PARAM
+      ? WORKSPACES_URL
       : `${DATASOURCES_URL_PARAM}/${location.state?.path}`;
   return (
     <Box className={classes.breadCombContainer}>
@@ -61,5 +67,4 @@ const BreadCrumb = ({ datasetName, location }) => {
     </Box>
   );
 };
-
 export default BreadCrumb;
