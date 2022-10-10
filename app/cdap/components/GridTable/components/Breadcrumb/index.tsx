@@ -33,7 +33,13 @@ import NestedMenu from '../NestedMenu';
 import { KEBAB_GRID_PAGE_OPTION } from '../NestedMenu/constants';
 import IngestViewSchemaDropDown from './KebabMenu';
 
-const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema }) => {
+const BreadCrumb = ({
+  datasetName,
+  location,
+  setOpenPipeline,
+  setOpenViewSchema,
+  setOpenIngestData,
+}) => {
   const classes = useStyles();
 
   const sourcePath =
@@ -64,7 +70,10 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
       <Breadcrumbs separator=" ">
         <IconButton>{icon}</IconButton>
         <IconButton>{icon1}</IconButton>
-        <IngestViewSchemaDropDown setOpenViewSchema={setOpenViewSchema} />
+        <IngestViewSchemaDropDown
+          setOpenViewSchema={setOpenViewSchema}
+          setOpenIngestData={setOpenIngestData}
+        />
         <Button
           className={`${classes.Button} ${classes.pipelineStyles}`}
           onClick={() => setOpenPipeline(true)}

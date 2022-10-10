@@ -61,6 +61,7 @@ import {
 import ColumnView from 'components/ColumnView';
 import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
 import ViewSchemaModal from './components/Modals/ViewSchemaModal';
+import { IngestData } from 'components/IngestData';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -120,6 +121,7 @@ export default function() {
   const [toastAction, setToastAction] = useState('');
   const [openPipeline, setOpenPipeline] = useState(false);
   const [openViewSchema, setOpenViewSchema] = useState(false);
+  const [openIngestData, setOpenIngestData] = useState(false);
   const [dataCounts, setDataCounts] = useState({
     rowCount: 0,
     columnCount: 0,
@@ -510,14 +512,17 @@ export default function() {
           location={location}
           setOpenPipeline={setOpenPipeline}
           setOpenViewSchema={setOpenViewSchema}
+          setOpenIngestData={setOpenIngestData}
         />
       )}
+
       <ToolBarList
         columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
       />
+      {openIngestData && <IngestData setOpenIngestData={setOpenIngestData} />}
       {insightDrawer.open && (
         <ColumnInsightDrawer
           columnData={insightDrawer}

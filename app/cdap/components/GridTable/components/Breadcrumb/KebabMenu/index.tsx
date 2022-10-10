@@ -5,7 +5,7 @@ import { KEBAB_GRID_PAGE_OPTION } from '../../NestedMenu/constants';
 import MenuItemComponent from '../../MenuItemComponent';
 import { useStyles } from '../styles';
 
-const MoreOptions = ({ setOpenViewSchema }) => {
+const MoreOptions = ({ setOpenViewSchema, setOpenIngestData }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -55,6 +55,9 @@ const MoreOptions = ({ setOpenViewSchema }) => {
             onMenuClick={(event, item) => {
               if (item.value == 'view-schema') {
                 setOpenViewSchema(true);
+              }
+              if (item.value == 'ingest-data') {
+                setOpenIngestData(true);
               }
             }}
           />
