@@ -1,15 +1,30 @@
-import React from 'react';
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+import React, { useEffect } from 'react';
 import { Box, InputLabel } from '@material-ui/core';
-import { useStyles } from '../../styles';
-import InputSelect from '../InputSelect';
 import {
   ENABLE_QUOTED_VALUES,
   ENCODING,
   FORMAT,
   USE_FIRST_ROW_AS_HEADER,
 } from 'components/ParsingDrawer/constants';
-import InputCheckbox from '../InputCheckbox';
 import T from 'i18n-react';
+import { useStyles } from '../../styles';
+import InputCheckbox from '../InputCheckbox';
+import InputSelect from '../InputSelect';
 
 const PREFIX = 'features.DataPrep.Directives.SetCharEncoding';
 const SUFFIX = 'features.DataPrep.Directives.Parse';
@@ -97,6 +112,17 @@ const ParsingPopupBody = (props) => {
     handleCheckboxChange,
   } = props;
 
+  let selectedFormatValue = [];
+  let selectedEncodingValue = [];
+
+  useEffect(() => {
+    selectedFormatValue = FORMAT_OPTIONS.filter((i) => i.value === formatValue);
+  }, [formatValue]);
+
+  useEffect(() => {
+    selectedEncodingValue = CHAR_ENCODING_OPTIONS.filter((i) => i.value === encodingValue);
+  }, [encodingValue]);
+
   return (
     <Box>
       <Box className={[classes.formFieldWrapperStyles, classes.marginBottomStyles].join(' ')}>
@@ -109,7 +135,7 @@ const ParsingPopupBody = (props) => {
           optionClassName={{ root: classes.optionStyles }}
           fullWidth
           defaultValue={FORMAT_OPTIONS[0].value}
-          value={formatValue}
+          value={selectedFormatValue[0]?.value}
           onChange={handleFormatChange}
           options={FORMAT_OPTIONS}
         />
@@ -125,7 +151,7 @@ const ParsingPopupBody = (props) => {
           optionClassName={{ root: classes.optionStyles }}
           defaultValue={CHAR_ENCODING_OPTIONS[0].value}
           fullWidth
-          value={encodingValue}
+          value={selectedEncodingValue[0]?.value}
           onChange={handleEncodingChange}
           options={CHAR_ENCODING_OPTIONS}
         />
