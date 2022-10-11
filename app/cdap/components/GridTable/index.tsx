@@ -49,7 +49,13 @@ import NoDataScreen from './components/NoRecordScreen';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IParams, IRecords, IObject } from './types';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IParams,
+  IRecords,
+  IObject,
+} from './types';
 import PositionedSnackbar from 'components/SnackbarComponent';
 import {
   calculateDistinctValues,
@@ -71,7 +77,9 @@ export default function() {
 
   const [loading, setLoading] = useState(false);
   const [workspaceName, setWorkspaceName] = useState('');
-  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
+  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>(
+    []
+  );
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
@@ -108,7 +116,10 @@ export default function() {
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
   const [progress, setProgress] = useState([]);
-  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [
+    directiveFunctionSupportedDataType,
+    setDirectiveFunctionSupportedDataType,
+  ] = useState([]);
   const [columnType, setColumnType] = useState('');
 
   const [connectorType, setConnectorType] = useState(null);
@@ -157,10 +168,13 @@ export default function() {
           }
           const directives = objectQuery(res, 'directives') || [];
           const updatedDirectives =
-            selectedDirective?.length > 0 ? directives.concat(selectedDirective) : directives;
+            selectedDirective?.length > 0
+              ? directives.concat(selectedDirective)
+              : directives;
           const requestBody = directiveRequestBodyCreator(updatedDirectives);
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
-          const visualization = objectQuery(res, 'insights', 'visualization') || {};
+          const visualization =
+            objectQuery(res, 'insights', 'visualization') || {};
 
           const insights = {
             name: res?.sampleSpec?.connectionName,
@@ -242,7 +256,12 @@ export default function() {
     setSshowAddTransformation((prev) => !prev);
   };
 
-  const applyDirective = (option, columnSelected, supported_dataType, value_1?) => {
+  const applyDirective = (
+    option,
+    columnSelected,
+    supported_dataType,
+    value_1?
+  ) => {
     setLoading(true);
     setOptionSelected(option);
     setDirectiveFunctionSupportedDataType(supported_dataType);
@@ -265,13 +284,23 @@ export default function() {
       Boolean(columnSelected) &&
       value_1
     ) {
-      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      const newDirective = getDirectiveOnTwoInputs(
+        option,
+        columnSelected,
+        value_1
+      );
       applyDirectiveAPICall(newDirective, 'add', [], '');
     } else {
       if (
-        multipleColumnSelected.filter((el) => el.value === option || el.value === optionSelected)
+        multipleColumnSelected.filter(
+          (el) => el.value === option || el.value === optionSelected
+        )
       ) {
-        const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+        const newDirective = getDirectiveOnTwoInputs(
+          option,
+          columnSelected,
+          value_1
+        );
         if (!Boolean(value_1)) {
           setDirectiveFunction(option);
           setLoading(false);
@@ -292,7 +321,11 @@ export default function() {
             setIsFirstWrangle(false);
           }
         } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
-          const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+          const newDirective = getDirectiveOnTwoInputs(
+            option,
+            columnSelected,
+            value_1
+          );
           if (!Boolean(value_1)) {
             setDirectiveFunction(option);
             setLoading(false);
@@ -311,7 +344,8 @@ export default function() {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
-    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
+    const updatedDirectives =
+      action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
     const arr = JSON.parse(JSON.stringify(newDirective));
     requestBody.insights = insights;
@@ -355,7 +389,9 @@ export default function() {
               ? `Transformation ${arr} successfully added`
               : from === 'undo' || arr?.length === 0
               ? 'Transformation successfully deleted'
-              : `${removed_arr?.length} transformation successfully deleted from ${
+              : `${
+                  removed_arr?.length
+                } transformation successfully deleted from ${
                   arr[arr.length - 1]
                 }`,
           isSuccess: true,
@@ -387,7 +423,10 @@ export default function() {
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
-  const createHeadersData = (columnNamesList: string[], columnTypesList: IRecords) => {
+  const createHeadersData = (
+    columnNamesList: string[],
+    columnTypesList: IRecords
+  ) => {
     if (Array.isArray(columnNamesList)) {
       return columnNamesList.map((eachColumnName: string) => {
         return {
@@ -408,7 +447,8 @@ export default function() {
       headerKeyTypeArray.forEach(([vKey, vValue]) => {
         typeArrayOfMissingValue.push({
           label: vKey == 'general' ? 'Missing/Null' : vKey == 'types' ? '' : '',
-          count: vKey == 'types' ? '' : convertNonNullPercent(gridData, key, vValue),
+          count:
+            vKey == 'types' ? '' : convertNonNullPercent(gridData, key, vValue),
         });
       }),
         metricArray.push({
@@ -456,7 +496,10 @@ export default function() {
         columnName,
         gridData?.summary?.statistics[columnName].general
       ) || 0;
-    const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
+    const getDataTypeString = checkAlphaNumericAndSpaces(
+      rowsDataList,
+      columnName
+    );
     setInsightDrawer({
       open: true,
       columnName,
@@ -465,14 +508,21 @@ export default function() {
       dataQuality: {
         missingNullValueCount: Number(getMissingValueCount),
         missingNullValuePercentage: Number(
-          ((Number(Number(getMissingValueCount).toFixed(0)) / rowsDataList.length) * 100).toFixed(0)
+          (
+            (Number(Number(getMissingValueCount).toFixed(0)) /
+              rowsDataList.length) *
+            100
+          ).toFixed(0)
         ),
         invalidValueCount: 0,
         invalidValuePercentage: 0,
       },
       dataQualityBar: gridData?.summary?.statistics[columnName],
       dataTypeString: getDataTypeString,
-      dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
+      dataDistributionGraphData: calculateDistributionGraphData(
+        rowsDataList,
+        columnName
+      ),
     });
   };
 
@@ -481,7 +531,9 @@ export default function() {
   }, [gridData]);
 
   const handleColumnSelect = (columnName) => {
-    setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+    setColumnSelected((prevColumn) =>
+      prevColumn === columnName ? '' : columnName
+    );
     setColumnType(types[columnName]);
   };
 
@@ -506,7 +558,12 @@ export default function() {
         message: '',
         isSuccess: false,
       });
-      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete', [], 'undo');
+      applyDirectiveAPICall(
+        stepsArr.splice(0, stepsArr.length - 1),
+        'delete',
+        [],
+        'undo'
+      );
     }
   };
 
@@ -594,7 +651,9 @@ export default function() {
           }
         />
       )}
-      {openPipeline && <CreatePipelineModal setOpenPipeline={setOpenPipeline} />}
+      {openPipeline && (
+        <CreatePipelineModal setOpenPipeline={setOpenPipeline} />
+      )}
       {openViewSchema && (
         <ViewSchemaModal
           setOpenViewSchema={setOpenViewSchema}
@@ -607,7 +666,9 @@ export default function() {
           setLoading={setLoading}
         />
       )}
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
+        <NoDataScreen />
+      )}
       {showRecipePanel && (
         <RecipeSteps
           setShowRecipePanel={setShowRecipePanel}
@@ -618,7 +679,9 @@ export default function() {
       {directiveFunction && (
         <AddTransformation
           functionName={directiveFunction}
-          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+          directiveFunctionSupportedDataType={
+            directiveFunctionSupportedDataType
+          }
           setLoading={setLoading}
           columnData={headersNamesList}
           missingDataList={dataQuality}
@@ -653,7 +716,11 @@ export default function() {
 
         {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
           <Box className={classes.gridTableWrapper}>
-            <Table aria-label="simple table" className="test" data-testid="grid-table">
+            <Table
+              aria-label="simple table"
+              className="test"
+              data-testid="grid-table"
+            >
               <TableHead>
                 <TableRow>
                   {headers.map((eachHeader) => (
@@ -672,7 +739,9 @@ export default function() {
                     <TableCell className={classes.progressBarRoot}>
                       <LinearProgress
                         variant="determinate"
-                        value={progress.filter((each) => each.key === item)[0]?.value}
+                        value={
+                          progress.filter((each) => each.key === item)[0]?.value
+                        }
                         key={index}
                         classes={{
                           root: classes.MUILinearRoot,
@@ -689,7 +758,9 @@ export default function() {
                     headers.map((each, index) => {
                       return missingDataList.map((item, itemIndex) => {
                         if (item.name === each) {
-                          return <GridKPICell metricData={item} key={item.name} />;
+                          return (
+                            <GridKPICell metricData={item} key={item.name} />
+                          );
                         }
                       });
                     })}
@@ -704,7 +775,9 @@ export default function() {
                           <GridTextCell
                             cellValue={eachRow[eachKey] || '--'}
                             key={`${eachKey}-${eachIndex}`}
-                            maskSelection={eachKey === columnSelected ? maskSelection : false}
+                            maskSelection={
+                              eachKey === columnSelected ? maskSelection : false
+                            }
                             rowNumber={rowIndex}
                             columnSelected={columnSelected}
                             optionSelected={optionSelected}
