@@ -238,7 +238,6 @@ export const useStyles = makeStyles(() => {
       color: '#E97567',
     },
     circularBarCell: {
-      width: 90,
     },
     nullValueHead: {
       width: 200,
@@ -294,8 +293,10 @@ export const useStyles = makeStyles(() => {
     innerWrapper: {
       textAlign: 'center',
     },
-    radioButtonCellStyles: {
-      width: 50,
+    radioButtonCellStyles: {},
+    rowsOfTable: {
+      display: 'grid',
+      gridTemplateColumns: '10% 45% 45%',
     },
   };
 });
