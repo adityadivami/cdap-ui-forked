@@ -78,7 +78,7 @@ export interface IDataPrepState {
   targetModel?: IModel;
   connectorType?: string;
   recentDirective?: string[];
-  undoDirectives? :string[];
+  undoDirectives?: string[];
 }
 
 const defaultInitialState: IDataPrepState = {
@@ -106,7 +106,7 @@ const defaultInitialState: IDataPrepState = {
   targetModel: null,
   connectorType: null,
   recentDirective: [],
-  undoDirectives: []
+  undoDirectives: [],
 };
 
 const errorInitialState = {
@@ -265,12 +265,12 @@ const dataprep = (state = defaultInitialState, action = defaultAction) => {
         connectorType: action.payload.connectorType,
       });
       break;
-    case DataPrepActions.setRecentDirective: 
+    case DataPrepActions.setRecentDirective:
       stateCopy = Object.assign({}, state, {
         recentDirective: action.payload.recentDirective,
       });
       break;
-    case DataPrepActions.setUndoDirective: 
+    case DataPrepActions.setUndoDirective:
       stateCopy = Object.assign({}, state, {
         undoDirectives: action.payload.undoDirectives,
       });
