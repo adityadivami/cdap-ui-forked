@@ -62,7 +62,7 @@ export default function(props) {
       ? directiveFunctionSupportedDataType?.filter((el) => el == 'all')
       : columns.filter((object1) => {
           return directiveFunctionSupportedDataType?.some((object2) => {
-            return object2.includes(object1.type[0].toLowerCase());
+            return object2.includes(object1?.type[0]?.toLowerCase());
           });
         });
   useEffect(() => {
