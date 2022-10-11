@@ -142,7 +142,7 @@ export default function(props) {
         <TableContainer component={Box}>
           <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
             <TableHead>
-              <TableRow className={classes.recipeStepsTableRowStyles}>
+              <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
                 <TableCell
                   classes={{
                     head: `${classes.recipeStepsTableHeadStyles} ${classes.columnstyles}`,
@@ -168,7 +168,10 @@ export default function(props) {
               {columns.map((eachColumn, index) => {
                 if (directiveFunctionSupportedDataType.includes('all')) {
                   return (
-                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                    <TableRow
+                      className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}
+                      key={index}
+                    >
                       <TableCell
                         classes={{
                           body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
@@ -184,10 +187,7 @@ export default function(props) {
                           }
                         />
                       </TableCell>
-                      <TableCell
-                        classes={{ body: classes.recipeStepsTableRowStyles }}
-                        style={{ width: 50 }}
-                      >
+                      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
                         <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
                         </Typography>
@@ -211,7 +211,10 @@ export default function(props) {
                   directiveFunctionSupportedDataType?.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   return (
-                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                    <TableRow
+                      className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}
+                      key={index}
+                    >
                       <TableCell
                         classes={{
                           body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
@@ -227,10 +230,7 @@ export default function(props) {
                           }
                         />
                       </TableCell>
-                      <TableCell
-                        classes={{ body: classes.recipeStepsTableRowStyles }}
-                        style={{ width: 50 }}
-                      >
+                      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
                         <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
                         </Typography>

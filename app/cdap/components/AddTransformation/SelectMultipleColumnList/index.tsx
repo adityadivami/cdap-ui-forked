@@ -135,7 +135,7 @@ const SelectColumnsList = (props) => {
         <TableContainer component={Box}>
           <Table aria-label="recipe steps table">
             <TableHead>
-              <TableRow className={classes.recipeStepsTableRowStyles}>
+              <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
                 <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}></TableCell>
                 <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
                   {COLUMNS}
@@ -153,7 +153,10 @@ const SelectColumnsList = (props) => {
               {columns.map((eachColumn, index) => {
                 if (directiveFunctionSupportedDataType.includes('all')) {
                   return (
-                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                    <TableRow
+                      className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}
+                      key={index}
+                    >
                       <TableCell
                         classes={{
                           body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
@@ -180,12 +183,7 @@ const SelectColumnsList = (props) => {
                           label=""
                         />
                       </TableCell>
-                      <TableCell
-                        classes={{ body: classes.recipeStepsTableRowStyles }}
-                        style={{ width: 50 }}
-                        // component="th"
-                        // scope="row"
-                      >
+                      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
                         <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
                         </Typography>
@@ -210,7 +208,10 @@ const SelectColumnsList = (props) => {
                   directiveFunctionSupportedDataType.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   return (
-                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                    <TableRow
+                      className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}
+                      key={index}
+                    >
                       <TableCell
                         classes={{
                           body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
@@ -237,12 +238,7 @@ const SelectColumnsList = (props) => {
                           label=""
                         />
                       </TableCell>
-                      <TableCell
-                        classes={{ body: classes.recipeStepsTableRowStyles }}
-                        style={{ width: 50 }}
-                        // component="th"
-                        // scope="row"
-                      >
+                      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
                         <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
                         </Typography>
