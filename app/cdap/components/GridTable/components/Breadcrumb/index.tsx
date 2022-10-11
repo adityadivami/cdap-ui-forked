@@ -20,8 +20,14 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { DATASOURCES_URL_PARAM, HOME_LABLE, MATCH_SOURCE, WORKSPACE_LIST } from './constants';
-import { icon, icon1 } from './images';
+import {
+  DATASOURCES_URL_PARAM,
+  HOME_LABLE,
+  MATCH_SOURCE,
+  WORKSPACE_LIST,
+  WORKSPACES_OPEN,
+} from './constants';
+import { icon, icon1, DividerIcon } from './images';
 import IngestViewSchemaDropDown from './KebabMenu';
 import { useStyles } from './styles';
 
@@ -52,7 +58,18 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
           </Link>
         )}
         <Typography color="textPrimary">{datasetName}</Typography>
+
+        <Breadcrumbs separator=" ">
+          {DividerIcon}
+          <Link
+            className={`${classes.breadcrumbLabel} ${classes.home}`}
+            data-testid="breadcrumb-home-text"
+          >
+            {WORKSPACES_OPEN}
+          </Link>
+        </Breadcrumbs>
       </Breadcrumbs>
+
       <Breadcrumbs separator=" ">
         <IconButton>{icon}</IconButton>
         <IconButton>{icon1}</IconButton>
