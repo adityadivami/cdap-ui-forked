@@ -61,12 +61,7 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
 
         <Breadcrumbs separator=" ">
           {DividerIcon}
-          <Link
-            className={`${classes.breadcrumbLabel} ${classes.home}`}
-            data-testid="breadcrumb-home-text"
-          >
-            {WORKSPACES_OPEN}
-          </Link>
+          <Link className={`${classes.breadcrumbLabel} ${classes.home}`}>{WORKSPACES_OPEN}</Link>
         </Breadcrumbs>
       </Breadcrumbs>
 
