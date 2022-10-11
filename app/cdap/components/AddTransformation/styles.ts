@@ -237,8 +237,7 @@ export const useStyles = makeStyles(() => {
     circularProgressRed: {
       color: '#E97567',
     },
-    circularBarCell: {
-    },
+    circularBarCell: {},
     nullValueHead: {
       width: 200,
     },
