@@ -57,11 +57,11 @@ export default function(props) {
   const classes = useStyles();
   const ref = useRef(null);
   const no_match =
-    directiveFunctionSupportedDataType.length > 0 &&
-    directiveFunctionSupportedDataType.includes('all')
-      ? directiveFunctionSupportedDataType.filter((el) => el == 'all')
+    directiveFunctionSupportedDataType?.length > 0 &&
+    directiveFunctionSupportedDataType?.includes('all')
+      ? directiveFunctionSupportedDataType?.filter((el) => el == 'all')
       : columns.filter((object1) => {
-          return directiveFunctionSupportedDataType.some((object2) => {
+          return directiveFunctionSupportedDataType?.some((object2) => {
             return object2.includes(object1.type[0].toLowerCase());
           });
         });
@@ -162,7 +162,7 @@ export default function(props) {
             </TableHead>
             <TableBody>
               {columns.map((eachColumn, index) => {
-                if (directiveFunctionSupportedDataType.includes('all')) {
+                if (directiveFunctionSupportedDataType?.includes('all')) {
                   if (!is_secondSelection) {
                     return (
                       <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
@@ -257,7 +257,7 @@ export default function(props) {
                     );
                   }
                 } else if (
-                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0]?.toLowerCase())
+                  directiveFunctionSupportedDataType?.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   if (!is_secondSelection) {
                     return (

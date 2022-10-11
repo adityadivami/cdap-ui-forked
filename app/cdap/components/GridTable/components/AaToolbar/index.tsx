@@ -113,7 +113,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
         {Divider}
         <FunctionSearch
           transformationPanel={(value) => {
-            submitMenuOption(value, 'all');
+            submitMenuOption(value, ['all']);
           }}
         />
       </Box>

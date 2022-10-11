@@ -20,7 +20,7 @@ export const useStyles = makeStyles(() => {
   return {
     paper: {
       top: '46px',
-      height: 'calc(100vh - 141px)',
+      height: 'calc(100vh - 47px)',
     },
     drawerContainerStyles: {
       width: 460,
