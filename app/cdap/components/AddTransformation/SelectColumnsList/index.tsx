@@ -130,9 +130,11 @@ export default function(props) {
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
-            <Typography className={classes.mainHeaderMessage}>No columns to show</Typography>
+            <Typography className={classes.mainHeaderMessage}>
+              {T.translate('features.WranglerNewSelectCoulmnList.noColumns')}
+            </Typography>
             <Typography className={classes.subHeaderMessage}>
-              Selected directive supported datatype does not match which the column's datatype
+              {T.translate('features.WranglerNewSelectCoulmnList.noMatchColumnDatatype')}
             </Typography>
           </Box>
         </Box>
@@ -185,8 +187,6 @@ export default function(props) {
                       <TableCell
                         classes={{ body: classes.recipeStepsTableRowStyles }}
                         style={{ width: 50 }}
-                        // component="th"
-                        // scope="row"
                       >
                         <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
@@ -196,7 +196,6 @@ export default function(props) {
                         </Typography>
                       </TableCell>
                       <TableCell
-                        // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
                         className={[
                           classes.recipeStepsTableRowStyles,
                           classes.circularBarCell,
@@ -231,8 +230,6 @@ export default function(props) {
                       <TableCell
                         classes={{ body: classes.recipeStepsTableRowStyles }}
                         style={{ width: 50 }}
-                        // component="th"
-                        // scope="row"
                       >
                         <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
@@ -242,7 +239,6 @@ export default function(props) {
                         </Typography>
                       </TableCell>
                       <TableCell
-                        // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
                         className={[
                           classes.recipeStepsTableRowStyles,
                           classes.circularBarCell,
