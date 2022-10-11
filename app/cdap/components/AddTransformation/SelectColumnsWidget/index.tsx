@@ -6,7 +6,7 @@ import {
   SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
   SELECT_COLUMNS_1_TO_APPLY_THIS_FUNCTION,
   SELECT_COLUMNS_2_TO_APPLY_THIS_FUNCTION,
-  SELECT_MULTI_COLUMNS
+  SELECT_MULTI_COLUMNS,
 } from '../constants';
 import { useStyles } from '../styles';
 import { multipleColumnSelected } from '../constants';
@@ -37,7 +37,9 @@ const SelectColumnsWidget = (props) => {
             className={classes.selectButtonStyles}
             onClick={() => props.handleSelectColumn(false)}
           >
-            {multipleColumnSelected.filter(el=>el.value === functionName).length > 0 ? SELECT_MULTI_COLUMNS : SELECT_COLUMNS}
+            {multipleColumnSelected.filter((el) => el.value === functionName).length > 0
+              ? SELECT_MULTI_COLUMNS
+              : SELECT_COLUMNS}
           </Button>
         )}
       </>
@@ -96,11 +98,7 @@ const SelectColumnsWidget = (props) => {
     );
   };
 
-  return (
-    <section className={classes.functionSectionStyles}>
-         {singleColumnSelect()}
-    </section>
-  );
+  return <section className={classes.functionSectionStyles}>{singleColumnSelect()}</section>;
 };
 
 export default SelectColumnsWidget;

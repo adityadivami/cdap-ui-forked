@@ -20,26 +20,26 @@ export const SELECT_COLUMNS_2_TO_APPLY_THIS_FUNCTION =
 export const multipleColumnSelected = [
   {
     value: 'join-columns',
-    isMoreThanTwo: false
+    isMoreThanTwo: false,
   },
   {
     value: 'swap-columns',
-    isMoreThanTwo: false
+    isMoreThanTwo: false,
   },
   {
     value: 'delete',
-    isMoreThanTwo: true
+    isMoreThanTwo: true,
   },
   {
     value: 'array-flattening',
-    isMoreThanTwo: true
+    isMoreThanTwo: true,
   },
   {
     value: 'record-flattening',
-    isMoreThanTwo: true
+    isMoreThanTwo: true,
   },
   {
     value: 'keep',
-    isMoreThanTwo: true
+    isMoreThanTwo: true,
   },
-]
+];
