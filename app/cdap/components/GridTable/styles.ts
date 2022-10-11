@@ -49,9 +49,10 @@ export const useStyles = makeStyles({
     overflowY: 'auto',
   },
   columnViewDrawer: {
-    height: '100%',
+    height: 'calc(100vh - 240px)',
   },
   columnViewContainer: {
     display: 'flex',
+    fontFamily: 'Roboto',
   },
 });
