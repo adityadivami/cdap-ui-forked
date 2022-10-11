@@ -21,6 +21,7 @@ export const useStyles = makeStyles(() => {
     drawerContainerStyles: {
       width: 389,
       borderTop: '1px solid #3994FF',
+      height: 'calc(100vh - 240px)',
     },
     headerStyles: {
       height: '60px',
@@ -39,6 +40,7 @@ export const useStyles = makeStyles(() => {
     headerRightStyles: {
       display: 'flex',
       alignItems: 'center',
+      paddingRight: '24px',
     },
     dividerLineStyles: {
       width: 1,
