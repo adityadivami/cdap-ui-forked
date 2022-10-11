@@ -19,12 +19,14 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
   '& .MuiSwitch-switchBase': {
     padding: 2,
+    color: '#757575',
     '&.Mui-checked': {
       transform: 'translateX(12px)',
-      color: '#fff',
+      color: '#757575',
       '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
+        backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
+        border: theme.palette.mode === 'dark' ? '1px solid #757575' : '1px solid #757575',
       },
     },
   },
@@ -40,7 +42,8 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-track': {
     borderRadius: 16 / 2,
     opacity: 1,
-    backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
+    backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
+    border: theme.palette.mode === 'dark' ? '1px solid #757575' : '1px solid #757575',
     boxSizing: 'border-box',
   },
 }));
