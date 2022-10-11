@@ -19,3 +19,4 @@ export const WORKSPACE_LIST = 'workspace-list';
 export const HOME_URL_PARAM = 'home';
 export const DATASOURCES_URL_PARAM = 'datasources';
 export const HOME_LABLE = 'Home';
+export const WORKSPACES_URL = 'workspace-list';

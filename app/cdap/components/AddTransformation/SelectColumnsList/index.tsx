@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 import {
   Box,
   Checkbox,
@@ -20,8 +36,9 @@ import { SearchIcon } from '../iconStore';
 import { prepareDataQualtiy } from '../CircularProgressBar/utils';
 import DataQualityProgress from '../CircularProgressBar';
 import { NoDataSVG } from 'components/GridTable/iconStore';
+import T from 'i18n-react';
 
-const SelectColumnsList = (props) => {
+export default function(props) {
   const {
     directiveFunctionSupportedDataType,
     selectedColumnsCount,
@@ -40,15 +57,14 @@ const SelectColumnsList = (props) => {
   const classes = useStyles();
   const ref = useRef(null);
   const no_match =
-    directiveFunctionSupportedDataType.length > 0
-      ? !directiveFunctionSupportedDataType.includes('all')
-      : false
-      ? columns.filter((object1) => {
-          return directiveFunctionSupportedDataType.some((object2) => {
+    directiveFunctionSupportedDataType?.length > 0 &&
+    directiveFunctionSupportedDataType?.includes('all')
+      ? directiveFunctionSupportedDataType?.filter((el) => el == 'all')
+      : columns.filter((object1) => {
+          return directiveFunctionSupportedDataType?.some((object2) => {
             return object2.includes(object1.type[0].toLowerCase());
           });
-        })
-      : [];
+        });
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
@@ -120,12 +136,20 @@ const SelectColumnsList = (props) => {
         </Box>
       ) : (
         <TableContainer component={Box}>
-          <Table aria-label="recipe steps table">
+          <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
             <TableHead>
               <TableRow className={classes.recipeStepsTableRowStyles}>
-                <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}></TableCell>
-                <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
-                  {COLUMNS}
+                <TableCell
+                  classes={{
+                    head: `${classes.recipeStepsTableHeadStyles} ${classes.columnstyles}`,
+                  }}
+                ></TableCell>
+                <TableCell
+                  classes={{
+                    head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}`,
+                  }}
+                >
+                  {T.translate('features.WranglerNewAddTransformation.columns')}
                 </TableCell>
                 <TableCell
                   classes={{
@@ -183,7 +207,7 @@ const SelectColumnsList = (props) => {
                     </TableRow>
                   );
                 } else if (
-                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0]?.toLowerCase())
+                  directiveFunctionSupportedDataType?.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   return (
                     <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
@@ -236,6 +260,4 @@ const SelectColumnsList = (props) => {
       )}
     </section>
   );
-};
-
-export default SelectColumnsList;
+}

@@ -1,8 +1,8 @@
 import { Box } from '@material-ui/core';
-import { IMPORT_SCHEMA } from 'components/ParsingDrawer/constants';
 import { useStyles } from 'components/ParsingDrawer/styles';
 import React from 'react';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
+import T from 'i18n-react';
 
 const ParsingHeaderActionTemplate = (props) => {
   const classes = useStyles();
@@ -41,8 +41,10 @@ const ParsingHeaderActionTemplate = (props) => {
           src="/cdap_assets/img/import.svg"
           alt="import schema icon"
         />
-        <span className={classes.importSchemaTextStyles}>{IMPORT_SCHEMA}</span>
       </label>
+      <span className={classes.importSchemaTextStyles}>
+        {T.translate('features.WranglerNewParsingDrawer.importSchema')}
+      </span>
     </Box>
   );
 };

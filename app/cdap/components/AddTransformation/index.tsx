@@ -1,28 +1,39 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 import { Button, Container } from '@material-ui/core';
-import DataPrepStore from 'components/DataPrep/store';
 import DrawerWidget from 'components/DrawerWidget';
 import DirectiveContent from 'components/GridTable/DirectiveComponents';
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
+import T from 'i18n-react';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import ActionsWidget from './ActionsWidget';
-import {
-  ADD_TRANSFORMATION_STEP,
-  APPLY_STEP,
-  DONE_STEP,
-  SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
-} from './constants';
+import { DONE_STEP } from './constants';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsList from './SelectColumnsList';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import { useStyles } from './styles';
 import {
-  parseDirective,
   directiveForHash,
+  parseDirective,
+  prepareDirectiveForDefineVariable,
   prepareDirectiveForFilter,
   prepareDirectiveForPattern,
-  prepareDirectiveForDefineVariable,
   prepareDirectiveForSendToError,
   prepareDirectiveForCalculate,
   prepareDirectiveForMerge,
@@ -36,7 +47,7 @@ import {
 import SelectMultipleColumnsList from './SelectMultipleColumnList';
 import { multipleColumnSelected } from './constants';
 
-const AddTransformation = (props) => {
+export default function(props) {
   const {
     directiveFunctionSupportedDataType,
     functionName,
@@ -44,6 +55,7 @@ const AddTransformation = (props) => {
     setLoading,
     missingDataList,
   } = props;
+  const params = useParams() as any;
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
@@ -318,8 +330,8 @@ const AddTransformation = (props) => {
   return (
     <Fragment>
       <DrawerWidget
-        headingText={ADD_TRANSFORMATION_STEP}
-        openDrawer={functionName}
+        headingText={T.translate('features.WranglerNewAddTransformation.addTransformation')}
+        openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
       >
         <Container className={classes.addTransformationBodyStyles}>
@@ -359,12 +371,12 @@ const AddTransformation = (props) => {
             className={classes.applyStepButtonStyles}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
           >
-            {APPLY_STEP}
+            {T.translate('features.WranglerNewAddTransformation.applyStep')}
           </Button>
         </Container>
       </DrawerWidget>
       <DrawerWidget
-        headingText={SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION}
+        headingText={T.translate('features.WranglerNewAddTransformation.selectColumn')}
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
@@ -404,6 +416,4 @@ const AddTransformation = (props) => {
       </DrawerWidget>
     </Fragment>
   );
-};
-
-export default AddTransformation;
+}

@@ -101,5 +101,4 @@ const NestedMenu: React.FC<INestedMenuProps> = ({
     </>
   );
 };
-
 export default NestedMenu;
