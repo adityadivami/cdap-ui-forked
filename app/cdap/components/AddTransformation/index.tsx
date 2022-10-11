@@ -27,7 +27,7 @@ import {
   prepareDirectiveForCalculate,
   prepareDirectiveForMerge,
   prepareDirectiveForMultipleDelete,
-  prepareDirectiveForMultipleKeep
+  prepareDirectiveForMultipleKeep,
 } from './utils';
 import {
   CALCULATE_OPTIONS,
@@ -83,14 +83,13 @@ const AddTransformation = (props) => {
   });
 
   useEffect(() => {
-      setDirectiveComponentsValue({
-        ...directiveComponentValues,
-        selectedColumn: selectedColumns.length > 0 ? selectedColumns[0].label : '',
-        column_1: selectedColumns.length > 0 ? selectedColumns[0].label : '',
-        column_2: selectedColumns.length === 2 ? selectedColumns[1].label : '',
-      });
+    setDirectiveComponentsValue({
+      ...directiveComponentValues,
+      selectedColumn: selectedColumns.length > 0 ? selectedColumns[0].label : '',
+      column_1: selectedColumns.length > 0 ? selectedColumns[0].label : '',
+      column_2: selectedColumns.length === 2 ? selectedColumns[1].label : '',
+    });
   }, [selectedColumns]);
-
 
   const classes = useStyles();
 
@@ -288,10 +287,10 @@ const AddTransformation = (props) => {
     } else if (functionName == 'rename-column') {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.copyColumnName);
     } else if (functionName == 'delete') {
-      const getValue = prepareDirectiveForMultipleDelete(selectedColumns)
+      const getValue = prepareDirectiveForMultipleDelete(selectedColumns);
       props.applyTransformation(selectedColumns[0].label, getValue);
     } else if (functionName == 'keep') {
-      const getValue = prepareDirectiveForMultipleKeep(selectedColumns)
+      const getValue = prepareDirectiveForMultipleKeep(selectedColumns);
       props.applyTransformation(selectedColumns[0].label, getValue);
     } else {
       setLoading(false);
@@ -309,8 +308,8 @@ const AddTransformation = (props) => {
 
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
-    setSelectedColumns([])
-  }
+    setSelectedColumns([]);
+  };
 
   const isComponentAvailable =
     DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
@@ -372,7 +371,7 @@ const AddTransformation = (props) => {
       >
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
-            {multipleColumnSelected.filter(el=>el.value === functionName).length > 0 ? 
+            {multipleColumnSelected.filter((el) => el.value === functionName).length > 0 ? (
               <SelectMultipleColumnsList
                 columnData={columnData}
                 selectedColumnsCount={selectedColumns.length}
@@ -380,14 +379,16 @@ const AddTransformation = (props) => {
                 dataQuality={missingDataList}
                 directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
                 functionName={functionName}
-              /> :
+              />
+            ) : (
               <SelectColumnsList
                 columnData={columnData}
                 selectedColumnsCount={selectedColumns.length}
                 setSelectedColumns={setSelectedColumns}
                 dataQuality={missingDataList}
                 directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
-              /> }
+              />
+            )}
           </div>
           <Button
             variant="contained"

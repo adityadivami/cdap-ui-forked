@@ -16,44 +16,13 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  iconContainer: {
+  functionWrapper: {
     display: 'flex',
-    justifyContent: 'space-between',
-    border: '1px solid #E0E0E0',
-    marginTop: '0px',
-    paddingLeft: '18px',
-    paddingRight: '15px',
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginLeft: '0px',
-    marginRight: '0px',
-    width: '80%',
-  },
-  searchIcon: {
-    border: 'none',
-    outline: 'none',
-    width: '250px',
-  },
-  closeBreadCrumb: {
-    transform: 'rotate(180deg)',
-  },
-  openedBreadcrumb: {},
-  functionNameWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '-webkit-fill-available',
   },
   typoClass: {
     color: '#757575',
     fontSize: '14px',
-  },
-  arrow: {
-    width: '5%',
   },
 });

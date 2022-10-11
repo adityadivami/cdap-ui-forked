@@ -14,10 +14,10 @@
  *  the License.
  */
 
-import { IconButton } from '@material-ui/core';
+import { IconButton, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import FunctionSearch from 'components/FunctionSearch';
-import { default as React } from 'react';
+import { default as React, useState } from 'react';
 import NestedMenu from '../NestedMenu';
 import {
   ColumnIcon,
@@ -46,69 +46,103 @@ import {
   SECURITY_OPTIONS,
   OTHER_OPTIONS,
 } from '../NestedMenu/constants';
+import FunctionToggle from '../FunctionNameToggle';
 
 const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) => {
   const classes = useStyles();
+  const [isShowNames, setIsShowName] = useState(false);
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
-        <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
-        <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
+        <Box className={classes.functionNameWrapper}>
+          <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
+          {isShowNames && <Typography className={classes.typoClass}>Undo</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
+          {isShowNames && <Typography className={classes.typoClass}>Redo</Typography>}
+        </Box>
 
         {Divider}
-        <NestedMenu
-          menuOptions={NULL_MISSING_OPTIONS}
-          columnType={columnType}
-          icon={NullIcon}
-          submitMenuOption={submitMenuOption}
-        />
-        <NestedMenu
-          menuOptions={INVALID_ICON_OPTIONS}
-          columnType={columnType}
-          icon={InvalidIcon}
-          submitMenuOption={submitMenuOption}
-        />
-        <NestedMenu
-          menuOptions={COLUMN_OPTIONS}
-          columnType={columnType}
-          icon={ColumnIcon}
-          submitMenuOption={submitMenuOption}
-        />
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={NULL_MISSING_OPTIONS}
+            columnType={columnType}
+            icon={NullIcon}
+            submitMenuOption={submitMenuOption}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>Null</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={INVALID_ICON_OPTIONS}
+            columnType={columnType}
+            icon={InvalidIcon}
+            submitMenuOption={submitMenuOption}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>Invalid</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={COLUMN_OPTIONS}
+            columnType={columnType}
+            icon={ColumnIcon}
+            submitMenuOption={submitMenuOption}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>Column</Typography>}
+        </Box>
+        {Divider}
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={StructureIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={MENU_OPTIONS}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>Structure</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={FragmentIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={FRAGMENT_OPTIONS}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>Fragment</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={MathIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={MATH_OPTIONS}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>Math</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={SecurityIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={SECURITY_OPTIONS}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>Security</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={OtherIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={OTHER_OPTIONS}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>Other</Typography>}
+        </Box>
 
         {Divider}
-        <NestedMenu
-          columnType={columnType}
-          icon={StructureIcon}
-          submitMenuOption={submitMenuOption}
-          menuOptions={MENU_OPTIONS}
-        />
-        <NestedMenu
-          columnType={columnType}
-          icon={FragmentIcon}
-          submitMenuOption={submitMenuOption}
-          menuOptions={FRAGMENT_OPTIONS}
-        />
-        <NestedMenu
-          columnType={columnType}
-          icon={MathIcon}
-          submitMenuOption={submitMenuOption}
-          menuOptions={MATH_OPTIONS}
-        />
-        <NestedMenu
-          columnType={columnType}
-          icon={SecurityIcon}
-          submitMenuOption={submitMenuOption}
-          menuOptions={SECURITY_OPTIONS}
-        />
-        <NestedMenu
-          columnType={columnType}
-          icon={OtherIcon}
-          submitMenuOption={submitMenuOption}
-          menuOptions={OTHER_OPTIONS}
-        />
-
-        {Divider}
-        <IconButton>{GridIcon}</IconButton>
+        <Box className={classes.functionNameWrapper}>
+          <IconButton>{GridIcon}</IconButton>
+          {isShowNames && <Typography className={classes.typoClass}>Grid</Typography>}
+        </Box>
 
         {Divider}
         <FunctionSearch
@@ -117,7 +151,8 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           }}
         />
       </Box>
-      <IconButton>{Expand}</IconButton>
+      <FunctionToggle setIsShowName={setIsShowName} isShowNames={isShowNames} />
+      <IconButton className={classes.arrow}>{Expand}</IconButton>
     </Box>
   );
 };
