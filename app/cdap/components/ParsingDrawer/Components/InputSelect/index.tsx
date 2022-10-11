@@ -34,9 +34,14 @@ const InputSelect = (props) => {
         // },
       }}
     >
-      {options.map((option) => {
+      {options.map((option, index) => {
         return (
-          <MenuItem classes={...optionClassName} value={option.value} key={option.value}>
+          <MenuItem
+            classes={{ ...optionClassName }}
+            value={option.value}
+            key={option.value}
+            data-testid={`input-select-${index}`}
+          >
             {option.label}
           </MenuItem>
         );
