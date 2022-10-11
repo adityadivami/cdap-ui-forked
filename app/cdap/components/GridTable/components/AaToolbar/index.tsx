@@ -117,7 +117,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           }}
         />
       </Box>
-      <IconButton>{Expand}</IconButton>
+      <IconButton onClick={() => setShowBreadCrumb(!showBreadCrumb)}>{Expand}</IconButton>
     </Box>
   );
 };
