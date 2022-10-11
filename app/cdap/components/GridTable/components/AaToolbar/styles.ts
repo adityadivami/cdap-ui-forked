@@ -16,6 +16,10 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
+  closeHeader: {
+    transform: 'rotate(180deg)',
+  },
+  openHeader: {},
   iconContainer: {
     display: 'flex',
     justifyContent: 'space-between',

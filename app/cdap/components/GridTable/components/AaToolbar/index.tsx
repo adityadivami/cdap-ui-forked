@@ -109,7 +109,6 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
 
         {Divider}
         <IconButton>{GridIcon}</IconButton>
-
         {Divider}
         <FunctionSearch
           transformationPanel={(value) => {
@@ -117,7 +116,12 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           }}
         />
       </Box>
-      <IconButton onClick={() => setShowBreadCrumb(!showBreadCrumb)}>{Expand}</IconButton>
+      <IconButton
+        className={showBreadCrumb ? classes.openHeader : classes.closeHeader}
+        onClick={() => setShowBreadCrumb(!showBreadCrumb)}
+      >
+        {Expand}
+      </IconButton>
     </Box>
   );
 };
