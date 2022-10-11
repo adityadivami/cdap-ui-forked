@@ -60,4 +60,5 @@ const MenuComponent: React.FC<IMenuComponentProps> = ({
     </Menu>
   );
 };
+
 export default MenuComponent;

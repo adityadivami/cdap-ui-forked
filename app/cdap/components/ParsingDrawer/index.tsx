@@ -1,26 +1,38 @@
-import React, { useEffect, useState, useReducer, useContext } from 'react';
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import { Button } from '@material-ui/core';
-import { useStyles } from './styles';
-import { APPLY_BUTTON, IMPORT_SCHEMA, PARSING, PARSING_INFO_TEXT } from './constants';
-import ParsingPopupBody from './Components/ParsingPopupBody';
-import DrawerWidget from 'components/DrawerWidget';
-import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
-import DataPrepStore from 'components/DataPrep/store';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
-import MyDataPrepApi from 'api/dataprep';
-import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
-import { objectQuery } from 'services/helpers';
-import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import DataPrepStore from 'components/DataPrep/store';
+import DrawerWidget from 'components/DrawerWidget';
 import PositionedSnackbar from 'components/SnackbarComponent/index';
+import React, { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
+import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
+import ParsingPopupBody from './Components/ParsingPopupBody';
+import { PARSING_INFO_TEXT } from './constants';
+import { useStyles } from './styles';
+import T from 'i18n-react';
 
 const ParsingDrawer = (props) => {
   const { setLoading } = props;
   const [drawerStatus, setDrawerStatus] = useState(true);
-  const [formatValue, setFormatValue] = useState();
-  const [encodingValue, setEncodingValue] = useState();
+  const [formatValue, setFormatValue] = useState('');
+  const [encodingValue, setEncodingValue] = useState('');
   const [quotedValuesChecked, setQuotedValuesChecked] = useState(false);
   const [headerValueChecked, setHeaderValueChecked] = useState(false);
   const [schemaValue, setSchemaValue] = useState(null);
@@ -70,13 +82,13 @@ const ParsingDrawer = (props) => {
     setDrawerStatus(false);
   };
 
-  const handleFormatChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value as any;
+  const handleFormatChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value as string;
     setFormatValue(value);
   };
 
-  const handleEncodingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value as any;
+  const handleEncodingChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value as string;
     setEncodingValue(value);
   };
 
@@ -133,7 +145,7 @@ const ParsingDrawer = (props) => {
 
   const componentToRender = (
     <DrawerWidget
-      headingText={PARSING}
+      headingText={T.translate('features.WranglerNewParsingDrawer.parsing')}
       openDrawer={setDrawerStatus}
       showDivider={true}
       headerActionTemplate={
@@ -159,16 +171,19 @@ const ParsingDrawer = (props) => {
         <Box className={classes.bottomSectionStyles}>
           <Box className={classes.infoWrapperStyles}>
             <InfoOutlinedIcon />
-            <span className={classes.infoTextStyles}>{PARSING_INFO_TEXT}</span>
+            <span className={classes.infoTextStyles}>
+              {T.translate('features.WranglerNewParsingDrawer.parsingInfoText')}
+            </span>
           </Box>
           <Button
             variant="contained"
             color="primary"
             classes={{ containedPrimary: classes.buttonStyles }}
             className={classes.applyButtonStyles}
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => handleApply(e)}
+            data-testid="parsing-apply-button"
           >
-            {APPLY_BUTTON}
+            {T.translate('features.WranglerNewParsingDrawer.apply')}
           </Button>
         </Box>
       </Box>

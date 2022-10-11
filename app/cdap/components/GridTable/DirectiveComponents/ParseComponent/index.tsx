@@ -34,5 +34,4 @@ const ParseComponent = (props) => {
     </section>
   );
 };
-
 export default ParseComponent;
