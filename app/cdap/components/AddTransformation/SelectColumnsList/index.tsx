@@ -56,6 +56,7 @@ export default function(props) {
   const [focused, setFocused] = useState(false);
   const classes = useStyles();
   const ref = useRef(null);
+
   const no_match =
     directiveFunctionSupportedDataType?.length > 0 &&
     directiveFunctionSupportedDataType?.includes('all')
@@ -65,6 +66,7 @@ export default function(props) {
             return object2.includes(object1?.type[0]?.toLowerCase());
           });
         });
+
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
