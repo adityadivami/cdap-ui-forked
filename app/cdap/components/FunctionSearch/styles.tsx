@@ -131,4 +131,17 @@ export const useStyles = makeStyles({
   listboxInMuiAutocomplete: {
     height: '1000px !important',
   },
+  close: {
+    color: '#757575',
+    fontSize: 'xx-large',
+    cursor: 'pointer',
+  },
+  onFocusAutocomplete: {
+    '& .MuiAutocomplete-inputFocused': {
+      borderBottom: 'none !important',
+    },
+  },
+  onBlurAutocomplete: {
+    borderBottom: '1px solid #E0E0E0',
+  },
 });

@@ -22,6 +22,7 @@ import NamespaceStore from 'services/NamespaceStore';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 
 const FunctionSearch = ({ transformationPanel }) => {
   const classes = useStyles();
@@ -30,7 +31,7 @@ const FunctionSearch = ({ transformationPanel }) => {
   const [textFieldInput, setTextFieldInput] = useState('');
   const [selectedDirective, setSelectedDirective] = useState('');
   const [recentSearches, setRecentSearches] = useState([]);
-
+  const textInput = React.useRef(null);
   const GetData = () => {
     const namespace = NamespaceStore.getState().selectedNamespace;
     MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
@@ -39,6 +40,7 @@ const FunctionSearch = ({ transformationPanel }) => {
   };
 
   const handleInputChange = (e) => {
+    setTextFieldInput(e.target.value);
     if (e.target.value == '') {
       setDisplayRecentSearches(true);
     } else {
@@ -69,11 +71,11 @@ const FunctionSearch = ({ transformationPanel }) => {
   };
 
   const handleOptionClick = (selectedOption) => {
+    setTextFieldInput(null);
     setSelectedDirective(selectedOption.directive);
     transformationPanel(selectedOption.directive);
     const currentRecentSearch = selectedOption;
     const array = [...recentSearches];
-
     const filterredSearchResults = array.filter(
       (item) => item.directive !== currentRecentSearch.directive
     );
@@ -86,6 +88,7 @@ const FunctionSearch = ({ transformationPanel }) => {
     if (textFieldInput === '') {
       setDisplayRecentSearches(false);
     }
+    setSeachResults([]);
   };
 
   return (
@@ -93,11 +96,17 @@ const FunctionSearch = ({ transformationPanel }) => {
       <Autocomplete
         id="combo-box-demo"
         options={displayRecentSearches ? recentSearches : searchResults}
-        getOptionLabel={(option) => option.directive.concat(`(${option.description})`)}
+        getOptionLabel={(option) =>
+          searchResults.length ? option.directive.concat(`(${option.description})`) : ''
+        }
         autoHighlight={true}
         PaperComponent={CustomPaper}
         onClose={handleClose}
-        classes={{ option: classes.optionInMUIAutocomplete }}
+        classes={{
+          option: classes.optionInMUIAutocomplete,
+          focused: classes.onFocusAutocomplete,
+          input: classes.onBlurAutocomplete,
+        }}
         renderOption={(option) => (
           <>
             <Box
@@ -132,14 +141,34 @@ const FunctionSearch = ({ transformationPanel }) => {
             value={textFieldInput}
             id="text-input"
             classes={{ root: classes.customTextField }}
+            inputRef={textInput}
             InputProps={{
               ...params.InputProps,
               startAdornment: (
-                <InputAdornment position="start">
-                  <div>
-                    <SearchOutlinedIcon className={classes.search} />
-                  </div>
-                </InputAdornment>
+                <>
+                  <InputAdornment position="start">
+                    <div>
+                      <SearchOutlinedIcon className={classes.search} />
+                    </div>
+                  </InputAdornment>
+                  <></>
+                </>
+              ),
+              endAdornment: (
+                <>
+                  <InputAdornment position="end">
+                    {textInput?.current?.value && (
+                      <div>
+                        <ClearOutlinedIcon
+                          className={classes.close}
+                          onClick={() => {
+                            textInput.current.value = '';
+                          }}
+                        />
+                      </div>
+                    )}
+                  </InputAdornment>
+                </>
               ),
             }}
           />
