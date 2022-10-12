@@ -78,7 +78,7 @@ export const useStyles = makeStyles({
         border: '0px solid #DADCE0 !important',
         outline: 0,
       },
-      padding: '8px !important',
+      paddingBottom: '8px !important',
     },
 
     '&:focus-visble': {
