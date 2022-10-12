@@ -69,11 +69,11 @@ export const useStyles = makeStyles({
     width: '490px',
     right: '6px',
     marginLeft: '5px',
-    boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+    // boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
     '& .MuiOutlinedInput-root': {
       borderRadius: '0px',
       '& fieldset': {
-        border: '1px solid #DADCE0 !important',
+        border: '0px solid #DADCE0 !important',
       },
       '&:hover': {
         border: '0px solid #DADCE0 !important',
