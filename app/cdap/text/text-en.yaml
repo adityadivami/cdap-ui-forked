@@ -3422,12 +3422,18 @@ features:
     selectColumn: Select column(s) to apply this function
     quickSelect: Quick select by clicking a column on the grid/columns panel
     selectCoulmn: Select column
-    selectColumns: Select columns
+    selectMultiColumns: Select columns
     selectAction: Select action to take
     applyStep: Apply Step
     columns: Columns
     nullValues: Null Values
     dataQuality: Data Quality
+    done: Done
+    removeRows: Remove rows
+    replaceRows: Replace rows
+    replaceWith: Replace with
+    selectFirstColumnApply: Select column first to apply this function
+    selectSecondColumnApply: Select column second to apply this function
   WranglerNewFooterPanel: 
     currentData: Current data - 1000 rows and 30 columns
     transformations: Transformations

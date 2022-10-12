@@ -37,7 +37,9 @@ export default function(props) {
         <div className={classes.functionHeadingTextStyles}>
           {SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION}
         </div>
-        <div className={classes.quickSelectTextStyles}>{QUICK_SELECT_INFO}</div>
+        <div className={classes.quickSelectTextStyles}>
+          {T.translate('features.WranglerNewAddTransformation.quickSelect')}
+        </div>
         {selectedColumns.length ? (
           selectedColumns.map((item, index) => {
             return (
@@ -54,8 +56,8 @@ export default function(props) {
             onClick={() => props.handleSelectColumn(false)}
           >
             {multipleColumnSelected.filter((el) => el.value === functionName).length > 0
-              ? SELECT_MULTI_COLUMNS
-              : SELECT_COLUMNS}
+              ? T.translate('features.WranglerNewAddTransformation.selectMultiColumns')
+              : T.translate('features.WranglerNewAddTransformation.selectCoulmn')}
           </Button>
         )}
       </>
@@ -68,7 +70,10 @@ export default function(props) {
         <div className={classes.functionHeadingTextStyles}>
           {SELECT_COLUMNS_1_TO_APPLY_THIS_FUNCTION}
         </div>
-        <div className={classes.quickSelectTextStyles}>{QUICK_SELECT_INFO}</div>
+        <div className={classes.quickSelectTextStyles}>
+          {' '}
+          {T.translate('features.WranglerNewAddTransformation.quickSelect')}
+        </div>
         {selectedColumns.length ? (
           selectedColumns.map((item, index) => {
             return (
@@ -84,13 +89,15 @@ export default function(props) {
             className={classes.selectButtonStyles}
             onClick={() => props.handleSelectColumn(false)}
           >
-            {SELECT_COLUMNS}
+            {T.translate('features.WranglerNewAddTransformation.selectCoulmn')}
           </Button>
         )}
         <div className={classes.functionHeadingTextStyles}>
           {SELECT_COLUMNS_2_TO_APPLY_THIS_FUNCTION}
         </div>
-        <div className={classes.quickSelectTextStyles}>{QUICK_SELECT_INFO}</div>
+        <div className={classes.quickSelectTextStyles}>
+          {T.translate('features.WranglerNewAddTransformation.quickSelect')}
+        </div>
         {selected_column_2.length ? (
           selected_column_2.map((item, index) => {
             return (
@@ -107,7 +114,7 @@ export default function(props) {
             onClick={() => props.handleSelectColumn(true)}
             disabled={selectedColumns.length === 0 ? true : false}
           >
-            {SELECT_COLUMNS}
+            {T.translate('features.WranglerNewAddTransformation.selectCoulmn')}
           </Button>
         )}
       </>
