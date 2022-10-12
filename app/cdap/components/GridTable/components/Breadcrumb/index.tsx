@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Button, IconButton, Typography } from '@material-ui/core';
+import { Box, Button, IconButton, Typography, Menu, MenuItem } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import React from 'react';
@@ -33,6 +33,15 @@ import { useStyles } from './styles';
 
 const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema }) => {
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const sourcePath =
     location.state?.from === MATCH_SOURCE
@@ -61,7 +70,45 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
 
         <Breadcrumbs separator=" ">
           {DividerIcon}
-          <Link className={`${classes.breadcrumbLabel} ${classes.home}`}>{WORKSPACES_OPEN}</Link>
+          <div>
+            <Button
+              color="inherit"
+              className={`${classes.breadcrumbLabel}`}
+              id="basic-button"
+              aria-controls={open ? 'basic-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              onClick={handleClick}
+            >
+              {WORKSPACES_OPEN}
+            </Button>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            >
+              <MenuItem onClick={handleClose}>{datasetName}</MenuItem>
+              <Link
+                onClick={handleClose}
+                to={`/ns/${getCurrentNamespace()}/workspace-list`}
+                className={`${classes.breadcrumbLabel}`}
+              >
+                View all ongoing workspaces
+              </Link>
+            </Menu>
+          </div>
         </Breadcrumbs>
       </Breadcrumbs>
 
