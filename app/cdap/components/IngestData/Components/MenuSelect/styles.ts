@@ -17,37 +17,27 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  buttonGroup: {
+  select: {
+    '& .MuiSelect-outlined.MuiSelect-outlined': {
+      padding: '10px 20px',
+      height: '20px',
+      width: '310px',
+    },
+  },
+  selectInfo: {
     display: 'flex',
-    marginTop: '234px',
-    gap: '20px',
-    justifyContent: 'flex-end',
+    gap: '14px',
   },
-  ingestDataButton: {
-    height: '36px',
-    width: '162px',
+  infoIcon: {
+    color: '#757575',
+    fontSize: '20px',
+    cursor: 'pointer',
   },
-  apply: {
-    fontSize: '15px',
-    fontWeight: 400,
-    lineHeight: '26px',
-    letterSpacing: '0.46px',
-    color: 'white',
-    textTransform: 'none',
-    boxShadow: 'none',
+  infoIconContainer: {
+    margin: 'auto',
   },
-  ingestDataButtonColor: {
-    backgroundColor: '#2196F3',
-  },
-  cancelButtonRoot: {
-    fontSize: '15px',
-    fontWeight: 400,
-    lineHeight: '26px',
-    letterSpacing: '0.46px',
-    color: '#2196F3',
-    textTransform: 'none',
-  },
-  bodyStyles: {
-    paddingTop: '13px',
+  customTooltip: {
+    width: '100px',
+    backgroundColor: 'black',
   },
 });

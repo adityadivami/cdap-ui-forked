@@ -61,7 +61,7 @@ import {
 import ColumnView from 'components/ColumnView';
 import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
 import ViewSchemaModal from './components/Modals/ViewSchemaModal';
-import { IngestData } from 'components/IngestData';
+import IngestData from 'components/IngestData';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -522,7 +522,9 @@ export default function() {
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
       />
-      {openIngestData && <IngestData setOpenIngestData={setOpenIngestData} />}
+      {openIngestData && (
+        <IngestData setOpenIngestData={setOpenIngestData} headersNamesList={headersNamesList} />
+      )}
       {insightDrawer.open && (
         <ColumnInsightDrawer
           columnData={insightDrawer}

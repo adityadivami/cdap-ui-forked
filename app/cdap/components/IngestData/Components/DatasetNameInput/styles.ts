@@ -17,37 +17,43 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  buttonGroup: {
+  datasetInput: {
+    height: '40px',
+    width: '350px',
+  },
+  inputInfo: {
     display: 'flex',
-    marginTop: '234px',
-    gap: '20px',
-    justifyContent: 'flex-end',
+    gap: '14px',
   },
-  ingestDataButton: {
-    height: '36px',
-    width: '162px',
+  infoIcon: {
+    color: '#757575',
+    fontSize: '20px',
+    cursor: 'pointer',
   },
-  apply: {
-    fontSize: '15px',
+  infoIconContainer: {
+    margin: 'auto',
+  },
+  datasetInputLabel: {
+    fontFamily: 'Roboto',
+    fontStyle: ' normal',
     fontWeight: 400,
-    lineHeight: '26px',
-    letterSpacing: '0.46px',
-    color: 'white',
-    textTransform: 'none',
-    boxShadow: 'none',
+    fontSize: '14px',
+    lineHeight: '150%',
+    letterSpacing: '0.15px',
+    color: ' #616161',
   },
-  ingestDataButtonColor: {
-    backgroundColor: '#2196F3',
+  textField: {
+    padding: '0px',
   },
-  cancelButtonRoot: {
-    fontSize: '15px',
-    fontWeight: 400,
-    lineHeight: '26px',
-    letterSpacing: '0.46px',
-    color: '#2196F3',
-    textTransform: 'none',
+  outlinedInput: {
+    padding: '0px',
+    '& .MuiOutlinedInput-input': {
+      padding: '5px 20px',
+      height: '30px',
+    },
   },
-  bodyStyles: {
-    paddingTop: '13px',
+  customTooltip: {
+    width: '100px',
+    backgroundColor: 'black',
   },
 });

@@ -17,37 +17,19 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  buttonGroup: {
-    display: 'flex',
-    marginTop: '234px',
-    gap: '20px',
-    justifyContent: 'flex-end',
-  },
-  ingestDataButton: {
-    height: '36px',
-    width: '162px',
-  },
-  apply: {
-    fontSize: '15px',
-    fontWeight: 400,
-    lineHeight: '26px',
-    letterSpacing: '0.46px',
-    color: 'white',
+  toggleButtonRoot: {
+    width: '200px',
     textTransform: 'none',
-    boxShadow: 'none',
-  },
-  ingestDataButtonColor: {
-    backgroundColor: '#2196F3',
-  },
-  cancelButtonRoot: {
-    fontSize: '15px',
+    height: '40px',
+    fontSize: '14px',
+    fontFamily: 'Roboto',
     fontWeight: 400,
-    lineHeight: '26px',
-    letterSpacing: '0.46px',
-    color: '#2196F3',
-    textTransform: 'none',
+    color: '#212121 ',
   },
-  bodyStyles: {
-    paddingTop: '13px',
+  selected: {
+    backgroundColor: 'white !important ',
+    boxShadow: 'inset 2px 2px 2px rgba(68, 132, 245, 0.4)',
+    border: '1px solid #2196F3',
+    color: '#212121 !important',
   },
 });
