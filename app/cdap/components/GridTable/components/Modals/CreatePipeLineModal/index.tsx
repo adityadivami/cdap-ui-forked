@@ -18,11 +18,11 @@ const PipeLineModal = ({ setOpenPipeline }) => {
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
-      className={classes.dialogWrapper}
-      maxWidth={'md'}
-      fullWidth={true}
+      classes={{
+        paper: classes.muiDialogPaper,
+      }}
     >
-      <DialogTitle id="alert-dialog-title">
+      <DialogTitle id="alert-dialog-title" className={classes.muiDialogTitle}>
         <Box className={classes.headerFlex}>
           <Typography className={classes.modalHeader}>Create a pipeline</Typography>
           <span role="button" tabIndex={0} className={classes.closeIcon} onClick={handleClose}>

@@ -366,6 +366,14 @@ export default function() {
         } else if (action === 'delete') {
           setToastAction('delete');
         }
+        setTimeout(() => {
+          setToaster({
+            open: false,
+            message: ``,
+            isSuccess: false,
+          });
+          setToastAction('');
+        }, 5000);
       },
       (err) => {
         setToaster({
