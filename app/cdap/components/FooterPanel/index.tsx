@@ -26,12 +26,18 @@ export default function({
   setOpenDirective,
   dataCounts,
   setOpenColumnViewHandler,
+  columnViewPanelOpened,
 }) {
   const classes = useCss();
   return (
     <Box className={classes.containerProps}>
       <Box className={classes.cont}>
-        <Box className={classes.imgCont} onClick={setOpenColumnViewHandler}>
+        <Box
+          className={`${classes.imgCont} ${
+            columnViewPanelOpened ? classes.showDepth : classes.showNormalView
+          }`}
+          onClick={setOpenColumnViewHandler}
+        >
           {ColumnIcon}
         </Box>
         <Box className={classes.dataWrapper}>
@@ -45,7 +51,10 @@ export default function({
           <p className={classes.spanElement}> 100%</p>
           {ArrowIcon}
         </Box>
-        <Box className={classes.directivesCont} onClick={() => setOpenDirective(true)}>
+        <Box
+          className={classes.directivesCont}
+          onClick={() => setOpenDirective(true)}
+        >
           <p> Directives </p>
         </Box>
         <Box className={classes.recipeCont} onClick={showRecipePanelHandler}>

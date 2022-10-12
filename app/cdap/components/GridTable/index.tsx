@@ -740,6 +740,7 @@ export default function() {
         setOpenDirective={setOpenDirective}
         dataCounts={dataCounts}
         setOpenColumnViewHandler={setOpenColumnViewHandler}
+        columnViewPanelOpened={openColumnView}
       />
       {toaster.open && (
         <PositionedSnackbar
