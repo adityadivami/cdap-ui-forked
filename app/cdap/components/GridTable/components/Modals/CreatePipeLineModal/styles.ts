@@ -27,7 +27,7 @@ export const useStyles = makeStyles({
   modalText: {
     color: '#212121',
     fontSize: '16px',
-    marginTop: '10px',
+    marginTop: '20px',
   },
   headerFlex: {
     display: 'flex',
@@ -44,6 +44,8 @@ export const useStyles = makeStyles({
     borderRadius: '4px',
     marginRight: '20px',
     cursor: 'pointer',
+    width: '250px',
+    height: '125px',
   },
   dialogActionGroup: {
     display: 'grid',
@@ -55,4 +57,6 @@ export const useStyles = makeStyles({
   closeIcon: {
     cursor: 'pointer',
   },
+  muiDialogPaper: { width: '600px', paddingBottom: '24px' },
+  muiDialogTitle: { paddingBottom: '5px' },
 });
