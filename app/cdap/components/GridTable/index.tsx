@@ -200,7 +200,6 @@ export default function() {
           setGridData(response);
           setDirectiveFunction('');
           setColumnSelected('');
-          setColumnType('');
           if (selectedDirective) {
             setToaster({
               open: true,
@@ -346,7 +345,6 @@ export default function() {
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
-        setColumnType('');
         setShowRecipePanel(false);
         setToaster({
           open: true,
@@ -632,7 +630,6 @@ export default function() {
             );
           }}
           callBack={(response) => {
-            setColumnType('');
             setColumnSelected('');
             setDirectiveFunction('');
           }}
@@ -718,7 +715,6 @@ export default function() {
                               );
                             }}
                             cancelTransformation={() => {
-                              setColumnType('');
                               setColumnSelected('');
                               setOptionSelected('');
                               setMaskSelection(false);

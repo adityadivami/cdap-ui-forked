@@ -13,14 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => {
-  return {
-    addTransformationBodyStyles: {
-      display: 'flex',
-      flexDirection: 'column',
-      padding: '0',
-    },
-  };
+export const useStyles = makeStyles({
+  functionWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  typoClass: {
+    color: '#757575',
+    fontSize: '14px',
+  },
 });

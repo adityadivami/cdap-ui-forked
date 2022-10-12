@@ -20,9 +20,7 @@ export const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     border: '1px solid #E0E0E0',
-    height: '48px',
     marginTop: '0px',
-    padding: '10px',
     paddingLeft: '18px',
     paddingRight: '15px',
   },
@@ -33,6 +31,7 @@ export const useStyles = makeStyles({
     alignItems: 'center',
     marginLeft: '0px',
     marginRight: '0px',
+    width: '80%',
   },
   searchIcon: {
     border: 'none',
@@ -43,4 +42,18 @@ export const useStyles = makeStyles({
     transform: 'rotate(180deg)',
   },
   openedBreadcrumb: {},
+  functionNameWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '-webkit-fill-available',
+  },
+  typoClass: {
+    color: '#757575',
+    fontSize: '14px',
+  },
+  arrow: {
+    width: '5%',
+  },
 });

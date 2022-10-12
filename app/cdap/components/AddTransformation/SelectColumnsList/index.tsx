@@ -56,15 +56,17 @@ export default function(props) {
   const [focused, setFocused] = useState(false);
   const classes = useStyles();
   const ref = useRef(null);
+
   const no_match =
     directiveFunctionSupportedDataType?.length > 0 &&
     directiveFunctionSupportedDataType?.includes('all')
       ? directiveFunctionSupportedDataType?.filter((el) => el == 'all')
       : columns.filter((object1) => {
           return directiveFunctionSupportedDataType?.some((object2) => {
-            return object2.includes(object1.type[0].toLowerCase());
+            return object2.includes(object1?.type[0]?.toLowerCase());
           });
         });
+
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
@@ -128,9 +130,11 @@ export default function(props) {
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
-            <Typography className={classes.mainHeaderMessage}>No columns to show</Typography>
+            <Typography className={classes.mainHeaderMessage}>
+              {T.translate('features.WranglerNewSelectCoulmnList.noColumns')}
+            </Typography>
             <Typography className={classes.subHeaderMessage}>
-              Selected directive supported datatype does not match which the column's datatype
+              {T.translate('features.WranglerNewSelectCoulmnList.noMatchColumnDatatype')}
             </Typography>
           </Box>
         </Box>
@@ -138,7 +142,7 @@ export default function(props) {
         <TableContainer component={Box}>
           <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
             <TableHead>
-              <TableRow className={classes.recipeStepsTableRowStyles}>
+              <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
                 <TableCell
                   classes={{
                     head: `${classes.recipeStepsTableHeadStyles} ${classes.columnstyles}`,
@@ -164,7 +168,10 @@ export default function(props) {
               {columns.map((eachColumn, index) => {
                 if (directiveFunctionSupportedDataType.includes('all')) {
                   return (
-                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                    <TableRow
+                      className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}
+                      key={index}
+                    >
                       <TableCell
                         classes={{
                           body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
@@ -180,12 +187,7 @@ export default function(props) {
                           }
                         />
                       </TableCell>
-                      <TableCell
-                        classes={{ body: classes.recipeStepsTableRowStyles }}
-                        style={{ width: 50 }}
-                        // component="th"
-                        // scope="row"
-                      >
+                      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
                         <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
                         </Typography>
@@ -194,7 +196,6 @@ export default function(props) {
                         </Typography>
                       </TableCell>
                       <TableCell
-                        // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
                         className={[
                           classes.recipeStepsTableRowStyles,
                           classes.circularBarCell,
@@ -210,7 +211,10 @@ export default function(props) {
                   directiveFunctionSupportedDataType?.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   return (
-                    <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                    <TableRow
+                      className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}
+                      key={index}
+                    >
                       <TableCell
                         classes={{
                           body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
@@ -226,12 +230,7 @@ export default function(props) {
                           }
                         />
                       </TableCell>
-                      <TableCell
-                        classes={{ body: classes.recipeStepsTableRowStyles }}
-                        style={{ width: 50 }}
-                        // component="th"
-                        // scope="row"
-                      >
+                      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
                         <Typography className={classes.recipeStepsActionTypeStyles}>
                           {eachColumn.label}
                         </Typography>
@@ -240,7 +239,6 @@ export default function(props) {
                         </Typography>
                       </TableCell>
                       <TableCell
-                        // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
                         className={[
                           classes.recipeStepsTableRowStyles,
                           classes.circularBarCell,

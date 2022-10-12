@@ -237,9 +237,7 @@ export const useStyles = makeStyles(() => {
     circularProgressRed: {
       color: '#E97567',
     },
-    circularBarCell: {
-      width: 90,
-    },
+    circularBarCell: {},
     nullValueHead: {
       width: 200,
     },
@@ -294,8 +292,10 @@ export const useStyles = makeStyles(() => {
     innerWrapper: {
       textAlign: 'center',
     },
-    radioButtonCellStyles: {
-      width: 50,
+    radioButtonCellStyles: {},
+    rowsOfTable: {
+      display: 'grid',
+      gridTemplateColumns: '10% 45% 45%',
     },
   };
 });
