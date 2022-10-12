@@ -32,7 +32,8 @@ interface ICardCount {
   fromAddress: string;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
+
+export default function OngoingDataExploration({ cardCount, fromAddress }: ICardCount) {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
   const getOngoingData = () => {
@@ -142,5 +143,4 @@ const OngoingDataExploration = ({ cardCount, fromAddress }: ICardCount) => {
       })}
     </Box>
   );
-};
-export default OngoingDataExploration;
+}

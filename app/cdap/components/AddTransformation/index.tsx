@@ -1,38 +1,53 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 import { Button, Container } from '@material-ui/core';
-import DataPrepStore from 'components/DataPrep/store';
 import DrawerWidget from 'components/DrawerWidget';
 import DirectiveContent from 'components/GridTable/DirectiveComponents';
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
+import T from 'i18n-react';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import ActionsWidget from './ActionsWidget';
-import {
-  ADD_TRANSFORMATION_STEP,
-  APPLY_STEP,
-  DONE_STEP,
-  SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
-} from './constants';
+import { DONE_STEP } from './constants';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsList from './SelectColumnsList';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import { useStyles } from './styles';
 import {
-  parseDirective,
   directiveForHash,
+  parseDirective,
+  prepareDirectiveForDefineVariable,
   prepareDirectiveForFilter,
   prepareDirectiveForPattern,
-  prepareDirectiveForDefineVariable,
   prepareDirectiveForSendToError,
   prepareDirectiveForCalculate,
   prepareDirectiveForMerge,
+  prepareDirectiveForMultipleDelete,
+  prepareDirectiveForMultipleKeep,
 } from './utils';
 import {
   CALCULATE_OPTIONS,
   DATATYPE_OPTIONS,
 } from 'components/GridTable/components/NestedMenu/constants';
+import SelectMultipleColumnsList from './SelectMultipleColumnList';
+import { multipleColumnSelected } from './constants';
 
-const AddTransformation = (props) => {
+export default function(props) {
   const {
     directiveFunctionSupportedDataType,
     functionName,
@@ -40,13 +55,12 @@ const AddTransformation = (props) => {
     setLoading,
     missingDataList,
   } = props;
+  const params = useParams() as any;
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
-  const [selected_column_2, setSelectedColumns_2] = useState([]);
   const [selectedAction, setSelectedAction] = useState('');
   const [replaceValue, setReplaceValue] = useState('');
-  const [is_secondSelection, setIsSecondSelection] = useState(false);
   const [directiveComponentValues, setDirectiveComponentsValue] = useState({
     radioOption: '',
     ignoreCase: false,
@@ -76,29 +90,18 @@ const AddTransformation = (props) => {
     selectedColumn: '',
     counter: 1,
     counterName: '',
-    selected_column_2,
     column_1: '',
     column_2: '',
   });
-  console.log('directiveComponentValues', directiveComponentValues);
+
   useEffect(() => {
-    if (selectedColumns.length) {
-      setDirectiveComponentsValue({
-        ...directiveComponentValues,
-        selectedColumn: selectedColumns[0].label,
-        column_1: selectedColumns[0].label,
-      });
-    }
+    setDirectiveComponentsValue({
+      ...directiveComponentValues,
+      selectedColumn: selectedColumns.length > 0 ? selectedColumns[0].label : '',
+      column_1: selectedColumns.length > 0 ? selectedColumns[0].label : '',
+      column_2: selectedColumns.length === 2 ? selectedColumns[1].label : '',
+    });
   }, [selectedColumns]);
-  useEffect(() => {
-    if (selectedColumns.length) {
-      setDirectiveComponentsValue({
-        ...directiveComponentValues,
-        selected_column_2: selected_column_2[0].label,
-        column_2: selected_column_2[0].label,
-      });
-    }
-  }, [selected_column_2]);
 
   const classes = useStyles();
 
@@ -273,7 +276,7 @@ const AddTransformation = (props) => {
     } else if (functionName === 'fillNullOrEmpty' || functionName === 'replace-null-missing') {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
     } else if (functionName === 'swap-columns') {
-      const directive = `swap :${selectedColumns[0].label} :${selected_column_2[0].label}`;
+      const directive = `swap :${selectedColumns[0].label} :${selectedColumns[1].label}`;
       props.applyTransformation(selectedColumns[0].label, directive);
     } else if (functionName === 'join-columns') {
       const directive = prepareDirectiveForMerge(
@@ -295,19 +298,29 @@ const AddTransformation = (props) => {
       props.applyTransformation(selectedColumns[0].label, getValue);
     } else if (functionName == 'rename-column') {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.copyColumnName);
+    } else if (functionName == 'delete') {
+      const getValue = prepareDirectiveForMultipleDelete(selectedColumns);
+      props.applyTransformation(selectedColumns[0].label, getValue);
+    } else if (functionName == 'keep') {
+      const getValue = prepareDirectiveForMultipleKeep(selectedColumns);
+      props.applyTransformation(selectedColumns[0].label, getValue);
     } else {
       setLoading(false);
       props.applyTransformation(selectedColumns[0].label);
     }
   };
 
-  const handleSelectColumn = (is_secondSelection) => {
+  const handleSelectColumn = () => {
     setColumnsPopup(true);
-    setIsSecondSelection(is_secondSelection);
   };
 
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
+  };
+
+  const closeSelectColumnsPopupWithoutColumn = () => {
+    setColumnsPopup(false);
+    setSelectedColumns([]);
   };
 
   const isComponentAvailable =
@@ -317,8 +330,8 @@ const AddTransformation = (props) => {
   return (
     <Fragment>
       <DrawerWidget
-        headingText={ADD_TRANSFORMATION_STEP}
-        openDrawer={functionName}
+        headingText={T.translate('features.WranglerNewAddTransformation.addTransformation')}
+        openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
       >
         <Container className={classes.addTransformationBodyStyles}>
@@ -329,7 +342,6 @@ const AddTransformation = (props) => {
               handleSelectColumn={handleSelectColumn}
               selectedColumns={selectedColumns}
               functionName={functionName}
-              selected_column_2={selected_column_2}
             />
             {functionName == 'null' ? (
               <ActionsWidget
@@ -359,29 +371,36 @@ const AddTransformation = (props) => {
             className={classes.applyStepButtonStyles}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
           >
-            {APPLY_STEP}
+            {T.translate('features.WranglerNewAddTransformation.applyStep')}
           </Button>
         </Container>
       </DrawerWidget>
       <DrawerWidget
-        headingText={SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION}
+        headingText={T.translate('features.WranglerNewAddTransformation.selectColumn')}
         openDrawer={columnsPopup}
         showBackIcon={true}
-        closeClickHandler={closeSelectColumnsPopup}
+        closeClickHandler={closeSelectColumnsPopupWithoutColumn}
       >
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
-            <SelectColumnsList
-              columnData={columnData}
-              selectedColumnsCount={selectedColumns.length}
-              setSelectedColumns={setSelectedColumns}
-              dataQuality={missingDataList}
-              directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
-              is_secondSelection={is_secondSelection}
-              selectedColumns_1={selectedColumns}
-              selected_column_2={selected_column_2}
-              setSelectedColumns_2={setSelectedColumns_2}
-            />
+            {multipleColumnSelected.filter((el) => el.value === functionName).length > 0 ? (
+              <SelectMultipleColumnsList
+                columnData={columnData}
+                selectedColumnsCount={selectedColumns.length}
+                setSelectedColumns={setSelectedColumns}
+                dataQuality={missingDataList}
+                directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+                functionName={functionName}
+              />
+            ) : (
+              <SelectColumnsList
+                columnData={columnData}
+                selectedColumnsCount={selectedColumns.length}
+                setSelectedColumns={setSelectedColumns}
+                dataQuality={missingDataList}
+                directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+              />
+            )}
           </div>
           <Button
             variant="contained"
@@ -397,6 +416,4 @@ const AddTransformation = (props) => {
       </DrawerWidget>
     </Fragment>
   );
-};
-
-export default AddTransformation;
+}

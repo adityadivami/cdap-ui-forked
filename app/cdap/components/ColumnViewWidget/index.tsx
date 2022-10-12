@@ -60,7 +60,6 @@ const ColumnViewWidget = (props) => {
           <CloseRoundedIcon
             className={classes.pointerStyles}
             color="action"
-            fontSize="large"
             onClick={closeClickHandler}
           />
         </Box>

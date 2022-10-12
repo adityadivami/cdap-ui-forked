@@ -134,6 +134,10 @@ export const getDirectiveOnTwoInputs = (option, column, value) => {
     return `fill-null-or-empty :${column} '${value}'`;
   } else if (option === 'rename-column') {
     return `rename :${column} :${value}`;
+  } else if (option === 'delete') {
+    return value;
+  } else if (option === 'keep') {
+    return value;
   } else {
     null;
   }

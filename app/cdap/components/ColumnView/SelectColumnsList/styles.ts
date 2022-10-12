@@ -25,6 +25,7 @@ export const useStyles = makeStyles(() => {
       marginTop: '40px',
     },
     tableBody: {
+      height: '300px',
       '& .MuiTableCell-root': {
         color: '#5F6368',
         fontSize: '14px',
@@ -51,7 +52,8 @@ export const useStyles = makeStyles(() => {
       padding: '0',
     },
     customTableContainer: {
-      overflowX: 'initial',
+      height: 'calc(100% - 43px)',
+      overflow: 'scroll',
       padding: 0,
     },
     columnsCountTextStyles: {
@@ -63,8 +65,7 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#5F6368',
-      paddingBottom: '15px',
-      height: 'calc(100vh - 246px)',
+      height: 'calc(100vh - 258px)',
       overflow: 'scroll',
     },
     functionSectionStyles: {
@@ -111,6 +112,9 @@ export const useStyles = makeStyles(() => {
       fontSize: '16px',
       lineHeight: '150%',
       letterSpacing: '0.15px',
+      '& .MuiTableCell-stickyHeader': {
+        backgroundColor: '#FFFFFF',
+      },
     },
     nullValuesContainer: {
       width: '134px',

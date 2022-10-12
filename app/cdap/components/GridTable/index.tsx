@@ -61,6 +61,7 @@ import {
 import ColumnView from 'components/ColumnView';
 import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
 import ViewSchemaModal from './components/Modals/ViewSchemaModal';
+import { multipleColumnSelected } from 'components/AddTransformation/constants';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -266,17 +267,10 @@ export default function() {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
       applyDirectiveAPICall(newDirective, 'add', [], '');
     } else {
-      if (OPTION_WITH_NO_INPUT.includes(option)) {
-        const newDirective = getDirective(option, columnSelected);
-        if (!columnSelected) {
-          setDirectiveFunction(option);
-          setLoading(false);
-          return;
-        } else {
-          applyDirectiveAPICall(newDirective, 'add', [], '');
-          setIsFirstWrangle(false);
-        }
-      } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      if (
+        multipleColumnSelected.filter((el) => el.value === option || el.value === optionSelected)
+          .length
+      ) {
         const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
         if (!Boolean(value_1)) {
           setDirectiveFunction(option);
@@ -284,6 +278,29 @@ export default function() {
           return;
         } else {
           applyDirectiveAPICall(newDirective, 'add', [], '');
+          setIsFirstWrangle(false);
+        }
+      } else {
+        if (OPTION_WITH_NO_INPUT.includes(option)) {
+          const newDirective = getDirective(option, columnSelected);
+          if (!columnSelected) {
+            setDirectiveFunction(option);
+            setLoading(false);
+            return;
+          } else {
+            applyDirectiveAPICall(newDirective, 'add', [], '');
+            setIsFirstWrangle(false);
+          }
+        } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+          const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+          if (!Boolean(value_1)) {
+            setDirectiveFunction(option);
+            setLoading(false);
+            return;
+          } else {
+            applyDirectiveAPICall(newDirective, 'add', [], '');
+            setIsFirstWrangle(false);
+          }
         }
       }
     }
@@ -469,10 +486,16 @@ export default function() {
 
   const deleteRecipes = (new_arr, remaining_arr) => {
     applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
+    DataPrepStore.dispatch({
+      type: DataPrepActions.setUndoDirective,
+      payload: {
+        undoDirectives: [],
+      },
+    });
   };
 
   // Redux store
-  const { data, headers, types, directives } = dataprep;
+  const { data, headers, types, directives, undoDirectives } = dataprep;
 
   const handleCloseSnackbar = () => {
     const stepsArr = JSON.parse(JSON.stringify(directives));
@@ -502,6 +525,32 @@ export default function() {
     setOpenColumnView(false);
   };
 
+  const undoRedoFunction = (option) => {
+    if (option === 'undo') {
+      const last_element = directives.slice(-1);
+      const newDirective = directives.slice(0, -1);
+      console.log('last_element', last_element, directives, newDirective);
+      DataPrepStore.dispatch({
+        type: DataPrepActions.setUndoDirective,
+        payload: {
+          undoDirectives: undoDirectives.concat(last_element),
+        },
+      });
+      applyDirectiveAPICall(newDirective, '', [], '');
+    } else if (option === 'redo') {
+      const last_element = undoDirectives.slice(-1);
+      const newDirective = directives.concat(last_element);
+      console.log('last_element', last_element, directives, newDirective);
+      DataPrepStore.dispatch({
+        type: DataPrepActions.setUndoDirective,
+        payload: {
+          undoDirectives: undoDirectives.slice(0, -1),
+        },
+      });
+      applyDirectiveAPICall(newDirective, '', [], '');
+    }
+  };
+  console.log('directives', directives, undoDirectives);
   return (
     <Box>
       {showBreadCrumb && (
@@ -514,7 +563,11 @@ export default function() {
       )}
       <ToolBarList
         columnType={columnType}
-        submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+        submitMenuOption={(option, dataType) =>
+          option === 'redo' || option === 'undo'
+            ? undoRedoFunction(option)
+            : applyDirective(option, columnSelected, dataType)
+        }
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
       />
