@@ -64,6 +64,7 @@ export const useStyles = makeStyles({
     borderRadius: '0px',
   },
   textField: {
+    outline: 'none',
     height: '48px',
     width: '490px',
     right: '6px',

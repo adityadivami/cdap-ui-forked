@@ -26,6 +26,7 @@ import {
   FragmentIcon,
   GridIcon,
   InvalidIcon,
+  LongDivider,
   MathIcon,
   NullIcon,
   OtherIcon,
@@ -63,7 +64,8 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           {isShowNames && <Typography className={classes.typoClass}>Redo</Typography>}
         </Box>
 
-        {Divider}
+        <Box> {isShowNames ? LongDivider : Divider}</Box>
+
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
             menuOptions={NULL_MISSING_OPTIONS}
@@ -91,7 +93,8 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           />
           {isShowNames && <Typography className={classes.typoClass}>Column</Typography>}
         </Box>
-        {Divider}
+        <Box> {isShowNames ? LongDivider : Divider}</Box>
+
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
             columnType={columnType}
@@ -138,13 +141,14 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           {isShowNames && <Typography className={classes.typoClass}>Other</Typography>}
         </Box>
 
-        {Divider}
+        <Box> {isShowNames ? LongDivider : Divider}</Box>
         <Box className={classes.functionNameWrapper}>
           <IconButton>{GridIcon}</IconButton>
           {isShowNames && <Typography className={classes.typoClass}>Grid</Typography>}
         </Box>
 
-        {Divider}
+        <Box> {isShowNames ? LongDivider : Divider}</Box>
+
         <FunctionSearch
           transformationPanel={(value) => {
             submitMenuOption(value, ['all']);
