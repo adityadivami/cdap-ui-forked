@@ -52,11 +52,15 @@ export const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     width: '-webkit-fill-available',
+    '& .MuiIconButton-root': {
+      paddingBottom: '8px',
+    },
   },
   typoClass: {
     color: '#757575',
     fontSize: '14px',
     padding: '0px 12px',
+    marginBottom: '10px',
   },
   arrow: {
     width: '5%',
