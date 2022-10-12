@@ -56,8 +56,12 @@ export const useStyles = makeStyles({
   typoClass: {
     color: '#757575',
     fontSize: '14px',
+    padding: '0px 12px',
   },
   arrow: {
     width: '5%',
+  },
+  divider: {
+    margin: '0px 4px',
   },
 });

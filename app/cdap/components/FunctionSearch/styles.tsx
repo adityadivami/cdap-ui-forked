@@ -69,7 +69,6 @@ export const useStyles = makeStyles({
     width: '490px',
     right: '6px',
     marginLeft: '5px',
-    // boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
     '& .MuiOutlinedInput-root': {
       borderRadius: '0px',
       '& fieldset': {

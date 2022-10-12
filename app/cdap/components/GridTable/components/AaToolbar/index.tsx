@@ -64,7 +64,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           {isShowNames && <Typography className={classes.typoClass}>Redo</Typography>}
         </Box>
 
-        <Box> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
 
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
@@ -93,7 +93,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           />
           {isShowNames && <Typography className={classes.typoClass}>Column</Typography>}
         </Box>
-        <Box> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
 
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
@@ -141,13 +141,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           {isShowNames && <Typography className={classes.typoClass}>Other</Typography>}
         </Box>
 
-        <Box> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Box className={classes.functionNameWrapper}>
           <IconButton>{GridIcon}</IconButton>
           {isShowNames && <Typography className={classes.typoClass}>Grid</Typography>}
         </Box>
 
-        <Box> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
 
         <FunctionSearch
           transformationPanel={(value) => {
