@@ -68,4 +68,7 @@ export const useStyles = makeStyles({
   divider: {
     margin: '0px 4px',
   },
+  lastDivider: {
+    margin: '0px 0px 0px 4px',
+  },
 });

@@ -147,7 +147,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           {isShowNames && <Typography className={classes.typoClass}>Grid</Typography>}
         </Box>
 
-        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.lastDivider}> {isShowNames ? LongDivider : Divider}</Box>
 
         <FunctionSearch
           transformationPanel={(value) => {
