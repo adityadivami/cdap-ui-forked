@@ -566,7 +566,7 @@ export default function() {
       });
       deleteFromRecipe.isDelete
         ? applyDirectiveAPICall(newDirective, 'add', [], '')
-        : applyDirectiveAPICall(newDirective, 'delete', [], '');
+        : applyDirectiveAPICall(newDirective, 'delete', last_element, '');
     } else if (option === 'redo') {
       const last_element = deleteFromRecipe.isDelete
         ? directives.slice(-deleteFromRecipe.totalDelete)
@@ -584,7 +584,7 @@ export default function() {
         },
       });
       deleteFromRecipe.isDelete
-        ? applyDirectiveAPICall(newDirective, 'delete', [], '')
+        ? applyDirectiveAPICall(newDirective, 'delete', last_element, '')
         : applyDirectiveAPICall(newDirective, 'add', [], '');
     }
   };
