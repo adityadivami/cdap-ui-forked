@@ -43,3 +43,7 @@ export interface IHeaderNamesList {
   label: string;
   type: string[];
 }
+
+export interface IObject {
+  [key: string]: string;
+}

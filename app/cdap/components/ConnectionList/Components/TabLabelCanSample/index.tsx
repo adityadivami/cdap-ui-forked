@@ -25,6 +25,8 @@ import * as React from 'react';
 import { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import { useLocation } from 'react-router';
+import { DATASOURCES_LABEL, WRANGLE_LABEL } from './constants';
 import useStyles from './styles';
 
 export default function TabLabelCanSample({
@@ -41,6 +43,7 @@ export default function TabLabelCanSample({
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const classes = useStyles();
+  const pathName = useLocation();
 
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
@@ -92,15 +95,27 @@ export default function TabLabelCanSample({
       });
   };
 
+  const indexOfSelectedDataset = location.pathname.lastIndexOf('/');
+  const requiredPath = location.pathname.slice(indexOfSelectedDataset + 1);
+
   return workspaceId ? (
-    <Redirect to={`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`} />
+    <Redirect
+      to={{
+        pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
+        state: { from: DATASOURCES_LABEL, path: requiredPath },
+      }}
+    />
   ) : refValue ? (
-    <CustomTooltip title={label} arrow>
+    <CustomTooltip title={label} arrow data-testid="connections-tab-ref-label-simple">
       <Box className={classes.labelsContainerCanSample}>
         <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
           {label}
         </Typography>
-        <button className="wranglingHover" onClick={() => onExplore(entity)}>
+        <button
+          className="wranglingHover"
+          data-testid="connections-tab-ref-explore"
+          onClick={() => onExplore(entity)}
+        >
           <WrangleIcon />
           <Typography variant="body2" className={classes.wrangleButton}>
             Wrangle
@@ -109,15 +124,21 @@ export default function TabLabelCanSample({
       </Box>
     </CustomTooltip>
   ) : (
-    <Box className={classes.labelsContainerCanSample}>
+    <Box className={classes.labelsContainerCanSample} data-testid="connections-tab-label-simple">
       <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
         {label}
       </Typography>
-      <button className="wranglingHover" onClick={() => onExplore(entity)}>
-        <WrangleIcon />
-        <Typography variant="body2" className={classes.wrangleButton}>
-          Wrangle
-        </Typography>
+      <button
+        className="wranglingHover"
+        data-testid="connections-tab-explore"
+        onClick={() => onExplore(entity)}
+      >
+        <Box className="wranglingHover">
+          <WrangleIcon />
+          <Typography color="primary" variant="body2" className={classes.wrangleButton}>
+            {WRANGLE_LABEL}
+          </Typography>
+        </Box>
       </button>
     </Box>
   );
