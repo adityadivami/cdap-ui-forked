@@ -48,4 +48,14 @@ export const useNestedMenuStyles = makeStyles({
       padding: '13px 0px',
     },
   },
+  tooltipToolbar: {
+    background: '#616161',
+    color: '#FFFFFF',
+    fontSize: '14px',
+  },
+  arrowTooltip: {
+    '&::before': {
+      backgroundColor: '#616161',
+    },
+  },
 });
