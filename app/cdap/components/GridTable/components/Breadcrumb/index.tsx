@@ -20,6 +20,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import OpenWorkspaces from '../OpenWorkspaces';
 import {
   DATASOURCES_URL_PARAM,
   HOME_LABLE,
@@ -70,7 +71,9 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
 
         <Breadcrumbs separator=" ">
           {DividerIcon}
-          <div>
+
+          <OpenWorkspaces />
+          {/* <div>
             <Button
               color="inherit"
               className={`${classes.breadcrumbLabel}`}
@@ -108,7 +111,7 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
                 View all ongoing workspaces
               </Link>
             </Menu>
-          </div>
+          </div> */}
         </Breadcrumbs>
       </Breadcrumbs>
 
