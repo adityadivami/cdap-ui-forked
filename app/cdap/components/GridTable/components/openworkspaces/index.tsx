@@ -23,6 +23,7 @@ import {
     Paper,
     Popper,
     Typography,
+    Link
   } from '@material-ui/core';
   import MyDataPrepApi from 'api/dataprep';
   import React, { useEffect, useState } from 'react';
@@ -158,4 +159,8 @@ import {
   };
   
   export default OpenWorkspaces;
+
+function getCurrentNamespace() {
+    throw new Error('Function not implemented.');
+}
   
