@@ -36,6 +36,7 @@ import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
 import FooterPanel from 'components/FooterPanel';
+import RecipeSteps from 'components/RecipeSteps';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -58,6 +59,7 @@ export default function() {
     },
   ]);
   const [connectorType, setConnectorType] = useState(null);
+  const [showRecipePanel, setShowRecipePanel] = useState(false);
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -201,6 +203,10 @@ export default function() {
     getGridTableData();
   }, [gridData]);
 
+  const showRecipePanelHandler = () => {
+    setShowRecipePanel((prev) => !prev);
+  };
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
@@ -210,6 +216,9 @@ export default function() {
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
           setLoading={setLoading}
         />
+      )}
+      {showRecipePanel && (
+        <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
       )}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
@@ -253,7 +262,7 @@ export default function() {
             })}
         </TableBody>
       </Table>
-      <FooterPanel />
+      <FooterPanel showRecipePanelHandler={showRecipePanelHandler} />
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />

@@ -18,7 +18,7 @@ import { Box } from '@material-ui/core';
 import { useCss } from './styles';
 import { ColumnIcon, ZoomIn, ArrowIcon } from './images';
 
-export default function() {
+export default function({ showRecipePanelHandler }) {
   const classes = useCss();
   return (
     <Box className={classes.containerProps}>
@@ -33,7 +33,7 @@ export default function() {
           {ArrowIcon}
         </Box>
         <p className={classes.directivesCont}> Directives </p>
-        <Box className={classes.recipeCont}>
+        <Box className={classes.recipeCont} onClick={showRecipePanelHandler}>
           <p> Recipe Steps</p>
           <p className={classes.spanElement1}> 10</p>
         </Box>
