@@ -139,14 +139,16 @@ import {
                         }
                       })}
   
-                      <MenuItem
+                      {/* <MenuItem
                         onClick={(e) => handleClose(e, 'openAllWorkspace')}
                         className={classes.viewAll}
                       >
                         <Typography className={classes.menuItemtext}>
                           View all ongoing workspaces
                         </Typography>
-                      </MenuItem>
+                      </MenuItem> */}
+
+                      <Link>View all ongoing workspaces </Link>
                     </MenuList>
                   </ClickAwayListener>
                 </Paper>
