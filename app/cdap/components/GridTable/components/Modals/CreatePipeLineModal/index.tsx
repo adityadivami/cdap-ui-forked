@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogTitle, Divider, Box, Typography } from '@material-ui/core';
 import { BatchIcon, RealtimePipelineIcon, CrossIcon } from '../../../iconStore';
 import { useStyles } from './styles';
+import DataPrepStore from 'components/DataPrep/store';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { Redirect } from 'react-router';
+import getPipelineConfig from 'components/DataPrep/TopPanel/PipelineConfigHelper';
 
 const PipeLineModal = ({ setOpenPipeline }) => {
   const classes = useStyles();
@@ -10,6 +15,42 @@ const PipeLineModal = ({ setOpenPipeline }) => {
   const handleClose = () => {
     setOpen(false);
     setOpenPipeline(false);
+  };
+
+  const generateLinks = () => {
+    const state = DataPrepStore.getState().dataprep;
+    const workspaceId = state.workspaceId;
+    const namespace = getCurrentNamespace();
+
+    getPipelineConfig().subscribe(
+      (res) => {
+        let realtimeUrl;
+
+        if (!res.realtimeConfig) {
+          realtimeUrl = null;
+        } else {
+          realtimeUrl = window.getHydratorUrl({
+            stateName: 'hydrator.create',
+            stateParams: {
+              namespace,
+              workspaceId,
+              artifactType: 'cdap-data-streams',
+            },
+          });
+        }
+
+        const batchUrl = window.getHydratorUrl({
+          stateName: 'hydrator.create',
+          stateParams: {
+            namespace,
+            workspaceId,
+            artifactType: 'cdap-data-pipeline',
+          },
+        });
+        window.open(`${batchUrl}`, '_self');
+      },
+      (err) => {}
+    );
   };
 
   return (
@@ -34,7 +75,7 @@ const PipeLineModal = ({ setOpenPipeline }) => {
         <Divider />
         <Typography className={classes.modalText}>Choose the type of pipeline to create</Typography>
         <Box className={classes.dialogActionGroup}>
-          <Box className={classes.buttonStyles}>
+          <Box className={classes.buttonStyles} onClick={() => generateLinks()}>
             {BatchIcon}
             <Typography className={classes.modalText}>Batch Pipeline</Typography>
           </Box>
