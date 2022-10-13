@@ -549,6 +549,7 @@ export default function() {
 
   const undoRedoFunction = (option) => {
     if (option === 'undo') {
+      console.log('undoDirectives', undoDirectives);
       const last_element = deleteFromRecipe.isDelete
         ? undoDirectives.slice(-deleteFromRecipe.totalDelete)
         : directives.slice(-1);
@@ -578,7 +579,7 @@ export default function() {
         type: DataPrepActions.setUndoDirective,
         payload: {
           undoDirectives: deleteFromRecipe.isDelete
-            ? undoDirectives.slice(0, -deleteFromRecipe.totalDelete)
+            ? undoDirectives.concat(last_element)
             : undoDirectives.slice(0, -1),
         },
       });
