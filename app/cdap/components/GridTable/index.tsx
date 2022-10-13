@@ -20,6 +20,7 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import ParsingDrawer from 'components/ParsingDrawer';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import React, { useEffect, useState } from 'react';
@@ -35,7 +36,7 @@ import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
 
-export default function GridTable() {
+export default function() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
@@ -53,6 +54,12 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const [connectorType, setConnectorType] = useState(null);
+
+  useEffect(() => {
+    const { dataprep } = DataPrepStore.getState();
+    setConnectorType(dataprep.connectorType);
+  }, []);
 
   const getWorkSpaceData = (params: IParams, workspaceId: string) => {
     const gridParams = {};
@@ -183,6 +190,7 @@ export default function GridTable() {
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
+      {connectorType === 'File' && <ParsingDrawer />}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
