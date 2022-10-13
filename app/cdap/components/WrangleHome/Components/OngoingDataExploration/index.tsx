@@ -29,7 +29,8 @@ import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
 interface ICardCount {
   cardCount?: number;
 }
-const OngoingDataExploration = ({ cardCount }: ICardCount) => {
+
+export default function OngoingDataExploration({ cardCount }: ICardCount) {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
   const getOngoingData = () => {
@@ -74,6 +75,7 @@ const OngoingDataExploration = ({ cardCount }: ICardCount) => {
                 recipeSteps: item.directives.length,
                 dataQuality: null,
                 workspaceId: item.workspaceId,
+                count: null,
               },
             ]);
             return MyDataPrepApi.execute(params, requestBody);
@@ -96,6 +98,7 @@ const OngoingDataExploration = ({ cardCount }: ICardCount) => {
             {
               ...current[index],
               dataQuality: totalDataQuality,
+              count: workspace.count,
             },
             ...current.slice(index + 1),
           ]);
@@ -112,9 +115,11 @@ const OngoingDataExploration = ({ cardCount }: ICardCount) => {
     setFinalArray(final);
   }, [ongoingExpDatas]);
 
+  const filteredData = finalArray.filter((eachWorkspace) => eachWorkspace[5].count !== 0);
+
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {finalArray.map((item, index) => {
+      {filteredData.map((item, index) => {
         return (
           <Link
             to={{
@@ -129,5 +134,4 @@ const OngoingDataExploration = ({ cardCount }: ICardCount) => {
       })}
     </Box>
   );
-};
-export default OngoingDataExploration;
+}
