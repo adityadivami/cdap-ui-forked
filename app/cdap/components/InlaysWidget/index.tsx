@@ -2,9 +2,9 @@ import { Box, Container, Drawer } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useStyles } from './styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import DrawerWidgetHeading from './DrawerWidgetHeading';
+import InlayWidgetHeading from './InlayWidgetHeading';
 
-const DrawerWidget = (props) => {
+const InlayWidget = (props) => {
   const classes = useStyles();
   const {
     headingText,
@@ -32,7 +32,7 @@ const DrawerWidget = (props) => {
                     alt="Back icon"
                   />
                 )}
-                <DrawerWidgetHeading headingText={headingText} />
+                <InlayWidgetHeading headingText={headingText} />
               </div>
               <Box className={classes.headerRightStyles}>
                 {headerActionTemplate && <div>{headerActionTemplate}</div>}
@@ -54,4 +54,4 @@ const DrawerWidget = (props) => {
   );
 };
 
-export default DrawerWidget;
+export default InlayWidget;

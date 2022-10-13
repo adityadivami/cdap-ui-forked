@@ -2,7 +2,7 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../styles';
 
-const DrawerWidgetHeading = (props) => {
+const InlayWidgetHeading = (props) => {
   const { headingText } = props;
   const classes = useStyles();
 
@@ -14,4 +14,4 @@ const DrawerWidgetHeading = (props) => {
   );
 };
 
-export default DrawerWidgetHeading;
+export default InlayWidgetHeading;
