@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
@@ -26,13 +26,14 @@ import { objectQuery } from 'services/helpers';
 import BreadCrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridTextCell from './components/GridTextCell';
-import GridKPICell from './components/GridKPICell';
-import NoDataScreen from './components/NoRecordScreen/index';
+import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList, IObject } from './types';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import { convertNonNullPercent } from './utils';
+import GridKPICell from './components/GridKPICell';
+import NoDataScreen from './components/NoRecordScreen';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
