@@ -38,14 +38,12 @@ const OpenWorkspaces = () => {
     const anchorRef = React.useRef(null);
     const [workspaceList, setWorkspaceList] = useState([]);
     const [workspaceCount, setWorkspaceCount] = useState<number>();
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
+   
     const getWorkspaceList = () => {
         MyDataPrepApi.getWorkspaceList({
             context: 'default',
         }).subscribe((res) => {
-            setWorkspaceCount(res.count);
+            setWorkspaceCount(res.count>4?4:res.count);
             res.values.forEach((workspace) => {
                 setWorkspaceList((prev) => [
                     ...prev,
@@ -53,6 +51,9 @@ const OpenWorkspaces = () => {
                 ]);
             });
         });
+    };
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
     };
     const handleClose = (event, currentWorkspaceId) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -100,7 +101,7 @@ const OpenWorkspaces = () => {
                     onClick={handleToggle}
                     className={classes.workspace}
                 >
-                    {workspaceCount} workspaces open
+                {workspaceCount} workspaces open
                 </Typography>
 
                 <Popper
