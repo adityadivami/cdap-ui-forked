@@ -68,4 +68,17 @@ export const useStyles = makeStyles({
   divider: {
     margin: '0px 4px',
   },
+  tooltipToolbar: {
+    background: '#616161',
+    color: '#FFFFFF',
+    fontSize: '14px',
+  },
+  arrowTooltip: {
+    '&::before': {
+      backgroundColor: '#616161',
+    },
+  },
+  lastDivider: {
+    margin: '0px 0px 0px 4px',
+  },
 });
