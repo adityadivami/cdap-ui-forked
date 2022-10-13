@@ -24,7 +24,7 @@ import { DATASOURCES_URL_PARAM, HOME_LABLE, MATCH_SOURCE, WORKSPACE_LIST } from 
 import { icon, icon1 } from './images';
 import IngestViewSchemaDropDown from './KebabMenu';
 import { useStyles } from './styles';
-import OpenWorkspaces from '../openworkspaces'
+import OpenWorkspaces from '../openworkspaces';
 
 const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema }) => {
   const classes = useStyles();
@@ -54,10 +54,10 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
         )}
         <Typography color="textPrimary">{datasetName}</Typography>
         <Breadcrumbs>
-        <OpenWorkspaces/>
+          <OpenWorkspaces />
         </Breadcrumbs>
       </Breadcrumbs>
-      
+
       <Breadcrumbs separator=" ">
         <IconButton>{icon}</IconButton>
         <IconButton>{icon1}</IconButton>
