@@ -56,4 +56,14 @@ export const useStyles = makeStyles({
   arrow: {
     width: '5%',
   },
+  tooltipToolbar: {
+    background: '#616161',
+    color: '#FFFFFF',
+    fontSize: '14px',
+  },
+  arrowTooltip: {
+    '&::before': {
+      backgroundColor: '#616161',
+    },
+  },
 });
