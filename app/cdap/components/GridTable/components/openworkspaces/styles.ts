@@ -21,6 +21,7 @@ export const useStyles = makeStyles({
     display: 'flex',
     margin: 'auto 0px',
     zIndex: 1,
+    cursor: 'pointer',
   },
   divider: {
     marginLeft: '22px',
