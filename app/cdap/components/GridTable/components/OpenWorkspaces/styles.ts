@@ -33,7 +33,9 @@ export const useStyles = makeStyles({
     fontSize: '14px',
     pointer: 'cursor',
   },
-  menuWrapper: {},
+  menuWrapper: {
+    zIndex: 1,
+  },
   menu: {
     boxShadow: 'none',
     border: '1px solid #DADCE0',
@@ -45,7 +47,6 @@ export const useStyles = makeStyles({
   },
   menuList: {
     padding: '0px',
-
     fontWeight: 400,
     '& *': {
       fontFamily: "'Noto Sans', sans-serif",
