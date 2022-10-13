@@ -15,10 +15,9 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
+import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { createBrowserHistory } from 'history';
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 import { Route, Router, Switch } from 'react-router-dom';
 import TabLabelCanSample from '../index';
 import {
@@ -26,7 +25,6 @@ import {
   mockEntityData,
   mockEntityDataForNoWorkspace,
 } from '../mock/mockConnectorTypeData';
-import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 
 const history = createBrowserHistory({
   basename: '/',
@@ -72,6 +70,22 @@ describe('Test TabLabelCanSample Component', () => {
     const ele = screen.getByTestId(/connections-tab-explore/i);
     fireEvent.click(ele);
     expect(setIsErrorOnNoWorkSpace).toHaveBeenCalled();
+  });
+
+  it('Should trigger onCreateWorkspace(entity) function', () => {
+    const setIsErrorOnNoWorkSpace = jest.fn();
+    render(
+      <TabLabelCanSample
+        label={mockEntityData.name}
+        entity={mockEntityData}
+        initialConnectionId={undefined}
+        toggleLoader={() => null}
+        setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+      />
+    );
+    const ele = screen.getByTestId(/connections-tab-explore/i);
+    fireEvent.click(ele);
+    expect(ele).toBeInTheDocument();
   });
 
   it('Should trigger onWorkspaceCreate Function', async () => {

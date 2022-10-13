@@ -35,6 +35,7 @@ import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
+import FooterPanel from 'components/FooterPanel';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -252,11 +253,7 @@ export default function() {
             })}
         </TableBody>
       </Table>
-      {loading && (
-        <div className={classes.loadingContainer}>
-          <LoadingSVG />
-        </div>
-      )}
+      <FooterPanel />
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />

@@ -15,11 +15,12 @@
  */
 
 import { fireEvent, render } from '@testing-library/react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { createBrowserHistory as createHistory } from 'history';
 import { Route, Router, Switch } from 'react-router';
 import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import ParsingDrawer from '..';
+import { Snackbar } from '@material-ui/core';
 
 const history = createHistory({
   basename: '/',
@@ -60,8 +61,10 @@ describe('It Should Test the Parsing Drawer Component', () => {
     });
     expect(handleApplyBtn).toBeInTheDocument();
   });
-
   it('Should test the handleApply Button ', () => {
+    jest.spyOn(apiHelpers, 'createWorkspace').mockImplementationOnce(() => {
+      return Promise.resolve(apiHelpers.createWorkspace);
+    });
     const screen = render(
       <Router history={history}>
         <Switch>
@@ -100,5 +103,6 @@ describe('It Should Test the Parsing Drawer Component', () => {
 
     const checkbox2 = getByTestId('parsing-checkbox-Use first row as header');
     fireEvent.click(checkbox2);
+    const handleApplyBtn = getByTestId('parsing-apply-button');
   });
 });
