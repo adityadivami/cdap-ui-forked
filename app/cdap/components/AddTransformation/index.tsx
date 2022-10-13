@@ -46,6 +46,7 @@ import {
 } from 'components/GridTable/components/NestedMenu/constants';
 import SelectMultipleColumnsList from './SelectMultipleColumnList';
 import { multipleColumnSelected } from './constants';
+import InLaysWidget from 'components/InlaysWidget';
 
 export default function(props) {
   const {
@@ -312,14 +313,17 @@ export default function(props) {
 
   const handleSelectColumn = () => {
     setColumnsPopup(true);
+    setDrawerStatus(false);
   };
 
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
+    setDrawerStatus(true);
   };
 
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
+    setDrawerStatus(true);
     setSelectedColumns([]);
   };
 
@@ -329,7 +333,7 @@ export default function(props) {
 
   return (
     <Fragment>
-      <DrawerWidget
+      <InLaysWidget
         headingText={T.translate('features.WranglerNewAddTransformation.addTransformation')}
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
@@ -374,8 +378,8 @@ export default function(props) {
             {T.translate('features.WranglerNewAddTransformation.applyStep')}
           </Button>
         </Container>
-      </DrawerWidget>
-      <DrawerWidget
+      </InLaysWidget>
+      <InLaysWidget
         headingText={T.translate('features.WranglerNewAddTransformation.selectColumn')}
         openDrawer={columnsPopup}
         showBackIcon={true}
@@ -413,7 +417,7 @@ export default function(props) {
             {DONE_STEP}
           </Button>
         </Container>
-      </DrawerWidget>
+      </InLaysWidget>
     </Fragment>
   );
 }

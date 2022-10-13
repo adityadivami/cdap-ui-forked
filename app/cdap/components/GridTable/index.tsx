@@ -62,6 +62,7 @@ import ColumnView from 'components/ColumnView';
 import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
 import ViewSchemaModal from './components/Modals/ViewSchemaModal';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import InlaysWidget from 'components/InlaysWidget';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -234,14 +235,32 @@ export default function() {
 
   const showRecipePanelHandler = () => {
     setShowRecipePanel((prev) => !prev);
+    setInsightDrawer({
+      ...insightDrawer,
+      open: false,
+    });
+    setDirectiveFunction('');
+    setOpenColumnView(false);
   };
 
   const [showAddTransformation, setSshowAddTransformation] = useState(false);
   const showAddTransformationHandler = () => {
     setSshowAddTransformation((prev) => !prev);
+    setInsightDrawer({
+      ...insightDrawer,
+      open: false,
+    });
+    setDirectiveFunction('');
+    setOpenColumnView(false);
   };
 
   const applyDirective = (option, columnSelected, supported_dataType, value_1?) => {
+    setSshowAddTransformation(false);
+    setInsightDrawer({
+      ...insightDrawer,
+      open: false,
+    });
+    setOpenColumnView(false);
     setLoading(true);
     setOptionSelected(option);
     setDirectiveFunctionSupportedDataType(supported_dataType);
@@ -527,6 +546,12 @@ export default function() {
 
   const setOpenColumnViewHandler = () => {
     setOpenColumnView((prev) => !prev);
+    setSshowAddTransformation(false);
+    setInsightDrawer({
+      ...insightDrawer,
+      open: false,
+    });
+    setDirectiveFunction('');
   };
 
   const closeClickHandler = () => {
@@ -620,28 +645,6 @@ export default function() {
           setShowRecipePanel={setShowRecipePanel}
           showRecipePanel={showRecipePanel}
           deleteRecipes={deleteRecipes}
-        />
-      )}
-      {directiveFunction && (
-        <AddTransformation
-          functionName={directiveFunction}
-          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
-          setLoading={setLoading}
-          columnData={headersNamesList}
-          missingDataList={dataQuality}
-          applyTransformation={(selectedColumn, value) => {
-            setColumnSelected(selectedColumn);
-            applyDirective(
-              optionSelected,
-              selectedColumn,
-              directiveFunctionSupportedDataType,
-              value
-            );
-          }}
-          callBack={(response) => {
-            setColumnSelected('');
-            setDirectiveFunction('');
-          }}
         />
       )}
 
@@ -739,6 +742,28 @@ export default function() {
           </Box>
         ) : (
           <NoDataScreen />
+        )}
+        {directiveFunction && (
+          <AddTransformation
+            functionName={directiveFunction}
+            directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+            setLoading={setLoading}
+            columnData={headersNamesList}
+            missingDataList={dataQuality}
+            applyTransformation={(selectedColumn, value) => {
+              setColumnSelected(selectedColumn);
+              applyDirective(
+                optionSelected,
+                selectedColumn,
+                directiveFunctionSupportedDataType,
+                value
+              );
+            }}
+            callBack={(response) => {
+              setColumnSelected('');
+              setDirectiveFunction('');
+            }}
+          />
         )}
       </Box>
       <FooterPanel

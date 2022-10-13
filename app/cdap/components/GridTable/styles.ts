@@ -54,5 +54,6 @@ export const useStyles = makeStyles({
   columnViewContainer: {
     display: 'flex',
     fontFamily: 'Roboto',
+    height: 'calc(100vh - 240px)',
   },
 });
