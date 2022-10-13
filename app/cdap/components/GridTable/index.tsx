@@ -42,12 +42,14 @@ export default function() {
   const classes = useStyles();
   const location = useLocation();
 
-  const [loading, setLoading] = useState(false);
   const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
+  const { dataprep } = DataPrepStore.getState();
+  const [isFirstWrangle, setIsFirstWrangle] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -57,12 +59,12 @@ export default function() {
   const [connectorType, setConnectorType] = useState(null);
 
   useEffect(() => {
-    const { dataprep } = DataPrepStore.getState();
+    setIsFirstWrangle(true);
     setConnectorType(dataprep.connectorType);
   }, []);
 
   const getWorkSpaceData = (params: IParams, workspaceId: string) => {
-    const gridParams = {};
+    let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
       type: DataPrepActions.setWorkspaceId,
@@ -85,9 +87,9 @@ export default function() {
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
           const insights = {
-            name: sampleSpec.connectionName,
+            name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
-            path: sampleSpec.path,
+            path: res?.sampleSpec?.path,
             visualization,
           };
           requestBody.insights = insights;
@@ -96,7 +98,7 @@ export default function() {
           const workspaceInfo = {
             properties: insights,
           };
-          const gridParams = {
+          gridParams = {
             directives,
             workspaceId,
             workspaceUri,
@@ -111,14 +113,26 @@ export default function() {
           type: DataPrepActions.setWorkspace,
           payload: {
             data: response.values,
+            values: response.values,
             headers: response.headers,
             types: response.types,
             ...gridParams,
           },
         });
         setLoading(false);
+        setLoading(false);
         setGridData(response);
+        setLoading(false);
       });
+  };
+
+  const updateDataTranformation = (wid: string) => {
+    const payload = {
+      context: params.namespace,
+      workspaceId: wid,
+    };
+    getWorkSpaceData(payload, wid);
+    setIsFirstWrangle(false);
   };
 
   useEffect(() => {
@@ -163,6 +177,7 @@ export default function() {
   };
 
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
+  // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData?.headers, rawData?.types);
@@ -176,8 +191,7 @@ export default function() {
       rawData.values &&
       Array.isArray(rawData?.values) &&
       rawData?.values.map((eachRow: {}) => {
-        const { ...rest } = eachRow;
-        return rest;
+        return eachRow;
       });
     setRowsDataList(rowData);
   };
@@ -190,7 +204,12 @@ export default function() {
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
-      {connectorType === 'File' && <ParsingDrawer />}
+      {isFirstWrangle && connectorType === 'File' && (
+        <ParsingDrawer
+          updateDataTranformation={(wid) => updateDataTranformation(wid)}
+          setLoading={setLoading}
+        />
+      )}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
@@ -233,6 +252,11 @@ export default function() {
             })}
         </TableBody>
       </Table>
+      {loading && (
+        <div className={classes.loadingContainer}>
+          <LoadingSVG />
+        </div>
+      )}
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />

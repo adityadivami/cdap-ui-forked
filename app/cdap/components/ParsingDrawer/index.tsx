@@ -13,27 +13,70 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import React, { ChangeEvent, useEffect, useState, MouseEvent } from 'react';
+import React, { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
+import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import { Button } from '@material-ui/core';
-import { useStyles } from './styles';
-import { APPLY_BUTTON, IMPORT_SCHEMA, PARSING, PARSING_INFO_TEXT } from './constants';
-import ParsingPopupBody from './Components/ParsingPopupBody';
+import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
+import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
+import DataPrepStore from 'components/DataPrep/store';
 import DrawerWidget from 'components/DrawerWidget';
+import Snackbar from 'components/SnackbarComponent/index';
 import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
+import ParsingPopupBody from './Components/ParsingPopupBody';
+import { APPLY_BUTTON, PARSING, PARSING_INFO_TEXT } from './constants';
+import { useStyles } from './styles';
 
 export default function(props) {
+  const { setLoading } = props;
+
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [formatValue, setFormatValue] = useState('');
   const [encodingValue, setEncodingValue] = useState('');
   const [quotedValuesChecked, setQuotedValuesChecked] = useState(false);
   const [headerValueChecked, setHeaderValueChecked] = useState(false);
+  const { dataprep } = DataPrepStore.getState();
+  console.log('dataprep', dataprep);
+  const { onWorkspaceCreate } = useContext(ConnectionsContext);
+  const [errorOnTranformation, setErrorOnTransformation] = useState({
+    open: false,
+    message: '',
+  });
+  const [connectionPayload, setConnectionPayload] = useState({
+    path: '',
+    connection: '',
+    sampleRequest: {
+      properties: {
+        format: formatValue,
+        fileEncoding: encodingValue,
+        skipHeader: headerValueChecked,
+        enableQuotedValues: quotedValuesChecked,
+        schema: null,
+        _pluginName: null,
+      },
+      limit: 1000,
+    },
+  });
   const classes = useStyles();
 
   useEffect(() => {
+    setConnectionPayload({
+      path: dataprep.insights.path,
+      connection: dataprep.connectorType,
+      sampleRequest: {
+        properties: {
+          format: formatValue,
+          fileEncoding: encodingValue,
+          skipHeader: headerValueChecked,
+          enableQuotedValues: quotedValuesChecked,
+          schema: null,
+          _pluginName: null,
+        },
+        limit: 1000,
+      },
+    });
     setDrawerStatus(true);
-  }, []);
+  }, [dataprep, formatValue, encodingValue, quotedValuesChecked, headerValueChecked]);
 
   const closeClickHandler = () => {
     setDrawerStatus(false);
@@ -57,8 +100,39 @@ export default function(props) {
     setHeaderValueChecked(event.target.checked);
   };
 
-  const handleApply = (event: MouseEvent<HTMLButtonElement>) => {
-    // This function will be utilized when this code gets merged with subsequent PR
+  const handleApply = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onConfirm(connectionPayload);
+  };
+
+  const createWorkspaceInternal = async (entity, parseConfig = {}) => {
+    try {
+      setLoading(true);
+      const wid = await createWorkspace({
+        entity,
+        connection: dataprep.insights.name,
+        properties: connectionPayload.sampleRequest.properties,
+      });
+      if (onWorkspaceCreate) {
+        return onWorkspaceCreate(wid);
+      }
+      setDrawerStatus(false);
+      props.updateDataTranformation(wid);
+    } catch (err) {
+      setErrorOnTransformation({
+        open: true,
+        message: 'Selected Transformation Cannot Be Applied',
+      });
+      setLoading(false);
+    }
+  };
+
+  const onConfirm = async (parseConfig) => {
+    try {
+      await createWorkspaceInternal(connectionPayload, parseConfig);
+    } catch (e) {
+      setLoading(false);
+      console.log('error', e);
+    }
   };
 
   const componentToRender = (
@@ -98,6 +172,13 @@ export default function(props) {
           </Button>
         </Box>
       </Box>
+      {errorOnTranformation.open && (
+        <Snackbar
+          handleCloseError={() => {
+            setErrorOnTransformation({ open: false, message: '' });
+          }}
+        />
+      )}
     </DrawerWidget>
   );
 
