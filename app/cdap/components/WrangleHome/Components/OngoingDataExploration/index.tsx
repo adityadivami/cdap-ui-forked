@@ -26,10 +26,12 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
 import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
 
-const OngoingDataExploration = (props) => {
+interface ICardCount {
+  cardCount?: number;
+}
+const OngoingDataExploration = ({ cardCount }: ICardCount) => {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
-
   const getOngoingData = () => {
     // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
     //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
@@ -38,8 +40,14 @@ const OngoingDataExploration = (props) => {
       context: 'default',
     })
       .pipe(
-        switchMap((res: IResponseData) => {
-          const workspaces = res.values.map((item) => {
+        switchMap((res: Record<string, unknown[]>) => {
+          let values = [];
+          if (cardCount) {
+            values = res.values.slice(0, cardCount);
+          } else {
+            values = res.values;
+          }
+          const workspaces = values.map((item) => {
             const params = {
               context: 'default',
               workspaceId: item.workspaceId,
@@ -115,7 +123,7 @@ const OngoingDataExploration = (props) => {
             }}
             style={{ textDecoration: 'none' }}
           >
-            {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
+            <OngoingDataExplorationCard item={item} key={index} />
           </Link>
         );
       })}
