@@ -115,7 +115,7 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
         </Breadcrumbs>
       </Breadcrumbs>
 
-      <Breadcrumbs separator=" ">
+      <Box className={classes.breadCrumbRight}>
         <IconButton>
           <a href="https://cdap.atlassian.net/wiki/spaces/DOCS/overview">{icon}</a>
         </IconButton>
@@ -126,7 +126,7 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
         >
           Create a Pipeline
         </Button>
-      </Breadcrumbs>
+      </Box>
     </Box>
   );
 };
