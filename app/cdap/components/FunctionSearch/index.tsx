@@ -67,7 +67,23 @@ const FunctionSearch = ({ transformationPanel }) => {
   }, [textFieldInput]);
 
   const CustomPaper = (props) => {
-    return <Paper elevation={0} {...props} className={classes.root} />;
+    return (
+      <Box>
+        {recentSearches.length > 0 && (
+          <Box className={classes.searchResultHeadBox}>
+            <div className={classes.headingTextStyles}>Recent Results</div>
+            <img src="/cdap_assets/img/Underline.svg" alt="header line" />
+          </Box>
+        )}
+        {searchResults.length > 0 && textInput?.current?.value && (
+          <Box className={classes.searchResultHeadBox}>
+            <div className={classes.headingTextStyles}>Search Results</div>
+            <img src="/cdap_assets/img/Underline.svg" alt="header line" />
+          </Box>
+        )}
+        <Paper elevation={0} {...props} className={classes.root} />
+      </Box>
+    );
   };
 
   const handleOptionClick = (selectedOption) => {

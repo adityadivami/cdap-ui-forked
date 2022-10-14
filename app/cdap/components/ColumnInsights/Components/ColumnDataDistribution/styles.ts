@@ -13,7 +13,6 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#212121',
-      marginTop: '5px',
     },
     columnDataQualityValuesButtons: {},
     columnDataQualityGraph: {
@@ -28,6 +27,16 @@ export const useStyles = makeStyles(() => {
       '& .graph': {
         transform: 'translate(0px, 20px) !important',
       },
+    },
+    distributionHeadBox: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    buttonText: {
+      color: '#2196F3',
+      fontSize: '14px',
+      textTransform: 'capitalize',
     },
   };
 });

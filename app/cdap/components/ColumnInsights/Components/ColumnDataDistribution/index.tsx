@@ -1,7 +1,8 @@
-import { DISTRIBUTION } from 'components/ColumnInsights/constants';
+import { DISTRIBUTION, VIEW_FULL_CHART } from 'components/ColumnInsights/constants';
 import React from 'react';
 import { useStyles } from './styles';
 import BarChart from 'react-bar-chart';
+import { Button } from '@material-ui/core';
 
 const margin = { top: 20, right: 20, bottom: 70, left: 40 };
 
@@ -17,7 +18,12 @@ const ColumnDataDistribution = ({ graphData }) => {
   const handleBarClick = () => {};
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
-      <div className={classes.columnInsightsColumnName}>{DISTRIBUTION}</div>
+      <div className={classes.distributionHeadBox}>
+        <div className={classes.columnInsightsColumnName}>{DISTRIBUTION}</div>
+        <Button variant="text" classes={{ text: classes.buttonText }}>
+          {VIEW_FULL_CHART}
+        </Button>
+      </div>
       <div className={classes.columnDataQualityGraph}>
         <BarChart
           style={{ background: 'blue' }}
