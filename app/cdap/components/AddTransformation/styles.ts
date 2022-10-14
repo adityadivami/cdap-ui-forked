@@ -18,6 +18,10 @@ import { makeStyles } from '@material-ui/styles';
 import { blue } from '@material-ui/core/colors';
 export const useStyles = makeStyles(() => {
   return {
+    tableBody: {
+      height: '400px',
+      overflow: 'scroll',
+    },
     addTransformationBodyStyles: {
       height: 'calc(100% - 100px)',
       display: 'flex',
@@ -38,6 +42,11 @@ export const useStyles = makeStyles(() => {
       color: '#5F6368',
       paddingTop: '5px',
       paddingBottom: '15px',
+    },
+    columnContainer: {
+      width: '406px',
+      position: 'fixed',
+      overflow: 'hidden',
     },
     functionSectionStyles: {
       padding: '15px 0',
