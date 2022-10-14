@@ -24,8 +24,8 @@ import DrawerWidget from 'components/DrawerWidget';
 import Snackbar from 'components/SnackbarComponent/index';
 import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import ParsingPopupBody from './Components/ParsingPopupBody';
-import { APPLY_BUTTON, PARSING, PARSING_INFO_TEXT } from './constants';
 import { useStyles } from './styles';
+import T from 'i18n-react';
 
 export default function(props) {
   const { setLoading } = props;
@@ -35,6 +35,7 @@ export default function(props) {
   const [encodingValue, setEncodingValue] = useState('');
   const [quotedValuesChecked, setQuotedValuesChecked] = useState(false);
   const [headerValueChecked, setHeaderValueChecked] = useState(false);
+  const [schemaValue, setSchemaValue] = useState(null);
   const { dataprep } = DataPrepStore.getState();
   console.log('dataprep', dataprep);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
@@ -51,7 +52,7 @@ export default function(props) {
         fileEncoding: encodingValue,
         skipHeader: headerValueChecked,
         enableQuotedValues: quotedValuesChecked,
-        schema: null,
+        schema: schemaValue,
         _pluginName: null,
       },
       limit: 1000,
@@ -69,14 +70,14 @@ export default function(props) {
           fileEncoding: encodingValue,
           skipHeader: headerValueChecked,
           enableQuotedValues: quotedValuesChecked,
-          schema: null,
+          schema: JSON.stringify(schemaValue),
           _pluginName: null,
         },
         limit: 1000,
       },
     });
     setDrawerStatus(true);
-  }, [dataprep, formatValue, encodingValue, quotedValuesChecked, headerValueChecked]);
+  }, [dataprep, formatValue, encodingValue, quotedValuesChecked, headerValueChecked, schemaValue]);
 
   const closeClickHandler = () => {
     setDrawerStatus(false);
@@ -98,6 +99,10 @@ export default function(props) {
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     setHeaderValueChecked(event.target.checked);
+  };
+
+  const handleSchemaUpload = (schema) => {
+    setSchemaValue(schema);
   };
 
   const handleApply = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -132,15 +137,21 @@ export default function(props) {
     } catch (e) {
       setLoading(false);
       console.log('error', e);
+      setLoading(false);
     }
   };
 
   const componentToRender = (
     <DrawerWidget
-      headingText={PARSING}
+      headingText={T.translate('features.WranglerNewParsingDrawer.parsing')}
       openDrawer={setDrawerStatus}
       showDivider={true}
-      headerActionTemplate={<ParsingHeaderActionTemplate />}
+      headerActionTemplate={
+        <ParsingHeaderActionTemplate
+          handleSchemaUpload={(schema) => handleSchemaUpload(schema)}
+          setErrorOnTransformation={setErrorOnTransformation}
+        />
+      }
       closeClickHandler={closeClickHandler}
       data-testid="drawer-widget"
     >
@@ -159,7 +170,9 @@ export default function(props) {
         <Box className={classes.bottomSectionStyles}>
           <Box className={classes.infoWrapperStyles}>
             <ErrorOutlineIcon />
-            <span className={classes.infoTextStyles}>{PARSING_INFO_TEXT}</span>
+            <span className={classes.infoTextStyles}>
+              {T.translate('features.WranglerNewParsingDrawer.parsingInfoText')}
+            </span>
           </Box>
           <Button
             variant="contained"
@@ -169,7 +182,7 @@ export default function(props) {
             onClick={(e: MouseEvent<HTMLButtonElement>) => handleApply(e)}
             data-testid="parsing-apply-button"
           >
-            {APPLY_BUTTON}
+            {T.translate('features.WranglerNewParsingDrawer.apply')}
           </Button>
         </Box>
       </Box>

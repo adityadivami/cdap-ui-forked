@@ -17,8 +17,9 @@
 import React from 'react';
 import { Switch, Router, Route } from 'react-router';
 import { createBrowserHistory as createHistory } from 'history';
-import { render } from '@testing-library/react';
+import { fireEvent, getByTestId, render } from '@testing-library/react';
 import ParsingHeaderActionTemplate from '..';
+import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 
 const history = createHistory({
   basename: '/',
