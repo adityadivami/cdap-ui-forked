@@ -37,6 +37,7 @@ import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } fro
 import { convertNonNullPercent } from './utils';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
+import AddTransformation from 'components/AddTransformation';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -207,6 +208,11 @@ export default function() {
     setShowRecipePanel((prev) => !prev);
   };
 
+  const [showAddTransformation, setSshowAddTransformation] = useState(false);
+  const showAddTransformationHandler = () => {
+    setSshowAddTransformation((prev) => !prev);
+  };
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
@@ -219,6 +225,12 @@ export default function() {
       )}
       {showRecipePanel && (
         <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
+      )}
+      {showAddTransformation && (
+        <AddTransformation
+          functionName="Null"
+          showAddTransformationHandler={showAddTransformationHandler}
+        />
       )}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
@@ -262,7 +274,10 @@ export default function() {
             })}
         </TableBody>
       </Table>
-      <FooterPanel showRecipePanelHandler={showRecipePanelHandler} />
+      <FooterPanel
+        showRecipePanelHandler={showRecipePanelHandler}
+        showAddTransformationHandler={showAddTransformationHandler}
+      />
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />

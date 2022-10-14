@@ -57,7 +57,7 @@ export const useCss = makeStyles({
     borderRight: '1px solid rgba(57, 148, 255, 0.4)',
   },
   data: {
-    width: '900px',
+    width: '700px',
     padding: '8px 32px',
     height: '21px',
     textAlign: 'left',
