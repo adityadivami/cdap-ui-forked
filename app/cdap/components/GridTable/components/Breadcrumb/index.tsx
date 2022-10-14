@@ -20,6 +20,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import OpenWorkspaces from '../OpenWorkspaces';
 import {
   DATASOURCES_URL_PARAM,
   HOME_LABLE,
@@ -70,7 +71,9 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
 
         <Breadcrumbs separator=" ">
           {DividerIcon}
-          <div>
+
+          <OpenWorkspaces />
+          {/* <div>
             <Button
               color="inherit"
               className={`${classes.breadcrumbLabel}`}
@@ -108,13 +111,14 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
                 View all ongoing workspaces
               </Link>
             </Menu>
-          </div>
+          </div> */}
         </Breadcrumbs>
       </Breadcrumbs>
 
       <Breadcrumbs separator=" ">
-        <IconButton>{icon}</IconButton>
-        <IconButton>{icon1}</IconButton>
+        <IconButton>
+          <a href="https://cdap.atlassian.net/wiki/spaces/DOCS/overview">{icon}</a>
+        </IconButton>
         <IngestViewSchemaDropDown setOpenViewSchema={setOpenViewSchema} />
         <Button
           className={`${classes.Button} ${classes.pipelineStyles}`}

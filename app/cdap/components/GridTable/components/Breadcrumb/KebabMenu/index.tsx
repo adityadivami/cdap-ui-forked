@@ -34,8 +34,8 @@ const MoreOptions = ({ setOpenViewSchema }) => {
         open={open}
         getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: 'bottom',
+          horizontal: 'left',
         }}
         transformOrigin={{
           vertical: 'top',
