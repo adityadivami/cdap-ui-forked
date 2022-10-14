@@ -7,6 +7,7 @@ export const useStyles = makeStyles(() => {
       borderBottom: '1px solid #E0E0E0',
     },
     columnInsightsColumnName: {
+      display: 'flex',
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,

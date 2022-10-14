@@ -2,19 +2,58 @@ import { DATATYPE_OPTIONS } from 'components/ColumnInsights/options';
 import InputSelect from 'components/ParsingDrawer/Components/InputSelect';
 import React, { useState } from 'react';
 import { useStyles } from './styles';
+import EditIcon from '@material-ui/icons/Edit';
+import { Box } from '@material-ui/core';
 
 const ColumnDetails = (props) => {
-  const { columnName, characterCount, distinctValues, dataTypeString } = props;
+  const {
+    columnName,
+    characterCount,
+    distinctValues,
+    dataTypeString,
+    renameColumnNameHandler,
+  } = props;
 
   const [dataTypeValue, setDataTypeValue] = useState();
 
   const classes = useStyles();
+  const [canEdit, setCanEdit] = useState(false);
+  const [inputValue, setInputValue] = useState(columnName);
 
   const handleDataTypeChange = () => {};
 
+  const editHandler = () => {
+    setCanEdit(true);
+  };
+
+  const onChangeHandler = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const onBlurEvent = (e) => {
+    setInputValue(e.target.value);
+    setCanEdit(false);
+    if (e.target.value !== columnName) {
+      renameColumnNameHandler(columnName, e.target.value);
+    }
+  };
+
   return (
     <section className={classes.columnInsightsTopSection}>
-      <div className={classes.columnInsightsColumnName}>{columnName}</div>
+      <div className={classes.columnInsightsColumnName}>
+        {canEdit ? (
+          <input
+            value={inputValue}
+            onBlur={(e) => onBlurEvent(e)}
+            onChange={(e) => onChangeHandler(e)}
+          />
+        ) : (
+          inputValue
+        )}
+        <Box>
+          <EditIcon onClick={editHandler} />
+        </Box>
+      </div>
       <InputSelect
         classes={{
           icon: classes.selectIconStyles,

@@ -241,7 +241,7 @@ export default function() {
     setSshowAddTransformation((prev) => !prev);
   };
 
-  const applyDirective = (option, columnSelected, supported_dataType, value_1?) => {
+  const applyDirective = (option, columnSelected, supported_dataType?, value_1?) => {
     setLoading(true);
     setOptionSelected(option);
     setDirectiveFunctionSupportedDataType(supported_dataType);
@@ -306,6 +306,11 @@ export default function() {
     }
   };
 
+  const renameColumnNameHandler = (oldColumnName, newColumnName) => {
+    const directive = `rename ${oldColumnName} ${newColumnName}`;
+    applyDirectiveAPICall(directive, 'add', [], 'insightsPanel');
+  };
+
   const applyDirectiveAPICall = (newDirective, action, removed_arr, from) => {
     setLoading(true);
     const { dataprep } = DataPrepStore.getState();
@@ -347,18 +352,26 @@ export default function() {
         setDirectiveFunction('');
         setColumnSelected('');
         setShowRecipePanel(false);
-        setToaster({
-          open: true,
-          message:
-            action === 'add'
-              ? `Transformation ${arr} successfully added`
-              : from === 'undo' || arr?.length === 0
-              ? 'Transformation successfully deleted'
-              : `${removed_arr?.length} transformation successfully deleted from ${
-                  arr[arr.length - 1]
-                }`,
-          isSuccess: true,
-        });
+        if (action === 'add' && from === 'insightsPanel') {
+          setToaster({
+            open: false,
+            message: '',
+            isSuccess: false,
+          });
+        } else {
+          setToaster({
+            open: true,
+            message:
+              action === 'add'
+                ? `Transformation ${arr} successfully added`
+                : from === 'undo' || arr?.length === 0
+                ? 'Transformation successfully deleted'
+                : `${removed_arr?.length} transformation successfully deleted from ${
+                    arr[arr.length - 1]
+                  }`,
+            isSuccess: true,
+          });
+        }
         if (action === 'add') {
           setToastAction('add');
         } else if (action === 'delete') {
@@ -537,7 +550,6 @@ export default function() {
     if (option === 'undo') {
       const last_element = directives.slice(-1);
       const newDirective = directives.slice(0, -1);
-      console.log('last_element', last_element, directives, newDirective);
       DataPrepStore.dispatch({
         type: DataPrepActions.setUndoDirective,
         payload: {
@@ -548,7 +560,6 @@ export default function() {
     } else if (option === 'redo') {
       const last_element = undoDirectives.slice(-1);
       const newDirective = directives.concat(last_element);
-      console.log('last_element', last_element, directives, newDirective);
       DataPrepStore.dispatch({
         type: DataPrepActions.setUndoDirective,
         payload: {
@@ -558,7 +569,6 @@ export default function() {
       applyDirectiveAPICall(newDirective, '', [], '');
     }
   };
-  console.log('directives', directives, undoDirectives);
   return (
     <Box>
       {showBreadCrumb && (
@@ -582,6 +592,7 @@ export default function() {
       {insightDrawer.open && (
         <ColumnInsightDrawer
           columnData={insightDrawer}
+          renameColumnNameHandler={renameColumnNameHandler}
           onClose={() =>
             setInsightDrawer({
               open: false,
