@@ -53,14 +53,11 @@ export default function(props) {
               <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
                 {index + 1 > 10 ? index + 1 : `0${index + 1}`}
               </TableCell>
-              <TableCell
-                classes={{ body: classes.recipeStepsTableRowStyles }}
-                // component="th"
-                // scope="row"
-              >
-                <span className={classes.recipeStepsActionTypeStyles}>{eachStep.actionType}</span>
+              <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
+                <span data-testid={'recipe-steps-span' + index}>{eachStep}</span>
+                {/* <span className={classes.recipeStepsActionTypeStyles}>{eachStep.actionType}</span>
                 &nbsp;
-                {eachStep.description}
+                {eachStep.description} */}
               </TableCell>
               <TableCell
                 className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}

@@ -16,20 +16,8 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  tableHeight: {
-    height: 'calc(100vh - 192px)',
-    overflow: 'scroll',
+  listitem: {
+    marginRight: '30px',
+    height: '20px',
   },
 });

@@ -16,20 +16,24 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  loadingContainer: {
+  iconContainer: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
+    justifyContent: 'space-between',
+    border: '1px solid #E0E0E0',
+    height: '48px',
+    marginTop: '0px',
+    padding: '10px',
   },
-  tableHeight: {
-    height: 'calc(100vh - 192px)',
-    overflow: 'scroll',
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginLeft: '0px',
+    marginRight: '0px',
+  },
+  searchIcon: {
+    border: 'none',
+    outline: 'none',
   },
 });

@@ -38,6 +38,9 @@ import { convertNonNullPercent } from './utils';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
 import AddTransformation from 'components/AddTransformation';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import ToolBarList from './components/AaToolbar';
+import { getDirective } from './directives';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -45,6 +48,7 @@ export default function() {
   const classes = useStyles();
   const location = useLocation();
 
+  const [loading, setLoading] = useState(false);
   const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
@@ -52,7 +56,6 @@ export default function() {
   const [missingDataList, setMissingDataList] = useState([]);
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -66,6 +69,7 @@ export default function() {
     setIsFirstWrangle(true);
     setConnectorType(dataprep.connectorType);
   }, []);
+  const [columnSelected, setColumnSelected] = useState('');
 
   const getWorkSpaceData = (params: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -124,9 +128,7 @@ export default function() {
           },
         });
         setLoading(false);
-        setLoading(false);
         setGridData(response);
-        setLoading(false);
       });
   };
 
@@ -213,10 +215,67 @@ export default function() {
     setSshowAddTransformation((prev) => !prev);
   };
 
+  const applyDirective = (option, column) => {
+    setLoading(true);
+    const newDirective = getDirective(option, column);
+    const { dataprep } = DataPrepStore.getState();
+    const { workspaceId, workspaceUri, directives, insights } = dataprep;
+
+    if (newDirective === null || !Boolean(column)) {
+      setLoading(false);
+      return;
+    }
+
+    let gridParams = {};
+    const updatedDirectives = directives.concat(newDirective);
+    const requestBody = directiveRequestBodyCreator(updatedDirectives);
+
+    requestBody.insights = insights;
+
+    const workspaceInfo = {
+      properties: insights,
+    };
+    gridParams = {
+      directives: updatedDirectives,
+      workspaceId,
+      workspaceUri,
+      workspaceInfo,
+      insights,
+    };
+    const payload = {
+      context: params.namespace,
+      workspaceId: params.wid,
+    };
+    MyDataPrepApi.execute(payload, requestBody).subscribe(
+      (response) => {
+        // response
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setLoading(false);
+        setGridData(response);
+      },
+      (err) => {
+        // err
+        setLoading(false);
+      }
+    );
+  };
+
+  // Redux store
+  const { data, headers, types } = dataprep;
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
+      <ToolBarList submitMenuOption={(option) => applyDirective(option, columnSelected)} />
       {isFirstWrangle && connectorType === 'File' && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
@@ -235,21 +294,22 @@ export default function() {
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
-            {headersNamesList?.length > 0 &&
-              headersNamesList.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader.label}
-                  types={eachHeader.type as string[]}
-                  key={eachHeader.name}
-                />
-              ))}
+            {headers.map((eachHeader) => (
+              <GridHeaderCell
+                label={eachHeader}
+                type={types[eachHeader]}
+                key={eachHeader}
+                columnSelected={columnSelected}
+                setColumnSelected={setColumnSelected}
+              />
+            ))}
           </TableRow>
           <TableRow>
             {missingDataList?.length > 0 &&
               headersNamesList.length > 0 &&
               headersNamesList.map((each, index) => {
                 return missingDataList.map((item, itemIndex) => {
-                  if (item.name == each.name) {
+                  if (item.name === each) {
                     return <GridKPICell metricData={item} key={item.name} />;
                   }
                 });

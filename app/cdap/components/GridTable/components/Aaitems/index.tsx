@@ -13,23 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { makeStyles } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
+import * as React from 'react';
+import { useStyles } from './styles';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  tableHeight: {
-    height: 'calc(100vh - 192px)',
-    overflow: 'scroll',
-  },
-});
+const Aaitems = (props) => {
+  const classes = useStyles();
+
+  const { details } = props;
+  const { id, imgUrl } = details;
+  return <IconButton className={classes.listitem}>{imgUrl}</IconButton>;
+};
+export default Aaitems;
