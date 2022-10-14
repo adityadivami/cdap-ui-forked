@@ -16,6 +16,7 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#212121',
       marginTop: '5px',
+      gap: '12px',
     },
     selectFieldStyles: {
       width: '350px',

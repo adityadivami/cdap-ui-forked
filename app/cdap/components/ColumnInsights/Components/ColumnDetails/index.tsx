@@ -12,6 +12,7 @@ const ColumnDetails = (props) => {
     distinctValues,
     dataTypeString,
     renameColumnNameHandler,
+    dataTypeHandler,
   } = props;
 
   const [dataTypeValue, setDataTypeValue] = useState();
@@ -20,7 +21,10 @@ const ColumnDetails = (props) => {
   const [canEdit, setCanEdit] = useState(false);
   const [inputValue, setInputValue] = useState(columnName);
 
-  const handleDataTypeChange = () => {};
+  const handleDataTypeChange = (e) => {
+    setDataTypeValue(e.target.value);
+    dataTypeHandler(e.target.value);
+  };
 
   const editHandler = () => {
     setCanEdit(true);
@@ -63,7 +67,7 @@ const ColumnDetails = (props) => {
         optionClassName={{ root: classes.optionStyles }}
         defaultValue={DATATYPE_OPTIONS[0].value}
         value={dataTypeValue}
-        onChange={handleDataTypeChange}
+        onChange={(e) => handleDataTypeChange(e)}
         options={DATATYPE_OPTIONS}
       />
       <section className={classes.columnInsightsDetailsWrapper}>

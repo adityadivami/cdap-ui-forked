@@ -569,6 +569,12 @@ export default function() {
       applyDirectiveAPICall(newDirective, '', [], '');
     }
   };
+
+  const dataTypeHandler = (dataType) => {
+    const newDirective = `set-type ${columnSelected} ${dataType}`;
+    applyDirectiveAPICall(newDirective, 'add', [], 'insightsPanel');
+  };
+
   return (
     <Box>
       {showBreadCrumb && (
@@ -593,6 +599,7 @@ export default function() {
         <ColumnInsightDrawer
           columnData={insightDrawer}
           renameColumnNameHandler={renameColumnNameHandler}
+          dataTypeHandler={dataTypeHandler}
           onClose={() =>
             setInsightDrawer({
               open: false,
