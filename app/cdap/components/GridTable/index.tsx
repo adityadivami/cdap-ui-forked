@@ -597,6 +597,7 @@ export default function() {
       />
       {insightDrawer.open && (
         <ColumnInsightDrawer
+          columnType={columnType}
           columnData={insightDrawer}
           renameColumnNameHandler={renameColumnNameHandler}
           dataTypeHandler={dataTypeHandler}

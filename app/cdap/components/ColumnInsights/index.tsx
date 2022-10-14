@@ -6,7 +6,7 @@ import ColumnDetails from './Components/ColumnDetails';
 import { COLUMN_INSIGHTS } from './constants';
 
 const ColumnInsights = (props) => {
-  const { columnData, renameColumnNameHandler, dataTypeHandler } = props;
+  const { columnData, renameColumnNameHandler, dataTypeHandler, columnType } = props;
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnDetail, setColumnDetail] = useState(columnData);
 
@@ -30,6 +30,7 @@ const ColumnInsights = (props) => {
       <ColumnDetails
         columnName={columnDetail?.columnName}
         dataTypeHandler={dataTypeHandler}
+        columnType={columnType}
         renameColumnNameHandler={renameColumnNameHandler}
         distinctValues={columnDetail?.distinctValues}
         characterCount={`${columnDetail?.characterCount?.min}-${columnDetail?.characterCount?.max}`}
