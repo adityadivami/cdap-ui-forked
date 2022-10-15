@@ -20,7 +20,6 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
-import CallerSample from 'components/DrawerWidget/callerSample';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import React, { useEffect, useState } from 'react';
@@ -35,6 +34,7 @@ import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
+import ParsingDrawer from 'components/ParsingDrawer';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -54,9 +54,21 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const { dataprep } = DataPrepStore.getState();
+  const [isFirstWrangle, setIsFirstWrangle] = useState(false);
+  const [connectorType, setConnectorType] = useState(null);
+
+  useEffect(() => {
+    setIsFirstWrangle(true);
+    setConnectorType(dataprep.connectorType);
+
+    console.log(dataprep.connectorType, 'dataprep.connectorType');
+    console.log(isFirstWrangle, 'isFirstWrangle');
+    console.log(dataprep.insights.name, 'dataprep.insights.name');
+  }, []);
 
   const getWorkSpaceData = (params: IParams, workspaceId: string) => {
-    const gridParams = {};
+    let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
       type: DataPrepActions.setWorkspaceId,
@@ -79,9 +91,9 @@ export default function GridTable() {
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
           const insights = {
-            name: sampleSpec.connectionName,
+            name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
-            path: sampleSpec.path,
+            path: res?.sampleSpec?.path,
             visualization,
           };
           requestBody.insights = insights;
@@ -90,7 +102,7 @@ export default function GridTable() {
           const workspaceInfo = {
             properties: insights,
           };
-          const gridParams = {
+          gridParams = {
             directives,
             workspaceId,
             workspaceUri,
@@ -105,14 +117,24 @@ export default function GridTable() {
           type: DataPrepActions.setWorkspace,
           payload: {
             data: response.values,
+            values: response.values,
             headers: response.headers,
             types: response.types,
             ...gridParams,
           },
         });
-        setLoading(false);
         setGridData(response);
+        setLoading(false);
       });
+  };
+
+  const updateDataTranformation = (wid: string) => {
+    const payload = {
+      context: params.namespace,
+      workspaceId: wid,
+    };
+    getWorkSpaceData(payload, wid);
+    setIsFirstWrangle(false);
   };
 
   useEffect(() => {
@@ -182,6 +204,12 @@ export default function GridTable() {
 
   return (
     <Box>
+      {dataprep.insights.name && isFirstWrangle && connectorType === 'File' && (
+        <ParsingDrawer
+          updateDataTranformation={(wid) => updateDataTranformation(wid)}
+          setLoading={setLoading}
+        />
+      )}
       <BreadCrumb datasetName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
@@ -231,7 +259,6 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
-      <CallerSample />
     </Box>
   );
 }

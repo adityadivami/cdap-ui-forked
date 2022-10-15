@@ -3409,4 +3409,9 @@ features:
         title: Configure a pipeline
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
+  WranglerNewParsingDrawer:
+    importSchema: Import schema
+    apply: Apply
+    parsing: Parsing
+    parsingInfoText: Once applied parsing settings cannot be changed.
 ...
