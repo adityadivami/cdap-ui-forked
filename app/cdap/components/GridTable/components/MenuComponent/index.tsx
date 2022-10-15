@@ -48,6 +48,7 @@ const MenuComponent: React.FC<IMenuComponentProps> = ({
         setAnchorEl(null);
       }}
       className={classes.root}
+      data-testid="menu-component-menu"
     >
       {menuOptions.map((item, index) => (
         <MenuItemComponent
