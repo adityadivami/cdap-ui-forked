@@ -13,21 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import PropTypes from 'prop-types';
 
-import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
 import Page404 from 'components/404';
-import Loadable from 'react-loadable';
-import NamespaceStore, { validateNamespace } from 'services/NamespaceStore';
-import NamespaceActions from 'services/NamespaceStore/NamespaceActions';
-import LoadingSVGCentered from 'components/shared/LoadingSVGCentered';
-import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/KitchenSync';
 import HomeActions from 'components/Home/HomeActions';
 import ToggleExperiment from 'components/Lab/ToggleExperiment';
+import ConfigurationGroupKitchenSync from 'components/shared/ConfigurationGroup/KitchenSync';
+import LoadingSVGCentered from 'components/shared/LoadingSVGCentered';
 import ee from 'event-emitter';
+import React, { Component } from 'react';
+import Loadable from 'react-loadable';
+import { Route, Switch } from 'react-router-dom';
+import NamespaceStore, { validateNamespace } from 'services/NamespaceStore';
+import NamespaceActions from 'services/NamespaceStore/NamespaceActions';
 require('./Home.scss');
 
+const WorkspaceList = Loadable({
+  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/WorkspaceList'),
+  loading: LoadingSVGCentered,
+});
 const EntityListView = Loadable({
   loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/EntityListView'),
   loading: LoadingSVGCentered,
@@ -177,6 +182,7 @@ export default class Home extends Component {
           <Route exact path="/ns/:namespace/operations" component={Operations} />
           <Route path="/ns/:namespace/details" component={NamespaceAdmin} />
           <Route path="/ns/:namespace/reports" component={Reports} />
+          <Route exact path="/ns/:namespace/workspace-list" component={WorkspaceList} />
           <Route
             exact
             path="/ns/:namespace/profiles/create"
