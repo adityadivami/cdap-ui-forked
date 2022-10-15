@@ -23,28 +23,37 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
+import { ADD_CONNECTION_LABEL, IMPORT_DATA_LABEL } from './constants';
 
-export default function SubHeader() {
+export default function SubHeader(props) {
+  const { setOpenImportDataPanel } = props;
   const classes = useStyles();
+
+  const handleAddConnection = () => {
+    localStorage.setItem('addConnection', 'true');
+  };
+
   return (
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
-      <Box>
+      <Box className={classes.box}>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
             Home
           </Link>
-          <Typography>Data Sources</Typography>
+          <Typography className={classes.breadcrumbTyporgraphy}>Data Sources</Typography>
         </Breadcrumbs>
       </Box>
 
       <Box className={classes.importDataContainer}>
-        <Box className={classes.importData}>
-          <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadCrumbTyporgraphy}>Add connection</Box>
-        </Box>
-        <Box className={classes.importData}>
+        <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>
+          <Box onClick={handleAddConnection} className={classes.importData}>
+            <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
+            <Box className={classes.breadcrumbTyporgraphy}>Add connection</Box>
+          </Box>
+        </Link>
+        <Box className={classes.importData} onClick={() => setOpenImportDataPanel(true)}>
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadCrumbTyporgraphy}>Import data</Box>
+          <Box className={classes.breadcrumbTyporgraphy}>{IMPORT_DATA_LABEL}</Box>
         </Box>
       </Box>
     </Box>
