@@ -64,21 +64,23 @@ export const useStyles = makeStyles({
     borderRadius: '0px',
   },
   textField: {
+    outline: 'none',
     height: '48px',
     width: '490px',
     right: '6px',
     marginLeft: '5px',
-    boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+
     '& .MuiOutlinedInput-root': {
       borderRadius: '0px',
       '& fieldset': {
-        border: '1px solid #DADCE0 !important',
+        border: '0px solid #DADCE0 !important',
       },
       '&:hover': {
         border: '0px solid #DADCE0 !important',
         outline: 0,
       },
       paddingBottom: '8px !important',
+      paddingRight: '14px !important',
     },
 
     '&:focus-visble': {
@@ -130,5 +132,20 @@ export const useStyles = makeStyles({
   },
   listboxInMuiAutocomplete: {
     height: '1000px !important',
+  },
+  close: {
+    color: '#757575',
+    fontSize: 'xx-large',
+    cursor: 'pointer',
+  },
+  onFocusAutocomplete: {
+    '& .MuiAutocomplete-inputFocused': {
+      borderBottom: 'none !important',
+    },
+    outline: '1px solid #DADCE0',
+    boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+  },
+  onBlurAutocomplete: {
+    borderBottom: '0px solid #E0E0E0',
   },
 });

@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
+import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
 import React, { useState } from 'react';
 import MenuComponent from '../MenuComponent';
 import MenuItemComponent from '../MenuItemComponent';
@@ -27,6 +27,7 @@ const NestedMenu: React.FC<INestedMenuProps> = ({
   icon,
   submitMenuOption,
   columnType,
+  title,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
@@ -48,16 +49,25 @@ const NestedMenu: React.FC<INestedMenuProps> = ({
   };
   return (
     <>
-      <IconButton
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setAnchorEl(e.currentTarget);
+      <Tooltip
+        title={title}
+        classes={{
+          tooltip: classes.tooltipToolbar,
+          arrow: classes.arrowTooltip,
         }}
+        arrow
         id="nested-menu-icon-button"
       >
-        {icon}
-      </IconButton>
+        <IconButton
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setAnchorEl(e.currentTarget);
+          }}
+        >
+          {icon}
+        </IconButton>
+      </Tooltip>
       <Menu
         id="parent-menu"
         keepMounted

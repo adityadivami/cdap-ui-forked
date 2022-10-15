@@ -16,6 +16,10 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
+  closeHeader: {
+    transform: 'rotate(180deg)',
+  },
+  openHeader: {},
   iconContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -48,13 +52,21 @@ export const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     width: '-webkit-fill-available',
+    '& .MuiIconButton-root': {
+      paddingBottom: '8px',
+    },
   },
   typoClass: {
     color: '#757575',
     fontSize: '14px',
+    padding: '0px 12px',
+    marginBottom: '10px',
   },
   arrow: {
     width: '5%',
+  },
+  divider: {
+    margin: '0px 4px',
   },
   tooltipToolbar: {
     background: '#616161',
@@ -65,5 +77,8 @@ export const useStyles = makeStyles({
     '&::before': {
       backgroundColor: '#616161',
     },
+  },
+  lastDivider: {
+    margin: '0px 0px 0px 4px',
   },
 });
