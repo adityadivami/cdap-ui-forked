@@ -40,6 +40,7 @@ export default function GridHeaderCell({
       className={classes.tableHeaderCell}
       onClick={() => setColumnSelected(label)}
       onDoubleClick={() => onColumnSelection(label)}
+      data-testid={'grid-header-cell-table-cell' + label}
     >
       <div
         className={classes.headerHighlitedIcon}
