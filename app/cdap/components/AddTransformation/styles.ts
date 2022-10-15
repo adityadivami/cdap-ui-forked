@@ -155,8 +155,6 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#5F6368',
-      padding: '15px 10px',
-      height: 70,
     },
     domm: {
       width: '100%',
@@ -237,12 +235,8 @@ export const useStyles = makeStyles(() => {
     circularProgressRed: {
       color: '#E97567',
     },
-    circularBarCell: {
-      width: 90,
-    },
-    nullValueHead: {
-      width: 200,
-    },
+    circularBarCell: {},
+    nullValueHead: {},
     displayStyles: {
       display: 'flex',
       justifyContent: 'space-between',
@@ -251,10 +245,7 @@ export const useStyles = makeStyles(() => {
       display: 'flex',
       flexDirection: 'column',
     },
-    columnstyles: {
-      paddingRight: 130,
-      paddingLeft: 45,
-    },
+    columnstyles: {},
     barStyles: {
       paddingRight: 110,
       height: 70,
@@ -294,8 +285,10 @@ export const useStyles = makeStyles(() => {
     innerWrapper: {
       textAlign: 'center',
     },
-    radioButtonCellStyles: {
-      width: 50,
+    radioButtonCellStyles: {},
+    rowsOfTable: {
+      display: 'grid',
+      gridTemplateColumns: '10% 45% 45%',
     },
   };
 });

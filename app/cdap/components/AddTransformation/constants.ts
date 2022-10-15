@@ -4,6 +4,7 @@ export const FUNCTION = 'Function';
 export const SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION = 'Select a column to apply this function';
 export const QUICK_SELECT_INFO = 'Quick select by clicking a column on the grid/columns panel';
 export const SELECT_COLUMNS = 'Select column';
+export const SELECT_MULTI_COLUMNS = 'Select columns';
 export const SELECT_ACTION_TO_TAKE = 'Select action to take';
 export const APPLY_STEP = 'Apply Step';
 export const COLUMNS = 'Columns';
@@ -15,3 +16,30 @@ export const REPLACE_WITH = 'Replace with';
 export const SELECT_COLUMNS_1_TO_APPLY_THIS_FUNCTION = 'Select column first to apply this function';
 export const SELECT_COLUMNS_2_TO_APPLY_THIS_FUNCTION =
   'Select column second to apply this function';
+
+export const multipleColumnSelected = [
+  {
+    value: 'join-columns',
+    isMoreThanTwo: false,
+  },
+  {
+    value: 'swap-columns',
+    isMoreThanTwo: false,
+  },
+  {
+    value: 'delete',
+    isMoreThanTwo: true,
+  },
+  {
+    value: 'array-flattening',
+    isMoreThanTwo: true,
+  },
+  {
+    value: 'record-flattening',
+    isMoreThanTwo: true,
+  },
+  {
+    value: 'keep',
+    isMoreThanTwo: true,
+  },
+];

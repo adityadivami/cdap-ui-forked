@@ -632,3 +632,27 @@ export const prepareDirectiveForMerge = (
   }
   return directive;
 };
+
+export const prepareDirectiveForMultipleDelete = (columnList) => {
+  let initial_value = 'drop :';
+  columnList.forEach((item, index) => {
+    if (index > 0) {
+      initial_value += `,:${item.label}`;
+    } else {
+      initial_value += `${item.label}`;
+    }
+  });
+  return initial_value;
+};
+
+export const prepareDirectiveForMultipleKeep = (columnList) => {
+  let initial_value = 'keep :';
+  columnList.forEach((item, index) => {
+    if (index > 0) {
+      initial_value += `,:${item.label}`;
+    } else {
+      initial_value += `${item.label}`;
+    }
+  });
+  return initial_value;
+};

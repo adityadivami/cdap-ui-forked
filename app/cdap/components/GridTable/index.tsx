@@ -61,6 +61,7 @@ import {
 import ColumnView from 'components/ColumnView';
 import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
 import ViewSchemaModal from './components/Modals/ViewSchemaModal';
+import { multipleColumnSelected } from 'components/AddTransformation/constants';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -267,17 +268,10 @@ export default function() {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
       applyDirectiveAPICall(newDirective, 'add', [], '');
     } else {
-      if (OPTION_WITH_NO_INPUT.includes(option)) {
-        const newDirective = getDirective(option, columnSelected);
-        if (!columnSelected) {
-          setDirectiveFunction(option);
-          setLoading(false);
-          return;
-        } else {
-          applyDirectiveAPICall(newDirective, 'add', [], '');
-          setIsFirstWrangle(false);
-        }
-      } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      if (
+        multipleColumnSelected.filter((el) => el.value === option || el.value === optionSelected)
+          ?.length
+      ) {
         const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
         if (!Boolean(value_1)) {
           setDirectiveFunction(option);
@@ -285,6 +279,29 @@ export default function() {
           return;
         } else {
           applyDirectiveAPICall(newDirective, 'add', [], '');
+          setIsFirstWrangle(false);
+        }
+      } else {
+        if (OPTION_WITH_NO_INPUT.includes(option)) {
+          const newDirective = getDirective(option, columnSelected);
+          if (!columnSelected) {
+            setDirectiveFunction(option);
+            setLoading(false);
+            return;
+          } else {
+            applyDirectiveAPICall(newDirective, 'add', [], '');
+            setIsFirstWrangle(false);
+          }
+        } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+          const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+          if (!Boolean(value_1)) {
+            setDirectiveFunction(option);
+            setLoading(false);
+            return;
+          } else {
+            applyDirectiveAPICall(newDirective, 'add', [], '');
+            setIsFirstWrangle(false);
+          }
         }
       }
     }
@@ -349,6 +366,14 @@ export default function() {
         } else if (action === 'delete') {
           setToastAction('delete');
         }
+        setTimeout(() => {
+          setToaster({
+            open: false,
+            message: ``,
+            isSuccess: false,
+          });
+          setToastAction('');
+        }, 5000);
       },
       (err) => {
         setToaster({
