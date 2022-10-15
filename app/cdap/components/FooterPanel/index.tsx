@@ -13,13 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@material-ui/core';
 import { useCss } from './styles';
 import { ColumnIcon, ZoomIn, ArrowIcon } from './images';
 import T from 'i18n-react';
 
-export default function({ showRecipePanelHandler, showAddTransformationHandler }) {
+export default function({
+  showRecipePanelHandler,
+  showAddTransformationHandler,
+  recipeStepsCount,
+}) {
   const classes = useCss();
   return (
     <Box className={classes.containerProps}>
@@ -49,7 +53,7 @@ export default function({ showRecipePanelHandler, showAddTransformationHandler }
           data-testid="footer-panel-box-click"
         >
           <p> {T.translate('features.WranglerNewFooterPanel.recipeSteps')}</p>
-          <p className={classes.spanElement1}> 10</p>
+          <p className={classes.spanElement1}>{recipeStepsCount}</p>
         </Box>
       </Box>
     </Box>

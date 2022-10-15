@@ -115,7 +115,10 @@ export default function ImportDataSet(props) {
       <Redirect
         to={{
           pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
-          state: { from: DATASOURCES_LABEL, path: '/wrangler-grid/' },
+          state: {
+            from: DATASOURCES_LABEL,
+            path: 'Select Dataset',
+          },
         }}
       />
     );

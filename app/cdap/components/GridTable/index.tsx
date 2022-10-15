@@ -314,7 +314,7 @@ export default function() {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
 
   // Redux store
-  const { data, headers, types } = dataprep;
+  const { data, headers, types, directives } = dataprep;
 
   return (
     <Box>
@@ -395,6 +395,7 @@ export default function() {
       <FooterPanel
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
+        recipeStepsCount={directives?.length}
       />
       {toaster.open && (
         <PositionedSnackbar
