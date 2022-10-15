@@ -101,26 +101,30 @@ export default function(props) {
         </div>
       </div>
       <TableContainer component={Box}>
-        <Table aria-label="recipe steps table">
+        <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
           <TableHead>
             <TableRow className={classes.recipeStepsTableRowStyles}>
-              <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}></TableCell>
-              <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
+              <TableCell
+                classes={{ head: `${classes.recipeStepsTableHeadStyles} ${classes.columnstyles}` }}
+              >
                 {T.translate('features.WranglerNewAddTransformation.columns')}
               </TableCell>
               <TableCell
-                classes={{ head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}` }}
+                classes={{
+                  head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}`,
+                }}
               >
                 {NULL_VALUES}
               </TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {columns.map((eachColumn, index) => (
               <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
                 <TableCell
                   classes={{
-                    body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
+                    body: `${classes.recipeStepsTableRowStyles} ${classes.displayStyles}`,
                   }}
                 >
                   <Radio
@@ -132,23 +136,23 @@ export default function(props) {
                         : false
                     }
                   />
+                  <div>
+                    <Typography className={classes.recipeStepsActionTypeStyles}>
+                      {eachColumn.label}
+                    </Typography>
+                    <Typography className={classes.recipeStepsActionTypeStyles}>
+                      {eachColumn.type}
+                    </Typography>
+                  </div>
                 </TableCell>
-                <TableCell
-                  classes={{ body: classes.recipeStepsTableRowStyles }}
-                  style={{ width: 50 }}
-                  // component="th"
-                  // scope="row"
-                >
-                  <Typography className={classes.recipeStepsActionTypeStyles}>
-                    {eachColumn.label}
-                  </Typography>
-                  <Typography className={classes.recipeStepsActionTypeStyles}>
-                    {eachColumn.type}
-                  </Typography>
-                </TableCell>
+
                 <TableCell
                   // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
-                  className={[classes.recipeStepsTableRowStyles, classes.circularBarCell].join(' ')}
+                  className={[
+                    classes.recipeStepsTableRowStyles,
+                    classes.circularBarCell,
+                    classes.barStyles,
+                  ].join(' ')}
                 >
                   {dataQualityValue?.length && (
                     <DataQualityProgress value={dataQualityValue[index]?.value} />

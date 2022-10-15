@@ -79,6 +79,13 @@ export const useStyles = makeStyles(() => {
     greenCheckIconStyles: {
       width: '20px',
       height: '20px',
+      marginRight: '5px',
+    },
+    selectedColumnTickIcon: {
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '10px',
+      justifyContent: 'space-between',
     },
     quickSelectTextStyles: {
       fontFamily: 'Noto Sans',
@@ -118,6 +125,7 @@ export const useStyles = makeStyles(() => {
       marginTop: '30px',
       textTransform: 'none',
       marginBottom: '20px',
+      marginRight: '8px',
     },
     buttonStyles: {
       '&:hover': {
@@ -147,6 +155,9 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#5F6368',
       padding: '15px 10px',
+    },
+    domm: {
+      width: '100%',
     },
     recipeStepsTableBodyRowStyles: {
       '&:hover': {
@@ -224,14 +235,27 @@ export const useStyles = makeStyles(() => {
     circularProgressRed: {
       color: '#E97567',
     },
-    radioButtonCellStyles: {
-      width: 50,
-    },
     circularBarCell: {
-      width: 70,
+      width: 90,
     },
     nullValueHead: {
-      width: 120,
+      width: 200,
+    },
+    displayStyles: {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    tabledisplayStyles: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    columnstyles: {
+      paddingRight: 130,
+      paddingLeft: 45,
+    },
+    barStyles: {
+      paddingLeft: 140,
+      paddingRight: 130,
     },
   };
 });

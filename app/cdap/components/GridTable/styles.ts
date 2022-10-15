@@ -44,4 +44,8 @@ export const useStyles = makeStyles({
   MUIBarColor: {
     backgroundColor: '#9CCC65',
   },
+  gridTableWrapper: {
+    height: 'calc(100vh - 240px)',
+    overflowY: 'auto',
+  },
 });

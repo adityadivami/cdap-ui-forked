@@ -22,7 +22,7 @@ import { useStyles } from 'components/ConnectionList/Components/ConnectionTabs/s
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import TabLabelCanBrowse from '../TabLabelCanBrowse';
 import TabLabelCanSample from '../TabLabelCanSample';
 
@@ -71,6 +71,18 @@ export default function({
     setConnectionId(connectionId);
   }, []);
 
+  const refValue = useRef(null);
+  const scrollToRight = () => {
+    refValue.current.scrollIntoView({
+      behavior: 'auto',
+    });
+  };
+  useEffect(() => {
+    if (refValue.current) {
+      scrollToRight();
+    }
+  }, [refValue]);
+
   if (index === 0) {
     DataPrepStore.dispatch({
       type: DataPrepActions.setConnectorType,
@@ -81,7 +93,11 @@ export default function({
   }
 
   return (
-    <Box data-testid="connections-tabs-parent" className={classes.connectionsTabsParent}>
+    <Box
+      {...({ ref: refValue } as any)}
+      data-testid="connections-tabs-parent"
+      className={classes.connectionsTabsParent}
+    >
       {tabsData.showTabs && (
         <div className={classes.boxStyles} data-testid="connection-tabs">
           <Tabs

@@ -41,7 +41,7 @@ export default function(props) {
     };
   };
   return (
-    <Box className={classes.pointerStyles}>
+    <Box>
       <input
         data-testId="fileinput"
         id="file"
@@ -49,8 +49,9 @@ export default function(props) {
         accept=".json"
         style={{ display: 'none' }}
         onChange={handleFile}
+        className={classes.pointerStyles}
       />
-      <label htmlFor="file">
+      <label htmlFor="file" className={classes.pointerStyles}>
         <img
           className={classes.importIconStyles}
           src="/cdap_assets/img/import.svg"

@@ -21,7 +21,7 @@ import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/a
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
 import DataPrepStore from 'components/DataPrep/store';
 import DrawerWidget from 'components/DrawerWidget';
-import Snackbar from 'components/SnackbarComponent/index';
+import PositionedSnackbar from 'components/SnackbarComponent/index';
 import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import ParsingPopupBody from './Components/ParsingPopupBody';
 import { useStyles } from './styles';
@@ -37,7 +37,6 @@ export default function(props) {
   const [headerValueChecked, setHeaderValueChecked] = useState(false);
   const [schemaValue, setSchemaValue] = useState(null);
   const { dataprep } = DataPrepStore.getState();
-  console.log('dataprep', dataprep);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
   const [errorOnTranformation, setErrorOnTransformation] = useState({
     open: false,
@@ -63,14 +62,14 @@ export default function(props) {
   useEffect(() => {
     setConnectionPayload({
       path: dataprep.insights.path,
-      connection: dataprep.connectorType,
+      connection: dataprep.insights.name,
       sampleRequest: {
         properties: {
           format: formatValue,
           fileEncoding: encodingValue,
           skipHeader: headerValueChecked,
           enableQuotedValues: quotedValuesChecked,
-          schema: JSON.stringify(schemaValue),
+          schema: schemaValue !== null ? JSON.stringify(schemaValue) : null,
           _pluginName: null,
         },
         limit: 1000,
@@ -141,6 +140,10 @@ export default function(props) {
     }
   };
 
+  const handleClose = () => {
+    setErrorOnTransformation({ open: false, message: '' });
+  };
+
   const componentToRender = (
     <DrawerWidget
       headingText={T.translate('features.WranglerNewParsingDrawer.parsing')}
@@ -187,10 +190,9 @@ export default function(props) {
         </Box>
       </Box>
       {errorOnTranformation.open && (
-        <Snackbar
-          handleCloseError={() => {
-            setErrorOnTransformation({ open: false, message: '' });
-          }}
+        <PositionedSnackbar
+          handleCloseError={handleClose}
+          messageToDisplay={errorOnTranformation.message}
         />
       )}
     </DrawerWidget>

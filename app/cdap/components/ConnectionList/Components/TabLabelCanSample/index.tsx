@@ -90,11 +90,6 @@ export default function TabLabelCanSample({
     })
       .then((res) => {
         toggleLoader(false);
-        setToaster({
-          open: true,
-          message: 'Success',
-          isSuccess: true,
-        });
         setTimeout(() => {
           if (onWorkspaceCreate) {
             return onWorkspaceCreate(res);

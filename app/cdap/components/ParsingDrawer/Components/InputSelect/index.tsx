@@ -17,15 +17,33 @@
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 
-export default function(props) {
-  const { options, classes, optionClassName } = props;
+const InputSelect = (props) => {
+  const {
+    options,
+    value,
+    onChange,
+    classes,
+    className,
+    fullWidth,
+    optionClassName,
+    defaultValue,
+  } = props;
 
   return (
     <Select
       classes={{ ...classes }}
-      {...props}
+      className={className}
+      fullWidth={fullWidth}
+      value={value}
+      onChange={onChange}
+      displayEmpty={false}
+      defaultValue={defaultValue}
       MenuProps={{
-        dataTestid: 'input-select-menu',
+        anchorOrigin: {
+          vertical: 'bottom',
+          horizontal: 'left',
+        },
+        getContentAnchorEl: null,
       }}
     >
       {options.map((option, index) => {
@@ -42,4 +60,6 @@ export default function(props) {
       })}
     </Select>
   );
-}
+};
+
+export default InputSelect;

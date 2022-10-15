@@ -29,7 +29,7 @@ export default function({
     <Box className={classes.containerProps}>
       <Box className={classes.cont}>
         <Box className={classes.imgCont}>{ColumnIcon}</Box>
-        <Box>
+        <Box className={classes.dataWrapper}>
           <p className={classes.data}>
             {' '}
             {T.translate('features.WranglerNewFooterPanel.currentData')}

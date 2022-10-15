@@ -17,7 +17,11 @@ import React from 'react';
 import { Button, Typography } from '@material-ui/core';
 import { useStyles } from '../styles';
 import T from 'i18n-react';
-import { QUICK_SELECT_INFO, SELECT_COLUMNS } from '../constants';
+import {
+  QUICK_SELECT_INFO,
+  SELECT_COLUMNS,
+  SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
+} from '../constants';
 
 export default function(props) {
   const { selectedColumns } = props;
@@ -26,7 +30,16 @@ export default function(props) {
   return (
     <section className={classes.functionSectionStyles}>
       <div className={classes.functionHeadingTextStyles}>
-        {T.translate('features.WranglerNewAddTransformation.selectColumn')}
+        <div className={classes.selectedColumnTickIcon}>
+          {SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION}
+          {selectedColumns.length !== 0 && (
+            <img
+              className={classes.greenCheckIconStyles}
+              src="/cdap_assets/img/green-check.svg"
+              alt="tick icon"
+            />
+          )}
+        </div>
       </div>
       <div className={classes.quickSelectTextStyles}>
         {T.translate('features.WranglerNewAddTransformation.quickSelect')}

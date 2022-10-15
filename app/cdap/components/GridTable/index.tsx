@@ -2,7 +2,7 @@
  * Copyright © 2022 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
+ * use this file except in compliance with the License. You may obtain `a` copy of
  * the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -196,6 +196,7 @@ export default function() {
   };
 
   const applyDirectiveAPICall = (newDirective, action) => {
+    setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
@@ -234,6 +235,7 @@ export default function() {
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
+        setShowRecipePanel(false);
         setToaster({
           open: true,
           message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
@@ -247,6 +249,7 @@ export default function() {
           isSuccess: false,
         });
         setLoading(false);
+        setShowRecipePanel(false);
       }
     );
   };
@@ -369,61 +372,66 @@ export default function() {
         />
       )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
-        <Table aria-label="simple table" className="test" data-testid="grid-table">
-          <TableHead>
-            <TableRow>
-              {headers.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader}
-                  type={types[eachHeader]}
-                  key={eachHeader}
-                  columnSelected={columnSelected}
-                  setColumnSelected={handleColumnSelect}
-                />
-              ))}
-            </TableRow>
-            <TableRow>
-              {headers.map((item, index) => (
-                <TableCell className={classes.progressBarRoot}>
-                  <LinearProgress
-                    variant="determinate"
-                    value={progress.filter((each) => each.key === item)[0]?.value}
-                    key={index}
-                    classes={{ root: classes.MUILinearRoot, barColorPrimary: classes.MUIBarColor }}
-                    className={classes.linearProgressBarStyle}
+        <Box className={classes.gridTableWrapper}>
+          <Table aria-label="simple table" className="test" data-testid="grid-table">
+            <TableHead>
+              <TableRow>
+                {headers.map((eachHeader) => (
+                  <GridHeaderCell
+                    label={eachHeader}
+                    type={types[eachHeader]}
+                    key={eachHeader}
+                    columnSelected={columnSelected}
+                    setColumnSelected={handleColumnSelect}
                   />
-                </TableCell>
-              ))}
-            </TableRow>
-            <TableRow>
-              {Array.isArray(missingDataList) &&
-                Array.isArray(headers) &&
-                headers.map((each, index) => {
-                  return missingDataList.map((item, itemIndex) => {
-                    if (item.name === each) {
-                      return <GridKPICell metricData={item} key={item.name} />;
-                    }
-                  });
-                })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((eachRow, rowIndex) => {
-              return (
-                <TableRow key={`row-${rowIndex}`}>
-                  {headers.map((eachKey, eachIndex) => {
-                    return (
-                      <GridTextCell
-                        cellValue={eachRow[eachKey] || '--'}
-                        key={`${eachKey}-${eachIndex}`}
-                      />
-                    );
+                ))}
+              </TableRow>
+              <TableRow>
+                {headers.map((item, index) => (
+                  <TableCell className={classes.progressBarRoot}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={progress.filter((each) => each.key === item)[0]?.value}
+                      key={index}
+                      classes={{
+                        root: classes.MUILinearRoot,
+                        barColorPrimary: classes.MUIBarColor,
+                      }}
+                      className={classes.linearProgressBarStyle}
+                    />
+                  </TableCell>
+                ))}
+              </TableRow>
+              <TableRow>
+                {Array.isArray(missingDataList) &&
+                  Array.isArray(headers) &&
+                  headers.map((each, index) => {
+                    return missingDataList.map((item, itemIndex) => {
+                      if (item.name === each) {
+                        return <GridKPICell metricData={item} key={item.name} />;
+                      }
+                    });
                   })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((eachRow, rowIndex) => {
+                return (
+                  <TableRow key={`row-${rowIndex}`}>
+                    {headers.map((eachKey, eachIndex) => {
+                      return (
+                        <GridTextCell
+                          cellValue={eachRow[eachKey] || '--'}
+                          key={`${eachKey}-${eachIndex}`}
+                        />
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </Box>
       ) : (
         <NoDataScreen />
       )}

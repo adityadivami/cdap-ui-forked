@@ -44,6 +44,15 @@ export const OPTION_WITH_NO_INPUT = [
   'character-encoding-utf16-le',
   'parseHL7',
   'parseAvro',
+  'string',
+  'boolean',
+  'integer',
+  'long',
+  'short',
+  'float',
+  'double',
+  'decimal',
+  'bytes',
 ];
 
 export const OPTION_WITH_TWO_INPUT = [

@@ -223,6 +223,13 @@ export default function ConnectionList() {
       return tempData;
     });
     refs.current[index].focus();
+    refs.current[index].addEventListener('blur', () => {
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = false;
+        return tempData;
+      });
+    });
   };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>, index: number) => {
@@ -240,6 +247,11 @@ export default function ConnectionList() {
     const newDataToSearch: IData[] = [...newData[index].data];
     const tempData = newDataToSearch.filter((item: IData) => item.name.toLowerCase().includes(''));
     newData[index].data = [...tempData];
+    setDataForTabs((prev) => {
+      const tempData = [...prev];
+      tempData[index].isSearching = false;
+      return tempData;
+    });
     setFilteredData(cloneDeep(newData));
   };
 
@@ -293,6 +305,13 @@ export default function ConnectionList() {
                       ref={(e) => {
                         refs.current[index] = e;
                       }}
+                      onBlur={() =>
+                        setDataForTabs((prev) => {
+                          const tempData = [...prev];
+                          tempData[index].isSearching = false;
+                          return tempData;
+                        })
+                      }
                     />
                     <Box
                       className={classes.closeIcon}
