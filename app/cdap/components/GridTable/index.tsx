@@ -75,10 +75,10 @@ export default function() {
   ]);
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
+  const [progress, setProgress] = useState([]);
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
   const [columnType, setColumnType] = useState('');
 
-  const [progress, setProgress] = useState([]);
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
   const [toaster, setToaster] = useState({
@@ -195,6 +195,16 @@ export default function() {
         return;
       } else {
         applyDirectiveAPICall(newDirective, 'add');
+        setIsFirstWrangle(false);
+      }
+    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective, 'add');
       }
     } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
       const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
@@ -251,7 +261,10 @@ export default function() {
         setShowRecipePanel(false);
         setToaster({
           open: true,
-          message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
+          message:
+            action === 'add'
+              ? `${newDirective} successfully added`
+              : `${newDirective} successfully deleted`,
           isSuccess: true,
         });
       },

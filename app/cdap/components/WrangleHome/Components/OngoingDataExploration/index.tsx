@@ -25,10 +25,12 @@ import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
 import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
+import { orderBy, find } from 'lodash';
 
 interface ICardCount {
   cardCount?: number;
   fromAddress: string;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function OngoingDataExploration({ cardCount, fromAddress }: ICardCount) {
@@ -49,6 +51,12 @@ export default function OngoingDataExploration({ cardCount, fromAddress }: ICard
           } else {
             values = res.values;
           }
+          values = orderBy(
+            values,
+            [(workspace) => (workspace.workspaceName || '').toLowerCase()],
+            ['asc']
+          );
+          console.log('values', values);
           const workspaces = values.map((item) => {
             const params = {
               context: 'default',
@@ -91,6 +99,7 @@ export default function OngoingDataExploration({ cardCount, fromAddress }: ICard
             const general = workspace.summary.statistics[element].general;
             const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
             const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+
             dataQuality = dataQuality + nonNull;
           });
           const totalDataQuality = dataQuality / workspace.headers.length;

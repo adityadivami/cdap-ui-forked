@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import Box from '@material-ui/core/Box';
 import { useStyles } from './style';
 import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExploration';
@@ -22,8 +22,10 @@ import { Breadcrumbs, Typography } from '@material-ui/core';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { Link } from 'react-router-dom';
+import LoadingSVG from 'components/shared/LoadingSVG';
 
-export default function WorkspaceList() {
+export default function() {
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
   return (
     <Box className={classes.wrapper} data-testid="workspace-list-parent">
@@ -42,8 +44,13 @@ export default function WorkspaceList() {
         </Breadcrumbs>
       </Box>
       <Box className={classes.explorationList}>
-        <OngoingDataExploration fromAddress="Workspaces" />
+        <OngoingDataExploration fromAddress="workspaceList" setLoading={setLoading} />
       </Box>
+      {loading && (
+        <Box className={classes.loadingContainer}>
+          <LoadingSVG />
+        </Box>
+      )}
     </Box>
   );
 }
