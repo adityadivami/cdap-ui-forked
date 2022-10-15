@@ -116,8 +116,9 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
       </Breadcrumbs>
 
       <Breadcrumbs separator=" ">
-        <IconButton>{icon}</IconButton>
-        <IconButton>{icon1}</IconButton>
+        <IconButton>
+          <a href="https://cdap.atlassian.net/wiki/spaces/DOCS/overview">{icon}</a>
+        </IconButton>
         <IngestViewSchemaDropDown setOpenViewSchema={setOpenViewSchema} />
         <Button
           className={`${classes.Button} ${classes.pipelineStyles}`}

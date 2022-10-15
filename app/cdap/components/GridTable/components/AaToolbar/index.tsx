@@ -95,153 +95,88 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
           </Box>
         </Tooltip>
         <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
-        <Tooltip
-          title={NULL_TITLE}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <NestedMenu
-              menuOptions={NULL_MISSING_OPTIONS}
-              columnType={columnType}
-              icon={NullIcon}
-              submitMenuOption={submitMenuOption}
-            />
-            {isShowNames && <Typography className={classes.typoClass}>{NULL_TITLE}</Typography>}
-          </Box>
-        </Tooltip>
-        <Tooltip
-          title={INVALID_TITLE}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <NestedMenu
-              menuOptions={INVALID_ICON_OPTIONS}
-              columnType={columnType}
-              icon={InvalidIcon}
-              submitMenuOption={submitMenuOption}
-            />
-            {isShowNames && <Typography className={classes.typoClass}>{INVALID_TITLE}</Typography>}
-          </Box>
-        </Tooltip>
-        <Tooltip
-          title={COLUMN_TITLE}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <NestedMenu
-              menuOptions={COLUMN_OPTIONS}
-              columnType={columnType}
-              icon={ColumnIcon}
-              submitMenuOption={submitMenuOption}
-            />
-            {isShowNames && <Typography className={classes.typoClass}>{COLUMN_TITLE}</Typography>}
-          </Box>
-        </Tooltip>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={NULL_MISSING_OPTIONS}
+            columnType={columnType}
+            icon={NullIcon}
+            submitMenuOption={submitMenuOption}
+            title={NULL_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{NULL_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={INVALID_ICON_OPTIONS}
+            columnType={columnType}
+            icon={InvalidIcon}
+            submitMenuOption={submitMenuOption}
+            title={INVALID_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{INVALID_TITLE}</Typography>}
+        </Box>
+
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={COLUMN_OPTIONS}
+            columnType={columnType}
+            icon={ColumnIcon}
+            submitMenuOption={submitMenuOption}
+            title={COLUMN_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{COLUMN_TITLE}</Typography>}
+        </Box>
         <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
-        <Tooltip
-          title={STRUCTURE_TITLE}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <NestedMenu
-              columnType={columnType}
-              icon={StructureIcon}
-              submitMenuOption={submitMenuOption}
-              menuOptions={MENU_OPTIONS}
-            />
-            {isShowNames && (
-              <Typography className={classes.typoClass}>{STRUCTURE_TITLE}</Typography>
-            )}
-          </Box>
-        </Tooltip>
-        <Tooltip
-          title={FRAGMENT_TITLE}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <NestedMenu
-              columnType={columnType}
-              icon={FragmentIcon}
-              submitMenuOption={submitMenuOption}
-              menuOptions={FRAGMENT_OPTIONS}
-            />
-            {isShowNames && <Typography className={classes.typoClass}>{FRAGMENT_TITLE}</Typography>}
-          </Box>
-        </Tooltip>
-        <Tooltip
-          title={MATH_TITLE}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <NestedMenu
-              columnType={columnType}
-              icon={MathIcon}
-              submitMenuOption={submitMenuOption}
-              menuOptions={MATH_OPTIONS}
-            />
-            {isShowNames && <Typography className={classes.typoClass}>{MATH_TITLE}</Typography>}
-          </Box>
-        </Tooltip>
-        <Tooltip
-          title={SECURITY_TITLE}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <NestedMenu
-              columnType={columnType}
-              icon={SecurityIcon}
-              submitMenuOption={submitMenuOption}
-              menuOptions={SECURITY_OPTIONS}
-            />
-            {isShowNames && <Typography className={classes.typoClass}>{SECURITY_TITLE}</Typography>}
-          </Box>
-        </Tooltip>
-        <Tooltip
-          title={OTHER_TITLE}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <NestedMenu
-              columnType={columnType}
-              icon={OtherIcon}
-              submitMenuOption={submitMenuOption}
-              menuOptions={OTHER_OPTIONS}
-            />
-            {isShowNames && <Typography className={classes.typoClass}>{OTHER_TITLE}</Typography>}
-          </Box>
-        </Tooltip>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={StructureIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={MENU_OPTIONS}
+            title={STRUCTURE_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{STRUCTURE_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={FragmentIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={FRAGMENT_OPTIONS}
+            title={FRAGMENT_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{FRAGMENT_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={MathIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={MATH_OPTIONS}
+            title={MATH_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{MATH_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={SecurityIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={SECURITY_OPTIONS}
+            title={SECURITY_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{SECURITY_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={OtherIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={OTHER_OPTIONS}
+            title={OTHER_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{OTHER_TITLE}</Typography>}
+        </Box>
         <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Tooltip
           title={GRID_TITLE}
@@ -256,7 +191,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             {isShowNames && <Typography className={classes.typoClass}>{GRID_TITLE}</Typography>}
           </Box>
         </Tooltip>
-        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.lastDivider}> {isShowNames ? LongDivider : Divider}</Box>
         <FunctionSearch
           transformationPanel={(value) => {
             submitMenuOption(value, ['all']);
