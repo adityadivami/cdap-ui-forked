@@ -15,26 +15,27 @@
  */
 
 import { Button, Container } from '@material-ui/core';
-import DataPrepStore from 'components/DataPrep/store';
 import DrawerWidget from 'components/DrawerWidget';
 import DirectiveContent from 'components/GridTable/DirectiveComponents';
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/DirectiveComponents/constants';
-import React, { Fragment, useState } from 'react';
+import T from 'i18n-react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import ActionsWidget from './ActionsWidget';
-import {
-  ADD_TRANSFORMATION_STEP,
-  APPLY_STEP,
-  DONE_STEP,
-  SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
-} from './constants';
+import { DONE_STEP } from './constants';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsList from './SelectColumnsList';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import { useStyles } from './styles';
-import { parseDirective } from './utils';
-import T from 'i18n-react';
+import {
+  directiveForHash,
+  parseDirective,
+  prepareDirectiveForDefineVariable,
+  prepareDirectiveForFilter,
+  prepareDirectiveForPattern,
+  prepareDirectiveForSendToError,
+} from './utils';
 
 export default function(props) {
   const { functionName, columnData, setLoading, missingDataList } = props;
@@ -44,7 +45,6 @@ export default function(props) {
   const [selectedColumns, setSelectedColumns] = useState([]);
   const [selectedAction, setSelectedAction] = useState('');
   const [replaceValue, setReplaceValue] = useState('');
-  const { dataprep } = DataPrepStore.getState();
   const [directiveComponentValues, setDirectiveComponentsValue] = useState({
     radioOption: '',
     ignoreCase: false,
@@ -61,7 +61,29 @@ export default function(props) {
     depth: 1,
     columnWidths: '',
     optionPaddingParam: '',
+    hashValue: '',
+    encode: false,
+    copyToNewColumn: false,
+    patternName: '',
+    startValue: '',
+    endValue: '',
+    nDigit: '',
+    variableName: '',
+    columnNames: columnData.map(({ label }) => label),
+    selectedColumnForDefineVariable: '',
+    selectedColumn: '',
+    counter: '',
+    counterName: '',
   });
+
+  useEffect(() => {
+    if (selectedColumns.length) {
+      setDirectiveComponentsValue({
+        ...directiveComponentValues,
+        selectedColumn: selectedColumns[0].label,
+      });
+    }
+  }, [selectedColumns]);
 
   const classes = useStyles();
 
@@ -145,6 +167,95 @@ export default function(props) {
         directiveComponentValues.optionPaddingParam
       );
       props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName == 'copyColumn') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.copyColumnName);
+    } else if (functionName == 'customTransform') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+    } else if (functionName === 'concatenate') {
+      if (directiveComponentValues.copyToNewColumn) {
+        const value =
+          directiveComponentValues.radioOption === 'END'
+            ? `${selectedColumns[0].label} + '${directiveComponentValues.customInput}'`
+            : `'${directiveComponentValues.customInput}' + ${selectedColumns[0].label}`;
+        props.applyTransformation(directiveComponentValues.copyColumnName, value);
+      } else {
+        const value =
+          directiveComponentValues.radioOption === 'END'
+            ? `${selectedColumns[0].label} + '${directiveComponentValues.customInput}'`
+            : `'${directiveComponentValues.customInput}' + ${selectedColumns[0].label}`;
+        props.applyTransformation(selectedColumns[0].label, value);
+      }
+    } else if (functionName == 'hash') {
+      const hashDirective = directiveForHash(
+        selectedColumns[0].label,
+        directiveComponentValues.hashValue,
+        directiveComponentValues.encode
+      );
+      props.applyTransformation(selectedColumns[0].label, hashDirective);
+    } else if (functionName === 'findAndReplace') {
+      const makeOldValue = directiveComponentValues.exactMatch
+        ? `^${directiveComponentValues.findPreviousValue}$`
+        : directiveComponentValues.findPreviousValue;
+      const finalValue = directiveComponentValues.ignoreCase
+        ? `s/${makeOldValue}/${directiveComponentValues.findReplaceValue}/Ig`
+        : `s/${makeOldValue}/${directiveComponentValues.findReplaceValue}/g`;
+      props.applyTransformation(selectedColumns[0].label, finalValue);
+    } else if (functionName === 'filter') {
+      const getDirective = prepareDirectiveForFilter(
+        directiveComponentValues.filterRowToKeepOrRemove,
+        directiveComponentValues.filterCondition,
+        directiveComponentValues.filterConditionValue,
+        directiveComponentValues.ignoreCase,
+        selectedColumns[0].label
+      );
+      props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName === 'delimited-text' || functionName === 'using-delimiters') {
+      const getDirective =
+        directiveComponentValues.radioOption === 'customDelimiter'
+          ? directiveComponentValues.customInput
+          : directiveComponentValues.radioOption;
+      props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName === 'using-patterns') {
+      const getDirective = prepareDirectiveForPattern(
+        selectedColumns[0].label,
+        directiveComponentValues.patternName,
+        directiveComponentValues.startValue,
+        directiveComponentValues.endValue,
+        directiveComponentValues.nDigit,
+        directiveComponentValues.customInput
+      );
+      props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName === 'define-variable') {
+      const getDirective = prepareDirectiveForDefineVariable(
+        directiveComponentValues.variableName,
+        directiveComponentValues.customInput,
+        directiveComponentValues.selectedColumnForDefineVariable,
+        directiveComponentValues.filterCondition,
+        selectedColumns[0].label
+      );
+      props.applyTransformation(selectedColumns[0].label, getDirective);
+    } else if (functionName === 'send-to-error') {
+      const getValue = prepareDirectiveForSendToError(
+        selectedColumns[0].label,
+        directiveComponentValues.customInput,
+        directiveComponentValues.ignoreCase,
+        directiveComponentValues.filterCondition
+      );
+      props.applyTransformation(selectedColumns[0].label, getValue);
+    } else if (functionName === 'set-counter') {
+      const getValue =
+        directiveComponentValues.filterCondition === 'true'
+          ? `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} true`
+          : `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} ${directiveComponentValues.filterConditionValue}`;
+      props.applyTransformation(selectedColumns[0].label, getValue);
+    } else if (functionName == 'dateTime' || functionName == 'dateTimeAsString') {
+      if (directiveComponentValues.radioOption === 'customFormat') {
+        props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+      } else {
+        props.applyTransformation(selectedColumns[0].label, directiveComponentValues.radioOption);
+      }
+    } else if (functionName === 'fillNullOrEmpty') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
     } else {
       setLoading(false);
       props.applyTransformation(selectedColumns[0].label);

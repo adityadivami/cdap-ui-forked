@@ -135,6 +135,8 @@ export const MENU_OPTIONS = [
       { value: 'trim', label: 'White spaces' },
       { value: 'ltrim', label: 'Leading white spaces' },
       { value: 'rtrim', label: 'Trailing White spaces' },
+      { value: 'dateTime', label: 'Date time' },
+      { value: 'dateTimeAsString', label: 'Date time as string' },
     ],
   },
   {
@@ -142,7 +144,7 @@ export const MENU_OPTIONS = [
     label: 'Calculate',
   },
   {
-    value: 'custom-transform',
+    value: 'customTransform',
     label: 'Custom Transform',
   },
   {
@@ -168,7 +170,7 @@ export const MENU_OPTIONS = [
     value: 'divider',
   },
   {
-    value: 'copy-column',
+    value: 'copyColumn',
     label: 'Copy column',
   },
   {

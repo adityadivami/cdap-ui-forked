@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 export const parseDirective = (
   functionName,
   column,
@@ -60,4 +76,323 @@ export const parseDirective = (
   } else if (functionName === 'parseFixedLength') {
     return `parse-as-fixed-length :${column} ${columnWidth} ${optionPadding}`;
   }
+};
+
+export const directiveForHash = (column, alogorithm, encode) => {
+  return `hash :${column} ${alogorithm} ${encode}`;
+};
+
+const FILTER_DIRECTIVES_MAP = {
+  KEEP: {
+    EMPTY: 'filter-rows-on condition-false',
+    TEXTEXACTLY: 'filter-rows-on regex-not-match',
+    TEXTCONTAINS: 'filter-rows-on regex-not-match',
+    TEXTSTARTSWITH: 'filter-rows-on condition-false',
+    TEXTENDSWITH: 'filter-rows-on condition-false',
+    TEXTREGEX: 'filter-rows-on regex-not-match',
+    CUSTOMCONDITION: 'filter-rows-on condition-false',
+  },
+  REMOVE: {
+    EMPTY: 'filter-rows-on condition-true',
+    TEXTEXACTLY: 'filter-rows-on regex-match',
+    TEXTCONTAINS: 'filter-rows-on regex-match',
+    TEXTSTARTSWITH: 'filter-rows-on condition-true',
+    TEXTENDSWITH: 'filter-rows-on condition-true',
+    TEXTREGEX: 'filter-rows-on regex-match',
+    CUSTOMCONDITION: 'filter-rows-on condition-true',
+  },
+};
+
+export const prepareDirectiveForFilter = (
+  rowFilter,
+  selectedCondition,
+  selectedConditionValue,
+  ignoreCase,
+  columnName
+) => {
+  let directive = '';
+  let column = columnName;
+  let textValue = selectedConditionValue;
+  let configuration;
+  const condition = FILTER_DIRECTIVES_MAP[rowFilter][selectedCondition];
+  switch (selectedCondition) {
+    case 'EMPTY':
+      directive = `${condition} ${column} == null || ${column} =~ "^\\W*$"`;
+      break;
+    case 'TEXTCONTAINS':
+      if (ignoreCase) {
+        textValue = `(?i)${textValue}`;
+      }
+      directive = `${condition} ${column} .*${textValue}.*`;
+      break;
+    case 'TEXTSTARTSWITH':
+      configuration = `"${textValue}"`;
+      if (ignoreCase) {
+        column = `${column}.toLowerCase()`;
+        configuration = `"${textValue}".toLowerCase()`;
+      }
+      directive = `${condition} ${column} =^ ${configuration}`;
+      break;
+    case 'TEXTENDSWITH':
+      configuration = `"${textValue}"`;
+      if (ignoreCase) {
+        column = `${column}.toLowerCase()`;
+        configuration = `"${textValue}".toLowerCase()`;
+      }
+      directive = `${condition} ${column} =$ ${configuration}`;
+      break;
+    case 'TEXTEXACTLY':
+      if (ignoreCase) {
+        textValue = `(?i)${textValue}`;
+      }
+      directive = `${condition} ${column} ^${textValue}$`;
+      break;
+    case 'TEXTREGEX':
+      directive = `${condition} ${column} ${textValue}`;
+      break;
+    case 'CUSTOMCONDITION':
+      directive = `${condition} ${column} ${textValue}`;
+      break;
+  }
+  return directive;
+};
+
+export const prepareDirectiveForPattern = (
+  column,
+  patternName,
+  startValue,
+  endValue,
+  nDigit,
+  customInput
+) => {
+  let directive;
+  switch (patternName) {
+    case 'creditcard':
+      directive = `extract-regex-groups :${column} ((?:\\d{4}[-\\s]?){4})`;
+      break;
+    case 'date':
+      directive = `extract-regex-groups :${column} ((?:(?:\\d{4}|\\d{2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))|(?:(?:(?:\\d{1,2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))|(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{4}|\\d{2})))`;
+      break;
+    case 'datetime':
+      directive = `extract-regex-groups :${column} ((?:(?:(?:\\d{4}|\\d{2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))|(?:(?:(?:\\d{1,2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))|(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{4}|\\d{2})))[T\\s](?:(?:(?:2[0-3])|(?:[01]?\\d))[h:\\s][0-5]\\d(?::(?:(?:[0-5]\\d)|(?:60)))?(?:\\s[aApP][mM])?(?:Z|(?:[+-](?:1[0-2])|(?:0?\\d):[0-5]\\d)|(?:\\s[[a-zA-Z]\\s]+))?))`;
+      break;
+    case 'email':
+      directive = `extract-regex-groups :${column} ([a-zA-Z0-9!#$%&*+/=?^_\`'{|}~-]+@(?!.*\\.{2})[a-zA-Z0-9\\.-]+(?:\\.[a-zA-Z]{2,6})?)`;
+      break;
+    case 'htmlhyperlink':
+      directive = `extract-regex-groups :${column} <[aA](?:\\s+[a-zA-Z]+=".*?")*\\s+[hH][rR][eE][fF]="(.*?)"(?:\\s+[a-zA-Z]+=".*?")*>(?:.*)<\/[aA]>`;
+      break;
+    case 'ipv4':
+      directive = `extract-regex-groups :${column} ((?:(?:0|(?:25[0-5])|(?:2[0-4][1-9])|(?:1\\d\\d)|(?:[1-9]\\d?))\\.){3}(?:(?:0|(?:25[0-5])|(?:2[0-4][1-9])|(?:1\\d\\d)|(?:[1-9]\\d?))))`;
+      break;
+    case 'isbncodes':
+      directive = `extract-regex-groups :${column} ((?:97[89]-?)?(?:\\d-?){9}[\\dxX])`;
+      break;
+    case 'macaddress':
+      directive = `extract-regex-groups :${column} ((?:\\p{XDigit}{2}[:-]){5}(?:\\p{XDigit}{2}))`;
+      break;
+    case 'ndigitnumber':
+      directive = `extract-regex-groups :${column} (\\d{${nDigit}})`;
+      break;
+    case 'phonenumber':
+      directive = `extract-regex-groups :${column} ((?:\\+\\d{1,3}[\\s-]?)?\\(?\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{4})`;
+      break;
+    case 'ssn':
+      directive = `extract-regex-groups :${column} (\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{4})`;
+      break;
+    case 'startend':
+      directive = `extract-regex-groups :${column} .*${startValue}(.*)${endValue}.*`;
+      break;
+    case 'time':
+      directive = `extract-regex-groups :${column} ((?:(?:2[0-3])|(?:[01]?\\d))[h:\\s][0-5]\\d(?::(?:(?:[0-5]\\d)|(?:60)))?(?:\\s[aApP][mM])?(?:Z|(?:[+-](?:1[0-2])|(?:0?\\d):[0-5]\\d)|(?:\\s[[a-zA-Z]\\s]+))?)`;
+      break;
+    case 'upscodes':
+      directive = `extract-regex-groups :${column} (1Z\\s?[0-9a-zA-Z]{3}\\s?[0-9a-zA-Z]{3}\\s?[0-9a-zA-Z]{2}\\s?\\d{4}\\s?\\d{4})`;
+      break;
+    case 'url':
+      directive = `extract-regex-groups :${column} ((?:(?:http[s]?|ftp):\/)?\/?(?:[^\/\\s]+)(?:(?:\/\\w+)*\/)(?:[\\w\-\.]+[^#?\\s]+)(?:.*)?)`;
+      break;
+    case 'zipcode':
+      directive = `extract-regex-groups :${column} [^\\d]?([0-9]{5}(?:-[0-9]{4})?)[^\\d]?`;
+      break;
+    case 'custom':
+      directive = `extract-regex-groups :${column} ${customInput}`;
+      break;
+  }
+  return directive;
+};
+
+export const prepareDirectiveForDefineVariable = (
+  variableValue,
+  customInput,
+  selectedColumnForDefineVariable,
+  selectedAction,
+  columnSelected
+) => {
+  const condition = 'set-variable';
+  const column = columnSelected;
+  const textValue = customInput;
+  const variableName = variableValue;
+  const selectedColumn = selectedColumnForDefineVariable;
+  let directive;
+  const selectedCondition = selectedAction;
+  if (!textValue || !variableName) {
+    return;
+  }
+
+  switch (selectedCondition) {
+    case 'TEXTSTARTSWITH':
+      directive = `${condition} ${variableName} ${column} =^ "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTENDSWITH':
+      directive = `${condition} ${variableName} ${column} =$ "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTEXACTLY':
+      directive = `${condition} ${variableName} ${column} == "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTREGEX':
+      directive = `${condition} ${variableName} ${column} =~ ${textValue} ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'CUSTOMCONDITION':
+      directive = `${condition} ${variableName} ${textValue} ? ${selectedColumn} : ${variableName}`;
+      break;
+  }
+  return directive;
+};
+
+const conditionToFnMap = {
+  ISNUMBER: 'isNumber',
+  ISINTEGER: 'isInteger',
+  ISDOUBLE: 'isDouble',
+  ISBOOLEAN: 'isBoolean',
+  ISDATE: 'isDate',
+  ISTIME: 'isTime',
+  ISDATEFORMAT: 'isDate',
+  ISIP: 'isIP',
+  ISIPV4: 'isIPv4',
+  ISIPV6: 'isIPv6',
+  ISEMAIL: 'isEmail',
+  ISURL: 'isUrl',
+  ISDOMAINNAME: 'isDomainName',
+  ISDOMAINTLD: 'isDomainTld',
+  ISGENERICTLD: 'isGenericTld',
+  ISCOUNTRYTLD: 'isCountryTld',
+  ISISBN: 'isISBN',
+  ISISBN10: 'isISBN10',
+  ISISBN13: 'isISBN13',
+  ISCREDITCARD: 'isCreditCard',
+  ISAMEXCARD: 'isAmex',
+  ISVISACARD: 'isVisa',
+  ISMASTERCARD: 'isMaster',
+  ISDINERCARD: 'isDiner',
+  ISVPAYCARD: 'isVPay',
+};
+
+const getDQFunction = (condition) => {
+  const c = condition.replace('NOT', '');
+  return conditionToFnMap[c];
+};
+
+const dqFunctions = Object.keys(conditionToFnMap).reduce((prev, curr) => {
+  const condition = curr.replace(/IS|ISNOT/, '');
+  return [...prev, `IS${condition}`, `ISNOT${condition}`];
+}, []);
+
+export const prepareDirectiveForSendToError = (
+  selectedColumn,
+  textValue,
+  ignoreCase,
+  filterAction
+) => {
+  const directive = 'send-to-error';
+  const column = selectedColumn;
+  let equalityOperator = '==';
+  let finalExpression;
+  let condition;
+
+  switch (filterAction) {
+    case 'EMPTY':
+      finalExpression = `${directive} empty(${column})`;
+      break;
+
+    case 'TEXTCONTAINS':
+      if (textValue === '') {
+        // if we get no textValue
+        return '';
+      }
+
+      if (ignoreCase) {
+        textValue = `(?i).*${textValue}`;
+      } else {
+        textValue = `.*${textValue}`;
+      }
+      finalExpression = `${directive} ${column} =~ "${textValue}.*"`;
+      break;
+
+    case 'TEXTSTARTSWITH':
+      if (textValue === '') {
+        return '';
+      }
+      equalityOperator = '=^';
+      if (ignoreCase) {
+        textValue = `(?i)^${textValue}.*`;
+        equalityOperator = '=~';
+      }
+      finalExpression = `${directive} ${column} ${equalityOperator} "${textValue}"`;
+      break;
+
+    case 'TEXTENDSWITH':
+      if (textValue === '') {
+        return '';
+      }
+      equalityOperator = '=$';
+      if (ignoreCase) {
+        textValue = `(?i).*${textValue}$`;
+        equalityOperator = '=~';
+      }
+      finalExpression = `${directive} ${column} ${equalityOperator} "${textValue}"`;
+      break;
+    case 'TEXTEXACTLY':
+      if (textValue === '') {
+        return '';
+      }
+      if (ignoreCase) {
+        textValue = `(?i)${textValue}`;
+        equalityOperator = `=~`;
+      }
+      finalExpression = `${directive} ${column} ${equalityOperator} "${textValue}"`;
+      break;
+    case 'TEXTREGEX':
+      if (textValue === '') {
+        return '';
+      }
+      finalExpression = `${directive} ${column} =~ "${textValue}"`;
+      break;
+
+    case 'CUSTOMCONDITION':
+      if (textValue === '') {
+        return '';
+      }
+      finalExpression = `${directive} ${textValue}`;
+      break;
+    case 'ISDATEFORMAT':
+    case 'ISNOTDATEFORMAT':
+      condition = `dq:${getDQFunction(filterAction)}(${column})`;
+      if (filterAction.indexOf('NOT') !== -1) {
+        condition = `!${condition}`;
+      }
+      finalExpression = `${directive} ${condition}`;
+      break;
+    default:
+      if (dqFunctions.indexOf(filterAction) !== -1) {
+        condition = `dq:${getDQFunction(filterAction)}(${column})`;
+        if (filterAction.indexOf('NOT') !== -1) {
+          condition = `!${condition}`;
+        }
+        finalExpression = `${directive} ${condition}`;
+      }
+      break;
+  }
+
+  return finalExpression;
 };

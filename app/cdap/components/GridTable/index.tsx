@@ -45,8 +45,8 @@ import { convertNonNullPercent } from './utils';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
 import AddTransformation from 'components/AddTransformation';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import ToolBarList from './components/AaToolbar';
+import { getDirectiveOnTwoInputs } from './directives';
 import getDirective from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
@@ -61,7 +61,7 @@ export default function() {
   const [workspaceName, setWorkspaceName] = useState('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
-  const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
+  const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
   const [dataQuality, setDataQuality] = useState({});
   const [optionSelected, setOptionSelected] = useState(null);
@@ -192,6 +192,15 @@ export default function() {
       } else {
         applyDirectiveAPICall(newDirective, 'add');
       }
+    } else if (OPTION_WITH_TWO_INPUT.includes(option)) {
+      const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective, 'add');
+      }
     }
   };
 
@@ -245,7 +254,7 @@ export default function() {
       (err) => {
         setToaster({
           open: true,
-          message: 'Transformation failed',
+          message: `Failed to transform ${newDirective}`,
           isSuccess: false,
         });
         setLoading(false);
@@ -295,7 +304,6 @@ export default function() {
     return metricArray;
   };
 
-  // ------------@getGridTableData Function is used for preparing data for entire grid-table
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
@@ -348,6 +356,7 @@ export default function() {
           setLoading={setLoading}
         />
       )}
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
       {showRecipePanel && (
         <RecipeSteps
           setShowRecipePanel={setShowRecipePanel}

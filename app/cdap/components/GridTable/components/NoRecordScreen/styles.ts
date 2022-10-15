@@ -25,6 +25,7 @@ export const useStyles = makeStyles({
     '& *': {
       fontFamily: "'Noto Sans', sans-serif",
     },
+    marginTop: 30,
   },
   mainHeaderMessage: {
     fontSize: '20px',

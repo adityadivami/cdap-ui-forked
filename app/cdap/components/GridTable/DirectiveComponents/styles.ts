@@ -84,5 +84,13 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       marginBottom: '10px',
     },
+    selectBootstrapInput: {
+      width: '87%',
+      marginLeft: '11px',
+    },
+    additionalText: {
+      color: '#5F6368',
+      fontSize: '12px',
+    },
   };
 });
