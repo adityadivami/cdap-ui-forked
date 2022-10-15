@@ -98,7 +98,9 @@ export const useCss = makeStyles({
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
   },
   recipeCont: {
-    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: 'red',
+    },
     textAlign: 'center',
     padding: '9.5px 32px',
     gap: '8px',

@@ -92,5 +92,14 @@ export const useStyles = makeStyles(() => {
       color: '#5F6368',
       fontSize: '12px',
     },
+    calculateFlex: {
+      display: 'flex',
+    },
+    calculateWrapper: {
+      marginTop: 20,
+    },
+    signText: {
+      marginRight: 10,
+    },
   };
 });

@@ -15,15 +15,20 @@
  */
 
 import React from 'react';
+import { CALCULATE_OPTIONS } from '../components/NestedMenu/constants';
 
 const DirectiveContent: React.FC<any> = (props) => {
-  const { directiveComponents, functionName: type } = props;
-  const Component = directiveComponents.find((item) => item.type === type)?.component;
+  const { directiveComponents, functionName: type, functionName } = props;
+
+  const Component =
+    directiveComponents.find((item) => item.type === type)?.component ||
+    CALCULATE_OPTIONS.find((item) => item.value === functionName)?.component;
 
   return (
     <Component
       directiveComponentValues={props.directiveComponentValues}
       setDirectiveComponentsValue={props.setDirectiveComponentsValue}
+      functionName={functionName}
       {...props}
     />
   );

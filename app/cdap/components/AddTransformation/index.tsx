@@ -35,7 +35,9 @@ import {
   prepareDirectiveForFilter,
   prepareDirectiveForPattern,
   prepareDirectiveForSendToError,
+  prepareDirectiveForCalculate,
 } from './utils';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/constants';
 
 export default function(props) {
   const { functionName, columnData, setLoading, missingDataList } = props;
@@ -256,6 +258,15 @@ export default function(props) {
       }
     } else if (functionName === 'fillNullOrEmpty') {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+    } else if (CALCULATE_OPTIONS.some((item) => item.value === functionName)) {
+      const getValue = prepareDirectiveForCalculate(
+        functionName,
+        selectedColumns[0].label,
+        directiveComponentValues.copyToNewColumn,
+        directiveComponentValues.copyColumnName,
+        directiveComponentValues.customInput
+      );
+      props.applyTransformation(selectedColumns[0].label, getValue);
     } else {
       setLoading(false);
       props.applyTransformation(selectedColumns[0].label);
@@ -270,7 +281,9 @@ export default function(props) {
     setColumnsPopup(false);
   };
 
-  const isComponentAvailable = DIRECTIVE_COMPONENTS.some((item) => item.type === functionName);
+  const isComponentAvailable =
+    DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
+    CALCULATE_OPTIONS.some((item) => item.value === functionName);
 
   return (
     <Fragment>
@@ -302,6 +315,7 @@ export default function(props) {
                   setDirectiveComponentsValue={setDirectiveComponentsValue}
                   directiveComponents={DIRECTIVE_COMPONENTS}
                   directiveComponentValues={directiveComponentValues}
+                  functionName={functionName}
                   {...props}
                 />
               )
