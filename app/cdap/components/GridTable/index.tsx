@@ -76,6 +76,7 @@ export default function() {
   const [columnSelected, setColumnSelected] = useState('');
   const [directiveFunction, setDirectiveFunction] = useState('');
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [columnType, setColumnType] = useState('');
 
   const [progress, setProgress] = useState([]);
   const [connectorType, setConnectorType] = useState(null);
@@ -339,8 +340,10 @@ export default function() {
     getGridTableData();
   }, [gridData]);
 
-  const handleColumnSelect = (columnName) =>
+  const handleColumnSelect = (columnName) => {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+    setColumnType(types[columnName]);
+  };
 
   const deleteRecipes = (new_arr) => {
     applyDirectiveAPICall(new_arr, 'delete');
@@ -353,6 +356,7 @@ export default function() {
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       <ToolBarList
+        columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
       />
       {isFirstWrangle && connectorType === 'File' && (

@@ -20,9 +20,14 @@ import { menuArrowIcon } from '../AaToolbar/images';
 import { useNestedMenuStyles } from '../NestedMenu/styles';
 import { IMenuItemComponentProps } from './types';
 
-const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({ item, index, onMenuClick }) => {
+const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({
+  item,
+  index,
+  onMenuClick,
+  columnType,
+}) => {
   const classes = useNestedMenuStyles();
-
+  console.log('item', item);
   if (item.value === 'divider') {
     return <hr className={classes.divider} key={index} />;
   }
@@ -36,7 +41,15 @@ const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({ item, index, onM
     return (
       <MenuItem
         key={index}
-        title={item.key}
+        disabled={
+          columnType
+            ? item?.supported_dataType?.includes(columnType) ||
+              item?.supported_dataType?.includes('all')
+              ? false
+              : true
+            : false
+        }
+        title={item.value}
         onClick={(e) => onMenuClick(e, item)}
         data-testid={`menu-item-component-${index}`}
       >

@@ -24,6 +24,7 @@ const MenuComponent: React.FC<IMenuComponentProps> = ({
   menuOptions,
   setAnchorEl,
   submitOption,
+  columnType,
 }) => {
   const open = Boolean(anchorEl);
   const classes = useStyles();
@@ -50,7 +51,12 @@ const MenuComponent: React.FC<IMenuComponentProps> = ({
       data-testid="menu-component-menu"
     >
       {menuOptions.map((item, index) => (
-        <MenuItemComponent item={item} index={index} onMenuClick={submitOption} />
+        <MenuItemComponent
+          columnType={columnType}
+          item={item}
+          index={index}
+          onMenuClick={submitOption}
+        />
       ))}
     </Menu>
   );

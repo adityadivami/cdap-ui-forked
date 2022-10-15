@@ -22,7 +22,7 @@ import { MENU_OPTIONS } from './constants';
 import { useNestedMenuStyles } from './styles';
 import { INestedMenuProps } from './types';
 
-const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
+const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption, columnType }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const open = Boolean(anchorEl);
@@ -41,7 +41,6 @@ const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
       setAnchorEl(null);
     }
   };
-
   return (
     <>
       <IconButton
@@ -73,14 +72,19 @@ const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
         className={classes.root}
       >
         {MENU_OPTIONS.map((item, index) => (
-          <MenuItemComponent item={item} index={index} onMenuClick={handleMenuClick} />
+          <MenuItemComponent
+            item={item}
+            columnType={columnType.toLowerCase()}
+            index={index}
+            onMenuClick={handleMenuClick}
+          />
         ))}
         <MenuComponent
           anchorEl={anchorEl2}
+          columnType={columnType.toLowerCase()}
           menuOptions={nestedOptions}
           setAnchorEl={setAnchorEl2}
           submitOption={(e, item) => {
-            console.log('item', item);
             e.preventDefault();
             e.stopPropagation();
             setAnchorEl(null);

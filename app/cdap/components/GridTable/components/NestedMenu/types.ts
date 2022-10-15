@@ -17,4 +17,5 @@
 export interface INestedMenuProps {
   icon: any;
   submitMenuOption: (value: any, dataType: string[]) => void;
+  columnType: string;
 }
