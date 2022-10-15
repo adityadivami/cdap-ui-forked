@@ -29,11 +29,12 @@ export default function(props) {
     headerActionTemplate,
     children,
     closeClickHandler,
+    anchor,
     showBackIcon,
   } = props;
 
   return (
-    <Drawer classes={{ paper: classes.paper }} anchor="right" open={openDrawer}>
+    <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>

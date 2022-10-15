@@ -41,7 +41,12 @@ import GridTextCell from './components/GridTextCell';
 import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
-import { convertNonNullPercent } from './utils';
+import {
+  calculateDistinctValues,
+  characterCount,
+  checkAlphaNumericAndSpaces,
+  convertNonNullPercent,
+} from './utils';
 import FooterPanel from 'components/FooterPanel';
 import RecipeSteps from 'components/RecipeSteps';
 import AddTransformation from 'components/AddTransformation';
@@ -63,6 +68,23 @@ export default function() {
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
+  const [insightDrawer, setInsightDrawer] = useState({
+    open: false,
+    columnName: '',
+    distinctValues: 0,
+    characterCount: {
+      min: 0,
+      max: 0,
+    },
+    dataQuality: {
+      missingNullValueCount: 0,
+      missingNullValuePercentage: 0,
+      invalidValueCount: 0,
+      invalidValuePercentage: 0,
+    },
+    dataQualityBar: {},
+    dataTypeString: '',
+  });
   const [dataQuality, setDataQuality] = useState({});
   const [optionSelected, setOptionSelected] = useState(null);
   const { dataprep } = DataPrepStore.getState();
@@ -347,6 +369,28 @@ export default function() {
       progressValues.push({ value: nonNull, key: title });
     }
     setProgress(progressValues);
+  };
+
+  const onColumnSelection = (columnName) => {
+    const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
+    const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
+    const getMissingValueCount =
+      convertNonNullPercent(gridData, gridData?.summary?.statistics[columnName].general) || 0;
+    const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
+    setInsightDrawer({
+      open: true,
+      columnName,
+      distinctValues: getDistinctValue,
+      characterCount: getCharacterCountOfCell,
+      dataQuality: {
+        missingNullValueCount: getMissingValueCount,
+        missingNullValuePercentage: (getMissingValueCount / rowsDataList.length) * 100,
+        invalidValueCount: 0,
+        invalidValuePercentage: 0,
+      },
+      dataQualityBar: gridData?.summary?.statistics[columnName],
+      dataTypeString: getDataTypeString,
+    });
   };
 
   useEffect(() => {
