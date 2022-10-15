@@ -47,7 +47,11 @@ export default function({
           {' '}
           {T.translate('features.WranglerNewFooterPanel.directives')}{' '}
         </p>
-        <Box className={classes.recipeCont} onClick={showRecipePanelHandler}>
+        <Box
+          className={classes.recipeCont}
+          onClick={showRecipePanelHandler}
+          data-testid="footer-panel-box-click"
+        >
           <p> {T.translate('features.WranglerNewFooterPanel.recipeSteps')}</p>
           <p className={classes.spanElement1}>{recipeStepsCount}</p>
         </Box>
