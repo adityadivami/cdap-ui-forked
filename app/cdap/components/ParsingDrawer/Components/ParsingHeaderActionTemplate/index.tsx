@@ -28,6 +28,7 @@ const ParsingHeaderActionTemplate = (props) => {
   return (
     <Box>
       <input
+        data-testId="fileinput"
         id="file"
         type="file"
         accept=".json"

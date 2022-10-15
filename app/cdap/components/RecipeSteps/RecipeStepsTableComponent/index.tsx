@@ -59,7 +59,7 @@ export default function(props) {
                 {index + 1 > 10 ? index + 1 : `0${index + 1}`}
               </TableCell>
               <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
-                <span>{eachStep}</span>
+                <span data-testid={'recipe-steps-span' + index}>{eachStep}</span>
                 {/* <span className={classes.recipeStepsActionTypeStyles}>{eachStep.actionType}</span>
                 &nbsp;
                 {eachStep.description} */}
@@ -72,6 +72,7 @@ export default function(props) {
                   onClick={() => handleDelete(eachStep, index)}
                   src="/cdap_assets/img/delete.svg"
                   alt="delete"
+                  data-testid={'recipe-steps-table-component-image-click' + index}
                 />
               </TableCell>
             </TableRow>

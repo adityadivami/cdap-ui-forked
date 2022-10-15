@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { MenuItem } from '@material-ui/core';
 import React from 'react';
 import { menuArrowIcon } from '../AaToolbar/images';
@@ -49,6 +50,7 @@ const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({
         }
         title={item.value}
         onClick={(e) => onMenuClick(e, item)}
+        data-testid={`menu-item-component-${index}`}
       >
         <span>{item.label} </span>
         {item.options?.length && menuArrowIcon}
