@@ -63,3 +63,8 @@ export const otherIcon = (
     />
   </svg>
 );
+export const DividerIcon = (
+  <svg width="2" height="21" viewBox="0 0 2 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1 0.501953V20.502" stroke="#DADCE0" stroke-linecap="round" />
+  </svg>
+);

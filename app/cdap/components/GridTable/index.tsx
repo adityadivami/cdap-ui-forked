@@ -269,6 +269,7 @@ export default function() {
     } else {
       if (
         multipleColumnSelected.filter((el) => el.value === option || el.value === optionSelected)
+          .length
       ) {
         const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
         if (!Boolean(value_1)) {
