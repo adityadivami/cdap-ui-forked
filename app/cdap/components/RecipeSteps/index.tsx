@@ -41,11 +41,11 @@ export default function({ setShowRecipePanel, showRecipePanel, deleteRecipes }) 
 
   const classes = useStyles();
 
-  const { dataprep } = DataPrepStore.getState();
-
   useEffect(() => {
+    const { dataprep } = DataPrepStore.getState();
+
     setRecipeSteps(dataprep.directives);
-  }, [dataprep]);
+  }, []);
 
   const closeClickHandler = () => {
     setShowRecipePanel(false);
