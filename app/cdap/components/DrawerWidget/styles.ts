@@ -20,11 +20,12 @@ export const useStyles = makeStyles(() => {
   return {
     paper: {
       top: '46px',
+      height: 'calc(100vh - 141px)',
     },
     drawerContainerStyles: {
-      width: 500,
+      width: 460,
       height: '100%',
-      padding: '5px 20px 5px 30px',
+      paddingLeft: '30px',
     },
     headerStyles: {
       height: '60px',

@@ -13,7 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
+import React from 'react';
+import { IExecuteAPIResponse } from './types';
+import _ from 'lodash';
 import {
   CONTAIN_LETTER_NUMBER_LEADING_TRAILING_SPACES,
   CONTAIN_LETTER_NUMBER,
@@ -24,15 +26,66 @@ import {
   CONTAIN_NUMBER_ONLY,
 } from './constants';
 
-export const convertNonNullPercent = (gridData, nonNullValue) => {
-  const lengthOfData: number = gridData?.values.length;
+/**
+ *
+ * @description This function takes API response of execute api and object containing detail about null, non-null or
+ * empty values and returns the count of Missing/Null values
+ * @param {IExecuteAPIResponse} gridData This is the execute API Response
+ * @param {nonNullValue} nonNullValue This the extracted object with respect to column from execute API Response
+ * @returns {number} This is the calculated count of missing/null value
+ */
+export const convertNonNullPercent = (
+  gridData: IExecuteAPIResponse | undefined,
+  key,
+  nonNullValue
+) => {
+  const lengthOfData: number = gridData?.values.length || 0;
   let nullValueCount: number = 0;
   if (lengthOfData) {
-    nullValueCount = nonNullValue.null
-      ? (((nonNullValue.null || 0) + (nonNullValue.empty || 0)) / 100) * lengthOfData
-      : 0;
+    nullValueCount =
+      (((nonNullValue?.null || 0) + (nonNullValue?.empty || 0)) / 100) * lengthOfData || 0;
   }
-  return nullValueCount;
+  return nullValueCount.toFixed(0);
+};
+
+/**
+ *
+ * @description This function takes API response of execute api and key(header column key) and finds out which item
+ * in a column appears maximum times, and returns an object containing value and the number of time it is present
+ * @param {IExecuteAPIResponse} gridData This is the execute API Response
+ * @param {string} key This is the name of column header
+ * @returns {name: string, count: number} Return value, object containing name of most frequently occurred value with its count
+ */
+export const checkFrequentlyOccuredValues = (
+  gridData: IExecuteAPIResponse | undefined,
+  key: string
+) => {
+  const valueOfKey = gridData?.values.map((el) => el[key]);
+  let mostFrequentItem: number = 1;
+  let mostFrequentItemCount: number = 0;
+  let mostFrequentItemValue: string = '';
+  const mostFrequentDataItem = {
+    name: '',
+    count: 0,
+  };
+  if (_.isArray(valueOfKey) && valueOfKey?.length) {
+    valueOfKey.forEach((item, index) => {
+      valueOfKey.forEach((value, valueIndex) => {
+        if (item == value) {
+          mostFrequentItemCount++;
+        }
+        if (mostFrequentItem < mostFrequentItemCount) {
+          mostFrequentItem = mostFrequentItemCount;
+          mostFrequentItemValue = item;
+        }
+      });
+      mostFrequentItemCount = 0;
+      mostFrequentItemValue = mostFrequentItemValue == '' ? item : mostFrequentItemValue;
+    });
+  }
+  mostFrequentDataItem.name = mostFrequentItemValue;
+  mostFrequentDataItem.count = mostFrequentItemCount;
+  return mostFrequentDataItem;
 };
 
 export const calculateDistinctValues = (values, columnName) => {
@@ -55,8 +108,8 @@ export const characterCount = (values, columnName) => {
   let maxCount = 0;
   const minElement = arrayOfColumn.reduce((a, b) => {
     if (a || b) {
-      minCount = Math.min(a.length, b.length);
-      if (a.length == minCount) {
+      minCount = Math.min(a?.length, b?.length);
+      if (a?.length == minCount) {
         return a;
       } else {
         return b;
@@ -65,8 +118,8 @@ export const characterCount = (values, columnName) => {
   });
   const maxElement = arrayOfColumn.reduce((a, b) => {
     if (a || b) {
-      maxCount = Math.max(a.length, b.length);
-      if (a.length == maxCount) {
+      maxCount = Math.max(a?.length, b?.length);
+      if (a?.length == maxCount) {
         return a;
       } else {
         return b;

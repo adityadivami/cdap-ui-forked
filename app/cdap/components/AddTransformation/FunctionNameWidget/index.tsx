@@ -13,10 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 import React from 'react';
-import { useStyles } from '../styles';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import T from 'i18n-react';
+import { useStyles } from '../styles';
 
 export default function(props) {
   const { functionName } = props;
@@ -36,6 +36,10 @@ export default function(props) {
       </div>
       <div className={classes.functionInfoSectionStyles}>
         <span className={classes.functionTextStyles}>{functionName}</span>
+        <span>
+          <InfoOutlinedIcon className={classes.infoIcon} />
+        </span>
+
         {/* Below commented code will re-direct the use to CDAP documnentation */}
         {/* <img className={classes.infoIconTextStyles} src="/cdap_assets/img/info.svg" alt="info" /> */}
       </div>

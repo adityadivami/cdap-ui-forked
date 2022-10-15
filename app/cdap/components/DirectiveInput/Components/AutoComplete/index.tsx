@@ -30,7 +30,7 @@ import { useStyles } from './styles';
 import { Box, Divider, Typography } from '@material-ui/core';
 import { query } from 'express';
 
-const DataPrepAutoComplete = (props) => {
+const DataPrepAutoComplete = ({ setDirectivesList, ...props }) => {
   const [activeResults, setActiveResults] = useState([]);
   const [input, setInput] = useState('');
   const [matched, setMatched] = useState(false);
@@ -44,28 +44,43 @@ const DataPrepAutoComplete = (props) => {
       MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
         const fuseOptions = {
           includeScore: true,
-          // includeMatches: true,
+          includeMatches: true,
           caseSensitive: false,
           threshold: 0,
-          shouldSort: true,
           location: 0,
+          shouldSort: true,
           distance: 100,
           minMatchCharLength: 1,
           maxPatternLength: 32,
           keys: ['directive'],
         };
+        console.log(res.values);
+        setDirectivesList(res.values);
         setFuse(new Fuse(res.values, fuseOptions));
       });
     } else {
-      setFuse(new Fuse(props.columnNamesList));
+      const fuseOptions = {
+        includeScore: true,
+        includeMatches: true,
+        caseSensitive: false,
+        threshold: 0,
+        shouldSort: true,
+        location: 0,
+        distance: 100,
+        minMatchCharLength: 1,
+        maxPatternLength: 32,
+        keys: ['label'],
+      };
+      setFuse(new Fuse(props.columnNamesList, fuseOptions));
     }
   };
-  eventEmitter.on(globalEvents.DIRECTIVEUPLOAD, getUsage);
-  useEffect(() => {
-    getUsage();
-  }, []);
 
   useEffect(() => {
+    getUsage();
+  }, [props.isDirectiveSelected]);
+
+  useEffect(() => {
+    eventEmitter.on(globalEvents.DIRECTIVEUPLOAD, getUsage);
     const directiveInput = document.getElementById('directive-input-search');
     const mousetrap = new Mousetrap(directiveInput);
     mousetrap.bind('esc', props.toggle);
@@ -73,6 +88,16 @@ const DataPrepAutoComplete = (props) => {
     mousetrap.bind('down', handleDownArrow);
     mousetrap.bind('enter', handleEnterKey);
     mousetrap.bind('tab', handleTabKey);
+
+    // returned function will be called on component unmount
+    return () => {
+      mousetrap.unbind('esc');
+      mousetrap.unbind('up');
+      mousetrap.unbind('down');
+      mousetrap.unbind('enter');
+      mousetrap.unbind('tab');
+      eventEmitter.off(globalEvents.DIRECTIVEUPLOAD, getUsage);
+    };
   });
   const handleUpArrow = (e) => {
     if (e.preventDefault) {
@@ -97,12 +122,11 @@ const DataPrepAutoComplete = (props) => {
     }
     setActiveSelectionIndex(activeSelectionIndex + 1);
   };
-
+  console.log('activeSelectionIndex', activeSelectionIndex);
   const handleEnterKey = () => {
     if (input.length === 0) {
       return;
     }
-
     const selectedDirective = activeResults[activeSelectionIndex];
     if (selectedDirective) {
       handleRowClick(activeResults[activeSelectionIndex]);
@@ -133,7 +157,7 @@ const DataPrepAutoComplete = (props) => {
     ) {
       const fuseOptions = {
         includeScore: true,
-        // includeMatches: true,
+        includeMatches: true,
         caseSensitive: false,
         threshold: 0,
         shouldSort: true,
@@ -205,9 +229,9 @@ const DataPrepAutoComplete = (props) => {
     } else {
       const splitData = input.split(/(?=[:])|(?<=[:])/g);
       eventObject = {
-        target: { value: `${splitData[0]} ${splitData[1]}${row.item.label}` },
+        target: { value: `${splitData[0]}${splitData[1]}${row.item.label}` },
       };
-      setInput(`${splitData[0]} ${splitData[1]}${row.item.label}`);
+      setInput(`${splitData[0]}${splitData[1]}${row.item.label}`);
       props.onRowClick(eventObject);
       props.onColumnSelected(true);
     }

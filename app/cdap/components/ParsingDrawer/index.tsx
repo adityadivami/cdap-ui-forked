@@ -13,23 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import React, { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
 import { Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
 import DataPrepStore from 'components/DataPrep/store';
 import DrawerWidget from 'components/DrawerWidget';
 import PositionedSnackbar from 'components/SnackbarComponent/index';
+import React, { ChangeEvent, MouseEvent, useContext, useEffect, useState } from 'react';
 import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import ParsingPopupBody from './Components/ParsingPopupBody';
+import { PARSING_INFO_TEXT } from './constants';
 import { useStyles } from './styles';
 import T from 'i18n-react';
 
-export default function(props) {
+const ParsingDrawer = (props) => {
   const { setLoading } = props;
-
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [formatValue, setFormatValue] = useState('');
   const [encodingValue, setEncodingValue] = useState('');
@@ -69,7 +69,7 @@ export default function(props) {
           fileEncoding: encodingValue,
           skipHeader: headerValueChecked,
           enableQuotedValues: quotedValuesChecked,
-          schema: schemaValue !== null ? JSON.stringify(schemaValue) : null,
+          schema: schemaValue != null ? JSON.stringify(schemaValue) : null,
           _pluginName: null,
         },
         limit: 1000,
@@ -92,11 +92,11 @@ export default function(props) {
     setEncodingValue(value);
   };
 
-  const handleQuoteValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleQuoteValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuotedValuesChecked(event.target.checked);
   };
 
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setHeaderValueChecked(event.target.checked);
   };
 
@@ -172,7 +172,7 @@ export default function(props) {
 
         <Box className={classes.bottomSectionStyles}>
           <Box className={classes.infoWrapperStyles}>
-            <ErrorOutlineIcon />
+            <InfoOutlinedIcon />
             <span className={classes.infoTextStyles}>
               {T.translate('features.WranglerNewParsingDrawer.parsingInfoText')}
             </span>
@@ -199,4 +199,6 @@ export default function(props) {
   );
 
   return drawerStatus && componentToRender;
-}
+};
+
+export default ParsingDrawer;

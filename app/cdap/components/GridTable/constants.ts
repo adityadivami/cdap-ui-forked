@@ -14,6 +14,7 @@
  * the License.
  */
 
+export const MISSING_NULL = 'Missing/Null';
 export const CONTAIN_LETTER_NUMBER_LEADING_TRAILING_SPACES =
   'Contains letters, numbers, leading and trailing spaces';
 export const CONTAIN_LETTER_NUMBER = 'Contains Letter and Number';

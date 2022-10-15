@@ -32,9 +32,13 @@ export const useStyles = makeStyles({
   },
   tabHeaders: {
     backgroundColor: blue[50],
+    width: 299,
     '& .MuiTypography-root': {
+      width: 209,
       fontSize: '16px',
       color: '#000000',
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
     },
   },
   styleForLevelZero: {
@@ -66,13 +70,17 @@ export const useStyles = makeStyles({
     backgroundColor: '#fff',
     alignItems: 'center',
     height: '50px',
-    borderRight: '1px dashed #DADCE0',
     paddingRight: '20px',
     paddingLeft: '18px',
     textDecoration: 'none',
   },
   hideComponent: {
     display: 'none',
+  },
+  closeIcon: {
+    '& :hover': {
+      cursor: 'pointer',
+    },
   },
   closeIcon: {
     '& :hover': {

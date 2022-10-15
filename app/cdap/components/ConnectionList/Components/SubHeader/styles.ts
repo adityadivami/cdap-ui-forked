@@ -68,8 +68,8 @@ export const useStyles = makeStyles({
     alignItems: 'flex-end',
     fontSize: '14px',
   },
-  breadcrumbTyporgraphy: {
-    color: grey[900],
+  breadCrumbTyporgraphy: {
+    color: '#212121',
     fontSize: '14px',
     lineHeight: '21px',
   },

@@ -35,7 +35,6 @@ import FooterPanel from 'components/FooterPanel';
 import ParsingDrawer from 'components/ParsingDrawer';
 import RecipeSteps from 'components/RecipeSteps';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import PositionedSnackbar from 'components/SnackbarComponent';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
@@ -50,13 +49,14 @@ import NoDataScreen from './components/NoRecordScreen';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
+import { IExecuteAPIResponse, IHeaderNamesList, IParams, IRecords, IObject } from './types';
+import PositionedSnackbar from 'components/SnackbarComponent';
 import {
   calculateDistinctValues,
-  calculateDistributionGraphData,
   characterCount,
-  checkAlphaNumericAndSpaces,
   convertNonNullPercent,
+  checkAlphaNumericAndSpaces,
+  calculateDistributionGraphData,
 } from './utils';
 
 export default function() {
@@ -71,7 +71,6 @@ export default function() {
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
-  const [openDirective, setOpenDirective] = useState(false);
   const [insightDrawer, setInsightDrawer] = useState({
     open: false,
     columnName: '',
@@ -94,6 +93,11 @@ export default function() {
   const [optionSelected, setOptionSelected] = useState(null);
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
+  const [openDirective, setOpenDirective] = useState(false);
+  const [toast, setToast] = useState({
+    open: false,
+    message: '',
+  });
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -113,6 +117,7 @@ export default function() {
     message: '',
     isSuccess: false,
   });
+  const [toastAction, setToastAction] = useState('');
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -124,7 +129,6 @@ export default function() {
     workspaceId: string,
     selectedDirective?: string[] | undefined
   ) => {
-    console.log('selectedDirective', selectedDirective);
     let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -224,7 +228,7 @@ export default function() {
     setDirectiveFunctionSupportedDataType(supported_dataType);
     if (OPTION_WITH_NO_INPUT.includes(option)) {
       const newDirective = getDirective(option, columnSelected);
-      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+      if (!Boolean(columnSelected)) {
         setDirectiveFunction(option);
         setLoading(false);
         return;
@@ -289,7 +293,6 @@ export default function() {
             ...gridParams,
           },
         });
-        setOpenDirective(false);
         setLoading(false);
         setGridData(response);
         setDirectiveFunction('');
@@ -303,6 +306,11 @@ export default function() {
               : `${newDirective} successfully deleted`,
           isSuccess: true,
         });
+        if (action === 'add') {
+          setToastAction('add');
+        } else if (action === 'delete') {
+          setToastAction('delete');
+        }
       },
       (err) => {
         setToaster({
@@ -345,8 +353,8 @@ export default function() {
       const typeArrayOfMissingValue = [];
       headerKeyTypeArray.forEach(([vKey, vValue]) => {
         typeArrayOfMissingValue.push({
-          label: vKey == 'general' ? 'Missing/Null' : '',
-          count: vKey == 'types' ? '' : convertNonNullPercent(gridData, vValue),
+          label: vKey == 'general' ? 'Missing/Null' : vKey == 'types' ? '' : '',
+          count: vKey == 'types' ? '' : convertNonNullPercent(gridData, key, vValue),
         });
       }),
         metricArray.push({
@@ -389,7 +397,11 @@ export default function() {
     const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
     const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
     const getMissingValueCount =
-      convertNonNullPercent(gridData, gridData?.summary?.statistics[columnName].general) || 0;
+      convertNonNullPercent(
+        gridData,
+        columnName,
+        gridData?.summary?.statistics[columnName].general
+      ) || 0;
     const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
     setInsightDrawer({
       open: true,
@@ -397,8 +409,8 @@ export default function() {
       distinctValues: getDistinctValue,
       characterCount: getCharacterCountOfCell,
       dataQuality: {
-        missingNullValueCount: getMissingValueCount,
-        missingNullValuePercentage: (getMissingValueCount / rowsDataList.length) * 100,
+        missingNullValueCount: Number(getMissingValueCount),
+        missingNullValuePercentage: (Number(getMissingValueCount) / rowsDataList.length) * 100,
         invalidValueCount: 0,
         invalidValuePercentage: 0,
       },
@@ -424,6 +436,28 @@ export default function() {
   // Redux store
   const { data, headers, types, directives } = dataprep;
 
+  const handleCloseSnackbar = () => {
+    const stepsArr = JSON.parse(JSON.stringify(directives));
+    if (toastAction === 'add') {
+      setToaster({
+        open: false,
+        message: '',
+        isSuccess: false,
+      });
+      applyDirectiveAPICall(stepsArr.splice(0, stepsArr.length - 1), 'delete');
+    }
+  };
+
+  const handleDefaultCloseSnackbar = () => {
+    setToaster({
+      open: false,
+      message: '',
+      isSuccess: false,
+    });
+  };
+
+  console.log('triggered', dataprep, isFirstWrangle, connectorType);
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
@@ -431,12 +465,6 @@ export default function() {
         columnType={columnType}
         submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
       />
-      {isFirstWrangle && connectorType === 'File' && (
-        <ParsingDrawer
-          updateDataTranformation={(wid) => updateDataTranformation(wid)}
-          setLoading={setLoading}
-        />
-      )}
       {insightDrawer.open && (
         <ColumnInsightDrawer
           columnData={insightDrawer}
@@ -457,6 +485,12 @@ export default function() {
               dataDistributionGraphData: [],
             })
           }
+        />
+      )}
+      {dataprep.insights.name && isFirstWrangle && connectorType === 'File' && (
+        <ParsingDrawer
+          updateDataTranformation={(wid) => updateDataTranformation(wid)}
+          setLoading={setLoading}
         />
       )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
@@ -501,7 +535,7 @@ export default function() {
                     key={eachHeader}
                     columnSelected={columnSelected}
                     setColumnSelected={handleColumnSelect}
-                    onColumnSelection={onColumnSelection}
+                    onColumnSelection={(column) => onColumnSelection(column)}
                   />
                 ))}
               </TableRow>
@@ -562,15 +596,11 @@ export default function() {
       />
       {toaster.open && (
         <PositionedSnackbar
-          handleCloseError={() =>
-            setToaster({
-              open: false,
-              message: '',
-              isSuccess: false,
-            })
-          }
+          handleDefaultCloseSnackbar={handleDefaultCloseSnackbar}
+          handleCloseError={handleCloseSnackbar}
           messageToDisplay={toaster.message}
           isSuccess={toaster.isSuccess}
+          actionType={toastAction}
         />
       )}
       {loading && (
@@ -584,7 +614,6 @@ export default function() {
           open={openDirective}
           columnNamesList={headersNamesList}
           onDirectiveInputHandler={(directives) => {
-            console.log('directives in handle', directives);
             const payload = {
               context: params.namespace,
               workspaceId: params.wid,

@@ -20,7 +20,11 @@ import classnames from 'classnames';
 import { useStyles } from '../../styles';
 import { Box, Divider, Typography } from '@material-ui/core';
 import { uploadSVG, infoIcon, deleteSVG } from 'components/ImportDataset/iconStore';
-import { DRAG_AND_DROP_TEXT, MAX_SIZE_TEXT } from 'components/ImportDataset/constants';
+import {
+  DRAG_AND_DROP_TEXT_LINE_1,
+  DRAG_AND_DROP_TEXT_LINE_2,
+  MAX_SIZE_TEXT,
+} from 'components/ImportDataset/constants';
 
 export default function FileDnD({ file, onDropHandler }) {
   const classes = useStyles();
@@ -49,7 +53,9 @@ export default function FileDnD({ file, onDropHandler }) {
             <div className={classes.uploadBox}>
               {uploadSVG()}
               <Typography variant="body1" className={classes.dropText}>
-                {DRAG_AND_DROP_TEXT}
+                {DRAG_AND_DROP_TEXT_LINE_1}
+                <br />
+                {DRAG_AND_DROP_TEXT_LINE_2}
               </Typography>
             </div>
           </div>
@@ -61,7 +67,9 @@ export default function FileDnD({ file, onDropHandler }) {
         <Box>
           <Box className={classes.FlexFile}>
             <Typography className={classes.fileNameText}>{file.name}</Typography>
-            <Box onClick={handleRemoveFile}>{deleteSVG()}</Box>
+            <Box className={classes.delete_cursor_pointer} onClick={handleRemoveFile}>
+              {deleteSVG()}
+            </Box>
           </Box>
           <Divider />
         </Box>

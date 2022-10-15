@@ -14,6 +14,7 @@
  * the License.
  */
 import { makeStyles } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 
 export const useCss = makeStyles({
   containerProps: {
@@ -98,13 +99,11 @@ export const useCss = makeStyles({
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
   },
   recipeCont: {
-    '&:hover': {
-      backgroundColor: 'red',
-    },
+    padding: '10px 32px',
+    cursor: 'pointer',
     textAlign: 'center',
-    padding: '9.5px 32px',
     gap: '8px',
-    width: '10%',
+    width: '184px',
     height: '40px',
     background:
       'linear-gradient(180deg, rgba(70, 129, 244, 0) 0.85%, rgba(70, 129, 244, 0.2) 118.78%)',
@@ -112,9 +111,10 @@ export const useCss = makeStyles({
     display: 'flex',
   },
   spanElement1: {
-    backgroundColor: '#5F6368',
+    backgroundColor: grey[600],
     height: '21px',
     width: '20px',
     color: '#FFFFFF',
+    borderRadius: '4px',
   },
 });

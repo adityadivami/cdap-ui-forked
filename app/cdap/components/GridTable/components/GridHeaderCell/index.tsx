@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Card, styled, TableCell, Typography } from '@material-ui/core';
 import TypographyComponent from '../Typography';
 import { useGridHeaderCellStyles } from './styles';
@@ -34,12 +34,25 @@ export default function GridHeaderCell({
 }: IGridHeaderCellProps) {
   const classes = useGridHeaderCellStyles();
   const isColumnHighlited = label === columnSelected;
+  const [data, setData] = useState<Record<string, string>>({
+    datatype1: type?.length > 0 ? type[0] : 'Unknown',
+    datatype2: type?.length > 1 ? type[1] : null,
+  });
+
+  useEffect(() => {
+    setData({
+      datatype1: type?.length > 0 ? type[0] : 'Unknown',
+      datatype2: type?.length > 1 ? type[1] : null,
+    });
+  }, [label, type]);
 
   return (
     <TableCell
       className={classes.tableHeaderCell}
-      onClick={() => setColumnSelected(label)}
-      onDoubleClick={() => onColumnSelection(label)}
+      onClick={() => {
+        setColumnSelected(label);
+        onColumnSelection(label);
+      }}
       data-testid={'grid-header-cell-table-cell' + label}
     >
       <div

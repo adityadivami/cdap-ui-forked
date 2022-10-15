@@ -35,12 +35,12 @@ export default function SubHeader(props) {
 
   return (
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
-      <Box className={classes.box}>
+      <Box className={classes.box} className={classes.box}>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
             Home
           </Link>
-          <Typography className={classes.breadcrumbTyporgraphy}>Data Sources</Typography>
+          <Typography className={classes.breadCrumbTyporgraphy}>Data Sources</Typography>
         </Breadcrumbs>
       </Box>
 
@@ -48,7 +48,7 @@ export default function SubHeader(props) {
         <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>
           <Box onClick={handleAddConnection} className={classes.importData}>
             <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
-            <Box className={classes.breadcrumbTyporgraphy}>Add connection</Box>
+            <Box className={classes.breadCrumbTyporgraphy}>Add connection</Box>
           </Box>
         </Link>
         <Box className={classes.importData} onClick={() => setOpenImportDataPanel(true)}>

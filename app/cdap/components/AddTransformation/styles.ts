@@ -15,7 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/styles';
-
+import { blue } from '@material-ui/core/colors';
 export const useStyles = makeStyles(() => {
   return {
     addTransformationBodyStyles: {
@@ -61,6 +61,7 @@ export const useStyles = makeStyles(() => {
     functionInfoSectionStyles: {
       display: 'flex',
       alignItems: 'center',
+      gap: '8px',
     },
     functionTextStyles: {
       fontFamily: 'Noto Sans',
@@ -155,6 +156,7 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#5F6368',
       padding: '15px 10px',
+      height: 70,
     },
     domm: {
       width: '100%',
@@ -254,8 +256,17 @@ export const useStyles = makeStyles(() => {
       paddingLeft: 45,
     },
     barStyles: {
-      paddingLeft: 140,
-      paddingRight: 130,
+      paddingRight: 110,
+      height: 70,
+    },
+    divStyles: {
+      width: 200,
+    },
+
+    infoIcon: {
+      color: blue[500],
+      fontSize: '20px',
+      cursor: 'pointer',
     },
     noRecordWrapper: {
       height: '100%',

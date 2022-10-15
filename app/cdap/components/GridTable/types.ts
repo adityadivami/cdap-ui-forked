@@ -48,3 +48,11 @@ export interface IHeaderNamesList {
 export interface IObject {
   [key: string]: string | number | IRecords;
 }
+
+export interface IDataTypeOfColumns {
+  [key: string]: string;
+}
+
+export interface IDataOfStatistics {
+  [key: string]: string;
+}

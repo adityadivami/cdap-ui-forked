@@ -54,6 +54,7 @@ export default function ConnectionList() {
   const { connectorType } = useParams() as IRecords;
 
   const refs = useRef([]);
+  const headersRefs = useRef([]);
   const classes = useStyles();
   const loc = useLocation();
   const queryParams = new URLSearchParams(loc.search);
@@ -296,7 +297,29 @@ export default function ConnectionList() {
                         : classes.beforeSearchIconClickDisplay
                     }
                   >
-                    <Typography variant="body2">{filteredData[index - 1].selectedTab}</Typography>
+                    {headersRefs.current[index]?.offsetWidth <
+                    headersRefs.current[index]?.scrollWidth ? (
+                      <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+                        <Typography
+                          variant="body2"
+                          ref={(element) => {
+                            headersRefs.current[index] = element;
+                          }}
+                        >
+                          {filteredData[index - 1].selectedTab}
+                        </Typography>
+                      </CustomTooltip>
+                    ) : (
+                      <Typography
+                        variant="body2"
+                        ref={(element) => {
+                          headersRefs.current[index] = element;
+                        }}
+                      >
+                        {filteredData[index - 1].selectedTab}
+                      </Typography>
+                    )}
+
                     <Box
                       onClick={() => {
                         searchHandler(index);

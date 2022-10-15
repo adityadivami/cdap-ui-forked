@@ -52,13 +52,14 @@ export default function(props) {
   const [focused, setFocused] = useState(false);
   const classes = useStyles();
   const ref = useRef(null);
-  const no_match = !directiveFunctionSupportedDataType.includes('all')
-    ? columns.filter((object1) => {
+  const no_match = directiveFunctionSupportedDataType.includes('all')
+    ? ['all']
+    : columns.filter((object1) => {
         return directiveFunctionSupportedDataType.some((object2) => {
-          return object2.includes(object1.type[0].toLowerCase());
+          return object2.includes(object1.type[0]?.toLowerCase());
         });
-      })
-    : [];
+      });
+
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
@@ -195,7 +196,7 @@ export default function(props) {
                     </TableRow>
                   );
                 } else if (
-                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0].toLowerCase())
+                  directiveFunctionSupportedDataType.includes(eachColumn?.type[0]?.toLowerCase())
                 ) {
                   return (
                     <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>

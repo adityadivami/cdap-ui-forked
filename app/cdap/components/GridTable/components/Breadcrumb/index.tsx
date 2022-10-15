@@ -14,13 +14,14 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Box, IconButton, Typography, Button } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useStyles } from './styles';
 import React from 'react';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
+import { icon, icon1, otherIcon } from './images';
 import {
   MATCH_SOURCE,
   HOME_URL_PARAM,
@@ -56,6 +57,12 @@ const BreadCrumb = ({ datasetName, location }) => {
           </Link>
         )}
         <Typography color="textPrimary">{datasetName}</Typography>
+      </Breadcrumbs>
+      <Breadcrumbs separator=" ">
+        <IconButton>{icon}</IconButton>
+        <IconButton>{icon1}</IconButton>
+        <IconButton>{otherIcon}</IconButton>
+        <Button className={`${classes.Button} ${classes.pipelineStyles}`}>Create a Pipeline</Button>
       </Breadcrumbs>
     </Box>
   );
