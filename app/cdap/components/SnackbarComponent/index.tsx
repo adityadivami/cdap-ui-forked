@@ -36,10 +36,14 @@ const PositionedSnackbar = ({
 
   useEffect(() => {
     handleClick();
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsOpen(false);
       handleDefaultCloseSnackbar();
     }, 5000);
+    return () => {
+      setIsOpen(true);
+      clearTimeout(timer);
+    };
   }, []);
 
   const handleClick = () => {
@@ -58,8 +62,9 @@ const PositionedSnackbar = ({
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
       open={isOpen}
+      classes={{ anchorOriginTopLeft: classes.MUIanchor, root: classes.MUIRoot }}
       TransitionComponent={() => (
         <TransitionComponent
           close={() => handleClose()}

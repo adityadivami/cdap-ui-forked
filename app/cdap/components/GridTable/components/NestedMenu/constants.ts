@@ -559,6 +559,7 @@ export const MENU_OPTIONS = [
       { value: 'using-delimiters', label: 'Using Delimiters', supported_dataType: ['all'] },
       { value: 'using-positions', label: 'Using Positions', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
   {
     value: 'explode',
@@ -568,6 +569,7 @@ export const MENU_OPTIONS = [
       { value: 'array-flattening', label: 'Array By Flattening', supported_dataType: ['all'] },
       { value: 'record-flattening', label: 'Record By Flattening', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
   {
     value: 'define-variable',
@@ -741,6 +743,7 @@ export const FRAGMENT_OPTIONS = [
       { value: 'using-delimiters', label: 'Using Delimiters', supported_dataType: ['all'] },
       { value: 'using-positions', label: 'Using Positions', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
   {
     value: 'explode',
@@ -750,6 +753,7 @@ export const FRAGMENT_OPTIONS = [
       { value: 'array-flattening', label: 'Array By Flattening', supported_dataType: ['all'] },
       { value: 'record-flattening', label: 'Record By Flattening', supported_dataType: ['all'] },
     ],
+    supported_dataType: ['all'],
   },
 ];
 
