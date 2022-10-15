@@ -14,16 +14,16 @@
  * the License.
  */
 
-import React from 'react';
-import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { Divider } from '@material-ui/core';
+import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
+import React from 'react';
 import { useStyles } from './styles';
 
 export default function TransitionComponent(props) {
   const classes = useStyles();
   return (
-    <div data-testid = "transition-component-parent">
-      <div className={classes.headFlex} >
+    <div data-testid="transition-component-parent">
+      <div className={classes.headFlex}>
         <h5 className={classes.errorHead}>
           <WarningRoundedIcon className={classes.warningIcon} />
           &nbsp;Error
@@ -33,7 +33,7 @@ export default function TransitionComponent(props) {
           tabIndex={0}
           className={classes.dismissSpan}
           onClick={() => props.close()}
-          data-testid = "snackbar-close-button"
+          data-testid="snackbar-close-button"
         >
           Dismiss
         </span>

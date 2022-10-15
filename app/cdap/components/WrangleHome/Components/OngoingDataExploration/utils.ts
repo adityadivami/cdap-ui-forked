@@ -17,40 +17,45 @@
 import { ImportDatasetIcon } from '../WrangleCard/iconStore/ImportDatasetIcon';
 import { IMassagedObject } from './types';
 
-export const generateDataForExplorationCard = (oldData) => {
+export const generateDataForExplorationCard = (oldData, cardCount) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
   const massagedArray = [];
 
   if (oldData && Array.isArray(oldData) && oldData.length) {
-    oldData.forEach((eachItem) => {
-      const childArray = [];
+    oldData
+      .filter((eachItem) => eachItem.count !== 0)
+      .filter((eachItem, itemIndex) => (cardCount && itemIndex < cardCount) || !cardCount)
+      .forEach((eachItem) => {
+        const childArray = [];
 
-      Object.keys(eachItem).map((keys) => {
-        const obj = {} as IMassagedObject;
+        Object.keys(eachItem).map((keys) => {
+          const obj = {} as IMassagedObject;
 
-        if (keys === 'connectionName') {
-          obj.icon = ImportDatasetIcon;
-          obj.label = eachItem[keys];
-          obj.type = 'iconWithText';
-        } else if (keys === 'workspaceName') {
-          obj.label = eachItem[keys];
-          obj.type = 'text';
-        } else if (keys === 'recipeSteps') {
-          obj.label = `${eachItem[keys]} Recipe steps`;
-          obj.type = 'text';
-        } else if (keys === 'dataQuality') {
-          obj.label = parseInt(eachItem[keys]);
-          obj.percentageSymbol = '%';
-          obj.subText = 'Data Quality';
-          obj.type = 'percentageWithText';
-        } else if (keys === 'workspaceId') {
-          obj.workspaceId = eachItem[keys];
-        }
-        childArray.push(obj);
+          if (keys === 'connectionName') {
+            obj.icon = ImportDatasetIcon;
+            obj.label = eachItem[keys];
+            obj.type = 'iconWithText';
+          } else if (keys === 'workspaceName') {
+            obj.label = eachItem[keys];
+            obj.type = 'text';
+          } else if (keys === 'recipeSteps') {
+            obj.label = `${eachItem[keys]} Recipe steps`;
+            obj.type = 'text';
+          } else if (keys === 'dataQuality') {
+            obj.label = parseInt(eachItem[keys]);
+            obj.percentageSymbol = '%';
+            obj.subText = 'Null values';
+            obj.type = 'percentageWithText';
+          } else if (keys === 'workspaceId') {
+            obj.workspaceId = eachItem[keys];
+          } else if (keys === 'count') {
+            obj.count = eachItem[keys];
+          }
+          childArray.push(obj);
+        });
+
+        massagedArray.push(childArray);
       });
-
-      massagedArray.push(childArray);
-    });
   }
   return massagedArray;
 };
