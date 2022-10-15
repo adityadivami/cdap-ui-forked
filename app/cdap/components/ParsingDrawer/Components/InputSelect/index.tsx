@@ -29,9 +29,9 @@ const InputSelect = (props) => {
           horizontal: 'left',
         },
         getContentAnchorEl: null,
-        classes: {
-          paper: anchorClass.MUIPopover,
-        },
+        // classes: {
+        //   paper: anchorClass.MUIPopover,
+        // },
       }}
     >
       {options.map((option, index) => {

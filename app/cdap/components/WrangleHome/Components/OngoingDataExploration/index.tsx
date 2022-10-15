@@ -21,7 +21,7 @@ import MyDataPrepApi from 'api/dataprep';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationCard from '../OngoingDataExplorationCard';
-import { switchMap } from 'rxjs/operators';
+import { count, switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
 import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
@@ -46,17 +46,12 @@ export default function OngoingDataExploration({ cardCount, fromAddress }: ICard
       .pipe(
         switchMap((res: Record<string, unknown[]>) => {
           let values = [];
-          if (cardCount) {
-            values = res.values.slice(0, cardCount);
-          } else {
-            values = res.values;
-          }
+          values = res.values;
           values = orderBy(
             values,
             [(workspace) => (workspace.workspaceName || '').toLowerCase()],
             ['asc']
           );
-          console.log('values', values);
           const workspaces = values.map((item) => {
             const params = {
               context: 'default',
@@ -123,9 +118,14 @@ export default function OngoingDataExploration({ cardCount, fromAddress }: ICard
   useEffect(() => {
     const final = generateDataForExplorationCard(ongoingExpDatas);
     setFinalArray(final);
+    console.log(finalArray);
   }, [ongoingExpDatas]);
 
-  const filteredData = finalArray.filter((eachWorkspace) => eachWorkspace[5].count !== 0);
+  let filteredData = finalArray.filter((eachWorkspace) => eachWorkspace[5].count !== 0);
+
+  if (cardCount) {
+    filteredData = filteredData.slice(0, cardCount);
+  }
 
   return (
     <Box data-testid="ongoing-data-explore-parent">

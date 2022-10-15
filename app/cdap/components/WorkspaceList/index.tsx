@@ -44,7 +44,7 @@ export default function() {
         </Breadcrumbs>
       </Box>
       <Box className={classes.explorationList}>
-        <OngoingDataExploration fromAddress="workspaceList" setLoading={setLoading} />
+        <OngoingDataExploration fromAddress="Workspaces" setLoading={setLoading} />
       </Box>
       {loading && (
         <Box className={classes.loadingContainer}>

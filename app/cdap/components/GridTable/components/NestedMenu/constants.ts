@@ -449,15 +449,15 @@ export const CALCULATE_OPTIONS = [
 ];
 
 export const MENU_OPTIONS = [
-  {
-    value: 'parse',
-    label: 'Parse',
-    options: PARSE_OPTIONS,
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'divider',
-  },
+  // {
+  //   value: 'parse',
+  //   label: 'Parse',
+  //   options: PARSE_OPTIONS,
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'divider',
+  // },
   {
     value: 'changeDatatype',
     label: 'Change data type',
@@ -468,174 +468,226 @@ export const MENU_OPTIONS = [
     value: 'set-character-encoding',
     label: 'Set character encoding',
     options: [
-      { value: 'character-encoding-utf8', label: 'UTF-8', supported_dataType: ['byte'] },
-      { value: 'character-encoding-utf16', label: 'UTF-16', supported_dataType: ['byte'] },
-      { value: 'character-encoding-us-ascii', label: 'US-ASCII', supported_dataType: ['byte'] },
-      { value: 'character-encoding-iso-8859-1', label: 'ISO-8859-1', supported_dataType: ['byte'] },
-      { value: 'character-encoding-utf16-be', label: 'UTF-16BE', supported_dataType: ['byte'] },
-      { value: 'character-encoding-utf16-le', label: 'UTF-16LE', supported_dataType: ['byte'] },
+      {
+        value: 'character-encoding-utf8',
+        label: 'UTF-8',
+        supported_dataType: ['byte'],
+      },
+      {
+        value: 'character-encoding-utf16',
+        label: 'UTF-16',
+        supported_dataType: ['byte'],
+      },
+      {
+        value: 'character-encoding-us-ascii',
+        label: 'US-ASCII',
+        supported_dataType: ['byte'],
+      },
+      {
+        value: 'character-encoding-iso-8859-1',
+        label: 'ISO-8859-1',
+        supported_dataType: ['byte'],
+      },
+      {
+        value: 'character-encoding-utf16-be',
+        label: 'UTF-16BE',
+        supported_dataType: ['byte'],
+      },
+      {
+        value: 'character-encoding-utf16-le',
+        label: 'UTF-16LE',
+        supported_dataType: ['byte'],
+      },
     ],
     supported_dataType: ['byte'],
   },
-  {
-    value: 'divider',
-  },
+  // {
+  //   value: 'divider',
+  // },
   {
     value: 'text',
     label: 'Format',
     options: [
-      { value: 'uppercase', label: 'UPPERCASE', supported_dataType: ['string'] },
-      { value: 'lowercase', label: 'Lowercase', supported_dataType: ['string'] },
-      { value: 'titlecase', label: 'Title Case', supported_dataType: ['string'] },
-      { value: 'concatenate', label: 'Concatenate', supported_dataType: ['string'] },
+      {
+        value: 'uppercase',
+        label: 'UPPERCASE',
+        supported_dataType: ['string'],
+      },
+      {
+        value: 'lowercase',
+        label: 'Lowercase',
+        supported_dataType: ['string'],
+      },
+      {
+        value: 'titlecase',
+        label: 'Title Case',
+        supported_dataType: ['string'],
+      },
+      {
+        value: 'concatenate',
+        label: 'Concatenate',
+        supported_dataType: ['string'],
+      },
       { value: 'trim', label: 'White spaces', supported_dataType: ['string'] },
-      { value: 'ltrim', label: 'Leading white spaces', supported_dataType: ['string'] },
-      { value: 'rtrim', label: 'Trailing White spaces', supported_dataType: ['string'] },
+      {
+        value: 'ltrim',
+        label: 'Leading white spaces',
+        supported_dataType: ['string'],
+      },
+      {
+        value: 'rtrim',
+        label: 'Trailing White spaces',
+        supported_dataType: ['string'],
+      },
       { value: 'dateTime', label: 'Date time', supported_dataType: ['string'] },
-      { value: 'dateTimeAsString', label: 'Date time as string', supported_dataType: ['string'] },
+      {
+        value: 'dateTimeAsString',
+        label: 'Date time as string',
+        supported_dataType: ['string'],
+      },
     ],
     supported_dataType: ['string'],
   },
-  {
-    value: 'calculate',
-    label: 'Calculate',
-    options: CALCULATE_OPTIONS,
-    supported_dataType: NUMBER_TYPES.concat(['string']),
-  },
+  // {
+  //   value: 'calculate',
+  //   label: 'Calculate',
+  //   options: CALCULATE_OPTIONS,
+  //   supported_dataType: NUMBER_TYPES.concat(['string']),
+  // },
   {
     value: 'customTransform',
     label: 'Custom Transform',
     supported_dataType: ['all'],
   },
-  {
-    value: 'divider',
-  },
+  // {
+  //   value: 'divider',
+  // },
   {
     value: 'filter',
     label: 'Filter',
     supported_dataType: ['all'],
   },
-  {
-    value: 'send-to-error',
-    label: 'Send to error',
-    supported_dataType: ['all'],
-  },
+  // {
+  //   value: 'send-to-error',
+  //   label: 'Send to error',
+  //   supported_dataType: ['all'],
+  // },
   {
     value: 'findAndReplace',
     label: 'Find and Replace',
     supported_dataType: ['all'],
   },
-  {
-    value: 'fillNullOrEmpty',
-    label: 'Fill null or empty',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'divider',
-  },
-  {
-    value: 'copyColumn',
-    label: 'Copy column',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'delete',
-    label: 'Delete column',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'keep',
-    label: 'Keep column',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'divider',
-  },
-  {
-    value: 'extract',
-    label: 'Extract',
-    options: [
-      { value: 'using-patterns', label: 'Using Patterns', supported_dataType: ['string'] },
-      { value: 'using-delimiters', label: 'Using Delimiters', supported_dataType: ['all'] },
-      { value: 'using-positions', label: 'Using Positions', supported_dataType: ['all'] },
-    ],
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'explode',
-    label: 'Explode',
-    options: [
-      { value: 'delimited-text', label: 'Delimited Text', supported_dataType: ['all'] },
-      { value: 'array-flattening', label: 'Array By Flattening', supported_dataType: ['all'] },
-      { value: 'record-flattening', label: 'Record By Flattening', supported_dataType: ['all'] },
-    ],
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'define-variable',
-    label: 'Define variable',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'set-counter',
-    label: 'Set counter',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'divider',
-  },
-  {
-    value: 'join-columns',
-    label: 'Join columns',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'swap-columns',
-    label: 'Swap columns',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'divider',
-  },
-  {
-    value: 'mask-data',
-    label: 'Mask Data',
-    options: [
-      { value: 'last-4', label: 'Show last 4 characters only', supported_dataType: ['string'] },
-      { value: 'last-2', label: 'Show last 2 characters only', supported_dataType: ['string'] },
-      { value: 'custom-selection', label: 'Custom Selection', supported_dataType: ['string'] },
-      { value: 'divider' },
-      { value: 'shuffle', label: 'By Shuffling', supported_dataType: ['string'] },
-    ],
-    supported_dataType: ['string'],
-  },
-  {
-    value: 'encode',
-    label: 'Encode',
-    options: [
-      { value: 'encode-base64', label: 'Base64', supported_dataType: ['all'] },
-      { value: 'encode-base32', label: 'Base32', supported_dataType: ['all'] },
-      { value: 'encode-hex', label: 'Hex', supported_dataType: ['all'] },
-      { value: 'encode-url', label: 'URL', supported_dataType: ['all'] },
-    ],
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'decode',
-    label: 'Decode',
-    options: [
-      { value: 'decode-base64', label: 'Base64', supported_dataType: ['all'] },
-      { value: 'decode-base32', label: 'Base32', supported_dataType: ['all'] },
-      { value: 'decode-hex', label: 'Hex', supported_dataType: ['all'] },
-      { value: 'decode-url', label: 'URL', supported_dataType: ['all'] },
-    ],
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'hash',
-    label: 'Hash',
-    supported_dataType: ['string'],
-  },
+  // {
+  //   value: 'fillNullOrEmpty',
+  //   label: 'Fill null or empty',
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'divider',
+  // },
+  // {
+  //   value: 'copyColumn',
+  //   label: 'Copy column',
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'delete',
+  //   label: 'Delete column',
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'keep',
+  //   label: 'Keep column',
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'divider',
+  // },
+  // {
+  //   value: 'extract',
+  //   label: 'Extract',
+  //   options: [
+  //     { value: 'using-patterns', label: 'Using Patterns', supported_dataType: ['string'] },
+  //     { value: 'using-delimiters', label: 'Using Delimiters', supported_dataType: ['all'] },
+  //     { value: 'using-positions', label: 'Using Positions', supported_dataType: ['all'] },
+  //   ],
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'explode',
+  //   label: 'Explode',
+  //   options: [
+  //     { value: 'delimited-text', label: 'Delimited Text', supported_dataType: ['all'] },
+  //     { value: 'array-flattening', label: 'Array By Flattening', supported_dataType: ['all'] },
+  //     { value: 'record-flattening', label: 'Record By Flattening', supported_dataType: ['all'] },
+  //   ],
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'define-variable',
+  //   label: 'Define variable',
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'set-counter',
+  //   label: 'Set counter',
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'divider',
+  // },
+  // {
+  //   value: 'join-columns',
+  //   label: 'Join columns',
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'swap-columns',
+  //   label: 'Swap columns',
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'divider',
+  // },
+  // {
+  //   value: 'mask-data',
+  //   label: 'Mask Data',
+  //   options: [
+  //     { value: 'last-4', label: 'Show last 4 characters only', supported_dataType: ['string'] },
+  //     { value: 'last-2', label: 'Show last 2 characters only', supported_dataType: ['string'] },
+  //     { value: 'custom-selection', label: 'Custom Selection', supported_dataType: ['string'] },
+  //     { value: 'divider' },
+  //     { value: 'shuffle', label: 'By Shuffling', supported_dataType: ['string'] },
+  //   ],
+  //   supported_dataType: ['string'],
+  // },
+  // {
+  //   value: 'encode',
+  //   label: 'Encode',
+  //   options: [
+  //     { value: 'encode-base64', label: 'Base64', supported_dataType: ['all'] },
+  //     { value: 'encode-base32', label: 'Base32', supported_dataType: ['all'] },
+  //     { value: 'encode-hex', label: 'Hex', supported_dataType: ['all'] },
+  //     { value: 'encode-url', label: 'URL', supported_dataType: ['all'] },
+  //   ],
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'decode',
+  //   label: 'Decode',
+  //   options: [
+  //     { value: 'decode-base64', label: 'Base64', supported_dataType: ['all'] },
+  //     { value: 'decode-base32', label: 'Base32', supported_dataType: ['all'] },
+  //     { value: 'decode-hex', label: 'Hex', supported_dataType: ['all'] },
+  //     { value: 'decode-url', label: 'URL', supported_dataType: ['all'] },
+  //   ],
+  //   supported_dataType: ['all'],
+  // },
+  // {
+  //   value: 'hash',
+  //   label: 'Hash',
+  //   supported_dataType: ['string'],
+  // },
 ];
 
 export const NULL_MISSING_OPTIONS = [
@@ -739,9 +791,21 @@ export const FRAGMENT_OPTIONS = [
     value: 'extract',
     label: 'Extract',
     options: [
-      { value: 'using-patterns', label: 'Using Patterns', supported_dataType: ['string'] },
-      { value: 'using-delimiters', label: 'Using Delimiters', supported_dataType: ['all'] },
-      { value: 'using-positions', label: 'Using Positions', supported_dataType: ['all'] },
+      {
+        value: 'using-patterns',
+        label: 'Using Patterns',
+        supported_dataType: ['string'],
+      },
+      {
+        value: 'using-delimiters',
+        label: 'Using Delimiters',
+        supported_dataType: ['all'],
+      },
+      {
+        value: 'using-positions',
+        label: 'Using Positions',
+        supported_dataType: ['all'],
+      },
     ],
     supported_dataType: ['all'],
   },
@@ -749,9 +813,21 @@ export const FRAGMENT_OPTIONS = [
     value: 'explode',
     label: 'Explode',
     options: [
-      { value: 'delimited-text', label: 'Delimited Text', supported_dataType: ['all'] },
-      { value: 'array-flattening', label: 'Array By Flattening', supported_dataType: ['all'] },
-      { value: 'record-flattening', label: 'Record By Flattening', supported_dataType: ['all'] },
+      {
+        value: 'delimited-text',
+        label: 'Delimited Text',
+        supported_dataType: ['all'],
+      },
+      {
+        value: 'array-flattening',
+        label: 'Array By Flattening',
+        supported_dataType: ['all'],
+      },
+      {
+        value: 'record-flattening',
+        label: 'Record By Flattening',
+        supported_dataType: ['all'],
+      },
     ],
     supported_dataType: ['all'],
   },
@@ -1105,11 +1181,27 @@ export const SECURITY_OPTIONS = [
     value: 'mask-data',
     label: 'Mask Data',
     options: [
-      { value: 'last-4', label: 'Show last 4 characters only', supported_dataType: ['string'] },
-      { value: 'last-2', label: 'Show last 2 characters only', supported_dataType: ['string'] },
-      { value: 'numbers', label: 'Custom Selection', supported_dataType: ['string'] },
+      {
+        value: 'last-4',
+        label: 'Show last 4 characters only',
+        supported_dataType: ['string'],
+      },
+      {
+        value: 'last-2',
+        label: 'Show last 2 characters only',
+        supported_dataType: ['string'],
+      },
+      {
+        value: 'numbers',
+        label: 'Custom Selection',
+        supported_dataType: ['string'],
+      },
       { value: 'divider' },
-      { value: 'shuffle', label: 'By Shuffling', supported_dataType: ['string'] },
+      {
+        value: 'shuffle',
+        label: 'By Shuffling',
+        supported_dataType: ['string'],
+      },
     ],
     supported_dataType: ['string'],
   },

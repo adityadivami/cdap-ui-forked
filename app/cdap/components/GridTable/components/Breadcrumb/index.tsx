@@ -20,7 +20,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { DATASOURCES_URL_PARAM, HOME_LABLE, MATCH_SOURCE, WORKSPACES_URL } from './constants';
+import { DATASOURCES_URL_PARAM, HOME_LABLE, MATCH_SOURCE, WORKSPACE_LIST } from './constants';
 import { icon, icon1 } from './images';
 import IngestViewSchemaDropDown from './KebabMenu';
 import { useStyles } from './styles';
@@ -30,7 +30,7 @@ const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema 
 
   const sourcePath =
     location.state?.from === MATCH_SOURCE
-      ? WORKSPACES_URL
+      ? WORKSPACE_LIST
       : `${DATASOURCES_URL_PARAM}/${location.state?.path}`;
   return (
     <Box className={classes.breadCombContainer}>
