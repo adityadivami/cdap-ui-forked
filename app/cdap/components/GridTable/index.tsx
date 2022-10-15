@@ -15,6 +15,7 @@
  */
 
 import {
+  Button,
   LinearProgress,
   Table,
   TableBody,
@@ -24,39 +25,39 @@ import {
 } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
+import AddTransformation from 'components/AddTransformation';
+import ColumnInsightDrawer from 'components/ColumnInsights';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import DirectiveInputDrawer from 'components/DirectiveInput';
+import FooterPanel from 'components/FooterPanel';
 import ParsingDrawer from 'components/ParsingDrawer';
+import RecipeSteps from 'components/RecipeSteps';
 import LoadingSVG from 'components/shared/LoadingSVG';
+import PositionedSnackbar from 'components/SnackbarComponent';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
+import ToolBarList from './components/AaToolbar';
 import BreadCrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import NoDataScreen from './components/NoRecordScreen';
+import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
+import { getDirective, getDirectiveOnTwoInputs } from './directives';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import {
   calculateDistinctValues,
+  calculateDistributionGraphData,
   characterCount,
   checkAlphaNumericAndSpaces,
-  calculateDistributionGraphData,
   convertNonNullPercent,
 } from './utils';
-import FooterPanel from 'components/FooterPanel';
-import RecipeSteps from 'components/RecipeSteps';
-import AddTransformation from 'components/AddTransformation';
-import ToolBarList from './components/AaToolbar';
-import { getDirectiveOnTwoInputs } from './directives';
-import getDirective from './directives';
-import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
-import PositionedSnackbar from 'components/SnackbarComponent';
-import ColumnInsightDrawer from 'components/ColumnInsights';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -70,6 +71,7 @@ export default function() {
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState<any>({});
   const [missingDataList, setMissingDataList] = useState([]);
+  const [openDirective, setOpenDirective] = useState(false);
   const [insightDrawer, setInsightDrawer] = useState({
     open: false,
     columnName: '',
@@ -117,7 +119,12 @@ export default function() {
     setConnectorType(dataprep.connectorType);
   }, []);
 
-  const getWorkSpaceData = (params: IParams, workspaceId: string) => {
+  const getWorkSpaceData = (
+    params: IParams,
+    workspaceId: string,
+    selectedDirective?: string[] | undefined
+  ) => {
+    console.log('selectedDirective', selectedDirective);
     let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
@@ -136,10 +143,13 @@ export default function() {
             return;
           }
           const directives = objectQuery(res, 'directives') || [];
-          const requestBody = directiveRequestBodyCreator(directives);
+          const updatedDirectives =
+            selectedDirective?.length > 0 ? directives.concat(selectedDirective) : directives;
+          const requestBody = directiveRequestBodyCreator(updatedDirectives);
           const sampleSpec = objectQuery(res, 'sampleSpec') || {};
           const visualization = objectQuery(res, 'insights', 'visualization') || {};
 
+          console.log('directives con', directives);
           const insights = {
             name: res?.sampleSpec?.connectionName,
             workspaceName: res.workspaceName,
@@ -279,6 +289,7 @@ export default function() {
             ...gridParams,
           },
         });
+        setOpenDirective(false);
         setLoading(false);
         setGridData(response);
         setDirectiveFunction('');
@@ -566,6 +577,22 @@ export default function() {
         <div className={classes.loadingContainer}>
           <LoadingSVG />
         </div>
+      )}
+      <Button onClick={() => setOpenDirective(true)}>Open</Button>
+      {openDirective && (
+        <DirectiveInputDrawer
+          open={openDirective}
+          columnNamesList={headersNamesList}
+          onDirectiveInputHandler={(directives) => {
+            console.log('directives in handle', directives);
+            const payload = {
+              context: params.namespace,
+              workspaceId: params.wid,
+            };
+            getWorkSpaceData(payload as IParams, wid as string, directives);
+          }}
+          onClose={() => setOpenDirective(false)}
+        />
       )}
     </Box>
   );
