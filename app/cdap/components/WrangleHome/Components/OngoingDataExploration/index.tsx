@@ -14,32 +14,43 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
 import { Box } from '@material-ui/core/';
-import { generateDataForExplorationCard } from './utils';
 import MyDataPrepApi from 'api/dataprep';
+import { orderBy } from 'lodash';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationCard from '../OngoingDataExplorationCard';
-import { switchMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs/observable/forkJoin';
-import { IResponseData } from './types';
-import { HOME_URL_PARAM, WORKSPACES_LABEL } from './constants';
+import { HOME_URL_PARAM } from './constants';
+import { generateDataForExplorationCard } from './utils';
 
-const OngoingDataExploration = (props) => {
-  const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
+interface ICardCount {
+  cardCount?: number;
+  fromAddress: string;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function OngoingDataExploration({ cardCount, fromAddress, setLoading }: ICardCount) {
   const [finalArray, setFinalArray] = useState([]);
-
-  const getOngoingData = () => {
+  const getOngoingData = useCallback(() => {
+    const expData = [];
     // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
     //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
-
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     })
       .pipe(
-        switchMap((res: IResponseData) => {
-          const workspaces = res.values.map((item) => {
+        switchMap((res: Record<string, unknown[]>) => {
+          let values = [];
+          values = res.values;
+          values = orderBy(
+            values,
+            [(workspace) => (workspace.workspaceName || '').toLowerCase()],
+            ['asc']
+          );
+          const workspaces = values.map((item) => {
             const params = {
               context: 'default',
               workspaceId: item.workspaceId,
@@ -48,26 +59,25 @@ const OngoingDataExploration = (props) => {
               directives: item.directives,
               limit: 1000,
               insights: {
-                name: item.sampleSpec.connectionName,
+                name: item?.sampleSpec?.connectionName,
                 workspaceName: item.workspaceName,
                 path: item?.sampleSpec?.path,
                 visualization: {},
               },
             };
 
-            setOngoingExpDatas((current) => [
-              ...current,
-              {
-                connectionName:
-                  item?.sampleSpec?.connectionName === undefined
-                    ? 'Upload'
-                    : item?.sampleSpec?.connectionName,
-                workspaceName: item.workspaceName,
-                recipeSteps: item.directives.length,
-                dataQuality: null,
-                workspaceId: item.workspaceId,
-              },
-            ]);
+            expData.push({
+              connectionName:
+                item?.sampleSpec?.connectionName === undefined
+                  ? 'Upload'
+                  : item?.sampleSpec?.connectionName,
+              workspaceName: item.workspaceName,
+              recipeSteps: item.directives.length,
+              dataQuality: null,
+              workspaceId: item.workspaceId,
+              count: 0,
+            });
+
             return MyDataPrepApi.execute(params, requestBody);
           });
           return forkJoin(workspaces);
@@ -80,46 +90,44 @@ const OngoingDataExploration = (props) => {
             const general = workspace.summary.statistics[element].general;
             const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
             const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+
             dataQuality = dataQuality + nonNull;
           });
           const totalDataQuality = dataQuality / workspace.headers.length;
-          setOngoingExpDatas((current) => [
-            ...current.slice(0, index),
-            {
-              ...current[index],
-              dataQuality: totalDataQuality,
-            },
-            ...current.slice(index + 1),
-          ]);
+          expData[index].dataQuality = totalDataQuality;
+          expData[index].count = workspace.count;
+
+          const final = generateDataForExplorationCard(expData, cardCount);
+          setFinalArray(final);
+          setLoading(false);
         });
       });
-  };
+  }, []);
 
   useEffect(() => {
     getOngoingData();
   }, []);
 
-  useEffect(() => {
-    const final = generateDataForExplorationCard(ongoingExpDatas);
-    setFinalArray(final);
-  }, [ongoingExpDatas]);
-
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {finalArray.map((item, index) => {
-        return (
-          <Link
-            to={{
-              pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
-              state: { from: WORKSPACES_LABEL, path: HOME_URL_PARAM },
-            }}
-            style={{ textDecoration: 'none' }}
-          >
-            {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
-          </Link>
-        );
-      })}
+      {finalArray && Array.isArray(finalArray) && finalArray.length ? (
+        finalArray.map((item, index) => {
+          return (
+            <Link
+              to={{
+                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
+                state: { from: fromAddress, path: HOME_URL_PARAM },
+              }}
+              style={{ textDecoration: 'none' }}
+            >
+              <OngoingDataExplorationCard item={item} key={index} fromAddress={fromAddress} />
+            </Link>
+          );
+        })
+      ) : (
+        <></>
+        /* TODO: add no data screen in case final array is empty */
+      )}
     </Box>
   );
-};
-export default OngoingDataExploration;
+}
