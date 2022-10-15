@@ -27,7 +27,6 @@ const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({
   columnType,
 }) => {
   const classes = useNestedMenuStyles();
-  console.log('item', item);
   if (item.value === 'divider') {
     return <hr className={classes.divider} key={index} />;
   }

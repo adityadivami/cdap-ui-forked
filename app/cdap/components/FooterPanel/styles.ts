@@ -97,6 +97,7 @@ export const useCss = makeStyles({
     background:
       'linear-gradient(180deg, rgba(70, 129, 244, 0) 0.85%, rgba(70, 129, 244, 0.2) 118.78%)',
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
+    cursor: 'pointer',
   },
   recipeCont: {
     padding: '10px 32px',

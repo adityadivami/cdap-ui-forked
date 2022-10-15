@@ -282,7 +282,7 @@ export default function(props) {
       } else {
         props.applyTransformation(selectedColumns[0].label, directiveComponentValues.radioOption);
       }
-    } else if (functionName === 'fillNullOrEmpty') {
+    } else if (functionName === 'fillNullOrEmpty' || functionName === 'replace-null-missing') {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
     } else if (functionName === 'swap-columns') {
       const directive = `swap :${selectedColumns[0].label} :${selected_column_2[0].label}`;
@@ -305,6 +305,8 @@ export default function(props) {
         directiveComponentValues.customInput
       );
       props.applyTransformation(selectedColumns[0].label, getValue);
+    } else if (functionName == 'rename-column') {
+      props.applyTransformation(selectedColumns[0].label, directiveComponentValues.copyColumnName);
     } else {
       setLoading(false);
       props.applyTransformation(selectedColumns[0].label);

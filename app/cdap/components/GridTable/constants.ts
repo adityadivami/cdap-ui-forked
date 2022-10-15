@@ -63,6 +63,9 @@ export const OPTION_WITH_NO_INPUT = [
   'double',
   'decimal',
   'bytes',
+  'remove-null-missing',
+  'remove-null',
+  'remove-missing',
 ];
 
 export const OPTION_WITH_TWO_INPUT = [
@@ -134,4 +137,6 @@ export const OPTION_WITH_TWO_INPUT = [
   'using-positions',
   'join-columns',
   'swap-columns',
+  'replace-null-missing',
+  'rename-column',
 ];

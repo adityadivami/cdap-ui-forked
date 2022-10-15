@@ -35,7 +35,6 @@ const DirectiveDrawer = (props) => {
   };
 
   const handleDirectiveChange = (event) => {
-    console.log('directiveInput', directiveInput, event.target);
     if (!event.target.value) {
       setOnDirectiveSelection({
         isDirectiveSelected: false,
@@ -44,19 +43,6 @@ const DirectiveDrawer = (props) => {
     }
     setDirectiveInput(event.target.value);
     setAutoCompleteOn(true);
-  };
-
-  const handlePaste = (e) => {
-    let data = e.clipboardData.getData('Text');
-    data = data.split('\n').filter((row) => {
-      // filter out empty rows
-      return row.trim().length > 0;
-    });
-
-    if (data.length > 1) {
-      e.preventDefault();
-      // this.execute(data);
-    }
   };
 
   const toggleAutoComplete = () => {
@@ -70,9 +56,15 @@ const DirectiveDrawer = (props) => {
         ? directivesList.filter((el) => el.usage.includes(inputSplit[0]))
         : [];
     const usageArraySplit = filterUsageItem.length > 0 ? filterUsageItem[0].usage.split(' ') : [];
-    if (usageArraySplit.length === inputSplit.length) {
+    console.log('inputSplit', inputSplit, usageArraySplit, filterUsageItem);
+    if (
+      usageArraySplit.length === inputSplit.length ||
+      inputSplit.length > usageArraySplit.length
+    ) {
+      console.log('inputSplit', true);
       return true;
     } else {
+      console.log('inputSplit', false);
       return false;
     }
   };
@@ -126,7 +118,6 @@ const DirectiveDrawer = (props) => {
                 placeholder={'Input a directive'}
                 value={directiveInput}
                 onChange={handleDirectiveChange}
-                onPaste={handlePaste}
                 ref={directiveRef}
                 onKeyDown={(e) => {
                   const usageArraySplit =
@@ -140,15 +131,17 @@ const DirectiveDrawer = (props) => {
                     e.key === 'Enter' &&
                     isColumnSelected &&
                     onDirectiveSelection.isDirectiveSelected &&
-                    usageArraySplit.length === inputSplit.length
+                    (usageArraySplit.length === inputSplit.length ||
+                      inputSplit.length > usageArraySplit.length)
                   ) {
                     props.onDirectiveInputHandler([directiveInput]);
                   }
                 }}
-                //   disabled={this.props.disabled}
               />
             </Box>
-            <Box onClick={() => props.onClose()}>{CrossIcon}</Box>
+            <Box className={classes.crossIcon} onClick={() => props.onClose()}>
+              {CrossIcon}
+            </Box>
           </Box>
         </Box>
       </Drawer>

@@ -70,4 +70,24 @@ export const useStyles = makeStyles({
       backgroundColor: blue[500],
     },
   },
+  root: {
+    '& .MuiMenuItem-root': {
+      padding: '6px 11px 6px 20px',
+      height: '33px',
+    },
+    '& .MuiMenu-paper': {
+      width: '199px',
+    },
+    '& .MuiMenu-list': {
+      color: '#5F6368',
+      border: '1px solid #DADCE0',
+    },
+    '& .MuiListItem-button': {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    '& .MuiList-padding': {
+      padding: '13px 0px',
+    },
+  },
 });

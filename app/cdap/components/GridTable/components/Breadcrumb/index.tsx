@@ -14,23 +14,18 @@
  * the License.
  */
 
-import { Box, IconButton, Typography, Button } from '@material-ui/core';
+import { Box, Button, IconButton, Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useStyles } from './styles';
 import React from 'react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
-import { icon, icon1, otherIcon } from './images';
-import {
-  MATCH_SOURCE,
-  HOME_URL_PARAM,
-  DATASOURCES_URL_PARAM,
-  HOME_LABLE,
-  WORKSPACES_URL,
-} from './constants';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { DATASOURCES_URL_PARAM, HOME_LABLE, MATCH_SOURCE, WORKSPACES_URL } from './constants';
+import { icon, icon1 } from './images';
+import IngestViewSchemaDropDown from './KebabMenu';
+import { useStyles } from './styles';
 
-const BreadCrumb = ({ datasetName, location }) => {
+const BreadCrumb = ({ datasetName, location, setOpenPipeline, setOpenViewSchema }) => {
   const classes = useStyles();
 
   const sourcePath =
@@ -61,8 +56,13 @@ const BreadCrumb = ({ datasetName, location }) => {
       <Breadcrumbs separator=" ">
         <IconButton>{icon}</IconButton>
         <IconButton>{icon1}</IconButton>
-        <IconButton>{otherIcon}</IconButton>
-        <Button className={`${classes.Button} ${classes.pipelineStyles}`}>Create a Pipeline</Button>
+        <IngestViewSchemaDropDown setOpenViewSchema={setOpenViewSchema} />
+        <Button
+          className={`${classes.Button} ${classes.pipelineStyles}`}
+          onClick={() => setOpenPipeline(true)}
+        >
+          Create a Pipeline
+        </Button>
       </Breadcrumbs>
     </Box>
   );

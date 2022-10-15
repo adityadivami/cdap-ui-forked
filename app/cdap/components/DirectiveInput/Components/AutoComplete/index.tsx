@@ -128,6 +128,7 @@ const DataPrepAutoComplete = ({ setDirectivesList, ...props }) => {
       return;
     }
     const selectedDirective = activeResults[activeSelectionIndex];
+    console.log('selectedDirective', selectedDirective);
     if (selectedDirective) {
       handleRowClick(activeResults[activeSelectionIndex]);
     } else {
@@ -221,7 +222,7 @@ const DataPrepAutoComplete = ({ setDirectivesList, ...props }) => {
     let eventObject = {};
     if (props.isDirectiveSelected === false) {
       eventObject = {
-        target: { value: `${row.item.directive} ` },
+        target: { value: `${row.item.directive}` },
       };
       props.onRowClick(eventObject);
       props.getDirectiveUsage([row], true);

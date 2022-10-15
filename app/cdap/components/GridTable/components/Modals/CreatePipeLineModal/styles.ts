@@ -13,34 +13,46 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { makeStyles } from '@material-ui/core';
+
+import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles({
-  iconContainer: {
+  dialogWrapper: {
+    paddingBottom: '20px',
+  },
+  modalHeader: {
+    color: '#212121',
+    fontSize: '20px',
+  },
+  modalText: {
+    color: '#212121',
+    fontSize: '16px',
+    marginTop: '10px',
+  },
+  headerFlex: {
     display: 'flex',
     justifyContent: 'space-between',
-    border: '1px solid #E0E0E0',
-    height: '48px',
-    marginTop: '0px',
-    padding: '10px',
-    paddingLeft: '18px',
-    paddingRight: '15px',
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    marginLeft: '0px',
-    marginRight: '0px',
   },
-  searchIcon: {
-    border: 'none',
-    outline: 'none',
-    width: '250px',
+  buttonStyles: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    border: '1px solid #DADCE0',
+    borderRadius: '4px',
+    marginRight: '20px',
+    cursor: 'pointer',
   },
-  closeBreadCrumb: {
-    transform: 'rotate(180deg)',
+  dialogActionGroup: {
+    display: 'grid',
+    justifyContent: 'center',
+    alignItem: 'center',
+    gridTemplateColumns: '50% 50%',
+    marginTop: '20px',
   },
-  openedBreadcrumb: {},
+  closeIcon: {
+    cursor: 'pointer',
+  },
 });

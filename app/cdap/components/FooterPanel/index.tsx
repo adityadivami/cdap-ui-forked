@@ -23,6 +23,8 @@ export default function({
   showRecipePanelHandler,
   showAddTransformationHandler,
   recipeStepsCount,
+  setOpenDirective,
+  dataCounts,
 }) {
   const classes = useCss();
   return (
@@ -32,7 +34,7 @@ export default function({
         <Box className={classes.dataWrapper}>
           <p className={classes.data}>
             {' '}
-            {T.translate('features.WranglerNewFooterPanel.currentData')}
+            {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
           </p>
         </Box>
         <Box className={classes.zoomCont}>
@@ -40,13 +42,9 @@ export default function({
           <p className={classes.spanElement}> 100%</p>
           {ArrowIcon}
         </Box>
-        <p className={classes.directivesCont} onClick={showAddTransformationHandler}>
-          {T.translate('features.WranglerNewFooterPanel.transformations')}
-        </p>
-        <p className={classes.directivesCont}>
-          {' '}
-          {T.translate('features.WranglerNewFooterPanel.directives')}{' '}
-        </p>
+        <Box className={classes.directivesCont} onClick={() => setOpenDirective(true)}>
+          <p> {T.translate('features.WranglerNewFooterPanel.directives')} </p>
+        </Box>
         <Box
           className={classes.recipeCont}
           onClick={showRecipePanelHandler}

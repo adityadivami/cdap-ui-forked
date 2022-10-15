@@ -35,6 +35,7 @@ import PositionedSnackbar from 'components/SnackbarComponent';
 import ImportDatasetPanel from 'components/ImportDataset';
 import { forEach } from 'vega-lite/build/src/encoding';
 import { IData, IdataForTabs } from './types';
+import CustomTooltip from './Components/CustomTooltip';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -220,7 +221,13 @@ export default function ConnectionList() {
 
   const searchHandler = (index: number) => {
     setDataForTabs((prev) => {
-      const tempData = [...prev];
+      let tempData = [...prev];
+      tempData = tempData.map((each) => {
+        return {
+          ...each,
+          isSearching: false,
+        };
+      });
       tempData[index].isSearching = true;
       tempData.forEach((each, ind) => {
         if (ind === index) {
@@ -232,43 +239,31 @@ export default function ConnectionList() {
       return tempData;
     });
     refs.current[index].focus();
-    // refs.current[index].addEventListener('blur', () => {
-    //   setDataForTabs((prev) => {
-    //     const tempData = [...prev];
-    //     tempData[index].isSearching = false;
-    //     return tempData;
-    //   });
-    // });
   };
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleSearch = (e: any, index: number) => {
     const val = e.target.value.toLowerCase();
-    const newData: IdataForTabs[] = cloneDeep(dataForTabs);
-    const newDataToSearch: IData[] = [...newData[index].data];
-    const tempData = newDataToSearch.filter((item: IData) => item.name.toLowerCase().includes(val));
+    const newData = cloneDeep(dataForTabs);
+    const newDataToSearch = [...newData[index].data];
+    const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(val));
     newData[index].data = [...tempData];
     setFilteredData(cloneDeep(newData));
   };
 
-  const handleClearSearch = (e: MouseEvent<HTMLElement>, index: number) => {
-    if (refs.current[index].value === '') {
-      const newData: IdataForTabs[] = cloneDeep(dataForTabs);
-      const newDataToSearch: IData[] = [...newData[index].data];
-      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
-      newData[index].data = [...tempData];
+  const handleClearSearch = (e: any, index: number) => {
+    if (refs.current[index].value == '') {
       setDataForTabs((prev) => {
         const tempData = [...prev];
         tempData[index].isSearching = false;
         return tempData;
       });
-      setFilteredData(cloneDeep(newData));
     } else {
       refs.current[index].value = '';
-      setDataForTabs((prev) => {
-        const tempData = [...prev];
-        tempData[index].isSearching = true;
-        return tempData;
-      });
+      const newData = cloneDeep(dataForTabs);
+      const newDataToSearch = [...newData[index].data];
+      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
+      newData[index].data = [...tempData];
+      setFilteredData(cloneDeep(newData));
     }
   };
 
