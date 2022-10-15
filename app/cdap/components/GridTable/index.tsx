@@ -200,7 +200,6 @@ export default function() {
           setGridData(response);
           setDirectiveFunction('');
           setColumnSelected('');
-          setColumnType('');
           if (selectedDirective) {
             setToaster({
               open: true,
@@ -270,7 +269,6 @@ export default function() {
     } else {
       if (
         multipleColumnSelected.filter((el) => el.value === option || el.value === optionSelected)
-          ?.length
       ) {
         const newDirective = getDirectiveOnTwoInputs(option, columnSelected, value_1);
         if (!Boolean(value_1)) {
@@ -347,7 +345,6 @@ export default function() {
         setGridData(response);
         setDirectiveFunction('');
         setColumnSelected('');
-        setColumnType('');
         setShowRecipePanel(false);
         setToaster({
           open: true,
@@ -641,7 +638,6 @@ export default function() {
             );
           }}
           callBack={(response) => {
-            setColumnType('');
             setColumnSelected('');
             setDirectiveFunction('');
           }}
@@ -727,7 +723,6 @@ export default function() {
                               );
                             }}
                             cancelTransformation={() => {
-                              setColumnType('');
                               setColumnSelected('');
                               setOptionSelected('');
                               setMaskSelection(false);

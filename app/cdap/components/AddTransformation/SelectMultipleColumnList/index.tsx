@@ -192,7 +192,6 @@ const SelectColumnsList = (props) => {
                         </Typography>
                       </TableCell>
                       <TableCell
-                        // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
                         className={[
                           classes.recipeStepsTableRowStyles,
                           classes.circularBarCell,
