@@ -3431,6 +3431,7 @@ features:
     trasnformations: Trasnformations
     recipeSteps: Recipe Steps
     directives: Directives
+    transformations: transformations
   WranglerNewParsingDrawer:
     importSchema: Import schema
     apply: Apply

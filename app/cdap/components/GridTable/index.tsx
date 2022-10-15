@@ -41,6 +41,8 @@ import AddTransformation from 'components/AddTransformation';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import ToolBarList from './components/AaToolbar';
 import { getDirective } from './directives';
+import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
+import Snackbar from 'components/SnackbarComponent';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -54,6 +56,9 @@ export default function() {
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
+  const [dataQuality, setDataQuality] = useState({});
+  const [optionSelected, setOptionSelected] = useState(null);
+  const [toast, setToast] = useState(false);
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
@@ -118,20 +123,28 @@ export default function() {
           return MyDataPrepApi.execute(params, requestBody);
         })
       )
-      .subscribe((response) => {
-        DataPrepStore.dispatch({
-          type: DataPrepActions.setWorkspace,
-          payload: {
-            data: response.values,
-            values: response.values,
-            headers: response.headers,
-            types: response.types,
-            ...gridParams,
-          },
-        });
-        setLoading(false);
-        setGridData(response);
-      });
+      .subscribe(
+        (response) => {
+          DataPrepStore.dispatch({
+            type: DataPrepActions.setWorkspace,
+            payload: {
+              data: response.values,
+              values: response.values,
+              headers: response.headers,
+              types: response.types,
+              ...gridParams,
+            },
+          });
+          setLoading(false);
+          setGridData(response);
+          setDirectiveFunction('');
+          setColumnSelected('');
+        },
+        (err) => {
+          setToast(true);
+          setLoading(false);
+        }
+      );
   };
 
   const updateDataTranformation = (wid: string) => {
@@ -141,6 +154,76 @@ export default function() {
     };
     getWorkSpaceData(payload, wid);
     setIsFirstWrangle(false);
+  };
+
+  const showRecipePanelHandler = () => {
+    setShowRecipePanel((prev) => !prev);
+  };
+
+  const [showAddTransformation, setSshowAddTransformation] = useState(false);
+  const showAddTransformationHandler = () => {
+    setSshowAddTransformation((prev) => !prev);
+  };
+
+  const applyDirective = (option, columnSelected, value_1?, value_2?) => {
+    setLoading(true);
+    setOptionSelected(option);
+    if (OPTION_WITH_NO_INPUT.includes(option)) {
+      const newDirective = getDirective(option, columnSelected);
+      if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+        setDirectiveFunction(option);
+        setLoading(false);
+        return;
+      } else {
+        applyDirectiveAPICall(newDirective);
+      }
+    }
+  };
+
+  const applyDirectiveAPICall = (newDirective) => {
+    const { dataprep } = DataPrepStore.getState();
+    const { workspaceId, workspaceUri, directives, insights } = dataprep;
+    let gridParams = {};
+    const updatedDirectives = directives.concat(newDirective);
+    const requestBody = directiveRequestBodyCreator(updatedDirectives);
+
+    requestBody.insights = insights;
+
+    const workspaceInfo = {
+      properties: insights,
+    };
+    gridParams = {
+      directives: updatedDirectives,
+      workspaceId,
+      workspaceUri,
+      workspaceInfo,
+      insights,
+    };
+    const payload = {
+      context: params.namespace,
+      workspaceId: params.wid,
+    };
+    MyDataPrepApi.execute(payload, requestBody).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setLoading(false);
+        setGridData(response);
+        setDirectiveFunction('');
+        setColumnSelected('');
+      },
+      (err) => {
+        setToast(true);
+        setLoading(false);
+      }
+    );
   };
 
   useEffect(() => {
@@ -188,10 +271,12 @@ export default function() {
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
-    // const headersData = createHeadersData(rawData.headers, rawData.types);
+    const headersData = createHeadersData(rawData.headers, rawData.types);
+    setHeadersNamesList(headersData);
     if (rawData && rawData.summary && rawData.summary.statistics) {
       const missingData = createMissingData(gridData?.summary.statistics);
       setMissingDataList(missingData);
+      setDataQuality(gridData.summary.statistics);
     }
     const rowData =
       rawData &&
@@ -207,76 +292,11 @@ export default function() {
     getGridTableData();
   }, [gridData]);
 
-  const showRecipePanelHandler = () => {
-    setShowRecipePanel((prev) => !prev);
-  };
-
-  const [showAddTransformation, setSshowAddTransformation] = useState(false);
-  const showAddTransformationHandler = () => {
-    setSshowAddTransformation((prev) => !prev);
-  };
-
-  const applyDirective = (option, column) => {
-    setLoading(true);
-    const newDirective = getDirective(option, columnSelected);
-    const { dataprep } = DataPrepStore.getState();
-    const { workspaceId, workspaceUri, directives, insights } = dataprep;
-    // setOpenTransformationPanel(option);
-    console.log(newDirective, columnSelected, option);
-    if (!Boolean(newDirective) || !Boolean(columnSelected)) {
-      setDirectiveFunction(option);
-      setLoading(false);
-      return;
-    }
-
-    let gridParams = {};
-    const updatedDirectives = directives.concat(newDirective);
-    const requestBody = directiveRequestBodyCreator(updatedDirectives);
-
-    requestBody.insights = insights;
-
-    const workspaceInfo = {
-      properties: insights,
-    };
-    gridParams = {
-      directives: updatedDirectives,
-      workspaceId,
-      workspaceUri,
-      workspaceInfo,
-      insights,
-    };
-    const payload = {
-      context: params.namespace,
-      workspaceId: params.wid,
-    };
-    MyDataPrepApi.execute(payload, requestBody).subscribe(
-      (response) => {
-        // response
-        DataPrepStore.dispatch({
-          type: DataPrepActions.setWorkspace,
-          payload: {
-            data: response.values,
-            headers: response.headers,
-            types: response.types,
-            ...gridParams,
-          },
-        });
-        setLoading(false);
-        setGridData(response);
-      },
-      (err) => {
-        // err
-        setLoading(false);
-      }
-    );
-  };
-
   const handleColumnSelect = (columnName) =>
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
 
   // Redux store
   const { data, headers, types } = dataprep;
-  console.log(columnSelected, directiveFunction);
 
   return (
     <Box>
@@ -296,11 +316,16 @@ export default function() {
         <AddTransformation
           functionName={directiveFunction}
           setLoading={setLoading}
-          columnData={headers}
+          columnData={headersNamesList}
+          missingDataList={dataQuality}
+          applyTransformation={(selectedColumn, value) => {
+            setColumnSelected(selectedColumn);
+            applyDirective(optionSelected, selectedColumn, value);
+          }}
           callBack={(response) => {
             setGridData(response);
-            setDirectiveFunction('');
             setColumnSelected('');
+            setDirectiveFunction('');
           }}
         />
       )}
@@ -352,6 +377,7 @@ export default function() {
         showRecipePanelHandler={showRecipePanelHandler}
         showAddTransformationHandler={showAddTransformationHandler}
       />
+      {toast && <Snackbar handleCloseError={() => setToast(false)} />}
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />

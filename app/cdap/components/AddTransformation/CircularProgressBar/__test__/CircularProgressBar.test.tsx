@@ -14,23 +14,26 @@
  * the License.
  */
 
+import { render } from '@testing-library/react';
+import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
-import { useStyles } from '../styles';
-import T from 'i18n-react';
+import { Route, Router, Switch } from 'react-router';
+import MatchMeter from '..';
 
-export default function(props) {
-  const { selectedColumnsCount } = props;
-  const classes = useStyles();
+const history = createHistory({
+  basename: '/',
+});
 
-  return (
-    <div className={classes.columnsCountTextStyles}>
-      {selectedColumnsCount
-        ? selectedColumnsCount > 10
-          ? selectedColumnsCount
-          : `0${selectedColumnsCount}`
-        : 'No '}{' '}
-      &nbsp;
-      {T.translate('features.WranglerNewAddTransformation.columnsSelected')}
-    </div>
-  );
-}
+describe('It should test the CircularProgressBar Component', () => {
+  it('Should render the Circular', () => {
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <MatchMeter value={0} />
+          </Route>
+        </Switch>
+      </Router>
+    );
+  });
+});

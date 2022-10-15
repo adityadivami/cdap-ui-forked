@@ -18,50 +18,45 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import AddTransformation from '..';
+import ActionsWidget from '..';
 
 const history = createHistory({
   basename: '/',
 });
 
-describe('It should test the SelectColumnsList Component', () => {
-  it('should render the SelectColumnsList Component and triggers the button and following event', () => {
+describe('It should test the ActionsWidget Component', () => {
+  it('should render the ActionsWidget Component', () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <AddTransformation
-              functionName="null"
-              columnData={[{ label: 'hello' }, { label: 'world' }]}
-              setLoading
-              missingDataList={[]}
-            />
+            <ActionsWidget selectedAction="replace" />
           </Route>
         </Switch>
       </Router>
     );
     expect(container).toBeDefined;
-    const ele = screen.getByTestId(/add-transformation-button/i);
-    fireEvent.click(ele);
-    const ele1 = screen.getByTestId(/select-column-widget-button/i);
-    fireEvent.click(ele1);
   });
 
-  it('should render the SelectColumnsList Component where functionName is parseCSV', () => {
+  it('should render the ActionsWidget Component', () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <AddTransformation
-              functionName="parseCSV"
-              columnData={[{ label: 'hello' }, { label: 'world' }]}
-              setLoading
-              missingDataList={[]}
+            <ActionsWidget
+              selectedAction="abc"
+              setSelectedAction={() => jest.fn()}
+              replaceValue="hello"
+              setReplaceValue={() => jest.fn()}
             />
           </Route>
         </Switch>
       </Router>
     );
+
+    // const ele = screen.getByTestId('actions-widget-textfield');
+    // fireEvent.click(ele);
+
     expect(container).toBeDefined;
   });
 });

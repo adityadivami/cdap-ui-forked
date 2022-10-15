@@ -23,68 +23,59 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Radio,
+  FormControl,
+  InputAdornment,
+  TextField,
+  Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { COLUMNS, COLUMNS_SELECTED, NULL_VALUES } from '../constants';
 import { useStyles } from '../styles';
+import { SearchIcon } from '../iconStore';
+import { prepareDataQualtiy } from '../CircularProgressBar/utils';
+import DataQualityProgress from '../CircularProgressBar';
 import T from 'i18n-react';
 
-const columnsData = [
-  {
-    label: 'Customer name',
-    domainType: 'ABC',
-    dataType: 'String',
-    dataQuality: '65',
-    isSelected: false,
-  },
-  {
-    label: 'Customer name',
-    domainType: 'ABC',
-    dataType: 'String',
-    dataQuality: '65',
-    isSelected: false,
-  },
-  {
-    label: 'Customer name',
-    domainType: 'ABC',
-    dataType: 'String',
-    dataQuality: '65',
-    isSelected: false,
-  },
-  {
-    label: 'Customer name',
-    domainType: 'ABC',
-    dataType: 'String',
-    dataQuality: '65',
-    isSelected: false,
-  },
-  {
-    label: 'Customer name',
-    domainType: 'ABC',
-    dataType: 'String',
-    dataQuality: '65',
-    isSelected: false,
-  },
-  {
-    label: 'Customer name',
-    domainType: 'ABC',
-    dataType: 'String',
-    dataQuality: '65',
-    isSelected: false,
-  },
-];
-
 export default function(props) {
-  const { selectedColumnsCount } = props;
-  const [columns, setColumns] = useState(columnsData);
-  const [selectedColumns, setSelectedColumns] = useState([]);
+  const { selectedColumnsCount, columnData, setSelectedColumns, dataQuality } = props;
+  const [columns, setColumns] = useState(columnData);
+  const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
+  const [selectedColumns, setSelectedColumn] = useState([]);
+  const [focused, setFocused] = useState(false);
   const classes = useStyles();
+  const ref = useRef(null);
 
-  const onSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      setSelectedColumns(columns);
-      return;
+  useEffect(() => {
+    console.log('data quality is: ', dataQuality);
+    console.log('columnData is: ', columnData);
+    const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
+    setDataQualityValue(getPreparedDataQuality);
+  }, []);
+
+  const onSelect = (event, label, column) => {
+    setSelectedColumns([column]);
+    setSelectedColumn([column]);
+  };
+
+  const handleSearch = (event) => {
+    if (event.target.value) {
+      const columnValue = columnData.filter((el) =>
+        el?.label.toLowerCase().includes(event.target.value.toLowerCase())
+      );
+      if (columnValue.length) {
+        setColumns(columnValue);
+      } else {
+        setColumns([]);
+      }
+    } else {
+      setColumns(columnData);
     }
-    setSelectedColumns([]);
+  };
+
+  const handleFocus = () => {
+    ref?.current.focus();
+    setFocused(true);
   };
 
   return (
@@ -96,73 +87,87 @@ export default function(props) {
               ? selectedColumnsCount
               : `0${selectedColumnsCount}`
             : 'No '}{' '}
-          {T.translate('features.WranglerNewAddTransformation.columnsSelected')}
+          &nbsp;{COLUMNS_SELECTED}
         </div>
-        <img src="/cdap_assets/img/search.svg" alt="search" />
+        <div className={classes.searchFormControl}>
+          <input
+            className={focused ? classes.isFocused : classes.isBlurred}
+            onChange={handleSearch}
+            ref={ref}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            data-testid="select-column-list-input"
+          />
+          <Box
+            className={classes.searchInputAdornment}
+            onClick={handleFocus}
+            data-testid="select-column-list-box"
+          >
+            {SearchIcon()}
+          </Box>
+        </div>
       </div>
       <TableContainer component={Box}>
         <Table aria-label="recipe steps table">
           <TableHead>
             <TableRow className={classes.recipeStepsTableRowStyles}>
-              <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
-                <Checkbox
-                  color="primary"
-                  indeterminate={
-                    selectedColumns.length > 0 && selectedColumns.length < columns.length
-                  }
-                  checked={columns.length > 0 && selectedColumns.length === columns.length}
-                  onChange={onSelectAllClick}
-                  inputProps={{
-                    'aria-label': 'select all columns',
-                    id: 'transformation-checkbox-select-all-columns',
-                  }}
-                />
-              </TableCell>
+              <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}></TableCell>
               <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
                 {T.translate('features.WranglerNewAddTransformation.columns')}
               </TableCell>
-              <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
-                {T.translate('features.WranglerNewAddTransformation.dataQuality')}
+              <TableCell
+                classes={{ head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}` }}
+              >
+                {NULL_VALUES}
               </TableCell>
-              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
-            {columns.map((eachColumn, index) => (
-              <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
-                <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
-                  <Checkbox
-                    color="primary"
-                    indeterminate={
-                      selectedColumns.length > 0 && selectedColumns.length < columns.length
-                    }
-                    checked={columns.length > 0 && selectedColumns.length === columns.length}
-                    onChange={onSelectAllClick}
-                    inputProps={{
-                      'aria-label': 'select all columns',
+            {columns &&
+              Array.isArray(columns) &&
+              columns.map((eachColumn, index) => (
+                <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                  <TableCell
+                    classes={{
+                      body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
                     }}
-                  />
-                </TableCell>
-                <TableCell
-                  classes={{ body: classes.recipeStepsTableRowStyles }}
-                  // component="th"
-                  // scope="row"
-                >
-                  <span className={classes.recipeStepsActionTypeStyles}>{eachColumn.label}</span>
-                  &nbsp;
-                  {eachColumn.label}
-                </TableCell>
-                <TableCell
-                  className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
-                >
-                  <img
-                    className={classes.recipeStepsDeleteStyles}
-                    src="/cdap_assets/img/delete.svg"
-                    alt="delete"
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
+                  >
+                    <Radio
+                      color="primary"
+                      onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
+                      checked={
+                        selectedColumns.filter((el) => el.label == eachColumn.label).length
+                          ? true
+                          : false
+                      }
+                      data-testid="select-column-list-radio"
+                    />
+                  </TableCell>
+                  <TableCell
+                    classes={{ body: classes.recipeStepsTableRowStyles }}
+                    style={{ width: 50 }}
+                    // component="th"
+                    // scope="row"
+                  >
+                    <Typography className={classes.recipeStepsActionTypeStyles}>
+                      {eachColumn.label}
+                    </Typography>
+                    <Typography className={classes.recipeStepsActionTypeStyles}>
+                      {eachColumn.type}
+                    </Typography>
+                  </TableCell>
+                  <TableCell
+                    // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
+                    className={[classes.recipeStepsTableRowStyles, classes.circularBarCell].join(
+                      ' '
+                    )}
+                  >
+                    {dataQualityValue?.length && (
+                      <DataQualityProgress value={dataQualityValue[index]?.value} />
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

@@ -13,13 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-import { Button } from '@material-ui/core';
 import React from 'react';
+import { Button, Typography } from '@material-ui/core';
 import { useStyles } from '../styles';
 import T from 'i18n-react';
+import { QUICK_SELECT_INFO, SELECT_COLUMNS } from '../constants';
 
 export default function(props) {
+  const { selectedColumns } = props;
   const classes = useStyles();
 
   return (
@@ -30,15 +31,25 @@ export default function(props) {
       <div className={classes.quickSelectTextStyles}>
         {T.translate('features.WranglerNewAddTransformation.quickSelect')}
       </div>
-      <Button
-        variant="outlined"
-        color="primary"
-        className={classes.selectButtonStyles}
-        onClick={props.handleSelectColumn}
-        data-testid="select-column-widget-button"
-      >
-        {T.translate('features.WranglerNewAddTransformation.selectColumns')}
-      </Button>
+      {selectedColumns.length ? (
+        selectedColumns.map((item, index) => {
+          return (
+            <Typography variant="body1" className={classes.quickSelectTextStyles}>
+              {index + 1}.&nbsp; {item.label}
+            </Typography>
+          );
+        })
+      ) : (
+        <Button
+          variant="outlined"
+          color="primary"
+          className={classes.selectButtonStyles}
+          onClick={props.handleSelectColumn}
+          data-testid="select-column-widget-button"
+        >
+          {T.translate('features.WranglerNewAddTransformation.selectColumns')}
+        </Button>
+      )}
     </section>
   );
 }

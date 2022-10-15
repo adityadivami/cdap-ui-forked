@@ -13,13 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 import React from 'react';
+import { SELECT_ACTION_TO_TAKE, REMOVE_ROWS, REPLACE_ROWS, REPLACE_WITH } from '../constants';
 import { useStyles } from '../styles';
+import {
+  RadioGroup,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  TextField,
+  FormLabel,
+} from '@material-ui/core';
 import T from 'i18n-react';
 
 export default function(props) {
   const classes = useStyles();
+  const { selectedAction, setSelectedAction, setReplaceValue, replaceValue } = props;
 
   return (
     <section className={classes.functionSectionStyles}>
@@ -33,6 +42,38 @@ export default function(props) {
           alt="tick icon"
         />
       </div>
+      <FormControl>
+        <RadioGroup
+          name="actions"
+          value={selectedAction}
+          onChange={(e) => setSelectedAction(e.target.value)}
+        >
+          <FormControlLabel
+            value="remove"
+            className={classes.radioStyles}
+            control={<Radio color="primary" />}
+            label={REMOVE_ROWS}
+          />
+          <FormControlLabel
+            value="replace"
+            className={classes.radioStyles}
+            control={<Radio color="primary" />}
+            label={REPLACE_ROWS}
+          />
+        </RadioGroup>
+      </FormControl>
+      <br />
+      {selectedAction == 'replace' && (
+        <FormControl className={classes.replaceWithInput}>
+          <FormLabel className={classes.replaceWithText}>{REPLACE_WITH}</FormLabel>
+          <TextField
+            variant="outlined"
+            value={replaceValue}
+            onChange={(e) => setReplaceValue(e.target.value)}
+            data-testid="actions-widget-textfield"
+          />
+        </FormControl>
+      )}
     </section>
   );
 }
