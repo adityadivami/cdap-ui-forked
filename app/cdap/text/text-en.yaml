@@ -3428,10 +3428,9 @@ features:
     dataQuality: Data Quality
   WranglerNewFooterPanel: 
     currentData: Current data - 1000 rows and 30 columns
-    trasnformations: Trasnformations
+    transformations: Transformations
     recipeSteps: Recipe Steps
     directives: Directives
-    transformations: transformations
   WranglerNewParsingDrawer:
     importSchema: Import schema
     apply: Apply

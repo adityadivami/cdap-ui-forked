@@ -44,8 +44,12 @@ export default function() {
 
       <Box>
         <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title={CONNECTORS_TITLE} />
-          <Box className={classes.viewMore}>{VIEW_ALL_LABEL}</Box>
+          <WrangleHomeTitle title="Start data exploration" />
+          <Box className={classes.viewMore}>
+            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}>
+              View all
+            </Link>
+          </Box>
         </Box>
         <WrangleCard />
         <Box className={classes.headerTitle}>
@@ -56,7 +60,12 @@ export default function() {
             </Link>
           </Box>
         </Box>
-        <OngoingDataExploration cardCount={cardCount} />
+        <OngoingDataExploration cardCount={cardCount} fromAddress="home" />
+        {loading && (
+          <Box className={classes.loadingContainer}>
+            <LoadingSVG />
+          </Box>
+        )}
       </Box>
     </Box>
   );

@@ -19,6 +19,12 @@ import grey from '@material-ui/core/colors/grey';
 import { blue } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
+  box: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   breadCombContainer: {
     display: 'flex',
     justifyContent: 'space-between',

@@ -42,7 +42,7 @@ export default function WorkspaceList() {
         </Breadcrumbs>
       </Box>
       <Box className={classes.explorationList}>
-        <OngoingDataExploration />
+        <OngoingDataExploration fromAddress="workspaceList" />
       </Box>
     </Box>
   );

@@ -60,7 +60,7 @@ export default function({
   value,
   index,
   connectionId,
-  setIsErrorOnNoWorkSpace,
+  setToaster,
   ...props
 }) {
   const classes = useStyles();
@@ -123,7 +123,7 @@ export default function({
                         entity={connectorType}
                         initialConnectionId={connectionIdProp}
                         toggleLoader={props.toggleLoader}
-                        setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                        setToaster={setToaster}
                       />
                     )
                   ) : (

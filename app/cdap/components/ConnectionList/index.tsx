@@ -31,6 +31,7 @@ import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './Components/ConnectionTabs';
 import SubHeader from './Components/SubHeader';
 import { useStyles } from './styles';
+import PositionedSnackbar from 'components/SnackbarComponent';
 import { IData, IdataForTabs } from './types';
 
 const SelectDatasetWrapper = styled(Box)({
@@ -56,7 +57,11 @@ export default function ConnectionList() {
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
-  const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
+  const [toaster, setToaster] = useState({
+    open: false,
+    message: '',
+    isSuccess: false,
+  });
 
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
@@ -307,7 +312,7 @@ export default function ConnectionList() {
                   index={index}
                   connectionId={connectionId || ''}
                   toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
-                  setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                  setToaster={setToaster}
                 />
               </Box>
             );
@@ -319,8 +324,18 @@ export default function ConnectionList() {
           <LoadingSVG />
         </div>
       )}
-      {isErrorOnNoWorkspace && (
-        <ErrorSnackbar handleCloseError={() => setIsErrorOnNoWorkSpace(false)} />
+      {toaster.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setToaster({
+              open: false,
+              message: '',
+              isSuccess: false,
+            })
+          }
+          messageToDisplay={toaster.message}
+          isSuccess={toaster.isSuccess}
+        />
       )}
     </Box>
   );
