@@ -94,8 +94,13 @@ export default function(props) {
             ref={ref}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
+            data-testid="select-column-list-input"
           />
-          <Box className={classes.searchInputAdornment} onClick={handleFocus}>
+          <Box
+            className={classes.searchInputAdornment}
+            onClick={handleFocus}
+            data-testid="select-column-list-box"
+          >
             {SearchIcon()}
           </Box>
         </div>
@@ -133,6 +138,7 @@ export default function(props) {
                           ? true
                           : false
                       }
+                      data-testid="select-column-list-radio"
                     />
                   </TableCell>
                   <TableCell

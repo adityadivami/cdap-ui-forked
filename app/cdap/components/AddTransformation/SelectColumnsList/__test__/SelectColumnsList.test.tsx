@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
@@ -37,7 +37,10 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'world', type: 'a' },
               ]}
               setSelectedColumns={() => jest.fn()}
-              dataQuality={[{ label: 'hello' }, { label: 'world' }]}
+              dataQuality={[
+                { label: 'hello', value: 5 },
+                { label: 'world', value: 1 },
+              ]}
             />
           </Route>
         </Switch>
@@ -57,7 +60,10 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'world', type: 'a' },
               ]}
               setSelectedColumns={() => jest.fn()}
-              dataQuality={[{ label: 'hello' }, { label: 'world' }]}
+              dataQuality={[
+                { label: 'hello', value: 5 },
+                { label: 'world', value: 5 },
+              ]}
             />
           </Route>
         </Switch>
@@ -77,7 +83,10 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'world', type: 'a' },
               ]}
               setSelectedColumns={() => jest.fn()}
-              dataQuality={[{ label: 'hello' }, { label: 'world' }]}
+              dataQuality={[
+                { label: 'hello', value: 5 },
+                { label: 'world', value: 5 },
+              ]}
             />
           </Route>
         </Switch>
@@ -86,8 +95,8 @@ describe('It should test the SelectColumnsList Component', () => {
     expect(container).toBeDefined;
   });
 
-  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and trigger onChnage Event', () => {
-    render(
+  it('should render the SelectColumnsList Component with some input value along with label and null', () => {
+    const container = render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -98,23 +107,26 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'world', type: 'a' },
               ]}
               setSelectedColumns={() => jest.fn()}
-              dataQuality={[{ label: 'hello' }, { label: 'world' }]}
+              dataQuality={[
+                { label: 'hello', value: 5 },
+                { label: 'world', value: 5 },
+              ]}
             />
           </Route>
         </Switch>
       </Router>
     );
 
-    const element: HTMLInputElement = document.getElementById(
-      'transformation-checkbox-select-all-columns'
-    ) as HTMLInputElement;
-    expect(element.checked).toBeFalsy();
+    const inputEle = screen.getByTestId(/select-column-list-input/i);
+    fireEvent.change(inputEle, { target: { value: '123' } });
+    fireEvent.change(inputEle, { target: { value: 'hello' } });
+    fireEvent.change(inputEle, { target: { value: null } });
 
-    element.click();
-    expect(element.checked).toBeTruthy();
+    const radio = screen.getAllByTestId(/select-column-list-radio/i);
+    fireEvent.click(radio[0]);
 
-    document.getElementById('transformation-checkbox-select-all-columns').click();
-
-    expect(element.checked).toBeFalsy();
+    const ele = screen.getByTestId(/select-column-list-box/i);
+    fireEvent.click(ele);
+    expect(container).toBeDefined;
   });
 });

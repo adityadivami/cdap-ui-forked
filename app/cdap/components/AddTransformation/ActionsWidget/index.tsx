@@ -70,6 +70,7 @@ export default function(props) {
             variant="outlined"
             value={replaceValue}
             onChange={(e) => setReplaceValue(e.target.value)}
+            data-testid="actions-widget-textfield"
           />
         </FormControl>
       )}
