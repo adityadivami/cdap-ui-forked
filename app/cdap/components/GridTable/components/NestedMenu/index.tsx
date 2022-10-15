@@ -37,7 +37,7 @@ const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
       setNestedOptions(item.options);
       setAnchorEl2(event.currentTarget);
     } else {
-      submitMenuOption(item.value);
+      submitMenuOption(item.value, item.supported_dataType);
       setAnchorEl(null);
     }
   };
@@ -85,7 +85,7 @@ const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
             e.stopPropagation();
             setAnchorEl(null);
             setAnchorEl2(null);
-            submitMenuOption(item.value);
+            submitMenuOption(item.value, item.supported_dataType);
           }}
         />
       </Menu>

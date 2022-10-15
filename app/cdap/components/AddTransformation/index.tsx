@@ -40,7 +40,13 @@ import {
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/constants';
 
 export default function(props) {
-  const { functionName, columnData, setLoading, missingDataList } = props;
+  const {
+    directiveFunctionSupportedDataType,
+    functionName,
+    columnData,
+    setLoading,
+    missingDataList,
+  } = props;
   const params = useParams() as any;
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnsPopup, setColumnsPopup] = useState(false);
@@ -347,6 +353,7 @@ export default function(props) {
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={missingDataList}
+              directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
             />
           </div>
           <Button
