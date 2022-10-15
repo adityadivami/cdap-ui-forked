@@ -471,10 +471,16 @@ export default function() {
 
   const deleteRecipes = (new_arr, remaining_arr) => {
     applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
+    DataPrepStore.dispatch({
+      type: DataPrepActions.setUndoDirective,
+      payload: {
+        undoDirectives: [],
+      },
+    });
   };
 
   // Redux store
-  const { data, headers, types, directives } = dataprep;
+  const { data, headers, types, directives, undoDirectives } = dataprep;
 
   const handleCloseSnackbar = () => {
     const stepsArr = JSON.parse(JSON.stringify(directives));
@@ -504,6 +510,32 @@ export default function() {
     setOpenColumnView(false);
   };
 
+  const undoRedoFunction = (option) => {
+    if (option === 'undo') {
+      const last_element = directives.slice(-1);
+      const newDirective = directives.slice(0, -1);
+      console.log('last_element', last_element, directives, newDirective);
+      DataPrepStore.dispatch({
+        type: DataPrepActions.setUndoDirective,
+        payload: {
+          undoDirectives: undoDirectives.concat(last_element),
+        },
+      });
+      applyDirectiveAPICall(newDirective, '', [], '');
+    } else if (option === 'redo') {
+      const last_element = undoDirectives.slice(-1);
+      const newDirective = directives.concat(last_element);
+      console.log('last_element', last_element, directives, newDirective);
+      DataPrepStore.dispatch({
+        type: DataPrepActions.setUndoDirective,
+        payload: {
+          undoDirectives: undoDirectives.slice(0, -1),
+        },
+      });
+      applyDirectiveAPICall(newDirective, '', [], '');
+    }
+  };
+  console.log('directives', directives, undoDirectives);
   return (
     <Box>
       {showBreadCrumb && (
@@ -516,7 +548,11 @@ export default function() {
       )}
       <ToolBarList
         columnType={columnType}
-        submitMenuOption={(option, dataType) => applyDirective(option, columnSelected, dataType)}
+        submitMenuOption={(option, dataType) =>
+          option === 'redo' || option === 'undo'
+            ? undoRedoFunction(option)
+            : applyDirective(option, columnSelected, dataType)
+        }
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
       />

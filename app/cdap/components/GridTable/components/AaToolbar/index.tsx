@@ -52,8 +52,8 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
-        <IconButton>{Undo}</IconButton>
-        <IconButton>{Redo}</IconButton>
+        <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
+        <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
 
         {Divider}
         <NestedMenu
