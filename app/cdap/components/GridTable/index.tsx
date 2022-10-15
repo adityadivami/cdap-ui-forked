@@ -355,20 +355,22 @@ export default function() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((eachRow, rowIndex) => {
-            return (
-              <TableRow key={`row-${rowIndex}`}>
-                {headers.map((eachKey, eachIndex) => {
-                  return (
-                    <GridTextCell
-                      cellValue={eachRow[eachKey] || '--'}
-                      key={`${eachKey}-${eachIndex}`}
-                    />
-                  );
-                })}
-              </TableRow>
-            );
-          })}
+          {data &&
+            Array.isArray(data) &&
+            data.map((eachRow, rowIndex) => {
+              return (
+                <TableRow key={`row-${rowIndex}`}>
+                  {headers.map((eachKey, eachIndex) => {
+                    return (
+                      <GridTextCell
+                        cellValue={eachRow[eachKey] || '--'}
+                        key={`${eachKey}-${eachIndex}`}
+                      />
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
         </TableBody>
       </Table>
       <FooterPanel

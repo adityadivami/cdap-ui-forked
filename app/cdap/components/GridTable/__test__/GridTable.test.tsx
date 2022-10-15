@@ -85,7 +85,7 @@ describe('Testing Grid Table Component', () => {
     expect(container.getByTestId('grid-table')).toBeInTheDocument();
     const ele = screen.getByTestId(/footer-panel-box-click/i);
     fireEvent.click(ele);
-    const ele2 = screen.getByTestId(/menu-item-component-8/i);
+    const ele2 = screen.getByTestId(/menu-item-component-0/i);
     fireEvent.click(ele2);
     expect(container).toBeDefined();
   });

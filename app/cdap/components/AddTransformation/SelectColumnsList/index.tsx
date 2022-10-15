@@ -116,46 +116,50 @@ export default function(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {columns.map((eachColumn, index) => (
-              <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
-                <TableCell
-                  classes={{
-                    body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
-                  }}
-                >
-                  <Radio
-                    color="primary"
-                    onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
-                    checked={
-                      selectedColumns.filter((el) => el.label == eachColumn.label).length
-                        ? true
-                        : false
-                    }
-                  />
-                </TableCell>
-                <TableCell
-                  classes={{ body: classes.recipeStepsTableRowStyles }}
-                  style={{ width: 50 }}
-                  // component="th"
-                  // scope="row"
-                >
-                  <Typography className={classes.recipeStepsActionTypeStyles}>
-                    {eachColumn.label}
-                  </Typography>
-                  <Typography className={classes.recipeStepsActionTypeStyles}>
-                    {eachColumn.type}
-                  </Typography>
-                </TableCell>
-                <TableCell
-                  // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
-                  className={[classes.recipeStepsTableRowStyles, classes.circularBarCell].join(' ')}
-                >
-                  {dataQualityValue?.length && (
-                    <DataQualityProgress value={dataQualityValue[index]?.value} />
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
+            {columns &&
+              Array.isArray(columns) &&
+              columns.map((eachColumn, index) => (
+                <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
+                  <TableCell
+                    classes={{
+                      body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
+                    }}
+                  >
+                    <Radio
+                      color="primary"
+                      onChange={(e) => onSelect(e, eachColumn.label, eachColumn)}
+                      checked={
+                        selectedColumns.filter((el) => el.label == eachColumn.label).length
+                          ? true
+                          : false
+                      }
+                    />
+                  </TableCell>
+                  <TableCell
+                    classes={{ body: classes.recipeStepsTableRowStyles }}
+                    style={{ width: 50 }}
+                    // component="th"
+                    // scope="row"
+                  >
+                    <Typography className={classes.recipeStepsActionTypeStyles}>
+                      {eachColumn.label}
+                    </Typography>
+                    <Typography className={classes.recipeStepsActionTypeStyles}>
+                      {eachColumn.type}
+                    </Typography>
+                  </TableCell>
+                  <TableCell
+                    // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
+                    className={[classes.recipeStepsTableRowStyles, classes.circularBarCell].join(
+                      ' '
+                    )}
+                  >
+                    {dataQualityValue?.length && (
+                      <DataQualityProgress value={dataQualityValue[index]?.value} />
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

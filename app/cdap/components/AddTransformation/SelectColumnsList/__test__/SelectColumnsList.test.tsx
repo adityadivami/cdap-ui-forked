@@ -30,7 +30,15 @@ describe('It should test the SelectColumnsList Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <SelectColumnsList selectedColumnsCount={20} />
+            <SelectColumnsList
+              selectedColumnsCount={20}
+              columnData={[
+                { label: 'hello', type: 'a' },
+                { label: 'world', type: 'a' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[{ label: 'hello' }, { label: 'world' }]}
+            />
           </Route>
         </Switch>
       </Router>
@@ -42,7 +50,15 @@ describe('It should test the SelectColumnsList Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <SelectColumnsList selectedColumnsCount={2} />
+            <SelectColumnsList
+              selectedColumnsCount={2}
+              columnData={[
+                { label: 'hello', type: 'a' },
+                { label: 'world', type: 'a' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[{ label: 'hello' }, { label: 'world' }]}
+            />
           </Route>
         </Switch>
       </Router>
@@ -54,7 +70,15 @@ describe('It should test the SelectColumnsList Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <SelectColumnsList selectedColumnsCount={0} />
+            <SelectColumnsList
+              selectedColumnsCount={0}
+              columnData={[
+                { label: 'hello', type: 'a' },
+                { label: 'world', type: 'a' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[{ label: 'hello' }, { label: 'world' }]}
+            />
           </Route>
         </Switch>
       </Router>
@@ -67,7 +91,15 @@ describe('It should test the SelectColumnsList Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <SelectColumnsList selectedColumnsCount={10} />
+            <SelectColumnsList
+              selectedColumnsCount={10}
+              columnData={[
+                { label: 'hello', type: 'a' },
+                { label: 'world', type: 'a' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[{ label: 'hello' }, { label: 'world' }]}
+            />
           </Route>
         </Switch>
       </Router>

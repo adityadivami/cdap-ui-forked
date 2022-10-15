@@ -30,7 +30,12 @@ describe('It should test the SelectColumnsList Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <AddTransformation />
+            <AddTransformation
+              functionName="null"
+              columnData={[{ label: 'hello' }, { label: 'world' }]}
+              setLoading
+              missingDataList={[]}
+            />
           </Route>
         </Switch>
       </Router>
@@ -40,5 +45,23 @@ describe('It should test the SelectColumnsList Component', () => {
     fireEvent.click(ele);
     const ele1 = screen.getByTestId(/select-column-widget-button/i);
     fireEvent.click(ele1);
+  });
+
+  it('should render the SelectColumnsList Component where functionName is parseCSV', () => {
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <AddTransformation
+              functionName="parseCSV"
+              columnData={[{ label: 'hello' }, { label: 'world' }]}
+              setLoading
+              missingDataList={[]}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    expect(container).toBeDefined;
   });
 });

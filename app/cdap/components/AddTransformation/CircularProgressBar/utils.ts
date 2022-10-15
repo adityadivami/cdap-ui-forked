@@ -1,10 +1,10 @@
 export const prepareDataQualtiy = (statistics, columnList) => {
-  const dataQualityToArray = Object.entries(statistics);
+  const dataQualityToArray = Object?.entries(statistics);
   const dataQuality = [];
   columnList.map((columnName) => {
     dataQualityToArray.forEach(([key, value]) => {
       if (columnName.name == key) {
-        const generalValues = Object.entries(value);
+        const generalValues = Object?.entries(value);
         generalValues.forEach(([vKey, vValue]) => {
           if (vKey == 'general') {
             if (vValue.null) {
