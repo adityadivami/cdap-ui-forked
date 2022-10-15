@@ -14,9 +14,9 @@
  * the License.
  */
 
-import React from 'react';
-import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { Divider } from '@material-ui/core';
+import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
+import React from 'react';
 import { useStyles } from './styles';
 
 export default function TransitionComponent(props) {
