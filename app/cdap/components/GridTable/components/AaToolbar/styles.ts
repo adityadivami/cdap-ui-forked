@@ -81,4 +81,7 @@ export const useStyles = makeStyles({
   lastDivider: {
     margin: '0px 0px 0px 4px',
   },
+  disabledFunction: {
+    cursor: 'not-allowed',
+  },
 });

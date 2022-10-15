@@ -57,11 +57,13 @@ import {
   convertNonNullPercent,
   checkAlphaNumericAndSpaces,
   calculateDistributionGraphData,
+  undoRedoLogic,
 } from './utils';
 import ColumnView from 'components/ColumnView';
 import CreatePipelineModal from './components/Modals/CreatePipeLineModal';
 import ViewSchemaModal from './components/Modals/ViewSchemaModal';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import _ from 'lodash';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -306,10 +308,11 @@ export default function() {
     }
   };
 
-  const applyDirectiveAPICall = (newDirective, action, removed_arr, from) => {
+  const applyDirectiveAPICall = (newDirectives, action, removed_arr, from) => {
+    const newDirective = Array.isArray(newDirectives) ? newDirectives : [newDirectives];
     setLoading(true);
     const { dataprep } = DataPrepStore.getState();
-    const { workspaceId, workspaceUri, directives, insights } = dataprep;
+    const { workspaceId, workspaceUri, directives, insights, activityPerformed } = dataprep;
     let gridParams = {};
     const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
@@ -340,6 +343,30 @@ export default function() {
             headers: response.headers,
             types: response.types,
             ...gridParams,
+          },
+        });
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setActivityStatus,
+          payload: {
+            activityPerformed: {
+              activityStack:
+                action == 'add'
+                  ? _.concat(activityPerformed.activityStack, [
+                      {
+                        isAdded: true,
+                        directives: newDirective,
+                      },
+                    ])
+                  : _.concat(activityPerformed.activityStack, [
+                      {
+                        isDeleted: true,
+                        directives: removed_arr,
+                      },
+                    ]),
+              undoStack: [],
+              isUndoEnabled: true,
+              isRedoEnabled: false,
+            },
           },
         });
         setLoading(false);
@@ -493,17 +520,27 @@ export default function() {
   };
 
   const deleteRecipes = (new_arr, remaining_arr) => {
-    applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
     DataPrepStore.dispatch({
-      type: DataPrepActions.setUndoDirective,
+      type: DataPrepActions.setActivityStatus,
       payload: {
-        undoDirectives: [],
+        activityPerformed: {
+          activityStack: _.concat(activityPerformed.activityStack, [
+            {
+              isDeleted: true,
+              directives: remaining_arr,
+            },
+          ]),
+          undoStack: [],
+          isUndoEnabled: true,
+          isRedoEnabled: false,
+        },
       },
     });
+    applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
   };
 
   // Redux store
-  const { data, headers, types, directives, undoDirectives } = dataprep;
+  const { data, headers, types, directives, activityPerformed } = dataprep;
 
   const handleCloseSnackbar = () => {
     const stepsArr = JSON.parse(JSON.stringify(directives));
@@ -533,32 +570,43 @@ export default function() {
     setOpenColumnView(false);
   };
 
-  const undoRedoFunction = (option) => {
-    if (option === 'undo') {
-      const last_element = directives.slice(-1);
-      const newDirective = directives.slice(0, -1);
-      console.log('last_element', last_element, directives, newDirective);
-      DataPrepStore.dispatch({
-        type: DataPrepActions.setUndoDirective,
-        payload: {
-          undoDirectives: undoDirectives.concat(last_element),
-        },
+  const undoRedoFunction = async (option) => {
+    setLoading(true);
+    const output = await undoRedoLogic(params, option);
+    if (output.data) {
+      setToaster({
+        open: true,
+        message:
+          output.action === 'add'
+            ? `Transformation successfully added`
+            : 'Transformation successfully deleted',
+        isSuccess: true,
       });
-      applyDirectiveAPICall(newDirective, '', [], '');
-    } else if (option === 'redo') {
-      const last_element = undoDirectives.slice(-1);
-      const newDirective = directives.concat(last_element);
-      console.log('last_element', last_element, directives, newDirective);
-      DataPrepStore.dispatch({
-        type: DataPrepActions.setUndoDirective,
-        payload: {
-          undoDirectives: undoDirectives.slice(0, -1),
-        },
+      setLoading(false);
+      setTimeout(() => {
+        setToaster({
+          open: false,
+          message: '',
+          isSuccess: false,
+        });
+      }, 5000);
+    } else {
+      setToaster({
+        open: true,
+        message: 'Failed to transform',
+        isSuccess: false,
       });
-      applyDirectiveAPICall(newDirective, '', [], '');
+      setLoading(false);
+      setTimeout(() => {
+        setToaster({
+          open: false,
+          message: '',
+          isSuccess: false,
+        });
+      }, 5000);
     }
   };
-  console.log('directives', directives, undoDirectives);
+
   return (
     <Box>
       {showBreadCrumb && (
@@ -769,11 +817,7 @@ export default function() {
           open={openDirective}
           columnNamesList={headersNamesList}
           onDirectiveInputHandler={(directives) => {
-            const payload = {
-              context: params.namespace,
-              workspaceId: params.wid,
-            };
-            getWorkSpaceData(payload as IParams, wid as string, directives);
+            applyDirectiveAPICall(directives[0], 'add', [], '');
             setOpenDirective(false);
           }}
           onClose={() => setOpenDirective(false)}
