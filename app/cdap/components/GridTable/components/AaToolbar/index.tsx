@@ -61,10 +61,13 @@ import {
   GRID_TITLE,
   OTHER_TITLE,
 } from './constants';
+import DataPrepStore from 'components/DataPrep/store';
 
 const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) => {
   const classes = useStyles();
   const [isShowNames, setIsShowName] = useState(false);
+  const { dataprep } = DataPrepStore.getState();
+  const { activityPerformed } = dataprep;
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
@@ -76,8 +79,19 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             arrow: classes.arrowTooltip,
           }}
         >
-          <Box className={classes.functionNameWrapper}>
-            <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
+          <Box
+            className={
+              !activityPerformed.isUndoEnabled
+                ? `${classes.functionNameWrapper} ${classes.disabledFunction}`
+                : classes.functionNameWrapper
+            }
+          >
+            <IconButton
+              disabled={activityPerformed.isUndoEnabled ? false : true}
+              onClick={() => submitMenuOption('undo', ['all'])}
+            >
+              {Undo}
+            </IconButton>
             {isShowNames && <Typography className={classes.typoClass}>{UNDO_TITLE}</Typography>}
           </Box>
         </Tooltip>
@@ -89,8 +103,19 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             arrow: classes.arrowTooltip,
           }}
         >
-          <Box className={classes.functionNameWrapper}>
-            <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
+          <Box
+            className={
+              !activityPerformed.isRedoEnabled
+                ? `${classes.functionNameWrapper} ${classes.disabledFunction}`
+                : classes.functionNameWrapper
+            }
+          >
+            <IconButton
+              disabled={activityPerformed.isRedoEnabled ? false : true}
+              onClick={() => submitMenuOption('redo', ['all'])}
+            >
+              {Redo}
+            </IconButton>
             {isShowNames && <Typography className={classes.typoClass}>{REDO_TITLE}</Typography>}
           </Box>
         </Tooltip>

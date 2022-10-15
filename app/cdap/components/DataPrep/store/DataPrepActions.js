@@ -39,8 +39,7 @@ const DataPrepActions = {
   setTargetDataModel: 'DATAPREP_SET_TARGET_DATA_MODEL',
   setTargetModel: 'DATAPREP_SET_TARGET_MODEL',
   setConnectorType: 'SET_CONNECTOR_TYPE',
-  setRecentDirective: 'SET_RECENT_DIRECTIVE',
-  setUndoDirective: 'SET_UNDO_DIRECTIVE',
+  setActivityStatus: 'SET_ACTIVITY_STATUS',
 };
 
 export default DataPrepActions;

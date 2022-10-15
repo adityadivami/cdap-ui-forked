@@ -25,7 +25,10 @@ import {
   CONTAIN_LETTER_ONLY,
   CONTAIN_NUMBER_ONLY,
 } from './constants';
-
+import DataPrepStore from 'components/DataPrep/store';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import MyDataPrepApi from 'api/dataprep';
+import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 /**
  *
  * @description This function takes API response of execute api and object containing detail about null, non-null or
@@ -189,4 +192,199 @@ export const calculateDistributionGraphData = (values, columnName) => {
     .map((key) => {
       return { text: key, value: map[key] };
     });
+};
+
+export const executeApiCall = (params, directiveForPayload, from) => {
+  console.log('directiveForPayload', directiveForPayload);
+  const executeApiData = {};
+  const { dataprep } = DataPrepStore.getState();
+  const { workspaceId, workspaceUri, directives, insights, activityPerformed } = dataprep;
+  let gridParams = {};
+  const updatedDirectives = directiveForPayload;
+  const requestBody = directiveRequestBodyCreator(updatedDirectives);
+  requestBody.insights = insights;
+
+  const workspaceInfo = {
+    properties: insights,
+  };
+  gridParams = {
+    directives: updatedDirectives,
+    workspaceId,
+    workspaceUri,
+    workspaceInfo,
+    insights,
+  };
+  const payload = {
+    context: params.namespace,
+    workspaceId: params.wid,
+  };
+  return new Promise((resolve) => {
+    MyDataPrepApi.execute(payload, requestBody).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            values: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setActivityStatus,
+          payload: {
+            activityPerformed: {
+              activityStack: activityPerformed.activityStack,
+              undoStack: activityPerformed.undoStack,
+              isUndoEnabled: activityPerformed.activityStack.length ? true : false,
+              isRedoEnabled: from === 'undo' ? true : false,
+            },
+          },
+        });
+        resolve(response);
+      },
+      (err) => {
+        resolve(err);
+      }
+    );
+  });
+};
+
+export const undoRedoLogic = async (params, selectedOption) => {
+  let finalOutput = {
+    data: {},
+    action: '',
+  };
+  const { dataprep } = DataPrepStore.getState();
+  const { directives, activityPerformed } = dataprep;
+  switch (selectedOption) {
+    case 'undo':
+      const last_action = activityPerformed.activityStack.slice(-1);
+      if (last_action[0]?.isAdded && directives.length === 1) {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setActivityStatus,
+          payload: {
+            activityPerformed: {
+              activityStack: activityPerformed.activityStack,
+              undoStack: last_action[0].directives,
+              isUndoEnabled: false,
+              isRedoEnabled: true,
+            },
+          },
+        });
+        const getData = await executeApiCall(params, [], 'undo');
+
+        finalOutput = {
+          data: getData,
+          action: 'delete',
+        };
+      } else if (last_action[0]?.isAdded && directives.length > 1) {
+        const last_action = activityPerformed.activityStack.slice(-1);
+        const directiveForPayload =
+          last_action[0]?.directives?.length > 1
+            ? directives.slice(0, -last_action[0].directives.length)
+            : directives.slice(0, -1);
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setActivityStatus,
+          payload: {
+            activityPerformed: {
+              activityStack: activityPerformed.activityStack,
+              undoStack: last_action[0].directives,
+              isUndoEnabled: false,
+              isRedoEnabled: true,
+            },
+          },
+        });
+        const getData = await executeApiCall(params, directiveForPayload, 'undo');
+        finalOutput = {
+          data: getData,
+          action: 'delete',
+        };
+      } else if (last_action[0]?.isDeleted) {
+        const last_action = activityPerformed.activityStack.slice(-1);
+        const directiveForPayload = _.concat(directives, last_action[0].directives);
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setActivityStatus,
+          payload: {
+            activityPerformed: {
+              activityStack: activityPerformed.activityStack,
+              undoStack: last_action[0].directives,
+              isUndoEnabled: false,
+              isRedoEnabled: true,
+            },
+          },
+        });
+        const getData = await executeApiCall(params, directiveForPayload, 'undo');
+        finalOutput = {
+          data: getData,
+          action: 'add',
+        };
+      }
+      break;
+    case 'redo':
+      const last_activity = activityPerformed.activityStack.slice(-1);
+      if (last_activity[0]?.isAdded) {
+        const directiveForPayload = _.concat(directives, last_activity[0].directives);
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setActivityStatus,
+          payload: {
+            activityPerformed: {
+              activityStack: activityPerformed.activityStack,
+              undoStack: last_activity[0].directives,
+              isUndoEnabled: true,
+              isRedoEnabled: true,
+            },
+          },
+        });
+        const getData = await executeApiCall(params, directiveForPayload, 'redo');
+        finalOutput = {
+          data: getData,
+          action: 'add',
+        };
+      } else if (last_activity[0]?.isDeleted && directives.length === 1) {
+        const last_activity = activityPerformed.activityStack.slice(-1);
+        const directiveForPayload = _.concat(directives, last_activity[0].directives);
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setActivityStatus,
+          payload: {
+            activityPerformed: {
+              activityStack: activityPerformed.activityStack,
+              undoStack: last_activity[0].directives,
+              isUndoEnabled: true,
+              isRedoEnabled: true,
+            },
+          },
+        });
+        const getData = await executeApiCall(params, [], 'redo');
+        finalOutput = {
+          data: getData,
+          action: 'delete',
+        };
+      } else if (last_activity[0]?.isDeleted && directives.length > 1) {
+        const last_activity = activityPerformed.activityStack.slice(-1);
+        const directiveForPayload =
+          last_activity[0]?.directives?.length > 1
+            ? directives.slice(0, -last_activity[0].directives.length)
+            : directives.slice(0, -1);
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setActivityStatus,
+          payload: {
+            activityPerformed: {
+              activityStack: activityPerformed.activityStack,
+              undoStack: last_activity[0].directives,
+              isUndoEnabled: true,
+              isRedoEnabled: true,
+            },
+          },
+        });
+        const getData = await executeApiCall(params, directiveForPayload, 'redo');
+        finalOutput = {
+          data: getData,
+          action: 'delete',
+        };
+      }
+      break;
+  }
+  return finalOutput;
 };

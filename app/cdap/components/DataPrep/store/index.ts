@@ -77,8 +77,12 @@ export interface IDataPrepState {
   targetDataModel?: IDataModel;
   targetModel?: IModel;
   connectorType?: string;
-  recentDirective?: string[];
-  undoDirectives?: string[];
+  activityPerformed?: {
+    activityStack: [];
+    undoStack: [];
+    isUndoEnabled: boolean;
+    isRedoEnabled: boolean;
+  };
 }
 
 const defaultInitialState: IDataPrepState = {
@@ -105,8 +109,12 @@ const defaultInitialState: IDataPrepState = {
   targetDataModel: null,
   targetModel: null,
   connectorType: null,
-  recentDirective: [],
-  undoDirectives: [],
+  activityPerformed: {
+    activityStack: [],
+    undoStack: [],
+    isUndoEnabled: false,
+    isRedoEnabled: false,
+  },
 };
 
 const errorInitialState = {
@@ -265,14 +273,15 @@ const dataprep = (state = defaultInitialState, action = defaultAction) => {
         connectorType: action.payload.connectorType,
       });
       break;
-    case DataPrepActions.setRecentDirective:
+    case DataPrepActions.setActivityStatus:
+      console.log('action', action);
       stateCopy = Object.assign({}, state, {
-        recentDirective: action.payload.recentDirective,
-      });
-      break;
-    case DataPrepActions.setUndoDirective:
-      stateCopy = Object.assign({}, state, {
-        undoDirectives: action.payload.undoDirectives,
+        activityPerformed: {
+          activityStack: action.payload.activityPerformed.activityStack,
+          undoStack: action.payload.activityPerformed.undoStack,
+          isUndoEnabled: action.payload.activityPerformed.isUndoEnabled,
+          isRedoEnabled: action.payload.activityPerformed.isRedoEnabled,
+        },
       });
       break;
     default:
