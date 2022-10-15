@@ -49,6 +49,7 @@ const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption, column
           e.stopPropagation();
           setAnchorEl(e.currentTarget);
         }}
+        id="nested-menu-icon-button"
       >
         {icon}
       </IconButton>
