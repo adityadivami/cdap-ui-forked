@@ -310,7 +310,6 @@ export default function() {
 
   const applyDirectiveAPICall = (newDirectives, action, removed_arr, from) => {
     const newDirective = Array.isArray(newDirectives) ? newDirectives : [newDirectives];
-    console.log('newDirective, action, removed_arr, from', newDirective, action, removed_arr, from);
     setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights, activityPerformed } = dataprep;
@@ -607,7 +606,6 @@ export default function() {
       }, 5000);
     }
   };
-  console.log('activityPerformed', activityPerformed);
 
   return (
     <Box>
@@ -819,11 +817,7 @@ export default function() {
           open={openDirective}
           columnNamesList={headersNamesList}
           onDirectiveInputHandler={(directives) => {
-            const payload = {
-              context: params.namespace,
-              workspaceId: params.wid,
-            };
-            getWorkSpaceData(payload as IParams, wid as string, directives);
+            applyDirectiveAPICall(directives[0], 'add', [], '');
             setOpenDirective(false);
           }}
           onClose={() => setOpenDirective(false)}
