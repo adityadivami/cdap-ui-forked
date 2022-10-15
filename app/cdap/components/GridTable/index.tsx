@@ -217,6 +217,7 @@ export default function() {
           type: DataPrepActions.setWorkspace,
           payload: {
             data: response.values,
+            values: response.values,
             headers: response.headers,
             types: response.types,
             ...gridParams,

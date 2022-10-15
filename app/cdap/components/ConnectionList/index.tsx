@@ -32,6 +32,7 @@ import ConnectionsTabs from './Components/ConnectionTabs';
 import SubHeader from './Components/SubHeader';
 import { useStyles } from './styles';
 import PositionedSnackbar from 'components/SnackbarComponent';
+import ImportDatasetPanel from 'components/ImportDataset';
 import { IData, IdataForTabs } from './types';
 
 const SelectDatasetWrapper = styled(Box)({
@@ -62,6 +63,7 @@ export default function ConnectionList() {
     message: '',
     isSuccess: false,
   });
+  const [openImportDataPanel, setOpenImportDataPanel] = useState<boolean>(false);
 
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
@@ -246,7 +248,7 @@ export default function ConnectionList() {
   };
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
-      <SubHeader />
+      <SubHeader setOpenImportDataPanel={setOpenImportDataPanel} />
       <SelectDatasetWrapper>
         {filteredData &&
           Array.isArray(filteredData) &&
@@ -336,6 +338,9 @@ export default function ConnectionList() {
           messageToDisplay={toaster.message}
           isSuccess={toaster.isSuccess}
         />
+      )}
+      {openImportDataPanel && (
+        <ImportDatasetPanel handleClosePanel={() => setOpenImportDataPanel(false)} />
       )}
     </Box>
   );

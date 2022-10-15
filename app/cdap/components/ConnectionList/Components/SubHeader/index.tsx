@@ -25,7 +25,8 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import { ADD_CONNECTION_LABEL, IMPORT_DATA_LABEL } from './constants';
 
-export default function() {
+export default function SubHeader(props) {
+  const { setOpenImportDataPanel } = props;
   const classes = useStyles();
 
   const handleAddConnection = () => {
@@ -50,7 +51,7 @@ export default function() {
             <Box className={classes.breadcrumbTyporgraphy}>Add connection</Box>
           </Box>
         </Link>
-        <Box className={classes.importData}>
+        <Box className={classes.importData} onClick={() => setOpenImportDataPanel(true)}>
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
           <Box className={classes.breadcrumbTyporgraphy}>{IMPORT_DATA_LABEL}</Box>
         </Box>
