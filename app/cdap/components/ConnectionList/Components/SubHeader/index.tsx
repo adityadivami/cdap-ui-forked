@@ -27,6 +27,11 @@ import { ADD_CONNECTION_LABEL, IMPORT_DATA_LABEL } from './constants';
 
 export default function() {
   const classes = useStyles();
+
+  const handleAddConnection = () => {
+    localStorage.setItem('addConnection', 'true');
+  };
+
   return (
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
       <Box className={classes.box}>
@@ -39,10 +44,12 @@ export default function() {
       </Box>
 
       <Box className={classes.importDataContainer}>
-        <Box className={classes.importData}>
-          <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadcrumbTyporgraphy}>{ADD_CONNECTION_LABEL}</Box>
-        </Box>
+        <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>
+          <Box onClick={handleAddConnection} className={classes.importData}>
+            <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
+            <Box className={classes.breadcrumbTyporgraphy}>Add connection</Box>
+          </Box>
+        </Link>
         <Box className={classes.importData}>
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
           <Box className={classes.breadcrumbTyporgraphy}>{IMPORT_DATA_LABEL}</Box>
