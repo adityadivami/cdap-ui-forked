@@ -156,6 +156,7 @@ export default function(props) {
         />
       }
       closeClickHandler={closeClickHandler}
+      data-testid="drawer-widget"
     >
       <Box className={classes.bodyContainerStyles}>
         <ParsingPopupBody
