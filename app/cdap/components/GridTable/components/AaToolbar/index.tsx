@@ -26,6 +26,7 @@ import {
   FragmentIcon,
   GridIcon,
   InvalidIcon,
+  LongDivider,
   MathIcon,
   NullIcon,
   OtherIcon,
@@ -93,7 +94,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             {isShowNames && <Typography className={classes.typoClass}>{REDO_TITLE}</Typography>}
           </Box>
         </Tooltip>
-        {Divider}
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Tooltip
           title={NULL_TITLE}
           arrow
@@ -148,7 +149,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             {isShowNames && <Typography className={classes.typoClass}>{COLUMN_TITLE}</Typography>}
           </Box>
         </Tooltip>
-        {Divider}
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Tooltip
           title={STRUCTURE_TITLE}
           arrow
@@ -241,7 +242,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             {isShowNames && <Typography className={classes.typoClass}>{OTHER_TITLE}</Typography>}
           </Box>
         </Tooltip>
-        {Divider}
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Tooltip
           title={GRID_TITLE}
           arrow
@@ -255,7 +256,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             {isShowNames && <Typography className={classes.typoClass}>{GRID_TITLE}</Typography>}
           </Box>
         </Tooltip>
-        {Divider}
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <FunctionSearch
           transformationPanel={(value) => {
             submitMenuOption(value, ['all']);
@@ -263,7 +264,12 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
         />
       </Box>
       <FunctionToggle setIsShowName={setIsShowName} isShowNames={isShowNames} />
-      <IconButton className={classes.arrow}>{Expand}</IconButton>
+      <IconButton
+        className={showBreadCrumb ? classes.openHeader : classes.closeHeader}
+        onClick={() => setShowBreadCrumb(!showBreadCrumb)}
+      >
+        {Expand}
+      </IconButton>
     </Box>
   );
 };

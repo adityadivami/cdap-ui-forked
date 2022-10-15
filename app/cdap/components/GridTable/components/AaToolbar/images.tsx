@@ -39,6 +39,12 @@ export const Divider = (
   </svg>
 );
 
+export const LongDivider = (
+  <svg width="2" height="57" viewBox="0 0 2 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1 1V56" stroke="#E0E0E0" stroke-linecap="round" />
+  </svg>
+);
+
 export const NullIcon = (
   <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="12" cy="12.5" r="9" stroke="#757575" strokeWidth="2" />
