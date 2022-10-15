@@ -20,6 +20,7 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import CallerSample from 'components/DrawerWidget/callerSample';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import React, { useEffect, useState } from 'react';
@@ -230,6 +231,7 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
+      <CallerSample />
     </Box>
   );
 }
