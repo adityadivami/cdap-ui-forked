@@ -21,47 +21,100 @@ import {
   QUICK_SELECT_INFO,
   SELECT_COLUMNS,
   SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION,
+  SELECT_COLUMNS_1_TO_APPLY_THIS_FUNCTION,
+  SELECT_COLUMNS_2_TO_APPLY_THIS_FUNCTION,
 } from '../constants';
 
 export default function(props) {
-  const { selectedColumns } = props;
+  const { selectedColumns, functionName, selected_column_2 } = props;
   const classes = useStyles();
+
+  const singleColumnSelect = () => {
+    return (
+      <>
+        <div className={classes.functionHeadingTextStyles}>
+          {SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION}
+        </div>
+        <div className={classes.quickSelectTextStyles}>{QUICK_SELECT_INFO}</div>
+        {selectedColumns.length ? (
+          selectedColumns.map((item, index) => {
+            return (
+              <Typography variant="body1" className={classes.quickSelectTextStyles}>
+                {index + 1}.&nbsp; {item.label}
+              </Typography>
+            );
+          })
+        ) : (
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.selectButtonStyles}
+            onClick={() => props.handleSelectColumn(false)}
+          >
+            {SELECT_COLUMNS}
+          </Button>
+        )}
+      </>
+    );
+  };
+
+  const multiColumnSelect = () => {
+    return (
+      <>
+        <div className={classes.functionHeadingTextStyles}>
+          {SELECT_COLUMNS_1_TO_APPLY_THIS_FUNCTION}
+        </div>
+        <div className={classes.quickSelectTextStyles}>{QUICK_SELECT_INFO}</div>
+        {selectedColumns.length ? (
+          selectedColumns.map((item, index) => {
+            return (
+              <Typography variant="body1" className={classes.quickSelectTextStyles}>
+                {index + 1}.&nbsp; {item.label}
+              </Typography>
+            );
+          })
+        ) : (
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.selectButtonStyles}
+            onClick={() => props.handleSelectColumn(false)}
+          >
+            {SELECT_COLUMNS}
+          </Button>
+        )}
+        <div className={classes.functionHeadingTextStyles}>
+          {SELECT_COLUMNS_2_TO_APPLY_THIS_FUNCTION}
+        </div>
+        <div className={classes.quickSelectTextStyles}>{QUICK_SELECT_INFO}</div>
+        {selected_column_2.length ? (
+          selected_column_2.map((item, index) => {
+            return (
+              <Typography variant="body1" className={classes.quickSelectTextStyles}>
+                {index + 1}.&nbsp; {item.label}
+              </Typography>
+            );
+          })
+        ) : (
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.selectButtonStyles}
+            onClick={() => props.handleSelectColumn(true)}
+            disabled={selectedColumns.length === 0 ? true : false}
+          >
+            {SELECT_COLUMNS}
+          </Button>
+        )}
+      </>
+    );
+  };
 
   return (
     <section className={classes.functionSectionStyles}>
-      <div className={classes.functionHeadingTextStyles}>
-        <div className={classes.selectedColumnTickIcon}>
-          {SELECT_COLUMNS_TO_APPLY_THIS_FUNCTION}
-          {selectedColumns.length !== 0 && (
-            <img
-              className={classes.greenCheckIconStyles}
-              src="/cdap_assets/img/green-check.svg"
-              alt="tick icon"
-            />
-          )}
-        </div>
-      </div>
-      <div className={classes.quickSelectTextStyles}>
-        {T.translate('features.WranglerNewAddTransformation.quickSelect')}
-      </div>
-      {selectedColumns.length ? (
-        selectedColumns.map((item, index) => {
-          return (
-            <Typography variant="body1" className={classes.quickSelectTextStyles}>
-              {index + 1}.&nbsp; {item.label}
-            </Typography>
-          );
-        })
-      ) : (
-        <Button
-          variant="outlined"
-          color="primary"
-          className={classes.selectButtonStyles}
-          onClick={props.handleSelectColumn}
-        >
-          {T.translate('features.WranglerNewAddTransformation.selectColumns')}
-        </Button>
-      )}
+      {functionName == 'join-columns' || functionName == 'swap-columns'
+        ? multiColumnSelect()
+        : singleColumnSelect()}
     </section>
   );
 }

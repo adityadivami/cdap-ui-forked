@@ -63,6 +63,9 @@ export const useStyles = makeStyles(() => {
       '&:after': {
         border: 'none',
       },
+      '&.MuiInput-underline.Mui-disabled:before': {
+        borderBottomStyle: 'unset',
+      },
     },
     inputStyles: {
       width: '100%',
@@ -100,6 +103,11 @@ export const useStyles = makeStyles(() => {
     },
     signText: {
       marginRight: 10,
+    },
+    exchangeIcon: {
+      width: '30px',
+      margin: '0 auto',
+      cursor: 'pointer',
     },
   };
 });

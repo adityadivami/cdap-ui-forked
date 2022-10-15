@@ -80,12 +80,14 @@ export default function GridTextCell({
       const pattern = getPattern(textSelectionRange, rowNumber, columnSelected);
       const directive = `mask-number :${columnSelected} ${pattern}`;
       applyTransformation(directive);
+      handleClose();
     } else if (optionSelected === 'using-positions') {
       if (!Boolean(column)) {
         return;
       }
       const directive = `cut-character :${columnSelected} :${column} ${textSelectionRange.start}-${textSelectionRange.end}`;
       applyTransformation(directive);
+      handleClose();
     }
     setAnchorEl(null);
   };

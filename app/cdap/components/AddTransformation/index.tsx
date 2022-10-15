@@ -36,8 +36,12 @@ import {
   prepareDirectiveForPattern,
   prepareDirectiveForSendToError,
   prepareDirectiveForCalculate,
+  prepareDirectiveForMerge,
 } from './utils';
-import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/constants';
+import {
+  CALCULATE_OPTIONS,
+  DATATYPE_OPTIONS,
+} from 'components/GridTable/components/NestedMenu/constants';
 
 export default function(props) {
   const {
@@ -51,8 +55,10 @@ export default function(props) {
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
+  const [selected_column_2, setSelectedColumns_2] = useState([]);
   const [selectedAction, setSelectedAction] = useState('');
   const [replaceValue, setReplaceValue] = useState('');
+  const [is_secondSelection, setIsSecondSelection] = useState(false);
   const [directiveComponentValues, setDirectiveComponentsValue] = useState({
     radioOption: '',
     ignoreCase: false,
@@ -80,18 +86,31 @@ export default function(props) {
     columnNames: columnData.map(({ label }) => label),
     selectedColumnForDefineVariable: '',
     selectedColumn: '',
-    counter: '',
+    counter: 1,
     counterName: '',
+    selected_column_2,
+    column_1: '',
+    column_2: '',
   });
-
+  console.log('directiveComponentValues', directiveComponentValues);
   useEffect(() => {
     if (selectedColumns.length) {
       setDirectiveComponentsValue({
         ...directiveComponentValues,
         selectedColumn: selectedColumns[0].label,
+        column_1: selectedColumns[0].label,
       });
     }
   }, [selectedColumns]);
+  useEffect(() => {
+    if (selectedColumns.length) {
+      setDirectiveComponentsValue({
+        ...directiveComponentValues,
+        selected_column_2: selected_column_2[0].label,
+        column_2: selected_column_2[0].label,
+      });
+    }
+  }, [selected_column_2]);
 
   const classes = useStyles();
 
@@ -210,8 +229,8 @@ export default function(props) {
       props.applyTransformation(selectedColumns[0].label, finalValue);
     } else if (functionName === 'filter') {
       const getDirective = prepareDirectiveForFilter(
-        directiveComponentValues.filterRowToKeepOrRemove,
-        directiveComponentValues.filterCondition,
+        directiveComponentValues.filterRowToKeepOrRemove || 'KEEP',
+        directiveComponentValues.filterCondition || 'EMPTY',
         directiveComponentValues.filterConditionValue,
         directiveComponentValues.ignoreCase,
         selectedColumns[0].label
@@ -252,9 +271,10 @@ export default function(props) {
       props.applyTransformation(selectedColumns[0].label, getValue);
     } else if (functionName === 'set-counter') {
       const getValue =
-        directiveComponentValues.filterCondition === 'true'
-          ? `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} true`
-          : `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} ${directiveComponentValues.filterConditionValue}`;
+        directiveComponentValues.filterConditionValue &&
+        directiveComponentValues.filterCondition != 'always'
+          ? `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} ${directiveComponentValues.filterConditionValue}`
+          : `increment-variable ${directiveComponentValues.counterName} ${directiveComponentValues.counter} true`;
       props.applyTransformation(selectedColumns[0].label, getValue);
     } else if (functionName == 'dateTime' || functionName == 'dateTimeAsString') {
       if (directiveComponentValues.radioOption === 'customFormat') {
@@ -264,6 +284,18 @@ export default function(props) {
       }
     } else if (functionName === 'fillNullOrEmpty') {
       props.applyTransformation(selectedColumns[0].label, directiveComponentValues.customInput);
+    } else if (functionName === 'swap-columns') {
+      const directive = `swap :${selectedColumns[0].label} :${selected_column_2[0].label}`;
+      props.applyTransformation(selectedColumns[0].label, directive);
+    } else if (functionName === 'join-columns') {
+      const directive = prepareDirectiveForMerge(
+        directiveComponentValues.radioOption,
+        directiveComponentValues.column_1,
+        directiveComponentValues.column_2,
+        directiveComponentValues.copyColumnName,
+        directiveComponentValues.customInput
+      );
+      props.applyTransformation(selectedColumns[0].label, directive);
     } else if (CALCULATE_OPTIONS.some((item) => item.value === functionName)) {
       const getValue = prepareDirectiveForCalculate(
         functionName,
@@ -279,8 +311,9 @@ export default function(props) {
     }
   };
 
-  const handleSelectColumn = () => {
+  const handleSelectColumn = (is_secondSelection) => {
     setColumnsPopup(true);
+    setIsSecondSelection(is_secondSelection);
   };
 
   const closeSelectColumnsPopup = () => {
@@ -303,9 +336,10 @@ export default function(props) {
             <SelectedColumnCountWidget selectedColumnsCount={selectedColumns.length} />
             <FunctionNameWidget functionName={functionName} />
             <SelectColumnsWidget
-              setSelectedColumns={setSelectedColumns}
               handleSelectColumn={handleSelectColumn}
               selectedColumns={selectedColumns}
+              functionName={functionName}
+              selected_column_2={selected_column_2}
             />
             {functionName == 'null' ? (
               <ActionsWidget
@@ -354,6 +388,10 @@ export default function(props) {
               setSelectedColumns={setSelectedColumns}
               dataQuality={missingDataList}
               directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+              is_secondSelection={is_secondSelection}
+              selectedColumns_1={selectedColumns}
+              selected_column_2={selected_column_2}
+              setSelectedColumns_2={setSelectedColumns_2}
             />
           </div>
           <Button
