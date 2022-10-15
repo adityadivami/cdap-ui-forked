@@ -112,4 +112,9 @@ export const useStyles = makeStyles({
     textOverflow: 'ellipsis',
     pointerEvents: 'none',
   },
+  settingIcon: {
+    position: 'absolute',
+    left: '1108px',
+    bottom: '80px',
+  },
 });

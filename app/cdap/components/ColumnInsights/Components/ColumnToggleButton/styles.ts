@@ -32,12 +32,18 @@ export const useStyles = makeStyles(() => {
       width: '50%',
       textAlign: 'center',
       padding: '10px',
+      '&:hover': {
+        cursor: 'pointer',
+      },
     },
     invalidCountBox: {
       width: '50%',
       textAlign: 'center',
       padding: '10px',
       border: '1px solid #DADCE0',
+      '&:hover': {
+        cursor: 'pointer',
+      },
     },
     missingText: {
       color: '#212121',
