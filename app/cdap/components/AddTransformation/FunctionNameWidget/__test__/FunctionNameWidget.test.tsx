@@ -14,13 +14,13 @@
  * the License.
  */
 
-import { render } from "@testing-library/react";
-import React from "react";
-import FunctionNameWidget from "..";
+import { render } from '@testing-library/react';
+import React from 'react';
+import FunctionNameWidget from '..';
 
-describe("It should test FunctionNameWidget Component", () => {
-  it("Should render the FunctionNameWidget Component", () => {
-        const container = render(<FunctionNameWidget functionName = {"UnitTesting"}/>)
-        expect(container).toBeDefined(); 
-    });
+describe('It should test FunctionNameWidget Component', () => {
+  it('Should render the FunctionNameWidget Component', () => {
+    const container = render(<FunctionNameWidget functionName={'UnitTesting'} />);
+    expect(container).toBeDefined();
+  });
 });

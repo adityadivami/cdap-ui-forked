@@ -14,23 +14,23 @@
  * the License.
  */
 
-import { fireEvent, render ,screen} from "@testing-library/react";
-import { createBrowserHistory as createHistory } from "history";
-import React from "react";
-import { Route, Router, Switch } from "react-router";
-import AddTransformation from "..";
+import { fireEvent, render, screen } from '@testing-library/react';
+import { createBrowserHistory as createHistory } from 'history';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import AddTransformation from '..';
 
 const history = createHistory({
-  basename: "/",
+  basename: '/',
 });
 
-describe("It should test the SelectColumnsList Component", () => {
-  it("should render the SelectColumnsList Component and triggers the button and following event", () => {
+describe('It should test the SelectColumnsList Component', () => {
+  it('should render the SelectColumnsList Component and triggers the button and following event', () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <AddTransformation />
+            <AddTransformation functionName showAddTransformationHandler />
           </Route>
         </Switch>
       </Router>

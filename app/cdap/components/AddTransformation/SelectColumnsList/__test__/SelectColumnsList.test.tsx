@@ -14,18 +14,18 @@
  * the License.
  */
 
-import { render } from "@testing-library/react";
-import { createBrowserHistory as createHistory } from "history";
-import React from "react";
-import { Route, Router, Switch } from "react-router";
-import SelectColumnsList from "..";
+import { render } from '@testing-library/react';
+import { createBrowserHistory as createHistory } from 'history';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import SelectColumnsList from '..';
 
 const history = createHistory({
-  basename: "/",
+  basename: '/',
 });
 
-describe("It should test the SelectColumnsList Component", () => {
-  it("should render the SelectColumnsList Component with selectedColumnsCount<10", () => {
+describe('It should test the SelectColumnsList Component', () => {
+  it('should render the SelectColumnsList Component with selectedColumnsCount<10', () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -37,7 +37,7 @@ describe("It should test the SelectColumnsList Component", () => {
     );
     expect(container).toBeDefined;
   });
-  it("should render the SelectColumnsList Component with selectedColumnsCount<10", () => {
+  it('should render the SelectColumnsList Component with selectedColumnsCount<10', () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -49,7 +49,7 @@ describe("It should test the SelectColumnsList Component", () => {
     );
     expect(container).toBeDefined;
   });
-  it("should render the SelectColumnsList Component with selectedColumnsCount is 0", () => {
+  it('should render the SelectColumnsList Component with selectedColumnsCount is 0', () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -62,7 +62,7 @@ describe("It should test the SelectColumnsList Component", () => {
     expect(container).toBeDefined;
   });
 
-  it("should render the SelectColumnsList Component with selectedColumnsCount is 0 and trigger onChnage Event", () => {
+  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and trigger onChnage Event', () => {
     render(
       <Router history={history}>
         <Switch>
@@ -74,16 +74,14 @@ describe("It should test the SelectColumnsList Component", () => {
     );
 
     const element: HTMLInputElement = document.getElementById(
-      "transformation-checkbox-select-all-columns"
+      'transformation-checkbox-select-all-columns'
     ) as HTMLInputElement;
     expect(element.checked).toBeFalsy();
 
     element.click();
     expect(element.checked).toBeTruthy();
 
-    document
-      .getElementById("transformation-checkbox-select-all-columns")
-      .click();
+    document.getElementById('transformation-checkbox-select-all-columns').click();
 
     expect(element.checked).toBeFalsy();
   });

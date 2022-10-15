@@ -28,7 +28,7 @@ import T from 'i18n-react';
 export default function(props) {
   const { functionName, showAddTransformationHandler } = props;
 
-  // const [drawerStatus, setDrawerStatus] = useState(functionName);
+  const [drawerStatus, setDrawerStatus] = useState(functionName);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
 

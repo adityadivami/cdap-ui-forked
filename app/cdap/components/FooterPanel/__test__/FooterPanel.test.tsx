@@ -14,28 +14,27 @@
  *  the License.
  */
 
-import React from "react";
-import { createBrowserHistory as createHistory} from "history";
-import { Route, Router, Switch } from "react-router";
-import FooterPanel from "..";
+import React from 'react';
+import { createBrowserHistory as createHistory } from 'history';
+import { Route, Router, Switch } from 'react-router';
+import FooterPanel from '..';
 import { render } from '@testing-library/react';
 
 const history = createHistory({
-    basename: '/',
+  basename: '/',
+});
+
+describe('It Should test the Footer Panel Component', () => {
+  it('Should render the Footer Panel Component', () => {
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <FooterPanel />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    expect(container).toBeDefined();
   });
-  
-describe("It Should test the Footer Panel Component",()=>{
-    it("Should render the Footer Panel Component",()=>{
-        const container = render(
-            <Router history = {history}>
-                <Switch>
-                    <Route>
-                        <FooterPanel/>
-                    </Route>
-                </Switch>
-            </Router>
-        )
-        expect(container).toBeDefined();
-    })
-    
-})
+});
