@@ -32,7 +32,7 @@ export const useStyles = makeStyles({
   },
   tabHeaders: {
     backgroundColor: blue[50],
-    width: 299,
+    maxWidth: 299,
     '& .MuiTypography-root': {
       width: 209,
       fontSize: '16px',
@@ -76,11 +76,6 @@ export const useStyles = makeStyles({
   },
   hideComponent: {
     display: 'none',
-  },
-  closeIcon: {
-    '& :hover': {
-      cursor: 'pointer',
-    },
   },
   closeIcon: {
     '& :hover': {
