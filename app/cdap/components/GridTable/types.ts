@@ -15,7 +15,7 @@
  */
 
 export interface IParams {
-  context: string | number | IRecords;
+  context: string | number | IRecords | boolean;
   workspaceId: string;
 }
 
