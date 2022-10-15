@@ -32,11 +32,14 @@ export default function GridHeaderCell({
   setColumnSelected,
 }: IGridHeaderCellProps) {
   const classes = useGridHeaderCellStyles();
-  console.log(label, columnSelected);
   const isColumnHighlited = label === columnSelected;
 
   return (
-    <TableCell className={classes.tableHeaderCell} onClick={() => setColumnSelected(label)} data-testid={'grid-header-cell-table-cell' + label}>
+    <TableCell
+      className={classes.tableHeaderCell}
+      onClick={() => setColumnSelected(label)}
+      data-testid={'grid-header-cell-table-cell' + label}
+    >
       <div
         className={classes.headerHighlitedIcon}
         style={isColumnHighlited ? { display: 'inline' } : { display: 'none' }}
@@ -48,7 +51,9 @@ export default function GridHeaderCell({
         style={isColumnHighlited ? { background: '#FFFFFF' } : { background: '#F1F8FF' }}
         variant="outlined"
       >
-        <Typography className={classes.columnHeader}>{label}</Typography>
+        <Typography className={classes.columnHeader} data-testid={`grid-header-cell-${label}`}>
+          {label}
+        </Typography>
         <StringIndicatorBox>
           <TypographyComponent className={classes.dataTypeIndicator} label={type || 'Unknown'} />
         </StringIndicatorBox>

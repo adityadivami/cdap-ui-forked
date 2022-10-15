@@ -14,18 +14,18 @@
  *  the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
-import { Route, Router, Switch } from "react-router";
-import MenuComponent from "..";
-import { createBrowserHistory as createHistory } from "history";
+import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import MenuComponent from '..';
+import { createBrowserHistory as createHistory } from 'history';
 
 const history = createHistory({
-  basename: "/",
+  basename: '/',
 });
 
-describe("To Test Grid Menu Component", () => {
-  it("Should check if the component is rendered", () => {
+describe('To Test Grid Menu Component', () => {
+  it('Should check if the component is rendered', () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -44,6 +44,4 @@ describe("To Test Grid Menu Component", () => {
     const ele = screen.getAllByTestId(/menu-component-menu/i);
     fireEvent.click(ele[0]);
   });
-
-  
 });

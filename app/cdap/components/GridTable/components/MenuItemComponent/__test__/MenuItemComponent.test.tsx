@@ -14,71 +14,57 @@
  * the License.
  */
 
-import { fireEvent, render } from "@testing-library/react";
-import React from "react";
-import MenuItemComponent from "..";
-import { MENU_OPTIONS } from "../../NestedMenu/constants";
+import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
+import MenuItemComponent from '..';
+import { MENU_OPTIONS } from '../../NestedMenu/constants';
 
-describe("It should test MenuItemComponent", () => {
-  it("Should render the MenuItemComponent", () => {
+describe('It should test MenuItemComponent', () => {
+  it('Should render the MenuItemComponent', () => {
     const onMenuClick = jest.fn();
     const container = render(
-      <MenuItemComponent
-        item={MENU_OPTIONS}
-        index={3}
-        onMenuClick={onMenuClick}
-      />
+      <MenuItemComponent item={MENU_OPTIONS} index={3} onMenuClick={onMenuClick} />
     );
     expect(container).toBeDefined();
-    
   });
-  it("Should render the MenuItemComponent and cover branches", () => {
+  it('Should render the MenuItemComponent and cover branches', () => {
     const item = {
-      key: "divider",
+      key: 'divider',
     };
     const onMenuClick = jest.fn();
-    const container = render(
-      <MenuItemComponent item={item} index={0} onMenuClick={onMenuClick} />
-    );
+    const container = render(<MenuItemComponent item={item} index={0} onMenuClick={onMenuClick} />);
     expect(container).toBeDefined();
   });
-  it("Should render the MenuItemComponent  and cover branches", () => {
+  it('Should render the MenuItemComponent  and cover branches', () => {
     const item = {
-      key: "heading",
+      key: 'heading',
     };
     const onMenuClick = jest.fn();
-    const container = render(
-      <MenuItemComponent item={item} index={0} onMenuClick={onMenuClick} />
-    );
+    const container = render(<MenuItemComponent item={item} index={0} onMenuClick={onMenuClick} />);
     expect(container).toBeDefined();
   });
-  it("Should render the MenuItemComponent ,cover branches and trigger onMenuClick Function", () => {
+  it('Should render the MenuItemComponent ,cover branches and trigger onMenuClick Function', () => {
     const item = {
-      key: "text",
-      label: "Text",
+      key: 'text',
+      label: 'Text',
       options: [
-        { key: "heading", label: "Remove" },
-        { key: "letters", label: "Letters" },
+        { key: 'heading', label: 'Remove' },
+        { key: 'letters', label: 'Letters' },
       ],
     };
     const onMenuClick = jest.fn();
-    const container = render(
-      <MenuItemComponent item={item} index={0} onMenuClick={onMenuClick} />
-    );
-    const menuItemElement = container.getByTestId("menu-item-component-0");
+    const container = render(<MenuItemComponent item={item} index={0} onMenuClick={onMenuClick} />);
+    const menuItemElement = container.getByTestId('menu-item-component-0');
     fireEvent.click(menuItemElement);
   });
 
-  it("Should render the MenuItemComponent ,cover branches and trigger onMenuClick Function", () => {
+  it('Should render the MenuItemComponent ,cover branches and trigger onMenuClick Function', () => {
     const item = {
-      key: "",
-
+      key: '',
     };
     const onMenuClick = jest.fn();
-    const container = render(
-      <MenuItemComponent item={item} index={0} onMenuClick={onMenuClick} />
-    );
-    const menuItemElement = container.getByTestId("menu-item-component-0");
+    const container = render(<MenuItemComponent item={item} index={0} onMenuClick={onMenuClick} />);
+    const menuItemElement = container.getByTestId('menu-item-component-0');
     fireEvent.click(menuItemElement);
   });
 });

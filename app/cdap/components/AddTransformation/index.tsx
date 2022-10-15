@@ -28,15 +28,14 @@ import T from 'i18n-react';
 export default function(props) {
   const { functionName, showAddTransformationHandler } = props;
 
-  const [drawerStatus, setDrawerStatus] = useState(true);
+  const [drawerStatus, setDrawerStatus] = useState(functionName);
   const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
 
   const classes = useStyles();
 
   const closeClickHandler = () => {
-    setDrawerStatus(false);
-    showAddTransformationHandler(false);
+    props.callBack();
   };
 
   const handleApply = (e: React.MouseEvent<HTMLButtonElement>) => {};

@@ -14,28 +14,28 @@
  * the License.
  */
 
-import { fireEvent, render } from "@testing-library/react";
-import React from "react";
-import NestedMenu from "..";
-import { StructureIcon } from "../../AaToolbar/images";
+import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
+import NestedMenu from '..';
+import { StructureIcon } from '../../AaToolbar/images';
 
-describe("It should test NestedMenu Component",()=>{
-    it("should render the component",()=>{
-        const container = render(<NestedMenu icon = {StructureIcon} submitMenuOption = {jest.fn()}/>)
-        expect(container).toBeDefined();
-        const IconButton = document.getElementById("nested-menu-icon-button");
-        fireEvent.click(IconButton);
-    })
-    it("It Should trigger handleMenuClick Function",()=>{
-        const container = render(<NestedMenu icon = {StructureIcon} submitMenuOption = {jest.fn()}/>)
-        const menuItemComponentElement = container.getByTestId("menu-item-component-3")
-        fireEvent.click(menuItemComponentElement);
-    })
-    it("It Should trigger onClick Function",()=>{
-        const container = render(<NestedMenu icon = {StructureIcon} submitMenuOption = {jest.fn()}/>)
-        const menuItemComponentElement = container.getByTestId("menu-item-component-3")
-        const menuElement  = document.getElementById("parent-menu");
-        fireEvent.click(menuElement);
-        fireEvent.click(menuItemComponentElement);
-    })
-})
+describe('It should test NestedMenu Component', () => {
+  it('should render the component', () => {
+    const container = render(<NestedMenu icon={StructureIcon} submitMenuOption={jest.fn()} />);
+    expect(container).toBeDefined();
+    const IconButton = document.getElementById('nested-menu-icon-button');
+    fireEvent.click(IconButton);
+  });
+  it('It Should trigger handleMenuClick Function', () => {
+    const container = render(<NestedMenu icon={StructureIcon} submitMenuOption={jest.fn()} />);
+    const menuItemComponentElement = container.getByTestId('menu-item-component-3');
+    fireEvent.click(menuItemComponentElement);
+  });
+  it('It Should trigger onClick Function', () => {
+    const container = render(<NestedMenu icon={StructureIcon} submitMenuOption={jest.fn()} />);
+    const menuItemComponentElement = container.getByTestId('menu-item-component-3');
+    const menuElement = document.getElementById('parent-menu');
+    fireEvent.click(menuElement);
+    fireEvent.click(menuItemComponentElement);
+  });
+});

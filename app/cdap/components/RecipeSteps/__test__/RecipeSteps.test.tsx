@@ -14,27 +14,24 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import DrawerWidget from "components/DrawerWidget";
-import { createBrowserHistory as createHistory } from "history";
-import React from "react";
-import { Route, Router, Switch } from "react-router";
-import RecipeSteps from "..";
+import { fireEvent, render, screen } from '@testing-library/react';
+import DrawerWidget from 'components/DrawerWidget';
+import { createBrowserHistory as createHistory } from 'history';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import RecipeSteps from '..';
 
 const history = createHistory({
-  basename: "/",
+  basename: '/',
 });
 
-describe("It should test the Recipe Component", () => {
-  it("renders Recipe Component", () => {
+describe('It should test the Recipe Component', () => {
+  it('renders Recipe Component', () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <RecipeSteps
-              setShowRecipePanel={jest.fn()}
-              showRecipePanel={false}
-            />
+            <RecipeSteps setShowRecipePanel={jest.fn()} showRecipePanel={false} />
           </Route>
         </Switch>
       </Router>
@@ -42,27 +39,26 @@ describe("It should test the Recipe Component", () => {
     expect(container).toBeDefined;
   });
 
-  it("renders Recipe Component", () => {
+  it('renders Recipe Component', () => {
     const container = render(
-        <Router history={history}>
-          <Switch>
-            <Route>
-              <DrawerWidget closeClickHandler = {jest.fn()} openDrawer={true} showBackIcon={true}/>
-            </Route>
-          </Switch>
-        </Router>)
-        expect(container).toBeDefined;
-       console.log(container);
-       const {debug} = render(<DrawerWidget showBackIcon/>);
-       debug();
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <DrawerWidget closeClickHandler={jest.fn()} openDrawer={true} showBackIcon={true} />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    expect(container).toBeDefined;
+    console.log(container);
+    const { debug } = render(<DrawerWidget showBackIcon />);
+    debug();
 
-      const element  = screen.getByRole("button");
-      const imagetag = screen.getByAltText('Back icon 1');
-      fireEvent.click(element)
-      fireEvent.click(imagetag)
-      console.log(imagetag,'sssasasasa')
-      // fireEvent.click(element);
-      
-
+    const element = screen.getByRole('button');
+    const imagetag = screen.getByAltText('Back icon 1');
+    fireEvent.click(element);
+    fireEvent.click(imagetag);
+    console.log(imagetag, 'sssasasasa');
+    // fireEvent.click(element);
   });
 });

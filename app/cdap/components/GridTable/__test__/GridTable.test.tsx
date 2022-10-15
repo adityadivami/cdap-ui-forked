@@ -70,8 +70,8 @@ describe('Testing Grid Table Component', () => {
         },
       };
     });
-    const realUseState = React.useState
-    React.useState = jest.fn().mockReturnValue([realUseState, {}])
+    const realUseState = React.useState;
+    React.useState = jest.fn().mockReturnValue([realUseState, {}]);
     const container = render(
       <Router history={history}>
         <Switch>
@@ -88,8 +88,5 @@ describe('Testing Grid Table Component', () => {
     const ele2 = screen.getByTestId(/menu-item-component-8/i);
     fireEvent.click(ele2);
     expect(container).toBeDefined();
-   
   });
 });
-
-

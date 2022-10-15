@@ -28,7 +28,7 @@ const history = createHistory({
 
 describe('It should test the Recipe Component', () => {
   it('renders Recipe Component and triggers button and following functionality', () => {
-   const container = render(
+    const container = render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -42,6 +42,5 @@ describe('It should test the Recipe Component', () => {
     fireEvent.click(ele);
     const ele2 = screen.getByTestId(/recipe-steps-span0/i);
     expect(ele2).toContainHTML('a-column');
-    
   });
 });

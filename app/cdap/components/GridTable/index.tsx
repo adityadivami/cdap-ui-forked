@@ -62,6 +62,9 @@ export default function() {
       count: '0',
     },
   ]);
+  const [columnSelected, setColumnSelected] = useState('');
+  const [directiveFunction, setDirectiveFunction] = useState('');
+
   const [connectorType, setConnectorType] = useState(null);
   const [showRecipePanel, setShowRecipePanel] = useState(false);
 
@@ -69,7 +72,6 @@ export default function() {
     setIsFirstWrangle(true);
     setConnectorType(dataprep.connectorType);
   }, []);
-  const [columnSelected, setColumnSelected] = useState('');
 
   const getWorkSpaceData = (params: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -186,10 +188,9 @@ export default function() {
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
-    const headersData = createHeadersData(rawData?.headers, rawData?.types);
-    setHeadersNamesList(headersData);
-    if (rawData && rawData.summary && rawData.summary?.statistics) {
-      const missingData = createMissingData(gridData?.summary?.statistics);
+    // const headersData = createHeadersData(rawData.headers, rawData.types);
+    if (rawData && rawData.summary && rawData.summary.statistics) {
+      const missingData = createMissingData(gridData?.summary.statistics);
       setMissingDataList(missingData);
     }
     const rowData =
@@ -217,11 +218,13 @@ export default function() {
 
   const applyDirective = (option, column) => {
     setLoading(true);
-    const newDirective = getDirective(option, column);
+    const newDirective = getDirective(option, columnSelected);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
-
-    if (newDirective === null || !Boolean(column)) {
+    // setOpenTransformationPanel(option);
+    console.log(newDirective, columnSelected, option);
+    if (!Boolean(newDirective) || !Boolean(columnSelected)) {
+      setDirectiveFunction(option);
       setLoading(false);
       return;
     }
@@ -268,8 +271,12 @@ export default function() {
     );
   };
 
+  const handleColumnSelect = (columnName) =>
+    setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
+
   // Redux store
   const { data, headers, types } = dataprep;
+  console.log(columnSelected, directiveFunction);
 
   return (
     <Box>
@@ -285,10 +292,16 @@ export default function() {
       {showRecipePanel && (
         <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
       )}
-      {showAddTransformation && (
+      {directiveFunction && (
         <AddTransformation
-          functionName="Null"
-          showAddTransformationHandler={showAddTransformationHandler}
+          functionName={directiveFunction}
+          setLoading={setLoading}
+          columnData={headers}
+          callBack={(response) => {
+            setGridData(response);
+            setDirectiveFunction('');
+            setColumnSelected('');
+          }}
         />
       )}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
@@ -300,14 +313,14 @@ export default function() {
                 type={types[eachHeader]}
                 key={eachHeader}
                 columnSelected={columnSelected}
-                setColumnSelected={setColumnSelected}
+                setColumnSelected={handleColumnSelect}
               />
             ))}
           </TableRow>
           <TableRow>
-            {missingDataList?.length > 0 &&
-              headersNamesList.length > 0 &&
-              headersNamesList.map((each, index) => {
+            {Array.isArray(missingDataList) &&
+              Array.isArray(headers) &&
+              headers.map((each, index) => {
                 return missingDataList.map((item, itemIndex) => {
                   if (item.name === each) {
                     return <GridKPICell metricData={item} key={item.name} />;
@@ -317,15 +330,16 @@ export default function() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rowsDataList?.length > 0 &&
-            rowsDataList.map((eachRow, rowIndex) => {
+          {data &&
+            Array.isArray(data) &&
+            data.map((eachRow, rowIndex) => {
               return (
                 <TableRow key={`row-${rowIndex}`}>
-                  {headersNamesList.map((eachKey, eachIndex) => {
+                  {headers.map((eachKey, eachIndex) => {
                     return (
                       <GridTextCell
-                        cellValue={eachRow[eachKey.name] || '--'}
-                        key={`${eachKey.name}-${eachIndex}`}
+                        cellValue={eachRow[eachKey] || '--'}
+                        key={`${eachKey}-${eachIndex}`}
                       />
                     );
                   })}
