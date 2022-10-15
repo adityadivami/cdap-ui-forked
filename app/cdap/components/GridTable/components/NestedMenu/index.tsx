@@ -92,5 +92,4 @@ const NestedMenu: React.FC<INestedMenuProps> = ({ icon, submitMenuOption }) => {
     </>
   );
 };
-
 export default NestedMenu;

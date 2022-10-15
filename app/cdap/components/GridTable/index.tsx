@@ -40,7 +40,7 @@ import RecipeSteps from 'components/RecipeSteps';
 import AddTransformation from 'components/AddTransformation';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import ToolBarList from './components/AaToolbar';
-import { getDirective } from './directives';
+import getDirective from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
 
@@ -183,16 +183,16 @@ export default function() {
         setLoading(false);
         return;
       } else {
-        applyDirectiveAPICall(newDirective);
+        applyDirectiveAPICall(newDirective, 'add');
       }
     }
   };
 
-  const applyDirectiveAPICall = (newDirective) => {
+  const applyDirectiveAPICall = (newDirective, action) => {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
-    const updatedDirectives = directives.concat(newDirective);
+    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
 
     requestBody.insights = insights;
@@ -229,7 +229,7 @@ export default function() {
         setColumnSelected('');
         setToaster({
           open: true,
-          message: 'Step successfully added',
+          message: action === 'add' ? 'Step successfully added' : 'Step successfully deleted',
           isSuccess: true,
         });
       },
@@ -313,6 +313,10 @@ export default function() {
   const handleColumnSelect = (columnName) =>
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
 
+  const deleteRecipes = (new_arr) => {
+    applyDirectiveAPICall(new_arr, 'delete');
+  };
+
   // Redux store
   const { data, headers, types, directives } = dataprep;
 
@@ -327,7 +331,11 @@ export default function() {
         />
       )}
       {showRecipePanel && (
-        <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
+        <RecipeSteps
+          setShowRecipePanel={setShowRecipePanel}
+          showRecipePanel={showRecipePanel}
+          deleteRecipes={deleteRecipes}
+        />
       )}
       {directiveFunction && (
         <AddTransformation

@@ -28,10 +28,12 @@ import { useStyles } from '../styles';
 import T from 'i18n-react';
 
 export default function(props) {
-  const { recipeSteps } = props;
+  const { recipeSteps, handleDeleteRecipeSteps } = props;
   const classes = useStyles();
 
-  const handleDelete = () => {};
+  const handleDelete = (eachStep, i) => {
+    handleDeleteRecipeSteps(recipeSteps.filter((x, index) => index < i));
+  };
 
   return (
     <TableContainer component={Box}>
@@ -64,7 +66,7 @@ export default function(props) {
               >
                 <img
                   className={classes.recipeStepsDeleteStyles}
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(eachStep, index)}
                   src="/cdap_assets/img/delete.svg"
                   alt="delete"
                   data-testid={'recipe-steps-table-component-image-click' + index}
