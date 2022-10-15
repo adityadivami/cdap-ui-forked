@@ -23,6 +23,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
+import { CrossIcon } from './iconStore';
 
 const FunctionSearch = ({ transformationPanel }) => {
   const classes = useStyles();
@@ -158,13 +159,13 @@ const FunctionSearch = ({ transformationPanel }) => {
                 <>
                   <InputAdornment position="end">
                     {textInput?.current?.value && (
-                      <div>
-                        <ClearOutlinedIcon
-                          className={classes.close}
-                          onClick={() => {
-                            textInput.current.value = '';
-                          }}
-                        />
+                      <div
+                        className={classes.close}
+                        onClick={() => {
+                          textInput.current.value = '';
+                        }}
+                      >
+                        {CrossIcon}
                       </div>
                     )}
                   </InputAdornment>
