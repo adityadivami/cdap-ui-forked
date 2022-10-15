@@ -38,8 +38,8 @@ describe('Test util Function checkFrequentlyOccuredValues', () => {
   });
 
   it('should trigget getDirectives', () => {
-    const x = getDirective(1,1);
-    const y = getDirective('delete',1);
-    const z = getDirective('keep',1);
+    const x = getDirective(1, 1);
+    const y = getDirective('delete', 1);
+    const z = getDirective('keep', 1);
   });
 });
