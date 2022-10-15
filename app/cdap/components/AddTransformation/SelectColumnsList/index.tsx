@@ -47,6 +47,8 @@ export default function(props) {
   const ref = useRef(null);
 
   useEffect(() => {
+    console.log('data quality is: ', dataQuality);
+    console.log('columnData is: ', columnData);
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
