@@ -40,7 +40,6 @@ export const useStyles = makeStyles(() => {
     headingStyles: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'flex-start',
     },
     pointerStyles: {
       cursor: 'pointer',

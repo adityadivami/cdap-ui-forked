@@ -30,6 +30,7 @@ export default function GridHeaderCell({
   type,
   columnSelected,
   setColumnSelected,
+  onColumnSelection,
 }: IGridHeaderCellProps) {
   const classes = useGridHeaderCellStyles();
   const isColumnHighlited = label === columnSelected;
@@ -38,6 +39,7 @@ export default function GridHeaderCell({
     <TableCell
       className={classes.tableHeaderCell}
       onClick={() => setColumnSelected(label)}
+      onDoubleClick={() => onColumnSelection(label)}
       data-testid={'grid-header-cell-table-cell' + label}
     >
       <div

@@ -16,5 +16,18 @@ export const useStyles = makeStyles(() => {
       marginTop: '5px',
     },
     columnDataQualityValuesButtons: {},
+    columnDataQualityGraph: {
+      '& .axis': {
+        display: 'none',
+      },
+
+      '& .bar': {
+        fill: '#3994FF',
+      },
+
+      '& .graph': {
+        transform: 'translate(0px, 20px) !important',
+      },
+    },
   };
 });

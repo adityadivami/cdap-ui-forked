@@ -45,6 +45,7 @@ import {
   calculateDistinctValues,
   characterCount,
   checkAlphaNumericAndSpaces,
+  calculateDistributionGraphData,
   convertNonNullPercent,
 } from './utils';
 import FooterPanel from 'components/FooterPanel';
@@ -55,6 +56,7 @@ import { getDirectiveOnTwoInputs } from './directives';
 import getDirective from './directives';
 import { OPTION_WITH_NO_INPUT, OPTION_WITH_TWO_INPUT } from './constants';
 import PositionedSnackbar from 'components/SnackbarComponent';
+import ColumnInsightDrawer from 'components/ColumnInsights';
 
 export default function() {
   const { wid } = useParams() as IRecords;
@@ -84,6 +86,7 @@ export default function() {
     },
     dataQualityBar: {},
     dataTypeString: '',
+    dataDistributionGraphData: [],
   });
   const [dataQuality, setDataQuality] = useState({});
   const [optionSelected, setOptionSelected] = useState(null);
@@ -390,6 +393,7 @@ export default function() {
       },
       dataQualityBar: gridData?.summary?.statistics[columnName],
       dataTypeString: getDataTypeString,
+      dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
     });
   };
 
@@ -420,6 +424,28 @@ export default function() {
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
           setLoading={setLoading}
+        />
+      )}
+      {insightDrawer.open && (
+        <ColumnInsightDrawer
+          columnData={insightDrawer}
+          onClose={() =>
+            setInsightDrawer({
+              open: false,
+              columnName: '',
+              distinctValues: 0,
+              characterCount: { min: 0, max: 0 },
+              dataQuality: {
+                missingNullValueCount: 0,
+                missingNullValuePercentage: 0,
+                invalidValueCount: 0,
+                invalidValuePercentage: 0,
+              },
+              dataQualityBar: {},
+              dataTypeString: '',
+              dataDistributionGraphData: [],
+            })
+          }
         />
       )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
@@ -464,6 +490,7 @@ export default function() {
                     key={eachHeader}
                     columnSelected={columnSelected}
                     setColumnSelected={handleColumnSelect}
+                    onColumnSelection={onColumnSelection}
                   />
                 ))}
               </TableRow>
