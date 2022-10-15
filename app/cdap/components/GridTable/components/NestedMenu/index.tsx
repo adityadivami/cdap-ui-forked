@@ -56,6 +56,7 @@ const NestedMenu: React.FC<INestedMenuProps> = ({
           arrow: classes.arrowTooltip,
         }}
         arrow
+        id="nested-menu-icon-button"
       >
         <IconButton
           onClick={(e) => {

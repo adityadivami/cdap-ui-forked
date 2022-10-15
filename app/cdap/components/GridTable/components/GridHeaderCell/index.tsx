@@ -53,6 +53,7 @@ export default function GridHeaderCell({
         setColumnSelected(label);
         onColumnSelection(label);
       }}
+      data-testid={'grid-header-cell-table-cell' + label}
     >
       <div
         className={classes.headerHighlitedIcon}
