@@ -22,6 +22,7 @@ import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
@@ -182,7 +183,12 @@ export default function GridTable() {
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
+        <NoDataScreen
+          title={T.translate(`features.NoRecordScreen.gridTable.title`)}
+          subTitle={T.translate(`features.NoRecordScreen.gridTable.subTitle`)}
+        />
+      )}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>

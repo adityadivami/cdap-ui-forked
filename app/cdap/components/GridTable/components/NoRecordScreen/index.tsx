@@ -19,16 +19,15 @@ import { NoDataSVG } from 'components/GridTable/iconStore';
 import { useStyles } from './styles';
 import { Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import { MAIN_HEADER_TEXT, SUB_HEADER_TEXT } from './constants';
 
-export default function() {
+export default function({ title, subTitle }) {
   const classes = useStyles();
   return (
     <Box className={classes.noRecordWrapper}>
       <Box className={classes.innerWrapper}>
         {NoDataSVG}
-        <Typography className={classes.mainHeaderMessage}>{MAIN_HEADER_TEXT}</Typography>
-        <Typography className={classes.subHeaderMessage}>{SUB_HEADER_TEXT}</Typography>
+        <Typography className={classes.mainHeaderMessage}>{title}</Typography>
+        <Typography className={classes.subHeaderMessage}>{subTitle}</Typography>
       </Box>
     </Box>
   );
