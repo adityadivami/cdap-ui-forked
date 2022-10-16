@@ -31,7 +31,7 @@ import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;

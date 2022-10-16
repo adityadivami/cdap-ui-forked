@@ -34,7 +34,11 @@ export default function OngoingDataExplorationCard({ item }) {
   });
 
   return (
-    <Grid container className={classes.gridContainer}>
+    <Grid
+      container
+      className={classes.gridContainer}
+      data-testid="wrangler-home-ongoing-data-exploration-card"
+    >
       {item.map((eachItem, index) => {
         switch (eachItem.type) {
           case 'iconWithText':
@@ -96,15 +100,22 @@ export default function OngoingDataExplorationCard({ item }) {
               </Grid>
             );
           case 'percentageWithText': {
-            const percent = parseInt(eachItem.label);
+            const percent = parseInt(eachItem.label, 2);
             return percent && !isNaN(percent) ? (
-              <Grid item xs={3} className={classes.elementStyle} key={index}>
+              <Grid
+                item
+                xs={3}
+                className={classes.elementStyle}
+                key={index}
+                data-testid="ongoing-data-exploration-card-percentage-nan"
+              >
                 <Box className={classes.percent}>
                   <Typography
                     variant="body2"
                     className={
                       percent < 100 ? classes.percentageStyleRed : classes.percentageStyleGreen
                     }
+                    data-testid="ongoing-data-card-percentage"
                   >
                     {percent}
                   </Typography>
@@ -113,6 +124,7 @@ export default function OngoingDataExplorationCard({ item }) {
                     className={
                       percent < 100 ? classes.percentageSymbolRed : classes.percentageSymbolGreen
                     }
+                    data-testid="ongoing-data-percentage-symbol"
                   >
                     {eachItem.percentageSymbol}
                   </Typography>
