@@ -18,7 +18,7 @@ import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import React, { useState } from 'react';
-import OngoingDataExploration from './Components/OngoingDataExploration';
+import OngoingDataExplorations from './Components/OngoingDataExplorations';
 import WrangleCard from './Components/WrangleCard';
 import WrangleHomeTitle from './Components/WrangleHomeTitle';
 import { GradientLine, HeaderImage } from './icons';
@@ -26,7 +26,6 @@ import { useStyles } from './styles';
 
 export default function WranglerHome() {
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
@@ -49,12 +48,7 @@ export default function WranglerHome() {
           <WrangleHomeTitle title="Continue ongoing data explorations, pick up where you left off" />
           <Box className={classes.viewMore}>View More</Box>
         </Box>
-        <OngoingDataExploration />
-        {loading && (
-          <Box className={classes.loadingContainer}>
-            <LoadingSVG />
-          </Box>
-        )}
+        <OngoingDataExplorations />
       </Box>
     </Box>
   );

@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import OngoingDataExploration from '../index';
+import OngoingDataExplorations from '../index';
 
 const testObj = {
   connectionName: 'Upload',
@@ -32,7 +32,7 @@ test('renders Ongoing Data Exploration component', () => {
       { connectionName: 'Upload', workspaceName: 'Divami_Users_Emails.xlsx', recipeSteps: 0 },
     ]);
   });
-  render(<OngoingDataExploration />);
+  render(<OngoingDataExplorations />);
   const ele = screen.getByTestId(/ongoing-data-explore-parent/i);
   expect(ele).toBeInTheDocument();
 });
