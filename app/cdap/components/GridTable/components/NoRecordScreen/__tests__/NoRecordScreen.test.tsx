@@ -29,7 +29,7 @@ describe('Test Breadcrumb Component', () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <NoRecordScreen />
+          <NoRecordScreen title={'Title'} subTitle={'Sub Title'} />
         </Route>
       </Switch>
     </Router>
