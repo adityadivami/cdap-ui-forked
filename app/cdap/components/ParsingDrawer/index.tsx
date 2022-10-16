@@ -90,10 +90,6 @@ export default function ParsingDrawer({ setLoading, updateDataTranformation }) {
     }
   };
 
-  useEffect(() => {
-    console.log(properties, 'these are properties');
-  }, [properties]);
-
   const handleChange = (value: string | boolean, property: string) => {
     setProperties((prev) => ({
       ...prev,

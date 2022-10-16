@@ -31,11 +31,11 @@ import BreadCrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
-import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
 import ParsingDrawer from 'components/ParsingDrawer';
+import NoRecordScreen from 'components/NoRecordScreen';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -213,7 +213,7 @@ export default function GridTable() {
       )}
       <BreadCrumb datasetName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
-        <NoDataScreen
+        <NoRecordScreen
           title={T.translate(`features.NoRecordScreen.gridTable.title`)}
           subTitle={T.translate(`features.NoRecordScreen.gridTable.subTitle`)}
         />
