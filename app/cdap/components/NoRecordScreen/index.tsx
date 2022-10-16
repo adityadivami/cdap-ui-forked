@@ -15,10 +15,10 @@
  */
 
 import React from 'react';
-import { NoDataSVG } from 'components/GridTable/iconStore';
 import { useStyles } from './styles';
 import { Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import { NoDataSVG } from './iconStore';
 
 export default function({ title, subTitle }) {
   const classes = useStyles();
