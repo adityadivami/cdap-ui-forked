@@ -16,19 +16,20 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import BreadCumb from '../index';
-import { Router, Route, Switch } from 'react-router';
-import history from 'services/history';
-test('renders BreadCumb Component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <BreadCumb />  ̰
-        </Route>
-      </Switch>
-    </Router>
-  );
-  const ele = screen.getByTestId(/bread-comb-container-parent/i);
-  expect(ele).toBeInTheDocument();
+import TabLabelCanBrowse from '../index';
+import { mockConnectorTypeData } from '../mock/mockConnectorTypeData';
+
+describe('Test TabLabelCanBrowse Component', () => {
+  it('Should render TabLabelCanBrowse Component', () => {
+    render(
+      <TabLabelCanBrowse
+        label={mockConnectorTypeData.name}
+        count={mockConnectorTypeData.count}
+        icon={mockConnectorTypeData.icon}
+        index={0}
+      />
+    );
+    const ele = screen.getByTestId(/connections-tab-label-browse/i);
+    expect(ele).toBeInTheDocument();
+  });
 });

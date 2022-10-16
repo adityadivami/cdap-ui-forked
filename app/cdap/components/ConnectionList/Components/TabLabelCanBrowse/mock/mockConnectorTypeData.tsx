@@ -14,21 +14,21 @@
  * the License.
  */
 
+import { GCSIcon } from 'components/ConnectionList/icons';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import BreadCumb from '../index';
-import { Router, Route, Switch } from 'react-router';
-import history from 'services/history';
-test('renders BreadCumb Component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <BreadCumb />  ̰
-        </Route>
-      </Switch>
-    </Router>
-  );
-  const ele = screen.getByTestId(/bread-comb-container-parent/i);
-  expect(ele).toBeInTheDocument();
-});
+
+export const mockConnectorTypeData = {
+  name: 'File',
+  type: 'connector',
+  category: 'File',
+  description: 'Connection to browse and sample data from the local file system.',
+  className: 'io.cdap.plugin.batch.connector.FileConnector',
+  artifact: {
+    name: 'core-plugins',
+    version: '2.10.0-SNAPSHOT',
+    scope: 'SYSTEM',
+  },
+  canBrowse: true,
+  count: 1,
+  icon: <GCSIcon />,
+};

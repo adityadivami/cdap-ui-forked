@@ -14,23 +14,10 @@
  * the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import ConnectionsTabs from '../index';
-
-const tabsTestData = [{ showTabs: true }];
-
-test('renders Connections Tab Component', () => {
-  render(
-    <ConnectionsTabs
-      tabsData={tabsTestData}
-      handleChange={() => null}
-      value="apple"
-      index="one"
-      connectionId={undefined}
-      setIsErrorOnNoWorkSpace={jest.fn()}
-    />
-  );
-  const ele = screen.getByTestId(/connections-tabs-parent/i);
-  expect(ele).toBeInTheDocument();
-});
+export const mockConnectorTypeData = {
+  name: 'File',
+  type: 'connector',
+  category: 'File',
+  description: 'Connection to browse and sample data from the local file system.',
+  className: 'io.cdap.plugin.batch.connector.FileConnector',
+};

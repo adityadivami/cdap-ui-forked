@@ -16,19 +16,17 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import BreadCumb from '../index';
-import { Router, Route, Switch } from 'react-router';
-import history from 'services/history';
-test('renders BreadCumb Component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <BreadCumb />  ̰
-        </Route>
-      </Switch>
-    </Router>
-  );
-  const ele = screen.getByTestId(/bread-comb-container-parent/i);
-  expect(ele).toBeInTheDocument();
+import CustomTooltip from '../index';
+import { Typography } from '@material-ui/core';
+
+describe('Test Connections List Component', () => {
+  it('Should render Connection list component', () => {
+    render(
+      <CustomTooltip arrow title={'Custom tooltip'}>
+        <Typography>Custom Tooltip</Typography>
+      </CustomTooltip>
+    );
+    const ele = screen.getByTestId(/tooltip-parent/i);
+    expect(ele).toBeInTheDocument();
+  });
 });
