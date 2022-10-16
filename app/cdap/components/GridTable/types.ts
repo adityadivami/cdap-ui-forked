@@ -42,9 +42,9 @@ export interface IExecuteAPIResponse {
 export interface IHeaderNamesList {
   name: string;
   label: string;
-  type: Array<string | number | IRecords>;
+  type: Array<string | number | IRecords | boolean>;
 }
 
 export interface IObject {
-  [key: string]: string | number | IRecords;
+  [key: string]: string | number | IRecords | boolean;
 }
