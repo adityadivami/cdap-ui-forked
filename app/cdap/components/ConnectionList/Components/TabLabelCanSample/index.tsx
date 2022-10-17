@@ -120,7 +120,7 @@ export default function TabLabelCanSample({
           <Box className="wranglingHover">
             <WrangleIcon />
             <Typography color="primary" variant="body2" className={classes.wrangleButton}>
-              {T.translate('features.Breadcrumb.labels.wrangleHome')}
+              {T.translate('features.ConnectionsList.labels.loadToGrid')}
             </Typography>
           </Box>
         </button>
@@ -138,7 +138,7 @@ export default function TabLabelCanSample({
       >
         <WrangleIcon />
         <Typography variant="body2" className={classes.wrangleButton}>
-          Wrangle
+          {T.translate('features.ConnectionsList.labels.loadToGrid')}
         </Typography>
       </button>
     </Box>
