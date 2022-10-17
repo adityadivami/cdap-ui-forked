@@ -83,4 +83,7 @@ export const useStyles = makeStyles({
   lastDivider: {
     margin: '0px 0px 0px 4px',
   },
+  searchBar: {
+    minWidth: 490,
+  },
 });
