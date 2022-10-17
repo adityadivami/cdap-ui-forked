@@ -18,6 +18,8 @@ import { IconButton, Typography, Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { default as React, useState } from 'react';
 import NestedMenu from '../NestedMenu';
+import T from 'i18n-react';
+
 import {
   ColumnIcon,
   Divider,
@@ -47,19 +49,6 @@ import {
   OTHER_OPTIONS,
 } from '../NestedMenu/constants';
 import FunctionToggle from '../FunctionNameToggle';
-import {
-  UNDO_TITLE,
-  REDO_TITLE,
-  NULL_TITLE,
-  INVALID_TITLE,
-  COLUMN_TITLE,
-  STRUCTURE_TITLE,
-  FRAGMENT_TITLE,
-  SECURITY_TITLE,
-  MATH_TITLE,
-  GRID_TITLE,
-  OTHER_TITLE,
-} from './constants';
 import FunctionSearch from '../FunctionSearch';
 
 const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) => {
@@ -69,7 +58,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
         <Tooltip
-          title={UNDO_TITLE}
+          title={T.translate(`features.GridPage.toolbar.undoTitle`)}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -78,11 +67,15 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
         >
           <Box className={classes.functionNameWrapper}>
             <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
-            {isShowNames && <Typography className={classes.typoClass}>{UNDO_TITLE}</Typography>}
+            {isShowNames && (
+              <Typography className={classes.typoClass}>
+                {T.translate('features.GridPage.toolbar.undoTitle')}
+              </Typography>
+            )}
           </Box>
         </Tooltip>
         <Tooltip
-          title={REDO_TITLE}
+          title={T.translate('features.GridPage.toolbar.redoTitle')}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -91,7 +84,11 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
         >
           <Box className={classes.functionNameWrapper}>
             <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
-            {isShowNames && <Typography className={classes.typoClass}>{REDO_TITLE}</Typography>}
+            {isShowNames && (
+              <Typography className={classes.typoClass}>
+                {T.translate('features.GridPage.toolbar.redoTitle')}
+              </Typography>
+            )}
           </Box>
         </Tooltip>
         <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
@@ -101,9 +98,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             columnType={columnType}
             icon={NullIcon}
             submitMenuOption={submitMenuOption}
-            title={NULL_TITLE}
+            title={T.translate('features.GridPage.toolbar.nullTitle').toString()}
           />
-          {isShowNames && <Typography className={classes.typoClass}>{NULL_TITLE}</Typography>}
+          {isShowNames && (
+            <Typography className={classes.typoClass}>
+              {T.translate('features.GridPage.toolbar.nullTitle')}
+            </Typography>
+          )}
         </Box>
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
@@ -111,9 +112,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             columnType={columnType}
             icon={InvalidIcon}
             submitMenuOption={submitMenuOption}
-            title={INVALID_TITLE}
+            title={T.translate('features.GridPage.toolbar.invalidTitle').toString()}
           />
-          {isShowNames && <Typography className={classes.typoClass}>{INVALID_TITLE}</Typography>}
+          {isShowNames && (
+            <Typography className={classes.typoClass}>
+              {T.translate('features.GridPage.toolbar.invalidTitle')}
+            </Typography>
+          )}
         </Box>
 
         <Box className={classes.functionNameWrapper}>
@@ -122,9 +127,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             columnType={columnType}
             icon={ColumnIcon}
             submitMenuOption={submitMenuOption}
-            title={COLUMN_TITLE}
+            title={T.translate('features.GridPage.toolbar.columnTitle').toString()}
           />
-          {isShowNames && <Typography className={classes.typoClass}>{COLUMN_TITLE}</Typography>}
+          {isShowNames && (
+            <Typography className={classes.typoClass}>
+              {T.translate('features.GridPage.toolbar.columnTitle')}
+            </Typography>
+          )}
         </Box>
         <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Box className={classes.functionNameWrapper}>
@@ -133,9 +142,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={StructureIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={MENU_OPTIONS}
-            title={STRUCTURE_TITLE}
+            title={T.translate('features.GridPage.toolbar.structureTitle').toString()}
           />
-          {isShowNames && <Typography className={classes.typoClass}>{STRUCTURE_TITLE}</Typography>}
+          {isShowNames && (
+            <Typography className={classes.typoClass}>
+              {T.translate('features.GridPage.toolbar.structureTitle')}
+            </Typography>
+          )}
         </Box>
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
@@ -143,9 +156,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={FragmentIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={FRAGMENT_OPTIONS}
-            title={FRAGMENT_TITLE}
+            title={T.translate('features.GridPage.toolbar.fragmentTitle').toString()}
           />
-          {isShowNames && <Typography className={classes.typoClass}>{FRAGMENT_TITLE}</Typography>}
+          {isShowNames && (
+            <Typography className={classes.typoClass}>
+              {T.translate('features.GridPage.toolbar.fragmentTitle')}
+            </Typography>
+          )}
         </Box>
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
@@ -153,9 +170,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={MathIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={MATH_OPTIONS}
-            title={MATH_TITLE}
+            title={T.translate('features.GridPage.toolbar.mathTitle').toString()}
           />
-          {isShowNames && <Typography className={classes.typoClass}>{MATH_TITLE}</Typography>}
+          {isShowNames && (
+            <Typography className={classes.typoClass}>
+              {T.translate('features.GridPage.toolbar.mathTitle')}
+            </Typography>
+          )}
         </Box>
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
@@ -163,9 +184,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={SecurityIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={SECURITY_OPTIONS}
-            title={SECURITY_TITLE}
+            title={T.translate('features.GridPage.toolbar.securityTitle').toString()}
           />
-          {isShowNames && <Typography className={classes.typoClass}>{SECURITY_TITLE}</Typography>}
+          {isShowNames && (
+            <Typography className={classes.typoClass}>
+              {T.translate('features.GridPage.toolbar.securityTitle')}
+            </Typography>
+          )}
         </Box>
         <Box className={classes.functionNameWrapper}>
           <NestedMenu
@@ -173,13 +198,17 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={OtherIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={OTHER_OPTIONS}
-            title={OTHER_TITLE}
+            title={T.translate('features.GridPage.toolbar.otherTitle').toString()}
           />
-          {isShowNames && <Typography className={classes.typoClass}>{OTHER_TITLE}</Typography>}
+          {isShowNames && (
+            <Typography className={classes.typoClass}>
+              {T.translate('features.GridPage.toolbar.otherTitle')}
+            </Typography>
+          )}
         </Box>
         <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Tooltip
-          title={GRID_TITLE}
+          title={T.translate('features.GridPage.toolbar.gridTitle')}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -188,7 +217,11 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
         >
           <Box className={classes.functionNameWrapper}>
             <IconButton>{GridIcon}</IconButton>
-            {isShowNames && <Typography className={classes.typoClass}>{GRID_TITLE}</Typography>}
+            {isShowNames && (
+              <Typography className={classes.typoClass}>
+                {T.translate('features.GridPage.toolbar.gridTitle')}
+              </Typography>
+            )}
           </Box>
         </Tooltip>
         <Box className={classes.lastDivider}> {isShowNames ? LongDivider : Divider}</Box>

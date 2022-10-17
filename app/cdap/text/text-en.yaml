@@ -899,7 +899,7 @@ features:
         ignoreCase: Ignore case
         KEEP: Keep rows
         Placeholders:
-          CUSTOMCONDITION: 'E.g. < 30 || gender == "Male"'
+          CUSTOMCONDITION: 'E.g. < 30 || gender :: "Male"'
           TEXTCONTAINS: Enter contained value
           TEXTENDSWITH: Enter suffix
           TEXTEXACTLY: Enter value
@@ -1060,7 +1060,7 @@ features:
         ignoreCase: Ignore case
         if: If
         Placeholders:
-          CUSTOMCONDITION: 'E.g. {column} < 30 || gender == "Male"'
+          CUSTOMCONDITION: 'E.g. {column} < 30 || gender :: "Male"'
           TEXTCONTAINS: Enter contained value
           TEXTENDSWITH: Enter suffix
           TEXTEXACTLY: Enter value
@@ -3439,3 +3439,16 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+  GridPage:
+    toolbar:
+      undoTitle: 'Undo'
+      redoTitle: 'Redo'
+      nullTitle: 'Null'
+      invalidTitle: 'Invalid'
+      columnTitle: 'Column'
+      structureTitle: 'Structure'
+      fragmentTitle: 'Fragment'
+      securityTitle: 'Security'
+      mathTitle: 'Math'
+      gridTitle: 'Grid'
+      otherTitle: 'Other'
