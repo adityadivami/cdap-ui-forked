@@ -15,8 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
-import { blue } from '@material-ui/core/colors';
+import { blue, grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   wrapper: {
@@ -62,5 +61,8 @@ export const useStyles = makeStyles({
     position: 'absolute',
     top: 0,
     width: '100%',
+  },
+  link: {
+    textDecoration: 'none',
   },
 });

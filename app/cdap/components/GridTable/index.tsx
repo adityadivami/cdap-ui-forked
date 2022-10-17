@@ -21,6 +21,7 @@ import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import CallerSample from 'components/DrawerWidget/callerSample';
+import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import T from 'i18n-react';
@@ -32,7 +33,6 @@ import BreadCrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
-import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
@@ -185,7 +185,7 @@ export default function GridTable() {
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
-        <NoDataScreen
+        <NoRecordScreen
           title={T.translate(`features.NoRecordScreen.gridTable.title`)}
           subTitle={T.translate(`features.NoRecordScreen.gridTable.subTitle`)}
         />
