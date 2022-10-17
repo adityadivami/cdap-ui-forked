@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   closeHeader: {
@@ -24,7 +25,7 @@ export const useStyles = makeStyles({
   iconContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    border: '1px solid #E0E0E0',
+    border: `1px solid ${grey[300]}`,
     marginTop: '0px',
     paddingLeft: '18px',
     paddingRight: '15px',
@@ -58,7 +59,7 @@ export const useStyles = makeStyles({
     },
   },
   typoClass: {
-    color: '#757575',
+    color: grey[600],
     fontSize: '14px',
     padding: '0px 12px',
     marginBottom: '10px',
@@ -70,13 +71,13 @@ export const useStyles = makeStyles({
     margin: '0px 4px',
   },
   tooltipToolbar: {
-    background: '#616161',
+    background: grey[700],
     color: '#FFFFFF',
     fontSize: '14px',
   },
   arrowTooltip: {
     '&::before': {
-      backgroundColor: '#616161',
+      backgroundColor: grey[600],
     },
   },
   lastDivider: {
