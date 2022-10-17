@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { IconButton, Typography, Tooltip } from '@material-ui/core';
+import { IconButton, Typography, Tooltip, TextField } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { default as React, useState } from 'react';
 import NestedMenu from '../NestedMenu';
@@ -39,7 +39,6 @@ import {
 } from './iconStore';
 import { useStyles } from './styles';
 import FunctionToggle from '../FunctionNameToggle';
-import FunctionSearch from '../FunctionSearch';
 import { COLUMN_OPTIONS } from '../NestedMenu/menuOptions/columnOptions';
 import { FRAGMENT_OPTIONS } from '../NestedMenu/menuOptions/fragmentOptions';
 import { INVALID_ICON_OPTIONS } from '../NestedMenu/menuOptions/invalidIconOptions';
@@ -244,11 +243,9 @@ export default function TransfomationsToolbar({
           </Box>
         </Tooltip>
         <Box className={classes.lastDivider}> {isShowNames ? LongDivider : Divider}</Box>
-        <FunctionSearch
-          transformationPanel={(value) => {
-            submitMenuOption(value, ['all']);
-          }}
-        />
+        <Box className={classes.searchBar}>
+          {/* Search functionality UI component will be added here */}
+        </Box>
       </Box>
       <FunctionToggle setIsShowName={setIsShowName} isShowNames={isShowNames} />
       <IconButton
