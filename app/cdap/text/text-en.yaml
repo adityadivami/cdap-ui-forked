@@ -3417,6 +3417,9 @@ features:
     gridTable:
       title: 'No rows left in this sample'
       subtitle: 'Remove some recipe steps to view some data'
+    workspacesList:
+      title: 'No ongoing workspaces to display'
+      subtitle: 'Please start data exploration to view ongoing workspaces'
   Breadcrumb:
     labels:
       connectionsList: 'Data Sources'
@@ -3432,6 +3435,9 @@ features:
     labels:
       common:
         viewAll: 'View All'
+      welcomeCard:
+        title: 'Hello!'
+        subtitle: 'Welcome to Wrangler'
       connectorTypes:
         title: 'Start data exploration'
       workspaces:

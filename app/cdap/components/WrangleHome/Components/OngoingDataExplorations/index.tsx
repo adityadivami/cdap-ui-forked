@@ -142,7 +142,12 @@ export default function OngoingDataExplorations({
               </Link>
             );
           })
-        : fromAddress === 'Workspaces' && <NoRecordScreen title="Title" subtitle="sub title" />
+        : fromAddress === 'Workspaces' && (
+            <NoRecordScreen
+              title={T.translate('features.NoRecordScreen.workspacesList.title')}
+              subtitle={T.translate('features.NoRecordScreen.workspacesList.subtitle')}
+            />
+          )
       /* TODO: add no data msg in home page if no workspaces to display */
       }
     </Box>

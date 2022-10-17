@@ -35,8 +35,8 @@ export default function WranglerHome() {
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
       <Box className={classes.subHeader}>
         <Typography className={classes.welcomeCard}>
-          Hello! <br />
-          Welcome to Wrangler
+          {T.translate('features.HomePage.labels.welcomeCard.title')} <br />
+          {T.translate('features.HomePage.labels.welcomeCard.subtitle')}
         </Typography>
         <Box> {HeaderImage}</Box>
       </Box>
