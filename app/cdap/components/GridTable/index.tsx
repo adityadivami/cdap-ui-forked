@@ -27,7 +27,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-import Breadcrumb from './components/Breadcrumb';
+import ToolBarList from './components/AaToolbar';
+import BreadCrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
@@ -55,6 +56,7 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const [showBreadCrumb, setShowBreadCrumb] = useState(true);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -186,7 +188,17 @@ export default function GridTable() {
 
   return (
     <Box>
-      <Breadcrumb datasetName={workspaceName} location={location} />
+      {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
+      <ToolBarList
+        setShowBreadCrumb={setShowBreadCrumb}
+        showBreadCrumb={showBreadCrumb}
+        columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
+        submitMenuOption={(option, datatype) => {
+          console.log(option, datatype, 'console log from toolbar');
+          // TODO: will integrate with add transformation panel later
+        }}
+      />
+
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.gridTable.title')}

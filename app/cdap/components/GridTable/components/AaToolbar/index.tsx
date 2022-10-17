@@ -1,0 +1,211 @@
+/*
+ *  Copyright © 2022 Cask Data, Inc.
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ *  use this file except in compliance with the License. You may obtain a copy of
+ *  the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ *  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ *  License for the specific language governing permissions and limitations under
+ *  the License.
+ */
+
+import { IconButton, Typography, Tooltip } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
+import { default as React, useState } from 'react';
+import NestedMenu from '../NestedMenu';
+import {
+  ColumnIcon,
+  Divider,
+  Expand,
+  FragmentIcon,
+  GridIcon,
+  InvalidIcon,
+  LongDivider,
+  MathIcon,
+  NullIcon,
+  OtherIcon,
+  Redo,
+  SearchIconn,
+  SecurityIcon,
+  StructureIcon,
+  Undo,
+} from './images';
+import { useStyles } from './styles';
+import {
+  MENU_OPTIONS,
+  NULL_MISSING_OPTIONS,
+  INVALID_ICON_OPTIONS,
+  COLUMN_OPTIONS,
+  FRAGMENT_OPTIONS,
+  MATH_OPTIONS,
+  SECURITY_OPTIONS,
+  OTHER_OPTIONS,
+} from '../NestedMenu/constants';
+import FunctionToggle from '../FunctionNameToggle';
+import {
+  UNDO_TITLE,
+  REDO_TITLE,
+  NULL_TITLE,
+  INVALID_TITLE,
+  COLUMN_TITLE,
+  STRUCTURE_TITLE,
+  FRAGMENT_TITLE,
+  SECURITY_TITLE,
+  MATH_TITLE,
+  GRID_TITLE,
+  OTHER_TITLE,
+} from './constants';
+import FunctionSearch from '../FunctionSearch';
+
+const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) => {
+  const classes = useStyles();
+  const [isShowNames, setIsShowName] = useState(false);
+  return (
+    <Box className={classes.iconContainer}>
+      <Box className={classes.container}>
+        <Tooltip
+          title={UNDO_TITLE}
+          arrow
+          classes={{
+            tooltip: classes.tooltipToolbar,
+            arrow: classes.arrowTooltip,
+          }}
+        >
+          <Box className={classes.functionNameWrapper}>
+            <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
+            {isShowNames && <Typography className={classes.typoClass}>{UNDO_TITLE}</Typography>}
+          </Box>
+        </Tooltip>
+        <Tooltip
+          title={REDO_TITLE}
+          arrow
+          classes={{
+            tooltip: classes.tooltipToolbar,
+            arrow: classes.arrowTooltip,
+          }}
+        >
+          <Box className={classes.functionNameWrapper}>
+            <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
+            {isShowNames && <Typography className={classes.typoClass}>{REDO_TITLE}</Typography>}
+          </Box>
+        </Tooltip>
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={NULL_MISSING_OPTIONS}
+            columnType={columnType}
+            icon={NullIcon}
+            submitMenuOption={submitMenuOption}
+            title={NULL_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{NULL_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={INVALID_ICON_OPTIONS}
+            columnType={columnType}
+            icon={InvalidIcon}
+            submitMenuOption={submitMenuOption}
+            title={INVALID_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{INVALID_TITLE}</Typography>}
+        </Box>
+
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            menuOptions={COLUMN_OPTIONS}
+            columnType={columnType}
+            icon={ColumnIcon}
+            submitMenuOption={submitMenuOption}
+            title={COLUMN_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{COLUMN_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={StructureIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={MENU_OPTIONS}
+            title={STRUCTURE_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{STRUCTURE_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={FragmentIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={FRAGMENT_OPTIONS}
+            title={FRAGMENT_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{FRAGMENT_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={MathIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={MATH_OPTIONS}
+            title={MATH_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{MATH_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={SecurityIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={SECURITY_OPTIONS}
+            title={SECURITY_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{SECURITY_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.functionNameWrapper}>
+          <NestedMenu
+            columnType={columnType}
+            icon={OtherIcon}
+            submitMenuOption={submitMenuOption}
+            menuOptions={OTHER_OPTIONS}
+            title={OTHER_TITLE}
+          />
+          {isShowNames && <Typography className={classes.typoClass}>{OTHER_TITLE}</Typography>}
+        </Box>
+        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
+        <Tooltip
+          title={GRID_TITLE}
+          arrow
+          classes={{
+            tooltip: classes.tooltipToolbar,
+            arrow: classes.arrowTooltip,
+          }}
+        >
+          <Box className={classes.functionNameWrapper}>
+            <IconButton>{GridIcon}</IconButton>
+            {isShowNames && <Typography className={classes.typoClass}>{GRID_TITLE}</Typography>}
+          </Box>
+        </Tooltip>
+        <Box className={classes.lastDivider}> {isShowNames ? LongDivider : Divider}</Box>
+        <FunctionSearch
+          transformationPanel={(value) => {
+            submitMenuOption(value, ['all']);
+          }}
+        />
+      </Box>
+      <FunctionToggle setIsShowName={setIsShowName} isShowNames={isShowNames} />
+      <IconButton
+        className={showBreadCrumb ? classes.openHeader : classes.closeHeader}
+        onClick={() => setShowBreadCrumb(!showBreadCrumb)}
+      >
+        {Expand}
+      </IconButton>
+    </Box>
+  );
+};
+export default ToolBarList;
