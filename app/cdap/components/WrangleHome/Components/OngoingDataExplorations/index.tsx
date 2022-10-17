@@ -22,10 +22,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
-import { switchMap } from 'rxjs/operators';
+import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
 import T from 'i18n-react';
+import NoRecordScreen from 'components/NoRecordScreen';
 
 interface ICardCount {
   cardCount?: number;
@@ -86,27 +87,30 @@ export default function OngoingDataExplorations({
             });
             return MyDataPrepApi.execute(params, requestBody);
           });
-          return forkJoin(workspaces);
+          return forkJoin(workspaces).pipe(defaultIfEmpty(null));
         })
       )
       .subscribe((responses) => {
-        responses.forEach((workspace, index) => {
-          let dataQuality = 0;
-          workspace.headers.forEach((element) => {
-            const general = workspace.summary.statistics[element].general;
-            const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
-            const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+        if (responses && Array.isArray(responses) && responses.length) {
+          responses.forEach((workspace, index) => {
+            let dataQuality = 0;
+            workspace.headers.forEach((element) => {
+              const general = workspace.summary.statistics[element].general;
+              const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+              const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
 
-            dataQuality = dataQuality + nonNull;
+              dataQuality = dataQuality + nonNull;
+            });
+            const totalDataQuality = dataQuality / workspace.headers.length;
+            expData[index].dataQuality = totalDataQuality;
+            expData[index].count = workspace.count;
+
+            const final = generateDataForExplorationCard(expData, cardCount);
+            setFinalArray(final);
+            setLoading(false);
           });
-          const totalDataQuality = dataQuality / workspace.headers.length;
-          expData[index].dataQuality = totalDataQuality;
-          expData[index].count = workspace.count;
-
-          const final = generateDataForExplorationCard(expData, cardCount);
-          setFinalArray(final);
-          setLoading(false);
-        });
+        }
+        setLoading(false);
       });
   }, []);
 
@@ -121,27 +125,26 @@ export default function OngoingDataExplorations({
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {finalArray && Array.isArray(finalArray) && finalArray.length ? (
-        finalArray.map((item, index) => {
-          return (
-            <Link
-              to={{
-                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
-                state: {
-                  from: fromAddress,
-                  path: T.translate('features.Breadcrumb.labels.wrangleHome'),
-                },
-              }}
-              style={{ textDecoration: 'none' }}
-            >
-              <OngoingDataExplorationsCard item={item} key={index} fromAddress={fromAddress} />
-            </Link>
-          );
-        })
-      ) : (
-        <></>
-        /* TODO: add no data screen in case final array is empty */
-      )}
+      {finalArray && Array.isArray(finalArray) && finalArray.length
+        ? finalArray.map((item, index) => {
+            return (
+              <Link
+                to={{
+                  pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
+                  state: {
+                    from: fromAddress,
+                    path: T.translate('features.Breadcrumb.labels.wrangleHome'),
+                  },
+                }}
+                style={{ textDecoration: 'none' }}
+              >
+                <OngoingDataExplorationsCard item={item} key={index} fromAddress={fromAddress} />
+              </Link>
+            );
+          })
+        : fromAddress === 'Workspaces' && <NoRecordScreen title="Title" subtitle="sub title" />
+      /* TODO: add no data msg in home page if no workspaces to display */
+      }
     </Box>
   );
 }
