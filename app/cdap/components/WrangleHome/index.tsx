@@ -16,7 +16,9 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorations from './Components/OngoingDataExplorations';
 import WrangleCard from './Components/WrangleCard';
 import WrangleHomeTitle from './Components/WrangleHomeTitle';
@@ -26,6 +28,8 @@ import T from 'i18n-react';
 
 export default function WranglerHome() {
   const classes = useStyles();
+  const [loading, setLoading] = useState(false);
+  const cardCount = 2;
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
@@ -49,10 +53,16 @@ export default function WranglerHome() {
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
           <Box className={classes.viewMore}>
-            {T.translate('features.HomePage.labels.common.viewAll')}
+            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
+              {T.translate('features.HomePage.labels.common.viewAll')}
+            </Link>
           </Box>
         </Box>
-        <OngoingDataExplorations />
+        <OngoingDataExplorations
+          cardCount={cardCount}
+          fromAddress={T.translate('features.Breadcrumb.labels.wrangleHome').toString()}
+          setLoading={setLoading}
+        />
       </Box>
     </Box>
   );
