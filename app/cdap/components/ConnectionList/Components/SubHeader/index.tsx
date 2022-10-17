@@ -34,18 +34,24 @@ export default function SubHeader() {
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
             {T.translate('features.Breadcrumb.labels.wrangleHome')}
           </Link>
-          <Typography>{T.translate('features.Breadcrumb.labels.connectionsList')}</Typography>
+          <Typography className={classes.breadcrumbTyporgraphy}>
+            {T.translate('features.Breadcrumb.labels.connectionsList')}
+          </Typography>
         </Breadcrumbs>
       </Box>
 
       <Box className={classes.importDataContainer}>
         <Box className={classes.importData}>
           <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadCrumbTyporgraphy}>Add connection</Box>
+          <Box className={classes.breadcrumbTyporgraphy}>
+            {T.translate('features.AddConnections.referenceLabel')}
+          </Box>
         </Box>
         <Box className={classes.importData}>
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadCrumbTyporgraphy}>Import data</Box>
+          <Box className={classes.breadcrumbTyporgraphy}>
+            {T.translate('features.ImportData.referenceLabel')}
+          </Box>
         </Box>
       </Box>
     </Box>

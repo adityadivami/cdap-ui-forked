@@ -21,13 +21,11 @@ import { WrangleIcon } from 'components/ConnectionList/icons';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
 import { IRecords } from 'components/GridTable/types';
-import * as React from 'react';
-import { createRef, Ref, useContext, useEffect, useState } from 'react';
-import { Redirect } from 'react-router';
+import T from 'i18n-react';
+import React, { createRef, Ref, useContext, useEffect, useState } from 'react';
+import { Redirect, useLocation } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import useStyles from './styles';
-import { useLocation } from 'react-router';
-import T from 'i18n-react';
 
 export default function TabLabelCanSample({
   label,

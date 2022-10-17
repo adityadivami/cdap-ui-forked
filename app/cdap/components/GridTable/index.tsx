@@ -22,8 +22,9 @@ import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import NoRecordScreen from 'components/NoRecordScreen/index';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import Breadcrumb from './components/Breadcrumb';
@@ -33,7 +34,6 @@ import GridTextCell from './components/GridTextCell';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
-import T from 'i18n-react';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;

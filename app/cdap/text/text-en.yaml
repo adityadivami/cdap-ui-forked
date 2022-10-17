@@ -3420,4 +3420,16 @@ features:
     params: 
       wrangeHome: 'home'
       connectionsList: 'datasources'
+  AddConnections:
+    referenceLabel: 'Add Connection'
+  ImportData:
+    referenceLabel: 'Import Data'
+  HomePage:
+    labels:
+      common:
+        viewAll: 'View All'
+      connectorTypes:
+        title: 'Start data exploration'
+      workspaces:
+        title: 'Continue ongoing data explorations, pick up where you left off'
 ...
