@@ -36,7 +36,7 @@ export interface IExecuteAPIResponse {
   types: IRecords;
   values: IRecords[];
   summary: ISummary;
-  message:string;
+  message: string;
 }
 
 export interface IHeaderNamesList {
