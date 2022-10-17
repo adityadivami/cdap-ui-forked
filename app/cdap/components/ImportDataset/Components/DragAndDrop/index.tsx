@@ -20,13 +20,9 @@ import classnames from 'classnames';
 import { useStyles } from '../../styles';
 import { Box, Divider, Typography } from '@material-ui/core';
 import { uploadSVG, infoIcon, deleteSVG } from 'components/ImportDataset/iconStore';
-import {
-  DRAG_AND_DROP_TEXT_LINE_1,
-  DRAG_AND_DROP_TEXT_LINE_2,
-  MAX_SIZE_TEXT,
-} from 'components/ImportDataset/constants';
+import T from 'i18n-react';
 
-export default function FileDnD({ file, onDropHandler }) {
+export default function({ file, onDropHandler }) {
   const classes = useStyles();
   const onDrop = useCallback((acceptedFiles) => {
     onDropHandler(acceptedFiles);
@@ -53,14 +49,14 @@ export default function FileDnD({ file, onDropHandler }) {
             <div className={classes.uploadBox}>
               {uploadSVG()}
               <Typography variant="body1" className={classes.dropText}>
-                {DRAG_AND_DROP_TEXT_LINE_1}
+                {T.translate('features.ImportData.dragAndDropTextLine1')}
                 <br />
-                {DRAG_AND_DROP_TEXT_LINE_2}
+                {T.translate('features.ImportData.dragAndDropTextLine2')}
               </Typography>
             </div>
           </div>
           <Typography variant="body1" className={classes.dropText}>
-            {infoIcon()} {MAX_SIZE_TEXT}
+            {infoIcon()} {T.translate('features.ImportData.maxSizeText')}
           </Typography>
         </>
       ) : (

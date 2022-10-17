@@ -20,7 +20,7 @@ import { useStyles } from './styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from './DrawerWidgetHeading';
 
-const DrawerWidget = (props) => {
+export default function(props) {
   const classes = useStyles();
   const {
     headingText,
@@ -66,6 +66,4 @@ const DrawerWidget = (props) => {
       </Container>
     </Drawer>
   );
-};
-
-export default DrawerWidget;
+}

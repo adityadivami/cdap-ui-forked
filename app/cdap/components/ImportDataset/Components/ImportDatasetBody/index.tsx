@@ -17,7 +17,7 @@
 import React from 'react';
 import DragDrop from '../DragAndDrop';
 
-export default function DatasetBody(props) {
+export default function(props) {
   const { file, onDropHandler } = props;
   return (
     <div>

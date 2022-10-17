@@ -19,7 +19,6 @@ import Box from '@material-ui/core/Box';
 import { Button } from '@material-ui/core';
 import { useStyles } from './styles';
 import DrawerWidget from 'components/DrawerWidget';
-import { IMPORT_DATASET, WRANGLE } from './constants';
 import DatasetBody from './Components/ImportDatasetBody';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
@@ -28,12 +27,12 @@ import isNil from 'lodash/isNil';
 import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
 import PositionedSnackbar from 'components/SnackbarComponent';
-import { DATASOURCES_LABEL } from 'components/ConnectionList/Components/TabLabelCanSample/constants';
+import T from 'i18n-react';
 
 const FILE_SIZE_LIMIT = 10 * 1024 * 1024; // 10 MB
 const cookie = new Cookies();
 
-export default function ImportDataSet(props) {
+export default function(props) {
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [file, setFile] = useState(null);
   const classes = useStyles();
@@ -116,7 +115,7 @@ export default function ImportDataSet(props) {
         to={{
           pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
           state: {
-            from: DATASOURCES_LABEL,
+            from: T.translate('features.ConnectionsList.labels.dataSources'),
             path: 'Select Dataset',
           },
         }}
@@ -125,7 +124,7 @@ export default function ImportDataSet(props) {
   }
   const componentToRender = (
     <DrawerWidget
-      headingText={IMPORT_DATASET}
+      headingText={T.translate('features.ImportData.referenceLabel')}
       openDrawer={setDrawerStatus}
       showDivider={true}
       closeClickHandler={closeClickHandler}
@@ -137,7 +136,7 @@ export default function ImportDataSet(props) {
         {file && (
           <Box className={classes.buttonWrapper}>
             <Button variant="contained" className={classes.wrangleButton} onClick={uploadWrangle}>
-              {WRANGLE}
+              {T.translate('features.ConnectionsList.labels.loadToGrid')}
             </Button>
           </Box>
         )}
