@@ -137,13 +137,11 @@ export default function ConnectionList() {
 
   const fetchEntities = async (connectionName, url = pathFromUrl) => {
     const pathDesired = url ? url : pathFromUrl;
-    const entitiesPromise = exploreConnection({
+    const entitiesPromise = await exploreConnection({
       connectionid: connectionName,
       path: pathDesired,
     });
-    return entitiesPromise.then((values) => {
-      return values;
-    });
+    return entitiesPromise;
   };
 
   const selectedTabValueHandler = (entity: IRecords, index: number) => {
