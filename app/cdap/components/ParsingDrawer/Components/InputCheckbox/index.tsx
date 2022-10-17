@@ -18,7 +18,7 @@ import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import { useStyles } from '../../styles';
 
-export default function InputCheckbox({ label, value, onChange, className }) {
+export default function({ label, value, onChange, className }) {
   const classes = useStyles();
 
   return (

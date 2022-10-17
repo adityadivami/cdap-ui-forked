@@ -20,7 +20,7 @@ import React, { ChangeEvent } from 'react';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 import T from 'i18n-react';
 
-export default function ParsingHeaderActionTemplate(props) {
+export default function(props) {
   const classes = useStyles();
 
   const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,7 @@ export default function ParsingHeaderActionTemplate(props) {
       } catch (e) {
         props.setErrorOnTransformation({
           open: true,
-          message: 'Imported schema is not a valid Avro schema',
+          message: T.translate('features.WranglerNewParsingDrawer.importSchemaErrorMessage'),
         });
       }
     };

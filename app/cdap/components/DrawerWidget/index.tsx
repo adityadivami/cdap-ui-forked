@@ -20,7 +20,7 @@ import React, { Fragment } from 'react';
 import DrawerWidgetHeading from './DrawerWidgetHeader';
 import { useStyles } from './styles';
 
-const DrawerWidget = (props) => {
+export default function(props) {
   const classes = useStyles();
   const {
     headingText,
@@ -64,6 +64,4 @@ const DrawerWidget = (props) => {
       </Container>
     </Drawer>
   );
-};
-
-export default DrawerWidget;
+}

@@ -36,7 +36,7 @@ import { convertNonNullPercent } from './utils';
 import ParsingDrawer from 'components/ParsingDrawer';
 import NoRecordScreen from 'components/NoRecordScreen';
 
-export default function GridTable() {
+export default function() {
   const { wid } = useParams() as IRecords;
 
   const params = useParams() as IRecords;
@@ -64,10 +64,6 @@ export default function GridTable() {
   useEffect(() => {
     setIsFirstWrangle(true);
     setConnectorType(dataprep.connectorType);
-
-    console.log(dataprep.connectorType, 'dataprep.connectorType');
-    console.log(isFirstWrangle, 'isFirstWrangle');
-    console.log(dataprep.insights.name, 'dataprep.insights.name');
   }, []);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {

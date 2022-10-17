@@ -15,19 +15,14 @@
  */
 
 import { Box, InputLabel } from '@material-ui/core';
-import {
-  ENABLE_QUOTED_VALUES,
-  ENCODING,
-  FORMAT,
-  USE_FIRST_ROW_AS_HEADER,
-} from 'components/ParsingDrawer/constants';
 import React, { ChangeEvent, useEffect } from 'react';
 import { useStyles } from '../../styles';
 import InputCheckbox from '../InputCheckbox';
 import InputSelect from '../InputSelect';
 import { CHAR_ENCODING_OPTIONS, FORMAT_OPTIONS } from './parsingOptions';
+import T from 'i18n-react';
 
-export default function ParsingPopupBody({ values, changeEventListener }) {
+export default function({ values, changeEventListener }) {
   const classes = useStyles();
 
   const { format, fileEncoding, enableQuotedValues, skipHeader } = values;
@@ -46,7 +41,7 @@ export default function ParsingPopupBody({ values, changeEventListener }) {
     <Box>
       <Box className={[classes.formFieldWrapperStyles, classes.marginBottomStyles].join(' ')}>
         <InputLabel id="label" className={classes.labelTextStyles}>
-          {FORMAT}
+          {T.translate('features.WranglerNewParsingDrawer.format')}
         </InputLabel>
         <InputSelect
           classes={{ icon: classes.selectIconStyles, select: classes.selectStyles }}
@@ -64,7 +59,7 @@ export default function ParsingPopupBody({ values, changeEventListener }) {
 
       <Box className={[classes.formFieldWrapperStyles, classes.marginBottomStyles].join(' ')}>
         <InputLabel id="label" className={classes.labelTextStyles}>
-          {ENCODING}
+          {T.translate('features.WranglerNewParsingDrawer.encoding')}
         </InputLabel>
         <InputSelect
           classes={{ icon: classes.selectIconStyles, select: classes.selectStyles }}
@@ -81,7 +76,7 @@ export default function ParsingPopupBody({ values, changeEventListener }) {
       </Box>
 
       <InputCheckbox
-        label={ENABLE_QUOTED_VALUES}
+        label={T.translate('features.WranglerNewParsingDrawer.enableQuotedValues')}
         value={enableQuotedValues}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           changeEventListener(event.target.checked, 'enableQuotedValues')
@@ -90,7 +85,7 @@ export default function ParsingPopupBody({ values, changeEventListener }) {
       />
 
       <InputCheckbox
-        label={USE_FIRST_ROW_AS_HEADER}
+        label={T.translate('features.WranglerNewParsingDrawer.useFirstRowAsHeader')}
         value={skipHeader}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           changeEventListener(event.target.checked, 'skipHeader')
