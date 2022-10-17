@@ -17,18 +17,27 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import TabLabelCanSample from '../index';
-import { mockConnectorTypeData } from '../mock/mockConnectorTypeData';
-
+import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
+import { createBrowserHistory } from 'history';
+import { Route, Router, Switch } from 'react-router-dom';
+import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
+import history from 'services/history';
 describe('Test TabLabelCanSample Component', () => {
   it('Should render TabLabelCanSample Component', () => {
     render(
-      <TabLabelCanSample
-        label={mockConnectorTypeData.name}
-        entity={mockConnectorTypeData}
-        initialConnectionId={undefined}
-        toggleLoader={() => null}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-      />
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <TabLabelCanSample
+              label={mockConnectorTypeData.name}
+              entity={mockConnectorTypeData}
+              initialConnectionId={undefined}
+              toggleLoader={() => null}
+              setIsErrorOnNoWorkSpace={jest.fn()}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
     const ele = screen.getByTestId(/connections-tab-label-simple/i);
     expect(ele).toBeInTheDocument();
@@ -37,16 +46,61 @@ describe('Test TabLabelCanSample Component', () => {
   it('Should trigger setIsErrorOnNoWorkSpace function ', () => {
     const setIsErrorOnNoWorkSpace = jest.fn();
     render(
-      <TabLabelCanSample
-        label={mockConnectorTypeData.name}
-        entity={mockConnectorTypeData}
-        initialConnectionId={undefined}
-        toggleLoader={() => null}
-        setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-      />
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <TabLabelCanSample
+              label={mockConnectorTypeData.name}
+              entity={mockConnectorTypeData}
+              initialConnectionId={undefined}
+              toggleLoader={() => null}
+              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
     const ele = screen.getByTestId(/connections-tab-explore/i);
     fireEvent.click(ele);
     expect(setIsErrorOnNoWorkSpace).toHaveBeenCalled();
+  });
+
+  it('Should trigger onWorkspaceCreate Function', async () => {
+    const setIsErrorOnNoWorkSpace = jest.fn();
+
+    jest.spyOn(apiHelpers, 'createWorkspace').mockReturnValue(
+      Promise.resolve({
+        entity: {
+          name: 'sql_feature',
+          path: '/information_schema/sql_features',
+          type: 'system table',
+          canSample: true,
+          canBrowse: false,
+          properties: {},
+        },
+        connection: 'exl',
+        properties: {},
+      })
+    );
+
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <TabLabelCanSample
+              label={mockEntityDataForNoWorkspace.name}
+              entity={mockEntityDataForNoWorkspace}
+              initialConnectionId="exl"
+              toggleLoader={() => null}
+              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+
+    const ele = screen.getByTestId(/connections-tab-explore/i);
+    fireEvent.click(ele);
+    expect(ele).toBeInTheDocument();
   });
 });

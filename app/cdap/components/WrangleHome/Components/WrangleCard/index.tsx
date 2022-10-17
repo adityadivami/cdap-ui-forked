@@ -126,7 +126,7 @@ export default function WrangleCard() {
     /* remove the other connector Types based on getCategorized connections */
 
     fetchedConnectorTypesFromAPI = fetchedConnectorTypesFromAPI.filter((obj) =>
-      connectorTypeWithConnections.find((each) => each == obj.name)
+      connectorTypeWithConnections.find((each) => each === obj.name)
     );
 
     fetchedConnectorTypesFromAPI.unshift({
@@ -161,6 +161,7 @@ export default function WrangleCard() {
           <Link
             to={`/ns/${getCurrentNamespace()}/datasources/${item.name}`}
             style={{ textDecoration: 'none' }}
+            data-testid={'item' + index}
           >
             <Card className={classes.card}>
               <Box className={classes.cardContent} key={index}>
