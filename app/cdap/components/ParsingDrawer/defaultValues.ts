@@ -36,7 +36,7 @@ export const defaultErrorOnTransformations = {
 };
 
 export const defaultProperties = {
-  format: 'CSV',
+  format: 'csv',
   fileEncoding: 'UTF-8',
   enableQuotedValues: false,
   skipHeader: false,

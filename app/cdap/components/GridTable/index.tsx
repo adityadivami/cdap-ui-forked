@@ -205,7 +205,7 @@ export default function GridTable() {
 
   return (
     <Box>
-      {dataprep.insights.name && isFirstWrangle && connectorType === 'File' && (
+      {dataprep.insights.name && isFirstWrangle && (
         <ParsingDrawer
           updateDataTranformation={(wid) => updateDataTranformation(wid)}
           setLoading={setLoading}
