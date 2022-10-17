@@ -78,7 +78,6 @@ export default function({ setIsShowName, isShowNames }) {
         checked={isShowNames}
         inputProps={{ 'aria-label': 'Functions Name Switch' }}
       />
-      <div style={{ border: '2px solid rgb(0 35 11 / 20%)' }}>test</div>
     </Box>
   );
 }
