@@ -18,7 +18,7 @@ import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 import { useStyles } from '../../styles';
 
-export default function InputSelect({
+export default function({
   options,
   value,
   onChange,

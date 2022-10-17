@@ -20,7 +20,7 @@ import React, { ChangeEvent } from 'react';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 import T from 'i18n-react';
 
-export default function ParsingHeaderActionTemplate(props) {
+export default function(props) {
   const classes = useStyles();
 
   const handleFile = (event: ChangeEvent<HTMLInputElement>) => {

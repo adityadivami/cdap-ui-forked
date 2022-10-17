@@ -20,7 +20,7 @@ import React, { Fragment } from 'react';
 import DrawerWidgetHeading from './DrawerWidgetHeader';
 import { useStyles } from './styles';
 
-export default function DrawerWidget(props) {
+export default function(props) {
   const classes = useStyles();
   const {
     headingText,

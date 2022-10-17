@@ -36,7 +36,7 @@ import { convertNonNullPercent } from './utils';
 import ParsingDrawer from 'components/ParsingDrawer';
 import NoRecordScreen from 'components/NoRecordScreen';
 
-export default function GridTable() {
+export default function() {
   const { wid } = useParams() as IRecords;
 
   const params = useParams() as IRecords;

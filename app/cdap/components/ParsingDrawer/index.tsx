@@ -33,7 +33,7 @@ import {
 } from './defaultValues';
 import { useStyles } from './styles';
 
-export default function ParsingDrawer({ setLoading, updateDataTranformation }) {
+export default function({ setLoading, updateDataTranformation }) {
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [properties, setProperties] = useState(defaultProperties);
   const [schemaValue, setSchemaValue] = useState(null);

@@ -22,7 +22,7 @@ import InputSelect from '../InputSelect';
 import { CHAR_ENCODING_OPTIONS, FORMAT_OPTIONS } from './parsingOptions';
 import T from 'i18n-react';
 
-export default function ParsingPopupBody({ values, changeEventListener }) {
+export default function({ values, changeEventListener }) {
   const classes = useStyles();
 
   const { format, fileEncoding, enableQuotedValues, skipHeader } = values;
