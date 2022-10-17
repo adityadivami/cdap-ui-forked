@@ -3418,6 +3418,6 @@ features:
       connectionsList: 'Data Sources'
       wrangleHome: 'Home'
     params: 
-      wrangeHome: 'home'
+      wrangleHome: 'home'
       connectionsList: 'datasources'
 ...

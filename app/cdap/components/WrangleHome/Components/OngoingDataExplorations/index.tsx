@@ -112,7 +112,7 @@ export default function OngoingDataExplorations() {
               pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
               state: {
                 from: T.translate('features.Breadcrumb.labels.wrangleHome'),
-                path: T.translate('features.Breadcrumb.params.wrangeHome'),
+                path: T.translate('features.Breadcrumb.params.wrangleHome'),
               },
             }}
             style={{ textDecoration: 'none' }}
