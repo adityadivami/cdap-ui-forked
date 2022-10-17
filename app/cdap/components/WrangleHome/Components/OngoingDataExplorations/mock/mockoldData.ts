@@ -295,4 +295,3 @@ export const getWorkspaceListSubscribeMock = [
     ],
   },
 ];
-
