@@ -14,17 +14,17 @@
  *  the License.
  */
 
-import { convertNonNullPercent } from "../utils";
+import { convertNonNullPercent } from '../utils';
 
-describe("Test util Function checkFrequentlyOccuredValues", () => {
-  it("should be undefined and trigger 0", () => {
+describe('Test util Function checkFrequentlyOccuredValues', () => {
+  it('should be undefined and trigger 0', () => {
     convertNonNullPercent(
       {
         headers: [],
         types: undefined,
         values: [],
         summary: undefined,
-        message: "",
+        message: '',
       },
       undefined
     );
