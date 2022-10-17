@@ -20,8 +20,14 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { mockTabsDataWithBrowse } from '../mock/mockTabsDataWithBrowse';
 import { mockTabsDataWithBrowseIndex } from '../mock/mockTabsDataWithBrowseIndex';
 import { mockTabsTestData } from '../mock/mockTabsTestData';
+import { createBrowserHistory } from 'history';
+import { Route, Router, Switch } from 'react-router-dom';
 
 const tabsTestData = [{ showTabs: true }];
+
+const history = createBrowserHistory({
+  basename: '/',
+});
 
 describe('Test ConnectionsTabs', () => {
   it('Should render Connections Tabs Parent Component', () => {
@@ -91,14 +97,20 @@ describe('Should test whether handleChange function is triggered or not', () => 
   it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is false', () => {
     const handleChange = jest.fn();
     render(
-      <ConnectionsTabs
-        tabsData={mockTabsTestData}
-        handleChange={handleChange}
-        value="apple"
-        index="2"
-        connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-      />
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <ConnectionsTabs
+              tabsData={mockTabsTestData}
+              handleChange={handleChange}
+              value="apple"
+              index="2"
+              connectionId={undefined}
+              setIsErrorOnNoWorkSpace={jest.fn()}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
     const ele = screen.getAllByTestId(/connections-tab-button/i);
     fireEvent.click(ele[0]);
@@ -108,14 +120,20 @@ describe('Should test whether handleChange function is triggered or not', () => 
   it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is true', () => {
     const handleChange = jest.fn();
     render(
-      <ConnectionsTabs
-        tabsData={mockTabsDataWithBrowse}
-        handleChange={handleChange}
-        value="apple"
-        index="2"
-        connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-      />
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <ConnectionsTabs
+              tabsData={mockTabsDataWithBrowse}
+              handleChange={handleChange}
+              value="apple"
+              index="2"
+              connectionId={undefined}
+              setIsErrorOnNoWorkSpace={jest.fn()}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
     const ele = screen.getAllByTestId(/connections-tab-button/i);
     fireEvent.click(ele[0]);
