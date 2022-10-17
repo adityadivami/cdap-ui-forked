@@ -64,10 +64,6 @@ export default function GridTable() {
   useEffect(() => {
     setIsFirstWrangle(true);
     setConnectorType(dataprep.connectorType);
-
-    console.log(dataprep.connectorType, 'dataprep.connectorType');
-    console.log(isFirstWrangle, 'isFirstWrangle');
-    console.log(dataprep.insights.name, 'dataprep.insights.name');
   }, []);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {

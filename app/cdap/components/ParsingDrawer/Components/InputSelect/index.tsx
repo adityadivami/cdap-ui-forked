@@ -18,7 +18,7 @@ import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 import { useStyles } from '../../styles';
 
-const InputSelect = ({
+export default function InputSelect({
   options,
   value,
   onChange,
@@ -27,7 +27,7 @@ const InputSelect = ({
   fullWidth,
   optionClassName,
   defaultValue,
-}) => {
+}) {
   const anchorClass = useStyles();
   return (
     <Select
@@ -60,6 +60,4 @@ const InputSelect = ({
       })}
     </Select>
   );
-};
-
-export default InputSelect;
+}

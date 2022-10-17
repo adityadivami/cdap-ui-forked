@@ -18,8 +18,7 @@ import { Box } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../styles';
 
-const DrawerWidgetHeading = (props) => {
-  const { headingText } = props;
+export default function({ headingText }) {
   const classes = useStyles();
 
   return (
@@ -28,6 +27,4 @@ const DrawerWidgetHeading = (props) => {
       <img src="/cdap_assets/img/Underline.svg" alt="header line" />
     </Box>
   );
-};
-
-export default DrawerWidgetHeading;
+}

@@ -38,7 +38,7 @@ export default function ParsingHeaderActionTemplate(props) {
       } catch (e) {
         props.setErrorOnTransformation({
           open: true,
-          message: 'Imported schema is not a valid Avro schema',
+          message: T.translate('features.WranglerNewParsingDrawer.importSchemaErrorMessage'),
         });
       }
     };
