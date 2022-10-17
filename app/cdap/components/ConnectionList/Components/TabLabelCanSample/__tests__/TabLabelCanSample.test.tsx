@@ -57,7 +57,6 @@ describe('Test TabLabelCanSample Component', () => {
     expect(setIsErrorOnNoWorkSpace).toHaveBeenCalled();
   });
 
-  
   it('Should trigger onWorkspaceCreate Function', async () => {
     const setIsErrorOnNoWorkSpace = jest.fn();
 
@@ -96,7 +95,4 @@ describe('Test TabLabelCanSample Component', () => {
     fireEvent.click(ele);
     expect(ele).toBeInTheDocument();
   });
-  
 });
-
-
