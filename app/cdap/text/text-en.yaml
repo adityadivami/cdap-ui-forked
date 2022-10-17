@@ -3428,6 +3428,9 @@ features:
     referenceLabel: 'Add Connection'
   ImportData:
     referenceLabel: 'Import Data'
+    dragAndDropTextLine1: 'Drag and drop a file to be uploaded'
+    dragAndDropTextLine2: 'or Click here to select a file from your computer'
+    maxSizeText: 'Max file size: 10 MB, Supported file formats: CSV, JSON'
   HomePage:
     labels:
       common:
@@ -3439,3 +3442,4 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+      dataSources: 'Data Sources'

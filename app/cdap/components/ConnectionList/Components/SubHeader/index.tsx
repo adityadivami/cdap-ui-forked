@@ -25,7 +25,8 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import T from 'i18n-react';
 
-export default function SubHeader() {
+export default function(props) {
+  const { setOpenImportDataPanel } = props;
   const classes = useStyles();
   return (
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
@@ -47,7 +48,7 @@ export default function SubHeader() {
             {T.translate('features.AddConnections.referenceLabel')}
           </Box>
         </Box>
-        <Box className={classes.importData}>
+        <Box className={classes.importData} onClick={() => setOpenImportDataPanel(true)}>
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
           <Box className={classes.breadcrumbTyporgraphy}>
             {T.translate('features.ImportData.referenceLabel')}

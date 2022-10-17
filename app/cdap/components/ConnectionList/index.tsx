@@ -28,6 +28,7 @@ import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
+import ImportDatasetPanel from 'components/ImportDataset';
 import { useStyles } from './styles';
 
 const SelectDatasetWrapper = styled(Box)({
@@ -44,7 +45,7 @@ const SelectDatasetWrapper = styled(Box)({
   },
 });
 
-export default function ConnectionList() {
+export default function() {
   const { connectorType } = useParams() as IRecords;
 
   const refs = useRef([]);
@@ -53,6 +54,7 @@ export default function ConnectionList() {
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
+  const [openImportDataPanel, setOpenImportDataPanel] = useState<boolean>(false);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
 
   const toggleLoader = (value: boolean, isError?: boolean) => {
@@ -201,7 +203,7 @@ export default function ConnectionList() {
 
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
-      <SubHeader />
+      <SubHeader setOpenImportDataPanel={setOpenImportDataPanel} />
       <SelectDatasetWrapper>
         {dataForTabs.map((each, index) => {
           const connectionIdRequired = each.data.filter((el) => el.connectionId);
@@ -264,6 +266,9 @@ export default function ConnectionList() {
       )}
       {isErrorOnNoWorkspace && (
         <ErrorSnackbar handleCloseError={() => setIsErrorOnNoWorkSpace(false)} />
+      )}
+      {openImportDataPanel && (
+        <ImportDatasetPanel handleClosePanel={() => setOpenImportDataPanel(false)} />
       )}
     </Box>
   );
