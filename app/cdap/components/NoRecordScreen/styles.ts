@@ -14,36 +14,28 @@
  * the License.
  */
 
-export interface IParams {
-  context: string;
-  workspaceId: string;
-}
+import { makeStyles } from '@material-ui/core';
 
-export interface IRecords {
-  [key: string]: string;
-}
-export interface IPercentOfDataTypeValues {
-  [key: string]: number;
-}
-
-interface ISummary {
-  statistics: IRecords;
-  validations: IRecords;
-}
-
-export interface IExecuteAPIResponse {
-  headers: string[];
-  types: IRecords;
-  values: IRecords[];
-  summary: ISummary;
-}
-
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
-}
-
-export interface IObject {
-  [key: string]: string;
-}
+export const useStyles = makeStyles({
+  noRecordWrapper: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '& *': {
+      fontFamily: "'Noto Sans', sans-serif",
+    },
+  },
+  mainHeaderMessage: {
+    fontSize: '20px',
+    color: '#000000',
+    marginTop: '20px',
+  },
+  subHeaderMessage: {
+    fontSize: '16px',
+    color: '#000000',
+  },
+  innerWrapper: {
+    textAlign: 'center',
+  },
+});
