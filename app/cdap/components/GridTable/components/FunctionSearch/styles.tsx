@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   main: {
@@ -46,7 +47,7 @@ export const useStyles = makeStyles({
       margin: '0px',
       background: 'white',
       borderRadius: '0px',
-      boxShadow: 'inset 3px 4px 15px rgba(68, 132, 245, 0.15);',
+      boxShadow: 'inset 3px 4px 15px #4484f526;',
     },
 
     '& div.MuiAutocomplete-noOptions': {
@@ -95,7 +96,7 @@ export const useStyles = makeStyles({
   },
 
   suggestions: {
-    borderBottom: '1px solid #E0E0E0',
+    borderBottom: `0px solid ${grey[300]}`,
     width: '450px',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
@@ -106,10 +107,10 @@ export const useStyles = makeStyles({
     padding: '15px 10px',
   },
   directive: {
-    color: '#212121',
+    color: grey[900],
   },
   description: {
-    color: '#616161',
+    color: grey[700],
     width: '400px',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -120,11 +121,11 @@ export const useStyles = makeStyles({
     justifyContent: 'space-between',
   },
   chevron: {
-    color: '#616161',
+    color: grey[700],
     fontSize: 'large',
   },
   search: {
-    color: '#757575',
+    color: grey[600],
     fontSize: 'xx-large',
   },
   optionInMUIAutocomplete: {
@@ -134,7 +135,7 @@ export const useStyles = makeStyles({
     height: '1000px !important',
   },
   close: {
-    color: '#757575',
+    color: grey[600],
     fontSize: 'xx-large',
     cursor: 'pointer',
   },
@@ -143,9 +144,9 @@ export const useStyles = makeStyles({
       borderBottom: 'none !important',
     },
     outline: '1px solid #DADCE0',
-    boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
+    boxShadow: '3px 4px 15px #4484f526',
   },
   onBlurAutocomplete: {
-    borderBottom: '0px solid #E0E0E0',
+    borderBottom: `0px solid ${grey[300]}`,
   },
 });
