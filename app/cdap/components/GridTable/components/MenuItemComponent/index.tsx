@@ -17,7 +17,7 @@
 import { MenuItem } from '@material-ui/core';
 import React from 'react';
 import { useNestedMenuStyles } from '../NestedMenu/styles';
-import { menuArrowIcon } from '../TransfomationsToolbar/iconStore';
+import { menuArrowIcon } from '../TransfomationToolbar/iconStore';
 import { IMenuItemComponentProps } from './types';
 
 export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
