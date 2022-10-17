@@ -14,37 +14,14 @@
  * the License.
  */
 
-export interface IParams {
-  context: string;
-  workspaceId: string;
-}
+import { render } from "@testing-library/react";
+import React from "react";
+import NoRecordScreen from "..";
 
-export interface IRecords {
-  [key: string]: string | any;
-}
-export interface IPercentOfDataTypeValues {
-  [key: string]: number;
-}
 
-interface ISummary {
-  statistics: IRecords;
-  validations: IRecords;
-}
-
-export interface IExecuteAPIResponse {
-  headers: string[];
-  types: IRecords;
-  values: IRecords[];
-  summary: ISummary;
-  message:string;
-}
-
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
-}
-
-export interface IObject {
-  [key: string]: string;
-}
+describe("It Should test NoRecordScreen Component",()=>{
+    it("Should render the NonRecordScreen Component",()=>{
+        const container = render(<NoRecordScreen title = {"testing"}  subtitle = {"Unit Testing"}/>)
+        expect(container).toBeDefined();
+    })
+})
