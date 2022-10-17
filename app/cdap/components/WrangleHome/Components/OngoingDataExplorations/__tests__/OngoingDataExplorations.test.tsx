@@ -62,4 +62,3 @@ test('renders Ongoing Data Exploration component', async () => {
   const ele = screen.getByTestId(/ongoing-data-explore-parent/i);
   expect(ele).toBeInTheDocument();
 });
-

@@ -113,7 +113,7 @@ export default function GridTable() {
     // Get DATA from URL paramteres to get data of workspace
     const payload = {
       context: params.namespace,
-      workspaceId: params.wid, 
+      workspaceId: params.wid,
     };
     getWorkSpaceData(payload, wid);
   }, [wid]);
@@ -230,7 +230,7 @@ export default function GridTable() {
   }, [gridData]);
 
   return (
-    <Box data-testid='grid-table'>
+    <Box data-testid="grid-table">
       <BreadCrumb datasetName={wid} />
       <Table aria-label="simple table" className="test">
         <TableHead>

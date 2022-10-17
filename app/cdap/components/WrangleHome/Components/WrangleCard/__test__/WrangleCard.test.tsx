@@ -72,4 +72,3 @@ describe('Testing the Wrangle Card Component', () => {
     expect(ele).toBeInTheDocument();
   });
 });
-
