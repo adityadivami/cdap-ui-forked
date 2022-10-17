@@ -558,7 +558,7 @@ export default function() {
       applyDirectiveAPICall(newDirective, '', [], '');
     }
   };
-  console.log('directives', directives, undoDirectives);
+
   return (
     <Box>
       {showBreadCrumb && (
@@ -579,28 +579,6 @@ export default function() {
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
       />
-      {insightDrawer.open && (
-        <ColumnInsightDrawer
-          columnData={insightDrawer}
-          onClose={() =>
-            setInsightDrawer({
-              open: false,
-              columnName: '',
-              distinctValues: 0,
-              characterCount: { min: 0, max: 0 },
-              dataQuality: {
-                missingNullValueCount: 0,
-                missingNullValuePercentage: 0,
-                invalidValueCount: 0,
-                invalidValuePercentage: 0,
-              },
-              dataQualityBar: {},
-              dataTypeString: '',
-              dataDistributionGraphData: [],
-            })
-          }
-        />
-      )}
       {openPipeline && <CreatePipelineModal setOpenPipeline={setOpenPipeline} />}
       {openViewSchema && (
         <ViewSchemaModal
@@ -653,10 +631,32 @@ export default function() {
               columnData={headersNamesList}
               dataQuality={dataQuality}
               closeClickHandler={closeClickHandler}
+              onColumnSelection={(column) => onColumnSelection(column)}
             />
           </Box>
         )}
-
+        {insightDrawer.open && (
+          <ColumnInsightDrawer
+            columnData={insightDrawer}
+            onClose={() =>
+              setInsightDrawer({
+                open: false,
+                columnName: '',
+                distinctValues: 0,
+                characterCount: { min: 0, max: 0 },
+                dataQuality: {
+                  missingNullValueCount: 0,
+                  missingNullValuePercentage: 0,
+                  invalidValueCount: 0,
+                  invalidValuePercentage: 0,
+                },
+                dataQualityBar: {},
+                dataTypeString: '',
+                dataDistributionGraphData: [],
+              })
+            }
+          />
+        )}
         {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
           <Box className={classes.gridTableWrapper}>
             <Table aria-label="simple table" className="test" data-testid="grid-table">

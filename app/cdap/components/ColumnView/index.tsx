@@ -21,7 +21,7 @@ import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
 
 const ColumnView = (props) => {
-  const { columnData, closeClickHandler, dataQuality } = props;
+  const { columnData, closeClickHandler, dataQuality, onColumnSelection } = props;
   const [searchValue, setSearchValue] = useState('');
 
   const classes = useStyles();
@@ -43,6 +43,7 @@ const ColumnView = (props) => {
             columnData={columnData}
             dataQuality={dataQuality}
             searchTerm={searchValue}
+            onColumnSelection={onColumnSelection}
           />
         </Box>
       </ColumnViewWidget>

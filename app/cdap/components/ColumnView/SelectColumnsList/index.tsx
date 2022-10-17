@@ -30,7 +30,7 @@ import { prepareDataQualtiy } from './CircularProgressBar/utils';
 import DataQualityProgress from './CircularProgressBar';
 
 const SelectColumnsList = (props) => {
-  const { columnData, dataQuality, searchTerm } = props;
+  const { columnData, dataQuality, searchTerm, onColumnSelection } = props;
   const [filteredColumns, setFilteredColumns] = useState(columnData);
   const classes = useStyles();
   const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
@@ -70,7 +70,11 @@ const SelectColumnsList = (props) => {
           <TableBody className={classes.tableBody}>
             {filteredColumns.map((eachColumn, index) => (
               <>
-                <TableRow key={index} className={classes.tableRowContainer}>
+                <TableRow
+                  key={index}
+                  className={classes.tableRowContainer}
+                  onClick={() => onColumnSelection(eachColumn.name)}
+                >
                   <TableCell className={classes.leftSideCell}>
                     <Box>
                       {eachColumn.label}

@@ -4,6 +4,7 @@ import ColumnDataDistribution from './Components/ColumnDataDistribution';
 import ColumnDataQuality from './Components/ColumnDataQuality';
 import ColumnDetails from './Components/ColumnDetails';
 import { COLUMN_INSIGHTS } from './constants';
+import InlayWidget from 'components/InlayWidget';
 
 const ColumnInsights = (props) => {
   const { columnData } = props;
@@ -20,7 +21,7 @@ const ColumnInsights = (props) => {
   };
 
   return (
-    <DrawerWidget
+    <InlayWidget
       headingText={COLUMN_INSIGHTS}
       openDrawer={setDrawerStatus}
       anchor="left"
@@ -38,7 +39,7 @@ const ColumnInsights = (props) => {
         columnInfo={columnDetail?.dataQualityBar}
       />
       <ColumnDataDistribution graphData={columnDetail?.dataDistributionGraphData} />
-    </DrawerWidget>
+    </InlayWidget>
   );
 };
 
