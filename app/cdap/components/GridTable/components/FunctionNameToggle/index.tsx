@@ -19,8 +19,10 @@ import { styled } from '@material-ui/core';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import { Typography, Box } from '@material-ui/core';
 import { useStyles } from './styles';
+import grey from '@material-ui/core/colors/grey';
+import T from 'i18n-react';
 
-const AntSwitch = styled(Switch)(({ theme }) => ({
+const StyledSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,
   padding: 0,
@@ -35,19 +37,19 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
   '& .MuiSwitch-switchBase': {
     padding: 2,
-    color: '#757575',
+    color: grey[600],
     '&.Mui-checked': {
       transform: 'translateX(12px)',
-      color: '#757575',
+      color: grey[600],
       '& + .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
-        border: theme.palette.mode === 'dark' ? '1px solid #757575' : '1px solid #757575',
+        backgroundColor: '#ffffff',
+        border: `1px solid ${grey[600]}`,
       },
     },
   },
   '& .MuiSwitch-thumb': {
-    boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+    boxShadow: '0 2px 4px 0 #00230b33',
     width: 12,
     height: 12,
     borderRadius: 6,
@@ -56,10 +58,10 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
     }),
   },
   '& .MuiSwitch-track': {
-    borderRadius: 16 / 2,
+    borderRadius: 8,
     opacity: 1,
-    backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : '#ffffff',
-    border: theme.palette.mode === 'dark' ? '1px solid #757575' : '1px solid #757575',
+    backgroundColor: '#ffffff',
+    border: `1px solid ${grey[600]}`,
     boxSizing: 'border-box',
   },
 }));
@@ -68,12 +70,15 @@ export default function({ setIsShowName, isShowNames }) {
   const classes = useStyles();
   return (
     <Box className={classes.functionWrapper}>
-      <Typography className={classes.typoClass}>Function names &nbsp;</Typography>
-      <AntSwitch
+      <Typography className={classes.typoClass}>
+        {T.translate('features.GridPage.transformationsToolbar.labels.toggleDescription')} &nbsp;
+      </Typography>
+      <StyledSwitch
         onClick={() => setIsShowName(!isShowNames)}
         checked={isShowNames}
-        inputProps={{ 'aria-label': 'ant design' }}
+        inputProps={{ 'aria-label': 'Functions Name Switch' }}
       />
+      <div style={{ border: '2px solid rgb(0 35 11 / 20%)' }}>test</div>
     </Box>
   );
 }

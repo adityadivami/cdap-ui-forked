@@ -3453,3 +3453,4 @@ features:
         mathIcon: 'Math'
         gridIcon: 'Grid'
         otherIcon: 'Other'
+        toggleDescription: 'Function names'
