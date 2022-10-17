@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/core';
+import grey from '@material-ui/core/colors/grey';
 
 export const useStyles = makeStyles({
   functionWrapper: {
@@ -23,7 +24,7 @@ export const useStyles = makeStyles({
     alignItems: 'center',
   },
   typoClass: {
-    color: '#757575',
+    color: grey[600],
     fontSize: '14px',
   },
 });
