@@ -13,9 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { MenuItem } from '@material-ui/core';
 import React from 'react';
-import { menuArrowIcon } from '../AaToolbar/images';
+import { menuArrowIcon } from '../transfomationsToolbar/images';
 import { useNestedMenuStyles } from '../NestedMenu/styles';
 import { IMenuItemComponentProps } from './types';
 

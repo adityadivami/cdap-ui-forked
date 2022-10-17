@@ -44,6 +44,7 @@ export const convertNonNullPercent = (gridData: IExecuteAPIResponse | undefined,
  * @param {string} key This is the name of column header
  * @returns {name: string, count: number} Return value, object containing name of most frequently occurred value with its count
  */
+
 export const checkFrequentlyOccuredValues = (
   gridData: IExecuteAPIResponse | undefined,
   key: string
