@@ -126,6 +126,7 @@ const DirectiveDrawer = (props) => {
                         <a
                           href={`${moreInfoOnDirective[row?.item?.directive]}`}
                           className={classes.infoLink}
+                          target="_blank"
                         >
                           {InfoIcon} &nbsp;More info to this directive
                         </a>
