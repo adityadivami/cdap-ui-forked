@@ -26,6 +26,8 @@ import { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import useStyles from './styles';
+import { useLocation } from 'react-router';
+import T from 'i18n-react';
 
 export default function TabLabelCanSample({
   label,
@@ -42,6 +44,7 @@ export default function TabLabelCanSample({
 }) {
   const classes = useStyles();
 
+  const pathName = useLocation();
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
   const [workspaceId, setWorkspaceId] = useState(null);
@@ -92,8 +95,19 @@ export default function TabLabelCanSample({
       });
   };
 
+  const indexOfSelectedDataset = location.pathname.lastIndexOf('/');
+  const requiredPath = location.pathname.slice(indexOfSelectedDataset + 1);
+
   return workspaceId ? (
-    <Redirect to={`/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`} />
+    <Redirect
+      to={{
+        pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
+        state: {
+          from: T.translate('features.Breadcrumb.labels.connectionsList'),
+          path: requiredPath,
+        },
+      }}
+    />
   ) : refValue ? (
     <CustomTooltip title={label} arrow data-testid="connections-tab-ref-label-simple">
       <Box className={classes.labelsContainerCanSample}>
@@ -105,10 +119,12 @@ export default function TabLabelCanSample({
           onClick={() => onExplore(entity)}
           data-testid="connections-tab-ref-explore"
         >
-          <WrangleIcon />
-          <Typography variant="body2" className={classes.wrangleButton}>
-            Wrangle
-          </Typography>
+          <Box className="wranglingHover">
+            <WrangleIcon />
+            <Typography color="primary" variant="body2" className={classes.wrangleButton}>
+              {T.translate('features.Breadcrumb.labels.wrangleHome')}
+            </Typography>
+          </Box>
         </button>
       </Box>
     </CustomTooltip>

@@ -23,10 +23,10 @@ import NoRecordScreen from 'components/NoRecordScreen/index';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useLocation } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-import BreadCrumb from './components/Breadcrumb';
+import Breadcrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
@@ -37,7 +37,10 @@ import T from 'i18n-react';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
+
   const params = useParams() as IRecords;
+  const location = useLocation();
+
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
@@ -45,6 +48,7 @@ export default function GridTable() {
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
+  const [workspaceName, setWorkspaceName] = useState('');
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -66,6 +70,7 @@ export default function GridTable() {
       .pipe(
         flatMap((res: IValues) => {
           const { dataprep } = DataPrepStore.getState();
+          setWorkspaceName(res.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
@@ -181,7 +186,7 @@ export default function GridTable() {
 
   return (
     <Box>
-      <BreadCrumb datasetName={wid} />
+      <Breadcrumb datasetName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.gridTable.title')}
