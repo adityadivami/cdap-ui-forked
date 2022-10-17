@@ -59,12 +59,5 @@ describe('It Should Test the ParsingPopupBody component', () => {
     fireEvent.click(option3);
     expect(handleChange).toHaveBeenCalled();
 
-    // const checkbox1 = getByTestId('parsing-checkbox-Enable quoted values');
-    // fireEvent.click(checkbox1);
-    // expect(handleChange).toHaveBeenCalled();
-
-    // const checkbox2 = getByTestId('parsing-checkbox-Use first row as header');
-    // fireEvent.click(checkbox2);
-    // expect(handleChange).toHaveBeenCalled();
   });
 });
