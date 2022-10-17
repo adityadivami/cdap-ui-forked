@@ -23,6 +23,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { useStyles } from './style';
+import T from 'i18n-react';
 
 export default function() {
   const [loading, setLoading] = useState(true);
@@ -36,13 +37,16 @@ export default function() {
           className={classes.breadcrumb}
         >
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
-            <Typography className={classes.text}> Home</Typography>
+            <Typography className={classes.text}>
+              {' '}
+              {T.translate('features.Breadcrumb.labels.wrangleHome')}
+            </Typography>
           </Link>
           <Typography
             className={`${classes.text} ${classes.textWorkspaces}`}
             data-testid="breadcrumb-label-workspaces"
           >
-            Workspaces
+            {T.translate('features.Breadcrumb.labels.workSpaces')}
           </Typography>
         </Breadcrumbs>
       </Box>

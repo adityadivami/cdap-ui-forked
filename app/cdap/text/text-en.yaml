@@ -3424,6 +3424,7 @@ features:
     labels:
       connectionsList: 'Data Sources'
       wrangleHome: 'Home'
+      workSpaces: 'Workspaces'
     params:
       wrangeHome: 'home'
       connectionsList: 'datasources'

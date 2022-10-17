@@ -52,7 +52,6 @@ describe('Test the Workspace List Component', () => {
     );
     expect(render).toBeDefined();
     const element = screen.getByTestId(/breadcrumb-label-workspaces/i);
-    console.log(element);
     expect(element).toHaveTextContent('Workspaces');
   });
 });
