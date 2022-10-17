@@ -16,7 +16,7 @@
 
 import { Box, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useStyles } from './styles';
 import NamespaceStore from 'services/NamespaceStore';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -31,7 +31,7 @@ export default function({ transformationPanel }) {
   const [textFieldInput, setTextFieldInput] = useState('');
   const [selectedDirective, setSelectedDirective] = useState('');
   const [recentSearches, setRecentSearches] = useState([]);
-  const textInput = React.useRef(null);
+  const textInput = useRef(null);
   const GetData = () => {
     const namespace = NamespaceStore.getState().selectedNamespace;
     MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
