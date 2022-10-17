@@ -36,7 +36,7 @@ import {
   SecurityIcon,
   StructureIcon,
   Undo,
-} from './images';
+} from './iconStore';
 import { useStyles } from './styles';
 import {
   MENU_OPTIONS,
@@ -51,14 +51,19 @@ import {
 import FunctionToggle from '../FunctionNameToggle';
 import FunctionSearch from '../FunctionSearch';
 
-const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) => {
+export default function TransfomationsToolbar({
+  columnType,
+  submitMenuOption,
+  setShowBreadCrumb,
+  showBreadCrumb,
+}) {
   const classes = useStyles();
   const [isShowNames, setIsShowName] = useState(false);
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
         <Tooltip
-          title={T.translate(`features.GridPage.toolbar.undoTitle`)}
+          title={T.translate('features.GridPage.transformationsToolbar.labels.undoIcon')}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -69,13 +74,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
             {isShowNames && (
               <Typography className={classes.typoClass}>
-                {T.translate('features.GridPage.toolbar.undoTitle')}
+                {T.translate('features.GridPage.transformationsToolbar.labels.undoIcon')}
               </Typography>
             )}
           </Box>
         </Tooltip>
         <Tooltip
-          title={T.translate('features.GridPage.toolbar.redoTitle')}
+          title={T.translate('features.GridPage.transformationsToolbar.labels.redoIcon')}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -86,7 +91,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
             {isShowNames && (
               <Typography className={classes.typoClass}>
-                {T.translate('features.GridPage.toolbar.redoTitle')}
+                {T.translate('features.GridPage.transformationsToolbar.labels.redoIcon')}
               </Typography>
             )}
           </Box>
@@ -98,11 +103,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             columnType={columnType}
             icon={NullIcon}
             submitMenuOption={submitMenuOption}
-            title={T.translate('features.GridPage.toolbar.nullTitle').toString()}
+            title={T.translate(
+              'features.GridPage.transformationsToolbar.labels.nullIcon'
+            ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.toolbar.nullTitle')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.nullIcon')}
             </Typography>
           )}
         </Box>
@@ -112,11 +119,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             columnType={columnType}
             icon={InvalidIcon}
             submitMenuOption={submitMenuOption}
-            title={T.translate('features.GridPage.toolbar.invalidTitle').toString()}
+            title={T.translate(
+              'features.GridPage.transformationsToolbar.labels.invalidIcon'
+            ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.toolbar.invalidTitle')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.invalidIcon')}
             </Typography>
           )}
         </Box>
@@ -127,11 +136,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             columnType={columnType}
             icon={ColumnIcon}
             submitMenuOption={submitMenuOption}
-            title={T.translate('features.GridPage.toolbar.columnTitle').toString()}
+            title={T.translate(
+              'features.GridPage.transformationsToolbar.labels.columnIcon'
+            ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.toolbar.columnTitle')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.columnIcon')}
             </Typography>
           )}
         </Box>
@@ -142,11 +153,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={StructureIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={MENU_OPTIONS}
-            title={T.translate('features.GridPage.toolbar.structureTitle').toString()}
+            title={T.translate(
+              'features.GridPage.transformationsToolbar.labels.structureIcon'
+            ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.toolbar.structureTitle')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.structureIcon')}
             </Typography>
           )}
         </Box>
@@ -156,11 +169,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={FragmentIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={FRAGMENT_OPTIONS}
-            title={T.translate('features.GridPage.toolbar.fragmentTitle').toString()}
+            title={T.translate(
+              'features.GridPage.transformationsToolbar.labels.fragmentIcon'
+            ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.toolbar.fragmentTitle')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.fragmentIcon')}
             </Typography>
           )}
         </Box>
@@ -170,11 +185,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={MathIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={MATH_OPTIONS}
-            title={T.translate('features.GridPage.toolbar.mathTitle').toString()}
+            title={T.translate(
+              'features.GridPage.transformationsToolbar.labels.securityIcon'
+            ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.toolbar.mathTitle')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.securityIcon')}
             </Typography>
           )}
         </Box>
@@ -184,11 +201,13 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={SecurityIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={SECURITY_OPTIONS}
-            title={T.translate('features.GridPage.toolbar.securityTitle').toString()}
+            title={T.translate(
+              'features.GridPage.transformationsToolbar.labels.mathIcon'
+            ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.toolbar.securityTitle')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.mathIcon')}
             </Typography>
           )}
         </Box>
@@ -198,17 +217,19 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             icon={OtherIcon}
             submitMenuOption={submitMenuOption}
             menuOptions={OTHER_OPTIONS}
-            title={T.translate('features.GridPage.toolbar.otherTitle').toString()}
+            title={T.translate(
+              'features.GridPage.transformationsToolbar.labels.otherIcon'
+            ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.toolbar.otherTitle')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.otherIcon')}
             </Typography>
           )}
         </Box>
         <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Tooltip
-          title={T.translate('features.GridPage.toolbar.gridTitle')}
+          title={T.translate('features.GridPage.transformationsToolbar.labels.gridIcon')}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -219,7 +240,7 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
             <IconButton>{GridIcon}</IconButton>
             {isShowNames && (
               <Typography className={classes.typoClass}>
-                {T.translate('features.GridPage.toolbar.gridTitle')}
+                {T.translate('features.GridPage.transformationsToolbar.labels.gridIcon')}
               </Typography>
             )}
           </Box>
@@ -240,5 +261,4 @@ const ToolBarList = ({ columnType, submitMenuOption, setShowBreadCrumb, showBrea
       </IconButton>
     </Box>
   );
-};
-export default ToolBarList;
+}

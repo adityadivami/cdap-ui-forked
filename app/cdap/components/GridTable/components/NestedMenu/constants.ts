@@ -119,7 +119,7 @@ export const PARSE_OPTIONS = [
   },
 ];
 
-export const Calculate_OPTIONS = [
+export const CALCULATE_OPTIONS = [
   {
     label: 'Character count',
     value: 'CHARCOUNT',

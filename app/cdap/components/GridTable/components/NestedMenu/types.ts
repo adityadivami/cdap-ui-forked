@@ -14,8 +14,10 @@
  * the License.
  */
 
+import { SVGProps } from 'react';
+
 export interface INestedMenuProps {
-  icon: any;
+  icon: SVGProps<SVGElement>;
   submitMenuOption: (value: any, dataType: string[]) => void;
   columnType: string;
   menuOptions: any;

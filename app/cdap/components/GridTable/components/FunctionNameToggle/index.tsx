@@ -14,7 +14,7 @@
  * the License.
  */
 
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@material-ui/core';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import { Typography, Box } from '@material-ui/core';
@@ -64,7 +64,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const CustomizedSwitches = ({ setIsShowName, isShowNames }) => {
+export default function({ setIsShowName, isShowNames }) {
   const classes = useStyles();
   return (
     <Box className={classes.functionWrapper}>
@@ -76,6 +76,4 @@ const CustomizedSwitches = ({ setIsShowName, isShowNames }) => {
       />
     </Box>
   );
-};
-
-export default CustomizedSwitches;
+}

@@ -22,13 +22,13 @@ import { MENU_OPTIONS } from './constants';
 import { useNestedMenuStyles } from './styles';
 import { INestedMenuProps } from './types';
 
-const NestedMenu: React.FC<INestedMenuProps> = ({
+export default function({
   menuOptions,
   icon,
   submitMenuOption,
   columnType,
   title,
-}) => {
+}: INestedMenuProps) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const open = Boolean(anchorEl);
@@ -110,5 +110,4 @@ const NestedMenu: React.FC<INestedMenuProps> = ({
       </Menu>
     </>
   );
-};
-export default NestedMenu;
+}

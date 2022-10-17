@@ -3440,15 +3440,16 @@ features:
     labels:
       loadToGrid: 'Wrangle'
   GridPage:
-    toolbar:
-      undoTitle: 'Undo'
-      redoTitle: 'Redo'
-      nullTitle: 'Null'
-      invalidTitle: 'Invalid'
-      columnTitle: 'Column'
-      structureTitle: 'Structure'
-      fragmentTitle: 'Fragment'
-      securityTitle: 'Security'
-      mathTitle: 'Math'
-      gridTitle: 'Grid'
-      otherTitle: 'Other'
+    transformationsToolbar:
+      labels:
+        undoIcon: 'Undo'
+        redoIcon: 'Redo'
+        nullIcon: 'Null'
+        invalidIcon: 'Invalid'
+        columnIcon: 'Column'
+        structureIcon: 'Structure'
+        fragmentIcon: 'Fragment'
+        securityIcon: 'Security'
+        mathIcon: 'Math'
+        gridIcon: 'Grid'
+        otherIcon: 'Other'

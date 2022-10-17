@@ -24,7 +24,7 @@ import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 
-const FunctionSearch = ({ transformationPanel }) => {
+export default function({ transformationPanel }) {
   const classes = useStyles();
   const [searchResults, setSeachResults] = useState([]);
   const [displayRecentSearches, setDisplayRecentSearches] = useState(false);
@@ -41,7 +41,7 @@ const FunctionSearch = ({ transformationPanel }) => {
 
   const handleInputChange = (e) => {
     setTextFieldInput(e.target.value);
-    if (e.target.value == '') {
+    if (e.target.value === '') {
       setDisplayRecentSearches(true);
     } else {
       setDisplayRecentSearches(false);
@@ -176,5 +176,4 @@ const FunctionSearch = ({ transformationPanel }) => {
       />
     </Box>
   );
-};
-export default FunctionSearch;
+}

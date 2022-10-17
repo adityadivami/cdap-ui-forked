@@ -16,16 +16,11 @@
 
 import { MenuItem } from '@material-ui/core';
 import React from 'react';
-import { menuArrowIcon } from '../transfomationsToolbar/images';
 import { useNestedMenuStyles } from '../NestedMenu/styles';
+import { menuArrowIcon } from '../TransfomationsToolbar/iconStore';
 import { IMenuItemComponentProps } from './types';
 
-const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({
-  item,
-  index,
-  onMenuClick,
-  columnType,
-}) => {
+export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
   const classes = useNestedMenuStyles();
   if (item.value === 'divider') {
     return <hr className={classes.divider} key={index} />;
@@ -56,5 +51,4 @@ const MenuItemComponent: React.FC<IMenuItemComponentProps> = ({
       </MenuItem>
     );
   }
-};
-export default MenuItemComponent;
+}

@@ -20,13 +20,13 @@ import MenuItemComponent from '../MenuItemComponent';
 import { IMenuComponentProps } from './types';
 import { useStyles } from './styles';
 
-const MenuComponent: React.FC<IMenuComponentProps> = ({
+export default function({
   anchorEl,
   menuOptions,
   setAnchorEl,
   submitOption,
   columnType,
-}) => {
+}: IMenuComponentProps) {
   const open = Boolean(anchorEl);
   const classes = useStyles();
   return (
@@ -60,6 +60,4 @@ const MenuComponent: React.FC<IMenuComponentProps> = ({
       ))}
     </Menu>
   );
-};
-
-export default MenuComponent;
+}
