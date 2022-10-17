@@ -14,17 +14,15 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
-
-export const useStyles = makeStyles({
-  functionWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+export const KEBAB_GRID_PAGE_OPTION = [
+  {
+    label: 'Ingest Data',
+    value: 'ingest-data',
+    supported_dataType: ['all'],
   },
-  typoClass: {
-    color: grey[600],
-    fontSize: 14,
+  {
+    label: 'View Schema',
+    value: 'view-schema',
+    supported_dataType: ['all'],
   },
-});
+];

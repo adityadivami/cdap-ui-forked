@@ -38,18 +38,16 @@ import {
   Undo,
 } from './iconStore';
 import { useStyles } from './styles';
-import {
-  MENU_OPTIONS,
-  NULL_MISSING_OPTIONS,
-  INVALID_ICON_OPTIONS,
-  COLUMN_OPTIONS,
-  FRAGMENT_OPTIONS,
-  MATH_OPTIONS,
-  SECURITY_OPTIONS,
-  OTHER_OPTIONS,
-} from '../NestedMenu/constants';
 import FunctionToggle from '../FunctionNameToggle';
 import FunctionSearch from '../FunctionSearch';
+import { COLUMN_OPTIONS } from '../NestedMenu/menuOptions/columnOptions';
+import { FRAGMENT_OPTIONS } from '../NestedMenu/menuOptions/fragmentOptions';
+import { INVALID_ICON_OPTIONS } from '../NestedMenu/menuOptions/invalidIconOptions';
+import { MATH_OPTIONS } from '../NestedMenu/menuOptions/mathOptions';
+import { MENU_OPTIONS } from '../NestedMenu/menuOptions/menuOptions';
+import { NULL_MISSING_OPTIONS } from '../NestedMenu/menuOptions/nullAndMissingOptions';
+import { OTHER_OPTIONS } from '../NestedMenu/menuOptions/otherOptions';
+import { SECURITY_OPTIONS } from '../NestedMenu/menuOptions/securityOptions';
 
 export default function TransfomationsToolbar({
   columnType,

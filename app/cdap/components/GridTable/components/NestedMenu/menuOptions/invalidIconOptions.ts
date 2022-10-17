@@ -14,17 +14,15 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
-
-export const useStyles = makeStyles({
-  functionWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+export const INVALID_ICON_OPTIONS = [
+  {
+    value: 'remove-invalid',
+    label: 'Remove invalid',
+    supported_dataType: ['all'],
   },
-  typoClass: {
-    color: grey[600],
-    fontSize: 14,
+  {
+    value: 'replace-invalid',
+    label: 'Replace invalid',
+    supported_dataType: ['all'],
   },
-});
+];

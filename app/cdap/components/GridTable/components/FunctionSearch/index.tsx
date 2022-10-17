@@ -15,14 +15,14 @@
  */
 
 import { Box, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
+import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import MyDataPrepApi from 'api/dataprep';
 import React, { useEffect, useRef, useState } from 'react';
-import { useStyles } from './styles';
 import NamespaceStore from 'services/NamespaceStore';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
+import { useStyles } from './styles';
 
 export default function({ transformationPanel }) {
   const classes = useStyles();
@@ -32,7 +32,8 @@ export default function({ transformationPanel }) {
   const [selectedDirective, setSelectedDirective] = useState('');
   const [recentSearches, setRecentSearches] = useState([]);
   const textInput = useRef(null);
-  const GetData = () => {
+
+  const getData = () => {
     const namespace = NamespaceStore.getState().selectedNamespace;
     MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
       setSeachResults([...res.values]);
@@ -51,8 +52,9 @@ export default function({ transformationPanel }) {
   const handleClose = () => {
     setDisplayRecentSearches(true);
   };
+
   useEffect(() => {
-    GetData();
+    getData();
     if (textFieldInput === '') {
       setDisplayRecentSearches(true);
     }

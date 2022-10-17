@@ -14,11 +14,10 @@
  * the License.
  */
 
-import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
+import { IconButton, Menu, Tooltip } from '@material-ui/core';
 import React, { useState } from 'react';
 import MenuComponent from '../MenuComponent';
 import MenuItemComponent from '../MenuItemComponent';
-import { MENU_OPTIONS } from './constants';
 import { useNestedMenuStyles } from './styles';
 import { INestedMenuProps } from './types';
 

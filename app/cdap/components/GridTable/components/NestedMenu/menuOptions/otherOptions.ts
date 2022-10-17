@@ -14,17 +14,33 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
-
-export const useStyles = makeStyles({
-  functionWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+export const OTHER_OPTIONS = [
+  {
+    value: 'define-variable',
+    label: 'Define variable',
+    supported_dataType: ['all'],
   },
-  typoClass: {
-    color: grey[600],
-    fontSize: 14,
+  {
+    value: 'set-counter',
+    label: 'Set counter',
+    supported_dataType: ['all'],
   },
-});
+  {
+    value: 'send-to-error',
+    label: 'Send to error',
+    supported_dataType: ['all'],
+  },
+  {
+    value: 'customTransform',
+    label: 'Custom Transform',
+    supported_dataType: ['all'],
+  },
+  {
+    label: 'Character count',
+    value: 'CHARCOUNT',
+    sign: null,
+    inputRequired: true,
+    component: 'Calculate',
+    supported_dataType: ['string'],
+  },
+];

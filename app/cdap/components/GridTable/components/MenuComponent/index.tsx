@@ -14,11 +14,11 @@
  * the License.
  */
 
-import { Menu, MenuItem } from '@material-ui/core';
+import { Menu } from '@material-ui/core';
 import React from 'react';
 import MenuItemComponent from '../MenuItemComponent';
-import { IMenuComponentProps } from './types';
 import { useStyles } from './styles';
+import { IMenuComponentProps } from './types';
 
 export default function({
   anchorEl,

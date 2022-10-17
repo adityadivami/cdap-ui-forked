@@ -76,7 +76,9 @@ export default function({ setIsShowName, isShowNames }) {
       <StyledSwitch
         onClick={() => setIsShowName(!isShowNames)}
         checked={isShowNames}
-        inputProps={{ 'aria-label': 'Functions Name Switch' }}
+        inputProps={{
+          'aria-label': T.translate('GridPage.gridHeader.ariaLabels.functionsName').toString(),
+        }}
       />
     </Box>
   );

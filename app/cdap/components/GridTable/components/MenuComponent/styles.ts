@@ -21,7 +21,7 @@ export const useStyles = makeStyles({
     borderColor: '#DADCE0',
   },
   heading: {
-    fontSize: '14px',
+    fontSize: 14,
     fontWeight: 600,
     color: '#5F6368',
     padding: '0px 21px',
@@ -29,10 +29,10 @@ export const useStyles = makeStyles({
   root: {
     '& .MuiMenuItem-root': {
       padding: '6px 11px 6px 20px',
-      height: '33px',
+      height: 33,
     },
     '& .MuiMenu-paper': {
-      width: '199px',
+      width: 199,
     },
     '& .MuiMenu-list': {
       color: '#5F6368',

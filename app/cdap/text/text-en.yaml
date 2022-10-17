@@ -3440,6 +3440,9 @@ features:
     labels:
       loadToGrid: 'Wrangle'
   GridPage:
+    gridHeader:
+      ariaLabels:
+        functionsName: Functions Name Switch
     transformationsToolbar:
       labels:
         undoIcon: 'Undo'
