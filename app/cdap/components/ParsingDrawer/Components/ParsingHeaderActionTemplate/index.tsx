@@ -53,6 +53,7 @@ export default function ParsingHeaderActionTemplate(props) {
         style={{ display: 'none' }}
         onChange={handleFile}
         className={classes.pointerStyles}
+        data-testid='parsing-header-action-template-input'
       />
       <label htmlFor="file" className={classes.pointerStyles}>
         <img

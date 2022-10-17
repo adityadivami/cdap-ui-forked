@@ -17,7 +17,7 @@
 import React from 'react';
 import { Switch, Router, Route } from 'react-router';
 import { createBrowserHistory as createHistory } from 'history';
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import ParsingHeaderActionTemplate from '..';
 
 const history = createHistory({
@@ -30,11 +30,27 @@ describe('It Should Test the ParsingHeaderActionTemplate Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingHeaderActionTemplate />
+            <ParsingHeaderActionTemplate handleSchemaUpload={() => jest.fn()} setErrorOnTransformation={() => jest.fn()}/>
           </Route>
         </Switch>
       </Router>
     );
     expect(container).toBeDefined();
   });
+
+  // it('Should test whether ParsingHeaderActionTemplate Component is rendered or not', () => {
+  //   const container = render(
+  //     <Router history={history}>
+  //       <Switch>
+  //         <Route>
+  //           <ParsingHeaderActionTemplate handleSchemaUpload={() => jest.fn()} setErrorOnTransformation={() => jest.fn()}/>
+  //         </Route>
+  //       </Switch>
+  //     </Router>
+  //   );
+
+  //   const ele = screen.getByTestId(/parsing-header-action-template-input/i)
+  //   fireEvent.change(ele, {target: {value: ''}})
+  //   expect(container).toBeDefined();
+  // });
 });
