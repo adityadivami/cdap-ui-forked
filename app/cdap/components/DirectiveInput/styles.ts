@@ -50,11 +50,21 @@ export const useStyles = makeStyles({
     fontSize: '14px',
     letterSpacing: '0.15px',
     color: '#ffffff',
+    marginBottom: '10px',
   },
   divider: {
     backgroundColor: '#ffffff',
   },
   crossIcon: {
     cursor: 'pointer',
+  },
+  infoLink: {
+    color: '#79B7FF',
+    fontSize: '14px',
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'none',
+      color: '#79B7FF',
+    },
   },
 });

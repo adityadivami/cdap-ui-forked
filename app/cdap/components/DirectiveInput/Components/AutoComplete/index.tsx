@@ -22,13 +22,11 @@ import Fuse from 'fuse.js';
 import uuidV4 from 'uuid/v4';
 import reverse from 'lodash/reverse';
 import Mousetrap from 'mousetrap';
-import classnames from 'classnames';
 import NamespaceStore from 'services/NamespaceStore';
 import ee from 'event-emitter';
 import globalEvents from 'services/global-events';
 import { useStyles } from './styles';
 import { Box, Divider, Typography } from '@material-ui/core';
-import { query } from 'express';
 
 const DataPrepAutoComplete = ({ setDirectivesList, ...props }) => {
   const [activeResults, setActiveResults] = useState([]);
@@ -54,7 +52,8 @@ const DataPrepAutoComplete = ({ setDirectivesList, ...props }) => {
           maxPatternLength: 32,
           keys: ['directive'],
         };
-        console.log(res.values);
+        const dd = res.values.map(({ directive }) => directive);
+        console.log('dd', dd);
         setDirectivesList(res.values);
         setFuse(new Fuse(res.values, fuseOptions));
       });
