@@ -20,12 +20,12 @@ import { generateDataForExplorationCard } from './utils';
 import MyDataPrepApi from 'api/dataprep';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import OngoingDataExplorationCard from '../OngoingDataExplorationCard';
+import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
 
-export default function OngoingDataExploration() {
+export default function OngoingDataExplorations() {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
 
@@ -110,7 +110,7 @@ export default function OngoingDataExploration() {
             to={`/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`}
             style={{ textDecoration: 'none' }}
           >
-            {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
+            {index <= 1 && <OngoingDataExplorationsCard item={item} key={index} />}
           </Link>
         );
       })}

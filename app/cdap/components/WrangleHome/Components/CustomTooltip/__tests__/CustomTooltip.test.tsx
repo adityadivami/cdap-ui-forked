@@ -16,23 +16,17 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import OngoingDataExploration from '../index';
+import CustomTooltip from '../index';
+import { Typography } from '@material-ui/core';
 
-const testObj = {
-  connectionName: 'Upload',
-  workspaceName: 'Divami_Users_Emails.xlsx',
-  recipeSteps: 0,
-  dataQuality: 100,
-};
-
-test('renders Ongoing Data Exploration component', () => {
-  jest.mock('api/dataprep', () => {
-    return Promise.resolve([
-      { connectionName: 'yolo', workspaceName: 'Divami_Users_Emails.xlsx', recipeSteps: 0 },
-      { connectionName: 'Upload', workspaceName: 'Divami_Users_Emails.xlsx', recipeSteps: 0 },
-    ]);
+describe('Test Custom Tooltip Component', () => {
+  it('Should render Custom tooltip component', () => {
+    render(
+      <CustomTooltip arrow title={'Custom tooltip'}>
+        <Typography></Typography>
+      </CustomTooltip>
+    );
+    const ele = screen.getByTestId(/tooltip-parent/i);
+    expect(ele).toBeInTheDocument();
   });
-  render(<OngoingDataExploration />);
-  const ele = screen.getByTestId(/ongoing-data-explore-parent/i);
-  expect(ele).toBeInTheDocument();
 });
