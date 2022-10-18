@@ -84,3 +84,7 @@ export const mockResponseForFetchConnectors = [
     },
   },
 ];
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9ec2f91bfa57f012a88b8f3a3d63e17672c032c0
