@@ -14,23 +14,33 @@
  * the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Breadcrumb from '../index';
-import history from 'services/history';
-import { Router, Route } from 'react-router';
+import { makeStyles } from '@material-ui/core';
 
-describe('renders Breadcrumb Component', () => {
-  render(
-    <Router history={history}>
-      <Route>
-        <Breadcrumb />
-      </Route>
-    </Router>
-  );
-
-  it('should render the Breadcrumb component', () => {
-    const ele = screen.getByTestId('breadcrumb-container-parent');
-    expect(ele).toBeInTheDocument();
-  });
+export const useStyles = makeStyles({
+  noRecordWrapper: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    '& *': {
+      fontFamily: "'Noto Sans', sans-serif",
+    },
+  },
+  mainHeaderMessage: {
+    fontSize: 20,
+    color: '#000000',
+    marginTop: 20,
+  },
+  subHeaderMessage: {
+    fontSize: 16,
+    color: '#000000',
+  },
+  innerWrapper: {
+    textAlign: 'center',
+  },
 });

@@ -14,23 +14,7 @@
  * the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Breadcrumb from '../index';
-import history from 'services/history';
-import { Router, Route } from 'react-router';
-
-describe('renders Breadcrumb Component', () => {
-  render(
-    <Router history={history}>
-      <Route>
-        <Breadcrumb />
-      </Route>
-    </Router>
-  );
-
-  it('should render the Breadcrumb component', () => {
-    const ele = screen.getByTestId('breadcrumb-container-parent');
-    expect(ele).toBeInTheDocument();
-  });
-});
+export interface INoDataScreenProps {
+  title: React.ReactNode;
+  subtitle: React.ReactNode;
+}
