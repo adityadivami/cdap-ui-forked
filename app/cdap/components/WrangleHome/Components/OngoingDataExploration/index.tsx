@@ -24,6 +24,7 @@ import OngoingDataExplorationCard from '../OngoingDataExplorationCard';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
+import T from 'i18n-react';
 
 export default function OngoingDataExploration() {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
@@ -107,8 +108,16 @@ export default function OngoingDataExploration() {
       {finalArray.map((item, index) => {
         return (
           <Link
-            to={`/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`}
+            to={{
+              pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
+              state: {
+                from: T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome'),
+                path: T.translate('features.WranglerNewUI.Breadcrumb.params.wrangleHome'),
+              },
+            }}
             style={{ textDecoration: 'none' }}
+            data-testid="ongoingdataexplorations-link-1"
+            id="ongoingdataexplorations-link-1"
           >
             {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
           </Link>

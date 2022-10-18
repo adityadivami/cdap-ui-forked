@@ -16,10 +16,21 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import BreadCumb from '../index';
+import Breadcrumb from '../index';
+import history from 'services/history';
+import { Router, Route } from 'react-router';
 
-test('renders BreadCumb Component', () => {
-  render(<BreadCumb />);
-  const ele = screen.getByTestId(/bread-comb-container-parent/i);
-  expect(ele).toBeInTheDocument();
+describe('renders Breadcrumb Component', () => {
+  render(
+    <Router history={history}>
+      <Route>
+        <Breadcrumb />
+      </Route>
+    </Router>
+  );
+  
+  it('should render the Breadcrumb component', () => {
+    const ele = screen.getByTestId('breadcrumb-container-parent');
+    expect(ele).toBeInTheDocument();
+  });
 });
