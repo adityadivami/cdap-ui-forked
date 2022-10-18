@@ -56,6 +56,4 @@ describe('Testing Grid Table Component', () => {
     expect(container).toBeDefined();
     expect(container.getByTestId('grid-table')).toBeInTheDocument();
   });
-
 });
-
