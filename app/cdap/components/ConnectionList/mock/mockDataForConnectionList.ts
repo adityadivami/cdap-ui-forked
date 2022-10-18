@@ -84,7 +84,35 @@ export const mockResponseForFetchConnectors = [
     },
   },
 ];
-<<<<<<< HEAD
-=======
 
->>>>>>> 9ec2f91bfa57f012a88b8f3a3d63e17672c032c0
+export const mockDataForExploreConnection = {
+  totalCount: 3,
+  sampleProperties: [],
+  entities: [
+    {
+      name: 'information_schema',
+      path: '/information_schema',
+      type: 'schema',
+      canSample: false,
+      canBrowse: true,
+      properties: {},
+    },
+    {
+      name: 'pg_catalog',
+      path: '/pg_catalog',
+      type: 'schema',
+      canSample: false,
+      canBrowse: true,
+      properties: {},
+    },
+    {
+      name: 'public',
+      path: '/public',
+      type: 'schema',
+      canSample: false,
+      canBrowse: true,
+      properties: {},
+    },
+  ],
+  propertyHeaders: [],
+};
