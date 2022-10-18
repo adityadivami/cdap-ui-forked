@@ -21,10 +21,10 @@ import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/a
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
 import DataPrepStore from 'components/DataPrep/store';
 import DrawerWidget from 'components/DrawerWidget';
+import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import PositionedSnackbar from 'components/SnackbarComponent/index';
 import T from 'i18n-react';
 import React, { useContext, useEffect, useState } from 'react';
-import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import ParsingPopupBody from './Components/ParsingPopupBody';
 import {
   defaultConnectionPayload,
@@ -76,10 +76,14 @@ export default function({ setLoading, updateDataTranformation }) {
     } catch (err) {
       setErrorOnTransformation({
         open: true,
-        message: 'Selected Transformation Cannot Be Applied',
+        message: JSON.stringify(T.translate('features.WranglerNewParsingDrawer.transformationErrorMessage1')),
       });
       setLoading(false);
     }
+  };
+
+  const handleSchemaUpload = (schema) => {
+    setSchemaValue(schema);
   };
 
   const onConfirm = async (parseConfig) => {
@@ -93,7 +97,7 @@ export default function({ setLoading, updateDataTranformation }) {
   const handleChange = (value: string | boolean, property: string) => {
     setProperties((prev) => ({
       ...prev,
-      [property]: value,
+      [property]: property === 'format' ? (value as string).toLowerCase() : value,
     }));
   };
 
@@ -104,7 +108,7 @@ export default function({ setLoading, updateDataTranformation }) {
       showDivider={true}
       headerActionTemplate={
         <ParsingHeaderActionTemplate
-          handleSchemaUpload={(schema) => setSchemaValue(schema)}
+          handleSchemaUpload={(schema) => handleSchemaUpload(schema)}
           setErrorOnTransformation={setErrorOnTransformation}
         />
       }
@@ -139,7 +143,7 @@ export default function({ setLoading, updateDataTranformation }) {
           handleCloseError={() =>
             setErrorOnTransformation({
               open: false,
-              message: 'Error Encountered...',
+              message: JSON.stringify(T.translate('features.WranglerNewParsingDrawer.transformationErrorMessage2')),
             })
           }
           messageToDisplay={errorOnTransformation.message}

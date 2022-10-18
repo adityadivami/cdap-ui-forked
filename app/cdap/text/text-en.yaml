@@ -3427,6 +3427,8 @@ features:
     enableQuotedValues: Enable quoted values
     encoding: Encoding
     format: Format
+    transformationErrorMessage1: Selected Transformation Cannot Be Applied
+    transformationErrorMessage2: Error Encountered...
   Breadcrumb:
     labels:
       connectionsList: 'Data Sources'

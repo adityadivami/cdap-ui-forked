@@ -27,26 +27,20 @@ const history = createHistory({
 
 describe('It Should Test the ParsingPopupBody component', () => {
   it('Should test whether ParsingPopupBody Component is rendered or not', () => {
-    const handleFormatChange = jest.fn();
-    const handleEncodingChange = jest.fn();
-    const handleQuoteValueChange = jest.fn();
-    const headerValueChecked = true;
-    const quotedValuesChecked = true;
-    const handleCheckboxChange = jest.fn();
+    const handleChange = jest.fn();
 
     const { getAllByRole, getAllByTestId, getByTestId } = render(
       <Router history={history}>
         <Switch>
           <Route>
             <ParsingPopupBody
-              formatValue={FORMAT_OPTIONS[0].value}
-              handleFormatChange={handleFormatChange}
-              encodingValue={CHAR_ENCODING_OPTIONS[0].value}
-              handleEncodingChange={handleEncodingChange}
-              quotedValuesChecked={quotedValuesChecked}
-              handleQuoteValueChange={handleQuoteValueChange}
-              headerValueChecked={headerValueChecked}
-              handleCheckboxChange={handleCheckboxChange}
+              values={{
+                format: 'csv',
+                fileEncoding: 'UTF-8',
+                enableQuotedValues: false,
+                skipHeader: false,
+              }}
+              changeEventListener={handleChange}
             />
           </Route>
         </Switch>
@@ -58,19 +52,11 @@ describe('It Should Test the ParsingPopupBody component', () => {
 
     const option2 = getAllByTestId('input-select-1')[0];
     fireEvent.click(option2);
-    expect(handleFormatChange).toHaveBeenCalled();
+    expect(handleChange).toHaveBeenCalled();
 
     fireEvent.mouseDown(menu[1]);
     const option3 = getAllByTestId('input-select-1')[1];
     fireEvent.click(option3);
-    expect(handleEncodingChange).toHaveBeenCalled();
-
-    const checkbox1 = getByTestId('parsing-checkbox-Enable quoted values');
-    fireEvent.click(checkbox1);
-    expect(handleQuoteValueChange).toHaveBeenCalled();
-
-    const checkbox2 = getByTestId('parsing-checkbox-Use first row as header');
-    fireEvent.click(checkbox2);
-    expect(handleCheckboxChange).toHaveBeenCalled();
+    expect(handleChange).toHaveBeenCalled();
   });
 });

@@ -30,7 +30,7 @@ describe('It Should Test the Parsing Drawer Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingDrawer />
+            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()} />
           </Route>
         </Switch>
       </Router>
@@ -44,7 +44,7 @@ describe('It Should Test the Parsing Drawer Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingDrawer />
+            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()} />
           </Route>
         </Switch>
       </Router>
@@ -59,7 +59,7 @@ describe('It Should Test the Parsing Drawer Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingDrawer />
+            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()} />
           </Route>
         </Switch>
       </Router>
@@ -73,10 +73,10 @@ describe('It Should Test the Parsing Drawer Component', () => {
     const option3 = getAllByTestId('input-select-1')[1];
     fireEvent.click(option3);
 
-    const checkbox1 = getByTestId('parsing-checkbox-Enable quoted values');
-    fireEvent.click(checkbox1);
+    // const checkbox1 = getByTestId('parsing-checkbox-Enable quoted values');
+    // fireEvent.click(checkbox1);
 
-    const checkbox2 = getByTestId('parsing-checkbox-Use first row as header');
-    fireEvent.click(checkbox2);
+    // const checkbox2 = getByTestId('parsing-checkbox-Use first row as header');
+    // fireEvent.click(checkbox2);
   });
 });

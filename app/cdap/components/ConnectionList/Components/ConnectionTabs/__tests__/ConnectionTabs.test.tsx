@@ -71,7 +71,7 @@ describe('Test ConnectionsTabs', () => {
         setIsErrorOnNoWorkSpace={jest.fn()}
       />
     );
-    const ele = screen.getByTestId(/connections-tab-label-browse/i);
+    const ele = screen.getByTestId(/connections-tab-label-browse0/i);
     expect(ele).toBeInTheDocument();
   });
 });

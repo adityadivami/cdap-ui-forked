@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ * Copyright © 2019 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,19 +16,16 @@
 
 import { Box } from '@material-ui/core';
 import { useStyles } from 'components/ParsingDrawer/styles';
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 import T from 'i18n-react';
 
-export default function(props) {
+export default function(props){
   const classes = useStyles();
-
-  const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFile = (event) => {
     const schemaFile = event.target.files[0];
     const reader = new FileReader();
-
     reader.readAsText(schemaFile, 'UTF-8');
-
     reader.onload = (evt) => {
       try {
         const fileContents = JSON.parse(evt.target.result.toString());
@@ -38,15 +35,16 @@ export default function(props) {
       } catch (e) {
         props.setErrorOnTransformation({
           open: true,
-          message: T.translate('features.WranglerNewParsingDrawer.importSchemaErrorMessage'),
+          message: 'Imported schema is not a valid Avro schema',
         });
+        // setParsingErrorMessage('Imported schema is not a valid Avro schema');
       }
     };
   };
-
   return (
     <Box>
       <input
+        data-testId="fileinput"
         id="file"
         type="file"
         accept=".json"
@@ -60,10 +58,10 @@ export default function(props) {
           src="/cdap_assets/img/import.svg"
           alt="import schema icon"
         />
-        <span className={classes.importSchemaTextStyles}>
-          {T.translate('features.WranglerNewParsingDrawer.importSchema')}
-        </span>
       </label>
+      <span className={classes.importSchemaTextStyles}>
+        {T.translate('features.WranglerNewParsingDrawer.importSchema')}
+      </span>
     </Box>
   );
-}
+};
