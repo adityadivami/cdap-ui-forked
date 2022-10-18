@@ -3439,3 +3439,8 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+  FooterPanel:
+    labels:
+      directives: 'Directives'
+      recipeSteps: 'Recipe Steps'
+      zoomPercent100: '100%'
