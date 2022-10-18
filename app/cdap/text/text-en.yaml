@@ -3439,3 +3439,12 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+  WranglerNewRecipeSteps:
+    labels:
+       recipe: Recipe
+       serialNo: S.No.
+       recipeSteps: Recipe steps
+  WranglerParsingPanelDrawerWidget:
+    labels:
+        parsing: Parsing
+
