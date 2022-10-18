@@ -88,6 +88,5 @@ export const mockItemsPercentageData = [
   },
   {
     workspaceId: '08e5d850-357d-4982-960a-6e1d19c7e0e8',
-  }
-  
+  },
 ];
