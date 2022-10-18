@@ -15,148 +15,31 @@
  */
 
 import { Box, Card, Typography } from '@material-ui/core';
-import { fetchConnectors } from 'components/Connections/Create/reducer';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { BigQuery } from './iconStore/BigQuerySVG';
-import { CloudSQLMySQL } from './iconStore/CloudSQLMySQL';
-import { CloudSQLPostGreSQL } from './iconStore/CloudSQLPostGreSQL';
-import { Database } from './iconStore/Database';
-import { GCS } from './iconStore/GCS';
-import { ImportDatasetIcon } from './iconStore/ImportDatasetIcon';
-import { Kafka } from './iconStore/Kafka';
-import { MySQL } from './iconStore/MySQL';
-import { Oracle } from './iconStore/Oracle';
-import { PostgreSQL } from './iconStore/PostgreSQL';
-import { S3 } from './iconStore/S3';
-import { Spanner } from './iconStore/Spanner';
-import { SQLServer } from './iconStore/SQLServer';
+import { getWidgetData } from './services/getWidgetData';
 import { useStyles } from './styles';
-import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import { IConnectorArray } from './types';
 
-export default function WrangleCard() {
-  const [connectorTypes, setConnectorTypes] = useState({
-    fetchedConnectorTypes: [],
-  });
+export default function() {
+  const [state, setState] = useState({ connectorTypes: [] });
 
-  // Fetching all the fetchedConnectorTypes and adding SVG its object to each connectorType and
-  // then using unshift function to add an object for Imported Dataset to entire ConnectorTypes Array.
-  const getConnectorTypesNames = async () => {
-    let fetchedConnectorTypesFromAPI = await fetchConnectors();
-    const categorizedConnections = await getCategorizedConnections();
-    const connectorTypeWithConnections = [];
-    categorizedConnections.forEach((itemEach, key) => {
-      connectorTypeWithConnections.push(key);
-    });
-    fetchedConnectorTypesFromAPI = fetchedConnectorTypesFromAPI.map((connectorType) => {
-      if (connectorType.name === 'S3') {
-        return {
-          ...connectorType,
-          SVG: S3,
-        };
-      } else if (connectorType.name === 'Database') {
-        return {
-          ...connectorType,
-          SVG: Database,
-        };
-      } else if (connectorType.name === 'BigQuery') {
-        return {
-          ...connectorType,
-          SVG: BigQuery,
-        };
-      } else if (connectorType.name === 'GCS') {
-        return {
-          ...connectorType,
-          SVG: GCS,
-        };
-      } else if (connectorType.name === 'Spanner') {
-        return {
-          ...connectorType,
-          SVG: Spanner,
-        };
-      } else if (connectorType.name === 'Kafka') {
-        return {
-          ...connectorType,
-          SVG: Kafka,
-        };
-      } else if (connectorType.name === 'SQL Server') {
-        return {
-          ...connectorType,
-          SVG: SQLServer,
-        };
-      } else if (connectorType.name === 'MySQL') {
-        return {
-          ...connectorType,
-          SVG: MySQL,
-        };
-      } else if (connectorType.name === 'Oracle') {
-        return {
-          ...connectorType,
-          SVG: Oracle,
-        };
-      } else if (connectorType.name === 'PostgreSQL') {
-        return {
-          ...connectorType,
-          SVG: PostgreSQL,
-        };
-      } else if (connectorType.name === 'File') {
-        return {
-          ...connectorType,
-          SVG: ImportDatasetIcon,
-        };
-      } else if (connectorType.name === 'CloudSQLMySQL') {
-        return {
-          ...connectorType,
-          SVG: CloudSQLMySQL,
-        };
-      } else if (connectorType.name === 'CloudSQLPostgreSQL') {
-        return {
-          ...connectorType,
-          SVG: CloudSQLPostGreSQL,
-        };
-      } else {
-        return {
-          ...connectorType,
-          SVG: BigQuery,
-        };
-      }
-    });
+  const classes = useStyles();
+  const connectorTypes: IConnectorArray[] = state.connectorTypes;
 
-    /* remove the other connector Types based on getCategorized connections */
-
-    fetchedConnectorTypesFromAPI = fetchedConnectorTypesFromAPI.filter((obj) =>
-      connectorTypeWithConnections.find((each) => each === obj.name)
-    );
-
-    fetchedConnectorTypesFromAPI.unshift({
-      name: 'Imported Datasets',
-      type: 'default',
-      category: 'default',
-      description: 'All Connections from the List',
-      artifact: {
-        name: 'allConnections',
-        version: 'local',
-        scope: 'local',
-      },
-
-      SVG: ImportDatasetIcon,
-    });
-
-    setConnectorTypes({
-      fetchedConnectorTypes: fetchedConnectorTypesFromAPI,
-    });
+  const updateState = (updatedState) => {
+    setState(updatedState);
   };
 
   useEffect(() => {
-    getConnectorTypesNames();
+    getWidgetData(updateState);
   }, []);
 
-  const classes = useStyles();
-  const fetchedConnectorTypes = connectorTypes.fetchedConnectorTypes;
   return (
     <Box className={classes.wrapper} data-testid="wrangle-card-parent">
-      {fetchedConnectorTypes.map((item, index) => {
+      {/* Here we are only showing top 4 connectors on home page */}
+      {connectorTypes.slice(0, 4).map((item, index) => {
         return (
           <Link
             to={`/ns/${getCurrentNamespace()}/datasources/${item.name}`}
