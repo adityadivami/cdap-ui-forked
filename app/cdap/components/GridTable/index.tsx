@@ -36,11 +36,13 @@ import { useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
   IHeaderNamesList,
+  IMissingList,
   IObject,
   IParams,
   IRecords,
 } from 'components/GridTable/types';
 import { convertNonNullPercent } from 'components/GridTable/utils';
+import AddTransformation from 'components/AddTransformation';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -63,7 +65,9 @@ export default function GridTable() {
     },
   ]);
   const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
-
+  const [directiveFunction, setDirectiveFunction] = useState('');
+  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [dataQuality, setDataQuality] = useState({});
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -170,11 +174,15 @@ export default function GridTable() {
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
-    const headersData = createHeadersData(rawData.headers, rawData.types);
+    const headersData: IHeaderNamesList[] = createHeadersData(
+      rawData?.headers,
+      rawData?.types
+    ) as IHeaderNamesList[];
     setheaderNamesList(headersData);
     if (rawData && rawData?.summary && rawData?.summary?.statistics) {
-      const missingData = createMissingData(gridData?.summary?.statistics);
-      setMissingDataList(missingData);
+      const missingItems: IMissingList[] = createMissingData(gridData?.summary?.statistics);
+      setMissingDataList(missingItems);
+      setDataQuality(gridData?.summary?.statistics);
     }
     const rowData =
       rawData &&
@@ -192,6 +200,12 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  // ------------@onMenuOptionSelection Function is used to set option selected from toolbar and then calling of execute API
+  const onMenuOptionSelection = (option, supported_dataType) => {
+    setDirectiveFunction(option);
+    setDirectiveFunctionSupportedDataType(supported_dataType);
+  };
+
   return (
     <Box>
       {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
@@ -200,8 +214,7 @@ export default function GridTable() {
         showBreadCrumb={showBreadCrumb}
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
-          return false;
-          // TODO: will integrate with add transformation panel later
+          onMenuOptionSelection(option, datatype);
         }}
       />
 
@@ -253,6 +266,18 @@ export default function GridTable() {
             })}
         </TableBody>
       </Table>
+      {directiveFunction && (
+        <AddTransformation
+          functionName={directiveFunction}
+          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+          setLoading={setLoading}
+          columnData={headerNamesList}
+          missingDataList={dataQuality}
+          callBack={(response) => {
+            setDirectiveFunction('');
+          }}
+        />
+      )}
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
