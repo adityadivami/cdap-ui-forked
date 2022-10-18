@@ -100,7 +100,7 @@ export default function OngoingDataExplorationCard({ item }) {
               </Grid>
             );
           case 'percentageWithText': {
-            const percent = parseInt(eachItem.label, 2);
+            const percent = parseInt(eachItem.label, 10);
             return percent && !isNaN(percent) ? (
               <Grid
                 item
