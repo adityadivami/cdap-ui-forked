@@ -35,6 +35,7 @@ import GridTextCell from './components/GridTextCell';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
+import AddTransformation from 'components/AddTransformation';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -57,7 +58,9 @@ export default function GridTable() {
     },
   ]);
   const [showBreadCrumb, setShowBreadCrumb] = useState(true);
-
+  const [directiveFunction, setDirectiveFunction] = useState('');
+  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [dataQuality, setDataQuality] = useState({});
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -169,6 +172,7 @@ export default function GridTable() {
     if (rawData && rawData?.summary && rawData?.summary?.statistics) {
       const missingData = createMissingData(gridData?.summary?.statistics);
       setMissingDataList(missingData);
+      setDataQuality(gridData?.summary?.statistics);
     }
     const rowData =
       rawData &&
@@ -186,6 +190,12 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  // ------------@onMenuOptionSelection Function is used to set option selected from toolbar and then calling of execute API
+  const onMenuOptionSelection = (option, supported_dataType) => {
+    setDirectiveFunction(option);
+    setDirectiveFunctionSupportedDataType(supported_dataType);
+  };
+
   return (
     <Box>
       {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
@@ -194,7 +204,7 @@ export default function GridTable() {
         showBreadCrumb={showBreadCrumb}
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
-          // TODO: will integrate with add transformation panel later
+          onMenuOptionSelection(option, datatype);
         }}
       />
 
@@ -246,6 +256,18 @@ export default function GridTable() {
             })}
         </TableBody>
       </Table>
+      {directiveFunction && (
+        <AddTransformation
+          functionName={directiveFunction}
+          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+          setLoading={setLoading}
+          columnData={headersNamesList}
+          missingDataList={dataQuality}
+          callBack={(response) => {
+            setDirectiveFunction('');
+          }}
+        />
+      )}
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
