@@ -62,5 +62,6 @@ export const useStyles = makeStyles({
     left: 0,
     right: 0,
     zIndex: 10,
+    boxShadow: '-3px -4px 15px rgb(68 132 245 / 25%)',
   },
 });
