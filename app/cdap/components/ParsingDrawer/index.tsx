@@ -24,7 +24,6 @@ import DrawerWidget from 'components/DrawerWidget';
 import PositionedSnackbar from 'components/SnackbarComponent/index';
 import T from 'i18n-react';
 import React, { useContext, useEffect, useState } from 'react';
-import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import ParsingPopupBody from './Components/ParsingPopupBody';
 import {
   defaultConnectionPayload,
@@ -102,12 +101,7 @@ export default function({ setLoading, updateDataTranformation }) {
       headingText={T.translate('features.WranglerNewParsingDrawer.parsing')}
       openDrawer={setDrawerStatus}
       showDivider={true}
-      headerActionTemplate={
-        <ParsingHeaderActionTemplate
-          handleSchemaUpload={(schema) => setSchemaValue(schema)}
-          setErrorOnTransformation={setErrorOnTransformation}
-        />
-      }
+      headerActionTemplate={<></>}
       closeClickHandler={() => setDrawerStatus(false)}
     >
       <Box className={classes.bodyContainerStyles}>
