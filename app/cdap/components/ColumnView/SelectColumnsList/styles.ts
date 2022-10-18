@@ -65,7 +65,7 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#5F6368',
-      height: 'calc(100vh - 258px)',
+      height: 'calc(100vh - 301px)',
       overflow: 'scroll',
     },
     functionSectionStyles: {

@@ -17,15 +17,7 @@ import { makeStyles } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 
 export const useCss = makeStyles({
-  containerProps: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    width: '100%',
-    position: 'absolute',
-    bottom: '54px',
-  },
+  containerProps: {},
   cont: {
     display: 'flex',
     flexDirection: 'row',

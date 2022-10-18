@@ -741,15 +741,34 @@ export default function() {
           <NoDataScreen />
         )}
       </Box>
-      <FooterPanel
-        showRecipePanelHandler={showRecipePanelHandler}
-        showAddTransformationHandler={showAddTransformationHandler}
-        recipeStepsCount={directives?.length}
-        setOpenDirective={setOpenDirective}
-        dataCounts={dataCounts}
-        setOpenColumnViewHandler={setOpenColumnViewHandler}
-        columnViewPanelOpened={openColumnView}
-      />
+      <Box className={classes.directivePanelDiv}>
+        {openDirective && (
+          <DirectiveInputDrawer
+            open={openDirective}
+            columnNamesList={headersNamesList}
+            onDirectiveInputHandler={(directives) => {
+              const payload = {
+                context: params.namespace,
+                workspaceId: params.wid,
+              };
+              getWorkSpaceData(payload as IParams, wid as string, directives);
+              setOpenDirective(false);
+            }}
+            onClose={() => setOpenDirective(false)}
+          />
+        )}
+      </Box>
+      <Box>
+        <FooterPanel
+          showRecipePanelHandler={showRecipePanelHandler}
+          showAddTransformationHandler={showAddTransformationHandler}
+          recipeStepsCount={directives?.length}
+          setOpenDirective={setOpenDirective}
+          dataCounts={dataCounts}
+          setOpenColumnViewHandler={setOpenColumnViewHandler}
+          columnViewPanelOpened={openColumnView}
+        />
+      </Box>
       {toaster.open && (
         <PositionedSnackbar
           handleDefaultCloseSnackbar={handleDefaultCloseSnackbar}
@@ -763,21 +782,6 @@ export default function() {
         <div className={classes.loadingContainer}>
           <LoadingSVG />
         </div>
-      )}
-      {openDirective && (
-        <DirectiveInputDrawer
-          open={openDirective}
-          columnNamesList={headersNamesList}
-          onDirectiveInputHandler={(directives) => {
-            const payload = {
-              context: params.namespace,
-              workspaceId: params.wid,
-            };
-            getWorkSpaceData(payload as IParams, wid as string, directives);
-            setOpenDirective(false);
-          }}
-          onClose={() => setOpenDirective(false)}
-        />
       )}
     </Box>
   );

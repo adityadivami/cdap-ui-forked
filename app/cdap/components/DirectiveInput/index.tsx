@@ -91,92 +91,94 @@ const DirectiveDrawer = (props) => {
   }, [directiveInput]);
 
   return (
-    <div>
-      <Drawer anchor={'bottom'} open={open} onClose={toggleDrawer('bottom', false)}>
-        <AutoCompleteList
-          isOpen={autoCompleteOn}
-          toggle={toggleAutoComplete}
-          input={directiveInput}
-          onRowClick={(eventObject) => handleDirectiveChange(eventObject)}
-          inputRef={directiveRef}
-          setDirectivesList={setDirectivesList}
-          getDirectiveUsage={(activeResults, value) => {
-            setOnDirectiveSelection({
-              isDirectiveSelected: value,
-              activeResults,
-            });
-            setUsageDirective(activeResults);
-          }}
-          onColumnSelected={(value) => {
-            setIsColumnSelected(true);
-          }}
-          usageArray={usageDirective}
-          isDirectiveSelected={onDirectiveSelection.isDirectiveSelected}
-          isColumnSelected={isColumnSelected}
-          columnNamesList={props.columnNamesList}
-        />
-        <Box className={classes.usageAndSearchWrapper}>
-          {usageDirective.length === 1
-            ? usageDirective.map((row) => {
-                return (
-                  <Box className={classes.directiveUsage}>
-                    <Typography className={classes.usageText} variant="body1">
-                      Usage:&nbsp; {row?.item?.usage || row?.usage} &nbsp; &nbsp;
-                      {moreInfoOnDirective[row?.item?.directive] && (
-                        <a
-                          href={`${moreInfoOnDirective[row?.item?.directive]}`}
-                          className={classes.infoLink}
-                          target="_blank"
-                        >
-                          {InfoIcon} &nbsp;More info to this directive
-                        </a>
-                      )}
-                    </Typography>
-                    <Divider classes={{ root: classes.divider }} />
-                  </Box>
-                );
-              })
-            : null}
-          <Box className={classes.searchBar}>
-            <Box className={classes.inputWrapper}>
-              <label htmlFor="directive-input-search" className={classes.label}>
-                $
-              </label>
-              <input
-                id="directive-input-search"
-                autoComplete="OFF"
-                className={classes.inputSearch}
-                placeholder={'Input a directive'}
-                value={directiveInput}
-                onChange={handleDirectiveChange}
-                ref={directiveRef}
-                onKeyDown={(e) => {
-                  const usageArraySplit =
-                    onDirectiveSelection.activeResults.length > 0
-                      ? onDirectiveSelection.activeResults[0]?.item?.usage.split(' ')
-                      : [];
-                  const inputSplit = directiveInput.replace(/^\s+/g, '').split(' ');
-                  if (e.key === 'Enter' && handlePasteDirective()) {
-                    props.onDirectiveInputHandler([directiveInput]);
-                  } else if (
-                    e.key === 'Enter' &&
-                    isColumnSelected &&
-                    onDirectiveSelection.isDirectiveSelected &&
-                    (usageArraySplit.length === inputSplit.length ||
-                      inputSplit.length > usageArraySplit.length)
-                  ) {
-                    props.onDirectiveInputHandler([directiveInput]);
-                  }
-                }}
-              />
-            </Box>
-            <Box className={classes.crossIcon} onClick={() => props.onClose()}>
-              {CrossIcon}
+    <>
+      {open && (
+        <Box>
+          <AutoCompleteList
+            isOpen={autoCompleteOn}
+            toggle={toggleAutoComplete}
+            input={directiveInput}
+            onRowClick={(eventObject) => handleDirectiveChange(eventObject)}
+            inputRef={directiveRef}
+            setDirectivesList={setDirectivesList}
+            getDirectiveUsage={(activeResults, value) => {
+              setOnDirectiveSelection({
+                isDirectiveSelected: value,
+                activeResults,
+              });
+              setUsageDirective(activeResults);
+            }}
+            onColumnSelected={(value) => {
+              setIsColumnSelected(true);
+            }}
+            usageArray={usageDirective}
+            isDirectiveSelected={onDirectiveSelection.isDirectiveSelected}
+            isColumnSelected={isColumnSelected}
+            columnNamesList={props.columnNamesList}
+          />
+          <Box className={classes.usageAndSearchWrapper}>
+            {usageDirective.length === 1
+              ? usageDirective.map((row) => {
+                  return (
+                    <Box className={classes.directiveUsage}>
+                      <Typography className={classes.usageText} variant="body1">
+                        Usage:&nbsp; {row?.item?.usage || row?.usage} &nbsp; &nbsp;
+                        {moreInfoOnDirective[row?.item?.directive] && (
+                          <a
+                            href={`${moreInfoOnDirective[row?.item?.directive]}`}
+                            className={classes.infoLink}
+                            target="_blank"
+                          >
+                            {InfoIcon} &nbsp;More info to this directive
+                          </a>
+                        )}
+                      </Typography>
+                      <Divider classes={{ root: classes.divider }} />
+                    </Box>
+                  );
+                })
+              : null}
+            <Box className={classes.searchBar}>
+              <Box className={classes.inputWrapper}>
+                <label htmlFor="directive-input-search" className={classes.label}>
+                  $
+                </label>
+                <input
+                  id="directive-input-search"
+                  autoComplete="OFF"
+                  className={classes.inputSearch}
+                  placeholder={'Input a directive'}
+                  value={directiveInput}
+                  onChange={handleDirectiveChange}
+                  ref={directiveRef}
+                  onKeyDown={(e) => {
+                    const usageArraySplit =
+                      onDirectiveSelection.activeResults.length > 0
+                        ? onDirectiveSelection.activeResults[0]?.item?.usage.split(' ')
+                        : [];
+                    const inputSplit = directiveInput.replace(/^\s+/g, '').split(' ');
+                    if (e.key === 'Enter' && handlePasteDirective()) {
+                      props.onDirectiveInputHandler([directiveInput]);
+                    } else if (
+                      e.key === 'Enter' &&
+                      isColumnSelected &&
+                      onDirectiveSelection.isDirectiveSelected &&
+                      (usageArraySplit.length === inputSplit.length ||
+                        inputSplit.length > usageArraySplit.length)
+                    ) {
+                      props.onDirectiveInputHandler([directiveInput]);
+                    }
+                  }}
+                />
+              </Box>
+              <Box className={classes.crossIcon} onClick={() => props.onClose()}>
+                {CrossIcon}
+              </Box>
             </Box>
           </Box>
         </Box>
-      </Drawer>
-    </div>
+      )}
+    </>
   );
 };
 

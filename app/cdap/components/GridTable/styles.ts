@@ -55,4 +55,12 @@ export const useStyles = makeStyles({
     display: 'flex',
     fontFamily: 'Roboto',
   },
+  directivePanelDiv: {
+    backgroundColor: '#ffffff',
+    position: 'absolute',
+    bottom: '92px',
+    left: 0,
+    right: 0,
+    zIndex: 10,
+  },
 });
