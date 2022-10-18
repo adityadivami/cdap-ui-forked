@@ -183,12 +183,12 @@ export default function TransfomationsToolbar({
             submitMenuOption={submitMenuOption}
             menuOptions={MATH_OPTIONS}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.securityIcon'
+              'features.GridPage.transformationsToolbar.labels.mathIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.securityIcon')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.mathIcon')}
             </Typography>
           )}
         </Box>
@@ -199,12 +199,12 @@ export default function TransfomationsToolbar({
             submitMenuOption={submitMenuOption}
             menuOptions={SECURITY_OPTIONS}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.mathIcon'
+              'features.GridPage.transformationsToolbar.labels.securityIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.mathIcon')}
+              {T.translate('features.GridPage.transformationsToolbar.labels.securityIcon')}
             </Typography>
           )}
         </Box>
