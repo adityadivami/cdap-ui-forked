@@ -15,12 +15,18 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
+import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { createBrowserHistory } from 'history';
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { Route, Router, Switch } from 'react-router-dom';
 import TabLabelCanSample from '../index';
-import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
+import {
+  mockConnectorTypeData,
+  mockEntityData,
+  mockEntityDataForNoWorkspace,
+} from '../mock/mockConnectorTypeData';
+import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 
 const history = createBrowserHistory({
   basename: '/',

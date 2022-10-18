@@ -15,12 +15,13 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import OngoingDataExploration from '../index';
 import MyDataPrepApi from 'api/dataprep';
 import operators from 'rxjs/operators';
 import { createBrowserHistory as createHistory } from 'history';
 import { Route, Router, Switch } from 'react-router';
+import { screen } from '@testing-library/react';
 
 const history = createHistory({
   basename: '/',
