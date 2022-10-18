@@ -30,7 +30,7 @@ describe('It Should Test the Parsing Drawer Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()}/>
+            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()} />
           </Route>
         </Switch>
       </Router>
@@ -44,7 +44,7 @@ describe('It Should Test the Parsing Drawer Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()}/>
+            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()} />
           </Route>
         </Switch>
       </Router>
@@ -55,13 +55,11 @@ describe('It Should Test the Parsing Drawer Component', () => {
   });
 
   it('Should test the handleFormatChange Button ', () => {
-    
-
     const { getAllByRole, getAllByTestId, getByTestId } = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()}/>
+            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()} />
           </Route>
         </Switch>
       </Router>

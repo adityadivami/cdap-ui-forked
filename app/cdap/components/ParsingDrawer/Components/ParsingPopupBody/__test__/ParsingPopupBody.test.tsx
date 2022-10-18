@@ -34,7 +34,7 @@ describe('It Should Test the ParsingPopupBody component', () => {
         <Switch>
           <Route>
             <ParsingPopupBody
-              values ={{
+              values={{
                 format: 'csv',
                 fileEncoding: 'UTF-8',
                 enableQuotedValues: false,
@@ -58,6 +58,5 @@ describe('It Should Test the ParsingPopupBody component', () => {
     const option3 = getAllByTestId('input-select-1')[1];
     fireEvent.click(option3);
     expect(handleChange).toHaveBeenCalled();
-
   });
 });

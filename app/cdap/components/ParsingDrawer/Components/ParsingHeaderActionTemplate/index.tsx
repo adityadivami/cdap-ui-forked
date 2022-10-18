@@ -53,7 +53,7 @@ export default function(props) {
         style={{ display: 'none' }}
         onChange={handleFile}
         className={classes.pointerStyles}
-        data-testid='parsing-header-action-template-input'
+        data-testid="parsing-header-action-template-input"
       />
       <label htmlFor="file" className={classes.pointerStyles}>
         <img

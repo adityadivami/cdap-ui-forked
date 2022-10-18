@@ -30,7 +30,10 @@ describe('It Should Test the ParsingHeaderActionTemplate Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingHeaderActionTemplate handleSchemaUpload={() => jest.fn()} setErrorOnTransformation={() => jest.fn()}/>
+            <ParsingHeaderActionTemplate
+              handleSchemaUpload={() => jest.fn()}
+              setErrorOnTransformation={() => jest.fn()}
+            />
           </Route>
         </Switch>
       </Router>
@@ -38,27 +41,28 @@ describe('It Should Test the ParsingHeaderActionTemplate Component', () => {
     expect(container).toBeDefined();
   });
 
-  it('Should test whether ParsingHeaderActionTemplate Component is rendered or not',async () => {
-
+  it('Should test whether ParsingHeaderActionTemplate Component is rendered or not', async () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingHeaderActionTemplate handleSchemaUpload={() => jest.fn()} setErrorOnTransformation={() => jest.fn()}/>
+            <ParsingHeaderActionTemplate
+              handleSchemaUpload={() => jest.fn()}
+              setErrorOnTransformation={() => jest.fn()}
+            />
           </Route>
         </Switch>
       </Router>
     );
 
-    const fileContents       = 'file contents';
-    const file               = new Blob([fileContents], {type : 'text/plain'});
-    const ele = screen.getByTestId(/parsing-header-action-template-input/i)
+    const fileContents = 'file contents';
+    const file = new Blob([fileContents], { type: 'text/plain' });
+    const ele = screen.getByTestId(/parsing-header-action-template-input/i);
 
     await waitFor(() =>
-    fireEvent.change(ele, {
-      target: { files: [file] },
-    })
-  );
-
+      fireEvent.change(ele, {
+        target: { files: [file] },
+      })
+    );
   });
 });
