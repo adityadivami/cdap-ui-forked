@@ -16,7 +16,7 @@
 import { makeStyles } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 
-export const useCss = makeStyles({
+export const useStyles = makeStyles({
   containerProps: {
     display: 'flex',
     flexDirection: 'column',
@@ -24,24 +24,24 @@ export const useCss = makeStyles({
     alignItems: 'flex-start',
     width: '100%',
     position: 'absolute',
-    bottom: '54px',
+    bottom: 54,
   },
-  cont: {
+  innnerContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'space-between',
     backgroundColor: '#F3F6F9',
-    height: '40px',
-    boxShadow: '0px -2px 2px rgba(0, 0, 0, 0.1)',
+    height: 40,
+    boxShadow: '0px -2px 2px #0000001a',
     width: '100%',
   },
-  spanElement: {
-    marginLeft: '2px',
-    marginRight: '5px',
-    marginTop: '8px',
+  zoomPercent: {
+    marginLeft: 2,
+    marginRight: 5,
+    marginTop: 8,
   },
-  imgCont: {
+  imgContainer: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -50,22 +50,21 @@ export const useCss = makeStyles({
     gap: '8px',
     width: '88px',
     height: '40px',
-    borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
+    borderLeft: '1px solid #3994ff66',
     flex: 'none',
     order: 0,
     flexGrow: 0,
-    borderRight: '1px solid rgba(57, 148, 255, 0.4)',
+    borderRight: '1px solid #3994ff66',
     '&:hover': {
       cursor: 'pointer',
     },
   },
   showNormalView: {
-    background:
-      'linear-gradient(180deg, rgba(70, 129, 244, 0) 0.85%, rgba(70, 129, 244, 0.2) 118.78%)',
+    background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
   },
   showDepth: {
     backgroundColor: '#F3F6F9',
-    boxShadow: 'inset 0px 2px 4px rgba(0, 0, 0, 0.2)',
+    boxShadow: 'inset 0px 2px 4px #00000033',
   },
   dataWrapper: {
     width: '65%',
@@ -83,7 +82,7 @@ export const useCss = makeStyles({
     color: '#5F6368',
   },
 
-  zoomCont: {
+  zoomContainer: {
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'row',
@@ -93,34 +92,32 @@ export const useCss = makeStyles({
     gap: '8px',
     width: '10%',
     height: '40px',
-    background:
-      'linear-gradient(180deg, rgba(70, 129, 244, 0) 0.85%, rgba(70, 129, 244, 0.2) 118.78%)',
+    background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
   },
-  directivesCont: {
+  directivesContainer: {
     textAlign: 'center',
     padding: '9.5px 32px',
     gap: '8px',
     width: '10%',
     height: '40px',
-    background:
-      'linear-gradient(180deg, rgba(70, 129, 244, 0) 0.85%, rgba(70, 129, 244, 0.2) 118.78%)',
+    background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
+
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
     cursor: 'pointer',
   },
-  recipeCont: {
+  recipeContainer: {
     padding: '10px 32px',
     cursor: 'pointer',
     textAlign: 'center',
     gap: '8px',
     width: '184px',
     height: '40px',
-    background:
-      'linear-gradient(180deg, rgba(70, 129, 244, 0) 0.85%, rgba(70, 129, 244, 0.2) 118.78%)',
+    background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
     display: 'flex',
   },
-  spanElement1: {
+  recipeCount: {
     backgroundColor: grey[600],
     height: '21px',
     width: '20px',

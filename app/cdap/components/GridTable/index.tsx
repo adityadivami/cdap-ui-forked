@@ -239,7 +239,7 @@ export default function GridTable() {
       <FooterPanel
         recipeStepsCount={0}
         dataCounts={{ rowCount: 1000, columnCount: 20 }}
-        columnViewPanelOpened={false}
+        columnViewPanelOpened={true}
       />
       {loading && (
         <div className={classes.loadingContainer}>

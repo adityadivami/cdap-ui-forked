@@ -15,17 +15,17 @@
  */
 import React, { useState, useEffect } from 'react';
 import { Box } from '@material-ui/core';
-import { useCss } from './styles';
-import { ColumnIcon, ZoomIn, ArrowIcon } from './images';
+import { useStyles } from './styles';
+import { ColumnIcon, ArrowIcon, ZoomIcon } from './images';
 import T from 'i18n-react';
 
 export default function({ recipeStepsCount, dataCounts, columnViewPanelOpened }) {
-  const classes = useCss();
+  const classes = useStyles();
   return (
     <Box className={classes.containerProps}>
-      <Box className={classes.cont}>
+      <Box className={classes.innnerContainer}>
         <Box
-          className={`${classes.imgCont} ${
+          className={`${classes.imgContainer} ${
             columnViewPanelOpened ? classes.showDepth : classes.showNormalView
           }`}
         >
@@ -37,20 +37,20 @@ export default function({ recipeStepsCount, dataCounts, columnViewPanelOpened })
             {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
           </p>
         </Box>
-        <Box className={classes.zoomCont}>
-          {ZoomIn}
-          <p className={classes.spanElement}>
+        <Box className={classes.zoomContainer}>
+          {ZoomIcon}
+          <p className={classes.zoomPercent}>
             {' '}
             {T.translate('features.FooterPanel.labels.zoomPercent100')}
           </p>
           {ArrowIcon}
         </Box>
-        <Box className={classes.directivesCont}>
+        <Box className={classes.directivesContainer}>
           <p> {T.translate('features.FooterPanel.labels.directives')} </p>
         </Box>
-        <Box className={classes.recipeCont}>
+        <Box className={classes.recipeContainer}>
           <p>{T.translate('features.FooterPanel.labels.recipeSteps')}</p>
-          <p className={classes.spanElement1}>{recipeStepsCount}</p>
+          <p className={classes.recipeCount}>{recipeStepsCount}</p>
         </Box>
       </Box>
     </Box>
