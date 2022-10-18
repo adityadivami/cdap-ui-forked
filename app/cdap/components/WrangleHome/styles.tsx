@@ -26,6 +26,9 @@ export const useStyles = makeStyles({
     justifyContent: 'center',
     flexDirection: 'column',
   },
+  link: {
+    textDecoration: 'none',
+  },
   subHeader: {
     display: 'flex',
     gap: '110px',
