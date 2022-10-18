@@ -24,7 +24,6 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { IResponseData } from './types';
 import T from 'i18n-react';
 import NoRecordScreen from 'components/NoRecordScreen';
 
@@ -32,14 +31,15 @@ interface ICardCount {
   cardCount?: number;
   fromAddress: string;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowExplorations?: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export default function OngoingDataExplorations({
   cardCount,
   fromAddress,
   setLoading,
+  setShowExplorations,
 }: ICardCount) {
-  const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
 
   const getOngoingData = useCallback(() => {
@@ -106,7 +106,15 @@ export default function OngoingDataExplorations({
             expData[index].count = workspace.count;
 
             const final = generateDataForExplorationCard(expData, cardCount);
+
+            /**
+             * if we have setData, then we should send data to parent element as the exploration state is then maintained in parent as well for showing or hiding the title of the parent component
+             */
+            if (setShowExplorations) {
+              setShowExplorations(final && Array.isArray(final) && final.length ? true : false);
+            }
             setFinalArray(final);
+
             setLoading(false);
           });
         }
@@ -118,36 +126,33 @@ export default function OngoingDataExplorations({
     getOngoingData();
   }, []);
 
-  useEffect(() => {
-    const final = generateDataForExplorationCard(ongoingExpDatas, cardCount);
-    setFinalArray(final);
-  }, [ongoingExpDatas]);
-
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {finalArray && Array.isArray(finalArray) && finalArray.length
-        ? finalArray.map((item, index) => {
-            return (
-              <Link
-                to={{
-                  pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
-                  state: {
-                    from: fromAddress,
-                    path: T.translate('features.Breadcrumb.labels.wrangleHome'),
-                  },
-                }}
-                style={{ textDecoration: 'none' }}
-              >
-                <OngoingDataExplorationsCard item={item} key={index} fromAddress={fromAddress} />
-              </Link>
-            );
-          })
-        : fromAddress === 'Workspaces' && (
-            <NoRecordScreen
-              title={T.translate('features.NoRecordScreen.workspacesList.title')}
-              subtitle={T.translate('features.NoRecordScreen.workspacesList.subtitle')}
-            />
-          )
+      {finalArray && Array.isArray(finalArray) && finalArray.length ? (
+        finalArray.map((item, index) => {
+          return (
+            <Link
+              to={{
+                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
+                state: {
+                  from: fromAddress,
+                  path: T.translate('features.Breadcrumb.labels.wrangleHome'),
+                },
+              }}
+              style={{ textDecoration: 'none' }}
+            >
+              <OngoingDataExplorationsCard item={item} key={index} fromAddress={fromAddress} />
+            </Link>
+          );
+        })
+      ) : fromAddress === 'Workspaces' ? (
+        <NoRecordScreen
+          title={T.translate('features.NoRecordScreen.workspacesList.title')}
+          subtitle={T.translate('features.NoRecordScreen.workspacesList.subtitle')}
+        />
+      ) : (
+        <></>
+      )
       /* TODO: add no data msg in home page if no workspaces to display */
       }
     </Box>
