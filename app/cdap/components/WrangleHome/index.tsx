@@ -23,6 +23,8 @@ import WrangleHomeTitle from './Components/WrangleHomeTitle';
 import { GradientLine, HeaderImage } from './icons';
 import { useStyles } from './styles';
 import T from 'i18n-react';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { Link } from 'react-router-dom';
 
 export default function WranglerHome() {
   const classes = useStyles();
@@ -42,7 +44,9 @@ export default function WranglerHome() {
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle title={T.translate('features.HomePage.labels.connectorTypes.title')} />
           <Box className={classes.viewMore}>
-            {T.translate('features.HomePage.labels.common.viewAll')}
+            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}>
+              {T.translate('features.HomePage.labels.common.viewAll')}
+            </Link>
           </Box>
         </Box>
         <WrangleCard />
