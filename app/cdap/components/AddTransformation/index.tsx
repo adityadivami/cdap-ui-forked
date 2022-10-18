@@ -22,16 +22,30 @@ import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
 import SelectMultipleColumnsList from './SelectMultipleColumnList';
 import { multipleColumnSelected } from './constants';
+import FunctionNameWidget from './FunctionNameWidget';
+import SelectColumnsWidget from './SelectColumnsWidget';
+import SelectedColumnCountWidget from './SelectedColumnCountWidget';
+import ActionsWidget from './ActionsWidget';
 
 export default function(props) {
-  const { directiveFunctionSupportedDataType, functionName, columnData, missingDataList } = props;
-  const [columnsPopup, setColumnsPopup] = useState(true);
+  const {
+    directiveFunctionSupportedDataType,
+    functionName,
+    columnData,
+    missingDataList,
+    applyTransformation,
+  } = props;
+  const [drawerStatus, setDrawerStatus] = useState(true);
+  const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState([]);
+  const [selectedAction, setSelectedAction] = useState('');
+  const [replaceValue, setReplaceValue] = useState('');
 
   const classes = useStyles();
 
   const closeClickHandler = () => {
     props.callBack();
+    setDrawerStatus(false);
   };
 
   const closeSelectColumnsPopup = () => {
@@ -41,11 +55,56 @@ export default function(props) {
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
     setSelectedColumns([]);
-    closeClickHandler();
+  };
+
+  const handleSelectColumn = () => {
+    setColumnsPopup(true);
+  };
+
+  const handleApply = (event) => {
+    applyTransformation('', selectedColumns[0].label);
+    setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
 
   return (
     <Fragment>
+      <DrawerWidget
+        headingText={T.translate('features.WranglerNewAddTransformation.addTransformation')}
+        openDrawer={drawerStatus}
+        closeClickHandler={closeClickHandler}
+      >
+        <Container className={classes.addTransformationBodyStyles}>
+          <div className={classes.addTransformationBodyWrapperStyles}>
+            <SelectedColumnCountWidget selectedColumnsCount={selectedColumns.length} />
+            <FunctionNameWidget functionName={functionName} />
+            <SelectColumnsWidget
+              handleSelectColumn={handleSelectColumn}
+              selectedColumns={selectedColumns}
+              functionName={functionName}
+            />
+            {functionName == 'remove-null' && (
+              <ActionsWidget
+                functionName={functionName}
+                setSelectedAction={setSelectedAction}
+                selectedAction={selectedAction}
+                setReplaceValue={setReplaceValue}
+                replaceValue={replaceValue}
+              />
+            )}
+          </div>
+          <Button
+            variant="contained"
+            disabled={selectedColumns.length ? false : true}
+            color="primary"
+            classes={{ containedPrimary: classes.buttonStyles }}
+            className={classes.applyStepButtonStyles}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
+            data-testid="add-transformation-button"
+          >
+            {T.translate('features.WranglerNewAddTransformation.applyStep')}
+          </Button>
+        </Container>
+      </DrawerWidget>
       <DrawerWidget
         headingText={T.translate('features.WranglerNewAddTransformation.selectColumn')}
         openDrawer={columnsPopup}
