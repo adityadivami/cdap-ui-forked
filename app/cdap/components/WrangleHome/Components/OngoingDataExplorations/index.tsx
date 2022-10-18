@@ -14,10 +14,11 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
 import { Box } from '@material-ui/core/';
 import { generateDataForExplorationCard } from './utils';
 import MyDataPrepApi from 'api/dataprep';
+import { orderBy } from 'lodash';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
@@ -26,19 +27,37 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
 import T from 'i18n-react';
 
-export default function OngoingDataExplorations() {
+interface ICardCount {
+  cardCount?: number;
+  fromAddress: string;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function OngoingDataExplorations({
+  cardCount,
+  fromAddress,
+  setLoading,
+}: ICardCount) {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
   const [finalArray, setFinalArray] = useState([]);
 
-  const getOngoingData = () => {
+  const getOngoingData = useCallback(() => {
+    const expData = [];
     // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
     //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     })
       .pipe(
-        switchMap((res: IResponseData) => {
-          const workspaces = res.values.map((item) => {
+        switchMap((res: Record<string, unknown[]>) => {
+          let values = [];
+          values = res.values;
+          values = orderBy(
+            values,
+            [(workspace) => (workspace.workspaceName || '').toLowerCase()],
+            ['asc']
+          );
+          const workspaces = values.map((item) => {
             const params = {
               context: 'default',
               workspaceId: item.workspaceId,
@@ -47,26 +66,24 @@ export default function OngoingDataExplorations() {
               directives: item.directives,
               limit: 1000,
               insights: {
-                name: item.sampleSpec.connectionName,
+                name: item?.sampleSpec?.connectionName,
                 workspaceName: item.workspaceName,
                 path: item?.sampleSpec?.path,
                 visualization: {},
               },
             };
 
-            setOngoingExpDatas((current) => [
-              ...current,
-              {
-                connectionName:
-                  item?.sampleSpec?.connectionName === undefined
-                    ? 'Upload'
-                    : item?.sampleSpec?.connectionName,
-                workspaceName: item.workspaceName,
-                recipeSteps: item.directives.length,
-                dataQuality: null,
-                workspaceId: item.workspaceId,
-              },
-            ]);
+            expData.push({
+              connectionName:
+                item?.sampleSpec?.connectionName === undefined
+                  ? 'Upload'
+                  : item?.sampleSpec?.connectionName,
+              workspaceName: item.workspaceName,
+              recipeSteps: item.directives.length,
+              dataQuality: null,
+              workspaceId: item.workspaceId,
+              count: 0,
+            });
             return MyDataPrepApi.execute(params, requestBody);
           });
           return forkJoin(workspaces);
@@ -79,48 +96,52 @@ export default function OngoingDataExplorations() {
             const general = workspace.summary.statistics[element].general;
             const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
             const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+
             dataQuality = dataQuality + nonNull;
           });
           const totalDataQuality = dataQuality / workspace.headers.length;
-          setOngoingExpDatas((current) => [
-            ...current.slice(0, index),
-            {
-              ...current[index],
-              dataQuality: totalDataQuality,
-            },
-            ...current.slice(index + 1),
-          ]);
+          expData[index].dataQuality = totalDataQuality;
+          expData[index].count = workspace.count;
+
+          const final = generateDataForExplorationCard(expData, cardCount);
+          setFinalArray(final);
+          setLoading(false);
         });
       });
-  };
+  }, []);
 
   useEffect(() => {
     getOngoingData();
   }, []);
 
   useEffect(() => {
-    const final = generateDataForExplorationCard(ongoingExpDatas);
+    const final = generateDataForExplorationCard(ongoingExpDatas, cardCount);
     setFinalArray(final);
   }, [ongoingExpDatas]);
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {finalArray.map((item, index) => {
-        return (
-          <Link
-            to={{
-              pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
-              state: {
-                from: T.translate('features.Breadcrumb.labels.wrangleHome'),
-                path: T.translate('features.Breadcrumb.params.wrangeHome'),
-              },
-            }}
-            style={{ textDecoration: 'none' }}
-          >
-            {index <= 1 && <OngoingDataExplorationsCard item={item} key={index} />}
-          </Link>
-        );
-      })}
+      {finalArray && Array.isArray(finalArray) && finalArray.length ? (
+        finalArray.map((item, index) => {
+          return (
+            <Link
+              to={{
+                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
+                state: {
+                  from: fromAddress,
+                  path: T.translate('features.Breadcrumb.labels.wrangleHome'),
+                },
+              }}
+              style={{ textDecoration: 'none' }}
+            >
+              <OngoingDataExplorationsCard item={item} key={index} fromAddress={fromAddress} />
+            </Link>
+          );
+        })
+      ) : (
+        <></>
+        /* TODO: add no data screen in case final array is empty */
+      )}
     </Box>
   );
 }
