@@ -92,7 +92,7 @@ export default function({ setLoading, updateDataTranformation }) {
   const handleChange = (value: string | boolean, property: string) => {
     setProperties((prev) => ({
       ...prev,
-      [property]: value,
+      [property]: property === 'format' ? (value as string).toLowerCase() : value,
     }));
   };
 
