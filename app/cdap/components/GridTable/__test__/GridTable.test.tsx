@@ -54,31 +54,5 @@ describe('Testing Grid Table Component', () => {
       </Router>
     );
     expect(container).toBeDefined();
-    expect(container.getByTestId('grid-table')).toBeInTheDocument();
-  });
-
-  it('Should mock API', () => {
-    jest.spyOn(MyDataPrepApi, 'getWorkspace').mockImplementation(() => {
-      return {
-        pipe: () => {
-          return {
-            subscribe: (callback) => {
-              callback([]);
-            },
-          };
-        },
-      };
-    });
-    const container = render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <GridTable />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    expect(container).toBeDefined();
-    expect(container.getByTestId('grid-table')).toBeInTheDocument();
   });
 });

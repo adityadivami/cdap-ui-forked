@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { act, fireEvent, getByTestId, render, screen } from '@testing-library/react';
 import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
 import * as reducer from 'components/Connections/Create/reducer';
 import { createBrowserHistory as createHistory } from 'history';
@@ -24,6 +24,8 @@ import ConnectionList from '..';
 import {
   connectionListDummyResPostGresSql,
   mockResponseForFetchConnectors,
+  mockDataForExploreConnection,
+  connectionListDummyResFile,
 } from '../mock/mockDataForConnectionList';
 import * as apiHelpersForExploreConnection from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
@@ -34,6 +36,19 @@ const history = createHistory({
 
 describe('It Should test Connection List Component', () => {
   it('Should render Connection List Component', () => {
+    const dummyRes = new Map();
+    dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
+    dummyRes.set('File', connectionListDummyResFile);
+    jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
+
+    jest
+      .spyOn(reducer, 'fetchConnectors')
+      .mockReturnValue(Promise.resolve(mockResponseForFetchConnectors));
+
+    jest.spyOn(apiHelpersForExploreConnection, 'exploreConnection').mockImplementation(() => {
+      return Promise.resolve(mockDataForExploreConnection);
+    });
+
     const container = render(
       <Router history={history}>
         <Switch>
@@ -87,7 +102,31 @@ describe('It Should test Connection List Component', () => {
     propertyHeaders: [],
   };
 
-  jest.spyOn(apiHelpersForExploreConnection, 'exploreConnection').mockImplementation(() => {
-    return Promise.resolve(mockDataForExploreConnection);
+  // jest.spyOn(apiHelpersForExploreConnection, 'exploreConnection').mockImplementation(() => {
+  //   return Promise.resolve(mockDataForExploreConnection);
+
+  //   // act(() => {
+  //   //   /* fire events that update state */
+  //   //   const ele = screen.getByTestId(/connections-tabs-list-change/i);
+  //   // });
+
+  //   // await act( async () => render(<TestApp/>));
+
+  //   expect(container).toBeDefined();
+  // });
+
+  it('Should render Connection List Component', () => {
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <ConnectionList />
+          </Route>
+        </Switch>
+      </Router>
+    );
+
+    const ele = screen.getByTestId(/data-sets-parent/i);
+    expect(ele).toBeInTheDocument();
   });
 });
