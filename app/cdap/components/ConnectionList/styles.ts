@@ -14,9 +14,8 @@
  * the License.
  */
 
+import { blue, grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
-import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   canBrowseHover: {

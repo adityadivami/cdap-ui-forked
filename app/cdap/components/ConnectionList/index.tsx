@@ -23,8 +23,7 @@ import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { IRecords } from 'components/GridTable/types';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import ErrorSnackbar from 'components/SnackbarComponent';
-import * as React from 'react';
-import { createRef, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
@@ -34,8 +33,7 @@ import { useStyles } from './styles';
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
   display: 'flex',
-  borderTop: '1px solid',
-  borderColor: grey[300],
+  borderTop: `1px solid ${grey[300]}`,
 
   height: '100%',
   '& > :first-child': {

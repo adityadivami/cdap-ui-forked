@@ -33,6 +33,7 @@ import { S3 } from './iconStore/S3';
 import { Spanner } from './iconStore/Spanner';
 import { SQLServer } from './iconStore/SQLServer';
 import { useStyles } from './styles';
+import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 
 export default function WrangleCard() {
   const [connectorTypes, setConnectorTypes] = useState({
@@ -43,7 +44,11 @@ export default function WrangleCard() {
   // then using unshift function to add an object for Imported Dataset to entire ConnectorTypes Array.
   const getConnectorTypesNames = async () => {
     let fetchedConnectorTypesFromAPI = await fetchConnectors();
-
+    const categorizedConnections = await getCategorizedConnections();
+    const connectorTypeWithConnections = [];
+    categorizedConnections.forEach((itemEach, key) => {
+      connectorTypeWithConnections.push(key);
+    });
     fetchedConnectorTypesFromAPI = fetchedConnectorTypesFromAPI.map((connectorType) => {
       if (connectorType.name === 'S3') {
         return {
@@ -117,6 +122,12 @@ export default function WrangleCard() {
         };
       }
     });
+
+    /* remove the other connector Types based on getCategorized connections */
+
+    fetchedConnectorTypesFromAPI = fetchedConnectorTypesFromAPI.filter((obj) =>
+      connectorTypeWithConnections.find((each) => each == obj.name)
+    );
 
     fetchedConnectorTypesFromAPI.unshift({
       name: 'Imported Datasets',

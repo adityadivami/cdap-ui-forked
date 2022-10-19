@@ -43,6 +43,7 @@ export default function BreadCrumb({ workspaceName, location }) {
         </Link>
         {location?.state?.from !== T.translate('features.Breadcrumb.labels.wrangleHome') && (
           <Link
+            className={`${classes.breadcrumbLabel}`}
             to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
             data-testid="breadcrumb-data-sources-text"
           >
