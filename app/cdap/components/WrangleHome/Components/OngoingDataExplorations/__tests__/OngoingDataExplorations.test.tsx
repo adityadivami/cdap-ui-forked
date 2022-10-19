@@ -298,7 +298,7 @@ test('renders Ongoing Data Exploration component', async () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <OngoingDataExploration />
+          <OngoingDataExploration cardCount={0} fromAddress={''} setLoading={() => jest.fn()}/>
         </Route>
       </Switch>
     </Router>
