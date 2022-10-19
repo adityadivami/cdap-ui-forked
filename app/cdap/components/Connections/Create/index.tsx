@@ -60,7 +60,7 @@ const useStyle = makeStyle(() => {
     },
   };
 });
-export function CreateConnection({
+export default function({
   onToggle = null,
   initialConfig = {},
   onCreate = null,
@@ -69,7 +69,7 @@ export function CreateConnection({
 }) {
   const { mode: connectionMode, disabledTypes } = useContext(ConnectionsContext);
   const classes = useStyle();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const activeCategory = useRef(null);
   const [connectionDetails, setConnectionDetails] = useState<IConnectorDetails>({
@@ -180,7 +180,13 @@ export function CreateConnection({
       }
 
       if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
-        setRedirectUrl(`${getConnectionPath(name)}`);
+        const value: string = localStorage.getItem('isNewWranglerRequested');
+        if (value) {
+          localStorage.removeItem('isNewWranglerRequested');
+          setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${name}`);
+        } else {
+          setRedirectUrl(`${getConnectionPath(name)}`);
+        }
       }
 
       if (typeof onToggle === 'function') {
@@ -235,7 +241,7 @@ export function CreateConnection({
   function onClose() {
     if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
       navigateToConnectionList(dispatch);
-      return;
+      return setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/Imported%20Datasets`);
     }
 
     onToggle();

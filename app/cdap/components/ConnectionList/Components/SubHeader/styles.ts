@@ -22,12 +22,12 @@ export const useStyles = makeStyles({
   breadCombContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    height: '48px',
+    height: 48,
     alignItems: 'center',
-    marginRight: '30px',
-    marginLeft: '34px',
+    marginRight: 30,
+    marginLeft: 34,
     '& .MuiBreadcrumbs-root': {
-      fontSize: '14px',
+      fontSize: 14,
       fontWeight: '400',
     },
     '& .MuiTypography-root': {
@@ -45,12 +45,12 @@ export const useStyles = makeStyles({
   },
   selectPrevPage: {
     display: 'flex',
-    gap: '8px',
+    gap: 8,
     alignItems: 'center',
   },
   importData: {
     display: 'flex',
-    gap: '12px',
+    gap: 12,
     alignItems: 'flex-end',
     '&:hover': {
       cursor: 'pointer',
@@ -58,13 +58,18 @@ export const useStyles = makeStyles({
   },
   importDataContainer: {
     display: 'flex',
-    gap: '30px',
+    gap: 30,
     alignItems: 'flex-end',
-    fontSize: '14px',
+    fontSize: 14,
   },
   breadcrumbTyporgraphy: {
     color: grey[900],
-    fontSize: '14px',
+    fontSize: 14,
     lineHeight: '21px',
+  },
+  link: {
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
 });

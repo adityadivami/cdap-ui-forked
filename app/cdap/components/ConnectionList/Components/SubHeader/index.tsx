@@ -25,8 +25,12 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import T from 'i18n-react';
 
-export default function SubHeader() {
+export default function() {
   const classes = useStyles();
+  const handleAddConnection = () => {
+    localStorage.setItem('isNewWranglerRequested', 'true');
+  };
+
   return (
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
       <Box>
@@ -41,12 +45,14 @@ export default function SubHeader() {
       </Box>
 
       <Box className={classes.importDataContainer}>
-        <Box className={classes.importData}>
-          <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.AddConnections.referenceLabel')}
+        <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>
+          <Box onClick={handleAddConnection} className={classes.importData}>
+            <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
+            <Box className={classes.breadcrumbTyporgraphy}>
+              {T.translate('features.AddConnections.referenceLabel')}
+            </Box>
           </Box>
-        </Box>
+        </Link>
         <Box className={classes.importData}>
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
           <Box className={classes.breadcrumbTyporgraphy}>
