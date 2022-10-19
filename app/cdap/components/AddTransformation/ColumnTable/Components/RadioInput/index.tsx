@@ -13,15 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 import React from 'react';
-import { IHeaderNamesList, IDataQuality } from '../types';
+import { Radio } from '@material-ui/core';
+import { IRadioInputProps } from '../../types';
 
-export interface ISelectMultipleColumnList {
-  directiveFunctionSupportedDataType: string[];
-  selectedColumnsCount: number;
-  columnData: IHeaderNamesList[];
-  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
-  dataQuality: IDataQuality[];
-  functionName: string;
+export default function({ selectedColumns, onSingleSelection, eachColumn }: IRadioInputProps) {
+  return (
+    <>
+      <Radio
+        color="primary"
+        onChange={() => onSingleSelection(eachColumn)}
+        checked={
+          Array.isArray(selectedColumns) &&
+          selectedColumns?.filter((el) => el.label == eachColumn.label).length
+            ? true
+            : false
+        }
+      />
+    </>
+  );
 }

@@ -17,12 +17,11 @@
 import { Button, Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
-import SelectMultipleColumnsList from './SelectMultipleColumnList';
-import { multipleColumnSelected } from './constants';
-import { IAddTransformationProp, IHeaderNamesList } from './types';
+import { IAddTransformationProp, IHeaderNamesList, IDataQuality } from './types';
+import { prepareDataQualtiy } from './CircularProgressBar/utils';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -33,7 +32,7 @@ export default function({
 }: IAddTransformationProp) {
   const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState([] as IHeaderNamesList[]);
-
+  const [dataQualityValue, setDataQualityValue] = useState([] as IDataQuality[]);
   const classes = useStyles();
 
   const closeClickHandler = () => {
@@ -50,6 +49,11 @@ export default function({
     closeClickHandler();
   };
 
+  useEffect(() => {
+    const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(missingDataList, columnData);
+    setDataQualityValue(getPreparedDataQuality);
+  }, []);
+
   return (
     <Fragment>
       <DrawerWidget
@@ -60,24 +64,14 @@ export default function({
       >
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
-            {multipleColumnSelected.filter((el) => el.value === functionName).length > 0 ? (
-              <SelectMultipleColumnsList
-                columnData={columnData}
-                selectedColumnsCount={selectedColumns.length}
-                setSelectedColumns={setSelectedColumns}
-                dataQuality={missingDataList}
-                directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
-                functionName={functionName}
-              />
-            ) : (
-              <SelectColumnsList
-                columnData={columnData}
-                selectedColumnsCount={selectedColumns.length}
-                setSelectedColumns={setSelectedColumns}
-                dataQuality={missingDataList}
-                directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
-              />
-            )}
+            <SelectColumnsList
+              columnData={columnData}
+              selectedColumnsCount={selectedColumns.length}
+              setSelectedColumns={setSelectedColumns}
+              dataQuality={dataQualityValue}
+              directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+              functionName={functionName}
+            />
           </div>
           <Button
             variant="contained"

@@ -29,6 +29,6 @@ export interface IAddTransformationProp {
   directiveFunctionSupportedDataType: string[];
   functionName: string;
   columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality[];
+  missingDataList: IDataQuality;
   callBack: () => void;
 }
