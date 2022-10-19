@@ -28,7 +28,7 @@ import T from 'i18n-react';
 export default function SubHeader() {
   const classes = useStyles();
   const handleAddConnection = () => {
-    localStorage.setItem('addConnection', 'true');
+    localStorage.setItem('isNewWranglerRequested', 'true');
   };
 
   return (
