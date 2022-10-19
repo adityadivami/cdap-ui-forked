@@ -14,14 +14,14 @@
  * the License.
  */
 
-import React from 'react';
-import ConnectionsTabs from '../index';
-import { fireEvent, render, screen } from '@testing-library/react';
-import { mockTabsDataWithBrowse } from '../mock/mockTabsDataWithBrowse';
-import { mockTabsDataWithBrowseIndex } from '../mock/mockTabsDataWithBrowseIndex';
-import { mockTabsTestData } from '../mock/mockTabsTestData';
-import { createBrowserHistory } from 'history';
-import { Route, Router, Switch } from 'react-router-dom';
+import React from "react";
+import ConnectionsTabs from "../index";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { mockTabsDataWithBrowse } from "../mock/mockTabsDataWithBrowse";
+import { mockTabsDataWithBrowseIndex } from "../mock/mockTabsDataWithBrowseIndex";
+import { mockTabsTestData } from "../mock/mockTabsTestData";
+import { Route, Router, Switch } from "react-router";
+import { createBrowserHistory } from "history";
 
 const tabsTestData = [{ showTabs: true }];
 
@@ -29,8 +29,8 @@ const history = createBrowserHistory({
   basename: '/',
 });
 
-describe('Test ConnectionsTabs', () => {
-  it('Should render Connections Tabs Parent Component', () => {
+describe("Test ConnectionsTabs", () => {
+  it("Should render Connections Tabs Parent Component", () => {
     render(
       <ConnectionsTabs
         tabsData={mockTabsTestData}
@@ -45,7 +45,7 @@ describe('Test ConnectionsTabs', () => {
     expect(ele).toBeInTheDocument();
   });
 
-  it('Should render Connections Tabs Component', () => {
+  it("Should render Connections Tabs Component", () => {
     render(
       <ConnectionsTabs
         tabsData={mockTabsTestData}
@@ -59,10 +59,25 @@ describe('Test ConnectionsTabs', () => {
     const ele = screen.getByTestId(/connection-tabs/i);
     expect(ele).toBeInTheDocument();
   });
+
+  it("Should render TabLabelCanBrowse with connectorTypes and count", () => {
+    render(
+      <ConnectionsTabs
+        tabsData={mockTabsDataWithBrowseIndex}
+        handleChange={() => null}
+        value="apple"
+        index={0}
+        connectionId={undefined}
+        setIsErrorOnNoWorkSpace={jest.fn()}
+      />
+    );
+    const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
+    expect(ele[0]).toBeInTheDocument();
+  });
 });
 
-describe('Should test whether handleChange function is triggered or not', () => {
-  it('Should trigger handlechange function for the first column i.e. Connector Types', () => {
+describe("Should test whether handleChange function is triggered or not", () => {
+  it("Should trigger handlechange function for the first column i.e. Connector Types", () => {
     const handleChange = jest.fn();
     render(
       <ConnectionsTabs
@@ -102,7 +117,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
     expect(handleChange).toHaveBeenCalledTimes(0);
   });
 
-  it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is true', () => {
+  it("Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is false", () => {
     const handleChange = jest.fn();
     render(
       <Router history={history}>
@@ -120,6 +135,31 @@ describe('Should test whether handleChange function is triggered or not', () => 
         </Switch>
       </Router>
     );
+    const ele = screen.getAllByTestId(/connections-tab-button/i);
+    fireEvent.click(ele[0]);
+    expect(handleChange).toHaveBeenCalledTimes(1);
+  });
+
+  it("Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is true", () => {
+    const handleChange = jest.fn();
+
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <ConnectionsTabs
+              tabsData={mockTabsDataWithBrowse}
+              handleChange={handleChange}
+              value="apple"
+              index="2"
+              connectionId={undefined}
+              setIsErrorOnNoWorkSpace={jest.fn()}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+
     const ele = screen.getAllByTestId(/connections-tab-button/i);
     fireEvent.click(ele[0]);
     expect(handleChange).toHaveBeenCalledTimes(1);

@@ -17,6 +17,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import TabLabelCanSample from '../index';
+import * as Module from 'react-router'; 
 import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
 import { Route, Router, Switch } from 'react-router';
 import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
@@ -69,6 +70,26 @@ describe('Test TabLabelCanSample Component', () => {
     expect(setIsErrorOnNoWorkSpace).toHaveBeenCalled();
   });
 
+  it('Should render TabLabelCanSample Component', () => {
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <TabLabelCanSample
+              label={mockConnectorTypeData.name}
+              entity={mockConnectorTypeData}
+              initialConnectionId={undefined}
+              toggleLoader={() => null}
+              setIsErrorOnNoWorkSpace={jest.fn()}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    const ele = screen.getByTestId(/connections-tab-label-simple/i);
+    expect(ele).toBeInTheDocument();
+  });
+
   it('Should trigger onWorkspaceCreate Function', async () => {
     const setIsErrorOnNoWorkSpace = jest.fn();
 
@@ -102,7 +123,13 @@ describe('Test TabLabelCanSample Component', () => {
         </Switch>
       </Router>
     );
-
+      // jest.spyOn(Module,'useLocation'
+      // ).mockReturnValue({
+      //   pathname: '',
+      //   state: undefined,
+      //   hash: '',
+      //   search: ''
+      // })
     const ele = screen.getByTestId(/connections-tab-explore/i);
     fireEvent.click(ele);
     expect(ele).toBeInTheDocument();
