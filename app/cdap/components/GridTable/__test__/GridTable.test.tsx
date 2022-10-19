@@ -54,5 +54,5 @@ describe('Testing Grid Table Component', () => {
       </Router>
     );
     expect(container).toBeDefined();
-  })
+  });
 });

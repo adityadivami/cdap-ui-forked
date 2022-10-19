@@ -14,14 +14,13 @@
  * the License.
  */
 
-import { render } from "@testing-library/react";
-import React from "react";
-import NoRecordScreen from "..";
+import { render } from '@testing-library/react';
+import React from 'react';
+import NoRecordScreen from '..';
 
-
-describe("It Should test NoRecordScreen Component",()=>{
-    it("Should render the NonRecordScreen Component",()=>{
-        const container = render(<NoRecordScreen title = {"testing"}  subtitle = {"Unit Testing"}/>)
-        expect(container).toBeDefined();
-    })
-})
+describe('It Should test NoRecordScreen Component', () => {
+  it('Should render the NonRecordScreen Component', () => {
+    const container = render(<NoRecordScreen title={'testing'} subtitle={'Unit Testing'} />);
+    expect(container).toBeDefined();
+  });
+});
