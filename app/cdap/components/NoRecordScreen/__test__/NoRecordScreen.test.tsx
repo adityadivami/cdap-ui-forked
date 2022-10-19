@@ -14,33 +14,14 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+import { render } from "@testing-library/react";
+import React from "react";
+import NoRecordScreen from "..";
 
-export const useStyles = makeStyles({
-  noRecordWrapper: {
-    height: 'calc(100vh - 246px)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    left: 0,
-    bottom: 0,
-    '& *': {
-      fontFamily: "'Noto Sans', sans-serif",
-    },
-  },
-  mainHeaderMessage: {
-    fontSize: '20px',
-    color: '#000000',
-    marginTop: '20px',
-  },
-  subHeaderMessage: {
-    fontSize: '16px',
-    color: '#000000',
-  },
-  innerWrapper: {
-    textAlign: 'center',
-  },
-});
+
+describe("It Should test NoRecordScreen Component",()=>{
+    it("Should render the NonRecordScreen Component",()=>{
+        const container = render(<NoRecordScreen title = {"testing"}  subtitle = {"Unit Testing"}/>)
+        expect(container).toBeDefined();
+    })
+})
