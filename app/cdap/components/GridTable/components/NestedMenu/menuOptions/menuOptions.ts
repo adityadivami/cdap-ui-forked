@@ -60,9 +60,6 @@ export const MENU_OPTIONS = [
     ],
     supported_dataType: ['byte'],
   },
-  // {
-  //   value: 'divider',
-  // },
   {
     value: 'text',
     label: 'Format',

@@ -13,10 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+export interface IItem {
+  label: string;
+  supported_dataType: string[];
+  value: string;
+  options?: [];
+}
 
 export interface IMenuItemComponentProps {
-  item;
-  index: any;
+  item: IItem;
+  index: number;
   onMenuClick: (e: any, item: any) => void;
   columnType: string;
 }

@@ -13,51 +13,52 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import T from 'i18n-react';
 
 export const DATATYPE_OPTIONS = [
   {
     value: 'string',
     label: 'string',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
     value: 'boolean',
     label: 'boolean',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
     value: 'integer',
     label: 'integer',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
     value: 'long',
     label: 'long',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
     value: 'short',
     label: 'short',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
     value: 'float',
     label: 'float',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
     value: 'double',
     label: 'double',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
     value: 'decimal',
     label: 'decimal',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
     value: 'bytes',
     label: 'bytes',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
 ];

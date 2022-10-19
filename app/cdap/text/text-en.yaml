@@ -3457,3 +3457,10 @@ features:
         gridIcon: 'Grid'
         otherIcon: 'Other'
         toggleDescription: 'Function names'
+        all: 'all'
+      nestedMenuInvalidIconOptions:
+        removeInvalidValue: remove-invalid
+        removeInvalidLabel: Remove invalid
+        replaceInvalidValue: replace-invalid
+        replaceInvalidLabel: Replace invalid
+

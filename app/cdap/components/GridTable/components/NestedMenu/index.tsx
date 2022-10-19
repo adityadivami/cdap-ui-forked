@@ -75,7 +75,6 @@ export default function({
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
         onClose={(e) => {
-          //   e.preventDefault();
           setAnchorEl(null);
         }}
         onClick={(e) => {

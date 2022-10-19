@@ -13,16 +13,25 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import T from 'i18n-react';
 
 export const INVALID_ICON_OPTIONS = [
   {
-    value: 'remove-invalid',
-    label: 'Remove invalid',
-    supported_dataType: ['all'],
+    value: T.translate(
+      'features.GridPage.transformationsToolbar.nestedMenuInvalidIconOptions.removeInvalidValue'
+    ),
+    label: T.translate(
+      'features.GridPage.transformationsToolbar.nestedMenuInvalidIconOptions.removeInvalidLabel'
+    ),
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
   {
-    value: 'replace-invalid',
-    label: 'Replace invalid',
-    supported_dataType: ['all'],
+    value: T.translate(
+      'features.GridPage.transformationsToolbar.nestedMenuInvalidIconOptions.replaceInvalidValue'
+    ),
+    label: T.translate(
+      'features.GridPage.transformationsToolbar.nestedMenuInvalidIconOptions.replaceInvalidLabel'
+    ),
+    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
   },
 ];

@@ -47,7 +47,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         onClick={(e) => onMenuClick(e, item)}
       >
         <span>{item.label} </span>
-        {item.options?.length && menuArrowIcon}
+        {item?.options?.length && menuArrowIcon}
       </MenuItem>
     );
   }

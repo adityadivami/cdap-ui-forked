@@ -16,8 +16,6 @@
 
 import { NATIVE_NUMBER_TYPES, NUMBER_TYPES } from 'services/global-constants';
 
-// TODO: Need to import "Calculate" from directives
-
 export const MATH_OPTIONS = [
   {
     value: 'algebra',
