@@ -25,10 +25,10 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import T from 'i18n-react';
 
-export default function SubHeader() {
+export default function() {
   const classes = useStyles();
   const handleAddConnection = () => {
-    localStorage.setItem('addConnection', 'true');
+    localStorage.setItem('isNewWranglerRequested', 'true');
   };
 
   return (
