@@ -36,6 +36,7 @@ describe('Testing Grid Table Component', () => {
   );
 
   it('Should check if the component is rendered', () => {
+
     expect(getByTestId('grid-table')).toBeInTheDocument();
   });
 });
