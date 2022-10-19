@@ -19,16 +19,16 @@ import { makeStyles } from '@material-ui/styles';
 export const useStyles = makeStyles(() => {
   return {
     paper: {
-      top: '46px',
+      top: 46,
       height: 'calc(100vh - 47px)',
     },
     drawerContainerStyles: {
       width: 460,
       height: '100%',
-      paddingLeft: '30px',
+      paddingLeft: 30,
     },
     headerStyles: {
-      height: '60px',
+      height: 60,
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -43,13 +43,16 @@ export const useStyles = makeStyles(() => {
     pointerStyles: {
       cursor: 'pointer',
     },
+    chevronLeftRounded: {
+      fontSize: '24px',
+    },
     headingTextStyles: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 20,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
+      letterSpacing: 0.15,
       color: '#000000',
     },
     headerRightStyles: {
@@ -60,16 +63,16 @@ export const useStyles = makeStyles(() => {
       width: 1,
       height: 28,
       backgroundColor: '#DADCE0',
-      margin: '0 15px',
+      margin: 0.15,
     },
     headerTextWithBackIconStyles: {
       display: 'flex',
       alignItems: 'center',
     },
     headerBackIconStyles: {
-      marginRight: '10px',
-      width: '10px',
-      height: '20px',
+      marginRight: 10,
+      width: 10,
+      height: 20,
       cursor: 'pointer',
     },
   };

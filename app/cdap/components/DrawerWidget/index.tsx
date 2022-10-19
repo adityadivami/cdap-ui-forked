@@ -19,33 +19,26 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import React, { Fragment } from 'react';
 import DrawerWidgetHeading from './DrawerWidgetHeader';
 import { useStyles } from './styles';
+import { IDrawerWidgetProps } from './types';
+import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 
-export default function(props) {
+export default function({
+  headingText,
+  openDrawer,
+  showDivider,
+  headerActionTemplate,
+  children,
+  closeClickHandler,
+  showBackIcon,
+  anchor,
+}: IDrawerWidgetProps) {
   const classes = useStyles();
-  const {
-    headingText,
-    openDrawer,
-    showDivider,
-    headerActionTemplate,
-    children,
-    closeClickHandler,
-    showBackIcon,
-    anchor,
-  } = props;
-
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
-            {showBackIcon && (
-              <img
-                onClick={closeClickHandler}
-                className={classes.headerBackIconStyles}
-                src="/cdap_assets/img/back-icon.svg"
-                alt="Back icon"
-              />
-            )}
+            {showBackIcon && <ChevronLeftRoundedIcon className={classes.chevronLeftRounded} />}
             <DrawerWidgetHeading headingText={headingText} />
           </div>
           <Box className={classes.headerRightStyles}>

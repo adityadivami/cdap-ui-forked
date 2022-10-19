@@ -14,19 +14,9 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
-import React from 'react';
-import { useStyles } from '../styles';
-import { UnderLineSVG } from '../iconStore';
-import { IHeaderText } from '../types';
-
-export default function({ headingText }: IHeaderText) {
-  const classes = useStyles();
-
-  return (
-    <Box className={classes.headingStyles}>
-      <div className={classes.headingTextStyles}>{headingText}</div>
-      <UnderLineSVG />
-    </Box>
-  );
+export interface IInputCheckboxProps {
+  label: string;
+  value: any;
+  onChange: any;
+  className: any;
 }

@@ -14,25 +14,19 @@
  * the License.
  */
 
-import React, { useState } from 'react';
-import DrawerWidget from '.';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
-export default function() {
-  const [open, setOpen] = useState<boolean>(true);
+export interface IHeaderText {
+  headingText: string | number | ReactNode | boolean;
+}
 
-  const closeClickHandler = () => {
-    setOpen(false);
-  };
-
-  return (
-    <DrawerWidget
-      headingText={'Drawer Widget Header'}
-      openDrawer={open}
-      showDivider={true}
-      headerActionTemplate={<button>Click</button>}
-      closeClickHandler={closeClickHandler}
-    >
-      <div>This is Drawer Body</div>
-    </DrawerWidget>
-  );
+export interface IDrawerWidgetProps {
+  headingText?: string | ReactNode;
+  openDrawer: boolean | Dispatch<SetStateAction<boolean>> | any;
+  showDivider?: boolean;
+  headerActionTemplate?: any;
+  children?: any[] | boolean;
+  closeClickHandler?: any;
+  showBackIcon?: boolean;
+  anchor?: any;
 }
