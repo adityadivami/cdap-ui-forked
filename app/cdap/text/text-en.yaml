@@ -3467,3 +3467,5 @@ features:
   WranglerNewSelectCoulmnList:
     noColumns: No columns to show
     noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
+    no: No
+    zero: '0'

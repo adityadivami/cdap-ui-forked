@@ -32,19 +32,20 @@ import { prepareDataQualtiy } from '../CircularProgressBar/utils';
 import DataQualityProgress from '../CircularProgressBar';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
+import { ISelectColumnList } from './types';
+import { IDataQuality, IHeaderNamesList } from '../types';
 
-export default function(props) {
-  const {
-    directiveFunctionSupportedDataType,
-    selectedColumnsCount,
-    columnData,
-    setSelectedColumns,
-    dataQuality,
-  } = props;
-  const [columns, setColumns] = useState(columnData);
-  const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
-  const [selectedColumns, setSelectedColumn] = useState([]);
-  const [focused, setFocused] = useState(false);
+export default function({
+  directiveFunctionSupportedDataType,
+  selectedColumnsCount,
+  columnData,
+  setSelectedColumns,
+  dataQuality,
+}: ISelectColumnList) {
+  const [columns, setColumns] = useState(columnData as IHeaderNamesList[]);
+  const [dataQualityValue, setDataQualityValue] = useState(dataQuality as IDataQuality[]);
+  const [selectedColumns, setSelectedColumn] = useState([] as IHeaderNamesList[]);
+  const [focused, setFocused] = useState<boolean>(false);
   const classes = useStyles();
   const ref = useRef(null);
 
@@ -59,21 +60,21 @@ export default function(props) {
         });
 
   useEffect(() => {
-    const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
+    const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(dataQuality, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
-  const onSelect = (column) => {
+  const onSelect = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
     setSelectedColumn([column]);
   };
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue = columnData.filter((el) =>
+      const columnValue: IHeaderNamesList[] = columnData.filter((el) =>
         el?.label.toLowerCase().includes(event.target.value.toLowerCase())
       );
-      if (columnValue.length) {
+      if (columnValue?.length) {
         setColumns(columnValue);
       } else {
         setColumns([]);
@@ -84,7 +85,7 @@ export default function(props) {
   };
 
   const handleFocus = () => {
-    ref?.current.focus();
+    ref?.current?.focus();
     setFocused(true);
   };
 
@@ -95,8 +96,8 @@ export default function(props) {
           {selectedColumnsCount
             ? selectedColumnsCount > 10
               ? selectedColumnsCount
-              : `0${selectedColumnsCount}`
-            : 'No '}{' '}
+              : `${T.translate('features.WranglerNewSelectCoulmnList.zero')}${selectedColumnsCount}`
+            : `${T.translate('features.WranglerNewSelectCoulmnList.no')}`}
           &nbsp;{T.translate('features.WranglerNewAddTransformation.columnsSelected')}
         </div>
         <div className={classes.searchFormControl}>
@@ -108,7 +109,7 @@ export default function(props) {
             onBlur={() => setFocused(false)}
           />
           <Box className={classes.searchInputAdornment} onClick={handleFocus}>
-            {SearchIcon()}
+            {SearchIcon}
           </Box>
         </div>
       </div>
@@ -165,7 +166,7 @@ export default function(props) {
                       >
                         <Radio
                           color="primary"
-                          onChange={(e) => onSelect(eachColumn)}
+                          onChange={() => onSelect(eachColumn)}
                           checked={
                             selectedColumns.filter((el) => el.label == eachColumn.label).length
                               ? true
@@ -208,7 +209,7 @@ export default function(props) {
                       >
                         <Radio
                           color="primary"
-                          onChange={(e) => onSelect(eachColumn)}
+                          onChange={() => onSelect(eachColumn)}
                           checked={
                             selectedColumns.filter((el) => el.label == eachColumn.label).length
                               ? true

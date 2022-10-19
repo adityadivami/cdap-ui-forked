@@ -28,7 +28,7 @@ export const useStyles = makeStyles(() => {
       paddingLeft: '30px',
     },
     headerStyles: {
-      height: '60px',
+      height: 60,
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -44,7 +44,6 @@ export const useStyles = makeStyles(() => {
       cursor: 'pointer',
     },
     headingTextStyles: {
-      fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 20,
@@ -67,9 +66,9 @@ export const useStyles = makeStyles(() => {
       alignItems: 'center',
     },
     headerBackIconStyles: {
-      marginRight: '10px',
-      width: '10px',
-      height: '20px',
+      marginRight: 10,
+      width: 10,
+      height: 20,
       cursor: 'pointer',
     },
   };
