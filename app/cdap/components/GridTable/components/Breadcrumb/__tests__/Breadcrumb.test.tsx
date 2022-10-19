@@ -47,8 +47,4 @@ describe("Test Breadcrumb Component", () => {
       "Home"
     );
   });
-
-  // it('Should have the Data Sources text in the Breadcrumb', () => {
-  //   expect(screen.getByTestId('breadcrumb-data-sources-text')).toHaveTextContent('Data Sources');
-  // });
 });
