@@ -163,7 +163,7 @@ export default function WrangleCard() {
             style={{ textDecoration: 'none' }}
             data-testid={'item' + index}
           >
-            <Card className={classes.card}>
+            <Card className={classes.card} data-testid={index + item.name}>
               <Box className={classes.cardContent} key={index}>
                 {item.SVG}
                 <Typography className={classes.cardText}>{item.name}</Typography>
