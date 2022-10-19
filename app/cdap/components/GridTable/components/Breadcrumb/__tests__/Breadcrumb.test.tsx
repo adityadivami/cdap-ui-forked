@@ -17,19 +17,26 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import BreadCrumb from '..';
+import Breadcrumb from '..';
 import { createBrowserHistory as createHistory } from 'history';
 
 const history = createHistory({
   basename: '/',
 });
 
+const location = {
+  state: {
+    from: 'Home',
+    path: 'wrangle-home',
+  },
+};
+
 describe('Test Breadcrumb Component', () => {
   render(
     <Router history={history}>
       <Switch>
         <Route>
-          <BreadCrumb datasetName="abc" />
+          <Breadcrumb workspaceName="abc" location={location} />
         </Route>
       </Switch>
     </Router>
@@ -38,8 +45,4 @@ describe('Test Breadcrumb Component', () => {
   it('Should have the Home text in the Breadcrumb', () => {
     expect(screen.getByTestId('breadcrumb-home-text')).toHaveTextContent('Home');
   });
-
-  // it('Should have the Data Sources text in the Breadcrumb', () => {
-  //   expect(screen.getByTestId('breadcrumb-data-sources-text')).toHaveTextContent('Data Sources');
-  // });
 });

@@ -14,19 +14,25 @@
  *  the License.
  */
 
-import { render } from '@testing-library/react';
-import React from 'react';
-import GridHeaderCell from '..';
-import { screen } from '@testing-library/dom';
+import { checkFrequentlyOccuredValues, convertNonNullPercent } from '../utils';
+import { mock, mockUtilResult } from '../mock/mockDataForGrid';
 
-describe('To Test Grid Header Cell Component', () => {
-  const arr = ['PostgrSQL', 'SQL'];
-  it('Should check if the label is displayed as expected', () => {
-    render(<GridHeaderCell label={'abc'} types={arr} />);
-    const ele = screen.getByTestId(`grid-header-cell-abc`);
-    expect(ele).toHaveTextContent('abc');
+describe('Test util Function checkFrequentlyOccuredValues', () => {
+  it('Should return expected output', () => {
+    const key = 'body_4';
+    expect(checkFrequentlyOccuredValues(mock, key)).toStrictEqual(mockUtilResult);
   });
-  it('Renders Component with empty types array to trigger Null', () => {
-    render(<GridHeaderCell label={'abc'} types={[]} />);
+
+  it('should be undefined and trigger 0', () => {
+    convertNonNullPercent(
+      {
+        headers: [],
+        types: undefined,
+        values: [],
+        summary: undefined,
+        message: '',
+      },
+      undefined
+    );
   });
 });

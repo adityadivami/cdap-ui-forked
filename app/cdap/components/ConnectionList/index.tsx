@@ -135,13 +135,11 @@ export default function ConnectionList() {
 
   const fetchEntities = async (connectionName, url = pathFromUrl) => {
     const pathDesired = url ? url : pathFromUrl;
-    const entitiesPromise = exploreConnection({
+    const entitiesPromise = await exploreConnection({
       connectionid: connectionName,
       path: pathDesired,
     });
-    return entitiesPromise.then((values) => {
-      return values;
-    });
+    return entitiesPromise;
   };
 
   const selectedTabValueHandler = (entity: IRecords, index: number) => {
@@ -251,6 +249,7 @@ export default function ConnectionList() {
                 connectionId={connectionId || ''}
                 toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
                 setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                data-testid="connections-tabs-list-change"
               />
             </Box>
           );
