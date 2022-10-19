@@ -21,22 +21,25 @@ export const useStyles = makeStyles({
   breadCombContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    height: '48px',
+    height: 48,
     alignItems: 'center',
-    marginRight: '30px',
-    marginLeft: '34px',
+    marginRight: 30,
+    marginLeft: 34,
+    '& .MuiBreadcrumbs-li, .MuiTypography-body1': {
+      fontSize: 14,
+    },
   },
   breadcrumbLabel: {
     color: blue[500],
-    fontSize: '14px',
+    fontSize: 14,
     fontWeight: 400,
   },
   home: {
-    width: '41px',
-    height: '21px',
+    width: 41,
+    height: 21,
   },
   dataset: {
-    width: '81px',
-    height: '21px',
+    width: 81,
+    height: 21,
   },
 });
