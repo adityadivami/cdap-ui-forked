@@ -14,22 +14,23 @@
  * the License.
  */
 
-export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
-}
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
-}
-export interface IDataQuality {
-  [key: string]: string;
-}
-export interface IAddTransformationProp {
-  directiveFunctionSupportedDataType: string[];
-  functionName: string;
-  columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality;
-  callBack: () => void;
-  applyTransformation: (directive: string, columnSelected) => void;
+import React from 'react';
+import { useStyles } from '../styles';
+import T from 'i18n-react';
+
+export default function(props) {
+  const { selectedColumnsCount } = props;
+  const classes = useStyles();
+
+  return (
+    <div className={classes.columnsCountTextStyles}>
+      {selectedColumnsCount
+        ? selectedColumnsCount > 10
+          ? selectedColumnsCount
+          : `0${selectedColumnsCount}`
+        : 'No '}
+      &nbsp;
+      {T.translate('features.WranglerNewAddTransformation.columnsSelected')}
+    </div>
+  );
 }
