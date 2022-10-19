@@ -42,9 +42,13 @@ export interface IExecuteAPIResponse {
 export interface IHeaderNamesList {
   name: string;
   label: string;
-  type: Array<string | number | IRecords | boolean>;
+  type: string[];
 }
 
 export interface IObject {
   [key: string]: string | number | IRecords | boolean;
+}
+
+export interface IDataQuality {
+  [key: string]: string;
 }

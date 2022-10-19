@@ -3459,11 +3459,11 @@ features:
         toggleDescription: 'Function names'
   WranglerNewAddTransformation:
     columnsSelected: columns selected
-    selectColumn: Select column(s) to apply this function
     columns: Columns
-    nullValues: Null Values
     dataQuality: Data Quality
     done: Done
+    nullValues: Null Values
+    selectColumn: Select column(s) to apply this function
   WranglerNewSelectCoulmnList:
     noColumns: No columns to show
     noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype

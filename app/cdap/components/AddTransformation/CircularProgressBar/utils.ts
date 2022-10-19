@@ -16,7 +16,7 @@
 
 import { IHeaderNamesList, IDataQuality, IRecords } from '../types';
 
-export const prepareDataQualtiy = (statistics: IDataQuality[], columnList: IHeaderNamesList[]) => {
+export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeaderNamesList[]) => {
   const dataQualityToArray = Object.entries(statistics);
   const dataQuality = [] as IDataQuality[];
   columnList.map((columnName: IHeaderNamesList) => {

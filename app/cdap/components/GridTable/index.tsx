@@ -33,7 +33,14 @@ import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IObject,
+  IParams,
+  IRecords,
+  IDataQuality,
+} from './types';
 import { convertNonNullPercent } from './utils';
 import AddTransformation from 'components/AddTransformation';
 
@@ -46,10 +53,10 @@ export default function GridTable() {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
-  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
+  const [headersNamesList, setHeadersNamesList] = useState([] as IHeaderNamesList[]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
-  const [missingDataList, setMissingDataList] = useState([]);
+  const [missingDataList, setMissingDataList] = useState([] as IDataQuality[]);
   const [workspaceName, setWorkspaceName] = useState('');
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
@@ -60,7 +67,7 @@ export default function GridTable() {
   const [showBreadCrumb, setShowBreadCrumb] = useState(true);
   const [directiveFunction, setDirectiveFunction] = useState('');
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
-  const [dataQuality, setDataQuality] = useState({});
+  const [dataQuality, setDataQuality] = useState({} as IDataQuality);
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);

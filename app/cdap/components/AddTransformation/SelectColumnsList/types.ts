@@ -23,4 +23,5 @@ export interface ISelectColumnList {
   columnData: IHeaderNamesList[];
   setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
   dataQuality: IDataQuality[];
+  functionName: string;
 }

@@ -14,26 +14,16 @@
  * the License.
  */
 
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Radio,
-  Typography,
-} from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
 import { useStyles } from '../styles';
 import { SearchIcon } from '../iconStore';
-import { prepareDataQualtiy } from '../CircularProgressBar/utils';
-import DataQualityProgress from '../CircularProgressBar';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
 import { ISelectColumnList } from './types';
-import { IDataQuality, IHeaderNamesList } from '../types';
+import { IHeaderNamesList } from '../types';
+import ColumnTable from '../ColumnTable';
+import { multipleColumnSelected } from '../constants';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -41,32 +31,66 @@ export default function({
   columnData,
   setSelectedColumns,
   dataQuality,
+  functionName,
 }: ISelectColumnList) {
   const [columns, setColumns] = useState(columnData as IHeaderNamesList[]);
-  const [dataQualityValue, setDataQualityValue] = useState(dataQuality as IDataQuality[]);
   const [selectedColumns, setSelectedColumn] = useState([] as IHeaderNamesList[]);
   const [focused, setFocused] = useState<boolean>(false);
+  const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const classes = useStyles();
   const ref = useRef(null);
 
-  const no_match =
+  useEffect(() => {
+    const multiSelect = multipleColumnSelected.filter((el) => el.value == functionName);
+    if (multiSelect.length) {
+      setIsSingleSelection(false);
+    }
+  }, []);
+
+  const columnsAsPerType: IHeaderNamesList[] | string[] =
     directiveFunctionSupportedDataType?.length > 0 &&
     directiveFunctionSupportedDataType?.includes('all')
       ? directiveFunctionSupportedDataType?.filter((el) => el == 'all')
       : columns.filter((object1) => {
           return directiveFunctionSupportedDataType?.some((object2) => {
-            return object2.includes(object1?.type[0]?.toLowerCase());
+            return object2?.includes(object1?.type[0]?.toLowerCase());
           });
         });
 
-  useEffect(() => {
-    const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(dataQuality, columnData);
-    setDataQualityValue(getPreparedDataQuality);
-  }, []);
-
-  const onSelect = (column: IHeaderNamesList) => {
+  const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
     setSelectedColumn([column]);
+  };
+
+  const onMultipleSelection = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    column: IHeaderNamesList
+  ) => {
+    if (event.target.checked) {
+      setSelectedColumns((prev) => [...prev, column]);
+      setSelectedColumn([...selectedColumns, column]);
+    } else {
+      const indexOfUnchecked = selectedColumns.findIndex((el) => el.label === column.label);
+      if (indexOfUnchecked > -1) {
+        const clone_columns = [...selectedColumns];
+        const remaining_col = clone_columns.splice(indexOfUnchecked, 1);
+        setSelectedColumns(clone_columns);
+        setSelectedColumn(clone_columns);
+      }
+    }
+  };
+
+  const handleDisableCheckbox = () => {
+    const multiSelect = multipleColumnSelected.filter(
+      (el) => el.value == functionName && el.isMoreThanTwo
+    );
+    if (selectedColumns.length === 0 || selectedColumns.length < 2) {
+      return false;
+    } else if (multiSelect.length) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +137,7 @@ export default function({
           </Box>
         </div>
       </div>
-      {no_match.length === 0 ? (
+      {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
@@ -126,122 +150,16 @@ export default function({
           </Box>
         </Box>
       ) : (
-        <TableContainer component={Box}>
-          <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
-            <TableHead>
-              <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
-                <TableCell
-                  classes={{
-                    head: `${classes.recipeStepsTableHeadStyles} ${classes.columnstyles}`,
-                  }}
-                ></TableCell>
-                <TableCell
-                  classes={{
-                    head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}`,
-                  }}
-                >
-                  {T.translate('features.WranglerNewAddTransformation.columns')}
-                </TableCell>
-                <TableCell
-                  classes={{
-                    head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}`,
-                  }}
-                >
-                  {T.translate('features.WranglerNewAddTransformation.nullValues')}
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {columns.map((eachColumn, index) => {
-                if (directiveFunctionSupportedDataType.includes('all')) {
-                  return (
-                    <TableRow
-                      className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}
-                      key={index}
-                    >
-                      <TableCell
-                        classes={{
-                          body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
-                        }}
-                      >
-                        <Radio
-                          color="primary"
-                          onChange={() => onSelect(eachColumn)}
-                          checked={
-                            selectedColumns.filter((el) => el.label == eachColumn.label).length
-                              ? true
-                              : false
-                          }
-                        />
-                      </TableCell>
-                      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
-                        <Typography className={classes.recipeStepsActionTypeStyles}>
-                          {eachColumn.label}
-                        </Typography>
-                        <Typography className={classes.recipeStepsActionTypeStyles}>
-                          {eachColumn.type}
-                        </Typography>
-                      </TableCell>
-                      <TableCell
-                        className={[
-                          classes.recipeStepsTableRowStyles,
-                          classes.circularBarCell,
-                        ].join(' ')}
-                      >
-                        {dataQualityValue?.length && (
-                          <DataQualityProgress value={dataQualityValue[index]?.value} />
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  );
-                } else if (
-                  directiveFunctionSupportedDataType?.includes(eachColumn?.type[0]?.toLowerCase())
-                ) {
-                  return (
-                    <TableRow
-                      className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}
-                      key={index}
-                    >
-                      <TableCell
-                        classes={{
-                          body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
-                        }}
-                      >
-                        <Radio
-                          color="primary"
-                          onChange={() => onSelect(eachColumn)}
-                          checked={
-                            selectedColumns.filter((el) => el.label == eachColumn.label).length
-                              ? true
-                              : false
-                          }
-                        />
-                      </TableCell>
-                      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
-                        <Typography className={classes.recipeStepsActionTypeStyles}>
-                          {eachColumn.label}
-                        </Typography>
-                        <Typography className={classes.recipeStepsActionTypeStyles}>
-                          {eachColumn.type}
-                        </Typography>
-                      </TableCell>
-                      <TableCell
-                        className={[
-                          classes.recipeStepsTableRowStyles,
-                          classes.circularBarCell,
-                        ].join(' ')}
-                      >
-                        {dataQualityValue?.length && (
-                          <DataQualityProgress value={dataQualityValue[index]?.value} />
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  );
-                }
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <ColumnTable
+          dataQualityValue={dataQuality}
+          onSingleSelection={onSingleSelection}
+          handleDisableCheckbox={handleDisableCheckbox}
+          onMultipleSelection={onMultipleSelection}
+          columns={columns}
+          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+          isSingleSelection={isSingleSelection}
+          selectedColumns={selectedColumns}
+        />
       )}
     </section>
   );
