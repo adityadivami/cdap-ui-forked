@@ -26,8 +26,12 @@ export default function({ title, subtitle }) {
     <Box className={classes.noRecordWrapper}>
       <Box className={classes.innerWrapper}>
         {NoDataSVG}
-        <Typography className={classes.mainHeaderMessage}>{title}</Typography>
-        <Typography className={classes.subHeaderMessage}>{subtitle}</Typography>
+        <Typography className={classes.mainHeaderMessage} data-testid="main-header-message">
+          {title}
+        </Typography>
+        <Typography className={classes.subHeaderMessage} data-testid="sub-header-message">
+          {subtitle}
+        </Typography>
       </Box>
     </Box>
   );
