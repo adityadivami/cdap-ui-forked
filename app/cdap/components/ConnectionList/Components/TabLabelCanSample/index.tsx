@@ -92,9 +92,10 @@ export default function TabLabelCanSample({
         setIsErrorOnNoWorkSpace(true);
       });
   };
-
-  const indexOfSelectedDataset = location.pathname.lastIndexOf('/');
-  const requiredPath = location.pathname.slice(indexOfSelectedDataset + 1);
+  const location = useLocation();
+  const indexOfSelectedDataset = location?.pathname?.lastIndexOf('/');
+  const requiredPath =
+    indexOfSelectedDataset && location.pathname.slice(indexOfSelectedDataset + 1);
 
   return workspaceId ? (
     <Redirect
