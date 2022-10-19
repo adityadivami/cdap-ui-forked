@@ -48,3 +48,19 @@ export interface IHeaderNamesList {
 export interface IObject {
   [key: string]: string;
 }
+
+export interface ITypeArrayOfMissingValue {
+  label: string;
+  count: string | number;
+}
+
+export interface IMetricArray {
+  name: string;
+  values: ITypeArrayOfMissingValue[];
+}
+
+export interface IHeadersData {
+  name: string;
+  label: string;
+  type: any[];
+}

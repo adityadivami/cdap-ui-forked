@@ -31,7 +31,16 @@ import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IHeadersData,
+  IMetricArray,
+  IObject,
+  IParams,
+  IRecords,
+  ITypeArrayOfMissingValue,
+} from './types';
 import { convertNonNullPercent } from './utils';
 import T from 'i18n-react';
 
@@ -136,11 +145,11 @@ export default function GridTable() {
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
   const createMissingData = (statistics: IObject) => {
     const statisticObjectToArray = Object.entries(statistics);
-    const metricArray = [];
+    const metricArray: IMetricArray[] = [];
     statisticObjectToArray.forEach(([key, value]) => {
       const headerKeyTypeArray = Object.entries(value);
-      const typeArrayOfMissingValue = [];
-      headerKeyTypeArray.forEach(([vKey, vValue]) => {
+      const typeArrayOfMissingValue: ITypeArrayOfMissingValue[] = [];
+      headerKeyTypeArray?.forEach(([vKey, vValue]) => {
         typeArrayOfMissingValue.push({
           label: vKey === 'general' ? 'Missing/Null' : '',
           count: vKey === 'types' ? '' : convertNonNullPercent(gridData, vValue),
@@ -148,7 +157,7 @@ export default function GridTable() {
       }),
         metricArray.push({
           name: key,
-          values: typeArrayOfMissingValue.concat(invalidCountArray),
+          values: typeArrayOfMissingValue?.concat(invalidCountArray),
         });
     });
     return metricArray;
@@ -157,10 +166,11 @@ export default function GridTable() {
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
-    const headersData = createHeadersData(rawData.headers, rawData.types);
+    const headersData: IHeadersData[] = createHeadersData(rawData.headers, rawData.types);
     setHeadersNamesList(headersData);
     if (rawData && rawData?.summary && rawData?.summary?.statistics) {
-      const missingData = createMissingData(gridData?.summary?.statistics);
+      const missingData: IMetricArray[] = createMissingData(gridData?.summary?.statistics);
+      console.log(missingData, 'headers data');
       setMissingDataList(missingData);
     }
     const rowData =
@@ -171,7 +181,7 @@ export default function GridTable() {
         const { ...rest } = eachRow;
         return rest;
       });
-
+    console.log(rawData, 'raw data', rowData, 'rowdat');
     setRowsDataList(rowData);
   };
 
@@ -202,7 +212,7 @@ export default function GridTable() {
           </TableRow>
           <TableRow>
             {missingDataList?.length > 0 &&
-              headersNamesList.length > 0 &&
+              headersNamesList?.length > 0 &&
               headersNamesList.map((each, index) => {
                 return missingDataList.map((item, itemIndex) => {
                   if (item.name === each.name) {

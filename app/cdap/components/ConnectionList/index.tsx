@@ -135,7 +135,7 @@ export default function ConnectionList() {
     toggleLoader(false);
   };
 
-  const fetchEntities = async (connectionName, url = pathFromUrl) => {
+  const fetchEntities = async (connectionName: string, url: string = pathFromUrl) => {
     const pathDesired = url ? url : pathFromUrl;
     const entitiesPromise = await exploreConnection({
       connectionid: connectionName,

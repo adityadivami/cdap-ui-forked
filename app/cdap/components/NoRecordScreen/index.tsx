@@ -19,8 +19,9 @@ import { NoDataSVG } from 'components/GridTable/iconStore';
 import { useStyles } from './styles';
 import { Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import { INoDataScreenProps } from './types';
 
-export default function({ title, subtitle }) {
+export default function({ title, subtitle }: INoDataScreenProps) {
   const classes = useStyles();
   return (
     <Box className={classes.noRecordWrapper}>
