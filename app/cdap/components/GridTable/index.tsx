@@ -20,6 +20,7 @@ import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import NoRecordScreen from 'components/NoRecordScreen/index';
+import RecipeSteps from 'components/RecipeSteps';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import T from 'i18n-react';
@@ -46,6 +47,7 @@ export default function GridTable() {
   const [loading, setLoading] = useState(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
+  const [showRecipePanel, setShowRecipePanel] = useState(false);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
   const [workspaceName, setWorkspaceName] = useState('');
@@ -184,9 +186,17 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  const showRecipePanelHandler = () => {
+    setShowRecipePanel((prev) => !prev);
+  };
+
   return (
     <Box>
+      <button onClick={showRecipePanelHandler}>recipe count</button>
       <Breadcrumb datasetName={workspaceName} location={location} />
+      {showRecipePanel && (
+        <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
+      )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.gridTable.title')}
