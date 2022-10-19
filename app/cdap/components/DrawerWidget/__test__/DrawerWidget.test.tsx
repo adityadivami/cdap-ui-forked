@@ -15,7 +15,7 @@
  */
 
 import { render } from '@testing-library/react';
-import ParsingHeaderActionTemplate from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate';
+
 import { PARSING } from 'components/ParsingDrawer/constants';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
@@ -40,7 +40,7 @@ describe('It should test DrawerWidget Component', () => {
               headingText={PARSING}
               openDrawer={jest.fn}
               showDivider={true}
-              headerActionTemplate={<ParsingHeaderActionTemplate />}
+              headerActionTemplate={<div />}
               closeClickHandler={closeClickHandler}
             />
           </Route>

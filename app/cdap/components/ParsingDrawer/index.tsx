@@ -35,7 +35,7 @@ import { useStyles } from './styles';
 export default function({ setLoading, updateDataTranformation }) {
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [properties, setProperties] = useState(defaultProperties);
-  const [schemaValue, setSchemaValue] = useState(null);
+  // const [schemaValue, setSchemaValue] = useState(null);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
   const [errorOnTransformation, setErrorOnTransformation] = useState(defaultErrorOnTransformations);
   const [connectionPayload, setConnectionPayload] = useState(defaultConnectionPayload);
@@ -50,35 +50,58 @@ export default function({ setLoading, updateDataTranformation }) {
       sampleRequest: {
         properties: {
           ...properties,
-          schema: schemaValue != null ? JSON.stringify(schemaValue) : null,
+          schema: null,
           _pluginName: null,
         },
         limit: 1000,
       },
     });
     setDrawerStatus(true);
-  }, [dataprep, properties, schemaValue]);
+  }, [dataprep, properties]);
 
-  const createWorkspaceInternal = async (entity, parseConfig = {}) => {
-    try {
-      setLoading(true);
-      const wid = await createWorkspace({
-        entity,
-        connection: dataprep.insights.name,
-        properties: connectionPayload.sampleRequest.properties,
+  // const createWorkspaceInternal = async (entity, parseConfig) => {
+  //   try {
+  //     setLoading(true);
+  // const wid = await createWorkspace({
+  //   entity,
+  //   connection: dataprep.insights.name,
+  //   properties: connectionPayload.sampleRequest.properties,
+  // });
+  //     console.log(wid);
+  //     if (onWorkspaceCreate) {
+  //       return onWorkspaceCreate(wid);
+  //     }
+  // setDrawerStatus(false);
+  // updateDataTranformation(wid);
+  //   } catch (err) {
+  // setErrorOnTransformation({
+  //   open: true,
+  //   message: 'Selected Transformation Cannot Be Applied',
+  // });
+  // setLoading(false);
+  //   }
+  // };
+  const createWorkspaceInternal = (entity, parseConfig) => {
+    setLoading(true);
+    createWorkspace({
+      entity,
+      connection: dataprep.insights.name,
+      properties: connectionPayload.sampleRequest.properties,
+    })
+      .then((res) => {
+        if (onWorkspaceCreate) {
+          return onWorkspaceCreate(res);
+        }
+        setDrawerStatus(false);
+        updateDataTranformation(res);
+      })
+      .catch((err) => {
+        setErrorOnTransformation({
+          open: true,
+          message: 'Selected Transformation Cannot Be Applied',
+        });
+        setLoading(false);
       });
-      if (onWorkspaceCreate) {
-        return onWorkspaceCreate(wid);
-      }
-      setDrawerStatus(false);
-      updateDataTranformation(wid);
-    } catch (err) {
-      setErrorOnTransformation({
-        open: true,
-        message: 'Selected Transformation Cannot Be Applied',
-      });
-      setLoading(false);
-    }
   };
 
   const onConfirm = async (parseConfig) => {

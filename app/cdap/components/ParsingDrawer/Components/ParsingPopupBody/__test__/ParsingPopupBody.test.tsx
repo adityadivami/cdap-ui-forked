@@ -18,7 +18,7 @@ import React from 'react';
 import { createBrowserHistory as createHistory } from 'history';
 import { Router, Route, Switch } from 'react-router';
 import ParsingPopupBody from '..';
-import { fireEvent, render, within } from '@testing-library/react';
+import { fireEvent, render, within, screen } from '@testing-library/react';
 import { CHAR_ENCODING_OPTIONS, FORMAT_OPTIONS } from '../parsingOptions';
 
 const history = createHistory({
@@ -58,5 +58,32 @@ describe('It Should Test the ParsingPopupBody component', () => {
     const option3 = getAllByTestId('input-select-1')[1];
     fireEvent.click(option3);
     expect(handleChange).toHaveBeenCalled();
+  });
+  it('Should test whether ParsingPopupBody Component is rendered or not', () => {
+    const handleChange = jest.fn();
+
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <ParsingPopupBody
+              values={{
+                format: 'csv',
+                fileEncoding: 'UTF-8',
+                enableQuotedValues: false,
+                skipHeader: false,
+              }}
+              changeEventListener={handleChange}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    const renderedCheckbox = screen.getByTestId(
+      'parsing-checkbox-features.WranglerNewParsingDrawer.useFirstRowAsHeader'
+    );
+    expect(renderedCheckbox).toBeInTheDocument();
+    fireEvent.click(renderedCheckbox);
+    fireEvent.change(renderedCheckbox, { target: { checked: true } });
   });
 });
