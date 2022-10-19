@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 import {
   Box,
   Checkbox,
@@ -18,20 +34,21 @@ import DataQualityProgress from '../CircularProgressBar';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import { multipleColumnSelected } from '../constants';
 import T from 'i18n-react';
+import { ISelectMultipleColumnList } from './types';
+import { IHeaderNamesList, IDataQuality } from '../types';
 
-const SelectColumnsList = (props) => {
-  const {
-    directiveFunctionSupportedDataType,
-    selectedColumnsCount,
-    columnData,
-    setSelectedColumns,
-    dataQuality,
-    functionName,
-  } = props;
-  const [columns, setColumns] = useState(columnData);
-  const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
-  const [selectedColumns, setSelectedColumn] = useState([]);
-  const [focused, setFocused] = useState(false);
+export default function({
+  directiveFunctionSupportedDataType,
+  selectedColumnsCount,
+  columnData,
+  setSelectedColumns,
+  dataQuality,
+  functionName,
+}: ISelectMultipleColumnList) {
+  const [columns, setColumns] = useState(columnData as IHeaderNamesList[]);
+  const [dataQualityValue, setDataQualityValue] = useState(dataQuality as IDataQuality[]);
+  const [selectedColumns, setSelectedColumn] = useState([] as IHeaderNamesList[]);
+  const [focused, setFocused] = useState<boolean>(false);
   const classes = useStyles();
   const ref = useRef(null);
   const no_match =
@@ -49,7 +66,7 @@ const SelectColumnsList = (props) => {
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
-  const onSelect = (event, column) => {
+  const onSelect = (event: React.ChangeEvent<HTMLInputElement>, column: IHeaderNamesList) => {
     if (event.target.checked) {
       setSelectedColumns((prev) => [...prev, column]);
       setSelectedColumn([...selectedColumns, column]);
@@ -64,12 +81,12 @@ const SelectColumnsList = (props) => {
     }
   };
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue = columnData.filter((el) =>
+      const columnValue: IHeaderNamesList[] = columnData.filter((el) =>
         el?.label.toLowerCase().includes(event.target.value.toLowerCase())
       );
-      if (columnValue.length) {
+      if (columnValue?.length) {
         setColumns(columnValue);
       } else {
         setColumns([]);
@@ -80,11 +97,11 @@ const SelectColumnsList = (props) => {
   };
 
   const handleFocus = () => {
-    ref?.current.focus();
+    ref?.current?.focus();
     setFocused(true);
   };
 
-  const handleDisableCheckbox = (column) => {
+  const handleDisableCheckbox = () => {
     const multiSelect = multipleColumnSelected.filter(
       (el) => el.value == functionName && el.isMoreThanTwo
     );
@@ -104,8 +121,8 @@ const SelectColumnsList = (props) => {
           {selectedColumnsCount
             ? selectedColumnsCount > 10
               ? selectedColumnsCount
-              : `0${selectedColumnsCount}`
-            : 'No '}
+              : `${T.translate('features.WranglerNewSelectCoulmnList.zero')}${selectedColumnsCount}`
+            : `${T.translate('features.WranglerNewSelectCoulmnList.no')}`}
           &nbsp;{T.translate('features.WranglerNewAddTransformation.columnsSelected')}
         </div>
         <div className={classes.searchFormControl}>
@@ -117,11 +134,11 @@ const SelectColumnsList = (props) => {
             onBlur={() => setFocused(false)}
           />
           <Box className={classes.searchInputAdornment} onClick={handleFocus}>
-            {SearchIcon()}
+            {SearchIcon}
           </Box>
         </div>
       </div>
-      {no_match.length === 0 ? (
+      {Array.isArray(no_match) && no_match.length === 0 ? (
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
@@ -167,7 +184,7 @@ const SelectColumnsList = (props) => {
                         <FormControlLabel
                           disabled={
                             selectedColumns.filter((el) => el.label === eachColumn.label).length ||
-                            !handleDisableCheckbox(eachColumn)
+                            !handleDisableCheckbox()
                               ? false
                               : true
                           }
@@ -179,7 +196,9 @@ const SelectColumnsList = (props) => {
                                   ? true
                                   : false
                               }
-                              onChange={(e) => onSelect(e, eachColumn)}
+                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                onSelect(event, eachColumn)
+                              }
                             />
                           }
                           label=""
@@ -221,7 +240,7 @@ const SelectColumnsList = (props) => {
                         <FormControlLabel
                           disabled={
                             selectedColumns.filter((el) => el.label === eachColumn.label).length ||
-                            !handleDisableCheckbox(eachColumn)
+                            !handleDisableCheckbox()
                               ? false
                               : true
                           }
@@ -233,7 +252,9 @@ const SelectColumnsList = (props) => {
                                   ? true
                                   : false
                               }
-                              onChange={(e) => onSelect(e, eachColumn)}
+                              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                                onSelect(event, eachColumn)
+                              }
                             />
                           }
                           label=""
@@ -248,7 +269,6 @@ const SelectColumnsList = (props) => {
                         </Typography>
                       </TableCell>
                       <TableCell
-                        // className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
                         className={[
                           classes.recipeStepsTableRowStyles,
                           classes.circularBarCell,
@@ -268,6 +288,4 @@ const SelectColumnsList = (props) => {
       )}
     </section>
   );
-};
-
-export default SelectColumnsList;
+}

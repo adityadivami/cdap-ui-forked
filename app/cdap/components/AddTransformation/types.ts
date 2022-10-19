@@ -14,31 +14,21 @@
  * the License.
  */
 
-import { createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-
-export const useStyles = makeStyles((_theme: Theme) => ({
-  progress: {
-    position: 'relative',
-    margin: 4,
-    float: 'left',
-    textAlign: 'center',
-  },
-  barOverflow: {
-    position: 'relative',
-    overflow: 'hidden',
-    width: 60,
-    height: 30,
-    marginBottom: '-20px !important',
-  },
-  value: {
-    fontSize: '14px !important',
-    fontStyle: 'normal',
-  },
-  redText: {
-    color: '#E97567',
-  },
-  greenText: {
-    color: '#8BCC74',
-  },
-}));
+export interface IRecords {
+  [key: string]: string | number | IRecords | boolean;
+}
+export interface IHeaderNamesList {
+  name: string;
+  label: string;
+  type: string[];
+}
+export interface IDataQuality {
+  [key: string]: string;
+}
+export interface IAddTransformationProp {
+  directiveFunctionSupportedDataType: string[];
+  functionName: string;
+  columnData: IHeaderNamesList[];
+  missingDataList: IDataQuality[];
+  callBack: () => void;
+}

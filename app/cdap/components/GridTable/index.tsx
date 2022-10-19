@@ -201,7 +201,7 @@ export default function GridTable() {
   }, [gridData]);
 
   // ------------@onMenuOptionSelection Function is used to set option selected from toolbar and then calling of execute API
-  const onMenuOptionSelection = (option, supported_dataType) => {
+  const onMenuOptionSelection = (option: string, supported_dataType: string[]) => {
     setDirectiveFunction(option);
     setDirectiveFunctionSupportedDataType(supported_dataType);
   };
@@ -270,10 +270,9 @@ export default function GridTable() {
         <AddTransformation
           functionName={directiveFunction}
           directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
-          setLoading={setLoading}
           columnData={headerNamesList}
           missingDataList={dataQuality}
-          callBack={(response) => {
+          callBack={() => {
             setDirectiveFunction('');
           }}
         />

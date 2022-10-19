@@ -14,31 +14,13 @@
  * the License.
  */
 
-import { createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import React from 'react';
+import { IHeaderNamesList, IDataQuality } from '../types';
 
-export const useStyles = makeStyles((_theme: Theme) => ({
-  progress: {
-    position: 'relative',
-    margin: 4,
-    float: 'left',
-    textAlign: 'center',
-  },
-  barOverflow: {
-    position: 'relative',
-    overflow: 'hidden',
-    width: 60,
-    height: 30,
-    marginBottom: '-20px !important',
-  },
-  value: {
-    fontSize: '14px !important',
-    fontStyle: 'normal',
-  },
-  redText: {
-    color: '#E97567',
-  },
-  greenText: {
-    color: '#8BCC74',
-  },
-}));
+export interface ISelectColumnList {
+  directiveFunctionSupportedDataType: string[];
+  selectedColumnsCount: number;
+  columnData: IHeaderNamesList[];
+  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  dataQuality: IDataQuality[];
+}

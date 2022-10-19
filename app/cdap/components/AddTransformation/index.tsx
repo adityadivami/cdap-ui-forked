@@ -22,16 +22,22 @@ import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
 import SelectMultipleColumnsList from './SelectMultipleColumnList';
 import { multipleColumnSelected } from './constants';
+import { IAddTransformationProp, IHeaderNamesList } from './types';
 
-export default function(props) {
-  const { directiveFunctionSupportedDataType, functionName, columnData, missingDataList } = props;
-  const [columnsPopup, setColumnsPopup] = useState(true);
-  const [selectedColumns, setSelectedColumns] = useState([]);
+export default function({
+  directiveFunctionSupportedDataType,
+  functionName,
+  columnData,
+  missingDataList,
+  callBack,
+}: IAddTransformationProp) {
+  const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
+  const [selectedColumns, setSelectedColumns] = useState([] as IHeaderNamesList[]);
 
   const classes = useStyles();
 
   const closeClickHandler = () => {
-    props.callBack();
+    callBack();
   };
 
   const closeSelectColumnsPopup = () => {
