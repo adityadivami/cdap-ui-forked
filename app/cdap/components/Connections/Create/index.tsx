@@ -42,10 +42,7 @@ import { ConnectionConfiguration } from 'components/Connections/Create/Connectio
 import { getConnectionPath } from 'components/Connections/helper';
 import { extractErrorMessage, objectQuery } from 'services/helpers';
 import Alert from 'components/shared/Alert';
-import {
-  ConnectionsContext,
-  IConnectionMode,
-} from 'components/Connections/ConnectionsContext';
+import { ConnectionsContext, IConnectionMode } from 'components/Connections/ConnectionsContext';
 import { constructErrors } from 'components/shared/ConfigurationGroup/utilities';
 import { ConnectionConfigurationMode } from 'components/Connections/types';
 
@@ -63,28 +60,24 @@ const useStyle = makeStyle(() => {
     },
   };
 });
-export function CreateConnection({
+export default function({
   onToggle = null,
   initialConfig = {},
   onCreate = null,
   mode = ConnectionConfigurationMode.CREATE,
   enableRouting = true,
 }) {
-  const { mode: connectionMode, disabledTypes } = useContext(
-    ConnectionsContext
-  );
+  const { mode: connectionMode, disabledTypes } = useContext(ConnectionsContext);
   const classes = useStyle();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [state, dispatch] = useReducer(reducer, initialState);
   const activeCategory = useRef(null);
-  const [connectionDetails, setConnectionDetails] = useState<IConnectorDetails>(
-    {
-      connectorWidgetJSON: null,
-      connectorProperties: null,
-      connectorDoc: null,
-      connectorError: null,
-    }
-  );
+  const [connectionDetails, setConnectionDetails] = useState<IConnectorDetails>({
+    connectorWidgetJSON: null,
+    connectorProperties: null,
+    connectorDoc: null,
+    connectorError: null,
+  });
   const [initValues, setInitValues] = useState({});
   const [error, setError] = useState(null);
   const [configurationErrors, setConfigurationErrors] = useState(null);
@@ -155,9 +148,7 @@ export function CreateConnection({
       setError('Connection name must not be empty.');
       return;
     } else if (!new RegExp('^[\\w\\s-]+$').test(name)) {
-      setError(
-        'Connection name can only include letters, numbers, hypen and underscore.'
-      );
+      setError('Connection name can only include letters, numbers, hypen and underscore.');
       return;
     }
 
@@ -189,8 +180,8 @@ export function CreateConnection({
       }
 
       if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
-        const value = localStorage.getItem('isNewWranglerRequested');
-        if (value == 'true') {
+        const value: string = localStorage.getItem('isNewWranglerRequested');
+        if (value) {
           localStorage.removeItem('isNewWranglerRequested');
           setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${name}`);
         } else {
@@ -203,9 +194,7 @@ export function CreateConnection({
       }
     } catch (e) {
       const errorMsg = extractErrorMessage(e);
-      setError(
-        `A server error occurred when creating this connection. Error: ${errorMsg}`
-      );
+      setError(`A server error occurred when creating this connection. Error: ${errorMsg}`);
     }
   };
 
@@ -243,9 +232,7 @@ export function CreateConnection({
       }
     } catch (e) {
       const errorMsg = extractErrorMessage(e);
-      setError(
-        `A server error occurred when testing the connection. Error: ${errorMsg}`
-      );
+      setError(`A server error occurred when testing the connection. Error: ${errorMsg}`);
     } finally {
       setTestInProgress(false);
     }
@@ -254,9 +241,7 @@ export function CreateConnection({
   function onClose() {
     if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
       navigateToConnectionList(dispatch);
-      return setRedirectUrl(
-        `/ns/${getCurrentNamespace()}/datasources/Imported%20Datasets`
-      );
+      return setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/Imported%20Datasets`);
     }
 
     onToggle();
@@ -332,12 +317,7 @@ export function CreateConnection({
       )}
 
       {!!error && (
-        <Alert
-          message={error}
-          type="error"
-          showAlert={true}
-          onClose={() => setError(null)}
-        />
+        <Alert message={error} type="error" showAlert={true} onClose={() => setError(null)} />
       )}
     </div>
   );
