@@ -213,7 +213,9 @@ export default function GridTable() {
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
           if (option === 'remove-null') {
-            onMenuOptionSelection(option, datatype);
+            if (option === 'remove-null') {
+              onMenuOptionSelection(option, datatype);
+            }
           }
         }}
       />

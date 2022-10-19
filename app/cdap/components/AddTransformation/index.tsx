@@ -112,6 +112,43 @@ export default function({
         </Container>
       </DrawerWidget>
       <DrawerWidget
+        headingText={T.translate('features.WranglerNewAddTransformation.addTransformation')}
+        openDrawer={drawerStatus}
+        closeClickHandler={closeClickHandler}
+      >
+        <Container className={classes.addTransformationBodyStyles}>
+          <div className={classes.addTransformationBodyWrapperStyles}>
+            <SelectedColumnCountWidget selectedColumnsCount={selectedColumns.length} />
+            <FunctionNameWidget functionName={functionName} />
+            <SelectColumnsWidget
+              handleSelectColumn={handleSelectColumn}
+              selectedColumns={selectedColumns}
+              functionName={functionName}
+            />
+            {functionName == 'remove-null' && (
+              <ActionsWidget
+                functionName={functionName}
+                setSelectedAction={setSelectedAction}
+                selectedAction={selectedAction}
+                setReplaceValue={setReplaceValue}
+                replaceValue={replaceValue}
+              />
+            )}
+          </div>
+          <Button
+            variant="contained"
+            disabled={selectedColumns.length ? false : true}
+            color="primary"
+            classes={{ containedPrimary: classes.buttonStyles }}
+            className={classes.applyStepButtonStyles}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
+            data-testid="add-transformation-button"
+          >
+            {T.translate('features.WranglerNewAddTransformation.applyStep')}
+          </Button>
+        </Container>
+      </DrawerWidget>
+      <DrawerWidget
         headingText={T.translate('features.WranglerNewAddTransformation.selectColumn')}
         openDrawer={columnsPopup}
         showBackIcon={true}
