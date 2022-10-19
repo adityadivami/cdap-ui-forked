@@ -170,7 +170,6 @@ export default function GridTable() {
     setHeadersNamesList(headersData);
     if (rawData && rawData?.summary && rawData?.summary?.statistics) {
       const missingData: IMetricArray[] = createMissingData(gridData?.summary?.statistics);
-      console.log(missingData, 'headers data');
       setMissingDataList(missingData);
     }
     const rowData =
@@ -181,7 +180,7 @@ export default function GridTable() {
         const { ...rest } = eachRow;
         return rest;
       });
-    console.log(rawData, 'raw data', rowData, 'rowdat');
+
     setRowsDataList(rowData);
   };
 
@@ -201,7 +200,8 @@ export default function GridTable() {
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
-            {headersNamesList?.length > 0 &&
+            {Array.isArray(headersNamesList) &&
+              headersNamesList?.length > 0 &&
               headersNamesList.map((eachHeader) => (
                 <GridHeaderCell
                   label={eachHeader.label}
