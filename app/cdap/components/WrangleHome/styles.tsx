@@ -66,4 +66,7 @@ export const useStyles = makeStyles({
     top: 0,
     width: '100%',
   },
+  wrapperWithBottomSpace: {
+    paddingBottom: 40,
+  },
 });

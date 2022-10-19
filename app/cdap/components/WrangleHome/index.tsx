@@ -29,10 +29,15 @@ import T from 'i18n-react';
 export default function WranglerHome() {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
+  const [showExplorations, setShowExplorations] = useState(false);
   const cardCount = 2;
-
   return (
-    <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
+    <Box
+      className={
+        showExplorations ? classes.wrapper : `${classes.wrapper} ${classes.wrapperWithBottomSpace}`
+      }
+      data-testid="wrangler-home-new-parent"
+    >
       <Box className={classes.subHeader}>
         <Typography className={classes.welcomeCard}>
           {T.translate('features.HomePage.labels.welcomeCard.title')} <br />
@@ -50,18 +55,23 @@ export default function WranglerHome() {
           </Box>
         </Box>
         <WrangleCard />
-        <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
-          <Box className={classes.viewMore}>
-            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
-              {T.translate('features.HomePage.labels.common.viewAll')}
-            </Link>
+        {showExplorations ? (
+          <Box className={classes.headerTitle}>
+            <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
+            <Box className={classes.viewMore}>
+              <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
+                {T.translate('features.HomePage.labels.common.viewAll')}
+              </Link>
+            </Box>
           </Box>
-        </Box>
+        ) : (
+          <></>
+        )}
         <OngoingDataExplorations
           cardCount={cardCount}
           fromAddress={T.translate('features.Breadcrumb.labels.wrangleHome').toString()}
           setLoading={setLoading}
+          setShowExplorations={setShowExplorations}
         />
       </Box>
     </Box>
