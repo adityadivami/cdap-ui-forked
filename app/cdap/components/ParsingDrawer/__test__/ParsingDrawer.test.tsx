@@ -73,45 +73,4 @@ describe('It Should Test the Parsing Drawer Component', () => {
     fireEvent.click(handleApplyBtn);
     expect(handleApplyBtn).toBeInTheDocument();
   });
-  // it('Should test the handleFormatChange Button ', () => {
-  //   jest.spyOn(ApiHelpers, 'createWorkspace').mockReturnValue(
-  //     Promise.resolve({
-  //       entity: {
-  //         name: 'sql_feature',
-  //         path: '/information_schema/sql_features',
-  //         type: 'system table',
-  //         canSample: true,
-  //         canBrowse: false,
-  //         properties: {},
-  //       },
-  //       connection: 'exl',
-  //       properties: {},
-  //     })
-  //   );
-  //   render(
-  //     <Router history={history}>
-  //       <Switch>
-  //         <Route>
-  //           <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()} />
-  //         </Route>
-  //       </Switch>
-  //     </Router>
-  //   );
-  //   // const menu = getAllByRole('button');
-  //   // fireEvent.mouseDown(menu[0]);
-  //   // const option2 = getAllByTestId('input-select-1')[0];
-  //   // fireEvent.click(option2);
-
-  //   // fireEvent.mouseDown(menu[1]);
-  //   // const option3 = getAllByTestId('input-select-1')[1];
-  //   // fireEvent.click(option3);
-
-  //   // const returnedPromises = Promise.resolve({});
-
-  //   // const checkbox1 = getByTestId('parsing-checkbox-Enable quoted values');
-  //   // fireEvent.click(checkbox1);
-
-  //   // const checkbox2 = getByTestId('parsing-checkbox-Use first row as header');
-  //   // fireEvent.click(checkbox2);
-  // });
 });

@@ -59,49 +59,27 @@ export default function({ setLoading, updateDataTranformation }) {
     setDrawerStatus(true);
   }, [dataprep, properties]);
 
-  // const createWorkspaceInternal = async (entity, parseConfig) => {
-  //   try {
-  //     setLoading(true);
-  // const wid = await createWorkspace({
-  //   entity,
-  //   connection: dataprep.insights.name,
-  //   properties: connectionPayload.sampleRequest.properties,
-  // });
-  //     console.log(wid);
-  //     if (onWorkspaceCreate) {
-  //       return onWorkspaceCreate(wid);
-  //     }
-  // setDrawerStatus(false);
-  // updateDataTranformation(wid);
-  //   } catch (err) {
-  // setErrorOnTransformation({
-  //   open: true,
-  //   message: 'Selected Transformation Cannot Be Applied',
-  // });
-  // setLoading(false);
-  //   }
-  // };
-  const createWorkspaceInternal = (entity, parseConfig) => {
-    setLoading(true);
-    createWorkspace({
-      entity,
-      connection: dataprep.insights.name,
-      properties: connectionPayload.sampleRequest.properties,
-    })
-      .then((res) => {
-        if (onWorkspaceCreate) {
-          return onWorkspaceCreate(res);
-        }
-        setDrawerStatus(false);
-        updateDataTranformation(res);
-      })
-      .catch((err) => {
-        setErrorOnTransformation({
-          open: true,
-          message: 'Selected Transformation Cannot Be Applied',
-        });
-        setLoading(false);
+  const createWorkspaceInternal = async (entity, parseConfig) => {
+    try {
+      setLoading(true);
+      const wid = await createWorkspace({
+        entity,
+        connection: dataprep.insights.name,
+        properties: connectionPayload.sampleRequest.properties,
       });
+      console.log(wid);
+      if (onWorkspaceCreate) {
+        return onWorkspaceCreate(wid);
+      }
+      setDrawerStatus(false);
+      updateDataTranformation(wid);
+    } catch (err) {
+      setErrorOnTransformation({
+        open: true,
+        message: 'Selected Transformation Cannot Be Applied',
+      });
+      setLoading(false);
+    }
   };
 
   const onConfirm = async (parseConfig) => {
