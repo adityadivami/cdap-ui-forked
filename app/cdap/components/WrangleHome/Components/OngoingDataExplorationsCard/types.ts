@@ -14,19 +14,17 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+export interface IExplorationCardDetails {
+  icon?: JSX.Element;
+  label?: string;
+  type?: string;
+  percentageSymbol?: string;
+  subText?: string;
+  workspaceId?: string;
+  count?: number;
+}
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-});
+export interface IOngoingDataExplorationsCard {
+  explorationCardDetails: IExplorationCardDetails;
+  cardIndex: number;
+}
