@@ -25,10 +25,8 @@ describe('To Test Grid Header Cell Component', () => {
     render(<GridHeaderCell label={'abc'} types={arr} />);
     const ele = screen.getByTestId(`grid-header-cell-abc`);
     expect(ele).toHaveTextContent('abc');
-
   });
   it('Renders Component with empty types array to trigger Null', () => {
     render(<GridHeaderCell label={'abc'} types={[]} />);
   });
 });
-
