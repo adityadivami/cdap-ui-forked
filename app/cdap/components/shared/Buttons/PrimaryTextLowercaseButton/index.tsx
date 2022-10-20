@@ -15,21 +15,19 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import BreadCumb from '../index';
-import history from 'services/history';
-import { Router, Route } from 'react-router';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 
-describe('renders BreadCumb Component', () => {
-  render(
-    <Router history={history}>
-      <Route>
-        <BreadCumb />
-      </Route>
-    </Router>
+const NewButton = styled(Button)`
+  text-transform: none;
+  font-weight: normal;
+  color: ${(props) => props.textColor || '#666666'};
+`;
+
+export const PrimaryTextLowercaseButton = ({ children, disabled = false, ...props }) => {
+  return (
+    <NewButton variant="text" color="primary" disabled={disabled} {...props}>
+      {children}
+    </NewButton>
   );
-  it('should render the Breadcrumb component', () => {
-    const ele = screen.getByTestId(/bread-comb-container-parent/i);
-    expect(ele).toBeInTheDocument();
-  });
-});
+};

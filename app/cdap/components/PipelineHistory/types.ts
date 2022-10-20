@@ -14,22 +14,8 @@
  * the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import BreadCumb from '../index';
-import history from 'services/history';
-import { Router, Route } from 'react-router';
-
-describe('renders BreadCumb Component', () => {
-  render(
-    <Router history={history}>
-      <Route>
-        <BreadCumb />
-      </Route>
-    </Router>
-  );
-  it('should render the Breadcrumb component', () => {
-    const ele = screen.getByTestId(/bread-comb-container-parent/i);
-    expect(ele).toBeInTheDocument();
-  });
-});
+export interface IPipelineVersion {
+  version: string;
+  description: string;
+  date: string;
+}
