@@ -39,7 +39,11 @@ export default function({
       <Container className={classes.drawerContainerStyles} role="presentation">
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
-            {showBackIcon && BackIcon}
+            {showBackIcon && (
+              <Box className={classes.backIconClass} onClick={closeClickHandler}>
+                {BackIcon}
+              </Box>
+            )}
             &nbsp;
             <DrawerWidgetHeading headingText={headingText} />
           </div>
