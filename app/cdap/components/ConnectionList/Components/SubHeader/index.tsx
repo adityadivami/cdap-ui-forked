@@ -24,9 +24,9 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import T from 'i18n-react';
+import { ISubHeaderProps } from 'components/ConnectionList/types';
 
-export default function(props) {
-  const { setOpenImportDataPanel } = props;
+export default function({ setOpenImportDataPanel }: ISubHeaderProps) {
   const classes = useStyles();
   return (
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">

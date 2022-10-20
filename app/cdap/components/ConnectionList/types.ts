@@ -14,19 +14,6 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
-import React from 'react';
-import { Underline } from '../iconStore';
-import { useStyles } from '../styles';
-import { IDrawerWidgetHeadingProps } from '../types';
-
-export default function({ headingText }: IDrawerWidgetHeadingProps) {
-  const classes = useStyles();
-
-  return (
-    <Box className={classes.headingStyles}>
-      <div className={classes.headingTextStyles}>{headingText}</div>
-      <Underline />
-    </Box>
-  );
+export interface ISubHeaderProps {
+  setOpenImportDataPanel: React.Dispatch<React.SetStateAction<boolean>>;
 }

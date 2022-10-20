@@ -205,17 +205,32 @@ export default function() {
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader setOpenImportDataPanel={setOpenImportDataPanel} />
       <SelectDatasetWrapper>
-        {dataForTabs.map((each, index) => {
-          const connectionIdRequired = each.data.filter((el) => el.connectionId);
-          if (connectionIdRequired.length) {
-            connectionId = connectionIdRequired[0].connectionId;
-          }
-          if (index === 0) {
-            headerContent = headerForLevelZero();
-          } else {
-            headerContent =
-              refs.current[index]?.offsetWidth < refs.current[index]?.scrollWidth ? (
-                <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+        {Array.isArray(dataForTabs) &&
+          dataForTabs?.length &&
+          dataForTabs?.map((each, index) => {
+            const connectionIdRequired = each.data?.filter((el) => el.connectionId);
+            if (connectionIdRequired.length) {
+              connectionId = connectionIdRequired[0].connectionId;
+            }
+            if (index === 0) {
+              headerContent = headerForLevelZero();
+            } else {
+              headerContent =
+                refs.current[index]?.offsetWidth < refs.current[index]?.scrollWidth ? (
+                  <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+                    <Box className={classes.beforeSearchIconClickDisplay}>
+                      <Typography
+                        variant="body2"
+                        className={classes.headerLabel}
+                        ref={(element) => {
+                          refs.current[index] = element;
+                        }}
+                      >
+                        {dataForTabs[index - 1].selectedTab}
+                      </Typography>
+                    </Box>
+                  </CustomTooltip>
+                ) : (
                   <Box className={classes.beforeSearchIconClickDisplay}>
                     <Typography
                       variant="body2"
@@ -227,36 +242,23 @@ export default function() {
                       {dataForTabs[index - 1].selectedTab}
                     </Typography>
                   </Box>
-                </CustomTooltip>
-              ) : (
-                <Box className={classes.beforeSearchIconClickDisplay}>
-                  <Typography
-                    variant="body2"
-                    className={classes.headerLabel}
-                    ref={(element) => {
-                      refs.current[index] = element;
-                    }}
-                  >
-                    {dataForTabs[index - 1].selectedTab}
-                  </Typography>
-                </Box>
-              );
-          }
-          return (
-            <Box className={classes.tabsContainerWithHeader}>
-              <Box className={classes.tabHeaders}>{headerContent}</Box>
-              <ConnectionsTabs
-                tabsData={each}
-                handleChange={selectedTabValueHandler}
-                value={each.selectedTab}
-                index={index}
-                connectionId={connectionId || ''}
-                toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
-                setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-              />
-            </Box>
-          );
-        })}
+                );
+            }
+            return (
+              <Box className={classes.tabsContainerWithHeader}>
+                <Box className={classes.tabHeaders}>{headerContent}</Box>
+                <ConnectionsTabs
+                  tabsData={each}
+                  handleChange={selectedTabValueHandler}
+                  value={each.selectedTab}
+                  index={index}
+                  connectionId={connectionId || ''}
+                  toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
+                  setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                />
+              </Box>
+            );
+          })}
       </SelectDatasetWrapper>
 
       {loading && (
