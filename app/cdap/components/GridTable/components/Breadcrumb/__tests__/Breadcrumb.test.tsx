@@ -17,12 +17,20 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import BreadCrumb from '..';
+import Breadcrumb from '..';
 import { createBrowserHistory as createHistory } from 'history';
+import BreadCrumb from '..';
 
 const history = createHistory({
   basename: '/',
 });
+
+const location = {
+  state: {
+    from: 'Home',
+    path: 'wrangle-home',
+  },
+};
 
 describe('Test Breadcrumb Component', () => {
   const locationMock = jest.mock('react-router-dom', () => ({
@@ -35,7 +43,7 @@ describe('Test Breadcrumb Component', () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <BreadCrumb datasetName="abc" location={locationMock} />{' '}
+          <BreadCrumb workspaceName="abc" location={locationMock} />{' '}
         </Route>
       </Switch>
     </Router>
@@ -51,7 +59,7 @@ describe('Test Breadcrumb Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <BreadCrumb datasetName="abc" location={location} />
+            <BreadCrumb workspaceName="abc" location={location} />
           </Route>
         </Switch>
       </Router>

@@ -23,7 +23,7 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 import T from 'i18n-react';
 
-export default function BreadCrumb({ datasetName, location }) {
+export default function BreadCrumb({ workspaceName, location }) {
   const classes = useStyles();
 
   const sourcePath =
@@ -50,7 +50,7 @@ export default function BreadCrumb({ datasetName, location }) {
             {location?.state?.from}
           </Link>
         )}
-        <Typography color="textPrimary">{datasetName}</Typography>
+        <Typography color="textPrimary">{workspaceName}</Typography>
       </Breadcrumbs>
     </Box>
   );

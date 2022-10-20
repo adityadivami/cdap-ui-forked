@@ -21,7 +21,7 @@ import { mockConnectorTypeData } from '../mock/mockConnectorTypeData';
 
 describe('Test TabLabelCanBrowse Component', () => {
   it('Should render TabLabelCanBrowse Component', () => {
-    render(
+    const container = render(
       <TabLabelCanBrowse
         label={mockConnectorTypeData.name}
         count={mockConnectorTypeData.count}
@@ -31,7 +31,9 @@ describe('Test TabLabelCanBrowse Component', () => {
     );
     const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
     expect(ele[0]).toBeInTheDocument();
+    expect(container).toBeDefined();
   });
+
   it('Should render TabLabelCanBrowse Component with ref true', () => {
     const ref: any = {
       current: {
