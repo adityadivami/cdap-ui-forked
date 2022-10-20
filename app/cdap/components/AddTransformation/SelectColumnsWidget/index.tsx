@@ -44,7 +44,7 @@ export default function({
           )
          : (
           <ButtonWidget
-            buttonText={multipleColumnSelected.filter((el) => el.value === functionName).length > 0 ? T.translate('features.WranglerNewAddTransformation.done') : T.translate('features.WranglerNewAddTransformation.selectCoulmn')}
+            buttonText={multipleColumnSelected.filter((el) => el.value === functionName).length > 0 ? T.translate('features.WranglerNewAddTransformation.selectMultiColumns') : T.translate('features.WranglerNewAddTransformation.selectCoulmn')}
             className={classes.selectButtonStyles}
             onClick={() => handleSelectColumn(false)}
             variant="outlined"
