@@ -95,9 +95,9 @@ export default function({
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue: IHeaderNamesList[] = columnData.filter((el) =>
+      const columnValue: IHeaderNamesList[] = Array.isArray(columnData) && columnData.length ? columnData.filter((el) =>
         el?.label.toLowerCase().includes(event.target.value.toLowerCase())
-      );
+      ) : [];
       if (columnValue?.length) {
         setColumns(columnValue);
       } else {
