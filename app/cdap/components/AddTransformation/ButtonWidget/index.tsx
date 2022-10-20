@@ -13,23 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { Button } from '@material-ui/core';
+import React from 'react';
+import { IButtonWidget } from './types';
 
-export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
-}
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
-}
-export interface IDataQuality {
-  [key: string]: string;
-}
-export interface IAddTransformationProp {
-  directiveFunctionSupportedDataType: string[];
-  functionName: string;
-  columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality;
-  callBack: () => void;
-  applyTransformation: (directive: string) => void;
+export default function({ buttonText, disabled, onClick, variant, className }: IButtonWidget) {
+  return (
+    <Button
+      variant={variant}
+      disabled={disabled}
+      color="primary"
+      className={className}
+      onClick={onClick}
+    >
+      {buttonText}
+    </Button>
+  );
 }

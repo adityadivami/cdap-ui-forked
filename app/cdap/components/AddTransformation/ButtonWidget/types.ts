@@ -14,22 +14,12 @@
  * the License.
  */
 
-export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
-}
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
-}
-export interface IDataQuality {
-  [key: string]: string;
-}
-export interface IAddTransformationProp {
-  directiveFunctionSupportedDataType: string[];
-  functionName: string;
-  columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality;
-  callBack: () => void;
-  applyTransformation: (directive: string) => void;
+import React, { ReactNode } from 'react';
+
+export interface IButtonWidget {
+  buttonText: ReactNode;
+  disabled: boolean;
+  onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
+  variant: 'contained' | 'outlined' | 'text';
+  className: string;
 }

@@ -3458,12 +3458,22 @@ features:
         otherIcon: 'Other'
         toggleDescription: 'Function names'
   WranglerNewAddTransformation:
+    addTransformation: Add Transformation Step
+    applyStep: Apply Step
     columnsSelected: columns selected
     columns: Columns
     dataQuality: Data Quality
     done: Done
+    function: Function
     nullValues: Null Values
+    quickSelect: Quick select by clicking a column on the grid/columns panel
+    removeRows: Remove rows
+    replaceRows: Replace rows
+    replaceWith: Replace with
     selectColumn: Select column(s) to apply this function
+    selectCoulmn: Select column
+    selectMultiColumns: Select columns
+    selectAction: Select action to take
   WranglerNewSelectCoulmnList:
     noColumns: No columns to show
     noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype

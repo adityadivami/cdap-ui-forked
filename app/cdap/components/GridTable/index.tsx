@@ -272,6 +272,9 @@ export default function GridTable() {
           callBack={() => {
             setDirectiveFunction('');
           }}
+          applyTransformation={(directive) => {
+            setDirectiveFunction('');
+          }}
         />
       )}
       {loading && (

@@ -13,23 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { IHeaderNamesList } from '../types';
 
-export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
-}
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
-}
-export interface IDataQuality {
-  [key: string]: string;
-}
-export interface IAddTransformationProp {
-  directiveFunctionSupportedDataType: string[];
+export interface ISelectColumnWidget {
+  selectedColumns: IHeaderNamesList[];
   functionName: string;
-  columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality;
-  callBack: () => void;
-  applyTransformation: (directive: string) => void;
+  handleSelectColumn: (value: boolean) => void;
 }

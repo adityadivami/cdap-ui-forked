@@ -14,22 +14,13 @@
  * the License.
  */
 
-export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
-}
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
-}
-export interface IDataQuality {
-  [key: string]: string;
-}
-export interface IAddTransformationProp {
-  directiveFunctionSupportedDataType: string[];
-  functionName: string;
-  columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality;
-  callBack: () => void;
-  applyTransformation: (directive: string) => void;
-}
+import { render } from '@testing-library/react';
+import React from 'react';
+import FunctionNameWidget from '..';
+
+describe('It should test FunctionNameWidget Component', () => {
+  it('Should render the FunctionNameWidget Component', () => {
+    const container = render(<FunctionNameWidget functionName={'UnitTesting'} />);
+    expect(container).toBeDefined();
+  });
+});

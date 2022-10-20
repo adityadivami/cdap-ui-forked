@@ -121,8 +121,6 @@ export const useStyles = makeStyles(() => {
       textTransform: 'none',
       marginBottom: 20,
       marginRight: 8,
-    },
-    buttonStyles: {
       '&:hover': {
         backgroundColor: '#3994FF',
       },
