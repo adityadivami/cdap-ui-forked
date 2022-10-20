@@ -15,6 +15,6 @@
  */
 
 export interface INoDataScreenProps {
-    title: React.ReactNode;
-    subtitle: React.ReactNode;
-  }
+  title: React.ReactNode;
+  subtitle: React.ReactNode;
+}

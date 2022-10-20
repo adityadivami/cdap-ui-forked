@@ -32,7 +32,7 @@ import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
-import NoRecordScreen from 'components/NoRecordScreen/index';
+import NoRecordScreen from 'components/NoRecordScreen';
 import T from 'i18n-react';
 
 export default function GridTable() {
@@ -236,8 +236,8 @@ export default function GridTable() {
       <BreadCrumb datasetName={wid} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
-          title={T.translate('features.NoRecordScreen.gridTable.title')}
-          subtitle={T.translate('features.NoRecordScreen.gridTable.subtitle')}
+          title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
+          subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
         />
       )}
       <Table aria-label="simple table" className="test">
