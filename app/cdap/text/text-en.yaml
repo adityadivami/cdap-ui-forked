@@ -2088,10 +2088,6 @@ features:
         distributed: Distributed
         localSandbox: Local Sandbox
     rulesmgmt: Rules
-  NoRecordScreen:
-    gridTable:
-      title: No rows left in this sample
-      subtitle: Remove some recipe steps to view some data
   NUX:
     ControlCenter:
       text: "{featureName} allows you to create, manage, operate, and monitor datasets and applications."
@@ -3435,4 +3431,9 @@ features:
         title: Configure a pipeline
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
+  WranglerNewUI:
+    NoRecordScreen:
+      gridTable:
+        title: No rows left in this sample
+        subtitle: Remove some recipe steps to view some data
 ...
