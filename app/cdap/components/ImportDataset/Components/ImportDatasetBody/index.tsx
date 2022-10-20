@@ -21,7 +21,7 @@ export default function(props) {
   const { file, onDropHandler } = props;
   return (
     <div>
-      <DragDrop file={file} onDropHandler={onDropHandler} />
+      <DragDrop file={file} onDropHandler={onDropHandler} data-testid="drag-drop" />
     </div>
   );
 }

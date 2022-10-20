@@ -63,7 +63,11 @@ export default function({ file, onDropHandler }) {
         <Box>
           <Box className={classes.FlexFile}>
             <Typography className={classes.fileNameText}>{file.name}</Typography>
-            <Box className={classes.delete_cursor_pointer} onClick={handleRemoveFile}>
+            <Box
+              className={classes.delete_cursor_pointer}
+              data-testid="delete-svg"
+              onClick={handleRemoveFile}
+            >
               {deleteSVG()}
             </Box>
           </Box>

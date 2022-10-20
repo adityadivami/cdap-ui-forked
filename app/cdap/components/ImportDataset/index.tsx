@@ -135,7 +135,12 @@ export default function(props) {
         </Box>
         {file && (
           <Box className={classes.buttonWrapper}>
-            <Button variant="contained" className={classes.wrangleButton} onClick={uploadWrangle}>
+            <Button
+              variant="contained"
+              className={classes.wrangleButton}
+              data-testid="upload-button"
+              onClick={uploadWrangle}
+            >
               {T.translate('features.ConnectionsList.labels.loadToGrid')}
             </Button>
           </Box>

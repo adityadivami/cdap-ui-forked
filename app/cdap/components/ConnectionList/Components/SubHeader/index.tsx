@@ -48,7 +48,11 @@ export default function(props) {
             {T.translate('features.AddConnections.referenceLabel')}
           </Box>
         </Box>
-        <Box className={classes.importData} onClick={() => setOpenImportDataPanel(true)}>
+        <Box
+          className={classes.importData}
+          onClick={() => setOpenImportDataPanel(true)}
+          data-testid="import-data"
+        >
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
           <Box className={classes.breadcrumbTyporgraphy}>
             {T.translate('features.ImportData.referenceLabel')}
