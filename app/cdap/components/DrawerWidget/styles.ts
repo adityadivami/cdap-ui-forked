@@ -71,5 +71,8 @@ export const useStyles = makeStyles(() => {
       height: 20,
       cursor: 'pointer',
     },
+    backIconClass: {
+      cursor: 'pointer'
+    }
   };
 });

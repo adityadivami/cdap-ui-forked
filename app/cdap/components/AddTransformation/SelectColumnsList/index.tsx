@@ -51,7 +51,7 @@ export default function({
     directiveFunctionSupportedDataType?.length > 0 &&
     directiveFunctionSupportedDataType?.includes('all')
       ? directiveFunctionSupportedDataType?.filter((el) => el == 'all')
-      : columns.filter((object1) => {
+      : columns?.filter((object1) => {
           return directiveFunctionSupportedDataType?.some((object2) => {
             return object2?.includes(object1?.type[0]?.toLowerCase());
           });
@@ -95,9 +95,12 @@ export default function({
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue: IHeaderNamesList[] = Array.isArray(columnData) && columnData.length ? columnData.filter((el) =>
-        el?.label.toLowerCase().includes(event.target.value.toLowerCase())
-      ) : [];
+      const columnValue: IHeaderNamesList[] =
+        Array.isArray(columnData) && columnData.length
+          ? columnData.filter((el) =>
+              el?.label.toLowerCase().includes(event.target.value.toLowerCase())
+            )
+          : [];
       if (columnValue?.length) {
         setColumns(columnValue);
       } else {

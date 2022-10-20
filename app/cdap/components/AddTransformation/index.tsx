@@ -41,12 +41,13 @@ export default function({
 
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
+    callBack();
   };
 
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
     setSelectedColumns([]);
-    closeClickHandler();
+    callBack();
   };
 
   useEffect(() => {
