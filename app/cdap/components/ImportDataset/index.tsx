@@ -131,7 +131,7 @@ export default function(props) {
     >
       <Box className={classes.bodyWrapper}>
         <Box className={classes.panelbody}>
-          <DatasetBody file={file} onDropHandler={onDropHandler} />
+          <DatasetBody file={file} onDropHandler={onDropHandler} data-testid="drag-drop" />
         </Box>
         {file && (
           <Box className={classes.buttonWrapper}>
