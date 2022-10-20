@@ -192,7 +192,9 @@ export default function GridTable() {
 
   return (
     <Box>
-      <button onClick={showRecipePanelHandler}>recipe count</button>
+      <button onClick={showRecipePanelHandler} data-testid="recipe-count">
+        recipe count
+      </button>
       <Breadcrumb datasetName={workspaceName} location={location} />
       {showRecipePanel && (
         <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />
