@@ -15,8 +15,8 @@
  */
 
 import { render } from '@testing-library/react';
-import ParsingHeaderActionTemplate from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate';
-import { PARSING } from 'components/ParsingDrawer/constants';
+// import ParsingHeaderActionTemplate from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate';
+// import { PARSING } from 'components/ParsingDrawer/constants';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
@@ -36,12 +36,13 @@ describe('It should test DrawerWidget Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <DrawerWidget
-              headingText={PARSING}
-              openDrawer={jest.fn}
-              showDivider={true}
-              headerActionTemplate={<ParsingHeaderActionTemplate />}
-              closeClickHandler={closeClickHandler}
+            <DrawerWidget headingText={''} openDrawer={false} closeClickHandler={function (): void {
+              throw new Error('Function not implemented.');
+            } }              // headingText={PARSING}
+              // openDrawer={jest.fn}
+              // showDivider={true}
+              // headerActionTemplate={<ParsingHeaderActionTemplate />}
+              // closeClickHandler={closeClickHandler}
             />
           </Route>
         </Switch>
