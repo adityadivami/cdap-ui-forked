@@ -36,10 +36,16 @@ export default function(props) {
       <Table aria-label="recipe steps table">
         <TableHead>
           <TableRow className={classes.recipeStepsTableRowStyles}>
-            <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
+            <TableCell
+              data-testid="serial-no"
+              classes={{ head: classes.recipeStepsTableHeadStyles }}
+            >
               {T.translate('features.WranglerNewRecipeSteps.labels.serialNo')}
             </TableCell>
-            <TableCell classes={{ head: classes.recipeStepsTableHeadStyles }}>
+            <TableCell
+              data-testid="recipe-steps"
+              classes={{ head: classes.recipeStepsTableHeadStyles }}
+            >
               {T.translate('features.WranglerNewRecipeSteps.labels.recipeSteps')}
             </TableCell>
             <TableCell />
@@ -48,14 +54,21 @@ export default function(props) {
         <TableBody>
           {recipeSteps?.map((eachStep, index) => (
             <TableRow className={classes.recipeStepsTableBodyRowStyles} key={index}>
-              <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
+              <TableCell
+                data-testid="index-num"
+                classes={{ body: classes.recipeStepsTableRowStyles }}
+              >
                 {index + 1 > 10 ? index + 1 : `0${index + 1}`}
               </TableCell>
-              <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
+              <TableCell
+                data-testid="each-recipe-step"
+                classes={{ body: classes.recipeStepsTableRowStyles }}
+              >
                 <span data-testid={'recipe-steps-span' + index}>{eachStep}</span>
               </TableCell>
               <TableCell
                 className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
+                data-testid="delete-styles"
               >
                 <img
                   className={classes.recipeStepsDeleteStyles}
