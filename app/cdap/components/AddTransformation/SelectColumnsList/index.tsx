@@ -24,6 +24,7 @@ import { ISelectColumnList } from './types';
 import { IHeaderNamesList } from '../types';
 import ColumnTable from '../ColumnTable';
 import { multipleColumnSelected } from '../constants';
+import SelectedColumnCountWidget from '../SelectedColumnCountWidget';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -119,14 +120,7 @@ export default function({
   return (
     <section className={classes.columnsCountTextStyles}>
       <div className={classes.selectColumnsHeaderStyles}>
-        <div>
-          {selectedColumnsCount
-            ? selectedColumnsCount > 10
-              ? selectedColumnsCount
-              : `${T.translate('features.WranglerNewSelectCoulmnList.zero')}${selectedColumnsCount}`
-            : `${T.translate('features.WranglerNewSelectCoulmnList.no')}`}
-          &nbsp;{T.translate('features.WranglerNewAddTransformation.columnsSelected')}
-        </div>
+        <SelectedColumnCountWidget selectedColumnsCount={selectedColumns.length} />
         <div className={classes.searchFormControl}>
           <input
             className={focused ? classes.isFocused : classes.isBlurred}
