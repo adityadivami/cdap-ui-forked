@@ -45,9 +45,11 @@ export default function({
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               onMultipleSelection(event, eachColumn)
             }
+            data-testid='check-box-input-checkbox'
           />
         }
         label=""
+        data-testid='form-control-label-parent'
       />
     </>
   );

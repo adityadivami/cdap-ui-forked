@@ -36,4 +36,15 @@ describe('It should test the CircularProgressBar Component', () => {
       </Router>
     );
   });
+  it('Should render the Circular', () => {
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <MatchMeter value={'101'} />
+          </Route>
+        </Switch>
+      </Router>
+    );
+  });
 });

@@ -14,29 +14,29 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import { createBrowserHistory as createHistory } from 'history';
-import React from 'react';
-import { Route, Router, Switch } from 'react-router';
-import AddTransformation from '..';
+import { fireEvent, render, screen } from "@testing-library/react";
+import { createBrowserHistory as createHistory } from "history";
+import React from "react";
+import { Route, Router, Switch } from "react-router";
+import AddTransformation from "..";
 
 const history = createHistory({
-  basename: '/',
+  basename: "/",
 });
 
-describe('It should test the SelectColumnsList Component', () => {
-  it('should render the SelectColumnsList Component and triggers the button and following event', () => {
+describe("It should test the SelectColumnsList Component", () => {
+  it("should render the SelectColumnsList Component and triggers the button and following event", () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
             <AddTransformation
-                        functionName="null" 
-                        directiveFunctionSupportedDataType={[]} 
-                        columnData={[]}
-                         missingDataList={undefined}
-                          callBack={() => jest.fn() }            
-                            // columnData={[{ label: 'hello' }, { label: 'world' }]}
+              functionName="null"
+              directiveFunctionSupportedDataType={[]}
+              columnData={[]}
+              missingDataList={undefined}
+              callBack={() => jest.fn()}
+              // columnData={[{ label: 'hello' }, { label: 'world' }]}
             />
           </Route>
         </Switch>
@@ -49,17 +49,17 @@ describe('It should test the SelectColumnsList Component', () => {
     fireEvent.click(ele1);
   });
 
-  it('should render the SelectColumnsList Component where functionName is parseCSV', () => {
+  it("should render the SelectColumnsList Component where functionName is parseCSV", () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
             <AddTransformation
-              functionName="parseCSV" 
-              directiveFunctionSupportedDataType={[]} 
+              functionName="parseCSV"
+              directiveFunctionSupportedDataType={[]}
               columnData={[]}
-               missingDataList={undefined}
-                callBack={() => jest.fn() } 
+              missingDataList={undefined}
+              callBack={() => jest.fn()}
             />
           </Route>
         </Switch>
@@ -68,4 +68,3 @@ describe('It should test the SelectColumnsList Component', () => {
     expect(container).toBeDefined;
   });
 });
-
