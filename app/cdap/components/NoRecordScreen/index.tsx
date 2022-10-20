@@ -27,8 +27,8 @@ export default function({ title, subtitle }: INoDataScreenProps) {
     <Box className={classes.noRecordWrapper}>
       <Box className={classes.innerWrapper}>
         {NoDataSVG}
-        <Typography className={classes.mainHeaderMessage}>{title}</Typography>
-        <Typography className={classes.subHeaderMessage}>{subtitle}</Typography>
+        <Typography data-testid="box-title" className={classes.mainHeaderMessage}>{title}</Typography>
+        <Typography data-testid="box-sub-title" className={classes.subHeaderMessage}>{subtitle}</Typography>
       </Box>
     </Box>
   );
