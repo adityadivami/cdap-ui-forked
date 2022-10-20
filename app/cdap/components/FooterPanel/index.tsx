@@ -19,8 +19,13 @@ import { Box } from '@material-ui/core';
 import { useStyles } from './styles';
 import { ColumnIcon, ArrowIcon, ZoomIcon } from './images';
 import T from 'i18n-react';
+import { IFooterPanelProps } from './types';
 
-export default function({ recipeStepsCount, dataCounts, columnViewPanelOpened }) {
+export default function({
+  recipeStepsCount,
+  dataCounts,
+  columnViewPanelOpened,
+}: IFooterPanelProps) {
   const classes = useStyles();
   return (
     <Box className={classes.containerProps}>
