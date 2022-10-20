@@ -73,7 +73,7 @@ export const useStyles = makeStyles(() => {
       width: 1,
       height: 28,
       backgroundColor: '#DADCE0',
-      margin: 0.15,
+      margin: '0px 15px',
     },
     checkboxStyles: {
       display: 'flex',
