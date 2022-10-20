@@ -71,13 +71,16 @@ export default function({ setIsShowName, isShowNames }) {
   return (
     <Box className={classes.functionWrapper}>
       <Typography className={classes.typoClass}>
-        {T.translate('features.GridPage.transformationsToolbar.labels.toggleDescription')} &nbsp;
+        {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.toggleDescription')}{' '}
+        &nbsp;
       </Typography>
       <StyledSwitch
         onClick={() => setIsShowName(!isShowNames)}
         checked={isShowNames}
         inputProps={{
-          'aria-label': T.translate('GridPage.gridHeader.ariaLabels.functionsName').toString(),
+          'aria-label': T.translate(
+            'features.WranglerNewUI.GridPage.gridHeader.ariaLabels.functionsName'
+          ).toString(),
         }}
       />
     </Box>

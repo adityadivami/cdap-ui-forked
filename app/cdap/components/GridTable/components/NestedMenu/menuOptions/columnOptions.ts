@@ -14,35 +14,49 @@
  * the License.
  */
 
+import T from 'i18n-react';
+
 export const COLUMN_OPTIONS = [
   {
     value: 'copyColumn',
-    label: 'Copy column',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.column.copyColumn'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'delete',
-    label: 'Delete column',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.column.deletecolumn'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'keep',
-    label: 'Keep column',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.column.keepColumn'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'rename-column',
-    label: 'Rename',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.column.rename'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'join-columns',
-    label: 'Join two column',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.column.joinTwozColumn'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'swap-columns',
-    label: 'Swap two column names',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.column.swapTwoColumnNames'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
 ];

@@ -14,46 +14,64 @@
  * the License.
  */
 
+import T from 'i18n-react';
+
 export const NULL_MISSING_OPTIONS = [
   {
     value: 'heading',
-    label: 'Remove',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.remove'
+    ),
   },
   {
     value: 'remove-null-missing',
-    label: 'Missing and null',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.missingAndNull'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'remove-missing',
-    label: 'Only missing',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.onlyMissing'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'remove-null',
-    label: 'Only null',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.onlyNull'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'divider',
   },
   {
     value: 'heading',
-    label: 'Replace',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.replace'
+    ),
   },
   {
     value: 'replace-null-missing',
-    label: 'Missing and null',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.missingAndNull'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'replace-missing',
-    label: 'Only missing',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.onlyMissing'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'replace-null',
-    label: 'Only null',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.onlyNull'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
 ];

@@ -15,334 +15,499 @@
  */
 
 import { NATIVE_NUMBER_TYPES } from 'services/global-constants';
+import T from 'i18n-react';
 
 export const CALCULATE_OPTIONS = [
   {
-    label: 'Character count',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.characterCount'
+    ),
     value: 'CHARCOUNT',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['string'],
   },
   {
-    label: 'Add',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.add'
+    ),
     value: 'ADD',
     sign: '+',
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Subtract',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.subtract'
+    ),
     value: 'SUBTRACT',
     sign: '-',
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Multiply',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.multiply'
+    ),
     value: 'MULTIPLY',
     sign: 'x',
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Divide',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.divide'
+    ),
     value: 'DIVIDE',
     sign: '/',
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Modulo',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.modulo'
+    ),
     value: 'MOD',
     sign: '%',
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Power of',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.powerOf'
+    ),
     value: 'POWEROF',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Square',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.square'
+    ),
     value: 'SQUARE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Square root',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.squareRoot'
+    ),
     value: 'SQUARE_ROOT',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Cube',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.cube'
+    ),
     value: 'CUBE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Cube root',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.cubeRoot'
+    ),
     value: 'CUBE_ROOT',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'log',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.log'
+    ),
     value: 'LOG',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Natural log',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.naturalLog'
+    ),
     value: 'NATURALLOG',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Absolute value',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.absoluteValue'
+    ),
     value: 'ABSVALUE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Ceil',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.ceil'
+    ),
     value: 'CEIL',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Floor',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.floor'
+    ),
     value: 'FLOOR',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Sin',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.sin'
+    ),
     value: 'SIN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Cos',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.cos'
+    ),
     value: 'COS',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Tan',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.tan'
+    ),
     value: 'TAN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'ARCSIN',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.ARCSIN'
+    ),
     value: 'ARCSIN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'ARCCOS',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.ARCCOS'
+    ),
     value: 'ARCCOS',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'ARCTAN',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.ARCTAN'
+    ),
     value: 'ARCTAN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Round',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.round'
+    ),
     value: 'ROUND',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Random',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.random'
+    ),
     value: 'RANDOM',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
-    label: 'Decimal Add',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalSubtract'
+    ),
     value: 'DECIMALADD',
     sign: '+',
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal Subtract',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalSubtract'
+    ),
     value: 'DECIMALSUBTRACT',
     sign: '-',
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal Multiply',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalMultiply'
+    ),
     value: 'DECIMALMULTIPLY',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal Divide',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalDivide'
+    ),
     value: 'DECIMALDIVIDEQ',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal Divider',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalDivider'
+    ),
     value: 'DECIMALDIVIDER',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Precision',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.drecision'
+    ),
     value: 'PRECISION',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Scale',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.scale'
+    ),
     value: 'SCALE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Unscaled',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.unscaled'
+    ),
     value: 'UNSCALED',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal left',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalLeft'
+    ),
     value: 'DECIMALLEFT',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal right',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalRight'
+    ),
     value: 'DECIMALRIGHT',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal power of',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalPowerOf'
+    ),
     value: 'DECIMALPOWEROF',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal absolute value',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalAbsoluteValue'
+    ),
     value: 'DECIMALABSVALUE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal square',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalSquare'
+    ),
     value: 'DECIMALSQUARE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Decimal cube',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.decimalCube'
+    ),
     value: 'DECIMALCUBE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Negate',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.negate'
+    ),
     value: 'NEGATE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Strip zero',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.StripZero'
+    ),
     value: 'STRIPZERO',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
   {
-    label: 'Sign',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.Sign'
+    ),
     value: 'SIGN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.calculate.component'
+    ),
     supported_dataType: ['bigdecimal'],
   },
 ];

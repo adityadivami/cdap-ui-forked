@@ -60,7 +60,7 @@ export default function TransfomationsToolbar({
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
         <Tooltip
-          title={T.translate('features.GridPage.transformationsToolbar.labels.undoIcon')}
+          title={T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.undoIcon')}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -71,13 +71,13 @@ export default function TransfomationsToolbar({
             <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
             {isShowNames && (
               <Typography className={classes.typoClass}>
-                {T.translate('features.GridPage.transformationsToolbar.labels.undoIcon')}
+                {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.undoIcon')}
               </Typography>
             )}
           </Box>
         </Tooltip>
         <Tooltip
-          title={T.translate('features.GridPage.transformationsToolbar.labels.redoIcon')}
+          title={T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.redoIcon')}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -88,7 +88,7 @@ export default function TransfomationsToolbar({
             <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
             {isShowNames && (
               <Typography className={classes.typoClass}>
-                {T.translate('features.GridPage.transformationsToolbar.labels.redoIcon')}
+                {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.redoIcon')}
               </Typography>
             )}
           </Box>
@@ -101,12 +101,12 @@ export default function TransfomationsToolbar({
             icon={NullIcon}
             submitMenuOption={submitMenuOption}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.nullIcon'
+              'features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.nullIcon')}
+              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon')}
             </Typography>
           )}
         </Box>
@@ -117,12 +117,12 @@ export default function TransfomationsToolbar({
             icon={InvalidIcon}
             submitMenuOption={submitMenuOption}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.invalidIcon'
+              'features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.invalidIcon')}
+              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon')}
             </Typography>
           )}
         </Box>
@@ -134,12 +134,12 @@ export default function TransfomationsToolbar({
             icon={ColumnIcon}
             submitMenuOption={submitMenuOption}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.columnIcon'
+              'features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.columnIcon')}
+              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon')}
             </Typography>
           )}
         </Box>
@@ -151,12 +151,12 @@ export default function TransfomationsToolbar({
             submitMenuOption={submitMenuOption}
             menuOptions={MENU_OPTIONS}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.structureIcon'
+              'features.WranglerNewUI.GridPage.toolbarIcons.labels.structureIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.structureIcon')}
+              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.structureIcon')}
             </Typography>
           )}
         </Box>
@@ -167,12 +167,12 @@ export default function TransfomationsToolbar({
             submitMenuOption={submitMenuOption}
             menuOptions={FRAGMENT_OPTIONS}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.fragmentIcon'
+              'features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.fragmentIcon')}
+              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon')}
             </Typography>
           )}
         </Box>
@@ -183,12 +183,12 @@ export default function TransfomationsToolbar({
             submitMenuOption={submitMenuOption}
             menuOptions={MATH_OPTIONS}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.mathIcon'
+              'features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.mathIcon')}
+              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon')}
             </Typography>
           )}
         </Box>
@@ -199,12 +199,12 @@ export default function TransfomationsToolbar({
             submitMenuOption={submitMenuOption}
             menuOptions={SECURITY_OPTIONS}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.securityIcon'
+              'features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.securityIcon')}
+              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon')}
             </Typography>
           )}
         </Box>
@@ -215,18 +215,18 @@ export default function TransfomationsToolbar({
             submitMenuOption={submitMenuOption}
             menuOptions={OTHER_OPTIONS}
             title={T.translate(
-              'features.GridPage.transformationsToolbar.labels.otherIcon'
+              'features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon'
             ).toString()}
           />
           {isShowNames && (
             <Typography className={classes.typoClass}>
-              {T.translate('features.GridPage.transformationsToolbar.labels.otherIcon')}
+              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon')}
             </Typography>
           )}
         </Box>
         <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
         <Tooltip
-          title={T.translate('features.GridPage.transformationsToolbar.labels.gridIcon')}
+          title={T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.gridIcon')}
           arrow
           classes={{
             tooltip: classes.tooltipToolbar,
@@ -237,7 +237,7 @@ export default function TransfomationsToolbar({
             <IconButton>{GridIcon}</IconButton>
             {isShowNames && (
               <Typography className={classes.typoClass}>
-                {T.translate('features.GridPage.transformationsToolbar.labels.gridIcon')}
+                {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.gridIcon')}
               </Typography>
             )}
           </Box>

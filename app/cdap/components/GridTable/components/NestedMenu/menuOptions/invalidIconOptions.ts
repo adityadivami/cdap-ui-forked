@@ -13,25 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import T from 'i18n-react';
 
 export const INVALID_ICON_OPTIONS = [
   {
-    value: T.translate(
-      'features.GridPage.transformationsToolbar.nestedMenuInvalidIconOptions.removeInvalidValue'
-    ),
+    value: 'remove-invalid',
     label: T.translate(
-      'features.GridPage.transformationsToolbar.nestedMenuInvalidIconOptions.removeInvalidLabel'
+      'features.WranglerNewUI.GridPage.transformations.options.labels.invalid.removeInvalid'
     ),
-    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
-    value: T.translate(
-      'features.GridPage.transformationsToolbar.nestedMenuInvalidIconOptions.replaceInvalidValue'
-    ),
+    value: 'replace-invalid',
     label: T.translate(
-      'features.GridPage.transformationsToolbar.nestedMenuInvalidIconOptions.replaceInvalidLabel'
+      'features.WranglerNewUI.GridPage.transformations.options.labels.invalid.replaceInvalid'
     ),
-    supported_dataType: [T.translate('features.GridPage.transformationsToolbar.labels.all')],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
 ];
