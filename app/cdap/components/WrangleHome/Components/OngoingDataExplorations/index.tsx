@@ -104,7 +104,6 @@ export default function OngoingDataExplorations({
             const totalDataQuality = dataQuality / workspace.headers.length;
             expData[index].dataQuality = totalDataQuality;
             expData[index].count = workspace.count;
-
             const final = generateDataForExplorationCard(expData, cardCount);
 
             /**

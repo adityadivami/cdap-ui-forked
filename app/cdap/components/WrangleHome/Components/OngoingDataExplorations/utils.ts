@@ -15,9 +15,9 @@
  */
 
 import { ImportDatasetIcon } from '../WrangleCard/iconStore/ImportDatasetIcon';
-import { IMassagedObject } from './types';
+import { IMassagedObject, IEachData } from './types';
 
-export const generateDataForExplorationCard = (oldData, cardCount) => {
+export const generateDataForExplorationCard = (oldData: IEachData[], cardCount: number) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
   const massagedArray = [];
 

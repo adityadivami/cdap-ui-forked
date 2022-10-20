@@ -60,7 +60,7 @@ export const checkFrequentlyOccuredValues = (
     if (Array.isArray(valueOfKey) && valueOfKey.length) {
       valueOfKey.map((item, index) => {
         valueOfKey.map((value, valueIndex) => {
-          if (item == value) {
+          if (item === value) {
             mostFrequentItemCount++;
           }
           if (mostFrequentItem < mostFrequentItemCount) {
@@ -69,7 +69,7 @@ export const checkFrequentlyOccuredValues = (
           }
         });
         mostFrequentItemCount = 0;
-        mostFrequentItemValue = (mostFrequentItemValue == ''
+        mostFrequentItemValue = (mostFrequentItemValue === ''
           ? item
           : mostFrequentItemValue) as string;
       });

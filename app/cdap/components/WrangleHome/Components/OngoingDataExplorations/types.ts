@@ -79,3 +79,12 @@ export interface IMassagedObject {
   workspaceId: string;
   count: number;
 }
+
+export interface IEachData {
+  connectionName: string;
+  count: number;
+  dataQuality: any;
+  recipeSteps: number;
+  workspaceId: string;
+  workspaceName: string;
+}

@@ -14,14 +14,17 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
-import React from 'react';
-import NoRecordScreen from '..';
+interface IEachItem {
+  icon?: SVGElement;
+  label?: string;
+  type?: string;
+  subText?: string;
+  percentageSymbol?: string;
+  workspaceId?: string;
+  count?: number;
+}
 
-describe('It Should test NoRecordScreen Component', () => {
-  const container = render(<NoRecordScreen title={'testing'} subtitle={'Unit Testing'} />);
-
-  it('Should render the NonRecordScreen Component', () => {
-    expect(container).toBeDefined();
-  });
-});
+export interface IOngoingDataExporationCardData {
+  item: IEachItem[];
+  fromAddress: string;
+}

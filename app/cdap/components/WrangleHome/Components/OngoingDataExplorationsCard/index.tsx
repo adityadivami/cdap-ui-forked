@@ -19,8 +19,12 @@ import { Box, Grid, Typography } from '@material-ui/core/';
 import { useStyles } from './styles';
 import CustomTooltip from '../CustomTooltip';
 import T from 'i18n-react';
+import { IOngoingDataExporationCardData } from './types';
 
-export default function OngoingDataExplorationCard({ item, fromAddress }) {
+export default function OngoingDataExplorationCard({
+  item,
+  fromAddress,
+}: IOngoingDataExporationCardData) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
