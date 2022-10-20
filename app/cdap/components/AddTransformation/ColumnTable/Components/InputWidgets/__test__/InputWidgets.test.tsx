@@ -15,38 +15,37 @@
  */
 
 import { fireEvent, render, screen } from "@testing-library/react";
-import { IHeaderNamesList } from "components/GridTable/types";
 import React, { ChangeEvent } from "react";
-import CheckBoxInput from "..";
+import InputWidgets from "..";
 
 describe("It should render ", () => {
-  it("Should render the checkBox component and click the checkbox", () => {
+  it("Should render component with isSingleSelection false", () => {
     const container = render(
-      <CheckBoxInput
-        selectedColumns={[{label:'test', type:[''], name:''}]}
+      <InputWidgets
+        isSingleSelection={false}
+        selectedColumns={[]}
+        onSingleSelection={() => jest.fn()}
+        eachColumn={undefined}
         handleDisableCheckbox={() => false}
-        eachColumn={{label:'test', type:[''], name:''}}
         onMultipleSelection={() => jest.fn()}
       />
     );
 
-    const ele = screen.getByTestId(/check-box-input-checkbox/i)
-    fireEvent.click(ele);
     expect(container).toBeDefined();
   });
 
-  it("Should render the checkBox component and click the checkbox", () => {
+  it("Should render component with isSingleSelection true", () => {
     const container = render(
-      <CheckBoxInput
-        selectedColumns={[{label:'test', type:[''], name:''}]}
-        handleDisableCheckbox={() => true}
-        eachColumn={{label:'test', type:[''], name:''}}
+      <InputWidgets
+        isSingleSelection={true}
+        selectedColumns={[]}
+        onSingleSelection={() => jest.fn()}
+        eachColumn={undefined}
+        handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
       />
     );
 
-    const ele = screen.getByTestId(/check-box-input-checkbox/i)
-    fireEvent.click(ele);
     expect(container).toBeDefined();
   });
 });

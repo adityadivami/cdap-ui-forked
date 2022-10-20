@@ -13,24 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import React from 'react';
-import { Radio } from '@material-ui/core';
-import { IRadioInputProps } from '../../types';
 
-export default function({ selectedColumns, onSingleSelection, eachColumn }: IRadioInputProps) {
-  return (
-    <>
-      <Radio
-        color="primary"
-        onChange={() => onSingleSelection(eachColumn)}
-        checked={
-          Array.isArray(selectedColumns) &&
-          selectedColumns?.filter((el) => el.label == eachColumn.label).length
-            ? true
-            : false
-        }
-        data-testid='radio-input-radio'
+import { fireEvent, render, screen } from "@testing-library/react";
+import React, { ChangeEvent } from "react";
+import RadioInput from "..";
+
+describe("It should render ", () => {
+  it("Should render RadioInput component", () => {
+    const container = render(
+      <RadioInput
+        selectedColumns={[{label:'test', name:'test', type:['test']}]}
+        onSingleSelection={() => jest.fn()}
+        eachColumn={{label:'test', name:'test', type:['test']}}
       />
-    </>
-  );
-}
+    );
+
+    const ele = screen.getByTestId(/radio-input-radio/i);
+    fireEvent.change(ele);
+    expect(container).toBeDefined();
+  });
+});
