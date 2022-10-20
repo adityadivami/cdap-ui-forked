@@ -28,7 +28,7 @@ describe('It should test the SelectColumnsList Component', () => {
     expect(container).toBeDefined;
   });
   it('should render the SelectColumnsList Component with no selectedColumnsCount', () => {
-    const container = render(<SelectedColumnCountWidget />);
+    const container = render(<SelectedColumnCountWidget selectedColumnsCount={0} />);
     expect(container).toBeDefined;
   });
 });

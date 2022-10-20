@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
@@ -30,7 +30,17 @@ describe('It should test the SelectColumnsList Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <SelectColumnsList selectedColumnsCount={20} />
+            <SelectColumnsList
+              selectedColumnsCount={20}
+              columnData={[
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[
+                // { label: 'hello', value: 5 },
+                // { label: 'world', value: 1 },
+              ]} directiveFunctionSupportedDataType={[]} functionName={''}            />
           </Route>
         </Switch>
       </Router>
@@ -42,7 +52,28 @@ describe('It should test the SelectColumnsList Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <SelectColumnsList selectedColumnsCount={2} />
+            <SelectColumnsList
+              // selectedColumnsCount={2}
+              // columnData={[
+              //   { label: 'hello', type: 'a' },
+              //   { label: 'world', type: 'a' },
+              // ]}
+              // setSelectedColumns={() => jest.fn()}
+              // dataQuality={[
+              //   { label: 'hello', value: 5 },
+              //   { label: 'world', value: 5 },
+              // ]}
+              selectedColumnsCount={20}
+              columnData={[
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[
+                // { label: 'hello', value: 5 },
+                // { label: 'world', value: 1 },
+              ]} directiveFunctionSupportedDataType={[]} functionName={''}  
+            />
           </Route>
         </Switch>
       </Router>
@@ -54,7 +85,28 @@ describe('It should test the SelectColumnsList Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <SelectColumnsList selectedColumnsCount={0} />
+            <SelectColumnsList
+              // selectedColumnsCount={0}
+              // columnData={[
+              //   { label: 'hello', type: 'a' },
+              //   { label: 'world', type: 'a' },
+              // ]}
+              // setSelectedColumns={() => jest.fn()}
+              // dataQuality={[
+              //   { label: 'hello', value: 5 },
+              //   { label: 'world', value: 5 },
+              // ]}
+              selectedColumnsCount={20}
+              columnData={[
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[
+                // { label: 'hello', value: 5 },
+                // { label: 'world', value: 1 },
+              ]} directiveFunctionSupportedDataType={[]} functionName={''}  
+            />
           </Route>
         </Switch>
       </Router>
@@ -62,27 +114,48 @@ describe('It should test the SelectColumnsList Component', () => {
     expect(container).toBeDefined;
   });
 
-  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and trigger onChnage Event', () => {
-    render(
+  it('should render the SelectColumnsList Component with some input value along with label and null', () => {
+    const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <SelectColumnsList selectedColumnsCount={10} />
+            <SelectColumnsList
+              // selectedColumnsCount={10}
+              // columnData={[
+              //   { label: 'hello', type: 'a' },
+              //   { label: 'world', type: 'a' },
+              // ]}
+              // setSelectedColumns={() => jest.fn()}
+              // dataQuality={[
+              //   { label: 'hello', value: 5 },
+              //   { label: 'world', value: 5 },
+              // ]}
+              selectedColumnsCount={20}
+              columnData={[
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[
+                // { label: 'hello', value: 5 },
+                // { label: 'world', value: 1 },
+              ]} directiveFunctionSupportedDataType={[]} functionName={''}  
+            />
           </Route>
         </Switch>
       </Router>
     );
 
-    const element: HTMLInputElement = document.getElementById(
-      'transformation-checkbox-select-all-columns'
-    ) as HTMLInputElement;
-    expect(element.checked).toBeFalsy();
+    const inputEle = screen.getByTestId(/select-column-list-input/i);
+    fireEvent.change(inputEle, { target: { value: '123' } });
+    fireEvent.change(inputEle, { target: { value: 'hello' } });
+    fireEvent.change(inputEle, { target: { value: null } });
 
-    element.click();
-    expect(element.checked).toBeTruthy();
+    const radio = screen.getAllByTestId(/select-column-list-radio/i);
+    fireEvent.click(radio[0]);
 
-    document.getElementById('transformation-checkbox-select-all-columns').click();
-
-    expect(element.checked).toBeFalsy();
+    const ele = screen.getByTestId(/select-column-list-box/i);
+    fireEvent.click(ele);
+    expect(container).toBeDefined;
   });
 });
