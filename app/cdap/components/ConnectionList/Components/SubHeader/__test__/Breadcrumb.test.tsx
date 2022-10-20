@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import BreadCumb from '../index';
 import { Router, Route, Switch } from 'react-router';
 import history from 'services/history';
@@ -31,4 +31,6 @@ test('renders BreadCumb Component', () => {
   );
   const ele = screen.getByTestId(/bread-comb-container-parent/i);
   expect(ele).toBeInTheDocument();
+  const ele2 = screen.getByTestId(/sub-header-handle-add-connection/i);
+  fireEvent.click(ele2);
 });

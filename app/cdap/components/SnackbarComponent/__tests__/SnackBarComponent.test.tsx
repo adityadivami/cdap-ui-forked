@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
 import { Route, Router, Switch } from 'react-router';
 import { createBrowserHistory as createHistory } from 'history';
 import PositionedSnackbar from '..';
@@ -40,6 +40,7 @@ describe('It should test the Snackbar Component', () => {
     const ele = container.getByTestId(/parent-snackbar-component/i);
     const button = screen.getByTestId(/snackbar-close-button/i)
     fireEvent.click(button);
-    expect(ele).toBeInTheDocument();
+    expect(ele).toBeDefined();
   });
 });
+

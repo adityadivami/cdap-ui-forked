@@ -46,7 +46,7 @@ export default function() {
 
       <Box className={classes.importDataContainer}>
         <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>
-          <Box onClick={handleAddConnection} className={classes.importData}>
+          <Box onClick={handleAddConnection} className={classes.importData} data-testid='sub-header-handle-add-connection'>
             <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
             <Box className={classes.breadcrumbTyporgraphy}>
               {T.translate('features.AddConnections.referenceLabel')}
