@@ -22,11 +22,11 @@ export interface IHeaderText {
 
 export interface IDrawerWidgetProps {
   headingText?: string | ReactNode;
-  openDrawer: boolean | Dispatch<SetStateAction<boolean>> | any;
+  openDrawer: boolean | Dispatch<SetStateAction<boolean>> | unknown;
   showDivider?: boolean;
-  headerActionTemplate?: any;
-  children?: any[] | boolean;
-  closeClickHandler?: any;
+  headerActionTemplate?: unknown;
+  children?: unknown[] | boolean;
+  closeClickHandler?: unknown;
   showBackIcon?: boolean;
-  anchor?: any;
+  anchor?: unknown;
 }
