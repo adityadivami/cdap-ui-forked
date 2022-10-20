@@ -21,8 +21,9 @@ import InputCheckbox from '../InputCheckbox';
 import InputSelect from '../InputSelect';
 import { CHAR_ENCODING_OPTIONS, FORMAT_OPTIONS } from './parsingOptions';
 import T from 'i18n-react';
+import { IParsingPopupBodyProps } from 'components/ParsingDrawer/types';
 
-export default function({ values, changeEventListener }) {
+export default function({ values, changeEventListener }: IParsingPopupBodyProps) {
   const classes = useStyles();
 
   const { format, fileEncoding, enableQuotedValues, skipHeader } = values;
@@ -30,16 +31,16 @@ export default function({ values, changeEventListener }) {
   let selectedEncodingValue = [];
 
   useEffect(() => {
-    selectedFormatValue = FORMAT_OPTIONS.filter((i) => i.value === format);
+    selectedFormatValue = FORMAT_OPTIONS?.filter((i) => i.value === format);
   }, [format]);
 
   useEffect(() => {
-    selectedEncodingValue = CHAR_ENCODING_OPTIONS.filter((i) => i.value === fileEncoding);
+    selectedEncodingValue = CHAR_ENCODING_OPTIONS?.filter((i) => i.value === fileEncoding);
   }, [fileEncoding]);
 
   return (
     <Box>
-      <Box className={[classes.formFieldWrapperStyles, classes.marginBottomStyles].join(' ')}>
+      <Box className={`${classes.formFieldWrapperStyles}${classes.marginBottomStyles}`}>
         <InputLabel id="label" className={classes.labelTextStyles}>
           {T.translate('features.WranglerNewParsingDrawer.format')}
         </InputLabel>
@@ -57,7 +58,7 @@ export default function({ values, changeEventListener }) {
         />
       </Box>
 
-      <Box className={[classes.formFieldWrapperStyles, classes.marginBottomStyles].join(' ')}>
+      <Box className={`${classes.formFieldWrapperStyles}${classes.marginBottomStyles}`}>
         <InputLabel id="label" className={classes.labelTextStyles}>
           {T.translate('features.WranglerNewParsingDrawer.encoding')}
         </InputLabel>

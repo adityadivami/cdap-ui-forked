@@ -14,33 +14,22 @@
  * the License.
  */
 
-import React from 'react';
+import { IRecords } from 'components/GridTable/types';
 import { ReactNode } from 'react';
 
-export const defaultConnectionPayload = {
-  path: '',
-  connection: '',
-  sampleRequest: {
-    properties: {
-      format: '',
-      fileEncoding: '',
-      skipHeader: false,
-      enableQuotedValues: false,
-      schema: null,
-      _pluginName: null,
-    },
-    limit: 1000,
-  },
-};
+export interface IConnectionTabs {
+  tabsData: ITabsData;
+  handleChange: (entity: IRecords, index: number) => void;
+  value: string | ReactNode;
+  index: number;
+  connectionId: string | ReactNode | unknown;
+  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleLoader: (value: boolean, isError?: boolean) => void;
+}
 
-export const defaultErrorOnTransformations = {
-  open: false,
-  message: '',
-};
-
-export const defaultProperties = {
-  format: 'csv',
-  fileEncoding: 'UTF-8',
-  enableQuotedValues: false,
-  skipHeader: false,
-};
+interface ITabsData {
+  data: Array<Record<string, string | number | boolean | IRecords | JSX.Element>>;
+  isSearching: boolean;
+  selectedTab: string;
+  showTabs: boolean;
+}

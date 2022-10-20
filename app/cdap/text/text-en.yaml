@@ -3449,3 +3449,7 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+  SnackBar:
+    errorMessage:
+      transformation: 'Selected Transformation Cannot Be Applied'
+      encountered : 'Error Encountered...'

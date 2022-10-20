@@ -14,33 +14,25 @@
  * the License.
  */
 
-import React from 'react';
-import { ReactNode } from 'react';
+import React, { useState } from 'react';
+import DrawerWidget from '.';
 
-export const defaultConnectionPayload = {
-  path: '',
-  connection: '',
-  sampleRequest: {
-    properties: {
-      format: '',
-      fileEncoding: '',
-      skipHeader: false,
-      enableQuotedValues: false,
-      schema: null,
-      _pluginName: null,
-    },
-    limit: 1000,
-  },
-};
+export default function() {
+  const [open, setOpen] = useState<boolean>(true);
 
-export const defaultErrorOnTransformations = {
-  open: false,
-  message: '',
-};
+  const closeClickHandler = () => {
+    setOpen(false);
+  };
 
-export const defaultProperties = {
-  format: 'csv',
-  fileEncoding: 'UTF-8',
-  enableQuotedValues: false,
-  skipHeader: false,
-};
+  return (
+    <DrawerWidget
+      headingText={'Drawer Widget Header'}
+      openDrawer={open}
+      showDivider={true}
+      headerActionTemplate={<button>Click</button>}
+      closeClickHandler={closeClickHandler}
+    >
+      <div>This is Drawer Body</div>
+    </DrawerWidget>
+  );
+}

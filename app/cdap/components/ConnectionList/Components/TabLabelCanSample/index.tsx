@@ -36,7 +36,7 @@ export default function TabLabelCanSample({
 }: {
   label: string;
   entity: IRecords;
-  initialConnectionId: string;
+  initialConnectionId: string | unknown;
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
