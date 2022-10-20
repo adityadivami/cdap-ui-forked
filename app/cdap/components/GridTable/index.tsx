@@ -68,6 +68,7 @@ export default function GridTable() {
   const [directiveFunction, setDirectiveFunction] = useState('');
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
   const [dataQuality, setDataQuality] = useState({} as IDataQuality);
+  const [columnSelected, setColumnSelected] = useState('');
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -211,7 +212,11 @@ export default function GridTable() {
         showBreadCrumb={showBreadCrumb}
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
-          onMenuOptionSelection(option, datatype);
+          if (option === 'remove-null') {
+            if (option === 'remove-null') {
+              onMenuOptionSelection(option, datatype);
+            }
+          }
         }}
       />
 
@@ -269,6 +274,11 @@ export default function GridTable() {
           directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
           columnData={headersNamesList}
           missingDataList={dataQuality}
+          applyTransformation={(prepareDirective, column) => {
+            setColumnSelected(column);
+            setDirectiveFunction('');
+            // TODO when user clicks on apply button for transformation
+          }}
           callBack={() => {
             setDirectiveFunction('');
           }}
