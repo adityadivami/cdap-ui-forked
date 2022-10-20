@@ -16,21 +16,20 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import ConnectionsTabs from '../index';
+import TabLabelCanBrowse from '../index';
+import { mockConnectorTypeData } from '../mock/mockConnectorTypeData';
 
-const tabsTestData = [{ showTabs: true }];
-
-test('renders Connections Tab Component', () => {
-  render(
-    <ConnectionsTabs
-      tabsData={tabsTestData}
-      handleChange={() => null}
-      value="apple"
-      index="one"
-      connectionId={undefined}
-      setIsErrorOnNoWorkSpace={jest.fn()}
-    />
-  );
-  const ele = screen.getByTestId(/connections-tabs-parent/i);
-  expect(ele).toBeInTheDocument();
+describe('Test TabLabelCanBrowse Component', () => {
+  it('Should render TabLabelCanBrowse Component', () => {
+    render(
+      <TabLabelCanBrowse
+        label={mockConnectorTypeData.name}
+        count={mockConnectorTypeData.count}
+        icon={mockConnectorTypeData.icon}
+        index={0}
+      />
+    );
+    const ele = screen.getByTestId(/connections-tab-label-browse/i);
+    expect(ele).toBeInTheDocument();
+  });
 });
