@@ -86,7 +86,6 @@ export default function({ setLoading, updateDataTranformation }) {
 
   const handleSchemaUpload = (schema) => {
     setSchemaValue(schema);
-    console.log(schema, 'schema');
   };
   const onConfirm = async (parseConfig) => {
     try {
