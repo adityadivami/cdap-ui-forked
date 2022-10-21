@@ -17,7 +17,7 @@
 import { IHeaderNamesList, IDataQuality, IRecords } from '../types';
 
 export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeaderNamesList[]) => {
-  const dataQualityToArray: Array<Array<string | IRecords>> = Object.entries(statistics);
+  const dataQualityToArray: Array<Array<string | IRecords>> | any = statistics ? Object.entries(statistics) : '';
   const dataQuality = [] as IDataQuality[];
   columnList.map((columnName: IHeaderNamesList) => {
     dataQualityToArray.forEach(([key, value]) => {

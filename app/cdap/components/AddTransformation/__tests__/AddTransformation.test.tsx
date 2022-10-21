@@ -36,17 +36,16 @@ describe("It should test the SelectColumnsList Component", () => {
               columnData={[]}
               missingDataList={undefined}
               callBack={() => jest.fn()}
-              // columnData={[{ label: 'hello' }, { label: 'world' }]}
             />
           </Route>
         </Switch>
       </Router>
     );
     expect(container).toBeDefined;
-    const ele = screen.getByTestId(/add-transformation-button/i);
-    fireEvent.click(ele);
-    const ele1 = screen.getByTestId(/select-column-widget-button/i);
-    fireEvent.click(ele1);
+    // const ele = screen.getByTestId(/add-transformation-button/i);
+    // fireEvent.click(ele);
+    // const ele1 = screen.getByTestId(/select-column-widget-button/i);
+    // fireEvent.click(ele1);
   });
 
   it("should render the SelectColumnsList Component where functionName is parseCSV", () => {

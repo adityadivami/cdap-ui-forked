@@ -31,7 +31,7 @@ describe("It should test the SelectColumnsList Component", () => {
         <Switch>
           <Route>
             <SelectColumnsList
-              selectedColumnsCount={20}
+              selectedColumnsCount={1}
               columnData={[
                 { label: "hello", type: ["a", "b"], name: "test" },
                 { label: "hello", type: ["a", "b"], name: "test" },
@@ -52,7 +52,7 @@ describe("It should test the SelectColumnsList Component", () => {
     );
     expect(container).toBeDefined;
   });
-  it("should render the SelectColumnsList Component with selectedColumnsCount<10", () => {
+  it("should render the SelectColumnsList Component with selectedColumnsCount > 10", () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -130,5 +130,32 @@ describe("It should test the SelectColumnsList Component", () => {
 
     const ele = screen.getByTestId(/click-handle-focus/i);
     fireEvent.click(ele);
+    expect(container).toBeDefined;
+  });
+
+  it("should render the SelectColumnsList Component with some input value along with label and null", () => {
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <SelectColumnsList
+              columnData={[]}
+              selectedColumnsCount={0}
+              setSelectedColumns={jest.fn()}
+              dataQuality={[
+                { label: "hello", value: "" },
+                { label: "world", value: "" },
+              ]}
+              directiveFunctionSupportedDataType={["all", "test"]}
+              functionName={""}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+
+    const inputEle = screen.getByTestId("input_id");
+    fireEvent.change(inputEle, { target: { value: "123" } });
+    expect(container).toBeDefined;
   });
 });

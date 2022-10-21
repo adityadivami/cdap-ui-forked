@@ -152,7 +152,7 @@ export default function GridTable() {
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
   const createMissingData = (statistics: IObject) => {
-    const statisticObjectToArray = Object.entries(statistics);
+    const statisticObjectToArray = statistics ? Object.entries(statistics): '';
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
       const headerKeyTypeArray = Object.entries(value);
