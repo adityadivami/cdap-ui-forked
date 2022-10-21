@@ -23,26 +23,40 @@ import { useStyles } from './styles';
 import { IConnectorArray } from './types';
 
 export default function() {
-  const [state, setState] = useState({ connectorTypes: [] });
+  const [connectorsData, setConnectorsData] = useState({ connectorTypes: [] });
 
   const classes = useStyles();
-  const connectorTypes: IConnectorArray[] = state.connectorTypes;
+  const connectorTypes: IConnectorArray[] = connectorsData.connectorTypes;
 
   const updateState = (updatedState) => {
-    setState(updatedState);
+    setConnectorsData(updatedState);
   };
 
   useEffect(() => {
     getWidgetData(updateState);
   }, []);
 
+  let startIndex = 0;
+  let endIndex = 2;
+  // Here we are finding out the connections are exist in the app or not
+  if (connectorTypes.length > 2) {
+    startIndex = 1; // This line is writtern to eliminate the add-connection cards's data from the array
+    endIndex = 5;
+  }
+
   return (
     <Box className={classes.wrapper} data-testid="wrangle-card-parent">
       {/* Here we are only showing top 4 connectors on home page */}
-      {connectorTypes.slice(0, 4).map((item, index) => {
+      {connectorTypes.slice(startIndex, endIndex).map((item, index) => {
         return (
           <Link
-            to={`/ns/${getCurrentNamespace()}/datasources/${item.name}`}
+            to={
+              startIndex === 0
+                ? `/ns/${getCurrentNamespace()}/${item.link}`
+                : index === 0
+                ? `/ns/${getCurrentNamespace()}/${item.link}`
+                : `/ns/${getCurrentNamespace()}/datasources/${item.name}`
+            }
             style={{ textDecoration: 'none' }}
             data-testid={'item' + index}
           >

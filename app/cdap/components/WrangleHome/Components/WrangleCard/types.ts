@@ -25,6 +25,7 @@ export interface IConnectorArray {
     scope: string;
   };
   SVG: JSX.Element;
+  link: string;
 }
 
 export interface IConnectorDetailPayloadArray {

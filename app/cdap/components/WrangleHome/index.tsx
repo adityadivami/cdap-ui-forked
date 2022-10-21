@@ -28,6 +28,7 @@ import { Link } from 'react-router-dom';
 
 export default function WranglerHome() {
   const classes = useStyles();
+  localStorage.setItem('requestFrom', 'home');
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">

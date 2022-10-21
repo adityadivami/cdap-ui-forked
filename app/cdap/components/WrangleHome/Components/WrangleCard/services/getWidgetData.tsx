@@ -19,7 +19,7 @@ import { getCategorizedConnections } from 'components/Connections/Browser/SidePa
 import { fetchConnectionDetails, fetchConnectors } from 'components/Connections/Create/reducer';
 import { getCategoriesToConnectorsMap } from '../WidgetData/utils';
 import WidgetSVG from '../WidgetData/index';
-import { ImportDatasetIcon } from '../iconStore/ImportDatasetIcon';
+import { ImportDatasetIcon, AddConnectionIcon, ImportDataIcon } from '../iconStore/ConnectorIcons';
 import { IConnectorArray, IConnectorDetailPayloadArray } from '../types';
 
 export const getWidgetData = async (cbUpdateState) => {
@@ -85,8 +85,7 @@ export const getWidgetData = async (cbUpdateState) => {
   connectorDataWithSvgArray = [
     ...new Map(connectorDataWithSvgArray.map((item) => [item.name, item])).values(),
   ];
-
-  connectorDataWithSvgArray.unshift({
+  const staticCardModel = {
     name: 'Imported Datasets',
     type: 'default',
     category: 'default',
@@ -98,7 +97,23 @@ export const getWidgetData = async (cbUpdateState) => {
     },
 
     SVG: ImportDatasetIcon,
+  };
+
+  connectorDataWithSvgArray.unshift({
+    ...staticCardModel,
+    name: 'Import Data',
+    SVG: ImportDataIcon,
+    link: 'home',
   });
+  connectorDataWithSvgArray.unshift({
+    ...staticCardModel,
+    name: 'Add Connection',
+    SVG: AddConnectionIcon,
+    link: 'connections/create',
+  });
+
+  console.log(connectorDataWithSvgArray, 'console');
+
   cbUpdateState({
     connectorTypes: connectorDataWithSvgArray,
   });

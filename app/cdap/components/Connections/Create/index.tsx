@@ -180,7 +180,15 @@ export function CreateConnection({
       }
 
       if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
-        setRedirectUrl(`${getConnectionPath(name)}`);
+        const value: string = localStorage.getItem('requestFrom');
+        if (value) {
+          localStorage.removeItem('requestFrom');
+          value === 'home'
+            ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
+            : setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${value}`);
+        } else {
+          setRedirectUrl(`${getConnectionPath(name)}`);
+        }
       }
 
       if (typeof onToggle === 'function') {
@@ -235,7 +243,10 @@ export function CreateConnection({
   function onClose() {
     if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
       navigateToConnectionList(dispatch);
-      return;
+      const value: string = localStorage.getItem('requestFrom');
+      return value === 'home'
+        ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
+        : setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${value}`);
     }
 
     onToggle();

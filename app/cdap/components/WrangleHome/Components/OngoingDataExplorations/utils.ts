@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { ImportDatasetIcon } from '../WrangleCard/iconStore/ImportDatasetIcon';
+import { ImportDatasetIcon } from '../WrangleCard/iconStore/ConnectorIcons';
 import { IMassagedObject } from './types';
 
 export const generateDataForExplorationCard = (oldData) => {
