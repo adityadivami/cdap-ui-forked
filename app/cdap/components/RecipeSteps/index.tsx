@@ -53,7 +53,7 @@ export default function({ setShowRecipePanel, showRecipePanel }) {
       closeClickHandler={closeClickHandler}
     >
       <Container className={classes.RecipeStepsBodyStyles}>
-        {recipeSteps.length ? (
+        {Array.isArray(recipeSteps) && recipeSteps.length ? (
           <RecipeStepsTableComponent recipeSteps={recipeSteps} />
         ) : (
           <RecipeStepsEmptyScreen />

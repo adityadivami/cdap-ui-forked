@@ -33,7 +33,15 @@ import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IObject,
+  IParams,
+  IRecords,
+  IRowData,
+  IMissingListData,
+} from './types';
 import { convertNonNullPercent } from './utils';
 
 export default function GridTable() {
@@ -44,14 +52,14 @@ export default function GridTable() {
 
   const classes = useStyles();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
-  const [rowsDataList, setRowsDataList] = useState([]);
-  const [showRecipePanel, setShowRecipePanel] = useState(false);
+  const [rowsDataList, setRowsDataList] = useState<IRowData[]>([]);
+  const [showRecipePanel, setShowRecipePanel] = useState<boolean>(false);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
-  const [missingDataList, setMissingDataList] = useState([]);
-  const [workspaceName, setWorkspaceName] = useState('');
-  const [invalidCountArray, setInvalidCountArray] = useState([
+  const [missingDataList, setMissingDataList] = useState<IMissingListData[]>([]);
+  const [workspaceName, setWorkspaceName] = useState<string>('');
+  const [invalidCountArray, setInvalidCountArray] = useState<Array<Record<string, string>>>([
     {
       label: 'Invalid',
       count: '0',
@@ -170,15 +178,14 @@ export default function GridTable() {
       const missingData = createMissingData(gridData?.summary?.statistics);
       setMissingDataList(missingData);
     }
-    const rowData =
+    const rowData: IRowData[] =
       rawData &&
       rawData.values &&
       Array.isArray(rawData?.values) &&
-      rawData?.values.map((eachRow: {}) => {
+      (rawData?.values.map((eachRow: IObject) => {
         const { ...rest } = eachRow;
         return rest;
-      });
-
+      }) as IRowData[]);
     setRowsDataList(rowData);
   };
 
@@ -192,7 +199,9 @@ export default function GridTable() {
 
   return (
     <Box>
-      <button onClick={showRecipePanelHandler}>recipe count</button>
+      <button onClick={showRecipePanelHandler}>
+        {T.translate('features.WranglerNewRecipeSteps.labels.recipeCount')}
+      </button>
       <Breadcrumb datasetName={workspaceName} location={location} />
       {showRecipePanel && (
         <RecipeSteps setShowRecipePanel={setShowRecipePanel} showRecipePanel={showRecipePanel} />

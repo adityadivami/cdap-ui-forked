@@ -15,22 +15,16 @@
  */
 import React from 'react';
 import { useStyles } from '../styles';
+import { DownloadIcon, KebabIcon } from '../iconStore';
+import { Box } from '@material-ui/core';
 
-export default function(props) {
+export default function() {
   const classes = useStyles();
 
   return (
-    <div>
-      <img
-        className={classes.importIconStyles}
-        src="/cdap_assets/img/import.svg"
-        alt="Download icon"
-      />
-      <img
-        src="/cdap_assets/img/more-options.svg"
-        alt="More icon"
-        className={classes.kebabMenuStyle}
-      />
-    </div>
+    <Box className={classes.downloadMenuActionWrapper}>
+      <Box className={classes.importIconStyles}>{DownloadIcon}</Box>
+      <Box className={classes.kebabMenuStyle}>{KebabIcon}</Box>
+    </Box>
   );
 }

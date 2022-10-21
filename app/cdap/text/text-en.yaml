@@ -3444,6 +3444,9 @@ features:
        recipe: Recipe
        serialNo: S.No.
        recipeSteps: Recipe steps
+       recipeCount: Recipe count
+    startWrangleTitle: Start Wrangling your data
+    startWrangleSubTitle: Select a column or function to add your first recipe step
   WranglerParsingPanelDrawerWidget:
     labels:
         parsing: Parsing

@@ -14,11 +14,12 @@
  * the License.
  */
 import { makeStyles } from '@material-ui/styles';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles(() => {
   return {
     importIconStyles: {
-      marginRight: '20px',
+      marginRight: 20,
       cursor: 'pointer',
     },
     more_icon: {
@@ -36,41 +37,41 @@ export const useStyles = makeStyles(() => {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '20px',
+      fontSize: 20,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#000000',
+      letterSpacing: 0.15,
+      color: grey[400],
     },
     emptyScreenInfoText: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '14px',
+      fontSize: 14,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
+      letterSpacing: 0.15,
       color: '#5F6368',
     },
     RecipeStepsBodyStyles: {
       height: 'calc(100% - 100px)',
-      padding: '0',
+      padding: 0,
     },
     recipeStepsTableHeadStyles: {
-      padding: '10px',
+      padding: 10,
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 600,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
+      letterSpacing: 0.15,
       color: '#5F6368',
     },
     recipeStepsTableRowStyles: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
+      letterSpacing: 0.15,
       color: '#5F6368',
       padding: '15px 10px',
     },
@@ -81,10 +82,9 @@ export const useStyles = makeStyles(() => {
       visibility: 'hidden',
     },
     recipeStepsDeleteStyles: {
-      width: '18px',
-      height: '20px',
+      width: 18,
+      height: 20,
       cursor: 'pointer',
-      //   padding: '15px 10px',
     },
     recipeStepsTableBodyRowStyles: {
       '&:hover': {
@@ -96,6 +96,9 @@ export const useStyles = makeStyles(() => {
     },
     kebabMenuStyle: {
       cursor: 'pointer',
+    },
+    downloadMenuActionWrapper: {
+      display: 'flex',
     },
   };
 });

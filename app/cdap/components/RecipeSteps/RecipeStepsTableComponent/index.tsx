@@ -26,9 +26,10 @@ import {
 import React from 'react';
 import { useStyles } from '../styles';
 import T from 'i18n-react';
+import { IRecipeStepTebleProps } from './types';
+import { DeleteIcon } from '../iconStore';
 
-export default function(props) {
-  const { recipeSteps } = props;
+export default function({ recipeSteps }: IRecipeStepTebleProps) {
   const classes = useStyles();
 
   return (
@@ -57,12 +58,7 @@ export default function(props) {
               <TableCell
                 className={[classes.recipeStepsTableRowStyles, classes.displayNone].join(' ')}
               >
-                <img
-                  className={classes.recipeStepsDeleteStyles}
-                  src="/cdap_assets/img/delete.svg"
-                  alt="delete"
-                  data-testid={'recipe-steps-table-component-image-click' + index}
-                />
+                <Box className={classes.recipeStepsDeleteStyles}>{DeleteIcon}</Box>
               </TableCell>
             </TableRow>
           ))}

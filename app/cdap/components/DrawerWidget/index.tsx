@@ -13,24 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { Box, Container, Drawer } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useStyles } from './styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from './DrawerWidgetHeading';
+import { IDrawerWidgetProps } from './types';
+import { BackIcon } from './iconStore';
 
-export default function(props) {
+export default function({
+  headingText,
+  openDrawer,
+  showDivider,
+  headerActionTemplate,
+  children,
+  closeClickHandler,
+  showBackIcon,
+  anchor,
+}: IDrawerWidgetProps) {
   const classes = useStyles();
-  const {
-    headingText,
-    openDrawer,
-    showDivider,
-    headerActionTemplate,
-    children,
-    closeClickHandler,
-    showBackIcon,
-    anchor,
-  } = props;
 
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
@@ -38,15 +40,11 @@ export default function(props) {
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && (
-              <img
-                onClick={closeClickHandler}
-                className={classes.headerBackIconStyles}
-                src="/cdap_assets/img/back-icon.svg"
-                alt="Back icon 1"
-                data-testid="abc"
-                role="button"
-              />
+              <Box className={classes.backIconClass} onClick={closeClickHandler}>
+                {BackIcon}
+              </Box>
             )}
+            &nbsp;
             <DrawerWidgetHeading headingText={headingText} />
           </div>
           <Box className={classes.headerRightStyles}>

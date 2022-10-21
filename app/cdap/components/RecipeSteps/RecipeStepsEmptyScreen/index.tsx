@@ -17,13 +17,14 @@ import { Container } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useStyles } from '../styles';
 import T from 'i18n-react';
+import { InfoGraphicData } from '../iconStore';
 
 export default function(props) {
   const classes = useStyles();
 
   return (
     <Container className={classes.emptyScreenStyles}>
-      <img src="/cdap_assets/img/recipe-steps_infographic.svg" alt="Empty infographic" />
+      {InfoGraphicData}
       <div className={classes.emptyScreenText}>
         {T.translate('features.WranglerNewRecipeSteps.startWrangleTitle')}
       </div>
