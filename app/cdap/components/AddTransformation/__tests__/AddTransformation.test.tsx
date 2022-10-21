@@ -26,7 +26,7 @@ const history = createHistory({
 
 describe("It should test the SelectColumnsList Component", () => {
   it("should render the SelectColumnsList Component and triggers the button and following event", () => {
-    const container = render(
+    const {rerender} = render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -41,11 +41,24 @@ describe("It should test the SelectColumnsList Component", () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined;
-    // const ele = screen.getByTestId(/add-transformation-button/i);
-    // fireEvent.click(ele);
-    // const ele1 = screen.getByTestId(/select-column-widget-button/i);
-    // fireEvent.click(ele1);
+    // expect(container).toBeDefined;
+    const eleBox = screen.getByTestId('box-id');
+    fireEvent.click(eleBox)
+    rerender( <Router history={history}>
+      <Switch>
+        <Route>
+          <AddTransformation
+            functionName="null"
+            directiveFunctionSupportedDataType={[]}
+            columnData={[]}
+            missingDataList={undefined}
+            callBack={() => jest.fn()}
+          />
+        </Route>
+      </Switch>
+    </Router>);
+  const ele = screen.getByTestId(/add-transform-button/i);
+  fireEvent.click(ele);
   });
 
   it("should render the SelectColumnsList Component where functionName is parseCSV", () => {
