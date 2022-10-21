@@ -68,21 +68,29 @@ export const getWidgetData = async (cbUpdateState) => {
     ({ connectorWidgetJSON }) => connectorWidgetJSON
   );
 
-  if (connectorWidgetJson.every((each) => each[`display-name`] !== 'File')) {
-    connectorWidgetJson.unshift({
-      'display-name': 'File',
-    });
-  }
-
-  connectorWidgetJson.map((item) => {
-    connectorDataArray.map((connectorType) => {
+  connectorDataArray.map((connectorType) => {
+    let connectorTypeHasWidget = false;
+    /**
+     * Getting widget icons for connector types
+     */
+    connectorWidgetJson.map((item) => {
       if (item['display-name'] && item['display-name'].includes(connectorType.name)) {
         connectorDataWithSvgArray.push({
           ...connectorType,
           SVG: <WidgetSVG dataSrc={item?.icon?.arguments?.data} />,
         });
+        connectorTypeHasWidget = true;
       }
     });
+    /**
+     * Retaining the connector types which are not part of widget api
+     */
+    if (!connectorTypeHasWidget) {
+      connectorDataWithSvgArray.push({
+        ...connectorType,
+        SVG: <WidgetSVG dataSrc={undefined} />,
+      });
+    }
   });
 
   connectorDataWithSvgArray = connectorDataWithSvgArray.filter((obj) =>
