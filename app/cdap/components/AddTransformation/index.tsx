@@ -74,6 +74,7 @@ export default function({
             variant="contained"
             disabled={selectedColumns.length ? false : true}
             color="primary"
+            data-testid ='button_apply'
             classes={{ containedPrimary: classes.buttonStyles }}
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}

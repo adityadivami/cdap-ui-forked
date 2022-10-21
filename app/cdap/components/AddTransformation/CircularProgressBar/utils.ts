@@ -17,12 +17,12 @@
 import { IHeaderNamesList, IDataQuality, IRecords } from '../types';
 
 export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeaderNamesList[]) => {
-  const dataQualityToArray: Array<Array<string | IRecords>> | any = statistics ? Object.entries(statistics) : '';
+  const dataQualityToArray:any = statistics ? Object.entries(statistics) : '';
   const dataQuality = [] as IDataQuality[];
   columnList.map((columnName: IHeaderNamesList) => {
     dataQualityToArray.forEach(([key, value]) => {
       if (columnName.name == key) {
-        const generalValues: Array<Array<string | number | boolean | IRecords>> = Object.entries(
+        const generalValues: Array<Array<string | number | boolean | IRecords>>| any= Object.entries(
           value
         );
         generalValues.forEach(([vKey, vValue]) => {
