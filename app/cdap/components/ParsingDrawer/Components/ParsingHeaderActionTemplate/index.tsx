@@ -16,13 +16,13 @@
 
 import { Box } from '@material-ui/core';
 import { useStyles } from 'components/ParsingDrawer/styles';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 import T from 'i18n-react';
 
-export default function(props){
+export default function(props) {
   const classes = useStyles();
-  const handleFile = (event) => {
+  const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
     const schemaFile = event.target.files[0];
     const reader = new FileReader();
     reader.readAsText(schemaFile, 'UTF-8');
@@ -35,9 +35,8 @@ export default function(props){
       } catch (e) {
         props.setErrorOnTransformation({
           open: true,
-          message: 'Imported schema is not a valid Avro schema',
+          message: T.translate('features.WranglerNewParsingDrawer.importSchemaErrorMessage'),
         });
-        // setParsingErrorMessage('Imported schema is not a valid Avro schema');
       }
     };
   };
@@ -64,4 +63,4 @@ export default function(props){
       </span>
     </Box>
   );
-};
+}

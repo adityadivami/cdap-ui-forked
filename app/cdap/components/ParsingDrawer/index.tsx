@@ -76,7 +76,9 @@ export default function({ setLoading, updateDataTranformation }) {
     } catch (err) {
       setErrorOnTransformation({
         open: true,
-        message: JSON.stringify(T.translate('features.WranglerNewParsingDrawer.transformationErrorMessage1')),
+        message: JSON.stringify(
+          T.translate('features.WranglerNewParsingDrawer.transformationErrorMessage1')
+        ),
       });
       setLoading(false);
     }
@@ -84,8 +86,8 @@ export default function({ setLoading, updateDataTranformation }) {
 
   const handleSchemaUpload = (schema) => {
     setSchemaValue(schema);
+    console.log(schema, 'schema');
   };
-
   const onConfirm = async (parseConfig) => {
     try {
       await createWorkspaceInternal(connectionPayload, parseConfig);
@@ -143,7 +145,9 @@ export default function({ setLoading, updateDataTranformation }) {
           handleCloseError={() =>
             setErrorOnTransformation({
               open: false,
-              message: JSON.stringify(T.translate('features.WranglerNewParsingDrawer.transformationErrorMessage2')),
+              message: JSON.stringify(
+                T.translate('features.WranglerNewParsingDrawer.transformationErrorMessage2')
+              ),
             })
           }
           messageToDisplay={errorOnTransformation.message}

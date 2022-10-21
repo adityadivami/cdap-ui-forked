@@ -72,11 +72,5 @@ describe('It Should Test the Parsing Drawer Component', () => {
     fireEvent.mouseDown(menu[1]);
     const option3 = getAllByTestId('input-select-1')[1];
     fireEvent.click(option3);
-
-    // const checkbox1 = getByTestId('parsing-checkbox-Enable quoted values');
-    // fireEvent.click(checkbox1);
-
-    // const checkbox2 = getByTestId('parsing-checkbox-Use first row as header');
-    // fireEvent.click(checkbox2);
   });
 });
