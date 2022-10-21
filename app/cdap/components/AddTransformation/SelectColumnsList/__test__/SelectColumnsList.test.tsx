@@ -55,9 +55,7 @@ describe("It should test the SelectColumnsList Component", () => {
         <Switch>
           <Route>
             <SelectColumnsList
-              columnData={[
-                // { label: "hello", type: ["test"], name: "hello" }
-              ]}
+              columnData={[]}
               selectedColumnsCount={0}
               setSelectedColumns={jest.fn()}
               dataQuality={[
@@ -79,6 +77,7 @@ describe("It should test the SelectColumnsList Component", () => {
 
     const ele = screen.getByTestId(/click-handle-focus/i);
     fireEvent.click(ele);
+    expect(ele).toBeInTheDocument()
   });
 
   it("should render the SelectColumnsList Component with some input value along with label and null", () => {
@@ -140,7 +139,7 @@ describe("It should test the SelectColumnsList Component", () => {
     fireEvent.change(inputEle, { target: { value: "123" } });
     expect(container).toBeDefined;
     });
-  it("should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array", () => {
+  it("should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the single selection function", () => {
     const mockSetSelected = jest.fn();
     const container = render(
       <Router history={history}>
@@ -164,8 +163,38 @@ describe("It should test the SelectColumnsList Component", () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined;
     const ele = screen.getAllByTestId('radio-input-radio');
     fireEvent.click(ele[0],{target:{checked:true}});
+    expect(container).toBeDefined;
+  });
+
+  it("should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the multiple selection function", () => {
+    const mockSetSelected = jest.fn();
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <SelectColumnsList
+              selectedColumnsCount={0}
+              columnData={[
+                { label: "hello", type: ["a", "b"], name: "test" },
+                { label: "hello", type: ["a", "b"], name: "test" },
+              ]}
+              setSelectedColumns={mockSetSelected}
+              dataQuality={[
+                { label: "hello", value: "" },
+                { label: "world", value: "" },
+              ]}
+              directiveFunctionSupportedDataType={['TEST','all']}
+              functionName={"join-columns"}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    const ele = screen.getAllByTestId('check-box-input-checkbox');
+    fireEvent.click(ele[0],{target:{checked:true}});
+    fireEvent.click(ele[0],{target:{checked:false}});
+    expect(container).toBeDefined;
   });
 });
