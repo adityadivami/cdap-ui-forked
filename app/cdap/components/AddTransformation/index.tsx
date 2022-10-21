@@ -35,10 +35,6 @@ export default function({
   const [dataQualityValue, setDataQualityValue] = useState([] as IDataQuality[]);
   const classes = useStyles();
 
-  const closeClickHandler = () => {
-    callBack();
-  };
-
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
     callBack();
@@ -81,6 +77,7 @@ export default function({
             classes={{ containedPrimary: classes.buttonStyles }}
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
+            data-testid='add-transform-button'
           >
             {T.translate('features.WranglerNewAddTransformation.done')}
           </Button>
