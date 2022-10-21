@@ -19,17 +19,18 @@ import React, { ChangeEvent } from "react";
 import RadioInput from "..";
 
 describe("It should render ", () => {
-  it("Should render RadioInput component", () => {
-    const container = render(
+  it("Should render RadioInput component and trigger the on click event", () => {
+    const MockOnChange = jest.fn();
+    render(
       <RadioInput
         selectedColumns={[{label:'test', name:'test', type:['test']}]}
-        onSingleSelection={() => jest.fn()}
+        onSingleSelection={MockOnChange}
         eachColumn={{label:'test', name:'test', type:['test']}}
       />
     );
 
     const ele = screen.getByTestId(/radio-input-radio/i);
-    fireEvent.change(ele);
-    expect(container).toBeDefined();
+    fireEvent.click(ele,{target:{checked:true}});
+    expect(MockOnChange).toHaveBeenCalled()
   });
 });

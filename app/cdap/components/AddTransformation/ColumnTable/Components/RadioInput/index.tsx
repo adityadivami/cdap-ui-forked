@@ -18,11 +18,12 @@ import { Radio } from '@material-ui/core';
 import { IRadioInputProps } from '../../types';
 
 export default function({ selectedColumns, onSingleSelection, eachColumn }: IRadioInputProps) {
+  
   return (
     <>
       <Radio
         color="primary"
-        onChange={() => onSingleSelection(eachColumn)}
+        onClick={()=>onSingleSelection(eachColumn)}
         checked={
           Array.isArray(selectedColumns) &&
           selectedColumns?.filter((el) => el.label == eachColumn.label).length
