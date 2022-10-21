@@ -14,15 +14,21 @@
  * the License.
  */
 
+import T from 'i18n-react';
+
 export const KEBAB_GRID_PAGE_OPTION = [
   {
-    label: 'Ingest Data',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.kebab.ingestData'
+    ),
     value: 'ingest-data',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
-    label: 'View Schema',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.kebab.viewSchema'
+    ),
     value: 'view-schema',
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
 ];

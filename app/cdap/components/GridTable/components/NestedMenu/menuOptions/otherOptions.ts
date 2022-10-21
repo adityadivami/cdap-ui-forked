@@ -13,30 +13,41 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import T from 'i18n-react';
 
 export const OTHER_OPTIONS = [
   {
     value: 'define-variable',
-    label: 'Define variable',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.other.defineVariable'
+    ),
     supported_dataType: ['all'],
   },
   {
     value: 'set-counter',
-    label: 'Set counter',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.other.setCounter'
+    ),
     supported_dataType: ['all'],
   },
   {
     value: 'send-to-error',
-    label: 'Send to error',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.other.sendToError'
+    ),
     supported_dataType: ['all'],
   },
   {
     value: 'customTransform',
-    label: 'Custom Transform',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.other.customTransform'
+    ),
     supported_dataType: ['all'],
   },
   {
-    label: 'Character count',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.other.characterCount'
+    ),
     value: 'CHARCOUNT',
     sign: null,
     inputRequired: true,

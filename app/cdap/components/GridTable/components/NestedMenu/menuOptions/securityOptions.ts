@@ -13,31 +13,42 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import T from 'i18n-react';
 
 export const SECURITY_OPTIONS = [
   {
     value: 'mask-data',
-    label: 'Mask Data',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.security.maskData'
+    ),
     options: [
       {
         value: 'last-4',
-        label: 'Show last 4 characters only',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.last4'
+        ),
         supported_dataType: ['string'],
       },
       {
         value: 'last-2',
-        label: 'Show last 2 characters only',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.last2'
+        ),
         supported_dataType: ['string'],
       },
       {
         value: 'numbers',
-        label: 'Custom Selection',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.customSelection'
+        ),
         supported_dataType: ['string'],
       },
       { value: 'divider' },
       {
         value: 'shuffle',
-        label: 'By Shuffling',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.shuffle'
+        ),
         supported_dataType: ['string'],
       },
     ],
@@ -45,29 +56,99 @@ export const SECURITY_OPTIONS = [
   },
   {
     value: 'encode',
-    label: 'Encode',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.security.encode'
+    ),
     options: [
-      { value: 'encode-base64', label: 'Base64', supported_dataType: ['all'] },
-      { value: 'encode-base32', label: 'Base32', supported_dataType: ['all'] },
-      { value: 'encode-hex', label: 'Hex', supported_dataType: ['all'] },
-      { value: 'encode-url', label: 'URL', supported_dataType: ['all'] },
+      {
+        value: 'encode-base64',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.encodeBase64'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
+      },
+      {
+        value: 'encode-base32',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.encodeBase32'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
+      },
+      {
+        value: 'encode-hex',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.encodeHex'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
+      },
+      {
+        value: 'encode-url',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.encodeUrl'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
+      },
     ],
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'decode',
-    label: 'Decode',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.security.decode'
+    ),
     options: [
-      { value: 'decode-base64', label: 'Base64', supported_dataType: ['all'] },
-      { value: 'decode-base32', label: 'Base32', supported_dataType: ['all'] },
-      { value: 'decode-hex', label: 'Hex', supported_dataType: ['all'] },
-      { value: 'decode-url', label: 'URL', supported_dataType: ['all'] },
+      {
+        value: 'decode-base64',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.decodeBase64'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
+      },
+      {
+        value: 'decode-base32',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.decodeBase32'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
+      },
+      {
+        value: 'decode-hex',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.decodeHex'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
+      },
+      {
+        value: 'decode-url',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.security.decodeUrl'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
+      },
     ],
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'hash',
-    label: 'Hash',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.security.hash'
+    ),
     supported_dataType: ['string'],
   },
 ];

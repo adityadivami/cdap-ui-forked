@@ -3540,3 +3540,117 @@ features:
               double: double
               decimal: decimal
               bytes: bytes
+            fragment:
+              parse: Parse
+              extract: Extract
+              usingPatterns: Using Patterns
+              usingDelimiters: Using Delimiters
+              usingPositions: Using Positions
+              explode: Explode
+              delimitedText: Delimited Text
+              arrayByFlattening: Array By Flattening
+              recordByFlattening: Record By Flattening
+            kebab:
+              ingestData: Ingest Data
+              viewSchema: View Schema
+            math:
+              algebra: Algebra
+              add: Add
+              subtract: Subtract
+              multiply: Multiply
+              divide: Divide
+              modulo: Modulo
+              powerOf: Power of
+              square: Square
+              squareRoot: Square root
+              cube: Cube
+              cubeRoot: Cube root
+              log: log
+              naturalLog: Natural log
+              absoluteValue: Absolute value
+              ceil: Ceil
+              floor: Floor
+              trigonometry: Trigonometry
+              sin: Sin
+              cos: Cos
+              tan: Tan
+              arcsin: ARCSIN
+              arccos: ARCCOS
+              arctan: ARCTAN
+              random: Random
+              decimal: DECIMAL
+              decimalAdd: Decimal Add
+              decimalSubtract: Decimal Subtract
+              decimalMultiply: Decimal Multiply
+              decimalDivide: Decimal Divide
+              decimalDivider: Decimal Divider
+              precision: Precision
+              scale: Scale
+              unscaled: Unscaled
+              decimalLeft: Decimal left
+              decimalRight: Decimal right
+              decimalPowerOf: Decimal power of
+              decimalAbsoluteValue: Decimal absolute value
+              decimalSquare: Decimal square
+              decimalCube: Decimal cube
+              negate: Negate
+              stripZero: Strip zero
+              sign: Sign
+            menu:
+              changeDatatype: Change data type
+              setCharacterEncoding: Set character encoding
+              UTF8: UTF-8
+              UTF16: UTF-16
+              USASCII: US-ASCII
+              ISO88591: ISO-8859-1
+              UTF16BE: UTF-16BE
+              UTF16LE: UTF-16LE
+              format: Format
+              upperCase: UPPERCASE
+              lowerCase: Lowercase
+              titleCase: Title Case
+              concatenate: Concatenate
+              whiteSpaces: White spaces
+              leadingWhiteSpaces: Leading white spaces
+              trailingWhiteSpaces: Trailing White spaces
+              dateTime: Date time
+              dateTimeAsString: Date time as string
+              customTransform: Custom Transform
+              filter: Filter
+              findAndReplace: Find and Replace
+            other:
+              defineVariable: Define variable
+              setCounter: Set counter
+              sendToError: Send to error
+              customTransform: custom Transform
+              characterCount: Character count
+            parse:
+              parseCSV: CSV
+              parseAvro: Avro
+              parseExcel: Excel
+              parseJSON: JSON
+              parseXML: XML to JSON
+              parseLog: Log
+              parseSimpleDate: Simple Date
+              parseDateTime: Datetime
+              parseFixedLength: Fixed Length
+              parseHL7: HL7
+            security:
+              maskData: Mask Data
+              last4: Show last 4 characters only
+              last2: Show last 2 characters only
+              customSelection: Custom Selection
+              shuffle: By Shuffling
+              encode: Encode
+              encodeBase64: Base64
+              encodeBase32: Base32
+              encodeHex: Hex
+              encodeUrl: URL
+              decode: Decode
+              decodeBase64: Base64
+              decodeBase32: Base32
+              decodeHex: Hex
+              decodeUrl: URL
+              hash: Hash
+
+              

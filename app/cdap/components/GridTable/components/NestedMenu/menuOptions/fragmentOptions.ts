@@ -15,56 +15,85 @@
  */
 
 import { PARSE_OPTIONS } from './parseOptions';
+import T from 'i18n-react';
 
 export const FRAGMENT_OPTIONS = [
   {
     value: 'parse',
-    label: 'Parse',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.parse'
+    ),
     options: PARSE_OPTIONS,
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'extract',
-    label: 'Extract',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.extract'
+    ),
     options: [
       {
         value: 'using-patterns',
-        label: 'Using Patterns',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.usingPatterns'
+        ),
         supported_dataType: ['string'],
       },
       {
         value: 'using-delimiters',
-        label: 'Using Delimiters',
-        supported_dataType: ['all'],
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.usingDelimiters'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
       },
       {
         value: 'using-positions',
-        label: 'Using Positions',
-        supported_dataType: ['all'],
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.usingPositions'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
       },
     ],
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'explode',
-    label: 'Explode',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.explode'
+    ),
     options: [
       {
         value: 'delimited-text',
-        label: 'Delimited Text',
-        supported_dataType: ['all'],
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.delimitedText'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
       },
       {
         value: 'array-flattening',
-        label: 'Array By Flattening',
-        supported_dataType: ['all'],
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.arrayByFlattening'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
       },
       {
         value: 'record-flattening',
-        label: 'Record By Flattening',
-        supported_dataType: ['all'],
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.fragment.recordByFlattening'
+        ),
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all'),
+        ],
       },
     ],
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
 ];

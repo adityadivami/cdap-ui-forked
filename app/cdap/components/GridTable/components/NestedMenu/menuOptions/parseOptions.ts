@@ -14,55 +14,77 @@
  * the License.
  */
 
+import T from 'i18n-react';
+
 export const PARSE_OPTIONS = [
   {
     value: 'parseCSV',
-    label: 'CSV',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseCSV'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseAvro',
-    label: 'Avro',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseAvro'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseExcel',
-    label: 'Excel',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseExcel'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseJSON',
-    label: 'JSON',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseJSON'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseXML',
-    label: 'XML to JSON',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseXML'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseLog',
-    label: 'Log',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseLog'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseSimpleDate',
-    label: 'Simple Date',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseSimpleDate'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseDateTime',
-    label: 'Datetime',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseDateTime'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseFixedLength',
-    label: 'Fixed Length',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseFixedLength'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'parseHL7',
-    label: 'HL7',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseHL7'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
 ];

@@ -15,46 +15,63 @@
  */
 
 import { DATATYPE_OPTIONS } from './datatypeOptions';
+import T from 'i18n-react';
 
 export const MENU_OPTIONS = [
   {
     value: 'changeDatatype',
-    label: 'Change data type',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.changeDatatype'
+    ),
     options: DATATYPE_OPTIONS,
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'set-character-encoding',
-    label: 'Set character encoding',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.setCharacterEncoding'
+    ),
     options: [
       {
         value: 'character-encoding-utf8',
-        label: 'UTF-8',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.UTF8'
+        ),
         supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-utf16',
-        label: 'UTF-16',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.UTF16'
+        ),
         supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-us-ascii',
-        label: 'US-ASCII',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.USASCII'
+        ),
         supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-iso-8859-1',
-        label: 'ISO-8859-1',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.ISO88591'
+        ),
         supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-utf16-be',
-        label: 'UTF-16BE',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.UTF-16BE'
+        ),
         supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-utf16-le',
-        label: 'UTF-16LE',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.UTF16LE'
+        ),
         supported_dataType: ['byte'],
       },
     ],
@@ -62,43 +79,71 @@ export const MENU_OPTIONS = [
   },
   {
     value: 'text',
-    label: 'Format',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.format'
+    ),
     options: [
       {
         value: 'uppercase',
-        label: 'UPPERCASE',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.upperCase'
+        ),
         supported_dataType: ['string'],
       },
       {
         value: 'lowercase',
-        label: 'Lowercase',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.lowerCase'
+        ),
         supported_dataType: ['string'],
       },
       {
         value: 'titlecase',
-        label: 'Title Case',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.titleCase'
+        ),
         supported_dataType: ['string'],
       },
       {
         value: 'concatenate',
-        label: 'Concatenate',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.concatenate'
+        ),
         supported_dataType: ['string'],
       },
-      { value: 'trim', label: 'White spaces', supported_dataType: ['string'] },
+      {
+        value: 'trim',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.whiteSpaces'
+        ),
+        supported_dataType: ['string'],
+      },
       {
         value: 'ltrim',
-        label: 'Leading white spaces',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.leadingWhiteSpaces'
+        ),
         supported_dataType: ['string'],
       },
       {
         value: 'rtrim',
-        label: 'Trailing White spaces',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.trailingWhiteSpaces'
+        ),
         supported_dataType: ['string'],
       },
-      { value: 'dateTime', label: 'Date time', supported_dataType: ['string'] },
+      {
+        value: 'dateTime',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.dateTime'
+        ),
+        supported_dataType: ['string'],
+      },
       {
         value: 'dateTimeAsString',
-        label: 'Date time as string',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.menu.dateTimeAsString'
+        ),
         supported_dataType: ['string'],
       },
     ],
@@ -106,17 +151,23 @@ export const MENU_OPTIONS = [
   },
   {
     value: 'customTransform',
-    label: 'Custom Transform',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.customTransform'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'filter',
-    label: 'Filter',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.filter'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'findAndReplace',
-    label: 'Find and Replace',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.findAndReplace'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
 ];
