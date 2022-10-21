@@ -14,13 +14,19 @@
  * the License.
  */
 
-import React from 'react';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
-import { fetchConnectionDetails, fetchConnectors } from 'components/Connections/Create/reducer';
-import { getCategoriesToConnectorsMap } from '../WidgetData/utils';
-import WidgetSVG from '../WidgetData/index';
-import { ImportDatasetIcon, AddConnectionIcon, ImportDataIcon } from '../iconStore/ConnectorIcons';
+import {
+  fetchAllConnectorPluginProperties,
+  fetchConnectionDetails,
+  fetchConnectors,
+  getMapOfConnectorToPluginProperties,
+  getSelectedConnectorDisplayName,
+} from 'components/Connections/Create/reducer';
+import React from 'react';
+import { AddConnectionIcon, ImportDataIcon, ImportDatasetIcon } from '../iconStore/ConnectorIcons';
 import { IConnectorArray, IConnectorDetailPayloadArray } from '../types';
+import WidgetSVG from '../WidgetData/index';
+import { getCategoriesToConnectorsMap } from '../WidgetData/utils';
 
 export const getWidgetData = async (cbUpdateState) => {
   const connectorTypes = await fetchConnectors();
@@ -40,6 +46,7 @@ export const getWidgetData = async (cbUpdateState) => {
       });
     }
   });
+
   const connectionDetailsData = await Promise.all(
     connectionPayloadArray.map(async (item, index) => {
       const selectedConnector = {
@@ -112,7 +119,26 @@ export const getWidgetData = async (cbUpdateState) => {
     link: 'connections/create',
   });
 
-  console.log(connectorDataWithSvgArray, 'console');
+  const allConnectorsPluginProperties1 = await fetchAllConnectorPluginProperties(connectorTypes);
+
+  const mapOfConnectorPluginProperties = getMapOfConnectorToPluginProperties(
+    allConnectorsPluginProperties1
+  );
+
+  connectorTypes.forEach((eachConnectorType) => {
+    const displayName = getSelectedConnectorDisplayName(
+      eachConnectorType,
+      mapOfConnectorPluginProperties
+    );
+    const index = connectorDataWithSvgArray.findIndex(
+      (eachConnectorDataWithSvgArray) =>
+        eachConnectorDataWithSvgArray.name === eachConnectorType.name
+    );
+
+    if (index >= 0) {
+      connectorDataWithSvgArray[index].displayName = displayName;
+    }
+  });
 
   cbUpdateState({
     connectorTypes: connectorDataWithSvgArray,

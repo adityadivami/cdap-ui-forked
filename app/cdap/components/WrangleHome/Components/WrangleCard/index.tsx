@@ -63,7 +63,9 @@ export default function() {
             <Card className={classes.card}>
               <Box className={classes.cardContent} key={index}>
                 {item.SVG}
-                <Typography className={classes.cardText}>{item.name}</Typography>
+                <Typography className={classes.cardText}>
+                  {item.displayName ?? item.name}
+                </Typography>
               </Box>
             </Card>
           </Link>
