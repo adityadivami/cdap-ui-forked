@@ -19,7 +19,7 @@ import T from 'i18n-react';
 import { useStyles } from '../styles';
 import { TickIcon } from '../iconStore';
 
-export default function({functionName}: {functionName: string}) {
+export default function({ functionName }: { functionName: string }) {
   const classes = useStyles();
 
   return (

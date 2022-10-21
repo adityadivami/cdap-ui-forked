@@ -14,6 +14,6 @@
  * the License.
  */
 
-export interface ISelectColumnCount{
-    selectedColumnsCount: number
+export interface ISelectColumnCount {
+  selectedColumnsCount: number;
 }

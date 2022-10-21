@@ -72,7 +72,7 @@ export const useStyles = makeStyles(() => {
       cursor: 'pointer',
     },
     backIconClass: {
-      cursor: 'pointer'
-    }
+      cursor: 'pointer',
+    },
   };
 });

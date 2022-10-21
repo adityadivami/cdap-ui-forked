@@ -22,38 +22,41 @@ import { ISelectColumnWidget } from './types';
 import ButtonWidget from '../ButtonWidget';
 
 export default function({
-  selectedColumns, functionName, handleSelectColumn
+  selectedColumns,
+  functionName,
+  handleSelectColumn,
 }: ISelectColumnWidget) {
   const classes = useStyles();
 
-  const singleColumnSelect = () => {
-    return (
-      <>
-        <div className={classes.functionHeadingTextStyles}>
-          {T.translate('features.WranglerNewAddTransformation.selectColumn')}
-        </div>
-        <div className={classes.quickSelectTextStyles}>
-          {T.translate('features.WranglerNewAddTransformation.quickSelect')}
-        </div>
-        {selectedColumns.length ? (
-          selectedColumns.map((item, index) => 
-              <Typography variant="body1" className={classes.quickSelectTextStyles}>
-                {index + 1}.&nbsp; {item.label}
-              </Typography>
-            )
-          )
-         : (
-          <ButtonWidget
-            buttonText={multipleColumnSelected.filter((el) => el.value === functionName).length > 0 ? T.translate('features.WranglerNewAddTransformation.selectMultiColumns') : T.translate('features.WranglerNewAddTransformation.selectCoulmn')}
-            className={classes.selectButtonStyles}
-            onClick={() => handleSelectColumn(false)}
-            variant="outlined"
-            disabled={false}
-          />
-        )}
-      </>
-    );
-  };
+  const singleColumnSelect = (
+    <>
+      <div className={classes.functionHeadingTextStyles}>
+        {T.translate('features.WranglerNewAddTransformation.selectColumn')}
+      </div>
+      <div className={classes.quickSelectTextStyles}>
+        {T.translate('features.WranglerNewAddTransformation.quickSelect')}
+      </div>
+      {Array.isArray(selectedColumns) && selectedColumns.length ? (
+        selectedColumns.map((item, index) => (
+          <Typography variant="body1" className={classes.quickSelectTextStyles}>
+            {index + 1}.&nbsp; {item.label}
+          </Typography>
+        ))
+      ) : (
+        <ButtonWidget
+          buttonText={
+            multipleColumnSelected?.filter((el) => el.value === functionName).length > 0
+              ? T.translate('features.WranglerNewAddTransformation.selectMultiColumns')
+              : T.translate('features.WranglerNewAddTransformation.selectCoulmn')
+          }
+          className={classes.selectButtonStyles}
+          onClick={() => handleSelectColumn(false)}
+          variant="outlined"
+          disabled={false}
+        />
+      )}
+    </>
+  );
 
-  return <section className={classes.functionSectionStyles}>{singleColumnSelect()}</section>;
+  return <section className={classes.functionSectionStyles}>{singleColumnSelect}</section>;
 }

@@ -80,7 +80,7 @@ export default function({
       >
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
-            <SelectedColumnCountWidget selectedColumnsCount={selectedColumns.length} />
+            <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
             <FunctionNameWidget functionName={functionName} />
             <SelectColumnsWidget
               handleSelectColumn={handleSelectColumn}
@@ -93,7 +93,7 @@ export default function({
             className={classes.applyStepButtonStyles}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
             variant="contained"
-            disabled={selectedColumns.length ? false : true}
+            disabled={selectedColumns?.length ? false : true}
           />
         </Container>
       </DrawerWidget>
@@ -107,7 +107,7 @@ export default function({
           <div className={classes.addTransformationBodyWrapperStyles}>
             <SelectColumnsList
               columnData={columnData}
-              selectedColumnsCount={selectedColumns.length}
+              selectedColumnsCount={selectedColumns?.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={dataQualityValue}
               directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
@@ -119,7 +119,7 @@ export default function({
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
             variant="contained"
-            disabled={selectedColumns.length ? false : true}
+            disabled={selectedColumns?.length ? false : true}
           />
         </Container>
       </DrawerWidget>
