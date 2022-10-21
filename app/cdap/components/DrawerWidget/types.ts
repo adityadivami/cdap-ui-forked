@@ -14,19 +14,19 @@
  * the License.
  */
 
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 export interface IDrawerWidgetHeadingProps {
   headingText: string | ReactNode;
 }
 
 export interface IDrawerWidget {
-  headingText?: any;
-  openDrawer?: any;
-  showDivider?: any;
-  headerActionTemplate: any;
-  children: any;
-  closeClickHandler?: any;
-  showBackIcon: any;
-  anchor: any;
+  headingText?: ReactNode | string;
+  openDrawer?: boolean;
+  showDivider?: boolean;
+  headerActionTemplate?: ReactNode | JSX.Element;
+  children?: ReactNode;
+  closeClickHandler?: () => void;
+  showBackIcon?: boolean;
+  anchor?: 'bottom' | 'left' | 'right' | 'top';
 }

@@ -33,12 +33,12 @@ const FILE_SIZE_LIMIT = 10 * 1024 * 1024; // 10 MB
 const cookie = new Cookies();
 
 export default function(props) {
-  const [drawerStatus, setDrawerStatus] = useState(true);
-  const [file, setFile] = useState(null);
+  const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
+  const [file, setFile] = useState<File>(null);
   const classes = useStyles();
   const [recordDelimiter, setRecordDelimiter] = useState('\\n');
-  const [workspaceId, setWorkspaceId] = useState(null);
-  const [error, setError] = useState(null);
+  const [workspaceId, setWorkspaceId] = useState<string>(null);
+  const [error, setError] = useState<unknown>(null);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
 
   useEffect(() => {
@@ -52,8 +52,8 @@ export default function(props) {
 
   const onDropHandler = (e) => {
     if (e) {
-      const isJSONOrXML = e[0].type === 'application/json' || e[0].type === 'text/xml';
-      if (e[0].size > FILE_SIZE_LIMIT) {
+      const isJSONOrXML = e[0]?.type === 'application/json' || e[0]?.type === 'text/xml';
+      if (e[0]?.size > FILE_SIZE_LIMIT) {
         setError('File size must be less than 10MB');
       } else {
         setFile(e[0]);
@@ -105,7 +105,7 @@ export default function(props) {
         }
       },
       (err) => {
-        setError(err.message);
+        setError(err);
       }
     );
   };
@@ -125,7 +125,7 @@ export default function(props) {
   const componentToRender = (
     <DrawerWidget
       headingText={T.translate('features.ImportData.referenceLabel')}
-      openDrawer={setDrawerStatus}
+      openDrawer={drawerStatus}
       showDivider={true}
       closeClickHandler={closeClickHandler}
     >

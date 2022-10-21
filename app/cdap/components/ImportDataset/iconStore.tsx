@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-export const uploadSVG = () => {
+export const UploadSVG = () => {
   return (
     <svg
       width="175"
@@ -267,7 +267,7 @@ export const uploadSVG = () => {
   );
 };
 
-export const infoIcon = () => {
+export const InfoIcon = () => {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -278,7 +278,7 @@ export const infoIcon = () => {
   );
 };
 
-export const deleteSVG = () => {
+export const DeleteSVG = () => {
   return (
     <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

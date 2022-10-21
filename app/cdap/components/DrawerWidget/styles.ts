@@ -14,21 +14,22 @@
  * the License.
  */
 
+import grey from '@material-ui/core/colors/grey';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
   return {
     paper: {
-      top: '46px',
+      top: 46,
       height: 'calc(100vh - 47px)',
     },
     drawerContainerStyles: {
       width: 460,
       height: '100%',
-      paddingLeft: '30px',
+      paddingLeft: 30,
     },
     headerStyles: {
-      height: '60px',
+      height: 60,
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -42,6 +43,7 @@ export const useStyles = makeStyles(() => {
     },
     pointerStyles: {
       cursor: 'pointer',
+      fontSize: 24,
     },
     headingTextStyles: {
       fontFamily: 'Noto Sans',
@@ -49,7 +51,7 @@ export const useStyles = makeStyles(() => {
       fontWeight: 400,
       fontSize: 20,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
+      letterSpacing: 0.15,
       color: '#000000',
     },
     headerRightStyles: {
@@ -67,10 +69,14 @@ export const useStyles = makeStyles(() => {
       alignItems: 'center',
     },
     headerBackIconStyles: {
-      marginRight: '10px',
-      width: '10px',
-      height: '20px',
+      marginRight: 10,
+      width: 10,
+      height: 20,
       cursor: 'pointer',
+    },
+    leftArrow: {
+      fontSize: 24,
+      color: grey[600],
     },
   };
 });

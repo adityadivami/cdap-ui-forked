@@ -19,10 +19,11 @@ import { useDropzone } from 'react-dropzone';
 import classnames from 'classnames';
 import { useStyles } from '../../styles';
 import { Box, Divider, Typography } from '@material-ui/core';
-import { uploadSVG, infoIcon, deleteSVG } from 'components/ImportDataset/iconStore';
+import { UploadSVG, InfoIcon, DeleteSVG } from 'components/ImportDataset/iconStore';
 import T from 'i18n-react';
+import { IDragAndDrop } from 'components/ImportDataset/types';
 
-export default function({ file, onDropHandler }) {
+export default function({ file, onDropHandler }: IDragAndDrop) {
   const classes = useStyles();
   const onDrop = useCallback((acceptedFiles) => {
     onDropHandler(acceptedFiles);
@@ -47,7 +48,7 @@ export default function({ file, onDropHandler }) {
           >
             <input {...getInputProps()} />
             <div className={classes.uploadBox}>
-              {uploadSVG()}
+              <UploadSVG />
               <Typography variant="body1" className={classes.dropText}>
                 {T.translate('features.ImportData.dragAndDropTextLine1')}
                 <br />
@@ -56,7 +57,8 @@ export default function({ file, onDropHandler }) {
             </div>
           </div>
           <Typography variant="body1" className={classes.dropText}>
-            {infoIcon()} {T.translate('features.ImportData.maxSizeText')}
+            <InfoIcon />
+            {T.translate('features.ImportData.maxSizeText')}
           </Typography>
         </>
       ) : (
@@ -68,7 +70,7 @@ export default function({ file, onDropHandler }) {
               data-testid="delete-svg"
               onClick={handleRemoveFile}
             >
-              {deleteSVG()}
+              <DeleteSVG />
             </Box>
           </Box>
           <Divider />

@@ -14,14 +14,7 @@
  * the License.
  */
 
-import { IDragAndDrop } from 'components/ImportDataset/types';
-import React from 'react';
-import DragDrop from '../DragAndDrop';
-
-export default function({ file, onDropHandler }: IDragAndDrop) {
-  return (
-    <div>
-      <DragDrop file={file} onDropHandler={onDropHandler} />
-    </div>
-  );
+export interface IDragAndDrop {
+  file: File;
+  onDropHandler: (e: unknown) => void;
 }

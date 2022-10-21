@@ -14,18 +14,19 @@
  * the License.
  */
 
+import grey from '@material-ui/core/colors/grey';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles({
   dropContainer: {
-    height: '400px',
+    height: 400,
     textAlign: 'center',
-    border: '1px dashed #616161',
-    borderRadius: '4px',
+    border: `1px dashed ${grey[700]}`,
+    borderRadius: 4,
     position: 'relative',
     zIndex: 99,
     padding: 20,
-    width: '400px',
+    width: 400,
   },
   delete_cursor_pointer: {
     cursor: 'pointer',
@@ -36,18 +37,18 @@ export const useStyles = makeStyles({
     fontWeight: 400,
     fontSize: 14,
     lineHeight: '150%',
-    letterSpacing: '0.15px',
-    color: '#616161',
+    letterSpacing: 0.15,
+    color: grey[700],
     marginTop: 10,
   },
   fileNameText: {
     fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: '16px',
+    fontSize: 16,
     lineHeight: '150%',
-    letterSpacing: '0.15px',
-    color: '#212121',
+    letterSpacing: 0.15,
+    color: grey[900],
   },
   FlexFile: {
     display: 'flex',
@@ -60,22 +61,22 @@ export const useStyles = makeStyles({
     zIndex: 2,
   },
   wrangleButton: {
-    width: '162px',
-    height: '36px',
+    width: 162,
+    height: 36,
     background: '#3994FF',
     boxShadow: '0px 2px 4px rgba(70, 129, 244, 0.15)',
-    borderRadius: '4px',
+    borderRadius: 4,
     fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: '15px',
-    lineHeight: '26px',
-    letterSpacing: '0.46px',
+    fontSize: 15,
+    lineHeight: 26,
+    letterSpacing: 0.46,
     color: '#FFFFFF',
     alignSelf: 'flex-end',
-    marginTop: '30px',
+    marginTop: 30,
     textTransform: 'none',
-    marginBottom: '20px',
+    marginBottom: 20,
     '&:hover': {
       background: '#3994FF',
     },
