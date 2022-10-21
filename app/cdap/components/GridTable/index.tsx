@@ -203,6 +203,63 @@ export default function GridTable() {
     setDirectiveFunctionSupportedDataType(supported_dataType);
   };
 
+  const getAPIRequestPayload = (newDirective, action) => {
+    const { dataprep } = DataPrepStore.getState();
+    const { workspaceId, workspaceUri, directives, insights } = dataprep;
+    let gridParams = {};
+    const updatedDirectives = directives.concat(newDirective);
+    const requestBody = directiveRequestBodyCreator(updatedDirectives);
+    requestBody.insights = insights;
+    const workspaceInfo = {
+      properties: insights,
+    };
+    gridParams = {
+      directives: updatedDirectives,
+      workspaceId,
+      workspaceUri,
+      workspaceInfo,
+      insights,
+    };
+    const payload = {
+      context: params.namespace,
+      workspaceId: params.wid,
+    };
+    return { payload, requestBody, gridParams };
+  };
+  const applyDirectives = (directive) => {
+    setLoading(true);
+    if (directive) {
+      const apiPayload = getAPIRequestPayload(directive, '');
+      executeAPICall(apiPayload);
+    }
+  };
+
+  const executeAPICall = (apiPayload) => {
+    const payload = apiPayload.payload;
+    const requestBody = apiPayload.requestBody;
+    const gridParams = apiPayload.gridParams;
+    MyDataPrepApi.execute(payload, requestBody).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            values: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setLoading(false);
+        setGridData(response);
+        setDirectiveFunction('');
+      },
+      (err) => {
+        setLoading(false);
+      }
+    );
+  };
+
   return (
     <Box>
       {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
@@ -273,7 +330,7 @@ export default function GridTable() {
             setDirectiveFunction('');
           }}
           applyTransformation={(directive) => {
-            setDirectiveFunction('');
+            applyDirectives(directive);
           }}
         />
       )}

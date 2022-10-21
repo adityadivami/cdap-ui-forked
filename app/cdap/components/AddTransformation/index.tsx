@@ -26,6 +26,7 @@ import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import ButtonWidget from './ButtonWidget';
+import { getDirective } from './directives';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -62,7 +63,8 @@ export default function({
   };
 
   const handleApply = (event) => {
-    applyTransformation('');
+    const directive = getDirective(functionName, selectedColumns[0].label);
+    applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
 
