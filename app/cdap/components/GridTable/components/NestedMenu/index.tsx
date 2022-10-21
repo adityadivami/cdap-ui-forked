@@ -28,6 +28,7 @@ export default function({
   columnType,
   title,
 }: INestedMenuProps) {
+  console.log(menuOptions, 'menuOptions');
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const open = Boolean(anchorEl);

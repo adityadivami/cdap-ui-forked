@@ -18,7 +18,7 @@ import { SVGProps } from 'react';
 
 export interface INestedMenuProps {
   icon: SVGProps<SVGElement>;
-  submitMenuOption: (value: any, dataType: string[]) => void;
+  submitMenuOption: (value: string, dataType: string[]) => void;
   columnType: string;
   menuOptions: any;
   title: string;
