@@ -21,28 +21,28 @@ export const OTHER_OPTIONS = [
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.other.defineVariable'
     ),
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'set-counter',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.other.setCounter'
     ),
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'send-to-error',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.other.sendToError'
     ),
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     value: 'customTransform',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.other.customTransform'
     ),
-    supported_dataType: ['all'],
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
   {
     label: T.translate(
