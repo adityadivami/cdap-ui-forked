@@ -35,7 +35,9 @@ export default function(props) {
       } catch (e) {
         props.setErrorOnTransformation({
           open: true,
-          message: T.translate('features.WranglerNewParsingDrawer.importSchemaErrorMessage'),
+          message: T.translate(
+            'features.WranglerNewUI.WranglerNewParsingDrawer.importSchemaErrorMessage'
+          ),
         });
       }
     };
