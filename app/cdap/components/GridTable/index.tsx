@@ -40,6 +40,11 @@ import {
   IParams,
   IRecords,
   IDataQuality,
+  IRowData,
+  IMissingListData,
+  IGridParams,
+  IRequestBody,
+  IApiPayload,
 } from './types';
 import { convertNonNullPercent } from './utils';
 import AddTransformation from 'components/AddTransformation';
@@ -53,21 +58,23 @@ export default function GridTable() {
 
   const classes = useStyles();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [headersNamesList, setHeadersNamesList] = useState([] as IHeaderNamesList[]);
-  const [rowsDataList, setRowsDataList] = useState([]);
+  const [rowsDataList, setRowsDataList] = useState([] as IRowData[]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
-  const [missingDataList, setMissingDataList] = useState([] as IDataQuality[]);
-  const [workspaceName, setWorkspaceName] = useState('');
-  const [invalidCountArray, setInvalidCountArray] = useState([
+  const [missingDataList, setMissingDataList] = useState([] as IMissingListData[]);
+  const [workspaceName, setWorkspaceName] = useState<string>('');
+  const [invalidCountArray, setInvalidCountArray] = useState<Array<Record<string, string>>>([
     {
       label: 'Invalid',
       count: '0',
     },
   ]);
-  const [showBreadCrumb, setShowBreadCrumb] = useState(true);
-  const [directiveFunction, setDirectiveFunction] = useState('');
-  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
+  const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
+  const [directiveFunction, setDirectiveFunction] = useState<string>('');
+  const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState<
+    string[]
+  >([]);
   const [dataQuality, setDataQuality] = useState({} as IDataQuality);
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -175,21 +182,24 @@ export default function GridTable() {
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
-    const headersData = createHeadersData(rawData.headers, rawData.types);
+    const headersData: IHeaderNamesList[] = createHeadersData(
+      rawData.headers,
+      rawData.types
+    ) as IHeaderNamesList[];
     setHeadersNamesList(headersData);
     if (rawData && rawData?.summary && rawData?.summary?.statistics) {
-      const missingData = createMissingData(gridData?.summary?.statistics);
+      const missingData: IMissingListData[] = createMissingData(gridData?.summary?.statistics);
       setMissingDataList(missingData);
       setDataQuality(gridData?.summary?.statistics);
     }
-    const rowData =
+    const rowData: IRowData[] =
       rawData &&
       rawData.values &&
       Array.isArray(rawData?.values) &&
-      rawData?.values.map((eachRow: {}) => {
+      (rawData?.values.map((eachRow: {}) => {
         const { ...rest } = eachRow;
         return rest;
-      });
+      }) as IRowData[]);
 
     setRowsDataList(rowData);
   };
@@ -207,15 +217,15 @@ export default function GridTable() {
   const applyDirectives = (directive: string) => {
     setLoading(true);
     if (directive) {
-      const apiPayload = getAPIRequestPayload(params, directive, '');
+      const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
       executeAPICall(apiPayload);
     }
   };
 
-  const executeAPICall = (apiPayload) => {
-    const payload = apiPayload.payload;
-    const requestBody = apiPayload.requestBody;
-    const gridParams = apiPayload.gridParams;
+  const executeAPICall = (apiPayload: IApiPayload) => {
+    const payload: IRecords = apiPayload.payload;
+    const requestBody: IRequestBody = apiPayload.requestBody;
+    const gridParams: IGridParams = apiPayload.gridParams;
     MyDataPrepApi.execute(payload, requestBody).subscribe(
       (response) => {
         DataPrepStore.dispatch({
@@ -307,7 +317,7 @@ export default function GridTable() {
           callBack={() => {
             setDirectiveFunction('');
           }}
-          applyTransformation={(directive) => {
+          applyTransformation={(directive: string) => {
             applyDirectives(directive);
           }}
         />

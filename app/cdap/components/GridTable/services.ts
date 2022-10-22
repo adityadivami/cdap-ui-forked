@@ -16,15 +16,20 @@
 
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
+import { IRecords, IGridParams, IRequestBody, IApiPayload } from './types';
 
-export const getAPIRequestPayload = (params, newDirective, action) => {
+export const getAPIRequestPayload = (
+  params: IRecords,
+  newDirective: string | string[],
+  action?: string
+) => {
   const { dataprep } = DataPrepStore.getState();
   const { workspaceId, workspaceUri, directives, insights } = dataprep;
-  let gridParams = {};
-  const updatedDirectives = directives.concat(newDirective);
-  const requestBody = directiveRequestBodyCreator(updatedDirectives);
+  let gridParams = {} as IGridParams;
+  const updatedDirectives: string[] = directives.concat(newDirective);
+  const requestBody: IRequestBody = directiveRequestBodyCreator(updatedDirectives);
   requestBody.insights = insights;
-  const workspaceInfo = {
+  const workspaceInfo: IRecords = {
     properties: insights,
   };
   gridParams = {
@@ -34,9 +39,14 @@ export const getAPIRequestPayload = (params, newDirective, action) => {
     workspaceInfo,
     insights,
   };
-  const payload = {
+  const payload: IRecords = {
     context: params.namespace,
     workspaceId: params.wid,
   };
-  return { payload, requestBody, gridParams };
+  const returnData: IApiPayload = {
+    payload,
+    requestBody,
+    gridParams,
+  };
+  return returnData;
 };

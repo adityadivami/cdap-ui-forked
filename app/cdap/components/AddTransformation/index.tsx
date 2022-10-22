@@ -62,7 +62,7 @@ export default function({
     setColumnsPopup(true);
   };
 
-  const handleApply = (event) => {
+  const handleApply = () => {
     const directive = getDirective(functionName, selectedColumns[0].label);
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
@@ -93,7 +93,7 @@ export default function({
           <ButtonWidget
             buttonText={T.translate('features.WranglerNewAddTransformation.applyStep')}
             className={classes.applyStepButtonStyles}
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleApply(e)}
+            onClick={handleApply}
             variant="contained"
             disabled={selectedColumns?.length ? false : true}
           />

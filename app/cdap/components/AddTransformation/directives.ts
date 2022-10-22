@@ -14,7 +14,7 @@
  * the License.
  */
 import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName, columnSelected) => {
+export const getDirective = (functionName: string, columnSelected: string) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
   } else {
