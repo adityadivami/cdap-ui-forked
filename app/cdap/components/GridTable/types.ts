@@ -48,3 +48,8 @@ export interface IHeaderNamesList {
 export interface IObject {
   [key: string]: string | number | IRecords | boolean;
 }
+
+export interface IInvalidCountArray {
+  label: string;
+  count: string;
+}

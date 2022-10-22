@@ -14,19 +14,19 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
-import React from 'react';
-import { useStyles } from '../styles';
-import { UnderLineSVG } from '../iconStore';
-import { IHeaderText } from '../types';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
-export default function({ headingText }: IHeaderText) {
-  const classes = useStyles();
+export interface IHeaderText {
+  headingText: string | number | ReactNode | boolean;
+}
 
-  return (
-    <Box className={classes.headingStyles}>
-      <div className={classes.headingTextStyles}>{headingText}</div>
-      <UnderLineSVG />
-    </Box>
-  );
+export interface IDrawerWidgetProps {
+  headingText?: string | ReactNode;
+  openDrawer: boolean | Dispatch<SetStateAction<boolean>> | unknown;
+  showDivider?: boolean;
+  headerActionTemplate?: unknown;
+  children?: unknown[] | boolean;
+  closeClickHandler?: unknown;
+  showBackIcon?: boolean;
+  anchor?: unknown;
 }

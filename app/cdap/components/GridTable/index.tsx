@@ -31,7 +31,14 @@ import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IInvalidCountArray,
+  IObject,
+  IParams,
+  IRecords,
+} from './types';
 import { convertNonNullPercent } from './utils';
 import ParsingDrawer from 'components/ParsingDrawer';
 import NoRecordScreen from 'components/NoRecordScreen';
@@ -49,8 +56,8 @@ export default function() {
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
-  const [workspaceName, setWorkspaceName] = useState('');
-  const [invalidCountArray, setInvalidCountArray] = useState([
+  const [workspaceName, setWorkspaceName] = useState<string>('');
+  const [invalidCountArray, setInvalidCountArray] = useState<IInvalidCountArray[]>([
     {
       label: 'Invalid',
       count: '0',
@@ -58,8 +65,8 @@ export default function() {
   ]);
 
   const { dataprep } = DataPrepStore.getState();
-  const [isFirstWrangle, setIsFirstWrangle] = useState(false);
-  const [connectorType, setConnectorType] = useState(null);
+  const [isFirstWrangle, setIsFirstWrangle] = useState<boolean>(false);
+  const [connectorType, setConnectorType] = useState<string>(null);
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -222,7 +229,8 @@ export default function() {
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
-            {headersNamesList?.length > 0 &&
+            {Array.isArray(headersNamesList) &&
+              headersNamesList?.length > 0 &&
               headersNamesList.map((eachHeader) => (
                 <GridHeaderCell
                   label={eachHeader.label}
@@ -232,7 +240,8 @@ export default function() {
               ))}
           </TableRow>
           <TableRow>
-            {missingDataList?.length > 0 &&
+            {Array.isArray(missingDataList) &&
+              missingDataList?.length > 0 &&
               headersNamesList.length > 0 &&
               headersNamesList.map((each, index) => {
                 return missingDataList.map((item, itemIndex) => {
@@ -244,7 +253,8 @@ export default function() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rowsDataList?.length > 0 &&
+          {Array.isArray(rowsDataList) &&
+            rowsDataList?.length > 0 &&
             rowsDataList.map((eachRow, rowIndex) => {
               return (
                 <TableRow key={`row-${rowIndex}`}>

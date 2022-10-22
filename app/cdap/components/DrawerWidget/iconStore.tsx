@@ -15,25 +15,12 @@
  */
 
 import React from 'react';
-import { Checkbox, FormControlLabel } from '@material-ui/core';
-import { useStyles } from '../../styles';
-import { IInputCheckboxProps } from 'components/ParsingDrawer/types';
 
-export default function({ label, value, onChange, className }: IInputCheckboxProps) {
-  const classes = useStyles();
-
+export const UnderLineSVG = () => {
   return (
-    <FormControlLabel
-      className={className}
-      control={
-        <Checkbox
-          onChange={onChange}
-          checked={value}
-          color="primary"
-          data-testid={`parsing-checkbox-${label}`}
-        />
-      }
-      label={<span className={classes.labelTextStyles}>{label}</span>}
-    />
+    <svg width="67" height="3" viewBox="0 0 67 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0.530273H50L53 2.5318H3L0 0.530273Z" fill="#2196F3" />
+      <path d="M54 0.530273H63.5L66.5 2.5318H57L54 0.530273Z" fill="#2196F3" />
+    </svg>
   );
-}
+};

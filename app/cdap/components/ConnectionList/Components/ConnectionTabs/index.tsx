@@ -25,6 +25,8 @@ import TabLabelCanBrowse from '../TabLabelCanBrowse';
 import TabLabelCanSample from '../TabLabelCanSample';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import { IConnectionTabs } from 'components/ConnectionList/types';
+import { IRecords } from 'components/GridTable/types';
 
 const ConnectionTab = styled(Tab)({
   width: '100%',
@@ -62,7 +64,7 @@ export default function({
   connectionId,
   setIsErrorOnNoWorkSpace,
   ...props
-}) {
+}: IConnectionTabs) {
   const classes = useStyles();
 
   const [connectionIdProp, setConnectionId] = useState(connectionId);
@@ -105,10 +107,10 @@ export default function({
                 onClick={() => {
                   if (index > 1) {
                     if (connectorType.canBrowse) {
-                      handleChange(connectorType, index);
+                      handleChange(connectorType as IRecords, index);
                     }
                   } else {
-                    handleChange(connectorType, index);
+                    handleChange(connectorType as IRecords, index);
                   }
                 }}
                 label={
@@ -116,13 +118,13 @@ export default function({
                     connectorType.canBrowse ? (
                       <TabLabelCanBrowse
                         count={undefined}
-                        label={connectorType.name}
+                        label={connectorType.name as string}
                         index={index}
                       />
                     ) : (
                       <TabLabelCanSample
-                        label={connectorType.name}
-                        entity={connectorType}
+                        label={connectorType.name as string}
+                        entity={connectorType as IRecords}
                         initialConnectionId={connectionIdProp}
                         toggleLoader={props.toggleLoader}
                         setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
@@ -130,17 +132,17 @@ export default function({
                     )
                   ) : (
                     <TabLabelCanBrowse
-                      label={connectorType.name}
-                      count={index === 0 ? connectorType.count : undefined}
+                      label={connectorType.name as string}
+                      count={index === 0 ? (connectorType.count as number) : undefined}
                       index={index}
-                      icon={connectorType.icon}
+                      icon={connectorType.icon as JSX.Element}
                     />
                   )
                 }
                 value={connectorType.name}
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
-                id={connectorType.name}
+                id={connectorType.name as string}
                 className={index > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
               />
             ))}

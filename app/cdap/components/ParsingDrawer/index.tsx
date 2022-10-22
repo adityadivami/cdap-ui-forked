@@ -24,7 +24,6 @@ import DrawerWidget from 'components/DrawerWidget';
 import PositionedSnackbar from 'components/SnackbarComponent/index';
 import T from 'i18n-react';
 import React, { useContext, useEffect, useState } from 'react';
-import ParsingHeaderActionTemplate from './Components/ParsingHeaderActionTemplate';
 import ParsingPopupBody from './Components/ParsingPopupBody';
 import {
   defaultConnectionPayload,
@@ -32,15 +31,19 @@ import {
   defaultProperties,
 } from './defaultValues';
 import { useStyles } from './styles';
+import { IConnectionPayload, IDefaultErrorOnTransformations, IParsingDrawer } from './types';
 
-export default function({ setLoading, updateDataTranformation }) {
+export default function({ setLoading, updateDataTranformation }: IParsingDrawer) {
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [properties, setProperties] = useState(defaultProperties);
-  const [schemaValue, setSchemaValue] = useState(null);
+  // const [schemaValue, setSchemaValue] = useState(null);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
-  const [errorOnTransformation, setErrorOnTransformation] = useState(defaultErrorOnTransformations);
-  const [connectionPayload, setConnectionPayload] = useState(defaultConnectionPayload);
-
+  const [errorOnTransformation, setErrorOnTransformation] = useState<
+    IDefaultErrorOnTransformations
+  >(defaultErrorOnTransformations);
+  const [connectionPayload, setConnectionPayload] = useState<IConnectionPayload>(
+    defaultConnectionPayload
+  );
   const classes = useStyles();
   const { dataprep } = DataPrepStore.getState();
 
@@ -51,16 +54,16 @@ export default function({ setLoading, updateDataTranformation }) {
       sampleRequest: {
         properties: {
           ...properties,
-          schema: schemaValue != null ? JSON.stringify(schemaValue) : null,
+          schema: null,
           _pluginName: null,
         },
         limit: 1000,
       },
     });
     setDrawerStatus(true);
-  }, [dataprep, properties, schemaValue]);
+  }, [dataprep, properties]);
 
-  const createWorkspaceInternal = async (entity, parseConfig = {}) => {
+  const createWorkspaceInternal = async (entity: IConnectionPayload, parseConfig: {}) => {
     try {
       setLoading(true);
       const wid = await createWorkspace({
@@ -68,6 +71,7 @@ export default function({ setLoading, updateDataTranformation }) {
         connection: dataprep.insights.name,
         properties: connectionPayload.sampleRequest.properties,
       });
+      console.log(wid);
       if (onWorkspaceCreate) {
         return onWorkspaceCreate(wid);
       }
@@ -76,7 +80,7 @@ export default function({ setLoading, updateDataTranformation }) {
     } catch (err) {
       setErrorOnTransformation({
         open: true,
-        message: 'Selected Transformation Cannot Be Applied',
+        message: T.translate(`features.errorMessage.transformation`),
       });
       setLoading(false);
     }
@@ -93,7 +97,7 @@ export default function({ setLoading, updateDataTranformation }) {
   const handleChange = (value: string | boolean, property: string) => {
     setProperties((prev) => ({
       ...prev,
-      [property]: value,
+      [property]: property === 'format' ? (value as string).toLowerCase() : value,
     }));
   };
 
@@ -102,12 +106,7 @@ export default function({ setLoading, updateDataTranformation }) {
       headingText={T.translate('features.WranglerNewParsingDrawer.parsing')}
       openDrawer={setDrawerStatus}
       showDivider={true}
-      headerActionTemplate={
-        <ParsingHeaderActionTemplate
-          handleSchemaUpload={(schema) => setSchemaValue(schema)}
-          setErrorOnTransformation={setErrorOnTransformation}
-        />
-      }
+      headerActionTemplate={<></>}
       closeClickHandler={() => setDrawerStatus(false)}
     >
       <Box className={classes.bodyContainerStyles}>
@@ -139,7 +138,7 @@ export default function({ setLoading, updateDataTranformation }) {
           handleCloseError={() =>
             setErrorOnTransformation({
               open: false,
-              message: 'Error Encountered...',
+              message: T.translate(`features.errorMessage.encountered`),
             })
           }
           messageToDisplay={errorOnTransformation.message}

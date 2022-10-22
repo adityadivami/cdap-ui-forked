@@ -17,6 +17,7 @@
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 import { useStyles } from '../../styles';
+import { IInputSelectProps } from 'components/ParsingDrawer/types';
 
 export default function({
   options,
@@ -27,7 +28,7 @@ export default function({
   fullWidth,
   optionClassName,
   defaultValue,
-}) {
+}: IInputSelectProps) {
   const anchorClass = useStyles();
   return (
     <Select
@@ -46,18 +47,20 @@ export default function({
         getContentAnchorEl: null,
       }}
     >
-      {options.map((option, index) => {
-        return (
-          <MenuItem
-            classes={{ ...optionClassName }}
-            value={option.value}
-            key={option.value}
-            data-testid={`input-select-${index}`}
-          >
-            {option.label}
-          </MenuItem>
-        );
-      })}
+      {Array.isArray(options) &&
+        options?.length &&
+        options.map((option, index) => {
+          return (
+            <MenuItem
+              classes={{ ...optionClassName }}
+              value={option.value}
+              key={option.value}
+              data-testid={`input-select-${index}`}
+            >
+              {option.label}
+            </MenuItem>
+          );
+        })}
     </Select>
   );
 }
