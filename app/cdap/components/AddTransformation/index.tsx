@@ -96,6 +96,7 @@ export default function({
             onClick={handleApply}
             variant="contained"
             disabled={selectedColumns?.length ? false : true}
+            dataTestId="apply-step-button"
           />
         </Container>
       </DrawerWidget>
@@ -122,6 +123,7 @@ export default function({
             onClick={closeSelectColumnsPopup}
             variant="contained"
             disabled={selectedColumns?.length ? false : true}
+            dataTestId="done-step-button"
           />
         </Container>
       </DrawerWidget>

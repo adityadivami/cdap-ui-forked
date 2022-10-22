@@ -219,6 +219,9 @@ export default function GridTable() {
     if (directive) {
       const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
       executeAPICall(apiPayload);
+    } else {
+      setLoading(false);
+      setDirectiveFunction('');
     }
   };
 

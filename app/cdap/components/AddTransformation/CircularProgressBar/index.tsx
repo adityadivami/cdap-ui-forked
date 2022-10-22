@@ -33,16 +33,21 @@ const ArcContainer = styled(Typography)`
   transform: ${(props) => `rotate(${45 + parseInt(props.value) * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
-const MatchMeter: React.FC<{ value: string }> = ({ value }) => {
+export default function({ value }: { value: string }) {
   const classes = useStyles();
 
   return (
     <>
       <Typography component="div" className={classes.progress}>
-        <Typography component="div" className={classes.barOverflow}>
+        <Typography
+          data-testid="data-quality-percent-arc"
+          component="div"
+          className={classes.barOverflow}
+        >
           <ArcContainer value={parseInt(value)}></ArcContainer>
         </Typography>
         <Typography
+          data-testid="data-quality-percent"
           component="span"
           className={
             parseInt(value) < 100
@@ -55,6 +60,4 @@ const MatchMeter: React.FC<{ value: string }> = ({ value }) => {
       </Typography>
     </>
   );
-};
-
-export default MatchMeter;
+}

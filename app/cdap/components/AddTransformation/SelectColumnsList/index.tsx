@@ -128,8 +128,13 @@ export default function({
             ref={ref}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
+            data-testid="search-column-name"
           />
-          <Box className={classes.searchInputAdornment} onClick={handleFocus}>
+          <Box
+            className={classes.searchInputAdornment}
+            data-testid="search-column-icon"
+            onClick={handleFocus}
+          >
             {SearchIcon}
           </Box>
         </div>
@@ -138,10 +143,16 @@ export default function({
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
-            <Typography className={classes.mainHeaderMessage}>
+            <Typography
+              data-testid="no-columns-to-show-title"
+              className={classes.mainHeaderMessage}
+            >
               {T.translate('features.WranglerNewSelectCoulmnList.noColumns')}
             </Typography>
-            <Typography className={classes.subHeaderMessage}>
+            <Typography
+              data-testid="no-columns-to-show-subtitle"
+              className={classes.subHeaderMessage}
+            >
               {T.translate('features.WranglerNewSelectCoulmnList.noMatchColumnDatatype')}
             </Typography>
           </Box>
