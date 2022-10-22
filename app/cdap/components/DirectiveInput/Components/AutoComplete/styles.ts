@@ -13,36 +13,36 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
+  resultRow: {
+    padding: 10,
+    borderBottom: '1px solid #E0E0E0',
+    '&:hover': {
+      background: '#EFF0F2',
+      cursor: 'pointer',
+    },
   },
-  gridTableWrapper: {
-    position: 'relative',
-    height: 'calc(100vh - 284px)',
+  activeRow: {
+    background: '#EFF0F2',
   },
-  gridTableBody: {
-    height: 'calc(100vh - 225px)',
-    overflowY: 'auto',
+  directiveTitle: {
+    fontFamily: 'Noto Sans',
+    fontStyle: 'normal',
+    fontWeight: 600,
+    fontSize: '16px',
+    letterSpacing: '0.15px',
+    color: '#616161',
   },
-  directivePanelDiv: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: '-62px',
-    backgroundColor: '#ffffff',
-    zIndex: 10,
+  directiveDescription: {
+    fontFamily: 'Noto Sans',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: '14px',
+    letterSpacing: '0.15px',
+    color: '#616161',
   },
+  directiveUsage: {},
+  listWrapper: {},
 });

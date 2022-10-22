@@ -33,8 +33,21 @@ import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IObject,
+  IParams,
+  IRecords,
+  IRowData,
+  IMissingListData,
+  IGridParams,
+  IRequestBody,
+  IApiPayload,
+} from './types';
 import { convertNonNullPercent } from './utils';
+import DirectivePanel from 'components/DirectiveInput';
+import { getAPIRequestPayload } from './services';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -57,6 +70,7 @@ export default function GridTable() {
     },
   ]);
   const [showBreadCrumb, setShowBreadCrumb] = useState(true);
+  const [openDirectivePanel, setDirectivePanel] = useState(false);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -186,8 +200,42 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  const applyDirectives = (directive: string) => {
+    setLoading(true);
+    if (directive) {
+      const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+      executeAPICall(apiPayload);
+    }
+  };
+
+  const executeAPICall = (apiPayload: IApiPayload) => {
+    const payload: IRecords = apiPayload.payload;
+    const requestBody: IRequestBody = apiPayload.requestBody;
+    const gridParams: IGridParams = apiPayload.gridParams;
+    MyDataPrepApi.execute(payload, requestBody).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            values: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setLoading(false);
+        setGridData(response);
+      },
+      (err) => {
+        setLoading(false);
+      }
+    );
+  };
+
   return (
     <Box>
+      <button onClick={() => setDirectivePanel(true)}>Open Directive</button>
       {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
@@ -197,55 +245,72 @@ export default function GridTable() {
           // TODO: will integrate with add transformation panel later
         }}
       />
-
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
-        <NoRecordScreen
-          title={T.translate('features.NoRecordScreen.gridTable.title')}
-          subtitle={T.translate('features.NoRecordScreen.gridTable.subtitle')}
-        />
-      )}
-      <Table aria-label="simple table" className="test" data-testid="grid-table">
-        <TableHead>
-          <TableRow>
-            {headersNamesList?.length > 0 &&
-              headersNamesList.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader.label}
-                  types={eachHeader.type as string[]}
-                  key={eachHeader.name}
-                />
-              ))}
-          </TableRow>
-          <TableRow>
-            {missingDataList?.length > 0 &&
-              headersNamesList.length > 0 &&
-              headersNamesList.map((each, index) => {
-                return missingDataList.map((item, itemIndex) => {
-                  if (item.name === each.name) {
-                    return <GridKPICell metricData={item} key={item.name} />;
-                  }
-                });
-              })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rowsDataList?.length > 0 &&
-            rowsDataList.map((eachRow, rowIndex) => {
-              return (
-                <TableRow key={`row-${rowIndex}`}>
-                  {headersNamesList.map((eachKey, eachIndex) => {
-                    return (
-                      <GridTextCell
-                        cellValue={eachRow[eachKey.name] || '--'}
-                        key={`${eachKey.name}-${eachIndex}`}
-                      />
-                    );
+      <Box className={classes.gridTableWrapper}>
+        <Box className={classes.gridTableBody}>
+          {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
+            <NoRecordScreen
+              title={T.translate('features.NoRecordScreen.gridTable.title')}
+              subtitle={T.translate('features.NoRecordScreen.gridTable.subtitle')}
+            />
+          )}
+          <Table aria-label="simple table" className="test" data-testid="grid-table">
+            <TableHead>
+              <TableRow>
+                {headersNamesList?.length > 0 &&
+                  headersNamesList.map((eachHeader) => (
+                    <GridHeaderCell
+                      label={eachHeader.label}
+                      types={eachHeader.type as string[]}
+                      key={eachHeader.name}
+                    />
+                  ))}
+              </TableRow>
+              <TableRow>
+                {missingDataList?.length > 0 &&
+                  headersNamesList.length > 0 &&
+                  headersNamesList.map((each, index) => {
+                    return missingDataList.map((item, itemIndex) => {
+                      if (item.name === each.name) {
+                        return <GridKPICell metricData={item} key={item.name} />;
+                      }
+                    });
                   })}
-                </TableRow>
-              );
-            })}
-        </TableBody>
-      </Table>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rowsDataList?.length > 0 &&
+                rowsDataList.map((eachRow, rowIndex) => {
+                  return (
+                    <TableRow key={`row-${rowIndex}`}>
+                      {headersNamesList.map((eachKey, eachIndex) => {
+                        return (
+                          <GridTextCell
+                            cellValue={eachRow[eachKey.name] || '--'}
+                            key={`${eachKey.name}-${eachIndex}`}
+                          />
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </Box>
+
+        {openDirectivePanel && (
+          <Box className={classes.directivePanelDiv}>
+            <DirectivePanel
+              columnNamesList={headersNamesList}
+              onDirectiveInputHandler={(directive) => {
+                applyDirectives(directive);
+                setDirectivePanel(false);
+              }}
+              onClose={() => setDirectivePanel(false)}
+              openDirectivePanel={openDirectivePanel}
+            />
+          </Box>
+        )}
+      </Box>
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />

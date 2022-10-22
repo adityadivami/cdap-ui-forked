@@ -48,3 +48,32 @@ export interface IHeaderNamesList {
 export interface IObject {
   [key: string]: string | number | IRecords | boolean;
 }
+
+export interface IRowData {
+  [key: string]: string;
+}
+
+export interface IMissingListData {
+  name: string;
+  values: Record<string, string>;
+}
+
+export interface IRequestBody {
+  directives: string[];
+  insights?: IRecords;
+  limit: number;
+}
+
+export interface IGridParams {
+  directives: string[];
+  insights: IRecords;
+  workspaceId: string;
+  workspaceInfo: IRecords;
+  workspaceUri: string;
+}
+
+export interface IApiPayload {
+  payload: IRecords;
+  requestBody: IRequestBody;
+  gridParams: IGridParams;
+}

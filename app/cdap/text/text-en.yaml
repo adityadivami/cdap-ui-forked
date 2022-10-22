@@ -3441,6 +3441,10 @@ features:
       loadToGrid: 'Wrangle'
   WranglerNewUI:
     GridPage:
+      directivePanel:
+        dollar: '$'
+        moreInfoOnDirective: 'More info to this directive'
+        usage: 'Usage'
       gridHeader:
         ariaLabels:
           functionsName: Functions Name Switch
