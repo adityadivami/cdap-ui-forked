@@ -14,11 +14,11 @@
  * the License.
  */
 
-import React, { useState, useEffect } from 'react';
 import { Box } from '@material-ui/core';
-import { useStyles } from './styles';
-import { ColumnIcon, ArrowIcon, ZoomIcon } from './images';
 import T from 'i18n-react';
+import React from 'react';
+import { ArrowIcon, ColumnIcon, ZoomIcon } from './images';
+import { useStyles } from './styles';
 import { IFooterPanelProps } from './types';
 
 export default function({
@@ -38,25 +38,32 @@ export default function({
           {ColumnIcon}
         </Box>
         <Box className={classes.dataWrapper}>
-          <p className={classes.data}>
+          <p className={classes.data} data-testid="footerpanel-labels-title">
             {' '}
             {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
           </p>
         </Box>
-        <Box className={classes.zoomContainer}>
+        <Box className={classes.zoomContainer} data-testid="footerpanel-box-zoom">
           {ZoomIcon}
-          <p className={classes.zoomPercent}>
+          <p className={classes.zoomPercent} data-testid="footerpanel-labels-zoompercent">
             {' '}
             {T.translate('features.FooterPanel.labels.zoomPercent100')}
           </p>
           {ArrowIcon}
         </Box>
         <Box className={classes.directivesContainer}>
-          <p> {T.translate('features.FooterPanel.labels.directives')} </p>
+          <p data-testid="footerpanel-labels-directives">
+            {' '}
+            {T.translate('features.FooterPanel.labels.directives')}{' '}
+          </p>
         </Box>
         <Box className={classes.recipeContainer}>
-          <p>{T.translate('features.FooterPanel.labels.recipeSteps')}</p>
-          <p className={classes.recipeCount}>{recipeStepsCount}</p>
+          <p data-testid="footerpanel-labels-recipesteps">
+            {T.translate('features.FooterPanel.labels.recipeSteps')}
+          </p>
+          <p className={classes.recipeCount} data-testid="footerpanel-labels-recipecount">
+            {recipeStepsCount}
+          </p>
         </Box>
       </Box>
     </Box>
