@@ -15,7 +15,13 @@
  */
 import { FormGroup } from '@material-ui/core';
 import FormInputFieldComponent from 'components/FormInputFieldComponent';
-import { PARSE_AS_FIXED_LENGTH, COLUMN_WIDTHS, COLUMN_WIDTHS_PLACEHOLDER, PADDING, PADDING_PLACEHOLDER } from 'components/GridTable/constants';
+import {
+  PARSE_AS_FIXED_LENGTH,
+  COLUMN_WIDTHS,
+  COLUMN_WIDTHS_PLACEHOLDER,
+  PADDING,
+  PADDING_PLACEHOLDER,
+} from 'components/GridTable/constants';
 import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { useStyles } from '../../styles';

@@ -1,10 +1,10 @@
-import ParseCSVComponent from "./components/DirectiveComponents/ParseComponents/ParseCSVComponent";
-import ParseDateTimeComponent from "./components/DirectiveComponents/ParseComponents/ParseDateTimeComponent";
-import ParseExcelComponent from "./components/DirectiveComponents/ParseComponents/ParseExcelComponent";
-import ParseFixedLengthComponent from "./components/DirectiveComponents/ParseComponents/ParseFixedLengthComponent";
-import ParseLogComponent from "./components/DirectiveComponents/ParseComponents/ParseLogComponent";
-import ParseSimpleDateComponent from "./components/DirectiveComponents/ParseComponents/ParseSimpleDateComponent";
-import ParseXMLToJSONComponent from "./components/DirectiveComponents/ParseComponents/ParseXMLToJSONComponent";
+import ParseCSVComponent from './components/DirectiveComponents/ParseComponents/ParseCSVComponent';
+import ParseDateTimeComponent from './components/DirectiveComponents/ParseComponents/ParseDateTimeComponent';
+import ParseExcelComponent from './components/DirectiveComponents/ParseComponents/ParseExcelComponent';
+import ParseFixedLengthComponent from './components/DirectiveComponents/ParseComponents/ParseFixedLengthComponent';
+import ParseLogComponent from './components/DirectiveComponents/ParseComponents/ParseLogComponent';
+import ParseSimpleDateComponent from './components/DirectiveComponents/ParseComponents/ParseSimpleDateComponent';
+import ParseXMLToJSONComponent from './components/DirectiveComponents/ParseComponents/ParseXMLToJSONComponent';
 
 export const MISSING_NULL = 'Missing/Null';
 export const PLEASE_SELECT_THE_DATE_FORMAT = 'Please select the date format';

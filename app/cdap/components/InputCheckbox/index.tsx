@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
-import { useStyles } from '../../styles';
+import { useStyles } from './styles';
 
 const InputCheckbox = (props) => {
   const { label, value, onChange, className } = props;

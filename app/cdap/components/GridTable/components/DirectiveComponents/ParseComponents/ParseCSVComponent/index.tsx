@@ -17,7 +17,10 @@ import React, { useState, useEffect } from 'react';
 import { PARSE_CSV_OPTIONS } from '../../options';
 import { useStyles } from '../../styles';
 import ParseComponent from '..';
-import { PLEASE_SELECT_THE_DELIMITER, SET_FIRST_ROW_AS_HEADER } from 'components/GridTable/constants';
+import {
+  PLEASE_SELECT_THE_DELIMITER,
+  SET_FIRST_ROW_AS_HEADER,
+} from 'components/GridTable/constants';
 import InputCheckbox from 'components/InputCheckbox';
 import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
 

@@ -21,7 +21,12 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
-import { CHOOSE_SHEET_IN_EXCEL, SHEET_NUMBER_PLACEHOLDER, SHEET_NAME_PLACEHOLDER, SET_FIRST_ROW_AS_HEADER } from 'components/GridTable/constants';
+import {
+  CHOOSE_SHEET_IN_EXCEL,
+  SHEET_NUMBER_PLACEHOLDER,
+  SHEET_NAME_PLACEHOLDER,
+  SET_FIRST_ROW_AS_HEADER,
+} from 'components/GridTable/constants';
 import InputCheckbox from 'components/InputCheckbox';
 import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';

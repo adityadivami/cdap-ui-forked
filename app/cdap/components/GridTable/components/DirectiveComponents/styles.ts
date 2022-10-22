@@ -13,7 +13,6 @@ export const useStyles = makeStyles(() => {
       marginBottom: '10px',
     },
     functionHeadingTextStyles: {
-      fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 600,
       fontSize: '16px',
@@ -28,7 +27,6 @@ export const useStyles = makeStyles(() => {
     radioStyles: {
       marginLeft: '-5px',
       '& span:last-child': {
-        fontFamily: 'Noto Sans',
         fontStyle: 'normal',
         fontWeight: 400,
         fontSize: '14px',
@@ -48,7 +46,6 @@ export const useStyles = makeStyles(() => {
       padding: '5px 15px',
       fontSize: '14px',
       background: '#FFFFFF',
-      fontFamily: 'Noto Sans',
       borderRadius: '4px',
       marginLeft: 0,
     },
@@ -81,7 +78,6 @@ export const useStyles = makeStyles(() => {
       fontSize: '14px',
       fontStyle: 'normal',
       marginTop: '10px',
-      fontFamily: 'Noto Sans',
       fontWeight: 400,
       lineHeight: '150%',
       letterSpacing: '0.15px',

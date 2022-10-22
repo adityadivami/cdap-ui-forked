@@ -16,16 +16,27 @@
 import { PARSE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/parseOptions';
 import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import { IDirectiveComponentValues } from './types';
-export const getDirective = (functionName: string, columnSelected: string, directiveComponentValues: IDirectiveComponentValues) => {
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  directiveComponentValues: IDirectiveComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
   } else if (functionName === 'parseHL7') {
     return `parse-as-hl7 :${columnSelected}`;
   } else if (functionName === 'parseAvro') {
     return `parse-as-avro-file :${columnSelected}`;
-  } else if(PARSE_OPTIONS.some((item) => item.value === functionName)) {
-    const value = parseDirective(functionName, columnSelected, directiveComponentValues.radioOption, directiveComponentValues.customInput, directiveComponentValues.firstRowAsHeader, directiveComponentValues.columnWidths,
-      directiveComponentValues.optionPaddingParam)
+  } else if (PARSE_OPTIONS.some((item) => item.value === functionName)) {
+    const value = parseDirective(
+      functionName,
+      columnSelected,
+      directiveComponentValues.radioOption,
+      directiveComponentValues.customInput,
+      directiveComponentValues.firstRowAsHeader,
+      directiveComponentValues.columnWidths,
+      directiveComponentValues.optionPaddingParam
+    );
     return value;
   } else {
     return null;

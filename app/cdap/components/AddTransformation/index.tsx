@@ -20,7 +20,12 @@ import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
-import { IAddTransformationProp, IHeaderNamesList, IDataQuality, IDirectiveComponentValues } from './types';
+import {
+  IAddTransformationProp,
+  IHeaderNamesList,
+  IDataQuality,
+  IDirectiveComponentValues,
+} from './types';
 import { prepareDataQualtiy } from './CircularProgressBar/utils';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsWidget from './SelectColumnsWidget';
@@ -43,7 +48,9 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
-  const [directiveComponentValues, setDirectiveComponentsValue] = useState<IDirectiveComponentValues>({
+  const [directiveComponentValues, setDirectiveComponentsValue] = useState<
+    IDirectiveComponentValues
+  >({
     radioOption: '',
     copyColumnName: '',
     copyToNewColumn: false,
@@ -87,7 +94,11 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive = getDirective(functionName, selectedColumns[0].label, directiveComponentValues);
+    const directive = getDirective(
+      functionName,
+      selectedColumns[0].label,
+      directiveComponentValues
+    );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
