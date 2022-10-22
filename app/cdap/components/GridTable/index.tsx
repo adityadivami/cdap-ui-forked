@@ -42,9 +42,13 @@ import {
   IDataQuality,
   IRowData,
   IMissingListData,
+  IGridParams,
+  IRequestBody,
+  IApiPayload,
 } from './types';
 import { convertNonNullPercent } from './utils';
 import AddTransformation from 'components/AddTransformation';
+import { getAPIRequestPayload } from './services';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -55,10 +59,10 @@ export default function GridTable() {
   const classes = useStyles();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [headersNamesList, setHeadersNamesList] = useState([] as IHeaderNamesList[]);
-  const [rowsDataList, setRowsDataList] = useState([] as IRowData[]);
-  const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
-  const [missingDataList, setMissingDataList] = useState([] as IMissingListData[]);
+  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
+  const [rowsDataList, setRowsDataList] = useState<IRowData[]>([]);
+  const [gridData, setGridData] = useState<IExecuteAPIResponse>();
+  const [missingDataList, setMissingDataList] = useState<IMissingListData[]>([]);
   const [workspaceName, setWorkspaceName] = useState<string>('');
   const [invalidCountArray, setInvalidCountArray] = useState<Array<Record<string, string>>>([
     {
@@ -71,7 +75,7 @@ export default function GridTable() {
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState<
     string[]
   >([]);
-  const [dataQuality, setDataQuality] = useState({} as IDataQuality);
+  const [dataQuality, setDataQuality] = useState<IDataQuality>({});
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -210,6 +214,43 @@ export default function GridTable() {
     setDirectiveFunctionSupportedDataType(supported_dataType);
   };
 
+  const applyDirectives = (directive: string) => {
+    setLoading(true);
+    if (directive) {
+      const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+      executeAPICall(apiPayload);
+    } else {
+      setLoading(false);
+      setDirectiveFunction('');
+    }
+  };
+
+  const executeAPICall = (apiPayload: IApiPayload) => {
+    const payload: IRecords = apiPayload.payload;
+    const requestBody: IRequestBody = apiPayload.requestBody;
+    const gridParams: IGridParams = apiPayload.gridParams;
+    MyDataPrepApi.execute(payload, requestBody).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            values: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setLoading(false);
+        setGridData(response);
+        setDirectiveFunction('');
+      },
+      (err) => {
+        setLoading(false);
+      }
+    );
+  };
+
   return (
     <Box>
       {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
@@ -280,7 +321,7 @@ export default function GridTable() {
             setDirectiveFunction('');
           }}
           applyTransformation={(directive: string) => {
-            setDirectiveFunction('');
+            applyDirectives(directive);
           }}
         />
       )}

@@ -26,6 +26,7 @@ import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import ButtonWidget from './ButtonWidget';
+import { getDirective } from './utils';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -37,8 +38,8 @@ export default function({
 }: IAddTransformationProp) {
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
-  const [selectedColumns, setSelectedColumns] = useState([] as IHeaderNamesList[]);
-  const [dataQualityValue, setDataQualityValue] = useState([] as IDataQuality[]);
+  const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
+  const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
 
   const classes = useStyles();
 
@@ -62,7 +63,8 @@ export default function({
   };
 
   const handleApply = () => {
-    applyTransformation('');
+    const directive = getDirective(functionName, selectedColumns[0].label);
+    applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
 
