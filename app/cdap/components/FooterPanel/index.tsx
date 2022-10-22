@@ -34,6 +34,7 @@ export default function({
           className={`${classes.imgContainer} ${
             columnViewPanelOpened ? classes.showDepth : classes.showNormalView
           }`}
+          data-testid='footer-panel-column-icon-container'
         >
           {ColumnIcon}
         </Box>

@@ -40,7 +40,8 @@
     "test": "run-p jest cypress",
     "ncc": "rm -rf server_dist && ncc build server.js -o server_dist",
     "build-graphql-fragment": "node ./graphql/schemaQuery.js",
-    "bower-root": "./node_modules/bower/bin/bower install --allow-root"
+    "bower-root": "./node_modules/bower/bin/bower install --allow-root",
+    "test:local": "jest"
   },
   "repository": {
     "type": "git",
