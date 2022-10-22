@@ -14,9 +14,52 @@
  * the License.
  */
 import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+import { IDirectiveComponentValues } from './types';
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  directiveComponentValues: IDirectiveComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
+  } else if (functionName === 'uppercase') {
+    return `uppercase :${columnSelected}`;
+  } else if (functionName === 'lowercase') {
+    return `lowercase :${columnSelected}`;
+  } else if (functionName === 'titlecase') {
+    return `titlecase :${columnSelected}`;
+  } else if (functionName === 'ltrim') {
+    return `ltrim :${columnSelected}`;
+  } else if (functionName === 'rtrim') {
+    return `rtrim :${columnSelected}`;
+  } else if (functionName === 'trim') {
+    return `trim :${columnSelected}`;
+  } else if (functionName === 'concatenate') {
+    if (directiveComponentValues.copyToNewColumn) {
+      const value =
+        directiveComponentValues.radioOption === 'END'
+          ? `${columnSelected} + '${directiveComponentValues.customInput}'`
+          : `'${directiveComponentValues.customInput}' + ${columnSelected}`;
+      return `set-column :${directiveComponentValues.copyColumnName} ${value}`;
+    } else {
+      const value =
+        directiveComponentValues.radioOption === 'END'
+          ? `${columnSelected} + '${directiveComponentValues.customInput}'`
+          : `'${directiveComponentValues.customInput}' + ${columnSelected}`;
+      return `set-column :${columnSelected} ${value}`;
+    }
+  } else if (functionName == 'dateTime') {
+    return `format-date :${columnSelected} ${
+      directiveComponentValues.radioOption === 'customFormat'
+        ? directiveComponentValues.customInput
+        : directiveComponentValues.radioOption
+    }`;
+  } else if (functionName == 'dateTimeAsString') {
+    return `format-datetime :${columnSelected} ${
+      directiveComponentValues.radioOption === 'customFormat'
+        ? directiveComponentValues.customInput
+        : directiveComponentValues.radioOption
+    }`;
   } else {
     return null;
   }
