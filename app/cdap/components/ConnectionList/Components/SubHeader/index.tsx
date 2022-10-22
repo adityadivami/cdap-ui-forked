@@ -25,7 +25,7 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import T from 'i18n-react';
 
-export default function SubHeader({ selectedConnection }) {
+export default function({ selectedConnection }) {
   const classes = useStyles();
   const handleAddConnection = () => {
     localStorage.setItem('requestFrom', selectedConnection);

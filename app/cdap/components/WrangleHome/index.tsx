@@ -26,7 +26,7 @@ import T from 'i18n-react';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 
-export default function WranglerHome() {
+export default function() {
   const classes = useStyles();
   localStorage.setItem('requestFrom', 'home');
 

@@ -58,13 +58,13 @@ export const useStyles = makeStyles({
   },
   importDataContainer: {
     display: 'flex',
-    gap: '30px',
+    gap: 30,
     alignItems: 'flex-end',
-    fontSize: '14px',
+    fontSize: 14,
   },
   breadcrumbTyporgraphy: {
     color: grey[900],
-    fontSize: '14px',
+    fontSize: 14,
     lineHeight: '21px',
   },
   link: {
