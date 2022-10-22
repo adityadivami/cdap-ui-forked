@@ -59,10 +59,10 @@ export default function GridTable() {
   const classes = useStyles();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [headersNamesList, setHeadersNamesList] = useState([] as IHeaderNamesList[]);
-  const [rowsDataList, setRowsDataList] = useState([] as IRowData[]);
-  const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
-  const [missingDataList, setMissingDataList] = useState([] as IMissingListData[]);
+  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
+  const [rowsDataList, setRowsDataList] = useState<IRowData[]>([]);
+  const [gridData, setGridData] = useState<IExecuteAPIResponse>();
+  const [missingDataList, setMissingDataList] = useState<IMissingListData[]>([]);
   const [workspaceName, setWorkspaceName] = useState<string>('');
   const [invalidCountArray, setInvalidCountArray] = useState<Array<Record<string, string>>>([
     {
@@ -75,7 +75,7 @@ export default function GridTable() {
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState<
     string[]
   >([]);
-  const [dataQuality, setDataQuality] = useState({} as IDataQuality);
+  const [dataQuality, setDataQuality] = useState<IDataQuality>({});
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);

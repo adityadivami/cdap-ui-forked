@@ -38,8 +38,8 @@ export default function({
 }: IAddTransformationProp) {
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
-  const [selectedColumns, setSelectedColumns] = useState([] as IHeaderNamesList[]);
-  const [dataQualityValue, setDataQualityValue] = useState([] as IDataQuality[]);
+  const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
+  const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
 
   const classes = useStyles();
 
