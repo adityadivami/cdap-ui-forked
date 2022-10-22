@@ -43,6 +43,7 @@ import {
 } from './types';
 import { convertNonNullPercent } from './utils';
 import AddTransformation from 'components/AddTransformation';
+import { getAPIRequestPayload } from './services';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -203,33 +204,10 @@ export default function GridTable() {
     setDirectiveFunctionSupportedDataType(supported_dataType);
   };
 
-  const getAPIRequestPayload = (newDirective, action) => {
-    const { dataprep } = DataPrepStore.getState();
-    const { workspaceId, workspaceUri, directives, insights } = dataprep;
-    let gridParams = {};
-    const updatedDirectives = directives.concat(newDirective);
-    const requestBody = directiveRequestBodyCreator(updatedDirectives);
-    requestBody.insights = insights;
-    const workspaceInfo = {
-      properties: insights,
-    };
-    gridParams = {
-      directives: updatedDirectives,
-      workspaceId,
-      workspaceUri,
-      workspaceInfo,
-      insights,
-    };
-    const payload = {
-      context: params.namespace,
-      workspaceId: params.wid,
-    };
-    return { payload, requestBody, gridParams };
-  };
-  const applyDirectives = (directive) => {
+  const applyDirectives = (directive: string) => {
     setLoading(true);
     if (directive) {
-      const apiPayload = getAPIRequestPayload(directive, '');
+      const apiPayload = getAPIRequestPayload(params, directive, '');
       executeAPICall(apiPayload);
     }
   };
