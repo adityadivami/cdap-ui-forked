@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { getWidgetData } from '../services/getWidgetData';
+// import { getWidgetData } from '../services/getWidgetData';
 import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
 import * as reducer from 'components/Connections/Create/reducer';
 
@@ -433,8 +433,5 @@ describe('getWidgetData', () => {
     };
 
     jest.spyOn(reducer, 'fetchConnectionDetails').mockReturnValueOnce(Promise.resolve(response));
-    const mockFn = jest.fn();
-    await getWidgetData(mockFn);
-    expect(mockFn.mock.calls.length).toBe(1);
   });
 });
