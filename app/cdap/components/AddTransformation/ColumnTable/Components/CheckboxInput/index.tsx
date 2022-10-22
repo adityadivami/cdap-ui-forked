@@ -45,6 +45,7 @@ export default function({
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               onMultipleSelection(event, eachColumn)
             }
+            data-testid="transformation-checkbox-select-multiple-columns"
           />
         }
         label=""

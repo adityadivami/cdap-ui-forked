@@ -30,10 +30,10 @@ export default function({
 
   const singleColumnSelect = (
     <>
-      <div className={classes.functionHeadingTextStyles}>
+      <div className={classes.functionHeadingTextStyles} data-testid="select-column-title">
         {T.translate('features.WranglerNewAddTransformation.selectColumn')}
       </div>
-      <div className={classes.quickSelectTextStyles}>
+      <div className={classes.quickSelectTextStyles} data-testid="select-column-subtitle">
         {T.translate('features.WranglerNewAddTransformation.quickSelect')}
       </div>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
@@ -53,6 +53,7 @@ export default function({
           onClick={() => handleSelectColumn(false)}
           variant="outlined"
           disabled={false}
+          dataTestId="select-column-button"
         />
       )}
     </>

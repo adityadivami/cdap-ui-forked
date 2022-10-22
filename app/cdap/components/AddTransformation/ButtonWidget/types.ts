@@ -22,4 +22,5 @@ export interface IButtonWidget {
   onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
   variant: 'contained' | 'outlined' | 'text';
   className: string;
+  dataTestId: string;
 }

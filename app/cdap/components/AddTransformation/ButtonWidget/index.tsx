@@ -17,7 +17,14 @@ import { Button } from '@material-ui/core';
 import React from 'react';
 import { IButtonWidget } from './types';
 
-export default function({ buttonText, disabled, onClick, variant, className }: IButtonWidget) {
+export default function({
+  buttonText,
+  disabled,
+  onClick,
+  variant,
+  className,
+  dataTestId,
+}: IButtonWidget) {
   return (
     <Button
       variant={variant}
@@ -25,6 +32,7 @@ export default function({ buttonText, disabled, onClick, variant, className }: I
       color="primary"
       className={className}
       onClick={onClick}
+      data-testid={dataTestId}
     >
       {buttonText}
     </Button>
