@@ -26,7 +26,7 @@ import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import ButtonWidget from './ButtonWidget';
-import { getDirective } from './directives';
+import { getDirective } from './utils';
 
 export default function({
   directiveFunctionSupportedDataType,
