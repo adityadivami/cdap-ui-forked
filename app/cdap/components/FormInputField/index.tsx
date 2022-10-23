@@ -14,15 +14,22 @@
  * the License.
  */
 
-import CopyColumnComponent from './DirectiveComponents/CopyColumnComponent/index';
+import { FormControlLabel, Input } from '@material-ui/core';
+import React from 'react';
+import { IFormInputComponentProps } from './types';
 
-export const MISSING_NULL = 'Missing/Null';
-export const NAME_NEW_COLUMN = 'Name new column';
-export const DESTINATION_COLUMN = 'Destination column';
-export const COLUMN_NAME_EXIST = 'Column name already exist';
-export const DIRECTIVE_COMPONENTS = [
-  {
-    type: 'copyColumn',
-    component: CopyColumnComponent,
-  },
-];
+const FormInputFieldComponent = ({
+  formInputValue,
+  classnames,
+  inputProps,
+}: IFormInputComponentProps) => {
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...inputProps} />}
+      label={''}
+    />
+  );
+};
+export default FormInputFieldComponent;

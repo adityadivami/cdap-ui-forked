@@ -14,15 +14,16 @@
  * the License.
  */
 
-import CopyColumnComponent from './DirectiveComponents/CopyColumnComponent/index';
-
-export const MISSING_NULL = 'Missing/Null';
-export const NAME_NEW_COLUMN = 'Name new column';
-export const DESTINATION_COLUMN = 'Destination column';
-export const COLUMN_NAME_EXIST = 'Column name already exist';
-export const DIRECTIVE_COMPONENTS = [
-  {
-    type: 'copyColumn',
-    component: CopyColumnComponent,
-  },
-];
+export interface IFormInputComponentProps {
+  formInputValue: string | number;
+  classnames: string;
+  inputProps: IFormInputProps;
+}
+export interface IFormInputProps {
+  classes: Record<string, string>;
+  type: string;
+  value: string | number;
+  onChange: (e: any) => void;
+  color: 'primary' | 'secondary';
+  placeholder: string;
+}

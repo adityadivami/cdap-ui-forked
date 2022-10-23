@@ -31,5 +31,11 @@ export interface IAddTransformationProp {
   columnData: IHeaderNamesList[];
   missingDataList: IDataQuality;
   callBack: () => void;
-  applyTransformation: (directive: string) => void;
+  applyTransformation: (directive: string, getValue?: any) => void;
+  setLoading: (value: boolean) => void;
+}
+
+export interface IDirectiveComponentValues {
+  copyColumnName: string;
+  columnNames: string[];
 }

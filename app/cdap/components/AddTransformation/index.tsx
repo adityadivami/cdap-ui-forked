@@ -20,13 +20,21 @@ import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
-import { IAddTransformationProp, IHeaderNamesList, IDataQuality } from './types';
+import {
+  IAddTransformationProp,
+  IHeaderNamesList,
+  IDataQuality,
+  IDirectiveComponentValues,
+} from './types';
 import { prepareDataQualtiy } from './CircularProgressBar/utils';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import ButtonWidget from './ButtonWidget';
 import { getDirective } from './utils';
+import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import DirectiveContent from 'components/GridTable/DirectiveComponents';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -40,6 +48,12 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
+  const [directiveComponentValues, setDirectiveComponentsValue] = useState<
+    IDirectiveComponentValues
+  >({
+    copyColumnName: '',
+    columnNames: columnData.map(({ label }) => label),
+  });
 
   const classes = useStyles();
 
@@ -63,7 +77,12 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive = getDirective(functionName, selectedColumns[0].label);
+    const directive = getDirective(
+      functionName,
+      selectedColumns[0].label,
+      directiveComponentValues,
+      selectedColumns
+    );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
@@ -72,6 +91,10 @@ export default function({
     const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
+
+  const isComponentAvailable =
+    DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
+    CALCULATE_OPTIONS.some((item) => item.value === functionName);
 
   return (
     <Fragment>
@@ -89,6 +112,14 @@ export default function({
               selectedColumns={selectedColumns}
               functionName={functionName}
             />
+            {isComponentAvailable && (
+              <DirectiveContent
+                setDirectiveComponentsValue={setDirectiveComponentsValue}
+                directiveComponents={DIRECTIVE_COMPONENTS}
+                directiveComponentValues={directiveComponentValues}
+                functionName={functionName}
+              />
+            )}
           </div>
           <ButtonWidget
             buttonText={T.translate('features.WranglerNewAddTransformation.applyStep')}
