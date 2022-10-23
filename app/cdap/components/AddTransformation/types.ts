@@ -41,7 +41,7 @@ export interface IDirectiveComponentValues {
   copyToNewColumn: boolean;
   sheetValue: string;
   firstRowAsHeader: boolean;
-  depth: Number;
+  depth: number;
   columnWidths: string;
   optionPaddingParam: string;
 }

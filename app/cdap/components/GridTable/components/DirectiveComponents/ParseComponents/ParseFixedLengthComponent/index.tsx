@@ -14,7 +14,7 @@
  * the License.
  */
 import { FormGroup } from '@material-ui/core';
-import FormInputFieldComponent from 'components/FormInputFieldComponent';
+import FormInputField from 'components/FormInputField';
 import {
   PARSE_AS_FIXED_LENGTH,
   COLUMN_WIDTHS,
@@ -47,7 +47,7 @@ const ParseFixedLengthComponent = ({
     <ParseComponent sectionHeading={PARSE_AS_FIXED_LENGTH}>
       <FormGroup>
         <div className={classes.formLabelStyles}>{COLUMN_WIDTHS}</div>
-        <FormInputFieldComponent
+        <FormInputField
           formInputValue={columnWidths}
           classnames={classes.formFieldStyles}
           inputProps={{
@@ -60,7 +60,7 @@ const ParseFixedLengthComponent = ({
           }}
         />
         <div className={classes.formLabelStyles}>{PADDING}</div>
-        <FormInputFieldComponent
+        <FormInputField
           formInputValue={padding}
           classnames={classes.formFieldStyles}
           inputProps={{

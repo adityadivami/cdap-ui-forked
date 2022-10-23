@@ -14,7 +14,7 @@
  * the License.
  */
 import { FormGroup } from '@material-ui/core';
-import FormInputFieldComponent from 'components/FormInputFieldComponent';
+import FormInputField from 'components/FormInputField';
 import { PARSE_AS_XML_TO_JSON, DEPTH, DEPTH_PLACEHOLDER } from 'components/GridTable/constants';
 import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
@@ -25,7 +25,7 @@ const ParseXMLToJSONComponent = ({
   setDirectiveComponentsValue,
   directiveComponentValues,
 }: IParseCSVProps) => {
-  const [depth, setDepth] = useState<Number>(1);
+  const [depth, setDepth] = useState<number>(1);
 
   const classes = useStyles();
 
@@ -37,7 +37,7 @@ const ParseXMLToJSONComponent = ({
     <ParseComponent sectionHeading={PARSE_AS_XML_TO_JSON}>
       <FormGroup>
         <div className={classes.formLabelStyles}>{DEPTH}</div>
-        <FormInputFieldComponent
+        <FormInputField
           formInputValue={depth}
           classnames={classes.formFieldStyles}
           inputProps={{
