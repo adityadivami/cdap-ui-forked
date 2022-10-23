@@ -29,9 +29,9 @@ const ParseCSVComponent = ({
   setDirectiveComponentsValue,
   directiveComponentValues,
 }: IParseCSVProps) => {
-  const [selectedParseType, setSelectedParseType] = useState('');
-  const [firstRowAsHeader, setFirstRowAsHeader] = useState(false);
-  const [delimiter, setDelimiter] = useState('');
+  const [selectedParseType, setSelectedParseType] = useState<string>('');
+  const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
+  const [delimiter, setDelimiter] = useState<string>('');
   const classes = useStyles();
 
   useEffect(() => {
@@ -48,20 +48,24 @@ const ParseCSVComponent = ({
 
   return (
     <ParseComponent sectionHeading={PLEASE_SELECT_THE_DELIMITER}>
-      <InputRadioWithCustomInputComponent
-        options={PARSE_CSV_OPTIONS}
-        radioValue={selectedParseType}
-        setRadioValue={setSelectedParseType}
-        customInputType="customDelimiter"
-        customInput={delimiter}
-        setCustomInput={setDelimiter}
-      />
-      <InputCheckbox
-        label={SET_FIRST_ROW_AS_HEADER}
-        value={firstRowAsHeader}
-        onChange={(e) => setFirstRowAsHeader(e.target.checked)}
-        className={classes.checkboxStyles}
-      />
+      <>
+        <InputRadioWithCustomInputComponent
+          options={PARSE_CSV_OPTIONS}
+          radioValue={selectedParseType}
+          setRadioValue={setSelectedParseType}
+          customInputType="customDelimiter"
+          customInput={delimiter}
+          setCustomInput={setDelimiter}
+        />
+        <InputCheckbox
+          label={SET_FIRST_ROW_AS_HEADER}
+          value={firstRowAsHeader}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setFirstRowAsHeader(e.target.checked)
+          }
+          className={classes.checkboxStyles}
+        />
+      </>
     </ParseComponent>
   );
 };

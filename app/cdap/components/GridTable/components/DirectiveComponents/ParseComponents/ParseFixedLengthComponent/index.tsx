@@ -25,11 +25,14 @@ import {
 import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { useStyles } from '../../styles';
+import { IParseCSVProps } from '../types';
 
-const ParseFixedLengthComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [columnWidths, setColumnWidths] = useState('');
-  const [padding, setPadding] = useState('');
+const ParseFixedLengthComponent = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IParseCSVProps) => {
+  const [columnWidths, setColumnWidths] = useState<string>('');
+  const [padding, setPadding] = useState<string>('');
   const classes = useStyles();
 
   useEffect(() => {

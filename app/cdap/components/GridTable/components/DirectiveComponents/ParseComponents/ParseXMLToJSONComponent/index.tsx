@@ -19,10 +19,13 @@ import { PARSE_AS_XML_TO_JSON, DEPTH, DEPTH_PLACEHOLDER } from 'components/GridT
 import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { useStyles } from '../../styles';
+import { IParseCSVProps } from '../types';
 
-const ParseXMLToJSONComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [depth, setDepth] = useState(1);
+const ParseXMLToJSONComponent = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IParseCSVProps) => {
+  const [depth, setDepth] = useState<Number>(1);
 
   const classes = useStyles();
 

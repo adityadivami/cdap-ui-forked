@@ -18,11 +18,14 @@ import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { PARSE_SIMPLE_DATE_OPTIONS } from '../../options';
 import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
+import { IParseCSVProps } from '../types';
 
-const ParseSimpleDateComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [customFormat, setCustomFormat] = useState('');
-  const [selectedParseType, setSelectedParseType] = useState('');
+const ParseSimpleDateComponent = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IParseCSVProps) => {
+  const [customFormat, setCustomFormat] = useState<string>('');
+  const [selectedParseType, setSelectedParseType] = useState<string>('');
 
   useEffect(() => {
     setDirectiveComponentsValue({ ...directiveComponentValues, radioOption: selectedParseType });

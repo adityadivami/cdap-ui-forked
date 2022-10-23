@@ -1,4 +1,6 @@
-export const PARSE_CSV_OPTIONS = [
+import { IParseOptions } from './ParseComponents/types';
+
+export const PARSE_CSV_OPTIONS: IParseOptions[] = [
   {
     value: 'comma',
     label: 'Comma',
@@ -29,7 +31,7 @@ export const PARSE_CSV_OPTIONS = [
   },
 ];
 
-export const PARSE_LOG_OPTIONS = [
+export const PARSE_LOG_OPTIONS: IParseOptions[] = [
   {
     value: 'common',
     label: 'Common',
@@ -56,7 +58,7 @@ export const PARSE_LOG_OPTIONS = [
   },
 ];
 
-export const PARSE_SIMPLE_DATE_OPTIONS = [
+export const PARSE_SIMPLE_DATE_OPTIONS: IParseOptions[] = [
   {
     label: 'MM/dd/yyyy',
     value: 'MM/dd/yyyy',
@@ -119,7 +121,7 @@ export const PARSE_SIMPLE_DATE_OPTIONS = [
   },
 ];
 
-export const PARSE_DATE_TIME_OPTIONS = [
+export const PARSE_DATE_TIME_OPTIONS: IParseOptions[] = [
   {
     label: 'yyyy-MM-dd HH:mm:ss',
     value: 'yyyy-MM-dd HH:mm:ss',
@@ -150,7 +152,7 @@ export const PARSE_DATE_TIME_OPTIONS = [
   },
 ];
 
-export const PARSE_EXCEL_OPTIONS = [
+export const PARSE_EXCEL_OPTIONS: IParseOptions[] = [
   {
     label: 'Sheet Number',
     value: 'sheetNumber',

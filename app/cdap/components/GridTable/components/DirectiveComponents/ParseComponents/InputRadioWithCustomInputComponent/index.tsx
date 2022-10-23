@@ -23,16 +23,16 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../../styles';
+import { IInputRadioWithCustomInputProps } from '../types';
 
-const InputRadioWithCustomInputComponent = (props) => {
-  const {
-    options,
-    radioValue,
-    setRadioValue,
-    customInputType,
-    customInput,
-    setCustomInput,
-  } = props;
+const InputRadioWithCustomInputComponent = ({
+  options,
+  radioValue,
+  setRadioValue,
+  customInputType,
+  customInput,
+  setCustomInput,
+}: IInputRadioWithCustomInputProps) => {
   const classes = useStyles();
 
   return (

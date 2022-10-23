@@ -18,11 +18,14 @@ import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { PARSE_LOG_OPTIONS } from '../../options';
 import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
+import { IParseCSVProps } from '../types';
 
-const ParseLogComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [selectedParseType, setSelectedParseType] = useState('');
-  const [delimiter, setDelimiter] = useState('');
+const ParseLogComponent = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IParseCSVProps) => {
+  const [selectedParseType, setSelectedParseType] = useState<string>('');
+  const [delimiter, setDelimiter] = useState<string>('');
 
   useEffect(() => {
     setDirectiveComponentsValue({ ...directiveComponentValues, radioOption: selectedParseType });

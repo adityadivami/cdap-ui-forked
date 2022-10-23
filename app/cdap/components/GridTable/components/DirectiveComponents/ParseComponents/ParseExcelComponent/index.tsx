@@ -32,13 +32,17 @@ import React, { useState, useEffect } from 'react';
 import ParseComponent from '..';
 import { PARSE_EXCEL_OPTIONS } from '../../options';
 import { useStyles } from '../../styles';
+import { IParseCSVProps } from '../types';
 
-const ParseExcelComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [sheetRadioType, setSheetRadioType] = useState('sheetNumber');
-  const [sheetValue, setSheetValue] = useState('');
-  const [firstRowAsHeader, setFirstRowAsHeader] = useState(false);
+const ParseExcelComponent = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IParseCSVProps) => {
+  const [sheetRadioType, setSheetRadioType] = useState<string>('sheetNumber');
+  const [sheetValue, setSheetValue] = useState<string>('');
+  const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
   const classes = useStyles();
+
   useEffect(() => {
     setDirectiveComponentsValue({ ...directiveComponentValues, radioOption: sheetRadioType });
   }, [sheetRadioType]);
@@ -50,6 +54,7 @@ const ParseExcelComponent = (props) => {
   useEffect(() => {
     setDirectiveComponentsValue({ ...directiveComponentValues, firstRowAsHeader });
   }, [firstRowAsHeader]);
+
   return (
     <ParseComponent sectionHeading={CHOOSE_SHEET_IN_EXCEL}>
       <FormGroup>
