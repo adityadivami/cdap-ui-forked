@@ -9,8 +9,6 @@ const history = createHistory({
 });
 
 describe('Test Transition Component', () => {
-  const handleClose = jest.fn();
-
   it('Should have rendered the component correctly', () => {
     const handleClose = jest.fn();
     const container = render(

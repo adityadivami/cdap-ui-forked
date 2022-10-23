@@ -25,13 +25,6 @@ const history = createHistory({
   basename: '/',
 });
 
-const location = {
-  state: {
-    from: 'Home',
-    path: 'wrangle-home',
-  },
-};
-
 describe('Test Breadcrumb Component', () => {
   const locationMock = jest.mock('react-router-dom', () => ({
     useLocation: () => ({

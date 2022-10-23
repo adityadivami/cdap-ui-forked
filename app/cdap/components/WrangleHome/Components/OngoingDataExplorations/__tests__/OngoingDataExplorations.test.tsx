@@ -35,9 +35,11 @@ const testObj = {
 };
 
 test('renders Ongoing Data Exploration component', async () => {
-  jest.spyOn(operators as any, 'switchMap').mockImplementation((callback: Function) => {
-    callback(switchMapCallbackMock);
-  });
+  jest
+    .spyOn(operators as any, 'switchMap')
+    .mockImplementation((callback: (...args: unknown[]) => unknown) => {
+      callback(switchMapCallbackMock);
+    });
   jest.spyOn(MyDataPrepApi, 'getWorkspaceList').mockImplementation(() => {
     return {
       pipe: () => {

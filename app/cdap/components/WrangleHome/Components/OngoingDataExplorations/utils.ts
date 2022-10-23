@@ -42,7 +42,7 @@ export const generateDataForExplorationCard = (oldData: IEachData[], cardCount: 
             obj.label = `${eachItem[keys]} Recipe steps`;
             obj.type = 'text';
           } else if (keys === 'dataQuality') {
-            obj.label = parseInt(eachItem[keys]);
+            obj.label = Number(eachItem[keys]);
             obj.percentageSymbol = '%';
             obj.subText = 'Null values';
             obj.type = 'percentageWithText';
