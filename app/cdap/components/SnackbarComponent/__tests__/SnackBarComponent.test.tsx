@@ -38,9 +38,8 @@ describe('It should test the Snackbar Component', () => {
       </Router>
     );
     const ele = container.getByTestId(/parent-snackbar-component/i);
-    const button = screen.getByTestId(/snackbar-close-button/i)
+    const button = screen.getByTestId(/snackbar-close-button/i);
     fireEvent.click(button);
     expect(ele).toBeDefined();
   });
 });
-
