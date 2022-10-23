@@ -23,9 +23,12 @@ import {
 } from 'components/GridTable/constants';
 import InputCheckbox from 'components/InputCheckbox';
 import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
+import { IParseCSVProps } from '../types';
 
-const ParseCSVComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
+const ParseCSVComponent = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IParseCSVProps) => {
   const [selectedParseType, setSelectedParseType] = useState('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState(false);
   const [delimiter, setDelimiter] = useState('');

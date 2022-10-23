@@ -33,6 +33,8 @@ export const getDirective = (
       columnSelected,
       directiveComponentValues.radioOption,
       directiveComponentValues.customInput,
+      directiveComponentValues.depth,
+      directiveComponentValues.sheetValue,
       directiveComponentValues.firstRowAsHeader,
       directiveComponentValues.columnWidths,
       directiveComponentValues.optionPaddingParam
@@ -48,6 +50,8 @@ export const parseDirective = (
   column,
   radioOption,
   inputValue,
+  depthValue,
+  sheetValue,
   booleanValue,
   columnWidth?,
   optionPadding?
@@ -79,11 +83,11 @@ export const parseDirective = (
     }
     return directive;
   } else if (functionName === 'parseExcel') {
-    return `parse-as-excel :${column} '${inputValue}' ${booleanValue}`;
+    return `parse-as-excel :${column} '${sheetValue}' ${booleanValue}`;
   } else if (functionName === 'parseJSON') {
-    return `parse-as-json :${column} ${inputValue}`;
+    return `parse-as-json :${column} ${depthValue}`;
   } else if (functionName === 'parseXML') {
-    return `parse-xml-to-json :${column} ${inputValue}`;
+    return `parse-xml-to-json :${column} ${depthValue}`;
   } else if (functionName === 'parseLog') {
     if (radioOption === 'custom') {
       return `parse-as-log :${column} '${inputValue}'`;
