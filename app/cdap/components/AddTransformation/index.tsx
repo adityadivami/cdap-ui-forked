@@ -68,10 +68,6 @@ export default function({
     });
   }, [selectedColumns]);
 
-  const isComponentAvailable =
-    DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
-    CALCULATE_OPTIONS.some((item) => item.value === functionName);
-
   const classes = useStyles();
 
   const closeClickHandler = () => {
@@ -107,6 +103,10 @@ export default function({
     const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
+
+  const isComponentAvailable =
+    DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
+    CALCULATE_OPTIONS.some((item) => item.value === functionName);
 
   return (
     <Fragment>

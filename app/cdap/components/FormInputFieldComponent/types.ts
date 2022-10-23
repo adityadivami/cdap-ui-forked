@@ -1,16 +1,13 @@
 export interface IFormInputComponentProps {
-  formInputValue: string | Number;
+  formInputValue: string | number;
   classnames: string;
   inputProps: IFormInputProps;
 }
 
 export interface IFormInputProps {
-  classes: {
-    underline: string;
-    input: string;
-  };
+  classes: Record<string, string>;
   type: string;
-  value: string | Number;
+  value: string | number;
   onChange: (e: any) => void;
   color: 'primary' | 'secondary';
   placeholder: string;
