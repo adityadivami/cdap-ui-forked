@@ -19,6 +19,7 @@ import { useStyles } from 'components/ParsingDrawer/styles';
 import React, { ChangeEvent } from 'react';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 import T from 'i18n-react';
+import fileDownload from 'js-file-download';
 
 export default function(props) {
   const classes = useStyles();
@@ -61,7 +62,7 @@ export default function(props) {
         />
       </label>
       <span className={classes.importSchemaTextStyles}>
-        {T.translate('features.WranglerNewParsingDrawer.importSchema')}
+        {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.importSchema')}
       </span>
     </Box>
   );
