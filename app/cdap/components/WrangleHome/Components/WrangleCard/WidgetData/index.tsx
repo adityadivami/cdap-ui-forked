@@ -23,9 +23,9 @@ const ImageContainer = styled.div`
   font-size: 40px;
 `;
 
-export default function({ dataSrc }) {
+export default function({ dataSrc }: Record<string, string | unknown>) {
   return dataSrc ? (
-    <Avatar src={dataSrc} variant="square" data-testid="card-image-from-widget-api" />
+    <Avatar src={dataSrc as string} variant="square" data-testid="card-image-from-widget-api" />
   ) : (
     <ImageContainer>
       <ImageOutlined fontSize="inherit" data-testid="card-image-default" />

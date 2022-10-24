@@ -40,7 +40,3 @@ export interface IConnectorDetailPayloadArray {
     scope: string;
   };
 }
-
-export interface IPluginProperties {
-  [key: string]: [];
-}

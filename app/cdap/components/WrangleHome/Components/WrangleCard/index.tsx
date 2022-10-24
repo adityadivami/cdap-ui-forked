@@ -28,7 +28,7 @@ export default function() {
   const classes = useStyles();
   const connectorTypes: IConnectorArray[] = connectorsData.connectorTypes;
 
-  const updateState = (updatedState) => {
+  const updateState = (updatedState: { connectorTypes: IConnectorArray[] }) => {
     setConnectorsData(updatedState);
   };
 

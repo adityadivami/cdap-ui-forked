@@ -32,14 +32,17 @@ export const getWidgetData = async (cbUpdateState) => {
   const connectorTypes = await fetchConnectors();
   const categorizedConnections = await getCategorizedConnections();
   const connectorTypeWithConnections = [];
-  categorizedConnections.forEach((itemEach, key) => {
+  categorizedConnections?.forEach((itemEach, key) => {
     connectorTypeWithConnections.push(key);
   });
   const connectorDataArray = [];
   let connectorDataWithSvgArray: IConnectorArray[] = [];
-  const allConnectorsPluginProperties = getCategoriesToConnectorsMap(connectorTypes);
+  const allConnectorsPluginProperties: Map<
+    string,
+    IConnectorDetailPayloadArray[]
+  > = getCategoriesToConnectorsMap(connectorTypes);
   const connectionPayloadArray: IConnectorDetailPayloadArray[] = [];
-  allConnectorsPluginProperties.forEach((connectorsArray) => {
+  allConnectorsPluginProperties?.forEach((connectorsArray) => {
     if (connectorsArray.length) {
       connectorsArray.map((item) => {
         connectionPayloadArray.push(item);
