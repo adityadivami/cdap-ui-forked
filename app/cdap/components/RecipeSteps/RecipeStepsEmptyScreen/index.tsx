@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Container } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useStyles } from '../styles';
 import T from 'i18n-react';
@@ -26,12 +26,12 @@ export default function(props) {
   return (
     <Container className={classes.emptyScreenStyles}>
       {InfoGraphicData}
-      <div className={classes.emptyScreenText}>
+      <Typography className={classes.emptyScreenText}>
         {T.translate('features.WranglerNewRecipeSteps.startWrangleTitle')}
-      </div>
-      <div className={classes.emptyScreenInfoText}>
+      </Typography>
+      <Typography className={classes.emptyScreenInfoText}>
         {T.translate('features.WranglerNewRecipeSteps.startWrangleSubTitle')}
-      </div>
+      </Typography>
     </Container>
   );
 }
