@@ -3439,3 +3439,4 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+      noConnections: No Connections to show

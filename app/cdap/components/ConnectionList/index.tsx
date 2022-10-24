@@ -29,6 +29,7 @@ import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
 import { useStyles } from './styles';
+import T from 'i18n-react';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -263,7 +264,10 @@ export default function ConnectionList() {
           </SelectDatasetWrapper>
         </>
       ) : (
-        <Typography className={classes.noDataLabel}>No Connections to show</Typography>
+        <Typography className={classes.noDataLabel}>
+          {' '}
+          {T.translate('features.ConnectionsList.labels.noConnections')}
+        </Typography>
         // TODO: No connectors types are available screen needs to be appended here
       )}
       {loading && (
