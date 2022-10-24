@@ -18,12 +18,13 @@ import { Avatar } from '@material-ui/core';
 import ImageOutlined from '@material-ui/icons/ImageOutlined';
 import React from 'react';
 import styled from 'styled-components';
+import { IWidgetSrc } from '../types';
 
 const ImageContainer = styled.div`
   font-size: 40px;
 `;
 
-export default function({ dataSrc }: Record<string, string | unknown>) {
+export default function({ dataSrc }: IWidgetSrc) {
   return dataSrc ? (
     <Avatar src={dataSrc as string} variant="square" data-testid="card-image-from-widget-api" />
   ) : (

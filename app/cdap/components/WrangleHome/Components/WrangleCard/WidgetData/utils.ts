@@ -34,7 +34,7 @@ export const getCategoriesToConnectorsMap = (connectionTypes = []) => {
       connectionToVersionsMap.set(connectionName, [connectionType.artifact]);
     } else {
       isDuplicate = true;
-      const existingVersions = connectionToVersionsMap.get(connectionName);
+      const existingVersions: string = connectionToVersionsMap.get(connectionName);
       connectionToVersionsMap.set(connectionName, [...existingVersions, connectionType.artifact]);
     }
     if (!categoryToConnectionsMap.has(category)) {
@@ -42,7 +42,7 @@ export const getCategoriesToConnectorsMap = (connectionTypes = []) => {
       continue;
     }
     if (!isDuplicate) {
-      const existingConnections = categoryToConnectionsMap.get(category);
+      const existingConnections: string = categoryToConnectionsMap.get(category);
       categoryToConnectionsMap.set(category, [...existingConnections, connectionType]);
     }
   }
@@ -62,7 +62,8 @@ export const addVersionInfo = (categoryToConnectionsMap, versionsMap) => {
         allVersions.map((plugin) => plugin.version),
         true
       );
-      const latestVersion = allVersions.find((plugin) => plugin.version === highestVersion);
+
+      const latestVersion: string = allVersions.find((plugin) => plugin.version === highestVersion);
       connection.artifact = latestVersion;
       connection.olderVersions = reject(allVersions, latestVersion);
     }

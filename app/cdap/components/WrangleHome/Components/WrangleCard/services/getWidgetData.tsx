@@ -136,7 +136,7 @@ export const getWidgetData = async (cbUpdateState) => {
     allConnectorsPluginProperties1
   );
 
-  connectorTypes.forEach((eachConnectorType) => {
+  connectorTypes?.forEach((eachConnectorType) => {
     const displayName = getSelectedConnectorDisplayName(
       eachConnectorType,
       mapOfConnectorPluginProperties
