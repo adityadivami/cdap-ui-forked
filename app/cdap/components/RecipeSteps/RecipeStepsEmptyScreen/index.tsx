@@ -20,7 +20,7 @@ import { useStyles } from '../styles';
 import T from 'i18n-react';
 import { InfoGraphicData } from '../iconStore';
 
-export default function(props) {
+export default function() {
   const classes = useStyles();
 
   return (

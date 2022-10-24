@@ -22,6 +22,8 @@ import RecipeStepsEmptyScreen from './RecipeStepsEmptyScreen';
 import RecipeStepsTableComponent from './RecipeStepsTableComponent';
 import { useStyles } from './styles';
 import T from 'i18n-react';
+import { IRecipesSteps, IRecipeStepsProps } from './types';
+import { IRecipeStepTebleProps } from './RecipeStepsTableComponent/types';
 
 const recipes = [
   {
@@ -36,8 +38,8 @@ const recipes = [
 
 const recipe_steps = ['uppercase: body1', 'titlecase: body2'];
 
-export default function({ setShowRecipePanel, showRecipePanel }) {
-  const [recipeSteps, setRecipeSteps] = useState([]);
+export default function({ setShowRecipePanel, showRecipePanel }: IRecipeStepsProps) {
+  const [recipeSteps, setRecipeSteps] = useState<string[]>(null);
 
   const classes = useStyles();
 
