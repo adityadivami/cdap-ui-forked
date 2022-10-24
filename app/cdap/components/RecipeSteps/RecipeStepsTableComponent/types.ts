@@ -14,6 +14,6 @@
  * the License.
  */
 
-export interface IRecipeStepTebleProps{
-    recipeSteps: string[];
+export interface IRecipeStepTebleProps {
+  recipeSteps: string[];
 }
