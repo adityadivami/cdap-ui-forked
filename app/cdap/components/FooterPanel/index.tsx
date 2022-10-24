@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import T from 'i18n-react';
 import React from 'react';
 import { ArrowIcon, ColumnIcon, ZoomIcon } from './images';
@@ -39,29 +39,29 @@ export default function({
           {ColumnIcon}
         </Box>
         <Box className={classes.dataWrapper}>
-          <p className={classes.data} data-testid="footerpanel-labels-title">
+          <Typography className={classes.data} data-testid="footerpanel-labels-title">
             {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
-          </p>
+          </Typography>
         </Box>
         <Box className={classes.zoomContainer} data-testid="footerpanel-box-zoom">
           {ZoomIcon}
-          <p className={classes.zoomPercent} data-testid="footerpanel-labels-zoompercent">
+          <Typography className={classes.zoomPercent} data-testid="footerpanel-labels-zoompercent">
             {T.translate('features.FooterPanel.labels.zoomPercent100')}
-          </p>
+          </Typography>
           {ArrowIcon}
         </Box>
         <Box className={classes.directivesContainer}>
-          <p data-testid="footerpanel-labels-directives">
+          <Typography data-testid="footerpanel-labels-directives">
             {T.translate('features.FooterPanel.labels.directives')}
-          </p>
+          </Typography>
         </Box>
         <Box className={classes.recipeContainer}>
-          <p data-testid="footerpanel-labels-recipesteps">
+          <Typography data-testid="footerpanel-labels-recipesteps">
             {T.translate('features.FooterPanel.labels.recipeSteps')}
-          </p>
-          <p className={classes.recipeCount} data-testid="footerpanel-labels-recipecount">
+          </Typography>
+          <Typography className={classes.recipeCount} data-testid="footerpanel-labels-recipecount">
             {recipeStepsCount}
-          </p>
+          </Typography>
         </Box>
       </Box>
     </Box>

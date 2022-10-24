@@ -40,7 +40,7 @@ export const useStyles = makeStyles({
   zoomPercent: {
     marginLeft: 2,
     marginRight: 5,
-    marginTop: 8,
+    marginTop: 2,
   },
   imgContainer: {
     display: 'flex',
