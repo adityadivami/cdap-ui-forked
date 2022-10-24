@@ -77,7 +77,7 @@ export default function({ setLoading, updateDataTranformation }) {
       setErrorOnTransformation({
         open: true,
         message: JSON.stringify(
-          T.translate('features.WranglerNewParsingDrawer.transformationErrorMessage1')
+          T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage1')
         ),
       });
       setLoading(false);
@@ -104,7 +104,7 @@ export default function({ setLoading, updateDataTranformation }) {
 
   const componentToRender = (
     <DrawerWidget
-      headingText={T.translate('features.WranglerNewParsingDrawer.parsing')}
+      headingText={T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.parsing')}
       openDrawer={setDrawerStatus}
       showDivider={true}
       headerActionTemplate={
@@ -122,7 +122,7 @@ export default function({ setLoading, updateDataTranformation }) {
           <Box className={classes.infoWrapperStyles}>
             <InfoOutlinedIcon />
             <span className={classes.infoTextStyles}>
-              {T.translate('features.WranglerNewParsingDrawer.parsingInfoText')}
+              {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.parsingInfoText')}
             </span>
           </Box>
 
@@ -134,7 +134,7 @@ export default function({ setLoading, updateDataTranformation }) {
             onClick={(event: React.MouseEvent<HTMLButtonElement>) => onConfirm(connectionPayload)}
             data-testid="parsing-apply-button"
           >
-            {T.translate('features.WranglerNewParsingDrawer.apply')}
+            {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.apply')}
           </Button>
         </Box>
       </Box>
@@ -145,7 +145,9 @@ export default function({ setLoading, updateDataTranformation }) {
             setErrorOnTransformation({
               open: false,
               message: JSON.stringify(
-                T.translate('features.WranglerNewParsingDrawer.transformationErrorMessage2')
+                T.translate(
+                  'features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage2'
+                )
               ),
             })
           }

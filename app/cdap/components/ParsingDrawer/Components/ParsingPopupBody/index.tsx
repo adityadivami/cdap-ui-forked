@@ -41,7 +41,7 @@ export default function({ values, changeEventListener }) {
     <Box>
       <Box className={[classes.formFieldWrapperStyles, classes.marginBottomStyles].join(' ')}>
         <InputLabel id="label" className={classes.labelTextStyles}>
-          {T.translate('features.WranglerNewParsingDrawer.format')}
+          {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.format')}
         </InputLabel>
         <InputSelect
           classes={{ icon: classes.selectIconStyles, select: classes.selectStyles }}
@@ -59,7 +59,7 @@ export default function({ values, changeEventListener }) {
 
       <Box className={[classes.formFieldWrapperStyles, classes.marginBottomStyles].join(' ')}>
         <InputLabel id="label" className={classes.labelTextStyles}>
-          {T.translate('features.WranglerNewParsingDrawer.encoding')}
+          {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.encoding')}
         </InputLabel>
         <InputSelect
           classes={{ icon: classes.selectIconStyles, select: classes.selectStyles }}
@@ -76,7 +76,7 @@ export default function({ values, changeEventListener }) {
       </Box>
 
       <InputCheckbox
-        label={T.translate('features.WranglerNewParsingDrawer.enableQuotedValues')}
+        label={T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.enableQuotedValues')}
         value={enableQuotedValues}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           changeEventListener(event.target.checked, 'enableQuotedValues')
@@ -85,7 +85,7 @@ export default function({ values, changeEventListener }) {
       />
 
       <InputCheckbox
-        label={T.translate('features.WranglerNewParsingDrawer.useFirstRowAsHeader')}
+        label={T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.useFirstRowAsHeader')}
         value={skipHeader}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           changeEventListener(event.target.checked, 'skipHeader')

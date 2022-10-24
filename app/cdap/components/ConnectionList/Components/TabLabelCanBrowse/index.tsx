@@ -23,7 +23,7 @@ import { createRef, Ref, useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import { ITabLabelsProps } from './types';
 
-export default function TabLabelCanBrowse({ label, count, index, icon }: ITabLabelsProps) {
+export default function({ label, count, index, icon }: ITabLabelsProps) {
   const classes = useStyles();
 
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
