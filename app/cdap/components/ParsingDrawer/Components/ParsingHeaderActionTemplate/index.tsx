@@ -21,7 +21,7 @@ import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/Sch
 import T from 'i18n-react';
 import fileDownload from 'js-file-download';
 
-export default function(props) {
+export default function({ handleSchemaUpload, setErrorOnTransformation }) {
   const classes = useStyles();
   const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
     const schemaFile = event.target.files[0];
@@ -32,9 +32,9 @@ export default function(props) {
         const fileContents = JSON.parse(evt.target.result.toString());
         const importedSchemas = parseImportedSchemas(fileContents);
         const schema = importedSchemas[0] && importedSchemas[0].schema;
-        props.handleSchemaUpload(schema);
+        handleSchemaUpload(schema);
       } catch (e) {
-        props.setErrorOnTransformation({
+        setErrorOnTransformation({
           open: true,
           message: T.translate(
             'features.WranglerNewUI.WranglerNewParsingDrawer.importSchemaErrorMessage'
