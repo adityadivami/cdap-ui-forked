@@ -16,20 +16,19 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import WranglerHomeNew from '../index';
-import history from 'services/history';
-import { Route, Router, Switch } from 'react-router';
+// import WidgetData from 'components/WrangleHome/Components/WrangleCard/WidgetData/index';
+import { getCategoriesToConnectorsMap } from '../utils';
+import * as highestVersion from 'services/VersionRange/VersionUtilities';
 
-test('renders Wrangler-Home-New component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <WranglerHomeNew />
-        </Route>
-      </Switch>
-    </Router>
-  );
-  const ele = screen.getByTestId(/wrangler-home-new-parent/i);
-  expect(ele).toBeInTheDocument();
+describe('Test Utils function', () => {
+  // findHighestVersion
+
+  jest.spyOn(highestVersion, 'findHighestVersion').mockReturnValue({});
+  it('Should invoke the utils function', () => {
+    const dummy = [{ artifact: { name: 'batman' }, name: 'superman' }];
+    getCategoriesToConnectorsMap(dummy);
+  });
+  it('Should invoke the utils function', () => {
+    getCategoriesToConnectorsMap(undefined);
+  });
 });

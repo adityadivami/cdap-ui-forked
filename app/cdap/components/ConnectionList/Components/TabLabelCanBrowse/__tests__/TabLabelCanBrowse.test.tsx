@@ -29,8 +29,8 @@ describe('Test TabLabelCanBrowse Component', () => {
         index={0}
       />
     );
-    const ele = screen.getByTestId(/connections-tab-label-browse/i);
-    expect(ele).toBeInTheDocument();
+    const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
+    expect(ele[0]).toBeInTheDocument();
   });
   it('Should render TabLabelCanBrowse Component with ref true', () => {
     const ref: any = {

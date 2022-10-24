@@ -21,6 +21,7 @@ import * as reducers from 'components/Connections/Create/reducer';
 import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { Route, Router, Switch } from 'react-router';
 import { createBrowserHistory as createHistory } from 'history';
+import * as widgetData from '../services/getWidgetData';
 
 const history = createHistory({
   basename: '/',
@@ -216,6 +217,8 @@ test('It renders Wrangler-Card ', async () => {
       },
     ])
   );
+
+  jest.spyOn(widgetData, 'getWidgetData').mockReturnValue(Promise.resolve());
 
   const dummyRes = new Map();
   dummyRes.set('PostgreSql', [

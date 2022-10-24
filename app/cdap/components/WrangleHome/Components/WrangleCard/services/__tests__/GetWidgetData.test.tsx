@@ -16,20 +16,10 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import WranglerHomeNew from '../index';
-import history from 'services/history';
-import { Route, Router, Switch } from 'react-router';
+import { getWidgetData } from '../getWidgetData';
 
-test('renders Wrangler-Home-New component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <WranglerHomeNew />
-        </Route>
-      </Switch>
-    </Router>
-  );
-  const ele = screen.getByTestId(/wrangler-home-new-parent/i);
-  expect(ele).toBeInTheDocument();
+describe('Test function getWidgetData', () => {
+  it('invokes getWidgetData function with undefined data', () => {
+    getWidgetData(undefined);
+  });
 });
