@@ -118,7 +118,6 @@ export default function GridTable() {
   };
 
   useEffect(() => {
-    // Get DATA from URL paramteres to get data of workspace
     const payload = {
       context: params.namespace,
       workspaceId: params.wid,
@@ -126,7 +125,6 @@ export default function GridTable() {
     getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
-  // ------------@createHeadersData Function is used for creating data of Table Header
   const createHeadersData = (columnNamesList: string[], columnTypesList: IRecords) => {
     if (Array.isArray(columnNamesList)) {
       return columnNamesList.map((eachColumnName: string) => {
@@ -139,7 +137,6 @@ export default function GridTable() {
     }
   };
 
-  // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
   const createMissingData = (statistics: IObject) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
@@ -160,7 +157,6 @@ export default function GridTable() {
     return metricArray;
   };
 
-  // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData.headers, rawData.types);

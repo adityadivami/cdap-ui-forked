@@ -34,28 +34,25 @@ export default function({
           className={`${classes.imgContainer} ${
             columnViewPanelOpened ? classes.showDepth : classes.showNormalView
           }`}
-          data-testid='footer-panel-column-icon-container'
+          data-testid="footer-panel-column-icon-container"
         >
           {ColumnIcon}
         </Box>
         <Box className={classes.dataWrapper}>
           <p className={classes.data} data-testid="footerpanel-labels-title">
-            {' '}
             {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
           </p>
         </Box>
         <Box className={classes.zoomContainer} data-testid="footerpanel-box-zoom">
           {ZoomIcon}
           <p className={classes.zoomPercent} data-testid="footerpanel-labels-zoompercent">
-            {' '}
             {T.translate('features.FooterPanel.labels.zoomPercent100')}
           </p>
           {ArrowIcon}
         </Box>
         <Box className={classes.directivesContainer}>
           <p data-testid="footerpanel-labels-directives">
-            {' '}
-            {T.translate('features.FooterPanel.labels.directives')}{' '}
+            {T.translate('features.FooterPanel.labels.directives')}
           </p>
         </Box>
         <Box className={classes.recipeContainer}>
