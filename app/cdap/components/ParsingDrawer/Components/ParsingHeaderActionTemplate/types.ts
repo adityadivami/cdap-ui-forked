@@ -15,6 +15,16 @@
  */
 
 export interface IParsingHeaderActionTemplateProps {
-  handleSchemaUpload: () => void;
-  // setErrorOnTransformation: () => void;
+  handleSchemaUpload: (IschemaProps) => void;
+  setErrorOnTransformation: () => void;
+}
+
+interface IschemaProps {
+  type: string;
+  name: string;
+  fields: Ifields;
+}
+interface Ifields {
+  name: string;
+  type: string[];
 }

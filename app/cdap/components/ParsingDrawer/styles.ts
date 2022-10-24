@@ -68,6 +68,7 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#000000',
+      marginLeft: 10,
     },
     dividerLineStyles: {
       width: 1,

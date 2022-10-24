@@ -20,8 +20,9 @@ import React, { ChangeEvent } from 'react';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 import T from 'i18n-react';
 import fileDownload from 'js-file-download';
+import { importIcon } from './importicon';
 
-export default function({ handleSchemaUpload, setErrorOnTransformation }) {
+export default function({ props }) {
   const classes = useStyles();
   const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
     const schemaFile = event.target.files[0];
@@ -32,9 +33,9 @@ export default function({ handleSchemaUpload, setErrorOnTransformation }) {
         const fileContents = JSON.parse(evt.target.result.toString());
         const importedSchemas = parseImportedSchemas(fileContents);
         const schema = importedSchemas[0] && importedSchemas[0].schema;
-        handleSchemaUpload(schema);
+        props.handleSchemaUpload(schema);
       } catch (e) {
-        setErrorOnTransformation({
+        props.setErrorOnTransformation({
           open: true,
           message: T.translate(
             'features.WranglerNewUI.WranglerNewParsingDrawer.importSchemaErrorMessage'
@@ -55,11 +56,7 @@ export default function({ handleSchemaUpload, setErrorOnTransformation }) {
         className={classes.pointerStyles}
       />
       <label htmlFor="file" className={classes.pointerStyles}>
-        <img
-          className={classes.importIconStyles}
-          src="/cdap_assets/img/import.svg"
-          alt="import schema icon"
-        />
+        {importIcon}
       </label>
       <span className={classes.importSchemaTextStyles}>
         {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.importSchema')}
