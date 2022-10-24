@@ -202,11 +202,12 @@ export default function ConnectionList() {
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader selectedConnection={dataForTabs[0]?.selectedTab} />
-      {dataForTabs[0]?.data.length > 0 ? (
+      {dataForTabs[0]?.data?.length > 0 ? (
         <>
           <SelectDatasetWrapper>
             {dataForTabs.map((each, index) => {
-              const connectionIdRequired = each.data.filter((el) => el.connectionId);
+              const connectionIdRequired =
+                each.data.length && each.data.filter((el) => el.connectionId);
               if (connectionIdRequired.length) {
                 connectionId = connectionIdRequired[0].connectionId;
               }
@@ -262,7 +263,7 @@ export default function ConnectionList() {
           </SelectDatasetWrapper>
         </>
       ) : (
-        <h6 className={classes.noDataLabel}>No Connections to show</h6>
+        <Typography className={classes.noDataLabel}>No Connections to show</Typography>
         // TODO: No connectors types are available screen needs to be appended here
       )}
       {loading && (
