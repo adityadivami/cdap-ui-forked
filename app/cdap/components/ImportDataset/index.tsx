@@ -28,11 +28,12 @@ import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
 import PositionedSnackbar from 'components/SnackbarComponent';
 import T from 'i18n-react';
+import { IImportDataset } from './types';
 
 const FILE_SIZE_LIMIT = 10 * 1024 * 1024; // 10 MB
 const cookie = new Cookies();
 
-export default function(props) {
+export default function({ handleClosePanel }: IImportDataset) {
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [file, setFile] = useState<File>(null);
   const classes = useStyles();
@@ -47,14 +48,14 @@ export default function(props) {
 
   const closeClickHandler = () => {
     setDrawerStatus(false);
-    props.handleClosePanel();
+    handleClosePanel();
   };
 
   const onDropHandler = (e) => {
     if (e) {
       const isJSONOrXML = e[0]?.type === 'application/json' || e[0]?.type === 'text/xml';
       if (e[0]?.size > FILE_SIZE_LIMIT) {
-        setError('File size must be less than 10MB');
+        setError(T.translate('features.ImportData.fileSizeError'));
       } else {
         setFile(e[0]);
         setRecordDelimiter(isJSONOrXML ? '' : '\\n');

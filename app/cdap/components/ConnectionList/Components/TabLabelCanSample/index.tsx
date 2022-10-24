@@ -18,9 +18,9 @@ import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import { WrangleIcon } from 'components/ConnectionList/icons';
+import { ITabLabelCanSample } from 'components/ConnectionList/types';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
-import { IRecords } from 'components/GridTable/types';
 import T from 'i18n-react';
 import React, { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router';
@@ -33,13 +33,7 @@ export default function TabLabelCanSample({
   initialConnectionId,
   toggleLoader,
   setIsErrorOnNoWorkSpace,
-}: {
-  label: string;
-  entity: IRecords;
-  initialConnectionId: string;
-  toggleLoader: (value: boolean, isError?: boolean) => void;
-  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+}: ITabLabelCanSample) {
   const classes = useStyles();
 
   const pathName = useLocation();
@@ -109,8 +103,13 @@ export default function TabLabelCanSample({
   ) : refValue ? (
     <CustomTooltip title={label} arrow data-testid="connections-tab-ref-label-simple">
       <Box className={classes.labelsContainerCanSample}>
-        <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
-          {label}
+        <Typography
+          variant="body2"
+          className={classes.labelStylesCanSample}
+          ref={myLabelRef}
+          data-testid="can-sample-label-with-tooltip"
+        >
+          {T.translate(`${label}`)}
         </Typography>
         <button
           className="wranglingHover"
@@ -119,7 +118,12 @@ export default function TabLabelCanSample({
         >
           <Box className="wranglingHover">
             <WrangleIcon />
-            <Typography color="primary" variant="body2" className={classes.wrangleButton}>
+            <Typography
+              color="primary"
+              variant="body2"
+              className={classes.wrangleButton}
+              data-testid="load-to-grid-text-with-tooltip"
+            >
               {T.translate('features.ConnectionsList.labels.loadToGrid')}
             </Typography>
           </Box>
@@ -128,8 +132,13 @@ export default function TabLabelCanSample({
     </CustomTooltip>
   ) : (
     <Box className={classes.labelsContainerCanSample} data-testid="connections-tab-label-simple">
-      <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
-        {label}
+      <Typography
+        variant="body2"
+        className={classes.labelStylesCanSample}
+        ref={myLabelRef}
+        data-testid="can-sample-label"
+      >
+        {T.translate(`${label}`)}
       </Typography>
       <button
         className="wranglingHover"
@@ -137,7 +146,11 @@ export default function TabLabelCanSample({
         data-testid="connections-tab-explore"
       >
         <WrangleIcon />
-        <Typography variant="body2" className={classes.wrangleButton}>
+        <Typography
+          variant="body2"
+          className={classes.wrangleButton}
+          data-testid="load-to-grid-text"
+        >
           {T.translate('features.ConnectionsList.labels.loadToGrid')}
         </Typography>
       </button>

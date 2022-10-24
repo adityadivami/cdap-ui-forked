@@ -30,6 +30,7 @@ import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
 import ImportDatasetPanel from 'components/ImportDataset';
 import { useStyles } from './styles';
+import T from 'i18n-react';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -80,7 +81,7 @@ export default function() {
     connectorTypes = connectorTypes.filter((conn) => {
       return [conn.name];
     });
-    // Mapping connector types and corresponding connections
+    //  Mapping connector types and corresponding connections
     connectorTypes = connectorTypes.map((eachConnectorType) => {
       const connections = categorizedConnections.get(eachConnectorType.name) || [];
       allConnectionsTotalLength = allConnectionsTotalLength + connections.length;
@@ -107,7 +108,7 @@ export default function() {
     });
   };
 
-  const setDataForTabsHelper = (res, index) => {
+  const setDataForTabsHelper = (res, index: number) => {
     setDataForTabs((prev) => {
       const tempData = [...prev];
       tempData.push({
@@ -194,7 +195,9 @@ export default function() {
   const headerForLevelZero = () => {
     return (
       <Box className={classes.styleForLevelZero}>
-        <Typography variant="body2">Data Connections</Typography>
+        <Typography variant="body2">
+          {T.translate(`features.ConnectionsList.headerForLevelZero`)}
+        </Typography>
       </Box>
     );
   };
@@ -226,7 +229,7 @@ export default function() {
                           refs.current[index] = element;
                         }}
                       >
-                        {dataForTabs[index - 1].selectedTab}
+                        {T.translate(`${dataForTabs[index - 1].selectedTab}`)}
                       </Typography>
                     </Box>
                   </CustomTooltip>
@@ -239,7 +242,7 @@ export default function() {
                         refs.current[index] = element;
                       }}
                     >
-                      {dataForTabs[index - 1].selectedTab}
+                      {T.translate(`${dataForTabs[index - 1].selectedTab}`)}
                     </Typography>
                   </Box>
                 );

@@ -19,13 +19,14 @@ import React from 'react';
 import { Underline } from '../iconStore';
 import { useStyles } from '../styles';
 import { IDrawerWidgetHeadingProps } from '../types';
+import T from 'i18n-react';
 
 export default function({ headingText }: IDrawerWidgetHeadingProps) {
   const classes = useStyles();
 
   return (
     <Box className={classes.headingStyles}>
-      <div className={classes.headingTextStyles}>{headingText}</div>
+      <div className={classes.headingTextStyles}>{T.translate(`${headingText}`)}</div>
       <Underline />
     </Box>
   );

@@ -56,15 +56,19 @@ export default function({ file, onDropHandler }: IDragAndDrop) {
               </Typography>
             </div>
           </div>
-          <Typography variant="body1" className={classes.dropText}>
-            <InfoIcon />
-            {T.translate('features.ImportData.maxSizeText')}
-          </Typography>
+          <div className={classes.infoIconText}>
+            <div className={classes.infoIcon}>
+              <InfoIcon />
+            </div>
+            <Typography variant="body1" className = {classes.infoText}>
+              {T.translate('features.ImportData.maxSizeText')}
+            </Typography>
+          </div>
         </>
       ) : (
         <Box>
           <Box className={classes.FlexFile}>
-            <Typography className={classes.fileNameText}>{file.name}</Typography>
+            <Typography className={classes.fileNameText}>{T.translate(`${file.name}`)}</Typography>
             <Box
               className={classes.delete_cursor_pointer}
               data-testid="delete-svg"

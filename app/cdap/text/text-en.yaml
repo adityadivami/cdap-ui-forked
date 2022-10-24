@@ -3427,19 +3427,22 @@ features:
   AddConnections:
     referenceLabel: 'Add Connection'
   ImportData:
-    referenceLabel: 'Import Data'
-    dragAndDropTextLine1: 'Drag and drop a file to be uploaded'
-    dragAndDropTextLine2: 'or Click here to select a file from your computer'
-    maxSizeText: 'Max file size: 10 MB, Supported file formats: CSV, JSON'
+    referenceLabel: "Import Data"
+    dragAndDropTextLine1: "Drag and drop a file to be uploaded"
+    dragAndDropTextLine2: "or Click here to select a file from your computer"
+    maxSizeText: "Max file size: 10 MB, Supported file formats: CSV, JSON"
+    fileSizeError: "File size must be less than 10MB"
   HomePage:
     labels:
       common:
-        viewAll: 'View All'
+        viewAll: "View All"
       connectorTypes:
-        title: 'Start data exploration'
+        title: "Start data exploration"
       workspaces:
-        title: 'Continue ongoing data explorations, pick up where you left off'
+        title: "Continue ongoing data explorations, pick up where you left off"
   ConnectionsList:
+    headerForLevelZero: "Data Connections"
     labels:
-      loadToGrid: 'Wrangle'
-      dataSources: 'Data Sources'
+      loadToGrid: "Wrangle"
+      dataSources: "Data Sources"
+      

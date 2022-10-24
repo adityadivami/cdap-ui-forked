@@ -14,6 +14,16 @@
  * the License.
  */
 
+import { IRecords } from 'components/GridTable/types';
+
 export interface ISubHeaderProps {
   setOpenImportDataPanel: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface ITabLabelCanSample {
+  label: string;
+  entity: IRecords;
+  initialConnectionId: string;
+  toggleLoader: (value: boolean, isError?: boolean) => void;
+  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
 }

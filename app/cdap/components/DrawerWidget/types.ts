@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { ReactNode } from 'react';
 
 export interface IDrawerWidgetHeadingProps {
   headingText: string | ReactNode;

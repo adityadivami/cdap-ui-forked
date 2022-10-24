@@ -18,3 +18,7 @@ export interface IDragAndDrop {
   file: File;
   onDropHandler: (e: unknown) => void;
 }
+
+export interface IImportDataset {
+  handleClosePanel: () => void;
+}

@@ -91,4 +91,22 @@ export const useStyles = makeStyles({
   panelbody: {
     height: 'calc(100vh - 250px)',
   },
+  infoIconText: {
+    display: 'flex',
+    gap: '8px',
+    marginTop: 10,
+  },
+  infoIcon: {
+    display: 'flex',
+    margin: 'auto 0px',
+  },
+  infoText: {
+    fontFamily: 'Noto Sans',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: 14,
+    lineHeight: '150%',
+    letterSpacing: 0.15,
+    color: grey[700],
+  },
 });
