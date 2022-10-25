@@ -35,16 +35,15 @@ const ParseCSVComponent = ({
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, radioOption: selectedParseType }));
-    
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: selectedParseType }));
   }, [selectedParseType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, customInput: delimiter }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, customInput: delimiter }));
   }, [delimiter]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, firstRowAsHeader }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, firstRowAsHeader }));
   }, [firstRowAsHeader]);
 
   return (

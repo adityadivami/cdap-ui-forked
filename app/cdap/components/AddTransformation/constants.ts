@@ -51,4 +51,4 @@ export const directiveComponentDefaultValues = {
   depth: 1,
   columnWidths: '',
   optionPaddingParam: '',
-}
+};

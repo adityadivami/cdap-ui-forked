@@ -28,11 +28,11 @@ const ParseLogComponent = ({
   const [delimiter, setDelimiter] = useState<string>('');
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, radioOption: selectedParseType }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: selectedParseType }));
   }, [selectedParseType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, customInput: delimiter }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, customInput: delimiter }));
   }, [delimiter]);
 
   return (

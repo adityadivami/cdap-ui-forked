@@ -28,11 +28,11 @@ const ParseDateTimeComponent = ({
   const [selectedParseType, setSelectedParseType] = useState<string>('');
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, radioOption: selectedParseType }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: selectedParseType }));
   }, [selectedParseType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, customInput: customFormat }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, customInput: customFormat }));
   }, [customFormat]);
 
   return (

@@ -21,6 +21,8 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
+import FormInputRadio from 'components/FormInputRadio';
+import FormInputField from 'components/FormInputField';
 import {
   CHOOSE_SHEET_IN_EXCEL,
   SHEET_NUMBER_PLACEHOLDER,
@@ -44,55 +46,42 @@ const ParseExcelComponent = ({
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, radioOption: sheetRadioType }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: sheetRadioType }));
   }, [sheetRadioType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, sheetValue }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, sheetValue }));
   }, [sheetValue]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState)=>({ ...prevState, firstRowAsHeader }));
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, firstRowAsHeader }));
   }, [firstRowAsHeader]);
 
   return (
     <ParseComponent sectionHeading={CHOOSE_SHEET_IN_EXCEL}>
       <FormGroup>
-        <FormControl>
-          <RadioGroup
-            name="actions"
-            value={sheetRadioType}
-            onChange={(e) => setSheetRadioType(e.target.value)}
-          >
-            {PARSE_EXCEL_OPTIONS.map((eachRadio) => (
-              <FormControlLabel
-                value={eachRadio.value}
-                className={classes.radioStyles}
-                control={<Radio color="primary" />}
-                label={eachRadio.label}
-              />
-            ))}
-          </RadioGroup>
-        </FormControl>
-        <FormControlLabel
-          value={sheetValue}
-          className={classes.formFieldStyles}
-          control={
-            <Input
-              classes={{
-                underline: classes.underlineStyles,
-                input: classes.inputStyles,
-              }}
-              type={sheetRadioType === 'sheetNumber' ? 'number' : 'text'}
-              value={sheetValue}
-              onChange={(e) => setSheetValue(e.target.value)}
-              color="primary"
-              placeholder={
-                sheetRadioType === 'sheetNumber' ? SHEET_NUMBER_PLACEHOLDER : SHEET_NAME_PLACEHOLDER
-              }
-            />
+        <FormInputRadio
+          options={PARSE_EXCEL_OPTIONS}
+          radioValue={sheetRadioType}
+          setRadioValue={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSheetRadioType(e.target.value)
           }
-          label={''}
+        />
+        <FormInputField
+          formInputValue={sheetValue}
+          classnames={classes.formFieldStyles}
+          inputProps={{
+            classes: {
+              underline: classes.underlineStyles,
+              input: classes.inputStyles,
+            },
+            type: sheetRadioType === 'sheetNumber' ? 'number' : 'text',
+            value: sheetValue,
+            onChange: (e) => setSheetValue(e.target.value),
+            color: 'primary',
+            placeholder:
+              sheetRadioType === 'sheetNumber' ? SHEET_NUMBER_PLACEHOLDER : SHEET_NAME_PLACEHOLDER,
+          }}
         />
         <InputCheckbox
           label={SET_FIRST_ROW_AS_HEADER}

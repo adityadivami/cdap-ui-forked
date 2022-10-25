@@ -21,6 +21,7 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
+import FormInputField from 'components/FormInputField';
 import FormInputRadio from 'components/FormInputRadio';
 import React from 'react';
 import { useStyles } from '../../styles';
@@ -44,22 +45,20 @@ const InputRadioWithCustomInputComponent = ({
         setRadioValue={(e: React.ChangeEvent<HTMLInputElement>) => setRadioValue(e.target.value)}
       />
       {radioValue === customInputType && (
-        <FormControlLabel
-          value={customInput}
-          className={classes.formFieldStyles}
-          control={
-            <Input
-              classes={{
-                underline: classes.underlineStyles,
-                input: classes.inputStyles,
-              }}
-              type="text"
-              value={customInput}
-              onChange={(e) => setCustomInput(e.target.value)}
-              color="primary"
-            />
-          }
-          label={''}
+        <FormInputField
+          formInputValue={customInput}
+          classnames={classes.formFieldStyles}
+          inputProps={{
+            classes: {
+              underline: classes.underlineStyles,
+              input: classes.inputStyles,
+            },
+            type: 'text',
+            value: customInput,
+            onChange: (e) => setCustomInput(e.target.value),
+            color: 'primary',
+            placeholder: '',
+          }}
         />
       )}
     </FormGroup>
