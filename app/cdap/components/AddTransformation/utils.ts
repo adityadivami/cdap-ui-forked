@@ -13,12 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 
 export const getDirective = (functionName: string, selectedColumnName: string) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
+  } else if (functionName === 'character-encoding-utf8') {
+    return `set-charset :${selectedColumnName} 'utf-8'`;
+  } else if (functionName === 'character-encoding-utf16') {
+    return `set-charset :${selectedColumnName} 'utf-16'`;
+  } else if (functionName === 'character-encoding-us-ascii') {
+    return `set-charset :${selectedColumnName} 'us-ascii'`;
+  } else if (functionName === 'character-encoding-iso-8859-1') {
+    return `set-charset :${selectedColumnName} 'iso-8859-1'`;
+  } else if (functionName === 'character-encoding-utf16-be') {
+    return `set-charset :${selectedColumnName} 'utf-16be'`;
+  } else if (functionName === 'character-encoding-utf16-le') {
+    return `set-charset :${selectedColumnName} 'utf-16le'`;
   } else {
     return null;
   }

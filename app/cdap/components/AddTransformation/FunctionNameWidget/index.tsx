@@ -24,7 +24,7 @@ import { blue } from '@material-ui/core/colors';
 
 const TransformationNameBox = styled.section`
   padding: 15px 0;
-  border-bottom: 1px solid #DADCE0;
+  border-bottom: 1px solid #dadce0;
 `;
 
 const TransformationNameHeadWrapper = styled.section`
@@ -43,24 +43,21 @@ const InfoIconComponent = styled(InfoOutlinedIcon)`
   margin-left: 5px;
   color: ${blue[500]};
   cursor: pointer;
-`
+`;
 
-export default function ({ transformationName }: { transformationName: string }) {
-
+export default function({ transformationName }: { transformationName: string }) {
   return (
     <TransformationNameBox>
       <TransformationNameHeadWrapper>
-        <SubHeadBoldFont
-          component="p"
-          data-testid="function-name-head"
-        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}</SubHeadBoldFont>
+        <SubHeadBoldFont component="p" data-testid="function-name-head">
+          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}
+        </SubHeadBoldFont>
         {TickIcon}
       </TransformationNameHeadWrapper>
       <TransformationNameTextInfoWrapper>
-        <SubHeadNormalFont
-          component="span"
-          data-testid="selected-function-name"
-        >{transformationName}</SubHeadNormalFont>
+        <SubHeadNormalFont component="span" data-testid="selected-function-name">
+          {transformationName}
+        </SubHeadNormalFont>
         <InfoIconComponent data-testid="info-link" />
       </TransformationNameTextInfoWrapper>
     </TransformationNameBox>
