@@ -35,6 +35,7 @@ import { getDirective } from './utils';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
 import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
+import { directiveComponentDefaultValues } from './constants';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -50,17 +51,7 @@ export default function({
   const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
   const [directiveComponentValues, setDirectiveComponentsValue] = useState<
     IDirectiveComponentValues
-  >({
-    radioOption: '',
-    copyColumnName: '',
-    copyToNewColumn: false,
-    customInput: '',
-    sheetValue: '',
-    firstRowAsHeader: false,
-    depth: 1,
-    columnWidths: '',
-    optionPaddingParam: '',
-  });
+  >(directiveComponentDefaultValues);
 
   useEffect(() => {
     setDirectiveComponentsValue({

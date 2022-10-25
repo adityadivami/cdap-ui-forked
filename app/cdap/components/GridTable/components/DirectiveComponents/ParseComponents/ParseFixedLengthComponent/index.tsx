@@ -36,11 +36,11 @@ const ParseFixedLengthComponent = ({
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, columnWidths });
+    setDirectiveComponentsValue((prevState)=>({ ...prevState, columnWidths }));
   }, [columnWidths]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, optionPaddingParam: padding });
+    setDirectiveComponentsValue((prevState)=>({ ...prevState, optionPaddingParam: padding }));
   }, [padding]);
 
   return (

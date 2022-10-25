@@ -44,15 +44,15 @@ const ParseExcelComponent = ({
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, radioOption: sheetRadioType });
+    setDirectiveComponentsValue((prevState)=>({ ...prevState, radioOption: sheetRadioType }));
   }, [sheetRadioType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, sheetValue });
+    setDirectiveComponentsValue((prevState)=>({ ...prevState, sheetValue }));
   }, [sheetValue]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, firstRowAsHeader });
+    setDirectiveComponentsValue((prevState)=>({ ...prevState, firstRowAsHeader }));
   }, [firstRowAsHeader]);
 
   return (

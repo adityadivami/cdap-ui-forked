@@ -30,7 +30,7 @@ const ParseXMLToJSONComponent = ({
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, depth });
+    setDirectiveComponentsValue((prevState)=>({ ...prevState, depth }));
   }, [depth]);
 
   return (

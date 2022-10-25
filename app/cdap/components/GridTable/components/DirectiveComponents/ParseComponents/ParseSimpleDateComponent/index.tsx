@@ -28,11 +28,11 @@ const ParseSimpleDateComponent = ({
   const [selectedParseType, setSelectedParseType] = useState<string>('');
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, radioOption: selectedParseType });
+    setDirectiveComponentsValue((prevState)=>({ ...prevState, radioOption: selectedParseType }));
   }, [selectedParseType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, customInput: customFormat });
+    setDirectiveComponentsValue((prevState)=>({ ...prevState, customInput: customFormat }));
   }, [customFormat]);
 
   return (
