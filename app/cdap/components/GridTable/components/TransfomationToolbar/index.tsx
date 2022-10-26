@@ -16,228 +16,61 @@
 
 import { IconButton, Typography, Tooltip, TextField } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { default as React, useState } from 'react';
+import { default as React, useEffect, useState } from 'react';
 import NestedMenu from '../NestedMenu';
 import T from 'i18n-react';
 
-import {
-  ColumnIcon,
-  Divider,
-  Expand,
-  FragmentIcon,
-  GridIcon,
-  InvalidIcon,
-  LongDivider,
-  MathIcon,
-  NullIcon,
-  OtherIcon,
-  Redo,
-  SearchIconn,
-  SecurityIcon,
-  StructureIcon,
-  Undo,
-} from './iconStore';
+import { Divider, Expand, LongDivider } from './iconStore';
 import { useStyles } from './styles';
 import FunctionToggle from '../FunctionNameToggle';
-import { COLUMN_OPTIONS } from '../NestedMenu/menuOptions/columnOptions';
-import { FRAGMENT_OPTIONS } from '../NestedMenu/menuOptions/fragmentOptions';
-import { INVALID_ICON_OPTIONS } from '../NestedMenu/menuOptions/invalidIconOptions';
-import { MATH_OPTIONS } from '../NestedMenu/menuOptions/mathOptions';
-import { MENU_OPTIONS } from '../NestedMenu/menuOptions/menuOptions';
-import { NULL_MISSING_OPTIONS } from '../NestedMenu/menuOptions/nullAndMissingOptions';
-import { OTHER_OPTIONS } from '../NestedMenu/menuOptions/otherOptions';
-import { SECURITY_OPTIONS } from '../NestedMenu/menuOptions/securityOptions';
-import { ITransformationToolBarProps } from './types';
+import { nestedMenuOptions } from './utils';
 
 export default function({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) {
   const classes = useStyles();
   const [isShowNames, setIsShowName] = useState(false);
+
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
-        <Tooltip
-          title={T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.undoIcon')}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <IconButton onClick={() => submitMenuOption('undo', ['all'])}>{Undo}</IconButton>
-            {isShowNames && (
-              <Typography className={classes.typoClass}>
-                {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.undoIcon')}
-              </Typography>
-            )}
-          </Box>
-        </Tooltip>
-        <Tooltip
-          title={T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.redoIcon')}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <IconButton onClick={() => submitMenuOption('redo', ['all'])}>{Redo}</IconButton>
-            {isShowNames && (
-              <Typography className={classes.typoClass}>
-                {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.redoIcon')}
-              </Typography>
-            )}
-          </Box>
-        </Tooltip>
-        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
-        <Box className={classes.functionNameWrapper}>
-          <NestedMenu
-            menuOptions={NULL_MISSING_OPTIONS}
-            columnType={columnType}
-            icon={NullIcon}
-            submitMenuOption={submitMenuOption}
-            title={T.translate(
-              'features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon'
-            ).toString()}
-          />
-          {isShowNames && (
-            <Typography className={classes.typoClass}>
-              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon')}
-            </Typography>
-          )}
-        </Box>
-        <Box className={classes.functionNameWrapper}>
-          <NestedMenu
-            menuOptions={INVALID_ICON_OPTIONS}
-            columnType={columnType}
-            icon={InvalidIcon}
-            submitMenuOption={submitMenuOption}
-            title={T.translate(
-              'features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon'
-            ).toString()}
-          />
-          {isShowNames && (
-            <Typography className={classes.typoClass}>
-              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon')}
-            </Typography>
-          )}
-        </Box>
-
-        <Box className={classes.functionNameWrapper}>
-          <NestedMenu
-            menuOptions={COLUMN_OPTIONS}
-            columnType={columnType}
-            icon={ColumnIcon}
-            submitMenuOption={submitMenuOption}
-            title={T.translate(
-              'features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon'
-            ).toString()}
-          />
-          {isShowNames && (
-            <Typography className={classes.typoClass}>
-              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon')}
-            </Typography>
-          )}
-        </Box>
-        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
-        <Box className={classes.functionNameWrapper}>
-          <NestedMenu
-            columnType={columnType}
-            icon={StructureIcon}
-            submitMenuOption={submitMenuOption}
-            menuOptions={MENU_OPTIONS}
-            title={T.translate(
-              'features.WranglerNewUI.GridPage.toolbarIcons.labels.structureIcon'
-            ).toString()}
-          />
-          {isShowNames && (
-            <Typography className={classes.typoClass}>
-              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.structureIcon')}
-            </Typography>
-          )}
-        </Box>
-        <Box className={classes.functionNameWrapper}>
-          <NestedMenu
-            columnType={columnType}
-            icon={FragmentIcon}
-            submitMenuOption={submitMenuOption}
-            menuOptions={FRAGMENT_OPTIONS}
-            title={T.translate(
-              'features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon'
-            ).toString()}
-          />
-          {isShowNames && (
-            <Typography className={classes.typoClass}>
-              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon')}
-            </Typography>
-          )}
-        </Box>
-        <Box className={classes.functionNameWrapper}>
-          <NestedMenu
-            columnType={columnType}
-            icon={MathIcon}
-            submitMenuOption={submitMenuOption}
-            menuOptions={MATH_OPTIONS}
-            title={T.translate(
-              'features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon'
-            ).toString()}
-          />
-          {isShowNames && (
-            <Typography className={classes.typoClass}>
-              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon')}
-            </Typography>
-          )}
-        </Box>
-        <Box className={classes.functionNameWrapper}>
-          <NestedMenu
-            columnType={columnType}
-            icon={SecurityIcon}
-            submitMenuOption={submitMenuOption}
-            menuOptions={SECURITY_OPTIONS}
-            title={T.translate(
-              'features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon'
-            ).toString()}
-          />
-          {isShowNames && (
-            <Typography className={classes.typoClass}>
-              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon')}
-            </Typography>
-          )}
-        </Box>
-        <Box className={classes.functionNameWrapper}>
-          <NestedMenu
-            columnType={columnType}
-            icon={OtherIcon}
-            submitMenuOption={submitMenuOption}
-            menuOptions={OTHER_OPTIONS}
-            title={T.translate(
-              'features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon'
-            ).toString()}
-          />
-          {isShowNames && (
-            <Typography className={classes.typoClass}>
-              {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon')}
-            </Typography>
-          )}
-        </Box>
-        <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
-        <Tooltip
-          title={T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.gridIcon')}
-          arrow
-          classes={{
-            tooltip: classes.tooltipToolbar,
-            arrow: classes.arrowTooltip,
-          }}
-        >
-          <Box className={classes.functionNameWrapper}>
-            <IconButton>{GridIcon}</IconButton>
-            {isShowNames && (
-              <Typography className={classes.typoClass}>
-                {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.gridIcon')}
-              </Typography>
-            )}
-          </Box>
-        </Tooltip>
+        {nestedMenuOptions?.map((i, index) => {
+          return i.options?.length ? (
+            <>
+              <Box className={classes.functionNameWrapper}>
+                <NestedMenu
+                  menuOptions={i.options}
+                  columnType={columnType}
+                  icon={i.icon}
+                  submitMenuOption={submitMenuOption}
+                  title={i.title}
+                />
+                {isShowNames && <Typography className={classes.typoClass}>{i.toolName}</Typography>}
+              </Box>
+              {(index === 4 || index === 1) && (
+                <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
+              )}
+            </>
+          ) : (
+            <>
+              <Tooltip
+                title={i.title}
+                arrow
+                classes={{
+                  tooltip: classes.tooltipToolbar,
+                  arrow: classes.arrowTooltip,
+                }}
+              >
+                <Box className={classes.functionNameWrapper}>
+                  <IconButton onClick={() => submitMenuOption(i.action, i.dataType)}>
+                    {i.icon}
+                  </IconButton>
+                  {isShowNames && (
+                    <Typography className={classes.typoClass}>{i.toolName}</Typography>
+                  )}
+                </Box>
+              </Tooltip>
+            </>
+          );
+        })}
         <Box className={classes.lastDivider}> {isShowNames ? LongDivider : Divider}</Box>
         <Box className={classes.searchBar}>
           {/* Search functionality UI component will be added here */}
