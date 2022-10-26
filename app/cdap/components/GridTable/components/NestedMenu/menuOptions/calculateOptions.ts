@@ -25,6 +25,12 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['string'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) => `set-column :${newColumnName} string:length(${column})`,
   },
   {
     label: 'Add',
@@ -33,6 +39,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} ${column} + ${input}`
+        : `set-column :${column} ${column} + ${input}`,
   },
   {
     label: 'Subtract',
@@ -41,6 +56,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} ${column} - ${input}`
+        : `set-column :${column} ${column} - ${input}`,
   },
   {
     label: 'Multiply',
@@ -49,6 +73,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} ${column} * ${input}`
+        : `set-column :${column} ${column} * ${input}`,
   },
   {
     label: 'Divide',
@@ -57,6 +90,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} ${column} / ${input}`
+        : `set-column :${column} ${column} / ${input}`,
   },
   {
     label: 'Modulo',
@@ -65,6 +107,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} ${column} % ${input}`
+        : `set-column :${column} ${column} % ${input}`,
   },
   {
     label: 'Power of',
@@ -73,6 +124,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:pow(${column}, ${input})`
+        : `set-column :${column} math:pow(${column}, ${input})`,
   },
   {
     label: 'Square',
@@ -81,6 +141,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:pow(${column}, 2)`
+        : `set-column :${column} math:pow(${column}, 2)`,
   },
   {
     label: 'Square root',
@@ -89,6 +158,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:sqrt(${column})`
+        : `set-column :${column} math:sqrt(${column})`,
   },
   {
     label: 'Cube',
@@ -97,6 +175,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:pow(${column}, 3)`
+        : `set-column :${column} math:pow(${column}, 3)`,
   },
   {
     label: 'Cube root',
@@ -105,6 +192,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:cbrt(${column})`
+        : `set-column :${column} math:cbrt(${column})`,
   },
   {
     label: 'log',
@@ -113,6 +209,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:log10(${column})`
+        : `set-column :${column} math:log10(${column})`,
   },
   {
     label: 'Natural log',
@@ -121,6 +226,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:log(${column})`
+        : `set-column :${column} math:log(${column})`,
   },
   {
     label: 'Absolute value',
@@ -129,6 +243,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:abs(${column})`
+        : `set-column :${column} math:abs(${column})`,
   },
   {
     label: 'Ceil',
@@ -137,6 +260,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:ceil(${column})`
+        : `set-column :${column} math:ceil(${column})`,
   },
   {
     label: 'Floor',
@@ -145,6 +277,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:floor(${column})`
+        : `set-column :${column} math:floor(${column})`,
   },
   {
     label: 'Sin',
@@ -153,6 +294,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:sin(${column})`
+        : `set-column :${column} math:sin(${column})`,
   },
   {
     label: 'Cos',
@@ -161,6 +311,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:cos(${column})`
+        : `set-column :${column} math:cos(${column})`,
   },
   {
     label: 'Tan',
@@ -169,6 +328,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:tan(${column})`
+        : `set-column :${column} math:tan(${column})`,
   },
   {
     label: 'ARCSIN',
@@ -177,6 +345,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:asin(${column})`
+        : `set-column :${column} math:asin(${column})`,
   },
   {
     label: 'ARCCOS',
@@ -185,6 +362,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:acos(${column})`
+        : `set-column :${column} math:acos(${column})`,
   },
   {
     label: 'ARCTAN',
@@ -193,6 +379,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:atan(${column})`
+        : `set-column :${column} math:atan(${column})`,
   },
   {
     label: 'Round',
@@ -201,6 +396,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:round(${column})`
+        : `set-column :${column} math:round(${column})`,
   },
   {
     label: 'Random',
@@ -209,6 +413,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} math:random()`
+        : `set-column :${column} math:random()`,
   },
   {
     label: 'Decimal Add',
@@ -217,6 +430,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:add(${column}, ${input})`
+        : `set-column :${column} decimal:add(${column}, ${input})`,
   },
   {
     label: 'Decimal Subtract',
@@ -225,6 +447,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:subtract(${column}, ${input})`
+        : `set-column :${column} decimal:subtract(${column}, ${input})`,
   },
   {
     label: 'Decimal Multiply',
@@ -233,6 +464,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:multiply(${column}, ${input})`
+        : `set-column :${column} decimal:multiply(${column}, ${input})`,
   },
   {
     label: 'Decimal Divide',
@@ -241,6 +481,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:divideq(${column}, ${input})`
+        : `set-column :${column} decimal:divideq(${column}, ${input})`,
   },
   {
     label: 'Decimal Divider',
@@ -249,6 +498,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:divider(${column}, ${input})`
+        : `set-column :${column} decimal:divider(${column}, ${input})`,
   },
   {
     label: 'Precision',
@@ -257,6 +515,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:precision(${column})`
+        : `set-column :${column} decimal:precision(${column})`,
   },
   {
     label: 'Scale',
@@ -265,6 +532,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:scale(${column})`
+        : `set-column :${column} decimal:scale(${column})`,
   },
   {
     label: 'Unscaled',
@@ -273,6 +549,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:unscaled(${column})`
+        : `set-column :${column} decimal:unscaled(${column})`,
   },
   {
     label: 'Decimal left',
@@ -281,6 +566,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:decimal_left(${column}, ${input})`
+        : `set-column :${column} decimal:decimal_left(${column}, ${input})`,
   },
   {
     label: 'Decimal right',
@@ -289,6 +583,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:decimal_right(${column}, ${input})`
+        : `set-column :${column} decimal:decimal_right(${column}, ${input})`,
   },
   {
     label: 'Decimal power of',
@@ -297,6 +600,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: true,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:pow(${column}, ${input})`
+        : `set-column :${column} decimal:pow(${column}, ${input})`,
   },
   {
     label: 'Decimal absolute value',
@@ -305,6 +617,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:abs(${column})`
+        : `set-column :${column} decimal:abs(${column})`,
   },
   {
     label: 'Decimal square',
@@ -313,6 +634,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:pow(${column}, 2)`
+        : `set-column :${column} decimal:pow(${column}, 2)`,
   },
   {
     label: 'Decimal cube',
@@ -321,6 +651,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:pow(${column}, 3)`
+        : `set-column :${column} decimal:pow(${column}, 3)`,
   },
   {
     label: 'Negate',
@@ -329,6 +668,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:negate(${column})`
+        : `set-column :${column} decimal:negate(${column})`,
   },
   {
     label: 'Strip zero',
@@ -337,6 +685,15 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:strip_zero(${column})`
+        : `set-column :${column} decimal:strip_zero(${column})`,
   },
   {
     label: 'Sign',
@@ -345,5 +702,14 @@ export const CALCULATE_OPTIONS = [
     inputRequired: false,
     component: Calculate,
     supported_dataType: ['bigdecimal'],
+    directive: (
+      column: string,
+      input: string | number,
+      newColumnName: string,
+      copyToNew: boolean
+    ) =>
+      copyToNew
+        ? `set-column :${newColumnName} decimal:sign(${column})`
+        : `set-column :${column} decimal:sign(${column})`,
   },
 ];
