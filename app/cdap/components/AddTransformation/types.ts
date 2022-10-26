@@ -33,3 +33,16 @@ export interface IAddTransformationProp {
   callBack: () => void;
   applyTransformation: (directive: string) => void;
 }
+
+export interface IDirectiveComponentValues {
+  radioOption: string;
+  copyColumnName: string;
+  customInput: string;
+  copyToNewColumn: boolean;
+  sheetValue: string;
+  firstRowAsHeader: boolean;
+  depth: number;
+  columnWidths: string;
+  optionPaddingParam: string;
+  columnNames: string[];
+}

@@ -13,3 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
+import {IDirectiveComponentValues} from '../../../../AddTransformation/types'
+
+export interface ICalculateProps {
+    functionName: string; 
+    setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>; 
+    directiveComponentValues: IDirectiveComponentValues
+}

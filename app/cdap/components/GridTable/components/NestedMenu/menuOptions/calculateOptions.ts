@@ -15,6 +15,7 @@
  */
 
 import { NATIVE_NUMBER_TYPES } from 'services/global-constants';
+import Calculate from '../../DirectiveComponents/Calculate';
 
 export const CALCULATE_OPTIONS = [
   {
@@ -22,7 +23,7 @@ export const CALCULATE_OPTIONS = [
     value: 'CHARCOUNT',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['string'],
   },
   {
@@ -30,7 +31,7 @@ export const CALCULATE_OPTIONS = [
     value: 'ADD',
     sign: '+',
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -38,7 +39,7 @@ export const CALCULATE_OPTIONS = [
     value: 'SUBTRACT',
     sign: '-',
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -46,7 +47,7 @@ export const CALCULATE_OPTIONS = [
     value: 'MULTIPLY',
     sign: 'x',
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -54,7 +55,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DIVIDE',
     sign: '/',
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -62,7 +63,7 @@ export const CALCULATE_OPTIONS = [
     value: 'MOD',
     sign: '%',
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -70,7 +71,7 @@ export const CALCULATE_OPTIONS = [
     value: 'POWEROF',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -78,7 +79,7 @@ export const CALCULATE_OPTIONS = [
     value: 'SQUARE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -86,7 +87,7 @@ export const CALCULATE_OPTIONS = [
     value: 'SQUARE_ROOT',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -94,7 +95,7 @@ export const CALCULATE_OPTIONS = [
     value: 'CUBE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -102,7 +103,7 @@ export const CALCULATE_OPTIONS = [
     value: 'CUBE_ROOT',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -110,7 +111,7 @@ export const CALCULATE_OPTIONS = [
     value: 'LOG',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -118,7 +119,7 @@ export const CALCULATE_OPTIONS = [
     value: 'NATURALLOG',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -126,7 +127,7 @@ export const CALCULATE_OPTIONS = [
     value: 'ABSVALUE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -134,7 +135,7 @@ export const CALCULATE_OPTIONS = [
     value: 'CEIL',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -142,7 +143,7 @@ export const CALCULATE_OPTIONS = [
     value: 'FLOOR',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -150,7 +151,7 @@ export const CALCULATE_OPTIONS = [
     value: 'SIN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -158,7 +159,7 @@ export const CALCULATE_OPTIONS = [
     value: 'COS',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -166,7 +167,7 @@ export const CALCULATE_OPTIONS = [
     value: 'TAN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -174,7 +175,7 @@ export const CALCULATE_OPTIONS = [
     value: 'ARCSIN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -182,7 +183,7 @@ export const CALCULATE_OPTIONS = [
     value: 'ARCCOS',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -190,7 +191,7 @@ export const CALCULATE_OPTIONS = [
     value: 'ARCTAN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -198,7 +199,7 @@ export const CALCULATE_OPTIONS = [
     value: 'ROUND',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -206,7 +207,7 @@ export const CALCULATE_OPTIONS = [
     value: 'RANDOM',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: NATIVE_NUMBER_TYPES,
   },
   {
@@ -214,7 +215,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALADD',
     sign: '+',
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -222,7 +223,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALSUBTRACT',
     sign: '-',
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -230,7 +231,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALMULTIPLY',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -238,7 +239,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALDIVIDEQ',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -246,7 +247,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALDIVIDER',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -254,7 +255,7 @@ export const CALCULATE_OPTIONS = [
     value: 'PRECISION',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -262,7 +263,7 @@ export const CALCULATE_OPTIONS = [
     value: 'SCALE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -270,7 +271,7 @@ export const CALCULATE_OPTIONS = [
     value: 'UNSCALED',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -278,7 +279,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALLEFT',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -286,7 +287,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALRIGHT',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -294,7 +295,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALPOWEROF',
     sign: null,
     inputRequired: true,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -302,7 +303,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALABSVALUE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -310,7 +311,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALSQUARE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -318,7 +319,7 @@ export const CALCULATE_OPTIONS = [
     value: 'DECIMALCUBE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -326,7 +327,7 @@ export const CALCULATE_OPTIONS = [
     value: 'NEGATE',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -334,7 +335,7 @@ export const CALCULATE_OPTIONS = [
     value: 'STRIPZERO',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
   {
@@ -342,7 +343,7 @@ export const CALCULATE_OPTIONS = [
     value: 'SIGN',
     sign: null,
     inputRequired: false,
-    component: 'Calculate',
+    component: Calculate,
     supported_dataType: ['bigdecimal'],
   },
 ];
