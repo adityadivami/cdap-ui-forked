@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { IDirectiveComponentValues } from 'components/AddTransformation/types';
 
 export interface IParams {
   context: string;
@@ -93,6 +94,23 @@ export interface IApiPayload {
   payload: IRecords;
   requestBody: IRequestBody;
   gridParams: IGridParams;
+}
+
+export interface IDirectiveContentParams {
+  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
+  directiveComponents: IDirectiveComponentType[];
+  directiveComponentValues: IDirectiveComponentValues;
+  functionName: string;
+  directiveFunctionSupportedDataType: string[];
+  columnData: IHeaderNamesList[];
+  missingDataList: IDataQuality;
+  callBack: () => void;
+  applyTransformation: (directive: string) => void;
+}
+
+export interface IDirectiveComponentType {
+  type: string;
+  component: (props) => JSX.Element;
 }
 
 export interface IGridCellData {
