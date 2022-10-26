@@ -49,6 +49,7 @@ export default function({
         setAnchorEl(null);
       }}
       className={classes.root}
+      data-testid="menuComponent-menu"
     >
       {menuOptions.map((item, index) => (
         <MenuItemComponent

@@ -63,6 +63,7 @@ export default function({
             e.stopPropagation();
             setAnchorEl(e.currentTarget);
           }}
+          data-testid="nested-menu-icon-button"
         >
           {icon}
         </IconButton>
@@ -83,6 +84,7 @@ export default function({
           e.stopPropagation();
         }}
         className={classes.root}
+        data-testid="menu-nested-menu"
       >
         {Array.isArray(menuOptions) &&
           menuOptions.map((item, index) => (
