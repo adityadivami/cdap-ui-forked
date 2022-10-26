@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IDirectiveContentParams } from 'components/GridTable/types';
+import { ITransformationContentParams } from '../../types';
 import React from 'react';
 
 export default function({

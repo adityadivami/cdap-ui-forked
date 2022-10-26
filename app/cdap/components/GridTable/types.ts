@@ -98,11 +98,11 @@ export interface IMissingList {
   values: Record<string, string>;
 }
 
-export interface IDirectiveContentParams {
+export interface ITransformationContentParams {
   setTransformationComponentsValue: React.Dispatch<
     React.SetStateAction<ITransformationComponentValues>
   >;
-  transformationComponent: IDirectiveComponentType[];
+  transformationComponent: ITransformationComponentType[];
   transformationComponentValues: ITransformationComponentValues;
   functionName: string;
   transformationFunctionSupportedDataType: string[];
@@ -112,7 +112,7 @@ export interface IDirectiveContentParams {
   applyTransformation: (directive: string) => void;
 }
 
-export interface IDirectiveComponentType {
+export interface ITransformationComponentType {
   type: string;
   component: (props) => JSX.Element;
 }
