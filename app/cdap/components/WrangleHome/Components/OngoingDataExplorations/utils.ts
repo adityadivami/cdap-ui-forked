@@ -39,7 +39,7 @@ export const generateDataForExplorationCard = (oldData) => {
           obj.label = `${eachItem[keys]} Recipe steps`;
           obj.type = 'text';
         } else if (keys === 'dataQuality') {
-          obj.label = parseInt(eachItem[keys], 2);
+          obj.label = Number(eachItem[keys]);
           obj.percentageSymbol = '%';
           obj.subText = 'Data Quality';
           obj.type = 'percentageWithText';
