@@ -36,9 +36,12 @@ describe('It should test DrawerWidget Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <DrawerWidget headingText={''} openDrawer={false} closeClickHandler={function (): void {
-              throw new Error('Function not implemented.');
-            } }              // headingText={PARSING}
+            <DrawerWidget
+              headingText={''}
+              openDrawer={false}
+              closeClickHandler={function(): void {
+                throw new Error('Function not implemented.');
+              }} // headingText={PARSING}
               // openDrawer={jest.fn}
               // showDivider={true}
               // headerActionTemplate={<ParsingHeaderActionTemplate />}

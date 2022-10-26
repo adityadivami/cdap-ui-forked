@@ -40,7 +40,11 @@ export default function({
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && (
-              <Box className={classes.backIconClass} onClick={closeClickHandler} data-testid= "box-id">
+              <Box
+                className={classes.backIconClass}
+                onClick={closeClickHandler}
+                data-testid="box-id"
+              >
                 {BackIcon}
               </Box>
             )}

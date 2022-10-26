@@ -22,6 +22,7 @@ import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
 import { IAddTransformationProp, IHeaderNamesList, IDataQuality } from './types';
 import { prepareDataQualtiy } from './CircularProgressBar/utils';
+import { multipleColumnSelected } from './constants';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -51,6 +52,21 @@ export default function({
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
+  const enableDoneButton = () => {
+    if (
+      multipleColumnSelected?.filter((el) => el?.value === functionName && !el.isMoreThanTwo)
+        ?.length
+    ) {
+      return selectedColumns.length == 2 ? false : true;
+    } else if (
+      multipleColumnSelected?.filter((el) => el?.value === functionName && el.isMoreThanTwo)?.length
+    ) {
+      return selectedColumns.length >= 1 ? false : true;
+    } else {
+      return selectedColumns.length >= 1 ? false : true;
+    }
+  };
+
   return (
     <Fragment>
       <DrawerWidget
@@ -72,13 +88,12 @@ export default function({
           </div>
           <Button
             variant="contained"
-            disabled={selectedColumns.length ? false : true}
+            disabled={enableDoneButton()}
             color="primary"
-            data-testid ='button_apply'
+            data-testid="button_apply"
             classes={{ containedPrimary: classes.buttonStyles }}
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
-            data-testid='add-transform-button'
           >
             {T.translate('features.WranglerNewAddTransformation.done')}
           </Button>

@@ -130,7 +130,11 @@ export default function({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
           />
-          <Box className={classes.searchInputAdornment} onClick={handleFocus} data-testid='click-handle-focus'>
+          <Box
+            className={classes.searchInputAdornment}
+            onClick={handleFocus}
+            data-testid="click-handle-focus"
+          >
             {SearchIcon}
           </Box>
         </div>
