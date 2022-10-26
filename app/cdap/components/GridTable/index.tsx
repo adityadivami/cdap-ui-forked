@@ -196,6 +196,7 @@ export default function GridTable() {
         showBreadCrumb={showBreadCrumb}
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
+          return false;
           // TODO: will integrate with add transformation panel later
         }}
       />

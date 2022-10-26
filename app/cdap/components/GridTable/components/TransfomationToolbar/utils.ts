@@ -31,6 +31,7 @@ export const nestedMenuOptions = [
     ).toString(),
     icon: Undo,
     options: [],
+    open: false,
   },
   {
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.redoIcon').toString(),
@@ -41,12 +42,14 @@ export const nestedMenuOptions = [
     ).toString(),
     icon: Redo,
     options: [],
+    open: false,
   },
   {
     options: NULL_MISSING_OPTIONS,
     icon: NullIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon'),
+    open: false,
   },
   {
     options: INVALID_ICON_OPTIONS,
@@ -55,12 +58,14 @@ export const nestedMenuOptions = [
       'features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon'
     ).toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon'),
+    open: false,
   },
   {
     options: COLUMN_OPTIONS,
     icon: ColumnIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon'),
+    open: false,
   },
   {
     options: MENU_OPTIONS,
@@ -69,6 +74,7 @@ export const nestedMenuOptions = [
       'features.WranglerNewUI.GridPage.toolbarIcons.labels.structureIcon'
     ).toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.structureIcon'),
+    open: false,
   },
   {
     options: FRAGMENT_OPTIONS,
@@ -77,12 +83,14 @@ export const nestedMenuOptions = [
       'features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon'
     ).toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon'),
+    open: false,
   },
   {
     options: MATH_OPTIONS,
     icon: MathIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon'),
+    open: false,
   },
   {
     options: SECURITY_OPTIONS,
@@ -91,12 +99,14 @@ export const nestedMenuOptions = [
       'features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon'
     ).toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon'),
+    open: false,
   },
   {
     options: OTHER_OPTIONS,
     icon: OtherIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon'),
+    open: false,
   },
   {
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.gridIcon').toString(),
@@ -105,5 +115,6 @@ export const nestedMenuOptions = [
     ).toString(),
     icon: GridIcon,
     options: [],
+    open: false,
   },
 ];

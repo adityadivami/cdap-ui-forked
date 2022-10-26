@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { SVGProps } from 'react';
+import { ReactNode, SVGProps } from 'react';
 
 export interface INestedMenuProps {
   icon: SVGProps<SVGElement>;
@@ -22,4 +22,8 @@ export interface INestedMenuProps {
   columnType: string;
   menuOptions: any;
   title: string;
+  anchorEl: HTMLElement;
+  setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement>>;
+  open: boolean;
+  handleMenuOpenClose?: (title: string) => void;
 }

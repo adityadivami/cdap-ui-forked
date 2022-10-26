@@ -28,46 +28,81 @@ import { nestedMenuOptions } from './utils';
 export default function({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) {
   const classes = useStyles();
   const [isShowNames, setIsShowName] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
+  const [nestedMenuList, setNestedMenuList] = useState(nestedMenuOptions);
+
+  const handleMenuOpenClose = (title) => {
+    let newState = [...nestedMenuList];
+    newState = newState.map((each) => {
+      each.open = false;
+      return each;
+    });
+  };
 
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
-        {nestedMenuOptions?.map((i, index) => {
-          return i.options?.length ? (
-            <>
-              <Box className={classes.functionNameWrapper}>
-                <NestedMenu
-                  menuOptions={i.options}
-                  columnType={columnType}
-                  icon={i.icon}
-                  submitMenuOption={submitMenuOption}
-                  title={i.title}
-                />
-                {isShowNames && <Typography className={classes.typoClass}>{i.toolName}</Typography>}
-              </Box>
-              {(index === 4 || index === 1) && (
-                <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
-              )}
-            </>
-          ) : (
+        {nestedMenuList?.map((i, index) => {
+          return (
             <>
               <Tooltip
                 title={i.title}
-                arrow
                 classes={{
                   tooltip: classes.tooltipToolbar,
                   arrow: classes.arrowTooltip,
                 }}
+                arrow
               >
                 <Box className={classes.functionNameWrapper}>
-                  <IconButton onClick={() => submitMenuOption(i.action, i.dataType)}>
-                    {i.icon}
-                  </IconButton>
-                  {isShowNames && (
-                    <Typography className={classes.typoClass}>{i.toolName}</Typography>
+                  {i.options?.length ? (
+                    <>
+                      <IconButton
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          let newState = [...nestedMenuList];
+                          newState = newState.map((each) => {
+                            each.open = false;
+                            return each;
+                          });
+                          newState[index].open = !newState[index].open;
+                          setNestedMenuList(newState);
+                          setAnchorEl(e.currentTarget);
+                        }}
+                      >
+                        {' '}
+                        {i.icon}
+                      </IconButton>
+                      <NestedMenu
+                        menuOptions={i.options}
+                        columnType={columnType}
+                        icon={i.icon}
+                        submitMenuOption={submitMenuOption}
+                        title={i.title}
+                        setAnchorEl={setAnchorEl}
+                        anchorEl={anchorEl}
+                        open={nestedMenuList[index].open}
+                        handleMenuOpenClose={handleMenuOpenClose}
+                      />
+                      {isShowNames && (
+                        <Typography className={classes.typoClass}>{i.toolName}</Typography>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      <IconButton onClick={() => submitMenuOption(i.action, i.dataType)}>
+                        {i.icon}
+                      </IconButton>
+                      {isShowNames && (
+                        <Typography className={classes.typoClass}>{i.toolName}</Typography>
+                      )}
+                    </>
                   )}
                 </Box>
               </Tooltip>
+              {(index === 4 || index === 1 || index === 9) && (
+                <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
+              )}
             </>
           );
         })}

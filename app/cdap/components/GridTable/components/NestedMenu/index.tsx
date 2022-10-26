@@ -27,10 +27,12 @@ export default function({
   submitMenuOption,
   columnType,
   title,
+  anchorEl,
+  setAnchorEl,
+  open,
+  handleMenuOpenClose,
 }: INestedMenuProps) {
-  const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
-  const open = Boolean(anchorEl);
   const [nestedOptions, setNestedOptions] = useState([]);
   const classes = useNestedMenuStyles();
 
@@ -44,28 +46,11 @@ export default function({
     } else {
       submitMenuOption(item.value, item.supported_dataType);
       setAnchorEl(null);
+      handleMenuOpenClose(title);
     }
   };
   return (
     <>
-      <Tooltip
-        title={title}
-        classes={{
-          tooltip: classes.tooltipToolbar,
-          arrow: classes.arrowTooltip,
-        }}
-        arrow
-      >
-        <IconButton
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setAnchorEl(e.currentTarget);
-          }}
-        >
-          {icon}
-        </IconButton>
-      </Tooltip>
       <Menu
         id="parent-menu"
         keepMounted
@@ -101,6 +86,7 @@ export default function({
             e.preventDefault();
             e.stopPropagation();
             setAnchorEl(null);
+            handleMenuOpenClose(title);
             setAnchorEl2(null);
             submitMenuOption(item.value, item.supported_dataType);
           }}
