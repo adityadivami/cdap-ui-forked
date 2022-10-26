@@ -15,6 +15,7 @@
  */
 
 import { Box, Typography } from '@material-ui/core';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import T from 'i18n-react';
 import React from 'react';
 import { ArrowIcon, ColumnIcon, ZoomIcon } from './images';
@@ -27,16 +28,21 @@ export default function({
   columnViewPanelOpened,
 }: IFooterPanelProps) {
   const classes = useStyles();
+
   return (
     <Box className={classes.containerProps}>
       <Box className={classes.innnerContainer}>
-        <Box
-          className={`${classes.imgContainer} ${
-            columnViewPanelOpened ? classes.showDepth : classes.showNormalView
-          }`}
-          data-testid="footer-panel-column-icon-container"
-        >
-          {ColumnIcon}
+        <Box>
+          <CustomTooltip title={`${T.translate('features.FooterPanel.labels.columnViewPanel')}`}>
+            <Box
+              className={`${classes.imgContainer} ${
+                columnViewPanelOpened ? classes.showDepth : classes.showNormalView
+              }`}
+              data-testid="footer-panel-column-icon-container"
+            >
+              {ColumnIcon}
+            </Box>
+          </CustomTooltip>
         </Box>
         <Box className={classes.dataWrapper}>
           <Typography className={classes.data} data-testid="footerpanel-labels-title">

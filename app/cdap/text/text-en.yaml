@@ -3444,3 +3444,4 @@ features:
       directives: 'Directives'
       recipeSteps: 'Recipe Steps'
       zoomPercent100: '100%'
+      columnViewPanel: 'Column View Panel'
