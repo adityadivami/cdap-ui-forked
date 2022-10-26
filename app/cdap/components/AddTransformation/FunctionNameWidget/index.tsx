@@ -25,16 +25,24 @@ export default function({ functionName }: { functionName: string }) {
   return (
     <section className={classes.functionSectionStyles}>
       <div className={classes.funtionSectionWrapperStyles}>
-        <div className={classes.functionHeadingTextStyles} data-testid="function-name-head">
+        <div
+          className={classes.functionHeadingTextStyles}
+          data-testid="function-name-head"
+          id="function-name-head"
+        >
           {T.translate('features.WranglerNewAddTransformation.function')}
         </div>
         {TickIcon}
       </div>
       <div className={classes.functionInfoSectionStyles}>
-        <span data-testid="selected-function-name" className={classes.functionTextStyles}>
+        <span
+          data-testid="selected-function-name"
+          id="selected-function-name"
+          className={classes.functionTextStyles}
+        >
           {functionName}
         </span>
-        <span data-testid="selected-function-info">
+        <span data-testid="selected-function-info" id="selected-function-info">
           <InfoOutlinedIcon className={classes.infoIcon} />
         </span>
       </div>

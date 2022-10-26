@@ -41,6 +41,7 @@ export default function({ value }: { value: string }) {
       <Typography component="div" className={classes.progress}>
         <Typography
           data-testid="data-quality-percent-arc"
+          id="data-quality-percent-arc"
           component="div"
           className={classes.barOverflow}
         >
@@ -48,6 +49,7 @@ export default function({ value }: { value: string }) {
         </Typography>
         <Typography
           data-testid="data-quality-percent"
+          id="data-quality-percent"
           component="span"
           className={
             parseInt(value) < 100

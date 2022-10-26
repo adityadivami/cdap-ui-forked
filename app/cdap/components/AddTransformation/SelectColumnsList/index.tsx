@@ -129,10 +129,12 @@ export default function({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             data-testid="search-column-name"
+            id="search-column-name"
           />
           <Box
             className={classes.searchInputAdornment}
             data-testid="search-column-icon"
+            id="search-column-icon"
             onClick={handleFocus}
           >
             {SearchIcon}
@@ -145,12 +147,14 @@ export default function({
             {NoDataSVG}
             <Typography
               data-testid="no-columns-to-show-title"
+              id="no-columns-to-show-title"
               className={classes.mainHeaderMessage}
             >
               {T.translate('features.WranglerNewSelectCoulmnList.noColumns')}
             </Typography>
             <Typography
               data-testid="no-columns-to-show-subtitle"
+              id="no-columns-to-show-subtitle"
               className={classes.subHeaderMessage}
             >
               {T.translate('features.WranglerNewSelectCoulmnList.noMatchColumnDatatype')}

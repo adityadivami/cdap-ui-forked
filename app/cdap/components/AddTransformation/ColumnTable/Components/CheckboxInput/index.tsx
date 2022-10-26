@@ -46,6 +46,7 @@ export default function({
               onMultipleSelection(event, eachColumn)
             }
             data-testid="transformation-checkbox-select-multiple-columns"
+            id="transformation-checkbox-select-multiple-columns"
           />
         }
         label=""
