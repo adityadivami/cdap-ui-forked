@@ -14,24 +14,35 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Box, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import NoRecordScreen from 'components/NoRecordScreen/index';
 import LoadingSVG from 'components/shared/LoadingSVG';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import BreadCrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
-import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
-import { flatMap } from 'rxjs/operators';
-import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IHeadersData,
+  IMetricArray,
+  IObject,
+  IParams,
+  IRecords,
+  ITypeArrayOfMissingValue,
+} from './types';
+import { convertNonNullPercent } from './utils';
+import T from 'i18n-react';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -131,74 +142,22 @@ export default function GridTable() {
     }
   };
 
-  // ------------@convertNonNullPercent Function is used for calculation of Missing/Null value
-  const convertNonNullPercent = (nonNullValue) => {
-    const lengthOfData: number = gridData?.values.length;
-    let count: number = 0;
-    let emptyCount: number = 0;
-    let nullValueCount: number = 0;
-    if (lengthOfData) {
-      nullValueCount = nonNullValue.null ? (nonNullValue.null / 100) * lengthOfData : 0;
-      emptyCount = nonNullValue.empty ? (nonNullValue.empty / 100) * lengthOfData : 0;
-      count = parseInt(nullValueCount.toFixed(0) + emptyCount.toFixed(0), 2);
-    }
-    return count;
-  };
-
-  // ------------@checkFrequentlyOccuredValues Function is used for checking which value appears maximum time in a column if that column doesn't have missing/null value
-  const checkFrequentlyOccuredValues = (key) => {
-    const valueOfKey = gridData.values.map((el) => el[key]);
-    let mostFrequentItem: number = 1;
-    let mostFrequentItemCount: number = 0;
-    let mostFrequentItemValue: string = '';
-    const mostFrequentDataItem = {
-      name: '',
-      count: 0,
-    };
-    if (Array.isArray(valueOfKey) && valueOfKey.length) {
-      valueOfKey.map((item, index) => {
-        valueOfKey.map((value, valueIndex) => {
-          if (item === value) {
-            mostFrequentItemCount++;
-          }
-          if (mostFrequentItem < mostFrequentItemCount) {
-            mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item;
-          }
-        });
-        mostFrequentItemCount = 0;
-        mostFrequentItemValue = mostFrequentItemValue === '' ? item : mostFrequentItemValue;
-      });
-    }
-    mostFrequentDataItem.name = mostFrequentItemValue;
-    mostFrequentDataItem.count = mostFrequentItemCount;
-    return mostFrequentDataItem;
-  };
-
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
-  const createMissingData = (statistics: IRecords) => {
+  const createMissingData = (statistics: IObject) => {
     const statisticObjectToArray = Object.entries(statistics);
-    const metricArray = [];
+    const metricArray: IMetricArray[] = [];
     statisticObjectToArray.forEach(([key, value]) => {
       const headerKeyTypeArray = Object.entries(value);
-      const arrayForMissingValue = [];
-      headerKeyTypeArray.forEach(([vKey, vValue]) => {
-        if (vKey !== 'types') {
-          arrayForMissingValue.push({
-            label:
-              convertNonNullPercent(vValue) === 0
-                ? checkFrequentlyOccuredValues(key).name
-                : 'Missing/Null',
-            count:
-              convertNonNullPercent(vValue) === 0
-                ? checkFrequentlyOccuredValues(key).count
-                : convertNonNullPercent(vValue),
-          });
-        }
+      const typeArrayOfMissingValue: ITypeArrayOfMissingValue[] = [];
+      headerKeyTypeArray?.forEach(([vKey, vValue]) => {
+        typeArrayOfMissingValue.push({
+          label: vKey === 'general' ? 'Missing/Null' : '',
+          count: vKey === 'types' ? '' : convertNonNullPercent(gridData, vValue),
+        });
       }),
         metricArray.push({
           name: key,
-          values: arrayForMissingValue.concat(invalidCountArray),
+          values: typeArrayOfMissingValue?.concat(invalidCountArray),
         });
     });
     return metricArray;
@@ -207,18 +166,18 @@ export default function GridTable() {
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
-    const headersData = createHeadersData(rawData.headers, rawData.types);
+    const headersData: IHeadersData[] = createHeadersData(rawData.headers, rawData.types);
     setHeadersNamesList(headersData);
-    if (rawData && rawData.summary && rawData.summary.statistics) {
-      const missingData = createMissingData(gridData?.summary.statistics);
+    if (rawData && rawData?.summary && rawData?.summary?.statistics) {
+      const missingData: IMetricArray[] = createMissingData(gridData?.summary?.statistics);
       setMissingDataList(missingData);
     }
     const rowData =
       rawData &&
       rawData.values &&
-      Array.isArray(rawData.values) &&
-      rawData.values.map((eachRow) => {
-        const { body, ...rest } = eachRow;
+      Array.isArray(rawData?.values) &&
+      rawData?.values.map((eachRow: {}) => {
+        const { ...rest } = eachRow;
         return rest;
       });
 
@@ -232,10 +191,17 @@ export default function GridTable() {
   return (
     <Box data-testid="grid-table">
       <BreadCrumb datasetName={wid} />
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
+        <NoRecordScreen
+          title={T.translate('features.NoRecordScreen.gridTable.title')}
+          subtitle={T.translate('features.NoRecordScreen.gridTable.subtitle')}
+        />
+      )}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
-            {headersNamesList?.length &&
+            {Array.isArray(headersNamesList) &&
+              headersNamesList?.length > 0 &&
               headersNamesList.map((eachHeader) => (
                 <GridHeaderCell
                   label={eachHeader.label}
@@ -245,8 +211,8 @@ export default function GridTable() {
               ))}
           </TableRow>
           <TableRow>
-            {missingDataList?.length &&
-              headersNamesList.length &&
+            {missingDataList?.length > 0 &&
+              headersNamesList?.length > 0 &&
               headersNamesList.map((each, index) => {
                 return missingDataList.map((item, itemIndex) => {
                   if (item.name === each.name) {
@@ -257,7 +223,7 @@ export default function GridTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rowsDataList?.length &&
+          {rowsDataList?.length > 0 &&
             rowsDataList.map((eachRow, rowIndex) => {
               return (
                 <TableRow key={`row-${rowIndex}`}>

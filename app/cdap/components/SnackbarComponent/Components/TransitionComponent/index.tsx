@@ -18,27 +18,33 @@ import React from 'react';
 import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { Divider } from '@material-ui/core';
 import { useStyles } from './styles';
+import T from 'i18n-react';
 
 export default function TransitionComponent(props) {
   const classes = useStyles();
   return (
-    <div>
+    <div data-testid="transition-component-parent" id="transition-component-parent">
       <div className={classes.headFlex}>
         <h5 className={classes.errorHead}>
           <WarningRoundedIcon className={classes.warningIcon} />
-          &nbsp;Error
+          &nbsp;
+          {T.translate('features.Snackbar.transitionComponent.labels.error')}
         </h5>
         <span
           role="button"
           tabIndex={0}
           className={classes.dismissSpan}
           onClick={() => props.close()}
+          id="snackbar-close-button"
+          data-testid="snackbar-close-button"
         >
-          Dismiss
+          {T.translate('features.Snackbar.transitionComponent.labels.dismiss')}
         </span>
       </div>
       <Divider />
-      <p className={classes.errorMessage}>Failed to retrieve sample</p>
+      <p className={classes.errorMessage}>
+        {T.translate('features.Snackbar.transitionComponent.labels.errorMessage')}
+      </p>
     </div>
   );
 }
