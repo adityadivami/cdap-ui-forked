@@ -50,6 +50,7 @@ export default function({
               fontSize="large"
               onClick={closeClickHandler}
               data-testid="drawer-widget-close-round-icon"
+              id="drawer-widget-close-round-icon"
             />
           </Box>
         </header>

@@ -56,6 +56,7 @@ export default function({
               value={option.value}
               key={option.value}
               data-testid={`input-select-${index}`}
+              id={`input-select-${index}`}
             >
               {option.label}
             </MenuItem>

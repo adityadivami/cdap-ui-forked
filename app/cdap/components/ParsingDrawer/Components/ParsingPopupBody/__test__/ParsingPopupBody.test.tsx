@@ -20,10 +20,7 @@ import { Router, Route, Switch } from 'react-router';
 import ParsingPopupBody from '..';
 import { fireEvent, render, within, screen } from '@testing-library/react';
 import { CHAR_ENCODING_OPTIONS, FORMAT_OPTIONS } from '../parsingOptions';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
 
 describe('It Should Test the ParsingPopupBody component', () => {
   it('Should test whether ParsingPopupBody Component is rendered or not', () => {
