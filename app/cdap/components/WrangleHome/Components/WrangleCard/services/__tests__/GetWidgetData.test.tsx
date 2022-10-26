@@ -17,9 +17,38 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { getWidgetData } from '../getWidgetData';
+import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
+import * as reducers from 'components/Connections/Create/reducer';
+import * as utils from '../../WidgetData/utils';
+import {
+  fetchConnectorMock,
+  fileMock2,
+  googleCloudMock,
+  dataBaseMock,
+  awsMock,
+  msgSystemsMock,
+  fileMock,
+  postGresMock,
+} from '../mock/mockData';
 
 describe('Test function getWidgetData', () => {
-  it('invokes getWidgetData function with undefined data', () => {
-    getWidgetData(undefined);
+  it('invokes getWidgetData function with data from API`s data', () => {
+    jest.spyOn(reducers, 'fetchConnectors').mockReturnValue(Promise.resolve(fetchConnectorMock));
+    const dummyRes = new Map();
+    dummyRes.set('PostgreSql', postGresMock);
+    dummyRes.set('File', fileMock);
+    jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
+
+    const dummyReturnMap = new Map();
+    dummyReturnMap.set('Messaging Systems', msgSystemsMock);
+    dummyReturnMap.set('Amazon Web Services', awsMock);
+    dummyReturnMap.set('Database', dataBaseMock);
+    dummyReturnMap.set('Google Cloud Platform', googleCloudMock);
+    dummyReturnMap.set('File', fileMock2);
+
+    jest.spyOn(utils, 'getCategoriesToConnectorsMap').mockReturnValue(dummyReturnMap);
+
+    getWidgetData(() => {});
+    expect(getWidgetData).toBeTruthy;
   });
 });
