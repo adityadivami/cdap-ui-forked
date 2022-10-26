@@ -40,3 +40,8 @@ export const multipleColumnSelected = [
     isMoreThanTwo: true,
   },
 ];
+
+export const directiveComponentDefaultValues = {
+  radioOption: '',
+  customInput: '',
+};
