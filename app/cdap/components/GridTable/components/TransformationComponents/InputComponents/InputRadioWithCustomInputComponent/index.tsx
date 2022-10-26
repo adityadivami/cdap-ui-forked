@@ -24,7 +24,7 @@ import {
 } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../../styles';
-import { IRadioInputWithCustomComponent } from '../types';
+import { IRadioInputWithCustomComponentProps } from '../types';
 
 export default function({
   options,
@@ -33,7 +33,7 @@ export default function({
   customInputType,
   customInput,
   setCustomInput,
-}: IRadioInputWithCustomComponent) {
+}: IRadioInputWithCustomComponentProps) {
   const classes = useStyles();
 
   return (

@@ -23,6 +23,7 @@ import InputCheckbox from '../InputComponents/InputCheckbox';
 import T from 'i18n-react';
 import LabelComponent from '../InputComponents/LabelInputComponent';
 import { ICalculateProps } from './types';
+import NewColumnInput from '../InputComponents/NewColumnInput';
 
 export default function({
   functionName,
@@ -58,35 +59,7 @@ export default function({
       {UI_INPUT.length > 0 &&
         UI_INPUT.map((item) =>
           item.value === 'CHARCOUNT' ? (
-            <Box className={classes.calculateFlex}>
-              <FormGroup>
-                <LabelComponent
-                  labelText={`${T.translate(
-                    'features.DirectiveUIComponent.calculate.nameNewColumn'
-                  )}`}
-                />
-                <FormInputFieldComponent
-                  formInputValue={column}
-                  classnames={classes.formFieldStyles}
-                  inputProps={{
-                    classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-                    type: 'text',
-                    value: column,
-                    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                      setColumnName(e.target.value),
-                    color: 'primary',
-                    placeholder: `${T.translate(
-                      'features.DirectiveUIComponent.calculate.destinationColumn'
-                    )}`,
-                  }}
-                />
-                {isError && (
-                  <FormHelperText error={isError}>
-                    {T.translate('features.DirectiveUIComponent.calculate.columnExist')}
-                  </FormHelperText>
-                )}
-              </FormGroup>
-            </Box>
+            <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
           ) : item.inputRequired ? (
             <Box className={classes.calculateFlex}>
               {item?.sign && (
@@ -94,7 +67,7 @@ export default function({
                   {item?.sign}
                 </Typography>
               )}
-              <FormGroup>
+              <FormGroup classes={{ root: classes.muiFormGroupRootInput }}>
                 <FormInputFieldComponent
                   formInputValue={customInput}
                   classnames={classes.formFieldStyles}
@@ -123,33 +96,7 @@ export default function({
             className={classes.checkboxStyles}
           />
           {copyToNewColumn && (
-            <Fragment>
-              <LabelComponent
-                labelText={`${T.translate(
-                  'features.DirectiveUIComponent.calculate.nameNewColumn'
-                )}`}
-              />
-              <FormInputFieldComponent
-                formInputValue={column}
-                classnames={classes.formFieldStyles}
-                inputProps={{
-                  classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-                  type: 'text',
-                  value: column,
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                    setColumnName(e.target.value),
-                  color: 'primary',
-                  placeholder: `${T.translate(
-                    'features.DirectiveUIComponent.calculate.destinationColumn'
-                  )}`,
-                }}
-              />
-              {isError && (
-                <FormHelperText error={isError}>
-                  {T.translate('features.DirectiveUIComponent.calculate.columnExist')}
-                </FormHelperText>
-              )}
-            </Fragment>
+            <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
           )}
         </FormGroup>
       )}

@@ -109,6 +109,7 @@ export const useStyles = makeStyles(() => {
     },
     calculateFlex: {
       display: 'flex',
+      width: '100%',
     },
     calculateWrapper: {
       marginTop: 20,
@@ -127,6 +128,12 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#5F6368',
+    },
+    muiFormGroupRootInput: {
+      width: '100%',
+    },
+    errorText: {
+      fontSize: 13,
     },
   };
 });

@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -33,18 +35,24 @@ export interface IFormInputFieldComponentProps {
   inputProps: IInput;
 }
 
-export interface IInputCheckbox {
+export interface IInputCheckboxProps {
   label: string;
   value: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className: string;
 }
 
-export interface IRadioInputWithCustomComponent {
+export interface IRadioInputWithCustomComponentProps {
   options: IObject[];
   radioValue: string;
   setRadioValue: React.Dispatch<React.SetStateAction<string>>;
   customInputType: string;
   customInput: string;
   setCustomInput: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface INewColumnProps {
+  column: string;
+  setColumnName: React.Dispatch<React.SetStateAction<string>>;
+  isError: boolean;
 }
