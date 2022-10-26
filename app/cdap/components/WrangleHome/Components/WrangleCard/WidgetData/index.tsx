@@ -26,10 +26,15 @@ const ImageContainer = styled.div`
 
 export default function({ dataSrc }: IWidgetSrc) {
   return dataSrc ? (
-    <Avatar src={dataSrc as string} variant="square" data-testid="card-image-from-widget-api" />
+    <Avatar
+      src={dataSrc as string}
+      variant="square"
+      data-testid="card-image-from-widget-api"
+      id="card-image-from-widget-api"
+    />
   ) : (
     <ImageContainer>
-      <ImageOutlined fontSize="inherit" data-testid="card-image-default" />
+      <ImageOutlined fontSize="inherit" data-testid="card-image-default" id="card-image-default" />
     </ImageContainer>
   );
 }

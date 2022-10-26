@@ -32,7 +32,11 @@ export default function({ selectedConnection }: { selectedConnection: string }) 
   };
 
   return (
-    <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
+    <Box
+      className={classes.breadCombContainer}
+      data-testid="bread-comb-container-parent"
+      id="bread-comb-container-parent"
+    >
       <Box>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
@@ -50,6 +54,7 @@ export default function({ selectedConnection }: { selectedConnection: string }) 
             onClick={handleAddConnection}
             className={classes.importData}
             data-testid="sub-header-handle-add-connection"
+            id="sub-header-handle-add-connection"
           >
             <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
             <Box className={classes.breadcrumbTyporgraphy}>
