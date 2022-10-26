@@ -14,18 +14,19 @@
  * the License.
  */
 
-import { MenuItem } from '@material-ui/core';
+import { MenuItem, Typography } from '@material-ui/core';
 import React from 'react';
 import { useNestedMenuStyles } from '../NestedMenu/styles';
 import { menuArrowIcon } from '../TransfomationToolbar/iconStore';
 import { IMenuItemComponentProps } from './types';
+import T from 'i18n-react';
 
 export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
   const classes = useNestedMenuStyles();
-  if (item.value === 'divider') {
+  if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.divider')) {
     return <hr className={classes.divider} key={index} />;
   }
-  if (item.value === 'heading') {
+  if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.heading')) {
     return (
       <div className={classes.heading} key={index}>
         {item.label}
@@ -46,7 +47,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         title={item.value}
         onClick={(e) => onMenuClick(e, item)}
       >
-        <span>{item.label} </span>
+        <Typography>{item.label} </Typography>
         {item?.options?.length && menuArrowIcon}
       </MenuItem>
     );
