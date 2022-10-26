@@ -13,11 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+interface IClasses {
+  [key: string]: string;
+}
 
-import CustomTransform from './components/TransformationComponents/CustomTransform';
-export const TRANSFORMATION_COMPONENTS = [
-  {
-    type: 'customTransform',
-    component: CustomTransform,
-  },
-];
+interface IInput {
+  classes?: IClasses;
+  type: 'text' | 'number';
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  color: 'primary' | 'secondary';
+  placeholder: string;
+}
+export interface IFormInputFieldComponentProps {
+  formInputValue: string;
+  classnames: string;
+  inputProps: IInput;
+}

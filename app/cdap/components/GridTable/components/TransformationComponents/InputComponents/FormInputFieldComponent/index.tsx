@@ -14,10 +14,17 @@
  * the License.
  */
 
-import CustomTransform from './components/TransformationComponents/CustomTransform';
-export const TRANSFORMATION_COMPONENTS = [
-  {
-    type: 'customTransform',
-    component: CustomTransform,
-  },
-];
+import { FormControlLabel, Input } from '@material-ui/core';
+import React from 'react';
+import { IFormInputFieldComponentProps } from '../types';
+
+export default function({ formInputValue, classnames, inputProps }: IFormInputFieldComponentProps) {
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...inputProps} />}
+      label={''}
+    />
+  );
+}

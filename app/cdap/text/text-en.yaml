@@ -3496,5 +3496,9 @@ features:
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
+      transformationUI:
+        customTransform:
+          typeCustomExpression: Type the custom expression to transform
+          exampleCustomExpression: E.g. math:sin(supported_value), empty(arg), supported_value+<column>, etc.
 
               

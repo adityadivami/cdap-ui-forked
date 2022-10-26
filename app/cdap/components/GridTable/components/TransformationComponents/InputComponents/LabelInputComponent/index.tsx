@@ -14,10 +14,11 @@
  * the License.
  */
 
-import CustomTransform from './components/TransformationComponents/CustomTransform';
-export const TRANSFORMATION_COMPONENTS = [
-  {
-    type: 'customTransform',
-    component: CustomTransform,
-  },
-];
+import React from 'react';
+import { useStyles } from '../../styles';
+import { Typography } from '@material-ui/core';
+
+export default function({ labelText }: { labelText: string }) {
+  const classes = useStyles();
+  return <Typography className={classes.formLabelStyles}>{labelText}</Typography>;
+}

@@ -14,9 +14,16 @@
  * the License.
  */
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+import { ITransformationComponentValues } from './types';
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  transformationComponentValues: ITransformationComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
+  } else if (functionName === 'customTransform') {
+    return `set-column :${columnSelected} ${transformationComponentValues.customInput}`;
   } else {
     return null;
   }

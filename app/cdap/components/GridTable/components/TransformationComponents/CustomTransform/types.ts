@@ -14,10 +14,11 @@
  * the License.
  */
 
-import CustomTransform from './components/TransformationComponents/CustomTransform';
-export const TRANSFORMATION_COMPONENTS = [
-  {
-    type: 'customTransform',
-    component: CustomTransform,
-  },
-];
+import { ITransformationComponentValues } from '../../../../AddTransformation/types';
+
+export interface ICustomTransformation {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
+}

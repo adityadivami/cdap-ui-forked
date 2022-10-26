@@ -40,3 +40,7 @@ export interface IMultipleSelectedFunctionDetail {
 export interface IDataQualityItem {
   [key: string]: string | number;
 }
+
+export interface ITransformationComponentValues {
+  customInput: string;
+}
