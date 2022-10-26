@@ -13,34 +13,20 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+interface IClasses {
+  [key: string]: string;
+}
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
-
-export const transformationComponentDefaultValues = {
-  customInput: '',
-};
+interface IInput {
+  classes?: IClasses;
+  type: 'text' | 'number';
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  color: 'primary' | 'secondary';
+  placeholder: string;
+}
+export interface IFormInputFieldComponentProps {
+  formInputValue: string;
+  classnames: string;
+  inputProps: IInput;
+}

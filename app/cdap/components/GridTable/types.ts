@@ -14,6 +14,8 @@
  * the License.
  */
 
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
+
 export interface IParams {
   context: string | number | IRecords;
   workspaceId: string;
@@ -80,4 +82,23 @@ export interface IApiPayload {
   payload: IRecords;
   requestBody: IRequestBody;
   gridParams: IGridParams;
+}
+
+export interface IDirectiveContentParams {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponent: IDirectiveComponentType[];
+  transformationComponentValues: ITransformationComponentValues;
+  functionName: string;
+  transformationFunctionSupportedDataType: string[];
+  columnData: IHeaderNamesList[];
+  missingDataList: IDataQuality;
+  callBack: () => void;
+  applyTransformation: (directive: string) => void;
+}
+
+export interface IDirectiveComponentType {
+  type: string;
+  component: (props) => JSX.Element;
 }

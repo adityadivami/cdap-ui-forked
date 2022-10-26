@@ -3457,6 +3457,10 @@ features:
         gridIcon: 'Grid'
         otherIcon: 'Other'
         toggleDescription: 'Function names'
+  DirectiveUIComponent: 
+    customTransform:
+      typeCustomExpression: Type the custom expression to transform
+      exampleCustomExpression: E.g. math:sin(supported_value), empty(arg), supported_value+<column>, etc.
   WranglerNewAddTransformation:
     addTransformation: Add Transformation Step
     applyStep: Apply Step

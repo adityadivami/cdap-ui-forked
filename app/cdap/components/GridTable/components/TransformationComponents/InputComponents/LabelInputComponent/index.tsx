@@ -14,33 +14,11 @@
  * the License.
  */
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
+import React from 'react';
+import { useStyles } from '../../styles';
+import { Typography } from '@material-ui/core';
 
-export const transformationComponentDefaultValues = {
-  customInput: '',
-};
+export default function({ labelText }: { labelText: string }) {
+  const classes = useStyles();
+  return <Typography className={classes.formLabelStyles}>{labelText}</Typography>;
+}
