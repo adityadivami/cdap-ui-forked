@@ -39,33 +39,56 @@ export default function({
                 columnViewPanelOpened ? classes.showDepth : classes.showNormalView
               }`}
               data-testid="footer-panel-column-icon-container"
+              id="footer-panel-column-icon-container"
             >
               {ColumnIcon}
             </Box>
           </CustomTooltip>
         </Box>
         <Box className={classes.dataWrapper}>
-          <Typography className={classes.data} data-testid="footerpanel-labels-title">
+          <Typography
+            className={classes.data}
+            id="footerpanel-labels-title"
+            data-testid="footerpanel-labels-title"
+          >
             {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
           </Typography>
         </Box>
-        <Box className={classes.zoomContainer} data-testid="footerpanel-box-zoom">
+        <Box
+          className={classes.zoomContainer}
+          data-testid="footerpanel-box-zoom"
+          id="footerpanel-box-zoom"
+        >
           {ZoomIcon}
-          <Typography className={classes.zoomPercent} data-testid="footerpanel-labels-zoompercent">
+          <Typography
+            className={classes.zoomPercent}
+            id="footerpanel-labels-zoompercent"
+            data-testid="footerpanel-labels-zoompercent"
+          >
             {T.translate('features.FooterPanel.labels.zoomPercent100')}
           </Typography>
           {ArrowIcon}
         </Box>
         <Box className={classes.directivesContainer}>
-          <Typography data-testid="footerpanel-labels-directives">
+          <Typography
+            data-testid="footerpanel-labels-directives"
+            id="footerpanel-labels-directives"
+          >
             {T.translate('features.FooterPanel.labels.directives')}
           </Typography>
         </Box>
         <Box className={classes.recipeContainer}>
-          <Typography data-testid="footerpanel-labels-recipesteps">
+          <Typography
+            data-testid="footerpanel-labels-recipesteps"
+            id="footerpanel-labels-recipesteps"
+          >
             {T.translate('features.FooterPanel.labels.recipeSteps')}
           </Typography>
-          <Typography className={classes.recipeCount} data-testid="footerpanel-labels-recipecount">
+          <Typography
+            className={classes.recipeCount}
+            id="footerpanel-labels-recipecount"
+            data-testid="footerpanel-labels-recipecount"
+          >
             {recipeStepsCount}
           </Typography>
         </Box>
