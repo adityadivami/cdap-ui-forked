@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IDirectiveContentParams } from '../../types';
+import { ITransformationContentParams } from '../../types';
 import React from 'react';
 import { CALCULATE_OPTIONS } from '../NestedMenu/menuOptions/calculateOptions';
 
@@ -25,7 +25,7 @@ export default function({
   transformationComponentValues,
   setTransformationComponentsValue,
   ...props
-}: IDirectiveContentParams) {
+}: ITransformationContentParams) {
   const Component =
     transformationComponent.find((item) => item.type === type)?.component ||
     CALCULATE_OPTIONS.find((item) => item?.value === functionName)?.component;
