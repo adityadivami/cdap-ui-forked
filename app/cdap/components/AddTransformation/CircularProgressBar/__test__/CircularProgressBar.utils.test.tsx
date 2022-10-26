@@ -14,22 +14,30 @@
  * the License.
  */
 
-export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
-}
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
-}
-export interface IDataQuality {
-  [key: string]: string | any;
-}
-export interface IAddTransformationProp {
-  directiveFunctionSupportedDataType: string[];
-  functionName: string;
-  columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality;
-  callBack: () => void;
-  applyTransformation: (directive: string) => void;
-}
+import { valueFromAST } from 'graphql';
+import { prepareDataQualtiy } from '../utils';
+
+describe('It should test prepareDataQualtiy function', () => {
+  const mockStatistics = {
+    general: {
+      'non-null': 100,
+    },
+    types: {
+      Integer: 99.9,
+      'US Postal Codes': 0.1,
+      'US State': 0.1,
+      Text: 0.1,
+    },
+  };
+
+  const mockColumnList = [
+    {
+      name: 'body_0',
+      label: 'body_0',
+      type: ['String'],
+    },
+  ];
+  it('mock prepareDataQuality function ', () => {
+    expect(prepareDataQualtiy(mockStatistics, mockColumnList)).toStrictEqual([]);
+  });
+});

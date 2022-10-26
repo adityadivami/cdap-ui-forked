@@ -16,19 +16,16 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import SelectedColumnCountWidget from '..';
+import CircularProgressBar from '..';
 
-describe('It should test the SelectColumnsList Component', () => {
-  it('should render the SelectColumnsList Component with selectedColumnsCount>10', () => {
-    const container = render(<SelectedColumnCountWidget selectedColumnsCount={20} />);
+describe('Should test CircularProgressBar Component', () => {
+  it('Should render CircularProgressBar Component with value < 100', () => {
+    const container = render(<CircularProgressBar value={'60'} />);
     expect(container).toBeDefined();
   });
-  it('should render the SelectColumnsList Component with selectedColumnsCount<10', () => {
-    const container = render(<SelectedColumnCountWidget selectedColumnsCount={1} />);
-    expect(container).toBeDefined();
-  });
-  it('should render the SelectColumnsList Component with no selectedColumnsCount', () => {
-    const container = render(<SelectedColumnCountWidget selectedColumnsCount={20} />);
+
+  it('Should render CircularProgressBar Component with value = 100', () => {
+    const container = render(<CircularProgressBar value={'100'} />);
     expect(container).toBeDefined();
   });
 });
