@@ -78,7 +78,7 @@ describe('It should test the AddTransformatio Component', () => {
     fireEvent.click(btn3);
   });
 
-  it('Trigger handleApply()', () => {
+  it('Trigger handleApply() , closeSelectColumnsPopupWithoutColumn ', () => {
     render(
       <AddTransformation
         directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}

@@ -15,31 +15,22 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import { mockDataQualityValue } from 'components/AddTransformation/mock/mockDataForAddTransformation';
+import {
+  mockColumnData,
+  mockColumnDataForColumnList,
+  mockDataQualityValue,
+  mockDirectiveFunctionSupportedDataType,
+} from 'components/AddTransformation/mock/mockDataForAddTransformation';
 import React from 'react';
 import SelectColumnsList from '..';
 
 describe('It should test the SelectColumnsList Component', () => {
-  const mockDirectiveFunctionSupportedDataType = ['string'];
-  const mockColumnData = [
-    {
-      name: 'body_0',
-      label: 'body_0',
-      type: ['String'],
-    },
-    {
-      name: 'body_1',
-      label: 'body_1',
-      type: ['String'],
-    },
-  ];
-
   it('Should render the SelectColumnsList Component with functionName "uppercase" ', () => {
     const container = render(
       <SelectColumnsList
         directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
         selectedColumnsCount={1}
-        columnData={mockColumnData}
+        columnData={mockColumnDataForColumnList}
         setSelectedColumns={jest.fn()}
         dataQuality={mockDataQualityValue}
         functionName={'uppercase'}
@@ -53,7 +44,7 @@ describe('It should test the SelectColumnsList Component', () => {
       <SelectColumnsList
         directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
         selectedColumnsCount={1}
-        columnData={mockColumnData}
+        columnData={mockColumnDataForColumnList}
         setSelectedColumns={jest.fn()}
         dataQuality={mockDataQualityValue}
         functionName={'delete'}

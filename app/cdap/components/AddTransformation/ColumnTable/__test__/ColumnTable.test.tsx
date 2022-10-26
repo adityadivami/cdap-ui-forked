@@ -21,28 +21,24 @@ import ColumnTable from '..';
 describe('Should test ColumnTable Component', () => {
   it('Should render ColumnTable Component', () => {
     const mockDirectiveFunctionSupportedDataType = ['all'];
-
-    const mockColumns = [
-      {
-        name: 'body_0',
-        label: 'body_0',
-        type: ['String'],
-      },
-    ];
-
-    const mockDataQualityValue = [
-      {
-        label: 'body_0',
-        value: '0',
-      },
-    ];
     const container = render(
       <ColumnTable
-        columns={mockColumns}
+        columns={[
+          {
+            name: 'body_0',
+            label: 'body_0',
+            type: ['String'],
+          },
+        ]}
         directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
         onSingleSelection={jest.fn()}
         selectedColumns={[]}
-        dataQualityValue={mockDataQualityValue}
+        dataQualityValue={[
+          {
+            label: 'body_0',
+            value: '0',
+          },
+        ]}
         isSingleSelection={true}
         handleDisableCheckbox={jest.fn()}
         onMultipleSelection={jest.fn()}

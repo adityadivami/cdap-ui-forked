@@ -62,3 +62,35 @@ export const mockDataQualityValue = [
     value: '0',
   },
 ];
+
+export const mockStatistics = {
+  general: {
+    'non-null': 100,
+  },
+  types: {
+    Integer: 99.9,
+    'US Postal Codes': 0.1,
+    'US State': 0.1,
+    Text: 0.1,
+  },
+};
+
+export const mockColumnList = [
+  {
+    name: 'body_0',
+    label: 'body_0',
+    type: ['String'],
+  },
+];
+export const mockColumnDataForColumnList = [
+  {
+    name: 'body_0',
+    label: 'body_0',
+    type: ['String'],
+  },
+  {
+    name: 'body_1',
+    label: 'body_1',
+    type: ['String'],
+  },
+];

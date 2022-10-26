@@ -34,7 +34,7 @@ describe('Should test ButtonWidget Component', () => {
     expect(container).toBeDefined();
   });
 
-  it('Should click the button', () => {
+  it('Should click the button in the ButtonWidget Component', () => {
     const container = render(
       <ButtonWidget
         buttonText={'Select column'}

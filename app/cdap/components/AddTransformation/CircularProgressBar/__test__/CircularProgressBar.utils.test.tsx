@@ -14,29 +14,13 @@
  * the License.
  */
 
-import { valueFromAST } from 'graphql';
+import {
+  mockStatistics,
+  mockColumnList,
+} from 'components/AddTransformation/mock/mockDataForAddTransformation';
 import { prepareDataQualtiy } from '../utils';
 
 describe('It should test prepareDataQualtiy function', () => {
-  const mockStatistics = {
-    general: {
-      'non-null': 100,
-    },
-    types: {
-      Integer: 99.9,
-      'US Postal Codes': 0.1,
-      'US State': 0.1,
-      Text: 0.1,
-    },
-  };
-
-  const mockColumnList = [
-    {
-      name: 'body_0',
-      label: 'body_0',
-      type: ['String'],
-    },
-  ];
   it('mock prepareDataQuality function ', () => {
     expect(prepareDataQualtiy(mockStatistics, mockColumnList)).toStrictEqual([]);
   });
