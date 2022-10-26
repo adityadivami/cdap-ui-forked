@@ -30,6 +30,8 @@ import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
 import { useStyles } from './styles';
 import T from 'i18n-react';
+import { getWidgetData } from 'components/WrangleHome/Components/WrangleCard/services/getWidgetData';
+import NoConnectionsScreen from '../NoRecordScreen';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -70,11 +72,18 @@ export default function ConnectionList() {
   ]);
 
   const getConnectionsTabData = async () => {
-    // Fetching the all available connectors list
-    let connectorTypes = await fetchConnectors();
+    let connectorTypes = [];
+    let connectorTypesWithSVG = [];
+    const connectorTypesWithIcons = (data) => {
+      connectorTypesWithSVG = data.connectorTypes;
+    };
+    // Fetching the all available connectors list with icons
+    await getWidgetData(connectorTypesWithIcons);
+    connectorTypes = connectorTypesWithSVG;
+
     let allConnectionsTotalLength = 0;
 
-    // Fetching all the connections list inside a connector
+    // Fetching all the connections list inside each connector type
     const categorizedConnections = await getCategorizedConnections();
     connectorTypes = connectorTypes.filter((conn) => {
       return [conn.name];
@@ -86,7 +95,7 @@ export default function ConnectionList() {
       return {
         ...eachConnectorType,
         count: connections.length,
-        icon: <GCSIcon />,
+        icon: eachConnectorType.SVG,
       };
     });
 
@@ -263,10 +272,10 @@ export default function ConnectionList() {
           })}
         </SelectDatasetWrapper>
       ) : (
-        <Typography className={classes.noDataLabel}>
-          {' '}
-          {T.translate('features.NewWranglerUI.ConnectionsList.labels.noConnections')}
-        </Typography>
+        <NoConnectionsScreen
+          title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
+          subtitle={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle')}
+        />
         // TODO: No connectors types are available screen needs to be appended here
       )}
       {loading && (

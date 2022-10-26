@@ -3418,6 +3418,9 @@ features:
       gridTable:
         title: No rows left in this sample
         subtitle: Remove some recipe steps to view some data
+      connectionsList:
+        title: No Connections available
+        subtitle: Please add connections to explore datasets
     Breadcrumb:
       labels:
         connectionsList: Data Sources
