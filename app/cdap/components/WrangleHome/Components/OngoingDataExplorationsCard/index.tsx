@@ -38,6 +38,7 @@ export default function OngoingDataExplorationCard({ item }) {
       container
       className={classes.gridContainer}
       data-testid="wrangler-home-ongoing-data-exploration-card"
+      id="wrangler-home-ongoing-data-exploration-card"
     >
       {item.map((eachItem, index) => {
         switch (eachItem.type) {

@@ -46,6 +46,7 @@ export default function({
           eachColumn={eachColumn}
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
+          index={index}
         />
       </TableCell>
       <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>

@@ -17,7 +17,12 @@ import React from 'react';
 import { Radio } from '@material-ui/core';
 import { IRadioInputProps } from '../../types';
 
-export default function({ selectedColumns, onSingleSelection, eachColumn }: IRadioInputProps) {
+export default function({
+  selectedColumns,
+  onSingleSelection,
+  eachColumn,
+  index,
+}: IRadioInputProps) {
   return (
     <>
       <Radio
@@ -30,7 +35,7 @@ export default function({ selectedColumns, onSingleSelection, eachColumn }: IRad
             : false
         }
         data-testid="radio-input-radio"
-        id="radio-input-radio"
+        id={`radio-input-radio-${index}`}
       />
     </>
   );

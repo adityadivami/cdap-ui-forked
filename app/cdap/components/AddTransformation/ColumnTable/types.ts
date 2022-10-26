@@ -49,6 +49,7 @@ export interface IRadioInputProps {
   selectedColumns: IHeaderNamesList[];
   onSingleSelection: (value: IHeaderNamesList) => void;
   eachColumn: IHeaderNamesList;
+  index: number;
 }
 
 export interface IInputWidgetProps {
@@ -61,6 +62,7 @@ export interface IInputWidgetProps {
     event: React.ChangeEvent<HTMLInputElement>,
     value: IHeaderNamesList
   ) => void;
+  index: number;
 }
 
 export interface ICheckBoxInput {
@@ -71,4 +73,5 @@ export interface ICheckBoxInput {
     event: React.ChangeEvent<HTMLInputElement>,
     value: IHeaderNamesList
   ) => void;
+  index: number;
 }

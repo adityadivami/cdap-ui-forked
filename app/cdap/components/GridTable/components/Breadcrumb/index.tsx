@@ -38,6 +38,7 @@ export default function BreadCrumb({ datasetName, location }) {
           className={`${classes.breadcrumbLabel} ${classes.home}`}
           to={`/ns/${getCurrentNamespace()}/home`}
           data-testid="breadcrumb-home-text"
+          id="breadcrumb-home-text"
         >
           {T.translate('features.Breadcrumb.labels.wrangleHome')}
         </Link>

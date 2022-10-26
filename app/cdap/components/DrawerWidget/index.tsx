@@ -44,6 +44,7 @@ export default function({
                 className={classes.backIconClass}
                 onClick={closeClickHandler}
                 data-testid="box-id"
+                id="box-id"
               >
                 {BackIcon}
               </Box>

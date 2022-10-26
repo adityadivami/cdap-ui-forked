@@ -22,6 +22,7 @@ export default function({
   handleDisableCheckbox,
   eachColumn,
   onMultipleSelection,
+  index,
 }: ICheckBoxInput) {
   return (
     <>
@@ -46,7 +47,7 @@ export default function({
               onMultipleSelection(event, eachColumn)
             }
             data-testid="check-box-input-checkbox"
-            id="check-box-input-checkbox"
+            id={`check-box-input-checkbox-${index}`}
           />
         }
         label=""
