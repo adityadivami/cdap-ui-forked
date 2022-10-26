@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
