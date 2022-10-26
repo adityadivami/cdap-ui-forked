@@ -20,28 +20,28 @@ import { red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   error: {
-    borderRadius: '4px',
+    borderRadius: 4,
     width: '100%',
     top: '48px !important',
     backgroundColor: red[600],
     padding: '15px 18px 14px 18px',
     display: 'block',
-    minHeight: '76px',
+    minHeight: 76,
   },
   success: {
-    boxShadow: '2px 2px 8px rgba(97, 97, 97, 0.2);',
+    boxShadow: '2px 2px 8px #61616133;',
     width: '100%',
     top: '48px !important',
     backgroundColor: green[600],
     padding: '15px 18px 14px 18px',
     display: 'block',
-    borderRadius: '4px',
-    minHeight: '76px',
+    borderRadius: 4,
+    minHeight: 76,
   },
   MUIanchor: {
-    left: '0px',
+    left: 0,
   },
   MUIRoot: {
-    left: '0px',
+    left: 0,
   },
 });

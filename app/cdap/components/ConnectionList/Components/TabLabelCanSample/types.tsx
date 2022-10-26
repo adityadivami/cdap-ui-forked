@@ -20,3 +20,9 @@ export interface IMessageState {
   message: string;
   isSuccess: boolean;
 }
+
+export interface ISnackbarToast {
+  open: boolean;
+  message: string;
+  isSuccess: boolean;
+}

@@ -13,30 +13,31 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
   warningIcon: {
-    color: 'white',
-    marginRight: '10px',
+    color: '#ffffff',
+    marginRight: 10,
     fontSize: 'x-large',
   },
   successIcon: {
     fontSize: 'xx-large',
-    color: 'white',
-    paddingRight: '14px',
+    color: '#ffffff',
+    paddingRight: 14,
     position: 'relative',
-    bottom: '4px',
+    bottom: 4,
   },
   successLabel: {
-    color: 'white',
+    color: '#ffffff',
     fontSize: '16px !important',
     lineHeight: '24px',
     fontWeight: 500,
     letterSpacing: '0.15px',
   },
   failureLabel: {
-    color: 'white',
+    color: '#ffffff',
     fontSize: '16px !important',
     lineHeight: '24px',
     fontWeight: 500,
@@ -44,8 +45,8 @@ export const useStyles = makeStyles((theme) => ({
   },
   dismissSpan: {
     display: 'block',
-    fontSize: '14px',
-    color: 'white',
+    fontSize: 14,
+    color: '#ffffff',
     cursor: 'pointer',
     lineHeight: '21px',
     fontWeight: 400,
@@ -54,9 +55,9 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   message: {
-    color: 'white',
-    fontSize: '14px',
-    paddingLeft: '31px',
+    color: '#ffffff',
+    fontSize: 14,
+    paddingLeft: 31,
   },
   headFlex: {
     display: 'flex',
@@ -64,10 +65,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   operations: {
     display: 'flex',
-    gap: '13px',
+    gap: 13,
   },
   cross: {
-    color: 'white',
+    color: '#ffffff',
     cursor: 'pointer',
   },
 }));

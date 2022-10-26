@@ -28,7 +28,7 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import useStyles from './styles';
 import { IMessageState } from './types';
 
-export default function TabLabelCanSample({
+export default function({
   label,
   entity,
   initialConnectionId,
@@ -60,7 +60,9 @@ export default function TabLabelCanSample({
     } else {
       setToaster({
         open: true,
-        message: `Failed to retrieve sample data for ${entity?.name}`,
+        message: `${T.translate('features.WranglerNewUI.Snackbar.labels.retrieveFailure')} ${
+          entity?.name
+        }`,
         isSuccess: false,
       });
     }
@@ -72,7 +74,9 @@ export default function TabLabelCanSample({
     } catch (e) {
       setToaster({
         open: true,
-        message: `Failed to create workspace for ${entity?.name}`,
+        message: `${T.translate('features.WranglerNewUI.Snackbar.labels.workspaceFailure')} ${
+          entity?.name
+        }`,
         isSuccess: false,
       });
     }
@@ -92,12 +96,13 @@ export default function TabLabelCanSample({
         if (res) {
           setToaster({
             open: true,
-            message: 'Success Message!!!!', // Success Messages can be appended here
+            message: `${T.translate('features.WranglerNewUI.Snackbar.labels.datasetSuccess')}`, // Success Messages can be appended here
             isSuccess: true,
           });
           setTimeout(() => {
             setWorkspaceId(res);
           }, 2000);
+          // TODO: this setTimeout needs to be removed after getting merged with Destination branch
           toggleLoader(false);
         }
       })
@@ -105,7 +110,7 @@ export default function TabLabelCanSample({
         toggleLoader(false);
         setToaster({
           open: true,
-          message: 'Failed to retrieve sample data', // -----Error Message can be sent here
+          message: `${T.translate('features.WranglerNewUI.Snackbar.labels.sampleFailure')}`, // -----Error Message can be sent here
           isSuccess: false,
         });
       });

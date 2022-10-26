@@ -28,6 +28,7 @@ import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
+import { ISnackbarToast } from './Components/TabLabelCanSample/types';
 import { useStyles } from './styles';
 
 const SelectDatasetWrapper = styled(Box)({
@@ -53,7 +54,7 @@ export default function ConnectionList() {
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
-  const [toaster, setToaster] = useState({
+  const [toaster, setToaster] = useState<ISnackbarToast>({
     open: false,
     message: '',
     isSuccess: false,

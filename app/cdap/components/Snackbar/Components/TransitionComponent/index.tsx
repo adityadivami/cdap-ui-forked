@@ -18,45 +18,53 @@ import React from 'react';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutline';
 import { Box, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
-import { SUCCESS_LABEL, FAILURE_LABEL } from './constants';
 import CloseIcon from '@material-ui/icons/Close';
+import T from 'i18n-react';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { ITransitionComponentProps } from './types';
 
-const TransitionComponent = (props) => {
+export default function({
+  handleClose,
+  isSuccess,
+  messageToDisplay,
+  actionType,
+}: ITransitionComponentProps) {
   const classes = useStyles();
   return (
     <Box>
       <Box className={classes.headFlex}>
         <Box className={classes.iconText}>
-          {props.isSuccess ? (
+          {isSuccess ? (
             <CheckCircleOutlinedIcon className={classes.successIcon} />
           ) : (
             <ErrorOutlineIcon className={classes.warningIcon} />
           )}
           <Typography
             variant="body1"
-            className={props.isSuccess ? classes.successLabel : classes.failureLabel}
+            className={isSuccess ? classes.successLabel : classes.failureLabel}
           >
-            {props.isSuccess ? <>{SUCCESS_LABEL}</> : <>{FAILURE_LABEL}</>}
+            {isSuccess ? (
+              <>{T.translate('features.WranglerNewUI.Snackbar.labels.success')}</>
+            ) : (
+              <>{T.translate('features.WranglerNewUI.Snackbar.labels.failure')}</>
+            )}
           </Typography>
         </Box>
         <Box className={classes.operations}>
-          <Typography variant="body1" className={classes.dismissSpan} onClick={() => props.close()}>
-            {props.actionType === 'add' ? (
+          <Typography variant="body1" className={classes.dismissSpan} onClick={() => close()}>
+            {actionType === 'add' ? (
               'Undo'
             ) : (
               <Box>
-                <CloseIcon className={classes.cross} onClick={props.handleClose} />
+                <CloseIcon className={classes.cross} onClick={handleClose} />
               </Box>
             )}
           </Typography>
         </Box>
       </Box>
       <Typography variant="body1" className={classes.message}>
-        {props?.messageToDisplay}
+        {messageToDisplay}
       </Typography>
     </Box>
   );
-};
-
-export default TransitionComponent;
+}
