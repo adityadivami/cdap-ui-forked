@@ -41,15 +41,9 @@ export const multipleColumnSelected = [
   },
 ];
 
-export const directiveComponentDefaultValues = {
-  radioOption: '',
+export const transformationComponentDefaultValues = {
   copyColumnName: '',
   copyToNewColumn: false,
   customInput: '',
-  sheetValue: '',
-  firstRowAsHeader: false,
-  depth: 1,
-  columnWidths: '',
-  optionPaddingParam: '',
   columnNames: [],
 };

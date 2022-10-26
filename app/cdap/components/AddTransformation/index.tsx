@@ -24,7 +24,7 @@ import {
   IAddTransformationProp,
   IHeaderNamesList,
   IDataQuality,
-  IDirectiveComponentValues,
+  ITransformationComponentValues,
 } from './types';
 import { prepareDataQualtiy } from './CircularProgressBar/utils';
 import FunctionNameWidget from './FunctionNameWidget';
@@ -32,8 +32,8 @@ import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import ButtonWidget from './ButtonWidget';
 import { getDirective } from './utils';
-import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
-import { directiveComponentDefaultValues } from './constants';
+import TransformationContent from 'components/GridTable/components/TransformationComponents';
+import { transformationComponentDefaultValues } from './constants';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 
 export default function({
@@ -48,9 +48,9 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
-  const [directiveComponentValues, setDirectiveComponentsValue] = useState<
-    IDirectiveComponentValues
-  >(directiveComponentDefaultValues);
+  const [transformationComponentValues, setTransformationComponentsValue] = useState<
+    ITransformationComponentValues
+  >(transformationComponentDefaultValues);
 
   const classes = useStyles();
 
@@ -77,7 +77,7 @@ export default function({
     const directive = getDirective(
       functionName,
       selectedColumns[0].label,
-      directiveComponentValues
+      transformationComponentValues
     );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
@@ -86,8 +86,8 @@ export default function({
   useEffect(() => {
     const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
-    setDirectiveComponentsValue({
-      ...directiveComponentValues,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       columnNames: columnData?.length > 0 ? columnData.map(({ label }) => label) : [],
     });
   }, []);
@@ -113,12 +113,12 @@ export default function({
               functionName={functionName}
             />
             {isComponentAvailable && (
-              <DirectiveContent
-                setDirectiveComponentsValue={setDirectiveComponentsValue}
-                directiveComponents={[]}
-                directiveComponentValues={directiveComponentValues}
+              <TransformationContent
+                setTransformationComponentsValue={setTransformationComponentsValue}
+                transformationComponent={[]}
+                transformationComponentValues={transformationComponentValues}
                 functionName={functionName}
-                directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+                transformationFunctionSupportedDataType={directiveFunctionSupportedDataType}
                 columnData={columnData}
                 missingDataList={missingDataList}
                 callBack={callBack}

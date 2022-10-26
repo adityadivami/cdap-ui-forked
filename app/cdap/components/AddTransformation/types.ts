@@ -34,15 +34,9 @@ export interface IAddTransformationProp {
   applyTransformation: (directive: string) => void;
 }
 
-export interface IDirectiveComponentValues {
-  radioOption: string;
+export interface ITransformationComponentValues {
   copyColumnName: string;
   customInput: string;
   copyToNewColumn: boolean;
-  sheetValue: string;
-  firstRowAsHeader: boolean;
-  depth: number;
-  columnWidths: string;
-  optionPaddingParam: string;
   columnNames: string[];
 }
