@@ -26,19 +26,20 @@ import React, { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import useStyles from './styles';
+import { IMessageState } from './types';
 
 export default function TabLabelCanSample({
   label,
   entity,
   initialConnectionId,
   toggleLoader,
-  setIsErrorOnNoWorkSpace,
+  setToaster,
 }: {
   label: string;
   entity: IRecords;
   initialConnectionId: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
-  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
+  setToaster: React.Dispatch<React.SetStateAction<IMessageState>>;
 }) {
   const classes = useStyles();
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
@@ -57,7 +58,11 @@ export default function TabLabelCanSample({
     if (!canBrowse && canSample) {
       onCreateWorkspace(currentEntity);
     } else {
-      setIsErrorOnNoWorkSpace(true);
+      setToaster({
+        open: true,
+        message: `Failed to retrieve sample data for ${entity?.name}`,
+        isSuccess: false,
+      });
     }
   };
 
@@ -65,7 +70,11 @@ export default function TabLabelCanSample({
     try {
       createWorkspaceInternal(currentEntity, parseConfig);
     } catch (e) {
-      setIsErrorOnNoWorkSpace(true);
+      setToaster({
+        open: true,
+        message: `Failed to create workspace for ${entity?.name}`,
+        isSuccess: false,
+      });
     }
   };
 
@@ -81,13 +90,24 @@ export default function TabLabelCanSample({
           return onWorkspaceCreate(res);
         }
         if (res) {
-          setWorkspaceId(res);
+          setToaster({
+            open: true,
+            message: 'Success Message!!!!', // Success Messages can be appended here
+            isSuccess: true,
+          });
+          setTimeout(() => {
+            setWorkspaceId(res);
+          }, 2000);
           toggleLoader(false);
         }
       })
       .catch((err) => {
         toggleLoader(false);
-        setIsErrorOnNoWorkSpace(true);
+        setToaster({
+          open: true,
+          message: 'Failed to retrieve sample data', // -----Error Message can be sent here
+          isSuccess: false,
+        });
       });
   };
   const location = useLocation();

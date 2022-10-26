@@ -58,7 +58,7 @@ export default function ConnectionsTabs({
   value,
   index,
   connectionId,
-  setIsErrorOnNoWorkSpace,
+  setToaster,
   ...props
 }) {
   const classes = useStyles();
@@ -114,7 +114,7 @@ export default function ConnectionsTabs({
                         entity={connectorType}
                         initialConnectionId={connectionIdProp}
                         toggleLoader={props.toggleLoader}
-                        setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                        setToaster={setToaster}
                       />
                     )
                   ) : (

@@ -22,7 +22,7 @@ import { getCategorizedConnections } from 'components/Connections/Browser/SidePa
 import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { IRecords } from 'components/GridTable/types';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import ErrorSnackbar from 'components/SnackbarComponent';
+import PositionedSnackbar from 'components/Snackbar';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import ConnectionsTabs from './Components/ConnectionTabs';
@@ -53,7 +53,11 @@ export default function ConnectionList() {
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
-  const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
+  const [toaster, setToaster] = useState({
+    open: false,
+    message: '',
+    isSuccess: false,
+  });
 
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
@@ -248,8 +252,8 @@ export default function ConnectionList() {
                 index={index}
                 connectionId={connectionId || ''}
                 toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
-                setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
                 data-testid="connections-tabs-list-change"
+                setToaster={setToaster}
               />
             </Box>
           );
@@ -261,8 +265,18 @@ export default function ConnectionList() {
           <LoadingSVG />
         </div>
       )}
-      {isErrorOnNoWorkspace && (
-        <ErrorSnackbar handleCloseError={() => setIsErrorOnNoWorkSpace(false)} />
+      {toaster.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setToaster({
+              open: false,
+              message: '',
+              isSuccess: false,
+            })
+          }
+          messageToDisplay={toaster.message}
+          isSuccess={toaster.isSuccess}
+        />
       )}
     </Box>
   );

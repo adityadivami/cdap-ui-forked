@@ -14,32 +14,60 @@
  * the License.
  */
 import { makeStyles } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
-import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
   warningIcon: {
-    color: '#E97567',
-    fontSize: '20px !important',
+    color: 'white',
+    marginRight: '10px',
+    fontSize: 'x-large',
   },
-  errorHead: {
-    color: '#E97567',
-    fontSize: '20px !important',
+  successIcon: {
+    fontSize: 'xx-large',
+    color: 'white',
+    paddingRight: '14px',
+    position: 'relative',
+    bottom: '4px',
+  },
+  successLabel: {
+    color: 'white',
+    fontSize: '16px !important',
+    lineHeight: '24px',
+    fontWeight: 500,
+    letterSpacing: '0.15px',
+  },
+  failureLabel: {
+    color: 'white',
+    fontSize: '16px !important',
+    lineHeight: '24px',
+    fontWeight: 500,
+    letterSpacing: '0.15px',
   },
   dismissSpan: {
     display: 'block',
     fontSize: '14px',
-    color: blue[500],
+    color: 'white',
     cursor: 'pointer',
+    lineHeight: '21px',
+    fontWeight: 400,
   },
-  errorMessage: {
-    color: grey[900],
+  iconText: {
+    display: 'flex',
+  },
+  message: {
+    color: 'white',
     fontSize: '14px',
-    padding: '10px',
+    paddingLeft: '31px',
   },
   headFlex: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
+  },
+  operations: {
+    display: 'flex',
+    gap: '13px',
+  },
+  cross: {
+    color: 'white',
+    cursor: 'pointer',
   },
 }));
