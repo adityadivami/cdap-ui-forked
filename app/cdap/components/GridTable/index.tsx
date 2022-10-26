@@ -257,12 +257,11 @@ export default function GridTable() {
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
-        columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
+        columnType={'int'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
           onMenuOptionSelection(option, datatype);
         }}
       />
-
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.gridTable.title')}
