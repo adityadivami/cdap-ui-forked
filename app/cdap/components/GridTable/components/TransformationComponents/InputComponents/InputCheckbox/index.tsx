@@ -30,7 +30,8 @@ export default function({ label, value, onChange, className }: IInputCheckbox) {
           onChange={onChange}
           checked={value}
           color="primary"
-          data-testid={`parsing-checkbox-${label}`}
+          data-testid={`input-checkbox-${label}`}
+          id={`input-checkbox-${label}`}
         />
       }
       label={<span className={classes.labelTextStyles}>{label}</span>}

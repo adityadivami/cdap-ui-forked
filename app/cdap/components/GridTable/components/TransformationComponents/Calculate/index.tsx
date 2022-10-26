@@ -26,8 +26,8 @@ import { ICalculateProps } from './types';
 
 export default function({
   functionName,
-  setDirectiveComponentsValue,
-  directiveComponentValues,
+  setTransformationComponentsValue,
+  transformationComponentValues,
 }: ICalculateProps) {
   const [customInput, setCustomInput] = useState<string>('');
   const [copyToNewColumn, setCopyToNew] = useState<boolean>(false);
@@ -39,18 +39,18 @@ export default function({
       : [];
   const classes = useStyles();
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, customInput });
+    setTransformationComponentsValue({ ...transformationComponentValues, customInput });
   }, [customInput]);
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, copyToNewColumn });
+    setTransformationComponentsValue({ ...transformationComponentValues, copyToNewColumn });
   }, [copyToNewColumn]);
   useEffect(() => {
-    if (directiveComponentValues?.columnNames?.filter((el: string) => el === column).length) {
+    if (transformationComponentValues?.columnNames?.filter((el: string) => el === column).length) {
       setIsError(true);
     } else {
       setIsError(false);
     }
-    setDirectiveComponentsValue({ ...directiveComponentValues, copyColumnName: column });
+    setTransformationComponentsValue({ ...transformationComponentValues, copyColumnName: column });
   }, [column]);
 
   return (

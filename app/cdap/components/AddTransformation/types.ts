@@ -41,15 +41,9 @@ export interface IDataQualityItem {
   [key: string]: string | number;
 }
 
-export interface IDirectiveComponentValues {
-  radioOption: string;
+export interface ITransformationComponentValues {
   copyColumnName: string;
   customInput: string;
   copyToNewColumn: boolean;
-  sheetValue: string;
-  firstRowAsHeader: boolean;
-  depth: number;
-  columnWidths: string;
-  optionPaddingParam: string;
   columnNames: string[];
 }

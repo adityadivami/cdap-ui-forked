@@ -14,27 +14,27 @@
  * the License.
  */
 
-import { IDirectiveContentParams } from '../../types';
+import { ITransformationContentParams } from '../../types';
 import React from 'react';
 import { CALCULATE_OPTIONS } from '../NestedMenu/menuOptions/calculateOptions';
 
 export default function({
-  directiveComponents,
+  transformationComponent,
   functionName: type,
   functionName,
-  directiveComponentValues,
-  setDirectiveComponentsValue,
+  transformationComponentValues,
+  setTransformationComponentsValue,
   ...props
-}: IDirectiveContentParams) {
+}: ITransformationContentParams) {
   const Component =
-    directiveComponents.find((item) => item.type === type)?.component ||
+    transformationComponent.find((item) => item.type === type)?.component ||
     CALCULATE_OPTIONS.find((item) => item?.value === functionName)?.component;
 
   return (
     <Component
       functionName={functionName}
-      directiveComponentValues={directiveComponentValues}
-      setDirectiveComponentsValue={setDirectiveComponentsValue}
+      transformationComponentValues={transformationComponentValues}
+      setTransformationComponentsValue={setTransformationComponentsValue}
       {...props}
     />
   );

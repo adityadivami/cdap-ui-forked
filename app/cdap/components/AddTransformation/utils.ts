@@ -15,11 +15,11 @@
  */
 import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import { CALCULATE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/calculateOptions';
-import { IDirectiveComponentValues } from './types';
+import { ITransformationComponentValues } from './types';
 export const getDirective = (
   functionName: string,
   columnSelected: string,
-  directiveComponentValues: IDirectiveComponentValues
+  directiveComponentValues: ITransformationComponentValues
 ) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
