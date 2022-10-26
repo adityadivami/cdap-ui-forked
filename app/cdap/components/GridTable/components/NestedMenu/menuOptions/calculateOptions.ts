@@ -15,7 +15,7 @@
  */
 
 import { NATIVE_NUMBER_TYPES } from 'services/global-constants';
-import Calculate from '../../DirectiveComponents/Calculate';
+import Calculate from '../../TransformationComponents/Calculate';
 
 export const CALCULATE_OPTIONS = [
   {

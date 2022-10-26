@@ -14,10 +14,12 @@
  * the License.
  */
 
-import {IDirectiveComponentValues} from '../../../../AddTransformation/types'
+import { ITransformationComponentValues } from '../../../../AddTransformation/types';
 
 export interface ICalculateProps {
-    functionName: string; 
-    setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>; 
-    directiveComponentValues: IDirectiveComponentValues
+  functionName: string;
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
 }
