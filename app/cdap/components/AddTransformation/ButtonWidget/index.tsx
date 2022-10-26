@@ -33,6 +33,7 @@ export default function({
       className={className}
       onClick={onClick}
       data-testid={dataTestId}
+      id={dataTestId}
     >
       {buttonText}
     </Button>
