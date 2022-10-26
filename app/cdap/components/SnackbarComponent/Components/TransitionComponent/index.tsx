@@ -23,7 +23,7 @@ import T from 'i18n-react';
 export default function TransitionComponent(props) {
   const classes = useStyles();
   return (
-    <div data-testid="transition-component-parent">
+    <div data-testid="transition-component-parent" id="transition-component-parent">
       <div className={classes.headFlex}>
         <h5 className={classes.errorHead}>
           <WarningRoundedIcon className={classes.warningIcon} />
@@ -35,6 +35,7 @@ export default function TransitionComponent(props) {
           tabIndex={0}
           className={classes.dismissSpan}
           onClick={() => props.close()}
+          id="snackbar-close-button"
           data-testid="snackbar-close-button"
         >
           {T.translate('features.Snackbar.transitionComponent.labels.dismiss')}

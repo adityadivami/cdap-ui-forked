@@ -45,6 +45,7 @@ export default function PositionedSnackbar(props) {
       onClose={handleClose}
       TransitionComponent={() => <TransitionComponent close={() => handleClose()} />}
       className={classes.snackBarDiv}
+      id="parent-snackbar-component"
       data-testid="parent-snackbar-component"
     />
   );
