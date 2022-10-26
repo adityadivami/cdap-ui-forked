@@ -45,6 +45,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         }
         title={item.value}
         onClick={(e) => onMenuClick(e, item)}
+        id={`${item.value}-${index}`}
       >
         <span>{item.label} </span>
         {item.options?.length && menuArrowIcon}

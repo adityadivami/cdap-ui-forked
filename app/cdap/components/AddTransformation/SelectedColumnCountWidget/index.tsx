@@ -23,7 +23,7 @@ export default function({ selectedColumnsCount }: ISelectColumnCount) {
   const classes = useStyles();
 
   return (
-    <div className={classes.columnsCountTextStyles}>
+    <div className={classes.columnsCountTextStyles} id="columns-count-text-styles">
       {selectedColumnsCount
         ? selectedColumnsCount > 10
           ? selectedColumnsCount

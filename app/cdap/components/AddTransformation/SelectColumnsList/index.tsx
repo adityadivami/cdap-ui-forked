@@ -124,13 +124,19 @@ export default function({
         <div className={classes.searchFormControl}>
           <input
             data-testid="input_id"
+            id="input_id"
             className={focused ? classes.isFocused : classes.isBlurred}
             onChange={handleSearch}
             ref={ref}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
           />
-          <Box className={classes.searchInputAdornment} onClick={handleFocus} data-testid='click-handle-focus'>
+          <Box
+            className={classes.searchInputAdornment}
+            onClick={handleFocus}
+            data-testid="click-handle-focus"
+            id="click-handle-focus"
+          >
             {SearchIcon}
           </Box>
         </div>

@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IconButton, Menu, Tooltip } from '@material-ui/core';
+import { Box, IconButton, Menu, Tooltip } from '@material-ui/core';
 import React, { useState } from 'react';
 import MenuComponent from '../MenuComponent';
 import MenuItemComponent from '../MenuItemComponent';
@@ -47,7 +47,7 @@ export default function({
     }
   };
   return (
-    <>
+    <Box id={title}>
       <Tooltip
         title={title}
         classes={{
@@ -67,7 +67,7 @@ export default function({
         </IconButton>
       </Tooltip>
       <Menu
-        id="parent-menu"
+        id={title}
         keepMounted
         anchorEl={anchorEl}
         open={open}
@@ -107,6 +107,6 @@ export default function({
           }}
         />
       </Menu>
-    </>
+    </Box>
   );
 }
