@@ -19,8 +19,10 @@ import React from 'react';
 import NoRecordScreen from '..';
 
 describe('It Should test NoRecordScreen Component', () => {
+  const container = render(<NoRecordScreen title={'testing'} subtitle={'Unit Testing'} />);
+
   it('Should render the NonRecordScreen Component', () => {
-    const container = render(<NoRecordScreen title={'testing'} subtitle={'Unit Testing'} />);
     expect(container).toBeDefined();
+    console.log(container);
   });
 });

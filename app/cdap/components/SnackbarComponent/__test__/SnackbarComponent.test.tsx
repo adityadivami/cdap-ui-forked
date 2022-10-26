@@ -25,9 +25,6 @@ const history = createHistory({
   basename: '/',
 });
 
-jest.useFakeTimers();
-jest.spyOn(global, 'setTimeout');
-
 describe('It should test the Snackbar Component', () => {
   it('renders Snackbar Component', () => {
     const handleCloseError = jest.fn();

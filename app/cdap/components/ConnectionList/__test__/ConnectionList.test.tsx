@@ -63,57 +63,11 @@ describe('It Should test Connection List Component', () => {
 
   const dummyRes = new Map();
   dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
-  // dummyRes.set('File', connectionListDummyResFile);
   jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
 
   jest
     .spyOn(reducer, 'fetchConnectors')
     .mockReturnValue(Promise.resolve(mockResponseForFetchConnectors));
-
-  const mockDataForExploreConnection = {
-    totalCount: 3,
-    sampleProperties: [],
-    entities: [
-      {
-        name: 'information_schema',
-        path: '/information_schema',
-        type: 'schema',
-        canSample: false,
-        canBrowse: true,
-        properties: {},
-      },
-      {
-        name: 'pg_catalog',
-        path: '/pg_catalog',
-        type: 'schema',
-        canSample: false,
-        canBrowse: true,
-        properties: {},
-      },
-      {
-        name: 'public',
-        path: '/public',
-        type: 'schema',
-        canSample: false,
-        canBrowse: true,
-        properties: {},
-      },
-    ],
-    propertyHeaders: [],
-  };
-
-  // jest.spyOn(apiHelpersForExploreConnection, 'exploreConnection').mockImplementation(() => {
-  //   return Promise.resolve(mockDataForExploreConnection);
-
-  //   // act(() => {
-  //   //   /* fire events that update state */
-  //   //   const ele = screen.getByTestId(/connections-tabs-list-change/i);
-  //   // });
-
-  //   // await act( async () => render(<TestApp/>));
-
-  //   expect(container).toBeDefined();
-  // });
 
   it('Should render Connection List Component', () => {
     render(

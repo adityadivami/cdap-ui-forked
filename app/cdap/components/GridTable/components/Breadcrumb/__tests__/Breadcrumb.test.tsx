@@ -19,6 +19,7 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import Breadcrumb from '..';
 import { createBrowserHistory as createHistory } from 'history';
+import BreadCrumb from '..';
 
 const history = createHistory({
   basename: '/',
@@ -32,11 +33,17 @@ const location = {
 };
 
 describe('Test Breadcrumb Component', () => {
+  const locationMock = jest.mock('react-router-dom', () => ({
+    useLocation: () => ({
+      pathname: 'localhost:3000/example/path',
+    }),
+  }));
+
   render(
     <Router history={history}>
       <Switch>
         <Route>
-          <Breadcrumb workspaceName="abc" location={location} />
+          <BreadCrumb workspaceName="abc" location={locationMock} />{' '}
         </Route>
       </Switch>
     </Router>
@@ -45,4 +52,21 @@ describe('Test Breadcrumb Component', () => {
   it('Should have the Home text in the Breadcrumb', () => {
     expect(screen.getByTestId('breadcrumb-home-text')).toHaveTextContent('Home');
   });
+
+  it('match state should be equal to location.state.from', () => {
+    const location = { state: { from: 'Workspaces' } };
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <BreadCrumb workspaceName="abc" location={location} />
+          </Route>
+        </Switch>
+      </Router>
+    );
+  });
+
+  // it('Should have the Data Sources text in the Breadcrumb', () => {
+  //   expect(screen.getByTestId('breadcrumb-data-sources-text')).toHaveTextContent('Data Sources');
+  // });
 });

@@ -15,12 +15,12 @@
  */
 
 export interface IParams {
-  context: string;
+  context: string | number | IRecords;
   workspaceId: string;
 }
 
 export interface IRecords {
-  [key: string]: string | any;
+  [key: string]: string | number | IRecords | boolean;
 }
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
@@ -42,9 +42,9 @@ export interface IExecuteAPIResponse {
 export interface IHeaderNamesList {
   name: string;
   label: string;
-  type: string[];
+  type: Array<string | number | IRecords | boolean>;
 }
 
 export interface IObject {
-  [key: string]: string;
+  [key: string]: string | number | IRecords | boolean;
 }

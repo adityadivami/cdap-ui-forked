@@ -28,7 +28,7 @@ export default function BreadCrumb({ workspaceName, location }) {
 
   const sourcePath =
     location?.state?.from === T.translate('features.Breadcrumb.labels.wrangleHome')
-      ? T.translate('features.Breadcrumb.params.wrangleHome')
+      ? T.translate('features.Breadcrumb.params.wrangeHome')
       : `${T.translate('features.Breadcrumb.params.connectionsList')}/${location?.state?.path}`;
 
   return (

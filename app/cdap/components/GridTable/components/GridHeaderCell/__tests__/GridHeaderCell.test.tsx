@@ -29,4 +29,14 @@ describe('To Test Grid Header Cell Component', () => {
   it('Renders Component with empty types array to trigger Null', () => {
     render(<GridHeaderCell label={'abc'} types={[]} />);
   });
+
+  it('label in TypographyComponent is Unknown', () => {
+    const arr1 = [''];
+    render(<GridHeaderCell label={'abc'} types={arr1} />);
+  });
+
+  it('datatype1 should return null when types.length is 0 ', () => {
+    const arr2 = [];
+    render(<GridHeaderCell label={'abc'} types={arr2} />);
+  });
 });
