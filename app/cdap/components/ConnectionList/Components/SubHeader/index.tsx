@@ -24,11 +24,12 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import T from 'i18n-react';
+import { ISubHeader } from './types';
 
-export default function({ selectedConnection }: { selectedConnection: string }) {
+export default function({ selectedConnection }: ISubHeader) {
   const classes = useStyles();
   const handleAddConnection = () => {
-    localStorage.setItem('requestFrom', selectedConnection);
+    localStorage.setItem('addConnectionRequestFromNewUI', selectedConnection);
   };
 
   return (
@@ -40,10 +41,10 @@ export default function({ selectedConnection }: { selectedConnection: string }) 
       <Box>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
-            {T.translate('features.Breadcrumb.labels.wrangleHome')}
+            {T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome')}
           </Link>
           <Typography className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.Breadcrumb.labels.connectionsList')}
+            {T.translate('features.NewWranglerUI.Breadcrumb.labels.connectionsList')}
           </Typography>
         </Breadcrumbs>
       </Box>
@@ -58,14 +59,14 @@ export default function({ selectedConnection }: { selectedConnection: string }) 
           >
             <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
             <Box className={classes.breadcrumbTyporgraphy}>
-              {T.translate('features.AddConnections.referenceLabel')}
+              {T.translate('features.NewWranglerUI.AddConnections.referenceLabel')}
             </Box>
           </Box>
         </Link>
         <Box className={classes.importData}>
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
           <Box className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.ImportData.referenceLabel')}
+            {T.translate('features.NewWranglerUI.ImportData.referenceLabel')}
           </Box>
         </Box>
       </Box>

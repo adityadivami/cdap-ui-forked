@@ -28,7 +28,7 @@ import { Link } from 'react-router-dom';
 
 export default function() {
   const classes = useStyles();
-  localStorage.setItem('requestFrom', 'home');
+  localStorage.setItem('addConnectionRequestFromNewUI', 'home');
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
@@ -43,18 +43,22 @@ export default function() {
 
       <Box>
         <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title={T.translate('features.HomePage.labels.connectorTypes.title')} />
+          <WrangleHomeTitle
+            title={T.translate('features.NewWranglerUI.HomePage.labels.connectorTypes.title')}
+          />
           <Box className={classes.viewMore}>
             <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}>
-              {T.translate('features.HomePage.labels.common.viewAll')}
+              {T.translate('features.NewWranglerUI.HomePage.labels.common.viewAll')}
             </Link>
           </Box>
         </Box>
         <WrangleCard />
         <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
+          <WrangleHomeTitle
+            title={T.translate('features.NewWranglerUI.HomePage.labels.workspaces.title')}
+          />
           <Box className={classes.viewMore}>
-            {T.translate('features.HomePage.labels.common.viewAll')}
+            {T.translate('features.NewWranglerUI.HomePage.labels.common.viewAll')}
           </Box>
         </Box>
         <OngoingDataExplorations />
