@@ -40,3 +40,16 @@ export interface IMultipleSelectedFunctionDetail {
 export interface IDataQualityItem {
   [key: string]: string | number;
 }
+
+export interface IDirectiveComponentValues {
+  radioOption: string;
+  copyColumnName: string;
+  customInput: string;
+  copyToNewColumn: boolean;
+  sheetValue: string;
+  firstRowAsHeader: boolean;
+  depth: number;
+  columnWidths: string;
+  optionPaddingParam: string;
+  columnNames: string[];
+}

@@ -33,6 +33,9 @@ import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidge
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { getDirective } from 'components/AddTransformation/utils';
+import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
+import { directiveComponentDefaultValues } from './constants';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 
 export default function({
   transformationFunctionSupportedDataType,
@@ -46,6 +49,9 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
+  const [directiveComponentValues, setDirectiveComponentsValue] = useState<
+    IDirectiveComponentValues
+  >(directiveComponentDefaultValues);
   const classes = useStyles();
   const closeClickHandler = () => {
     callBack();
@@ -68,7 +74,11 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive: string = getDirective(functionName, selectedColumns[0].label);
+    const directive = getDirective(
+      functionName,
+      selectedColumns[0].label,
+      directiveComponentValues
+    );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
@@ -76,6 +86,10 @@ export default function({
   useEffect(() => {
     const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
+    setDirectiveComponentsValue({
+      ...directiveComponentValues,
+      columnNames: columnData?.length > 0 ? columnData.map(({ label }) => label) : [],
+    });
   }, []);
 
   const enableDoneButton = () => {
@@ -98,6 +112,10 @@ export default function({
     }
   };
 
+  const isComponentAvailable = CALCULATE_OPTIONS.some(
+    (item) => item?.value?.toLowerCase() === functionName.toLowerCase()
+  );
+
   return (
     <Fragment>
       <DrawerWidget
@@ -116,6 +134,19 @@ export default function({
               selectedColumns={selectedColumns}
               functionName={functionName}
             />
+            {isComponentAvailable && (
+              <DirectiveContent
+                setDirectiveComponentsValue={setDirectiveComponentsValue}
+                directiveComponents={[]}
+                directiveComponentValues={directiveComponentValues}
+                functionName={functionName}
+                directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+                columnData={columnData}
+                missingDataList={missingDataList}
+                callBack={callBack}
+                applyTransformation={applyTransformation}
+              />
+            )}
           </div>
           <ButtonWidget
             buttonText={T.translate(

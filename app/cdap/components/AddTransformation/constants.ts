@@ -40,3 +40,16 @@ export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
     isMoreThanTwo: true,
   },
 ];
+
+export const directiveComponentDefaultValues = {
+  radioOption: '',
+  copyColumnName: '',
+  copyToNewColumn: false,
+  customInput: '',
+  sheetValue: '',
+  firstRowAsHeader: false,
+  depth: 1,
+  columnWidths: '',
+  optionPaddingParam: '',
+  columnNames: [],
+};
