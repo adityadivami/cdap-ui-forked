@@ -203,7 +203,10 @@ export default function ConnectionList() {
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader selectedConnection={dataForTabs[0]?.selectedTab} />
-      {dataForTabs[0]?.data?.length > 0 ? (
+      {dataForTabs &&
+      Array.isArray(dataForTabs) &&
+      dataForTabs.length &&
+      dataForTabs[0]?.data?.length > 0 ? (
         <SelectDatasetWrapper>
           {dataForTabs.map((each, index) => {
             const connectionIdRequired =
