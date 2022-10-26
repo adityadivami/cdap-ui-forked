@@ -23,16 +23,15 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
-import { IResponseData } from './types';
+import { IEachData, IMassagedObject, IResponseData, IValues } from './types';
 import { generateDataForExplorationCard } from './utils';
 import { orderBy } from 'lodash';
 
-export default function OngoingDataExplorations() {
-  const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
-  const [finalArray, setFinalArray] = useState([]);
+export default function() {
+  const [finalArray, setFinalArray] = useState<IMassagedObject[]>([]);
 
   const getOngoingData = useCallback(() => {
-    const expData = [];
+    const expData: IEachData[] = [];
     // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
     //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
     MyDataPrepApi.getWorkspaceList({
@@ -40,7 +39,7 @@ export default function OngoingDataExplorations() {
     })
       .pipe(
         switchMap((res: Record<string, unknown[]>) => {
-          let values = [];
+          let values: IValues[] = [];
           values = res.values;
           values = orderBy(
             values,
@@ -87,17 +86,12 @@ export default function OngoingDataExplorations() {
               const general = workspace.summary.statistics[element].general;
               const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
               const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
-
               dataQuality = dataQuality + nonNull;
             });
             const totalDataQuality = dataQuality / workspace.headers.length;
             expData[index].dataQuality = totalDataQuality;
             expData[index].count = workspace.count;
             const final = generateDataForExplorationCard(expData);
-
-            /**
-             * if we have setData, then we should send data to parent element as the exploration state is then maintained in parent as well for showing or hiding the title of the parent component
-             */
             setFinalArray(final);
           });
         }
@@ -107,16 +101,6 @@ export default function OngoingDataExplorations() {
   useEffect(() => {
     getOngoingData();
   }, []);
-
-  useEffect(() => {
-    getOngoingData();
-  }, []);
-
-  useEffect(() => {
-    console.log(ongoingExpDatas, 'ongoingExpDatas');
-    const final = generateDataForExplorationCard(ongoingExpDatas);
-    setFinalArray(final);
-  }, [ongoingExpDatas]);
 
   return (
     <Box data-testid="ongoing-data-explore-parent">

@@ -21,13 +21,13 @@ export interface IResponseData {
 }
 
 export interface IValues {
-  createdTimeMillis: number;
-  directives: [];
-  insights: IInsights;
-  sampleSpec: ISampleSpec;
-  updatedTimeMillis: number;
-  workspaceId: string;
-  workspaceName: string;
+  createdTimeMillis?: number;
+  directives?: [];
+  insights?: IInsights;
+  sampleSpec?: ISampleSpec;
+  updatedTimeMillis?: number;
+  workspaceId?: string;
+  workspaceName?: string;
 }
 
 export interface IInsights {
@@ -77,4 +77,13 @@ export interface IMassagedObject {
   percentageSymbol: string;
   subText: string;
   workspaceId: string;
+}
+
+export interface IEachData {
+  connectionName: string;
+  count: number;
+  dataQuality: unknown;
+  recipeSteps: number;
+  workspaceId: string;
+  workspaceName: string;
 }
