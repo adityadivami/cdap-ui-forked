@@ -28,7 +28,6 @@ export default function({
   columnType,
   title,
 }: INestedMenuProps) {
-  console.log(menuOptions, 'menuOptions');
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorEl2, setAnchorEl2] = useState(null);
   const open = Boolean(anchorEl);
@@ -84,7 +83,7 @@ export default function({
         }}
         className={classes.root}
       >
-        {Array.isArray(menuOptions) &&
+        {Array?.isArray(menuOptions) &&
           menuOptions.map((item, index) => (
             <MenuItemComponent
               item={item}

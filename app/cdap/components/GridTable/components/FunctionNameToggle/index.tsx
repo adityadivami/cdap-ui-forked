@@ -21,6 +21,7 @@ import { Typography, Box } from '@material-ui/core';
 import { useStyles } from './styles';
 import grey from '@material-ui/core/colors/grey';
 import T from 'i18n-react';
+import { IFunctionNameProps } from './types';
 
 const StyledSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -71,7 +72,7 @@ export default function({ setIsShowName, isShowNames }) {
   return (
     <Box className={classes.functionWrapper}>
       <Typography className={classes.typoClass}>
-        {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.toggleDescription')}{' '}
+        {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.toggleDescription')}
         &nbsp;
       </Typography>
       <StyledSwitch

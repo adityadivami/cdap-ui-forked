@@ -47,13 +47,9 @@ import { MENU_OPTIONS } from '../NestedMenu/menuOptions/menuOptions';
 import { NULL_MISSING_OPTIONS } from '../NestedMenu/menuOptions/nullAndMissingOptions';
 import { OTHER_OPTIONS } from '../NestedMenu/menuOptions/otherOptions';
 import { SECURITY_OPTIONS } from '../NestedMenu/menuOptions/securityOptions';
+import { ITransformationToolBarProps } from './types';
 
-export default function TransfomationsToolbar({
-  columnType,
-  submitMenuOption,
-  setShowBreadCrumb,
-  showBreadCrumb,
-}) {
+export default function({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) {
   const classes = useStyles();
   const [isShowNames, setIsShowName] = useState(false);
   return (
