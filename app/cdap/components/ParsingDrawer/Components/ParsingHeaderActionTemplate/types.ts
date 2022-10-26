@@ -14,9 +14,16 @@
  * the License.
  */
 
+import { ReactNode } from 'react';
+
 export interface IParsingHeaderActionTemplateProps {
   handleSchemaUpload: (IschemaProps) => void;
-  setErrorOnTransformation: () => void;
+  setErrorOnTransformation: React.Dispatch<
+    React.SetStateAction<{
+      open: boolean;
+      message: ReactNode;
+    }>
+  >;
 }
 
 interface IschemaProps {

@@ -15,14 +15,17 @@
  */
 
 import { Box } from '@material-ui/core';
-import { useStyles } from 'components/ParsingDrawer/styles';
-import React, { ChangeEvent } from 'react';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
+import { useStyles } from 'components/ParsingDrawer/styles';
 import T from 'i18n-react';
-import fileDownload from 'js-file-download';
+import React, { ChangeEvent } from 'react';
 import { importIcon } from './importicon';
+import { IParsingHeaderActionTemplateProps } from './types';
 
-export default function({ props }) {
+export default function({
+  handleSchemaUpload,
+  setErrorOnTransformation,
+}: IParsingHeaderActionTemplateProps) {
   const classes = useStyles();
   const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
     const schemaFile = event.target.files[0];
@@ -33,9 +36,10 @@ export default function({ props }) {
         const fileContents = JSON.parse(evt.target.result.toString());
         const importedSchemas = parseImportedSchemas(fileContents);
         const schema = importedSchemas[0] && importedSchemas[0].schema;
-        props.handleSchemaUpload(schema);
+        console.log(schema, 'schemaa');
+        handleSchemaUpload(schema);
       } catch (e) {
-        props.setErrorOnTransformation({
+        setErrorOnTransformation({
           open: true,
           message: T.translate(
             'features.WranglerNewUI.WranglerNewParsingDrawer.importSchemaErrorMessage'
