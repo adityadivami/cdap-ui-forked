@@ -24,9 +24,9 @@ export interface IDrawerWidgetProps {
   headingText?: string | ReactNode;
   openDrawer: boolean | Dispatch<SetStateAction<boolean>> | unknown;
   showDivider?: boolean;
-  headerActionTemplate?: unknown;
+  headerActionTemplate?: ReactNode | JSX.Element;
   children?: unknown[] | boolean;
-  closeClickHandler?: unknown;
+  closeClickHandler?: () => void;
   showBackIcon?: boolean;
-  anchor?: unknown;
+  anchor?: 'bottom' | 'left' | 'right' | 'top';
 }
