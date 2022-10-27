@@ -19,10 +19,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { createBrowserHistory as createHistory } from 'history';
 import InputCheckbox from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
 
 describe('Should Test the InputCheckbox Component', () => {
   it('Should test whether InputCheckbox component is rendered or not', () => {

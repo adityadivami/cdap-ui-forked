@@ -126,6 +126,7 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
             classes={{ containedPrimary: classes.buttonStyles }}
             className={classes.applyButtonStyles}
             onClick={(event: React.MouseEvent<HTMLButtonElement>) => onConfirm(connectionPayload)}
+            id="parsing-apply-button"
             data-testid="parsing-apply-button"
           >
             {T.translate('features.WranglerNewParsingDrawer.apply')}

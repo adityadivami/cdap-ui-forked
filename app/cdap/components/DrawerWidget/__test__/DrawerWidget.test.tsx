@@ -21,10 +21,7 @@ import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import DrawerWidget from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
 
 describe('It should test DrawerWidget Component', () => {
   it('Should test whether DrawerWidget Component is rendered', () => {

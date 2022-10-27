@@ -20,10 +20,7 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import InputSelect from '..';
 import { CHAR_ENCODING_OPTIONS } from '../../ParsingPopupBody/parsingOptions';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
 
 const mockOptions = [
   {

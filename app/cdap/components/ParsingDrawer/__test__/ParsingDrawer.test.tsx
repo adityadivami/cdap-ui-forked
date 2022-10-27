@@ -22,10 +22,7 @@ import * as ApiHelpers from 'components/Connections/Browser/GenericBrowser/apiHe
 
 import ParsingDrawer from '..';
 import { async } from 'q';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
 
 describe('It Should Test the Parsing Drawer Component', () => {
   beforeEach(() => {

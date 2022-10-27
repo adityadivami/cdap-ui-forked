@@ -162,6 +162,7 @@ export default function WrangleCard() {
             to={`/ns/${getCurrentNamespace()}/datasources/${item.name}`}
             style={{ textDecoration: 'none' }}
             data-testid={'item' + index}
+            id={'item' + index}
           >
             <Card className={classes.card} data-testid={index + item.name}>
               <Box className={classes.cardContent} key={index}>
