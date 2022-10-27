@@ -18,18 +18,18 @@
 Feature: Breadcrumb - Navigate to the application
   @Breadcrumb
   Scenario: Navigate to the Data Source
-    Given I navigate to the home page
-    Then I click on the Data source
-    Then I click on the first tab of second column
-    Then I click on the first tab of third column
-    Then I hover&click on the Wrangler
-    Then I click on the Home link
-    Then I click on the Data source
-    Then I click on the first tab of second column
-    Then I click on the first tab of third column
-    Then I hover&click on the Wrangler
-    Then I click on the Data Sources link
-    Then I click on the Home link button
-    Then I click on the Exploration
-    Then I click on the Home link
-    Then I check the text
+    Given Navigate to the home page
+    Then  Click on the Data source
+    Then Click on the first tab of second column
+    Then Click on the first tab of third column
+    Then Hover&Click on the Wrangler
+    Then Click on the Home link
+    Then Click on the Data source
+    Then Click on the first tab of second column
+    Then Click on the first tab of third column
+    Then Hover&Click on the Wrangler
+    Then Click on the Data Sources link
+    Then Click on the Home link button
+    Then Click on the Exploration card
+    Then Click on the Home link
+    Then Check the user navigated back to home page or not
