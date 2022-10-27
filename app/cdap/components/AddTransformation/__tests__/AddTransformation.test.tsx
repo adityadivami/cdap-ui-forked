@@ -59,8 +59,7 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    const ele = screen.getByTestId(/add-transform-button/i);
-    fireEvent.click(ele);
+    expect(eleBox).toBeInTheDocument();
   });
 
   it('should render the SelectColumnsList Component where functionName is parseCSV', () => {
