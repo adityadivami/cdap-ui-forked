@@ -183,8 +183,8 @@ export default function GridTable() {
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData: IHeaderNamesList[] = createHeadersData(
-      rawData.headers,
-      rawData.types
+      rawData?.headers,
+      rawData?.types
     ) as IHeaderNamesList[];
     setHeadersNamesList(headersData);
     if (rawData && rawData?.summary && rawData?.summary?.statistics) {
