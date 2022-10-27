@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
+import { Box, Container, Drawer, Typography } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useStyles } from './styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
@@ -42,7 +42,7 @@ export default function({
             <DrawerWidgetHeading headingText={headingText} />
           </div>
           <Box className={classes.headerRightStyles}>
-            {headerActionTemplate && <div>{headerActionTemplate}</div>}
+            {headerActionTemplate && <Typography>{headerActionTemplate}</Typography>}
             {showDivider && <div className={classes.dividerLineStyles} />}
             <CloseRoundedIcon
               className={classes.pointerStyles}

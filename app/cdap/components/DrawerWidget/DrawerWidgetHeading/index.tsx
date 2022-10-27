@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { Underline } from '../iconStore';
 import { useStyles } from '../styles';
@@ -26,7 +26,7 @@ export default function({ headingText }: IDrawerWidgetHeadingProps) {
 
   return (
     <Box className={classes.headingStyles}>
-      <div className={classes.headingTextStyles}>{T.translate(`${headingText}`)}</div>
+      <Typography className={classes.headingTextStyles}>{T.translate(`${headingText}`)}</Typography>
       <Underline />
     </Box>
   );
