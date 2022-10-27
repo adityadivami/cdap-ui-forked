@@ -60,7 +60,7 @@ export default function({ file, onDropHandler }: IDragAndDrop) {
             <div className={classes.infoIcon}>
               <InfoIcon />
             </div>
-            <Typography variant="body1" className = {classes.infoText}>
+            <Typography variant="body1" className={classes.infoText}>
               {T.translate('features.ImportData.maxSizeText')}
             </Typography>
           </div>

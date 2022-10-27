@@ -42,7 +42,7 @@ export default function({
             <DrawerWidgetHeading headingText={headingText} />
           </div>
           <Box className={classes.headerRightStyles}>
-            {headerActionTemplate && <Typography>{headerActionTemplate}</Typography>}
+            {headerActionTemplate && <div>{headerActionTemplate}</div>}
             {showDivider && <div className={classes.dividerLineStyles} />}
             <CloseRoundedIcon
               className={classes.pointerStyles}
