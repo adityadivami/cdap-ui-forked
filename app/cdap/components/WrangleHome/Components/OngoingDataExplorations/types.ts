@@ -14,6 +14,8 @@
  *  the License.
  */
 
+import { ReactElement } from 'react';
+
 export interface IResponseData {
   count: number;
   message: string;
@@ -86,5 +88,22 @@ export interface IEachData {
   recipeSteps: number;
   workspaceId: string;
   workspaceName: string;
+  connectorType: string;
+}
+
+export interface IMapValue {
+  connectionId: string;
+  connectionType: string;
+  createdTimeMillis: number;
+  description: string;
+  isDefault: boolean;
+  name: string;
+  plugin?: IPluginObject;
+  preConfigured: boolean;
+  updatedTimeMillis: number;
+}
+
+export interface IConnectionsWithConnectorTypeDataObject {
+  name: string;
   connectorType: string;
 }

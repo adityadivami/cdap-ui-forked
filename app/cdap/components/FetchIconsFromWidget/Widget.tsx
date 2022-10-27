@@ -17,8 +17,7 @@
 import { Avatar } from '@material-ui/core';
 import ImageOutlined from '@material-ui/icons/ImageOutlined';
 import React from 'react';
-import styled from 'styled-components';
-import { IWidgetSrc } from '../../../../../../Documents/cdap-ui-forked/app/cdap/components/WrangleHome/Components/WrangleCard/types';
+import { IWidgetSrc } from './types';
 
 export default function({ dataSrc }: IWidgetSrc) {
   return dataSrc ? (

@@ -15,7 +15,6 @@
  */
 
 import DataPrepStore from 'components/DataPrep/store';
-import { ImportDatasetIcon } from '../WrangleCard/iconStore/ImportDatasetIcon';
 import { IEachData, IMassagedObject } from './types';
 
 export const generateDataForExplorationCard = (oldData: IEachData[]) => {
@@ -24,7 +23,6 @@ export const generateDataForExplorationCard = (oldData: IEachData[]) => {
 
   const { dataprep } = DataPrepStore.getState();
   const { connectorsWithIcons } = dataprep;
-  console.log(connectorsWithIcons, 'connectorsWithIcons---store');
 
   const getIcon = (connectorName) => {
     const tempItem = connectorsWithIcons.find((e) => {

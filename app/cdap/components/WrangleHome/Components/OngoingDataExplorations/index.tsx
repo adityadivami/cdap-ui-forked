@@ -16,25 +16,33 @@
 
 import { Box } from '@material-ui/core/';
 import MyDataPrepApi from 'api/dataprep';
+import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import T from 'i18n-react';
+import { orderBy } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
-import { IEachData, IMassagedObject, IResponseData, IValues } from './types';
+import {
+  IConnectionsWithConnectorTypeDataObject,
+  IEachData,
+  IMapValue,
+  IMassagedObject,
+  IValues,
+} from './types';
 import { generateDataForExplorationCard } from './utils';
-import { orderBy } from 'lodash';
-import { getWidgetData } from 'components/FetchIconsFromWidget/utils';
-import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 
 export default function() {
   const [finalArray, setFinalArray] = useState<IMassagedObject[]>([]);
 
   const getOngoingData = useCallback(async () => {
-    const connectionsWithConnectorTypeData = await getCategorizedConnections();
-    const connectionsWithConnectorTypeDataObject = [];
+    const connectionsWithConnectorTypeData: Map<
+      string,
+      IMapValue[]
+    > = await getCategorizedConnections();
+    const connectionsWithConnectorTypeDataObject: IConnectionsWithConnectorTypeDataObject[] = [];
     for (const x of connectionsWithConnectorTypeData.keys()) {
       const values = connectionsWithConnectorTypeData.get(x);
       const connections = values.map((e) => {
@@ -53,7 +61,7 @@ export default function() {
         });
         return connec.connectorType;
       }
-      return 'Upload';
+      return 'Imported Dataset';
     };
 
     const expData: IEachData[] = [];
@@ -93,7 +101,7 @@ export default function() {
               connectorType: conectorName,
               connectionName:
                 item?.sampleSpec?.connectionName === undefined
-                  ? 'Upload'
+                  ? 'Imported Dataset'
                   : item?.sampleSpec?.connectionName,
               workspaceName: item.workspaceName,
               recipeSteps: item.directives.length,

@@ -24,19 +24,18 @@ import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 import React from 'react';
+import { IConnectorArray, IConnectorDetailPayloadArray, IConnectorTypes } from './types';
 import WidgetSVG from './Widget';
 
 export const getWidgetData = async () => {
-  const connectorTypes = await fetchConnectors();
-  const categorizedConnections = await getCategorizedConnections();
-  const connectorTypeWithConnections = [];
-  categorizedConnections?.forEach((itemEach, key) => {
-    connectorTypeWithConnections.push(key);
-  });
-  const connectorDataArray = [];
-  const connectorDataWithSvgArray = [];
-  const allConnectorsPluginProperties = getCategoriesToConnectorsMap(connectorTypes);
-  const connectionPayloadArray = [];
+  const connectorTypes: IConnectorArray[] = await fetchConnectors();
+  const connectorDataArray: IConnectorTypes[] = [];
+  const connectorDataWithSvgArray: IConnectorArray[] = [];
+  const allConnectorsPluginProperties: Map<
+    string,
+    IConnectorDetailPayloadArray[]
+  > = getCategoriesToConnectorsMap(connectorTypes);
+  const connectionPayloadArray: IConnectorDetailPayloadArray[] = [];
   allConnectorsPluginProperties?.forEach((connectorsArray) => {
     if (connectorsArray.length) {
       connectorsArray.map((item) => {
@@ -92,11 +91,10 @@ export const getWidgetData = async () => {
   });
 
   connectorDataWithSvgArray.push({
-    name: 'Upload',
-    SVG: <WidgetSVG dataSrc={undefined} />,
+    name: 'Imported Dataset',
+    SVG: ImportDatasetIcon,
   });
 
-  console.log(connectorDataWithSvgArray, 'connectorDataWithSvgArray');
   DataPrepStore.dispatch({
     type: DataPrepActions.setConnectorIcons,
     payload: {
