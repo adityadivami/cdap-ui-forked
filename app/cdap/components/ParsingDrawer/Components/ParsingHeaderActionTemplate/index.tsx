@@ -48,7 +48,7 @@ export default function({
     };
   };
   return (
-    <Box>
+    <Box className={classes.importSchemaIconText}>
       <input
         data-testId="fileinput"
         id="file"
@@ -58,7 +58,7 @@ export default function({
         onChange={handleFile}
         className={classes.pointerStyles}
       />
-      <label htmlFor="file" className={classes.pointerStyles}>
+      <label htmlFor="file" className={classes.importSchemaLabel}>
         {importIcon}
       </label>
       <Typography className={classes.importSchemaTextStyles}>

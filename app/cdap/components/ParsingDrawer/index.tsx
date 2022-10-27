@@ -84,9 +84,6 @@ export default function({ setLoading, updateDataTranformation }) {
     }
   };
 
-  const handleSchemaUpload = (schema: unknown) => {
-    setSchemaValue(schema);
-  };
   const onConfirm = async (parseConfig) => {
     try {
       await createWorkspaceInternal(connectionPayload, parseConfig);
@@ -109,7 +106,7 @@ export default function({ setLoading, updateDataTranformation }) {
       showDivider={true}
       headerActionTemplate={
         <ParsingHeaderActionTemplate
-          handleSchemaUpload={(schema) => handleSchemaUpload(schema)}
+          handleSchemaUpload={(schema: unknown) => setSchemaValue(schema)}
           setErrorOnTransformation={setErrorOnTransformation}
         />
       }

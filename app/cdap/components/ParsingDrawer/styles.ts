@@ -43,6 +43,11 @@ export const useStyles = makeStyles(() => {
     },
     pointerStyles: {
       cursor: 'pointer',
+      marginBottom: '0 !important',
+    },
+    importSchemaLabel: {
+      cursor: 'pointer',
+      marginBottom: '0 !important',
     },
     headingTextStyles: {
       fontFamily: 'Noto Sans',
@@ -69,6 +74,9 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#000000',
       marginLeft: 10,
+    },
+    importSchemaIconText: {
+      display: 'flex !important',
     },
     dividerLineStyles: {
       width: 1,
