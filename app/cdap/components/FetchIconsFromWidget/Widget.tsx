@@ -20,10 +20,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { IWidgetSrc } from '../../../../../../Documents/cdap-ui-forked/app/cdap/components/WrangleHome/Components/WrangleCard/types';
 
-const ImageContainer = styled.div`
-  font-size: 45px;
-`;
-
 export default function({ dataSrc }: IWidgetSrc) {
   return dataSrc ? (
     <Avatar
@@ -33,8 +29,10 @@ export default function({ dataSrc }: IWidgetSrc) {
       id="card-image-from-widget-api"
     />
   ) : (
-    <ImageContainer>
-      <ImageOutlined fontSize="inherit" data-testid="card-image-default" id="card-image-default" />
-    </ImageContainer>
+    <ImageOutlined
+      style={{ fontSize: 40 }}
+      data-testid="card-image-default"
+      id="card-image-default"
+    />
   );
 }
