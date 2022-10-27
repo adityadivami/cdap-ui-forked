@@ -180,9 +180,14 @@ export function CreateConnection({
       }
 
       if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
-        const value: string = localStorage.getItem('requestFrom');
+        /**
+         * This following code is checking whether the add connection request is coming from New UI
+         * If the request is from New UI, the redirection is set to New UI URL
+         * Otherwise, the redirection is set to Old UI URL as existed
+         */
+        const value: string = localStorage.getItem('addConnectionRequestFromNewUI');
         if (value) {
-          localStorage.removeItem('requestFrom');
+          localStorage.removeItem('addConnectionRequestFromNewUI');
           value === 'home'
             ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
             : setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${value}`);
@@ -243,7 +248,13 @@ export function CreateConnection({
   function onClose() {
     if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
       navigateToConnectionList(dispatch);
-      const value: string = localStorage.getItem('requestFrom');
+
+      /**
+       * This following code is checking whether the add connection request is coming from New UI
+       * If the request is from New UI, the redirection is set to New UI URL
+       * Otherwise, the redirection is set to Old UI URL as existed
+       */
+      const value: string = localStorage.getItem('addConnectionRequestFromNewUI');
       return value === 'home'
         ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
         : setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${value}`);

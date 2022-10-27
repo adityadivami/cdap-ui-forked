@@ -22,10 +22,7 @@ import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers
 import { Route, Router, Switch } from 'react-router';
 import { createBrowserHistory as createHistory } from 'history';
 import * as widgetData from '../services/getWidgetData';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
 
 test('It renders Wrangler-Card ', async () => {
   jest.mock('components/Connections/Create/reducer', () => {

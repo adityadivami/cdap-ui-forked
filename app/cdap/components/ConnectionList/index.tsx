@@ -203,34 +203,23 @@ export default function ConnectionList() {
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader selectedConnection={dataForTabs[0]?.selectedTab} />
-      {dataForTabs[0]?.data?.length > 0 ? (
-        <>
-          <SelectDatasetWrapper>
-            {dataForTabs.map((each, index) => {
-              const connectionIdRequired =
-                each.data.length && each.data.filter((el) => el.connectionId);
-              if (connectionIdRequired.length) {
-                connectionId = connectionIdRequired[0].connectionId;
-              }
-              if (index === 0) {
-                headerContent = headerForLevelZero();
-              } else {
-                headerContent =
-                  refs.current[index]?.offsetWidth < refs.current[index]?.scrollWidth ? (
-                    <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
-                      <Box className={classes.beforeSearchIconClickDisplay}>
-                        <Typography
-                          variant="body2"
-                          className={classes.headerLabel}
-                          ref={(element) => {
-                            refs.current[index] = element;
-                          }}
-                        >
-                          {dataForTabs[index - 1].selectedTab}
-                        </Typography>
-                      </Box>
-                    </CustomTooltip>
-                  ) : (
+      {dataForTabs &&
+      Array.isArray(dataForTabs) &&
+      dataForTabs.length &&
+      dataForTabs[0]?.data?.length > 0 ? (
+        <SelectDatasetWrapper>
+          {dataForTabs.map((each, index) => {
+            const connectionIdRequired =
+              each.data.length && each.data.filter((el) => el.connectionId);
+            if (connectionIdRequired.length) {
+              connectionId = connectionIdRequired[0].connectionId;
+            }
+            if (index === 0) {
+              headerContent = headerForLevelZero();
+            } else {
+              headerContent =
+                refs.current[index]?.offsetWidth < refs.current[index]?.scrollWidth ? (
+                  <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
                     <Box className={classes.beforeSearchIconClickDisplay}>
                       <Typography
                         variant="body2"
@@ -242,31 +231,41 @@ export default function ConnectionList() {
                         {dataForTabs[index - 1].selectedTab}
                       </Typography>
                     </Box>
-                  );
-              }
-              return (
-                <Box className={classes.tabsContainerWithHeader}>
-                  <Box className={classes.tabHeaders}>{headerContent}</Box>
-                  <ConnectionsTabs
-                    tabsData={each}
-                    handleChange={selectedTabValueHandler}
-                    value={each.selectedTab}
-                    index={index}
-                    connectionId={connectionId || ''}
-                    toggleLoader={(value: boolean, isError?: boolean) =>
-                      toggleLoader(value, isError)
-                    }
-                    setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-                  />
-                </Box>
-              );
-            })}
-          </SelectDatasetWrapper>
-        </>
+                  </CustomTooltip>
+                ) : (
+                  <Box className={classes.beforeSearchIconClickDisplay}>
+                    <Typography
+                      variant="body2"
+                      className={classes.headerLabel}
+                      ref={(element) => {
+                        refs.current[index] = element;
+                      }}
+                    >
+                      {dataForTabs[index - 1].selectedTab}
+                    </Typography>
+                  </Box>
+                );
+            }
+            return (
+              <Box className={classes.tabsContainerWithHeader}>
+                <Box className={classes.tabHeaders}>{headerContent}</Box>
+                <ConnectionsTabs
+                  tabsData={each}
+                  handleChange={selectedTabValueHandler}
+                  value={each.selectedTab}
+                  index={index}
+                  connectionId={connectionId || ''}
+                  toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
+                  setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                />
+              </Box>
+            );
+          })}
+        </SelectDatasetWrapper>
       ) : (
         <Typography className={classes.noDataLabel}>
           {' '}
-          {T.translate('features.ConnectionsList.labels.noConnections')}
+          {T.translate('features.NewWranglerUI.ConnectionsList.labels.noConnections')}
         </Typography>
         // TODO: No connectors types are available screen needs to be appended here
       )}
