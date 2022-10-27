@@ -26,6 +26,9 @@ export const useStyles = makeStyles({
     borderRadius: '4px',
     marginBottom: '10px',
     cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyConent: 'center',
   },
   elementStyle: {
     width: '301px',
@@ -54,11 +57,6 @@ export const useStyles = makeStyles({
     display: 'flex',
     minWidth: '85px',
     justifyContent: 'end',
-  },
-  iconStyle: {
-    marginRight: '32px',
-    height: '50px',
-    width: '50px',
   },
   dataQualityWrapper: {
     display: 'flex',
@@ -108,5 +106,14 @@ export const useStyles = makeStyles({
     maxWidth: '166px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+  },
+  connectorIcon: {
+    maxWidth: 100,
+    paddingTop: 5,
+    paddingLeft: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

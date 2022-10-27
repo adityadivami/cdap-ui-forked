@@ -86,4 +86,5 @@ export interface IEachData {
   recipeSteps: number;
   workspaceId: string;
   workspaceName: string;
+  connectorType: string;
 }

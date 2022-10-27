@@ -16,16 +16,21 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import React from 'react';
+import React, { useEffect } from 'react';
 import OngoingDataExplorations from './Components/OngoingDataExplorations';
 import WrangleCard from './Components/WrangleCard';
 import WrangleHomeTitle from './Components/WrangleHomeTitle';
 import { GradientLine, HeaderImage } from './icons';
 import { useStyles } from './styles';
 import T from 'i18n-react';
+import { getWidgetData } from 'components/FetchIconsFromWidget/utils';
 
 export default function WranglerHome() {
   const classes = useStyles();
+
+  useEffect(() => {
+    getWidgetData();
+  }, []);
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">

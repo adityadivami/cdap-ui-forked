@@ -26,11 +26,36 @@ import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
 import { IEachData, IMassagedObject, IResponseData, IValues } from './types';
 import { generateDataForExplorationCard } from './utils';
 import { orderBy } from 'lodash';
+import { getWidgetData } from 'components/FetchIconsFromWidget/utils';
+import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 
 export default function() {
   const [finalArray, setFinalArray] = useState<IMassagedObject[]>([]);
 
-  const getOngoingData = useCallback(() => {
+  const getOngoingData = useCallback(async () => {
+    const connectionsWithConnectorTypeData = await getCategorizedConnections();
+    const connectionsWithConnectorTypeDataObject = [];
+    for (const x of connectionsWithConnectorTypeData.keys()) {
+      const values = connectionsWithConnectorTypeData.get(x);
+      const connections = values.map((e) => {
+        return {
+          name: e.name,
+          connectorType: e.connectionType,
+        };
+      });
+      connectionsWithConnectorTypeDataObject.push(...connections);
+    }
+
+    const findConnectorTypeOf = (connection) => {
+      if (connection) {
+        const connec = connectionsWithConnectorTypeDataObject.find((el) => {
+          return el.name === connection;
+        });
+        return connec.connectorType;
+      }
+      return 'Upload';
+    };
+
     const expData: IEachData[] = [];
     // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
     //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
@@ -41,6 +66,7 @@ export default function() {
         switchMap((res: Record<string, unknown[]>) => {
           let values: IValues[] = [];
           values = res.values;
+
           values = orderBy(
             values,
             [(workspace) => (workspace.workspaceName || '').toLowerCase()],
@@ -62,7 +88,9 @@ export default function() {
               },
             };
 
+            const conectorName = findConnectorTypeOf(item?.sampleSpec?.connectionName);
             expData.push({
+              connectorType: conectorName,
               connectionName:
                 item?.sampleSpec?.connectionName === undefined
                   ? 'Upload'

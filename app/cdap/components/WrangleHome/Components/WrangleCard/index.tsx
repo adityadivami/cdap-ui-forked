@@ -45,6 +45,7 @@ export default function WrangleCard() {
   const getConnectorTypesNames = async () => {
     let fetchedConnectorTypesFromAPI = await fetchConnectors();
     const categorizedConnections = await getCategorizedConnections();
+
     const connectorTypeWithConnections = [];
     categorizedConnections.forEach((itemEach, key) => {
       connectorTypeWithConnections.push(key);

@@ -33,6 +33,8 @@ export default function OngoingDataExplorationCard({ item }) {
     setdatasetNameRef(datasetNameRef?.current?.offsetWidth < datasetNameRef?.current?.scrollWidth);
   });
 
+  console.log(item);
+
   return (
     <Grid
       container
@@ -41,10 +43,15 @@ export default function OngoingDataExplorationCard({ item }) {
     >
       {item.map((eachItem, index) => {
         switch (eachItem.type) {
+          case 'icon':
+            return (
+              <Grid item xs={3} key={index} className={`${classes.connectorIcon}`}>
+                {eachItem.icon}
+              </Grid>
+            );
           case 'iconWithText':
             return (
               <Grid item xs={3} className={classes.elementStyle} key={index}>
-                <Box className={classes.iconStyle}> {eachItem.icon}</Box>
                 {connectionRefValue ? (
                   <CustomTooltip title={eachItem.label} arrow>
                     <Typography

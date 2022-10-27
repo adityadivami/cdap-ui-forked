@@ -14,6 +14,7 @@
  * the License.
  */
 
+import DataPrepStore from 'components/DataPrep/store';
 import { ImportDatasetIcon } from '../WrangleCard/iconStore/ImportDatasetIcon';
 import { IEachData, IMassagedObject } from './types';
 
@@ -21,15 +22,27 @@ export const generateDataForExplorationCard = (oldData: IEachData[]) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
   const massagedArray = [];
 
+  const { dataprep } = DataPrepStore.getState();
+  const { connectorsWithIcons } = dataprep;
+
+  const getIcon = (connectorName) => {
+    const tempItem = connectorsWithIcons.find((e) => {
+      return e.name === connectorName;
+    });
+    return tempItem.SVG;
+  };
+
   if (oldData && Array.isArray(oldData) && oldData.length) {
     oldData.forEach((eachItem) => {
       const childArray = [];
 
       Object.keys(eachItem).map((keys) => {
         const obj = {} as IMassagedObject;
-
-        if (keys === 'connectionName') {
-          obj.icon = ImportDatasetIcon;
+        if (keys === 'connectorType') {
+          obj.icon = getIcon(eachItem[keys]);
+          obj.label = eachItem[keys];
+          obj.type = 'icon';
+        } else if (keys === 'connectionName') {
           obj.label = eachItem[keys];
           obj.type = 'iconWithText';
         } else if (keys === 'workspaceName') {
@@ -41,7 +54,7 @@ export const generateDataForExplorationCard = (oldData: IEachData[]) => {
         } else if (keys === 'dataQuality') {
           obj.label = Number(eachItem[keys]);
           obj.percentageSymbol = '%';
-          obj.subText = 'Data Quality';
+          obj.subText = 'Null values';
           obj.type = 'percentageWithText';
         } else if (keys === 'workspaceId') {
           obj.workspaceId = eachItem[keys];
