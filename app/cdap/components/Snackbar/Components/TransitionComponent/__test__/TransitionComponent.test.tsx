@@ -11,7 +11,7 @@ const history = createHistory({
 describe('Test Transition Component', () => {
   const handleClose = jest.fn();
 
-  it('Should have rendered the component correctly', () => {
+  it('Should have rendered the component correctly with isSuccess as false', () => {
     const handleClose = jest.fn();
     const container = render(
       <Router history={history}>
@@ -21,6 +21,25 @@ describe('Test Transition Component', () => {
               handleClose={() => jest.fn()}
               isSuccess={false}
               actionType={''}
+              messageToDisplay={''}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    expect(container).toBeDefined();
+  });
+
+  it('Should have rendered the component correctly with isSuccess as false', () => {
+    const handleClose = jest.fn();
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <TransitionComponent
+              handleClose={() => jest.fn()}
+              isSuccess={true}
+              actionType={'add'}
               messageToDisplay={''}
             />
           </Route>
