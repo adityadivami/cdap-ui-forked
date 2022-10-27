@@ -136,7 +136,7 @@ export default function() {
         return (
           <Link
             to={{
-              pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
+              pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[5].workspaceId}`}`,
               state: {
                 from: T.translate('features.Breadcrumb.labels.wrangleHome'),
                 path: T.translate('features.Breadcrumb.params.wrangleHome'),
