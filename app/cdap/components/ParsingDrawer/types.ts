@@ -76,3 +76,10 @@ interface IProperties {
   skipHeader: boolean;
   _pluginName: unknown;
 }
+
+export interface IDefaultProperties {
+  format: string;
+  fileEncoding: string;
+  enableQuotedValues: boolean;
+  skipHeader: boolean;
+}

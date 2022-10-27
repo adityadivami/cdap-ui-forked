@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../styles';
 import { UnderLineSVG } from '../iconStore';
@@ -25,7 +25,7 @@ export default function({ headingText }: IHeaderText) {
 
   return (
     <Box className={classes.headingStyles}>
-      <div className={classes.headingTextStyles}>{headingText}</div>
+      <Typography className={classes.headingTextStyles}>{headingText}</Typography>
       <UnderLineSVG />
     </Box>
   );

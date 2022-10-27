@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
+import { Box, Container, Drawer, Typography } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import React, { Fragment } from 'react';
 import DrawerWidgetHeading from './DrawerWidgetHeader';
@@ -33,14 +33,15 @@ export default function({
   anchor,
 }: IDrawerWidgetProps) {
   const classes = useStyles();
+  console.log();
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
         <header className={classes.headerStyles}>
-          <div className={classes.headerTextWithBackIconStyles}>
+          <Typography className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && <ChevronLeftRoundedIcon className={classes.chevronLeftRounded} />}
             <DrawerWidgetHeading headingText={headingText} />
-          </div>
+          </Typography>
           <Box className={classes.headerRightStyles}>
             {headerActionTemplate && <div>{headerActionTemplate}</div>}
             {showDivider && <div className={classes.dividerLineStyles} />}
