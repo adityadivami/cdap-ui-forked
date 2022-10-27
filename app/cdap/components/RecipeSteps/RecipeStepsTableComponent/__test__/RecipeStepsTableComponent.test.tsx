@@ -38,8 +38,6 @@ describe('It should test the Recipe Component', () => {
       </Router>
     );
     expect(container).toBeDefined;
-    const ele = screen.getByTestId(/recipe-steps-table-component-image-click0/i);
-    fireEvent.click(ele);
     const ele2 = screen.getByTestId(/recipe-steps-span0/i);
     expect(ele2).toContainHTML('a-column');
   });

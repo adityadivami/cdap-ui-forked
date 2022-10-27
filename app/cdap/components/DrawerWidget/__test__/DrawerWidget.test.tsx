@@ -15,12 +15,12 @@
  */
 
 import { render } from '@testing-library/react';
-import ParsingHeaderActionTemplate from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import DrawerWidget from '..';
 import T from 'i18n-react';
+import RecipeHeaderActionTemplate from 'components/RecipeSteps/RecipeHeaderActionTemplate';
 
 const history = createHistory({
   basename: '/',
@@ -38,9 +38,9 @@ describe('It should test DrawerWidget Component', () => {
           <Route>
             <DrawerWidget
               headingText={T.translate('features.WranglerParsingPanelDrawerWidget.labels.parsing')}
-              openDrawer={jest.fn}
+              openDrawer={true}
               showDivider={true}
-              headerActionTemplate={<ParsingHeaderActionTemplate />}
+              headerActionTemplate={<RecipeHeaderActionTemplate />}
               closeClickHandler={closeClickHandler}
             />
           </Route>
