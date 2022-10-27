@@ -14,38 +14,38 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import { IHeaderNamesList } from "components/GridTable/types";
-import React, { ChangeEvent } from "react";
-import CheckBoxInput from "..";
+import { fireEvent, render, screen } from '@testing-library/react';
+import { IHeaderNamesList } from 'components/GridTable/types';
+import React, { ChangeEvent } from 'react';
+import CheckBoxInput from '..';
 
-describe("It should render ", () => {
-  it("Should render the checkBox component and click the checkbox", () => {
+describe('It should render ', () => {
+  it('Should render the checkBox component and click the checkbox', () => {
     const container = render(
       <CheckBoxInput
-        selectedColumns={[{label:'test', type:[''], name:''}]}
+        selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => false}
-        eachColumn={{label:'test', type:[''], name:''}}
+        eachColumn={{ label: 'test', type: [''], name: '' }}
         onMultipleSelection={() => jest.fn()}
       />
     );
 
-    const ele = screen.getByTestId(/check-box-input-checkbox/i)
+    const ele = screen.getByTestId(/check-box-input-checkbox/i);
     fireEvent.click(ele);
     expect(container).toBeDefined();
   });
 
-  it("Should render the checkBox component and click the checkbox", () => {
+  it('Should render the checkBox component and click the checkbox', () => {
     const container = render(
       <CheckBoxInput
-        selectedColumns={[{label:'test', type:[''], name:''}]}
+        selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => true}
-        eachColumn={{label:'test', type:[''], name:''}}
+        eachColumn={{ label: 'test', type: [''], name: '' }}
         onMultipleSelection={() => jest.fn()}
       />
     );
 
-    const ele = screen.getByTestId(/check-box-input-checkbox/i)
+    const ele = screen.getByTestId(/check-box-input-checkbox/i);
     fireEvent.click(ele);
     expect(container).toBeDefined();
   });

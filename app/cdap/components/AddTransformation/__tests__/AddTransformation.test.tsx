@@ -14,19 +14,19 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import { createBrowserHistory as createHistory } from "history";
-import React from "react";
-import { Route, Router, Switch } from "react-router";
-import AddTransformation from "..";
+import { fireEvent, render, screen } from '@testing-library/react';
+import { createBrowserHistory as createHistory } from 'history';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import AddTransformation from '..';
 
 const history = createHistory({
-  basename: "/",
+  basename: '/',
 });
 
-describe("It should test the SelectColumnsList Component", () => {
-  it("should render the SelectColumnsList Component and triggers the button and following event", () => {
-    const {rerender} = render(
+describe('It should test the SelectColumnsList Component', () => {
+  it('should render the SelectColumnsList Component and triggers the button and following event', () => {
+    const { rerender } = render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -43,25 +43,27 @@ describe("It should test the SelectColumnsList Component", () => {
     );
     // expect(container).toBeDefined;
     const eleBox = screen.getByTestId('box-id');
-    fireEvent.click(eleBox)
-    rerender( <Router history={history}>
-      <Switch>
-        <Route>
-          <AddTransformation
-            functionName="null"
-            directiveFunctionSupportedDataType={[]}
-            columnData={[]}
-            missingDataList={undefined}
-            callBack={() => jest.fn()}
-          />
-        </Route>
-      </Switch>
-    </Router>);
-  const ele = screen.getByTestId(/add-transform-button/i);
-  fireEvent.click(ele);
+    fireEvent.click(eleBox);
+    rerender(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <AddTransformation
+              functionName="null"
+              directiveFunctionSupportedDataType={[]}
+              columnData={[]}
+              missingDataList={undefined}
+              callBack={() => jest.fn()}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    const ele = screen.getByTestId(/add-transform-button/i);
+    fireEvent.click(ele);
   });
 
-  it("should render the SelectColumnsList Component where functionName is parseCSV", () => {
+  it('should render the SelectColumnsList Component where functionName is parseCSV', () => {
     const container = render(
       <Router history={history}>
         <Switch>

@@ -14,16 +14,16 @@
  * the License.
  */
 
-import { render } from "@testing-library/react";
-import React from "react";
-import ColumnTable from "..";
+import { render } from '@testing-library/react';
+import React from 'react';
+import ColumnTable from '..';
 
-describe("It should test FunctionNameWidget Component", () => {
-  it("Should render the FunctionNameWidget Component", () => {
+describe('It should test FunctionNameWidget Component', () => {
+  it('Should render the FunctionNameWidget Component', () => {
     const container = render(
       <ColumnTable
-        columns={[{ name: "a", type: [0] }]}
-        directiveFunctionSupportedDataType={["all"]}
+        columns={[{ name: 'a', type: [0] }]}
+        directiveFunctionSupportedDataType={['all']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[]}
@@ -35,11 +35,11 @@ describe("It should test FunctionNameWidget Component", () => {
     expect(container).toBeDefined();
   });
 
-  it("Should render the FunctionNameWidget Component", () => {
+  it('Should render the FunctionNameWidget Component', () => {
     const container = render(
       <ColumnTable
-        columns={[{ name: "a", type: ["test"], label: "test" }]}
-        directiveFunctionSupportedDataType={["test"]}
+        columns={[{ name: 'a', type: ['test'], label: 'test' }]}
+        directiveFunctionSupportedDataType={['test']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[]}

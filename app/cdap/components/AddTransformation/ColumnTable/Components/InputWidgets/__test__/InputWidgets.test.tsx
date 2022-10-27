@@ -14,12 +14,12 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import React, { ChangeEvent } from "react";
-import InputWidgets from "..";
+import { fireEvent, render, screen } from '@testing-library/react';
+import React, { ChangeEvent } from 'react';
+import InputWidgets from '..';
 
-describe("It should render ", () => {
-  it("Should render component with isSingleSelection false", () => {
+describe('It should render ', () => {
+  it('Should render component with isSingleSelection false', () => {
     const container = render(
       <InputWidgets
         isSingleSelection={false}
@@ -34,7 +34,7 @@ describe("It should render ", () => {
     expect(container).toBeDefined();
   });
 
-  it("Should render component with isSingleSelection true", () => {
+  it('Should render component with isSingleSelection true', () => {
     const container = render(
       <InputWidgets
         isSingleSelection={true}

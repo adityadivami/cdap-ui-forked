@@ -14,23 +14,23 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import React, { ChangeEvent } from "react";
-import RadioInput from "..";
+import { fireEvent, render, screen } from '@testing-library/react';
+import React, { ChangeEvent } from 'react';
+import RadioInput from '..';
 
-describe("It should render ", () => {
-  it("Should render RadioInput component and trigger the on click event", () => {
+describe('It should render ', () => {
+  it('Should render RadioInput component and trigger the on click event', () => {
     const MockOnChange = jest.fn();
     render(
       <RadioInput
-        selectedColumns={[{label:'test', name:'test', type:['test']}]}
+        selectedColumns={[{ label: 'test', name: 'test', type: ['test'] }]}
         onSingleSelection={MockOnChange}
-        eachColumn={{label:'test', name:'test', type:['test']}}
+        eachColumn={{ label: 'test', name: 'test', type: ['test'] }}
       />
     );
 
     const ele = screen.getByTestId(/radio-input-radio/i);
-    fireEvent.click(ele,{target:{checked:true}});
-    expect(MockOnChange).toHaveBeenCalled()
+    fireEvent.click(ele, { target: { checked: true } });
+    expect(MockOnChange).toHaveBeenCalled();
   });
 });
