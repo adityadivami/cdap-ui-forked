@@ -28,6 +28,7 @@ import { useStyles } from '../styles';
 import T from 'i18n-react';
 import { IRecipeStepTebleProps } from './types';
 import { DeleteIcon } from '../iconStore';
+import { headerData } from './utils';
 
 export default function({ recipeSteps }: IRecipeStepTebleProps) {
   const classes = useStyles();
@@ -37,19 +38,14 @@ export default function({ recipeSteps }: IRecipeStepTebleProps) {
       <Table aria-label="recipe steps table">
         <TableHead>
           <TableRow className={classes.recipeStepsTableRowStyles}>
-            <TableCell
-              data-testid="serial-no"
-              classes={{ head: classes.recipeStepsTableHeadStyles }}
-            >
-              {T.translate('features.WranglerNewRecipeSteps.labels.serialNo')}
-            </TableCell>
-            <TableCell
-              data-testid="recipe-steps"
-              classes={{ head: classes.recipeStepsTableHeadStyles }}
-            >
-              {T.translate('features.WranglerNewRecipeSteps.labels.recipeSteps')}
-            </TableCell>
-            <TableCell />
+            {headerData?.map((i) => (
+              <TableCell
+                data-testid={i.textId}
+                classes={{ head: classes.recipeStepsTableHeadStyles }}
+              >
+                {i.text}
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>

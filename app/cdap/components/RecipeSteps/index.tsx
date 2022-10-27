@@ -39,7 +39,7 @@ const recipes = [
 const recipe_steps = ['uppercase: body1', 'titlecase: body2'];
 
 export default function({ setShowRecipePanel, showRecipePanel }: IRecipeStepsProps) {
-  const [recipeSteps, setRecipeSteps] = useState<string[]>(null);
+  const [recipeSteps, setRecipeSteps] = useState<string[]>(recipe_steps);
 
   const classes = useStyles();
 
