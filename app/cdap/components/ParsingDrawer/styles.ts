@@ -179,9 +179,9 @@ export const useStyles = makeStyles(() => {
       textTransform: 'none',
     },
     MUIPopover: {
-      left: '472px !important',
-      minWidth: '345px !important',
-      top: '253px !important',
+      left: '472 !important',
+      minWidth: '345 !important',
+      top: '253 !important',
     },
     buttonStyles: {
       '&:hover': {

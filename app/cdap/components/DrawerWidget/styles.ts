@@ -44,7 +44,7 @@ export const useStyles = makeStyles(() => {
       cursor: 'pointer',
     },
     chevronLeftRounded: {
-      fontSize: '24px',
+      fontSize: 24,
     },
     headingTextStyles: {
       fontFamily: 'Noto Sans',

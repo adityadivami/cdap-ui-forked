@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { Checkbox, FormControlLabel } from '@material-ui/core';
+import { Checkbox, FormControlLabel, Typography } from '@material-ui/core';
 import { useStyles } from '../../styles';
 import { IInputCheckboxProps } from 'components/ParsingDrawer/types';
 
@@ -34,7 +34,7 @@ export default function({ label, value, onChange, className }: IInputCheckboxPro
           id={`parsing-checkbox-${label}`}
         />
       }
-      label={<span className={classes.labelTextStyles}>{label}</span>}
+      label={<Typography className={classes.labelTextStyles}>{label}</Typography>}
     />
   );
 }

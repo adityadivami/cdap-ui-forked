@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
+import { Box, Container, Drawer, Typography } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import React, { Fragment } from 'react';
 import DrawerWidgetHeading from './DrawerWidgetHeader';

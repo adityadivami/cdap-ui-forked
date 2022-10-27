@@ -31,12 +31,16 @@ import {
   defaultProperties,
 } from './defaultValues';
 import { useStyles } from './styles';
-import { IConnectionPayload, IDefaultErrorOnTransformations, IParsingDrawer } from './types';
+import {
+  IConnectionPayload,
+  IDefaultErrorOnTransformations,
+  IParsingDrawer,
+  IDefaultProperties,
+} from './types';
 
 export default function({ setLoading, updateDataTranformation }: IParsingDrawer) {
-  const [drawerStatus, setDrawerStatus] = useState(true);
-  const [properties, setProperties] = useState(defaultProperties);
-  // const [schemaValue, setSchemaValue] = useState(null);
+  const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
+  const [properties, setProperties] = useState<IDefaultProperties>(defaultProperties);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
   const [errorOnTransformation, setErrorOnTransformation] = useState<
     IDefaultErrorOnTransformations
@@ -71,7 +75,6 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
         connection: dataprep.insights.name,
         properties: connectionPayload.sampleRequest.properties,
       });
-      console.log(wid);
       if (onWorkspaceCreate) {
         return onWorkspaceCreate(wid);
       }
