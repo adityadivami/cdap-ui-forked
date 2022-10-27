@@ -24,6 +24,7 @@ export const generateDataForExplorationCard = (oldData: IEachData[]) => {
 
   const { dataprep } = DataPrepStore.getState();
   const { connectorsWithIcons } = dataprep;
+  console.log(connectorsWithIcons, 'connectorsWithIcons---store');
 
   const getIcon = (connectorName) => {
     const tempItem = connectorsWithIcons.find((e) => {

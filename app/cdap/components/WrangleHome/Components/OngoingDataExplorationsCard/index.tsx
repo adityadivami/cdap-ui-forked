@@ -33,8 +33,6 @@ export default function OngoingDataExplorationCard({ item }) {
     setdatasetNameRef(datasetNameRef?.current?.offsetWidth < datasetNameRef?.current?.scrollWidth);
   });
 
-  console.log(item);
-
   return (
     <Grid
       container

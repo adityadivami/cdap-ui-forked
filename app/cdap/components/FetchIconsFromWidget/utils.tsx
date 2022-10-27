@@ -90,6 +90,12 @@ export const getWidgetData = async () => {
     }
   });
 
+  connectorDataWithSvgArray.push({
+    name: 'Upload',
+    SVG: <WidgetSVG dataSrc={undefined} />,
+  });
+
+  console.log(connectorDataWithSvgArray, 'connectorDataWithSvgArray');
   DataPrepStore.dispatch({
     type: DataPrepActions.setConnectorIcons,
     payload: {
