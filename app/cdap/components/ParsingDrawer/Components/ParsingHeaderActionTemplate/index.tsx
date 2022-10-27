@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 import { useStyles } from 'components/ParsingDrawer/styles';
 import T from 'i18n-react';
@@ -36,7 +36,6 @@ export default function({
         const fileContents = JSON.parse(evt.target.result.toString());
         const importedSchemas = parseImportedSchemas(fileContents);
         const schema = importedSchemas[0] && importedSchemas[0].schema;
-        console.log(schema, 'schemaa');
         handleSchemaUpload(schema);
       } catch (e) {
         setErrorOnTransformation({
@@ -62,9 +61,9 @@ export default function({
       <label htmlFor="file" className={classes.pointerStyles}>
         {importIcon}
       </label>
-      <span className={classes.importSchemaTextStyles}>
+      <Typography className={classes.importSchemaTextStyles}>
         {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.importSchema')}
-      </span>
+      </Typography>
     </Box>
   );
 }
