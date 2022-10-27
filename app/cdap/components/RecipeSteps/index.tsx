@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import React, { useEffect, useState } from 'react';
@@ -21,6 +22,8 @@ import RecipeStepsEmptyScreen from './RecipeStepsEmptyScreen';
 import RecipeStepsTableComponent from './RecipeStepsTableComponent';
 import { useStyles } from './styles';
 import T from 'i18n-react';
+import { IRecipesSteps, IRecipeStepsProps } from './types';
+import { IRecipeStepTebleProps } from './RecipeStepsTableComponent/types';
 
 const recipes = [
   {
@@ -35,8 +38,8 @@ const recipes = [
 
 const recipe_steps = ['uppercase: body1', 'titlecase: body2'];
 
-export default function({ setShowRecipePanel, showRecipePanel }) {
-  const [recipeSteps, setRecipeSteps] = useState(recipe_steps);
+export default function({ setShowRecipePanel, showRecipePanel }: IRecipeStepsProps) {
+  const [recipeSteps, setRecipeSteps] = useState<string[]>(null);
 
   const classes = useStyles();
 

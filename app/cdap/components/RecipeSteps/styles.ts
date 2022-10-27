@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { makeStyles } from '@material-ui/styles';
 import { grey } from '@material-ui/core/colors';
 
@@ -40,7 +41,7 @@ export const useStyles = makeStyles(() => {
       fontSize: 20,
       lineHeight: '150%',
       letterSpacing: 0.15,
-      color: grey[400],
+      color: grey[900],
     },
     emptyScreenInfoText: {
       fontFamily: 'Noto Sans',
@@ -49,7 +50,7 @@ export const useStyles = makeStyles(() => {
       fontSize: 14,
       lineHeight: '150%',
       letterSpacing: 0.15,
-      color: '#5F6368',
+      color: grey[700],
     },
     RecipeStepsBodyStyles: {
       height: 'calc(100% - 100px)',
