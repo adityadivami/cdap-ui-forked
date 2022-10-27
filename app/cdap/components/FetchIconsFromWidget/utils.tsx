@@ -93,7 +93,7 @@ export const getWidgetData = async () => {
 
   connectorDataWithSvgArray.push({
     name: 'Upload',
-    SVG: ImportDatasetIcon,
+    SVG: <WidgetSVG dataSrc={undefined} />,
   });
 
   console.log(connectorDataWithSvgArray, 'connectorDataWithSvgArray');

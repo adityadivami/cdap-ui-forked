@@ -109,7 +109,6 @@ export const useStyles = makeStyles({
   },
   connectorIcon: {
     minWidth: 100,
-    paddingTop: 10,
     paddingLeft: 20,
     display: 'flex',
     flexDirection: 'column',
