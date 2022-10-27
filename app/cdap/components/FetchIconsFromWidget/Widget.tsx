@@ -21,7 +21,7 @@ import styled from 'styled-components';
 import { IWidgetSrc } from '../../../../../../Documents/cdap-ui-forked/app/cdap/components/WrangleHome/Components/WrangleCard/types';
 
 const ImageContainer = styled.div`
-  font-size: 40px;
+  font-size: 35px;
 `;
 
 export default function({ dataSrc }: IWidgetSrc) {

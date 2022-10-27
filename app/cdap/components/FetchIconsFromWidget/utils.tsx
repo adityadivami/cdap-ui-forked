@@ -22,6 +22,7 @@ import {
 } from 'components/Connections/Create/reducer';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 import React from 'react';
 import WidgetSVG from './Widget';
 
@@ -92,7 +93,7 @@ export const getWidgetData = async () => {
 
   connectorDataWithSvgArray.push({
     name: 'Upload',
-    SVG: <WidgetSVG dataSrc={undefined} />,
+    SVG: ImportDatasetIcon,
   });
 
   console.log(connectorDataWithSvgArray, 'connectorDataWithSvgArray');

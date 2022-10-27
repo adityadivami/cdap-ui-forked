@@ -44,7 +44,7 @@ export default function OngoingDataExplorationCard({ item }) {
           case 'icon':
             return (
               <Grid item xs={3} key={index} className={`${classes.connectorIcon}`}>
-                {eachItem.icon}
+                <Box>{eachItem.icon}</Box>
               </Grid>
             );
           case 'iconWithText':

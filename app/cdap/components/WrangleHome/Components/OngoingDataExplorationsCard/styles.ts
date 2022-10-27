@@ -108,12 +108,12 @@ export const useStyles = makeStyles({
     textOverflow: 'ellipsis',
   },
   connectorIcon: {
-    maxWidth: 100,
-    paddingTop: 5,
+    minWidth: 100,
+    paddingTop: 10,
     paddingLeft: 20,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
 });
