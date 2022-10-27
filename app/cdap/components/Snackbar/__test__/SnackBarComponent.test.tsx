@@ -14,44 +14,36 @@
  * the License.
  */
 
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
-import { Route, Router, Switch } from 'react-router';
-import { createBrowserHistory as createHistory } from 'history';
 import PositionedSnackbar from '..';
-import TransitionComponent from '../Components/TransitionComponent';
-
-const history = createHistory({
-  basename: '/',
-});
-
-jest.useFakeTimers();
-jest.spyOn(global, 'setTimeout');
 
 describe('It should test the Snackbar Component', () => {
   it('renders Snackbar Component', () => {
-    const handleCloseError = jest.fn();
     const container = render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <PositionedSnackbar handleCloseError={handleCloseError} />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    // const ele = container.getByTestId(/parent-snackbar-component/i);
-    // expect(ele).toBeInTheDocument();
-    // fireEvent.click(ele);
-    const transitionComponent = render(
-      <TransitionComponent
-        handleClose={() => jest.fn()}
-        isSuccess={false}
-        actionType={''}
-        messageToDisplay={''}
+      <PositionedSnackbar
+        handleCloseError={jest.fn()}
+        handleDefaultCloseSnackbar={jest.fn()}
+        messageToDisplay={'Hello This is Snackbar'}
+        isSuccess={true}
+        actionType={'add'}
       />
     );
-    // const spanEle = transitionComponent.getAllByTestId(/snackbar-close-button/i);
-    // fireEvent.click(spanEle[0]);
+    expect(container).toBeDefined();
+  });
+
+  it('Should trigger handleClose()', () => {
+    render(
+      <PositionedSnackbar
+        handleCloseError={jest.fn()}
+        handleDefaultCloseSnackbar={jest.fn()}
+        messageToDisplay={'Hello This is Snackbar'}
+        isSuccess={false}
+        actionType={''}
+      />
+    );
+    const closeBtn = screen.getByTestId('close-icon');
+    expect(closeBtn).toBeInTheDocument();
+    fireEvent.click(closeBtn);
   });
 });

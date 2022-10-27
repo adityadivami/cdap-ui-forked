@@ -29,6 +29,9 @@ export default function({
   messageToDisplay,
   actionType,
 }: ITransitionComponentProps) {
+  const undoActivity = () => {
+    // method where the recent activity on transformations in undone
+  };
   const classes = useStyles();
   return (
     <Box>
@@ -51,12 +54,20 @@ export default function({
           </Typography>
         </Box>
         <Box className={classes.operations}>
-          <Typography variant="body1" className={classes.dismissSpan} onClick={() => close()}>
+          <Typography
+            variant="body1"
+            className={classes.dismissSpan}
+            onClick={() => undoActivity()}
+          >
             {actionType === 'add' ? (
               'Undo'
             ) : (
               <Box>
-                <CloseIcon className={classes.cross} onClick={handleClose} />
+                <CloseIcon
+                  className={classes.cross}
+                  onClick={handleClose}
+                  data-testid="close-icon"
+                />
               </Box>
             )}
           </Typography>
