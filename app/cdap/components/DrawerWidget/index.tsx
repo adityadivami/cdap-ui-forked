@@ -33,7 +33,6 @@ export default function({
   anchor,
 }: IDrawerWidgetProps) {
   const classes = useStyles();
-  console.log(closeClickHandler, 'closeClickHandler');
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
