@@ -94,3 +94,41 @@ export const mockColumnDataForColumnList = [
     type: ['String'],
   },
 ];
+
+export const mockDataQualityValueForTableRow = [
+  {
+    label: 'body_0',
+    value: '0',
+  },
+  {
+    label: 'body_1',
+    value: '0',
+  },
+  {
+    label: 'body_2',
+    value: '0',
+  },
+];
+
+export const mockUtilsForNullValues = {
+  body_0: {
+    general: {
+      'non-null': 100,
+      null: 10,
+    },
+    types: {
+      Integer: 99.9,
+      'US Postal Codes': 0.1,
+      'US State': 0.1,
+      Text: 0.1,
+    },
+  },
+};
+
+export const mockColumnListForNullValues = [
+  {
+    name: 'body_0',
+    label: 'body_0',
+    type: ['String'],
+  },
+];

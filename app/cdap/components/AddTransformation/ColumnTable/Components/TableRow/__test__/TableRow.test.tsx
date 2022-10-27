@@ -14,51 +14,37 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import {
+  mockDataQualityValue,
+  mockDataQualityValueForTableRow,
+} from 'components/AddTransformation/mock/mockDataForAddTransformation';
+
 import React from 'react';
 import TableRow from '..';
 
 describe('It Should test TableRow Component', () => {
-  const mockSelectedColumns = [
-    {
-      label: 'body_5',
-      name: 'body_5',
-      type: ['String'],
-    },
-  ];
-
-  const mockDataQualityValue = [
-    {
-      label: 'body_0',
-      value: '0',
-    },
-    {
-      label: 'body_1',
-      value: '0',
-    },
-    {
-      label: 'body_2',
-      value: '0',
-    },
-  ];
-
-  const mockEachColumn = {
-    label: 'body_5',
-    name: 'body_5',
-    type: ['String'],
-  };
-
   it('Should test TableRow Component', () => {
     const container = render(
       <TableRow
         onSingleSelection={jest.fn()}
-        selectedColumns={mockSelectedColumns}
-        dataQualityValue={mockDataQualityValue}
+        selectedColumns={[
+          {
+            label: 'body_5',
+            name: 'body_5',
+            type: ['String'],
+          },
+        ]}
+        dataQualityValue={mockDataQualityValueForTableRow}
         isSingleSelection={false}
         handleDisableCheckbox={jest.fn()}
         onMultipleSelection={jest.fn()}
         index={0}
-        eachColumn={mockEachColumn}
+        eachColumn={{
+          label: 'body_5',
+          name: 'body_5',
+          type: ['String'],
+        }}
       />
     );
     expect(container).toBeDefined();

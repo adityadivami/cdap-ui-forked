@@ -49,4 +49,20 @@ describe('Should test ButtonWidget Component', () => {
     const buttonWidgetButton = container.getByTestId('select-column-button');
     fireEvent.click(buttonWidgetButton);
   });
+
+  it('Should should have Button Text as Select column', () => {
+    const container = render(
+      <ButtonWidget
+        buttonText={'Select column'}
+        disabled={false}
+        onClick={jest.fn()}
+        variant={'outlined'}
+        className={'makeStyles-selectButtonStyles-698'}
+        dataTestId={'select-column-button'}
+      />
+    );
+
+    const buttonWidgetButton = container.getByTestId('select-column-button');
+    expect(buttonWidgetButton).toHaveTextContent('Select column');
+  });
 });

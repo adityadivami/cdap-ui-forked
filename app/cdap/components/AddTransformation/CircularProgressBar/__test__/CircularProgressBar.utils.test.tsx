@@ -17,11 +17,19 @@
 import {
   mockStatistics,
   mockColumnList,
+  mockUtilsForNullValues,
+  mockColumnListForNullValues,
 } from 'components/AddTransformation/mock/mockDataForAddTransformation';
 import { prepareDataQualtiy } from '../utils';
 
 describe('It should test prepareDataQualtiy function', () => {
   it('mock prepareDataQuality function ', () => {
     expect(prepareDataQualtiy(mockStatistics, mockColumnList)).toStrictEqual([]);
+  });
+
+  it('mock prepareDataQuality function branching ', () => {
+    expect(prepareDataQualtiy(mockUtilsForNullValues, mockColumnListForNullValues)).toStrictEqual([
+      { label: 'body_0', value: 10 },
+    ]);
   });
 });

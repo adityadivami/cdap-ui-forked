@@ -18,7 +18,6 @@ import { IHeaderNamesList, IDataQuality, IRecords } from '../types';
 
 export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeaderNamesList[]) => {
   const dataQualityToArray: Array<Array<string | IRecords>> = Object.entries(statistics);
-
   const dataQuality = [] as IDataQuality[];
   columnList.map((columnName: IHeaderNamesList) => {
     dataQualityToArray.forEach(([key, value]) => {
@@ -28,6 +27,7 @@ export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeader
         >> = Object.entries(value);
         generalValues.forEach(([vKey, vValue]) => {
           if (vKey == 'general') {
+            console.log(vValue.null);
             if (vValue.null) {
               const nullCount = vValue.null || 0;
               const totalNullEmpty = nullCount;
