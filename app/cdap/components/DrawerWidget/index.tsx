@@ -33,17 +33,17 @@ export default function({
   anchor,
 }: IDrawerWidgetProps) {
   const classes = useStyles();
-  console.log();
+  console.log(closeClickHandler, 'closeClickHandler');
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
         <header className={classes.headerStyles}>
-          <Typography className={classes.headerTextWithBackIconStyles}>
+          <div className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && <ChevronLeftRoundedIcon className={classes.chevronLeftRounded} />}
             <DrawerWidgetHeading headingText={headingText} />
-          </Typography>
+          </div>
           <Box className={classes.headerRightStyles}>
-            {headerActionTemplate && <div>{headerActionTemplate}</div>}
+            {headerActionTemplate && <Typography>{headerActionTemplate}</Typography>}
             {showDivider && <div className={classes.dividerLineStyles} />}
             <CloseRoundedIcon
               className={classes.pointerStyles}
