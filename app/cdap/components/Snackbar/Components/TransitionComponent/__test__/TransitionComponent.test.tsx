@@ -1,18 +1,11 @@
-import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
-import TransitionComponent from '../index';
-import { Router, Switch, Route } from 'react-router';
-import { createBrowserHistory as createHistory } from 'history';
+import React from "react";
+import { render } from "@testing-library/react";
+import TransitionComponent from "../index";
+import { Router, Switch, Route } from "react-router";
+import history from "app/cdap/services/history";
 
-const history = createHistory({
-  basename: '/',
-});
-
-describe('Test Transition Component', () => {
-  const handleClose = jest.fn();
-
-  it('Should have rendered the component correctly with isSuccess as false', () => {
-    const handleClose = jest.fn();
+describe("Test Transition Component", () => {
+  it("Should have rendered the component correctly with isSuccess as false", () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -20,8 +13,8 @@ describe('Test Transition Component', () => {
             <TransitionComponent
               handleClose={() => jest.fn()}
               isSuccess={false}
-              actionType={''}
-              messageToDisplay={''}
+              actionType={""}
+              messageToDisplay={""}
             />
           </Route>
         </Switch>
@@ -30,8 +23,7 @@ describe('Test Transition Component', () => {
     expect(container).toBeDefined();
   });
 
-  it('Should have rendered the component correctly with isSuccess as false', () => {
-    const handleClose = jest.fn();
+  it("Should have rendered the component correctly with isSuccess as false", () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -39,8 +31,8 @@ describe('Test Transition Component', () => {
             <TransitionComponent
               handleClose={() => jest.fn()}
               isSuccess={true}
-              actionType={'add'}
-              messageToDisplay={''}
+              actionType={"add"}
+              messageToDisplay={""}
             />
           </Route>
         </Switch>
