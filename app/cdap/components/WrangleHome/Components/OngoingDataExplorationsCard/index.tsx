@@ -21,10 +21,7 @@ import CustomTooltip from '../CustomTooltip';
 import T from 'i18n-react';
 import { IOngoingDataExporationCardData } from './types';
 
-export default function OngoingDataExplorationCard({
-  item,
-  fromAddress,
-}: IOngoingDataExporationCardData) {
+export default function({ item, fromAddress }: IOngoingDataExporationCardData) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();

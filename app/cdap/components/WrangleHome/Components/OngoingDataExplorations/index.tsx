@@ -26,20 +26,9 @@ import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import T from 'i18n-react';
 import NoRecordScreen from 'components/NoRecordScreen';
+import { ICardCount } from './types';
 
-interface ICardCount {
-  cardCount?: number;
-  fromAddress: string;
-  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowExplorations?: React.Dispatch<React.SetStateAction<any>>;
-}
-
-export default function OngoingDataExplorations({
-  cardCount,
-  fromAddress,
-  setLoading,
-  setShowExplorations,
-}: ICardCount) {
+export default function({ cardCount, fromAddress, setLoading, setShowExplorations }: ICardCount) {
   const [finalArray, setFinalArray] = useState([]);
 
   const getOngoingData = useCallback(() => {

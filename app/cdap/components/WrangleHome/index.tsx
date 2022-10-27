@@ -28,8 +28,8 @@ import T from 'i18n-react';
 
 export default function WranglerHome() {
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
-  const [showExplorations, setShowExplorations] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showExplorations, setShowExplorations] = useState<boolean>(false);
   const cardCount = 2;
   return (
     <Box

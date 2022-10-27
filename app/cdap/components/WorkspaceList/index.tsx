@@ -26,7 +26,7 @@ import { useStyles } from './style';
 import T from 'i18n-react';
 
 export default function() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const classes = useStyles();
   return (
     <Box className={classes.wrapper} data-testid="workspace-list-parent">
@@ -38,7 +38,6 @@ export default function() {
         >
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
             <Typography className={classes.text}>
-              {' '}
               {T.translate('features.Breadcrumb.labels.wrangleHome')}
             </Typography>
           </Link>

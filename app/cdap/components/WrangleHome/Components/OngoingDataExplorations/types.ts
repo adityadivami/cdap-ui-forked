@@ -88,3 +88,10 @@ export interface IEachData {
   workspaceId: string;
   workspaceName: string;
 }
+
+export interface ICardCount {
+  cardCount?: number;
+  fromAddress: string;
+  setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowExplorations?: React.Dispatch<React.SetStateAction<boolean>>;
+}

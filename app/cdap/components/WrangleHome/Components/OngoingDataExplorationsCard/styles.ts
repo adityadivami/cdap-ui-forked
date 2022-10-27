@@ -19,20 +19,20 @@ import { green, red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   gridContainerHome: {
-    width: '1204px',
-    height: '77px',
+    width: 1204,
+    height: 77,
     border: '1px solid #DADCE0',
     borderRadius: '4px',
-    marginBottom: '10px',
+    marginBottom: 10,
     cursor: 'pointer',
     margin: '10px auto',
   },
   gridContainerWorkspaces: {
-    width: '1306px',
-    height: '77px',
+    width: 1306,
+    height: 77,
     border: '1px solid #DADCE0',
     borderRadius: '4px',
-    marginBottom: '10px',
+    marginBottom: 10,
     cursor: 'pointer',
     margin: '10px auto',
   },
