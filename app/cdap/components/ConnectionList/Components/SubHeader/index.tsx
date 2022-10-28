@@ -39,7 +39,7 @@ export default function SubHeader() {
           <Link
             color="inherit"
             to={`/ns/${getCurrentNamespace()}/home`}
-            id="connectionlist-subheader-1"
+            data-testid="breadcrumb-home-link"
           >
             {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
           </Link>

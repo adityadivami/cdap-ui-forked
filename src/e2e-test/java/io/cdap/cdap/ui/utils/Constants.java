@@ -41,6 +41,8 @@ public class Constants {
 
   public static final String DEFAULT_GCS_CONNECTION_NAME = "gcs_" + String.valueOf(getRandomArbitrary(1, 10000));
 
+  public static final String WRANGLE_HOME_URL = "http://localhost:11011/cdap/ns/default/home";
+
   // 000 to keep this bucket in the first 1000 entries
   // TODO Change back when we support > 1000 entries
   public static final String DEFAULT_GCS_FOLDER = "000cdap-gcp-ui-test";

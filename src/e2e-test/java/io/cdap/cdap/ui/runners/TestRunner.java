@@ -14,7 +14,6 @@
  * the License.
  */
 package io.cdap.cdap.ui.runners;
-
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
@@ -25,7 +24,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Cucumber.class)
 @CucumberOptions(
-  features = {"/src/e2e-test/features/"},
+  features = {"/Users/divami/Documents/cdap-ui-forked/src/e2e-test/features/breadcrumb.feature"},
   glue = {"io.cdap.cdap.ui.stepsdesign", "stepsdesign"},
   tags = {"not @ignore"},
   plugin = {"pretty", "html:target/cucumber-html-report/tethering",

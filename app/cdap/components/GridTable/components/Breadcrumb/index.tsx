@@ -40,7 +40,6 @@ export default function Breadcrumb({ workspaceName, location }) {
           className={`${classes.breadcrumbLabel} ${classes.home}`}
           to={`/ns/${getCurrentNamespace()}/home`}
           data-testid="breadcrumb-home-text"
-          id="breadcrumb-home-text"
         >
           {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
         </Link>
@@ -49,7 +48,6 @@ export default function Breadcrumb({ workspaceName, location }) {
           <Link
             to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
             data-testid="breadcrumb-data-sources-text"
-            id="breadcrumb-data-sources-text"
           >
             {location?.state?.from}
           </Link>

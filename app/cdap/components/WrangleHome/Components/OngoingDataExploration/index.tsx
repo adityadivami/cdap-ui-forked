@@ -116,7 +116,7 @@ export default function OngoingDataExploration() {
               },
             }}
             style={{ textDecoration: 'none' }}
-            data-testid="ongoingdataexplorations-link-1"
+            data-testid="ongoingdataexplorations-link-card"
           >
             {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
           </Link>

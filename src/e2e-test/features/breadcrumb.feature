@@ -16,20 +16,23 @@
 
 @Integration_Tests
 Feature: Breadcrumb - Navigate to the application
+
   @Breadcrumb
   Scenario: Navigate to the Data Source
     Given Navigate to the home page
-    Then  Click on the Data source
+    Then  Click on the connector type
     Then Click on the first tab of second column
     Then Click on the first tab of third column
     Then Hover&Click on the Wrangler
-    Then Click on the Home link
-    Then Click on the Data source
+    Then Click on the Home link of wrangle page
+    Then Check the url is equal to home url text
+    Then Click on the connector type
     Then Click on the first tab of second column
     Then Click on the first tab of third column
     Then Hover&Click on the Wrangler
     Then Click on the Data Sources link
+    Then Check the url is equal to Datasource url text
     Then Click on the Home link button
     Then Click on the Exploration card
-    Then Click on the Home link
-    Then Check the user navigated back to home page or not
+    Then Click on the Home link of wrangle page
+    Then Check the url is equal to home url text

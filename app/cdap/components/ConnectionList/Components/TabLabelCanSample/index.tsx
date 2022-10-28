@@ -142,7 +142,7 @@ export default function TabLabelCanSample({
         <Typography
           variant="body2"
           className={classes.wrangleButton}
-          id="tablabelcansample-typography-2"
+          data-testid="loadtogrid-wrangle-button"
         >
           {T.translate('features.WranglerNewUI.Breadcrumb.labels.loadToGrid')}
         </Typography>

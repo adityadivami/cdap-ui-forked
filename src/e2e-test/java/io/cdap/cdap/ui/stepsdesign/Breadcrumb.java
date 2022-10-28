@@ -29,66 +29,76 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import io.cdap.e2e.utils.SeleniumDriver;
+import io.cdap.cdap.ui.utils.Constants;
 
 public class Breadcrumb {
-    ChromeDriver driver;
+
+
 
     @Given("Navigate to the home page")
     public void navigateToTheHomePage() {
-        driver = new ChromeDriver();
-        driver.get("http://localhost:11011/cdap/ns/default/home");
+
+        SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
 
-    @Then("Click on the Data source")
+    @Then("Click on the connector type")
     public void clickOnTheDatasource() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.cssSelector(Helper.getCssSelectorByDataTestId("wranglecard-link-1"))).click();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("wranglecard-link-1"));
     }
 
     @Then("Click on the first tab of second column")
     public void clickOnTheFirstTabOfSecondColumn() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.cssSelector(Helper.getCssSelectorByDataTestId("connectionlist-connectiontabs-tabs-loop-1-0"))).click();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("connectionlist-connectiontabs-tabs-loop-exl"));
     }
     @Then("Click on the first tab of third column")
     public void clickOnTheFirstTabOfThirdColumn() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("connectionlist-connectiontabs-tabs-loop-2-0")).click();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("connectionlist-connectiontabs-tabs-loop-information_schema"));
     }
     @When("Hover&Click on the Wrangler")
     public void hoverAndClickOnTheWrangler() {
         WaitHelper.waitForPageToLoad();
-        WebElement ele = driver.findElement(By.id("connectionlist-connectiontabs-label-loop-3-0"));
-        Actions action = new Actions(driver);
+        WebElement ele = Helper.locateElementByTestId("connectionlist-connectiontabs-tabs-loop-sql_features");
+        Actions action = new Actions(SeleniumDriver.getDriver());
         WaitHelper.waitForPageToLoad();
         action.moveToElement(ele).perform();
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("tablabelcansample-typography-2")).click();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("loadtogrid-wrangle-button"));
     }
     @Then("Click on the Data Sources link")
     public void clickONTheDataSourcesLink() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("breadcrumb-data-sources-text")).click();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-data-sources-text"));
     }
-    @Then("Click on the Home link")
+    @Then("Check the url is equal to Datasource url text")
+    public void dataSourcesText() {
+        WaitHelper.waitForPageToLoad();
+        String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
+        Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/datasources/PostgreSQL");
+    }
+    @Then("Click on the Home link of wrangle page")
     public void clickOnTheHomeLink() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("breadcrumb-home-text")).click();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-text"));
     }
     @Then("Click on the Home link button")
     public void clickOnTheHomeLinkButton() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("connectionlist-subheader-1")).click();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-link"));
     }
     @Then("Click on the Exploration card")
     public void clickOnTheExplorationCard() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.cssSelector(Helper.getCssSelectorByDataTestId("ongoingdataexplorations-link-1"))).click();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoingdataexplorations-link-card"));
     }
-    @Then("Check the user navigated back to home page or not")
+    @Then("Check the url is equal to home url text")
     public void dashboard() {
         WaitHelper.waitForPageToLoad();
-        WebElement text= driver.findElement(By.id("wranglehome-1"));
+        String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
+        Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/home");
     }
 }
