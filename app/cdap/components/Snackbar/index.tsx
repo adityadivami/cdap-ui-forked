@@ -62,7 +62,7 @@ export default function({
         <TransitionComponent
           handleClose={() => handleClose()}
           isSuccess={isSuccess}
-          messageToDisplay={messageToDisplay}
+          messageToDisplay={messageToDisplay && ''}
           actionType={actionType}
         />
       )}

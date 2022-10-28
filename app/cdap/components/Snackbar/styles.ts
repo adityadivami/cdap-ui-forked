@@ -29,7 +29,6 @@ export const useStyles = makeStyles({
     minHeight: 76,
   },
   success: {
-    boxShadow: '2px 2px 8px #61616133;',
     width: '100%',
     top: '48px !important',
     backgroundColor: green[600],

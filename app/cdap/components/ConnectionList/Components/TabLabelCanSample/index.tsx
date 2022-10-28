@@ -20,13 +20,12 @@ import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import { WrangleIcon } from 'components/ConnectionList/icons';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
-import { IRecords } from 'components/GridTable/types';
 import T from 'i18n-react';
 import React, { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import useStyles from './styles';
-import { IMessageState } from './types';
+import useStyles from 'components/ConnectionList/Components/TabLabelCanSample/styles';
+import { ITableSampleCanSampleProps } from 'components/ConnectionList/Components/TabLabelCanSample/types';
 
 export default function({
   label,
@@ -34,13 +33,7 @@ export default function({
   initialConnectionId,
   toggleLoader,
   setToaster,
-}: {
-  label: string;
-  entity: IRecords;
-  initialConnectionId: string;
-  toggleLoader: (value: boolean, isError?: boolean) => void;
-  setToaster: React.Dispatch<React.SetStateAction<IMessageState>>;
-}) {
+}: ITableSampleCanSampleProps) {
   const classes = useStyles();
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
@@ -96,13 +89,13 @@ export default function({
         if (res) {
           setToaster({
             open: true,
-            message: `${T.translate('features.WranglerNewUI.Snackbar.labels.datasetSuccess')}`, // Success Messages can be appended here
+            message: `${T.translate('features.WranglerNewUI.Snackbar.labels.datasetSuccess')}`,
             isSuccess: true,
           });
           setTimeout(() => {
             setWorkspaceId(res);
           }, 2000);
-          // TODO: this setTimeout needs to be removed after getting merged with Destination branch
+          // TODO: this setTimeout needs to be removed after getting merged with Destination(test/unit-tests-for-m1) branch
           toggleLoader(false);
         }
       })
@@ -110,7 +103,7 @@ export default function({
         toggleLoader(false);
         setToaster({
           open: true,
-          message: `${T.translate('features.WranglerNewUI.Snackbar.labels.sampleFailure')}`, // -----Error Message can be sent here
+          message: `${T.translate('features.WranglerNewUI.Snackbar.labels.sampleFailure')}`,
           isSuccess: false,
         });
       });

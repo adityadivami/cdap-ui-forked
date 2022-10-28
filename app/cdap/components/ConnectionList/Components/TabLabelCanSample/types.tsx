@@ -14,6 +14,15 @@
  *  the License.
  */
 import React from 'react';
+import { IRecords } from 'components/GridTable/types';
+
+export interface ITableSampleCanSampleProps {
+  label: string;
+  entity: IRecords;
+  initialConnectionId: string;
+  toggleLoader: (value: boolean, isError?: boolean) => void;
+  setToaster: React.Dispatch<React.SetStateAction<IMessageState>>;
+}
 
 export interface IMessageState {
   open: boolean;
@@ -23,6 +32,6 @@ export interface IMessageState {
 
 export interface ISnackbarToast {
   open: boolean;
-  message: string;
-  isSuccess: boolean;
+  message?: string;
+  isSuccess?: boolean;
 }

@@ -14,8 +14,24 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
+import { Box, styled } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 import blue from '@material-ui/core/colors/blue';
+import { makeStyles } from '@material-ui/styles';
+
+export const SelectDatasetWrapper = styled(Box)({
+  overflowX: 'scroll',
+  display: 'flex',
+  borderTop: `1px solid ${grey[300]}`,
+
+  height: '100%',
+  '& > :first-child': {
+    minWidth: '280px',
+  },
+  '& > :not(:first-child)': {
+    minWidth: '300px',
+  },
+});
 
 const useStyles = makeStyles({
   labelsContainerCanSample: {

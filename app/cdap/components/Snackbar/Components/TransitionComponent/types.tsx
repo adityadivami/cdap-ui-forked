@@ -18,5 +18,5 @@ export interface ITransitionComponentProps {
   handleClose: () => void;
   isSuccess: boolean;
   actionType: string;
-  messageToDisplay: string;
+  messageToDisplay?: string;
 }

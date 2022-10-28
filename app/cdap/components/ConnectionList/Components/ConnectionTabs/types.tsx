@@ -14,10 +14,25 @@
  * the License.
  */
 
-export interface ISnackbarProps {
-  handleCloseError: () => void;
-  handleDefaultCloseSnackbar?: () => void;
-  messageToDisplay?: string;
-  isSuccess?: boolean;
-  actionType?: string;
+import { ISnackbarToast } from '../TabLabelCanSample/types';
+
+export interface IRecords {
+  [key: string]: string | number | IRecords | boolean;
+}
+
+export interface ITabsData {
+  data: any[];
+  showTabs: boolean;
+  selectedTab: string;
+  isSearching: boolean;
+}
+
+export interface IConnectionTabsProps {
+  tabsData: ITabsData;
+  handleChange: (entity: IRecords, index: number) => void;
+  value: string;
+  index: number;
+  connectionId: string;
+  setToaster: React.Dispatch<React.SetStateAction<ISnackbarToast>>;
+  toggleLoader: (value: boolean, isError?: boolean) => void;
 }

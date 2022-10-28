@@ -14,22 +14,18 @@
  * the License.
  */
 
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import WrangleCard from '../index';
-import * as reducers from 'components/Connections/Create/reducer';
+import history from 'app/cdap/services/history';
 import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
+import * as reducers from 'components/Connections/Create/reducer';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import { createBrowserHistory as createHistory } from 'history';
+import WrangleCard from '../index';
 import {
-  wrangleCardFetchConnectors,
-  wrangleCardDummyResPostGresSql,
   wrangleCardDummyResFile,
+  wrangleCardDummyResPostGresSql,
+  wrangleCardFetchConnectors,
 } from '../mock/wrangleCardMockData';
-
-const history = createHistory({
-  basename: '/',
-});
 
 describe('Testing the Wrangle Card Component', () => {
   test('Should check whether WrangleCard Component is rendered or not', () => {
