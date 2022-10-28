@@ -40,7 +40,11 @@ export default function({ selectedConnection }: ISubHeader) {
     >
       <Box>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-          <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
+          <Link
+            color="inherit"
+            to={`/ns/${getCurrentNamespace()}/home`}
+            data-testid="breadcrumb-home-link"
+          >
             {T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome')}
           </Link>
           <Typography className={classes.breadcrumbTyporgraphy}>
