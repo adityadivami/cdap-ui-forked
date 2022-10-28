@@ -33,35 +33,35 @@ export const MENU_OPTIONS = [
       {
         value: 'character-encoding-utf8',
         label: 'UTF-8',
-        supported_dataType: ['all'],
+        supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-utf16',
         label: 'UTF-16',
-        supported_dataType: ['all'],
+        supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-us-ascii',
         label: 'US-ASCII',
-        supported_dataType: ['all'],
+        supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-iso-8859-1',
         label: 'ISO-8859-1',
-        supported_dataType: ['all'],
+        supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-utf16-be',
         label: 'UTF-16BE',
-        supported_dataType: ['all'],
+        supported_dataType: ['byte'],
       },
       {
         value: 'character-encoding-utf16-le',
         label: 'UTF-16LE',
-        supported_dataType: ['all'],
+        supported_dataType: ['byte'],
       },
     ],
-    supported_dataType: ['all'],
+    supported_dataType: ['byte'],
   },
   // {
   //   value: 'divider',
