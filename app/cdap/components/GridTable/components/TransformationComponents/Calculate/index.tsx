@@ -14,14 +14,13 @@
  * the License.
  */
 
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CALCULATE_OPTIONS } from '../../NestedMenu/menuOptions/calculateOptions';
 import FormInputFieldComponent from '../InputComponents/FormInputFieldComponent';
-import { FormGroup, FormHelperText, Box, Typography } from '@material-ui/core';
+import { FormGroup, Box, Typography } from '@material-ui/core';
 import { useStyles } from '../styles';
 import InputCheckbox from '../InputComponents/InputCheckbox';
 import T from 'i18n-react';
-import LabelComponent from '../InputComponents/LabelInputComponent';
 import { ICalculateProps } from './types';
 import NewColumnInput from '../InputComponents/NewColumnInput';
 
@@ -56,7 +55,7 @@ export default function({
 
   return (
     <Box className={classes.calculateWrapper}>
-      {UI_INPUT.length > 0 &&
+      {UI_INPUT?.length > 0 &&
         UI_INPUT.map((item) =>
           item.value === 'CHARCOUNT' ? (
             <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
