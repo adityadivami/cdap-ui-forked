@@ -55,7 +55,7 @@ export default function TabLabelCanBrowse({
       title={label}
       arrow
       key={`tooltip-${index}`}
-      data-testid="connections-tab-ref-label-browse"
+      data-testid={`connections-tab-ref-label-browse-${label}`}
     >
       <Box className={classes.labelContainerBox}>
         <Box className={classes.labelsContainer}>
@@ -78,14 +78,17 @@ export default function TabLabelCanBrowse({
       </Box>
     </CustomTooltip>
   ) : (
-    <Box className={classes.labelContainerBox} data-testid="connections-tab-label-browse">
+    <Box
+      className={classes.labelContainerBox}
+      data-testid={`connections-tab-label-browse-${label}`}
+    >
       <Box className={classes.labelsContainer}>
         {icon && <Box>{icon}</Box>}
         <Typography
           variant="body1"
           className={classes.labelStyles}
           ref={myLabelRef}
-          data-testid="connections-tab-label-browse-body1"
+          data-testid={`connections-tab-label-browse-body1-${label}`}
         >
           {label}
         </Typography>

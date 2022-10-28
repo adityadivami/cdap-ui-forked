@@ -32,6 +32,12 @@ public class ConnectorTypes {
         ElementHelper.clickOnElement(
                 Helper.locateElementByTestId("item2"));
     }
+    @Then("Click on the another Connector type in Data Sources page")
+    public void clickOnTheAnotherConnectorType() {
+        WaitHelper.waitForPageToLoad();
+        ElementHelper.clickOnElement(
+                Helper.locateElementByTestId("connections-tab-label-browse-File"));
+    }
     @Then("Click on the Home link in Data Sources page")
     public void clickOnTheHomeLinkInDataSourcesPage() {
         WaitHelper.waitForPageToLoad();

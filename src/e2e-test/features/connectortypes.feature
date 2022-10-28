@@ -22,6 +22,7 @@ Feature: Navigating through the connector types
     Then Click on the View all option
     Then Click on the Home link
     Then Click on the Connector type card
+    Then Click on the another Connector type in Data Sources page
     Then Click on the Home link in Data Sources page
     Then Click on the Exploration card
     Then Click on the Home link on wrangle page
