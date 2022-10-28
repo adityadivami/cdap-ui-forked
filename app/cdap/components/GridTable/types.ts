@@ -14,6 +14,8 @@
  * the License.
  */
 
+import { IDirectiveComponentValues } from 'components/AddTransformation/types';
+
 export interface IParams {
   context: string | number | IRecords;
   workspaceId: string;
@@ -80,4 +82,21 @@ export interface IApiPayload {
   payload: IRecords;
   requestBody: IRequestBody;
   gridParams: IGridParams;
+}
+
+export interface IDirectiveContentParams {
+  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
+  directiveComponents: IDirectiveComponentType[];
+  directiveComponentValues: IDirectiveComponentValues;
+  functionName: string;
+}
+
+export interface IDirectiveComponentType {
+  type: string;
+  component: (props: IDirectiveComponentProps) => JSX.Element;
+}
+
+export interface IDirectiveComponentProps {
+  directiveComponentValues: IDirectiveComponentValues;
+  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
 }

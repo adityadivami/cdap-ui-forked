@@ -214,7 +214,7 @@ export default function GridTable() {
     setDirectiveFunctionSupportedDataType(supported_dataType);
   };
 
-  const applyDirectives = (directive: string) => {
+  const applyDirective = (directive: string) => {
     setLoading(true);
     if (directive) {
       const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
@@ -321,8 +321,9 @@ export default function GridTable() {
             setDirectiveFunction('');
           }}
           applyTransformation={(directive: string) => {
-            applyDirectives(directive);
+            applyDirective(directive);
           }}
+          setLoading={setLoading}
         />
       )}
       {loading && (
