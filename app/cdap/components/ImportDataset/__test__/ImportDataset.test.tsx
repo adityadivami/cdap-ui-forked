@@ -18,23 +18,20 @@ import { render } from '@testing-library/react';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import DrawerWidget from 'components/DrawerWidget/index';
+// import DrawerWidget from 'components/DrawerWidget/index';
+import DastaSet from 'components/ImportDataset/index';
 import history from 'services/history';
 
 describe('It should test DrawerWidget Component', () => {
   it('Should test whether DrawerWidget Component is rendered', () => {
-    const setDrawerStatus = jest.fn();
-    const closeClickHandler = () => {
-      setDrawerStatus(false);
-    };
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <DrawerWidget
-              openDrawer={jest.fn}
-              showDivider={true}
-              closeClickHandler={closeClickHandler}
+            <DastaSet
+              handleClosePanel={() => {
+                jest.fn();
+              }}
             />
           </Route>
         </Switch>
