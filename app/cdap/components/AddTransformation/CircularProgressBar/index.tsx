@@ -18,6 +18,7 @@ import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useStyles } from './styles';
 import styled from 'styled-components';
+import { ICircularBarProps } from './type';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -33,7 +34,7 @@ const ArcContainer = styled(Typography)`
   transform: ${(props) => `rotate(${45 + parseInt(props.value) * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
-const MatchMeter: React.FC<{ value: string }> = ({ value }) => {
+export default function({ value }: ICircularBarProps) {
   const classes = useStyles();
 
   return (
@@ -55,6 +56,4 @@ const MatchMeter: React.FC<{ value: string }> = ({ value }) => {
       </Typography>
     </>
   );
-};
-
-export default MatchMeter;
+}

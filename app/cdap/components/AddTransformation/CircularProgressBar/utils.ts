@@ -19,31 +19,33 @@ import { IHeaderNamesList, IDataQuality, IRecords } from '../types';
 export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeaderNamesList[]) => {
   const dataQualityToArray: any = statistics ? Object.entries(statistics) : '';
   const dataQuality = [] as IDataQuality[];
-  columnList.map((columnName: IHeaderNamesList) => {
-    dataQualityToArray.forEach(([key, value]) => {
-      if (columnName.name == key) {
-        const generalValues:
-          | Array<Array<string | number | boolean | IRecords>>
-          | any = Object.entries(value);
-        generalValues.forEach(([vKey, vValue]) => {
-          if (vKey == 'general') {
-            if (vValue.null) {
-              const nullCount = vValue.null || 0;
-              const totalNullEmpty = nullCount;
-              dataQuality.push({
-                label: key,
-                value: totalNullEmpty,
-              });
-            } else {
-              dataQuality.push({
-                label: key,
-                value: '0',
-              });
-            }
-          }
-        });
-      }
+  columnList.length &&
+    columnList.map((columnName: IHeaderNamesList) => {
+      dataQualityToArray.forEach(([key, value]) => {
+        if (columnName.name == key) {
+          const generalValues:
+            | Array<Array<string | number | boolean | IRecords>>
+            | any = Object.entries(value);
+          generalValues.length &&
+            generalValues.forEach(([vKey, vValue]) => {
+              if (vKey == 'general') {
+                if (vValue.null) {
+                  const nullCount = vValue.null || 0;
+                  const totalNullEmpty = nullCount;
+                  dataQuality.push({
+                    label: key,
+                    value: totalNullEmpty,
+                  });
+                } else {
+                  dataQuality.push({
+                    label: key,
+                    value: '0',
+                  });
+                }
+              }
+            });
+        }
+      });
     });
-  });
   return dataQuality;
 };

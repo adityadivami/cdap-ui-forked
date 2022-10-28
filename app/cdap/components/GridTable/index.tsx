@@ -43,6 +43,7 @@ import {
 } from 'components/GridTable/types';
 import { convertNonNullPercent } from 'components/GridTable/utils';
 import AddTransformation from 'components/AddTransformation';
+import { IDataQuality } from 'components/AddTransformation/types';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -56,7 +57,7 @@ export default function GridTable() {
   const [headerNamesList, setheaderNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
-  const [missingDataList, setMissingDataList] = useState([] as IDataQuality[]);
+  const [missingDataList, setMissingDataList] = useState<IDataQuality[]>([]);
   const [workspaceName, setWorkspaceName] = useState('');
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
@@ -65,9 +66,9 @@ export default function GridTable() {
     },
   ]);
   const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
-  const [directiveFunction, setDirectiveFunction] = useState('');
+  const [directiveFunction, setDirectiveFunction] = useState<string>('');
   const [directiveFunctionSupportedDataType, setDirectiveFunctionSupportedDataType] = useState([]);
-  const [dataQuality, setDataQuality] = useState({} as IDataQuality);
+  const [dataQuality, setDataQuality] = useState<IDataQuality>({});
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -152,7 +153,7 @@ export default function GridTable() {
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
   const createMissingData = (statistics: IObject) => {
-    const statisticObjectToArray = statistics ? Object.entries(statistics) : '';
+    const statisticObjectToArray = statistics ? Object.entries(statistics) : [];
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
       const headerKeyTypeArray = Object.entries(value);
