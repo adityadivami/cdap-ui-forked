@@ -50,7 +50,7 @@ import { convertNonNullPercent } from './utils';
 import AddTransformation from 'components/AddTransformation';
 import { getAPIRequestPayload } from './services';
 
-export default function GridTable() {
+export default function() {
   const { wid } = useParams() as IRecords;
 
   const params = useParams() as IRecords;
