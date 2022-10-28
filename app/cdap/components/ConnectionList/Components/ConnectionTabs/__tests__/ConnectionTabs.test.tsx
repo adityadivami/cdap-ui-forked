@@ -29,10 +29,12 @@ describe('Test ConnectionsTabs', () => {
         tabsData={mockTabsTestData}
         handleChange={() => null}
         value="apple"
-        index="0"
+        index={0}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-        setToaster={true}
+        setToaster={jest.fn}
+        toggleLoader={function(value: boolean, isError?: boolean): void {
+          throw new Error('Function not implemented.');
+        }}
       />
     );
     const ele = screen.getByTestId(/connections-tabs-parent/i);
@@ -45,10 +47,12 @@ describe('Test ConnectionsTabs', () => {
         tabsData={mockTabsTestData}
         handleChange={() => null}
         value="apple"
-        index="1"
+        index={1}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-        setToaster={true}
+        setToaster={jest.fn}
+        toggleLoader={function(value: boolean, isError?: boolean): void {
+          throw new Error('Function not implemented.');
+        }}
       />
     );
     const ele = screen.getByTestId(/connection-tabs/i);
@@ -63,8 +67,10 @@ describe('Test ConnectionsTabs', () => {
         value="apple"
         index={0}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-        setToaster={true}
+        setToaster={jest.fn}
+        toggleLoader={function(value: boolean, isError?: boolean): void {
+          throw new Error('Function not implemented.');
+        }}
       />
     );
     const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
@@ -80,10 +86,12 @@ describe('Should test whether handleChange function is triggered or not', () => 
         tabsData={mockTabsTestData}
         handleChange={handleChange}
         value="apple"
-        index="1"
+        index={1}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-        setToaster={true}
+        setToaster={jest.fn}
+        toggleLoader={function(value: boolean, isError?: boolean): void {
+          throw new Error('Function not implemented.');
+        }}
       />
     );
     const ele = screen.getAllByTestId(/connections-tab-button/i);
@@ -101,10 +109,12 @@ describe('Should test whether handleChange function is triggered or not', () => 
               tabsData={mockTabsTestData}
               handleChange={handleChange}
               value="apple"
-              index="2"
+              index={2}
               connectionId={undefined}
-              setIsErrorOnNoWorkSpace={jest.fn()}
-              setToaster={true}
+              setToaster={jest.fn}
+              toggleLoader={function(value: boolean, isError?: boolean): void {
+                throw new Error('Function not implemented.');
+              }}
             />
           </Route>
         </Switch>
@@ -125,10 +135,12 @@ describe('Should test whether handleChange function is triggered or not', () => 
               tabsData={mockTabsDataWithBrowse}
               handleChange={handleChange}
               value="apple"
-              index="2"
+              index={2}
               connectionId={undefined}
-              setIsErrorOnNoWorkSpace={jest.fn()}
-              setToaster={true}
+              setToaster={jest.fn}
+              toggleLoader={function(value: boolean, isError?: boolean): void {
+                throw new Error('Function not implemented.');
+              }}
             />
           </Route>
         </Switch>
@@ -150,10 +162,12 @@ describe('Should test whether handleChange function is triggered or not', () => 
               tabsData={mockTabsDataWithBrowse}
               handleChange={handleChange}
               value="apple"
-              index="2"
+              index={2}
               connectionId={undefined}
-              setIsErrorOnNoWorkSpace={jest.fn()}
-              setToaster={true}
+              setToaster={jest.fn}
+              toggleLoader={function(value: boolean, isError?: boolean): void {
+                throw new Error('Function not implemented.');
+              }}
             />
           </Route>
         </Switch>

@@ -15,8 +15,8 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import history from 'app/cdap/services/history';
+import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import TabLabelCanSample from '../index';

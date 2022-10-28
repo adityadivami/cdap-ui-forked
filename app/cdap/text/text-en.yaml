@@ -3413,18 +3413,6 @@ features:
         title: Configure a pipeline
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
-  NoRecordScreen:
-    gridTable:
-      title: 'No rows left in this sample'
-      subtitle: 'Remove some recipe steps to view some data'
-  Breadcrumb:
-    labels:
-      connectionsList: 'Data Sources'
-      wrangleHome: 'Home'
-      loadToGrid: 'Wrangle'
-    params:
-      wrangleHome: 'home'
-      connectionsList: 'datasources'
   AddConnections:
     referenceLabel: 'Add Connection'
   ImportData:
@@ -3449,4 +3437,16 @@ features:
         sampleFailure: Failed to retrieve sample data
         success: Success
         failure: Failure
+    NoRecordScreen:
+      gridTable:
+        title: 'No rows left in this sample'
+        subtitle: 'Remove some recipe steps to view some data'
+    Breadcrumb:
+      labels:
+        connectionsList: 'Data Sources'
+        wrangleHome: 'Home'
+        loadToGrid: 'Wrangle'
+      params:
+        wrangleHome: 'home'
+        connectionsList: 'datasources'
 
