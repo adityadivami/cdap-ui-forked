@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -16,7 +18,7 @@
 interface IClasses {
   [key: string]: string;
 }
-interface IObject {
+export interface IObject {
   [key: string]: string;
 }
 interface IInput {
@@ -53,4 +55,23 @@ export interface INewColumnProps {
   column: string;
   setColumnName: React.Dispatch<React.SetStateAction<string>>;
   isError: boolean;
+}
+
+export interface ISelectOptions {
+  label: string;
+  value: string;
+  isInputRequired?: boolean;
+  isCheckboxRequired?: boolean;
+  directive?: (condition: string, column: string, ignoreCase: boolean, textValue: string) => string;
+}
+export interface ISelectColumnProps {
+  optionSelected: string;
+  setOptionSelected: React.Dispatch<React.SetStateAction<string>>;
+  options: ISelectOptions[];
+  customInput: string;
+  setCustomInput: React.Dispatch<React.SetStateAction<string>>;
+  customInputPlaceHolder: string;
+  checkboxValue: boolean;
+  setCheckboxValue: React.Dispatch<React.SetStateAction<boolean>>;
+  checkboxLabel: string;
 }

@@ -14,10 +14,11 @@
  * the License.
  */
 import React, { useState } from 'react';
-import { Box, MenuItem, FormControl, Select, FormGroup } from '@material-ui/core';
+import { MenuItem, FormControl, Select, FormGroup } from '@material-ui/core';
 import FormInputFieldComponent from '../FormInputFieldComponent';
 import { useStyles } from '../../styles';
 import InputCheckbox from '../InputCheckbox';
+import { ISelectColumnProps, ISelectOptions } from '../types';
 
 export default function({
   optionSelected,
@@ -29,32 +30,41 @@ export default function({
   checkboxValue,
   setCheckboxValue,
   checkboxLabel,
-}) {
-  const [inputRequired, setInputRequired] = useState(false);
-  const [checkboxRequired, setCheckboxRequired] = useState(false);
+}: ISelectColumnProps) {
+  const [inputRequired, setInputRequired] = useState<boolean>(false);
+  const [checkboxRequired, setCheckboxRequired] = useState<boolean>(false);
 
   const classes = useStyles();
-  const handleChange = (event, item) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setOptionSelected(event.target.value);
   };
 
-  const onOptionClick = (item) => {
-    setInputRequired(item.isInputRequired);
-    setCheckboxRequired(item.isCheckboxRequired);
+  const onOptionClick = (item: ISelectOptions) => {
+    setInputRequired(item?.isInputRequired);
+    setCheckboxRequired(item?.isCheckboxRequired);
   };
 
   return (
-    <Box>
-      <FormGroup>
-        <Select value={optionSelected} onChange={handleChange}>
+    <>
+      <FormControl classes={{ root: classes.selectFormGroup }}>
+        <Select
+          value={optionSelected}
+          onChange={handleChange}
+          classes={{ root: classes.selectInputRoot }}
+          disableUnderline
+        >
           {options?.length > 0 &&
             options.map((item) => (
-              <MenuItem onClick={() => onOptionClick(item)} value={item.value}>
+              <MenuItem
+                classes={{ root: classes.menuItemText }}
+                onClick={() => onOptionClick(item)}
+                value={item.value}
+              >
                 {item.label}
               </MenuItem>
             ))}
         </Select>
-      </FormGroup>
+      </FormControl>
       {inputRequired && (
         <FormGroup>
           <FormInputFieldComponent
@@ -64,7 +74,7 @@ export default function({
               type: 'text',
               value: customInput,
               classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-              onChange: (e) => setCustomInput(e.target.value),
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCustomInput(e.target.value),
               color: 'primary',
               placeholder: customInputPlaceHolder,
             }}
@@ -73,12 +83,14 @@ export default function({
             <InputCheckbox
               label={checkboxLabel}
               value={checkboxValue}
-              onChange={(e) => setCheckboxValue(e.target.checked)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setCheckboxValue(e.target.checked)
+              }
               className={classes.checkboxStyles}
             />
           )}
         </FormGroup>
       )}
-    </Box>
+    </>
   );
 }

@@ -44,7 +44,7 @@ export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
 export const transformationComponentDefaultValues = {
   customInput: '',
   ignoreCase: false,
-  filterOptionSelected: '',
+  filterOptionSelected: 'EMPTY',
   filterOptionValue: '',
-  filterRadioOption: '',
+  filterRadioOption: 'KEEP',
 };

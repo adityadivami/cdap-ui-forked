@@ -13,3 +13,11 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
+import { ITransformationComponentValues } from '../../../../AddTransformation/types';
+export interface IFilterProps {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
+}
