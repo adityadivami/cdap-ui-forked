@@ -14,21 +14,92 @@
  * the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-// import WidgetData from 'components/WrangleHome/Components/WrangleCard/WidgetData/index';
+import {
+  mockConnectorTypeData,
+  mockConnectorTypeWithDuplicates,
+  mockConnectorTypeWithNoCategory,
+  mockConnectorTypeWithoutDuplicates,
+} from '../mock/mockForWidgetData';
 import { getCategoriesToConnectorsMap } from '../utils';
-import * as highestVersion from 'services/VersionRange/VersionUtilities';
 
 describe('Test Utils function', () => {
-  // findHighestVersion
+  const mockReturnedValueWithConnectorType = new Map();
+  mockReturnedValueWithConnectorType.set('Database', [
+    {
+      artifact: {
+        name: 'postgresql-plugin',
+        scope: 'SYSTEM',
+        version: '1.9.0-SNAPSHOT',
+      },
+      category: 'Database',
+      className: 'io.cdap.plugin.postgres.PostgresConnector',
+      description: 'Connection to access data in PostgreSQL databases using JDBC.',
+      name: 'PostgreSQL',
+      olderVersions: [],
+      type: 'connector',
+    },
+  ]);
+  mockReturnedValueWithConnectorType.set('File', [
+    {
+      artifact: {
+        name: 'core-plugins',
+        scope: 'SYSTEM',
+        version: '2.10.0-SNAPSHOT',
+      },
+      category: 'File',
+      className: 'io.cdap.plugin.batch.connector.FileConnector',
+      description: 'Connection to browse and sample data from the local file system.',
+      name: 'File',
+      olderVersions: [],
+      type: 'connector',
+    },
+  ]);
 
-  jest.spyOn(highestVersion, 'findHighestVersion').mockReturnValue({});
-  it('Should invoke the utils function', () => {
-    const dummy = [{ artifact: { name: 'batman' }, name: 'superman' }];
-    getCategoriesToConnectorsMap(dummy);
+  const mockReturnedValue = new Map();
+  mockReturnedValue.set('postgresql-plugin', [
+    {
+      artifact: {
+        name: 'postgresql-plugin',
+        scope: 'SYSTEM',
+        version: '1.9.0-SNAPSHOT',
+      },
+      className: 'io.cdap.plugin.postgres.PostgresConnector',
+      description: 'Connection to access data in PostgreSQL databases using JDBC.',
+      name: 'PostgreSQL',
+      olderVersions: [],
+      type: 'connector',
+    },
+  ]);
+  it('Should invoke the utils with ConnectorTypeData', () => {
+    getCategoriesToConnectorsMap(mockConnectorTypeData);
+    expect(getCategoriesToConnectorsMap(mockConnectorTypeData)).toStrictEqual(
+      mockReturnedValueWithConnectorType
+    );
   });
-  it('Should invoke the utils function', () => {
+
+  it('Should invoke the utils function with no parameters', () => {
+    const mockReturnedValue = new Map();
     getCategoriesToConnectorsMap(undefined);
+    expect(getCategoriesToConnectorsMap(undefined)).toStrictEqual(mockReturnedValue);
+  });
+
+  it('Should invoke the function when there is no category', () => {
+    getCategoriesToConnectorsMap(mockConnectorTypeWithNoCategory);
+    expect(getCategoriesToConnectorsMap(mockConnectorTypeWithNoCategory)).toStrictEqual(
+      mockReturnedValue
+    );
+  });
+  it('Should invoke the function when there is duplicate input ', () => {
+    getCategoriesToConnectorsMap(mockConnectorTypeWithDuplicates);
+    expect(getCategoriesToConnectorsMap(mockConnectorTypeWithNoCategory)).toStrictEqual(
+      mockReturnedValue
+    );
+  });
+
+  it('Should invoke the function when there is no duplicate input ', () => {
+    getCategoriesToConnectorsMap(mockConnectorTypeWithoutDuplicates);
+    expect(getCategoriesToConnectorsMap(mockConnectorTypeWithNoCategory)).toStrictEqual(
+      mockReturnedValue
+    );
   });
 });
