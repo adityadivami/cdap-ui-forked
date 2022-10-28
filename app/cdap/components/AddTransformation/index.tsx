@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Button, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
