@@ -70,7 +70,7 @@ export default function GridTable() {
       .pipe(
         flatMap((res: IValues) => {
           const { dataprep } = DataPrepStore.getState();
-          setWorkspaceName(res.workspaceName);
+          setWorkspaceName(res?.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
@@ -186,7 +186,7 @@ export default function GridTable() {
 
   return (
     <Box>
-      <Breadcrumb datasetName={workspaceName} location={location} />
+      <Breadcrumb workspaceName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NewWranglerUI.NoRecordScreen.gridTable.title')}

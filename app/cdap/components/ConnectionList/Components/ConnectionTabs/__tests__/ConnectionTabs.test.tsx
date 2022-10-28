@@ -111,7 +111,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
     expect(handleChange).toHaveBeenCalledTimes(0);
   });
 
-  it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is true', () => {
+  it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is false', () => {
     const handleChange = jest.fn();
     render(
       <Router history={history}>
@@ -129,6 +129,31 @@ describe('Should test whether handleChange function is triggered or not', () => 
         </Switch>
       </Router>
     );
+    const ele = screen.getAllByTestId(/connections-tab-button/i);
+    fireEvent.click(ele[0]);
+    expect(handleChange).toHaveBeenCalledTimes(1);
+  });
+
+  it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is true', () => {
+    const handleChange = jest.fn();
+
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <ConnectionsTabs
+              tabsData={mockTabsDataWithBrowse}
+              handleChange={handleChange}
+              value="apple"
+              index="2"
+              connectionId={undefined}
+              setIsErrorOnNoWorkSpace={jest.fn()}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+
     const ele = screen.getAllByTestId(/connections-tab-button/i);
     fireEvent.click(ele[0]);
     expect(handleChange).toHaveBeenCalledTimes(1);

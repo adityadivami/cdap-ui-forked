@@ -41,8 +41,6 @@ export default function TabLabelCanSample({
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const classes = useStyles();
-
-  const pathName = useLocation();
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
   const [workspaceId, setWorkspaceId] = useState(null);
@@ -92,9 +90,10 @@ export default function TabLabelCanSample({
         setIsErrorOnNoWorkSpace(true);
       });
   };
-
-  const indexOfSelectedDataset = location.pathname.lastIndexOf('/');
-  const requiredPath = location.pathname.slice(indexOfSelectedDataset + 1);
+  const location = useLocation();
+  const indexOfSelectedDataset = location?.pathname?.lastIndexOf('/');
+  const requiredPath =
+    indexOfSelectedDataset && location.pathname.slice(indexOfSelectedDataset + 1);
 
   return workspaceId ? (
     <Redirect
