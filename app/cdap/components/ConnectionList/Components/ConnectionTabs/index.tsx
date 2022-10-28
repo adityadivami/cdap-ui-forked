@@ -106,6 +106,7 @@ export default function ConnectionsTabs({
                         label={connectorType.name}
                         count={index === 0 ? connectorType.count : undefined}
                         index={index}
+                        testId={`connectionlist-connectiontabs-label-loop-${connectorType.name}`}
                       />
                     ) : (
                       <TabLabelCanSample
@@ -114,7 +115,7 @@ export default function ConnectionsTabs({
                         initialConnectionId={connectionIdProp}
                         toggleLoader={props.toggleLoader}
                         setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-                        testid={`connectionlist-connectiontabs-label-loop-${index}-${connectorTypeIndex}`}
+                        testId={`connectionlist-connectiontabs-label-loop-${connectorType.name}`}
                       />
                     )
                   ) : (
@@ -123,6 +124,7 @@ export default function ConnectionsTabs({
                       count={index === 0 ? connectorType.count : undefined}
                       index={index}
                       icon={connectorType.icon}
+                      testId={`connectionlist-connectiontabs-label-loop-${connectorType.name}`}
                     />
                   )
                 }

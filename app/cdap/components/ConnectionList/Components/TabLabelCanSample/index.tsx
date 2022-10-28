@@ -35,14 +35,14 @@ export default function TabLabelCanSample({
   initialConnectionId,
   toggleLoader,
   setIsErrorOnNoWorkSpace,
-  testid,
+  testId,
 }: {
   label: string;
   entity: IRecords;
   initialConnectionId: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
-  testid: string;
+  testId: string;
 }) {
   const classes = useStyles();
 
@@ -114,7 +114,7 @@ export default function TabLabelCanSample({
     />
   ) : refValue ? (
     <CustomTooltip title={label} arrow>
-      <Box className={classes.labelsContainerCanSample} id={testid}>
+      <Box className={classes.labelsContainerCanSample} data-testid={testId}>
         <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
           {label}
         </Typography>
@@ -133,7 +133,7 @@ export default function TabLabelCanSample({
       </Box>
     </CustomTooltip>
   ) : (
-    <Box className={classes.labelsContainerCanSample} id={testid}>
+    <Box className={classes.labelsContainerCanSample} data-testid={testId}>
       <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
         {label}
       </Typography>

@@ -24,11 +24,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
 import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.cdap.ui.utils.Constants;
 
@@ -43,16 +40,23 @@ public class Breadcrumb {
         WaitHelper.waitForPageToLoad();
     }
 
-    @Then("Click on the connector type")
-    public void clickOnTheDatasource() {
+    @Then("Click on the Connector type")
+    public void clickOnTheConnectorType() {
         WaitHelper.waitForPageToLoad();
         ElementHelper.clickOnElement(Helper.locateElementByTestId("wranglecard-link-1"));
     }
+    @Then("click on the postgreSQL")
+    public void clickPostgreSql(){
+
+        WaitHelper.waitForPageToLoad();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("connectionlist-connectiontabs-tabs-loop-PostgreSQL"));
+    }
+
 
     @Then("Click on the first tab of second column")
     public void clickOnTheFirstTabOfSecondColumn() {
         WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("connectionlist-connectiontabs-tabs-loop-exl"));
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("connectionlist-connectiontabs-tabs-loop-EXL"));
     }
     @Then("Click on the first tab of third column")
     public void clickOnTheFirstTabOfThirdColumn() {
@@ -78,7 +82,7 @@ public class Breadcrumb {
     public void dataSourcesText() {
         WaitHelper.waitForPageToLoad();
         String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
-        Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/datasources/PostgreSQL");
+        Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/datasources/Imported%20Datasets");
     }
     @Then("Click on the Home link of wrangle page")
     public void clickOnTheHomeLink() {
