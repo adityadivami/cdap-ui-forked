@@ -13,24 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import React from 'react';
-import { Radio } from '@material-ui/core';
-import { IRadioInputProps } from '../../types';
 
-export default function({ selectedColumns, onSingleSelection, eachColumn }: IRadioInputProps) {
+import React from 'react';
+import { Checkbox, FormControlLabel } from '@material-ui/core';
+import { useStyles } from '../../styles';
+import { IInputCheckboxProps } from '../types';
+
+export default function({ label, value, onChange, className }: IInputCheckboxProps) {
+  const classes = useStyles();
+
   return (
-    <>
-      <Radio
-        color="primary"
-        onChange={() => onSingleSelection(eachColumn)}
-        checked={
-          Array.isArray(selectedColumns) &&
-          selectedColumns?.filter((el) => el.label == eachColumn.label).length
-            ? true
-            : false
-        }
-        data-testid="transformation-radio-select-columns"
-      />
-    </>
+    <FormControlLabel
+      className={className}
+      control={
+        <Checkbox
+          onChange={onChange}
+          checked={value}
+          color="primary"
+          data-testid={`input-checkbox-${label}`}
+          id={`input-checkbox-${label}`}
+        />
+      }
+      label={<span className={classes.labelTextStyles}>{label}</span>}
+    />
   );
 }

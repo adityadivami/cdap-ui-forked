@@ -47,7 +47,6 @@ export default function({
         aria-label="recipe steps table"
         className={classes.tabledisplayStyles}
         data-testid="select-column-table"
-        id="select-column-table"
       >
         <TableHead>
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>

@@ -13,10 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import FilterComponent from './components/TransformationComponents/Filter';
-export const TRANSFORMATION_COMPONENTS = [
-  {
-    type: 'filter',
-    component: FilterComponent,
-  },
-];
+
+import React from 'react';
+import { useStyles } from '../../styles';
+import { Typography } from '@material-ui/core';
+
+export default function({ labelText }: { labelText: string }) {
+  const classes = useStyles();
+  return <Typography className={classes.formLabelStyles}>{labelText}</Typography>;
+}

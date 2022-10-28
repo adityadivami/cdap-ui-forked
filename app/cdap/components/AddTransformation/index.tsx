@@ -14,19 +14,28 @@
  * the License.
  */
 
-import { Button, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from './SelectColumnsList';
 import { useStyles } from './styles';
-import { IAddTransformationProp, IHeaderNamesList, IDataQuality } from './types';
+import {
+  IAddTransformationProp,
+  IHeaderNamesList,
+  IDataQuality,
+  ITransformationComponentValues,
+} from './types';
 import { prepareDataQualtiy } from './CircularProgressBar/utils';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import ButtonWidget from './ButtonWidget';
 import { getDirective } from './utils';
+import TransformationContent from 'components/GridTable/components/TransformationComponents';
+import { transformationComponentDefaultValues } from './constants';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import { TRANSFORMATION_COMPONENTS } from 'components/GridTable/constants';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -36,10 +45,14 @@ export default function({
   callBack,
   applyTransformation,
 }: IAddTransformationProp) {
+  console.log('add transform');
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
+  const [transformationComponentValues, setTransformationComponentsValue] = useState<
+    ITransformationComponentValues
+  >(transformationComponentDefaultValues);
 
   const classes = useStyles();
 
@@ -63,7 +76,11 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive = getDirective(functionName, selectedColumns[0].label);
+    const directive = getDirective(
+      functionName,
+      selectedColumns[0].label,
+      transformationComponentValues
+    );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
@@ -72,6 +89,10 @@ export default function({
     const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
+
+  const isComponentAvailable =
+    TRANSFORMATION_COMPONENTS?.some((item) => item?.type === functionName) ||
+    CALCULATE_OPTIONS?.some((item) => item?.value?.toLowerCase() === functionName?.toLowerCase());
 
   return (
     <Fragment>
@@ -89,6 +110,19 @@ export default function({
               selectedColumns={selectedColumns}
               functionName={functionName}
             />
+            {isComponentAvailable && (
+              <TransformationContent
+                setTransformationComponentsValue={setTransformationComponentsValue}
+                transformationComponent={TRANSFORMATION_COMPONENTS}
+                transformationComponentValues={transformationComponentValues}
+                functionName={functionName}
+                transformationFunctionSupportedDataType={directiveFunctionSupportedDataType}
+                columnData={columnData}
+                missingDataList={missingDataList}
+                callBack={callBack}
+                applyTransformation={applyTransformation}
+              />
+            )}
           </div>
           <ButtonWidget
             buttonText={T.translate('features.WranglerNewAddTransformation.applyStep')}

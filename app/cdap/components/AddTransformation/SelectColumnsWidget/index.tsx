@@ -30,18 +30,10 @@ export default function({
 
   const singleColumnSelect = (
     <>
-      <div
-        className={classes.functionHeadingTextStyles}
-        id="select-column-title"
-        data-testid="select-column-title"
-      >
+      <div className={classes.functionHeadingTextStyles} data-testid="select-column-title">
         {T.translate('features.WranglerNewAddTransformation.selectColumn')}
       </div>
-      <div
-        className={classes.quickSelectTextStyles}
-        id="select-column-subtitle"
-        data-testid="select-column-subtitle"
-      >
+      <div className={classes.quickSelectTextStyles} data-testid="select-column-subtitle">
         {T.translate('features.WranglerNewAddTransformation.quickSelect')}
       </div>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (

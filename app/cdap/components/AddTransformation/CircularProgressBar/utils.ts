@@ -22,12 +22,11 @@ export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeader
   columnList.map((columnName: IHeaderNamesList) => {
     dataQualityToArray.forEach(([key, value]) => {
       if (columnName.name == key) {
-        const generalValues: Array<Array<
-          string | number | boolean | IRecords | any
-        >> = Object.entries(value);
+        const generalValues: Array<Array<string | number | boolean | IRecords>> = Object.entries(
+          value
+        );
         generalValues.forEach(([vKey, vValue]) => {
           if (vKey == 'general') {
-            console.log(vValue.null);
             if (vValue.null) {
               const nullCount = vValue.null || 0;
               const totalNullEmpty = nullCount;

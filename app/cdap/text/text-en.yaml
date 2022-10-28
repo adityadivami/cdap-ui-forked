@@ -3457,6 +3457,27 @@ features:
         gridIcon: 'Grid'
         otherIcon: 'Other'
         toggleDescription: 'Function names'
+  DirectiveUIComponent:
+    filter: 
+      selectAction: Select action to take
+      filterRadioOption:
+        keepRow: Keep rows
+        removeRow: Remove rows
+      filterSelectOption:
+        customCondition: Custom condition
+        emptyValue: Value is empty
+        textExactly: Value is
+        textContains: Value contains
+        textStartWith: Value starts with
+        textEndWith: Value ends with
+        textRegex: Value contains regex
+      filterPlaceHolder:
+        customCondition: E.g. < 30 || gender == "Male"
+        textExactly: Enter value
+        textContains: Enter contained value
+        textStartWith: Enter prefix
+        textEndWith: Enter suffix
+        textRegex: Enter regex
   WranglerNewAddTransformation:
     addTransformation: Add Transformation Step
     applyStep: Apply Step
