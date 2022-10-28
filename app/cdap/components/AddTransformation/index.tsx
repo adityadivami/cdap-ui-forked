@@ -75,7 +75,7 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive = getDirective(
+    const directive: string | null = getDirective(
       functionName,
       selectedColumns[0].label,
       transformationComponentValues
@@ -90,8 +90,8 @@ export default function({
   }, []);
 
   const isComponentAvailable =
-    TRANSFORMATION_COMPONENTS.some((item) => item.type === functionName) ||
-    CALCULATE_OPTIONS.some((item) => item?.value?.toLowerCase() === functionName.toLowerCase());
+    TRANSFORMATION_COMPONENTS?.some((item) => item?.type === functionName) ||
+    CALCULATE_OPTIONS?.some((item) => item?.value?.toLowerCase() === functionName?.toLowerCase());
 
   return (
     <Fragment>

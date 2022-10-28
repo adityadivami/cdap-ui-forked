@@ -20,7 +20,7 @@ export const getDirective = (
   columnSelected: string,
   transformationComponentValues: ITransformationComponentValues
 ) => {
-  if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
+  if (DATATYPE_OPTIONS?.some((item) => item?.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
   } else if (functionName === 'customTransform') {
     return `set-column :${columnSelected} ${transformationComponentValues.customInput}`;
