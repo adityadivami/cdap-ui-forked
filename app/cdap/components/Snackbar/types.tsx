@@ -14,11 +14,10 @@
  * the License.
  */
 
-export interface ISnackbarProps
-  {
-    handleCloseError: () => void;
-    handleDefaultCloseSnackbar?: () => void;
-    messageToDisplay?: string;
-    isSuccess?: boolean;
-    actionType?: string;
-  }
+export interface ISnackbarProps {
+  handleCloseError: () => void;
+  handleDefaultCloseSnackbar?: () => void;
+  messageToDisplay?: string;
+  isSuccess?: boolean;
+  actionType?: string;
+}

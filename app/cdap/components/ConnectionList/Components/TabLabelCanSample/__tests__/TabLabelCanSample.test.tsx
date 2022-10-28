@@ -21,11 +21,7 @@ import * as Module from 'react-router';
 import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
 import { Route, Router, Switch } from 'react-router';
 import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
-import { createBrowserHistory } from 'history';
-
-const history = createBrowserHistory({
-  basename: '/',
-});
+import history from 'app/cdap/services/history';
 
 describe('Test TabLabelCanSample Component', () => {
   it('Should render TabLabelCanSample Component', () => {

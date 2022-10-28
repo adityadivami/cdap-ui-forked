@@ -14,21 +14,14 @@
  * the License.
  */
 
-import React from 'react';
-import ConnectionsTabs from '../index';
 import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import ConnectionsTabs from '../index';
 import { mockTabsDataWithBrowse } from '../mock/mockTabsDataWithBrowse';
 import { mockTabsDataWithBrowseIndex } from '../mock/mockTabsDataWithBrowseIndex';
 import { mockTabsTestData } from '../mock/mockTabsTestData';
-import { Route, Router, Switch } from 'react-router';
-import { createBrowserHistory } from 'history';
-
-const tabsTestData = [{ showTabs: true }];
-
-const history = createBrowserHistory({
-  basename: '/',
-});
-
+import history from 'app/cdap/services/history';
 describe('Test ConnectionsTabs', () => {
   it('Should render Connections Tabs Parent Component', () => {
     render(
@@ -39,6 +32,7 @@ describe('Test ConnectionsTabs', () => {
         index="0"
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
+        setToaster={true}
       />
     );
     const ele = screen.getByTestId(/connections-tabs-parent/i);
@@ -54,6 +48,7 @@ describe('Test ConnectionsTabs', () => {
         index="1"
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
+        setToaster={true}
       />
     );
     const ele = screen.getByTestId(/connection-tabs/i);
@@ -69,6 +64,7 @@ describe('Test ConnectionsTabs', () => {
         index={0}
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
+        setToaster={true}
       />
     );
     const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
@@ -87,6 +83,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
         index="1"
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
+        setToaster={true}
       />
     );
     const ele = screen.getAllByTestId(/connections-tab-button/i);
@@ -107,6 +104,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
               index="2"
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
+              setToaster={true}
             />
           </Route>
         </Switch>
@@ -130,6 +128,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
               index="2"
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
+              setToaster={true}
             />
           </Route>
         </Switch>
@@ -154,6 +153,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
               index="2"
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
+              setToaster={true}
             />
           </Route>
         </Switch>

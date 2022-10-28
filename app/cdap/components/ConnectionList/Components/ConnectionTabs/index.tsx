@@ -62,7 +62,7 @@ export default function ConnectionsTabs({
   ...props
 }) {
   const classes = useStyles();
-
+  // console.log(tabsData);
   const [connectionIdProp, setConnectionId] = useState(connectionId);
 
   useEffect(() => {
