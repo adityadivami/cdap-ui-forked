@@ -75,7 +75,7 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive: string = getDirective(
+    const directive: string | null = getDirective(
       functionName,
       selectedColumns[0].label,
       transformationComponentValues
