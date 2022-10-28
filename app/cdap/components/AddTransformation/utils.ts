@@ -39,7 +39,7 @@ export const getDirective = (
         condition,
         columnSelected,
         directiveComponentValues.ignoreCase,
-        directiveComponentValues.customInput
+        directiveComponentValues.filterOptionValue
       );
     }
   } else {
