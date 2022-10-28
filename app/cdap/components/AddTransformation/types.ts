@@ -22,7 +22,9 @@ export interface IHeaderNamesList {
   label: string;
   type: string[];
 }
-
+export interface IDataQuality {
+  [key: string]: string;
+}
 export interface IAddTransformationProps {
   transformationFunctionSupportedDataType: string[];
   functionName: string;
@@ -30,6 +32,14 @@ export interface IAddTransformationProps {
   missingDataList: IStatistics;
   callBack: () => void;
   applyTransformation: (directive: string) => void;
+}
+
+export interface ITransformationComponentValues {
+  customInput: string;
+  ignoreCase: boolean;
+  filterOptionSelected: string;
+  filterOptionValue: string;
+  filterRadioOption: string;
 }
 
 export interface IMultipleSelectedFunctionDetail {

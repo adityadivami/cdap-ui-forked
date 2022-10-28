@@ -25,6 +25,7 @@ import {
   IHeaderNamesList,
   IMultipleSelectedFunctionDetail,
   IDataQualityItem,
+  ITransformationComponentValues
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
@@ -33,6 +34,9 @@ import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidge
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { getDirective } from 'components/AddTransformation/utils';
+import TransformationContent from 'components/GridTable/components/TransformationComponents';
+import { transformationComponentDefaultValues } from 'components/AddTransformation/constants';
+import { TRANSFORMATION_COMPONENTS } from 'components/GridTable/constants';
 
 export default function({
   transformationFunctionSupportedDataType,
@@ -46,6 +50,9 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
+  const [transformationComponentValues, setTransformationComponentsValue] = useState<
+    ITransformationComponentValues
+  >(transformationComponentDefaultValues);
   const classes = useStyles();
   const closeClickHandler = () => {
     callBack();
@@ -68,7 +75,11 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive: string = getDirective(functionName, selectedColumns[0].label);
+    const directive = getDirective(
+      functionName,
+      selectedColumns[0].label,
+      transformationComponentValues
+    );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
@@ -98,6 +109,9 @@ export default function({
     }
   };
 
+  const isComponentAvailable =
+    TRANSFORMATION_COMPONENTS?.some((item) => item?.type === functionName)
+
   return (
     <Fragment>
       <DrawerWidget
@@ -116,6 +130,19 @@ export default function({
               selectedColumns={selectedColumns}
               functionName={functionName}
             />
+            {isComponentAvailable && (
+              <TransformationContent
+                setTransformationComponentsValue={setTransformationComponentsValue}
+                transformationComponent={TRANSFORMATION_COMPONENTS}
+                transformationComponentValues={transformationComponentValues}
+                functionName={functionName}
+                transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
+                columnData={columnData}
+                missingDataList={missingDataList}
+                callBack={callBack}
+                applyTransformation={applyTransformation}
+              />
+            )}
           </div>
           <ButtonWidget
             buttonText={T.translate(

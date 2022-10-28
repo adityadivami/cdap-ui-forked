@@ -14,13 +14,25 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { ITransformationContentParams } from 'components/GridTable/types';
 import React from 'react';
-import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
 
-describe('It should test FunctionNameWidget Component', () => {
-  it('Should render the FunctionNameWidget Component', () => {
-    const container = render(<FunctionNameWidget functionName={'UnitTesting'} />);
-    expect(container).toBeDefined();
-  });
-});
+export default function({
+  transformationComponent,
+  functionName: type,
+  functionName,
+  transformationComponentValues,
+  setTransformationComponentsValue,
+  ...props
+}: ITransformationContentParams) {
+  const Component =
+    transformationComponent.find((item) => item.type === type)?.component
+  return (
+    <Component
+      functionName={functionName}
+      transformationComponentValues={transformationComponentValues}
+      setTransformationComponentsValue={setTransformationComponentsValue}
+      {...props}
+    />
+  );
+}

@@ -136,9 +136,13 @@ export default function({
             ref={ref}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
+            data-testid="search-column-name"
+            id="search-column-name"
           />
           <Box
             className={classes.searchInputAdornment}
+            data-testid="search-column-icon"
+            id="search-column-icon"
             onClick={handleFocus}
             data-testid="click-handle-focus"
           >
