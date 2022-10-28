@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../styles';
 import { UnderLine } from '../iconStore';
@@ -24,7 +24,7 @@ export default function({ headingText }) {
 
   return (
     <Box className={classes.headingStyles}>
-      <div className={classes.headingTextStyles}>{headingText}</div>
+      <Typography className={classes.headingTextStyles}>{headingText}</Typography>
       {UnderLine}
     </Box>
   );
