@@ -17,17 +17,13 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import Breadcrumb from '..';
-import { createBrowserHistory as createHistory } from 'history';
 import BreadCrumb from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'app/cdap/services/history';
+import T from 'i18n-react';
 
 const location = {
   state: {
-    from: 'Home',
+    from: T.translate('features.Breadcrumb.labels.wrangleHome'),
     path: 'wrangle-home',
   },
 };
@@ -54,7 +50,6 @@ describe('Test Breadcrumb Component', () => {
   });
 
   it('match state should be equal to location.state.from', () => {
-    const location = { state: { from: 'Workspaces' } };
     render(
       <Router history={history}>
         <Switch>
@@ -65,8 +60,4 @@ describe('Test Breadcrumb Component', () => {
       </Router>
     );
   });
-
-  // it('Should have the Data Sources text in the Breadcrumb', () => {
-  //   expect(screen.getByTestId('breadcrumb-data-sources-text')).toHaveTextContent('Data Sources');
-  // });
 });

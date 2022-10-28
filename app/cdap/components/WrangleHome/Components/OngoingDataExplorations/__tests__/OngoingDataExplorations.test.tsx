@@ -14,25 +14,14 @@
  * the License.
  */
 
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import OngoingDataExploration from '../index';
 import MyDataPrepApi from 'api/dataprep';
-import operators from 'rxjs/operators';
-import { createBrowserHistory as createHistory } from 'history';
+import history from 'app/cdap/services/history';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import { switchMapCallbackMock, getWorkspaceListSubscribeMock } from '../mock/mockoldData';
-
-const history = createHistory({
-  basename: '/',
-});
-
-const testObj = {
-  connectionName: 'Upload',
-  workspaceName: 'Divami_Users_Emails.xlsx',
-  recipeSteps: 0,
-  dataQuality: 100,
-};
+import operators from 'rxjs/operators';
+import OngoingDataExploration from '../index';
+import { getWorkspaceListSubscribeMock, switchMapCallbackMock } from '../mock/mockoldData';
 
 test('renders Ongoing Data Exploration component', async () => {
   jest.spyOn(operators as any, 'switchMap').mockImplementation((callback: Function) => {
