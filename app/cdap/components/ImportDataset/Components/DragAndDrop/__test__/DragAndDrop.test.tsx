@@ -14,27 +14,28 @@
  *  the License.
  */
 
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import DastaSet from 'components/ImportDataset/index';
+import DragAndDrop from 'components/ImportDataset/Components/DragAndDrop/index';
 import history from 'services/history';
 
 describe('It should test DrawerWidget Component', () => {
   it('Should test whether DrawerWidget Component is rendered', () => {
+    const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
+    jest.spyOn(React, 'useCallback').mockImplementation((f) => f());
+
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <DastaSet
-              handleClosePanel={() => {
-                jest.fn();
-              }}
-            />
+            <DragAndDrop file={file} onDropHandler={() => jest.fn()} />
           </Route>
         </Switch>
       </Router>
     );
+    const boxEle = screen.getByTestId(/delete-svg/i);
+    fireEvent.click(boxEle);
     expect(container).toBeDefined();
   });
 });
