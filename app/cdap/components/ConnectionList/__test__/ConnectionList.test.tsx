@@ -14,36 +14,32 @@
  * the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import * as apiHelpersForExploreConnection from "components/Connections/Browser/GenericBrowser/apiHelpers";
-import * as apiHelpers from "components/Connections/Browser/SidePanel/apiHelpers";
-import * as Reducer from "components/Connections/Create/reducer";
-import history from "app/cdap/services/history";
-import React from "react";
-import { Route, Router, Switch } from "react-router";
-import ConnectionList from "..";
+import { render, screen } from '@testing-library/react';
+import * as apiHelpersForExploreConnection from 'components/Connections/Browser/GenericBrowser/apiHelpers';
+import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
+import * as Reducer from 'components/Connections/Create/reducer';
+import history from 'app/cdap/services/history';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import ConnectionList from '..';
 import {
   connectionListDummyResFile,
   connectionListDummyResPostGresSql,
   mockDataForExploreConnection,
   mockResponseForFetchConnectors,
-} from "../mock/mockDataForConnectionList";
+} from '../mock/mockDataForConnectionList';
 
-describe("It Should test Connection List Component", () => {
+describe('It Should test Connection List Component', () => {
   beforeEach(() => {
     const dummyRes = new Map();
-    dummyRes.set("PostgreSql", connectionListDummyResPostGresSql);
-    dummyRes.set("File", connectionListDummyResFile);
-    jest
-      .spyOn(apiHelpers, "getCategorizedConnections")
-      .mockReturnValue(Promise.resolve(dummyRes));
-    jest
-      .spyOn(apiHelpersForExploreConnection, "exploreConnection")
-      .mockImplementation(() => {
-        return Promise.resolve(mockDataForExploreConnection);
-      });
+    dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
+    dummyRes.set('File', connectionListDummyResFile);
+    jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
+    jest.spyOn(apiHelpersForExploreConnection, 'exploreConnection').mockImplementation(() => {
+      return Promise.resolve(mockDataForExploreConnection);
+    });
   });
-  it("Should render Connection List Component", () => {
+  it('Should render Connection List Component', () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -55,17 +51,15 @@ describe("It Should test Connection List Component", () => {
     );
     expect(container).toBeDefined();
   });
-  it("Should render Connection List Component", () => {
+  it('Should render Connection List Component', () => {
     const dummyRes = new Map();
-    dummyRes.set("PostgreSql", connectionListDummyResPostGresSql);
-    dummyRes.set("File", connectionListDummyResFile);
+    dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
+    dummyRes.set('File', connectionListDummyResFile);
     jest
-      .spyOn(Reducer, "fetchConnectors")
+      .spyOn(Reducer, 'fetchConnectors')
       .mockReturnValue(Promise.resolve(mockResponseForFetchConnectors));
 
-    jest
-      .spyOn(apiHelpers, "getCategorizedConnections")
-      .mockReturnValue(Promise.resolve(dummyRes));
+    jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
 
     const container = render(
       <Router history={history}>

@@ -14,36 +14,22 @@
  * the License.
  */
 
-import { Box, styled, Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import { Box, Typography } from '@material-ui/core';
 import { GCSIcon } from 'components/ConnectionList/icons';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { IRecords } from 'components/GridTable/types';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import PositionedSnackbar from 'components/Snackbar';
+import Snackbar from 'components/Snackbar';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import ConnectionsTabs from './Components/ConnectionTabs';
-import CustomTooltip from './Components/CustomTooltip';
-import SubHeader from './Components/SubHeader';
-import { ISnackbarToast } from './Components/TabLabelCanSample/types';
-import { useStyles } from './styles';
-
-const SelectDatasetWrapper = styled(Box)({
-  overflowX: 'scroll',
-  display: 'flex',
-  borderTop: `1px solid ${grey[300]}`,
-
-  height: '100%',
-  '& > :first-child': {
-    minWidth: '280px',
-  },
-  '& > :not(:first-child)': {
-    minWidth: '300px',
-  },
-});
+import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import SubHeader from 'components/ConnectionList/Components/SubHeader';
+import { SelectDatasetWrapper } from 'components/ConnectionList/Components/TabLabelCanSample/styles';
+import { ISnackbarToast } from 'components/ConnectionList/Components/TabLabelCanSample/types';
+import { useStyles } from 'components/ConnectionList/styles';
 
 export default function ConnectionList() {
   const { connectorType } = useParams() as IRecords;
@@ -56,7 +42,6 @@ export default function ConnectionList() {
   const [loading, setLoading] = useState(true);
   const [toaster, setToaster] = useState<ISnackbarToast>({
     open: false,
-    message: '',
     isSuccess: false,
   });
 
@@ -267,15 +252,13 @@ export default function ConnectionList() {
         </div>
       )}
       {toaster.open && (
-        <PositionedSnackbar
+        <Snackbar
           handleCloseError={() =>
             setToaster({
               open: false,
-              message: '',
-              isSuccess: false,
             })
           }
-          messageToDisplay={toaster.message}
+          messageToDisplay={toaster.message ? toaster.message : ''}
           isSuccess={toaster.isSuccess}
         />
       )}
