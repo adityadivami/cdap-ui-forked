@@ -16,7 +16,7 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import GridHeaderCell from '..';
+import GridHeaderCell from 'components/GridTable/components/GridHeaderCell/index';
 import { screen } from '@testing-library/dom';
 
 describe('To Test Grid Header Cell Component', () => {

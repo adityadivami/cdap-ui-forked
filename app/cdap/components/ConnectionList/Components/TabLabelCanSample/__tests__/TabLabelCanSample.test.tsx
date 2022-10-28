@@ -18,7 +18,6 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import TabLabelCanSample from '../index';
 import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
-import { createBrowserHistory } from 'history';
 import { Route, Router, Switch } from 'react-router-dom';
 import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
 import history from 'services/history';

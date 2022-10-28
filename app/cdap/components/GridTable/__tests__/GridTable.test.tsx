@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import GridTable from '..';
+import GridTable from 'components/GridTable/index';
 import { render } from '@testing-library/react';
 import { Route, Router, Switch } from 'react-router';
 import history from 'services/history';

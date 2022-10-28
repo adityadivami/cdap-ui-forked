@@ -15,7 +15,7 @@
  */
 
 import { render } from '@testing-library/react';
-import GridTextCell from '..';
+import GridTextCell from 'components/GridTable/components/GridTextCell/index';
 import { screen } from '@testing-library/react';
 import React from 'react';
 
