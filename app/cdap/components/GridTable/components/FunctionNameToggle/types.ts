@@ -15,6 +15,6 @@
  */
 
 export interface IFunctionNameProps {
-  setIsShowName: any;
+  setIsShowName: React.Dispatch<React.SetStateAction<boolean>>;
   isShowNames: boolean;
 }

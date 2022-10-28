@@ -19,13 +19,18 @@ import Box from '@material-ui/core/Box';
 import { default as React, useEffect, useState } from 'react';
 import NestedMenu from '../NestedMenu';
 import T from 'i18n-react';
-
+import { ITransformationToolBarProps } from './types';
 import { Divider, Expand, LongDivider } from './iconStore';
 import { useStyles } from './styles';
 import FunctionToggle from '../FunctionNameToggle';
 import { nestedMenuOptions } from './utils';
 
-export default function({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) {
+export default function({
+  columnType,
+  submitMenuOption,
+  setShowBreadCrumb,
+  showBreadCrumb,
+}: ITransformationToolBarProps) {
   const classes = useStyles();
   const [isShowNames, setIsShowName] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);

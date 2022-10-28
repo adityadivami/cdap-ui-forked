@@ -14,9 +14,8 @@
  * the License.
  */
 export interface ITransformationToolBarProps {
-    columnType: string;
-    submitMenuOption: (value: string, dataType: string[]) => void;
-    setShowBreadCrumb: ;
-    showBreadCrumb: boolean;
+  columnType: string;
+  submitMenuOption: (value: string, dataType: string[]) => void;
+  setShowBreadCrumb: React.Dispatch<React.SetStateAction<boolean>>;
+  showBreadCrumb: boolean;
 }
-  

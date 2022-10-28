@@ -67,7 +67,7 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function({ setIsShowName, isShowNames }) {
+export default function({ setIsShowName, isShowNames }: IFunctionNameProps) {
   const classes = useStyles();
   return (
     <Box className={classes.functionWrapper}>
