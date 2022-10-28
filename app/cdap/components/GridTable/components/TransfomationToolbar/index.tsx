@@ -37,6 +37,7 @@ export default function({ columnType, submitMenuOption, setShowBreadCrumb, showB
       each.open = false;
       return each;
     });
+    setNestedMenuList(newState);
   };
 
   return (
@@ -45,17 +46,17 @@ export default function({ columnType, submitMenuOption, setShowBreadCrumb, showB
         {nestedMenuList?.map((i, index) => {
           return (
             <>
-              <Tooltip
-                title={i.title}
-                classes={{
-                  tooltip: classes.tooltipToolbar,
-                  arrow: classes.arrowTooltip,
-                }}
-                arrow
-              >
-                <Box className={classes.functionNameWrapper}>
-                  {i.options?.length ? (
-                    <>
+              <Box className={classes.functionNameWrapper}>
+                {i.options?.length ? (
+                  <>
+                    <Tooltip
+                      title={i.title}
+                      classes={{
+                        tooltip: classes.tooltipToolbar,
+                        arrow: classes.arrowTooltip,
+                      }}
+                      arrow
+                    >
                       <IconButton
                         onClick={(e) => {
                           e.preventDefault();
@@ -73,33 +74,42 @@ export default function({ columnType, submitMenuOption, setShowBreadCrumb, showB
                         {' '}
                         {i.icon}
                       </IconButton>
-                      <NestedMenu
-                        menuOptions={i.options}
-                        columnType={columnType}
-                        icon={i.icon}
-                        submitMenuOption={submitMenuOption}
-                        title={i.title}
-                        setAnchorEl={setAnchorEl}
-                        anchorEl={anchorEl}
-                        open={nestedMenuList[index].open}
-                        handleMenuOpenClose={handleMenuOpenClose}
-                      />
-                      {isShowNames && (
-                        <Typography className={classes.typoClass}>{i.toolName}</Typography>
-                      )}
-                    </>
-                  ) : (
-                    <>
+                    </Tooltip>
+                    <NestedMenu
+                      menuOptions={i.options}
+                      columnType={columnType}
+                      icon={i.icon}
+                      submitMenuOption={submitMenuOption}
+                      title={i.title}
+                      setAnchorEl={setAnchorEl}
+                      anchorEl={anchorEl}
+                      open={nestedMenuList[index].open}
+                      handleMenuOpenClose={handleMenuOpenClose}
+                    />
+                    {isShowNames && (
+                      <Typography className={classes.typoClass}>{i.toolName}</Typography>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <Tooltip
+                      title={i.title}
+                      classes={{
+                        tooltip: classes.tooltipToolbar,
+                        arrow: classes.arrowTooltip,
+                      }}
+                      arrow
+                    >
                       <IconButton onClick={() => submitMenuOption(i.action, i.dataType)}>
                         {i.icon}
                       </IconButton>
-                      {isShowNames && (
-                        <Typography className={classes.typoClass}>{i.toolName}</Typography>
-                      )}
-                    </>
-                  )}
-                </Box>
-              </Tooltip>
+                    </Tooltip>
+                    {isShowNames && (
+                      <Typography className={classes.typoClass}>{i.toolName}</Typography>
+                    )}
+                  </>
+                )}
+              </Box>
               {(index === 4 || index === 1 || index === 9) && (
                 <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
               )}

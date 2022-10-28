@@ -61,6 +61,7 @@ export default function({
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
         onClose={(e) => {
           setAnchorEl(null);
+          handleMenuOpenClose(title);
         }}
         onClick={(e) => {
           e.preventDefault();
