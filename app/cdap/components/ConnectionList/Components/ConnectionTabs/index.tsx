@@ -90,7 +90,7 @@ export default function ConnectionsTabs({
             {tabsData.data.map((connectorType, connectorTypeIndex) => (
               <ConnectionTab
                 role="button"
-                data-testid="connections-tab-button"
+                data-testid={`connections-tab-button-${connectorType.name}`}
                 onClick={() => {
                   if (index > 1) {
                     if (connectorType.canBrowse) {
@@ -129,7 +129,6 @@ export default function ConnectionsTabs({
                 value={connectorType.name}
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
-                id={connectorType.name}
                 className={index > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
               />
             ))}

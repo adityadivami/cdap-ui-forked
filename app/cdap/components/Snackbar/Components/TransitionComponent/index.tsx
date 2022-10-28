@@ -66,7 +66,7 @@ export default function({
                 <CloseIcon
                   className={classes.cross}
                   onClick={handleClose}
-                  data-testid="close-icon"
+                  data-testid="snackbar-close-icon"
                 />
               </Box>
             )}

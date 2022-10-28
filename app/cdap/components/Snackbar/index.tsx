@@ -67,6 +67,7 @@ export default function({
         />
       )}
       className={isSuccess ? classes.success : classes.error}
+      data-testid="snackbar-alert"
     />
   );
 }
