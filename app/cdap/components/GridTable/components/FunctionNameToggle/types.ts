@@ -15,6 +15,6 @@
  */
 
 export interface IFunctionNameProps {
-  setIsShowName: string;
+  setIsShowName: any;
   isShowNames: boolean;
 }

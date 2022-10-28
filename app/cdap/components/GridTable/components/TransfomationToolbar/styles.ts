@@ -26,23 +26,23 @@ export const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'space-between',
     border: `1px solid ${grey[300]}`,
-    marginTop: '0px',
-    paddingLeft: '18px',
-    paddingRight: '15px',
+    marginTop: 0,
+    paddingLeft: 18,
+    paddingRight: 15,
   },
   container: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginLeft: '0px',
-    marginRight: '0px',
+    marginLeft: 0,
+    marginRight: 0,
     width: '80%',
   },
   searchIcon: {
     border: 'none',
     outline: 'none',
-    width: '250px',
+    width: 250,
   },
   closeBreadCrumb: {
     transform: 'rotate(180deg)',
@@ -60,20 +60,20 @@ export const useStyles = makeStyles({
   },
   typoClass: {
     color: grey[600],
-    fontSize: '14px',
-    padding: '0px 12px',
-    marginBottom: '10px',
+    fontSize: 14,
+    padding: '0 12',
+    marginBottom: 10,
   },
   arrow: {
     width: '5%',
   },
   divider: {
-    margin: '0px 4px',
+    margin: '0 4',
   },
   tooltipToolbar: {
     background: grey[700],
     color: '#FFFFFF',
-    fontSize: '14px',
+    fontSize: 14,
   },
   arrowTooltip: {
     '&::before': {

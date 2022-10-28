@@ -30,11 +30,11 @@ export const useNestedMenuStyles = makeStyles({
   },
   root: {
     '& .MuiMenuItem-root': {
-      padding: '6px 11px 6px 20px',
-      height: '33px',
+      padding: '6 11 6 20',
+      height: 33,
     },
     '& .MuiMenu-paper': {
-      width: '199px',
+      width: 199,
       top: '145px !important',
       maxHeight: '70% !important',
     },

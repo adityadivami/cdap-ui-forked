@@ -50,7 +50,7 @@ export default function({
       }}
       className={classes.root}
     >
-      {menuOptions.map((item, index) => (
+      {menuOptions?.map((item, index) => (
         <MenuItemComponent
           columnType={columnType}
           item={item}

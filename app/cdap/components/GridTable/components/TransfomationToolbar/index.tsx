@@ -27,7 +27,7 @@ import { nestedMenuOptions } from './utils';
 
 export default function({ columnType, submitMenuOption, setShowBreadCrumb, showBreadCrumb }) {
   const classes = useStyles();
-  const [isShowNames, setIsShowName] = useState(false);
+  const [isShowNames, setIsShowName] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
   const [nestedMenuList, setNestedMenuList] = useState(nestedMenuOptions);
 

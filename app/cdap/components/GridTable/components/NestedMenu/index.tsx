@@ -40,7 +40,7 @@ export default function({
     setNestedOptions([]);
     event.preventDefault();
     event.stopPropagation();
-    if (item.options) {
+    if (item?.options) {
       setNestedOptions(item.options);
       setAnchorEl2(event.currentTarget);
     } else {
@@ -69,7 +69,7 @@ export default function({
         }}
         className={classes.root}
       >
-        {Array?.isArray(menuOptions) &&
+        {Array.isArray(menuOptions) &&
           menuOptions.map((item, index) => (
             <MenuItemComponent
               item={item}

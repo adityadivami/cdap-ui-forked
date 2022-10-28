@@ -56,9 +56,7 @@ export default function GridTable() {
       count: '0',
     },
   ]);
-  const [showBreadCrumb, setShowBreadCrumb] = useState(true);
-  console.log(showBreadCrumb, 'showBreadCrumb');
-  console.log(setShowBreadCrumb, 'setShowBreadCrumb');
+  const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
