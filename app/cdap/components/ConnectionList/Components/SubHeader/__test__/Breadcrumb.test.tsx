@@ -24,7 +24,7 @@ test('renders BreadCumb Component', () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <BreadCumb />  ̰
+          <BreadCumb />
         </Route>
       </Switch>
     </Router>

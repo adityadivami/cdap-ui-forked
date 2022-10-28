@@ -14,16 +14,11 @@
  * the License.
  */
 
+import { fireEvent, render, screen } from '@testing-library/react';
+import history from 'app/cdap/services/history';
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
 import { Route, Router, Switch } from 'react-router';
-import { createBrowserHistory as createHistory } from 'history';
 import PositionedSnackbar from '..';
-import TransitionComponent from '../Components/TransitionComponent';
-
-const history = createHistory({
-  basename: '/',
-});
 
 describe('It should test the Snackbar Component', () => {
   it('renders Snackbar Component', () => {
@@ -39,5 +34,7 @@ describe('It should test the Snackbar Component', () => {
     );
     const ele = container.getByTestId(/parent-snackbar-component/i);
     expect(ele).toBeInTheDocument();
+    const closeBtn = screen.getByTestId('snackbar-close-button');
+    fireEvent.click(closeBtn);
   });
 });
