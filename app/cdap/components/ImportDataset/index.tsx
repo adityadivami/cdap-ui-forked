@@ -82,7 +82,7 @@ export default function({ handleClosePanel }: IImportDataset) {
       file: fileName,
     };
 
-    if (window.CDAP_CONFIG.securityEnabled) {
+    if (window?.CDAP_CONFIG?.securityEnabled) {
       const token = cookie.get('CDAP_Auth_Token');
       if (!isNil(token)) {
         headers.Authorization = `Bearer ${token}`;
