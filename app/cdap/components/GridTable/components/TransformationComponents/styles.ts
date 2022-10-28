@@ -135,5 +135,26 @@ export const useStyles = makeStyles(() => {
     errorText: {
       fontSize: 13,
     },
+    selectFormGroup: {
+      width: 'calc(100% - 60px)',
+      marginRight: '60px',
+      border: '1px solid #DADCE0',
+      height: '40px',
+      padding: '5px 15px',
+      fontSize: '14px',
+      background: '#FFFFFF',
+      borderRadius: '4px',
+      marginLeft: 0,
+      marginBottom: 5,
+    },
+    selectInputRoot: {
+      color: '#5F6368',
+      '&:before': {
+        border: 'none',
+      },
+    },
+    menuItemText: {
+      color: '#5F6368',
+    },
   };
 });

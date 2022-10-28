@@ -45,7 +45,6 @@ export default function({
   callBack,
   applyTransformation,
 }: IAddTransformationProp) {
-  console.log('add transform');
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);

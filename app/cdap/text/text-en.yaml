@@ -3460,6 +3460,8 @@ features:
   DirectiveUIComponent:
     filter: 
       selectAction: Select action to take
+      if: If
+      ignoreCase: Ignore Case
       filterRadioOption:
         keepRow: Keep rows
         removeRow: Remove rows

@@ -23,22 +23,18 @@ import T from 'i18n-react';
 import LabelComponent from '../InputComponents/LabelInputComponent';
 import { FormGroup, Box } from '@material-ui/core';
 import { FILTER_RADIO_OPTION, FILTER_OPTIONS, FILTER_PLACEHOLDER } from './options';
+import { IFilterProps } from './types';
 
-export default function({ setTransformationComponentsValue, transformationComponentValues }) {
-  console.log('filter');
-  const [radioOption, setRadioOption] = useState('KEEP');
-  const [optionSelected, setOptionSelected] = useState('EMPTY');
-  const [ignoreCase, setIgnoreCase] = useState(false);
-  const [customInput, setCustomInput] = useState('');
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: IFilterProps) {
+  const [radioOption, setRadioOption] = useState<string>('KEEP');
+  const [optionSelected, setOptionSelected] = useState<string>('EMPTY');
+  const [ignoreCase, setIgnoreCase] = useState<boolean>(false);
+  const [customInput, setCustomInput] = useState<string>('');
 
   const classes = useStyles();
-  useEffect(() => {
-    setTransformationComponentsValue({
-      ...transformationComponentValues,
-      filterRadioOption: radioOption,
-    });
-  }, [radioOption]);
-
   useEffect(() => {
     setTransformationComponentsValue({
       ...transformationComponentValues,
@@ -46,6 +42,13 @@ export default function({ setTransformationComponentsValue, transformationCompon
       filterOptionSelected: optionSelected,
     });
   }, []);
+
+  useEffect(() => {
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      filterRadioOption: radioOption,
+    });
+  }, [radioOption]);
 
   useEffect(() => {
     setTransformationComponentsValue({
@@ -81,7 +84,7 @@ export default function({ setTransformationComponentsValue, transformationCompon
         />
       </FormGroup>
       <FormGroup>
-        <LabelComponent labelText={`IF`} />
+        <LabelComponent labelText={`${T.translate('features.DirectiveUIComponent.filter.if')}`} />
         <SelectInput
           optionSelected={optionSelected}
           setOptionSelected={setOptionSelected}
@@ -91,7 +94,7 @@ export default function({ setTransformationComponentsValue, transformationCompon
           customInputPlaceHolder={FILTER_PLACEHOLDER[optionSelected]}
           checkboxValue={ignoreCase}
           setCheckboxValue={setIgnoreCase}
-          checkboxLabel={'Ignore case'}
+          checkboxLabel={`${T.translate('features.DirectiveUIComponent.filter.ignoreCase')}`}
         />
       </FormGroup>
     </Box>
