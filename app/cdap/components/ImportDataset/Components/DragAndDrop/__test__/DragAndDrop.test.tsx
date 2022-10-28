@@ -23,7 +23,6 @@ import history from 'services/history';
 describe('It should test DrawerWidget Component', () => {
   it('Should test whether DrawerWidget Component is rendered', () => {
     const file = new File(['(⌐□_□)'], 'chucknorris.png', { type: 'image/png' });
-    jest.spyOn(React, 'useCallback').mockImplementation((f) => f());
 
     const container = render(
       <Router history={history}>

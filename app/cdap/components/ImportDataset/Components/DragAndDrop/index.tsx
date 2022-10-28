@@ -46,7 +46,7 @@ export default function({ file, onDropHandler }: IDragAndDrop) {
               'file-drag-container': isDragActive,
             })}
           >
-            <input {...getInputProps()} />
+            <input {...getInputProps()} data-testid="file-drop-zone" />
             <div className={classes.uploadBox}>
               <UploadSVG />
               <Typography variant="body1" className={classes.dropText}>

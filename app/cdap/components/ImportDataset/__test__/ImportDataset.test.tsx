@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import DastaSet from 'components/ImportDataset/index';
@@ -36,5 +36,24 @@ describe('It should test DrawerWidget Component', () => {
       </Router>
     );
     expect(container).toBeDefined();
+  });
+  it('Should drop a file and trigger onDropHandler', async () => {
+    render(
+      <DastaSet
+        handleClosePanel={() => {
+          jest.fn();
+        }}
+      />
+    );
+    window.URL.createObjectURL = jest.fn().mockImplementation(() => 'url');
+    const inputEl = screen.getByTestId('file-drop-zone');
+    const file = new File(['file'], 'ping.json', {
+      type: 'application/json',
+    });
+    Object.defineProperty(inputEl, 'files', {
+      value: [file],
+    });
+    fireEvent.drop(inputEl);
+    expect(await screen.findByText('ping.json')).toBeInTheDocument();
   });
 });
