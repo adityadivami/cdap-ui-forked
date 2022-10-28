@@ -71,7 +71,7 @@ export default function() {
       .pipe(
         flatMap((res: IValues) => {
           const { dataprep } = DataPrepStore.getState();
-          setWorkspaceName(res.workspaceName);
+          setWorkspaceName(res?.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
@@ -183,7 +183,7 @@ export default function() {
 
   return (
     <Box>
-      <Breadcrumb datasetName={workspaceName} location={location} />
+      <Breadcrumb workspaceName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.gridTable.title')}
