@@ -14,21 +14,19 @@
  * the License.
  */
 
+import { Box } from '@material-ui/core';
+import { TickIcon } from 'components/AddTransformation/iconStore';
 import React from 'react';
 import { useStyles } from '../styles';
+import { IParseComponentProps } from './types';
 
-const ParseComponent = (props) => {
-  const { sectionHeading, children } = props;
+const ParseComponent = ({ sectionHeading, children }: IParseComponentProps) => {
   const classes = useStyles();
   return (
     <section className={classes.functionSectionStyles}>
       <div className={classes.funtionSectionWrapperStyles}>
         <div className={classes.functionHeadingTextStyles}>{sectionHeading}</div>
-        <img
-          className={classes.greenCheckIconStyles}
-          src="/cdap_assets/img/green-check.svg"
-          alt="tick icon"
-        />
+        <Box className={classes.greenCheckIconStyles}>{TickIcon}</Box>
       </div>
       {children}
     </section>

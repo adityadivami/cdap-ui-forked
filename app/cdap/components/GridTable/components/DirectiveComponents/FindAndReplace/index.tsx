@@ -24,45 +24,48 @@ import {
   NEW_VALUE,
 } from '../../../constants';
 import { useStyles } from '../styles';
-import FormInputFieldComponent from '../ParseComponents/FormInputFieldComponent';
 import InputCheckbox from 'components/InputCheckbox';
+import { IParseCSVProps } from '../ParseComponents/types';
+import FormInputField from 'components/FormInputField';
 
-const FindAndReplace = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [oldValue, setOldValue] = useState('');
-  const [ignoreCase, setIgnoreCase] = useState(false);
-  const [exactMatch, setExactMatch] = useState(false);
-  const [newValue, setNewValue] = useState('');
+const FindAndReplace = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IParseCSVProps) => {
+  const [oldValue, setOldValue] = useState<string>('');
+  const [ignoreCase, setIgnoreCase] = useState<boolean>(false);
+  const [exactMatch, setExactMatch] = useState<boolean>(false);
+  const [newValue, setNewValue] = useState<string>('');
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, findPreviousValue: oldValue });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, findPreviousValue: oldValue }));
   }, [oldValue]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, ignoreCase });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, ignoreCase }));
   }, [ignoreCase]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, exactMatch });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, exactMatch }));
   }, [exactMatch]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, findReplaceValue: newValue });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, findReplaceValue: newValue }));
   }, [newValue]);
 
   return (
     <div>
       <FormGroup>
         <div className={classes.formLabelStyles}>{FIND}</div>
-        <FormInputFieldComponent
+        <FormInputField
           formInputValue={oldValue}
           classnames={classes.formFieldStyles}
           inputProps={{
             type: 'text',
             value: oldValue,
             classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-            onChange: (e) => setOldValue(e.target.value),
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setOldValue(e.target.value),
             color: 'primary',
             placeholder: OLD_VALUE,
           }}
@@ -70,26 +73,26 @@ const FindAndReplace = (props) => {
         <InputCheckbox
           label={IGNORE_CASE}
           value={ignoreCase}
-          onChange={(e) => setIgnoreCase(e.target.checked)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIgnoreCase(e.target.checked)}
           className={classes.checkboxStyles}
         />
         <InputCheckbox
           label={EXACT_MATCH}
           value={exactMatch}
-          onChange={(e) => setExactMatch(e.target.checked)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setExactMatch(e.target.checked)}
           className={classes.checkboxStyles}
         />
       </FormGroup>
       <FormGroup>
         <div className={classes.formLabelStyles}>{REPLACE_WITH}</div>
-        <FormInputFieldComponent
+        <FormInputField
           formInputValue={newValue}
           classnames={classes.formFieldStyles}
           inputProps={{
             type: 'text',
             value: newValue,
             classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-            onChange: (e) => setNewValue(e.target.value),
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setNewValue(e.target.value),
             color: 'primary',
             placeholder: NEW_VALUE,
           }}

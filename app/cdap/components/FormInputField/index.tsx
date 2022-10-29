@@ -13,19 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { FormControlLabel, Input } from '@material-ui/core';
+import { FormControlLabel, Input, InputProps } from '@material-ui/core';
 import React from 'react';
+import { IFormInputComponentProps } from './types';
 
-const FormInputFieldComponent = (props) => {
-  const { formInputValue, classnames } = props;
-  console.log('Propssss', props.inputProps);
+const FormInputField = ({ formInputValue, classnames, inputProps }: IFormInputComponentProps) => {
   return (
     <FormControlLabel
       value={formInputValue}
       className={classnames}
-      control={<Input {...props.inputProps} />}
+      control={<Input {...(inputProps as InputProps)} />}
       label={''}
     />
   );
 };
-export default FormInputFieldComponent;
+export default FormInputField;
