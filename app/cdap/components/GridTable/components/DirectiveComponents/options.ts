@@ -13,35 +13,25 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-export const multipleColumnSelected = [
+export const DELIMITER_OPTION_EXPLODE_EXTRACT = [
   {
-    value: 'join-columns',
-    isMoreThanTwo: false,
+    value: ',',
+    label: 'Comma',
   },
   {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
+    value: '\\t',
+    label: 'Tab',
   },
   {
-    value: 'delete',
-    isMoreThanTwo: true,
+    value: '\\s+',
+    label: 'Whitespace',
   },
   {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
+    value: '\\|',
+    label: 'Pipe',
   },
   {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
+    value: 'customDelimiter',
+    label: 'Custom delimiter',
   },
 ];
-
-export const directiveComponentDefaultValues = {
-  radioOption: '',
-  customInput: '',
-};

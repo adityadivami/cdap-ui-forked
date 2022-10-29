@@ -14,34 +14,18 @@
  * the License.
  */
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
+import { makeStyles } from '@material-ui/styles';
 
-export const directiveComponentDefaultValues = {
-  radioOption: '',
-  customInput: '',
-};
+export const useStyles = makeStyles(() => {
+  return {
+    radioStyles: {
+      marginLeft: '-5px',
+      '& span:last-child': {
+        fontStyle: 'normal',
+        fontWeight: 400,
+        fontSize: '14px',
+        color: '#5F6368',
+      },
+    },
+  };
+});
