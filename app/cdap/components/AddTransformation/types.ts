@@ -33,3 +33,10 @@ export interface IAddTransformationProp {
   callBack: () => void;
   applyTransformation: (directive: string) => void;
 }
+
+export interface IDirectiveComponentValues {
+  filterCondition: string;
+  filterConditionValue: string;
+  counter: number;
+  counterName: string;
+}

@@ -14,17 +14,9 @@
  * the License.
  */
 
-import SetCounter from './components/DirectiveComponents/SetCounter';
-
-export const MISSING_NULL = 'Missing/Null';
-
-export const DIRECTIVE_COMPONENTS = [
-  {
-    type: 'set-counter',
-    component: SetCounter,
-  },
-];
-
-export const SELECT_ACTION = 'Select action to take';
-export const INCREMENT_COUNT_BY = 'Increment the count by';
-export const NAME_THIS_COUNTER = 'Name this counter';
+export interface IInputCheckbox {
+  label: string;
+  value: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className: string;
+}

@@ -13,18 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { InputProps } from '@material-ui/core';
 
-import SetCounter from './components/DirectiveComponents/SetCounter';
-
-export const MISSING_NULL = 'Missing/Null';
-
-export const DIRECTIVE_COMPONENTS = [
-  {
-    type: 'set-counter',
-    component: SetCounter,
-  },
-];
-
-export const SELECT_ACTION = 'Select action to take';
-export const INCREMENT_COUNT_BY = 'Increment the count by';
-export const NAME_THIS_COUNTER = 'Name this counter';
+export interface IFormInputComponentProps {
+  formInputValue: string | number;
+  classnames: string;
+  inputProps: InputProps;
+}

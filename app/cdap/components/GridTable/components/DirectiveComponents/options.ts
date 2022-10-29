@@ -14,17 +14,13 @@
  * the License.
  */
 
-import SetCounter from './components/DirectiveComponents/SetCounter';
-
-export const MISSING_NULL = 'Missing/Null';
-
-export const DIRECTIVE_COMPONENTS = [
+export const SET_COUNTER_OPTION = [
   {
-    type: 'set-counter',
-    component: SetCounter,
+    label: 'Always',
+    value: 'always',
+  },
+  {
+    label: 'If condition is true',
+    value: 'custom',
   },
 ];
-
-export const SELECT_ACTION = 'Select action to take';
-export const INCREMENT_COUNT_BY = 'Increment the count by';
-export const NAME_THIS_COUNTER = 'Name this counter';
