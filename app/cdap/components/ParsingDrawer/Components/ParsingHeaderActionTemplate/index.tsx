@@ -60,10 +60,10 @@ export default function({
       />
       <label htmlFor="file" className={classes.importSchemaLabel}>
         {importIcon}
+        <Typography className={classes.importSchemaTextStyles}>
+          {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.importSchema')}
+        </Typography>
       </label>
-      <Typography className={classes.importSchemaTextStyles}>
-        {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.importSchema')}
-      </Typography>
     </Box>
   );
 }
