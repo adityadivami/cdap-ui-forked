@@ -13,38 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { InputProps } from '@material-ui/core';
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
-
-export const directiveComponentDefaultValues = {
-  variableName: '',
-  selectedColumnForDefineVariable: '',
-  filterCondition: 'TEXTEXACTLY',
-  customInput: '',
-  selectedColumn: '',
-};
+export interface IFormInputComponentProps {
+  formInputValue: string | number;
+  classnames: string;
+  inputProps: InputProps;
+}
