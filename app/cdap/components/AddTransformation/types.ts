@@ -33,3 +33,12 @@ export interface IAddTransformationProp {
   callBack: () => void;
   applyTransformation: (directive: string) => void;
 }
+
+export interface IDirectiveComponentValues {
+  variableName: string;
+  selectedColumnForDefineVariable: string;
+  filterCondition: string;
+  customInput: string;
+  columnNames: string[];
+  selectedColumn: string;
+}

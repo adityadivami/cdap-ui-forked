@@ -13,38 +13,35 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-export const multipleColumnSelected = [
+export const DEFINE_VARIABLE_OPTIONS = [
   {
-    value: 'join-columns',
-    isMoreThanTwo: false,
+    label: 'value is',
+    value: 'TEXTEXACTLY',
   },
   {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
+    label: 'value starts with',
+    value: 'TEXTSTARTSWITH',
   },
   {
-    value: 'delete',
-    isMoreThanTwo: true,
+    label: 'value ends with',
+    value: 'TEXTENDSWITH',
   },
   {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
+    label: 'value contains regex',
+    value: 'TEXTREGEX',
   },
   {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
+    label: 'custom condition',
+    value: 'CUSTOMCONDITION',
   },
 ];
 
-export const directiveComponentDefaultValues = {
-  variableName: '',
-  selectedColumnForDefineVariable: '',
-  filterCondition: 'TEXTEXACTLY',
-  customInput: '',
-  selectedColumn: '',
+export const FILTER_PLACEHOLDER = {
+  EMPTY: '',
+  TEXTEXACTLY: 'Enter value',
+  TEXTCONTAINS: 'Enter contained value',
+  TEXTSTARTSWITH: 'Enter prefix',
+  TEXTENDSWITH: 'Enter suffix',
+  TEXTREGEX: 'Enter regex',
+  CUSTOMCONDITION: 'E.g. < 30 || gender == "Male"',
 };
