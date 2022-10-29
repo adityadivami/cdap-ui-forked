@@ -156,5 +156,41 @@ export const useStyles = makeStyles(() => {
     menuItemText: {
       color: '#5F6368',
     },
+    popoverBox: {
+      padding: 10,
+    },
+    popoverHead: {
+      fontSize: 16,
+      borderBottom: '1px solid #E0E0E0',
+      color: '#5F6368',
+      marginBottom: 5,
+      fontWeight: 600,
+    },
+    popoverText: {
+      fontSize: 14,
+      color: '#5F6368',
+      fontWeight: 400,
+    },
+    applyStepButtonStyles: {
+      width: '162px',
+      height: '36px',
+      background: '#3994FF',
+      boxShadow: '0px 2px 4px rgba(70, 129, 244, 0.15)',
+      borderRadius: '4px',
+      fontFamily: 'Noto Sans',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: '15px',
+      lineHeight: '26px',
+      letterSpacing: '0.46px',
+      color: '#FFFFFF',
+      alignSelf: 'flex-end',
+      marginTop: '30px',
+      textTransform: 'none',
+      marginBottom: '20px',
+      '&:hover': {
+        backgroundColor: '#3994FF',
+      },
+    },
   };
 });
