@@ -1,5 +1,3 @@
-import { InputProps } from '@material-ui/core';
-
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -15,6 +13,8 @@ import { InputProps } from '@material-ui/core';
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
+import { InputProps } from '@material-ui/core';
 export interface IFormInputComponentProps {
   formInputValue: string | number;
   classnames: string;

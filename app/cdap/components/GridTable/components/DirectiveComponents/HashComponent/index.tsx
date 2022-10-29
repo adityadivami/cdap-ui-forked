@@ -20,11 +20,15 @@ import React, { useState, useEffect } from 'react';
 import { useStyles } from '../styles';
 import { ENCODE, SELECT_HASH_ALGO } from 'components/GridTable/constants';
 import SelectInputComponent from '../../../../SelectInputComponent';
+import { IParseCSVProps } from '../ParseComponents/types';
 
-const HashComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues, functionName } = props;
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(HASH_ALGORITHM_OPTIONS[0]);
-  const [encode, setEncode] = useState(false);
+const HashComponent = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+  functionName,
+}: IParseCSVProps) => {
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>(HASH_ALGORITHM_OPTIONS[0]);
+  const [encode, setEncode] = useState<boolean>(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -51,12 +55,6 @@ const HashComponent = (props) => {
         checkboxLabel={ENCODE}
         functionName={functionName}
       />
-      {/* <InputCheckbox
-        label={ENCODE}
-        value={encode}
-        onChange={(e) => setEncode(e.target.checked)}
-        className={classes.checkboxStyles}
-      /> */}
     </FormGroup>
   );
 };
