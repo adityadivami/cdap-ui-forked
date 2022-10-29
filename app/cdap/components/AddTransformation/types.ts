@@ -23,7 +23,7 @@ export interface IHeaderNamesList {
   type: string[];
 }
 export interface IDataQuality {
-  [key: string]: string | any;
+  [key: string]: string;
 }
 export interface IAddTransformationProp {
   directiveFunctionSupportedDataType: string[];
@@ -32,4 +32,13 @@ export interface IAddTransformationProp {
   missingDataList: IDataQuality;
   callBack: () => void;
   applyTransformation: (directive: string) => void;
+}
+
+export interface ITransformationComponentValues {
+  radioOption: string;
+  customInput: string;
+  startValue: string;
+  endValue: string;
+  nDigit: string;
+  extractOptionSelected: string;
 }

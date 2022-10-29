@@ -14,9 +14,34 @@
  * the License.
  */
 import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+import { USING_PATTERN_OPTIONS } from 'components/GridTable/components/TransformationComponents/PatternExtract/options';
+import { ITransformationComponentValues } from './types';
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  directiveComponentValues: ITransformationComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
+  } else if (functionName === 'using-delimiters') {
+    return `split-to-columns :${columnSelected} ${
+      directiveComponentValues.customInput
+        ? directiveComponentValues.customInput
+        : directiveComponentValues.radioOption
+    }`;
+  } else if (functionName === 'using-patterns') {
+    const option = USING_PATTERN_OPTIONS?.filter(
+      (el) => el.value === directiveComponentValues.extractOptionSelected
+    );
+    if (option?.length) {
+      return option[0].extractDirective(
+        columnSelected,
+        directiveComponentValues.customInput,
+        directiveComponentValues.startValue,
+        directiveComponentValues.endValue,
+        directiveComponentValues.nDigit
+      );
+    }
   } else {
     return null;
   }

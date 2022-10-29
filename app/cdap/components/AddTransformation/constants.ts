@@ -40,3 +40,12 @@ export const multipleColumnSelected = [
     isMoreThanTwo: true,
   },
 ];
+
+export const transformationComponentDefaultValues = {
+  radioOption: '',
+  customInput: '',
+  startValue: '',
+  endValue: '',
+  nDigit: '',
+  extractOptionSelected: '',
+};
