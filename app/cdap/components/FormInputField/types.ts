@@ -1,3 +1,5 @@
+import { InputProps } from '@material-ui/core';
+
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -13,37 +15,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+export interface IFormInputComponentProps {
+  formInputValue: string | number;
+  classnames: string;
+  inputProps: InputProps;
+}
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
-
-export const directiveComponentDefaultValues = {
-  ignoreCase: false,
-  exactMatch: false,
-  findPreviousValue: '',
-  findReplaceValue: '',
-};
+export interface IFormInputClassProps {
+  underline: string;
+  input: string;
+}

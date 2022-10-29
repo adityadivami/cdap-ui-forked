@@ -33,3 +33,10 @@ export interface IAddTransformationProp {
   callBack: () => void;
   applyTransformation: (directive: string) => void;
 }
+
+export interface IDirectiveComponentValues {
+  ignoreCase: boolean;
+  exactMatch: boolean;
+  findPreviousValue: string;
+  findReplaceValue: string;
+}

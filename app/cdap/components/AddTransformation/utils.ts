@@ -14,9 +14,22 @@
  * the License.
  */
 import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+import { IDirectiveComponentValues } from './types';
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  directiveComponentValues: IDirectiveComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
+  } else if (functionName === 'findAndReplace') {
+    const makeOldValue = directiveComponentValues.exactMatch
+      ? `^${directiveComponentValues.findPreviousValue}$`
+      : directiveComponentValues.findPreviousValue;
+    const finalValue = directiveComponentValues.ignoreCase
+      ? `s/${makeOldValue}/${directiveComponentValues.findReplaceValue}/Ig`
+      : `s/${makeOldValue}/${directiveComponentValues.findReplaceValue}/g`;
+    return `find-and-replace :${columnSelected} ${finalValue}`;
   } else {
     return null;
   }

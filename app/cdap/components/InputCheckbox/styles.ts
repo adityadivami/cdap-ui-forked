@@ -14,36 +14,17 @@
  * the License.
  */
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
+import { makeStyles } from '@material-ui/styles';
 
-export const directiveComponentDefaultValues = {
-  ignoreCase: false,
-  exactMatch: false,
-  findPreviousValue: '',
-  findReplaceValue: '',
-};
+export const useStyles = makeStyles(() => {
+  return {
+    labelTextStyles: {
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: 14,
+      lineHeight: '150%',
+      letterSpacing: '0.15px',
+      color: '#5F6368',
+    },
+  };
+});
