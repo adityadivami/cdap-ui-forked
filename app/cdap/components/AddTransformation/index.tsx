@@ -46,6 +46,9 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
+  const [transformationComponentValues, setTransformationComponentsValue] = useState<
+    ITransformationComponentValues
+  >(transformationComponentDefaultValues);
   const classes = useStyles();
   const closeClickHandler = () => {
     callBack();
@@ -68,7 +71,11 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive: string = getDirective(functionName, selectedColumns[0].label);
+    const directive = getDirective(
+      functionName,
+      selectedColumns[0].label,
+      transformationComponentValues
+    );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
@@ -98,6 +105,10 @@ export default function({
     }
   };
 
+  const isComponentAvailable =
+    TRANSFORMATION_COMPONENTS?.some((item) => item?.type === functionName) ||
+    CALCULATE_OPTIONS?.some((item) => item?.value?.toLowerCase() === functionName?.toLowerCase());
+
   return (
     <Fragment>
       <DrawerWidget
@@ -116,6 +127,19 @@ export default function({
               selectedColumns={selectedColumns}
               functionName={functionName}
             />
+            {isComponentAvailable && (
+              <TransformationContent
+                setTransformationComponentsValue={setTransformationComponentsValue}
+                transformationComponent={TRANSFORMATION_COMPONENTS}
+                transformationComponentValues={transformationComponentValues}
+                functionName={functionName}
+                transformationFunctionSupportedDataType={directiveFunctionSupportedDataType}
+                columnData={columnData}
+                missingDataList={missingDataList}
+                callBack={callBack}
+                applyTransformation={applyTransformation}
+              />
+            )}
           </div>
           <ButtonWidget
             buttonText={T.translate(

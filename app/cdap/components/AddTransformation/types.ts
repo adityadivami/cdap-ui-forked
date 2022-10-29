@@ -40,3 +40,11 @@ export interface IMultipleSelectedFunctionDetail {
 export interface IDataQualityItem {
   [key: string]: string | number;
 }
+
+export interface ITransformationComponentValues {
+  customInput: string;
+  ignoreCase: boolean;
+  filterOptionSelected: string;
+  filterOptionValue: string;
+  filterRadioOption: string;
+}
