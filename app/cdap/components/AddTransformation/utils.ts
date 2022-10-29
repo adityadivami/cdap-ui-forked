@@ -23,10 +23,8 @@ export const getDirective = (
 ) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
-  } else if (functionName === 'array-flattening') {
-    return explodeByFlattening(selectedColumns);
-  } else if (functionName === 'record-flattening') {
-    return explodeRecordByFlattening(selectedColumns);
+  } else if (functionName === 'array-flattening' || functionName === 'record-flattening') {
+    return explodeByFlattening(selectedColumns, functionName);
   } else if (functionName === 'delimited-text' || functionName === 'using-delimiters') {
     return `split-to-rows :${columnSelected} ${
       directiveComponentValues.radioOption === 'customDelimiter'
@@ -38,20 +36,15 @@ export const getDirective = (
   }
 };
 
-const explodeByFlattening = (columnName) => {
-  let column = `:${columnName.toString()}`;
-  if (Array.isArray(columnName) && columnName.length > 1) {
-    column = columnName.map((c) => `:${c}`).join(',');
+const explodeByFlattening = (columnsList: IHeaderNamesList[], type: string) => {
+  if (columnsList.length) {
+    const column = columnsList.map(({ label }) => `:${label}`).join(',');
+    let directive;
+    if (type === 'array-flattening') {
+      directive = `flatten ${column}`;
+    } else {
+      directive = `flatten-record ${column}`;
+    }
+    return directive;
   }
-  const directive = `flatten ${column}`;
-  return directive;
-};
-
-const explodeRecordByFlattening = (columnName) => {
-  let column = `:${columnName.toString()}`;
-  if (Array.isArray(columnName) && columnName.length > 1) {
-    column = columnName.map((c) => `:${c}`).join(',');
-  }
-  const directive = `flatten-record ${column}`;
-  return directive;
 };
