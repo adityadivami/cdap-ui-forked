@@ -76,6 +76,10 @@ export default function GridTable() {
     string[]
   >([]);
   const [dataQuality, setDataQuality] = useState<IDataQuality>({});
+  const [columnSelected, setColumnSelected] = useState<string>('');
+  const [optionSelected, setOptionSelected] = useState<string>('');
+  const [maskSelection, setMaskSelection] = useState<boolean>(false);
+
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -210,18 +214,33 @@ export default function GridTable() {
 
   // ------------@onMenuOptionSelection Function is used to set option selected from toolbar and then calling of execute API
   const onMenuOptionSelection = (option: string, supported_dataType: string[]) => {
+    setOptionSelected(option);
     setDirectiveFunction(option);
     setDirectiveFunctionSupportedDataType(supported_dataType);
   };
 
   const applyDirectives = (directive: string) => {
-    setLoading(true);
-    if (directive) {
-      const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
-      executeAPICall(apiPayload);
+    if (optionSelected === 'using-positions') {
+      if (!Boolean(columnSelected) && !Boolean(directive)) {
+        setMaskSelection(true);
+        return;
+      } else if (Boolean(columnSelected) && !Boolean(directive)) {
+        setMaskSelection(true);
+        return;
+      } else {
+        const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+        executeAPICall(apiPayload);
+        setMaskSelection(false);
+      }
     } else {
-      setLoading(false);
-      setDirectiveFunction('');
+      setLoading(true);
+      if (directive) {
+        const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+        executeAPICall(apiPayload);
+      } else {
+        setLoading(false);
+        setDirectiveFunction('');
+      }
     }
   };
 
@@ -299,10 +318,33 @@ export default function GridTable() {
               return (
                 <TableRow key={`row-${rowIndex}`}>
                   {headersNamesList.map((eachKey, eachIndex) => {
+                    console.log(
+                      'columnSelected',
+                      columnSelected,
+                      eachKey.name === columnSelected,
+                      eachKey.name
+                    );
                     return (
                       <GridTextCell
                         cellValue={eachRow[eachKey.name] || '--'}
                         key={`${eachKey.name}-${eachIndex}`}
+                        maskSelection={eachKey.name === columnSelected ? maskSelection : false}
+                        rowNumber={rowIndex}
+                        columnSelected={columnSelected}
+                        optionSelected={optionSelected}
+                        headers={
+                          headersNamesList.length > 0
+                            ? headersNamesList.map(({ label }) => label)
+                            : []
+                        }
+                        applyTransformation={(value) => {
+                          applyDirectives(value);
+                        }}
+                        cancelTransformation={() => {
+                          setColumnSelected('');
+                          setOptionSelected('');
+                          setMaskSelection(false);
+                        }}
                       />
                     );
                   })}
@@ -320,7 +362,8 @@ export default function GridTable() {
           callBack={() => {
             setDirectiveFunction('');
           }}
-          applyTransformation={(directive: string) => {
+          applyTransformation={(directive: string, column?: string) => {
+            setColumnSelected(column);
             applyDirectives(directive);
           }}
         />

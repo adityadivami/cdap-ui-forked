@@ -80,7 +80,7 @@ export default function({
       selectedColumns[0].label,
       transformationComponentValues
     );
-    applyTransformation(directive);
+    applyTransformation(directive, selectedColumns[0].label);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
 

@@ -3458,6 +3458,11 @@ features:
         otherIcon: 'Other'
         toggleDescription: 'Function names'
   DirectiveUIComponent:
+    calculate:
+      columnExist: This column name already exist
+      copyToNewColumn: Copy to a new column
+      destinationColumn: Destination Column
+      nameNewColumn:  Name new column
     extract:
       digits: Digits
       extractTextStart: Extract text that start with

@@ -31,7 +31,7 @@ export interface IAddTransformationProp {
   columnData: IHeaderNamesList[];
   missingDataList: IDataQuality;
   callBack: () => void;
-  applyTransformation: (directive: string) => void;
+  applyTransformation: (directive: string, column?: string) => void;
 }
 
 export interface ITransformationComponentValues {

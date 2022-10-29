@@ -14,21 +14,101 @@
  * the License.
  */
 
-import { Card, TableCell, Typography } from '@material-ui/core';
-import React from 'react';
+import { Card, TableCell, Typography, Popover } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { useGridTextCellStyles } from './styles';
 import { IGridTextCellProps } from './types';
+import PostionExtract from '../TransformationComponents/PositionExtract';
 
-export default function GridTextCell({ cellValue }: IGridTextCellProps) {
+export default function GridTextCell({
+  cellValue,
+  maskSelection,
+  rowNumber,
+  columnSelected,
+  applyTransformation,
+  cancelTransformation,
+  optionSelected,
+  headers,
+}: IGridTextCellProps) {
+  console.log('maskSelection', maskSelection);
   const classes = useGridTextCellStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [textSelectionRange, setTextSelectionRange] = useState({
+    start: null,
+    end: null,
+  });
+
+  const mouseUpHandler = (event) => {
+    if (!maskSelection) {
+      return;
+    }
+
+    const currentSelection = window.getSelection().toString();
+    let startRange, endRange;
+
+    if (currentSelection.length) {
+      startRange = window.getSelection().getRangeAt(0).startOffset;
+      endRange = window.getSelection().getRangeAt(0).endOffset;
+      setAnchorEl(event.currentTarget);
+      setTextSelectionRange({
+        start: startRange,
+        end: endRange,
+      });
+    } else {
+      setTextSelectionRange({
+        start: null,
+        end: null,
+      });
+      setAnchorEl(null);
+      cancelTransformation();
+    }
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setTextSelectionRange({
+      start: null,
+      end: null,
+    });
+    cancelTransformation();
+  };
+
+  const open = Boolean(anchorEl);
 
   return (
-    <TableCell className={classes.tableRowCell}>
-      <Card className={classes.root} variant="outlined">
-        <Typography className={classes.cell} data-testid={`grid-text-cell-${cellValue}`}>
-          {cellValue}
-        </Typography>
-      </Card>
-    </TableCell>
+    <>
+      <TableCell
+        className={
+          maskSelection
+            ? `${classes.tableRowCell} ${classes.highlightedColumn}`
+            : classes.tableRowCell
+        }
+        onMouseUp={mouseUpHandler}
+      >
+        <Card
+          className={maskSelection ? `${classes.root} ${classes.highlightedColumn}` : classes.root}
+          variant="outlined"
+        >
+          <Typography className={classes.cell} data-testid={`grid-text-cell-${cellValue}`}>
+            {cellValue}
+          </Typography>
+        </Card>
+      </TableCell>
+      {optionSelected == 'using-positions' && anchorEl && (
+        <PostionExtract
+          open={open}
+          anchorEl={anchorEl}
+          handleClose={handleClose}
+          setAnchorEl={setAnchorEl}
+          setTextSelectionRange={setTextSelectionRange}
+          textSelectionRange={textSelectionRange}
+          columnSelected={columnSelected}
+          applyTransformation={applyTransformation}
+          cancelTransformation={cancelTransformation}
+          optionSelected={optionSelected}
+          headers={headers}
+        />
+      )}
+    </>
   );
 }
