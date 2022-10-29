@@ -14,37 +14,17 @@
  * the License.
  */
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
+import { FormControlLabel, Input } from '@material-ui/core';
+import React from 'react';
+import { IFormInputFieldComponentProps } from '../types';
 
-export const transformationComponentDefaultValues = {
-  customInput: '',
-  ignoreCase: false,
-  filterOptionSelected: 'EMPTY',
-  filterOptionValue: '',
-  filterRadioOption: 'KEEP',
-};
+export default function({ formInputValue, classnames, inputProps }: IFormInputFieldComponentProps) {
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...inputProps} />}
+      label={''}
+    />
+  );
+}

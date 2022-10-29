@@ -14,37 +14,10 @@
  * the License.
  */
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
-
-export const transformationComponentDefaultValues = {
-  customInput: '',
-  ignoreCase: false,
-  filterOptionSelected: 'EMPTY',
-  filterOptionValue: '',
-  filterRadioOption: 'KEEP',
-};
+import { ITransformationComponentValues } from '../../../../AddTransformation/types';
+export interface ISendToErrorProps {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
+}
