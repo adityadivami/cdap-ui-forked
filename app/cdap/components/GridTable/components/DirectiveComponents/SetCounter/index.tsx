@@ -24,11 +24,12 @@ import {
 } from 'components/GridTable/constants';
 import FormInputField from 'components/FormInputField';
 import SelectInputComponent from 'components/SelectInputComponent';
+import { IParseCSVProps } from '../ParseComponents/ParseSimpleDateComponent/types';
 
-const SetCounter = ({ setDirectiveComponentsValue, directiveComponentValues }) => {
+const SetCounter = ({ setDirectiveComponentsValue, directiveComponentValues }: IParseCSVProps) => {
   const [filterCondition, setFilterCondition] = useState<string>('always');
   const [filterValue, setFilterValue] = useState<string>('');
-  const [counter, setCounter] = useState<string>('1');
+  const [counter, setCounter] = useState<number>(1);
   const [counterName, setCounterName] = useState<string>('');
   const classes = useStyles();
 
@@ -109,7 +110,8 @@ const SetCounter = ({ setDirectiveComponentsValue, directiveComponentValues }) =
             type: 'number',
             value: counter,
             classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCounter(e.target.value),
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+              setCounter(Number(e.target.value)),
             color: 'primary',
           }}
         />
