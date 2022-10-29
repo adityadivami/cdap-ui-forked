@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
 
 export interface IParams {
   context: string | number | IRecords;
@@ -94,4 +95,23 @@ export interface ICellData {
 export interface IMissingList {
   name: string;
   values: Record<string, string>;
+}
+
+export interface ITransformationContentParams {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponent: ITransformationComponentType[];
+  transformationComponentValues: ITransformationComponentValues;
+  functionName: string;
+  transformationFunctionSupportedDataType: string[];
+  columnData: IHeaderNamesList[];
+  missingDataList: IDataQuality;
+  callBack: () => void;
+  applyTransformation: (directive: string) => void;
+}
+
+export interface ITransformationComponentType {
+  type: string;
+  component: (props) => JSX.Element;
 }

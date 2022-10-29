@@ -32,6 +32,15 @@ export interface IAddTransformationProps {
   applyTransformation: (directive: string) => void;
 }
 
+export interface ITransformationComponentValues {
+  radioOption: string;
+  customInput: string;
+  startValue: string;
+  endValue: string;
+  nDigit: string;
+  extractOptionSelected: string;
+}
+
 export interface IMultipleSelectedFunctionDetail {
   value: string;
   isMoreThanTwo: boolean;
