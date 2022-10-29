@@ -33,3 +33,7 @@ export interface IAddTransformationProp {
   callBack: () => void;
   applyTransformation: (directive: string) => void;
 }
+export interface IDirectiveComponentValues {
+  hashValue: string;
+  encode: boolean;
+}

@@ -14,10 +14,26 @@
  * the License.
  */
 import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+import { IDirectiveComponentValues } from './types';
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  directiveComponentValues: IDirectiveComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
+  } else if (functionName == 'hash') {
+    const hashDirective = directiveForHash(
+      columnSelected,
+      directiveComponentValues.hashValue,
+      directiveComponentValues.encode
+    );
+    return hashDirective;
   } else {
     return null;
   }
+};
+
+export const directiveForHash = (column, alogorithm, encode) => {
+  return `hash :${column} ${alogorithm} ${encode}`;
 };
