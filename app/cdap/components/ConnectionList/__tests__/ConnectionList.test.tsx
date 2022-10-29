@@ -17,7 +17,7 @@
 import { render, screen } from '@testing-library/react';
 import * as apiHelpersForExploreConnection from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
-import * as Reducer from 'components/Connections/Create/reducer';
+import * as reducer from 'components/Connections/Create/reducer';
 import history from 'app/cdap/services/history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
@@ -27,9 +27,9 @@ import {
   connectionListDummyResPostGresSql,
   mockDataForExploreConnection,
   mockResponseForFetchConnectors,
-} from '../mock/mockDataForConnectionList';
+} from 'components/ConnectionList/mock/mockDataForConnectionList';
 
-describe('It Should test Connection List Component', () => {
+describe('It should test Connection List component', () => {
   beforeEach(() => {
     const dummyRes = new Map();
     dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
@@ -39,7 +39,7 @@ describe('It Should test Connection List Component', () => {
       return Promise.resolve(mockDataForExploreConnection);
     });
   });
-  it('Should render Connection List Component', () => {
+  it('Should render Connection List component', () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -51,12 +51,12 @@ describe('It Should test Connection List Component', () => {
     );
     expect(container).toBeDefined();
   });
-  it('Should render Connection List Component', () => {
+  it('Should render Connection List component', () => {
     const dummyRes = new Map();
     dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
     dummyRes.set('File', connectionListDummyResFile);
     jest
-      .spyOn(Reducer, 'fetchConnectors')
+      .spyOn(reducer, 'fetchConnectors')
       .mockReturnValue(Promise.resolve(mockResponseForFetchConnectors));
 
     jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));

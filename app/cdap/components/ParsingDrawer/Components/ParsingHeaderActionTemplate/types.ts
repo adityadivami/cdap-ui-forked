@@ -17,7 +17,7 @@
 import { ReactNode } from 'react';
 
 export interface IParsingHeaderActionTemplateProps {
-  handleSchemaUpload: (IschemaProps) => void;
+  handleSchemaUpload: (iSchemaProps) => void;
   setErrorOnTransformation: React.Dispatch<
     React.SetStateAction<{
       open: boolean;
@@ -26,7 +26,7 @@ export interface IParsingHeaderActionTemplateProps {
   >;
 }
 
-interface IschemaProps {
+interface iSchemaProps {
   type: string;
   name: string;
   fields: Ifields;

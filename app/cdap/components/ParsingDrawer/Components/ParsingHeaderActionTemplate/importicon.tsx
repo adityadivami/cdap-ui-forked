@@ -17,7 +17,14 @@
 import React from 'react';
 
 export const importIcon = (
-  <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="23"
+    height="22"
+    viewBox="0 0 23 22"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    data-testId="import-icon-svg"
+  >
     <path
       d="M21.2646 14.0059V18.5059C21.2646 19.1026 21.0276 19.6749 20.6056 20.0968C20.1837 20.5188 19.6114 20.7559 19.0146 20.7559H3.26465C2.66791 20.7559 2.09561 20.5188 1.67366 20.0968C1.2517 19.6749 1.01465 19.1026 1.01465 18.5059V14.0059"
       stroke="#5F6368"

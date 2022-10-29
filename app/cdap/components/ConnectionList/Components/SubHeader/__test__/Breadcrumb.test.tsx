@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import BreadCumb from '../index';
+import Breadcrumb from '../index';
 import { Router, Route, Switch } from 'react-router';
 import history from 'services/history';
 test('renders BreadCumb Component', () => {
@@ -24,7 +24,7 @@ test('renders BreadCumb Component', () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <BreadCumb />
+          <Breadcrumb />
         </Route>
       </Switch>
     </Router>

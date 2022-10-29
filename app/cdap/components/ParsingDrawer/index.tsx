@@ -76,9 +76,9 @@ export default function({ setLoading, updateDataTranformation }) {
     } catch (err) {
       setErrorOnTransformation({
         open: true,
-        message: JSON.stringify(
-          T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage1')
-        ),
+        message: T.translate(
+          'features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage1'
+        ).toString(),
       });
       setLoading(false);
     }
@@ -141,11 +141,9 @@ export default function({ setLoading, updateDataTranformation }) {
           handleCloseError={() =>
             setErrorOnTransformation({
               open: false,
-              message: JSON.stringify(
-                T.translate(
-                  'features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage2'
-                )
-              ),
+              message: T.translate(
+                'features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage2'
+              ).toString(),
             })
           }
           messageToDisplay={errorOnTransformation.message}

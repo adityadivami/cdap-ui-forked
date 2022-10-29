@@ -19,8 +19,11 @@ import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHe
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import history from 'services/history';
-import TabLabelCanSample from '../index';
-import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
+import TabLabelCanSample from 'components/ConnectionList/Components/TabLabelCanSample/index';
+import {
+  mockConnectorTypeData,
+  mockEntityDataForNoWorkspace,
+} from 'components/ConnectionList/Components/TabLabelCanSample/mock/mockConnectorTypeData';
 describe('Test TabLabelCanSample Component', () => {
   it('Should render TabLabelCanSample Component', () => {
     render(
