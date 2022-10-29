@@ -13,18 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { FormControlLabel, Input, InputProps } from '@material-ui/core';
+import React from 'react';
+import { IFormInputComponentProps } from './types';
 
-import SetCounter from './components/DirectiveComponents/SetCounter';
-
-export const MISSING_NULL = 'Missing/Null';
-
-export const DIRECTIVE_COMPONENTS = [
-  {
-    type: 'set-counter',
-    component: SetCounter,
-  },
-];
-
-export const SELECT_ACTION = 'Select action to take';
-export const INCREMENT_COUNT_BY = 'Increment the count by';
-export const NAME_THIS_COUNTER = 'Name this counter';
+const FormInputField = ({ formInputValue, classnames, inputProps }: IFormInputComponentProps) => {
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...(inputProps as InputProps)} />}
+      label={''}
+    />
+  );
+};
+export default FormInputField;

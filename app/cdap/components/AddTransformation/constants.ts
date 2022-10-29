@@ -40,3 +40,10 @@ export const multipleColumnSelected = [
     isMoreThanTwo: true,
   },
 ];
+
+export const directiveComponentDefaultValues = {
+  filterCondition: '',
+  filterConditionValue: '',
+  counter: 1,
+  counterName: '',
+};

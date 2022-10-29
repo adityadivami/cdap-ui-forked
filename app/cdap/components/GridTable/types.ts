@@ -14,6 +14,9 @@
  * the License.
  */
 
+import { IDirectiveComponentValues } from 'components/AddTransformation/types';
+import { IParseCSVProps } from './components/DirectiveComponents/ParseComponents/ParseSimpleDateComponent/types';
+
 export interface IParams {
   context: string | number | IRecords;
   workspaceId: string;
@@ -80,4 +83,21 @@ export interface IApiPayload {
   payload: IRecords;
   requestBody: IRequestBody;
   gridParams: IGridParams;
+}
+
+export interface IDirectiveContentParams {
+  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
+  directiveComponents: IDirectiveComponentType[];
+  directiveComponentValues: IDirectiveComponentValues;
+  functionName: string;
+  directiveFunctionSupportedDataType: string[];
+  columnData: IHeaderNamesList[];
+  missingDataList: IDataQuality;
+  callBack: () => void;
+  applyTransformation: (directive: string) => void;
+}
+
+export interface IDirectiveComponentType {
+  type: string;
+  component: (props: IParseCSVProps) => JSX.Element;
 }
