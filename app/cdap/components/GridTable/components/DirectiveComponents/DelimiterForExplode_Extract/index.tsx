@@ -18,11 +18,15 @@ import { PLEASE_SELECT_THE_DELIMITER } from '../../../constants';
 import { DELIMITER_OPTION_EXPLODE_EXTRACT } from '../options';
 import InputRadioWithCustomInputComponent from '../ParseComponents/InputRadioWithCustomInputComponent';
 import ParseComponent from '../ParseComponents';
+import { IDirectiveComponentValues } from 'components/AddTransformation/types';
+import { IParseCSVProps } from '../ParseComponents/types';
 
-const DelimiterComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [selectedParseType, setSelectedParseType] = useState('');
-  const [delimiter, setDelimiter] = useState('');
+const DelimiterComponent = ({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IParseCSVProps) => {
+  const [selectedParseType, setSelectedParseType] = useState<string>('');
+  const [delimiter, setDelimiter] = useState<string>('');
 
   useEffect(() => {
     setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: selectedParseType }));

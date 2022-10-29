@@ -14,13 +14,13 @@
  * the License.
  */
 
+import { Box } from '@material-ui/core';
+import { TickIcon } from 'components/AddTransformation/iconStore';
 import React from 'react';
 import { useStyles } from '../styles';
-import { TickIcon } from 'components/AddTransformation/iconStore';
-import { Box } from '@material-ui/core';
+import { IParseComponentProps } from './types';
 
-const ParseComponent = (props) => {
-  const { sectionHeading, children } = props;
+const ParseComponent = ({ sectionHeading, children }: IParseComponentProps) => {
   const classes = useStyles();
   return (
     <section className={classes.functionSectionStyles}>

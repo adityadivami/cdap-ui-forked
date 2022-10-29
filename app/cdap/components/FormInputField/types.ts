@@ -13,19 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import DelimiterExtractExplode from './components/DirectiveComponents/DelimiterForExplode_Extract';
+export interface IFormInputComponentProps {
+  formInputValue: string | number;
+  classnames: string;
+  inputProps: IFormInputProps;
+}
 
-export const MISSING_NULL = 'Missing/Null';
-
-export const DIRECTIVE_COMPONENTS = [
-  {
-    type: 'delimited-text',
-    component: DelimiterExtractExplode,
-  },
-  {
-    type: 'using-delimiters',
-    component: DelimiterExtractExplode,
-  },
-];
-
-export const PLEASE_SELECT_THE_DELIMITER = 'Please select the delimiter';
+export interface IFormInputProps {
+  classes: Record<string, string>;
+  type: string;
+  value: string | number;
+  onChange: (e: any) => void;
+  color: 'primary' | 'secondary';
+  placeholder: string;
+}
