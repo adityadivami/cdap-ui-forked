@@ -13,35 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { FormControlLabel, Input, InputProps } from '@material-ui/core';
+import React from 'react';
+import { IFormInputComponentProps } from './types';
 
-export const multipleColumnSelected = [
-  {
-    value: 'join-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'swap-columns',
-    isMoreThanTwo: false,
-  },
-  {
-    value: 'delete',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'array-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'record-flattening',
-    isMoreThanTwo: true,
-  },
-  {
-    value: 'keep',
-    isMoreThanTwo: true,
-  },
-];
-
-export const directiveComponentDefaultValues = {
-  hashValue: '',
-  encode: false,
+const FormInputField = ({ formInputValue, classnames, inputProps }: IFormInputComponentProps) => {
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...(inputProps as InputProps)} />}
+      label={''}
+    />
+  );
 };
+export default FormInputField;
