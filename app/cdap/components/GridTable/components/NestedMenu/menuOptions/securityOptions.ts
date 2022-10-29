@@ -16,41 +16,33 @@
 
 export const SECURITY_OPTIONS = [
   {
-    value: 'mask-data',
-    label: 'Mask Data',
-    options: [
-      {
-        value: 'last-4',
-        label: 'Show last 4 characters only',
-        supported_dataType: ['string'],
-      },
-      {
-        value: 'last-2',
-        label: 'Show last 2 characters only',
-        supported_dataType: ['string'],
-      },
-      {
-        value: 'numbers',
-        label: 'Custom Selection',
-        supported_dataType: ['string'],
-      },
-      { value: 'divider' },
-      {
-        value: 'shuffle',
-        label: 'By Shuffling',
-        supported_dataType: ['string'],
-      },
-    ],
-    supported_dataType: ['string'],
-  },
-  {
     value: 'encode',
     label: 'Encode',
     options: [
-      { value: 'encode-base64', label: 'Base64', supported_dataType: ['all'] },
-      { value: 'encode-base32', label: 'Base32', supported_dataType: ['all'] },
-      { value: 'encode-hex', label: 'Hex', supported_dataType: ['all'] },
-      { value: 'encode-url', label: 'URL', supported_dataType: ['all'] },
+      {
+        value: 'encode-base64',
+        label: 'Base64',
+        supported_dataType: ['all'],
+        directive: (columnSelected: string) => `encode base64 :${columnSelected}`,
+      },
+      {
+        value: 'encode-base32',
+        label: 'Base32',
+        supported_dataType: ['all'],
+        directive: (columnSelected: string) => `encode base32 :${columnSelected}`,
+      },
+      {
+        value: 'encode-hex',
+        label: 'Hex',
+        supported_dataType: ['all'],
+        directive: (columnSelected: string) => `encode hex :${columnSelected}`,
+      },
+      {
+        value: 'encode-url',
+        label: 'URL',
+        supported_dataType: ['all'],
+        directive: (columnSelected: string) => `url-encode :${columnSelected}`,
+      },
     ],
     supported_dataType: ['all'],
   },
@@ -58,16 +50,31 @@ export const SECURITY_OPTIONS = [
     value: 'decode',
     label: 'Decode',
     options: [
-      { value: 'decode-base64', label: 'Base64', supported_dataType: ['all'] },
-      { value: 'decode-base32', label: 'Base32', supported_dataType: ['all'] },
-      { value: 'decode-hex', label: 'Hex', supported_dataType: ['all'] },
-      { value: 'decode-url', label: 'URL', supported_dataType: ['all'] },
+      {
+        value: 'decode-base64',
+        label: 'Base64',
+        supported_dataType: ['all'],
+        directive: (columnSelected: string) => `decode base64 :${columnSelected}`,
+      },
+      {
+        value: 'decode-base32',
+        label: 'Base32',
+        supported_dataType: ['all'],
+        directive: (columnSelected: string) => `decode base32 :${columnSelected}`,
+      },
+      {
+        value: 'decode-hex',
+        label: 'Hex',
+        supported_dataType: ['all'],
+        directive: (columnSelected: string) => `decode hex :${columnSelected}`,
+      },
+      {
+        value: 'decode-url',
+        label: 'URL',
+        supported_dataType: ['all'],
+        directive: (columnSelected: string) => `url-decode :${columnSelected}`,
+      },
     ],
     supported_dataType: ['all'],
-  },
-  {
-    value: 'hash',
-    label: 'Hash',
-    supported_dataType: ['string'],
   },
 ];

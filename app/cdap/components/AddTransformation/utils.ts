@@ -13,26 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { SECURITY_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/securityOptions';
 import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { DECODE, ENCODE } from './constants';
 export const getDirective = (functionName: string, columnSelected: string) => {
+  const encodeDecodeOptions = [];
+  SECURITY_OPTIONS.forEach((eachOptionObj) => {
+    if (eachOptionObj.value === ENCODE || eachOptionObj.value === DECODE) {
+      encodeDecodeOptions.push(...eachOptionObj.options);
+    }
+  });
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
-  } else if (functionName === 'encode-base64') {
-    return `encode base64 :${columnSelected}`;
-  } else if (functionName === 'encode-base32') {
-    return `encode base32 :${columnSelected}`;
-  } else if (functionName === 'encode-hex') {
-    return `encode hex :${columnSelected}`;
-  } else if (functionName === 'encode-url') {
-    return `url-encode :${columnSelected}`;
-  } else if (functionName === 'decode-base64') {
-    return `decode base64 :${columnSelected}`;
-  } else if (functionName === 'decode-base32') {
-    return `decode base32 :${columnSelected}`;
-  } else if (functionName === 'decode-hex') {
-    return `decode hex :${columnSelected}`;
-  } else if (functionName === 'decode-url') {
-    return `url-decode :${columnSelected}`;
+  } else if (encodeDecodeOptions.some((item) => item.value === functionName)) {
+    const option = encodeDecodeOptions.find((el) => el.value === functionName);
+    if (option) {
+      const value = option.directive(columnSelected);
+      return value;
+    }
   } else {
     return null;
   }
