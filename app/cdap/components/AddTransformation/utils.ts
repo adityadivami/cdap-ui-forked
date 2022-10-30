@@ -20,9 +20,9 @@ import { IMenuOption } from 'components/AddTransformation/types';
 
 export const getDirective = (functionName: string, selectedColumn: string) => {
   const characterEncodingOptions: IMenuOption[] = [];
-  MENU_OPTIONS.forEach((eachOptionObj) => {
-    if (eachOptionObj.value === SET_CHARACTER_ENCODING) {
-      characterEncodingOptions.push(...eachOptionObj.options);
+  MENU_OPTIONS.forEach((eachOption) => {
+    if (eachOption.value === SET_CHARACTER_ENCODING) {
+      characterEncodingOptions.push(...eachOption.options);
     }
   });
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
