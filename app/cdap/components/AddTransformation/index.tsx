@@ -14,18 +14,18 @@
  * the License.
  */
 
-import { Button, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
-import React, { Fragment, useState, useEffect } from 'react';
-import SelectColumnsList from './SelectColumnsList';
-import { useStyles } from './styles';
-import { IAddTransformationProp, IHeaderNamesList, IDataQuality } from './types';
+import React, { Fragment, useEffect, useState } from 'react';
+import ButtonWidget from './ButtonWidget';
 import { prepareDataQualtiy } from './CircularProgressBar/utils';
 import FunctionNameWidget from './FunctionNameWidget';
+import SelectColumnsList from './SelectColumnsList';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
-import ButtonWidget from './ButtonWidget';
+import { useStyles } from './styles';
+import { IAddTransformationProp, IDataQuality, IHeaderNamesList } from './types';
 import { getDirective } from './utils';
 
 export default function({
