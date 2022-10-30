@@ -27,7 +27,7 @@ export const SECURITY_OPTIONS = [
         label: `${T.translate(
           'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base64'
         ).toString()}`,
-        supported_dataType: ['all'],
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `encode base64 :${selectedColumn}`,
       },
       {
@@ -35,7 +35,7 @@ export const SECURITY_OPTIONS = [
         label: `${T.translate(
           'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base32'
         ).toString()}`,
-        supported_dataType: ['all'],
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `encode base32 :${selectedColumn}`,
       },
       {
@@ -43,7 +43,7 @@ export const SECURITY_OPTIONS = [
         label: `${T.translate(
           'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.hex'
         ).toString()}`,
-        supported_dataType: ['all'],
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `encode hex :${selectedColumn}`,
       },
       {
@@ -51,11 +51,11 @@ export const SECURITY_OPTIONS = [
         label: `${T.translate(
           'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.url'
         ).toString()}`,
-        supported_dataType: ['all'],
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `url-encode :${selectedColumn}`,
       },
     ],
-    supported_dataType: ['all'],
+    supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
   },
   {
     value: 'decode',
@@ -68,7 +68,7 @@ export const SECURITY_OPTIONS = [
         label: `${T.translate(
           'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base64'
         ).toString()}`,
-        supported_dataType: ['all'],
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `decode base64 :${selectedColumn}`,
       },
       {
@@ -76,7 +76,7 @@ export const SECURITY_OPTIONS = [
         label: `${T.translate(
           'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base32'
         ).toString()}`,
-        supported_dataType: ['all'],
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `decode base32 :${selectedColumn}`,
       },
       {
@@ -84,7 +84,7 @@ export const SECURITY_OPTIONS = [
         label: `${T.translate(
           'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.hex'
         ).toString()}`,
-        supported_dataType: ['all'],
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `decode hex :${selectedColumn}`,
       },
       {
@@ -92,10 +92,10 @@ export const SECURITY_OPTIONS = [
         label: `${T.translate(
           'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.url'
         ).toString()}`,
-        supported_dataType: ['all'],
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `url-decode :${selectedColumn}`,
       },
     ],
-    supported_dataType: ['all'],
+    supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we have to change it to supportedDataType(camelcase) in transformation toolbox feature
   },
 ];
