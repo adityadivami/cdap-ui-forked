@@ -40,3 +40,6 @@ export const multipleColumnSelected = [
     isMoreThanTwo: true,
   },
 ];
+
+export const ENCODE = 'encode';
+export const DECODE = 'decode';

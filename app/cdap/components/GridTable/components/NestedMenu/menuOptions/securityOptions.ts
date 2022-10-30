@@ -13,61 +13,89 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import T from 'i18n-react';
 
 export const SECURITY_OPTIONS = [
   {
-    value: 'mask-data',
-    label: 'Mask Data',
-    options: [
-      {
-        value: 'last-4',
-        label: 'Show last 4 characters only',
-        supported_dataType: ['string'],
-      },
-      {
-        value: 'last-2',
-        label: 'Show last 2 characters only',
-        supported_dataType: ['string'],
-      },
-      {
-        value: 'numbers',
-        label: 'Custom Selection',
-        supported_dataType: ['string'],
-      },
-      { value: 'divider' },
-      {
-        value: 'shuffle',
-        label: 'By Shuffling',
-        supported_dataType: ['string'],
-      },
-    ],
-    supported_dataType: ['string'],
-  },
-  {
     value: 'encode',
-    label: 'Encode',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.encode'
+    ).toString()}`,
     options: [
-      { value: 'encode-base64', label: 'Base64', supported_dataType: ['all'] },
-      { value: 'encode-base32', label: 'Base32', supported_dataType: ['all'] },
-      { value: 'encode-hex', label: 'Hex', supported_dataType: ['all'] },
-      { value: 'encode-url', label: 'URL', supported_dataType: ['all'] },
+      {
+        value: 'encode-base64',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base64'
+        ).toString()}`,
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
+        directive: (selectedColumn: string) => `encode base64 :${selectedColumn}`,
+      },
+      {
+        value: 'encode-base32',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base32'
+        ).toString()}`,
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
+        directive: (selectedColumn: string) => `encode base32 :${selectedColumn}`,
+      },
+      {
+        value: 'encode-hex',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.hex'
+        ).toString()}`,
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
+        directive: (selectedColumn: string) => `encode hex :${selectedColumn}`,
+      },
+      {
+        value: 'encode-url',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.url'
+        ).toString()}`,
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
+        directive: (selectedColumn: string) => `url-encode :${selectedColumn}`,
+      },
     ],
-    supported_dataType: ['all'],
+    supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
   },
   {
     value: 'decode',
-    label: 'Decode',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.decode'
+    ).toString()}`,
     options: [
-      { value: 'decode-base64', label: 'Base64', supported_dataType: ['all'] },
-      { value: 'decode-base32', label: 'Base32', supported_dataType: ['all'] },
-      { value: 'decode-hex', label: 'Hex', supported_dataType: ['all'] },
-      { value: 'decode-url', label: 'URL', supported_dataType: ['all'] },
+      {
+        value: 'decode-base64',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base64'
+        ).toString()}`,
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
+        directive: (selectedColumn: string) => `decode base64 :${selectedColumn}`,
+      },
+      {
+        value: 'decode-base32',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base32'
+        ).toString()}`,
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
+        directive: (selectedColumn: string) => `decode base32 :${selectedColumn}`,
+      },
+      {
+        value: 'decode-hex',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.hex'
+        ).toString()}`,
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
+        directive: (selectedColumn: string) => `decode hex :${selectedColumn}`,
+      },
+      {
+        value: 'decode-url',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.url'
+        ).toString()}`,
+        supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
+        directive: (selectedColumn: string) => `url-decode :${selectedColumn}`,
+      },
     ],
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'hash',
-    label: 'Hash',
-    supported_dataType: ['string'],
+    supported_dataType: ['all'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
   },
 ];

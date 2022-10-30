@@ -13,10 +13,27 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
-  if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
-    return `set-type :${columnSelected} ${functionName}`;
+import { DECODE, ENCODE } from 'components/AddTransformation/constants';
+import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { SECURITY_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/securityOptions';
+import { IMenuOption } from 'components/AddTransformation/types';
+
+export const getDirective = (functionName: string, selectedColumn: string) => {
+  const encodeDecodeOptions: IMenuOption[] = [];
+  SECURITY_OPTIONS.forEach((eachOption) => {
+    if (eachOption.value === ENCODE || eachOption.value === DECODE) {
+      encodeDecodeOptions.push(...eachOption.options);
+    }
+  });
+  if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
+    return `set-type :${selectedColumn} ${functionName}`; // TODO: get directive from DATATYPE_OPTIONS
+  } else if (encodeDecodeOptions.some((eachOption) => eachOption.value === functionName)) {
+    const option: IMenuOption = encodeDecodeOptions.find(
+      (eachOption) => eachOption.value === functionName
+    );
+    if (option) {
+      return option.directive(selectedColumn);
+    }
   } else {
     return null;
   }
