@@ -32,8 +32,7 @@ export const getDirective = (functionName: string, selectedColumn: string) => {
       (eachOption) => eachOption.value === functionName
     );
     if (option) {
-      const value = option.directive(selectedColumn);
-      return value;
+      return option.directive(selectedColumn);
     }
   } else {
     return null;
