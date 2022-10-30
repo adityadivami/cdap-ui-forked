@@ -18,62 +18,82 @@ import T from 'i18n-react';
 export const SECURITY_OPTIONS = [
   {
     value: 'encode',
-    label: `${T.translate('features.WranglerNewSecurityOptions.encode').toString()}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.encode'
+    ).toString()}`,
     options: [
       {
         value: 'encode-base64',
-        label: `${T.translate('features.WranglerNewSecurityOptions.base64').toString()}`,
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base64'
+        ).toString()}`,
         supported_dataType: ['all'],
-        directive: (columnSelected: string) => `encode base64 :${columnSelected}`,
+        directive: (selectedColumn: string) => `encode base64 :${selectedColumn}`,
       },
       {
         value: 'encode-base32',
-        label: `${T.translate('features.WranglerNewSecurityOptions.base32').toString()}`,
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base32'
+        ).toString()}`,
         supported_dataType: ['all'],
-        directive: (columnSelected: string) => `encode base32 :${columnSelected}`,
+        directive: (selectedColumn: string) => `encode base32 :${selectedColumn}`,
       },
       {
         value: 'encode-hex',
-        label: `${T.translate('features.WranglerNewSecurityOptions.hex').toString()}`,
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.hex'
+        ).toString()}`,
         supported_dataType: ['all'],
-        directive: (columnSelected: string) => `encode hex :${columnSelected}`,
+        directive: (selectedColumn: string) => `encode hex :${selectedColumn}`,
       },
       {
         value: 'encode-url',
-        label: `${T.translate('features.WranglerNewSecurityOptions.url').toString()}`,
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.url'
+        ).toString()}`,
         supported_dataType: ['all'],
-        directive: (columnSelected: string) => `url-encode :${columnSelected}`,
+        directive: (selectedColumn: string) => `url-encode :${selectedColumn}`,
       },
     ],
     supported_dataType: ['all'],
   },
   {
     value: 'decode',
-    label: `${T.translate('features.WranglerNewSecurityOptions.decode').toString()}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.decode'
+    ).toString()}`,
     options: [
       {
         value: 'decode-base64',
-        label: `${T.translate('features.WranglerNewSecurityOptions.base64').toString()}`,
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base64'
+        ).toString()}`,
         supported_dataType: ['all'],
-        directive: (columnSelected: string) => `decode base64 :${columnSelected}`,
+        directive: (selectedColumn: string) => `decode base64 :${selectedColumn}`,
       },
       {
         value: 'decode-base32',
-        label: `${T.translate('features.WranglerNewSecurityOptions.base32').toString()}`,
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.base32'
+        ).toString()}`,
         supported_dataType: ['all'],
-        directive: (columnSelected: string) => `decode base32 :${columnSelected}`,
+        directive: (selectedColumn: string) => `decode base32 :${selectedColumn}`,
       },
       {
         value: 'decode-hex',
-        label: `${T.translate('features.WranglerNewSecurityOptions.hex').toString()}`,
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.hex'
+        ).toString()}`,
         supported_dataType: ['all'],
-        directive: (columnSelected: string) => `decode hex :${columnSelected}`,
+        directive: (selectedColumn: string) => `decode hex :${selectedColumn}`,
       },
       {
         value: 'decode-url',
-        label: `${T.translate('features.WranglerNewSecurityOptions.url').toString()}`,
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.securityOptions.encodeDecodeOptions.url'
+        ).toString()}`,
         supported_dataType: ['all'],
-        directive: (columnSelected: string) => `url-decode :${columnSelected}`,
+        directive: (selectedColumn: string) => `url-decode :${selectedColumn}`,
       },
     ],
     supported_dataType: ['all'],

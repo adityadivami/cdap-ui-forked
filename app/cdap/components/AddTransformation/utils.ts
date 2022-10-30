@@ -16,19 +16,20 @@
 import { DECODE, ENCODE } from 'components/AddTransformation/constants';
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import { SECURITY_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/securityOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
-  const encodeDecodeOptions = [];
+import { IEncodeDecodeOption } from 'components/GridTable/components/NestedMenu/types';
+export const getDirective = (functionName: string, selectedColumn: string) => {
+  const encodeDecodeOptions: IEncodeDecodeOption[] = [];
   SECURITY_OPTIONS.forEach((eachOptionObj) => {
     if (eachOptionObj.value === ENCODE || eachOptionObj.value === DECODE) {
       encodeDecodeOptions.push(...eachOptionObj.options);
     }
   });
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
-    return `set-type :${columnSelected} ${functionName}`;
+    return `set-type :${selectedColumn} ${functionName}`;
   } else if (encodeDecodeOptions.some((item) => item.value === functionName)) {
-    const option = encodeDecodeOptions.find((el) => el.value === functionName);
+    const option: IEncodeDecodeOption = encodeDecodeOptions.find((el) => el.value === functionName);
     if (option) {
-      const value = option.directive(columnSelected);
+      const value = option.directive(selectedColumn);
       return value;
     }
   } else {

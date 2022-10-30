@@ -23,3 +23,10 @@ export interface INestedMenuProps {
   menuOptions: any;
   title: string;
 }
+
+export interface IEncodeDecodeOption {
+  value: string;
+  label: string;
+  supported_dataType: string[];
+  directive: (string) => string;
+}
