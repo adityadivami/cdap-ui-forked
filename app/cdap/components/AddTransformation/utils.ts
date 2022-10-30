@@ -13,10 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-import { MENU_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/menuOptions';
 import { SET_CHARACTER_ENCODING } from 'components/AddTransformation/constants';
 import { IMenuOption } from 'components/AddTransformation/types';
+import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { MENU_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/menuOptions';
 
 export const getDirective = (functionName: string, selectedColumn: string) => {
   const characterEncodingOptions: IMenuOption[] = [];
