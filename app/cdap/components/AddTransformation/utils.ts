@@ -14,8 +14,8 @@
  * the License.
  */
 import { SECURITY_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/securityOptions';
-import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-import { DECODE, ENCODE } from './constants';
+import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { DECODE, ENCODE } from 'components/AddTransformation/constants';
 export const getDirective = (functionName: string, columnSelected: string) => {
   const encodeDecodeOptions = [];
   SECURITY_OPTIONS.forEach((eachOptionObj) => {
