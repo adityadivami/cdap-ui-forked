@@ -26,7 +26,7 @@ export const getDirective = (functionName: string, selectedColumn: string) => {
     }
   });
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-    return `set-type :${selectedColumn} ${functionName}`;
+    return `set-type :${selectedColumn} ${functionName}`; // TODO: get directive from DATATYPE_OPTIONS
   } else if (characterEncodingOptions.some((eachOption) => eachOption.value === functionName)) {
     const option: IMenuOption = characterEncodingOptions.find(
       (eachOption) => eachOption.value === functionName
