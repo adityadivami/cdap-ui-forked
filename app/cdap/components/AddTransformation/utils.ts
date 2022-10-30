@@ -25,7 +25,7 @@ export const getDirective = (functionName: string, selectedColumn: string) => {
       encodeDecodeOptions.push(...eachOptionObj.options);
     }
   });
-  if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
+  if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumn} ${functionName}`;
   } else if (encodeDecodeOptions.some((eachOption) => eachOption.value === functionName)) {
     const option: IMenuOption = encodeDecodeOptions.find(
