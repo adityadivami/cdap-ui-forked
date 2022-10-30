@@ -3479,3 +3479,10 @@ features:
     noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
     no: No
     zero: '0'
+  WranglerNewSecurityOptions:
+    encode: Encode
+    decode: Decode
+    base64: Base64
+    base32: Base32
+    hex: Hex
+    url: URL
