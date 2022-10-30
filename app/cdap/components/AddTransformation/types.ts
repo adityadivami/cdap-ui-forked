@@ -33,3 +33,9 @@ export interface IAddTransformationProp {
   callBack: () => void;
   applyTransformation: (directive: string) => void;
 }
+export interface IMenuOption {
+  value: string;
+  label: string;
+  supported_dataType: string[];
+  directive: (string) => string;
+}

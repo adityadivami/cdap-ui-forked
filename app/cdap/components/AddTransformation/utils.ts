@@ -16,9 +16,10 @@
 import { DECODE, ENCODE } from 'components/AddTransformation/constants';
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import { SECURITY_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/securityOptions';
-import { IEncodeDecodeOption } from 'components/GridTable/components/NestedMenu/types';
+import { IMenuOption } from 'components/AddTransformation/types';
+
 export const getDirective = (functionName: string, selectedColumn: string) => {
-  const encodeDecodeOptions: IEncodeDecodeOption[] = [];
+  const encodeDecodeOptions: IMenuOption[] = [];
   SECURITY_OPTIONS.forEach((eachOptionObj) => {
     if (eachOptionObj.value === ENCODE || eachOptionObj.value === DECODE) {
       encodeDecodeOptions.push(...eachOptionObj.options);
@@ -27,7 +28,7 @@ export const getDirective = (functionName: string, selectedColumn: string) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${selectedColumn} ${functionName}`;
   } else if (encodeDecodeOptions.some((item) => item.value === functionName)) {
-    const option: IEncodeDecodeOption = encodeDecodeOptions.find((el) => el.value === functionName);
+    const option: IMenuOption = encodeDecodeOptions.find((el) => el.value === functionName);
     if (option) {
       const value = option.directive(selectedColumn);
       return value;
