@@ -28,101 +28,59 @@ export const MENU_OPTIONS = [
   },
   {
     value: 'set-character-encoding',
-    label: 'Set character encoding',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.setCharacterEncoding'
+    ).toString()}`,
     options: [
       {
         value: 'character-encoding-utf8',
-        label: 'UTF-8',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.utf8'
+        ).toString()}`,
         supported_dataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-8'`,
       },
       {
         value: 'character-encoding-utf16',
-        label: 'UTF-16',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.utf16'
+        ).toString()}`,
         supported_dataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16'`,
       },
       {
         value: 'character-encoding-us-ascii',
-        label: 'US-ASCII',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.usascii'
+        ).toString()}`,
         supported_dataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'us-ascii'`,
       },
       {
         value: 'character-encoding-iso-8859-1',
-        label: 'ISO-8859-1',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.iso88591'
+        ).toString()}`,
         supported_dataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'iso-8859-1'`,
       },
       {
         value: 'character-encoding-utf16-be',
-        label: 'UTF-16BE',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.utf16be'
+        ).toString()}`,
         supported_dataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16be'`,
       },
       {
         value: 'character-encoding-utf16-le',
-        label: 'UTF-16LE',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.utf16le'
+        ).toString()}`,
         supported_dataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16le'`,
       },
     ],
     supported_dataType: ['byte'],
-  },
-  // {
-  //   value: 'divider',
-  // },
-  {
-    value: 'text',
-    label: 'Format',
-    options: [
-      {
-        value: 'uppercase',
-        label: 'UPPERCASE',
-        supported_dataType: ['string'],
-      },
-      {
-        value: 'lowercase',
-        label: 'Lowercase',
-        supported_dataType: ['string'],
-      },
-      {
-        value: 'titlecase',
-        label: 'Title Case',
-        supported_dataType: ['string'],
-      },
-      {
-        value: 'concatenate',
-        label: 'Concatenate',
-        supported_dataType: ['string'],
-      },
-      { value: 'trim', label: 'White spaces', supported_dataType: ['string'] },
-      {
-        value: 'ltrim',
-        label: 'Leading white spaces',
-        supported_dataType: ['string'],
-      },
-      {
-        value: 'rtrim',
-        label: 'Trailing White spaces',
-        supported_dataType: ['string'],
-      },
-      { value: 'dateTime', label: 'Date time', supported_dataType: ['string'] },
-      {
-        value: 'dateTimeAsString',
-        label: 'Date time as string',
-        supported_dataType: ['string'],
-      },
-    ],
-    supported_dataType: ['string'],
-  },
-  {
-    value: 'customTransform',
-    label: 'Custom Transform',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'filter',
-    label: 'Filter',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'findAndReplace',
-    label: 'Find and Replace',
-    supported_dataType: ['all'],
   },
 ];

@@ -14,22 +14,25 @@
  * the License.
  */
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { MENU_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/menuOptions';
+import { SET_CHARACTER_ENCODING } from 'components/AddTransformation/constants';
+import { IMenuOption } from 'components/AddTransformation/types';
 
-export const getDirective = (functionName: string, selectedColumnName: string) => {
+export const getDirective = (functionName: string, selectedColumn: string) => {
+  const characterEncodingOptions: IMenuOption[] = [];
+  MENU_OPTIONS.forEach((eachOptionObj) => {
+    if (eachOptionObj.value === SET_CHARACTER_ENCODING) {
+      characterEncodingOptions.push(...eachOptionObj.options);
+    }
+  });
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-    return `set-type :${selectedColumnName} ${functionName}`;
-  } else if (functionName === 'character-encoding-utf8') {
-    return `set-charset :${selectedColumnName} 'utf-8'`;
-  } else if (functionName === 'character-encoding-utf16') {
-    return `set-charset :${selectedColumnName} 'utf-16'`;
-  } else if (functionName === 'character-encoding-us-ascii') {
-    return `set-charset :${selectedColumnName} 'us-ascii'`;
-  } else if (functionName === 'character-encoding-iso-8859-1') {
-    return `set-charset :${selectedColumnName} 'iso-8859-1'`;
-  } else if (functionName === 'character-encoding-utf16-be') {
-    return `set-charset :${selectedColumnName} 'utf-16be'`;
-  } else if (functionName === 'character-encoding-utf16-le') {
-    return `set-charset :${selectedColumnName} 'utf-16le'`;
+    return `set-type :${selectedColumn} ${functionName}`;
+  } else if (characterEncodingOptions.some((item) => item.value === functionName)) {
+    const option: IMenuOption = characterEncodingOptions.find((el) => el.value === functionName);
+    if (option) {
+      const value = option.directive(selectedColumn);
+      return value;
+    }
   } else {
     return null;
   }
