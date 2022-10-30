@@ -27,8 +27,10 @@ export const getDirective = (functionName: string, selectedColumn: string) => {
   });
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${selectedColumn} ${functionName}`;
-  } else if (encodeDecodeOptions.some((item) => item.value === functionName)) {
-    const option: IMenuOption = encodeDecodeOptions.find((el) => el.value === functionName);
+  } else if (encodeDecodeOptions.some((eachOption) => eachOption.value === functionName)) {
+    const option: IMenuOption = encodeDecodeOptions.find(
+      (eachOption) => eachOption.value === functionName
+    );
     if (option) {
       const value = option.directive(selectedColumn);
       return value;
