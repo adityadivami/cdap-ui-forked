@@ -20,9 +20,9 @@ import { IMenuOption } from 'components/AddTransformation/types';
 
 export const getDirective = (functionName: string, selectedColumn: string) => {
   const encodeDecodeOptions: IMenuOption[] = [];
-  SECURITY_OPTIONS.forEach((eachOptionObj) => {
-    if (eachOptionObj.value === ENCODE || eachOptionObj.value === DECODE) {
-      encodeDecodeOptions.push(...eachOptionObj.options);
+  SECURITY_OPTIONS.forEach((eachOption) => {
+    if (eachOption.value === ENCODE || eachOption.value === DECODE) {
+      encodeDecodeOptions.push(...eachOption.options);
     }
   });
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
