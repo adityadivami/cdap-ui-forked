@@ -16,22 +16,13 @@
 
 import { Avatar } from '@material-ui/core';
 import ImageOutlined from '@material-ui/icons/ImageOutlined';
+import { IWidgetSrc } from 'components/FetchIconsFromWidget/types';
 import React from 'react';
-import { IWidgetSrc } from './types';
 
-export default function({ dataSrc }: IWidgetSrc) {
+export default function({ dataSrc, label }: IWidgetSrc) {
   return dataSrc ? (
-    <Avatar
-      src={dataSrc as string}
-      variant="square"
-      data-testid="card-image-from-widget-api"
-      id="card-image-from-widget-api"
-    />
+    <Avatar src={dataSrc as string} variant="square" data-testid={`widget-api-image-${label}`} />
   ) : (
-    <ImageOutlined
-      style={{ fontSize: 40 }}
-      data-testid="card-image-default"
-      id="card-image-default"
-    />
+    <ImageOutlined style={{ fontSize: 40 }} data-testid={`default-widget-image-${label}`} />
   );
 }

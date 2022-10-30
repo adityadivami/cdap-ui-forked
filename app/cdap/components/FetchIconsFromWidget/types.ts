@@ -14,16 +14,18 @@
  * the License.
  */
 
+export interface IArtifact {
+  name: string;
+  version: string;
+  scope: string;
+}
+
 export interface IConnectorArray {
   name: string;
   typ?: string;
   category?: string;
   description?: string;
-  artifact?: {
-    name: string;
-    version: string;
-    scope: string;
-  };
+  artifact?: IArtifact;
   SVG: JSX.Element;
   link?: string;
   displayName?: string;
@@ -34,24 +36,17 @@ export interface IConnectorDetailPayloadArray {
   type: string;
   category: string;
   description: string;
-  artifact: {
-    name: string;
-    version: string;
-    scope: string;
-  };
+  artifact: IArtifact;
 }
 
 export interface IWidgetSrc {
-  [key: string]: string | unknown;
+  dataSrc: unknown;
+  label: string;
 }
 
 export interface IConnectorTypes {
   name: string;
   type: string;
   category: string;
-  artifact: {
-    name: string;
-    version: string;
-    scope: string;
-  };
+  artifact: IArtifact;
 }

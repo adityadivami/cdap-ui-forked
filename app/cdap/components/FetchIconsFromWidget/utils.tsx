@@ -14,7 +14,6 @@
  * the License.
  */
 
-import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import {
   fetchConnectionDetails,
   fetchConnectors,
@@ -22,10 +21,14 @@ import {
 } from 'components/Connections/Create/reducer';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import {
+  IConnectorArray,
+  IConnectorDetailPayloadArray,
+  IConnectorTypes,
+} from 'components/FetchIconsFromWidget/types';
+import WidgetSVG from 'components/FetchIconsFromWidget/Widget';
 import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 import React from 'react';
-import { IConnectorArray, IConnectorDetailPayloadArray, IConnectorTypes } from './types';
-import WidgetSVG from './Widget';
 
 export const getWidgetData = async () => {
   const connectorTypes: IConnectorArray[] = await fetchConnectors();
@@ -74,7 +77,7 @@ export const getWidgetData = async () => {
       if (item['display-name'] && item['display-name'].includes(connectorType.name)) {
         connectorDataWithSvgArray.push({
           ...connectorType,
-          SVG: <WidgetSVG dataSrc={item?.icon?.arguments?.data} />,
+          SVG: <WidgetSVG dataSrc={item?.icon?.arguments?.data} label={connectorType.name} />,
         });
         connectorTypeHasWidget = true;
       }
@@ -85,7 +88,7 @@ export const getWidgetData = async () => {
     if (!connectorTypeHasWidget) {
       connectorDataWithSvgArray.push({
         ...connectorType,
-        SVG: <WidgetSVG dataSrc={undefined} />,
+        SVG: <WidgetSVG dataSrc={undefined} label={connectorType.name} />,
       });
     }
   });
