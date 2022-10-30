@@ -33,6 +33,7 @@ export interface IInputRadioWithCustomInputProps {
 export interface IParseOptions {
   value: string;
   label: string;
+  directiveExpression?: string;
 }
 
 export interface IParseComponentProps {

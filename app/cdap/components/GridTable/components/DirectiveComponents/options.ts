@@ -20,26 +20,32 @@ export const PARSE_CSV_OPTIONS: IParseOptions[] = [
   {
     value: 'comma',
     label: 'Comma',
+    directiveExpression: ',',
   },
   {
     value: 'tab',
     label: 'Tab',
+    directiveExpression: '\\t',
   },
   {
     value: 'space',
     label: 'Space',
+    directiveExpression: ' ',
   },
   {
     value: 'pipe',
     label: 'Pipe',
+    directiveExpression: '\\|',
   },
   {
     value: 'capA',
     label: '^A',
+    directiveExpression: '\\u0001',
   },
   {
     value: 'capD',
     label: '^D',
+    directiveExpression: '\\u0004',
   },
   {
     value: 'customDelimiter',

@@ -14,28 +14,28 @@
  * the License.
  */
 
-import { Button, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
+import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
 import T from 'i18n-react';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import ButtonWidget from './ButtonWidget';
+import { prepareDataQualtiy } from './CircularProgressBar/utils';
+import { directiveComponentDefaultValues } from './constants';
+import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsList from './SelectColumnsList';
+import SelectColumnsWidget from './SelectColumnsWidget';
+import SelectedColumnCountWidget from './SelectedColumnCountWidget';
 import { useStyles } from './styles';
 import {
   IAddTransformationProp,
-  IHeaderNamesList,
   IDataQuality,
   IDirectiveComponentValues,
+  IHeaderNamesList,
 } from './types';
-import { prepareDataQualtiy } from './CircularProgressBar/utils';
-import FunctionNameWidget from './FunctionNameWidget';
-import SelectColumnsWidget from './SelectColumnsWidget';
-import SelectedColumnCountWidget from './SelectedColumnCountWidget';
-import ButtonWidget from './ButtonWidget';
 import { getDirective } from './utils';
-import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
-import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
-import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
-import { directiveComponentDefaultValues } from './constants';
 
 export default function({
   directiveFunctionSupportedDataType,
