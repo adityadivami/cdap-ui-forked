@@ -25,9 +25,9 @@ import {
   IConnectorArray,
   IConnectorDetailPayloadArray,
   IConnectorTypes,
-} from 'components/FetchIconsFromWidget/types';
-import WidgetSVG from 'components/FetchIconsFromWidget/Widget';
-import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
+} from 'components/WidgetSVG/types';
+import WidgetSVG from 'components/WidgetSVG';
+import { Importdataseticon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 import React from 'react';
 
 export const getWidgetData = async () => {
@@ -95,7 +95,7 @@ export const getWidgetData = async () => {
 
   connectorDataWithSvgArray.push({
     name: 'Imported Dataset',
-    SVG: ImportDatasetIcon,
+    SVG: Importdataseticon,
   });
 
   DataPrepStore.dispatch({

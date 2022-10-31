@@ -23,7 +23,7 @@ import WrangleHomeTitle from './Components/WrangleHomeTitle';
 import { GradientLine, HeaderImage } from './icons';
 import { useStyles } from './styles';
 import T from 'i18n-react';
-import { getWidgetData } from 'components/FetchIconsFromWidget/utils';
+import { getWidgetData } from 'components/WidgetSVG/utils';
 
 export default function WranglerHome() {
   const classes = useStyles();
