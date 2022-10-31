@@ -39,8 +39,8 @@ export interface IConnectorDetailPayloadArray {
   artifact: IArtifact;
 }
 
-export interface IWidgetSrc {
-  dataSrc: unknown;
+export interface IWidgetSVGProps {
+  dataSrc: string;
   label: string;
 }
 
@@ -49,4 +49,8 @@ export interface IConnectorTypes {
   type: string;
   category: string;
   artifact: IArtifact;
+}
+
+export interface IAllConnectorPluginProps {
+  [index: string]: IConnectorDetailPayloadArray;
 }

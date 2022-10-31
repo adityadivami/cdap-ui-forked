@@ -17,6 +17,15 @@
 import { Box } from '@material-ui/core/';
 import MyDataPrepApi from 'api/dataprep';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import {
+  IConnectionsWithConnectorTypeDataObject,
+  IEachData,
+  IMapValue,
+  IMassagedObject,
+  IValues,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import { generateDataForExplorationCard } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
+import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
 import T from 'i18n-react';
 import { orderBy } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -24,15 +33,6 @@ import { Link } from 'react-router-dom';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
-import {
-  IConnectionsWithConnectorTypeDataObject,
-  IEachData,
-  IMapValue,
-  IMassagedObject,
-  IValues,
-} from './types';
-import { generateDataForExplorationCard } from './utils';
 
 export default function() {
   const [finalArray, setFinalArray] = useState<IMassagedObject[]>([]);
@@ -43,23 +43,23 @@ export default function() {
       IMapValue[]
     > = await getCategorizedConnections();
     const connectionsWithConnectorTypeDataObject: IConnectionsWithConnectorTypeDataObject[] = [];
-    for (const x of connectionsWithConnectorTypeData.keys()) {
-      const values = connectionsWithConnectorTypeData.get(x);
-      const connections = values.map((e) => {
+    for (const connectorName of connectionsWithConnectorTypeData.keys()) {
+      const values = connectionsWithConnectorTypeData.get(connectorName);
+      const connections = values.map((eachValue) => {
         return {
-          name: e.name,
-          connectorType: e.connectionType,
+          name: eachValue.name,
+          connectorType: eachValue.connectionType,
         };
       });
       connectionsWithConnectorTypeDataObject.push(...connections);
     }
 
-    const findConnectorTypeOf = (connection) => {
+    const findConnectorType = (connection): string => {
       if (connection) {
-        const connec = connectionsWithConnectorTypeDataObject.find((el) => {
-          return el.name === connection;
+        const matchedConnection = connectionsWithConnectorTypeDataObject.find((eachConnection) => {
+          return eachConnection.name === connection;
         });
-        return connec.connectorType;
+        return matchedConnection.connectorType;
       }
       return 'Imported Dataset';
     };
@@ -96,7 +96,7 @@ export default function() {
               },
             };
 
-            const conectorName = findConnectorTypeOf(item?.sampleSpec?.connectionName);
+            const conectorName = findConnectorType(item?.sampleSpec?.connectionName);
             expData.push({
               connectorType: conectorName,
               connectionName:

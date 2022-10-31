@@ -16,10 +16,10 @@
 
 import { Avatar } from '@material-ui/core';
 import ImageOutlined from '@material-ui/icons/ImageOutlined';
-import { IWidgetSrc } from 'components/FetchIconsFromWidget/types';
+import { IWidgetSVGProps } from 'components/WidgetSVG/types';
 import React from 'react';
 
-export default function({ dataSrc, label }: IWidgetSrc) {
+export default function({ dataSrc, label }: IWidgetSVGProps) {
   return dataSrc ? (
     <Avatar src={dataSrc as string} variant="square" data-testid={`widget-api-image-${label}`} />
   ) : (

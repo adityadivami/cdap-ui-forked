@@ -24,7 +24,7 @@ import { CloudSQLMySQL } from './iconStore/CloudSQLMySQL';
 import { CloudSQLPostGreSQL } from './iconStore/CloudSQLPostGreSQL';
 import { Database } from './iconStore/Database';
 import { GCS } from './iconStore/GCS';
-import { ImportDatasetIcon } from './iconStore/ImportDatasetIcon';
+import { importDatasetIcon } from './iconStore/ImportDatasetIcon';
 import { Kafka } from './iconStore/Kafka';
 import { MySQL } from './iconStore/MySQL';
 import { Oracle } from './iconStore/Oracle';
@@ -103,7 +103,7 @@ export default function WrangleCard() {
       } else if (connectorType.name === 'File') {
         return {
           ...connectorType,
-          SVG: ImportDatasetIcon,
+          SVG: importDatasetIcon,
         };
       } else if (connectorType.name === 'CloudSQLMySQL') {
         return {
@@ -140,7 +140,7 @@ export default function WrangleCard() {
         scope: 'local',
       },
 
-      SVG: ImportDatasetIcon,
+      SVG: importDatasetIcon,
     });
 
     setConnectorTypes({
