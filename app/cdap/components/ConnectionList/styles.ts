@@ -101,4 +101,27 @@ export const useStyles = makeStyles({
   infograph: {
     paddingBottom: '80px',
   },
+  closeIcon: {
+    '& :hover': {
+      cursor: 'pointer',
+    },
+  },
+  searchBar: {
+    width: '100%',
+    backgroundColor: '#fff',
+    border: 'none',
+    marginLeft: '9px',
+    height: '21px',
+    fontSize: '14px',
+    outline: 0,
+  },
+  afterSearchIconClick: {
+    display: 'flex',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    height: '50px',
+    paddingRight: '20px',
+    paddingLeft: '18px',
+    textDecoration: 'none',
+  },
 });

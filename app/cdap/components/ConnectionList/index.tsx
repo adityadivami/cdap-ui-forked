@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, styled, Typography } from '@material-ui/core';
+import { Box, styled, IconButton, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
@@ -31,6 +31,9 @@ import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
 import { InfoGraph } from './icons';
 import { useStyles } from './styles';
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import CloseIcon from '@material-ui/icons/Close';
+import cloneDeep from 'lodash/cloneDeep';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -50,6 +53,7 @@ export default function ConnectionList() {
   const { connectorType } = useParams() as IRecords;
 
   const refs = useRef([]);
+  const headersRefs = useRef([]);
   const classes = useStyles();
   const loc = useLocation();
   const queryParams = new URLSearchParams(loc.search);
@@ -57,7 +61,6 @@ export default function ConnectionList() {
   const [loading, setLoading] = useState(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
   const [tabSize, setTabSize] = useState(0);
-
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
   };
@@ -70,6 +73,7 @@ export default function ConnectionList() {
       isSearching: false,
     },
   ]);
+  const [filteredData, setFilteredData] = useState(cloneDeep(dataForTabs));
 
   const getConnectionsTabData = async () => {
     let connectorTypes = [];
@@ -154,6 +158,10 @@ export default function ConnectionList() {
     });
   };
 
+  const makeCursorFocused = (index: number) => {
+    refs.current[index].focus();
+  };
+
   const selectedTabValueHandler = (entity: IRecords, index: number) => {
     toggleLoader(true);
     setDataForTabs((currentData) => {
@@ -186,9 +194,62 @@ export default function ConnectionList() {
     });
   };
 
+  const searchHandler = (index: number) => {
+    setDataForTabs((prev) => {
+      let tempData = [...prev];
+      tempData = tempData.map((each) => {
+        return {
+          ...each,
+          isSearching: false,
+        };
+      });
+      tempData[index].isSearching = true;
+      tempData.forEach((each, ind) => {
+        if (ind === index) {
+          each.isSearching = true;
+        } else {
+          each.isSearching = false;
+        }
+      });
+      return tempData;
+    });
+    refs.current[index].focus();
+  };
+
+  const handleSearch = (e: any, index: number) => {
+    const val = e.target.value.toLowerCase();
+    const newData = cloneDeep(dataForTabs);
+    const newDataToSearch = [...newData[index].data];
+    const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(val));
+    newData[index].data = [...tempData];
+    setFilteredData(cloneDeep(newData));
+  };
+
+  const handleClearSearch = (e: any, index: number) => {
+    if (refs.current[index].value == '') {
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].isSearching = false;
+        return tempData;
+      });
+    } else {
+      refs.current[index].value = '';
+      const newData = cloneDeep(dataForTabs);
+      const newDataToSearch = [...newData[index].data];
+      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
+      newData[index].data = [...tempData];
+      setFilteredData(cloneDeep(newData));
+    }
+  };
+
   useEffect(() => {
     getConnectionsTabData();
   }, []);
+
+  useEffect(() => {
+    const newData = cloneDeep(dataForTabs);
+    setFilteredData(newData);
+  }, [dataForTabs]);
 
   useEffect(() => {
     setDataForTabs((prev) => {
@@ -223,61 +284,99 @@ export default function ConnectionList() {
       dataForTabs[0]?.data?.length > 0 ? (
         <Box className={classes.connectionsWithInfo}>
           <SelectDatasetWrapper>
-            {dataForTabs.map((each, index) => {
-              const connectionIdRequired =
-                each.data.length && each.data.filter((el) => el.connectionId);
-              if (connectionIdRequired.length) {
-                connectionId = connectionIdRequired[0].connectionId;
-              }
-              if (index === 0) {
-                headerContent = headerForLevelZero();
-              } else {
-                headerContent =
-                  refs.current[index]?.offsetWidth < refs.current[index]?.scrollWidth ? (
-                    <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
-                      <Box className={classes.beforeSearchIconClickDisplay}>
-                        <Typography
-                          variant="body2"
-                          className={classes.headerLabel}
-                          ref={(element) => {
-                            refs.current[index] = element;
+            {filteredData &&
+              Array.isArray(filteredData) &&
+              filteredData.map((each, index) => {
+                if (each.data.filter((el) => el.connectionId).length) {
+                  connectionId = each.data.filter((el) => el.connectionId)[0].connectionId;
+                }
+                if (index === 0) {
+                  headerContent = headerForLevelZero();
+                } else {
+                  headerContent = (
+                    <>
+                      <Box
+                        className={
+                          each.isSearching
+                            ? classes.hideComponent
+                            : classes.beforeSearchIconClickDisplay
+                        }
+                      >
+                        {headersRefs.current[index]?.offsetWidth <
+                        headersRefs.current[index]?.scrollWidth ? (
+                          <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+                            <Typography
+                              variant="body2"
+                              ref={(element) => {
+                                headersRefs.current[index] = element;
+                              }}
+                            >
+                              {filteredData[index - 1].selectedTab}
+                            </Typography>
+                          </CustomTooltip>
+                        ) : (
+                          <Typography
+                            variant="body2"
+                            ref={(element) => {
+                              headersRefs.current[index] = element;
+                            }}
+                          >
+                            {filteredData[index - 1].selectedTab}
+                          </Typography>
+                        )}
+
+                        <Box
+                          onClick={() => {
+                            searchHandler(index);
                           }}
                         >
-                          {dataForTabs[index - 1].selectedTab}
-                        </Typography>
+                          <IconButton>
+                            <SearchRoundedIcon />
+                          </IconButton>
+                        </Box>
                       </Box>
-                    </CustomTooltip>
-                  ) : (
-                    <Box className={classes.beforeSearchIconClickDisplay}>
-                      <Typography
-                        variant="body2"
-                        className={classes.headerLabel}
-                        ref={(element) => {
-                          refs.current[index] = element;
-                        }}
+                      <Box
+                        className={
+                          each.isSearching ? classes.afterSearchIconClick : classes.hideComponent
+                        }
+                        onMouseOver={() => makeCursorFocused(index)}
                       >
-                        {dataForTabs[index - 1].selectedTab}
-                      </Typography>
-                    </Box>
+                        <SearchRoundedIcon />
+                        <input
+                          type="text"
+                          className={classes.searchBar}
+                          onChange={(e) => handleSearch(e, index)}
+                          ref={(e) => {
+                            refs.current[index] = e;
+                          }}
+                        />
+                        <Box
+                          className={classes.closeIcon}
+                          onClick={(e) => handleClearSearch(e, index)}
+                        >
+                          <CloseIcon />
+                        </Box>
+                      </Box>
+                    </>
                   );
-              }
-              return (
-                <Box className={classes.tabsContainerWithHeader}>
-                  <Box className={classes.tabHeaders}>{headerContent}</Box>
-                  <ConnectionsTabs
-                    tabsData={each}
-                    handleChange={selectedTabValueHandler}
-                    value={each.selectedTab}
-                    index={index}
-                    connectionId={connectionId || ''}
-                    toggleLoader={(value: boolean, isError?: boolean) =>
-                      toggleLoader(value, isError)
-                    }
-                    setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-                  />
-                </Box>
-              );
-            })}
+                }
+                return (
+                  <Box className={classes.tabsContainerWithHeader}>
+                    <Box className={classes.tabHeaders}>{headerContent}</Box>
+                    <ConnectionsTabs
+                      tabsData={each}
+                      handleChange={selectedTabValueHandler}
+                      value={each.selectedTab}
+                      index={index}
+                      connectionId={connectionId || ''}
+                      toggleLoader={(value: boolean, isError?: boolean) =>
+                        toggleLoader(value, isError)
+                      }
+                      setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                    />
+                  </Box>
+                );
+              })}
           </SelectDatasetWrapper>
           {tabSize < 5 && (
             <Box className={classes.infographContainer}>
