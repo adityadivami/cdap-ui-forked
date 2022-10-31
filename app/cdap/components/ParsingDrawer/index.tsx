@@ -153,7 +153,7 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
         </Box>
       </Box>
 
-      {errorOnTransformation.open && (
+      {/* {errorOnTransformation.open && (
         <PositionedSnackbar
           handleCloseError={() =>
             setErrorOnTransformation({
@@ -162,6 +162,20 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
             })
           }
           messageToDisplay={errorOnTransformation.message}
+        />
+      )} */}
+
+      {toaster.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setToaster({
+              open: false,
+              message: '',
+              isSuccess: false,
+            })
+          }
+          messageToDisplay={toaster.message}
+          isSuccess={toaster.isSuccess}
         />
       )}
     </DrawerWidget>
