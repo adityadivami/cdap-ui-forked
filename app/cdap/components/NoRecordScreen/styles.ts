@@ -18,7 +18,7 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
   noRecordWrapper: {
-    height: 'calc(100vh - 246px)',
+    height: `100vh`,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -27,6 +27,7 @@ export const useStyles = makeStyles({
     right: 0,
     left: 0,
     bottom: 0,
+    zIndex: -9,
     '& *': {
       fontFamily: "'Noto Sans', sans-serif",
     },
