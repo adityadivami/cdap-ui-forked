@@ -39,6 +39,7 @@ describe('It should test DrawerWidget Component', () => {
               showDivider={true}
               headerActionTemplate={<div />}
               closeClickHandler={closeClickHandler}
+              showBackIcon
             />
           </Route>
         </Switch>
