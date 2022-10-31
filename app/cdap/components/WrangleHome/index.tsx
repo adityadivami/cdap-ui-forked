@@ -25,7 +25,7 @@ import { useStyles } from 'components/WrangleHome/styles';
 import T from 'i18n-react';
 import React, { useEffect } from 'react';
 
-export default function WranglerHome() {
+export default function() {
   const classes = useStyles();
 
   useEffect(() => {
