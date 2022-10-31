@@ -18,6 +18,9 @@ import { blue, grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles({
+  connectionsWithInfo: {
+    display: 'flex',
+  },
   canBrowseHover: {
     display: 'none',
   },
@@ -87,5 +90,13 @@ export const useStyles = makeStyles({
   },
   noDataLabel: {
     paddingLeft: 34,
+  },
+  infograph: {
+    display: 'flex',
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    alignItems: ' flex-end',
+    paddingRight: '80px',
+    paddingBottom: '80px',
   },
 });

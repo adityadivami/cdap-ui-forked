@@ -16,22 +16,21 @@
 
 import { Box, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import { GCSIcon } from 'components/ConnectionList/icons';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
-import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { IRecords } from 'components/GridTable/types';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import ErrorSnackbar from 'components/SnackbarComponent';
+import { getWidgetData } from 'components/WrangleHome/Components/WrangleCard/services/getWidgetData';
+import T from 'i18n-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
+import NoConnectionsScreen from '../NoRecordScreen';
 import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
+import { InfoGraph } from './icons';
 import { useStyles } from './styles';
-import T from 'i18n-react';
-import { getWidgetData } from 'components/WrangleHome/Components/WrangleCard/services/getWidgetData';
-import NoConnectionsScreen from '../NoRecordScreen';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -57,6 +56,7 @@ export default function ConnectionList() {
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
+  const [tabSize, setTabSize] = useState(0);
 
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
@@ -207,28 +207,47 @@ export default function ConnectionList() {
     );
   };
 
+  useEffect(() => {
+    setTabSize(dataForTabs.length);
+  }, [dataForTabs.length]);
+
   let headerContent;
 
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader selectedConnection={dataForTabs[0]?.selectedTab} />
+
       {dataForTabs &&
       Array.isArray(dataForTabs) &&
       dataForTabs.length &&
       dataForTabs[0]?.data?.length > 0 ? (
-        <SelectDatasetWrapper>
-          {dataForTabs.map((each, index) => {
-            const connectionIdRequired =
-              each.data.length && each.data.filter((el) => el.connectionId);
-            if (connectionIdRequired.length) {
-              connectionId = connectionIdRequired[0].connectionId;
-            }
-            if (index === 0) {
-              headerContent = headerForLevelZero();
-            } else {
-              headerContent =
-                refs.current[index]?.offsetWidth < refs.current[index]?.scrollWidth ? (
-                  <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+        <Box className={classes.connectionsWithInfo}>
+          <SelectDatasetWrapper>
+            {dataForTabs.map((each, index) => {
+              const connectionIdRequired =
+                each.data.length && each.data.filter((el) => el.connectionId);
+              if (connectionIdRequired.length) {
+                connectionId = connectionIdRequired[0].connectionId;
+              }
+              if (index === 0) {
+                headerContent = headerForLevelZero();
+              } else {
+                headerContent =
+                  refs.current[index]?.offsetWidth < refs.current[index]?.scrollWidth ? (
+                    <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+                      <Box className={classes.beforeSearchIconClickDisplay}>
+                        <Typography
+                          variant="body2"
+                          className={classes.headerLabel}
+                          ref={(element) => {
+                            refs.current[index] = element;
+                          }}
+                        >
+                          {dataForTabs[index - 1].selectedTab}
+                        </Typography>
+                      </Box>
+                    </CustomTooltip>
+                  ) : (
                     <Box className={classes.beforeSearchIconClickDisplay}>
                       <Typography
                         variant="body2"
@@ -240,37 +259,32 @@ export default function ConnectionList() {
                         {dataForTabs[index - 1].selectedTab}
                       </Typography>
                     </Box>
-                  </CustomTooltip>
-                ) : (
-                  <Box className={classes.beforeSearchIconClickDisplay}>
-                    <Typography
-                      variant="body2"
-                      className={classes.headerLabel}
-                      ref={(element) => {
-                        refs.current[index] = element;
-                      }}
-                    >
-                      {dataForTabs[index - 1].selectedTab}
-                    </Typography>
-                  </Box>
-                );
-            }
-            return (
-              <Box className={classes.tabsContainerWithHeader}>
-                <Box className={classes.tabHeaders}>{headerContent}</Box>
-                <ConnectionsTabs
-                  tabsData={each}
-                  handleChange={selectedTabValueHandler}
-                  value={each.selectedTab}
-                  index={index}
-                  connectionId={connectionId || ''}
-                  toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
-                  setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-                />
-              </Box>
-            );
-          })}
-        </SelectDatasetWrapper>
+                  );
+              }
+              return (
+                <Box className={classes.tabsContainerWithHeader}>
+                  <Box className={classes.tabHeaders}>{headerContent}</Box>
+                  <ConnectionsTabs
+                    tabsData={each}
+                    handleChange={selectedTabValueHandler}
+                    value={each.selectedTab}
+                    index={index}
+                    connectionId={connectionId || ''}
+                    toggleLoader={(value: boolean, isError?: boolean) =>
+                      toggleLoader(value, isError)
+                    }
+                    setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                  />
+                </Box>
+              );
+            })}
+          </SelectDatasetWrapper>
+          {tabSize < 5 && (
+            <Box className={classes.infograph}>
+              <InfoGraph />
+            </Box>
+          )}
+        </Box>
       ) : (
         <NoConnectionsScreen
           title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
