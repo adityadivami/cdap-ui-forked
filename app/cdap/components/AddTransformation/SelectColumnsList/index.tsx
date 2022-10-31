@@ -42,7 +42,7 @@ export default function({
   const ref = useRef(null);
 
   useEffect(() => {
-    const multiSelect = multipleColumnSelected?.filter((el) => el?.value == functionName);
+    const multiSelect = multipleColumnSelected?.filter((el) => el?.value === functionName);
     if (multiSelect?.length) {
       setIsSingleSelection(false);
     }
@@ -51,7 +51,7 @@ export default function({
   const columnsAsPerType: IHeaderNamesList[] | string[] =
     directiveFunctionSupportedDataType?.length > 0 &&
     directiveFunctionSupportedDataType?.includes('all')
-      ? directiveFunctionSupportedDataType?.filter((el) => el == 'all')
+      ? directiveFunctionSupportedDataType?.filter((el) => el === 'all')
       : columns?.filter((object1) => {
           return directiveFunctionSupportedDataType?.some((object2) => {
             return object2?.includes(object1?.type[0]?.toLowerCase());
@@ -83,7 +83,7 @@ export default function({
 
   const handleDisableCheckbox = () => {
     const multiSelect = multipleColumnSelected.filter(
-      (el) => el.value == functionName && el.isMoreThanTwo
+      (el) => el.value === functionName && el.isMoreThanTwo
     );
     if (selectedColumns.length === 0 || selectedColumns.length < 2) {
       return false;

@@ -31,7 +31,7 @@ const ArcContainer = styled(Typography)`
   border: 4px solid #dbdbdb;
   border-bottom-color: ${(props) => (props.value < 100 ? '#E97567' : '#8BCC74')};
   border-right-color: ${(props) => (props.value < 100 ? '#E97567' : '#8BCC74')};
-  transform: ${(props) => `rotate(${45 + parseInt(props.value) * 1.8}deg)` || 'rotate(0deg)'};
+  transform: ${(props) => `rotate(${45 + parseInt(props.value, 10) * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
 export default function({ value }: ICircularBarProps) {
@@ -41,12 +41,12 @@ export default function({ value }: ICircularBarProps) {
     <>
       <Typography component="div" className={classes.progress}>
         <Typography component="div" className={classes.barOverflow}>
-          <ArcContainer value={parseInt(value)}></ArcContainer>
+          <ArcContainer value={parseInt(value, 10)}></ArcContainer>
         </Typography>
         <Typography
           component="span"
           className={
-            parseInt(value) < 100
+            parseInt(value, 10) < 100
               ? `${classes.redText} ${classes.value}`
               : `${classes.greenText} ${classes.value}`
           }

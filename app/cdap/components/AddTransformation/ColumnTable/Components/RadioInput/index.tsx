@@ -25,7 +25,7 @@ export default function({ selectedColumns, onSingleSelection, eachColumn }: IRad
         onClick={() => onSingleSelection(eachColumn)}
         checked={
           Array.isArray(selectedColumns) &&
-          selectedColumns?.filter((el) => el.label == eachColumn.label).length
+          selectedColumns?.filter((el) => el.label === eachColumn.label).length
             ? true
             : false
         }

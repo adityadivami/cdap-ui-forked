@@ -61,7 +61,7 @@ export default function({
       multipleColumnSelected?.filter((el) => el?.value === functionName && !el.isMoreThanTwo)
         ?.length
     ) {
-      return selectedColumns.length == 2 ? false : true;
+      return selectedColumns?.length === 2 ? false : true;
     } else if (
       multipleColumnSelected?.filter((el) => el?.value === functionName && el.isMoreThanTwo)?.length
     ) {
