@@ -134,7 +134,7 @@ export default function({ item }) {
                     {eachItem.percentageSymbol}
                   </Typography>
                 </Box>
-                <Box>
+                <Box className={classes.dataQualityTextContainer}>
                   <Typography variant="body1" className={classes.dataQualityText}>
                     {eachItem.subText}
                   </Typography>

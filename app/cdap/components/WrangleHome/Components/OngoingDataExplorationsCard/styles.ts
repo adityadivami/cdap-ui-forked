@@ -97,7 +97,7 @@ export const useStyles = makeStyles({
     paddingTop: 14,
   },
   dataQualityText: {
-    paddingTop: 11,
+    paddingTop: 0,
   },
   iconWithText: {
     maxWidth: 171,
@@ -117,5 +117,9 @@ export const useStyles = makeStyles({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  dataQualityTextContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
   },
 });
