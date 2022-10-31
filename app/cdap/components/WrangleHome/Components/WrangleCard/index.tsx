@@ -24,7 +24,7 @@ import { CloudSQLMySQL } from 'components/WrangleHome/Components/WrangleCard/ico
 import { CloudSQLPostGreSQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/CloudSQLPostGreSQL';
 import { Database } from 'components/WrangleHome/Components/WrangleCard/iconStore/Database';
 import { GCS } from 'components/WrangleHome/Components/WrangleCard/iconStore/GCS';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
+import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDatasetIcon';
 import { Kafka } from 'components/WrangleHome/Components/WrangleCard/iconStore/Kafka';
 import { MySQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/MySQL';
 import { Oracle } from 'components/WrangleHome/Components/WrangleCard/iconStore/Oracle';

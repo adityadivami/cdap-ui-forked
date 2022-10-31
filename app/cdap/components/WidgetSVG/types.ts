@@ -20,7 +20,7 @@ export interface IArtifact {
   scope: string;
 }
 
-export interface IConnectorArray {
+export interface IConnectorTypesWithSVG {
   name: string;
   typ?: string;
   category?: string;
@@ -31,7 +31,7 @@ export interface IConnectorArray {
   displayName?: string;
 }
 
-export interface IConnectorDetailPayloadArray {
+export interface IConnectorDetailsPayload {
   name: string;
   type: string;
   category: string;
@@ -40,7 +40,7 @@ export interface IConnectorDetailPayloadArray {
 }
 
 export interface IWidgetSVGProps {
-  dataSrc: string;
+  imageSource: string;
   label: string;
 }
 
@@ -52,5 +52,5 @@ export interface IConnectorTypes {
 }
 
 export interface IAllConnectorPluginProps {
-  [index: string]: IConnectorDetailPayloadArray;
+  [index: string]: IConnectorDetailsPayload;
 }

@@ -15,14 +15,23 @@
  */
 
 import { Avatar } from '@material-ui/core';
+import styled from 'styled-components';
 import ImageOutlined from '@material-ui/icons/ImageOutlined';
 import { IWidgetSVGProps } from 'components/WidgetSVG/types';
 import React from 'react';
 
-export default function({ dataSrc, label }: IWidgetSVGProps) {
-  return dataSrc ? (
-    <Avatar src={dataSrc as string} variant="square" data-testid={`widget-api-image-${label}`} />
+const StyledImageOutlined = styled(ImageOutlined)`
+  font-size: 40px;
+`;
+
+export default function({ imageSource, label }: IWidgetSVGProps) {
+  return imageSource ? (
+    <Avatar
+      src={imageSource as string}
+      variant="square"
+      data-testid={`widget-api-image-${label}`}
+    />
   ) : (
-    <ImageOutlined style={{ fontSize: 40 }} data-testid={`default-widget-image-${label}`} />
+    <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
   );
 }

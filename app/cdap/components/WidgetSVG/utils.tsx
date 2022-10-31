@@ -21,41 +21,41 @@ import {
 } from 'components/Connections/Create/reducer';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import WidgetSVG from 'components/WidgetSVG';
 import {
-  IConnectorArray,
-  IConnectorDetailPayloadArray,
+  IConnectorTypesWithSVG,
+  IConnectorDetailsPayload,
   IConnectorTypes,
 } from 'components/WidgetSVG/types';
-import WidgetSVG from 'components/WidgetSVG';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
+import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDatasetIcon';
 import React from 'react';
 
 export const getWidgetData = async () => {
-  const connectorTypes: IConnectorArray[] = await fetchConnectors();
-  const connectorDataArray: IConnectorTypes[] = [];
-  const connectorDataWithSvgArray: IConnectorArray[] = [];
+  const connectorTypes: IConnectorTypesWithSVG[] = await fetchConnectors();
+  const connectorsTypesData: IConnectorTypes[] = [];
+  const IConnectionWithConnectorType: IConnectorTypesWithSVG[] = [];
   const allConnectorsPluginProperties: Map<
     string,
-    IConnectorDetailPayloadArray[]
+    IConnectorDetailsPayload[]
   > = getCategoriesToConnectorsMap(connectorTypes);
-  const connectionPayloadArray: IConnectorDetailPayloadArray[] = [];
-  allConnectorsPluginProperties?.forEach((connectorsArray) => {
-    if (connectorsArray.length) {
-      connectorsArray.map((item) => {
-        connectionPayloadArray.push(item);
+  const connectionPayload: IConnectorDetailsPayload[] = [];
+  allConnectorsPluginProperties?.forEach((eachProperty) => {
+    if (eachProperty.length) {
+      eachProperty.map((item) => {
+        connectionPayload.push(item);
       });
     }
   });
 
   const connectionDetailsData = await Promise.all(
-    connectionPayloadArray.map(async (item, index) => {
+    connectionPayload.map(async (item, index) => {
       const selectedConnector = {
         artifact: item.artifact,
         category: item.category,
         name: item.name,
         type: item.type,
       };
-      connectorDataArray.push(selectedConnector);
+      connectorsTypesData.push(selectedConnector);
       return new Promise((resolve, reject) => {
         const response = fetchConnectionDetails(selectedConnector);
         if (response) {
@@ -69,7 +69,7 @@ export const getWidgetData = async () => {
     connectionDetailsData.length &&
     connectionDetailsData.map(({ connectorWidgetJSON }) => connectorWidgetJSON);
 
-  connectorDataArray.map((connectorType) => {
+  connectorsTypesData.map((connectorType) => {
     let connectorTypeHasWidget: boolean = false;
     /**
      * Getting widget icons for connector types
@@ -81,11 +81,11 @@ export const getWidgetData = async () => {
           eachConnector['display-name'] &&
           eachConnector['display-name'].includes(connectorType.name)
         ) {
-          connectorDataWithSvgArray.push({
+          IConnectionWithConnectorType.push({
             ...connectorType,
             SVG: (
               <WidgetSVG
-                dataSrc={eachConnector?.icon?.arguments?.data}
+                imageSource={eachConnector?.icon?.arguments?.data}
                 label={connectorType.name}
               />
             ),
@@ -97,14 +97,14 @@ export const getWidgetData = async () => {
      * Retaining the connector types which are not part of widget api
      */
     if (!connectorTypeHasWidget) {
-      connectorDataWithSvgArray.push({
+      IConnectionWithConnectorType.push({
         ...connectorType,
-        SVG: <WidgetSVG dataSrc={undefined} label={connectorType.name} />,
+        SVG: <WidgetSVG imageSource={undefined} label={connectorType.name} />,
       });
     }
   });
 
-  connectorDataWithSvgArray.push({
+  IConnectionWithConnectorType.push({
     name: 'Imported Dataset',
     SVG: importDatasetIcon,
   });
@@ -112,7 +112,7 @@ export const getWidgetData = async () => {
   DataPrepStore.dispatch({
     type: DataPrepActions.setConnectorIcons,
     payload: {
-      data: connectorDataWithSvgArray,
+      data: IConnectionWithConnectorType,
     },
   });
 };
