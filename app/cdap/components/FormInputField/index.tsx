@@ -15,7 +15,7 @@
  */
 import { FormControlLabel, Input } from '@material-ui/core';
 import React from 'react';
-import { IFormInputComponentProps } from './types';
+import { IFormInputComponentProps } from 'components/FormInputField/types';
 
 const FormInputField = ({ formInputValue, classnames, inputProps }: IFormInputComponentProps) => {
   return (

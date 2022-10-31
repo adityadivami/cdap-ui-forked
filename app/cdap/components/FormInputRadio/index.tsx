@@ -15,8 +15,8 @@
  */
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from './styles';
-import { IFormInputRadioProps } from './types';
+import { useStyles } from 'components/FormInputRadio/styles';
+import { IFormInputRadioProps } from 'components/FormInputRadio/types';
 
 const FormInputRadio = ({ options, radioValue, setRadioValue }: IFormInputRadioProps) => {
   const classes = useStyles();

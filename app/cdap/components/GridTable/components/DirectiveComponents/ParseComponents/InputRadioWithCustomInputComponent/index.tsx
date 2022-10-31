@@ -13,14 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import {
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Input,
-  Radio,
-  RadioGroup,
-} from '@material-ui/core';
+import { FormGroup } from '@material-ui/core';
 import FormInputField from 'components/FormInputField';
 import FormInputRadio from 'components/FormInputRadio';
 import React from 'react';
