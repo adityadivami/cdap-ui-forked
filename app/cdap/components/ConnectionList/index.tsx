@@ -280,8 +280,10 @@ export default function ConnectionList() {
             })}
           </SelectDatasetWrapper>
           {tabSize < 5 && (
-            <Box className={classes.infograph}>
-              <InfoGraph />
+            <Box className={classes.infographContainer}>
+              <Box className={classes.infograph}>
+                <InfoGraph />
+              </Box>
             </Box>
           )}
         </Box>

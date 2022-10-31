@@ -91,12 +91,14 @@ export const useStyles = makeStyles({
   noDataLabel: {
     paddingLeft: 34,
   },
-  infograph: {
+  infographContainer: {
     display: 'flex',
     flexGrow: 1,
     justifyContent: 'flex-end',
     alignItems: ' flex-end',
     paddingRight: '80px',
+  },
+  infograph: {
     paddingBottom: '80px',
   },
 });
