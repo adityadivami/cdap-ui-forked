@@ -86,10 +86,20 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
       }
       setDrawerStatus(false);
       updateDataTranformation(wid);
-    } catch (err) {
-      setErrorOnTransformation({
+      setToaster({
         open: true,
-        message: T.translate(`features.errorMessage.transformation`),
+        message: 'Step successfully added',
+        isSuccess: true,
+      });
+    } catch (err) {
+      // setErrorOnTransformation({
+      //   open: true,
+      //   message: T.translate(`features.errorMessage.transformation`),
+      // });
+      setToaster({
+        open: true,
+        message: 'Failed',
+        isSuccess: false,
       });
       setLoading(false);
     }
