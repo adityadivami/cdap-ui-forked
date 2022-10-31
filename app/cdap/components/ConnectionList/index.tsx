@@ -401,10 +401,16 @@ export default function ConnectionList() {
           )}
         </Box>
       ) : (
-        <NoConnectionsScreen
-          title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
-          subtitle={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle')}
-        />
+        <>
+          {loading && (
+            <NoConnectionsScreen
+              title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
+              subtitle={T.translate(
+                'features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle'
+              )}
+            />
+          )}
+        </>
 
         // TODO: No connectors types are available screen needs to be appended here
       )}
