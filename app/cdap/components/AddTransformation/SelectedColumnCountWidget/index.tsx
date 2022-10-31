@@ -17,7 +17,7 @@
 import React from 'react';
 import { useStyles } from '../styles';
 import T from 'i18n-react';
-import { ISelectColumnCount } from './types';
+import { ISelectColumnCount } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 
 export default function({ selectedColumnsCount }: ISelectColumnCount) {
   const classes = useStyles();

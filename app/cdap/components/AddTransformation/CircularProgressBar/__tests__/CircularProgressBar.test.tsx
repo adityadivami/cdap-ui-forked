@@ -15,14 +15,10 @@
  */
 
 import { render } from '@testing-library/react';
-import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import MatchMeter from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import MatchMeter from 'components/AddTransformation/CircularProgressBar';
+import history from 'services/history';
 
 describe('It should test the CircularProgressBar Component', () => {
   it('Should render the Circular', () => {

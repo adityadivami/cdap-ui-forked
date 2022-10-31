@@ -24,10 +24,10 @@ import {
   TableRow,
 } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from '../styles';
+import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
-import TableRowWidget from './Components/TableRow';
-import { IColumnTableProps } from './types';
+import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
+import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({
   columns,

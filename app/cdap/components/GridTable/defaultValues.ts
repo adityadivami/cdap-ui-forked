@@ -14,18 +14,9 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
-import React from 'react';
-import { useStyles } from 'components/DrawerWidget/styles';
-import { UnderLine } from 'components/DrawerWidget/iconStore';
-
-export default function({ headingText }) {
-  const classes = useStyles();
-
-  return (
-    <Box className={classes.headingStyles}>
-      <Typography className={classes.headingTextStyles}>{headingText}</Typography>
-      {UnderLine}
-    </Box>
-  );
-}
+export const missingItemDefaultValue = [
+  {
+    label: 'Invalid',
+    count: '0',
+  },
+];

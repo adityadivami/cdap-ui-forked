@@ -15,7 +15,7 @@
  */
 import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
-import { ICheckBoxInput } from '../../types';
+import { ICheckBoxInput } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({
   selectedColumns,

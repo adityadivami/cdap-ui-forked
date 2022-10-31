@@ -27,7 +27,7 @@ export interface IPercentOfDataTypeValues {
 }
 
 interface ISummary {
-  statistics: IRecords;
+  statistics: ICellData;
   validations: IRecords;
 }
 
@@ -49,6 +49,11 @@ export interface IObject {
   [key: string]: string | number | IRecords | boolean;
 }
 
-export interface IDataQuality {
+export interface ICellData {
   [key: string]: string;
+}
+
+export interface IMissingList {
+  name: string;
+  values: Record<string, string>;
 }

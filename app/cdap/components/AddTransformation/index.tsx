@@ -18,11 +18,15 @@ import { Button, Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
-import SelectColumnsList from './SelectColumnsList';
-import { useStyles } from './styles';
-import { IAddTransformationProp, IHeaderNamesList, IDataQuality } from './types';
-import { prepareDataQualtiy } from './CircularProgressBar/utils';
-import { multipleColumnSelected } from './constants';
+import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
+import { useStyles } from 'components/AddTransformation/styles';
+import {
+  IAddTransformationProp,
+  IHeaderNamesList,
+  IDataQuality,
+} from 'components/AddTransformation/types';
+import { prepareDataQualtiy } from 'components/AddTransformation/CircularProgressBar/utils';
+import { multipleColumnSelected } from 'components/AddTransformation/constants';
 
 export default function({
   directiveFunctionSupportedDataType,

@@ -16,15 +16,15 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { useStyles } from '../styles';
-import { SearchIcon } from '../iconStore';
+import { useStyles } from 'components/AddTransformation/styles';
+import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
-import { ISelectColumnList } from './types';
-import { IHeaderNamesList } from '../types';
-import ColumnTable from '../ColumnTable';
-import { multipleColumnSelected } from '../constants';
-import SelectedColumnCountWidget from '../SelectedColumnCountWidget';
+import { ISelectColumnList } from 'components/AddTransformation/SelectColumnsList/types';
+import { IHeaderNamesList } from 'components/AddTransformation/types';
+import ColumnTable from 'components/AddTransformation/ColumnTable';
+import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 
 export default function({
   directiveFunctionSupportedDataType,

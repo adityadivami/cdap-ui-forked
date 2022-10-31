@@ -15,7 +15,7 @@
  */
 import React from 'react';
 import { Radio } from '@material-ui/core';
-import { IRadioInputProps } from '../../types';
+import { IRadioInputProps } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({ selectedColumns, onSingleSelection, eachColumn }: IRadioInputProps) {
   return (

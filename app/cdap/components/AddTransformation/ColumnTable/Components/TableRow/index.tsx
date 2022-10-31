@@ -16,10 +16,10 @@
 
 import React from 'react';
 import { TableCell, TableRow, Typography } from '@material-ui/core';
-import { useStyles } from '../../../styles';
-import InputWidget from '../InputWidgets';
-import DataQualityProgress from '../../../CircularProgressBar';
-import { ITableRowProps } from '../../types';
+import { useStyles } from 'components/AddTransformation/styles';
+import InputWidget from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
+import DataQualityProgress from 'components/AddTransformation/CircularProgressBar';
+import { ITableRowProps } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({
   onSingleSelection,
