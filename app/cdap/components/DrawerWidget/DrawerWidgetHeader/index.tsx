@@ -17,16 +17,25 @@
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from '../styles';
-import { UnderLineSVG } from '../iconStore';
+import { UnderLineSVG, ImportIcon } from '../iconStore';
 import { IHeaderText } from '../types';
+import T from 'i18n-react';
 
 export default function({ headingText }: IHeaderText) {
   const classes = useStyles();
 
   return (
-    <Box className={classes.headingStyles}>
-      <Typography className={classes.headingTextStyles}>{headingText}</Typography>
-      <UnderLineSVG />
+    <Box className={classes.containerStyles}>
+      <Box className={classes.headingStyles}>
+        <Typography className={classes.headingTextStyles}>{headingText}</Typography>
+        <UnderLineSVG />
+      </Box>
+      <Box className={classes.importStyles}>
+        <ImportIcon />
+        <Typography className={classes.importTextStyles}>
+          {T.translate('features.WranglerNewParsingDrawer.importSchema')}
+        </Typography>
+      </Box>
     </Box>
   );
 }
