@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IconButton, Menu, Tooltip } from '@material-ui/core';
+import { Menu } from '@material-ui/core';
 import React, { useState } from 'react';
 import MenuComponent from 'components/GridTable/components/MenuComponent';
 import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';

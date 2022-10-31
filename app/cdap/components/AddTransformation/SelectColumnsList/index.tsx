@@ -34,16 +34,16 @@ export default function({
   dataQuality,
   functionName,
 }: ISelectColumnList) {
-  const [columns, setColumns] = useState(columnData as IHeaderNamesList[]);
-  const [selectedColumns, setSelectedColumn] = useState([] as IHeaderNamesList[]);
+  const [columns, setColumns] = useState<IHeaderNamesList[]>(columnData);
+  const [selectedColumns, setSelectedColumn] = useState<IHeaderNamesList[]>([]);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const classes = useStyles();
   const ref = useRef(null);
 
   useEffect(() => {
-    const multiSelect = multipleColumnSelected.filter((el) => el.value == functionName);
-    if (multiSelect.length) {
+    const multiSelect = multipleColumnSelected?.filter((el) => el?.value == functionName);
+    if (multiSelect?.length) {
       setIsSingleSelection(false);
     }
   }, []);
@@ -120,7 +120,7 @@ export default function({
   return (
     <section className={classes.columnsCountTextStyles}>
       <div className={classes.selectColumnsHeaderStyles}>
-        <SelectedColumnCountWidget selectedColumnsCount={selectedColumns.length} />
+        <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
           <input
             data-testid="input_id"
