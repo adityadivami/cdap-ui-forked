@@ -178,16 +178,30 @@ export default function ConnectionList() {
       if (index === 0) {
         getCategorizedConnectionsforSelectedTab(entity.name as string, index);
       } else if (index === 1) {
-        fetchEntities(entity.name).then((res) => {
-          setDataForTabsHelper(res, index);
-          toggleLoader(false);
-        });
-      } else {
-        if (entity.canBrowse) {
-          fetchEntities(dataForTabs[1].selectedTab, entity.path as string).then((res) => {
+        fetchEntities(entity.name)
+          .then((res) => {
             setDataForTabsHelper(res, index);
             toggleLoader(false);
+          })
+          .catch((error) => {
+            console.log('Failed to explore connection.', error.message);
+            toggleLoader(false);
+            setIsErrorOnNoWorkSpace(true);
+            // TODO : Need to bind the message on Snackbar . The message is inside error.message same as the old UI
           });
+      } else {
+        if (entity.canBrowse) {
+          fetchEntities(dataForTabs[1].selectedTab, entity.path as string)
+            .then((res) => {
+              setDataForTabsHelper(res, index);
+              toggleLoader(false);
+            })
+            .catch((error) => {
+              console.log('Error while Browsing', error.message);
+              toggleLoader(false);
+              setIsErrorOnNoWorkSpace(true);
+              // TODO : Need to bind the message on Snackbar
+            });
         }
       }
       return newData;
@@ -378,7 +392,7 @@ export default function ConnectionList() {
                 );
               })}
           </SelectDatasetWrapper>
-          {tabSize < 5 && (
+          {tabSize < 4 && (
             <Box className={classes.infographContainer}>
               <Box className={classes.infograph}>
                 <InfoGraph />
