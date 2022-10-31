@@ -16,6 +16,7 @@
 
 import { makeStyles } from '@material-ui/styles';
 import { blue } from '@material-ui/core/colors';
+import { styled, Tab } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
   connectionsTabsParent: {
@@ -110,3 +111,31 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
 }));
+
+export const ConnectionTab = styled(Tab)({
+  width: '100%',
+  padding: '15px 10px 15px 30px',
+  textTransform: 'none',
+  color: 'black',
+  fontSize: '16px',
+  height: '50px',
+  maxWidth: '300px',
+  '& .MuiTab-root': {
+    maxWidth: '300px',
+  },
+  '& .MuiTab-labelIcon': { minHeight: '54px !important' },
+  '& .MuiTab-wrapper': {
+    width: '100%',
+    fontSize: '16px',
+    fontWeight: '400',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    gap: '9.41px',
+    flexDirection: 'row',
+    zIndex: 3,
+    whiteSpace: 'nowrap',
+  },
+  '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
+    marginBottom: '0px',
+  },
+});

@@ -20,26 +20,20 @@ import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import { WrangleIcon } from 'components/ConnectionList/icons';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
-import { IRecords } from 'components/GridTable/types';
 import T from 'i18n-react';
 import React, { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect, useLocation } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import useStyles from './styles';
+import useStyles from 'components/ConnectionList/Components/TabLabelCanSample/styles';
+import { ITableSampleCanSampleProps } from 'components/ConnectionList/Components/TabLabelCanSample/types';
 
-export default function TabLabelCanSample({
+export default function({
   label,
   entity,
   initialConnectionId,
   toggleLoader,
-  setIsErrorOnNoWorkSpace,
-}: {
-  label: string;
-  entity: IRecords;
-  initialConnectionId: string;
-  toggleLoader: (value: boolean, isError?: boolean) => void;
-  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+  setToaster,
+}: ITableSampleCanSampleProps) {
   const classes = useStyles();
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
@@ -57,7 +51,13 @@ export default function TabLabelCanSample({
     if (!canBrowse && canSample) {
       onCreateWorkspace(currentEntity);
     } else {
-      setIsErrorOnNoWorkSpace(true);
+      setToaster({
+        open: true,
+        message: `${T.translate('features.WranglerNewUI.Snackbar.labels.retrieveFailure')} ${
+          entity?.name
+        }`,
+        isSuccess: false,
+      });
     }
   };
 
@@ -65,7 +65,13 @@ export default function TabLabelCanSample({
     try {
       createWorkspaceInternal(currentEntity, parseConfig);
     } catch (e) {
-      setIsErrorOnNoWorkSpace(true);
+      setToaster({
+        open: true,
+        message: `${T.translate('features.WranglerNewUI.Snackbar.labels.workspaceFailure')} ${
+          entity?.name
+        }`,
+        isSuccess: false,
+      });
     }
   };
 
@@ -81,13 +87,25 @@ export default function TabLabelCanSample({
           return onWorkspaceCreate(res);
         }
         if (res) {
-          setWorkspaceId(res);
+          setToaster({
+            open: true,
+            message: `${T.translate('features.WranglerNewUI.Snackbar.labels.datasetSuccess')}`,
+            isSuccess: true,
+          });
+          setTimeout(() => {
+            setWorkspaceId(res);
+          }, 2000);
+          // TODO: this setTimeout needs to be removed after getting merged with Destination(test/unit-tests-for-m1) branch
           toggleLoader(false);
         }
       })
       .catch((err) => {
         toggleLoader(false);
-        setIsErrorOnNoWorkSpace(true);
+        setToaster({
+          open: true,
+          message: `${T.translate('features.WranglerNewUI.Snackbar.labels.sampleFailure')}`,
+          isSuccess: false,
+        });
       });
   };
   const location = useLocation();
@@ -100,7 +118,7 @@ export default function TabLabelCanSample({
       to={{
         pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
         state: {
-          from: T.translate('features.Breadcrumb.labels.connectionsList'),
+          from: T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList'),
           path: requiredPath,
         },
       }}
@@ -119,7 +137,7 @@ export default function TabLabelCanSample({
           <Box className="wranglingHover">
             <WrangleIcon />
             <Typography color="primary" variant="body2" className={classes.wrangleButton}>
-              {T.translate('features.Breadcrumb.labels.loadToGrid')}
+              {T.translate('features.WranglerNewUI.Breadcrumb.labels.loadToGrid')}
             </Typography>
           </Box>
         </button>
@@ -137,7 +155,7 @@ export default function TabLabelCanSample({
       >
         <WrangleIcon />
         <Typography variant="body2" className={classes.wrangleButton}>
-          {T.translate('features.Breadcrumb.labels.loadToGrid')}
+          {T.translate('features.WranglerNewUI.Breadcrumb.labels.loadToGrid')}
         </Typography>
       </button>
     </Box>

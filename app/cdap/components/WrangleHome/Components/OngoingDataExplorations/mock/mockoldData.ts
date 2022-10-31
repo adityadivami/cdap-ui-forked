@@ -42,7 +42,7 @@ export const expectedResult = [
       type: 'text',
     },
     {
-      label: 63,
+      label: NaN,
       percentageSymbol: '%',
       subText: 'Data Quality',
       type: 'percentageWithText',

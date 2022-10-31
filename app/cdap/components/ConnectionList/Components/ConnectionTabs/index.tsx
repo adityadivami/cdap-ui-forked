@@ -14,43 +14,16 @@
  * the License.
  */
 
-import { styled } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import { useStyles } from 'components/ConnectionList/Components/ConnectionTabs/styles';
-import React from 'react';
-import { useEffect, useState } from 'react';
+import {
+  ConnectionTab,
+  useStyles,
+} from 'components/ConnectionList/Components/ConnectionTabs/styles';
+import React, { useEffect, useState } from 'react';
 import TabLabelCanBrowse from '../TabLabelCanBrowse';
 import TabLabelCanSample from '../TabLabelCanSample';
-
-const ConnectionTab = styled(Tab)({
-  width: '100%',
-  padding: '15px 10px 15px 30px',
-  textTransform: 'none',
-  color: 'black',
-  fontSize: '16px',
-  height: '50px',
-  maxWidth: '300px',
-  '& .MuiTab-root': {
-    maxWidth: '300px',
-  },
-  '& .MuiTab-labelIcon': { minHeight: '54px !important' },
-  '& .MuiTab-wrapper': {
-    width: '100%',
-    fontSize: '16px',
-    fontWeight: '400',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    gap: '9.41px',
-    flexDirection: 'row',
-    zIndex: 3,
-    whiteSpace: 'nowrap',
-  },
-  '&.MuiTab-labelIcon .MuiTab-wrapper > *:first-child': {
-    marginBottom: '0px',
-  },
-});
+import { IConnectionTabsProps } from './types';
 
 export default function ConnectionsTabs({
   tabsData,
@@ -58,11 +31,11 @@ export default function ConnectionsTabs({
   value,
   index,
   connectionId,
-  setIsErrorOnNoWorkSpace,
-  ...props
-}) {
+  setToaster,
+  toggleLoader,
+}: IConnectionTabsProps) {
   const classes = useStyles();
-
+  // console.log(tabsData);
   const [connectionIdProp, setConnectionId] = useState(connectionId);
 
   useEffect(() => {
@@ -90,7 +63,7 @@ export default function ConnectionsTabs({
             {tabsData.data.map((connectorType, connectorTypeIndex) => (
               <ConnectionTab
                 role="button"
-                data-testid="connections-tab-button"
+                data-testid={`connections-tab-button-${connectorType.name}`}
                 onClick={() => {
                   if (index > 1) {
                     if (connectorType.canBrowse) {
@@ -113,8 +86,8 @@ export default function ConnectionsTabs({
                         label={connectorType.name}
                         entity={connectorType}
                         initialConnectionId={connectionIdProp}
-                        toggleLoader={props.toggleLoader}
-                        setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                        toggleLoader={toggleLoader}
+                        setToaster={setToaster}
                       />
                     )
                   ) : (
@@ -129,7 +102,6 @@ export default function ConnectionsTabs({
                 value={connectorType.name}
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
-                id={connectorType.name}
                 className={index > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
               />
             ))}

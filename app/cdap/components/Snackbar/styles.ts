@@ -15,33 +15,32 @@
  */
 
 import { makeStyles } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
-  noRecordWrapper: {
-    height: `100vh`,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: 0,
-    right: 0,
+  error: {
+    borderRadius: 4,
+    width: '100%',
+    top: '48px !important',
+    backgroundColor: red[600],
+    padding: '15px 18px 14px 18px',
+    display: 'block',
+    minHeight: 76,
+  },
+  success: {
+    width: '100%',
+    top: '48px !important',
+    backgroundColor: green[600],
+    padding: '15px 18px 14px 18px',
+    display: 'block',
+    borderRadius: 4,
+    minHeight: 76,
+  },
+  MUIanchor: {
     left: 0,
-    bottom: 0,
-    zIndex: -9,
-    '& *': {
-      fontFamily: "'Noto Sans', sans-serif",
-    },
   },
-  mainHeaderMessage: {
-    fontSize: '20px',
-    color: '#000000',
-    marginTop: '20px',
-  },
-  subHeaderMessage: {
-    fontSize: '16px',
-    color: '#000000',
-  },
-  innerWrapper: {
-    textAlign: 'center',
+  MUIRoot: {
+    left: 0,
   },
 });

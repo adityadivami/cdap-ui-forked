@@ -14,35 +14,22 @@
  * the License.
  */
 
-import { Box, styled, Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import { Box, Typography } from '@material-ui/core';
 import { GCSIcon } from 'components/ConnectionList/icons';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { IRecords } from 'components/GridTable/types';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import ErrorSnackbar from 'components/SnackbarComponent';
+import Snackbar from 'components/Snackbar';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import ConnectionsTabs from './Components/ConnectionTabs';
-import CustomTooltip from './Components/CustomTooltip';
-import SubHeader from './Components/SubHeader';
-import { useStyles } from './styles';
-
-const SelectDatasetWrapper = styled(Box)({
-  overflowX: 'scroll',
-  display: 'flex',
-  borderTop: `1px solid ${grey[300]}`,
-
-  height: '100%',
-  '& > :first-child': {
-    minWidth: '280px',
-  },
-  '& > :not(:first-child)': {
-    minWidth: '300px',
-  },
-});
+import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import SubHeader from 'components/ConnectionList/Components/SubHeader';
+import { SelectDatasetWrapper } from 'components/ConnectionList/Components/TabLabelCanSample/styles';
+import { ISnackbarToast } from 'components/ConnectionList/Components/TabLabelCanSample/types';
+import { useStyles } from 'components/ConnectionList/styles';
 
 export default function ConnectionList() {
   const { connectorType } = useParams() as IRecords;
@@ -53,7 +40,10 @@ export default function ConnectionList() {
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
-  const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
+  const [toaster, setToaster] = useState<ISnackbarToast>({
+    open: false,
+    isSuccess: false,
+  });
 
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
@@ -248,8 +238,8 @@ export default function ConnectionList() {
                 index={index}
                 connectionId={connectionId || ''}
                 toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
-                setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
                 data-testid="connections-tabs-list-change"
+                setToaster={setToaster}
               />
             </Box>
           );
@@ -261,8 +251,16 @@ export default function ConnectionList() {
           <LoadingSVG />
         </div>
       )}
-      {isErrorOnNoWorkspace && (
-        <ErrorSnackbar handleCloseError={() => setIsErrorOnNoWorkSpace(false)} />
+      {toaster.open && (
+        <Snackbar
+          handleCloseError={() =>
+            setToaster({
+              open: false,
+            })
+          }
+          messageToDisplay={toaster.message ? toaster.message : ''}
+          isSuccess={toaster.isSuccess}
+        />
       )}
     </Box>
   );

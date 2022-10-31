@@ -31,11 +31,15 @@ export default function SubHeader() {
     <Box className={classes.breadCombContainer} data-testid="bread-comb-container-parent">
       <Box>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-          <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
-            {T.translate('features.Breadcrumb.labels.wrangleHome')}
+          <Link
+            color="inherit"
+            to={`/ns/${getCurrentNamespace()}/home`}
+            data-testid="breadcrumb-home-link"
+          >
+            {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
           </Link>
           <Typography className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.Breadcrumb.labels.connectionsList')}
+            {T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
           </Typography>
         </Breadcrumbs>
       </Box>
