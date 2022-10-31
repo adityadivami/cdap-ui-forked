@@ -16,16 +16,21 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import React from 'react';
+import React, { useState } from 'react';
 import OngoingDataExplorations from './Components/OngoingDataExplorations';
 import WrangleCard from './Components/WrangleCard';
 import WrangleHomeTitle from './Components/WrangleHomeTitle';
 import { GradientLine, HeaderImage } from './icons';
 import { useStyles } from './styles';
 import T from 'i18n-react';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { Link } from 'react-router-dom';
 
-export default function WranglerHome() {
+export default function() {
   const classes = useStyles();
+  localStorage.setItem('addConnectionRequestFromNewUI', 'home');
+
+  const [viewAll, setViewAll] = useState<boolean>(false);
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
@@ -40,16 +45,28 @@ export default function WranglerHome() {
 
       <Box>
         <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title={T.translate('features.HomePage.labels.connectorTypes.title')} />
-          <Box className={classes.viewMore}>
-            {T.translate('features.HomePage.labels.common.viewAll')}
-          </Box>
+          <WrangleHomeTitle
+            title={T.translate('features.NewWranglerUI.HomePage.labels.connectorTypes.title')}
+          />
+          {viewAll && (
+            <Box className={classes.viewMore}>
+              <Link
+                color="inherit"
+                to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}
+                data-testid="connector-types-view-all"
+              >
+                {T.translate('features.NewWranglerUI.HomePage.labels.common.viewAll')}
+              </Link>
+            </Box>
+          )}
         </Box>
-        <WrangleCard />
+        <WrangleCard setViewAll={setViewAll} />
         <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
+          <WrangleHomeTitle
+            title={T.translate('features.NewWranglerUI.HomePage.labels.workspaces.title')}
+          />
           <Box className={classes.viewMore}>
-            {T.translate('features.HomePage.labels.common.viewAll')}
+            {T.translate('features.NewWranglerUI.HomePage.labels.common.viewAll')}
           </Box>
         </Box>
         <OngoingDataExplorations />

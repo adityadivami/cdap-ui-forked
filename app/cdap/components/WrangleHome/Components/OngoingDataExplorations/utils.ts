@@ -14,10 +14,10 @@
  * the License.
  */
 
-import { ImportDatasetIcon } from '../WrangleCard/iconStore/ImportDatasetIcon';
-import { IMassagedObject } from './types';
+import { ImportDatasetIcon } from '../WrangleCard/iconStore/ConnectorIcons';
+import { IEachData, IMassagedObject } from './types';
 
-export const generateDataForExplorationCard = (oldData) => {
+export const generateDataForExplorationCard = (oldData: IEachData[]) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
   const massagedArray = [];
 
@@ -39,7 +39,7 @@ export const generateDataForExplorationCard = (oldData) => {
           obj.label = `${eachItem[keys]} Recipe steps`;
           obj.type = 'text';
         } else if (keys === 'dataQuality') {
-          obj.label = parseInt(eachItem[keys], 2);
+          obj.label = Number(eachItem[keys]);
           obj.percentageSymbol = '%';
           obj.subText = 'Data Quality';
           obj.type = 'percentageWithText';

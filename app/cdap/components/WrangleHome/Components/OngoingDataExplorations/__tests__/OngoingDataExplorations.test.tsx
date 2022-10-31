@@ -19,13 +19,12 @@ import { render, screen } from '@testing-library/react';
 import OngoingDataExploration from '../index';
 import MyDataPrepApi from 'api/dataprep';
 import operators from 'rxjs/operators';
-import { createBrowserHistory as createHistory } from 'history';
 import { Route, Router, Switch } from 'react-router';
-import { switchMapCallbackMock, getWorkspaceListSubscribeMock } from '../mock/mockoldData';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
+import {
+  getWorkspaceListSubscribeMock,
+  switchMapCallbackMock,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mockoldData';
 
 const testObj = {
   connectionName: 'Upload',

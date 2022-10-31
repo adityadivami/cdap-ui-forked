@@ -20,14 +20,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { mockTabsDataWithBrowse } from '../mock/mockTabsDataWithBrowse';
 import { mockTabsDataWithBrowseIndex } from '../mock/mockTabsDataWithBrowseIndex';
 import { mockTabsTestData } from '../mock/mockTabsTestData';
-import { Route, Router, Switch } from 'react-router';
-import { createBrowserHistory } from 'history';
-
-const tabsTestData = [{ showTabs: true }];
-
-const history = createBrowserHistory({
-  basename: '/',
-});
+import { Route, Router, Switch } from 'react-router-dom';
+import history from 'services/history';
 
 describe('Test ConnectionsTabs', () => {
   it('Should render Connections Tabs Parent Component', () => {

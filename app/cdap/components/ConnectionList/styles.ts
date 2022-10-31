@@ -85,4 +85,7 @@ export const useStyles = makeStyles({
     textOverflow: 'ellipsis',
     pointerEvents: 'none',
   },
+  noDataLabel: {
+    paddingLeft: 34,
+  },
 });

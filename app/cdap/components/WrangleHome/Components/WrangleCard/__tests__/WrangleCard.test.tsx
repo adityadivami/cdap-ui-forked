@@ -16,20 +16,21 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import WranglerHomeNew from '../index';
-import history from 'services/history';
+import WrangleCard from '../index';
 import { Route, Router, Switch } from 'react-router';
+import history from 'services/history';
 
-test('renders Wrangler-Home-New component', () => {
+test('It renders Wrangler-Card ', async () => {
   render(
     <Router history={history}>
       <Switch>
         <Route>
-          <WranglerHomeNew />
+          <WrangleCard />
         </Route>
       </Switch>
     </Router>
   );
-  const ele = screen.getByTestId(/wrangler-home-new-parent/i);
+
+  const ele = screen.getByTestId(/wrangle-card-parent/i);
   expect(ele).toBeInTheDocument();
 });

@@ -14,19 +14,13 @@
  * the License.
  */
 
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import TabLabelCanSample from '../index';
-import * as Module from 'react-router';
-import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
-import { Route, Router, Switch } from 'react-router';
 import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
-import { createBrowserHistory } from 'history';
-
-const history = createBrowserHistory({
-  basename: '/',
-});
-
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import history from 'services/history';
+import TabLabelCanSample from '../index';
+import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
 describe('Test TabLabelCanSample Component', () => {
   it('Should render TabLabelCanSample Component', () => {
     render(

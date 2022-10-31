@@ -14,22 +14,27 @@
  * the License.
  */
 
+import { Avatar } from '@material-ui/core';
+import ImageOutlined from '@material-ui/icons/ImageOutlined';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import WranglerHomeNew from '../index';
-import history from 'services/history';
-import { Route, Router, Switch } from 'react-router';
+import styled from 'styled-components';
+import { IWidgetSrc } from '../types';
 
-test('renders Wrangler-Home-New component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <WranglerHomeNew />
-        </Route>
-      </Switch>
-    </Router>
+const ImageContainer = styled.div`
+  font-size: 40px;
+`;
+
+export default function({ dataSrc }: IWidgetSrc) {
+  return dataSrc ? (
+    <Avatar
+      src={dataSrc as string}
+      variant="square"
+      data-testid="card-image-from-widget-api"
+      id="card-image-from-widget-api"
+    />
+  ) : (
+    <ImageContainer>
+      <ImageOutlined fontSize="inherit" data-testid="card-image-default" id="card-image-default" />
+    </ImageContainer>
   );
-  const ele = screen.getByTestId(/wrangler-home-new-parent/i);
-  expect(ele).toBeInTheDocument();
-});
+}

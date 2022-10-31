@@ -16,20 +16,11 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import WranglerHomeNew from '../index';
-import history from 'services/history';
-import { Route, Router, Switch } from 'react-router';
+import WidgetData from 'components/WrangleHome/Components/WrangleCard/WidgetData/index';
 
-test('renders Wrangler-Home-New component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <WranglerHomeNew />
-        </Route>
-      </Switch>
-    </Router>
-  );
-  const ele = screen.getByTestId(/wrangler-home-new-parent/i);
-  expect(ele).toBeInTheDocument();
+describe('Test Widget data Component', () => {
+  it('Should render Widget data component', () => {
+    const container = render(<WidgetData />);
+    expect(container).toBeDefined();
+  });
 });

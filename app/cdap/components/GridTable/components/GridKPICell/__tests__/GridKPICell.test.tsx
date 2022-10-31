@@ -15,7 +15,7 @@
  */
 
 import { render } from '@testing-library/react';
-import GridKPICell from '..';
+import GridKPICell from 'components/GridTable/components/GridKPICell/index';
 import { screen } from '@testing-library/dom';
 import React from 'react';
 

@@ -14,22 +14,33 @@
  * the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import WranglerHomeNew from '../index';
-import history from 'services/history';
-import { Route, Router, Switch } from 'react-router';
+export interface IConnectorArray {
+  name: string;
+  type: string;
+  category: string;
+  description: string;
+  artifact: {
+    name: string;
+    version: string;
+    scope: string;
+  };
+  SVG: JSX.Element;
+  link: string;
+  displayName?: string;
+}
 
-test('renders Wrangler-Home-New component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <WranglerHomeNew />
-        </Route>
-      </Switch>
-    </Router>
-  );
-  const ele = screen.getByTestId(/wrangler-home-new-parent/i);
-  expect(ele).toBeInTheDocument();
-});
+export interface IConnectorDetailPayloadArray {
+  name: string;
+  type: string;
+  category: string;
+  description: string;
+  artifact: {
+    name: string;
+    version: string;
+    scope: string;
+  };
+}
+
+export interface IWidgetSrc {
+  [key: string]: string | unknown;
+}

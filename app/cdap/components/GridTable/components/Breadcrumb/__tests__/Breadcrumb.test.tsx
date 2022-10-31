@@ -17,20 +17,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import Breadcrumb from '..';
-import { createBrowserHistory as createHistory } from 'history';
-import BreadCrumb from '..';
-
-const history = createHistory({
-  basename: '/',
-});
-
-const location = {
-  state: {
-    from: 'Home',
-    path: 'wrangle-home',
-  },
-};
+import BreadCrumb from 'components/GridTable/components/Breadcrumb/index';
+import history from 'app/cdap/services/history';
 
 describe('Test Breadcrumb Component', () => {
   const locationMock = jest.mock('react-router-dom', () => ({
@@ -65,8 +53,4 @@ describe('Test Breadcrumb Component', () => {
       </Router>
     );
   });
-
-  // it('Should have the Data Sources text in the Breadcrumb', () => {
-  //   expect(screen.getByTestId('breadcrumb-data-sources-text')).toHaveTextContent('Data Sources');
-  // });
 });

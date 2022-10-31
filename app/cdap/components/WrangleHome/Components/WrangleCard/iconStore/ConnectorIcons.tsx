@@ -34,3 +34,33 @@ export const ImportDatasetIcon = (
     />
   </svg>
 );
+
+export const AddConnectionIcon = (
+  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0.307129" y="16.21" width="39.386" height="7" fill="#FFC107" />
+    <rect
+      x="16.5"
+      y="39.4033"
+      width="39.386"
+      height="7"
+      transform="rotate(-90 16.5 39.4033)"
+      fill="#43A047"
+    />
+    <rect x="16.5" y="16.21" width="23.1931" height="7" fill="#2196F3" />
+    <path d="M16.5 23.4033L16.5 0.0173569H23.5V16.2059L16.5 23.4033Z" fill="#E53935" />
+  </svg>
+);
+
+export const ImportDataIcon = (
+  <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect y="33.5444" width="40" height="6.66667" fill="#FFC107" />
+    <rect x="20" y="33.5444" width="20" height="6.66667" fill="#E53935" />
+    <path d="M16.6665 28.2109L16.6665 0.210941H23.3332V28.2109H16.6665Z" fill="#2196F3" />
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M20.3052 32.2617L36.0508 15.9567L31.2552 11.3256L20.1409 22.8348L8.63134 11.7202L4.00029 16.5158L15.5098 27.6304L15.5096 27.6307L20.3052 32.2617Z"
+      fill="#43A047"
+    />
+  </svg>
+);
