@@ -37,12 +37,18 @@ export default function({
   const [nestedMenuList, setNestedMenuList] = useState(nestedMenuOptions);
 
   const handleMenuOpenClose = (title) => {
-    let newState = [...nestedMenuList];
-    newState = newState.map((each) => {
-      each.open = false;
-      return each;
-    });
-    setNestedMenuList(newState);
+    // let newState = [...nestedMenuList];
+    // newState = newState.map((each) => {
+    //   each.open = false;
+    //   return each;
+    // });
+
+    setNestedMenuList((previousState) =>
+      previousState.map((each) => {
+        each.open = false;
+        return each;
+      })
+    );
   };
 
   return (

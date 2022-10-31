@@ -3449,19 +3449,19 @@ features:
           functionsName: Functions Name Switch
       toolbarIcons:
         labels:
-          undoIcon: Undo
-          redoIcon: Redo
-          nullIcon: 'Null'
-          invalidIcon: Invalid
-          columnIcon: Column
-          structureIcon: Structure
-          fragmentIcon: Fragment
-          securityIcon: Security
-          mathIcon: Math
-          gridIcon: Grid
-          otherIcon: Other
-          toggleDescription: Function names
           all: all
+          columnIcon: Column
+          fragmentIcon: Fragment
+          gridIcon: Grid
+          invalidIcon: Invalid
+          mathIcon: Math
+          nullIcon: 'Null'
+          otherIcon: Other
+          redoIcon: Redo
+          securityIcon: Security
+          structureIcon: Structure
+          toggleDescription: Function names
+          undoIcon: Undo
       transformations:
         options:
           labels:

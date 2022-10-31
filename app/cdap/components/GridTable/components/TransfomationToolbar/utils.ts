@@ -1,11 +1,4 @@
-import { COLUMN_OPTIONS } from '../NestedMenu/menuOptions/columnOptions';
-import { FRAGMENT_OPTIONS } from '../NestedMenu/menuOptions/fragmentOptions';
-import { INVALID_ICON_OPTIONS } from '../NestedMenu/menuOptions/invalidIconOptions';
-import { MATH_OPTIONS } from '../NestedMenu/menuOptions/mathOptions';
 import { MENU_OPTIONS } from '../NestedMenu/menuOptions/menuOptions';
-import { NULL_MISSING_OPTIONS } from '../NestedMenu/menuOptions/nullAndMissingOptions';
-import { OTHER_OPTIONS } from '../NestedMenu/menuOptions/otherOptions';
-import { SECURITY_OPTIONS } from '../NestedMenu/menuOptions/securityOptions';
 import {
   ColumnIcon,
   FragmentIcon,
@@ -45,14 +38,14 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: NULL_MISSING_OPTIONS,
+    options: [],
     icon: NullIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon'),
     open: false,
   },
   {
-    options: INVALID_ICON_OPTIONS,
+    options: [],
     icon: InvalidIcon,
     title: T.translate(
       'features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon'
@@ -61,7 +54,7 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: COLUMN_OPTIONS,
+    options: [],
     icon: ColumnIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon'),
@@ -77,7 +70,7 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: FRAGMENT_OPTIONS,
+    options: [],
     icon: FragmentIcon,
     title: T.translate(
       'features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon'
@@ -86,14 +79,14 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: MATH_OPTIONS,
+    options: [],
     icon: MathIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon'),
     open: false,
   },
   {
-    options: SECURITY_OPTIONS,
+    options: [],
     icon: SecurityIcon,
     title: T.translate(
       'features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon'
@@ -102,7 +95,7 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: OTHER_OPTIONS,
+    options: [],
     icon: OtherIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon'),
