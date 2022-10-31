@@ -51,12 +51,6 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
   const classes = useStyles();
   const { dataprep } = DataPrepStore.getState();
 
-  const [toaster, setToaster] = useState({
-    open: false,
-    message: '',
-    isSuccess: false,
-  });
-
   useEffect(() => {
     setConnectionPayload({
       path: dataprep.insights.path,
@@ -143,7 +137,7 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
         </Box>
       </Box>
 
-      {/* {errorOnTransformation.open && (
+      {errorOnTransformation.open && (
         <PositionedSnackbar
           handleCloseError={() =>
             setErrorOnTransformation({
@@ -152,20 +146,6 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
             })
           }
           messageToDisplay={errorOnTransformation.message}
-        />
-      )} */}
-
-      {toaster.open && (
-        <PositionedSnackbar
-          handleCloseError={() =>
-            setToaster({
-              open: false,
-              message: '',
-              isSuccess: false,
-            })
-          }
-          messageToDisplay={toaster.message}
-          isSuccess={toaster.isSuccess}
         />
       )}
     </DrawerWidget>
