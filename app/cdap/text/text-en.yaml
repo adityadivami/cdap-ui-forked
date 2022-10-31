@@ -3439,3 +3439,9 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+  WranglerNewUI:
+    OnGoingDataExplorations:
+      labels:
+       recipeSteps: Recipe steps
+       nullValues: Null values
+       

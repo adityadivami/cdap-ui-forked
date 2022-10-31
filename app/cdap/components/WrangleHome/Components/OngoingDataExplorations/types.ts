@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 export interface IResponseData {
   count: number;
@@ -77,7 +77,7 @@ export interface IMassagedObject {
   label: string | number;
   type: string;
   percentageSymbol: string;
-  subText: string;
+  subText: ReactNode;
   workspaceId: string;
   count: number;
 }

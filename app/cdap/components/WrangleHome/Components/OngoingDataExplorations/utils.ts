@@ -26,20 +26,20 @@ import {
   DATA_QUALITY,
   ICON,
   ICON_WITH_TEXT,
-  NULL_VALUES,
   PERCENTAGE_WITH_TEXT,
   RECIPE_STEPS,
   TEXT,
   WORKPSACE_NAME,
   WORKSPACE_ID,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
+import T from 'i18n-react';
 
 export const getUpdatedExplorationCards = (
   existingExplorationCardsData: IExistingExplorationCardsData[]
 ) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
 
-  const massagedArray = [];
+  const updatedExplorationCardsData = [];
 
   const { dataprep } = DataPrepStore.getState();
   const { connectorsWithIcons } = dataprep;
@@ -57,7 +57,7 @@ export const getUpdatedExplorationCards = (
     existingExplorationCardsData.length
   ) {
     existingExplorationCardsData.forEach((eachItem) => {
-      const childArray = [];
+      const eachExplorationCardData = [];
 
       Object.keys(eachItem).map((keys) => {
         const obj = {} as IMassagedObject;
@@ -72,24 +72,28 @@ export const getUpdatedExplorationCards = (
           obj.label = eachItem[keys];
           obj.type = TEXT;
         } else if (keys === RECIPE_STEPS) {
-          obj.label = `${eachItem[keys]} Recipe steps`;
+          obj.label = `${eachItem[keys]} ${T.translate(
+            'features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps'
+          )}`;
           obj.type = TEXT;
         } else if (keys === DATA_QUALITY) {
           obj.label = Number(eachItem[keys]);
           obj.percentageSymbol = '%';
-          obj.subText = NULL_VALUES;
+          obj.subText = T.translate(
+            'features.WranglerNewUI.OnGoingDataExplorations.labels.nullValues'
+          );
           obj.type = PERCENTAGE_WITH_TEXT;
         } else if (keys === WORKSPACE_ID) {
           obj.workspaceId = eachItem[keys];
         } else if (keys === COUNT) {
           obj.count = eachItem[keys];
         }
-        childArray.push(obj);
+        eachExplorationCardData.push(obj);
       });
 
-      massagedArray.push(childArray);
+      updatedExplorationCardsData.push(eachExplorationCardData);
     });
   }
 
-  return massagedArray;
+  return updatedExplorationCardsData;
 };

@@ -35,7 +35,7 @@ import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function() {
-  const [finalArray, setFinalArray] = useState<IMassagedObject[]>([]);
+  const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IMassagedObject[]>([]);
 
   const getOngoingData = useCallback(async () => {
     const connectionsWithConnectorTypeData: Map<
@@ -135,7 +135,7 @@ export default function() {
             expData[index].dataQuality = totalDataQuality;
             expData[index].count = workspace.count;
             const final = getUpdatedExplorationCards(expData);
-            setFinalArray(final);
+            setOnGoingExplorationsData(final);
           });
         }
       });
@@ -145,11 +145,13 @@ export default function() {
     getOngoingData();
   }, []);
 
-  const filteredArray = finalArray.filter((eachWorkspace) => eachWorkspace[6].count !== 0);
+  const filteredData = onGoingExplorationsData.filter(
+    (eachWorkspace) => eachWorkspace[6].count !== 0
+  );
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {filteredArray.map((item, index) => {
+      {filteredData.map((item, index) => {
         return (
           <Link
             to={{

@@ -22,7 +22,6 @@ export const ICON_WITH_TEXT = 'iconWithText';
 export const TEXT = 'text';
 export const RECIPE_STEPS = 'recipeSteps';
 export const DATA_QUALITY = 'dataQuality';
-export const NULL_VALUES = 'Null values';
 export const PERCENTAGE_WITH_TEXT = 'percentageWithText';
 export const WORKSPACE_ID = 'workspaceId';
 export const COUNT = 'count';
