@@ -64,7 +64,10 @@ export default function TabLabelCanBrowse({
             {label}
           </Typography>
           {count && (
-            <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
+            <Typography
+              variant="body1"
+              className={classes.labelStylesCount}
+            >{`(${count})`}</Typography>
           )}
         </Box>
         <Box>
@@ -90,7 +93,10 @@ export default function TabLabelCanBrowse({
           {label}
         </Typography>
         {count && (
-          <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
+          <Typography
+            variant="body1"
+            className={classes.labelStylesCount}
+          >{`(${count})`}</Typography>
         )}
       </Box>
       <Box>

@@ -31,12 +31,18 @@ export const useStyles = makeStyles({
     height: '24px',
   },
   labelStyles: {
-    maxWidth: '192px',
+    maxWidth: '164px',
     whiteSpace: 'nowrap',
     fontSize: '16px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     pointerEvents: 'none',
+    paddingLeft: '11px',
+  },
+  labelStylesCount: {
+    fontSize: '16px',
+    overflow: 'hidden',
+    paddingLeft: '11px',
   },
   rightArrow: {
     color: grey[600],

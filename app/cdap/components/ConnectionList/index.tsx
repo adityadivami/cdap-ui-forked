@@ -34,6 +34,7 @@ import { useStyles } from './styles';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import CloseIcon from '@material-ui/icons/Close';
 import cloneDeep from 'lodash/cloneDeep';
+import { each } from 'immer/dist/internal';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -84,7 +85,6 @@ export default function ConnectionList() {
     // Fetching the all available connectors list with icons
     await getWidgetData(connectorTypesWithIcons);
     connectorTypes = connectorTypesWithSVG;
-
     let allConnectionsTotalLength = 0;
 
     // Fetching all the connections list inside each connector type
@@ -103,14 +103,13 @@ export default function ConnectionList() {
       };
     });
 
+    // Connector types which has connections inside it
     const firstLevelData = connectorTypes.filter((each) => {
       if (each.count > 0) {
-        return {
-          name: each.name,
-          count: each.count,
-        };
+        return true;
       }
     });
+
     setLoading(false);
     setDataForTabs((prev) => {
       const tempData = [...prev];
@@ -142,6 +141,7 @@ export default function ConnectionList() {
 
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string, index: number) => {
     const categorizedConnections = await getCategorizedConnections();
+
     const connections = categorizedConnections.get(selectedValue) || [];
     setDataForTabsHelper(connections, index);
     toggleLoader(false);
@@ -294,7 +294,7 @@ export default function ConnectionList() {
 
       {dataForTabs &&
       Array.isArray(dataForTabs) &&
-      dataForTabs.length &&
+      dataForTabs?.length &&
       dataForTabs[0]?.data?.length > 0 ? (
         <Box className={classes.connectionsWithInfo}>
           <SelectDatasetWrapper>
@@ -401,10 +401,16 @@ export default function ConnectionList() {
           )}
         </Box>
       ) : (
-        <NoConnectionsScreen
-          title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
-          subtitle={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle')}
-        />
+        <>
+          {loading && (
+            <NoConnectionsScreen
+              title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
+              subtitle={T.translate(
+                'features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle'
+              )}
+            />
+          )}
+        </>
         // TODO: No connectors types are available screen needs to be appended here
       )}
       {loading && (
