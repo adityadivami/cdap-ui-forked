@@ -22,11 +22,9 @@ import { useStyles } from '../styles';
 export default function GridTextCell({
   anchorEl,
   setAnchorEl,
-  setTextSelectionRange,
   textSelectionRange,
   columnSelected,
   applyTransformation,
-  cancelTransformation,
   optionSelected,
   headers,
   open,
