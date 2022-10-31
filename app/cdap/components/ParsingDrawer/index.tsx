@@ -51,6 +51,12 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
   const classes = useStyles();
   const { dataprep } = DataPrepStore.getState();
 
+  const [toaster, setToaster] = useState({
+    open: false,
+    message: '',
+    isSuccess: false,
+  });
+
   useEffect(() => {
     setConnectionPayload({
       path: dataprep.insights.path,
