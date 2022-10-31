@@ -22,6 +22,16 @@ export const useStyles = makeStyles(() => {
       top: 46,
       height: 'calc(100vh - 47px)',
     },
+    containerStyles: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    importStyles: {
+      display: 'flex',
+      flexDirection: 'row',
+      paddingTop: 5,
+    },
     drawerContainerStyles: {
       width: 460,
       height: '100%',
@@ -39,6 +49,7 @@ export const useStyles = makeStyles(() => {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-start',
+      marginRight: 150,
     },
     pointerStyles: {
       cursor: 'pointer',
@@ -54,6 +65,16 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: 0.15,
       color: '#000000',
+    },
+    importTextStyles: {
+      fontWeight: 400,
+      fontSize: 14,
+      fontStyle: 'normal',
+      color: '#000000',
+      lineHeight: '150%',
+      letterSpacing: 0.15,
+      fontFamily: 'Noto Sans',
+      paddingLeft: 8,
     },
     headerRightStyles: {
       display: 'flex',
