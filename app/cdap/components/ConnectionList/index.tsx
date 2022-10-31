@@ -294,7 +294,7 @@ export default function ConnectionList() {
 
       {dataForTabs &&
       Array.isArray(dataForTabs) &&
-      dataForTabs?.length &&
+      dataForTabs.length &&
       dataForTabs[0]?.data?.length > 0 ? (
         <Box className={classes.connectionsWithInfo}>
           <SelectDatasetWrapper>
@@ -401,16 +401,11 @@ export default function ConnectionList() {
           )}
         </Box>
       ) : (
-        <>
-          {loading && (
-            <NoConnectionsScreen
-              title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
-              subtitle={T.translate(
-                'features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle'
-              )}
-            />
-          )}
-        </>
+        <NoConnectionsScreen
+          title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
+          subtitle={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle')}
+        />
+
         // TODO: No connectors types are available screen needs to be appended here
       )}
       {loading && (
