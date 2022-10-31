@@ -138,9 +138,12 @@ export default function() {
     getOngoingData();
   }, []);
 
+  console.log(finalArray, 'final Array');
+  const filteredArray = finalArray.filter((eachWorkspace) => eachWorkspace[6].count !== 0);
+
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {finalArray.map((item, index) => {
+      {filteredArray.map((item, index) => {
         return (
           <Link
             to={{

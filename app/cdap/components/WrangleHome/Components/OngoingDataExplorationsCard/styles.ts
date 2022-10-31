@@ -29,6 +29,7 @@ export const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyConent: 'center',
+    paddingRight: 62,
   },
   elementStyle: {
     width: 301,
@@ -40,6 +41,7 @@ export const useStyles = makeStyles({
     display: 'flex',
     margin: 'auto 0px',
     justifyContent: 'space-between',
+    alignItems: 'center',
     '& .MuiTypography-body1': {
       margin: 'auto 0px',
       fontSize: 16,
