@@ -3442,6 +3442,6 @@ features:
   WranglerNewUI:
     OnGoingDataExplorations:
       labels:
-       recipeSteps: Recipe steps
        nullValues: Null values
+       recipeSteps: Recipe steps
        
