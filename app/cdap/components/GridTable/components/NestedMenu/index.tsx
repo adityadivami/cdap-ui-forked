@@ -18,6 +18,7 @@ import { IconButton, Menu, Tooltip } from '@material-ui/core';
 import React, { useState } from 'react';
 import MenuComponent from '../MenuComponent';
 import MenuItemComponent from '../MenuItemComponent';
+import { IItem } from '../MenuItemComponent/types';
 import { useNestedMenuStyles } from './styles';
 import { INestedMenuProps } from './types';
 
@@ -36,7 +37,7 @@ export default function({
   const [nestedOptions, setNestedOptions] = useState([]);
   const classes = useNestedMenuStyles();
 
-  const handleMenuClick = (event: any, item: any) => {
+  const handleMenuClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IItem) => {
     setNestedOptions([]);
     event.preventDefault();
     event.stopPropagation();

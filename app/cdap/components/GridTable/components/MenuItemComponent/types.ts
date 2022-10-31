@@ -23,6 +23,6 @@ export interface IItem {
 export interface IMenuItemComponentProps {
   item: IItem;
   index: number;
-  onMenuClick: (e: any, item: any) => void;
+  onMenuClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IItem) => void;
   columnType: string;
 }

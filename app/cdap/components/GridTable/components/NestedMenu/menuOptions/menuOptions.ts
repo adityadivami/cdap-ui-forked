@@ -25,5 +25,5 @@ export const MENU_OPTIONS = [
     ),
     options: DATATYPE_OPTIONS,
     supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
-  }
+  },
 ];

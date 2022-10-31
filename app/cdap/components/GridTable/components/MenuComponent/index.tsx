@@ -44,7 +44,7 @@ export default function({
         vertical: 'top',
         horizontal: 'left',
       }}
-      onClose={(e: any) => {
+      onClose={(e: Event) => {
         e.preventDefault();
         setAnchorEl(null);
       }}

@@ -14,12 +14,12 @@
  * the License.
  */
 
-import { MenuProps } from '@material-ui/core';
+import { IItem } from './../MenuItemComponent/types';
 
 export interface IMenuComponentProps {
   anchorEl;
   menuOptions;
   setAnchorEl;
-  submitOption: (e: any, item: any) => void;
+  submitOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IItem) => void;
   columnType: string;
 }

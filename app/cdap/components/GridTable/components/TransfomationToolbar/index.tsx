@@ -34,34 +34,23 @@ export default function({
   const classes = useStyles();
   const [isShowNames, setIsShowName] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
-  const [nestedMenuList, setNestedMenuList] = useState(nestedMenuOptions);
+  const [selectedMenuOptions, setSelectedMenuOptions] = useState([]);
 
-  const handleMenuOpenClose = (title) => {
-    // let newState = [...nestedMenuList];
-    // newState = newState.map((each) => {
-    //   each.open = false;
-    //   return each;
-    // });
-
-    setNestedMenuList((previousState) =>
-      previousState.map((each) => {
-        each.open = false;
-        return each;
-      })
-    );
+  const handleMenuOpenClose = () => {
+    setSelectedMenuOptions([]);
   };
 
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
-        {nestedMenuList?.map((i, index) => {
+        {nestedMenuOptions?.map((menuItem, index) => {
           return (
             <>
               <Box className={classes.functionNameWrapper}>
-                {i.options?.length ? (
+                {menuItem.options?.length ? (
                   <>
                     <Tooltip
-                      title={i.title}
+                      title={menuItem.title}
                       classes={{
                         tooltip: classes.tooltipToolbar,
                         arrow: classes.arrowTooltip,
@@ -72,51 +61,47 @@ export default function({
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          let newState = [...nestedMenuList];
-                          newState = newState.map((each) => {
-                            each.open = false;
-                            return each;
-                          });
-                          newState[index].open = !newState[index].open;
-                          setNestedMenuList(newState);
+                          setSelectedMenuOptions(menuItem.options);
                           setAnchorEl(e.currentTarget);
                         }}
                       >
                         {' '}
-                        {i.icon}
+                        {menuItem.icon}
                       </IconButton>
                     </Tooltip>
                     <NestedMenu
-                      menuOptions={i.options}
+                      menuOptions={selectedMenuOptions}
                       columnType={columnType}
-                      icon={i.icon}
+                      icon={menuItem.icon}
                       submitMenuOption={submitMenuOption}
-                      title={i.title}
+                      title={menuItem.title}
                       setAnchorEl={setAnchorEl}
                       anchorEl={anchorEl}
-                      open={nestedMenuList[index].open}
+                      open={Boolean(selectedMenuOptions.length)}
                       handleMenuOpenClose={handleMenuOpenClose}
                     />
                     {isShowNames && (
-                      <Typography className={classes.typoClass}>{i.toolName}</Typography>
+                      <Typography className={classes.typoClass}>{menuItem.toolName}</Typography>
                     )}
                   </>
                 ) : (
                   <>
                     <Tooltip
-                      title={i.title}
+                      title={menuItem.title}
                       classes={{
                         tooltip: classes.tooltipToolbar,
                         arrow: classes.arrowTooltip,
                       }}
                       arrow
                     >
-                      <IconButton onClick={() => submitMenuOption(i.action, i.dataType)}>
-                        {i.icon}
+                      <IconButton
+                        onClick={() => submitMenuOption(menuItem.action, menuItem.dataType)}
+                      >
+                        {menuItem.icon}
                       </IconButton>
                     </Tooltip>
                     {isShowNames && (
-                      <Typography className={classes.typoClass}>{i.toolName}</Typography>
+                      <Typography className={classes.typoClass}>{menuItem.toolName}</Typography>
                     )}
                   </>
                 )}
