@@ -16,7 +16,7 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import React from 'react';
+import React, { useState } from 'react';
 import OngoingDataExplorations from './Components/OngoingDataExplorations';
 import WrangleCard from './Components/WrangleCard';
 import WrangleHomeTitle from './Components/WrangleHomeTitle';
@@ -29,6 +29,8 @@ import { Link } from 'react-router-dom';
 export default function() {
   const classes = useStyles();
   localStorage.setItem('addConnectionRequestFromNewUI', 'home');
+
+  const [viewAll, setViewAll] = useState<boolean>(false);
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
@@ -46,17 +48,19 @@ export default function() {
           <WrangleHomeTitle
             title={T.translate('features.NewWranglerUI.HomePage.labels.connectorTypes.title')}
           />
-          <Box className={classes.viewMore}>
-            <Link
-              color="inherit"
-              to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}
-              data-testid="connector-types-view-all"
-            >
-              {T.translate('features.NewWranglerUI.HomePage.labels.common.viewAll')}
-            </Link>
-          </Box>
+          {viewAll && (
+            <Box className={classes.viewMore}>
+              <Link
+                color="inherit"
+                to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}
+                data-testid="connector-types-view-all"
+              >
+                {T.translate('features.NewWranglerUI.HomePage.labels.common.viewAll')}
+              </Link>
+            </Box>
+          )}
         </Box>
-        <WrangleCard />
+        <WrangleCard setViewAll={setViewAll} />
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle
             title={T.translate('features.NewWranglerUI.HomePage.labels.workspaces.title')}

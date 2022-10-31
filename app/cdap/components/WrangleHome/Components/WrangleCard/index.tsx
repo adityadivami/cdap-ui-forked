@@ -22,7 +22,7 @@ import { getWidgetData } from './services/getWidgetData';
 import { useStyles } from './styles';
 import { IConnectorArray } from './types';
 
-export default function() {
+export default function({ setViewAll }) {
   const [connectorsData, setConnectorsData] = useState({ connectorTypes: [] });
 
   const classes = useStyles();
@@ -42,6 +42,12 @@ export default function() {
   if (connectorTypes.length > 2) {
     startIndex = 1; // This line is writtern to eliminate the add-connection cards's data from the array
     endIndex = 5;
+  }
+
+  if (connectorTypes.length > 5) {
+    setViewAll(true);
+  } else {
+    setViewAll(false);
   }
 
   return (
