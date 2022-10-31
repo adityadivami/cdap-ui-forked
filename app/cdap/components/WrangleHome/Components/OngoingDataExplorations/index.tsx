@@ -18,13 +18,13 @@ import { Box } from '@material-ui/core/';
 import MyDataPrepApi from 'api/dataprep';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import {
-  IConnectionsWithConnectorTypeDataObject,
-  IEachData,
-  IMapValue,
+  IConnectionWithConnectorType,
+  IExistingExplorationCardsData,
+  IConnectionsList,
   IMassagedObject,
   IValues,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
-import { generateDataForExplorationCard } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
+import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
 import T from 'i18n-react';
 import { orderBy } from 'lodash';
@@ -40,9 +40,9 @@ export default function() {
   const getOngoingData = useCallback(async () => {
     const connectionsWithConnectorTypeData: Map<
       string,
-      IMapValue[]
+      IConnectionsList[]
     > = await getCategorizedConnections();
-    const connectionsWithConnectorTypeDataObject: IConnectionsWithConnectorTypeDataObject[] = [];
+    const connectionsWithConnectorTypeDataObject: IConnectionWithConnectorType[] = [];
     for (const connectorName of connectionsWithConnectorTypeData.keys()) {
       const values = connectionsWithConnectorTypeData.get(connectorName);
       const connections = values.map((eachValue) => {
@@ -56,57 +56,60 @@ export default function() {
 
     const findConnectorType = (connection): string => {
       if (connection) {
-        const matchedConnection = connectionsWithConnectorTypeDataObject.find((eachConnection) => {
-          return eachConnection.name === connection;
-        });
+        const matchedConnection: IConnectionWithConnectorType = connectionsWithConnectorTypeDataObject.find(
+          (eachConnection) => {
+            return eachConnection.name === connection;
+          }
+        );
         return matchedConnection.connectorType;
       }
       return 'Imported Dataset';
     };
 
-    const expData: IEachData[] = [];
+    const expData: IExistingExplorationCardsData[] = [];
+
     // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
     //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
+
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     })
       .pipe(
-        switchMap((res: Record<string, unknown[]>) => {
+        switchMap((response: Record<string, unknown[]>) => {
           let values: IValues[] = [];
-          values = res.values;
+          values = response?.values ?? [];
 
           values = orderBy(
             values,
             [(workspace) => (workspace.workspaceName || '').toLowerCase()],
             ['asc']
           );
-          const workspaces = values.map((item) => {
+          const workspaces = values.map((eachValue) => {
             const params = {
               context: 'default',
-              workspaceId: item.workspaceId,
+              workspaceId: eachValue.workspaceId,
             };
             const requestBody = {
-              directives: item.directives,
+              directives: eachValue.directives,
               limit: 1000,
               insights: {
-                name: item?.sampleSpec?.connectionName,
-                workspaceName: item.workspaceName,
-                path: item?.sampleSpec?.path,
+                name: eachValue?.sampleSpec?.connectionName,
+                workspaceName: eachValue.workspaceName,
+                path: eachValue?.sampleSpec?.path,
                 visualization: {},
               },
             };
 
-            const conectorName = findConnectorType(item?.sampleSpec?.connectionName);
+            const connectorName: string = findConnectorType(eachValue?.sampleSpec?.connectionName);
             expData.push({
-              connectorType: conectorName,
-              connectionName:
-                item?.sampleSpec?.connectionName === undefined
-                  ? 'Imported Dataset'
-                  : item?.sampleSpec?.connectionName,
-              workspaceName: item.workspaceName,
-              recipeSteps: item.directives.length,
+              connectorType: connectorName,
+              connectionName: eachValue?.sampleSpec?.connectionName
+                ? eachValue?.sampleSpec?.connectionName
+                : 'Imported Dataset',
+              workspaceName: eachValue.workspaceName,
+              recipeSteps: eachValue.directives?.length ?? 0,
               dataQuality: null,
-              workspaceId: item.workspaceId,
+              workspaceId: eachValue.workspaceId,
               count: 0,
             });
             return MyDataPrepApi.execute(params, requestBody);
@@ -118,16 +121,20 @@ export default function() {
         if (responses && Array.isArray(responses) && responses.length) {
           responses.forEach((workspace, index) => {
             let dataQuality = 0;
-            workspace.headers.forEach((element) => {
-              const general = workspace.summary.statistics[element].general;
+            workspace.headers?.forEach((eachWorkspaceHeader) => {
+              const general = workspace.summary?.statistics[eachWorkspaceHeader]?.general;
+              // Here we are getting empty & non-null(renaming it as nonEmpty) values from general(API Response) and provinding default values for them
               const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+
+              // Round number to next lowest .1%
+              // Number.toFixed() can round up and leave .0 on integers
               const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
               dataQuality = dataQuality + nonNull;
             });
-            const totalDataQuality = dataQuality / workspace.headers.length;
+            const totalDataQuality = dataQuality / workspace.headers?.length ?? 1;
             expData[index].dataQuality = totalDataQuality;
             expData[index].count = workspace.count;
-            const final = generateDataForExplorationCard(expData);
+            const final = getUpdatedExplorationCards(expData);
             setFinalArray(final);
           });
         }
@@ -138,7 +145,6 @@ export default function() {
     getOngoingData();
   }, []);
 
-  console.log(finalArray, 'final Array');
   const filteredArray = finalArray.filter((eachWorkspace) => eachWorkspace[6].count !== 0);
 
   return (

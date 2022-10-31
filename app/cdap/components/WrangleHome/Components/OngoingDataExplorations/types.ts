@@ -82,7 +82,7 @@ export interface IMassagedObject {
   count: number;
 }
 
-export interface IEachData {
+export interface IExistingExplorationCardsData {
   connectionName: string;
   count: number;
   dataQuality: unknown;
@@ -92,7 +92,7 @@ export interface IEachData {
   connectorType: string;
 }
 
-export interface IMapValue {
+export interface IConnectionsList {
   connectionId: string;
   connectionType: string;
   createdTimeMillis: number;
@@ -104,7 +104,7 @@ export interface IMapValue {
   updatedTimeMillis: number;
 }
 
-export interface IConnectionsWithConnectorTypeDataObject {
+export interface IConnectionWithConnectorType {
   name: string;
   connectorType: string;
 }

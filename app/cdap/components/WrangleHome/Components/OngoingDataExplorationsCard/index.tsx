@@ -16,8 +16,8 @@
 
 import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core/';
-import { useStyles } from './styles';
-import CustomTooltip from '../CustomTooltip';
+import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
+import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
 
 export default function OngoingDataExplorationCard({ item }) {
   const classes = useStyles();
@@ -43,7 +43,7 @@ export default function OngoingDataExplorationCard({ item }) {
         switch (eachItem.type) {
           case 'icon':
             return (
-              <Grid item xs={3} key={index} className={`${classes.connectorIcon}`}>
+              <Grid item xs={3} key={index} className={classes.connectorIcon}>
                 <Box>{eachItem.icon}</Box>
               </Grid>
             );

@@ -15,49 +15,73 @@
  */
 
 import DataPrepStore from 'components/DataPrep/store';
-import { IEachData, IMassagedObject } from './types';
+import {
+  IExistingExplorationCardsData,
+  IMassagedObject,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import {
+  CONNECTION_NAME,
+  CONNECTOR_TYPE,
+  COUNT,
+  DATA_QUALITY,
+  ICON,
+  ICON_WITH_TEXT,
+  NULL_VALUES,
+  PERCENTAGE_WITH_TEXT,
+  RECIPE_STEPS,
+  TEXT,
+  WORKPSACE_NAME,
+  WORKSPACE_ID,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
 
-export const generateDataForExplorationCard = (oldData: IEachData[]) => {
+export const getUpdatedExplorationCards = (
+  existingExplorationCardsData: IExistingExplorationCardsData[]
+) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
+
   const massagedArray = [];
 
   const { dataprep } = DataPrepStore.getState();
   const { connectorsWithIcons } = dataprep;
 
-  const getIcon = (connectorName) => {
-    const tempItem = connectorsWithIcons.find((e) => {
-      return e.name === connectorName;
-    });
-    return tempItem.SVG;
+  const getIconForConnector = (connectorName: string) => {
+    const matchingConnector = connectorsWithIcons.find(
+      (eachConnector) => eachConnector.name === connectorName
+    );
+    return matchingConnector.SVG;
   };
 
-  if (oldData && Array.isArray(oldData) && oldData.length) {
-    oldData.forEach((eachItem) => {
+  if (
+    existingExplorationCardsData &&
+    Array.isArray(existingExplorationCardsData) &&
+    existingExplorationCardsData.length
+  ) {
+    existingExplorationCardsData.forEach((eachItem) => {
       const childArray = [];
 
       Object.keys(eachItem).map((keys) => {
         const obj = {} as IMassagedObject;
-        if (keys === 'connectorType') {
-          obj.icon = getIcon(eachItem[keys]);
+        if (keys === CONNECTOR_TYPE) {
+          obj.icon = getIconForConnector(eachItem[keys]);
           obj.label = eachItem[keys];
-          obj.type = 'icon';
-        } else if (keys === 'connectionName') {
+          obj.type = ICON;
+        } else if (keys === CONNECTION_NAME) {
           obj.label = eachItem[keys];
-          obj.type = 'iconWithText';
-        } else if (keys === 'workspaceName') {
+          obj.type = ICON_WITH_TEXT;
+        } else if (keys === WORKPSACE_NAME) {
           obj.label = eachItem[keys];
-          obj.type = 'text';
-        } else if (keys === 'recipeSteps') {
+          obj.type = TEXT;
+        } else if (keys === RECIPE_STEPS) {
           obj.label = `${eachItem[keys]} Recipe steps`;
-          obj.type = 'text';
-        } else if (keys === 'dataQuality') {
+          obj.type = TEXT;
+        } else if (keys === DATA_QUALITY) {
           obj.label = Number(eachItem[keys]);
           obj.percentageSymbol = '%';
-          obj.subText = 'Null values';
-          obj.type = 'percentageWithText';
-        } else if (keys === 'workspaceId') {
+          obj.subText = NULL_VALUES;
+          obj.type = PERCENTAGE_WITH_TEXT;
+        } else if (keys === WORKSPACE_ID) {
           obj.workspaceId = eachItem[keys];
-        } else if (keys === 'count') {
+        } else if (keys === COUNT) {
           obj.count = eachItem[keys];
         }
         childArray.push(obj);
