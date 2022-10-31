@@ -31,18 +31,16 @@ export const useStyles = makeStyles({
     height: '24px',
   },
   labelStyles: {
-    maxWidth: '164px',
+    maxWidth: '153px',
     whiteSpace: 'nowrap',
     fontSize: '16px',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     pointerEvents: 'none',
-    paddingLeft: '11px',
   },
   labelStylesCount: {
     fontSize: '16px',
     overflow: 'hidden',
-    paddingLeft: '11px',
   },
   rightArrow: {
     color: grey[600],
@@ -51,5 +49,8 @@ export const useStyles = makeStyles({
   rightArrowSelected: {
     color: '#fff',
     fontSize: 'large',
+  },
+  connectorTypeIcon: {
+    paddingRight: '11px',
   },
 });

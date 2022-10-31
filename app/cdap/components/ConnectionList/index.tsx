@@ -14,8 +14,10 @@
  * the License.
  */
 
-import { Box, styled, IconButton, Typography } from '@material-ui/core';
+import { Box, IconButton, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
+import CloseIcon from '@material-ui/icons/Close';
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { IRecords } from 'components/GridTable/types';
@@ -23,6 +25,7 @@ import LoadingSVG from 'components/shared/LoadingSVG';
 import ErrorSnackbar from 'components/SnackbarComponent';
 import { getWidgetData } from 'components/WrangleHome/Components/WrangleCard/services/getWidgetData';
 import T from 'i18n-react';
+import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import NoConnectionsScreen from '../NoRecordScreen';
@@ -31,10 +34,6 @@ import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
 import { InfoGraph } from './icons';
 import { useStyles } from './styles';
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import CloseIcon from '@material-ui/icons/Close';
-import cloneDeep from 'lodash/cloneDeep';
-import { each } from 'immer/dist/internal';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -104,8 +103,8 @@ export default function ConnectionList() {
     });
 
     // Connector types which has connections inside it
-    const firstLevelData = connectorTypes.filter((each) => {
-      if (each.count > 0) {
+    const firstLevelData = connectorTypes.filter((eachConnectorType) => {
+      if (eachConnectorType.count > 0) {
         return true;
       }
     });
@@ -167,11 +166,11 @@ export default function ConnectionList() {
     setDataForTabs((currentData) => {
       let newData = [...currentData];
       newData[index].selectedTab = entity.name;
-      newData = newData.map((each) => {
+      newData = newData.map((eachNewData) => {
         return {
-          data: each.data,
-          showTabs: each.showTabs,
-          selectedTab: each.selectedTab,
+          data: eachNewData.data,
+          showTabs: eachNewData.showTabs,
+          selectedTab: eachNewData.selectedTab,
           isSearching: false,
         };
       });
@@ -184,10 +183,9 @@ export default function ConnectionList() {
             toggleLoader(false);
           })
           .catch((error) => {
-            console.log('Failed to explore connection.', error.message);
             toggleLoader(false);
             setIsErrorOnNoWorkSpace(true);
-            // TODO : Need to bind the message on Snackbar . The message is inside error.message same as the old UI
+            // TODO : Need to bind the message on Snackbar . The message is in error.message same as the old UI . Remove the console log later
           });
       } else {
         if (entity.canBrowse) {
@@ -197,10 +195,9 @@ export default function ConnectionList() {
               toggleLoader(false);
             })
             .catch((error) => {
-              console.log('Error while Browsing', error.message);
               toggleLoader(false);
               setIsErrorOnNoWorkSpace(true);
-              // TODO : Need to bind the message on Snackbar
+              // TODO : Need to bind the message on Snackbar. Remove the console log later
             });
         }
       }
@@ -211,18 +208,18 @@ export default function ConnectionList() {
   const searchHandler = (index: number) => {
     setDataForTabs((prev) => {
       let tempData = [...prev];
-      tempData = tempData.map((each) => {
+      tempData = tempData.map((eachTempData) => {
         return {
-          ...each,
+          ...eachTempData,
           isSearching: false,
         };
       });
       tempData[index].isSearching = true;
-      tempData.forEach((each, ind) => {
-        if (ind === index) {
-          each.isSearching = true;
+      tempData.forEach((eachTempData, innerIndex) => {
+        if (innerIndex === index) {
+          eachTempData.isSearching = true;
         } else {
-          each.isSearching = false;
+          eachTempData.isSearching = false;
         }
       });
       return tempData;
@@ -240,7 +237,7 @@ export default function ConnectionList() {
   };
 
   const handleClearSearch = (e: any, index: number) => {
-    if (refs.current[index].value == '') {
+    if (refs.current[index].value === '') {
       setDataForTabs((prev) => {
         const tempData = [...prev];
         tempData[index].isSearching = false;
@@ -300,9 +297,10 @@ export default function ConnectionList() {
           <SelectDatasetWrapper>
             {filteredData &&
               Array.isArray(filteredData) &&
-              filteredData.map((each, index) => {
-                if (each.data.filter((el) => el.connectionId).length) {
-                  connectionId = each.data.filter((el) => el.connectionId)[0].connectionId;
+              filteredData.map((eachFilteredData, index) => {
+                if (eachFilteredData.data.filter((el) => el.connectionId).length) {
+                  connectionId = eachFilteredData.data.filter((el) => el.connectionId)[0]
+                    .connectionId;
                 }
                 if (index === 0) {
                   headerContent = headerForLevelZero();
@@ -311,7 +309,7 @@ export default function ConnectionList() {
                     <>
                       <Box
                         className={
-                          each.isSearching
+                          eachFilteredData.isSearching
                             ? classes.hideComponent
                             : classes.beforeSearchIconClickDisplay
                         }
@@ -351,7 +349,9 @@ export default function ConnectionList() {
                       </Box>
                       <Box
                         className={
-                          each.isSearching ? classes.afterSearchIconClick : classes.hideComponent
+                          eachFilteredData.isSearching
+                            ? classes.afterSearchIconClick
+                            : classes.hideComponent
                         }
                         onMouseOver={() => makeCursorFocused(index)}
                       >
@@ -378,9 +378,9 @@ export default function ConnectionList() {
                   <Box className={classes.tabsContainerWithHeader}>
                     <Box className={classes.tabHeaders}>{headerContent}</Box>
                     <ConnectionsTabs
-                      tabsData={each}
+                      tabsData={eachFilteredData}
                       handleChange={selectedTabValueHandler}
-                      value={each.selectedTab}
+                      value={eachFilteredData.selectedTab}
                       index={index}
                       connectionId={connectionId || ''}
                       toggleLoader={(value: boolean, isError?: boolean) =>
@@ -411,8 +411,6 @@ export default function ConnectionList() {
             />
           )}
         </>
-
-        // TODO: No connectors types are available screen needs to be appended here
       )}
       {loading && (
         <div className={classes.loadingContainer}>
