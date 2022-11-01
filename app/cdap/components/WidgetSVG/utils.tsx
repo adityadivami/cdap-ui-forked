@@ -27,7 +27,7 @@ import {
   IConnectorDetailsPayload,
   IConnectorTypes,
 } from 'components/WidgetSVG/types';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDatasetIcon';
+import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
 import React from 'react';
 
 export const getWidgetData = async () => {

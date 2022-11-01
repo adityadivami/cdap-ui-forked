@@ -33,7 +33,7 @@ import { Spanner } from 'components/WrangleHome/Components/WrangleCard/iconStore
 import { SQLServer } from 'components/WrangleHome/Components/WrangleCard/iconStore/SQLServer';
 import { useStyles } from 'components/WrangleHome/Components/WrangleCard/styles';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDatasetIcon';
+import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
 
 export default function WrangleCard() {
   const [connectorTypes, setConnectorTypes] = useState({
