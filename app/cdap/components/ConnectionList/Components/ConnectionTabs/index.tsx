@@ -119,7 +119,7 @@ export default function ConnectionsTabs({
                     )
                   ) : (
                     <TabLabelCanBrowse
-                      label={connectorType.name}
+                      label={index === 0 ? connectorType.displayName : connectorType.name}
                       count={index === 0 ? connectorType.count : undefined}
                       index={index}
                       icon={connectorType.icon}

@@ -20,12 +20,13 @@ import { blue } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   breadCombContainer: {
+    borderBottom: '1px solid #E0E0E0',
     display: 'flex',
     justifyContent: 'space-between',
     height: '48px',
     alignItems: 'center',
-    marginRight: '30px',
-    marginLeft: '34px',
+    paddingRight: '30px',
+    paddingLeft: '34px',
     '& .MuiBreadcrumbs-root': {
       fontSize: '14px',
       fontWeight: '400',

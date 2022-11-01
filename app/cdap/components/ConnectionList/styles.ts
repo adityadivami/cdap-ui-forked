@@ -18,6 +18,9 @@ import { blue, grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles({
+  connectionsWithInfo: {
+    display: 'flex',
+  },
   canBrowseHover: {
     display: 'none',
   },
@@ -87,5 +90,38 @@ export const useStyles = makeStyles({
   },
   noDataLabel: {
     paddingLeft: 34,
+  },
+  infographContainer: {
+    display: 'flex',
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    alignItems: ' flex-end',
+    paddingRight: '80px',
+  },
+  infograph: {
+    paddingBottom: '80px',
+  },
+  closeIcon: {
+    '& :hover': {
+      cursor: 'pointer',
+    },
+  },
+  searchBar: {
+    width: '100%',
+    backgroundColor: '#fff',
+    border: 'none',
+    marginLeft: '9px',
+    height: '21px',
+    fontSize: '14px',
+    outline: 0,
+  },
+  afterSearchIconClick: {
+    display: 'flex',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    height: '50px',
+    paddingRight: '20px',
+    paddingLeft: '18px',
+    textDecoration: 'none',
   },
 });
