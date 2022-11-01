@@ -93,7 +93,7 @@ export default function ConnectionList() {
       return [conn.name];
     });
     // Mapping connector types and corresponding connections
-    connectorTypes = connectorTypes.map((eachConnectorType) => {
+    connectorTypes = connectorTypes?.map((eachConnectorType) => {
       const connections = categorizedConnections.get(eachConnectorType.name) || [];
       allConnectionsTotalLength = allConnectionsTotalLength + connections.length;
       return {
@@ -298,7 +298,7 @@ export default function ConnectionList() {
           <SelectDatasetWrapper>
             {filteredData &&
               Array.isArray(filteredData) &&
-              filteredData.map((eachFilteredData, index) => {
+              filteredData?.map((eachFilteredData, index) => {
                 if (eachFilteredData.data.filter((el) => el.connectionId).length) {
                   connectionId = eachFilteredData.data.filter((el) => el.connectionId)[0]
                     .connectionId;
