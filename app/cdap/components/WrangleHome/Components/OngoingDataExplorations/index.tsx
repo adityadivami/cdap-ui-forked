@@ -31,6 +31,7 @@ import { orderBy } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { of } from 'rxjs/observable/of';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
@@ -57,9 +58,11 @@ export default function() {
     const findConnectorType = (connection): string => {
       if (connection) {
         const matchedConnection: IConnectionWithConnectorType = connectionsWithConnectorTypeDataObject.find(
-          (eachConnection) => eachConnection.name === connection.replace('_', ' ')
+          (eachConnection) => {
+            return eachConnection.name === connection.replace('_', ' ');
+          }
         );
-        return matchedConnection.connectorType;
+        return matchedConnection ? matchedConnection.connectorType : undefined;
       }
       return 'Imported Dataset';
     };
@@ -77,11 +80,9 @@ export default function() {
           let values: IValues[] = [];
           values = response?.values ?? [];
 
-          values = orderBy(
-            values,
-            [(workspace) => (workspace.workspaceName || '').toLowerCase()],
-            ['asc']
-          );
+          // sorting the workspaces based on dataset created time.
+          values.sort((a, b) => b.createdTimeMillis - a.createdTimeMillis);
+
           const workspaces = values.map((eachValue) => {
             const params = {
               context: 'default',
@@ -98,43 +99,50 @@ export default function() {
               },
             };
 
-            const connectorName: string = findConnectorType(eachValue?.sampleSpec?.connectionName);
-            expData.push({
-              connectorType: connectorName,
-              connectionName: eachValue?.sampleSpec?.connectionName
-                ? eachValue?.sampleSpec?.connectionName
-                : 'Imported Dataset',
-              workspaceName: eachValue.workspaceName,
-              recipeSteps: eachValue.directives?.length ?? 0,
-              dataQuality: null,
-              workspaceId: eachValue.workspaceId,
-              count: 0,
-            });
-            return MyDataPrepApi.execute(params, requestBody);
+            const connectorName: string | undefined = findConnectorType(
+              eachValue?.sampleSpec?.connectionName
+            );
+            if (connectorName) {
+              expData.push({
+                connectorType: connectorName,
+                connectionName: eachValue?.sampleSpec?.connectionName
+                  ? eachValue?.sampleSpec?.connectionName
+                  : 'Imported Dataset',
+                workspaceName: eachValue.workspaceName,
+                recipeSteps: eachValue.directives?.length ?? 0,
+                dataQuality: null,
+                workspaceId: eachValue.workspaceId,
+                count: 0,
+              });
+              return MyDataPrepApi.execute(params, requestBody);
+            }
+            return of(undefined);
           });
           return forkJoin(workspaces).pipe(defaultIfEmpty(null));
         })
       )
       .subscribe((responses) => {
         if (responses && Array.isArray(responses) && responses.length) {
-          responses.forEach((workspace, index) => {
-            let dataQuality = 0;
-            workspace.headers?.forEach((eachWorkspaceHeader) => {
-              const general = workspace.summary?.statistics[eachWorkspaceHeader]?.general;
-              // Here we are getting empty & non-null(renaming it as nonEmpty) values from general(API Response) and provinding default values for them
-              const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+          responses
+            ?.filter((eachResponse) => eachResponse)
+            .forEach((workspace, index) => {
+              let dataQuality = 0;
+              workspace?.headers?.forEach((eachWorkspaceHeader) => {
+                const general = workspace.summary?.statistics[eachWorkspaceHeader]?.general;
+                // Here we are getting empty & non-null(renaming it as nonEmpty) values from general(API Response) and provinding default values for them
+                const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
 
-              // Round number to next lowest .1%
-              // Number.toFixed() can round up and leave .0 on integers
-              const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
-              dataQuality = dataQuality + nonNull;
+                // Round number to next lowest .1%
+                // Number.toFixed() can round up and leave .0 on integers
+                const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+                dataQuality = dataQuality + nonNull;
+              });
+              const totalDataQuality = dataQuality / workspace.headers?.length ?? 1;
+              expData[index].dataQuality = totalDataQuality;
+              expData[index].count = workspace.count;
+              const final = getUpdatedExplorationCards(expData);
+              setOnGoingExplorationsData(final);
             });
-            const totalDataQuality = dataQuality / workspace.headers?.length ?? 1;
-            expData[index].dataQuality = totalDataQuality;
-            expData[index].count = workspace.count;
-            const final = getUpdatedExplorationCards(expData);
-            setOnGoingExplorationsData(final);
-          });
         }
       });
   }, []);
