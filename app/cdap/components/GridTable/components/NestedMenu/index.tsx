@@ -36,15 +36,18 @@ export default function({
   const [nestedOptions, setNestedOptions] = useState<IMenuItem[]>([]);
   const classes = useNestedMenuStyles();
 
-  const handleMenuClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IMenuItem) => {
+  const handleMenuClick = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    menuItem: IMenuItem
+  ) => {
     setNestedOptions([]);
     event.preventDefault();
     event.stopPropagation();
-    if (item?.options) {
-      setNestedOptions(item.options);
+    if (menuItem?.options) {
+      setNestedOptions(menuItem.options);
       setAnchorEl2(event.currentTarget);
     } else {
-      submitMenuOption(item.value, item.supported_dataType);
+      submitMenuOption(menuItem.value, menuItem.supported_dataType);
       setAnchorEl(null);
       handleMenuOpenClose(title);
     }
@@ -59,7 +62,7 @@ export default function({
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-        onClose={(e) => {
+        onClose={() => {
           setAnchorEl(null);
           handleMenuOpenClose(title);
         }}
