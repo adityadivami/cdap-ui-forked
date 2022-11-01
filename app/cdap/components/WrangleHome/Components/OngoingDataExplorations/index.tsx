@@ -140,9 +140,7 @@ export default function({ cardCount, fromAddress, setLoading, setShowExploration
         />
       ) : (
         <></>
-      )
-      /* TODO: add no data msg in home page if no workspaces to display */
-      }
+      )}
     </Box>
   );
 }

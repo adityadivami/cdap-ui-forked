@@ -18,7 +18,7 @@ import { render } from '@testing-library/react';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import WorkspaceList from '..';
+import WorkspaceList from 'components/WorkspaceList';
 
 const history = createHistory({
   basename: '/',
