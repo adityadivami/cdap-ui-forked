@@ -27,9 +27,11 @@ export default function({ selectedColumnsCount }: ISelectColumnCountProps) {
       {selectedColumnsCount
         ? selectedColumnsCount > 10
           ? selectedColumnsCount
-          : `${T.translate('features.WranglerNewSelectCoulmnList.zero')}${selectedColumnsCount}`
-        : `${T.translate('features.WranglerNewSelectCoulmnList.no')}`}
-      &nbsp;{T.translate('features.WranglerNewAddTransformation.columnsSelected')}
+          : `${T.translate(
+              'features.WranglerNewUI.GridPage.selectColumnListPanel.zero'
+            )}${selectedColumnsCount}`
+        : `${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.no')}`}
+      &nbsp;{T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected')}
     </div>
   );
 }

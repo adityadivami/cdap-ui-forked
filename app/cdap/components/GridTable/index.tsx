@@ -45,7 +45,6 @@ import {
 } from 'components/GridTable/types';
 import { convertNonNullPercent } from 'components/GridTable/utils';
 import AddTransformation from 'components/AddTransformation';
-import { IDataQuality } from 'components/AddTransformation/types';
 import { missingItemDefaultValue } from 'components/GridTable/defaultValues';
 
 export default function GridTable() {

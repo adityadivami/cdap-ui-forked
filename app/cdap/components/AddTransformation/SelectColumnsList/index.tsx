@@ -149,10 +149,12 @@ export default function({
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
             <Typography className={classes.mainHeaderMessage}>
-              {T.translate('features.WranglerNewSelectCoulmnList.noColumns')}
+              {T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.noColumns')}
             </Typography>
             <Typography className={classes.subHeaderMessage}>
-              {T.translate('features.WranglerNewSelectCoulmnList.noMatchColumnDatatype')}
+              {T.translate(
+                'features.WranglerNewUI.GridPage.selectColumnListPanel.noMatchColumnDatatype'
+              )}
             </Typography>
           </Box>
         </Box>

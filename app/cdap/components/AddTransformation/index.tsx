@@ -21,7 +21,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
 import { useStyles } from 'components/AddTransformation/styles';
 import {
-  IAddTransformationProp,
+  IAddTransformationProps,
   IHeaderNamesList,
   IMultipleSelectedFunctionDetail,
   IObject,
@@ -35,7 +35,7 @@ export default function({
   columnData,
   missingDataList,
   callBack,
-}: IAddTransformationProp) {
+}: IAddTransformationProps) {
   const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IObject[]>([]);
@@ -71,16 +71,18 @@ export default function({
           functionNameDetail.value === functionName && functionNameDetail.isMoreThanTwo
       )?.length
     ) {
-      return selectedColumns.length >= 1 ? false : true;
+      return selectedColumns?.length >= 1 ? false : true;
     } else {
-      return selectedColumns.length >= 1 ? false : true;
+      return selectedColumns?.length >= 1 ? false : true;
     }
   };
 
   return (
     <Fragment>
       <DrawerWidget
-        headingText={T.translate('features.WranglerNewAddTransformation.selectColumn')}
+        headingText={T.translate(
+          'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara'
+        )}
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
@@ -105,7 +107,7 @@ export default function({
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
           >
-            {T.translate('features.WranglerNewAddTransformation.done')}
+            {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.done')}
           </Button>
         </Container>
       </DrawerWidget>

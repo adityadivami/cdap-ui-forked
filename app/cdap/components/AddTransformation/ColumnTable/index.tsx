@@ -48,22 +48,22 @@ export default function({
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
             <TableCell
               classes={{
-                head: `${classes.recipeStepsTableHeadStyles} ${classes.columnstyles}`,
+                head: `${classes.recipeStepsTableHeadStyles}`,
               }}
             ></TableCell>
             <TableCell
               classes={{
-                head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}`,
+                head: `${classes.recipeStepsTableHeadStyles}`,
               }}
             >
-              {T.translate('features.WranglerNewAddTransformation.columns')}
+              {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}
             </TableCell>
             <TableCell
               classes={{
-                head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}`,
+                head: `${classes.recipeStepsTableHeadStyles}`,
               }}
             >
-              {T.translate('features.WranglerNewAddTransformation.nullValues')}
+              {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}
             </TableCell>
           </TableRow>
         </TableHead>
