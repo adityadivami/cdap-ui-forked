@@ -22,73 +22,55 @@ import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
+import io.cdap.e2e.utils.SeleniumDriver;
+import io.cdap.cdap.ui.utils.Constants;
 
 public class Breadcrumb {
-    ChromeDriver driver;
-
-    @Given("Navigate to the home page")
+    @Given("Navigate to the Home Page")
     public void navigateToTheHomePage() {
-        driver = new ChromeDriver();
-        driver.get("http://localhost:11011/cdap/ns/default/home");
+        SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
-
-    @Then("Click on the Data source")
-    public void clickOnTheDatasource() {
+    @Then("Click on the View all option")
+    public void clickOnTheViewAllOption() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.cssSelector(Helper.getCssSelectorByDataTestId("wranglecard-link-1"))).click();
-    }
-
-    @Then("Click on the first tab of second column")
-    public void clickOnTheFirstTabOfSecondColumn() {
-        WaitHelper.waitForPageToLoad();
-        driver.findElement(By.cssSelector(Helper.getCssSelectorByDataTestId("connectionlist-connectiontabs-tabs-loop-1-0"))).click();
-    }
-    @Then("Click on the first tab of third column")
-    public void clickOnTheFirstTabOfThirdColumn() {
-        WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("connectionlist-connectiontabs-tabs-loop-2-0")).click();
-    }
-    @When("Hover&Click on the Wrangler")
-    public void hoverAndClickOnTheWrangler() {
-        WaitHelper.waitForPageToLoad();
-        WebElement ele = driver.findElement(By.id("connectionlist-connectiontabs-label-loop-3-0"));
-        Actions action = new Actions(driver);
-        WaitHelper.waitForPageToLoad();
-        action.moveToElement(ele).perform();
-        WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("tablabelcansample-typography-2")).click();
-    }
-    @Then("Click on the Data Sources link")
-    public void clickONTheDataSourcesLink() {
-        WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("breadcrumb-data-sources-text")).click();
+        ElementHelper.clickOnElement(
+                Helper.locateElementByTestId("connector-types-view-all"));
     }
     @Then("Click on the Home link")
-    public void clickOnTheHomeLink() {
+    public void  clickOnTheHomeLink(){
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("breadcrumb-home-text")).click();
+        ElementHelper.clickOnElement(
+                Helper.locateElementByTestId("breadcrumb-home-link"));
     }
-    @Then("Click on the Home link button")
-    public void clickOnTheHomeLinkButton() {
+    @Then("Click on the Connector type card")
+    public void clickOnTheConnectorTypeCard() {
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.id("connectionlist-subheader-1")).click();
+        ElementHelper.clickOnElement(
+                Helper.locateElementByTestId("wranglecard-link-1"));
+    }
+    @Then("Click on the another Connector type in Data Sources page")
+    public void clickOnTheAnotherConnectorType() {
+        WaitHelper.waitForPageToLoad();
+        ElementHelper.clickOnElement(
+                Helper.locateElementByTestId("connections-tab-label-browse-File"));
+    }
+    @Then("Click on the Home link in Data Sources page")
+    public void clickOnTheHomeLinkInDataSourcesPage() {
+        WaitHelper.waitForPageToLoad();
+        ElementHelper.clickOnElement(
+                Helper.locateElementByTestId("breadcrumb-home-link"));
     }
     @Then("Click on the Exploration card")
-    public void clickOnTheExplorationCard() {
+    public void clickOnTheExplorationCard(){
         WaitHelper.waitForPageToLoad();
-        driver.findElement(By.cssSelector(Helper.getCssSelectorByDataTestId("ongoingdataexplorations-link-1"))).click();
+        ElementHelper.clickOnElement(
+                Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
     }
-    @Then("Check the user navigated back to home page or not")
-    public void dashboard() {
+    @Then("Click on the Home link on wrangle page")
+    public void clickOnTheHomeLinkOnWranglePage(){
         WaitHelper.waitForPageToLoad();
-        WebElement text= driver.findElement(By.id("wranglehome-1"));
+        ElementHelper.clickOnElement(
+                Helper.locateElementByTestId("breadcrumb-home-text"));
     }
 }

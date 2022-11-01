@@ -18,18 +18,12 @@
 Feature: Breadcrumb - Navigate to the application
   @Breadcrumb
   Scenario: Navigate to the Data Source
-    Given Navigate to the home page
-    Then  Click on the Data source
-    Then Click on the first tab of second column
-    Then Click on the first tab of third column
-    Then Hover&Click on the Wrangler
-    Then Click on the Home link
-    Then Click on the Data source
-    Then Click on the first tab of second column
-    Then Click on the first tab of third column
-    Then Hover&Click on the Wrangler
-    Then Click on the Data Sources link
-    Then Click on the Home link button
+    Given Navigate to the Home Page
+#    Then  Click on the View all option
+#    Then Click on the Home link
+    Then Click on the Connector type card
+    Then Click on the Home link in Data Sources page
+    Then Click on the Connector type card
+    Then Click on the another Connector type in Data Sources page
     Then Click on the Exploration card
-    Then Click on the Home link
-    Then Check the user navigated back to home page or not
+    Then Click on the Home link on wrangle page
