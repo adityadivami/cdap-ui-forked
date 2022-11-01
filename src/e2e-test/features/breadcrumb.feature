@@ -26,6 +26,7 @@ Feature: Breadcrumb - Navigate to the application
 #    Then Click on the first tab of third column
 #    Then Hover&Click on the Wrangler
 #    Then Click on the Home link of wrangle page
+    Then Click on the Home link button
     Then Check the url is equal to home url text
 #    Then Click on the Connector type
 #    Then click on the postgreSQL
@@ -34,10 +35,10 @@ Feature: Breadcrumb - Navigate to the application
 #    Then Hover&Click on the Wrangler
 #    Then Click on the Data Sources link
 #    Then Check the url is equal to Datasource url text
-    Then Click on the Home link button
     Then Click on the Exploration card
     Then Click on the Home link of wrangle page
     Then Check the url is equal to home url text
     Examples:
          | connectionLabel | connectionTestId |
-         | Add connections  |
+         | PostgreSQL | postgresql |
+         | File | file |

@@ -106,6 +106,7 @@ export default function OngoingDataExploration() {
   return (
     <Box data-testid="ongoing-data-explore-parent">
       {finalArray.map((item, index) => {
+        console.log(item, 'this is the item');
         return (
           <Link
             to={{
@@ -116,7 +117,10 @@ export default function OngoingDataExploration() {
               },
             }}
             style={{ textDecoration: 'none' }}
-            data-testid="ongoingdataexplorations-link-card"
+            data-testid={`ongoing-data-explorations-${item[1].label
+              .toLowerCase()
+              .split(' ')
+              .join('-')}-${index}`}
           >
             {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
           </Link>
