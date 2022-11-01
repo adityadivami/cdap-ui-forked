@@ -30,8 +30,8 @@ describe('It should render ', () => {
       />
     );
 
-    const ele = screen.getByTestId(/check-box-input-checkbox/i);
-    fireEvent.click(ele);
+    const checkboxInputElement = screen.getByTestId(/check-box-input-checkbox/i);
+    fireEvent.click(checkboxInputElement);
     expect(container).toBeDefined();
   });
 
@@ -45,8 +45,8 @@ describe('It should render ', () => {
       />
     );
 
-    const ele = screen.getByTestId(/check-box-input-checkbox/i);
-    fireEvent.click(ele);
+    const checkboxInputElement = screen.getByTestId(/check-box-input-checkbox/i);
+    fireEvent.click(checkboxInputElement);
     expect(container).toBeDefined();
   });
 });

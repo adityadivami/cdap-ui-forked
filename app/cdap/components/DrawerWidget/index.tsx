@@ -49,7 +49,7 @@ export default function({
               </Box>
             )}
             &nbsp;
-            <DrawerWidgetHeading headingText={headingText} />
+            <DrawerWidgetHeading headingText={headingText.toString()} />
           </div>
           <Box className={classes.headerRightStyles}>
             {headerActionTemplate && <div>{headerActionTemplate}</div>}

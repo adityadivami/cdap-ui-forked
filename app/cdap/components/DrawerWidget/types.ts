@@ -17,7 +17,7 @@
 import React from 'react';
 
 export interface IDrawerWidgetProps {
-  headingText: React.ReactNode;
+  headingText?: React.ReactNode;
   openDrawer: boolean;
   showDivider?: boolean;
   headerActionTemplate?: JSX.Element;
@@ -25,4 +25,8 @@ export interface IDrawerWidgetProps {
   closeClickHandler: () => void;
   showBackIcon?: boolean;
   anchor?: 'bottom' | 'left' | 'right' | 'top';
+}
+
+export interface IDrawerWidgetHeadingProps {
+  headingText?: string;
 }

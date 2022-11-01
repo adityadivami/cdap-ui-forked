@@ -64,14 +64,14 @@ describe('It should test the SelectColumnsList Component', () => {
       </Router>
     );
 
-    const inputEle = screen.getByTestId('input_id');
-    fireEvent.change(inputEle, { target: { value: '123' } });
-    fireEvent.change(inputEle, { target: { value: 'hello' } });
-    fireEvent.change(inputEle, { target: { value: null } });
+    const inputSearchElement = screen.getByTestId('input_id');
+    fireEvent.change(inputSearchElement, { target: { value: '123' } });
+    fireEvent.change(inputSearchElement, { target: { value: 'hello' } });
+    fireEvent.change(inputSearchElement, { target: { value: null } });
 
-    const ele = screen.getByTestId(/click-handle-focus/i);
-    fireEvent.click(ele);
-    expect(ele).toBeInTheDocument();
+    const searchIconElement = screen.getByTestId(/click-handle-focus/i);
+    fireEvent.click(searchIconElement);
+    expect(searchIconElement).toBeInTheDocument();
   });
 
   it('should render the SelectColumnsList Component with some input value along with label and null', () => {
@@ -95,13 +95,13 @@ describe('It should test the SelectColumnsList Component', () => {
       </Router>
     );
 
-    const inputEle = screen.getByTestId('input_id');
-    fireEvent.change(inputEle, { target: { value: '123' } });
-    fireEvent.change(inputEle, { target: { value: 'hello' } });
-    fireEvent.change(inputEle, { target: { value: null } });
+    const inputSearchElement = screen.getByTestId('input_id');
+    fireEvent.change(inputSearchElement, { target: { value: '123' } });
+    fireEvent.change(inputSearchElement, { target: { value: 'hello' } });
+    fireEvent.change(inputSearchElement, { target: { value: null } });
 
-    const ele = screen.getByTestId(/click-handle-focus/i);
-    fireEvent.click(ele);
+    const searchIconElement = screen.getByTestId(/click-handle-focus/i);
+    fireEvent.click(searchIconElement);
     expect(container).toBeDefined;
   });
 
@@ -127,8 +127,8 @@ describe('It should test the SelectColumnsList Component', () => {
       </Router>
     );
 
-    const inputEle = screen.getByTestId('input_id');
-    fireEvent.change(inputEle, { target: { value: '123' } });
+    const inputSearchElement = screen.getByTestId('input_id');
+    fireEvent.change(inputSearchElement, { target: { value: '123' } });
     expect(container).toBeDefined;
   });
   it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the single selection function', () => {
@@ -155,8 +155,8 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    const ele = screen.getAllByTestId('radio-input-radio');
-    fireEvent.click(ele[0], { target: { checked: true } });
+    const radioInputElement = screen.getAllByTestId('radio-input-radio');
+    fireEvent.click(radioInputElement[0], { target: { checked: true } });
     expect(container).toBeDefined;
   });
 
@@ -184,9 +184,9 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    const ele = screen.getAllByTestId('check-box-input-checkbox');
-    fireEvent.click(ele[0], { target: { checked: true } });
-    fireEvent.click(ele[0], { target: { checked: false } });
+    const checkboxInputElement = screen.getAllByTestId('check-box-input-checkbox');
+    fireEvent.click(checkboxInputElement[0], { target: { checked: true } });
+    fireEvent.click(checkboxInputElement[0], { target: { checked: false } });
     expect(container).toBeDefined;
   });
 });

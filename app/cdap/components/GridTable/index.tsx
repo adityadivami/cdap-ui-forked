@@ -40,8 +40,9 @@ import {
   IObject,
   IParams,
   IRecords,
-  ICellData
-} from './types';
+  ICellData,
+  IStatistics,
+} from 'components/GridTable/types';
 import { convertNonNullPercent } from 'components/GridTable/utils';
 import AddTransformation from 'components/AddTransformation';
 import { IDataQuality } from 'components/AddTransformation/types';
@@ -68,7 +69,7 @@ export default function GridTable() {
     transformationFunctionSupportedDataType,
     setTransformationFunctionSupportedDataType,
   ] = useState<string[]>([]);
-  const [dataQuality, setDataQuality] = useState<ICellData>();
+  const [dataQuality, setDataQuality] = useState<IStatistics>();
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -152,7 +153,7 @@ export default function GridTable() {
   };
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
-  const getMissingList = (statistics: IObject) => {
+  const getMissingList = (statistics: IStatistics) => {
     const updatedStatisticsData = statistics ? Object.entries(statistics) : [];
     const metricArray = [];
     updatedStatisticsData.forEach(([key, value]) => {

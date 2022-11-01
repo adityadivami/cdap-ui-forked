@@ -29,8 +29,8 @@ describe('It should render ', () => {
       />
     );
 
-    const ele = screen.getByTestId(/radio-input-radio/i);
-    fireEvent.click(ele, { target: { checked: true } });
+    const radioInputElement = screen.getByTestId(/radio-input-radio/i);
+    fireEvent.click(radioInputElement, { target: { checked: true } });
     expect(MockOnChange).toHaveBeenCalled();
   });
 });

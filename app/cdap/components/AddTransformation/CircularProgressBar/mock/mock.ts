@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
+import { IStatistics } from 'components/GridTable/types';
 export const statistics = {
   feature_id: {
     general: {
@@ -70,7 +70,7 @@ export const statistics = {
       Text: 20.111732,
     },
   },
-} as any;
+} as IStatistics;
 
 export const columnList = [
   {

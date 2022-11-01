@@ -17,14 +17,10 @@
 import { render } from '@testing-library/react';
 // import ParsingHeaderActionTemplate from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate';
 // import { PARSING } from 'components/ParsingDrawer/constants';
-import { createBrowserHistory as createHistory } from 'history';
+import history from 'services/history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import DrawerWidget from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import DrawerWidget from 'components/DrawerWidget';
 
 describe('It should test DrawerWidget Component', () => {
   it('Should test whether DrawerWidget Component is rendered', () => {

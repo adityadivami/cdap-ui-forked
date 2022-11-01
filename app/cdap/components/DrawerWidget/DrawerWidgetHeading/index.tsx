@@ -18,8 +18,9 @@ import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from 'components/DrawerWidget/styles';
 import { UnderLine } from 'components/DrawerWidget/iconStore';
+import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
 
-export default function({ headingText }) {
+export default function({ headingText }: IDrawerWidgetHeadingProps) {
   const classes = useStyles();
 
   return (

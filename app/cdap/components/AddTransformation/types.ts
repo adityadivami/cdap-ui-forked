@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
+import { IStatistics } from 'components/GridTable/types';
 export interface IRecords {
   [key: string]: string | number | IRecords | boolean;
 }
@@ -22,9 +22,7 @@ export interface IHeaderNamesList {
   label: string;
   type: string[];
 }
-export interface IStatistics {
-  [key: string]: string;
-}
+
 export interface IAddTransformationProps {
   directiveFunctionSupportedDataType: string[];
   functionName: string;
@@ -36,4 +34,8 @@ export interface IAddTransformationProps {
 export interface IMultipleSelectedFunctionDetail {
   value: string;
   isMoreThanTwo: boolean;
+}
+
+export interface IObject {
+  [key: string]: string | number;
 }

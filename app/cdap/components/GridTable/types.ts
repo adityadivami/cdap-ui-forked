@@ -25,9 +25,18 @@ export interface IRecords {
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
 }
-
+interface IGeneralObjectRecord {
+  [key: string]: number | string;
+}
+interface IGeneral {
+  general?: IGeneralObjectRecord;
+  types?: IGeneralObjectRecord;
+}
+export interface IStatistics {
+  [key: string]: IGeneral;
+}
 interface ISummary {
-  statistics: ICellData;
+  statistics: IStatistics;
   validations: IRecords;
 }
 

@@ -38,8 +38,8 @@ describe('It should test the SelectColumnsList Component', () => {
       </Router>
     );
     // expect(container).toBeDefined;
-    const eleBox = screen.getByTestId('box-id');
-    fireEvent.click(eleBox);
+    const boxContainer = screen.getByTestId('box-id');
+    fireEvent.click(boxContainer);
     rerender(
       <Router history={history}>
         <Switch>
@@ -55,7 +55,7 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    expect(eleBox).toBeInTheDocument();
+    expect(boxContainer).toBeInTheDocument();
   });
 
   it('should render the SelectColumnsList Component where functionName is parseCSV', () => {
