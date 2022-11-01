@@ -43,14 +43,14 @@ public class Breadcrumb {
             System.out.println("Clicked on " + connectionLabel + " Element");
             WaitHelper.waitForPageToLoad();
             if (connectionLabel.equals("Add Connections")) {
-                ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangle-card-" + connectionTestId));
+                ElementHelper.clickOnElement(Helper.locateElementByTestId("connector-type-" + connectionTestId));
                 System.out.println("Clicked on " + connectionLabel + " Element");
                 WaitHelper.waitForPageToLoad();
                 String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
                 Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/connections/create");
                 System.out.println("Navigated to " + connectionLabel + " Page - Old UI");
             }
-            if (connectionLabel.equals("PostgreSQL") || connectionLabel.equals("File")) {
+           else {
                 String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
                 Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/datasources/" + connectionLabel);
                 System.out.println("Navigated to Data Source page wit connection " + connectionLabel + " selected");
@@ -103,14 +103,16 @@ public class Breadcrumb {
     @Then("Click on the Home link of wrangle page")
     public void clickOnTheHomeLink() {
         WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByXPath("breadcrumb-home-text"));
+        WaitHelper.waitForElementToBeEnabled(
+                Helper.locateElementByTestId("breadcrumb-home-text"));
+        ElementHelper.clickOnElement(Helper.locateElementByXPath("//a[@data-testid=\"breadcrumb-home-text\"]"));
     }
     @Then("Click on the Home link button")
     public void clickOnTheHomeLinkButton() {
         WaitHelper.waitForPageToLoad();
         WaitHelper.waitForElementToBeEnabled(
                 Helper.locateElementByTestId("breadcrumb-home-link"));
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-link"));
+        ElementHelper.clickOnElement(Helper.locateElementByXPath("//a[@data-testid=\"breadcrumb-home-link\"]"));
     }
     @Then("Click on the Exploration card")
     public void clickOnTheExplorationCard() {
