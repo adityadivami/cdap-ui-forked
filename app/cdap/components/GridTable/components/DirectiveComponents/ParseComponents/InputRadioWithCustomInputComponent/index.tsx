@@ -13,66 +13,47 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import {
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Input,
-  Radio,
-  RadioGroup,
-} from '@material-ui/core';
+import { FormGroup } from '@material-ui/core';
+import FormInputField from 'components/FormInputField';
+import FormInputRadio from 'components/FormInputRadio';
+import { IInputRadioWithCustomInputProps } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
 import React from 'react';
-import { useStyles } from '../../styles';
 
-const InputRadioWithCustomInputComponent = (props) => {
-  const {
-    options,
-    radioValue,
-    setRadioValue,
-    customInputType,
-    customInput,
-    setCustomInput,
-  } = props;
+export default function({
+  options,
+  radioValue,
+  setRadioValue,
+  customInputType,
+  customInput,
+  setCustomInput,
+}: IInputRadioWithCustomInputProps) {
   const classes = useStyles();
 
   return (
     <FormGroup className={classes.formGroupStyles}>
-      <FormControl>
-        <RadioGroup
-          name="actions"
-          value={radioValue}
-          onChange={(e) => setRadioValue(e.target.value)}
-        >
-          {options.map((eachRadio) => (
-            <FormControlLabel
-              value={eachRadio.value}
-              className={classes.radioStyles}
-              control={<Radio color="primary" />}
-              label={eachRadio.label}
-            />
-          ))}
-        </RadioGroup>
-      </FormControl>
+      <FormInputRadio
+        options={options}
+        radioValue={radioValue}
+        setRadioValue={(e: React.ChangeEvent<HTMLInputElement>) => setRadioValue(e.target.value)}
+      />
       {radioValue === customInputType && (
-        <FormControlLabel
-          value={customInput}
-          className={classes.formFieldStyles}
-          control={
-            <Input
-              classes={{
-                underline: classes.underlineStyles,
-                input: classes.inputStyles,
-              }}
-              type="text"
-              value={customInput}
-              onChange={(e) => setCustomInput(e.target.value)}
-              color="primary"
-            />
-          }
-          label={''}
+        <FormInputField
+          formInputValue={customInput}
+          classnames={classes.formFieldStyles}
+          inputProps={{
+            classes: {
+              underline: classes.underlineStyles,
+              input: classes.inputStyles,
+            },
+            type: 'text',
+            value: customInput,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCustomInput(e.target.value),
+            color: 'primary',
+            placeholder: '',
+          }}
         />
       )}
     </FormGroup>
   );
-};
-export default InputRadioWithCustomInputComponent;
+}

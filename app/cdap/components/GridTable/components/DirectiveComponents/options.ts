@@ -1,4 +1,6 @@
-export const PARSE_SIMPLE_DATE_OPTIONS = [
+import { ISubMenuOption } from 'components/GridTable/types';
+
+export const PARSE_SIMPLE_DATE_OPTIONS: ISubMenuOption[] = [
   {
     label: 'MM/dd/yyyy',
     value: 'MM/dd/yyyy',
@@ -61,7 +63,7 @@ export const PARSE_SIMPLE_DATE_OPTIONS = [
   },
 ];
 
-export const PARSE_DATE_TIME_OPTIONS = [
+export const PARSE_DATE_TIME_OPTIONS: ISubMenuOption[] = [
   {
     label: 'yyyy-MM-dd HH:mm:ss',
     value: 'yyyy-MM-dd HH:mm:ss',
@@ -92,7 +94,7 @@ export const PARSE_DATE_TIME_OPTIONS = [
   },
 ];
 
-export const CONCATENATE_OPTIONS = [
+export const CONCATENATE_OPTIONS: ISubMenuOption[] = [
   {
     label: 'at the beginning of the content of each row',
     value: 'BEGINNING',

@@ -1,3 +1,5 @@
+import { InputProps } from '@material-ui/core';
+
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -13,18 +15,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { FormControlLabel, Input } from '@material-ui/core';
-import React from 'react';
-
-const FormInputFieldComponent = (props) => {
-  const { formInputValue, classnames } = props;
-  return (
-    <FormControlLabel
-      value={formInputValue}
-      className={classnames}
-      control={<Input {...props.inputProps} />}
-      label={''}
-    />
-  );
-};
-export default FormInputFieldComponent;
+export interface IFormInputComponentProps {
+  formInputValue: string | number;
+  classnames: string;
+  inputProps: InputProps;
+}

@@ -14,14 +14,18 @@
  * the License.
  */
 
-import T from 'i18n-react';
-import { FORMAT_OPTIONS } from './formatOptions';
+import { makeStyles } from '@material-ui/styles';
 
-export const MENU_OPTIONS = [
-  {
-    value: 'text',
-    label: `${T.translate('features.WranglerNewUI.Transformations.format.heading').toString()}`,
-    options: FORMAT_OPTIONS,
-    supported_dataType: ['string'],
-  },
-];
+export const useStyles = makeStyles(() => {
+  return {
+    radioStyles: {
+      marginLeft: '-5px',
+      '& span:last-child': {
+        fontStyle: 'normal',
+        fontWeight: 400,
+        fontSize: '14px',
+        color: '#5F6368',
+      },
+    },
+  };
+});

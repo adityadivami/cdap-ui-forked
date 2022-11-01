@@ -3481,13 +3481,24 @@ features:
     zero: '0'
   WranglerNewUI:
     Transformations:
-      Format:
+      Parse:
+        options:
+          common:
+            customFormat: Custom Format
+            pleaseSelectTheDateFormat: Please select the date format
+      format:
         heading: Format
         options:
           uppercase: UPPERCASE
           lowercase: Lowercase
           titlecase: Title Case
-          concatenate: Concatenate
+          concatenate:
+            heading: Concatenate
+            labels:
+              add: Add
+              enterString: Enter string
+              copyToNewColumn: Copy to a new column
+              destinationColumn: Destination column
           trim: White spaces
           ltrim: Leading white spaces
           rtrim: Trailing White spaces

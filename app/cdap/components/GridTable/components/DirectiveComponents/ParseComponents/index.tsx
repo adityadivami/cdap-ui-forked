@@ -16,11 +16,11 @@
 
 import { Box } from '@material-ui/core';
 import { TickIcon } from 'components/AddTransformation/iconStore';
+import { IParseComponentProps } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
 import React from 'react';
-import { useStyles } from '../styles';
 
-const ParseComponent = (props) => {
-  const { sectionHeading, children } = props;
+export default function({ sectionHeading, children }: IParseComponentProps) {
   const classes = useStyles();
   return (
     <section className={classes.functionSectionStyles}>
@@ -31,5 +31,4 @@ const ParseComponent = (props) => {
       {children}
     </section>
   );
-};
-export default ParseComponent;
+}

@@ -21,34 +21,40 @@ import {
   Radio,
   RadioGroup,
 } from '@material-ui/core';
-import InputCheckbox from '../../../../InputCheckbox';
-import React, { useState, useEffect } from 'react';
-import { ADD, ENTER_STRING, COPY_TO_NEW_COLUMN, DESTINATION_COLUMN } from '../../../constants';
-import { CONCATENATE_OPTIONS } from '../options';
-import { useStyles } from '../styles';
-import FormInputFieldComponent from '../../../../FormInputFieldComponent';
+import FormInputField from 'components/FormInputField';
+import { CONCATENATE_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
+import { ISetDirectiveComponentValue } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
+import {
+  ADD,
+  COPY_TO_NEW_COLUMN,
+  DESTINATION_COLUMN,
+  ENTER_STRING,
+} from 'components/GridTable/constants';
+import { ISubMenuOption } from 'components/GridTable/types';
+import InputCheckbox from 'components/InputCheckbox';
+import React, { useEffect, useState } from 'react';
 
-const Concatenate = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [placement, setPlacement] = useState('');
-  const [stringValue, setStringValue] = useState('');
-  const [copy, setCopy] = useState(false);
-  const [columnName, setColumnName] = useState('');
+export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
+  const [placement, setPlacement] = useState<string>('');
+  const [stringValue, setStringValue] = useState<string>('');
+  const [copy, setCopy] = useState<boolean>(false);
+  const [columnName, setColumnName] = useState<string>('');
   const classes = useStyles();
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, radioOption: placement });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: placement }));
   }, [placement]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, customInput: stringValue });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, customInput: stringValue }));
   }, [stringValue]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, copyToNewColumn: copy });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, copyToNewColumn: copy }));
   }, [copy]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, copyColumnName: columnName });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, copyColumnName: columnName }));
   }, [columnName]);
 
   return (
@@ -67,7 +73,9 @@ const Concatenate = (props) => {
                 }}
                 type={'text'}
                 value={stringValue}
-                onChange={(e) => setStringValue(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setStringValue(e.target.value)
+                }
                 color="primary"
                 placeholder={ENTER_STRING}
               />
@@ -77,9 +85,9 @@ const Concatenate = (props) => {
           <RadioGroup
             name="actions"
             value={placement}
-            onChange={(e) => setPlacement(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPlacement(e.target.value)}
           >
-            {CONCATENATE_OPTIONS.map((eachRadio) => (
+            {CONCATENATE_OPTIONS.map((eachRadio: ISubMenuOption) => (
               <FormControlLabel
                 value={eachRadio.value}
                 className={classes.radioStyles}
@@ -92,20 +100,20 @@ const Concatenate = (props) => {
         <InputCheckbox
           label={COPY_TO_NEW_COLUMN}
           value={copy}
-          onChange={(e) => setCopy(e.target.checked)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCopy(e.target.checked)}
           className={classes.checkboxStyles}
         />
       </FormGroup>
       {copy && (
         <FormGroup>
-          <FormInputFieldComponent
+          <FormInputField
             formInputValue={columnName}
             classnames={classes.formFieldStyles}
             inputProps={{
               type: 'text',
               value: columnName,
               classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-              onChange: (e) => setColumnName(e.target.value),
+              onChange: (e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value),
               color: 'primary',
               placeholder: DESTINATION_COLUMN,
             }}
@@ -114,6 +122,4 @@ const Concatenate = (props) => {
       )}
     </div>
   );
-};
-
-export default Concatenate;
+}

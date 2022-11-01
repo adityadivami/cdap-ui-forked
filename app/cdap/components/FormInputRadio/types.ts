@@ -14,14 +14,10 @@
  * the License.
  */
 
-import T from 'i18n-react';
-import { FORMAT_OPTIONS } from './formatOptions';
+import { IParseOptions } from 'components/GridTable/types';
 
-export const MENU_OPTIONS = [
-  {
-    value: 'text',
-    label: `${T.translate('features.WranglerNewUI.Transformations.format.heading').toString()}`,
-    options: FORMAT_OPTIONS,
-    supported_dataType: ['string'],
-  },
-];
+export interface IFormInputRadioProps {
+  options: IParseOptions[];
+  radioValue: string;
+  setRadioValue: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}

@@ -14,6 +14,9 @@
  * the License.
  */
 
+import { IDirectiveComponentValues } from 'components/AddTransformation/types';
+import { IParseCSVProps } from './components/DirectiveComponents/ParseComponents/types';
+
 export interface IParams {
   context: string | number | IRecords;
   workspaceId: string;
@@ -80,4 +83,32 @@ export interface IApiPayload {
   payload: IRecords;
   requestBody: IRequestBody;
   gridParams: IGridParams;
+}
+
+export interface ISubMenuOption {
+  value: string;
+  label: string;
+}
+
+export interface IParseOptions {
+  value: string;
+  label: string;
+  directiveExpression?: string;
+}
+
+export interface IDirectiveContentParams {
+  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
+  directiveComponents: IDirectiveComponentType[];
+  directiveComponentValues: IDirectiveComponentValues;
+  functionName: string;
+  directiveFunctionSupportedDataType: string[];
+  columnData: IHeaderNamesList[];
+  missingDataList: IDataQuality;
+  callBack: () => void;
+  applyTransformation: (directive: string) => void;
+}
+
+export interface IDirectiveComponentType {
+  type: string;
+  component: (props: IParseCSVProps) => JSX.Element;
 }

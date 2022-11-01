@@ -21,7 +21,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'uppercase',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.uppercase'
+      'features.WranglerNewUI.Transformations.format.options.uppercase'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string) => `uppercase :${selectedColumn}`,
@@ -29,7 +29,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'lowercase',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.lowercase'
+      'features.WranglerNewUI.Transformations.format.options.lowercase'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string) => `lowercase :${selectedColumn}`,
@@ -37,7 +37,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'titlecase',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.titlecase'
+      'features.WranglerNewUI.Transformations.format.options.titlecase'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string) => `titlecase :${selectedColumn}`,
@@ -45,7 +45,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'concatenate',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.concatenate'
+      'features.WranglerNewUI.Transformations.format.options.concatenate.heading'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) => {
@@ -67,7 +67,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'trim',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.trim'
+      'features.WranglerNewUI.Transformations.format.options.trim'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string) => `trim :${selectedColumn}`,
@@ -75,7 +75,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'ltrim',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.ltrim'
+      'features.WranglerNewUI.Transformations.format.options.ltrim'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string) => `ltrim :${selectedColumn}`,
@@ -83,7 +83,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'rtrim',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.rtrim'
+      'features.WranglerNewUI.Transformations.format.options.rtrim'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string) => `rtrim :${selectedColumn}`,
@@ -91,7 +91,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'dateTime',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.dateTime'
+      'features.WranglerNewUI.Transformations.format.options.dateTime'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) => {
@@ -105,7 +105,7 @@ export const FORMAT_OPTIONS = [
   {
     value: 'dateTimeAsString',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.Format.options.dateTimeAsString'
+      'features.WranglerNewUI.Transformations.format.options.dateTimeAsString'
     ).toString()}`,
     supported_dataType: ['string'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
     directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) => {

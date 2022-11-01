@@ -13,23 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import React, { useState, useEffect } from 'react';
-import ParseComponent from '..';
-import { PLEASE_SELECT_THE_DATE_FORMAT } from '../../../../constants';
-import { PARSE_DATE_TIME_OPTIONS, PARSE_SIMPLE_DATE_OPTIONS } from '../../options';
-import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
+import { PARSE_DATE_TIME_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
+import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
+import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
+import { ISetDirectiveComponentValue } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { CUSTOM_FORMAT, PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
+import React, { useEffect, useState } from 'react';
 
-const ParseDateTimeComponent = (props) => {
-  const { setDirectiveComponentsValue, directiveComponentValues } = props;
-  const [customFormat, setCustomFormat] = useState('');
-  const [selectedParseType, setSelectedParseType] = useState('');
+export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
+  const [customFormat, setCustomFormat] = useState<string>('');
+  const [selectedParseType, setSelectedParseType] = useState<string>('');
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, radioOption: selectedParseType });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: selectedParseType }));
   }, [selectedParseType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, customInput: customFormat });
+    setDirectiveComponentsValue((prevState) => ({ ...prevState, customInput: customFormat }));
   }, [customFormat]);
 
   return (
@@ -38,11 +38,10 @@ const ParseDateTimeComponent = (props) => {
         options={PARSE_DATE_TIME_OPTIONS}
         radioValue={selectedParseType}
         setRadioValue={setSelectedParseType}
-        customInputType="customFormat"
+        customInputType={CUSTOM_FORMAT}
         customInput={customFormat}
         setCustomInput={setCustomFormat}
       />
     </ParseComponent>
   );
-};
-export default ParseDateTimeComponent;
+}

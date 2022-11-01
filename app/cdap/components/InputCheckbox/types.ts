@@ -14,14 +14,9 @@
  * the License.
  */
 
-import T from 'i18n-react';
-import { FORMAT_OPTIONS } from './formatOptions';
-
-export const MENU_OPTIONS = [
-  {
-    value: 'text',
-    label: `${T.translate('features.WranglerNewUI.Transformations.format.heading').toString()}`,
-    options: FORMAT_OPTIONS,
-    supported_dataType: ['string'],
-  },
-];
+export interface IInputCheckbox {
+  label: string;
+  value: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  className: string;
+}
