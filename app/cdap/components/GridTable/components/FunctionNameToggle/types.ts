@@ -14,7 +14,7 @@
  * the License.
  */
 
-export interface IFunctionNameProps {
+export interface IFunctionNameToggleProps {
   setIsShowName: React.Dispatch<React.SetStateAction<boolean>>;
   isShowNames: boolean;
 }

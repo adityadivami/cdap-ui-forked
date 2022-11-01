@@ -18,10 +18,10 @@ import React from 'react';
 import { styled } from '@material-ui/core';
 import Switch, { SwitchProps } from '@material-ui/core/Switch';
 import { Typography, Box } from '@material-ui/core';
-import { useStyles } from './styles';
+import { useStyles } from 'components/GridTable/components/FunctionNameToggle/styles';
 import grey from '@material-ui/core/colors/grey';
 import T from 'i18n-react';
-import { IFunctionNameProps } from './types';
+import { IFunctionNameToggleProps } from 'components/GridTable/components/FunctionNameToggle/types';
 
 const StyledSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -67,11 +67,11 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function({ setIsShowName, isShowNames }: IFunctionNameProps) {
+export default function({ setIsShowName, isShowNames }: IFunctionNameToggleProps) {
   const classes = useStyles();
   return (
     <Box className={classes.functionWrapper}>
-      <Typography className={classes.typoClass}>
+      <Typography className={classes.typoClass} component='div'>
         {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.toggleDescription')}
         &nbsp;
       </Typography>

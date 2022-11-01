@@ -16,9 +16,9 @@
 
 import { MenuItem, Typography } from '@material-ui/core';
 import React from 'react';
-import { useNestedMenuStyles } from '../NestedMenu/styles';
-import { menuArrowIcon } from '../TransformationToolbar/iconStore';
-import { IMenuItemComponentProps } from './types';
+import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
+import { menuArrowIcon } from 'components/GridTable/components/TransformationToolbar/iconStore';
+import { IMenuItemComponentProps } from 'components/GridTable/components/MenuItemComponent/types';
 import T from 'i18n-react';
 
 export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
@@ -47,7 +47,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         title={item.value}
         onClick={(e) => onMenuClick(e, item)}
       >
-        <Typography>{item.label} </Typography>
+        <Typography component='div'>{item.label} </Typography>
         {item?.options?.length && menuArrowIcon}
       </MenuItem>
     );
