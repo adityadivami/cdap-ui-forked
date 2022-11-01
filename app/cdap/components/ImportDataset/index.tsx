@@ -55,7 +55,7 @@ export default function({ handleClosePanel }: IImportDataset) {
     if (e) {
       const isJSONOrXML = e[0]?.type === 'application/json' || e[0]?.type === 'text/xml';
       if (e[0]?.size > FILE_SIZE_LIMIT) {
-        setError(T.translate('features.NewWranglerUI.ImportData.fileSizeError'));
+        setError(T.translate('features.ImportData.fileSizeError'));
       } else {
         setFile(e[0]);
         setRecordDelimiter(isJSONOrXML ? '' : '\\n');

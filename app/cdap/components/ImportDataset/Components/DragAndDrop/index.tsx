@@ -50,9 +50,9 @@ export default function({ file, onDropHandler }: IDragAndDrop) {
             <div className={classes.uploadBox}>
               <UploadSVG />
               <Typography variant="body1" className={classes.dropText}>
-                {T.translate('features.NewWranglerUI.ImportData.dragAndDropTextLine1')}
+                {T.translate('features.ImportData.dragAndDropTextLine1')}
                 <br />
-                {T.translate('features.NewWranglerUI.ImportData.dragAndDropTextLine2')}
+                {T.translate('features.ImportData.dragAndDropTextLine2')}
               </Typography>
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function({ file, onDropHandler }: IDragAndDrop) {
               <InfoIcon />
             </div>
             <Typography variant="body1" className={classes.infoText}>
-              {T.translate('features.NewWranglerUI.ImportData.maxSizeText')}
+              {T.translate('features.ImportData.maxSizeText')}
             </Typography>
           </div>
         </>
