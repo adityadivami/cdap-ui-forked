@@ -29,13 +29,13 @@ export const MENU_OPTIONS = [
   {
     value: 'set-character-encoding',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.setCharacterEncoding'
+      'features.WranglerNewUI.Transformations.setCharacterEncoding.heading'
     ).toString()}`,
     options: [
       {
         value: 'character-encoding-utf8',
         label: `${T.translate(
-          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.utf8'
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.utf8'
         ).toString()}`,
         supported_dataType: ['byte'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-8'`,
@@ -43,7 +43,7 @@ export const MENU_OPTIONS = [
       {
         value: 'character-encoding-utf16',
         label: `${T.translate(
-          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.utf16'
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.utf16'
         ).toString()}`,
         supported_dataType: ['byte'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16'`,
@@ -51,7 +51,7 @@ export const MENU_OPTIONS = [
       {
         value: 'character-encoding-us-ascii',
         label: `${T.translate(
-          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.usascii'
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.usascii'
         ).toString()}`,
         supported_dataType: ['byte'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'us-ascii'`,
@@ -59,7 +59,7 @@ export const MENU_OPTIONS = [
       {
         value: 'character-encoding-iso-8859-1',
         label: `${T.translate(
-          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.iso88591'
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.iso88591'
         ).toString()}`,
         supported_dataType: ['byte'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'iso-8859-1'`,
@@ -67,7 +67,7 @@ export const MENU_OPTIONS = [
       {
         value: 'character-encoding-utf16-be',
         label: `${T.translate(
-          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.utf16be'
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.utf16be'
         ).toString()}`,
         supported_dataType: ['byte'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16be'`,
@@ -75,7 +75,7 @@ export const MENU_OPTIONS = [
       {
         value: 'character-encoding-utf16-le',
         label: `${T.translate(
-          'features.WranglerNewUI.Transformations.menuOptions.characterEncoding.utf16le'
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.utf16le'
         ).toString()}`,
         supported_dataType: ['byte'], // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16le'`,
