@@ -23,6 +23,8 @@ public class OngoingDataExploration {
         String homeText = ele.getText();
         System.out.println(homeText);
         ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
+        String url=SeleniumDriver.getDriver().getCurrentUrl();
+        Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         WebElement test = Helper.locateElementByTestId("breadcrumb-workspace-name");
         String ActualText= test.getText();
         System.out.println(ActualText);
@@ -39,6 +41,6 @@ public class OngoingDataExploration {
     public void checkTheUserIsOnTheHomePageOrNot(){
         String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
         Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/home");
-        System.out.println("The assertion for home url is passes");
+        System.out.println("The assertion for home url is passed");
     }
 }
