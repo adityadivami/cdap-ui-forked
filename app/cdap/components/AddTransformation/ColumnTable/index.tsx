@@ -68,11 +68,9 @@ export default function({
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.isArray(columns) &&
-            columns.length > 0 &&
+          {columns?.length > 0 &&
             columns.map((eachColumn, index) =>
-              Array.isArray(directiveFunctionSupportedDataType) &&
-              directiveFunctionSupportedDataType.includes('all') ? (
+              directiveFunctionSupportedDataType?.includes('all') ? (
                 <TableRowWidget
                   onSingleSelection={onSingleSelection}
                   selectedColumns={selectedColumns}

@@ -52,8 +52,10 @@ export default function({
         <Typography className={classes.recipeStepsActionTypeStyles}>{eachColumn.label}</Typography>
         <Typography className={classes.recipeStepsActionTypeStyles}>{eachColumn.type}</Typography>
       </TableCell>
-      <TableCell className={`${classes.recipeStepsTableRowStyles} ${classes.circularBarCell}`}>
-        {dataQualityValue?.length && <DataQualityProgress value={dataQualityValue[index]?.value} />}
+      <TableCell className={`${classes.recipeStepsTableRowStyles}`}>
+        {dataQualityValue?.length && (
+          <DataQualityProgress value={Number(dataQualityValue[index]?.value)} />
+        )}
       </TableCell>
     </TableRow>
   );

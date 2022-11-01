@@ -15,10 +15,10 @@
  */
 
 import { Typography } from '@material-ui/core';
-import React, { useState } from 'react';
-import { useStyles } from './styles';
+import React from 'react';
+import { useStyles } from 'components/AddTransformation/CircularProgressBar/styles';
 import styled from 'styled-components';
-import { ICircularBarProps } from './type';
+import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -29,29 +29,29 @@ const ArcContainer = styled(Typography)`
   border-radius: 50%;
   box-sizing: border-box;
   border: 4px solid #dbdbdb;
-  border-bottom-color: ${(props) => (props.value < 100 ? '#E97567' : '#8BCC74')};
-  border-right-color: ${(props) => (props.value < 100 ? '#E97567' : '#8BCC74')};
-  transform: ${(props) => `rotate(${45 + parseInt(props.value, 10) * 1.8}deg)` || 'rotate(0deg)'};
+  border-bottom-color: ${({ value }) => (value < 100 ? '#E97567' : '#8BCC74')};
+  border-right-color: ${({ value }) => (value < 100 ? '#E97567' : '#8BCC74')};
+  transform: ${({ value }) => `rotate(${45 + value * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
-export default function({ value }: ICircularBarProps) {
+export default function({ value }: ICircularProgressBarProps) {
   const classes = useStyles();
 
   return (
     <>
       <Typography component="div" className={classes.progress}>
         <Typography component="div" className={classes.barOverflow}>
-          <ArcContainer value={parseInt(value, 10)}></ArcContainer>
+          <ArcContainer value={Math.round(value)}></ArcContainer>
         </Typography>
         <Typography
           component="span"
           className={
-            parseInt(value, 10) < 100
+            Math.round(value) < 100
               ? `${classes.redText} ${classes.value}`
               : `${classes.greenText} ${classes.value}`
           }
         >
-          {Number(value).toFixed(0)}%
+          {Math.round(value)}%
         </Typography>
       </Typography>
     </>

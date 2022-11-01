@@ -15,14 +15,10 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import { createBrowserHistory as createHistory } from 'history';
+import history from 'services/history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import AddTransformation from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import AddTransformation from 'components/AddTransformation';
 
 describe('It should test the SelectColumnsList Component', () => {
   it('should render the SelectColumnsList Component and triggers the button and following event', () => {

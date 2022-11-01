@@ -17,7 +17,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { IHeaderNamesList } from 'components/GridTable/types';
 import React, { ChangeEvent } from 'react';
-import CheckBoxInput from '..';
+import CheckBoxInput from 'components/AddTransformation/ColumnTable/Components/CheckboxInput';
 
 describe('It should render ', () => {
   it('Should render the checkBox component and click the checkbox', () => {

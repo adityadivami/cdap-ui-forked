@@ -14,6 +14,6 @@
  * the License.
  */
 
-export interface ICircularBarProps {
-  value: string;
+export interface ICircularProgressBarProps {
+  value: number;
 }

@@ -23,9 +23,10 @@ import { useStyles } from 'components/AddTransformation/styles';
 import {
   IAddTransformationProp,
   IHeaderNamesList,
-  IDataQuality,
+  IStatistics,
+  IMultipleSelectedFunctionDetail,
 } from 'components/AddTransformation/types';
-import { prepareDataQualtiy } from 'components/AddTransformation/CircularProgressBar/utils';
+import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 
 export default function({
@@ -36,8 +37,8 @@ export default function({
   callBack,
 }: IAddTransformationProp) {
   const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
-  const [selectedColumns, setSelectedColumns] = useState([] as IHeaderNamesList[]);
-  const [dataQualityValue, setDataQualityValue] = useState([] as IDataQuality[]);
+  const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
+  const [dataQualityValue, setDataQualityValue] = useState<IStatistics[]>([]);
   const classes = useStyles();
 
   const closeSelectColumnsPopup = () => {
@@ -52,18 +53,23 @@ export default function({
   };
 
   useEffect(() => {
-    const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(missingDataList, columnData);
+    const getPreparedDataQuality: IStatistics[] = getDataQuality(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
   const enableDoneButton = () => {
     if (
-      multipleColumnSelected?.filter((el) => el?.value === functionName && !el.isMoreThanTwo)
-        ?.length
+      multipleColumnSelected.filter(
+        (functionNameDetail: IMultipleSelectedFunctionDetail) =>
+          functionNameDetail.value === functionName && !functionNameDetail.isMoreThanTwo
+      )?.length
     ) {
       return selectedColumns?.length === 2 ? false : true;
     } else if (
-      multipleColumnSelected?.filter((el) => el?.value === functionName && el.isMoreThanTwo)?.length
+      multipleColumnSelected.filter(
+        (functionNameDetail: IMultipleSelectedFunctionDetail) =>
+          functionNameDetail.value === functionName && functionNameDetail.isMoreThanTwo
+      )?.length
     ) {
       return selectedColumns.length >= 1 ? false : true;
     } else {

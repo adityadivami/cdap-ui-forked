@@ -14,14 +14,16 @@
  * the License.
  */
 
-import { IHeaderNamesList, IDataQuality, IRecords } from '../types';
+import { IHeaderNamesList, IStatistics, IRecords } from 'components/AddTransformation/types';
 
-export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeaderNamesList[]) => {
-  const dataQualityToArray: any = statistics ? Object.entries(statistics) : '';
-  const dataQuality = [] as IDataQuality[];
+export const getDataQuality = (statistics: IStatistics, columnList: IHeaderNamesList[]) => {
+  const updatedStatistics: Array<Array<string | IRecords>> = statistics
+    ? Object.entries(statistics)
+    : [];
+  const dataQuality: IStatistics[] = [];
   columnList?.length &&
-    columnList?.map((columnName: IHeaderNamesList) => {
-      dataQualityToArray.forEach(([key, value]) => {
+    columnList?.forEach((columnName: IHeaderNamesList) => {
+      updatedStatistics.forEach(([key, value]) => {
         if (columnName.name === key) {
           const generalValues:
             | Array<Array<string | number | boolean | IRecords>>
@@ -31,10 +33,9 @@ export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeader
               if (vKey === 'general') {
                 if (vValue.null) {
                   const nullCount = vValue.null || 0;
-                  const totalNullEmpty = nullCount;
                   dataQuality.push({
                     label: key,
-                    value: totalNullEmpty,
+                    value: nullCount,
                   });
                 } else {
                   dataQuality.push({

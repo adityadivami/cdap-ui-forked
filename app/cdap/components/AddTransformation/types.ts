@@ -22,13 +22,18 @@ export interface IHeaderNamesList {
   label: string;
   type: string[];
 }
-export interface IDataQuality {
+export interface IStatistics {
   [key: string]: string;
 }
-export interface IAddTransformationProp {
+export interface IAddTransformationProps {
   directiveFunctionSupportedDataType: string[];
   functionName: string;
   columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality;
+  missingDataList: IStatistics;
   callBack: () => void;
+}
+
+export interface IMultipleSelectedFunctionDetail {
+  value: string;
+  isMoreThanTwo: boolean;
 }

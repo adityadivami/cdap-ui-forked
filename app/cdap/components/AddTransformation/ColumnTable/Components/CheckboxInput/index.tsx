@@ -15,20 +15,20 @@
  */
 import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
-import { ICheckBoxInput } from 'components/AddTransformation/ColumnTable/types';
+import { ICheckBoxInputProps } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({
   selectedColumns,
   handleDisableCheckbox,
   eachColumn,
   onMultipleSelection,
-}: ICheckBoxInput) {
+  label,
+}: ICheckBoxInputProps) {
   return (
     <>
       <FormControlLabel
         disabled={
-          (Array.isArray(selectedColumns) &&
-            selectedColumns?.filter((el) => el.label === eachColumn.label).length) ||
+          selectedColumns?.filter((el) => el.label === eachColumn.label).length ||
           !handleDisableCheckbox()
             ? false
             : true
@@ -48,7 +48,7 @@ export default function({
             data-testid="check-box-input-checkbox"
           />
         }
-        label=""
+        label={label}
         data-testid="form-control-label-parent"
       />
     </>

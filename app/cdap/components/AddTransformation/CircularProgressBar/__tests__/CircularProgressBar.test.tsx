@@ -26,7 +26,7 @@ describe('It should test the CircularProgressBar Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <MatchMeter value={'0'} />
+            <MatchMeter value={0} />
           </Route>
         </Switch>
       </Router>
@@ -37,7 +37,7 @@ describe('It should test the CircularProgressBar Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <MatchMeter value={'101'} />
+            <MatchMeter value={101} />
           </Route>
         </Switch>
       </Router>
