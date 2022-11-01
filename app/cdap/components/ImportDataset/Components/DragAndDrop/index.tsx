@@ -17,7 +17,7 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import classnames from 'classnames';
-import { useStyles } from '../../styles';
+import { useStyles } from 'components/ImportDataset/styles';
 import { Box, Divider, Typography } from '@material-ui/core';
 import { UploadSVG, InfoIcon, DeleteSVG } from 'components/ImportDataset/iconStore';
 import T from 'i18n-react';
