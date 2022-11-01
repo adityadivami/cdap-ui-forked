@@ -14,10 +14,11 @@
  * the License.
  */
 
-import { IDirectiveComponentValues } from 'components/AddTransformation/types';
-import { PARSE_CSV_OPTIONS } from '../../DirectiveComponents/options';
+import { IDirectiveComponentValues, IMenuOption } from 'components/AddTransformation/types';
+import { PARSE_CSV_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
+import { IParseOptions } from '../../DirectiveComponents/ParseComponents/types';
 
-export const PARSE_OPTIONS = [
+export const PARSE_OPTIONS: IMenuOption[] = [
   {
     value: 'parseCSV',
     label: 'CSV',

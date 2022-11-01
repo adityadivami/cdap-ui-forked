@@ -21,21 +21,21 @@ import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/me
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
 import T from 'i18n-react';
 import React, { Fragment, useEffect, useState } from 'react';
-import ButtonWidget from './ButtonWidget';
-import { prepareDataQualtiy } from './CircularProgressBar/utils';
-import { directiveComponentDefaultValues } from './constants';
-import FunctionNameWidget from './FunctionNameWidget';
-import SelectColumnsList from './SelectColumnsList';
-import SelectColumnsWidget from './SelectColumnsWidget';
-import SelectedColumnCountWidget from './SelectedColumnCountWidget';
-import { useStyles } from './styles';
+import ButtonWidget from 'components/AddTransformation/ButtonWidget';
+import { prepareDataQualtiy } from 'components/AddTransformation/CircularProgressBar/utils';
+import { directiveComponentDefaultValues } from 'components/AddTransformation/constants';
+import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
+import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
+import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
+import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
+import { useStyles } from 'components/AddTransformation/styles';
 import {
   IAddTransformationProp,
   IDataQuality,
   IDirectiveComponentValues,
   IHeaderNamesList,
-} from './types';
-import { getDirective } from './utils';
+} from 'components/AddTransformation/types';
+import { getDirective } from 'components/AddTransformation/utils';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -95,7 +95,7 @@ export default function({
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
-  const isComponentAvailable =
+  const isComponentAvailable: boolean =
     DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
     CALCULATE_OPTIONS.some((item) => item.value === functionName);
 

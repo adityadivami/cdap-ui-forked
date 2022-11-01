@@ -13,22 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { PARSE_CSV_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
+import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
+import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
 import {
+  IParseCSVProps,
+  ISetDirectiveComponentValue,
+} from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
+import {
+  CUSTOM_DELIMITER,
   PLEASE_SELECT_THE_DELIMITER,
   SET_FIRST_ROW_AS_HEADER,
 } from 'components/GridTable/constants';
 import InputCheckbox from 'components/InputCheckbox';
 import React, { useEffect, useState } from 'react';
-import ParseComponent from '..';
-import { PARSE_CSV_OPTIONS } from '../../options';
-import { useStyles } from '../../styles';
-import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
-import { IParseCSVProps } from '../types';
 
-const ParseCSVComponent = ({
-  setDirectiveComponentsValue,
-  directiveComponentValues,
-}: IParseCSVProps) => {
+export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
   const [selectedParseType, setSelectedParseType] = useState<string>('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
   const [delimiter, setDelimiter] = useState<string>('');
@@ -53,7 +54,7 @@ const ParseCSVComponent = ({
           options={PARSE_CSV_OPTIONS}
           radioValue={selectedParseType}
           setRadioValue={setSelectedParseType}
-          customInputType="customDelimiter"
+          customInputType={CUSTOM_DELIMITER}
           customInput={delimiter}
           setCustomInput={setDelimiter}
         />
@@ -68,5 +69,4 @@ const ParseCSVComponent = ({
       </>
     </ParseComponent>
   );
-};
-export default ParseCSVComponent;
+}

@@ -13,17 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
-import React, { useState, useEffect } from 'react';
-import ParseComponent from '..';
-import { PARSE_DATE_TIME_OPTIONS } from '../../options';
-import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
-import { IParseCSVProps } from '../types';
+import { PARSE_DATE_TIME_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
+import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
+import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
+import { ISetDirectiveComponentValue } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { CUSTOM_FORMAT, PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
+import React, { useEffect, useState } from 'react';
 
-const ParseDateTimeComponent = ({
-  setDirectiveComponentsValue,
-  directiveComponentValues,
-}: IParseCSVProps) => {
+export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
   const [customFormat, setCustomFormat] = useState<string>('');
   const [selectedParseType, setSelectedParseType] = useState<string>('');
 
@@ -41,11 +38,10 @@ const ParseDateTimeComponent = ({
         options={PARSE_DATE_TIME_OPTIONS}
         radioValue={selectedParseType}
         setRadioValue={setSelectedParseType}
-        customInputType="customFormat"
+        customInputType={CUSTOM_FORMAT}
         customInput={customFormat}
         setCustomInput={setCustomFormat}
       />
     </ParseComponent>
   );
-};
-export default ParseDateTimeComponent;
+}

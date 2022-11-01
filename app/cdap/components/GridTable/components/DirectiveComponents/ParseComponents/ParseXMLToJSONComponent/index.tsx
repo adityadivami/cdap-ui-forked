@@ -15,16 +15,13 @@
  */
 import { FormGroup } from '@material-ui/core';
 import FormInputField from 'components/FormInputField';
-import { PARSE_AS_XML_TO_JSON, DEPTH, DEPTH_PLACEHOLDER } from 'components/GridTable/constants';
-import React, { useState, useEffect } from 'react';
-import ParseComponent from '..';
-import { useStyles } from '../../styles';
-import { IParseCSVProps } from '../types';
+import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
+import { ISetDirectiveComponentValue } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
+import { DEPTH, DEPTH_PLACEHOLDER, PARSE_AS_XML_TO_JSON } from 'components/GridTable/constants';
+import React, { useEffect, useState } from 'react';
 
-const ParseXMLToJSONComponent = ({
-  setDirectiveComponentsValue,
-  directiveComponentValues,
-}: IParseCSVProps) => {
+export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
   const [depth, setDepth] = useState<number>(1);
 
   const classes = useStyles();
@@ -44,7 +41,7 @@ const ParseXMLToJSONComponent = ({
             classes: { underline: classes.underlineStyles, input: classes.inputStyles },
             type: 'number',
             value: depth,
-            onChange: (e) => setDepth(e.target.value),
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setDepth(Number(e.target.value)),
             color: 'primary',
             placeholder: DEPTH_PLACEHOLDER,
           }}
@@ -52,5 +49,4 @@ const ParseXMLToJSONComponent = ({
       </FormGroup>
     </ParseComponent>
   );
-};
-export default ParseXMLToJSONComponent;
+}

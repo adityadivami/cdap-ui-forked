@@ -14,11 +14,11 @@
  *  the License.
  */
 
-import { Route, Router, Switch } from 'react-router';
 import { render } from '@testing-library/react';
-import React from 'react';
+import InputCheckbox from 'components/InputCheckbox/index';
 import { createBrowserHistory as createHistory } from 'history';
-import InputCheckbox from '..';
+import React, { ChangeEvent } from 'react';
+import { Route, Router, Switch } from 'react-router';
 
 const history = createHistory({
   basename: '/',
@@ -30,7 +30,14 @@ describe('Should Test the InputCheckbox Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <InputCheckbox />
+            <InputCheckbox
+              label={''}
+              value={false}
+              onChange={function(e: ChangeEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.');
+              }}
+              className={''}
+            />
           </Route>
         </Switch>
       </Router>

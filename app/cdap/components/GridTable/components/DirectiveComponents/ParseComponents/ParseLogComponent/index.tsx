@@ -13,17 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { PARSE_LOG_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
+import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
+import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
+import { ISetDirectiveComponentValue } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import { PLEASE_SELECT_THE_LOGS_FORMAT } from 'components/GridTable/constants';
-import React, { useState, useEffect } from 'react';
-import ParseComponent from '..';
-import { PARSE_LOG_OPTIONS } from '../../options';
-import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
-import { IParseCSVProps } from '../types';
+import React, { useEffect, useState } from 'react';
 
-const ParseLogComponent = ({
-  setDirectiveComponentsValue,
-  directiveComponentValues,
-}: IParseCSVProps) => {
+export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
   const [selectedParseType, setSelectedParseType] = useState<string>('');
   const [delimiter, setDelimiter] = useState<string>('');
 
@@ -47,5 +44,4 @@ const ParseLogComponent = ({
       />
     </ParseComponent>
   );
-};
-export default ParseLogComponent;
+}

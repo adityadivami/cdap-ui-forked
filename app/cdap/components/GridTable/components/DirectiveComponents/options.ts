@@ -14,69 +14,96 @@
  * the License.
  */
 
-import { IParseOptions } from './ParseComponents/types';
+import { IParseOptions } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import T from 'i18n-react';
 
 export const PARSE_CSV_OPTIONS: IParseOptions[] = [
   {
     value: 'comma',
-    label: 'Comma',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.csv.options.comma'
+    ).toString()}`,
     directiveExpression: ',',
   },
   {
     value: 'tab',
-    label: 'Tab',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.csv.options.tab'
+    ).toString()}`,
     directiveExpression: '\\t',
   },
   {
     value: 'space',
-    label: 'Space',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.csv.options.space'
+    ).toString()}`,
     directiveExpression: ' ',
   },
   {
     value: 'pipe',
-    label: 'Pipe',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.csv.options.pipe'
+    ).toString()}`,
     directiveExpression: '\\|',
   },
   {
     value: 'capA',
-    label: '^A',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.csv.options.capA'
+    ).toString()}`,
     directiveExpression: '\\u0001',
   },
   {
     value: 'capD',
-    label: '^D',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.csv.options.capD'
+    ).toString()}`,
     directiveExpression: '\\u0004',
   },
   {
     value: 'customDelimiter',
-    label: 'Custom delimiter',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.csv.options.customDelimiter'
+    ).toString()}`,
   },
 ];
 
 export const PARSE_LOG_OPTIONS: IParseOptions[] = [
   {
     value: 'common',
-    label: 'Common',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.log.options.common'
+    ).toString()}`,
   },
   {
     value: 'combined',
-    label: 'Combined',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.log.options.combined'
+    ).toString()}`,
   },
   {
     value: 'combinedio',
-    label: 'Combinedio',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.log.options.combinedio'
+    ).toString()}`,
   },
   {
     value: 'referer',
-    label: 'Referer',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.log.options.referer'
+    ).toString()}`,
   },
   {
     value: 'agent',
-    label: 'Agent',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.log.options.agent'
+    ).toString()}`,
   },
   {
     value: 'custom',
-    label: 'Custom',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.log.options.custom'
+    ).toString()}`,
   },
 ];
 
@@ -138,7 +165,9 @@ export const PARSE_SIMPLE_DATE_OPTIONS: IParseOptions[] = [
     value: 'H:mm a, z',
   },
   {
-    label: 'Custom Format',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.common.customFormat'
+    ).toString()}`,
     value: 'customFormat',
   },
 ];
@@ -169,18 +198,24 @@ export const PARSE_DATE_TIME_OPTIONS: IParseOptions[] = [
     value: 'EEE, d MMM yyyy HH:mm:ss',
   },
   {
-    label: 'Custom Format',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.common.customFormat'
+    ).toString()}`,
     value: 'customFormat',
   },
 ];
 
 export const PARSE_EXCEL_OPTIONS: IParseOptions[] = [
   {
-    label: 'Sheet Number',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.excel.options.sheetNumber'
+    ).toString()}`,
     value: 'sheetNumber',
   },
   {
-    label: 'Sheet Name',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.Parse.options.excel.options.sheetName'
+    ).toString()}`,
     value: 'sheetName',
   },
 ];

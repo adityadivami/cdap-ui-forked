@@ -13,33 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import {
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  Input,
-  Radio,
-  RadioGroup,
-} from '@material-ui/core';
-import FormInputRadio from 'components/FormInputRadio';
+import { FormGroup } from '@material-ui/core';
 import FormInputField from 'components/FormInputField';
+import FormInputRadio from 'components/FormInputRadio';
+import { PARSE_EXCEL_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
+import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
+import {
+  IParseCSVProps,
+  ISetDirectiveComponentValue,
+} from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
 import {
   CHOOSE_SHEET_IN_EXCEL,
-  SHEET_NUMBER_PLACEHOLDER,
-  SHEET_NAME_PLACEHOLDER,
   SET_FIRST_ROW_AS_HEADER,
+  SHEET_NAME_PLACEHOLDER,
+  SHEET_NUMBER_PLACEHOLDER,
 } from 'components/GridTable/constants';
 import InputCheckbox from 'components/InputCheckbox';
-import React, { useState, useEffect } from 'react';
-import ParseComponent from '..';
-import { PARSE_EXCEL_OPTIONS } from '../../options';
-import { useStyles } from '../../styles';
-import { IParseCSVProps } from '../types';
+import React, { useEffect, useState } from 'react';
 
-const ParseExcelComponent = ({
-  setDirectiveComponentsValue,
-  directiveComponentValues,
-}: IParseCSVProps) => {
+export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
   const [sheetRadioType, setSheetRadioType] = useState<string>('sheetNumber');
   const [sheetValue, setSheetValue] = useState<string>('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
@@ -77,7 +70,7 @@ const ParseExcelComponent = ({
             },
             type: sheetRadioType === 'sheetNumber' ? 'number' : 'text',
             value: sheetValue,
-            onChange: (e) => setSheetValue(e.target.value),
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setSheetValue(e.target.value),
             color: 'primary',
             placeholder:
               sheetRadioType === 'sheetNumber' ? SHEET_NUMBER_PLACEHOLDER : SHEET_NAME_PLACEHOLDER,
@@ -86,11 +79,12 @@ const ParseExcelComponent = ({
         <InputCheckbox
           label={SET_FIRST_ROW_AS_HEADER}
           value={firstRowAsHeader}
-          onChange={(e) => setFirstRowAsHeader(e.target.checked)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setFirstRowAsHeader(e.target.checked)
+          }
           className={classes.checkboxStyles}
         />
       </FormGroup>
     </ParseComponent>
   );
-};
-export default ParseExcelComponent;
+}

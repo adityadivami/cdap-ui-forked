@@ -14,8 +14,8 @@
  * the License.
  */
 import { PARSE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/parseOptions';
-import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-import { IDirectiveComponentValues, IMenuOption } from './types';
+import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { IDirectiveComponentValues, IMenuOption } from 'components/AddTransformation/types';
 
 export const getDirective = (
   functionName: string,

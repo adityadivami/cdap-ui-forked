@@ -13,17 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { PARSE_SIMPLE_DATE_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
+import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
+import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
+import {
+  IParseCSVProps,
+  ISetDirectiveComponentValue,
+} from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import { PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
-import React, { useState, useEffect } from 'react';
-import ParseComponent from '..';
-import { PARSE_SIMPLE_DATE_OPTIONS } from '../../options';
-import InputRadioWithCustomInputComponent from '../InputRadioWithCustomInputComponent';
-import { IParseCSVProps } from '../types';
+import React, { useEffect, useState } from 'react';
 
-const ParseSimpleDateComponent = ({
-  setDirectiveComponentsValue,
-  directiveComponentValues,
-}: IParseCSVProps) => {
+const ParseSimpleDateComponent = ({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) => {
   const [customFormat, setCustomFormat] = useState<string>('');
   const [selectedParseType, setSelectedParseType] = useState<string>('');
 

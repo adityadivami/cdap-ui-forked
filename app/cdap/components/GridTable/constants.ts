@@ -14,31 +14,63 @@
  * the License.
  */
 
-import ParseCSVComponent from './components/DirectiveComponents/ParseComponents/ParseCSVComponent';
-import ParseDateTimeComponent from './components/DirectiveComponents/ParseComponents/ParseDateTimeComponent';
-import ParseExcelComponent from './components/DirectiveComponents/ParseComponents/ParseExcelComponent';
-import ParseFixedLengthComponent from './components/DirectiveComponents/ParseComponents/ParseFixedLengthComponent';
-import ParseLogComponent from './components/DirectiveComponents/ParseComponents/ParseLogComponent';
-import ParseSimpleDateComponent from './components/DirectiveComponents/ParseComponents/ParseSimpleDateComponent';
-import ParseXMLToJSONComponent from './components/DirectiveComponents/ParseComponents/ParseXMLToJSONComponent';
+import ParseCSVComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseCSVComponent';
+import ParseDateTimeComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseDateTimeComponent';
+import ParseExcelComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseExcelComponent';
+import ParseFixedLengthComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseFixedLengthComponent';
+import ParseLogComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseLogComponent';
+import ParseSimpleDateComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseSimpleDateComponent';
+import ParseXMLToJSONComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseXMLToJSONComponent';
+import T from 'i18n-react';
 
 export const MISSING_NULL = 'Missing/Null';
-export const PLEASE_SELECT_THE_DATE_FORMAT = 'Please select the date format';
-export const PARSE_AS_XML_TO_JSON = 'Parse as XML to JSON';
-export const DEPTH = 'Depth';
-export const DEPTH_PLACEHOLDER = 'Enter depth';
-export const PLEASE_SELECT_THE_LOGS_FORMAT = 'Please select the logs format';
-export const PARSE_AS_FIXED_LENGTH = 'Parse as Fixed length';
-export const COLUMN_WIDTHS = 'Column widths';
-export const PADDING = 'Padding';
-export const COLUMN_WIDTHS_PLACEHOLDER = 'e.g. 3, 5, 2, 5, 15';
-export const PADDING_PLACEHOLDER = 'Optional padding parameter';
-export const CHOOSE_SHEET_IN_EXCEL =
-  'Choose how you would like to specify the sheet in your Excel file';
-export const SHEET_NUMBER_PLACEHOLDER = 'Sheet number';
-export const SHEET_NAME_PLACEHOLDER = 'Sheet name';
-export const SET_FIRST_ROW_AS_HEADER = 'Set first row as header';
-export const PLEASE_SELECT_THE_DELIMITER = 'Please select the delimiter';
+export const PLEASE_SELECT_THE_DATE_FORMAT = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.common.pleaseSelectTheDateFormat'
+).toString()}`;
+export const PARSE_AS_XML_TO_JSON = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.xmlToJSON.heading.parseXMLToJSON'
+).toString()}`;
+export const DEPTH = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.xmlToJSON.labels.depth'
+).toString()}`;
+export const DEPTH_PLACEHOLDER = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.xmlToJSON.labels.depthPlaceholder'
+).toString()}`;
+export const PLEASE_SELECT_THE_LOGS_FORMAT = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.log.heading.selectLogsFormat'
+).toString()}`;
+export const PARSE_AS_FIXED_LENGTH = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.fixedLength.heading.parseAsFixedLength'
+).toString()}`;
+export const COLUMN_WIDTHS = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.fixedLength.labels.columnWidths'
+).toString()}`;
+export const PADDING = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.fixedLength.labels.padding'
+).toString()}`;
+export const COLUMN_WIDTHS_PLACEHOLDER = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.fixedLength.labels.columnWidthsPlaceholder'
+).toString()}`;
+export const PADDING_PLACEHOLDER = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.fixedLength.labels.optionalPaddingParameter'
+).toString()}`;
+export const CHOOSE_SHEET_IN_EXCEL = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.excel.heading.chooseSheetInExcel'
+).toString()}`;
+export const SHEET_NUMBER_PLACEHOLDER = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.excel.heading.sheetNumberPlaceholder'
+).toString()}`;
+export const SHEET_NAME_PLACEHOLDER = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.excel.heading.sheetNamePlaceholder'
+).toString()}`;
+export const SET_FIRST_ROW_AS_HEADER = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.common.setFirstRowAsHeader'
+).toString()}`;
+export const PLEASE_SELECT_THE_DELIMITER = `${T.translate(
+  'features.WranglerNewUI.Transformations.Parse.options.csv.heading.pleaseSelectTheDelimiter'
+).toString()}`;
+export const CUSTOM_DELIMITER = 'customDelimiter';
+export const CUSTOM_FORMAT = 'customFormat';
 
 export const DIRECTIVE_COMPONENTS = [
   {

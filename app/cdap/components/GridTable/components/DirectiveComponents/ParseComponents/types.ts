@@ -40,3 +40,7 @@ export interface IParseComponentProps {
   sectionHeading: string;
   children: JSX.Element;
 }
+
+export interface ISetDirectiveComponentValue {
+  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
+}

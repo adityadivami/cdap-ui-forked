@@ -15,8 +15,8 @@
  */
 
 import { IDirectiveComponentValues } from 'components/AddTransformation/types';
+import { IParseCSVProps } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import React from 'react';
-import { IParseCSVProps } from './components/DirectiveComponents/ParseComponents/types';
 
 export interface IParams {
   context: string | number | IRecords;

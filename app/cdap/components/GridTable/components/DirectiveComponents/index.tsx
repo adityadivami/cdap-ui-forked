@@ -14,18 +14,18 @@
  * the License.
  */
 
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 import { IDirectiveContentParams } from 'components/GridTable/types';
 import React from 'react';
-import { CALCULATE_OPTIONS } from '../NestedMenu/menuOptions/calculateOptions';
 
-const DirectiveContent: React.FC<IDirectiveContentParams> = ({
+export default function({
   directiveComponents,
   functionName: type,
   functionName,
   directiveComponentValues,
   setDirectiveComponentsValue,
   ...props
-}: IDirectiveContentParams) => {
+}: IDirectiveContentParams) {
   const Component =
     directiveComponents.find((item) => item.type === type)?.component ||
     CALCULATE_OPTIONS.find((item) => item.value === functionName)?.component;
@@ -37,5 +37,4 @@ const DirectiveContent: React.FC<IDirectiveContentParams> = ({
       {...props}
     />
   );
-};
-export default DirectiveContent;
+}

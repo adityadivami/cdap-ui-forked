@@ -16,18 +16,18 @@
 import { FormGroup } from '@material-ui/core';
 import FormInputField from 'components/FormInputField';
 import FormInputRadio from 'components/FormInputRadio';
+import { IInputRadioWithCustomInputProps } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
 import React from 'react';
-import { useStyles } from '../../styles';
-import { IInputRadioWithCustomInputProps } from '../types';
 
-const InputRadioWithCustomInputComponent = ({
+export default function({
   options,
   radioValue,
   setRadioValue,
   customInputType,
   customInput,
   setCustomInput,
-}: IInputRadioWithCustomInputProps) => {
+}: IInputRadioWithCustomInputProps) {
   const classes = useStyles();
 
   return (
@@ -48,7 +48,7 @@ const InputRadioWithCustomInputComponent = ({
             },
             type: 'text',
             value: customInput,
-            onChange: (e) => setCustomInput(e.target.value),
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCustomInput(e.target.value),
             color: 'primary',
             placeholder: '',
           }}
@@ -56,5 +56,4 @@ const InputRadioWithCustomInputComponent = ({
       )}
     </FormGroup>
   );
-};
-export default InputRadioWithCustomInputComponent;
+}

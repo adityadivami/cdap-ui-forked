@@ -14,25 +14,26 @@
  * the License.
  */
 import { FormControl, FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
-import React from 'react';
+import { TRANSFORMATION_ACTIONS } from 'components/FormInputRadio/constants';
 import { useStyles } from 'components/FormInputRadio/styles';
 import { IFormInputRadioProps } from 'components/FormInputRadio/types';
+import { IParseOptions } from 'components/GridTable/types';
+import React from 'react';
 
-const FormInputRadio = ({ options, radioValue, setRadioValue }: IFormInputRadioProps) => {
+export default function({ options, radioValue, setRadioValue }: IFormInputRadioProps) {
   const classes = useStyles();
   return (
     <FormControl>
-      <RadioGroup name="actions" value={radioValue} onChange={setRadioValue}>
-        {options.map((eachRadio) => (
+      <RadioGroup name={TRANSFORMATION_ACTIONS} value={radioValue} onChange={setRadioValue}>
+        {options.map((eachOption: IParseOptions) => (
           <FormControlLabel
-            value={eachRadio.value}
+            value={eachOption.value}
             className={classes.radioStyles}
             control={<Radio color="primary" />}
-            label={eachRadio.label}
+            label={eachOption.label}
           />
         ))}
       </RadioGroup>
     </FormControl>
   );
-};
-export default FormInputRadio;
+}

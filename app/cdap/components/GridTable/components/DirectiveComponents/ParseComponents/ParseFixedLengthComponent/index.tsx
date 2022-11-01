@@ -15,22 +15,19 @@
  */
 import { FormGroup } from '@material-ui/core';
 import FormInputField from 'components/FormInputField';
+import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
+import { IParseCSVProps } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
 import {
-  PARSE_AS_FIXED_LENGTH,
   COLUMN_WIDTHS,
   COLUMN_WIDTHS_PLACEHOLDER,
   PADDING,
   PADDING_PLACEHOLDER,
+  PARSE_AS_FIXED_LENGTH,
 } from 'components/GridTable/constants';
-import React, { useState, useEffect } from 'react';
-import ParseComponent from '..';
-import { useStyles } from '../../styles';
-import { IParseCSVProps } from '../types';
+import React, { useEffect, useState } from 'react';
 
-const ParseFixedLengthComponent = ({
-  setDirectiveComponentsValue,
-  directiveComponentValues,
-}: IParseCSVProps) => {
+export default function({ setDirectiveComponentsValue }: IParseCSVProps) {
   const [columnWidths, setColumnWidths] = useState<string>('');
   const [padding, setPadding] = useState<string>('');
   const classes = useStyles();
@@ -54,7 +51,7 @@ const ParseFixedLengthComponent = ({
             classes: { underline: classes.underlineStyles, input: classes.inputStyles },
             type: 'number',
             value: columnWidths,
-            onChange: (e) => setColumnWidths(e.target.value),
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setColumnWidths(e.target.value),
             color: 'primary',
             placeholder: COLUMN_WIDTHS_PLACEHOLDER,
           }}
@@ -67,7 +64,7 @@ const ParseFixedLengthComponent = ({
             classes: { underline: classes.underlineStyles, input: classes.inputStyles },
             type: 'number',
             value: padding,
-            onChange: (e) => setPadding(e.target.value),
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => setPadding(e.target.value),
             color: 'primary',
             placeholder: PADDING_PLACEHOLDER,
           }}
@@ -75,5 +72,4 @@ const ParseFixedLengthComponent = ({
       </FormGroup>
     </ParseComponent>
   );
-};
-export default ParseFixedLengthComponent;
+}
