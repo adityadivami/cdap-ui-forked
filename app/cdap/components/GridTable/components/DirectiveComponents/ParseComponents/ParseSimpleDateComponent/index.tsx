@@ -23,7 +23,7 @@ import {
 import { PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
-const ParseSimpleDateComponent = ({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) => {
+export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
   const [customFormat, setCustomFormat] = useState<string>('');
   const [selectedParseType, setSelectedParseType] = useState<string>('');
 
@@ -47,5 +47,4 @@ const ParseSimpleDateComponent = ({ setDirectiveComponentsValue }: ISetDirective
       />
     </ParseComponent>
   );
-};
-export default ParseSimpleDateComponent;
+}

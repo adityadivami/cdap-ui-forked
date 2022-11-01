@@ -3481,7 +3481,7 @@ features:
     zero: '0'
   WranglerNewUI:
     Transformations:
-      Parse:
+      parse:
         options:
           common:
             customFormat: Custom Format
