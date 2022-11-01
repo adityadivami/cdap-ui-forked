@@ -13,10 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { DATATYPE_OPTIONS } from '../GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+import { PARSE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/parseOptions';
+import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { IDirectiveComponentValues, IMenuOption } from 'components/AddTransformation/types';
+
+export const getDirective = (
+  functionName: string,
+  selectedColumn: string,
+  directiveComponentValues: IDirectiveComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
-    return `set-type :${columnSelected} ${functionName}`;
+    return `set-type :${selectedColumn} ${functionName}`;
+  } else if (PARSE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
+    const option: IMenuOption = PARSE_OPTIONS.find(
+      (eachOption) => eachOption.value === functionName
+    );
+    if (option) {
+      return option.directive(selectedColumn, directiveComponentValues);
+    }
   } else {
     return null;
   }

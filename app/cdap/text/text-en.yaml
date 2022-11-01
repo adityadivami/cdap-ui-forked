@@ -3479,3 +3479,74 @@ features:
     noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
     no: No
     zero: '0'
+  WranglerNewUI:
+    Transformations:
+      Parse:
+        options:
+          common:
+            customFormat: Custom Format
+            pleaseSelectTheDateFormat: Please select the date format
+            setFirstRowAsHeader: Set first row as header
+            yyyyMMddHHmmss: yyyy-MM-dd HH:mm:ss
+            ddMMyyHHmmss: dd/MM/yy HH:mm:ss
+            MMddyyyyHHmmssSSS: MM.dd.yyyy HH:mm:ss.SSS
+            EEEdMMMyyyyHHmmss: EEE, d MMM yyyy HH:mm:ss
+            yyyyMMddTHHmmssSSSWithRFCTimezone: yyyy,MM.dd'T'HH:mm:ss.SSS with RFC timezone
+          csv:
+            heading: 
+              pleaseSelectTheDelimiter: Please select the delimiter
+            options:
+              comma: Comma
+              tab: Tab
+              space: Space
+              pipe: Pipe
+              capA: ^A
+              capD: ^D
+              customDelimiter: Custom delimiter
+          log:
+            heading: 
+              selectLogsFormat: Please select the logs format
+            options:
+              common: Common
+              combined: Combined
+              combinedio: Combinedio
+              referer: Referer
+              agent: Agent
+              custom: Custom
+          excel:
+            heading: 
+              chooseSheetInExcel: Choose how you would like to specify the sheet in your Excel file
+              sheetNumberPlaceholder: Sheet number
+              sheetNamePlaceholder: Sheet name
+            options:
+              sheetName: Sheet Name
+              sheetNumber: Sheet Number
+          xmlToJSON:
+            heading: 
+              parseXMLToJSON: Parse as XML to JSON
+            labels: 
+              depth: Depth
+              depthPlaceholder: Enter depth
+          fixedLength:
+            heading:
+              parseAsFixedLength: Parse as Fixed length
+            labels: 
+              columnWidths: Column widths
+              columnWidthsPlaceholder: e.g. 3, 5, 2, 5, 15
+              padding: Padding
+              optionalPaddingParameter: Optional padding parameter
+          simpleDate:
+            options:        
+              MMddyyyy: MM/dd/yyyy
+              MMddyyyyFormat: MM-dd-yyyy
+              ddMMyyyy: dd/MM/yyyy
+              MMddyy: MM-dd-yy
+              yyyyMMdd: yyyy-MM-dd
+              MMddyyyyatHHmmssz: MM-dd-yyyy 'at' HH:mm:ss z
+              yyyyMMddTHHmmssSSSZ: yyyy,MM.dd'T'HH:mm:ss.SSSZ
+              EEEMMMdyy: EEE, MMM d, ''yy
+              hmma: h:mm a
+              Hmmaz: H:mm a, z
+          dateTime:
+            options:
+              MMddyyyyAtHHmmssWithTimezone: MM-dd-yyyy 'at' HH:mm:ss with timezone
