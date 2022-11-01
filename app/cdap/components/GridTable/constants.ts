@@ -17,7 +17,7 @@ export const DESTINATION_COLUMN = `${T.translate(
   'features.WranglerNewUI.Transformations.Transformations.format.options.concatenate.labels.destinationColumn'
 ).toString()}`;
 export const PLEASE_SELECT_THE_DATE_FORMAT = `${T.translate(
-  'features.WranglerNewUI.Transformations.Parse.options.common.pleaseSelectTheDateFormat'
+  'features.WranglerNewUI.Transformations.parse.options.common.pleaseSelectTheDateFormat'
 ).toString()}`;
 export const CUSTOM_FORMAT = 'customFormat';
 
