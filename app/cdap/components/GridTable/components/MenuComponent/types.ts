@@ -14,12 +14,12 @@
  * the License.
  */
 
-import { IItem } from './../MenuItemComponent/types';
+import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 
 export interface IMenuComponentProps {
   anchorEl;
-  menuOptions;
+  menuOptions: IMenuItem[];
   setAnchorEl;
-  submitOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IItem) => void;
+  submitOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
 }

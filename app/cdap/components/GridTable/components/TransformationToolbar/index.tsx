@@ -16,14 +16,18 @@
 
 import { IconButton, Typography, Tooltip, TextField } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { default as React, useEffect, useState } from 'react';
-import NestedMenu from '../NestedMenu';
-import T from 'i18n-react';
-import { ITransformationToolBarProps } from './types';
-import { Divider, Expand, LongDivider } from './iconStore';
-import { useStyles } from './styles';
-import FunctionToggle from '../FunctionNameToggle';
-import { nestedMenuOptions } from './utils';
+import { default as React, useState } from 'react';
+import NestedMenu from 'components/GridTable/components/NestedMenu';
+import { ITransformationToolBarProps } from 'components/GridTable/components/TransformationToolbar/types';
+import {
+  Divider,
+  Expand,
+  LongDivider,
+} from 'components/GridTable/components/TransformationToolbar/iconStore';
+import { useStyles } from 'components/GridTable/components/TransformationToolbar/styles';
+import FunctionToggle from 'components/GridTable/components/FunctionNameToggle';
+import { nestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/utils';
+import { IMenuItem } from '../MenuItemComponent/types';
 
 export default function({
   columnType,
@@ -34,7 +38,7 @@ export default function({
   const classes = useStyles();
   const [isShowNames, setIsShowName] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
-  const [selectedMenuOptions, setSelectedMenuOptions] = useState([]);
+  const [selectedMenuOptions, setSelectedMenuOptions] = useState<IMenuItem[]>([]);
 
   const handleMenuOpenClose = () => {
     setSelectedMenuOptions([]);
@@ -72,7 +76,6 @@ export default function({
                     <NestedMenu
                       menuOptions={selectedMenuOptions}
                       columnType={columnType}
-                      icon={menuItem.icon}
                       submitMenuOption={submitMenuOption}
                       title={menuItem.title}
                       setAnchorEl={setAnchorEl}

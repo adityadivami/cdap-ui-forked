@@ -1,4 +1,4 @@
-import { MENU_OPTIONS } from '../NestedMenu/menuOptions/menuOptions';
+import { MENU_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/menuOptions';
 import {
   ColumnIcon,
   FragmentIcon,
@@ -11,7 +11,7 @@ import {
   SecurityIcon,
   StructureIcon,
   Undo,
-} from './iconStore';
+} from 'components/GridTable/components/TransformationToolbar/iconStore';
 import T from 'i18n-react';
 
 export const nestedMenuOptions = [

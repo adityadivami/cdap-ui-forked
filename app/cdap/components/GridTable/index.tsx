@@ -27,14 +27,20 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-import ToolBarList from 'components/GridTable/components/TransfomationToolbar';
-import BreadCrumb from './components/Breadcrumb';
-import GridHeaderCell from './components/GridHeaderCell';
-import GridKPICell from './components/GridKPICell';
-import GridTextCell from './components/GridTextCell';
-import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
-import { convertNonNullPercent } from './utils';
+import ToolBarList from 'components/GridTable/components/TransformationToolbar';
+import BreadCrumb from 'components/GridTable/components/Breadcrumb';
+import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
+import GridKPICell from 'components/GridTable/components/GridKPICell';
+import GridTextCell from 'components/GridTable/components/GridTextCell';
+import { useStyles } from 'components/GridTable/styles';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IObject,
+  IParams,
+  IRecords,
+} from 'components/GridTable/types';
+import { convertNonNullPercent } from 'components/GridTable/utils';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -45,7 +51,7 @@ export default function GridTable() {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
-  const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
+  const [headerNamesList, setheaderNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
@@ -165,7 +171,7 @@ export default function GridTable() {
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData.headers, rawData.types);
-    setHeadersNamesList(headersData);
+    setheaderNamesList(headersData);
     if (rawData && rawData?.summary && rawData?.summary?.statistics) {
       const missingData = createMissingData(gridData?.summary?.statistics);
       setMissingDataList(missingData);
@@ -208,22 +214,22 @@ export default function GridTable() {
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
-            {headersNamesList?.length > 0 &&
-              headersNamesList.map((eachHeader) => (
+            {headerNamesList?.length > 0 &&
+              headerNamesList.map((eachHeaderName) => (
                 <GridHeaderCell
-                  label={eachHeader.label}
-                  types={eachHeader.type as string[]}
-                  key={eachHeader.name}
+                  label={eachHeaderName.label}
+                  types={eachHeaderName.type as string[]}
+                  key={eachHeaderName.name}
                 />
               ))}
           </TableRow>
           <TableRow>
             {missingDataList?.length > 0 &&
-              headersNamesList.length > 0 &&
-              headersNamesList.map((each, index) => {
-                return missingDataList.map((item, itemIndex) => {
-                  if (item.name === each.name) {
-                    return <GridKPICell metricData={item} key={item.name} />;
+              headerNamesList.length > 0 &&
+              headerNamesList.map((eachHeaderName) => {
+                return missingDataList.map((eachMissingData) => {
+                  if (eachMissingData.name === eachHeaderName.name) {
+                    return <GridKPICell metricData={eachMissingData} key={eachMissingData.name} />;
                   }
                 });
               })}
@@ -234,11 +240,11 @@ export default function GridTable() {
             rowsDataList.map((eachRow, rowIndex) => {
               return (
                 <TableRow key={`row-${rowIndex}`}>
-                  {headersNamesList.map((eachKey, eachIndex) => {
+                  {headerNamesList.map((eachHeaderName, eachIndex) => {
                     return (
                       <GridTextCell
-                        cellValue={eachRow[eachKey.name] || '--'}
-                        key={`${eachKey.name}-${eachIndex}`}
+                        cellValue={eachRow[eachHeaderName.name] || '--'}
+                        key={`${eachHeaderName.name}-${eachIndex}`}
                       />
                     );
                   })}

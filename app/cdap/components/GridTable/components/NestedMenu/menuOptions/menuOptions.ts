@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { DATATYPE_OPTIONS } from './datatypeOptions';
+import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import T from 'i18n-react';
 
 export const MENU_OPTIONS = [
@@ -22,8 +22,10 @@ export const MENU_OPTIONS = [
     value: 'changeDatatype',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.menu.changeDatatype'
-    ),
+    ).toString(),
     options: DATATYPE_OPTIONS,
-    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
 ];

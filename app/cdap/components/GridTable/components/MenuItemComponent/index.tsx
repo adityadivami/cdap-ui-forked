@@ -17,7 +17,7 @@
 import { MenuItem, Typography } from '@material-ui/core';
 import React from 'react';
 import { useNestedMenuStyles } from '../NestedMenu/styles';
-import { menuArrowIcon } from '../TransfomationToolbar/iconStore';
+import { menuArrowIcon } from '../TransformationToolbar/iconStore';
 import { IMenuItemComponentProps } from './types';
 import T from 'i18n-react';
 

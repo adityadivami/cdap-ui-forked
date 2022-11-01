@@ -16,15 +16,14 @@
 
 import { IconButton, Menu, Tooltip } from '@material-ui/core';
 import React, { useState } from 'react';
-import MenuComponent from '../MenuComponent';
-import MenuItemComponent from '../MenuItemComponent';
-import { IItem } from '../MenuItemComponent/types';
-import { useNestedMenuStyles } from './styles';
-import { INestedMenuProps } from './types';
+import MenuComponent from 'components/GridTable/components/MenuComponent';
+import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
+import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
+import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
+import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
 
 export default function({
   menuOptions,
-  icon,
   submitMenuOption,
   columnType,
   title,
@@ -33,11 +32,11 @@ export default function({
   open,
   handleMenuOpenClose,
 }: INestedMenuProps) {
-  const [anchorEl2, setAnchorEl2] = useState(null);
-  const [nestedOptions, setNestedOptions] = useState([]);
+  const [anchorEl2, setAnchorEl2] = useState<EventTarget | null>(null);
+  const [nestedOptions, setNestedOptions] = useState<IMenuItem[]>([]);
   const classes = useNestedMenuStyles();
 
-  const handleMenuClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IItem) => {
+  const handleMenuClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IMenuItem) => {
     setNestedOptions([]);
     event.preventDefault();
     event.stopPropagation();
@@ -70,15 +69,14 @@ export default function({
         }}
         className={classes.root}
       >
-        {Array.isArray(menuOptions) &&
-          menuOptions.map((item, index) => (
-            <MenuItemComponent
-              item={item}
-              columnType={columnType.toLowerCase()}
-              index={index}
-              onMenuClick={handleMenuClick}
-            />
-          ))}
+        {menuOptions?.map((eachOption, index) => (
+          <MenuItemComponent
+            item={eachOption}
+            columnType={columnType.toLowerCase()}
+            index={index}
+            onMenuClick={handleMenuClick}
+          />
+        ))}
         <MenuComponent
           anchorEl={anchorEl2}
           columnType={columnType.toLowerCase()}

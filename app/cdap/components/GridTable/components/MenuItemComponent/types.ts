@@ -13,16 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IItem {
+
+export interface IMenuItem {
   label: string;
   supported_dataType: string[];
   value: string;
-  options?: [];
+  options?: IMenuItem[];
 }
 
 export interface IMenuItemComponentProps {
-  item: IItem;
+  item: IMenuItem;
   index: number;
-  onMenuClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IItem) => void;
+  onMenuClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
 }

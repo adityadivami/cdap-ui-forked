@@ -14,13 +14,11 @@
  * the License.
  */
 
-import { ReactNode, SVGProps } from 'react';
-
+import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 export interface INestedMenuProps {
-  icon: SVGProps<SVGElement>;
   submitMenuOption: (value: string, dataType: string[]) => void;
   columnType: string;
-  menuOptions: any;
+  menuOptions: IMenuItem[];
   title: string;
   anchorEl: HTMLElement;
   setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement>>;
