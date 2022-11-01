@@ -15,21 +15,37 @@
  */
 
 import { render } from '@testing-library/react';
+// import ParsingHeaderActionTemplate from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate';
+// import { PARSING } from 'components/ParsingDrawer/constants';
+import history from 'services/history';
 import React from 'react';
-import DrawerWidget from '..';
+import { Route, Router, Switch } from 'react-router';
+import DrawerWidget from 'components/DrawerWidget';
 
 describe('It should test DrawerWidget Component', () => {
   it('Should test whether DrawerWidget Component is rendered', () => {
+    const setDrawerStatus = jest.fn();
+    const closeClickHandler = () => {
+      setDrawerStatus(false);
+    };
     const container = render(
-      <DrawerWidget
-        headingText={'PARSING'}
-        openDrawer={false}
-        showDivider={true}
-        headerActionTemplate={<div />}
-        closeClickHandler={jest.fn()}
-        children={<div></div>}
-        showBackIcon={true}
-      />
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <DrawerWidget
+              headingText={''}
+              openDrawer={false}
+              closeClickHandler={function(): void {
+                throw new Error('Function not implemented.');
+              }} // headingText={PARSING}
+              // openDrawer={jest.fn}
+              // showDivider={true}
+              // headerActionTemplate={<ParsingHeaderActionTemplate />}
+              // closeClickHandler={closeClickHandler}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
     expect(container).toBeDefined();
   });

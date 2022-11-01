@@ -22,7 +22,7 @@ export const useStyles = makeStyles(() => {
       height: 'calc(100% - 100px)',
       display: 'flex',
       flexDirection: 'column',
-      padding: '0',
+      padding: 0,
     },
     addTransformationBodyWrapperStyles: {
       height: 'calc(100% - 40px)',
@@ -72,7 +72,7 @@ export const useStyles = makeStyles(() => {
     infoIconTextStyles: {
       marginLeft: 5,
       width: 20,
-      height: '20px',
+      height: 20,
     },
     greenCheckIconStyles: {
       width: 20,
@@ -121,6 +121,8 @@ export const useStyles = makeStyles(() => {
       textTransform: 'none',
       marginBottom: 20,
       marginRight: 8,
+    },
+    buttonStyles: {
       '&:hover': {
         backgroundColor: '#3994FF',
       },

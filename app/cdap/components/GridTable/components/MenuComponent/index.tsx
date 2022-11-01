@@ -16,9 +16,9 @@
 
 import { Menu } from '@material-ui/core';
 import React from 'react';
-import MenuItemComponent from '../MenuItemComponent';
-import { useStyles } from './styles';
-import { IMenuComponentProps } from './types';
+import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
+import { useStyles } from 'components/GridTable/components/MenuComponent/styles';
+import { IMenuComponentProps } from 'components/GridTable/components/MenuComponent/types';
 
 export default function({
   anchorEl,
@@ -44,16 +44,16 @@ export default function({
         vertical: 'top',
         horizontal: 'left',
       }}
-      onClose={(e: any) => {
+      onClose={(e: Event) => {
         e.preventDefault();
         setAnchorEl(null);
       }}
       className={classes.root}
     >
-      {menuOptions.map((item, index) => (
+      {menuOptions?.map((eachOption, index) => (
         <MenuItemComponent
           columnType={columnType}
-          item={item}
+          item={eachOption}
           index={index}
           onMenuClick={submitOption}
         />

@@ -15,25 +15,23 @@
  */
 
 import React from 'react';
-import { useStyles } from '../styles';
+import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
-import { ISelectColumnCount } from './types';
+import { ISelectColumnCountProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 
-export default function({ selectedColumnsCount }: ISelectColumnCount) {
+export default function({ selectedColumnsCount }: ISelectColumnCountProps) {
   const classes = useStyles();
 
   return (
-    <div
-      className={classes.columnsCountTextStyles}
-      id="select-column-count"
-      data-testid="select-column-count"
-    >
+    <div className={classes.columnsCountTextStyles}>
       {selectedColumnsCount
         ? selectedColumnsCount > 10
           ? selectedColumnsCount
-          : `${T.translate('features.WranglerNewSelectCoulmnList.zero')}${selectedColumnsCount}`
-        : `${T.translate('features.WranglerNewSelectCoulmnList.no')}`}
-      &nbsp;{T.translate('features.WranglerNewAddTransformation.columnsSelected')}
+          : `${T.translate(
+              'features.WranglerNewUI.GridPage.selectColumnListPanel.zero'
+            )}${selectedColumnsCount}`
+        : `${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.no')}`}
+      &nbsp;{T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected')}
     </div>
   );
 }

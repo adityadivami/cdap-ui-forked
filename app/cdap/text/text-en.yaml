@@ -899,7 +899,7 @@ features:
         ignoreCase: Ignore case
         KEEP: Keep rows
         Placeholders:
-          CUSTOMCONDITION: 'E.g. < 30 || gender :: "Male"'
+          CUSTOMCONDITION: 'E.g. < 30 || gender == "Male"'
           TEXTCONTAINS: Enter contained value
           TEXTENDSWITH: Enter suffix
           TEXTEXACTLY: Enter value
@@ -1060,7 +1060,7 @@ features:
         ignoreCase: Ignore case
         if: If
         Placeholders:
-          CUSTOMCONDITION: 'E.g. {column} < 30 || gender :: "Male"'
+          CUSTOMCONDITION: 'E.g. {column} < 30 || gender == "Male"'
           TEXTCONTAINS: Enter contained value
           TEXTENDSWITH: Enter suffix
           TEXTEXACTLY: Enter value
@@ -3439,43 +3439,59 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
-  GridPage:
-    gridHeader:
-      ariaLabels:
-        functionsName: Functions Name Switch
-    transformationsToolbar:
-      labels:
-        undoIcon: 'Undo'
-        redoIcon: 'Redo'
-        nullIcon: 'Null'
-        invalidIcon: 'Invalid'
-        columnIcon: 'Column'
-        structureIcon: 'Structure'
-        fragmentIcon: 'Fragment'
-        securityIcon: 'Security'
-        mathIcon: 'Math'
-        gridIcon: 'Grid'
-        otherIcon: 'Other'
-        toggleDescription: 'Function names'
-  WranglerNewAddTransformation:
-    addTransformation: Add Transformation Step
-    applyStep: Apply Step
-    columnsSelected: columns selected
-    columns: Columns
-    dataQuality: Data Quality
-    done: Done
-    function: Function
-    nullValues: Null Values
-    quickSelect: Quick select by clicking a column on the grid/columns panel
-    removeRows: Remove rows
-    replaceRows: Replace rows
-    replaceWith: Replace with
-    selectColumn: Select column(s) to apply this function
-    selectCoulmn: Select column
-    selectMultiColumns: Select columns
-    selectAction: Select action to take
-  WranglerNewSelectCoulmnList:
-    noColumns: No columns to show
-    noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
-    no: No
-    zero: '0'
+  WranglerNewUI:
+    GridPage:
+      menuItems:
+        divider: divider
+        heading: heading
+      gridHeader:
+        ariaLabels:
+          functionsName: Functions Name Switch
+      toolbarIcons:
+        labels:
+          all: all
+          columnIcon: Column
+          fragmentIcon: Fragment
+          gridIcon: Grid
+          invalidIcon: Invalid
+          mathIcon: Math
+          nullIcon: 'Null'
+          otherIcon: Other
+          redoIcon: Redo
+          securityIcon: Security
+          structureIcon: Structure
+          toggleDescription: Function names
+          undoIcon: Undo
+      transformations:
+        options:
+          labels:
+            datatype:
+              string: string
+              boolean: boolean
+              integer: integer
+              long: long
+              short: short
+              float: float
+              double: double
+              decimal: decimal
+              bytes: bytes
+            menu:
+              changeDatatype: Change data type
+      addTransformationPanel:
+        applyStep: Apply Step
+        columnsSelected: columns selected
+        columns: Columns
+        dataQuality: Data Quality
+        done: Done
+        nullValues: Null Values
+        selectColumnPara: Select column(s) to apply this function
+        selectColumn: Select column
+        selectMultiColumns: Select columns
+      selectColumnListPanel:
+        columnsSelected: column selected
+        no: No
+        noColumns: No columns to show
+        noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
+        zero: '0' 
+
+              

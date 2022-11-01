@@ -14,8 +14,7 @@
  * the License.
  */
 
-import React from 'react';
-import { IExecuteAPIResponse } from './types';
+import { IExecuteAPIResponse } from 'components/GridTable/types';
 
 /**
  *
@@ -50,7 +49,7 @@ export const checkFrequentlyOccuredValues = (
   key: string
 ) => {
   if (gridData?.values && Array.isArray(gridData?.values)) {
-    const valueOfKey = gridData?.values?.map((el) => el[key]);
+    const valueOfKey = gridData?.values?.map((eachValue) => eachValue[key]);
     let mostFrequentItem: number = 1;
     let mostFrequentItemCount: number = 0;
     let mostFrequentItemValue: string = '';

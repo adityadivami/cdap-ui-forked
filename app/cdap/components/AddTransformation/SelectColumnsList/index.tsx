@@ -16,15 +16,16 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { useStyles } from '../styles';
-import { SearchIcon } from '../iconStore';
+import { useStyles } from 'components/AddTransformation/styles';
+import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
-import { ISelectColumnList } from './types';
-import { IHeaderNamesList } from '../types';
-import ColumnTable from '../ColumnTable';
-import { multipleColumnSelected } from '../constants';
-import SelectedColumnCountWidget from '../SelectedColumnCountWidget';
+import { ISelectColumnListProps } from 'components/AddTransformation/SelectColumnsList/types';
+import { IHeaderNamesList } from 'components/AddTransformation/types';
+import ColumnTable from 'components/AddTransformation/ColumnTable';
+import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
+import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -33,16 +34,18 @@ export default function({
   setSelectedColumns,
   dataQuality,
   functionName,
-}: ISelectColumnList) {
-  const [columns, setColumns] = useState(columnData as IHeaderNamesList[]);
-  const [selectedColumns, setSelectedColumn] = useState([] as IHeaderNamesList[]);
+}: ISelectColumnListProps) {
+  const [columns, setColumns] = useState<IHeaderNamesList[]>(columnData);
+  const [selectedColumns, setSelectedColumn] = useState<IHeaderNamesList[]>([]);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const classes = useStyles();
   const ref = useRef(null);
 
   useEffect(() => {
-    const multiSelect = multipleColumnSelected.filter((el) => el.value == functionName);
+    const multiSelect: IMultipleSelectedFunctionDetail[] = multipleColumnSelected?.filter(
+      (functionDetail: IMultipleSelectedFunctionDetail) => functionDetail.value === functionName
+    );
     if (multiSelect.length) {
       setIsSingleSelection(false);
     }
@@ -51,11 +54,15 @@ export default function({
   const columnsAsPerType: IHeaderNamesList[] | string[] =
     directiveFunctionSupportedDataType?.length > 0 &&
     directiveFunctionSupportedDataType?.includes('all')
-      ? directiveFunctionSupportedDataType?.filter((el) => el == 'all')
-      : columns?.filter((object1) => {
-          return directiveFunctionSupportedDataType?.some((object2) => {
-            return object2?.includes(object1?.type[0]?.toLowerCase());
-          });
+      ? directiveFunctionSupportedDataType?.filter(
+          (supportedType: string) => supportedType === 'all'
+        )
+      : columns?.filter((columnDetail: IHeaderNamesList) => {
+          return directiveFunctionSupportedDataType?.some(
+            (dataTypeCollection: string | string[]) => {
+              return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+            }
+          );
         });
 
   const onSingleSelection = (column: IHeaderNamesList) => {
@@ -73,17 +80,16 @@ export default function({
     } else {
       const indexOfUnchecked = selectedColumns.findIndex((el) => el.label === column.label);
       if (indexOfUnchecked > -1) {
-        const clone_columns = [...selectedColumns];
-        const remaining_col = clone_columns.splice(indexOfUnchecked, 1);
-        setSelectedColumns(clone_columns);
-        setSelectedColumn(clone_columns);
+        setSelectedColumns(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
+        setSelectedColumn(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
       }
     }
   };
 
   const handleDisableCheckbox = () => {
-    const multiSelect = multipleColumnSelected.filter(
-      (el) => el.value == functionName && el.isMoreThanTwo
+    const multiSelect: IMultipleSelectedFunctionDetail[] = multipleColumnSelected.filter(
+      (functionDetail: IMultipleSelectedFunctionDetail) =>
+        functionDetail.value === functionName && functionDetail.isMoreThanTwo
     );
     if (selectedColumns.length === 0 || selectedColumns.length < 2) {
       return false;
@@ -96,12 +102,11 @@ export default function({
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue: IHeaderNamesList[] =
-        Array.isArray(columnData) && columnData.length
-          ? columnData.filter((el) =>
-              el?.label.toLowerCase().includes(event.target.value.toLowerCase())
-            )
-          : [];
+      const columnValue: IHeaderNamesList[] = columnData.length
+        ? columnData.filter((columnDetail: IHeaderNamesList) =>
+            columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
+          )
+        : [];
       if (columnValue?.length) {
         setColumns(columnValue);
       } else {
@@ -120,22 +125,20 @@ export default function({
   return (
     <section className={classes.columnsCountTextStyles}>
       <div className={classes.selectColumnsHeaderStyles}>
-        <SelectedColumnCountWidget selectedColumnsCount={selectedColumns.length} />
+        <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
           <input
+            data-testid="input_id"
             className={focused ? classes.isFocused : classes.isBlurred}
             onChange={handleSearch}
             ref={ref}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            data-testid="search-column-name"
-            id="search-column-name"
           />
           <Box
             className={classes.searchInputAdornment}
-            data-testid="search-column-icon"
-            id="search-column-icon"
             onClick={handleFocus}
+            data-testid="click-handle-focus"
           >
             {SearchIcon}
           </Box>
@@ -145,19 +148,13 @@ export default function({
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
-            <Typography
-              data-testid="no-columns-to-show-title"
-              id="no-columns-to-show-title"
-              className={classes.mainHeaderMessage}
-            >
-              {T.translate('features.WranglerNewSelectCoulmnList.noColumns')}
+            <Typography className={classes.mainHeaderMessage}>
+              {T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.noColumns')}
             </Typography>
-            <Typography
-              data-testid="no-columns-to-show-subtitle"
-              id="no-columns-to-show-subtitle"
-              className={classes.subHeaderMessage}
-            >
-              {T.translate('features.WranglerNewSelectCoulmnList.noMatchColumnDatatype')}
+            <Typography className={classes.subHeaderMessage}>
+              {T.translate(
+                'features.WranglerNewUI.GridPage.selectColumnListPanel.noMatchColumnDatatype'
+              )}
             </Typography>
           </Box>
         </Box>

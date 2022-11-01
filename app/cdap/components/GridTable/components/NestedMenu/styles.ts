@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/core/styles';
+import { grey } from '@material-ui/core/colors';
 
 export const useNestedMenuStyles = makeStyles({
   divider: {
@@ -29,11 +30,11 @@ export const useNestedMenuStyles = makeStyles({
   },
   root: {
     '& .MuiMenuItem-root': {
-      padding: '6px 11px 6px 20px',
-      height: '33px',
+      padding: '6 11 6 20',
+      height: 33,
     },
     '& .MuiMenu-paper': {
-      width: '199px',
+      width: 199,
       top: '145px !important',
       maxHeight: '70% !important',
     },
@@ -46,17 +47,17 @@ export const useNestedMenuStyles = makeStyles({
       justifyContent: 'space-between',
     },
     '& .MuiList-padding': {
-      padding: '13px 0px',
+      padding: '13 0',
     },
   },
   tooltipToolbar: {
     background: '#616161',
     color: '#FFFFFF',
-    fontSize: '14px',
+    fontSize: 14,
   },
   arrowTooltip: {
     '&::before': {
-      backgroundColor: '#616161',
+      backgroundColor: grey[700],
     },
   },
 });

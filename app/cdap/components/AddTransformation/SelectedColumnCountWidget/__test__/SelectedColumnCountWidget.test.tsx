@@ -16,19 +16,19 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import SelectedColumnCountWidget from '..';
+import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 
 describe('It should test the SelectColumnsList Component', () => {
   it('should render the SelectColumnsList Component with selectedColumnsCount>10', () => {
     const container = render(<SelectedColumnCountWidget selectedColumnsCount={20} />);
-    expect(container).toBeDefined();
+    expect(container).toBeDefined;
   });
   it('should render the SelectColumnsList Component with selectedColumnsCount<10', () => {
     const container = render(<SelectedColumnCountWidget selectedColumnsCount={1} />);
-    expect(container).toBeDefined();
+    expect(container).toBeDefined;
   });
   it('should render the SelectColumnsList Component with no selectedColumnsCount', () => {
-    const container = render(<SelectedColumnCountWidget selectedColumnsCount={20} />);
-    expect(container).toBeDefined();
+    const container = render(<SelectedColumnCountWidget selectedColumnsCount={0} />);
+    expect(container).toBeDefined;
   });
 });

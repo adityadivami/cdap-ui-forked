@@ -16,10 +16,10 @@
 
 import React from 'react';
 import { TableCell, TableRow, Typography } from '@material-ui/core';
-import { useStyles } from '../../../styles';
-import InputWidget from '../InputWidgets';
-import DataQualityProgress from '../../../CircularProgressBar';
-import { ITableRowProps } from '../../types';
+import { useStyles } from 'components/AddTransformation/styles';
+import InputWidget from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
+import DataQualityProgress from 'components/AddTransformation/CircularProgressBar';
+import { ITableRowProps } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({
   onSingleSelection,
@@ -52,8 +52,10 @@ export default function({
         <Typography className={classes.recipeStepsActionTypeStyles}>{eachColumn.label}</Typography>
         <Typography className={classes.recipeStepsActionTypeStyles}>{eachColumn.type}</Typography>
       </TableCell>
-      <TableCell className={`${classes.recipeStepsTableRowStyles} ${classes.circularBarCell}`}>
-        {dataQualityValue?.length && <DataQualityProgress value={dataQualityValue[index]?.value} />}
+      <TableCell className={`${classes.recipeStepsTableRowStyles}`}>
+        {dataQualityValue?.length && (
+          <DataQualityProgress value={Number(dataQualityValue[index]?.value)} />
+        )}
       </TableCell>
     </TableRow>
   );

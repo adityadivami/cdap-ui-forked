@@ -16,11 +16,11 @@
 
 import { Box, Container, Drawer } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { useStyles } from './styles';
+import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import DrawerWidgetHeading from './DrawerWidgetHeading';
-import { IDrawerWidgetProps } from './types';
-import { BackIcon } from './iconStore';
+import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
+import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
+import { BackIcon } from 'components/DrawerWidget/iconStore';
 
 export default function({
   headingText,
@@ -43,13 +43,13 @@ export default function({
               <Box
                 className={classes.backIconClass}
                 onClick={closeClickHandler}
-                data-testid="back-icon"
+                data-testid="box-id"
               >
                 {BackIcon}
               </Box>
             )}
             &nbsp;
-            <DrawerWidgetHeading headingText={headingText} />
+            <DrawerWidgetHeading headingText={headingText.toString()} />
           </div>
           <Box className={classes.headerRightStyles}>
             {headerActionTemplate && <div>{headerActionTemplate}</div>}

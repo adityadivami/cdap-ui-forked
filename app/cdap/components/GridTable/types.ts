@@ -25,9 +25,18 @@ export interface IRecords {
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
 }
-
+interface IGeneralObjectRecord {
+  [key: string]: number | string;
+}
+interface IGeneral {
+  general?: IGeneralObjectRecord;
+  types?: IGeneralObjectRecord;
+}
+export interface IStatistics {
+  [key: string]: IGeneral;
+}
 interface ISummary {
-  statistics: IDataQuality;
+  statistics: IStatistics;
   validations: IRecords;
 }
 
@@ -80,4 +89,13 @@ export interface IApiPayload {
   payload: IRecords;
   requestBody: IRequestBody;
   gridParams: IGridParams;
+}
+
+export interface ICellData {
+  [key: string]: string;
+}
+
+export interface IMissingList {
+  name: string;
+  values: Record<string, string>;
 }

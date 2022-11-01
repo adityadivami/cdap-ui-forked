@@ -14,9 +14,16 @@
  * the License.
  */
 
+export interface IMenuItem {
+  label: string;
+  supported_dataType: string[];
+  value: string;
+  options?: IMenuItem[];
+}
+
 export interface IMenuItemComponentProps {
-  item;
-  index: any;
-  onMenuClick: (e: any, item: any) => void;
+  item: IMenuItem;
+  index: number;
+  onMenuClick: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
 }

@@ -13,16 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-export const INVALID_ICON_OPTIONS = [
-  {
-    value: 'remove-invalid',
-    label: 'Remove invalid',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'replace-invalid',
-    label: 'Replace invalid',
-    supported_dataType: ['all'],
-  },
-];
+export interface ITransformationToolBarProps {
+  columnType: string;
+  submitMenuOption: (value: string, dataType: string[]) => void;
+  setShowBreadCrumb: React.Dispatch<React.SetStateAction<boolean>>;
+  showBreadCrumb: boolean;
+}

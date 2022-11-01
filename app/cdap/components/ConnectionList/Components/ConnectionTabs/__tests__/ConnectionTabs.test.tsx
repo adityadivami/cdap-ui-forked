@@ -59,6 +59,21 @@ describe('Test ConnectionsTabs', () => {
     const ele = screen.getByTestId(/connection-tabs/i);
     expect(ele).toBeInTheDocument();
   });
+
+  it('Should render TabLabelCanBrowse with connectorTypes and count', () => {
+    render(
+      <ConnectionsTabs
+        tabsData={mockTabsDataWithBrowseIndex}
+        handleChange={() => null}
+        value="apple"
+        index={0}
+        connectionId={undefined}
+        setIsErrorOnNoWorkSpace={jest.fn()}
+      />
+    );
+    const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
+    expect(ele[0]).toBeInTheDocument();
+  });
 });
 
 describe('Should test whether handleChange function is triggered or not', () => {

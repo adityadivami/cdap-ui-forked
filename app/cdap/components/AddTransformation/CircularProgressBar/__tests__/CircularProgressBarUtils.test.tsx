@@ -14,33 +14,11 @@
  * the License.
  */
 
-export const OTHER_OPTIONS = [
-  {
-    value: 'define-variable',
-    label: 'Define variable',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'set-counter',
-    label: 'Set counter',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'send-to-error',
-    label: 'Send to error',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'customTransform',
-    label: 'Custom Transform',
-    supported_dataType: ['all'],
-  },
-  {
-    label: 'Character count',
-    value: 'CHARCOUNT',
-    sign: null,
-    inputRequired: true,
-    component: 'Calculate',
-    supported_dataType: ['string'],
-  },
-];
+import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
+import { columnList, statistics } from 'components/AddTransformation/CircularProgressBar/mock/mock';
+
+describe('Should mock prepareDataQualtiy function', () => {
+  it('should mock prepareDataQualtiy function', () => {
+    getDataQuality(statistics, columnList);
+  });
+});

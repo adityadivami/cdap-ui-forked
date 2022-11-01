@@ -24,11 +24,11 @@ export const useStyles = makeStyles({
     fontSize: 14,
     fontWeight: 600,
     color: '#5F6368',
-    padding: '0px 21px',
+    padding: '0 21',
   },
   root: {
     '& .MuiMenuItem-root': {
-      padding: '6px 11px 6px 20px',
+      padding: '6 11 6 20',
       height: 33,
     },
     '& .MuiMenu-paper': {
@@ -36,14 +36,14 @@ export const useStyles = makeStyles({
     },
     '& .MuiMenu-list': {
       color: '#5F6368',
-      border: '1px solid #DADCE0',
+      border: '1 solid #DADCE0',
     },
     '& .MuiListItem-button': {
       display: 'flex',
       justifyContent: 'space-between',
     },
     '& .MuiList-padding': {
-      padding: '13px 0px',
+      padding: '13 0',
     },
   },
 });

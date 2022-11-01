@@ -14,38 +14,40 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import React, { ChangeEvent } from 'react';
-import InputWidgets from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
+import { render } from '@testing-library/react';
+import React from 'react';
+import ColumnTable from 'components/AddTransformation/ColumnTable';
 
-describe('It should render ', () => {
-  it('Should render component with isSingleSelection false', () => {
+describe('It should test FunctionNameWidget Component', () => {
+  it('Should render the FunctionNameWidget Component', () => {
     const container = render(
-      <InputWidgets
-        isSingleSelection={false}
-        selectedColumns={[]}
+      <ColumnTable
+        columns={[{ name: 'a', type: [0] }]}
+        directiveFunctionSupportedDataType={['all']}
         onSingleSelection={() => jest.fn()}
-        eachColumn={undefined}
+        selectedColumns={[]}
+        dataQualityValue={[]}
+        isSingleSelection={false}
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
       />
     );
-
     expect(container).toBeDefined();
   });
 
-  it('Should render component with isSingleSelection true', () => {
+  it('Should render the FunctionNameWidget Component', () => {
     const container = render(
-      <InputWidgets
-        isSingleSelection={true}
-        selectedColumns={[]}
+      <ColumnTable
+        columns={[{ name: 'a', type: ['test'], label: 'test' }]}
+        directiveFunctionSupportedDataType={['test']}
         onSingleSelection={() => jest.fn()}
-        eachColumn={undefined}
+        selectedColumns={[]}
+        dataQualityValue={[]}
+        isSingleSelection={false}
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
       />
     );
-
     expect(container).toBeDefined();
   });
 });

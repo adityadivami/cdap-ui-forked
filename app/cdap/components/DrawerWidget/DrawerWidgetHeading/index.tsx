@@ -14,17 +14,18 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from '../styles';
-import { UnderLine } from '../iconStore';
+import { useStyles } from 'components/DrawerWidget/styles';
+import { UnderLine } from 'components/DrawerWidget/iconStore';
+import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
 
-export default function({ headingText }) {
+export default function({ headingText }: IDrawerWidgetHeadingProps) {
   const classes = useStyles();
 
   return (
     <Box className={classes.headingStyles}>
-      <div className={classes.headingTextStyles}>{headingText}</div>
+      <Typography className={classes.headingTextStyles}>{headingText}</Typography>
       {UnderLine}
     </Box>
   );

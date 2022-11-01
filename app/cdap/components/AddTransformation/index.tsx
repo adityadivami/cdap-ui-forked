@@ -18,10 +18,16 @@ import { Button, Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
-import SelectColumnsList from './SelectColumnsList';
-import { useStyles } from './styles';
-import { IAddTransformationProp, IHeaderNamesList, IDataQuality } from './types';
-import { prepareDataQualtiy } from './CircularProgressBar/utils';
+import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
+import { useStyles } from 'components/AddTransformation/styles';
+import {
+  IAddTransformationProps,
+  IHeaderNamesList,
+  IMultipleSelectedFunctionDetail,
+  IObject,
+} from 'components/AddTransformation/types';
+import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
+import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import FunctionNameWidget from './FunctionNameWidget';
 import SelectColumnsWidget from './SelectColumnsWidget';
 import SelectedColumnCountWidget from './SelectedColumnCountWidget';
@@ -35,14 +41,12 @@ export default function({
   missingDataList,
   callBack,
   applyTransformation,
-}: IAddTransformationProp) {
+}: IAddTransformationProps) {
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
-  const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
+  const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
-  const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
-
+  const [dataQualityValue, setDataQualityValue] = useState<IObject[]>([]);
   const classes = useStyles();
-
   const closeClickHandler = () => {
     callBack();
     setDrawerStatus(false);
@@ -50,12 +54,14 @@ export default function({
 
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
+    callBack();
     setDrawerStatus(true);
   };
 
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
     setSelectedColumns([]);
+    callBack();
   };
 
   const handleSelectColumn = () => {
@@ -69,13 +75,33 @@ export default function({
   };
 
   useEffect(() => {
-    const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(missingDataList, columnData);
+    const getPreparedDataQuality: IObject[] = getDataQuality(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
+  const enableDoneButton = () => {
+    if (
+      multipleColumnSelected.filter(
+        (functionNameDetail: IMultipleSelectedFunctionDetail) =>
+          functionNameDetail.value === functionName && !functionNameDetail.isMoreThanTwo
+      )?.length
+    ) {
+      return selectedColumns?.length === 2 ? false : true;
+    } else if (
+      multipleColumnSelected.filter(
+        (functionNameDetail: IMultipleSelectedFunctionDetail) =>
+          functionNameDetail.value === functionName && functionNameDetail.isMoreThanTwo
+      )?.length
+    ) {
+      return selectedColumns?.length >= 1 ? false : true;
+    } else {
+      return selectedColumns?.length >= 1 ? false : true;
+    }
+  };
+
   return (
     <Fragment>
-      <DrawerWidget
+    <DrawerWidget
         headingText={T.translate('features.WranglerNewAddTransformation.addTransformation')}
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
@@ -101,7 +127,9 @@ export default function({
         </Container>
       </DrawerWidget>
       <DrawerWidget
-        headingText={T.translate('features.WranglerNewAddTransformation.selectColumn')}
+        headingText={T.translate(
+          'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara'
+        )}
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
@@ -110,7 +138,7 @@ export default function({
           <div className={classes.addTransformationBodyWrapperStyles}>
             <SelectColumnsList
               columnData={columnData}
-              selectedColumnsCount={selectedColumns?.length}
+              selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={dataQualityValue}
               directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
@@ -122,7 +150,7 @@ export default function({
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
             variant="contained"
-            disabled={selectedColumns?.length ? false : true}
+            disabled={enableDoneButton()}
             dataTestId="done-step-button"
           />
         </Container>

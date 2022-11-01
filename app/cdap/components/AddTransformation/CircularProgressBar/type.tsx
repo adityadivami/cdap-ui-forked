@@ -14,4 +14,6 @@
  * the License.
  */
 
-export const MISSING_NULL = 'Missing/Null';
+export interface ICircularProgressBarProps {
+  value: number;
+}

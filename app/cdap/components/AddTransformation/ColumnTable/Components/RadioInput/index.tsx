@@ -15,7 +15,7 @@
  */
 import React from 'react';
 import { Radio } from '@material-ui/core';
-import { IRadioInputProps } from '../../types';
+import { IRadioInputProps } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({ selectedColumns, onSingleSelection, eachColumn }: IRadioInputProps) {
   return (
@@ -24,13 +24,9 @@ export default function({ selectedColumns, onSingleSelection, eachColumn }: IRad
         color="primary"
         onClick={() => onSingleSelection(eachColumn)}
         checked={
-          Array.isArray(selectedColumns) &&
-          selectedColumns?.filter((el) => el.label == eachColumn.label).length
-            ? true
-            : false
+          selectedColumns?.filter((el) => el.label === eachColumn.label).length ? true : false
         }
-        data-testid="transformation-radio-select-columns"
-        id="transformation-radio-select-columns"
+        data-testid="radio-input-radio"
       />
     </>
   );

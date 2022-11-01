@@ -15,9 +15,10 @@
  */
 
 import { Typography } from '@material-ui/core';
-import React, { useState } from 'react';
-import { useStyles } from './styles';
+import React from 'react';
+import { useStyles } from 'components/AddTransformation/CircularProgressBar/styles';
 import styled from 'styled-components';
+import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -28,36 +29,29 @@ const ArcContainer = styled(Typography)`
   border-radius: 50%;
   box-sizing: border-box;
   border: 4px solid #dbdbdb;
-  border-bottom-color: ${(props) => (props.value < 100 ? '#E97567' : '#8BCC74')};
-  border-right-color: ${(props) => (props.value < 100 ? '#E97567' : '#8BCC74')};
-  transform: ${(props) => `rotate(${45 + parseInt(props.value) * 1.8}deg)` || 'rotate(0deg)'};
+  border-bottom-color: ${({ value }) => (value < 100 ? '#E97567' : '#8BCC74')};
+  border-right-color: ${({ value }) => (value < 100 ? '#E97567' : '#8BCC74')};
+  transform: ${({ value }) => `rotate(${45 + value * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
-export default function({ value }: { value: string }) {
+export default function({ value }: ICircularProgressBarProps) {
   const classes = useStyles();
 
   return (
     <>
       <Typography component="div" className={classes.progress}>
-        <Typography
-          data-testid="data-quality-percent-arc"
-          id="data-quality-percent-arc"
-          component="div"
-          className={classes.barOverflow}
-        >
-          <ArcContainer value={parseInt(value)}></ArcContainer>
+        <Typography component="div" className={classes.barOverflow}>
+          <ArcContainer value={Math.round(value)}></ArcContainer>
         </Typography>
         <Typography
-          data-testid="data-quality-percent"
-          id="data-quality-percent"
           component="span"
           className={
-            parseInt(value) < 100
+            Math.round(value) < 100
               ? `${classes.redText} ${classes.value}`
               : `${classes.greenText} ${classes.value}`
           }
         >
-          {Number(value).toFixed(0)}%
+          {Math.round(value)}%
         </Typography>
       </Typography>
     </>

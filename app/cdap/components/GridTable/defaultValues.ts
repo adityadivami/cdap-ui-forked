@@ -14,35 +14,9 @@
  * the License.
  */
 
-export const COLUMN_OPTIONS = [
+export const missingItemDefaultValue = [
   {
-    value: 'copyColumn',
-    label: 'Copy column',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'delete',
-    label: 'Delete column',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'keep',
-    label: 'Keep column',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'rename-column',
-    label: 'Rename',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'join-columns',
-    label: 'Join two column',
-    supported_dataType: ['all'],
-  },
-  {
-    value: 'swap-columns',
-    label: 'Swap two column names',
-    supported_dataType: ['all'],
+    label: 'Invalid',
+    count: '0',
   },
 ];

@@ -14,58 +14,46 @@
  * the License.
  */
 
-import { IconButton, Menu, Tooltip } from '@material-ui/core';
+import { Menu } from '@material-ui/core';
 import React, { useState } from 'react';
-import MenuComponent from '../MenuComponent';
-import MenuItemComponent from '../MenuItemComponent';
-import { useNestedMenuStyles } from './styles';
-import { INestedMenuProps } from './types';
+import MenuComponent from 'components/GridTable/components/MenuComponent';
+import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
+import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
+import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
+import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
 
 export default function({
   menuOptions,
-  icon,
   submitMenuOption,
   columnType,
   title,
+  anchorEl,
+  setAnchorEl,
+  open,
+  handleMenuOpenClose,
 }: INestedMenuProps) {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorEl2, setAnchorEl2] = useState(null);
-  const open = Boolean(anchorEl);
-  const [nestedOptions, setNestedOptions] = useState([]);
+  const [anchorEl2, setAnchorEl2] = useState<EventTarget | null>(null);
+  const [nestedOptions, setNestedOptions] = useState<IMenuItem[]>([]);
   const classes = useNestedMenuStyles();
 
-  const handleMenuClick = (event: any, item: any) => {
+  const handleMenuClick = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    menuItem: IMenuItem
+  ) => {
     setNestedOptions([]);
     event.preventDefault();
     event.stopPropagation();
-    if (item.options) {
-      setNestedOptions(item.options);
+    if (menuItem?.options) {
+      setNestedOptions(menuItem.options);
       setAnchorEl2(event.currentTarget);
     } else {
-      submitMenuOption(item.value, item.supported_dataType);
+      submitMenuOption(menuItem.value, menuItem.supported_dataType);
       setAnchorEl(null);
+      handleMenuOpenClose(title);
     }
   };
   return (
     <>
-      <Tooltip
-        title={title}
-        classes={{
-          tooltip: classes.tooltipToolbar,
-          arrow: classes.arrowTooltip,
-        }}
-        arrow
-      >
-        <IconButton
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setAnchorEl(e.currentTarget);
-          }}
-        >
-          {icon}
-        </IconButton>
-      </Tooltip>
       <Menu
         id="parent-menu"
         keepMounted
@@ -74,9 +62,9 @@ export default function({
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-        onClose={(e) => {
-          //   e.preventDefault();
+        onClose={() => {
           setAnchorEl(null);
+          handleMenuOpenClose(title);
         }}
         onClick={(e) => {
           e.preventDefault();
@@ -84,15 +72,14 @@ export default function({
         }}
         className={classes.root}
       >
-        {Array.isArray(menuOptions) &&
-          menuOptions.map((item, index) => (
-            <MenuItemComponent
-              item={item}
-              columnType={columnType.toLowerCase()}
-              index={index}
-              onMenuClick={handleMenuClick}
-            />
-          ))}
+        {menuOptions?.map((eachOption, index) => (
+          <MenuItemComponent
+            item={eachOption}
+            columnType={columnType.toLowerCase()}
+            index={index}
+            onMenuClick={handleMenuClick}
+          />
+        ))}
         <MenuComponent
           anchorEl={anchorEl2}
           columnType={columnType.toLowerCase()}
@@ -102,6 +89,7 @@ export default function({
             e.preventDefault();
             e.stopPropagation();
             setAnchorEl(null);
+            handleMenuOpenClose(title);
             setAnchorEl2(null);
             submitMenuOption(item.value, item.supported_dataType);
           }}

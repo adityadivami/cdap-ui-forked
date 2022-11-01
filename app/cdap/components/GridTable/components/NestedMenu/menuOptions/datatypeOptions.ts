@@ -13,51 +13,88 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import T from 'i18n-react';
 
 export const DATATYPE_OPTIONS = [
   {
     value: 'string',
-    label: 'string',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.string'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
   {
     value: 'boolean',
-    label: 'boolean',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.boolean'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
   {
     value: 'integer',
-    label: 'integer',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.integer'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
   {
     value: 'long',
-    label: 'long',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.long'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
   {
     value: 'short',
-    label: 'short',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.short'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
   {
     value: 'float',
-    label: 'float',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.float'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
   {
     value: 'double',
-    label: 'double',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.double'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
   {
     value: 'decimal',
-    label: 'decimal',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.decimal'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
   {
     value: 'bytes',
-    label: 'bytes',
-    supported_dataType: ['all'],
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.bytes'
+    ).toString(),
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
   },
 ];

@@ -14,15 +14,7 @@
  * the License.
  */
 
-export const KEBAB_GRID_PAGE_OPTION = [
-  {
-    label: 'Ingest Data',
-    value: 'ingest-data',
-    supported_dataType: ['all'],
-  },
-  {
-    label: 'View Schema',
-    value: 'view-schema',
-    supported_dataType: ['all'],
-  },
-];
+export interface IFunctionNameToggleProps {
+  setIsShowName: React.Dispatch<React.SetStateAction<boolean>>;
+  isShowNames: boolean;
+}

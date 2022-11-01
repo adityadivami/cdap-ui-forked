@@ -15,147 +15,178 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import {
-  mockColumnData,
-  mockColumnDataForColumnList,
-  mockDataQualityValue,
-  mockDirectiveFunctionSupportedDataType,
-} from 'components/AddTransformation/mock/mockDataForAddTransformation';
+import history from 'services/history';
 import React from 'react';
-import SelectColumnsList from '..';
+import { Route, Router, Switch } from 'react-router';
+import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
 
 describe('It should test the SelectColumnsList Component', () => {
-  it('Should render the SelectColumnsList Component with functionName "uppercase" ', () => {
+  it('should render the SelectColumnsList Component', () => {
     const container = render(
-      <SelectColumnsList
-        directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
-        selectedColumnsCount={1}
-        columnData={mockColumnDataForColumnList}
-        setSelectedColumns={jest.fn()}
-        dataQuality={mockDataQualityValue}
-        functionName={'uppercase'}
-      />
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <SelectColumnsList
+              selectedColumnsCount={1}
+              columnData={[
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+              ]}
+              setSelectedColumns={() => jest.fn()}
+              dataQuality={[]}
+              directiveFunctionSupportedDataType={[]}
+              functionName={''}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
-    expect(container).toBeDefined();
-  });
-
-  it('Should render the SelectedColumnList Component with functionName "delete" ', () => {
-    const container = render(
-      <SelectColumnsList
-        directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
-        selectedColumnsCount={1}
-        columnData={mockColumnDataForColumnList}
-        setSelectedColumns={jest.fn()}
-        dataQuality={mockDataQualityValue}
-        functionName={'delete'}
-      />
-    );
-    expect(container).toBeDefined();
-  });
-
-  it('Should render the SelectedColumnList Component with functionName "delete" ', () => {
-    const container = render(
-      <SelectColumnsList
-        directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
-        selectedColumnsCount={1}
-        columnData={mockColumnData}
-        setSelectedColumns={jest.fn()}
-        dataQuality={mockDataQualityValue}
-        functionName={'delete'}
-      />
-    );
-    expect(container).toBeDefined();
-  });
-
-  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the multiple selection function', () => {
-    const mockSetSelected = jest.fn();
-    const container = render(
-      <SelectColumnsList
-        selectedColumnsCount={0}
-        columnData={[
-          { label: 'hello', type: ['a', 'b'], name: 'test' },
-          { label: 'hello', type: ['a', 'b'], name: 'test' },
-        ]}
-        setSelectedColumns={mockSetSelected}
-        dataQuality={[
-          { label: 'hello', value: '' },
-          { label: 'world', value: '' },
-        ]}
-        directiveFunctionSupportedDataType={['TEST', 'all']}
-        functionName={'join-columns'}
-      />
-    );
-    const ele = screen.getAllByTestId('transformation-checkbox-select-multiple-columns');
-    fireEvent.click(ele[0], { target: { checked: true } });
-    fireEvent.click(ele[0], { target: { checked: false } });
     expect(container).toBeDefined;
   });
-
-  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the single selection function', () => {
-    const mockSetSelected = jest.fn();
-    const container = render(
-      <SelectColumnsList
-        selectedColumnsCount={0}
-        columnData={[
-          { label: 'hello', type: ['a', 'b'], name: 'test' },
-          { label: 'hello', type: ['a', 'b'], name: 'test' },
-        ]}
-        setSelectedColumns={mockSetSelected}
-        dataQuality={[
-          { label: 'hello', value: '' },
-          { label: 'world', value: '' },
-        ]}
-        directiveFunctionSupportedDataType={['TEST', 'all']}
-        functionName={''}
-      />
+  it('should render the SelectColumnsList Component with some input value along with label and null and trigger input ', () => {
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <SelectColumnsList
+              columnData={[]}
+              selectedColumnsCount={0}
+              setSelectedColumns={jest.fn()}
+              dataQuality={[
+                { label: 'hello', value: '' },
+                { label: 'world', value: '' },
+              ]}
+              directiveFunctionSupportedDataType={['all', 'test']}
+              functionName={''}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
-    const ele = screen.getAllByTestId('transformation-radio-select-columns');
-    fireEvent.click(ele[0], { target: { checked: true } });
+
+    const inputSearchElement = screen.getByTestId('input_id');
+    fireEvent.change(inputSearchElement, { target: { value: '123' } });
+    fireEvent.change(inputSearchElement, { target: { value: 'hello' } });
+    fireEvent.change(inputSearchElement, { target: { value: null } });
+
+    const searchIconElement = screen.getByTestId(/click-handle-focus/i);
+    fireEvent.click(searchIconElement);
+    expect(searchIconElement).toBeInTheDocument();
+  });
+
+  it('should render the SelectColumnsList Component with some input value along with label and null', () => {
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <SelectColumnsList
+              columnData={[{ label: 'hello', type: ['test'], name: 'hello' }]}
+              selectedColumnsCount={1}
+              setSelectedColumns={jest.fn()}
+              dataQuality={[
+                { label: 'hello', value: '' },
+                { label: 'world', value: '' },
+              ]}
+              directiveFunctionSupportedDataType={['test']}
+              functionName={'join-columns'}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+
+    const inputSearchElement = screen.getByTestId('input_id');
+    fireEvent.change(inputSearchElement, { target: { value: '123' } });
+    fireEvent.change(inputSearchElement, { target: { value: 'hello' } });
+    fireEvent.change(inputSearchElement, { target: { value: null } });
+
+    const searchIconElement = screen.getByTestId(/click-handle-focus/i);
+    fireEvent.click(searchIconElement);
     expect(container).toBeDefined;
   });
 
   it('should render the SelectColumnsList Component with some input value along with label and null', () => {
     const getSelectedColumns = jest.fn();
     const container = render(
-      <SelectColumnsList
-        columnData={[]}
-        selectedColumnsCount={0}
-        setSelectedColumns={getSelectedColumns}
-        dataQuality={[
-          { label: 'hello', value: '' },
-          { label: 'world', value: '' },
-        ]}
-        directiveFunctionSupportedDataType={['all', 'test']}
-        functionName={''}
-      />
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <SelectColumnsList
+              columnData={[]}
+              selectedColumnsCount={0}
+              setSelectedColumns={getSelectedColumns}
+              dataQuality={[
+                { label: 'hello', value: '' },
+                { label: 'world', value: '' },
+              ]}
+              directiveFunctionSupportedDataType={['all', 'test']}
+              functionName={''}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
-    const inputEle = screen.getByTestId('search-column-name');
-    fireEvent.change(inputEle, { target: { value: '123' } });
+
+    const inputSearchElement = screen.getByTestId('input_id');
+    fireEvent.change(inputSearchElement, { target: { value: '123' } });
+    expect(container).toBeDefined;
+  });
+  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the single selection function', () => {
+    const mockSetSelected = jest.fn();
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <SelectColumnsList
+              selectedColumnsCount={0}
+              columnData={[
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+              ]}
+              setSelectedColumns={mockSetSelected}
+              dataQuality={[
+                { label: 'hello', value: '' },
+                { label: 'world', value: '' },
+              ]}
+              directiveFunctionSupportedDataType={['TEST', 'all']}
+              functionName={''}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    const radioInputElement = screen.getAllByTestId('radio-input-radio');
+    fireEvent.click(radioInputElement[0], { target: { checked: true } });
     expect(container).toBeDefined;
   });
 
-  it('should render the SelectColumnsList Component with some input value along with label and null', () => {
+  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the multiple selection function', () => {
+    const mockSetSelected = jest.fn();
     const container = render(
-      <SelectColumnsList
-        columnData={[{ label: 'hello', type: ['test'], name: 'hello' }]}
-        selectedColumnsCount={1}
-        setSelectedColumns={jest.fn()}
-        dataQuality={[
-          { label: 'hello', value: '' },
-          { label: 'world', value: '' },
-        ]}
-        directiveFunctionSupportedDataType={['test']}
-        functionName={'join-columns'}
-      />
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <SelectColumnsList
+              selectedColumnsCount={0}
+              columnData={[
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+                { label: 'hello', type: ['a', 'b'], name: 'test' },
+              ]}
+              setSelectedColumns={mockSetSelected}
+              dataQuality={[
+                { label: 'hello', value: '' },
+                { label: 'world', value: '' },
+              ]}
+              directiveFunctionSupportedDataType={['TEST', 'all']}
+              functionName={'join-columns'}
+            />
+          </Route>
+        </Switch>
+      </Router>
     );
-
-    const inputEle = screen.getByTestId('search-column-name');
-    fireEvent.change(inputEle, { target: { value: '123' } });
-    fireEvent.change(inputEle, { target: { value: 'hello' } });
-    fireEvent.change(inputEle, { target: { value: null } });
-
-    const ele = screen.getByTestId(/search-column-icon/i);
-    fireEvent.click(ele);
+    const checkboxInputElement = screen.getAllByTestId('check-box-input-checkbox');
+    fireEvent.click(checkboxInputElement[0], { target: { checked: true } });
+    fireEvent.click(checkboxInputElement[0], { target: { checked: false } });
     expect(container).toBeDefined;
   });
 });

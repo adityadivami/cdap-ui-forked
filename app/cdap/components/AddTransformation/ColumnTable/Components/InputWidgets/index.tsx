@@ -14,9 +14,9 @@
  * the License.
  */
 import React from 'react';
-import RadioInput from '../RadioInput';
-import CheckboxInput from '../CheckboxInput';
-import { IInputWidgetProps } from '../../types';
+import RadioInput from 'components/AddTransformation/ColumnTable/Components/RadioInput';
+import CheckboxInput from 'components/AddTransformation/ColumnTable/Components/CheckboxInput';
+import { IInputWidgetProps } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({
   isSingleSelection,

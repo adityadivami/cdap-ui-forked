@@ -16,7 +16,7 @@
 
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import { ITypographyTextComponentProps } from './types';
+import { ITypographyTextComponentProps } from 'components/GridTable/components/Typography/types';
 
 export default function({ className, label }: ITypographyTextComponentProps) {
   return (

@@ -14,37 +14,26 @@
  * the License.
  */
 
-import { IHeaderNamesList, IDataQuality, IRecords } from '../types';
+import { IHeaderNamesList, IObject } from 'components/AddTransformation/types';
+import { IStatistics } from 'components/GridTable/types';
 
-export const prepareDataQualtiy = (statistics: IDataQuality, columnList: IHeaderNamesList[]) => {
-  const dataQualityToArray: Array<Array<string | IRecords>> = Object.entries(statistics);
-  const dataQuality = [] as IDataQuality[];
-  columnList.map((columnName: IHeaderNamesList) => {
-    dataQualityToArray.forEach(([key, value]) => {
-      if (columnName.name == key) {
-        const generalValues: Array<Array<
-          string | number | boolean | IRecords | any
-        >> = Object.entries(value);
-        generalValues.forEach(([vKey, vValue]) => {
-          if (vKey == 'general') {
-            console.log(vValue.null);
-            if (vValue.null) {
-              const nullCount = vValue.null || 0;
-              const totalNullEmpty = nullCount;
-              dataQuality.push({
-                label: key,
-                value: totalNullEmpty,
-              });
-            } else {
-              dataQuality.push({
-                label: key,
-                value: '0',
-              });
-            }
-          }
+export const getDataQuality = (statistics: IStatistics, columnList: IHeaderNamesList[]) => {
+  const dataQuality: IObject[] = [];
+  columnList?.length &&
+    columnList?.forEach((columnName: IHeaderNamesList) => {
+      const generalValues: IObject = statistics[columnName.name].general;
+      if (generalValues.null) {
+        const nullCount = generalValues.null || 0;
+        dataQuality.push({
+          label: columnName.name,
+          value: nullCount,
+        });
+      } else {
+        dataQuality.push({
+          label: columnName.name,
+          value: '0',
         });
       }
     });
-  });
   return dataQuality;
 };

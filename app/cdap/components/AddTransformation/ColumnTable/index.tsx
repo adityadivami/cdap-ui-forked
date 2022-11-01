@@ -24,10 +24,10 @@ import {
   TableRow,
 } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from '../styles';
+import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
-import TableRowWidget from './Components/TableRow';
-import { IColumnTableProps } from './types';
+import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
+import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
 
 export default function({
   columns,
@@ -43,41 +43,34 @@ export default function({
 
   return (
     <TableContainer component={Box}>
-      <Table
-        aria-label="recipe steps table"
-        className={classes.tabledisplayStyles}
-        data-testid="select-column-table"
-        id="select-column-table"
-      >
+      <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
         <TableHead>
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
             <TableCell
               classes={{
-                head: `${classes.recipeStepsTableHeadStyles} ${classes.columnstyles}`,
+                head: `${classes.recipeStepsTableHeadStyles}`,
               }}
             ></TableCell>
             <TableCell
               classes={{
-                head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}`,
+                head: `${classes.recipeStepsTableHeadStyles}`,
               }}
             >
-              {T.translate('features.WranglerNewAddTransformation.columns')}
+              {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}
             </TableCell>
             <TableCell
               classes={{
-                head: `${classes.recipeStepsTableHeadStyles} ${classes.nullValueHead}`,
+                head: `${classes.recipeStepsTableHeadStyles}`,
               }}
             >
-              {T.translate('features.WranglerNewAddTransformation.nullValues')}
+              {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.isArray(columns) &&
-            columns.length > 0 &&
+          {columns?.length > 0 &&
             columns.map((eachColumn, index) =>
-              Array.isArray(directiveFunctionSupportedDataType) &&
-              directiveFunctionSupportedDataType.includes('all') ? (
+              directiveFunctionSupportedDataType?.includes('all') ? (
                 <TableRowWidget
                   onSingleSelection={onSingleSelection}
                   selectedColumns={selectedColumns}

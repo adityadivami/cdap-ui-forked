@@ -16,13 +16,9 @@
 
 import React from 'react';
 import { Router, Switch, Route } from 'react-router';
-import { createBrowserHistory as createHistory } from 'history';
+import history from 'services/history';
 import { render } from '@testing-library/react';
-import DrawerWidgetHeading from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 
 describe('It should test DrawerWidgetHeading Component', () => {
   it('Should test whether DrawerWidgetHeading Component is rendered', () => {

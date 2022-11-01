@@ -15,13 +15,13 @@
  */
 
 import React from 'react';
-import { IHeaderNamesList, IDataQuality } from '../types';
+import { IHeaderNamesList, IObject } from 'components/AddTransformation/types';
 
-export interface ISelectColumnList {
+export interface ISelectColumnListProps {
   directiveFunctionSupportedDataType: string[];
   selectedColumnsCount: number;
   columnData: IHeaderNamesList[];
   setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
-  dataQuality: IDataQuality[];
+  dataQuality: IObject[];
   functionName: string;
 }
