@@ -3487,6 +3487,11 @@ features:
             customFormat: Custom Format
             pleaseSelectTheDateFormat: Please select the date format
             setFirstRowAsHeader: Set first row as header
+            yyyyMMddHHmmss: yyyy-MM-dd HH:mm:ss
+            ddMMyyHHmmss: dd/MM/yy HH:mm:ss
+            MMddyyyyHHmmssSSS: MM.dd.yyyy HH:mm:ss.SSS
+            EEEdMMMyyyyHHmmss: EEE, d MMM yyyy HH:mm:ss
+            yyyyMMddTHHmmssSSSWithRFCTimezone: yyyy,MM.dd'T'HH:mm:ss.SSS with RFC timezone
           csv:
             heading: 
               pleaseSelectTheDelimiter: Please select the delimiter
@@ -3532,3 +3537,16 @@ features:
               optionalPaddingParameter: Optional padding parameter
           simpleDate:
             options:        
+              MMddyyyy: MM/dd/yyyy
+              MMddyyyyFormat: MM-dd-yyyy
+              ddMMyyyy: dd/MM/yyyy
+              MMddyy: MM-dd-yy
+              yyyyMMdd: yyyy-MM-dd
+              MMddyyyyatHHmmssz: MM-dd-yyyy 'at' HH:mm:ss z
+              yyyyMMddTHHmmssSSSZ: yyyy,MM.dd'T'HH:mm:ss.SSSZ
+              EEEMMMdyy: EEE, MMM d, ''yy
+              hmma: h:mm a
+              Hmmaz: H:mm a, z
+          dateTime:
+            options:
+              MMddyyyyAtHHmmssWithTimezone: MM-dd-yyyy 'at' HH:mm:ss with timezone
