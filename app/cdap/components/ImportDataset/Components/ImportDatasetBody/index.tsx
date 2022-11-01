@@ -16,7 +16,7 @@
 
 import { IDragAndDrop } from 'components/ImportDataset/types';
 import React from 'react';
-import DragDrop from '../DragAndDrop';
+import DragDrop from 'components/ImportDataset/Components/DragAndDrop/index';
 
 export default function({ file, onDropHandler }: IDragAndDrop) {
   return (
