@@ -51,12 +51,6 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
   const classes = useStyles();
   const { dataprep } = DataPrepStore.getState();
 
-  const [toaster, setToaster] = useState({
-    open: false,
-    message: '',
-    isSuccess: false,
-  });
-
   useEffect(() => {
     setConnectionPayload({
       path: dataprep.insights.path,
@@ -74,6 +68,7 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
   }, [dataprep, properties]);
 
   const createWorkspaceInternal = async (entity: IConnectionPayload, parseConfig: {}) => {
+    let snackbar: any = false;
     try {
       setLoading(true);
       const wid = await createWorkspace({
@@ -86,23 +81,18 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
       }
       setDrawerStatus(false);
       updateDataTranformation(wid);
-      setToaster({
+      snackbar = {
         open: true,
-        message: 'Step successfully added',
-        isSuccess: true,
-      });
+        message: 'success',
+      };
     } catch (err) {
-      // setErrorOnTransformation({
-      //   open: true,
-      //   message: T.translate(`features.errorMessage.transformation`),
-      // });
-      setToaster({
+      snackbar = {
         open: true,
-        message: 'Failed',
-        isSuccess: false,
-      });
-      setLoading(false);
+        message: 'Failed to retrive sample',
+      };
     }
+    setErrorOnTransformation(snackbar);
+    setLoading(false);
   };
 
   const onConfirm = async (parseConfig) => {
@@ -153,29 +143,16 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
         </Box>
       </Box>
 
-      {/* {errorOnTransformation.open && (
+      {errorOnTransformation.open && (
         <PositionedSnackbar
-          handleCloseError={() =>
-            setErrorOnTransformation({
+          handleCloseError={
+            () => {}
+            /* setErrorOnTransformation({
               open: false,
               message: T.translate(`features.errorMessage.encountered`),
-            })
+            }) */
           }
           messageToDisplay={errorOnTransformation.message}
-        />
-      )} */}
-
-      {toaster.open && (
-        <PositionedSnackbar
-          handleCloseError={() =>
-            setToaster({
-              open: false,
-              message: '',
-              isSuccess: false,
-            })
-          }
-          messageToDisplay={toaster.message}
-          isSuccess={toaster.isSuccess}
         />
       )}
     </DrawerWidget>

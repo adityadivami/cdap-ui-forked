@@ -19,7 +19,7 @@ import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { Divider } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export default function TransitionComponent(props) {
+export default function TransitionComponent({ messageToDisplay, close }) {
   const classes = useStyles();
   return (
     <div data-testid="transition-component-parent">
@@ -32,14 +32,14 @@ export default function TransitionComponent(props) {
           role="button"
           tabIndex={0}
           className={classes.dismissSpan}
-          onClick={() => props.close()}
+          onClick={() => close()}
           data-testid="snackbar-close-button"
         >
           Dismiss
         </span>
       </div>
       <Divider />
-      <p className={classes.errorMessage}>Failed to retrieve sample</p>
+      <p className={classes.errorMessage}>{messageToDisplay}</p>
     </div>
   );
 }
