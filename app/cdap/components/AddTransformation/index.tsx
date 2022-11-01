@@ -14,27 +14,28 @@
  * the License.
  */
 
-import { Button, Container } from '@material-ui/core';
-import DrawerWidget from 'components/DrawerWidget';
-import T from 'i18n-react';
-import React, { Fragment, useState, useEffect } from 'react';
-import SelectColumnsList from './SelectColumnsList';
-import { useStyles } from './styles';
+import { Container } from '@material-ui/core';
+import ButtonWidget from 'components/AddTransformation/ButtonWidget';
+import { prepareDataQualtiy } from 'components/AddTransformation/CircularProgressBar/utils';
+import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
+import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
+import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
+import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
+import { useStyles } from 'components/AddTransformation/styles';
 import {
   IAddTransformationProp,
-  IHeaderNamesList,
   IDataQuality,
   IDirectiveComponentValues,
-} from './types';
-import { prepareDataQualtiy } from './CircularProgressBar/utils';
-import FunctionNameWidget from './FunctionNameWidget';
-import SelectColumnsWidget from './SelectColumnsWidget';
-import SelectedColumnCountWidget from './SelectedColumnCountWidget';
-import ButtonWidget from './ButtonWidget';
-import { getDirective } from './utils';
-import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
-import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+  IHeaderNamesList,
+} from 'components/AddTransformation/types';
+import { getDirective } from 'components/AddTransformation/utils';
+import DrawerWidget from 'components/DrawerWidget';
 import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
+import T from 'i18n-react';
+import React, { Fragment, useEffect, useState } from 'react';
+import { directiveComponentDefaultValues } from './constants';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -50,16 +51,7 @@ export default function({
   const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
   const [directiveComponentValues, setDirectiveComponentsValue] = useState<
     IDirectiveComponentValues
-  >({
-    radioOption: '',
-    copyColumnName: '',
-    customInput: '',
-    copyToNewColumn: false,
-  });
-
-  const isComponentAvailable =
-    DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
-    CALCULATE_OPTIONS.some((item) => item.value === functionName);
+  >(directiveComponentDefaultValues);
 
   useEffect(() => {
     setDirectiveComponentsValue({
@@ -102,6 +94,10 @@ export default function({
     const getPreparedDataQuality: IDataQuality[] = prepareDataQualtiy(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
+
+  const isComponentAvailable: boolean =
+    DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
+    CALCULATE_OPTIONS.some((item) => item.value === functionName);
 
   return (
     <Fragment>

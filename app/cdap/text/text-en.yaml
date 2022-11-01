@@ -3479,3 +3479,19 @@ features:
     noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
     no: No
     zero: '0'
+  WranglerNewUI:
+    Transformations:
+      Format:
+        heading: Format
+        options:
+          uppercase: UPPERCASE
+          lowercase: Lowercase
+          titlecase: Title Case
+          concatenate: Concatenate
+          trim: White spaces
+          ltrim: Leading white spaces
+          rtrim: Trailing White spaces
+          dateTime: Date time
+          dateTimeAsString: Date time as string
+  
+  
