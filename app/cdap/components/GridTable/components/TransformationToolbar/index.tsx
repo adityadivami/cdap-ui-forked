@@ -27,7 +27,7 @@ import {
 import { useStyles } from 'components/GridTable/components/TransformationToolbar/styles';
 import FunctionToggle from 'components/GridTable/components/FunctionNameToggle';
 import { nestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/utils';
-import { IMenuItem } from '../MenuItemComponent/types';
+import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 
 export default function({
   columnType,
@@ -84,7 +84,7 @@ export default function({
                       handleMenuOpenClose={handleMenuOpenClose}
                     />
                     {isShowNames && (
-                      <Typography className={classes.typoClass}>{menuItem.toolName}</Typography>
+                      <Typography className={classes.typoClass} component='div'>{menuItem.toolName}</Typography>
                     )}
                   </>
                 ) : (
@@ -104,7 +104,7 @@ export default function({
                       </IconButton>
                     </Tooltip>
                     {isShowNames && (
-                      <Typography className={classes.typoClass}>{menuItem.toolName}</Typography>
+                      <Typography className={classes.typoClass} component='div'>{menuItem.toolName}</Typography>
                     )}
                   </>
                 )}
