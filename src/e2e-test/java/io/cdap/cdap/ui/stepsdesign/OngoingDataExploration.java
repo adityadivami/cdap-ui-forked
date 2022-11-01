@@ -8,6 +8,7 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 public class OngoingDataExploration {
     @Given("Navigate to the home page")
@@ -18,12 +19,12 @@ public class OngoingDataExploration {
     @Then("Click on the Data Exploration")
     public void clickOnTheDataExploration(){
         WaitHelper.waitForPageToLoad();
+        WebElement ele = Helper.locateElementByTestId("home-ongoing-explorations-text-0");
+        String homeText = ele.getText();
         ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
-    }
-    @Then("Check the data exploration text is showing or not")
-    public void checkTheDataExplorationFile(){
-        String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
-        Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/wrangler-grid/b53e2cbe-23a8-4cee-a69b-70c26dec5c6b");
+        WebElement test = Helper.locateElementByTestId("breadcrumb-workspace-name");
+        String ActualText= test.getText();
+        Assert.assertEquals(ActualText, homeText );
     }
     @Then("Click on the Home link")
     public void clickONTheHomeLink(){

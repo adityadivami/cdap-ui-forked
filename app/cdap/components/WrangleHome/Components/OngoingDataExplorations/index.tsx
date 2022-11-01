@@ -170,7 +170,11 @@ export default function() {
             style={{ textDecoration: 'none' }}
           >
             {index <= 1 && (
-              <OngoingDataExplorationsCard explorationCardDetails={item} key={index} />
+              <OngoingDataExplorationsCard
+                explorationCardDetails={item}
+                key={index}
+                cardIndex={index}
+              />
             )}
           </Link>
         );
