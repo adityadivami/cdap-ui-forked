@@ -40,3 +40,10 @@ export const multipleColumnSelected = [
     isMoreThanTwo: true,
   },
 ];
+
+export const directiveComponentDefaultValues = {
+  radioOption: '',
+  copyColumnName: '',
+  copyToNewColumn: false,
+  customInput: '',
+};

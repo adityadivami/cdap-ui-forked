@@ -13,15 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { FormControlLabel, Input } from '@material-ui/core';
+import React from 'react';
 
-import T from 'i18n-react';
-import { FORMAT_OPTIONS } from './formatOptions';
-
-export const MENU_OPTIONS = [
-  {
-    value: 'text',
-    label: `${T.translate('features.WranglerNewUI.Transformations.Format.heading').toString()}`,
-    options: FORMAT_OPTIONS,
-    supported_dataType: ['string'],
-  },
-];
+const FormInputFieldComponent = (props) => {
+  const { formInputValue, classnames } = props;
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...props.inputProps} />}
+      label={''}
+    />
+  );
+};
+export default FormInputFieldComponent;
