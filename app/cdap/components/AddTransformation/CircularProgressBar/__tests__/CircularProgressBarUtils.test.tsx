@@ -14,8 +14,8 @@
  * the License.
  */
 
-import { getDataQuality } from '../utils';
-import { columnList, statistics } from '../mock/mock';
+import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
+import { columnList, statistics } from 'components/AddTransformation/CircularProgressBar/mock/mock';
 
 describe('Should mock prepareDataQualtiy function', () => {
   it('should mock prepareDataQualtiy function', () => {
