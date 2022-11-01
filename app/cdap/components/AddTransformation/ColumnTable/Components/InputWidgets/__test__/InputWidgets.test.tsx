@@ -16,7 +16,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { ChangeEvent } from 'react';
-import InputWidgets from '..';
+import InputWidgets from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
 
 describe('It should render ', () => {
   it('Should render component with isSingleSelection false', () => {

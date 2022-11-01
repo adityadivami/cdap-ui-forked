@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { IMultipleSelectedFunctionDetail } from './types';
+import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
   {
     value: 'join-columns',

@@ -16,7 +16,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { ChangeEvent } from 'react';
-import RadioInput from '..';
+import RadioInput from 'components/AddTransformation/ColumnTable/Components/RadioInput';
 
 describe('It should render ', () => {
   it('Should render RadioInput component and trigger the on click event', () => {
