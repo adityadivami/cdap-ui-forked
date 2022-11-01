@@ -17,6 +17,7 @@
 import { IHeaderNamesList, IStatistics, IRecords } from 'components/AddTransformation/types';
 
 export const getDataQuality = (statistics: IStatistics, columnList: IHeaderNamesList[]) => {
+  console.log('statistics', statistics);
   const updatedStatistics: Array<Array<string | IRecords>> = statistics
     ? Object.entries(statistics)
     : [];
