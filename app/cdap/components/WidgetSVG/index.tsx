@@ -26,11 +26,7 @@ const StyledImageOutlined = styled(ImageOutlined)`
 
 export default function({ imageSource, label }: IWidgetSVGProps) {
   return imageSource ? (
-    <Avatar
-      src={imageSource as string}
-      variant="square"
-      data-testid={`widget-api-image-${label}`}
-    />
+    <Avatar src={imageSource} variant="square" data-testid={`widget-api-image-${label}`} />
   ) : (
     <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
   );

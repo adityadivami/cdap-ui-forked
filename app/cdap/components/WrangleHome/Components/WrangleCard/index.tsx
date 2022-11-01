@@ -24,7 +24,6 @@ import { CloudSQLMySQL } from 'components/WrangleHome/Components/WrangleCard/ico
 import { CloudSQLPostGreSQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/CloudSQLPostGreSQL';
 import { Database } from 'components/WrangleHome/Components/WrangleCard/iconStore/Database';
 import { GCS } from 'components/WrangleHome/Components/WrangleCard/iconStore/GCS';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDatasetIcon';
 import { Kafka } from 'components/WrangleHome/Components/WrangleCard/iconStore/Kafka';
 import { MySQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/MySQL';
 import { Oracle } from 'components/WrangleHome/Components/WrangleCard/iconStore/Oracle';
@@ -34,6 +33,7 @@ import { Spanner } from 'components/WrangleHome/Components/WrangleCard/iconStore
 import { SQLServer } from 'components/WrangleHome/Components/WrangleCard/iconStore/SQLServer';
 import { useStyles } from 'components/WrangleHome/Components/WrangleCard/styles';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDatasetIcon';
 
 export default function WrangleCard() {
   const [connectorTypes, setConnectorTypes] = useState({

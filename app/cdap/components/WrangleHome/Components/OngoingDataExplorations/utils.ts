@@ -58,35 +58,42 @@ export const getUpdatedExplorationCards = (
   ) {
     existingExplorationCardsData.forEach((eachItem) => {
       const eachExplorationCardData = [];
-
       Object.keys(eachItem).map((keys) => {
         const obj = {} as IMassagedObject;
-        if (keys === CONNECTOR_TYPE) {
-          obj.icon = getIconForConnector(eachItem[keys]);
-          obj.label = eachItem[keys];
-          obj.type = ICON;
-        } else if (keys === CONNECTION_NAME) {
-          obj.label = eachItem[keys];
-          obj.type = ICON_WITH_TEXT;
-        } else if (keys === WORKPSACE_NAME) {
-          obj.label = eachItem[keys];
-          obj.type = TEXT;
-        } else if (keys === RECIPE_STEPS) {
-          obj.label = `${eachItem[keys]} ${T.translate(
-            'features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps'
-          )}`;
-          obj.type = TEXT;
-        } else if (keys === DATA_QUALITY) {
-          obj.label = Number(eachItem[keys]);
-          obj.percentageSymbol = '%';
-          obj.subText = T.translate(
-            'features.WranglerNewUI.OnGoingDataExplorations.labels.nullValues'
-          );
-          obj.type = PERCENTAGE_WITH_TEXT;
-        } else if (keys === WORKSPACE_ID) {
-          obj.workspaceId = eachItem[keys];
-        } else if (keys === COUNT) {
-          obj.count = eachItem[keys];
+        switch (keys) {
+          case CONNECTOR_TYPE:
+            obj.icon = getIconForConnector(eachItem[keys]);
+            obj.label = eachItem[keys];
+            obj.type = ICON;
+            break;
+          case CONNECTION_NAME:
+            obj.label = eachItem[keys];
+            obj.type = ICON_WITH_TEXT;
+            break;
+          case WORKPSACE_NAME:
+            obj.label = eachItem[keys];
+            obj.type = TEXT;
+            break;
+          case RECIPE_STEPS:
+            obj.label = `${eachItem[keys]} ${T.translate(
+              'features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps'
+            )}`;
+            obj.type = TEXT;
+            break;
+          case DATA_QUALITY:
+            obj.label = Number(eachItem[keys]);
+            obj.percentageSymbol = '%';
+            obj.subText = T.translate(
+              'features.WranglerNewUI.OnGoingDataExplorations.labels.nullValues'
+            );
+            obj.type = PERCENTAGE_WITH_TEXT;
+            break;
+          case WORKSPACE_ID:
+            obj.workspaceId = eachItem[keys];
+            break;
+          case COUNT:
+            obj.count = eachItem[keys];
+            break;
         }
         eachExplorationCardData.push(obj);
       });

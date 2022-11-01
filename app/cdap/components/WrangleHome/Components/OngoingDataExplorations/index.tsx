@@ -57,9 +57,7 @@ export default function() {
     const findConnectorType = (connection): string => {
       if (connection) {
         const matchedConnection: IConnectionWithConnectorType = connectionsWithConnectorTypeDataObject.find(
-          (eachConnection) => {
-            return eachConnection.name === connection;
-          }
+          (eachConnection) => eachConnection.name === connection
         );
         return matchedConnection.connectorType;
       }
@@ -163,7 +161,9 @@ export default function() {
             }}
             style={{ textDecoration: 'none' }}
           >
-            {index <= 1 && <OngoingDataExplorationsCard item={item} key={index} />}
+            {index <= 1 && (
+              <OngoingDataExplorationsCard explorationCardDetails={item} key={index} />
+            )}
           </Link>
         );
       })}

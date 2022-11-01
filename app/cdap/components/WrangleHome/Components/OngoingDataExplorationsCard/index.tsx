@@ -19,7 +19,7 @@ import { Box, Grid, Typography } from '@material-ui/core/';
 import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
 import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
 
-export default function({ item }) {
+export default function({ explorationCardDetails }) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
@@ -39,7 +39,7 @@ export default function({ item }) {
       className={classes.gridContainer}
       data-testid="wrangler-home-ongoing-data-exploration-card"
     >
-      {item.map((eachItem, index) => {
+      {explorationCardDetails.map((eachItem, index) => {
         switch (eachItem.type) {
           case 'icon':
             return (

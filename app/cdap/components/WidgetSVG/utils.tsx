@@ -41,7 +41,7 @@ export const getWidgetData = async () => {
   const connectionPayload: IConnectorDetailsPayload[] = [];
   allConnectorsPluginProperties?.forEach((eachProperty) => {
     if (eachProperty.length) {
-      eachProperty.map((item) => {
+      eachProperty.forEach((item) => {
         connectionPayload.push(item);
       });
     }
