@@ -50,7 +50,9 @@ export default function BreadCrumb({ workspaceName, location }) {
             {location?.state?.from}
           </Link>
         )}
-        <Typography color="textPrimary">{workspaceName}</Typography>
+        <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
+          {workspaceName}
+        </Typography>
       </Breadcrumbs>
     </Box>
   );
