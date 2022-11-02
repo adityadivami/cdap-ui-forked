@@ -14,10 +14,15 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: string;
-  setColumnSelected: (columnName: string) => void;
-  onColumnSelection: (columnName: string) => void;
+import { IRecords } from 'components/GridTable/types';
+
+export interface IDrawerWidgetProps {
+  headingText: string;
+  openDrawer: boolean;
+  showDivider: boolean;
+  headerActionTemplate: JSX.Element;
+  children: IRecords[];
+  closeClickHandler: () => void;
+  showBackIcon: boolean;
+  anchor: 'bottom' | 'left' | 'right' | 'top';
 }

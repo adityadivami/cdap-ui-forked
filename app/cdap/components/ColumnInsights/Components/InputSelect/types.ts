@@ -14,10 +14,18 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: string;
-  setColumnSelected: (columnName: string) => void;
-  onColumnSelection: (columnName: string) => void;
+import { IRecords } from 'components/GridTable/types';
+
+export interface IInputSelect {
+  options: IRecords[];
+  value: {
+    value: string;
+    name: string;
+  };
+  onChange: (e: any) => void;
+  classes: { icon: string; select: string };
+  className: string;
+  fullWidth: boolean;
+  optionClassName: IRecords;
+  defaultValue: string;
 }

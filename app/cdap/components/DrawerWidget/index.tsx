@@ -19,6 +19,7 @@ import React, { Fragment } from 'react';
 import { useStyles } from './styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from './DrawerWidgetHeading';
+import { IDrawerWidgetProps } from './types';
 
 export default function DrawerWidget({
   headingText,
@@ -29,7 +30,7 @@ export default function DrawerWidget({
   closeClickHandler,
   showBackIcon,
   anchor,
-}) {
+}: IDrawerWidgetProps) {
   const classes = useStyles();
 
   return (

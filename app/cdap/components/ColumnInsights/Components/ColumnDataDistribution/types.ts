@@ -14,10 +14,8 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: string;
-  setColumnSelected: (columnName: string) => void;
-  onColumnSelection: (columnName: string) => void;
+import { IRecords } from 'components/GridTable/types';
+
+export interface IColumnDataDistributionProps {
+  graphData: IRecords;
 }

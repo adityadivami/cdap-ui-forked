@@ -14,10 +14,13 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: string;
-  setColumnSelected: (columnName: string) => void;
-  onColumnSelection: (columnName: string) => void;
+export interface IDataQualityProps {
+  dataQuality: IDataQuality;
+}
+
+interface IDataQuality {
+  missingNullValueCount: number;
+  missingNullValuePercentage: number;
+  invalidValueCount: number;
+  invalidValuePercentage: number;
 }

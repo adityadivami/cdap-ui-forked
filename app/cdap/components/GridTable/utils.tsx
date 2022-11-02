@@ -23,7 +23,7 @@ import {
   CONTAIN_LETTER_ONLY,
   CONTAIN_NUMBER_ONLY,
 } from './constants';
-import { IExecuteAPIResponse } from './types';
+import { IExecuteAPIResponse, IRecords } from './types';
 
 /**
  *
@@ -182,7 +182,7 @@ const isLetter = (string) => {
   return /[a-z]/.test(string);
 };
 
-export const calculateDistributionGraphData = (values, columnName) => {
+export const calculateDistributionGraphData = (values: IRecords, columnName: string) => {
   const arrayOfColumn = values.map((el) => el[columnName]);
   const map = {};
   for (let i = 0; i < arrayOfColumn.length; i++) {

@@ -17,8 +17,9 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
+import { IDataQualityProps } from './types';
 
-export default function ToggleButton({ dataQuality }) {
+export default function ToggleButton({ dataQuality }: IDataQualityProps) {
   const classes = useStyles();
   const [isSelected, setIsSelected] = useState(0);
   return (

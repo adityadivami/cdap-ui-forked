@@ -20,6 +20,7 @@ import { useStyles } from './styles';
 import EditIcon from '@material-ui/icons/Edit';
 import { Box } from '@material-ui/core';
 import InputSelect from '../InputSelect';
+import { IColumnDetailsProps } from './types';
 
 export default function ColumnDetails({
   columnName,
@@ -29,7 +30,7 @@ export default function ColumnDetails({
   renameColumnNameHandler,
   dataTypeHandler,
   columnType,
-}) {
+}: IColumnDetailsProps) {
   const defaultValueProvided = DATATYPE_OPTIONS.filter(
     (each) => each.value === columnType.toLowerCase()
   );

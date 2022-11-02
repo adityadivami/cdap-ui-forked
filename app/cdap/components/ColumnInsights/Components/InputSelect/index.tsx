@@ -16,6 +16,7 @@
 
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
+import { IInputSelect } from './types';
 
 export default function InputSelect({
   options,
@@ -26,7 +27,7 @@ export default function InputSelect({
   fullWidth,
   optionClassName,
   defaultValue,
-}) {
+}: IInputSelect) {
   return (
     <Select
       classes={{ ...classes }}

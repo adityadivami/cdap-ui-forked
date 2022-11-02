@@ -14,10 +14,12 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: string;
-  setColumnSelected: (columnName: string) => void;
-  onColumnSelection: (columnName: string) => void;
+export interface IColumnDetailsProps {
+  columnName: string;
+  characterCount: string;
+  distinctValues: number;
+  dataTypeString: string;
+  renameColumnNameHandler: (oldColumnName: string, newColumnName: string) => void;
+  dataTypeHandler: (dataType: string) => void;
+  columnType: string;
 }

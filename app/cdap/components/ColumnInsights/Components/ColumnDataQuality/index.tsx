@@ -19,8 +19,9 @@ import React from 'react';
 import { useStyles } from './styles';
 import ToggleButton from '../ColumnToggleButton';
 import { Box, Typography } from '@material-ui/core';
+import { IColumnDataQualityProps } from './types';
 
-export default function ColumnDataQuality({ dataQuality, columnInfo }) {
+export default function ColumnDataQuality({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const classes = useStyles();
   const nonNull = columnInfo?.general['non-null'] || 0,
     empty = columnInfo?.general?.empty || 0;

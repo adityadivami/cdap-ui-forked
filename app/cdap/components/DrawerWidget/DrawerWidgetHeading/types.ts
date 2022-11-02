@@ -14,10 +14,6 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: string;
-  setColumnSelected: (columnName: string) => void;
-  onColumnSelection: (columnName: string) => void;
+export interface IDrawerWidgetHeadingProps {
+  headingText: string;
 }

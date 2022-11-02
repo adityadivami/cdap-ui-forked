@@ -18,11 +18,14 @@ import { DISTRIBUTION } from 'components/ColumnInsights/constants';
 import React from 'react';
 import { useStyles } from './styles';
 import BarChart from 'react-bar-chart';
+import { IColumnDataDistributionProps } from './types';
 
-export default function ColumnDataDistribution({ graphData }) {
+export default function ColumnDataDistribution({ graphData }: IColumnDataDistributionProps) {
   const classes = useStyles();
   const margin = { top: 20, right: 20, bottom: 70, left: 40 };
-  const handleBarClick = () => {};
+  const handleBarClick = () => {
+    // TODO
+  };
   const spliceData = (data) => {
     if (data.length >= 10) {
       return data.slice(0, 9);

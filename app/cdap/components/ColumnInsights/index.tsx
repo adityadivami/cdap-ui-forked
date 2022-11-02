@@ -20,6 +20,7 @@ import ColumnDataDistribution from './Components/ColumnDataDistribution';
 import ColumnDataQuality from './Components/ColumnDataQuality';
 import ColumnDetails from './Components/ColumnDetails';
 import { COLUMN_INSIGHTS } from './constants';
+import { IColumnInsightsProps } from './types';
 
 export default function ColumnInsights({
   columnData,
@@ -27,7 +28,7 @@ export default function ColumnInsights({
   dataTypeHandler,
   columnType,
   onClose,
-}) {
+}: IColumnInsightsProps) {
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnDetail, setColumnDetail] = useState(columnData);
 
@@ -42,9 +43,9 @@ export default function ColumnInsights({
   return (
     <DrawerWidget
       headingText={COLUMN_INSIGHTS}
-      openDrawer={setDrawerStatus}
+      openDrawer={drawerStatus}
       anchor="left"
-      headerActionTemplate={undefined}
+      headerActionTemplate={<>hin</>}
       closeClickHandler={closeClickHandler}
       showBackIcon={false}
       showDivider={false}

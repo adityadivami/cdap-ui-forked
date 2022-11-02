@@ -169,13 +169,13 @@ export default function GridTable() {
     }
   };
 
-  const handleColumnSelect = (columnName) => {
+  const handleColumnSelect = (columnName: string) => {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
     setColumnType(types[columnName]);
   };
   const { types } = dataprep;
 
-  const renameColumnNameHandler = (oldColumnName, newColumnName) => {
+  const renameColumnNameHandler = (oldColumnName: string, newColumnName: string) => {
     const directive = `rename ${oldColumnName} ${newColumnName}`;
     applyDirectiveAPICall(directive, 'add', [], 'insightsPanel');
   };
@@ -276,7 +276,7 @@ export default function GridTable() {
     setRowsDataList(rowData);
   };
 
-  const dataTypeHandler = (dataType) => {
+  const dataTypeHandler = (dataType: string) => {
     const newDirective = `set-type ${columnSelected} ${dataType}`;
     applyDirectiveAPICall(newDirective, 'add', [], 'insightsPanel');
   };
