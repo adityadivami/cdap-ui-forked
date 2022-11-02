@@ -14,10 +14,8 @@
  * the License.
  */
 
-import React, { ReactNode } from 'react';
-
 export interface IButtonWidgetProps {
-  buttonText: ReactNode;
+  buttonText: string;
   disabled: boolean;
   onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
   variant: 'contained' | 'outlined' | 'text';

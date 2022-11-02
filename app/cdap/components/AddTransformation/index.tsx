@@ -120,7 +120,7 @@ export default function({
           <ButtonWidget
             buttonText={T.translate(
               'features.WranglerNewUI.GridPage.addTransformationPanel.applyStep'
-            )}
+            ).toString()}
             className={classes.applyStepButtonStyles}
             onClick={handleApply}
             variant="contained"
@@ -149,7 +149,9 @@ export default function({
             />
           </div>
           <ButtonWidget
-            buttonText={T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.done')}
+            buttonText={T.translate(
+              'features.WranglerNewUI.GridPage.addTransformationPanel.done'
+            ).toString()}
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
             variant="contained"

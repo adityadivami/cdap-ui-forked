@@ -56,8 +56,10 @@ export default function({
             multipleColumnSelected?.filter((el) => el.value === functionName).length > 0
               ? T.translate(
                   'features.WranglerNewUI.GridPage.addTransformationPanel.selectMultiColumns'
-                )
-              : T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.selectColumn')
+                ).toString()
+              : T.translate(
+                  'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumn'
+                ).toString()
           }
           className={classes.selectButtonStyles}
           onClick={() => handleSelectColumn(false)}
