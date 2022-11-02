@@ -16,9 +16,9 @@
 
 import { DISTRIBUTION } from 'components/ColumnInsights/constants';
 import React from 'react';
-import { useStyles } from './styles';
 import BarChart from 'react-bar-chart';
-import { IColumnDataDistributionProps } from './types';
+import { useStyles } from './styles';
+import { IColumnDataDistributionProps } from 'components/ColumnInsights/Components/ColumnDataDistribution/types';
 
 export default function ColumnDataDistribution({ graphData }: IColumnDataDistributionProps) {
   const classes = useStyles();

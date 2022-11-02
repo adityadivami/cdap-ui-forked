@@ -19,8 +19,8 @@ import React, { useEffect, useState } from 'react';
 import ColumnDataDistribution from './Components/ColumnDataDistribution';
 import ColumnDataQuality from './Components/ColumnDataQuality';
 import ColumnDetails from './Components/ColumnDetails';
-import { COLUMN_INSIGHTS } from './constants';
-import { IColumnInsightsProps } from './types';
+import { COLUMN_INSIGHTS } from 'components/ColumnInsights/constants';
+import { IColumnInsightsProps } from 'components/ColumnInsights/types';
 
 export default function ColumnInsights({
   columnData,

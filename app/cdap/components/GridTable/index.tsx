@@ -34,7 +34,13 @@ import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import NoDataScreen from './components/NoRecordScreen';
 import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IObject,
+  IParams,
+  IRecords,
+} from 'components/GridTable/types';
 import {
   calculateDistinctValues,
   calculateDistributionGraphData,

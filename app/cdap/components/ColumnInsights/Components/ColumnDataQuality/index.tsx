@@ -17,9 +17,9 @@
 import { QUALITY } from 'components/ColumnInsights/constants';
 import React from 'react';
 import { useStyles } from './styles';
-import ToggleButton from '../ColumnToggleButton';
+import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton/index';
 import { Box, Typography } from '@material-ui/core';
-import { IColumnDataQualityProps } from './types';
+import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/ColumnDataQuality/types';
 
 export default function ColumnDataQuality({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const classes = useStyles();

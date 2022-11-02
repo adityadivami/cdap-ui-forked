@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
-import { IInputSelect } from './types';
+import { IInputSelect } from 'components/ColumnInsights/Components/InputSelect/types';
 
 export default function InputSelect({
   options,

@@ -16,7 +16,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Box, Card, styled, TableCell, Typography } from '@material-ui/core';
-import TypographyComponent from '../Typography';
+import TypographyComponent from 'components/GridTable/components/Typography/index';
 import { useGridHeaderCellStyles } from './styles';
 import { IGridHeaderCellProps } from './types';
 import { headerSelectedIcon } from './icons';

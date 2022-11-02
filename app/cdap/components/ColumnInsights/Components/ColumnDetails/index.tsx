@@ -19,8 +19,8 @@ import React, { useState } from 'react';
 import { useStyles } from './styles';
 import EditIcon from '@material-ui/icons/Edit';
 import { Box } from '@material-ui/core';
-import InputSelect from '../InputSelect';
-import { IColumnDetailsProps } from './types';
+import InputSelect from 'components/ColumnInsights/Components/InputSelect/index';
+import { IColumnDetailsProps } from 'components/ColumnInsights/Components/ColumnDetails/types';
 
 export default function ColumnDetails({
   columnName,
