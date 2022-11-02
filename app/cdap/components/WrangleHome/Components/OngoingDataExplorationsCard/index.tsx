@@ -21,7 +21,7 @@ import CustomTooltip from '../CustomTooltip';
 import T from 'i18n-react';
 import { IOngoingDataExporationCardData } from './types';
 
-export default function({ item, fromAddress }: IOngoingDataExporationCardData) {
+export default function({ item, fromAddress, cardIndex }: IOngoingDataExporationCardData) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
@@ -43,7 +43,7 @@ export default function({ item, fromAddress }: IOngoingDataExporationCardData) {
           ? classes.gridContainerHome
           : classes.gridContainerWorkspaces
       }
-      data-testid="wrangler-home-ongoing-data-exploration-card"
+      data-testid={`wrangler-home-ongoing-data-exploration-card-${cardIndex}`}
     >
       {item.map((eachItem, index) => {
         switch (eachItem.type) {

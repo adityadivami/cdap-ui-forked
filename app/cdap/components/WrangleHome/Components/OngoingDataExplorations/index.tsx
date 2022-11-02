@@ -129,7 +129,12 @@ export default function({ cardCount, fromAddress, setLoading, setShowExploration
               }}
               style={{ textDecoration: 'none' }}
             >
-              <OngoingDataExplorationsCard item={item} key={index} fromAddress={fromAddress} />
+              <OngoingDataExplorationsCard
+                item={item}
+                key={index}
+                fromAddress={fromAddress}
+                cardIndex={index}
+              />
             </Link>
           );
         })

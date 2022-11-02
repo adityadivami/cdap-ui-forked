@@ -27,4 +27,5 @@ interface IEachItem {
 export interface IOngoingDataExporationCardData {
   item: IEachItem[];
   fromAddress: string;
+  cardIndex: number;
 }
