@@ -27,19 +27,20 @@ import {
 import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
 import React, { useCallback, useEffect, useState } from 'react';
-import { orderBy } from 'lodash';
-import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import T from 'i18n-react';
 import NoRecordScreen from 'components/NoRecordScreen';
-import { ICardCount } from './types';
+import { ICardCount } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import { of } from 'rxjs/observable/of';
+import { NavLink } from 'react-router-dom';
+import { useStyles } from './styles';
 
 export default function({ cardCount, fromAddress, setLoading, setShowExplorations }: ICardCount) {
   const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IMassagedObject[]>([]);
 
+  const classes = useStyles();
   const getOngoingData = useCallback(async () => {
     const connectionsWithConnectorTypeData: Map<
       string,
@@ -167,25 +168,25 @@ export default function({ cardCount, fromAddress, setLoading, setShowExploration
   return (
     <Box data-testid="ongoing-data-explore-parent">
       {filteredData && Array.isArray(filteredData) && filteredData.length ? (
-        filteredData.map((item, index) => {
+        filteredData.map((eachExplorationCardData, index) => {
           return (
-            <Link
+            <NavLink
               to={{
-                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[5].workspaceId}`}`,
+                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${eachExplorationCardData[5].workspaceId}`}`,
                 state: {
                   from: fromAddress,
                   path: T.translate('features.WranglerNewUI.Breadcrumb.labels.workSpaces'),
                 },
               }}
-              style={{ textDecoration: 'none' }}
+              className={classes.link}
             >
               <OngoingDataExplorationsCard
                 key={index}
-                explorationCardDetails={item}
+                explorationCardDetails={eachExplorationCardData}
                 cardIndex={index}
                 fromAddress={fromAddress}
               />
-            </Link>
+            </NavLink>
           );
         })
       ) : fromAddress === 'Workspaces' ? (
