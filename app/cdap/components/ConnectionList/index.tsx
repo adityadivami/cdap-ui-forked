@@ -18,6 +18,8 @@ import { Box, IconButton, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import { InfoGraph } from 'components/ConnectionList/IconsStore/InfoGraph';
+import { IFilterData } from 'components/ConnectionList/types';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { IRecords } from 'components/GridTable/types';
@@ -32,7 +34,6 @@ import NoConnectionsScreen from '../NoRecordScreen';
 import ConnectionsTabs from './Components/ConnectionTabs';
 import CustomTooltip from './Components/CustomTooltip';
 import SubHeader from './Components/SubHeader';
-import { InfoGraph } from './icons';
 import { useStyles } from './styles';
 
 const SelectDatasetWrapper = styled(Box)({
@@ -60,7 +61,7 @@ export default function ConnectionList() {
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
-  const [tabSize, setTabSize] = useState(0);
+  const [tabSize, setTabSize] = useState<number>(0);
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
   };
@@ -73,13 +74,13 @@ export default function ConnectionList() {
       isSearching: false,
     },
   ]);
-  const [filteredData, setFilteredData] = useState(cloneDeep(dataForTabs));
+  const [filteredData, setFilteredData] = useState<IFilterData>(cloneDeep(dataForTabs));
 
   const getConnectionsTabData = async () => {
     let connectorTypes = [];
     let connectorTypesWithSVG = [];
     const connectorTypesWithIcons = (data) => {
-      connectorTypesWithSVG = data.connectorTypes;
+      connectorTypesWithSVG = data?.connectorTypes;
     };
     // Fetching the all available connectors list with icons
     await getWidgetData(connectorTypesWithIcons);

@@ -96,10 +96,10 @@ export const useStyles = makeStyles({
     flexGrow: 1,
     justifyContent: 'flex-end',
     alignItems: ' flex-end',
-    paddingRight: '80px',
+    paddingRight: 80,
   },
   infograph: {
-    paddingBottom: '80px',
+    paddingBottom: 80,
   },
   closeIcon: {
     '& :hover': {
@@ -110,18 +110,18 @@ export const useStyles = makeStyles({
     width: '100%',
     backgroundColor: '#fff',
     border: 'none',
-    marginLeft: '9px',
-    height: '21px',
-    fontSize: '14px',
+    marginLeft: 9,
+    height: 21,
+    fontSize: 14,
     outline: 0,
   },
   afterSearchIconClick: {
     display: 'flex',
     backgroundColor: '#fff',
     alignItems: 'center',
-    height: '50px',
-    paddingRight: '20px',
-    paddingLeft: '18px',
+    height: 50,
+    paddingRight: 20,
+    paddingLeft: 18,
     textDecoration: 'none',
   },
 });

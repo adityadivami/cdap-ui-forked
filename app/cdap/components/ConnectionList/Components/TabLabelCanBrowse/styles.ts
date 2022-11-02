@@ -39,7 +39,7 @@ export const useStyles = makeStyles({
     pointerEvents: 'none',
   },
   labelStylesCount: {
-    fontSize: '16px',
+    fontSize: 16,
     overflow: 'hidden',
   },
   rightArrow: {
@@ -51,6 +51,6 @@ export const useStyles = makeStyles({
     fontSize: 'large',
   },
   connectorTypeIcon: {
-    paddingRight: '11px',
+    paddingRight: 11,
   },
 });
