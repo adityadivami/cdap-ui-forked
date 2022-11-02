@@ -101,28 +101,20 @@ export default function ConnectionsTabs({
                   }
                 }}
                 label={
-                  index > 1 ? (
-                    connectorType.canBrowse ? (
-                      <TabLabelCanBrowse
-                        count={undefined}
-                        label={connectorType.name}
-                        index={index}
-                      />
-                    ) : (
-                      <TabLabelCanSample
-                        label={connectorType.name}
-                        entity={connectorType}
-                        initialConnectionId={connectionIdProp}
-                        toggleLoader={props.toggleLoader}
-                        setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-                      />
-                    )
-                  ) : (
+                  [0, 1].includes(index) || connectorType.canBrowse ? (
                     <TabLabelCanBrowse
-                      label={index === 0 ? connectorType.displayName : connectorType.name}
+                      label={connectorType.name}
                       count={index === 0 ? connectorType.count : undefined}
                       index={index}
                       icon={connectorType.icon}
+                    />
+                  ) : (
+                    <TabLabelCanSample
+                      label={connectorType.name}
+                      entity={connectorType}
+                      initialConnectionId={connectionIdProp}
+                      toggleLoader={props.toggleLoader}
+                      setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
                     />
                   )
                 }
