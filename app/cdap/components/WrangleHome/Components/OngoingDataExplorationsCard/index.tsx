@@ -39,7 +39,7 @@ export default function({ explorationCardDetails, cardIndex }) {
       className={classes.gridContainer}
       data-testid="wrangler-home-ongoing-data-exploration-card"
     >
-      {explorationCardDetails.map((eachItem, index) => {
+      {explorationCardDetails?.map((eachItem, index) => {
         switch (eachItem.type) {
           case 'icon':
             return (

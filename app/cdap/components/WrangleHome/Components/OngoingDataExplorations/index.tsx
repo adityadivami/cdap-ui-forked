@@ -157,7 +157,7 @@ export default function() {
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {filteredData.map((item, index) => {
+      {filteredData?.map((item, index) => {
         return (
           <Link
             to={{
