@@ -22,6 +22,9 @@ import { IWidgetSrc } from '../types';
 
 const ImageContainer = styled.div`
   font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default function({ dataSrc }: IWidgetSrc) {
