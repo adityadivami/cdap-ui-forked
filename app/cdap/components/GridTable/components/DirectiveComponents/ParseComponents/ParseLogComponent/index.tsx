@@ -16,11 +16,11 @@
 import { PARSE_LOG_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
 import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
 import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
-import { ISetDirectiveComponentValue } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { ISetTransformationValues } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import { PLEASE_SELECT_THE_LOGS_FORMAT } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetTransformationValues) {
   const [selectedParseType, setSelectedParseType] = useState<string>('');
   const [delimiter, setDelimiter] = useState<string>('');
 

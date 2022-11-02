@@ -15,19 +15,19 @@
  */
 
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
-import { IDirectiveContentParams } from 'components/GridTable/types';
+import { ITransformationParams } from 'components/GridTable/types';
 import React from 'react';
 
 export default function({
-  directiveComponents,
+  transformationComponents,
   functionName: type,
   functionName,
   transformationValues,
   setTransformationValues,
   ...props
-}: IDirectiveContentParams) {
+}: ITransformationParams) {
   const Component =
-    directiveComponents.find((item) => item.type === type)?.component ||
+    transformationComponents.find((item) => item.type === type)?.component ||
     CALCULATE_OPTIONS.find((item) => item.value === functionName)?.component;
 
   return (

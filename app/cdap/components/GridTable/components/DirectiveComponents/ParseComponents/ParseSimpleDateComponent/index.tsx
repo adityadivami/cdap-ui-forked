@@ -16,14 +16,11 @@
 import { PARSE_SIMPLE_DATE_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
 import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
 import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
-import {
-  IParseCSVProps,
-  ISetDirectiveComponentValue,
-} from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { ISetTransformationValues } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import { PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetTransformationValues) {
   const [customFormat, setCustomFormat] = useState<string>('');
   const [selectedParseType, setSelectedParseType] = useState<string>('');
 

@@ -26,12 +26,12 @@ import { useStyles } from 'components/AddTransformation/styles';
 import {
   IAddTransformationProp,
   IDataQuality,
-  ITransformationValues,
   IHeaderNamesList,
+  ITransformationValues,
 } from 'components/AddTransformation/types';
 import { getDirective } from 'components/AddTransformation/utils';
 import DrawerWidget from 'components/DrawerWidget';
-import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
+import TransformationComponent from 'components/GridTable/components/DirectiveComponents';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 import { TRANSFORMATION_COMPONENTS } from 'components/GridTable/constants';
 import T from 'i18n-react';
@@ -112,12 +112,12 @@ export default function({
               functionName={functionName}
             />
             {isComponentAvailable && (
-              <DirectiveContent
+              <TransformationComponent
                 setTransformationValues={setTransformationValues}
-                directiveComponents={TRANSFORMATION_COMPONENTS}
+                transformationComponents={TRANSFORMATION_COMPONENTS}
                 transformationValues={transformationValues}
                 functionName={functionName}
-                directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+                transformationFunctionSupportedDataType={directiveFunctionSupportedDataType}
                 columnData={columnData}
                 missingDataList={missingDataList}
                 callBack={callBack}

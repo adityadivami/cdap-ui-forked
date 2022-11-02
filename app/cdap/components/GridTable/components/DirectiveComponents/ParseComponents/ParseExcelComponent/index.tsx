@@ -18,10 +18,7 @@ import FormInputField from 'components/FormInputField';
 import FormInputRadio from 'components/FormInputRadio';
 import { PARSE_EXCEL_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
 import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
-import {
-  IParseCSVProps,
-  ISetDirectiveComponentValue,
-} from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { ISetTransformationValues } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
 import {
   CHOOSE_SHEET_IN_EXCEL,
@@ -32,7 +29,7 @@ import {
 import InputCheckbox from 'components/InputCheckbox';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetTransformationValues) {
   const [sheetRadioType, setSheetRadioType] = useState<string>('sheetNumber');
   const [sheetValue, setSheetValue] = useState<string>('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);

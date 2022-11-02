@@ -16,10 +16,7 @@
 import { PARSE_CSV_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
 import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
 import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
-import {
-  IParseCSVProps,
-  ISetDirectiveComponentValue,
-} from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { ISetTransformationValues } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
 import {
   CUSTOM_DELIMITER,
@@ -29,7 +26,7 @@ import {
 import InputCheckbox from 'components/InputCheckbox';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetTransformationValues) {
   const [selectedParseType, setSelectedParseType] = useState<string>('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
   const [delimiter, setDelimiter] = useState<string>('');

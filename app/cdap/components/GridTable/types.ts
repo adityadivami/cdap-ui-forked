@@ -86,19 +86,19 @@ export interface IApiPayload {
   gridParams: IGridParams;
 }
 
-export interface IDirectiveContentParams {
+export interface ITransformationParams {
   setTransformationValues: React.Dispatch<React.SetStateAction<ITransformationValues>>;
-  directiveComponents: IDirectiveComponentType[];
+  transformationComponents: ITransformationComponentType[];
   transformationValues: ITransformationValues;
   functionName: string;
-  directiveFunctionSupportedDataType: string[];
+  transformationFunctionSupportedDataType: string[];
   columnData: IHeaderNamesList[];
   missingDataList: IDataQuality;
   callBack: () => void;
-  applyTransformation: (directive: string) => void;
+  applyTransformation: (string) => void;
 }
 
-export interface IDirectiveComponentType {
+export interface ITransformationComponentType {
   type: string;
   component: (props: IParseCSVProps) => JSX.Element;
 }

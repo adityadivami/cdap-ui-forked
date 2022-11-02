@@ -41,6 +41,6 @@ export interface IParseComponentProps {
   children: JSX.Element;
 }
 
-export interface ISetDirectiveComponentValue {
+export interface ISetTransformationValues {
   setTransformationValues: React.Dispatch<React.SetStateAction<ITransformationValues>>;
 }

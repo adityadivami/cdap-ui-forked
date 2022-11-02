@@ -16,12 +16,12 @@
 import { FormGroup } from '@material-ui/core';
 import FormInputField from 'components/FormInputField';
 import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
-import { ISetDirectiveComponentValue } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
+import { ISetTransformationValues } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import { useStyles } from 'components/GridTable/components/DirectiveComponents/styles';
 import { DEPTH, DEPTH_PLACEHOLDER, PARSE_AS_XML_TO_JSON } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetTransformationValues) {
   const [depth, setDepth] = useState<number>(1);
 
   const classes = useStyles();
