@@ -174,7 +174,7 @@ export default function({ cardCount, fromAddress, setLoading, setShowExploration
                 pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[5].workspaceId}`}`,
                 state: {
                   from: fromAddress,
-                  path: T.translate('features.Breadcrumb.labels.wrangleHome'),
+                  path: T.translate('features.Breadcrumb.labels.workspaces'),
                 },
               }}
               style={{ textDecoration: 'none' }}

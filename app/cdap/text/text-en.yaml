@@ -3455,10 +3455,11 @@ features:
         workSpaces: 'Workspaces'
         loadToGrid: 'Wrangle'
       params:
-        wrangeHome: 'home'
+        wrangleHome: 'home'
         connectionsList: 'datasources'
+        workspaces: workspace-list
   WranglerNewUI:
     OnGoingDataExplorations:
       labels:
-       nullValues: Null values
-       recipeSteps: Recipe steps
+        nullValues: Null values
+        recipeSteps: Recipe steps
