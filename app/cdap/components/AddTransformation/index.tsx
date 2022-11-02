@@ -24,7 +24,7 @@ import {
   IAddTransformationProps,
   IHeaderNamesList,
   IMultipleSelectedFunctionDetail,
-  IObject,
+  IDataQualityItem,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
@@ -38,7 +38,7 @@ export default function({
 }: IAddTransformationProps) {
   const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
-  const [dataQualityValue, setDataQualityValue] = useState<IObject[]>([]);
+  const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
   const classes = useStyles();
 
   const closeSelectColumnsPopup = () => {
@@ -53,7 +53,7 @@ export default function({
   };
 
   useEffect(() => {
-    const getPreparedDataQuality: IObject[] = getDataQuality(missingDataList, columnData);
+    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 

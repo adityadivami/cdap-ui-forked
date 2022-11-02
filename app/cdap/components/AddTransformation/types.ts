@@ -36,6 +36,6 @@ export interface IMultipleSelectedFunctionDetail {
   isMoreThanTwo: boolean;
 }
 
-export interface IObject {
+export interface IDataQualityItem {
   [key: string]: string | number;
 }

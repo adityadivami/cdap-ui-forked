@@ -132,7 +132,7 @@ export const useStyles = makeStyles(() => {
       justifyContent: 'space-between',
     },
     recipeStepsTableHeadStyles: {
-      padding: '10px',
+      padding: 10,
       fontStyle: 'normal',
       fontWeight: 600,
       fontSize: 16,

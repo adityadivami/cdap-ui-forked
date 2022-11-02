@@ -24,7 +24,9 @@ export default function({ selectedColumns, onSingleSelection, eachColumn }: IRad
         color="primary"
         onClick={() => onSingleSelection(eachColumn)}
         checked={
-          selectedColumns?.filter((el) => el.label === eachColumn.label).length ? true : false
+          selectedColumns?.filter((columnDetail) => columnDetail.label === eachColumn.label).length
+            ? true
+            : false
         }
         data-testid="radio-input-radio"
       />

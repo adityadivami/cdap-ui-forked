@@ -25,7 +25,9 @@ export default function({ headingText }: IDrawerWidgetHeadingProps) {
 
   return (
     <Box className={classes.headingStyles}>
-      <Typography className={classes.headingTextStyles}>{headingText}</Typography>
+      <Typography component="div" className={classes.headingTextStyles}>
+        {headingText}
+      </Typography>
       {UnderLine}
     </Box>
   );

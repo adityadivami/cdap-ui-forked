@@ -23,7 +23,7 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
@@ -69,35 +69,37 @@ export default function({
         </TableHead>
         <TableBody>
           {columns?.length > 0 &&
-            columns.map((eachColumn, index) =>
-              directiveFunctionSupportedDataType?.includes('all') ? (
-                <TableRowWidget
-                  onSingleSelection={onSingleSelection}
-                  selectedColumns={selectedColumns}
-                  dataQualityValue={dataQualityValue}
-                  isSingleSelection={isSingleSelection}
-                  handleDisableCheckbox={handleDisableCheckbox}
-                  onMultipleSelection={onMultipleSelection}
-                  index={index}
-                  eachColumn={eachColumn}
-                />
-              ) : directiveFunctionSupportedDataType?.includes(
-                  eachColumn?.type[0]?.toLowerCase()
-                ) ? (
-                <TableRowWidget
-                  onSingleSelection={onSingleSelection}
-                  selectedColumns={selectedColumns}
-                  dataQualityValue={dataQualityValue}
-                  isSingleSelection={isSingleSelection}
-                  handleDisableCheckbox={handleDisableCheckbox}
-                  onMultipleSelection={onMultipleSelection}
-                  index={index}
-                  eachColumn={eachColumn}
-                />
-              ) : (
-                <></>
-              )
-            )}
+            columns.map((eachColumn, index) => (
+              <>
+                {directiveFunctionSupportedDataType?.includes('all') ? (
+                  <TableRowWidget
+                    onSingleSelection={onSingleSelection}
+                    selectedColumns={selectedColumns}
+                    dataQualityValue={dataQualityValue}
+                    isSingleSelection={isSingleSelection}
+                    handleDisableCheckbox={handleDisableCheckbox}
+                    onMultipleSelection={onMultipleSelection}
+                    index={index}
+                    eachColumn={eachColumn}
+                  />
+                ) : (
+                  directiveFunctionSupportedDataType?.includes(
+                    eachColumn?.type[0]?.toLowerCase()
+                  ) && (
+                    <TableRowWidget
+                      onSingleSelection={onSingleSelection}
+                      selectedColumns={selectedColumns}
+                      dataQualityValue={dataQualityValue}
+                      isSingleSelection={isSingleSelection}
+                      handleDisableCheckbox={handleDisableCheckbox}
+                      onMultipleSelection={onMultipleSelection}
+                      index={index}
+                      eachColumn={eachColumn}
+                    />
+                  )
+                )}
+              </>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>

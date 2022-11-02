@@ -37,7 +37,6 @@ import {
   IExecuteAPIResponse,
   IHeaderNamesList,
   IMissingList,
-  IObject,
   IParams,
   IRecords,
   ICellData,

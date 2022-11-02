@@ -14,14 +14,14 @@
  * the License.
  */
 
-import { IHeaderNamesList, IObject } from 'components/AddTransformation/types';
+import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation/types';
 import { IStatistics } from 'components/GridTable/types';
 
 export const getDataQuality = (statistics: IStatistics, columnList: IHeaderNamesList[]) => {
-  const dataQuality: IObject[] = [];
+  const dataQuality: IDataQualityItem[] = [];
   columnList?.length &&
     columnList?.forEach((columnName: IHeaderNamesList) => {
-      const generalValues: IObject = statistics[columnName.name].general;
+      const generalValues: IDataQualityItem = statistics[columnName.name].general;
       if (generalValues.null) {
         const nullCount = generalValues.null || 0;
         dataQuality.push({

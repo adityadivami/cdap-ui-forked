@@ -22,7 +22,7 @@ describe('It should test FunctionNameWidget Component', () => {
   it('Should render the FunctionNameWidget Component', () => {
     const container = render(
       <ColumnTable
-        columns={[{ name: 'a', type: [0] }]}
+        columns={[{ name: 'a', type: ['test'], label: 'test' }]}
         directiveFunctionSupportedDataType={['all']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
