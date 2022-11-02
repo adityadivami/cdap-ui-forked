@@ -14,10 +14,20 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: any;
-  setColumnSelected: any;
-  onColumnSelection: any;
-}
+import { Box } from '@material-ui/core';
+import React from 'react';
+import { Underline } from '../iconStore';
+import { useStyles } from '../styles';
+
+const DrawerWidgetHeading = ({ headingText }) => {
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.headingStyles}>
+      <div className={classes.headingTextStyles}>{headingText}</div>
+      <Underline />
+    </Box>
+  );
+};
+
+export default DrawerWidgetHeading;

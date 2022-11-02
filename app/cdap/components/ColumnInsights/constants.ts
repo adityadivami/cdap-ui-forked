@@ -14,10 +14,6 @@
  * the License.
  */
 
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: any;
-  setColumnSelected: any;
-  onColumnSelection: any;
-}
+export const COLUMN_INSIGHTS = 'Column Insights';
+export const QUALITY = 'Quality';
+export const DISTRIBUTION = 'Distribution';

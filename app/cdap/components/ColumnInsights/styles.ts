@@ -13,11 +13,3 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-export interface IGridHeaderCellProps {
-  label: string;
-  type: string[];
-  columnSelected: any;
-  setColumnSelected: any;
-  onColumnSelection: any;
-}

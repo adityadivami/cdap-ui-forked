@@ -30,6 +30,13 @@ export const useGridHeaderCellStyles = makeStyles({
     width: 'auto',
     fontSize: '14px',
     border: '1px solid #E0E0E0',
+    cursor: 'pointer',
+    position: 'relative',
+  },
+  headerHighlitedIcon: {
+    position: 'absolute',
+    top: '10px',
+    left: '11px',
   },
   subDataTypeIndicator: {
     marginLeft: '2px',
