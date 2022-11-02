@@ -97,7 +97,7 @@ export interface ITransformationContentParams {
   functionName: string;
   transformationFunctionSupportedDataType: string[];
   columnData: IHeaderNamesList[];
-  missingDataList: IDataQuality;
+  missingDataList: IStatistics;
   callBack: () => void;
   applyTransformation: (directive: string) => void;
 }

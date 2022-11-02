@@ -35,7 +35,7 @@ import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColu
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { getDirective } from 'components/AddTransformation/utils';
 import TransformationContent from 'components/GridTable/components/TransformationComponents';
-import { transformationComponentDefaultValues } from './constants';
+import { transformationComponentDefaultValues } from 'components/AddTransformation/constants';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 
 export default function({
@@ -142,7 +142,7 @@ export default function({
                 transformationComponent={[]}
                 transformationComponentValues={transformationComponentValues}
                 functionName={functionName}
-                transformationFunctionSupportedDataType={directiveFunctionSupportedDataType}
+                transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
                 columnData={columnData}
                 missingDataList={missingDataList}
                 callBack={callBack}

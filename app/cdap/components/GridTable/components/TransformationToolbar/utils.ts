@@ -13,6 +13,7 @@ import {
   Undo,
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
 import T from 'i18n-react';
+import { MATH_OPTIONS } from '../NestedMenu/menuOptions/mathOptions';
 
 export const nestedMenuOptions = [
   {
@@ -79,7 +80,7 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: [],
+    options: MATH_OPTIONS,
     icon: MathIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon'),
