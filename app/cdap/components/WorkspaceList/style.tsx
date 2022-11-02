@@ -31,14 +31,14 @@ export const useStyles = makeStyles({
     alignItems: 'center',
   },
   breadcrumb: {
-    marginLeft: '30px',
+    marginLeft: 30,
     textDecoration: 'none',
   },
   explorationList: {
-    marginTop: '30px',
+    marginTop: 30,
   },
   text: {
-    fontSize: '14px',
+    fontSize: 14,
     lineHeight: '21px',
     letterSpacing: '0.15px',
     fontWeight: 400,
