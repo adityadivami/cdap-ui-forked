@@ -221,7 +221,7 @@ export default function GridTable() {
       executeAPICall(apiPayload);
     } else {
       setLoading(false);
-      setTransformationFunction(''); //use setTransformation function for error
+      setTransformationFunction('');
     }
   };
 
@@ -262,7 +262,6 @@ export default function GridTable() {
           option !== 'undo' && option !== 'redo' ? onMenuOptionSelection(option, datatype) : null;
         }}
       />
-
       {gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.gridTable.title')}

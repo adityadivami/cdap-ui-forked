@@ -101,7 +101,7 @@ export default function({
 
   return (
     <Fragment>
-    <DrawerWidget
+      <DrawerWidget
         headingText={T.translate('features.WranglerNewAddTransformation.addTransformation')}
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}

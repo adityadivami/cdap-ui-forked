@@ -71,7 +71,7 @@ export default function({ setIsShowName, isShowNames }: IFunctionNameToggleProps
   const classes = useStyles();
   return (
     <Box className={classes.functionWrapper}>
-      <Typography className={classes.typoClass} component='div'>
+      <Typography className={classes.typoClass} component="div">
         {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.toggleDescription')}
         &nbsp;
       </Typography>

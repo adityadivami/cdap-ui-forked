@@ -84,7 +84,9 @@ export default function({
                       handleMenuOpenClose={handleMenuOpenClose}
                     />
                     {isShowNames && (
-                      <Typography className={classes.typoClass} component='div'>{menuItem.toolName}</Typography>
+                      <Typography className={classes.typoClass} component="div">
+                        {menuItem.toolName}
+                      </Typography>
                     )}
                   </>
                 ) : (
@@ -104,7 +106,9 @@ export default function({
                       </IconButton>
                     </Tooltip>
                     {isShowNames && (
-                      <Typography className={classes.typoClass} component='div'>{menuItem.toolName}</Typography>
+                      <Typography className={classes.typoClass} component="div">
+                        {menuItem.toolName}
+                      </Typography>
                     )}
                   </>
                 )}
