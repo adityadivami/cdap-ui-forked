@@ -41,7 +41,7 @@ export const multipleColumnSelected = [
   },
 ];
 
-export const directiveComponentDefaultValues = {
+export const transformationsDefaultValues = {
   radioOption: '',
   copyColumnName: '',
   copyToNewColumn: false,

@@ -15,15 +15,9 @@
  */
 
 import { Container } from '@material-ui/core';
-import DrawerWidget from 'components/DrawerWidget';
-import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
-import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
-import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
-import T from 'i18n-react';
-import React, { Fragment, useEffect, useState } from 'react';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { prepareDataQualtiy } from 'components/AddTransformation/CircularProgressBar/utils';
-import { directiveComponentDefaultValues } from 'components/AddTransformation/constants';
+import { transformationsDefaultValues } from 'components/AddTransformation/constants';
 import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
 import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
 import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
@@ -36,6 +30,12 @@ import {
   IHeaderNamesList,
 } from 'components/AddTransformation/types';
 import { getDirective } from 'components/AddTransformation/utils';
+import DrawerWidget from 'components/DrawerWidget';
+import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
+import T from 'i18n-react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -51,7 +51,7 @@ export default function({
   const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
   const [directiveComponentValues, setDirectiveComponentsValue] = useState<
     IDirectiveComponentValues
-  >(directiveComponentDefaultValues);
+  >(transformationsDefaultValues);
 
   useEffect(() => {
     setDirectiveComponentsValue({
