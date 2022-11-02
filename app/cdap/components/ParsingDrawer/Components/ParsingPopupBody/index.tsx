@@ -42,7 +42,7 @@ export default function({ values, changeEventListener }: IParsingPopupBodyProps)
     <Box>
       <Box className={`${classes.formFieldWrapperStyles}${classes.marginBottomStyles}`}>
         <InputLabel id="label" className={classes.labelTextStyles}>
-          {T.translate('features.WranglerNewParsingDrawer.format')}
+          {T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.format')}
         </InputLabel>
         <InputSelect
           classes={{ icon: classes.selectIconStyles, select: classes.selectStyles }}
@@ -60,7 +60,7 @@ export default function({ values, changeEventListener }: IParsingPopupBodyProps)
 
       <Box className={`${classes.formFieldWrapperStyles}${classes.marginBottomStyles}`}>
         <InputLabel id="label" className={classes.labelTextStyles}>
-          {T.translate('features.WranglerNewParsingDrawer.encoding')}
+          {T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.encoding')}
         </InputLabel>
         <InputSelect
           classes={{ icon: classes.selectIconStyles, select: classes.selectStyles }}
@@ -77,7 +77,7 @@ export default function({ values, changeEventListener }: IParsingPopupBodyProps)
       </Box>
 
       <InputCheckbox
-        label={T.translate('features.WranglerNewParsingDrawer.enableQuotedValues')}
+        label={T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.enableQuotedValues')}
         value={enableQuotedValues}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           changeEventListener(event.target.checked, 'enableQuotedValues')
@@ -86,7 +86,7 @@ export default function({ values, changeEventListener }: IParsingPopupBodyProps)
       />
 
       <InputCheckbox
-        label={T.translate('features.WranglerNewParsingDrawer.useFirstRowAsHeader')}
+        label={T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.useFirstRowAsHeader')}
         value={skipHeader}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           changeEventListener(event.target.checked, 'skipHeader')

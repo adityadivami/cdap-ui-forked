@@ -32,7 +32,7 @@ export default function({ headingText }: IDrawerWidgetHeaderProps) {
       <Box className={classes.importStyles}>
         <ImportIcon />
         <Typography className={classes.importTextStyles}>
-          {T.translate('features.WranglerNewParsingDrawer.importSchema')}
+          {T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.importSchema')}
         </Typography>
       </Box>
     </Box>

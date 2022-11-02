@@ -112,7 +112,7 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
 
   const componentToRender = (
     <DrawerWidget
-      headingText={T.translate('features.WranglerNewParsingDrawer.parsing')}
+      headingText={T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.parsing')}
       openDrawer={setDrawerStatus}
       showDivider={true}
       headerActionTemplate={<></>}
@@ -125,7 +125,7 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
           <Box className={classes.infoWrapperStyles}>
             <InfoOutlinedIcon />
             <span className={classes.infoTextStyles}>
-              {T.translate('features.WranglerNewParsingDrawer.parsingInfoText')}
+              {T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.parsingInfoText')}
             </span>
           </Box>
 
@@ -138,7 +138,7 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
             id="parsing-apply-button"
             data-testid="parsing-apply-button"
           >
-            {T.translate('features.WranglerNewParsingDrawer.apply')}
+            {T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.apply')}
           </Button>
         </Box>
       </Box>
