@@ -26,14 +26,14 @@ import { useStyles } from 'components/AddTransformation/styles';
 import {
   IAddTransformationProp,
   IDataQuality,
-  IDirectiveComponentValues,
+  ITransformationValues,
   IHeaderNamesList,
 } from 'components/AddTransformation/types';
 import { getDirective } from 'components/AddTransformation/utils';
 import DrawerWidget from 'components/DrawerWidget';
 import DirectiveContent from 'components/GridTable/components/DirectiveComponents';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
-import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
+import { TRANSFORMATION_COMPONENTS } from 'components/GridTable/constants';
 import T from 'i18n-react';
 import React, { Fragment, useEffect, useState } from 'react';
 
@@ -49,13 +49,13 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQuality[]>([]);
-  const [directiveComponentValues, setDirectiveComponentsValue] = useState<
-    IDirectiveComponentValues
-  >(transformationsDefaultValues);
+  const [transformationValues, setTransformationValues] = useState<ITransformationValues>(
+    transformationsDefaultValues
+  );
 
   useEffect(() => {
-    setDirectiveComponentsValue({
-      ...directiveComponentValues,
+    setTransformationValues({
+      ...transformationValues,
     });
   }, [selectedColumns]);
 
@@ -81,11 +81,7 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive = getDirective(
-      functionName,
-      selectedColumns[0].label,
-      directiveComponentValues
-    );
+    const directive = getDirective(functionName, selectedColumns[0].label, transformationValues);
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
@@ -96,7 +92,7 @@ export default function({
   }, []);
 
   const isComponentAvailable: boolean =
-    DIRECTIVE_COMPONENTS.some((item) => item.type === functionName) ||
+    TRANSFORMATION_COMPONENTS.some((item) => item.type === functionName) ||
     CALCULATE_OPTIONS.some((item) => item.value === functionName);
 
   return (
@@ -117,9 +113,9 @@ export default function({
             />
             {isComponentAvailable && (
               <DirectiveContent
-                setDirectiveComponentsValue={setDirectiveComponentsValue}
-                directiveComponents={DIRECTIVE_COMPONENTS}
-                directiveComponentValues={directiveComponentValues}
+                setTransformationValues={setTransformationValues}
+                directiveComponents={TRANSFORMATION_COMPONENTS}
+                transformationValues={transformationValues}
                 functionName={functionName}
                 directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
                 columnData={columnData}

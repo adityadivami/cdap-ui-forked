@@ -14,11 +14,11 @@
  * the License.
  */
 
-import { IDirectiveComponentValues } from 'components/AddTransformation/types';
+import { ITransformationValues } from 'components/AddTransformation/types';
 
 export interface IParseCSVProps {
-  directiveComponentValues: IDirectiveComponentValues;
-  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
+  transformationValues: ITransformationValues;
+  setTransformationValues: React.Dispatch<React.SetStateAction<ITransformationValues>>;
 }
 
 export interface IInputRadioWithCustomInputProps {
@@ -42,5 +42,5 @@ export interface IParseComponentProps {
 }
 
 export interface ISetDirectiveComponentValue {
-  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
+  setTransformationValues: React.Dispatch<React.SetStateAction<ITransformationValues>>;
 }

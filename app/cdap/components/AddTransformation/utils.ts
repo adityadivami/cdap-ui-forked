@@ -15,12 +15,12 @@
  */
 import { PARSE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/parseOptions';
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-import { IDirectiveComponentValues, IMenuOption } from 'components/AddTransformation/types';
+import { ITransformationValues, IMenuOption } from 'components/AddTransformation/types';
 
 export const getDirective = (
   functionName: string,
   selectedColumn: string,
-  directiveComponentValues: IDirectiveComponentValues
+  transformationValues: ITransformationValues
 ) => {
   if (DATATYPE_OPTIONS.some((item) => item.value === functionName)) {
     return `set-type :${selectedColumn} ${functionName}`;
@@ -29,7 +29,7 @@ export const getDirective = (
       (eachOption) => eachOption.value === functionName
     );
     if (option) {
-      return option.directive(selectedColumn, directiveComponentValues);
+      return option.directive(selectedColumn, transformationValues);
     }
   } else {
     return null;

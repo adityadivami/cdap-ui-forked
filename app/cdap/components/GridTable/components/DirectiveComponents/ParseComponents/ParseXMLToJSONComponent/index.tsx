@@ -21,13 +21,13 @@ import { useStyles } from 'components/GridTable/components/DirectiveComponents/s
 import { DEPTH, DEPTH_PLACEHOLDER, PARSE_AS_XML_TO_JSON } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
   const [depth, setDepth] = useState<number>(1);
 
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, depth }));
+    setTransformationValues((prevState) => ({ ...prevState, depth }));
   }, [depth]);
 
   return (

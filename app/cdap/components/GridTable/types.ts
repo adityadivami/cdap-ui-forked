@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IDirectiveComponentValues } from 'components/AddTransformation/types';
+import { ITransformationValues } from 'components/AddTransformation/types';
 import { IParseCSVProps } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
 import React from 'react';
 
@@ -87,9 +87,9 @@ export interface IApiPayload {
 }
 
 export interface IDirectiveContentParams {
-  setDirectiveComponentsValue: React.Dispatch<React.SetStateAction<IDirectiveComponentValues>>;
+  setTransformationValues: React.Dispatch<React.SetStateAction<ITransformationValues>>;
   directiveComponents: IDirectiveComponentType[];
-  directiveComponentValues: IDirectiveComponentValues;
+  transformationValues: ITransformationValues;
   functionName: string;
   directiveFunctionSupportedDataType: string[];
   columnData: IHeaderNamesList[];

@@ -27,17 +27,17 @@ import {
 } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setDirectiveComponentsValue }: IParseCSVProps) {
+export default function({ setTransformationValues }: IParseCSVProps) {
   const [columnWidths, setColumnWidths] = useState<string>('');
   const [padding, setPadding] = useState<string>('');
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, columnWidths }));
+    setTransformationValues((prevState) => ({ ...prevState, columnWidths }));
   }, [columnWidths]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, optionPaddingParam: padding }));
+    setTransformationValues((prevState) => ({ ...prevState, optionPaddingParam: padding }));
   }, [padding]);
 
   return (

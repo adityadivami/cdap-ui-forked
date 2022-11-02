@@ -29,22 +29,22 @@ import {
 import InputCheckbox from 'components/InputCheckbox';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
   const [selectedParseType, setSelectedParseType] = useState<string>('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
   const [delimiter, setDelimiter] = useState<string>('');
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: selectedParseType }));
+    setTransformationValues((prevState) => ({ ...prevState, radioOption: selectedParseType }));
   }, [selectedParseType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, customInput: delimiter }));
+    setTransformationValues((prevState) => ({ ...prevState, customInput: delimiter }));
   }, [delimiter]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, firstRowAsHeader }));
+    setTransformationValues((prevState) => ({ ...prevState, firstRowAsHeader }));
   }, [firstRowAsHeader]);
 
   return (

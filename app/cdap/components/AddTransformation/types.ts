@@ -34,7 +34,7 @@ export interface IAddTransformationProp {
   applyTransformation: (directive: string) => void;
 }
 
-export interface IDirectiveComponentValues {
+export interface ITransformationValues {
   radioOption: string;
   copyColumnName: string;
   customInput: string;
@@ -50,5 +50,5 @@ export interface IMenuOption {
   value: string;
   label: string;
   supported_dataType: string[]; // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
-  directive: (string, IDirectiveComponentValues) => string;
+  directive: (string, ITransformationValues) => string;
 }

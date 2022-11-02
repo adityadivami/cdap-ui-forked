@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IDirectiveComponentValues, IMenuOption } from 'components/AddTransformation/types';
+import { ITransformationValues, IMenuOption } from 'components/AddTransformation/types';
 import { PARSE_CSV_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
 import { IParseOptions } from '../../DirectiveComponents/ParseComponents/types';
 
@@ -23,14 +23,14 @@ export const PARSE_OPTIONS: IMenuOption[] = [
     value: 'parseCSV',
     label: 'CSV',
     supported_dataType: ['all'],
-    directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) => {
+    directive: (selectedColumn: string, transformationValues: ITransformationValues) => {
       return `parse-as-csv :${selectedColumn} '${
-        directiveComponentValues.radioOption === 'customDelimiter'
-          ? directiveComponentValues.customInput
+        transformationValues.radioOption === 'customDelimiter'
+          ? transformationValues.customInput
           : PARSE_CSV_OPTIONS.find(
-              (eachOption) => eachOption.value === directiveComponentValues.radioOption
+              (eachOption) => eachOption.value === transformationValues.radioOption
             )?.directiveExpression
-      }' ${directiveComponentValues.firstRowAsHeader}`;
+      }' ${transformationValues.firstRowAsHeader}`;
     },
   },
   {
@@ -43,32 +43,32 @@ export const PARSE_OPTIONS: IMenuOption[] = [
     value: 'parseExcel',
     label: 'Excel',
     supported_dataType: ['all'],
-    directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) =>
-      `parse-as-excel :${selectedColumn} '${directiveComponentValues.sheetValue}' ${directiveComponentValues.firstRowAsHeader}`,
+    directive: (selectedColumn: string, transformationValues: ITransformationValues) =>
+      `parse-as-excel :${selectedColumn} '${transformationValues.sheetValue}' ${transformationValues.firstRowAsHeader}`,
   },
   {
     value: 'parseJSON',
     label: 'JSON',
     supported_dataType: ['all'],
-    directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) =>
-      `parse-as-json :${selectedColumn} ${directiveComponentValues.depth}`,
+    directive: (selectedColumn: string, transformationValues: ITransformationValues) =>
+      `parse-as-json :${selectedColumn} ${transformationValues.depth}`,
   },
   {
     value: 'parseXML',
     label: 'XML to JSON',
     supported_dataType: ['all'],
-    directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) =>
-      `parse-xml-to-json :${selectedColumn} ${directiveComponentValues.depth}`,
+    directive: (selectedColumn: string, transformationValues: ITransformationValues) =>
+      `parse-xml-to-json :${selectedColumn} ${transformationValues.depth}`,
   },
   {
     value: 'parseLog',
     label: 'Log',
     supported_dataType: ['all'],
-    directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) => {
+    directive: (selectedColumn: string, transformationValues: ITransformationValues) => {
       return `parse-as-log :${selectedColumn} '${
-        directiveComponentValues.radioOption === 'custom'
-          ? directiveComponentValues.customInput
-          : directiveComponentValues.radioOption
+        transformationValues.radioOption === 'custom'
+          ? transformationValues.customInput
+          : transformationValues.radioOption
       }'`;
     },
   },
@@ -76,11 +76,11 @@ export const PARSE_OPTIONS: IMenuOption[] = [
     value: 'parseSimpleDate',
     label: 'Simple Date',
     supported_dataType: ['all'],
-    directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) => {
+    directive: (selectedColumn: string, transformationValues: ITransformationValues) => {
       return `parse-as-simple-date  :${selectedColumn} ${
-        directiveComponentValues.radioOption === 'customFormat'
-          ? directiveComponentValues.customInput
-          : directiveComponentValues.radioOption
+        transformationValues.radioOption === 'customFormat'
+          ? transformationValues.customInput
+          : transformationValues.radioOption
       }`;
     },
   },
@@ -88,11 +88,11 @@ export const PARSE_OPTIONS: IMenuOption[] = [
     value: 'parseDateTime',
     label: 'Datetime',
     supported_dataType: ['all'],
-    directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) => {
+    directive: (selectedColumn: string, transformationValues: ITransformationValues) => {
       return `parse-as-datetime  :${selectedColumn} \"${
-        directiveComponentValues.radioOption === 'customFormat'
-          ? directiveComponentValues.customInput
-          : directiveComponentValues.radioOption
+        transformationValues.radioOption === 'customFormat'
+          ? transformationValues.customInput
+          : transformationValues.radioOption
       }\"`;
     },
   },
@@ -100,8 +100,8 @@ export const PARSE_OPTIONS: IMenuOption[] = [
     value: 'parseFixedLength',
     label: 'Fixed Length',
     supported_dataType: ['all'],
-    directive: (selectedColumn: string, directiveComponentValues: IDirectiveComponentValues) =>
-      `parse-as-fixed-length :${selectedColumn} ${directiveComponentValues.columnWidths} ${directiveComponentValues.optionPaddingParam}`,
+    directive: (selectedColumn: string, transformationValues: ITransformationValues) =>
+      `parse-as-fixed-length :${selectedColumn} ${transformationValues.columnWidths} ${transformationValues.optionPaddingParam}`,
   },
   {
     value: 'parseHL7',

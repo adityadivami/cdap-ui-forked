@@ -72,7 +72,7 @@ export const PLEASE_SELECT_THE_DELIMITER = `${T.translate(
 export const CUSTOM_DELIMITER = 'customDelimiter';
 export const CUSTOM_FORMAT = 'customFormat';
 
-export const DIRECTIVE_COMPONENTS = [
+export const TRANSFORMATION_COMPONENTS = [
   {
     type: 'parseCSV',
     component: ParseCSVComponent,

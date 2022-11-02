@@ -32,22 +32,22 @@ import {
 import InputCheckbox from 'components/InputCheckbox';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
   const [sheetRadioType, setSheetRadioType] = useState<string>('sheetNumber');
   const [sheetValue, setSheetValue] = useState<string>('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
   const classes = useStyles();
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: sheetRadioType }));
+    setTransformationValues((prevState) => ({ ...prevState, radioOption: sheetRadioType }));
   }, [sheetRadioType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, sheetValue }));
+    setTransformationValues((prevState) => ({ ...prevState, sheetValue }));
   }, [sheetValue]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, firstRowAsHeader }));
+    setTransformationValues((prevState) => ({ ...prevState, firstRowAsHeader }));
   }, [firstRowAsHeader]);
 
   return (

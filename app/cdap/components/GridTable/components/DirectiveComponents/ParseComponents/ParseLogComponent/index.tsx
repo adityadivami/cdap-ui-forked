@@ -20,16 +20,16 @@ import { ISetDirectiveComponentValue } from 'components/GridTable/components/Dir
 import { PLEASE_SELECT_THE_LOGS_FORMAT } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
   const [selectedParseType, setSelectedParseType] = useState<string>('');
   const [delimiter, setDelimiter] = useState<string>('');
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: selectedParseType }));
+    setTransformationValues((prevState) => ({ ...prevState, radioOption: selectedParseType }));
   }, [selectedParseType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, customInput: delimiter }));
+    setTransformationValues((prevState) => ({ ...prevState, customInput: delimiter }));
   }, [delimiter]);
 
   return (

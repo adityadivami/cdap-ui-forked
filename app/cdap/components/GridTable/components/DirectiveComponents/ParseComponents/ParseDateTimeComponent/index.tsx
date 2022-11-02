@@ -20,16 +20,16 @@ import { ISetDirectiveComponentValue } from 'components/GridTable/components/Dir
 import { CUSTOM_FORMAT, PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
+export default function({ setTransformationValues }: ISetDirectiveComponentValue) {
   const [customFormat, setCustomFormat] = useState<string>('');
   const [selectedParseType, setSelectedParseType] = useState<string>('');
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, radioOption: selectedParseType }));
+    setTransformationValues((prevState) => ({ ...prevState, radioOption: selectedParseType }));
   }, [selectedParseType]);
 
   useEffect(() => {
-    setDirectiveComponentsValue((prevState) => ({ ...prevState, customInput: customFormat }));
+    setTransformationValues((prevState) => ({ ...prevState, customInput: customFormat }));
   }, [customFormat]);
 
   return (

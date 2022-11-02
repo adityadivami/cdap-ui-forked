@@ -22,8 +22,8 @@ export default function({
   directiveComponents,
   functionName: type,
   functionName,
-  directiveComponentValues,
-  setDirectiveComponentsValue,
+  transformationValues,
+  setTransformationValues,
   ...props
 }: IDirectiveContentParams) {
   const Component =
@@ -32,8 +32,8 @@ export default function({
 
   return (
     <Component
-      directiveComponentValues={directiveComponentValues}
-      setDirectiveComponentsValue={setDirectiveComponentsValue}
+      transformationValues={transformationValues}
+      setTransformationValues={setTransformationValues}
       {...props}
     />
   );
