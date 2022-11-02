@@ -18,8 +18,9 @@ import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core/';
 import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
 import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
+import { IOngoingDataExplorationsCard } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/types';
 
-export default function({ explorationCardDetails, cardIndex }) {
+export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplorationsCard) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
