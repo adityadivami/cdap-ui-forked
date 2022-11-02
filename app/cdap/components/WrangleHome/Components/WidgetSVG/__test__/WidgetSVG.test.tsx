@@ -20,12 +20,14 @@ import WidgetSvg from 'components/WrangleHome/Components/WidgetSVG/index';
 
 describe('Test Widget data Component', () => {
   it('Should render Widget data component without dataSrc', () => {
-    const container = render(<WidgetSvg />);
-    expect(container).toBeDefined();
+    render(<WidgetSvg />);
+    const avatarElement = screen.getByTestId(/card-image-default/i);
+    expect(avatarElement).toBeInTheDocument();
   });
 
   it('Should render Widget data component with dataSrc', () => {
-    const container = render(<WidgetSvg dataSrc={''} />);
-    expect(container).toBeDefined();
+    render(<WidgetSvg dataSrc={'test'} />);
+    const imageOutlineElement = screen.getByTestId(/card-image-from-widget-api/i);
+    expect(imageOutlineElement).toBeInTheDocument();
   });
 });
