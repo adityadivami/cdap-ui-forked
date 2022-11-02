@@ -15,7 +15,7 @@
  */
 
 interface IExplorationCardDetails {
-  icon?: unknown;
+  icon?: SVGAElement;
   label?: string;
   type?: string;
   percentageSymbol?: string;
