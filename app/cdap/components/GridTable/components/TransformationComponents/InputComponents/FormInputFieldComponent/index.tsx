@@ -16,7 +16,7 @@
 
 import { FormControlLabel, Input } from '@material-ui/core';
 import React from 'react';
-import { IFormInputFieldComponentProps } from '../types';
+import { IFormInputFieldComponentProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
 export default function({ formInputValue, classnames, inputProps }: IFormInputFieldComponentProps) {
   return (

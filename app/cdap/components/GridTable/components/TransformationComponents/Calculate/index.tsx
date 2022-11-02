@@ -15,14 +15,14 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { CALCULATE_OPTIONS } from '../../NestedMenu/menuOptions/calculateOptions';
-import FormInputFieldComponent from '../InputComponents/FormInputFieldComponent';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import FormInputFieldComponent from 'components/GridTable/components/TransformationComponents/InputComponents/FormInputFieldComponent';
 import { FormGroup, Box, Typography } from '@material-ui/core';
-import { useStyles } from '../styles';
-import InputCheckbox from '../InputComponents/InputCheckbox';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
+import InputCheckbox from 'components/GridTable/components/TransformationComponents/InputComponents/InputCheckbox';
 import T from 'i18n-react';
-import { ICalculateProps } from './types';
-import NewColumnInput from '../InputComponents/NewColumnInput';
+import { ICalculateProps } from 'components/GridTable/components/TransformationComponents/Calculate/types';
+import NewColumnInput from 'components/GridTable/components/TransformationComponents/InputComponents/NewColumnInput';
 
 export default function({
   functionName,
@@ -89,7 +89,9 @@ export default function({
       {functionName !== 'CHARCOUNT' && (
         <FormGroup>
           <InputCheckbox
-            label={`${T.translate('features.DirectiveUIComponent.calculate.copyToNewColumn')}`}
+            label={`${T.translate(
+              'features.WranglerNewUI.GridPage.transformationUI.calculate.copyToNewColumn'
+            )}`}
             value={copyToNewColumn}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCopyToNew(e.target.checked)}
             className={classes.checkboxStyles}

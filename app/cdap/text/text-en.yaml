@@ -3496,5 +3496,12 @@ features:
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
+        DirectiveUIComponent:
+      transformationUI:
+        calculate:
+          columnExist: This column name already exist
+          copyToNewColumn: Copy to a new column
+          destinationColumn: Destination Column
+          nameNewColumn:  Name new column
 
               
