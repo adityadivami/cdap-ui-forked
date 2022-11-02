@@ -14,6 +14,8 @@
  *  the License.
  */
 
+import { ReactElement, ReactNode } from 'react';
+
 export interface IResponseData {
   count: number;
   message: string;
@@ -21,13 +23,13 @@ export interface IResponseData {
 }
 
 export interface IValues {
-  createdTimeMillis: number;
-  directives: [];
-  insights: IInsights;
-  sampleSpec: ISampleSpec;
-  updatedTimeMillis: number;
-  workspaceId: string;
-  workspaceName: string;
+  createdTimeMillis?: number;
+  directives?: [];
+  insights?: IInsights;
+  sampleSpec?: ISampleSpec;
+  updatedTimeMillis?: number;
+  workspaceId?: string;
+  workspaceName?: string;
 }
 
 export interface IInsights {
@@ -75,9 +77,36 @@ export interface IMassagedObject {
   label: string | number;
   type: string;
   percentageSymbol: string;
-  subText: string;
+  subText: ReactNode;
   workspaceId: string;
   count: number;
+}
+
+export interface IExistingExplorationCardsData {
+  connectionName: string;
+  count: number;
+  dataQuality: unknown;
+  recipeSteps: number;
+  workspaceId: string;
+  workspaceName: string;
+  connectorType: string;
+}
+
+export interface IConnectionsList {
+  connectionId: string;
+  connectionType: string;
+  createdTimeMillis: number;
+  description: string;
+  isDefault: boolean;
+  name: string;
+  plugin?: IPluginObject;
+  preConfigured: boolean;
+  updatedTimeMillis: number;
+}
+
+export interface IConnectionWithConnectorType {
+  name: string;
+  connectorType: string;
 }
 
 export interface IEachData {

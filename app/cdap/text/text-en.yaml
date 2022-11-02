@@ -3457,4 +3457,8 @@ features:
       params:
         wrangeHome: 'home'
         connectionsList: 'datasources'
-    
+  WranglerNewUI:
+    OnGoingDataExplorations:
+      labels:
+       nullValues: Null values
+       recipeSteps: Recipe steps

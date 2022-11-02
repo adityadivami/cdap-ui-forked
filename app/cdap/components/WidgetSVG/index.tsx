@@ -14,18 +14,20 @@
  * the License.
  */
 
-interface IEachItem {
-  icon?: SVGElement;
-  label?: string;
-  type?: string;
-  subText?: string;
-  percentageSymbol?: string;
-  workspaceId?: string;
-  count?: number;
-}
+import { Avatar } from '@material-ui/core';
+import styled from 'styled-components';
+import ImageOutlined from '@material-ui/icons/ImageOutlined';
+import { IWidgetSVGProps } from 'components/WidgetSVG/types';
+import React from 'react';
 
-export interface IOngoingDataExporationCardData {
-  explorationCardDetails: IEachItem[];
-  cardIndex: number;
-  fromAddress: string;
+const StyledImageOutlined = styled(ImageOutlined)`
+  font-size: 40px;
+`;
+
+export default function({ imageSource, label }: IWidgetSVGProps) {
+  return imageSource ? (
+    <Avatar src={imageSource} variant="square" data-testid={`widget-api-image-${label}`} />
+  ) : (
+    <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
+  );
 }

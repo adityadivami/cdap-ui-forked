@@ -14,18 +14,14 @@
  * the License.
  */
 
-interface IEachItem {
-  icon?: SVGElement;
-  label?: string;
-  type?: string;
-  subText?: string;
-  percentageSymbol?: string;
-  workspaceId?: string;
-  count?: number;
-}
-
-export interface IOngoingDataExporationCardData {
-  explorationCardDetails: IEachItem[];
-  cardIndex: number;
-  fromAddress: string;
-}
+export const CONNECTOR_TYPE = 'connectorType';
+export const ICON = 'icon';
+export const CONNECTION_NAME = 'connectionName';
+export const WORKPSACE_NAME = 'workspaceName';
+export const ICON_WITH_TEXT = 'iconWithText';
+export const TEXT = 'text';
+export const RECIPE_STEPS = 'recipeSteps';
+export const DATA_QUALITY = 'dataQuality';
+export const PERCENTAGE_WITH_TEXT = 'percentageWithText';
+export const WORKSPACE_ID = 'workspaceId';
+export const COUNT = 'count';
