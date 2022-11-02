@@ -20,19 +20,19 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { useStyles } from 'components/WrangleHome/Components/WrangleCard/styles';
-import { IConnectorArray, IWrangleCard } from 'components/WrangleHome/Components/WrangleCard/types';
+import { IConnector, IWrangleCard } from 'components/WrangleHome/Components/WrangleCard/types';
 
 export default function({ toggleViewAllLink }: IWrangleCard) {
-  const [connectorsData, setConnectorsData] = useState<{ connectorTypes: IConnectorArray[] }>({
+  const [connectorsData, setConnectorsData] = useState<{ connectorTypes: IConnector[] }>({
     connectorTypes: [],
   });
   // Fetching all the fetchedConnectorTypes and adding SVG its object to each connectorType and
   // then using unshift function to add an object for Imported Dataset to entire ConnectorTypes Array.
 
   const classes = useStyles();
-  const connectorTypes: IConnectorArray[] = connectorsData.connectorTypes;
+  const connectorTypes: IConnector[] = connectorsData.connectorTypes;
 
-  const updateState = (updatedState: { connectorTypes: IConnectorArray[] }) => {
+  const updateState = (updatedState: { connectorTypes: IConnector[] }) => {
     if (
       updatedState.hasOwnProperty('connectorTypes') &&
       Array.isArray(updatedState.connectorTypes) &&

@@ -28,8 +28,8 @@ import { AddConnectionIcon } from 'components/WrangleHome/Components/WrangleCard
 import { ImportDataIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDataIcon';
 import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 import {
-  IConnectorArray,
-  IConnectorDetailPayloadArray,
+  IConnector,
+  IConnectorDetailPayload,
 } from 'components/WrangleHome/Components/WrangleCard/types';
 import React from 'react';
 
@@ -47,16 +47,15 @@ export const getWidgetData = async (cbUpdateState) => {
     });
     connectorTypeWithConnections.push({ name: key, time: mostUpdatedTimeStamp });
   });
-  const sortedConections = connectorTypeWithConnections.slice(0);
-  sortedConections.sort((a, b) => b.time - a.time);
+  const sortedConections = [...connectorTypeWithConnections].sort((a, b) => b.time - a.time);
 
   const connectorDataArray = [];
-  let connectorDataWithSvgArray: IConnectorArray[] = [];
+  let connectorDataWithSvgArray: IConnector[] = [];
   const allConnectorsPluginProperties: Map<
     string,
-    IConnectorDetailPayloadArray[]
+    IConnectorDetailPayload[]
   > = getCategoriesToConnectorsMap(connectorTypes);
-  const connectionPayloadArray: IConnectorDetailPayloadArray[] = [];
+  const connectionPayloadArray: IConnectorDetailPayload[] = [];
   allConnectorsPluginProperties?.forEach((connectorsArray) => {
     if (connectorsArray.length) {
       connectorsArray.map((item) => {
@@ -86,11 +85,25 @@ export const getWidgetData = async (cbUpdateState) => {
     ({ connectorWidgetJSON }) => connectorWidgetJSON
   );
 
+  const staticCardModel = {
+    name: 'Imported Datasets',
+    type: 'default',
+    category: 'default',
+    description: 'All Connections from the List',
+    artifact: {
+      name: 'allConnections',
+      version: 'local',
+      scope: 'local',
+    },
+
+    SVG: ImportDatasetIcon,
+  };
+
   connectorDataArray.map((connectorType) => {
     let connectorTypeHasWidget = false;
-    /**
-     * Getting widget icons for connector types
-     */
+
+    // Getting widget icons for connector types
+
     connectorWidgetJson.map((item) => {
       if (item['display-name'] && item['display-name'].includes(connectorType.name)) {
         connectorDataWithSvgArray.push({
@@ -118,19 +131,6 @@ export const getWidgetData = async (cbUpdateState) => {
   connectorDataWithSvgArray = [
     ...new Map(connectorDataWithSvgArray.map((item) => [item.name, item])).values(),
   ];
-  const staticCardModel = {
-    name: 'Imported Datasets',
-    type: 'default',
-    category: 'default',
-    description: 'All Connections from the List',
-    artifact: {
-      name: 'allConnections',
-      version: 'local',
-      scope: 'local',
-    },
-
-    SVG: ImportDatasetIcon,
-  };
 
   connectorDataWithSvgArray.unshift({
     ...staticCardModel,
@@ -145,10 +145,10 @@ export const getWidgetData = async (cbUpdateState) => {
     link: 'connections/create',
   });
 
-  const allConnectorsPluginProperties1 = await fetchAllConnectorPluginProperties(connectorTypes);
+  const connectorsPluginProperties = await fetchAllConnectorPluginProperties(connectorTypes);
 
   const mapOfConnectorPluginProperties = getMapOfConnectorToPluginProperties(
-    allConnectorsPluginProperties1
+    connectorsPluginProperties
   );
 
   connectorTypes?.forEach((eachConnectorType) => {

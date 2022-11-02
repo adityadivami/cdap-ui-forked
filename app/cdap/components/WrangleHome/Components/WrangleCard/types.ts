@@ -14,7 +14,7 @@
  * the License.
  */
 
-export interface IConnectorArray {
+export interface IConnector {
   name: string;
   type: string;
   category: string;
@@ -29,7 +29,7 @@ export interface IConnectorArray {
   displayName?: string;
 }
 
-export interface IConnectorDetailPayloadArray {
+export interface IConnectorDetailPayload {
   name: string;
   type: string;
   category: string;
