@@ -13,9 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { PARSE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/parseOptions';
+import { IMenuOption, ITransformationValues } from 'components/AddTransformation/types';
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-import { ITransformationValues, IMenuOption } from 'components/AddTransformation/types';
+import { PARSE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/parseOptions';
 
 export const getDirective = (
   functionName: string,
