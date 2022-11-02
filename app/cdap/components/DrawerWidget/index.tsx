@@ -63,7 +63,7 @@ export default function({
             />
           </Box>
         </header>
-        <Fragment>{children}</Fragment>
+        <>{children}</>
       </Container>
     </Drawer>
   );

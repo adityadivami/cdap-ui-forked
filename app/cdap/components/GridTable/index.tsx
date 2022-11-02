@@ -48,7 +48,7 @@ import {
 import { convertNonNullPercent } from 'components/GridTable/utils';
 import AddTransformation from 'components/AddTransformation';
 import { missingItemDefaultValue } from 'components/GridTable/defaultValues';
-import { getAPIRequestPayload } from './services';
+import { getAPIRequestPayload } from 'components/GridTable/services';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -243,6 +243,7 @@ export default function GridTable() {
       },
       (err) => {
         setLoading(false);
+        setTransformationFunction('');
       }
     );
   };

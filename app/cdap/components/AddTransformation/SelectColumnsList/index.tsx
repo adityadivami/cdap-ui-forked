@@ -78,7 +78,9 @@ export default function({
       setSelectedColumns((prev) => [...prev, column]);
       setSelectedColumn([...selectedColumns, column]);
     } else {
-      const indexOfUnchecked = selectedColumns.findIndex((el) => el.label === column.label);
+      const indexOfUnchecked = selectedColumns.findIndex(
+        (columnDetail) => columnDetail.label === column.label
+      );
       if (indexOfUnchecked > -1) {
         setSelectedColumns(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
         setSelectedColumn(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
@@ -148,10 +150,10 @@ export default function({
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
-            <Typography className={classes.mainHeaderMessage}>
+            <Typography component="div" className={classes.mainHeaderMessage}>
               {T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.noColumns')}
             </Typography>
-            <Typography className={classes.subHeaderMessage}>
+            <Typography component="div" className={classes.subHeaderMessage}>
               {T.translate(
                 'features.WranglerNewUI.GridPage.selectColumnListPanel.noMatchColumnDatatype'
               )}

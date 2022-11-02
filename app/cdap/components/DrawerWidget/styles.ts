@@ -19,13 +19,13 @@ import { makeStyles } from '@material-ui/styles';
 export const useStyles = makeStyles(() => {
   return {
     paper: {
-      top: '46px',
+      top: 46,
       height: 'calc(100vh - 47px)',
     },
     drawerContainerStyles: {
       width: 460,
       height: '100%',
-      paddingLeft: '30px',
+      paddingLeft: 30,
     },
     headerStyles: {
       height: 60,

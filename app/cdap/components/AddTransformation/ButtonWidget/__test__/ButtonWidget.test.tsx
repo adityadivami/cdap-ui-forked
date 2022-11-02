@@ -27,7 +27,7 @@ describe('Should test ButtonWidget Component', () => {
         onClick={jest.fn()}
         variant={'outlined'}
         className={'makeStyles-selectButtonStyles-698'}
-        dataTestId={'select-column-button'}
+        buttonId={'select-column-button'}
       />
     );
 
@@ -42,7 +42,7 @@ describe('Should test ButtonWidget Component', () => {
         onClick={jest.fn()}
         variant={'outlined'}
         className={'makeStyles-selectButtonStyles-698'}
-        dataTestId={'select-column-button'}
+        buttonId={'select-column-button'}
       />
     );
 
@@ -58,7 +58,7 @@ describe('Should test ButtonWidget Component', () => {
         onClick={jest.fn()}
         variant={'outlined'}
         className={'makeStyles-selectButtonStyles-698'}
-        dataTestId={'select-column-button'}
+        buttonId={'select-column-button'}
       />
     );
 

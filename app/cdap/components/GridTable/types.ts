@@ -54,10 +54,6 @@ export interface IHeaderNamesList {
   type: string[];
 }
 
-export interface IObject {
-  [key: string]: string | number | IRecords | boolean;
-}
-
 export interface IDataQuality {
   [key: string]: string;
 }

@@ -49,8 +49,12 @@ export default function({
         />
       </TableCell>
       <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
-        <Typography className={classes.recipeStepsActionTypeStyles}>{eachColumn.label}</Typography>
-        <Typography className={classes.recipeStepsActionTypeStyles}>{eachColumn.type}</Typography>
+        <Typography component="div" className={classes.recipeStepsActionTypeStyles}>
+          {eachColumn.label}
+        </Typography>
+        <Typography component="div" className={classes.recipeStepsActionTypeStyles}>
+          {eachColumn.type}
+        </Typography>
       </TableCell>
       <TableCell className={`${classes.recipeStepsTableRowStyles}`}>
         {dataQualityValue?.length && (

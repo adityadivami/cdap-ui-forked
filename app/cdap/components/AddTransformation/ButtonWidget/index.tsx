@@ -23,7 +23,7 @@ export default function({
   onClick,
   variant,
   className,
-  dataTestId,
+  buttonId,
 }: IButtonWidgetProps) {
   return (
     <Button
@@ -32,8 +32,8 @@ export default function({
       color="primary"
       className={className}
       onClick={onClick}
-      data-testid={dataTestId}
-      id={dataTestId}
+      data-testid={buttonId}
+      id={buttonId}
     >
       {buttonText}
     </Button>

@@ -17,6 +17,7 @@
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import { IRecords, IGridParams, IRequestBody, IApiPayload } from 'components/GridTable/types';
+import { gridParamsDefaultValues } from 'components/GridTable/defaultValues';
 
 export const getAPIRequestPayload = (
   params: IRecords,
@@ -25,7 +26,7 @@ export const getAPIRequestPayload = (
 ) => {
   const { dataprep } = DataPrepStore.getState();
   const { workspaceId, workspaceUri, directives, insights } = dataprep;
-  let gridParams = {} as IGridParams;
+  let gridParams: IGridParams = gridParamsDefaultValues;
   const updatedDirectives: string[] = directives.concat(newDirective);
   const requestBody: IRequestBody = directiveRequestBodyCreator(updatedDirectives);
   requestBody.insights = insights;

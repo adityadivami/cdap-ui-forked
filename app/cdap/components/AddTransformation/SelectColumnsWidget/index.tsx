@@ -46,7 +46,7 @@ export default function({
       </div>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
-          <Typography variant="body1" className={classes.quickSelectTextStyles}>
+          <Typography component="span" variant="body1" className={classes.quickSelectTextStyles}>
             {index + 1}.&nbsp; {item.label}
           </Typography>
         ))
@@ -65,7 +65,7 @@ export default function({
           onClick={() => handleSelectColumn(false)}
           variant="outlined"
           disabled={false}
-          dataTestId="select-column-button"
+          buttonId="select-column-button"
         />
       )}
     </>

@@ -15,14 +15,14 @@
  */
 
 import React from 'react';
-import { IHeaderNamesList, IObject } from 'components/AddTransformation/types';
+import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation/types';
 
 export interface IColumnTableProps {
   columns: IHeaderNamesList[];
   transformationFunctionSupportedDataType: string[];
   onSingleSelection: (value: IHeaderNamesList) => void;
   selectedColumns: IHeaderNamesList[];
-  dataQualityValue: IObject[];
+  dataQualityValue: IDataQualityItem[];
   isSingleSelection: boolean;
   handleDisableCheckbox: () => boolean;
   onMultipleSelection: (
@@ -34,7 +34,7 @@ export interface IColumnTableProps {
 export interface ITableRowProps {
   onSingleSelection: (value: IHeaderNamesList) => void;
   selectedColumns: IHeaderNamesList[];
-  dataQualityValue: IObject[];
+  dataQualityValue: IDataQualityItem[];
   isSingleSelection: boolean;
   handleDisableCheckbox: () => boolean;
   onMultipleSelection: (

@@ -28,8 +28,8 @@ export default function({
     <>
       <FormControlLabel
         disabled={
-          selectedColumns?.filter((el) => el.label === eachColumn.label).length ||
-          !handleDisableCheckbox()
+          selectedColumns?.filter((columnDetail) => columnDetail.label === eachColumn.label)
+            .length || !handleDisableCheckbox()
             ? false
             : true
         }
@@ -38,7 +38,8 @@ export default function({
             color="primary"
             checked={
               selectedColumns?.length &&
-              selectedColumns?.filter((el) => el.label === eachColumn.label).length
+              selectedColumns?.filter((columnDetail) => columnDetail.label === eachColumn.label)
+                .length
                 ? true
                 : false
             }

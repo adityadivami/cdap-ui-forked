@@ -24,7 +24,7 @@ import {
   IAddTransformationProps,
   IHeaderNamesList,
   IMultipleSelectedFunctionDetail,
-  IObject,
+  IDataQualityItem,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
@@ -45,7 +45,7 @@ export default function({
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
-  const [dataQualityValue, setDataQualityValue] = useState<IObject[]>([]);
+  const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
   const classes = useStyles();
   const closeClickHandler = () => {
     callBack();
@@ -74,7 +74,7 @@ export default function({
   };
 
   useEffect(() => {
-    const getPreparedDataQuality: IObject[] = getDataQuality(missingDataList, columnData);
+    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(missingDataList, columnData);
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
@@ -125,7 +125,7 @@ export default function({
             onClick={handleApply}
             variant="contained"
             disabled={selectedColumns?.length ? false : true}
-            dataTestId="apply-step-button"
+            buttonId="apply-step-button"
           />
         </Container>
       </DrawerWidget>
@@ -156,7 +156,7 @@ export default function({
             onClick={closeSelectColumnsPopup}
             variant="contained"
             disabled={enableDoneButton()}
-            dataTestId="done-step-button"
+            buttonId="done-step-button"
           />
         </Container>
       </DrawerWidget>
