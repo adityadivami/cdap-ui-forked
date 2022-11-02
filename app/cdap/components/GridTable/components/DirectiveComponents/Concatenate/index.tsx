@@ -19,7 +19,7 @@ import {
   FormGroup,
   Input,
   Radio,
-  RadioGroup,
+  RadioGroup
 } from '@material-ui/core';
 import FormInputField from 'components/FormInputField';
 import { CONCATENATE_OPTIONS } from 'components/GridTable/components/DirectiveComponents/options';
@@ -29,7 +29,7 @@ import {
   ADD,
   COPY_TO_NEW_COLUMN,
   DESTINATION_COLUMN,
-  ENTER_STRING,
+  ENTER_STRING
 } from 'components/GridTable/constants';
 import { ISubMenuOption } from 'components/GridTable/types';
 import InputCheckbox from 'components/InputCheckbox';

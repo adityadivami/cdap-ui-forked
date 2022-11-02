@@ -17,7 +17,7 @@ import { PARSE_SIMPLE_DATE_OPTIONS } from 'components/GridTable/components/Direc
 import ParseComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/index';
 import InputRadioWithCustomInputComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/InputRadioWithCustomInputComponent';
 import { ISetDirectiveComponentValue } from 'components/GridTable/components/DirectiveComponents/ParseComponents/types';
-import { PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
+import { CUSTOM_FORMAT, PLEASE_SELECT_THE_DATE_FORMAT } from 'components/GridTable/constants';
 import React, { useEffect, useState } from 'react';
 
 export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentValue) {
@@ -38,7 +38,7 @@ export default function({ setDirectiveComponentsValue }: ISetDirectiveComponentV
         options={PARSE_SIMPLE_DATE_OPTIONS}
         radioValue={selectedParseType}
         setRadioValue={setSelectedParseType}
-        customInputType="customFormat"
+        customInputType={CUSTOM_FORMAT}
         customInput={customFormat}
         setCustomInput={setCustomFormat}
       />

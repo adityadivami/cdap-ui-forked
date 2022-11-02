@@ -17,6 +17,7 @@
 import { Container } from '@material-ui/core';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { prepareDataQualtiy } from 'components/AddTransformation/CircularProgressBar/utils';
+import { directiveComponentDefaultValues } from 'components/AddTransformation/constants';
 import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
 import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
 import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
@@ -26,7 +27,7 @@ import {
   IAddTransformationProp,
   IDataQuality,
   IDirectiveComponentValues,
-  IHeaderNamesList,
+  IHeaderNamesList
 } from 'components/AddTransformation/types';
 import { getDirective } from 'components/AddTransformation/utils';
 import DrawerWidget from 'components/DrawerWidget';
@@ -35,7 +36,6 @@ import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/me
 import { DIRECTIVE_COMPONENTS } from 'components/GridTable/constants';
 import T from 'i18n-react';
 import React, { Fragment, useEffect, useState } from 'react';
-import { directiveComponentDefaultValues } from './constants';
 
 export default function({
   directiveFunctionSupportedDataType,

@@ -14,10 +14,11 @@
  * the License.
  */
 
+import { FORMAT_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/formatOptions';
+import { IMainMenuOption } from 'components/GridTable/components/NestedMenu/types';
 import T from 'i18n-react';
-import { FORMAT_OPTIONS } from './formatOptions';
 
-export const MENU_OPTIONS = [
+export const MENU_OPTIONS: IMainMenuOption[] = [
   {
     value: 'text',
     label: `${T.translate('features.WranglerNewUI.Transformations.format.heading').toString()}`,

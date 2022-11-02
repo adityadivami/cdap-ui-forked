@@ -1,7 +1,7 @@
+import Concatenate from 'components/GridTable/components/DirectiveComponents/Concatenate';
+import ParseDateTimeComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseDateTimeComponent';
+import ParseSimpleDateComponent from 'components/GridTable/components/DirectiveComponents/ParseComponents/ParseSimpleDateComponent';
 import T from 'i18n-react';
-import Concatenate from './components/DirectiveComponents/Concatenate';
-import ParseDateTimeComponent from './components/DirectiveComponents/ParseComponents/ParseDateTimeComponent';
-import ParseSimpleDateComponent from './components/DirectiveComponents/ParseComponents/ParseSimpleDateComponent';
 
 export const MISSING_NULL = 'Missing/Null';
 export const ADD = `${T.translate(

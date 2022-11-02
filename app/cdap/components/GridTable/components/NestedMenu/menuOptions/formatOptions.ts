@@ -14,10 +14,10 @@
  * the License.
  */
 
-import { IDirectiveComponentValues } from 'components/AddTransformation/types';
+import { IDirectiveComponentValues, IMenuOption } from 'components/AddTransformation/types';
 import T from 'i18n-react';
 
-export const FORMAT_OPTIONS = [
+export const FORMAT_OPTIONS: IMenuOption[] = [
   {
     value: 'uppercase',
     label: `${T.translate(

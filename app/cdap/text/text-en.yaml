@@ -3486,6 +3486,26 @@ features:
           common:
             customFormat: Custom Format
             pleaseSelectTheDateFormat: Please select the date format
+            yyyyMMddHHmmss: yyyy-MM-dd HH:mm:ss
+            ddMMyyHHmmss: dd/MM/yy HH:mm:ss
+            MMddyyyyHHmmssSSS: MM.dd.yyyy HH:mm:ss.SSS
+            EEEdMMMyyyyHHmmss: EEE, d MMM yyyy HH:mm:ss
+            yyyyMMddTHHmmssSSSWithRFCTimezone: yyyy,MM.dd'T'HH:mm:ss.SSS with RFC timezone
+          simpleDate:
+            options:        
+              MMddyyyy: MM/dd/yyyy
+              MMddyyyyFormat: MM-dd-yyyy
+              ddMMyyyy: dd/MM/yyyy
+              MMddyy: MM-dd-yy
+              yyyyMMdd: yyyy-MM-dd
+              MMddyyyyatHHmmssz: MM-dd-yyyy 'at' HH:mm:ss z
+              yyyyMMddTHHmmssSSSZ: yyyy,MM.dd'T'HH:mm:ss.SSSZ
+              EEEMMMdyy: EEE, MMM d, ''yy
+              hmma: h:mm a
+              Hmmaz: H:mm a, z
+          dateTime:
+            options:
+              MMddyyyyAtHHmmssWithTimezone: MM-dd-yyyy 'at' HH:mm:ss with timezone
       format:
         heading: Format
         options:
@@ -3499,6 +3519,9 @@ features:
               enterString: Enter string
               copyToNewColumn: Copy to a new column
               destinationColumn: Destination column
+            options:
+             atTheBegining: at the beginning of the content of each row
+             atTheEnd: at the end of the content of each row
           trim: White spaces
           ltrim: Leading white spaces
           rtrim: Trailing White spaces

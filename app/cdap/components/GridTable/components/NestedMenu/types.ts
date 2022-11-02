@@ -14,6 +14,7 @@
  * the License.
  */
 
+import { IMenuOption } from 'components/AddTransformation/types';
 import { SVGProps } from 'react';
 
 export interface INestedMenuProps {
@@ -22,4 +23,11 @@ export interface INestedMenuProps {
   columnType: string;
   menuOptions: any;
   title: string;
+}
+
+export interface IMainMenuOption {
+  value: string;
+  label: string;
+  options: IMenuOption[];
+  supported_dataType: string[];
 }
