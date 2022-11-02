@@ -31,7 +31,7 @@ public class WorkspacesList {
     }
     @Then("Check the user is on workspace list or not")
     public void checkTheUserIsOnTheWorkspaceListOrNot(){
-        String url= SeleniumDriver.getDriver()
+//        String url= SeleniumDriver.getDriver()
 
     }
     @Then("Click on the Home link")
