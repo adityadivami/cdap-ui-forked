@@ -15,12 +15,12 @@
  */
 
 import {
-  IEachData,
+  IOngoingExplorationCard,
   IMassagedObject,
 } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 
-export const generateDataForExplorationCard = (oldData: IEachData[]) => {
+export const generateDataForExplorationCard = (oldData: IOngoingExplorationCard[]) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
   const massagedArray = [];
 

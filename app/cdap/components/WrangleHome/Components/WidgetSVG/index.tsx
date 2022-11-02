@@ -27,7 +27,7 @@ const ImageContainer = styled.div`
 export default function({ dataSrc }: IWidgetSrc) {
   return dataSrc ? (
     <Avatar
-      src={dataSrc as string}
+      src={dataSrc}
       variant="square"
       data-testid="card-image-from-widget-api"
       id="card-image-from-widget-api"
