@@ -21,38 +21,10 @@ import { mockItems, mockItemsWithPercentage, mockItemsPercentageData } from '../
 
 describe('Test Ongoing Data Explrations Component', () => {
   it('Should render OngoingDataExplorationCard component', () => {
-    render(<OngoingDataExplorationCard item={mockItems} />);
+    render(
+      <OngoingDataExplorationCard explorationCardDetails={mockItemsWithPercentage} cardIndex={1} />
+    );
     const ele = screen.getByTestId(/wrangler-home-ongoing-data-exploration-card/i);
     expect(ele).toBeInTheDocument();
-  });
-
-  it('Should render OngoingDataExplorationCard percentage non nan code', () => {
-    render(<OngoingDataExplorationCard item={mockItemsWithPercentage} />);
-    const ele = screen.getByTestId(/ongoing-data-exploration-card-percentage-nan/i);
-    expect(ele).toBeInTheDocument();
-  });
-
-  it('Should check whether percentageStyleRed is applied to ongoing-data-card-percentage when percent is < 100', () => {
-    render(<OngoingDataExplorationCard item={mockItemsWithPercentage} />);
-    const ele = screen.getByTestId(/ongoing-data-card-percentage/i);
-    expect(ele).toHaveStyle('color: rgb(229, 57, 53)');
-  });
-
-  it('Should check whether percentageSymbolRed is applied to ongoing-data-percentage-symbol when percent is < 100', () => {
-    render(<OngoingDataExplorationCard item={mockItemsWithPercentage} />);
-    const ele = screen.getByTestId(/ongoing-data-percentage-symbol/i);
-    expect(ele).toHaveStyle('color: rgb(229, 57, 53)');
-  });
-
-  it('Should check whether percentageStyleGreen is applied to ongoing-data-card-percentage when percent is 100', () => {
-    render(<OngoingDataExplorationCard item={mockItemsPercentageData} />);
-    const ele = screen.getByTestId(/ongoing-data-card-percentage/i);
-    expect(ele).toHaveStyle('color: rgb(67, 160, 71)');
-  });
-
-  it('Should check whether percentageSymbolGreen is applied to ongoing-data-percentage-symbol when percent is 100', () => {
-    render(<OngoingDataExplorationCard item={mockItemsPercentageData} />);
-    const ele = screen.getByTestId(/ongoing-data-percentage-symbol/i);
-    expect(ele).toHaveStyle('color: rgb(67, 160, 71)');
   });
 });

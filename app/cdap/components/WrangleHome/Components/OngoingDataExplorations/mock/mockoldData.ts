@@ -38,13 +38,13 @@ export const expectedResult = [
       type: 'text',
     },
     {
-      label: '0 Recipe steps',
+      label: '0 features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps',
       type: 'text',
     },
     {
-      label: 63,
+      label: 63.32000000000001,
       percentageSymbol: '%',
-      subText: 'Data Quality',
+      subText: 'features.WranglerNewUI.OnGoingDataExplorations.labels.nullValues',
       type: 'percentageWithText',
     },
     {
