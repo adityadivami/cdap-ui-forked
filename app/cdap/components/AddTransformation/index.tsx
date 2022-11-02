@@ -27,7 +27,7 @@ import {
   IAddTransformationProp,
   IDataQuality,
   IDirectiveComponentValues,
-  IHeaderNamesList
+  IHeaderNamesList,
 } from 'components/AddTransformation/types';
 import { getDirective } from 'components/AddTransformation/utils';
 import DrawerWidget from 'components/DrawerWidget';
