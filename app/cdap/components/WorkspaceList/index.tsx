@@ -22,7 +22,7 @@ import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDat
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { useStyles } from './style';
+import { useStyles } from 'components/WorkspaceList/style';
 import T from 'i18n-react';
 
 export default function() {
