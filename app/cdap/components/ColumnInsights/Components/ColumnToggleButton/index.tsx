@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 
-const ToggleButton = ({ dataQuality }) => {
+export default function ToggleButton({ dataQuality }) {
   const classes = useStyles();
   const [isSelected, setIsSelected] = useState(0);
   return (
@@ -53,6 +53,4 @@ const ToggleButton = ({ dataQuality }) => {
       </Box>
     </Box>
   );
-};
-
-export default ToggleButton;
+}

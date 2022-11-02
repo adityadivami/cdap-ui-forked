@@ -20,18 +20,17 @@ import { useStyles } from './styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from './DrawerWidgetHeading';
 
-const DrawerWidget = (props) => {
+export default function DrawerWidget({
+  headingText,
+  openDrawer,
+  showDivider,
+  headerActionTemplate,
+  children,
+  closeClickHandler,
+  showBackIcon,
+  anchor,
+}) {
   const classes = useStyles();
-  const {
-    headingText,
-    openDrawer,
-    showDivider,
-    headerActionTemplate,
-    children,
-    closeClickHandler,
-    showBackIcon,
-    anchor,
-  } = props;
 
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
@@ -64,6 +63,4 @@ const DrawerWidget = (props) => {
       </Container>
     </Drawer>
   );
-};
-
-export default DrawerWidget;
+}

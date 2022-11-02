@@ -19,7 +19,7 @@ import React from 'react';
 import { Underline } from '../iconStore';
 import { useStyles } from '../styles';
 
-const DrawerWidgetHeading = ({ headingText }) => {
+export default function DrawerWidgetHeading({ headingText }) {
   const classes = useStyles();
 
   return (
@@ -28,6 +28,4 @@ const DrawerWidgetHeading = ({ headingText }) => {
       <Underline />
     </Box>
   );
-};
-
-export default DrawerWidgetHeading;
+}

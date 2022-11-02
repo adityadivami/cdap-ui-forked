@@ -21,8 +21,13 @@ import ColumnDataQuality from './Components/ColumnDataQuality';
 import ColumnDetails from './Components/ColumnDetails';
 import { COLUMN_INSIGHTS } from './constants';
 
-const ColumnInsights = (props) => {
-  const { columnData, renameColumnNameHandler, dataTypeHandler, columnType } = props;
+export default function ColumnInsights({
+  columnData,
+  renameColumnNameHandler,
+  dataTypeHandler,
+  columnType,
+  onClose,
+}) {
   const [drawerStatus, setDrawerStatus] = useState(true);
   const [columnDetail, setColumnDetail] = useState(columnData);
 
@@ -32,9 +37,8 @@ const ColumnInsights = (props) => {
 
   const closeClickHandler = () => {
     setDrawerStatus(false);
-    props.onClose();
+    onClose();
   };
-
   return (
     <DrawerWidget
       headingText={COLUMN_INSIGHTS}
@@ -42,6 +46,8 @@ const ColumnInsights = (props) => {
       anchor="left"
       headerActionTemplate={undefined}
       closeClickHandler={closeClickHandler}
+      showBackIcon={false}
+      showDivider={false}
     >
       <ColumnDetails
         columnName={columnDetail?.columnName}
@@ -59,6 +65,4 @@ const ColumnInsights = (props) => {
       <ColumnDataDistribution graphData={columnDetail?.dataDistributionGraphData} />
     </DrawerWidget>
   );
-};
-
-export default ColumnInsights;
+}

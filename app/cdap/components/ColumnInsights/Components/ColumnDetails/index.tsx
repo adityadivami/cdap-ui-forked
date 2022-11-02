@@ -21,17 +21,15 @@ import EditIcon from '@material-ui/icons/Edit';
 import { Box } from '@material-ui/core';
 import InputSelect from '../InputSelect';
 
-const ColumnDetails = (props) => {
-  const {
-    columnName,
-    characterCount,
-    distinctValues,
-    dataTypeString,
-    renameColumnNameHandler,
-    dataTypeHandler,
-    columnType,
-  } = props;
-
+export default function ColumnDetails({
+  columnName,
+  characterCount,
+  distinctValues,
+  dataTypeString,
+  renameColumnNameHandler,
+  dataTypeHandler,
+  columnType,
+}) {
   const defaultValueProvided = DATATYPE_OPTIONS.filter(
     (each) => each.value === columnType.toLowerCase()
   );
@@ -77,6 +75,7 @@ const ColumnDetails = (props) => {
           <EditIcon onClick={editHandler} />
         </Box>
       </div>
+
       <InputSelect
         classes={{
           icon: classes.selectIconStyles,
@@ -88,6 +87,7 @@ const ColumnDetails = (props) => {
         value={dataTypeValue}
         onChange={(e) => handleDataTypeChange(e)}
         options={DATATYPE_OPTIONS}
+        fullWidth={false}
       />
       <section className={classes.columnInsightsDetailsWrapper}>
         <div className={classes.columnInsightsDetailsCountSection}>
@@ -99,6 +99,4 @@ const ColumnDetails = (props) => {
       </section>
     </section>
   );
-};
-
-export default ColumnDetails;
+}

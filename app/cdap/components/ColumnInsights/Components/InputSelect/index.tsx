@@ -17,17 +17,16 @@
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
 
-const InputSelect = (props) => {
-  const {
-    options,
-    value,
-    onChange,
-    classes,
-    className,
-    fullWidth,
-    optionClassName,
-    defaultValue,
-  } = props;
+export default function InputSelect({
+  options,
+  value,
+  onChange,
+  classes,
+  className,
+  fullWidth,
+  optionClassName,
+  defaultValue,
+}) {
   return (
     <Select
       classes={{ ...classes }}
@@ -59,6 +58,4 @@ const InputSelect = (props) => {
       })}
     </Select>
   );
-};
-
-export default InputSelect;
+}

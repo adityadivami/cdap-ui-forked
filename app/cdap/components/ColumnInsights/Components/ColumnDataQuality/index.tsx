@@ -20,7 +20,7 @@ import { useStyles } from './styles';
 import ToggleButton from '../ColumnToggleButton';
 import { Box, Typography } from '@material-ui/core';
 
-const ColumnDataQuality = ({ dataQuality, columnInfo }) => {
+export default function ColumnDataQuality({ dataQuality, columnInfo }) {
   const classes = useStyles();
   const nonNull = columnInfo?.general['non-null'] || 0,
     empty = columnInfo?.general?.empty || 0;
@@ -45,6 +45,4 @@ const ColumnDataQuality = ({ dataQuality, columnInfo }) => {
       </section>
     </section>
   );
-};
-
-export default ColumnDataQuality;
+}

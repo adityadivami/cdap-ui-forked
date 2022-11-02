@@ -19,18 +19,16 @@ import React from 'react';
 import { useStyles } from './styles';
 import BarChart from 'react-bar-chart';
 
-const margin = { top: 20, right: 20, bottom: 70, left: 40 };
-
-const spliceData = (data) => {
-  if (data.length >= 10) {
-    return data.slice(0, 9);
-  }
-  return data;
-};
-
-const ColumnDataDistribution = ({ graphData }) => {
+export default function ColumnDataDistribution({ graphData }) {
   const classes = useStyles();
+  const margin = { top: 20, right: 20, bottom: 70, left: 40 };
   const handleBarClick = () => {};
+  const spliceData = (data) => {
+    if (data.length >= 10) {
+      return data.slice(0, 9);
+    }
+    return data;
+  };
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
       <div className={classes.columnInsightsColumnName}>{DISTRIBUTION}</div>
@@ -47,6 +45,4 @@ const ColumnDataDistribution = ({ graphData }) => {
       </div>
     </section>
   );
-};
-
-export default ColumnDataDistribution;
+}
