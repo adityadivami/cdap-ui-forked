@@ -16,10 +16,6 @@
 
 import DataPrepStore from 'components/DataPrep/store';
 import {
-  IExistingExplorationCardsData,
-  IMassagedObject,
-} from 'components/WrangleHome/Components/OngoingDataExplorations/types';
-import {
   CONNECTION_NAME,
   CONNECTOR_TYPE,
   COUNT,
@@ -32,6 +28,10 @@ import {
   WORKPSACE_NAME,
   WORKSPACE_ID,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
+import {
+  IExistingExplorationCardsData,
+  IMassagedObject,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import T from 'i18n-react';
 
 export const getUpdatedExplorationCards = (

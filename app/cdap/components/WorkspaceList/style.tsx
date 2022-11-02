@@ -25,7 +25,7 @@ export const useStyles = makeStyles({
     paddingBottom: 10,
   },
   header: {
-    height: '48px',
+    height: 48,
     borderBottom: '1px solid ${grey[300]}',
     display: 'flex',
     alignItems: 'center',
@@ -39,7 +39,7 @@ export const useStyles = makeStyles({
   },
   text: {
     fontSize: 14,
-    lineHeight: '21px',
+    lineHeight: 21,
     letterSpacing: '0.15px',
     fontWeight: 400,
   },

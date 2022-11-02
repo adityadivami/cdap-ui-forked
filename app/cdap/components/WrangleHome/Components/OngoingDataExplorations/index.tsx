@@ -127,7 +127,7 @@ export default function({ cardCount, fromAddress, setLoading, setShowExploration
       .subscribe((responses) => {
         if (responses && Array.isArray(responses) && responses.length) {
           responses
-            ?.filter((eachResponse) => eachResponse)
+            .filter((eachResponse) => eachResponse)
             .forEach((workspace, index) => {
               let dataQuality = 0;
               workspace?.headers?.forEach((eachWorkspaceHeader) => {

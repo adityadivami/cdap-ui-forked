@@ -25,9 +25,6 @@ import T from 'i18n-react';
 
 export default function BreadCrumb({ workspaceName, location }) {
   const classes = useStyles();
-
-  console.log(location, 'location');
-
   const sourcePath =
     location?.state?.from === T.translate('features.WranglerNewUI.Breadcrumb.labels.workSpaces')
       ? T.translate('features.WranglerNewUI.Breadcrumb.params.workspaces')

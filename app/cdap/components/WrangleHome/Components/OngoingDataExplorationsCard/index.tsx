@@ -14,12 +14,11 @@
  * the License.
  */
 
-import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core/';
-import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
 import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
+import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
 import T from 'i18n-react';
-import { IOngoingDataExporationCardData } from './types';
+import React, { createRef, RefObject, useEffect, useState } from 'react';
 
 export default function({ explorationCardDetails, cardIndex, fromAddress }) {
   const classes = useStyles();
