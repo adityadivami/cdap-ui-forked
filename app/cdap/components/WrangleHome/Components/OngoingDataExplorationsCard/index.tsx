@@ -19,7 +19,7 @@ import { Box, Grid, Typography } from '@material-ui/core/';
 import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
 import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
 
-export default function({ explorationCardDetails }) {
+export default function({ explorationCardDetails, cardIndex }) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
@@ -80,7 +80,13 @@ export default function({ explorationCardDetails }) {
                 </Typography>
               </Grid>
             ) : (
-              <Grid item xs={3} className={classes.elementStyle} key={index}>
+              <Grid
+                item
+                xs={3}
+                className={classes.elementStyle}
+                key={index}
+                data-testid={`home-ongoing-explorations-${eachItem.type}-${cardIndex}`}
+              >
                 {datasetNameRefValue ? (
                   <CustomTooltip title={eachItem.label} arrow>
                     <Typography
