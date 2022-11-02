@@ -18,15 +18,15 @@
 Feature: Breadcrumb - Navigate to the application
 
   @Breadcrumb
-  Scenario Outline: Navigate to the Data Source
+  Scenario: Navigate to the Data Source
     Given Navigate to the home page
-    Then  Click on the Connector type with "<connectionLabel>" and "<connectionTestId>"
+#    Then  Click on the Connector type with "<connectionLabel>" and "<connectionTestId>"
+    Then Click on the connector type
     Then Click on the Home link button
-    Then Check the url is equal to home url text
     Then Click on the Exploration card
     Then Click on the Home link of wrangle page
-    Then Check the url is equal to home url text
-    Examples:
-         | connectionLabel | connectionTestId |
-         | PostgreSQL | postgresql |
-         | File | file |
+#    Then Check the url is equal to home url text
+#    Examples:
+#         | connectionLabel | connectionTestId |
+#         | PostgreSQL | postgresql |
+#         | File | file |
