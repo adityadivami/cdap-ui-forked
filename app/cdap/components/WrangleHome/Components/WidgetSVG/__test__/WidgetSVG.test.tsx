@@ -25,7 +25,7 @@ describe('Test Widget data Component', () => {
   });
 
   it('Should render Widget data component with dataSrc', () => {
-    const container = render(<WidgetSvg dataSrc />);
+    const container = render(<WidgetSvg dataSrc={''} />);
     expect(container).toBeDefined();
   });
 });

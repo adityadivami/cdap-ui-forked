@@ -15,5 +15,5 @@
  */
 
 export interface IWidgetSrc {
-  [key: string]: string | unknown;
+  dataSrc?: string;
 }

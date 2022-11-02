@@ -79,7 +79,7 @@ export interface IMassagedObject {
   workspaceId: string;
 }
 
-export interface IEachData {
+export interface IOngoingExplorationCard {
   connectionName: string;
   count: number;
   dataQuality: string;
