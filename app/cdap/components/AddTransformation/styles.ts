@@ -161,7 +161,7 @@ export const useStyles = makeStyles(() => {
     },
     recipeStepsActionTypeStyles: {
       fontWeight: 400,
-      maxWidth: '190px',
+      maxWidth: 190,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       fontSize: 14,
