@@ -124,12 +124,10 @@ export const useStyles = makeStyles({
   },
   connectorIcon: {
     minWidth: 100,
-    paddingTop: 14,
-    paddingLeft: 20,
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
+    minHeight: '100%',
   },
   dataQualityTextContainer: {
     display: 'flex',
