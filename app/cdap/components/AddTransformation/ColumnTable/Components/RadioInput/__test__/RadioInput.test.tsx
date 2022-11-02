@@ -66,7 +66,7 @@ describe('It Should test RadioInput Component', () => {
       />
     );
 
-    const btn = container.getByTestId('transformation-radio-select-columns');
-    fireEvent.click(btn);
+    const radioInputElement = container.getByTestId('transformation-radio-select-columns');
+    fireEvent.click(radioInputElement);
   });
 });

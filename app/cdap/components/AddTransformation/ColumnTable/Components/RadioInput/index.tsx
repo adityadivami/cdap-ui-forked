@@ -28,7 +28,7 @@ export default function({ selectedColumns, onSingleSelection, eachColumn }: IRad
             ? true
             : false
         }
-        data-testid="radio-input-radio"
+        data-testid="transformation-radio-select-columns"
       />
     </>
   );

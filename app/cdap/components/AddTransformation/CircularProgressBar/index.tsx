@@ -44,6 +44,7 @@ export default function({ value }: ICircularProgressBarProps) {
           <ArcContainer value={Math.round(value)}></ArcContainer>
         </Typography>
         <Typography
+          data-testid="data-quality-percent"
           component="span"
           className={
             Math.round(value) < 100

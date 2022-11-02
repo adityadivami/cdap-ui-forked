@@ -155,7 +155,7 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    const radioInputElement = screen.getAllByTestId('radio-input-radio');
+    const radioInputElement = screen.getAllByTestId('transformation-radio-select-columns');
     fireEvent.click(radioInputElement[0], { target: { checked: true } });
     expect(container).toBeDefined;
   });
