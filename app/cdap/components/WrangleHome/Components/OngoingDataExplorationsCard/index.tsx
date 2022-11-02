@@ -16,12 +16,12 @@
 
 import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core/';
-import { useStyles } from './styles';
-import CustomTooltip from '../CustomTooltip';
+import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
+import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
 import T from 'i18n-react';
 import { IOngoingDataExporationCardData } from './types';
 
-export default function({ item, fromAddress }: IOngoingDataExporationCardData) {
+export default function({ explorationCardDetails, cardIndex, fromAddress }) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
@@ -39,18 +39,23 @@ export default function({ item, fromAddress }: IOngoingDataExporationCardData) {
     <Grid
       container
       className={
-        fromAddress === T.translate('features.Breadcrumb.labels.wrangleHome')
+        fromAddress === T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')
           ? classes.gridContainerHome
           : classes.gridContainerWorkspaces
       }
-      data-testid="wrangler-home-ongoing-data-exploration-card"
+      data-testid={`wrangler-home-ongoing-data-exploration-card-${cardIndex}`}
     >
-      {item.map((eachItem, index) => {
+      {explorationCardDetails.map((eachItem, index) => {
         switch (eachItem.type) {
+          case 'icon':
+            return (
+              <Grid item xs={3} key={index} className={classes.connectorIcon}>
+                <Box>{eachItem.icon}</Box>
+              </Grid>
+            );
           case 'iconWithText':
             return (
               <Grid item xs={3} className={classes.elementStyle} key={index}>
-                <Box className={classes.iconStyle}> {eachItem.icon}</Box>
                 {connectionRefValue ? (
                   <CustomTooltip title={eachItem.label} arrow>
                     <Typography
@@ -81,7 +86,13 @@ export default function({ item, fromAddress }: IOngoingDataExporationCardData) {
                 </Typography>
               </Grid>
             ) : (
-              <Grid item xs={3} className={classes.elementStyle} key={index}>
+              <Grid
+                item
+                xs={3}
+                className={classes.elementStyle}
+                key={index}
+                data-testid={`home-ongoing-explorations-${eachItem.type}-${cardIndex}`}
+              >
                 {datasetNameRefValue ? (
                   <CustomTooltip title={eachItem.label} arrow>
                     <Typography
@@ -135,7 +146,7 @@ export default function({ item, fromAddress }: IOngoingDataExporationCardData) {
                     {eachItem.percentageSymbol}
                   </Typography>
                 </Box>
-                <Box>
+                <Box className={classes.dataQualityTextContainer}>
                   <Typography variant="body1" className={classes.dataQualityText}>
                     {eachItem.subText}
                   </Typography>

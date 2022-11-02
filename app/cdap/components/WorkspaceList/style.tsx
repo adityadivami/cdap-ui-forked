@@ -22,10 +22,11 @@ export const useStyles = makeStyles({
     '& *': {
       fontFamily: "'Noto Sans', sans-serif",
     },
+    paddingBottom: 10,
   },
   header: {
     height: '48px',
-    borderBottom: '1px solid #E0E0E0',
+    borderBottom: '1px solid ${grey[300]}',
     display: 'flex',
     alignItems: 'center',
   },

@@ -20,7 +20,7 @@ import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import rxjs from 'rxjs/operators';
-import GridTable from '..';
+import GridTable from 'components/GridTable';
 import { mockForFlatMap, mockForGetWorkspace } from '../mock/mockDataForGrid';
 
 const history = createHistory({

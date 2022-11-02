@@ -3420,15 +3420,7 @@ features:
     workspacesList:
       title: 'No ongoing workspaces to display'
       subtitle: 'Please start data exploration to view ongoing workspaces'
-  Breadcrumb:
-    labels:
-      connectionsList: 'Data Sources'
-      wrangleHome: 'Home'
-      workSpaces: 'Workspaces'
-      loadToGrid: 'Wrangle'
-    params:
-      wrangeHome: 'home'
-      connectionsList: 'datasources'
+  
   AddConnections:
     referenceLabel: 'Add Connection'
   ImportData:
@@ -3446,4 +3438,20 @@ features:
         title: 'Continue ongoing data explorations, pick up where you left off'
   ConnectionsList:
     labels:
-      loadToGrid: 'Wrangle'
+      loadToGrid: 'Wrangle'    
+  WranglerNewUI:
+    Breadcrumb:
+      labels:
+        connectionsList: 'Data Sources'
+        wrangleHome: 'Home'
+        workSpaces: 'Workspaces'
+        loadToGrid: 'Wrangle'
+      params:
+        wrangleHome: 'home'
+        connectionsList: 'datasources'
+        workspaces: workspace-list
+    OnGoingDataExplorations:
+      labels:
+        nullValues: Null values
+        recipeSteps: Recipe steps
+    

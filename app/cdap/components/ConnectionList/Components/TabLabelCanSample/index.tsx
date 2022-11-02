@@ -100,7 +100,7 @@ export default function TabLabelCanSample({
       to={{
         pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
         state: {
-          from: T.translate('features.Breadcrumb.labels.connectionsList'),
+          from: T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList'),
           path: requiredPath,
         },
       }}
@@ -119,7 +119,7 @@ export default function TabLabelCanSample({
           <Box className="wranglingHover">
             <WrangleIcon />
             <Typography color="primary" variant="body2" className={classes.wrangleButton}>
-              {T.translate('features.Breadcrumb.labels.loadToGrid')}
+              {T.translate('features.WranglerNewUI.Breadcrumb.labels.loadToGrid')}
             </Typography>
           </Box>
         </button>
@@ -137,7 +137,7 @@ export default function TabLabelCanSample({
       >
         <WrangleIcon />
         <Typography variant="body2" className={classes.wrangleButton}>
-          {T.translate('features.Breadcrumb.labels.loadToGrid')}
+          {T.translate('features.WranglerNewUI.Breadcrumb.labels.loadToGrid')}
         </Typography>
       </button>
     </Box>

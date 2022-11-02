@@ -32,10 +32,10 @@ export default function SubHeader() {
       <Box>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
-            {T.translate('features.Breadcrumb.labels.wrangleHome')}
+            {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
           </Link>
           <Typography className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.Breadcrumb.labels.connectionsList')}
+            {T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
           </Typography>
         </Breadcrumbs>
       </Box>

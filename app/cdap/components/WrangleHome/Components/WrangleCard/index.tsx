@@ -19,21 +19,21 @@ import { fetchConnectors } from 'components/Connections/Create/reducer';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { BigQuery } from './iconStore/BigQuerySVG';
-import { CloudSQLMySQL } from './iconStore/CloudSQLMySQL';
-import { CloudSQLPostGreSQL } from './iconStore/CloudSQLPostGreSQL';
-import { Database } from './iconStore/Database';
-import { GCS } from './iconStore/GCS';
-import { ImportDatasetIcon } from './iconStore/ImportDatasetIcon';
-import { Kafka } from './iconStore/Kafka';
-import { MySQL } from './iconStore/MySQL';
-import { Oracle } from './iconStore/Oracle';
-import { PostgreSQL } from './iconStore/PostgreSQL';
-import { S3 } from './iconStore/S3';
-import { Spanner } from './iconStore/Spanner';
-import { SQLServer } from './iconStore/SQLServer';
-import { useStyles } from './styles';
+import { BigQuery } from 'components/WrangleHome/Components/WrangleCard/iconStore/BigQuerySVG';
+import { CloudSQLMySQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/CloudSQLMySQL';
+import { CloudSQLPostGreSQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/CloudSQLPostGreSQL';
+import { Database } from 'components/WrangleHome/Components/WrangleCard/iconStore/Database';
+import { GCS } from 'components/WrangleHome/Components/WrangleCard/iconStore/GCS';
+import { Kafka } from 'components/WrangleHome/Components/WrangleCard/iconStore/Kafka';
+import { MySQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/MySQL';
+import { Oracle } from 'components/WrangleHome/Components/WrangleCard/iconStore/Oracle';
+import { PostgreSQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/PostgreSQL';
+import { S3 } from 'components/WrangleHome/Components/WrangleCard/iconStore/S3';
+import { Spanner } from 'components/WrangleHome/Components/WrangleCard/iconStore/Spanner';
+import { SQLServer } from 'components/WrangleHome/Components/WrangleCard/iconStore/SQLServer';
+import { useStyles } from 'components/WrangleHome/Components/WrangleCard/styles';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
 
 export default function WrangleCard() {
   const [connectorTypes, setConnectorTypes] = useState({
@@ -103,7 +103,7 @@ export default function WrangleCard() {
       } else if (connectorType.name === 'File') {
         return {
           ...connectorType,
-          SVG: ImportDatasetIcon,
+          SVG: importDatasetIcon,
         };
       } else if (connectorType.name === 'CloudSQLMySQL') {
         return {
@@ -140,7 +140,7 @@ export default function WrangleCard() {
         scope: 'local',
       },
 
-      SVG: ImportDatasetIcon,
+      SVG: importDatasetIcon,
     });
 
     setConnectorTypes({

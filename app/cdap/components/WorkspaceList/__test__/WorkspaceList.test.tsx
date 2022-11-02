@@ -18,7 +18,7 @@ import { render } from '@testing-library/react';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import WorkspaceList from '..';
+import WorkspaceList from 'components/WorkspaceList';
 
 const history = createHistory({
   basename: '/',
@@ -52,6 +52,6 @@ describe('Test the Workspace List Component', () => {
     );
     expect(render).toBeDefined();
     const element = screen.getByTestId(/breadcrumb-label-workspaces/i);
-    expect(element).toHaveTextContent('features.Breadcrumb.labels.workSpaces');
+    expect(element).toHaveTextContent('features.WranglerNewUI.Breadcrumb.labels.workSpaces');
   });
 });
