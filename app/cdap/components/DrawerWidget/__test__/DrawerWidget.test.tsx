@@ -20,7 +20,7 @@ import { PARSING } from 'components/ParsingDrawer/constants';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import DrawerWidget from '..';
+import DrawerWidget from 'components/DrawerWidget';
 import history from 'services/history';
 
 describe('It should test DrawerWidget Component', () => {

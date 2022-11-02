@@ -18,7 +18,7 @@ import React from 'react';
 import { Router, Switch, Route } from 'react-router';
 import { createBrowserHistory as createHistory } from 'history';
 import { render } from '@testing-library/react';
-import DrawerWidgetHeading from '..';
+import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeader';
 import history from 'services/history';
 
 describe('It should test DrawerWidgetHeading Component', () => {
@@ -27,7 +27,7 @@ describe('It should test DrawerWidgetHeading Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <DrawerWidgetHeading />
+            <DrawerWidgetHeading headingText={''} />
           </Route>
         </Switch>
       </Router>

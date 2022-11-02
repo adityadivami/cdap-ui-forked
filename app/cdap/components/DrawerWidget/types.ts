@@ -16,7 +16,7 @@
 
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 
-export interface IHeaderText {
+export interface IDrawerWidgetHeaderProps {
   headingText: string | number | ReactNode | boolean;
 }
 

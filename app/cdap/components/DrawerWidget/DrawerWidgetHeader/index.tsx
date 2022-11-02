@@ -16,14 +16,13 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from '../styles';
-import { UnderLineSVG, ImportIcon } from '../iconStore';
-import { IHeaderText } from '../types';
+import { useStyles } from 'components/DrawerWidget/styles';
+import { UnderLineSVG, ImportIcon } from 'components/DrawerWidget/iconStore';
+import { IDrawerWidgetHeaderProps } from 'components/DrawerWidget/types';
 import T from 'i18n-react';
 
-export default function({ headingText }: IHeaderText) {
+export default function({ headingText }: IDrawerWidgetHeaderProps) {
   const classes = useStyles();
-
   return (
     <Box className={classes.containerStyles}>
       <Box className={classes.headingStyles}>
