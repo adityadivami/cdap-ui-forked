@@ -39,19 +39,30 @@ export default function({ explorationCardDetails, cardIndex }) {
       className={classes.gridContainer}
       data-testid="wrangler-home-ongoing-data-exploration-card"
     >
-      {explorationCardDetails?.map((eachItem, index) => {
-        switch (eachItem.type) {
-          case 'icon':
-            return (
-              <Grid item xs={3} key={index} className={classes.connectorIcon}>
-                <Box>{eachItem.icon}</Box>
-              </Grid>
-            );
-          case 'iconWithText':
-            return (
-              <Grid item xs={3} className={classes.elementStyle} key={index}>
-                {connectionRefValue ? (
-                  <CustomTooltip title={eachItem.label} arrow>
+      {explorationCardDetails &&
+        Array.isArray(explorationCardDetails) &&
+        explorationCardDetails?.map((eachItem, index) => {
+          switch (eachItem.type) {
+            case 'icon':
+              return (
+                <Grid item xs={3} key={index} className={classes.connectorIcon}>
+                  <Box>{eachItem.icon}</Box>
+                </Grid>
+              );
+            case 'iconWithText':
+              return (
+                <Grid item xs={3} className={classes.elementStyle} key={index}>
+                  {connectionRefValue ? (
+                    <CustomTooltip title={eachItem.label} arrow>
+                      <Typography
+                        variant="body1"
+                        ref={connectionNameRef}
+                        className={classes.iconWithText}
+                      >
+                        {eachItem.label}
+                      </Typography>
+                    </CustomTooltip>
+                  ) : (
                     <Typography
                       variant="body1"
                       ref={connectionNameRef}
@@ -59,36 +70,37 @@ export default function({ explorationCardDetails, cardIndex }) {
                     >
                       {eachItem.label}
                     </Typography>
-                  </CustomTooltip>
-                ) : (
-                  <Typography
-                    variant="body1"
-                    ref={connectionNameRef}
-                    className={classes.iconWithText}
-                  >
+                  )}
+                </Grid>
+              );
+            case 'text':
+              return eachItem.label.includes('Recipe steps') ? (
+                <Grid item xs={3} className={classes.elementStyle} key={index}>
+                  <Typography variant="body1" className={classes.textWithoutIcon}>
+                    {' '}
                     {eachItem.label}
                   </Typography>
-                )}
-              </Grid>
-            );
-          case 'text':
-            return eachItem.label.includes('Recipe steps') ? (
-              <Grid item xs={3} className={classes.elementStyle} key={index}>
-                <Typography variant="body1" className={classes.textWithoutIcon}>
-                  {' '}
-                  {eachItem.label}
-                </Typography>
-              </Grid>
-            ) : (
-              <Grid
-                item
-                xs={3}
-                className={classes.elementStyle}
-                key={index}
-                data-testid={`home-ongoing-explorations-${eachItem.type}-${cardIndex}`}
-              >
-                {datasetNameRefValue ? (
-                  <CustomTooltip title={eachItem.label} arrow>
+                </Grid>
+              ) : (
+                <Grid
+                  item
+                  xs={3}
+                  className={classes.elementStyle}
+                  key={index}
+                  data-testid={`home-ongoing-explorations-${eachItem.type}-${cardIndex}`}
+                >
+                  {datasetNameRefValue ? (
+                    <CustomTooltip title={eachItem.label} arrow>
+                      <Typography
+                        variant="body1"
+                        ref={datasetNameRef}
+                        className={classes.textWithoutIcon}
+                      >
+                        {' '}
+                        {eachItem.label}
+                      </Typography>
+                    </CustomTooltip>
+                  ) : (
                     <Typography
                       variant="body1"
                       ref={datasetNameRef}
@@ -97,64 +109,54 @@ export default function({ explorationCardDetails, cardIndex }) {
                       {' '}
                       {eachItem.label}
                     </Typography>
-                  </CustomTooltip>
-                ) : (
-                  <Typography
-                    variant="body1"
-                    ref={datasetNameRef}
-                    className={classes.textWithoutIcon}
-                  >
-                    {' '}
-                    {eachItem.label}
-                  </Typography>
-                )}
-              </Grid>
-            );
-          case 'percentageWithText': {
-            const percent = parseInt(eachItem.label, 10);
-            return percent && !isNaN(percent) ? (
-              <Grid
-                item
-                xs={3}
-                className={classes.elementStyle}
-                key={index}
-                data-testid="ongoing-data-exploration-card-percentage-nan"
-              >
-                <Box className={classes.percent}>
-                  <Typography
-                    variant="body2"
-                    className={
-                      percent < 100 ? classes.percentageStyleRed : classes.percentageStyleGreen
-                    }
-                    data-testid="ongoing-data-card-percentage"
-                  >
-                    {percent}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    className={
-                      percent < 100 ? classes.percentageSymbolRed : classes.percentageSymbolGreen
-                    }
-                    data-testid="ongoing-data-percentage-symbol"
-                  >
-                    {eachItem.percentageSymbol}
-                  </Typography>
-                </Box>
-                <Box className={classes.dataQualityTextContainer}>
-                  <Typography variant="body1" className={classes.dataQualityText}>
-                    {eachItem.subText}
-                  </Typography>
-                </Box>
-              </Grid>
-            ) : (
-              <Grid item xs={3}></Grid>
-            );
-          }
+                  )}
+                </Grid>
+              );
+            case 'percentageWithText': {
+              const percent = parseInt(eachItem.label, 10);
+              return percent && !isNaN(percent) ? (
+                <Grid
+                  item
+                  xs={3}
+                  className={classes.elementStyle}
+                  key={index}
+                  data-testid="ongoing-data-exploration-card-percentage-nan"
+                >
+                  <Box className={classes.percent}>
+                    <Typography
+                      variant="body2"
+                      className={
+                        percent < 100 ? classes.percentageStyleRed : classes.percentageStyleGreen
+                      }
+                      data-testid="ongoing-data-card-percentage"
+                    >
+                      {percent}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className={
+                        percent < 100 ? classes.percentageSymbolRed : classes.percentageSymbolGreen
+                      }
+                      data-testid="ongoing-data-percentage-symbol"
+                    >
+                      {eachItem.percentageSymbol}
+                    </Typography>
+                  </Box>
+                  <Box className={classes.dataQualityTextContainer}>
+                    <Typography variant="body1" className={classes.dataQualityText}>
+                      {eachItem.subText}
+                    </Typography>
+                  </Box>
+                </Grid>
+              ) : (
+                <Grid item xs={3}></Grid>
+              );
+            }
 
-          default:
-            break;
-        }
-      })}
+            default:
+              break;
+          }
+        })}
     </Grid>
   );
 }

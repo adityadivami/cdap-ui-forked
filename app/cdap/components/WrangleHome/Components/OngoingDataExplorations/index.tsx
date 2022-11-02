@@ -157,28 +157,30 @@ export default function() {
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {filteredData?.map((item, index) => {
-        return (
-          <Link
-            to={{
-              pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[5].workspaceId}`}`,
-              state: {
-                from: T.translate('features.Breadcrumb.labels.wrangleHome'),
-                path: T.translate('features.Breadcrumb.params.wrangleHome'),
-              },
-            }}
-            style={{ textDecoration: 'none' }}
-          >
-            {index <= 1 && (
-              <OngoingDataExplorationsCard
-                explorationCardDetails={item}
-                key={index}
-                cardIndex={index}
-              />
-            )}
-          </Link>
-        );
-      })}
+      {filteredData &&
+        Array.isArray(filteredData) &&
+        filteredData?.map((item, index) => {
+          return (
+            <Link
+              to={{
+                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[5].workspaceId}`}`,
+                state: {
+                  from: T.translate('features.Breadcrumb.labels.wrangleHome'),
+                  path: T.translate('features.Breadcrumb.params.wrangleHome'),
+                },
+              }}
+              style={{ textDecoration: 'none' }}
+            >
+              {index <= 1 && (
+                <OngoingDataExplorationsCard
+                  explorationCardDetails={item}
+                  key={index}
+                  cardIndex={index}
+                />
+              )}
+            </Link>
+          );
+        })}
     </Box>
   );
 }
