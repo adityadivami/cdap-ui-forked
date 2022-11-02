@@ -16,7 +16,7 @@
 
 import React, { ReactNode } from 'react';
 
-export interface IButtonWidget {
+export interface IButtonWidgetProps {
   buttonText: ReactNode;
   disabled: boolean;
   onClick: (event: React.MouseEvent<HTMLInputElement>) => void;

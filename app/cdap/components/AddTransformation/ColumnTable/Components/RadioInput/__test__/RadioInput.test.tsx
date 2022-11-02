@@ -16,7 +16,7 @@
 
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import RadioInput from '..';
+import RadioInput from 'components/AddTransformation/ColumnTable/Components/RadioInput';
 
 describe('It Should test RadioInput Component', () => {
   const mockEachColumn = {

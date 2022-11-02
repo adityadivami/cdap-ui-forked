@@ -17,7 +17,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { mockSelectedColumns } from 'components/AddTransformation/mock/mockDataForAddTransformation';
 import React from 'react';
-import SelectColumnsWidget from '..';
+import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
 
 describe('It should test SelectColumnsWidget Component', () => {
   it('Should render the SelectColumnsWidget Component', () => {

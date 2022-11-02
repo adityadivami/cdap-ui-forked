@@ -28,10 +28,11 @@ describe('It should test the SelectColumnsList Component', () => {
           <Route>
             <AddTransformation
               functionName="null"
-              directiveFunctionSupportedDataType={[]}
+              transformationFunctionSupportedDataType={[]}
               columnData={[]}
               missingDataList={undefined}
               callBack={() => jest.fn()}
+              applyTransformation={jest.fn()}
             />
           </Route>
         </Switch>
@@ -46,10 +47,11 @@ describe('It should test the SelectColumnsList Component', () => {
           <Route>
             <AddTransformation
               functionName="null"
-              directiveFunctionSupportedDataType={[]}
+              transformationFunctionSupportedDataType={[]}
               columnData={[]}
               missingDataList={undefined}
               callBack={() => jest.fn()}
+              applyTransformation={jest.fn()}
             />
           </Route>
         </Switch>
@@ -65,10 +67,11 @@ describe('It should test the SelectColumnsList Component', () => {
           <Route>
             <AddTransformation
               functionName="parseCSV"
-              directiveFunctionSupportedDataType={[]}
+              transformationFunctionSupportedDataType={[]}
               columnData={[]}
               missingDataList={undefined}
               callBack={() => jest.fn()}
+              applyTransformation={jest.fn()}
             />
           </Route>
         </Switch>

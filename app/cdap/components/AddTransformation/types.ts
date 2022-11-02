@@ -24,7 +24,7 @@ export interface IHeaderNamesList {
 }
 
 export interface IAddTransformationProps {
-  directiveFunctionSupportedDataType: string[];
+  transformationFunctionSupportedDataType: string[];
   functionName: string;
   columnData: IHeaderNamesList[];
   missingDataList: IStatistics;

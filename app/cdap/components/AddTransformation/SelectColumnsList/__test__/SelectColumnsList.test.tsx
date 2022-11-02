@@ -34,7 +34,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               setSelectedColumns={() => jest.fn()}
               dataQuality={[]}
-              directiveFunctionSupportedDataType={[]}
+              transformationFunctionSupportedDataType={[]}
               functionName={''}
             />
           </Route>
@@ -56,7 +56,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['all', 'test']}
+              transformationFunctionSupportedDataType={['all', 'test']}
               functionName={''}
             />
           </Route>
@@ -87,7 +87,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['test']}
+              transformationFunctionSupportedDataType={['test']}
               functionName={'join-columns'}
             />
           </Route>
@@ -119,7 +119,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['all', 'test']}
+              transformationFunctionSupportedDataType={['all', 'test']}
               functionName={''}
             />
           </Route>
@@ -148,7 +148,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['TEST', 'all']}
+              transformationFunctionSupportedDataType={['TEST', 'all']}
               functionName={''}
             />
           </Route>
@@ -177,7 +177,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['TEST', 'all']}
+              transformationFunctionSupportedDataType={['TEST', 'all']}
               functionName={'join-columns'}
             />
           </Route>

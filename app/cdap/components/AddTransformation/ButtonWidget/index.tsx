@@ -15,7 +15,7 @@
  */
 import { Button } from '@material-ui/core';
 import React from 'react';
-import { IButtonWidget } from './types';
+import { IButtonWidgetProps } from 'components/AddTransformation/ButtonWidget/types';
 
 export default function({
   buttonText,
@@ -24,7 +24,7 @@ export default function({
   variant,
   className,
   dataTestId,
-}: IButtonWidget) {
+}: IButtonWidgetProps) {
   return (
     <Button
       variant={variant}

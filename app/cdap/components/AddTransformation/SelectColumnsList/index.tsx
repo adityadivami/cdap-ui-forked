@@ -20,7 +20,7 @@ import { useStyles } from 'components/AddTransformation/styles';
 import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
-import { ISelectColumnListProps } from 'components/AddTransformation/SelectColumnsList/types';
+import { ISelectColumnsListProps } from 'components/AddTransformation/SelectColumnsList/types';
 import { IHeaderNamesList } from 'components/AddTransformation/types';
 import ColumnTable from 'components/AddTransformation/ColumnTable';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
@@ -28,13 +28,13 @@ import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColu
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 
 export default function({
-  directiveFunctionSupportedDataType,
+  transformationFunctionSupportedDataType,
   selectedColumnsCount,
   columnData,
   setSelectedColumns,
   dataQuality,
   functionName,
-}: ISelectColumnListProps) {
+}: ISelectColumnsListProps) {
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnData);
   const [selectedColumns, setSelectedColumn] = useState<IHeaderNamesList[]>([]);
   const [focused, setFocused] = useState<boolean>(false);
@@ -52,13 +52,13 @@ export default function({
   }, []);
 
   const columnsAsPerType: IHeaderNamesList[] | string[] =
-    directiveFunctionSupportedDataType?.length > 0 &&
-    directiveFunctionSupportedDataType?.includes('all')
-      ? directiveFunctionSupportedDataType?.filter(
+    transformationFunctionSupportedDataType?.length > 0 &&
+    transformationFunctionSupportedDataType?.includes('all')
+      ? transformationFunctionSupportedDataType?.filter(
           (supportedType: string) => supportedType === 'all'
         )
       : columns?.filter((columnDetail: IHeaderNamesList) => {
-          return directiveFunctionSupportedDataType?.some(
+          return transformationFunctionSupportedDataType?.some(
             (dataTypeCollection: string | string[]) => {
               return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
             }
@@ -165,7 +165,7 @@ export default function({
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
           columns={columns}
-          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+          transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
         />

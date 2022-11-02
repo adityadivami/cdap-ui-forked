@@ -14,18 +14,18 @@
  * the License.
  */
 import React from 'react';
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import T from 'i18n-react';
-import { useStyles } from '../styles';
-import { multipleColumnSelected } from '../constants';
-import { ISelectColumnWidget } from './types';
-import ButtonWidget from '../ButtonWidget';
+import { useStyles } from 'components/AddTransformation/styles';
+import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import { ISelectColumnsWidgetProps } from 'components/AddTransformation/SelectColumnsWidget/types';
+import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 
 export default function({
   selectedColumns,
   functionName,
   handleSelectColumn,
-}: ISelectColumnWidget) {
+}: ISelectColumnsWidgetProps) {
   const classes = useStyles();
 
   const singleColumnSelect = (
@@ -35,14 +35,14 @@ export default function({
         id="select-column-title"
         data-testid="select-column-title"
       >
-        {T.translate('features.WranglerNewAddTransformation.selectColumn')}
+        {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara')}
       </div>
       <div
         className={classes.quickSelectTextStyles}
         id="select-column-subtitle"
         data-testid="select-column-subtitle"
       >
-        {T.translate('features.WranglerNewAddTransformation.quickSelect')}
+        {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.quickSelect')}
       </div>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
@@ -54,8 +54,10 @@ export default function({
         <ButtonWidget
           buttonText={
             multipleColumnSelected?.filter((el) => el.value === functionName).length > 0
-              ? T.translate('features.WranglerNewAddTransformation.selectMultiColumns')
-              : T.translate('features.WranglerNewAddTransformation.selectCoulmn')
+              ? T.translate(
+                  'features.WranglerNewUI.GridPage.addTransformationPanel.selectMultiColumns'
+                )
+              : T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.selectColumn')
           }
           className={classes.selectButtonStyles}
           onClick={() => handleSelectColumn(false)}

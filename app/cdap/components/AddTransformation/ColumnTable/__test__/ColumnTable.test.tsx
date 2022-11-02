@@ -16,7 +16,7 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import ColumnTable from '..';
+import ColumnTable from 'components/AddTransformation/ColumnTable';
 
 describe('Should test ColumnTable Component', () => {
   it('Should render ColumnTable Component', () => {
@@ -30,7 +30,7 @@ describe('Should test ColumnTable Component', () => {
             type: ['String'],
           },
         ]}
-        directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
+        transformationFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
         onSingleSelection={jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[

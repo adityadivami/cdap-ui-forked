@@ -21,7 +21,7 @@ import {
 } from 'components/AddTransformation/mock/mockDataForAddTransformation';
 
 import React from 'react';
-import TableRow from '..';
+import TableRow from 'components/AddTransformation/ColumnTable/Components/TableRow';
 
 describe('It Should test TableRow Component', () => {
   it('Should test TableRow Component', () => {

@@ -25,10 +25,10 @@ export interface IRecords {
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
 }
-interface IGeneralObjectRecord {
+export interface IGeneralObjectRecord {
   [key: string]: number | string;
 }
-interface IGeneral {
+export interface IGeneral {
   general?: IGeneralObjectRecord;
   types?: IGeneralObjectRecord;
 }

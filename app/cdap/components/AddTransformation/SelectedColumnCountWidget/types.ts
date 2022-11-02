@@ -14,6 +14,6 @@
  * the License.
  */
 
-export interface ISelectColumnCountProps {
+export interface ISelectedColumnCountWidgetProps {
   selectedColumnsCount: number;
 }

@@ -37,14 +37,10 @@ import {
   IExecuteAPIResponse,
   IHeaderNamesList,
   IMissingList,
-  IObject,
   IParams,
   IRecords,
   ICellData,
   IStatistics,
-  IDataQuality,
-  IRowData,
-  IMissingListData,
   IGridParams,
   IRequestBody,
   IApiPayload,
@@ -313,7 +309,7 @@ export default function GridTable() {
       {transformationFunction && (
         <AddTransformation
           functionName={transformationFunction}
-          directiveFunctionSupportedDataType={transformationFunctionSupportedDataType}
+          transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
           columnData={headerNamesList}
           missingDataList={dataQuality}
           callBack={() => {
