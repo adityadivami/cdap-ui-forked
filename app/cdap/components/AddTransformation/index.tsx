@@ -92,6 +92,10 @@ export default function({
       ...transformationComponentValues,
       columnNames: columnData?.length > 0 ? columnData.map(({ label }) => label) : [],
     });
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      columnNames: columnData?.length > 0 ? columnData.map(({ label }) => label) : [],
+    });
   }, []);
 
   const enableDoneButton = () => {
