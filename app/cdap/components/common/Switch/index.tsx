@@ -63,12 +63,6 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export default function({ setIsShowName, isShowNames, inputProps }: ISwitchProps) {
-  return (
-    <StyledSwitch
-      onClick={() => setIsShowName(!isShowNames)}
-      checked={isShowNames}
-      inputProps={inputProps}
-    />
-  );
+export default function({ setShow, show, inputProps }: ISwitchProps) {
+  return <StyledSwitch onClick={() => setShow(!show)} checked={show} inputProps={inputProps} />;
 }

@@ -15,6 +15,6 @@
  */
 
 export interface IFunctionNameToggleProps {
-  setIsShowName: React.Dispatch<React.SetStateAction<boolean>>;
-  isShowNames: boolean;
+  setShowName: React.Dispatch<React.SetStateAction<boolean>>;
+  showName: boolean;
 }

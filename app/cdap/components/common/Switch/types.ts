@@ -19,7 +19,7 @@ interface IInputProps {
 }
 
 export interface ISwitchProps {
-  setIsShowName: React.Dispatch<React.SetStateAction<boolean>>;
-  isShowNames: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  show: boolean;
   inputProps?: IInputProps;
 }

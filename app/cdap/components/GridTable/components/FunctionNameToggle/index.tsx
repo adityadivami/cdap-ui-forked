@@ -21,21 +21,21 @@ import T from 'i18n-react';
 import { IFunctionNameToggleProps } from 'components/GridTable/components/FunctionNameToggle/types';
 import SwitchInputComponent from 'components/common/Switch';
 
-export default function({ setIsShowName, isShowNames }: IFunctionNameToggleProps) {
+const PREFIX = 'features.WranglerNewUI.GridPage';
+
+export default function({ setShowName, showName }: IFunctionNameToggleProps) {
   const classes = useStyles();
   return (
     <Box className={classes.functionWrapper}>
       <Typography className={classes.typoClass} component="div">
-        {T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.toggleDescription')}
+        {T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}
         &nbsp;
       </Typography>
       <SwitchInputComponent
-        setIsShowName={setIsShowName}
-        isShowNames={isShowNames}
+        setShow={setShowName}
+        show={showName}
         inputProps={{
-          'aria-label': T.translate(
-            'features.WranglerNewUI.GridPage.gridHeader.ariaLabels.functionsName'
-          ).toString(),
+          'aria-label': T.translate(`${PREFIX}.gridHeader.ariaLabels.functionsName`).toString(),
         }}
       />
     </Box>

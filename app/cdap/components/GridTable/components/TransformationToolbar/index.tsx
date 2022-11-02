@@ -36,25 +36,25 @@ export default function({
   showBreadCrumb,
 }: ITransformationToolBarProps) {
   const classes = useStyles();
-  const [isShowNames, setIsShowName] = useState<boolean>(false);
+  const [showName, setShowName] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
   const [selectedMenuOptions, setSelectedMenuOptions] = useState<IMenuItem[]>([]);
 
-  const handleMenuOpenClose = () => {
+  const toggleMenu = () => {
     setSelectedMenuOptions([]);
   };
 
   return (
     <Box className={classes.iconContainer}>
       <Box className={classes.container}>
-        {nestedMenuOptions?.map((menuItem, index) => {
+        {nestedMenuOptions?.map((eachOption, optionIndex) => {
           return (
             <>
               <Box className={classes.functionNameWrapper}>
-                {menuItem.options?.length ? (
+                {eachOption.options?.length ? (
                   <>
                     <Tooltip
-                      title={menuItem.title}
+                      title={eachOption.title}
                       classes={{
                         tooltip: classes.tooltipToolbar,
                         arrow: classes.arrowTooltip,
@@ -65,34 +65,34 @@ export default function({
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          setSelectedMenuOptions(menuItem.options);
+                          setSelectedMenuOptions(eachOption.options);
                           setAnchorEl(e.currentTarget);
                         }}
                       >
                         {' '}
-                        {menuItem.icon}
+                        {eachOption.icon}
                       </IconButton>
                     </Tooltip>
                     <NestedMenu
                       menuOptions={selectedMenuOptions}
                       columnType={columnType}
                       submitMenuOption={submitMenuOption}
-                      title={menuItem.title}
+                      title={eachOption.title}
                       setAnchorEl={setAnchorEl}
                       anchorEl={anchorEl}
                       open={Boolean(selectedMenuOptions.length)}
-                      handleMenuOpenClose={handleMenuOpenClose}
+                      handleMenuOpenClose={toggleMenu}
                     />
-                    {isShowNames && (
+                    {showName && (
                       <Typography className={classes.typoClass} component="div">
-                        {menuItem.toolName}
+                        {eachOption.toolName}
                       </Typography>
                     )}
                   </>
                 ) : (
                   <>
                     <Tooltip
-                      title={menuItem.title}
+                      title={eachOption.title}
                       classes={{
                         tooltip: classes.tooltipToolbar,
                         arrow: classes.arrowTooltip,
@@ -100,31 +100,31 @@ export default function({
                       arrow
                     >
                       <IconButton
-                        onClick={() => submitMenuOption(menuItem.action, menuItem.dataType)}
+                        onClick={() => submitMenuOption(eachOption.action, eachOption.dataType)}
                       >
-                        {menuItem.icon}
+                        {eachOption.icon}
                       </IconButton>
                     </Tooltip>
-                    {isShowNames && (
+                    {showName && (
                       <Typography className={classes.typoClass} component="div">
-                        {menuItem.toolName}
+                        {eachOption.toolName}
                       </Typography>
                     )}
                   </>
                 )}
               </Box>
-              {(index === 4 || index === 1 || index === 9) && (
-                <Box className={classes.divider}> {isShowNames ? LongDivider : Divider}</Box>
+              {(optionIndex === 4 || optionIndex === 1 || optionIndex === 9) && (
+                <Box className={classes.divider}> {showName ? LongDivider : Divider}</Box>
               )}
             </>
           );
         })}
-        <Box className={classes.lastDivider}> {isShowNames ? LongDivider : Divider}</Box>
+        <Box className={classes.lastDivider}> {showName ? LongDivider : Divider}</Box>
         <Box className={classes.searchBar}>
           {/* Search functionality UI component will be added here */}
         </Box>
       </Box>
-      <FunctionToggle setIsShowName={setIsShowName} isShowNames={isShowNames} />
+      <FunctionToggle setShowName={setShowName} showName={showName} />
       <IconButton
         className={showBreadCrumb ? classes.openHeader : classes.closeHeader}
         onClick={() => setShowBreadCrumb(!showBreadCrumb)}
