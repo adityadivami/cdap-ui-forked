@@ -20,7 +20,7 @@ import { createBrowserHistory as createHistory } from 'history';
 import { Route, Router, Switch } from 'react-router';
 import * as ApiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 
-import ParsingDrawer from '..';
+import ParsingDrawer from 'components/ParsingDrawer/index';
 import { async } from 'q';
 import history from 'services/history';
 

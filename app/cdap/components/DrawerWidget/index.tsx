@@ -17,9 +17,9 @@
 import { Box, Container, Drawer, Typography } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import React, { Fragment } from 'react';
-import DrawerWidgetHeading from './DrawerWidgetHeader';
-import { useStyles } from './styles';
-import { IDrawerWidgetProps } from './types';
+import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeader';
+import { useStyles } from 'components/DrawerWidget/styles';
+import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 
 export default function({

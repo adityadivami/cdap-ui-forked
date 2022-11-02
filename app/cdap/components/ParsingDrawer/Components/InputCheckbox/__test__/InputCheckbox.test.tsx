@@ -18,7 +18,7 @@ import { Route, Router, Switch } from 'react-router';
 import { render } from '@testing-library/react';
 import React from 'react';
 import { createBrowserHistory as createHistory } from 'history';
-import InputCheckbox from '..';
+import InputCheckbox from 'components/ParsingDrawer/Components/InputCheckbox';
 import history from 'services/history';
 
 describe('Should Test the InputCheckbox Component', () => {

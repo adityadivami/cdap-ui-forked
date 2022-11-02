@@ -38,7 +38,7 @@ import {
   IObject,
   IParams,
   IRecords,
-} from './types';
+} from 'components/GridTable/types';
 import { convertNonNullPercent } from './utils';
 import ParsingDrawer from 'components/ParsingDrawer';
 import NoRecordScreen from 'components/NoRecordScreen';

@@ -171,7 +171,7 @@ export const useStyles = makeStyles(() => {
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 15,
-      lineHeight: '26px',
+      lineHeight: 26,
       letterSpacing: 0.46,
       color: '#FFFFFF',
       alignSelf: 'flex-end',

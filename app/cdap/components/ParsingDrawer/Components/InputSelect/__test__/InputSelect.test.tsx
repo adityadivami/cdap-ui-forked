@@ -18,8 +18,8 @@ import { fireEvent, render } from '@testing-library/react';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import InputSelect from '..';
-import { CHAR_ENCODING_OPTIONS } from '../../ParsingPopupBody/parsingOptions';
+import InputSelect from 'components/ParsingDrawer/Components/InputSelect/index';
+import { CHAR_ENCODING_OPTIONS } from 'components/ParsingDrawer/Components/ParsingPopupBody/parsingOptions';
 import history from 'services/history';
 
 const mockOptions = [

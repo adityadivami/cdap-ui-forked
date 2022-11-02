@@ -16,9 +16,9 @@
 
 import { Box, InputLabel } from '@material-ui/core';
 import React, { ChangeEvent, useEffect } from 'react';
-import { useStyles } from '../../styles';
-import InputCheckbox from '../InputCheckbox';
-import InputSelect from '../InputSelect';
+import { useStyles } from 'components/ParsingDrawer/styles';
+import InputCheckbox from 'components/ParsingDrawer/Components/InputCheckbox';
+import InputSelect from 'components/ParsingDrawer/Components/InputSelect';
 import { CHAR_ENCODING_OPTIONS, FORMAT_OPTIONS } from './parsingOptions';
 import T from 'i18n-react';
 import { IParsingPopupBodyProps } from 'components/ParsingDrawer/types';

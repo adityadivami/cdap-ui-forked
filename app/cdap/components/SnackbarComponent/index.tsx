@@ -40,7 +40,7 @@ export default function PositionedSnackbar({ messageToDisplay, handleCloseError 
 
   return (
     <Snackbar
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       open={isOpen}
       onClose={handleClose}
       TransitionComponent={() => (

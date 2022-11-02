@@ -17,7 +17,7 @@
 import React from 'react';
 import { createBrowserHistory as createHistory } from 'history';
 import { Router, Route, Switch } from 'react-router';
-import ParsingPopupBody from '..';
+import ParsingPopupBody from 'components/ParsingDrawer/Components/ParsingPopupBody/index';
 import { fireEvent, render, within, screen } from '@testing-library/react';
 import { CHAR_ENCODING_OPTIONS, FORMAT_OPTIONS } from '../parsingOptions';
 import history from 'services/history';

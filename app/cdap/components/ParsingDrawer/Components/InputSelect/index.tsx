@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
-import { useStyles } from '../../styles';
+import { useStyles } from 'components/ParsingDrawer/styles';
 import { IInputSelectProps } from 'components/ParsingDrawer/types';
 
 export default function({
