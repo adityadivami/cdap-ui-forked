@@ -15,7 +15,7 @@
  */
 
 import React, { useState } from 'react';
-import DrawerWidget from '.';
+import DrawerWidget from 'components/DrawerWidget';
 
 export default function() {
   const [open, setOpen] = useState<boolean>(true);
