@@ -38,14 +38,14 @@ export default function() {
         >
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
             <Typography className={classes.text}>
-              {T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome')}
+              {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
             </Typography>
           </Link>
           <Typography
             className={`${classes.text} ${classes.textWorkspaces}`}
             data-testid="breadcrumb-label-workspaces"
           >
-            {T.translate('features.NewWranglerUI.Breadcrumb.labels.workSpaces')}
+            {T.translate('features.WranglerNewUI.Breadcrumb.labels.workSpaces')}
           </Typography>
         </Breadcrumbs>
       </Box>

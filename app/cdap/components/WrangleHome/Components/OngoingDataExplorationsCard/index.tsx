@@ -39,7 +39,7 @@ export default function({ explorationCardDetails, cardIndex, fromAddress }) {
     <Grid
       container
       className={
-        fromAddress === T.translate('features.Breadcrumb.labels.wrangleHome')
+        fromAddress === T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')
           ? classes.gridContainerHome
           : classes.gridContainerWorkspaces
       }

@@ -74,7 +74,9 @@ export default function() {
         )}
         <OngoingDataExplorations
           cardCount={cardCount}
-          fromAddress={T.translate('features.Breadcrumb.labels.wrangleHome').toString()}
+          fromAddress={T.translate(
+            'features.WranglerNewUI.Breadcrumb.labels.wrangleHome'
+          ).toString()}
           setLoading={setLoading}
           setShowExplorations={setShowExplorations}
         />
