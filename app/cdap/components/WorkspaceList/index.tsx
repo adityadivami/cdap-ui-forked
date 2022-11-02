@@ -18,12 +18,12 @@ import { Breadcrumbs, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import LoadingSVG from 'components/shared/LoadingSVG';
+import { useStyles } from 'components/WorkspaceList/style';
 import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExplorations';
+import T from 'i18n-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { useStyles } from 'components/WorkspaceList/style';
-import T from 'i18n-react';
 
 export default function() {
   const [loading, setLoading] = useState<boolean>(true);

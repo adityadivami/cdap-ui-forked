@@ -15,15 +15,14 @@
  */
 
 import { Box, Card, Typography } from '@material-ui/core';
+import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import { BigQuery } from 'components/WrangleHome/Components/WrangleCard/iconStore/BigQuerySVG';
 import { CloudSQLMySQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/CloudSQLMySQL';
 import { CloudSQLPostGreSQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/CloudSQLPostGreSQL';
 import { Database } from 'components/WrangleHome/Components/WrangleCard/iconStore/Database';
 import { GCS } from 'components/WrangleHome/Components/WrangleCard/iconStore/GCS';
+import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
 import { Kafka } from 'components/WrangleHome/Components/WrangleCard/iconStore/Kafka';
 import { MySQL } from 'components/WrangleHome/Components/WrangleCard/iconStore/MySQL';
 import { Oracle } from 'components/WrangleHome/Components/WrangleCard/iconStore/Oracle';
@@ -32,8 +31,9 @@ import { S3 } from 'components/WrangleHome/Components/WrangleCard/iconStore/S3';
 import { Spanner } from 'components/WrangleHome/Components/WrangleCard/iconStore/Spanner';
 import { SQLServer } from 'components/WrangleHome/Components/WrangleCard/iconStore/SQLServer';
 import { useStyles } from 'components/WrangleHome/Components/WrangleCard/styles';
-import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function WrangleCard() {
   const [connectorTypes, setConnectorTypes] = useState({

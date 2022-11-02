@@ -17,25 +17,25 @@
 import { Box } from '@material-ui/core/';
 import MyDataPrepApi from 'api/dataprep';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import NoRecordScreen from 'components/NoRecordScreen';
+import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorations/styles';
 import {
+  ICardCount,
+  IConnectionsList,
   IConnectionWithConnectorType,
   IExistingExplorationCardsData,
-  IConnectionsList,
   IMassagedObject,
   IValues,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
-import React, { useCallback, useEffect, useState } from 'react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
-import { defaultIfEmpty, switchMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs/observable/forkJoin';
 import T from 'i18n-react';
-import NoRecordScreen from 'components/NoRecordScreen';
-import { ICardCount } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
-import { of } from 'rxjs/observable/of';
+import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useStyles } from './styles';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { of } from 'rxjs/observable/of';
+import { defaultIfEmpty, switchMap } from 'rxjs/operators';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function({ cardCount, fromAddress, setLoading, setShowExplorations }: ICardCount) {
   const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IMassagedObject[]>([]);

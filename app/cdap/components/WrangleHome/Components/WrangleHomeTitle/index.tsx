@@ -15,9 +15,9 @@
  */
 
 import { Box, Typography } from '@material-ui/core';
+import { useStyles } from 'components/WrangleHome/Components/WrangleHomeTitle/styles';
 import { UnderLine } from 'components/WrangleHome/icons';
 import React from 'react';
-import { useStyles } from './styles';
 
 export default function WrangleHomeTitle({ title }) {
   const classes = useStyles();

@@ -15,19 +15,19 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import ConnectionList from 'components/ConnectionList/index';
+import {
+  connectionListDummyResFile,
+  connectionListDummyResPostGresSql,
+  mockDataForExploreConnection,
+  mockResponseForFetchConnectors,
+} from 'components/ConnectionList/mock/mockDataForConnectionList';
 import * as apiHelpersForExploreConnection from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
 import * as reducer from 'components/Connections/Create/reducer';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import history from 'services/history';
-import ConnectionList from '..';
-import {
-  connectionListDummyResFile,
-  connectionListDummyResPostGresSql,
-  mockDataForExploreConnection,
-  mockResponseForFetchConnectors,
-} from '../mock/mockDataForConnectionList';
 
 describe('It Should test Connection List Component', () => {
   const dummyRes = new Map();

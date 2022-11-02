@@ -19,6 +19,19 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import Breadcrumb from 'components/GridTable/components/Breadcrumb';
+import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
+import GridKPICell from 'components/GridTable/components/GridKPICell';
+import GridTextCell from 'components/GridTable/components/GridTextCell';
+import { useStyles } from 'components/GridTable/styles';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IObject,
+  IParams,
+  IRecords,
+} from 'components/GridTable/types';
+import { convertNonNullPercent } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
@@ -27,13 +40,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-import Breadcrumb from './components/Breadcrumb';
-import GridHeaderCell from './components/GridHeaderCell';
-import GridKPICell from './components/GridKPICell';
-import GridTextCell from './components/GridTextCell';
-import { useStyles } from './styles';
-import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
-import { convertNonNullPercent } from './utils';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;

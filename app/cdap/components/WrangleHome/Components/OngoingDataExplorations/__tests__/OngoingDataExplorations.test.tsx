@@ -14,14 +14,17 @@
  * the License.
  */
 
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import OngoingDataExploration from '../index';
 import MyDataPrepApi from 'api/dataprep';
-import operators from 'rxjs/operators';
+import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExplorations';
+import {
+  getWorkspaceListSubscribeMock,
+  switchMapCallbackMock,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mockoldData';
 import { createBrowserHistory as createHistory } from 'history';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import { switchMapCallbackMock, getWorkspaceListSubscribeMock } from '../mock/mockoldData';
+import operators from 'rxjs/operators';
 
 const history = createHistory({
   basename: '/',

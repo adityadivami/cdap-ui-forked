@@ -14,8 +14,7 @@
  * the License.
  */
 
-import React from 'react';
-import { IExecuteAPIResponse } from './types';
+import { IExecuteAPIResponse } from 'components/GridTable/types';
 
 /**
  *

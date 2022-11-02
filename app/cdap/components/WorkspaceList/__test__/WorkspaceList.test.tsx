@@ -15,10 +15,10 @@
  */
 
 import { render } from '@testing-library/react';
+import WorkspaceList from 'components/WorkspaceList';
 import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import WorkspaceList from 'components/WorkspaceList';
 
 const history = createHistory({
   basename: '/',

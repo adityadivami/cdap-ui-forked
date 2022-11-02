@@ -15,11 +15,10 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import BreadCrumb from 'components/GridTable/components/Breadcrumb/index';
+import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import Breadcrumb from '..';
-import { createBrowserHistory as createHistory } from 'history';
-import BreadCrumb from '..';
 
 const history = createHistory({
   basename: '/',

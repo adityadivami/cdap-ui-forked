@@ -23,9 +23,9 @@ import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import WidgetSVG from 'components/WidgetSVG';
 import {
-  IConnectorTypesWithSVG,
   IConnectorDetailsPayload,
   IConnectorTypes,
+  IConnectorTypesWithSVG,
 } from 'components/WidgetSVG/types';
 import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
 import React from 'react';
@@ -39,17 +39,17 @@ export const getWidgetData = async () => {
     IConnectorDetailsPayload[]
   > = getCategoriesToConnectorsMap(connectorTypes);
   const connectionPayload: IConnectorDetailsPayload[] = [];
-  allConnectorsPluginProperties?.forEach((eachProperty) => {
+  allConnectorsPluginProperties?.forEach((eachProperty: IConnectorDetailsPayload[]) => {
     if (eachProperty.length) {
-      eachProperty.forEach((item) => {
+      eachProperty.forEach((item: IConnectorDetailsPayload) => {
         connectionPayload.push(item);
       });
     }
   });
 
   const connectionDetailsData = await Promise.all(
-    connectionPayload.map(async (item, index) => {
-      const selectedConnector = {
+    connectionPayload.map(async (item: IConnectorDetailsPayload) => {
+      const selectedConnector: IConnectorTypes = {
         artifact: item.artifact,
         category: item.category,
         name: item.name,

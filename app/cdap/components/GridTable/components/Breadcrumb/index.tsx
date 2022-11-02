@@ -17,11 +17,11 @@
 import { Box, Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useStyles } from './styles';
-import React from 'react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
-import { Link } from 'react-router-dom';
+import { useStyles } from 'components/GridTable/components/Breadcrumb/styles';
 import T from 'i18n-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function BreadCrumb({ workspaceName, location }) {
   const classes = useStyles();

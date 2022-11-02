@@ -28,5 +28,4 @@ export interface IOngoingDataExporationCardData {
   explorationCardDetails: IEachItem[];
   cardIndex: number;
   fromAddress: string;
-  cardIndex: number;
 }

@@ -14,14 +14,14 @@
  * the License.
  */
 
-import React from 'react';
-import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs/index';
 import { fireEvent, render, screen } from '@testing-library/react';
+import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs/index';
 import { mockTabsDataWithBrowse } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsDataWithBrowse';
 import { mockTabsDataWithBrowseIndex } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsDataWithBrowseIndex';
 import { mockTabsTestData } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsTestData';
-import { Route, Router, Switch } from 'react-router';
 import { createBrowserHistory } from 'history';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
 
 const tabsTestData = [{ showTabs: true }];
 

@@ -16,11 +16,11 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import { useStyles } from 'components/ConnectionList/Components/TabLabelCanBrowse/styles';
 import * as React from 'react';
 import { createRef, Ref, useEffect, useState } from 'react';
-import { useStyles } from './styles';
 
 export default function TabLabelCanBrowse({
   label,

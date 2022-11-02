@@ -14,8 +14,8 @@
  * the License.
  */
 
-import { combineReducers, createStore } from 'redux';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import { combineReducers, createStore } from 'redux';
 import { composeEnhancers } from 'services/helpers';
 
 export interface IDataPrepAction {
