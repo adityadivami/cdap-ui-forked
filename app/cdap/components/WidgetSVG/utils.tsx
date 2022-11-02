@@ -69,7 +69,7 @@ export const getWidgetData = async () => {
     connectionDetailsData.length &&
     connectionDetailsData.map(({ connectorWidgetJSON }) => connectorWidgetJSON);
 
-  connectorsTypesData.map((connectorType) => {
+  connectorsTypesData.map((connectorType: IConnectorTypes) => {
     let connectorTypeHasWidget: boolean = false;
     // Getting widget icons for connector types
     Array.isArray(connectorWidgetJson) &&

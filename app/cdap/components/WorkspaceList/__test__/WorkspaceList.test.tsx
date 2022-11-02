@@ -16,13 +16,9 @@
 
 import { render } from '@testing-library/react';
 import WorkspaceList from 'components/WorkspaceList';
-import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
 
 describe('Test the Workspace List Component', () => {
   it('Should render the Workspace List Component', () => {
@@ -36,8 +32,8 @@ describe('Test the Workspace List Component', () => {
       </Router>
     );
     expect(render).toBeDefined();
-    const ele = screen.getByTestId(/workspace-list-parent/i);
-    expect(ele).toBeInTheDocument();
+    const workspaceListContainerElement = screen.getByTestId(/workspace-list-parent/i);
+    expect(workspaceListContainerElement).toBeInTheDocument();
   });
 
   it('Should should have Workspaces Label in Breadcrumb', () => {
@@ -51,7 +47,9 @@ describe('Test the Workspace List Component', () => {
       </Router>
     );
     expect(render).toBeDefined();
-    const element = screen.getByTestId(/breadcrumb-label-workspaces/i);
-    expect(element).toHaveTextContent('features.WranglerNewUI.Breadcrumb.labels.workSpaces');
+    const BreadcrumbLabelElement = screen.getByTestId(/breadcrumb-label-workspaces/i);
+    expect(BreadcrumbLabelElement).toHaveTextContent(
+      'features.WranglerNewUI.Breadcrumb.labels.workSpaces'
+    );
   });
 });

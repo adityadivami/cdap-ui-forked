@@ -21,14 +21,10 @@ import {
   getWorkspaceListSubscribeMock,
   switchMapCallbackMock,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mockoldData';
-import { createBrowserHistory as createHistory } from 'history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import operators from 'rxjs/operators';
-
-const history = createHistory({
-  basename: '/',
-});
+import history from 'services/history';
 
 const testObj = {
   connectionName: 'Upload',

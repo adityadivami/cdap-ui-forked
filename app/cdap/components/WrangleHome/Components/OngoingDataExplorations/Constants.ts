@@ -25,3 +25,4 @@ export const DATA_QUALITY = 'dataQuality';
 export const PERCENTAGE_WITH_TEXT = 'percentageWithText';
 export const WORKSPACE_ID = 'workspaceId';
 export const COUNT = 'count';
+export const IMPORT_DATASET = 'Imported Dataset';

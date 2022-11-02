@@ -30,11 +30,13 @@ import { Route, Router, Switch } from 'react-router';
 import history from 'services/history';
 
 describe('It Should test Connection List Component', () => {
-  const dummyRes = new Map();
+  const mockResponseData = new Map();
   it('Should render Connection List Component', () => {
-    dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
-    dummyRes.set('File', connectionListDummyResFile);
-    jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
+    mockResponseData.set('PostgreSql', connectionListDummyResPostGresSql);
+    mockResponseData.set('File', connectionListDummyResFile);
+    jest
+      .spyOn(apiHelpers, 'getCategorizedConnections')
+      .mockReturnValue(Promise.resolve(mockResponseData));
 
     jest
       .spyOn(reducer, 'fetchConnectors')
@@ -56,8 +58,10 @@ describe('It Should test Connection List Component', () => {
     expect(container).toBeDefined();
   });
 
-  dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
-  jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
+  mockResponseData.set('PostgreSql', connectionListDummyResPostGresSql);
+  jest
+    .spyOn(apiHelpers, 'getCategorizedConnections')
+    .mockReturnValue(Promise.resolve(mockResponseData));
 
   jest
     .spyOn(reducer, 'fetchConnectors')

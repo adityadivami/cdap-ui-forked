@@ -17,14 +17,15 @@
 import { Box } from '@material-ui/core/';
 import MyDataPrepApi from 'api/dataprep';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import { IParams } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorations/styles';
 import {
-  ICardCount,
   IConnectionsList,
   IConnectionWithConnectorType,
   IExistingExplorationCardsData,
   IMassagedObject,
+  IOngoingDataExplorationsProps,
   IValues,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
@@ -36,8 +37,14 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { of } from 'rxjs/observable/of';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import { IMPORT_DATASET } from './Constants';
 
-export default function({ cardCount, fromAddress, setLoading, setShowExplorations }: ICardCount) {
+export default function({
+  cardCount,
+  fromAddress,
+  setLoading,
+  setShowExplorations,
+}: IOngoingDataExplorationsProps) {
   const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IMassagedObject[]>([]);
 
   const classes = useStyles();
@@ -48,26 +55,28 @@ export default function({ cardCount, fromAddress, setLoading, setShowExploration
     > = await getCategorizedConnections();
     const connectionsWithConnectorTypeDataObject: IConnectionWithConnectorType[] = [];
     for (const connectorName of connectionsWithConnectorTypeData.keys()) {
-      const values = connectionsWithConnectorTypeData.get(connectorName);
-      const connections = values.map((eachValue) => {
-        return {
-          name: eachValue.name,
-          connectorType: eachValue.connectionType,
-        };
-      });
+      const values: IConnectionsList[] = connectionsWithConnectorTypeData.get(connectorName);
+      const connections: IConnectionWithConnectorType[] = values?.map(
+        (eachValue: IConnectionsList) => {
+          return {
+            name: eachValue.name,
+            connectorType: eachValue.connectionType,
+          };
+        }
+      );
       connectionsWithConnectorTypeDataObject.push(...connections);
     }
 
-    const findConnectorType = (connection): string => {
+    const findConnectorType = (connection: string): string => {
       if (connection) {
         const matchedConnection: IConnectionWithConnectorType = connectionsWithConnectorTypeDataObject.find(
-          (eachConnection) => {
+          (eachConnection: IConnectionWithConnectorType) => {
             return eachConnection.name === connection.replace('_', ' ');
           }
         );
         return matchedConnection ? matchedConnection.connectorType : undefined;
       }
-      return 'Imported Dataset';
+      return IMPORT_DATASET;
     };
 
     const expData: IExistingExplorationCardsData[] = [];
@@ -86,8 +95,8 @@ export default function({ cardCount, fromAddress, setLoading, setShowExploration
           // sorting the workspaces based on dataset created time.
           values.sort((a, b) => b.createdTimeMillis - a.createdTimeMillis);
 
-          const workspaces = values.map((eachValue) => {
-            const params = {
+          const workspaces = values.map((eachValue: IValues) => {
+            const params: IParams = {
               context: 'default',
               workspaceId: eachValue.workspaceId,
             };

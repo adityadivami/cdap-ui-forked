@@ -23,8 +23,8 @@ import WrangleHomeTitle from 'components/WrangleHome/Components/WrangleHomeTitle
 import { GradientLine, HeaderImage } from 'components/WrangleHome/icons';
 import { useStyles } from 'components/WrangleHome/styles';
 import T from 'i18n-react';
-import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function() {

@@ -118,7 +118,7 @@ export interface IEachData {
   workspaceName: string;
 }
 
-export interface ICardCount {
+export interface IOngoingDataExplorationsProps {
   cardCount?: number;
   fromAddress: string;
   setLoading?: React.Dispatch<React.SetStateAction<boolean>>;
