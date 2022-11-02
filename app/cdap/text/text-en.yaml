@@ -3447,3 +3447,14 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+  NewWranglerUI:
+    Breadcrumb:
+      labels:
+        connectionsList: 'Data Sources'
+        wrangleHome: 'Home'
+        workSpaces: 'Workspaces'
+        loadToGrid: 'Wrangle'
+      params:
+        wrangeHome: 'home'
+        connectionsList: 'datasources'
+    
