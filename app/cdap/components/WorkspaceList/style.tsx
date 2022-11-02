@@ -22,6 +22,7 @@ export const useStyles = makeStyles({
     '& *': {
       fontFamily: "'Noto Sans', sans-serif",
     },
+    paddingBottom: 10,
   },
   header: {
     height: '48px',

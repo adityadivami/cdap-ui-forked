@@ -43,7 +43,7 @@ export default function({ explorationCardDetails, cardIndex, fromAddress }) {
           ? classes.gridContainerHome
           : classes.gridContainerWorkspaces
       }
-      data-testid="wrangler-home-ongoing-data-exploration-card"
+      data-testid={`wrangler-home-ongoing-data-exploration-card-${cardIndex}`}
     >
       {explorationCardDetails.map((eachItem, index) => {
         switch (eachItem.type) {

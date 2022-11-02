@@ -182,7 +182,7 @@ export default function({ cardCount, fromAddress, setLoading, setShowExploration
               <OngoingDataExplorationsCard
                 key={index}
                 explorationCardDetails={item}
-                cardIndex={cardCount}
+                cardIndex={index}
                 fromAddress={fromAddress}
               />
             </Link>
