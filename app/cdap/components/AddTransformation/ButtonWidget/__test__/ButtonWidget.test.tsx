@@ -16,7 +16,7 @@
 
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import ButtonWidget from '..';
+import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 
 describe('Should test ButtonWidget Component', () => {
   it('Should render the ButtonWidget Component', () => {

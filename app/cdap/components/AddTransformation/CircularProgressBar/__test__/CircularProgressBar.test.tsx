@@ -17,21 +17,21 @@
 import { render, screen } from '@testing-library/react';
 import { textEditor } from 'components/AbstractWidget/CodeEditorWidgets.stories';
 import React from 'react';
-import CircularProgressBar from '..';
+import CircularProgressBar from 'components/AddTransformation/CircularProgressBar';
 
 describe('Should test CircularProgressBar Component', () => {
   it('Should render CircularProgressBar Component with value < 100', () => {
-    const container = render(<CircularProgressBar value={'60'} />);
+    const container = render(<CircularProgressBar value={60} />);
     expect(container).toBeDefined();
   });
 
   it('Should render CircularProgressBar Component with value = 100', () => {
-    const container = render(<CircularProgressBar value={'100'} />);
+    const container = render(<CircularProgressBar value={100} />);
     expect(container).toBeDefined();
   });
 
   it('Should have text as 100%', () => {
-    render(<CircularProgressBar value={'100'} />);
+    render(<CircularProgressBar value={100} />);
     const textElement = screen.getByTestId('data-quality-percent');
     expect(textElement).toHaveTextContent('100%');
   });

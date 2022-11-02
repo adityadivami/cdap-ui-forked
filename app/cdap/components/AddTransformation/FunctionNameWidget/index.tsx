@@ -16,10 +16,11 @@
 import React from 'react';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import T from 'i18n-react';
-import { useStyles } from '../styles';
-import { TickIcon } from '../iconStore';
+import { useStyles } from 'components/AddTransformation/styles';
+import { TickIcon } from 'components/AddTransformation/iconStore';
+import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
 
-export default function({ functionName }: { functionName: string }) {
+export default function({ functionName }: IFunctionNameWidgetProps) {
   const classes = useStyles();
 
   return (
@@ -30,7 +31,7 @@ export default function({ functionName }: { functionName: string }) {
           data-testid="function-name-head"
           id="function-name-head"
         >
-          {T.translate('features.WranglerNewAddTransformation.function')}
+          {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.function')}
         </div>
         {TickIcon}
       </div>

@@ -13,9 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { IHeaderNamesList } from '../types';
+import { IHeaderNamesList } from 'components/AddTransformation/types';
 
-export interface ISelectColumnWidget {
+export interface ISelectColumnsWidgetProps {
   selectedColumns: IHeaderNamesList[];
   functionName: string;
   handleSelectColumn: (value: boolean) => void;

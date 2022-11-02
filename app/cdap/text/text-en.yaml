@@ -3478,12 +3478,15 @@ features:
             menu:
               changeDatatype: Change data type
       addTransformationPanel:
+        addTransformation: Add Transformation Step
         applyStep: Apply Step
         columnsSelected: columns selected
         columns: Columns
         dataQuality: Data Quality
         done: Done
+        function: Function
         nullValues: Null Values
+        quickSelect: Quick select by clicking a column on the grid/columns panel
         selectColumnPara: Select column(s) to apply this function
         selectColumn: Select column
         selectMultiColumns: Select columns

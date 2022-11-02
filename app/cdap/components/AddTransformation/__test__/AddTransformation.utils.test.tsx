@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { getDirective } from '../utils';
+import { getDirective } from 'components/AddTransformation/utils';
 
 describe('It should test getDirective function', () => {
   it('should call getDirective() when there is error in function name', () => {

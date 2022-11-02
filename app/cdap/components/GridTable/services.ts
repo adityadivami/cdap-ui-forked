@@ -16,7 +16,7 @@
 
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
-import { IRecords, IGridParams, IRequestBody, IApiPayload } from './types';
+import { IRecords, IGridParams, IRequestBody, IApiPayload } from 'components/GridTable/types';
 
 export const getAPIRequestPayload = (
   params: IRecords,

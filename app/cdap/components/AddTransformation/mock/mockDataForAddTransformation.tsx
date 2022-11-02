@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
+import { IGeneral } from 'components/GridTable/types';
 export const mockDirectiveFunctionSupportedDataType = ['string'];
 export const mockFunctionName = 'uppercase';
 export const mockColumnData = [
@@ -63,7 +63,7 @@ export const mockDataQualityValue = [
   },
 ];
 
-export const mockStatistics = {
+export const mockStatistics: IGeneral = {
   general: {
     'non-null': 100,
   },

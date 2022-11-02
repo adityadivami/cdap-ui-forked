@@ -31,7 +31,7 @@ import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/type
 
 export default function({
   columns,
-  directiveFunctionSupportedDataType,
+  transformationFunctionSupportedDataType,
   onSingleSelection,
   selectedColumns,
   dataQualityValue,
@@ -70,7 +70,7 @@ export default function({
         <TableBody>
           {columns?.length > 0 &&
             columns.map((eachColumn, index) =>
-              directiveFunctionSupportedDataType?.includes('all') ? (
+              transformationFunctionSupportedDataType?.includes('all') ? (
                 <TableRowWidget
                   onSingleSelection={onSingleSelection}
                   selectedColumns={selectedColumns}
@@ -81,7 +81,7 @@ export default function({
                   index={index}
                   eachColumn={eachColumn}
                 />
-              ) : directiveFunctionSupportedDataType?.includes(
+              ) : transformationFunctionSupportedDataType?.includes(
                   eachColumn?.type[0]?.toLowerCase()
                 ) ? (
                 <TableRowWidget

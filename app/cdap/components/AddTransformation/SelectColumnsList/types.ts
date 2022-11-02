@@ -17,8 +17,8 @@
 import React from 'react';
 import { IHeaderNamesList, IObject } from 'components/AddTransformation/types';
 
-export interface ISelectColumnListProps {
-  directiveFunctionSupportedDataType: string[];
+export interface ISelectColumnsListProps {
+  transformationFunctionSupportedDataType: string[];
   selectedColumnsCount: number;
   columnData: IHeaderNamesList[];
   setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;

@@ -19,7 +19,7 @@ import { IHeaderNamesList, IObject } from 'components/AddTransformation/types';
 
 export interface IColumnTableProps {
   columns: IHeaderNamesList[];
-  directiveFunctionSupportedDataType: string[];
+  transformationFunctionSupportedDataType: string[];
   onSingleSelection: (value: IHeaderNamesList) => void;
   selectedColumns: IHeaderNamesList[];
   dataQualityValue: IObject[];

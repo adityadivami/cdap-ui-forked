@@ -16,19 +16,19 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import AddTransformation from '..';
+import AddTransformation from 'components/AddTransformation';
 import {
   mockDirectiveFunctionSupportedDataType,
   mockFunctionName,
   mockColumnData,
   mockMissingDataList,
-} from '../mock/mockDataForAddTransformation';
+} from 'components/AddTransformation/mock/mockDataForAddTransformation';
 
 describe('It should test the AddTransformatio Component', () => {
   it('Should render the AddTransformation Component', () => {
     const container = render(
       <AddTransformation
-        directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
+        transformationFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
         functionName={mockFunctionName}
         columnData={mockColumnData}
         missingDataList={mockMissingDataList}
@@ -42,7 +42,7 @@ describe('It should test the AddTransformatio Component', () => {
   it('Trigger handleSelectColumn()', () => {
     render(
       <AddTransformation
-        directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
+        transformationFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
         functionName={mockFunctionName}
         columnData={mockColumnData}
         missingDataList={mockMissingDataList}
@@ -51,14 +51,14 @@ describe('It should test the AddTransformatio Component', () => {
       />
     );
 
-    const btn = screen.getByTestId('select-column-button');
-    fireEvent.click(btn);
-    expect(btn).toBeInTheDocument();
+    const selectColumnButton = screen.getByTestId('select-column-button');
+    fireEvent.click(selectColumnButton);
+    expect(selectColumnButton).toBeInTheDocument();
   });
   it('Trigger closeClickHandler() and closeSelectColumnsPopupWithoutColumn()', () => {
     render(
       <AddTransformation
-        directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
+        transformationFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
         functionName={mockFunctionName}
         columnData={mockColumnData}
         missingDataList={mockMissingDataList}
@@ -67,21 +67,21 @@ describe('It should test the AddTransformatio Component', () => {
       />
     );
 
-    const btn = screen.getByTestId('select-column-button');
-    fireEvent.click(btn);
-    expect(btn).toBeInTheDocument();
+    const selectColumnButton = screen.getByTestId('select-column-button');
+    fireEvent.click(selectColumnButton);
+    expect(selectColumnButton).toBeInTheDocument();
 
-    const btn2 = screen.getAllByTestId('back-icon')[0];
-    fireEvent.click(btn2);
+    const backIconButton = screen.getAllByTestId('back-icon')[0];
+    fireEvent.click(backIconButton);
 
-    const btn3 = screen.getAllByTestId('drawer-widget-close-round-icon')[0];
-    fireEvent.click(btn3);
+    const drawerCloseButton = screen.getAllByTestId('drawer-widget-close-round-icon')[0];
+    fireEvent.click(drawerCloseButton);
   });
 
   it('Trigger handleApply() , closeSelectColumnsPopupWithoutColumn ', () => {
     render(
       <AddTransformation
-        directiveFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
+        transformationFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
         functionName={mockFunctionName}
         columnData={mockColumnData}
         missingDataList={mockMissingDataList}
