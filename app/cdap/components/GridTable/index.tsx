@@ -179,14 +179,14 @@ export default function GridTable() {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
     setColumnType(types[columnName]);
   };
-  const { data, headers, types, directives, undoDirectives } = dataprep;
+  const { types } = dataprep;
 
   const renameColumnNameHandler = (oldColumnName: string, newColumnName: string) => {
     const directive = `rename ${oldColumnName} ${newColumnName}`;
     applyDirectiveAPICall(directive, 'add', [], 'insightsPanel');
   };
 
-  const applyDirectiveAPICall = (newDirective, action, removed_arr, from) => {
+  const applyDirectiveAPICall = (newDirective: string, action, removed_arr, from) => {
     setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
@@ -291,7 +291,7 @@ export default function GridTable() {
     applyDirectiveAPICall(newDirective, 'add', [], 'insightsPanel');
   };
 
-  const onColumnSelection = (columnName) => {
+  const onColumnSelection = (columnName: string) => {
     const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
     const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
     const getMissingValueCount =
@@ -360,11 +360,12 @@ export default function GridTable() {
           }}
         />
       )}
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}
+      {Array.isArray(gridData?.headers) && gridData?.headers?.length === 0 && <NoDataScreen />}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
-            {headersNamesList?.length > 0 &&
+            {Array.isArray(headersNamesList) &&
+              headersNamesList?.length > 0 &&
               headersNamesList.map((eachHeader) => (
                 <GridHeaderCell
                   label={eachHeader.label}
@@ -377,7 +378,8 @@ export default function GridTable() {
               ))}
           </TableRow>
           <TableRow>
-            {missingDataList?.length > 0 &&
+            {Array.isArray(missingDataList) &&
+              missingDataList?.length > 0 &&
               headersNamesList?.length > 0 &&
               headersNamesList.map((each, index) => {
                 return missingDataList.map((item, itemIndex) => {
@@ -389,7 +391,8 @@ export default function GridTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rowsDataList?.length > 0 &&
+          {Array.isArray(rowsDataList) &&
+            rowsDataList?.length > 0 &&
             rowsDataList.map((eachRow, rowIndex) => {
               return (
                 <TableRow key={`row-${rowIndex}`}>

@@ -22,7 +22,7 @@ import T from 'i18n-react';
 
 export default function ToggleButton({ dataQuality }: IDataQualityProps) {
   const classes = useStyles();
-  const [isSelected, setIsSelected] = useState(0);
+  const [isSelected, setIsSelected] = useState<number>(0);
   return (
     <Box>
       <Box className={classes.dataQualityCard}>
@@ -49,7 +49,7 @@ export default function ToggleButton({ dataQuality }: IDataQualityProps) {
         >
           <Typography className={classes.invalidText} variant="body1">
             {T.translate('features.NewWranglerUI.ColumnInsights.invalid')}
-            {` ${dataQuality.invalidValueCount} (${dataQuality.invalidValuePercentage}%)`}
+            {` ${dataQuality?.invalidValueCount} (${dataQuality?.invalidValuePercentage}%)`}
           </Typography>
         </Box>
       </Box>

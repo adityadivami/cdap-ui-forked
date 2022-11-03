@@ -49,11 +49,11 @@ export default function ColumnDetails({
     setCanEdit(true);
   };
 
-  const onChangeHandler = (e) => {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const onBlurEvent = (e) => {
+  const onBlurEvent = (e: React.FocusEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     setCanEdit(false);
     if (e.target.value !== columnName) {

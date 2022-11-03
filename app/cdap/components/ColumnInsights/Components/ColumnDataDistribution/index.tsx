@@ -21,6 +21,7 @@ import { IColumnDataDistributionProps } from 'components/ColumnInsights/Componen
 import T from 'i18n-react';
 import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import { IRecords } from 'components/GridTable/types';
 
 export default function ColumnDataDistribution({ graphData }: IColumnDataDistributionProps) {
   const classes = useStyles();
@@ -28,7 +29,7 @@ export default function ColumnDataDistribution({ graphData }: IColumnDataDistrib
   const handleBarClick = () => {
     // TODO
   };
-  const spliceData = (data) => {
+  const spliceData = (data: IRecords) => {
     if (data.length >= 10) {
       return data.slice(0, 9);
     }

@@ -36,13 +36,13 @@ export default function GridHeaderCell({
   const isColumnHighlited = label === columnSelected;
 
   const [data, setData] = useState<Record<string, string>>({
-    datatype1: type?.length > 0 ? type[0] : 'Unknown',
+    datatype1: type?.length > 0 ? type[0] : 'unknown',
     datatype2: type?.length > 1 ? type[1] : null,
   });
 
   useEffect(() => {
     setData({
-      datatype1: type?.length > 0 ? type[0] : 'Unknown',
+      datatype1: type?.length > 0 ? type[0] : 'unknown',
       datatype2: type?.length > 1 ? type[1] : null,
     });
   }, [label, type]);
@@ -72,7 +72,7 @@ export default function GridHeaderCell({
         <StringIndicatorBox>
           <TypographyComponent
             className={classes.dataTypeIndicator}
-            label={data?.datatype1 || 'Unknown'}
+            label={data?.datatype1 || 'unknown'}
           />
           {data?.datatype2 && (
             <StringIndicatorBox>

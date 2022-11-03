@@ -19,7 +19,7 @@ import React, { useEffect, useState } from 'react';
 import ColumnDataDistribution from './Components/ColumnDataDistribution';
 import ColumnDataQuality from './Components/ColumnDataQuality';
 import ColumnDetails from './Components/ColumnDetails';
-import { IColumnInsightsProps } from 'components/ColumnInsights/types';
+import { IColumnData, IColumnInsightsProps } from 'components/ColumnInsights/types';
 import T from 'i18n-react';
 
 export default function ColumnInsights({
@@ -29,8 +29,8 @@ export default function ColumnInsights({
   columnType,
   onClose,
 }: IColumnInsightsProps) {
-  const [drawerStatus, setDrawerStatus] = useState(true);
-  const [columnDetail, setColumnDetail] = useState(columnData);
+  const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
+  const [columnDetail, setColumnDetail] = useState<IColumnData>(columnData);
 
   useEffect(() => {
     setColumnDetail(columnData);
@@ -45,7 +45,7 @@ export default function ColumnInsights({
       headingText={T.translate('features.NewWranglerUI.ColumnInsights.columnInsightsHeadingText')}
       openDrawer={drawerStatus}
       anchor="left"
-      headerActionTemplate={undefined}
+      headerActionTemplate={<></>}
       closeClickHandler={closeClickHandler}
       showBackIcon={false}
       showDivider={false}
