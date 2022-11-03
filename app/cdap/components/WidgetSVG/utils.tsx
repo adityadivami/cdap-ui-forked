@@ -29,10 +29,11 @@ import {
 } from 'components/WidgetSVG/types';
 import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 import React from 'react';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 export const getWidgetData = async () => {
   const connectorTypes: IConnectorTypesWithSVG[] = await fetchConnectors();
-  const connectorsTypesData: IConnectorTypes[] = [];
+  const connectorTypesData: IConnectorTypes[] = [];
   const IConnectionWithConnectorType: IConnectorTypesWithSVG[] = [];
   const allConnectorsPluginProperties: Map<
     string,
@@ -47,38 +48,31 @@ export const getWidgetData = async () => {
     }
   });
 
-  const connectionDetailsData = await Promise.all(
-    connectorsPluginProperties.map(async (eachConnection) => {
+  const connectionDetailsList = forkJoin(
+    connectorsPluginProperties.map((eachConnection) => {
       const selectedConnector = {
         artifact: eachConnection.artifact,
         category: eachConnection.category,
         name: eachConnection.name,
         type: eachConnection.type,
       };
-      connectorsTypesData.push(selectedConnector);
-      return new Promise((resolve, reject) => {
-        const response = fetchConnectionDetails(selectedConnector);
-        if (response) {
-          resolve(response);
-        } else {
-          reject(response);
-        }
-      });
+      connectorTypesData.push(selectedConnector);
+      return fetchConnectionDetails(selectedConnector);
     })
-  );
-  const connectorWidgetJson =
-    Array.isArray(connectionDetailsData) &&
-    connectionDetailsData.length &&
-    connectionDetailsData.map(({ connectorWidgetJSON }) => connectorWidgetJSON);
+  ).subscribe((res) => res);
+  const connectorWidgetData =
+    Array.isArray(connectionDetailsList) &&
+    connectionDetailsList.length &&
+    connectionDetailsList.map(({ connectorWidgetJSON }) => connectorWidgetJSON);
 
-  connectorsTypesData.map((connectorType) => {
+  connectorTypesData.map((connectorType) => {
     let connectorTypeHasWidget: boolean = false;
 
     // Getting widget icons for connector types
 
-    Array.isArray(connectorWidgetJson) &&
-      connectorWidgetJson.length &&
-      connectorWidgetJson.map((eachConnector) => {
+    Array.isArray(connectorWidgetData) &&
+      connectorWidgetData.length &&
+      connectorWidgetData.map((eachConnector) => {
         if (
           eachConnector['display-name'] &&
           eachConnector['display-name'].includes(connectorType.name)

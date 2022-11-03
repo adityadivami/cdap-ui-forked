@@ -21,8 +21,7 @@ import {
   IConnectionWithConnectorType,
   IExistingExplorationCard,
   IConnectionsList,
-  IWorkspaceData,
-  IOnGoingDataExplorationsData,
+  IWorkspace,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
@@ -79,7 +78,7 @@ export default function() {
     })
       .pipe(
         switchMap((response: Record<string, unknown[]>) => {
-          let values: IWorkspaceData[] = [];
+          let values: IWorkspace[] = [];
           values = response?.values ?? [];
 
           // sorting the workspaces based on dataset created time.
@@ -177,7 +176,7 @@ export default function() {
             >
               {index <= 1 && (
                 <OngoingDataExplorationsCard
-                  explorationCardDetails={filteredData}
+                  explorationCardDetails={item}
                   key={index}
                   cardIndex={index}
                 />

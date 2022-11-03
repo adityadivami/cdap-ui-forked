@@ -20,7 +20,7 @@ import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorat
 import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
 import { IOngoingDataExplorationsCard } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/types';
 
-export default function({ explorationCardDetails = [], cardIndex }: IOngoingDataExplorationsCard) {
+export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplorationsCard) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();

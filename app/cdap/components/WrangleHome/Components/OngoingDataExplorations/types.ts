@@ -19,10 +19,10 @@ import { ReactElement, ReactNode } from 'react';
 export interface IResponseData {
   count: number;
   message: string;
-  values: IWorkspaceData[];
+  values: IWorkspace[];
 }
 
-export interface IWorkspaceData {
+export interface IWorkspace {
   createdTimeMillis?: number;
   directives?: [];
   insights?: IInsights;
