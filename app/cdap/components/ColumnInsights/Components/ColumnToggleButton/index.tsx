@@ -18,6 +18,7 @@ import React, { useState } from 'react';
 import { Box, Typography } from '@material-ui/core';
 import { useStyles } from './styles';
 import { IDataQualityProps } from 'components/ColumnInsights/Components/ColumnToggleButton/types';
+import T from 'i18n-react';
 
 export default function ToggleButton({ dataQuality }: IDataQualityProps) {
   const classes = useStyles();
@@ -33,10 +34,10 @@ export default function ToggleButton({ dataQuality }: IDataQualityProps) {
           }
           onClick={() => setIsSelected(1)}
         >
-          <Typography
-            className={classes.missingText}
-            variant="body1"
-          >{`Missing/Null ${dataQuality.missingNullValueCount} (${dataQuality.missingNullValuePercentage}%)`}</Typography>
+          <Typography className={classes.missingText} variant="body1">
+            {T.translate('features.NewWranglerUI.ColumnInsights.missingNull')}
+            {` ${dataQuality.missingNullValueCount} (${dataQuality.missingNullValuePercentage}%)`}
+          </Typography>
         </Box>
         <Box
           className={
@@ -46,10 +47,10 @@ export default function ToggleButton({ dataQuality }: IDataQualityProps) {
           }
           onClick={() => setIsSelected(2)}
         >
-          <Typography
-            className={classes.invalidText}
-            variant="body1"
-          >{`Invalid ${dataQuality.invalidValueCount} (${dataQuality.invalidValuePercentage}%)`}</Typography>
+          <Typography className={classes.invalidText} variant="body1">
+            {T.translate('features.NewWranglerUI.ColumnInsights.invalid')}
+            {` ${dataQuality.invalidValueCount} (${dataQuality.invalidValuePercentage}%)`}
+          </Typography>
         </Box>
       </Box>
     </Box>

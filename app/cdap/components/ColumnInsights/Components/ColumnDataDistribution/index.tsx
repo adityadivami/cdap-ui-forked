@@ -14,11 +14,13 @@
  * the License.
  */
 
-import { DISTRIBUTION } from 'components/ColumnInsights/constants';
 import React from 'react';
 import BarChart from 'react-bar-chart';
 import { useStyles } from './styles';
 import { IColumnDataDistributionProps } from 'components/ColumnInsights/Components/ColumnDataDistribution/types';
+import T from 'i18n-react';
+import { NavLink } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
 export default function ColumnDataDistribution({ graphData }: IColumnDataDistributionProps) {
   const classes = useStyles();
@@ -34,7 +36,18 @@ export default function ColumnDataDistribution({ graphData }: IColumnDataDistrib
   };
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
-      <div className={classes.columnInsightsColumnName}>{DISTRIBUTION}</div>
+      <div className={classes.columnInsightsColumnName}>
+        <Typography variant="body2" className={classes.distribution}>
+          {T.translate('features.NewWranglerUI.ColumnInsights.distribution')}
+        </Typography>
+
+        <Typography variant="body2" className={classes.viewFullChart}>
+          <NavLink to="#">
+            {T.translate('features.NewWranglerUI.ColumnInsights.viewFullChart')}
+          </NavLink>
+        </Typography>
+      </div>
+
       <div className={classes.columnDataQualityGraph}>
         <BarChart
           style={{ background: 'blue' }}

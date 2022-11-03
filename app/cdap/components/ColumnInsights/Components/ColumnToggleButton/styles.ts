@@ -46,6 +46,8 @@ export const useStyles = makeStyles(() => {
     },
     missingCountBox: {
       border: '1px solid #DADCE0',
+      borderTopLeftRadius: 4,
+      borderBottomLeftRadius: 4,
       width: '50%',
       textAlign: 'center',
       padding: 10,
@@ -54,6 +56,8 @@ export const useStyles = makeStyles(() => {
       },
     },
     invalidCountBox: {
+      borderTopRightRadius: 4,
+      borderBottomRightRadius: 4,
       width: '50%',
       textAlign: 'center',
       padding: 10,
@@ -68,6 +72,8 @@ export const useStyles = makeStyles(() => {
       fontWeight: 400,
       fontStyle: 'normal',
       fontFamily: 'Noto Sans',
+      letterSpacing: 0.15,
+      lineHeight: '150%',
     },
     invalidText: {
       color: red[600],
@@ -75,6 +81,8 @@ export const useStyles = makeStyles(() => {
       fontWeight: 400,
       fontStyle: 'normal',
       fontFamily: 'Noto Sans',
+      letterSpacing: 0.15,
+      lineHeight: '150%',
     },
     isSelected: {
       background: '#F3F6F9',

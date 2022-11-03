@@ -14,6 +14,7 @@
  * the License.
  */
 
+import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
@@ -23,9 +24,10 @@ export const useStyles = makeStyles(() => {
       height: 'calc(100vh - 47px)',
     },
     drawerContainerStyles: {
-      width: 460,
+      width: 472,
       height: '100%',
       paddingLeft: 30,
+      paddingRight: 30,
     },
     headerStyles: {
       height: 60,
@@ -50,7 +52,7 @@ export const useStyles = makeStyles(() => {
       fontSize: 20,
       lineHeight: '150%',
       letterSpacing: 0.15,
-      color: '#000000',
+      color: grey[900],
     },
     headerRightStyles: {
       display: 'flex',

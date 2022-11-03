@@ -23,6 +23,10 @@ export const useStyles = makeStyles(() => {
       padding: '20px 0',
     },
     columnInsightsColumnName: {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    distribution: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
@@ -30,7 +34,17 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: 0.15,
       color: grey[900],
-      marginTop: 5,
+    },
+
+    viewFullChart: {
+      fontFamily: 'Noto Sans',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: 14,
+      lineHeight: '150%',
+      letterSpacing: 0.15,
+      color: blue[500],
+      margin: 'auto 0px',
     },
     columnDataQualityValuesButtons: {},
     columnDataQualityGraph: {

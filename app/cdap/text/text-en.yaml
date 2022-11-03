@@ -3410,5 +3410,14 @@ features:
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
   NewWranglerUI:
-    ColumnInsights:  
+    ColumnInsights: 
+       distribution: Distribution
+       viewFullChart: View Full Chart
+       columnInsightsHeadingText: Column Insights
+       quality: Quality
+       containsLetter: Contains Letter
+       characterCount: Character count
+       distinct: Distinct
+       missingNull: Missing/Null
+       invalid: Invalid
 ...

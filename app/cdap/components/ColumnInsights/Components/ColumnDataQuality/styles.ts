@@ -31,7 +31,6 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: 0.15,
       color: grey[900],
-      marginTop: 5,
     },
     columnDataQualityValuesButtons: {},
     qualityBar: {

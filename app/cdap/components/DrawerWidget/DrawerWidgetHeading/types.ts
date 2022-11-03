@@ -14,6 +14,8 @@
  * the License.
  */
 
+import { ReactNode } from 'react';
+
 export interface IDrawerWidgetHeadingProps {
-  headingText: string;
+  headingText: string | ReactNode;
 }

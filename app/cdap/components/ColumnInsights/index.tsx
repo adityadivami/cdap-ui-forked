@@ -19,8 +19,8 @@ import React, { useEffect, useState } from 'react';
 import ColumnDataDistribution from './Components/ColumnDataDistribution';
 import ColumnDataQuality from './Components/ColumnDataQuality';
 import ColumnDetails from './Components/ColumnDetails';
-import { COLUMN_INSIGHTS } from 'components/ColumnInsights/constants';
 import { IColumnInsightsProps } from 'components/ColumnInsights/types';
+import T from 'i18n-react';
 
 export default function ColumnInsights({
   columnData,
@@ -42,7 +42,7 @@ export default function ColumnInsights({
   };
   return (
     <DrawerWidget
-      headingText={COLUMN_INSIGHTS}
+      headingText={T.translate('features.NewWranglerUI.ColumnInsights.columnInsightsHeadingText')}
       openDrawer={drawerStatus}
       anchor="left"
       headerActionTemplate={undefined}
@@ -57,7 +57,10 @@ export default function ColumnInsights({
         renameColumnNameHandler={renameColumnNameHandler}
         distinctValues={columnDetail?.distinctValues}
         characterCount={`${columnDetail?.characterCount?.min}-${columnDetail?.characterCount?.max}`}
-        dataTypeString={columnDetail?.dataTypeString || 'Contains Letter'}
+        dataTypeString={
+          columnDetail?.dataTypeString ||
+          T.translate('features.NewWranglerUI.ColumnInsights.containsLetter')
+        }
       />
       <ColumnDataQuality
         dataQuality={columnDetail?.dataQuality}

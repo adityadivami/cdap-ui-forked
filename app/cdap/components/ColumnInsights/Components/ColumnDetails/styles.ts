@@ -24,7 +24,6 @@ export const useStyles = makeStyles(() => {
       borderBottom: `1px solid ${grey[300]}`,
     },
     columnInsightsColumnName: {
-      display: 'flex',
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
@@ -32,8 +31,11 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: 0.15,
       color: grey[900],
-      marginTop: 5,
+    },
+    columnNameEdit: {
+      display: 'flex',
       gap: 12,
+      marginTop: 5,
     },
     selectFieldStyles: {
       width: 350,
@@ -44,7 +46,7 @@ export const useStyles = makeStyles(() => {
       padding: '5px 15px',
       fontFamily: 'Noto Sans',
       fontSize: 14,
-      marginTop: 10,
+      marginTop: 9,
 
       '&:before': {
         display: 'none',
@@ -94,7 +96,7 @@ export const useStyles = makeStyles(() => {
       width: 1,
       height: 13,
       backgroundColor: '#DADCE0',
-      margin: '0 15px',
+      margin: '0 8px',
     },
     columnInsightsDetailsCountDescription: {
       fontFamily: 'Noto Sans',
@@ -104,7 +106,7 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: 0.15,
       color: grey[900],
-      marginTop: 8,
+      marginTop: 7,
     },
   };
 });

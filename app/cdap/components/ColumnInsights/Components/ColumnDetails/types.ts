@@ -14,11 +14,13 @@
  * the License.
  */
 
+import { ReactNode } from 'react';
+
 export interface IColumnDetailsProps {
   columnName: string;
   characterCount: string;
   distinctValues: number;
-  dataTypeString: string;
+  dataTypeString: string | ReactNode;
   renameColumnNameHandler: (oldColumnName: string, newColumnName: string) => void;
   dataTypeHandler: (dataType: string) => void;
   columnType: string;

@@ -18,9 +18,10 @@ import { DATATYPE_OPTIONS } from 'components/ColumnInsights/options';
 import React, { useState } from 'react';
 import { useStyles } from './styles';
 import EditIcon from '@material-ui/icons/Edit';
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import InputSelect from 'components/ColumnInsights/Components/InputSelect/index';
 import { IColumnDetailsProps } from 'components/ColumnInsights/Components/ColumnDetails/types';
+import T from 'i18n-react';
 
 export default function ColumnDetails({
   columnName,
@@ -36,8 +37,8 @@ export default function ColumnDetails({
   );
   const [dataTypeValue, setDataTypeValue] = useState();
   const classes = useStyles();
-  const [canEdit, setCanEdit] = useState(false);
-  const [inputValue, setInputValue] = useState(columnName);
+  const [canEdit, setCanEdit] = useState<Boolean>(false);
+  const [inputValue, setInputValue] = useState<string>(columnName);
 
   const handleDataTypeChange = (e) => {
     setDataTypeValue(e.target);
@@ -62,7 +63,7 @@ export default function ColumnDetails({
 
   return (
     <section className={classes.columnInsightsTopSection}>
-      <div className={classes.columnInsightsColumnName}>
+      <div className={classes.columnNameEdit}>
         {canEdit ? (
           <input
             value={inputValue}
@@ -70,7 +71,7 @@ export default function ColumnDetails({
             onChange={(e) => onChangeHandler(e)}
           />
         ) : (
-          inputValue
+          <Typography className={classes.columnInsightsColumnName}>{inputValue}</Typography>
         )}
         <Box>
           <EditIcon onClick={editHandler} />
@@ -92,11 +93,17 @@ export default function ColumnDetails({
       />
       <section className={classes.columnInsightsDetailsWrapper}>
         <div className={classes.columnInsightsDetailsCountSection}>
-          <div className={classes.columnInsightsDetailsCount}>Character count {characterCount}</div>
+          <Typography variant="body2" className={classes.columnInsightsDetailsCount}>
+            {T.translate('features.NewWranglerUI.ColumnInsights.characterCount')} {characterCount}
+          </Typography>
           <div className={classes.dividerLineStyles} />
-          <div className={classes.columnInsightsDetailsCount}>Distinct {distinctValues}</div>
+          <Typography variant="body2" className={classes.columnInsightsDetailsCount}>
+            {T.translate('features.NewWranglerUI.ColumnInsights.distinct')} {distinctValues}
+          </Typography>
         </div>
-        <div className={classes.columnInsightsDetailsCountDescription}>{dataTypeString}</div>
+        <Typography variant="body2" className={classes.columnInsightsDetailsCountDescription}>
+          {T.translate(`${dataTypeString}`)}
+        </Typography>
       </section>
     </section>
   );
