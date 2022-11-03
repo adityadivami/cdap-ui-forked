@@ -15,11 +15,13 @@
  */
 import { FormGroup } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
-import { useStyles } from '../styles';
-import FormInputFieldComponent from '../InputComponents/FormInputFieldComponent';
-import { ICustomTransformation } from './types';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
+import FormInputFieldComponent from 'components/GridTable/components/TransformationComponents/InputComponents/FormInputFieldComponent';
+import { ICustomTransformation } from 'components/GridTable/components/TransformationComponents/CustomTransform/types';
 import T from 'i18n-react';
-import LabelComponent from '../InputComponents/LabelInputComponent';
+import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
+
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.customTransform';
 
 export default function({
   setTransformationComponentsValue,
@@ -34,11 +36,7 @@ export default function({
 
   return (
     <FormGroup>
-      <LabelComponent
-        labelText={`${T.translate(
-          'features.DirectiveUIComponent.customTransform.typeCustomExpression'
-        )}`}
-      />
+      <LabelComponent labelText={`${T.translate(`${PREFIX}.typeCustomExpression`)}`} />
       <FormInputFieldComponent
         formInputValue={customExp}
         classnames={classes.formFieldStyles}
@@ -48,9 +46,7 @@ export default function({
           value: customExp,
           onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCustomExp(e.target.value),
           color: 'primary',
-          placeholder: `${T.translate(
-            'features.DirectiveUIComponent.customTransform.exampleCustomExpression'
-          )}`,
+          placeholder: `${T.translate(`${PREFIX}.exampleCustomExpression`)}`,
         }}
       />
     </FormGroup>

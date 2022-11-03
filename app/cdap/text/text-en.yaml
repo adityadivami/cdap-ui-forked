@@ -3477,6 +3477,7 @@ features:
               bytes: bytes
             menu:
               changeDatatype: Change data type
+              customTransform: Custom Transform
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step

@@ -43,7 +43,7 @@ export default function({
     setNestedOptions([]);
     event.preventDefault();
     event.stopPropagation();
-    if (menuItem?.options) {
+    if (menuItem?.options?.length > 0) {
       setNestedOptions(menuItem.options);
       setAnchorEl2(event.currentTarget);
     } else {
