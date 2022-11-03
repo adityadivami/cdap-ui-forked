@@ -24,6 +24,8 @@ export const getDirective = (
     return `set-type :${columnSelected} ${functionName}`;
   } else if (functionName === 'customTransform') {
     return `set-column :${columnSelected} ${transformationComponentValues.customInput}`;
+  } else if (functionName === 'customTransform') {
+    return `set-column :${columnSelected} ${transformationComponentValues.customInput}`;
   } else {
     return null;
   }
