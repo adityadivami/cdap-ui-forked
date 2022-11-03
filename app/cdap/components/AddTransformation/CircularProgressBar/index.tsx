@@ -50,6 +50,7 @@ export default function({ value }: ICircularProgressBarProps) {
               ? `${classes.redText} ${classes.value}`
               : `${classes.greenText} ${classes.value}`
           }
+          data-testid='circular-bar-value'
         >
           {Math.round(value)}%
         </Typography>

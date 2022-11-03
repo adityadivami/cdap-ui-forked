@@ -14,13 +14,14 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ColumnTable from 'components/AddTransformation/ColumnTable';
+import T from 'i18n-react';
 
 describe('It should test FunctionNameWidget Component', () => {
   it('Should render the FunctionNameWidget Component', () => {
-    const container = render(
+    render(
       <ColumnTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
         directiveFunctionSupportedDataType={['all']}
@@ -32,11 +33,12 @@ describe('It should test FunctionNameWidget Component', () => {
         onMultipleSelection={() => jest.fn()}
       />
     );
-    expect(container).toBeDefined();
+    expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
+    expect(screen.getByTestId(/panel-columns/i)).toHaveTextContent(`${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}`);
   });
 
-  it('Should render the FunctionNameWidget Component', () => {
-    const container = render(
+  it('Should render the FunctionNameWidget Component with data tye as test', () => {
+    render(
       <ColumnTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
         directiveFunctionSupportedDataType={['test']}
@@ -48,6 +50,8 @@ describe('It should test FunctionNameWidget Component', () => {
         onMultipleSelection={() => jest.fn()}
       />
     );
-    expect(container).toBeDefined();
+    expect(screen.getByTestId(/panel-values/i)).toHaveTextContent(`${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}`);
+    expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
+
   });
 });

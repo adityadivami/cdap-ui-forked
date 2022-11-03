@@ -42,7 +42,7 @@ export default function({
   const classes = useStyles();
 
   return (
-    <TableContainer component={Box}>
+    <TableContainer component={Box} data-testid='column-table-parent'>
       <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
         <TableHead>
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
@@ -55,6 +55,7 @@ export default function({
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
+              data-testid='panel-columns'
             >
               {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}
             </TableCell>
@@ -62,6 +63,7 @@ export default function({
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
+              data-testid='panel-values'
             >
               {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}
             </TableCell>

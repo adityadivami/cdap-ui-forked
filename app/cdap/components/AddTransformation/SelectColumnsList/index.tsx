@@ -125,7 +125,7 @@ export default function({
   };
 
   return (
-    <section className={classes.columnsCountTextStyles}>
+    <section className={classes.columnsCountTextStyles} data-testid='select-column-list-parent'>
       <div className={classes.selectColumnsHeaderStyles}>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>

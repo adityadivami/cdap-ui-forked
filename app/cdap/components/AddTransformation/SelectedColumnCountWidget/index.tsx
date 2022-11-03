@@ -23,7 +23,7 @@ export default function({ selectedColumnsCount }: ISelectColumnCountProps) {
   const classes = useStyles();
 
   return (
-    <div className={classes.columnsCountTextStyles}>
+    <div className={classes.columnsCountTextStyles} data-testid='count-widget-parent'>
       {selectedColumnsCount
         ? selectedColumnsCount > 10
           ? selectedColumnsCount

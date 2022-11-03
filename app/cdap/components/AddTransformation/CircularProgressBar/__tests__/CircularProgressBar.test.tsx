@@ -14,15 +14,15 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { render , screen} from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import MatchMeter from 'components/AddTransformation/CircularProgressBar';
 import history from 'services/history';
 
 describe('It should test the CircularProgressBar Component', () => {
-  it('Should render the Circular', () => {
-    const container = render(
+  it('Should render the Circular-Bar component with value as 0', () => {
+   render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -31,9 +31,11 @@ describe('It should test the CircularProgressBar Component', () => {
         </Switch>
       </Router>
     );
+    const valueElement = screen.getByTestId(/circular-bar-value/i);
+    expect(valueElement).toHaveTextContent('0')
   });
-  it('Should render the Circular', () => {
-    const container = render(
+  it('Should render the Circular-Bar compoennt with value as 101', () => {
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -42,5 +44,7 @@ describe('It should test the CircularProgressBar Component', () => {
         </Switch>
       </Router>
     );
+    const valueElement = screen.getByTestId(/circular-bar-value/i);
+    expect(valueElement).toHaveTextContent('101')
   });
 });
