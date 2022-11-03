@@ -3477,6 +3477,8 @@ features:
               bytes: bytes
             menu:
               changeDatatype: Change data type
+            other:
+              sendToError: Send to error
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step
@@ -3496,5 +3498,79 @@ features:
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
+      transformationUI: 
+          calculate:
+            columnExist: This column name already exist
+            copyToNewColumn: Copy to a new column
+            destinationColumn: Destination Column
+            nameNewColumn:  Name new column
+          sendToError:
+            if: If
+            ignoreCase: Ignore case
+            optionLabels:
+              customCondition: Custom condition
+              emptyValue: Value is empty
+              isNumber: value is number
+              isNotNumber: value is not number
+              isDouble: value is double
+              isNotDouble: value is not double
+              isInteger: value is integer
+              isNotInteger: value is not integer
+              isBoolean: value is boolean
+              isNotBoolean: value is not boolean
+              isDate: value is date
+              isNotDate: value is not date
+              isDateFormat: value is date format
+              isNotDateFormat: value is not date format
+              isTime: value is time
+              isNotTime: value is not time
+              isIP: value is IP
+              isNotIP: value is not IP
+              isIPV4: value is IPV4
+              isNotIPV4: value is not IPV4
+              isIPV6: value is IPV6
+              isNotIPV6: value is not IPV6
+              isEmail: value is email
+              isNotEmail: value is not email
+              isURL: value is URL 
+              isNotURL: value is not URL
+              isDomain: value is domain name
+              isNotDomain: value is not domain name
+              isDomainTLD: value is domain TLD
+              isNotDomainTLD: value is not domain TLD
+              isGenericTLD: value is generic TLD
+              isNotGenericTLD: value is not generic TLD
+              isCountryTLD: value is country TLD
+              isNotCountryTLD: value is not country TLD
+              isValueISBN: value is ISBN
+              isValueNotISBN: value is not ISBN
+              isValueISBN10: value is ISBN10
+              isValueNotISBN10: value is not ISBN10
+              isValueISBN13: value is ISBN13
+              isValueNotISBN13: value is not ISBN13
+              isCreditCard: value is credit card
+              isNotCreditCard: value is not credit card
+              isAmericanExpressCard: value is American Express card
+              isNotAmericanExpressCard: value is not American Express card
+              isVisaCard: value is Visa card
+              isNotVisaCard: value is not Visa card
+              isMasterCard: value is Master card
+              isNotMasterCard: value is not Master card
+              isDinerCard: value is Diner card
+              isNotDinerCard: value is not Diner card
+              isVPayCard: value is VPay card
+              isNotVPayCard: value is not VPay card
+              textExactly: Value is
+              textContains: Value contains
+              textStartWith: Value starts with
+              textEndWith: Value ends with
+              textRegex: Value contains regex
+            optionPlaceHolder:
+              customCondition: E.g. < 30 || gender == "Male"
+              textExactly: Enter value
+              textContains: Enter contained value
+              textStartWith: Enter prefix
+              textEndWith: Enter suffix
+              textRegex: Enter regex
 
               

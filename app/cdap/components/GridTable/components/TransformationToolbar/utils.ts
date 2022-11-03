@@ -13,6 +13,7 @@ import {
   Undo,
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
 import T from 'i18n-react';
+import { OTHER_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/otherOptions';
 
 export const nestedMenuOptions = [
   {
@@ -95,7 +96,7 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: [],
+    options: OTHER_OPTIONS,
     icon: OtherIcon,
     title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon').toString(),
     toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon'),

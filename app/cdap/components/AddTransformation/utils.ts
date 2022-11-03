@@ -13,10 +13,31 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+import { SEND_TO_ERROR_OPTIONS } from 'components/GridTable/components/TransformationComponents/SendToError/options';
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  directiveComponentValues: ITransformationComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
+  } else if (functionName === 'send-to-error') {
+    const option = SEND_TO_ERROR_OPTIONS?.filter(
+      (eachOption) => eachOption?.value === directiveComponentValues?.filterOptionSelected
+    );
+    if (option?.length) {
+      const value = option[0].directive(
+        'send-to-error',
+        columnSelected,
+        directiveComponentValues.ignoreCase,
+        directiveComponentValues.filterOptionValue,
+        directiveComponentValues.filterOptionSelected
+      );
+      return value;
+    }
   } else {
     return null;
   }

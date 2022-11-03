@@ -40,3 +40,11 @@ export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
     isMoreThanTwo: true,
   },
 ];
+
+export const transformationComponentDefaultValues = {
+  customInput: '',
+  ignoreCase: false,
+  filterOptionSelected: 'EMPTY',
+  filterOptionValue: '',
+  filterRadioOption: 'KEEP',
+};
