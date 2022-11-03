@@ -157,11 +157,9 @@ const dataprep = (state = defaultInitialState, action = defaultAction) => {
       });
       break;
     case DataPrepActions.setConnectorIcons:
-      console.log(action.payload.data, '*****');
       stateCopy = Object.assign({}, state, {
         connectorsWithIcons: action?.payload?.data,
       });
-      console.log(stateCopy, '*****abc');
       break;
     case DataPrepActions.setDirectives:
       stateCopy = Object.assign({}, state, {

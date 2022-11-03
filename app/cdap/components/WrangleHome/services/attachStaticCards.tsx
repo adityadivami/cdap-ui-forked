@@ -14,25 +14,19 @@
  * the License.
  */
 
-export interface IWidgetSrc {
-  imageSource?: string;
-}
+import { AddConnectionIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/AddConnectionIcon';
+import { ImportDataIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDataIcon';
 
-export interface IArtifact {
-  name: string;
-  version: string;
-  scope: string;
-}
-
-export interface IConnectorTypes {
-  name: string;
-  type?: string;
-  category?: string;
-  className?: string;
-  description?: string;
-  artifact?: IArtifact;
-  SVG: JSX.Element;
-  link?: string;
-  displayName?: string;
-  olderVersions?: string[];
-}
+export const attachStaticCards = (connectorsWithoutStaticCards) => [
+  {
+    name: 'Import Data',
+    SVG: ImportDataIcon,
+    link: 'home',
+  },
+  {
+    name: 'Add Connection',
+    SVG: AddConnectionIcon,
+    link: 'connections/create',
+  },
+  ...connectorsWithoutStaticCards,
+];

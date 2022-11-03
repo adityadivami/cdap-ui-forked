@@ -15,77 +15,45 @@
  */
 
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
-import {
-  fetchAllConnectorPluginProperties,
-  fetchConnectionDetails,
-  fetchConnectors,
-  getMapOfConnectorToPluginProperties,
-  getSelectedConnectorDisplayName,
-} from 'components/Connections/Create/reducer';
-import WidgetSVG from 'components/WrangleHome/Components/WidgetSVG';
-import { getCategoriesToConnectorsMap } from 'components/WrangleHome/Components/WidgetSVG/utils';
-import { AddConnectionIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/AddConnectionIcon';
-import { ImportDataIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDataIcon';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
-import {
-  IConnector,
-  IConnectorDetailPayload,
-} from 'components/WrangleHome/Components/WrangleCard/types';
-import React from 'react';
-import { IConnectorTypes } from 'components/WrangleHome/Components/WidgetSVG/types';
-import DataPrepStore from 'components/DataPrep/store';
+import { fetchConnectors } from 'components/Connections/Create/reducer';
+import { attachStaticCards } from 'components/WrangleHome/services/attachStaticCards';
+import { getConnectorTypesDisplayNames } from 'components/WrangleHome/services/getConnectorTypesDisplayNames';
 
-export const getUpdatedConnectorCards = async (connectorsInStore) => {
-  console.log(connectorsInStore, 'connectorsWithIconsconnectorsWithIcons');
-  const connectorDataWithSvgArray = connectorsInStore;
+export const getUpdatedConnectorCards = async (storeConnectors) => {
+  const connectorTypes = await fetchConnectors();
+  const categorizedConnections = await getCategorizedConnections();
 
-  const connectorTypes: IConnectorTypes[] = await fetchConnectors();
-
-  const staticCardModel = {
-    name: 'Imported Datasets',
-    type: 'default',
-    category: 'default',
-    description: 'All Connections from the List',
-    artifact: {
-      name: 'allConnections',
-      version: 'local',
-      scope: 'local',
-    },
-
-    SVG: importDatasetIcon,
+  const getIconForConnector = (connectorName: string) => {
+    const matchingConnector = storeConnectors.find(
+      (eachConnector) => eachConnector.name === connectorName
+    );
+    return matchingConnector.SVG;
   };
 
-  connectorDataWithSvgArray.unshift({
-    ...staticCardModel,
-    name: 'Import Data',
-    SVG: ImportDataIcon,
-    link: 'home',
-  });
-  connectorDataWithSvgArray.unshift({
-    ...staticCardModel,
-    name: 'Add Connection',
-    SVG: AddConnectionIcon,
-    link: 'connections/create',
+  const connectorTypeWithConnections = [];
+  categorizedConnections?.forEach((value, key) => {
+    let mostUpdatedTimeStamp = value[0].updatedTimeMillis;
+    value.forEach((e) => {
+      if (mostUpdatedTimeStamp < e.updatedTimeMillis) {
+        mostUpdatedTimeStamp = e.updatedTimeMillis;
+      }
+    });
+    connectorTypeWithConnections.push({ name: key, time: mostUpdatedTimeStamp });
   });
 
-  const connectorsPluginProperties = await fetchAllConnectorPluginProperties(connectorTypes);
+  const sortedConections = [...connectorTypeWithConnections].sort((a, b) => b.time - a.time);
 
-  const mapOfConnectorPluginProperties = getMapOfConnectorToPluginProperties(
-    connectorsPluginProperties
-  );
+  let connectorDataWithSvgArray = sortedConections.map((eachConnector) => {
+    return {
+      ...eachConnector,
+      SVG: getIconForConnector(eachConnector.name),
+    };
+  });
 
-  connectorTypes?.forEach((eachConnectorType) => {
-    const displayName = getSelectedConnectorDisplayName(
-      eachConnectorType,
-      mapOfConnectorPluginProperties
-    );
-    const index = connectorDataWithSvgArray.findIndex(
-      (eachConnectorDataWithSvgArray) =>
-        eachConnectorDataWithSvgArray.name === eachConnectorType.name
-    );
-
-    if (index >= 0) {
-      connectorDataWithSvgArray[index].displayName = displayName;
+  connectorDataWithSvgArray = attachStaticCards(connectorDataWithSvgArray);
+  getConnectorTypesDisplayNames(connectorTypes, connectorDataWithSvgArray).then((response) => {
+    if (response) {
+      connectorDataWithSvgArray = response;
     }
   });
 

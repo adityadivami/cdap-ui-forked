@@ -57,7 +57,6 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
 
   DataPrepStore.subscribe(() => {
     const newState = DataPrepStore.getState();
-
     setStoreConnectors(newState.dataprep.connectorsWithIcons);
   });
 

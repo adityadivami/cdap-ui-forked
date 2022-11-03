@@ -100,12 +100,11 @@ export const getWidgetData = async () => {
     }
   });
 
-  /* connectionWithConnectorType.push({
+  connectionWithConnectorType.push({
     name: 'Imported Dataset',
     SVG: importDatasetIcon,
-  }); */
+  });
 
-  console.log('dispatching', connectionWithConnectorType);
   DataPrepStore.dispatch({
     type: DataPrepActions.setConnectorIcons,
     payload: {
