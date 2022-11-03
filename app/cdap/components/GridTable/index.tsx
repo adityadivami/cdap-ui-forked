@@ -95,7 +95,7 @@ export default function GridTable() {
   ]);
 
   const getWorkSpaceData = (params: IParams, workspaceId: string) => {
-    const gridParams = {};
+    let gridParams = {};
     setLoading(true);
     DataPrepStore.dispatch({
       type: DataPrepActions.setWorkspaceId,
@@ -129,7 +129,7 @@ export default function GridTable() {
           const workspaceInfo = {
             properties: insights,
           };
-          const gridParams = {
+          gridParams = {
             directives,
             workspaceId,
             workspaceUri,
@@ -179,7 +179,7 @@ export default function GridTable() {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
     setColumnType(types[columnName]);
   };
-  const { types } = dataprep;
+  const { data, headers, types, directives, undoDirectives } = dataprep;
 
   const renameColumnNameHandler = (oldColumnName: string, newColumnName: string) => {
     const directive = `rename ${oldColumnName} ${newColumnName}`;
@@ -191,7 +191,7 @@ export default function GridTable() {
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
     let gridParams = {};
-    const updatedDirectives = action === 'add' ? directives.concat(newDirective) : newDirective;
+    const updatedDirectives = directives.concat(newDirective);
     const requestBody = directiveRequestBodyCreator(updatedDirectives);
     const arr = JSON.parse(JSON.stringify(newDirective));
     requestBody.insights = insights;
@@ -222,9 +222,13 @@ export default function GridTable() {
             ...gridParams,
           },
         });
-        setLoading(false);
         setGridData(response);
-        setColumnSelected('');
+        if (!insightDrawer.open) {
+          setColumnSelected('');
+        } else {
+          setLoading(true);
+        }
+        setLoading(false);
       },
       (err) => {
         setToaster({
@@ -320,6 +324,13 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  useEffect(() => {
+    if (insightDrawer.open) {
+      onColumnSelection(columnSelected);
+    }
+    setLoading(false);
+  }, [rowsDataList]);
+
   return (
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
@@ -329,7 +340,7 @@ export default function GridTable() {
           columnData={insightDrawer}
           renameColumnNameHandler={renameColumnNameHandler}
           dataTypeHandler={dataTypeHandler}
-          onClose={() =>
+          onClose={() => {
             setInsightDrawer({
               open: false,
               columnName: '',
@@ -344,8 +355,9 @@ export default function GridTable() {
               dataQualityBar: {},
               dataTypeString: '',
               dataDistributionGraphData: [],
-            })
-          }
+            });
+            setColumnSelected('');
+          }}
         />
       )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && <NoDataScreen />}

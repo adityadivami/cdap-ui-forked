@@ -45,7 +45,7 @@ export default function ColumnInsights({
       headingText={COLUMN_INSIGHTS}
       openDrawer={drawerStatus}
       anchor="left"
-      headerActionTemplate={<>hin</>}
+      headerActionTemplate={undefined}
       closeClickHandler={closeClickHandler}
       showBackIcon={false}
       showDivider={false}

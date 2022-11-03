@@ -32,7 +32,7 @@ export default function ColumnDetails({
   columnType,
 }: IColumnDetailsProps) {
   const defaultValueProvided = DATATYPE_OPTIONS.filter(
-    (each) => each.value === columnType.toLowerCase()
+    (each) => each.value === columnType?.toLowerCase()
   );
   const [dataTypeValue, setDataTypeValue] = useState();
   const classes = useStyles();
@@ -84,7 +84,7 @@ export default function ColumnDetails({
         }}
         className={classes.selectFieldStyles}
         optionClassName={{ root: classes.optionStyles }}
-        defaultValue={defaultValueProvided[0].value}
+        defaultValue={defaultValueProvided[0]?.value}
         value={dataTypeValue}
         onChange={(e) => handleDataTypeChange(e)}
         options={DATATYPE_OPTIONS}

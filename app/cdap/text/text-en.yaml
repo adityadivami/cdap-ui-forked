@@ -3409,4 +3409,6 @@ features:
         title: Configure a pipeline
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
+  NewWranglerUI:
+    ColumnInsights:  
 ...

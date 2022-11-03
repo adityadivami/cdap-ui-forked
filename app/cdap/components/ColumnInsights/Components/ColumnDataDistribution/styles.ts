@@ -14,6 +14,7 @@
  * the License.
  */
 
+import { blue, grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
@@ -25,11 +26,11 @@ export const useStyles = makeStyles(() => {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#212121',
-      marginTop: '5px',
+      letterSpacing: 0.15,
+      color: grey[900],
+      marginTop: 5,
     },
     columnDataQualityValuesButtons: {},
     columnDataQualityGraph: {
@@ -38,7 +39,7 @@ export const useStyles = makeStyles(() => {
       },
 
       '& .bar': {
-        fill: '#3994FF',
+        fill: blue[500],
       },
 
       '& .graph': {

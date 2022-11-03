@@ -20,6 +20,7 @@ import { useStyles } from './styles';
 import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton/index';
 import { Box, Typography } from '@material-ui/core';
 import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/ColumnDataQuality/types';
+import red from '@material-ui/core/colors/red';
 
 export default function ColumnDataQuality({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const classes = useStyles();
@@ -37,7 +38,7 @@ export default function ColumnDataQuality({ dataQuality, columnInfo }: IColumnDa
           className={classes.empty}
           style={{
             width: `${100 - filled}%`,
-            border: `${100 - filled === 0 ? 'none' : '1px solid #E53935'}`,
+            border: `${100 - filled === 0 ? 'none' : `1px solid ${red[600]}`}`,
           }}
         />
       </Box>

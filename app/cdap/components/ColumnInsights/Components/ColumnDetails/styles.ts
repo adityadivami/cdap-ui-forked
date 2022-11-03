@@ -14,36 +14,37 @@
  * the License.
  */
 
+import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
   return {
     columnInsightsTopSection: {
-      paddingBottom: '20px',
-      borderBottom: '1px solid #E0E0E0',
+      paddingBottom: 20,
+      borderBottom: `1px solid ${grey[300]}`,
     },
     columnInsightsColumnName: {
       display: 'flex',
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#212121',
-      marginTop: '5px',
-      gap: '12px',
+      letterSpacing: 0.15,
+      color: grey[900],
+      marginTop: 5,
+      gap: 12,
     },
     selectFieldStyles: {
-      width: '350px',
-      height: '40px',
+      width: 350,
+      height: 40,
       background: '#FFFFFF',
       border: '1px solid #DADCE0',
-      borderRadius: '4px',
+      borderRadius: 4,
       padding: '5px 15px',
       fontFamily: 'Noto Sans',
-      fontSize: '14px',
-      marginTop: '10px',
+      fontSize: 14,
+      marginTop: 10,
 
       '&:before': {
         display: 'none',
@@ -59,14 +60,14 @@ export const useStyles = makeStyles(() => {
     },
     optionStyles: {
       fontFamily: 'Noto Sans',
-      fontSize: '14px',
+      fontSize: 14,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
+      letterSpacing: 0.15,
       color: '#000000',
     },
     selectIconStyles: {
       top: 'calc(50% - 10px)',
-      right: '10px',
+      right: 10,
     },
     selectStyles: {
       '&:focus': {
@@ -74,16 +75,16 @@ export const useStyles = makeStyles(() => {
       },
     },
     columnInsightsDetailsWrapper: {
-      marginTop: '20px',
+      marginTop: 20,
     },
     columnInsightsDetailsCount: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '14px',
+      fontSize: 14,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#212121',
+      letterSpacing: 0.15,
+      color: grey[900],
     },
     columnInsightsDetailsCountSection: {
       display: 'flex',
@@ -99,11 +100,11 @@ export const useStyles = makeStyles(() => {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '14px',
+      fontSize: 14,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#212121',
-      marginTop: '8px',
+      letterSpacing: 0.15,
+      color: grey[900],
+      marginTop: 8,
     },
   };
 });
