@@ -66,32 +66,34 @@ const otherOptionsDirective = (column: string, filterAction: string) => {
   }
 };
 
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.sendToError'
+
 export const SEND_TO_ERROR_PLACEHOLDER = {
   EMPTY: '',
   TEXTEXACTLY: `${T.translate(
-    'features.DirectiveUIComponent.sendToError.optionPlaceHolder.textExactly'
+    `${PREFIX}.optionPlaceHolder.textExactly`
   )}`,
   TEXTCONTAINS: `${T.translate(
-    'features.DirectiveUIComponent.sendToError.optionPlaceHolder.textContains'
+    `${PREFIX}.optionPlaceHolder.textContains`
   )}`,
   TEXTSTARTSWITH: `${T.translate(
-    'features.DirectiveUIComponent.sendToError.optionPlaceHolder.textStartWith'
+    `${PREFIX}.optionPlaceHolder.textStartWith`
   )}`,
   TEXTENDSWITH: `${T.translate(
-    'features.DirectiveUIComponent.sendToError.optionPlaceHolder.textEndWith'
+    `${PREFIX}.optionPlaceHolder.textEndWith`
   )}`,
   TEXTREGEX: `${T.translate(
-    'features.DirectiveUIComponent.sendToError.optionPlaceHolder.textRegex'
+    `${PREFIX}.optionPlaceHolder.textRegex`
   )}`,
   CUSTOMCONDITION: `${T.translate(
-    'features.DirectiveUIComponent.sendToError.optionPlaceHolder.customCondition'
+    `${PREFIX}.optionPlaceHolder.customCondition`
   )}`,
 };
 
 export const SEND_TO_ERROR_OPTIONS = [
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.emptyValue')}`,
-    value: 'EMPTY',
+    label: `${T.translate(`${PREFIX}.optionLabels.emptyValue`)}`,
+    value: `EMPTY`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -104,8 +106,8 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
 
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.textExactly')}`,
-    value: 'TEXTEXACTLY',
+    label: `${T.translate(`${PREFIX}.optionLabels.textExactly`)}`,
+    value: `TEXTEXACTLY`,
     isInputRequired: true,
     isCheckboxRequired: true,
     directive: (
@@ -115,7 +117,7 @@ export const SEND_TO_ERROR_OPTIONS = [
       inputValue: string,
       filterAction?: string
     ) => {
-      let equalityOperator = '==';
+      let equalityOperator = `==`;
       let textValue = inputValue;
       if (ignoreCase) {
         textValue = `(?i)${inputValue}`;
@@ -125,8 +127,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     },
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.textContains')}`,
-    value: 'TEXTCONTAINS',
+    label: `${T.translate(`${PREFIX}.optionLabels.textContains`)}`,
+    value: `TEXTCONTAINS`,
     isInputRequired: true,
     isCheckboxRequired: true,
     directive: (
@@ -146,8 +148,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     },
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.textStartWith')}`,
-    value: 'TEXTSTARTSWITH',
+    label: `${T.translate(`${PREFIX}.optionLabels.textStartWith`)}`,
+    value: `TEXTSTARTSWITH`,
     isInputRequired: true,
     isCheckboxRequired: true,
     directive: (
@@ -157,18 +159,18 @@ export const SEND_TO_ERROR_OPTIONS = [
       inputValue: string,
       filterAction?: string
     ) => {
-      let equalityOperator = '=^';
+      let equalityOperator = `=^`;
       let textValue = inputValue;
       if (ignoreCase) {
         textValue = `(?i)^${textValue}.*`;
-        equalityOperator = '=~';
+        equalityOperator = `=~`;
       }
       return `${directive} ${column} ${equalityOperator} "${textValue}"`;
     },
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.textEndWith')}`,
-    value: 'TEXTENDSWITH',
+    label: `${T.translate(`${PREFIX}.optionLabels.textEndWith`)}`,
+    value: `TEXTENDSWITH`,
     isInputRequired: true,
     isCheckboxRequired: true,
     directive: (
@@ -178,18 +180,18 @@ export const SEND_TO_ERROR_OPTIONS = [
       inputValue: string,
       filterAction?: string
     ) => {
-      let equalityOperator = '=$';
+      let equalityOperator = `=$`;
       let textValue = inputValue;
       if (ignoreCase) {
         textValue = `(?i).*${textValue}$`;
-        equalityOperator = '=~';
+        equalityOperator = `=~`;
       }
       return `${directive} ${column} ${equalityOperator} "${textValue}"`;
     },
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.textRegex')}`,
-    value: 'TEXTREGEX',
+    label: `${T.translate(`${PREFIX}.optionLabels.textRegex`)}`,
+    value: `TEXTREGEX`,
     isInputRequired: true,
     isCheckboxRequired: false,
     directive: (
@@ -202,8 +204,8 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
 
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNumber')}`,
-    value: 'ISNUMBER',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNumber`)}`,
+    value: `ISNUMBER`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -215,8 +217,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotNumber')}`,
-    value: 'ISNOTNUMBER',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotNumber`)}`,
+    value: `ISNOTNUMBER`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -228,8 +230,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isDouble')}`,
-    value: 'ISDOUBLE',
+    label: `${T.translate(`${PREFIX}.optionLabels.isDouble`)}`,
+    value: `ISDOUBLE`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -241,8 +243,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotDouble')}`,
-    value: 'ISNOTDOUBLE',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotDouble`)}`,
+    value: `ISNOTDOUBLE`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -254,8 +256,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isInteger')}`,
-    value: 'ISINTEGER',
+    label: `${T.translate(`${PREFIX}.optionLabels.isInteger`)}`,
+    value: `ISINTEGER`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -267,8 +269,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotInteger')}`,
-    value: 'ISNOTINTEGER',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotInteger`)}`,
+    value: `ISNOTINTEGER`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -280,8 +282,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isBoolean')}`,
-    value: 'ISBOOLEAN',
+    label: `${T.translate(`${PREFIX}.optionLabels.isBoolean`)}`,
+    value: `ISBOOLEAN`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -293,8 +295,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotBoolean')}`,
-    value: 'ISNOTBOOLEAN',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotBoolean`)}`,
+    value: `ISNOTBOOLEAN`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -306,8 +308,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isDate')}`,
-    value: 'ISDATE',
+    label: `${T.translate(`${PREFIX}.optionLabels.isDate`)}`,
+    value: `ISDATE`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -319,8 +321,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotDate')}`,
-    value: 'ISNOTDATE',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotDate`)}`,
+    value: `ISNOTDATE`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -332,8 +334,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isDateFormat')}`,
-    value: 'ISDATEFORMAT',
+    label: `${T.translate(`${PREFIX}.optionLabels.isDateFormat`)}`,
+    value: `ISDATEFORMAT`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -344,7 +346,7 @@ export const SEND_TO_ERROR_OPTIONS = [
       filterAction?: string
     ) => {
       let condition = `dq:${getDQFunction(filterAction)}(${column})`;
-      if (filterAction.indexOf('NOT') !== -1) {
+      if (filterAction.indexOf(`NOT`) !== -1) {
         condition = `!${condition}`;
       }
       return `${directive} ${condition}`;
@@ -352,9 +354,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isNotDateFormat'
+      `${PREFIX}.optionLabels.isNotDateFormat`
     )}`,
-    value: 'ISNOTDATEFORMAT',
+    value: `ISNOTDATEFORMAT`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -365,15 +367,15 @@ export const SEND_TO_ERROR_OPTIONS = [
       filterAction?: string
     ) => {
       let condition = `dq:${getDQFunction(filterAction)}(${column})`;
-      if (filterAction.indexOf('NOT') !== -1) {
+      if (filterAction.indexOf(`NOT`) !== -1) {
         condition = `!${condition}`;
       }
       return `${directive} ${condition}`;
     },
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isTime')}`,
-    value: 'ISTIME',
+    label: `${T.translate(`${PREFIX}.optionLabels.isTime`)}`,
+    value: `ISTIME`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -385,8 +387,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotTime')}`,
-    value: 'ISNOTTIME',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotTime`)}`,
+    value: `ISNOTTIME`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -398,8 +400,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isIP')}`,
-    value: 'ISIP',
+    label: `${T.translate(`${PREFIX}.optionLabels.isIP`)}`,
+    value: `ISIP`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -411,8 +413,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotIP')}`,
-    value: 'ISNOTIP',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotIP`)}`,
+    value: `ISNOTIP`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -424,8 +426,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isIPV4')}`,
-    value: 'ISIPV4',
+    label: `${T.translate(`${PREFIX}.optionLabels.isIPV4`)}`,
+    value: `ISIPV4`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -437,8 +439,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotIPV4')}`,
-    value: 'ISNOTIPV4',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotIPV4`)}`,
+    value: `ISNOTIPV4`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -450,8 +452,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isIPV6')}`,
-    value: 'ISIPV6',
+    label: `${T.translate(`${PREFIX}.optionLabels.isIPV6`)}`,
+    value: `ISIPV6`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -463,8 +465,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotIPV6')}`,
-    value: 'ISNOTIPV6',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotIPV6`)}`,
+    value: `ISNOTIPV6`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -476,8 +478,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isEmail')}`,
-    value: 'ISEMAIL',
+    label: `${T.translate(`${PREFIX}.optionLabels.isEmail`)}`,
+    value: `ISEMAIL`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -489,8 +491,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotEmail')}`,
-    value: 'ISNOTEMAIL',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotEmail`)}`,
+    value: `ISNOTEMAIL`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -502,8 +504,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isURL')}`,
-    value: 'ISURL',
+    label: `${T.translate(`${PREFIX}.optionLabels.isURL`)}`,
+    value: `ISURL`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -515,8 +517,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotURL')}`,
-    value: 'ISNOTURL',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotURL`)}`,
+    value: `ISNOTURL`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -528,8 +530,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isDomain')}`,
-    value: 'ISDOMAINNAME',
+    label: `${T.translate(`${PREFIX}.optionLabels.isDomain`)}`,
+    value: `ISDOMAINNAME`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -541,8 +543,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotDomain')}`,
-    value: 'ISNOTDOMAINNAME',
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotDomain`)}`,
+    value: `ISNOTDOMAINNAME`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -554,36 +556,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isDomainTLD')}`,
-    value: 'ISDOMAINTLD',
-    isInputRequired: false,
-    isCheckboxRequired: false,
-    directive: (
-      directive: string,
-      column: string,
-      ignoreCase: boolean,
-      inputValue: string,
-      filterAction?: string
-    ) => otherOptionsDirective(column, filterAction),
-  },
-  {
-    label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isNotDomainTLD'
-    )}`,
-    value: 'ISNOTDOMAINTLD',
-    isInputRequired: false,
-    isCheckboxRequired: false,
-    directive: (
-      directive: string,
-      column: string,
-      ignoreCase: boolean,
-      inputValue: string,
-      filterAction?: string
-    ) => otherOptionsDirective(column, filterAction),
-  },
-  {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isGenericTLD')}`,
-    value: 'ISGENERICTLD',
+    label: `${T.translate(`${PREFIX}.optionLabels.isDomainTLD`)}`,
+    value: `ISDOMAINTLD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -596,9 +570,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isNotGenericTLD'
+      `${PREFIX}.optionLabels.isNotDomainTLD`
     )}`,
-    value: 'ISNOTGENERICTLD',
+    value: `ISNOTDOMAINTLD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -610,8 +584,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isCountryTLD')}`,
-    value: 'ISCOUNTRYTLD',
+    label: `${T.translate(`${PREFIX}.optionLabels.isGenericTLD`)}`,
+    value: `ISGENERICTLD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -624,9 +598,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isNotCountryTLD'
+      `${PREFIX}.optionLabels.isNotGenericTLD`
     )}`,
-    value: 'ISNOTCOUNTRYTLD',
+    value: `ISNOTGENERICTLD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -638,8 +612,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isValueISBN')}`,
-    value: 'ISISBN',
+    label: `${T.translate(`${PREFIX}.optionLabels.isCountryTLD`)}`,
+    value: `ISCOUNTRYTLD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -652,9 +626,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isValueNotISBN'
+      `${PREFIX}.optionLabels.isNotCountryTLD`
     )}`,
-    value: 'ISNOTISBN',
+    value: `ISNOTCOUNTRYTLD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -666,8 +640,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isValueISBN10')}`,
-    value: 'ISISBN10',
+    label: `${T.translate(`${PREFIX}.optionLabels.isValueISBN`)}`,
+    value: `ISISBN`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -680,9 +654,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isValueNotISBN10'
+      `${PREFIX}.optionLabels.isValueNotISBN`
     )}`,
-    value: 'ISNOTISBN10',
+    value: `ISNOTISBN`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -694,8 +668,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isValueISBN13')}`,
-    value: 'ISISBN13',
+    label: `${T.translate(`${PREFIX}.optionLabels.isValueISBN10`)}`,
+    value: `ISISBN10`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -708,9 +682,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isValueNotISBN13'
+      `${PREFIX}.optionLabels.isValueNotISBN10`
     )}`,
-    value: 'ISNOTISBN13',
+    value: `ISNOTISBN10`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -722,8 +696,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isCreditCard')}`,
-    value: 'ISCREDITCARD',
+    label: `${T.translate(`${PREFIX}.optionLabels.isValueISBN13`)}`,
+    value: `ISISBN13`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -736,9 +710,22 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isNotCreditCard'
+      `${PREFIX}.optionLabels.isValueNotISBN13`
     )}`,
-    value: 'ISNOTCREDITCARD',
+    value: `ISNOTISBN13`,
+    isInputRequired: false,
+    isCheckboxRequired: false,
+    directive: (
+      directive: string,
+      column: string,
+      ignoreCase: boolean,
+      inputValue: string,
+      filterAction?: string
+    ) => otherOptionsDirective(column, filterAction),
+  },
+  {
+    label: `${T.translate(`${PREFIX}.optionLabels.isCreditCard`)}`,
+    value: `ISCREDITCARD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -751,9 +738,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isAmericanExpressCard'
+      `${PREFIX}.optionLabels.isNotCreditCard`
     )}`,
-    value: 'ISAMEXCARD',
+    value: `ISNOTCREDITCARD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -766,48 +753,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isNotAmericanExpressCard'
+      `${PREFIX}.optionLabels.isAmericanExpressCard`
     )}`,
-    value: 'ISNOTAMEXCARD',
-    isInputRequired: false,
-    isCheckboxRequired: false,
-    directive: (
-      directive: string,
-      column: string,
-      ignoreCase: boolean,
-      inputValue: string,
-      filterAction?: string
-    ) => otherOptionsDirective(column, filterAction),
-  },
-  {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isVisaCard')}`,
-    value: 'ISVISACARD',
-    isInputRequired: false,
-    isCheckboxRequired: false,
-    directive: (
-      directive: string,
-      column: string,
-      ignoreCase: boolean,
-      inputValue: string,
-      filterAction?: string
-    ) => otherOptionsDirective(column, filterAction),
-  },
-  {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotVisaCard')}`,
-    value: 'ISNOTVISACARD',
-    isInputRequired: false,
-    isCheckboxRequired: false,
-    directive: (
-      directive: string,
-      column: string,
-      ignoreCase: boolean,
-      inputValue: string,
-      filterAction?: string
-    ) => otherOptionsDirective(column, filterAction),
-  },
-  {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isMasterCard')}`,
-    value: 'ISMASTERCARD',
+    value: `ISAMEXCARD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -820,9 +768,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isNotMasterCard'
+      `${PREFIX}.optionLabels.isNotAmericanExpressCard`
     )}`,
-    value: 'ISNOTMASTERCARD',
+    value: `ISNOTAMEXCARD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -834,8 +782,34 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isDinerCard')}`,
-    value: 'ISDINERCARD',
+    label: `${T.translate(`${PREFIX}.optionLabels.isVisaCard`)}`,
+    value: `ISVISACARD`,
+    isInputRequired: false,
+    isCheckboxRequired: false,
+    directive: (
+      directive: string,
+      column: string,
+      ignoreCase: boolean,
+      inputValue: string,
+      filterAction?: string
+    ) => otherOptionsDirective(column, filterAction),
+  },
+  {
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotVisaCard`)}`,
+    value: `ISNOTVISACARD`,
+    isInputRequired: false,
+    isCheckboxRequired: false,
+    directive: (
+      directive: string,
+      column: string,
+      ignoreCase: boolean,
+      inputValue: string,
+      filterAction?: string
+    ) => otherOptionsDirective(column, filterAction),
+  },
+  {
+    label: `${T.translate(`${PREFIX}.optionLabels.isMasterCard`)}`,
+    value: `ISMASTERCARD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -848,9 +822,9 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.isNotDinerCard'
+      `${PREFIX}.optionLabels.isNotMasterCard`
     )}`,
-    value: 'ISNOTDINERCARD',
+    value: `ISNOTMASTERCARD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -862,21 +836,8 @@ export const SEND_TO_ERROR_OPTIONS = [
     ) => otherOptionsDirective(column, filterAction),
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isVPayCard')}`,
-    value: 'ISVPAYCARD',
-    isInputRequired: false,
-    isCheckboxRequired: false,
-    directive: (
-      directive: string,
-      column: string,
-      ignoreCase: boolean,
-      inputValue: string,
-      filterAction?: string
-    ) => otherOptionsDirective(column, filterAction),
-  },
-  {
-    label: `${T.translate('features.DirectiveUIComponent.sendToError.optionLabels.isNotVPayCard')}`,
-    value: 'ISNOTVPAYCARD',
+    label: `${T.translate(`${PREFIX}.optionLabels.isDinerCard`)}`,
+    value: `ISDINERCARD`,
     isInputRequired: false,
     isCheckboxRequired: false,
     directive: (
@@ -889,9 +850,50 @@ export const SEND_TO_ERROR_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.sendToError.optionLabels.customCondition'
+      `${PREFIX}.optionLabels.isNotDinerCard`
     )}`,
-    value: 'CUSTOMCONDITION',
+    value: `ISNOTDINERCARD`,
+    isInputRequired: false,
+    isCheckboxRequired: false,
+    directive: (
+      directive: string,
+      column: string,
+      ignoreCase: boolean,
+      inputValue: string,
+      filterAction?: string
+    ) => otherOptionsDirective(column, filterAction),
+  },
+  {
+    label: `${T.translate(`${PREFIX}.optionLabels.isVPayCard`)}`,
+    value: `ISVPAYCARD`,
+    isInputRequired: false,
+    isCheckboxRequired: false,
+    directive: (
+      directive: string,
+      column: string,
+      ignoreCase: boolean,
+      inputValue: string,
+      filterAction?: string
+    ) => otherOptionsDirective(column, filterAction),
+  },
+  {
+    label: `${T.translate(`${PREFIX}.optionLabels.isNotVPayCard`)}`,
+    value: `ISNOTVPAYCARD`,
+    isInputRequired: false,
+    isCheckboxRequired: false,
+    directive: (
+      directive: string,
+      column: string,
+      ignoreCase: boolean,
+      inputValue: string,
+      filterAction?: string
+    ) => otherOptionsDirective(column, filterAction),
+  },
+  {
+    label: `${T.translate(
+      `${PREFIX}.optionLabels.customCondition`
+    )}`,
+    value: `CUSTOMCONDITION`,
     isInputRequired: true,
     isCheckboxRequired: false,
     directive: (

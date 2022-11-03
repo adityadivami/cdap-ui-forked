@@ -15,12 +15,12 @@
  */
 
 import React from 'react';
-import { useStyles } from '../../styles';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 import { Box, FormGroup, FormHelperText } from '@material-ui/core';
-import FormInputFieldComponent from '../FormInputFieldComponent';
-import LabelComponent from '../LabelInputComponent';
+import FormInputFieldComponent from 'components/GridTable/components/TransformationComponents/InputComponents/FormInputFieldComponent';
+import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
 import T from 'i18n-react';
-import { INewColumnProps } from '../types';
+import { INewColumnProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
 export default function({ column, setColumnName, isError }: INewColumnProps) {
   const classes = useStyles();

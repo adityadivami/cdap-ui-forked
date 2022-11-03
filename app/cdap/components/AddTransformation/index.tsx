@@ -25,6 +25,7 @@ import {
   IHeaderNamesList,
   IMultipleSelectedFunctionDetail,
   IDataQualityItem,
+  ITransformationComponentValues,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
@@ -33,6 +34,9 @@ import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidge
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { getDirective } from 'components/AddTransformation/utils';
+import TransformationContent from 'components/GridTable/components/TransformationComponents';
+import { transformationComponentDefaultValues } from 'components/AddTransformation/constants';
+import { TRANSFORMATION_COMPONENTS } from 'components/GridTable/constants';
 
 export default function({
   transformationFunctionSupportedDataType,
@@ -106,8 +110,7 @@ export default function({
   };
 
   const isComponentAvailable =
-    TRANSFORMATION_COMPONENTS?.some((item) => item?.type === functionName) ||
-    CALCULATE_OPTIONS?.some((item) => item?.value?.toLowerCase() === functionName?.toLowerCase());
+    TRANSFORMATION_COMPONENTS?.some((item) => item?.type === functionName)
 
   return (
     <Fragment>
@@ -133,7 +136,7 @@ export default function({
                 transformationComponent={TRANSFORMATION_COMPONENTS}
                 transformationComponentValues={transformationComponentValues}
                 functionName={functionName}
-                transformationFunctionSupportedDataType={directiveFunctionSupportedDataType}
+                transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
                 columnData={columnData}
                 missingDataList={missingDataList}
                 callBack={callBack}

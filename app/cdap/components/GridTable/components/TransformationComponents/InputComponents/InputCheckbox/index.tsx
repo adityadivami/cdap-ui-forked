@@ -16,8 +16,8 @@
 
 import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
-import { useStyles } from '../../styles';
-import { IInputCheckboxProps } from '../types';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
+import { IInputCheckboxProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
 export default function({ label, value, onChange, className }: IInputCheckboxProps) {
   const classes = useStyles();

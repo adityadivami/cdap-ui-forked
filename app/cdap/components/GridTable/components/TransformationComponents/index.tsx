@@ -14,9 +14,8 @@
  * the License.
  */
 
-import { ITransformationContentParams } from '../../types';
+import { ITransformationContentParams } from 'components/GridTable/types';
 import React from 'react';
-import { CALCULATE_OPTIONS } from '../NestedMenu/menuOptions/calculateOptions';
 
 export default function({
   transformationComponent,
@@ -27,9 +26,7 @@ export default function({
   ...props
 }: ITransformationContentParams) {
   const Component =
-    transformationComponent.find((item) => item.type === type)?.component ||
-    CALCULATE_OPTIONS.find((item) => item?.value === functionName)?.component;
-  console.log('compoent', Component, functionName, transformationComponent);
+    transformationComponent.find((item) => item.type === type)?.component 
   return (
     <Component
       functionName={functionName}

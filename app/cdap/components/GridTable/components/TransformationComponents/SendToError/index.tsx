@@ -15,12 +15,14 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import SelectInput from '../InputComponents/SelectInputComponent';
+import SelectInput from 'components/GridTable/components/TransformationComponents/InputComponents/SelectInputComponent';
 import T from 'i18n-react';
-import LabelComponent from '../InputComponents/LabelInputComponent';
+import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
 import { FormGroup, Box } from '@material-ui/core';
-import { SEND_TO_ERROR_OPTIONS, SEND_TO_ERROR_PLACEHOLDER } from './options';
-import { ISendToErrorProps } from './types';
+import { SEND_TO_ERROR_OPTIONS, SEND_TO_ERROR_PLACEHOLDER } from 'components/GridTable/components/TransformationComponents/SendToError/options';
+import { ISendToErrorProps } from 'components/GridTable/components/TransformationComponents/SendToError/types';
+
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.sendToError'
 
 export default function({
   setTransformationComponentsValue,
@@ -52,7 +54,7 @@ export default function({
     <Box>
       <FormGroup>
         <LabelComponent
-          labelText={`${T.translate('features.DirectiveUIComponent.sendToError.if')}`}
+          labelText={`${T.translate(`${PREFIX}.if`)}`}
         />
         <SelectInput
           optionSelected={optionSelected}
@@ -63,7 +65,7 @@ export default function({
           customInputPlaceHolder={SEND_TO_ERROR_PLACEHOLDER[optionSelected]}
           checkboxValue={ignoreCase}
           setCheckboxValue={setIgnoreCase}
-          checkboxLabel={`${T.translate('features.DirectiveUIComponent.sendToError.ignoreCase')}`}
+          checkboxLabel={`${T.translate(`${PREFIX}.ignoreCase`)}`}
         />
       </FormGroup>
     </Box>

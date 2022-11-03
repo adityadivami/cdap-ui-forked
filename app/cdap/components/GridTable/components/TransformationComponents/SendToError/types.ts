@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { ITransformationComponentValues } from '../../../../AddTransformation/types';
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
 export interface ISendToErrorProps {
   setTransformationComponentsValue: React.Dispatch<
     React.SetStateAction<ITransformationComponentValues>
