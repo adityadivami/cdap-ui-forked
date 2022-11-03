@@ -81,11 +81,10 @@ export interface IOnGoingDataExplorationsData {
   workspaceId: string;
   count: number;
 }
-
 export interface IExistingExplorationCard {
   connectionName: string;
   count: number;
-  dataQuality: unknown;
+  dataQuality: number | null;
   recipeSteps: number;
   workspaceId: string;
   workspaceName: string;

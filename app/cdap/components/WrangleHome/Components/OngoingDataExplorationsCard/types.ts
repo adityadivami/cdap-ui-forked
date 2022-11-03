@@ -14,7 +14,7 @@
  * the License.
  */
 
-interface IExplorationCardDetails {
+export interface IExplorationCardDetails {
   icon?: SVGAElement;
   label?: string;
   type?: string;

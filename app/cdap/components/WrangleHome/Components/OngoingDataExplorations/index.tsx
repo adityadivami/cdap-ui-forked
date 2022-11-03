@@ -22,6 +22,7 @@ import {
   IExistingExplorationCard,
   IConnectionsList,
   IWorkspaceData,
+  IOnGoingDataExplorationsData,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
@@ -32,9 +33,12 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { of } from 'rxjs/observable/of';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import { IExplorationCardDetails } from '../OngoingDataExplorationsCard/types';
 
 export default function() {
-  const [onGoingExplorationsData, setOnGoingExplorationsData] = useState([]);
+  const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IExplorationCardDetails[]>(
+    []
+  );
 
   const getOngoingData = useCallback(async () => {
     const connectionsWithConnectorTypes: Map<
@@ -155,7 +159,6 @@ export default function() {
     (eachWorkspace) => eachWorkspace[6].count !== 0
   );
 
-  console.log('test', filteredData);
   return (
     <Box data-testid="ongoing-data-explore-parent">
       {filteredData &&
@@ -174,7 +177,7 @@ export default function() {
             >
               {index <= 1 && (
                 <OngoingDataExplorationsCard
-                  explorationCardDetails={item}
+                  explorationCardDetails={filteredData}
                   key={index}
                   cardIndex={index}
                 />
