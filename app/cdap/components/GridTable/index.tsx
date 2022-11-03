@@ -218,7 +218,7 @@ export default function GridTable() {
         }}
       />
 
-      {gridData?.headers.length === 0 && (
+      {gridData?.headers?.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.gridTable.title')}
           subtitle={T.translate('features.NoRecordScreen.gridTable.subtitle')}
