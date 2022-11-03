@@ -14,6 +14,6 @@
  * the License.
  */
 
-export interface IFunctionNameWidgetProps{
-    functionName: string;
+export interface IFunctionNameWidgetProps {
+  functionName: string;
 }
