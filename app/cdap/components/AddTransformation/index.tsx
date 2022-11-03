@@ -25,7 +25,7 @@ import {
   IHeaderNamesList,
   IMultipleSelectedFunctionDetail,
   IDataQualityItem,
-  ITransformationComponentValues
+  ITransformationComponentValues,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
@@ -109,8 +109,9 @@ export default function({
     }
   };
 
-  const isComponentAvailable =
-    TRANSFORMATION_COMPONENTS?.some((item) => item?.type === functionName)
+  const isComponentAvailable = TRANSFORMATION_COMPONENTS?.some(
+    (item) => item?.type === functionName
+  );
 
   return (
     <Fragment>

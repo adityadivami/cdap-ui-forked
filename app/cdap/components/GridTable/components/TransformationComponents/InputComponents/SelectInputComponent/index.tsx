@@ -18,7 +18,10 @@ import { MenuItem, FormControl, Select, FormGroup } from '@material-ui/core';
 import FormInputFieldComponent from 'components/GridTable/components/TransformationComponents/InputComponents/FormInputFieldComponent';
 import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 import InputCheckbox from 'components/GridTable/components/TransformationComponents/InputComponents/InputCheckbox';
-import { ISelectColumnProps, ISelectOptions } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
+import {
+  ISelectColumnProps,
+  ISelectOptions,
+} from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
 export default function({
   optionSelected,

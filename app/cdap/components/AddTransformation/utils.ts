@@ -18,7 +18,7 @@ import {
   FILTER_OPTIONS,
   FILTER_TRANSFORMATIONS_MAP,
 } from 'components/GridTable/components/TransformationComponents/Filter/options';
-import { ITransformationComponentValues } from './types';
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
 export const getDirective = (
   functionName: string,
   columnSelected: string,

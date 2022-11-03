@@ -21,7 +21,11 @@ import { useStyles } from 'components/GridTable/components/TransformationCompone
 import T from 'i18n-react';
 import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
 import { FormGroup, Box } from '@material-ui/core';
-import { FILTER_RADIO_OPTION, FILTER_OPTIONS, FILTER_PLACEHOLDER } from 'components/GridTable/components/TransformationComponents/Filter/options';
+import {
+  FILTER_RADIO_OPTION,
+  FILTER_OPTIONS,
+  FILTER_PLACEHOLDER,
+} from 'components/GridTable/components/TransformationComponents/Filter/options';
 import { IFilterProps } from 'components/GridTable/components/TransformationComponents/Filter/types';
 
 export default function({
@@ -71,7 +75,9 @@ export default function({
     <Box>
       <FormGroup>
         <LabelComponent
-          labelText={`${T.translate('features.DirectiveUIComponent.filter.selectAction')}`}
+          labelText={`${T.translate(
+            'features.WranglerNewUI.GridPage.transformationUI.filter.selectAction'
+          )}`}
         />
         <InputRadioWithCustomInputComponent
           options={FILTER_RADIO_OPTION}
@@ -83,7 +89,9 @@ export default function({
         />
       </FormGroup>
       <FormGroup>
-        <LabelComponent labelText={`${T.translate('features.DirectiveUIComponent.filter.if')}`} />
+        <LabelComponent
+          labelText={`${T.translate('features.WranglerNewUI.GridPage.transformationUI.filter.if')}`}
+        />
         <SelectInput
           optionSelected={optionSelected}
           setOptionSelected={setOptionSelected}
@@ -93,7 +101,9 @@ export default function({
           customInputPlaceHolder={FILTER_PLACEHOLDER[optionSelected]}
           checkboxValue={ignoreCase}
           setCheckboxValue={setIgnoreCase}
-          checkboxLabel={`${T.translate('features.DirectiveUIComponent.filter.ignoreCase')}`}
+          checkboxLabel={`${T.translate(
+            'features.WranglerNewUI.GridPage.transformationUI.filter.ignoreCase'
+          )}`}
         />
       </FormGroup>
     </Box>

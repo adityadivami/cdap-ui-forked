@@ -16,6 +16,8 @@
 
 import T from 'i18n-react';
 
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.filter';
+
 export const FILTER_TRANSFORMATIONS_MAP = {
   KEEP: {
     EMPTY: 'filter-rows-on condition-false',
@@ -39,18 +41,18 @@ export const FILTER_TRANSFORMATIONS_MAP = {
 
 export const FILTER_RADIO_OPTION = [
   {
-    label: `${T.translate('features.DirectiveUIComponent.filter.filterRadioOption.keepRow')}`,
+    label: `${T.translate(`${PREFIX}.filterRadioOption.keepRow`)}`,
     value: 'KEEP',
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.filter.filterRadioOption.removeRow')}`,
+    label: `${T.translate(`${PREFIX}.filterRadioOption.removeRow`)}`,
     value: 'REMOVE',
   },
 ];
 
 export const FILTER_OPTIONS = [
   {
-    label: `${T.translate('features.DirectiveUIComponent.filter.filterSelectOption.emptyValue')}`,
+    label: `${T.translate(`${PREFIX}.filterSelectOption.emptyValue`)}`,
     value: 'EMPTY',
     isInputRequired: false,
     isCheckboxRequired: false,
@@ -58,7 +60,7 @@ export const FILTER_OPTIONS = [
       `${condition} ${column} == null || ${column} =~ "^\\W*$"`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.filter.filterSelectOption.textExactly')}`,
+    label: `${T.translate(`${PREFIX}.filterSelectOption.textExactly`)}`,
     value: 'TEXTEXACTLY',
     isInputRequired: true,
     isCheckboxRequired: true,
@@ -68,7 +70,7 @@ export const FILTER_OPTIONS = [
     },
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.filter.filterSelectOption.textContains')}`,
+    label: `${T.translate(`${PREFIX}.filterSelectOption.textContains`)}`,
     value: 'TEXTCONTAINS',
     isInputRequired: true,
     isCheckboxRequired: true,
@@ -78,9 +80,7 @@ export const FILTER_OPTIONS = [
     },
   },
   {
-    label: `${T.translate(
-      'features.DirectiveUIComponent.filter.filterSelectOption.textStartWith'
-    )}`,
+    label: `${T.translate(`${PREFIX}.filterSelectOption.textStartWith`)}`,
     value: 'TEXTSTARTSWITH',
     isInputRequired: true,
     isCheckboxRequired: true,
@@ -95,7 +95,7 @@ export const FILTER_OPTIONS = [
     },
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.filter.filterSelectOption.textEndWith')}`,
+    label: `${T.translate(`${PREFIX}.filterSelectOption.textEndWith`)}`,
     value: 'TEXTENDSWITH',
     isInputRequired: true,
     isCheckboxRequired: true,
@@ -110,7 +110,7 @@ export const FILTER_OPTIONS = [
     },
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.filter.filterSelectOption.textRegex')}`,
+    label: `${T.translate(`${PREFIX}.filterSelectOption.textRegex`)}`,
     value: 'TEXTREGEX',
     isInputRequired: true,
     isCheckboxRequired: false,
@@ -118,9 +118,7 @@ export const FILTER_OPTIONS = [
       `${condition} ${column} ${textValue}`,
   },
   {
-    label: `${T.translate(
-      'features.DirectiveUIComponent.filter.filterSelectOption.customCondition'
-    )}`,
+    label: `${T.translate(`${PREFIX}.filterSelectOption.customCondition`)}`,
     value: 'CUSTOMCONDITION',
     isInputRequired: true,
     isCheckboxRequired: false,
@@ -131,20 +129,10 @@ export const FILTER_OPTIONS = [
 
 export const FILTER_PLACEHOLDER = {
   EMPTY: '',
-  TEXTEXACTLY: `${T.translate(
-    'features.DirectiveUIComponent.filter.filterPlaceHolder.textExactly'
-  )}`,
-  TEXTCONTAINS: `${T.translate(
-    'features.DirectiveUIComponent.filter.filterPlaceHolder.textContains'
-  )}`,
-  TEXTSTARTSWITH: `${T.translate(
-    'features.DirectiveUIComponent.filter.filterPlaceHolder.textStartWith'
-  )}`,
-  TEXTENDSWITH: `${T.translate(
-    'features.DirectiveUIComponent.filter.filterPlaceHolder.textEndWith'
-  )}`,
-  TEXTREGEX: `${T.translate('features.DirectiveUIComponent.filter.filterPlaceHolder.textRegex')}`,
-  CUSTOMCONDITION: `${T.translate(
-    'features.DirectiveUIComponent.filter.filterPlaceHolder.customCondition'
-  )}`,
+  TEXTEXACTLY: `${T.translate(`${PREFIX}.filterPlaceHolder.textExactly`)}`,
+  TEXTCONTAINS: `${T.translate(`${PREFIX}.filterPlaceHolder.textContains`)}`,
+  TEXTSTARTSWITH: `${T.translate(`${PREFIX}.filterPlaceHolder.textStartWith`)}`,
+  TEXTENDSWITH: `${T.translate(`${PREFIX}.filterPlaceHolder.textEndWith`)}`,
+  TEXTREGEX: `${T.translate(`${PREFIX}.filterPlaceHolder.textRegex`)}`,
+  CUSTOMCONDITION: `${T.translate(`${PREFIX}.filterPlaceHolder.customCondition`)}`,
 };

@@ -29,7 +29,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import FilterComponent from './components/TransformationComponents/Filter';
+import FilterComponent from 'components/GridTable/components/TransformationComponents/Filter';
 export const TRANSFORMATION_COMPONENTS = [
   {
     type: 'filter',
