@@ -15,16 +15,19 @@
  */
 
 import { NATIVE_NUMBER_TYPES, NUMBER_TYPES } from 'services/global-constants';
-
-// TODO: Need to import "Calculate" from directives
+import T from 'i18n-react';
 
 export const MATH_OPTIONS = [
   {
     value: 'algebra',
-    label: 'Algebra',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.math.algebra'
+    ),
     options: [
       {
-        label: 'Add',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.add'
+        ),
         value: 'ADD',
         sign: '+',
         inputRequired: true,
@@ -32,7 +35,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Subtract',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.subtract'
+        ),
         value: 'SUBTRACT',
         sign: '-',
         inputRequired: true,
@@ -40,7 +45,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Multiply',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.multiply'
+        ),
         value: 'MULTIPLY',
         sign: 'x',
         inputRequired: true,
@@ -48,7 +55,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Divide',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.divide'
+        ),
         value: 'DIVIDE',
         sign: '/',
         inputRequired: true,
@@ -56,7 +65,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Modulo',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.modulo'
+        ),
         value: 'MOD',
         sign: '%',
         inputRequired: true,
@@ -64,7 +75,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Power of',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.powerOf'
+        ),
         value: 'POWEROF',
         sign: null,
         inputRequired: true,
@@ -72,7 +85,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Square',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.square'
+        ),
         value: 'SQUARE',
         sign: null,
         inputRequired: false,
@@ -80,7 +95,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Square root',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.squareRoot'
+        ),
         value: 'SQUARE_ROOT',
         sign: null,
         inputRequired: false,
@@ -88,7 +105,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Cube',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.cube'
+        ),
         value: 'CUBE',
         sign: null,
         inputRequired: false,
@@ -96,7 +115,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Cube root',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.cubeRoot'
+        ),
         value: 'CUBE_ROOT',
         sign: null,
         inputRequired: false,
@@ -104,7 +125,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'log',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.log'
+        ),
         value: 'LOG',
         sign: null,
         inputRequired: false,
@@ -112,7 +135,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Natural log',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.naturalLog'
+        ),
         value: 'NATURALLOG',
         sign: null,
         inputRequired: false,
@@ -120,7 +145,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Absolute value',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.absoluteValue'
+        ),
         value: 'ABSVALUE',
         sign: null,
         inputRequired: false,
@@ -128,7 +155,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Ceil',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.ceil'
+        ),
         value: 'CEIL',
         sign: null,
         inputRequired: false,
@@ -136,7 +165,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Floor',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.floor'
+        ),
         value: 'FLOOR',
         sign: null,
         inputRequired: false,
@@ -148,10 +179,14 @@ export const MATH_OPTIONS = [
   },
   {
     value: 'trigonometry',
-    label: 'Trigonometry',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.math.trigonometry'
+    ),
     options: [
       {
-        label: 'Sin',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.sin'
+        ),
         value: 'SIN',
         sign: null,
         inputRequired: false,
@@ -159,7 +194,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Cos',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.cos'
+        ),
         value: 'COS',
         sign: null,
         inputRequired: false,
@@ -167,7 +204,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'Tan',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.tan'
+        ),
         value: 'TAN',
         sign: null,
         inputRequired: false,
@@ -175,7 +214,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'ARCSIN',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.arcsin'
+        ),
         value: 'ARCSIN',
         sign: null,
         inputRequired: false,
@@ -183,7 +224,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'ARCCOS',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.arccos'
+        ),
         value: 'ARCCOS',
         sign: null,
         inputRequired: false,
@@ -191,7 +234,9 @@ export const MATH_OPTIONS = [
         supported_dataType: NATIVE_NUMBER_TYPES,
       },
       {
-        label: 'ARCTAN',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.arctan'
+        ),
         value: 'ARCTAN',
         sign: null,
         inputRequired: false,
@@ -203,10 +248,14 @@ export const MATH_OPTIONS = [
   },
   {
     value: 'random',
-    label: 'Random',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.math.random'
+    ),
     options: [
       {
-        label: 'Random',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.random'
+        ),
         value: 'RANDOM',
         sign: null,
         inputRequired: false,
@@ -218,10 +267,14 @@ export const MATH_OPTIONS = [
   },
   {
     value: 'decimal',
-    label: 'DECIMAL',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimal'
+    ),
     options: [
       {
-        label: 'Decimal Add',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalAdd'
+        ),
         value: 'DECIMALADD',
         sign: '+',
         inputRequired: true,
@@ -229,7 +282,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal Subtract',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalSubtract'
+        ),
         value: 'DECIMALSUBTRACT',
         sign: '-',
         inputRequired: true,
@@ -237,7 +292,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal Multiply',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalMultiply'
+        ),
         value: 'DECIMALMULTIPLY',
         sign: null,
         inputRequired: true,
@@ -245,7 +302,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal Divide',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalDivide'
+        ),
         value: 'DECIMALDIVIDEQ',
         sign: null,
         inputRequired: true,
@@ -253,7 +312,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal Divider',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalDivider'
+        ),
         value: 'DECIMALDIVIDER',
         sign: null,
         inputRequired: true,
@@ -261,7 +322,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Precision',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.precision'
+        ),
         value: 'PRECISION',
         sign: null,
         inputRequired: false,
@@ -269,7 +332,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Scale',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.scale'
+        ),
         value: 'SCALE',
         sign: null,
         inputRequired: false,
@@ -277,7 +342,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Unscaled',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.unscaled'
+        ),
         value: 'UNSCALED',
         sign: null,
         inputRequired: false,
@@ -285,7 +352,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal left',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalLeft'
+        ),
         value: 'DECIMALLEFT',
         sign: null,
         inputRequired: true,
@@ -293,7 +362,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal right',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalRight'
+        ),
         value: 'DECIMALRIGHT',
         sign: null,
         inputRequired: true,
@@ -301,7 +372,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal power of',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalPowerOf'
+        ),
         value: 'DECIMALPOWEROF',
         sign: null,
         inputRequired: true,
@@ -309,7 +382,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal absolute value',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalAbsoluteValue'
+        ),
         value: 'DECIMALABSVALUE',
         sign: null,
         inputRequired: false,
@@ -317,7 +392,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal square',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalSquare'
+        ),
         value: 'DECIMALSQUARE',
         sign: null,
         inputRequired: false,
@@ -325,7 +402,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Decimal cube',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.decimalCube'
+        ),
         value: 'DECIMALCUBE',
         sign: null,
         inputRequired: false,
@@ -333,7 +412,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Negate',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.negate'
+        ),
         value: 'NEGATE',
         sign: null,
         inputRequired: false,
@@ -341,7 +422,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Strip zero',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.stripZero'
+        ),
         value: 'STRIPZERO',
         sign: null,
         inputRequired: false,
@@ -349,7 +432,9 @@ export const MATH_OPTIONS = [
         supported_dataType: ['bigdecimal'],
       },
       {
-        label: 'Sign',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.math.sign'
+        ),
         value: 'SIGN',
         sign: null,
         inputRequired: false,
