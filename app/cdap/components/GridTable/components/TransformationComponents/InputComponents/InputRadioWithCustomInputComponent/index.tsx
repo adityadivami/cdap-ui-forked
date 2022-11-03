@@ -26,7 +26,6 @@ import React from 'react';
 import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 import { IRadioInputWithCustomComponentProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
-
 export default function({
   options,
   radioValue,

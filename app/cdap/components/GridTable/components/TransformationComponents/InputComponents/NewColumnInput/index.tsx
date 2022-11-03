@@ -22,14 +22,13 @@ import LabelComponent from 'components/GridTable/components/TransformationCompon
 import T from 'i18n-react';
 import { INewColumnProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.calculate';
 export default function({ column, setColumnName, isError }: INewColumnProps) {
   const classes = useStyles();
   return (
     <Box className={classes.calculateFlex}>
       <FormGroup classes={{ root: classes.muiFormGroupRootInput }}>
-        <LabelComponent
-          labelText={`${T.translate('features.DirectiveUIComponent.calculate.nameNewColumn')}`}
-        />
+        <LabelComponent labelText={`${T.translate(`${PREFIX}.nameNewColumn`)}`} />
         <FormInputFieldComponent
           formInputValue={column}
           classnames={classes.formFieldStyles}
@@ -39,14 +38,12 @@ export default function({ column, setColumnName, isError }: INewColumnProps) {
             value: column,
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value),
             color: 'primary',
-            placeholder: `${T.translate(
-              'features.DirectiveUIComponent.calculate.destinationColumn'
-            )}`,
+            placeholder: `${T.translate(`${PREFIX}.destinationColumn`)}`,
           }}
         />
         {isError && (
           <FormHelperText error={isError} classes={{ root: classes.errorText }}>
-            {T.translate('features.DirectiveUIComponent.calculate.columnExist')}
+            {T.translate(`${PREFIX}.columnExist`)}
           </FormHelperText>
         )}
       </FormGroup>

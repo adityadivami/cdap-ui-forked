@@ -3477,6 +3477,8 @@ features:
               bytes: bytes
             menu:
               changeDatatype: Change data type
+            other:
+              sendToError: Send to error
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step
@@ -3497,6 +3499,11 @@ features:
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
       transformationUI: 
+          calculate:
+            columnExist: This column name already exist
+            copyToNewColumn: Copy to a new column
+            destinationColumn: Destination Column
+            nameNewColumn:  Name new column
           sendToError:
             if: If
             ignoreCase: Ignore case

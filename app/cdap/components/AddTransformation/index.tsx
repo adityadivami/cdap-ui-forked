@@ -109,8 +109,9 @@ export default function({
     }
   };
 
-  const isComponentAvailable =
-    TRANSFORMATION_COMPONENTS?.some((item) => item?.type === functionName)
+  const isComponentAvailable = TRANSFORMATION_COMPONENTS?.some(
+    (item) => item?.type === functionName
+  );
 
   return (
     <Fragment>

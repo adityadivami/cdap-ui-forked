@@ -48,7 +48,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         onClick={(e) => onMenuClick(e, item)}
       >
         <Typography component="div">{item.label} </Typography>
-        {item?.options?.length && menuArrowIcon}
+        {item?.options?.length > 0 && menuArrowIcon}
       </MenuItem>
     );
   }

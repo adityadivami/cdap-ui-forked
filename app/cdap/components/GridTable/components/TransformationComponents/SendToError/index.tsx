@@ -19,10 +19,13 @@ import SelectInput from 'components/GridTable/components/TransformationComponent
 import T from 'i18n-react';
 import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
 import { FormGroup, Box } from '@material-ui/core';
-import { SEND_TO_ERROR_OPTIONS, SEND_TO_ERROR_PLACEHOLDER } from 'components/GridTable/components/TransformationComponents/SendToError/options';
+import {
+  SEND_TO_ERROR_OPTIONS,
+  SEND_TO_ERROR_PLACEHOLDER,
+} from 'components/GridTable/components/TransformationComponents/SendToError/options';
 import { ISendToErrorProps } from 'components/GridTable/components/TransformationComponents/SendToError/types';
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.sendToError'
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.sendToError';
 
 export default function({
   setTransformationComponentsValue,
@@ -53,9 +56,7 @@ export default function({
   return (
     <Box>
       <FormGroup>
-        <LabelComponent
-          labelText={`${T.translate(`${PREFIX}.if`)}`}
-        />
+        <LabelComponent labelText={`${T.translate(`${PREFIX}.if`)}`} />
         <SelectInput
           optionSelected={optionSelected}
           setOptionSelected={setOptionSelected}
