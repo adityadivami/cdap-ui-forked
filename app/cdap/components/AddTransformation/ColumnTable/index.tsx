@@ -43,7 +43,11 @@ export default function({
 
   return (
     <TableContainer component={Box}>
-      <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
+      <Table
+        aria-label="recipe steps table"
+        className={classes.tabledisplayStyles}
+        data-testid="select-column-table"
+      >
         <TableHead>
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
             <TableCell

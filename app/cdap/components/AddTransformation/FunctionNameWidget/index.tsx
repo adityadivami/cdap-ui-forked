@@ -36,14 +36,10 @@ export default function({ functionName }: IFunctionNameWidgetProps) {
         {TickIcon}
       </div>
       <div className={classes.functionInfoSectionStyles}>
-        <span
-          data-testid="selected-function-name"
-          id="selected-function-name"
-          className={classes.functionTextStyles}
-        >
+        <span data-testid="selected-function-name" className={classes.functionTextStyles}>
           {functionName}
         </span>
-        <span data-testid="selected-function-info" id="selected-function-info">
+        <span data-testid="selected-function-info">
           <InfoOutlinedIcon className={classes.infoIcon} />
         </span>
       </div>

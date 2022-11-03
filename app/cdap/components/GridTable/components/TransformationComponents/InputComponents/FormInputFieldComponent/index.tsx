@@ -14,13 +14,17 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { FormControlLabel, Input } from '@material-ui/core';
 import React from 'react';
-import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
+import { IFormInputFieldComponentProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
-describe('It should test FunctionNameWidget Component', () => {
-  it('Should render the FunctionNameWidget Component', () => {
-    const container = render(<FunctionNameWidget functionName={'UnitTesting'} />);
-    expect(container).toBeDefined();
-  });
-});
+export default function({ formInputValue, classnames, inputProps }: IFormInputFieldComponentProps) {
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...inputProps} />}
+      label={''}
+    />
+  );
+}

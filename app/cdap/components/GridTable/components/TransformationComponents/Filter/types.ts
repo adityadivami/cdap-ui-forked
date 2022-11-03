@@ -14,13 +14,10 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
-import React from 'react';
-import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
-
-describe('It should test FunctionNameWidget Component', () => {
-  it('Should render the FunctionNameWidget Component', () => {
-    const container = render(<FunctionNameWidget functionName={'UnitTesting'} />);
-    expect(container).toBeDefined();
-  });
-});
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
+export interface IFilterProps {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
+}

@@ -14,9 +14,50 @@
  * the License.
  */
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+import {
+  FILTER_OPTIONS,
+  FILTER_TRANSFORMATIONS_MAP,
+} from 'components/GridTable/components/TransformationComponents/Filter/options';
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  directiveComponentValues: ITransformationComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${columnSelected} ${functionName}`;
+  } else if (functionName === 'filter') {
+    const condition =
+      FILTER_TRANSFORMATIONS_MAP[directiveComponentValues.filterRadioOption][
+        directiveComponentValues.filterOptionSelected
+      ];
+    const transformation = FILTER_OPTIONS?.filter(
+      (el) => el?.value === directiveComponentValues?.filterOptionSelected
+    );
+    if (transformation.length) {
+      return transformation[0].directive(
+        condition,
+        columnSelected,
+        directiveComponentValues.ignoreCase,
+        directiveComponentValues.filterOptionValue
+      );
+    }
+  } else if (functionName === 'filter') {
+    const condition =
+      FILTER_TRANSFORMATIONS_MAP[directiveComponentValues.filterRadioOption][
+        directiveComponentValues.filterOptionSelected
+      ];
+    const transformation = FILTER_OPTIONS?.filter(
+      (el) => el?.value === directiveComponentValues?.filterOptionSelected
+    );
+    if (transformation.length) {
+      return transformation[0].directive(
+        condition,
+        columnSelected,
+        directiveComponentValues.ignoreCase,
+        directiveComponentValues.filterOptionValue
+      );
+    }
   } else {
     return null;
   }

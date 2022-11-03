@@ -14,13 +14,11 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
 import React from 'react';
-import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
+import { Typography } from '@material-ui/core';
 
-describe('It should test FunctionNameWidget Component', () => {
-  it('Should render the FunctionNameWidget Component', () => {
-    const container = render(<FunctionNameWidget functionName={'UnitTesting'} />);
-    expect(container).toBeDefined();
-  });
-});
+export default function({ labelText }: { labelText: string }) {
+  const classes = useStyles();
+  return <Typography className={classes.formLabelStyles}>{labelText}</Typography>;
+}

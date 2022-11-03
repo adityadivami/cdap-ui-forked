@@ -22,7 +22,7 @@ export default function({ selectedColumns, onSingleSelection, eachColumn }: IRad
     <>
       <Radio
         color="primary"
-        onClick={() => onSingleSelection(eachColumn)}
+        onChange={() => onSingleSelection(eachColumn)}
         checked={
           selectedColumns?.filter((columnDetail) => columnDetail.label === eachColumn.label).length
             ? true
