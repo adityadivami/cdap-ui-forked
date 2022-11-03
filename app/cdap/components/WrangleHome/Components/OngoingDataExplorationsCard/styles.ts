@@ -31,7 +31,7 @@ export const useStyles = makeStyles({
     justifyConent: 'center',
     paddingRight: 62,
   },
-  elementStyle: {
+  explorationCard: {
     width: 301,
     flex: 1,
     paddingTop: 14,

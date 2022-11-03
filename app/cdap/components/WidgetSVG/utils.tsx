@@ -27,7 +27,7 @@ import {
   IConnectorDetailsPayload,
   IConnectorTypes,
 } from 'components/WidgetSVG/types';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
+import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDataset';
 import React from 'react';
 
 export const getWidgetData = async () => {
@@ -38,22 +38,22 @@ export const getWidgetData = async () => {
     string,
     IConnectorDetailsPayload[]
   > = getCategoriesToConnectorsMap(connectorTypes);
-  const connectionPayload: IConnectorDetailsPayload[] = [];
+  const connectorsPluginProperties: IConnectorDetailsPayload[] = [];
   allConnectorsPluginProperties?.forEach((eachProperty) => {
     if (eachProperty.length) {
-      eachProperty.forEach((item) => {
-        connectionPayload.push(item);
+      eachProperty.forEach((eachPropertyItem) => {
+        connectorsPluginProperties.push(eachPropertyItem);
       });
     }
   });
 
   const connectionDetailsData = await Promise.all(
-    connectionPayload.map(async (item, index) => {
+    connectorsPluginProperties.map(async (eachConnection) => {
       const selectedConnector = {
-        artifact: item.artifact,
-        category: item.category,
-        name: item.name,
-        type: item.type,
+        artifact: eachConnection.artifact,
+        category: eachConnection.category,
+        name: eachConnection.name,
+        type: eachConnection.type,
       };
       connectorsTypesData.push(selectedConnector);
       return new Promise((resolve, reject) => {
@@ -71,9 +71,9 @@ export const getWidgetData = async () => {
 
   connectorsTypesData.map((connectorType) => {
     let connectorTypeHasWidget: boolean = false;
-    /**
-     * Getting widget icons for connector types
-     */
+
+    // Getting widget icons for connector types
+
     Array.isArray(connectorWidgetJson) &&
       connectorWidgetJson.length &&
       connectorWidgetJson.map((eachConnector) => {
@@ -93,20 +93,20 @@ export const getWidgetData = async () => {
           connectorTypeHasWidget = true;
         }
       });
-    /**
-     * Retaining the connector types which are not part of widget api
-     */
+
+    // Retaining the connector types which are not part of widget api
+
     if (!connectorTypeHasWidget) {
       IConnectionWithConnectorType.push({
         ...connectorType,
-        SVG: <WidgetSVG imageSource={undefined} label={connectorType.name} />,
+        SVG: <WidgetSVG label={connectorType.name} />,
       });
     }
   });
 
   IConnectionWithConnectorType.push({
     name: 'Imported Dataset',
-    SVG: importDatasetIcon,
+    SVG: ImportDatasetIcon,
   });
 
   DataPrepStore.dispatch({

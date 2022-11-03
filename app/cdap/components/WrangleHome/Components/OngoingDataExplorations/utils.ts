@@ -16,8 +16,8 @@
 
 import DataPrepStore from 'components/DataPrep/store';
 import {
-  IExistingExplorationCardsData,
-  IMassagedObject,
+  IExistingExplorationCard,
+  IOnGoingDataExplorationsData,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import {
   CONNECTION_NAME,
@@ -34,12 +34,14 @@ import {
 } from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
 import T from 'i18n-react';
 
+const PREFIX = 'features.WranglerNewUI.OnGoingDataExplorations.labels';
+
 export const getUpdatedExplorationCards = (
-  existingExplorationCardsData: IExistingExplorationCardsData[]
+  existingExplorationCards: IExistingExplorationCard[]
 ) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
 
-  const updatedExplorationCardsData = [];
+  const updatedExplorationCards = [];
 
   const { dataprep } = DataPrepStore.getState();
   const { connectorsWithIcons } = dataprep;
@@ -52,55 +54,54 @@ export const getUpdatedExplorationCards = (
   };
 
   if (
-    existingExplorationCardsData &&
-    Array.isArray(existingExplorationCardsData) &&
-    existingExplorationCardsData.length
+    existingExplorationCards &&
+    Array.isArray(existingExplorationCards) &&
+    existingExplorationCards.length
   ) {
-    existingExplorationCardsData.forEach((eachItem) => {
+    existingExplorationCards.forEach((eachExplorationCard) => {
       const eachExplorationCardData = [];
-      Object.keys(eachItem).map((keys) => {
-        const obj = {} as IMassagedObject;
+      Object.keys(eachExplorationCard).map((keys) => {
+        const onGoingDatExplorationData = {} as IOnGoingDataExplorationsData;
         switch (keys) {
           case CONNECTOR_TYPE:
-            obj.icon = getIconForConnector(eachItem[keys]);
-            obj.label = eachItem[keys];
-            obj.type = ICON;
+            onGoingDatExplorationData.icon = getIconForConnector(eachExplorationCard[keys]);
+            onGoingDatExplorationData.label = eachExplorationCard[keys];
+            onGoingDatExplorationData.type = ICON;
             break;
           case CONNECTION_NAME:
-            obj.label = eachItem[keys];
-            obj.type = ICON_WITH_TEXT;
+            onGoingDatExplorationData.label = eachExplorationCard[keys];
+            onGoingDatExplorationData.type = ICON_WITH_TEXT;
             break;
           case WORKPSACE_NAME:
-            obj.label = eachItem[keys];
-            obj.type = TEXT;
+            onGoingDatExplorationData.label = eachExplorationCard[keys];
+            onGoingDatExplorationData.type = TEXT;
             break;
           case RECIPE_STEPS:
-            obj.label = `${eachItem[keys]} ${T.translate(
-              'features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps'
-            )}`;
-            obj.type = TEXT;
+            onGoingDatExplorationData.label = [
+              eachExplorationCard[keys],
+              T.translate(`${PREFIX}.recipeSteps`),
+            ].join(' ');
+            onGoingDatExplorationData.type = TEXT;
             break;
           case DATA_QUALITY:
-            obj.label = Number(eachItem[keys]);
-            obj.percentageSymbol = '%';
-            obj.subText = T.translate(
-              'features.WranglerNewUI.OnGoingDataExplorations.labels.nullValues'
-            );
-            obj.type = PERCENTAGE_WITH_TEXT;
+            onGoingDatExplorationData.label = Number(eachExplorationCard[keys]);
+            onGoingDatExplorationData.percentageSymbol = '%';
+            onGoingDatExplorationData.subText = T.translate(`${PREFIX}.nullValues`);
+            onGoingDatExplorationData.type = PERCENTAGE_WITH_TEXT;
             break;
           case WORKSPACE_ID:
-            obj.workspaceId = eachItem[keys];
+            onGoingDatExplorationData.workspaceId = eachExplorationCard[keys];
             break;
           case COUNT:
-            obj.count = eachItem[keys];
+            onGoingDatExplorationData.count = eachExplorationCard[keys];
             break;
         }
-        eachExplorationCardData.push(obj);
+        eachExplorationCardData.push(onGoingDatExplorationData);
       });
 
-      updatedExplorationCardsData.push(eachExplorationCardData);
+      updatedExplorationCards.push(eachExplorationCardData);
     });
   }
 
-  return updatedExplorationCardsData;
+  return updatedExplorationCards;
 };

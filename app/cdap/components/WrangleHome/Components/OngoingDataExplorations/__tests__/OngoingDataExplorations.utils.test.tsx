@@ -23,7 +23,7 @@ describe('Test the Utility Functions', () => {
     expect(result).toEqual([]);
   });
 
-  it('Should test the result for mock data', () => {
+  it('Should have returned the expected result for the provided mock data', () => {
     const result = getUpdatedExplorationCards(mockOldData);
   });
 });
