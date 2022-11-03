@@ -271,13 +271,13 @@ export default function GridTable() {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData?.headers, rawData?.types);
     setHeadersNamesList(headersData);
-    if (rawData && rawData.summary && rawData.summary?.statistics) {
+    if (rawData && rawData?.summary && rawData?.summary?.statistics) {
       const missingData = createMissingData(gridData?.summary?.statistics);
       setMissingDataList(missingData);
     }
     const rowData =
       rawData &&
-      rawData.values &&
+      rawData?.values &&
       Array.isArray(rawData?.values) &&
       rawData?.values.map((eachRow: {}) => {
         const { ...rest } = eachRow;
