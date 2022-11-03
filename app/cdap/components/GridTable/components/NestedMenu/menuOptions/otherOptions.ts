@@ -13,19 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import T from 'i18n-react';
 
-export const MENU_OPTIONS = [
+export const OTHER_OPTIONS = [
   {
-    value: 'changeDatatype',
+    value: 'customTransform',
     label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.changeDatatype'
-    ).toString(),
-    options: DATATYPE_OPTIONS,
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+      'features.WranglerNewUI.GridPage.transformations.options.labels.other.customTransform'
+    ),
+    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
   },
 ];
