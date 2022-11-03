@@ -27,4 +27,3 @@ Feature: Breadcrumb - Navigate to the application
     Examples:
          | connectionLabel | connectionTestId |
          | PostgreSQL | postgresql |
-
