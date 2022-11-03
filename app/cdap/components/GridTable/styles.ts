@@ -41,7 +41,7 @@ export const useStyles = makeStyles({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: '-62px',
+    bottom: -62,
     backgroundColor: '#ffffff',
     zIndex: 10,
   },

@@ -23,9 +23,12 @@ import Mousetrap from 'mousetrap';
 import NamespaceStore from 'services/NamespaceStore';
 import ee from 'event-emitter';
 import globalEvents from 'services/global-events';
-import { useStyles } from './styles';
+import { useStyles } from 'components/DirectiveInput/Components/AutoComplete/styles';
 import { Box, Typography } from '@material-ui/core';
-import { IAutoCompleteProps, IOnRowClickValue } from './types';
+import {
+  IAutoCompleteProps,
+  IOnRowClickValue,
+} from 'components/DirectiveInput/Components/AutoComplete/types';
 
 export default function({
   setDirectivesList,

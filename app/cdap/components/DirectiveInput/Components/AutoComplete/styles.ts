@@ -13,7 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { makeStyles } from '@material-ui/core';
+import grey from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   resultRow: {
@@ -31,16 +33,16 @@ export const useStyles = makeStyles({
     fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: '16px',
-    letterSpacing: '0.15px',
+    fontSize: 16,
+    letterSpacing: 0.15,
     color: '#616161',
   },
   directiveDescription: {
     fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: '14px',
-    letterSpacing: '0.15px',
+    fontSize: 14,
+    letterSpacing: 0.15,
     color: '#616161',
   },
   directiveUsage: {},

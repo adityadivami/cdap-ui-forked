@@ -13,12 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 export interface IHeaderNamesList {
   name: string;
   label: string;
 }
 
-export interface IDirectiveProps {
+export interface IDirectiveInputProps {
   columnNamesList: IHeaderNamesList[];
   onDirectiveInputHandler: (value: string) => void;
   onClose: () => void;

@@ -13,7 +13,9 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { makeStyles } from '@material-ui/core';
+import grey from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   usageAndSearchWrapper: {
@@ -30,7 +32,7 @@ export const useStyles = makeStyles({
   },
   inputSearch: {
     width: '95%',
-    marginLeft: '5px',
+    marginLeft: 5,
     outline: 0,
     border: 0,
     background: 'transparent',
@@ -38,7 +40,7 @@ export const useStyles = makeStyles({
   },
   label: {
     color: '#94EC98',
-    fontSize: '14px',
+    fontSize: 14,
   },
   directiveUsage: {
     padding: 10,
@@ -47,10 +49,10 @@ export const useStyles = makeStyles({
     fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: '14px',
-    letterSpacing: '0.15px',
+    fontSize: 14,
+    letterSpacing: 0.15,
     color: '#ffffff',
-    marginBottom: '10px',
+    marginBottom: 10,
   },
   divider: {
     backgroundColor: '#ffffff',
@@ -60,7 +62,7 @@ export const useStyles = makeStyles({
   },
   infoLink: {
     color: '#79B7FF',
-    fontSize: '14px',
+    fontSize: 14,
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
