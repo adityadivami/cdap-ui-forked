@@ -27,6 +27,7 @@ export default function({
 }: ITransformationContentParams) {
   const Component =
     transformationComponent.find((item) => item.type === type)?.component 
+
   return (
     <Component
       functionName={functionName}

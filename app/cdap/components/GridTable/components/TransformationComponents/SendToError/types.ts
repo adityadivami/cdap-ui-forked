@@ -15,6 +15,7 @@
  */
 
 import { ITransformationComponentValues } from 'components/AddTransformation/types';
+
 export interface ISendToErrorProps {
   setTransformationComponentsValue: React.Dispatch<
     React.SetStateAction<ITransformationComponentValues>
