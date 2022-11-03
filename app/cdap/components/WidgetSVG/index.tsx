@@ -14,25 +14,20 @@
  * the License.
  */
 
-export interface IWidgetSrc {
-  imageSource?: string;
-}
+import { Avatar } from '@material-ui/core';
+import ImageOutlined from '@material-ui/icons/ImageOutlined';
+import { IWidgetSVGProps } from 'components/WidgetSVG/types';
+import React from 'react';
+import styled from 'styled-components';
 
-export interface IArtifact {
-  name: string;
-  version: string;
-  scope: string;
-}
+const StyledImageOutlined = styled(ImageOutlined)`
+  font-size: 40px;
+`;
 
-export interface IConnectorTypes {
-  name: string;
-  type?: string;
-  category?: string;
-  className?: string;
-  description?: string;
-  artifact?: IArtifact;
-  SVG: JSX.Element;
-  link?: string;
-  displayName?: string;
-  olderVersions?: string[];
+export default function({ imageSource, label }: IWidgetSVGProps) {
+  return imageSource ? (
+    <Avatar src={imageSource} variant="square" data-testid={`widget-api-image-${label}`} />
+  ) : (
+    <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
+  );
 }

@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { getWidgetData } from 'components/WrangleHome/services/getWidgetData';
+import { getUpdatedConnectorCards } from 'components/WrangleHome/services/getUpdatedConnectorCards';
 import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
 import * as reducers from 'components/Connections/Create/reducer';
 import * as utils from 'components/WrangleHome/Components/WidgetSVG/utils';
@@ -58,7 +58,7 @@ describe('Test function getWidgetData', () => {
     const updateState = (newState) => {
       result = { ...newState };
     };
-    getWidgetData(updateState);
-    expect(getWidgetData).toBeDefined();
+    getUpdatedConnectorCards();
+    expect(getUpdatedConnectorCards).toBeDefined();
   });
 });

@@ -14,25 +14,43 @@
  * the License.
  */
 
-export interface IWidgetSrc {
-  imageSource?: string;
-}
-
 export interface IArtifact {
   name: string;
   version: string;
   scope: string;
 }
 
-export interface IConnectorTypes {
+export interface IConnectorTypesWithSVG {
   name: string;
-  type?: string;
+  typ?: string;
   category?: string;
-  className?: string;
   description?: string;
   artifact?: IArtifact;
   SVG: JSX.Element;
   link?: string;
   displayName?: string;
-  olderVersions?: string[];
+}
+
+export interface IConnectorDetailsPayload {
+  name: string;
+  type: string;
+  category: string;
+  description: string;
+  artifact: IArtifact;
+}
+
+export interface IWidgetSVGProps {
+  imageSource: string;
+  label: string;
+}
+
+export interface IConnectorTypes {
+  name: string;
+  type: string;
+  category: string;
+  artifact: IArtifact;
+}
+
+export interface IAllConnectorPluginProps {
+  [index: string]: IConnectorDetailsPayload;
 }

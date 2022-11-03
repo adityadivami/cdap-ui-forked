@@ -16,6 +16,7 @@
 
 import reject from 'lodash/reject';
 import { findHighestVersion } from 'services/VersionRange/VersionUtilities';
+import { IConnectorTypes } from './types';
 
 export const getCategoriesToConnectorsMap = (connectionTypes = []) => {
   const categoryToConnectionsMap = new Map();
