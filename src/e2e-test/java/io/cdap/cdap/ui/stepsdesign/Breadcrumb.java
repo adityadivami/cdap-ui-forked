@@ -16,7 +16,6 @@
 
 package io.cdap.cdap.ui.stepsdesign;
 
-
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.WaitHelper;
@@ -30,9 +29,6 @@ import java.time.Duration;
 import org.openqa.selenium.WebElement;
 
 public class Breadcrumb {
-
-
-
     @Given("Navigate to the home page")
     public void navigateToTheHomePage() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
