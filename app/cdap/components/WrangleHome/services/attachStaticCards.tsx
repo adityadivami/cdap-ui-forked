@@ -19,14 +19,14 @@ import { ImportDataIcon } from 'components/WrangleHome/Components/WrangleCard/ic
 
 export const attachStaticCards = (connectorsWithoutStaticCards) => [
   {
-    name: 'Import Data',
-    SVG: ImportDataIcon,
-    link: 'home',
-  },
-  {
     name: 'Add Connection',
     SVG: AddConnectionIcon,
     link: 'connections/create',
+  },
+  {
+    name: 'Import Data',
+    SVG: ImportDataIcon,
+    link: 'home',
   },
   ...connectorsWithoutStaticCards,
 ];
