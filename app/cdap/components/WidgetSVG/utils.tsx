@@ -60,6 +60,8 @@ export const getWidgetData = async () => {
         const response = fetchConnectionDetails(selectedConnector);
         if (response) {
           resolve(response);
+        } else {
+          reject(response);
         }
       });
     })
