@@ -15,15 +15,14 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import SelectInput from '../InputComponents/SelectInputComponent';
-import FormInputFieldComponent from '../InputComponents/FormInputFieldComponent';
-import InputRadioWithCustomInputComponent from '../InputComponents/InputRadioWithCustomInputComponent';
-import { useStyles } from '../styles';
+import SelectInput from 'components/GridTable/components/TransformationComponents/InputComponents/SelectInputComponent';
+import InputRadioWithCustomInputComponent from 'components/GridTable/components/TransformationComponents/InputComponents/InputRadioWithCustomInputComponent';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 import T from 'i18n-react';
-import LabelComponent from '../InputComponents/LabelInputComponent';
+import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
 import { FormGroup, Box } from '@material-ui/core';
-import { FILTER_RADIO_OPTION, FILTER_OPTIONS, FILTER_PLACEHOLDER } from './options';
-import { IFilterProps } from './types';
+import { FILTER_RADIO_OPTION, FILTER_OPTIONS, FILTER_PLACEHOLDER } from 'components/GridTable/components/TransformationComponents/Filter/options';
+import { IFilterProps } from 'components/GridTable/components/TransformationComponents/Filter/types';
 
 export default function({
   setTransformationComponentsValue,

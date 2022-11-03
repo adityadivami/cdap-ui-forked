@@ -42,6 +42,22 @@ export const getDirective = (
         directiveComponentValues.filterOptionValue
       );
     }
+  } else if (functionName === 'filter') {
+    const condition =
+      FILTER_TRANSFORMATIONS_MAP[directiveComponentValues.filterRadioOption][
+        directiveComponentValues.filterOptionSelected
+      ];
+    const transformation = FILTER_OPTIONS?.filter(
+      (el) => el?.value === directiveComponentValues?.filterOptionSelected
+    );
+    if (transformation.length) {
+      return transformation[0].directive(
+        condition,
+        columnSelected,
+        directiveComponentValues.ignoreCase,
+        directiveComponentValues.filterOptionValue
+      );
+    }
   } else {
     return null;
   }

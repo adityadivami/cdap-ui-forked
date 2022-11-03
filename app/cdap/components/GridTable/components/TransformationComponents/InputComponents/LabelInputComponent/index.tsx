@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { useStyles } from '../../styles';
+import { useStyles } from  'components/GridTable/components/TransformationComponents/styles'
 import { Typography } from '@material-ui/core';
 
 export default function({ labelText }: { labelText: string }) {
