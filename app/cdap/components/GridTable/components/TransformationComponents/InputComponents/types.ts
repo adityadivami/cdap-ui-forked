@@ -30,3 +30,7 @@ export interface IFormInputFieldComponentProps {
   classnames: string;
   inputProps: IInput;
 }
+
+export interface ILabelInputComponent {
+  labelText: string;
+}

@@ -17,8 +17,9 @@
 import React from 'react';
 import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 import { Typography } from '@material-ui/core';
+import { ILabelInputComponent } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
-export default function({ labelText }: { labelText: string }) {
+export default function({ labelText }: ILabelInputComponent) {
   const classes = useStyles();
   return <Typography className={classes.formLabelStyles}>{labelText}</Typography>;
 }
