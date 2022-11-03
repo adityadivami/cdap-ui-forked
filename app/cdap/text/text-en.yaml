@@ -3496,5 +3496,28 @@ features:
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
+      transformationUI: 
+        filter: 
+          selectAction: Select action to take
+          if: If
+          ignoreCase: Ignore Case
+          filterRadioOption:
+            keepRow: Keep rows
+            removeRow: Remove rows
+          filterSelectOption:
+            customCondition: Custom condition
+            emptyValue: Value is empty
+            textExactly: Value is
+            textContains: Value contains
+            textStartWith: Value starts with
+            textEndWith: Value ends with
+            textRegex: Value contains regex
+          filterPlaceHolder:
+            customCondition: E.g. < 30 || gender == "Male"
+            textExactly: Enter value
+            textContains: Enter contained value
+            textStartWith: Enter prefix
+            textEndWith: Enter suffix
+            textRegex: Enter regex
 
               
