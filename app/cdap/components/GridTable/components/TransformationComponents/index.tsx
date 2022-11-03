@@ -16,7 +16,6 @@
 
 import { ITransformationContentParams } from '../../types';
 import React from 'react';
-import { CALCULATE_OPTIONS } from '../NestedMenu/menuOptions/calculateOptions';
 
 export default function({
   transformationComponent,
@@ -26,10 +25,7 @@ export default function({
   setTransformationComponentsValue,
   ...props
 }: ITransformationContentParams) {
-  const Component =
-    transformationComponent.find((item) => item.type === type)?.component ||
-    CALCULATE_OPTIONS.find((item) => item?.value === functionName)?.component;
-  console.log('compoent', Component, functionName, transformationComponent);
+  const Component = transformationComponent.find((item) => item.type === type)?.component;
   return (
     <Component
       functionName={functionName}

@@ -17,12 +17,12 @@
 import { FormControl, FormGroup, MenuItem } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import { USING_PATTERN_OPTIONS } from './options';
-import { useStyles } from '../styles';
-import FormInputFieldComponent from '../InputComponents/FormInputFieldComponent';
-import SelectInputComponent from '../InputComponents/SelectInputComponent';
-import LabelComponent from '../InputComponents/LabelInputComponent';
-import StartEndComponent from './StartEndPattern';
-import CustomComponent from './CustomPattern';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
+import FormInputFieldComponent from 'components/GridTable/components/TransformationComponents/InputComponents/FormInputFieldComponent';
+import SelectInputComponent from 'components/GridTable/components/TransformationComponents/InputComponents/SelectInputComponent';
+import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
+import StartEndComponent from 'components/GridTable/components/TransformationComponents/PatternExtract/StartEndPattern';
+import CustomComponent from 'components/GridTable/components/TransformationComponents/PatternExtract/CustomPattern';
 import T from 'i18n-react';
 
 export default function({ setTransformationComponentsValue, transformationComponentValues }) {
@@ -61,7 +61,9 @@ export default function({ setTransformationComponentsValue, transformationCompon
     <>
       <FormGroup>
         <LabelComponent
-          labelText={`${T.translate('features.DirectiveUIComponent.extract.selectPattern')}`}
+          labelText={`${T.translate(
+            'features.WranglerNewUI.GridPage.transformationUI.extract.selectPattern'
+          )}`}
         />
         <FormControl>
           <SelectInputComponent
@@ -80,7 +82,9 @@ export default function({ setTransformationComponentsValue, transformationCompon
       {patternName === 'ndigitnumber' && (
         <FormGroup>
           <LabelComponent
-            labelText={`${T.translate('features.DirectiveUIComponent.extract.extractNumber')}`}
+            labelText={`${T.translate(
+              'features.WranglerNewUI.GridPage.transformationUI.extract.extractNumber'
+            )}`}
           />
           <FormInputFieldComponent
             formInputValue={nDigit}
@@ -93,7 +97,9 @@ export default function({ setTransformationComponentsValue, transformationCompon
               color: 'primary',
               placeholder: 'E.g. 3',
             }}
-            label={`${T.translate('features.DirectiveUIComponent.extract.digits')}`}
+            label={`${T.translate(
+              'features.WranglerNewUI.GridPage.transformationUI.extract.digits'
+            )}`}
           />
         </FormGroup>
       )}

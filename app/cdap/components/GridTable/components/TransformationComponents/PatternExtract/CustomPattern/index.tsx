@@ -15,18 +15,20 @@
  */
 
 import React from 'react';
-import FormInputFieldComponent from '../../InputComponents/FormInputFieldComponent';
-import LabelComponent from '../../InputComponents/LabelInputComponent';
+import FormInputFieldComponent from 'components/GridTable/components/TransformationComponents/InputComponents/FormInputFieldComponent';
+import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
 import { FormGroup } from '@material-ui/core';
 import T from 'i18n-react';
-import { useStyles } from '../../styles';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 
 export default function({ customInput, setCustomInput }) {
   const classes = useStyles();
   return (
     <FormGroup>
       <LabelComponent
-        labelText={`${T.translate('features.DirectiveUIComponent.extract.writeYourRegex')}`}
+        labelText={`${T.translate(
+          'features.WranglerNewUI.GridPage.transformationUI.extract.writeYourRegex'
+        )}`}
       />
       <FormInputFieldComponent
         formInputValue={customInput}

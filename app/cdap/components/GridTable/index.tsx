@@ -235,7 +235,7 @@ export default function GridTable() {
         executeAPICall(apiPayload);
       } else {
         setLoading(false);
-        setDirectiveFunction('');
+        setTransformationFunction('');
       }
     }
   };
@@ -319,13 +319,15 @@ export default function GridTable() {
                       <GridTextCell
                         cellValue={eachRow[eachHeaderName.name] || '--'}
                         key={`${eachHeaderName.name}-${eachIndex}`}
-                        maskSelection={eachKey.name === columnSelected ? maskSelection : false}
+                        maskSelection={
+                          eachHeaderName.name === columnSelected ? maskSelection : false
+                        }
                         rowNumber={rowIndex}
                         columnSelected={columnSelected}
                         optionSelected={optionSelected}
                         headers={
-                          headersNamesList.length > 0
-                            ? headersNamesList.map(({ label }) => label)
+                          headerNamesList.length > 0
+                            ? headerNamesList.map(({ label }) => label)
                             : []
                         }
                         applyTransformation={(value) => {

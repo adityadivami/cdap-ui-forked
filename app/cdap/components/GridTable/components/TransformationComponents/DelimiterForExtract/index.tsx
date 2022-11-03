@@ -14,11 +14,11 @@
  * the License.
  */
 import React, { useState, useEffect } from 'react';
-import { DELIMITER_OPTION_EXPLODE_EXTRACT } from './options';
-import InputRadioWithCustomInputComponent from '../InputComponents/InputRadioWithCustomInputComponent';
-import { IDelimiterExtractProps } from './types';
+import { DELIMITER_OPTION_EXPLODE_EXTRACT } from 'components/GridTable/components/TransformationComponents/DelimiterForExtract/options';
+import InputRadioWithCustomInputComponent from 'components/GridTable/components/TransformationComponents/InputComponents/InputRadioWithCustomInputComponent';
+import { IDelimiterExtractProps } from 'components/GridTable/components/TransformationComponents/DelimiterForExtract/types';
 import { FormGroup } from '@material-ui/core';
-import LabelComponent from '../InputComponents/LabelInputComponent';
+import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
 import T from 'i18n-react';
 
 export default function({
@@ -42,7 +42,9 @@ export default function({
   return (
     <FormGroup>
       <LabelComponent
-        labelText={`${T.translate('features.DirectiveUIComponent.extract.selectDelimiter')}`}
+        labelText={`${T.translate(
+          'features.WranglerNewUI.GridPage.transformationUI.extract.selectDelimiter'
+        )}`}
       />
       <InputRadioWithCustomInputComponent
         options={DELIMITER_OPTION_EXPLODE_EXTRACT}

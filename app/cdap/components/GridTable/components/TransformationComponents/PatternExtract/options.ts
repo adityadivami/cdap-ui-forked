@@ -19,7 +19,7 @@ import T from 'i18n-react';
 export const USING_PATTERN_OPTIONS = [
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractPatternOptions.creditCard'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.creditCard'
     )}`,
     patternName: `((?:\\d{4}[-\\s]?){4})`,
     value: 'creditcard',
@@ -32,7 +32,9 @@ export const USING_PATTERN_OPTIONS = [
     ) => `extract-regex-groups :${column} ((?:\\d{4}[-\\s]?){4})`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.date')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.date'
+    )}`,
     patternName: `((?:(?:\\d{4}|\\d{2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))|(?:(?:(?:\\d{1,2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))|(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{4}|\\d{2})))`,
     value: 'date',
     extractDirective: (
@@ -45,7 +47,9 @@ export const USING_PATTERN_OPTIONS = [
       `extract-regex-groups :${column} ((?:(?:\\d{4}|\\d{2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))|(?:(?:(?:\\d{1,2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))|(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{4}|\\d{2})))`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.dateTime')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.dateTime'
+    )}`,
     patternName: `((?:(?:(?:\\d{4}|\\d{2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))|(?:(?:(?:\\d{1,2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))|(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{4}|\\d{2})))[T\\s](?:(?:(?:2[0-3])|(?:[01]?\\d))[h:\\s][0-5]\\d(?::(?:(?:[0-5]\\d)|(?:60)))?(?:\\s[aApP][mM])?(?:Z|(?:[+-](?:1[0-2])|(?:0?\\d):[0-5]\\d)|(?:\\s[[a-zA-Z]\\s]+))?))`,
     value: 'datetime',
     extractDirective: (
@@ -58,7 +62,9 @@ export const USING_PATTERN_OPTIONS = [
       `extract-regex-groups :${column} ((?:(?:(?:\\d{4}|\\d{2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))|(?:(?:(?:\\d{1,2})(?:(?:[.,]\\s)|[-\/.\\s])(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))|(?:(?:1[0-2])|(?:0?\\d)|(?:[a-zA-Z]{3}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{1,2}))(?:(?:[.,]\\s)|[-\/.\\s])(?:\\d{4}|\\d{2})))[T\\s](?:(?:(?:2[0-3])|(?:[01]?\\d))[h:\\s][0-5]\\d(?::(?:(?:[0-5]\\d)|(?:60)))?(?:\\s[aApP][mM])?(?:Z|(?:[+-](?:1[0-2])|(?:0?\\d):[0-5]\\d)|(?:\\s[[a-zA-Z]\\s]+))?))`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.email')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.email'
+    )}`,
     patternName: `([a-zA-Z0-9!#$%&*+/=?^_\`'{|}~-]+@(?!.*\\.{2})[a-zA-Z0-9\\.-]+(?:\\.[a-zA-Z]{2,6})?)`,
     value: 'email',
     extractDirective: (
@@ -72,7 +78,7 @@ export const USING_PATTERN_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractPatternOptions.urlAnchor'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.urlAnchor'
     )}`,
     patternName: `<[aA](?:\\s+[a-zA-Z]+=".*?")*\\s+[hH][rR][eE][fF]="(.*?)"(?:\\s+[a-zA-Z]+=".*?")*>(?:.*)<\/[aA]>`,
     value: 'htmlhyperlink',
@@ -87,7 +93,7 @@ export const USING_PATTERN_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractPatternOptions.ip4Address'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.ip4Address'
     )}`,
     patternName: `((?:(?:0|(?:25[0-5])|(?:2[0-4][1-9])|(?:1\\d\\d)|(?:[1-9]\\d?))\\.){3}(?:(?:0|(?:25[0-5])|(?:2[0-4][1-9])|(?:1\\d\\d)|(?:[1-9]\\d?))))`,
     value: 'ipv4',
@@ -101,7 +107,9 @@ export const USING_PATTERN_OPTIONS = [
       `extract-regex-groups :${column} ((?:(?:0|(?:25[0-5])|(?:2[0-4][1-9])|(?:1\\d\\d)|(?:[1-9]\\d?))\\.){3}(?:(?:0|(?:25[0-5])|(?:2[0-4][1-9])|(?:1\\d\\d)|(?:[1-9]\\d?))))`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.isbnCode')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.isbnCode'
+    )}`,
     patternName: `((?:97[89]-?)?(?:\\d-?){9}[\\dxX])`,
     value: 'isbncodes',
     extractDirective: (
@@ -114,7 +122,7 @@ export const USING_PATTERN_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractPatternOptions.macAddress'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.macAddress'
     )}`,
     patternName: `((?:\\p{XDigit}{2}[:-]){5}(?:\\p{XDigit}{2}))`,
     value: 'macaddress',
@@ -128,7 +136,7 @@ export const USING_PATTERN_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractPatternOptions.ndigitnumber'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.ndigitnumber'
     )}`,
     patternName: null,
     value: 'ndigitnumber',
@@ -141,7 +149,9 @@ export const USING_PATTERN_OPTIONS = [
     ) => `extract-regex-groups :${column} (\\d{${nDigit}})`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.usPhone')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.usPhone'
+    )}`,
     patternName: `((?:\\+\\d{1,3}[\\s-]?)?\\(?\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{4})`,
     value: 'phonenumber',
     extractDirective: (
@@ -154,7 +164,9 @@ export const USING_PATTERN_OPTIONS = [
       `extract-regex-groups :${column} ((?:\\+\\d{1,3}[\\s-]?)?\\(?\\d{3}\\)?[\\s-]?\\d{3}[\\s-]?\\d{4})`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.ssn')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.ssn'
+    )}`,
     patternName: `(\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{4})`,
     value: 'ssn',
     extractDirective: (
@@ -167,7 +179,7 @@ export const USING_PATTERN_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractPatternOptions.startEndPattern'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.startEndPattern'
     )}`,
     patternName: null,
     value: 'startend',
@@ -180,7 +192,9 @@ export const USING_PATTERN_OPTIONS = [
     ) => `extract-regex-groups :${column} .*${startValue}(.*)${endValue}.*`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.time')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.time'
+    )}`,
     patternName: `((?:(?:2[0-3])|(?:[01]?\\d))[h:\\s][0-5]\\d(?::(?:(?:[0-5]\\d)|(?:60)))?(?:\\s[aApP][mM])?(?:Z|(?:[+-](?:1[0-2])|(?:0?\\d):[0-5]\\d)|(?:\\s[[a-zA-Z]\\s]+))?)`,
     value: 'time',
     extractDirective: (
@@ -193,7 +207,9 @@ export const USING_PATTERN_OPTIONS = [
       `extract-regex-groups :${column} ((?:(?:2[0-3])|(?:[01]?\\d))[h:\\s][0-5]\\d(?::(?:(?:[0-5]\\d)|(?:60)))?(?:\\s[aApP][mM])?(?:Z|(?:[+-](?:1[0-2])|(?:0?\\d):[0-5]\\d)|(?:\\s[[a-zA-Z]\\s]+))?)`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.upsCode')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.upsCode'
+    )}`,
     patternName: `(1Z\\s?[0-9a-zA-Z]{3}\\s?[0-9a-zA-Z]{3}\\s?[0-9a-zA-Z]{2}\\s?\\d{4}\\s?\\d{4})`,
     value: 'upscodes',
     extractDirective: (
@@ -206,7 +222,9 @@ export const USING_PATTERN_OPTIONS = [
       `extract-regex-groups :${column} (1Z\\s?[0-9a-zA-Z]{3}\\s?[0-9a-zA-Z]{3}\\s?[0-9a-zA-Z]{2}\\s?\\d{4}\\s?\\d{4})`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.url')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.url'
+    )}`,
     patternName: `((?:(?:http[s]?|ftp):\/)?\/?(?:[^\/\\s]+)(?:(?:\/\\w+)*\/)(?:[\\w\-\.]+[^#?\\s]+)(?:.*)?)`,
     value: 'url',
     extractDirective: (
@@ -220,7 +238,7 @@ export const USING_PATTERN_OPTIONS = [
   },
   {
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractPatternOptions.usZipCode'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.usZipCode'
     )}`,
     patternName: `[^\\d]?([0-9]{5}(?:-[0-9]{4})?)[^\\d]?`,
     value: 'zipcode',
@@ -233,7 +251,9 @@ export const USING_PATTERN_OPTIONS = [
     ) => `extract-regex-groups :${column} [^\\d]?([0-9]{5}(?:-[0-9]{4})?)[^\\d]?`,
   },
   {
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractPatternOptions.custom')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractPatternOptions.custom'
+    )}`,
     patternName: null,
     value: 'custom',
     extractDirective: (

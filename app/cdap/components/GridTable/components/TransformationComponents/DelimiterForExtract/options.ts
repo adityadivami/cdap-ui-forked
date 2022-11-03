@@ -18,26 +18,32 @@ import T from 'i18n-react';
 export const DELIMITER_OPTION_EXPLODE_EXTRACT = [
   {
     value: ',',
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractDelimiterOptions.comma')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractDelimiterOptions.comma'
+    )}`,
   },
   {
     value: '\\t',
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractDelimiterOptions.tab')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractDelimiterOptions.tab'
+    )}`,
   },
   {
     value: '\\s+',
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractDelimiterOptions.whitespace'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractDelimiterOptions.whitespace'
     )}`,
   },
   {
     value: '\\|',
-    label: `${T.translate('features.DirectiveUIComponent.extract.extractDelimiterOptions.pipe')}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractDelimiterOptions.pipe'
+    )}`,
   },
   {
     value: 'customDelimiter',
     label: `${T.translate(
-      'features.DirectiveUIComponent.extract.extractDelimiterOptions.customDelimiter'
+      'features.WranglerNewUI.GridPage.transformationUI.extract.extractDelimiterOptions.customDelimiter'
     )}`,
   },
 ];

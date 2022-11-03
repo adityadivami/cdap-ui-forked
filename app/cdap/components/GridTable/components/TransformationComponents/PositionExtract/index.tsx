@@ -16,8 +16,11 @@
 
 import { Typography, Popover, Button, Box } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import NewColumnInput from '../InputComponents/NewColumnInput';
-import { useStyles } from '../styles';
+import NewColumnInput from 'components/GridTable/components/TransformationComponents/InputComponents/NewColumnInput';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
+import T from 'i18n-react';
+
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.extract.extractUsingPosition';
 
 export default function GridTextCell({
   anchorEl,
@@ -70,10 +73,12 @@ export default function GridTextCell({
       >
         <Box className={classes.popoverBox}>
           <Typography className={classes.popoverHead} variant="h5">
-            Extract using postion
+            {T.translate(`${PREFIX}.extractPosition`)}
           </Typography>
           <Typography className={classes.popoverText} variant="body1">
-            {`Extract characters ${textSelectionRange.start}-${textSelectionRange.end} from this column to a new column`}
+            {`${T.translate(`${PREFIX}.extractCharacter`)} ${textSelectionRange.start}-${
+              textSelectionRange.end
+            } ${T.translate(`${PREFIX}.fromThisColumnToNew`)}`}
           </Typography>
           <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
 
@@ -82,10 +87,10 @@ export default function GridTextCell({
             onClick={applyDirective}
             variant="contained"
           >
-            Apply
+            {T.translate(`${PREFIX}.apply`)}
           </Button>
           <Button className={classes.popoverText} onClick={handleClose} variant="text">
-            Exit 'Extract' mode
+            {T.translate(`${PREFIX}.exitMode`)}
           </Button>
         </Box>
       </Popover>

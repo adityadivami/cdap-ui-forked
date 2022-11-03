@@ -13,6 +13,7 @@ import {
   Undo,
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
 import T from 'i18n-react';
+import { FRAGMENT_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/fragmentOptions';
 
 export const nestedMenuOptions = [
   {
@@ -70,7 +71,7 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: [],
+    options: FRAGMENT_OPTIONS,
     icon: FragmentIcon,
     title: T.translate(
       'features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon'
