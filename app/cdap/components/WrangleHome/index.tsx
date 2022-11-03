@@ -36,12 +36,8 @@ export default function() {
 
   const [viewAllLink, toggleViewAllLink] = useState<boolean>(false);
 
-  const d = useCallback(async () => {
-    await getWidgetData();
-  }, []);
-
   useEffect(() => {
-    d();
+    getWidgetData();
   }, []);
 
   return (

@@ -51,11 +51,13 @@ export const getUpdatedConnectorCards = async (storeConnectors) => {
   });
 
   connectorDataWithSvgArray = attachStaticCards(connectorDataWithSvgArray);
-  getConnectorTypesDisplayNames(connectorTypes, connectorDataWithSvgArray).then((response) => {
-    if (response) {
-      connectorDataWithSvgArray = response;
+  await getConnectorTypesDisplayNames(connectorTypes, connectorDataWithSvgArray).then(
+    (response) => {
+      if (response) {
+        connectorDataWithSvgArray = response;
+      }
     }
-  });
+  );
 
   return {
     connectorTypes: connectorDataWithSvgArray,

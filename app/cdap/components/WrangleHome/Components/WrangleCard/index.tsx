@@ -47,17 +47,17 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
     setConnectorsData(updatedState);
   };
 
-  const [storeConnectors, setStoreConnectors] = useState([]);
+  const [fetchedConnectorsData, setFetchedConnectorsData] = useState([]);
 
   useEffect(() => {
-    getUpdatedConnectorCards(storeConnectors).then((res) => {
+    getUpdatedConnectorCards(fetchedConnectorsData).then((res) => {
       updateState(res);
     });
-  }, [storeConnectors]);
+  }, [fetchedConnectorsData]);
 
   DataPrepStore.subscribe(() => {
     const newState = DataPrepStore.getState();
-    setStoreConnectors(newState.dataprep.connectorsWithIcons);
+    setFetchedConnectorsData(newState.dataprep.connectorsWithIcons);
   });
 
   let startIndex = 0;

@@ -16,15 +16,16 @@
 
 import { AddConnectionIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/AddConnectionIcon';
 import { ImportDataIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDataIcon';
+import T from 'i18n-react';
 
 export const attachStaticCards = (connectorsWithoutStaticCards) => [
   {
-    name: 'Add Connection',
+    name: T.translate(`features.WranglerNewUI.HomePage.labels.common.addConnection`),
     SVG: AddConnectionIcon,
     link: 'connections/create',
   },
   {
-    name: 'Import Data',
+    name: T.translate(`features.WranglerNewUI.HomePage.labels.common.importData`),
     SVG: ImportDataIcon,
     link: 'home',
   },

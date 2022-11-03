@@ -21,6 +21,7 @@ import {
 } from 'components/Connections/Create/reducer';
 
 export const getConnectorTypesDisplayNames = async (connectorTypes, connectorDataWithSvgArray) => {
+  const appendDisplayNamesToConnectorTypes = connectorDataWithSvgArray;
   const connectorsPluginProperties = await fetchAllConnectorPluginProperties(connectorTypes);
 
   const mapOfConnectorPluginProperties = getMapOfConnectorToPluginProperties(
@@ -32,15 +33,15 @@ export const getConnectorTypesDisplayNames = async (connectorTypes, connectorDat
       eachConnectorType,
       mapOfConnectorPluginProperties
     );
-    const index = connectorDataWithSvgArray.findIndex(
-      (eachConnectorDataWithSvgArray) =>
-        eachConnectorDataWithSvgArray.name === eachConnectorType.name
+    const index = appendDisplayNamesToConnectorTypes.findIndex(
+      (eachappendDisplayNamesToConnectorTypes) =>
+        eachappendDisplayNamesToConnectorTypes.name === eachConnectorType.name
     );
 
     if (index >= 0) {
-      connectorDataWithSvgArray[index].displayName = displayName;
+      appendDisplayNamesToConnectorTypes[index].displayName = displayName;
     }
   });
 
-  return connectorDataWithSvgArray;
+  return appendDisplayNamesToConnectorTypes;
 };
