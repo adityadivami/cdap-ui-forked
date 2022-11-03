@@ -14,7 +14,12 @@
  * the License.
  */
 
-export interface IFunctionNameToggleProps {
-  setShowName: React.Dispatch<React.SetStateAction<boolean>>;
-  showName: boolean;
+interface IInputProps {
+  [key: string]: string;
+}
+
+export interface ISwitchProps {
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  show: boolean;
+  inputProps?: IInputProps;
 }
