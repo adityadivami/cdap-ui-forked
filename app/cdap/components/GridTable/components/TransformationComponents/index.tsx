@@ -24,7 +24,7 @@ export default function({
   transformationComponentValues,
   setTransformationComponentsValue,
   ...props
-}: IDirectiveContentParams) {
+}: ITransformationContentParams) {
   const Component = transformationComponent.find((item) => item.type === type)?.component;
 
   return (
