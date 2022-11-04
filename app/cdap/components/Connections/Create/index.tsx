@@ -45,6 +45,7 @@ import Alert from 'components/shared/Alert';
 import { ConnectionsContext, IConnectionMode } from 'components/Connections/ConnectionsContext';
 import { constructErrors } from 'components/shared/ConfigurationGroup/utilities';
 import { ConnectionConfigurationMode } from 'components/Connections/types';
+import { useLocation } from 'react-router';
 
 const PREFIX = 'features.DataPrepConnections.ConnectionManagement';
 
@@ -60,6 +61,7 @@ const useStyle = makeStyle(() => {
     },
   };
 });
+
 export function CreateConnection({
   onToggle = null,
   initialConfig = {},
@@ -85,6 +87,11 @@ export function CreateConnection({
   const [testInProgress, setTestInProgress] = useState(false);
   const [testResponseMessages, setTestResponseMessages] = useState(undefined);
   const [redirectUrl, setRedirectUrl] = useState(null);
+  const location: any = useLocation();
+
+  const featRequestingFrom = location?.state?.from?.addConnectionRequestFromNewUI;
+
+  console.log(featRequestingFrom, 'featRequestingFrom');
 
   const init = async () => {
     try {
@@ -185,9 +192,9 @@ export function CreateConnection({
          * If the request is from New UI, the redirection is set to New UI URL
          * Otherwise, the redirection is set to Old UI URL as existed
          */
-        const value: string = localStorage.getItem('addConnectionRequestFromNewUI');
+        const value: string | boolean = featRequestingFrom ? featRequestingFrom : false;
+        console.log(value, '---values');
         if (value) {
-          localStorage.removeItem('addConnectionRequestFromNewUI');
           value === 'home'
             ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
             : setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${value}`);
@@ -253,7 +260,9 @@ export function CreateConnection({
        * If the request is from New UI, the redirection is set to New UI URL
        * Otherwise, the redirection is set to Old UI URL as existed
        */
-      const value: string = localStorage.getItem('addConnectionRequestFromNewUI');
+
+      const value: string | boolean = featRequestingFrom ? featRequestingFrom : false;
+      console.log('close', value);
       return value === 'home'
         ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
         : setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${value}`);

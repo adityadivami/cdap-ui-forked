@@ -49,16 +49,16 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
 
   const [fetchedConnectorsData, setFetchedConnectorsData] = useState([]);
 
+  DataPrepStore.subscribe(() => {
+    const newState = DataPrepStore.getState();
+    setFetchedConnectorsData(newState.dataprep.connectorsWithIcons);
+  });
+
   useEffect(() => {
     getUpdatedConnectorCards(fetchedConnectorsData).then((res) => {
       updateState(res);
     });
   }, [fetchedConnectorsData]);
-
-  DataPrepStore.subscribe(() => {
-    const newState = DataPrepStore.getState();
-    setFetchedConnectorsData(newState.dataprep.connectorsWithIcons);
-  });
 
   let startIndex = 0;
   let endIndex = 2;
@@ -74,13 +74,17 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
       {connectorTypes.slice(startIndex, endIndex).map((item, index) => {
         return (
           <Link
-            to={
-              startIndex === 0
-                ? `/ns/${getCurrentNamespace()}/${item.link}`
-                : index === 0
-                ? `/ns/${getCurrentNamespace()}/${item.link}`
-                : `/ns/${getCurrentNamespace()}/datasources/${item.name}`
-            }
+            to={{
+              pathname:
+                startIndex === 0
+                  ? `/ns/${getCurrentNamespace()}/${item.link}`
+                  : index === 0
+                  ? `/ns/${getCurrentNamespace()}/${item.link}`
+                  : `/ns/${getCurrentNamespace()}/datasources/${item.name}`,
+              state: {
+                from: { addConnectionRequestFromNewUI: 'home' },
+              },
+            }}
             style={{ textDecoration: 'none' }}
             data-testid={`wrangle-card-${item.name
               .toLowerCase()

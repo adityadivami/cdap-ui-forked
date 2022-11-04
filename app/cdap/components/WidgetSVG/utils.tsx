@@ -30,7 +30,15 @@ import {
 import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
 import React from 'react';
 
+/**
+ * This will be triggered when a user visits home page
+ * Fetch all the connectors & it's corresponding icons from widget API
+ *
+ *  Will dispatch the connector with icons data to store at the end
+ */
+
 export const getWidgetData = async () => {
+  // fetching all the available connector types
   const connectorTypes: IConnectorTypesWithSVG[] = await fetchConnectors();
   const connectorsTypesData: IConnectorTypes[] = [];
   const connectionWithConnectorType: IConnectorTypesWithSVG[] = [];
@@ -100,6 +108,7 @@ export const getWidgetData = async () => {
     }
   });
 
+  // appennd this as connector type for uploaded datasets won't be available from API.
   connectionWithConnectorType.push({
     name: 'Imported Dataset',
     SVG: importDatasetIcon,

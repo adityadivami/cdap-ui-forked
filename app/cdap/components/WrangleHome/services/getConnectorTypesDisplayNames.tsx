@@ -20,8 +20,8 @@ import {
   getSelectedConnectorDisplayName,
 } from 'components/Connections/Create/reducer';
 
-export const getConnectorTypesDisplayNames = async (connectorTypes, connectorDataWithSvgArray) => {
-  const appendDisplayNamesToConnectorTypes = connectorDataWithSvgArray;
+export const getConnectorTypesDisplayNames = async (connectorTypes, connectorTypesCardsData) => {
+  const connectorTypesCardsDataWithDisplayName = connectorTypesCardsData;
   const connectorsPluginProperties = await fetchAllConnectorPluginProperties(connectorTypes);
 
   const mapOfConnectorPluginProperties = getMapOfConnectorToPluginProperties(
@@ -33,15 +33,15 @@ export const getConnectorTypesDisplayNames = async (connectorTypes, connectorDat
       eachConnectorType,
       mapOfConnectorPluginProperties
     );
-    const index = appendDisplayNamesToConnectorTypes.findIndex(
-      (eachappendDisplayNamesToConnectorTypes) =>
-        eachappendDisplayNamesToConnectorTypes.name === eachConnectorType.name
+    const index = connectorTypesCardsDataWithDisplayName.findIndex(
+      (eachconnectorTypesCardsDataWithDisplayName) =>
+        eachconnectorTypesCardsDataWithDisplayName.name === eachConnectorType.name
     );
 
     if (index >= 0) {
-      appendDisplayNamesToConnectorTypes[index].displayName = displayName;
+      connectorTypesCardsDataWithDisplayName[index].displayName = displayName;
     }
   });
 
-  return appendDisplayNamesToConnectorTypes;
+  return connectorTypesCardsDataWithDisplayName;
 };

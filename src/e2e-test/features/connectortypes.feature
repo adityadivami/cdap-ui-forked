@@ -28,3 +28,4 @@ Feature: Navigating through the connector types
     | PostgreSQL | postgresql |
     | File | file |
     | Import Data | import-data |
+    

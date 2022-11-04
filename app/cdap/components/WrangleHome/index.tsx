@@ -32,7 +32,6 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 export default function() {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
-  localStorage.setItem('addConnectionRequestFromNewUI', 'home');
 
   const [viewAllLink, toggleViewAllLink] = useState<boolean>(false);
 
