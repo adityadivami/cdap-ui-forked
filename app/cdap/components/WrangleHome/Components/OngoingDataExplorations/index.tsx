@@ -161,7 +161,6 @@ export default function() {
       {filteredData &&
         Array.isArray(filteredData) &&
         filteredData?.map((item, index) => {
-          console.log(item, 'item');
           return (
             <Link
               to={{

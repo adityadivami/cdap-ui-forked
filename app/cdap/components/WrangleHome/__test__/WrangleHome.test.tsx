@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import WranglerHomeNew from '../index';
+import WranglerHomeNew from 'components/WrangleHome/index';
 
 test('renders Wrangler-Home-New component', () => {
   render(<WranglerHomeNew />);

@@ -38,11 +38,11 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
     <Grid
       container
       className={classes.gridContainer}
+      data-testid="ongoing-0explorations-card-parent"
     >
       {explorationCardDetails &&
         Array.isArray(explorationCardDetails) &&
         explorationCardDetails?.map((eachExplorationCard, explorationCardIndex) => {
-          console.log(eachExplorationCard, 'eachExplorationCard');
           switch (eachExplorationCard.type) {
             case 'icon':
               return (

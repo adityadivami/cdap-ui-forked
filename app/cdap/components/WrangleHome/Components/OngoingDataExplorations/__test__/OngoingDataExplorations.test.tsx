@@ -20,7 +20,10 @@ import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDat
 import MyDataPrepApi from 'api/dataprep';
 import operators from 'rxjs/operators';
 import { Route, Router, Switch } from 'react-router';
-import { switchMapCallbackMock, getWorkspaceListSubscribeMock } from '../mock/mockoldData';
+import {
+  switchMapCallbackMock,
+  getWorkspaceListSubscribeMock,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mockoldData';
 import history from 'services/history';
 import {
   connectionListDummyResPostGresSql,
