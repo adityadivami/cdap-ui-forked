@@ -3451,7 +3451,7 @@ features:
        workspaceName: workspaceName
        iconWithText: iconWithText
        text: text
-       recipeSteps: recipeSteps
+       recipeStepsKey: recipeSteps
        dataQuality: dataQuality
        percentageWithText: percentageWithText
        workspaceId: workspaceId

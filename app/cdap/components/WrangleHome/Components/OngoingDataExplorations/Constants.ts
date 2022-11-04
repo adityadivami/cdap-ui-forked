@@ -34,8 +34,8 @@ export const ICON_WITH_TEXT = T.translate(
 export const TEXT = T.translate(
   'features.WranglerNewUI.OnGoingDataExplorations.labels.text'
 ).toString();
-export const RECIPE_STEPS = T.translate(
-  'features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps'
+export const RECIPE_STEPS_KEY = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.recipeStepsKey'
 ).toString();
 export const DATA_QUALITY = T.translate(
   'features.WranglerNewUI.OnGoingDataExplorations.labels.dataQuality'

@@ -27,7 +27,7 @@ import {
   ICON,
   ICON_WITH_TEXT,
   PERCENTAGE_WITH_TEXT,
-  RECIPE_STEPS,
+  RECIPE_STEPS_KEY,
   TEXT,
   WORKPSACE_NAME,
   WORKSPACE_ID,
@@ -76,7 +76,7 @@ export const getUpdatedExplorationCards = (
             onGoingDatExplorationData.label = eachExplorationCard[keys];
             onGoingDatExplorationData.type = TEXT;
             break;
-          case RECIPE_STEPS:
+          case RECIPE_STEPS_KEY:
             onGoingDatExplorationData.label = [
               eachExplorationCard[keys],
               T.translate(`${PREFIX}.recipeSteps`),
