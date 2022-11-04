@@ -39,14 +39,9 @@ public class OngoingDataExplorations {
             WebElement ele = Helper.locateElementByTestId("home-ongoing-explorations-text-0");
             String homeText = ele.getText();
             System.out.println(homeText);
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-            WebElement test = Helper.locateElementByTestId("breadcrumb-workspace-name");
-            String ActualText = test.getText();
-            System.out.println(ActualText);
-            Assert.assertEquals(ActualText, homeText);
-            System.out.println("The file name is displayed correctly on grid page");
         }
         catch(Exception e)
         {

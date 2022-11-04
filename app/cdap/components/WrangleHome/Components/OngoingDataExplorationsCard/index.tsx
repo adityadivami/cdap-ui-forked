@@ -38,7 +38,6 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
     <Grid
       container
       className={classes.gridContainer}
-      data-testid="wrangler-home-ongoing-data-exploration-card"
     >
       {explorationCardDetails &&
         Array.isArray(explorationCardDetails) &&

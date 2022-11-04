@@ -172,6 +172,7 @@ export default function() {
                 },
               }}
               style={{ textDecoration: 'none' }}
+              data-testid={`wrangler-home-ongoing-data-exploration-card-${index}`}
             >
               {index <= 1 && (
                 <OngoingDataExplorationsCard
