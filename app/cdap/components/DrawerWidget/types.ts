@@ -15,10 +15,8 @@
  */
 
 import { IRecords } from 'components/GridTable/types';
-import { ReactNode } from 'react';
-
 export interface IDrawerWidgetProps {
-  headingText: string | ReactNode;
+  headingText: string;
   openDrawer: boolean;
   showDivider: boolean;
   headerActionTemplate: JSX.Element;

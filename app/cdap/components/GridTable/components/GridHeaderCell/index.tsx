@@ -14,16 +14,19 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Box, Card, styled, TableCell, Typography } from '@material-ui/core';
-import TypographyComponent from 'components/GridTable/components/Typography/index';
+import TypographyComponent from 'components/GridTable/components/Typography';
 import { useGridHeaderCellStyles } from './styles';
 import { IGridHeaderCellProps } from './types';
 import { headerSelectedIcon } from './icons';
+import T from 'i18n-react';
 
 const StringIndicatorBox = styled(Box)({
   display: 'flex',
 });
+
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 
 export default function GridHeaderCell({
   label,
@@ -35,14 +38,14 @@ export default function GridHeaderCell({
   const classes = useGridHeaderCellStyles();
   const isColumnHighlited = label === columnSelected;
 
-  const [data, setData] = useState<Record<string, string>>({
-    datatype1: type?.length > 0 ? type[0] : 'unknown',
+  const [data, setData] = useState<Record<string, string | ReactNode>>({
+    datatype1: type?.length > 0 ? type[0] : T.translate(`${PREFIX}.unknown`),
     datatype2: type?.length > 1 ? type[1] : null,
   });
 
   useEffect(() => {
     setData({
-      datatype1: type?.length > 0 ? type[0] : 'unknown',
+      datatype1: type?.length > 0 ? type[0] : T.translate(`${PREFIX}.unknown`),
       datatype2: type?.length > 1 ? type[1] : null,
     });
   }, [label, type]);
@@ -56,30 +59,33 @@ export default function GridHeaderCell({
       }}
     >
       <div
-        className={classes.headerHighlitedIcon}
-        style={isColumnHighlited ? { display: 'inline' } : { display: 'none' }}
+        className={isColumnHighlited ? classes.headerHighlitedIcon : classes.notHeaderHighlitedIcon}
       >
         {headerSelectedIcon}
       </div>
       <Card
-        className={classes.root}
-        style={isColumnHighlited ? { background: '#FFFFFF' } : { background: '#F1F8FF' }}
+        className={isColumnHighlited ? classes.cardHighlighted : classes.cardNotHighlighted}
         variant="outlined"
       >
-        <Typography className={classes.columnHeader} data-testid={`grid-header-cell-${label}`}>
+        <Typography
+          className={classes.columnHeader}
+          component="span"
+          data-testid={`grid-header-cell-${label}`}
+          variant="body1"
+        >
           {label}
         </Typography>
         <StringIndicatorBox>
           <TypographyComponent
             className={classes.dataTypeIndicator}
-            label={data?.datatype1 || 'unknown'}
+            label={(data?.datatype1 as string) || 'unknown'}
           />
           {data?.datatype2 && (
             <StringIndicatorBox>
               <TypographyComponent className={classes.subDataTypeIndicator} label={'|'} />
               <TypographyComponent
                 className={classes.subDataTypeIndicator}
-                label={data?.datatype2}
+                label={data?.datatype2 as string}
               />
             </StringIndicatorBox>
           )}

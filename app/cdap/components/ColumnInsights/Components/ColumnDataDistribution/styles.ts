@@ -46,6 +46,9 @@ export const useStyles = makeStyles(() => {
       color: blue[500],
       margin: 'auto 0px',
     },
+    barChart: {
+      background: 'blue',
+    },
     columnDataQualityValuesButtons: {},
     columnDataQualityGraph: {
       '& .axis': {

@@ -22,7 +22,9 @@ import ColumnDetails from './Components/ColumnDetails';
 import { IColumnData, IColumnInsightsProps } from 'components/ColumnInsights/types';
 import T from 'i18n-react';
 
-export default function ColumnInsights({
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+
+export default function({
   columnData,
   renameColumnNameHandler,
   dataTypeHandler,
@@ -42,7 +44,7 @@ export default function ColumnInsights({
   };
   return (
     <DrawerWidget
-      headingText={T.translate('features.NewWranglerUI.ColumnInsights.columnInsightsHeadingText')}
+      headingText={T.translate(`${PREFIX}.columnInsightsHeadingText`).toString()}
       openDrawer={drawerStatus}
       anchor="left"
       headerActionTemplate={<></>}
@@ -57,10 +59,7 @@ export default function ColumnInsights({
         renameColumnNameHandler={renameColumnNameHandler}
         distinctValues={columnDetail?.distinctValues}
         characterCount={`${columnDetail?.characterCount?.min}-${columnDetail?.characterCount?.max}`}
-        dataTypeString={
-          columnDetail?.dataTypeString ||
-          T.translate('features.NewWranglerUI.ColumnInsights.containsLetter')
-        }
+        dataTypeString={columnDetail?.dataTypeString || T.translate(`${PREFIX}.containsLetter`)}
       />
       <ColumnDataQuality
         dataQuality={columnDetail?.dataQuality}

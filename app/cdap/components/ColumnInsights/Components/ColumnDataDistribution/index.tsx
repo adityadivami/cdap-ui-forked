@@ -23,7 +23,9 @@ import { NavLink } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { IRecords } from 'components/GridTable/types';
 
-export default function ColumnDataDistribution({ graphData }: IColumnDataDistributionProps) {
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+
+export default function({ graphData }: IColumnDataDistributionProps) {
   const classes = useStyles();
   const margin = { top: 20, right: 20, bottom: 70, left: 40 };
   const handleBarClick = () => {
@@ -38,21 +40,19 @@ export default function ColumnDataDistribution({ graphData }: IColumnDataDistrib
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
       <div className={classes.columnInsightsColumnName}>
-        <Typography variant="body2" className={classes.distribution}>
-          {T.translate('features.NewWranglerUI.ColumnInsights.distribution')}
+        <Typography variant="body2" component="span" className={classes.distribution}>
+          {T.translate(`${PREFIX}.distribution`).toString()}
         </Typography>
 
-        <Typography variant="body2" className={classes.viewFullChart}>
-          <NavLink to="#">
-            {T.translate('features.NewWranglerUI.ColumnInsights.viewFullChart')}
-          </NavLink>
+        <Typography variant="body2" component="span" className={classes.viewFullChart}>
+          <NavLink to="#">{T.translate(`${PREFIX}.viewFullChart`).toString()}</NavLink>
         </Typography>
       </div>
 
       <div className={classes.columnDataQualityGraph}>
         <BarChart
-          style={{ background: 'blue' }}
-          ylabel="Quantity"
+          className={classes.barChart}
+          ylabel={`${PREFIX}.barChartYLabel`}
           width={410}
           height={200}
           margin={margin}

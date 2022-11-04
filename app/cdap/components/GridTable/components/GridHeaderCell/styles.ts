@@ -17,18 +17,28 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useGridHeaderCellStyles = makeStyles({
-  root: {
-    minWidth: '216px',
+  cardHighlighted: {
+    minWidth: 216,
+    background: '#FFFFFF',
     padding: '10px 0px 10px 30px',
     borderRadius: '0px',
     border: '0px',
     backgroundImage:
       'linear-gradient(0deg, rgba(70, 129, 244, 0) -49.23%, rgba(70, 129, 244, 0.1) 100%)',
   },
+  cardNotHighlighted: {
+    minWidth: 216,
+    padding: '10px 0px 10px 30px',
+    borderRadius: '0px',
+    border: '0px',
+    background: '#F1F8FF',
+    backgroundImage:
+      'linear-gradient(0deg, rgba(70, 129, 244, 0) -49.23%, rgba(70, 129, 244, 0.1) 100%)',
+  },
   tableHeaderCell: {
     padding: '0px',
     width: 'auto',
-    fontSize: '14px',
+    fontSize: 14,
     border: '1px solid #E0E0E0',
     cursor: 'pointer',
     position: 'relative',
@@ -37,7 +47,15 @@ export const useGridHeaderCellStyles = makeStyles({
     position: 'absolute',
     top: '10px',
     left: '11px',
+    display: 'inline',
   },
+  notHeaderHighlitedIcon: {
+    position: 'absolute',
+    top: '10px',
+    left: '11px',
+    display: 'none',
+  },
+
   subDataTypeIndicator: {
     marginLeft: '2px',
     fontSize: '14px',

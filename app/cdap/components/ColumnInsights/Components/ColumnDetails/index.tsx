@@ -19,11 +19,13 @@ import React, { useState } from 'react';
 import { useStyles } from './styles';
 import EditIcon from '@material-ui/icons/Edit';
 import { Box, Typography } from '@material-ui/core';
-import InputSelect from 'components/ColumnInsights/Components/InputSelect/index';
+import InputSelect from 'components/ColumnInsights/Components/InputSelect';
 import { IColumnDetailsProps } from 'components/ColumnInsights/Components/ColumnDetails/types';
 import T from 'i18n-react';
 
-export default function ColumnDetails({
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+
+export default function({
   columnName,
   characterCount,
   distinctValues,
@@ -93,15 +95,27 @@ export default function ColumnDetails({
       />
       <section className={classes.columnInsightsDetailsWrapper}>
         <div className={classes.columnInsightsDetailsCountSection}>
-          <Typography variant="body2" className={classes.columnInsightsDetailsCount}>
-            {T.translate('features.NewWranglerUI.ColumnInsights.characterCount')} {characterCount}
+          <Typography
+            variant="body2"
+            component="span"
+            className={classes.columnInsightsDetailsCount}
+          >
+            {T.translate(`${PREFIX}.characterCount`).toString()} {characterCount}
           </Typography>
           <div className={classes.dividerLineStyles} />
-          <Typography variant="body2" className={classes.columnInsightsDetailsCount}>
-            {T.translate('features.NewWranglerUI.ColumnInsights.distinct')} {distinctValues}
+          <Typography
+            variant="body2"
+            component="span"
+            className={classes.columnInsightsDetailsCount}
+          >
+            {T.translate(`${PREFIX}.distinct`).toString()} {distinctValues}
           </Typography>
         </div>
-        <Typography variant="body2" className={classes.columnInsightsDetailsCountDescription}>
+        <Typography
+          variant="body2"
+          component="span"
+          className={classes.columnInsightsDetailsCountDescription}
+        >
           {T.translate(`${dataTypeString}`)}
         </Typography>
       </section>

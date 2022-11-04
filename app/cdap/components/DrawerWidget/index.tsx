@@ -18,10 +18,11 @@ import { Box, Container, Drawer } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useStyles } from './styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import DrawerWidgetHeading from './DrawerWidgetHeading';
-import { IDrawerWidgetProps } from './types';
+import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
+import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
+import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 
-export default function DrawerWidget({
+export default function({
   headingText,
   openDrawer,
   showDivider,
@@ -39,11 +40,9 @@ export default function DrawerWidget({
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && (
-              <img
+              <ChevronLeftRoundedIcon
                 onClick={closeClickHandler}
                 className={classes.headerBackIconStyles}
-                src="/cdap_assets/img/back-icon.svg"
-                alt="Back icon"
               />
             )}
             <DrawerWidgetHeading headingText={headingText} />

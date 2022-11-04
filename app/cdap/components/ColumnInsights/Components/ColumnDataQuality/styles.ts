@@ -44,7 +44,6 @@ export const useStyles = makeStyles(() => {
       border: '1px solid #4BAF4F',
       borderRadius: 10,
     },
-
     empty: {
       backgroundColor: red[600],
       display: 'inline-block',

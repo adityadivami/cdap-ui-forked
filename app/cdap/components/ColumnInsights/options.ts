@@ -14,41 +14,44 @@
  * the License.
  */
 
+import T from 'i18n-react';
+const PREFIX = 'features.NewWranglerUI.ColumnInsights.options';
+
 export const DATATYPE_OPTIONS = [
   {
     value: 'string',
-    label: 'String',
+    label: T.translate(`${PREFIX}.labelString`).toString(),
   },
   {
     value: 'boolean',
-    label: 'Boolean',
+    label: T.translate(`${PREFIX}.labelBoolean`).toString(),
   },
   {
     value: 'integer',
-    label: 'Integer',
+    label: T.translate(`${PREFIX}.labelInteger`).toString(),
   },
   {
     value: 'long',
-    label: 'Long',
+    label: T.translate(`${PREFIX}.labelLong`).toString(),
   },
   {
     value: 'short',
-    label: 'Short',
+    label: T.translate(`${PREFIX}.labelShort`).toString(),
   },
   {
     value: 'float',
-    label: 'Float',
+    label: T.translate(`${PREFIX}.labelFloat`).toString(),
   },
   {
     value: 'double',
-    label: 'Double',
+    label: T.translate(`${PREFIX}.labelDouble`).toString(),
   },
   {
     value: 'decimal',
-    label: 'Decimal',
+    label: T.translate(`${PREFIX}.labelDecimal`).toString(),
   },
   {
     value: 'bytes',
-    label: 'Bytes',
+    label: T.translate(`${PREFIX}.labelBytes`).toString(),
   },
 ];

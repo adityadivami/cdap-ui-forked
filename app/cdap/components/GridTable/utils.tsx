@@ -22,8 +22,8 @@ import {
   CONTAIN_LETTER_NUMBER,
   CONTAIN_LETTER_ONLY,
   CONTAIN_NUMBER_ONLY,
-} from './constants';
-import { IExecuteAPIResponse, IRecords } from './types';
+} from 'components/GridTable/constants';
+import { IExecuteAPIResponse, IRecords } from 'components/GridTable/types';
 
 /**
  *
@@ -39,7 +39,7 @@ export const convertNonNullPercent = (
   key,
   nonNullValue
 ) => {
-  const lengthOfData: number = gridData?.values.length || 0;
+  const lengthOfData: number = gridData?.values?.length || 0;
   let nullValueCount: number = 0;
   if (lengthOfData) {
     nullValueCount =
@@ -61,7 +61,7 @@ export const checkFrequentlyOccuredValues = (
   gridData: IExecuteAPIResponse | undefined,
   key: string
 ) => {
-  if (gridData?.values && Array.isArray(gridData?.values)) {
+  if (gridData?.values && gridData && Array.isArray(gridData?.values)) {
     const valueOfKey = gridData?.values?.map((el) => el[key]);
     let mostFrequentItem: number = 1;
     let mostFrequentItemCount: number = 0;

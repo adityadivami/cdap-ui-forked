@@ -16,22 +16,24 @@
 
 import React from 'react';
 import { useStyles } from './styles';
-import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton/index';
+import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton';
 import { Box, Typography } from '@material-ui/core';
 import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/ColumnDataQuality/types';
 import red from '@material-ui/core/colors/red';
 import T from 'i18n-react';
 
-export default function ColumnDataQuality({ dataQuality, columnInfo }: IColumnDataQualityProps) {
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+
+export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const classes = useStyles();
   const nonNull = columnInfo?.general['non-null'] || 0,
     empty = columnInfo?.general?.empty || 0;
-
   const filled = nonNull - empty;
+
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
-      <Typography className={classes.columnInsightsColumnName}>
-        {T.translate('features.NewWranglerUI.ColumnInsights.quality')}
+      <Typography component="span" className={classes.columnInsightsColumnName}>
+        {T.translate(`${PREFIX}.quality`).toString}
       </Typography>
       <Box className={classes.qualityBar}>
         <Typography component="span" className={classes.filled} style={{ width: `${filled}%` }} />

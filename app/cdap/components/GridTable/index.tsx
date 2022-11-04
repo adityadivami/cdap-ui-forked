@@ -17,7 +17,7 @@
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
-import ColumnInsightDrawer from 'components/ColumnInsights';
+import ColumnInsights from 'components/ColumnInsights';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
@@ -47,14 +47,13 @@ import {
   characterCount,
   checkAlphaNumericAndSpaces,
   convertNonNullPercent,
-} from './utils';
+} from 'components/GridTable/utils';
 
-export default function GridTable() {
+export default function() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
   const location = useLocation();
-
   const [loading, setLoading] = useState(false);
   const { dataprep } = DataPrepStore.getState();
   const [workspaceName, setWorkspaceName] = useState('');
@@ -298,7 +297,7 @@ export default function GridTable() {
       convertNonNullPercent(
         gridData,
         columnName,
-        gridData?.summary?.statistics[columnName].general
+        gridData?.summary?.statistics[columnName]?.general
       ) || 0;
     const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
     setInsightDrawer({
@@ -335,7 +334,7 @@ export default function GridTable() {
     <Box>
       <BreadCrumb datasetName={workspaceName} location={location} />
       {insightDrawer.open && (
-        <ColumnInsightDrawer
+        <ColumnInsights
           columnType={columnType}
           columnData={insightDrawer}
           renameColumnNameHandler={renameColumnNameHandler}
