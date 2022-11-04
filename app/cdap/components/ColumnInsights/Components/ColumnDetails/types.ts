@@ -20,7 +20,7 @@ export interface IColumnDetailsProps {
   columnName: string;
   characterCount: string;
   distinctValues: number;
-  dataTypeString: string | ReactNode;
+  dataTypeString: string;
   renameColumnNameHandler: (oldColumnName: string, newColumnName: string) => void;
   dataTypeHandler: (dataType: string) => void;
   columnType: string;

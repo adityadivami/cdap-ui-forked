@@ -59,7 +59,9 @@ export default function({
         renameColumnNameHandler={renameColumnNameHandler}
         distinctValues={columnDetail?.distinctValues}
         characterCount={`${columnDetail?.characterCount?.min}-${columnDetail?.characterCount?.max}`}
-        dataTypeString={columnDetail?.dataTypeString || T.translate(`${PREFIX}.containsLetter`)}
+        dataTypeString={
+          columnDetail?.dataTypeString || T.translate(`${PREFIX}.containsLetter`).toString()
+        }
       />
       <ColumnDataQuality
         dataQuality={columnDetail?.dataQuality}

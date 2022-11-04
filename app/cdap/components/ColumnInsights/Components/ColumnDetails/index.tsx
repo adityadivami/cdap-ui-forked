@@ -34,16 +34,17 @@ export default function({
   dataTypeHandler,
   columnType,
 }: IColumnDetailsProps) {
-  const defaultValueProvided = DATATYPE_OPTIONS.filter(
-    (each) => each.value === columnType?.toLowerCase()
-  );
-  const [dataTypeValue, setDataTypeValue] = useState();
+  const defaultValueProvided =
+    Array.isArray(DATATYPE_OPTIONS) &&
+    DATATYPE_OPTIONS?.length &&
+    DATATYPE_OPTIONS.filter((each) => each.value === columnType?.toLowerCase());
+  const [dataTypeValue, setDataTypeValue] = useState<string>();
   const classes = useStyles();
   const [canEdit, setCanEdit] = useState<Boolean>(false);
   const [inputValue, setInputValue] = useState<string>(columnName);
 
-  const handleDataTypeChange = (e) => {
-    setDataTypeValue(e.target);
+  const handleDataTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDataTypeValue(e.target.value);
     dataTypeHandler(e.target.value);
   };
 
@@ -116,7 +117,7 @@ export default function({
           component="span"
           className={classes.columnInsightsDetailsCountDescription}
         >
-          {T.translate(`${dataTypeString}`)}
+          {T.translate(`${dataTypeString}`).toString()}
         </Typography>
       </section>
     </section>

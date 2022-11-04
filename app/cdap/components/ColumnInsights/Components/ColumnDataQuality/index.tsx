@@ -33,7 +33,7 @@ export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
       <Typography component="span" className={classes.columnInsightsColumnName}>
-        {T.translate(`${PREFIX}.quality`).toString}
+        {T.translate(`${PREFIX}.quality`).toString()}
       </Typography>
       <Box className={classes.qualityBar}>
         <Typography component="span" className={classes.filled} style={{ width: `${filled}%` }} />

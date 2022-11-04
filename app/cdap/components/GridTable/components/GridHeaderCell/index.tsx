@@ -18,8 +18,8 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { Box, Card, styled, TableCell, Typography } from '@material-ui/core';
 import TypographyComponent from 'components/GridTable/components/Typography';
 import { useGridHeaderCellStyles } from './styles';
-import { IGridHeaderCellProps } from './types';
-import { headerSelectedIcon } from './icons';
+import { IGridHeaderCellProps } from 'components/GridTable/components/GridHeaderCell/types';
+import { headerSelectedIcon } from 'components/GridTable/components/GridHeaderCell/iconStore';
 import T from 'i18n-react';
 
 const StringIndicatorBox = styled(Box)({
@@ -38,14 +38,14 @@ export default function GridHeaderCell({
   const classes = useGridHeaderCellStyles();
   const isColumnHighlited = label === columnSelected;
 
-  const [data, setData] = useState<Record<string, string | ReactNode>>({
-    datatype1: type?.length > 0 ? type[0] : T.translate(`${PREFIX}.unknown`),
+  const [data, setData] = useState<Record<string, string>>({
+    datatype1: type?.length > 0 ? type[0] : T.translate(`${PREFIX}.unknown`).toString(),
     datatype2: type?.length > 1 ? type[1] : null,
   });
 
   useEffect(() => {
     setData({
-      datatype1: type?.length > 0 ? type[0] : T.translate(`${PREFIX}.unknown`),
+      datatype1: type?.length > 0 ? type[0] : T.translate(`${PREFIX}.unknown`).toString(),
       datatype2: type?.length > 1 ? type[1] : null,
     });
   }, [label, type]);
@@ -78,14 +78,14 @@ export default function GridHeaderCell({
         <StringIndicatorBox>
           <TypographyComponent
             className={classes.dataTypeIndicator}
-            label={(data?.datatype1 as string) || 'unknown'}
+            label={data?.datatype1 || T.translate(`${PREFIX}.unknown`).toString()}
           />
           {data?.datatype2 && (
             <StringIndicatorBox>
               <TypographyComponent className={classes.subDataTypeIndicator} label={'|'} />
               <TypographyComponent
                 className={classes.subDataTypeIndicator}
-                label={data?.datatype2 as string}
+                label={data?.datatype2}
               />
             </StringIndicatorBox>
           )}

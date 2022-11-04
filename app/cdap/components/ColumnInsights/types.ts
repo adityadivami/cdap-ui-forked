@@ -1,5 +1,3 @@
-import { IRecords } from 'components/GridTable/types';
-
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -15,6 +13,8 @@ import { IRecords } from 'components/GridTable/types';
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
+import { IRecords } from 'components/GridTable/types';
 export interface IColumnInsightsProps {
   columnData: IColumnData;
   renameColumnNameHandler: (oldColumnName: string, newColumnName: string) => void;
@@ -31,7 +31,7 @@ export interface IColumnData {
   dataQuality: IDataQuality;
   dataQualityBar: {};
   dataTypeString: string;
-  dataDistributionGraphData: IRecords[]; // Not able to figure out
+  dataDistributionGraphData: IRecords[];
 }
 
 interface ICharacterCount {

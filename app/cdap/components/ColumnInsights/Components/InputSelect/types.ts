@@ -18,11 +18,8 @@ import { IRecords } from 'components/GridTable/types';
 
 export interface IInputSelect {
   options: IRecords[];
-  value: {
-    value: string;
-    name: string;
-  };
-  onChange: (e: any) => void;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   classes: { icon: string; select: string };
   className: string;
   fullWidth: boolean;

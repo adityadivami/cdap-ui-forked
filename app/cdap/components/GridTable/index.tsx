@@ -54,14 +54,14 @@ export default function() {
   const params = useParams() as IRecords;
   const classes = useStyles();
   const location = useLocation();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const { dataprep } = DataPrepStore.getState();
-  const [workspaceName, setWorkspaceName] = useState('');
+  const [workspaceName, setWorkspaceName] = useState<string>('');
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
-  const [columnType, setColumnType] = useState('');
+  const [columnType, setColumnType] = useState<string>('');
   const [toaster, setToaster] = useState({
     open: false,
     message: '',

@@ -73,7 +73,7 @@ export const useStyles = makeStyles(() => {
       width: 10,
       height: 20,
       cursor: 'pointer',
-      fontSize: '24px',
+      fontSize: 24,
     },
   };
 });
