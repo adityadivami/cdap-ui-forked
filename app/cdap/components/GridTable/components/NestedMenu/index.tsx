@@ -22,7 +22,7 @@ import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/typ
 import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
 import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
 
-export default function({
+const NestedMenu = ({
   menuOptions,
   submitMenuOption,
   columnType,
@@ -31,33 +31,35 @@ export default function({
   setAnchorEl,
   open,
   handleMenuOpenClose,
-}: INestedMenuProps) {
-  const [anchorEl2, setAnchorEl2] = useState<EventTarget | null>(null);
-  const [nestedOptions, setNestedOptions] = useState<IMenuItem[]>([]);
+  newIndex,
+}: INestedMenuProps) => {
+  const [menuComponentOptions, setMenuComponentOptions] = useState([]);
   const classes = useNestedMenuStyles();
 
   const handleMenuClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     menuItem: IMenuItem
   ) => {
-    setNestedOptions([]);
     event.preventDefault();
     event.stopPropagation();
-    if (menuItem?.options) {
-      setNestedOptions(menuItem.options);
-      setAnchorEl2(event.currentTarget);
+    if (menuItem?.options?.length > 0) {
+      setAnchorEl((prev) => [...prev, event.currentTarget]);
+      setMenuComponentOptions((prev) =>
+        prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
+      );
     } else {
       submitMenuOption(menuItem.value, menuItem.supported_dataType);
       setAnchorEl(null);
       handleMenuOpenClose(title);
     }
   };
+
   return (
     <>
       <Menu
         id="parent-menu"
         keepMounted
-        anchorEl={anchorEl}
+        anchorEl={anchorEl?.length ? anchorEl[0] : null}
         open={open}
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
@@ -72,29 +74,37 @@ export default function({
         }}
         className={classes.root}
       >
-        {menuOptions?.map((eachOption, index) => (
-          <MenuItemComponent
-            item={eachOption}
-            columnType={columnType.toLowerCase()}
-            index={index}
-            onMenuClick={handleMenuClick}
-          />
-        ))}
-        <MenuComponent
-          anchorEl={anchorEl2}
-          columnType={columnType.toLowerCase()}
-          menuOptions={nestedOptions}
-          setAnchorEl={setAnchorEl2}
-          submitOption={(e, item) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setAnchorEl(null);
-            handleMenuOpenClose(title);
-            setAnchorEl2(null);
-            submitMenuOption(item.value, item.supported_dataType);
-          }}
-        />
+        {menuOptions?.map((eachOption, index) => {
+          return (
+            <MenuItemComponent
+              item={eachOption}
+              columnType={columnType.toLowerCase()}
+              index={index}
+              onMenuClick={handleMenuClick}
+            />
+          );
+        })}
+        {menuComponentOptions?.length > 0 &&
+          menuComponentOptions.map((options, index) => {
+            return (
+              <MenuComponent
+                anchorEl={anchorEl?.length > 1 ? anchorEl[index] : null}
+                columnType={columnType.toLowerCase()}
+                menuOptions={options}
+                setAnchorEl={setAnchorEl}
+                submitOption={(e, item) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleMenuClick(e, item);
+                  // handleMenuOpenClose(title);
+                  // submitMenuOption(item.value, item.supported_dataType);
+                }}
+              />
+            );
+          })}
       </Menu>
     </>
   );
-}
+};
+
+export default NestedMenu;

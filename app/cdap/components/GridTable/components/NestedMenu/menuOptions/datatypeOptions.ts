@@ -21,6 +21,28 @@ export const DATATYPE_OPTIONS = [
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.string'
     ).toString(),
+    options: [
+      {
+        value: 'boolean',
+        label: T.translate(
+          'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.boolean'
+        ).toString(),
+        options: [
+          {
+            value: 'boolean',
+            label: T.translate(
+              'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.boolean'
+            ).toString(),
+            supported_dataType: [
+              T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+            ],
+          },
+        ],
+        supported_dataType: [
+          T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+        ],
+      },
+    ],
     supported_dataType: [
       T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
     ],

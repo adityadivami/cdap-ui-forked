@@ -20,8 +20,9 @@ export interface INestedMenuProps {
   columnType: string;
   menuOptions: IMenuItem[];
   title: string;
-  anchorEl: HTMLElement;
-  setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement>>;
+  anchorEl: HTMLElement[];
+  setAnchorEl: React.Dispatch<React.SetStateAction<HTMLElement[]>>;
   open: boolean;
   handleMenuOpenClose?: (title: string) => void;
+  newIndex?: number;
 }

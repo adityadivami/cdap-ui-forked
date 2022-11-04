@@ -28,4 +28,14 @@ export const MENU_OPTIONS = [
       T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
     ],
   },
+  {
+    value: 'changeDatatype',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.changeDatatype'
+    ).toString(),
+    options: [],
+    supported_dataType: [
+      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    ],
+  },
 ];

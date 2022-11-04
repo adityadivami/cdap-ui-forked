@@ -27,6 +27,7 @@ export default function({
   submitOption,
   columnType,
 }: IMenuComponentProps) {
+  console.log('menuOptions', menuOptions);
   const open = Boolean(anchorEl);
   const classes = useStyles();
   return (
