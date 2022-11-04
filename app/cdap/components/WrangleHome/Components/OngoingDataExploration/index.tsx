@@ -119,7 +119,8 @@ export default function OngoingDataExploration() {
             style={{ textDecoration: 'none' }}
             data-testid={`ongoing-data-explorations-${item[1].label
               .toLowerCase()
-              .split(' ')
+              .replace(' ', '-')
+              .split(/[^a-zA-Z\d\s:]/)
               .join('-')}-${index}`}
           >
             {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}

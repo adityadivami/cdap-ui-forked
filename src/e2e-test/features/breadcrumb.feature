@@ -22,8 +22,8 @@ Feature: Breadcrumb - Navigate to the application
     Given Navigate to the home page
     Then  Click on the Connector type with "<connectionLabel>" and "<connectionTestId>"
     Then Click on the Home link button
-    Then Click on the Exploration card
+    Then Click on the Exploration card with "<testId>"
     Then Click on the Home link of wrangle page
     Examples:
-         | connectionLabel | connectionTestId |
-         | PostgreSQL | postgresql |
+         | connectionLabel | connectionTestId |testId|
+         | PostgreSQL | postgresql |developers-md-1 |

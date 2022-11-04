@@ -21,6 +21,7 @@ import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.cdap.ui.utils.Constants;
@@ -28,7 +29,8 @@ import org.junit.Assert;
 import java.time.Duration;
 import org.openqa.selenium.WebElement;
 
-public class Breadcrumb {
+public class
+Breadcrumb {
     @Given("Navigate to the home page")
     public void navigateToTheHomePage() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
@@ -71,12 +73,12 @@ public class Breadcrumb {
         ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-text"));
         System.out.println("clicked on home link from Data source page");
     }
-    @Then("Click on the Exploration card")
-    public void clickOnTheExplorationCard() {
+    @Then("Click on the Exploration card with \\\"(.*)\\\"")
+    public void clickOnTheExplorationCard( String testId) {
         WaitHelper.waitForPageToLoad();
 
         SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explorations-sql_features-0"));
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explorations-" + testId));
         System.out.println("clicked on exploration card");
     }
     @Then("Click on the Home link of wrangle page")
@@ -87,6 +89,16 @@ public class Breadcrumb {
         String url= SeleniumDriver.getDriver().getCurrentUrl();
         Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         System.out.println(url);
+        boolean flag = true;
+        for(int i = 0;flag == true; i++) {
+            if(Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+               flag = true;
+            }
+            else {
+                flag=false;
+            }
+        }
+
         WebElement ele = Helper.locateElementByTestId("breadcrumb-home-link");
         Actions action = new Actions(SeleniumDriver.getDriver());
         action.moveToElement(ele).perform();
@@ -94,3 +106,4 @@ public class Breadcrumb {
 
     }
 }
+
