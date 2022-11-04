@@ -131,7 +131,7 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
                       data-testid="ongoing-data-card-percentage"
                       component="p"
                     >
-                      {percent}
+                      {Math.round(percent)}
                     </Typography>
                     <Typography
                       variant="body2"

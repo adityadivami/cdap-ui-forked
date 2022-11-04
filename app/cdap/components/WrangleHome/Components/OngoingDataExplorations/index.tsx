@@ -57,9 +57,7 @@ export default function() {
     const findConnectorType = (connection: string) => {
       if (connection) {
         const matchedConnection: IConnectionWithConnectorType = connectionsWithConnectorTypeData.find(
-          (eachConnection) => {
-            return eachConnection.name === connection.replace('_', ' ');
-          }
+          (eachConnection) => eachConnection.name === connection.replace('_', ' ')
         );
         return matchedConnection ? matchedConnection.connectorType : undefined;
       }

@@ -65,7 +65,7 @@ export const getWidgetData = async () => {
     connectionDetailsList.length &&
     connectionDetailsList.map(({ connectorWidgetJSON }) => connectorWidgetJSON);
 
-  connectorTypesData.map((connectorType) => {
+  connectorTypesData.map((eachConnectorType) => {
     let connectorTypeHasWidget: boolean = false;
 
     // Getting widget icons for connector types
@@ -75,14 +75,14 @@ export const getWidgetData = async () => {
       connectorWidgetData.map((eachConnector) => {
         if (
           eachConnector['display-name'] &&
-          eachConnector['display-name'].includes(connectorType.name)
+          eachConnector['display-name'].includes(eachConnectorType.name)
         ) {
           IConnectionWithConnectorType.push({
-            ...connectorType,
+            ...eachConnectorType,
             SVG: (
               <WidgetSVG
                 imageSource={eachConnector?.icon?.arguments?.data}
-                label={connectorType.name}
+                label={eachConnectorType.name}
               />
             ),
           });
@@ -94,8 +94,8 @@ export const getWidgetData = async () => {
 
     if (!connectorTypeHasWidget) {
       IConnectionWithConnectorType.push({
-        ...connectorType,
-        SVG: <WidgetSVG label={connectorType.name} />,
+        ...eachConnectorType,
+        SVG: <WidgetSVG label={eachConnectorType.name} />,
       });
     }
   });

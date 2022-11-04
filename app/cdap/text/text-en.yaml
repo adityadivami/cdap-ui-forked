@@ -3442,7 +3442,18 @@ features:
   WranglerNewUI:
     OnGoingDataExplorations:
       labels:
+       importedDataset: Imported Dataset
        nullValues: Null values
        recipeSteps: Recipe steps
-       importedDataset: Imported Dataset
+       connectorType: ConnectorType
+       icon: icon
+       connectionName: connectionName
+       workspaceName: workspaceName
+       iconWithText: iconWithText
+       text: text
+       recipeSteps: recipeSteps
+       dataQuality: dataQuality
+       percentageWithText: percentageWithText
+       workspaceId: workspaceId
+       count: count
        

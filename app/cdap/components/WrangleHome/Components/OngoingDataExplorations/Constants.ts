@@ -14,14 +14,38 @@
  * the License.
  */
 
-export const CONNECTOR_TYPE = 'connectorType';
-export const ICON = 'icon';
-export const CONNECTION_NAME = 'connectionName';
-export const WORKPSACE_NAME = 'workspaceName';
-export const ICON_WITH_TEXT = 'iconWithText';
-export const TEXT = 'text';
-export const RECIPE_STEPS = 'recipeSteps';
-export const DATA_QUALITY = 'dataQuality';
-export const PERCENTAGE_WITH_TEXT = 'percentageWithText';
-export const WORKSPACE_ID = 'workspaceId';
-export const COUNT = 'count';
+import T from 'i18n-react';
+
+export const CONNECTOR_TYPE = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.connectorType'
+).toString();
+export const ICON = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.icon'
+).toString();
+export const CONNECTION_NAME = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.connectionName'
+).toString();
+export const WORKPSACE_NAME = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.workspaceName'
+).toString();
+export const ICON_WITH_TEXT = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.iconWithText'
+).toString();
+export const TEXT = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.text'
+).toString();
+export const RECIPE_STEPS = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps'
+).toString();
+export const DATA_QUALITY = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.dataQuality'
+).toString();
+export const PERCENTAGE_WITH_TEXT = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.percentageWithText'
+).toString();
+export const WORKSPACE_ID = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.workspaceId'
+).toString();
+export const COUNT = T.translate(
+  'features.WranglerNewUI.OnGoingDataExplorations.labels.count'
+).toString();
