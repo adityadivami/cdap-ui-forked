@@ -14,41 +14,39 @@
  * the License.
  */
 
-export interface IParams {
-  context: string;
-  workspaceId: string;
-  namespace?: string;
-  wid?: string;
-  connectorType?: string;
-}
-
-export interface IRecords {
-  wid?: string;
-  payload?: IParams;
-  body?: string;
-  path?: string;
-  canBrowse?: boolean;
-  name?: string;
-}
-
-export interface IPercentOfDataTypeValues {
-  [key: string]: number;
-}
-
-interface ISummary {
-  statistics: IRecords;
-  validations: IRecords;
-}
-
-export interface IExecuteAPIResponse {
-  headers: string[];
-  types: IRecords;
-  values: IRecords[];
-  summary: ISummary;
-}
-
-export interface IHeaderNamesList {
+export interface IArtifact {
   name: string;
+  version: string;
+  scope: string;
+}
+
+export interface IConnectorTypesWithSVG {
+  name: string;
+  typ?: string;
+  category?: string;
+  description?: string;
+  artifact?: IArtifact;
+  SVG: JSX.Element;
+  link?: string;
+  displayName?: string;
+}
+
+export interface IConnectorDetailsPayload {
+  name: string;
+  type: string;
+  category: string;
+  description: string;
+  artifact: IArtifact;
+}
+
+export interface IWidgetSVGProps {
+  imageSource?: string;
   label: string;
-  type: string[];
+}
+
+export interface IConnectorTypes {
+  name: string;
+  type: string;
+  category: string;
+  artifact: IArtifact;
 }

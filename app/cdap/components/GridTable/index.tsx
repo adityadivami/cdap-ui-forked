@@ -21,9 +21,9 @@ import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { objectQuery } from 'services/helpers';
-import BreadCrumb from './components/Breadcrumb';
+import Breadcrumb from './components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
@@ -31,14 +31,15 @@ import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import T from 'i18n-react';
+import { IWorkspace } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 
 export default function GridTable() {
-  const { wid } = useParams() as IRecords;
-  const params = useParams() as IRecords;
+  const { wid } = useParams<IParams>();
+  const params = useParams<IParams>();
   const classes = useStyles();
+  const location = useLocation();
 
   const [loading, setLoading] = useState(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
@@ -64,7 +65,7 @@ export default function GridTable() {
     });
     MyDataPrepApi.getWorkspace(payload)
       .pipe(
-        flatMap((res: IValues) => {
+        flatMap((res: IWorkspace) => {
           const { dataprep } = DataPrepStore.getState();
           if (dataprep.workspaceId !== workspaceId) {
             return;
@@ -233,7 +234,7 @@ export default function GridTable() {
 
   return (
     <Box>
-      <BreadCrumb datasetName={wid} />
+      <Breadcrumb workspaceName={wid} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
