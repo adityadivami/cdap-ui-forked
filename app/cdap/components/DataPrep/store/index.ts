@@ -55,6 +55,18 @@ export interface IModelField {
   description?: string;
 }
 
+export interface IConnectorsWithIcons {
+  name: string;
+  type: string;
+  category: string;
+  artifact: {
+    name: string;
+    version: string;
+    scope: string;
+  };
+  SVG: JSX.Element;
+}
+
 // TODO Replace 'any' types with concrete ones
 export interface IDataPrepState {
   initialized?: boolean;

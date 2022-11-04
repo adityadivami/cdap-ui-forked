@@ -88,10 +88,7 @@ export function CreateConnection({
   const [testResponseMessages, setTestResponseMessages] = useState(undefined);
   const [redirectUrl, setRedirectUrl] = useState(null);
   const location: any = useLocation();
-
   const featRequestingFrom = location?.state?.from?.addConnectionRequestFromNewUI;
-
-  console.log(featRequestingFrom, 'featRequestingFrom');
 
   const init = async () => {
     try {
@@ -193,7 +190,6 @@ export function CreateConnection({
          * Otherwise, the redirection is set to Old UI URL as existed
          */
         const value: string | boolean = featRequestingFrom ? featRequestingFrom : false;
-        console.log(value, '---values');
         if (value) {
           value === 'home'
             ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
@@ -254,7 +250,6 @@ export function CreateConnection({
 
   function onClose() {
     if (connectionMode === IConnectionMode.ROUTED && enableRouting) {
-      navigateToConnectionList(dispatch);
       /**
        * This following code is checking whether the add connection request is coming from New UI
        * If the request is from New UI, the redirection is set to New UI URL
@@ -262,10 +257,14 @@ export function CreateConnection({
        */
 
       const value: string | boolean = featRequestingFrom ? featRequestingFrom : false;
-      console.log('close', value);
-      return value === 'home'
-        ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
-        : setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${value}`);
+      if (value) {
+        return value === 'home'
+          ? setRedirectUrl(`/ns/${getCurrentNamespace()}/home`)
+          : setRedirectUrl(`/ns/${getCurrentNamespace()}/datasources/${value}`);
+      } else {
+        navigateToConnectionList(dispatch);
+        return;
+      }
     }
 
     onToggle();
