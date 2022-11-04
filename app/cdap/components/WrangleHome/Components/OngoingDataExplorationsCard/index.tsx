@@ -42,25 +42,26 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
     >
       {explorationCardDetails &&
         Array.isArray(explorationCardDetails) &&
-        explorationCardDetails?.map((eachItem, index) => {
-          switch (eachItem.type) {
+        explorationCardDetails?.map((eachExplorationCard, explorationCardIndex) => {
+          switch (eachExplorationCard.type) {
             case 'icon':
               return (
-                <Grid item xs={3} key={index} className={classes.connectorIcon}>
-                  <Box>{eachItem.icon}</Box>
+                <Grid item xs={3} key={explorationCardIndex} className={classes.connectorIcon}>
+                  <Box>{eachExplorationCard.icon}</Box>
                 </Grid>
               );
             case 'iconWithText':
               return (
-                <Grid item xs={3} className={classes.elementStyle} key={index}>
+                <Grid item xs={3} className={classes.explorationCard} key={explorationCardIndex}>
                   {connectionRefValue ? (
-                    <CustomTooltip title={eachItem.label} arrow>
+                    <CustomTooltip title={eachExplorationCard.label} arrow>
                       <Typography
                         variant="body1"
                         ref={connectionNameRef}
                         className={classes.iconWithText}
+                        component="p"
                       >
-                        {eachItem.label}
+                        {eachExplorationCard.label}
                       </Typography>
                     </CustomTooltip>
                   ) : (
@@ -69,36 +70,35 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
                       ref={connectionNameRef}
                       className={classes.iconWithText}
                     >
-                      {eachItem.label}
+                      {eachExplorationCard.label}
                     </Typography>
                   )}
                 </Grid>
               );
             case 'text':
-              return eachItem.label.includes('Recipe steps') ? (
-                <Grid item xs={3} className={classes.elementStyle} key={index}>
-                  <Typography variant="body1" className={classes.textWithoutIcon}>
-                    {' '}
-                    {eachItem.label}
+              return eachExplorationCard.label.includes('Recipe steps') ? (
+                <Grid item xs={3} className={classes.explorationCard} key={explorationCardIndex}>
+                  <Typography variant="body1" className={classes.textWithoutIcon} component="p">
+                    {eachExplorationCard.label}
                   </Typography>
                 </Grid>
               ) : (
                 <Grid
                   item
                   xs={3}
-                  className={classes.elementStyle}
-                  key={index}
-                  data-testid={`home-ongoing-explorations-${eachItem.type}-${cardIndex}`}
+                  className={classes.explorationCard}
+                  key={explorationCardIndex}
+                  data-testid={`home-ongoing-explorations-${eachExplorationCard.type}-${cardIndex}`}
                 >
                   {datasetNameRefValue ? (
-                    <CustomTooltip title={eachItem.label} arrow>
+                    <CustomTooltip title={eachExplorationCard.label} arrow>
                       <Typography
                         variant="body1"
                         ref={datasetNameRef}
                         className={classes.textWithoutIcon}
+                        component="p"
                       >
-                        {' '}
-                        {eachItem.label}
+                        {eachExplorationCard.label}
                       </Typography>
                     </CustomTooltip>
                   ) : (
@@ -107,20 +107,19 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
                       ref={datasetNameRef}
                       className={classes.textWithoutIcon}
                     >
-                      {' '}
-                      {eachItem.label}
+                      {eachExplorationCard.label}
                     </Typography>
                   )}
                 </Grid>
               );
             case 'percentageWithText': {
-              const percent = parseInt(eachItem.label, 10);
+              const percent = Number(eachExplorationCard.label);
               return percent && !isNaN(percent) ? (
                 <Grid
                   item
                   xs={3}
-                  className={classes.elementStyle}
-                  key={index}
+                  className={classes.explorationCard}
+                  key={explorationCardIndex}
                   data-testid="ongoing-data-exploration-card-percentage-nan"
                 >
                   <Box className={classes.percent}>
@@ -130,6 +129,7 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
                         percent < 100 ? classes.percentageStyleRed : classes.percentageStyleGreen
                       }
                       data-testid="ongoing-data-card-percentage"
+                      component="p"
                     >
                       {percent}
                     </Typography>
@@ -139,13 +139,14 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
                         percent < 100 ? classes.percentageSymbolRed : classes.percentageSymbolGreen
                       }
                       data-testid="ongoing-data-percentage-symbol"
+                      component="p"
                     >
-                      {eachItem.percentageSymbol}
+                      {eachExplorationCard.percentageSymbol}
                     </Typography>
                   </Box>
                   <Box className={classes.dataQualityTextContainer}>
-                    <Typography variant="body1" className={classes.dataQualityText}>
-                      {eachItem.subText}
+                    <Typography variant="body1" className={classes.dataQualityText} component="p">
+                      {eachExplorationCard.subText}
                     </Typography>
                   </Box>
                 </Grid>

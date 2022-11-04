@@ -40,7 +40,7 @@ export interface IConnectorDetailsPayload {
 }
 
 export interface IWidgetSVGProps {
-  imageSource: string;
+  imageSource?: string;
   label: string;
 }
 
@@ -49,8 +49,4 @@ export interface IConnectorTypes {
   type: string;
   category: string;
   artifact: IArtifact;
-}
-
-export interface IAllConnectorPluginProps {
-  [index: string]: IConnectorDetailsPayload;
 }

@@ -27,56 +27,52 @@ import {
   IConnectorDetailsPayload,
   IConnectorTypes,
 } from 'components/WidgetSVG/types';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
+import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 import React from 'react';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 export const getWidgetData = async () => {
   const connectorTypes: IConnectorTypesWithSVG[] = await fetchConnectors();
-  const connectorsTypesData: IConnectorTypes[] = [];
+  const connectorTypesData: IConnectorTypes[] = [];
   const IConnectionWithConnectorType: IConnectorTypesWithSVG[] = [];
   const allConnectorsPluginProperties: Map<
     string,
     IConnectorDetailsPayload[]
   > = getCategoriesToConnectorsMap(connectorTypes);
-  const connectionPayload: IConnectorDetailsPayload[] = [];
+  const connectorsPluginProperties: IConnectorDetailsPayload[] = [];
   allConnectorsPluginProperties?.forEach((eachProperty) => {
     if (eachProperty.length) {
-      eachProperty.forEach((item) => {
-        connectionPayload.push(item);
+      eachProperty.forEach((eachPropertyItem) => {
+        connectorsPluginProperties.push(eachPropertyItem);
       });
     }
   });
 
-  const connectionDetailsData = await Promise.all(
-    connectionPayload.map(async (item, index) => {
+  const connectionDetailsList = forkJoin(
+    connectorsPluginProperties.map((eachConnection) => {
       const selectedConnector = {
-        artifact: item.artifact,
-        category: item.category,
-        name: item.name,
-        type: item.type,
+        artifact: eachConnection.artifact,
+        category: eachConnection.category,
+        name: eachConnection.name,
+        type: eachConnection.type,
       };
-      connectorsTypesData.push(selectedConnector);
-      return new Promise((resolve, reject) => {
-        const response = fetchConnectionDetails(selectedConnector);
-        if (response) {
-          resolve(response);
-        }
-      });
+      connectorTypesData.push(selectedConnector);
+      return fetchConnectionDetails(selectedConnector);
     })
-  );
-  const connectorWidgetJson =
-    Array.isArray(connectionDetailsData) &&
-    connectionDetailsData.length &&
-    connectionDetailsData.map(({ connectorWidgetJSON }) => connectorWidgetJSON);
+  ).subscribe((res) => res);
+  const connectorWidgetData =
+    Array.isArray(connectionDetailsList) &&
+    connectionDetailsList.length &&
+    connectionDetailsList.map(({ connectorWidgetJSON }) => connectorWidgetJSON);
 
-  connectorsTypesData.map((connectorType) => {
+  connectorTypesData.map((connectorType) => {
     let connectorTypeHasWidget: boolean = false;
-    /**
-     * Getting widget icons for connector types
-     */
-    Array.isArray(connectorWidgetJson) &&
-      connectorWidgetJson.length &&
-      connectorWidgetJson.map((eachConnector) => {
+
+    // Getting widget icons for connector types
+
+    Array.isArray(connectorWidgetData) &&
+      connectorWidgetData.length &&
+      connectorWidgetData.map((eachConnector) => {
         if (
           eachConnector['display-name'] &&
           eachConnector['display-name'].includes(connectorType.name)
@@ -93,20 +89,20 @@ export const getWidgetData = async () => {
           connectorTypeHasWidget = true;
         }
       });
-    /**
-     * Retaining the connector types which are not part of widget api
-     */
+
+    // Retaining the connector types which are not part of widget api
+
     if (!connectorTypeHasWidget) {
       IConnectionWithConnectorType.push({
         ...connectorType,
-        SVG: <WidgetSVG imageSource={undefined} label={connectorType.name} />,
+        SVG: <WidgetSVG label={connectorType.name} />,
       });
     }
   });
 
   IConnectionWithConnectorType.push({
     name: 'Imported Dataset',
-    SVG: importDatasetIcon,
+    SVG: ImportDatasetIcon,
   });
 
   DataPrepStore.dispatch({

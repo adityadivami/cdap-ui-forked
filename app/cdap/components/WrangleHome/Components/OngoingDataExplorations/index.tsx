@@ -19,55 +19,56 @@ import MyDataPrepApi from 'api/dataprep';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import {
   IConnectionWithConnectorType,
-  IExistingExplorationCardsData,
+  IExistingExplorationCard,
   IConnectionsList,
-  IMassagedObject,
-  IValues,
+  IWorkspace,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
 import T from 'i18n-react';
-import { orderBy } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { of } from 'rxjs/observable/of';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import { IExplorationCardDetails } from '../OngoingDataExplorationsCard/types';
 
 export default function() {
-  const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IMassagedObject[]>([]);
+  const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IExplorationCardDetails[]>(
+    []
+  );
 
   const getOngoingData = useCallback(async () => {
-    const connectionsWithConnectorTypeData: Map<
+    const connectionsWithConnectorTypes: Map<
       string,
       IConnectionsList[]
     > = await getCategorizedConnections();
-    const connectionsWithConnectorTypeDataObject: IConnectionWithConnectorType[] = [];
-    for (const connectorName of connectionsWithConnectorTypeData.keys()) {
-      const values = connectionsWithConnectorTypeData.get(connectorName);
-      const connections = values.map((eachValue) => {
-        return {
-          name: eachValue.name,
-          connectorType: eachValue.connectionType,
-        };
-      });
-      connectionsWithConnectorTypeDataObject.push(...connections);
+    const connectionsWithConnectorTypeData: IConnectionWithConnectorType[] = [];
+    for (const connectorName of connectionsWithConnectorTypes.keys()) {
+      const values = connectionsWithConnectorTypes.get(connectorName);
+      const connections = values.map((eachValue) => ({
+        name: eachValue.name,
+        connectorType: eachValue.connectionType,
+      }));
+      connectionsWithConnectorTypeData.push(...connections);
     }
 
-    const findConnectorType = (connection): string => {
+    const findConnectorType = (connection: string) => {
       if (connection) {
-        const matchedConnection: IConnectionWithConnectorType = connectionsWithConnectorTypeDataObject.find(
+        const matchedConnection: IConnectionWithConnectorType = connectionsWithConnectorTypeData.find(
           (eachConnection) => {
             return eachConnection.name === connection.replace('_', ' ');
           }
         );
         return matchedConnection ? matchedConnection.connectorType : undefined;
       }
-      return 'Imported Dataset';
+      return T.translate(
+        'features.WranglerNewUI.OnGoingDataExplorations.labels.importedDataset'
+      ).toString();
     };
 
-    const expData: IExistingExplorationCardsData[] = [];
+    const explorationData: IExistingExplorationCard[] = [];
 
     // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
     //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
@@ -77,7 +78,7 @@ export default function() {
     })
       .pipe(
         switchMap((response: Record<string, unknown[]>) => {
-          let values: IValues[] = [];
+          let values: IWorkspace[] = [];
           values = response?.values ?? [];
 
           // sorting the workspaces based on dataset created time.
@@ -103,11 +104,13 @@ export default function() {
               eachValue?.sampleSpec?.connectionName
             );
             if (connectorName) {
-              expData.push({
+              explorationData.push({
                 connectorType: connectorName,
                 connectionName: eachValue?.sampleSpec?.connectionName
                   ? eachValue?.sampleSpec?.connectionName
-                  : 'Imported Dataset',
+                  : T.translate(
+                      'features.WranglerNewUI.OnGoingDataExplorations.labels.importedDataset'
+                    ).toString(),
                 workspaceName: eachValue.workspaceName,
                 recipeSteps: eachValue.directives?.length ?? 0,
                 dataQuality: null,
@@ -138,9 +141,9 @@ export default function() {
                 dataQuality = dataQuality + nonNull;
               });
               const totalDataQuality = dataQuality / workspace.headers?.length ?? 1;
-              expData[index].dataQuality = totalDataQuality;
-              expData[index].count = workspace.count;
-              const final = getUpdatedExplorationCards(expData);
+              explorationData[index].dataQuality = totalDataQuality;
+              explorationData[index].count = workspace.count;
+              const final = getUpdatedExplorationCards(explorationData);
               setOnGoingExplorationsData(final);
             });
         }

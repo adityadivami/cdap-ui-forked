@@ -19,10 +19,10 @@ import { ReactElement, ReactNode } from 'react';
 export interface IResponseData {
   count: number;
   message: string;
-  values: IValues[];
+  values: IWorkspace[];
 }
 
-export interface IValues {
+export interface IWorkspace {
   createdTimeMillis?: number;
   directives?: [];
   insights?: IInsights;
@@ -72,7 +72,7 @@ export interface IFields {
   type: string;
 }
 
-export interface IMassagedObject {
+export interface IOnGoingDataExplorationsData {
   icon: JSX.Element;
   label: string | number;
   type: string;
@@ -81,11 +81,10 @@ export interface IMassagedObject {
   workspaceId: string;
   count: number;
 }
-
-export interface IExistingExplorationCardsData {
+export interface IExistingExplorationCard {
   connectionName: string;
   count: number;
-  dataQuality: unknown;
+  dataQuality: number | null;
   recipeSteps: number;
   workspaceId: string;
   workspaceName: string;

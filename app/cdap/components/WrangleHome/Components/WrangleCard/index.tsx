@@ -33,7 +33,7 @@ import { Spanner } from 'components/WrangleHome/Components/WrangleCard/iconStore
 import { SQLServer } from 'components/WrangleHome/Components/WrangleCard/iconStore/SQLServer';
 import { useStyles } from 'components/WrangleHome/Components/WrangleCard/styles';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
+import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 
 export default function WrangleCard() {
   const [connectorTypes, setConnectorTypes] = useState({
@@ -103,7 +103,7 @@ export default function WrangleCard() {
       } else if (connectorType.name === 'File') {
         return {
           ...connectorType,
-          SVG: importDatasetIcon,
+          SVG: ImportDatasetIcon,
         };
       } else if (connectorType.name === 'CloudSQLMySQL') {
         return {
@@ -140,7 +140,7 @@ export default function WrangleCard() {
         scope: 'local',
       },
 
-      SVG: importDatasetIcon,
+      SVG: ImportDatasetIcon,
     });
 
     setConnectorTypes({

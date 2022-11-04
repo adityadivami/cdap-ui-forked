@@ -14,7 +14,7 @@
  * the License.
  */
 
-interface IExplorationCardDetails {
+export interface IExplorationCardDetails {
   icon?: SVGAElement;
   label?: string;
   type?: string;
@@ -25,6 +25,6 @@ interface IExplorationCardDetails {
 }
 
 export interface IOngoingDataExplorationsCard {
-  explorationCardDetails: IExplorationCardDetails[];
+  explorationCardDetails: IExplorationCardDetails;
   cardIndex: number;
 }

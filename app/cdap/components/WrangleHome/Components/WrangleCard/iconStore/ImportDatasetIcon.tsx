@@ -16,7 +16,7 @@
 
 import React from 'react';
 
-export const importDatasetIcon = (
+export const ImportDatasetIcon = (
   <svg width="49" height="40" viewBox="0 0 49 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       fill-rule="evenodd"

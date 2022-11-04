@@ -1,8 +1,8 @@
 @Integration_Tests
-Feature: Ongoing Data Exploration
+Feature: Ongoing Data Explorations
 
-  @OngoingDataExploration
-  Scenario: Go through the Ongoing Data Exploration Page
+  @OngoingDataExplorations
+  Scenario: Go through the Ongoing Data Explorations Page
     Given Navigate to the home page
     Then Click on the Data Exploration
     Then Click on the Home link
