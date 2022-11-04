@@ -14,6 +14,7 @@
  * the License.
  */
 
+import { grey } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useGridHeaderCellStyles = makeStyles({
@@ -65,15 +66,19 @@ export const useGridHeaderCellStyles = makeStyles({
   },
   dataTypeIndicator: {
     fontSize: 14,
-    lineHeight: 21,
+    lineHeight: '150%',
     fontWeight: 400,
     color: '#5F6368',
+    fontFamily: 'Noto Sans',
+    letterSpacing: 0.15,
   },
   columnHeader: {
     fontSize: 14,
-    lineHeight: 21,
+    lineHeight: '150%',
     fontWeight: 400,
-    color: '#000000',
     marginBottom: 5,
+    fontFamily: 'Noto Sans',
+    color: grey[900],
+    letterSpacing: 0.15,
   },
 });

@@ -3411,26 +3411,35 @@ features:
     Skip: Skipped
   NewWranglerUI:
     ColumnInsights: 
-       distribution: Distribution
-       viewFullChart: View Full Chart
-       columnInsightsHeadingText: Column Insights
-       quality: Quality
-       containsLetter: Contains Letter
-       characterCount: Character count
-       distinct: Distinct
-       missingNull: Missing/Null
-       invalid: Invalid
-       barChartYLabel: Quantity
-       unknown: unknown
-       options:
-          labelString: String
-          labelBoolean: Boolean
-          labelInteger: Integer
-          labelLong: Long
-          labelShort: Short
-          labelFloat: Float
-          labelDouble: Double
-          labelDecimal: Decimal
-          labelBytes: Bytes
-
+      distribution: Distribution
+      viewFullChart: View Full Chart
+      columnInsightsHeadingText: Column Insights
+      quality: Quality
+      containsLetter: Contains Letter
+      characterCount: Character count
+      distinct: Distinct
+      invalid: Invalid
+      barChartYLabel: Quantity
+      unknown: unknown
+      missingNull: Missing/Null
+      options:
+        labelString: String
+        labelBoolean: Boolean
+        labelInteger: Integer
+        labelLong: Long
+        labelShort: Short
+        labelFloat: Float
+        labelDouble: Double
+        labelDecimal: Decimal
+        labelBytes: Bytes
+    GridTable:
+      missingNull: Missing/Null
+      containsLetterNumberLeadingTrailingSpaces: Contains letters, numbers, leading and trailing spaces
+      containsLetterNumber: Contains Letter and Number
+      containsLetterLeadingTrailing: Contains Letter, leading and trailing spaces
+      containsLetterLeading: Contains Letter and leading spaces
+      containsLetterTrailing: Contains Letter and trailing spaces
+      containsLetterOnly: Contains Letter
+      containsNumberOnly: Contains Number
+      
 ...

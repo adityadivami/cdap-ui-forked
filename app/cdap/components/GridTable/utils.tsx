@@ -14,16 +14,10 @@
  * the License.
  */
 
-import {
-  CONTAIN_LETTER_NUMBER_LEADING_TRAILING_SPACES,
-  CONTAIN_LETTER_LEADING_TRAILING,
-  CONTAIN_LETTER_LEADING,
-  CONTAIN_LETTER_TRAILING,
-  CONTAIN_LETTER_NUMBER,
-  CONTAIN_LETTER_ONLY,
-  CONTAIN_NUMBER_ONLY,
-} from 'components/GridTable/constants';
 import { IExecuteAPIResponse, IRecords } from 'components/GridTable/types';
+import T from 'i18n-react';
+
+const PREFIX = 'features.NewWranglerUI.GridTable';
 
 /**
  *
@@ -142,25 +136,27 @@ export const checkAlphaNumericAndSpaces = (values, columnName) => {
   let containLeadingSpace = false;
   let containTrailingSpace = false;
   let returnValue = '';
+
   arrayOfColumn.forEach((element) => {
     containNumber = isAlphaNumeric(element);
     containLetter = isLetter(element);
     containLeadingSpace = isLeadingSpace(element);
     containTrailingSpace = isTrailingSpace(element);
+
     if (containNumber && containLetter && containLeadingSpace && containTrailingSpace) {
-      returnValue = CONTAIN_LETTER_NUMBER_LEADING_TRAILING_SPACES;
+      returnValue = T.translate(`${PREFIX}.containsLetterNumberLeadingTrailingSpaces`).toString();
     } else if (containLetter && containLeadingSpace && containTrailingSpace) {
-      returnValue = CONTAIN_LETTER_LEADING_TRAILING;
+      returnValue = T.translate(`${PREFIX}.containsLetterLeadingTrailing`).toString();
     } else if (containLetter && containLeadingSpace) {
-      returnValue = CONTAIN_LETTER_LEADING;
+      returnValue = T.translate(`${PREFIX}.containsLetterLeading`).toString();
     } else if (containLetter && containTrailingSpace) {
-      returnValue = CONTAIN_LETTER_TRAILING;
+      returnValue = T.translate(`${PREFIX}.containsLetterTrailing`).toString();
     } else if (containLetter && containNumber) {
-      returnValue = CONTAIN_LETTER_NUMBER;
+      returnValue = T.translate(`${PREFIX}.containsLetterNumber`).toString();
     } else if (containLetter) {
-      returnValue = CONTAIN_LETTER_ONLY;
+      returnValue = T.translate(`${PREFIX}.containsLetterOnly`).toString();
     } else if (containNumber) {
-      returnValue = CONTAIN_NUMBER_ONLY;
+      returnValue = T.translate(`${PREFIX}.containsNumberOnly`).toString();
     }
   });
   return returnValue;

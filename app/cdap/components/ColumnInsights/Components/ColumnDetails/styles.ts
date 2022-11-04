@@ -37,6 +37,9 @@ export const useStyles = makeStyles(() => {
       gap: 12,
       marginTop: 5,
     },
+    editIcon: {
+      cursor: 'pointer',
+    },
     selectFieldStyles: {
       width: 350,
       height: 40,

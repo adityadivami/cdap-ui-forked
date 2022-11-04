@@ -77,7 +77,7 @@ export default function({
           <Typography className={classes.columnInsightsColumnName}>{inputValue}</Typography>
         )}
         <Box>
-          <EditIcon onClick={editHandler} />
+          <EditIcon onClick={editHandler} className={classes.editIcon} />
         </Box>
       </div>
 

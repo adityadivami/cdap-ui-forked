@@ -17,11 +17,11 @@
 import { Box, Card, TableCell, Typography } from '@material-ui/core';
 import React from 'react';
 import { useGridKPICellStyles } from './styles';
-import { MISSING_NULL } from 'components/GridTable/constants';
+import T from 'i18n-react';
+const PREFIX = 'features.GridTable';
 
 export default function GridKPICell({ metricData }) {
   const classes = useGridKPICellStyles();
-
   const metricValue = metricData.values;
 
   return (
@@ -35,8 +35,8 @@ export default function GridKPICell({ metricData }) {
               <Typography className={classes.label}>{eachValue.label}</Typography>
               <Typography
                 className={
-                  eachValue.label == MISSING_NULL
-                    ? `${classes.missingClass} ${classes.count}`
+                  eachValue.label == T.translate(`${PREFIX}.missingNull`).toString()
+                    ? `${classes.missingClass}  ${classes.count}`
                     : `${classes.generalClass} ${classes.count}`
                 }
                 data-testid={`grid-kpi-metric-value-${eachValue.label}`}
