@@ -177,7 +177,6 @@ export const useStyles = makeStyles(() => {
       background: '#3994FF',
       boxShadow: '0px 2px 4px rgba(70, 129, 244, 0.15)',
       borderRadius: '4px',
-      fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: '15px',
@@ -191,6 +190,11 @@ export const useStyles = makeStyles(() => {
       '&:hover': {
         backgroundColor: '#3994FF',
       },
+    },
+    extractPositionButtonGroup: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   };
 });

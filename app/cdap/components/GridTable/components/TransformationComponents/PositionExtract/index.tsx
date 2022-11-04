@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 import NewColumnInput from 'components/GridTable/components/TransformationComponents/InputComponents/NewColumnInput';
 import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 import T from 'i18n-react';
+import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 
 const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.extract.extractUsingPosition';
 
@@ -81,17 +82,24 @@ export default function GridTextCell({
             } ${T.translate(`${PREFIX}.fromThisColumnToNew`)}`}
           </Typography>
           <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
-
-          <Button
-            className={classes.applyStepButtonStyles}
-            onClick={applyDirective}
-            variant="contained"
-          >
-            {T.translate(`${PREFIX}.apply`)}
-          </Button>
-          <Button className={classes.popoverText} onClick={handleClose} variant="text">
-            {T.translate(`${PREFIX}.exitMode`)}
-          </Button>
+          <Box className={classes.extractPositionButtonGroup}>
+            <ButtonWidget
+              buttonText={T.translate(`${PREFIX}.apply`).toString()}
+              className={classes.applyStepButtonStyles}
+              onClick={applyDirective}
+              variant="contained"
+              disabled={false}
+              buttonId="apply-button"
+            />
+            <ButtonWidget
+              buttonText={T.translate(`${PREFIX}.exitMode`).toString()}
+              className={classes.popoverText}
+              onClick={handleClose}
+              variant="text"
+              disabled={false}
+              buttonId="exit-button"
+            />
+          </Box>
         </Box>
       </Popover>
     </>
