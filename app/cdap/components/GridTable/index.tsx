@@ -31,7 +31,7 @@ import Box from '@material-ui/core/Box';
 import { useStyles } from './styles';
 import { flatMap } from 'rxjs/operators';
 import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import { IWorkspace } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import T from 'i18n-react';
 
@@ -64,7 +64,7 @@ export default function GridTable() {
     });
     MyDataPrepApi.getWorkspace(payload)
       .pipe(
-        flatMap((res: IValues) => {
+        flatMap((res: IWorkspace) => {
           const { dataprep } = DataPrepStore.getState();
           if (dataprep.workspaceId !== workspaceId) {
             return;

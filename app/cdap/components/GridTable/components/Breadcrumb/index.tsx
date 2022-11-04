@@ -21,25 +21,38 @@ import { useStyles } from './styles';
 import React from 'react';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
+import T from 'i18n-react';
 
-export default function BreadCrumb({ datasetName }) {
+export default function BreadCrumb({ workspaceName, location }) {
+  console.log(location, 'location');
   const classes = useStyles();
+
+  const sourcePath =
+    location?.state?.from === T.translate('features.Breadcrumb.labels.wrangleHome')
+      ? T.translate('features.Breadcrumb.params.wrangeHome')
+      : `${T.translate('features.Breadcrumb.params.connectionsList')}/${location?.state?.path}`;
   return (
     <Box className={classes.breadCombContainer}>
       <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
         <Link
           className={`${classes.breadcrumbLabel} ${classes.home}`}
           to={`/ns/${getCurrentNamespace()}/home`}
+          data-testid="breadcrumb-home-text"
         >
-          Home
+          {T.translate('features.Breadcrumb.labels.wrangleHome')}
         </Link>
-        <Link
-          className={`${classes.breadcrumbLabel} ${classes.dataset}`}
-          to={`/ns/${getCurrentNamespace()}/datasources/${`select-dataset`}`}
-        >
-          Data Sources
-        </Link>
-        <Typography color="textPrimary">{datasetName}</Typography>
+        {location?.state?.from !== T.translate('features.Breadcrumb.labels.wrangleHome') && (
+          <Link
+            className={`${classes.breadcrumbLabel}`}
+            to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
+            data-testid="breadcrumb-data-sources-text"
+          >
+            {location?.state?.from}
+          </Link>
+        )}
+        <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
+          {workspaceName}
+        </Typography>
       </Breadcrumbs>
     </Box>
   );
