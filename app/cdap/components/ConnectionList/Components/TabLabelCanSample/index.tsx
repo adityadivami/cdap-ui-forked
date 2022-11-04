@@ -35,14 +35,14 @@ export default function TabLabelCanSample({
   initialConnectionId,
   toggleLoader,
   setIsErrorOnNoWorkSpace,
-  testid,
+  dataTestId,
 }: {
   label: string;
   entity: IRecords;
   initialConnectionId: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
-  testid: string;
+  dataTestId: string;
 }) {
   const classes = useStyles();
 
@@ -114,7 +114,7 @@ export default function TabLabelCanSample({
     />
   ) : refValue ? (
     <CustomTooltip title={label} arrow>
-      <Box className={classes.labelsContainerCanSample} id={testid}>
+      <Box className={classes.labelsContainerCanSample} data-testid={dataTestId}>
         <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
           {label}
         </Typography>
@@ -124,7 +124,7 @@ export default function TabLabelCanSample({
             <Typography
               variant="body2"
               className={classes.wrangleButton}
-              data-testid="tablabelcansample-typography-1"
+              data-testid="dataset-name-with-tooltip"
             >
               {T.translate('features.WranglerNewUI.Breadcrumb.labels.loadToGrid')}
             </Typography>
@@ -133,7 +133,7 @@ export default function TabLabelCanSample({
       </Box>
     </CustomTooltip>
   ) : (
-    <Box className={classes.labelsContainerCanSample} id={testid}>
+    <Box className={classes.labelsContainerCanSample} data-testid={dataTestId}>
       <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
         {label}
       </Typography>
@@ -142,7 +142,7 @@ export default function TabLabelCanSample({
         <Typography
           variant="body2"
           className={classes.wrangleButton}
-          id="tablabelcansample-typography-2"
+          data-testid="dataset-name-without-tooltip"
         >
           {T.translate('features.WranglerNewUI.Breadcrumb.labels.loadToGrid')}
         </Typography>

@@ -16,7 +16,6 @@
 
 package io.cdap.cdap.ui.stepsdesign;
 
-
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.WaitHelper;

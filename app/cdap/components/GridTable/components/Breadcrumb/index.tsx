@@ -26,12 +26,13 @@ import T from 'i18n-react';
 export default function Breadcrumb({ workspaceName, location }) {
   const classes = useStyles();
 
+  const PREFIX = 'features.WranglerNewUI.Breadcrumb';
+  const requestFromAddress = location?.state?.from;
+
   const sourcePath =
-    location?.state?.from === T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')
-      ? T.translate('features.WranglerNewUI.Breadcrumb.params.wrangleHome')
-      : `${T.translate('features.WranglerNewUI.Breadcrumb.params.connectionsList')}/${
-          location?.state?.path
-        }`;
+    requestFromAddress === T.translate(`${PREFIX}.labels.wrangleHome`)
+      ? T.translate(`${PREFIX}.params.wrangleHome`)
+      : `${T.translate(`${PREFIX}.params.connectionsList`)}/${location?.state?.path}`;
 
   return (
     <Box className={classes.breadCombContainer}>
@@ -42,19 +43,18 @@ export default function Breadcrumb({ workspaceName, location }) {
           data-testid="breadcrumb-home-text"
           id="breadcrumb-home-text"
         >
-          {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
+          {T.translate(`${PREFIX}.labels.wrangleHome`)}
         </Link>
-        {location?.state?.from !==
-          T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome') && (
+        {requestFromAddress !== T.translate(`${PREFIX}.labels.wrangleHome`) && (
           <Link
             to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
             data-testid="breadcrumb-data-sources-text"
             id="breadcrumb-data-sources-text"
           >
-            {location?.state?.from}
+            {requestFromAddress}
           </Link>
         )}
-        <Typography color="textPrimary" data-testid="breadcrumb-typography-1">
+        <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
           {workspaceName}
         </Typography>
       </Breadcrumbs>

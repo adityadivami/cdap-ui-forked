@@ -27,3 +27,4 @@ Feature: Breadcrumb - Navigate to the application
     Then Click on the another Connector type in Data Sources page
     Then Click on the Exploration card
     Then Click on the Home link on wrangle page
+    
