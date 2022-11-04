@@ -23,4 +23,3 @@ Feature: Ongoing Data Explorations
     Then Click on the Data Explorations Card
     Then Click on the Home link
     Then Check if the user is on the Home Page
-    
