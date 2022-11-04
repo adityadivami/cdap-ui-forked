@@ -17,12 +17,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import Breadcrumb from '..';
-import { createBrowserHistory as createHistory } from 'history';
-
-const history = createHistory({
-  basename: '/',
-});
+import Breadcrumb from 'components/GridTable/components/Breadcrumb/index';
+import history from 'services/history'
 
 const location = {
   state: {
