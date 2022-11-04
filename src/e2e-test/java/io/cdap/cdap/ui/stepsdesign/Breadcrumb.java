@@ -21,7 +21,6 @@ import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.cdap.ui.utils.Constants;
