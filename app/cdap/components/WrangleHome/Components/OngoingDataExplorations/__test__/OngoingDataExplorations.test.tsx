@@ -22,6 +22,11 @@ import operators from 'rxjs/operators';
 import { Route, Router, Switch } from 'react-router';
 import { switchMapCallbackMock, getWorkspaceListSubscribeMock } from '../mock/mockoldData';
 import history from 'services/history';
+import {
+  connectionListDummyResPostGresSql,
+  connectionListDummyResFile,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mock';
+import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
 
 const testObj = {
   connectionName: 'Upload',
@@ -31,6 +36,10 @@ const testObj = {
 };
 
 test('renders Ongoing Data Exploration component', async () => {
+  const dummyRes = new Map();
+  dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
+  dummyRes.set('File', connectionListDummyResFile);
+  jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
   jest.spyOn(operators as any, 'switchMap').mockImplementation((callback: Function) => {
     callback(switchMapCallbackMock);
   });
