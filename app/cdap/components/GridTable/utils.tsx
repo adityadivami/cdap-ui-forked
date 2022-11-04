@@ -55,7 +55,7 @@ export const checkFrequentlyOccuredValues = (
   gridData: IExecuteAPIResponse | undefined,
   key: string
 ) => {
-  if (gridData?.values && gridData && Array.isArray(gridData?.values)) {
+  if (gridData?.values && Array.isArray(gridData?.values)) {
     const valueOfKey = gridData?.values?.map((el) => el[key]);
     let mostFrequentItem: number = 1;
     let mostFrequentItemCount: number = 0;
@@ -64,7 +64,7 @@ export const checkFrequentlyOccuredValues = (
       name: '',
       count: 0,
     };
-    if (Array.isArray(valueOfKey) && valueOfKey.length) {
+    if (Array.isArray(valueOfKey) && valueOfKey?.length) {
       valueOfKey.map((item, index) => {
         valueOfKey.map((value, valueIndex) => {
           if (item == value) {
@@ -88,8 +88,16 @@ export const checkFrequentlyOccuredValues = (
   return { name: 'No Data Found', count: 0 };
 };
 
-export const calculateDistinctValues = (values, columnName) => {
-  const arrayOfColumn = values.map((el) => el[columnName]);
+/**
+ * @description This function takes column name , rowsDataList and calculate the distinct values in the Column .
+ * @param  {IRecords} values , this is the rowDataList .
+ * @param  {string}  , this is the column Name .
+ * @returns {distinctCount : number } Return number of distinct values
+ */
+
+export const calculateDistinctValues = (values: IRecords[], columnName: string) => {
+  const arrayOfColumn =
+    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
   const arr = [...arrayOfColumn];
   let distinctCount: number = 0;
 
@@ -102,20 +110,31 @@ export const calculateDistinctValues = (values, columnName) => {
   return distinctCount;
 };
 
-export const characterCount = (values, columnName) => {
-  const arrayOfColumn = values.map((el) => el[columnName]);
+/**
+ * @description This function takes column name , rowsDataList and calculate the minimum and maximum character Count in the Column .
+ * @param  {IRecords} values , this is the rowDataList .
+ * @param  {string}  , this is the column Name .
+ * @returns {min : number || max : number } Return minimum and maximum character Count .
+ */
+
+export const characterCount = (values: IRecords[], columnName: string) => {
+  const arrayOfColumn =
+    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
   let minCount = 0;
   let maxCount = 0;
-  const minElement = arrayOfColumn.reduce((a, b) => {
-    if (a || b) {
-      minCount = Math.min(a?.length, b?.length);
-      if (a?.length == minCount) {
-        return a;
-      } else {
-        return b;
+  const minElement =
+    Array.isArray(arrayOfColumn) &&
+    arrayOfColumn?.length &&
+    arrayOfColumn.reduce((a, b) => {
+      if (a || b) {
+        minCount = Math.min(a?.length, b?.length);
+        if (a?.length == minCount) {
+          return a;
+        } else {
+          return b;
+        }
       }
-    }
-  });
+    });
   const maxElement = arrayOfColumn.reduce((a, b) => {
     if (a || b) {
       maxCount = Math.max(a?.length, b?.length);
@@ -129,8 +148,16 @@ export const characterCount = (values, columnName) => {
   return { min: minElement?.length || 0, max: maxElement?.length || 0 };
 };
 
-export const checkAlphaNumericAndSpaces = (values, columnName) => {
-  const arrayOfColumn = values.map((el) => el[columnName]);
+/**
+ * @description This function takes column name , rowsDataList and checks for column container letter , trailing spaces , number ,leading space
+ * @param  {IRecords} values , this is the rowDataList .
+ * @param  {string}  , this is the column Name .
+ * @returns {returnValue : string } Returns a string which describe the column having letter or number or leading , trailing spaces.
+ */
+
+export const checkAlphaNumericAndSpaces = (values: IRecords[], columnName: string) => {
+  const arrayOfColumn =
+    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
   let containNumber = false;
   let containLetter = false;
   let containLeadingSpace = false;
@@ -162,24 +189,36 @@ export const checkAlphaNumericAndSpaces = (values, columnName) => {
   return returnValue;
 };
 
-const isAlphaNumeric = (string) => {
-  return /\d/.test(string);
+/* Checks whether a string is Alphabet or number*/
+const isAlphaNumeric = (str: string) => {
+  return /\d/.test(str);
 };
 
-const isLeadingSpace = (string) => {
-  return /^\s*/.test(string);
+/*Checks whether a string has leading space */
+const isLeadingSpace = (str: string) => {
+  return /^\s*/.test(str);
 };
 
-const isTrailingSpace = (string) => {
-  return /\s*$/.test(string);
+/*Checks whether a string has trailing space */
+const isTrailingSpace = (str: string) => {
+  return /\s*$/.test(str);
 };
 
-const isLetter = (string) => {
-  return /[a-z]/.test(string);
+/* Checks whether a string has letter */
+const isLetter = (str: string) => {
+  return /[a-z]/.test(str);
 };
 
-export const calculateDistributionGraphData = (values: IRecords, columnName: string) => {
-  const arrayOfColumn = values.map((el) => el[columnName]);
+/**
+ * @description This function takes column name , rowsDataList and calculate Distribution Graph Data
+ * @param  {IRecords} values , this is the rowDataList .
+ * @param  {string}  , this is the column Name .
+ * @returns  TODO:
+ */
+
+export const calculateDistributionGraphData = (values: IRecords[], columnName: string) => {
+  const arrayOfColumn =
+    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
   const map = {};
   for (let i = 0; i < arrayOfColumn.length; i++) {
     map[arrayOfColumn[i]] = (map[arrayOfColumn[i]] || 0) + 1;

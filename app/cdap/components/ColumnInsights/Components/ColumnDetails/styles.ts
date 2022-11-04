@@ -94,6 +94,7 @@ export const useStyles = makeStyles(() => {
     columnInsightsDetailsCountSection: {
       display: 'flex',
       alignItems: 'center',
+      marginBottom: 7,
     },
     dividerLineStyles: {
       width: 1,
