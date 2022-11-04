@@ -47,10 +47,10 @@ export const getUpdatedExplorationCards = (
   const { connectorsWithIcons } = dataprep;
 
   const getIconForConnector = (connectorName: string) => {
-    const matchingConnector = connectorsWithIcons.find(
+    const matchingConnector = connectorsWithIcons?.find(
       (eachConnector) => eachConnector.name === connectorName
     );
-    return matchingConnector.SVG;
+    return matchingConnector?.SVG;
   };
 
   if (
