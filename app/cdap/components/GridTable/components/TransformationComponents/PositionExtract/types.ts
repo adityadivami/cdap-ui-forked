@@ -13,13 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  maskSelection?: boolean;
-  rowNumber: number;
-  columnSelected?: string;
-  applyTransformation?: (value?: string) => void;
-  cancelTransformation?: () => void;
-  optionSelected?: string;
+interface ISelectionRange {
+  [key: string]: string;
+}
+export interface IUsingPosition {
+  anchorEl: JSX.Element;
+  setAnchorEl: React.Dispatch<React.SetStateAction<JSX.Element>>;
+  textSelectionRange: ISelectionRange;
+  columnSelected: string;
+  applyTransformation: (value: string) => void;
+  optionSelected: string;
   headers: string[];
+  open: boolean;
+  handleClose: () => void;
 }

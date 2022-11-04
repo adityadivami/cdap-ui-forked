@@ -13,13 +13,18 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  maskSelection?: boolean;
-  rowNumber: number;
-  columnSelected?: string;
-  applyTransformation?: (value?: string) => void;
-  cancelTransformation?: () => void;
-  optionSelected?: string;
-  headers: string[];
+
+import { FormControlLabel, Input } from '@material-ui/core';
+import React from 'react';
+import { IFormInputFieldComponentProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
+
+export default function({ formInputValue, classnames, inputProps }: IFormInputFieldComponentProps) {
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...inputProps} />}
+      label={''}
+    />
+  );
 }

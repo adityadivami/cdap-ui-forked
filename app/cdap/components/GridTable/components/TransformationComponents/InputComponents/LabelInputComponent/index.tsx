@@ -13,13 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  maskSelection?: boolean;
-  rowNumber: number;
-  columnSelected?: string;
-  applyTransformation?: (value?: string) => void;
-  cancelTransformation?: () => void;
-  optionSelected?: string;
-  headers: string[];
+
+import React from 'react';
+import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
+import { Typography } from '@material-ui/core';
+
+export default function({ labelText }: { labelText: string }) {
+  const classes = useStyles();
+  return <Typography className={classes.formLabelStyles}>{labelText}</Typography>;
 }

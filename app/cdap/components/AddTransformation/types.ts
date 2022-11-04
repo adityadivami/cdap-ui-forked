@@ -29,7 +29,16 @@ export interface IAddTransformationProps {
   columnData: IHeaderNamesList[];
   missingDataList: IStatistics;
   callBack: () => void;
-  applyTransformation: (directive: string) => void;
+  applyTransformation: (directive: string, column?: string) => void;
+}
+
+export interface ITransformationComponentValues {
+  radioOption: string;
+  customInput: string;
+  startValue: string;
+  endValue: string;
+  nDigit: string;
+  extractOptionSelected: string;
 }
 
 export interface IMultipleSelectedFunctionDetail {
