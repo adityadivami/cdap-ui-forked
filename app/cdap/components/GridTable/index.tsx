@@ -21,7 +21,7 @@ import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import NoRecordScreen from 'components/NoRecordScreen/index';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import { IWorkspace } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
@@ -68,7 +68,7 @@ export default function GridTable() {
     });
     MyDataPrepApi.getWorkspace(payload)
       .pipe(
-        flatMap((res: IValues) => {
+        flatMap((res: IWorkspace) => {
           const { dataprep } = DataPrepStore.getState();
           setWorkspaceName(res?.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {

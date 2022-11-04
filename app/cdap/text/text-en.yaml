@@ -3439,3 +3439,21 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+  WranglerNewUI:
+    OnGoingDataExplorations:
+      labels:
+       importedDataset: Imported Dataset
+       nullValues: Null values
+       recipeSteps: Recipe steps
+       connectorType: ConnectorType
+       icon: icon
+       connectionName: connectionName
+       workspaceName: workspaceName
+       iconWithText: iconWithText
+       text: text
+       recipeStepsKey: recipeSteps
+       dataQuality: dataQuality
+       percentageWithText: percentageWithText
+       workspaceId: workspaceId
+       count: count
+       

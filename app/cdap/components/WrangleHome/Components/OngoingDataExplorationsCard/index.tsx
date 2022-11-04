@@ -16,10 +16,11 @@
 
 import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@material-ui/core/';
-import { useStyles } from './styles';
-import CustomTooltip from '../CustomTooltip';
+import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
+import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
+import { IOngoingDataExplorationsCard } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/types';
 
-export default function OngoingDataExplorationCard({ item }) {
+export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplorationsCard) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
@@ -39,111 +40,125 @@ export default function OngoingDataExplorationCard({ item }) {
       className={classes.gridContainer}
       data-testid="wrangler-home-ongoing-data-exploration-card"
     >
-      {item.map((eachItem, index) => {
-        switch (eachItem.type) {
-          case 'iconWithText':
-            return (
-              <Grid item xs={3} className={classes.elementStyle} key={index}>
-                <Box className={classes.iconStyle}> {eachItem.icon}</Box>
-                {connectionRefValue ? (
-                  <CustomTooltip title={eachItem.label} arrow>
+      {explorationCardDetails &&
+        Array.isArray(explorationCardDetails) &&
+        explorationCardDetails?.map((eachExplorationCard, explorationCardIndex) => {
+          switch (eachExplorationCard.type) {
+            case 'icon':
+              return (
+                <Grid item xs={3} key={explorationCardIndex} className={classes.connectorIcon}>
+                  <Box>{eachExplorationCard.icon}</Box>
+                </Grid>
+              );
+            case 'iconWithText':
+              return (
+                <Grid item xs={3} className={classes.explorationCard} key={explorationCardIndex}>
+                  {connectionRefValue ? (
+                    <CustomTooltip title={eachExplorationCard.label} arrow>
+                      <Typography
+                        variant="body1"
+                        ref={connectionNameRef}
+                        className={classes.iconWithText}
+                        component="p"
+                      >
+                        {eachExplorationCard.label}
+                      </Typography>
+                    </CustomTooltip>
+                  ) : (
                     <Typography
                       variant="body1"
                       ref={connectionNameRef}
                       className={classes.iconWithText}
                     >
-                      {eachItem.label}
+                      {eachExplorationCard.label}
                     </Typography>
-                  </CustomTooltip>
-                ) : (
-                  <Typography
-                    variant="body1"
-                    ref={connectionNameRef}
-                    className={classes.iconWithText}
-                  >
-                    {eachItem.label}
+                  )}
+                </Grid>
+              );
+            case 'text':
+              return eachExplorationCard.label.includes('Recipe steps') ? (
+                <Grid item xs={3} className={classes.explorationCard} key={explorationCardIndex}>
+                  <Typography variant="body1" className={classes.textWithoutIcon} component="p">
+                    {eachExplorationCard.label}
                   </Typography>
-                )}
-              </Grid>
-            );
-          case 'text':
-            return eachItem.label.includes('Recipe steps') ? (
-              <Grid item xs={3} className={classes.elementStyle} key={index}>
-                <Typography variant="body1" className={classes.textWithoutIcon}>
-                  {' '}
-                  {eachItem.label}
-                </Typography>
-              </Grid>
-            ) : (
-              <Grid item xs={3} className={classes.elementStyle} key={index}>
-                {datasetNameRefValue ? (
-                  <CustomTooltip title={eachItem.label} arrow>
+                </Grid>
+              ) : (
+                <Grid
+                  item
+                  xs={3}
+                  className={classes.explorationCard}
+                  key={explorationCardIndex}
+                  data-testid={`home-ongoing-explorations-${eachExplorationCard.type}-${cardIndex}`}
+                >
+                  {datasetNameRefValue ? (
+                    <CustomTooltip title={eachExplorationCard.label} arrow>
+                      <Typography
+                        variant="body1"
+                        ref={datasetNameRef}
+                        className={classes.textWithoutIcon}
+                        component="p"
+                      >
+                        {eachExplorationCard.label}
+                      </Typography>
+                    </CustomTooltip>
+                  ) : (
                     <Typography
                       variant="body1"
                       ref={datasetNameRef}
                       className={classes.textWithoutIcon}
                     >
-                      {' '}
-                      {eachItem.label}
+                      {eachExplorationCard.label}
                     </Typography>
-                  </CustomTooltip>
-                ) : (
-                  <Typography
-                    variant="body1"
-                    ref={datasetNameRef}
-                    className={classes.textWithoutIcon}
-                  >
-                    {' '}
-                    {eachItem.label}
-                  </Typography>
-                )}
-              </Grid>
-            );
-          case 'percentageWithText': {
-            const percent = parseInt(eachItem.label, 10);
-            return percent && !isNaN(percent) ? (
-              <Grid
-                item
-                xs={3}
-                className={classes.elementStyle}
-                key={index}
-                data-testid="ongoing-data-exploration-card-percentage-nan"
-              >
-                <Box className={classes.percent}>
-                  <Typography
-                    variant="body2"
-                    className={
-                      percent < 100 ? classes.percentageStyleRed : classes.percentageStyleGreen
-                    }
-                    data-testid="ongoing-data-card-percentage"
-                  >
-                    {percent}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    className={
-                      percent < 100 ? classes.percentageSymbolRed : classes.percentageSymbolGreen
-                    }
-                    data-testid="ongoing-data-percentage-symbol"
-                  >
-                    {eachItem.percentageSymbol}
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body1" className={classes.dataQualityText}>
-                    {eachItem.subText}
-                  </Typography>
-                </Box>
-              </Grid>
-            ) : (
-              <Grid item xs={3}></Grid>
-            );
-          }
+                  )}
+                </Grid>
+              );
+            case 'percentageWithText': {
+              const percent = Number(eachExplorationCard.label);
+              return percent && !isNaN(percent) ? (
+                <Grid
+                  item
+                  xs={3}
+                  className={classes.explorationCard}
+                  key={explorationCardIndex}
+                  data-testid="ongoing-data-exploration-card-percentage-nan"
+                >
+                  <Box className={classes.percent}>
+                    <Typography
+                      variant="body2"
+                      className={
+                        percent < 100 ? classes.percentageStyleRed : classes.percentageStyleGreen
+                      }
+                      data-testid="ongoing-data-card-percentage"
+                      component="p"
+                    >
+                      {Math.round(percent)}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      className={
+                        percent < 100 ? classes.percentageSymbolRed : classes.percentageSymbolGreen
+                      }
+                      data-testid="ongoing-data-percentage-symbol"
+                      component="p"
+                    >
+                      {eachExplorationCard.percentageSymbol}
+                    </Typography>
+                  </Box>
+                  <Box className={classes.dataQualityTextContainer}>
+                    <Typography variant="body1" className={classes.dataQualityText} component="p">
+                      {eachExplorationCard.subText}
+                    </Typography>
+                  </Box>
+                </Grid>
+              ) : (
+                <Grid item xs={3}></Grid>
+              );
+            }
 
-          default:
-            break;
-        }
-      })}
+            default:
+              break;
+          }
+        })}
     </Grid>
   );
 }

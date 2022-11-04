@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { ImportDatasetIcon } from '../../WrangleCard/iconStore/ImportDatasetIcon';
+import { ImportDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDatasetIcon';
 
 export const mockOldData = [
   {
@@ -23,6 +23,8 @@ export const mockOldData = [
     recipeSteps: 0,
     dataQuality: 63.32000000000001,
     workspaceId: '0cbc0f7b-c554-4bbb-ad3a-74fe147dfe3b',
+    connectorType: '',
+    count: 1,
   },
 ];
 
@@ -38,13 +40,13 @@ export const expectedResult = [
       type: 'text',
     },
     {
-      label: '0 Recipe steps',
+      label: '0 features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps',
       type: 'text',
     },
     {
-      label: 63,
+      label: 63.32000000000001,
       percentageSymbol: '%',
-      subText: 'Data Quality',
+      subText: 'features.WranglerNewUI.OnGoingDataExplorations.labels.nullValues',
       type: 'percentageWithText',
     },
     {

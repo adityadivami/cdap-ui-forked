@@ -14,17 +14,20 @@
  * the License.
  */
 
+import { Avatar } from '@material-ui/core';
+import styled from 'styled-components';
+import ImageOutlined from '@material-ui/icons/ImageOutlined';
+import { IWidgetSVGProps } from 'components/WidgetSVG/types';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import OngoingDataExplorationCard from '../index';
-import { mockItems, mockItemsWithPercentage, mockItemsPercentageData } from '../mock/mock';
 
-describe('Test Ongoing Data Explrations Component', () => {
-  it('Should render OngoingDataExplorationCard component', () => {
-    render(
-      <OngoingDataExplorationCard explorationCardDetails={mockItemsWithPercentage} cardIndex={1} />
-    );
-    const ele = screen.getByTestId(/wrangler-home-ongoing-data-exploration-card/i);
-    expect(ele).toBeInTheDocument();
-  });
-});
+const StyledImageOutlined = styled(ImageOutlined)`
+  font-size: 40px;
+`;
+
+export default function({ imageSource, label }: IWidgetSVGProps) {
+  return imageSource ? (
+    <Avatar src={imageSource} variant="square" data-testid={`widget-api-image-${label}`} />
+  ) : (
+    <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
+  );
+}

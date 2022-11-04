@@ -14,44 +14,94 @@
  * the License.
  */
 
-import { ImportDatasetIcon } from '../WrangleCard/iconStore/ImportDatasetIcon';
-import { IMassagedObject } from './types';
+import DataPrepStore from 'components/DataPrep/store';
+import {
+  IExistingExplorationCard,
+  IOnGoingDataExplorationsData,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import {
+  CONNECTION_NAME,
+  CONNECTOR_TYPE,
+  COUNT,
+  DATA_QUALITY,
+  ICON,
+  ICON_WITH_TEXT,
+  PERCENTAGE_WITH_TEXT,
+  RECIPE_STEPS_KEY,
+  TEXT,
+  WORKPSACE_NAME,
+  WORKSPACE_ID,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
+import T from 'i18n-react';
 
-export const generateDataForExplorationCard = (oldData) => {
+const PREFIX = 'features.WranglerNewUI.OnGoingDataExplorations.labels';
+
+export const getUpdatedExplorationCards = (
+  existingExplorationCards: IExistingExplorationCard[]
+) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
-  const massagedArray = [];
 
-  if (oldData && Array.isArray(oldData) && oldData.length) {
-    oldData.forEach((eachItem) => {
-      const childArray = [];
+  const updatedExplorationCards = [];
 
-      Object.keys(eachItem).map((keys) => {
-        const obj = {} as IMassagedObject;
+  const { dataprep } = DataPrepStore.getState();
+  const { connectorsWithIcons } = dataprep;
 
-        if (keys === 'connectionName') {
-          obj.icon = ImportDatasetIcon;
-          obj.label = eachItem[keys];
-          obj.type = 'iconWithText';
-        } else if (keys === 'workspaceName') {
-          obj.label = eachItem[keys];
-          obj.type = 'text';
-        } else if (keys === 'recipeSteps') {
-          obj.label = `${eachItem[keys]} Recipe steps`;
-          obj.type = 'text';
-        } else if (keys === 'dataQuality') {
-          obj.label = parseInt(eachItem[keys], 2);
-          obj.percentageSymbol = '%';
-          obj.subText = 'Data Quality';
-          obj.type = 'percentageWithText';
-        } else if (keys === 'workspaceId') {
-          obj.workspaceId = eachItem[keys];
+  const getIconForConnector = (connectorName: string) => {
+    const matchingConnector = connectorsWithIcons?.find(
+      (eachConnector) => eachConnector.name === connectorName
+    );
+    return matchingConnector?.SVG;
+  };
+
+  if (
+    existingExplorationCards &&
+    Array.isArray(existingExplorationCards) &&
+    existingExplorationCards.length
+  ) {
+    existingExplorationCards.forEach((eachExplorationCard) => {
+      const eachExplorationCardData = [];
+      Object.keys(eachExplorationCard).map((keys) => {
+        const onGoingDatExplorationData = {} as IOnGoingDataExplorationsData;
+        switch (keys) {
+          case CONNECTOR_TYPE:
+            onGoingDatExplorationData.icon = getIconForConnector(eachExplorationCard[keys]);
+            onGoingDatExplorationData.label = eachExplorationCard[keys];
+            onGoingDatExplorationData.type = ICON;
+            break;
+          case CONNECTION_NAME:
+            onGoingDatExplorationData.label = eachExplorationCard[keys];
+            onGoingDatExplorationData.type = ICON_WITH_TEXT;
+            break;
+          case WORKPSACE_NAME:
+            onGoingDatExplorationData.label = eachExplorationCard[keys];
+            onGoingDatExplorationData.type = TEXT;
+            break;
+          case RECIPE_STEPS_KEY:
+            onGoingDatExplorationData.label = [
+              eachExplorationCard[keys],
+              T.translate(`${PREFIX}.recipeSteps`),
+            ].join(' ');
+            onGoingDatExplorationData.type = TEXT;
+            break;
+          case DATA_QUALITY:
+            onGoingDatExplorationData.label = Number(eachExplorationCard[keys]);
+            onGoingDatExplorationData.percentageSymbol = '%';
+            onGoingDatExplorationData.subText = T.translate(`${PREFIX}.nullValues`);
+            onGoingDatExplorationData.type = PERCENTAGE_WITH_TEXT;
+            break;
+          case WORKSPACE_ID:
+            onGoingDatExplorationData.workspaceId = eachExplorationCard[keys];
+            break;
+          case COUNT:
+            onGoingDatExplorationData.count = eachExplorationCard[keys];
+            break;
         }
-        childArray.push(obj);
+        eachExplorationCardData.push(onGoingDatExplorationData);
       });
 
-      massagedArray.push(childArray);
+      updatedExplorationCards.push(eachExplorationCardData);
     });
   }
 
-  return massagedArray;
+  return updatedExplorationCards;
 };
