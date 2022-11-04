@@ -34,24 +34,35 @@ public class OngoingDataExplorations {
     }
     @Then("Click on the Data Explorations Card")
     public void clickOnTheDataExplorationsCard(){
-        WaitHelper.waitForPageToLoad();
-        WebElement ele = Helper.locateElementByTestId("home-ongoing-explorations-text-0");
-        String homeText = ele.getText();
-        System.out.println(homeText);
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
-        String url=SeleniumDriver.getDriver().getCurrentUrl();
-        Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-        WebElement test = Helper.locateElementByTestId("breadcrumb-workspace-name");
-        String ActualText= test.getText();
-        System.out.println(ActualText);
-        Assert.assertEquals(ActualText, homeText );
-        System.out.println("The file name is displayed correctly on grid page");
+        try {
+            WaitHelper.waitForPageToLoad();
+            WebElement ele = Helper.locateElementByTestId("home-ongoing-explorations-text-0");
+            String homeText = ele.getText();
+            System.out.println(homeText);
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
+            String url = SeleniumDriver.getDriver().getCurrentUrl();
+            Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
+            WebElement test = Helper.locateElementByTestId("breadcrumb-workspace-name");
+            String ActualText = test.getText();
+            System.out.println(ActualText);
+            Assert.assertEquals(ActualText, homeText);
+            System.out.println("The file name is displayed correctly on grid page");
+        }
+        catch(Exception e)
+        {
+            System.err.println("error: " +e);
+        }
     }
     @Then("Click on the Home link")
     public void clickOnTheHomeLink(){
         WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-text"));
-        System.out.println("the home link is clicked");
+        try {
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-text"));
+            System.out.println("the home link is clicked");
+        }catch(Exception e)
+        {
+            System.err.println("error: " +e);
+        }
     }
     @Then("Check if the user is on the Home Page")
     public void checkIfTheUserIsOnTheHomePage(){
