@@ -25,5 +25,6 @@ describe('Test the Utility Functions', () => {
 
   it('Should have returned the expected result for the provided mock data', () => {
     const result = getUpdatedExplorationCards(mockOldData);
+    expect(result).toEqual([[{"label": "postgres1", "type": "iconWithText"}, {"label": "sql_implementation_info", "type": "text"}, {"label": "0 features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps", "type": "text"}, {"label": 63.32000000000001, "percentageSymbol": "%", "subText": "features.WranglerNewUI.OnGoingDataExplorations.labels.nullValues", "type": "percentageWithText"}, {"workspaceId": "0cbc0f7b-c554-4bbb-ad3a-74fe147dfe3b"}, {"icon": undefined, "label": "", "type": "icon"}, {"count": 1}]]);
   });
 });
