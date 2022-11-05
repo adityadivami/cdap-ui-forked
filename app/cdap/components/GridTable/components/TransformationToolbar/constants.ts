@@ -16,3 +16,5 @@
 
 export const TOOLBAR_ICONS_LABEL_ALL_PREFIX =
   'features.WranglerNewUI.GridPage.toolbarIcons.labels.all';
+export const TOOLBAR_ICONS_LABEL_PREFIX =
+  'features.WranglerNewUI.GridPage.toolbarIcons.labels';
