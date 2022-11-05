@@ -17,6 +17,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
+import Breadcrumb from '..';
 import { createBrowserHistory as createHistory } from 'history';
 import BreadCrumb from '..';
 
@@ -64,8 +65,8 @@ describe('Test Breadcrumb Component', () => {
       </Router>
     );
   });
-});
 
-// it('Should have the Data Sources text in the Breadcrumb', () => {
-//   expect(screen.getByTestId('breadcrumb-data-sources-text')).toHaveTextContent('Data Sources');
-// });
+  // it('Should have the Data Sources text in the Breadcrumb', () => {
+  //   expect(screen.getByTestId('breadcrumb-data-sources-text')).toHaveTextContent('Data Sources');
+  // });
+});
