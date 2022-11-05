@@ -14,10 +14,11 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useStyles } from 'components/FooterPanel/Components/DirectivesTab/styles';
 import T from 'i18n-react';
 import React from 'react';
+import TypographyLabel from '../common/TypographyLabel';
 
 const PREFIX = 'features.FooterPanel.labels';
 
@@ -26,13 +27,9 @@ export default function() {
 
   return (
     <Box className={classes.directivesContainer}>
-      <Typography
-        data-testid="footerpanel-labels-directives"
-        id="footerpanel-labels-directives"
-        component="span"
-      >
-        {`${T.translate(`${PREFIX}.directives`)}`}
-      </Typography>
+      <TypographyLabel classname={'simpleLabel'}>{`${T.translate(
+        `${PREFIX}.directives`
+      )}`}</TypographyLabel>
     </Box>
   );
 }

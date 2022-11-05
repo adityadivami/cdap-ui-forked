@@ -14,10 +14,11 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useStyles } from 'components/FooterPanel/Components/TableMetaInfoTab/styles';
 import T from 'i18n-react';
 import React from 'react';
+import TypographyLabel from '../common/TypographyLabel';
 
 const PREFIX = 'features.FooterPanel.labels';
 
@@ -26,18 +27,13 @@ export default function({ dataCounts }) {
 
   return (
     <Box className={classes.dataWrapper}>
-      <Typography
-        className={classes.data}
-        id="footerpanel-labels-title"
-        data-testid="footerpanel-labels-title"
-        component="span"
-      >
+      <TypographyLabel classname={'simpleLabel'}>
         {`${T.translate(`${PREFIX}.currentData`)} - ${dataCounts.rowCount} ${T.translate(
           `${PREFIX}.rows`
         )} ${T.translate(`${PREFIX}.and`)} ${dataCounts.columnCount} ${T.translate(
           `${PREFIX}.columns`
         )}`}
-      </Typography>
+      </TypographyLabel>
     </Box>
   );
 }

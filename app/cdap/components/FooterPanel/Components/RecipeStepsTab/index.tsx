@@ -14,10 +14,11 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useStyles } from 'components/FooterPanel/Components/RecipeStepsTab/styles';
 import T from 'i18n-react';
 import React from 'react';
+import TypographyLabel from '../common/TypographyLabel';
 
 const PREFIX = 'features.FooterPanel.labels';
 
@@ -26,21 +27,10 @@ export default function({ recipeStepsCount }) {
 
   return (
     <Box className={classes.recipeContainer}>
-      <Typography
-        data-testid="footerpanel-labels-recipesteps"
-        id="footerpanel-labels-recipesteps"
-        component="span"
-      >
-        {`${T.translate(`${PREFIX}.recipeSteps`)}`}
-      </Typography>
-      <Typography
-        className={classes.recipeStepsCount}
-        id="footerpanel-labels-recipeStepsCount"
-        data-testid="footerpanel-labels-recipeStepsCount"
-        component="span"
-      >
-        {recipeStepsCount}
-      </Typography>
+      <TypographyLabel classname={'simpleLabel'}>{`${T.translate(
+        `${PREFIX}.recipeSteps`
+      )}`}</TypographyLabel>
+      <TypographyLabel classname={'outlinedLabel'}>{recipeStepsCount}</TypographyLabel>
     </Box>
   );
 }

@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   simpleLabel: {
@@ -23,17 +24,11 @@ export const useStyles = makeStyles({
     marginTop: 2,
   },
 
-  zoomContainer: {
-    textAlign: 'center',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '9.5px 32px',
-    gap: 8,
-    width: '10%',
-    height: 40,
-    background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
-    borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
+  outlinedLabel: {
+    backgroundColor: grey[600],
+    height: 21,
+    width: 20,
+    color: '#FFFFFF',
+    borderRadius: 4,
   },
 });
