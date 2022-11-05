@@ -29,7 +29,6 @@ export default function({
   title,
   anchorElement,
   setAnchorElement,
-  open,
   handleMenuOpenClose,
 }: INestedMenuProps) {
   const [menuComponentOptions, setMenuComponentOptions] = useState<IMenuItem[][]>([]);

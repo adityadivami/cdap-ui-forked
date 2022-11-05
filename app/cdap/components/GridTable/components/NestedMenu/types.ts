@@ -22,6 +22,6 @@ export interface INestedMenuProps {
   title: string;
   anchorElement: HTMLElement[];
   setAnchorElement: React.Dispatch<React.SetStateAction<HTMLElement[]>>;
-  open: boolean;
+  open?: boolean;
   handleMenuOpenClose?: (title?: string) => void;
 }

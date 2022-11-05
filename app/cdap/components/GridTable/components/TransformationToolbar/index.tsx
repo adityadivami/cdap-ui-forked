@@ -70,7 +70,6 @@ export default function({
                           setAnchorElement([clickEvent.currentTarget]);
                         }}
                       >
-                        {' '}
                         {eachOption.icon}
                       </IconButton>
                     </Tooltip>
@@ -81,7 +80,6 @@ export default function({
                       title={eachOption.title}
                       setAnchorElement={setAnchorElement}
                       anchorElement={anchorElement}
-                      open={Boolean(selectedMenuOptions.length)}
                       handleMenuOpenClose={toggleMenu}
                     />
                     {showName && (
