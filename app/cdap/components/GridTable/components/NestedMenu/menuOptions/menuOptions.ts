@@ -15,10 +15,8 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-import {
-  TOOLBAR_ICONS_LABEL_PREFIX,
-  TOOLBAR_ICONS_LABEL_ALL_PREFIX,
-} from 'components/GridTable/components/NestedMenu/menuOptions/constants';
+import { TOOLBAR_ICONS_LABEL_PREFIX } from 'components/GridTable/components/NestedMenu/menuOptions/constants';
+import { TOOLBAR_ICONS_LABEL_ALL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 import T from 'i18n-react';
 
 export const MENU_OPTIONS = [

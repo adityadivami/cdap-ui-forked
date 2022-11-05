@@ -41,7 +41,7 @@ export default function({
   ) => {
     event.preventDefault();
     event.stopPropagation();
-    if (menuItem?.options?.length > 0) {
+    if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
       setAnchorElement((prev) => [...prev, event.currentTarget]);
       setMenuComponentOptions((prev) =>
         prev.length ? [...prev, menuItem?.options] : [menuItem?.options]

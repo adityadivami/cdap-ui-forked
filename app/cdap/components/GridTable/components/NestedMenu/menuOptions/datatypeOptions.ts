@@ -13,11 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import T from 'i18n-react';
-import {
-  DATA_TYPE_LABEL_PREFIX,
-  TOOLBAR_ICONS_LABEL_ALL_PREFIX,
-} from 'components/GridTable/components/NestedMenu/menuOptions/constants';
+import { DATA_TYPE_LABEL_PREFIX } from 'components/GridTable/components/NestedMenu/menuOptions/constants';
+import { TOOLBAR_ICONS_LABEL_ALL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 
 export const DATATYPE_OPTIONS = [
   {

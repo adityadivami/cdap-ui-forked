@@ -14,7 +14,5 @@
  * the License.
  */
 
-export const DATA_TYPE_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels.datatype';
-export const TOOLBAR_ICONS_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels';
+export const TOOLBAR_ICONS_LABEL_ALL_PREFIX =
+  'features.WranglerNewUI.GridPage.toolbarIcons.labels.all';
