@@ -15,9 +15,9 @@
  */
 
 import { Box, Typography } from '@material-ui/core';
-import React from 'react';
-import T from 'i18n-react';
 import { useStyles } from 'components/FooterPanel/Components/RecipeStepsTab/styles';
+import T from 'i18n-react';
+import React from 'react';
 
 const PREFIX = 'features.FooterPanel.labels';
 
