@@ -27,7 +27,7 @@ export default function({ dataCounts }) {
 
   return (
     <Box className={classes.dataWrapper}>
-      <TypographyLabel classname={'simpleLabel'}>
+      <TypographyLabel type={'simpleLabel'}>
         {`${T.translate(`${PREFIX}.currentData`)} - ${dataCounts.rowCount} ${T.translate(
           `${PREFIX}.rows`
         )} ${T.translate(`${PREFIX}.and`)} ${dataCounts.columnCount} ${T.translate(

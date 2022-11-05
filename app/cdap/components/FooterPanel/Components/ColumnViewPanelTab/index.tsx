@@ -23,16 +23,14 @@ import React from 'react';
 
 const PREFIX = 'features.FooterPanel.labels';
 
-export default function({ columnViewPanelOpened, setOpenColumnViewHandler }) {
+export default function({ setOpenColumnViewHandler }) {
   const classes = useStyles();
 
   return (
     <Box>
       <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
         <Box
-          className={`${classes.imgContainer} ${
-            columnViewPanelOpened ? classes.showDepth : classes.showNormalView
-          }`}
+          className={`${classes.imgContainer}`}
           data-testid="footer-panel-column-icon-container"
           id="footer-panel-column-icon-container"
           onClick={setOpenColumnViewHandler}

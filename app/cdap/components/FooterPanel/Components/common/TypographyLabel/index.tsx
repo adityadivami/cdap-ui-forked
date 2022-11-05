@@ -1,18 +1,39 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from './styles';
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 
-export default function({ children, classname }) {
-  const classes = useStyles();
+const SimpleLabel = styled(Typography)`
+  &&& {
+    margin-left: 2px;
+    margin-right: 5px;
+    margin-top: 2px;
+  }
+`;
 
+const OutlinedLabel = styled(Typography)`
+  &&& {
+    background-color: ${grey[600]};
+    height: 21px;
+    width: 20px;
+    color: #ffffff;
+    border-radius: 4px;
+  }
+`;
+
+export default function({ children, type }) {
   return (
-    <Typography
-      className={classes[classname]}
-      id="footerpanel-labels-zoompercent"
-      data-testid="footerpanel-labels-zoompercent"
-      component="span"
-    >
-      {children}
-    </Typography>
+    <>
+      {type === 'simpleLabel' && (
+        <SimpleLabel data-testid="footerpanel-simple-label" component="span">
+          {children}
+        </SimpleLabel>
+      )}
+      {type === 'outlinedLabel' && (
+        <OutlinedLabel data-testid="footerpanel-outlined-label" component="span">
+          {children}
+        </OutlinedLabel>
+      )}
+    </>
   );
 }

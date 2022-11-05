@@ -27,7 +27,7 @@ export default function() {
 
   return (
     <Box className={classes.directivesContainer}>
-      <TypographyLabel classname={'simpleLabel'}>{`${T.translate(
+      <TypographyLabel type={'simpleLabel'}>{`${T.translate(
         `${PREFIX}.directives`
       )}`}</TypographyLabel>
     </Box>

@@ -14,21 +14,7 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
-
-export const useStyles = makeStyles({
-  simpleLabel: {
-    marginLeft: 2,
-    marginRight: 5,
-    marginTop: 2,
-  },
-
-  outlinedLabel: {
-    backgroundColor: grey[600],
-    height: 21,
-    width: 20,
-    color: '#FFFFFF',
-    borderRadius: 4,
-  },
-});
+export interface ITypographyLabelProps {
+  children: JSX.Element;
+  type: 'simpleLabel' | 'outlinedLabel';
+}

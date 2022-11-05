@@ -29,11 +29,4 @@ export const useStyles = makeStyles({
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
     display: 'flex',
   },
-  recipeStepsCount: {
-    backgroundColor: grey[600],
-    height: 21,
-    width: 20,
-    color: '#FFFFFF',
-    borderRadius: 4,
-  },
 });

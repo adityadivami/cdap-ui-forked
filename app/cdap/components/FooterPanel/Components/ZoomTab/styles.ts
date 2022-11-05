@@ -17,12 +17,6 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles({
-  simpleLabel: {
-    marginLeft: 2,
-    marginRight: 5,
-    marginTop: 2,
-  },
-
   zoomContainer: {
     textAlign: 'center',
     display: 'flex',

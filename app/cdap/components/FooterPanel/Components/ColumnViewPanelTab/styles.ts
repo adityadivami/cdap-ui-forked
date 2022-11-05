@@ -33,12 +33,6 @@ export const useStyles = makeStyles({
     '&:hover': {
       cursor: 'pointer',
     },
-  },
-  showDepth: {
-    backgroundColor: '#F3F6F9',
-    boxShadow: 'inset 0px 2px 4px #00000033',
-  },
-  showNormalView: {
     background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
     borderRight: '1px solid #3994ff66',
   },

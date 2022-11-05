@@ -27,10 +27,10 @@ export default function({ recipeStepsCount }) {
 
   return (
     <Box className={classes.recipeContainer}>
-      <TypographyLabel classname={'simpleLabel'}>{`${T.translate(
+      <TypographyLabel type={'simpleLabel'}>{`${T.translate(
         `${PREFIX}.recipeSteps`
       )}`}</TypographyLabel>
-      <TypographyLabel classname={'outlinedLabel'}>{recipeStepsCount}</TypographyLabel>
+      <TypographyLabel type={'outlinedLabel'}>{recipeStepsCount}</TypographyLabel>
     </Box>
   );
 }
