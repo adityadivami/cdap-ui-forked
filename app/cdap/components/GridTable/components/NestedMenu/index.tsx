@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IconButton, Menu, Tooltip } from '@material-ui/core';
+import { Menu } from '@material-ui/core';
 import React, { useState } from 'react';
 import MenuComponent from 'components/GridTable/components/MenuComponent';
 import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
@@ -22,18 +22,17 @@ import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/typ
 import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
 import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
 
-const NestedMenu = ({
+export default function({
   menuOptions,
   submitMenuOption,
   columnType,
   title,
-  anchorEl,
-  setAnchorEl,
+  anchorElement,
+  setAnchorElement,
   open,
   handleMenuOpenClose,
-  newIndex,
-}: INestedMenuProps) => {
-  const [menuComponentOptions, setMenuComponentOptions] = useState([]);
+}: INestedMenuProps) {
+  const [menuComponentOptions, setMenuComponentOptions] = useState<IMenuItem[][]>([]);
   const classes = useNestedMenuStyles();
 
   const handleMenuClick = (
@@ -43,61 +42,59 @@ const NestedMenu = ({
     event.preventDefault();
     event.stopPropagation();
     if (menuItem?.options?.length > 0) {
-      setAnchorEl((prev) => [...prev, event.currentTarget]);
+      setAnchorElement((prev) => [...prev, event.currentTarget]);
       setMenuComponentOptions((prev) =>
         prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
       );
     } else {
       submitMenuOption(menuItem.value, menuItem.supported_dataType);
-      setAnchorEl(null);
+      setAnchorElement(null);
       handleMenuOpenClose(title);
     }
   };
-  console.log('open 1', open);
   return (
     <>
       <Menu
         id="parent-menu"
         keepMounted
-        anchorEl={anchorEl?.length ? anchorEl[0] : null}
-        open={anchorEl?.length ? true : false}
+        anchorEl={anchorElement?.length ? anchorElement[0] : null}
+        open={anchorElement?.length ? true : false}
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
         onClose={() => {
-          setAnchorEl(null);
+          setAnchorElement(null);
           handleMenuOpenClose(title);
         }}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
+        onClick={(clickEvent) => {
+          clickEvent.preventDefault();
+          clickEvent.stopPropagation();
         }}
         className={classes.root}
       >
-        {menuOptions?.map((eachOption, index) => {
+        {menuOptions?.map((eachOption, optionsIndex) => {
           return (
             <MenuItemComponent
               item={eachOption}
               columnType={columnType.toLowerCase()}
-              index={index}
+              index={optionsIndex}
               onMenuClick={handleMenuClick}
             />
           );
         })}
         {menuComponentOptions?.length > 0 &&
-          menuComponentOptions.map((options, index) => {
-            console.log('anchorEl', anchorEl);
+          menuComponentOptions.map((eachOption, optionsIndex) => {
             return (
               <MenuComponent
-                anchorEl={anchorEl?.length > 1 ? anchorEl[index + 1] : null}
+                anchorElement={anchorElement?.length > 1 ? anchorElement[optionsIndex + 1] : null}
                 columnType={columnType.toLowerCase()}
-                menuOptions={options}
-                setAnchorEl={setAnchorEl}
+                menuOptions={eachOption}
+                setAnchorElement={setAnchorElement}
                 setMenuComponentOptions={setMenuComponentOptions}
-                submitOption={(e, item) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  handleMenuClick(e, item);
+                submitOption={(onClickEvent, clickedItem) => {
+                  onClickEvent.preventDefault();
+                  onClickEvent.stopPropagation();
+                  handleMenuClick(onClickEvent, clickedItem);
                 }}
               />
             );
@@ -105,6 +102,4 @@ const NestedMenu = ({
       </Menu>
     </>
   );
-};
-
-export default NestedMenu;
+}

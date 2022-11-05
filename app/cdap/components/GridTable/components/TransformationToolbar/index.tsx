@@ -37,12 +37,12 @@ export default function({
 }: ITransformationToolBarProps) {
   const classes = useStyles();
   const [showName, setShowName] = useState<boolean>(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement[]>(null);
+  const [anchorElement, setAnchorElement] = useState<HTMLElement[]>(null);
   const [selectedMenuOptions, setSelectedMenuOptions] = useState<IMenuItem[]>([]);
 
   const toggleMenu = () => {
     setSelectedMenuOptions([]);
-    setAnchorEl(null);
+    setAnchorElement(null);
   };
 
   return (
@@ -63,11 +63,11 @@ export default function({
                       arrow
                     >
                       <IconButton
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
+                        onClick={(clickEvent) => {
+                          clickEvent.preventDefault();
+                          clickEvent.stopPropagation();
                           setSelectedMenuOptions(eachOption.options);
-                          setAnchorEl([e.currentTarget]);
+                          setAnchorElement([clickEvent.currentTarget]);
                         }}
                       >
                         {' '}
@@ -79,8 +79,8 @@ export default function({
                       columnType={columnType}
                       submitMenuOption={submitMenuOption}
                       title={eachOption.title}
-                      setAnchorEl={setAnchorEl}
-                      anchorEl={anchorEl}
+                      setAnchorElement={setAnchorElement}
+                      anchorElement={anchorElement}
                       open={Boolean(selectedMenuOptions.length)}
                       handleMenuOpenClose={toggleMenu}
                     />

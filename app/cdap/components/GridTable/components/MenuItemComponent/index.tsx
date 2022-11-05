@@ -45,7 +45,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
             : false
         }
         title={item.value}
-        onClick={(e) => onMenuClick(e, item)}
+        onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
         data-testid="menu-item-parent"
       >
         <Typography component="div">{item.label} </Typography>
