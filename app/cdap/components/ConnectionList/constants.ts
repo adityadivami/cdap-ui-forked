@@ -14,9 +14,4 @@
  * the License.
  */
 
-export interface IFilteredData {
-  data: any[];
-  showTabs: boolean;
-  selectedTab: any;
-  isSearching: boolean;
-}
+export const PREFIX = 'features.WranglerNewUI';

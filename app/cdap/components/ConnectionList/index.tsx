@@ -18,11 +18,17 @@ import { Box, IconButton, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import SubHeader from 'components/ConnectionList/Components/SubHeader';
+import { PREFIX } from 'components/ConnectionList/constants';
 import { InfoGraph } from 'components/ConnectionList/IconsStore/InfoGraph';
-import { IFilterData } from 'components/ConnectionList/types';
+import { useStyles } from 'components/ConnectionList/styles';
+import { IFilteredData } from 'components/ConnectionList/types';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { IRecords } from 'components/GridTable/types';
+import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import ErrorSnackbar from 'components/SnackbarComponent';
 import { getWidgetData } from 'components/WrangleHome/Components/WrangleCard/services/getWidgetData';
@@ -30,11 +36,6 @@ import T from 'i18n-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import NoConnectionsScreen from '../NoRecordScreen';
-import ConnectionsTabs from './Components/ConnectionTabs';
-import CustomTooltip from './Components/CustomTooltip';
-import SubHeader from './Components/SubHeader';
-import { useStyles } from './styles';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -61,7 +62,7 @@ export default function ConnectionList() {
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
-  const [tabSize, setTabSize] = useState<number>(0);
+  const [tabsLength, setTabsLength] = useState<number>(0);
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
   };
@@ -71,10 +72,10 @@ export default function ConnectionList() {
       data: [],
       showTabs: true,
       selectedTab: null,
-      isSearching: false,
+      toggleSearch: false,
     },
   ]);
-  const [filteredData, setFilteredData] = useState<IFilterData>(cloneDeep(dataForTabs));
+  const [filteredData, setFilteredData] = useState<IFilteredData>(cloneDeep(dataForTabs));
 
   const getConnectionsTabData = async () => {
     let connectorTypes = [];
@@ -82,7 +83,7 @@ export default function ConnectionList() {
     const connectorTypesWithIcons = (data) => {
       connectorTypesWithSVG = data?.connectorTypes;
     };
-    // Fetching the all available connectors list with icons
+    // Fetching all the available connectors list with icons
     await getWidgetData(connectorTypesWithIcons);
     connectorTypes = connectorTypesWithSVG;
     let allConnectionsTotalLength = 0;
@@ -125,7 +126,7 @@ export default function ConnectionList() {
         data: [],
         showTabs: false,
         selectedTab: '',
-        isSearching: false,
+        toggleSearch: false,
       });
       if (res.entities) {
         tempData[index + 1][`data`] = res.entities;
@@ -134,7 +135,7 @@ export default function ConnectionList() {
       }
       tempData[index + 1][`showTabs`] = true;
       tempData[index + 1][`selectedTab`] = null;
-      tempData[index + 1][`isSearching`] = false;
+      tempData[index + 1][`toggleSearch`] = false;
       return tempData.slice(0, index + 2);
     });
   };
@@ -172,7 +173,7 @@ export default function ConnectionList() {
           data: eachNewData.data,
           showTabs: eachNewData.showTabs,
           selectedTab: eachNewData.selectedTab,
-          isSearching: false,
+          toggleSearch: false,
         };
       });
       if (index === 0) {
@@ -209,18 +210,16 @@ export default function ConnectionList() {
   const searchHandler = (index: number) => {
     setDataForTabs((prev) => {
       let tempData = [...prev];
-      tempData = tempData.map((eachTempData) => {
-        return {
-          ...eachTempData,
-          isSearching: false,
-        };
-      });
-      tempData[index].isSearching = true;
-      tempData.forEach((eachTempData, innerIndex) => {
-        if (innerIndex === index) {
-          eachTempData.isSearching = true;
+      tempData = tempData.map((eachTempData) => ({
+        ...eachTempData,
+        toggleSearch: false,
+      }));
+      tempData[index].toggleSearch = true;
+      tempData.forEach((eachTempData, tempDataIndex) => {
+        if (tempDataIndex === index) {
+          eachTempData.toggleSearch = true;
         } else {
-          eachTempData.isSearching = false;
+          eachTempData.toggleSearch = false;
         }
       });
       return tempData;
@@ -228,7 +227,7 @@ export default function ConnectionList() {
     refs.current[index].focus();
   };
 
-  const handleSearch = (e: any, index: number) => {
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const val = e.target.value.toLowerCase();
     const newData = cloneDeep(dataForTabs);
     const newDataToSearch = [...newData[index].data];
@@ -237,11 +236,11 @@ export default function ConnectionList() {
     setFilteredData(cloneDeep(newData));
   };
 
-  const handleClearSearch = (e: any, index: number) => {
+  const handleClearSearch = (e: React.MouseEvent<HTMLInputElement>, index: number) => {
     if (refs.current[index].value === '') {
       setDataForTabs((prev) => {
         const tempData = [...prev];
-        tempData[index].isSearching = false;
+        tempData[index].toggleSearch = false;
         return tempData;
       });
     } else {
@@ -259,8 +258,7 @@ export default function ConnectionList() {
   }, []);
 
   useEffect(() => {
-    const newData = cloneDeep(dataForTabs);
-    setFilteredData(newData);
+    setFilteredData(cloneDeep(dataForTabs));
   }, [dataForTabs]);
 
   useEffect(() => {
@@ -275,13 +273,15 @@ export default function ConnectionList() {
   const headerForLevelZero = () => {
     return (
       <Box className={classes.styleForLevelZero}>
-        <Typography variant="body2">Data Connections</Typography>
+        <Typography variant="body2" component="div">
+          Data Connections
+        </Typography>
       </Box>
     );
   };
 
   useEffect(() => {
-    setTabSize(dataForTabs.length);
+    setTabsLength(dataForTabs?.length);
   }, [dataForTabs.length]);
 
   let headerContent;
@@ -299,9 +299,13 @@ export default function ConnectionList() {
             {filteredData &&
               Array.isArray(filteredData) &&
               filteredData?.map((eachFilteredData, index) => {
-                if (eachFilteredData.data.filter((el) => el.connectionId).length) {
-                  connectionId = eachFilteredData.data.filter((el) => el.connectionId)[0]
-                    .connectionId;
+                if (
+                  eachFilteredData.data.filter((eachFilterItem) => eachFilterItem.connectionId)
+                    .length
+                ) {
+                  connectionId = eachFilteredData.data.filter(
+                    (eachFilterItem) => eachFilterItem.connectionId
+                  )[0].connectionId;
                 }
                 if (index === 0) {
                   headerContent = headerForLevelZero();
@@ -310,7 +314,7 @@ export default function ConnectionList() {
                     <>
                       <Box
                         className={
-                          eachFilteredData.isSearching
+                          eachFilteredData.toggleSearch
                             ? classes.hideComponent
                             : classes.beforeSearchIconClickDisplay
                         }
@@ -323,6 +327,7 @@ export default function ConnectionList() {
                               ref={(element) => {
                                 headersRefs.current[index] = element;
                               }}
+                              component="div"
                             >
                               {filteredData[index - 1].selectedTab}
                             </Typography>
@@ -333,6 +338,7 @@ export default function ConnectionList() {
                             ref={(element) => {
                               headersRefs.current[index] = element;
                             }}
+                            component="div"
                           >
                             {filteredData[index - 1].selectedTab}
                           </Typography>
@@ -350,7 +356,7 @@ export default function ConnectionList() {
                       </Box>
                       <Box
                         className={
-                          eachFilteredData.isSearching
+                          eachFilteredData.toggleSearch
                             ? classes.afterSearchIconClick
                             : classes.hideComponent
                         }
@@ -360,14 +366,18 @@ export default function ConnectionList() {
                         <input
                           type="text"
                           className={classes.searchBar}
-                          onChange={(e) => handleSearch(e, index)}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            handleSearch(e, index)
+                          }
                           ref={(e) => {
                             refs.current[index] = e;
                           }}
                         />
                         <Box
                           className={classes.closeIcon}
-                          onClick={(e) => handleClearSearch(e, index)}
+                          onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+                            handleClearSearch(e, index)
+                          }
                         >
                           <CloseIcon />
                         </Box>
@@ -393,7 +403,7 @@ export default function ConnectionList() {
                 );
               })}
           </SelectDatasetWrapper>
-          {tabSize < 4 && (
+          {tabsLength < 4 && (
             <Box className={classes.infographContainer}>
               <Box className={classes.infograph}>
                 <InfoGraph />
@@ -404,11 +414,9 @@ export default function ConnectionList() {
       ) : (
         <>
           {loading && (
-            <NoConnectionsScreen
-              title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
-              subtitle={T.translate(
-                'features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle'
-              )}
+            <NoRecordScreen
+              title={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.title`)}
+              subtitle={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.subtitle`)}
             />
           )}
         </>
