@@ -22,7 +22,7 @@ import TabWrapper from '../common/TabWrapper';
 
 export default function({ recipeStepsCount }) {
   return (
-    <TabWrapper type="medium">
+    <TabWrapper size="medium">
       <>
         <TypographyLabel type={'simple'}>
           <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>

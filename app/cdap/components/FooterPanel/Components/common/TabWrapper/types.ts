@@ -18,6 +18,6 @@ import { MouseEventHandler } from 'react';
 
 export interface ITabWrapperProps {
   children: JSX.Element;
-  type: 'small' | 'medium' | 'large';
+  size: 'small' | 'medium' | 'large';
   clickEventListener?: MouseEventHandler<HTMLElement>;
 }

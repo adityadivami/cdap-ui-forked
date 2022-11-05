@@ -26,7 +26,7 @@ export default function() {
   return (
     <Box>
       <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
-        <TabWrapper type="small">{ColumnIcon}</TabWrapper>
+        <TabWrapper size="small">{ColumnIcon}</TabWrapper>
       </CustomTooltip>
     </Box>
   );

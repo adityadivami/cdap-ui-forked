@@ -59,20 +59,20 @@ const LargeBox = styled(Box)`
   }
 `;
 
-export default function({ type, clickEventListener, children }: ITabWrapperProps) {
+export default function({ size, clickEventListener, children }: ITabWrapperProps) {
   return (
     <>
-      {type === 'small' && (
+      {size === 'small' && (
         <SmallBox data-testid="footer-panel-small-tab" onClick={clickEventListener}>
           {children}
         </SmallBox>
       )}
-      {type === 'medium' && (
+      {size === 'medium' && (
         <MediumBox data-testid="footer-panel-medium-tab" onClick={clickEventListener}>
           {children}
         </MediumBox>
       )}
-      {type === 'large' && (
+      {size === 'large' && (
         <LargeBox data-testid="footer-panel-large-tab" onClick={clickEventListener}>
           {children}
         </LargeBox>

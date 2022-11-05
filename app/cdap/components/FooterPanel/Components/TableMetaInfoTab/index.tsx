@@ -22,7 +22,7 @@ import React from 'react';
 
 export default function({ dataCounts }) {
   return (
-    <TabWrapper type="large">
+    <TabWrapper size="large">
       <TypographyLabel type={'simple'}>
         <>
           {`${T.translate(`${PREFIX}.currentData`)} - ${dataCounts.rowCount} ${T.translate(
