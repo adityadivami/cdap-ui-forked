@@ -27,7 +27,7 @@ import {
   IDataQualityItem,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
-import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import { multipleColumnSelected, ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 
 export default function({
   directiveFunctionSupportedDataType,
@@ -81,7 +81,7 @@ export default function({
     <Fragment>
       <DrawerWidget
         headingText={T.translate(
-          'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara'
+          `${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`
         )}
         openDrawer={columnsPopup}
         showBackIcon={true}
@@ -107,7 +107,7 @@ export default function({
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
           >
-            {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.done')}
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}
           </Button>
         </Container>
       </DrawerWidget>

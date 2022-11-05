@@ -28,6 +28,7 @@ import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
 import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 
 export default function({
   columns,
@@ -57,7 +58,7 @@ export default function({
               }}
               data-testid='panel-columns'
             >
-              {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}
+              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
             </TableCell>
             <TableCell
               classes={{
@@ -65,7 +66,7 @@ export default function({
               }}
               data-testid='panel-values'
             >
-              {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}
+              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
             </TableCell>
           </TableRow>
         </TableHead>
