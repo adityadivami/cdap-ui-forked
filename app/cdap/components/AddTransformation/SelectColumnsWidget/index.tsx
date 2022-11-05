@@ -47,7 +47,7 @@ export default function({
       </div>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
-          <Typography component="span" variant="body1" className={classes.quickSelectTextStyles}>
+          <Typography component="p" variant="body1" className={classes.quickSelectTextStyles}>
             {index + 1}.&nbsp; {item.label}
           </Typography>
         ))
