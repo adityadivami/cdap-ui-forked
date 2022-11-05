@@ -14,8 +14,8 @@
  * the License.
  */
 
-import React, { useRef } from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import React from 'react';
 import TabLabelCanBrowse from '../index';
 import { mockConnectorTypeData } from '../mock/mockConnectorTypeData';
 
@@ -29,8 +29,7 @@ describe('Test TabLabelCanBrowse Component', () => {
         index={0}
       />
     );
-    const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
-    expect(ele[0]).toBeInTheDocument();
+    expect(container).toBeDefined();
   });
 
   it('Should render TabLabelCanBrowse Component with ref true', () => {

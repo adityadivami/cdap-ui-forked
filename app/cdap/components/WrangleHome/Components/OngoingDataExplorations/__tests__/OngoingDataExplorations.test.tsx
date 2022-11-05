@@ -16,12 +16,15 @@
 
 import { render, screen } from '@testing-library/react';
 import MyDataPrepApi from 'api/dataprep';
-import history from 'app/cdap/services/history';
+import history from 'services/history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import operators from 'rxjs/operators';
 import OngoingDataExplorations from 'components/WrangleHome/Components/OngoingDataExplorations';
-import { getWorkspaceListSubscribeMock, switchMapCallbackMock } from '../mock/mockoldData';
+import {
+  getWorkspaceListSubscribeMock,
+  switchMapCallbackMock,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mockoldData';
 
 test('renders Ongoing Data Exploration component', async () => {
   jest.spyOn(operators as any, 'switchMap').mockImplementation((callback: Function) => {
