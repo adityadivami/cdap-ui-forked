@@ -33,9 +33,9 @@ export default function() {
       id="footerpanel-box-zoom"
     >
       {ZoomIcon}
-      <TypographyLabel type={'simpleLabel'}>{`${T.translate(
-        `${PREFIX}.zoomPercent100`
-      )}`}</TypographyLabel>
+      <TypographyLabel type={'simple'}>
+        <>{`${T.translate(`${PREFIX}.zoomPercent100`)}`}</>
+      </TypographyLabel>
       {ArrowIcon}
     </Box>
   );

@@ -16,5 +16,5 @@
 
 export interface ITypographyLabelProps {
   children: JSX.Element;
-  type: 'simpleLabel' | 'outlinedLabel';
+  type: 'simple' | 'outlined';
 }

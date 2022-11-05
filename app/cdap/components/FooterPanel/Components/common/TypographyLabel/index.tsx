@@ -2,6 +2,7 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import { grey } from '@material-ui/core/colors';
+import { ITypographyLabelProps } from './types';
 
 const SimpleLabel = styled(Typography)`
   &&& {
@@ -21,15 +22,15 @@ const OutlinedLabel = styled(Typography)`
   }
 `;
 
-export default function({ children, type }) {
+export default function({ children, type }: ITypographyLabelProps) {
   return (
     <>
-      {type === 'simpleLabel' && (
+      {type === 'simple' && (
         <SimpleLabel data-testid="footerpanel-simple-label" component="span">
           {children}
         </SimpleLabel>
       )}
-      {type === 'outlinedLabel' && (
+      {type === 'outlined' && (
         <OutlinedLabel data-testid="footerpanel-outlined-label" component="span">
           {children}
         </OutlinedLabel>

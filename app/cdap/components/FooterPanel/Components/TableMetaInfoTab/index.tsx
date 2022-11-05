@@ -27,12 +27,14 @@ export default function({ dataCounts }) {
 
   return (
     <Box className={classes.dataWrapper}>
-      <TypographyLabel type={'simpleLabel'}>
-        {`${T.translate(`${PREFIX}.currentData`)} - ${dataCounts.rowCount} ${T.translate(
-          `${PREFIX}.rows`
-        )} ${T.translate(`${PREFIX}.and`)} ${dataCounts.columnCount} ${T.translate(
-          `${PREFIX}.columns`
-        )}`}
+      <TypographyLabel type={'simple'}>
+        <>
+          {`${T.translate(`${PREFIX}.currentData`)} - ${dataCounts.rowCount} ${T.translate(
+            `${PREFIX}.rows`
+          )} ${T.translate(`${PREFIX}.and`)} ${dataCounts.columnCount} ${T.translate(
+            `${PREFIX}.columns`
+          )}`}
+        </>
       </TypographyLabel>
     </Box>
   );
