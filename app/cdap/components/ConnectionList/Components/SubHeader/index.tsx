@@ -14,40 +14,36 @@
  * the License.
  */
 
-import { Breadcrumbs, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { getCurrentNamespace } from 'services/NamespaceStore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
+import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
+import { ISubHeader } from 'components/ConnectionList/Components/SubHeader/types';
+import Breadcrumb from 'components/GridTable/components/Breadcrumb';
 import T from 'i18n-react';
-import { ISubHeader } from './types';
+import React from 'react';
+import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function({ selectedConnection }: ISubHeader) {
   const classes = useStyles();
+  const location = useLocation();
+
   const handleAddConnection = () => {
     localStorage.setItem('addConnectionRequestFromNewUI', selectedConnection);
   };
 
   return (
     <Box
-      className={classes.breadCombContainer}
-      data-testid="bread-comb-container-parent"
-      id="bread-comb-container-parent"
+      className={classes.breadcrumbContainer}
+      data-testid="breadcrumb-container-parent"
+      id="breadcrumb-container-parent"
     >
-      <Box>
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-          <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
-            {T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome')}
-          </Link>
-          <Typography className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.NewWranglerUI.Breadcrumb.labels.connectionsList')}
-          </Typography>
-        </Breadcrumbs>
-      </Box>
+      <Breadcrumb
+        datasetName={T.translate('features.NewWranglerUI.Breadcrumb.labels.connectionsList')}
+        location={location}
+      />
 
       <Box className={classes.importDataContainer}>
         <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>

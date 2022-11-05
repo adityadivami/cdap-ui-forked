@@ -29,7 +29,7 @@ test('renders BreadCumb Component', () => {
       </Switch>
     </Router>
   );
-  const ele = screen.getByTestId(/bread-comb-container-parent/i);
+  const ele = screen.getByTestId(/breadcrumb-container-parent/i);
   expect(ele).toBeInTheDocument();
 
   const clickEle = screen.getByTestId(/sub-header-handle-add-connection/i);

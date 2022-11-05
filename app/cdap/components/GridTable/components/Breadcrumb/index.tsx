@@ -43,16 +43,17 @@ export default function BreadCrumb({ datasetName, location }) {
         >
           {T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome')}
         </Link>
-        {location?.state?.from !==
-          T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome') && (
-          <Link
-            className={`${classes.breadcrumbLabel}`}
-            to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
-            data-testid="breadcrumb-data-sources-text"
-          >
-            {location?.state?.from}
-          </Link>
-        )}
+        {location?.state?.from !== undefined &&
+          location?.state?.from !==
+            T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome') && (
+            <Link
+              className={`${classes.breadcrumbLabel}`}
+              to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
+              data-testid="breadcrumb-data-sources-text"
+            >
+              {location?.state?.from}
+            </Link>
+          )}
         <Typography color="textPrimary">{datasetName}</Typography>
       </Breadcrumbs>
     </Box>
