@@ -16,12 +16,11 @@
 
 import { Box } from '@material-ui/core';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
+import { PREFIX } from 'components/FooterPanel/constants';
 import { ColumnIcon } from 'components/FooterPanel/IconStore/ColumnIcon';
 import T from 'i18n-react';
 import React from 'react';
-import TabWrapper from '../common/TabWrapper';
-
-const PREFIX = 'features.FooterPanel.labels';
 
 export default function() {
   return (

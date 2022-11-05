@@ -15,8 +15,8 @@
  */
 
 import { Box } from '@material-ui/core';
+import { ITabWrapperProps } from 'components/FooterPanel/Components/common/TabWrapper/types';
 import React from 'react';
-import { ITabWrapperProps } from './types';
 import styled from 'styled-components';
 
 const SmallBox = styled(Box)`

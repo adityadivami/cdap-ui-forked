@@ -14,18 +14,4 @@
  * the License.
  */
 
-import TypographyLabel from 'components/FooterPanel/Components/common/TypographyLabel/index';
-import { PREFIX } from 'components/FooterPanel/constants';
-import T from 'i18n-react';
-import React from 'react';
-import TabWrapper from '../common/TabWrapper';
-
-export default function() {
-  return (
-    <TabWrapper type="medium">
-      <TypographyLabel type={'simple'}>
-        <>{`${T.translate(`${PREFIX}.directives`)}`}</>
-      </TypographyLabel>
-    </TabWrapper>
-  );
-}
+export const PREFIX = 'features.FooterPanel.labels';

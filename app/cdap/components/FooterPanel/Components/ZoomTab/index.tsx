@@ -14,14 +14,13 @@
  * the License.
  */
 
+import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
+import TypographyLabel from 'components/FooterPanel/Components/common/TypographyLabel';
+import { PREFIX } from 'components/FooterPanel/constants';
 import { ArrowIcon } from 'components/FooterPanel/IconStore/ArrowIcon';
 import { ZoomIcon } from 'components/FooterPanel/IconStore/ZoomIcon';
 import T from 'i18n-react';
 import React from 'react';
-import TabWrapper from '../common/TabWrapper';
-import TypographyLabel from '../common/TypographyLabel';
-
-const PREFIX = 'features.FooterPanel.labels';
 
 export default function() {
   return (

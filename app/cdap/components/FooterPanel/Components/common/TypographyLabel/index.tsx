@@ -1,8 +1,8 @@
 import { Typography } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import { ITypographyLabelProps } from 'components/FooterPanel/Components/common/TypographyLabel/types';
 import React from 'react';
 import styled from 'styled-components';
-import { grey } from '@material-ui/core/colors';
-import { ITypographyLabelProps } from './types';
 
 const SimpleLabel = styled(Typography)`
   &&& {
