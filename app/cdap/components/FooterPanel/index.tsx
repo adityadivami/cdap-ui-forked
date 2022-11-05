@@ -23,6 +23,7 @@ import { ColumnIcon } from 'components/FooterPanel/IconStore/ColumnIcon';
 import { ZoomIcon } from 'components/FooterPanel/IconStore/ZoomIcon';
 import { useStyles } from 'components/FooterPanel/styles';
 import { IFooterPanelProps } from 'components/FooterPanel/types';
+import ColumnViewPanelTab from './Components/ColumnViewPanelTab';
 
 const PREFIX = 'features.FooterPanel.labels';
 
@@ -37,20 +38,10 @@ export default function({
   return (
     <Box className={classes.containerProps}>
       <Box className={classes.innnerContainer}>
-        <Box>
-          <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
-            <Box
-              className={`${classes.imgContainer} ${
-                columnViewPanelOpened ? classes.showDepth : classes.showNormalView
-              }`}
-              data-testid="footer-panel-column-icon-container"
-              id="footer-panel-column-icon-container"
-              onClick={setOpenColumnViewHandler}
-            >
-              {ColumnIcon}
-            </Box>
-          </CustomTooltip>
-        </Box>
+        <ColumnViewPanelTab
+          columnViewPanelOpened={columnViewPanelOpened}
+          setOpenColumnViewHandler={setOpenColumnViewHandler}
+        />
         <Box className={classes.dataWrapper}>
           <Typography
             className={classes.data}
