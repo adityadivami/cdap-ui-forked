@@ -30,7 +30,7 @@ export const useNestedMenuStyles = makeStyles({
   },
   root: {
     '& .MuiMenuItem-root': {
-      padding: '6 11 6 20',
+      padding: '6px 20px 6px 20px',
       height: 33,
     },
     '& .MuiMenu-paper': {
@@ -46,8 +46,11 @@ export const useNestedMenuStyles = makeStyles({
       display: 'flex',
       justifyContent: 'space-between',
     },
+    '& .MuiListItem-button:hover': {
+      background: '#EFF0F2',
+    },
     '& .MuiList-padding': {
-      padding: '13 0',
+      padding: '13px 0',
     },
   },
   tooltipToolbar: {
@@ -59,5 +62,13 @@ export const useNestedMenuStyles = makeStyles({
     '&::before': {
       backgroundColor: grey[700],
     },
+  },
+  popoverPaper: {
+    boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15);',
+  },
+  menuLabels: {
+    fontSize: 14,
+    color: '#5F6368',
+    textTransform: 'capitalize',
   },
 });

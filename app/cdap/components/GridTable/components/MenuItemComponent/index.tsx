@@ -48,7 +48,9 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
         data-testid="menu-item-parent"
       >
-        <Typography component="div">{item.label} </Typography>
+        <Typography component="div" className={classes.menuLabels}>
+          {item.label}{' '}
+        </Typography>
         {item?.options?.length > 0 && menuArrowIcon}
       </MenuItem>
     );
