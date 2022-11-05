@@ -17,7 +17,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import BreadCrumb from '..';
+import Breadcrumb from '..';
 import { createBrowserHistory as createHistory } from 'history';
 
 const history = createHistory({
@@ -42,7 +42,7 @@ describe('Test Breadcrumb Component', () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <BreadCrumb workspaceName="abc" location={locationMock} />{' '}
+          <Breadcrumb workspaceName="abc" location={locationMock} />{' '}
         </Route>
       </Switch>
     </Router>
@@ -65,3 +65,7 @@ describe('Test Breadcrumb Component', () => {
     );
   });
 });
+
+// it('Should have the Data Sources text in the Breadcrumb', () => {
+//   expect(screen.getByTestId('breadcrumb-data-sources-text')).toHaveTextContent('Data Sources');
+// });

@@ -14,8 +14,8 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
-import React from 'react';
+import React, { useRef } from 'react';
+import { render, screen } from '@testing-library/react';
 import TabLabelCanBrowse from '../index';
 import { mockConnectorTypeData } from '../mock/mockConnectorTypeData';
 
