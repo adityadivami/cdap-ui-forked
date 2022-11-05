@@ -14,22 +14,25 @@
  *  the License.
  */
 
-import { render } from "@testing-library/react";
-import React from "react";
+import { render } from '@testing-library/react';
+import React from 'react';
 
-import NestedMenu from "components/GridTable/components/NestedMenu/index";
+import NestedMenu from 'components/GridTable/components/NestedMenu/index';
 
 describe('Testing nested menu component', () => {
-    it('should test default render of nested menu', () => {
-        render(
-            <NestedMenu submitMenuOption={function (value: string, dataType: string[]): void {
-                throw new Error("Function not implemented.");
-            }} 
-            columnType={""} 
-            menuOptions={[]} 
-            title={""} 
-            anchorEl={undefined} 
-            setAnchorEl={() => jest.fn()} open={false} />
-        )
-    })
-})
+  it('should test default render of nested menu', () => {
+    render(
+      <NestedMenu
+        submitMenuOption={function(value: string, dataType: string[]): void {
+          throw new Error('Function not implemented.');
+        }}
+        columnType={''}
+        menuOptions={[]}
+        title={''}
+        anchorElement={undefined}
+        setAnchorElement={() => jest.fn()}
+        open={false}
+      />
+    );
+  });
+});

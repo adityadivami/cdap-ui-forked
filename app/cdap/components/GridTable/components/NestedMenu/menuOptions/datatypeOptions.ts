@@ -13,88 +13,83 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import T from 'i18n-react';
+import { DATA_TYPE_LABEL_PREFIX } from 'components/GridTable/components/NestedMenu/menuOptions/constants';
+import { TOOLBAR_ICONS_LABEL_ALL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 
 export const DATATYPE_OPTIONS = [
   {
     value: 'string',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.string'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.string`).toString(),
+    options: [
+      {
+        value: 'boolean',
+        label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+        options: [
+          {
+            value: 'boolean',
+            label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+          },
+        ],
+        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+      },
     ],
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'boolean',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.boolean'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+    options: [
+      {
+        value: 'boolean',
+        label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+        options: [
+          {
+            value: 'boolean',
+            label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+          },
+        ],
+        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+      },
     ],
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'integer',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.integer'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.integer`).toString(),
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'long',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.long'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.long`).toString(),
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'short',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.short'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'float',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.float'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.float`).toString(),
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'double',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.double'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.double`).toString(),
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'decimal',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.decimal'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.decimal`).toString(),
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'bytes',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.datatype.bytes'
-    ).toString(),
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.bytes`).toString(),
+    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
 ];
