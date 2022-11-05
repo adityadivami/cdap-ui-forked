@@ -59,6 +59,7 @@ export default function ConnectionsTabs({
   index,
   connectionId,
   setIsErrorOnNoWorkSpace,
+  toggleLoader,
   ...props
 }) {
   const classes = useStyles();
@@ -101,28 +102,20 @@ export default function ConnectionsTabs({
                   }
                 }}
                 label={
-                  index > 1 ? (
-                    connectorType.canBrowse ? (
-                      <TabLabelCanBrowse
-                        count={undefined}
-                        label={connectorType.name}
-                        index={index}
-                      />
-                    ) : (
-                      <TabLabelCanSample
-                        label={connectorType.name}
-                        entity={connectorType}
-                        initialConnectionId={connectionIdProp}
-                        toggleLoader={props.toggleLoader}
-                        setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-                      />
-                    )
-                  ) : (
+                  [0, 1].includes(index) || connectorType.canBrowse ? (
                     <TabLabelCanBrowse
                       label={connectorType.name}
                       count={index === 0 ? connectorType.count : undefined}
                       index={index}
                       icon={connectorType.icon}
+                    />
+                  ) : (
+                    <TabLabelCanSample
+                      label={connectorType.name}
+                      entity={connectorType}
+                      initialConnectionId={connectionIdProp}
+                      toggleLoader={toggleLoader}
+                      setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
                     />
                   )
                 }

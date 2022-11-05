@@ -17,7 +17,7 @@
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
-import { WrangleIcon } from 'components/ConnectionList/icons';
+import { WrangleIcon } from 'components/ConnectionList/IconStore/WrangleIcon';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
 import { IRecords } from 'components/GridTable/types';

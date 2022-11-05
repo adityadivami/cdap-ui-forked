@@ -59,12 +59,15 @@ export default function TabLabelCanBrowse({
     >
       <Box className={classes.labelContainerBox}>
         <Box className={classes.labelsContainer}>
-          {icon && <Box>{icon}</Box>}
+          {icon && <Box className={classes.connectorTypeIcon}>{icon}</Box>}
           <Typography variant="body1" className={classes.labelStyles} ref={myLabelRef}>
             {label}
           </Typography>
           {count && (
-            <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
+            <Typography
+              variant="body1"
+              className={classes.labelStylesCount}
+            >{`(${count})`}</Typography>
           )}
         </Box>
         <Box>
@@ -83,7 +86,7 @@ export default function TabLabelCanBrowse({
       data-testid={`connections-tab-label-browse-${label}`}
     >
       <Box className={classes.labelsContainer}>
-        {icon && <Box>{icon}</Box>}
+        {icon && <Box className={classes.connectorTypeIcon}>{icon}</Box>}
         <Typography
           variant="body1"
           className={classes.labelStyles}
@@ -93,7 +96,10 @@ export default function TabLabelCanBrowse({
           {label}
         </Typography>
         {count && (
-          <Typography variant="body1" className={classes.labelStyles}>{`(${count})`}</Typography>
+          <Typography
+            variant="body1"
+            className={classes.labelStylesCount}
+          >{`(${count})`}</Typography>
         )}
       </Box>
       <Box>

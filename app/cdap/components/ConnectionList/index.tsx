@@ -14,22 +14,28 @@
  * the License.
  */
 
-import { Box, styled, Typography } from '@material-ui/core';
+import { Box, IconButton, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import { GCSIcon } from 'components/ConnectionList/icons';
+import CloseIcon from '@material-ui/icons/Close';
+import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
+import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import SubHeader from 'components/ConnectionList/Components/SubHeader';
+import { PREFIX } from 'components/ConnectionList/constants';
+import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
+import { useStyles } from 'components/ConnectionList/styles';
+import { IFilteredData } from 'components/ConnectionList/types';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
-import { fetchConnectors } from 'components/Connections/Create/reducer';
 import { IRecords } from 'components/GridTable/types';
+import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import ErrorSnackbar from 'components/SnackbarComponent';
+import { getWidgetData } from 'components/WrangleHome/Components/WrangleCard/services/getWidgetData';
+import T from 'i18n-react';
+import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import ConnectionsTabs from './Components/ConnectionTabs';
-import CustomTooltip from './Components/CustomTooltip';
-import SubHeader from './Components/SubHeader';
-import { useStyles } from './styles';
-import T from 'i18n-react';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -49,13 +55,14 @@ export default function ConnectionList() {
   const { connectorType } = useParams() as IRecords;
 
   const refs = useRef([]);
+  const headersRefs = useRef([]);
   const classes = useStyles();
   const loc = useLocation();
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
   const [loading, setLoading] = useState(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
-
+  const [tabsLength, setTabsLength] = useState<number>(0);
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
   };
@@ -65,39 +72,45 @@ export default function ConnectionList() {
       data: [],
       showTabs: true,
       selectedTab: null,
-      isSearching: false,
+      toggleSearch: false,
     },
   ]);
+  const [filteredData, setFilteredData] = useState<IFilteredData>(cloneDeep(dataForTabs));
 
   const getConnectionsTabData = async () => {
-    // Fetching the all available connectors list
-    let connectorTypes = await fetchConnectors();
+    let connectorTypes = [];
+    let connectorTypesWithSVG = [];
+    const connectorTypesWithIcons = (data) => {
+      connectorTypesWithSVG = data?.connectorTypes;
+    };
+    // Fetching all the available connectors list with icons
+    await getWidgetData(connectorTypesWithIcons);
+    connectorTypes = connectorTypesWithSVG;
     let allConnectionsTotalLength = 0;
 
-    // Fetching all the connections list inside a connector
+    // Fetching all the connections list inside each connector type
     const categorizedConnections = await getCategorizedConnections();
     connectorTypes = connectorTypes.filter((conn) => {
       return [conn.name];
     });
     // Mapping connector types and corresponding connections
-    connectorTypes = connectorTypes.map((eachConnectorType) => {
+    connectorTypes = connectorTypes?.map((eachConnectorType) => {
       const connections = categorizedConnections.get(eachConnectorType.name) || [];
       allConnectionsTotalLength = allConnectionsTotalLength + connections.length;
       return {
         ...eachConnectorType,
         count: connections.length,
-        icon: <GCSIcon />,
+        icon: eachConnectorType.SVG,
       };
     });
 
-    const firstLevelData = connectorTypes.filter((each) => {
-      if (each.count > 0) {
-        return {
-          name: each.name,
-          count: each.count,
-        };
+    // Connector types which has connections inside it
+    const firstLevelData = connectorTypes.filter((eachConnectorType) => {
+      if (eachConnectorType.count > 0) {
+        return true;
       }
     });
+
     setLoading(false);
     setDataForTabs((prev) => {
       const tempData = [...prev];
@@ -113,7 +126,7 @@ export default function ConnectionList() {
         data: [],
         showTabs: false,
         selectedTab: '',
-        isSearching: false,
+        toggleSearch: false,
       });
       if (res.entities) {
         tempData[index + 1][`data`] = res.entities;
@@ -122,13 +135,14 @@ export default function ConnectionList() {
       }
       tempData[index + 1][`showTabs`] = true;
       tempData[index + 1][`selectedTab`] = null;
-      tempData[index + 1][`isSearching`] = false;
+      tempData[index + 1][`toggleSearch`] = false;
       return tempData.slice(0, index + 2);
     });
   };
 
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string, index: number) => {
     const categorizedConnections = await getCategorizedConnections();
+
     const connections = categorizedConnections.get(selectedValue) || [];
     setDataForTabsHelper(connections, index);
     toggleLoader(false);
@@ -143,41 +157,107 @@ export default function ConnectionList() {
     return entitiesPromise;
   };
 
+  const makeCursorFocused = (index: number) => {
+    refs.current[index].focus();
+  };
+
   const selectedTabValueHandler = (entity: IRecords, index: number) => {
     toggleLoader(true);
     setDataForTabs((currentData) => {
       let newData = [...currentData];
       newData[index].selectedTab = entity.name;
-      newData = newData.map((each) => {
+      newData = newData.map((eachNewData) => {
         return {
-          data: each.data,
-          showTabs: each.showTabs,
-          selectedTab: each.selectedTab,
-          isSearching: false,
+          data: eachNewData.data,
+          showTabs: eachNewData.showTabs,
+          selectedTab: eachNewData.selectedTab,
+          toggleSearch: false,
         };
       });
       if (index === 0) {
         getCategorizedConnectionsforSelectedTab(entity.name as string, index);
       } else if (index === 1) {
-        fetchEntities(entity.name).then((res) => {
-          setDataForTabsHelper(res, index);
-          toggleLoader(false);
-        });
-      } else {
-        if (entity.canBrowse) {
-          fetchEntities(dataForTabs[1].selectedTab, entity.path as string).then((res) => {
+        fetchEntities(entity.name)
+          .then((res) => {
             setDataForTabsHelper(res, index);
             toggleLoader(false);
+          })
+          .catch((error) => {
+            toggleLoader(false);
+            setIsErrorOnNoWorkSpace(true);
+            // TODO : Need to bind the message on Snackbar . The message is in error.message same as the old UI . Remove the console log later
           });
+      } else {
+        if (entity.canBrowse) {
+          fetchEntities(dataForTabs[1].selectedTab, entity.path as string)
+            .then((res) => {
+              setDataForTabsHelper(res, index);
+              toggleLoader(false);
+            })
+            .catch((error) => {
+              toggleLoader(false);
+              setIsErrorOnNoWorkSpace(true);
+              // TODO : Need to bind the message on Snackbar. Remove the console log later
+            });
         }
       }
       return newData;
     });
   };
 
+  const searchHandler = (index: number) => {
+    setDataForTabs((prev) => {
+      let tempData = [...prev];
+      tempData = tempData.map((eachTempData) => ({
+        ...eachTempData,
+        toggleSearch: false,
+      }));
+      tempData[index].toggleSearch = true;
+      tempData.forEach((eachTempData, tempDataIndex) => {
+        if (tempDataIndex === index) {
+          eachTempData.toggleSearch = true;
+        } else {
+          eachTempData.toggleSearch = false;
+        }
+      });
+      return tempData;
+    });
+    refs.current[index].focus();
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const val = e.target.value.toLowerCase();
+    const newData = cloneDeep(dataForTabs);
+    const newDataToSearch = [...newData[index].data];
+    const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(val));
+    newData[index].data = [...tempData];
+    setFilteredData(cloneDeep(newData));
+  };
+
+  const handleClearSearch = (e: React.MouseEvent<HTMLInputElement>, index: number) => {
+    if (refs.current[index].value === '') {
+      setDataForTabs((prev) => {
+        const tempData = [...prev];
+        tempData[index].toggleSearch = false;
+        return tempData;
+      });
+    } else {
+      refs.current[index].value = '';
+      const newData = cloneDeep(dataForTabs);
+      const newDataToSearch = [...newData[index].data];
+      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
+      newData[index].data = [...tempData];
+      setFilteredData(cloneDeep(newData));
+    }
+  };
+
   useEffect(() => {
     getConnectionsTabData();
   }, []);
+
+  useEffect(() => {
+    setFilteredData(cloneDeep(dataForTabs));
+  }, [dataForTabs]);
 
   useEffect(() => {
     setDataForTabs((prev) => {
@@ -191,81 +271,153 @@ export default function ConnectionList() {
   const headerForLevelZero = () => {
     return (
       <Box className={classes.styleForLevelZero}>
-        <Typography variant="body2">Data Connections</Typography>
+        <Typography variant="body2" component="div">
+          Data Connections
+        </Typography>
       </Box>
     );
   };
+
+  useEffect(() => {
+    setTabsLength(dataForTabs?.length);
+  }, [dataForTabs.length]);
 
   let headerContent;
 
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader selectedConnection={dataForTabs[0]?.selectedTab} />
+
       {dataForTabs &&
       Array.isArray(dataForTabs) &&
       dataForTabs.length &&
       dataForTabs[0]?.data?.length > 0 ? (
-        <SelectDatasetWrapper>
-          {dataForTabs.map((each, index) => {
-            const connectionIdRequired =
-              each.data.length && each.data.filter((el) => el.connectionId);
-            if (connectionIdRequired.length) {
-              connectionId = connectionIdRequired[0].connectionId;
-            }
-            if (index === 0) {
-              headerContent = headerForLevelZero();
-            } else {
-              headerContent =
-                refs.current[index]?.offsetWidth < refs.current[index]?.scrollWidth ? (
-                  <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
-                    <Box className={classes.beforeSearchIconClickDisplay}>
-                      <Typography
-                        variant="body2"
-                        className={classes.headerLabel}
-                        ref={(element) => {
-                          refs.current[index] = element;
-                        }}
+        <Box className={classes.connectionsWithInfo}>
+          <SelectDatasetWrapper>
+            {filteredData &&
+              Array.isArray(filteredData) &&
+              filteredData?.map((eachFilteredData, index) => {
+                if (
+                  eachFilteredData.data.filter((eachFilterItem) => eachFilterItem.connectionId)
+                    .length
+                ) {
+                  connectionId = eachFilteredData.data.filter(
+                    (eachFilterItem) => eachFilterItem.connectionId
+                  )[0].connectionId;
+                }
+                if (index === 0) {
+                  headerContent = headerForLevelZero();
+                } else {
+                  headerContent = (
+                    <>
+                      <Box
+                        className={
+                          eachFilteredData.toggleSearch
+                            ? classes.hideComponent
+                            : classes.beforeSearchIconClickDisplay
+                        }
                       >
-                        {dataForTabs[index - 1].selectedTab}
-                      </Typography>
-                    </Box>
-                  </CustomTooltip>
-                ) : (
-                  <Box className={classes.beforeSearchIconClickDisplay}>
-                    <Typography
-                      variant="body2"
-                      className={classes.headerLabel}
-                      ref={(element) => {
-                        refs.current[index] = element;
-                      }}
-                    >
-                      {dataForTabs[index - 1].selectedTab}
-                    </Typography>
+                        {headersRefs.current[index]?.offsetWidth <
+                        headersRefs.current[index]?.scrollWidth ? (
+                          <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+                            <Typography
+                              variant="body2"
+                              ref={(element) => {
+                                headersRefs.current[index] = element;
+                              }}
+                              component="div"
+                            >
+                              {filteredData[index - 1].selectedTab}
+                            </Typography>
+                          </CustomTooltip>
+                        ) : (
+                          <Typography
+                            variant="body2"
+                            ref={(element) => {
+                              headersRefs.current[index] = element;
+                            }}
+                            component="div"
+                          >
+                            {filteredData[index - 1].selectedTab}
+                          </Typography>
+                        )}
+
+                        <Box
+                          onClick={() => {
+                            searchHandler(index);
+                          }}
+                        >
+                          <IconButton>
+                            <SearchRoundedIcon />
+                          </IconButton>
+                        </Box>
+                      </Box>
+                      <Box
+                        className={
+                          eachFilteredData.toggleSearch
+                            ? classes.afterSearchIconClick
+                            : classes.hideComponent
+                        }
+                        onMouseOver={() => makeCursorFocused(index)}
+                      >
+                        <SearchRoundedIcon />
+                        <input
+                          type="text"
+                          className={classes.searchBar}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            handleSearch(e, index)
+                          }
+                          ref={(e) => {
+                            refs.current[index] = e;
+                          }}
+                        />
+                        <Box
+                          className={classes.closeIcon}
+                          onClick={(e: React.MouseEvent<HTMLInputElement>) =>
+                            handleClearSearch(e, index)
+                          }
+                        >
+                          <CloseIcon />
+                        </Box>
+                      </Box>
+                    </>
+                  );
+                }
+                return (
+                  <Box className={classes.tabsContainerWithHeader}>
+                    <Box className={classes.tabHeaders}>{headerContent}</Box>
+                    <ConnectionsTabs
+                      tabsData={eachFilteredData}
+                      handleChange={selectedTabValueHandler}
+                      value={eachFilteredData.selectedTab}
+                      index={index}
+                      connectionId={connectionId || ''}
+                      toggleLoader={(value: boolean, isError?: boolean) =>
+                        toggleLoader(value, isError)
+                      }
+                      setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                    />
                   </Box>
                 );
-            }
-            return (
-              <Box className={classes.tabsContainerWithHeader}>
-                <Box className={classes.tabHeaders}>{headerContent}</Box>
-                <ConnectionsTabs
-                  tabsData={each}
-                  handleChange={selectedTabValueHandler}
-                  value={each.selectedTab}
-                  index={index}
-                  connectionId={connectionId || ''}
-                  toggleLoader={(value: boolean, isError?: boolean) => toggleLoader(value, isError)}
-                  setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-                />
+              })}
+          </SelectDatasetWrapper>
+          {tabsLength < 4 && (
+            <Box className={classes.infographContainer}>
+              <Box className={classes.infograph}>
+                <InfoGraph />
               </Box>
-            );
-          })}
-        </SelectDatasetWrapper>
+            </Box>
+          )}
+        </Box>
       ) : (
-        <Typography className={classes.noDataLabel}>
-          {' '}
-          {T.translate('features.NewWranglerUI.ConnectionsList.labels.noConnections')}
-        </Typography>
-        // TODO: No connectors types are available screen needs to be appended here
+        <>
+          {loading && (
+            <NoRecordScreen
+              title={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.title`)}
+              subtitle={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.subtitle`)}
+            />
+          )}
+        </>
       )}
       {loading && (
         <div className={classes.loadingContainer}>

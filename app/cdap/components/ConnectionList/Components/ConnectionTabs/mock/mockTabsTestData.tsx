@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { GCSIcon } from 'components/ConnectionList/icons';
+import { GCSIcon } from 'components/ConnectionList/IconStore/CGSIcon';
 import React from 'react';
 
 export const mockTabsTestData = {
