@@ -27,28 +27,27 @@ export default function({
   submitMenuOption,
   columnType,
   title,
-  anchorEl,
-  setAnchorEl,
-  open,
+  anchorElement,
+  setAnchorElement,
   handleMenuOpenClose,
 }: INestedMenuProps) {
-  const [anchorEl2, setAnchorEl2] = useState<EventTarget | null>(null);
-  const [nestedOptions, setNestedOptions] = useState<IMenuItem[]>([]);
+  const [menuComponentOptions, setMenuComponentOptions] = useState<IMenuItem[][]>([]);
   const classes = useNestedMenuStyles();
 
   const handleMenuClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     menuItem: IMenuItem
   ) => {
-    setNestedOptions([]);
     event.preventDefault();
     event.stopPropagation();
-    if (menuItem?.options) {
-      setNestedOptions(menuItem.options);
-      setAnchorEl2(event.currentTarget);
+    if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
+      setAnchorElement((prev) => [...prev, event.currentTarget]);
+      setMenuComponentOptions((prev) =>
+        prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
+      );
     } else {
       submitMenuOption(menuItem.value, menuItem.supported_dataType);
-      setAnchorEl(null);
+      setAnchorElement(null);
       handleMenuOpenClose(title);
     }
   };
@@ -57,43 +56,46 @@ export default function({
       <Menu
         id="parent-menu"
         keepMounted
-        anchorEl={anchorEl}
-        open={open}
+        anchorEl={anchorElement?.length ? anchorElement[0] : null}
+        open={anchorElement?.length ? true : false}
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-        onClose={() => {
-          setAnchorEl(null);
-          handleMenuOpenClose(title);
-        }}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
+        onClose={() => handleMenuOpenClose()}
+        onClick={(clickEvent) => {
+          clickEvent.preventDefault();
+          clickEvent.stopPropagation();
         }}
         className={classes.root}
+        classes={{ paper: classes.popoverPaper }}
       >
-        {menuOptions?.map((eachOption, index) => (
-          <MenuItemComponent
-            item={eachOption}
-            columnType={columnType.toLowerCase()}
-            index={index}
-            onMenuClick={handleMenuClick}
-          />
-        ))}
-        <MenuComponent
-          anchorEl={anchorEl2}
-          columnType={columnType.toLowerCase()}
-          menuOptions={nestedOptions}
-          setAnchorEl={setAnchorEl2}
-          submitOption={(e, item) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setAnchorEl(null);
-            handleMenuOpenClose(title);
-            setAnchorEl2(null);
-            submitMenuOption(item.value, item.supported_dataType);
-          }}
-        />
+        {menuOptions?.map((eachOption, optionsIndex) => {
+          return (
+            <MenuItemComponent
+              item={eachOption}
+              columnType={columnType.toLowerCase()}
+              index={optionsIndex}
+              onMenuClick={handleMenuClick}
+            />
+          );
+        })}
+        {menuComponentOptions?.length > 0 &&
+          menuComponentOptions.map((eachOption, optionsIndex) => {
+            return (
+              <MenuComponent
+                anchorElement={anchorElement?.length > 1 ? anchorElement[optionsIndex + 1] : null}
+                columnType={columnType.toLowerCase()}
+                menuOptions={eachOption}
+                setAnchorElement={setAnchorElement}
+                setMenuComponentOptions={setMenuComponentOptions}
+                submitOption={(onClickEvent, clickedItem) => {
+                  onClickEvent.preventDefault();
+                  onClickEvent.stopPropagation();
+                  handleMenuClick(onClickEvent, clickedItem);
+                }}
+              />
+            );
+          })}
       </Menu>
     </>
   );

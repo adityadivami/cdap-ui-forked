@@ -24,11 +24,11 @@ import T from 'i18n-react';
 export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
   const classes = useNestedMenuStyles();
   if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.divider')) {
-    return <hr className={classes.divider} key={index} />;
+    return <hr className={classes.divider} key={index} data-testid="menu-item-divider" />;
   }
   if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.heading')) {
     return (
-      <div className={classes.heading} key={index}>
+      <div className={classes.heading} key={index} data-testid="menu-item-heading">
         {item.label}
       </div>
     );
@@ -45,10 +45,13 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
             : false
         }
         title={item.value}
-        onClick={(e) => onMenuClick(e, item)}
+        onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
+        data-testid="menu-item-parent"
       >
-        <Typography component="div">{item.label} </Typography>
-        {item?.options?.length && menuArrowIcon}
+        <Typography component="div" className={classes.menuLabels}>
+          {item.label}{' '}
+        </Typography>
+        {item?.options?.length > 0 && menuArrowIcon}
       </MenuItem>
     );
   }
