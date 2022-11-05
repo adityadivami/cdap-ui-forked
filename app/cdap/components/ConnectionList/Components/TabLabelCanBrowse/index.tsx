@@ -14,13 +14,11 @@
  * the License.
  */
 
-import { Typography } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { Box } from '@material-ui/core';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
-import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import TabLabelItem from 'components/ConnectionList/Components/TabLabelCanBrowse/Components/TabLabelItem';
 import * as React from 'react';
 import { createRef, Ref, useEffect, useState } from 'react';
-import { useStyles } from './styles';
 
 export default function TabLabelCanBrowse({
   label,
@@ -33,10 +31,8 @@ export default function TabLabelCanBrowse({
   index: number;
   icon?: JSX.Element;
 }) {
-  const classes = useStyles();
-
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
-  const [refValue, setRefValue] = useState(false);
+  const [refValue, setRefValue] = useState<boolean>(false);
 
   useEffect(() => {
     /**
@@ -57,56 +53,18 @@ export default function TabLabelCanBrowse({
       key={`tooltip-${index}`}
       data-testid="connections-tab-ref-label-browse"
     >
-      <Box className={classes.labelContainerBox}>
-        <Box className={classes.labelsContainer}>
-          {icon && <Box className={classes.connectorTypeIcon}>{icon}</Box>}
-          <Typography variant="body1" className={classes.labelStyles} ref={myLabelRef}>
-            {label}
-          </Typography>
-          {count && (
-            <Typography
-              variant="body1"
-              className={classes.labelStylesCount}
-            >{`(${count})`}</Typography>
-          )}
-        </Box>
-        <Box>
-          <Box className={'canBrowseNormal'}>
-            <ChevronRightRoundedIcon className={classes.rightArrow} />
-          </Box>
-          <Box className={'canBrowseHover'}>
-            <ChevronRightRoundedIcon className={classes.rightArrowSelected} />
-          </Box>
-        </Box>
+      <Box>
+        <TabLabelItem myLabelRef={myLabelRef} icon={icon} label={label} count={count} />
       </Box>
     </CustomTooltip>
   ) : (
-    <Box className={classes.labelContainerBox} data-testid="connections-tab-label-browse">
-      <Box className={classes.labelsContainer}>
-        {icon && <Box className={classes.connectorTypeIcon}>{icon}</Box>}
-        <Typography
-          variant="body1"
-          className={classes.labelStyles}
-          ref={myLabelRef}
-          data-testid="connections-tab-label-browse-body1"
-        >
-          {label}
-        </Typography>
-        {count && (
-          <Typography
-            variant="body1"
-            className={classes.labelStylesCount}
-          >{`(${count})`}</Typography>
-        )}
-      </Box>
-      <Box>
-        <Box className={'canBrowseNormal'}>
-          <ChevronRightRoundedIcon className={classes.rightArrow} />
-        </Box>
-        <Box className={'canBrowseHover'}>
-          <ChevronRightRoundedIcon className={classes.rightArrowSelected} />
-        </Box>
-      </Box>
-    </Box>
+    <TabLabelItem
+      icon={icon}
+      myLabelRef={myLabelRef}
+      label={label}
+      count={count}
+      labelContainerTestId="connections-tab-label-browse"
+      labelTestId="connections-tab-label-browse-body1"
+    />
   );
 }
