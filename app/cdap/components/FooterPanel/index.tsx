@@ -37,10 +37,7 @@ export default function({
   return (
     <Box className={classes.containerProps}>
       <Box className={classes.innnerContainer}>
-        <ColumnViewPanelTab
-          columnViewPanelOpened={columnViewPanelOpened}
-          setOpenColumnViewHandler={setOpenColumnViewHandler}
-        />
+        <ColumnViewPanelTab />
         <TableMetaInfoTab dataCounts={dataCounts} />
         <ZoomTab />
         <DirectivesTab />

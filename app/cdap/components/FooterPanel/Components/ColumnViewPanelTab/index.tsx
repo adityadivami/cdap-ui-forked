@@ -23,7 +23,7 @@ import TabWrapper from '../common/TabWrapper';
 
 const PREFIX = 'features.FooterPanel.labels';
 
-export default function({ setOpenColumnViewHandler }) {
+export default function() {
   return (
     <Box>
       <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
