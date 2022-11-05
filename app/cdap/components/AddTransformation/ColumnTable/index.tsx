@@ -73,7 +73,9 @@ export default function({
           {columns?.length > 0 &&
             columns.map((eachColumn, index) => (
               <>
-                {directiveFunctionSupportedDataType?.includes('all') ? (
+                {directiveFunctionSupportedDataType?.includes('all') || directiveFunctionSupportedDataType?.includes(
+                    eachColumn?.type[0]?.toLowerCase()
+                  )  && (
                   <TableRowWidget
                     onSingleSelection={onSingleSelection}
                     selectedColumns={selectedColumns}
@@ -84,21 +86,6 @@ export default function({
                     index={index}
                     eachColumn={eachColumn}
                   />
-                ) : (
-                  directiveFunctionSupportedDataType?.includes(
-                    eachColumn?.type[0]?.toLowerCase()
-                  ) && (
-                    <TableRowWidget
-                      onSingleSelection={onSingleSelection}
-                      selectedColumns={selectedColumns}
-                      dataQualityValue={dataQualityValue}
-                      isSingleSelection={isSingleSelection}
-                      handleDisableCheckbox={handleDisableCheckbox}
-                      onMultipleSelection={onMultipleSelection}
-                      index={index}
-                      eachColumn={eachColumn}
-                    />
-                  )
                 )}
               </>
             ))}
