@@ -14,7 +14,6 @@
  * the License.
  */
 
-import { ReactNode } from 'react';
 export interface IFooterPanelProps {
   recipeStepsCount: number;
   dataCounts: IFooterDataCount;
