@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { GCSIcon } from 'components/ConnectionList/IconsStore/CGSIcon';
+import { GCSIcon } from 'components/ConnectionList/IconStore/CGSIcon';
 import React from 'react';
 
 export const mockConnectorTypeData = {

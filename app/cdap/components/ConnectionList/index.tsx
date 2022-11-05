@@ -22,7 +22,7 @@ import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
 import { PREFIX } from 'components/ConnectionList/constants';
-import { InfoGraph } from 'components/ConnectionList/IconsStore/InfoGraph';
+import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
 import { useStyles } from 'components/ConnectionList/styles';
 import { IFilteredData } from 'components/ConnectionList/types';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
