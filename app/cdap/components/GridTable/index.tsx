@@ -237,12 +237,7 @@ export default function() {
             })}
         </TableBody>
       </Table>
-      <FooterPanel
-        recipeStepsCount={0}
-        dataCounts={{ rowCount: 1000, columnCount: 20 }}
-        setOpenColumnViewHandler={setOpenColumnViewHandler}
-        columnViewPanelOpened={openColumnView}
-      />
+      <FooterPanel recipeStepsCount={0} dataCounts={{ rowCount: 1000, columnCount: 20 }} />
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />

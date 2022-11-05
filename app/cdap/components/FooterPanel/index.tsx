@@ -15,23 +15,16 @@
  */
 
 import { Box } from '@material-ui/core';
+import ColumnViewPanelTab from 'components/FooterPanel/Components/ColumnViewPanelTab';
+import DirectivesTab from 'components/FooterPanel/Components/DirectivesTab';
+import RecipeStepsTab from 'components/FooterPanel/Components/RecipeStepsTab';
+import TableMetaInfoTab from 'components/FooterPanel/Components/TableMetaInfoTab';
+import ZoomTab from 'components/FooterPanel/Components/ZoomTab';
 import { useStyles } from 'components/FooterPanel/styles';
 import { IFooterPanelProps } from 'components/FooterPanel/types';
 import React from 'react';
-import ColumnViewPanelTab from './Components/ColumnViewPanelTab';
-import DirectivesTab from './Components/DirectivesTab';
-import RecipeStepsTab from './Components/RecipeStepsTab';
-import TableMetaInfoTab from './Components/TableMetaInfoTab';
-import ZoomTab from './Components/ZoomTab';
 
-const PREFIX = 'features.FooterPanel.labels';
-
-export default function({
-  recipeStepsCount,
-  dataCounts,
-  columnViewPanelOpened,
-  setOpenColumnViewHandler,
-}: IFooterPanelProps) {
+export default function({ recipeStepsCount, dataCounts }: IFooterPanelProps) {
   const classes = useStyles();
 
   return (

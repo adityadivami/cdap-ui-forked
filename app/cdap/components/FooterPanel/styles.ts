@@ -36,16 +36,4 @@ export const useStyles = makeStyles({
     boxShadow: '0px -2px 2px #0000001a',
     width: '100%',
   },
-
-  directivesContainer: {
-    textAlign: 'center',
-    padding: '9.5px 32px',
-    gap: 8,
-    width: '10%',
-    height: 40,
-    background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
-
-    borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
-    cursor: 'pointer',
-  },
 });
