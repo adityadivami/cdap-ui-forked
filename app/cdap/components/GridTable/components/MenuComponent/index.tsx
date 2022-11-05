@@ -50,6 +50,7 @@ export default function({
         setMenuComponentOptions((prev) => prev.slice(0, -1));
       }}
       className={classes.root}
+      classes={{ paper: classes.popoverPaper }}
     >
       {menuOptions?.map((eachOption, optionsIndex) => (
         <MenuItemComponent

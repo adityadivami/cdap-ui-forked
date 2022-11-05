@@ -74,6 +74,7 @@ export default function({
           clickEvent.stopPropagation();
         }}
         className={classes.root}
+        classes={{ paper: classes.popoverPaper }}
       >
         {menuOptions?.map((eachOption, optionsIndex) => {
           return (
