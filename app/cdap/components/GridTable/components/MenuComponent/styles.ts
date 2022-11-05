@@ -36,7 +36,7 @@ export const useStyles = makeStyles({
     },
     '& .MuiMenu-list': {
       color: '#5F6368',
-      border: '1 solid #DADCE0',
+      border: '1px solid #DADCE0',
     },
     '& .MuiListItem-button': {
       display: 'flex',

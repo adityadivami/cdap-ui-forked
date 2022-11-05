@@ -22,4 +22,5 @@ export interface IMenuComponentProps {
   setAnchorEl;
   submitOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
+  setMenuComponentOptions;
 }

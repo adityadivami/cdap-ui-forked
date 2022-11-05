@@ -26,8 +26,8 @@ export default function({
   setAnchorEl,
   submitOption,
   columnType,
+  setMenuComponentOptions,
 }: IMenuComponentProps) {
-  console.log('menuOptions', menuOptions);
   const open = Boolean(anchorEl);
   const classes = useStyles();
   return (
@@ -35,7 +35,7 @@ export default function({
       id="long-menu"
       keepMounted
       anchorEl={anchorEl}
-      open={open}
+      open={anchorEl ? true : false}
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: 'top',
@@ -48,6 +48,7 @@ export default function({
       onClose={(e: Event) => {
         e.preventDefault();
         setAnchorEl(null);
+        setMenuComponentOptions([]);
       }}
       className={classes.root}
     >

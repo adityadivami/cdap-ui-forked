@@ -53,14 +53,14 @@ const NestedMenu = ({
       handleMenuOpenClose(title);
     }
   };
-
+  console.log('open 1', open);
   return (
     <>
       <Menu
         id="parent-menu"
         keepMounted
         anchorEl={anchorEl?.length ? anchorEl[0] : null}
-        open={open}
+        open={anchorEl?.length ? true : false}
         getContentAnchorEl={null}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         transformOrigin={{ vertical: 'top', horizontal: 'left' }}
@@ -86,18 +86,18 @@ const NestedMenu = ({
         })}
         {menuComponentOptions?.length > 0 &&
           menuComponentOptions.map((options, index) => {
+            console.log('anchorEl', anchorEl);
             return (
               <MenuComponent
-                anchorEl={anchorEl?.length > 1 ? anchorEl[index] : null}
+                anchorEl={anchorEl?.length > 1 ? anchorEl[index + 1] : null}
                 columnType={columnType.toLowerCase()}
                 menuOptions={options}
                 setAnchorEl={setAnchorEl}
+                setMenuComponentOptions={setMenuComponentOptions}
                 submitOption={(e, item) => {
                   e.preventDefault();
                   e.stopPropagation();
                   handleMenuClick(e, item);
-                  // handleMenuOpenClose(title);
-                  // submitMenuOption(item.value, item.supported_dataType);
                 }}
               />
             );
