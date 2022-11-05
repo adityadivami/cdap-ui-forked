@@ -17,8 +17,8 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import Breadcrumb from '..';
 import { createBrowserHistory as createHistory } from 'history';
+import BreadCrumb from '..';
 
 const history = createHistory({
   basename: '/',
@@ -42,7 +42,7 @@ describe('Test Breadcrumb Component', () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <Breadcrumb workspaceName="abc" location={locationMock} />{' '}
+          <BreadCrumb workspaceName="abc" location={locationMock} />{' '}
         </Route>
       </Switch>
     </Router>
@@ -58,7 +58,7 @@ describe('Test Breadcrumb Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <BreadCrumb workspaceName="abc" location={location} />
+            <Breadcrumb workspaceName="abc" location={location} />
           </Route>
         </Switch>
       </Router>
