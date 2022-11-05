@@ -14,28 +14,20 @@
  * the License.
  */
 
-import { GCSIcon } from 'components/ConnectionList/IconStore/CGSIcon';
+import { Typography } from '@material-ui/core';
+import { IHeaderCustomTooltipLabelProps } from 'components/ConnectionList/types';
 import React from 'react';
 
-export const mockTabsDataWithBrowseIndex = {
-  data: [
-    {
-      name: 'File',
-      type: 'connector',
-      category: 'File',
-      description: 'Connection to browse and sample data from the local file system.',
-      className: 'io.cdap.plugin.batch.connector.FileConnector',
-      artifact: {
-        name: 'core-plugins',
-        version: '2.10.0-SNAPSHOT',
-        scope: 'SYSTEM',
-      },
-      canBrowse: true,
-      count: 1,
-      icon: <GCSIcon />,
-    },
-  ],
-  showTabs: true,
-  selectedTab: 'S3',
-  toggleSearch: false,
-};
+export default function({ index, headersRefs, filteredData }: IHeaderCustomTooltipLabelProps) {
+  return (
+    <Typography
+      variant="body2"
+      ref={(element) => {
+        headersRefs.current[index] = element;
+      }}
+      component="div"
+    >
+      {filteredData[index - 1].selectedTab}
+    </Typography>
+  );
+}

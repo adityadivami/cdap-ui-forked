@@ -14,12 +14,10 @@
  * the License.
  */
 
-import { Box, IconButton, styled, Typography } from '@material-ui/core';
+import { Box, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import CloseIcon from '@material-ui/icons/Close';
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs';
-import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import HeaderContent from 'components/ConnectionList/Components/HeaderContent';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
 import { PREFIX } from 'components/ConnectionList/constants';
 import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
@@ -60,14 +58,14 @@ export default function ConnectionList() {
   const loc = useLocation();
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
   const [tabsLength, setTabsLength] = useState<number>(0);
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
   };
   let connectionId;
-  const [dataForTabs, setDataForTabs] = useState([
+  const [dataForTabs, setDataForTabs] = useState<IFilteredData[]>([
     {
       data: [],
       showTabs: true,
@@ -311,78 +309,18 @@ export default function ConnectionList() {
                   headerContent = headerForLevelZero();
                 } else {
                   headerContent = (
-                    <>
-                      <Box
-                        className={
-                          eachFilteredData.toggleSearch
-                            ? classes.hideComponent
-                            : classes.beforeSearchIconClickDisplay
-                        }
-                      >
-                        {headersRefs.current[index]?.offsetWidth <
-                        headersRefs.current[index]?.scrollWidth ? (
-                          <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
-                            <Typography
-                              variant="body2"
-                              ref={(element) => {
-                                headersRefs.current[index] = element;
-                              }}
-                              component="div"
-                            >
-                              {filteredData[index - 1].selectedTab}
-                            </Typography>
-                          </CustomTooltip>
-                        ) : (
-                          <Typography
-                            variant="body2"
-                            ref={(element) => {
-                              headersRefs.current[index] = element;
-                            }}
-                            component="div"
-                          >
-                            {filteredData[index - 1].selectedTab}
-                          </Typography>
-                        )}
-
-                        <Box
-                          onClick={() => {
-                            searchHandler(index);
-                          }}
-                        >
-                          <IconButton>
-                            <SearchRoundedIcon />
-                          </IconButton>
-                        </Box>
-                      </Box>
-                      <Box
-                        className={
-                          eachFilteredData.toggleSearch
-                            ? classes.afterSearchIconClick
-                            : classes.hideComponent
-                        }
-                        onMouseOver={() => makeCursorFocused(index)}
-                      >
-                        <SearchRoundedIcon />
-                        <input
-                          type="text"
-                          className={classes.searchBar}
-                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            handleSearch(e, index)
-                          }
-                          ref={(e) => {
-                            refs.current[index] = e;
-                          }}
-                        />
-                        <Box
-                          className={classes.closeIcon}
-                          onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-                            handleClearSearch(e, index)
-                          }
-                        >
-                          <CloseIcon />
-                        </Box>
-                      </Box>
-                    </>
+                    <HeaderContent
+                      eachFilteredData={eachFilteredData}
+                      headersRefs={headersRefs}
+                      index={index}
+                      dataForTabs={dataForTabs}
+                      filteredData={filteredData}
+                      searchHandler={searchHandler}
+                      makeCursorFocused={makeCursorFocused}
+                      handleSearch={handleSearch}
+                      refs={refs}
+                      handleClearSearch={handleClearSearch}
+                    />
                   );
                 }
                 return (

@@ -18,5 +18,42 @@ export interface IFilteredData {
   data: any[];
   showTabs: boolean;
   selectedTab: any;
-  isSearching: boolean;
+  toggleSearch: boolean;
+}
+
+export interface IHeaderCustomTooltipLabelProps {
+  headersRefs: React.MutableRefObject<any[]>;
+  index: number;
+  filteredData: IFilteredData;
+}
+
+export interface IHeaderContentProps extends IHeaderCustomTooltipLabelProps {
+  eachFilteredData: any;
+  dataForTabs: IFilteredData[];
+  searchHandler: (index: number) => void;
+  makeCursorFocused: (index: number) => void;
+  handleSearch: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  refs: React.MutableRefObject<any[]>;
+  handleClearSearch: (e: React.MouseEvent<HTMLInputElement>, index: number) => void;
+}
+
+export interface IHeaderCustomTooltipProps extends IHeaderCustomTooltipLabelProps {
+  dataForTabs: IFilteredData[];
+}
+
+export interface IHeaderSearchProps {
+  eachFilteredData: any;
+  index: number;
+  refs: React.MutableRefObject<any[]>;
+  makeCursorFocused: (index: number) => void;
+  handleSearch: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  handleClearSearch: (e: React.MouseEvent<HTMLInputElement>, index: number) => void;
+}
+
+export interface IHeaderSearchInputFieldProps {
+  type: string;
+  classnames: string;
+  refs: React.MutableRefObject<any[]>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  index: number;
 }

@@ -50,5 +50,5 @@ export const mockTabsTestData = {
   ],
   showTabs: true,
   selectedTab: 'S3',
-  isSearching: false,
+  toggleSearch: false,
 };

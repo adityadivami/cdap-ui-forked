@@ -51,5 +51,5 @@ export const mockTabsDataWithBrowse = {
   ],
   showTabs: true,
   selectedTab: 'S3',
-  isSearching: false,
+  toggleSearch: false,
 };

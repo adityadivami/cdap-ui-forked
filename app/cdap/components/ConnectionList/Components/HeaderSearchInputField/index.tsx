@@ -14,28 +14,21 @@
  * the License.
  */
 
-import { GCSIcon } from 'components/ConnectionList/IconStore/CGSIcon';
+import { useStyles } from 'components/ConnectionList/styles';
+import { IHeaderSearchInputFieldProps } from 'components/ConnectionList/types';
 import React from 'react';
 
-export const mockTabsDataWithBrowseIndex = {
-  data: [
-    {
-      name: 'File',
-      type: 'connector',
-      category: 'File',
-      description: 'Connection to browse and sample data from the local file system.',
-      className: 'io.cdap.plugin.batch.connector.FileConnector',
-      artifact: {
-        name: 'core-plugins',
-        version: '2.10.0-SNAPSHOT',
-        scope: 'SYSTEM',
-      },
-      canBrowse: true,
-      count: 1,
-      icon: <GCSIcon />,
-    },
-  ],
-  showTabs: true,
-  selectedTab: 'S3',
-  toggleSearch: false,
-};
+export default function({ type, classnames, refs, onChange, index }: IHeaderSearchInputFieldProps) {
+  const classes = useStyles();
+
+  return (
+    <input
+      type={type}
+      className={classnames}
+      onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, index)}
+      ref={(e: HTMLInputElement) => {
+        refs.current[index] = e;
+      }}
+    />
+  );
+}
