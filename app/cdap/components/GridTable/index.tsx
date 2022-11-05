@@ -56,8 +56,6 @@ export default function() {
       count: '0',
     },
   ]);
-  const [openColumnView, setOpenColumnView] = useState<boolean>(false);
-
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -136,10 +134,6 @@ export default function() {
         };
       });
     }
-  };
-
-  const setOpenColumnViewHandler = () => {
-    setOpenColumnView((prev) => !prev);
   };
 
   const createMissingData = (statistics: IObject) => {
