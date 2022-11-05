@@ -28,12 +28,12 @@ import org.openqa.selenium.WebElement;
 
 public class OngoingDataExplorations {
     @Given("Navigate to the Home Page")
-    public void navigateToTheHomePage(){
+    public void navigateToTheHomePage() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
     @Then("Click on the Data Explorations Card")
-    public void clickOnTheDataExplorationsCard(){
+    public void clickOnTheDataExplorationsCard() {
         try {
             WaitHelper.waitForPageToLoad();
             WebElement ele = Helper.locateElementByTestId("home-ongoing-explorations-text-0");
@@ -42,31 +42,27 @@ public class OngoingDataExplorations {
             ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-        }
-        catch(Exception e)
-        {
-            System.err.println("error: " +e);
+        } catch(Exception e) {
+        System.err.println("ERROR: "+e);
         }
     }
     @Then("Click on the Home link")
-    public void clickOnTheHomeLink(){
+    public void clickOnTheHomeLink() {
         WaitHelper.waitForPageToLoad();
         try {
             ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-text"));
             System.out.println("the home link is clicked");
-        }catch(Exception e)
-        {
-            System.err.println("error: " +e);
+        } catch(Exception e) {
+            System.err.println("ERROR: "+e);
         }
     }
     @Then("Check if the user is on the Home Page")
-    public void checkIfTheUserIsOnTheHomePage(){
+    public void checkIfTheUserIsOnTheHomePage() {
         try {
-            String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
-            Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/home");
+            String actualText = SeleniumDriver.getDriver().getCurrentUrl();
+            Assert.assertEquals(actualText, "http://localhost:11011/cdap/ns/default/home");
             System.out.println("The assertion for home url is passed");
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
         System.err.println("ERROR: "+e);
         }
     }
