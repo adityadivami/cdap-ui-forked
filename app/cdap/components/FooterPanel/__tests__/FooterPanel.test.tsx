@@ -30,6 +30,7 @@ describe('Testing Footer Panel Component - Unit tests', () => {
               recipeStepsCount={0}
               dataCounts={{ rowCount: 1, columnCount: 1 }}
               columnViewPanelOpened={false}
+              setOpenColumnViewHandler={jest.fn}
             />
           </Route>
         </Switch>
@@ -51,6 +52,7 @@ describe('Testing Footer Panel Component - Unit tests', () => {
               recipeStepsCount={10}
               dataCounts={{ rowCount: 6, columnCount: 42 }}
               columnViewPanelOpened={false}
+              setOpenColumnViewHandler={jest.fn}
             />
           </Route>
         </Switch>
@@ -73,6 +75,7 @@ describe('Testing Footer Panel Component - Unit tests', () => {
               recipeStepsCount={10}
               dataCounts={{ rowCount: 6, columnCount: 42 }}
               columnViewPanelOpened={false}
+              setOpenColumnViewHandler={jest.fn}
             />
           </Route>
         </Switch>
@@ -105,6 +108,7 @@ describe('Testing Footer Panel Component - Unit tests', () => {
               recipeStepsCount={0}
               dataCounts={{ rowCount: 1, columnCount: 1 }}
               columnViewPanelOpened={true}
+              setOpenColumnViewHandler={jest.fn}
             />
           </Route>
         </Switch>
