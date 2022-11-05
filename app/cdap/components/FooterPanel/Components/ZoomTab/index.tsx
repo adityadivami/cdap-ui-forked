@@ -14,8 +14,6 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
-import { useStyles } from 'components/FooterPanel/Components/ZoomTab/styles';
 import { ArrowIcon } from 'components/FooterPanel/IconStore/ArrowIcon';
 import { ZoomIcon } from 'components/FooterPanel/IconStore/ZoomIcon';
 import T from 'i18n-react';
@@ -26,7 +24,6 @@ import TypographyLabel from '../common/TypographyLabel';
 const PREFIX = 'features.FooterPanel.labels';
 
 export default function() {
-  const classes = useStyles();
   return (
     <TabWrapper type="medium">
       <>

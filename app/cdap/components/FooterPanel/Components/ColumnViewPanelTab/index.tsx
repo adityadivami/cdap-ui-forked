@@ -16,7 +16,6 @@
 
 import { Box } from '@material-ui/core';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
-import { useStyles } from 'components/FooterPanel/Components/ColumnViewPanelTab/styles';
 import { ColumnIcon } from 'components/FooterPanel/IconStore/ColumnIcon';
 import T from 'i18n-react';
 import React from 'react';
@@ -25,18 +24,10 @@ import TabWrapper from '../common/TabWrapper';
 const PREFIX = 'features.FooterPanel.labels';
 
 export default function({ setOpenColumnViewHandler }) {
-  const classes = useStyles();
-
-  const clickEventHandler = () => {
-    // do nothing
-  };
-
   return (
     <Box>
       <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
-        <TabWrapper type="small" clickEventListener={clickEventHandler}>
-          {ColumnIcon}
-        </TabWrapper>
+        <TabWrapper type="small">{ColumnIcon}</TabWrapper>
       </CustomTooltip>
     </Box>
   );
