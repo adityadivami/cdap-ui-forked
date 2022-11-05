@@ -29,8 +29,8 @@ describe('Testing nested menu component', () => {
         columnType={''}
         menuOptions={[]}
         title={''}
-        anchorEl={undefined}
-        setAnchorEl={() => jest.fn()}
+        anchorElement={undefined}
+        setAnchorElement={() => jest.fn()}
         open={false}
       />
     );
