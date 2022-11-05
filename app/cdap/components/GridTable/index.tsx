@@ -36,7 +36,7 @@ import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IObject, IParams, IRecords } from './types';
 import { convertNonNullPercent } from './utils';
 
-export default function() {
+export default function GridTable() {
   const { wid } = useParams() as IRecords;
 
   const params = useParams() as IRecords;
@@ -56,6 +56,7 @@ export default function() {
       count: '0',
     },
   ]);
+
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -117,6 +118,7 @@ export default function() {
   };
 
   useEffect(() => {
+    // Get DATA from URL paramteres to get data of workspace
     const payload = {
       context: params.namespace,
       workspaceId: params.wid,
@@ -124,6 +126,7 @@ export default function() {
     getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
+  // ------------@createHeadersData Function is used for creating data of Table Header
   const createHeadersData = (columnNamesList: string[], columnTypesList: IRecords) => {
     if (Array.isArray(columnNamesList)) {
       return columnNamesList.map((eachColumnName: string) => {
@@ -136,6 +139,7 @@ export default function() {
     }
   };
 
+  // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
   const createMissingData = (statistics: IObject) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
@@ -156,6 +160,7 @@ export default function() {
     return metricArray;
   };
 
+  // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData.headers, rawData.types);
