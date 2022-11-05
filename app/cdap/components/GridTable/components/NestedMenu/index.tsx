@@ -60,12 +60,15 @@ export default function({
         anchorEl={anchorElement?.length ? anchorElement[0] : null}
         open={anchorElement?.length ? true : false}
         getContentAnchorEl={null}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
-        onClose={() => {
-          setAnchorElement(null);
-          handleMenuOpenClose(title);
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
         }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        onClose={() => {}}
         onClick={(clickEvent) => {
           clickEvent.preventDefault();
           clickEvent.stopPropagation();

@@ -46,8 +46,8 @@ export default function({
       }}
       onClose={(e: Event) => {
         e.preventDefault();
-        setAnchorElement(null);
-        setMenuComponentOptions([]);
+        setAnchorElement((prev) => prev.slice(0, -1));
+        setMenuComponentOptions((prev) => prev.slice(0, -1));
       }}
       className={classes.root}
     >
