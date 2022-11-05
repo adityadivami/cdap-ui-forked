@@ -18,9 +18,13 @@ import { Box, Typography } from '@material-ui/core';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import T from 'i18n-react';
 import React from 'react';
-import { ArrowIcon, ColumnIcon, ZoomIcon } from './images';
-import { useStyles } from './styles';
-import { IFooterPanelProps } from './types';
+import { ArrowIcon } from 'components/FooterPanel/IconStore/ArrowIcon';
+import { ColumnIcon } from 'components/FooterPanel/IconStore/ColumnIcon';
+import { ZoomIcon } from 'components/FooterPanel/IconStore/ZoomIcon';
+import { useStyles } from 'components/FooterPanel/styles';
+import { IFooterPanelProps } from 'components/FooterPanel/types';
+
+const PREFIX = 'features.FooterPanel.labels';
 
 export default function({
   recipeStepsCount,
@@ -33,7 +37,7 @@ export default function({
     <Box className={classes.containerProps}>
       <Box className={classes.innnerContainer}>
         <Box>
-          <CustomTooltip title={`${T.translate('features.FooterPanel.labels.columnViewPanel')}`}>
+          <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
             <Box
               className={`${classes.imgContainer} ${
                 columnViewPanelOpened ? classes.showDepth : classes.showNormalView
@@ -50,8 +54,13 @@ export default function({
             className={classes.data}
             id="footerpanel-labels-title"
             data-testid="footerpanel-labels-title"
+            component="span"
           >
-            {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
+            {`${T.translate(`${PREFIX}.currentData`)} - ${dataCounts.rowCount} ${T.translate(
+              `${PREFIX}.rows`
+            )} ${T.translate(`${PREFIX}.and`)} ${dataCounts.columnCount} ${T.translate(
+              `${PREFIX}.columns`
+            )}`}
           </Typography>
         </Box>
         <Box
@@ -64,8 +73,9 @@ export default function({
             className={classes.zoomPercent}
             id="footerpanel-labels-zoompercent"
             data-testid="footerpanel-labels-zoompercent"
+            component="span"
           >
-            {T.translate('features.FooterPanel.labels.zoomPercent100')}
+            {`${T.translate(`${PREFIX}.zoomPercent100`)}`}
           </Typography>
           {ArrowIcon}
         </Box>
@@ -73,21 +83,24 @@ export default function({
           <Typography
             data-testid="footerpanel-labels-directives"
             id="footerpanel-labels-directives"
+            component="span"
           >
-            {T.translate('features.FooterPanel.labels.directives')}
+            {`${T.translate(`${PREFIX}.directives`)}`}
           </Typography>
         </Box>
         <Box className={classes.recipeContainer}>
           <Typography
             data-testid="footerpanel-labels-recipesteps"
             id="footerpanel-labels-recipesteps"
+            component="span"
           >
-            {T.translate('features.FooterPanel.labels.recipeSteps')}
+            {`${T.translate(`${PREFIX}.recipeSteps`)}`}
           </Typography>
           <Typography
-            className={classes.recipeCount}
-            id="footerpanel-labels-recipecount"
-            data-testid="footerpanel-labels-recipecount"
+            className={classes.recipeStepsCount}
+            id="footerpanel-labels-recipeStepsCount"
+            data-testid="footerpanel-labels-recipeStepsCount"
+            component="span"
           >
             {recipeStepsCount}
           </Typography>

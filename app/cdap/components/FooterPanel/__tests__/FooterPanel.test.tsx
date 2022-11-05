@@ -60,7 +60,7 @@ describe('Testing Footer Panel Component - Unit tests', () => {
     const label_title = screen.getByTestId(/footerpanel-labels-title/i);
     expect(label_title).toHaveTextContent('Current data - 6 rows and 42 columns');
 
-    const recipe_count = screen.getByTestId(/footerpanel-labels-recipecount/i);
+    const recipe_count = screen.getByTestId(/footerpanel-labels-recipeStepsCount/i);
     expect(recipe_count).toHaveTextContent('10');
   });
 

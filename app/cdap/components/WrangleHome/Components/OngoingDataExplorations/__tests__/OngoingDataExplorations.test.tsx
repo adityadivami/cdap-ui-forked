@@ -20,7 +20,7 @@ import history from 'app/cdap/services/history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import operators from 'rxjs/operators';
-import OngoingDataExploration from '../index';
+import OngoingDataExplorations from 'components/WrangleHome/Components/OngoingDataExplorations';
 import { getWorkspaceListSubscribeMock, switchMapCallbackMock } from '../mock/mockoldData';
 
 test('renders Ongoing Data Exploration component', async () => {
@@ -42,7 +42,7 @@ test('renders Ongoing Data Exploration component', async () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <OngoingDataExploration />
+          <OngoingDataExplorations />
         </Route>
       </Switch>
     </Router>

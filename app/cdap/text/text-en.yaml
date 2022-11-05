@@ -3441,7 +3441,11 @@ features:
       loadToGrid: 'Wrangle'
   FooterPanel:
     labels:
+      and: 'and'
+      columns: 'columns'
+      columnViewPanel: 'Column View Panel'
+      currentData: 'Current data'
       directives: 'Directives'
       recipeSteps: 'Recipe Steps'
+      rows: 'rows'
       zoomPercent100: '100%'
-      columnViewPanel: 'Column View Panel'

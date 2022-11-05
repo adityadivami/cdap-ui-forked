@@ -69,9 +69,9 @@ export const useStyles = makeStyles({
   },
   dataWrapper: {
     width: '65%',
+    padding: '9.5px 32px',
   },
   data: {
-    padding: '8px 32px',
     height: 21,
     textAlign: 'left',
     fontFamily: 'Noto Sans',
@@ -118,7 +118,7 @@ export const useStyles = makeStyles({
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
     display: 'flex',
   },
-  recipeCount: {
+  recipeStepsCount: {
     backgroundColor: grey[600],
     height: 21,
     width: 20,
