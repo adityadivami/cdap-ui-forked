@@ -18,20 +18,21 @@ import React from 'react';
 import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
 import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
+import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
 
 export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
   const classes = useStyles();
 
   return (
-    <div className={classes.columnsCountTextStyles}>
+    <div className={classes.columnsCountTextStyles} data-testid='count-widget-parent'>
       {selectedColumnsCount
         ? selectedColumnsCount > 10
           ? selectedColumnsCount
           : `${T.translate(
-              'features.WranglerNewUI.GridPage.selectColumnListPanel.zero'
+              `${SELECT_COLUMN_LIST_PREFIX}.zero`
             )}${selectedColumnsCount}`
-        : `${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.no')}`}
-      &nbsp;{T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected')}
+        : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)}`}
+      &nbsp;{T.translate(`${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`)}
     </div>
   );
 }

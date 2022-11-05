@@ -14,14 +14,7 @@
  * the License.
  */
 
-import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
-import React from 'react';
-
-export interface IMenuComponentProps {
-  anchorElement: HTMLElement;
-  menuOptions: IMenuItem[];
-  setAnchorElement: React.Dispatch<React.SetStateAction<HTMLElement[]>>;
-  submitOption: (e: React.MouseEvent<HTMLLIElement, MouseEvent>, item: IMenuItem) => void;
-  columnType: string;
-  setMenuComponentOptions: React.Dispatch<React.SetStateAction<IMenuItem[][]>>;
-}
+export const DATA_TYPE_LABEL_PREFIX =
+  'features.WranglerNewUI.GridPage.transformations.options.labels.datatype';
+export const TOOLBAR_ICONS_LABEL_PREFIX =
+  'features.WranglerNewUI.GridPage.transformations.options.labels';

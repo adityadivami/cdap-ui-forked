@@ -26,6 +26,7 @@ import ColumnTable from 'components/AddTransformation/ColumnTable';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
+import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
 
 export default function({
   transformationFunctionSupportedDataType,
@@ -64,7 +65,7 @@ export default function({
             }
           );
         });
-
+        console.log('columnData', columnData, columnsAsPerType)
   const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
     setSelectedColumn([column]);
@@ -125,7 +126,7 @@ export default function({
   };
 
   return (
-    <section className={classes.columnsCountTextStyles}>
+    <section className={classes.columnsCountTextStyles} data-testid='select-column-list-parent'>
       <div className={classes.selectColumnsHeaderStyles}>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
@@ -151,11 +152,11 @@ export default function({
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
             <Typography component="div" className={classes.mainHeaderMessage}>
-              {T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.noColumns')}
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
             </Typography>
             <Typography component="div" className={classes.subHeaderMessage}>
               {T.translate(
-                'features.WranglerNewUI.GridPage.selectColumnListPanel.noMatchColumnDatatype'
+                `${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`
               )}
             </Typography>
           </Box>

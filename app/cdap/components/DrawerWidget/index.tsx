@@ -52,8 +52,8 @@ export default function({
             <DrawerWidgetHeading headingText={headingText.toString()} />
           </div>
           <Box className={classes.headerRightStyles}>
-            {headerActionTemplate && <div>{headerActionTemplate}</div>}
-            {showDivider && <div className={classes.dividerLineStyles} />}
+            {headerActionTemplate && <div data-testid='header-action-template'>{headerActionTemplate}</div>}
+            {showDivider && <div className={classes.dividerLineStyles} data-testid='show-divider-box'/>}
             <CloseRoundedIcon
               className={classes.pointerStyles}
               color="action"

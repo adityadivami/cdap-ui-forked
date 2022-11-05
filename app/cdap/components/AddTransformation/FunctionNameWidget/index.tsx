@@ -19,6 +19,7 @@ import T from 'i18n-react';
 import { useStyles } from 'components/AddTransformation/styles';
 import { TickIcon } from 'components/AddTransformation/iconStore';
 import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 
 export default function({ functionName }: IFunctionNameWidgetProps) {
   const classes = useStyles();
@@ -31,7 +32,7 @@ export default function({ functionName }: IFunctionNameWidgetProps) {
           data-testid="function-name-head"
           id="function-name-head"
         >
-          {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.function')}
+          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}
         </div>
         {TickIcon}
       </div>

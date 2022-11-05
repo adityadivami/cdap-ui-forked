@@ -28,6 +28,7 @@ import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
 import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 
 export default function({
   columns,
@@ -42,7 +43,7 @@ export default function({
   const classes = useStyles();
 
   return (
-    <TableContainer component={Box}>
+    <TableContainer component={Box} data-testid='column-table-parent'>
       <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
         <TableHead>
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
@@ -55,15 +56,17 @@ export default function({
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
+              data-testid='panel-columns'
             >
-              {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}
+              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
             </TableCell>
             <TableCell
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
+              data-testid='panel-values'
             >
-              {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}
+              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
             </TableCell>
           </TableRow>
         </TableHead>

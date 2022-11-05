@@ -22,7 +22,7 @@ import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
 
 describe('It should test the SelectColumnsList Component', () => {
   it('should render the SelectColumnsList Component', () => {
-    const container = render(
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -41,7 +41,7 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined;
+    expect(screen.getByTestId(/select-column-list-parent/i)).toBeInTheDocument();
   });
   it('should render the SelectColumnsList Component with some input value along with label and null and trigger input ', () => {
     render(
@@ -74,8 +74,8 @@ describe('It should test the SelectColumnsList Component', () => {
     expect(searchIconElement).toBeInTheDocument();
   });
 
-  it('should render the SelectColumnsList Component with some input value along with label and null', () => {
-    const container = render(
+  it('should render the SelectColumnsList Component with some input value along with label and null and trigger searchIconClick', () => {
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -102,12 +102,12 @@ describe('It should test the SelectColumnsList Component', () => {
 
     const searchIconElement = screen.getByTestId(/click-handle-focus/i);
     fireEvent.click(searchIconElement);
-    expect(container).toBeDefined;
+    expect(searchIconElement).toBeInTheDocument();
   });
 
-  it('should render the SelectColumnsList Component with some input value along with label and null', () => {
+  it('should render the SelectColumnsList Component while changing text input with some input value along with label and null', () => {
     const getSelectedColumns = jest.fn();
-    const container = render(
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -129,11 +129,12 @@ describe('It should test the SelectColumnsList Component', () => {
 
     const inputSearchElement = screen.getByTestId('input_id');
     fireEvent.change(inputSearchElement, { target: { value: '123' } });
-    expect(container).toBeDefined;
+    expect(inputSearchElement).toHaveValue('123');
+    
   });
-  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the single selection function', () => {
+  it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the single selection function and to click the radio button', () => {
     const mockSetSelected = jest.fn();
-    const container = render(
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -157,12 +158,12 @@ describe('It should test the SelectColumnsList Component', () => {
     );
     const radioInputElement = screen.getAllByTestId('transformation-radio-select-columns');
     fireEvent.click(radioInputElement[0], { target: { checked: true } });
-    expect(container).toBeDefined;
+    expect(radioInputElement[0]).toBeInTheDocument();
   });
 
   it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the multiple selection function', () => {
     const mockSetSelected = jest.fn();
-    const container = render(
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -185,8 +186,8 @@ describe('It should test the SelectColumnsList Component', () => {
       </Router>
     );
     const checkboxInputElement = screen.getAllByTestId('check-box-input-checkbox');
-    fireEvent.click(checkboxInputElement[0], { target: { checked: true } });
     fireEvent.click(checkboxInputElement[0], { target: { checked: false } });
-    expect(container).toBeDefined;
+    fireEvent.click(checkboxInputElement[0], { target: { checked: true } });
+    expect(checkboxInputElement[0]).toBeInTheDocument();
   });
 });

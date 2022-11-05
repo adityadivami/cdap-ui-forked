@@ -27,7 +27,7 @@ import {
   IDataQualityItem,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
-import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import { multipleColumnSelected, ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
 import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
@@ -102,7 +102,7 @@ export default function({
     <Fragment>
       <DrawerWidget
         headingText={T.translate(
-          'features.WranglerNewUI.GridPage.addTransformationPanel.addTransformation'
+          `${ADD_TRANSFORMATION_PREFIX}.addTransformation`
         )}
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
@@ -119,7 +119,7 @@ export default function({
           </div>
           <ButtonWidget
             buttonText={T.translate(
-              'features.WranglerNewUI.GridPage.addTransformationPanel.applyStep'
+              `${ADD_TRANSFORMATION_PREFIX}.applyStep`
             ).toString()}
             className={classes.applyStepButtonStyles}
             onClick={handleApply}
@@ -131,7 +131,7 @@ export default function({
       </DrawerWidget>
       <DrawerWidget
         headingText={T.translate(
-          'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara'
+          `${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`
         )}
         openDrawer={columnsPopup}
         showBackIcon={true}
@@ -149,14 +149,12 @@ export default function({
             />
           </div>
           <ButtonWidget
-            buttonText={T.translate(
-              'features.WranglerNewUI.GridPage.addTransformationPanel.done'
-            ).toString()}
+            buttonText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`).toString()}
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
-            variant="contained"
             disabled={enableDoneButton()}
-            buttonId="done-step-button"
+            variant="contained"
+            buttonId='done-button'
           />
         </Container>
       </DrawerWidget>

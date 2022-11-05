@@ -20,6 +20,7 @@ import { useStyles } from 'components/AddTransformation/styles';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import { ISelectColumnsWidgetProps } from 'components/AddTransformation/SelectColumnsWidget/types';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 
 export default function({
   selectedColumns,
@@ -35,14 +36,14 @@ export default function({
         id="select-column-title"
         data-testid="select-column-title"
       >
-        {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara')}
+        {T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
       </div>
       <div
         className={classes.quickSelectTextStyles}
         id="select-column-subtitle"
         data-testid="select-column-subtitle"
       >
-        {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.quickSelect')}
+        {T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}
       </div>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
@@ -55,10 +56,10 @@ export default function({
           buttonText={
             multipleColumnSelected?.filter((el) => el.value === functionName).length > 0
               ? T.translate(
-                  'features.WranglerNewUI.GridPage.addTransformationPanel.selectMultiColumns'
+                  `${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`
                 ).toString()
               : T.translate(
-                  'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumn'
+                  `${ADD_TRANSFORMATION_PREFIX}.selectColumn`
                 ).toString()
           }
           className={classes.selectButtonStyles}

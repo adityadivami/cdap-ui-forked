@@ -21,20 +21,20 @@ import { useStyles } from 'components/GridTable/components/MenuComponent/styles'
 import { IMenuComponentProps } from 'components/GridTable/components/MenuComponent/types';
 
 export default function({
-  anchorEl,
+  anchorElement,
   menuOptions,
-  setAnchorEl,
+  setAnchorElement,
   submitOption,
   columnType,
+  setMenuComponentOptions,
 }: IMenuComponentProps) {
-  const open = Boolean(anchorEl);
   const classes = useStyles();
   return (
     <Menu
       id="long-menu"
       keepMounted
-      anchorEl={anchorEl}
-      open={open}
+      anchorEl={anchorElement}
+      open={anchorElement ? true : false}
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: 'top',
@@ -46,15 +46,17 @@ export default function({
       }}
       onClose={(e: Event) => {
         e.preventDefault();
-        setAnchorEl(null);
+        setAnchorElement((prev) => prev.slice(0, -1));
+        setMenuComponentOptions((prev) => prev.slice(0, -1));
       }}
       className={classes.root}
+      classes={{ paper: classes.popoverPaper }}
     >
-      {menuOptions?.map((eachOption, index) => (
+      {menuOptions?.map((eachOption, optionsIndex) => (
         <MenuItemComponent
           columnType={columnType}
           item={eachOption}
-          index={index}
+          index={optionsIndex}
           onMenuClick={submitOption}
         />
       ))}
