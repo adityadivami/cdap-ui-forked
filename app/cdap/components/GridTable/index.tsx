@@ -56,6 +56,7 @@ export default function() {
       count: '0',
     },
   ]);
+  const [openColumnView, setOpenColumnView] = useState<boolean>(false);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -135,6 +136,10 @@ export default function() {
         };
       });
     }
+  };
+
+  const setOpenColumnViewHandler = () => {
+    setOpenColumnView((prev) => !prev);
   };
 
   const createMissingData = (statistics: IObject) => {
@@ -235,7 +240,8 @@ export default function() {
       <FooterPanel
         recipeStepsCount={0}
         dataCounts={{ rowCount: 1000, columnCount: 20 }}
-        columnViewPanelOpened={false}
+        setOpenColumnViewHandler={setOpenColumnViewHandler}
+        columnViewPanelOpened={openColumnView}
       />
       {loading && (
         <div className={classes.loadingContainer}>

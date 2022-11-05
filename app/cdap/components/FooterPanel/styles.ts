@@ -55,13 +55,13 @@ export const useStyles = makeStyles({
     flex: 'none',
     order: 0,
     flexGrow: 0,
-    borderRight: '1px solid #3994ff66',
     '&:hover': {
       cursor: 'pointer',
     },
   },
   showNormalView: {
     background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
+    borderRight: '1px solid #3994ff66',
   },
   showDepth: {
     backgroundColor: '#F3F6F9',

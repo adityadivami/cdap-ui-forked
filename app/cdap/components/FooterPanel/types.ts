@@ -19,6 +19,7 @@ export interface IFooterPanelProps {
   recipeStepsCount: number;
   dataCounts: IFooterDataCount;
   columnViewPanelOpened: boolean;
+  setOpenColumnViewHandler: () => void;
 }
 
 interface IFooterDataCount {

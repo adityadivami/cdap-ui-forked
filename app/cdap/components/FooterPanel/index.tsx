@@ -30,6 +30,7 @@ export default function({
   recipeStepsCount,
   dataCounts,
   columnViewPanelOpened,
+  setOpenColumnViewHandler,
 }: IFooterPanelProps) {
   const classes = useStyles();
 
@@ -44,6 +45,7 @@ export default function({
               }`}
               data-testid="footer-panel-column-icon-container"
               id="footer-panel-column-icon-container"
+              onClick={setOpenColumnViewHandler}
             >
               {ColumnIcon}
             </Box>
