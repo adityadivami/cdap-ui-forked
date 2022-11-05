@@ -19,10 +19,8 @@ import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import { useStyles } from 'components/ConnectionList/Components/ConnectionTabs/styles';
-import React from 'react';
-import { useEffect, useState } from 'react';
-import TabLabelCanBrowse from '../TabLabelCanBrowse';
-import TabLabelCanSample from '../TabLabelCanSample';
+import React, { useEffect, useState } from 'react';
+import RenderTabLabel from './Components/RenderTabLabel';
 
 const ConnectionTab = styled(Tab)({
   width: '100%',
@@ -93,31 +91,20 @@ export default function ConnectionsTabs({
                 role="button"
                 data-testid="connections-tab-button"
                 onClick={() => {
-                  if (index > 1) {
-                    if (connectorType.canBrowse) {
-                      handleChange(connectorType, index);
-                    }
+                  if (index > 1 && !connectorType.canBrowse) {
+                    return;
                   } else {
                     handleChange(connectorType, index);
                   }
                 }}
                 label={
-                  [0, 1].includes(index) || connectorType.canBrowse ? (
-                    <TabLabelCanBrowse
-                      label={connectorType.name}
-                      count={index === 0 ? connectorType.count : undefined}
-                      index={index}
-                      icon={connectorType.icon}
-                    />
-                  ) : (
-                    <TabLabelCanSample
-                      label={connectorType.name}
-                      entity={connectorType}
-                      initialConnectionId={connectionIdProp}
-                      toggleLoader={toggleLoader}
-                      setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-                    />
-                  )
+                  <RenderTabLabel
+                    index={index}
+                    connectorType={connectorType}
+                    connectionIdProp={connectionIdProp}
+                    toggleLoader={toggleLoader}
+                    setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                  />
                 }
                 value={connectorType.name}
                 disableTouchRipple
