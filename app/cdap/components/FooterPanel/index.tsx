@@ -15,15 +15,15 @@
  */
 
 import { Box, Typography } from '@material-ui/core';
-import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
-import T from 'i18n-react';
-import React from 'react';
-import { ArrowIcon } from 'components/FooterPanel/IconStore/ArrowIcon';
-import { ColumnIcon } from 'components/FooterPanel/IconStore/ColumnIcon';
-import { ZoomIcon } from 'components/FooterPanel/IconStore/ZoomIcon';
 import { useStyles } from 'components/FooterPanel/styles';
 import { IFooterPanelProps } from 'components/FooterPanel/types';
+import T from 'i18n-react';
+import React from 'react';
 import ColumnViewPanelTab from './Components/ColumnViewPanelTab';
+import DirectivesTab from './Components/DirectivesTab';
+import RecipeStepsTab from './Components/RecipeStepsTab';
+import TableMetaInfoTab from './Components/TableMetaInfoTab';
+import ZoomTab from './Components/ZoomTab';
 
 const PREFIX = 'features.FooterPanel.labels';
 
@@ -42,62 +42,10 @@ export default function({
           columnViewPanelOpened={columnViewPanelOpened}
           setOpenColumnViewHandler={setOpenColumnViewHandler}
         />
-        <Box className={classes.dataWrapper}>
-          <Typography
-            className={classes.data}
-            id="footerpanel-labels-title"
-            data-testid="footerpanel-labels-title"
-            component="span"
-          >
-            {`${T.translate(`${PREFIX}.currentData`)} - ${dataCounts.rowCount} ${T.translate(
-              `${PREFIX}.rows`
-            )} ${T.translate(`${PREFIX}.and`)} ${dataCounts.columnCount} ${T.translate(
-              `${PREFIX}.columns`
-            )}`}
-          </Typography>
-        </Box>
-        <Box
-          className={classes.zoomContainer}
-          data-testid="footerpanel-box-zoom"
-          id="footerpanel-box-zoom"
-        >
-          {ZoomIcon}
-          <Typography
-            className={classes.zoomPercent}
-            id="footerpanel-labels-zoompercent"
-            data-testid="footerpanel-labels-zoompercent"
-            component="span"
-          >
-            {`${T.translate(`${PREFIX}.zoomPercent100`)}`}
-          </Typography>
-          {ArrowIcon}
-        </Box>
-        <Box className={classes.directivesContainer}>
-          <Typography
-            data-testid="footerpanel-labels-directives"
-            id="footerpanel-labels-directives"
-            component="span"
-          >
-            {`${T.translate(`${PREFIX}.directives`)}`}
-          </Typography>
-        </Box>
-        <Box className={classes.recipeContainer}>
-          <Typography
-            data-testid="footerpanel-labels-recipesteps"
-            id="footerpanel-labels-recipesteps"
-            component="span"
-          >
-            {`${T.translate(`${PREFIX}.recipeSteps`)}`}
-          </Typography>
-          <Typography
-            className={classes.recipeStepsCount}
-            id="footerpanel-labels-recipeStepsCount"
-            data-testid="footerpanel-labels-recipeStepsCount"
-            component="span"
-          >
-            {recipeStepsCount}
-          </Typography>
-        </Box>
+        <TableMetaInfoTab dataCounts={dataCounts} />
+        <ZoomTab />
+        <DirectivesTab />
+        <RecipeStepsTab recipeStepsCount={recipeStepsCount} />
       </Box>
     </Box>
   );

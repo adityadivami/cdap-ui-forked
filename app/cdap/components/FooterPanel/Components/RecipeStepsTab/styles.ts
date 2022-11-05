@@ -18,35 +18,22 @@ import { makeStyles } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
-  containerProps: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    width: '100%',
-    position: 'absolute',
-    bottom: 54,
-  },
-  innnerContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'space-between',
-    backgroundColor: '#F3F6F9',
-    height: 40,
-    boxShadow: '0px -2px 2px #0000001a',
-    width: '100%',
-  },
-
-  directivesContainer: {
+  recipeContainer: {
+    padding: '10px 32px',
+    cursor: 'pointer',
     textAlign: 'center',
-    padding: '9.5px 32px',
     gap: 8,
-    width: '10%',
+    width: 184,
     height: 40,
     background: 'linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%)',
-
     borderLeft: '1px solid rgba(57, 148, 255, 0.4)',
-    cursor: 'pointer',
+    display: 'flex',
+  },
+  recipeStepsCount: {
+    backgroundColor: grey[600],
+    height: 21,
+    width: 20,
+    color: '#FFFFFF',
+    borderRadius: 4,
   },
 });

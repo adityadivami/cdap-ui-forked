@@ -18,26 +18,6 @@ import { makeStyles } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
-  containerProps: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
-    width: '100%',
-    position: 'absolute',
-    bottom: 54,
-  },
-  innnerContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'space-between',
-    backgroundColor: '#F3F6F9',
-    height: 40,
-    boxShadow: '0px -2px 2px #0000001a',
-    width: '100%',
-  },
-
   directivesContainer: {
     textAlign: 'center',
     padding: '9.5px 32px',
