@@ -14,10 +14,9 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useStyles } from 'components/FooterPanel/styles';
 import { IFooterPanelProps } from 'components/FooterPanel/types';
-import T from 'i18n-react';
 import React from 'react';
 import ColumnViewPanelTab from './Components/ColumnViewPanelTab';
 import DirectivesTab from './Components/DirectivesTab';
