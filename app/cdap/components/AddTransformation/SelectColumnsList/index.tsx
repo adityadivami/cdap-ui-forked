@@ -65,7 +65,7 @@ export default function({
             }
           );
         });
-
+        console.log('columnData', columnData, columnsAsPerType)
   const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
     setSelectedColumn([column]);

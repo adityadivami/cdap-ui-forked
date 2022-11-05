@@ -17,10 +17,10 @@
 import React from 'react';
 import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
-import { ISelectColumnCountProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
+import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
 
-export default function({ selectedColumnsCount }: ISelectColumnCountProps) {
+export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
   const classes = useStyles();
 
   return (
