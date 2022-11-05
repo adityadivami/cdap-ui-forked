@@ -33,6 +33,7 @@ const testObj = {
   recipeSteps: 0,
   dataQuality: 100,
 };
+
 test('renders Ongoing Data Exploration component', async () => {
   jest.spyOn(operators as any, 'switchMap').mockImplementation((callback: Function) => {
     callback(switchMapCallbackMock);
