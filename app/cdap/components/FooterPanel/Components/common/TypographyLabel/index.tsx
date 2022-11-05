@@ -19,6 +19,7 @@ const OutlinedLabel = styled(Typography)`
     width: 20px;
     color: #ffffff;
     border-radius: 4px;
+    padding: 4px 5px;
   }
 `;
 

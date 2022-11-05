@@ -20,6 +20,7 @@ import { ArrowIcon } from 'components/FooterPanel/IconStore/ArrowIcon';
 import { ZoomIcon } from 'components/FooterPanel/IconStore/ZoomIcon';
 import T from 'i18n-react';
 import React from 'react';
+import TabWrapper from '../common/TabWrapper';
 import TypographyLabel from '../common/TypographyLabel';
 
 const PREFIX = 'features.FooterPanel.labels';
@@ -27,16 +28,14 @@ const PREFIX = 'features.FooterPanel.labels';
 export default function() {
   const classes = useStyles();
   return (
-    <Box
-      className={classes.zoomContainer}
-      data-testid="footerpanel-box-zoom"
-      id="footerpanel-box-zoom"
-    >
-      {ZoomIcon}
-      <TypographyLabel type={'simple'}>
-        <>{`${T.translate(`${PREFIX}.zoomPercent100`)}`}</>
-      </TypographyLabel>
-      {ArrowIcon}
-    </Box>
+    <TabWrapper type="medium">
+      <>
+        {ZoomIcon}
+        <TypographyLabel type={'simple'}>
+          <>{`${T.translate(`${PREFIX}.zoomPercent100`)}`}</>
+        </TypographyLabel>
+        {ArrowIcon}
+      </>
+    </TabWrapper>
   );
 }

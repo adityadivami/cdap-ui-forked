@@ -20,23 +20,23 @@ import { useStyles } from 'components/FooterPanel/Components/ColumnViewPanelTab/
 import { ColumnIcon } from 'components/FooterPanel/IconStore/ColumnIcon';
 import T from 'i18n-react';
 import React from 'react';
+import TabWrapper from '../common/TabWrapper';
 
 const PREFIX = 'features.FooterPanel.labels';
 
 export default function({ setOpenColumnViewHandler }) {
   const classes = useStyles();
 
+  const clickEventHandler = () => {
+    // do nothing
+  };
+
   return (
     <Box>
       <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
-        <Box
-          className={`${classes.imgContainer}`}
-          data-testid="footer-panel-column-icon-container"
-          id="footer-panel-column-icon-container"
-          onClick={setOpenColumnViewHandler}
-        >
+        <TabWrapper type="small" clickEventListener={clickEventHandler}>
           {ColumnIcon}
-        </Box>
+        </TabWrapper>
       </CustomTooltip>
     </Box>
   );

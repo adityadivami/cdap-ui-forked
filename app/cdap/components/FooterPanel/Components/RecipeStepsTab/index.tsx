@@ -18,6 +18,7 @@ import { Box } from '@material-ui/core';
 import { useStyles } from 'components/FooterPanel/Components/RecipeStepsTab/styles';
 import T from 'i18n-react';
 import React from 'react';
+import TabWrapper from '../common/TabWrapper';
 import TypographyLabel from '../common/TypographyLabel';
 
 const PREFIX = 'features.FooterPanel.labels';
@@ -26,13 +27,15 @@ export default function({ recipeStepsCount }) {
   const classes = useStyles();
 
   return (
-    <Box className={classes.recipeContainer}>
-      <TypographyLabel type={'simple'}>
-        <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>
-      </TypographyLabel>
-      <TypographyLabel type={'outlined'}>
-        <>{recipeStepsCount}</>
-      </TypographyLabel>
-    </Box>
+    <TabWrapper type="medium">
+      <>
+        <TypographyLabel type={'simple'}>
+          <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>
+        </TypographyLabel>
+        <TypographyLabel type={'outlined'}>
+          <>{recipeStepsCount}</>
+        </TypographyLabel>
+      </>
+    </TabWrapper>
   );
 }
