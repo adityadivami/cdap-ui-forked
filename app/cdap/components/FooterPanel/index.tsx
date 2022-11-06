@@ -49,12 +49,12 @@ const TabsWrapper = styled(Box)`
   }
 `;
 
-export default function({ recipeStepsCount, dataCounts }: IFooterPanelProps) {
+export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
   return (
     <Container>
       <TabsWrapper>
         <ColumnViewPanelTab />
-        <TableMetaInfoTab {...dataCounts} />
+        <TableMetaInfoTab {...gridMetaInfo} />
         <ZoomTab />
         <DirectivesTab />
         <RecipeStepsTab recipeStepsCount={recipeStepsCount} />

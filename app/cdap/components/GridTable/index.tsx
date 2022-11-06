@@ -236,7 +236,7 @@ export default function GridTable() {
             })}
         </TableBody>
       </Table>
-      <FooterPanel recipeStepsCount={0} dataCounts={{ rowCount: 1000, columnCount: 20 }} />
+      <FooterPanel recipeStepsCount={0} gridMetaInfo={{ rowCount: 1000, columnCount: 20 }} />
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />

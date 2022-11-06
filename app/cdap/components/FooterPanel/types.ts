@@ -16,10 +16,10 @@
 
 export interface IFooterPanelProps {
   recipeStepsCount: number;
-  dataCounts: IDataCount;
+  gridMetaInfo: IGridMetaInfo;
 }
 
-interface IDataCount {
+interface IGridMetaInfo {
   rowCount: number;
   columnCount: number;
 }
