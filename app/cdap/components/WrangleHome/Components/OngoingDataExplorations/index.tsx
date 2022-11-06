@@ -36,6 +36,7 @@ import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { IExplorationCardDetails } from '../OngoingDataExplorationsCard/types';
 import styled from 'styled-components';
+import { WORKSPACES } from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 
 const OngoingExplorationCardLink = styled(Link)`
   text-decoration: none !important;
@@ -199,7 +200,7 @@ export default function({
             </OngoingExplorationCardLink>
           );
         })
-      ) : fromAddress === 'Workspaces' ? (
+      ) : fromAddress === WORKSPACES ? (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.workspacesList.title')}
           subtitle={T.translate('features.NoRecordScreen.workspacesList.subtitle')}

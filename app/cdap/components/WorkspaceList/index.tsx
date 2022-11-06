@@ -20,7 +20,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { useStyles } from 'components/WorkspaceList/style';
 import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExplorations';
-import { WORKSPACES } from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
+import { WORKSPACES } from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 import T from 'i18n-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';

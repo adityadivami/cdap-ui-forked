@@ -3449,17 +3449,17 @@ features:
         wrangleHome: 'Home'
     OnGoingDataExplorations:
       labels:
+       connectorType: connectorType
+       connectionName: connectionName
+       count: count
+       dataQuality: dataQuality
+       icon: icon
+       iconWithText: iconWithText
        importedDataset: Imported Dataset
        nullValues: Null values
-       recipeSteps: Recipe steps
-       connectorType: connectorType
-       icon: icon
-       connectionName: connectionName
-       workspaceName: workspaceName
-       iconWithText: iconWithText
-       text: text
-       recipeStepsKey: recipeSteps
-       dataQuality: dataQuality
        percentageWithText: percentageWithText
+       recipeSteps: Recipe steps
+       recipeStepsKey: recipeSteps
+       text: text
        workspaceId: workspaceId
-       count: count
+       workspaceName: workspaceName

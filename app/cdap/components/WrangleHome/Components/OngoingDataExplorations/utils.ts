@@ -31,7 +31,7 @@ import {
   TEXT,
   WORKPSACE_NAME,
   WORKSPACE_ID,
-} from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
+} from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 import T from 'i18n-react';
 
 const PREFIX = 'features.WranglerNewUI.OnGoingDataExplorations.labels';
@@ -59,7 +59,6 @@ export const getUpdatedExplorationCards = (
     Array.isArray(existingExplorationCards) &&
     existingExplorationCards.length
   ) {
-    console.log(existingExplorationCards);
     existingExplorationCards
       .filter((eachItem) => eachItem.count !== 0)
       .filter((_, itemIndex) => (cardCount && itemIndex < cardCount) || !cardCount)

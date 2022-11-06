@@ -19,7 +19,7 @@ import { Box, Grid, Typography } from '@material-ui/core/';
 import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
 import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
 import { IOngoingDataExplorationsCard } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/types';
-import T from 'i18n-react';
+import { WORKSPACES } from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 
 export default function({
   explorationCardDetails,
@@ -43,9 +43,7 @@ export default function({
     <Grid
       container
       className={
-        fromAddress === T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')
-          ? classes.gridContainerHome
-          : classes.gridContainerWorkspaces
+        fromAddress === WORKSPACES ? classes.gridContainerHome : classes.gridContainerWorkspaces
       }
       data-testid={`ongoing-data-explorations-card-${cardIndex}`}
     >
