@@ -27,3 +27,10 @@ export interface ITabLabelProps extends ITabLabelItemProps {
   icon: JSX.Element;
   labelContainerTestId?: string;
 }
+
+export interface ITabLabelCanBrowseProps {
+  label: string;
+  count: number;
+  index: number;
+  icon?: JSX.Element;
+}

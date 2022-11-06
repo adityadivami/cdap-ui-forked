@@ -14,13 +14,10 @@
  * the License.
  */
 
-import { useStyles } from 'components/ConnectionList/styles';
 import { IHeaderSearchInputFieldProps } from 'components/ConnectionList/types';
 import React from 'react';
 
 export default function({ type, classnames, refs, onChange, index }: IHeaderSearchInputFieldProps) {
-  const classes = useStyles();
-
   return (
     <input
       type={type}

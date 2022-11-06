@@ -33,7 +33,6 @@ export default function({
     <Box className={classes.labelsContainerCanSample} data-testid="connections-tab-label-simple">
       <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
         {label}
-        ajksk
       </Typography>
       <button
         className="wranglingHover"

@@ -25,3 +25,11 @@ export interface ITabLabelSampleItemProps {
   buttonTestId: string;
   buttonElement: JSX.Element;
 }
+
+export interface ITabLabelCanSampleProps {
+  label: string;
+  entity: IConnectorTabType;
+  initialConnectionId: string;
+  toggleLoader: (value: boolean, isError?: boolean) => void;
+  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
+}
