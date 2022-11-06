@@ -24,6 +24,11 @@ import OngoingDataExplorationCard from '../OngoingDataExplorationCard';
 import { switchMap } from 'rxjs/operators';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { IResponseData } from './types';
+import styled from 'styled-components';
+
+const OngoingExplorationCardLink = styled(Link)`
+  text-decoration: 'none';
+`;
 
 export default function OngoingDataExploration() {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
@@ -106,12 +111,11 @@ export default function OngoingDataExploration() {
     <Box data-testid="ongoing-data-explore-parent">
       {finalArray.map((item, index) => {
         return (
-          <Link
+          <OngoingExplorationCardLink
             to={`/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`}
-            style={{ textDecoration: 'none' }}
           >
             {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
-          </Link>
+          </OngoingExplorationCardLink>
         );
       })}
     </Box>
