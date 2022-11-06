@@ -15,7 +15,7 @@
  */
 
 import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
-import TypographyLabel from 'components/FooterPanel/Components/common/TypographyLabel';
+import TypographyLabel from 'components/FooterPanel/Components/common/RenderLabel';
 import { PREFIX } from 'components/FooterPanel/constants';
 import { ArrowIcon } from 'components/FooterPanel/IconStore/ArrowIcon';
 import { ZoomIcon } from 'components/FooterPanel/IconStore/ZoomIcon';

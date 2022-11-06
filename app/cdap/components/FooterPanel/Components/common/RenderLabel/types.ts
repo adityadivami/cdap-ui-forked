@@ -14,7 +14,7 @@
  * the License.
  */
 
-export interface ITypographyLabelProps {
+export interface IRenderLabelProps {
   children: JSX.Element;
   type: 'simple' | 'outlined';
 }
