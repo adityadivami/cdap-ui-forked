@@ -49,3 +49,5 @@ export const WORKSPACE_ID = T.translate(
 export const COUNT = T.translate(
   'features.WranglerNewUI.OnGoingDataExplorations.labels.count'
 ).toString();
+
+export const WORKSPACES = 'Workspaces';

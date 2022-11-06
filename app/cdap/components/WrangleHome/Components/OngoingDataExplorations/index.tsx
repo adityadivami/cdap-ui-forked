@@ -17,11 +17,13 @@
 import { Box } from '@material-ui/core/';
 import MyDataPrepApi from 'api/dataprep';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import NoRecordScreen from 'components/NoRecordScreen';
 import {
   IConnectionWithConnectorType,
   IExistingExplorationCard,
   IConnectionsList,
   IWorkspace,
+  IOngoingDataExplorationsProps,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
@@ -34,7 +36,12 @@ import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { IExplorationCardDetails } from '../OngoingDataExplorationsCard/types';
 
-export default function() {
+export default function({
+  cardCount,
+  fromAddress,
+  setLoading,
+  setShowExplorations,
+}: IOngoingDataExplorationsProps) {
   const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IExplorationCardDetails[]>(
     []
   );
@@ -141,8 +148,15 @@ export default function() {
               const totalDataQuality = dataQuality / workspace.headers?.length ?? 1;
               explorationData[index].dataQuality = totalDataQuality;
               explorationData[index].count = workspace.count;
-              const final = getUpdatedExplorationCards(explorationData);
+              const final = getUpdatedExplorationCards(explorationData, cardCount);
+              /**
+               * if we have setData, then we should send data to parent element as the exploration state is then maintained in parent as well for showing or hiding the title of the parent component
+               */
+              if (setShowExplorations) {
+                setShowExplorations(final && Array.isArray(final) && final.length ? true : false);
+              }
               setOnGoingExplorationsData(final);
+              setLoading(false);
             });
         }
       });
@@ -158,32 +172,35 @@ export default function() {
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {filteredData &&
-        Array.isArray(filteredData) &&
-        filteredData?.map((item, index) => {
-          console.log(item, 'item');
+      {filteredData && Array.isArray(filteredData) && filteredData.length ? (
+        filteredData.map((eachExplorationCardData, index) => {
           return (
             <Link
               to={{
-                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[5].workspaceId}`}`,
+                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${eachExplorationCardData[5].workspaceId}`}`,
                 state: {
-                  from: T.translate('features.Breadcrumb.labels.wrangleHome'),
-                  path: T.translate('features.Breadcrumb.params.wrangleHome'),
+                  from: fromAddress,
+                  path: T.translate('features.WranglerNewUI.Breadcrumb.labels.workSpaces'),
                 },
               }}
               style={{ textDecoration: 'none' }}
               data-testid={`wrangler-home-ongoing-data-exploration-card-${index}`}
             >
-              {index <= 1 && (
-                <OngoingDataExplorationsCard
-                  explorationCardDetails={item}
-                  key={index}
-                  cardIndex={index}
-                />
-              )}
+              <OngoingDataExplorationsCard
+                key={index}
+                explorationCardDetails={eachExplorationCardData}
+                cardIndex={index}
+                fromAddress={fromAddress}
+              />
             </Link>
           );
-        })}
+        })
+      ) : fromAddress === 'Workspaces' ? (
+        <NoRecordScreen
+          title={T.translate('features.NoRecordScreen.workspacesList.title')}
+          subtitle={T.translate('features.NoRecordScreen.workspacesList.subtitle')}
+        />
+      ) : null}
     </Box>
   );
 }
