@@ -39,6 +39,7 @@ export interface IConnectorTabType {
   properties?: Record<string, string>;
   count?: number;
   icon?: JSX.Element;
+  SVG?: JSX.Element;
 }
 
 export interface IConnectorTabPlugin {

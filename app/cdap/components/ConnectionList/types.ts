@@ -14,28 +14,28 @@
  * the License.
  */
 
-import { IConnectorTabType } from './Components/ConnectionTabs/types';
+import { IConnectorTabPluginArtifact, IConnectorTabType } from './Components/ConnectionTabs/types';
 
 export interface IFilteredData {
-  data: any[];
+  data: ITabData[];
   showTabs: boolean;
-  selectedTab: any;
+  selectedTab: string;
   toggleSearch: boolean;
 }
 
 export interface IHeaderCustomTooltipLabelProps {
-  headersRefs: React.MutableRefObject<any[]>;
+  headersRefs: React.MutableRefObject<HTMLDivElement[]>;
   index: number;
   filteredData: IFilteredData;
 }
 
 export interface IHeaderContentProps extends IHeaderCustomTooltipLabelProps {
-  eachFilteredData: any;
+  eachFilteredData: IFilteredData;
   tabsData: IFilteredData[];
   searchHandler: (index: number) => void;
   makeCursorFocused: (index: number) => void;
   handleSearch: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  refs: React.MutableRefObject<any[]>;
+  refs: React.MutableRefObject<HTMLDivElement[]>;
   handleClearSearch: (e: React.MouseEvent<HTMLInputElement>, index: number) => void;
 }
 
@@ -44,9 +44,9 @@ export interface IHeaderCustomTooltipProps extends IHeaderCustomTooltipLabelProp
 }
 
 export interface IHeaderSearchProps {
-  eachFilteredData: any;
+  eachFilteredData: IFilteredData;
   index: number;
-  refs: React.MutableRefObject<any[]>;
+  refs: React.MutableRefObject<HTMLDivElement[]>;
   makeCursorFocused: (index: number) => void;
   handleSearch: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   handleClearSearch: (e: React.MouseEvent<HTMLInputElement>, index: number) => void;
@@ -55,7 +55,7 @@ export interface IHeaderSearchProps {
 export interface IHeaderSearchInputFieldProps {
   type: string;
   classnames: string;
-  refs: React.MutableRefObject<any[]>;
+  refs: React.MutableRefObject<HTMLDivElement[]>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   index: number;
 }
@@ -63,9 +63,35 @@ export interface IHeaderSearchInputFieldProps {
 export interface IConnectionTabsProps {
   tabsData: IFilteredData;
   handleChange: (entity: IConnectorTabType, index: number) => void;
-  value: any;
+  value: string;
   index: number;
   connectionId: string;
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
   toggleLoader?: (value: boolean, isError?: boolean) => void;
+}
+
+export interface ITabData extends IConnectorTabType {
+  SVG: JSX.Element;
+  artifact: IConnectorTabPluginArtifact;
+  category: string;
+  count: number;
+  displayName: string;
+  icon: JSX.Element;
+  name: string;
+  type: string;
+}
+
+export interface ITabsDataResponse {
+  entities: ITabData[];
+  propertyHeaders: string[];
+  sampleProperties: ITabsDataResponseSampleProperties[];
+  totalCount: number;
+}
+
+export interface ITabsDataResponseSampleProperties {
+  properties: {
+    name: string;
+    description: string;
+  };
+  type: string;
 }

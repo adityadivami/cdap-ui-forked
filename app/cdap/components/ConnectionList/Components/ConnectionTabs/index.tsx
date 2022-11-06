@@ -112,7 +112,7 @@ export default function({
                 value={connectorType.name}
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
-                id={connectorType?.name.toString()}
+                id={connectorType.name}
                 className={index > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
               />
             ))}

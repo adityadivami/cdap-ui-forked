@@ -20,34 +20,28 @@ import { IConnectorTabType } from 'components/ConnectionList/Components/Connecti
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import TabLabelItem from 'components/ConnectionList/Components/TabLabelCanSample/Components/TabLabelItem';
 import useStyles from 'components/ConnectionList/Components/TabLabelCanSample/styles';
+import { ITabLabelCanSampleProps } from 'components/ConnectionList/Components/TabLabelCanSample/types';
 import { WrangleIcon } from 'components/ConnectionList/IconStore/WrangleIcon';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
 import T from 'i18n-react';
 import React, { createRef, Fragment, Ref, useContext, useEffect, useState } from 'react';
-import { Redirect, useLocation } from 'react-router';
+import { Redirect } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
-export default function TabLabelCanSample({
+export default function({
   label,
   entity,
   initialConnectionId,
   toggleLoader,
   setIsErrorOnNoWorkSpace,
-}: {
-  label: string;
-  entity: IConnectorTabType;
-  initialConnectionId: string;
-  toggleLoader: (value: boolean, isError?: boolean) => void;
-  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+}: ITabLabelCanSampleProps) {
   const classes = useStyles();
 
-  const pathName = useLocation();
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
-  const [refValue, setRefValue] = useState(false);
-  const [workspaceId, setWorkspaceId] = useState(null);
-  const [currentConnection, setCurrentConnection] = useState(initialConnectionId);
+  const [refValue, setRefValue] = useState<boolean>(false);
+  const [workspaceId, setWorkspaceId] = useState<string>(null);
+  const [currentConnection, setCurrentConnection] = useState<string>(initialConnectionId);
 
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
 
@@ -55,7 +49,7 @@ export default function TabLabelCanSample({
     setRefValue(myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth);
   }, []);
 
-  const onExplore = (currentEntity) => {
+  const onExplore = (currentEntity: IConnectorTabType) => {
     const { canBrowse, canSample } = currentEntity;
     if (!canBrowse && canSample) {
       onCreateWorkspace(currentEntity);
@@ -64,20 +58,20 @@ export default function TabLabelCanSample({
     }
   };
 
-  const onCreateWorkspace = (currentEntity, parseConfig = {}) => {
+  const onCreateWorkspace = (currentEntity: IConnectorTabType) => {
     try {
-      createWorkspaceInternal(currentEntity, parseConfig);
+      createWorkspaceInternal(currentEntity);
     } catch (e) {
       setIsErrorOnNoWorkSpace(true);
     }
   };
 
-  const createWorkspaceInternal = (currentEntity, parseConfig = {}) => {
+  const createWorkspaceInternal = (currentEntity: IConnectorTabType) => {
     toggleLoader(true);
     createWorkspace({
       entity: currentEntity,
       connection: currentConnection,
-      properties: parseConfig,
+      properties: {},
     })
       .then((res) => {
         if (onWorkspaceCreate) {
@@ -94,8 +88,8 @@ export default function TabLabelCanSample({
       });
   };
 
-  const indexOfSelectedDataset = location.pathname.lastIndexOf('/');
-  const requiredPath = location.pathname.slice(indexOfSelectedDataset + 1);
+  const indexOfSelectedDataset: number = location.pathname.lastIndexOf('/');
+  const requiredPath: string = location.pathname.slice(indexOfSelectedDataset + 1);
 
   return workspaceId ? (
     <Redirect

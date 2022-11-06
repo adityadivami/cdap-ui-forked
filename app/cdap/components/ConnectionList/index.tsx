@@ -23,7 +23,7 @@ import SubHeader from 'components/ConnectionList/Components/SubHeader';
 import { PREFIX } from 'components/ConnectionList/constants';
 import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
 import { useStyles } from 'components/ConnectionList/styles';
-import { IFilteredData } from 'components/ConnectionList/types';
+import { IFilteredData, ITabData, ITabsDataResponse } from 'components/ConnectionList/types';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { IRecords } from 'components/GridTable/types';
@@ -35,7 +35,6 @@ import T from 'i18n-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import {} from 'rxjs';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -51,7 +50,7 @@ const SelectDatasetWrapper = styled(Box)({
   },
 });
 
-export default function ConnectionList() {
+export default function() {
   const { connectorType } = useParams() as IRecords;
 
   const refs = useRef([]);
@@ -63,6 +62,7 @@ export default function ConnectionList() {
   const [loading, setLoading] = useState<boolean>(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
   const [tabsLength, setTabsLength] = useState<number>(0);
+
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
   };
@@ -78,8 +78,8 @@ export default function ConnectionList() {
   const [filteredData, setFilteredData] = useState<IFilteredData>(cloneDeep(tabsData));
 
   const getConnectionsTabData = async () => {
-    let connectorTypes = [];
-    let connectorTypesWithSVG = [];
+    let connectorTypes: ITabData[] = [];
+    let connectorTypesWithSVG: ITabData[] = [];
     const connectorTypesWithIcons = (data) => {
       connectorTypesWithSVG = data?.connectorTypes;
     };
@@ -90,11 +90,11 @@ export default function ConnectionList() {
 
     // Fetching all the connections list inside each connector type
     const categorizedConnections = await getCategorizedConnections();
-    connectorTypes = connectorTypes.filter((conn) => {
-      return [conn.name];
+    connectorTypes = connectorTypes.filter((eachConnectionType: ITabData) => {
+      return [eachConnectionType.name];
     });
     // Mapping connector types and corresponding connections
-    connectorTypes = connectorTypes?.map((eachConnectorType) => {
+    connectorTypes = connectorTypes?.map((eachConnectorType: ITabData) => {
       const connections = categorizedConnections.get(eachConnectorType.name) || [];
       allConnectionsTotalLength = allConnectionsTotalLength + connections.length;
       return {
@@ -105,11 +105,9 @@ export default function ConnectionList() {
     });
 
     // Connector types which has connections inside it
-    const firstLevelData = connectorTypes.filter((eachConnectorType) => {
-      if (eachConnectorType.count > 0) {
-        return true;
-      }
-    });
+    const firstLevelData: ITabData[] = connectorTypes.filter(
+      (eachConnectorType: ITabData) => eachConnectorType.count > 0
+    );
 
     setLoading(false);
     setTabsData((prev: IFilteredData[]) => {
@@ -119,7 +117,7 @@ export default function ConnectionList() {
     });
   };
 
-  const setDataForTabsHelper = (res, index) => {
+  const setDataForTabsHelper = (response: ITabsDataResponse | ITabData[], index: number) => {
     setTabsData((prev) => {
       const tempData = [...prev];
       tempData.push({
@@ -128,10 +126,10 @@ export default function ConnectionList() {
         selectedTab: '',
         toggleSearch: false,
       });
-      if (res.entities) {
-        tempData[index + 1][`data`] = res.entities;
+      if ('entities' in response) {
+        tempData[index + 1][`data`] = response.entities;
       } else {
-        tempData[index + 1][`data`] = res;
+        tempData[index + 1][`data`] = response as ITabData[];
       }
       tempData[index + 1][`showTabs`] = true;
       tempData[index + 1][`selectedTab`] = null;
@@ -148,7 +146,7 @@ export default function ConnectionList() {
     toggleLoader(false);
   };
 
-  const fetchEntities = async (connectionName, url = pathFromUrl) => {
+  const fetchEntities = async (connectionName: string, url: string = pathFromUrl) => {
     const pathDesired = url ? url : pathFromUrl;
     const entitiesPromise = exploreConnection({
       connectionid: connectionName,
@@ -180,6 +178,7 @@ export default function ConnectionList() {
         getCategorizedConnectionsforSelectedTab(entity.name as string, index);
       } else if (index === 1) {
         fetchEntities(entity.name)
+          // NOTE: As the function is returning promise, we are using .then here
           .then((res) => {
             setDataForTabsHelper(res, index);
             toggleLoader(false);
@@ -192,6 +191,7 @@ export default function ConnectionList() {
       } else {
         if (entity.canBrowse) {
           fetchEntities(tabsData[1].selectedTab, entity.path as string)
+            // NOTE: As the function is returning promise, we are using .then here
             .then((res) => {
               setDataForTabsHelper(res, index);
               toggleLoader(false);
@@ -264,7 +264,7 @@ export default function ConnectionList() {
   useEffect(() => {
     setTabsData((prev) => {
       const temp = prev;
-      temp[0].selectedTab = connectorType;
+      temp[0].selectedTab = connectorType as string;
       return temp;
     });
     getCategorizedConnectionsforSelectedTab(connectorType as string, 0);
@@ -282,7 +282,7 @@ export default function ConnectionList() {
 
   useEffect(() => {
     setTabsLength(tabsData?.length);
-  }, [tabsData.length]);
+  }, [tabsData?.length]);
 
   let headerContent;
 
@@ -295,13 +295,14 @@ export default function ConnectionList() {
           <SelectDatasetWrapper>
             {filteredData &&
               Array.isArray(filteredData) &&
-              filteredData?.map((eachFilteredData, index) => {
+              filteredData?.map((eachFilteredData: IFilteredData, index: number) => {
                 if (
-                  eachFilteredData.data.filter((eachFilterItem) => eachFilterItem.connectionId)
-                    .length
+                  eachFilteredData.data.filter(
+                    (eachFilterItem: ITabData) => eachFilterItem.connectionId
+                  ).length
                 ) {
                   connectionId = eachFilteredData.data.filter(
-                    (eachFilterItem) => eachFilterItem.connectionId
+                    (eachFilterItem: ITabData) => eachFilterItem.connectionId
                   )[0].connectionId;
                 }
                 if (index === 0) {
