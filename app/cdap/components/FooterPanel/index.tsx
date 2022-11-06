@@ -20,22 +20,45 @@ import DirectivesTab from 'components/FooterPanel/Components/DirectivesTab';
 import RecipeStepsTab from 'components/FooterPanel/Components/RecipeStepsTab';
 import TableMetaInfoTab from 'components/FooterPanel/Components/TableMetaInfoTab';
 import ZoomTab from 'components/FooterPanel/Components/ZoomTab';
-import { useStyles } from 'components/FooterPanel/styles';
 import { IFooterPanelProps } from 'components/FooterPanel/types';
 import React from 'react';
+import styled from 'styled-components';
+
+const Container = styled(Box)`
+  &&& {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    position: absolute;
+    bottom: 54px;
+  }
+`;
+
+const TabsWrapper = styled(Box)`
+  &&& {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: space-between;
+    background-color: #f3f6f9;
+    height: 40;
+    box-shadow: 0px -2px 2px #0000001a;
+    width: 100%;
+  }
+`;
 
 export default function({ recipeStepsCount, dataCounts }: IFooterPanelProps) {
-  const classes = useStyles();
-
   return (
-    <Box className={classes.containerProps}>
-      <Box className={classes.innnerContainer}>
+    <Container>
+      <TabsWrapper>
         <ColumnViewPanelTab />
         <TableMetaInfoTab {...dataCounts} />
         <ZoomTab />
         <DirectivesTab />
         <RecipeStepsTab recipeStepsCount={recipeStepsCount} />
-      </Box>
-    </Box>
+      </TabsWrapper>
+    </Container>
   );
 }
