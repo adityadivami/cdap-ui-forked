@@ -28,7 +28,7 @@ export default function({ rowCount, columnCount }: ITableMetaInfoTabProps) {
         <>
           {`${T.translate(`${PREFIX}.currentData`)} 
           - ${rowCount} ${T.translate(`${PREFIX}.rows`)} ${T.translate(
-            `${PREFIX}.and`
+            `features.WranglerNewUI.common.and`
           )} ${columnCount} ${T.translate(`${PREFIX}.columns`)}`}
         </>
       </RenderLabel>

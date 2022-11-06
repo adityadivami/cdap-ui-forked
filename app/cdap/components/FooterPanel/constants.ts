@@ -14,4 +14,4 @@
  * the License.
  */
 
-export const PREFIX = 'features.FooterPanel.labels';
+export const PREFIX = 'features.WranglerNewUI.FooterPanel.labels';

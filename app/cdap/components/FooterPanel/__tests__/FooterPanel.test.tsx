@@ -74,14 +74,18 @@ describe('Testing Footer Panel Component', () => {
     expect(svg_container).toContainElement(svg_element);
 
     const recipe_steps_element = screen.getByTestId(/footerpanel-labels-recipesteps/i);
-    expect(recipe_steps_element).toHaveTextContent('features.FooterPanel.labels.recipeSteps');
+    expect(recipe_steps_element).toHaveTextContent(
+      'features.WranglerNewUI.FooterPanel.labels.recipeSteps'
+    );
 
     const label_directive_element = screen.getByTestId(/footerpanel-labels-directives/i);
-    expect(label_directive_element).toHaveTextContent('features.FooterPanel.labels.directives');
+    expect(label_directive_element).toHaveTextContent(
+      'features.WranglerNewUI.FooterPanel.labels.directives'
+    );
 
     const label_zoom_percent_element = screen.getByTestId(/footerpanel-labels-zoompercent/i);
     expect(label_zoom_percent_element).toHaveTextContent(
-      'features.FooterPanel.labels.zoomPercent100'
+      'features.WranglerNewUI.FooterPanel.labels.zoomPercent100'
     );
   });
 
