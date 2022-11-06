@@ -29,11 +29,16 @@ export default function({ labelTestId, label, count, myLabelRef }: ITabLabelItem
         className={classes.labelStyles}
         ref={myLabelRef}
         data-testid={labelTestId}
+        component="span"
       >
         {label}
       </Typography>
       {count && (
-        <Typography variant="body1" className={classes.labelStylesCount}>{`(${count})`}</Typography>
+        <Typography
+          variant="body1"
+          className={classes.labelStylesCount}
+          component="span"
+        >{`(${count})`}</Typography>
       )}
     </Fragment>
   );
