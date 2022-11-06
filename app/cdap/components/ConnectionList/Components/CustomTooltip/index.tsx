@@ -23,7 +23,7 @@ export default function CustomTooltip(props: TooltipProps) {
 
   return (
     <Box data-testid="tooltip-parent" className={classes.forEachTabLabelWidth}>
-      <Tooltip arrow classes={classes} placement="bottom-start" {...props} />
+      <Tooltip arrow classes={classes} {...props} />
     </Box>
   );
 }
