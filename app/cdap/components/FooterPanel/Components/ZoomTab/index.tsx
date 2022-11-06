@@ -27,7 +27,7 @@ export default function() {
     <TabWrapper size="medium" width={10.5}>
       <>
         {ZoomIcon}
-        <RenderLabel type={'simple'}>
+        <RenderLabel type="simple">
           <>{`${T.translate(`${PREFIX}.zoomPercent100`)}`}</>
         </RenderLabel>
         {ArrowIcon}

@@ -25,10 +25,10 @@ export default function({ recipeStepsCount }: IRecipeStepsTabProps) {
   return (
     <TabWrapper size="medium" width={13.5}>
       <>
-        <RenderLabel type={'simple'}>
+        <RenderLabel type="simple">
           <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>
         </RenderLabel>
-        <RenderLabel type={'outlined'}>
+        <RenderLabel type="outlined">
           <>{recipeStepsCount}</>
         </RenderLabel>
       </>

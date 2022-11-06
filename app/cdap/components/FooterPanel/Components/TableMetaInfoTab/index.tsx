@@ -16,19 +16,20 @@
 
 import RenderLabel from 'components/FooterPanel/Components/common/RenderLabel';
 import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
+import { ITableMetaInfoTabProps } from 'components/FooterPanel/Components/TableMetaInfoTab/types';
 import { PREFIX } from 'components/FooterPanel/constants';
 import T from 'i18n-react';
 import React from 'react';
-import { ITableMetaInfoTabProps } from './types';
 
 export default function({ rowCount, columnCount }: ITableMetaInfoTabProps) {
   return (
     <TabWrapper size="large">
-      <RenderLabel type={'simple'}>
+      <RenderLabel type="simple">
         <>
-          {`${T.translate(`${PREFIX}.currentData`)} - ${rowCount} ${T.translate(
-            `${PREFIX}.rows`
-          )} ${T.translate(`${PREFIX}.and`)} ${columnCount} ${T.translate(`${PREFIX}.columns`)}`}
+          {`${T.translate(`${PREFIX}.currentData`)} 
+          - ${rowCount} ${T.translate(`${PREFIX}.rows`)} ${T.translate(
+            `${PREFIX}.and`
+          )} ${columnCount} ${T.translate(`${PREFIX}.columns`)}`}
         </>
       </RenderLabel>
     </TabWrapper>

@@ -20,18 +20,13 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import history from 'services/history';
 
-describe('Testing Footer Panel Component - Unit tests', () => {
+describe('Testing Footer Panel Component', () => {
   it('Should check if the component is rendered with class name = showNormalView when columnViewPanelOpened is false', () => {
     const screen = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <FooterPanel
-              recipeStepsCount={0}
-              dataCounts={{ rowCount: 1, columnCount: 1 }}
-              columnViewPanelOpened={false}
-              setOpenColumnViewHandler={jest.fn}
-            />
+            <FooterPanel recipeStepsCount={0} gridMetaInfo={{ rowCount: 1, columnCount: 1 }} />
           </Route>
         </Switch>
       </Router>
@@ -48,12 +43,7 @@ describe('Testing Footer Panel Component - Unit tests', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <FooterPanel
-              recipeStepsCount={10}
-              dataCounts={{ rowCount: 6, columnCount: 42 }}
-              columnViewPanelOpened={false}
-              setOpenColumnViewHandler={jest.fn}
-            />
+            <FooterPanel recipeStepsCount={10} gridMetaInfo={{ rowCount: 6, columnCount: 42 }} />
           </Route>
         </Switch>
       </Router>
@@ -71,12 +61,7 @@ describe('Testing Footer Panel Component - Unit tests', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <FooterPanel
-              recipeStepsCount={10}
-              dataCounts={{ rowCount: 6, columnCount: 42 }}
-              columnViewPanelOpened={false}
-              setOpenColumnViewHandler={jest.fn}
-            />
+            <FooterPanel recipeStepsCount={10} gridMetaInfo={{ rowCount: 6, columnCount: 42 }} />
           </Route>
         </Switch>
       </Router>
@@ -99,17 +84,13 @@ describe('Testing Footer Panel Component - Unit tests', () => {
       'features.FooterPanel.labels.zoomPercent100'
     );
   });
+
   it('Should render the component with columnViewPanelOpened as true', () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <FooterPanel
-              recipeStepsCount={0}
-              dataCounts={{ rowCount: 1, columnCount: 1 }}
-              columnViewPanelOpened={true}
-              setOpenColumnViewHandler={jest.fn}
-            />
+            <FooterPanel recipeStepsCount={0} gridMetaInfo={{ rowCount: 1, columnCount: 1 }} />
           </Route>
         </Switch>
       </Router>
