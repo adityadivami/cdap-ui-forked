@@ -14,29 +14,25 @@
  * the License.
  */
 
-import React from 'react';
-import ConnectionsTabs from '../index';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { mockTabsDataWithBrowse } from '../mock/mockTabsDataWithBrowse';
-import { mockTabsDataWithBrowseIndex } from '../mock/mockTabsDataWithBrowseIndex';
-import { mockTabsTestData } from '../mock/mockTabsTestData';
-import { createBrowserHistory } from 'history';
+import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import { mockTabsDataWithBrowse } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsDataWithBrowse';
+import { mockTabsDataWithBrowseIndex } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsDataWithBrowseIndex';
+import { mockTabsTestData } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsTestData';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
+import history from 'services/history';
 
 const tabsTestData = [{ showTabs: true }];
-
-const history = createBrowserHistory({
-  basename: '/',
-});
 
 describe('Test ConnectionsTabs', () => {
   it('Should render Connections Tabs Parent Component', () => {
     render(
-      <ConnectionsTabs
+      <ConnectionTabs
         tabsData={mockTabsTestData}
         handleChange={() => null}
         value="apple"
-        index="0"
+        index={0}
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
       />
@@ -47,11 +43,11 @@ describe('Test ConnectionsTabs', () => {
 
   it('Should render Connections Tabs Component', () => {
     render(
-      <ConnectionsTabs
+      <ConnectionTabs
         tabsData={mockTabsTestData}
         handleChange={() => null}
         value="apple"
-        index="1"
+        index={1}
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
       />
@@ -62,7 +58,7 @@ describe('Test ConnectionsTabs', () => {
 
   it('Should render TabLabelCanBrowse with connectorTypes and count', () => {
     render(
-      <ConnectionsTabs
+      <ConnectionTabs
         tabsData={mockTabsDataWithBrowseIndex}
         handleChange={() => null}
         value="apple"
@@ -80,11 +76,11 @@ describe('Should test whether handleChange function is triggered or not', () => 
   it('Should trigger handlechange function for the first column i.e. Connector Types', () => {
     const handleChange = jest.fn();
     render(
-      <ConnectionsTabs
+      <ConnectionTabs
         tabsData={mockTabsTestData}
         handleChange={handleChange}
         value="apple"
-        index="1"
+        index={1}
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
       />
@@ -100,11 +96,11 @@ describe('Should test whether handleChange function is triggered or not', () => 
       <Router history={history}>
         <Switch>
           <Route>
-            <ConnectionsTabs
+            <ConnectionTabs
               tabsData={mockTabsTestData}
               handleChange={handleChange}
               value="apple"
-              index="2"
+              index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
             />
@@ -123,11 +119,11 @@ describe('Should test whether handleChange function is triggered or not', () => 
       <Router history={history}>
         <Switch>
           <Route>
-            <ConnectionsTabs
+            <ConnectionTabs
               tabsData={mockTabsDataWithBrowse}
               handleChange={handleChange}
               value="apple"
-              index="2"
+              index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
             />

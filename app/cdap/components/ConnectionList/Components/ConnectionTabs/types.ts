@@ -16,8 +16,51 @@
 
 export interface IRenderLabelProps {
   index: number;
-  connectorType: any;
+  connectorType: IConnectorTabType;
   connectionIdProp: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface IConnectorTabType {
+  connectionId?: string;
+  connectionType?: string;
+  createdTimeMillis?: number;
+  description?: string;
+  isDefault?: boolean;
+  name: string;
+  plugin?: IConnectorTabPlugin;
+  preConfigured?: boolean;
+  updatedTimeMillis?: number;
+  canBrowse?: boolean;
+  canSample?: boolean;
+  path?: string;
+  type?: string;
+  properties?: Record<string, string>;
+  count?: number;
+  icon?: JSX.Element;
+}
+
+export interface IConnectorTabPlugin {
+  artifact: IConnectorTabPluginArtifact;
+  category: string;
+  name: string;
+  properties: IConnectorTabPluginProperties;
+  type: string;
+}
+
+export interface IConnectorTabPluginArtifact {
+  scope: string;
+  name: string;
+  version: string;
+}
+
+export interface IConnectorTabPluginProperties {
+  host: string;
+  port: string;
+  jdbcPluginName: string;
+  database: string;
+  connectionArgument: string;
+  password: string;
+  user: string;
 }

@@ -18,9 +18,11 @@ import { styled } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
+import RenderTabLabel from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderTabLabel';
 import { useStyles } from 'components/ConnectionList/Components/ConnectionTabs/styles';
+import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
+import { IConnectionTabsProps } from 'components/ConnectionList/types';
 import React, { useEffect, useState } from 'react';
-import RenderTabLabel from './Components/RenderTabLabel';
 
 const ConnectionTab = styled(Tab)({
   width: '100%',
@@ -50,7 +52,7 @@ const ConnectionTab = styled(Tab)({
   },
 });
 
-export default function ConnectionsTabs({
+export default function({
   tabsData,
   handleChange,
   value,
@@ -58,19 +60,26 @@ export default function ConnectionsTabs({
   connectionId,
   setIsErrorOnNoWorkSpace,
   toggleLoader,
-  ...props
-}) {
+}: IConnectionTabsProps) {
   const classes = useStyles();
 
-  const [connectionIdProp, setConnectionId] = useState(connectionId);
+  const [connectionIdProp, setConnectionId] = useState<string>(connectionId);
 
   useEffect(() => {
     setConnectionId(connectionId);
   }, []);
 
+  const handleConnectionTabClick = (connectorType: IConnectorTabType, index: number) => {
+    if (index > 1 && !connectorType.canBrowse) {
+      return;
+    } else {
+      handleChange(connectorType, index);
+    }
+  };
+
   return (
     <Box data-testid="connections-tabs-parent" className={classes.connectionsTabsParent}>
-      {tabsData.showTabs && (
+      {tabsData?.showTabs && (
         <div className={classes.boxStyles} data-testid="connection-tabs">
           <Tabs
             value={value}
@@ -86,17 +95,11 @@ export default function ConnectionsTabs({
               root: classes.tabsContainer,
             }}
           >
-            {tabsData.data.map((connectorType, connectorTypeIndex) => (
+            {tabsData?.data?.map((connectorType: IConnectorTabType, connectorTypeIndex: number) => (
               <ConnectionTab
                 role="button"
                 data-testid="connections-tab-button"
-                onClick={() => {
-                  if (index > 1 && !connectorType.canBrowse) {
-                    return;
-                  } else {
-                    handleChange(connectorType, index);
-                  }
-                }}
+                onClick={() => handleConnectionTabClick(connectorType, index)}
                 label={
                   <RenderTabLabel
                     index={index}
@@ -109,7 +112,7 @@ export default function ConnectionsTabs({
                 value={connectorType.name}
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
-                id={connectorType.name}
+                id={connectorType?.name.toString()}
                 className={index > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
               />
             ))}

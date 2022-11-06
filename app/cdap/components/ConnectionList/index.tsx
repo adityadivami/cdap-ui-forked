@@ -16,7 +16,8 @@
 
 import { Box, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import ConnectionsTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import HeaderContent from 'components/ConnectionList/Components/HeaderContent';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
 import { PREFIX } from 'components/ConnectionList/constants';
@@ -34,6 +35,7 @@ import T from 'i18n-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
+import {} from 'rxjs';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -65,7 +67,7 @@ export default function ConnectionList() {
     setLoading(value);
   };
   let connectionId;
-  const [dataForTabs, setDataForTabs] = useState<IFilteredData[]>([
+  const [tabsData, setTabsData] = useState<IFilteredData[]>([
     {
       data: [],
       showTabs: true,
@@ -73,7 +75,7 @@ export default function ConnectionList() {
       toggleSearch: false,
     },
   ]);
-  const [filteredData, setFilteredData] = useState<IFilteredData>(cloneDeep(dataForTabs));
+  const [filteredData, setFilteredData] = useState<IFilteredData>(cloneDeep(tabsData));
 
   const getConnectionsTabData = async () => {
     let connectorTypes = [];
@@ -110,7 +112,7 @@ export default function ConnectionList() {
     });
 
     setLoading(false);
-    setDataForTabs((prev) => {
+    setTabsData((prev: IFilteredData[]) => {
       const tempData = [...prev];
       tempData[0].data = firstLevelData;
       return tempData;
@@ -118,7 +120,7 @@ export default function ConnectionList() {
   };
 
   const setDataForTabsHelper = (res, index) => {
-    setDataForTabs((prev) => {
+    setTabsData((prev) => {
       const tempData = [...prev];
       tempData.push({
         data: [],
@@ -161,9 +163,9 @@ export default function ConnectionList() {
     refs.current[index].focus();
   };
 
-  const selectedTabValueHandler = (entity: IRecords, index: number) => {
+  const selectedTabValueHandler = (entity: IConnectorTabType, index: number) => {
     toggleLoader(true);
-    setDataForTabs((currentData) => {
+    setTabsData((currentData) => {
       let newData = [...currentData];
       newData[index].selectedTab = entity.name;
       newData = newData.map((eachNewData) => {
@@ -189,7 +191,7 @@ export default function ConnectionList() {
           });
       } else {
         if (entity.canBrowse) {
-          fetchEntities(dataForTabs[1].selectedTab, entity.path as string)
+          fetchEntities(tabsData[1].selectedTab, entity.path as string)
             .then((res) => {
               setDataForTabsHelper(res, index);
               toggleLoader(false);
@@ -206,7 +208,7 @@ export default function ConnectionList() {
   };
 
   const searchHandler = (index: number) => {
-    setDataForTabs((prev) => {
+    setTabsData((prev) => {
       let tempData = [...prev];
       tempData = tempData.map((eachTempData) => ({
         ...eachTempData,
@@ -227,7 +229,7 @@ export default function ConnectionList() {
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const val = e.target.value.toLowerCase();
-    const newData = cloneDeep(dataForTabs);
+    const newData = cloneDeep(tabsData);
     const newDataToSearch = [...newData[index].data];
     const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(val));
     newData[index].data = [...tempData];
@@ -236,14 +238,14 @@ export default function ConnectionList() {
 
   const handleClearSearch = (e: React.MouseEvent<HTMLInputElement>, index: number) => {
     if (refs.current[index].value === '') {
-      setDataForTabs((prev) => {
+      setTabsData((prev) => {
         const tempData = [...prev];
         tempData[index].toggleSearch = false;
         return tempData;
       });
     } else {
       refs.current[index].value = '';
-      const newData = cloneDeep(dataForTabs);
+      const newData = cloneDeep(tabsData);
       const newDataToSearch = [...newData[index].data];
       const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
       newData[index].data = [...tempData];
@@ -256,11 +258,11 @@ export default function ConnectionList() {
   }, []);
 
   useEffect(() => {
-    setFilteredData(cloneDeep(dataForTabs));
-  }, [dataForTabs]);
+    setFilteredData(cloneDeep(tabsData));
+  }, [tabsData]);
 
   useEffect(() => {
-    setDataForTabs((prev) => {
+    setTabsData((prev) => {
       const temp = prev;
       temp[0].selectedTab = connectorType;
       return temp;
@@ -279,19 +281,16 @@ export default function ConnectionList() {
   };
 
   useEffect(() => {
-    setTabsLength(dataForTabs?.length);
-  }, [dataForTabs.length]);
+    setTabsLength(tabsData?.length);
+  }, [tabsData.length]);
 
   let headerContent;
 
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
-      <SubHeader selectedConnection={dataForTabs[0]?.selectedTab} />
+      <SubHeader selectedConnection={tabsData[0]?.selectedTab} />
 
-      {dataForTabs &&
-      Array.isArray(dataForTabs) &&
-      dataForTabs.length &&
-      dataForTabs[0]?.data?.length > 0 ? (
+      {tabsData && Array.isArray(tabsData) && tabsData.length && tabsData[0]?.data?.length > 0 ? (
         <Box className={classes.connectionsWithInfo}>
           <SelectDatasetWrapper>
             {filteredData &&
@@ -313,7 +312,7 @@ export default function ConnectionList() {
                       eachFilteredData={eachFilteredData}
                       headersRefs={headersRefs}
                       index={index}
-                      dataForTabs={dataForTabs}
+                      tabsData={tabsData}
                       filteredData={filteredData}
                       searchHandler={searchHandler}
                       makeCursorFocused={makeCursorFocused}
@@ -326,7 +325,7 @@ export default function ConnectionList() {
                 return (
                   <Box className={classes.tabsContainerWithHeader}>
                     <Box className={classes.tabHeaders}>{headerContent}</Box>
-                    <ConnectionsTabs
+                    <ConnectionTabs
                       tabsData={eachFilteredData}
                       handleChange={selectedTabValueHandler}
                       value={eachFilteredData.selectedTab}

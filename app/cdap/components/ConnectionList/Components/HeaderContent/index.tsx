@@ -26,7 +26,7 @@ export default function({
   eachFilteredData,
   headersRefs,
   index,
-  dataForTabs,
+  tabsData,
   filteredData,
   searchHandler,
   makeCursorFocused,
@@ -48,7 +48,7 @@ export default function({
         <HeaderCustomTooltip
           headersRefs={headersRefs}
           index={index}
-          dataForTabs={dataForTabs}
+          tabsData={tabsData}
           filteredData={filteredData}
         />
 

@@ -14,14 +14,14 @@
  * the License.
  */
 
-import { IRecords } from 'components/GridTable/types';
+import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import { Ref } from 'react';
 
 export interface ITabLabelSampleItemProps {
   label: string;
   myLabelRef: Ref<HTMLSpanElement>;
-  onExplore: (entity: IRecords) => void;
-  entity: IRecords;
+  onExplore: (entity: IConnectorTabType) => void;
+  entity: IConnectorTabType;
   buttonTestId: string;
   buttonElement: JSX.Element;
 }

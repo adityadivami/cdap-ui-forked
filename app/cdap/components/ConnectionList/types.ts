@@ -14,6 +14,8 @@
  * the License.
  */
 
+import { IConnectorTabType } from './Components/ConnectionTabs/types';
+
 export interface IFilteredData {
   data: any[];
   showTabs: boolean;
@@ -29,7 +31,7 @@ export interface IHeaderCustomTooltipLabelProps {
 
 export interface IHeaderContentProps extends IHeaderCustomTooltipLabelProps {
   eachFilteredData: any;
-  dataForTabs: IFilteredData[];
+  tabsData: IFilteredData[];
   searchHandler: (index: number) => void;
   makeCursorFocused: (index: number) => void;
   handleSearch: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
@@ -38,7 +40,7 @@ export interface IHeaderContentProps extends IHeaderCustomTooltipLabelProps {
 }
 
 export interface IHeaderCustomTooltipProps extends IHeaderCustomTooltipLabelProps {
-  dataForTabs: IFilteredData[];
+  tabsData: IFilteredData[];
 }
 
 export interface IHeaderSearchProps {
@@ -56,4 +58,14 @@ export interface IHeaderSearchInputFieldProps {
   refs: React.MutableRefObject<any[]>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
   index: number;
+}
+
+export interface IConnectionTabsProps {
+  tabsData: IFilteredData;
+  handleChange: (entity: IConnectorTabType, index: number) => void;
+  value: any;
+  index: number;
+  connectionId: string;
+  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleLoader?: (value: boolean, isError?: boolean) => void;
 }

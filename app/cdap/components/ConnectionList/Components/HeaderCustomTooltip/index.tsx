@@ -20,14 +20,9 @@ import HeaderCustomTooltipLabel from 'components/ConnectionList/Components/Heade
 import { IHeaderCustomTooltipProps } from 'components/ConnectionList/types';
 import React from 'react';
 
-export default function({
-  headersRefs,
-  index,
-  dataForTabs,
-  filteredData,
-}: IHeaderCustomTooltipProps) {
+export default function({ headersRefs, index, tabsData, filteredData }: IHeaderCustomTooltipProps) {
   return headersRefs.current[index]?.offsetWidth < headersRefs.current[index]?.scrollWidth ? (
-    <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
+    <CustomTooltip title={tabsData[index - 1].selectedTab} arrow>
       <Box>
         <HeaderCustomTooltipLabel
           index={index}
