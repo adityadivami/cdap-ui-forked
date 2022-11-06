@@ -27,7 +27,7 @@ export default function({ index, headersRefs, filteredData }: IHeaderCustomToolt
       }}
       component="div"
     >
-      {filteredData[index - 1].selectedTab}
+      {filteredData[index - 1]?.selectedTab}
     </Typography>
   );
 }

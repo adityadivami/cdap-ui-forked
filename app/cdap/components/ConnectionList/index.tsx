@@ -119,7 +119,7 @@ export default function() {
 
   const setDataForTabsHelper = (response: ITabsDataResponse | ITabData[], index: number) => {
     setTabsData((prev) => {
-      const tempData = [...prev];
+      const tempData: IFilteredData[] = [...prev];
       tempData.push({
         data: [],
         showTabs: false,
@@ -140,14 +140,14 @@ export default function() {
 
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string, index: number) => {
     const categorizedConnections = await getCategorizedConnections();
-
-    const connections = categorizedConnections.get(selectedValue) || [];
+    const connections: ITabsDataResponse | ITabData[] =
+      categorizedConnections.get(selectedValue) || [];
     setDataForTabsHelper(connections, index);
     toggleLoader(false);
   };
 
   const fetchEntities = async (connectionName: string, url: string = pathFromUrl) => {
-    const pathDesired = url ? url : pathFromUrl;
+    const pathDesired: string = url ? url : pathFromUrl;
     const entitiesPromise = exploreConnection({
       connectionid: connectionName,
       path: pathDesired,
@@ -164,7 +164,7 @@ export default function() {
   const selectedTabValueHandler = (entity: IConnectorTabType, index: number) => {
     toggleLoader(true);
     setTabsData((currentData) => {
-      let newData = [...currentData];
+      let newData: IFilteredData[] = [...currentData];
       newData[index].selectedTab = entity.name;
       newData = newData.map((eachNewData) => {
         return {
@@ -177,39 +177,33 @@ export default function() {
       if (index === 0) {
         getCategorizedConnectionsforSelectedTab(entity.name as string, index);
       } else if (index === 1) {
-        fetchEntities(entity.name)
-          // NOTE: As the function is returning promise, we are using .then here
-          .then((res) => {
-            setDataForTabsHelper(res, index);
-            toggleLoader(false);
-          })
-          .catch((error) => {
-            toggleLoader(false);
-            setIsErrorOnNoWorkSpace(true);
-            // TODO : Need to bind the message on Snackbar . The message is in error.message same as the old UI . Remove the console log later
-          });
+        fetchEntitiesData(entity?.name, index);
       } else {
         if (entity.canBrowse) {
-          fetchEntities(tabsData[1].selectedTab, entity.path as string)
-            // NOTE: As the function is returning promise, we are using .then here
-            .then((res) => {
-              setDataForTabsHelper(res, index);
-              toggleLoader(false);
-            })
-            .catch((error) => {
-              toggleLoader(false);
-              setIsErrorOnNoWorkSpace(true);
-              // TODO : Need to bind the message on Snackbar. Remove the console log later
-            });
+          fetchEntitiesData(tabsData[1]?.selectedTab, index, entity.path);
         }
       }
       return newData;
     });
   };
 
+  const fetchEntitiesData = (entityName: string, index: number, path?: string) => {
+    fetchEntities(entityName, path ? path : undefined)
+      // NOTE: As the function is returning promise, we are using .then here
+      .then((res) => {
+        setDataForTabsHelper(res, index);
+        toggleLoader(false);
+      })
+      .catch((error) => {
+        toggleLoader(false);
+        setIsErrorOnNoWorkSpace(true);
+        // TODO : Need to bind the message on Snackbar . The message is in error.message same as the old UI . Remove the console log later
+      });
+  };
+
   const searchHandler = (index: number) => {
     setTabsData((prev) => {
-      let tempData = [...prev];
+      let tempData: IFilteredData[] = [...prev];
       tempData = tempData.map((eachTempData) => ({
         ...eachTempData,
         toggleSearch: false,
@@ -228,10 +222,12 @@ export default function() {
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const val = e.target.value.toLowerCase();
-    const newData = cloneDeep(tabsData);
-    const newDataToSearch = [...newData[index].data];
-    const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(val));
+    const val: string = e.target.value.toLowerCase();
+    const newData: IFilteredData[] = cloneDeep(tabsData);
+    const newDataToSearch: ITabData[] = [...newData[index].data];
+    const tempData: ITabData[] = newDataToSearch.filter((item: ITabData) =>
+      item.name.toLowerCase().includes(val)
+    );
     newData[index].data = [...tempData];
     setFilteredData(cloneDeep(newData));
   };
@@ -239,15 +235,17 @@ export default function() {
   const handleClearSearch = (e: React.MouseEvent<HTMLInputElement>, index: number) => {
     if (refs.current[index].value === '') {
       setTabsData((prev) => {
-        const tempData = [...prev];
+        const tempData: IFilteredData[] = [...prev];
         tempData[index].toggleSearch = false;
         return tempData;
       });
     } else {
       refs.current[index].value = '';
-      const newData = cloneDeep(tabsData);
-      const newDataToSearch = [...newData[index].data];
-      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
+      const newData: IFilteredData[] = cloneDeep(tabsData);
+      const newDataToSearch: ITabData[] = [...newData[index].data];
+      const tempData: ITabData[] = newDataToSearch.filter((item: ITabData) =>
+        item.name.toLowerCase().includes('')
+      );
       newData[index].data = [...tempData];
       setFilteredData(cloneDeep(newData));
     }
@@ -263,7 +261,7 @@ export default function() {
 
   useEffect(() => {
     setTabsData((prev) => {
-      const temp = prev;
+      const temp: IFilteredData[] = prev;
       temp[0].selectedTab = connectorType as string;
       return temp;
     });

@@ -14,7 +14,11 @@
  * the License.
  */
 
-import { IConnectorTabPluginArtifact, IConnectorTabType } from './Components/ConnectionTabs/types';
+import {
+  IConnectorTabPluginArtifact,
+  IConnectorTabType,
+} from 'components/ConnectionList/Components/ConnectionTabs/types';
+import { ChangeEvent, Dispatch, MouseEvent, MutableRefObject, SetStateAction } from 'react';
 
 export interface IFilteredData {
   data: ITabData[];
@@ -24,7 +28,7 @@ export interface IFilteredData {
 }
 
 export interface IHeaderCustomTooltipLabelProps {
-  headersRefs: React.MutableRefObject<HTMLDivElement[]>;
+  headersRefs: MutableRefObject<HTMLDivElement[]>;
   index: number;
   filteredData: IFilteredData;
 }
@@ -34,9 +38,9 @@ export interface IHeaderContentProps extends IHeaderCustomTooltipLabelProps {
   tabsData: IFilteredData[];
   searchHandler: (index: number) => void;
   makeCursorFocused: (index: number) => void;
-  handleSearch: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  refs: React.MutableRefObject<HTMLDivElement[]>;
-  handleClearSearch: (e: React.MouseEvent<HTMLInputElement>, index: number) => void;
+  handleSearch: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  refs: MutableRefObject<HTMLDivElement[]>;
+  handleClearSearch: (e: MouseEvent<HTMLInputElement>, index: number) => void;
 }
 
 export interface IHeaderCustomTooltipProps extends IHeaderCustomTooltipLabelProps {
@@ -46,17 +50,17 @@ export interface IHeaderCustomTooltipProps extends IHeaderCustomTooltipLabelProp
 export interface IHeaderSearchProps {
   eachFilteredData: IFilteredData;
   index: number;
-  refs: React.MutableRefObject<HTMLDivElement[]>;
+  refs: MutableRefObject<HTMLDivElement[]>;
   makeCursorFocused: (index: number) => void;
-  handleSearch: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
-  handleClearSearch: (e: React.MouseEvent<HTMLInputElement>, index: number) => void;
+  handleSearch: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
+  handleClearSearch: (e: MouseEvent<HTMLInputElement>, index: number) => void;
 }
 
 export interface IHeaderSearchInputFieldProps {
   type: string;
   classnames: string;
-  refs: React.MutableRefObject<HTMLDivElement[]>;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+  refs: MutableRefObject<HTMLDivElement[]>;
+  onChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
   index: number;
 }
 
@@ -66,7 +70,7 @@ export interface IConnectionTabsProps {
   value: string;
   index: number;
   connectionId: string;
-  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
   toggleLoader?: (value: boolean, isError?: boolean) => void;
 }
 

@@ -21,7 +21,7 @@ import { IHeaderCustomTooltipProps } from 'components/ConnectionList/types';
 import React from 'react';
 
 export default function({ headersRefs, index, tabsData, filteredData }: IHeaderCustomTooltipProps) {
-  return headersRefs.current[index]?.offsetWidth < headersRefs.current[index]?.scrollWidth ? (
+  return headersRefs?.current[index]?.offsetWidth < headersRefs?.current[index]?.scrollWidth ? (
     <CustomTooltip title={tabsData[index - 1].selectedTab} arrow>
       <Box>
         <HeaderCustomTooltipLabel

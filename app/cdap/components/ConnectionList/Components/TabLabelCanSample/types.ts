@@ -15,7 +15,7 @@
  */
 
 import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
-import { Ref } from 'react';
+import { Dispatch, Ref, SetStateAction } from 'react';
 
 export interface ITabLabelSampleItemProps {
   label: string;
@@ -31,5 +31,5 @@ export interface ITabLabelCanSampleProps {
   entity: IConnectorTabType;
   initialConnectionId: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
-  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
 }

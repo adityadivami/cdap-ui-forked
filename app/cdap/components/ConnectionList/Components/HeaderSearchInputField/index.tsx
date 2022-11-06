@@ -15,14 +15,14 @@
  */
 
 import { IHeaderSearchInputFieldProps } from 'components/ConnectionList/types';
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 export default function({ type, classnames, refs, onChange, index }: IHeaderSearchInputFieldProps) {
   return (
     <input
       type={type}
       className={classnames}
-      onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e, index)}
+      onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e, index)}
       ref={(e: HTMLInputElement) => {
         refs.current[index] = e;
       }}

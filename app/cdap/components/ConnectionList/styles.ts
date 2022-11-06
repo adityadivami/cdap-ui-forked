@@ -115,7 +115,7 @@ export const useStyles = makeStyles({
     fontSize: 14,
     outline: 0,
   },
-  afterSearchIconClick: {
+  searchIconContainer: {
     display: 'flex',
     backgroundColor: '#fff',
     alignItems: 'center',

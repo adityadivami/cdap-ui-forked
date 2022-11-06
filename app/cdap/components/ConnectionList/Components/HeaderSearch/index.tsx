@@ -20,7 +20,7 @@ import SearchRounded from '@material-ui/icons/SearchRounded';
 import HeaderSearchInputField from 'components/ConnectionList/Components/HeaderSearchInputField';
 import { useStyles } from 'components/ConnectionList/styles';
 import { IHeaderSearchProps } from 'components/ConnectionList/types';
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 export default function({
   eachFilteredData,
@@ -34,7 +34,7 @@ export default function({
   return (
     <Box
       className={
-        eachFilteredData.toggleSearch ? classes.afterSearchIconClick : classes.hideComponent
+        eachFilteredData.toggleSearch ? classes.searchIconContainer : classes.hideComponent
       }
       onMouseOver={() => makeCursorFocused(index)}
     >
@@ -48,7 +48,9 @@ export default function({
       />
       <Box
         className={classes.closeIcon}
-        onClick={(e: React.MouseEvent<HTMLInputElement>) => handleClearSearch(e, index)}
+        onClick={(e: MouseEvent<HTMLInputElement>) => {
+          return handleClearSearch(e, index);
+        }}
       >
         <Close />
       </Box>

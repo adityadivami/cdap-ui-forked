@@ -14,12 +14,14 @@
  * the License.
  */
 
+import { Dispatch, SetStateAction } from 'react';
+
 export interface IRenderLabelProps {
   index: number;
   connectorType: IConnectorTabType;
   connectionIdProp: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
-  setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IConnectorTabType {

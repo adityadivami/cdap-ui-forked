@@ -73,6 +73,7 @@ export default function({
       connection: currentConnection,
       properties: {},
     })
+      // NOTE: As the function is returning promise, we are using .then here
       .then((res) => {
         if (onWorkspaceCreate) {
           return onWorkspaceCreate(res);
@@ -113,7 +114,12 @@ export default function({
           buttonElement={
             <Box className="wranglingHover">
               <WrangleIcon />
-              <Typography color="primary" variant="body2" className={classes.wrangleButton}>
+              <Typography
+                color="primary"
+                variant="body2"
+                className={classes.wrangleButton}
+                component="span"
+              >
                 {T.translate('features.NewWranglerUI.ConnectionsList.labels.loadToGrid')}
               </Typography>
             </Box>
@@ -131,7 +137,7 @@ export default function({
       buttonElement={
         <Fragment>
           <WrangleIcon />
-          <Typography variant="body2" className={classes.wrangleButton}>
+          <Typography variant="body2" className={classes.wrangleButton} component="span">
             {T.translate('features.NewWranglerUI.ConnectionsList.labels.loadToGrid')}
           </Typography>
         </Fragment>
