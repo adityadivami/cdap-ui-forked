@@ -31,7 +31,7 @@ export default function({ recipeStepsCount, dataCounts }: IFooterPanelProps) {
     <Box className={classes.containerProps}>
       <Box className={classes.innnerContainer}>
         <ColumnViewPanelTab />
-        <TableMetaInfoTab dataCounts={dataCounts} />
+        <TableMetaInfoTab {...dataCounts} />
         <ZoomTab />
         <DirectivesTab />
         <RecipeStepsTab recipeStepsCount={recipeStepsCount} />
