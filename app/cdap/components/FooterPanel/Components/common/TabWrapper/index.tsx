@@ -44,7 +44,7 @@ const MediumBox = styled(Box)`
     text-align: center;
     padding: 9.5px 12px;
     gap: 8px;
-    width: 10%;
+    width: ${(props) => props.width}%;
     height: 40px;
     background: linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%);
     border-left: 1px solid rgba(57, 148, 255, 0.4);
@@ -59,7 +59,15 @@ const LargeBox = styled(Box)`
   }
 `;
 
-export default function({ size, clickEventListener, children }: ITabWrapperProps) {
+/**
+ *
+ * @param size small or medium or large, 3 variants of footer tabs
+ * @param clickEventListener callback to handle click events on the tabs
+ * @param children children to be rendered inside the variants of TabWrapper
+ * @param width width in percentage for the medium size variant of TabWrapper
+ * @returns TabWrapper with appropriate variations according to props
+ */
+export default function({ size, clickEventListener, children, width }: ITabWrapperProps) {
   return (
     <>
       {size === 'small' && (
@@ -68,7 +76,7 @@ export default function({ size, clickEventListener, children }: ITabWrapperProps
         </SmallBox>
       )}
       {size === 'medium' && (
-        <MediumBox data-testid="footer-panel-medium-tab" onClick={clickEventListener}>
+        <MediumBox data-testid="footer-panel-medium-tab" onClick={clickEventListener} width={width}>
           {children}
         </MediumBox>
       )}

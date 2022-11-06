@@ -24,7 +24,7 @@ import React from 'react';
 
 export default function() {
   return (
-    <TabWrapper size="medium">
+    <TabWrapper size="medium" width={10.5}>
       <>
         {ZoomIcon}
         <TypographyLabel type={'simple'}>

@@ -20,4 +20,5 @@ export interface ITabWrapperProps {
   children: JSX.Element;
   size: 'small' | 'medium' | 'large';
   clickEventListener?: MouseEventHandler<HTMLElement>;
+  width?: number;
 }

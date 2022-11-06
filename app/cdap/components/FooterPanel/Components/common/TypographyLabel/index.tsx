@@ -23,6 +23,12 @@ const OutlinedLabel = styled(Typography)`
   }
 `;
 
+/**
+ *
+ * @param children: children to be rendered inside the variants of TypographyLabel
+ * @param type: simple or outlined, 2 variants of Typography Label
+ * @returns TypographyLabel with appropriate variations according to props
+ */
 export default function({ children, type }: ITypographyLabelProps) {
   return (
     <>

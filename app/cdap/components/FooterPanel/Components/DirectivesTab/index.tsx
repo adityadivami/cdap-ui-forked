@@ -22,7 +22,7 @@ import React from 'react';
 
 export default function() {
   return (
-    <TabWrapper size="medium">
+    <TabWrapper size="medium" width={9.5}>
       <TypographyLabel type={'simple'}>
         <>{`${T.translate(`${PREFIX}.directives`)}`}</>
       </TypographyLabel>
