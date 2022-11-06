@@ -14,8 +14,8 @@
  * the License.
  */
 
+import RenderLabel from 'components/FooterPanel/Components/common/RenderLabel';
 import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
-import TypographyLabel from 'components/FooterPanel/Components/common/RenderLabel';
 import { PREFIX } from 'components/FooterPanel/constants';
 import { ArrowIcon } from 'components/FooterPanel/IconStore/ArrowIcon';
 import { ZoomIcon } from 'components/FooterPanel/IconStore/ZoomIcon';
@@ -27,9 +27,9 @@ export default function() {
     <TabWrapper size="medium" width={10.5}>
       <>
         {ZoomIcon}
-        <TypographyLabel type={'simple'}>
+        <RenderLabel type={'simple'}>
           <>{`${T.translate(`${PREFIX}.zoomPercent100`)}`}</>
-        </TypographyLabel>
+        </RenderLabel>
         {ArrowIcon}
       </>
     </TabWrapper>

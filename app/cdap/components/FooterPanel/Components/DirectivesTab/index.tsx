@@ -14,8 +14,8 @@
  * the License.
  */
 
+import RenderLabel from 'components/FooterPanel/Components/common/RenderLabel/index';
 import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
-import TypographyLabel from 'components/FooterPanel/Components/common/RenderLabel/index';
 import { PREFIX } from 'components/FooterPanel/constants';
 import T from 'i18n-react';
 import React from 'react';
@@ -23,9 +23,9 @@ import React from 'react';
 export default function() {
   return (
     <TabWrapper size="medium" width={9.5}>
-      <TypographyLabel type={'simple'}>
+      <RenderLabel type={'simple'}>
         <>{`${T.translate(`${PREFIX}.directives`)}`}</>
-      </TypographyLabel>
+      </RenderLabel>
     </TabWrapper>
   );
 }

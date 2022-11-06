@@ -14,8 +14,8 @@
  * the License.
  */
 
+import RenderLabel from 'components/FooterPanel/Components/common/RenderLabel';
 import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
-import TypographyLabel from 'components/FooterPanel/Components/common/RenderLabel';
 import { IRecipeStepsTabProps } from 'components/FooterPanel/Components/RecipeStepsTab/types';
 import { PREFIX } from 'components/FooterPanel/constants';
 import T from 'i18n-react';
@@ -25,12 +25,12 @@ export default function({ recipeStepsCount }: IRecipeStepsTabProps) {
   return (
     <TabWrapper size="medium" width={13.5}>
       <>
-        <TypographyLabel type={'simple'}>
+        <RenderLabel type={'simple'}>
           <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>
-        </TypographyLabel>
-        <TypographyLabel type={'outlined'}>
+        </RenderLabel>
+        <RenderLabel type={'outlined'}>
           <>{recipeStepsCount}</>
-        </TypographyLabel>
+        </RenderLabel>
       </>
     </TabWrapper>
   );
