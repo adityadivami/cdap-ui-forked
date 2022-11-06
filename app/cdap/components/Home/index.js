@@ -29,7 +29,7 @@ import ee from 'event-emitter';
 require('./Home.scss');
 
 const WorkspaceList = Loadable({
-  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/WorkspaceList'),
+  loader: () => import(/* webpackChunkName: "WorkspaceList" */ 'components/WorkspaceList'),
   loading: LoadingSVGCentered,
 });
 

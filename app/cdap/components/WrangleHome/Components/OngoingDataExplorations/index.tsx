@@ -35,6 +35,11 @@ import { of } from 'rxjs/observable/of';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { IExplorationCardDetails } from '../OngoingDataExplorationsCard/types';
+import styled from 'styled-components';
+
+const OngoingExplorationCardLink = styled(Link)`
+  text-decoration: none !important;
+`;
 
 export default function({
   cardCount,
@@ -156,7 +161,7 @@ export default function({
                 setShowExplorations(final && Array.isArray(final) && final.length ? true : false);
               }
               setOnGoingExplorationsData(final);
-              setLoading(false);
+              setLoading && setLoading(false);
             });
         }
       });
@@ -175,7 +180,7 @@ export default function({
       {filteredData && Array.isArray(filteredData) && filteredData.length ? (
         filteredData.map((eachExplorationCardData, index) => {
           return (
-            <Link
+            <OngoingExplorationCardLink
               to={{
                 pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${eachExplorationCardData[5].workspaceId}`}`,
                 state: {
@@ -183,7 +188,6 @@ export default function({
                   path: T.translate('features.WranglerNewUI.Breadcrumb.labels.workSpaces'),
                 },
               }}
-              style={{ textDecoration: 'none' }}
               data-testid={`wrangler-home-ongoing-data-exploration-card-${index}`}
             >
               <OngoingDataExplorationsCard
@@ -192,7 +196,7 @@ export default function({
                 cardIndex={index}
                 fromAddress={fromAddress}
               />
-            </Link>
+            </OngoingExplorationCardLink>
           );
         })
       ) : fromAddress === 'Workspaces' ? (
