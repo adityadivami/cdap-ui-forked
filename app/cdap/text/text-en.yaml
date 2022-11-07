@@ -3432,6 +3432,8 @@ features:
         labelDouble: Double
         labelDecimal: Decimal
         labelBytes: Bytes
+      invalidInputErrorMessage : The name you have entered is invalid. It must contain only letters, numbers, and
+            underscores (_). Pick a new name.
     GridTable:
       missingNull: Missing/Null
       containsLetterNumberLeadingTrailingSpaces: Contains letters, numbers, leading and trailing spaces

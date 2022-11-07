@@ -42,6 +42,15 @@ export default function({
   const classes = useStyles();
   const [canEdit, setCanEdit] = useState<Boolean>(false);
   const [inputValue, setInputValue] = useState<string>(columnName);
+  const [invalidInput, setInvalidInput] = useState<Boolean>(false);
+
+  const checkForInvalidInput = (renamedString: string) => {
+    if (!/^\w+$/.test(renamedString)) {
+      setInvalidInput(true);
+    } else {
+      setInvalidInput(false);
+    }
+  };
 
   const handleDataTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDataTypeValue(e.target.value);
@@ -53,14 +62,21 @@ export default function({
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    checkForInvalidInput(e.target.value);
     setInputValue(e.target.value);
   };
 
   const onBlurEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
     setCanEdit(false);
-    if (e.target.value !== columnName) {
+    if (e.target.value !== columnName && !invalidInput) {
       renameColumnNameHandler(columnName, e.target.value);
+    }
+  };
+
+  const onEnter = (e) => {
+    if (e.target.value !== columnName && !invalidInput && e.keyCode === 13) {
+      renameColumnNameHandler(columnName, e.target.value);
+      setCanEdit(false);
     }
   };
 
@@ -72,6 +88,7 @@ export default function({
             value={inputValue}
             onBlur={(e) => onBlurEvent(e)}
             onChange={(e) => onChangeHandler(e)}
+            onKeyDown={onEnter}
           />
         ) : (
           <Typography className={classes.columnInsightsColumnName}>{inputValue}</Typography>
@@ -80,6 +97,13 @@ export default function({
           <EditIcon onClick={editHandler} className={classes.editIcon} />
         </Box>
       </div>
+      {invalidInput && (
+        <div>
+          <Typography className={classes.invalidInput} component="span" variant="body1">
+            {T.translate(`${PREFIX}.invalidInputErrorMessage`).toString()}
+          </Typography>
+        </div>
+      )}
 
       <InputSelect
         classes={{

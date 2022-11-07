@@ -182,6 +182,7 @@ export default function() {
 
   const renameColumnNameHandler = (oldColumnName: string, newColumnName: string) => {
     const directive = `rename ${oldColumnName} ${newColumnName}`;
+    setColumnSelected(newColumnName);
     applyDirectiveAPICall(directive, 'add', [], 'insightsPanel');
   };
 
@@ -308,7 +309,9 @@ export default function() {
       dataQuality: {
         missingNullValueCount: Number(getMissingValueCount),
         missingNullValuePercentage: Number(
-          ((Number(Number(getMissingValueCount).toFixed(0)) / rowsDataList.length) * 100).toFixed(0)
+          ((Number(Number(getMissingValueCount).toFixed(0)) / rowsDataList?.length) * 100).toFixed(
+            0
+          )
         ),
         invalidValueCount: 0,
         invalidValuePercentage: 0,

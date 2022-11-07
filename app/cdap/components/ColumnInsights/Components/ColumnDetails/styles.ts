@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { grey } from '@material-ui/core/colors';
+import { grey, red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
@@ -111,6 +111,16 @@ export const useStyles = makeStyles(() => {
       letterSpacing: 0.15,
       color: grey[900],
       marginTop: 7,
+    },
+    invalidInput: {
+      padding: '10px 0px',
+      color: red[600],
+      fontFamily: 'Noto Sans',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: 14,
+      lineHeight: '150%',
+      letterSpacing: 0.15,
     },
   };
 });
