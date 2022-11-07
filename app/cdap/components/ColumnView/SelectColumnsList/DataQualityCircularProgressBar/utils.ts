@@ -14,9 +14,7 @@
  * the License.
  */
 
-import { IPrepareDataQualtiy } from 'components/ColumnView/SelectColumnsList/types';
-
-export const prepareDataQualtiy = ({ statistics, columnList }: IPrepareDataQualtiy) => {
+export const prepareDataQualtiy = (statistics, columnList) => {
   const dataQualityToArray = statistics && Object.entries(statistics);
   const dataQuality = [];
   Array.isArray(columnList) &&

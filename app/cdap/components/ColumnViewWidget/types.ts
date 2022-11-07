@@ -14,8 +14,8 @@
  * the License.
  */
 
-import T from 'i18n-react';
-
-export const COLUMNS = T.translate('features.NewWranglerUI.columns');
-export const NULL_VALUES = T.translate('features.NewWranglerUI.nullValues');
-export const HEADING_TEXT = T.translate('features.NewWranglerUI.columnView');
+export interface IColumnViewWidget {
+  headingText: string;
+  closeClickHandler: () => void;
+  searchedTermHandler: () => void;
+}

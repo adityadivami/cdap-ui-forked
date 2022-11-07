@@ -24,19 +24,16 @@ import {
   TableRow,
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { COLUMNS, NULL_VALUES } from '../constants';
-import { useStyles } from './styles';
-import { prepareDataQualtiy } from './utils';
-import DataQualityCircularProgressBar from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar';
-import {
-  ISelectColumnListProps,
-  IHeaderNamesList,
-} from 'components/ColumnView/SelectColumnsList/types';
+import { COLUMNS, NULL_VALUES } from 'components/ColumnView/constants';
+import { useStyles } from 'components/ColumnView/SelectColumnsList/styles';
+import { prepareDataQualtiy } from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar/utils';
+import { ISelectColumnListProps } from 'components/ColumnView/SelectColumnsList/types';
+import DataQualityCircularProgressBar from './DataQualityCircularProgressBar';
 
 export default function({ columnData, dataQuality, searchTerm }: ISelectColumnListProps) {
   const classes = useStyles();
-  const [filteredColumns, setFilteredColumns] = useState<IHeaderNamesList[]>(columnData);
-  const [dataQualityValue, setDataQualityValue] = useState<unknown>(dataQuality);
+  const [filteredColumns, setFilteredColumns] = useState(columnData);
+  const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
 
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
@@ -86,7 +83,7 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
                       </Box>
                     </TableCell>
                     <TableCell className={classes.nullValuesContainer}>
-                      {dataQualityValue?.length && (
+                      {dataQualityValue.length && (
                         <DataQualityCircularProgressBar
                           dataQualityPercentValue={dataQualityValue[index]?.value}
                         />

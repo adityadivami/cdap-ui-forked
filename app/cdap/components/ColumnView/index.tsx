@@ -13,18 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { Box } from '@material-ui/core';
 import ColumnViewWidget from 'components/ColumnViewWidget';
 import React, { Fragment, useState } from 'react';
-import { HEADING_TEXT } from './constants';
-import SelectColumnsList from './SelectColumnsList';
-import { useStyles } from './styles';
+import { HEADING_TEXT } from 'components/ColumnView/constants';
+import SelectColumnsList from 'components/ColumnView/SelectColumnsList';
+import { useStyles } from 'components/ColumnView/styles';
+import { IColumnViewProps } from 'components/ColumnView/types';
 
-const ColumnView = (props) => {
-  const { columnData, closeClickHandler, dataQuality } = props;
-  const [searchValue, setSearchValue] = useState('');
-
+export default function({
+  setLoading,
+  columnData,
+  dataQuality,
+  closeClickHandler,
+}: IColumnViewProps) {
   const classes = useStyles();
+  const [searchValue, setSearchValue] = useState<string>('');
 
   const searchedTermHandler = (searchedTerm) => {
     setSearchValue(searchedTerm);
@@ -48,6 +53,4 @@ const ColumnView = (props) => {
       </ColumnViewWidget>
     </Fragment>
   );
-};
-
-export default ColumnView;
+}

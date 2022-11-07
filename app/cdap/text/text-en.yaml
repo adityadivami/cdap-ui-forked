@@ -3439,3 +3439,8 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
+  NewWranglerUI:
+    columns: 'Columns'
+    nullValues: 'Null Values'
+    columnView: 'Column View'
+

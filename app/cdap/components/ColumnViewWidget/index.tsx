@@ -17,14 +17,19 @@
 import { Box } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import React, { Fragment, useRef, useState } from 'react';
-import DrawerWidgetHeading from './DrawerWidgetHeading';
-import { useStyles } from './styles';
+import DrawerWidgetHeading from 'components/ColumnViewWidget/DrawerWidgetHeading';
+import { useStyles } from 'components/ColumnViewWidget/styles';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 
-const ColumnViewWidget = (props) => {
+export default function({
+  headingText,
+  columnData,
+  closeClickHandler,
+  searchedTermHandler,
+  children,
+}) {
   const classes = useStyles();
-  const { headingText, children, closeClickHandler, searchedTermHandler } = props;
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = useState<boolean>(false);
   const ref = useRef(null);
 
   const handleSearch = (event) => {
@@ -67,6 +72,4 @@ const ColumnViewWidget = (props) => {
       <Fragment>{children}</Fragment>
     </Box>
   );
-};
-
-export default ColumnViewWidget;
+}

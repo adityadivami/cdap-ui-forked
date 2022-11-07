@@ -24,7 +24,7 @@ export const useStyles = makeStyles(() => {
       height: 'calc(100vh - 240px)',
     },
     headerStyles: {
-      height: '60px',
+      height: 60,
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -40,23 +40,23 @@ export const useStyles = makeStyles(() => {
     headerRightStyles: {
       display: 'flex',
       alignItems: 'center',
-      paddingRight: '24px',
+      paddingRight: 24,
     },
     dividerLineStyles: {
       width: 1,
       height: 28,
-      marginRight: '12px',
+      marginRight: 12,
       backgroundColor: '#DADCE0',
     },
     headerTextWithBackIconStyles: {
       display: 'flex',
       alignItems: 'center',
-      paddingLeft: '30px',
+      paddingLeft: 30,
     },
     searchFormControl: {
       position: 'relative',
       display: 'flex',
-      marginRight: '16px',
+      marginRight: 16,
     },
     searchInputAdornment: {
       zIndex: 0,

@@ -15,13 +15,12 @@
  */
 
 import { Typography } from '@material-ui/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { useStyles } from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar/styles';
 import { IDataQualityCircularProgressBarProps } from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar/types';
 
 export default function({ dataQualityPercentValue }: IDataQualityCircularProgressBarProps) {
   const classes = useStyles();
-
   return (
     <>
       <Typography component="div" className={classes.progress}>
