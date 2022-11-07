@@ -16,7 +16,7 @@
 
 import React from 'react';
 import BarChart from 'react-bar-chart';
-import { useStyles } from './styles';
+import { useStyles } from 'components/ColumnInsights/Components/ColumnDataDistribution/styles';
 import { IColumnDataDistributionProps } from 'components/ColumnInsights/Components/ColumnDataDistribution/types';
 import T from 'i18n-react';
 import { NavLink } from 'react-router-dom';

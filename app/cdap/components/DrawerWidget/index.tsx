@@ -16,7 +16,7 @@
 
 import { Box, Container, Drawer } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { useStyles } from './styles';
+import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';

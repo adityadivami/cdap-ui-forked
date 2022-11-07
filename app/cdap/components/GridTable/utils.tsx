@@ -16,7 +16,6 @@
 
 import { IExecuteAPIResponse, IRecords } from 'components/GridTable/types';
 import T from 'i18n-react';
-import { element } from 'prop-types';
 
 const PREFIX = 'features.NewWranglerUI.GridTable';
 

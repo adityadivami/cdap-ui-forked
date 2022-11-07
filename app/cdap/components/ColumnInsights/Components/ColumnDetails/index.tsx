@@ -16,7 +16,7 @@
 
 import { DATATYPE_OPTIONS } from 'components/ColumnInsights/options';
 import React, { useState } from 'react';
-import { useStyles } from './styles';
+import { useStyles } from 'components/ColumnInsights/Components/ColumnDetails/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import { Box, Typography } from '@material-ui/core';
 import InputSelect from 'components/ColumnInsights/Components/InputSelect';

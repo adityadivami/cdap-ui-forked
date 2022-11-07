@@ -33,7 +33,7 @@ import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import NoDataScreen from './components/NoRecordScreen';
-import { useStyles } from './styles';
+import { useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
   IHeaderNamesList,

@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { useStyles } from './styles';
+import { useStyles } from 'components/ColumnInsights/Components/ColumnDataQuality/styles';
 import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton';
 import { Box, Typography } from '@material-ui/core';
 import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/ColumnDataQuality/types';

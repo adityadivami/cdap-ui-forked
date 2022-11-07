@@ -16,8 +16,8 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { Underline } from 'components/DrawerWidget/iconStore';
-import { useStyles } from '../styles';
+import { Underline } from 'components/DrawerWidget/DrawerWidgetHeading/IconStore/iconStore';
+import { useStyles } from 'components/DrawerWidget/styles';
 import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/DrawerWidgetHeading/types';
 import T from 'i18n-react';
 
