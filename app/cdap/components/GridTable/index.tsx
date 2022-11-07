@@ -19,6 +19,7 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import FooterPanel from 'components/FooterPanel';
 import NoRecordScreen from 'components/NoRecordScreen/index';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
@@ -235,6 +236,7 @@ export default function GridTable() {
             })}
         </TableBody>
       </Table>
+      <FooterPanel recipeStepsCount={0} gridMetaInfo={{ rowCount: 1000, columnCount: 20 }} />
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
