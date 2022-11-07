@@ -51,7 +51,7 @@ const TabsWrapper = styled(Box)`
 
 export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
   return (
-    <Container>
+    <Container data-testid="footer-panel-parent">
       <TabsWrapper>
         <ColumnViewPanelTab />
         <TableMetaInfoTab {...gridMetaInfo} />
