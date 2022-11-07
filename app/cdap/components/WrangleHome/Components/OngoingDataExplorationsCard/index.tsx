@@ -19,7 +19,7 @@ import { Box, Grid, Typography } from '@material-ui/core/';
 import { useStyles } from './styles';
 import CustomTooltip from '../CustomTooltip';
 
-export default function OngoingDataExplorationCard({ item }) {
+export default function OngoingDataExplorationCard({ item, cardIndex }) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
@@ -37,7 +37,7 @@ export default function OngoingDataExplorationCard({ item }) {
     <Grid
       container
       className={classes.gridContainer}
-      data-testid="wrangler-home-ongoing-data-exploration-card"
+      data-testid={`wrangler-home-ongoing-data-exploration-card-${cardIndex}`}
     >
       {item.map((eachItem, index) => {
         switch (eachItem.type) {
