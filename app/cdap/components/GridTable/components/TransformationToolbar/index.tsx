@@ -51,10 +51,13 @@ export default function({
         {nestedMenuOptions?.map((eachOption, optionIndex) => {
           return (
             <>
-              <Box className={classes.functionNameWrapper}  data-testid={`toolbar-icon-${eachOption.title
+              <Box
+                className={classes.functionNameWrapper}
+                data-testid={`toolbar-icon-${eachOption.title
                   .toLowerCase()
                   .split(' ')
-                  .join('-')}`}>
+                  .join('-')}`}
+              >
                 {eachOption.options?.length ? (
                   <>
                     <Tooltip
@@ -76,7 +79,7 @@ export default function({
                           setSelectedMenuOptions(eachOption.options);
                           setAnchorElement([clickEvent.currentTarget]);
                         }}
-                        data-testid='toolbar-icon-button'
+                        data-testid="toolbar-icon-button"
                       >
                         {eachOption.icon}
                       </IconButton>
