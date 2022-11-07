@@ -18,7 +18,7 @@ import { Box, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
 import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
-import HeaderContent from 'components/ConnectionList/Components/HeaderContent';
+import Header from 'components/ConnectionList/Components/Header';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
 import { PREFIX } from 'components/ConnectionList/constants';
 import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
@@ -291,6 +291,7 @@ export default function() {
       {tabsData && Array.isArray(tabsData) && tabsData.length && tabsData[0]?.data?.length > 0 ? (
         <Box className={classes.connectionsWithInfo}>
           <SelectDatasetWrapper>
+            {console.log('FILTERED', filteredData)}
             {filteredData &&
               Array.isArray(filteredData) &&
               filteredData?.map((eachFilteredData: IFilteredData, index: number) => {
@@ -307,10 +308,10 @@ export default function() {
                   headerContent = headerForLevelZero();
                 } else {
                   headerContent = (
-                    <HeaderContent
+                    <Header
                       eachFilteredData={eachFilteredData}
                       headersRefs={headersRefs}
-                      index={index}
+                      columnIndex={index}
                       tabsData={tabsData}
                       filteredData={filteredData}
                       searchHandler={searchHandler}

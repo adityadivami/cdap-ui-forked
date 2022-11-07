@@ -29,7 +29,7 @@ export interface IFilteredData {
 
 export interface IHeaderCustomTooltipLabelProps {
   headersRefs: MutableRefObject<HTMLDivElement[]>;
-  index: number;
+  columnIndex: number;
   filteredData: IFilteredData;
 }
 
@@ -49,7 +49,7 @@ export interface IHeaderCustomTooltipProps extends IHeaderCustomTooltipLabelProp
 
 export interface IHeaderSearchProps {
   eachFilteredData: IFilteredData;
-  index: number;
+  columnIndex: number;
   refs: MutableRefObject<HTMLDivElement[]>;
   makeCursorFocused: (index: number) => void;
   handleSearch: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
@@ -58,10 +58,9 @@ export interface IHeaderSearchProps {
 
 export interface IHeaderSearchInputFieldProps {
   type: string;
-  classnames: string;
   refs: MutableRefObject<HTMLDivElement[]>;
   onChange: (e: ChangeEvent<HTMLInputElement>, index: number) => void;
-  index: number;
+  columnIndex: number;
 }
 
 export interface IConnectionTabsProps {

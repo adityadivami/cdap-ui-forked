@@ -14,20 +14,19 @@
  * the License.
  */
 
-import { Typography } from '@material-ui/core';
-import { IHeaderCustomTooltipLabelProps } from 'components/ConnectionList/types';
-import React from 'react';
+import styled from 'styled-components';
 
-export default function({ index, headersRefs, filteredData }: IHeaderCustomTooltipLabelProps) {
-  return (
-    <Typography
-      variant="body2"
-      ref={(element) => {
-        headersRefs.current[index] = element;
-      }}
-      component="div"
-    >
-      {filteredData[index - 1]?.selectedTab}
-    </Typography>
-  );
-}
+export const RenderInput = styled.input`
+  &&& {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #000000;
+    width: 100%;
+    background-color: #ffffff;
+    border: none;
+    height: ${(props) => (props.inputHeight ? props.inputHeight : '35px')};
+    outline: 0;
+  }
+`;

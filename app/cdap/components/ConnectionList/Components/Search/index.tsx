@@ -18,42 +18,47 @@ import { Box } from '@material-ui/core';
 import Close from '@material-ui/icons/Close';
 import SearchRounded from '@material-ui/icons/SearchRounded';
 import HeaderSearchInputField from 'components/ConnectionList/Components/HeaderSearchInputField';
-import { useStyles } from 'components/ConnectionList/styles';
 import { IHeaderSearchProps } from 'components/ConnectionList/types';
 import React, { MouseEvent } from 'react';
+import styled from 'styled-components';
+
+const ConnectionListSearchWrapper = styled(Box)`
+  display: ${(props) => (props.toggleSearch ? 'flex' : 'none')};
+  background-color: #fff;
+  align-items: center;
+  height: 50px;
+  padding-right: 20px;
+  padding-left: 18px;
+  text-decoration: none;
+`;
 
 export default function({
   eachFilteredData,
-  index,
+  columnIndex,
   refs,
   makeCursorFocused,
   handleSearch,
   handleClearSearch,
 }: IHeaderSearchProps) {
-  const classes = useStyles();
   return (
-    <Box
-      className={
-        eachFilteredData.toggleSearch ? classes.searchIconContainer : classes.hideComponent
-      }
-      onMouseOver={() => makeCursorFocused(index)}
+    <ConnectionListSearchWrapper
+      toggleSearch={eachFilteredData.toggleSearch}
+      onMouseOver={() => makeCursorFocused(columnIndex)}
     >
       <SearchRounded />
       <HeaderSearchInputField
         refs={refs}
         onChange={handleSearch}
-        index={index}
+        columnIndex={columnIndex}
         type="text"
-        classnames={classes.searchBar}
       />
       <Box
-        className={classes.closeIcon}
         onClick={(e: MouseEvent<HTMLInputElement>) => {
-          return handleClearSearch(e, index);
+          return handleClearSearch(e, columnIndex);
         }}
       >
         <Close />
       </Box>
-    </Box>
+    </ConnectionListSearchWrapper>
   );
 }

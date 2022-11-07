@@ -14,24 +14,15 @@
  * the License.
  */
 
-import { RenderInput } from 'components/ConnectionList/Components/common/RenderInput';
-import { IHeaderSearchInputFieldProps } from 'components/ConnectionList/types';
-import React, { ChangeEvent } from 'react';
+import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
-const SearchInput = styled(RenderInput)`
-  margin-left: 9px;
+export const RenderLabel = styled(Typography)`
+  &&& {
+    font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
+    font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
+    font-size: ${(props) => (props.fontSize ? props.fontSize : '14px')};
+    line-height: 150%;
+    color: ${(props) => (props.fontColor ? props.fontColor : '#000000')};
+  }
 `;
-
-export default function({ type, refs, onChange, columnIndex }: IHeaderSearchInputFieldProps) {
-  return (
-    <SearchInput
-      inputHeight="21px"
-      type={type}
-      onChange={(e: ChangeEvent<HTMLInputElement>) => onChange(e, columnIndex)}
-      ref={(e: HTMLInputElement) => {
-        refs.current[columnIndex] = e;
-      }}
-    />
-  );
-}

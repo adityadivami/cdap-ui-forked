@@ -16,22 +16,28 @@
 
 import { Box } from '@material-ui/core';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
-import HeaderCustomTooltipLabel from 'components/ConnectionList/Components/HeaderCustomTooltipLabel';
+import HeaderLabel from 'components/ConnectionList/Components/HeaderLabel';
 import { IHeaderCustomTooltipProps } from 'components/ConnectionList/types';
 import React from 'react';
 
-export default function({ headersRefs, index, tabsData, filteredData }: IHeaderCustomTooltipProps) {
-  return headersRefs?.current[index]?.offsetWidth < headersRefs?.current[index]?.scrollWidth ? (
-    <CustomTooltip title={tabsData[index - 1].selectedTab} arrow>
+export default function({
+  headersRefs,
+  columnIndex,
+  tabsData,
+  filteredData,
+}: IHeaderCustomTooltipProps) {
+  return headersRefs?.current[columnIndex]?.offsetWidth <
+    headersRefs?.current[columnIndex]?.scrollWidth ? (
+    <CustomTooltip title={tabsData[columnIndex - 1].selectedTab} arrow>
       <Box>
-        <HeaderCustomTooltipLabel
-          index={index}
+        <HeaderLabel
+          columnIndex={columnIndex}
           headersRefs={headersRefs}
           filteredData={filteredData}
         />
       </Box>
     </CustomTooltip>
   ) : (
-    <HeaderCustomTooltipLabel index={index} headersRefs={headersRefs} filteredData={filteredData} />
+    <HeaderLabel columnIndex={columnIndex} headersRefs={headersRefs} filteredData={filteredData} />
   );
 }

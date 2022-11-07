@@ -18,7 +18,7 @@ import { styled } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import RenderTabLabel from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderTabLabel';
+import RenderLabel from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
 import { useStyles } from 'components/ConnectionList/Components/ConnectionTabs/styles';
 import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import { IConnectionTabsProps } from 'components/ConnectionList/types';
@@ -101,7 +101,7 @@ export default function({
                 data-testid="connections-tab-button"
                 onClick={() => handleConnectionTabClick(connectorType, index)}
                 label={
-                  <RenderTabLabel
+                  <RenderLabel
                     index={index}
                     connectorType={connectorType}
                     connectionIdProp={connectionIdProp}

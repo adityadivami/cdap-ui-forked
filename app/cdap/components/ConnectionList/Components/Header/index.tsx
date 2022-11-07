@@ -16,16 +16,25 @@
 
 import { Box, IconButton } from '@material-ui/core';
 import SearchRounded from '@material-ui/icons/SearchRounded';
-import HeaderCustomTooltip from 'components/ConnectionList/Components/HeaderCustomTooltip';
-import HeaderSearch from 'components/ConnectionList/Components/HeaderSearch';
-import { useStyles } from 'components/ConnectionList/styles';
+import Search from 'components/ConnectionList/Components/Search';
+import HeaderLabelWrapper from 'components/ConnectionList/Components/HeaderLabelWrapper';
 import { IHeaderContentProps } from 'components/ConnectionList/types';
-import React from 'react';
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
+
+const ConnectionListHeaderWrapper = styled(Box)`
+  display: ${(props) => (props.toggleSearch ? 'none' : 'flex')};
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding-right: 18px;
+  padding-left: 30px;
+`;
 
 export default function({
   eachFilteredData,
   headersRefs,
-  index,
+  columnIndex,
   tabsData,
   filteredData,
   searchHandler,
@@ -34,42 +43,29 @@ export default function({
   refs,
   handleClearSearch,
 }: IHeaderContentProps) {
-  const classes = useStyles();
-
   return (
-    <>
-      <Box
-        className={
-          eachFilteredData.toggleSearch
-            ? classes.hideComponent
-            : classes.beforeSearchIconClickDisplay
-        }
-      >
-        <HeaderCustomTooltip
+    <Fragment>
+      <ConnectionListHeaderWrapper toggleSearch={eachFilteredData.toggleSearch}>
+        <HeaderLabelWrapper
           headersRefs={headersRefs}
-          index={index}
+          columnIndex={columnIndex}
           tabsData={tabsData}
           filteredData={filteredData}
         />
-
-        <Box
-          onClick={() => {
-            searchHandler(index);
-          }}
-        >
+        <Box onClick={() => searchHandler(columnIndex)}>
           <IconButton>
             <SearchRounded />
           </IconButton>
         </Box>
-      </Box>
-      <HeaderSearch
+      </ConnectionListHeaderWrapper>
+      <Search
         eachFilteredData={eachFilteredData}
-        index={index}
+        columnIndex={columnIndex}
         refs={refs}
         makeCursorFocused={makeCursorFocused}
         handleSearch={handleSearch}
         handleClearSearch={handleClearSearch}
       />
-    </>
+    </Fragment>
   );
 }

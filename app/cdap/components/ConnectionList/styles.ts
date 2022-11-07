@@ -107,13 +107,8 @@ export const useStyles = makeStyles({
     },
   },
   searchBar: {
-    width: '100%',
-    backgroundColor: '#fff',
-    border: 'none',
     marginLeft: 9,
     height: 21,
-    fontSize: 14,
-    outline: 0,
   },
   searchIconContainer: {
     display: 'flex',
