@@ -30,7 +30,11 @@ export default function({ setShowName, showName }: IFunctionNameToggleProps) {
       className={classes.functionWrapper}
       data-testid="transformations-toolbar-icons-function-name-toggler"
     >
-      <Typography className={classes.typoClass} component="div">
+      <Typography
+        className={classes.typoClass}
+        component="div"
+        data-testid="name-toggle-child-label"
+      >
         {T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}
         &nbsp;
       </Typography>
