@@ -61,7 +61,7 @@ export const useStyles = makeStyles({
   typoClass: {
     color: grey[600],
     fontSize: 14,
-    padding: '0 12',
+    padding: '0 12px',
     marginBottom: 10,
   },
   arrow: {

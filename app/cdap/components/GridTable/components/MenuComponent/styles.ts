@@ -33,6 +33,8 @@ export const useStyles = makeStyles({
     },
     '& .MuiMenu-paper': {
       width: 199,
+      top: '145px !important',
+      maxHeight: '70% !important',
     },
     '& .MuiMenu-list': {
       color: '#5F6368',
