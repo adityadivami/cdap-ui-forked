@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/styles';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles(() => {
   return {
@@ -22,27 +23,27 @@ export const useStyles = makeStyles(() => {
       border: '2px solid red',
     },
     tableHead: {
-      marginTop: '40px',
+      marginTop: 40,
     },
     tableBody: {
       '& .MuiTableCell-root': {
         color: '#5F6368',
-        fontSize: '14px',
+        fontSize: 14,
       },
     },
     tableRowContainer: {
       '& .MuiTableCell-root': {
-        paddingTop: '10px',
-        paddingBottom: '10px',
+        paddingTop: 10,
+        paddingBottom: 10,
       },
       '&:hover': {
         boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
       },
     },
     headerNamesSeparator: {
-      width: '250px',
+      width: 250,
       border: '1px solid red',
-      height: '1px',
+      height: 1,
     },
     addTransformationBodyStyles: {
       height: 'calc(100% - 100px)',
@@ -60,7 +61,7 @@ export const useStyles = makeStyles(() => {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '14px',
+      fontSize: 14,
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#5F6368',
@@ -75,40 +76,40 @@ export const useStyles = makeStyles(() => {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: '10px',
+      marginBottom: 10,
     },
     functionHeadingTextStyles: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '150%',
       letterSpacing: '0.15px',
-      color: '#212121',
+      color: grey[900],
     },
     columnLeft: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '150%',
       letterSpacing: '0.15px',
-      paddingLeft: '30px',
+      paddingLeft: 30,
     },
     columnRight: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '150%',
       letterSpacing: '0.15px',
-      paddingLeft: '0px',
+      paddingLeft: 0,
     },
     recipeStepsTableRowStyles: {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '150%',
       letterSpacing: '0.15px',
       '& .MuiTableCell-stickyHeader': {
@@ -116,12 +117,12 @@ export const useStyles = makeStyles(() => {
       },
     },
     nullValuesContainer: {
-      width: '134px',
-      paddingLeft: '0px',
+      width: 134,
+      paddingLeft: 0,
     },
     recipeStepsDeleteStyles: {
-      width: '18px',
-      height: '20px',
+      width: 18,
+      height: 20,
       cursor: 'pointer',
     },
     radioStyles: {
@@ -129,7 +130,7 @@ export const useStyles = makeStyles(() => {
         fontFamily: 'Noto Sans',
         fontStyle: 'normal',
         fontWeight: 400,
-        fontSize: '14px',
+        fontSize: 14,
         color: '#5F6368',
       },
     },
@@ -140,14 +141,14 @@ export const useStyles = makeStyles(() => {
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
-      fontSize: '12px',
+      fontSize: 12,
       color: '#5F6368',
     },
     leftSideCell: {
-      maxWidth: '200px',
+      maxWidth: 200,
       overflow: 'hidden',
       textOverflow: 'ellipsis',
-      paddingLeft: '30px',
+      paddingLeft: 30,
       '& .MuiTableCell-root': {
         padding: '10px 0px 10px 30px',
       },

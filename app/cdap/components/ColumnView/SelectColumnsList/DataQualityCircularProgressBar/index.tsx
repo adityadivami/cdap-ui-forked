@@ -16,38 +16,35 @@
 
 import { Typography } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useStyles } from './styles';
+import { useStyles } from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar/styles';
+import { IDataQualityCircularProgressBarProps } from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar/types';
 
-const MatchMeter: React.FC<{ value: number }> = ({ value }) => {
+export default function({ dataQualityPercentValue }: IDataQualityCircularProgressBarProps) {
   const classes = useStyles();
 
-  const getInlineStyles = (): string => {
-    if (value < 100) {
-      return '#E97567';
-    } else {
-      return '#8BCC74';
-    }
-  };
   return (
     <>
       <Typography component="div" className={classes.progress}>
         <Typography component="div" className={classes.barOverflow}>
           <Typography
             style={{
-              borderBottomColor: getInlineStyles(),
-              borderRightColor: getInlineStyles(),
-              transform: `rotate(${45 + value * 1.8}deg)`,
+              borderBottomColor: dataQualityPercentValue < 100 ? '#E97567' : '#8BCC74',
+              borderRightColor: dataQualityPercentValue < 100 ? '#E97567' : '#8BCC74',
+              transform: `rotate(${45 + dataQualityPercentValue * 1.8}deg)`,
             }}
             component="div"
             className={classes.bar}
           ></Typography>
         </Typography>
-        <Typography component="span" className={classes.value} style={{ color: getInlineStyles() }}>
-          {value.toFixed(1)}%
+        <Typography
+          component="span"
+          className={`${
+            dataQualityPercentValue < 100 ? classes.dataQualityRed : classes.dataQualityGreen
+          }`}
+        >
+          {dataQualityPercentValue.toFixed(1)}%
         </Typography>
       </Typography>
     </>
   );
-};
-
-export default MatchMeter;
+}
