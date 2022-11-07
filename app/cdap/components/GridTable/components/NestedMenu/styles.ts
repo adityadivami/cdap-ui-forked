@@ -29,6 +29,10 @@ export const useNestedMenuStyles = makeStyles({
     padding: '0px 20px',
   },
   root: {
+    position: 'absolute !important',
+    left: '0 !important',
+    right: '0 !important',
+    bottom: '0 !important',
     '& .MuiMenuItem-root': {
       padding: '6px 20px 6px 20px',
       height: 33,
@@ -71,4 +75,5 @@ export const useNestedMenuStyles = makeStyles({
     color: '#5F6368',
     textTransform: 'capitalize',
   },
+  muiPopoverRoot: {},
 });

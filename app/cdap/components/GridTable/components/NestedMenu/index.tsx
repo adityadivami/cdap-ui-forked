@@ -21,6 +21,7 @@ import MenuItemComponent from 'components/GridTable/components/MenuItemComponent
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
 import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
+import _ from 'lodash';
 
 export default function({
   menuOptions,
