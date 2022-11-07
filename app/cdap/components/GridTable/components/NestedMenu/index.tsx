@@ -67,12 +67,16 @@ export default function({
           cloneAnchorElement.splice(insertPosition, 0, event.currentTarget);
           const anchorElementUpdate = cloneAnchorElement.slice(0, insertPosition + 1);
           setAnchorElement((prev) => anchorElementUpdate);
-          if (menuComponentOptions.length < anchorElementUpdate.length - 1) {
+          if (menuComponentOptions.length <= anchorElementUpdate.length - 1) {
+            menuComponentOptions.splice(anchorElementUpdate.length - 2, 0, menuItem?.options);
             setMenuComponentOptions((prev) =>
-              prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
+              prev.length ? menuComponentOptions : [menuItem?.options]
             );
           } else {
-            setMenuComponentOptions((prev) => prev.slice(0, anchorElementUpdate.length - 1));
+            menuComponentOptions.splice(anchorElementUpdate.length - 2, 0, menuItem?.options);
+            setMenuComponentOptions((prev) =>
+              prev.length ? menuComponentOptions : [menuItem?.options]
+            );
           }
         } else if (anchorElement.includes(event.currentTarget)) {
           const currentTargetIndex = _.findIndex(
