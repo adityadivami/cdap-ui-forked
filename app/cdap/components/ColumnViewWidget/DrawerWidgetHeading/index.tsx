@@ -13,26 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  columnViewDrawer: {
-    height: 'calc(100vh - 240px)',
-  },
-  columnViewContainer: {
-    display: 'flex',
-    fontFamily: 'Roboto',
-  },
-});
+import { Box } from '@material-ui/core';
+import React from 'react';
+import { useStyles } from './styles';
+import {UnderlineIcon} from 'components/ColumnViewWidget/IconStore/Underline'
+
+const DrawerWidgetHeading = (props) => {
+  const { headingText } = props;
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.headingStyles}>
+      <div className={classes.headingTextStyles}>{headingText}</div>
+      {UnderlineIcon}
+    </Box>
+  );
+};
+
+export default DrawerWidgetHeading;

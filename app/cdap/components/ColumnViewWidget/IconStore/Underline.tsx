@@ -13,26 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  columnViewDrawer: {
-    height: 'calc(100vh - 240px)',
-  },
-  columnViewContainer: {
-    display: 'flex',
-    fontFamily: 'Roboto',
-  },
-});
+import React from 'react';
+
+export const UnderlineIcon = (
+<svg width="67" height="2" viewBox="0 0 67 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0H50L53 2H3L0 0Z" fill="#2196F3"/>
+<path d="M54 0H63.5L66.5 2H57L54 0Z" fill="#2196F3"/>
+</svg>
+);

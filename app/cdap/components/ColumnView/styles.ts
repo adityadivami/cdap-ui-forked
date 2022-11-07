@@ -13,26 +13,14 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  columnViewDrawer: {
-    height: 'calc(100vh - 240px)',
-  },
-  columnViewContainer: {
-    display: 'flex',
-    fontFamily: 'Roboto',
-  },
+export const useStyles = makeStyles(() => {
+  return {
+    addTransformationBodyStyles: {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: '0',
+    },
+  };
 });
