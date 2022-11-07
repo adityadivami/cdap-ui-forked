@@ -31,7 +31,8 @@ describe('Testing Footer Panel Component', () => {
         </Switch>
       </Router>
     );
-    const parentElement = screen.getByTestId(/footer-panel-parent/i);
+    const parentElement = screen.getByTestId(/footer-panel-container/i);
     expect(parentElement).toBeInTheDocument();
+    expect(parentElement).toContainElement(screen.getByTestId(/footer-panel-wrapper/i));
   });
 });
