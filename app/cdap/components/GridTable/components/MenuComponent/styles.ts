@@ -27,13 +27,21 @@ export const useStyles = makeStyles({
     padding: '0px 21px',
   },
   root: {
+    position: 'absolute !important',
+    left: '0 !important',
+    right: '0 !important',
+    bottom: '0 !important',
+    width: 232,
+    top: '-13px !important',
+    '& > div': {
+      position: 'absolute !important',
+    },
     '& .MuiMenuItem-root': {
       padding: '6px 20px 6px 20px',
       height: 33,
     },
     '& .MuiMenu-paper': {
       width: 199,
-      top: '145px !important',
       maxHeight: '70% !important',
     },
     '& .MuiMenu-list': {

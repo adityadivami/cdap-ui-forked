@@ -24,22 +24,22 @@ export const DATATYPE_OPTIONS = [
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.string`).toString(),
     options: [
       {
-        value: 'boolean',
+        value: 'test',
         label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
         supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
         options: [
           {
-            value: 'short',
+            value: 'test 2',
             label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
             supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
             options: [
               {
-                value: 'short',
+                value: 'test 3',
                 label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
                 supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
                 options: [
                   {
-                    value: 'short',
+                    value: 'test 4',
                     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
                     supported_dataType: [
                       T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
@@ -80,22 +80,22 @@ export const DATATYPE_OPTIONS = [
     supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
     options: [
       {
-        value: 'boolean',
+        value: 'test 85',
         label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
         supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
         options: [
           {
-            value: 'short',
+            value: 'test 6',
             label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
             supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
             options: [
               {
-                value: 'short',
+                value: 'test 7',
                 label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
                 supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
                 options: [
                   {
-                    value: 'short',
+                    value: 'test 8',
                     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
                     supported_dataType: [
                       T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
@@ -123,35 +123,5 @@ export const DATATYPE_OPTIONS = [
     value: 'bytes',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.bytes`).toString(),
     supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
-    options: [
-      {
-        value: 'boolean',
-        label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
-        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
-        options: [
-          {
-            value: 'short',
-            label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
-            options: [
-              {
-                value: 'short',
-                label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-                supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
-                options: [
-                  {
-                    value: 'short',
-                    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-                    supported_dataType: [
-                      T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
   },
 ];
