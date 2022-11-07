@@ -51,6 +51,8 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
   const classes = useStyles();
   const { dataprep } = DataPrepStore.getState();
 
+  console.log(defaultConnectionPayload, 'defaultConnectionPayload');
+
   useEffect(() => {
     setConnectionPayload({
       path: dataprep.insights.path,
@@ -113,9 +115,8 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
   const componentToRender = (
     <DrawerWidget
       headingText={T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.parsing')}
-      openDrawer={setDrawerStatus}
+      openDrawer={drawerStatus}
       showDivider={true}
-      headerActionTemplate={<></>}
       closeClickHandler={() => setDrawerStatus(false)}
     >
       <Box className={classes.bodyContainerStyles}>
@@ -145,13 +146,7 @@ export default function({ setLoading, updateDataTranformation }: IParsingDrawer)
 
       {errorOnTransformation.open && (
         <PositionedSnackbar
-          handleCloseError={
-            () => {}
-            /* setErrorOnTransformation({
-              open: false,
-              message: T.translate(`features.errorMessage.encountered`),
-            }) */
-          }
+          handleCloseError={() => {}}
           messageToDisplay={errorOnTransformation.message}
         />
       )}

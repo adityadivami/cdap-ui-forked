@@ -22,7 +22,7 @@ export interface IDrawerWidgetHeaderProps {
 
 export interface IDrawerWidgetProps {
   headingText?: string | ReactNode;
-  openDrawer: boolean | Dispatch<SetStateAction<boolean>> | unknown;
+  openDrawer: boolean;
   showDivider?: boolean;
   headerActionTemplate?: ReactNode | JSX.Element;
   children?: unknown[] | boolean;

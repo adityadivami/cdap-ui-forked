@@ -14,12 +14,12 @@
  * the License.
  */
 
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from 'react';
 
 export interface IInputCheckboxProps {
   label: ReactNode | string;
   value: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   className: string;
 }
 
@@ -50,7 +50,7 @@ interface IParsingPopupBodyPropsValues {
 }
 
 export interface IParsingDrawer {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
   updateDataTranformation: (wid: string) => void;
 }
 
@@ -72,9 +72,9 @@ interface IProperties {
   enableQuotedValues: boolean;
   fileEncoding: string;
   format: string;
-  schema: unknown;
+  schema: null | unknown;
   skipHeader: boolean;
-  _pluginName: unknown;
+  _pluginName: null | unknown;
 }
 
 export interface IDefaultProperties {

@@ -37,10 +37,10 @@ export default function({
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
         <header className={classes.headerStyles}>
-          <div className={classes.headerTextWithBackIconStyles}>
+          <Box className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && <ChevronLeftRoundedIcon className={classes.chevronLeftRounded} />}
             <DrawerWidgetHeading headingText={headingText} />
-          </div>
+          </Box>
           <Box className={classes.headerRightStyles}>
             {headerActionTemplate && <div>{headerActionTemplate}</div>}
             {showDivider && <div className={classes.dividerLineStyles} />}
