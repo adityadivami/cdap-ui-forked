@@ -37,19 +37,61 @@ export default function({
 
   const handleMenuClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    menuItem: IMenuItem
+    menuItem: IMenuItem,
+    origin?: string
   ) => {
     event.preventDefault();
     event.stopPropagation();
-    if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
-      setAnchorElement((prev) => [...prev, event.currentTarget]);
-      setMenuComponentOptions((prev) =>
-        prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
-      );
+    if (origin === 'parentMenu') {
+      if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
+        setAnchorElement((prev) => [...prev, event.currentTarget]);
+        setMenuComponentOptions((prev) => [menuItem?.options]);
+      } else {
+        submitMenuOption(menuItem.value, menuItem.supported_dataType);
+        setAnchorElement(null);
+        handleMenuOpenClose(title);
+      }
     } else {
-      submitMenuOption(menuItem.value, menuItem.supported_dataType);
-      setAnchorElement(null);
-      handleMenuOpenClose(title);
+      if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
+        let referenceIndex = -1;
+        menuComponentOptions.forEach((menuOptions, menuOptionsIndex) => {
+          menuOptions.forEach((eachOption, optionsIndex) => {
+            if (eachOption.value === menuItem.value) {
+              referenceIndex = menuOptionsIndex;
+            }
+          });
+        });
+        if (referenceIndex >= 0 && !anchorElement.includes(event.currentTarget)) {
+          const cloneAnchorElement = anchorElement;
+          const insertPosition = referenceIndex + 2;
+          cloneAnchorElement.splice(insertPosition, 0, event.currentTarget);
+          const anchorElementUpdate = cloneAnchorElement.slice(0, insertPosition + 1);
+          setAnchorElement((prev) => anchorElementUpdate);
+          if (menuComponentOptions.length < anchorElementUpdate.length - 1) {
+            setMenuComponentOptions((prev) =>
+              prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
+            );
+          } else {
+            setMenuComponentOptions((prev) => prev.slice(0, anchorElementUpdate.length - 1));
+          }
+        } else if (anchorElement.includes(event.currentTarget)) {
+          const currentTargetIndex = _.findIndex(
+            anchorElement,
+            (anchor) => anchor == event.currentTarget
+          );
+          setAnchorElement((prev) => prev.slice(0, currentTargetIndex + 1));
+          setMenuComponentOptions((prev) => prev.slice(0, currentTargetIndex));
+        } else {
+          setAnchorElement((prev) => [...prev, event.currentTarget]);
+          setMenuComponentOptions((prev) =>
+            prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
+          );
+        }
+      } else {
+        submitMenuOption(menuItem.value, menuItem.supported_dataType);
+        setAnchorElement(null);
+        handleMenuOpenClose(title);
+      }
     }
   };
   return (
@@ -76,7 +118,9 @@ export default function({
               item={eachOption}
               columnType={columnType.toLowerCase()}
               index={optionsIndex}
-              onMenuClick={handleMenuClick}
+              onMenuClick={(onClickEvent, clickedItem) =>
+                handleMenuClick(onClickEvent, clickedItem, 'parentMenu')
+              }
             />
           );
         })}
