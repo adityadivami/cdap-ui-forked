@@ -95,7 +95,7 @@ export default function({
     <>
       <Menu
         id="parent-menu"
-        data-testid='nested-menu-parent-root'
+        data-testid="nested-menu-parent-root"
         keepMounted
         anchorEl={anchorElement?.length ? anchorElement[0] : null}
         open={anchorElement?.length ? true : false}

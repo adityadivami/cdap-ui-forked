@@ -14,23 +14,26 @@
  *  the License.
  */
 
-import { fireEvent, render ,screen} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import NestedMenu from 'components/GridTable/components/NestedMenu/index';
 
 describe('Testing nested menu component', () => {
   it('should test default render of nested menu', () => {
-    const x =  [{label: 'test',
-    supported_dataType: ['test'],
-    value: 'test',
-    options: [{label: 'test',
-    supported_dataType: ['test'],
-    value: 'test',
-    options: []}]}]
+    const x = [
+      {
+        label: 'test',
+        supported_dataType: ['test'],
+        value: 'test',
+        options: [{ label: 'test', supported_dataType: ['test'], value: 'test', options: [] }],
+      },
+    ];
     render(
       <NestedMenu
-        submitMenuOption={() => {jest.fn()}}
+        submitMenuOption={() => {
+          jest.fn();
+        }}
         columnType={'test'}
         menuOptions={x}
         title={'hello'}
@@ -38,24 +41,21 @@ describe('Testing nested menu component', () => {
         setAnchorElement={() => jest.fn()}
         open={true}
         handleMenuOpenClose={() => jest.fn()}
-
       />
     );
 
     const parentElement = screen.getByTestId(/menu-item-parent/i);
     fireEvent.click(parentElement);
     fireEvent.click(screen.getByTestId(/nested-menu-parent-root/i));
-
   });
 
   it('should test default render of nested menu with options as empty', () => {
-    const x =  [{label: 'test',
-    supported_dataType: ['test'],
-    value: 'test',
-    options: []}]
+    const x = [{ label: 'test', supported_dataType: ['test'], value: 'test', options: [] }];
     render(
       <NestedMenu
-        submitMenuOption={() => {jest.fn()}}
+        submitMenuOption={() => {
+          jest.fn();
+        }}
         columnType={'test'}
         menuOptions={x}
         title={'hello'}

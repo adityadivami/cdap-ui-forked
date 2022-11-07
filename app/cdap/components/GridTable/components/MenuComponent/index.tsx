@@ -52,7 +52,7 @@ export default function({
       }}
       className={classes.root}
       classes={{ paper: classes.popoverPaper }}
-      data-testid='menu-component-parent'
+      data-testid="menu-component-parent"
     >
       {menuOptions?.map((eachOption, optionsIndex) => (
         <MenuItemComponent
