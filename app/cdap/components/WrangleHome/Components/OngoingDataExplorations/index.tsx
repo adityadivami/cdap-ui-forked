@@ -155,12 +155,10 @@ export default function({
               explorationData[index].dataQuality = totalDataQuality;
               explorationData[index].count = workspace.count;
               const final = getUpdatedExplorationCards(explorationData, cardCount);
-              /**
-               * if we have setData, then we should send data to parent element as the exploration state is then maintained in parent as well for showing or hiding the title of the parent component
-               */
-              if (setShowExplorations) {
+
+              // if we have setShowExplorations, then we should send data to parent element as the exploration state is then maintained in parent as well for showing or hiding the title of the parent component
+              setShowExplorations &&
                 setShowExplorations(final && Array.isArray(final) && final.length ? true : false);
-              }
               setOnGoingExplorationsData(final);
               setLoading && setLoading(false);
             });
@@ -179,7 +177,7 @@ export default function({
   return (
     <Box data-testid="ongoing-data-explore-parent">
       {filteredData && Array.isArray(filteredData) && filteredData.length ? (
-        filteredData.map((eachExplorationCardData, index) => {
+        filteredData.map((eachExplorationCardData, cardIndex) => {
           return (
             <OngoingExplorationCardLink
               to={{
@@ -189,12 +187,12 @@ export default function({
                   path: T.translate('features.WranglerNewUI.Breadcrumb.labels.workSpaces'),
                 },
               }}
-              data-testid={`wrangler-home-ongoing-data-exploration-card-${index}`}
+              data-testid={`wrangler-home-ongoing-data-exploration-card-${cardIndex}`}
             >
               <OngoingDataExplorationsCard
-                key={index}
+                key={`ongoing-data-exploration-card-${cardIndex}`}
                 explorationCardDetails={eachExplorationCardData}
-                cardIndex={index}
+                cardIndex={cardIndex}
                 fromAddress={fromAddress}
               />
             </OngoingExplorationCardLink>

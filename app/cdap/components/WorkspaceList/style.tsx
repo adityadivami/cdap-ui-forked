@@ -19,9 +19,6 @@ import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   wrapper: {
-    '& *': {
-      fontFamily: "'Noto Sans', sans-serif",
-    },
     paddingBottom: 10,
   },
   header: {

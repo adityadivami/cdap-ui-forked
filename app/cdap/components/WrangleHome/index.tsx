@@ -37,9 +37,7 @@ export default function() {
 
   return (
     <Box
-      className={
-        showExplorations ? classes.wrapper : `${classes.wrapper} ${classes.wrapperWithBottomSpace}`
-      }
+      className={`${classes.wrapper} ${showExplorations && classes.wrapperWithBottomSpace}`}
       data-testid="wrangler-home-new-parent"
     >
       <Box className={classes.subHeader}>

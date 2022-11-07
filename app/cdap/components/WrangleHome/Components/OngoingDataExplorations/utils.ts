@@ -63,7 +63,7 @@ export const getUpdatedExplorationCards = (
       .filter((eachItem) => eachItem.count !== 0)
       .filter((_, itemIndex) => (cardCount && itemIndex < cardCount) || !cardCount)
       .forEach((eachExplorationCard) => {
-        const eachExplorationCardData = [];
+        const eachExplorationCardsData = [];
         Object.keys(eachExplorationCard).map((keys) => {
           const onGoingDatExplorationData = {} as IOnGoingDataExplorationsData;
           switch (keys) {
@@ -100,10 +100,10 @@ export const getUpdatedExplorationCards = (
               onGoingDatExplorationData.count = eachExplorationCard[keys];
               break;
           }
-          eachExplorationCardData.push(onGoingDatExplorationData);
+          eachExplorationCardsData.push(onGoingDatExplorationData);
         });
 
-        updatedExplorationCards.push(eachExplorationCardData);
+        updatedExplorationCards.push(eachExplorationCardsData);
       });
   }
 

@@ -19,7 +19,7 @@ import Box from '@material-ui/core/Box';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { useStyles } from 'components/WorkspaceList/style';
-import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExplorations';
+import OngoingDataExplorations from 'components/WrangleHome/Components/OngoingDataExplorations';
 import { WORKSPACES } from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 import T from 'i18n-react';
 import React, { useState } from 'react';
@@ -51,7 +51,7 @@ export default function() {
         </Breadcrumbs>
       </Box>
       <Box className={classes.explorationList}>
-        <OngoingDataExploration fromAddress={WORKSPACES} setLoading={setLoading} />
+        <OngoingDataExplorations fromAddress={WORKSPACES} setLoading={setLoading} />
       </Box>
       {loading && (
         <Box className={classes.loadingContainer}>
