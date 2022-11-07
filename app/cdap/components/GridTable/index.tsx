@@ -212,48 +212,50 @@ export default function GridTable() {
           </Box>
         )}
         {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
-          <Table aria-label="simple table" className="test" data-testid="grid-table">
-            <TableHead>
-              <TableRow>
-                {headersNamesList?.length > 0 &&
-                  headersNamesList.map((eachHeader) => (
-                    <GridHeaderCell
-                      label={eachHeader.label}
-                      types={eachHeader.type as string[]}
-                      key={eachHeader.name}
-                    />
-                  ))}
-              </TableRow>
-              <TableRow>
-                {missingDataList?.length > 0 &&
-                  headersNamesList.length > 0 &&
-                  headersNamesList.map((each, index) => {
-                    return missingDataList.map((item, itemIndex) => {
-                      if (item.name === each.name) {
-                        return <GridKPICell metricData={item} key={item.name} />;
-                      }
-                    });
+          <Box className={classes.gridTableWrapper}>
+            <Table aria-label="simple table" className="test" data-testid="grid-table">
+              <TableHead>
+                <TableRow>
+                  {headersNamesList?.length > 0 &&
+                    headersNamesList.map((eachHeader) => (
+                      <GridHeaderCell
+                        label={eachHeader.label}
+                        types={eachHeader.type as string[]}
+                        key={eachHeader.name}
+                      />
+                    ))}
+                </TableRow>
+                <TableRow>
+                  {missingDataList?.length > 0 &&
+                    headersNamesList.length > 0 &&
+                    headersNamesList.map((each, index) => {
+                      return missingDataList.map((item, itemIndex) => {
+                        if (item.name === each.name) {
+                          return <GridKPICell metricData={item} key={item.name} />;
+                        }
+                      });
+                    })}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rowsDataList?.length > 0 &&
+                  rowsDataList.map((eachRow, rowIndex) => {
+                    return (
+                      <TableRow key={`row-${rowIndex}`}>
+                        {headersNamesList.map((eachKey, eachIndex) => {
+                          return (
+                            <GridTextCell
+                              cellValue={eachRow[eachKey.name] || '--'}
+                              key={`${eachKey.name}-${eachIndex}`}
+                            />
+                          );
+                        })}
+                      </TableRow>
+                    );
                   })}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rowsDataList?.length > 0 &&
-                rowsDataList.map((eachRow, rowIndex) => {
-                  return (
-                    <TableRow key={`row-${rowIndex}`}>
-                      {headersNamesList.map((eachKey, eachIndex) => {
-                        return (
-                          <GridTextCell
-                            cellValue={eachRow[eachKey.name] || '--'}
-                            key={`${eachKey.name}-${eachIndex}`}
-                          />
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
+              </TableBody>
+            </Table>
+          </Box>
         ) : (
           <NoRecordScreen
             title={T.translate('features.NoRecordScreen.gridTable.title')}

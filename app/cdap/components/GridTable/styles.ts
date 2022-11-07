@@ -35,4 +35,8 @@ export const useStyles = makeStyles({
     display: 'flex',
     fontFamily: 'Roboto',
   },
+  gridTableWrapper: {
+    height: 'calc(100vh - 240px)',
+    overflowY: 'auto',
+  },
 });

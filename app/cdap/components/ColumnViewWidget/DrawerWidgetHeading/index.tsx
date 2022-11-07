@@ -17,7 +17,7 @@
 import { Box } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from './styles';
-import {UnderlineIcon} from 'components/ColumnViewWidget/IconStore/Underline'
+import { UnderlineIcon } from 'components/ColumnViewWidget/IconStore/Underline';
 
 const DrawerWidgetHeading = (props) => {
   const { headingText } = props;

@@ -25,7 +25,6 @@ export const useStyles = makeStyles(() => {
       marginTop: '40px',
     },
     tableBody: {
-      height: '300px',
       '& .MuiTableCell-root': {
         color: '#5F6368',
         fontSize: '14px',
