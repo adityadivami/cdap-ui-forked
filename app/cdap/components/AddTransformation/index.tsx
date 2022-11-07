@@ -27,10 +27,13 @@ import {
   IDataQualityItem,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
-import { multipleColumnSelected, ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
+import {
+  multipleColumnSelected,
+  ADD_TRANSFORMATION_PREFIX,
+} from 'components/AddTransformation/constants';
 
 export default function({
-  directiveFunctionSupportedDataType,
+  functionSupportedDataType,
   functionName,
   columnData,
   missingDataList,
@@ -80,9 +83,7 @@ export default function({
   return (
     <Fragment>
       <DrawerWidget
-        headingText={T.translate(
-          `${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`
-        )}
+        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
@@ -94,7 +95,7 @@ export default function({
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={dataQualityValue}
-              directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+              functionSupportedDataType={functionSupportedDataType}
               functionName={functionName}
             />
           </div>

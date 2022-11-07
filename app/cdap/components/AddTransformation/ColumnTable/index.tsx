@@ -24,7 +24,7 @@ import {
   TableRow,
 } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { useStyles } from 'components/AddTransformation/styles';
+import { useStyles } from 'components/AddTransformation/ColumnTable/styles';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
 import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
@@ -32,7 +32,7 @@ import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constant
 
 export default function({
   columns,
-  directiveFunctionSupportedDataType,
+  functionSupportedDataType,
   onSingleSelection,
   selectedColumns,
   dataQualityValue,
@@ -43,7 +43,7 @@ export default function({
   const classes = useStyles();
 
   return (
-    <TableContainer component={Box} data-testid='column-table-parent'>
+    <TableContainer component={Box} data-testid="column-table-parent">
       <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
         <TableHead>
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
@@ -56,7 +56,7 @@ export default function({
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
-              data-testid='panel-columns'
+              data-testid="panel-columns"
             >
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
             </TableCell>
@@ -64,7 +64,7 @@ export default function({
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
-              data-testid='panel-values'
+              data-testid="panel-values"
             >
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
             </TableCell>
@@ -74,7 +74,7 @@ export default function({
           {columns?.length > 0 &&
             columns.map((eachColumn, index) => (
               <>
-                {directiveFunctionSupportedDataType?.includes('all') ? (
+                {functionSupportedDataType?.includes('all') ? (
                   <TableRowWidget
                     onSingleSelection={onSingleSelection}
                     selectedColumns={selectedColumns}
@@ -85,19 +85,19 @@ export default function({
                     index={index}
                     eachColumn={eachColumn}
                   />
-                ) : directiveFunctionSupportedDataType?.includes(
-                  eachColumn?.type[0]?.toLowerCase()
-                ) && (
-                  <TableRowWidget
-                    onSingleSelection={onSingleSelection}
-                    selectedColumns={selectedColumns}
-                    dataQualityValue={dataQualityValue}
-                    isSingleSelection={isSingleSelection}
-                    handleDisableCheckbox={handleDisableCheckbox}
-                    onMultipleSelection={onMultipleSelection}
-                    index={index}
-                    eachColumn={eachColumn}
-                  />
+                ) : (
+                  functionSupportedDataType?.includes(eachColumn?.type[0]?.toLowerCase()) && (
+                    <TableRowWidget
+                      onSingleSelection={onSingleSelection}
+                      selectedColumns={selectedColumns}
+                      dataQualityValue={dataQualityValue}
+                      isSingleSelection={isSingleSelection}
+                      handleDisableCheckbox={handleDisableCheckbox}
+                      onMultipleSelection={onMultipleSelection}
+                      index={index}
+                      eachColumn={eachColumn}
+                    />
+                  )
                 )}
               </>
             ))}

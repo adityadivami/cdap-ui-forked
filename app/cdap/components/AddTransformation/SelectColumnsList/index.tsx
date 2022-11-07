@@ -16,7 +16,7 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { useStyles } from 'components/AddTransformation/styles';
+import { useStyles } from 'components/AddTransformation/SelectColumnsList/styles';
 import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
@@ -27,9 +27,10 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
+import TypographyText from 'components/common/TypographyText';
 
 export default function({
-  directiveFunctionSupportedDataType,
+  functionSupportedDataType,
   selectedColumnsCount,
   columnData,
   setSelectedColumns,
@@ -53,18 +54,14 @@ export default function({
   }, []);
 
   const columnsAsPerType: IHeaderNamesList[] | string[] =
-    directiveFunctionSupportedDataType?.length > 0 &&
-    directiveFunctionSupportedDataType?.includes('all')
-      ? directiveFunctionSupportedDataType?.filter(
-          (supportedType: string) => supportedType === 'all'
-        )
+    functionSupportedDataType?.length > 0 && functionSupportedDataType?.includes('all')
+      ? functionSupportedDataType?.filter((supportedType: string) => supportedType === 'all')
       : columns?.filter((columnDetail: IHeaderNamesList) => {
-          return directiveFunctionSupportedDataType?.some(
-            (dataTypeCollection: string | string[]) => {
-              return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
-            }
-          );
+          return functionSupportedDataType?.some((dataTypeCollection: string | string[]) => {
+            return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+          });
         });
+
   const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
     setSelectedColumn([column]);
@@ -125,7 +122,7 @@ export default function({
   };
 
   return (
-    <section className={classes.columnsCountTextStyles} data-testid='select-column-list-parent'>
+    <section className={classes.columnsCountTextStyles} data-testid="select-column-list-parent">
       <div className={classes.selectColumnsHeaderStyles}>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
@@ -150,14 +147,22 @@ export default function({
         <Box className={classes.noRecordWrapper}>
           <Box className={classes.innerWrapper}>
             {NoDataSVG}
-            <Typography component="div" className={classes.mainHeaderMessage}>
-              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
-            </Typography>
-            <Typography component="div" className={classes.subHeaderMessage}>
-              {T.translate(
-                `${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`
-              )}
-            </Typography>
+            <TypographyText
+              type="simpleBold"
+              text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
+              component="p"
+              size="16px"
+              weight={600}
+              dataTestId="no-column-title"
+            />
+            <TypographyText
+              type="simpleBold"
+              text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`).toString()}
+              component="p"
+              size="14px"
+              weight={400}
+              dataTestId="no-column-subTitle"
+            />
           </Box>
         </Box>
       ) : (
@@ -167,7 +172,7 @@ export default function({
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
           columns={columns}
-          directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
+          functionSupportedDataType={functionSupportedDataType}
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
         />

@@ -14,21 +14,32 @@
  * the License.
  */
 
-import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-
-export const useStyles = makeStyles((_theme: Theme) => ({
-  progress: {
-    position: 'relative',
-    margin: 4,
-    float: 'left',
-    textAlign: 'center',
-  },
-  barOverflow: {
-    position: 'relative',
-    overflow: 'hidden',
-    width: 60,
-    height: 30,
-    marginBottom: '-20px !important',
-  },
-}));
+import { grey } from '@material-ui/core/colors';
+export const useStyles = makeStyles(() => {
+  return {
+    tabledisplayStyles: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    recipeStepsTableRowStyles: {
+      fontWeight: 400,
+      fontSize: 16,
+      lineHeight: '150%',
+      letterSpacing: 0.15,
+      color: grey[700],
+    },
+    rowsOfTable: {
+      display: 'grid',
+      gridTemplateColumns: '10% 45% 45%',
+    },
+    recipeStepsTableHeadStyles: {
+      padding: 10,
+      fontWeight: 600,
+      fontSize: 16,
+      lineHeight: '150%',
+      letterSpacing: 0.15,
+      color: grey[700],
+    },
+  };
+});

@@ -48,7 +48,7 @@ export const useStyles = makeStyles(() => {
       fontWeight: 400,
       fontSize: 20,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
+      letterSpacing: 0.15,
       color: '#000000',
     },
     headerRightStyles: {

@@ -15,12 +15,20 @@
  */
 
 export interface IParams {
-  context: string | number | IRecords;
+  context: string;
   workspaceId: string;
+  namespace?: string;
+  wid?: string;
+  connectorType?: string;
 }
 
 export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
+  wid?: string;
+  payload?: IParams;
+  body?: string;
+  path?: string;
+  canBrowse?: boolean;
+  name?: string;
 }
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
@@ -42,7 +50,7 @@ interface ISummary {
 
 export interface IExecuteAPIResponse {
   headers: string[];
-  types: IRecords;
+  types: ICellData;
   values: IRecords[];
   summary: ISummary;
   message: string;
@@ -61,4 +69,9 @@ export interface ICellData {
 export interface IMissingList {
   name: string;
   values: Record<string, string>;
+}
+
+export interface IAddTransformationItem {
+  option: string;
+  supportedDataType: string[];
 }

@@ -107,14 +107,14 @@ export const useStyles = makeStyles(() => {
     applyStepButtonStyles: {
       width: 162,
       height: 36,
-      background: '#3994FF',
+      background: blue[500],
       boxShadow: '0px 2px 4px rgba(70, 129, 244, 0.15)',
       borderRadius: 4,
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 15,
       lineHeight: '26px',
-      letterSpacing: '0.46px',
+      letterSpacing: 0.46,
       color: '#FFFFFF',
       alignSelf: 'flex-end',
       marginTop: 30,
@@ -124,7 +124,7 @@ export const useStyles = makeStyles(() => {
     },
     buttonStyles: {
       '&:hover': {
-        backgroundColor: '#3994FF',
+        backgroundColor: blue[500],
       },
     },
     selectColumnsHeaderStyles: {
@@ -137,7 +137,7 @@ export const useStyles = makeStyles(() => {
       fontWeight: 600,
       fontSize: 16,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
+      letterSpacing: 0.15,
       color: '#5F6368',
     },
     recipeStepsTableRowStyles: {
@@ -176,7 +176,6 @@ export const useStyles = makeStyles(() => {
       width: 18,
       height: 20,
       cursor: 'pointer',
-      //   padding: '15px 10px',
     },
     radioStyles: {
       '& span:last-child': {
@@ -199,7 +198,6 @@ export const useStyles = makeStyles(() => {
       position: 'relative',
       display: 'flex',
     },
-    searchTextField: {},
     searchInputAdornment: {
       zIndex: 0,
       cursor: 'pointer',
@@ -269,7 +267,6 @@ export const useStyles = makeStyles(() => {
     innerWrapper: {
       textAlign: 'center',
     },
-    radioButtonCellStyles: {},
     rowsOfTable: {
       display: 'grid',
       gridTemplateColumns: '10% 45% 45%',

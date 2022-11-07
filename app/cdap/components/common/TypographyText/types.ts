@@ -14,14 +14,11 @@
  * the License.
  */
 
-import React from 'react';
-import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation/types';
-
-export interface ISelectColumnListProps {
-  functionSupportedDataType: string[];
-  selectedColumnsCount: number;
-  columnData: IHeaderNamesList[];
-  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
-  dataQuality: IDataQualityItem[];
-  functionName: string;
+export interface ITypographyTextProps {
+  text: string;
+  type: 'simple' | 'error' | 'success' | 'simpleBold';
+  component?: string; /// It has to be HTML tag like p, span, h1-h6
+  size?: string;
+  weight?: number;
+  dataTestId?: string;
 }

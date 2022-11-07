@@ -34,7 +34,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               setSelectedColumns={() => jest.fn()}
               dataQuality={[]}
-              directiveFunctionSupportedDataType={[]}
+              functionSupportedDataType={[]}
               functionName={''}
             />
           </Route>
@@ -56,7 +56,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['all', 'test']}
+              functionSupportedDataType={['all', 'test']}
               functionName={''}
             />
           </Route>
@@ -87,7 +87,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['test']}
+              functionSupportedDataType={['test']}
               functionName={'join-columns'}
             />
           </Route>
@@ -119,7 +119,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['all', 'test']}
+              functionSupportedDataType={['all', 'test']}
               functionName={''}
             />
           </Route>
@@ -130,7 +130,6 @@ describe('It should test the SelectColumnsList Component', () => {
     const inputSearchElement = screen.getByTestId('input_id');
     fireEvent.change(inputSearchElement, { target: { value: '123' } });
     expect(inputSearchElement).toHaveValue('123');
-    
   });
   it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the single selection function and to click the radio button', () => {
     const mockSetSelected = jest.fn();
@@ -149,7 +148,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['TEST', 'all']}
+              functionSupportedDataType={['TEST', 'all']}
               functionName={''}
             />
           </Route>
@@ -178,7 +177,7 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              directiveFunctionSupportedDataType={['TEST', 'all']}
+              functionSupportedDataType={['TEST', 'all']}
               functionName={'join-columns'}
             />
           </Route>

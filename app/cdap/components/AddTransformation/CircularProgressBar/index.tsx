@@ -14,11 +14,12 @@
  * the License.
  */
 
-import { Typography } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from 'components/AddTransformation/CircularProgressBar/styles';
 import styled from 'styled-components';
 import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
+import TypographyText from 'components/common/TypographyText';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -39,22 +40,19 @@ export default function({ value }: ICircularProgressBarProps) {
 
   return (
     <>
-      <Typography component="div" className={classes.progress}>
-        <Typography component="div" className={classes.barOverflow}>
-          <ArcContainer value={Math.round(value)}></ArcContainer>
-        </Typography>
-        <Typography
+      <Box className={classes.progress}>
+        <Box className={classes.barOverflow}>
+          <ArcContainer value={Math.round(value)} />
+        </Box>
+        <TypographyText
           component="span"
-          className={
-            Math.round(value) < 100
-              ? `${classes.redText} ${classes.value}`
-              : `${classes.greenText} ${classes.value}`
-          }
-          data-testid='circular-bar-value'
-        >
-          {Math.round(value)}%
-        </Typography>
-      </Typography>
+          size="14px"
+          weight={400}
+          type={Math.round(value) < 100 ? 'error' : 'success'}
+          dataTestId="circular-bar-value"
+          text={`${Math.round(value)}%`}
+        />
+      </Box>
     </>
   );
 }

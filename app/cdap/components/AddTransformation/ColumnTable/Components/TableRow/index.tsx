@@ -36,7 +36,7 @@ export default function({
     <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`} key={index}>
       <TableCell
         classes={{
-          body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
+          body: `${classes.recipeStepsTableRowStyles}`,
         }}
       >
         <InputWidget
