@@ -24,10 +24,12 @@ import React from 'react';
 
 export default function() {
   return (
-    <Box>
+    <Box data-test="footer-panel-column-view-panel-tab-wrapper">
       <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
         <Box>
-          <TabWrapper size="small">{ColumnIcon}</TabWrapper>
+          <TabWrapper size="small" dataTestID="footer-panel-column-view-panel-tab">
+            {ColumnIcon}
+          </TabWrapper>
         </Box>
       </CustomTooltip>
     </Box>
