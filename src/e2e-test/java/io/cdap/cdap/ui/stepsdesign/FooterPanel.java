@@ -35,7 +35,7 @@ public class FooterPanel {
     public void clickOnTheDataExplorationCard() {
         WaitHelper.waitForPageToLoad();
         ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
-        String url=SeleniumDriver.getDriver().getCurrentUrl();
+        String url = SeleniumDriver.getDriver().getCurrentUrl();
         Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         System.out.println("Clicked the data exploration card");
     }
@@ -43,25 +43,26 @@ public class FooterPanel {
     public void verifyIfTheFooterPanelIsDisplayed() {
         WaitHelper.waitForPageToLoad();
         boolean flag = true;
-        while(flag == true) {
-            if(Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+        while (flag == true) {
+            if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
                 flag = true;
             } else {
-                flag=false;
+                flag = false;
             }
         }
         boolean test = Helper.isElementExists("footer-panel-container");
         boolean footer = Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-container"));
-        if (test==footer) {
+        if (test == footer) {
             System.out.println("Footer panel is displayed");
         } else {
             System.out.println("Footer panel is not displayed");
         }
     }
     @Then("Verify if the elements on the Footer Panel are displayed")
-    public void verifyIfTheElementsOnTheFooterPanelAreDisplayed(){
+    public void verifyIfTheElementsOnTheFooterPanelAreDisplayed() {
         WaitHelper.waitForPageToLoad();
-        Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-column-view-panel-tab")));
+        Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-column-view-panel-tab"
+        )));
         System.out.println("Column icon is displayed");
         Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-meta-info-tab")));
         System.out.println("Column Title is displayed");
