@@ -16,25 +16,18 @@
 
 import { Avatar } from '@material-ui/core';
 import ImageOutlined from '@material-ui/icons/ImageOutlined';
+import { IWidgetSVGProps } from 'components/WidgetSVG/types';
 import React from 'react';
 import styled from 'styled-components';
-import { IWidgetSrc } from 'components/WrangleHome/Components/WidgetSVG/types';
 
-const ImageContainer = styled.div`
+const StyledImageOutlined = styled(ImageOutlined)`
   font-size: 40px;
 `;
 
-export default function({ dataSrc }: IWidgetSrc) {
-  return dataSrc ? (
-    <Avatar
-      src={dataSrc}
-      variant="square"
-      data-testid="card-image-from-widget-api"
-      id="card-image-from-widget-api"
-    />
+export default function({ imageSource, label }: IWidgetSVGProps) {
+  return imageSource ? (
+    <Avatar src={imageSource} variant="square" data-testid={`widget-api-image-${label}`} />
   ) : (
-    <ImageContainer>
-      <ImageOutlined fontSize="inherit" data-testid="card-image-default" id="card-image-default" />
-    </ImageContainer>
+    <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
   );
 }

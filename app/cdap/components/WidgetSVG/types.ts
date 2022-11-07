@@ -14,33 +14,43 @@
  * the License.
  */
 
-export interface IConnector {
+export interface IArtifact {
   name: string;
-  type: string;
-  category: string;
-  description: string;
-  artifact: {
-    name: string;
-    version: string;
-    scope: string;
-  };
+  version: string;
+  scope: string;
+}
+
+export interface IConnectorTypesWithSVG {
+  name: string;
+  typ?: string;
+  category?: string;
+  description?: string;
+  artifact?: IArtifact;
   SVG: JSX.Element;
-  link: string;
+  link?: string;
   displayName?: string;
 }
 
-export interface IConnectorDetailPayload {
+export interface IConnectorDetailsPayload {
   name: string;
   type: string;
   category: string;
   description: string;
-  artifact: {
-    name: string;
-    version: string;
-    scope: string;
-  };
+  artifact: IArtifact;
 }
 
-export interface IWrangleCard {
-  toggleViewAllLink: (x: boolean) => void;
+export interface IWidgetSVGProps {
+  imageSource: string;
+  label: string;
+}
+
+export interface IConnectorTypes {
+  name: string;
+  type: string;
+  category: string;
+  artifact: IArtifact;
+}
+
+export interface IAllConnectorPluginProps {
+  [index: string]: IConnectorDetailsPayload;
 }

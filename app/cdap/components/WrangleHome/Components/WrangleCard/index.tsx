@@ -15,24 +15,26 @@
  */
 
 import { Box, Card, Typography } from '@material-ui/core';
-import { getWidgetData } from 'components/WrangleHome/services/getWidgetData';
+import DataPrepStore from 'components/DataPrep/store';
+import { useStyles } from 'components/WrangleHome/Components/WrangleCard/styles';
+import { IConnector, IWrangleCard } from 'components/WrangleHome/Components/WrangleCard/types';
+import { getUpdatedConnectorCards } from 'components/WrangleHome/services/getUpdatedConnectorCards';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { useStyles } from 'components/WrangleHome/Components/WrangleCard/styles';
-import { IConnectorArray, IWrangleCard } from 'components/WrangleHome/Components/WrangleCard/types';
 
 export default function({ toggleViewAllLink }: IWrangleCard) {
-  const [connectorsData, setConnectorsData] = useState<{ connectorTypes: IConnectorArray[] }>({
+  const [connectorsData, setConnectorsData] = useState<{ connectorTypes: IConnector[] }>({
     connectorTypes: [],
   });
+
   // Fetching all the fetchedConnectorTypes and adding SVG its object to each connectorType and
   // then using unshift function to add an object for Imported Dataset to entire ConnectorTypes Array.
 
   const classes = useStyles();
-  const connectorTypes: IConnectorArray[] = connectorsData.connectorTypes;
+  const connectorTypes: IConnector[] = connectorsData.connectorTypes;
 
-  const updateState = (updatedState: { connectorTypes: IConnectorArray[] }) => {
+  const updateState = (updatedState: { connectorTypes: IConnector[] }) => {
     if (
       updatedState.hasOwnProperty('connectorTypes') &&
       Array.isArray(updatedState.connectorTypes) &&
@@ -45,9 +47,18 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
     setConnectorsData(updatedState);
   };
 
+  const [fetchedConnectorsData, setFetchedConnectorsData] = useState([]);
+
+  DataPrepStore.subscribe(() => {
+    const newState = DataPrepStore.getState();
+    setFetchedConnectorsData(newState.dataprep.connectorsWithIcons);
+  });
+
   useEffect(() => {
-    getWidgetData(updateState);
-  }, []);
+    getUpdatedConnectorCards(fetchedConnectorsData).then((res) => {
+      updateState(res);
+    });
+  }, [fetchedConnectorsData]);
 
   let startIndex = 0;
   let endIndex = 2;
@@ -63,13 +74,17 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
       {connectorTypes.slice(startIndex, endIndex).map((item, index) => {
         return (
           <Link
-            to={
-              startIndex === 0
-                ? `/ns/${getCurrentNamespace()}/${item.link}`
-                : index === 0
-                ? `/ns/${getCurrentNamespace()}/${item.link}`
-                : `/ns/${getCurrentNamespace()}/datasources/${item.name}`
-            }
+            to={{
+              pathname:
+                startIndex === 0
+                  ? `/ns/${getCurrentNamespace()}/${item.link}`
+                  : index === 0
+                  ? `/ns/${getCurrentNamespace()}/${item.link}`
+                  : `/ns/${getCurrentNamespace()}/datasources/${item.name}`,
+              state: {
+                from: { addConnectionRequestFromNewUI: 'home' },
+              },
+            }}
             style={{ textDecoration: 'none' }}
             data-testid={`wrangle-card-${item.name
               .toLowerCase()

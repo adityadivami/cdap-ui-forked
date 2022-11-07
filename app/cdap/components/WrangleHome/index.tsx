@@ -16,23 +16,28 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import DataPrepStore from 'components/DataPrep/store';
 import LoadingSVG from 'components/shared/LoadingSVG';
+import { getWidgetData } from 'components/WidgetSVG/utils';
 import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExploration/index';
 import WrangleCard from 'components/WrangleHome/Components/WrangleCard/index';
 import WrangleHomeTitle from 'components/WrangleHome/Components/WrangleHomeTitle/index';
 import { GradientLine, HeaderImage } from 'components/WrangleHome/icons';
 import { useStyles } from 'components/WrangleHome/styles';
 import T from 'i18n-react';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function() {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
-  localStorage.setItem('addConnectionRequestFromNewUI', 'home');
 
   const [viewAllLink, toggleViewAllLink] = useState<boolean>(false);
+
+  useEffect(() => {
+    getWidgetData();
+  }, []);
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
