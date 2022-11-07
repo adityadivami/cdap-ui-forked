@@ -366,7 +366,8 @@ export default function() {
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
-            {Array.isArray(headersNamesList) &&
+            {headersNamesList &&
+              Array.isArray(headersNamesList) &&
               headersNamesList?.length > 0 &&
               headersNamesList.map((eachHeader) => (
                 <GridHeaderCell
@@ -380,8 +381,10 @@ export default function() {
               ))}
           </TableRow>
           <TableRow>
-            {Array.isArray(missingDataList) &&
+            {missingDataList &&
+              Array.isArray(missingDataList) &&
               missingDataList?.length > 0 &&
+              headersNamesList &&
               headersNamesList?.length > 0 &&
               headersNamesList.map((each, index) => {
                 return missingDataList.map((item, itemIndex) => {

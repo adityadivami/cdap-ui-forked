@@ -15,6 +15,7 @@
  */
 
 import { IRecords } from 'components/GridTable/types';
+
 export interface IColumnInsightsProps {
   columnData: IColumnData;
   renameColumnNameHandler: (oldColumnName: string, newColumnName: string) => void;

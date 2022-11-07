@@ -16,7 +16,7 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { Underline } from 'components/DrawerWidget/DrawerWidgetHeading/IconStore/iconStore';
+import { Underline } from 'components/DrawerWidget/DrawerWidgetHeading/iconStore/iconStore';
 import { useStyles } from 'components/DrawerWidget/styles';
 import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/DrawerWidgetHeading/types';
 import T from 'i18n-react';
@@ -26,7 +26,7 @@ export default function({ headingText }: IDrawerWidgetHeadingProps) {
 
   return (
     <Box className={classes.headingStyles}>
-      <Typography className={classes.headingTextStyles}>
+      <Typography className={classes.headingTextStyles} component="span" variant="body1">
         {T.translate(`${headingText}`).toString()}
       </Typography>
       <Underline />

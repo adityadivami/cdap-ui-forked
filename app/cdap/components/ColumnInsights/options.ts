@@ -15,6 +15,7 @@
  */
 
 import T from 'i18n-react';
+
 const PREFIX = 'features.NewWranglerUI.ColumnInsights.options';
 
 export const DATATYPE_OPTIONS = [

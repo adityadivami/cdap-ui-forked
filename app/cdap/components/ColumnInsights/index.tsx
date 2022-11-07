@@ -16,7 +16,7 @@
 
 import DrawerWidget from 'components/DrawerWidget';
 import React, { useEffect, useState } from 'react';
-import ColumnDataDistribution from './Components/ColumnDataDistribution';
+import ColumnDataDistribution from 'components/ColumnInsights/Components/ColumnDataDistribution';
 import ColumnDataQuality from 'components/ColumnInsights/Components/ColumnDataQuality';
 import ColumnDetails from 'components/ColumnInsights/Components/ColumnDetails/index';
 import { IColumnData, IColumnInsightsProps } from 'components/ColumnInsights/types';

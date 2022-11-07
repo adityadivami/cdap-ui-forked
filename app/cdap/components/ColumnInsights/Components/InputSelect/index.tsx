@@ -45,18 +45,21 @@ export default function({
         getContentAnchorEl: null,
       }}
     >
-      {options.map((option, index) => {
-        return (
-          <MenuItem
-            classes={{ ...optionClassName }}
-            value={option.value}
-            key={option.value}
-            data-testid={`input-select-${index}`}
-          >
-            {option.label}
-          </MenuItem>
-        );
-      })}
+      {options &&
+        Array.isArray(options) &&
+        options?.length &&
+        options.map((option, index) => {
+          return (
+            <MenuItem
+              classes={{ ...optionClassName }}
+              value={option.value}
+              key={option.value}
+              data-testid={`input-select-${index}`}
+            >
+              {option.label}
+            </MenuItem>
+          );
+        })}
     </Select>
   );
 }

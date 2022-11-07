@@ -26,8 +26,8 @@ const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 
 export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const classes = useStyles();
-  const nonNull = columnInfo?.general['non-null'] || 0,
-    empty = columnInfo?.general?.empty || 0;
+  const nonNull = columnInfo?.general['non-null'] || 0;
+  const empty = columnInfo?.general?.empty || 0;
   const filled = nonNull - empty;
 
   return (

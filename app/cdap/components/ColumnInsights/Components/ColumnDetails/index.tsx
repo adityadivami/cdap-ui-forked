@@ -35,6 +35,7 @@ export default function({
   columnType,
 }: IColumnDetailsProps) {
   const defaultValueProvided =
+    DATATYPE_OPTIONS &&
     Array.isArray(DATATYPE_OPTIONS) &&
     DATATYPE_OPTIONS?.length &&
     DATATYPE_OPTIONS.filter((each) => each.value === columnType?.toLowerCase());

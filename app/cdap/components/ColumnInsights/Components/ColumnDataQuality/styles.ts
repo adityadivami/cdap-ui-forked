@@ -32,7 +32,6 @@ export const useStyles = makeStyles(() => {
       letterSpacing: 0.15,
       color: grey[900],
     },
-    columnDataQualityValuesButtons: {},
     qualityBar: {
       display: 'flex',
       marginTop: 20,

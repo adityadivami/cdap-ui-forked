@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Card, styled, TableCell, Typography } from '@material-ui/core';
 import TypographyComponent from 'components/GridTable/components/Typography';
 import { useGridHeaderCellStyles } from './styles';

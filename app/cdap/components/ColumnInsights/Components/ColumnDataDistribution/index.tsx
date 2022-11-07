@@ -31,12 +31,14 @@ export default function({ graphData }: IColumnDataDistributionProps) {
   const handleBarClick = () => {
     // TODO
   };
+
   const spliceData = (data: IRecords) => {
-    if (data.length >= 10) {
+    if (data && data?.length >= 10) {
       return data.slice(0, 9);
     }
     return data;
   };
+
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
       <div className={classes.columnInsightsColumnName}>
