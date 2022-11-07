@@ -22,6 +22,36 @@ export const DATATYPE_OPTIONS = [
   {
     value: 'string',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.string`).toString(),
+    options: [
+      {
+        value: 'boolean',
+        label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+        options: [
+          {
+            value: 'short',
+            label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+            options: [
+              {
+                value: 'short',
+                label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+                options: [
+                  {
+                    value: 'short',
+                    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                    supported_dataType: [
+                      T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
     supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
