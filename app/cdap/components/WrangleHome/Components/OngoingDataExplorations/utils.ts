@@ -54,6 +54,45 @@ export const getUpdatedExplorationCards = (
     return matchingConnector?.SVG;
   };
 
+  const getUpdatedOngoingExplorationData = (keys, eachExplorationCard) => {
+    const onGoingDatExplorationData = {} as IOnGoingDataExplorationsData;
+    switch (keys) {
+      case CONNECTOR_TYPE:
+        onGoingDatExplorationData.icon = getIconForConnector(eachExplorationCard[keys]);
+        onGoingDatExplorationData.label = eachExplorationCard[keys];
+        onGoingDatExplorationData.type = ICON;
+        break;
+      case CONNECTION_NAME:
+        onGoingDatExplorationData.label = eachExplorationCard[keys];
+        onGoingDatExplorationData.type = ICON_WITH_TEXT;
+        break;
+      case WORKPSACE_NAME:
+        onGoingDatExplorationData.label = eachExplorationCard[keys];
+        onGoingDatExplorationData.type = TEXT;
+        break;
+      case RECIPE_STEPS_KEY:
+        onGoingDatExplorationData.label = [
+          eachExplorationCard[keys],
+          T.translate(`${PREFIX}.recipeSteps`),
+        ].join(' ');
+        onGoingDatExplorationData.type = TEXT;
+        break;
+      case DATA_QUALITY:
+        onGoingDatExplorationData.label = Number(eachExplorationCard[keys]);
+        onGoingDatExplorationData.percentageSymbol = '%';
+        onGoingDatExplorationData.subText = T.translate(`${PREFIX}.nullValues`);
+        onGoingDatExplorationData.type = PERCENTAGE_WITH_TEXT;
+        break;
+      case WORKSPACE_ID:
+        onGoingDatExplorationData.workspaceId = eachExplorationCard[keys];
+        break;
+      case COUNT:
+        onGoingDatExplorationData.count = eachExplorationCard[keys];
+        break;
+    }
+    return onGoingDatExplorationData;
+  };
+
   if (
     existingExplorationCards &&
     Array.isArray(existingExplorationCards) &&
@@ -64,43 +103,10 @@ export const getUpdatedExplorationCards = (
       .filter((_, itemIndex) => (cardCount && itemIndex < cardCount) || !cardCount)
       .forEach((eachExplorationCard) => {
         const eachExplorationCardsData = [];
-        Object.keys(eachExplorationCard).map((keys) => {
-          const onGoingDatExplorationData = {} as IOnGoingDataExplorationsData;
-          switch (keys) {
-            case CONNECTOR_TYPE:
-              onGoingDatExplorationData.icon = getIconForConnector(eachExplorationCard[keys]);
-              onGoingDatExplorationData.label = eachExplorationCard[keys];
-              onGoingDatExplorationData.type = ICON;
-              break;
-            case CONNECTION_NAME:
-              onGoingDatExplorationData.label = eachExplorationCard[keys];
-              onGoingDatExplorationData.type = ICON_WITH_TEXT;
-              break;
-            case WORKPSACE_NAME:
-              onGoingDatExplorationData.label = eachExplorationCard[keys];
-              onGoingDatExplorationData.type = TEXT;
-              break;
-            case RECIPE_STEPS_KEY:
-              onGoingDatExplorationData.label = [
-                eachExplorationCard[keys],
-                T.translate(`${PREFIX}.recipeSteps`),
-              ].join(' ');
-              onGoingDatExplorationData.type = TEXT;
-              break;
-            case DATA_QUALITY:
-              onGoingDatExplorationData.label = Number(eachExplorationCard[keys]);
-              onGoingDatExplorationData.percentageSymbol = '%';
-              onGoingDatExplorationData.subText = T.translate(`${PREFIX}.nullValues`);
-              onGoingDatExplorationData.type = PERCENTAGE_WITH_TEXT;
-              break;
-            case WORKSPACE_ID:
-              onGoingDatExplorationData.workspaceId = eachExplorationCard[keys];
-              break;
-            case COUNT:
-              onGoingDatExplorationData.count = eachExplorationCard[keys];
-              break;
-          }
-          eachExplorationCardsData.push(onGoingDatExplorationData);
+        Object.keys(eachExplorationCard).forEach((keys) => {
+          eachExplorationCardsData.push(
+            getUpdatedOngoingExplorationData(keys, eachExplorationCard)
+          );
         });
 
         updatedExplorationCards.push(eachExplorationCardsData);

@@ -57,7 +57,7 @@ export default function() {
           </Box>
         </Box>
         <WrangleCard />
-        {showExplorations ? (
+        {showExplorations && (
           <Box className={classes.headerTitle}>
             <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
             <Box className={classes.viewMore} data-testid="ongoing-explorations-view-all">
@@ -66,8 +66,6 @@ export default function() {
               </Link>
             </Box>
           </Box>
-        ) : (
-          <></>
         )}
         <OngoingDataExplorations
           fromAddress={T.translate(

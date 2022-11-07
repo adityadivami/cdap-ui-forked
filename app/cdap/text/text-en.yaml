@@ -2098,13 +2098,6 @@ features:
         distributed: Distributed
         localSandbox: Local Sandbox
     rulesmgmt: Rules
-  NoRecordScreen:
-    gridTable:
-      subtitle: 'Remove some recipe steps to view some data'
-      title: 'No rows left in this sample'
-    workspacesList:
-      subtitle: 'Please start data exploration to view ongoing workspaces'
-      title: 'No ongoing workspaces to display'
   NUX:
     ControlCenter:
       text: '{featureName} allows you to create, manage, operate, and monitor datasets and applications.'
@@ -3447,6 +3440,13 @@ features:
       labels:
         workSpaces: 'Workspaces'
         wrangleHome: 'Home'
+    NoRecordScreen:
+      gridTable:
+        subtitle: 'Remove some recipe steps to view some data'
+        title: 'No rows left in this sample'
+      workspacesList:
+        subtitle: 'Please start data exploration to view ongoing workspaces'
+        title: 'No ongoing workspaces to display'
     OnGoingDataExplorations:
       labels:
        connectorType: connectorType

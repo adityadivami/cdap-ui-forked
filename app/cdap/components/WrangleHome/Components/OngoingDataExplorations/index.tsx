@@ -158,7 +158,9 @@ export default function({
 
               // if we have setShowExplorations, then we should send data to parent element as the exploration state is then maintained in parent as well for showing or hiding the title of the parent component
               setShowExplorations &&
-                setShowExplorations(final && Array.isArray(final) && final.length ? true : false);
+                setShowExplorations(
+                  Boolean(final) && Array.isArray(final) && final.length ? true : false
+                );
               setOnGoingExplorationsData(final);
               setLoading && setLoading(false);
             });
@@ -200,8 +202,8 @@ export default function({
         })
       ) : fromAddress === WORKSPACES ? (
         <NoRecordScreen
-          title={T.translate('features.NoRecordScreen.workspacesList.title')}
-          subtitle={T.translate('features.NoRecordScreen.workspacesList.subtitle')}
+          title={T.translate('features.WranglerNewUI.NoRecordScreen.workspacesList.title')}
+          subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.workspacesList.subtitle')}
         />
       ) : null}
     </Box>
