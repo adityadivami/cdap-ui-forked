@@ -78,6 +78,36 @@ export const DATATYPE_OPTIONS = [
     value: 'float',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.float`).toString(),
     supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    options: [
+      {
+        value: 'boolean',
+        label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+        options: [
+          {
+            value: 'short',
+            label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+            options: [
+              {
+                value: 'short',
+                label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+                options: [
+                  {
+                    value: 'short',
+                    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                    supported_dataType: [
+                      T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     value: 'double',
@@ -93,5 +123,35 @@ export const DATATYPE_OPTIONS = [
     value: 'bytes',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.bytes`).toString(),
     supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    options: [
+      {
+        value: 'boolean',
+        label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+        options: [
+          {
+            value: 'short',
+            label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+            options: [
+              {
+                value: 'short',
+                label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+                options: [
+                  {
+                    value: 'short',
+                    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                    supported_dataType: [
+                      T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
 ];
