@@ -45,7 +45,7 @@ export default function({
     if (origin === 'parentMenu') {
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
         setAnchorElement((prev) => [...prev, event.currentTarget]);
-        setMenuComponentOptions((prev) => [menuItem?.options]);
+        setMenuComponentOptions([menuItem?.options]);
       } else {
         submitMenuOption(menuItem.value, menuItem.supported_dataType);
         setAnchorElement(null);
@@ -62,29 +62,22 @@ export default function({
           });
         });
         if (referenceIndex >= 0 && !anchorElement.includes(event.currentTarget)) {
-          const cloneAnchorElement = anchorElement;
           const insertPosition = referenceIndex + 2;
-          cloneAnchorElement.splice(insertPosition, 0, event.currentTarget);
-          const anchorElementUpdate = cloneAnchorElement.slice(0, insertPosition + 1);
-          setAnchorElement((prev) => anchorElementUpdate);
-          if (menuComponentOptions.length <= anchorElementUpdate.length - 1) {
-            menuComponentOptions.splice(anchorElementUpdate.length - 2, 0, menuItem?.options);
-            setMenuComponentOptions((prev) =>
-              prev.length ? menuComponentOptions : [menuItem?.options]
-            );
-          } else {
-            menuComponentOptions.splice(anchorElementUpdate.length - 2, 0, menuItem?.options);
-            setMenuComponentOptions((prev) =>
-              prev.length ? menuComponentOptions : [menuItem?.options]
-            );
-          }
+          anchorElement.splice(insertPosition, 0, event.currentTarget);
+          const updatedAnchors = anchorElement.slice(0, insertPosition + 1);
+          menuComponentOptions.splice(updatedAnchors.length - 2, 0, menuItem?.options);
+          setMenuComponentOptions((prev) =>
+            prev.length ? menuComponentOptions : [menuItem?.options]
+          );
+          setAnchorElement(updatedAnchors);
         } else if (anchorElement.includes(event.currentTarget)) {
           const currentTargetIndex = _.findIndex(
             anchorElement,
             (anchor) => anchor == event.currentTarget
           );
+          menuComponentOptions.splice(currentTargetIndex, 0, menuItem?.options);
           setAnchorElement((prev) => prev.slice(0, currentTargetIndex + 1));
-          setMenuComponentOptions((prev) => prev.slice(0, currentTargetIndex));
+          setMenuComponentOptions((prev) => menuComponentOptions.slice(0, currentTargetIndex + 1));
         } else {
           setAnchorElement((prev) => [...prev, event.currentTarget]);
           setMenuComponentOptions((prev) =>
