@@ -27,7 +27,7 @@ export const DATATYPE_OPTIONS = [
     label: T.translate(`${PREFIX}.labelBoolean`).toString(),
   },
   {
-    value: 'integer',
+    value: 'int',
     label: T.translate(`${PREFIX}.labelInteger`).toString(),
   },
   {

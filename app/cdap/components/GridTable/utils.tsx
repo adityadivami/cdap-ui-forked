@@ -16,6 +16,7 @@
 
 import { IExecuteAPIResponse, IRecords } from 'components/GridTable/types';
 import T from 'i18n-react';
+import { element } from 'prop-types';
 
 const PREFIX = 'features.NewWranglerUI.GridTable';
 
@@ -102,7 +103,7 @@ export const calculateDistinctValues = (values: IRecords[], columnName: string) 
   let distinctCount: number = 0;
 
   arr.forEach((element, index) => {
-    if (arr.indexOf(element) === index) {
+    if (arr.indexOf(element) === index && element !== undefined) {
       distinctCount += 1;
     }
   });
@@ -118,34 +119,23 @@ export const calculateDistinctValues = (values: IRecords[], columnName: string) 
  */
 
 export const characterCount = (values: IRecords[], columnName: string) => {
-  const arrayOfColumn =
-    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
   let minCount = 0;
   let maxCount = 0;
-  const minElement =
-    Array.isArray(arrayOfColumn) &&
+  const arrayOfColumn =
+    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+
+  Array.isArray(arrayOfColumn) &&
     arrayOfColumn?.length &&
-    arrayOfColumn.reduce((a, b) => {
-      if (a || b) {
-        minCount = Math.min(a?.length, b?.length);
-        if (a?.length == minCount) {
-          return a;
-        } else {
-          return b;
+    arrayOfColumn.map((element) => {
+      if (element !== undefined) {
+        if (element !== undefined && element.length < minCount) {
+          minCount = element.length;
+        } else if (element !== undefined && element.length > maxCount) {
+          maxCount = element.length;
         }
       }
     });
-  const maxElement = arrayOfColumn.reduce((a, b) => {
-    if (a || b) {
-      maxCount = Math.max(a?.length, b?.length);
-      if (a?.length == maxCount) {
-        return a;
-      } else {
-        return b;
-      }
-    }
-  });
-  return { min: minElement?.length || 0, max: maxElement?.length || 0 };
+  return { min: minCount || 0, max: maxCount || 0 };
 };
 
 /**
@@ -165,43 +155,52 @@ export const checkAlphaNumericAndSpaces = (values: IRecords[], columnName: strin
   let returnValue = '';
 
   arrayOfColumn.forEach((element) => {
-    containNumber = isAlphaNumeric(element);
-    containLetter = isLetter(element);
-    containLeadingSpace = isLeadingSpace(element);
-    containTrailingSpace = isTrailingSpace(element);
-
-    if (containNumber && containLetter && containLeadingSpace && containTrailingSpace) {
-      returnValue = T.translate(`${PREFIX}.containsLetterNumberLeadingTrailingSpaces`).toString();
-    } else if (containLetter && containLeadingSpace && containTrailingSpace) {
-      returnValue = T.translate(`${PREFIX}.containsLetterLeadingTrailing`).toString();
-    } else if (containLetter && containLeadingSpace) {
-      returnValue = T.translate(`${PREFIX}.containsLetterLeading`).toString();
-    } else if (containLetter && containTrailingSpace) {
-      returnValue = T.translate(`${PREFIX}.containsLetterTrailing`).toString();
-    } else if (containLetter && containNumber) {
-      returnValue = T.translate(`${PREFIX}.containsLetterNumber`).toString();
-    } else if (containLetter) {
-      returnValue = T.translate(`${PREFIX}.containsLetterOnly`).toString();
-    } else if (containNumber) {
-      returnValue = T.translate(`${PREFIX}.containsNumberOnly`).toString();
+    if (!containNumber) {
+      containNumber = isNumber(element);
+    }
+    if (!containLetter) {
+      containLetter = isLetter(element);
+    }
+    if (!containLeadingSpace) {
+      containLeadingSpace = isLeadingSpace(element);
+    }
+    if (!containTrailingSpace) {
+      containTrailingSpace = isTrailingSpace(element);
     }
   });
+
+  if (containNumber && containLetter && containLeadingSpace && containTrailingSpace) {
+    returnValue = T.translate(`${PREFIX}.containsLetterNumberLeadingTrailingSpaces`).toString();
+  } else if (containLetter && containLeadingSpace && containTrailingSpace) {
+    returnValue = T.translate(`${PREFIX}.containsLetterLeadingTrailing`).toString();
+  } else if (containLetter && containLeadingSpace) {
+    returnValue = T.translate(`${PREFIX}.containsLetterLeading`).toString();
+  } else if (containLetter && containTrailingSpace) {
+    returnValue = T.translate(`${PREFIX}.containsLetterTrailing`).toString();
+  } else if (containLetter && containNumber) {
+    returnValue = T.translate(`${PREFIX}.containsLetterNumber`).toString();
+  } else if (containLetter) {
+    returnValue = T.translate(`${PREFIX}.containsLetterOnly`).toString();
+  } else if (containNumber) {
+    returnValue = T.translate(`${PREFIX}.containsNumberOnly`).toString();
+  }
+
   return returnValue;
 };
 
-/* Checks whether a string is Alphabet or number*/
-const isAlphaNumeric = (str: string) => {
-  return /\d/.test(str);
+/* Checks whether a string is number*/
+const isNumber = (str: string) => {
+  return /^\d+$/.test(str);
 };
 
 /*Checks whether a string has leading space */
 const isLeadingSpace = (str: string) => {
-  return /^\s*/.test(str);
+  return /^\s+/.test(str);
 };
 
 /*Checks whether a string has trailing space */
 const isTrailingSpace = (str: string) => {
-  return /\s*$/.test(str);
+  return /[\s]+$/.test(str);
 };
 
 /* Checks whether a string has letter */

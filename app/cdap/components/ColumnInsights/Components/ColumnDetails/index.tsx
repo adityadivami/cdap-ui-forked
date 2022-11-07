@@ -67,9 +67,13 @@ export default function({
   };
 
   const onBlurEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    setCanEdit(false);
-    if (e.target.value !== columnName && !invalidInput) {
-      renameColumnNameHandler(columnName, e.target.value);
+    if (invalidInput) {
+      setCanEdit(true);
+    } else {
+      setCanEdit(false);
+      if (e.target.value !== columnName && !invalidInput) {
+        renameColumnNameHandler(columnName, e.target.value);
+      }
     }
   };
 
@@ -79,7 +83,6 @@ export default function({
       setCanEdit(false);
     }
   };
-
   return (
     <section className={classes.columnInsightsTopSection}>
       <div className={classes.columnNameEdit}>
