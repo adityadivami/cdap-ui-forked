@@ -14,19 +14,21 @@
  *  the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
+import { fireEvent, render, screen } from "@testing-library/react";
+import React from "react";
 
-import NestedMenu from 'components/GridTable/components/NestedMenu/index';
+import NestedMenu from "components/GridTable/components/NestedMenu/index";
 
-describe('Testing nested menu component', () => {
-  it('should test default render of nested menu', () => {
+describe("Testing nested menu component", () => {
+  it("should test default render of nested menu", () => {
     const x = [
       {
-        label: 'test',
-        supported_dataType: ['test'],
-        value: 'test',
-        options: [{ label: 'test', supported_dataType: ['test'], value: 'test', options: [] }],
+        label: "test",
+        supported_dataType: ["test"],
+        value: "test",
+        options: [
+          { label: "test", supported_dataType: ["test"], value: "test" },
+        ],
       },
     ];
     render(
@@ -34,9 +36,9 @@ describe('Testing nested menu component', () => {
         submitMenuOption={() => {
           jest.fn();
         }}
-        columnType={'test'}
+        columnType={"test"}
         menuOptions={x}
-        title={'hello'}
+        title={"hello"}
         anchorElement={[]}
         setAnchorElement={() => jest.fn()}
         open={true}
@@ -47,19 +49,30 @@ describe('Testing nested menu component', () => {
     const parentElement = screen.getByTestId(/menu-item-parent/i);
     fireEvent.click(parentElement);
     fireEvent.click(screen.getByTestId(/nested-menu-parent-root/i));
+    expect(screen.getByTestId(/nested-menu-parent-root/i)).toBeInTheDocument();
   });
 
-  it('should test default render of nested menu with options as empty', () => {
-    const x = [{ label: 'test', supported_dataType: ['test'], value: 'test', options: [] }];
+  it("should test default render of nested menu with options as empty", () => {
+    const x = [
+      {
+        label: "test",
+        supported_dataType: ["test"],
+        value: "test",
+        // options: [],
+      },
+    ];
+    var dummyElement = document.createElement('');
+    document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
+
     render(
       <NestedMenu
         submitMenuOption={() => {
           jest.fn();
         }}
-        columnType={'test'}
+        columnType={"test"}
         menuOptions={x}
-        title={'hello'}
-        anchorElement={[<h1>hello</h1>]}
+        title={"hello"}
+        anchorElement={[dummyElement]}
         setAnchorElement={(x) => jest.fn()}
         open={false}
         handleMenuOpenClose={() => jest.fn()}

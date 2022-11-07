@@ -26,7 +26,7 @@ const PREFIX = 'features.WranglerNewUI.GridPage';
 export default function({ setShowName, showName }: IFunctionNameToggleProps) {
   const classes = useStyles();
   return (
-    <Box className={classes.functionWrapper} data-testid="name-toggle-parent">
+    <Box className={classes.functionWrapper} data-testid="transformations-toolbar-icons-function-name-toggler">
       <Typography
         className={classes.typoClass}
         component="div"
