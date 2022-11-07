@@ -15,58 +15,50 @@
  */
 
 import { Box } from '@material-ui/core';
-import T from 'i18n-react';
+import ColumnViewPanelTab from 'components/FooterPanel/Components/ColumnViewPanelTab';
+import DirectivesTab from 'components/FooterPanel/Components/DirectivesTab';
+import RecipeStepsTab from 'components/FooterPanel/Components/RecipeStepsTab';
+import TableMetaInfoTab from 'components/FooterPanel/Components/TableMetaInfoTab';
+import ZoomTab from 'components/FooterPanel/Components/ZoomTab';
+import { IFooterPanelProps } from 'components/FooterPanel/types';
 import React from 'react';
-import { ArrowIcon, ColumnIcon, ZoomIcon } from './images';
-import { useStyles } from './styles';
-import { IFooterPanelProps } from './types';
+import styled from 'styled-components';
 
-export default function({
-  recipeStepsCount,
-  dataCounts,
-  columnViewPanelOpened,
-}: IFooterPanelProps) {
-  const classes = useStyles();
+const Container = styled(Box)`
+  &&& {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    position: absolute;
+    bottom: 54px;
+  }
+`;
+
+const TabsWrapper = styled(Box)`
+  &&& {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: space-between;
+    background-color: #f3f6f9;
+    height: 40;
+    box-shadow: 0px -2px 2px #0000001a;
+    width: 100%;
+  }
+`;
+
+export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
   return (
-    <Box className={classes.containerProps}>
-      <Box className={classes.innnerContainer}>
-        <Box
-          className={`${classes.imgContainer} ${
-            columnViewPanelOpened ? classes.showDepth : classes.showNormalView
-          }`}
-          data-testid='footer-panel-column-icon-container'
-        >
-          {ColumnIcon}
-        </Box>
-        <Box className={classes.dataWrapper}>
-          <p className={classes.data} data-testid="footerpanel-labels-title">
-            {' '}
-            {`Current data - ${dataCounts.rowCount} rows and ${dataCounts.columnCount} columns`}
-          </p>
-        </Box>
-        <Box className={classes.zoomContainer} data-testid="footerpanel-box-zoom">
-          {ZoomIcon}
-          <p className={classes.zoomPercent} data-testid="footerpanel-labels-zoompercent">
-            {' '}
-            {T.translate('features.FooterPanel.labels.zoomPercent100')}
-          </p>
-          {ArrowIcon}
-        </Box>
-        <Box className={classes.directivesContainer}>
-          <p data-testid="footerpanel-labels-directives">
-            {' '}
-            {T.translate('features.FooterPanel.labels.directives')}{' '}
-          </p>
-        </Box>
-        <Box className={classes.recipeContainer}>
-          <p data-testid="footerpanel-labels-recipesteps">
-            {T.translate('features.FooterPanel.labels.recipeSteps')}
-          </p>
-          <p className={classes.recipeCount} data-testid="footerpanel-labels-recipecount">
-            {recipeStepsCount}
-          </p>
-        </Box>
-      </Box>
-    </Box>
+    <Container>
+      <TabsWrapper>
+        <ColumnViewPanelTab />
+        <TableMetaInfoTab {...gridMetaInfo} />
+        <ZoomTab />
+        <DirectivesTab />
+        <RecipeStepsTab recipeStepsCount={recipeStepsCount} />
+      </TabsWrapper>
+    </Container>
   );
 }

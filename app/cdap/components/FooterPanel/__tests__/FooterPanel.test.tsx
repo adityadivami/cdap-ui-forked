@@ -14,23 +14,19 @@
  *  the License.
  */
 
-import { render } from "@testing-library/react";
-import FooterPanel from "components/FooterPanel/index";
-import React from "react";
-import { Route, Router, Switch } from "react-router";
-import history from "services/history";
+import { render } from '@testing-library/react';
+import FooterPanel from 'components/FooterPanel/index';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import history from 'services/history';
 
-describe("Testing Footer Panel Component - Unit tests", () => {
-  it("Should check if the component is rendered with class name = showNormalView when columnViewPanelOpened is false", () => {
+describe('Testing Footer Panel Component', () => {
+  it('Should check if the component is rendered with class name = showNormalView when columnViewPanelOpened is false', () => {
     const screen = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <FooterPanel
-              recipeStepsCount={0}
-              dataCounts={{ rowCount: 1, columnCount: 1 }}
-              columnViewPanelOpened={false}
-            />
+            <FooterPanel recipeStepsCount={0} gridMetaInfo={{ rowCount: 1, columnCount: 1 }} />
           </Route>
         </Switch>
       </Router>
@@ -39,75 +35,70 @@ describe("Testing Footer Panel Component - Unit tests", () => {
     const ele = screen.getByTestId(/footer-panel-column-icon-container/i);
     const classes = ele.classList;
     const classname = classes[classes.length - 1];
-    expect(classname).toContain("makeStyles-showNormalView");
+    expect(classname).toContain('makeStyles-showNormalView');
   });
 
-  it("Should check if element with id footerpanel-labels-title is rendered with correct dataCounts prop", () => {
+  it('Should check if element with id footerpanel-labels-title is rendered with correct dataCounts prop', () => {
     const screen = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <FooterPanel
-              recipeStepsCount={10}
-              dataCounts={{ rowCount: 6, columnCount: 42 }}
-              columnViewPanelOpened={false}
-            />
+            <FooterPanel recipeStepsCount={10} gridMetaInfo={{ rowCount: 6, columnCount: 42 }} />
           </Route>
         </Switch>
       </Router>
     );
 
     const label_title = screen.getByTestId(/footerpanel-labels-title/i);
-    expect(label_title).toHaveTextContent(
-      "Current data - 6 rows and 42 columns"
-    );
+    expect(label_title).toHaveTextContent('Current data - 6 rows and 42 columns');
 
-    const recipe_count = screen.getByTestId(/footerpanel-labels-recipecount/i);
-    expect(recipe_count).toHaveTextContent("10");
+    const recipe_count = screen.getByTestId(/footerpanel-labels-recipeStepsCount/i);
+    expect(recipe_count).toHaveTextContent('10');
   });
 
-  it("Should expect SVG icon and labels as provided in the respective component", () => {
+  it('Should expect SVG icon and labels as provided in the respective component', () => {
     const screen = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <FooterPanel
-              recipeStepsCount={10}
-              dataCounts={{ rowCount: 6, columnCount: 42 }}
-              columnViewPanelOpened={false}
-            />
+            <FooterPanel recipeStepsCount={10} gridMetaInfo={{ rowCount: 6, columnCount: 42 }} />
           </Route>
         </Switch>
       </Router>
     );
 
-    const svg_container = screen.getByTestId(
-      /footer-panel-column-icon-container/i
-    );
+    const svg_container = screen.getByTestId(/footer-panel-column-icon-container/i);
     expect(svg_container).toBeInTheDocument();
-    const svg_element = document.getElementById("column-icon");
+    const svg_element = document.getElementById('column-icon');
     expect(svg_element).toBeInTheDocument();
     expect(svg_container).toContainElement(svg_element);
 
-    const recipe_steps_element = screen.getByTestId(
-      /footerpanel-labels-recipesteps/i
-    );
+    const recipe_steps_element = screen.getByTestId(/footerpanel-labels-recipesteps/i);
     expect(recipe_steps_element).toHaveTextContent(
-      "features.FooterPanel.labels.recipeSteps"
+      'features.WranglerNewUI.FooterPanel.labels.recipeSteps'
     );
 
-    const label_directive_element = screen.getByTestId(
-      /footerpanel-labels-directives/i
-    );
+    const label_directive_element = screen.getByTestId(/footerpanel-labels-directives/i);
     expect(label_directive_element).toHaveTextContent(
-      "features.FooterPanel.labels.directives"
+      'features.WranglerNewUI.FooterPanel.labels.directives'
     );
 
-    const label_zoom_percent_element = screen.getByTestId(
-      /footerpanel-labels-zoompercent/i
-    );
+    const label_zoom_percent_element = screen.getByTestId(/footerpanel-labels-zoompercent/i);
     expect(label_zoom_percent_element).toHaveTextContent(
-      "features.FooterPanel.labels.zoomPercent100"
+      'features.WranglerNewUI.FooterPanel.labels.zoomPercent100'
     );
+  });
+
+  it('Should render the component with columnViewPanelOpened as true', () => {
+    const container = render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <FooterPanel recipeStepsCount={0} gridMetaInfo={{ rowCount: 1, columnCount: 1 }} />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    expect(container).toBeDefined();
   });
 });

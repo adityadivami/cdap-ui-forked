@@ -14,32 +14,15 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
+import { render } from '@testing-library/react';
+import React from 'react';
+import NoRecordScreen from '..';
 
-export const useStyles = makeStyles({
-  breadCombContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    height: 48,
-    alignItems: 'center',
-    marginRight: 30,
-    marginLeft: 34,
-    '& .MuiBreadcrumbs-li, .MuiTypography-body1': {
-      fontSize: 14,
-    },
-  },
-  breadcrumbLabel: {
-    color: blue[500],
-    fontSize: 14,
-    fontWeight: 400,
-  },
-  home: {
-    width: 41,
-    height: 21,
-  },
-  dataset: {
-    width: 81,
-    height: 21,
-  },
+describe('It Should test NoRecordScreen Component', () => {
+  const container = render(<NoRecordScreen title={'testing'} subtitle={'Unit Testing'} />);
+
+  it('Should render the NonRecordScreen Component', () => {
+    expect(container).toBeDefined();
+    console.log(container);
+  });
 });

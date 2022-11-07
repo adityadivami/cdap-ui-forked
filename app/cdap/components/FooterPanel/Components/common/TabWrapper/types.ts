@@ -14,32 +14,11 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
+import { MouseEventHandler } from 'react';
 
-export const useStyles = makeStyles({
-  breadCombContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    height: 48,
-    alignItems: 'center',
-    marginRight: 30,
-    marginLeft: 34,
-    '& .MuiBreadcrumbs-li, .MuiTypography-body1': {
-      fontSize: 14,
-    },
-  },
-  breadcrumbLabel: {
-    color: blue[500],
-    fontSize: 14,
-    fontWeight: 400,
-  },
-  home: {
-    width: 41,
-    height: 21,
-  },
-  dataset: {
-    width: 81,
-    height: 21,
-  },
-});
+export interface ITabWrapperProps {
+  children: JSX.Element;
+  size: 'small' | 'medium' | 'large';
+  clickEventListener?: MouseEventHandler<HTMLElement>;
+  width?: number;
+}

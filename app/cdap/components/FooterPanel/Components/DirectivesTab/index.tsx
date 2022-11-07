@@ -14,32 +14,18 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
+import RenderLabel from 'components/FooterPanel/Components/common/RenderLabel';
+import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
+import { PREFIX } from 'components/FooterPanel/constants';
+import T from 'i18n-react';
+import React from 'react';
 
-export const useStyles = makeStyles({
-  breadCombContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    height: 48,
-    alignItems: 'center',
-    marginRight: 30,
-    marginLeft: 34,
-    '& .MuiBreadcrumbs-li, .MuiTypography-body1': {
-      fontSize: 14,
-    },
-  },
-  breadcrumbLabel: {
-    color: blue[500],
-    fontSize: 14,
-    fontWeight: 400,
-  },
-  home: {
-    width: 41,
-    height: 21,
-  },
-  dataset: {
-    width: 81,
-    height: 21,
-  },
-});
+export default function() {
+  return (
+    <TabWrapper size="medium" width={9.5}>
+      <RenderLabel type="simple">
+        <>{`${T.translate(`${PREFIX}.directives`)}`}</>
+      </RenderLabel>
+    </TabWrapper>
+  );
+}

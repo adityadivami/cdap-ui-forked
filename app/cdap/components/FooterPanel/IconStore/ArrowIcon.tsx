@@ -14,32 +14,17 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
+import React from 'react';
 
-export const useStyles = makeStyles({
-  breadCombContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    height: 48,
-    alignItems: 'center',
-    marginRight: 30,
-    marginLeft: 34,
-    '& .MuiBreadcrumbs-li, .MuiTypography-body1': {
-      fontSize: 14,
-    },
-  },
-  breadcrumbLabel: {
-    color: blue[500],
-    fontSize: 14,
-    fontWeight: 400,
-  },
-  home: {
-    width: 41,
-    height: 21,
-  },
-  dataset: {
-    width: 81,
-    height: 21,
-  },
-});
+export const ArrowIcon = (
+  <svg
+    width="10"
+    height="5"
+    viewBox="0 0 10 5"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    data-testid="arrow-icon"
+  >
+    <path d="M0 0L5 5L10 0H0Z" fill="black" fillOpacity="0.54" />
+  </svg>
+);

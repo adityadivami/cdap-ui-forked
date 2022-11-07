@@ -41,8 +41,6 @@ export default function TabLabelCanSample({
   setIsErrorOnNoWorkSpace: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const classes = useStyles();
-
-  const pathName = useLocation();
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
   const [workspaceId, setWorkspaceId] = useState(null);
@@ -92,9 +90,10 @@ export default function TabLabelCanSample({
         setIsErrorOnNoWorkSpace(true);
       });
   };
-
-  const indexOfSelectedDataset = location.pathname.lastIndexOf('/');
-  const requiredPath = location.pathname.slice(indexOfSelectedDataset + 1);
+  const location = useLocation();
+  const indexOfSelectedDataset = location?.pathname?.lastIndexOf('/');
+  const requiredPath =
+    indexOfSelectedDataset && location.pathname.slice(indexOfSelectedDataset + 1);
 
   return workspaceId ? (
     <Redirect
@@ -120,7 +119,7 @@ export default function TabLabelCanSample({
           <Box className="wranglingHover">
             <WrangleIcon />
             <Typography color="primary" variant="body2" className={classes.wrangleButton}>
-              {T.translate('features.ConnectionsList.labels.loadToGrid')}
+              {T.translate('features.Breadcrumb.labels.loadToGrid')}
             </Typography>
           </Box>
         </button>
@@ -138,7 +137,7 @@ export default function TabLabelCanSample({
       >
         <WrangleIcon />
         <Typography variant="body2" className={classes.wrangleButton}>
-          {T.translate('features.ConnectionsList.labels.loadToGrid')}
+          {T.translate('features.Breadcrumb.labels.loadToGrid')}
         </Typography>
       </button>
     </Box>

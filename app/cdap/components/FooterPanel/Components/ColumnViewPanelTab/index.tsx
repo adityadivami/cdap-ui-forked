@@ -14,25 +14,22 @@
  * the License.
  */
 
-import React from 'react';
-import { NoDataSVG } from 'components/GridTable/iconStore';
-import { useStyles } from './styles';
 import { Box } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import TabWrapper from 'components/FooterPanel/Components/common/TabWrapper';
+import { PREFIX } from 'components/FooterPanel/constants';
+import { ColumnIcon } from 'components/FooterPanel/IconStore/ColumnIcon';
+import T from 'i18n-react';
+import React from 'react';
 
-export default function({ title, subtitle }) {
-  const classes = useStyles();
+export default function() {
   return (
-    <Box className={classes.noRecordWrapper}>
-      <Box className={classes.innerWrapper}>
-        {NoDataSVG}
-        <Typography className={classes.mainHeaderMessage} data-testid="main-header-message">
-          {title}
-        </Typography>
-        <Typography className={classes.subHeaderMessage} data-testid="sub-header-message">
-          {subtitle}
-        </Typography>
-      </Box>
+    <Box>
+      <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
+        <Box>
+          <TabWrapper size="small">{ColumnIcon}</TabWrapper>
+        </Box>
+      </CustomTooltip>
     </Box>
   );
 }

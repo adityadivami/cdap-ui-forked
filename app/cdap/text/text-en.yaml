@@ -319,6 +319,14 @@ features:
       message1: 'Create a new namespace '
       message2: '(Note: You will require ADMIN privileges for creating a namespace)'
     mainMessage: ' You are not authorized to access any existing namespace'
+  Breadcrumb:
+    labels:
+      connectionsList: 'Data Sources'
+      wrangleHome: 'Home'
+      loadToGrid: 'Wrangle'
+    params:
+      wrangleHome: 'home'
+      connectionsList: 'datasources'
   Cloud:
     Profiles:
       common:
@@ -2090,7 +2098,10 @@ features:
         distributed: Distributed
         localSandbox: Local Sandbox
     rulesmgmt: Rules
-
+  NoRecordScreen:
+    gridTable:
+      title: 'No rows left in this sample'
+      subtitle: 'Remove some recipe steps to view some data'
   NUX:
     ControlCenter:
       text: '{featureName} allows you to create, manage, operate, and monitor datasets and applications.'
@@ -3413,17 +3424,6 @@ features:
         title: Configure a pipeline
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
-  NoRecordScreen:
-    gridTable:
-      title: 'No rows left in this sample'
-      subtitle: 'Remove some recipe steps to view some data'
-  Breadcrumb:
-    labels:
-      connectionsList: 'Data Sources'
-      wrangleHome: 'Home'
-    params:
-      wrangeHome: 'home'
-      connectionsList: 'datasources'
   AddConnections:
     referenceLabel: 'Add Connection'
   ImportData:
@@ -3439,8 +3439,15 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
-  FooterPanel:
-    labels:
-      directives: 'Directives'
-      recipeSteps: 'Recipe Steps'
-      zoomPercent100: '100%'
+  WranglerNewUI:
+    common:
+      and: and
+    FooterPanel:
+      labels:
+        columns: columns
+        columnViewPanel: Column View Panel
+        currentData: Current data
+        directives: Directives
+        recipeSteps: Recipe Steps
+        rows: rows
+        zoomPercent100: 100%

@@ -71,7 +71,7 @@ export default function GridTable() {
       .pipe(
         flatMap((res: IValues) => {
           const { dataprep } = DataPrepStore.getState();
-          setWorkspaceName(res.workspaceName);
+          setWorkspaceName(res?.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
@@ -187,7 +187,7 @@ export default function GridTable() {
 
   return (
     <Box>
-      <Breadcrumb datasetName={workspaceName} location={location} />
+      <Breadcrumb workspaceName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.NoRecordScreen.gridTable.title')}
@@ -236,11 +236,7 @@ export default function GridTable() {
             })}
         </TableBody>
       </Table>
-      <FooterPanel
-        recipeStepsCount={0}
-        dataCounts={{ rowCount: 1000, columnCount: 20 }}
-        columnViewPanelOpened={true}
-      />
+      <FooterPanel recipeStepsCount={0} gridMetaInfo={{ rowCount: 1000, columnCount: 20 }} />
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
