@@ -20,17 +20,17 @@ import TabLabelCanSample from 'components/ConnectionList/Components/TabLabelCanS
 import React from 'react';
 
 export default function({
-  index,
+  columnIndex,
   connectorType,
   connectionIdProp,
   toggleLoader,
   setIsErrorOnNoWorkSpace,
 }: IRenderLabelProps) {
-  return [0, 1].includes(index) || connectorType.canBrowse ? (
+  return [0, 1].includes(columnIndex) || connectorType.canBrowse ? (
     <TabLabelCanBrowse
       label={connectorType.name}
-      count={index === 0 ? connectorType.count : undefined}
-      index={index}
+      count={columnIndex === 0 ? connectorType.count : undefined}
+      columnIndex={columnIndex}
       icon={connectorType.icon}
     />
   ) : (

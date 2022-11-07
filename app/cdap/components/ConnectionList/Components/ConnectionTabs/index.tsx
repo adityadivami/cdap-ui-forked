@@ -56,7 +56,7 @@ export default function({
   tabsData,
   handleChange,
   value,
-  index,
+  columnIndex,
   connectionId,
   setIsErrorOnNoWorkSpace,
   toggleLoader,
@@ -99,10 +99,10 @@ export default function({
               <ConnectionTab
                 role="button"
                 data-testid="connections-tab-button"
-                onClick={() => handleConnectionTabClick(connectorType, index)}
+                onClick={() => handleConnectionTabClick(connectorType, columnIndex)}
                 label={
                   <RenderLabel
-                    index={index}
+                    columnIndex={columnIndex}
                     connectorType={connectorType}
                     connectionIdProp={connectionIdProp}
                     toggleLoader={toggleLoader}
@@ -113,7 +113,7 @@ export default function({
                 disableTouchRipple
                 key={`${connectorType.name}=${connectorTypeIndex}`}
                 id={connectorType.name}
-                className={index > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
+                className={columnIndex > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
               />
             ))}
           </Tabs>

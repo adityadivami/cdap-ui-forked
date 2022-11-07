@@ -291,7 +291,6 @@ export default function() {
       {tabsData && Array.isArray(tabsData) && tabsData.length && tabsData[0]?.data?.length > 0 ? (
         <Box className={classes.connectionsWithInfo}>
           <SelectDatasetWrapper>
-            {console.log('FILTERED', filteredData)}
             {filteredData &&
               Array.isArray(filteredData) &&
               filteredData?.map((eachFilteredData: IFilteredData, index: number) => {
@@ -329,7 +328,7 @@ export default function() {
                       tabsData={eachFilteredData}
                       handleChange={selectedTabValueHandler}
                       value={eachFilteredData.selectedTab}
-                      index={index}
+                      columnIndex={index}
                       connectionId={connectionId || ''}
                       toggleLoader={(value: boolean, isError?: boolean) =>
                         toggleLoader(value, isError)

@@ -31,6 +31,6 @@ export interface ITabLabelProps extends ITabLabelItemProps {
 export interface ITabLabelCanBrowseProps {
   label: string;
   count: number;
-  index: number;
+  columnIndex: number;
   icon?: JSX.Element;
 }

@@ -21,7 +21,7 @@ import { ITabLabelCanBrowseProps } from 'components/ConnectionList/Components/Ta
 import * as React from 'react';
 import { createRef, Ref, useEffect, useState } from 'react';
 
-export default function({ label, count, index, icon }: ITabLabelCanBrowseProps) {
+export default function({ label, count, columnIndex, icon }: ITabLabelCanBrowseProps) {
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState<boolean>(false);
 
@@ -41,7 +41,7 @@ export default function({ label, count, index, icon }: ITabLabelCanBrowseProps) 
     <CustomTooltip
       title={label}
       arrow
-      key={`tooltip-${index}`}
+      key={`tooltip-${columnIndex}`}
       data-testid="connections-tab-ref-label-browse"
     >
       <Box>

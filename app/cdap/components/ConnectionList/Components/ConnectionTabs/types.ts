@@ -17,7 +17,7 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export interface IRenderLabelProps {
-  index: number;
+  columnIndex: number;
   connectorType: IConnectorTabType;
   connectionIdProp: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
