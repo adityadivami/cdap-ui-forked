@@ -22,7 +22,7 @@ import React from 'react';
 
 export default function() {
   return (
-    <TabWrapper size="medium" width={9.5}>
+    <TabWrapper size="medium" width={9.5} dataTestID="footer-panel-directives-tab">
       <RenderLabel type="simple">
         <>{`${T.translate(`${PREFIX}.directives`)}`}</>
       </RenderLabel>

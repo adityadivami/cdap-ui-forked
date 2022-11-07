@@ -21,4 +21,5 @@ export interface ITabWrapperProps {
   size: 'small' | 'medium' | 'large';
   clickEventListener?: MouseEventHandler<HTMLElement>;
   width?: number;
+  dataTestID: string;
 }

@@ -23,7 +23,7 @@ import React from 'react';
 
 export default function({ rowCount, columnCount }: ITableMetaInfoTabProps) {
   return (
-    <TabWrapper size="large">
+    <TabWrapper size="large" dataTestID="footer-panel-meta-info-tab">
       <RenderLabel type="simple">
         <>
           {`${T.translate(`${PREFIX}.currentData`)} 

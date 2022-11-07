@@ -67,21 +67,27 @@ const LargeBox = styled(Box)`
  * @param width width in percentage for the medium size variant of TabWrapper
  * @returns TabWrapper with appropriate variations according to props
  */
-export default function({ size, clickEventListener, children, width }: ITabWrapperProps) {
+export default function({
+  size,
+  clickEventListener,
+  children,
+  width,
+  dataTestID,
+}: ITabWrapperProps) {
   return (
     <>
       {size === 'small' && (
-        <SmallBox data-testid="footer-panel-small-tab" onClick={clickEventListener}>
+        <SmallBox onClick={clickEventListener} data-testid={dataTestID}>
           {children}
         </SmallBox>
       )}
       {size === 'medium' && (
-        <MediumBox data-testid="footer-panel-medium-tab" onClick={clickEventListener} width={width}>
+        <MediumBox onClick={clickEventListener} width={width} data-testid={dataTestID}>
           {children}
         </MediumBox>
       )}
       {size === 'large' && (
-        <LargeBox data-testid="footer-panel-large-tab" onClick={clickEventListener}>
+        <LargeBox onClick={clickEventListener} data-testid={dataTestID}>
           {children}
         </LargeBox>
       )}
