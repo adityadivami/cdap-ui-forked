@@ -15,24 +15,23 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import FooterPanel from 'components/FooterPanel/index';
+import DirectivesTab from 'components/FooterPanel/Components/DirectivesTab/index';
+import { PREFIX } from 'components/FooterPanel/constants';
+import T from 'i18n-react';
 import React from 'react';
-import { Route, Router, Switch } from 'react-router';
-import history from 'services/history';
 
-describe('Testing Footer Panel Component', () => {
-  it('Should check if the component is rendered ', () => {
-    render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <FooterPanel recipeStepsCount={42} gridMetaInfo={{ rowCount: 1, columnCount: 1 }} />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    const parentElement = screen.getByTestId(/footer-panel-container/i);
+describe('Testing DirectivesTab component', () => {
+  it('Should render component and check for respective elements', () => {
+    render(<DirectivesTab />);
+
+    const parentElement = screen.getByTestId(/footer-panel-directives-tab/i);
+
+    // Check if the parent component is rendered on the screen
     expect(parentElement).toBeInTheDocument();
-    expect(parentElement).toContainElement(screen.getByTestId(/footer-panel-wrapper/i));
+
+    const simpleLabelElement = screen.getByTestId(/footerpanel-simple-label/i);
+
+    // Checking if the exact label is rendered on the screen
+    expect(simpleLabelElement).toHaveTextContent(`${T.translate(`${PREFIX}.directives`)}`);
   });
 });

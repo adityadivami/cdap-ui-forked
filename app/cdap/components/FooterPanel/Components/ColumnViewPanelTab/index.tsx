@@ -24,7 +24,7 @@ import React from 'react';
 
 export default function() {
   return (
-    <Box data-test="footer-panel-column-view-panel-tab-wrapper">
+    <Box data-testid="footer-panel-column-view-panel-tab-wrapper">
       <CustomTooltip title={`${T.translate(`${PREFIX}.columnViewPanel`)}`}>
         <Box>
           <TabWrapper size="small" dataTestID="footer-panel-column-view-panel-tab">
