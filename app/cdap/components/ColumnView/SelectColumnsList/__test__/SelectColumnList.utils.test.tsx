@@ -13,31 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  columnViewDrawer: {
-    maxHeight: 'calc(100vh - 240px)',
-    border: '1px solid #E0E0E0',
-  },
-  columnViewContainer: {
-    display: 'flex',
-    fontFamily: 'Roboto',
-  },
-  gridTableWrapper: {
-    maxHeight: 'calc(100vh - 240px)',
-    overflowY: 'auto',
-  },
+import { prepareDataQualtiy } from 'components/ColumnView/SelectColumnsList/utils';
+import {
+  mockColumnData,
+  mockDataQuality,
+  mockResult,
+} from 'components/ColumnView/mock/mockDataForColumnView';
+
+describe('It Should test the utils function prepareDataQualtiy', () => {
+  it('should test whether the utils function return the expected Value', () => {
+    expect(prepareDataQualtiy(mockDataQuality, mockColumnData)).toStrictEqual(mockResult);
+  });
 });
