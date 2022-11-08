@@ -14,9 +14,11 @@
  * the License.
  */
 
+import { ReactNode } from 'react';
+
 export interface IColumnViewWidget {
-  headingText: string;
+  headingText: ReactNode;
   closeClickHandler: () => void;
   searchedTermHandler: (searchedTerm: string) => void;
-  children: React.ReactNode;
+  children: JSX.Element;
 }
