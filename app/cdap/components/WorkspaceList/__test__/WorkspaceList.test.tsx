@@ -39,11 +39,16 @@ describe('Test the Workspace List Component', () => {
 
     expect(workspaceListContainerElement).toBeInTheDocument();
 
+    expect(workspaceListContainerElement).toHaveClass('MuiBox-root');
+    expect(workspaceListBody).toHaveClass('MuiBox-root');
+
     expect(workspaceListContainerElement).toContainElement(workspaceListBody);
   });
 
   it('Should should have Workspaces Label in Breadcrumb', () => {
     const BreadcrumbLabelElement = screen.getByTestId(/breadcrumb-label-workspaces/i);
+
+    expect(BreadcrumbLabelElement).toHaveClass('MuiTypography-root');
 
     expect(BreadcrumbLabelElement).toHaveTextContent(
       'features.WranglerNewUI.Breadcrumb.labels.workSpaces'
@@ -52,6 +57,9 @@ describe('Test the Workspace List Component', () => {
 
   it('Should expect correct text as expected inside link', () => {
     const linkElement = screen.getByTestId(/link-type-wrangle-home/i);
+
+    expect(linkElement).toHaveClass('MuiTypography-root');
+
     expect(linkElement).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}`
     );
@@ -59,7 +67,9 @@ describe('Test the Workspace List Component', () => {
 
   it('Should render loading icon when loading is true', () => {
     const loadingIconElement = screen.getByTestId(/workspace-loading-icon/i);
+
     expect(loadingIconElement).toBeInTheDocument();
+
     expect(loadingIconElement).toHaveClass('MuiBox-root');
   });
 });
