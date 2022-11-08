@@ -17,17 +17,29 @@
 import { Breadcrumbs, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import DataPrepStore from 'components/DataPrep/store';
 import LoadingSVG from 'components/shared/LoadingSVG';
+import { getWidgetData } from 'components/WidgetSVG/utils';
 import { useStyles } from 'components/WorkspaceList/style';
 import OngoingDataExplorations from 'components/WrangleHome/Components/OngoingDataExplorations';
 import { WORKSPACES } from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 import T from 'i18n-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function() {
   const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    if (
+      !(
+        DataPrepStore.getState().dataprep.connectorsWithIcons &&
+        DataPrepStore.getState().dataprep.connectorsWithIcons.length > 0
+      )
+    ) {
+      getWidgetData();
+    }
+  }, []);
   const classes = useStyles();
   return (
     <Box className={classes.wrapper} data-testid="workspace-list-parent">
