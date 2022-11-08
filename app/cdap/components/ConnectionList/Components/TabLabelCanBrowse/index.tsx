@@ -46,7 +46,7 @@ export default function({ label, count, index, icon }: ITabLabelsProps) {
       title={label}
       arrow
       key={`tooltip-${index}`}
-      data-testid={'connections-tab-ref-label-browse' + index}
+      data-testid={`connections-tab-ref-label-browse-${label.toLowerCase()}`}
     >
       <Box className={classes.labelContainerBox}>
         <Box className={classes.labelsContainer}>
@@ -69,7 +69,10 @@ export default function({ label, count, index, icon }: ITabLabelsProps) {
       </Box>
     </CustomTooltip>
   ) : (
-    <Box className={classes.labelContainerBox} data-testid={'connections-tab-label-browse' + index}>
+    <Box
+      className={classes.labelContainerBox}
+      data-testid={`connections-tab-label-browse-${label.toLowerCase()}`}
+    >
       <Box className={classes.labelsContainer}>
         {icon && <Box>{icon}</Box>}
         <Typography
