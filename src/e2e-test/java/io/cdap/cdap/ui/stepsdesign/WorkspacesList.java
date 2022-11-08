@@ -31,12 +31,20 @@ public class WorkspacesList {
     @Then("Click on the Workspace link")
     public void clickOnTheWorkspaceLink() {
         WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-workspaces-text"));
+        boolean flag = true;
+        while (flag == true) {
+            if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+                flag = true;
+            } else {
+                flag = false;
+            }
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-workspaces-text"));
+        }
     }
 
     @Then("Check if the user is on workspace list")
     public void checkTheUserIsOnTheWorkspaceListOrNot() {
-        String url = SeleniumDriver.getDriver().getCurrentUrl();
-        Assert.assertEquals(url, "http://localhost:11011/cdap/ns/default/workspace-list");
+            String url = SeleniumDriver.getDriver().getCurrentUrl();
+         Assert.assertEquals(url, "http://localhost:11011/cdap/ns/default/workspace-list");
     }
 }
