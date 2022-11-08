@@ -19,44 +19,30 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useStyles } from './styles';
 import React from 'react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
-import T from 'i18n-react';
+import { IBreadcrumbProps } from './types';
 
-export default function Breadcrumb({ workspaceName, location }) {
+export default function({ breadcrumbsList }: IBreadcrumbProps) {
   const classes = useStyles();
-
-  const PREFIX = 'features.WranglerNewUI.Breadcrumb';
-  const requestFromAddress = location?.state?.from;
-
-  const sourcePath =
-    requestFromAddress === T.translate(`${PREFIX}.labels.wrangleHome`)
-      ? T.translate(`${PREFIX}.params.wrangleHome`)
-      : `${T.translate(`${PREFIX}.params.connectionsList`)}/${location?.state?.path}`;
 
   return (
     <Box className={classes.breadCombContainer}>
       <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-        <Link
-          className={`${classes.breadcrumbLabel} ${classes.home}`}
-          to={`/ns/${getCurrentNamespace()}/home`}
-          data-testid="breadcrumb-home-text"
-          id="breadcrumb-home-text"
-        >
-          {T.translate(`${PREFIX}.labels.wrangleHome`)}
-        </Link>
-        {requestFromAddress !== T.translate(`${PREFIX}.labels.wrangleHome`) && (
-          <Link
-            to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
-            data-testid="breadcrumb-data-sources-text"
-            id="breadcrumb-data-sources-text"
-          >
-            {requestFromAddress}
-          </Link>
+        {breadcrumbsList.map((eachBreadcrumb) =>
+          eachBreadcrumb.link ? (
+            <Link
+              className={`${classes.breadcrumbLabel} ${classes.home}`}
+              to={eachBreadcrumb.link}
+              data-testid={`breadcrumb-home-${eachBreadcrumb.label}`}
+            >
+              {eachBreadcrumb.label}
+            </Link>
+          ) : (
+            <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
+              {eachBreadcrumb.label}
+            </Typography>
+          )
         )}
-        <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
-          {workspaceName}
-        </Typography>
       </Breadcrumbs>
     </Box>
   );

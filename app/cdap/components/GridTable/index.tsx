@@ -23,7 +23,7 @@ import LoadingSVG from 'components/shared/LoadingSVG';
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router';
 import { objectQuery } from 'services/helpers';
-import Breadcrumb from './components/Breadcrumb';
+import Breadcrumb from 'components/GridTable/components/Breadcrumb';
 import GridHeaderCell from './components/GridHeaderCell';
 import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
@@ -34,6 +34,7 @@ import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './type
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import T from 'i18n-react';
+import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/constants';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -236,7 +237,7 @@ export default function GridTable() {
 
   return (
     <Box>
-      <Breadcrumb workspaceName={workspaceName} location={location} />
+      <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
