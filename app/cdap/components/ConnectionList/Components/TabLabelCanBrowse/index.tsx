@@ -21,7 +21,7 @@ import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 import * as React from 'react';
 import { createRef, Ref, useEffect, useState } from 'react';
 import { useStyles } from './styles';
-import { ITabLabelsProps } from './types';
+import { ITabLabelsProps } from 'components/ConnectionList/Components/TabLabelCanBrowse/types';
 
 export default function({ label, count, index, icon }: ITabLabelsProps) {
   const classes = useStyles();

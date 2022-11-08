@@ -29,6 +29,9 @@ export default function({
   const classes = useStyles();
   const handleFile = (event: ChangeEvent<HTMLInputElement>) => {
     const schemaFile = event.target.files[0];
+
+    console.log(schemaFile, 'schema');
+
     const reader = new FileReader();
     reader.readAsText(schemaFile, 'UTF-8');
     reader.onload = (evt) => {
