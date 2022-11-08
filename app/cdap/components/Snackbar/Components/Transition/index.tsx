@@ -18,7 +18,7 @@ import { Box, Typography } from '@material-ui/core';
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutline';
 import CloseIcon from '@material-ui/icons/Close';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import { addActionType, PREFIX } from 'components/Snackbar/Components/Transition/constants';
+import { ADD_ACTION_TYPE, PREFIX } from 'components/Snackbar/Components/Transition/constants';
 import { useStyles } from 'components/Snackbar/Components/Transition/styles';
 import { ITransitionProps } from 'components/Snackbar/Components/Transition/types';
 import T from 'i18n-react';
@@ -68,7 +68,7 @@ export default function({
             variant="body1"
             component="span"
           >
-            {transitionAction === addActionType ? (
+            {transitionAction === ADD_ACTION_TYPE ? (
               T.translate(`${PREFIX}.undo`)
             ) : (
               <Box>
