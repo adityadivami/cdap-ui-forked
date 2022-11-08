@@ -47,12 +47,12 @@ export default function BreadCrumb({ workspaceName, location }) {
           <Link
             className={`${classes.breadcrumbLabel}`}
             to={`/ns/${getCurrentNamespace()}/${sourcePath}`}
-            data-testid="breadcrumb-data-sources-text"
+            data-testid="breadcrumb-workspaces-text"
           >
             {location?.state?.from}
           </Link>
         )}
-        <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
+        <Typography color="textPrimary" data-testid={workspaceName}>
           {workspaceName}
         </Typography>
       </Breadcrumbs>

@@ -7,6 +7,7 @@ import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
 
 public class WorkspacesList {
     @Given("Navigate to the Home Page")
@@ -14,29 +15,28 @@ public class WorkspacesList {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
-    @Then("Click on the View all option")
-    public void clickOnTheViewAllOption(){
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("data-testid"));
-    }
-    @Then("Select & Click on the WorkSpace")
-    public void selectAndClickOnTheWorkspace(){
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("data-testid"));
-    }
-    @Then("Click on the Workspace link")
-    public void clickOnTheWorkspaceLink(){
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("data-testid"));
-    }
-    @Then("Check the user is on workspace list or not")
-    public void checkTheUserIsOnTheWorkspaceListOrNot(){
-//        String url= SeleniumDriver.getDriver()
 
-    }
-    @Then("Click on the Home link")
-    public void clickOnTheHomeLink(){
+    @Then("Click on the View all option")
+    public void clickOnTheViewAllOption() {
         WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("data-testid"));
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-explorations-view-all"));
+    }
+
+    @Then("Select & Click on the WorkSpace")
+    public void selectAndClickOnTheWorkspace() {
+        WaitHelper.waitForPageToLoad();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
+    }
+
+    @Then("Click on the Workspace link")
+    public void clickOnTheWorkspaceLink() {
+        WaitHelper.waitForPageToLoad();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-workspaces-text"));
+    }
+
+    @Then("Check if the user is on workspace list")
+    public void checkTheUserIsOnTheWorkspaceListOrNot() {
+        String url = SeleniumDriver.getDriver().getCurrentUrl();
+        Assert.assertEquals(url, "http://localhost:11011/cdap/ns/default/workspace-list");
     }
 }

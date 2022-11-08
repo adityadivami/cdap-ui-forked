@@ -12,33 +12,36 @@ import org.openqa.selenium.WebElement;
 
 public class OngoingDataExploration {
     @Given("Navigate to the home page")
-    public void navigateToTheHomePage(){
+    public void navigateToTheHomePage() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
+
     @Then("Click on the Data Exploration")
-    public void clickOnTheDataExploration(){
+    public void clickOnTheDataExploration() {
         WaitHelper.waitForPageToLoad();
         WebElement ele = Helper.locateElementByTestId("home-ongoing-explorations-text-0");
         String homeText = ele.getText();
         System.out.println(homeText);
         ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
-        String url=SeleniumDriver.getDriver().getCurrentUrl();
+        String url = SeleniumDriver.getDriver().getCurrentUrl();
         Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         WebElement test = Helper.locateElementByTestId("breadcrumb-workspace-name");
-        String ActualText= test.getText();
+        String ActualText = test.getText();
         System.out.println(ActualText);
-        Assert.assertEquals(ActualText, homeText );
+        Assert.assertEquals(ActualText, homeText);
         System.out.println("The file name is displayed correctly on grid page");
     }
+
     @Then("Click on the Home link")
-    public void clickONTheHomeLink(){
+    public void clickOnTheHomeLink() {
         WaitHelper.waitForPageToLoad();
         ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-text"));
         System.out.println("the home link is clicked");
     }
+
     @Then("Check the user is on the home page or not")
-    public void checkTheUserIsOnTheHomePageOrNot(){
+    public void checkTheUserIsOnTheHomePageOrNot() {
         String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
         Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/home");
         System.out.println("The assertion for home url is passed");
