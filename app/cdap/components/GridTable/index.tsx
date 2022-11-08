@@ -15,26 +15,31 @@
  */
 
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
-import LoadingSVG from 'components/shared/LoadingSVG';
-import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router';
-import { objectQuery } from 'services/helpers';
 import Breadcrumb from 'components/GridTable/components/Breadcrumb';
-import GridHeaderCell from './components/GridHeaderCell';
-import GridKPICell from './components/GridKPICell';
-import GridTextCell from './components/GridTextCell';
-import Box from '@material-ui/core/Box';
-import { useStyles } from './styles';
-import { flatMap } from 'rxjs/operators';
-import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './types';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
-import NoRecordScreen from 'components/NoRecordScreen';
-import T from 'i18n-react';
+import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
+import GridKPICell from 'components/GridTable/components/GridKPICell';
+import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/constants';
+import { useStyles } from 'components/GridTable/styles';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IParams,
+  IRecords,
+} from 'components/GridTable/types';
+import NoRecordScreen from 'components/NoRecordScreen';
+import LoadingSVG from 'components/shared/LoadingSVG';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router';
+import { flatMap } from 'rxjs/operators';
+import { objectQuery } from 'services/helpers';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -121,7 +126,7 @@ export default function GridTable() {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload, wid);
+    getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -131,7 +136,7 @@ export default function GridTable() {
         return {
           name: eachColumnName,
           label: eachColumnName,
-          type: [columnTypesList[eachColumnName]],
+          type: [columnTypesList[eachColumnName]] as string[],
         };
       });
     }
@@ -169,11 +174,12 @@ export default function GridTable() {
           }
           if (mostFrequentItem < mostFrequentItemCount) {
             mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item;
+            mostFrequentItemValue = item as string;
           }
         });
         mostFrequentItemCount = 0;
-        mostFrequentItemValue = mostFrequentItemValue === '' ? item : mostFrequentItemValue;
+        mostFrequentItemValue =
+          mostFrequentItemValue === '' ? (item as string) : mostFrequentItemValue;
       });
     }
     mostFrequentDataItem.name = mostFrequentItemValue;
@@ -236,56 +242,57 @@ export default function GridTable() {
   }, [gridData]);
 
   return (
-    <Box>
+    <Box data-testid="grid-table-container">
       <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
+      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
           subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
         />
-      )}
-      <Table aria-label="simple table" className="test">
-        <TableHead>
-          <TableRow>
-            {headersNamesList?.length &&
-              headersNamesList.map((eachHeader) => (
-                <GridHeaderCell
-                  label={eachHeader.label}
-                  types={eachHeader.type}
-                  key={eachHeader.name}
-                />
-              ))}
-          </TableRow>
-          <TableRow>
-            {missingDataList?.length &&
-              headersNamesList.length &&
-              headersNamesList.map((each, index) => {
-                return missingDataList.map((item, itemIndex) => {
-                  if (item.name === each.name) {
-                    return <GridKPICell metricData={item} key={item.name} />;
-                  }
-                });
+      ) : (
+        <Table aria-label="simple table" className="test">
+          <TableHead>
+            <TableRow>
+              {headersNamesList?.length &&
+                headersNamesList.map((eachHeader) => (
+                  <GridHeaderCell
+                    label={eachHeader.label}
+                    types={eachHeader.type}
+                    key={eachHeader.name}
+                  />
+                ))}
+            </TableRow>
+            <TableRow>
+              {missingDataList?.length &&
+                headersNamesList.length &&
+                headersNamesList.map((each, index) => {
+                  return missingDataList.map((item, itemIndex) => {
+                    if (item.name === each.name) {
+                      return <GridKPICell metricData={item} key={item.name} />;
+                    }
+                  });
+                })}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rowsDataList?.length &&
+              rowsDataList.map((eachRow, rowIndex) => {
+                return (
+                  <TableRow key={`row-${rowIndex}`}>
+                    {headersNamesList.map((eachKey, eachIndex) => {
+                      return (
+                        <GridTextCell
+                          cellValue={eachRow[eachKey.name] || '--'}
+                          key={`${eachKey.name}-${eachIndex}`}
+                        />
+                      );
+                    })}
+                  </TableRow>
+                );
               })}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rowsDataList?.length &&
-            rowsDataList.map((eachRow, rowIndex) => {
-              return (
-                <TableRow key={`row-${rowIndex}`}>
-                  {headersNamesList.map((eachKey, eachIndex) => {
-                    return (
-                      <GridTextCell
-                        cellValue={eachRow[eachKey.name] || '--'}
-                        key={`${eachKey.name}-${eachIndex}`}
-                      />
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      )}
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
