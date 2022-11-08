@@ -39,6 +39,7 @@ export default function({ setLoading, updateDataTranformation }) {
   const [schemaValue, setSchemaValue] = useState(null);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
   const [errorOnTransformation, setErrorOnTransformation] = useState(defaultErrorOnTransformations);
+  const [successUpload, setSuccessUpload] = useState({ open: false, message: '' });
   const [connectionPayload, setConnectionPayload] = useState(defaultConnectionPayload);
 
   const classes = useStyles();
@@ -106,6 +107,7 @@ export default function({ setLoading, updateDataTranformation }) {
       showDivider={true}
       headerActionTemplate={
         <ParsingHeaderActionTemplate
+          setSuccessUpload={setSuccessUpload}
           handleSchemaUpload={(schema: unknown) => setSchemaValue(schema)}
           setErrorOnTransformation={setErrorOnTransformation}
         />
@@ -147,6 +149,17 @@ export default function({ setLoading, updateDataTranformation }) {
             })
           }
           messageToDisplay={errorOnTransformation.message}
+        />
+      )}
+      {successUpload.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setErrorOnTransformation({
+              open: false,
+              message: '',
+            })
+          }
+          messageToDisplay={successUpload.message}
         />
       )}
     </DrawerWidget>

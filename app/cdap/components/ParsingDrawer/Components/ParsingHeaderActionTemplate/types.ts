@@ -16,6 +16,7 @@
 
 import { ReactNode } from 'react';
 export interface IParsingHeaderActionTemplateProps {
+  setSuccessUpload: React.Dispatch<React.SetStateAction<ITransformationMessage>>;
   handleSchemaUpload: (iSchemaProps) => void;
   setErrorOnTransformation: React.Dispatch<React.SetStateAction<ITransformationMessage>>;
 }

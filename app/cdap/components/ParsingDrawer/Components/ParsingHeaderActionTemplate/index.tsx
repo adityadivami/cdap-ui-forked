@@ -23,6 +23,7 @@ import { importIcon } from 'components/ParsingDrawer/Components/ParsingHeaderAct
 import { IParsingHeaderActionTemplateProps } from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate/types';
 
 export default function({
+  setSuccessUpload,
   handleSchemaUpload,
   setErrorOnTransformation,
 }: IParsingHeaderActionTemplateProps) {
@@ -37,6 +38,10 @@ export default function({
         const importedSchemas = parseImportedSchemas(fileContents);
         const schema = importedSchemas[0] && importedSchemas[0].schema;
         handleSchemaUpload(schema);
+        setSuccessUpload({
+          open: true,
+          message: 'successfully uploaded',
+        });
       } catch (e) {
         setErrorOnTransformation({
           open: true,
