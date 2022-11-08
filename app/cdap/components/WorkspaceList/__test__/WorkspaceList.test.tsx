@@ -20,7 +20,6 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import history from 'services/history';
 import T from 'i18n-react';
-import LoadingSVG from 'components/shared/LoadingSVG';
 
 describe('Test the Workspace List Component', () => {
   beforeEach(() => {
@@ -61,5 +60,6 @@ describe('Test the Workspace List Component', () => {
   it('Should render loading icon when loading is true', () => {
     const loadingIconElement = screen.getByTestId(/workspace-loading-icon/i);
     expect(loadingIconElement).toBeInTheDocument();
+    expect(loadingIconElement).toHaveClass('MuiBox-root');
   });
 });
