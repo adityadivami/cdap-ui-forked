@@ -38,4 +38,40 @@ export const MENU_OPTIONS = [
     ],
     supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
+  {
+    value: 'test tt1',
+    label: 'test tt',
+    options: [
+      {
+        value: 'test new1',
+        label: 'test new',
+        supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+      },
+    ],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+  },
+  {
+    value: 'test tt2',
+    label: 'test tt',
+    options: [
+      {
+        value: 'test new2',
+        label: 'test new',
+        supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+      },
+    ],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+  },
+  {
+    value: 'test tt3',
+    label: 'test tt',
+    options: [
+      {
+        value: 'test new3',
+        label: 'test new',
+        supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+      },
+    ],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+  },
 ];
