@@ -17,11 +17,11 @@
 import { Box, Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { useStyles } from './styles';
 import React from 'react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import { Link } from 'react-router-dom';
 import T from 'i18n-react';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { useStyles } from './styles';
 
 export default function Breadcrumb({ workspaceName, location }) {
   const classes = useStyles();
@@ -41,7 +41,6 @@ export default function Breadcrumb({ workspaceName, location }) {
           className={`${classes.breadcrumbLabel} ${classes.home}`}
           to={`/ns/${getCurrentNamespace()}/home`}
           data-testid="breadcrumb-home-text"
-          id="breadcrumb-home-text"
         >
           {T.translate(`${PREFIX}.labels.wrangleHome`)}
         </Link>
