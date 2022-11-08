@@ -43,13 +43,6 @@ export const nestedMenuOptions = [
   },
   {
     options: [],
-    icon: InvalidIcon,
-    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.invalidIcon`).toString(),
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.invalidIcon`),
-    open: false,
-  },
-  {
-    options: [],
     icon: ColumnIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.columnIcon`).toString(),
     toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.columnIcon`),
