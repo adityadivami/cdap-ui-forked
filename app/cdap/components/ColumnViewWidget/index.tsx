@@ -32,10 +32,6 @@ export default function({
   const [focused, setFocused] = useState<boolean>(false);
   const ref = useRef(null);
 
-  const handleSearch = (event) => {
-    searchedTermHandler(event.target.value);
-  };
-
   const handleFocus = () => {
     ref?.current.focus();
     setFocused(true);
@@ -53,7 +49,7 @@ export default function({
               className={`${classes.searchInput} ${
                 focused ? classes.isFocused : classes.isBlurred
               }`}
-              onChange={handleSearch}
+              onChange={(e) => searchedTermHandler(e.target.value)}
               ref={ref}
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
