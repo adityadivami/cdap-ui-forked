@@ -3439,8 +3439,9 @@ features:
   ConnectionsList:
     labels:
       loadToGrid: 'Wrangle'
-  NewWranglerUI:
-    columns: 'Columns'
-    nullValues: 'Null Values'
-    columnView: 'Column View'
+  WranglerNewUI:
+    ColumnViewPanel:
+      columns: 'Columns'
+      nullValues: 'Null Values'
+      columnView: 'Column View'
 

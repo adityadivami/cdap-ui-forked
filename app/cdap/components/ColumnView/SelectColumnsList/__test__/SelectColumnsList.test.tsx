@@ -31,7 +31,7 @@ describe('It should test SelectColumnList Component', () => {
     );
     const nullValueHeader = screen.getByTestId('null-values-header');
     expect(nullValueHeader).toHaveTextContent(
-      T.translate(`features.WranglerNewUI.nullValues`).toString()
+      T.translate(`features.WranglerNewUI.ColumnViewPanel.nullValues`).toString()
     );
   });
   it('should render SelectColumnList Component and test Column Header Name ', () => {
@@ -44,7 +44,7 @@ describe('It should test SelectColumnList Component', () => {
     );
     const columnNameHeader = screen.getByTestId('column-name-header');
     expect(columnNameHeader).toHaveTextContent(
-      T.translate(`features.WranglerNewUI.columns (4)`).toString()
+      T.translate(`features.WranglerNewUI.ColumnViewPanel.columns (4)`).toString()
     );
   });
   it('should render SelectColumnList Component , test Column Name and data quality percent', () => {
