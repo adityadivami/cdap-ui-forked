@@ -2090,7 +2090,6 @@ features:
         distributed: Distributed
         localSandbox: Local Sandbox
     rulesmgmt: Rules
-
   NUX:
     ControlCenter:
       text: '{featureName} allows you to create, manage, operate, and monitor datasets and applications.'
@@ -3439,11 +3438,16 @@ features:
   WranglerNewUI:
     Breadcrumb:
       labels:
-        wrangleHome: Home
         connectionsList: Data Source
         loadToGrid: Wrangle
+        wrangleHome: Home
       params:
-        wrangleHome: home
         connectionsList: datasources
+        wrangleHome: home
       ariaLabels:
         breadcrumb: breadcrumb
+    NoRecordScreen:
+      gridTable:
+        subtitle: Remove some recipe steps to view some data
+        title: No rows left in this sample
+...
