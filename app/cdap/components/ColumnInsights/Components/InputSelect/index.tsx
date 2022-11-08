@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
-import { IInputSelect } from 'components/ColumnInsights/Components/InputSelect/types';
+import { IInputSelect, IOption } from 'components/ColumnInsights/Components/InputSelect/types';
 
 export default function({
   options,
@@ -48,7 +48,7 @@ export default function({
       {options &&
         Array.isArray(options) &&
         options?.length &&
-        options.map((option, index) => {
+        options.map((option: IOption, index: number) => {
           return (
             <MenuItem
               classes={{ ...optionClassName }}

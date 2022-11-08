@@ -16,19 +16,20 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { Underline } from 'components/DrawerWidget/DrawerWidgetHeading/iconStore/iconStore';
+import { Underline } from 'components/DrawerWidget/DrawerWidgetHeading/IconStore/iconStore';
 import { useStyles } from 'components/DrawerWidget/styles';
 import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/DrawerWidgetHeading/types';
 import T from 'i18n-react';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
 
 export default function({ headingText }: IDrawerWidgetHeadingProps) {
   const classes = useStyles();
 
   return (
     <Box className={classes.headingStyles}>
-      <Typography className={classes.headingTextStyles} component="span" variant="body1">
-        {T.translate(`${headingText}`).toString()}
-      </Typography>
+      <RenderLabel type="simple" fontSize={20}>
+        <> {T.translate(`${headingText}`).toString()}</>
+      </RenderLabel>
       <Underline />
     </Box>
   );

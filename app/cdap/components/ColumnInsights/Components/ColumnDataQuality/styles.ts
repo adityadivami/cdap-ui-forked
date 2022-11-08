@@ -24,7 +24,6 @@ export const useStyles = makeStyles(() => {
       borderBottom: `1px solid ${grey[300]}`,
     },
     columnInsightsColumnName: {
-      fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 16,

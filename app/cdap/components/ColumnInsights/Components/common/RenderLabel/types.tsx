@@ -14,20 +14,9 @@
  * the License.
  */
 
-import { IRecords } from 'components/GridTable/types';
-
-export interface IInputSelect {
-  options: IRecords[];
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  classes: { icon: string; select: string };
-  className: string;
-  fullWidth: boolean;
-  optionClassName: IRecords;
-  defaultValue: string;
-}
-
-export interface IOption {
-  value: string;
-  label: string;
+export interface IRenderLabelProps {
+  children: JSX.Element;
+  type: 'simple' | 'outlined';
+  fontSize: number;
+  color?: string;
 }

@@ -18,10 +18,12 @@ import { DATATYPE_OPTIONS } from 'components/ColumnInsights/options';
 import React, { useState } from 'react';
 import { useStyles } from 'components/ColumnInsights/Components/ColumnDetails/styles';
 import EditIcon from '@material-ui/icons/Edit';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import InputSelect from 'components/ColumnInsights/Components/InputSelect';
 import { IColumnDetailsProps } from 'components/ColumnInsights/Components/ColumnDetails/types';
 import T from 'i18n-react';
+import RenderLabel from '../common/RenderLabel';
+import { red } from '@material-ui/core/colors';
 
 const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 
@@ -92,10 +94,12 @@ export default function({
             value={inputValue}
             onBlur={(e) => onBlurEvent(e)}
             onChange={(e) => onChangeHandler(e)}
-            onKeyDown={onEnter}
+            onKeyDown={(e) => onEnter(e)}
           />
         ) : (
-          <Typography className={classes.columnInsightsColumnName}>{inputValue}</Typography>
+          <RenderLabel type="simple" fontSize={16}>
+            <> {inputValue}</>
+          </RenderLabel>
         )}
         <Box>
           <EditIcon onClick={editHandler} className={classes.editIcon} />
@@ -103,9 +107,9 @@ export default function({
       </div>
       {invalidInput && (
         <div>
-          <Typography className={classes.invalidInput} component="span" variant="body1">
-            {T.translate(`${PREFIX}.invalidInputErrorMessage`).toString()}
-          </Typography>
+          <RenderLabel type="simple" fontSize={14} color={`${red[600]}`}>
+            <> {T.translate(`${PREFIX}.invalidInputErrorMessage`).toString()}</>
+          </RenderLabel>
         </div>
       )}
 
@@ -118,35 +122,29 @@ export default function({
         optionClassName={{ root: classes.optionStyles }}
         defaultValue={defaultValueProvided[0]?.value}
         value={dataTypeValue}
-        onChange={(e) => handleDataTypeChange(e)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleDataTypeChange(e)}
         options={DATATYPE_OPTIONS}
         fullWidth={false}
       />
       <section className={classes.columnInsightsDetailsWrapper}>
         <div className={classes.columnInsightsDetailsCountSection}>
-          <Typography
-            variant="body2"
-            component="span"
-            className={classes.columnInsightsDetailsCount}
-          >
-            {T.translate(`${PREFIX}.characterCount`).toString()} {characterCount}
-          </Typography>
+          <RenderLabel type="simple" fontSize={14}>
+            <>
+              {T.translate(`${PREFIX}.characterCount`).toString()} {characterCount}
+            </>
+          </RenderLabel>
+
           <div className={classes.dividerLineStyles} />
-          <Typography
-            variant="body2"
-            component="span"
-            className={classes.columnInsightsDetailsCount}
-          >
-            {T.translate(`${PREFIX}.distinct`).toString()} {distinctValues}
-          </Typography>
+          <RenderLabel type="simple" fontSize={14}>
+            <>
+              {T.translate(`${PREFIX}.distinct`).toString()} {distinctValues}
+            </>
+          </RenderLabel>
         </div>
-        <Typography
-          variant="body2"
-          component="span"
-          className={classes.columnInsightsDetailsCountDescription}
-        >
-          {T.translate(`${dataTypeString}`).toString()}
-        </Typography>
+
+        <RenderLabel type="simple" fontSize={14}>
+          <>{T.translate(`${dataTypeString}`).toString()}</>
+        </RenderLabel>
       </section>
     </section>
   );

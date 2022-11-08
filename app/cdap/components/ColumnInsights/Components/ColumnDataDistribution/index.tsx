@@ -20,14 +20,25 @@ import { useStyles } from 'components/ColumnInsights/Components/ColumnDataDistri
 import { IColumnDataDistributionProps } from 'components/ColumnInsights/Components/ColumnDataDistribution/types';
 import T from 'i18n-react';
 import { NavLink } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
 import { IRecords } from 'components/GridTable/types';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
+import styled from 'styled-components';
+import blue from '@material-ui/core/colors/blue';
 
 const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 
+const StyledBarChart = styled(BarChart)`
+  background: 'blue';
+`;
+
 export default function({ graphData }: IColumnDataDistributionProps) {
   const classes = useStyles();
-  const margin = { top: 20, right: 20, bottom: 70, left: 40 };
+  const barChartProps = {
+    margin: { top: 20, right: 20, bottom: 70, left: 40 },
+    width: 400,
+    height: 200,
+  };
+
   const handleBarClick = () => {
     // TODO
   };
@@ -40,28 +51,26 @@ export default function({ graphData }: IColumnDataDistributionProps) {
   };
 
   return (
-    <section className={classes.columnInsightsDataQualityTopSection}>
+    <div className={classes.columnInsightsDataQualityTopSection}>
       <div className={classes.columnInsightsColumnName}>
-        <Typography variant="body2" component="span" className={classes.distribution}>
-          {T.translate(`${PREFIX}.distribution`).toString()}
-        </Typography>
-
-        <Typography variant="body2" component="span" className={classes.viewFullChart}>
-          <NavLink to="#">{T.translate(`${PREFIX}.viewFullChart`).toString()}</NavLink>
-        </Typography>
+        <RenderLabel type="simple" fontSize={16}>
+          <>{T.translate(`${PREFIX}.distribution`).toString()}</>
+        </RenderLabel>
+        <NavLink to="#">
+          <RenderLabel type="simple" fontSize={14} color={`${blue[500]}`}>
+            <> {T.translate(`${PREFIX}.viewFullChart`).toString()}</>
+          </RenderLabel>
+        </NavLink>
       </div>
 
       <div className={classes.columnDataQualityGraph}>
-        <BarChart
-          className={classes.barChart}
+        <StyledBarChart
           ylabel={`${PREFIX}.barChartYLabel`}
-          width={410}
-          height={200}
-          margin={margin}
+          {...barChartProps}
           data={spliceData(graphData)}
           onBarClick={handleBarClick}
         />
       </div>
-    </section>
+    </div>
   );
 }

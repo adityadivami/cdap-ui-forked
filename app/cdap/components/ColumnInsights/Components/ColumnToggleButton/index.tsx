@@ -14,11 +14,13 @@
  * the License.
  */
 
-import React, { useState } from 'react';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
+import red from '@material-ui/core/colors/red';
 import { useStyles } from 'components/ColumnInsights/Components/ColumnToggleButton/styles';
 import { IDataQualityProps } from 'components/ColumnInsights/Components/ColumnToggleButton/types';
 import T from 'i18n-react';
+import React, { useState } from 'react';
+import RenderLabel from '../common/RenderLabel';
 
 const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 
@@ -36,10 +38,12 @@ export default function({ dataQuality }: IDataQualityProps) {
           }
           onClick={() => setIsSelected(1)}
         >
-          <Typography className={classes.missingText} component="span" variant="body1">
-            {T.translate(`${PREFIX}.missingNull`).toString()}
-            {` ${dataQuality.missingNullValueCount} (${dataQuality.missingNullValuePercentage}%)`}
-          </Typography>
+          <RenderLabel type="simple" fontSize={14}>
+            <>
+              {T.translate(`${PREFIX}.missingNull`).toString()}
+              {` ${dataQuality.missingNullValueCount} (${dataQuality.missingNullValuePercentage}%)`}
+            </>
+          </RenderLabel>
         </Box>
         <Box
           className={
@@ -49,10 +53,12 @@ export default function({ dataQuality }: IDataQualityProps) {
           }
           onClick={() => setIsSelected(2)}
         >
-          <Typography className={classes.invalidText} component="span" variant="body1">
-            {T.translate(`${PREFIX}.invalid`)}
-            {` ${dataQuality?.invalidValueCount} (${dataQuality?.invalidValuePercentage}%)`}
-          </Typography>
+          <RenderLabel type="simple" fontSize={14} color={`${red[600]}`}>
+            <>
+              {T.translate(`${PREFIX}.invalid`)}
+              {` ${dataQuality?.invalidValueCount} (${dataQuality?.invalidValuePercentage}%)`}
+            </>
+          </RenderLabel>
         </Box>
       </Box>
     </Box>

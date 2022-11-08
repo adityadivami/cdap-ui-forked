@@ -97,7 +97,7 @@ export const checkFrequentlyOccuredValues = (
 
 export const calculateDistinctValues = (values: IRecords[], columnName: string) => {
   const arrayOfColumn =
-    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
   const arr = [...arrayOfColumn];
   let distinctCount: number = 0;
 
@@ -121,9 +121,10 @@ export const characterCount = (values: IRecords[], columnName: string) => {
   let minCount = 0;
   let maxCount = 0;
   const arrayOfColumn =
-    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
 
-  Array.isArray(arrayOfColumn) &&
+  arrayOfColumn &&
+    Array.isArray(arrayOfColumn) &&
     arrayOfColumn?.length &&
     arrayOfColumn.map((element) => {
       if (element !== undefined) {
@@ -146,7 +147,7 @@ export const characterCount = (values: IRecords[], columnName: string) => {
 
 export const checkAlphaNumericAndSpaces = (values: IRecords[], columnName: string) => {
   const arrayOfColumn =
-    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
   let containNumber = false;
   let containLetter = false;
   let containLeadingSpace = false;
@@ -216,7 +217,7 @@ const isLetter = (str: string) => {
 
 export const calculateDistributionGraphData = (values: IRecords[], columnName: string) => {
   const arrayOfColumn =
-    Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
   const map = {};
   for (let i = 0; i < arrayOfColumn.length; i++) {
     map[arrayOfColumn[i]] = (map[arrayOfColumn[i]] || 0) + 1;

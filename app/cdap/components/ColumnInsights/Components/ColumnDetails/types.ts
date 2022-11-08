@@ -14,8 +14,6 @@
  * the License.
  */
 
-import { ReactNode } from 'react';
-
 export interface IColumnDetailsProps {
   columnName: string;
   characterCount: string;

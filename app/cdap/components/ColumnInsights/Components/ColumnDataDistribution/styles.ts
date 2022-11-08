@@ -27,7 +27,6 @@ export const useStyles = makeStyles(() => {
       justifyContent: 'space-between',
     },
     distribution: {
-      fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 16,
@@ -37,7 +36,6 @@ export const useStyles = makeStyles(() => {
     },
 
     viewFullChart: {
-      fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 14,
@@ -46,10 +44,6 @@ export const useStyles = makeStyles(() => {
       color: blue[500],
       margin: 'auto 0px',
     },
-    barChart: {
-      background: 'blue',
-    },
-    columnDataQualityValuesButtons: {},
     columnDataQualityGraph: {
       '& .axis': {
         display: 'none',

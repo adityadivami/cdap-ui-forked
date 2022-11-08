@@ -21,6 +21,7 @@ import { Box, Typography } from '@material-ui/core';
 import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/ColumnDataQuality/types';
 import red from '@material-ui/core/colors/red';
 import T from 'i18n-react';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
 
 const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 
@@ -29,20 +30,21 @@ export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const nonNull = columnInfo?.general['non-null'] || 0;
   const empty = columnInfo?.general?.empty || 0;
   const filled = nonNull - empty;
+  const calculatedEmptyValue = 100 - filled;
 
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
-      <Typography component="span" className={classes.columnInsightsColumnName}>
-        {T.translate(`${PREFIX}.quality`).toString()}
-      </Typography>
+      <RenderLabel type="simple" fontSize={16}>
+        <>{T.translate(`${PREFIX}.quality`).toString()}</>
+      </RenderLabel>
       <Box className={classes.qualityBar}>
         <Typography component="span" className={classes.filled} style={{ width: `${filled}%` }} />
         <Typography
           component="span"
           className={classes.empty}
           style={{
-            width: `${100 - filled}%`,
-            border: `${100 - filled === 0 ? 'none' : `1px solid ${red[600]}`}`,
+            width: `${calculatedEmptyValue}%`,
+            border: `${calculatedEmptyValue === 0 ? 'none' : `1px solid ${red[600]}`}`,
           }}
         />
       </Box>
