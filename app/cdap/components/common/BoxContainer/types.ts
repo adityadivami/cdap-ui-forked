@@ -33,4 +33,5 @@ export interface IBoxContainerProps {
   flexDirection?: string;
   onClick?: () => void;
   dataTestId?: string;
+  textAlign?: string;
 }

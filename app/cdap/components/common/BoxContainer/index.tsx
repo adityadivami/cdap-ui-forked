@@ -30,6 +30,7 @@ const SimpleBox = styled(Box)`
   margin: ${({ margin }) => (margin ? margin : 0)};
   border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 0)};
   border: ${({ border }) => (border ? border : 0)};
+  text-align: ${({ textAlign }) => (textAlign ? textAlign : 'left')};
 `;
 
 const AbsoluteDiv = styled(SimpleBox)`
@@ -70,6 +71,7 @@ export default function({
   flexDirection,
   onClick,
   dataTestId,
+  textAlign,
 }: IBoxContainerProps) {
   return (
     <>
@@ -84,6 +86,7 @@ export default function({
           height={height}
           onClick={onClick}
           dataTestId={dataTestId}
+          textAlign={textAlign}
         >
           {children}
         </SimpleBox>
@@ -103,6 +106,7 @@ export default function({
           height={height}
           onClick={onClick}
           dataTestId={dataTestId}
+          textAlign={textAlign}
         >
           {children}
         </AbsoluteDiv>
@@ -121,6 +125,7 @@ export default function({
           flexDirection={flexDirection}
           onClick={onClick}
           dataTestId={dataTestId}
+          textAlign={textAlign}
         >
           {children}
         </SimpleFlexBox>
@@ -137,6 +142,7 @@ export default function({
           height={height}
           onClick={onClick}
           dataTestId={dataTestId}
+          textAlign={textAlign}
         >
           {children}
         </IconBox>

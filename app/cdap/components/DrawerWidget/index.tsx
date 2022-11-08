@@ -14,8 +14,8 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
-import React, { Fragment } from 'react';
+import { Container, Drawer } from '@material-ui/core';
+import React from 'react';
 import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
@@ -46,7 +46,14 @@ export default function({
         >
           <BoxContainer type="FlexBox" alignItems="center">
             {showBackIcon && (
-              <BoxContainer type="IconBox" onClick={closeClickHandler} dataTestId="box-id">
+              <BoxContainer
+                type="IconBox"
+                onClick={closeClickHandler}
+                dataTestId="box-id"
+                margin="0 10px 0 0 "
+                width="10px"
+                height="20px"
+              >
                 {BackIcon}
               </BoxContainer>
             )}

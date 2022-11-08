@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
 import { useStyles } from 'components/AddTransformation/SelectColumnsList/styles';
 import { SearchIcon } from 'components/AddTransformation/iconStore';
@@ -28,6 +28,7 @@ import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColu
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
 import TypographyText from 'components/common/TypographyText';
+import BoxContainer from 'components/common/BoxContainer';
 
 export default function({
   transformationDataType,
@@ -123,8 +124,8 @@ export default function({
   };
 
   return (
-    <section className={classes.columnsCountTextStyles} data-testid="select-column-list-parent">
-      <div className={classes.selectColumnsHeaderStyles}>
+    <BoxContainer type="SimpleBox" dataTestId="select-column-list-parent">
+      <BoxContainer type="FlexBox" justifyContent="space-between">
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
           <input
@@ -143,10 +144,10 @@ export default function({
             {SearchIcon}
           </Box>
         </div>
-      </div>
+      </BoxContainer>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <Box className={classes.noRecordWrapper}>
-          <Box className={classes.innerWrapper}>
+        <BoxContainer type="FlexBox" height="100%" margin="30px 0 0 0">
+          <BoxContainer type="SimpleBox" textAlign="center">
             {NoDataSVG}
             <TypographyText
               type="simpleBold"
@@ -164,8 +165,8 @@ export default function({
               weight={400}
               dataTestId="no-column-subTitle"
             />
-          </Box>
-        </Box>
+          </BoxContainer>
+        </BoxContainer>
       ) : (
         <ColumnTable
           dataQualityValue={dataQuality}
@@ -178,6 +179,6 @@ export default function({
           selectedColumns={selectedColumns}
         />
       )}
-    </section>
+    </BoxContainer>
   );
 }
