@@ -26,22 +26,22 @@ export const DATATYPE_OPTIONS = [
       {
         value: 'test',
         label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
-        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+        supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
         options: [
           {
             value: 'test 2',
             label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+            supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
             options: [
               {
                 value: 'test 3',
                 label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-                supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+                supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
                 options: [
                   {
                     value: 'test 4',
                     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-                    supported_dataType: [
+                    supportedDataType: [
                       T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
                     ],
                   },
@@ -52,52 +52,52 @@ export const DATATYPE_OPTIONS = [
         ],
       },
     ],
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'boolean',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'integer',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.integer`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'long',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.long`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'short',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'float',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.float`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
     options: [
       {
         value: 'test 85',
         label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
-        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+        supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
         options: [
           {
             value: 'test 6',
             label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+            supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
             options: [
               {
                 value: 'test 7',
                 label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-                supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+                supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
                 options: [
                   {
                     value: 'test 8',
                     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-                    supported_dataType: [
+                    supportedDataType: [
                       T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
                     ],
                   },
@@ -112,16 +112,16 @@ export const DATATYPE_OPTIONS = [
   {
     value: 'double',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.double`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'decimal',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.decimal`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'bytes',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.bytes`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
 ];

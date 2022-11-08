@@ -20,12 +20,12 @@ import { grey } from '@material-ui/core/colors';
 export const useNestedMenuStyles = makeStyles({
   divider: {
     borderColor: '#DADCE0',
-    width: '159px',
+    width: 159,
   },
   heading: {
-    fontSize: '14px',
+    fontSize: 14,
     fontWeight: 600,
-    color: '#5F6368',
+    color: grey[600],
     padding: '0px 20px',
   },
   root: {
@@ -43,7 +43,7 @@ export const useNestedMenuStyles = makeStyles({
       maxHeight: '70% !important',
     },
     '& .MuiMenu-list': {
-      color: '#5F6368',
+      color: grey[600],
       border: '1px solid #DADCE0',
     },
     '& .MuiListItem-button': {
@@ -58,7 +58,7 @@ export const useNestedMenuStyles = makeStyles({
     },
   },
   tooltipToolbar: {
-    background: '#616161',
+    background: grey[700],
     color: '#FFFFFF',
     fontSize: 14,
   },
@@ -72,7 +72,7 @@ export const useNestedMenuStyles = makeStyles({
   },
   menuLabels: {
     fontSize: 14,
-    color: '#5F6368',
+    color: grey[600],
     textTransform: 'capitalize',
   },
   muiPopoverRoot: {},

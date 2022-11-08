@@ -14,28 +14,31 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import T from "i18n-react";
-import MenuComponent from "..";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import T from 'i18n-react';
+import MenuComponent from '..';
 
-describe("Testing render FunctionNameToggle component", () => {
+describe('Testing render FunctionNameToggle component', () => {
+  const PREFIX = 'features.WranglerNewUI.GridPage';
 
-  const PREFIX = "features.WranglerNewUI.GridPage";
-
-  it("Should render component with all the parent elements and child elements", () => {
-    const x =  [{label: 'test',
-    supported_dataType: ['test'],
-    value: 'test',
-    options: []}]
+  it('Should render component with all the parent elements and child elements', () => {
+    const x = [{ label: 'test', supportedDataType: ['test'], value: 'test', options: [] }];
 
     render(
-      <MenuComponent anchorElement={undefined} menuOptions={x} setAnchorElement={() => {jest.fn()}} submitOption={() => jest.fn()} columnType={""} setMenuComponentOptions={() => jest.fn() }    
+      <MenuComponent
+        anchorElement={undefined}
+        menuOptions={x}
+        setAnchorElement={() => {
+          jest.fn();
+        }}
+        submitOption={() => jest.fn()}
+        columnType={''}
+        setMenuComponentOptions={() => jest.fn()}
       />
     );
 
-    const menuComponentParent = screen.getByTestId(/menu-component-parent/i)
-    expect(menuComponentParent).toBeInTheDocument()
-
+    const menuComponentParent = screen.getByTestId(/menu-component-parent/i);
+    expect(menuComponentParent).toBeInTheDocument();
   });
 });

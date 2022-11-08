@@ -32,24 +32,26 @@ describe('Testing render FunctionNameToggle component', () => {
       />
     );
 
-    const nameToggleParentElement = screen.getAllByTestId(
-      /transformations-toolbar-icons-function-name-toggler/i
-    );
+    const nameToggleParentElement = screen.getByTestId(/name-toggle-parent/i);
 
     // Check if parent element is rendered on screen
-    expect(nameToggleParentElement[0]).toBeInTheDocument();
+    expect(nameToggleParentElement).toBeInTheDocument();
 
     const nameToggleChildLabel = screen.getByTestId(/name-toggle-child-label/i);
+
+    // nameToggleChildLabel should be present inside the parent component
+    expect(nameToggleParentElement).toContainElement(nameToggleChildLabel);
 
     // Child label element should have expected text inside.
     expect(nameToggleChildLabel).toHaveTextContent(
       `${T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}`
     );
 
-    // const switchInputElement = screen.getAllByTestId(
-    //   /transformations-toolbar-icons-function-name-toggler/i
-    // );
+    const switchInputElement = screen.getByTestId(
+      /transformations-toolbar-icons-function-name-toggler/i
+    );
 
-    //   expect(switchInputElement).toBeInTheDocument();
+    // Check if switchInputElement is present inside the parent component
+    expect(nameToggleParentElement).toContainElement(switchInputElement);
   });
 });
