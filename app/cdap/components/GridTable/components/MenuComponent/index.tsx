@@ -19,6 +19,7 @@ import React from 'react';
 import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
 import { useStyles } from 'components/GridTable/components/MenuComponent/styles';
 import { IMenuComponentProps } from 'components/GridTable/components/MenuComponent/types';
+import { isNullable } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 
 export default function({
   anchorElement,
@@ -46,11 +47,12 @@ export default function({
       }}
       onClose={(e: Event) => {
         e.preventDefault();
-        setAnchorElement((prev) => prev.slice(0, -1));
-        setMenuComponentOptions((prev) => prev.slice(0, -1));
+        setAnchorElement(null);
+        setMenuComponentOptions([]);
       }}
       className={classes.root}
       classes={{ paper: classes.popoverPaper }}
+      data-testid="menu-component-parent"
     >
       {menuOptions?.map((eachOption, optionsIndex) => (
         <MenuItemComponent

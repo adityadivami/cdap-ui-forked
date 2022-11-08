@@ -22,6 +22,36 @@ export const DATATYPE_OPTIONS = [
   {
     value: 'string',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.string`).toString(),
+    options: [
+      {
+        value: 'test',
+        label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+        options: [
+          {
+            value: 'test 2',
+            label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+            options: [
+              {
+                value: 'test 3',
+                label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+                options: [
+                  {
+                    value: 'test 4',
+                    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                    supported_dataType: [
+                      T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
     supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
@@ -48,6 +78,36 @@ export const DATATYPE_OPTIONS = [
     value: 'float',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.float`).toString(),
     supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    options: [
+      {
+        value: 'test 85',
+        label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
+        supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+        options: [
+          {
+            value: 'test 6',
+            label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+            supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+            options: [
+              {
+                value: 'test 7',
+                label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+                options: [
+                  {
+                    value: 'test 8',
+                    label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
+                    supported_dataType: [
+                      T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString(),
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     value: 'double',

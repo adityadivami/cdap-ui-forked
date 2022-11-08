@@ -46,12 +46,18 @@ export default function({
   };
 
   return (
-    <Box className={classes.iconContainer}>
-      <Box className={classes.container}>
+    <Box className={classes.iconContainer} data-testid="transformations-toolbar-container">
+      <Box className={classes.container} data-testid="nested-menu-container">
         {nestedMenuOptions?.map((eachOption, optionIndex) => {
           return (
             <>
-              <Box className={classes.functionNameWrapper}>
+              <Box
+                className={classes.functionNameWrapper}
+                data-testid={`toolbar-icon-${eachOption.title
+                  .toLowerCase()
+                  .split(' ')
+                  .join('-')}`}
+              >
                 {eachOption.options?.length ? (
                   <>
                     <Tooltip
@@ -61,6 +67,10 @@ export default function({
                         arrow: classes.arrowTooltip,
                       }}
                       arrow
+                      data-testid={`toolbar-icon-tooltip-${eachOption.title
+                        .toLowerCase()
+                        .split(' ')
+                        .join('-')}`}
                     >
                       <IconButton
                         onClick={(clickEvent) => {
@@ -69,6 +79,7 @@ export default function({
                           setSelectedMenuOptions(eachOption.options);
                           setAnchorElement([clickEvent.currentTarget]);
                         }}
+                        data-testid="toolbar-icon-button"
                       >
                         {eachOption.icon}
                       </IconButton>
@@ -83,7 +94,14 @@ export default function({
                       handleMenuOpenClose={toggleMenu}
                     />
                     {showName && (
-                      <Typography className={classes.typoClass} component="div">
+                      <Typography
+                        className={classes.typoClass}
+                        component="div"
+                        data-testid={`toolbar-icon-title-${eachOption.title
+                          .toLowerCase()
+                          .split(' ')
+                          .join('-')}`}
+                      >
                         {eachOption.toolName}
                       </Typography>
                     )}
@@ -105,7 +123,14 @@ export default function({
                       </IconButton>
                     </Tooltip>
                     {showName && (
-                      <Typography className={classes.typoClass} component="div">
+                      <Typography
+                        className={classes.typoClass}
+                        component="div"
+                        data-testid={`toolbar-icon-title-${eachOption.title
+                          .toLowerCase()
+                          .split(' ')
+                          .join('-')}`}
+                      >
                         {eachOption.toolName}
                       </Typography>
                     )}
@@ -127,6 +152,7 @@ export default function({
       <IconButton
         className={showBreadCrumb ? classes.openHeader : classes.closeHeader}
         onClick={() => setShowBreadCrumb(!showBreadCrumb)}
+        data-testid="toolbar-header-toggler"
       >
         {Expand}
       </IconButton>
