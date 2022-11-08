@@ -39,7 +39,7 @@ import {
   IMissingList,
   IParams,
   IRecords,
-  ICellData,
+  IGridCellData,
   IStatistics,
   IAddTransformationItem,
 } from 'components/GridTable/types';
@@ -57,11 +57,11 @@ export default function GridTable() {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [headerNamesList, setHeaderNamesList] = useState<IHeaderNamesList[]>([]);
-  const [rowsDataList, setRowsDataList] = useState<ICellData[]>([]);
+  const [rowsDataList, setRowsDataList] = useState<IGridCellData[]>([]);
   const [gridData, setGridData] = useState<IExecuteAPIResponse>();
   const [missingDataList, setMissingList] = useState<IMissingList[]>([]);
   const [workspaceName, setWorkspaceName] = useState<string>('');
-  const [invalidCount, setInvalidCount] = useState<ICellData[]>(defaultMissingItem);
+  const [invalidCount, setInvalidCount] = useState<IGridCellData[]>(defaultMissingItem);
   const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
   const [addTransformationFunction, setAddTransformationFunction] = useState<
     IAddTransformationItem
@@ -140,7 +140,7 @@ export default function GridTable() {
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
-  const createHeadersData = (columnNamesList: string[], columnTypesList: ICellData) => {
+  const createHeadersData = (columnNamesList: string[], columnTypesList: IGridCellData) => {
     if (Array.isArray(columnNamesList)) {
       const headersData: IHeaderNamesList[] = columnNamesList.map((eachColumnName: string) => {
         return {
@@ -187,11 +187,11 @@ export default function GridTable() {
       setMissingList(missingItems);
       setDataQuality(gridData?.summary?.statistics);
     }
-    const gridRowValues: ICellData[] =
+    const gridRowValues: IGridCellData[] =
       executeAPIData &&
       executeAPIData?.values &&
       Array.isArray(executeAPIData?.values) &&
-      executeAPIData?.values?.map((eachRow: ICellData) => {
+      executeAPIData?.values?.map((eachRow: IGridCellData) => {
         const { ...rest } = eachRow;
         return rest;
       });

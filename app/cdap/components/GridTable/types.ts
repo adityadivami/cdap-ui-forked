@@ -50,7 +50,7 @@ interface ISummary {
 
 export interface IExecuteAPIResponse {
   headers: string[];
-  types: ICellData;
+  types: IGridCellData;
   values: IRecords[];
   summary: ISummary;
   message: string;
@@ -62,7 +62,7 @@ export interface IHeaderNamesList {
   type: string[];
 }
 
-export interface ICellData {
+export interface IGridCellData {
   [key: string]: string;
 }
 
