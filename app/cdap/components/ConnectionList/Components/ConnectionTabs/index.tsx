@@ -129,7 +129,7 @@ export default function ConnectionsTabs({
                 value={connectorType.name}
                 disableTouchRipple
                 key={`${connectorType.name}-${connectorTypeIndex}`}
-                id={`connectionlist-connectiontabs-tabs-loop-${index}-${connectorTypeIndex}`}
+                data-testid={`connectionlist-connectiontabs-tabs-loop-${index}-${connectorTypeIndex}`}
                 className={index > 1 && !connectorType.canBrowse ? classes.wrangleTab : null}
               />
             ))}
