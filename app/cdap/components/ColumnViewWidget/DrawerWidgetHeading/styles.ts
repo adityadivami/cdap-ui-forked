@@ -32,6 +32,7 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: '0.15px',
       color: '#000000',
+      width: '115px !important',
     },
   };
 });

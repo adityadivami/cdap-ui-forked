@@ -73,5 +73,8 @@ export const useStyles = makeStyles(() => {
       border: 'none',
       borderBottom: '1px solid transparent',
     },
+    close: {
+      marginTop: 3,
+    },
   };
 });

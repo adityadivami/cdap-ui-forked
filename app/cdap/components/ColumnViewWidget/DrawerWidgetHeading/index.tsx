@@ -24,11 +24,11 @@ export default function({ headingText }: IDrawerWidgetHeading) {
   const classes = useStyles();
 
   return (
-    <Box className={classes.headingStyles}>
+    <Typography className={classes.headingStyles} component="span">
       <Typography className={classes.headingTextStyles} component="div">
         {headingText}
       </Typography>
       {UnderlineIcon}
-    </Box>
+    </Typography>
   );
 }

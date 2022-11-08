@@ -14,12 +14,13 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import React, { Fragment, useRef, useState } from 'react';
 import DrawerWidgetHeading from 'components/ColumnViewWidget/DrawerWidgetHeading';
 import { useStyles } from 'components/ColumnViewWidget/styles';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import CloseIcon from '@material-ui/icons/SearchOutlined';
 
 export default function({
   headingText,
@@ -56,9 +57,9 @@ export default function({
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
             />
-            <Box className={classes.searchInputAdornment} onClick={handleFocus}>
-              <SearchOutlinedIcon />
-            </Box>
+            <Typography className={classes.close} component="span">
+              <CloseIcon />
+            </Typography>
           </Box>
 
           <div className={classes.dividerLineStyles} />
