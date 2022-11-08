@@ -31,8 +31,8 @@ export default function({ dataQualityPercentValue }: IDataQualityCircularProgres
         <Typography component="div" className={classes.barOverflow}>
           <Typography
             style={{
-              borderBottomColor: dataQualityPercentValue < 100 ? '#E97567' : '#8BCC74',
-              borderRightColor: dataQualityPercentValue < 100 ? '#E97567' : '#8BCC74',
+              borderBottomColor: dataQualityPercentValue === 0 ? '#8BCC74' : '#E97567',
+              borderRightColor: dataQualityPercentValue === 0 ? '#8BCC74' : '#E97567',
               transform: `rotate(${45 + dataQualityPercentValue * 1.8}deg)`,
             }}
             component="div"
@@ -42,7 +42,7 @@ export default function({ dataQualityPercentValue }: IDataQualityCircularProgres
         <Typography
           component="span"
           className={`${
-            dataQualityPercentValue < 100 ? classes.dataQualityRed : classes.dataQualityGreen
+            dataQualityPercentValue === 0 ? classes.dataQualityGreen : classes.dataQualityRed
           }`}
           data-testid="data-quality-percent"
         >
