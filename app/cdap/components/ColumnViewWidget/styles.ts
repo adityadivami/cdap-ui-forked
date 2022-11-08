@@ -76,5 +76,8 @@ export const useStyles = makeStyles(() => {
     close: {
       marginTop: 3,
     },
+    searchInput: {
+      width: '140px !important',
+    },
   };
 });

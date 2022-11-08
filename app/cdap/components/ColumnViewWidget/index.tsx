@@ -20,7 +20,7 @@ import React, { Fragment, useRef, useState } from 'react';
 import DrawerWidgetHeading from 'components/ColumnViewWidget/DrawerWidgetHeading';
 import { useStyles } from 'components/ColumnViewWidget/styles';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import CloseIcon from '@material-ui/icons/SearchOutlined';
+import SearchIcon from '@material-ui/icons/SearchOutlined';
 import { IColumnViewWidget } from 'components/ColumnViewWidget/types';
 
 export default function({
@@ -51,14 +51,16 @@ export default function({
         <Box className={classes.headerRightStyles}>
           <Box className={classes.searchFormControl}>
             <input
-              className={focused ? classes.isFocused : classes.isBlurred}
+              className={`${classes.searchInput} ${
+                focused ? classes.isFocused : classes.isBlurred
+              }`}
               onChange={handleSearch}
               ref={ref}
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
             />
-            <Typography className={classes.close} component="span">
-              <CloseIcon />
+            <Typography className={classes.close} component="span" onClick={handleFocus}>
+              <SearchIcon />
             </Typography>
           </Box>
 
