@@ -18,13 +18,13 @@ export const prepareDataQualtiy = (statistics, columnList) => {
   const dataQualityToArray = statistics && Object.entries(statistics);
   const dataQuality = [];
   Array.isArray(columnList) &&
-    columnList.length &&
+    columnList.length !== 0 &&
     columnList.map((columnName) => {
       dataQualityToArray.forEach(([key, value]) => {
         if (columnName.name == key) {
           const generalValues = Object.entries(value);
           Array.isArray(generalValues) &&
-            generalValues.length &&
+            generalValues.length !== 0 &&
             generalValues.forEach(([vKey, vValue]) => {
               if (vKey == 'general') {
                 if (vValue.null) {

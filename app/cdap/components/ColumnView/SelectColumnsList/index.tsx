@@ -44,7 +44,7 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
     if (searchTerm) {
       const columnValue =
         Array.isArray(columnData) &&
-        columnData.length &&
+        columnData.length !== 0 &&
         columnData.filter((el) => el?.label.toLowerCase().includes(searchTerm.toLowerCase()));
       if (columnValue?.length) {
         setFilteredColumns(columnValue);
@@ -70,7 +70,7 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
           </TableHead>
           <TableBody className={classes.tableBody}>
             {Array.isArray(filteredColumns) &&
-              filteredColumns.length &&
+              filteredColumns.length !== 0 &&
               filteredColumns.map((eachColumn, index) => (
                 <>
                   <TableRow key={index} className={classes.tableRowContainer}>
