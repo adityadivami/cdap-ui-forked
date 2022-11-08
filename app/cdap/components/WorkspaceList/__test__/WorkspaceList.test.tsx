@@ -14,15 +14,17 @@
  * the License.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import WorkspaceList from 'components/WorkspaceList';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import history from 'services/history';
+import T from 'i18n-react';
+import LoadingSVG from 'components/shared/LoadingSVG';
 
 describe('Test the Workspace List Component', () => {
-  it('Should render the Workspace List Component', () => {
-    const screen = render(
+  beforeEach(() => {
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -31,25 +33,33 @@ describe('Test the Workspace List Component', () => {
         </Switch>
       </Router>
     );
-    expect(render).toBeDefined();
+  });
+  it('Should render the Workspace List Component parent and check if body is present', () => {
     const workspaceListContainerElement = screen.getByTestId(/workspace-list-parent/i);
+    const workspaceListBody = screen.getByTestId(/workspace-list-body/i);
+
     expect(workspaceListContainerElement).toBeInTheDocument();
+
+    expect(workspaceListContainerElement).toContainElement(workspaceListBody);
   });
 
   it('Should should have Workspaces Label in Breadcrumb', () => {
-    const screen = render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <WorkspaceList />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    expect(render).toBeDefined();
     const BreadcrumbLabelElement = screen.getByTestId(/breadcrumb-label-workspaces/i);
+
     expect(BreadcrumbLabelElement).toHaveTextContent(
       'features.WranglerNewUI.Breadcrumb.labels.workSpaces'
     );
+  });
+
+  it('Should expect correct text as expected inside link', () => {
+    const linkElement = screen.getByTestId(/link-type-wrangle-home/i);
+    expect(linkElement).toHaveTextContent(
+      `${T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}`
+    );
+  });
+
+  it('Should render loading icon when loading is true', () => {
+    const loadingIconElement = screen.getByTestId(/workspace-loading-icon/i);
+    expect(loadingIconElement).toBeInTheDocument();
   });
 });
