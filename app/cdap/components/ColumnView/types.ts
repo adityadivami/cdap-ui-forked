@@ -20,5 +20,5 @@ export interface IColumnViewProps {
   setLoading?: boolean;
   columnData: IHeaderNamesList[];
   closeClickHandler: () => void;
-  dataQuality: unknown;
+  dataQuality: Array<Record<string, unknown>>;
 }

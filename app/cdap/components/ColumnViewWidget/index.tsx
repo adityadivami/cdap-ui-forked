@@ -19,7 +19,6 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import React, { Fragment, useRef, useState } from 'react';
 import DrawerWidgetHeading from 'components/ColumnViewWidget/DrawerWidgetHeading';
 import { useStyles } from 'components/ColumnViewWidget/styles';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import SearchIcon from '@material-ui/icons/SearchOutlined';
 import { IColumnViewWidget } from 'components/ColumnViewWidget/types';
 

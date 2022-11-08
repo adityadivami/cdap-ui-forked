@@ -26,9 +26,9 @@ import {
 import React, { useEffect, useState } from 'react';
 import { COLUMNS, NULL_VALUES } from 'components/ColumnView/constants';
 import { useStyles } from 'components/ColumnView/SelectColumnsList/styles';
-import { prepareDataQualtiy } from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar/utils';
+import { prepareDataQualtiy } from 'components/ColumnView/SelectColumnsList/utils';
 import { ISelectColumnListProps } from 'components/ColumnView/SelectColumnsList/types';
-import DataQualityCircularProgressBar from './DataQualityCircularProgressBar';
+import DataQualityCircularProgressBar from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar';
 
 export default function({ columnData, dataQuality, searchTerm }: ISelectColumnListProps) {
   const classes = useStyles();
@@ -85,7 +85,7 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
                     <TableCell className={classes.nullValuesContainer}>
                       {dataQualityValue.length && (
                         <DataQualityCircularProgressBar
-                          dataQualityPercentValue={dataQualityValue[index]?.value}
+                          dataQualityPercentValue={dataQualityValue[index]?.value as number}
                         />
                       )}
                     </TableCell>

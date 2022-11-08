@@ -14,23 +14,14 @@
  * the License.
  */
 
-export interface IPrepareDataQualtiy {
-  statistics: number;
-  columnList: IHeaderNamesList[];
-}
-
 export interface IHeaderNamesList {
   name: string;
   label: string;
-  // type: Array<string | number | IRecords | boolean>; //TODO need to add IRecords
   type: Array<string | number | boolean>;
 }
 
 export interface ISelectColumnListProps {
   columnData: IHeaderNamesList[];
-  dataQuality: any;
+  dataQuality: Array<Record<string, unknown>>;
   searchTerm: string;
 }
-
-// TODO need to add IRecords
-interface IDataQuality {}
