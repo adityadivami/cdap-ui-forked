@@ -35,10 +35,10 @@ describe('Testing render TransformationToolbar component', () => {
     );
   });
 
-  //   const iconButtonElement = screen.getByTestId(/toolbar-icon-button/i)
-  //   fireEvent.click(iconButtonElement)
+  // const iconButtonElement = screen.getByTestId(/toolbar-icon-button/i)
+  // fireEvent.click(iconButtonElement)
 
-  //   const transformToolbarParent = screen.getByTestId(/transformations-toolbar-container/i);
+  // const transformToolbarParent = screen.getByTestId(/transformations-toolbar-container/i);
 
   // Should render the parent component
   //   expect(transformToolbarParent).toBeInTheDocument();
