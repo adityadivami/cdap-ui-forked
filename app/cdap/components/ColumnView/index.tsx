@@ -40,7 +40,6 @@ export default function({
       <ColumnViewWidget
         headingText={HEADING_TEXT}
         closeClickHandler={closeClickHandler}
-        columnData={columnData}
         searchedTermHandler={searchedTermHandler}
       >
         <Box className={classes.addTransformationBodyStyles}>

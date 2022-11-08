@@ -21,14 +21,14 @@ import DrawerWidgetHeading from 'components/ColumnViewWidget/DrawerWidgetHeading
 import { useStyles } from 'components/ColumnViewWidget/styles';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import CloseIcon from '@material-ui/icons/SearchOutlined';
+import { IColumnViewWidget } from 'components/ColumnViewWidget/types';
 
 export default function({
   headingText,
-  columnData,
   closeClickHandler,
   searchedTermHandler,
   children,
-}) {
+}: IColumnViewWidget) {
   const classes = useStyles();
   const [focused, setFocused] = useState<boolean>(false);
   const ref = useRef(null);

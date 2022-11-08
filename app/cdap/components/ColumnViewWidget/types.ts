@@ -17,5 +17,6 @@
 export interface IColumnViewWidget {
   headingText: string;
   closeClickHandler: () => void;
-  searchedTermHandler: () => void;
+  searchedTermHandler: (searchedTerm: string) => void;
+  children: React.ReactNode;
 }
