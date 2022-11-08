@@ -16,7 +16,7 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from './styles';
+import { useStyles } from 'components/ColumnViewWidget/DrawerWidgetHeading/styles';
 import { UnderlineIcon } from 'components/ColumnViewWidget/IconStore/Underline';
 import { IDrawerWidgetHeading } from 'components/ColumnViewWidget/DrawerWidgetHeading/types';
 

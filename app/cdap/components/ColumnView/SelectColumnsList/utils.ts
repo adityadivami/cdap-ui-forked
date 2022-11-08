@@ -20,7 +20,7 @@ export const prepareDataQualtiy = (statistics, columnList) => {
   Array.isArray(columnList) &&
     columnList.length !== 0 &&
     columnList.map((columnName) => {
-      dataQualityToArray.forEach(([key, value]) => {
+      dataQualityToArray?.forEach(([key, value]) => {
         if (columnName.name == key) {
           const generalValues = Object.entries(value);
           Array.isArray(generalValues) &&

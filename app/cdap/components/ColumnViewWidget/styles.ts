@@ -73,8 +73,9 @@ export const useStyles = makeStyles(() => {
       border: 'none',
       borderBottom: '1px solid transparent',
     },
-    close: {
+    searchIcon: {
       marginTop: 3,
+      cursor: 'pointer',
     },
     searchInput: {
       width: '140px !important',

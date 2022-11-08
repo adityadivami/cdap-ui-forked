@@ -58,7 +58,7 @@ export default function({
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
             />
-            <Typography className={classes.close} component="span" onClick={handleFocus}>
+            <Typography className={classes.searchIcon} component="span" onClick={handleFocus}>
               <SearchIcon />
             </Typography>
           </Box>

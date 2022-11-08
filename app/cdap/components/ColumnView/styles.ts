@@ -17,7 +17,7 @@ import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
   return {
-    addTransformationBodyStyles: {
+    selectColumnListBodyStyles: {
       display: 'flex',
       flexDirection: 'column',
       padding: '0',

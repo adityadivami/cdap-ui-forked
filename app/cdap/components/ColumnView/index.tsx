@@ -22,12 +22,7 @@ import SelectColumnsList from 'components/ColumnView/SelectColumnsList';
 import { useStyles } from 'components/ColumnView/styles';
 import { IColumnViewProps } from 'components/ColumnView/types';
 
-export default function({
-  setLoading,
-  columnData,
-  dataQuality,
-  closeClickHandler,
-}: IColumnViewProps) {
+export default function({ columnData, dataQuality, closeClickHandler }: IColumnViewProps) {
   const classes = useStyles();
   const [searchValue, setSearchValue] = useState<string>('');
 
@@ -42,7 +37,7 @@ export default function({
         closeClickHandler={closeClickHandler}
         searchedTermHandler={searchedTermHandler}
       >
-        <Box className={classes.addTransformationBodyStyles}>
+        <Box className={classes.selectColumnListBodyStyles}>
           <SelectColumnsList
             columnData={columnData}
             dataQuality={dataQuality}
