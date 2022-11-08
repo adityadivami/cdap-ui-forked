@@ -42,9 +42,9 @@ export default function({
   return (
     <Grid
       container
-      className={
-        fromAddress === WORKSPACES ? classes.gridContainerHome : classes.gridContainerWorkspaces
-      }
+      className={`${classes.explorationCardWrapper} ${
+        fromAddress === WORKSPACES ? classes.gridContainerWorkspaces : classes.gridContainerHome
+      }`}
       data-testid={`ongoing-data-explorations-card-${cardIndex}`}
     >
       {explorationCardDetails &&

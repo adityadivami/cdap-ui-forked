@@ -19,11 +19,10 @@ import { green } from '@material-ui/core/colors';
 import { red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
-  gridContainerWorkspaces: {
-    width: 1306,
+  explorationCardWrapper: {
     height: 77,
     border: '1px solid #DADCE0',
-    borderRadius: '4px',
+    borderRadius: 4,
     marginBottom: 10,
     cursor: 'pointer',
     margin: '10px auto',
@@ -32,18 +31,12 @@ export const useStyles = makeStyles({
     justifyConent: 'center',
     paddingRight: 62,
   },
+  gridContainerWorkspaces: {
+    width: 1306,
+    margin: '10px auto',
+  },
   gridContainerHome: {
     width: 1204,
-    height: 77,
-    border: '1px solid #DADCE0',
-    borderRadius: 4,
-    marginBottom: 10,
-    cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyConent: 'center',
-    paddingRight: 62,
-    margin: '10px auto',
   },
   explorationCard: {
     width: 301,
