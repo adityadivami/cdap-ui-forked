@@ -34,7 +34,7 @@ import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './type
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import T from 'i18n-react';
-import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/constants';
+import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;

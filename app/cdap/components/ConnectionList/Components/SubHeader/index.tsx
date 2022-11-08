@@ -14,39 +14,20 @@
  * the License.
  */
 
-import { Breadcrumbs, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { getCurrentNamespace } from 'services/NamespaceStore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
-import T from 'i18n-react';
+import Breadcrumb from 'components/GridTable/components/Breadcrumb';
+import { CONNECTION_LIST_BREADCRUMB_OPTIONS } from 'components/ConnectionList/Components/SubHeader/constants';
 
 export default function SubHeader() {
   const classes = useStyles();
   return (
     <Box className={classes.breadCombContainer} data-testid="breadcrumb-container-parent">
       <Box>
-        <Breadcrumbs
-          separator={<NavigateNextIcon fontSize="small" />}
-          aria-label={T.translate(
-            'features.WranglerNewUI.Breadcrumb.ariaLabels.breadcrumb'
-          ).toString()}
-        >
-          <Link
-            color="inherit"
-            to={`/ns/${getCurrentNamespace()}/home`}
-            id="connectionlist-subheader-1"
-          >
-            {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
-          </Link>
-          <Typography>
-            {T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
-          </Typography>
-        </Breadcrumbs>
+        <Breadcrumb breadcrumbsList={CONNECTION_LIST_BREADCRUMB_OPTIONS} />
       </Box>
 
       <Box className={classes.importDataContainer}>
