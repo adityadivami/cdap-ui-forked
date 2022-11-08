@@ -29,14 +29,15 @@ export const useStyles = makeStyles({
     zIndex: 2000,
   },
   columnViewDrawer: {
-    height: 'calc(100vh - 240px)',
+    maxHeight: 'calc(100vh - 240px)',
+    border: '1px solid #E0E0E0',
   },
   columnViewContainer: {
     display: 'flex',
     fontFamily: 'Roboto',
   },
   gridTableWrapper: {
-    height: 'calc(100vh - 240px)',
+    maxHeight: 'calc(100vh - 240px)',
     overflowY: 'auto',
   },
 });
