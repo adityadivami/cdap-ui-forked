@@ -24,9 +24,9 @@ describe('Testing nested menu component', () => {
     const x = [
       {
         label: 'test',
-        supported_dataType: ['test'],
+        supportedDataType: ['test'],
         value: 'test',
-        options: [{ label: 'test', supported_dataType: ['test'], value: 'test' }],
+        options: [{ label: 'test', supportedDataType: ['test'], value: 'test' }],
       },
     ];
     render(
@@ -54,7 +54,7 @@ describe('Testing nested menu component', () => {
     const x = [
       {
         label: 'test',
-        supported_dataType: ['test'],
+        supportedDataType: ['test'],
         value: 'test',
         // options: [],
       },

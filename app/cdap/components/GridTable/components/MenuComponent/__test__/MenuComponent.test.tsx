@@ -23,7 +23,7 @@ describe('Testing render FunctionNameToggle component', () => {
   const PREFIX = 'features.WranglerNewUI.GridPage';
 
   it('Should render component with all the parent elements and child elements', () => {
-    const x = [{ label: 'test', supported_dataType: ['test'], value: 'test', options: [] }];
+    const x = [{ label: 'test', supportedDataType: ['test'], value: 'test', options: [] }];
 
     render(
       <MenuComponent

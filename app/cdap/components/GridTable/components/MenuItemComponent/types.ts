@@ -16,7 +16,7 @@
 
 export interface IMenuItem {
   label: string;
-  supported_dataType: string[];
+  supportedDataType: string[];
   value: string;
   options?: IMenuItem[];
 }

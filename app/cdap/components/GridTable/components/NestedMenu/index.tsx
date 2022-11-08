@@ -47,7 +47,7 @@ export default function({
         setAnchorElement((prev) => [...prev, event.currentTarget]);
         setMenuComponentOptions([menuItem?.options]);
       } else {
-        submitMenuOption(menuItem.value, menuItem.supported_dataType);
+        submitMenuOption(menuItem.value, menuItem.supportedDataType);
         setAnchorElement(null);
         handleMenuOpenClose(title);
       }
@@ -85,7 +85,7 @@ export default function({
           );
         }
       } else {
-        submitMenuOption(menuItem.value, menuItem.supported_dataType);
+        submitMenuOption(menuItem.value, menuItem.supportedDataType);
         setAnchorElement(null);
         handleMenuOpenClose(title);
       }
