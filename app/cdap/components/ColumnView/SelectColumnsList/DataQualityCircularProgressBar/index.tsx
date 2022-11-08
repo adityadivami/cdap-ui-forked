@@ -23,7 +23,11 @@ export default function({ dataQualityPercentValue }: IDataQualityCircularProgres
   const classes = useStyles();
   return (
     <>
-      <Typography component="div" className={classes.progress}>
+      <Typography
+        component="div"
+        className={classes.progress}
+        data-testid="circular-progress-bar-parent"
+      >
         <Typography component="div" className={classes.barOverflow}>
           <Typography
             style={{
@@ -40,6 +44,7 @@ export default function({ dataQualityPercentValue }: IDataQualityCircularProgres
           className={`${
             dataQualityPercentValue < 100 ? classes.dataQualityRed : classes.dataQualityGreen
           }`}
+          data-testid="data-quality-percent"
         >
           {dataQualityPercentValue.toFixed(1)}%
         </Typography>
