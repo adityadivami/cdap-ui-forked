@@ -22,6 +22,8 @@ import { ITabLabelCanSampleProps } from 'components/ConnectionList/Components/Ta
 import { WrangleIcon } from 'components/ConnectionList/icons';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
+import DataPrepStore from 'components/DataPrep/store';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import T from 'i18n-react';
 import * as React from 'react';
 import { createRef, Ref, useContext, useEffect, useState } from 'react';
@@ -35,7 +37,6 @@ export default function TabLabelCanSample({
   entity,
   initialConnectionId,
   toggleLoader,
-  setToaster,
 }: ITabLabelCanSampleProps) {
   const classes = useStyles();
   const PREFIX = 'features.WranglerNewUI.Snackbar.labels';
@@ -56,10 +57,13 @@ export default function TabLabelCanSample({
     if (!canBrowse && canSample) {
       onCreateWorkspace(currentEntity);
     } else {
-      setToaster({
-        open: true,
-        message: [T.translate(`${PREFIX}.retrieveFailure`), entity?.name].join(' '),
-        isSuccess: false,
+      DataPrepStore.dispatch({
+        type: DataPrepActions.setSnackbarStatus,
+        payload: {
+          open: true,
+          message: [T.translate(`${PREFIX}.retrieveFailure`), entity?.name].join(' '),
+          isSuccess: false,
+        },
       });
     }
   };
@@ -68,10 +72,13 @@ export default function TabLabelCanSample({
     try {
       createWorkspaceInternal(currentEntity, parseConfig);
     } catch (e) {
-      setToaster({
-        open: true,
-        message: [T.translate(`${PREFIX}.workspaceFailure`).toString(), entity?.name].join(' '),
-        isSuccess: false,
+      DataPrepStore.dispatch({
+        type: DataPrepActions.setSnackbarStatus,
+        payload: {
+          open: true,
+          message: [T.translate(`${PREFIX}.workspaceFailure`).toString(), entity?.name].join(' '),
+          isSuccess: false,
+        },
       });
     }
   };
@@ -94,10 +101,13 @@ export default function TabLabelCanSample({
       })
       .catch((err) => {
         toggleLoader(false);
-        setToaster({
-          open: true,
-          message: `${T.translate(`${PREFIX}.sampleFailure`)} ${currentEntity?.name.toString()}`,
-          isSuccess: false,
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setSnackbarStatus,
+          payload: {
+            open: true,
+            message: `${T.translate(`${PREFIX}.sampleFailure`)} ${currentEntity?.name.toString()}`,
+            isSuccess: false,
+          },
         });
       });
   };

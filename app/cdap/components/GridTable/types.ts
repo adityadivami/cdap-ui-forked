@@ -22,6 +22,7 @@ export interface IParams {
 export interface IRecords {
   [key: string]: string | number | IRecords | boolean;
 }
+
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
 }
@@ -42,4 +43,8 @@ export interface IHeaderNamesList {
   name: string;
   label: string;
   type: string[];
+}
+
+export interface ISelectedValue {
+  selectedValue: string | number | boolean | IRecords;
 }

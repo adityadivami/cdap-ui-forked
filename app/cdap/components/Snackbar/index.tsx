@@ -15,41 +15,42 @@
  */
 
 import Snackbar from '@material-ui/core/Snackbar';
+import DataPrepStore from 'components/DataPrep/store';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import Transition from 'components/Snackbar/Components/Transition/index';
 import { useStyles } from 'components/Snackbar/styles';
 import { ISnackbarProps } from 'components/Snackbar/types';
 import React, { useEffect, useState } from 'react';
 
-export default function({
-  handleCloseError,
-  description = '',
-  isSuccess,
-  snackbarAction,
-}: ISnackbarProps) {
+export default function({ description = '', isSuccess, snackbarAction }: ISnackbarProps) {
   const classes = useStyles();
-  const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  useEffect(() => {
-    setIsOpen(true);
-    const timer = setTimeout(() => {
-      setIsOpen(false);
-      handleCloseError();
-    }, 5000);
-    return () => {
-      setIsOpen(true);
-      clearTimeout(timer);
-    };
-  }, []);
+  const { dataprep } = DataPrepStore.getState();
+  const { snackbarStatus } = dataprep;
+  // useEffect(() => {
+  //   setSnackbarState({ open: true });
+  //   const timer = setTimeout(() => {
+  //     setSnackbarState({ open: false });
+  //   }, 5000);
+  //   return () => {
+  //     setSnackbarState({ open: true });
+  //     clearTimeout(timer);
+  //   };
+  // }, []);
 
   const handleClose = () => {
-    setIsOpen(false);
-    handleCloseError();
+    DataPrepStore.dispatch({
+      type: DataPrepActions.setSnackbarStatus,
+      payload: {
+        open: false,
+      },
+    });
   };
 
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-      open={isOpen}
+      open={snackbarStatus.open}
       classes={{
         anchorOriginTopLeft: classes.anchor,
         root: classes.root,

@@ -23,5 +23,4 @@ export interface ITabLabelCanSampleProps {
   entity: IRecords;
   initialConnectionId: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
-  setToaster: React.Dispatch<React.SetStateAction<ISnackbar>>;
 }

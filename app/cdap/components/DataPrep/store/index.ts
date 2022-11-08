@@ -55,6 +55,12 @@ export interface IModelField {
   description?: string;
 }
 
+export interface ISnackbarStatus {
+  open: boolean;
+  isSuccess?: boolean;
+  message?: string;
+}
+
 // TODO Replace 'any' types with concrete ones
 export interface IDataPrepState {
   initialized?: boolean;
@@ -76,6 +82,7 @@ export interface IDataPrepState {
   dataModelList?: IDataModel[];
   targetDataModel?: IDataModel;
   targetModel?: IModel;
+  snackbarStatus?: ISnackbarStatus;
 }
 
 const defaultInitialState: IDataPrepState = {
@@ -101,6 +108,7 @@ const defaultInitialState: IDataPrepState = {
   dataModelList: null,
   targetDataModel: null,
   targetModel: null,
+  snackbarStatus: { open: false, isSuccess: false, message: '' },
 };
 
 const errorInitialState = {
@@ -152,6 +160,12 @@ const dataprep = (state = defaultInitialState, action = defaultAction) => {
         data: action.payload.data,
         headers: action.payload.headers,
         loading: false,
+      });
+      break;
+    case DataPrepActions.setSnackbarStatus:
+      console.log('store --', action.payload);
+      stateCopy = Object.assign({}, state, {
+        snackbarState: action.payload.snackbarState,
       });
       break;
     case DataPrepActions.setDirectives:

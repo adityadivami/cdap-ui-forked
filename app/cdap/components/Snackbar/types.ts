@@ -15,7 +15,6 @@
  */
 
 export interface ISnackbarProps {
-  handleCloseError: () => void;
   description?: string;
   isSuccess?: boolean;
   actionType?: string;

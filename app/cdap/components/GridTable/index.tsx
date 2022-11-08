@@ -24,7 +24,6 @@ import { GRID_TABLE_PREFIX, PREFIX } from 'components/GridTable/constants';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import Snackbar from 'components/Snackbar';
-import { ISnackbar } from 'components/Snackbar/types';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
@@ -37,6 +36,7 @@ import GridKPICell from './components/GridKPICell';
 import GridTextCell from './components/GridTextCell';
 import { useStyles } from './styles';
 import { IExecuteAPIResponse, IHeaderNamesList, IParams, IRecords } from './types';
+import { useSelector } from 'react-redux';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -54,10 +54,11 @@ export default function GridTable() {
       count: '0',
     },
   ]);
-  const [toaster, setToaster] = useState<ISnackbar>({
-    open: false,
-    isSuccess: false,
-  });
+
+  const { dataprep } = DataPrepStore.getState();
+  const { snackbarStatus } = dataprep;
+
+  console.log(snackbarStatus, 'snackbarStatus @grid');
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -115,10 +116,13 @@ export default function GridTable() {
         });
         setLoading(false);
         setGridData(response);
-        setToaster({
-          open: true,
-          isSuccess: true,
-          message: T.translate(`${PREFIX}.Snackbar.labels.datasetSuccess`).toString(),
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setSnackbarStatus,
+          payload: {
+            open: true,
+            isSuccess: true,
+            message: T.translate(`${PREFIX}.Snackbar.labels.datasetSuccess`).toString(),
+          },
         });
       });
   };
@@ -129,7 +133,7 @@ export default function GridTable() {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload, wid);
+    getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -177,11 +181,12 @@ export default function GridTable() {
           }
           if (mostFrequentItem < mostFrequentItemCount) {
             mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item;
+            mostFrequentItemValue = item as string;
           }
         });
         mostFrequentItemCount = 0;
-        mostFrequentItemValue = mostFrequentItemValue === '' ? item : mostFrequentItemValue;
+        mostFrequentItemValue =
+          mostFrequentItemValue === '' ? (item as string) : mostFrequentItemValue;
       });
     }
     mostFrequentDataItem.name = mostFrequentItemValue;
@@ -222,7 +227,7 @@ export default function GridTable() {
   const getGridTableData = async () => {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData.headers, rawData.types);
-    setHeadersNamesList(headersData);
+    setHeadersNamesList(headersData as any);
     if (rawData && rawData.summary && rawData.summary.statistics) {
       const missingData = createMissingData(gridData?.summary.statistics);
       setMissingDataList(missingData);
@@ -300,15 +305,10 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
-      {toaster.open && (
+      {snackbarStatus.open && (
         <Snackbar // TODO: This snackbar is just for the feature demo purpose. Will be removed in the further development.
-          handleCloseError={() =>
-            setToaster({
-              open: false,
-            })
-          }
-          description={toaster.message}
-          isSuccess={toaster.isSuccess}
+          description={snackbarStatus.message}
+          isSuccess={snackbarStatus.isSuccess}
         />
       )}
     </Box>

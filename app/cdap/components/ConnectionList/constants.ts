@@ -14,7 +14,14 @@
  * the License.
  */
 
-export const snackbarDefaultValues = {
+export interface ISnackbarDefaultValues {
+  open: boolean;
+  isSuccess?: boolean;
+  message?: string;
+}
+
+export const snackbarDefaultValues: ISnackbarDefaultValues = {
   open: false,
   isSuccess: false,
+  message: '',
 };
