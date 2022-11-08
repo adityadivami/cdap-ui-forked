@@ -45,11 +45,5 @@ describe('Testing render FunctionNameToggle component', () => {
     expect(nameToggleChildLabel).toHaveTextContent(
       `${T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}`
     );
-
-    // const switchInputElement = screen.getAllByTestId(
-    //   /transformations-toolbar-icons-function-name-toggler/i
-    // );
-
-    //   expect(switchInputElement).toBeInTheDocument();
   });
 });

@@ -14,28 +14,20 @@
  *  the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
 import React from 'react';
-
 import NestedMenu from 'components/GridTable/components/NestedMenu/index';
+import { dummyData1, dummyData2 } from 'components/GridTable/components/NestedMenu/mock/mock';
 
 describe('Testing nested menu component', () => {
   it('should test default render of nested menu', () => {
-    const x = [
-      {
-        label: 'test',
-        supported_dataType: ['test'],
-        value: 'test',
-        options: [{ label: 'test', supported_dataType: ['test'], value: 'test' }],
-      },
-    ];
     render(
       <NestedMenu
         submitMenuOption={() => {
           jest.fn();
         }}
         columnType={'test'}
-        menuOptions={x}
+        menuOptions={dummyData1}
         title={'hello'}
         anchorElement={[]}
         setAnchorElement={() => jest.fn()}
@@ -51,33 +43,23 @@ describe('Testing nested menu component', () => {
   });
 
   it('should test default render of nested menu with options as empty', () => {
-    const x = [
-      {
-        label: 'test',
-        supported_dataType: ['test'],
-        value: 'test',
-        // options: [],
-      },
-    ];
-    const dummyElement = document.createElement('');
-    document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
-
     render(
       <NestedMenu
         submitMenuOption={() => {
           jest.fn();
         }}
         columnType={'test'}
-        menuOptions={x}
+        menuOptions={dummyData2}
         title={'hello'}
-        anchorElement={[dummyElement]}
+        anchorElement={[]}
         setAnchorElement={(x) => jest.fn()}
         open={false}
         handleMenuOpenClose={() => jest.fn()}
       />
     );
 
-    const ele = screen.getByTestId(/menu-item-parent/i);
-    fireEvent.click(ele);
+    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    fireEvent.click(parentElement);
+    expect(parentElement).toBeInTheDocument();
   });
 });
