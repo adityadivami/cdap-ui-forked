@@ -28,14 +28,6 @@ export const useStyles = makeStyles(() => {
       height: '100%',
       paddingLeft: 30,
     },
-    headerStyles: {
-      height: 60,
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
     headingStyles: {
       display: 'flex',
       flexDirection: 'column',
@@ -62,17 +54,10 @@ export const useStyles = makeStyles(() => {
       backgroundColor: '#DADCE0',
       margin: '0 15px',
     },
-    headerTextWithBackIconStyles: {
-      display: 'flex',
-      alignItems: 'center',
-    },
     headerBackIconStyles: {
       marginRight: 10,
       width: 10,
       height: 20,
-      cursor: 'pointer',
-    },
-    backIconClass: {
       cursor: 'pointer',
     },
   };

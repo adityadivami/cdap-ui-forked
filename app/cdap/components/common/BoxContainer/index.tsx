@@ -17,6 +17,7 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
+import { IBoxContainerProps } from 'components/common/BoxContainer/types';
 
 const SimpleBox = styled(Box)`
   display: block;
@@ -42,7 +43,8 @@ const AbsoluteDiv = styled(SimpleBox)`
 const SimpleFlexBox = styled(SimpleBox)`
   display: flex;
   justify-content: ${({ justifyContent }) => (justifyContent ? justifyContent : 'flex-start')};
-  align-item: ${({ alignItem }) => (alignItem ? alignItem : 'flex-start')};
+  align-items: ${({ alignItem }) => (alignItem ? alignItem : 'flex-start')};
+  flex-direction: ${({ flexDirection }) => (flexDirection ? flexDirection : 'row')};
 `;
 
 const IconBox = styled(SimpleBox)`
@@ -60,12 +62,15 @@ export default function({
   top,
   bottom,
   justifyContent,
-  alignItem,
+  alignItems,
   borderRadius,
   border,
   width,
   height,
-}) {
+  flexDirection,
+  onClick,
+  dataTestId,
+}: IBoxContainerProps) {
   return (
     <>
       {type == 'SimpleBox' && (
@@ -77,6 +82,8 @@ export default function({
           border={border}
           width={width}
           height={height}
+          onClick={onClick}
+          dataTestId={dataTestId}
         >
           {children}
         </SimpleBox>
@@ -94,6 +101,8 @@ export default function({
           border={border}
           width={width}
           height={height}
+          onClick={onClick}
+          dataTestId={dataTestId}
         >
           {children}
         </AbsoluteDiv>
@@ -104,11 +113,14 @@ export default function({
           margin={margin}
           backgroundColor={backgroundColor}
           justifyContent={justifyContent}
-          alignItem={alignItem}
+          alignItem={alignItems}
           borderRadius={borderRadius}
           border={border}
           width={width}
           height={height}
+          flexDirection={flexDirection}
+          onClick={onClick}
+          dataTestId={dataTestId}
         >
           {children}
         </SimpleFlexBox>
@@ -123,6 +135,8 @@ export default function({
           border={border}
           width={width}
           height={height}
+          onClick={onClick}
+          dataTestId={dataTestId}
         >
           {children}
         </IconBox>
