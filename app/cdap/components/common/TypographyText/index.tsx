@@ -26,22 +26,16 @@ const SimpleText = styled(Typography)`
   font-weight: ${({ weight }) => (weight ? weight : 500)};
 `;
 
-const ErrorText = styled(Typography)`
+const ErrorText = styled(SimpleText)`
   color: ${red[600]};
-  font-size: ${({ size }) => (size ? size : '14px')};
-  font-weight: ${({ weight }) => (weight ? weight : 500)};
 `;
 
-const SuccessText = styled(Typography)`
+const SuccessText = styled(SimpleText)`
   color: ${green[600]};
-  font-size: ${({ size }) => (size ? size : '14px')};
-  font-weight: ${({ weight }) => (weight ? weight : 500)};
 `;
 
-const SimpleBoldText = styled(Typography)`
+const SimpleBoldText = styled(SimpleText)`
   color: ${grey[900]};
-  font-size: ${({ size }) => (size ? size : '14px')};
-  font-weight: ${({ weight }) => (weight ? weight : 500)};
 `;
 
 export default function({ text, type, component, size, weight, dataTestId }: ITypographyTextProps) {

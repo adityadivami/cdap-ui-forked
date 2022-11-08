@@ -31,11 +31,11 @@ export interface IHeaderNamesList {
 }
 
 export interface IAddTransformationProps {
-  functionSupportedDataType: string[];
-  functionName: string;
-  columnData: IHeaderNamesList[];
-  missingDataList: IStatistics;
-  callBack: () => void;
+  transformationDataType: string[];
+  transformationName: string;
+  columnsList: IHeaderNamesList[];
+  missingItemsList: IStatistics;
+  onCancel: () => void;
 }
 
 export interface IMultipleSelectedFunctionDetail {

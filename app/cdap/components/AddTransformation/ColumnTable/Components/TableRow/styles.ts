@@ -15,41 +15,40 @@
  */
 
 import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 export const useStyles = makeStyles(() => {
   return {
-    addTransformationBodyStyles: {
-      height: 'calc(100% - 100px)',
+    tabledisplayStyles: {
       display: 'flex',
       flexDirection: 'column',
-      padding: 0,
     },
-    addTransformationBodyWrapperStyles: {
-      height: 'calc(100% - 40px)',
-      overflowY: 'auto',
-    },
-    applyStepButtonStyles: {
-      width: 162,
-      height: 36,
-      background: blue[500],
-      boxShadow: '0px 2px 4px rgba(70, 129, 244, 0.15)',
-      borderRadius: 4,
-      fontStyle: 'normal',
+    recipeStepsTableRowStyles: {
       fontWeight: 400,
-      fontSize: 15,
-      lineHeight: '26px',
-      letterSpacing: 0.46,
-      color: '#FFFFFF',
-      alignSelf: 'flex-end',
-      marginTop: 30,
-      textTransform: 'none',
-      marginBottom: 20,
-      marginRight: 8,
+      fontSize: 16,
+      lineHeight: '150%',
+      letterSpacing: 0.15,
+      color: grey[700],
     },
-    buttonStyles: {
-      '&:hover': {
-        backgroundColor: blue[500],
-      },
+    rowsOfTable: {
+      display: 'grid',
+      gridTemplateColumns: '10% 45% 45%',
+    },
+    recipeStepsTableHeadStyles: {
+      padding: 10,
+      fontWeight: 600,
+      fontSize: 16,
+      lineHeight: '150%',
+      letterSpacing: 0.15,
+      color: grey[700],
+    },
+    recipeStepsActionTypeStyles: {
+      fontWeight: 400,
+      maxWidth: 190,
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      fontSize: 14,
+      marginBottom: 5,
+      textTransform: 'capitalize',
     },
   };
 });

@@ -24,7 +24,7 @@ describe('It should test FunctionNameWidget Component', () => {
     render(
       <ColumnTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
-        functionSupportedDataType={['all']}
+        transformationDataType={['all']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[]}
@@ -43,7 +43,7 @@ describe('It should test FunctionNameWidget Component', () => {
     render(
       <ColumnTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
-        functionSupportedDataType={['test']}
+        transformationDataType={['test']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[]}

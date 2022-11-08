@@ -32,7 +32,7 @@ import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constant
 
 export default function({
   columns,
-  functionSupportedDataType,
+  transformationDataType,
   onSingleSelection,
   selectedColumns,
   dataQualityValue,
@@ -74,7 +74,7 @@ export default function({
           {columns?.length > 0 &&
             columns.map((eachColumn, index) => (
               <>
-                {functionSupportedDataType?.includes('all') ? (
+                {transformationDataType?.includes('all') ? (
                   <TableRowWidget
                     onSingleSelection={onSingleSelection}
                     selectedColumns={selectedColumns}
@@ -86,7 +86,7 @@ export default function({
                     eachColumn={eachColumn}
                   />
                 ) : (
-                  functionSupportedDataType?.includes(eachColumn?.type[0]?.toLowerCase()) && (
+                  transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase()) && (
                     <TableRowWidget
                       onSingleSelection={onSingleSelection}
                       selectedColumns={selectedColumns}

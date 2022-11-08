@@ -33,11 +33,11 @@ import {
 } from 'components/AddTransformation/constants';
 
 export default function({
-  functionSupportedDataType,
-  functionName,
-  columnData,
-  missingDataList,
-  callBack,
+  transformationDataType,
+  transformationName,
+  columnsList,
+  missingItemsList,
+  onCancel,
 }: IAddTransformationProps) {
   const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
@@ -46,17 +46,20 @@ export default function({
 
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
-    callBack();
+    onCancel();
   };
 
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
     setSelectedColumns([]);
-    callBack();
+    onCancel();
   };
 
   useEffect(() => {
-    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(missingDataList, columnData);
+    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(
+      missingItemsList,
+      columnsList
+    );
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
@@ -64,14 +67,14 @@ export default function({
     if (
       multipleColumnSelected.filter(
         (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === functionName && !functionNameDetail.isMoreThanTwo
+          functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
       )?.length
     ) {
       return selectedColumns?.length === 2 ? false : true;
     } else if (
       multipleColumnSelected.filter(
         (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === functionName && functionNameDetail.isMoreThanTwo
+          functionNameDetail.value === transformationName && functionNameDetail.isMoreThanTwo
       )?.length
     ) {
       return selectedColumns?.length >= 1 ? false : true;
@@ -91,12 +94,12 @@ export default function({
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
             <SelectColumnsList
-              columnData={columnData}
+              columnsList={columnsList}
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={dataQualityValue}
-              functionSupportedDataType={functionSupportedDataType}
-              functionName={functionName}
+              transformationDataType={transformationDataType}
+              transformationName={transformationName}
             />
           </div>
           <Button

@@ -204,10 +204,10 @@ export default function GridTable() {
   }, [gridData]);
 
   // ------------@onMenuOptionSelection Function is used to set option selected from toolbar and then calling of execute API
-  const onMenuOptionSelection = (option: string, supported_dataType: string[]) => {
+  const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
     setAddTransformationFunction({
       option,
-      supportedDataType: supported_dataType,
+      supportedDataType,
     });
   };
 
@@ -273,11 +273,11 @@ export default function GridTable() {
       </Table>
       {addTransformationFunction.option && (
         <AddTransformation
-          functionName={addTransformationFunction.option}
-          functionSupportedDataType={addTransformationFunction.supportedDataType}
-          columnData={headerNamesList}
-          missingDataList={dataQuality}
-          callBack={() => {
+          transformationName={addTransformationFunction.option}
+          transformationDataType={addTransformationFunction.supportedDataType}
+          columnsList={headerNamesList}
+          missingItemsList={dataQuality}
+          onCancel={() => {
             setAddTransformationFunction({
               option: '',
               supportedDataType: [],

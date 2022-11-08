@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/styles';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles(() => {
   return {
@@ -49,7 +50,7 @@ export const useStyles = makeStyles(() => {
       fontSize: 20,
       lineHeight: '150%',
       letterSpacing: 0.15,
-      color: '#000000',
+      color: grey[900],
     },
     headerRightStyles: {
       display: 'flex',

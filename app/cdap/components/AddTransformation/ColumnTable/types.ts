@@ -19,7 +19,7 @@ import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation
 
 export interface IColumnTableProps {
   columns: IHeaderNamesList[];
-  functionSupportedDataType: string[];
+  transformationDataType: string[];
   onSingleSelection: (value: IHeaderNamesList) => void;
   selectedColumns: IHeaderNamesList[];
   dataQualityValue: IDataQualityItem[];

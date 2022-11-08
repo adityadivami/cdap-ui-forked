@@ -30,14 +30,14 @@ import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constant
 import TypographyText from 'components/common/TypographyText';
 
 export default function({
-  functionSupportedDataType,
+  transformationDataType,
   selectedColumnsCount,
-  columnData,
+  columnsList,
   setSelectedColumns,
   dataQuality,
-  functionName,
+  transformationName,
 }: ISelectColumnListProps) {
-  const [columns, setColumns] = useState<IHeaderNamesList[]>(columnData);
+  const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [selectedColumns, setSelectedColumn] = useState<IHeaderNamesList[]>([]);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
@@ -46,7 +46,8 @@ export default function({
 
   useEffect(() => {
     const multiSelect: IMultipleSelectedFunctionDetail[] = multipleColumnSelected?.filter(
-      (functionDetail: IMultipleSelectedFunctionDetail) => functionDetail.value === functionName
+      (functionDetail: IMultipleSelectedFunctionDetail) =>
+        functionDetail.value === transformationName
     );
     if (multiSelect.length) {
       setIsSingleSelection(false);
@@ -54,10 +55,10 @@ export default function({
   }, []);
 
   const columnsAsPerType: IHeaderNamesList[] | string[] =
-    functionSupportedDataType?.length > 0 && functionSupportedDataType?.includes('all')
-      ? functionSupportedDataType?.filter((supportedType: string) => supportedType === 'all')
+    transformationDataType?.length > 0 && transformationDataType?.includes('all')
+      ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
       : columns?.filter((columnDetail: IHeaderNamesList) => {
-          return functionSupportedDataType?.some((dataTypeCollection: string | string[]) => {
+          return transformationDataType?.some((dataTypeCollection: string | string[]) => {
             return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
           });
         });
@@ -88,7 +89,7 @@ export default function({
   const handleDisableCheckbox = () => {
     const multiSelect: IMultipleSelectedFunctionDetail[] = multipleColumnSelected.filter(
       (functionDetail: IMultipleSelectedFunctionDetail) =>
-        functionDetail.value === functionName && functionDetail.isMoreThanTwo
+        functionDetail.value === transformationName && functionDetail.isMoreThanTwo
     );
     if (selectedColumns.length === 0 || selectedColumns.length < 2) {
       return false;
@@ -101,8 +102,8 @@ export default function({
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue: IHeaderNamesList[] = columnData.length
-        ? columnData.filter((columnDetail: IHeaderNamesList) =>
+      const columnValue: IHeaderNamesList[] = columnsList.length
+        ? columnsList.filter((columnDetail: IHeaderNamesList) =>
             columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
           )
         : [];
@@ -112,7 +113,7 @@ export default function({
         setColumns([]);
       }
     } else {
-      setColumns(columnData);
+      setColumns(columnsList);
     }
   };
 
@@ -172,7 +173,7 @@ export default function({
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
           columns={columns}
-          functionSupportedDataType={functionSupportedDataType}
+          transformationDataType={transformationDataType}
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
         />

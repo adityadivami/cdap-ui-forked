@@ -14,16 +14,16 @@
  *  the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
-import T from "i18n-react";
-import TransformationToolbar from "components/GridTable/components/TransformationToolbar/index";
+import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import T from 'i18n-react';
+import TransformationToolbar from 'components/GridTable/components/TransformationToolbar/index';
 
-describe("Testing render TransformationToolbar component", () => {
-  it("Should render component", () => {
+describe('Testing render TransformationToolbar component', () => {
+  it('Should render component', () => {
     render(
       <TransformationToolbar
-        columnType={"abhilash"}
+        columnType={'abhilash'}
         submitMenuOption={() => {
           jest.fn();
         }}
@@ -35,17 +35,16 @@ describe("Testing render TransformationToolbar component", () => {
     );
   });
 
-//   const iconButtonElement = screen.getByTestId(/toolbar-icon-button/i)
-//   fireEvent.click(iconButtonElement)
+  //   const iconButtonElement = screen.getByTestId(/toolbar-icon-button/i)
+  //   fireEvent.click(iconButtonElement)
 
-//   const transformToolbarParent = screen.getByTestId(/transformations-toolbar-container/i);
+  //   const transformToolbarParent = screen.getByTestId(/transformations-toolbar-container/i);
 
-  // Should render the parent component 
-//   expect(transformToolbarParent).toBeInTheDocument();
+  // Should render the parent component
+  //   expect(transformToolbarParent).toBeInTheDocument();
 
-//   const nestedMenuContainer = screen.getByTestId(/nested-menu-container"/i)
+  //   const nestedMenuContainer = screen.getByTestId(/nested-menu-container"/i)
 
-  // Check if child is rendered in the parent 
-//   expect(transformToolbarParent).toContainElement(nestedMenuContainer)
-  
+  // Check if child is rendered in the parent
+  //   expect(transformToolbarParent).toContainElement(nestedMenuContainer)
 });

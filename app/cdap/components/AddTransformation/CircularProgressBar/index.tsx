@@ -20,6 +20,7 @@ import { useStyles } from 'components/AddTransformation/CircularProgressBar/styl
 import styled from 'styled-components';
 import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
 import TypographyText from 'components/common/TypographyText';
+import { red, green } from '@material-ui/core/colors';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -30,8 +31,8 @@ const ArcContainer = styled(Typography)`
   border-radius: 50%;
   box-sizing: border-box;
   border: 4px solid #dbdbdb;
-  border-bottom-color: ${({ value }) => (value < 100 ? '#E97567' : '#8BCC74')};
-  border-right-color: ${({ value }) => (value < 100 ? '#E97567' : '#8BCC74')};
+  border-bottom-color: ${({ value }) => (value < 100 ? red[600] : green[600])};
+  border-right-color: ${({ value }) => (value < 100 ? red[600] : green[600])};
   transform: ${({ value }) => `rotate(${45 + value * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
