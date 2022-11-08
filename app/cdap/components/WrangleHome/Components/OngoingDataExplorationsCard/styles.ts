@@ -15,33 +15,51 @@
  */
 
 import { makeStyles } from '@material-ui/core';
-import { green } from '@material-ui/core/colors';
-import { red } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
-  gridContainer: {
-    width: '1204px',
-    height: '77px',
+  gridContainerWorkspaces: {
+    width: 1306,
+    height: 77,
     border: '1px solid #DADCE0',
     borderRadius: '4px',
-    marginBottom: '10px',
+    marginBottom: 10,
     cursor: 'pointer',
+    margin: '10px auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyConent: 'center',
+    paddingRight: 62,
+  },
+  gridContainerHome: {
+    width: 1204,
+    height: 77,
+    border: '1px solid #DADCE0',
+    borderRadius: 4,
+    marginBottom: 10,
+    cursor: 'pointer',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyConent: 'center',
+    paddingRight: 62,
+    margin: '10px auto',
   },
   elementStyle: {
-    width: '301px',
+    width: 301,
     flex: 1,
-    paddingTop: '14px',
-    paddingLeft: '23px',
-    paddingBottom: '13px',
-    paddingRight: '23px',
+    paddingTop: 14,
+    paddingLeft: 23,
+    paddingBottom: 13,
+    paddingRight: 23,
     display: 'flex',
     margin: 'auto 0px',
     justifyContent: 'space-between',
+    alignItems: 'center',
     '& .MuiTypography-body1': {
       margin: 'auto 0px',
-      fontSize: '16px',
+      fontSize: 16,
       lineHeight: '24px',
-      width: '253px',
+      width: 253,
       textOverflow: 'ellipsis',
       fontWeight: 400,
       overflow: 'hidden',
@@ -52,13 +70,8 @@ export const useStyles = makeStyles({
 
   percent: {
     display: 'flex',
-    minWidth: '85px',
+    minWidth: 85,
     justifyContent: 'end',
-  },
-  iconStyle: {
-    marginRight: '32px',
-    height: '50px',
-    width: '50px',
   },
   dataQualityWrapper: {
     display: 'flex',
@@ -66,47 +79,58 @@ export const useStyles = makeStyles({
   },
   percentageStyleRed: {
     lineHeight: '30px',
-    fontSize: '36px',
+    fontSize: 36,
     letterSpacing: '0.15px',
     color: red[600],
     margin: 'auto 0px',
   },
   percentageSymbolRed: {
-    fontSize: '20px',
+    fontSize: 20,
     color: red[600],
     letterSpacing: '0.15px',
     lineHeight: '30px',
-    marginRight: '6px',
+    marginRight: 6,
     margin: 'auto 0px',
-    paddingTop: '14px',
+    paddingTop: 14,
   },
   percentageStyleGreen: {
     lineHeight: '30px',
-    fontSize: '36px',
+    fontSize: 36,
     color: green[600],
     margin: 'auto 0px',
     letterSpacing: '0.15px',
   },
   percentageSymbolGreen: {
-    fontSize: '20px',
+    fontSize: 20,
     color: green[600],
     lineHeight: '30px',
-    marginRight: '6px',
+    marginRight: 6,
     margin: 'auto 0px',
     letterSpacing: '0.15px',
-    paddingTop: '14px',
+    paddingTop: 14,
   },
   dataQualityText: {
-    paddingTop: '11px',
+    paddingTop: 0,
   },
   iconWithText: {
-    maxWidth: '171px',
+    maxWidth: 171,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
   textWithoutIcon: {
-    maxWidth: '166px',
+    maxWidth: 166,
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+  },
+  connectorIcon: {
+    minWidth: 100,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '100%',
+  },
+  dataQualityTextContainer: {
+    display: 'flex',
+    justifyContent: 'flex-start',
   },
 });

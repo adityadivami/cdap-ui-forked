@@ -14,8 +14,8 @@
  * the License.
  */
 
-import { combineReducers, createStore } from 'redux';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import { combineReducers, createStore } from 'redux';
 import { composeEnhancers } from 'services/helpers';
 
 export interface IDataPrepAction {
@@ -152,6 +152,11 @@ const dataprep = (state = defaultInitialState, action = defaultAction) => {
         data: action.payload.data,
         headers: action.payload.headers,
         loading: false,
+      });
+      break;
+    case DataPrepActions.setConnectorIcons:
+      stateCopy = Object.assign({}, state, {
+        connectorsWithIcons: action?.payload?.data,
       });
       break;
     case DataPrepActions.setDirectives:

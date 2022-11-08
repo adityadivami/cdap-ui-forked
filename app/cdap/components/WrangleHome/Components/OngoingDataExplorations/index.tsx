@@ -14,113 +14,198 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
 import { Box } from '@material-ui/core/';
-import { generateDataForExplorationCard } from './utils';
 import MyDataPrepApi from 'api/dataprep';
-import { Link } from 'react-router-dom';
-import { getCurrentNamespace } from 'services/NamespaceStore';
-import OngoingDataExplorationsCard from '../OngoingDataExplorationsCard';
-import { switchMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs/observable/forkJoin';
-import { IResponseData } from './types';
+import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import { IParams } from 'components/GridTable/types';
+import NoRecordScreen from 'components/NoRecordScreen';
+import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorations/styles';
+import {
+  IConnectionsList,
+  IConnectionWithConnectorType,
+  IExistingExplorationCardsData,
+  IMassagedObject,
+  IOngoingDataExplorationsProps,
+  IValues,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
+import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
 import T from 'i18n-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { of } from 'rxjs/observable/of';
+import { defaultIfEmpty, switchMap } from 'rxjs/operators';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { IMPORT_DATASET } from './Constants';
 
-export default function OngoingDataExplorations() {
-  const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
-  const [finalArray, setFinalArray] = useState([]);
+export default function({
+  cardCount,
+  fromAddress,
+  setLoading,
+  setShowExplorations,
+}: IOngoingDataExplorationsProps) {
+  const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IMassagedObject[]>([]);
 
-  const getOngoingData = () => {
+  const classes = useStyles();
+  const getOngoingData = useCallback(async () => {
+    const connectionsWithConnectorTypeData: Map<
+      string,
+      IConnectionsList[]
+    > = await getCategorizedConnections();
+    const connectionsWithConnectorTypeDataObject: IConnectionWithConnectorType[] = [];
+    for (const connectorName of connectionsWithConnectorTypeData.keys()) {
+      const values: IConnectionsList[] = connectionsWithConnectorTypeData.get(connectorName);
+      const connections: IConnectionWithConnectorType[] = values?.map(
+        (eachValue: IConnectionsList) => {
+          return {
+            name: eachValue.name,
+            connectorType: eachValue.connectionType,
+          };
+        }
+      );
+      connectionsWithConnectorTypeDataObject.push(...connections);
+    }
+
+    const findConnectorType = (connection: string): string => {
+      if (connection) {
+        const matchedConnection: IConnectionWithConnectorType = connectionsWithConnectorTypeDataObject.find(
+          (eachConnection: IConnectionWithConnectorType) => {
+            return eachConnection.name === connection.replace('_', ' ');
+          }
+        );
+        return matchedConnection ? matchedConnection.connectorType : undefined;
+      }
+      return IMPORT_DATASET;
+    };
+
+    const expData: IExistingExplorationCardsData[] = [];
+
     // Getting the workspace name, path ,workspaceId and name from MyDataPrepApi.getWorkspaceList API and
     //  using these in params and requestBody to get Data quality from MyDataPrepApi.execute API
+
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     })
       .pipe(
-        switchMap((res: IResponseData) => {
-          const workspaces = res.values.map((item) => {
-            const params = {
+        switchMap((response: Record<string, unknown[]>) => {
+          let values: IValues[] = [];
+          values = response?.values ?? [];
+
+          // sorting the workspaces based on dataset created time.
+          values.sort((a, b) => b.createdTimeMillis - a.createdTimeMillis);
+
+          const workspaces = values.map((eachValue: IValues) => {
+            const params: IParams = {
               context: 'default',
-              workspaceId: item.workspaceId,
+              workspaceId: eachValue.workspaceId,
             };
             const requestBody = {
-              directives: item.directives,
+              directives: eachValue.directives,
               limit: 1000,
               insights: {
-                name: item.sampleSpec.connectionName,
-                workspaceName: item.workspaceName,
-                path: item?.sampleSpec?.path,
+                name: eachValue?.sampleSpec?.connectionName,
+                workspaceName: eachValue.workspaceName,
+                path: eachValue?.sampleSpec?.path,
                 visualization: {},
               },
             };
 
-            setOngoingExpDatas((current) => [
-              ...current,
-              {
-                connectionName:
-                  item?.sampleSpec?.connectionName === undefined
-                    ? 'Upload'
-                    : item?.sampleSpec?.connectionName,
-                workspaceName: item.workspaceName,
-                recipeSteps: item.directives.length,
+            const connectorName: string | undefined = findConnectorType(
+              eachValue?.sampleSpec?.connectionName
+            );
+            if (connectorName) {
+              expData.push({
+                connectorType: connectorName,
+                connectionName: eachValue?.sampleSpec?.connectionName
+                  ? eachValue?.sampleSpec?.connectionName
+                  : 'Imported Dataset',
+                workspaceName: eachValue.workspaceName,
+                recipeSteps: eachValue.directives?.length ?? 0,
                 dataQuality: null,
-                workspaceId: item.workspaceId,
-              },
-            ]);
-            return MyDataPrepApi.execute(params, requestBody);
+                workspaceId: eachValue.workspaceId,
+                count: 0,
+              });
+              return MyDataPrepApi.execute(params, requestBody);
+            }
+            return of(undefined);
           });
-          return forkJoin(workspaces);
+          return forkJoin(workspaces).pipe(defaultIfEmpty(null));
         })
       )
       .subscribe((responses) => {
-        responses.forEach((workspace, index) => {
-          let dataQuality = 0;
-          workspace.headers.forEach((element) => {
-            const general = workspace.summary.statistics[element].general;
-            const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
-            const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
-            dataQuality = dataQuality + nonNull;
-          });
-          const totalDataQuality = dataQuality / workspace.headers.length;
-          setOngoingExpDatas((current) => [
-            ...current.slice(0, index),
-            {
-              ...current[index],
-              dataQuality: totalDataQuality,
-            },
-            ...current.slice(index + 1),
-          ]);
-        });
+        if (responses && Array.isArray(responses) && responses.length) {
+          responses
+            .filter((eachResponse) => eachResponse)
+            .forEach((workspace, index) => {
+              let dataQuality = 0;
+              workspace?.headers?.forEach((eachWorkspaceHeader) => {
+                const general = workspace.summary?.statistics[eachWorkspaceHeader]?.general;
+                // Here we are getting empty & non-null(renaming it as nonEmpty) values from general(API Response) and provinding default values for them
+                const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+
+                // Round number to next lowest .1%
+                // Number.toFixed() can round up and leave .0 on integers
+                const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+                dataQuality = dataQuality + nonNull;
+              });
+              const totalDataQuality = dataQuality / workspace.headers?.length ?? 1;
+              expData[index].dataQuality = totalDataQuality;
+              expData[index].count = workspace.count;
+              const final = getUpdatedExplorationCards(expData, cardCount);
+              /**
+               * if we have setData, then we should send data to parent element as the exploration state is then maintained in parent as well for showing or hiding the title of the parent component
+               */
+              if (setShowExplorations) {
+                setShowExplorations(final && Array.isArray(final) && final.length ? true : false);
+              }
+              setOnGoingExplorationsData(final);
+              setLoading(false);
+            });
+        }
       });
-  };
+  }, []);
 
   useEffect(() => {
     getOngoingData();
   }, []);
 
-  useEffect(() => {
-    const final = generateDataForExplorationCard(ongoingExpDatas);
-    setFinalArray(final);
-  }, [ongoingExpDatas]);
+  const filteredData = onGoingExplorationsData.filter(
+    (eachWorkspace) => eachWorkspace[6].count !== 0
+  );
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {finalArray.map((item, index) => {
-        return (
-          <Link
-            to={{
-              pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
-              state: {
-                from: T.translate('features.Breadcrumb.labels.wrangleHome'),
-                path: T.translate('features.Breadcrumb.params.wrangleHome'),
-              },
-            }}
-            style={{ textDecoration: 'none' }}
-          >
-            {index <= 1 && <OngoingDataExplorationsCard item={item} key={index} />}
-          </Link>
-        );
-      })}
+      {filteredData && Array.isArray(filteredData) && filteredData.length ? (
+        filteredData.map((eachExplorationCardData, index) => {
+          return (
+            <NavLink
+              to={{
+                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${eachExplorationCardData[5].workspaceId}`}`,
+                state: {
+                  from: fromAddress,
+                  path: T.translate('features.WranglerNewUI.Breadcrumb.labels.workSpaces'),
+                },
+              }}
+              className={classes.link}
+            >
+              <OngoingDataExplorationsCard
+                key={index}
+                explorationCardDetails={eachExplorationCardData}
+                cardIndex={index}
+                fromAddress={fromAddress}
+              />
+            </NavLink>
+          );
+        })
+      ) : fromAddress === 'Workspaces' ? (
+        <NoRecordScreen
+          title={T.translate('features.NoRecordScreen.workspacesList.title')}
+          subtitle={T.translate('features.NoRecordScreen.workspacesList.subtitle')}
+        />
+      ) : (
+        <></>
+      )}
     </Box>
   );
 }

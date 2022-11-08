@@ -14,19 +14,20 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
-import { useStyles } from 'components/WrangleHome/Components/WrangleHomeTitle/styles';
-import { UnderLine } from 'components/WrangleHome/icons';
+import { Avatar } from '@material-ui/core';
+import ImageOutlined from '@material-ui/icons/ImageOutlined';
+import { IWidgetSVGProps } from 'components/WidgetSVG/types';
 import React from 'react';
+import styled from 'styled-components';
 
-export default function WrangleHomeTitle({ title }) {
-  const classes = useStyles();
-  return (
-    <Box className={classes.dataExplorationWrapper}>
-      <Typography className={classes.dataExploration} data-testid="wrangler-home-title-text">
-        {title}
-      </Typography>
-      {UnderLine}
-    </Box>
+const StyledImageOutlined = styled(ImageOutlined)`
+  font-size: 40px;
+`;
+
+export default function({ imageSource, label }: IWidgetSVGProps) {
+  return imageSource ? (
+    <Avatar src={imageSource} variant="square" data-testid={`widget-api-image-${label}`} />
+  ) : (
+    <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
   );
 }

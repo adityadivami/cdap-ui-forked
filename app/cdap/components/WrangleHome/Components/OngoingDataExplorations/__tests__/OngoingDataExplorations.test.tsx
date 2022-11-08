@@ -14,18 +14,17 @@
  * the License.
  */
 
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import OngoingDataExploration from '../index';
 import MyDataPrepApi from 'api/dataprep';
-import operators from 'rxjs/operators';
-import { createBrowserHistory as createHistory } from 'history';
+import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExplorations';
+import {
+  getWorkspaceListSubscribeMock,
+  switchMapCallbackMock,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mockoldData';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import { switchMapCallbackMock, getWorkspaceListSubscribeMock } from '../mock/mockoldData';
-
-const history = createHistory({
-  basename: '/',
-});
+import operators from 'rxjs/operators';
+import history from 'services/history';
 
 const testObj = {
   connectionName: 'Upload',
@@ -35,9 +34,11 @@ const testObj = {
 };
 
 test('renders Ongoing Data Exploration component', async () => {
-  jest.spyOn(operators as any, 'switchMap').mockImplementation((callback: Function) => {
-    callback(switchMapCallbackMock);
-  });
+  jest
+    .spyOn(operators as any, 'switchMap')
+    .mockImplementation((callback: (...args: unknown[]) => unknown) => {
+      callback(switchMapCallbackMock);
+    });
   jest.spyOn(MyDataPrepApi, 'getWorkspaceList').mockImplementation(() => {
     return {
       pipe: () => {
@@ -53,7 +54,7 @@ test('renders Ongoing Data Exploration component', async () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <OngoingDataExploration />
+          <OngoingDataExploration cardCount={0} fromAddress={''} setLoading={() => jest.fn()} />
         </Route>
       </Switch>
     </Router>

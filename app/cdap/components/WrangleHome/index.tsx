@@ -16,23 +16,37 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import React from 'react';
-import OngoingDataExplorations from './Components/OngoingDataExplorations';
-import WrangleCard from './Components/WrangleCard';
-import WrangleHomeTitle from './Components/WrangleHomeTitle';
-import { GradientLine, HeaderImage } from './icons';
-import { useStyles } from './styles';
+import { getWidgetData } from 'components/WidgetSVG/utils';
+import OngoingDataExplorations from 'components/WrangleHome/Components/OngoingDataExplorations';
+import WrangleCard from 'components/WrangleHome/Components/WrangleCard';
+import WrangleHomeTitle from 'components/WrangleHome/Components/WrangleHomeTitle';
+import { GradientLine, HeaderImage } from 'components/WrangleHome/icons';
+import { useStyles } from 'components/WrangleHome/styles';
 import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
-export default function WranglerHome() {
+export default function() {
   const classes = useStyles();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showExplorations, setShowExplorations] = useState<boolean>(false);
+  const cardCount = 2;
+  useEffect(() => {
+    getWidgetData();
+  }, []);
 
   return (
-    <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
+    <Box
+      className={
+        showExplorations ? classes.wrapper : `${classes.wrapper} ${classes.wrapperWithBottomSpace}`
+      }
+      data-testid="wrangler-home-new-parent"
+    >
       <Box className={classes.subHeader}>
         <Typography className={classes.welcomeCard}>
-          Hello! <br />
-          Welcome to Wrangler
+          {T.translate('features.HomePage.labels.welcomeCard.title')} <br />
+          {T.translate('features.HomePage.labels.welcomeCard.subtitle')}
         </Typography>
         <Box> {HeaderImage}</Box>
       </Box>
@@ -46,13 +60,26 @@ export default function WranglerHome() {
           </Box>
         </Box>
         <WrangleCard />
-        <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
-          <Box className={classes.viewMore}>
-            {T.translate('features.HomePage.labels.common.viewAll')}
+        {showExplorations ? (
+          <Box className={classes.headerTitle}>
+            <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
+            <Box className={classes.viewMore} data-testid="ongoing-explorations-view-all">
+              <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
+                {T.translate('features.HomePage.labels.common.viewAll')}
+              </Link>
+            </Box>
           </Box>
-        </Box>
-        <OngoingDataExplorations />
+        ) : (
+          <></>
+        )}
+        <OngoingDataExplorations
+          cardCount={cardCount}
+          fromAddress={T.translate(
+            'features.WranglerNewUI.Breadcrumb.labels.wrangleHome'
+          ).toString()}
+          setLoading={setLoading}
+          setShowExplorations={setShowExplorations}
+        />
       </Box>
     </Box>
   );

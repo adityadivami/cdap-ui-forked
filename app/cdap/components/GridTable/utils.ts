@@ -14,8 +14,7 @@
  * the License.
  */
 
-import React from 'react';
-import { IExecuteAPIResponse } from './types';
+import { IExecuteAPIResponse } from 'components/GridTable/types';
 
 /**
  *
@@ -58,19 +57,19 @@ export const checkFrequentlyOccuredValues = (
       count: 0,
     };
     if (Array.isArray(valueOfKey) && valueOfKey.length) {
-      valueOfKey.map((item, index) => {
+      valueOfKey.map((eachValue, index) => {
         valueOfKey.map((value, valueIndex) => {
-          if (item == value) {
+          if (eachValue === value) {
             mostFrequentItemCount++;
           }
           if (mostFrequentItem < mostFrequentItemCount) {
             mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item as string;
+            mostFrequentItemValue = eachValue as string;
           }
         });
         mostFrequentItemCount = 0;
-        mostFrequentItemValue = (mostFrequentItemValue == ''
-          ? item
+        mostFrequentItemValue = (mostFrequentItemValue === ''
+          ? eachValue
           : mostFrequentItemValue) as string;
       });
     }

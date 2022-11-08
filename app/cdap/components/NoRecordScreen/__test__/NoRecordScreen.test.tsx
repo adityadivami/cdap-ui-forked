@@ -15,14 +15,13 @@
  */
 
 import { render } from '@testing-library/react';
+import NoRecordScreen from 'components/NoRecordScreen';
 import React from 'react';
-import NoRecordScreen from '..';
 
 describe('It Should test NoRecordScreen Component', () => {
   const container = render(<NoRecordScreen title={'testing'} subtitle={'Unit Testing'} />);
 
   it('Should render the NonRecordScreen Component', () => {
     expect(container).toBeDefined();
-    console.log(container);
   });
 });

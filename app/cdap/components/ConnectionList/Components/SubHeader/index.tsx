@@ -16,14 +16,14 @@
 
 import { Breadcrumbs, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
+import T from 'i18n-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
-import T from 'i18n-react';
 
 export default function SubHeader() {
   const classes = useStyles();
@@ -32,10 +32,10 @@ export default function SubHeader() {
       <Box>
         <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
-            {T.translate('features.Breadcrumb.labels.wrangleHome')}
+            {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
           </Link>
           <Typography className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.Breadcrumb.labels.connectionsList')}
+            {T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
           </Typography>
         </Breadcrumbs>
       </Box>

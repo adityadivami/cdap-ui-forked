@@ -14,19 +14,18 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
-import { useStyles } from 'components/WrangleHome/Components/WrangleHomeTitle/styles';
-import { UnderLine } from 'components/WrangleHome/icons';
-import React from 'react';
+interface IEachItem {
+  icon?: SVGElement;
+  label?: string;
+  type?: string;
+  subText?: string;
+  percentageSymbol?: string;
+  workspaceId?: string;
+  count?: number;
+}
 
-export default function WrangleHomeTitle({ title }) {
-  const classes = useStyles();
-  return (
-    <Box className={classes.dataExplorationWrapper}>
-      <Typography className={classes.dataExploration} data-testid="wrangler-home-title-text">
-        {title}
-      </Typography>
-      {UnderLine}
-    </Box>
-  );
+export interface IOngoingDataExporationCardData {
+  explorationCardDetails: IEachItem[];
+  cardIndex: number;
+  fromAddress: string;
 }

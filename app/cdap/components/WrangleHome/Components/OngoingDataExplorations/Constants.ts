@@ -14,19 +14,15 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
-import { useStyles } from 'components/WrangleHome/Components/WrangleHomeTitle/styles';
-import { UnderLine } from 'components/WrangleHome/icons';
-import React from 'react';
-
-export default function WrangleHomeTitle({ title }) {
-  const classes = useStyles();
-  return (
-    <Box className={classes.dataExplorationWrapper}>
-      <Typography className={classes.dataExploration} data-testid="wrangler-home-title-text">
-        {title}
-      </Typography>
-      {UnderLine}
-    </Box>
-  );
-}
+export const CONNECTOR_TYPE = 'connectorType';
+export const ICON = 'icon';
+export const CONNECTION_NAME = 'connectionName';
+export const WORKPSACE_NAME = 'workspaceName';
+export const ICON_WITH_TEXT = 'iconWithText';
+export const TEXT = 'text';
+export const RECIPE_STEPS = 'recipeSteps';
+export const DATA_QUALITY = 'dataQuality';
+export const PERCENTAGE_WITH_TEXT = 'percentageWithText';
+export const WORKSPACE_ID = 'workspaceId';
+export const COUNT = 'count';
+export const IMPORT_DATASET = 'Imported Dataset';

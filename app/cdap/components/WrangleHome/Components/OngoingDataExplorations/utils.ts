@@ -14,44 +14,94 @@
  * the License.
  */
 
-import { ImportDatasetIcon } from '../WrangleCard/iconStore/ImportDatasetIcon';
-import { IMassagedObject } from './types';
+import DataPrepStore from 'components/DataPrep/store';
+import {
+  CONNECTION_NAME,
+  CONNECTOR_TYPE,
+  COUNT,
+  DATA_QUALITY,
+  ICON,
+  ICON_WITH_TEXT,
+  PERCENTAGE_WITH_TEXT,
+  RECIPE_STEPS,
+  TEXT,
+  WORKPSACE_NAME,
+  WORKSPACE_ID,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
+import {
+  IExistingExplorationCardsData,
+  IMassagedObject,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import T from 'i18n-react';
 
-export const generateDataForExplorationCard = (oldData) => {
+export const getUpdatedExplorationCards = (
+  existingExplorationCardsData: IExistingExplorationCardsData[],
+  cardCount: number
+) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
-  const massagedArray = [];
+  const updatedExplorationCardsData = [];
+  const { dataprep } = DataPrepStore.getState();
+  const { connectorsWithIcons } = dataprep;
 
-  if (oldData && Array.isArray(oldData) && oldData.length) {
-    oldData.forEach((eachItem) => {
-      const childArray = [];
+  const getIconForConnector = (connectorName: string) => {
+    const matchingConnector = connectorsWithIcons.find(
+      (eachConnector) => eachConnector.name === connectorName
+    );
+    return matchingConnector.SVG;
+  };
 
-      Object.keys(eachItem).map((keys) => {
-        const obj = {} as IMassagedObject;
+  if (
+    existingExplorationCardsData &&
+    Array.isArray(existingExplorationCardsData) &&
+    existingExplorationCardsData.length
+  ) {
+    existingExplorationCardsData
+      .filter((eachItem) => eachItem.count !== 0)
+      .filter((eachItem, itemIndex) => (cardCount && itemIndex < cardCount) || !cardCount)
+      .forEach((eachItem) => {
+        const eachExplorationCardData = [];
+        Object.keys(eachItem).map((keys) => {
+          const obj = {} as IMassagedObject;
+          switch (keys) {
+            case CONNECTOR_TYPE:
+              obj.icon = getIconForConnector(eachItem[keys]);
+              obj.label = eachItem[keys];
+              obj.type = ICON;
+              break;
+            case CONNECTION_NAME:
+              obj.label = eachItem[keys];
+              obj.type = ICON_WITH_TEXT;
+              break;
+            case WORKPSACE_NAME:
+              obj.label = eachItem[keys];
+              obj.type = TEXT;
+              break;
+            case RECIPE_STEPS:
+              obj.label = `${eachItem[keys]} ${T.translate(
+                'features.WranglerNewUI.OnGoingDataExplorations.labels.recipeSteps'
+              )}`;
+              obj.type = TEXT;
+              break;
+            case DATA_QUALITY:
+              obj.label = Number(eachItem[keys]);
+              obj.percentageSymbol = '%';
+              obj.subText = T.translate(
+                'features.WranglerNewUI.OnGoingDataExplorations.labels.nullValues'
+              );
+              obj.type = PERCENTAGE_WITH_TEXT;
+              break;
+            case WORKSPACE_ID:
+              obj.workspaceId = eachItem[keys];
+              break;
+            case COUNT:
+              obj.count = eachItem[keys];
+              break;
+          }
+          eachExplorationCardData.push(obj);
+        });
 
-        if (keys === 'connectionName') {
-          obj.icon = ImportDatasetIcon;
-          obj.label = eachItem[keys];
-          obj.type = 'iconWithText';
-        } else if (keys === 'workspaceName') {
-          obj.label = eachItem[keys];
-          obj.type = 'text';
-        } else if (keys === 'recipeSteps') {
-          obj.label = `${eachItem[keys]} Recipe steps`;
-          obj.type = 'text';
-        } else if (keys === 'dataQuality') {
-          obj.label = parseInt(eachItem[keys], 2);
-          obj.percentageSymbol = '%';
-          obj.subText = 'Data Quality';
-          obj.type = 'percentageWithText';
-        } else if (keys === 'workspaceId') {
-          obj.workspaceId = eachItem[keys];
-        }
-        childArray.push(obj);
+        updatedExplorationCardsData.push(eachExplorationCardData);
       });
-
-      massagedArray.push(childArray);
-    });
   }
-
-  return massagedArray;
+  return updatedExplorationCardsData;
 };
