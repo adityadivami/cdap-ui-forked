@@ -16,12 +16,18 @@
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import DataQualityCircularProgressBar from '..';
+import DataQualityCircularProgressBar from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar';
 
 describe('It Should test DataQualityCircularProgressBar Component', () => {
-  it('Should render the DataQualityCircularProgressBar Component', () => {
+  it('Should render the DataQualityCircularProgressBar Component with data Quality percent as 100', () => {
     render(<DataQualityCircularProgressBar dataQualityPercentValue={100} />);
     const dataQualityPercent = screen.getByTestId(/data-quality-percent/i);
     expect(dataQualityPercent).toHaveTextContent('100');
+  });
+
+  it('Should render the DataQualityCircularProgressBar Component with data Quality percent as 0', () => {
+    render(<DataQualityCircularProgressBar dataQualityPercentValue={0} />);
+    const dataQualityPercent = screen.getByTestId(/data-quality-percent/i);
+    expect(dataQualityPercent).toHaveTextContent('0');
   });
 });
