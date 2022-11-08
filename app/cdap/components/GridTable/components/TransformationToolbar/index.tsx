@@ -94,7 +94,14 @@ export default function({
                       handleMenuOpenClose={toggleMenu}
                     />
                     {showName && (
-                      <Typography className={classes.typoClass} component="div">
+                      <Typography
+                        className={classes.typoClass}
+                        component="div"
+                        data-testid={`toolbar-icon-title-${eachOption.title
+                          .toLowerCase()
+                          .split(' ')
+                          .join('-')}`}
+                      >
                         {eachOption.toolName}
                       </Typography>
                     )}
@@ -116,7 +123,14 @@ export default function({
                       </IconButton>
                     </Tooltip>
                     {showName && (
-                      <Typography className={classes.typoClass} component="div">
+                      <Typography
+                        className={classes.typoClass}
+                        component="div"
+                        data-testid={`toolbar-icon-title-${eachOption.title
+                          .toLowerCase()
+                          .split(' ')
+                          .join('-')}`}
+                      >
                         {eachOption.toolName}
                       </Typography>
                     )}

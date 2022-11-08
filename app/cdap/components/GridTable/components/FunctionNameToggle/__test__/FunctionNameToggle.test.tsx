@@ -14,16 +14,15 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import FunctionNameToggle from "components/GridTable/components/FunctionNameToggle/index";
-import T from "i18n-react";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import FunctionNameToggle from 'components/GridTable/components/FunctionNameToggle/index';
+import T from 'i18n-react';
 
-describe("Testing render FunctionNameToggle component", () => {
+describe('Testing render FunctionNameToggle component', () => {
+  const PREFIX = 'features.WranglerNewUI.GridPage';
 
-  const PREFIX = "features.WranglerNewUI.GridPage";
-
-  it("Should render component with all the parent elements and child elements", () => {
+  it('Should render component with all the parent elements and child elements', () => {
     render(
       <FunctionNameToggle
         setShowName={() => {
@@ -33,7 +32,9 @@ describe("Testing render FunctionNameToggle component", () => {
       />
     );
 
-    const nameToggleParentElement = screen.getAllByTestId(/transformations-toolbar-icons-function-name-toggler/i);
+    const nameToggleParentElement = screen.getAllByTestId(
+      /transformations-toolbar-icons-function-name-toggler/i
+    );
 
     // Check if parent element is rendered on screen
     expect(nameToggleParentElement[0]).toBeInTheDocument();
