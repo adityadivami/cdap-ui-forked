@@ -31,14 +31,14 @@ export default function() {
   const classes = useStyles();
   return (
     <Box className={classes.wrapper} data-testid="workspace-list-parent">
-      <Box className={classes.header}>
+      <Box className={classes.header} data-testid="workspace-list-body">
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
           className={classes.breadcrumb}
         >
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
-            <Typography className={classes.text}>
+            <Typography className={classes.text} data-testid="link-type-wrangle-home">
               {T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome')}
             </Typography>
           </Link>
@@ -54,7 +54,7 @@ export default function() {
         <OngoingDataExplorations fromAddress={WORKSPACES} setLoading={setLoading} />
       </Box>
       {loading && (
-        <Box className={classes.loadingContainer}>
+        <Box className={classes.loadingContainer} data-testid="workspace-loading-icon">
           <LoadingSVG />
         </Box>
       )}
