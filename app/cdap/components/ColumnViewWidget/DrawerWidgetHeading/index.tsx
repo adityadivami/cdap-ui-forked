@@ -25,7 +25,11 @@ export default function({ headingText }: IDrawerWidgetHeading) {
 
   return (
     <Typography className={classes.headingStyles} component="span">
-      <Typography className={classes.headingTextStyles} component="div">
+      <Typography
+        className={classes.headingTextStyles}
+        component="div"
+        data-testid="drawer-widget-heading-text"
+      >
         {headingText}
       </Typography>
       {UnderlineIcon}

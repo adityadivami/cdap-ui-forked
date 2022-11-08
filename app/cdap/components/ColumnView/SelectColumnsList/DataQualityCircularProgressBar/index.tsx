@@ -19,7 +19,7 @@ import React from 'react';
 import { useStyles } from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar/styles';
 import { IDataQualityCircularProgressBarProps } from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar/types';
 
-export default function({ dataQualityPercentValue }: IDataQualityCircularProgressBarProps) {
+export default function({ dataQualityPercentValue, index }: IDataQualityCircularProgressBarProps) {
   const classes = useStyles();
   return (
     <>
@@ -44,7 +44,7 @@ export default function({ dataQualityPercentValue }: IDataQualityCircularProgres
           className={`${
             dataQualityPercentValue === 0 ? classes.dataQualityGreen : classes.dataQualityRed
           }`}
-          data-testid="data-quality-percent"
+          data-testid={`data-quality-percent-${index}`}
         >
           {dataQualityPercentValue.toFixed(1)}%
         </Typography>

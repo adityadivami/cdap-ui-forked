@@ -37,7 +37,7 @@ export default function({ columnData, dataQuality, closeClickHandler }: IColumnV
         closeClickHandler={closeClickHandler}
         searchedTermHandler={searchedTermHandler}
       >
-        <Box className={classes.selectColumnListBodyStyles}>
+        <Box className={classes.selectColumnListBodyStyles} data-testid="select-column-list-parent">
           <SelectColumnsList
             columnData={columnData}
             dataQuality={dataQuality}

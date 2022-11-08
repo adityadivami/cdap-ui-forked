@@ -14,7 +14,14 @@
  * the License.
  */
 
-export interface IDataQualityCircularProgressBarProps {
-  dataQualityPercentValue: number;
-  index: number;
-}
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import DrawerWidgetHeading from 'components/ColumnViewWidget/DrawerWidgetHeading/';
+
+describe('It Should test DrawerWidgetHeading Component', () => {
+  it('Should render DrawerWidgetheading Component and test the column view heading text', () => {
+    render(<DrawerWidgetHeading headingText={'Column View Panel'} />);
+    const headingText = screen.getByTestId('drawer-widget-heading-text');
+    expect(headingText).toHaveTextContent('Column View Panel');
+  });
+});

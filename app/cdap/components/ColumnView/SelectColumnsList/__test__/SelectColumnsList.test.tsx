@@ -18,62 +18,8 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import SelectColumnsList from 'components/ColumnView/SelectColumnsList';
 import T from 'i18n-react';
+import { mockColumnData, mockDataQuality } from 'components/ColumnView/mock/mockDataForColumnView';
 
-const mockColumnData = [
-  {
-    name: 'body_0',
-    label: 'body_0',
-    type: ['Int'],
-  },
-  {
-    name: 'body_1',
-    label: 'body_1',
-    type: ['String'],
-  },
-  {
-    name: 'body_2',
-    label: 'body_2',
-    type: ['String'],
-  },
-  {
-    name: 'body_3',
-    label: 'body_3',
-    type: ['String'],
-  },
-];
-
-const mockDataQuality = {
-  body_0: {
-    general: {
-      'non-null': 100,
-    },
-  },
-  body_1: {
-    general: {
-      'non-null': 66.66667,
-      null: 33.333336,
-    },
-  },
-  body_2: {
-    general: {
-      'non-null': 83.33333,
-      null: 16.666668,
-    },
-    types: {
-      Integer: 33.333336,
-      Text: 33.333336,
-    },
-  },
-  body_3: {
-    general: {
-      'non-null': 50,
-      null: 50,
-    },
-    types: {
-      Text: 16.666668,
-    },
-  },
-};
 describe('It should test SelectColumnList Component', () => {
   it('should render SelectColumnList Component and test column header text for null values', () => {
     render(
@@ -85,10 +31,10 @@ describe('It should test SelectColumnList Component', () => {
     );
     const nullValueHeader = screen.getByTestId('null-values-header');
     expect(nullValueHeader).toHaveTextContent(
-      T.translate(`features.NewWranglerUI.nullValues`).toString()
+      T.translate(`features.WranglerNewUI.nullValues`).toString()
     );
   });
-  it('should render SelectColumnList Component and test ', () => {
+  it('should render SelectColumnList Component and test Column Header Name ', () => {
     render(
       <SelectColumnsList
         columnData={mockColumnData}
@@ -98,10 +44,10 @@ describe('It should test SelectColumnList Component', () => {
     );
     const columnNameHeader = screen.getByTestId('column-name-header');
     expect(columnNameHeader).toHaveTextContent(
-      T.translate(`features.NewWranglerUI.columns (4)`).toString()
+      T.translate(`features.WranglerNewUI.columns (4)`).toString()
     );
   });
-  it('should render SelectColumnList Component and test Column Name and datatype ', () => {
+  it('should render SelectColumnList Component , test Column Name and data quality percent', () => {
     render(
       <SelectColumnsList
         columnData={mockColumnData}
@@ -112,5 +58,8 @@ describe('It should test SelectColumnList Component', () => {
 
     const columnLabelType = screen.getByTestId('each-column-label-type-1');
     expect(columnLabelType).toHaveTextContent('body_1 String');
+
+    const dataQualityCircularProgressBar = screen.getByTestId('data-quality-percent-1');
+    expect(dataQualityCircularProgressBar).toHaveTextContent('33.3%');
   });
 });

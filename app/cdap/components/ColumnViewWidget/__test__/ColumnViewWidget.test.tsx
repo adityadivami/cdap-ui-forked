@@ -15,31 +15,38 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import ColumnView from 'components/ColumnView';
 import React from 'react';
-import { mockColumnData, mockDataQuality } from 'components/ColumnView/mock/mockDataForColumnView';
+import ColumnViewWidget from 'components/ColumnViewWidget';
 
-describe('It Should test Column View Component', () => {
-  it('Should render the Column View Component and the column view panel , select Column list component to be in the document', () => {
+describe('It should test ColumnViewWidget Component', () => {
+  it('Should render Column View Widget Component and click on search icon for the input to be in the screen', () => {
     render(
-      <ColumnView
-        columnData={mockColumnData}
-        dataQuality={mockDataQuality}
-        closeClickHandler={() => jest.fn()}
+      <ColumnViewWidget
+        headingText={'Column View'}
+        closeClickHandler={jest.fn()}
+        searchedTermHandler={jest.fn()}
+        children={<></>}
       />
     );
-    const columnViewParent = screen.getByTestId('column-view-panel-parent');
-    expect(columnViewParent).toBeInTheDocument();
+
+    const searchIcon = screen.getByTestId('search-icon');
+    fireEvent.click(searchIcon);
+
+    const searchInput = screen.getByTestId('search-term-input');
+    fireEvent.change(searchInput, { target: { value: 'body_0' } });
+    expect(searchInput).toHaveValue('body_0');
   });
 
-  it('It Should trigger searchTermHandler Function', () => {
+  it('Should render Column View Widget Component and search the column Name', () => {
     render(
-      <ColumnView
-        columnData={mockColumnData}
-        dataQuality={mockDataQuality}
-        closeClickHandler={() => jest.fn()}
+      <ColumnViewWidget
+        headingText={'Column View'}
+        closeClickHandler={jest.fn()}
+        searchedTermHandler={jest.fn()}
+        children={<></>}
       />
     );
+
     const searchIcon = screen.getByTestId('search-icon');
     fireEvent.click(searchIcon);
 

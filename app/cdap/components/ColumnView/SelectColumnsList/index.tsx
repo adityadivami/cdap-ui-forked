@@ -94,6 +94,7 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
                       {dataQualityList?.length && (
                         <DataQualityCircularProgressBar
                           dataQualityPercentValue={dataQualityList[index].value as number}
+                          index={index}
                         />
                       )}
                     </TableCell>
