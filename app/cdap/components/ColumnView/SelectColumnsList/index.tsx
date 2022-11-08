@@ -65,10 +65,12 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
         <Table aria-label="recipe steps table" stickyHeader>
           <TableHead>
             <TableRow className={classes.recipeStepsTableRowStyles}>
-              <TableCell className={classes.columnLeft}>
+              <TableCell className={classes.columnLeft} data-testid="column-name-header">
                 {`${COLUMNS} (${columnData?.length})`}
               </TableCell>
-              <TableCell className={classes.columnRight}>{NULL_VALUES}</TableCell>
+              <TableCell className={classes.columnRight} data-testid="null-values-header">
+                {NULL_VALUES}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody className={classes.tableBody}>
@@ -77,7 +79,10 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
               filteredColumns.map((eachColumn, index) => (
                 <>
                   <TableRow key={index} className={classes.tableRowContainer}>
-                    <TableCell className={classes.leftSideCell}>
+                    <TableCell
+                      className={classes.leftSideCell}
+                      data-testid={`each-column-label-type-${index}`}
+                    >
                       <Box>
                         {eachColumn?.label}
                         &nbsp;
