@@ -22,9 +22,6 @@ export const useStyles = makeStyles(() => {
     tableNamesList: {
       border: '2px solid red',
     },
-    tableHead: {
-      marginTop: 40,
-    },
     tableBody: {
       '& .MuiTableCell-root': {
         color: '#5F6368',

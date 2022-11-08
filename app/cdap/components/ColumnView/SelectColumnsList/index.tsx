@@ -60,7 +60,7 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
     <section className={classes.columnsCountTextStyles}>
       <TableContainer component={Box} classes={{ root: classes.customTableContainer }}>
         <Table aria-label="recipe steps table" stickyHeader>
-          <TableHead className={classes.tableHead}>
+          <TableHead>
             <TableRow className={classes.recipeStepsTableRowStyles}>
               <TableCell className={classes.columnLeft}>
                 {`${COLUMNS} (${columnData?.length})`}

@@ -13,31 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  columnViewDrawer: {
-    maxHeight: 'calc(100vh - 240px)',
-    border: '1px solid #E0E0E0',
-  },
-  columnViewContainer: {
-    display: 'flex',
-    fontFamily: 'Roboto',
-  },
-  gridTableWrapper: {
-    maxHeight: 'calc(100vh - 240px)',
-    overflowY: 'auto',
-  },
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import DataQualityCircularProgressBar from '..';
+
+describe('It Should test DataQualityCircularProgressBar Component', () => {
+  it('Should render the DataQualityCircularProgressBar Component', () => {
+    render(<DataQualityCircularProgressBar dataQualityPercentValue={100} />);
+    const dataQualityPercent = screen.getByTestId(/data-quality-percent/i);
+    expect(dataQualityPercent).toHaveTextContent('100');
+  });
 });
