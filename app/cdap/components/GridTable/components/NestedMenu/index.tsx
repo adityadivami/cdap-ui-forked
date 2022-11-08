@@ -46,7 +46,6 @@ export default function({
     if (origin === 'parentMenu') {
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
         const updatedAnchors = anchorElement.splice(1, 0, event.currentTarget);
-        console.log('updatedAnchors', updatedAnchors, anchorElement);
         setAnchorElement((prev) => anchorElement);
         setMenuComponentOptions([menuItem?.options]);
       } else {
