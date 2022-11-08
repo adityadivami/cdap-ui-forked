@@ -21,7 +21,7 @@ import * as reducer from 'components/Connections/Create/reducer';
 import history from 'app/cdap/services/history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import ConnectionList from '..';
+import ConnectionList from 'components/ConnectionList';
 import {
   connectionListDummyResFile,
   connectionListDummyResPostGresSql,

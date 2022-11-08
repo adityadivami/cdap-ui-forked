@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Breadcrumb from 'components/ConnectionList/Components/SubHeader';
+import Breadcrumb from '../index';
 import { Router, Route, Switch } from 'react-router';
 import history from 'services/history';
 test('renders BreadCumb Component', () => {
