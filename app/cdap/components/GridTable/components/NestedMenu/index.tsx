@@ -22,6 +22,7 @@ import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/typ
 import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
 import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
 import _ from 'lodash';
+import { reverseArrayWithoutMutating } from 'services/helpers';
 
 export default function({
   menuOptions,
@@ -44,10 +45,12 @@ export default function({
     event.stopPropagation();
     if (origin === 'parentMenu') {
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
-        setAnchorElement((prev) => [...prev, event.currentTarget]);
+        const updatedAnchors = anchorElement.splice(1, 0, event.currentTarget);
+        console.log('updatedAnchors', updatedAnchors, anchorElement);
+        setAnchorElement((prev) => anchorElement);
         setMenuComponentOptions([menuItem?.options]);
       } else {
-        submitMenuOption(menuItem.value, menuItem.supported_dataType);
+        submitMenuOption(menuItem.value, menuItem.supportedDataType);
         setAnchorElement(null);
         handleMenuOpenClose(title);
       }
@@ -85,7 +88,7 @@ export default function({
           );
         }
       } else {
-        submitMenuOption(menuItem.value, menuItem.supported_dataType);
+        submitMenuOption(menuItem.value, menuItem.supportedDataType);
         setAnchorElement(null);
         handleMenuOpenClose(title);
       }

@@ -38,8 +38,8 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         key={index}
         disabled={
           columnType
-            ? item?.supported_dataType?.includes(columnType) ||
-              item?.supported_dataType?.includes('all')
+            ? item?.supportedDataType?.includes(columnType) ||
+              item?.supportedDataType?.includes('all')
               ? false
               : true
             : false
