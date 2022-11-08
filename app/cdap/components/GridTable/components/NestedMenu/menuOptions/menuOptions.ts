@@ -26,16 +26,4 @@ export const MENU_OPTIONS = [
     options: DATATYPE_OPTIONS,
     supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
-  {
-    value: 'test tt',
-    label: 'test tt',
-    options: [
-      {
-        value: 'test new',
-        label: 'test new',
-        supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
-      },
-    ],
-    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
-  },
 ];
