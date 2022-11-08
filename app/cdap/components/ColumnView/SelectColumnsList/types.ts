@@ -22,6 +22,15 @@ export interface IHeaderNamesList {
 
 export interface ISelectColumnListProps {
   columnData: IHeaderNamesList[];
-  dataQuality: Array<Record<string, unknown>>;
+  dataQuality: IDataQuality;
   searchTerm: string;
+}
+
+interface IDataQuality {
+  [key: string]: unknown;
+}
+
+export interface IDataQualityRecord {
+  label: string;
+  value: number;
 }

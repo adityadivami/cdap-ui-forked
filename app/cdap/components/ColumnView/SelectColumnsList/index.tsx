@@ -27,17 +27,20 @@ import React, { useEffect, useState } from 'react';
 import { COLUMNS, NULL_VALUES } from 'components/ColumnView/constants';
 import { useStyles } from 'components/ColumnView/SelectColumnsList/styles';
 import { prepareDataQualtiy } from 'components/ColumnView/SelectColumnsList/utils';
-import { ISelectColumnListProps } from 'components/ColumnView/SelectColumnsList/types';
+import {
+  ISelectColumnListProps,
+  IDataQualityRecord,
+} from 'components/ColumnView/SelectColumnsList/types';
 import DataQualityCircularProgressBar from 'components/ColumnView/SelectColumnsList/DataQualityCircularProgressBar';
 
 export default function({ columnData, dataQuality, searchTerm }: ISelectColumnListProps) {
   const classes = useStyles();
   const [filteredColumns, setFilteredColumns] = useState(columnData);
-  const [dataQualityValue, setDataQualityValue] = useState(dataQuality);
+  const [dataQualityList, setDataQualityList] = useState<IDataQualityRecord[]>([]);
 
   useEffect(() => {
     const getPreparedDataQuality = prepareDataQualtiy(dataQuality, columnData);
-    setDataQualityValue(getPreparedDataQuality);
+    setDataQualityList(getPreparedDataQuality);
   }, []);
 
   useEffect(() => {
@@ -83,9 +86,9 @@ export default function({ columnData, dataQuality, searchTerm }: ISelectColumnLi
                       </Box>
                     </TableCell>
                     <TableCell className={classes.nullValuesContainer}>
-                      {dataQualityValue.length && (
+                      {dataQualityList?.length && (
                         <DataQualityCircularProgressBar
-                          dataQualityPercentValue={dataQualityValue[index]?.value as number}
+                          dataQualityPercentValue={dataQualityList[index].value as number}
                         />
                       )}
                     </TableCell>
