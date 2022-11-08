@@ -44,7 +44,7 @@ export default function({ dataQualityPercentValue, index }: IDataQualityCircular
           className={`${
             dataQualityPercentValue === 0 ? classes.dataQualityGreen : classes.dataQualityRed
           }`}
-          data-testid="data-quality-percent"
+          data-testid={`data-quality-percent-${index}`}
         >
           {dataQualityPercentValue.toFixed(1)}%
         </Typography>

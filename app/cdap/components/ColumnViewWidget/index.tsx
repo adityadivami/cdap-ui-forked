@@ -38,7 +38,11 @@ export default function({
   };
 
   return (
-    <Box className={classes.drawerContainerStyles} role="presentation">
+    <Box
+      className={classes.drawerContainerStyles}
+      role="presentation"
+      data-testid="column-view-panel-parent"
+    >
       <header className={classes.headerStyles}>
         <div className={classes.headerTextWithBackIconStyles}>
           <DrawerWidgetHeading headingText={headingText} />
@@ -53,8 +57,14 @@ export default function({
               ref={ref}
               onFocus={() => setFocused(true)}
               onBlur={() => setFocused(false)}
+              data-testid="search-term-input"
             />
-            <Typography className={classes.searchIcon} component="span" onClick={handleFocus}>
+            <Typography
+              className={classes.searchIcon}
+              component="span"
+              onClick={handleFocus}
+              data-testid="search-icon"
+            >
               <SearchIcon />
             </Typography>
           </Box>
