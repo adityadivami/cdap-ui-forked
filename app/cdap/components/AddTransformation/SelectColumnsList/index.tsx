@@ -89,7 +89,7 @@ export default function({
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName && functionDetail.isMoreThanTwo
     );
-    if (selectedColumns.length === 0 || selectedColumns.length < 2) {
+    if (selectedColumns?.length === 0 || selectedColumns?.length < 2) {
       return false;
     } else if (multiSelect.length) {
       return false;
