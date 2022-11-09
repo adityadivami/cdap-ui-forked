@@ -20,47 +20,50 @@ import { useStyles } from 'components/ColumnInsights/Components/ColumnToggleButt
 import { IDataQualityProps } from 'components/ColumnInsights/Components/ColumnToggleButton/types';
 import T from 'i18n-react';
 import React, { useState } from 'react';
-import RenderLabel from '../common/RenderLabel';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/';
+import { PREFIX } from 'components/ColumnInsights/constants';
+import styled from 'styled-components';
+import ToggleButton from '../ToggleButton';
 
-const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+const StyledDataQualityBox = styled(Box)`
+    &&& { 
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background-color: rgb(255, 255, 255);
+      justify-content: center
+      filter : drop-shadow(0px 2px 4px rgba(68, 132, 245, 0.25));
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+`;
 
 export default function({ dataQuality }: IDataQualityProps) {
   const classes = useStyles();
   const [isSelected, setIsSelected] = useState<number>(0);
   return (
-    <Box>
-      <Box className={classes.dataQualityCard}>
-        <Box
-          className={
-            isSelected == 1
-              ? `${classes.isSelected} ${classes.missingCountBox}`
-              : classes.missingCountBox
-          }
-          onClick={() => setIsSelected(1)}
-        >
-          <RenderLabel type="simple" fontSize={14}>
-            <>
-              {T.translate(`${PREFIX}.missingNull`).toString()}
-              {` ${dataQuality.missingNullValueCount} (${dataQuality.missingNullValuePercentage}%)`}
-            </>
-          </RenderLabel>
-        </Box>
-        <Box
-          className={
-            isSelected == 2
-              ? `${classes.isSelected} ${classes.invalidCountBox}`
-              : classes.invalidCountBox
-          }
-          onClick={() => setIsSelected(2)}
-        >
-          <RenderLabel type="simple" fontSize={14} color={`${red[600]}`}>
-            <>
-              {T.translate(`${PREFIX}.invalid`)}
-              {` ${dataQuality?.invalidValueCount} (${dataQuality?.invalidValuePercentage}%)`}
-            </>
-          </RenderLabel>
-        </Box>
-      </Box>
-    </Box>
+    <StyledDataQualityBox>
+      <ToggleButton
+        type={'left'}
+        setIsSelected={setIsSelected}
+        className={isSelected === 1 ? classes.isSelected : ''}
+      >
+        <>
+          {T.translate(`${PREFIX}.missingNull`).toString()}
+          {` ${dataQuality.missingNullValueCount} (${dataQuality.missingNullValuePercentage}%)`}
+        </>
+      </ToggleButton>
+
+      <ToggleButton
+        type={'right'}
+        setIsSelected={setIsSelected}
+        className={isSelected === 2 ? classes.isSelected : ''}
+      >
+        <>
+          {T.translate(`${PREFIX}.null`)}
+          {` ${dataQuality?.invalidValueCount} (${dataQuality?.invalidValuePercentage}%)`}
+        </>
+      </ToggleButton>
+    </StyledDataQualityBox>
   );
 }

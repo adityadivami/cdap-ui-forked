@@ -21,8 +21,7 @@ import ColumnDataQuality from 'components/ColumnInsights/Components/ColumnDataQu
 import ColumnDetails from 'components/ColumnInsights/Components/ColumnDetails/index';
 import { IColumnData, IColumnInsightsProps } from 'components/ColumnInsights/types';
 import T from 'i18n-react';
-
-const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+import { PREFIX } from 'components/ColumnInsights/constants';
 
 export default function({
   columnData,

@@ -24,8 +24,7 @@ import { IRecords } from 'components/GridTable/types';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
 import styled from 'styled-components';
 import blue from '@material-ui/core/colors/blue';
-
-const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+import { PREFIX } from 'components/ColumnInsights/constants';
 
 const StyledBarChart = styled(BarChart)`
   background: 'blue';

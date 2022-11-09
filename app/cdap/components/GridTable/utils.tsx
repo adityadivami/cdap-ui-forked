@@ -188,9 +188,9 @@ export const checkAlphaNumericAndSpaces = (values: IRecords[], columnName: strin
   return returnValue;
 };
 
-/* Checks whether a string is number*/
+/* Checks whether a string has number*/
 const isNumber = (str: string) => {
-  return /^\d+$/.test(str);
+  return /\d/.test(str);
 };
 
 /*Checks whether a string has leading space */

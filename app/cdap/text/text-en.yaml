@@ -3418,7 +3418,7 @@ features:
       containsLetter: Contains Letter
       characterCount: Character count
       distinct: Distinct
-      invalid: Invalid
+      null : "Null"
       barChartYLabel: Quantity
       unknown: unknown
       missingNull: Missing/Null
@@ -3437,11 +3437,11 @@ features:
     GridTable:
       missingNull: Missing/Null
       containsLetterNumberLeadingTrailingSpaces: Contains letters, numbers, leading and trailing spaces
-      containsLetterNumber: Contains Letter and Number
-      containsLetterLeadingTrailing: Contains Letter, leading and trailing spaces
-      containsLetterLeading: Contains Letter and leading spaces
-      containsLetterTrailing: Contains Letter and trailing spaces
-      containsLetterOnly: Contains Letter
-      containsNumberOnly: Contains Number
+      containsLetterNumber: Contains letters and numbers
+      containsLetterLeadingTrailing: Contains letters, leading and trailing spaces
+      containsLetterLeading: Contains letters and leading spaces
+      containsLetterTrailing: Contains letters and trailing spaces
+      containsLetterOnly: Contains letters
+      containsNumberOnly: Contains numbers
       
 ...

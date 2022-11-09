@@ -14,15 +14,4 @@
  * the License.
  */
 
-import { blue } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/styles';
-
-export const useStyles = makeStyles(() => {
-  return {
-    isSelected: {
-      background: '#F3F6F9',
-      border: `1px solid ${blue[500]} !important`,
-      boxShadow: 'inset 2px 2px 2px rgba(68, 132, 245, 0.4)',
-    },
-  };
-});
+export const PREFIX = 'features.NewWranglerUI.ColumnInsights';

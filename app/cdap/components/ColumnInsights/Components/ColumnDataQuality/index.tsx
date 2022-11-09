@@ -22,8 +22,7 @@ import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/Co
 import red from '@material-ui/core/colors/red';
 import T from 'i18n-react';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
-
-const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+import { PREFIX } from 'components/ColumnInsights/constants';
 
 export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const classes = useStyles();

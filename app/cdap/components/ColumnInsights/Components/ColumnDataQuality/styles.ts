@@ -23,14 +23,6 @@ export const useStyles = makeStyles(() => {
       padding: '20px 0',
       borderBottom: `1px solid ${grey[300]}`,
     },
-    columnInsightsColumnName: {
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 16,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[900],
-    },
     qualityBar: {
       display: 'flex',
       marginTop: 20,

@@ -24,8 +24,7 @@ import { IColumnDetailsProps } from 'components/ColumnInsights/Components/Column
 import T from 'i18n-react';
 import RenderLabel from '../common/RenderLabel';
 import { red } from '@material-ui/core/colors';
-
-const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+import { PREFIX } from 'components/ColumnInsights/constants';
 
 export default function({
   columnName,
@@ -80,9 +79,9 @@ export default function({
     }
   };
 
-  const onEnter = (e) => {
-    if (e.target.value !== columnName && !invalidInput && e.keyCode === 13) {
-      renameColumnNameHandler(columnName, e.target.value);
+  const onEnter = (e: React.KeyboardEvent<HTMLElement>) => {
+    if ((e.target as HTMLInputElement).value !== columnName && !invalidInput && e.keyCode === 13) {
+      renameColumnNameHandler(columnName, (e.target as HTMLInputElement).value);
       setCanEdit(false);
     }
   };
