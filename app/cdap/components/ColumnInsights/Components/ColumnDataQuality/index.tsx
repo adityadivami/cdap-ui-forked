@@ -43,7 +43,6 @@ export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
           className={classes.empty}
           style={{
             width: `${calculatedEmptyValue}%`,
-            border: `${calculatedEmptyValue === 0 ? 'none' : `1px solid ${red[600]}`}`,
           }}
         />
       </Box>

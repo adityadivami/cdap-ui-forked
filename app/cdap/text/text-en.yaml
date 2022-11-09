@@ -3421,7 +3421,7 @@ features:
       null : "Null"
       barChartYLabel: Quantity
       unknown: unknown
-      missingNull: Missing/Null
+      empty: Empty
       options:
         labelString: String
         labelBoolean: Boolean

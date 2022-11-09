@@ -49,7 +49,7 @@ export default function({ dataQuality }: IDataQualityProps) {
         className={isSelected === 1 ? classes.isSelected : ''}
       >
         <>
-          {T.translate(`${PREFIX}.missingNull`).toString()}
+          {T.translate(`${PREFIX}.empty`).toString()}
           {` ${dataQuality.missingNullValueCount} (${dataQuality.missingNullValuePercentage}%)`}
         </>
       </ToggleButton>

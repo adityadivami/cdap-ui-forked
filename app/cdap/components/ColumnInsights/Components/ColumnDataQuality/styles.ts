@@ -28,17 +28,16 @@ export const useStyles = makeStyles(() => {
       marginTop: 20,
     },
     filled: {
-      backgroundColor: '#4BAF4F',
+      backgroundColor: '#E0E0E0',
       display: 'inline-block',
       height: 5,
-      border: '1px solid #4BAF4F',
+
       borderRadius: 10,
     },
     empty: {
-      backgroundColor: red[600],
+      backgroundColor: red.A100,
       display: 'inline-block',
       height: 5,
-      border: `1px solid ${red[600]}`,
       borderRadius: 10,
     },
   };
