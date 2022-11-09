@@ -233,7 +233,7 @@ export default function GridTable() {
   }, [gridData]);
 
   return (
-    <Box>
+    <Box data-testid="grid-table-container">
       <Breadcrumb workspaceName={wid} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen

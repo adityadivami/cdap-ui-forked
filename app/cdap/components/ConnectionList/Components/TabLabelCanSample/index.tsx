@@ -100,7 +100,11 @@ export default function TabLabelCanSample({
         <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
           {label}
         </Typography>
-        <button className="wranglingHover" onClick={() => onExplore(entity)}>
+        <button
+          className="wranglingHover"
+          onClick={() => onExplore(entity)}
+          data-testid="connections-tab-explore"
+        >
           <WrangleIcon />
           <Typography variant="body2" className={classes.wrangleButton}>
             Wrangle
@@ -109,11 +113,15 @@ export default function TabLabelCanSample({
       </Box>
     </CustomTooltip>
   ) : (
-    <Box className={classes.labelsContainerCanSample}>
+    <Box className={classes.labelsContainerCanSample} data-testid="connections-tab-label-simple">
       <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
         {label}
       </Typography>
-      <button className="wranglingHover" onClick={() => onExplore(entity)}>
+      <button
+        className="wranglingHover"
+        onClick={() => onExplore(entity)}
+        data-testid="connections-tab-explore"
+      >
         <WrangleIcon />
         <Typography variant="body2" className={classes.wrangleButton}>
           Wrangle

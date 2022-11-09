@@ -20,7 +20,7 @@ import { ITypographyTextComponentProps } from './types';
 
 export default function TypographyComponent({ className, label }: ITypographyTextComponentProps) {
   return (
-    <Typography className={className} color="textSecondary">
+    <Typography className={className} color="textSecondary" data-testid="typography-component-test">
       {label}
     </Typography>
   );
