@@ -43,7 +43,7 @@ export default function({
   const classes = useStyles();
 
   return (
-    <TableContainer component={Box} data-testid='column-table-parent'>
+    <TableContainer component={Box} data-testid="column-table-parent">
       <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
         <TableHead>
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
@@ -56,7 +56,7 @@ export default function({
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
-              data-testid='panel-columns'
+              data-testid="panel-columns"
             >
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
             </TableCell>
@@ -64,7 +64,7 @@ export default function({
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
-              data-testid='panel-values'
+              data-testid="panel-values"
             >
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
             </TableCell>

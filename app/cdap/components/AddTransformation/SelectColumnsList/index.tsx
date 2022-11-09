@@ -125,7 +125,7 @@ export default function({
   };
 
   return (
-    <section className={classes.columnsCountTextStyles} data-testid='select-column-list-parent'>
+    <section className={classes.columnsCountTextStyles} data-testid="select-column-list-parent">
       <div className={classes.selectColumnsHeaderStyles}>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
@@ -154,9 +154,7 @@ export default function({
               {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
             </Typography>
             <Typography component="div" className={classes.subHeaderMessage}>
-              {T.translate(
-                `${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`
-              )}
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
             </Typography>
           </Box>
         </Box>
