@@ -67,7 +67,7 @@ export interface IConnectionTabsProps {
   tabsData: IFilteredData;
   handleChange: (entity: IConnectorTabType, index: number) => void;
   value: string;
-  index: number;
+  columnIndex: number;
   connectionId: string;
   setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
   toggleLoader?: (value: boolean, isError?: boolean) => void;

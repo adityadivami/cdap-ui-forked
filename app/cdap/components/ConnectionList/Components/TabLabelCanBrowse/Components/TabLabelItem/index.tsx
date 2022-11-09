@@ -20,6 +20,16 @@ import TabLabelItemLabel from 'components/ConnectionList/Components/TabLabelCanB
 import { useStyles } from 'components/ConnectionList/Components/TabLabelCanBrowse/styles';
 import { ITabLabelProps } from 'components/ConnectionList/Components/TabLabelCanBrowse/types';
 import React from 'react';
+import styled from 'styled-components';
+
+const LabelContainerBox = styled(Box)`
+  &&& {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;x
+  }
+`;
 
 export default function({
   icon,
@@ -32,7 +42,7 @@ export default function({
   const classes = useStyles();
 
   return (
-    <Box className={classes.labelContainerBox} data-testid={labelContainerTestId}>
+    <LabelContainerBox data-testid={labelContainerTestId}>
       <Box className={classes.labelsContainer}>
         {icon && <Box className={classes.connectorTypeIcon}>{icon}</Box>}
         <TabLabelItemLabel
@@ -50,6 +60,6 @@ export default function({
           <ChevronRightRounded className={classes.rightArrowSelected} />
         </Box>
       </Box>
-    </Box>
+    </LabelContainerBox>
   );
 }

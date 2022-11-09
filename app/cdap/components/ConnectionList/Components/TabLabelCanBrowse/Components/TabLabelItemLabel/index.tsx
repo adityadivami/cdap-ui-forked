@@ -15,30 +15,38 @@
  */
 
 import { Typography } from '@material-ui/core';
-import { useStyles } from 'components/ConnectionList/Components/TabLabelCanBrowse/styles';
 import { ITabLabelItemProps } from 'components/ConnectionList/Components/TabLabelCanBrowse/types';
 import React, { Fragment } from 'react';
+import styled from 'styled-components';
+
+const RenderTabLabel = styled(Typography)`
+  &&& {
+    max-width: 153px;
+    white-space: nowrap;
+    font-size: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+  }
+`;
+
+const RenderCount = styled(Typography)`
+  &&& {
+    font-size: 16px;
+    overflow: hidden;
+  }
+`;
 
 export default function({ labelTestId, label, count, myLabelRef }: ITabLabelItemProps) {
-  const classes = useStyles();
-
   return (
     <Fragment>
-      <Typography
-        variant="body1"
-        className={classes.labelStyles}
-        ref={myLabelRef}
-        data-testid={labelTestId}
-        component="span"
-      >
+      <RenderTabLabel variant="body1" ref={myLabelRef} data-testid={labelTestId} component="span">
         {label}
-      </Typography>
+      </RenderTabLabel>
       {count && (
-        <Typography
-          variant="body1"
-          className={classes.labelStylesCount}
-          component="span"
-        >{`(${count})`}</Typography>
+        <RenderCount variant="body1" component="span">
+          {`(${count})`}
+        </RenderCount>
       )}
     </Fragment>
   );
