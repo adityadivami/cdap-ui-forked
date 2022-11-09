@@ -40,7 +40,7 @@ public class TransformationToolbar {
         try {
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
-            String url=SeleniumDriver.getDriver().getCurrentUrl();
+            String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         } catch (Exception e) {
             System.err.println("error:" + e);
@@ -58,7 +58,8 @@ public class TransformationToolbar {
                     flag = false;
                 }
             }
-            Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("transformations-toolbar-container")));
+            Assert.assertTrue(Helper.isElementExists
+                    (Helper.getCssSelectorByDataTestId("transformations-toolbar-container")));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -77,7 +78,8 @@ public class TransformationToolbar {
     public void clickOnTheSliderButton(String testId, String iconLabelName) {
         try {
             WaitHelper.waitForPageToLoad();
-            WebElement ele = Helper.locateElementByXPath("//input[@data-testid='transformations-toolbar-icons-function-name-toggler']");
+            WebElement ele = Helper.locateElementByXPath
+                    ("//input[@data-testid='transformations-toolbar-icons-function-name-toggler']");
             Actions action = new Actions(SeleniumDriver.getDriver());
             WaitHelper.waitForPageToLoad();
             action.moveToElement(ele).perform();
@@ -85,8 +87,8 @@ public class TransformationToolbar {
             WaitHelper.waitForPageToLoad();
             WebElement icon = Helper.locateElementByTestId("toolbar-icon-title-" + testId);
             String text = icon.getText();
-            String actualText = iconLabelName;
-            Assert.assertEquals(text, actualText);
+            String actual = iconLabelName;
+            Assert.assertEquals(text, actual);
         } catch (Exception e) {
             System.err.println("error: " + e);
         }
