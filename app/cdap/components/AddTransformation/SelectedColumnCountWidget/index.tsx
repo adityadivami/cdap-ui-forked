@@ -24,13 +24,11 @@ export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProp
   const classes = useStyles();
 
   return (
-    <div className={classes.columnsCountTextStyles} data-testid='count-widget-parent'>
+    <div className={classes.columnsCountTextStyles} data-testid="count-widget-parent">
       {selectedColumnsCount
         ? selectedColumnsCount > 10
           ? selectedColumnsCount
-          : `${T.translate(
-              `${SELECT_COLUMN_LIST_PREFIX}.zero`
-            )}${selectedColumnsCount}`
+          : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.zero`)}${selectedColumnsCount}`
         : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)}`}
       &nbsp;{T.translate(`${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`)}
     </div>
