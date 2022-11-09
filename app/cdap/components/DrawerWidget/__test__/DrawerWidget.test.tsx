@@ -14,14 +14,14 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import history from "services/history";
-import React from "react";
-import { Route, Router, Switch } from "react-router";
-import DrawerWidget from "components/DrawerWidget";
+import { render, screen } from '@testing-library/react';
+import history from 'services/history';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
+import DrawerWidget from 'components/DrawerWidget';
 
-describe("It should test DrawerWidget Component", () => {
-  it("Should test whether DrawerWidget Component is rendered with showDivider,showBackIcon,openDrawer as true", () => {
+describe('It should test DrawerWidget Component', () => {
+  it('Should test whether DrawerWidget Component is rendered with showDivider,showBackIcon,openDrawer as true', () => {
     render(
       <Router history={history}>
         <Switch>
@@ -29,13 +29,12 @@ describe("It should test DrawerWidget Component", () => {
             <DrawerWidget
               showDivider
               headerActionTemplate={<h1>Test</h1>}
-              headingText={""}
+              headingText={''}
               openDrawer
               closeClickHandler={function(): void {
-                throw new Error("Function not implemented.");
+                throw new Error('Function not implemented.');
               }}
               showBackIcon
-              
             />
           </Route>
         </Switch>
