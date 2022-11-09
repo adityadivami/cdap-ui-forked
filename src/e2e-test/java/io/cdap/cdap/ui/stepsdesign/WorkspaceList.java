@@ -34,30 +34,41 @@ public class WorkspaceList {
 
     @Then("Click on the View all option")
     public void clickOnTheViewAllOption() {
+        try {
         WaitHelper.waitForPageToLoad();
         ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-explorations-view-all"));
+    } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
     }
 
     @Then("Select & Click on the WorkSpace")
     public void selectAndClickOnTheWorkspace() {
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
     }
 
     @Then("Click on the Workspace link")
     public void clickOnTheWorkspaceLink() {
-        WaitHelper.waitForPageToLoad();
-        boolean flag = true;
-        while (flag == true) {
-            if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
-                flag = true;
-            } else {
-                flag = false;
+        try {
+            WaitHelper.waitForPageToLoad();
+            boolean flag = true;
+            while (flag == true) {
+                if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+                    flag = true;
+                } else {
+                    flag = false;
+                }
             }
-        }
             ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-data-sources-text"));
+        } catch (Exception e) {
+            System.err.println("error:" + e);
         }
-
+    }
 
     @Then("Check if the user is on workspace list")
     public void checkTheUserIsOnTheWorkspaceListOrNot() {
