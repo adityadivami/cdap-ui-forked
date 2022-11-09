@@ -18,13 +18,22 @@
 Feature: TransformationToolbar
 
   @ADMIN_TEST
-  Scenario: Go through the Transformation Toolbar
+  Scenario Outline: Go through the Transformation Toolbar
     Given Navigate to Home Page
     Then Click on the Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
-    Then Verify if all icons are displayed on Toolbar
-    Then Hover on the Icons and verify if the tool tip is displayed
-    Then Click on the function names toggle
-    Then Verify if the label name is displayed for appropriate icon
+    Then Verify if all icons are displayed on Toolbar with "<testId>"
+    Then Click on the function names toggle with testId as "<testId>" and "<iconLabelName>"
     Then Verify by Clicking on the Up and Down arrow icon
-#    Then Click on the Structure icon and verify the menu is displayed
+    Examples:
+      | testId | iconLabelName |
+      | undo |  Undo |
+      | redo |  Redo |
+      | null |  Null |
+      | column | Column |
+      | structure | Structure |
+      | fragment | Fragment |
+      | math     | Math     |
+      | security | Security |
+      | other | Other |
+      | grid | Grid |
