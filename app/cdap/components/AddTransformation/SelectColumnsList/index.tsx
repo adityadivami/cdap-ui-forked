@@ -38,7 +38,7 @@ export default function({
   dataQuality,
   transformationName,
   selectedColumns,
-}: ISelectColumnListProps) {
+}: ISelectColumnsListProps) {
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);

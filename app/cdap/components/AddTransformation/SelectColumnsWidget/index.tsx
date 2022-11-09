@@ -21,6 +21,8 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import { ISelectColumnsWidgetProps } from 'components/AddTransformation/SelectColumnsWidget/types';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
+import BoxContainer from 'components/common/BoxContainer';
+import TypographyText from 'components/common/TypographyText';
 
 export default function({
   selectedColumns,
@@ -31,36 +33,43 @@ export default function({
 
   const singleColumnSelect = (
     <>
-      <div
-        className={classes.functionHeadingTextStyles}
-        id="select-column-title"
-        data-testid="select-column-title"
-      >
-        {T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
-      </div>
-      <div
-        className={classes.quickSelectTextStyles}
-        id="select-column-subtitle"
-        data-testid="select-column-subtitle"
-      >
-        {T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}
-      </div>
+      <TypographyText
+        component="p"
+        size="16px"
+        weight={600}
+        type="simple"
+        dataTestId="select-column-title"
+        text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`).toString()}
+      />
+      <BoxContainer type="SimpleBox" padding="10px 0 0">
+        <TypographyText
+          component="p"
+          size="14px"
+          weight={400}
+          type="simple"
+          dataTestId="select-column-subtitle"
+          text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`).toString()}
+        />
+      </BoxContainer>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
-          <Typography component="p" variant="body1" className={classes.quickSelectTextStyles}>
-            {index + 1}.&nbsp; {item.label}
-          </Typography>
+          <BoxContainer type="SimpleBox" padding="5px 0">
+            <TypographyText
+              component="p"
+              size="14px"
+              weight={400}
+              type="simple"
+              dataTestId="selected-function-name"
+              text={`${index + 1}. ${item.label}`}
+            />
+          </BoxContainer>
         ))
       ) : (
         <ButtonWidget
           buttonText={
             multipleColumnSelected?.filter((el) => el.value === transformationName).length > 0
-              ? T.translate(
-                  `${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`
-                ).toString()
-              : T.translate(
-                  `${ADD_TRANSFORMATION_PREFIX}.selectColumn`
-                ).toString()
+              ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`).toString()
+              : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString()
           }
           className={classes.selectButtonStyles}
           onClick={() => handleSelectColumn(false)}

@@ -18,41 +18,13 @@ import { makeStyles } from '@material-ui/styles';
 import { blue } from '@material-ui/core/colors';
 export const useStyles = makeStyles(() => {
   return {
-    functionHeadingTextStyles: {
-      fontStyle: 'normal',
-      fontWeight: 600,
-      fontSize: 16,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#5F6368',
-    },
-    greenCheckIconStyles: {
-      width: 20,
-      height: 20,
-      marginRight: 5,
-    },
-    selectedColumnTickIcon: {
-      display: 'flex',
-      alignItems: 'center',
-      marginBottom: 10,
-      justifyContent: 'space-between',
-    },
-    quickSelectTextStyles: {
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 14,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#5F6368',
-      marginTop: 10,
-    },
     selectButtonStyles: {
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 15,
       lineHeight: '26px',
-      letterSpacing: '0.46px',
-      color: '#4681F4;',
+      letterSpacing: 0.46,
+      color: blue[500],
       textTransform: 'none',
       marginTop: 15,
     },

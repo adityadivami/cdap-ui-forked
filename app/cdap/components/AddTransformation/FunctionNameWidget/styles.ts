@@ -22,33 +22,6 @@ export const useStyles = makeStyles(() => {
       padding: '15px 0',
       borderBottom: '1px solid #DADCE0',
     },
-    funtionSectionWrapperStyles: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 10,
-    },
-    functionHeadingTextStyles: {
-      fontStyle: 'normal',
-      fontWeight: 600,
-      fontSize: 16,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#5F6368',
-    },
-    functionInfoSectionStyles: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '8px',
-    },
-    functionTextStyles: {
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 16,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#5F6368',
-    },
     infoIcon: {
       color: blue[500],
       fontSize: 20,

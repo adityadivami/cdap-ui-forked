@@ -20,34 +20,38 @@ import { useStyles } from 'components/AddTransformation/FunctionNameWidget/style
 import { TickIcon } from 'components/AddTransformation/iconStore';
 import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
+import BoxContainer from 'components/common/BoxContainer';
+import TypographyText from 'components/common/TypographyText';
 
 export default function({ transformationName }: IFunctionNameWidgetProps) {
   const classes = useStyles();
 
   return (
     <section className={classes.functionSectionStyles}>
-      <div className={classes.funtionSectionWrapperStyles}>
-        <div
-          className={classes.functionHeadingTextStyles}
-          data-testid="function-name-head"
-          id="function-name-head"
-        >
-          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}
-        </div>
+      <BoxContainer type="FlexBox" justifyContent="space-between">
+        <TypographyText
+          component="span"
+          size="16px"
+          weight={600}
+          type="simple"
+          dataTestId="function-name-head"
+          text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`).toString()}
+        />
         {TickIcon}
-      </div>
-      <div className={classes.functionInfoSectionStyles}>
-        <span
-          data-testid="selected-function-name"
-          id="selected-function-name"
-          className={classes.functionTextStyles}
-        >
-          {transformationName}
-        </span>
+      </BoxContainer>
+      <BoxContainer type="SimpleBox" justifyContent="space-between" padding="10px 0 0 0">
+        <TypographyText
+          component="span"
+          size="16px"
+          weight={400}
+          type="simple"
+          dataTestId="selected-function-name"
+          text={transformationName}
+        />
         <span data-testid="selected-function-info" id="selected-function-info">
           <InfoOutlinedIcon className={classes.infoIcon} />
         </span>
-      </div>
+      </BoxContainer>
     </section>
   );
 }
