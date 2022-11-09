@@ -319,14 +319,6 @@ features:
       message1: 'Create a new namespace '
       message2: '(Note: You will require ADMIN privileges for creating a namespace)'
     mainMessage: ' You are not authorized to access any existing namespace'
-  Breadcrumb:
-    labels:
-      connectionsList: 'Data Sources'
-      wrangleHome: 'Home'
-      loadToGrid: 'Wrangle'
-    params:
-      wrangleHome: 'home'
-      connectionsList: 'datasources'
   Cloud:
     Profiles:
       common:
@@ -2098,10 +2090,6 @@ features:
         distributed: Distributed
         localSandbox: Local Sandbox
     rulesmgmt: Rules
-  NoRecordScreen:
-    gridTable:
-      title: 'No rows left in this sample'
-      subtitle: 'Remove some recipe steps to view some data'
   NUX:
     ControlCenter:
       text: '{featureName} allows you to create, manage, operate, and monitor datasets and applications.'
@@ -3440,19 +3428,36 @@ features:
     labels:
       loadToGrid: 'Wrangle'
   WranglerNewUI:
+    Breadcrumb:
+      labels:
+        connectionsList: 'Data Sources'
+        loadToGrid: 'Wrangle'
+        workSpaces: 'Workspaces'
+        wrangleHome: 'Home'
+      params:
+        connectionsList: 'datasources'
+        workSpaces: 'workspace-list'
+        wrangleHome: 'home'
+    NoRecordScreen:
+      gridTable:
+        subtitle: 'Remove some recipe steps to view some data'
+        title: 'No rows left in this sample'
+      workspacesList:
+        subtitle: 'Please start data exploration to view ongoing workspaces'
+        title: 'No ongoing workspaces to display'
     OnGoingDataExplorations:
       labels:
+       connectorType: connectorType
+       connectionName: connectionName
+       count: count
+       dataQuality: dataQuality
+       icon: icon
+       iconWithText: iconWithText
        importedDataset: Imported Dataset
        nullValues: Null values
-       recipeSteps: Recipe steps
-       connectorType: connectorType
-       icon: icon
-       connectionName: connectionName
-       workspaceName: workspaceName
-       iconWithText: iconWithText
-       text: text
-       recipeStepsKey: recipeSteps
-       dataQuality: dataQuality
        percentageWithText: percentageWithText
+       recipeSteps: Recipe steps
+       recipeStepsKey: recipeSteps
+       text: text
        workspaceId: workspaceId
-       count: count
+       workspaceName: workspaceName

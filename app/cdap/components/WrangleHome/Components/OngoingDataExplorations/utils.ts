@@ -31,13 +31,14 @@ import {
   TEXT,
   WORKPSACE_NAME,
   WORKSPACE_ID,
-} from 'components/WrangleHome/Components/OngoingDataExplorations/Constants';
+} from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 import T from 'i18n-react';
 
 const PREFIX = 'features.WranglerNewUI.OnGoingDataExplorations.labels';
 
 export const getUpdatedExplorationCards = (
-  existingExplorationCards: IExistingExplorationCard[]
+  existingExplorationCards: IExistingExplorationCard[],
+  cardCount: number
 ) => {
   // Massaging the data to map the API response to the Ongoing Data Exploration List
 
@@ -50,8 +51,46 @@ export const getUpdatedExplorationCards = (
     const matchingConnector = connectorsWithIcons?.find(
       (eachConnector) => eachConnector.name === connectorName
     );
-    console.log(matchingConnector?.SVG, 'icoon');
     return matchingConnector?.SVG;
+  };
+
+  const getUpdatedOngoingExplorationData = (keys, eachExplorationCard) => {
+    const onGoingDatExplorationData = {} as IOnGoingDataExplorationsData;
+    switch (keys) {
+      case CONNECTOR_TYPE:
+        onGoingDatExplorationData.icon = getIconForConnector(eachExplorationCard[keys]);
+        onGoingDatExplorationData.label = eachExplorationCard[keys];
+        onGoingDatExplorationData.type = ICON;
+        break;
+      case CONNECTION_NAME:
+        onGoingDatExplorationData.label = eachExplorationCard[keys];
+        onGoingDatExplorationData.type = ICON_WITH_TEXT;
+        break;
+      case WORKPSACE_NAME:
+        onGoingDatExplorationData.label = eachExplorationCard[keys];
+        onGoingDatExplorationData.type = TEXT;
+        break;
+      case RECIPE_STEPS_KEY:
+        onGoingDatExplorationData.label = [
+          eachExplorationCard[keys],
+          T.translate(`${PREFIX}.recipeSteps`),
+        ].join(' ');
+        onGoingDatExplorationData.type = TEXT;
+        break;
+      case DATA_QUALITY:
+        onGoingDatExplorationData.label = Number(eachExplorationCard[keys]);
+        onGoingDatExplorationData.percentageSymbol = '%';
+        onGoingDatExplorationData.subText = T.translate(`${PREFIX}.nullValues`);
+        onGoingDatExplorationData.type = PERCENTAGE_WITH_TEXT;
+        break;
+      case WORKSPACE_ID:
+        onGoingDatExplorationData.workspaceId = eachExplorationCard[keys];
+        break;
+      case COUNT:
+        onGoingDatExplorationData.count = eachExplorationCard[keys];
+        break;
+    }
+    return onGoingDatExplorationData;
   };
 
   if (
@@ -59,49 +98,19 @@ export const getUpdatedExplorationCards = (
     Array.isArray(existingExplorationCards) &&
     existingExplorationCards.length
   ) {
-    existingExplorationCards.forEach((eachExplorationCard) => {
-      const eachExplorationCardData = [];
-      Object.keys(eachExplorationCard).map((keys) => {
-        const onGoingDatExplorationData = {} as IOnGoingDataExplorationsData;
-        switch (keys) {
-          case CONNECTOR_TYPE:
-            onGoingDatExplorationData.icon = getIconForConnector(eachExplorationCard[keys]);
-            onGoingDatExplorationData.label = eachExplorationCard[keys];
-            onGoingDatExplorationData.type = ICON;
-            break;
-          case CONNECTION_NAME:
-            onGoingDatExplorationData.label = eachExplorationCard[keys];
-            onGoingDatExplorationData.type = ICON_WITH_TEXT;
-            break;
-          case WORKPSACE_NAME:
-            onGoingDatExplorationData.label = eachExplorationCard[keys];
-            onGoingDatExplorationData.type = TEXT;
-            break;
-          case RECIPE_STEPS_KEY:
-            onGoingDatExplorationData.label = [
-              eachExplorationCard[keys],
-              T.translate(`${PREFIX}.recipeSteps`),
-            ].join(' ');
-            onGoingDatExplorationData.type = TEXT;
-            break;
-          case DATA_QUALITY:
-            onGoingDatExplorationData.label = Number(eachExplorationCard[keys]);
-            onGoingDatExplorationData.percentageSymbol = '%';
-            onGoingDatExplorationData.subText = T.translate(`${PREFIX}.nullValues`);
-            onGoingDatExplorationData.type = PERCENTAGE_WITH_TEXT;
-            break;
-          case WORKSPACE_ID:
-            onGoingDatExplorationData.workspaceId = eachExplorationCard[keys];
-            break;
-          case COUNT:
-            onGoingDatExplorationData.count = eachExplorationCard[keys];
-            break;
-        }
-        eachExplorationCardData.push(onGoingDatExplorationData);
-      });
+    existingExplorationCards
+      .filter((eachItem) => eachItem.count !== 0)
+      .filter((_, itemIndex) => (cardCount && itemIndex < cardCount) || !cardCount)
+      .forEach((eachExplorationCard) => {
+        const eachExplorationCardsData = [];
+        Object.keys(eachExplorationCard).forEach((keys) => {
+          eachExplorationCardsData.push(
+            getUpdatedOngoingExplorationData(keys, eachExplorationCard)
+          );
+        });
 
-      updatedExplorationCards.push(eachExplorationCardData);
-    });
+        updatedExplorationCards.push(eachExplorationCardsData);
+      });
   }
 
   return updatedExplorationCards;

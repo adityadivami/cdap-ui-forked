@@ -19,8 +19,13 @@ import { Box, Grid, Typography } from '@material-ui/core/';
 import { useStyles } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/styles';
 import CustomTooltip from 'components/WrangleHome/Components/CustomTooltip';
 import { IOngoingDataExplorationsCard } from 'components/WrangleHome/Components/OngoingDataExplorationsCard/types';
+import { WORKSPACES } from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 
-export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplorationsCard) {
+export default function({
+  explorationCardDetails,
+  cardIndex,
+  fromAddress,
+}: IOngoingDataExplorationsCard) {
   const classes = useStyles();
   const connectionNameRef: RefObject<HTMLInputElement> = createRef();
   const datasetNameRef: RefObject<HTMLInputElement> = createRef();
@@ -37,7 +42,9 @@ export default function({ explorationCardDetails, cardIndex }: IOngoingDataExplo
   return (
     <Grid
       container
-      className={classes.gridContainer}
+      className={`${classes.explorationCardWrapper} ${
+        fromAddress === WORKSPACES ? classes.gridContainerWorkspaces : classes.gridContainerHome
+      }`}
       data-testid={`ongoing-data-explorations-card-${cardIndex}`}
     >
       {explorationCardDetails &&

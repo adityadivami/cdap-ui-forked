@@ -17,11 +17,13 @@
 import { Box } from '@material-ui/core/';
 import MyDataPrepApi from 'api/dataprep';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import NoRecordScreen from 'components/NoRecordScreen';
 import {
   IConnectionWithConnectorType,
   IExistingExplorationCard,
   IConnectionsList,
   IWorkspace,
+  IOngoingDataExplorationsProps,
 } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
 import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 import OngoingDataExplorationsCard from 'components/WrangleHome/Components/OngoingDataExplorationsCard';
@@ -33,8 +35,19 @@ import { of } from 'rxjs/observable/of';
 import { defaultIfEmpty, switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { IExplorationCardDetails } from '../OngoingDataExplorationsCard/types';
+import styled from 'styled-components';
+import { WORKSPACES } from 'components/WrangleHome/Components/OngoingDataExplorations/constants';
 
-export default function() {
+const OngoingExplorationCardLink = styled(Link)`
+  text-decoration: none !important;
+`;
+
+export default function({
+  cardCount,
+  fromAddress,
+  setLoading,
+  setShowExplorations,
+}: IOngoingDataExplorationsProps) {
   const [onGoingExplorationsData, setOnGoingExplorationsData] = useState<IExplorationCardDetails[]>(
     []
   );
@@ -141,8 +154,15 @@ export default function() {
               const totalDataQuality = dataQuality / workspace.headers?.length ?? 1;
               explorationData[index].dataQuality = totalDataQuality;
               explorationData[index].count = workspace.count;
-              const final = getUpdatedExplorationCards(explorationData);
+              const final = getUpdatedExplorationCards(explorationData, cardCount);
+
+              // if we have setShowExplorations, then we should send data to parent element as the exploration state is then maintained in parent as well for showing or hiding the title of the parent component
+              setShowExplorations &&
+                setShowExplorations(
+                  Boolean(final) && Array.isArray(final) && final.length ? true : false
+                );
               setOnGoingExplorationsData(final);
+              setLoading && setLoading(false);
             });
         }
       });
@@ -158,32 +178,34 @@ export default function() {
 
   return (
     <Box data-testid="ongoing-data-explore-parent">
-      {filteredData &&
-        Array.isArray(filteredData) &&
-        filteredData?.map((item, index) => {
-          console.log(item, 'item');
+      {filteredData && Array.isArray(filteredData) && filteredData.length ? (
+        filteredData.map((eachExplorationCardData, cardIndex) => {
           return (
-            <Link
+            <OngoingExplorationCardLink
               to={{
-                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[5].workspaceId}`}`,
+                pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${eachExplorationCardData[5].workspaceId}`}`,
                 state: {
-                  from: T.translate('features.Breadcrumb.labels.wrangleHome'),
-                  path: T.translate('features.Breadcrumb.params.wrangleHome'),
+                  from: fromAddress,
+                  path: T.translate('features.WranglerNewUI.Breadcrumb.labels.workSpaces'),
                 },
               }}
-              style={{ textDecoration: 'none' }}
-              data-testid={`wrangler-home-ongoing-data-exploration-card-${index}`}
+              data-testid={`wrangler-home-ongoing-data-exploration-card-${cardIndex}`}
             >
-              {index <= 1 && (
-                <OngoingDataExplorationsCard
-                  explorationCardDetails={item}
-                  key={index}
-                  cardIndex={index}
-                />
-              )}
-            </Link>
+              <OngoingDataExplorationsCard
+                key={`ongoing-data-exploration-card-${cardIndex}`}
+                explorationCardDetails={eachExplorationCardData}
+                cardIndex={cardIndex}
+                fromAddress={fromAddress}
+              />
+            </OngoingExplorationCardLink>
           );
-        })}
+        })
+      ) : fromAddress === WORKSPACES ? (
+        <NoRecordScreen
+          title={T.translate('features.WranglerNewUI.NoRecordScreen.workspacesList.title')}
+          subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.workspacesList.subtitle')}
+        />
+      ) : null}
     </Box>
   );
 }
