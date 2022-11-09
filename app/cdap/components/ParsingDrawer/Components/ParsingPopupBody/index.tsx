@@ -15,16 +15,16 @@
  */
 
 import { Box, InputLabel } from '@material-ui/core';
-import React, { ChangeEvent, useEffect } from 'react';
-import { useStyles } from 'components/ParsingDrawer/styles';
-import InputCheckbox from 'components/ParsingDrawer/Components/InputCheckbox';
+import FormInputCheckbox from 'components/FormInputCheckbox';
 import InputSelect from 'components/ParsingDrawer/Components/InputSelect';
 import {
   CHAR_ENCODING_OPTIONS,
   FORMAT_OPTIONS,
 } from 'components/ParsingDrawer/Components/ParsingPopupBody/parsingOptions';
-import T from 'i18n-react';
+import { useStyles } from 'components/ParsingDrawer/styles';
 import { IParsingPopupBodyProps } from 'components/ParsingDrawer/types';
+import T from 'i18n-react';
+import React, { ChangeEvent, useEffect } from 'react';
 
 export default function({ values, changeEventListener }: IParsingPopupBodyProps) {
   const classes = useStyles();
@@ -79,7 +79,7 @@ export default function({ values, changeEventListener }: IParsingPopupBodyProps)
         />
       </Box>
 
-      <InputCheckbox
+      <FormInputCheckbox
         label={T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.enableQuotedValues')}
         value={enableQuotedValues}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -88,7 +88,7 @@ export default function({ values, changeEventListener }: IParsingPopupBodyProps)
         className={classes.checkboxStyles}
       />
 
-      <InputCheckbox
+      <FormInputCheckbox
         label={T.translate('features.NewWranglerUI.WranglerNewParsingDrawer.useFirstRowAsHeader')}
         value={skipHeader}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>

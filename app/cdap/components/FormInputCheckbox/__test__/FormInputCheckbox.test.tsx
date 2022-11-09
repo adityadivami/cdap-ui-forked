@@ -14,20 +14,26 @@
  *  the License.
  */
 
-import { Route, Router, Switch } from 'react-router';
 import { render } from '@testing-library/react';
-import React from 'react';
-import { createBrowserHistory as createHistory } from 'history';
-import InputCheckbox from 'components/ParsingDrawer/Components/InputCheckbox';
+import FormInputCheckbox from 'components/FormInputCheckbox';
+import React, { ChangeEvent } from 'react';
+import { Route, Router, Switch } from 'react-router';
 import history from 'services/history';
 
-describe('Should Test the InputCheckbox Component', () => {
-  it('Should test whether InputCheckbox component is rendered or not', () => {
+describe('Should Test the FormInputCheckbox Component', () => {
+  it('Should test whether FormInputCheckbox component is rendered or not', () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <InputCheckbox />
+            <FormInputCheckbox
+              label={''}
+              value={false}
+              onChange={function(e: ChangeEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.');
+              }}
+              className={''}
+            />
           </Route>
         </Switch>
       </Router>

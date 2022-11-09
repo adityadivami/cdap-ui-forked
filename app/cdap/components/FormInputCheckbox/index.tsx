@@ -14,10 +14,10 @@
  * the License.
  */
 
-import React from 'react';
 import { Checkbox, FormControlLabel, Typography } from '@material-ui/core';
-import { useStyles } from 'components/ParsingDrawer/styles';
-import { IInputCheckboxProps } from 'components/ParsingDrawer/types';
+import { useStyles } from 'components/FormInputCheckbox/styles';
+import { IInputCheckboxProps } from 'components/FormInputCheckbox/types';
+import React from 'react';
 
 export default function({ label, value, onChange, className }: IInputCheckboxProps) {
   const classes = useStyles();
