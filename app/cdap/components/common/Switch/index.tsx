@@ -24,10 +24,6 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
   height: 16,
   padding: 0,
   display: 'flex',
-  '& .MuiSwitch-input': {
-    left: 0,
-    width: '100%',
-  },
   '&:active': {
     '& .MuiSwitch-thumb': {
       width: 15,
