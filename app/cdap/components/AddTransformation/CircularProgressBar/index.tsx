@@ -14,11 +14,13 @@
  * the License.
  */
 
-import { Typography } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from 'components/AddTransformation/CircularProgressBar/styles';
 import styled from 'styled-components';
 import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
+import TypographyText from 'components/common/TypographyText';
+import { red, green } from '@material-ui/core/colors';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -29,8 +31,8 @@ const ArcContainer = styled(Typography)`
   border-radius: 50%;
   box-sizing: border-box;
   border: 4px solid #dbdbdb;
-  border-bottom-color: ${({ value }) => (value < 100 ? '#E97567' : '#8BCC74')};
-  border-right-color: ${({ value }) => (value < 100 ? '#E97567' : '#8BCC74')};
+  border-bottom-color: ${({ value }) => (value < 100 ? red[600] : green[600])};
+  border-right-color: ${({ value }) => (value < 100 ? red[600] : green[600])};
   transform: ${({ value }) => `rotate(${45 + value * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
@@ -39,22 +41,19 @@ export default function({ value }: ICircularProgressBarProps) {
 
   return (
     <>
-      <Typography component="div" className={classes.progress}>
-        <Typography component="div" className={classes.barOverflow}>
-          <ArcContainer value={Math.round(value)}></ArcContainer>
-        </Typography>
-        <Typography
+      <Box className={classes.progress}>
+        <Box className={classes.barOverflow}>
+          <ArcContainer value={Math.round(value)} />
+        </Box>
+        <TypographyText
           component="span"
-          className={
-            Math.round(value) < 100
-              ? `${classes.redText} ${classes.value}`
-              : `${classes.greenText} ${classes.value}`
-          }
-          data-testid='circular-bar-value'
-        >
-          {Math.round(value)}%
-        </Typography>
-      </Typography>
+          size="14px"
+          weight={400}
+          type={Math.round(value) < 100 ? 'error' : 'success'}
+          dataTestId="circular-bar-value"
+          text={`${Math.round(value)}%`}
+        />
+      </Box>
     </>
   );
 }

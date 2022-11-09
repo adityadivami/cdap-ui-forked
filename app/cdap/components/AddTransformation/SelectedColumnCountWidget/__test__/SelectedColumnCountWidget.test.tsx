@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { render , screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import T from 'i18n-react';
@@ -30,6 +30,8 @@ describe('It should test the SelectColumnsList Component', () => {
   });
   it('should render the SelectColumnsList Component with no selectedColumnsCount', () => {
     render(<SelectedColumnCountWidget selectedColumnsCount={0} />);
-    expect(screen.getByTestId(/count-widget-parent/i)).toHaveTextContent(`${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected')}`);
+    expect(screen.getByTestId(/count-widget-parent/i)).toHaveTextContent(
+      `${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected')}`
+    );
   });
 });

@@ -13,9 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { IStatistics } from 'components/GridTable/types';
+
+import { IStatistics, IParams } from 'components/GridTable/types';
+
 export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
+  wid?: string;
+  payload?: IParams;
+  body?: string;
+  path?: string;
+  canBrowse?: boolean;
+  name?: string;
 }
 export interface IHeaderNamesList {
   name: string;
@@ -24,11 +31,11 @@ export interface IHeaderNamesList {
 }
 
 export interface IAddTransformationProps {
-  directiveFunctionSupportedDataType: string[];
-  functionName: string;
-  columnData: IHeaderNamesList[];
-  missingDataList: IStatistics;
-  callBack: () => void;
+  transformationDataType: string[];
+  transformationName: string;
+  columnsList: IHeaderNamesList[];
+  missingItemsList: IStatistics;
+  onCancel: () => void;
 }
 
 export interface IMultipleSelectedFunctionDetail {

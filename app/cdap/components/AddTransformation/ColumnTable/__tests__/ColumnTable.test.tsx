@@ -24,7 +24,7 @@ describe('It should test FunctionNameWidget Component', () => {
     render(
       <ColumnTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
-        directiveFunctionSupportedDataType={['all']}
+        transformationDataType={['all']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[]}
@@ -34,14 +34,16 @@ describe('It should test FunctionNameWidget Component', () => {
       />
     );
     expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
-    expect(screen.getByTestId(/panel-columns/i)).toHaveTextContent(`${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}`);
+    expect(screen.getByTestId(/panel-columns/i)).toHaveTextContent(
+      `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}`
+    );
   });
 
   it('Should render the FunctionNameWidget Component with data tye as test', () => {
     render(
       <ColumnTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
-        directiveFunctionSupportedDataType={['test']}
+        transformationDataType={['test']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[]}
@@ -50,8 +52,9 @@ describe('It should test FunctionNameWidget Component', () => {
         onMultipleSelection={() => jest.fn()}
       />
     );
-    expect(screen.getByTestId(/panel-values/i)).toHaveTextContent(`${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}`);
+    expect(screen.getByTestId(/panel-values/i)).toHaveTextContent(
+      `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}`
+    );
     expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
-
   });
 });

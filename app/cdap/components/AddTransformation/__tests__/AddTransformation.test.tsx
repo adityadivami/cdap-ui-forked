@@ -27,11 +27,11 @@ describe('It should test the SelectColumnsList Component', () => {
         <Switch>
           <Route>
             <AddTransformation
-              functionName="null"
-              directiveFunctionSupportedDataType={[]}
-              columnData={[]}
-              missingDataList={undefined}
-              callBack={() => jest.fn()}
+              transformationName="null"
+              transformationDataType={[]}
+              columnsList={[]}
+              missingItemsList={undefined}
+              onCancel={() => jest.fn()}
             />
           </Route>
         </Switch>
@@ -45,11 +45,11 @@ describe('It should test the SelectColumnsList Component', () => {
         <Switch>
           <Route>
             <AddTransformation
-              functionName="null"
-              directiveFunctionSupportedDataType={[]}
-              columnData={[]}
-              missingDataList={undefined}
-              callBack={() => jest.fn()}
+              transformationName="null"
+              transformationDataType={[]}
+              columnsList={[]}
+              missingItemsList={undefined}
+              onCancel={() => jest.fn()}
             />
           </Route>
         </Switch>
@@ -58,17 +58,17 @@ describe('It should test the SelectColumnsList Component', () => {
     expect(boxContainer).toBeInTheDocument();
   });
 
-  it('should render the SelectColumnsList Component where functionName is parseCSV', () => {
+  it('should render the SelectColumnsList Component where transformationName=is parseCSV', () => {
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
             <AddTransformation
-              functionName="parseCSV"
-              directiveFunctionSupportedDataType={[]}
-              columnData={[]}
-              missingDataList={undefined}
-              callBack={() => jest.fn()}
+              transformationName="parseCSV"
+              transformationDataType={[]}
+              columnsList={[]}
+              missingItemsList={undefined}
+              onCancel={() => jest.fn()}
             />
           </Route>
         </Switch>

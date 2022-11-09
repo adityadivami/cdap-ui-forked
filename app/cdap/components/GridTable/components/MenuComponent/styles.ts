@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/core/styles';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   divider: {
@@ -23,27 +24,43 @@ export const useStyles = makeStyles({
   heading: {
     fontSize: 14,
     fontWeight: 600,
-    color: '#5F6368',
-    padding: '0 21',
+    color: grey[600],
+    padding: '0px 21px',
   },
   root: {
+    position: 'absolute !important',
+    left: '0 !important',
+    right: '0 !important',
+    bottom: '0 !important',
+    width: 232,
+    top: '-13px !important',
+    '& > div': {
+      position: 'absolute !important',
+    },
     '& .MuiMenuItem-root': {
-      padding: '6 11 6 20',
+      padding: '6px 20px 6px 20px',
       height: 33,
     },
     '& .MuiMenu-paper': {
       width: 199,
+      maxHeight: '70% !important',
     },
     '& .MuiMenu-list': {
       color: '#5F6368',
-      border: '1 solid #DADCE0',
+      border: '1px solid #DADCE0',
     },
     '& .MuiListItem-button': {
       display: 'flex',
       justifyContent: 'space-between',
     },
-    '& .MuiList-padding': {
-      padding: '13 0',
+    '& .MuiListItem-button:hover': {
+      background: '#EFF0F2',
     },
+    '& .MuiList-padding': {
+      padding: '13px 0',
+    },
+  },
+  popoverPaper: {
+    boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15);',
   },
 });

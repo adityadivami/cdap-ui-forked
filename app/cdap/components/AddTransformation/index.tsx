@@ -27,14 +27,17 @@ import {
   IDataQualityItem,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
-import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import {
+  multipleColumnSelected,
+  ADD_TRANSFORMATION_PREFIX,
+} from 'components/AddTransformation/constants';
 
 export default function({
-  directiveFunctionSupportedDataType,
-  functionName,
-  columnData,
-  missingDataList,
-  callBack,
+  transformationDataType,
+  transformationName,
+  columnsList,
+  missingItemsList,
+  onCancel,
 }: IAddTransformationProps) {
   const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
@@ -43,17 +46,20 @@ export default function({
 
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
-    callBack();
+    onCancel();
   };
 
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
     setSelectedColumns([]);
-    callBack();
+    onCancel();
   };
 
   useEffect(() => {
-    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(missingDataList, columnData);
+    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(
+      missingItemsList,
+      columnsList
+    );
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
@@ -61,14 +67,14 @@ export default function({
     if (
       multipleColumnSelected.filter(
         (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === functionName && !functionNameDetail.isMoreThanTwo
+          functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
       )?.length
     ) {
       return selectedColumns?.length === 2 ? false : true;
     } else if (
       multipleColumnSelected.filter(
         (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === functionName && functionNameDetail.isMoreThanTwo
+          functionNameDetail.value === transformationName && functionNameDetail.isMoreThanTwo
       )?.length
     ) {
       return selectedColumns?.length >= 1 ? false : true;
@@ -80,9 +86,7 @@ export default function({
   return (
     <Fragment>
       <DrawerWidget
-        headingText={T.translate(
-          'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara'
-        )}
+        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
@@ -90,12 +94,13 @@ export default function({
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
             <SelectColumnsList
-              columnData={columnData}
+              columnsList={columnsList}
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={dataQualityValue}
-              directiveFunctionSupportedDataType={directiveFunctionSupportedDataType}
-              functionName={functionName}
+              transformationDataType={transformationDataType}
+              transformationName={transformationName}
+              selectedColumns={selectedColumns}
             />
           </div>
           <Button
@@ -107,7 +112,7 @@ export default function({
             className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
           >
-            {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.done')}
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}
           </Button>
         </Container>
       </DrawerWidget>

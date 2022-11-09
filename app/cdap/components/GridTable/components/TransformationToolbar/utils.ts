@@ -12,27 +12,24 @@ import {
   StructureIcon,
   Undo,
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
+import { TOOLBAR_ICONS_LABEL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 import T from 'i18n-react';
 
 export const nestedMenuOptions = [
   {
-    title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.undoIcon').toString(),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.undoIcon`).toString(),
     action: 'undo',
     dataType: ['all'],
-    toolName: T.translate(
-      'features.WranglerNewUI.GridPage.toolbarIcons.labels.undoIcon'
-    ).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.undoIcon`).toString(),
     icon: Undo,
     options: [],
     open: false,
   },
   {
-    title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.redoIcon').toString(),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.redoIcon`).toString(),
     action: 'redo',
     dataType: ['all'],
-    toolName: T.translate(
-      'features.WranglerNewUI.GridPage.toolbarIcons.labels.redoIcon'
-    ).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.redoIcon`).toString(),
     icon: Redo,
     options: [],
     open: false,
@@ -40,72 +37,55 @@ export const nestedMenuOptions = [
   {
     options: [],
     icon: NullIcon,
-    title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon').toString(),
-    toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.nullIcon'),
-    open: false,
-  },
-  {
-    options: [],
-    icon: InvalidIcon,
-    title: T.translate(
-      'features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon'
-    ).toString(),
-    toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.invalidIcon'),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.nullIcon`).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.nullIcon`),
     open: false,
   },
   {
     options: [],
     icon: ColumnIcon,
-    title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon').toString(),
-    toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.columnIcon'),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.columnIcon`).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.columnIcon`),
     open: false,
   },
   {
     options: MENU_OPTIONS,
     icon: StructureIcon,
-    title: T.translate(
-      'features.WranglerNewUI.GridPage.toolbarIcons.labels.structureIcon'
-    ).toString(),
-    toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.structureIcon'),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.structureIcon`).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.structureIcon`),
     open: false,
   },
   {
     options: [],
     icon: FragmentIcon,
-    title: T.translate(
-      'features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon'
-    ).toString(),
-    toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.fragmentIcon'),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.fragmentIcon`).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.fragmentIcon`),
     open: false,
   },
   {
     options: [],
     icon: MathIcon,
-    title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon').toString(),
-    toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.mathIcon'),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.mathIcon`).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.mathIcon`),
     open: false,
   },
   {
     options: [],
     icon: SecurityIcon,
-    title: T.translate(
-      'features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon'
-    ).toString(),
-    toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.securityIcon'),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.securityIcon`).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.securityIcon`),
     open: false,
   },
   {
     options: [],
     icon: OtherIcon,
-    title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon').toString(),
-    toolName: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.otherIcon'),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.otherIcon`).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.otherIcon`),
     open: false,
   },
   {
-    title: T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.gridIcon').toString(),
-    toolName: T.translate(
-      'features.WranglerNewUI.GridPage.toolbarIcons.labels.gridIcon'
-    ).toString(),
+    title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.gridIcon`).toString(),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.gridIcon`).toString(),
     icon: GridIcon,
     options: [],
     open: false,

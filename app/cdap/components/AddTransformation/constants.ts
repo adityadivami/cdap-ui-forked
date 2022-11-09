@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
   {
@@ -40,3 +41,6 @@ export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
     isMoreThanTwo: true,
   },
 ];
+
+export const SELECT_COLUMN_LIST_PREFIX = 'features.WranglerNewUI.GridPage.selectColumnListPanel';
+export const ADD_TRANSFORMATION_PREFIX = 'features.WranglerNewUI.GridPage.addTransformationPanel';

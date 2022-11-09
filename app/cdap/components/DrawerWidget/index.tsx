@@ -14,13 +14,14 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
-import React, { Fragment } from 'react';
+import { Container, Drawer } from '@material-ui/core';
+import React from 'react';
 import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
+import BoxContainer from 'components/common/BoxContainer';
 
 export default function({
   headingText,
@@ -37,23 +38,44 @@ export default function({
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
-        <header className={classes.headerStyles}>
-          <div className={classes.headerTextWithBackIconStyles}>
+        <BoxContainer
+          type="FlexBox"
+          justifyContent="space-between"
+          alignItems="center"
+          height="60px"
+        >
+          <BoxContainer type="FlexBox" alignItems="center">
             {showBackIcon && (
-              <Box
-                className={classes.backIconClass}
+              <BoxContainer
+                type="IconBox"
                 onClick={closeClickHandler}
-                data-testid="box-id"
+                dataTestId="box-id"
+                margin="0 10px 0 0 "
+                width="10px"
+                height="20px"
               >
                 {BackIcon}
-              </Box>
+              </BoxContainer>
             )}
-            &nbsp;
             <DrawerWidgetHeading headingText={headingText.toString()} />
-          </div>
-          <Box className={classes.headerRightStyles}>
-            {headerActionTemplate && <div data-testid='header-action-template'>{headerActionTemplate}</div>}
-            {showDivider && <div className={classes.dividerLineStyles} data-testid='show-divider-box'/>}
+          </BoxContainer>
+          <BoxContainer type="FlexBox" alignItems="center">
+            {headerActionTemplate && (
+              <BoxContainer type="SimpleBox" dataTestId="header-action-template">
+                {headerActionTemplate}
+              </BoxContainer>
+            )}
+            {showDivider && (
+              <BoxContainer
+                type="SimpleBox"
+                alignItems="center"
+                dataTestId="show-divider-box"
+                width="1px"
+                height="28px"
+                backgroundColor="#DADCE0"
+                margin="0 15px"
+              />
+            )}
             <CloseRoundedIcon
               className={classes.pointerStyles}
               color="action"
@@ -61,8 +83,8 @@ export default function({
               onClick={closeClickHandler}
               data-testid="drawer-widget-close-round-icon"
             />
-          </Box>
-        </header>
+          </BoxContainer>
+        </BoxContainer>
         <>{children}</>
       </Container>
     </Drawer>

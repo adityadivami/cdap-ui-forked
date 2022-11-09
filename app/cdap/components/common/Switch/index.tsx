@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import React from 'react';
 import { styled } from '@material-ui/core';
 import Switch from '@material-ui/core/Switch';
@@ -24,6 +25,10 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
   height: 16,
   padding: 0,
   display: 'flex',
+  '& .MuiSwitch-input': {
+    left: 0,
+    width: '100%',
+  },
   '&:active': {
     '& .MuiSwitch-thumb': {
       width: 15,

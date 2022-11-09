@@ -19,22 +19,23 @@ import React from 'react';
 import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
 import { useStyles } from 'components/GridTable/components/MenuComponent/styles';
 import { IMenuComponentProps } from 'components/GridTable/components/MenuComponent/types';
+import { isNullable } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 
 export default function({
-  anchorEl,
+  anchorElement,
   menuOptions,
-  setAnchorEl,
+  setAnchorElement,
   submitOption,
   columnType,
+  setMenuComponentOptions,
 }: IMenuComponentProps) {
-  const open = Boolean(anchorEl);
   const classes = useStyles();
   return (
     <Menu
       id="long-menu"
       keepMounted
-      anchorEl={anchorEl}
-      open={open}
+      anchorEl={anchorElement}
+      open={anchorElement ? true : false}
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: 'top',
@@ -46,15 +47,18 @@ export default function({
       }}
       onClose={(e: Event) => {
         e.preventDefault();
-        setAnchorEl(null);
+        setAnchorElement(null);
+        setMenuComponentOptions([]);
       }}
       className={classes.root}
+      classes={{ paper: classes.popoverPaper }}
+      data-testid="menu-component-parent"
     >
-      {menuOptions?.map((eachOption, index) => (
+      {menuOptions?.map((eachOption, optionsIndex) => (
         <MenuItemComponent
           columnType={columnType}
           item={eachOption}
-          index={index}
+          index={optionsIndex}
           onMenuClick={submitOption}
         />
       ))}

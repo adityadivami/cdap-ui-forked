@@ -39,34 +39,36 @@ import {
   IMissingList,
   IParams,
   IRecords,
-  ICellData,
+  IGridCellData,
   IStatistics,
+  IAddTransformationItem,
 } from 'components/GridTable/types';
 import { convertNonNullPercent } from 'components/GridTable/utils';
 import AddTransformation from 'components/AddTransformation';
-import { missingItemDefaultValue } from 'components/GridTable/defaultValues';
+import { defaultMissingItem } from 'components/GridTable/defaultValues';
+import { transformationOptions } from 'components/GridTable/constants';
 
 export default function GridTable() {
-  const { wid } = useParams() as IRecords;
-
-  const params = useParams() as IRecords;
+  const params = useParams() as IParams;
+  const { wid } = params;
   const location = useLocation();
 
   const classes = useStyles();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [headerNamesList, setHeaderNamesList] = useState<IHeaderNamesList[]>([]);
-  const [rowsDataList, setRowsDataList] = useState<ICellData[]>([]);
+  const [rowsDataList, setRowsDataList] = useState<IGridCellData[]>([]);
   const [gridData, setGridData] = useState<IExecuteAPIResponse>();
-  const [missingDataList, setMissingDataList] = useState<IMissingList[]>([]);
+  const [missingDataList, setMissingList] = useState<IMissingList[]>([]);
   const [workspaceName, setWorkspaceName] = useState<string>('');
-  const [invalidCountArray, setInvalidCountArray] = useState<ICellData[]>(missingItemDefaultValue);
+  const [invalidCount, setInvalidCount] = useState<IGridCellData[]>(defaultMissingItem);
   const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
-  const [transformationFunction, setTransformationFunction] = useState<string>('');
-  const [
-    transformationFunctionSupportedDataType,
-    setTransformationFunctionSupportedDataType,
-  ] = useState<string[]>([]);
+  const [addTransformationFunction, setAddTransformationFunction] = useState<
+    IAddTransformationItem
+  >({
+    option: '',
+    supportedDataType: [],
+  });
   const [dataQuality, setDataQuality] = useState<IStatistics>();
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -138,15 +140,16 @@ export default function GridTable() {
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
-  const createHeadersData = (columnNamesList: string[], columnTypesList: IRecords) => {
+  const createHeadersData = (columnNamesList: string[], columnTypesList: IGridCellData) => {
     if (Array.isArray(columnNamesList)) {
-      return columnNamesList.map((eachColumnName: string) => {
+      const headersData: IHeaderNamesList[] = columnNamesList.map((eachColumnName: string) => {
         return {
           name: eachColumnName,
           label: eachColumnName,
           type: [columnTypesList[eachColumnName]],
         };
       });
+      return headersData;
     }
   };
 
@@ -165,7 +168,7 @@ export default function GridTable() {
       }),
         metricArray.push({
           name: key,
-          values: typeArrayOfMissingValue.concat(invalidCountArray),
+          values: typeArrayOfMissingValue.concat(invalidCount),
         });
     });
     return metricArray;
@@ -173,27 +176,27 @@ export default function GridTable() {
 
   // ------------@getGridTableData Function is used for preparing data for entire grid-table
   const getGridTableData = async () => {
-    const rawData: IExecuteAPIResponse = gridData;
+    const executeAPIData: IExecuteAPIResponse = gridData;
     const headersData: IHeaderNamesList[] = createHeadersData(
-      rawData?.headers,
-      rawData?.types
-    ) as IHeaderNamesList[];
+      executeAPIData?.headers,
+      executeAPIData?.types
+    );
     setHeaderNamesList(headersData);
-    if (rawData && rawData?.summary && rawData?.summary?.statistics) {
+    if (executeAPIData && executeAPIData?.summary && executeAPIData?.summary?.statistics) {
       const missingItems: IMissingList[] = getMissingList(gridData?.summary?.statistics);
-      setMissingDataList(missingItems);
+      setMissingList(missingItems);
       setDataQuality(gridData?.summary?.statistics);
     }
-    const rowData: ICellData[] =
-      rawData &&
-      rawData?.values &&
-      Array.isArray(rawData?.values) &&
-      (rawData?.values?.map((eachRow: {}) => {
+    const gridRowValues: IGridCellData[] =
+      executeAPIData &&
+      executeAPIData?.values &&
+      Array.isArray(executeAPIData?.values) &&
+      executeAPIData?.values?.map((eachRow: IGridCellData) => {
         const { ...rest } = eachRow;
         return rest;
-      }) as ICellData[]);
+      });
 
-    setRowsDataList(rowData);
+    setRowsDataList(gridRowValues);
   };
 
   useEffect(() => {
@@ -201,9 +204,11 @@ export default function GridTable() {
   }, [gridData]);
 
   // ------------@onMenuOptionSelection Function is used to set option selected from toolbar and then calling of execute API
-  const onMenuOptionSelection = (option: string, supported_dataType: string[]) => {
-    setTransformationFunction(option);
-    setTransformationFunctionSupportedDataType(supported_dataType);
+  const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
+    setAddTransformationFunction({
+      option,
+      supportedDataType,
+    });
   };
 
   return (
@@ -214,7 +219,7 @@ export default function GridTable() {
         showBreadCrumb={showBreadCrumb}
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
-          option !== 'undo' && option !== 'redo' ? onMenuOptionSelection(option, datatype) : null;
+          !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null;
         }}
       />
 
@@ -266,14 +271,17 @@ export default function GridTable() {
             })}
         </TableBody>
       </Table>
-      {transformationFunction && (
+      {addTransformationFunction.option && (
         <AddTransformation
-          functionName={transformationFunction}
-          directiveFunctionSupportedDataType={transformationFunctionSupportedDataType}
-          columnData={headerNamesList}
-          missingDataList={dataQuality}
-          callBack={() => {
-            setTransformationFunction('');
+          transformationName={addTransformationFunction.option}
+          transformationDataType={addTransformationFunction.supportedDataType}
+          columnsList={headerNamesList}
+          missingItemsList={dataQuality}
+          onCancel={() => {
+            setAddTransformationFunction({
+              option: '',
+              supportedDataType: [],
+            });
           }}
         />
       )}

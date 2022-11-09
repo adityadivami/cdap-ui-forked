@@ -19,7 +19,7 @@ import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation
 
 export interface IColumnTableProps {
   columns: IHeaderNamesList[];
-  directiveFunctionSupportedDataType: string[];
+  transformationDataType: string[];
   onSingleSelection: (value: IHeaderNamesList) => void;
   selectedColumns: IHeaderNamesList[];
   dataQualityValue: IDataQualityItem[];
@@ -29,6 +29,9 @@ export interface IColumnTableProps {
     event: React.ChangeEvent<HTMLInputElement>,
     value: IHeaderNamesList
   ) => void;
+  totalColumnCount: number;
+  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  transformationName: string;
 }
 
 export interface ITableRowProps {

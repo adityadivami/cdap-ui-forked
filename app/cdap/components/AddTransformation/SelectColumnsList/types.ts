@@ -18,10 +18,11 @@ import React from 'react';
 import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation/types';
 
 export interface ISelectColumnListProps {
-  directiveFunctionSupportedDataType: string[];
+  transformationDataType: string[];
   selectedColumnsCount: number;
-  columnData: IHeaderNamesList[];
+  columnsList: IHeaderNamesList[];
   setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
   dataQuality: IDataQualityItem[];
-  functionName: string;
+  transformationName: string;
+  selectedColumns: IHeaderNamesList[];
 }
