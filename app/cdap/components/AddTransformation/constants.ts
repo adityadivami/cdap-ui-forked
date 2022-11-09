@@ -40,6 +40,14 @@ export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
     value: 'keep',
     isMoreThanTwo: true,
   },
+  {
+    value: 'boolean',
+    isMoreThanTwo: true,
+  },
+  {
+    value: 'string',
+    isMoreThanTwo: false,
+  },
 ];
 
 export const SELECT_COLUMN_LIST_PREFIX = 'features.WranglerNewUI.GridPage.selectColumnListPanel';
