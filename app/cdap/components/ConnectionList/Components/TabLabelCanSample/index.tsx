@@ -113,7 +113,7 @@ export default function TabLabelCanSample({
       }}
     />
   ) : refValue ? (
-    <CustomTooltip title={label} arrow>
+    <CustomTooltip title={label} arrow data-testid="connections-tab-ref-label-simple">
       <Box className={classes.labelsContainerCanSample} data-testid={dataTestId}>
         <Typography variant="body2" className={classes.labelStylesCanSample} ref={myLabelRef}>
           {label}
