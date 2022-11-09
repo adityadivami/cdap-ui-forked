@@ -32,6 +32,9 @@ describe('Testing Menu Item Component', () => {
     const parentElement = screen.getByTestId(/menu-item-parent/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
+    expect(parentElement).toHaveClass(
+      'MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button'
+    );
   });
 
   it('Should render default component in columntype null case', () => {

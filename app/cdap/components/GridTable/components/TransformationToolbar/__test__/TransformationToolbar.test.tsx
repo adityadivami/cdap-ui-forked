@@ -16,14 +16,13 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import T from 'i18n-react';
 import TransformationToolbar from 'components/GridTable/components/TransformationToolbar/index';
 
 describe('Testing render TransformationToolbar component', () => {
-  it('Should render component', () => {
+  beforeEach(() => {
     render(
       <TransformationToolbar
-        columnType={'abhilash'}
+        columnType={''}
         submitMenuOption={() => {
           jest.fn();
         }}
@@ -34,17 +33,23 @@ describe('Testing render TransformationToolbar component', () => {
       />
     );
   });
+  it('Should render component and check if child is rendered as expected', () => {
+    const transformToolbarParent = screen.getByTestId('transformations-toolbar-container');
+    expect(transformToolbarParent).toBeInTheDocument();
 
-  // const iconButtonElement = screen.getByTestId(/toolbar-icon-button/i)
-  // fireEvent.click(iconButtonElement)
+    const nestedMenuContainer = screen.getByTestId(/nested-menu-container/i);
+    expect(transformToolbarParent).toContainElement(nestedMenuContainer);
+  });
 
-  // const transformToolbarParent = screen.getByTestId(/transformations-toolbar-container/i);
+  it('should check if component exists and trigger the event', () => {
+    const iconButtonElement = screen.getByTestId(/toolbar-icon-button/i);
+    fireEvent.click(iconButtonElement);
+    expect(iconButtonElement).toBeInTheDocument();
+  });
 
-  // Should render the parent component
-  //   expect(transformToolbarParent).toBeInTheDocument();
-
-  //   const nestedMenuContainer = screen.getByTestId(/nested-menu-container"/i)
-
-  // Check if child is rendered in the parent
-  //   expect(transformToolbarParent).toContainElement(nestedMenuContainer)
+  it('Should check if headerToggler component exists and triggers the click event', () => {
+    const headerToggler = screen.getByTestId(/toolbar-header-toggler/i);
+    fireEvent.click(headerToggler);
+    expect(headerToggler).toBeInTheDocument();
+  });
 });

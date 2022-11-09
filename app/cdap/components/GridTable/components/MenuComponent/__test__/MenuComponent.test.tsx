@@ -14,21 +14,19 @@
  *  the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import T from 'i18n-react';
-import MenuComponent from '..';
-
+import MenuComponent from 'components/GridTable/components/MenuComponent/index';
+import { dummyData } from 'components/GridTable/components/MenuComponent/mock/mock';
 describe('Testing render FunctionNameToggle component', () => {
   const PREFIX = 'features.WranglerNewUI.GridPage';
 
   it('Should render component with all the parent elements and child elements', () => {
-    const x = [{ label: 'test', supportedDataType: ['test'], value: 'test', options: [] }];
-
     render(
       <MenuComponent
         anchorElement={undefined}
-        menuOptions={x}
+        menuOptions={dummyData}
         setAnchorElement={() => {
           jest.fn();
         }}
@@ -40,5 +38,9 @@ describe('Testing render FunctionNameToggle component', () => {
 
     const menuComponentParent = screen.getByTestId(/menu-component-parent/i);
     expect(menuComponentParent).toBeInTheDocument();
+
+    const test = screen.getByTestId(/menu-item-parent/i);
+    fireEvent.click(test);
+    expect(test).toBeInTheDocument();
   });
 });
