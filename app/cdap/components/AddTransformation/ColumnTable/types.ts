@@ -29,6 +29,9 @@ export interface IColumnTableProps {
     event: React.ChangeEvent<HTMLInputElement>,
     value: IHeaderNamesList
   ) => void;
+  totalColumnCount: number;
+  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  transformationName: string;
 }
 
 export interface ITableRowProps {

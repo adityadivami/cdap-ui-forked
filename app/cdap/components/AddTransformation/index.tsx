@@ -100,6 +100,7 @@ export default function({
               dataQuality={dataQualityValue}
               transformationDataType={transformationDataType}
               transformationName={transformationName}
+              selectedColumns={selectedColumns}
             />
           </div>
           <Button

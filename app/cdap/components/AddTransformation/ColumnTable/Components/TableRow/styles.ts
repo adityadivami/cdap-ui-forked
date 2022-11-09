@@ -28,18 +28,13 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: 0.15,
       color: grey[700],
+      padding: 5,
+      height: 64,
     },
     rowsOfTable: {
       display: 'grid',
       gridTemplateColumns: '10% 45% 45%',
-    },
-    recipeStepsTableHeadStyles: {
-      padding: 10,
-      fontWeight: 600,
-      fontSize: 16,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[700],
+      alignItems: 'center',
     },
     recipeStepsActionTypeStyles: {
       fontWeight: 400,

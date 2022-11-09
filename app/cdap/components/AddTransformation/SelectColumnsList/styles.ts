@@ -21,6 +21,10 @@ export const useStyles = makeStyles(() => {
     searchFormControl: {
       position: 'relative',
       display: 'flex',
+      marginRight: 10,
+      '& input': {
+        marginRight: 30,
+      },
     },
     searchInputAdornment: {
       zIndex: 0,

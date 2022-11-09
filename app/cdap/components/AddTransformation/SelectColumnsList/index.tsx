@@ -37,9 +37,9 @@ export default function({
   setSelectedColumns,
   dataQuality,
   transformationName,
+  selectedColumns,
 }: ISelectColumnListProps) {
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
-  const [selectedColumns, setSelectedColumn] = useState<IHeaderNamesList[]>([]);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const classes = useStyles();
@@ -66,7 +66,6 @@ export default function({
 
   const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
-    setSelectedColumn([column]);
   };
 
   const onMultipleSelection = (
@@ -75,14 +74,12 @@ export default function({
   ) => {
     if (event.target.checked) {
       setSelectedColumns((prev) => [...prev, column]);
-      setSelectedColumn([...selectedColumns, column]);
     } else {
       const indexOfUnchecked = selectedColumns.findIndex(
         (columnDetail) => columnDetail.label === column.label
       );
       if (indexOfUnchecked > -1) {
         setSelectedColumns(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
-        setSelectedColumn(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
       }
     }
   };
@@ -124,7 +121,7 @@ export default function({
   };
 
   return (
-    <BoxContainer type="SimpleBox" dataTestId="select-column-list-parent">
+    <BoxContainer type="SimpleBox" dataTestId="select-column-list-parent" height="90%">
       <BoxContainer type="FlexBox" justifyContent="space-between">
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
@@ -177,6 +174,9 @@ export default function({
           transformationDataType={transformationDataType}
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
+          totalColumnCount={columnsList?.length}
+          setSelectedColumns={setSelectedColumns}
+          transformationName={transformationName}
         />
       )}
     </BoxContainer>

@@ -24,4 +24,5 @@ export interface ISelectColumnListProps {
   setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
   dataQuality: IDataQualityItem[];
   transformationName: string;
+  selectedColumns: IHeaderNamesList[];
 }
