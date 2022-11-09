@@ -13,14 +13,23 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { makeStyles } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
-import { grey } from '@material-ui/core/colors';
+import { grey, green } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
   warningIcon: {
     color: '#E97567',
     fontSize: '20px !important',
+  },
+  successIcon: {
+    color: '#4BAF4F',
+    fontSize: '20px !important',
+  },
+  successHead: {
+    color: '#4BAF4F',
+    fontSize: '18px !important',
   },
   errorHead: {
     color: '#E97567',
@@ -32,8 +41,19 @@ export const useStyles = makeStyles((theme) => ({
     color: blue[500],
     cursor: 'pointer',
   },
+  undoSpan: {
+    display: 'block',
+    fontSize: '14px',
+    cursor: 'pointer',
+    color: green[900],
+  },
   errorMessage: {
     color: grey[900],
+    fontSize: '14px',
+    padding: '10px',
+  },
+  successMessage: {
+    color: green[900],
     fontSize: '14px',
     padding: '10px',
   },

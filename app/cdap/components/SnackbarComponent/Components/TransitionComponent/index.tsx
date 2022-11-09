@@ -16,6 +16,7 @@
 
 import React from 'react';
 import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { Divider } from '@material-ui/core';
 import { useStyles } from './styles';
 
@@ -24,22 +25,22 @@ export default function TransitionComponent(props) {
   return (
     <div data-testid="transition-component-parent">
       <div className={classes.headFlex}>
-        <h5 className={classes.errorHead}>
-          <WarningRoundedIcon className={classes.warningIcon} />
-          &nbsp;Error
+        <h5 className={classes.successHead}>
+          <CheckCircleIcon fontSize="large" className={classes.successIcon} />
+          &nbsp; Step Successfully added!
         </h5>
         <span
           role="button"
           tabIndex={0}
-          className={classes.dismissSpan}
+          className={classes.undoSpan}
           onClick={() => props.close()}
           data-testid="snackbar-close-button"
         >
-          Dismiss
+          UNDO
         </span>
       </div>
       <Divider />
-      <p className={classes.errorMessage}>{props.messageToDisplay}</p>
+      <p className={classes.successMessage}>{props.messageToDisplay}</p>
     </div>
   );
 }

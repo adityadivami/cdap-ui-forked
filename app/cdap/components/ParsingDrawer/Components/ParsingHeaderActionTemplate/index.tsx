@@ -40,7 +40,9 @@ export default function({
         handleSchemaUpload(schema);
         setSuccessUpload({
           open: true,
-          message: 'successfully uploaded',
+          message: T.translate(
+            'features.WranglerNewUI.WranglerNewParsingDrawer.importSchemaSuccessMessage'
+          ),
         });
       } catch (e) {
         setErrorOnTransformation({
