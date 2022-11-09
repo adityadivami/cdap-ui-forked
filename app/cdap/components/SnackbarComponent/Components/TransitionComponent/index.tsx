@@ -19,8 +19,9 @@ import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { Divider } from '@material-ui/core';
 import { useStyles } from './styles';
+import { ITransitionComponentProps } from './types';
 
-export default function TransitionComponent(props) {
+export default function({ messageToDisplay, close }: ITransitionComponentProps) {
   const classes = useStyles();
   return (
     <div data-testid="transition-component-parent">
@@ -33,14 +34,14 @@ export default function TransitionComponent(props) {
           role="button"
           tabIndex={0}
           className={classes.undoSpan}
-          onClick={() => props.close()}
+          onClick={() => close()}
           data-testid="snackbar-close-button"
         >
           UNDO
         </span>
       </div>
       <Divider />
-      <p className={classes.successMessage}>{props.messageToDisplay}</p>
+      <p className={classes.successMessage}>{messageToDisplay}</p>
     </div>
   );
 }
