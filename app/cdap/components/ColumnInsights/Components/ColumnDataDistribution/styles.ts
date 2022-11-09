@@ -34,16 +34,6 @@ export const useStyles = makeStyles(() => {
       letterSpacing: 0.15,
       color: grey[900],
     },
-
-    viewFullChart: {
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 14,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: blue[500],
-      margin: 'auto 0px',
-    },
     columnDataQualityGraph: {
       '& .axis': {
         display: 'none',

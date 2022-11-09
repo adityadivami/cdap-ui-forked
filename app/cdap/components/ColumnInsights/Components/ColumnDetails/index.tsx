@@ -42,9 +42,9 @@ export default function({
     DATATYPE_OPTIONS.filter((each) => each.value === columnType?.toLowerCase());
   const [dataTypeValue, setDataTypeValue] = useState<string>();
   const classes = useStyles();
-  const [canEdit, setCanEdit] = useState<Boolean>(false);
+  const [canEdit, setCanEdit] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>(columnName);
-  const [invalidInput, setInvalidInput] = useState<Boolean>(false);
+  const [invalidInput, setInvalidInput] = useState<boolean>(false);
 
   const checkForInvalidInput = (renamedString: string) => {
     if (!/^\w+$/.test(renamedString)) {

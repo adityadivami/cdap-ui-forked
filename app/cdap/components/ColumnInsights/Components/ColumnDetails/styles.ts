@@ -23,14 +23,6 @@ export const useStyles = makeStyles(() => {
       paddingBottom: 20,
       borderBottom: `1px solid ${grey[300]}`,
     },
-    columnInsightsColumnName: {
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 16,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[900],
-    },
     columnNameEdit: {
       display: 'flex',
       gap: 12,
@@ -80,15 +72,6 @@ export const useStyles = makeStyles(() => {
     columnInsightsDetailsWrapper: {
       marginTop: 20,
     },
-    columnInsightsDetailsCount: {
-      fontFamily: 'Noto Sans',
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 14,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[900],
-    },
     columnInsightsDetailsCountSection: {
       display: 'flex',
       alignItems: 'center',
@@ -99,26 +82,6 @@ export const useStyles = makeStyles(() => {
       height: 13,
       backgroundColor: '#DADCE0',
       margin: '0 8px',
-    },
-    columnInsightsDetailsCountDescription: {
-      fontFamily: 'Noto Sans',
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 14,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[900],
-      marginTop: 7,
-    },
-    invalidInput: {
-      padding: '10px 0px',
-      color: red[600],
-      fontFamily: 'Noto Sans',
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 14,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
     },
   };
 });
