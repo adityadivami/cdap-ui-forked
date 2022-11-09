@@ -23,17 +23,25 @@ import WrangleHomeTitle from 'components/WrangleHome/Components/WrangleHomeTitle
 import { GradientLine, HeaderImage } from 'components/WrangleHome/icons';
 import { useStyles } from 'components/WrangleHome/styles';
 import T from 'i18n-react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { CARD_COUNT } from 'components/WrangleHome/constants';
 
 export default function() {
   const classes = useStyles();
-
+  const [showExplorations, setShowExplorations] = useState<boolean>(false);
   useEffect(() => {
     getWidgetData();
   }, []);
 
   return (
-    <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
+    <Box
+      className={
+        showExplorations ? classes.wrapper : `${classes.wrapper} ${classes.wrapperWithBottomSpace}`
+      }
+      data-testid="wrangler-home-new-parent"
+    >
       <Box className={classes.subHeader}>
         <Typography className={classes.welcomeCard}>
           Hello! <br />
@@ -51,13 +59,25 @@ export default function() {
           </Box>
         </Box>
         <WrangleCard />
-        <Box className={classes.headerTitle}>
-          <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
-          <Box className={classes.viewMore}>
-            {T.translate('features.HomePage.labels.common.viewAll')}
+        {showExplorations ? (
+          <Box className={classes.headerTitle}>
+            <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
+            <Box className={classes.viewMore} data-testid="ongoing-explorations-view-all">
+              <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
+                {T.translate('features.HomePage.labels.common.viewAll')}
+              </Link>
+            </Box>
           </Box>
-        </Box>
-        <OngoingDataExplorations />
+        ) : (
+          <></>
+        )}
+        <OngoingDataExplorations
+          fromAddress={T.translate(
+            'features.WranglerNewUI.Breadcrumb.labels.wrangleHome'
+          ).toString()}
+          setShowExplorations={setShowExplorations}
+          cardCount={CARD_COUNT}
+        />
       </Box>
     </Box>
   );
