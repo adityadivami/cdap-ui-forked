@@ -16,7 +16,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import T from 'i18n-react';
-import { useStyles } from 'components/AddTransformation/styles';
+import { useStyles } from 'components/AddTransformation/SelectColumnsWidget/styles';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import { ISelectColumnsWidgetProps } from 'components/AddTransformation/SelectColumnsWidget/types';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
@@ -24,7 +24,7 @@ import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constant
 
 export default function({
   selectedColumns,
-  functionName,
+  transformationName,
   handleSelectColumn,
 }: ISelectColumnsWidgetProps) {
   const classes = useStyles();
@@ -54,7 +54,7 @@ export default function({
       ) : (
         <ButtonWidget
           buttonText={
-            multipleColumnSelected?.filter((el) => el.value === functionName).length > 0
+            multipleColumnSelected?.filter((el) => el.value === transformationName).length > 0
               ? T.translate(
                   `${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`
                 ).toString()

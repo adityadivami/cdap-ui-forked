@@ -15,5 +15,5 @@
  */
 
 export interface IFunctionNameWidgetProps {
-  functionName: string;
+  transformationName: string;
 }

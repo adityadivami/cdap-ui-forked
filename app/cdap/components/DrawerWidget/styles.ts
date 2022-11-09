@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/styles';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles(() => {
   return {
@@ -27,19 +28,6 @@ export const useStyles = makeStyles(() => {
       height: '100%',
       paddingLeft: 30,
     },
-    headerStyles: {
-      height: 60,
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
-    headingStyles: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-    },
     pointerStyles: {
       cursor: 'pointer',
     },
@@ -48,31 +36,8 @@ export const useStyles = makeStyles(() => {
       fontWeight: 400,
       fontSize: 20,
       lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#000000',
-    },
-    headerRightStyles: {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    dividerLineStyles: {
-      width: 1,
-      height: 28,
-      backgroundColor: '#DADCE0',
-      margin: '0 15px',
-    },
-    headerTextWithBackIconStyles: {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    headerBackIconStyles: {
-      marginRight: 10,
-      width: 10,
-      height: 20,
-      cursor: 'pointer',
-    },
-    backIconClass: {
-      cursor: 'pointer',
+      letterSpacing: 0.15,
+      color: grey[900],
     },
   };
 });

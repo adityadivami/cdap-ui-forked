@@ -21,6 +21,8 @@ import MenuItemComponent from 'components/GridTable/components/MenuItemComponent
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
 import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
+import _ from 'lodash';
+import { reverseArrayWithoutMutating } from 'services/helpers';
 
 export default function({
   menuOptions,
@@ -36,25 +38,66 @@ export default function({
 
   const handleMenuClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    menuItem: IMenuItem
+    menuItem: IMenuItem,
+    origin?: string
   ) => {
     event.preventDefault();
     event.stopPropagation();
-    if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
-      setAnchorElement((prev) => [...prev, event.currentTarget]);
-      setMenuComponentOptions((prev) =>
-        prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
-      );
+    if (origin === 'parentMenu') {
+      if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
+        const updatedAnchors = anchorElement.splice(1, 0, event.currentTarget);
+        setAnchorElement((prev) => anchorElement);
+        setMenuComponentOptions([menuItem?.options]);
+      } else {
+        submitMenuOption(menuItem.value, menuItem.supportedDataType);
+        setAnchorElement(null);
+        handleMenuOpenClose(title);
+      }
     } else {
-      submitMenuOption(menuItem.value, menuItem.supported_dataType);
-      setAnchorElement(null);
-      handleMenuOpenClose(title);
+      if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
+        let referenceIndex = -1;
+        menuComponentOptions.forEach((menuOptions, menuOptionsIndex) => {
+          menuOptions.forEach((eachOption, optionsIndex) => {
+            if (eachOption.value === menuItem.value) {
+              referenceIndex = menuOptionsIndex;
+            }
+          });
+        });
+        if (referenceIndex >= 0 && !anchorElement.includes(event.currentTarget)) {
+          const insertPosition = referenceIndex + 2;
+          anchorElement.splice(insertPosition, 0, event.currentTarget);
+          const updatedAnchors = anchorElement.slice(0, insertPosition + 1);
+          menuComponentOptions.splice(updatedAnchors.length - 2, 0, menuItem?.options);
+          setMenuComponentOptions((prev) =>
+            prev.length ? menuComponentOptions : [menuItem?.options]
+          );
+          setAnchorElement(updatedAnchors);
+        } else if (anchorElement.includes(event.currentTarget)) {
+          const currentTargetIndex = _.findIndex(
+            anchorElement,
+            (anchor) => anchor == event.currentTarget
+          );
+          menuComponentOptions.splice(currentTargetIndex, 0, menuItem?.options);
+          setAnchorElement((prev) => prev.slice(0, currentTargetIndex + 1));
+          setMenuComponentOptions((prev) => menuComponentOptions.slice(0, currentTargetIndex + 1));
+        } else {
+          setAnchorElement((prev) => [...prev, event.currentTarget]);
+          setMenuComponentOptions((prev) =>
+            prev.length ? [...prev, menuItem?.options] : [menuItem?.options]
+          );
+        }
+      } else {
+        submitMenuOption(menuItem.value, menuItem.supportedDataType);
+        setAnchorElement(null);
+        handleMenuOpenClose(title);
+      }
     }
   };
   return (
     <>
       <Menu
         id="parent-menu"
+        data-testid="nested-menu-parent-root"
         keepMounted
         anchorEl={anchorElement?.length ? anchorElement[0] : null}
         open={anchorElement?.length ? true : false}
@@ -75,7 +118,9 @@ export default function({
               item={eachOption}
               columnType={columnType.toLowerCase()}
               index={optionsIndex}
-              onMenuClick={handleMenuClick}
+              onMenuClick={(onClickEvent, clickedItem) =>
+                handleMenuClick(onClickEvent, clickedItem, 'parentMenu')
+              }
             />
           );
         })}

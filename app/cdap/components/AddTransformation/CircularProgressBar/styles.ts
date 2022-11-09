@@ -31,14 +31,4 @@ export const useStyles = makeStyles((_theme: Theme) => ({
     height: 30,
     marginBottom: '-20px !important',
   },
-  value: {
-    fontSize: '14px !important',
-    fontStyle: 'normal',
-  },
-  redText: {
-    color: '#E97567',
-  },
-  greenText: {
-    color: '#8BCC74',
-  },
 }));

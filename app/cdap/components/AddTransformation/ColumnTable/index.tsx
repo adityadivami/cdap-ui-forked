@@ -22,36 +22,77 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Checkbox,
+  Divider,
 } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { useStyles } from 'components/AddTransformation/styles';
+import { useStyles } from 'components/AddTransformation/ColumnTable/styles';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
 import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
+import { multipleColumnSelected } from 'components/AddTransformation/constants';
 
 export default function({
   columns,
-  transformationFunctionSupportedDataType,
+  transformationDataType,
   onSingleSelection,
   selectedColumns,
   dataQualityValue,
   isSingleSelection,
   handleDisableCheckbox,
   onMultipleSelection,
+  totalColumnCount,
+  setSelectedColumns,
+  transformationName,
 }: IColumnTableProps) {
   const classes = useStyles();
 
+  const handleChange = () => {
+    if (
+      multipleColumnSelected?.filter(
+        (option) => option.value === transformationName && option.isMoreThanTwo === false
+      ).length > 0
+    ) {
+      if (selectedColumns?.length) {
+        setSelectedColumns([]);
+      } else {
+        columns?.length > 2 ? setSelectedColumns(columns.slice(0, 2)) : setSelectedColumns(columns);
+      }
+    } else {
+      if (selectedColumns?.length) {
+        setSelectedColumns([]);
+      } else {
+        setSelectedColumns(columns);
+      }
+    }
+  };
+
   return (
-    <TableContainer component={Box} data-testid="column-table-parent">
+    <TableContainer
+      component={Box}
+      data-testid="column-table-parent"
+      classes={{ root: classes.muiTableContainer }}
+    >
       <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
-        <TableHead>
+        <Divider />
+        <TableHead classes={{ root: classes.muiTableHeader }}>
           <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
             <TableCell
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
               }}
-            ></TableCell>
+            >
+              {multipleColumnSelected?.filter((option) => option.value === transformationName)
+                .length > 0 && (
+                <Checkbox
+                  color="primary"
+                  checked={selectedColumns?.length ? true : false}
+                  onChange={handleChange}
+                  indeterminate={selectedColumns?.length ? true : false}
+                />
+              )}
+            </TableCell>
             <TableCell
               classes={{
                 head: `${classes.recipeStepsTableHeadStyles}`,
@@ -59,6 +100,7 @@ export default function({
               data-testid="panel-columns"
             >
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
+              {`(${totalColumnCount})`}
             </TableCell>
             <TableCell
               classes={{
@@ -70,11 +112,12 @@ export default function({
             </TableCell>
           </TableRow>
         </TableHead>
+        <Divider />
         <TableBody>
           {columns?.length > 0 &&
             columns.map((eachColumn, index) => (
               <>
-                {transformationFunctionSupportedDataType?.includes('all') ? (
+                {transformationDataType?.includes('all') ? (
                   <TableRowWidget
                     onSingleSelection={onSingleSelection}
                     selectedColumns={selectedColumns}
@@ -86,9 +129,7 @@ export default function({
                     eachColumn={eachColumn}
                   />
                 ) : (
-                  transformationFunctionSupportedDataType?.includes(
-                    eachColumn?.type[0]?.toLowerCase()
-                  ) && (
+                  transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase()) && (
                     <TableRowWidget
                       onSingleSelection={onSingleSelection}
                       selectedColumns={selectedColumns}

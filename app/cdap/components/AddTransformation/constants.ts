@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
   {
@@ -38,6 +39,14 @@ export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
   {
     value: 'keep',
     isMoreThanTwo: true,
+  },
+  {
+    value: 'boolean',
+    isMoreThanTwo: true,
+  },
+  {
+    value: 'string',
+    isMoreThanTwo: false,
   },
 ];
 

@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { TableCell, TableRow, Typography } from '@material-ui/core';
-import { useStyles } from 'components/AddTransformation/styles';
+import { useStyles } from 'components/AddTransformation/ColumnTable/Components/TableRow/styles';
 import InputWidget from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
 import DataQualityProgress from 'components/AddTransformation/CircularProgressBar';
 import { ITableRowProps } from 'components/AddTransformation/ColumnTable/types';
@@ -36,7 +36,7 @@ export default function({
     <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`} key={index}>
       <TableCell
         classes={{
-          body: `${classes.recipeStepsTableRowStyles} ${classes.radioButtonCellStyles}`,
+          body: `${classes.recipeStepsTableRowStyles}`,
         }}
       >
         <InputWidget

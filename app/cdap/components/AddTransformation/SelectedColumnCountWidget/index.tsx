@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { useStyles } from 'components/AddTransformation/styles';
+import { useStyles } from 'components/AddTransformation/SelectedColumnCountWidget/styles';
 import T from 'i18n-react';
 import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';

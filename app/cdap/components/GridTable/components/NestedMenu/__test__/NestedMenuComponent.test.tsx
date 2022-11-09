@@ -14,25 +14,52 @@
  *  the License.
  */
 
-import { render } from '@testing-library/react';
+import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
 import React from 'react';
-
 import NestedMenu from 'components/GridTable/components/NestedMenu/index';
+import { dummyData1, dummyData2 } from 'components/GridTable/components/NestedMenu/mock/mock';
 
 describe('Testing nested menu component', () => {
   it('should test default render of nested menu', () => {
     render(
       <NestedMenu
-        submitMenuOption={function(value: string, dataType: string[]): void {
-          throw new Error('Function not implemented.');
+        submitMenuOption={() => {
+          jest.fn();
         }}
-        columnType={''}
-        menuOptions={[]}
-        title={''}
-        anchorElement={undefined}
+        columnType={'test'}
+        menuOptions={dummyData1}
+        title={'hello'}
+        anchorElement={[]}
         setAnchorElement={() => jest.fn()}
-        open={false}
+        open={true}
+        handleMenuOpenClose={() => jest.fn()}
       />
     );
+
+    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    fireEvent.click(parentElement);
+    fireEvent.click(screen.getByTestId(/nested-menu-parent-root/i));
+    expect(screen.getByTestId(/nested-menu-parent-root/i)).toBeInTheDocument();
+  });
+
+  it('should test default render of nested menu with options as empty', () => {
+    render(
+      <NestedMenu
+        submitMenuOption={() => {
+          jest.fn();
+        }}
+        columnType={'test'}
+        menuOptions={dummyData2}
+        title={'hello'}
+        anchorElement={[]}
+        setAnchorElement={(x) => jest.fn()}
+        open={false}
+        handleMenuOpenClose={() => jest.fn()}
+      />
+    );
+
+    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    fireEvent.click(parentElement);
+    expect(parentElement).toBeInTheDocument();
   });
 });

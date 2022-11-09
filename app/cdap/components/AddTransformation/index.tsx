@@ -27,7 +27,10 @@ import {
   IDataQualityItem,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
-import { multipleColumnSelected, ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
+import {
+  multipleColumnSelected,
+  ADD_TRANSFORMATION_PREFIX,
+} from 'components/AddTransformation/constants';
 import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
 import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
@@ -35,11 +38,11 @@ import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { getDirective } from 'components/AddTransformation/utils';
 
 export default function({
-  transformationFunctionSupportedDataType,
-  functionName,
-  columnData,
-  missingDataList,
-  callBack,
+  transformationDataType,
+  transformationName,
+  columnsList,
+  missingItemsList,
+  onCancel,
   applyTransformation,
 }: IAddTransformationProps) {
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
@@ -48,7 +51,7 @@ export default function({
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
   const classes = useStyles();
   const closeClickHandler = () => {
-    callBack();
+    onCancel();
     setDrawerStatus(false);
   };
 
@@ -68,13 +71,16 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive: string = getDirective(functionName, selectedColumns[0].label);
+    const directive: string = getDirective(transformationName, selectedColumns[0].label);
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
 
   useEffect(() => {
-    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(missingDataList, columnData);
+    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(
+      missingItemsList,
+      columnsList
+    );
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
@@ -82,14 +88,14 @@ export default function({
     if (
       multipleColumnSelected.filter(
         (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === functionName && !functionNameDetail.isMoreThanTwo
+          functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
       )?.length
     ) {
       return selectedColumns?.length === 2 ? false : true;
     } else if (
       multipleColumnSelected.filter(
         (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === functionName && functionNameDetail.isMoreThanTwo
+          functionNameDetail.value === transformationName && functionNameDetail.isMoreThanTwo
       )?.length
     ) {
       return selectedColumns?.length >= 1 ? false : true;
@@ -101,26 +107,22 @@ export default function({
   return (
     <Fragment>
       <DrawerWidget
-        headingText={T.translate(
-          `${ADD_TRANSFORMATION_PREFIX}.addTransformation`
-        )}
+        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.addTransformation`)}
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
       >
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
             <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
-            <FunctionNameWidget functionName={functionName} />
+            <FunctionNameWidget transformationName={transformationName} />
             <SelectColumnsWidget
               handleSelectColumn={handleSelectColumn}
               selectedColumns={selectedColumns}
-              functionName={functionName}
+              transformationName={transformationName}
             />
           </div>
           <ButtonWidget
-            buttonText={T.translate(
-              `${ADD_TRANSFORMATION_PREFIX}.applyStep`
-            ).toString()}
+            buttonText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.applyStep`).toString()}
             className={classes.applyStepButtonStyles}
             onClick={handleApply}
             variant="contained"
@@ -130,9 +132,7 @@ export default function({
         </Container>
       </DrawerWidget>
       <DrawerWidget
-        headingText={T.translate(
-          `${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`
-        )}
+        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
@@ -140,12 +140,13 @@ export default function({
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
             <SelectColumnsList
-              columnData={columnData}
+              columnsList={columnsList}
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={dataQualityValue}
-              transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
-              functionName={functionName}
+              transformationDataType={transformationDataType}
+              transformationName={transformationName}
+              selectedColumns={selectedColumns}
             />
           </div>
           <ButtonWidget
@@ -154,7 +155,7 @@ export default function({
             onClick={closeSelectColumnsPopup}
             disabled={enableDoneButton()}
             variant="contained"
-            buttonId='done-button'
+            buttonId="done-button"
           />
         </Container>
       </DrawerWidget>

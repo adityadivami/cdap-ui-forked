@@ -17,7 +17,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { screen } from '@testing-library/dom';
-import TypographyComponent from '..';
+import TypographyComponent from 'components/GridTable/components/Typography/index';
 
 describe('It Should test Typography Component', () => {
   render(<TypographyComponent className="material" label="test" />);

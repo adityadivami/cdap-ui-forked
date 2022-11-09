@@ -22,46 +22,46 @@ export const DATATYPE_OPTIONS = [
   {
     value: 'string',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.string`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'boolean',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.boolean`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'integer',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.integer`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'long',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.long`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'short',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.short`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'float',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.float`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'double',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.double`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'decimal',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.decimal`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
   {
     value: 'bytes',
     label: T.translate(`${DATA_TYPE_LABEL_PREFIX}.bytes`).toString(),
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
 ];

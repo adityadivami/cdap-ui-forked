@@ -24,6 +24,6 @@ export const MENU_OPTIONS = [
     value: 'changeDatatype',
     label: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.menu.changeDatatype`).toString(),
     options: DATATYPE_OPTIONS,
-    supported_dataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
-  }
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+  },
 ];

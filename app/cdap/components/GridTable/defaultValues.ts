@@ -14,7 +14,7 @@
  * the License.
  */
 
-export const missingItemDefaultValue = [
+export const defaultMissingItem = [
   {
     label: 'Invalid',
     count: '0',

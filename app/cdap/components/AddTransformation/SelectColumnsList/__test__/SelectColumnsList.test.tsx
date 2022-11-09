@@ -28,14 +28,14 @@ describe('It should test the SelectColumnsList Component', () => {
           <Route>
             <SelectColumnsList
               selectedColumnsCount={1}
-              columnData={[
+              columnsList={[
                 { label: 'hello', type: ['a', 'b'], name: 'test' },
                 { label: 'hello', type: ['a', 'b'], name: 'test' },
               ]}
               setSelectedColumns={() => jest.fn()}
               dataQuality={[]}
-              transformationFunctionSupportedDataType={[]}
-              functionName={''}
+              transformationDataType={[]}
+              transformationName={''}
             />
           </Route>
         </Switch>
@@ -49,15 +49,15 @@ describe('It should test the SelectColumnsList Component', () => {
         <Switch>
           <Route>
             <SelectColumnsList
-              columnData={[]}
+              columnsList={[]}
               selectedColumnsCount={0}
               setSelectedColumns={jest.fn()}
               dataQuality={[
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              transformationFunctionSupportedDataType={['all', 'test']}
-              functionName={''}
+              transformationDataType={['all', 'test']}
+              transformationName={''}
             />
           </Route>
         </Switch>
@@ -80,15 +80,15 @@ describe('It should test the SelectColumnsList Component', () => {
         <Switch>
           <Route>
             <SelectColumnsList
-              columnData={[{ label: 'hello', type: ['test'], name: 'hello' }]}
+              columnsList={[{ label: 'hello', type: ['test'], name: 'hello' }]}
               selectedColumnsCount={1}
               setSelectedColumns={jest.fn()}
               dataQuality={[
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              transformationFunctionSupportedDataType={['test']}
-              functionName={'join-columns'}
+              transformationDataType={['test']}
+              transformationName={'join-columns'}
             />
           </Route>
         </Switch>
@@ -112,15 +112,15 @@ describe('It should test the SelectColumnsList Component', () => {
         <Switch>
           <Route>
             <SelectColumnsList
-              columnData={[]}
+              columnsList={[]}
               selectedColumnsCount={0}
               setSelectedColumns={getSelectedColumns}
               dataQuality={[
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              transformationFunctionSupportedDataType={['all', 'test']}
-              functionName={''}
+              transformationDataType={['all', 'test']}
+              transformationName={''}
             />
           </Route>
         </Switch>
@@ -139,7 +139,7 @@ describe('It should test the SelectColumnsList Component', () => {
           <Route>
             <SelectColumnsList
               selectedColumnsCount={0}
-              columnData={[
+              columnsList={[
                 { label: 'hello', type: ['a', 'b'], name: 'test' },
                 { label: 'hello', type: ['a', 'b'], name: 'test' },
               ]}
@@ -148,8 +148,8 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              transformationFunctionSupportedDataType={['TEST', 'all']}
-              functionName={''}
+              transformationDataType={['TEST', 'all']}
+              transformationName={''}
             />
           </Route>
         </Switch>
@@ -168,7 +168,7 @@ describe('It should test the SelectColumnsList Component', () => {
           <Route>
             <SelectColumnsList
               selectedColumnsCount={0}
-              columnData={[
+              columnsList={[
                 { label: 'hello', type: ['a', 'b'], name: 'test' },
                 { label: 'hello', type: ['a', 'b'], name: 'test' },
               ]}
@@ -177,8 +177,8 @@ describe('It should test the SelectColumnsList Component', () => {
                 { label: 'hello', value: '' },
                 { label: 'world', value: '' },
               ]}
-              transformationFunctionSupportedDataType={['TEST', 'all']}
-              functionName={'join-columns'}
+              transformationDataType={['TEST', 'all']}
+              transformationName={'join-columns'}
             />
           </Route>
         </Switch>

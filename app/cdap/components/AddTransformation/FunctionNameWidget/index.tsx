@@ -16,12 +16,12 @@
 import React from 'react';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import T from 'i18n-react';
-import { useStyles } from 'components/AddTransformation/styles';
+import { useStyles } from 'components/AddTransformation/FunctionNameWidget/styles';
 import { TickIcon } from 'components/AddTransformation/iconStore';
 import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 
-export default function({ functionName }: IFunctionNameWidgetProps) {
+export default function({ transformationName }: IFunctionNameWidgetProps) {
   const classes = useStyles();
 
   return (
@@ -42,7 +42,7 @@ export default function({ functionName }: IFunctionNameWidgetProps) {
           id="selected-function-name"
           className={classes.functionTextStyles}
         >
-          {functionName}
+          {transformationName}
         </span>
         <span data-testid="selected-function-info" id="selected-function-info">
           <InfoOutlinedIcon className={classes.infoIcon} />

@@ -15,6 +15,7 @@
  */
 
 import { makeStyles } from '@material-ui/core/styles';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   divider: {
@@ -23,16 +24,26 @@ export const useStyles = makeStyles({
   heading: {
     fontSize: 14,
     fontWeight: 600,
-    color: '#5F6368',
+    color: grey[600],
     padding: '0px 21px',
   },
   root: {
+    position: 'absolute !important',
+    left: '0 !important',
+    right: '0 !important',
+    bottom: '0 !important',
+    width: 232,
+    top: '-13px !important',
+    '& > div': {
+      position: 'absolute !important',
+    },
     '& .MuiMenuItem-root': {
       padding: '6px 20px 6px 20px',
       height: 33,
     },
     '& .MuiMenu-paper': {
       width: 199,
+      maxHeight: '70% !important',
     },
     '& .MuiMenu-list': {
       color: '#5F6368',

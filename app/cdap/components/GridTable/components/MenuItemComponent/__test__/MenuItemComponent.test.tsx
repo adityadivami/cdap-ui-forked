@@ -22,7 +22,7 @@ describe('Testing Menu Item Component', () => {
   it('Should render default component', () => {
     const dummyItem = {
       label: 'test',
-      supported_dataType: ['all'],
+      supportedDataType: ['all'],
       value: 'string',
       options: [],
     };
@@ -37,7 +37,7 @@ describe('Testing Menu Item Component', () => {
   it('Should render default component in columntype null case', () => {
     const dummyItem = {
       label: 'test',
-      supported_dataType: [],
+      supportedDataType: [],
       value: 'string',
       options: [],
     };
@@ -51,7 +51,7 @@ describe('Testing Menu Item Component', () => {
   it('Should render the item list divider element', () => {
     const dummyItem = {
       label: 'test',
-      supported_dataType: ['all'],
+      supportedDataType: ['all'],
       value: T.translate('features.WranglerNewUI.GridPage.menuItems.divider'),
       options: ['all'],
     };
@@ -71,7 +71,7 @@ describe('Testing Menu Item Component', () => {
 it('should render the heading element', () => {
   const dummyItem = {
     label: 'test',
-    supported_dataType: [],
+    supportedDataType: [],
     value: T.translate('features.WranglerNewUI.GridPage.menuItems.heading'),
     options: ['all'],
   };
