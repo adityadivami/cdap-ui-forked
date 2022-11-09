@@ -32,13 +32,13 @@ describe('Test Breadcrumb Component', () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <Breadcrumb workspaceName="abc" location={location} />
+          <Breadcrumb breadcrumbsList={[{ label: 'display name', link: 'path to redirect' }]} />
         </Route>
       </Switch>
     </Router>
   );
 
   it('Should have the Home text in the Breadcrumb', () => {
-    expect(screen.getByTestId('breadcrumb-home-text')).toHaveTextContent('Home');
+    expect(screen.getByTestId('breadcrumb-home-display name')).toHaveTextContent('display name');
   });
 });

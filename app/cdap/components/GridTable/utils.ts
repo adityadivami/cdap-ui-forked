@@ -42,7 +42,7 @@ export const getWrangleGridBreadcrumbOptions = (workspaceName, location) => {
     finalBreadcrumbList.push(intermediateBreadcrumb);
 
   finalBreadcrumbList.push({
-    label: workspaceName.toString(),
+    label: workspaceName?.toString(),
   });
 
   return finalBreadcrumbList;
