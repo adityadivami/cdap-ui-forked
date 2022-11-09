@@ -14,32 +14,14 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import DrawerWidgetHeading from 'components/ColumnViewWidget/DrawerWidgetHeading/';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  columnViewDrawer: {
-    maxHeight: 'calc(100vh - 240px)',
-  },
-  columnViewContainer: {
-    display: 'flex',
-    fontFamily: 'Roboto',
-  },
-  floatingButton: {
-    position: 'fixed',
-    left: 0,
-    bottom: '8%',
-    height: 40,
-  },
+describe('It Should test DrawerWidgetHeading Component', () => {
+  it('Should render DrawerWidgetheading Component and test the column view heading text', () => {
+    render(<DrawerWidgetHeading headingText={'Column View Panel'} />);
+    const headingText = screen.getByTestId('drawer-widget-heading-text');
+    expect(headingText).toHaveTextContent('Column View Panel');
+  });
 });

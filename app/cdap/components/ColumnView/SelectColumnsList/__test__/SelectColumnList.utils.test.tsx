@@ -14,32 +14,15 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+import { prepareDataQualtiy } from 'components/ColumnView/SelectColumnsList/utils';
+import {
+  mockColumnData,
+  mockDataQuality,
+  mockResult,
+} from 'components/ColumnView/mock/mockDataForColumnView';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  columnViewDrawer: {
-    maxHeight: 'calc(100vh - 240px)',
-  },
-  columnViewContainer: {
-    display: 'flex',
-    fontFamily: 'Roboto',
-  },
-  floatingButton: {
-    position: 'fixed',
-    left: 0,
-    bottom: '8%',
-    height: 40,
-  },
+describe('It Should test the utils function prepareDataQualtiy', () => {
+  it('should test whether the utils function return the expected Value', () => {
+    expect(prepareDataQualtiy(mockDataQuality, mockColumnData)).toStrictEqual(mockResult);
+  });
 });

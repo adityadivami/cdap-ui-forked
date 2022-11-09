@@ -14,9 +14,11 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Button, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
+import ColumnView from 'components/ColumnView';
+import { IDataQuality } from 'components/ColumnView/types';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
@@ -56,6 +58,8 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const [openColumnView, setOpenColumnView] = useState<boolean>(false);
+  const [dataQuality, setDataQuality] = useState<IDataQuality>({});
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -240,55 +244,75 @@ export default function GridTable() {
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
-        <NoRecordScreen
-          title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
-          subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
-        />
-      ) : (
-        <Table aria-label="simple table" className="test">
-          <TableHead>
-            <TableRow>
-              {headersNamesList?.length &&
-                headersNamesList.map((eachHeader) => (
-                  <GridHeaderCell
-                    label={eachHeader.label}
-                    types={eachHeader.type}
-                    key={eachHeader.name}
-                  />
-                ))}
-            </TableRow>
-            <TableRow>
-              {missingDataList?.length &&
-                headersNamesList.length &&
-                headersNamesList.map((each, index) => {
-                  return missingDataList.map((item, itemIndex) => {
-                    if (item.name === each.name) {
-                      return <GridKPICell metricData={item} key={item.name} />;
-                    }
-                  });
+      <Button
+        onClick={() => setOpenColumnView((prev) => !prev)}
+        fullWidth
+        className={classes.floatingButton}
+        variant="contained"
+      >
+        Column View Panel
+      </Button>
+      <Box className={classes.columnViewContainer}>
+        {openColumnView && (
+          <Box className={classes.columnViewDrawer}>
+            <ColumnView
+              setLoading={setLoading}
+              columnData={headersNamesList}
+              dataQuality={dataQuality}
+              closeClickHandler={() => setOpenColumnView(false)}
+            />
+          </Box>
+        )}
+        {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
+          <NoRecordScreen
+            title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
+            subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
+          />
+        ) : (
+          <Table aria-label="simple table" className="test">
+            <TableHead>
+              <TableRow>
+                {headersNamesList?.length &&
+                  headersNamesList.map((eachHeader) => (
+                    <GridHeaderCell
+                      label={eachHeader.label}
+                      types={eachHeader.type}
+                      key={eachHeader.name}
+                    />
+                  ))}
+              </TableRow>
+              <TableRow>
+                {missingDataList?.length &&
+                  headersNamesList.length &&
+                  headersNamesList.map((each, index) => {
+                    return missingDataList.map((item, itemIndex) => {
+                      if (item.name === each.name) {
+                        return <GridKPICell metricData={item} key={item.name} />;
+                      }
+                    });
+                  })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rowsDataList?.length &&
+                rowsDataList.map((eachRow, rowIndex) => {
+                  return (
+                    <TableRow key={`row-${rowIndex}`}>
+                      {headersNamesList.map((eachKey, eachIndex) => {
+                        return (
+                          <GridTextCell
+                            cellValue={eachRow[eachKey.name] || '--'}
+                            key={`${eachKey.name}-${eachIndex}`}
+                          />
+                        );
+                      })}
+                    </TableRow>
+                  );
                 })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rowsDataList?.length &&
-              rowsDataList.map((eachRow, rowIndex) => {
-                return (
-                  <TableRow key={`row-${rowIndex}`}>
-                    {headersNamesList.map((eachKey, eachIndex) => {
-                      return (
-                        <GridTextCell
-                          cellValue={eachRow[eachKey.name] || '--'}
-                          key={`${eachKey.name}-${eachIndex}`}
-                        />
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      )}
+            </TableBody>
+          </Table>
+        )}
+      </Box>
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
