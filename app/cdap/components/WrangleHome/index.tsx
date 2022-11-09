@@ -60,8 +60,12 @@ export default function() {
         {showExplorations && (
           <Box className={classes.headerTitle}>
             <WrangleHomeTitle title={T.translate('features.HomePage.labels.workspaces.title')} />
-            <Box className={classes.viewMore} data-testid="ongoing-explorations-view-all">
-              <Link color="inherit" to={`/ns/${getCurrentNamespace()}/workspace-list`}>
+            <Box className={classes.viewMore}>
+              <Link
+                color="inherit"
+                to={`/ns/${getCurrentNamespace()}/workspace-list`}
+                data-testid="ongoing-explorations-view-all"
+              >
                 {T.translate('features.HomePage.labels.common.viewAll')}
               </Link>
             </Box>
