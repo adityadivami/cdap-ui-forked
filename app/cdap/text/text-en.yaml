@@ -319,14 +319,6 @@ features:
       message1: 'Create a new namespace '
       message2: '(Note: You will require ADMIN privileges for creating a namespace)'
     mainMessage: ' You are not authorized to access any existing namespace'
-  Breadcrumb:
-    labels:
-      connectionsList: 'Data Sources'
-      wrangleHome: 'Home'
-      loadToGrid: 'Wrangle'
-    params:
-      wrangleHome: 'home'
-      connectionsList: 'datasources'
   Cloud:
     Profiles:
       common:
@@ -3438,8 +3430,14 @@ features:
   WranglerNewUI:
     Breadcrumb:
       labels:
+        connectionsList: 'Data Sources'
+        loadToGrid: 'Wrangle'
         workSpaces: 'Workspaces'
         wrangleHome: 'Home'
+      params:
+        connectionsList: 'datasources'
+        workSpaces: 'workspace-list'
+        wrangleHome: 'home'
     NoRecordScreen:
       gridTable:
         subtitle: 'Remove some recipe steps to view some data'
