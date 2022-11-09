@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import NestedMenu from 'components/GridTable/components/NestedMenu/index';
 import { dummyData1, dummyData2 } from 'components/GridTable/components/NestedMenu/mock/mock';
@@ -37,9 +37,13 @@ describe('Testing nested menu component', () => {
     );
 
     const parentElement = screen.getByTestId(/menu-item-parent/i);
-    fireEvent.click(parentElement);
+    // fireEvent.click(parentElement);
     fireEvent.click(screen.getByTestId(/nested-menu-parent-root/i));
     expect(screen.getByTestId(/nested-menu-parent-root/i)).toBeInTheDocument();
+    expect(parentElement).toBeInTheDocument();
+    expect(parentElement).toHaveClass(
+      'MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button'
+    );
   });
 
   it('should test default render of nested menu with options as empty', () => {
@@ -52,7 +56,7 @@ describe('Testing nested menu component', () => {
         menuOptions={dummyData2}
         title={'hello'}
         anchorElement={[]}
-        setAnchorElement={(x) => jest.fn()}
+        setAnchorElement={() => jest.fn()}
         open={false}
         handleMenuOpenClose={() => jest.fn()}
       />
