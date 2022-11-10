@@ -14,21 +14,20 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from 'components/DrawerWidget/styles';
 import { UnderLine } from 'components/DrawerWidget/iconStore';
 import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
+import { FlexBoxContainer } from 'components/common/BoxContainer';
+import { SimpleBoldLabel } from 'components/common/TypographyText';
 
 export default function({ headingText }: IDrawerWidgetHeadingProps) {
   const classes = useStyles();
 
   return (
-    <Box className={classes.headingStyles}>
-      <Typography component="div" className={classes.headingTextStyles}>
-        {headingText}
-      </Typography>
+    <FlexBoxContainer flexDirection="column">
+      <SimpleBoldLabel component="p" size="20px" dataTestId="drawer-heading" text={headingText} />
       {UnderLine}
-    </Box>
+    </FlexBoxContainer>
   );
 }

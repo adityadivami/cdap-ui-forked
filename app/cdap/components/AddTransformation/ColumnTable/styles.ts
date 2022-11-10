@@ -32,14 +32,23 @@ export const useStyles = makeStyles(() => {
     rowsOfTable: {
       display: 'grid',
       gridTemplateColumns: '10% 45% 45%',
+      alignItems: 'center',
+      height: '100%',
     },
     recipeStepsTableHeadStyles: {
-      padding: 10,
+      padding: 0,
       fontWeight: 600,
       fontSize: 16,
       lineHeight: '150%',
       letterSpacing: 0.15,
       color: grey[700],
+      borderBottom: 'none !important',
+    },
+    muiTableHeader: {
+      height: 54,
+    },
+    muiTableContainer: {
+      height: '100%',
     },
   };
 });

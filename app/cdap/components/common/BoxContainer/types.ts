@@ -16,7 +16,6 @@
 
 export interface IBoxContainerProps {
   children?: JSX.Element[] | JSX.Element;
-  type: 'SimpleBox' | 'AbsoluteDiv' | 'FlexBox' | 'IconBox';
   padding?: string | number;
   margin?: string | number;
   backgroundColor?: string;
@@ -33,4 +32,5 @@ export interface IBoxContainerProps {
   flexDirection?: string;
   onClick?: () => void;
   dataTestId?: string;
+  textAlign?: string;
 }

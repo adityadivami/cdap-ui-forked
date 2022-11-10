@@ -18,22 +18,13 @@ import { makeStyles } from '@material-ui/styles';
 import { grey } from '@material-ui/core/colors';
 export const useStyles = makeStyles(() => {
   return {
-    columnsCountTextStyles: {
-      fontWeight: 400,
-      fontSize: 14,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[700],
-      paddingTop: 5,
-      paddingBottom: 15,
-    },
-    selectColumnsHeaderStyles: {
-      display: 'flex',
-      justifyContent: 'space-between',
-    },
     searchFormControl: {
       position: 'relative',
       display: 'flex',
+      marginRight: 10,
+      '& input': {
+        marginRight: 30,
+      },
     },
     searchInputAdornment: {
       zIndex: 0,
@@ -49,16 +40,6 @@ export const useStyles = makeStyles(() => {
     isBlurred: {
       border: 'none',
       borderBottom: '1px solid transparent',
-    },
-    noRecordWrapper: {
-      height: '100%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 30,
-    },
-    innerWrapper: {
-      textAlign: 'center',
     },
   };
 });

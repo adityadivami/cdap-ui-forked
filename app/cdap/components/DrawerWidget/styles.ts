@@ -28,11 +28,6 @@ export const useStyles = makeStyles(() => {
       height: '100%',
       paddingLeft: 30,
     },
-    headingStyles: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-    },
     pointerStyles: {
       cursor: 'pointer',
     },
@@ -43,22 +38,6 @@ export const useStyles = makeStyles(() => {
       lineHeight: '150%',
       letterSpacing: 0.15,
       color: grey[900],
-    },
-    headerRightStyles: {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    dividerLineStyles: {
-      width: 1,
-      height: 28,
-      backgroundColor: '#DADCE0',
-      margin: '0 15px',
-    },
-    headerBackIconStyles: {
-      marginRight: 10,
-      width: 10,
-      height: 20,
-      cursor: 'pointer',
     },
   };
 });

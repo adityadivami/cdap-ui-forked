@@ -19,8 +19,8 @@ import React from 'react';
 import { useStyles } from 'components/AddTransformation/CircularProgressBar/styles';
 import styled from 'styled-components';
 import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
-import TypographyText from 'components/common/TypographyText';
 import { red, green } from '@material-ui/core/colors';
+import { ErrorLabel, SuccessLabel } from 'components/common/TypographyText';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -45,14 +45,23 @@ export default function({ value }: ICircularProgressBarProps) {
         <Box className={classes.barOverflow}>
           <ArcContainer value={Math.round(value)} />
         </Box>
-        <TypographyText
-          component="span"
-          size="14px"
-          weight={400}
-          type={Math.round(value) < 100 ? 'error' : 'success'}
-          dataTestId="circular-bar-value"
-          text={`${Math.round(value)}%`}
-        />
+        {Math.round(value) < 100 ? (
+          <ErrorLabel
+            size="14px"
+            component="div"
+            weight={400}
+            dataTestId="circular-bar-value"
+            text={`${Math.round(value)}%`}
+          />
+        ) : (
+          <SuccessLabel
+            size="14px"
+            component="div"
+            weight={400}
+            dataTestId="circular-bar-value"
+            text={`${Math.round(value)}%`}
+          />
+        )}
       </Box>
     </>
   );
