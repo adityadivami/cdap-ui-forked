@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Container } from '@material-ui/core';
+import { Container, Divider } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
@@ -114,6 +114,7 @@ export default function({
         <Container className={classes.addTransformationBodyStyles}>
           <div className={classes.addTransformationBodyWrapperStyles}>
             <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
+            <Divider />
             <FunctionNameWidget transformationName={transformationName} />
             <SelectColumnsWidget
               handleSelectColumn={handleSelectColumn}

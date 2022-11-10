@@ -21,8 +21,9 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import { ISelectColumnsWidgetProps } from 'components/AddTransformation/SelectColumnsWidget/types';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
-import { BlockContainer } from 'components/common/BoxContainer';
+import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
 import { SimpleLabel } from 'components/common/TypographyText';
+import { TickIcon } from 'components/AddTransformation/iconStore';
 
 export default function({
   selectedColumns,
@@ -33,14 +34,17 @@ export default function({
 
   const singleColumnSelect = (
     <>
-      <SimpleLabel
-        component="p"
-        size="16px"
-        weight={600}
-        dataTestId="select-column-title"
-        text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`).toString()}
-      />
-      <BlockContainer padding="10px 0 0">
+      <FlexBoxContainer justifyContent="space-between" alignItems="center">
+        <SimpleLabel
+          component="p"
+          size="16px"
+          weight={600}
+          dataTestId="select-column-title"
+          text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`).toString()}
+        />
+        {selectedColumns.length > 0 && TickIcon}
+      </FlexBoxContainer>
+      <BlockContainer padding="10px 0">
         <SimpleLabel
           component="p"
           size="14px"

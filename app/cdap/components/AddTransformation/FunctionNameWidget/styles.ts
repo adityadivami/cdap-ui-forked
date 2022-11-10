@@ -26,6 +26,7 @@ export const useStyles = makeStyles(() => {
       color: blue[500],
       fontSize: 20,
       cursor: 'pointer',
+      marginLeft: 8,
     },
   };
 });

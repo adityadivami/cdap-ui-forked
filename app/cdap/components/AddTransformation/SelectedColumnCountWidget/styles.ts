@@ -20,7 +20,7 @@ export const useStyles = makeStyles(() => {
   return {
     columnsCountTextStyles: {
       paddingTop: 5,
-      paddingBottom: 15,
+      paddingBottom: 10,
     },
   };
 });

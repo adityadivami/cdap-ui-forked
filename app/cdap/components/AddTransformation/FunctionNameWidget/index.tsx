@@ -38,7 +38,7 @@ export default function({ transformationName }: IFunctionNameWidgetProps) {
         />
         {TickIcon}
       </FlexBoxContainer>
-      <BlockContainer justifyContent="space-between" padding="10px 0 0 0">
+      <BlockContainer padding="10px 0 0 0">
         <SimpleLabel
           component="span"
           size="16px"
