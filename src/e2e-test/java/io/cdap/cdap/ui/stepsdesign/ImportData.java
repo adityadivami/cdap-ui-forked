@@ -31,26 +31,29 @@ public class ImportData {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
+
     @Then("Click on the Connector type card with \\\"(.*)\\\"")
-    public void clickOnTheConnectionTypeCard( String testId) {
+    public void clickOnTheConnectionTypeCard(String testId) {
         try {
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId(testId + "-connector-type"));
-            String url=SeleniumDriver.getDriver().getCurrentUrl();
+            String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/datasources/" + testId));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
+
     @Then("Click on the Import Data button")
     public void clickOnTheImportDataCard() {
         try {
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("import-data"));
-    } catch (Exception e) {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("import-data"));
+        } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
+
     @Then("Click on the file drop zone to upload a file with {string}")
     public void clickOnTheFileDropZoneToUploadAFile(String file) {
         try {
@@ -60,30 +63,33 @@ public class ImportData {
             System.err.println("error:" + e);
         }
     }
+
     @Then("Click on the Delete icon")
     public void clickOnTheDeleteIon() {
         try {
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("delete-svg"));
-    } catch (Exception e) {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("delete-svg"));
+        } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
+
     @Then("Click on the Cross icon")
     public void clickOnTheCrossIcon() {
         try {
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("drawer-widget-close-round-icon"));
-    } catch (Exception e) {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("drawer-widget-close-round-icon"));
+        } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
+
     @Then("Click on the Wrangle button")
     public void clickOnTheWrangleIcon() {
         try {
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("upload-button"));
-    } catch (Exception e) {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("upload-button"));
+        } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
