@@ -14,21 +14,17 @@
  * the License.
  */
 
-import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
+import { FormControlLabel, Input } from '@material-ui/core';
+import React from 'react';
+import { IFormInputFieldComponentProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
 
-export interface ITransformationToolBarProps {
-  columnType: string;
-  submitMenuOption: (value: string, dataType: string[]) => void;
-  setShowBreadCrumb: React.Dispatch<React.SetStateAction<boolean>>;
-  showBreadCrumb: boolean;
-}
-
-export interface INestedMenuOptions {
-  title: string;
-  action?: string;
-  dataType?: string[];
-  toolName: string;
-  icon: JSX.Element;
-  options: IMenuItem[] | [];
-  open: boolean;
+export default function({ formInputValue, classnames, inputProps }: IFormInputFieldComponentProps) {
+  return (
+    <FormControlLabel
+      value={formInputValue}
+      className={classnames}
+      control={<Input {...inputProps} />}
+      label={''}
+    />
+  );
 }

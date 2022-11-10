@@ -19,6 +19,9 @@ export interface IMenuItem {
   supportedDataType: string[];
   value: string;
   options?: IMenuItem[];
+  inputRequired?: boolean;
+  sign?: string | null;
+  component?: string | JSX.Element | JSX.Element[];
 }
 
 export interface IMenuItemComponentProps {

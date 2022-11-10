@@ -3475,6 +3475,49 @@ features:
               double: double
               decimal: decimal
               bytes: bytes
+            math:
+              algebra: Algebra
+              add: Add
+              subtract: Subtract
+              multiply: Multiply
+              divide: Divide
+              modulo: Modulo
+              powerOf: Power of
+              square: Square
+              squareRoot: Square root
+              cube: Cube
+              cubeRoot: Cube root
+              log: log
+              naturalLog: Natural log
+              absoluteValue: Absolute value
+              ceil: Ceil
+              floor: Floor
+              trigonometry: Trigonometry
+              sin: Sin
+              cos: Cos
+              tan: Tan
+              arcsin: ARCSIN
+              arccos: ARCCOS
+              arctan: ARCTAN
+              random: Random
+              decimal: DECIMAL
+              decimalAdd: Decimal Add
+              decimalSubtract: Decimal Subtract
+              decimalMultiply: Decimal Multiply
+              decimalDivide: Decimal Divide
+              decimalDivider: Decimal Divider
+              precision: Precision
+              scale: Scale
+              unscaled: Unscaled
+              decimalLeft: Decimal left
+              decimalRight: Decimal right
+              decimalPowerOf: Decimal power of
+              decimalAbsoluteValue: Decimal absolute value
+              decimalSquare: Decimal square
+              decimalCube: Decimal cube
+              negate: Negate
+              stripZero: Strip zero
+              sign: Sign
             menu:
               changeDatatype: Change data type
       addTransformationPanel:
@@ -3495,7 +3538,14 @@ features:
         no: No
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
-        zero: '0' 
+        zero: '0'
+      transformationUI:
+        calculate:
+          columnExist: This column name already exist
+          copyToNewColumn: Copy to a new column
+          destinationColumn: Destination Column
+          enterValueTo: Please enter a value to
+          nameNewColumn:  Name new column 
     Snackbar:
       labels:
         datasetSuccess: Dataset loaded successfully 

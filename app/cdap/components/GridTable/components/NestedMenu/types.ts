@@ -30,12 +30,18 @@ interface IOptions {
   value: string;
   label: string;
   options?: IOptions[];
-  supported_dataType: string[];
+  supportedDataType: string[];
+  inputRequired?: boolean;
+  sign?: string | null;
+  component?: JSX.Element | JSX.Element[];
 }
 
 export interface IMenuOptions {
   value: string;
   label: string;
   options?: IOptions[];
-  supported_dataType: string[];
+  supportedDataType: string[];
+  inputRequired?: boolean;
+  sign?: string | null;
+  component?: JSX.Element | JSX.Element[];
 }

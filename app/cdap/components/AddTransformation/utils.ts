@@ -14,11 +14,30 @@
  * the License.
  */
 
-import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 
-export const getDirective = (functionName: string, selectedColumnName: string) => {
+import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
+export const getDirective = (
+  functionName: string,
+  columnSelected: string,
+  directiveComponentValues: ITransformationComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-    return `set-type :${selectedColumnName} ${functionName}`;
+    return `set-type :${columnSelected} ${functionName}`;
+  } else if (CALCULATE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
+    const calculateOption = CALCULATE_OPTIONS.filter(
+      (eachOption) => eachOption.value === functionName
+    );
+    if (calculateOption.length) {
+      const value = calculateOption[0]?.directive(
+        columnSelected,
+        directiveComponentValues.customInput,
+        directiveComponentValues.copyColumnName,
+        directiveComponentValues.copyToNewColumn
+      );
+      return value;
+    }
   } else {
     return null;
   }
