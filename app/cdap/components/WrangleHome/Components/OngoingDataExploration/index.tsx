@@ -115,7 +115,7 @@ const OngoingDataExploration = (props) => {
             }}
             style={{ textDecoration: 'none' }}
           >
-            {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
+            {index <= 1 && <OngoingDataExplorationCard item={item} index={index} />}
           </Link>
         );
       })}

@@ -20,4 +20,5 @@ export interface IGridHeaderCellProps {
   columnSelected: string;
   setColumnSelected: (columnName: string) => void;
   onColumnSelection: (columnName: string) => void;
+  index: number;
 }

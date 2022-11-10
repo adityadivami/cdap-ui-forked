@@ -94,6 +94,7 @@ export default function({
             onBlur={(e) => onBlurEvent(e)}
             onChange={(e) => onChangeHandler(e)}
             onKeyDown={(e) => onEnter(e)}
+            data-testid="column-name-edit-input"
           />
         ) : (
           <RenderLabel fontSize={16}>
@@ -101,7 +102,7 @@ export default function({
           </RenderLabel>
         )}
         <Box>
-          <EditIcon onClick={editHandler} className={classes.editIcon} />
+          <EditIcon onClick={editHandler} className={classes.editIcon} data-testid="edit-icon" />
         </Box>
       </div>
       {invalidInput && (
@@ -124,6 +125,7 @@ export default function({
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleDataTypeChange(e)}
         options={DATATYPE_OPTIONS}
         fullWidth={false}
+        dataTestId={'datatype-input-select'}
       />
       <section className={classes.columnInsightsDetailsWrapper}>
         <div className={classes.columnInsightsDetailsCountSection}>

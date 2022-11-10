@@ -27,6 +27,7 @@ export default function({
   fullWidth,
   optionClassName,
   defaultValue,
+  dataTestId,
 }: IInputSelect) {
   return (
     <Select
@@ -44,6 +45,7 @@ export default function({
         },
         getContentAnchorEl: null,
       }}
+      data-testid={dataTestId}
     >
       {options &&
         Array.isArray(options) &&
