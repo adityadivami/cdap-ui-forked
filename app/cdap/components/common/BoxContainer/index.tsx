@@ -33,6 +33,35 @@ const SimpleBox = styled(Box)`
   text-align: ${({ textAlign }) => (textAlign ? textAlign : 'left')};
 `;
 
+export const BlockContainer = ({
+  children,
+  padding,
+  margin,
+  backgroundColor,
+  borderRadius,
+  border,
+  width,
+  height,
+  onClick,
+  dataTestId,
+  textAlign,
+}: IBoxContainerProps) => (
+  <SimpleBox
+    padding={padding}
+    margin={margin}
+    backgroundColor={backgroundColor}
+    borderRadius={borderRadius}
+    border={border}
+    width={width}
+    height={height}
+    onClick={onClick}
+    dataTestId={dataTestId}
+    textAlign={textAlign}
+  >
+    {children}
+  </SimpleBox>
+);
+
 const AbsoluteDiv = styled(SimpleBox)`
   position: absolute;
   top: ${({ top }) => (top ? top : 0)};
@@ -41,20 +70,8 @@ const AbsoluteDiv = styled(SimpleBox)`
   bottom: ${({ bottom }) => (bottom ? bottom : 0)};
 `;
 
-const SimpleFlexBox = styled(SimpleBox)`
-  display: flex;
-  justify-content: ${({ justifyContent }) => (justifyContent ? justifyContent : 'flex-start')};
-  align-items: ${({ alignItem }) => (alignItem ? alignItem : 'flex-start')};
-  flex-direction: ${({ flexDirection }) => (flexDirection ? flexDirection : 'row')};
-`;
-
-const IconBox = styled(SimpleBox)`
-  cursor: pointer;
-`;
-
-export default function({
+export const AbsoluteContainer = ({
   children,
-  type,
   padding,
   margin,
   backgroundColor,
@@ -62,6 +79,46 @@ export default function({
   left,
   top,
   bottom,
+  borderRadius,
+  border,
+  width,
+  height,
+  onClick,
+  dataTestId,
+  textAlign,
+}: IBoxContainerProps) => (
+  <AbsoluteDiv
+    padding={padding}
+    margin={margin}
+    backgroundColor={backgroundColor}
+    right={right}
+    left={left}
+    top={top}
+    bottom={bottom}
+    borderRadius={borderRadius}
+    border={border}
+    width={width}
+    height={height}
+    onClick={onClick}
+    dataTestId={dataTestId}
+    textAlign={textAlign}
+  >
+    {children}
+  </AbsoluteDiv>
+);
+
+const SimpleFlexBox = styled(SimpleBox)`
+  display: flex;
+  justify-content: ${({ justifyContent }) => (justifyContent ? justifyContent : 'flex-start')};
+  align-items: ${({ alignItem }) => (alignItem ? alignItem : 'flex-start')};
+  flex-direction: ${({ flexDirection }) => (flexDirection ? flexDirection : 'row')};
+`;
+
+export const FlexBoxContainer = ({
+  children,
+  padding,
+  margin,
+  backgroundColor,
   justifyContent,
   alignItems,
   borderRadius,
@@ -72,81 +129,57 @@ export default function({
   onClick,
   dataTestId,
   textAlign,
-}: IBoxContainerProps) {
-  return (
-    <>
-      {type == 'SimpleBox' && (
-        <SimpleBox
-          padding={padding}
-          margin={margin}
-          backgroundColor={backgroundColor}
-          borderRadius={borderRadius}
-          border={border}
-          width={width}
-          height={height}
-          onClick={onClick}
-          dataTestId={dataTestId}
-          textAlign={textAlign}
-        >
-          {children}
-        </SimpleBox>
-      )}
-      {type == 'AbsoluteDiv' && (
-        <AbsoluteDiv
-          padding={padding}
-          margin={margin}
-          backgroundColor={backgroundColor}
-          right={right}
-          left={left}
-          top={top}
-          bottom={bottom}
-          borderRadius={borderRadius}
-          border={border}
-          width={width}
-          height={height}
-          onClick={onClick}
-          dataTestId={dataTestId}
-          textAlign={textAlign}
-        >
-          {children}
-        </AbsoluteDiv>
-      )}
-      {type == 'FlexBox' && (
-        <SimpleFlexBox
-          padding={padding}
-          margin={margin}
-          backgroundColor={backgroundColor}
-          justifyContent={justifyContent}
-          alignItem={alignItems}
-          borderRadius={borderRadius}
-          border={border}
-          width={width}
-          height={height}
-          flexDirection={flexDirection}
-          onClick={onClick}
-          dataTestId={dataTestId}
-          textAlign={textAlign}
-        >
-          {children}
-        </SimpleFlexBox>
-      )}
-      {type == 'IconBox' && (
-        <IconBox
-          padding={padding}
-          margin={margin}
-          backgroundColor={backgroundColor}
-          bottom={bottom}
-          borderRadius={borderRadius}
-          border={border}
-          width={width}
-          height={height}
-          onClick={onClick}
-          dataTestId={dataTestId}
-          textAlign={textAlign}
-        >
-          {children}
-        </IconBox>
-      )}
-    </>
-  );
-}
+}: IBoxContainerProps) => (
+  <SimpleFlexBox
+    padding={padding}
+    margin={margin}
+    backgroundColor={backgroundColor}
+    justifyContent={justifyContent}
+    alignItem={alignItems}
+    borderRadius={borderRadius}
+    border={border}
+    width={width}
+    height={height}
+    flexDirection={flexDirection}
+    onClick={onClick}
+    dataTestId={dataTestId}
+    textAlign={textAlign}
+  >
+    {children}
+  </SimpleFlexBox>
+);
+
+const IconBox = styled(SimpleBox)`
+  cursor: pointer;
+`;
+
+export const IconContainer = ({
+  children,
+  padding,
+  margin,
+  backgroundColor,
+  bottom,
+  borderRadius,
+  border,
+  width,
+  height,
+  onClick,
+  dataTestId,
+  textAlign,
+}: IBoxContainerProps) => (
+  <IconBox
+    padding={padding}
+    margin={margin}
+    backgroundColor={backgroundColor}
+    bottom={bottom}
+    borderRadius={borderRadius}
+    border={border}
+    width={width}
+    height={height}
+    onClick={onClick}
+    dataTestId={dataTestId}
+    textAlign={textAlign}
+  >
+    {children}
+  </IconBox>
+);

@@ -20,14 +20,14 @@ import { useStyles } from 'components/AddTransformation/SelectColumnsList/styles
 import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
-import { ISelectColumnListProps } from 'components/AddTransformation/SelectColumnsList/types';
+import { ISelectColumnsListProps } from 'components/AddTransformation/SelectColumnsList/types';
 import { IHeaderNamesList } from 'components/AddTransformation/types';
 import ColumnTable from 'components/AddTransformation/ColumnTable';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import BoxContainer from 'components/common/BoxContainer';
+import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
 import { SimpleBoldLabel } from 'components/common/TypographyText';
 
 export default function({
@@ -38,7 +38,7 @@ export default function({
   dataQuality,
   transformationName,
   selectedColumns,
-}: ISelectColumnListProps) {
+}: ISelectColumnsListProps) {
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
@@ -121,8 +121,8 @@ export default function({
   };
 
   return (
-    <BoxContainer type="SimpleBox" dataTestId="select-column-list-parent" height="90%">
-      <BoxContainer type="FlexBox" justifyContent="space-between">
+    <BlockContainer dataTestId="select-column-list-parent" height="90%">
+      <FlexBoxContainer justifyContent="space-between">
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
           <input
@@ -141,10 +141,10 @@ export default function({
             {SearchIcon}
           </Box>
         </div>
-      </BoxContainer>
+      </FlexBoxContainer>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <BoxContainer type="FlexBox" height="100%" margin="30px 0 0 0">
-          <BoxContainer type="SimpleBox" textAlign="center">
+        <FlexBoxContainer height="100%" margin="30px 0 0 0">
+          <BlockContainer textAlign="center">
             {NoDataSVG}
             <SimpleBoldLabel
               text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
@@ -160,8 +160,8 @@ export default function({
               weight={400}
               dataTestId="no-column-subTitle"
             />
-          </BoxContainer>
-        </BoxContainer>
+          </BlockContainer>
+        </FlexBoxContainer>
       ) : (
         <ColumnTable
           dataQualityValue={dataQuality}
@@ -177,6 +177,6 @@ export default function({
           transformationName={transformationName}
         />
       )}
-    </BoxContainer>
+    </BlockContainer>
   );
 }

@@ -21,7 +21,7 @@ import styled from 'styled-components';
 
 export interface ITypographyTextProps {
   text: string;
-  component?: string; 
+  component?: string;
   size?: string;
   weight?: number;
   dataTestId?: string;

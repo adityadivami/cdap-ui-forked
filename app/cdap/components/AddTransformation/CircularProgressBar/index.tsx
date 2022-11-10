@@ -36,7 +36,7 @@ const ArcContainer = styled(Typography)`
   transform: ${({ value }) => `rotate(${45 + value * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
-export default function ({ value }: ICircularProgressBarProps) {
+export default function({ value }: ICircularProgressBarProps) {
   const classes = useStyles();
 
   return (
@@ -45,21 +45,23 @@ export default function ({ value }: ICircularProgressBarProps) {
         <Box className={classes.barOverflow}>
           <ArcContainer value={Math.round(value)} />
         </Box>
-        {
-          Math.round(value) < 100 ? <ErrorLabel
+        {Math.round(value) < 100 ? (
+          <ErrorLabel
             size="14px"
             component="div"
             weight={400}
-          dataTestId="circular-bar-value"
+            dataTestId="circular-bar-value"
             text={`${Math.round(value)}%`}
-          /> : <SuccessLabel
-          size="14px"
-          component="div"
-          weight={400}
-          dataTestId="circular-bar-value"
-          text={`${Math.round(value)}%`}
-        /> 
-        }
+          />
+        ) : (
+          <SuccessLabel
+            size="14px"
+            component="div"
+            weight={400}
+            dataTestId="circular-bar-value"
+            text={`${Math.round(value)}%`}
+          />
+        )}
       </Box>
     </>
   );
