@@ -20,38 +20,36 @@ import { useStyles } from 'components/AddTransformation/FunctionNameWidget/style
 import { TickIcon } from 'components/AddTransformation/iconStore';
 import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
-import BoxContainer from 'components/common/BoxContainer';
-import TypographyText from 'components/common/TypographyText';
+import { FlexBoxContainer, BlockContainer } from 'components/common/BoxContainer';
+import { SimpleLabel } from 'components/common/TypographyText';
 
 export default function({ transformationName }: IFunctionNameWidgetProps) {
   const classes = useStyles();
 
   return (
     <section className={classes.functionSectionStyles}>
-      <BoxContainer type="FlexBox" justifyContent="space-between">
-        <TypographyText
+      <FlexBoxContainer justifyContent="space-between">
+        <SimpleLabel
           component="span"
           size="16px"
           weight={600}
-          type="simple"
           dataTestId="function-name-head"
           text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`).toString()}
         />
         {TickIcon}
-      </BoxContainer>
-      <BoxContainer type="SimpleBox" justifyContent="space-between" padding="10px 0 0 0">
-        <TypographyText
+      </FlexBoxContainer>
+      <BlockContainer justifyContent="space-between" padding="10px 0 0 0">
+        <SimpleLabel
           component="span"
           size="16px"
           weight={400}
-          type="simple"
           dataTestId="selected-function-name"
           text={transformationName}
         />
         <span data-testid="selected-function-info" id="selected-function-info">
           <InfoOutlinedIcon className={classes.infoIcon} />
         </span>
-      </BoxContainer>
+      </BlockContainer>
     </section>
   );
 }

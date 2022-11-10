@@ -21,8 +21,8 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import { ISelectColumnsWidgetProps } from 'components/AddTransformation/SelectColumnsWidget/types';
 import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
-import BoxContainer from 'components/common/BoxContainer';
-import TypographyText from 'components/common/TypographyText';
+import { BlockContainer } from 'components/common/BoxContainer';
+import { SimpleLabel } from 'components/common/TypographyText';
 
 export default function({
   selectedColumns,
@@ -33,36 +33,33 @@ export default function({
 
   const singleColumnSelect = (
     <>
-      <TypographyText
+      <SimpleLabel
         component="p"
         size="16px"
         weight={600}
-        type="simple"
         dataTestId="select-column-title"
         text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`).toString()}
       />
-      <BoxContainer type="SimpleBox" padding="10px 0 0">
-        <TypographyText
+      <BlockContainer padding="10px 0 0">
+        <SimpleLabel
           component="p"
           size="14px"
           weight={400}
-          type="simple"
           dataTestId="select-column-subtitle"
           text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`).toString()}
         />
-      </BoxContainer>
+      </BlockContainer>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
-          <BoxContainer type="SimpleBox" padding="5px 0">
-            <TypographyText
+          <BlockContainer padding="5px 0">
+            <SimpleLabel
               component="p"
               size="14px"
               weight={400}
-              type="simple"
               dataTestId="selected-function-name"
               text={`${index + 1}. ${item.label}`}
             />
-          </BoxContainer>
+          </BlockContainer>
         ))
       ) : (
         <ButtonWidget
