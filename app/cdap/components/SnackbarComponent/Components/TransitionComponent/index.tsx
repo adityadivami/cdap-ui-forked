@@ -19,27 +19,24 @@ import WarningRoundedIcon from '@material-ui/icons/WarningRounded';
 import { Divider } from '@material-ui/core';
 import { useStyles } from './styles';
 
-export default function TransitionComponent(props) {
+export default function({ close, isSuccess, message }) {
   const classes = useStyles();
   return (
     <div data-testid="transition-component-parent">
       <div className={classes.headFlex}>
-        <h5 className={classes.errorHead}>
-          <WarningRoundedIcon className={classes.warningIcon} />
-          &nbsp;Error
-        </h5>
+        <h5 className={classes.errorHead}>{isSuccess ? 'Success' : 'Error'}</h5>
         <span
           role="button"
           tabIndex={0}
           className={classes.dismissSpan}
-          onClick={() => props.close()}
+          onClick={() => close()}
           data-testid="snackbar-close-button"
         >
           Dismiss
         </span>
       </div>
       <Divider />
-      <p className={classes.errorMessage}>Failed to retrieve sample</p>
+      <p className={classes.errorMessage}>{message}</p>
     </div>
   );
 }

@@ -51,6 +51,7 @@ import AddTransformation from 'components/AddTransformation';
 import { defaultMissingItem } from 'components/GridTable/defaultValues';
 import { transformationOptions } from 'components/GridTable/constants';
 import { getAPIRequestPayload } from 'components/GridTable/services';
+import PositionedSnackbar from 'components/SnackbarComponent';
 
 export default function GridTable() {
   const params = useParams() as IParams;
@@ -74,6 +75,11 @@ export default function GridTable() {
     supportedDataType: [],
   });
   const [dataQuality, setDataQuality] = useState<IStatistics>();
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    isSuccess: false,
+  });
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -251,12 +257,22 @@ export default function GridTable() {
           option: '',
           supportedDataType: [],
         });
+        setSnackbar({
+          open: true,
+          message: 'Transformation applied successfully',
+          isSuccess: true,
+        });
       },
       (err) => {
         setLoading(false);
         setAddTransformationFunction({
           option: '',
           supportedDataType: [],
+        });
+        setSnackbar({
+          open: true,
+          message: 'Transformation failed to apply',
+          isSuccess: false,
         });
       }
     );
@@ -337,6 +353,19 @@ export default function GridTable() {
           applyTransformation={(directive: string) => {
             applyDirectives(directive);
           }}
+        />
+      )}
+      {snackbar.open && (
+        <PositionedSnackbar
+          handleCloseSnackbar={() =>
+            setSnackbar({
+              open: false,
+              message: '',
+              isSuccess: false,
+            })
+          }
+          message={snackbar.message}
+          isSuccess={snackbar.isSuccess}
         />
       )}
       {loading && (
