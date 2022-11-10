@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IHeaderNamesList, IRecords, IObject } from '../../types';
+import { IHeaderNamesList, IRecords, IObject } from 'components/DirectiveInput/types';
 
 export interface IOnRowClickValue {
   target: IObject;

@@ -16,21 +16,21 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, Typography, Divider } from '@material-ui/core';
-import { CrossIcon, InfoIcon } from './iconStore';
-import { useStyles } from './styles';
-import AutoCompleteList from './Components/AutoComplete';
+import { CrossIcon, InfoIcon } from 'components/DirectiveInput/iconStore';
+import { useStyles } from 'components/DirectiveInput/styles';
+import AutoCompleteList from 'components/DirectiveInput/Components/AutoComplete';
 import Fuse from 'fuse.js';
 import uuidV4 from 'uuid/v4';
-import { moreInfoOnDirective } from './constants';
+import { moreInfoOnDirective } from 'components/DirectiveInput/constants';
 import T from 'i18n-react';
-import { IDirectiveProps, IOnRowClickValue } from './types';
+import { IDirectiveInputProps, IOnRowClickValue } from 'components/DirectiveInput/types';
 
 export default function({
   columnNamesList,
   onDirectiveInputHandler,
   onClose,
   openDirectivePanel,
-}: IDirectiveProps) {
+}: IDirectiveInputProps) {
   const [directiveInput, setDirectiveInput] = useState<string>('');
   const [isColumnSelected, setIsColumnSelected] = useState<boolean>(false);
   const [isDirectiveSelected, setIsDirectiveSelected] = useState<boolean>(false);
@@ -127,7 +127,7 @@ export default function({
                 return (
                   <Box className={classes.directiveUsage}>
                     <Typography className={classes.usageText} variant="body1">
-                      {T.translate('features.WranglerNewUI.GridPage.directivePanel.usage')}:&nbsp;{' '}
+                      {T.translate('features.WranglerNewUI.GridPage.directivePanel.usage')}:&nbsp;
                       {row?.item?.usage || row?.usage} &nbsp; &nbsp;
                       {moreInfoOnDirective[row?.item?.directive] && (
                         <a

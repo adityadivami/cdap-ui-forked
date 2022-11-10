@@ -44,10 +44,10 @@ import {
   IGridParams,
   IRequestBody,
   IApiPayload,
-} from './types';
-import { convertNonNullPercent } from './utils';
+} from 'components/GridTable/types';
+import { convertNonNullPercent } from 'components/GridTable/utils';
 import DirectivePanel from 'components/DirectiveInput';
-import { getAPIRequestPayload } from './services';
+import { getAPIRequestPayload } from 'components/GridTable/services';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -70,7 +70,7 @@ export default function GridTable() {
     },
   ]);
   const [showBreadCrumb, setShowBreadCrumb] = useState(true);
-  const [openDirectivePanel, setDirectivePanel] = useState(false);
+  const [openDirectivePanel, setDirectivePanel] = useState<boolean>(false);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
