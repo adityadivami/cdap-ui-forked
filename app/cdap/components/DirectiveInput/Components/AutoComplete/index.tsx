@@ -29,6 +29,7 @@ import {
   IAutoCompleteProps,
   IOnRowClickValue,
 } from 'components/DirectiveInput/Components/AutoComplete/types';
+import { IUsageDirectives } from 'components/DirectiveInput/types';
 
 export default function({
   setDirectivesList,
@@ -39,7 +40,7 @@ export default function({
   onColumnSelected,
   directiveInput,
 }: IAutoCompleteProps) {
-  const [activeResults, setActiveResults] = useState([]);
+  const [activeResults, setActiveResults] = useState<IUsageDirectives[]>([]);
   const [input, setInput] = useState<string>('');
   const [activeSelectionIndex, setActiveSelectionIndex] = useState<number | null>(null);
   const eventEmitter = ee(ee);
@@ -235,7 +236,7 @@ export default function({
   };
 
   return (
-    <Box className={classes.listWrapper} >
+    <Box className={classes.listWrapper}>
       {Array.isArray(activeResults) &&
         activeResults.length > 0 &&
         activeResults.map((row, index) => {

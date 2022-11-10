@@ -14,17 +14,36 @@
  * the License.
  */
 
-import { Box, Divider, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import AutoCompleteList from 'components/DirectiveInput/Components/AutoComplete';
-import { moreInfoOnDirective } from 'components/DirectiveInput/constants';
+import UsageDirective from 'components/DirectiveInput/Components/UsageDirective';
 import { CrossIcon } from 'components/DirectiveInput/IconStore/CrossIcon';
-import { InfoIcon } from 'components/DirectiveInput/IconStore/InfoIcon';
 import { useStyles } from 'components/DirectiveInput/styles';
-import { IDirectiveInputProps, IOnRowClickValue } from 'components/DirectiveInput/types';
-import Fuse from 'fuse.js';
+import {
+  IDirectiveInputProps,
+  IDirectivesList,
+  IOnRowClickValue,
+  IUsageDirectives,
+} from 'components/DirectiveInput/types';
+import { formatUsageDirectiveData, handlePasteDirective } from 'components/DirectiveInput/utils';
 import T from 'i18n-react';
 import React, { useEffect, useRef, useState } from 'react';
-import uuidV4 from 'uuid/v4';
+import styled from 'styled-components';
+
+const SearchBarWrapper = styled(Box)`
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const InputWrapper = styled(Box)`
+  width: 100%;
+`;
+
+const UsageDirectiveWrapper = styled(Box)`
+  background: #616161;
+  box-shadow: -3px -4px 15px rgba(68, 132, 245, 0.25);
+`;
 
 export default function({
   columnNamesList,
@@ -35,10 +54,10 @@ export default function({
   const [directiveInput, setDirectiveInput] = useState<string>('');
   const [isColumnSelected, setIsColumnSelected] = useState<boolean>(false);
   const [isDirectiveSelected, setIsDirectiveSelected] = useState<boolean>(false);
-  const [usageDirective, setUsageDirective] = useState([]);
+  const [usageDirective, setUsageDirective] = useState<IUsageDirectives[]>([]);
+  const [directivesList, setDirectivesList] = useState<IDirectivesList[]>([]);
   const directiveRef = useRef();
   const classes = useStyles();
-  const [directivesList, setDirectivesList] = useState([]);
 
   const handleDirectiveChange = (event: IOnRowClickValue | React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.value) {
@@ -48,50 +67,15 @@ export default function({
   };
 
   useEffect(() => {
-    const inputSplit: string[] = directiveInput.replace(/^\s+/g, '').split(' ');
-    const fuseOptions = {
-      includeScore: true,
-      includeMatches: true,
-      caseSensitive: false,
-      threshold: 0,
-      location: 0,
-      shouldSort: true,
-      distance: 100,
-      minMatchCharLength: 1,
-      maxPatternLength: 32,
-      keys: ['directive'],
-    };
-    const fuse = new Fuse(directivesList, fuseOptions);
-    const results = fuse.search(inputSplit[0]).map((row) => {
-      row.uniqueId = uuidV4();
-      return row;
-    });
-    setUsageDirective(results);
+    setUsageDirective(formatUsageDirectiveData(directiveInput, directivesList));
   }, [directiveInput]);
-
-  const handlePasteDirective = () => {
-    const inputSplit = directiveInput.replace(/^\s+/g, '').split(' ');
-    const filterUsageItem =
-      directivesList.length > 0
-        ? directivesList.filter((el) => el.usage.includes(inputSplit[0]))
-        : [];
-    const usageArraySplit = filterUsageItem.length > 0 ? filterUsageItem[0].usage.split(' ') : [];
-    if (
-      usageArraySplit.length === inputSplit.length ||
-      inputSplit.length > usageArraySplit.length
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   const onEnterClick = (event: React.KeyboardEvent<HTMLInputElement>) => {
     {
       const usageArraySplit =
         usageDirective.length > 0 ? usageDirective[0]?.item?.usage.split(' ') : [];
       const inputSplit = directiveInput.replace(/^\s+/g, '').split(' ');
-      if (event.key === 'Enter' && handlePasteDirective()) {
+      if (event.key === 'Enter' && handlePasteDirective(directiveInput, directivesList)) {
         onDirectiveInputHandler(directiveInput);
       } else if (
         event.key === 'Enter' &&
@@ -112,7 +96,7 @@ export default function({
             directiveInput={directiveInput}
             onRowClick={(eventObject) => handleDirectiveChange(eventObject)}
             setDirectivesList={setDirectivesList}
-            getDirectiveUsage={(activeResults, value) => {
+            getDirectiveUsage={(activeResults: IUsageDirectives[], value) => {
               setIsDirectiveSelected(value);
               setUsageDirective(activeResults);
             }}
@@ -122,40 +106,16 @@ export default function({
             isDirectiveSelected={isDirectiveSelected}
             columnNamesList={columnNamesList}
           />
-          <Box className={classes.usageAndSearchWrapper}>
+          <UsageDirectiveWrapper>
             {Array.isArray(usageDirective) && usageDirective.length === 1 ? (
-              usageDirective.map((row) => {
-                return (
-                  <Box className={classes.directiveUsage}>
-                    <Typography
-                      className={classes.usageText}
-                      variant="body1"
-                      data-testid="directive-usage-text"
-                    >
-                      {T.translate('features.WranglerNewUI.GridPage.directivePanel.usage')}:&nbsp;
-                      {row?.item?.usage || row?.usage} &nbsp; &nbsp;
-                      {moreInfoOnDirective[row?.item?.directive] && (
-                        <a
-                          href={`${moreInfoOnDirective[row?.item?.directive]}`}
-                          className={classes.infoLink}
-                          target="_blank"
-                        >
-                          {InfoIcon} &nbsp;
-                          {T.translate(
-                            'features.WranglerNewUI.GridPage.directivePanel.moreInfoOnDirective'
-                          )}
-                        </a>
-                      )}
-                    </Typography>
-                    <Divider classes={{ root: classes.divider }} />
-                  </Box>
-                );
+              usageDirective.map((row: IUsageDirectives) => {
+                return <UsageDirective row={row} />;
               })
             ) : (
               <></>
             )}
-            <Box className={classes.searchBar}>
-              <Box className={classes.inputWrapper}>
+            <SearchBarWrapper>
+              <InputWrapper>
                 <label
                   htmlFor="directive-input-search"
                   data-testid="select-directive-input-label"
@@ -174,7 +134,7 @@ export default function({
                   onKeyDown={onEnterClick}
                   data-testid="select-directive-input-search"
                 />
-              </Box>
+              </InputWrapper>
               <Box
                 className={classes.crossIcon}
                 data-testid="close-directive-panel"
@@ -182,8 +142,8 @@ export default function({
               >
                 {CrossIcon}
               </Box>
-            </Box>
-          </Box>
+            </SearchBarWrapper>
+          </UsageDirectiveWrapper>
         </Box>
       )}
     </>

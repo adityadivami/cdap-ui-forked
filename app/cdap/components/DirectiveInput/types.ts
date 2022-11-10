@@ -36,3 +36,57 @@ export interface IObject {
 export interface IOnRowClickValue {
   target: IObject;
 }
+
+export interface IUsageDirectives {
+  item: IUsageDirectivesItem;
+  matches: IUsageDirectivesMatches;
+  score: number;
+  uniqueId: string;
+  usage?: string;
+}
+
+export interface IUsageDirectivesMatches {
+  arrayIndex: number;
+  indices: number[][];
+  key: string;
+  value: string;
+}
+
+export interface IUsageDirectivesItem {
+  alias: boolean;
+  arguments: IUsageDirectivesItemArguments;
+  categories: string[];
+  description: string;
+  directive: string;
+  excluded: boolean;
+  scope: string;
+  usage: string;
+  label?: string;
+}
+
+export interface IUsageDirectivesItemArguments {
+  directive: string;
+  tokens: IUsageDirectivesItemArgumentsTokens[];
+}
+
+export interface IUsageDirectivesItemArgumentsTokens {
+  name: string;
+  optional: boolean;
+  ordinal: number;
+  type: string;
+}
+
+export interface IDirectivesList {
+  alias: boolean;
+  arguments: IUsageDirectivesItemArguments;
+  categories: string[];
+  description: string;
+  directive: string;
+  excluded: boolean;
+  scope: string;
+  usage: string;
+}
+
+export interface IUsageDirectiveProps {
+  row: IUsageDirectives;
+}

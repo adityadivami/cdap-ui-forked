@@ -42,18 +42,6 @@ export const useStyles = makeStyles({
     color: '#94EC98',
     fontSize: 14,
   },
-  directiveUsage: {
-    padding: 10,
-  },
-  usageText: {
-    fontFamily: 'Noto Sans',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    fontSize: 14,
-    letterSpacing: 0.15,
-    color: '#ffffff',
-    marginBottom: 10,
-  },
   divider: {
     backgroundColor: '#ffffff',
   },

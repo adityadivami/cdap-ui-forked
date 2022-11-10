@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IHeaderNamesList, IRecords, IObject } from 'components/DirectiveInput/types';
+import { IHeaderNamesList, IObject, IUsageDirectives } from 'components/DirectiveInput/types';
 
 export interface IOnRowClickValue {
   target: IObject;
@@ -24,7 +24,7 @@ export interface IAutoCompleteProps {
   isDirectiveSelected: boolean;
   columnNamesList: IHeaderNamesList[];
   onRowClick: (value: IOnRowClickValue) => void;
-  getDirectiveUsage: (results: IRecords[], value: boolean) => void;
+  getDirectiveUsage: (results: IUsageDirectives[], value: boolean) => void;
   onColumnSelected: (value: boolean) => void;
   directiveInput: string;
 }
