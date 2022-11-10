@@ -14,24 +14,43 @@
  * the License.
  */
 
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import WrangleCard from 'components/WrangleHome/Components/WrangleCard/index';
+import * as reducers from 'components/Connections/Create/reducer';
+import { createBrowserHistory as createHistory } from 'history';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router';
+import WrangleCard from '../index';
+import { wrangleCardFetchConnectors } from '../mock/wrangleCardMockData';
 import history from 'services/history';
 
-describe('It renders Wrangler-Card ', () => {
-  it('It should test WrangleCard Component', () => {
-    render(
+describe('Testing the Wrangle Card Component', () => {
+  test('Should check whether WrangleCard Component is rendered or not', () => {
+    const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <WrangleCard toggleViewAllLink={jest.fn} />
+            <WrangleCard />
           </Route>
         </Switch>
       </Router>
     );
+    expect(container).toBeDefined();
+  });
 
+  test('It renders Wrangler-Card ', async () => {
+    jest
+      .spyOn(reducers, 'fetchConnectors')
+      .mockReturnValue(Promise.resolve(wrangleCardFetchConnectors));
+
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <WrangleCard />
+          </Route>
+        </Switch>
+      </Router>
+    );
     const ele = screen.getByTestId(/wrangle-card-parent/i);
     expect(ele).toBeInTheDocument();
   });

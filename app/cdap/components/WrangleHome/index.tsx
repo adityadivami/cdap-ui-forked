@@ -77,11 +77,6 @@ export default function() {
           </Box>
         </Box>
         <OngoingDataExploration />
-        {loading && (
-          <Box className={classes.loadingContainer}>
-            <LoadingSVG />
-          </Box>
-        )}
       </Box>
     </Box>
   );
