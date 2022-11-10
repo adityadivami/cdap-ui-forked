@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
 
 export interface IParams {
   context: string;
@@ -93,6 +94,25 @@ export interface IApiPayload {
   payload: IRecords;
   requestBody: IRequestBody;
   gridParams: IGridParams;
+}
+
+export interface ITransformationContentParams {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponent: ITransformationComponentType[];
+  transformationComponentValues: ITransformationComponentValues;
+  transformationName: string;
+  transformationDataType: string[];
+  columnsList: IHeaderNamesList[];
+  missingItemsList: IStatistics;
+  onCancel: () => void;
+  applyTransformation: (directive: string) => void;
+}
+
+export interface ITransformationComponentType {
+  type: string;
+  component: (props) => JSX.Element;
 }
 
 export interface IGridCellData {
