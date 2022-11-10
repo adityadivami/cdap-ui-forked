@@ -235,7 +235,7 @@ export default function({
   };
 
   return (
-    <Box className={classes.listWrapper}>
+    <Box className={classes.listWrapper} >
       {Array.isArray(activeResults) &&
         activeResults.length > 0 &&
         activeResults.map((row, index) => {

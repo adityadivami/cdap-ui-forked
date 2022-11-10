@@ -106,7 +106,7 @@ export default function({
   return (
     <>
       {openDirectivePanel && (
-        <Box>
+        <Box data-testid='directive-input-parent'>
           <AutoCompleteList
             directiveInput={directiveInput}
             onRowClick={(eventObject) => handleDirectiveChange(eventObject)}
@@ -126,7 +126,7 @@ export default function({
               usageDirective.map((row) => {
                 return (
                   <Box className={classes.directiveUsage}>
-                    <Typography className={classes.usageText} variant="body1">
+                    <Typography className={classes.usageText} variant="body1" data-testid='directive-usage-text'>
                       {T.translate('features.WranglerNewUI.GridPage.directivePanel.usage')}:&nbsp;
                       {row?.item?.usage || row?.usage} &nbsp; &nbsp;
                       {moreInfoOnDirective[row?.item?.directive] && (
