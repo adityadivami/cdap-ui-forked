@@ -15,13 +15,11 @@
  */
 
 import { Box } from '@material-ui/core';
-import red from '@material-ui/core/colors/red';
 import { useStyles } from 'components/ColumnInsights/Components/ColumnToggleButton/styles';
 import { IDataQualityProps } from 'components/ColumnInsights/Components/ColumnToggleButton/types';
+import { PREFIX } from 'components/ColumnInsights/constants';
 import T from 'i18n-react';
 import React, { useState } from 'react';
-import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/';
-import { PREFIX } from 'components/ColumnInsights/constants';
 import styled from 'styled-components';
 import ToggleButton from '../ToggleButton';
 
@@ -50,7 +48,7 @@ export default function({ dataQuality }: IDataQualityProps) {
       >
         <>
           {T.translate(`${PREFIX}.empty`).toString()}
-          {` ${dataQuality.missingNullValueCount} (${dataQuality.missingNullValuePercentage}%)`}
+          {` ${dataQuality.emptyValueCount} (${dataQuality.emptyValuePercentage}%)`}
         </>
       </ToggleButton>
 
@@ -61,7 +59,7 @@ export default function({ dataQuality }: IDataQualityProps) {
       >
         <>
           {T.translate(`${PREFIX}.null`)}
-          {` ${dataQuality?.invalidValueCount} (${dataQuality?.invalidValuePercentage}%)`}
+          {` ${dataQuality?.nullValueCount} (${dataQuality?.nullValuePercentage}%)`}
         </>
       </ToggleButton>
     </StyledDataQualityBox>

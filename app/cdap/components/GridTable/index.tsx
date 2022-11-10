@@ -44,6 +44,7 @@ import {
 import {
   calculateDistinctValues,
   calculateDistributionGraphData,
+  calculateEmptyValueCount,
   characterCount,
   checkAlphaNumericAndSpaces,
   convertNonNullPercent,
@@ -76,10 +77,10 @@ export default function() {
       max: 0,
     },
     dataQuality: {
-      missingNullValueCount: 0,
-      missingNullValuePercentage: 0,
-      invalidValueCount: 0,
-      invalidValuePercentage: 0,
+      nullValueCount: 0,
+      nullValuePercentage: 0,
+      emptyValueCount: 0,
+      emptyValuePercentage: 0,
     },
     dataQualityBar: {},
     dataTypeString: '',
@@ -294,7 +295,7 @@ export default function() {
   const onColumnSelection = (columnName: string) => {
     const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
     const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
-    const getMissingValueCount =
+    const getNullValueCount =
       convertNonNullPercent(
         gridData,
         columnName,
@@ -307,14 +308,18 @@ export default function() {
       distinctValues: getDistinctValue,
       characterCount: getCharacterCountOfCell,
       dataQuality: {
-        missingNullValueCount: Number(getMissingValueCount),
-        missingNullValuePercentage: Number(
-          ((Number(Number(getMissingValueCount).toFixed(0)) / rowsDataList?.length) * 100).toFixed(
-            0
-          )
+        nullValueCount: Number(getNullValueCount),
+        nullValuePercentage: Number(
+          ((Number(Number(getNullValueCount).toFixed(0)) / rowsDataList?.length) * 100).toFixed(0)
         ),
-        invalidValueCount: 0,
-        invalidValuePercentage: 0,
+        emptyValueCount: calculateEmptyValueCount(rowsDataList, columnName),
+        emptyValuePercentage: Number(
+          (
+            (Number(Number(calculateEmptyValueCount(rowsDataList, columnName)).toFixed(0)) /
+              rowsDataList?.length) *
+            100
+          ).toFixed(0)
+        ),
       },
       dataQualityBar: gridData?.summary?.statistics[columnName],
       dataTypeString: getDataTypeString,
@@ -349,10 +354,10 @@ export default function() {
               distinctValues: 0,
               characterCount: { min: 0, max: 0 },
               dataQuality: {
-                missingNullValueCount: 0,
-                missingNullValuePercentage: 0,
-                invalidValueCount: 0,
-                invalidValuePercentage: 0,
+                nullValueCount: 0,
+                nullValuePercentage: 0,
+                emptyValueCount: 0,
+                emptyValuePercentage: 0,
               },
               dataQualityBar: {},
               dataTypeString: '',

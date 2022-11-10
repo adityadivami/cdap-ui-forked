@@ -14,15 +14,14 @@
  * the License.
  */
 
-import React from 'react';
-import { useStyles } from 'components/ColumnInsights/Components/ColumnDataQuality/styles';
-import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton';
 import { Box, Typography } from '@material-ui/core';
+import { useStyles } from 'components/ColumnInsights/Components/ColumnDataQuality/styles';
 import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/ColumnDataQuality/types';
-import red from '@material-ui/core/colors/red';
-import T from 'i18n-react';
+import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
 import { PREFIX } from 'components/ColumnInsights/constants';
+import T from 'i18n-react';
+import React from 'react';
 
 export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const classes = useStyles();
@@ -47,7 +46,7 @@ export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
         />
       </Box>
       <section>
-        <ToggleButton dataQuality={dataQuality} />
+        <ToggleButton dataQuality={dataQuality} columnInfo={columnInfo} />
       </section>
     </section>
   );

@@ -14,13 +14,16 @@
  * the License.
  */
 
+import { IRecords } from 'components/GridTable/types';
+
 export interface IDataQualityProps {
   dataQuality: IDataQuality;
+  columnInfo: IRecords;
 }
 
 interface IDataQuality {
-  missingNullValueCount: number;
-  missingNullValuePercentage: number;
-  invalidValueCount: number;
-  invalidValuePercentage: number;
+  nullValueCount: number;
+  nullValuePercentage: number;
+  emptyValueCount: number;
+  emptyValuePercentage: number;
 }

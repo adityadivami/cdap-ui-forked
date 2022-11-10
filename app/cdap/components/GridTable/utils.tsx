@@ -44,6 +44,31 @@ export const convertNonNullPercent = (
 
 /**
  *
+ * @description This function takes API response of execute API and coloumn Name
+ * @param  {IRecords} values , this is the rowDataList .
+ * @param  {string} columnName  , this is the column Name .
+ * @returns {number} This is the calculated count of empty Value
+ */
+
+export const calculateEmptyValueCount = (values: IRecords[], columnName: string) => {
+  const arrayOfColumn =
+    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+  let emptyValueCount = 0;
+  arrayOfColumn &&
+    Array.isArray(arrayOfColumn) &&
+    arrayOfColumn?.length &&
+    arrayOfColumn &&
+    arrayOfColumn.map((element) => {
+      if (element !== undefined && !element.replace(/\s/g, '').length) {
+        emptyValueCount = emptyValueCount + 1;
+      }
+    });
+
+  return emptyValueCount;
+};
+
+/**
+ *
  * @description This function takes API response of execute api and key(header column key) and finds out which item
  * in a column appears maximum times, and returns an object containing value and the number of time it is present
  * @param {IExecuteAPIResponse} gridData This is the execute API Response
@@ -91,7 +116,7 @@ export const checkFrequentlyOccuredValues = (
 /**
  * @description This function takes column name , rowsDataList and calculate the distinct values in the Column .
  * @param  {IRecords} values , this is the rowDataList .
- * @param  {string}  , this is the column Name .
+ * @param  {string} columnName  , this is the column Name .
  * @returns {distinctCount : number } Return number of distinct values
  */
 
@@ -113,7 +138,7 @@ export const calculateDistinctValues = (values: IRecords[], columnName: string) 
 /**
  * @description This function takes column name , rowsDataList and calculate the minimum and maximum character Count in the Column .
  * @param  {IRecords} values , this is the rowDataList .
- * @param  {string}  , this is the column Name .
+ * @param  {string} columnName , this is the column Name .
  * @returns {min : number || max : number } Return minimum and maximum character Count .
  */
 
@@ -141,7 +166,7 @@ export const characterCount = (values: IRecords[], columnName: string) => {
 /**
  * @description This function takes column name , rowsDataList and checks for column container letter , trailing spaces , number ,leading space
  * @param  {IRecords} values , this is the rowDataList .
- * @param  {string}  , this is the column Name .
+ * @param  {string} columnName , this is the column Name .
  * @returns {returnValue : string } Returns a string which describe the column having letter or number or leading , trailing spaces.
  */
 
@@ -211,7 +236,7 @@ const isLetter = (str: string) => {
 /**
  * @description This function takes column name , rowsDataList and calculate Distribution Graph Data
  * @param  {IRecords} values , this is the rowDataList .
- * @param  {string}  , this is the column Name .
+ * @param  {string}  columnName, this is the column Name .
  * @returns  TODO:
  */
 
