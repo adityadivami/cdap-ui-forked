@@ -36,13 +36,12 @@ export default function({
   const classes = useStyles();
 
   return (
-    <Drawer
-      classes={{ paper: classes.paper }}
-      anchor={anchor ? anchor : 'right'}
-      open={openDrawer}
-      data-testid={dataTestId}
-    >
-      <Container className={classes.drawerContainerStyles} role="presentation">
+    <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
+      <Container
+        className={classes.drawerContainerStyles}
+        role="presentation"
+        data-testid={dataTestId}
+      >
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && (
