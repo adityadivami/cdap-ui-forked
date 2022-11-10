@@ -53,7 +53,7 @@ describe('Test TabLabelCanSample Component', () => {
             initialConnectionId={undefined}
             toggleLoader={() => null}
             setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-            dataTestId={'tab-label-can-sample'}
+            dataTestId="tab-label-can-sample"
           />
         </Route>
       </Router>
