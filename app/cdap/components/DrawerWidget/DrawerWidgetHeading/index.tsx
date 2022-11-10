@@ -19,17 +19,16 @@ import { useStyles } from 'components/DrawerWidget/styles';
 import { UnderLine } from 'components/DrawerWidget/iconStore';
 import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
 import BoxContainer from 'components/common/BoxContainer';
-import TypographyText from 'components/common/TypographyText';
+import { SimpleBoldLabel } from 'components/common/TypographyText';
 
 export default function({ headingText }: IDrawerWidgetHeadingProps) {
   const classes = useStyles();
 
   return (
     <BoxContainer type="FlexBox" flexDirection="column">
-      <TypographyText
+      <SimpleBoldLabel
         component="p"
         size="20px"
-        type="simpleBold"
         dataTestId="drawer-heading"
         text={headingText}
       />

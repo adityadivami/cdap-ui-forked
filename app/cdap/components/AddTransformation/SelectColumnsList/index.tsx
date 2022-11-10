@@ -27,8 +27,8 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import TypographyText from 'components/common/TypographyText';
 import BoxContainer from 'components/common/BoxContainer';
+import { SimpleBoldLabel } from 'components/common/TypographyText';
 
 export default function({
   transformationDataType,
@@ -146,16 +146,14 @@ export default function({
         <BoxContainer type="FlexBox" height="100%" margin="30px 0 0 0">
           <BoxContainer type="SimpleBox" textAlign="center">
             {NoDataSVG}
-            <TypographyText
-              type="simpleBold"
+            <SimpleBoldLabel
               text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
               component="p"
               size="16px"
               weight={600}
               dataTestId="no-column-title"
             />
-            <TypographyText
-              type="simpleBold"
+            <SimpleBoldLabel
               text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`).toString()}
               component="p"
               size="14px"

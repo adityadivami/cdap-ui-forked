@@ -16,9 +16,16 @@
 
 import { Typography } from '@material-ui/core';
 import { grey, red, green } from '@material-ui/core/colors';
-import { ITypographyTextProps } from 'components/common/TypographyText/types';
 import React from 'react';
 import styled from 'styled-components';
+
+export interface ITypographyTextProps {
+  text: string;
+  component?: string; 
+  size?: string;
+  weight?: number;
+  dataTestId?: string;
+}
 
 const SimpleText = styled(Typography)`
   color: ${grey[700]};
@@ -26,41 +33,56 @@ const SimpleText = styled(Typography)`
   font-weight: ${({ weight }) => (weight ? weight : 500)};
 `;
 
+export const SimpleLabel = ({
+  text,
+  component,
+  size,
+  weight,
+  dataTestId,
+}: ITypographyTextProps) => (
+  <SimpleText data-testid={dataTestId} component={component} size={size} weight={weight}>
+    {text}
+  </SimpleText>
+);
+
 const ErrorText = styled(SimpleText)`
   color: ${red[600]};
 `;
+
+export const ErrorLabel = ({ text, component, size, weight, dataTestId }: ITypographyTextProps) => (
+  <ErrorText data-testid={dataTestId} component={component} size={size} weight={weight}>
+    {text}
+  </ErrorText>
+);
 
 const SuccessText = styled(SimpleText)`
   color: ${green[600]};
 `;
 
+export const SuccessLabel = ({
+  text,
+  component,
+  size,
+  weight,
+  dataTestId,
+}: ITypographyTextProps) => (
+  <SuccessText data-testid={dataTestId} component={component} size={size} weight={weight}>
+    {text}
+  </SuccessText>
+);
+
 const SimpleBoldText = styled(SimpleText)`
   color: ${grey[900]};
 `;
 
-export default function({ text, type, component, size, weight, dataTestId }: ITypographyTextProps) {
-  return (
-    <>
-      {type === 'simple' && (
-        <SimpleText data-testid={dataTestId} component={component} size={size} weight={weight}>
-          {text}
-        </SimpleText>
-      )}
-      {type === 'error' && (
-        <ErrorText data-testid={dataTestId} component={component} size={size} weight={weight}>
-          {text}
-        </ErrorText>
-      )}
-      {type === 'success' && (
-        <SuccessText data-testid={dataTestId} component={component} size={size} weight={weight}>
-          {text}
-        </SuccessText>
-      )}
-      {type === 'simpleBold' && (
-        <SimpleBoldText data-testid={dataTestId} component={component} size={size} weight={weight}>
-          {text}
-        </SimpleBoldText>
-      )}
-    </>
-  );
-}
+export const SimpleBoldLabel = ({
+  text,
+  component,
+  size,
+  weight,
+  dataTestId,
+}: ITypographyTextProps) => (
+  <SimpleBoldText data-testid={dataTestId} component={component} size={size} weight={weight}>
+    {text}
+  </SimpleBoldText>
+);
