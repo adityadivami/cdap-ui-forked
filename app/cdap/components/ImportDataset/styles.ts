@@ -32,7 +32,6 @@ export const useStyles = makeStyles({
     cursor: 'pointer',
   },
   dropText: {
-    fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 400,
     fontSize: 14,
@@ -42,7 +41,6 @@ export const useStyles = makeStyles({
     marginTop: 10,
   },
   fileNameText: {
-    fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 400,
     fontSize: 16,
@@ -66,7 +64,6 @@ export const useStyles = makeStyles({
     background: '#3994FF',
     boxShadow: '0px 2px 4px rgba(70, 129, 244, 0.15)',
     borderRadius: 4,
-    fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 400,
     fontSize: 15,
@@ -101,7 +98,6 @@ export const useStyles = makeStyles({
     margin: 'auto 0px',
   },
   infoText: {
-    fontFamily: 'Noto Sans',
     fontStyle: 'normal',
     fontWeight: 400,
     fontSize: 14,

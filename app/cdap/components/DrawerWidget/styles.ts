@@ -46,7 +46,6 @@ export const useStyles = makeStyles(() => {
       fontSize: 24,
     },
     headingTextStyles: {
-      fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
       fontSize: 20,
