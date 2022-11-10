@@ -18,4 +18,5 @@ export interface IRenderLabelProps {
   children: JSX.Element;
   fontSize: number;
   color?: string;
+  dataTestId?: string;
 }

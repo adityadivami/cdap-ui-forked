@@ -72,7 +72,7 @@ export default function GridHeaderCell({
         <Typography
           className={classes.columnHeader}
           component="span"
-          data-testid={`grid-header-cell-${label}`}
+          data-testid={`grid-header-column-name-${index}`}
           variant="body1"
         >
           {label}
@@ -81,13 +81,19 @@ export default function GridHeaderCell({
           <TypographyComponent
             className={classes.dataTypeIndicator}
             label={data?.datatype1 || T.translate(`${PREFIX}.unknown`).toString()}
+            index={index}
           />
           {data?.datatype2 && (
             <StringIndicatorBox>
-              <TypographyComponent className={classes.subDataTypeIndicator} label={'|'} />
+              <TypographyComponent
+                className={classes.subDataTypeIndicator}
+                label={'|'}
+                index={index}
+              />
               <TypographyComponent
                 className={classes.subDataTypeIndicator}
                 label={data?.datatype2}
+                index={index}
               />
             </StringIndicatorBox>
           )}

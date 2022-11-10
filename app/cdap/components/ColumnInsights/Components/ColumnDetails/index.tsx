@@ -77,6 +77,7 @@ export default function({
         renameColumnNameHandler(columnName, e.target.value);
       }
     }
+    setCanEdit(false);
   };
 
   const onEnter = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -97,7 +98,7 @@ export default function({
             data-testid="column-name-edit-input"
           />
         ) : (
-          <RenderLabel fontSize={16}>
+          <RenderLabel fontSize={16} dataTestId={'column-name'}>
             <> {inputValue}</>
           </RenderLabel>
         )}

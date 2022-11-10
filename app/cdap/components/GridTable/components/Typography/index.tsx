@@ -18,12 +18,16 @@ import { Typography } from '@material-ui/core';
 import React from 'react';
 import { ITypographyTextComponentProps } from './types';
 
-export default function TypographyComponent({ className, label }: ITypographyTextComponentProps) {
+export default function TypographyComponent({
+  className,
+  label,
+  index,
+}: ITypographyTextComponentProps) {
   return (
     <Typography
       className={className}
       color="textSecondary"
-      data-testid={`typography-component-${label}`}
+      data-testid={`typography-component-${index}`}
     >
       {label}
     </Typography>

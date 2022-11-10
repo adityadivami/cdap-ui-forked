@@ -36,12 +36,10 @@ const SimpleLabel = styled(Typography)`
  * @param color: color
  * @returns RenderLabel with custom Color and fontSize
  */
-export default function({ children, fontSize, color }: IRenderLabelProps) {
+export default function({ children, fontSize, color, dataTestId }: IRenderLabelProps) {
   return (
-    <>
-      <SimpleLabel component="span" fontSize={fontSize} color={color}>
-        {children}
-      </SimpleLabel>
-    </>
+    <SimpleLabel component="span" fontSize={fontSize} color={color} data-testid={dataTestId}>
+      {children}
+    </SimpleLabel>
   );
 }
