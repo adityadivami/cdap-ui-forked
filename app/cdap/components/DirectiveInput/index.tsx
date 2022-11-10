@@ -14,16 +14,17 @@
  * the License.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Box, Typography, Divider } from '@material-ui/core';
-import { CrossIcon, InfoIcon } from 'components/DirectiveInput/iconStore';
-import { useStyles } from 'components/DirectiveInput/styles';
+import { Box, Divider, Typography } from '@material-ui/core';
 import AutoCompleteList from 'components/DirectiveInput/Components/AutoComplete';
-import Fuse from 'fuse.js';
-import uuidV4 from 'uuid/v4';
 import { moreInfoOnDirective } from 'components/DirectiveInput/constants';
-import T from 'i18n-react';
+import { CrossIcon } from 'components/DirectiveInput/IconStore/CrossIcon';
+import { InfoIcon } from 'components/DirectiveInput/IconStore/InfoIcon';
+import { useStyles } from 'components/DirectiveInput/styles';
 import { IDirectiveInputProps, IOnRowClickValue } from 'components/DirectiveInput/types';
+import Fuse from 'fuse.js';
+import T from 'i18n-react';
+import React, { useEffect, useRef, useState } from 'react';
+import uuidV4 from 'uuid/v4';
 
 export default function({
   columnNamesList,
@@ -106,7 +107,7 @@ export default function({
   return (
     <>
       {openDirectivePanel && (
-        <Box data-testid='directive-input-parent'>
+        <Box data-testid="directive-input-parent">
           <AutoCompleteList
             directiveInput={directiveInput}
             onRowClick={(eventObject) => handleDirectiveChange(eventObject)}
@@ -126,7 +127,11 @@ export default function({
               usageDirective.map((row) => {
                 return (
                   <Box className={classes.directiveUsage}>
-                    <Typography className={classes.usageText} variant="body1" data-testid='directive-usage-text'>
+                    <Typography
+                      className={classes.usageText}
+                      variant="body1"
+                      data-testid="directive-usage-text"
+                    >
                       {T.translate('features.WranglerNewUI.GridPage.directivePanel.usage')}:&nbsp;
                       {row?.item?.usage || row?.usage} &nbsp; &nbsp;
                       {moreInfoOnDirective[row?.item?.directive] && (

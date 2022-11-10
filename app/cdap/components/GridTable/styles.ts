@@ -31,7 +31,7 @@ export const useStyles = makeStyles({
   },
   gridTableWrapper: {
     position: 'relative',
-    height: 'calc(100vh - 222px)',
+    height: 'calc(100vh - 196px)',
     display: 'flex',
     flexDirection: 'column',
   },

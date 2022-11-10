@@ -19,6 +19,25 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import DirectivePanel from 'components/DirectiveInput';
+import BreadCrumb from 'components/GridTable/components/Breadcrumb';
+import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
+import GridKPICell from 'components/GridTable/components/GridKPICell';
+import GridTextCell from 'components/GridTable/components/GridTextCell';
+import ToolBarList from 'components/GridTable/components/TransfomationToolbar';
+import { getAPIRequestPayload } from 'components/GridTable/services';
+import { useStyles } from 'components/GridTable/styles';
+import {
+  IApiPayload,
+  IExecuteAPIResponse,
+  IGridParams,
+  IHeaderNamesList,
+  IObject,
+  IParams,
+  IRecords,
+  IRequestBody,
+} from 'components/GridTable/types';
+import { convertNonNullPercent } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen/index';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
@@ -27,27 +46,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-import ToolBarList from 'components/GridTable/components/TransfomationToolbar';
-import BreadCrumb from './components/Breadcrumb';
-import GridHeaderCell from './components/GridHeaderCell';
-import GridKPICell from './components/GridKPICell';
-import GridTextCell from './components/GridTextCell';
-import { useStyles } from './styles';
-import {
-  IExecuteAPIResponse,
-  IHeaderNamesList,
-  IObject,
-  IParams,
-  IRecords,
-  IRowData,
-  IMissingListData,
-  IGridParams,
-  IRequestBody,
-  IApiPayload,
-} from 'components/GridTable/types';
-import { convertNonNullPercent } from 'components/GridTable/utils';
-import DirectivePanel from 'components/DirectiveInput';
-import { getAPIRequestPayload } from 'components/GridTable/services';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -70,7 +68,7 @@ export default function GridTable() {
     },
   ]);
   const [showBreadCrumb, setShowBreadCrumb] = useState(true);
-  const [openDirectivePanel, setDirectivePanel] = useState<boolean>(false);
+  const [openDirectivePanel, setDirectivePanel] = useState<boolean>(true);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -235,7 +233,6 @@ export default function GridTable() {
 
   return (
     <Box>
-      <button onClick={() => setDirectivePanel(true)}>Open Directive</button>
       {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
