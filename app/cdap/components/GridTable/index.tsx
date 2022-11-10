@@ -367,7 +367,9 @@ export default function() {
           }}
         />
       )}
-      {Array.isArray(gridData?.headers) && gridData?.headers?.length === 0 && <NoDataScreen />}
+      {gridData && Array.isArray(gridData?.headers) && gridData?.headers?.length === 0 && (
+        <NoDataScreen />
+      )}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
         <TableHead>
           <TableRow>
@@ -401,7 +403,8 @@ export default function() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.isArray(rowsDataList) &&
+          {rowsDataList &&
+            Array.isArray(rowsDataList) &&
             rowsDataList?.length > 0 &&
             rowsDataList.map((eachRow, rowIndex) => {
               return (

@@ -89,7 +89,7 @@ export const checkFrequentlyOccuredValues = (
       name: '',
       count: 0,
     };
-    if (Array.isArray(valueOfKey) && valueOfKey?.length) {
+    if (valueOfKey && Array.isArray(valueOfKey) && valueOfKey?.length) {
       valueOfKey.map((item, index) => {
         valueOfKey.map((value, valueIndex) => {
           if (item == value) {
@@ -153,9 +153,9 @@ export const characterCount = (values: IRecords[], columnName: string) => {
     arrayOfColumn?.length &&
     arrayOfColumn.map((element) => {
       if (element !== undefined) {
-        if (element !== undefined && element.length < minCount) {
+        if (element.length < minCount) {
           minCount = element.length;
-        } else if (element !== undefined && element.length > maxCount) {
+        } else if (element.length > maxCount) {
           maxCount = element.length;
         }
       }
