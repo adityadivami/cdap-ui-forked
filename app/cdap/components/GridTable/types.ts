@@ -14,6 +14,7 @@
  * the License.
  */
 import { ITransformationComponentValues } from 'components/AddTransformation/types';
+import { ITransformationComponentValues } from 'components/AddTransformation/types';
 
 export interface IParams {
   context: string;
