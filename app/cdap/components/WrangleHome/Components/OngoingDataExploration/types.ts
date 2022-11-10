@@ -14,6 +14,7 @@
  *  the License.
  */
 
+import { IArtifact } from 'components/WidgetSVG/types';
 export interface IResponseData {
   count: number;
   message: string;
@@ -40,11 +41,6 @@ export interface ISampleSpec {
   connectionName: string;
   path: string;
   relatedPlugins: IPlugin;
-}
-interface IArtifact {
-  name: string;
-  version: string;
-  scope: string;
 }
 
 export interface IPlugin {

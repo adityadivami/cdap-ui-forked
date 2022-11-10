@@ -34,6 +34,7 @@ import {
   testConnection,
   IConnectorDetails,
   getSelectedConnectorDisplayName,
+  ILocation,
 } from 'components/Connections/Create/reducer';
 import LoadingSVGCentered from 'components/shared/LoadingSVGCentered';
 import { Redirect } from 'react-router';
@@ -87,7 +88,8 @@ export function CreateConnection({
   const [testInProgress, setTestInProgress] = useState(false);
   const [testResponseMessages, setTestResponseMessages] = useState(undefined);
   const [redirectUrl, setRedirectUrl] = useState(null);
-  const location: any = useLocation();
+  const location: ILocation = useLocation();
+  console.log(location, 'ILocation');
   const featRequestingFrom = location?.state?.from?.addConnectionRequestFromNewUI;
 
   const init = async () => {

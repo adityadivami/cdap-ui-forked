@@ -78,11 +78,10 @@ export const getWidgetData = async () => {
     connectionDetailsData.map(({ connectorWidgetJSON }) => connectorWidgetJSON);
 
   connectorsTypesData.map((connectorType: IConnectorTypes) => {
-    let connectorTypeHasWidget: boolean = false;
+    let connectorTypeHasWidget = false;
     // Getting widget icons for connector types
-    Array.isArray(connectorWidgetJson) &&
-      connectorWidgetJson.length &&
-      connectorWidgetJson.map((eachConnector) => {
+    if (Array.isArray(connectorWidgetJson) && connectorWidgetJson.length) {
+      connectorWidgetJson.forEach((eachConnector) => {
         if (
           eachConnector['display-name'] &&
           eachConnector['display-name'].includes(connectorType.name)
@@ -99,6 +98,7 @@ export const getWidgetData = async () => {
           connectorTypeHasWidget = true;
         }
       });
+    }
     // Retaining the connector types which are not part of widget api
     if (!connectorTypeHasWidget) {
       connectionWithConnectorType.push({

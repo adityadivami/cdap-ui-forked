@@ -18,6 +18,13 @@ import { AddConnectionIcon } from 'components/WrangleHome/Components/WrangleCard
 import { ImportDataIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/ImportDataIcon';
 import T from 'i18n-react';
 
+/**
+ *
+ * @param connectorsWithoutStaticCards connector types cards data without Addconnection card, import data card
+ * @returns connectory types data with static data (addconnection card, import data cards) which needs to
+ * be shown on home page when no connector type(or connections inside any connector type) is available.
+ */
+
 export const attachStaticCards = (connectorsWithoutStaticCards) => [
   {
     name: T.translate(`features.WranglerNewUI.HomePage.labels.common.addConnection`),
