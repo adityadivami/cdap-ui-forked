@@ -50,6 +50,7 @@ export default function({
       closeClickHandler={closeClickHandler}
       showBackIcon={false}
       showDivider={false}
+      dataTestId={'column-insights-panel'}
     >
       <ColumnDetails
         columnName={columnDetail?.columnName}
