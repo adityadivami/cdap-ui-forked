@@ -48,7 +48,9 @@ export default function({
     setTransformationComponentsValue({ ...transformationComponentValues, copyToNewColumn });
   }, [copyToNewColumn]);
   useEffect(() => {
-    if (transformationComponentValues?.columnNames?.filter((el: string) => el === column).length) {
+    if (
+      transformationComponentValues?.columnNames?.filter((name: string) => name === column).length
+    ) {
       setIsError(true);
     } else {
       setIsError(false);
