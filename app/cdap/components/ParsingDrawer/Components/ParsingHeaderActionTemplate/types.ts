@@ -15,18 +15,17 @@
  */
 
 import { ReactNode } from 'react';
-
 export interface IParsingHeaderActionTemplateProps {
-  handleSchemaUpload: (IschemaProps) => void;
-  setErrorOnTransformation: React.Dispatch<
-    React.SetStateAction<{
-      open: boolean;
-      message: ReactNode;
-    }>
-  >;
+  setSuccessUpload: React.Dispatch<React.SetStateAction<ITransformationMessage>>;
+  handleSchemaUpload: (iSchemaProps) => void;
+  setErrorOnTransformation: React.Dispatch<React.SetStateAction<ITransformationMessage>>;
+}
+interface ITransformationMessage {
+  open: boolean;
+  message: ReactNode;
 }
 
-interface IschemaProps {
+interface iSchemaProps {
   type: string;
   name: string;
   fields: Ifields;

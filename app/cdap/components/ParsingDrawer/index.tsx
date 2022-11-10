@@ -39,6 +39,7 @@ export default function({ setLoading, updateDataTranformation }) {
   const [schemaValue, setSchemaValue] = useState(null);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
   const [errorOnTransformation, setErrorOnTransformation] = useState(defaultErrorOnTransformations);
+  const [successUpload, setSuccessUpload] = useState({ open: false, message: '' });
   const [connectionPayload, setConnectionPayload] = useState(defaultConnectionPayload);
 
   const classes = useStyles();
@@ -76,9 +77,9 @@ export default function({ setLoading, updateDataTranformation }) {
     } catch (err) {
       setErrorOnTransformation({
         open: true,
-        message: JSON.stringify(
-          T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage1')
-        ),
+        message: T.translate(
+          'features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage1'
+        ).toString(),
       });
       setLoading(false);
     }
@@ -106,6 +107,7 @@ export default function({ setLoading, updateDataTranformation }) {
       showDivider={true}
       headerActionTemplate={
         <ParsingHeaderActionTemplate
+          setSuccessUpload={setSuccessUpload}
           handleSchemaUpload={(schema: unknown) => setSchemaValue(schema)}
           setErrorOnTransformation={setErrorOnTransformation}
         />
@@ -141,14 +143,23 @@ export default function({ setLoading, updateDataTranformation }) {
           handleCloseError={() =>
             setErrorOnTransformation({
               open: false,
-              message: JSON.stringify(
-                T.translate(
-                  'features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage2'
-                )
-              ),
+              message: T.translate(
+                'features.WranglerNewUI.WranglerNewParsingDrawer.transformationErrorMessage2'
+              ).toString(),
             })
           }
           messageToDisplay={errorOnTransformation.message}
+        />
+      )}
+      {successUpload.open && (
+        <PositionedSnackbar
+          handleCloseError={() =>
+            setErrorOnTransformation({
+              open: false,
+              message: '',
+            })
+          }
+          messageToDisplay={successUpload.message}
         />
       )}
     </DrawerWidget>

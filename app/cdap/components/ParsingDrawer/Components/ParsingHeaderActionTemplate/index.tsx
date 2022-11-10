@@ -19,10 +19,11 @@ import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/Sch
 import { useStyles } from 'components/ParsingDrawer/styles';
 import T from 'i18n-react';
 import React, { ChangeEvent } from 'react';
-import { importIcon } from './importicon';
-import { IParsingHeaderActionTemplateProps } from './types';
+import { importIcon } from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate/importicon';
+import { IParsingHeaderActionTemplateProps } from 'components/ParsingDrawer/Components/ParsingHeaderActionTemplate/types';
 
 export default function({
+  setSuccessUpload,
   handleSchemaUpload,
   setErrorOnTransformation,
 }: IParsingHeaderActionTemplateProps) {
@@ -37,6 +38,12 @@ export default function({
         const importedSchemas = parseImportedSchemas(fileContents);
         const schema = importedSchemas[0] && importedSchemas[0].schema;
         handleSchemaUpload(schema);
+        setSuccessUpload({
+          open: true,
+          message: T.translate(
+            'features.WranglerNewUI.WranglerNewParsingDrawer.importSchemaSuccessMessage'
+          ),
+        });
       } catch (e) {
         setErrorOnTransformation({
           open: true,
@@ -60,10 +67,10 @@ export default function({
       />
       <label htmlFor="file" className={classes.importSchemaLabel}>
         {importIcon}
+        <Typography className={classes.importSchemaTextStyles}>
+          {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.importSchema')}
+        </Typography>
       </label>
-      <Typography className={classes.importSchemaTextStyles}>
-        {T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.importSchema')}
-      </Typography>
     </Box>
   );
 }

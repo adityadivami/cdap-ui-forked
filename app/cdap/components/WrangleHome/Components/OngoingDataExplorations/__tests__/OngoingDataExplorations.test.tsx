@@ -19,28 +19,10 @@ import { render, screen } from '@testing-library/react';
 import OngoingDataExploration from '../index';
 import MyDataPrepApi from 'api/dataprep';
 import operators from 'rxjs/operators';
-import { createBrowserHistory as createHistory } from 'history';
 import { Route, Router, Switch } from 'react-router';
-
-const history = createHistory({
-  basename: '/',
-});
-
-const testObj = {
-  connectionName: 'Upload',
-  workspaceName: 'Divami_Users_Emails.xlsx',
-  recipeSteps: 0,
-  dataQuality: 100,
-};
+import history from 'app/cdap/services/history';
 
 test('renders Ongoing Data Exploration component', async () => {
-  // jest.mock('api/dataprep', () => {
-  //   return Promise.resolve([
-  //     { connectionName: 'yolo', workspaceName: 'Divami_Users_Emails.xlsx', recipeSteps: 0 },
-  //     { connectionName: 'Upload', workspaceName: 'Divami_Users_Emails.xlsx', recipeSteps: 0 },
-  //   ]);
-  // });
-
   jest.spyOn(operators as any, 'switchMap').mockImplementation((callback: Function) => {
     callback({
       message: 'Success',

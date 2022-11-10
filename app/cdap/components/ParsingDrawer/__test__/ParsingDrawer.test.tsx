@@ -15,15 +15,10 @@
  */
 
 import { fireEvent, render } from '@testing-library/react';
+import history from 'app/cdap/services/history';
 import React from 'react';
-import { createBrowserHistory as createHistory } from 'history';
 import { Route, Router, Switch } from 'react-router';
 import ParsingDrawer from '..';
-
-const history = createHistory({
-  basename: '/',
-});
-
 describe('It Should Test the Parsing Drawer Component', () => {
   it('Should render the Parsing Drawer Parent Component', () => {
     const container = render(

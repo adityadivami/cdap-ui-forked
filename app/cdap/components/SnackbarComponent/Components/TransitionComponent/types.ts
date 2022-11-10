@@ -14,21 +14,7 @@
  * the License.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Breadcrumb from '../index';
-import { Router, Route, Switch } from 'react-router';
-import history from 'services/history';
-test('renders BreadCumb Component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <Breadcrumb />
-        </Route>
-      </Switch>
-    </Router>
-  );
-  const ele = screen.getByTestId(/bread-comb-container-parent/i);
-  expect(ele).toBeInTheDocument();
-});
+export interface ITransitionComponentProps {
+  close: () => void;
+  messageToDisplay: string;
+}

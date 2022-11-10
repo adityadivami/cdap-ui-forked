@@ -48,6 +48,7 @@ export const useStyles = makeStyles(() => {
     importSchemaLabel: {
       cursor: 'pointer',
       marginBottom: '0 !important',
+      display: 'flex',
     },
     headingTextStyles: {
       fontFamily: 'Noto Sans',
