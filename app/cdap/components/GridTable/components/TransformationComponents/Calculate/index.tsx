@@ -17,15 +17,18 @@
 import React, { useState, useEffect } from 'react';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 import FormInputFieldComponent from 'components/GridTable/components/TransformationComponents/InputComponents/FormInputFieldComponent';
-import { FormGroup, Box, Typography } from '@material-ui/core';
+import { FormGroup } from '@material-ui/core';
 import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 import InputCheckbox from 'components/GridTable/components/TransformationComponents/InputComponents/InputCheckbox';
 import T from 'i18n-react';
 import { ICalculateProps } from 'components/GridTable/components/TransformationComponents/Calculate/types';
 import NewColumnInput from 'components/GridTable/components/TransformationComponents/InputComponents/NewColumnInput';
+import { SimpleLabel } from 'components/common/TypographyText';
+import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
+import { CALCULATE_PREFIX } from 'components/GridTable/components/TransformationComponents/constants';
 
 export default function({
-  functionName,
+  transformationName,
   setTransformationComponentsValue,
   transformationComponentValues,
 }: ICalculateProps) {
@@ -35,7 +38,7 @@ export default function({
   const [isError, setIsError] = useState<boolean>(false);
   const UI_INPUT =
     CALCULATE_OPTIONS?.length > 0
-      ? CALCULATE_OPTIONS.filter((el) => el?.value === functionName)
+      ? CALCULATE_OPTIONS.filter((option) => option?.value === transformationName)
       : [];
   const classes = useStyles();
   useEffect(() => {
@@ -54,44 +57,55 @@ export default function({
   }, [column]);
 
   return (
-    <Box className={classes.calculateWrapper}>
-      {UI_INPUT?.length > 0 &&
-        UI_INPUT.map((item) =>
-          item.value === 'CHARCOUNT' ? (
-            <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
-          ) : item.inputRequired ? (
-            <Box className={classes.calculateFlex}>
-              {item?.sign && (
-                <Typography className={`${classes.formLabelStyles} ${classes.signText}`}>
-                  {item?.sign}
-                </Typography>
-              )}
-              <FormGroup classes={{ root: classes.muiFormGroupRootInput }}>
-                <FormInputFieldComponent
-                  formInputValue={customInput}
-                  classnames={classes.formFieldStyles}
-                  inputProps={{
-                    classes: { underline: classes.underlineStyles, input: classes.inputStyles },
-                    type: 'number',
-                    value: customInput,
-                    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                      setCustomInput(e.target.value),
-                    color: 'primary',
-                    placeholder: 'Enter value, e.g. 3',
-                  }}
+    <BlockContainer margin="10px 0 0">
+      <div>
+        {UI_INPUT?.length > 0 &&
+          UI_INPUT.map((item) =>
+            item.value === 'CHARCOUNT' ? (
+              <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
+            ) : item.inputRequired ? (
+              <BlockContainer>
+                <SimpleLabel
+                  size="16px"
+                  weight={600}
+                  text={
+                    item?.sign
+                      ? `${T.translate(`${CALCULATE_PREFIX}.enterValueTo`)} ${transformationName}`
+                      : ''
+                  }
                 />
-              </FormGroup>
-            </Box>
-          ) : (
-            <></>
-          )
-        )}
-      {functionName !== 'CHARCOUNT' && (
+                <FlexBoxContainer margin="10px 0 0">
+                  {item?.sign && (
+                    <BlockContainer margin="10px">
+                      <SimpleLabel size="14px" text={item?.sign} />
+                    </BlockContainer>
+                  )}
+                  <FormGroup classes={{ root: classes.muiFormGroupRootInput }}>
+                    <FormInputFieldComponent
+                      formInputValue={customInput}
+                      classnames={classes.formFieldStyles}
+                      inputProps={{
+                        classes: { underline: classes.underlineStyles, input: classes.inputStyles },
+                        type: 'number',
+                        value: customInput,
+                        onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                          setCustomInput(e.target.value),
+                        color: 'primary',
+                        placeholder: 'Enter value, e.g. 3',
+                      }}
+                    />
+                  </FormGroup>
+                </FlexBoxContainer>
+              </BlockContainer>
+            ) : (
+              <></>
+            )
+          )}
+      </div>
+      {transformationName !== 'CHARCOUNT' && (
         <FormGroup>
           <InputCheckbox
-            label={`${T.translate(
-              'features.WranglerNewUI.GridPage.transformationUI.calculate.copyToNewColumn'
-            )}`}
+            label={`${T.translate(`${CALCULATE_PREFIX}.copyToNewColumn`)}`}
             value={copyToNewColumn}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCopyToNew(e.target.checked)}
             className={classes.checkboxStyles}
@@ -101,6 +115,6 @@ export default function({
           )}
         </FormGroup>
       )}
-    </Box>
+    </BlockContainer>
   );
 }

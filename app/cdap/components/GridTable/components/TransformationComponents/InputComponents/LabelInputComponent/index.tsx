@@ -15,10 +15,13 @@
  */
 
 import React from 'react';
-import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
-import { Typography } from '@material-ui/core';
+import { SimpleLabel } from 'components/common/TypographyText';
+import { BlockContainer } from 'components/common/BoxContainer';
 
 export default function({ labelText }: { labelText: string }) {
-  const classes = useStyles();
-  return <Typography className={classes.formLabelStyles}>{labelText}</Typography>;
+  return (
+    <BlockContainer margin="10px 0">
+      <SimpleLabel size="14px" text={labelText} />
+    </BlockContainer>
+  );
 }

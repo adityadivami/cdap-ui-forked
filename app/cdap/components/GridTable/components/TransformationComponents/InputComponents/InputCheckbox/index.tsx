@@ -18,6 +18,8 @@ import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 import { IInputCheckboxProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
+import { SimpleLabel } from 'components/common/TypographyText';
+import { BlockContainer } from 'components/common/BoxContainer';
 
 export default function({ label, value, onChange, className }: IInputCheckboxProps) {
   const classes = useStyles();
@@ -34,7 +36,11 @@ export default function({ label, value, onChange, className }: IInputCheckboxPro
           id={`input-checkbox-${label}`}
         />
       }
-      label={<span className={classes.labelTextStyles}>{label}</span>}
+      label={
+        <BlockContainer margin="10px 0">
+          <SimpleLabel size="14px" text={label} component="span" />
+        </BlockContainer>
+      }
     />
   );
 }

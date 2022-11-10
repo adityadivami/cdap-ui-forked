@@ -80,7 +80,7 @@ export default function({
 
   const handleApply = () => {
     const directive = getDirective(
-      functionName,
+      transformationName,
       selectedColumns[0].label,
       transformationComponentValues
     );
@@ -96,7 +96,7 @@ export default function({
     setDataQualityValue(getPreparedDataQuality);
     setTransformationComponentsValue({
       ...transformationComponentValues,
-      columnNames: columnData?.length > 0 ? columnData.map(({ label }) => label) : [],
+      columnNames: columnsList?.length > 0 ? columnsList.map(({ label }) => label) : [],
     });
   }, []);
 
@@ -121,7 +121,7 @@ export default function({
   };
 
   const isComponentAvailable = CALCULATE_OPTIONS.some(
-    (item) => item?.value?.toLowerCase() === functionName.toLowerCase()
+    (item) => item?.value?.toLowerCase() === transformationName.toLowerCase()
   );
 
   return (
@@ -146,11 +146,11 @@ export default function({
                 setTransformationComponentsValue={setTransformationComponentsValue}
                 transformationComponent={[]}
                 transformationComponentValues={transformationComponentValues}
-                functionName={functionName}
-                transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
-                columnData={columnData}
-                missingDataList={missingDataList}
-                callBack={callBack}
+                transformationName={transformationName}
+                transformationDataType={transformationDataType}
+                columnsList={columnsList}
+                missingItemsList={missingItemsList}
+                onCancel={onCancel}
                 applyTransformation={applyTransformation}
               />
             )}

@@ -14,12 +14,4 @@
  * the License.
  */
 
-import { ITransformationComponentValues } from 'components/AddTransformation/types';
-
-export interface ICalculateProps {
-  transformationName: string;
-  setTransformationComponentsValue: React.Dispatch<
-    React.SetStateAction<ITransformationComponentValues>
-  >;
-  transformationComponentValues: ITransformationComponentValues;
-}
+export const CALCULATE_PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.calculate';

@@ -3545,6 +3545,7 @@ features:
           columnExist: This column name already exist
           copyToNewColumn: Copy to a new column
           destinationColumn: Destination Column
+          enterValueTo: Please enter a value to
           nameNewColumn:  Name new column
 
               

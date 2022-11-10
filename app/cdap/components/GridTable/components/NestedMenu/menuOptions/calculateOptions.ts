@@ -24,7 +24,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['string'],
+    supportedDataType: ['string'],
     directive: (
       column: string,
       input: string | number,
@@ -38,7 +38,7 @@ export const CALCULATE_OPTIONS = [
     sign: '+',
     inputRequired: true,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -55,7 +55,7 @@ export const CALCULATE_OPTIONS = [
     sign: '-',
     inputRequired: true,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -72,7 +72,7 @@ export const CALCULATE_OPTIONS = [
     sign: 'x',
     inputRequired: true,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -89,7 +89,7 @@ export const CALCULATE_OPTIONS = [
     sign: '/',
     inputRequired: true,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -106,7 +106,7 @@ export const CALCULATE_OPTIONS = [
     sign: '%',
     inputRequired: true,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -123,7 +123,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -140,7 +140,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -157,7 +157,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -174,7 +174,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -191,7 +191,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -208,7 +208,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -225,7 +225,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -242,7 +242,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -259,7 +259,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -276,7 +276,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -293,7 +293,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -310,7 +310,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -327,7 +327,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -344,7 +344,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -361,7 +361,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -378,7 +378,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -395,7 +395,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -412,7 +412,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: NATIVE_NUMBER_TYPES,
+    supportedDataType: NATIVE_NUMBER_TYPES,
     directive: (
       column: string,
       input: string | number,
@@ -429,7 +429,7 @@ export const CALCULATE_OPTIONS = [
     sign: '+',
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -446,7 +446,7 @@ export const CALCULATE_OPTIONS = [
     sign: '-',
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -463,7 +463,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -480,7 +480,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -497,7 +497,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -514,7 +514,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -531,7 +531,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -548,7 +548,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -565,7 +565,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -582,7 +582,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -599,7 +599,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: true,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -616,7 +616,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -633,7 +633,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -650,7 +650,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -667,7 +667,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -684,7 +684,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,
@@ -701,7 +701,7 @@ export const CALCULATE_OPTIONS = [
     sign: null,
     inputRequired: false,
     component: Calculate,
-    supported_dataType: ['bigdecimal'],
+    supportedDataType: ['bigdecimal'],
     directive: (
       column: string,
       input: string | number,

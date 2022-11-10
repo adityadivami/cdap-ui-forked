@@ -20,18 +20,18 @@ import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/me
 
 export default function({
   transformationComponent,
-  functionName: type,
-  functionName,
+  transformationName: type,
+  transformationName,
   transformationComponentValues,
   setTransformationComponentsValue,
   ...props
 }: ITransformationContentParams) {
   const Component =
     transformationComponent.find((item) => item?.type === type)?.component ||
-    CALCULATE_OPTIONS.find((item) => item?.value === functionName)?.component;
+    CALCULATE_OPTIONS.find((item) => item?.value === transformationName)?.component;
   return (
     <Component
-      functionName={functionName}
+      transformationName={transformationName}
       transformationComponentValues={transformationComponentValues}
       setTransformationComponentsValue={setTransformationComponentsValue}
       {...props}

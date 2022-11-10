@@ -32,7 +32,7 @@ export const MATH_OPTIONS = [
         sign: '+',
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -42,7 +42,7 @@ export const MATH_OPTIONS = [
         sign: '-',
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -52,7 +52,7 @@ export const MATH_OPTIONS = [
         sign: 'x',
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -62,7 +62,7 @@ export const MATH_OPTIONS = [
         sign: '/',
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -72,7 +72,7 @@ export const MATH_OPTIONS = [
         sign: '%',
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -82,7 +82,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -92,7 +92,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -102,7 +102,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -112,7 +112,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -122,7 +122,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -132,7 +132,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -142,7 +142,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -152,7 +152,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -162,7 +162,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -172,10 +172,10 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
     ],
-    supported_dataType: NUMBER_TYPES,
+    supportedDataType: NUMBER_TYPES,
   },
   {
     value: 'trigonometry',
@@ -191,7 +191,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -201,7 +201,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -211,7 +211,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -221,7 +221,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -231,7 +231,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
       {
         label: T.translate(
@@ -241,10 +241,10 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
     ],
-    supported_dataType: NUMBER_TYPES,
+    supportedDataType: NUMBER_TYPES,
   },
   {
     value: 'random',
@@ -260,10 +260,10 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: NATIVE_NUMBER_TYPES,
+        supportedDataType: NATIVE_NUMBER_TYPES,
       },
     ],
-    supported_dataType: NUMBER_TYPES,
+    supportedDataType: NUMBER_TYPES,
   },
   {
     value: 'decimal',
@@ -279,7 +279,7 @@ export const MATH_OPTIONS = [
         sign: '+',
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -289,7 +289,7 @@ export const MATH_OPTIONS = [
         sign: '-',
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -299,7 +299,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -309,7 +309,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -319,7 +319,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -329,7 +329,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -339,7 +339,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -349,7 +349,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -359,7 +359,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -369,7 +369,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -379,7 +379,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: true,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -389,7 +389,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -399,7 +399,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -409,7 +409,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -419,7 +419,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -429,7 +429,7 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
       {
         label: T.translate(
@@ -439,9 +439,9 @@ export const MATH_OPTIONS = [
         sign: null,
         inputRequired: false,
         component: 'Calculate',
-        supported_dataType: ['bigdecimal'],
+        supportedDataType: ['bigdecimal'],
       },
     ],
-    supported_dataType: NUMBER_TYPES,
+    supportedDataType: NUMBER_TYPES,
   },
 ];

@@ -21,14 +21,16 @@ import FormInputFieldComponent from 'components/GridTable/components/Transformat
 import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
 import T from 'i18n-react';
 import { INewColumnProps } from 'components/GridTable/components/TransformationComponents/InputComponents/types';
+import { ErrorLabel } from 'components/common/TypographyText';
+import { FlexBoxContainer } from 'components/common/BoxContainer';
+import { CALCULATE_PREFIX } from 'components/GridTable/components/TransformationComponents/constants';
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.calculate';
 export default function({ column, setColumnName, isError }: INewColumnProps) {
   const classes = useStyles();
   return (
-    <Box className={classes.calculateFlex}>
+    <FlexBoxContainer width="100%">
       <FormGroup classes={{ root: classes.muiFormGroupRootInput }}>
-        <LabelComponent labelText={`${T.translate(`${PREFIX}.nameNewColumn`)}`} />
+        <LabelComponent labelText={`${T.translate(`${CALCULATE_PREFIX}.nameNewColumn`)}`} />
         <FormInputFieldComponent
           formInputValue={column}
           classnames={classes.formFieldStyles}
@@ -38,15 +40,19 @@ export default function({ column, setColumnName, isError }: INewColumnProps) {
             value: column,
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value),
             color: 'primary',
-            placeholder: `${T.translate(`${PREFIX}.destinationColumn`)}`,
+            placeholder: `${T.translate(`${CALCULATE_PREFIX}.destinationColumn`)}`,
           }}
         />
         {isError && (
-          <FormHelperText error={isError} classes={{ root: classes.errorText }}>
-            {T.translate(`${PREFIX}.columnExist`)}
-          </FormHelperText>
+          <ErrorLabel
+            size="14px"
+            component="p"
+            weight={400}
+            dataTestId="error-text"
+            text={T.translate(`${CALCULATE_PREFIX}.columnExist`).toString()}
+          />
         )}
       </FormGroup>
-    </Box>
+    </FlexBoxContainer>
   );
 }

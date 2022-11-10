@@ -18,42 +18,6 @@ import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles(() => {
   return {
-    functionSectionStyles: {
-      padding: '15px 0',
-      borderBottom: '1px solid #DADCE0',
-    },
-    funtionSectionWrapperStyles: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: '10px',
-    },
-    functionHeadingTextStyles: {
-      fontStyle: 'normal',
-      fontWeight: 600,
-      fontSize: '16px',
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#5F6368',
-    },
-    greenCheckIconStyles: {
-      width: '20px',
-      height: '20px',
-    },
-    radioStyles: {
-      marginLeft: '-5px',
-      '& span:last-child': {
-        fontStyle: 'normal',
-        fontWeight: 400,
-        fontSize: '14px',
-        color: '#5F6368',
-      },
-    },
-    checkboxStyles: {
-      display: 'flex',
-      width: '100%',
-      marginBottom: 0,
-    },
     formFieldStyles: {
       width: 'calc(100% - 60px)',
       marginRight: '60px',
@@ -89,51 +53,22 @@ export const useStyles = makeStyles(() => {
     formGroupStyles: {
       width: 'calc(100% - 60px)',
     },
-    formLabelStyles: {
-      color: '#5F6368',
-      fontSize: '14px',
-      fontStyle: 'normal',
-      marginTop: '10px',
-      fontWeight: 400,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      marginBottom: '10px',
-    },
-    selectBootstrapInput: {
-      width: '87%',
-      marginLeft: '11px',
-    },
-    additionalText: {
-      color: '#5F6368',
-      fontSize: '12px',
-    },
-    calculateFlex: {
-      display: 'flex',
-      width: '100%',
-    },
-    calculateWrapper: {
-      marginTop: 20,
-    },
-    signText: {
-      marginRight: 10,
-    },
-    exchangeIcon: {
-      width: '30px',
-      margin: '0 auto',
-      cursor: 'pointer',
-    },
-    labelTextStyles: {
-      fontWeight: 400,
-      fontSize: 14,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      color: '#5F6368',
+    radioStyles: {
+      marginLeft: '-5px',
+      '& span:last-child': {
+        fontStyle: 'normal',
+        fontWeight: 400,
+        fontSize: '14px',
+        color: '#5F6368',
+      },
     },
     muiFormGroupRootInput: {
       width: '100%',
     },
-    errorText: {
-      fontSize: 13,
+    checkboxStyles: {
+      display: 'flex',
+      width: '100%',
+      marginBottom: 0,
     },
   };
 });

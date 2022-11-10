@@ -14,7 +14,6 @@
  * the License.
  */
 import { ITransformationComponentValues } from 'components/AddTransformation/types';
-import { ITransformationComponentValues } from 'components/AddTransformation/types';
 
 export interface IParams {
   context: string;
@@ -103,11 +102,11 @@ export interface ITransformationContentParams {
   >;
   transformationComponent: ITransformationComponentType[];
   transformationComponentValues: ITransformationComponentValues;
-  functionName: string;
-  transformationFunctionSupportedDataType: string[];
-  columnData: IHeaderNamesList[];
-  missingDataList: IStatistics;
-  callBack: () => void;
+  transformationName: string;
+  transformationDataType: string[];
+  columnsList: IHeaderNamesList[];
+  missingItemsList: IStatistics;
+  onCancel: () => void;
   applyTransformation: (directive: string) => void;
 }
 
