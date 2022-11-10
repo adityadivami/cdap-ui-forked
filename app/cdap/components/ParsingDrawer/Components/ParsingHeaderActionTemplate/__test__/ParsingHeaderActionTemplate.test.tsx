@@ -14,28 +14,48 @@
  *  the License.
  */
 
-import React from 'react';
-import { Switch, Router, Route } from 'react-router';
-import { createBrowserHistory as createHistory } from 'history';
-import { fireEvent, getByTestId, render } from '@testing-library/react';
-import ParsingHeaderActionTemplate from '..';
-import { parseImportedSchemas } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
+import React from "react";
+import { Switch, Router, Route } from "react-router";
+import { createBrowserHistory as createHistory } from "history";
+import { fireEvent,render, screen } from "@testing-library/react";
+import ParsingHeaderActionTemplate from "..";
+import { parseImportedSchemas } from "components/AbstractWidget/SchemaEditor/SchemaHelpers";
+import T from 'i18n-react';
+
 
 const history = createHistory({
-  basename: '/',
+  basename: "/",
 });
 
-describe('It Should Test the ParsingHeaderActionTemplate Component', () => {
-  it('Should test whether ParsingHeaderActionTemplate Component is rendered or not', () => {
-    const container = render(
+describe("It Should Test the ParsingHeaderActionTemplate Component", () => {
+
+  beforeEach(() => {
+   render(
       <Router history={history}>
         <Switch>
           <Route>
-            <ParsingHeaderActionTemplate />
+            <ParsingHeaderActionTemplate
+              handleSchemaUpload={() => jest.fn()}
+              setErrorOnTransformation={() => jest.fn()}
+            />
           </Route>
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined();
+  })
+  it("Should trigger ParsingHeaderActionTemplate Component fileInput element", () => {
+
+    const fileContents       = 'file contents';
+    const file               = new Blob([fileContents], {type : 'text/plain'});
+    const fileInputElement = screen.getByTestId(/fileinput/i)
+    fireEvent.change(fileInputElement, {target: {files: [file]}})  
+    expect(fileInputElement).toBeInTheDocument()
+
+  });
+
+  it("check if the label is rendered as expected ", () => {
+    const labelElement = screen.getByTestId(/schema-text-styles-label/i);
+    expect(labelElement).toHaveTextContent(`${T.translate('features.WranglerNewUI.WranglerNewParsingDrawer.importSchema')}`)
+
   });
 });

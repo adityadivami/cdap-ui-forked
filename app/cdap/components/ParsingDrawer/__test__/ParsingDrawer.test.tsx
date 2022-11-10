@@ -20,19 +20,6 @@ import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import ParsingDrawer from '..';
 describe('It Should Test the Parsing Drawer Component', () => {
-  it('Should render the Parsing Drawer Parent Component', () => {
-    const container = render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <ParsingDrawer setLoading={() => jest.fn()} updateDataTranformation={() => jest.fn()} />
-          </Route>
-        </Switch>
-      </Router>
-    );
-
-    expect(container).toBeDefined();
-  });
 
   it('Should test the handleApply Button ', () => {
     const screen = render(
