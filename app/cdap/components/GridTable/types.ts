@@ -28,7 +28,7 @@ export interface IRecords {
   body?: string;
   path?: string;
   canBrowse?: boolean;
-  name?: string;
+  name?: string | boolean | Record<string, IType>;
 }
 
 export interface IPercentOfDataTypeValues {
@@ -45,10 +45,15 @@ export interface IExecuteAPIResponse {
   types: IRecords;
   values: IRecords[];
   summary: ISummary;
+  message: string;
 }
 
 export interface IHeaderNamesList {
   name: string;
   label: string;
-  type: string[];
+  type: Array<string | boolean | Record<string, IType>>;
+}
+
+export interface IType {
+  [key: string]: string | number;
 }
