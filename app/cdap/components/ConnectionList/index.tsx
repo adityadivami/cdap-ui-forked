@@ -195,7 +195,7 @@ export default function() {
   const headerForLevelZero = () => {
     return (
       <Box className={classes.styleForLevelZero}>
-        <Typography variant="body2">
+        <Typography variant="body2" component="span">
           {T.translate(`features.ConnectionsList.headerForLevelZero`)}
         </Typography>
       </Box>
@@ -209,8 +209,8 @@ export default function() {
       <SubHeader setOpenImportDataPanel={setOpenImportDataPanel} />
       <SelectDatasetWrapper>
         {Array.isArray(dataForTabs) &&
-          dataForTabs?.length &&
-          dataForTabs?.map((each, index) => {
+          dataForTabs.length &&
+          dataForTabs.map((each, index) => {
             const connectionIdRequired = each.data?.filter((el) => el.connectionId);
             if (connectionIdRequired.length) {
               connectionId = connectionIdRequired[0].connectionId;
@@ -228,8 +228,9 @@ export default function() {
                         ref={(element) => {
                           refs.current[index] = element;
                         }}
+                        component="span"
                       >
-                        {T.translate(`${dataForTabs[index - 1].selectedTab}`)}
+                        {dataForTabs[index - 1].selectedTab}
                       </Typography>
                     </Box>
                   </CustomTooltip>
@@ -242,14 +243,16 @@ export default function() {
                         refs.current[index] = element;
                       }}
                     >
-                      {T.translate(`${dataForTabs[index - 1].selectedTab}`)}
+                      {dataForTabs[index - 1].selectedTab}
                     </Typography>
                   </Box>
                 );
             }
             return (
               <Box className={classes.tabsContainerWithHeader}>
-                <Box className={classes.tabHeaders}>{headerContent}</Box>
+                <Box className={classes.tabHeaders}>
+                  <Typography component="span">{headerContent}</Typography>
+                </Box>
                 <ConnectionsTabs
                   tabsData={each}
                   handleChange={selectedTabValueHandler}

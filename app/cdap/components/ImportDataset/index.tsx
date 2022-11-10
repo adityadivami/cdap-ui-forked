@@ -17,9 +17,9 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Box from '@material-ui/core/Box';
 import { Button } from '@material-ui/core';
-import { useStyles } from './styles';
+import { useStyles } from 'components/ImportDataset/styles';
 import DrawerWidget from 'components/DrawerWidget';
-import DatasetBody from './Components/ImportDatasetBody';
+import DatasetBody from 'components/ImportDataset/Components/ImportDatasetBody';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
 import UploadFile from 'services/upload-file';
@@ -28,18 +28,18 @@ import Cookies from 'universal-cookie';
 import { Redirect } from 'react-router';
 import PositionedSnackbar from 'components/SnackbarComponent';
 import T from 'i18n-react';
-import { IImportDataset } from './types';
+import { IImportDataset } from 'components/ImportDataset/types';
 
 const FILE_SIZE_LIMIT = 10 * 1024 * 1024; // 10 MB
 const cookie = new Cookies();
 
 export default function({ handleClosePanel }: IImportDataset) {
+  const classes = useStyles();
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [file, setFile] = useState<File>(null);
-  const classes = useStyles();
-  const [recordDelimiter, setRecordDelimiter] = useState('\\n');
+  const [recordDelimiter, setRecordDelimiter] = useState<string>('\\n');
   const [workspaceId, setWorkspaceId] = useState<string>(null);
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<string>(null);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function({ handleClosePanel }: IImportDataset) {
     if (e) {
       const isJSONOrXML = e[0]?.type === 'application/json' || e[0]?.type === 'text/xml';
       if (e[0]?.size > FILE_SIZE_LIMIT) {
-        setError(T.translate('features.NewWranglerUI.ImportData.fileSizeError'));
+        setError(T.translate('features.NewWranglerUI.ImportData.fileSizeError').toString());
       } else {
         setFile(e[0]);
         setRecordDelimiter(isJSONOrXML ? '' : '\\n');

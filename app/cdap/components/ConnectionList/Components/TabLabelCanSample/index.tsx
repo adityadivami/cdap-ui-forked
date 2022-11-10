@@ -108,8 +108,9 @@ export default function TabLabelCanSample({
           className={classes.labelStylesCanSample}
           ref={myLabelRef}
           data-testid="can-sample-label-with-tooltip"
+          component="span"
         >
-          {T.translate(`${label}`)}
+          {label}
         </Typography>
         <button
           className="wranglingHover"
@@ -123,6 +124,7 @@ export default function TabLabelCanSample({
               variant="body2"
               className={classes.wrangleButton}
               data-testid="load-to-grid-text-with-tooltip"
+              component="span"
             >
               {T.translate('features.ConnectionsList.labels.loadToGrid')}
             </Typography>
@@ -137,8 +139,9 @@ export default function TabLabelCanSample({
         className={classes.labelStylesCanSample}
         ref={myLabelRef}
         data-testid="can-sample-label"
+        component="span"
       >
-        {T.translate(`${label}`)}
+        {label}
       </Typography>
       <button
         className="wranglingHover"
@@ -150,6 +153,7 @@ export default function TabLabelCanSample({
           variant="body2"
           className={classes.wrangleButton}
           data-testid="load-to-grid-text"
+          component="span"
         >
           {T.translate('features.ConnectionsList.labels.loadToGrid')}
         </Typography>

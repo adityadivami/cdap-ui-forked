@@ -16,10 +16,10 @@
 
 import { Box, Container, Drawer, Typography } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { useStyles } from './styles';
+import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import DrawerWidgetHeading from './DrawerWidgetHeading';
-import { IDrawerWidget } from './types';
+import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
+import { IDrawerWidget } from 'components/DrawerWidget/types';
 import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 
 export default function({

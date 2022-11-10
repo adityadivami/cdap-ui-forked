@@ -19,7 +19,9 @@ import { useDropzone } from 'react-dropzone';
 import classnames from 'classnames';
 import { useStyles } from 'components/ImportDataset/styles';
 import { Box, Divider, Typography } from '@material-ui/core';
-import { UploadSVG, InfoIcon, DeleteSVG } from 'components/ImportDataset/iconStore';
+import { UploadSVG } from 'components/ImportDataset/IconStore/UploadSVG';
+import { InfoIcon } from 'components/ImportDataset/IconStore/InfoIcon';
+import { DeleteSVG } from 'components/ImportDataset/IconStore/DeleteSVG';
 import T from 'i18n-react';
 import { IDragAndDrop } from 'components/ImportDataset/types';
 
@@ -49,7 +51,7 @@ export default function({ file, onDropHandler }: IDragAndDrop) {
             <input {...getInputProps()} data-testid="file-drop-zone" />
             <div className={classes.uploadBox}>
               <UploadSVG />
-              <Typography variant="body1" className={classes.dropText}>
+              <Typography variant="body1" className={classes.dropText} component="div">
                 {T.translate('features.WranglerNewUI.ImportData.dragAndDropTextLine1')}
                 <br />
                 {T.translate('features.WranglerNewUI.ImportData.dragAndDropTextLine2')}
@@ -60,7 +62,7 @@ export default function({ file, onDropHandler }: IDragAndDrop) {
             <div className={classes.infoIcon}>
               <InfoIcon />
             </div>
-            <Typography variant="body1" className={classes.infoText}>
+            <Typography variant="body1" className={classes.infoText} component="span">
               {T.translate('features.WranglerNewUI.ImportData.maxSizeText')}
             </Typography>
           </div>
@@ -68,7 +70,9 @@ export default function({ file, onDropHandler }: IDragAndDrop) {
       ) : (
         <Box>
           <Box className={classes.FlexFile}>
-            <Typography className={classes.fileNameText}>{T.translate(`${file.name}`)}</Typography>
+            <Typography className={classes.fileNameText} component="span">
+              {file.name}
+            </Typography>
             <Box
               className={classes.delete_cursor_pointer}
               data-testid="delete-svg"
