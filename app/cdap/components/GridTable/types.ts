@@ -48,3 +48,33 @@ export interface IHeaderNamesList {
 export interface IObject {
   [key: string]: string | number | IRecords | boolean;
 }
+
+export interface IToaster {
+  open: boolean;
+  message: string;
+  isSuccess: boolean;
+}
+
+export interface IInsightDrawer {
+  open: boolean;
+  columnName: string;
+  distinctValues: number;
+  characterCount: {
+    min: number;
+    max: number;
+  };
+  dataQuality: {
+    nullValueCount: number;
+    nullValuePercentage: number;
+    emptyValueCount: number;
+    emptyValuePercentage: number;
+  };
+  dataQualityBar: {};
+  dataTypeString: string;
+  dataDistributionGraphData: IdataDistributionGraphData[];
+}
+
+interface IdataDistributionGraphData {
+  text: string;
+  value: any;
+}

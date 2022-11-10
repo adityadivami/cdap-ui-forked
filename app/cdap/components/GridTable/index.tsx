@@ -37,9 +37,11 @@ import { useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
   IHeaderNamesList,
+  IInsightDrawer,
   IObject,
   IParams,
   IRecords,
+  IToaster,
 } from 'components/GridTable/types';
 import {
   calculateDistinctValues,
@@ -63,12 +65,12 @@ export default function() {
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
   const [columnType, setColumnType] = useState<string>('');
-  const [toaster, setToaster] = useState({
+  const [toaster, setToaster] = useState<IToaster>({
     open: false,
     message: '',
     isSuccess: false,
   });
-  const [insightDrawer, setInsightDrawer] = useState({
+  const [insightDrawer, setInsightDrawer] = useState<IInsightDrawer>({
     open: false,
     columnName: '',
     distinctValues: 0,
