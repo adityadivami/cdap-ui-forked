@@ -17,7 +17,7 @@
 import { IRecords } from 'components/GridTable/types';
 
 export interface IInputSelect {
-  options: IRecords[];
+  options: IOption[];
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   classes: { icon: string; select: string };

@@ -16,7 +16,6 @@
 
 export interface IRenderLabelProps {
   children: JSX.Element;
-  type: 'simple' | 'outlined';
   fontSize: number;
   color?: string;
 }

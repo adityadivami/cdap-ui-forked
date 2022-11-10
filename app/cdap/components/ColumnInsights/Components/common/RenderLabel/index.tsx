@@ -29,32 +29,19 @@ const SimpleLabel = styled(Typography)`
   }
 `;
 
-const OutlinedLabel = styled(Typography)`
-  &&& {
-    background-color: ${grey[600]};
-    height: 21px;
-    width: 20px;
-    color: #ffffff;
-    border-radius: 4px;
-    padding: 4px 5px;
-  }
-`;
-
 /**
  *
  * @param children: children to be rendered inside the variants of RenderLabel
- * @param type: simple or outlined, 2 variants of Typography Label
- * @returns RenderLabel with appropriate variations according to props
+ * @param fontSize: fontSize as props
+ * @param color: color
+ * @returns RenderLabel with custom Color and fontSize
  */
-export default function({ children, type, fontSize, color }: IRenderLabelProps) {
+export default function({ children, fontSize, color }: IRenderLabelProps) {
   return (
     <>
-      {type === 'simple' && (
-        <SimpleLabel component="span" fontSize={fontSize} color={color}>
-          {children}
-        </SimpleLabel>
-      )}
-      {type === 'outlined' && <OutlinedLabel component="span">{children}</OutlinedLabel>}
+      <SimpleLabel component="span" fontSize={fontSize} color={color}>
+        {children}
+      </SimpleLabel>
     </>
   );
 }

@@ -43,9 +43,7 @@ export default function({ children, type, setIsSelected, className }: IToggleBut
       role="button"
       className={className}
     >
-      <RenderLabel type="simple" fontSize={14}>
-        {children}
-      </RenderLabel>
+      <RenderLabel fontSize={14}>{children}</RenderLabel>
     </StyledToggleBox>
   );
 }

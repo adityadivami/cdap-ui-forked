@@ -21,7 +21,7 @@ import { PREFIX } from 'components/ColumnInsights/constants';
 import T from 'i18n-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ToggleButton from '../ToggleButton';
+import ToggleButton from 'components/ColumnInsights/Components/ToggleButton';
 
 const StyledDataQualityBox = styled(Box)`
     &&& { 

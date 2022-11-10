@@ -74,14 +74,9 @@ export const useStyles = makeStyles(() => {
     },
     columnInsightsDetailsCountSection: {
       display: 'flex',
+      gap: 27,
       alignItems: 'center',
       marginBottom: 7,
-    },
-    dividerLineStyles: {
-      width: 1,
-      height: 13,
-      backgroundColor: '#DADCE0',
-      margin: '0 8px',
     },
   };
 });

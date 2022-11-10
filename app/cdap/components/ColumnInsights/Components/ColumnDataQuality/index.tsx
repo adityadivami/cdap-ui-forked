@@ -18,7 +18,7 @@ import { Box, Typography } from '@material-ui/core';
 import { useStyles } from 'components/ColumnInsights/Components/ColumnDataQuality/styles';
 import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/ColumnDataQuality/types';
 import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton';
-import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
 import { PREFIX } from 'components/ColumnInsights/constants';
 import T from 'i18n-react';
 import React from 'react';
@@ -32,7 +32,7 @@ export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
 
   return (
     <section className={classes.columnInsightsDataQualityTopSection}>
-      <RenderLabel type="simple" fontSize={16}>
+      <RenderLabel fontSize={16}>
         <>{T.translate(`${PREFIX}.quality`).toString()}</>
       </RenderLabel>
       <Box className={classes.qualityBar}>

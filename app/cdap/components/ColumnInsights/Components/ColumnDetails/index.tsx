@@ -22,7 +22,7 @@ import { Box } from '@material-ui/core';
 import InputSelect from 'components/ColumnInsights/Components/InputSelect';
 import { IColumnDetailsProps } from 'components/ColumnInsights/Components/ColumnDetails/types';
 import T from 'i18n-react';
-import RenderLabel from '../common/RenderLabel';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
 import { red } from '@material-ui/core/colors';
 import { PREFIX } from 'components/ColumnInsights/constants';
 
@@ -96,7 +96,7 @@ export default function({
             onKeyDown={(e) => onEnter(e)}
           />
         ) : (
-          <RenderLabel type="simple" fontSize={16}>
+          <RenderLabel fontSize={16}>
             <> {inputValue}</>
           </RenderLabel>
         )}
@@ -106,7 +106,7 @@ export default function({
       </div>
       {invalidInput && (
         <div>
-          <RenderLabel type="simple" fontSize={14} color={`${red[600]}`}>
+          <RenderLabel fontSize={14} color={`${red[600]}`}>
             <> {T.translate(`${PREFIX}.invalidInputErrorMessage`).toString()}</>
           </RenderLabel>
         </div>
@@ -127,21 +127,20 @@ export default function({
       />
       <section className={classes.columnInsightsDetailsWrapper}>
         <div className={classes.columnInsightsDetailsCountSection}>
-          <RenderLabel type="simple" fontSize={14}>
+          <RenderLabel fontSize={14}>
             <>
               {T.translate(`${PREFIX}.characterCount`).toString()} {characterCount}
             </>
           </RenderLabel>
 
-          <div className={classes.dividerLineStyles} />
-          <RenderLabel type="simple" fontSize={14}>
+          <RenderLabel fontSize={14}>
             <>
               {T.translate(`${PREFIX}.distinct`).toString()} {distinctValues}
             </>
           </RenderLabel>
         </div>
 
-        <RenderLabel type="simple" fontSize={14}>
+        <RenderLabel fontSize={14}>
           <>{T.translate(`${dataTypeString}`).toString()}</>
         </RenderLabel>
       </section>

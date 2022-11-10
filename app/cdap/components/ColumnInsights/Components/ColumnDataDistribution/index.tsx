@@ -52,11 +52,11 @@ export default function({ graphData }: IColumnDataDistributionProps) {
   return (
     <div className={classes.columnInsightsDataQualityTopSection}>
       <div className={classes.columnInsightsColumnName}>
-        <RenderLabel type="simple" fontSize={16}>
+        <RenderLabel fontSize={16}>
           <>{T.translate(`${PREFIX}.distribution`).toString()}</>
         </RenderLabel>
         <NavLink to="#">
-          <RenderLabel type="simple" fontSize={14} color={`${blue[500]}`}>
+          <RenderLabel fontSize={14} color={`${blue[500]}`}>
             <> {T.translate(`${PREFIX}.viewFullChart`).toString()}</>
           </RenderLabel>
         </NavLink>

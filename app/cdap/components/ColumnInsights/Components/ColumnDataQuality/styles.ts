@@ -28,7 +28,7 @@ export const useStyles = makeStyles(() => {
       marginTop: 20,
     },
     filled: {
-      backgroundColor: '#E0E0E0',
+      backgroundColor: `${grey[300]}`,
       display: 'inline-block',
       height: 5,
 

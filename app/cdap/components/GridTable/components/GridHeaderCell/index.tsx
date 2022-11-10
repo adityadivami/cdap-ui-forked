@@ -26,7 +26,7 @@ const StringIndicatorBox = styled(Box)({
   display: 'flex',
 });
 
-const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+const PREFIX = 'features.NewWranglerUI.GridTable';
 
 export default function GridHeaderCell({
   label,
