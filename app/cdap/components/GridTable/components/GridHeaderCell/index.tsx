@@ -34,6 +34,7 @@ export default function GridHeaderCell({
   columnSelected,
   setColumnSelected,
   onColumnSelection,
+  index,
 }: IGridHeaderCellProps) {
   const classes = useGridHeaderCellStyles();
   const isColumnHighlited = label === columnSelected;
@@ -57,6 +58,7 @@ export default function GridHeaderCell({
         setColumnSelected(label);
         onColumnSelection(label);
       }}
+      data-testid={`grid-header-cell-${index}`}
     >
       <div
         className={isColumnHighlited ? classes.headerHighlitedIcon : classes.notHeaderHighlitedIcon}

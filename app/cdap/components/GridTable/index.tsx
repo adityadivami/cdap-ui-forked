@@ -376,7 +376,7 @@ export default function() {
             {headersNamesList &&
               Array.isArray(headersNamesList) &&
               headersNamesList?.length > 0 &&
-              headersNamesList.map((eachHeader) => (
+              headersNamesList.map((eachHeader, index) => (
                 <GridHeaderCell
                   label={eachHeader.label}
                   type={eachHeader.type as string[]}
@@ -384,6 +384,7 @@ export default function() {
                   columnSelected={columnSelected}
                   setColumnSelected={handleColumnSelect}
                   onColumnSelection={(column) => onColumnSelection(column)}
+                  index={index}
                 />
               ))}
           </TableRow>

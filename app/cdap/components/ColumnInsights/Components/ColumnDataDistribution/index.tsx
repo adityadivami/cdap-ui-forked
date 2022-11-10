@@ -55,7 +55,7 @@ export default function({ graphData }: IColumnDataDistributionProps) {
         <RenderLabel fontSize={16}>
           <>{T.translate(`${PREFIX}.distribution`).toString()}</>
         </RenderLabel>
-        <NavLink to="#">
+        <NavLink to="#" data-testid="view-full-chart-link">
           <RenderLabel fontSize={14} color={`${blue[500]}`}>
             <> {T.translate(`${PREFIX}.viewFullChart`).toString()}</>
           </RenderLabel>

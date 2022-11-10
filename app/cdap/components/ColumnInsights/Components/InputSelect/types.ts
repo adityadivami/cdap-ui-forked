@@ -25,6 +25,7 @@ export interface IInputSelect {
   fullWidth: boolean;
   optionClassName: IRecords;
   defaultValue: string;
+  dataTestId: string;
 }
 
 export interface IOption {

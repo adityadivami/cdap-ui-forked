@@ -31,12 +31,17 @@ export default function({
   closeClickHandler,
   showBackIcon,
   anchor,
+  dataTestId,
 }: IDrawerWidgetProps) {
   const classes = useStyles();
 
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
-      <Container className={classes.drawerContainerStyles} role="presentation">
+      <Container
+        className={classes.drawerContainerStyles}
+        role="presentation"
+        data-testid={dataTestId}
+      >
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && (

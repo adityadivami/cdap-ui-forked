@@ -42,6 +42,7 @@ export default function({ children, type, setIsSelected, className }: IToggleBut
       }}
       role="button"
       className={className}
+      data-testid={`toggle-button-${type}`}
     >
       <RenderLabel fontSize={14}>{children}</RenderLabel>
     </StyledToggleBox>
