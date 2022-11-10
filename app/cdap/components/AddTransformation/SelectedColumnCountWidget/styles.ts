@@ -15,15 +15,10 @@
  */
 
 import { makeStyles } from '@material-ui/styles';
-import { grey } from '@material-ui/core/colors';
+
 export const useStyles = makeStyles(() => {
   return {
     columnsCountTextStyles: {
-      fontWeight: 400,
-      fontSize: 14,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[700],
       paddingTop: 5,
       paddingBottom: 15,
     },

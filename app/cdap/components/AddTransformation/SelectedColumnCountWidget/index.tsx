@@ -19,18 +19,29 @@ import { useStyles } from 'components/AddTransformation/SelectedColumnCountWidge
 import T from 'i18n-react';
 import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
+import { SimpleLabel } from 'components/common/TypographyText';
 
 export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
   const classes = useStyles();
+  const text = selectedColumnsCount
+    ? selectedColumnsCount > 10
+      ? selectedColumnsCount
+      : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.zero`)}${selectedColumnsCount} ${T.translate(
+          `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
+        )}`
+    : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)} ${T.translate(
+        `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
+      )}`;
 
   return (
-    <div className={classes.columnsCountTextStyles} data-testid="count-widget-parent">
-      {selectedColumnsCount
-        ? selectedColumnsCount > 10
-          ? selectedColumnsCount
-          : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.zero`)}${selectedColumnsCount}`
-        : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)}`}
-      &nbsp;{T.translate(`${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`)}
+    <div className={classes.columnsCountTextStyles}>
+      <SimpleLabel
+        text={text.toString()}
+        component="p"
+        size="14px"
+        weight={400}
+        dataTestId="no-column-title"
+      />
     </div>
   );
 }

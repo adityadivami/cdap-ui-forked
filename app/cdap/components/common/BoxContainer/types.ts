@@ -16,7 +16,6 @@
 
 export interface IBoxContainerProps {
   children?: JSX.Element[] | JSX.Element;
-  type: 'SimpleBox' | 'AbsoluteDiv' | 'FlexBox' | 'IconBox';
   padding?: string | number;
   margin?: string | number;
   backgroundColor?: string;

@@ -27,8 +27,8 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import TypographyText from 'components/common/TypographyText';
-import BoxContainer from 'components/common/BoxContainer';
+import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
+import { SimpleBoldLabel } from 'components/common/TypographyText';
 
 export default function({
   transformationDataType,
@@ -89,7 +89,7 @@ export default function({
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName && functionDetail.isMoreThanTwo
     );
-    if (selectedColumns.length === 0 || selectedColumns.length < 2) {
+    if (selectedColumns?.length === 0 || selectedColumns?.length < 2) {
       return false;
     } else if (multiSelect.length) {
       return false;
@@ -121,8 +121,8 @@ export default function({
   };
 
   return (
-    <BoxContainer type="SimpleBox" dataTestId="select-column-list-parent" height="90%">
-      <BoxContainer type="FlexBox" justifyContent="space-between">
+    <BlockContainer dataTestId="select-column-list-parent" height="90%">
+      <FlexBoxContainer justifyContent="space-between">
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
           <input
@@ -141,29 +141,27 @@ export default function({
             {SearchIcon}
           </Box>
         </div>
-      </BoxContainer>
+      </FlexBoxContainer>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <BoxContainer type="FlexBox" height="100%" margin="30px 0 0 0">
-          <BoxContainer type="SimpleBox" textAlign="center">
+        <FlexBoxContainer height="100%" margin="30px 0 0 0">
+          <BlockContainer textAlign="center">
             {NoDataSVG}
-            <TypographyText
-              type="simpleBold"
+            <SimpleBoldLabel
               text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
               component="p"
               size="16px"
               weight={600}
               dataTestId="no-column-title"
             />
-            <TypographyText
-              type="simpleBold"
+            <SimpleBoldLabel
               text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`).toString()}
               component="p"
               size="14px"
               weight={400}
               dataTestId="no-column-subTitle"
             />
-          </BoxContainer>
-        </BoxContainer>
+          </BlockContainer>
+        </FlexBoxContainer>
       ) : (
         <ColumnTable
           dataQualityValue={dataQuality}
@@ -179,6 +177,6 @@ export default function({
           transformationName={transformationName}
         />
       )}
-    </BoxContainer>
+    </BlockContainer>
   );
 }

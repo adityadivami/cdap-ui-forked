@@ -21,7 +21,7 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
-import BoxContainer from 'components/common/BoxContainer';
+import { BlockContainer, FlexBoxContainer, IconContainer } from 'components/common/BoxContainer';
 
 export default function({
   headingText,
@@ -38,16 +38,10 @@ export default function({
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
-        <BoxContainer
-          type="FlexBox"
-          justifyContent="space-between"
-          alignItems="center"
-          height="60px"
-        >
-          <BoxContainer type="FlexBox" alignItems="center">
+        <FlexBoxContainer justifyContent="space-between" alignItems="center" height="60px">
+          <FlexBoxContainer alignItems="center">
             {showBackIcon && (
-              <BoxContainer
-                type="IconBox"
+              <IconContainer
                 onClick={closeClickHandler}
                 dataTestId="box-id"
                 margin="0 10px 0 0 "
@@ -55,19 +49,18 @@ export default function({
                 height="20px"
               >
                 {BackIcon}
-              </BoxContainer>
+              </IconContainer>
             )}
             <DrawerWidgetHeading headingText={headingText.toString()} />
-          </BoxContainer>
-          <BoxContainer type="FlexBox" alignItems="center">
+          </FlexBoxContainer>
+          <FlexBoxContainer alignItems="center">
             {headerActionTemplate && (
-              <BoxContainer type="SimpleBox" dataTestId="header-action-template">
+              <BlockContainer dataTestId="header-action-template">
                 {headerActionTemplate}
-              </BoxContainer>
+              </BlockContainer>
             )}
             {showDivider && (
-              <BoxContainer
-                type="SimpleBox"
+              <BlockContainer
                 alignItems="center"
                 dataTestId="show-divider-box"
                 width="1px"
@@ -83,8 +76,8 @@ export default function({
               onClick={closeClickHandler}
               data-testid="drawer-widget-close-round-icon"
             />
-          </BoxContainer>
-        </BoxContainer>
+          </FlexBoxContainer>
+        </FlexBoxContainer>
         <>{children}</>
       </Container>
     </Drawer>
