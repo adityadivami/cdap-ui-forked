@@ -3439,9 +3439,10 @@ features:
         title: "Start data exploration"
       workspaces:
         title: "Continue ongoing data explorations, pick up where you left off"
-  ImportData:
-    referenceLabel: "Import Data"
-    dragAndDropTextLine1: "Drag and drop a file to be uploaded"
-    dragAndDropTextLine2: "or Click here to select a file from your computer"
-    maxSizeText: "Max file size: 10 MB, Supported file formats: CSV, JSON"
-    fileSizeError: "File size must be less than 10MB"   
+  WranglerNewUI:
+    ImportData:
+      referenceLabel: "Import Data"
+      dragAndDropTextLine1: "Drag and drop a file to be uploaded"
+      dragAndDropTextLine2: "or Click here to select a file from your computer"
+      maxSizeText: "Max file size: 10 MB, Supported file formats: CSV, JSON"
+      fileSizeError: "File size must be less than 10MB"   

@@ -125,7 +125,7 @@ export default function({ handleClosePanel }: IImportDataset) {
   }
   const componentToRender = (
     <DrawerWidget
-      headingText={T.translate('features.NewWranglerUI.ImportData.referenceLabel')}
+      headingText={T.translate('features.WranglerNewUI.ImportData.referenceLabel')}
       openDrawer={drawerStatus}
       showDivider={true}
       closeClickHandler={closeClickHandler}

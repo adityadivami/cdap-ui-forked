@@ -55,7 +55,7 @@ export default function({ setOpenImportDataPanel }: ISubHeaderProps) {
         >
           <SaveAltRoundedIcon className={classes.subHeaderIcon} />
           <Box className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.ImportData.referenceLabel')}
+            {T.translate('features.WranglerNewUI.ImportData.referenceLabel')}
           </Box>
         </Box>
       </Box>
