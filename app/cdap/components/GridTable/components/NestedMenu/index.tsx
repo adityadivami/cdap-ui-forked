@@ -21,8 +21,7 @@ import MenuItemComponent from 'components/GridTable/components/MenuItemComponent
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
 import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
-import _ from 'lodash';
-import { reverseArrayWithoutMutating } from 'services/helpers';
+import { findIndex } from 'lodash';
 
 export default function({
   menuOptions,
@@ -73,7 +72,7 @@ export default function({
           );
           setAnchorElement(updatedAnchors);
         } else if (anchorElement.includes(event.currentTarget)) {
-          const currentTargetIndex = _.findIndex(
+          const currentTargetIndex = findIndex(
             anchorElement,
             (anchor) => anchor == event.currentTarget
           );

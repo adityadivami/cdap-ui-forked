@@ -44,7 +44,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
               : true
             : false
         }
-        title={item.value}
+        title={item.label}
         onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
         data-testid="menu-item-parent"
       >

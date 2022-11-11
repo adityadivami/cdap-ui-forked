@@ -14,20 +14,22 @@
  *  the License.
  */
 
-import { IconButton, Typography, Tooltip, TextField } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { default as React, useState } from 'react';
 import NestedMenu from 'components/GridTable/components/NestedMenu';
 import { ITransformationToolBarProps } from 'components/GridTable/components/TransformationToolbar/types';
 import {
   Divider,
-  Expand,
   LongDivider,
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
 import { useStyles } from 'components/GridTable/components/TransformationToolbar/styles';
 import FunctionToggle from 'components/GridTable/components/FunctionNameToggle';
 import { nestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/utils';
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
+import ExpandButton from 'components/common/ExpandButton';
+import { SimpleLabel } from 'components/common/TypographyText';
+import ReplayIcon from '@material-ui/icons/Replay';
 
 export default function({
   columnType,
@@ -49,6 +51,7 @@ export default function({
     <Box className={classes.iconContainer} data-testid="transformations-toolbar-container">
       <Box className={classes.container} data-testid="nested-menu-container">
         {nestedMenuOptions?.map((eachOption, optionIndex) => {
+          console.log('eachOption', eachOption);
           return (
             <>
               <Box
@@ -58,83 +61,65 @@ export default function({
                   .split(' ')
                   .join('-')}`}
               >
-                {eachOption.options?.length ? (
-                  <>
-                    <Tooltip
-                      title={eachOption.title}
-                      classes={{
-                        tooltip: classes.tooltipToolbar,
-                        arrow: classes.arrowTooltip,
-                      }}
-                      arrow
-                      data-testid={`toolbar-icon-tooltip-${eachOption.title
-                        .toLowerCase()
-                        .split(' ')
-                        .join('-')}`}
-                    >
-                      <IconButton
-                        onClick={(clickEvent) => {
-                          clickEvent.preventDefault();
-                          clickEvent.stopPropagation();
-                          setSelectedMenuOptions(eachOption.options);
-                          setAnchorElement([clickEvent.currentTarget]);
+                <Tooltip
+                  title={eachOption.title}
+                  classes={{
+                    tooltip: classes.tooltipToolbar,
+                    arrow: classes.arrowTooltip,
+                  }}
+                  arrow
+                  data-testid={`toolbar-icon-tooltip-${eachOption.title
+                    .toLowerCase()
+                    .split(' ')
+                    .join('-')}`}
+                >
+                  <IconButton
+                    onClick={(clickEvent) => {
+                      if (eachOption.options?.length) {
+                        clickEvent.preventDefault();
+                        clickEvent.stopPropagation();
+                        setSelectedMenuOptions(eachOption.options);
+                        setAnchorElement([clickEvent.currentTarget]);
+                      } else {
+                        submitMenuOption(eachOption.action, eachOption.dataType);
+                      }
+                    }}
+                    data-testid="toolbar-icon-button"
+                  >
+                    {eachOption?.action == 'undo' || eachOption?.action == 'redo' ? (
+                      <ReplayIcon
+                        classes={{
+                          root:
+                            eachOption?.action == 'undo'
+                              ? classes.muiRootUndoIcon
+                              : classes.muiRootRedoIcon,
                         }}
-                        data-testid="toolbar-icon-button"
-                      >
-                        {eachOption.icon}
-                      </IconButton>
-                    </Tooltip>
-                    <NestedMenu
-                      menuOptions={selectedMenuOptions}
-                      columnType={columnType}
-                      submitMenuOption={submitMenuOption}
-                      title={eachOption.title}
-                      setAnchorElement={setAnchorElement}
-                      anchorElement={anchorElement}
-                      handleMenuOpenClose={toggleMenu}
-                    />
-                    {showName && (
-                      <Typography
-                        className={classes.typoClass}
-                        component="div"
-                        data-testid={`toolbar-icon-title-${eachOption.title
-                          .toLowerCase()
-                          .split(' ')
-                          .join('-')}`}
-                      >
-                        {eachOption.toolName}
-                      </Typography>
+                      />
+                    ) : (
+                      eachOption.icon
                     )}
-                  </>
-                ) : (
-                  <>
-                    <Tooltip
-                      title={eachOption.title}
-                      classes={{
-                        tooltip: classes.tooltipToolbar,
-                        arrow: classes.arrowTooltip,
-                      }}
-                      arrow
-                    >
-                      <IconButton
-                        onClick={() => submitMenuOption(eachOption.action, eachOption.dataType)}
-                      >
-                        {eachOption.icon}
-                      </IconButton>
-                    </Tooltip>
-                    {showName && (
-                      <Typography
-                        className={classes.typoClass}
-                        component="div"
-                        data-testid={`toolbar-icon-title-${eachOption.title
-                          .toLowerCase()
-                          .split(' ')
-                          .join('-')}`}
-                      >
-                        {eachOption.toolName}
-                      </Typography>
-                    )}
-                  </>
+                  </IconButton>
+                </Tooltip>
+                {eachOption.options?.length > 0 && (
+                  <NestedMenu
+                    menuOptions={selectedMenuOptions}
+                    columnType={columnType}
+                    submitMenuOption={submitMenuOption}
+                    title={eachOption.title}
+                    setAnchorElement={setAnchorElement}
+                    anchorElement={anchorElement}
+                    handleMenuOpenClose={toggleMenu}
+                  />
+                )}
+                {showName && (
+                  <SimpleLabel
+                    component="div"
+                    dataTestId={`toolbar-icon-title-${eachOption.title
+                      .toLowerCase()
+                      .split(' ')
+                      .join('-')}`}
+                    text={eachOption.toolName}
+                  />
                 )}
               </Box>
               {(optionIndex === 4 || optionIndex === 1 || optionIndex === 9) && (
@@ -145,17 +130,15 @@ export default function({
         })}
         <Box className={classes.lastDivider}> {showName ? LongDivider : Divider}</Box>
         <Box className={classes.searchBar}>
-          {/* Search functionality UI component will be added here */}
+          {/* TODO Search functionality UI component will be added here */}
         </Box>
       </Box>
       <FunctionToggle setShowName={setShowName} showName={showName} />
-      <IconButton
-        className={showBreadCrumb ? classes.openHeader : classes.closeHeader}
+      <ExpandButton
+        open={showBreadCrumb}
         onClick={() => setShowBreadCrumb(!showBreadCrumb)}
-        data-testid="toolbar-header-toggler"
-      >
-        {Expand}
-      </IconButton>
+        dataTestId="toolbar-header-toggler"
+      />
     </Box>
   );
 }

@@ -18,10 +18,15 @@ import React from 'react';
 import { Typography, Box } from '@material-ui/core';
 import { useStyles } from 'components/GridTable/components/FunctionNameToggle/styles';
 import T from 'i18n-react';
-import { IFunctionNameToggleProps } from 'components/GridTable/components/FunctionNameToggle/types';
 import SwitchInputComponent from 'components/common/Switch';
+import { SimpleLabel } from 'components/common/TypographyText';
 
 const PREFIX = 'features.WranglerNewUI.GridPage';
+
+interface IFunctionNameToggleProps {
+  setShowName: React.Dispatch<React.SetStateAction<boolean>>;
+  showName: boolean;
+}
 
 export default function({ setShowName, showName }: IFunctionNameToggleProps) {
   const classes = useStyles();
@@ -30,14 +35,11 @@ export default function({ setShowName, showName }: IFunctionNameToggleProps) {
       className={classes.functionWrapper}
       data-testid="transformations-toolbar-icons-function-name-toggler"
     >
-      <Typography
-        className={classes.typoClass}
+      <SimpleLabel
+        text={T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`).toString()}
         component="div"
-        data-testid="name-toggle-child-label"
-      >
-        {T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}
-        &nbsp;
-      </Typography>
+        dataTestId="name-toggle-child-label"
+      />
       <SwitchInputComponent
         setShow={setShowName}
         show={showName}

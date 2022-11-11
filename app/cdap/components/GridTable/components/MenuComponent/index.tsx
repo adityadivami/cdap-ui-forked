@@ -19,7 +19,6 @@ import React from 'react';
 import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
 import { useStyles } from 'components/GridTable/components/MenuComponent/styles';
 import { IMenuComponentProps } from 'components/GridTable/components/MenuComponent/types';
-import { isNullable } from 'components/AbstractWidget/SchemaEditor/SchemaHelpers';
 
 export default function({
   anchorElement,
@@ -35,7 +34,7 @@ export default function({
       id="long-menu"
       keepMounted
       anchorEl={anchorElement}
-      open={anchorElement ? true : false}
+      open={!!anchorElement}
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: 'top',

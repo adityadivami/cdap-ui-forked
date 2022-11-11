@@ -18,10 +18,6 @@ import { makeStyles } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
-  closeHeader: {
-    transform: 'rotate(180deg)',
-  },
-  openHeader: {},
   iconContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -44,10 +40,6 @@ export const useStyles = makeStyles({
     outline: 'none',
     width: 250,
   },
-  closeBreadCrumb: {
-    transform: 'rotate(180deg)',
-  },
-  openedBreadcrumb: {},
   functionNameWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -86,4 +78,10 @@ export const useStyles = makeStyles({
   searchBar: {
     minWidth: 490,
   },
+  muiRootUndoIcon: {
+
+  },
+  muiRootRedoIcon: {
+
+  }
 });
