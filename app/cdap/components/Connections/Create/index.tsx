@@ -89,7 +89,6 @@ export function CreateConnection({
   const [testResponseMessages, setTestResponseMessages] = useState(undefined);
   const [redirectUrl, setRedirectUrl] = useState(null);
   const location: ILocation = useLocation();
-  console.log(location, 'ILocation');
   const featRequestingFrom = location?.state?.from?.addConnectionRequestFromNewUI;
 
   const init = async () => {
