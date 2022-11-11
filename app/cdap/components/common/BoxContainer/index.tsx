@@ -44,7 +44,12 @@ export const BlockContainer = ({
     width={width}
     height={height}
     onClick={onClick}
+<<<<<<< HEAD
     dataTestId={dataTestId}
+=======
+    data-testid={dataTestId}
+    textAlign={textAlign}
+>>>>>>> 5287afb0d98822355ac364c6f32a1492e81cd220
   >
     {children}
   </SimpleBox>
@@ -68,7 +73,13 @@ export const CenterAlignedBox = ({
     margin={margin}
     width={width}
     height={height}
+<<<<<<< HEAD
     dataTestId={dataTestId}
+=======
+    onClick={onClick}
+    data-testid={dataTestId}
+    textAlign={textAlign}
+>>>>>>> 5287afb0d98822355ac364c6f32a1492e81cd220
   >
     {children}
   </CenterAligned>
@@ -98,8 +109,15 @@ export const FlexBoxContainer = ({
     margin={margin}
     width={width}
     height={height}
+<<<<<<< HEAD
     dataTestId={dataTestId}
     flexDirection={flexDirection}
+=======
+    flexDirection={flexDirection}
+    onClick={onClick}
+    data-testid={dataTestId}
+    textAlign={textAlign}
+>>>>>>> 5287afb0d98822355ac364c6f32a1492e81cd220
   >
     {children}
   </SimpleFlexBox>
@@ -118,7 +136,13 @@ export const FlexSpaceBetweenContainer = ({
     margin={margin}
     width={width}
     height={height}
+<<<<<<< HEAD
     dataTestId={dataTestId}
+=======
+    onClick={onClick}
+    data-testid={dataTestId}
+    textAlign={textAlign}
+>>>>>>> 5287afb0d98822355ac364c6f32a1492e81cd220
   >
     {children}
   </FlexSpaceBox>

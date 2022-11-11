@@ -34,9 +34,12 @@ describe('It should test the SelectColumnsList Component', () => {
               // ]}
               setSelectedColumns={() => jest.fn()}
               dataQuality={[]}
-              directiveFunctionSupportedDataType={[]}
-              columnData={[]}
-              functionName={''} // transformationDataType={[]}
+              transformationDataType={[]}
+              columnsList={[]}
+              transformationName={''}
+              selectedColumns={[]} // directiveFunctionSupportedDataType={[]}
+              // columnData={[]}
+              // functionName={''} // transformationDataType={[]}
               // transformationName={''}
             />
           </Route>
@@ -60,6 +63,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['all', 'test']}
               transformationName={''}
+              selectedColumns={[]}
             />
           </Route>
         </Switch>
@@ -70,7 +74,6 @@ describe('It should test the SelectColumnsList Component', () => {
     fireEvent.change(inputSearchElement, { target: { value: '123' } });
     fireEvent.change(inputSearchElement, { target: { value: 'hello' } });
     fireEvent.change(inputSearchElement, { target: { value: null } });
-
     const searchIconElement = screen.getByTestId(/click-handle-focus/i);
     fireEvent.click(searchIconElement);
     expect(searchIconElement).toBeInTheDocument();
@@ -91,6 +94,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['test']}
               transformationName={'join-columns'}
+              selectedColumns={[]}
             />
           </Route>
         </Switch>
@@ -123,6 +127,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['all', 'test']}
               transformationName={''}
+              selectedColumns={[]}
             />
           </Route>
         </Switch>
@@ -152,6 +157,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['TEST', 'all']}
               transformationName={''}
+              selectedColumns={[]}
             />
           </Route>
         </Switch>
@@ -181,6 +187,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['TEST', 'all']}
               transformationName={'join-columns'}
+              selectedColumns={[]}
             />
           </Route>
         </Switch>
