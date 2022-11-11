@@ -31,23 +31,32 @@ export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const calculatedEmptyValue = 100 - filled;
 
   return (
-    <section className={classes.columnInsightsDataQualityTopSection}>
-      <RenderLabel fontSize={16}>
+    <div
+      className={classes.columnInsightsDataQualityTopSection}
+      data-testid="column-data-quality-parent"
+    >
+      <RenderLabel fontSize={16} dataTestId={'quality-text'}>
         <>{T.translate(`${PREFIX}.quality`).toString()}</>
       </RenderLabel>
-      <Box className={classes.qualityBar}>
-        <Typography component="span" className={classes.filled} style={{ width: `${filled}%` }} />
+      <Box className={classes.qualityBar} data-testid="quality-bar">
+        <Typography
+          component="span"
+          className={classes.filled}
+          style={{ width: `${filled}%` }}
+          data-testid="filled"
+        />
         <Typography
           component="span"
           className={classes.empty}
           style={{
             width: `${calculatedEmptyValue}%`,
           }}
+          data-testid="empty"
         />
       </Box>
-      <section>
+      <div>
         <ToggleButton dataQuality={dataQuality} columnInfo={columnInfo} />
-      </section>
-    </section>
+      </div>
+    </div>
   );
 }

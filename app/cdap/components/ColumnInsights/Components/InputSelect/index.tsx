@@ -56,7 +56,7 @@ export default function({
               classes={{ ...optionClassName }}
               value={option.value}
               key={option.value}
-              data-testid={`input-select-${index}`}
+              data-testid={`select-${index}`}
             >
               {option.label}
             </MenuItem>

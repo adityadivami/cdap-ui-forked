@@ -50,19 +50,22 @@ export default function({ graphData }: IColumnDataDistributionProps) {
   };
 
   return (
-    <div className={classes.columnInsightsDataQualityTopSection}>
+    <div
+      className={classes.columnInsightsDataQualityTopSection}
+      data-testid="column-data-distribution-parent"
+    >
       <div className={classes.columnInsightsColumnName}>
-        <RenderLabel fontSize={16}>
+        <RenderLabel fontSize={16} dataTestId="distribution-text">
           <>{T.translate(`${PREFIX}.distribution`).toString()}</>
         </RenderLabel>
         <NavLink to="#" data-testid="view-full-chart-link">
-          <RenderLabel fontSize={14} color={`${blue[500]}`}>
+          <RenderLabel fontSize={14} color={`${blue[500]}`} dataTestId="view-full-chart-text">
             <> {T.translate(`${PREFIX}.viewFullChart`).toString()}</>
           </RenderLabel>
         </NavLink>
       </div>
 
-      <div className={classes.columnDataQualityGraph}>
+      <div className={classes.columnDataQualityGraph} data-testid="data-distribution-graph">
         <StyledBarChart
           ylabel={`${PREFIX}.barChartYLabel`}
           {...barChartProps}

@@ -87,7 +87,7 @@ export default function({
     }
   };
   return (
-    <section className={classes.columnInsightsTopSection}>
+    <div className={classes.columnInsightsTopSection} data-testid="column-details-parent">
       <div className={classes.columnNameEdit}>
         {canEdit ? (
           <input
@@ -108,7 +108,7 @@ export default function({
       </div>
       {invalidInput && (
         <div>
-          <RenderLabel fontSize={14} color={`${red[600]}`}>
+          <RenderLabel fontSize={14} color={`${red[600]}`} dataTestId={'invalid-text'}>
             <> {T.translate(`${PREFIX}.invalidInputErrorMessage`).toString()}</>
           </RenderLabel>
         </div>
@@ -147,6 +147,6 @@ export default function({
           <>{T.translate(`${dataTypeString}`).toString()}</>
         </RenderLabel>
       </section>
-    </section>
+    </div>
   );
 }
