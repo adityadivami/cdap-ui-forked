@@ -27,7 +27,6 @@ import React from 'react';
 import { useStyles } from 'components/RecipeSteps/styles';
 import { IRecipeStepTebleProps } from 'components/RecipeSteps/RecipeStepsTableComponent/types';
 import { DeleteIcon } from 'components/RecipeSteps/iconStore';
-
 import { headerData } from 'components/RecipeSteps/RecipeStepsTableComponent/utils';
 
 export default function({ recipeSteps }: IRecipeStepTebleProps) {
