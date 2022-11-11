@@ -39,5 +39,9 @@ export const useStyles = makeStyles(() => {
       letterSpacing: 0.15,
       color: grey[900],
     },
+    headerStyles: {
+      display: 'flex',
+      alignItems: 'center'
+    }
   };
 });

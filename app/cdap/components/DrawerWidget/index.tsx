@@ -21,7 +21,8 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
-import { BlockContainer, FlexBoxContainer, IconContainer } from 'components/common/BoxContainer';
+import { BlockContainer, FlexBoxContainer, FlexSpaceBetweenContainer } from 'components/common/BoxContainer';
+import { IconContainer } from 'components/common/IconContainer';
 
 export default function({
   headingText,
@@ -38,22 +39,21 @@ export default function({
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
-        <FlexBoxContainer justifyContent="space-between" alignItems="center" height="60px">
-          <FlexBoxContainer alignItems="center">
+        <FlexSpaceBetweenContainer height="60px">
+          <div className={classes.headerStyles}>
             {showBackIcon && (
               <IconContainer
                 onClick={closeClickHandler}
                 dataTestId="box-id"
-                margin="0 10px 0 0 "
-                width="10px"
-                height="20px"
+                margin="0 10px 0 0"
+                isPointer={true}
               >
                 {BackIcon}
               </IconContainer>
             )}
             <DrawerWidgetHeading headingText={headingText.toString()} />
-          </FlexBoxContainer>
-          <FlexBoxContainer alignItems="center">
+          </div>
+          <FlexBoxContainer>
             {headerActionTemplate && (
               <BlockContainer dataTestId="header-action-template">
                 {headerActionTemplate}
@@ -77,7 +77,7 @@ export default function({
               data-testid="drawer-widget-close-round-icon"
             />
           </FlexBoxContainer>
-        </FlexBoxContainer>
+        </FlexSpaceBetweenContainer>
         <>{children}</>
       </Container>
     </Drawer>

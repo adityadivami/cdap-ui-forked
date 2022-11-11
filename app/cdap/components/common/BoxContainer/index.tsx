@@ -25,161 +25,101 @@ const SimpleBox = styled(Box)`
   width: ${({ width }) => (width ? width : 'auto')};
   height: ${({ height }) => (height ? height : 'auto')};
   box-sizing: border-box;
-  background-color: ${({ backgroundColor }) => (backgroundColor ? backgroundColor : 'transparent')};
   padding: ${({ padding }) => (padding ? padding : 0)};
   margin: ${({ margin }) => (margin ? margin : 0)};
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 0)};
-  border: ${({ border }) => (border ? border : 0)};
-  text-align: ${({ textAlign }) => (textAlign ? textAlign : 'left')};
 `;
 
 export const BlockContainer = ({
   children,
   padding,
   margin,
-  backgroundColor,
-  borderRadius,
-  border,
   width,
   height,
   onClick,
   dataTestId,
-  textAlign,
 }: IBoxContainerProps) => (
   <SimpleBox
     padding={padding}
     margin={margin}
-    backgroundColor={backgroundColor}
-    borderRadius={borderRadius}
-    border={border}
     width={width}
     height={height}
     onClick={onClick}
     dataTestId={dataTestId}
-    textAlign={textAlign}
   >
     {children}
   </SimpleBox>
 );
 
-const AbsoluteDiv = styled(SimpleBox)`
-  position: absolute;
-  top: ${({ top }) => (top ? top : 0)};
-  left: ${({ left }) => (left ? left : 0)};
-  right: ${({ right }) => (right ? right : 0)};
-  bottom: ${({ bottom }) => (bottom ? bottom : 0)};
+const CenterAligned = styled(SimpleBox)`
+text-align: center;
 `;
 
-export const AbsoluteContainer = ({
+
+export const CenterAlignedBox = ({
   children,
   padding,
   margin,
-  backgroundColor,
-  right,
-  left,
-  top,
-  bottom,
-  borderRadius,
-  border,
   width,
   height,
-  onClick,
   dataTestId,
-  textAlign,
 }: IBoxContainerProps) => (
-  <AbsoluteDiv
+  <CenterAligned
     padding={padding}
     margin={margin}
-    backgroundColor={backgroundColor}
-    right={right}
-    left={left}
-    top={top}
-    bottom={bottom}
-    borderRadius={borderRadius}
-    border={border}
     width={width}
     height={height}
-    onClick={onClick}
     dataTestId={dataTestId}
-    textAlign={textAlign}
   >
     {children}
-  </AbsoluteDiv>
+  </CenterAligned>
 );
 
 const SimpleFlexBox = styled(SimpleBox)`
   display: flex;
-  justify-content: ${({ justifyContent }) => (justifyContent ? justifyContent : 'flex-start')};
-  align-items: ${({ alignItem }) => (alignItem ? alignItem : 'flex-start')};
   flex-direction: ${({ flexDirection }) => (flexDirection ? flexDirection : 'row')};
+`;
+
+const FlexSpaceBox = styled(SimpleFlexBox)`
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export const FlexBoxContainer = ({
   children,
   padding,
   margin,
-  backgroundColor,
-  justifyContent,
-  alignItems,
-  borderRadius,
-  border,
   width,
   height,
-  flexDirection,
-  onClick,
   dataTestId,
-  textAlign,
+  flexDirection
 }: IBoxContainerProps) => (
   <SimpleFlexBox
     padding={padding}
     margin={margin}
-    backgroundColor={backgroundColor}
-    justifyContent={justifyContent}
-    alignItem={alignItems}
-    borderRadius={borderRadius}
-    border={border}
     width={width}
     height={height}
-    flexDirection={flexDirection}
-    onClick={onClick}
     dataTestId={dataTestId}
-    textAlign={textAlign}
+    flexDirection={flexDirection}
   >
     {children}
   </SimpleFlexBox>
 );
 
-const IconBox = styled(SimpleBox)`
-  cursor: pointer;
-`;
-
-export const IconContainer = ({
+export const FlexSpaceBetweenContainer = ({
   children,
   padding,
   margin,
-  backgroundColor,
-  bottom,
-  borderRadius,
-  border,
   width,
   height,
-  onClick,
   dataTestId,
-  textAlign,
 }: IBoxContainerProps) => (
-  <IconBox
+  <FlexSpaceBox
     padding={padding}
     margin={margin}
-    backgroundColor={backgroundColor}
-    bottom={bottom}
-    borderRadius={borderRadius}
-    border={border}
     width={width}
     height={height}
-    onClick={onClick}
     dataTestId={dataTestId}
-    textAlign={textAlign}
   >
     {children}
-  </IconBox>
+  </FlexSpaceBox>
 );
