@@ -71,8 +71,13 @@ public class WorkspaceList {
     }
 
     @Then("Check if the user is on workspace list")
-    public void checkTheUserIsOnTheWorkspaceListOrNot() {
-        String url = SeleniumDriver.getDriver().getCurrentUrl();
-        Assert.assertEquals(url, "http://localhost:11011/cdap/ns/default/workspace-list");
+    public void checkIfTheUserIsOnTheWorkspaceListOrNot() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            String url = SeleniumDriver.getDriver().getCurrentUrl();
+            Assert.assertEquals(url, "http://localhost:11011/cdap/ns/default/workspace-list");
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
     }
 }
