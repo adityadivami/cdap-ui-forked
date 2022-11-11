@@ -86,18 +86,7 @@ export default function({
                     }}
                     data-testid="toolbar-icon-button"
                   >
-                    {eachOption?.action == 'undo' || eachOption?.action == 'redo' ? (
-                      <ReplayIcon
-                        classes={{
-                          root:
-                            eachOption?.action == 'undo'
-                              ? classes.muiRootUndoIcon
-                              : classes.muiRootRedoIcon,
-                        }}
-                      />
-                    ) : (
-                      eachOption.icon
-                    )}
+                    {eachOption.icon}
                   </IconButton>
                 </Tooltip>
                 {eachOption.options?.length > 0 && (
