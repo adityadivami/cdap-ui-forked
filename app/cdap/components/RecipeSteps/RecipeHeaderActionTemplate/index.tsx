@@ -15,17 +15,17 @@
  */
 
 import React from 'react';
-import { useStyles } from '../styles';
-import { DownloadIcon, KebabIcon } from '../iconStore';
+import { useStyles } from 'components/RecipeSteps/styles';
+import { DownloadIcon, KebabIcon } from 'components/RecipeSteps/iconStore';
 import { Box } from '@material-ui/core';
 
 export default function() {
   const classes = useStyles();
 
   return (
-    <Box className={classes.downloadMenuActionWrapper}>
-      <Box className={classes.importIconStyles}>{DownloadIcon}</Box>
-      <Box className={classes.kebabMenuStyle}>{KebabIcon}</Box>
+    <Box className={classes.downloadMenuActionWrapper} data-testid='header-action-template-parent'>
+      <Box className={classes.importIconStyles} data-testid='header-action-download-icon'>{DownloadIcon}</Box>
+      <Box className={classes.kebabMenuStyle} data-testid='header-action-kebab-icon'>{KebabIcon}</Box>
     </Box>
   );
 }

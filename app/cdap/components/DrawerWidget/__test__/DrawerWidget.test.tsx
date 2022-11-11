@@ -14,17 +14,14 @@
  *  the License.
  */
 
-import { render } from '@testing-library/react';
-import { createBrowserHistory as createHistory } from 'history';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import DrawerWidget from '..';
+import DrawerWidget from 'components/DrawerWidget/index';
 import T from 'i18n-react';
 import RecipeHeaderActionTemplate from 'components/RecipeSteps/RecipeHeaderActionTemplate';
+import history from 'services/history'
 
-const history = createHistory({
-  basename: '/',
-});
 
 describe('It should test DrawerWidget Component', () => {
   it('Should test whether DrawerWidget Component is rendered', () => {
@@ -32,7 +29,7 @@ describe('It should test DrawerWidget Component', () => {
     const closeClickHandler = () => {
       setDrawerStatus(false);
     };
-    const container = render(
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -47,6 +44,7 @@ describe('It should test DrawerWidget Component', () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined();
+    const widgetParentElement = screen.getByTestId(/drawer-widget-parent/i);
+    expect(widgetParentElement).toBeInTheDocument();
   });
 });

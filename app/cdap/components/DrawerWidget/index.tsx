@@ -35,7 +35,7 @@ export default function({
   const classes = useStyles();
 
   return (
-    <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
+    <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer} data-testid='drawer-widget-parent'>
       <Container className={classes.drawerContainerStyles} role="presentation">
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>

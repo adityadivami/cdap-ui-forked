@@ -24,10 +24,10 @@ import {
   TableRow,
 } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from '../styles';
+import { useStyles } from 'components/RecipeSteps/styles';
 import T from 'i18n-react';
-import { IRecipeStepTebleProps } from './types';
-import { DeleteIcon } from '../iconStore';
+import { IRecipeStepTebleProps } from 'components/RecipeSteps/RecipeStepsTableComponent/types';
+import { DeleteIcon } from 'components/RecipeSteps/iconStore';
 
 export default function({ recipeSteps }: IRecipeStepTebleProps) {
   const classes = useStyles();

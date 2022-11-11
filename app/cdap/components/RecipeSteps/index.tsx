@@ -55,7 +55,7 @@ export default function({ setShowRecipePanel, showRecipePanel }: IRecipeStepsPro
       headerActionTemplate={<RecipeHeaderActionTemplate />}
       closeClickHandler={closeClickHandler}
     >
-      <Container className={classes.RecipeStepsBodyStyles}>
+      <Container className={classes.RecipeStepsBodyStyles} >
         {Array.isArray(recipeSteps) && recipeSteps.length ? (
           <RecipeStepsTableComponent recipeSteps={recipeSteps} />
         ) : (

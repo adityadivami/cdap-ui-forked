@@ -16,25 +16,24 @@
 
 import React from 'react';
 import { Router, Switch, Route } from 'react-router';
-import { createBrowserHistory as createHistory } from 'history';
-import { render } from '@testing-library/react';
-import DrawerWidgetHeading from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import { render, screen } from '@testing-library/react';
+import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading/index';
+import history from 'services/history'
 
 describe('It should test DrawerWidgetHeading Component', () => {
-  it('Should test whether DrawerWidgetHeading Component is rendered', () => {
-    const container = render(
+  it('Should test whether DrawerWidgetHeading Component is rendered with correct heading', () => {
+    render(
       <Router history={history}>
         <Switch>
           <Route>
-            <DrawerWidgetHeading />
+            <DrawerWidgetHeading headingText={'test-heading'} />
           </Route>
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined();
+
+    const headingLabelElement = screen.getByTestId(/drawer-widget-heading/i);
+    expect(headingLabelElement).toBeInTheDocument();
+    expect(headingLabelElement).toHaveTextContent('test-heading');
   });
 });

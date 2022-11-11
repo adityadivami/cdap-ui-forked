@@ -14,16 +14,11 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import DrawerWidget from 'components/DrawerWidget';
-import { createBrowserHistory as createHistory } from 'history';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import RecipeSteps from '..';
-
-const history = createHistory({
-  basename: '/',
-});
+import RecipeSteps from 'components/RecipeSteps/index';
+import history from 'services/history'
 
 describe('It should test the Recipe Component', () => {
   it('renders Recipe Component', () => {
@@ -36,6 +31,6 @@ describe('It should test the Recipe Component', () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined;
+    expect(container).toBeDefined();
   });
 });

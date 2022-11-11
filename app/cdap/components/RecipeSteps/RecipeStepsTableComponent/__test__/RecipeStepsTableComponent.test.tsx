@@ -14,21 +14,17 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import DrawerWidget from 'components/DrawerWidget';
-import { createBrowserHistory as createHistory } from 'history';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import RecipeStepsTableComponent from '..';
-import { mockRecipe } from '../mock/mock';
+import RecipeStepsTableComponent from 'components/RecipeSteps/RecipeStepsTableComponent/index';
+import { mockRecipe } from 'components/RecipeSteps/RecipeStepsTableComponent/mock/mock';
+import history from 'services/history'
 
-const history = createHistory({
-  basename: '/',
-});
 
 describe('It should test the Recipe Component', () => {
   it('renders Recipe Component and triggers button and following functionality', () => {
-    const container = render(
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -37,8 +33,7 @@ describe('It should test the Recipe Component', () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined;
-    const ele2 = screen.getByTestId(/recipe-steps-span0/i);
-    expect(ele2).toContainHTML('a-column');
+    const recipeStepsSpan = screen.getByTestId(/recipe-steps-span0/i);
+    expect(recipeStepsSpan).toContainHTML('a-column');
   });
 });

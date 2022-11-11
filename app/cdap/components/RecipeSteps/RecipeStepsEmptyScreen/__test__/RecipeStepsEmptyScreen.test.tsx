@@ -14,20 +14,17 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import DrawerWidget from 'components/DrawerWidget';
-import { createBrowserHistory as createHistory } from 'history';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import RecipeStepsEmptyScreen from '..';
+import RecipeStepsEmptyScreen from 'components/RecipeSteps/RecipeStepsEmptyScreen/index';
+import history from 'services/history'
+import T from 'i18n-react';
 
-const history = createHistory({
-  basename: '/',
-});
 
 describe('It should test the RecipeStepsEmptyScreen Component', () => {
-  it('renders RecipeStepsEmptyScreen Component', () => {
-    const container = render(
+  it('renders RecipeStepsEmptyScreen Component and check if the labels are rendered as expected', () => {
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -36,6 +33,13 @@ describe('It should test the RecipeStepsEmptyScreen Component', () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined;
+    const recipeStepsEmptyScreenElement = screen.getByTestId(/recipe-steps-empty-screen-parent/i)
+    expect(recipeStepsEmptyScreenElement).toBeDefined();
+
+    const headingElement = screen.getByTestId(/start-wrangle-title/i);
+    expect(headingElement).toHaveTextContent(`${T.translate('features.WranglerNewRecipeSteps.startWrangleTitle')}`);
+
+    const subHeadingElement = screen.getByTestId(/start-wrangle-sub-title/i);
+    expect(subHeadingElement).toHaveTextContent(`${T.translate('features.WranglerNewRecipeSteps.startWrangleSubTitle')}`)
   });
 });

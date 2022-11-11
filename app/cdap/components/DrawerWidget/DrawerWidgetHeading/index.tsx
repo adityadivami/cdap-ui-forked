@@ -16,16 +16,16 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from '../styles';
-import { UnderLine } from '../iconStore';
-import { IDrawerWidgetHeadinProps } from './types';
+import { useStyles } from 'components/DrawerWidget/styles';
+import { UnderLine } from 'components/DrawerWidget/iconStore';
+import { IDrawerWidgetHeadinProps } from 'components/DrawerWidget/DrawerWidgetHeading/types';
 
 export default function({ headingText }: IDrawerWidgetHeadinProps) {
   const classes = useStyles();
 
   return (
     <Box className={classes.headingStyles}>
-      <Typography className={classes.headingTextStyles}>{headingText}</Typography>
+      <Typography className={classes.headingTextStyles} data-testid='drawer-widget-heading'>{headingText}</Typography>
       {UnderLine}
     </Box>
   );

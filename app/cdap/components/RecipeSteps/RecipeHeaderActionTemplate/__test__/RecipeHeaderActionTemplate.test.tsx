@@ -14,20 +14,16 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import DrawerWidget from 'components/DrawerWidget';
-import { createBrowserHistory as createHistory } from 'history';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import RecipeHeaderActionTemplate from '..';
+import RecipeHeaderActionTemplate from 'components/RecipeSteps/RecipeHeaderActionTemplate/index';
+import history from 'services/history'
 
-const history = createHistory({
-  basename: '/',
-});
 
 describe('It should test the RecipeHeaderActionTemplate Component', () => {
   it('renders RecipeHeaderActionTemplate component', () => {
-    const container = render(
+    render(
       <Router history={history}>
         <Switch>
           <Route>
@@ -36,6 +32,8 @@ describe('It should test the RecipeHeaderActionTemplate Component', () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined;
+    // expect(container).toBeDefined;
+    const recipeHeaderActionParent = screen.getByTestId(/header-action-template-parent/i);
+    expect(recipeHeaderActionParent).toBeInTheDocument();
   });
 });

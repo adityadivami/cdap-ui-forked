@@ -16,20 +16,20 @@
 
 import { Container, Typography } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import { useStyles } from '../styles';
+import { useStyles } from 'components/RecipeSteps/styles';
 import T from 'i18n-react';
-import { InfoGraphicData } from '../iconStore';
+import { InfoGraphicData } from 'components/RecipeSteps/iconStore';
 
 export default function() {
   const classes = useStyles();
 
   return (
-    <Container className={classes.emptyScreenStyles}>
+    <Container className={classes.emptyScreenStyles} data-testid='recipe-steps-empty-screen-parent'>
       {InfoGraphicData}
-      <Typography className={classes.emptyScreenText}>
+      <Typography className={classes.emptyScreenText} data-testid='start-wrangle-title'>
         {T.translate('features.WranglerNewRecipeSteps.startWrangleTitle')}
       </Typography>
-      <Typography className={classes.emptyScreenInfoText}>
+      <Typography className={classes.emptyScreenInfoText} data-testid='start-wrangle-sub-title'>
         {T.translate('features.WranglerNewRecipeSteps.startWrangleSubTitle')}
       </Typography>
     </Container>
