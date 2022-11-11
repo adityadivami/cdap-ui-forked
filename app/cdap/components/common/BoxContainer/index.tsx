@@ -17,133 +17,49 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
-import { IBoxContainerProps } from 'components/common/BoxContainer/types';
+import {SxProps} from '@material-ui/system/styleFunctionSx'
 
-const SimpleBox = styled(Box)`
-  display: block;
-  position: relative;
-  width: ${({ width }) => (width ? width : 'auto')};
-  height: ${({ height }) => (height ? height : 'auto')};
-  box-sizing: border-box;
-  padding: ${({ padding }) => (padding ? padding : 0)};
-  margin: ${({ margin }) => (margin ? margin : 0)};
-`;
+interface IBoxContainerProps {
+  children?: JSX.Element[] | JSX.Element;
+  onClick?: () => void;
+  dataTestId?: string;
+  sx?: SxProps;
+}
+
+const SimpleBox = styled(Box)(({ theme }) => ({
+  display: 'block',
+  position: 'relative',
+}));
 
 export const BlockContainer = ({
   children,
-  padding,
-  margin,
-  width,
-  height,
   onClick,
   dataTestId,
+  sx,
 }: IBoxContainerProps) => (
   <SimpleBox
-    padding={padding}
-    margin={margin}
-    width={width}
-    height={height}
     onClick={onClick}
-<<<<<<< HEAD
-    dataTestId={dataTestId}
-=======
     data-testid={dataTestId}
-    textAlign={textAlign}
->>>>>>> 5287afb0d98822355ac364c6f32a1492e81cd220
+    sx={sx}
   >
     {children}
   </SimpleBox>
 );
 
-const CenterAligned = styled(SimpleBox)`
-text-align: center;
-`;
 
-
-export const CenterAlignedBox = ({
-  children,
-  padding,
-  margin,
-  width,
-  height,
-  dataTestId,
-}: IBoxContainerProps) => (
-  <CenterAligned
-    padding={padding}
-    margin={margin}
-    width={width}
-    height={height}
-<<<<<<< HEAD
-    dataTestId={dataTestId}
-=======
-    onClick={onClick}
-    data-testid={dataTestId}
-    textAlign={textAlign}
->>>>>>> 5287afb0d98822355ac364c6f32a1492e81cd220
-  >
-    {children}
-  </CenterAligned>
-);
-
-const SimpleFlexBox = styled(SimpleBox)`
-  display: flex;
-  flex-direction: ${({ flexDirection }) => (flexDirection ? flexDirection : 'row')};
-`;
-
-const FlexSpaceBox = styled(SimpleFlexBox)`
-  justify-content: space-between;
-  align-items: center;
-`;
+const SimpleFlexBox =styled(SimpleBox)(({ theme }) => ({
+  display: 'flex'
+})); 
 
 export const FlexBoxContainer = ({
   children,
-  padding,
-  margin,
-  width,
-  height,
+  sx,
   dataTestId,
-  flexDirection
 }: IBoxContainerProps) => (
   <SimpleFlexBox
-    padding={padding}
-    margin={margin}
-    width={width}
-    height={height}
-<<<<<<< HEAD
-    dataTestId={dataTestId}
-    flexDirection={flexDirection}
-=======
-    flexDirection={flexDirection}
-    onClick={onClick}
     data-testid={dataTestId}
-    textAlign={textAlign}
->>>>>>> 5287afb0d98822355ac364c6f32a1492e81cd220
+    sx={sx}
   >
     {children}
   </SimpleFlexBox>
-);
-
-export const FlexSpaceBetweenContainer = ({
-  children,
-  padding,
-  margin,
-  width,
-  height,
-  dataTestId,
-}: IBoxContainerProps) => (
-  <FlexSpaceBox
-    padding={padding}
-    margin={margin}
-    width={width}
-    height={height}
-<<<<<<< HEAD
-    dataTestId={dataTestId}
-=======
-    onClick={onClick}
-    data-testid={dataTestId}
-    textAlign={textAlign}
->>>>>>> 5287afb0d98822355ac364c6f32a1492e81cd220
-  >
-    {children}
-  </FlexSpaceBox>
 );

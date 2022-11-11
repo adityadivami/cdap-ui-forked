@@ -17,24 +17,29 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
+import {SxProps} from '@material-ui/system/styleFunctionSx'
 
-const IconBox = styled(Box)`
-  cursor: ${({ isPointer }) => (isPointer ? 'pointer' : 'auto')};
-  margin: ${({ margin }) => (margin ? margin : 0)};
-`;
+interface IIconContainerProps {
+  children?: JSX.Element[] | JSX.Element;
+  onClick?: () => void;
+  dataTestId?: string;
+  sx?: SxProps;
+}
+
+const IconBox = styled(Box)(({ theme }) => ({
+    backgroundColor: '#ffffff'
+}));
 
 export const IconContainer = ({
   children,
-  margin,
   onClick,
   dataTestId,
-  isPointer
-}) => (
+  sx
+}: IIconContainerProps) => (
   <IconBox
-    margin={margin}
     onClick={onClick}
-    dataTestId={dataTestId}
-    isPointer={isPointer}
+    data-testid={dataTestId}
+    sx={sx}
   >
     {children}
   </IconBox>

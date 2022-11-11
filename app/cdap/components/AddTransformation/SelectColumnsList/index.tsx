@@ -27,7 +27,7 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import { BlockContainer, FlexBoxContainer, FlexSpaceBetweenContainer, CenterAlignedBox } from 'components/common/BoxContainer';
+import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
 import { SimpleBoldLabel } from 'components/common/TypographyText';
 
 export default function({
@@ -121,8 +121,12 @@ export default function({
   };
 
   return (
-    <BlockContainer dataTestId="select-column-list-parent" height="90%">
-      <FlexSpaceBetweenContainer>
+    <BlockContainer dataTestId="select-column-list-parent" sx={{height: '90%'}}>
+      <FlexBoxContainer sx={{
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 20
+      }}>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
           <input
@@ -133,18 +137,20 @@ export default function({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
           />
-          <Box
-            className={classes.searchInputAdornment}
+          <BlockContainer
+            sx={{cursor: 'pointer'}}
             onClick={handleFocus}
             data-testid="click-handle-focus"
           >
             {SearchIcon}
-          </Box>
+          </BlockContainer>
         </div>
-      </FlexSpaceBetweenContainer>
+      </FlexBoxContainer>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <FlexBoxContainer height="100%" margin="30px 0 0 0">
-          <CenterAlignedBox>
+        <FlexBoxContainer sx={{
+          marginTop: 30
+        }}>
+          <BlockContainer sx={{textAlign: 'center'}}>
             {NoDataSVG}
             <SimpleBoldLabel
               text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
@@ -160,7 +166,7 @@ export default function({
               weight={400}
               dataTestId="no-column-subTitle"
             />
-          </CenterAlignedBox>
+          </BlockContainer>
         </FlexBoxContainer>
       ) : (
         <ColumnTable

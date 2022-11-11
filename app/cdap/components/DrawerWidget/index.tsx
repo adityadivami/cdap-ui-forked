@@ -21,7 +21,7 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
-import { BlockContainer, FlexBoxContainer, FlexSpaceBetweenContainer } from 'components/common/BoxContainer';
+import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
 import { IconContainer } from 'components/common/IconContainer';
 
 export default function({
@@ -39,20 +39,22 @@ export default function({
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
-        <FlexSpaceBetweenContainer height="60px">
-          <div className={classes.headerStyles}>
+        <FlexBoxContainer sx={{justifyContent: 'space-between', alignItems: 'center', marginTop: 15}}>
+          <FlexBoxContainer sx={{alignItems: 'center'}}>
             {showBackIcon && (
               <IconContainer
                 onClick={closeClickHandler}
                 dataTestId="box-id"
-                margin="0 10px 0 0"
-                isPointer={true}
+                sx={{
+                  marginRight: 10,
+                  cursor: 'pointer'
+                }}
               >
                 {BackIcon}
               </IconContainer>
             )}
             <DrawerWidgetHeading headingText={headingText.toString()} />
-          </div>
+          </FlexBoxContainer>
           <FlexBoxContainer>
             {headerActionTemplate && (
               <BlockContainer dataTestId="header-action-template">
@@ -61,12 +63,13 @@ export default function({
             )}
             {showDivider && (
               <BlockContainer
-                alignItems="center"
                 dataTestId="show-divider-box"
-                width="1px"
-                height="28px"
-                backgroundColor="#DADCE0"
-                margin="0 15px"
+                sx={{
+                  width: "1px",
+                  height: "28px",
+                  backgroundColor: "#DADCE0",
+                  margin: "0 15px"
+                }}
               />
             )}
             <CloseRoundedIcon
@@ -77,8 +80,8 @@ export default function({
               data-testid="drawer-widget-close-round-icon"
             />
           </FlexBoxContainer>
-        </FlexSpaceBetweenContainer>
-        <>{children}</>
+        </FlexBoxContainer>
+        {children}
       </Container>
     </Drawer>
   );

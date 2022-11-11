@@ -23,14 +23,8 @@ export const useStyles = makeStyles(() => {
       display: 'flex',
       marginRight: 10,
       '& input': {
-        marginRight: 30,
+        marginRight: 20,
       },
-    },
-    searchInputAdornment: {
-      zIndex: 0,
-      cursor: 'pointer',
-      position: 'absolute',
-      right: 0,
     },
     isFocused: {
       border: 'none',

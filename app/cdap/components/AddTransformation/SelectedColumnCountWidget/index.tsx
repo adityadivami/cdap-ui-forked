@@ -15,14 +15,13 @@
  */
 
 import React from 'react';
-import { useStyles } from 'components/AddTransformation/SelectedColumnCountWidget/styles';
 import T from 'i18n-react';
 import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
 import { SimpleLabel } from 'components/common/TypographyText';
+import { BlockContainer } from 'components/common/BoxContainer';
 
 export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
-  const classes = useStyles();
   const text = selectedColumnsCount
     ? selectedColumnsCount > 10
       ? selectedColumnsCount
@@ -34,7 +33,10 @@ export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProp
       )}`;
 
   return (
-    <div className={classes.columnsCountTextStyles}>
+    <BlockContainer sx={{
+      paddingTop: 5,
+      paddingBottom: 15,
+    }}>
       <SimpleLabel
         text={text.toString()}
         component="p"
@@ -42,6 +44,6 @@ export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProp
         weight={400}
         dataTestId="no-column-title"
       />
-    </div>
+    </BlockContainer>
   );
 }
