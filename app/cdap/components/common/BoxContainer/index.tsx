@@ -55,7 +55,7 @@ export const BlockContainer = ({
     width={width}
     height={height}
     onClick={onClick}
-    dataTestId={dataTestId}
+    data-testid={dataTestId}
     textAlign={textAlign}
   >
     {children}
@@ -100,7 +100,7 @@ export const AbsoluteContainer = ({
     width={width}
     height={height}
     onClick={onClick}
-    dataTestId={dataTestId}
+    data-testid={dataTestId}
     textAlign={textAlign}
   >
     {children}
@@ -142,7 +142,7 @@ export const FlexBoxContainer = ({
     height={height}
     flexDirection={flexDirection}
     onClick={onClick}
-    dataTestId={dataTestId}
+    data-testid={dataTestId}
     textAlign={textAlign}
   >
     {children}
@@ -177,7 +177,7 @@ export const IconContainer = ({
     width={width}
     height={height}
     onClick={onClick}
-    dataTestId={dataTestId}
+    data-testid={dataTestId}
     textAlign={textAlign}
   >
     {children}
