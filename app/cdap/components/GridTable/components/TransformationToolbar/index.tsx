@@ -14,8 +14,7 @@
  *  the License.
  */
 
-import { IconButton, Tooltip } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { IconButton } from '@material-ui/core';
 import { default as React, useState } from 'react';
 import NestedMenu from 'components/GridTable/components/NestedMenu';
 import { ITransformationToolBarProps } from 'components/GridTable/components/TransformationToolbar/types';
@@ -23,13 +22,14 @@ import {
   Divider,
   LongDivider,
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
-import { useStyles } from 'components/GridTable/components/TransformationToolbar/styles';
 import FunctionToggle from 'components/GridTable/components/FunctionNameToggle';
 import { nestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/utils';
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 import ExpandButton from 'components/common/ExpandButton';
-import { SimpleLabel } from 'components/common/TypographyText';
-import ReplayIcon from '@material-ui/icons/Replay';
+import { NormalFont } from 'components/common/TypographyText';
+import { LastDividerBox, DividerBox, FunctionBoxWrapper, SearchBoxWrapper } from 'components/common/BoxContainer';
+import {ToolBarIconWrapper, ToolBarInnerWrapper} from 'components/common/IconContainer';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip'
 
 export default function({
   columnType,
@@ -37,7 +37,6 @@ export default function({
   setShowBreadCrumb,
   showBreadCrumb,
 }: ITransformationToolBarProps) {
-  const classes = useStyles();
   const [showName, setShowName] = useState<boolean>(false);
   const [anchorElement, setAnchorElement] = useState<HTMLElement[]>(null);
   const [selectedMenuOptions, setSelectedMenuOptions] = useState<IMenuItem[]>([]);
@@ -48,25 +47,19 @@ export default function({
   };
 
   return (
-    <Box className={classes.iconContainer} data-testid="transformations-toolbar-container">
-      <Box className={classes.container} data-testid="nested-menu-container">
+    <ToolBarIconWrapper data-testid="transformations-toolbar-container">
+      <ToolBarInnerWrapper data-testid="nested-menu-container">
         {nestedMenuOptions?.map((eachOption, optionIndex) => {
-          console.log('eachOption', eachOption);
           return (
             <>
-              <Box
-                className={classes.functionNameWrapper}
+              <FunctionBoxWrapper
                 data-testid={`toolbar-icon-${eachOption.title
                   .toLowerCase()
                   .split(' ')
                   .join('-')}`}
               >
-                <Tooltip
+                <CustomTooltip
                   title={eachOption.title}
-                  classes={{
-                    tooltip: classes.tooltipToolbar,
-                    arrow: classes.arrowTooltip,
-                  }}
                   arrow
                   data-testid={`toolbar-icon-tooltip-${eachOption.title
                     .toLowerCase()
@@ -88,7 +81,7 @@ export default function({
                   >
                     {eachOption.icon}
                   </IconButton>
-                </Tooltip>
+                </CustomTooltip>
                 {eachOption.options?.length > 0 && (
                   <NestedMenu
                     menuOptions={selectedMenuOptions}
@@ -101,33 +94,32 @@ export default function({
                   />
                 )}
                 {showName && (
-                  <SimpleLabel
+                  <NormalFont
                     component="div"
-                    dataTestId={`toolbar-icon-title-${eachOption.title
+                    data-testid={`toolbar-icon-title-${eachOption.title
                       .toLowerCase()
                       .split(' ')
                       .join('-')}`}
-                    text={eachOption.toolName}
-                  />
+                  >{eachOption.toolName}</NormalFont>
                 )}
-              </Box>
+              </FunctionBoxWrapper>
               {(optionIndex === 4 || optionIndex === 1 || optionIndex === 9) && (
-                <Box className={classes.divider}> {showName ? LongDivider : Divider}</Box>
+                <DividerBox> {showName ? LongDivider : Divider}</DividerBox>
               )}
             </>
           );
         })}
-        <Box className={classes.lastDivider}> {showName ? LongDivider : Divider}</Box>
-        <Box className={classes.searchBar}>
+        <LastDividerBox> {showName ? LongDivider : Divider}</LastDividerBox>
+        <SearchBoxWrapper>
           {/* TODO Search functionality UI component will be added here */}
-        </Box>
-      </Box>
+        </SearchBoxWrapper>
+      </ToolBarInnerWrapper>
       <FunctionToggle setShowName={setShowName} showName={showName} />
       <ExpandButton
         open={showBreadCrumb}
         onClick={() => setShowBreadCrumb(!showBreadCrumb)}
         dataTestId="toolbar-header-toggler"
       />
-    </Box>
+    </ToolBarIconWrapper>
   );
 }

@@ -15,11 +15,10 @@
  */
 
 import React from 'react';
-import { Typography, Box } from '@material-ui/core';
-import { useStyles } from 'components/GridTable/components/FunctionNameToggle/styles';
 import T from 'i18n-react';
 import SwitchInputComponent from 'components/common/Switch';
-import { SimpleLabel } from 'components/common/TypographyText';
+import { NormalFont } from 'components/common/TypographyText';
+import { FlexJustifyAlignCenter } from 'components/common/BoxContainer';
 
 const PREFIX = 'features.WranglerNewUI.GridPage';
 
@@ -29,17 +28,14 @@ interface IFunctionNameToggleProps {
 }
 
 export default function({ setShowName, showName }: IFunctionNameToggleProps) {
-  const classes = useStyles();
   return (
-    <Box
-      className={classes.functionWrapper}
+    <FlexJustifyAlignCenter
       data-testid="transformations-toolbar-icons-function-name-toggler"
     >
-      <SimpleLabel
-        text={T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`).toString()}
+      <NormalFont
         component="div"
-        dataTestId="name-toggle-child-label"
-      />
+        data-testid="name-toggle-child-label"
+      >{T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}</NormalFont>
       <SwitchInputComponent
         setShow={setShowName}
         show={showName}
@@ -48,6 +44,6 @@ export default function({ setShowName, showName }: IFunctionNameToggleProps) {
           'data-testid': 'transformations-toolbar-icons-function-name-toggler',
         }}
       />
-    </Box>
+    </FlexJustifyAlignCenter>
   );
 }

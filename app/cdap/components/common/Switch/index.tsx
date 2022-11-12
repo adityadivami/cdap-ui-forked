@@ -23,6 +23,7 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,
   padding: 0,
+  marginLeft: 5,
   display: 'flex',
   '& .MuiSwitch-input': {
     left: 0,

@@ -14,11 +14,10 @@
  * the License.
  */
 
-import { Menu } from '@material-ui/core';
 import React from 'react';
 import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
-import { useStyles } from 'components/GridTable/components/MenuComponent/styles';
 import { IMenuComponentProps } from 'components/GridTable/components/MenuComponent/types';
+import { MenuComponent } from 'components/common/MenuContainer';
 
 export default function({
   anchorElement,
@@ -28,9 +27,8 @@ export default function({
   columnType,
   setMenuComponentOptions,
 }: IMenuComponentProps) {
-  const classes = useStyles();
   return (
-    <Menu
+    <MenuComponent
       id="long-menu"
       keepMounted
       anchorEl={anchorElement}
@@ -49,8 +47,6 @@ export default function({
         setAnchorElement(null);
         setMenuComponentOptions([]);
       }}
-      className={classes.root}
-      classes={{ paper: classes.popoverPaper }}
       data-testid="menu-component-parent"
     >
       {menuOptions?.map((eachOption, optionsIndex) => (
@@ -61,6 +57,6 @@ export default function({
           onMenuClick={submitOption}
         />
       ))}
-    </Menu>
+    </MenuComponent>
   );
 }
