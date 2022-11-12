@@ -16,8 +16,12 @@
 
 import Fuse from 'fuse.js';
 import uuidV4 from 'uuid/v4';
+import { IDirectivesList } from './types';
 
-export const formatUsageDirectiveData = (directiveInput: string, directivesList) => {
+export const formatUsageDirectiveData = (
+  directiveInput: string,
+  directivesList: IDirectivesList[]
+) => {
   const inputSplit: string[] = directiveInput.replace(/^\s+/g, '').split(' ');
   const fuseOptions = {
     includeScore: true,
@@ -39,7 +43,7 @@ export const formatUsageDirectiveData = (directiveInput: string, directivesList)
   return results;
 };
 
-export const handlePasteDirective = (directiveInput: string, directivesList) => {
+export const handlePasteDirective = (directiveInput: string, directivesList: IDirectivesList[]) => {
   const inputSplit = directiveInput.replace(/^\s+/g, '').split(' ');
   const filterUsageItem =
     directivesList.length > 0
