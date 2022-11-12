@@ -52,3 +52,7 @@ export const handlePasteDirective = (directiveInput: string, directivesList) => 
     return false;
   }
 };
+
+export const eventPreventDefault = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  e.preventDefault();
+};
