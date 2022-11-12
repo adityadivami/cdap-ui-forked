@@ -36,7 +36,6 @@ export const formatUsageDirectiveData = (directiveInput: string, directivesList)
     row.uniqueId = uuidV4();
     return row;
   });
-  console.log('RESSS', directivesList);
   return results;
 };
 
