@@ -25,6 +25,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
+import javax.swing.*;
 
 public class ColumnInsightsPanel {
     @Given("Navigate to Home Page")
@@ -49,7 +52,7 @@ public class ColumnInsightsPanel {
     public void clickOnAnyColumnFromGridTable() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("grid-header-cell-0"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("grid-header-cell-1"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -59,7 +62,12 @@ public class ColumnInsightsPanel {
     public void verifyIfUserChangesTheColumnName(String inputValue) {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("edit-icon"));
+           WebElement edit = Helper.locateElementByXPath("//svg[@data-testid=edit-icon']");
+            Actions action = new Actions(SeleniumDriver.getDriver());
+            action.moveToElement(edit).click(edit);
+            action.perform();
+           boolean check1= edit.isSelected();
+            System.out.println(check1);
             Helper.locateElementByXPath("//input[@data-testid='column-name-edit-input']").click();
             Helper.locateElementByXPath("//input[@data-testid='column-name-edit-input']").clear();
             Helper.locateElementByXPath("//input[@data-testid='column-name-edit-input']").sendKeys(inputValue);
