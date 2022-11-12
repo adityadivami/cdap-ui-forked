@@ -15,19 +15,17 @@
  */
 
 import React from 'react';
-import { useStyles } from 'components/DrawerWidget/styles';
 import { UnderLine } from 'components/DrawerWidget/iconStore';
 import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
-import { FlexBoxContainer } from 'components/common/BoxContainer';
-import { SimpleBoldLabel } from 'components/common/TypographyText';
+import { DrawerHeadWrapper } from 'components/common/BoxContainer';
+import { HeadFont } from 'components/common/TypographyText';
 
 export default function({ headingText }: IDrawerWidgetHeadingProps) {
-  const classes = useStyles();
 
   return (
-    <FlexBoxContainer sx={{ flexDirection: 'column' }}>
-      <SimpleBoldLabel component="p" size="20px" dataTestId="drawer-heading" text={headingText} />
+    <DrawerHeadWrapper>
+      <HeadFont component="p" data-testid="drawer-heading">{headingText}</HeadFont>
       {UnderLine}
-    </FlexBoxContainer>
+    </DrawerHeadWrapper>
   );
 }

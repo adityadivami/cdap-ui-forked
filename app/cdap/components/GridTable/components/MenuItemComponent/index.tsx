@@ -14,23 +14,23 @@
  * the License.
  */
 
-import { MenuItem, Typography } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
 import React from 'react';
-import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
 import { menuArrowIcon } from 'components/GridTable/components/TransformationToolbar/iconStore';
 import { IMenuItemComponentProps } from 'components/GridTable/components/MenuItemComponent/types';
 import T from 'i18n-react';
+import { NormalFont, MenuHeadText } from 'components/common/TypographyText';
+import {ShortDivider} from 'components/common/Divider';
 
 export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
-  const classes = useNestedMenuStyles();
   if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.divider')) {
-    return <hr className={classes.divider} key={index} data-testid="menu-item-divider" />;
+    return <ShortDivider key={index} data-testid="menu-item-divider" />;
   }
   if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.heading')) {
     return (
-      <div className={classes.heading} key={index} data-testid="menu-item-heading">
+      <MenuHeadText key={index} data-testid="menu-item-heading">
         {item.label}
-      </div>
+      </MenuHeadText>
     );
   } else {
     return (
@@ -44,13 +44,13 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
               : true
             : false
         }
-        title={item.value}
+        title={item.label}
         onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
         data-testid="menu-item-parent"
       >
-        <Typography component="div" className={classes.menuLabels}>
-          {item.label}{' '}
-        </Typography>
+        <NormalFont component="div">
+          {item.label}
+        </NormalFont>
         {item?.options?.length > 0 && menuArrowIcon}
       </MenuItem>
     );

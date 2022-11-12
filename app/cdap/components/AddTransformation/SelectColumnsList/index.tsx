@@ -27,8 +27,8 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
-import { SimpleBoldLabel } from 'components/common/TypographyText';
+import { SelectColumnWrapper, SelectColumnInnerWrapper, PointerBox, FlexWrapper, CenterAlignBox } from 'components/common/BoxContainer';
+import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 
 export default function({
   transformationDataType,
@@ -121,13 +121,8 @@ export default function({
   };
 
   return (
-    <BlockContainer dataTestId="select-column-list-parent" sx={{ height: '90%' }}>
-      <FlexBoxContainer
-        sx={{
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginTop: 20,
-        }}
+    <SelectColumnWrapper dataTestId="select-column-list-parent">
+      <SelectColumnInnerWrapper
       >
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
@@ -139,39 +134,29 @@ export default function({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
           />
-          <BlockContainer
-            sx={{ cursor: 'pointer' }}
+          <PointerBox
             onClick={handleFocus}
             data-testid="click-handle-focus"
           >
             {SearchIcon}
-          </BlockContainer>
+          </PointerBox>
         </div>
-      </FlexBoxContainer>
+      </SelectColumnInnerWrapper>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <FlexBoxContainer
-          sx={{
-            marginTop: 30,
-          }}
+        <FlexWrapper
         >
-          <BlockContainer sx={{ textAlign: 'center' }}>
+          <CenterAlignBox>
             {NoDataSVG}
-            <SimpleBoldLabel
-              text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
+            <SubHeadBoldFont
               component="p"
-              size="16px"
-              weight={600}
               dataTestId="no-column-title"
-            />
-            <SimpleBoldLabel
-              text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`).toString()}
+            >{T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}</SubHeadBoldFont>
+            <NormalFont
               component="p"
-              size="14px"
-              weight={400}
               dataTestId="no-column-subTitle"
-            />
-          </BlockContainer>
-        </FlexBoxContainer>
+            >{T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}</NormalFont>
+          </CenterAlignBox>
+        </FlexWrapper>
       ) : (
         <ColumnTable
           dataQualityValue={dataQuality}
@@ -187,6 +172,6 @@ export default function({
           transformationName={transformationName}
         />
       )}
-    </BlockContainer>
+    </SelectColumnWrapper>
   );
 }

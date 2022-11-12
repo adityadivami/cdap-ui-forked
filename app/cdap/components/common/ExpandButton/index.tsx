@@ -14,25 +14,25 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import React from 'react';
+import { IconButton } from '@material-ui/core';
 import styled from 'styled-components';
-import { grey } from '@material-ui/core/colors';
+import { Expand } from 'components/GridTable/components/TransformationToolbar/iconStore';
 
-export const ToolBarIconWrapper = styled(Box)`
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid ${grey[300]};
-    margin-top: 0;
-    padding-left: 18px;
-    padding-right: 15px;
-`;
+interface IExpandButtonProps {
+  open: boolean;
+  onClick: (event: React.MouseEvent) => void;
+  dataTestId: string;
+}
 
-export const ToolBarInnerWrapper = styled(Box)`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 0;
-    margin-right: 0;
-    width: 80%;
+const ExpandButton = styled(IconButton)`
+  transform: ${({ open }) => (!open ? 'rotate(180deg)' : 'rotate(0deg)')};
+  cursor: pointer;
 `;
+export default function({ open, onClick, dataTestId }: IExpandButtonProps) {
+  return (
+    <ExpandButton open={open} onClick={onClick} data-testid={dataTestId}>
+      {Expand}
+    </ExpandButton>
+  );
+}

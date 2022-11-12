@@ -18,8 +18,8 @@ import React from 'react';
 import T from 'i18n-react';
 import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import { SimpleLabel } from 'components/common/TypographyText';
-import { BlockContainer } from 'components/common/BoxContainer';
+import { NormalFont } from 'components/common/TypographyText';
+import { SelectColumnWidgetBox } from 'components/common/BoxContainer';
 
 export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
   const text = selectedColumnsCount
@@ -33,19 +33,12 @@ export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProp
       )}`;
 
   return (
-    <BlockContainer
-      sx={{
-        paddingTop: 5,
-        paddingBottom: 15,
-      }}
+    <SelectColumnWidgetBox
     >
-      <SimpleLabel
-        text={text.toString()}
+      <NormalFont
         component="p"
-        size="14px"
-        weight={400}
         dataTestId="no-column-title"
-      />
-    </BlockContainer>
+      >{text}</NormalFont>
+    </SelectColumnWidgetBox>
   );
 }

@@ -17,7 +17,23 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import NestedMenu from 'components/GridTable/components/NestedMenu/index';
-import { dummyData1, dummyData2 } from 'components/GridTable/components/NestedMenu/mock/mock';
+
+const dummyData1 = [
+  {
+    label: 'test',
+    supportedDataType: ['test'],
+    value: 'test',
+    options: [{ label: 'test', supportedDataType: ['test'], value: 'test', options: [] }],
+  },
+];
+
+const dummyData2 = [
+  {
+    label: 'test',
+    supportedDataType: ['test'],
+    value: 'test',
+  },
+];
 
 describe('Testing nested menu component', () => {
   it('should test default render of nested menu', () => {

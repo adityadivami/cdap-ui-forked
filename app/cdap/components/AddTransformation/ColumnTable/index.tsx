@@ -25,7 +25,7 @@ import {
   Checkbox,
   Divider,
 } from '@material-ui/core';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useStyles } from 'components/AddTransformation/ColumnTable/styles';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';

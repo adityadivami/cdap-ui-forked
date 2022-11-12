@@ -14,15 +14,15 @@
  * the License.
  */
 
-import { Container, Drawer } from '@material-ui/core';
+import { Container, Drawer, Box } from '@material-ui/core';
 import React from 'react';
 import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
-import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
-import { IconContainer } from 'components/common/IconContainer';
+import { BackIconBox, DrawerContainerInnerFlex, FlexWrapper, FlexAlignCenter } from 'components/common/BoxContainer';
+import {VerticalDividerBox} from 'components/common/Divider';
 
 export default function({
   headingText,
@@ -39,39 +39,28 @@ export default function({
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
-        <FlexBoxContainer
-          sx={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 15 }}
+        <DrawerContainerInnerFlex
         >
-          <FlexBoxContainer sx={{ alignItems: 'center' }}>
+          <FlexAlignCenter>
             {showBackIcon && (
-              <IconContainer
+              <BackIconBox
                 onClick={closeClickHandler}
-                dataTestId="box-id"
-                sx={{
-                  marginRight: 10,
-                  cursor: 'pointer',
-                }}
+                data-testid="box-id"
               >
                 {BackIcon}
-              </IconContainer>
+              </BackIconBox>
             )}
             <DrawerWidgetHeading headingText={headingText.toString()} />
-          </FlexBoxContainer>
-          <FlexBoxContainer>
+          </FlexAlignCenter>
+          <FlexWrapper>
             {headerActionTemplate && (
-              <BlockContainer dataTestId="header-action-template">
+              <Box data-testid="header-action-template">
                 {headerActionTemplate}
-              </BlockContainer>
+              </Box>
             )}
             {showDivider && (
-              <BlockContainer
-                dataTestId="show-divider-box"
-                sx={{
-                  width: '1px',
-                  height: '28px',
-                  backgroundColor: '#DADCE0',
-                  margin: '0 15px',
-                }}
+              <VerticalDividerBox
+                data-testid="show-divider-box"
               />
             )}
             <CloseRoundedIcon
@@ -81,8 +70,8 @@ export default function({
               onClick={closeClickHandler}
               data-testid="drawer-widget-close-round-icon"
             />
-          </FlexBoxContainer>
-        </FlexBoxContainer>
+          </FlexWrapper>
+        </DrawerContainerInnerFlex>
         {children}
       </Container>
     </Drawer>

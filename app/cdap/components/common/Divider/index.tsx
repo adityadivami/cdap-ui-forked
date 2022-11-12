@@ -14,17 +14,17 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
+import { Divider, Box } from '@material-ui/core';
+import styled from 'styled-components';
 
-export const useStyles = makeStyles({
-  functionWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  typoClass: {
-    color: grey[600],
-    fontSize: 14,
-  },
-});
+export const ShortDivider = styled(Divider)`
+   width: 159px;
+   background: #DADCE0;
+`;
+
+export const VerticalDividerBox = styled(Divider)`
+   width: 1px;
+   height: 28px;
+   background-color: #DADCE0;
+   margin: 0 15px;
+`;             

@@ -3,7 +3,6 @@ import {
   ColumnIcon,
   FragmentIcon,
   GridIcon,
-  InvalidIcon,
   MathIcon,
   NullIcon,
   OtherIcon,
@@ -14,14 +13,15 @@ import {
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
 import { TOOLBAR_ICONS_LABEL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 import T from 'i18n-react';
+import ReplayIcon from '@material-ui/icons/Replay';
 
 export const nestedMenuOptions = [
   {
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.undoIcon`).toString(),
     action: 'undo',
     dataType: ['all'],
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.undoIcon`).toString(),
     icon: Undo,
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.undoIcon`).toString(),
     options: [],
     open: false,
   },
@@ -29,8 +29,8 @@ export const nestedMenuOptions = [
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.redoIcon`).toString(),
     action: 'redo',
     dataType: ['all'],
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.redoIcon`).toString(),
     icon: Redo,
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.redoIcon`).toString(),
     options: [],
     open: false,
   },
@@ -38,49 +38,49 @@ export const nestedMenuOptions = [
     options: [],
     icon: NullIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.nullIcon`).toString(),
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.nullIcon`),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.nullIcon`).toString(),
     open: false,
   },
   {
     options: [],
     icon: ColumnIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.columnIcon`).toString(),
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.columnIcon`),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.columnIcon`).toString(),
     open: false,
   },
   {
     options: MENU_OPTIONS,
     icon: StructureIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.structureIcon`).toString(),
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.structureIcon`),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.structureIcon`).toString(),
     open: false,
   },
   {
     options: [],
     icon: FragmentIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.fragmentIcon`).toString(),
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.fragmentIcon`),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.fragmentIcon`).toString(),
     open: false,
   },
   {
     options: [],
     icon: MathIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.mathIcon`).toString(),
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.mathIcon`),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.mathIcon`).toString(),
     open: false,
   },
   {
     options: [],
     icon: SecurityIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.securityIcon`).toString(),
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.securityIcon`),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.securityIcon`).toString(),
     open: false,
   },
   {
     options: [],
     icon: OtherIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.otherIcon`).toString(),
-    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.otherIcon`),
+    toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.otherIcon`).toString(),
     open: false,
   },
   {

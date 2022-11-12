@@ -19,8 +19,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
 import { red, green } from '@material-ui/core/colors';
-import { ErrorLabel, SuccessLabel } from 'components/common/TypographyText';
-import { BlockContainer } from 'components/common/BoxContainer';
+import { ErrorFont, SuccessText } from 'components/common/TypographyText';
+import { ProgressBoxWrapper, ProgressBoxInnerWrapper } from 'components/common/BoxContainer';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -39,7 +39,7 @@ const ArcContainer = styled(Typography)`
 export default function({ value }: ICircularProgressBarProps) {
   return (
     <>
-      <BlockContainer
+      <ProgressBoxWrapper
         sx={{
           position: 'relative',
           margin: 4,
@@ -47,7 +47,7 @@ export default function({ value }: ICircularProgressBarProps) {
           textAlign: 'center',
         }}
       >
-        <BlockContainer
+        <ProgressBoxInnerWrapper
           sx={{
             position: 'relative',
             overflow: 'hidden',
@@ -57,25 +57,19 @@ export default function({ value }: ICircularProgressBarProps) {
           }}
         >
           <ArcContainer value={Math.round(value)} />
-        </BlockContainer>
+        </ProgressBoxInnerWrapper>
         {Math.round(value) < 100 ? (
-          <ErrorLabel
-            size="14px"
+          <ErrorFont
             component="div"
-            weight={400}
             dataTestId="circular-bar-value"
-            text={`${Math.round(value)}%`}
-          />
+          >{`${Math.round(value)}%`}</ErrorFont>
         ) : (
-          <SuccessLabel
-            size="14px"
+          <SuccessText
             component="div"
-            weight={400}
             dataTestId="circular-bar-value"
-            text={`${Math.round(value)}%`}
-          />
+          >{`${Math.round(value)}%`}</SuccessText>
         )}
-      </BlockContainer>
+      </ProgressBoxWrapper>
     </>
   );
 }

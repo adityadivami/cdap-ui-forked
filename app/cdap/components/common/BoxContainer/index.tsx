@@ -14,35 +14,99 @@
  * the License.
  */
 
-import React from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
-import { SxProps } from '@material-ui/system/styleFunctionSx';
 
-interface IBoxContainerProps {
-  children?: JSX.Element[] | JSX.Element;
-  onClick?: () => void;
-  dataTestId?: string;
-  sx?: SxProps;
-}
+export const FlexJustifyAlignCenter = styled(Box)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
-const SimpleBox = styled(Box)(({ theme }) => ({
-  display: 'block',
-  position: 'relative',
-}));
+export const LastDividerBox = styled(Box)`
+    margin: 0px 0px 0px 4px;
+`;
 
-export const BlockContainer = ({ children, onClick, dataTestId, sx }: IBoxContainerProps) => (
-  <SimpleBox onClick={onClick} data-testid={dataTestId} sx={sx}>
-    {children}
-  </SimpleBox>
-);
+export const DividerBox = styled(Box)`
+    margin: 0px 4px;
+`;
 
-const SimpleFlexBox = styled(SimpleBox)(({ theme }) => ({
-  display: 'flex',
-}));
+export const FunctionBoxWrapper = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: -webkit-fill-available;
+    & .MuiIconButton-root{
+        padding-bottom: 8px;
+    }
+`;
 
-export const FlexBoxContainer = ({ children, sx, dataTestId }: IBoxContainerProps) => (
-  <SimpleFlexBox data-testid={dataTestId} sx={sx}>
-    {children}
-  </SimpleFlexBox>
-);
+export const SearchBoxWrapper =  styled(Box)`
+    min-width: 490px;
+`;
+
+export const ProgressBoxWrapper = styled(Box)`
+    position: relative;
+    margin: 4px;
+    float: left;
+    text-align: center;
+`;
+
+export const ProgressBoxInnerWrapper = styled(Box)`
+    position: relative;
+    overflow: hidden;
+    width: 60px;
+    height: 30px;
+    margin-bottom: -20px !important;
+`;
+
+export const SelectColumnWrapper = styled(Box)`
+    height: 90%;
+`;
+
+export const SelectColumnInnerWrapper =  styled(Box)`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+`;
+
+export const PointerBox =  styled(Box)`
+    cursor: pointer;
+`;
+
+export const FlexWrapper =  styled(Box)`
+    display: flex;
+`;
+
+export const CenterAlignBox =  styled(Box)`
+    text-align: center;
+`;
+
+export const SelectColumnWidgetBox = styled(Box)`
+    padding-top: 5px;
+    padding-bottom: 15px;
+`;
+
+export const FlexAlignCenter = styled(Box)`
+    display: flex;
+    align-items: center;
+`;
+
+export const DrawerContainerInnerFlex = styled(Box)`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+`;
+
+export const BackIconBox = styled(Box)`
+    cursor: pointer;
+    margin-right: 10px;
+`;
+
+export const DrawerHeadWrapper = styled(Box)`
+    display: flex;
+    flex-direction: column;
+`;

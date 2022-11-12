@@ -14,20 +14,22 @@
  *  the License.
  */
 
-import { IconButton, Typography, Tooltip } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { IconButton } from '@material-ui/core';
 import { default as React, useState } from 'react';
 import NestedMenu from 'components/GridTable/components/NestedMenu';
 import { ITransformationToolBarProps } from 'components/GridTable/components/TransformationToolbar/types';
 import {
   Divider,
-  Expand,
   LongDivider,
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
-import { useStyles } from 'components/GridTable/components/TransformationToolbar/styles';
 import FunctionToggle from 'components/GridTable/components/FunctionNameToggle';
 import { nestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/utils';
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
+import ExpandButton from 'components/common/ExpandButton';
+import { NormalFont } from 'components/common/TypographyText';
+import { LastDividerBox, DividerBox, FunctionBoxWrapper, SearchBoxWrapper } from 'components/common/BoxContainer';
+import {ToolBarIconWrapper, ToolBarInnerWrapper} from 'components/common/IconContainer';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip'
 
 export default function({
   columnType,
@@ -35,7 +37,6 @@ export default function({
   setShowBreadCrumb,
   showBreadCrumb,
 }: ITransformationToolBarProps) {
-  const classes = useStyles();
   const [showName, setShowName] = useState<boolean>(false);
   const [anchorElement, setAnchorElement] = useState<HTMLElement[]>(null);
   const [selectedMenuOptions, setSelectedMenuOptions] = useState<IMenuItem[]>([]);
@@ -46,116 +47,79 @@ export default function({
   };
 
   return (
-    <Box className={classes.iconContainer} data-testid="transformations-toolbar-container">
-      <Box className={classes.container} data-testid="nested-menu-container">
+    <ToolBarIconWrapper data-testid="transformations-toolbar-container">
+      <ToolBarInnerWrapper data-testid="nested-menu-container">
         {nestedMenuOptions?.map((eachOption, optionIndex) => {
           return (
             <>
-              <Box
-                className={classes.functionNameWrapper}
+              <FunctionBoxWrapper
                 data-testid={`toolbar-icon-${eachOption.title
                   .toLowerCase()
                   .split(' ')
                   .join('-')}`}
               >
-                {eachOption.options?.length ? (
-                  <>
-                    <Tooltip
-                      title={eachOption.title}
-                      classes={{
-                        tooltip: classes.tooltipToolbar,
-                        arrow: classes.arrowTooltip,
-                      }}
-                      arrow
-                      data-testid={`toolbar-icon-tooltip-${eachOption.title
-                        .toLowerCase()
-                        .split(' ')
-                        .join('-')}`}
-                    >
-                      <IconButton
-                        onClick={(clickEvent) => {
-                          clickEvent.preventDefault();
-                          clickEvent.stopPropagation();
-                          setSelectedMenuOptions(eachOption.options);
-                          setAnchorElement([clickEvent.currentTarget]);
-                        }}
-                        data-testid="toolbar-icon-button"
-                      >
-                        {eachOption.icon}
-                      </IconButton>
-                    </Tooltip>
-                    <NestedMenu
-                      menuOptions={selectedMenuOptions}
-                      columnType={columnType}
-                      submitMenuOption={submitMenuOption}
-                      title={eachOption.title}
-                      setAnchorElement={setAnchorElement}
-                      anchorElement={anchorElement}
-                      handleMenuOpenClose={toggleMenu}
-                    />
-                    {showName && (
-                      <Typography
-                        className={classes.typoClass}
-                        component="div"
-                        data-testid={`toolbar-icon-title-${eachOption.title
-                          .toLowerCase()
-                          .split(' ')
-                          .join('-')}`}
-                      >
-                        {eachOption.toolName}
-                      </Typography>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <Tooltip
-                      title={eachOption.title}
-                      classes={{
-                        tooltip: classes.tooltipToolbar,
-                        arrow: classes.arrowTooltip,
-                      }}
-                      arrow
-                    >
-                      <IconButton
-                        onClick={() => submitMenuOption(eachOption.action, eachOption.dataType)}
-                      >
-                        {eachOption.icon}
-                      </IconButton>
-                    </Tooltip>
-                    {showName && (
-                      <Typography
-                        className={classes.typoClass}
-                        component="div"
-                        data-testid={`toolbar-icon-title-${eachOption.title
-                          .toLowerCase()
-                          .split(' ')
-                          .join('-')}`}
-                      >
-                        {eachOption.toolName}
-                      </Typography>
-                    )}
-                  </>
+                <CustomTooltip
+                  title={eachOption.title}
+                  arrow
+                  data-testid={`toolbar-icon-tooltip-${eachOption.title
+                    .toLowerCase()
+                    .split(' ')
+                    .join('-')}`}
+                >
+                  <IconButton
+                    onClick={(clickEvent) => {
+                      if (eachOption.options?.length) {
+                        clickEvent.preventDefault();
+                        clickEvent.stopPropagation();
+                        setSelectedMenuOptions(eachOption.options);
+                        setAnchorElement([clickEvent.currentTarget]);
+                      } else {
+                        submitMenuOption(eachOption.action, eachOption.dataType);
+                      }
+                    }}
+                    data-testid="toolbar-icon-button"
+                  >
+                    {eachOption.icon}
+                  </IconButton>
+                </CustomTooltip>
+                {eachOption.options?.length > 0 && (
+                  <NestedMenu
+                    menuOptions={selectedMenuOptions}
+                    columnType={columnType}
+                    submitMenuOption={submitMenuOption}
+                    title={eachOption.title}
+                    setAnchorElement={setAnchorElement}
+                    anchorElement={anchorElement}
+                    handleMenuOpenClose={toggleMenu}
+                  />
                 )}
-              </Box>
+                {showName && (
+                  <NormalFont
+                    component="div"
+                    data-testid={`toolbar-icon-title-${eachOption.title
+                      .toLowerCase()
+                      .split(' ')
+                      .join('-')}`}
+                  >{eachOption.toolName}</NormalFont>
+                )}
+              </FunctionBoxWrapper>
               {(optionIndex === 4 || optionIndex === 1 || optionIndex === 9) && (
-                <Box className={classes.divider}> {showName ? LongDivider : Divider}</Box>
+                <DividerBox> {showName ? LongDivider : Divider}</DividerBox>
               )}
             </>
           );
         })}
-        <Box className={classes.lastDivider}> {showName ? LongDivider : Divider}</Box>
-        <Box className={classes.searchBar}>
-          {/* Search functionality UI component will be added here */}
-        </Box>
-      </Box>
+        <LastDividerBox> {showName ? LongDivider : Divider}</LastDividerBox>
+        <SearchBoxWrapper>
+          {/* TODO Search functionality UI component will be added here */}
+        </SearchBoxWrapper>
+      </ToolBarInnerWrapper>
       <FunctionToggle setShowName={setShowName} showName={showName} />
-      <IconButton
-        className={showBreadCrumb ? classes.openHeader : classes.closeHeader}
+      <ExpandButton
+        open={showBreadCrumb}
         onClick={() => setShowBreadCrumb(!showBreadCrumb)}
-        data-testid="toolbar-header-toggler"
-      >
-        {Expand}
-      </IconButton>
-    </Box>
+        dataTestId="toolbar-header-toggler"
+      />
+    </ToolBarIconWrapper>
   );
 }
