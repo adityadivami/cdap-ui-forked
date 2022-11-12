@@ -14,26 +14,12 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
-import { grey } from '@material-ui/core/colors';
-export const useStyles = makeStyles(() => {
-  return {
-    searchFormControl: {
-      position: 'relative',
-      display: 'flex',
-      marginRight: 10,
-      '& input': {
-        marginRight: 20,
-      },
-    },
-    isFocused: {
-      border: 'none',
-      borderBottom: `1px solid ${grey[700]}`,
-      outline: 'none',
-    },
-    isBlurred: {
-      border: 'none',
-      borderBottom: '1px solid transparent',
-    },
-  };
-});
+import { Drawer } from '@material-ui/core';
+import styled from 'styled-components';
+
+export const DrawerWidgetComponent = styled(Drawer)`
+    & .MuiDrawer-paper{
+        top: 46px;
+        height: calc(100vh - 47px);
+    }
+`;

@@ -33,8 +33,7 @@ export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProp
       )}`;
 
   return (
-    <SelectColumnWidgetBox
-    >
+    <SelectColumnWidgetBox>
       <NormalFont
         component="p"
         dataTestId="no-column-title"

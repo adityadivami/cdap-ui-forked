@@ -14,15 +14,15 @@
  * the License.
  */
 
-import { Container, Drawer, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
-import { BackIconBox, DrawerContainerInnerFlex, FlexWrapper, FlexAlignCenter } from 'components/common/BoxContainer';
-import {VerticalDividerBox} from 'components/common/Divider';
+import { BackIconBox, DrawerContainerInnerFlex, FlexWrapper, FlexAlignCenter, PointerBox, DrawerContainerBox } from 'components/common/BoxContainer';
+import { VerticalDividerBox } from 'components/common/Divider';
+import { DrawerWidgetComponent } from 'components/common/Drawer';
 
 export default function({
   headingText,
@@ -34,13 +34,11 @@ export default function({
   showBackIcon,
   anchor,
 }: IDrawerWidgetProps) {
-  const classes = useStyles();
 
   return (
-    <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
-      <Container className={classes.drawerContainerStyles} role="presentation">
-        <DrawerContainerInnerFlex
-        >
+    <DrawerWidgetComponent anchor={anchor ? anchor : 'right'} open={openDrawer}>
+      <DrawerContainerBox role="presentation">
+        <DrawerContainerInnerFlex>
           <FlexAlignCenter>
             {showBackIcon && (
               <BackIconBox
@@ -63,17 +61,18 @@ export default function({
                 data-testid="show-divider-box"
               />
             )}
+            <PointerBox>
             <CloseRoundedIcon
-              className={classes.pointerStyles}
               color="action"
               fontSize="large"
               onClick={closeClickHandler}
               data-testid="drawer-widget-close-round-icon"
             />
+            </PointerBox>
           </FlexWrapper>
         </DrawerContainerInnerFlex>
         {children}
-      </Container>
-    </Drawer>
+      </DrawerContainerBox>
+    </DrawerWidgetComponent>
   );
 }

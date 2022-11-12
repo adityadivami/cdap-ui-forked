@@ -14,30 +14,15 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
-import { grey } from '@material-ui/core/colors';
+import styled from 'styled-components';
+import {grey} from '@material-ui/core/colors';
 
-export const useStyles = makeStyles(() => {
-  return {
-    paper: {
-      top: 46,
-      height: 'calc(100vh - 47px)',
-    },
-    drawerContainerStyles: {
-      width: 460,
-      height: '100%',
-      paddingLeft: 30,
-    },
-    pointerStyles: {
-      cursor: 'pointer',
-    },
-    headingTextStyles: {
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 20,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[900],
-    },
-  };
-});
+export const SelectColumnSearchInput = styled.input`
+    margin-right: 5px;
+    border: none;
+    border-bottom: 1px solid transparent;
+    &:focus {
+        border-bottom: 1px solid ${grey[700]};
+        outline: none;
+    }
+`

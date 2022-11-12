@@ -15,11 +15,11 @@
  */
 
 import React from 'react';
-import { TableCell, TableRow, Typography } from '@material-ui/core';
-import { useStyles } from 'components/AddTransformation/ColumnTable/Components/TableRow/styles';
 import InputWidget from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
 import DataQualityProgress from 'components/AddTransformation/CircularProgressBar';
 import { ITableRowProps } from 'components/AddTransformation/ColumnTable/types';
+import {SelectColumnTableBodyCell, SelectColumnTableRow} from 'components/common/TableContainer';
+import {TableCellText} from 'components/common/TypographyText';
 
 export default function({
   onSingleSelection,
@@ -31,14 +31,9 @@ export default function({
   index,
   eachColumn,
 }: ITableRowProps) {
-  const classes = useStyles();
   return (
-    <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`} key={index}>
-      <TableCell
-        classes={{
-          body: `${classes.recipeStepsTableRowStyles}`,
-        }}
-      >
+    <SelectColumnTableRow key={index}>
+      <SelectColumnTableBodyCell>
         <InputWidget
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
@@ -47,20 +42,20 @@ export default function({
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
         />
-      </TableCell>
-      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
-        <Typography component="div" className={classes.recipeStepsActionTypeStyles}>
+      </SelectColumnTableBodyCell>
+      <SelectColumnTableBodyCell>
+        <TableCellText component="div">
           {eachColumn.label}
-        </Typography>
-        <Typography component="div" className={classes.recipeStepsActionTypeStyles}>
+        </TableCellText>
+        <TableCellText component="div">
           {eachColumn.type}
-        </Typography>
-      </TableCell>
-      <TableCell className={`${classes.recipeStepsTableRowStyles}`}>
+        </TableCellText>
+      </SelectColumnTableBodyCell>
+      <SelectColumnTableBodyCell>
         {dataQualityValue?.length && (
           <DataQualityProgress value={Number(dataQualityValue[index]?.value)} />
         )}
-      </TableCell>
-    </TableRow>
+      </SelectColumnTableBodyCell>
+    </SelectColumnTableRow>
   );
 }

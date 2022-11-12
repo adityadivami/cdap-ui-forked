@@ -14,9 +14,7 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { useStyles } from 'components/AddTransformation/SelectColumnsList/styles';
 import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
@@ -27,8 +25,9 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import { SelectColumnWrapper, SelectColumnInnerWrapper, PointerBox, FlexWrapper, CenterAlignBox } from 'components/common/BoxContainer';
+import { SelectColumnWrapper, SelectColumnInnerWrapper, PointerBox, FlexWrapper, CenterAlignBox, SelectColumnSearchBox } from 'components/common/BoxContainer';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
+import {SelectColumnSearchInput} from 'components/common/InputFieldComponent';
 
 export default function({
   transformationDataType,
@@ -42,7 +41,6 @@ export default function({
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
-  const classes = useStyles();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -122,13 +120,11 @@ export default function({
 
   return (
     <SelectColumnWrapper dataTestId="select-column-list-parent">
-      <SelectColumnInnerWrapper
-      >
+      <SelectColumnInnerWrapper>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
-        <div className={classes.searchFormControl}>
-          <input
+        <SelectColumnSearchBox>
+          <SelectColumnSearchInput
             data-testid="input_id"
-            className={focused ? classes.isFocused : classes.isBlurred}
             onChange={handleSearch}
             ref={ref}
             onFocus={() => setFocused(true)}
@@ -140,7 +136,7 @@ export default function({
           >
             {SearchIcon}
           </PointerBox>
-        </div>
+        </SelectColumnSearchBox>
       </SelectColumnInnerWrapper>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
         <FlexWrapper
