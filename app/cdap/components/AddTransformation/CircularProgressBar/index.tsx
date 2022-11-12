@@ -37,22 +37,25 @@ const ArcContainer = styled(Typography)`
 `;
 
 export default function({ value }: ICircularProgressBarProps) {
-
   return (
     <>
-      <BlockContainer sx={{
+      <BlockContainer
+        sx={{
+          position: 'relative',
+          margin: 4,
+          float: 'left',
+          textAlign: 'center',
+        }}
+      >
+        <BlockContainer
+          sx={{
             position: 'relative',
-            margin: 4,
-            float: 'left',
-            textAlign: 'center',
-      }}>
-        <BlockContainer sx={{
-              position: 'relative',
-              overflow: 'hidden',
-              width: 60,
-              height: 30,
-              marginBottom: '-20px !important',
-        }}>
+            overflow: 'hidden',
+            width: 60,
+            height: 30,
+            marginBottom: '-20px !important',
+          }}
+        >
           <ArcContainer value={Math.round(value)} />
         </BlockContainer>
         {Math.round(value) < 100 ? (

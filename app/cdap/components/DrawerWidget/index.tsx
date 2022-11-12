@@ -39,15 +39,17 @@ export default function({
   return (
     <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <Container className={classes.drawerContainerStyles} role="presentation">
-        <FlexBoxContainer sx={{justifyContent: 'space-between', alignItems: 'center', marginTop: 15}}>
-          <FlexBoxContainer sx={{alignItems: 'center'}}>
+        <FlexBoxContainer
+          sx={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 15 }}
+        >
+          <FlexBoxContainer sx={{ alignItems: 'center' }}>
             {showBackIcon && (
               <IconContainer
                 onClick={closeClickHandler}
                 dataTestId="box-id"
                 sx={{
                   marginRight: 10,
-                  cursor: 'pointer'
+                  cursor: 'pointer',
                 }}
               >
                 {BackIcon}
@@ -65,10 +67,10 @@ export default function({
               <BlockContainer
                 dataTestId="show-divider-box"
                 sx={{
-                  width: "1px",
-                  height: "28px",
-                  backgroundColor: "#DADCE0",
-                  margin: "0 15px"
+                  width: '1px',
+                  height: '28px',
+                  backgroundColor: '#DADCE0',
+                  margin: '0 15px',
                 }}
               />
             )}

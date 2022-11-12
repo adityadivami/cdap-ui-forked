@@ -33,10 +33,12 @@ export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProp
       )}`;
 
   return (
-    <BlockContainer sx={{
-      paddingTop: 5,
-      paddingBottom: 15,
-    }}>
+    <BlockContainer
+      sx={{
+        paddingTop: 5,
+        paddingBottom: 15,
+      }}
+    >
       <SimpleLabel
         text={text.toString()}
         component="p"

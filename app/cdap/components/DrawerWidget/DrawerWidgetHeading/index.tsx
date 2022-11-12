@@ -25,7 +25,7 @@ export default function({ headingText }: IDrawerWidgetHeadingProps) {
   const classes = useStyles();
 
   return (
-    <FlexBoxContainer sx={{flexDirection: 'column'}}>
+    <FlexBoxContainer sx={{ flexDirection: 'column' }}>
       <SimpleBoldLabel component="p" size="20px" dataTestId="drawer-heading" text={headingText} />
       {UnderLine}
     </FlexBoxContainer>

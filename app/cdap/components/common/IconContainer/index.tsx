@@ -17,7 +17,7 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
-import {SxProps} from '@material-ui/system/styleFunctionSx'
+import { SxProps } from '@material-ui/system/styleFunctionSx';
 
 interface IIconContainerProps {
   children?: JSX.Element[] | JSX.Element;
@@ -27,20 +27,11 @@ interface IIconContainerProps {
 }
 
 const IconBox = styled(Box)(({ theme }) => ({
-    backgroundColor: '#ffffff'
+  backgroundColor: '#ffffff',
 }));
 
-export const IconContainer = ({
-  children,
-  onClick,
-  dataTestId,
-  sx
-}: IIconContainerProps) => (
-  <IconBox
-    onClick={onClick}
-    data-testid={dataTestId}
-    sx={sx}
-  >
+export const IconContainer = ({ children, onClick, dataTestId, sx }: IIconContainerProps) => (
+  <IconBox onClick={onClick} data-testid={dataTestId} sx={sx}>
     {children}
   </IconBox>
 );

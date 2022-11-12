@@ -121,12 +121,14 @@ export default function({
   };
 
   return (
-    <BlockContainer dataTestId="select-column-list-parent" sx={{height: '90%'}}>
-      <FlexBoxContainer sx={{
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: 20
-      }}>
+    <BlockContainer dataTestId="select-column-list-parent" sx={{ height: '90%' }}>
+      <FlexBoxContainer
+        sx={{
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginTop: 20,
+        }}
+      >
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <div className={classes.searchFormControl}>
           <input
@@ -138,7 +140,7 @@ export default function({
             onBlur={() => setFocused(false)}
           />
           <BlockContainer
-            sx={{cursor: 'pointer'}}
+            sx={{ cursor: 'pointer' }}
             onClick={handleFocus}
             data-testid="click-handle-focus"
           >
@@ -147,10 +149,12 @@ export default function({
         </div>
       </FlexBoxContainer>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <FlexBoxContainer sx={{
-          marginTop: 30
-        }}>
-          <BlockContainer sx={{textAlign: 'center'}}>
+        <FlexBoxContainer
+          sx={{
+            marginTop: 30,
+          }}
+        >
+          <BlockContainer sx={{ textAlign: 'center' }}>
             {NoDataSVG}
             <SimpleBoldLabel
               text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
