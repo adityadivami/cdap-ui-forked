@@ -14,9 +14,12 @@
  * the License.
  */
 
+import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import { IRecords, IGridParams, IRequestBody, IApiPayload } from 'components/GridTable/types';
+import { objectQuery } from 'services/helpers';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export const getAPIRequestPayload = (
   params: IRecords,
@@ -49,4 +52,28 @@ export const getAPIRequestPayload = (
     gridParams,
   };
   return returnData;
+};
+
+export const applyDirectives = (workspaceId, directives) => {
+  return MyDataPrepApi.getWorkspace({
+    context: getCurrentNamespace(),
+    workspaceId,
+  }).mergeMap((res) => {
+    const params = {
+      workspaceId,
+      context: getCurrentNamespace(),
+    };
+    const requestBody = directiveRequestBodyCreator(directives);
+    const sampleSpec = objectQuery(res, 'sampleSpec') || {};
+    const visualization = objectQuery(res, 'insights', 'visualization') || {};
+
+    const insights = {
+      name: sampleSpec.connectionName,
+      workspaceName: res.workspaceName,
+      path: sampleSpec.path,
+      visualization,
+    };
+    requestBody.insights = insights;
+    return MyDataPrepApi.execute(params, requestBody);
+  });
 };

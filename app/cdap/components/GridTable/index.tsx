@@ -25,7 +25,7 @@ import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
 import ToolBarList from 'components/GridTable/components/TransfomationToolbar';
-import { getAPIRequestPayload } from 'components/GridTable/services';
+import { applyDirectives, getAPIRequestPayload } from 'components/GridTable/services';
 import { useStyles } from 'components/GridTable/styles';
 import {
   IApiPayload,
@@ -198,19 +198,17 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  const applyDirectives = (directive: string) => {
+  const addDirectives = (directive: string) => {
     setLoading(true);
     if (directive) {
       const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
-      executeAPICall(apiPayload);
+      addDirectiveAPICall(apiPayload);
     }
   };
 
-  const executeAPICall = (apiPayload: IApiPayload) => {
-    const payload: IRecords = apiPayload.payload;
-    const requestBody: IRequestBody = apiPayload.requestBody;
+  const addDirectiveAPICall = (apiPayload: IApiPayload) => {
     const gridParams: IGridParams = apiPayload.gridParams;
-    MyDataPrepApi.execute(payload, requestBody).subscribe(
+    applyDirectives(wid, gridParams.directives).subscribe(
       (response) => {
         DataPrepStore.dispatch({
           type: DataPrepActions.setWorkspace,
@@ -299,7 +297,7 @@ export default function GridTable() {
             <DirectivePanel
               columnNamesList={headersNamesList}
               onDirectiveInputHandler={(directive) => {
-                applyDirectives(directive);
+                addDirectives(directive);
                 setDirectivePanel(false);
               }}
               onClose={() => setDirectivePanel(false)}
