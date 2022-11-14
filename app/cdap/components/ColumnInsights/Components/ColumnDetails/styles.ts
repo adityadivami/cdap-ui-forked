@@ -25,14 +25,11 @@ export const useStyles = makeStyles(() => {
     },
     columnNameEdit: {
       display: 'flex',
-      gap: 12,
-      marginTop: 5,
+      gap: 16,
     },
     editIcon: {
       cursor: 'pointer',
-      padding: '0px 0px',
       justifyContent: 'flex-start !important',
-      width: 18,
     },
     selectFieldStyles: {
       width: 350,

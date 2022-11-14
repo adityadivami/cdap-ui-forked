@@ -26,6 +26,7 @@ const SimpleLabel = styled(Typography)`
     line-height: 150%;
     font-weight: 400;
     color: ${(props) => props.color ?? `${grey[900]}`};
+    margin: auto 0px;
   }
 `;
 

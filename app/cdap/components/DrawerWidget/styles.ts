@@ -46,7 +46,6 @@ export const useStyles = makeStyles(() => {
       cursor: 'pointer',
       display: 'flex',
       justifyContent: 'flex-end !important',
-      padding: '0px 0px',
     },
     headingTextStyles: {
       fontFamily: 'Noto Sans',

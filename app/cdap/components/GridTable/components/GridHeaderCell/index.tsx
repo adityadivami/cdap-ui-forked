@@ -19,7 +19,6 @@ import { Box, Card, styled, TableCell, Typography } from '@material-ui/core';
 import TypographyComponent from 'components/GridTable/components/Typography';
 import { useGridHeaderCellStyles } from './styles';
 import { IGridHeaderCellProps } from 'components/GridTable/components/GridHeaderCell/types';
-import { headerSelectedIcon } from 'components/GridTable/components/GridHeaderCell/iconStore';
 import T from 'i18n-react';
 
 const StringIndicatorBox = styled(Box)({
@@ -60,11 +59,6 @@ export default function GridHeaderCell({
       }}
       data-testid={`grid-header-cell-${index}`}
     >
-      <div
-        className={isColumnHighlited ? classes.headerHighlitedIcon : classes.notHeaderHighlitedIcon}
-      >
-        {headerSelectedIcon}
-      </div>
       <Card
         className={isColumnHighlited ? classes.cardHighlighted : classes.cardNotHighlighted}
         variant="outlined"

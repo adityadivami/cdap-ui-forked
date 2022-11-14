@@ -56,6 +56,7 @@ export const mockColumnData = {
       value: 1,
     },
   ],
+  columnNamesList: ['body_0,body_1,body_2,body_3,body_4'],
 };
 
 export const mockColumnDataWithEmptyDataTypeString = {
@@ -100,6 +101,7 @@ export const mockColumnDataWithEmptyDataTypeString = {
       value: 1,
     },
   ],
+  columnNamesList: ['body_0,body_1,body_2,body_3,body_4'],
 };
 
 export const mockGraphData = [
