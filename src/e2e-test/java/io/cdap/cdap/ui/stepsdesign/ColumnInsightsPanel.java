@@ -27,7 +27,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import javax.swing.*;
 
 public class ColumnInsightsPanel {
     @Given("Navigate to Home Page")
@@ -53,6 +52,7 @@ public class ColumnInsightsPanel {
         try {
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("grid-header-cell-1"));
+            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("column-insights-panel")));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -62,10 +62,14 @@ public class ColumnInsightsPanel {
     public void verifyIfUserChangesTheColumnName(String inputValue) {
         try {
             WaitHelper.waitForPageToLoad();
-           WebElement edit = Helper.locateElementByXPath("//svg[@data-testid=edit-icon']");
+           WebElement edit = Helper.locateElementByTestId("edit-icon");
             Actions action = new Actions(SeleniumDriver.getDriver());
-            action.moveToElement(edit).click(edit);
-            action.perform();
+            action.moveToElement(edit).perform();
+            boolean flag = edit.isEnabled();
+            System.out.println(flag);
+            boolean test = edit.isSelected();
+            System.out.println(test);
+            edit.click();
            boolean check1= edit.isSelected();
             System.out.println(check1);
             Helper.locateElementByXPath("//input[@data-testid='column-name-edit-input']").click();
@@ -91,9 +95,9 @@ public class ColumnInsightsPanel {
     public void verifyIfUserChangesTheDataType() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("datatype-input-select"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("input-select-column-insights"));
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByXPath("//ul/li[@data-testid='input-select-1']" ));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("select-1"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -102,8 +106,9 @@ public class ColumnInsightsPanel {
     @Then("verify if selected datatype is displayed for column as per \\\"(.*)\\\"")
     public void datatypeDisplayed(int id) {
         try {
-            String text = Helper.locateElementByTestId("datatype-input-select").getText();
-            String edited = Helper.locateElementByTestId("input-select-" + id).getText();
+            String text = Helper.locateElementByTestId("input-select-column-insights").getText();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("input-select-column-insights"));
+            String edited = Helper.locateElementByTestId("select-" + id ).getText();
             if (edited.equals(text)) {
                 ElementHelper.clickOnElement(Helper.locateElementByTestId("drawer-widget-close-round-icon"));
                 String columnType = Helper.locateElementByTestId("typography-component-" + edited).getText();
