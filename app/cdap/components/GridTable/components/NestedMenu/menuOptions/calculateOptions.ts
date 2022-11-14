@@ -15,7 +15,7 @@
  */
 
 import { NATIVE_NUMBER_TYPES } from 'services/global-constants';
-import Calculate from 'components/GridTable/components/TransformationComponents/Calculate';
+import Calculate from 'components/TransformationComponents/Calculate';
 
 export const CALCULATE_OPTIONS = [
   {

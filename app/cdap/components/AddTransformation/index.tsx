@@ -14,12 +14,10 @@
  * the License.
  */
 
-import { Container, Divider } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
-import { useStyles } from 'components/AddTransformation/styles';
 import {
   IAddTransformationProps,
   IHeaderNamesList,
@@ -32,12 +30,17 @@ import {
   multipleColumnSelected,
   ADD_TRANSFORMATION_PREFIX,
 } from 'components/AddTransformation/constants';
+import {
+  AddTransformationBodyWrapper,
+  AddTransformationWrapper,
+} from 'components/common/BoxContainer';
+import { AddTransformationButton } from 'components/common/ButtonWidget';
 import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
 import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
-import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { getDirective } from 'components/AddTransformation/utils';
-import TransformationContent from 'components/GridTable/components/TransformationComponents';
+import { Divider } from '@material-ui/core';
+import TransformationContent from 'components/TransformationComponents';
 import { transformationComponentDefaultValues } from 'components/AddTransformation/constants';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 
@@ -57,7 +60,6 @@ export default function({
     ITransformationComponentValues
   >(transformationComponentDefaultValues);
 
-  const classes = useStyles();
   const closeClickHandler = () => {
     onCancel();
     setDrawerStatus(false);
@@ -131,8 +133,8 @@ export default function({
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
       >
-        <Container className={classes.addTransformationBodyStyles}>
-          <div className={classes.addTransformationBodyWrapperStyles}>
+        <AddTransformationWrapper>
+          <AddTransformationBodyWrapper>
             <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
             <Divider />
             <FunctionNameWidget transformationName={transformationName} />
@@ -154,16 +156,15 @@ export default function({
                 applyTransformation={applyTransformation}
               />
             )}
-          </div>
-          <ButtonWidget
-            buttonText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.applyStep`).toString()}
-            className={classes.applyStepButtonStyles}
-            onClick={handleApply}
-            variant="contained"
+          </AddTransformationBodyWrapper>
+          <AddTransformationButton
             disabled={selectedColumns?.length ? false : true}
-            buttonId="apply-step-button"
-          />
-        </Container>
+            data-testid="apply-step-button"
+            onClick={handleApply}
+          >
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.applyStep`)}
+          </AddTransformationButton>
+        </AddTransformationWrapper>
       </DrawerWidget>
       <DrawerWidget
         headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
@@ -171,8 +172,8 @@ export default function({
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
       >
-        <Container className={classes.addTransformationBodyStyles}>
-          <div className={classes.addTransformationBodyWrapperStyles}>
+        <AddTransformationWrapper>
+          <AddTransformationBodyWrapper>
             <SelectColumnsList
               columnsList={columnsList}
               selectedColumnsCount={selectedColumns.length}
@@ -182,16 +183,17 @@ export default function({
               transformationName={transformationName}
               selectedColumns={selectedColumns}
             />
-          </div>
-          <ButtonWidget
-            buttonText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`).toString()}
-            className={classes.applyStepButtonStyles}
-            onClick={closeSelectColumnsPopup}
-            disabled={enableDoneButton()}
+          </AddTransformationBodyWrapper>
+          <AddTransformationButton
             variant="contained"
-            buttonId="done-button"
-          />
-        </Container>
+            disabled={enableDoneButton()}
+            color="primary"
+            data-testid="button_apply"
+            onClick={closeSelectColumnsPopup}
+          >
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}
+          </AddTransformationButton>
+        </AddTransformationWrapper>
       </DrawerWidget>
     </Fragment>
   );

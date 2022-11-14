@@ -14,14 +14,22 @@
  * the License.
  */
 
-import { Container, Drawer } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
-import { BlockContainer, FlexBoxContainer, IconContainer } from 'components/common/BoxContainer';
+import {
+  BackIconBox,
+  DrawerContainerInnerFlex,
+  FlexWrapper,
+  FlexAlignCenter,
+  PointerBox,
+  DrawerContainerBox,
+} from 'components/common/BoxContainer';
+import { VerticalDividerBox } from 'components/common/Divider';
+import { DrawerWidgetComponent } from 'components/common/Drawer';
 
 export default function({
   headingText,
@@ -33,53 +41,35 @@ export default function({
   showBackIcon,
   anchor,
 }: IDrawerWidgetProps) {
-  const classes = useStyles();
-
   return (
-    <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
-      <Container className={classes.drawerContainerStyles} role="presentation">
-        <FlexBoxContainer justifyContent="space-between" alignItems="center" height="60px">
-          <FlexBoxContainer alignItems="center">
+    <DrawerWidgetComponent anchor={anchor ? anchor : 'right'} open={openDrawer}>
+      <DrawerContainerBox role="presentation">
+        <DrawerContainerInnerFlex>
+          <FlexAlignCenter>
             {showBackIcon && (
-              <IconContainer
-                onClick={closeClickHandler}
-                dataTestId="box-id"
-                margin="0 10px 0 0 "
-                width="10px"
-                height="20px"
-              >
+              <BackIconBox onClick={closeClickHandler} data-testid="box-id">
                 {BackIcon}
-              </IconContainer>
+              </BackIconBox>
             )}
             <DrawerWidgetHeading headingText={headingText.toString()} />
-          </FlexBoxContainer>
-          <FlexBoxContainer alignItems="center">
+          </FlexAlignCenter>
+          <FlexWrapper>
             {headerActionTemplate && (
-              <BlockContainer dataTestId="header-action-template">
-                {headerActionTemplate}
-              </BlockContainer>
+              <Box data-testid="header-action-template">{headerActionTemplate}</Box>
             )}
-            {showDivider && (
-              <BlockContainer
-                alignItems="center"
-                dataTestId="show-divider-box"
-                width="1px"
-                height="28px"
-                backgroundColor="#DADCE0"
-                margin="0 15px"
+            {showDivider && <VerticalDividerBox data-testid="show-divider-box" />}
+            <PointerBox>
+              <CloseRoundedIcon
+                color="action"
+                fontSize="large"
+                onClick={closeClickHandler}
+                data-testid="drawer-widget-close-round-icon"
               />
-            )}
-            <CloseRoundedIcon
-              className={classes.pointerStyles}
-              color="action"
-              fontSize="large"
-              onClick={closeClickHandler}
-              data-testid="drawer-widget-close-round-icon"
-            />
-          </FlexBoxContainer>
-        </FlexBoxContainer>
-        <>{children}</>
-      </Container>
-    </Drawer>
+            </PointerBox>
+          </FlexWrapper>
+        </DrawerContainerInnerFlex>
+        {children}
+      </DrawerContainerBox>
+    </DrawerWidgetComponent>
   );
 }

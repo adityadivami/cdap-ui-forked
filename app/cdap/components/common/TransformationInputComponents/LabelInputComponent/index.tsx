@@ -15,18 +15,13 @@
  */
 
 import React from 'react';
-import { UnderLine } from 'components/DrawerWidget/iconStore';
-import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
-import { DrawerHeadWrapper } from 'components/common/BoxContainer';
-import { HeadFont } from 'components/common/TypographyText';
+import { NormalFont } from 'components/common/TypographyText';
+import { LabelWrapper } from 'components/common/BoxContainer';
 
-export default function({ headingText }: IDrawerWidgetHeadingProps) {
+export default function({ labelText }: { labelText: string }) {
   return (
-    <DrawerHeadWrapper>
-      <HeadFont component="p" data-testid="drawer-heading">
-        {headingText}
-      </HeadFont>
-      {UnderLine}
-    </DrawerHeadWrapper>
+    <LabelWrapper>
+      <NormalFont>{labelText}</NormalFont>
+    </LabelWrapper>
   );
 }

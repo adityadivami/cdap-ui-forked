@@ -14,172 +14,160 @@
  * the License.
  */
 
-import React from 'react';
-import { Box } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import styled from 'styled-components';
-import { IBoxContainerProps } from 'components/common/BoxContainer/types';
 
-const SimpleBox = styled(Box)`
-  display: block;
-  position: relative;
-  width: ${({ width }) => (width ? width : 'auto')};
-  height: ${({ height }) => (height ? height : 'auto')};
-  box-sizing: border-box;
-  background-color: ${({ backgroundColor }) => (backgroundColor ? backgroundColor : 'transparent')};
-  padding: ${({ padding }) => (padding ? padding : 0)};
-  margin: ${({ margin }) => (margin ? margin : 0)};
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 0)};
-  border: ${({ border }) => (border ? border : 0)};
-  text-align: ${({ textAlign }) => (textAlign ? textAlign : 'left')};
-`;
-
-export const BlockContainer = ({
-  children,
-  padding,
-  margin,
-  backgroundColor,
-  borderRadius,
-  border,
-  width,
-  height,
-  onClick,
-  dataTestId,
-  textAlign,
-}: IBoxContainerProps) => (
-  <SimpleBox
-    padding={padding}
-    margin={margin}
-    backgroundColor={backgroundColor}
-    borderRadius={borderRadius}
-    border={border}
-    width={width}
-    height={height}
-    onClick={onClick}
-    dataTestId={dataTestId}
-    textAlign={textAlign}
-  >
-    {children}
-  </SimpleBox>
-);
-
-const AbsoluteDiv = styled(SimpleBox)`
-  position: absolute;
-  top: ${({ top }) => (top ? top : 0)};
-  left: ${({ left }) => (left ? left : 0)};
-  right: ${({ right }) => (right ? right : 0)};
-  bottom: ${({ bottom }) => (bottom ? bottom : 0)};
-`;
-
-export const AbsoluteContainer = ({
-  children,
-  padding,
-  margin,
-  backgroundColor,
-  right,
-  left,
-  top,
-  bottom,
-  borderRadius,
-  border,
-  width,
-  height,
-  onClick,
-  dataTestId,
-  textAlign,
-}: IBoxContainerProps) => (
-  <AbsoluteDiv
-    padding={padding}
-    margin={margin}
-    backgroundColor={backgroundColor}
-    right={right}
-    left={left}
-    top={top}
-    bottom={bottom}
-    borderRadius={borderRadius}
-    border={border}
-    width={width}
-    height={height}
-    onClick={onClick}
-    dataTestId={dataTestId}
-    textAlign={textAlign}
-  >
-    {children}
-  </AbsoluteDiv>
-);
-
-const SimpleFlexBox = styled(SimpleBox)`
+export const FlexJustifyAlignCenter = styled(Box)`
   display: flex;
-  justify-content: ${({ justifyContent }) => (justifyContent ? justifyContent : 'flex-start')};
-  align-items: ${({ alignItem }) => (alignItem ? alignItem : 'flex-start')};
-  flex-direction: ${({ flexDirection }) => (flexDirection ? flexDirection : 'row')};
+  justify-content: center;
+  align-items: center;
 `;
 
-export const FlexBoxContainer = ({
-  children,
-  padding,
-  margin,
-  backgroundColor,
-  justifyContent,
-  alignItems,
-  borderRadius,
-  border,
-  width,
-  height,
-  flexDirection,
-  onClick,
-  dataTestId,
-  textAlign,
-}: IBoxContainerProps) => (
-  <SimpleFlexBox
-    padding={padding}
-    margin={margin}
-    backgroundColor={backgroundColor}
-    justifyContent={justifyContent}
-    alignItem={alignItems}
-    borderRadius={borderRadius}
-    border={border}
-    width={width}
-    height={height}
-    flexDirection={flexDirection}
-    onClick={onClick}
-    dataTestId={dataTestId}
-    textAlign={textAlign}
-  >
-    {children}
-  </SimpleFlexBox>
-);
+export const LastDividerBox = styled(Box)`
+  margin: 0px 0px 0px 4px;
+`;
 
-const IconBox = styled(SimpleBox)`
+export const DividerBox = styled(Box)`
+  margin: 0px 4px;
+`;
+
+export const FunctionBoxWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: -webkit-fill-available;
+  & .MuiIconButton-root {
+    padding-bottom: 8px;
+  }
+`;
+
+export const SearchBoxWrapper = styled(Box)`
+  min-width: 490px;
+`;
+
+export const ProgressBoxWrapper = styled(Box)`
+  position: relative;
+  margin: 4px;
+  float: left;
+  text-align: center;
+`;
+
+export const ProgressBoxInnerWrapper = styled(Box)`
+  position: relative;
+  overflow: hidden;
+  width: 60px;
+  height: 30px;
+  margin-bottom: -20px !important;
+`;
+
+export const SelectColumnWrapper = styled(Box)`
+  height: 90%;
+`;
+
+export const SelectColumnInnerWrapper = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+export const PointerBox = styled(Box)`
   cursor: pointer;
 `;
 
-export const IconContainer = ({
-  children,
-  padding,
-  margin,
-  backgroundColor,
-  bottom,
-  borderRadius,
-  border,
-  width,
-  height,
-  onClick,
-  dataTestId,
-  textAlign,
-}: IBoxContainerProps) => (
-  <IconBox
-    padding={padding}
-    margin={margin}
-    backgroundColor={backgroundColor}
-    bottom={bottom}
-    borderRadius={borderRadius}
-    border={border}
-    width={width}
-    height={height}
-    onClick={onClick}
-    dataTestId={dataTestId}
-    textAlign={textAlign}
-  >
-    {children}
-  </IconBox>
-);
+export const FlexWrapper = styled(Box)`
+  display: flex;
+`;
+
+export const CenterAlignBox = styled(Box)`
+  text-align: center;
+`;
+
+export const SelectColumnWidgetBox = styled(Box)`
+  padding-top: 15px;
+  padding-bottom: 15px;
+`;
+
+export const FlexAlignCenter = styled(Box)`
+  display: flex;
+  align-items: center;
+`;
+
+export const DrawerContainerInnerFlex = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+`;
+
+export const BackIconBox = styled(Box)`
+  cursor: pointer;
+  margin-right: 10px;
+`;
+
+export const DrawerHeadWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SelectColumnSearchBox = styled(Box)`
+  position: relative;
+  display: flex;
+  margin-right: 10px;
+`;
+
+export const AddTransformationWrapper = styled(Container)`
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+`;
+
+export const AddTransformationBodyWrapper = styled(Box)`
+  height: calc(100% - 40px);
+  overflow-y: auto;
+`;
+
+export const DrawerContainerBox = styled(Container)`
+  width: 460px;
+  height: 100%;
+  padding-left: 30px;
+`;
+
+export const TransformationNameBox = styled.section`
+  padding: 15px 0;
+  border-bottom: 1px solid #DADCE0;
+`;
+
+export const TransformationNameHeadWrapper = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const TransformationNameTextInfoWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  padding: 10px 0 0;
+  ${PointerBox}{
+    margin-left: 8px;
+  }
+`;
+
+export const LabelWrapper = styled(Box)`
+  margin: 10px 0;
+`;
+
+export const NewColumnWrapper = styled(Box)`
+  width: 100%;
+  display: flex;
+`;
+
+export const CalculateWrapper = styled(Box)`
+  margin: 10px 0 0;
+`;
+
+export const CalculateSignWrapper = styled(Box)`
+  margin-right: 5px;
+`;

@@ -14,9 +14,7 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { useStyles } from 'components/AddTransformation/SelectColumnsList/styles';
 import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
@@ -27,8 +25,16 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import { BlockContainer, FlexBoxContainer } from 'components/common/BoxContainer';
-import { SimpleBoldLabel } from 'components/common/TypographyText';
+import {
+  SelectColumnWrapper,
+  SelectColumnInnerWrapper,
+  PointerBox,
+  FlexWrapper,
+  CenterAlignBox,
+  SelectColumnSearchBox,
+} from 'components/common/BoxContainer';
+import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
+import { SelectColumnSearchInput } from 'components/common/InputFieldComponent';
 
 export default function({
   transformationDataType,
@@ -42,7 +48,6 @@ export default function({
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
-  const classes = useStyles();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -121,47 +126,34 @@ export default function({
   };
 
   return (
-    <BlockContainer dataTestId="select-column-list-parent" height="90%">
-      <FlexBoxContainer justifyContent="space-between">
+    <SelectColumnWrapper dataTestId="select-column-list-parent">
+      <SelectColumnInnerWrapper>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
-        <div className={classes.searchFormControl}>
-          <input
+        <SelectColumnSearchBox>
+          <SelectColumnSearchInput
             data-testid="input_id"
-            className={focused ? classes.isFocused : classes.isBlurred}
             onChange={handleSearch}
             ref={ref}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
           />
-          <Box
-            className={classes.searchInputAdornment}
-            onClick={handleFocus}
-            data-testid="click-handle-focus"
-          >
+          <PointerBox onClick={handleFocus} data-testid="click-handle-focus">
             {SearchIcon}
-          </Box>
-        </div>
-      </FlexBoxContainer>
+          </PointerBox>
+        </SelectColumnSearchBox>
+      </SelectColumnInnerWrapper>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <FlexBoxContainer height="100%" margin="30px 0 0 0">
-          <BlockContainer textAlign="center">
+        <FlexWrapper>
+          <CenterAlignBox>
             {NoDataSVG}
-            <SimpleBoldLabel
-              text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
-              component="p"
-              size="16px"
-              weight={600}
-              dataTestId="no-column-title"
-            />
-            <SimpleBoldLabel
-              text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`).toString()}
-              component="p"
-              size="14px"
-              weight={400}
-              dataTestId="no-column-subTitle"
-            />
-          </BlockContainer>
-        </FlexBoxContainer>
+            <SubHeadBoldFont component="p" dataTestId="no-column-title">
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
+            </SubHeadBoldFont>
+            <NormalFont component="p" dataTestId="no-column-subTitle">
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
+            </NormalFont>
+          </CenterAlignBox>
+        </FlexWrapper>
       ) : (
         <ColumnTable
           dataQualityValue={dataQuality}
@@ -177,6 +169,6 @@ export default function({
           transformationName={transformationName}
         />
       )}
-    </BlockContainer>
+    </SelectColumnWrapper>
   );
 }

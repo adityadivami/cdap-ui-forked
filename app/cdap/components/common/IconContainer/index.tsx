@@ -14,19 +14,25 @@
  * the License.
  */
 
-import React from 'react';
-import { UnderLine } from 'components/DrawerWidget/iconStore';
-import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
-import { DrawerHeadWrapper } from 'components/common/BoxContainer';
-import { HeadFont } from 'components/common/TypographyText';
+import { Box } from '@material-ui/core';
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 
-export default function({ headingText }: IDrawerWidgetHeadingProps) {
-  return (
-    <DrawerHeadWrapper>
-      <HeadFont component="p" data-testid="drawer-heading">
-        {headingText}
-      </HeadFont>
-      {UnderLine}
-    </DrawerHeadWrapper>
-  );
-}
+export const ToolBarIconWrapper = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid ${grey[300]};
+  margin-top: 0;
+  padding-left: 18px;
+  padding-right: 15px;
+`;
+
+export const ToolBarInnerWrapper = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 0;
+  margin-right: 0;
+  width: 80%;
+`;

@@ -15,18 +15,24 @@
  */
 
 import React from 'react';
-import { UnderLine } from 'components/DrawerWidget/iconStore';
-import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
-import { DrawerHeadWrapper } from 'components/common/BoxContainer';
-import { HeadFont } from 'components/common/TypographyText';
+import { IconButton } from '@material-ui/core';
+import styled from 'styled-components';
+import { Expand } from 'components/GridTable/components/TransformationToolbar/iconStore';
 
-export default function({ headingText }: IDrawerWidgetHeadingProps) {
+interface IExpandButtonProps {
+  open: boolean;
+  onClick: (event: React.MouseEvent) => void;
+  dataTestId: string;
+}
+
+const ExpandButton = styled(IconButton)`
+  transform: ${({ open }) => (!open ? 'rotate(180deg)' : 'rotate(0deg)')};
+  cursor: pointer;
+`;
+export default function({ open, onClick, dataTestId }: IExpandButtonProps) {
   return (
-    <DrawerHeadWrapper>
-      <HeadFont component="p" data-testid="drawer-heading">
-        {headingText}
-      </HeadFont>
-      {UnderLine}
-    </DrawerHeadWrapper>
+    <ExpandButton open={open} onClick={onClick} data-testid={dataTestId}>
+      {Expand}
+    </ExpandButton>
   );
 }

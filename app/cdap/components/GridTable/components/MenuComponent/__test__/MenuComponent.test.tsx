@@ -18,7 +18,9 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import T from 'i18n-react';
 import MenuComponent from 'components/GridTable/components/MenuComponent/index';
-import { dummyData } from 'components/GridTable/components/MenuComponent/mock/mock';
+
+const dummyData = [{ label: 'test', supportedDataType: ['test'], value: 'test', options: [] }];
+
 describe('Testing render FunctionNameToggle component', () => {
   const PREFIX = 'features.WranglerNewUI.GridPage';
 
