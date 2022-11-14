@@ -32,6 +32,7 @@ export const useStyles = makeStyles(() => {
       cursor: 'pointer',
       padding: '0px 0px',
       justifyContent: 'flex-start !important',
+      width: 18,
     },
     selectFieldStyles: {
       width: 350,
