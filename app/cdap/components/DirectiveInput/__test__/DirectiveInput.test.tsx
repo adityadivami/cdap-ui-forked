@@ -17,14 +17,13 @@
 import React from 'react';
 import DirectiveInput from 'components/DirectiveInput/index';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Route, Router, Switch } from 'react-router';
-import history from 'services/history';
+import T from 'i18n-react';
 
 describe('Testing Directive Input Component', () => {
   beforeEach(() => {
     render(
       <DirectiveInput
-        columnNamesList={[{ name: 'abhilash', label: 'Batman' }]}
+        columnNamesList={[{ name: 'Abhilash', label: 'Batman' }]}
         onDirectiveInputHandler={() => jest.fn()}
         onClose={() => jest.fn()}
         openDirectivePanel={true}
@@ -37,17 +36,33 @@ describe('Testing Directive Input Component', () => {
     expect(parentElement).toBeInTheDocument();
   });
 
-  it('Should check if the input element is working as expected with test as input', () => {
+  it('Should check if the input element is working as expected with test as input on pressing Enter', () => {
     const inputElement = screen.getByTestId(/select-directive-input-search/i);
     expect(inputElement).toBeInTheDocument();
-    fireEvent.change(inputElement, { target: { value: undefined } });
+    fireEvent.change(inputElement, { target: { value: 'test' } });
     fireEvent.keyDown(inputElement, { key: 'Enter', code: 'Enter', charCode: 13 });
-    expect(inputElement).toHaveAttribute('value', undefined);
+    expect(inputElement).toHaveAttribute('value', 'test');
+  });
+
+  it('Should check if the input element is working as expected with test as input on pressing tab ', () => {
+    const inputElement = screen.getByTestId(/select-directive-input-search/i);
+    expect(inputElement).toBeInTheDocument();
+    fireEvent.change(inputElement, { target: { value: 'test' } });
+    fireEvent.keyDown(inputElement, { key: 'Tab', code: 'Tab', charCode: 9 });
+    expect(inputElement).toHaveAttribute('value', 'test');
   });
 
   it('Should check cross icon is functioning as expected ', () => {
     const closeIconElement = screen.getByTestId(/close-directive-panel/i);
     fireEvent.click(closeIconElement);
     expect(closeIconElement).toBeInTheDocument();
+  });
+
+  it('Should check if label is rendered as expected', () => {
+    const labelElement = screen.getByTestId(/select-directive-input-label/i);
+    expect(labelElement).toBeInTheDocument();
+    expect(labelElement).toHaveTextContent(
+      `${T.translate('features.WranglerNewUI.GridPage.directivePanel.dollar')}`
+    );
   });
 });

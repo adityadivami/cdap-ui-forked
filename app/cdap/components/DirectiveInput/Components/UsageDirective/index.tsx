@@ -46,7 +46,7 @@ export default function({ row }: IUsageDirectiveProps) {
   const classes = useStyles();
 
   return (
-    <UsageDirectiveWrapper>
+    <UsageDirectiveWrapper data-testid="usage-directive-parent-wrapper">
       <UsageText variant="body1" data-testid="directive-usage-text">
         {T.translate('features.WranglerNewUI.GridPage.directivePanel.usage')}:&nbsp;
         {row?.item?.usage || row?.usage} &nbsp; &nbsp;

@@ -206,7 +206,7 @@ export default function({
   };
 
   return (
-    <Box>
+    <Box data-testid="auto-complete-parent-container">
       {Array.isArray(activeResults) &&
         activeResults.length > 0 &&
         activeResults.map((row, index) => {
