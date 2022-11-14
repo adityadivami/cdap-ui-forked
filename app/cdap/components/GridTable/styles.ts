@@ -31,18 +31,15 @@ export const useStyles = makeStyles({
   },
   gridTableWrapper: {
     position: 'relative',
-    height: 'calc(100vh - 284px)',
+    height: 'calc(100vh - 196px)',
+    display: 'flex',
+    flexDirection: 'column',
   },
   gridTableBody: {
-    height: 'calc(100vh - 225px)',
+    height: '100%',
     overflowY: 'auto',
   },
   directivePanelDiv: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: -62,
     backgroundColor: '#ffffff',
-    zIndex: 10,
   },
 });

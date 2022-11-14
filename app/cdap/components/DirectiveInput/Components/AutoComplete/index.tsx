@@ -14,21 +14,42 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
-import MyDataPrepApi from 'api/dataprep';
-import Fuse from 'fuse.js';
-import uuidV4 from 'uuid/v4';
-import reverse from 'lodash/reverse';
-import Mousetrap from 'mousetrap';
-import NamespaceStore from 'services/NamespaceStore';
-import ee from 'event-emitter';
-import globalEvents from 'services/global-events';
-import { useStyles } from 'components/DirectiveInput/Components/AutoComplete/styles';
 import { Box, Typography } from '@material-ui/core';
+import MyDataPrepApi from 'api/dataprep';
 import {
   IAutoCompleteProps,
   IOnRowClickValue,
 } from 'components/DirectiveInput/Components/AutoComplete/types';
+import { defaultFuseOptions } from 'components/DirectiveInput/constants';
+import { IUsageDirectives } from 'components/DirectiveInput/types';
+import { eventPreventDefault } from 'components/DirectiveInput/utils';
+import ee from 'event-emitter';
+import Fuse from 'fuse.js';
+import reverse from 'lodash/reverse';
+import Mousetrap from 'mousetrap';
+import React, { useEffect, useState } from 'react';
+import globalEvents from 'services/global-events';
+import NamespaceStore from 'services/NamespaceStore';
+import styled from 'styled-components';
+import uuidV4 from 'uuid/v4';
+
+const DirectiveLabel = styled(Typography)`
+  font-style: normal;
+  font-weight: 600;
+  font-size: ${(props) => (props.isDescription ? '14px' : '16px')};
+  letter-spacing: 0.15;
+  color: #616161;
+`;
+
+const DirectiveResultRow = styled(Box)`
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: ${(props) => (props.isActive ? '#EFF0F2' : '#FFFFFF')};
+  &:hover {
+    background: #eff0f2;
+    cursor: pointer;
+  }
+`;
 
 export default function({
   setDirectivesList,
@@ -39,45 +60,22 @@ export default function({
   onColumnSelected,
   directiveInput,
 }: IAutoCompleteProps) {
-  const [activeResults, setActiveResults] = useState([]);
+  const [activeResults, setActiveResults] = useState<IUsageDirectives[]>([]);
   const [input, setInput] = useState<string>('');
   const [activeSelectionIndex, setActiveSelectionIndex] = useState<number | null>(null);
   const eventEmitter = ee(ee);
   const [fuse, setFuse] = useState(null);
-  const classes = useStyles();
+
   const getUsage = () => {
-    if (isDirectiveSelected === false) {
-      const namespace = NamespaceStore.getState().selectedNamespace;
-      MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
-        const fuseOptions = {
-          includeScore: true,
-          includeMatches: true,
-          caseSensitive: false,
-          threshold: 0,
-          location: 0,
-          shouldSort: true,
-          distance: 100,
-          minMatchCharLength: 1,
-          maxPatternLength: 32,
-          keys: ['directive'],
-        };
-        setDirectivesList(res.values);
-        setFuse(new Fuse(res.values, fuseOptions));
-      });
+    if (!isDirectiveSelected) {
+      MyDataPrepApi.getUsage({ context: NamespaceStore.getState().selectedNamespace }).subscribe(
+        (res) => {
+          setDirectivesList(res.values);
+          setFuse(new Fuse(res.values, { ...defaultFuseOptions }));
+        }
+      );
     } else {
-      const fuseOptions = {
-        includeScore: true,
-        includeMatches: true,
-        caseSensitive: false,
-        threshold: 0,
-        shouldSort: true,
-        location: 0,
-        distance: 100,
-        minMatchCharLength: 1,
-        maxPatternLength: 32,
-        keys: ['label'],
-      };
-      setFuse(new Fuse(columnNamesList, fuseOptions));
+      setFuse(new Fuse(columnNamesList, { ...defaultFuseOptions, keys: ['label'] }));
     }
   };
 
@@ -104,38 +102,28 @@ export default function({
     };
   });
   const handleUpArrow = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.preventDefault) {
-      event.preventDefault();
+    eventPreventDefault(event);
+    if (activeSelectionIndex !== 0) {
+      setActiveSelectionIndex(activeSelectionIndex - 1);
     }
-    if (activeSelectionIndex === 0) {
-      return;
-    }
-    setActiveSelectionIndex(activeSelectionIndex - 1);
   };
 
   const handleDownArrow = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.preventDefault) {
-      event.preventDefault();
+    eventPreventDefault(event);
+    if (activeSelectionIndex !== activeResults.length - 1) {
+      setActiveSelectionIndex(activeSelectionIndex + 1);
     }
-    if (activeSelectionIndex === activeResults.length - 1) {
-      return;
-    }
-    setActiveSelectionIndex(activeSelectionIndex + 1);
   };
 
   const handleEnterKey = () => {
-    if (input.length === 0) {
-      return;
-    }
-    const selectedDirective = activeResults[activeSelectionIndex];
-
-    if (selectedDirective) {
-      handleRowClick(activeResults[activeSelectionIndex]);
-    } else {
-      const eventObject = {
-        target: { value: `${input}` },
-      };
-      onRowClick(eventObject);
+    if (input.length > 0) {
+      if (activeResults[activeSelectionIndex]) {
+        handleRowClick(activeResults[activeSelectionIndex]);
+      } else {
+        onRowClick({
+          target: { value: `${input}` },
+        });
+      }
     }
   };
 
@@ -143,30 +131,13 @@ export default function({
     if (input.length === 0 || input.split(' ').length !== 1) {
       return;
     }
-    if (event.preventDefault) {
-      event.preventDefault();
-    }
+    eventPreventDefault(event);
     handleEnterKey();
   };
 
   useEffect(() => {
-    if (
-      (isDirectiveSelected === true || isDirectiveSelected == undefined) &&
-      isDirectiveSelected !== false
-    ) {
-      const fuseOptions = {
-        includeScore: true,
-        includeMatches: true,
-        caseSensitive: false,
-        threshold: 0,
-        shouldSort: true,
-        location: 0,
-        distance: 100,
-        minMatchCharLength: 1,
-        maxPatternLength: 32,
-        keys: ['label'],
-      };
-      setFuse(new Fuse(columnNamesList, fuseOptions));
+    if (isDirectiveSelected) {
+      setFuse(new Fuse(columnNamesList, { ...defaultFuseOptions, keys: ['label'] }));
     }
     searchMatch(directiveInput);
     setInput(directiveInput);
@@ -175,9 +146,9 @@ export default function({
   const searchMatch = (query: string) => {
     let results = [];
     const input: string = query;
-    const spaceIndex = input.indexOf(' ');
+    const spaceIndex: number = input.indexOf(' ');
     if (fuse && input.length > 0) {
-      if (isDirectiveSelected === false) {
+      if (!isDirectiveSelected) {
         results = fuse
           .search(input)
           .slice(0, 3)
@@ -203,7 +174,7 @@ export default function({
     setActiveResults(results);
     setInput(query);
     setActiveSelectionIndex(results.length - 1);
-    if (isDirectiveSelected === false) {
+    if (!isDirectiveSelected) {
       if ((spaceIndex !== -1) === true) {
         getDirectiveUsage(results, true);
       } else {
@@ -217,7 +188,7 @@ export default function({
       return;
     }
     let eventObject = {} as IOnRowClickValue;
-    if (isDirectiveSelected === false) {
+    if (!isDirectiveSelected) {
       eventObject = {
         target: { value: `${row.item.directive}` },
       };
@@ -235,38 +206,30 @@ export default function({
   };
 
   return (
-    <Box className={classes.listWrapper} >
+    <Box>
       {Array.isArray(activeResults) &&
         activeResults.length > 0 &&
         activeResults.map((row, index) => {
           return (
-            <Box
-              className={
-                index === activeSelectionIndex
-                  ? `${classes.resultRow} ${classes.activeRow}`
-                  : `${classes.resultRow}`
-              }
+            <DirectiveResultRow
+              isActive={index === activeSelectionIndex}
               key={row.uniqueId}
               onClick={() => handleRowClick(row)}
               data-testid="select-directive-list-option"
             >
               <Box>
-                <Typography
-                  data-testid="select-directive-list-label"
-                  className={classes.directiveTitle}
-                  variant="body1"
-                >
+                <DirectiveLabel data-testid="select-directive-list-label" variant="body1">
                   {row?.item?.directive || row?.item?.label}
-                </Typography>
-                <Typography
+                </DirectiveLabel>
+                <DirectiveLabel
+                  isDescription={true}
                   data-testid="select-directive-list-description"
-                  className={classes.directiveDescription}
                   variant="body1"
                 >
                   {row?.item?.description}
-                </Typography>
+                </DirectiveLabel>
               </Box>
-            </Box>
+            </DirectiveResultRow>
           );
         })}
     </Box>

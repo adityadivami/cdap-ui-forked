@@ -127,3 +127,16 @@ export const moreInfoOnDirective = {
   'diff-date': 'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/381976612/Diff+Date',
   'cut-character': 'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382074928/Cut+Character',
 };
+
+export const defaultFuseOptions = {
+  includeScore: true,
+  includeMatches: true,
+  caseSensitive: false,
+  threshold: 0,
+  location: 0,
+  shouldSort: true,
+  distance: 100,
+  minMatchCharLength: 1,
+  maxPatternLength: 32,
+  keys: ['directive'],
+};
