@@ -29,7 +29,7 @@ describe('It Should test ColumnDetails Component', () => {
         renameColumnNameHandler={jest.fn()}
         dataTypeHandler={jest.fn()}
         columnType={'String'}
-        columnHeader={['body_0,body_1,body_2,body_3,body_4']}
+        columnHeaderList={['body_0,body_1,body_2,body_3,body_4']}
       />
     );
     const columnDetailParent = screen.getByTestId(/column-details-parent/i);
@@ -48,7 +48,7 @@ describe('It Should test ColumnDetails Component', () => {
         renameColumnNameHandler={jest.fn()}
         dataTypeHandler={jest.fn()}
         columnType={'String'}
-        columnHeader={['body_0,body_1,body_2,body_3,body_4']}
+        columnHeaderList={['body_0,body_1,body_2,body_3,body_4']}
       />
     );
     const editIcon = screen.getByTestId(/edit-icon/i);
@@ -66,7 +66,7 @@ describe('It Should test ColumnDetails Component', () => {
         renameColumnNameHandler={jest.fn()}
         dataTypeHandler={jest.fn()}
         columnType={'String'}
-        columnHeader={['body_0,body_1,body_2,body_3,body_4']}
+        columnHeaderList={['body_0,body_1,body_2,body_3,body_4']}
       />
     );
 
@@ -96,7 +96,7 @@ describe('It Should test ColumnDetails Component', () => {
         renameColumnNameHandler={jest.fn()}
         dataTypeHandler={jest.fn()}
         columnType={'String'}
-        columnHeader={['body_0,body_1,body_2,body_3,body_4']}
+        columnHeaderList={['body_0,body_1,body_2,body_3,body_4']}
       />
     );
     const editIcon = screen.getByTestId(/edit-icon/i);
@@ -117,7 +117,7 @@ describe('It Should test ColumnDetails Component', () => {
         renameColumnNameHandler={jest.fn()}
         dataTypeHandler={jest.fn()}
         columnType={'String'}
-        columnHeader={['body_0,body_1,body_2,body_3,body_4']}
+        columnHeaderList={['body_0,body_1,body_2,body_3,body_4']}
       />
     );
     const editIcon = screen.getByTestId(/edit-icon/i);
@@ -138,7 +138,7 @@ describe('It Should test ColumnDetails Component', () => {
         renameColumnNameHandler={jest.fn()}
         dataTypeHandler={jest.fn()}
         columnType={'String'}
-        columnHeader={['body_0,body_1,body_2,body_3,body_4']}
+        columnHeaderList={['body_0,body_1,body_2,body_3,body_4']}
       />
     );
     const editIcon = screen.getByTestId(/edit-icon/i);

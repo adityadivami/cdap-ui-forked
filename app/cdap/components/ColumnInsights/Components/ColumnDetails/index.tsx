@@ -34,7 +34,7 @@ export default function({
   renameColumnNameHandler,
   dataTypeHandler,
   columnType,
-  columnHeader,
+  columnHeaderList,
 }: IColumnDetailsProps) {
   const defaultValueProvided =
     DATATYPE_OPTIONS &&
@@ -45,17 +45,32 @@ export default function({
   const classes = useStyles();
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>(columnName);
-  const [invalidInput, setInvalidInput] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState({
+    hasError: false,
+    message: '',
+  });
+
+  const displayMessage = {
+    invalidMessage: `${PREFIX}.error.invalidError`,
+    matchedColumnMessage: `${PREFIX}.error.matchedColumnError`,
+  };
 
   const checkForInvalidInput = (renamedString: string) => {
-    if (
-      !/^\w+$/.test(renamedString) ||
-      columnHeader.includes(renamedString) ||
-      renamedString === ''
-    ) {
-      setInvalidInput(true);
+    if (renamedString === '' || !/^\w+$/.test(renamedString)) {
+      setErrorMessage({
+        hasError: true,
+        message: displayMessage.invalidMessage,
+      });
+    } else if (columnHeaderList.includes(renamedString) && columnName !== renamedString) {
+      setErrorMessage({
+        hasError: true,
+        message: displayMessage.matchedColumnMessage,
+      });
     } else {
-      setInvalidInput(false);
+      setErrorMessage({
+        hasError: false,
+        message: '',
+      });
     }
   };
 
@@ -74,7 +89,7 @@ export default function({
   };
 
   const onBlurEvent = (e: React.FocusEvent<HTMLInputElement>) => {
-    if (invalidInput) {
+    if (errorMessage.hasError) {
       setCanEdit(true);
     } else {
       if (e.target.value !== columnName) {
@@ -87,7 +102,11 @@ export default function({
   };
 
   const onEnter = (e: React.KeyboardEvent<HTMLElement>) => {
-    if ((e.target as HTMLInputElement).value !== columnName && !invalidInput && e.keyCode === 13) {
+    if (
+      (e.target as HTMLInputElement).value !== columnName &&
+      !errorMessage.hasError &&
+      e.keyCode === 13
+    ) {
       renameColumnNameHandler(columnName, (e.target as HTMLInputElement).value);
       setCanEdit(false);
     } else {
@@ -120,10 +139,10 @@ export default function({
           <EditIcon />
         </IconButton>
       </div>
-      {invalidInput && (
+      {errorMessage.hasError && (
         <div>
           <RenderLabel fontSize={14} color={`${red[600]}`} dataTestId={'invalid-text'}>
-            <> {T.translate(`${PREFIX}.invalidInputErrorMessage`).toString()}</>
+            <> {T.translate(errorMessage.message).toString()}</>
           </RenderLabel>
         </div>
       )}
