@@ -17,7 +17,7 @@
 @Integration_Tests
 Feature: ColumnInsightsPanel
 
-  @ADMIN_TEST
+  @ColumnInsight_Test
   Scenario Outline: Go through the Column Insights Panel
     Given Navigate to Home Page
     Then Click on the Data Explorations card
