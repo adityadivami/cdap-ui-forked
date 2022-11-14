@@ -14,38 +14,50 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { IBreadcrumbProps } from 'components/GridTable/components/Breadcrumb/types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IBreadcrumbProps } from './types';
-import T from 'i18n-react';
-import { getCurrentNamespace } from 'services/NamespaceStore';
-import { useStyles } from './styles';
+import styled from 'styled-components';
+
+const PREFIX = 'features.WranglerNewUI.Breadcrumb';
+
+const CustomizedBreadcrumb = styled(Breadcrumbs)`
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  align-items: center;
+  margin-right: 30px;
+  margin-left: 34px;
+`;
+
+const CustomLink = styled(Link)`
+    color: blue[500];
+    font-size: 14px;
+    font-weight: 400;
+    width: 41px,
+    height: 21px,
+`;
 
 export default function({ breadcrumbsList }: IBreadcrumbProps) {
-  const classes = useStyles();
-
   return (
-    <Box className={classes.breadCombContainer}>
-      <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-        {breadcrumbsList.map((eachBreadcrumb) =>
-          eachBreadcrumb.link ? (
-            <Link
-              className={`${classes.breadcrumbLabel} ${classes.home}`}
-              to={eachBreadcrumb.link}
-              data-testid={`breadcrumb-home-${eachBreadcrumb.label}`}
-            >
-              {eachBreadcrumb.label}
-            </Link>
-          ) : (
-            <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
-              {eachBreadcrumb.label}
-            </Typography>
-          )
-        )}
-      </Breadcrumbs>
-    </Box>
+    <CustomizedBreadcrumb separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
+      {breadcrumbsList.map((eachBreadcrumb) =>
+        eachBreadcrumb.link ? (
+          <CustomLink
+            to={eachBreadcrumb.link}
+            data-testid={`breadcrumb-home-${eachBreadcrumb.label}`}
+          >
+            {eachBreadcrumb.label}
+          </CustomLink>
+        ) : (
+          <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
+            {eachBreadcrumb.label}
+          </Typography>
+        )
+      )}
+    </CustomizedBreadcrumb>
   );
 }

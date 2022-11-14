@@ -3438,7 +3438,7 @@ features:
   WranglerNewUI:
     Breadcrumb:
       labels:
-        connectionsList: Data Source
+        connectionsList: Data Sources
         loadToGrid: Wrangle
         wrangleHome: Home
       params:
