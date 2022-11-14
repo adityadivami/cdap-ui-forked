@@ -16,6 +16,7 @@
 
 import { Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import { grey } from '@material-ui/core/colors';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { IBreadcrumbProps } from 'components/GridTable/components/Breadcrumb/types';
 import React from 'react';
@@ -41,6 +42,14 @@ const CustomLink = styled(Link)`
     height: 21px,
 `;
 
+const CustomTypography = styled(Typography)`
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0.15px;
+  color: ${grey[900]};
+`;
+
 export default function({ breadcrumbsList }: IBreadcrumbProps) {
   return (
     <CustomizedBreadcrumb separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
@@ -53,9 +62,9 @@ export default function({ breadcrumbsList }: IBreadcrumbProps) {
             {eachBreadcrumb.label}
           </CustomLink>
         ) : (
-          <Typography color="textPrimary" data-testid="breadcrumb-workspace-name">
+          <CustomTypography color="textPrimary" data-testid="breadcrumb-workspace-name">
             {eachBreadcrumb.label}
-          </Typography>
+          </CustomTypography>
         )
       )}
     </CustomizedBreadcrumb>
