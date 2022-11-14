@@ -255,3 +255,19 @@ export const calculateDistributionGraphData = (values: IRecords[], columnName: s
       return { text: key, value: map[key] };
     });
 };
+
+/**
+ * @description This function takes  rowsDataList .
+ * @param  {IRecords} values , this is the rowDataList .
+ * @returns  the Column Headers List .
+ */
+
+export const getColumnNames = (values) => {
+  const uniqueColumnDataSet = new Set<string>();
+  values.forEach((element) => {
+    for (const [key] of Object.entries(element)) {
+      uniqueColumnDataSet.add(`${key}`);
+    }
+  });
+  return [...uniqueColumnDataSet];
+};

@@ -22,4 +22,5 @@ export interface IColumnDetailsProps {
   renameColumnNameHandler: (oldColumnName: string, newColumnName: string) => void;
   dataTypeHandler: (dataType: string) => void;
   columnType: string;
+  columnHeader: string[];
 }

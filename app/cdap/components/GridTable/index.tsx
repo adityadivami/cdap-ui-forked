@@ -50,6 +50,7 @@ import {
   characterCount,
   checkAlphaNumericAndSpaces,
   convertNonNullPercent,
+  getColumnNames,
 } from 'components/GridTable/utils';
 
 export default function() {
@@ -87,6 +88,7 @@ export default function() {
     dataQualityBar: {},
     dataTypeString: '',
     dataDistributionGraphData: [],
+    columnNamesList: [],
   });
   const [columnSelected, setColumnSelected] = useState('');
   const [invalidCountArray, setInvalidCountArray] = useState([
@@ -326,6 +328,7 @@ export default function() {
       dataQualityBar: gridData?.summary?.statistics[columnName],
       dataTypeString: getDataTypeString,
       dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
+      columnNamesList: getColumnNames(rowsDataList),
     });
   };
 
@@ -364,6 +367,7 @@ export default function() {
               dataQualityBar: {},
               dataTypeString: '',
               dataDistributionGraphData: [],
+              columnNamesList: [],
             });
             setColumnSelected('');
           }}
