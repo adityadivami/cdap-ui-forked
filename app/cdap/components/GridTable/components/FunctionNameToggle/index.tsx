@@ -29,13 +29,10 @@ interface IFunctionNameToggleProps {
 
 export default function({ setShowName, showName }: IFunctionNameToggleProps) {
   return (
-    <FlexJustifyAlignCenter
-      data-testid="transformations-toolbar-icons-function-name-toggler"
-    >
-      <NormalFont
-        component="div"
-        data-testid="name-toggle-child-label"
-      >{T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}</NormalFont>
+    <FlexJustifyAlignCenter data-testid="transformations-toolbar-icons-function-name-toggler">
+      <NormalFont component="div" data-testid="name-toggle-child-label">
+        {T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}
+      </NormalFont>
       <SwitchInputComponent
         setShow={setShowName}
         show={showName}

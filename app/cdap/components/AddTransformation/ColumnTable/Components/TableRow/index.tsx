@@ -18,8 +18,8 @@ import React from 'react';
 import InputWidget from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
 import DataQualityProgress from 'components/AddTransformation/CircularProgressBar';
 import { ITableRowProps } from 'components/AddTransformation/ColumnTable/types';
-import {SelectColumnTableBodyCell, SelectColumnTableRow} from 'components/common/TableContainer';
-import {TableCellText} from 'components/common/TypographyText';
+import { SelectColumnTableBodyCell, SelectColumnTableRow } from 'components/common/TableContainer';
+import { TableCellText } from 'components/common/TypographyText';
 
 export default function({
   onSingleSelection,
@@ -44,12 +44,8 @@ export default function({
         />
       </SelectColumnTableBodyCell>
       <SelectColumnTableBodyCell>
-        <TableCellText component="div">
-          {eachColumn.label}
-        </TableCellText>
-        <TableCellText component="div">
-          {eachColumn.type}
-        </TableCellText>
+        <TableCellText component="div">{eachColumn.label}</TableCellText>
+        <TableCellText component="div">{eachColumn.type}</TableCellText>
       </SelectColumnTableBodyCell>
       <SelectColumnTableBodyCell>
         {dataQualityValue?.length && (

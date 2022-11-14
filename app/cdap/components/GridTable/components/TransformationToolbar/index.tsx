@@ -27,9 +27,14 @@ import { nestedMenuOptions } from 'components/GridTable/components/Transformatio
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 import ExpandButton from 'components/common/ExpandButton';
 import { NormalFont } from 'components/common/TypographyText';
-import { LastDividerBox, DividerBox, FunctionBoxWrapper, SearchBoxWrapper } from 'components/common/BoxContainer';
-import {ToolBarIconWrapper, ToolBarInnerWrapper} from 'components/common/IconContainer';
-import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip'
+import {
+  LastDividerBox,
+  DividerBox,
+  FunctionBoxWrapper,
+  SearchBoxWrapper,
+} from 'components/common/BoxContainer';
+import { ToolBarIconWrapper, ToolBarInnerWrapper } from 'components/common/IconContainer';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 
 export default function({
   columnType,
@@ -100,7 +105,9 @@ export default function({
                       .toLowerCase()
                       .split(' ')
                       .join('-')}`}
-                  >{eachOption.toolName}</NormalFont>
+                  >
+                    {eachOption.toolName}
+                  </NormalFont>
                 )}
               </FunctionBoxWrapper>
               {(optionIndex === 4 || optionIndex === 1 || optionIndex === 9) && (

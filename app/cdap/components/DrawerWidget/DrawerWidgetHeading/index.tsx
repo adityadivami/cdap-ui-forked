@@ -21,10 +21,11 @@ import { DrawerHeadWrapper } from 'components/common/BoxContainer';
 import { HeadFont } from 'components/common/TypographyText';
 
 export default function({ headingText }: IDrawerWidgetHeadingProps) {
-
   return (
     <DrawerHeadWrapper>
-      <HeadFont component="p" data-testid="drawer-heading">{headingText}</HeadFont>
+      <HeadFont component="p" data-testid="drawer-heading">
+        {headingText}
+      </HeadFont>
       {UnderLine}
     </DrawerHeadWrapper>
   );

@@ -18,8 +18,8 @@ import { Drawer } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const DrawerWidgetComponent = styled(Drawer)`
-    & .MuiDrawer-paper{
-        top: 46px;
-        height: calc(100vh - 47px);
-    }
+  & .MuiDrawer-paper {
+    top: 46px;
+    height: calc(100vh - 47px);
+  }
 `;

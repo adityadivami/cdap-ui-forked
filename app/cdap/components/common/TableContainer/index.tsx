@@ -19,50 +19,50 @@ import { grey } from '@material-ui/core/colors';
 import styled from 'styled-components';
 
 export const SelectColumnTableContainer = styled(TableContainer)`
-    height: 100%;
+  height: 100%;
 `;
 
 export const SelectColumnTable = styled(Table)`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const SelectColumnTableHead = styled(TableHead)`
-    height: 54px;
+  height: 54px;
 `;
 
 export const SelectColumnTableRow = styled(TableRow)`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: ${grey[700]};
+  display: grid;
+  grid-template-columns: 10% 45% 45%;
+  align-items: center;
+  height: 100%;
+`;
+
+export const SelectColumnTableHeadCell = styled(TableCell)`
+  &.MuiTableCell-head {
+    padding: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.15px;
+    color: ${grey[700]};
+    border-bottom: none !important;
+  }
+`;
+
+export const SelectColumnTableBodyCell = styled(TableCell)`
+  &.MuiTableCell-body {
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.15px;
     color: ${grey[700]};
-    display: grid;
-    grid-template-columns: 10% 45% 45%;
-    align-items: center;
-    height: 100%;
-`;
-
-export const SelectColumnTableHeadCell = styled(TableCell)`
-    &.MuiTableCell-head{
-        padding: 0;
-        font-weight: 600;
-        font-size: 16px;
-        line-height: 150%;
-        letter-spacing: 0.15px;
-        color: ${grey[700]};
-        border-bottom: none !important;
-    }
-`;
-
-export const SelectColumnTableBodyCell = styled(TableCell)`
-    &.MuiTableCell-body{
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 150%;
-        letter-spacing: 0.15px;
-        color: ${grey[700]};
-        padding: 5px;
-        height: 64px;
-    }
+    padding: 5px;
+    height: 64px;
+  }
 `;

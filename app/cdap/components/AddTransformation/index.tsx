@@ -29,8 +29,11 @@ import {
   multipleColumnSelected,
   ADD_TRANSFORMATION_PREFIX,
 } from 'components/AddTransformation/constants';
-import {AddTransformationBodyWrapper, AddTransformationWrapper} from 'components/common/BoxContainer';
-import {AddTransformationButton} from 'components/common/ButtonWidget';
+import {
+  AddTransformationBodyWrapper,
+  AddTransformationWrapper,
+} from 'components/common/BoxContainer';
+import { AddTransformationButton } from 'components/common/ButtonWidget';
 
 export default function({
   transformationDataType,

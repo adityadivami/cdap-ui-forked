@@ -59,15 +59,13 @@ export default function({ value }: ICircularProgressBarProps) {
           <ArcContainer value={Math.round(value)} />
         </ProgressBoxInnerWrapper>
         {Math.round(value) < 100 ? (
-          <ErrorFont
-            component="div"
-            dataTestId="circular-bar-value"
-          >{`${Math.round(value)}%`}</ErrorFont>
+          <ErrorFont component="div" dataTestId="circular-bar-value">{`${Math.round(
+            value
+          )}%`}</ErrorFont>
         ) : (
-          <SuccessText
-            component="div"
-            dataTestId="circular-bar-value"
-          >{`${Math.round(value)}%`}</SuccessText>
+          <SuccessText component="div" dataTestId="circular-bar-value">{`${Math.round(
+            value
+          )}%`}</SuccessText>
         )}
       </ProgressBoxWrapper>
     </>

@@ -14,18 +14,20 @@
  * the License.
  */
 
-import {
-  TableBody,
-  Checkbox,
-  Divider,
-} from '@material-ui/core';
+import { TableBody, Checkbox, Divider } from '@material-ui/core';
 import React from 'react';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
 import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
-import {SelectColumnTableContainer, SelectColumnTable, SelectColumnTableHead, SelectColumnTableRow, SelectColumnTableHeadCell} from 'components/common/TableContainer';
+import {
+  SelectColumnTableContainer,
+  SelectColumnTable,
+  SelectColumnTableHead,
+  SelectColumnTableRow,
+  SelectColumnTableHeadCell,
+} from 'components/common/TableContainer';
 
 export default function({
   columns,
@@ -40,7 +42,6 @@ export default function({
   setSelectedColumns,
   transformationName,
 }: IColumnTableProps) {
-
   const handleChange = () => {
     if (
       multipleColumnSelected?.filter(
@@ -62,9 +63,7 @@ export default function({
   };
 
   return (
-    <SelectColumnTableContainer
-      data-testid="column-table-parent"
-    >
+    <SelectColumnTableContainer data-testid="column-table-parent">
       <SelectColumnTable aria-label="recipe steps table">
         <Divider />
         <SelectColumnTableHead>
@@ -80,15 +79,11 @@ export default function({
                 />
               )}
             </SelectColumnTableHeadCell>
-            <SelectColumnTableHeadCell
-              data-testid="panel-columns"
-            >
+            <SelectColumnTableHeadCell data-testid="panel-columns">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
               {`(${totalColumnCount})`}
             </SelectColumnTableHeadCell>
-            <SelectColumnTableHeadCell
-              data-testid="panel-values"
-            >
+            <SelectColumnTableHeadCell data-testid="panel-values">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
             </SelectColumnTableHeadCell>
           </SelectColumnTableRow>

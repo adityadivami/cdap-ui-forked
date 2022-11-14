@@ -20,7 +20,14 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
-import { BackIconBox, DrawerContainerInnerFlex, FlexWrapper, FlexAlignCenter, PointerBox, DrawerContainerBox } from 'components/common/BoxContainer';
+import {
+  BackIconBox,
+  DrawerContainerInnerFlex,
+  FlexWrapper,
+  FlexAlignCenter,
+  PointerBox,
+  DrawerContainerBox,
+} from 'components/common/BoxContainer';
 import { VerticalDividerBox } from 'components/common/Divider';
 import { DrawerWidgetComponent } from 'components/common/Drawer';
 
@@ -34,17 +41,13 @@ export default function({
   showBackIcon,
   anchor,
 }: IDrawerWidgetProps) {
-
   return (
     <DrawerWidgetComponent anchor={anchor ? anchor : 'right'} open={openDrawer}>
       <DrawerContainerBox role="presentation">
         <DrawerContainerInnerFlex>
           <FlexAlignCenter>
             {showBackIcon && (
-              <BackIconBox
-                onClick={closeClickHandler}
-                data-testid="box-id"
-              >
+              <BackIconBox onClick={closeClickHandler} data-testid="box-id">
                 {BackIcon}
               </BackIconBox>
             )}
@@ -52,22 +55,16 @@ export default function({
           </FlexAlignCenter>
           <FlexWrapper>
             {headerActionTemplate && (
-              <Box data-testid="header-action-template">
-                {headerActionTemplate}
-              </Box>
+              <Box data-testid="header-action-template">{headerActionTemplate}</Box>
             )}
-            {showDivider && (
-              <VerticalDividerBox
-                data-testid="show-divider-box"
-              />
-            )}
+            {showDivider && <VerticalDividerBox data-testid="show-divider-box" />}
             <PointerBox>
-            <CloseRoundedIcon
-              color="action"
-              fontSize="large"
-              onClick={closeClickHandler}
-              data-testid="drawer-widget-close-round-icon"
-            />
+              <CloseRoundedIcon
+                color="action"
+                fontSize="large"
+                onClick={closeClickHandler}
+                data-testid="drawer-widget-close-round-icon"
+              />
             </PointerBox>
           </FlexWrapper>
         </DrawerContainerInnerFlex>

@@ -19,71 +19,71 @@ import styled from 'styled-components';
 import { grey } from '@material-ui/core/colors';
 
 export const MenuComponent = styled(Menu)`
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 232px;
+  top: -13px !important;
+  & > div {
     position: absolute !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 232px;
-    top: -13px !important;
-    & > div {
-        position: absolute !important;
-    }
-    & .MuiMenuItem-root {
-        padding: 6px 20px 6px 20px;
-        height: 33px;
-    }
-    & .MuiMenu-paper {
-        width: 199px;
-        max-height: 70% !important;
-    }
-    & .MuiMenu-list{
-        color: ${grey[600]};
-        border: 1px solid #DADCE0;
-    }
-    & .MuiListItem-button {
-        display: flex;
-        justify-content: space-between;
-    }
-    & .MuiListItem-button:hover {
-        background: ${grey[300]};
-    }
-    & .MuiList-padding{
-        padding: 13px 0;
-    }
-    $ .MuiPaper-root{
-        box-shadow: 3px 4px 15px rgba(68, 132, 245, 0.15);
-    }
+  }
+  & .MuiMenuItem-root {
+    padding: 6px 20px 6px 20px;
+    height: 33px;
+  }
+  & .MuiMenu-paper {
+    width: 199px;
+    max-height: 70% !important;
+  }
+  & .MuiMenu-list {
+    color: ${grey[600]};
+    border: 1px solid #dadce0;
+  }
+  & .MuiListItem-button {
+    display: flex;
+    justify-content: space-between;
+  }
+  & .MuiListItem-button:hover {
+    background: ${grey[300]};
+  }
+  & .MuiList-padding {
+    padding: 13px 0;
+  }
+  $ .MuiPaper-root {
+    box-shadow: 3px 4px 15px rgba(68, 132, 245, 0.15);
+  }
 `;
 
 export const NestedMenuComponent = styled(Menu)`
-    position: absolute !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    & .MuiMenuItem-root {
-        padding: 6px 20px 6px 20px;
-        height: 33px;
-    }
-    & .MuiMenu-paper {
-        width: 199px;
-        max-height: 70% !important;
-        top: 145px !important;
-    }
-    & .MuiMenu-list{
-        color: ${grey[600]};
-        border: 1px solid #DADCE0;
-    }
-    & .MuiListItem-button {
-        display: flex;
-        justify-content: space-between;
-    }
-    & .MuiListItem-button:hover {
-        background: ${grey[300]};
-    }
-    & .MuiList-padding{
-        padding: 13px 0;
-    }
-    $ .MuiPaper-root{
-        box-shadow: 3px 4px 15px rgba(68, 132, 245, 0.15);
-    }
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  & .MuiMenuItem-root {
+    padding: 6px 20px 6px 20px;
+    height: 33px;
+  }
+  & .MuiMenu-paper {
+    width: 199px;
+    max-height: 70% !important;
+    top: 145px !important;
+  }
+  & .MuiMenu-list {
+    color: ${grey[600]};
+    border: 1px solid #dadce0;
+  }
+  & .MuiListItem-button {
+    display: flex;
+    justify-content: space-between;
+  }
+  & .MuiListItem-button:hover {
+    background: ${grey[300]};
+  }
+  & .MuiList-padding {
+    padding: 13px 0;
+  }
+  $ .MuiPaper-root {
+    box-shadow: 3px 4px 15px rgba(68, 132, 245, 0.15);
+  }
 `;

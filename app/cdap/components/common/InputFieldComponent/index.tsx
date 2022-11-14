@@ -15,14 +15,14 @@
  */
 
 import styled from 'styled-components';
-import {grey} from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 
 export const SelectColumnSearchInput = styled.input`
-    margin-right: 5px;
-    border: none;
-    border-bottom: 1px solid transparent;
-    &:focus {
-        border-bottom: 1px solid ${grey[700]};
-        outline: none;
-    }
-`
+  margin-right: 5px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  &:focus {
+    border-bottom: 1px solid ${grey[700]};
+    outline: none;
+  }
+`;

@@ -25,9 +25,16 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import { SelectColumnWrapper, SelectColumnInnerWrapper, PointerBox, FlexWrapper, CenterAlignBox, SelectColumnSearchBox } from 'components/common/BoxContainer';
+import {
+  SelectColumnWrapper,
+  SelectColumnInnerWrapper,
+  PointerBox,
+  FlexWrapper,
+  CenterAlignBox,
+  SelectColumnSearchBox,
+} from 'components/common/BoxContainer';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
-import {SelectColumnSearchInput} from 'components/common/InputFieldComponent';
+import { SelectColumnSearchInput } from 'components/common/InputFieldComponent';
 
 export default function({
   transformationDataType,
@@ -130,27 +137,21 @@ export default function({
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
           />
-          <PointerBox
-            onClick={handleFocus}
-            data-testid="click-handle-focus"
-          >
+          <PointerBox onClick={handleFocus} data-testid="click-handle-focus">
             {SearchIcon}
           </PointerBox>
         </SelectColumnSearchBox>
       </SelectColumnInnerWrapper>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <FlexWrapper
-        >
+        <FlexWrapper>
           <CenterAlignBox>
             {NoDataSVG}
-            <SubHeadBoldFont
-              component="p"
-              dataTestId="no-column-title"
-            >{T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}</SubHeadBoldFont>
-            <NormalFont
-              component="p"
-              dataTestId="no-column-subTitle"
-            >{T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}</NormalFont>
+            <SubHeadBoldFont component="p" dataTestId="no-column-title">
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
+            </SubHeadBoldFont>
+            <NormalFont component="p" dataTestId="no-column-subTitle">
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
+            </NormalFont>
           </CenterAlignBox>
         </FlexWrapper>
       ) : (

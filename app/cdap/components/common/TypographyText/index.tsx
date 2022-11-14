@@ -66,4 +66,4 @@ export const TableCellText = styled(Typography)`
   font-size: 14px;
   margin-bottom: 5px;
   text-transform: capitalize;
-`
+`;

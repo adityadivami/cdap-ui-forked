@@ -19,22 +19,22 @@ import { blue } from '@material-ui/core/colors';
 import styled from 'styled-components';
 
 export const AddTransformationButton = styled(Button)`
-    width: 162px;
-    height: 36px;
+  width: 162px;
+  height: 36px;
+  background: ${blue[500]};
+  box-shadow: 0px 2px 4px rgba(70, 129, 244, 0.15);
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 0.46px;
+  color: #ffffff;
+  align-self: flex-end;
+  margin-top: 30px;
+  text-transform: none;
+  margin-bottom: 20px;
+  margin-right: 8px;
+  &:hover {
     background: ${blue[500]};
-    box-shadow: 0px 2px 4px rgba(70, 129, 244, 0.15);
-    border-radius: 4px;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 26px;
-    letter-spacing: 0.46px;
-    color: #FFFFFF;
-    align-self: flex-end;
-    margin-top: 30px;
-    text-transform: none;
-    margin-bottom: 20px;
-    margin-right: 8px;
-    &:hover{
-        background: ${blue[500]};
-    }
-`
+  }
+`;
