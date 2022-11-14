@@ -14,30 +14,17 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
-import { grey } from '@material-ui/core/colors';
+import { Divider, Box } from '@material-ui/core';
+import styled from 'styled-components';
 
-export const useStyles = makeStyles(() => {
-  return {
-    paper: {
-      top: 46,
-      height: 'calc(100vh - 47px)',
-    },
-    drawerContainerStyles: {
-      width: 460,
-      height: '100%',
-      paddingLeft: 30,
-    },
-    pointerStyles: {
-      cursor: 'pointer',
-    },
-    headingTextStyles: {
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 20,
-      lineHeight: '150%',
-      letterSpacing: 0.15,
-      color: grey[900],
-    },
-  };
-});
+export const ShortDivider = styled(Divider)`
+  width: 159px;
+  background: #dadce0;
+`;
+
+export const VerticalDividerBox = styled(Divider)`
+  width: 1px;
+  height: 28px;
+  background-color: #dadce0;
+  margin: 0 15px;
+`;

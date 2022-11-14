@@ -14,24 +14,20 @@
  * the License.
  */
 
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Checkbox,
-  Divider,
-} from '@material-ui/core';
-import React, { Fragment } from 'react';
-import { useStyles } from 'components/AddTransformation/ColumnTable/styles';
+import { TableBody, Checkbox, Divider } from '@material-ui/core';
+import React from 'react';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
 import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import {
+  SelectColumnTableContainer,
+  SelectColumnTable,
+  SelectColumnTableHead,
+  SelectColumnTableRow,
+  SelectColumnTableHeadCell,
+} from 'components/common/TableContainer';
 
 export default function({
   columns,
@@ -46,8 +42,6 @@ export default function({
   setSelectedColumns,
   transformationName,
 }: IColumnTableProps) {
-  const classes = useStyles();
-
   const handleChange = () => {
     if (
       multipleColumnSelected?.filter(
@@ -69,20 +63,12 @@ export default function({
   };
 
   return (
-    <TableContainer
-      component={Box}
-      data-testid="column-table-parent"
-      classes={{ root: classes.muiTableContainer }}
-    >
-      <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
+    <SelectColumnTableContainer data-testid="column-table-parent">
+      <SelectColumnTable aria-label="recipe steps table">
         <Divider />
-        <TableHead classes={{ root: classes.muiTableHeader }}>
-          <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
-            <TableCell
-              classes={{
-                head: `${classes.recipeStepsTableHeadStyles}`,
-              }}
-            >
+        <SelectColumnTableHead>
+          <SelectColumnTableRow>
+            <SelectColumnTableHeadCell>
               {multipleColumnSelected?.filter((option) => option.value === transformationName)
                 .length > 0 && (
                 <Checkbox
@@ -92,26 +78,16 @@ export default function({
                   indeterminate={selectedColumns?.length ? true : false}
                 />
               )}
-            </TableCell>
-            <TableCell
-              classes={{
-                head: `${classes.recipeStepsTableHeadStyles}`,
-              }}
-              data-testid="panel-columns"
-            >
+            </SelectColumnTableHeadCell>
+            <SelectColumnTableHeadCell data-testid="panel-columns">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
               {`(${totalColumnCount})`}
-            </TableCell>
-            <TableCell
-              classes={{
-                head: `${classes.recipeStepsTableHeadStyles}`,
-              }}
-              data-testid="panel-values"
-            >
+            </SelectColumnTableHeadCell>
+            <SelectColumnTableHeadCell data-testid="panel-values">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
-            </TableCell>
-          </TableRow>
-        </TableHead>
+            </SelectColumnTableHeadCell>
+          </SelectColumnTableRow>
+        </SelectColumnTableHead>
         <Divider />
         <TableBody>
           {columns?.length > 0 &&
@@ -145,7 +121,7 @@ export default function({
               </>
             ))}
         </TableBody>
-      </Table>
-    </TableContainer>
+      </SelectColumnTable>
+    </SelectColumnTableContainer>
   );
 }

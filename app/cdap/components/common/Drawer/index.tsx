@@ -14,23 +14,12 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
-export const useStyles = makeStyles(() => {
-  return {
-    selectButtonStyles: {
-      fontStyle: 'normal',
-      fontWeight: 400,
-      fontSize: 15,
-      lineHeight: '26px',
-      letterSpacing: 0.46,
-      color: blue[500],
-      textTransform: 'none',
-      marginTop: 15,
-    },
-    functionSectionStyles: {
-      padding: '15px 0',
-      borderBottom: '1px solid #DADCE0',
-    },
-  };
-});
+import { Drawer } from '@material-ui/core';
+import styled from 'styled-components';
+
+export const DrawerWidgetComponent = styled(Drawer)`
+  & .MuiDrawer-paper {
+    top: 46px;
+    height: calc(100vh - 47px);
+  }
+`;

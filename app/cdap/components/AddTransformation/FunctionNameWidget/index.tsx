@@ -14,42 +14,33 @@
  * the License.
  */
 import React from 'react';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import T from 'i18n-react';
-import { useStyles } from 'components/AddTransformation/FunctionNameWidget/styles';
-import { TickIcon } from 'components/AddTransformation/iconStore';
+import { TickIcon, InfoIcon } from 'components/AddTransformation/iconStore';
 import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
-import { FlexBoxContainer, BlockContainer } from 'components/common/BoxContainer';
-import { SimpleLabel } from 'components/common/TypographyText';
+import { TransformationNameHeadWrapper, TransformationNameTextInfoWrapper, TransformationNameBox, PointerBox } from 'components/common/BoxContainer';
+import { SubHeadNormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 
 export default function({ transformationName }: IFunctionNameWidgetProps) {
-  const classes = useStyles();
 
   return (
-    <section className={classes.functionSectionStyles}>
-      <FlexBoxContainer justifyContent="space-between">
-        <SimpleLabel
-          component="span"
-          size="16px"
-          weight={600}
-          dataTestId="function-name-head"
-          text={T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`).toString()}
-        />
+    <TransformationNameBox>
+      <TransformationNameHeadWrapper>
+        <SubHeadBoldFont
+          component="p"
+          data-testid="function-name-head"
+        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}</SubHeadBoldFont>
         {TickIcon}
-      </FlexBoxContainer>
-      <BlockContainer padding="10px 0 0 0">
-        <SimpleLabel
+      </TransformationNameHeadWrapper>
+      <TransformationNameTextInfoWrapper>
+        <SubHeadNormalFont
           component="span"
-          size="16px"
-          weight={400}
-          dataTestId="selected-function-name"
-          text={transformationName}
-        />
-        <span data-testid="selected-function-info" id="selected-function-info">
-          <InfoOutlinedIcon className={classes.infoIcon} />
-        </span>
-      </BlockContainer>
-    </section>
+          data-testid="selected-function-name"
+        >{transformationName}</SubHeadNormalFont>&nbsp;
+        <PointerBox>
+          {InfoIcon}
+        </PointerBox>
+      </TransformationNameTextInfoWrapper>
+    </TransformationNameBox>
   );
 }

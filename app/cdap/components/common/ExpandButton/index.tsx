@@ -13,29 +13,26 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { Button } from '@material-ui/core';
-import React from 'react';
-import { IButtonWidgetProps } from 'components/AddTransformation/ButtonWidget/types';
 
-export default function({
-  buttonText,
-  disabled,
-  onClick,
-  variant,
-  className,
-  buttonId,
-}: IButtonWidgetProps) {
+import React from 'react';
+import { IconButton } from '@material-ui/core';
+import styled from 'styled-components';
+import { Expand } from 'components/GridTable/components/TransformationToolbar/iconStore';
+
+interface IExpandButtonProps {
+  open: boolean;
+  onClick: (event: React.MouseEvent) => void;
+  dataTestId: string;
+}
+
+const ExpandButton = styled(IconButton)`
+  transform: ${({ open }) => (!open ? 'rotate(180deg)' : 'rotate(0deg)')};
+  cursor: pointer;
+`;
+export default function({ open, onClick, dataTestId }: IExpandButtonProps) {
   return (
-    <Button
-      variant={variant}
-      disabled={disabled}
-      color="primary"
-      className={className}
-      onClick={onClick}
-      data-testid={buttonId}
-      id={buttonId}
-    >
-      {buttonText}
-    </Button>
+    <ExpandButton open={open} onClick={onClick} data-testid={dataTestId}>
+      {Expand}
+    </ExpandButton>
   );
 }

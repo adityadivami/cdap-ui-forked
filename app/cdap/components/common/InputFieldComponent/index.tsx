@@ -14,11 +14,15 @@
  * the License.
  */
 
-export interface IButtonWidgetProps {
-  buttonText: string;
-  disabled: boolean;
-  onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
-  variant: 'contained' | 'outlined' | 'text';
-  className: string;
-  buttonId: string;
-}
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
+
+export const SelectColumnSearchInput = styled.input`
+  margin-right: 5px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  &:focus {
+    border-bottom: 1px solid ${grey[700]};
+    outline: none;
+  }
+`;

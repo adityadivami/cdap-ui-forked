@@ -31,6 +31,9 @@ describe('It should test FunctionNameWidget Component', () => {
         isSingleSelection={false}
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
+        totalColumnCount={0}
+        setSelectedColumns={() => jest.fn()}
+        transformationName={''}
       />
     );
     expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
@@ -50,6 +53,9 @@ describe('It should test FunctionNameWidget Component', () => {
         isSingleSelection={false}
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
+        totalColumnCount={0}
+        setSelectedColumns={() => jest.fn()}
+        transformationName={''}
       />
     );
     expect(screen.getByTestId(/panel-values/i)).toHaveTextContent(

@@ -16,11 +16,11 @@
 
 import { Typography, Box } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from 'components/AddTransformation/CircularProgressBar/styles';
 import styled from 'styled-components';
 import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
 import { red, green } from '@material-ui/core/colors';
-import { ErrorLabel, SuccessLabel } from 'components/common/TypographyText';
+import { ErrorFont, SuccessText } from 'components/common/TypographyText';
+import { ProgressBoxWrapper, ProgressBoxInnerWrapper } from 'components/common/BoxContainer';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -37,32 +37,37 @@ const ArcContainer = styled(Typography)`
 `;
 
 export default function({ value }: ICircularProgressBarProps) {
-  const classes = useStyles();
-
   return (
     <>
-      <Box className={classes.progress}>
-        <Box className={classes.barOverflow}>
+      <ProgressBoxWrapper
+        sx={{
+          position: 'relative',
+          margin: 4,
+          float: 'left',
+          textAlign: 'center',
+        }}
+      >
+        <ProgressBoxInnerWrapper
+          sx={{
+            position: 'relative',
+            overflow: 'hidden',
+            width: 60,
+            height: 30,
+            marginBottom: '-20px !important',
+          }}
+        >
           <ArcContainer value={Math.round(value)} />
-        </Box>
+        </ProgressBoxInnerWrapper>
         {Math.round(value) < 100 ? (
-          <ErrorLabel
-            size="14px"
-            component="div"
-            weight={400}
-            dataTestId="circular-bar-value"
-            text={`${Math.round(value)}%`}
-          />
+          <ErrorFont component="div" dataTestId="circular-bar-value">{`${Math.round(
+            value
+          )}%`}</ErrorFont>
         ) : (
-          <SuccessLabel
-            size="14px"
-            component="div"
-            weight={400}
-            dataTestId="circular-bar-value"
-            text={`${Math.round(value)}%`}
-          />
+          <SuccessText component="div" dataTestId="circular-bar-value">{`${Math.round(
+            value
+          )}%`}</SuccessText>
         )}
-      </Box>
+      </ProgressBoxWrapper>
     </>
   );
 }

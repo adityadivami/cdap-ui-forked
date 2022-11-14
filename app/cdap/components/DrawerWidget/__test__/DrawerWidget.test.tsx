@@ -34,7 +34,7 @@ describe('It should test DrawerWidget Component', () => {
               closeClickHandler={function(): void {
                 throw new Error('Function not implemented.');
               }}
-              showBackIcon
+              showBackIcon={true}
             />
           </Route>
         </Switch>

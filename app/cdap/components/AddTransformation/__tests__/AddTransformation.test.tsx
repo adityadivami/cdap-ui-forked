@@ -38,7 +38,7 @@ describe('It should test the SelectColumnsList Component', () => {
       </Router>
     );
     // expect(container).toBeDefined;
-    const boxContainer = screen.getByTestId('box-id');
+    const boxContainer = screen.getByTestId('button_apply');
     fireEvent.click(boxContainer);
     rerender(
       <Router history={history}>
