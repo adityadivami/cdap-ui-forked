@@ -14,62 +14,60 @@
  * the License.
  */
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import T from 'i18n-react';
-import { useStyles } from 'components/AddTransformation/styles';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import { ISelectColumnsWidgetProps } from 'components/AddTransformation/SelectColumnsWidget/types';
-import ButtonWidget from 'components/AddTransformation/ButtonWidget';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
+import { TransformationNameTextInfoWrapper, TransformationNameHeadWrapper, TransformationNameBox } from 'components/common/BoxContainer';
+import { SubHeadBoldFont, NormalFont } from 'components/common/TypographyText';
+import { TickIcon } from 'components/AddTransformation/iconStore';
+import { SelectColumnButton } from 'components/common/ButtonWidget';
 
 export default function({
   selectedColumns,
-  functionName,
+  transformationName,
   handleSelectColumn,
 }: ISelectColumnsWidgetProps) {
-  const classes = useStyles();
 
   const singleColumnSelect = (
     <>
-      <div
-        className={classes.functionHeadingTextStyles}
-        id="select-column-title"
-        data-testid="select-column-title"
-      >
-        {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara')}
-      </div>
-      <div
-        className={classes.quickSelectTextStyles}
-        id="select-column-subtitle"
-        data-testid="select-column-subtitle"
-      >
-        {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.quickSelect')}
-      </div>
+      <TransformationNameHeadWrapper>
+        <SubHeadBoldFont
+          component="p"
+          data-testid="select-column-title"
+        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}</SubHeadBoldFont>
+        {selectedColumns.length > 0 && TickIcon}
+      </TransformationNameHeadWrapper>
+      <TransformationNameTextInfoWrapper padding="10px 0">
+        <NormalFont
+          component="p"
+          data-testid="select-column-subtitle"
+        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}</NormalFont>
+      </TransformationNameTextInfoWrapper>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
-          <Typography component="span" variant="body1" className={classes.quickSelectTextStyles}>
-            {index + 1}.&nbsp; {item.label}
-          </Typography>
+          <TransformationNameTextInfoWrapper padding="5px 0">
+            <NormalFont
+              component="p"
+              data-testid="selected-function-name"
+            >{`${index + 1}. ${item.label}`}</NormalFont>
+          </TransformationNameTextInfoWrapper>
         ))
       ) : (
-        <ButtonWidget
-          buttonText={
-            multipleColumnSelected?.filter((el) => el.value === functionName).length > 0
-              ? T.translate(
-                  'features.WranglerNewUI.GridPage.addTransformationPanel.selectMultiColumns'
-                ).toString()
-              : T.translate(
-                  'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumn'
-                ).toString()
-          }
-          className={classes.selectButtonStyles}
+        <SelectColumnButton
           onClick={() => handleSelectColumn(false)}
-          variant="outlined"
           disabled={false}
-          buttonId="select-column-button"
-        />
+          data-testid="select-column-button"
+        >
+{
+            multipleColumnSelected?.filter((el) => el.value === transformationName).length > 0
+              ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`).toString()
+              : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString()
+          }
+        </SelectColumnButton>
       )}
     </>
   );
 
-  return <section className={classes.functionSectionStyles}>{singleColumnSelect}</section>;
+  return <TransformationNameBox>{singleColumnSelect}</TransformationNameBox>;
 }

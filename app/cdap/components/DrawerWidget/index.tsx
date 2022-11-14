@@ -14,13 +14,22 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
-import React, { Fragment } from 'react';
-import { useStyles } from 'components/DrawerWidget/styles';
+import { Box } from '@material-ui/core';
+import React from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
 import { BackIcon } from 'components/DrawerWidget/iconStore';
+import {
+  BackIconBox,
+  DrawerContainerInnerFlex,
+  FlexWrapper,
+  FlexAlignCenter,
+  PointerBox,
+  DrawerContainerBox,
+} from 'components/common/BoxContainer';
+import { VerticalDividerBox } from 'components/common/Divider';
+import { DrawerWidgetComponent } from 'components/common/Drawer';
 
 export default function({
   headingText,
@@ -32,39 +41,35 @@ export default function({
   showBackIcon,
   anchor,
 }: IDrawerWidgetProps) {
-  const classes = useStyles();
-
   return (
-    <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
-      <Container className={classes.drawerContainerStyles} role="presentation">
-        <header className={classes.headerStyles}>
-          <div className={classes.headerTextWithBackIconStyles}>
+    <DrawerWidgetComponent anchor={anchor ? anchor : 'right'} open={openDrawer}>
+      <DrawerContainerBox role="presentation">
+        <DrawerContainerInnerFlex>
+          <FlexAlignCenter>
             {showBackIcon && (
-              <Box
-                className={classes.backIconClass}
-                onClick={closeClickHandler}
-                data-testid="box-id"
-              >
+              <BackIconBox onClick={closeClickHandler} data-testid="box-id">
                 {BackIcon}
-              </Box>
+              </BackIconBox>
             )}
-            &nbsp;
             <DrawerWidgetHeading headingText={headingText.toString()} />
-          </div>
-          <Box className={classes.headerRightStyles}>
-            {headerActionTemplate && <div>{headerActionTemplate}</div>}
-            {showDivider && <div className={classes.dividerLineStyles} />}
-            <CloseRoundedIcon
-              className={classes.pointerStyles}
-              color="action"
-              fontSize="large"
-              onClick={closeClickHandler}
-              data-testid="drawer-widget-close-round-icon"
-            />
-          </Box>
-        </header>
-        <>{children}</>
-      </Container>
-    </Drawer>
+          </FlexAlignCenter>
+          <FlexWrapper>
+            {headerActionTemplate && (
+              <Box data-testid="header-action-template">{headerActionTemplate}</Box>
+            )}
+            {showDivider && <VerticalDividerBox data-testid="show-divider-box" />}
+            <PointerBox>
+              <CloseRoundedIcon
+                color="action"
+                fontSize="large"
+                onClick={closeClickHandler}
+                data-testid="drawer-widget-close-round-icon"
+              />
+            </PointerBox>
+          </FlexWrapper>
+        </DrawerContainerInnerFlex>
+        {children}
+      </DrawerContainerBox>
+    </DrawerWidgetComponent>
   );
 }

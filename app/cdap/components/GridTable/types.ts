@@ -17,12 +17,20 @@
 import { ITransformationComponentValues } from 'components/AddTransformation/types';
 
 export interface IParams {
-  context: string | number | IRecords;
+  context: string;
   workspaceId: string;
+  namespace?: string;
+  wid?: string;
+  connectorType?: string;
 }
 
 export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
+  wid?: string;
+  payload?: IParams;
+  body?: string;
+  path?: string;
+  canBrowse?: boolean;
+  name?: string;
 }
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
@@ -44,7 +52,7 @@ interface ISummary {
 
 export interface IExecuteAPIResponse {
   headers: string[];
-  types: IRecords;
+  types: IGridCellData;
   values: IRecords[];
   summary: ISummary;
   message: string;
@@ -89,7 +97,7 @@ export interface IApiPayload {
   gridParams: IGridParams;
 }
 
-export interface ICellData {
+export interface IGridCellData {
   [key: string]: string;
 }
 
@@ -98,17 +106,22 @@ export interface IMissingList {
   values: Record<string, string>;
 }
 
+export interface IAddTransformationItem {
+  option: string;
+  supportedDataType: string[];
+}
+
 export interface ITransformationContentParams {
   setTransformationComponentsValue: React.Dispatch<
     React.SetStateAction<ITransformationComponentValues>
   >;
   transformationComponent: ITransformationComponentType[];
   transformationComponentValues: ITransformationComponentValues;
-  functionName: string;
-  transformationFunctionSupportedDataType: string[];
-  columnData: IHeaderNamesList[];
-  missingDataList: IStatistics;
-  callBack: () => void;
+  transformationName: string;
+  transformationDataType: string[];
+  columnsList: IHeaderNamesList[];
+  missingItemsList: IStatistics;
+  onCancel: () => void;
   applyTransformation: (directive: string) => void;
 }
 

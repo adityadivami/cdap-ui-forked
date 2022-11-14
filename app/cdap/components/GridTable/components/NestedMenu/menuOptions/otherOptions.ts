@@ -13,14 +13,17 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import T from 'i18n-react';
+import { OTHER_LABEL_PREFIX } from 'components/GridTable/components/NestedMenu/menuOptions/constants';
+import { TOOLBAR_ICONS_LABEL_ALL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 
 export const OTHER_OPTIONS = [
   {
     value: 'customTransform',
     label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.other.customTransform'
-    ),
-    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
+      `${OTHER_LABEL_PREFIX}.customTransform`
+    ).toString(),
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
 ];

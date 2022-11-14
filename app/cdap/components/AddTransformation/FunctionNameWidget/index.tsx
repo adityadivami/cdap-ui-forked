@@ -14,39 +14,33 @@
  * the License.
  */
 import React from 'react';
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import T from 'i18n-react';
-import { useStyles } from 'components/AddTransformation/styles';
-import { TickIcon } from 'components/AddTransformation/iconStore';
+import { TickIcon, InfoIcon } from 'components/AddTransformation/iconStore';
 import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
+import { TransformationNameHeadWrapper, TransformationNameTextInfoWrapper, TransformationNameBox, PointerBox } from 'components/common/BoxContainer';
+import { SubHeadNormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 
-export default function({ functionName }: IFunctionNameWidgetProps) {
-  const classes = useStyles();
+export default function({ transformationName }: IFunctionNameWidgetProps) {
 
   return (
-    <section className={classes.functionSectionStyles}>
-      <div className={classes.funtionSectionWrapperStyles}>
-        <div
-          className={classes.functionHeadingTextStyles}
+    <TransformationNameBox>
+      <TransformationNameHeadWrapper>
+        <SubHeadBoldFont
+          component="p"
           data-testid="function-name-head"
-          id="function-name-head"
-        >
-          {T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.function')}
-        </div>
+        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}</SubHeadBoldFont>
         {TickIcon}
-      </div>
-      <div className={classes.functionInfoSectionStyles}>
-        <span
+      </TransformationNameHeadWrapper>
+      <TransformationNameTextInfoWrapper>
+        <SubHeadNormalFont
+          component="span"
           data-testid="selected-function-name"
-          id="selected-function-name"
-          className={classes.functionTextStyles}
-        >
-          {functionName}
-        </span>
-        <span data-testid="selected-function-info" id="selected-function-info">
-          <InfoOutlinedIcon className={classes.infoIcon} />
-        </span>
-      </div>
-    </section>
+        >{transformationName}</SubHeadNormalFont>&nbsp;
+        <PointerBox>
+          {InfoIcon}
+        </PointerBox>
+      </TransformationNameTextInfoWrapper>
+    </TransformationNameBox>
   );
 }

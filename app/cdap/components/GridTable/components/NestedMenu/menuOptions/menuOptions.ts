@@ -15,17 +15,15 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { TOOLBAR_ICONS_LABEL_PREFIX } from 'components/GridTable/components/NestedMenu/menuOptions/constants';
+import { TOOLBAR_ICONS_LABEL_ALL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 import T from 'i18n-react';
 
 export const MENU_OPTIONS = [
   {
     value: 'changeDatatype',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.menu.changeDatatype'
-    ).toString(),
+    label: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.menu.changeDatatype`).toString(),
     options: DATATYPE_OPTIONS,
-    supported_dataType: [
-      T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
-    ],
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
 ];

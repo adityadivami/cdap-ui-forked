@@ -14,12 +14,10 @@
  * the License.
  */
 
-import { Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
-import { useStyles } from 'components/AddTransformation/styles';
 import {
   IAddTransformationProps,
   IHeaderNamesList,
@@ -28,22 +26,30 @@ import {
   ITransformationComponentValues,
 } from 'components/AddTransformation/types';
 import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
-import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import {
+  multipleColumnSelected,
+  ADD_TRANSFORMATION_PREFIX,
+} from 'components/AddTransformation/constants';
+import {
+  AddTransformationBodyWrapper,
+  AddTransformationWrapper,
+} from 'components/common/BoxContainer';
+import { AddTransformationButton } from 'components/common/ButtonWidget';
 import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
 import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
-import ButtonWidget from 'components/AddTransformation/ButtonWidget';
 import { getDirective } from 'components/AddTransformation/utils';
 import { transformationComponentDefaultValues } from 'components/AddTransformation/constants';
-import TransformationContent from 'components/GridTable/components/TransformationComponents';
-import { TRANSFORMATION_COMPONENTS } from 'components/GridTable/constants';
+import TransformationContent from 'components/TransformationComponents';
+import { TRANSFORMATION_COMPONENTS } from 'components/TransformationComponents/constants';
+import { Divider } from '@material-ui/core';
 
 export default function({
-  transformationFunctionSupportedDataType,
-  functionName,
-  columnData,
-  missingDataList,
-  callBack,
+  transformationDataType,
+  transformationName,
+  columnsList,
+  missingItemsList,
+  onCancel,
   applyTransformation,
 }: IAddTransformationProps) {
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
@@ -53,9 +59,9 @@ export default function({
   const [transformationComponentValues, setTransformationComponentsValue] = useState<
     ITransformationComponentValues
   >(transformationComponentDefaultValues);
-  const classes = useStyles();
+
   const closeClickHandler = () => {
-    callBack();
+    onCancel();
     setDrawerStatus(false);
   };
 
@@ -76,7 +82,7 @@ export default function({
 
   const handleApply = () => {
     const directive: string | null = getDirective(
-      functionName,
+      transformationName,
       selectedColumns[0].label,
       transformationComponentValues
     );
@@ -85,7 +91,10 @@ export default function({
   };
 
   useEffect(() => {
-    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(missingDataList, columnData);
+    const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(
+      missingItemsList,
+      columnsList
+    );
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
@@ -93,14 +102,14 @@ export default function({
     if (
       multipleColumnSelected.filter(
         (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === functionName && !functionNameDetail.isMoreThanTwo
+          functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
       )?.length
     ) {
       return selectedColumns?.length === 2 ? false : true;
     } else if (
       multipleColumnSelected.filter(
         (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === functionName && functionNameDetail.isMoreThanTwo
+          functionNameDetail.value === transformationName && functionNameDetail.isMoreThanTwo
       )?.length
     ) {
       return selectedColumns?.length >= 1 ? false : true;
@@ -109,82 +118,77 @@ export default function({
     }
   };
 
-  const isComponentAvailable = TRANSFORMATION_COMPONENTS.some((item) => item.type === functionName);
+  const isComponentAvailable = TRANSFORMATION_COMPONENTS.some((item) => item.type === transformationName);
 
   return (
     <Fragment>
       <DrawerWidget
-        headingText={T.translate(
-          'features.WranglerNewUI.GridPage.addTransformationPanel.addTransformation'
-        )}
+        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.addTransformation`)}
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
       >
-        <Container className={classes.addTransformationBodyStyles}>
-          <div className={classes.addTransformationBodyWrapperStyles}>
+        <AddTransformationWrapper>
+          <AddTransformationBodyWrapper>
             <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
-            <FunctionNameWidget functionName={functionName} />
+            <Divider />
+            <FunctionNameWidget transformationName={transformationName} />
             <SelectColumnsWidget
               handleSelectColumn={handleSelectColumn}
               selectedColumns={selectedColumns}
-              functionName={functionName}
+              transformationName={transformationName}
             />
             {isComponentAvailable && (
               <TransformationContent
                 setTransformationComponentsValue={setTransformationComponentsValue}
                 transformationComponent={TRANSFORMATION_COMPONENTS}
                 transformationComponentValues={transformationComponentValues}
-                functionName={functionName}
-                transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
-                columnData={columnData}
-                missingDataList={missingDataList}
-                callBack={callBack}
+                transformationName={transformationName}
+                transformationDataType={transformationDataType}
+                columnsList={columnsList}
+                missingItemsList={missingItemsList}
+                onCancel={onCancel}
                 applyTransformation={applyTransformation}
               />
             )}
-          </div>
-          <ButtonWidget
-            buttonText={T.translate(
-              'features.WranglerNewUI.GridPage.addTransformationPanel.applyStep'
-            ).toString()}
-            className={classes.applyStepButtonStyles}
-            onClick={handleApply}
-            variant="contained"
+          </AddTransformationBodyWrapper>
+          <AddTransformationButton
             disabled={selectedColumns?.length ? false : true}
-            buttonId="apply-step-button"
-          />
-        </Container>
+            color="primary"
+            data-testid="apply-step-button"
+            onClick={handleApply}
+          >
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.applyStep`)}
+          </AddTransformationButton>
+        </AddTransformationWrapper>
       </DrawerWidget>
       <DrawerWidget
-        headingText={T.translate(
-          'features.WranglerNewUI.GridPage.addTransformationPanel.selectColumnPara'
-        )}
+        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
       >
-        <Container className={classes.addTransformationBodyStyles}>
-          <div className={classes.addTransformationBodyWrapperStyles}>
+        <AddTransformationWrapper>
+          <AddTransformationBodyWrapper>
             <SelectColumnsList
-              columnData={columnData}
+              columnsList={columnsList}
               selectedColumnsCount={selectedColumns.length}
               setSelectedColumns={setSelectedColumns}
               dataQuality={dataQualityValue}
-              transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
-              functionName={functionName}
+              transformationDataType={transformationDataType}
+              transformationName={transformationName}
+              selectedColumns={selectedColumns}
             />
-          </div>
-          <ButtonWidget
-            buttonText={T.translate(
-              'features.WranglerNewUI.GridPage.addTransformationPanel.done'
-            ).toString()}
-            className={classes.applyStepButtonStyles}
-            onClick={closeSelectColumnsPopup}
+          </AddTransformationBodyWrapper>
+          <AddTransformationButton
             variant="contained"
             disabled={enableDoneButton()}
-            buttonId="done-step-button"
-          />
-        </Container>
+            color="primary"
+            data-testid="button_apply"
+            onClick={closeSelectColumnsPopup}
+          >
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}
+          </AddTransformationButton>
+        </AddTransformationWrapper>
       </DrawerWidget>
     </Fragment>
   );

@@ -14,10 +14,4 @@
  * the License.
  */
 
-import CustomTransform from './components/TransformationComponents/CustomTransform';
-export const TRANSFORMATION_COMPONENTS = [
-  {
-    type: 'customTransform',
-    component: CustomTransform,
-  },
-];
+export const transformationOptions = ['undo', 'redo'];

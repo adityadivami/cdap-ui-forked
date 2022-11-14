@@ -15,23 +15,28 @@
  */
 
 import React from 'react';
-import { useStyles } from 'components/AddTransformation/styles';
 import T from 'i18n-react';
 import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
+import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
+import { NormalFont } from 'components/common/TypographyText';
+import { SelectColumnWidgetBox } from 'components/common/BoxContainer';
 
 export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
-  const classes = useStyles();
+  const text = selectedColumnsCount
+    ? selectedColumnsCount > 10
+      ? selectedColumnsCount
+      : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.zero`)}${selectedColumnsCount} ${T.translate(
+          `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
+        )}`
+    : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)} ${T.translate(
+        `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
+      )}`;
 
   return (
-    <div className={classes.columnsCountTextStyles}>
-      {selectedColumnsCount
-        ? selectedColumnsCount > 10
-          ? selectedColumnsCount
-          : `${T.translate(
-              'features.WranglerNewUI.GridPage.selectColumnListPanel.zero'
-            )}${selectedColumnsCount}`
-        : `${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.no')}`}
-      &nbsp;{T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected')}
-    </div>
+    <SelectColumnWidgetBox>
+      <NormalFont component="p" dataTestId="no-column-title">
+        {text}
+      </NormalFont>
+    </SelectColumnWidgetBox>
   );
 }

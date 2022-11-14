@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '20px !important',
   },
   errorHead: {
-    color: '#E97567',
+    color: grey[900],
     fontSize: '20px !important',
   },
   dismissSpan: {

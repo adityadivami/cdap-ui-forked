@@ -14,9 +14,7 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { useStyles } from 'components/AddTransformation/styles';
 import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
@@ -26,25 +24,36 @@ import ColumnTable from 'components/AddTransformation/ColumnTable';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
+import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
+import {
+  SelectColumnWrapper,
+  SelectColumnInnerWrapper,
+  PointerBox,
+  FlexWrapper,
+  CenterAlignBox,
+  SelectColumnSearchBox,
+} from 'components/common/BoxContainer';
+import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
+import { SelectColumnSearchInput } from 'components/common/InputFieldComponent';
 
 export default function({
-  transformationFunctionSupportedDataType,
+  transformationDataType,
   selectedColumnsCount,
-  columnData,
+  columnsList,
   setSelectedColumns,
   dataQuality,
-  functionName,
+  transformationName,
+  selectedColumns,
 }: ISelectColumnsListProps) {
-  const [columns, setColumns] = useState<IHeaderNamesList[]>(columnData);
-  const [selectedColumns, setSelectedColumn] = useState<IHeaderNamesList[]>([]);
+  const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
-  const classes = useStyles();
   const ref = useRef(null);
 
   useEffect(() => {
     const multiSelect: IMultipleSelectedFunctionDetail[] = multipleColumnSelected?.filter(
-      (functionDetail: IMultipleSelectedFunctionDetail) => functionDetail.value === functionName
+      (functionDetail: IMultipleSelectedFunctionDetail) =>
+        functionDetail.value === transformationName
     );
     if (multiSelect.length) {
       setIsSingleSelection(false);
@@ -52,22 +61,16 @@ export default function({
   }, []);
 
   const columnsAsPerType: IHeaderNamesList[] | string[] =
-    transformationFunctionSupportedDataType?.length > 0 &&
-    transformationFunctionSupportedDataType?.includes('all')
-      ? transformationFunctionSupportedDataType?.filter(
-          (supportedType: string) => supportedType === 'all'
-        )
+    transformationDataType?.length > 0 && transformationDataType?.includes('all')
+      ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
       : columns?.filter((columnDetail: IHeaderNamesList) => {
-          return transformationFunctionSupportedDataType?.some(
-            (dataTypeCollection: string | string[]) => {
-              return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
-            }
-          );
+          return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+            return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+          });
         });
 
   const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
-    setSelectedColumn([column]);
   };
 
   const onMultipleSelection = (
@@ -76,14 +79,12 @@ export default function({
   ) => {
     if (event.target.checked) {
       setSelectedColumns((prev) => [...prev, column]);
-      setSelectedColumn([...selectedColumns, column]);
     } else {
       const indexOfUnchecked = selectedColumns.findIndex(
         (columnDetail) => columnDetail.label === column.label
       );
       if (indexOfUnchecked > -1) {
         setSelectedColumns(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
-        setSelectedColumn(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
       }
     }
   };
@@ -91,9 +92,9 @@ export default function({
   const handleDisableCheckbox = () => {
     const multiSelect: IMultipleSelectedFunctionDetail[] = multipleColumnSelected.filter(
       (functionDetail: IMultipleSelectedFunctionDetail) =>
-        functionDetail.value === functionName && functionDetail.isMoreThanTwo
+        functionDetail.value === transformationName && functionDetail.isMoreThanTwo
     );
-    if (selectedColumns.length === 0 || selectedColumns.length < 2) {
+    if (selectedColumns?.length === 0 || selectedColumns?.length < 2) {
       return false;
     } else if (multiSelect.length) {
       return false;
@@ -104,8 +105,8 @@ export default function({
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue: IHeaderNamesList[] = columnData.length
-        ? columnData.filter((columnDetail: IHeaderNamesList) =>
+      const columnValue: IHeaderNamesList[] = columnsList.length
+        ? columnsList.filter((columnDetail: IHeaderNamesList) =>
             columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
           )
         : [];
@@ -115,7 +116,7 @@ export default function({
         setColumns([]);
       }
     } else {
-      setColumns(columnData);
+      setColumns(columnsList);
     }
   };
 
@@ -125,41 +126,34 @@ export default function({
   };
 
   return (
-    <section className={classes.columnsCountTextStyles}>
-      <div className={classes.selectColumnsHeaderStyles}>
+    <SelectColumnWrapper dataTestId="select-column-list-parent">
+      <SelectColumnInnerWrapper>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
-        <div className={classes.searchFormControl}>
-          <input
+        <SelectColumnSearchBox>
+          <SelectColumnSearchInput
             data-testid="input_id"
-            className={focused ? classes.isFocused : classes.isBlurred}
             onChange={handleSearch}
             ref={ref}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
           />
-          <Box
-            className={classes.searchInputAdornment}
-            onClick={handleFocus}
-            data-testid="click-handle-focus"
-          >
+          <PointerBox onClick={handleFocus} data-testid="click-handle-focus">
             {SearchIcon}
-          </Box>
-        </div>
-      </div>
+          </PointerBox>
+        </SelectColumnSearchBox>
+      </SelectColumnInnerWrapper>
       {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <Box className={classes.noRecordWrapper}>
-          <Box className={classes.innerWrapper}>
+        <FlexWrapper>
+          <CenterAlignBox>
             {NoDataSVG}
-            <Typography component="div" className={classes.mainHeaderMessage}>
-              {T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.noColumns')}
-            </Typography>
-            <Typography component="div" className={classes.subHeaderMessage}>
-              {T.translate(
-                'features.WranglerNewUI.GridPage.selectColumnListPanel.noMatchColumnDatatype'
-              )}
-            </Typography>
-          </Box>
-        </Box>
+            <SubHeadBoldFont component="p" dataTestId="no-column-title">
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
+            </SubHeadBoldFont>
+            <NormalFont component="p" dataTestId="no-column-subTitle">
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
+            </NormalFont>
+          </CenterAlignBox>
+        </FlexWrapper>
       ) : (
         <ColumnTable
           dataQualityValue={dataQuality}
@@ -167,11 +161,14 @@ export default function({
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
           columns={columns}
-          transformationFunctionSupportedDataType={transformationFunctionSupportedDataType}
+          transformationDataType={transformationDataType}
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
+          totalColumnCount={columnsList?.length}
+          setSelectedColumns={setSelectedColumns}
+          transformationName={transformationName}
         />
       )}
-    </section>
+    </SelectColumnWrapper>
   );
 }

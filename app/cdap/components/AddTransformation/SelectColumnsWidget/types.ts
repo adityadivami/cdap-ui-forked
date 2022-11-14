@@ -17,6 +17,6 @@ import { IHeaderNamesList } from 'components/AddTransformation/types';
 
 export interface ISelectColumnsWidgetProps {
   selectedColumns: IHeaderNamesList[];
-  functionName: string;
+  transformationName: string;
   handleSelectColumn: (value: boolean) => void;
 }
