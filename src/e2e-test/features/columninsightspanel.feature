@@ -22,12 +22,11 @@ Feature: ColumnInsightsPanel
     Given Navigate to Home Page
     Then Click on the Data Explorations card
     Then Click on any column from grid table
-    Then Verify if user changes the column name as "sudha"
     Then Click on the Cross icon
-    Then verify if edited name as "sudha" displayed for column
     Then Click on any column from grid table
     Then Verify if user changes the data type
     Then verify if selected datatype is displayed for column as per "<id>"
+
     Examples:
     | id |
     | 1 |

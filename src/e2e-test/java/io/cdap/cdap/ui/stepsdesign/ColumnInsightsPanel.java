@@ -24,9 +24,6 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
 
 public class ColumnInsightsPanel {
     @Given("Navigate to Home Page")
@@ -58,39 +55,6 @@ public class ColumnInsightsPanel {
         }
     }
 
-    @Then("Verify if user changes the column name as {string}")
-    public void verifyIfUserChangesTheColumnName(String inputValue) {
-        try {
-            WaitHelper.waitForPageToLoad();
-           WebElement edit = Helper.locateElementByTestId("edit-icon");
-            Actions action = new Actions(SeleniumDriver.getDriver());
-            action.moveToElement(edit).perform();
-            boolean flag = edit.isEnabled();
-            System.out.println(flag);
-            boolean test = edit.isSelected();
-            System.out.println(test);
-            edit.click();
-           boolean check1= edit.isSelected();
-            System.out.println(check1);
-            Helper.locateElementByXPath("//input[@data-testid='column-name-edit-input']").click();
-            Helper.locateElementByXPath("//input[@data-testid='column-name-edit-input']").clear();
-            Helper.locateElementByXPath("//input[@data-testid='column-name-edit-input']").sendKeys(inputValue);
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("edit-icon"));
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
-    @Then("verify if edited name as {string} displayed for column")
-    public void editedNameDisplayed(String inputValue) {
-        try {
-            String edited = Helper.locateElementByTestId("grid-header-cell-" + inputValue).getText();
-            Assert.assertEquals(edited, inputValue);
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
     @Then("Verify if user changes the data type")
     public void verifyIfUserChangesTheDataType() {
         try {
@@ -108,9 +72,9 @@ public class ColumnInsightsPanel {
         try {
             String text = Helper.locateElementByTestId("input-select-column-insights").getText();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("input-select-column-insights"));
-            String edited = Helper.locateElementByTestId("select-" + id ).getText();
+            String edited = Helper.locateElementByTestId("select-" + id).getText();
             if (edited.equals(text)) {
-                ElementHelper.clickOnElement(Helper.locateElementByTestId("drawer-widget-close-round-icon"));
+                ElementHelper.clickOnElement(Helper.locateElementByTestId("close-icon"));
                 String columnType = Helper.locateElementByTestId("typography-component-" + edited).getText();
                 Assert.assertEquals(columnType, edited);
             }
@@ -123,7 +87,7 @@ public class ColumnInsightsPanel {
     public void clickOnTheCrossIcon() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("drawer-widget-close-round-icon"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("close-icon"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
