@@ -55,7 +55,7 @@ export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
         />
       </Box>
       <div>
-        <ToggleButton dataQuality={dataQuality} columnInfo={columnInfo} />
+        <ToggleButton dataQuality={dataQuality} />
       </div>
     </div>
   );

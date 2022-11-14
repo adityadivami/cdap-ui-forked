@@ -29,6 +29,7 @@ describe('It Should test ColumnDatQuality Component', () => {
     );
     const columnDataQualityParent = screen.getByTestId(/column-data-quality-parent/i);
     expect(columnDataQualityParent).toBeInTheDocument();
+
     const qualityText = screen.getByTestId(/quality-text/i);
     expect(qualityText).toHaveTextContent('features.NewWranglerUI.ColumnInsights.quality');
   });
@@ -66,5 +67,23 @@ describe('It Should test ColumnDatQuality Component', () => {
 
     const filledQualityBar = screen.getByTestId(/filled/i);
     expect(filledQualityBar).toHaveStyle('width:0%');
+  });
+
+  it('Should test whether ToggleButton is in the Document ', () => {
+    render(
+      <ColumnDataQuality
+        dataQuality={mockDataQuality}
+        columnInfo={{
+          general: {
+            null: 50,
+          },
+          types: {
+            Text: 16.666668,
+          },
+        }}
+      />
+    );
+    const toggleButton = screen.getByTestId(/data-quality-toggle-parent/i);
+    expect(toggleButton).toBeInTheDocument();
   });
 });

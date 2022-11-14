@@ -40,7 +40,7 @@ export default function({ dataQuality }: IDataQualityProps) {
   const classes = useStyles();
   const [isSelected, setIsSelected] = useState<number>(0);
   return (
-    <StyledDataQualityBox>
+    <StyledDataQualityBox data-testid={'data-quality-toggle-parent'}>
       <ToggleButton
         type={'left'}
         setIsSelected={setIsSelected}

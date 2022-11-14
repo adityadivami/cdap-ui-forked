@@ -13,3 +13,53 @@
  *  License for the specific language governing permissions and limitations under
  *  the License.
  */
+
+import { fireEvent, render, screen, within } from '@testing-library/react';
+import { mockClasses, mockOptions } from 'components/ColumnInsights/mock/mockDataForColumnInsights';
+import React from 'react';
+import InputSelect from 'components/ColumnInsights/Components/InputSelect';
+
+describe('It Should test InputSelect Component', () => {
+  it('should test whether InputSelect Component is rendered.', () => {
+    render(
+      <InputSelect
+        options={mockOptions}
+        value={'boolean'}
+        onChange={jest.fn()}
+        classes={mockClasses}
+        className={'makeStyles-selectFieldStyles-510'}
+        fullWidth={false}
+        optionClassName={{
+          root: 'makeStyles-optionStyles-511',
+        }}
+        defaultValue={'string'}
+        type={'column-insights'}
+      />
+    );
+    const inputElement = screen.getByTestId(/input-select/i);
+    expect(inputElement).toBeInTheDocument();
+  });
+  it('should test whether MenuItem has the expected label which is selected', () => {
+    const { getByRole } = render(
+      <InputSelect
+        options={mockOptions}
+        value={'boolean'}
+        onChange={jest.fn()}
+        classes={mockClasses}
+        className={'makeStyles-selectFieldStyles-510'}
+        fullWidth={false}
+        optionClassName={{
+          root: 'makeStyles-optionStyles-511',
+        }}
+        defaultValue={'string'}
+        type={'column-insights'}
+      />
+    );
+    fireEvent.mouseDown(getByRole('button'));
+    const listbox = within(getByRole('listbox'));
+    const longText = listbox.getByText(/Long/i);
+    fireEvent.click(longText);
+    const selectOption = screen.getByTestId(/select-option-Long/i);
+    expect(selectOption).toHaveTextContent('Long');
+  });
+});

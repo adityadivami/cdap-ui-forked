@@ -15,8 +15,8 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
 import ColumnDetails from 'components/ColumnInsights/Components/ColumnDetails';
+import React from 'react';
 
 describe('It Should test ColumnDetails Component', () => {
   it('Should render ColumnDetails Component and check the parent div is in the Document and column name is as expected', () => {
@@ -83,7 +83,7 @@ describe('It Should test ColumnDetails Component', () => {
       'features.NewWranglerUI.ColumnInsights.invalidInputErrorMessage'
     );
   });
-  it('Should test the input field when valid and invalid inputs are provided and trigerring onEnter().', () => {
+  it('Should test inputField when onBlur event is triggered and the new column name is different', () => {
     render(
       <ColumnDetails
         columnName={'body_2'}
@@ -95,18 +95,15 @@ describe('It Should test ColumnDetails Component', () => {
         columnType={'String'}
       />
     );
-
     const editIcon = screen.getByTestId(/edit-icon/i);
     fireEvent.click(editIcon);
 
     const inputField = screen.getByTestId(/column-name-edit-input/i);
     expect(inputField).toBeInTheDocument();
-
-    fireEvent.change(inputField, { target: { value: 'body_10' } }); // When valid input is given
-    inputField.blur();
+    fireEvent.change(inputField, { target: { value: 'body_10' } });
+    fireEvent.blur(inputField);
   });
-
-  it('Should test the Select Menu and trigger handleDataTypeChange', () => {
+  it('Should test inputField when onBlur event is triggered and the new column name is same', () => {
     render(
       <ColumnDetails
         columnName={'body_2'}
@@ -118,11 +115,31 @@ describe('It Should test ColumnDetails Component', () => {
         columnType={'String'}
       />
     );
+    const editIcon = screen.getByTestId(/edit-icon/i);
+    fireEvent.click(editIcon);
+    const inputField = screen.getByTestId(/column-name-edit-input/i);
+    expect(inputField).toBeInTheDocument();
+    fireEvent.change(inputField, { target: { value: 'body_2' } });
+    fireEvent.blur(inputField);
+  });
 
-    const inputSelect = screen.getByTestId('datatype-input-select');
-    expect(inputSelect).toBeInTheDocument();
-    fireEvent.click(inputSelect);
-    const inputSelectElement = screen.getByTestId(/select-1/i);
-    expect(inputSelectElement).toBeInTheDocument();
+  it('Should test inputField when onBlur event is triggered with invalid column Name', () => {
+    render(
+      <ColumnDetails
+        columnName={'body_2'}
+        characterCount={'0-8'}
+        distinctValues={3}
+        dataTypeString={'Contains letters and numbers'}
+        renameColumnNameHandler={jest.fn()}
+        dataTypeHandler={jest.fn()}
+        columnType={'String'}
+      />
+    );
+    const editIcon = screen.getByTestId(/edit-icon/i);
+    fireEvent.click(editIcon);
+    const inputField = screen.getByTestId(/column-name-edit-input/i);
+    expect(inputField).toBeInTheDocument();
+    fireEvent.change(inputField, { target: { value: 'body_2**' } });
+    fireEvent.blur(inputField);
   });
 });

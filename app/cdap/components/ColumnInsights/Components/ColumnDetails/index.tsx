@@ -72,9 +72,11 @@ export default function({
     if (invalidInput) {
       setCanEdit(true);
     } else {
-      setCanEdit(false);
-      if (e.target.value !== columnName && !invalidInput) {
+      if (e.target.value !== columnName) {
+        setCanEdit(false);
         renameColumnNameHandler(columnName, e.target.value);
+      } else {
+        setCanEdit(false);
       }
     }
     setCanEdit(false);
@@ -84,6 +86,8 @@ export default function({
     if ((e.target as HTMLInputElement).value !== columnName && !invalidInput && e.keyCode === 13) {
       renameColumnNameHandler(columnName, (e.target as HTMLInputElement).value);
       setCanEdit(false);
+    } else {
+      setCanEdit(true);
     }
   };
   return (
@@ -96,6 +100,7 @@ export default function({
             onChange={(e) => onChangeHandler(e)}
             onKeyDown={(e) => onEnter(e)}
             data-testid="column-name-edit-input"
+            autoFocus
           />
         ) : (
           <RenderLabel fontSize={16} dataTestId={'column-name'}>
@@ -126,7 +131,7 @@ export default function({
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleDataTypeChange(e)}
         options={DATATYPE_OPTIONS}
         fullWidth={false}
-        dataTestId={'datatype-input-select'}
+        type={'column-insights'}
       />
       <section className={classes.columnInsightsDetailsWrapper}>
         <div className={classes.columnInsightsDetailsCountSection}>

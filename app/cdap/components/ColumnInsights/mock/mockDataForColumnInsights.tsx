@@ -161,3 +161,47 @@ export const mockColumnInfoForDataQuality = {
     Text: 16.666668,
   },
 };
+
+export const mockOptions = [
+  {
+    value: 'string',
+    label: 'String',
+  },
+  {
+    value: 'boolean',
+    label: 'Boolean',
+  },
+  {
+    value: 'int',
+    label: 'Integer',
+  },
+  {
+    value: 'long',
+    label: 'Long',
+  },
+  {
+    value: 'short',
+    label: 'Short',
+  },
+  {
+    value: 'float',
+    label: 'Float',
+  },
+  {
+    value: 'double',
+    label: 'Double',
+  },
+  {
+    value: 'decimal',
+    label: 'Decimal',
+  },
+  {
+    value: 'bytes',
+    label: 'Bytes',
+  },
+];
+
+export const mockClasses = {
+  icon: 'makeStyles-selectIconStyles-512',
+  select: 'makeStyles-selectStyles-513',
+};

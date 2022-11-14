@@ -13,12 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-import { IRecords } from 'components/GridTable/types';
-
 export interface IDataQualityProps {
   dataQuality: IDataQuality;
-  columnInfo: IRecords;
 }
 
 interface IDataQuality {

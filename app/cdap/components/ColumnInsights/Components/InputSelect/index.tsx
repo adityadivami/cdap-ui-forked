@@ -14,9 +14,10 @@
  * the License.
  */
 
-import React from 'react';
 import { MenuItem, Select } from '@material-ui/core';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
 import { IInputSelect, IOption } from 'components/ColumnInsights/Components/InputSelect/types';
+import React from 'react';
 
 export default function({
   options,
@@ -27,7 +28,7 @@ export default function({
   fullWidth,
   optionClassName,
   defaultValue,
-  dataTestId,
+  type,
 }: IInputSelect) {
   return (
     <Select
@@ -45,7 +46,7 @@ export default function({
         },
         getContentAnchorEl: null,
       }}
-      data-testid={dataTestId}
+      data-testid={`input-select-${type}`}
     >
       {options &&
         Array.isArray(options) &&
@@ -58,7 +59,9 @@ export default function({
               key={option.value}
               data-testid={`select-${index}`}
             >
-              {option.label}
+              <RenderLabel dataTestId={`select-option-${option.label}`}>
+                <>{option.label}</>
+              </RenderLabel>
             </MenuItem>
           );
         })}
