@@ -14,13 +14,13 @@
  * the License.
  */
 
-import { Box, Button, Container, Drawer } from '@material-ui/core';
-import React, { Fragment } from 'react';
-import { useStyles } from 'components/DrawerWidget/styles';
+import { Box, Button, Container, Drawer, IconButton } from '@material-ui/core';
+import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
+import { useStyles } from 'components/DrawerWidget/styles';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
-import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
+import React, { Fragment } from 'react';
 
 export default function({
   headingText,
@@ -45,28 +45,28 @@ export default function({
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && (
-              <Button
+              <IconButton
                 aria-label="back-icon"
                 data-testid="back-icon"
                 onClick={closeClickHandler}
                 className={classes.headerBackIconStyles}
               >
                 <ChevronLeftRoundedIcon fontSize="large" />
-              </Button>
+              </IconButton>
             )}
             <DrawerWidgetHeading headingText={headingText} />
           </div>
           <Box className={classes.headerRightStyles}>
             {headerActionTemplate && <div>{headerActionTemplate}</div>}
             {showDivider && <div className={classes.dividerLineStyles} />}
-            <Button
+            <IconButton
               data-testid="close-icon"
               aria-label="close-icon"
               className={classes.closeButtonStyle}
               onClick={closeClickHandler}
             >
               <CloseRoundedIcon color="action" fontSize="large" />
-            </Button>
+            </IconButton>
           </Box>
         </header>
         <Fragment>{children}</Fragment>

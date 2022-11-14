@@ -14,17 +14,17 @@
  * the License.
  */
 
-import { DATATYPE_OPTIONS } from 'components/ColumnInsights/options';
-import React, { useState } from 'react';
-import { useStyles } from 'components/ColumnInsights/Components/ColumnDetails/styles';
-import EditIcon from '@material-ui/icons/Edit';
-import { Box, Button } from '@material-ui/core';
-import InputSelect from 'components/ColumnInsights/Components/InputSelect';
-import { IColumnDetailsProps } from 'components/ColumnInsights/Components/ColumnDetails/types';
-import T from 'i18n-react';
-import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
+import { IconButton } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
+import EditIcon from '@material-ui/icons/Edit';
+import { useStyles } from 'components/ColumnInsights/Components/ColumnDetails/styles';
+import { IColumnDetailsProps } from 'components/ColumnInsights/Components/ColumnDetails/types';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
+import InputSelect from 'components/ColumnInsights/Components/InputSelect';
 import { PREFIX } from 'components/ColumnInsights/constants';
+import { DATATYPE_OPTIONS } from 'components/ColumnInsights/options';
+import T from 'i18n-react';
+import React, { useState } from 'react';
 
 export default function({
   columnName,
@@ -111,14 +111,14 @@ export default function({
             <> {inputValue}</>
           </RenderLabel>
         )}
-        <Button
+        <IconButton
           onClick={editHandler}
           className={classes.editIcon}
           aria-label="edit-icon"
           data-testid="edit-icon"
         >
           <EditIcon />
-        </Button>
+        </IconButton>
       </div>
       {invalidInput && (
         <div>
