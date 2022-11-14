@@ -72,6 +72,7 @@ export interface IInsightDrawer {
   dataQualityBar: {};
   dataTypeString: string;
   dataDistributionGraphData: IdataDistributionGraphData[];
+  columnNamesList: string[];
 }
 
 interface IdataDistributionGraphData {

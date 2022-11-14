@@ -34,6 +34,7 @@ export default function({
   renameColumnNameHandler,
   dataTypeHandler,
   columnType,
+  columnHeader,
 }: IColumnDetailsProps) {
   const defaultValueProvided =
     DATATYPE_OPTIONS &&
@@ -47,7 +48,11 @@ export default function({
   const [invalidInput, setInvalidInput] = useState<boolean>(false);
 
   const checkForInvalidInput = (renamedString: string) => {
-    if (!/^\w+$/.test(renamedString)) {
+    if (
+      !/^\w+$/.test(renamedString) ||
+      columnHeader.includes(renamedString) ||
+      renamedString === ''
+    ) {
       setInvalidInput(true);
     } else {
       setInvalidInput(false);
@@ -79,7 +84,6 @@ export default function({
         setCanEdit(false);
       }
     }
-    setCanEdit(false);
   };
 
   const onEnter = (e: React.KeyboardEvent<HTMLElement>) => {

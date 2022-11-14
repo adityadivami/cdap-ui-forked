@@ -62,6 +62,7 @@ export default function({
         dataTypeString={
           columnDetail?.dataTypeString || T.translate(`${PREFIX}.containsLetter`).toString()
         }
+        columnHeader={columnData.columnNamesList}
       />
       <ColumnDataQuality
         dataQuality={columnDetail?.dataQuality}

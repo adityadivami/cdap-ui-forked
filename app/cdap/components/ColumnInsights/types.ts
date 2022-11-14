@@ -33,6 +33,7 @@ export interface IColumnData {
   dataQualityBar: {};
   dataTypeString: string;
   dataDistributionGraphData: IRecords[];
+  columnNamesList: string[];
 }
 
 interface ICharacterCount {
