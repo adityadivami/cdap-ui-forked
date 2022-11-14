@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
+import { Box, Button, Container, Drawer } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
@@ -45,23 +45,28 @@ export default function({
         <header className={classes.headerStyles}>
           <div className={classes.headerTextWithBackIconStyles}>
             {showBackIcon && (
-              <ChevronLeftRoundedIcon
+              <Button
+                aria-label="back-icon"
+                data-testid="back-icon"
                 onClick={closeClickHandler}
                 className={classes.headerBackIconStyles}
-              />
+              >
+                <ChevronLeftRoundedIcon fontSize="large" />
+              </Button>
             )}
             <DrawerWidgetHeading headingText={headingText} />
           </div>
           <Box className={classes.headerRightStyles}>
             {headerActionTemplate && <div>{headerActionTemplate}</div>}
             {showDivider && <div className={classes.dividerLineStyles} />}
-            <CloseRoundedIcon
-              className={classes.pointerStyles}
-              color="action"
-              fontSize="large"
+            <Button
+              data-testid="close-icon"
+              aria-label="close-icon"
+              className={classes.closeButtonStyle}
               onClick={closeClickHandler}
-              data-testid="drawer-widget-close-round-icon"
-            />
+            >
+              <CloseRoundedIcon color="action" fontSize="large" />
+            </Button>
           </Box>
         </header>
         <Fragment>{children}</Fragment>

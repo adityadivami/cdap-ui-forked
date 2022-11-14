@@ -23,5 +23,19 @@ export interface IColumnDataQualityProps {
     emptyValueCount: number;
     emptyValuePercentage: number;
   };
-  columnInfo: IRecords;
+  columnInfo: any | {}; // Need to fix
+}
+interface IColumnInfo {
+  general: IGeneral;
+  types: ITypes;
+}
+
+interface ITypes {
+  [key: string]: number | string;
+}
+
+interface IGeneral {
+  'non-null': number;
+  null: number;
+  empty: number;
 }

@@ -22,7 +22,7 @@ import { Route, Router, Switch } from 'react-router';
 import { mockGraphData } from 'components/ColumnInsights/mock/mockDataForColumnInsights';
 
 describe('It Should test Column Data Distribution Component', () => {
-  it('Should test whether  Column Data Distribution Component is rendered in the screen and the graph label is as expected', () => {
+  it('Should test whether  Column Data Distribution Component is rendered in the screen and the Graph label is as expected.', () => {
     render(
       <Router history={history}>
         <Switch>
@@ -38,7 +38,7 @@ describe('It Should test Column Data Distribution Component', () => {
     );
   });
 
-  it('should test whether View Full chart Text is as expected.', () => {
+  it('Should test whether View Full Chart Text is as expected.', () => {
     render(
       <Router history={history}>
         <Switch>
@@ -54,7 +54,7 @@ describe('It Should test Column Data Distribution Component', () => {
     );
   });
 
-  it('should test whether Data Distribution Graph is rendered in the Screen.', () => {
+  it('Should test whether Data Distribution Graph is rendered in the Screen.', () => {
     render(
       <Router history={history}>
         <Switch>

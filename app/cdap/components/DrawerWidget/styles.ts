@@ -42,8 +42,11 @@ export const useStyles = makeStyles(() => {
       flexDirection: 'column',
       alignItems: 'flex-start',
     },
-    pointerStyles: {
+    closeButtonStyle: {
       cursor: 'pointer',
+      display: 'flex',
+      justifyContent: 'flex-end !important',
+      padding: '0px 0px',
     },
     headingTextStyles: {
       fontFamily: 'Noto Sans',

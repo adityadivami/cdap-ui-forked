@@ -62,7 +62,7 @@ describe('It Should test Column Insights Component', () => {
       </Router>
     );
     const columnInsightsPanel = screen.getByTestId(/column-insights-panel/i);
-    const closeIcon = screen.getByTestId(/drawer-widget-close-round-icon/i);
+    const closeIcon = screen.getByTestId(/close-icon/i);
     fireEvent.click(closeIcon);
     expect(columnInsightsPanel).not.toBeInTheDocument();
   });

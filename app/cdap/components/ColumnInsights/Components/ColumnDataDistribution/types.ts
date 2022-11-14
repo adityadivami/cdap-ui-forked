@@ -14,8 +14,10 @@
  * the License.
  */
 
-import { IRecords } from 'components/GridTable/types';
-
 export interface IColumnDataDistributionProps {
-  graphData: IRecords;
+  graphData: IGraphData[];
+}
+interface IGraphData {
+  text: string;
+  value: number;
 }

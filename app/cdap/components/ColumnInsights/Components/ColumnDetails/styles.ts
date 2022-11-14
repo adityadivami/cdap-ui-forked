@@ -30,6 +30,8 @@ export const useStyles = makeStyles(() => {
     },
     editIcon: {
       cursor: 'pointer',
+      padding: '0px 0px',
+      justifyContent: 'flex-start !important',
     },
     selectFieldStyles: {
       width: 350,

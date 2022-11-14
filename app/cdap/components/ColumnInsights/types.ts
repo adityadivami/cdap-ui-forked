@@ -32,8 +32,13 @@ export interface IColumnData {
   dataQuality: IDataQuality;
   dataQualityBar: {};
   dataTypeString: string;
-  dataDistributionGraphData: IRecords[];
+  dataDistributionGraphData: IGraphData[];
   columnNamesList: string[];
+}
+
+interface IGraphData {
+  text: string;
+  value: number;
 }
 
 interface ICharacterCount {

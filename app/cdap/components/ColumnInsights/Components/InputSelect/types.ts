@@ -23,7 +23,7 @@ export interface IInputSelect {
   classes: { icon: string; select: string };
   className: string;
   fullWidth: boolean;
-  optionClassName: IRecords;
+  optionClassName: { root: string };
   defaultValue: string;
   type: string;
 }
