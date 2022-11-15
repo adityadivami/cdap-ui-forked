@@ -14,28 +14,43 @@
  * the License.
  */
 
-import { IHeaderCustomTooltipLabelProps } from 'components/ConnectionList/types';
+import { Box, Typography } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import { IHeaderCustomTooltipProps } from 'components/ConnectionList/types';
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 
 const RenderLabel = styled(Typography)`
-  font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
-  font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
-  font-size: ${(props) => (props.fontSize ? props.fontSize : '14px')};
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
   line-height: 150%;
-  color: ${(props) => (props.fontColor ? props.fontColor : '#000000')};
+  color: ${grey[900]};
 `;
 
 export default function({
-  columnIndex,
   headersRefs,
+  columnIndex,
+  tabsData,
   filteredData,
-}: IHeaderCustomTooltipLabelProps) {
-  return (
+}: IHeaderCustomTooltipProps) {
+  return headersRefs?.current[columnIndex]?.offsetWidth <
+    headersRefs?.current[columnIndex]?.scrollWidth ? (
+    <CustomTooltip title={tabsData[columnIndex - 1].selectedTab} arrow>
+      <Box>
+        <RenderLabel
+          variant="body2"
+          ref={(element) => {
+            headersRefs.current[columnIndex] = element;
+          }}
+        >
+          {filteredData[columnIndex - 1]?.selectedTab}
+        </RenderLabel>
+      </Box>
+    </CustomTooltip>
+  ) : (
     <RenderLabel
-      fontSize="16px"
-      fontColor="#212121"
       variant="body2"
       ref={(element) => {
         headersRefs.current[columnIndex] = element;

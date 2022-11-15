@@ -15,11 +15,11 @@
  */
 
 import { Box, IconButton } from '@material-ui/core';
+import Close from '@material-ui/icons/Close';
 import SearchRounded from '@material-ui/icons/SearchRounded';
-import Search from 'components/ConnectionList/Components/Search';
-import HeaderLabelWrapper from 'components/ConnectionList/Components/HeaderLabelWrapper';
+import HeaderLabelWrapper from 'components/ConnectionList/Components/Header/Components/HeaderLabelWrapper';
 import { IHeaderContentProps } from 'components/ConnectionList/types';
-import React, { Fragment } from 'react';
+import React, { ChangeEvent, Fragment, MouseEvent } from 'react';
 import styled from 'styled-components';
 
 const ConnectionListHeaderWrapper = styled(Box)`
@@ -29,6 +29,33 @@ const ConnectionListHeaderWrapper = styled(Box)`
   height: 50px;
   padding-right: 18px;
   padding-left: 30px;
+`;
+
+const RenderInput = styled.input`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #000000;
+  width: 100%;
+  background-color: #ffffff;
+  border: none;
+  height: ${(props) => (props.inputHeight ? props.inputHeight : '35px')};
+  outline: 0;
+`;
+
+const SearchInput = styled(RenderInput)`
+  margin-left: 9px;
+`;
+
+const ConnectionListSearchWrapper = styled(Box)`
+  display: ${(props) => (props.toggleSearch ? 'flex' : 'none')};
+  background-color: #fff;
+  align-items: center;
+  height: 50px;
+  padding-right: 20px;
+  padding-left: 18px;
+  text-decoration: none;
 `;
 
 export default function({
@@ -56,14 +83,27 @@ export default function({
           <SearchRounded />
         </IconButton>
       </ConnectionListHeaderWrapper>
-      <Search
-        eachFilteredData={eachFilteredData}
-        columnIndex={columnIndex}
-        refs={refs}
-        makeCursorFocused={makeCursorFocused}
-        handleSearch={handleSearch}
-        handleClearSearch={handleClearSearch}
-      />
+      <ConnectionListSearchWrapper
+        toggleSearch={eachFilteredData.toggleSearch}
+        onMouseOver={() => makeCursorFocused(columnIndex)}
+      >
+        <SearchRounded />
+        <SearchInput
+          inputHeight="21px"
+          type="text"
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleSearch(e, columnIndex)}
+          ref={(e: HTMLInputElement) => {
+            refs.current[columnIndex] = e;
+          }}
+        />
+        <Box
+          onClick={(e: MouseEvent<HTMLInputElement>) => {
+            return handleClearSearch(e, columnIndex);
+          }}
+        >
+          <Close />
+        </Box>
+      </ConnectionListSearchWrapper>
     </Fragment>
   );
 }

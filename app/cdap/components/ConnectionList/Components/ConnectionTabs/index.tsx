@@ -14,7 +14,6 @@
  * the License.
  */
 
-import { styled } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -23,6 +22,7 @@ import { useStyles } from 'components/ConnectionList/Components/ConnectionTabs/s
 import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import { IConnectionTabsProps } from 'components/ConnectionList/types';
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const ConnectionTab = styled(Tab)({
   width: '100%',
@@ -52,6 +52,13 @@ const ConnectionTab = styled(Tab)({
   },
 });
 
+const TabsInnerContainer = styled(Box)`
+  z-index: 1;
+  height: 100%;
+  overflow: scroll;
+  height: calc(100vh - 200px);
+`;
+
 export default function({
   tabsData,
   handleChange,
@@ -78,9 +85,9 @@ export default function({
   };
 
   return (
-    <Box data-testid="connections-tabs-parent" className={classes.connectionsTabsParent}>
+    <Box data-testid="connections-tabs-parent">
       {tabsData?.showTabs && (
-        <div className={classes.boxStyles} data-testid="connection-tabs">
+        <TabsInnerContainer data-testid="connection-tabs">
           <Tabs
             value={value}
             orientation="vertical"
@@ -117,7 +124,7 @@ export default function({
               />
             ))}
           </Tabs>
-        </div>
+        </TabsInnerContainer>
       )}
     </Box>
   );

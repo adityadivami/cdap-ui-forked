@@ -18,14 +18,6 @@ import { makeStyles } from '@material-ui/styles';
 import { blue } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
-  connectionsTabsParent: {
-    overflow: 'scroll',
-    height: 'calc(100vh - 200px)',
-  },
-  boxStyles: {
-    zIndex: 1,
-    height: '100%',
-  },
   tabIndicatorStyles: {
     backgroundColor: blue[500],
     color: 'white !important',
@@ -56,57 +48,5 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: '#EFF0F2',
       cursor: 'default',
     },
-  },
-  labelContainerBox: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  labelsContainer: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    gap: '4px',
-  },
-  labelStyles: {
-    fontSize: '16px',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  labelsContainerCanSample: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    gap: '4px',
-    '&:hover': {
-      '&>.MuiBox-root': {
-        display: 'flex',
-        justifyContent: 'space-between',
-        gap: '10px',
-      },
-    },
-    '&>.MuiBox-root': {
-      display: 'none',
-    },
-  },
-  labelStylesCanSample: {
-    maxWidth: '145px',
-    fontSize: '16px',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  wranglingHover: {
-    display: 'flex',
-    textDecoration: 'none',
-    gap: '10px',
-    outline: 0,
-    border: 0,
-  },
-  wrangleTypography: {
-    color: '#4681F4 !important',
-    fontSize: '14px',
-  },
-  eachConnectionStyle: {
-    width: '100%',
   },
 }));

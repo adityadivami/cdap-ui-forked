@@ -15,16 +15,42 @@
  */
 
 import Box from '@material-ui/core/Box';
+import { blue, grey } from '@material-ui/core/colors';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
-import { ISubHeader } from 'components/ConnectionList/Components/SubHeader/types';
 import Breadcrumb from 'components/GridTable/components/Breadcrumb';
 import T from 'i18n-react';
 import React from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import styled from 'styled-components';
+
+interface ISubHeader {
+  selectedConnection: string;
+}
+
+// const BreadcrumbContainer = styled(Box)`
+//     border-bottom: 1px solid ${grey[300]};
+//     display: flex;
+//     justify-content: space-between;
+//     height: 48px;
+//     align-items: center;
+//     padding-right: 30px;
+//     & .MuiBreadcrumbs-root{
+//       font-size: 14px;
+//       font-weight: 400;
+//     },
+//     & .MuiTypography-root'{
+//       color: #000000;
+//       line-height: 21px;
+//     },
+//     & a {
+//       color: ${blue[500]};
+//       line-height: 21px;
+//     },
+// `;
 
 export default function({ selectedConnection }: ISubHeader) {
   const classes = useStyles();
