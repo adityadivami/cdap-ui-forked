@@ -37,7 +37,7 @@ export const AddTransformationButton = styled(Button)`
   &:hover {
     background: ${blue[500]};
   }
-  &.Mui-disabled{
+  &.Mui-disabled {
     background: ${grey[200]};
   }
 `;

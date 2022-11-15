@@ -28,7 +28,6 @@ export const SelectColumnSearchInput = styled.input`
   }
 `;
 
-
 export const InputComponent = styled(Input)`
   &.MuiInput-underline {
     width: 100%;

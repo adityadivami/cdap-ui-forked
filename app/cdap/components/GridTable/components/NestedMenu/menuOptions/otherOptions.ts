@@ -21,9 +21,7 @@ import { TOOLBAR_ICONS_LABEL_ALL_PREFIX } from 'components/GridTable/components/
 export const OTHER_OPTIONS = [
   {
     value: 'customTransform',
-    label: T.translate(
-      `${OTHER_LABEL_PREFIX}.customTransform`
-    ).toString(),
+    label: T.translate(`${OTHER_LABEL_PREFIX}.customTransform`).toString(),
     supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
 ];

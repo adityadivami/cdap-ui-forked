@@ -118,7 +118,9 @@ export default function({
     }
   };
 
-  const isComponentAvailable = TRANSFORMATION_COMPONENTS.some((item) => item.type === transformationName);
+  const isComponentAvailable = TRANSFORMATION_COMPONENTS.some(
+    (item) => item.type === transformationName
+  );
 
   return (
     <Fragment>

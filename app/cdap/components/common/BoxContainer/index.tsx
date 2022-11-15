@@ -137,7 +137,7 @@ export const DrawerContainerBox = styled(Container)`
 
 export const TransformationNameBox = styled.section`
   padding: 15px 0;
-  border-bottom: 1px solid #DADCE0;
+  border-bottom: 1px solid #dadce0;
 `;
 
 export const TransformationNameHeadWrapper = styled.section`
@@ -150,7 +150,7 @@ export const TransformationNameTextInfoWrapper = styled.section`
   display: flex;
   align-items: center;
   padding: 10px 0 0;
-  ${PointerBox}{
+  ${PointerBox} {
     margin-left: 8px;
   }
 `;

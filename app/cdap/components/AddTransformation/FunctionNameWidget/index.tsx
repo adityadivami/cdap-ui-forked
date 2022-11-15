@@ -18,28 +18,29 @@ import T from 'i18n-react';
 import { TickIcon, InfoIcon } from 'components/AddTransformation/iconStore';
 import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
-import { TransformationNameHeadWrapper, TransformationNameTextInfoWrapper, TransformationNameBox, PointerBox } from 'components/common/BoxContainer';
+import {
+  TransformationNameHeadWrapper,
+  TransformationNameTextInfoWrapper,
+  TransformationNameBox,
+  PointerBox,
+} from 'components/common/BoxContainer';
 import { SubHeadNormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 
 export default function({ transformationName }: IFunctionNameWidgetProps) {
-
   return (
     <TransformationNameBox>
       <TransformationNameHeadWrapper>
-        <SubHeadBoldFont
-          component="p"
-          data-testid="function-name-head"
-        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}</SubHeadBoldFont>
+        <SubHeadBoldFont component="p" data-testid="function-name-head">
+          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}
+        </SubHeadBoldFont>
         {TickIcon}
       </TransformationNameHeadWrapper>
       <TransformationNameTextInfoWrapper>
-        <SubHeadNormalFont
-          component="span"
-          data-testid="selected-function-name"
-        >{transformationName}</SubHeadNormalFont>&nbsp;
-        <PointerBox>
-          {InfoIcon}
-        </PointerBox>
+        <SubHeadNormalFont component="span" data-testid="selected-function-name">
+          {transformationName}
+        </SubHeadNormalFont>
+        &nbsp;
+        <PointerBox>{InfoIcon}</PointerBox>
       </TransformationNameTextInfoWrapper>
     </TransformationNameBox>
   );
