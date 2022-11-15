@@ -17,7 +17,7 @@
 @Integration_Tests
 Feature: TransformationToolbar
 
-  @ADMIN_TEST
+  @TransformationToolbar
   Scenario Outline: Go through the Transformation Toolbar
     Given Navigate to Home Page
     Then Click on the Data Explorations card
