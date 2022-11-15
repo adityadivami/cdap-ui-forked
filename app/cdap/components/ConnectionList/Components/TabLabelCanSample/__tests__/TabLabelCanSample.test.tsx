@@ -14,14 +14,38 @@
  * the License.
  */
 
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import TabLabelCanSample from '../index';
 import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHelpers';
-import { createBrowserHistory } from 'history';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
-import { mockConnectorTypeData, mockEntityDataForNoWorkspace } from '../mock/mockConnectorTypeData';
 import history from 'services/history';
+import TabLabelCanSample from '../index';
+
+const mockConnectorTypeData = {
+  name: 'File',
+  type: 'connector',
+  category: 'File',
+  description: 'Connection to browse and sample data from the local file system.',
+  className: 'io.cdap.plugin.batch.connector.FileConnector',
+};
+
+const mockEntityData = {
+  name: 'role_routine_grants',
+  path: '/information_schema/role_routine_grants',
+  type: 'system view',
+  canSample: true,
+  canBrowse: false,
+  properties: {},
+};
+
+const mockEntityDataForNoWorkspace = {
+  name: 'sql_feature',
+  path: '/information_schema/sql_features',
+  type: 'system table',
+  canSample: true,
+  canBrowse: false,
+  properties: {},
+};
 describe('Test TabLabelCanSample Component', () => {
   it('Should render TabLabelCanSample Component', () => {
     render(

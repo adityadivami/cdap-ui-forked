@@ -14,10 +14,22 @@
  * the License.
  */
 
-import { RenderInput } from 'components/ConnectionList/Components/common/RenderInput';
 import { IHeaderSearchInputFieldProps } from 'components/ConnectionList/types';
 import React, { ChangeEvent } from 'react';
 import styled from 'styled-components';
+
+const RenderInput = styled.input`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #000000;
+  width: 100%;
+  background-color: #ffffff;
+  border: none;
+  height: ${(props) => (props.inputHeight ? props.inputHeight : '35px')};
+  outline: 0;
+`;
 
 const SearchInput = styled(RenderInput)`
   margin-left: 9px;

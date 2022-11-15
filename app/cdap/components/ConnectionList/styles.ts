@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { blue, grey } from '@material-ui/core/colors';
+import { blue } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles({
@@ -58,11 +58,6 @@ export const useStyles = makeStyles({
   hideComponent: {
     display: 'none',
   },
-  tabsContainerWithHeader: {
-    display: 'flex',
-    flexDirection: 'column',
-    borderRight: `1px solid ${grey[300]}`,
-  },
   connectionsListContainer: {
     width: '100vw',
     overflow: 'scroll',
@@ -90,16 +85,6 @@ export const useStyles = makeStyles({
   },
   noDataLabel: {
     paddingLeft: 34,
-  },
-  infographContainer: {
-    display: 'flex',
-    flexGrow: 1,
-    justifyContent: 'flex-end',
-    alignItems: ' flex-end',
-    paddingRight: 80,
-  },
-  infograph: {
-    paddingBottom: 80,
   },
   closeIcon: {
     '& :hover': {

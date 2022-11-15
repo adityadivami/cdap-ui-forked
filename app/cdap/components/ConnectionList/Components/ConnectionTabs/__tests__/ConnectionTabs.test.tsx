@@ -16,12 +16,106 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
-import { mockTabsDataWithBrowse } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsDataWithBrowse';
-import { mockTabsDataWithBrowseIndex } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsDataWithBrowseIndex';
-import { mockTabsTestData } from 'components/ConnectionList/Components/ConnectionTabs/mock/mockTabsTestData';
+import { GCSIcon } from 'components/ConnectionList/IconStore/CGSIcon';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import history from 'services/history';
+
+export const mockTabsTestData = {
+  data: [
+    {
+      name: 'File',
+      type: 'connector',
+      category: 'File',
+      description: 'Connection to browse and sample data from the local file system.',
+      className: 'io.cdap.plugin.batch.connector.FileConnector',
+      artifact: {
+        name: 'core-plugins',
+        version: '2.10.0-SNAPSHOT',
+        scope: 'SYSTEM',
+      },
+      count: 1,
+      icon: <GCSIcon />,
+    },
+    {
+      name: 'PostgreSQL',
+      type: 'connector',
+      category: 'Database',
+      description: 'Connection to access data in PostgreSQL databases using JDBC.',
+      className: 'io.cdap.plugin.postgres.PostgresConnector',
+      artifact: {
+        name: 'postgresql-plugin',
+        version: '1.9.0-SNAPSHOT',
+        scope: 'SYSTEM',
+      },
+      count: 1,
+      icon: <GCSIcon />,
+    },
+  ],
+  showTabs: true,
+  selectedTab: 'S3',
+  toggleSearch: false,
+};
+
+const mockTabsDataWithBrowse = {
+  data: [
+    {
+      name: 'File',
+      type: 'connector',
+      category: 'File',
+      description: 'Connection to browse and sample data from the local file system.',
+      className: 'io.cdap.plugin.batch.connector.FileConnector',
+      artifact: {
+        name: 'core-plugins',
+        version: '2.10.0-SNAPSHOT',
+        scope: 'SYSTEM',
+      },
+      canBrowse: true,
+      count: 1,
+      icon: <GCSIcon />,
+    },
+    {
+      name: 'PostgreSQL',
+      type: 'connector',
+      category: 'Database',
+      description: 'Connection to access data in PostgreSQL databases using JDBC.',
+      className: 'io.cdap.plugin.postgres.PostgresConnector',
+      artifact: {
+        name: 'postgresql-plugin',
+        version: '1.9.0-SNAPSHOT',
+        scope: 'SYSTEM',
+      },
+      count: 1,
+      icon: <GCSIcon />,
+    },
+  ],
+  showTabs: true,
+  selectedTab: 'S3',
+  toggleSearch: false,
+};
+
+export const mockTabsDataWithBrowseIndex = {
+  data: [
+    {
+      name: 'File',
+      type: 'connector',
+      category: 'File',
+      description: 'Connection to browse and sample data from the local file system.',
+      className: 'io.cdap.plugin.batch.connector.FileConnector',
+      artifact: {
+        name: 'core-plugins',
+        version: '2.10.0-SNAPSHOT',
+        scope: 'SYSTEM',
+      },
+      canBrowse: true,
+      count: 1,
+      icon: <GCSIcon />,
+    },
+  ],
+  showTabs: true,
+  selectedTab: 'S3',
+  toggleSearch: false,
+};
 
 const tabsTestData = [{ showTabs: true }];
 

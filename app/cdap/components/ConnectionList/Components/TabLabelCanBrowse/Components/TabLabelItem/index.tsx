@@ -14,21 +14,63 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
-import TabLabelItemLabel from 'components/ConnectionList/Components/TabLabelCanBrowse/Components/TabLabelItemLabel';
-import { useStyles } from 'components/ConnectionList/Components/TabLabelCanBrowse/styles';
-import { ITabLabelProps } from 'components/ConnectionList/Components/TabLabelCanBrowse/types';
-import React from 'react';
+import React, { Ref } from 'react';
 import styled from 'styled-components';
+export interface ITabLabelItemProps {
+  myLabelRef: Ref<HTMLSpanElement>;
+  label: string;
+  count: number;
+  labelTestId?: string;
+}
+
+export interface ITabLabelProps extends ITabLabelItemProps {
+  icon: JSX.Element;
+  labelContainerTestId?: string;
+}
 
 const LabelContainerBox = styled(Box)`
-  &&& {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;x
-  }
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const LabelConatainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+`;
+
+const RenderCount = styled(Typography)`
+  font-size: 16px;
+  overflow: hidden;
+`;
+
+const RenderTabLabel = styled(RenderCount)`
+  max-width: 153px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+`;
+
+const CustomIconContainer = styled(Box)`
+  padding-right: 11px;
+`;
+
+const LargeChevronIcon = styled(ChevronRightRounded)`
+  font-size: large;
+`;
+
+const ChevronIconSelected = styled(LargeChevronIcon)`
+  color: #fff;
+`;
+
+const ChevronIcon = styled(LargeChevronIcon)`
+  color: ${grey[600]};
 `;
 
 export default function({
@@ -39,27 +81,34 @@ export default function({
   labelTestId,
   myLabelRef,
 }: ITabLabelProps) {
-  const classes = useStyles();
-
   return (
     <LabelContainerBox data-testid={labelContainerTestId}>
-      <Box className={classes.labelsContainer}>
-        {icon && <Box className={classes.connectorTypeIcon}>{icon}</Box>}
-        <TabLabelItemLabel
-          myLabelRef={myLabelRef}
-          labelTestId={labelTestId}
-          label={label}
-          count={count}
-        />
-      </Box>
-      <Box>
+      <LabelConatainer>
+        {icon && <CustomIconContainer>{icon}</CustomIconContainer>}
+        <>
+          <RenderTabLabel
+            variant="body1"
+            ref={myLabelRef}
+            data-testid={labelTestId}
+            component="span"
+          >
+            {label}
+          </RenderTabLabel>
+          {count && (
+            <RenderCount variant="body1" component="span">
+              {`(${count})`}
+            </RenderCount>
+          )}
+        </>
+      </LabelConatainer>
+      <>
         <Box className={'canBrowseNormal'}>
-          <ChevronRightRounded className={classes.rightArrow} />
+          <ChevronIcon />
         </Box>
         <Box className={'canBrowseHover'}>
-          <ChevronRightRounded className={classes.rightArrowSelected} />
+          <ChevronIconSelected />
         </Box>
-      </Box>
+      </>
     </LabelContainerBox>
   );
 }

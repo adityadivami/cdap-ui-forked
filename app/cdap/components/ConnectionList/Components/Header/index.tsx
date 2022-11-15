@@ -52,11 +52,9 @@ export default function({
           tabsData={tabsData}
           filteredData={filteredData}
         />
-        <Box onClick={() => searchHandler(columnIndex)}>
-          <IconButton>
-            <SearchRounded />
-          </IconButton>
-        </Box>
+        <IconButton onClick={() => searchHandler(columnIndex)}>
+          <SearchRounded />
+        </IconButton>
       </ConnectionListHeaderWrapper>
       <Search
         eachFilteredData={eachFilteredData}

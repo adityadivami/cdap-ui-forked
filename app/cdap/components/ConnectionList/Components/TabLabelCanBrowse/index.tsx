@@ -17,9 +17,15 @@
 import { Box } from '@material-ui/core';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import TabLabelItem from 'components/ConnectionList/Components/TabLabelCanBrowse/Components/TabLabelItem';
-import { ITabLabelCanBrowseProps } from 'components/ConnectionList/Components/TabLabelCanBrowse/types';
 import * as React from 'react';
 import { createRef, Ref, useEffect, useState } from 'react';
+
+export interface ITabLabelCanBrowseProps {
+  label: string;
+  count: number;
+  columnIndex: number;
+  icon?: JSX.Element;
+}
 
 export default function({ label, count, columnIndex, icon }: ITabLabelCanBrowseProps) {
   const myLabelRef: Ref<HTMLSpanElement> = createRef();

@@ -19,15 +19,32 @@ import Box from '@material-ui/core/Box';
 import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import TabLabelItem from 'components/ConnectionList/Components/TabLabelCanSample/Components/TabLabelItem';
-import useStyles from 'components/ConnectionList/Components/TabLabelCanSample/styles';
-import { ITabLabelCanSampleProps } from 'components/ConnectionList/Components/TabLabelCanSample/types';
 import { WrangleIcon } from 'components/ConnectionList/IconStore/WrangleIcon';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
 import T from 'i18n-react';
-import React, { createRef, Fragment, Ref, useContext, useEffect, useState } from 'react';
+import React, { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+
+import { Dispatch, SetStateAction } from 'react';
+
+export interface ITabLabelSampleItemProps {
+  label: string;
+  myLabelRef: Ref<HTMLSpanElement>;
+  onExplore: (entity: IConnectorTabType) => void;
+  entity: IConnectorTabType;
+  buttonTestId: string;
+  buttonElement: JSX.Element;
+}
+
+export interface ITabLabelCanSampleProps {
+  label: string;
+  entity: IConnectorTabType;
+  initialConnectionId: string;
+  toggleLoader: (value: boolean, isError?: boolean) => void;
+  setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
+}
 
 export default function({
   label,
@@ -36,8 +53,6 @@ export default function({
   toggleLoader,
   setIsErrorOnNoWorkSpace,
 }: ITabLabelCanSampleProps) {
-  const classes = useStyles();
-
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState<boolean>(false);
   const [workspaceId, setWorkspaceId] = useState<string>(null);
@@ -114,12 +129,7 @@ export default function({
           buttonElement={
             <Box className="wranglingHover">
               <WrangleIcon />
-              <Typography
-                color="primary"
-                variant="body2"
-                className={classes.wrangleButton}
-                component="span"
-              >
+              <Typography color="primary" variant="body2" component="span">
                 {T.translate('features.NewWranglerUI.ConnectionsList.labels.loadToGrid')}
               </Typography>
             </Box>
@@ -135,12 +145,12 @@ export default function({
       entity={entity}
       buttonTestId="connections-tab-explore"
       buttonElement={
-        <Fragment>
+        <Box className="wranglingHover">
           <WrangleIcon />
-          <Typography variant="body2" className={classes.wrangleButton} component="span">
+          <Typography variant="body2" color="primary" component="span">
             {T.translate('features.NewWranglerUI.ConnectionsList.labels.loadToGrid')}
           </Typography>
-        </Fragment>
+        </Box>
       }
     />
   );

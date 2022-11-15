@@ -14,9 +14,18 @@
  * the License.
  */
 
-import { RenderLabel } from 'components/ConnectionList/Components/common/RenderLabel';
 import { IHeaderCustomTooltipLabelProps } from 'components/ConnectionList/types';
 import React from 'react';
+import { Typography } from '@material-ui/core';
+import styled from 'styled-components';
+
+const RenderLabel = styled(Typography)`
+  font-style: ${(props) => (props.fontStyle ? props.fontStyle : 'normal')};
+  font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
+  font-size: ${(props) => (props.fontSize ? props.fontSize : '14px')};
+  line-height: 150%;
+  color: ${(props) => (props.fontColor ? props.fontColor : '#000000')};
+`;
 
 export default function({
   columnIndex,

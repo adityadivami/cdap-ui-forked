@@ -15,9 +15,50 @@
  */
 
 import { Box, Typography } from '@material-ui/core';
-import useStyles from 'components/ConnectionList/Components/TabLabelCanSample/styles';
-import { ITabLabelSampleItemProps } from 'components/ConnectionList/Components/TabLabelCanSample/types';
+import blue from '@material-ui/core/colors/blue';
+import { ITabLabelSampleItemProps } from 'components/ConnectionList/Components/TabLabelCanSample';
 import React from 'react';
+import styled from 'styled-components';
+
+const ContainerForLabelCanSample = styled(Box)`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  &:hover {
+    cursor: 'default',
+  },
+`;
+
+const WranglingHover = styled.button`
+  display: none;
+  cursor: pointer;
+  text-decoration: none;
+  gap: 10px;
+  border: 0;
+  outline: 0;
+  & .MuiTypography-root {
+    color: ${blue[500]};
+    font-size: 14px;
+    letter-spacing: 0.15px;
+    font-weight: 400;
+  }
+  ${ContainerForLabelCanSample}:hover & {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    background: none;
+  }
+`;
+
+const LabelForCanSample = styled(Typography)`
+  max-width: 145px;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  point-erevents: none;
+`;
 
 export default function({
   label,
@@ -27,25 +68,14 @@ export default function({
   buttonTestId,
   buttonElement,
 }: ITabLabelSampleItemProps) {
-  const classes = useStyles();
-
   return (
-    <Box className={classes.labelsContainerCanSample} data-testid="connections-tab-label-simple">
-      <Typography
-        variant="body2"
-        className={classes.labelStylesCanSample}
-        ref={myLabelRef}
-        component="span"
-      >
+    <ContainerForLabelCanSample data-testid="connections-tab-label-simple">
+      <LabelForCanSample variant="body2" ref={myLabelRef} component="span">
         {label}
-      </Typography>
-      <button
-        className="wranglingHover"
-        onClick={() => onExplore(entity)}
-        data-testid={buttonTestId}
-      >
+      </LabelForCanSample>
+      <WranglingHover onClick={() => onExplore(entity)} data-testid={buttonTestId}>
         {buttonElement}
-      </button>
-    </Box>
+      </WranglingHover>
+    </ContainerForLabelCanSample>
   );
 }

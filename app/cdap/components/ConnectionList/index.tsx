@@ -14,13 +14,12 @@
  * the License.
  */
 
-import { Box, styled, Typography } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
 import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import Header from 'components/ConnectionList/Components/Header';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
-import { PREFIX } from 'components/ConnectionList/constants';
 import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
 import { useStyles } from 'components/ConnectionList/styles';
 import { IFilteredData, ITabData, ITabsDataResponse } from 'components/ConnectionList/types';
@@ -35,6 +34,10 @@ import T from 'i18n-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
+import styled from 'styled-components';
+import { getUpdatedTabsData, setDataForTabsHelper } from './utils';
+
+const PREFIX = 'features.WranglerNewUI';
 
 const SelectDatasetWrapper = styled(Box)({
   overflowX: 'scroll',
@@ -50,23 +53,32 @@ const SelectDatasetWrapper = styled(Box)({
   },
 });
 
+const InfographicContainer = styled(Box)`
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 80px;
+  padding-bottom: 80px;
+`;
+
+const TabsContainerWithHeader = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid ${grey[300]};
+`;
+
 export default function() {
   const { connectorType } = useParams() as IRecords;
-
-  const refs = useRef([]);
-  const headersRefs = useRef([]);
-  const classes = useStyles();
   const loc = useLocation();
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
+  const refs = useRef([]);
+  const headersRefs = useRef([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
   const [tabsLength, setTabsLength] = useState<number>(0);
-
-  const toggleLoader = (value: boolean, isError?: boolean) => {
-    setLoading(value);
-  };
-  let connectionId;
+  const classes = useStyles();
   const [tabsData, setTabsData] = useState<IFilteredData[]>([
     {
       data: [],
@@ -76,6 +88,11 @@ export default function() {
     },
   ]);
   const [filteredData, setFilteredData] = useState<IFilteredData>(cloneDeep(tabsData));
+  const toggleLoader = (value: boolean, isError?: boolean) => {
+    setLoading(value);
+  };
+
+  let connectionId;
 
   const getConnectionsTabData = async () => {
     let connectorTypes: ITabData[] = [];
@@ -117,32 +134,11 @@ export default function() {
     });
   };
 
-  const setDataForTabsHelper = (response: ITabsDataResponse | ITabData[], index: number) => {
-    setTabsData((prev) => {
-      const tempData: IFilteredData[] = [...prev];
-      tempData.push({
-        data: [],
-        showTabs: false,
-        selectedTab: '',
-        toggleSearch: false,
-      });
-      if ('entities' in response) {
-        tempData[index + 1][`data`] = response.entities;
-      } else {
-        tempData[index + 1][`data`] = response as ITabData[];
-      }
-      tempData[index + 1][`showTabs`] = true;
-      tempData[index + 1][`selectedTab`] = null;
-      tempData[index + 1][`toggleSearch`] = false;
-      return tempData.slice(0, index + 2);
-    });
-  };
-
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string, index: number) => {
     const categorizedConnections = await getCategorizedConnections();
     const connections: ITabsDataResponse | ITabData[] =
       categorizedConnections.get(selectedValue) || [];
-    setDataForTabsHelper(connections, index);
+    setTabsData(setDataForTabsHelper(connections, index, tabsData));
     toggleLoader(false);
   };
 
@@ -191,33 +187,18 @@ export default function() {
     fetchEntities(entityName, path ? path : undefined)
       // NOTE: As the function is returning promise, we are using .then here
       .then((res) => {
-        setDataForTabsHelper(res, index);
+        setTabsData(setDataForTabsHelper(res, index, tabsData));
         toggleLoader(false);
       })
       .catch((error) => {
         toggleLoader(false);
         setIsErrorOnNoWorkSpace(true);
-        // TODO : Need to bind the message on Snackbar . The message is in error.message same as the old UI . Remove the console log later
+        // TODO : Need to bind the message on Snackbar. The message is in error.message same as the old UI.
       });
   };
 
   const searchHandler = (index: number) => {
-    setTabsData((prev) => {
-      let tempData: IFilteredData[] = [...prev];
-      tempData = tempData.map((eachTempData) => ({
-        ...eachTempData,
-        toggleSearch: false,
-      }));
-      tempData[index].toggleSearch = true;
-      tempData.forEach((eachTempData, tempDataIndex) => {
-        if (tempDataIndex === index) {
-          eachTempData.toggleSearch = true;
-        } else {
-          eachTempData.toggleSearch = false;
-        }
-      });
-      return tempData;
-    });
+    setTabsData(getUpdatedTabsData(index, tabsData));
     refs.current[index].focus();
   };
 
@@ -268,6 +249,10 @@ export default function() {
     getCategorizedConnectionsforSelectedTab(connectorType as string, 0);
   }, [connectorType]);
 
+  useEffect(() => {
+    setTabsLength(tabsData?.length);
+  }, [tabsData?.length]);
+
   const headerForLevelZero = () => {
     return (
       <Box className={classes.styleForLevelZero}>
@@ -278,16 +263,11 @@ export default function() {
     );
   };
 
-  useEffect(() => {
-    setTabsLength(tabsData?.length);
-  }, [tabsData?.length]);
-
   let headerContent;
 
   return (
     <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
       <SubHeader selectedConnection={tabsData[0]?.selectedTab} />
-
       {tabsData && Array.isArray(tabsData) && tabsData.length && tabsData[0]?.data?.length > 0 ? (
         <Box className={classes.connectionsWithInfo}>
           <SelectDatasetWrapper>
@@ -322,7 +302,7 @@ export default function() {
                   );
                 }
                 return (
-                  <Box className={classes.tabsContainerWithHeader}>
+                  <TabsContainerWithHeader>
                     <Box className={classes.tabHeaders}>{headerContent}</Box>
                     <ConnectionTabs
                       tabsData={eachFilteredData}
@@ -335,33 +315,31 @@ export default function() {
                       }
                       setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
                     />
-                  </Box>
+                  </TabsContainerWithHeader>
                 );
               })}
           </SelectDatasetWrapper>
           {tabsLength < 4 && (
-            <Box className={classes.infographContainer}>
-              <Box className={classes.infograph}>
-                <InfoGraph />
-              </Box>
-            </Box>
+            <InfographicContainer>
+              <InfoGraph />
+            </InfographicContainer>
           )}
         </Box>
       ) : (
-        <>
-          {loading && (
-            <NoRecordScreen
-              title={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.title`)}
-              subtitle={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.subtitle`)}
-            />
-          )}
-        </>
+        loading && (
+          <NoRecordScreen
+            title={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.title`)}
+            subtitle={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.subtitle`)}
+          />
+        )
       )}
+
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
         </div>
       )}
+
       {isErrorOnNoWorkspace && (
         <ErrorSnackbar handleCloseError={() => setIsErrorOnNoWorkSpace(false)} />
       )}
