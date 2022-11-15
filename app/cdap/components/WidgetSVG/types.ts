@@ -15,14 +15,14 @@
  */
 
 export interface IArtifact {
-  name: string;
-  version: string;
-  scope: string;
+  name?: string;
+  version?: string;
+  scope?: string;
 }
 
 export interface IConnectorTypesWithSVG {
   name: string;
-  typ?: string;
+  type?: string;
   category?: string;
   description?: string;
   artifact?: IArtifact;

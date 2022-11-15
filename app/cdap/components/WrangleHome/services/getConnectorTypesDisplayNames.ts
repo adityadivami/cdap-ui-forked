@@ -20,6 +20,12 @@ import {
   getSelectedConnectorDisplayName,
 } from 'components/Connections/Create/reducer';
 
+/**
+ * @param connectorTypes array of connector types
+ * @param connectorTypesCardsData connector types data which has icon attached to each connector
+ * @returns connectors data with display name to show it on UI
+ */
+
 export const getConnectorTypesDisplayNames = async (connectorTypes, connectorTypesCardsData) => {
   const connectorTypesCardsDataWithDisplayName = connectorTypesCardsData;
   const connectorsPluginProperties = await fetchAllConnectorPluginProperties(connectorTypes);
