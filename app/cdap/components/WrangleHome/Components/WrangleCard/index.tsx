@@ -63,7 +63,7 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
   let startIndex = 0;
   let endIndex = 2;
   // Here we are finding out the connections are exist in the app or not
-  if (connectorTypes.length > 2) {
+  if (connectorTypes?.length > 2) {
     startIndex = 1; // This line is writtern to eliminate the add-connection cards's data from the array
     endIndex = 5;
   }
@@ -71,7 +71,7 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
   return (
     <Box className={classes.wrapper} data-testid="wrangle-card-parent">
       {/* Here we are only showing top 4 connectors on home page */}
-      {connectorTypes.slice(startIndex, endIndex).map((item, index) => {
+      {connectorTypes?.slice(startIndex, endIndex).map((item, index) => {
         return (
           <Link
             to={{

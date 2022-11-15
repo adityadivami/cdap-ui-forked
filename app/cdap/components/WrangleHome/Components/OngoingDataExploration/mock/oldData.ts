@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset'
+import { importDatasetIcon } from 'components/WrangleHome/Components/WrangleCard/iconStore/importDataset';
 
 export const mockOldData = [
   {

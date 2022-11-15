@@ -29,6 +29,7 @@ import { getConnectorTypesDisplayNames } from 'components/WrangleHome/services/g
 export const getUpdatedConnectorCards = async (connectorTypesWithIcons) => {
   // Fetching all the connector type data here
   const connectorTypes = await fetchConnectors();
+
   // Fetching all the connections inside each connector type
   const categorizedConnections = await getCategorizedConnections();
 
@@ -37,7 +38,7 @@ export const getUpdatedConnectorCards = async (connectorTypesWithIcons) => {
     const matchingConnector = connectorTypesWithIcons.find(
       (eachConnector) => eachConnector.name === connectorName
     );
-    return matchingConnector.SVG;
+    return matchingConnector?.SVG;
   };
 
   const connectorTypeWithConnections = [];
