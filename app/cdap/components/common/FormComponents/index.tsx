@@ -21,28 +21,28 @@ import { grey } from '@material-ui/core/colors';
 export const FormControlLabelComponent = styled(FormControlLabel)`
   width: calc(100% - 60px);
   margin-right: 60px;
-  border: 1px solid #DADCE0;
+  border: 1px solid #dadce0;
   height: 40px;
   padding: 5px 15px;
   font-size: 14px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 4px;
   margin-left: 0;
 `;
 
 export const FormControlLabelRadioComponent = styled(FormControlLabel)`
-    margin-left: -5px;
-    & span:last-child: {
-        font-weight: 400;
-        font-size: 14px;
-        color: ${grey[600]};
-    }
+  margin-left: -5px;
+  & span:last-child: {
+    font-weight: 400;
+    font-size: 14px;
+    color: ${grey[600]};
+  }
 `;
 
 export const FormGroupComponent = styled(FormGroup)`
-    width: calc(100% - 60px);
+  width: calc(100% - 60px);
 `;
 
 export const FormGroupFullWidthComponent = styled(FormGroup)`
-    width: 100%;
+  width: 100%;
 `;

@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import {InputComponent} from 'components/common/InputFieldComponent';
-import {FormControlLabelComponent} from 'components/common/FormComponents';
+import { InputComponent } from 'components/common/InputFieldComponent';
+import { FormControlLabelComponent } from 'components/common/FormComponents';
 
 interface IInput {
   type: 'text' | 'number';
