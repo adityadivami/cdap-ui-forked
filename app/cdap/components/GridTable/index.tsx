@@ -20,13 +20,16 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import DirectiveInput from 'components/DirectiveInput';
 import BreadCrumb from 'components/GridTable/components/Breadcrumb';
 import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
-import { useStyles } from 'components/GridTable/styles';
+import { applyDirectives, getAPIRequestPayload } from 'components/GridTable/services';
 import {
+  IApiPayload,
   IExecuteAPIResponse,
+  IGridParams,
   IHeaderNamesList,
   IParams,
   IRecords,
@@ -39,11 +42,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
+import { useStyles } from 'components/GridTable/styles';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
-  const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
@@ -56,6 +59,17 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+
+  const { dataprep } = DataPrepStore.getState();
+  const [isFirstWrangle, setIsFirstWrangle] = useState(false);
+  const [connectorType, setConnectorType] = useState<string | null>(null);
+  const [openDirectivePanel, setDirectivePanel] = useState(true);
+  const classes = useStyles();
+
+  useEffect(() => {
+    setIsFirstWrangle(true);
+    setConnectorType(dataprep.connectorType);
+  }, []);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -114,6 +128,15 @@ export default function GridTable() {
         setLoading(false);
         setGridData(response);
       });
+  };
+
+  const updateDataTranformation = (wid: string) => {
+    const payload: IParams = {
+      context: params.namespace as string,
+      workspaceId: wid,
+    };
+    getWorkSpaceData(payload, wid);
+    setIsFirstWrangle(false);
   };
 
   useEffect(() => {
@@ -233,9 +256,47 @@ export default function GridTable() {
     setRowsDataList(rowData);
   };
 
+  const isParsingPanel =
+    dataprep?.insights?.name &&
+    isFirstWrangle &&
+    connectorType === 'File' &&
+    Array.isArray(gridData?.headers) &&
+    gridData?.headers.length !== 0;
+
   useEffect(() => {
     getGridTableData();
   }, [gridData]);
+
+  const addDirectives = (directive: string) => {
+    setLoading(true);
+    if (directive) {
+      const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+      addDirectiveAPICall(apiPayload);
+    }
+  };
+
+  const addDirectiveAPICall = (apiPayload: IApiPayload) => {
+    const gridParams: IGridParams = apiPayload.gridParams;
+    applyDirectives(wid, gridParams.directives).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            values: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setLoading(false);
+        setGridData(response);
+      },
+      (err) => {
+        setLoading(false);
+      }
+    );
+  };
 
   return (
     <Box data-testid="grid-table-container">
@@ -280,6 +341,7 @@ export default function GridTable() {
                         <GridTextCell
                           cellValue={eachRow[eachKey.name] || '--'}
                           key={`${eachKey.name}-${eachIndex}`}
+                          dataTestId={`table-cell-${rowIndex}${eachIndex}`}
                         />
                       );
                     })}
@@ -288,6 +350,17 @@ export default function GridTable() {
               })}
           </TableBody>
         </Table>
+      )}
+      {openDirectivePanel && (
+        <DirectiveInput
+          columnNamesList={headersNamesList}
+          onDirectiveInputHandler={(directive) => {
+            addDirectives(directive);
+            setDirectivePanel(false);
+          }}
+          onClose={() => setDirectivePanel(false)}
+          openDirectivePanel={openDirectivePanel}
+        />
       )}
       {loading && (
         <div className={classes.loadingContainer}>
