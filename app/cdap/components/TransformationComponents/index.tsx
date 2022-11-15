@@ -25,8 +25,7 @@ export default function({
   setTransformationComponentsValue,
   ...props
 }: ITransformationContentParams) {
-  const Component =
-    transformationComponent.find((item) => item?.type === type)?.component
+  const Component = transformationComponent.find((item) => item?.type === type)?.component;
 
   return (
     <Component
