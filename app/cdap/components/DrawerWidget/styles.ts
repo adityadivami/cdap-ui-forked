@@ -26,8 +26,8 @@ export const useStyles = makeStyles(() => {
     drawerContainerStyles: {
       width: 472,
       height: '100%',
+      paddingRight: 20,
       paddingLeft: 30,
-      paddingRight: 30,
     },
     headerStyles: {
       height: 60,

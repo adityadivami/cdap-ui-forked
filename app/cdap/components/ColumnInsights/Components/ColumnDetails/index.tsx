@@ -14,17 +14,53 @@
  * the License.
  */
 
-import { IconButton } from '@material-ui/core';
-import { red } from '@material-ui/core/colors';
+import { Box, IconButton } from '@material-ui/core';
+import { grey, red } from '@material-ui/core/colors';
 import EditIcon from '@material-ui/icons/Edit';
-import { useStyles } from 'components/ColumnInsights/Components/ColumnDetails/styles';
-import { IColumnDetailsProps } from 'components/ColumnInsights/Components/ColumnDetails/types';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
 import InputSelect from 'components/ColumnInsights/Components/InputSelect';
-import { PREFIX } from 'components/ColumnInsights/constants';
 import { DATATYPE_OPTIONS } from 'components/ColumnInsights/options';
 import T from 'i18n-react';
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+interface IColumnDetailsProps {
+  columnName: string;
+  characterCount: string;
+  distinctValues: number;
+  dataTypeString: string;
+  renameColumnNameHandler: (oldColumnName: string, newColumnName: string) => void;
+  dataTypeHandler: (dataType: string) => void;
+  columnType: string;
+  columnHeaderList: string[];
+}
+
+const ColumnDetailsContainer = styled(Box)`
+  padding-bottom: 20px;
+  border-bottom: 1px solid ${grey[300]};
+`;
+
+const CustomizedColumnNameEditBox = styled(Box)`
+  display: flex;
+  gap: 16px;
+`;
+
+const CustomizedIconButton = styled(IconButton)`
+  cursor: pointer;
+  justify-content: flex-start !important;
+`;
+
+const ColumnInsightsDetailsBox = styled(Box)`
+  margin-top: 20px;
+`;
+
+const ColumnInsightsDetailsCountBox = styled(Box)`
+  display: flex;
+  gap: 27px;
+  align-items: center;
+  margin-bottom: 7px;
+`;
 
 export default function({
   columnName,
@@ -42,7 +78,6 @@ export default function({
     DATATYPE_OPTIONS?.length &&
     DATATYPE_OPTIONS.filter((each) => each.value === columnType?.toLowerCase());
   const [dataTypeValue, setDataTypeValue] = useState<string>();
-  const classes = useStyles();
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>(columnName);
   const [errorMessage, setErrorMessage] = useState({
@@ -114,8 +149,8 @@ export default function({
     }
   };
   return (
-    <div className={classes.columnInsightsTopSection} data-testid="column-details-parent">
-      <div className={classes.columnNameEdit}>
+    <ColumnDetailsContainer data-testid="column-details-parent">
+      <CustomizedColumnNameEditBox>
         {canEdit ? (
           <input
             value={inputValue}
@@ -130,30 +165,17 @@ export default function({
             <> {inputValue}</>
           </RenderLabel>
         )}
-        <IconButton
-          onClick={editHandler}
-          className={classes.editIcon}
-          aria-label="edit-icon"
-          data-testid="edit-icon"
-        >
+        <CustomizedIconButton onClick={editHandler} aria-label="edit-icon" data-testid="edit-icon">
           <EditIcon />
-        </IconButton>
-      </div>
+        </CustomizedIconButton>
+      </CustomizedColumnNameEditBox>
       {errorMessage.hasError && (
-        <div>
-          <RenderLabel fontSize={14} color={`${red[600]}`} dataTestId={'invalid-text'}>
-            <> {T.translate(errorMessage.message).toString()}</>
-          </RenderLabel>
-        </div>
+        <RenderLabel fontSize={14} color={`${red[600]}`} dataTestId={'invalid-text'}>
+          <> {T.translate(errorMessage.message).toString()}</>
+        </RenderLabel>
       )}
 
       <InputSelect
-        classes={{
-          icon: classes.selectIconStyles,
-          select: classes.selectStyles,
-        }}
-        className={classes.selectFieldStyles}
-        optionClassName={{ root: classes.optionStyles }}
         defaultValue={defaultValueProvided[0]?.value}
         value={dataTypeValue}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleDataTypeChange(e)}
@@ -161,8 +183,8 @@ export default function({
         fullWidth={false}
         type={'column-insights'}
       />
-      <section className={classes.columnInsightsDetailsWrapper}>
-        <div className={classes.columnInsightsDetailsCountSection}>
+      <ColumnInsightsDetailsBox>
+        <ColumnInsightsDetailsCountBox>
           <RenderLabel fontSize={14}>
             <>
               {T.translate(`${PREFIX}.characterCount`).toString()} {characterCount}
@@ -174,12 +196,12 @@ export default function({
               {T.translate(`${PREFIX}.distinct`).toString()} {distinctValues}
             </>
           </RenderLabel>
-        </div>
+        </ColumnInsightsDetailsCountBox>
 
         <RenderLabel fontSize={14}>
           <>{T.translate(`${dataTypeString}`).toString()}</>
         </RenderLabel>
-      </section>
-    </div>
+      </ColumnInsightsDetailsBox>
+    </ColumnDetailsContainer>
   );
 }

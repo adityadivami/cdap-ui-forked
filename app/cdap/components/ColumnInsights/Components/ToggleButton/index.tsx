@@ -18,7 +18,13 @@ import { Box } from '@material-ui/core';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/';
 import React from 'react';
 import styled from 'styled-components';
-import { IToggleButtonProps } from 'components/ColumnInsights/Components/ToggleButton/types';
+
+export interface IToggleButtonProps {
+  children: JSX.Element;
+  type: string;
+  setIsSelected: React.Dispatch<React.SetStateAction<number>>;
+  className: string;
+}
 
 const StyledToggleBox = styled(Box)`
   border-top-left-radius: ${(props) => (props.type === 'left' ? 4 : 0)}px;

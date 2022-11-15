@@ -14,49 +14,86 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
-import { useStyles } from 'components/ColumnInsights/Components/ColumnDataQuality/styles';
-import { IColumnDataQualityProps } from 'components/ColumnInsights/Components/ColumnDataQuality/types';
+import { Box } from '@material-ui/core';
+import grey from '@material-ui/core/colors/grey';
+import red from '@material-ui/core/colors/red';
 import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
-import { PREFIX } from 'components/ColumnInsights/constants';
 import T from 'i18n-react';
 import React from 'react';
+import styled from 'styled-components';
+
+export const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+interface IColumnDataQualityProps {
+  dataQuality: {
+    nullValueCount: number;
+    nullValuePercentage: number;
+    emptyValueCount: number;
+    emptyValuePercentage: number;
+  };
+  columnInfo: any | {}; // Need to fix
+}
+interface IColumnInfo {
+  general: IGeneral;
+  types: ITypes;
+}
+
+interface ITypes {
+  [key: string]: number | string;
+}
+
+interface IGeneral {
+  'non-null': number;
+  null: number;
+  empty: number;
+}
+
+const ColumnDataQualityContainer = styled(Box)`
+  border-bottom: 1px solid ${grey[300]};
+  padding: 20px 0px;
+`;
+
+const QualityBarContainer = styled(Box)`
+  display: flex;
+  margin-top: 20px;
+`;
+
+const FilledBar = styled(Box)`
+  background-color: ${grey[300]};
+  display: inline-block;
+  height: 5px
+  border-radius: 10px;
+`;
+
+const EmptyBar = styled(Box)`
+  background-color: ${red.A100};
+  display: inline-block;
+  height: 5px;
+  border-radius: 10px;
+`;
 
 export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
-  const classes = useStyles();
   const nonNull = columnInfo?.general['non-null'] || 0;
   const empty = columnInfo?.general?.empty || 0;
   const filled = nonNull - empty;
   const calculatedEmptyValue = 100 - filled;
 
   return (
-    <div
-      className={classes.columnInsightsDataQualityTopSection}
-      data-testid="column-data-quality-parent"
-    >
+    <ColumnDataQualityContainer data-testid="column-data-quality-parent">
       <RenderLabel fontSize={16} dataTestId={'quality-text'}>
         <>{T.translate(`${PREFIX}.quality`).toString()}</>
       </RenderLabel>
-      <Box className={classes.qualityBar} data-testid="quality-bar">
-        <Typography
+      <QualityBarContainer data-testid="quality-bar">
+        <FilledBar component="span" style={{ width: `${filled}%` }} data-testid="filled" />
+        <EmptyBar
           component="span"
-          className={classes.filled}
-          style={{ width: `${filled}%` }}
-          data-testid="filled"
-        />
-        <Typography
-          component="span"
-          className={classes.empty}
           style={{
             width: `${calculatedEmptyValue}%`,
           }}
           data-testid="empty"
         />
-      </Box>
-      <div>
-        <ToggleButton dataQuality={dataQuality} />
-      </div>
-    </div>
+      </QualityBarContainer>
+      <ToggleButton dataQuality={dataQuality} />
+    </ColumnDataQualityContainer>
   );
 }

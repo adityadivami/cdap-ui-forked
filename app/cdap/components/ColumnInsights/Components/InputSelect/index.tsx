@@ -16,24 +16,60 @@
 
 import { MenuItem, Select } from '@material-ui/core';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
-import { IInputSelect, IOption } from 'components/ColumnInsights/Components/InputSelect/types';
 import React from 'react';
+import styled from 'styled-components';
 
-export default function({
-  options,
-  value,
-  onChange,
-  classes,
-  className,
-  fullWidth,
-  optionClassName,
-  defaultValue,
-  type,
-}: IInputSelect) {
+interface IInputSelect {
+  options: IOption[];
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  fullWidth: boolean;
+  defaultValue: string;
+  type: string;
+  classes?: any;
+}
+
+interface IOption {
+  value: string;
+  label: string;
+}
+
+const CustomizedInputSelect = styled(Select)`
+  width: 350px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  padding: 2px 15px;
+  font-size: 14px;
+  margin-top: 9px;
+  display: block;
+
+  &:before {
+    display: none;
+  }
+
+  &:focus-visible {
+    outline: none !important;
+  }
+
+  &:after {
+    display: none;
+  }
+
+  & .select:focus {
+    background-color: transparent;
+  }
+  & .iconStyles {
+    top: calc(50% - 10px);
+    right: 8px;
+  }
+`;
+
+export default function({ options, value, onChange, fullWidth, defaultValue, type }: IInputSelect) {
   return (
-    <Select
-      classes={{ ...classes }}
-      className={className}
+    <CustomizedInputSelect
+      classes={{ select: 'select', icon: 'iconStyles' }}
       fullWidth={fullWidth}
       value={value}
       onChange={onChange}
@@ -53,18 +89,13 @@ export default function({
         options?.length &&
         options.map((option: IOption, index: number) => {
           return (
-            <MenuItem
-              classes={{ ...optionClassName }}
-              value={option.value}
-              key={option.value}
-              data-testid={`select-${index}`}
-            >
+            <MenuItem value={option.value} key={option.value} data-testid={`select-${index}`}>
               <RenderLabel dataTestId={`select-option-${option.label}`}>
                 <>{option.label}</>
               </RenderLabel>
             </MenuItem>
           );
         })}
-    </Select>
+    </CustomizedInputSelect>
   );
 }

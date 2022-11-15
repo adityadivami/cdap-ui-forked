@@ -20,7 +20,7 @@ export interface IDrawerWidgetProps {
   openDrawer: boolean;
   showDivider: boolean;
   headerActionTemplate: JSX.Element;
-  children: IRecords[];
+  children: JSX.Element;
   closeClickHandler: () => void;
   showBackIcon: boolean;
   anchor: 'bottom' | 'left' | 'right' | 'top';

@@ -19,9 +19,51 @@ import React, { useEffect, useState } from 'react';
 import ColumnDataDistribution from 'components/ColumnInsights/Components/ColumnDataDistribution';
 import ColumnDataQuality from 'components/ColumnInsights/Components/ColumnDataQuality';
 import ColumnDetails from 'components/ColumnInsights/Components/ColumnDetails';
-import { IColumnData, IColumnInsightsProps } from 'components/ColumnInsights/types';
+import styled from 'styled-components';
 import T from 'i18n-react';
-import { PREFIX } from 'components/ColumnInsights/constants';
+import Box from '@material-ui/core/Box';
+
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+interface IColumnInsightsProps {
+  columnData: IColumnData;
+  renameColumnNameHandler: (oldColumnName: string, newColumnName: string) => void;
+  dataTypeHandler: (dataType: string) => void;
+  columnType: string;
+  onClose: () => void;
+}
+
+interface IColumnData {
+  open: boolean;
+  columnName: string;
+  distinctValues: number;
+  characterCount: ICharacterCount;
+  dataQuality: IDataQuality;
+  dataQualityBar: {};
+  dataTypeString: string;
+  dataDistributionGraphData: IGraphData[];
+  columnNamesList: string[];
+}
+
+interface IGraphData {
+  text: string;
+  value: number;
+}
+
+interface ICharacterCount {
+  min: number;
+  max: number;
+}
+
+interface IDataQuality {
+  nullValueCount: number;
+  nullValuePercentage: number;
+  emptyValueCount: number;
+  emptyValuePercentage: number;
+}
+
+const ColumnInsightsContainer = styled(Box)`
+  padding-right: 10px;
+`;
 
 export default function({
   columnData,
@@ -52,23 +94,23 @@ export default function({
       showDivider={false}
       dataTestId={'column-insights-panel'}
     >
-      <ColumnDetails
-        columnName={columnDetail?.columnName}
-        dataTypeHandler={dataTypeHandler}
-        columnType={columnType}
-        renameColumnNameHandler={renameColumnNameHandler}
-        distinctValues={columnDetail?.distinctValues}
-        characterCount={`${columnDetail?.characterCount?.min}-${columnDetail?.characterCount?.max}`}
-        dataTypeString={
-          columnDetail?.dataTypeString || T.translate(`${PREFIX}.containsLetter`).toString()
-        }
-        columnHeaderList={columnData.columnNamesList}
-      />
-      <ColumnDataQuality
-        dataQuality={columnDetail?.dataQuality}
-        columnInfo={columnDetail?.dataQualityBar}
-      />
-      <ColumnDataDistribution graphData={columnDetail?.dataDistributionGraphData} />
+      <ColumnInsightsContainer>
+        <ColumnDetails
+          columnName={columnDetail?.columnName}
+          dataTypeHandler={dataTypeHandler}
+          columnType={columnType}
+          renameColumnNameHandler={renameColumnNameHandler}
+          distinctValues={columnDetail?.distinctValues}
+          characterCount={`${columnDetail?.characterCount?.min}-${columnDetail?.characterCount?.max}`}
+          dataTypeString={columnDetail?.dataTypeString}
+          columnHeaderList={columnData.columnNamesList}
+        />
+        <ColumnDataQuality
+          dataQuality={columnDetail?.dataQuality}
+          columnInfo={columnDetail?.dataQualityBar}
+        />
+        <ColumnDataDistribution graphData={columnDetail?.dataDistributionGraphData} />
+      </ColumnInsightsContainer>
     </DrawerWidget>
   );
 }

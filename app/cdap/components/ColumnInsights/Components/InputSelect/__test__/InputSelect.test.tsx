@@ -15,9 +15,9 @@
  */
 
 import { fireEvent, render, screen, within } from '@testing-library/react';
-import { mockClasses, mockOptions } from 'components/ColumnInsights/mock/mockDataForColumnInsights';
-import React from 'react';
 import InputSelect from 'components/ColumnInsights/Components/InputSelect';
+import { mockOptions } from 'components/ColumnInsights/mock/mockDataForColumnInsights';
+import React from 'react';
 
 describe('It Should test InputSelect Component', () => {
   it('should test whether InputSelect Component is rendered.', () => {
@@ -26,12 +26,7 @@ describe('It Should test InputSelect Component', () => {
         options={mockOptions}
         value={'boolean'}
         onChange={jest.fn()}
-        classes={mockClasses}
-        className={'makeStyles-selectFieldStyles-510'}
         fullWidth={false}
-        optionClassName={{
-          root: 'makeStyles-optionStyles-511',
-        }}
         defaultValue={'string'}
         type={'column-insights'}
       />
@@ -45,12 +40,7 @@ describe('It Should test InputSelect Component', () => {
         options={mockOptions}
         value={'boolean'}
         onChange={jest.fn()}
-        classes={mockClasses}
-        className={'makeStyles-selectFieldStyles-510'}
         fullWidth={false}
-        optionClassName={{
-          root: 'makeStyles-optionStyles-511',
-        }}
         defaultValue={'string'}
         type={'column-insights'}
       />

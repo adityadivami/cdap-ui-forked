@@ -16,10 +16,10 @@
 
 import { render, screen } from '@testing-library/react';
 import ToggleButton from 'components/ColumnInsights/Components/ToggleButton';
-import { PREFIX } from 'components/ColumnInsights/constants';
 import T from 'i18n-react';
 import React from 'react';
 
+export const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 describe('It should test ToggleButton Component', () => {
   it('test whether ToggleButton Component is rendered and isin the document', () => {
     render(

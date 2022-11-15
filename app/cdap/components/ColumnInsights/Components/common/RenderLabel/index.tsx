@@ -18,7 +18,13 @@ import { Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import React from 'react';
 import styled from 'styled-components';
-import { IRenderLabelProps } from 'components/ColumnInsights/Components/common/RenderLabel/types';
+
+interface IRenderLabelProps {
+  children: JSX.Element;
+  fontSize?: number;
+  color?: string;
+  dataTestId?: string;
+}
 
 const SimpleLabel = styled(Typography)`
   &&& {

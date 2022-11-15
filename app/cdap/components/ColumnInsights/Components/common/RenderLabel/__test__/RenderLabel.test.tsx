@@ -15,11 +15,11 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import { PREFIX } from 'components/ColumnInsights/constants';
 import T from 'i18n-react';
 import React from 'react';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
 
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 describe('It should test Render Label Component', () => {
   it('should test whether RenderLabelComponent is rendered and in the Document', () => {
     render(

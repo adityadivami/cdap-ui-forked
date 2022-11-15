@@ -202,8 +202,3 @@ export const mockOptions = [
     label: 'Bytes',
   },
 ];
-
-export const mockClasses = {
-  icon: 'makeStyles-selectIconStyles-512',
-  select: 'makeStyles-selectStyles-513',
-};

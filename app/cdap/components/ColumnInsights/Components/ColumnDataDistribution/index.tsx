@@ -16,22 +16,47 @@
 
 import React from 'react';
 import BarChart from 'react-bar-chart';
-import { useStyles } from 'components/ColumnInsights/Components/ColumnDataDistribution/styles';
-import { IColumnDataDistributionProps } from 'components/ColumnInsights/Components/ColumnDataDistribution/types';
 import T from 'i18n-react';
 import { NavLink } from 'react-router-dom';
 import { IRecords } from 'components/GridTable/types';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
 import styled from 'styled-components';
 import blue from '@material-ui/core/colors/blue';
-import { PREFIX } from 'components/ColumnInsights/constants';
+import { Box } from '@material-ui/core';
 
-const StyledBarChart = styled(BarChart)`
-  background: 'blue';
+export const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+interface IColumnDataDistributionProps {
+  graphData: IGraphData[];
+}
+interface IGraphData {
+  text: string;
+  value: number;
+}
+
+const ColumnDataDistributionContainer = styled(Box)`
+  padding: 20px 0px;
+`;
+
+const ColumnDataDistributionLabel = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ColumnDataQualityGraph = styled(Box)`
+  & .axis {
+    display: none;
+  }
+
+  & .bar {
+    fill: ${blue[500]};
+  }
+
+  & .graph {
+    transform: translate(0px, 20px) !important;
+  }
 `;
 
 export default function({ graphData }: IColumnDataDistributionProps) {
-  const classes = useStyles();
   const barChartProps = {
     margin: { top: 20, right: 20, bottom: 70, left: 40 },
     width: 400,
@@ -50,11 +75,8 @@ export default function({ graphData }: IColumnDataDistributionProps) {
   };
 
   return (
-    <div
-      className={classes.columnInsightsDataQualityTopSection}
-      data-testid="column-data-distribution-parent"
-    >
-      <div className={classes.columnInsightsColumnName}>
+    <ColumnDataDistributionContainer data-testid="column-data-distribution-parent">
+      <ColumnDataDistributionLabel>
         <RenderLabel fontSize={16} dataTestId="distribution-text">
           <>{T.translate(`${PREFIX}.distribution`).toString()}</>
         </RenderLabel>
@@ -63,16 +85,16 @@ export default function({ graphData }: IColumnDataDistributionProps) {
             <> {T.translate(`${PREFIX}.viewFullChart`).toString()}</>
           </RenderLabel>
         </NavLink>
-      </div>
+      </ColumnDataDistributionLabel>
 
-      <div className={classes.columnDataQualityGraph} data-testid="data-distribution-graph">
-        <StyledBarChart
+      <ColumnDataQualityGraph data-testid="data-distribution-graph">
+        <BarChart
           ylabel={`${PREFIX}.barChartYLabel`}
           {...barChartProps}
           data={spliceData(graphData)}
           onBarClick={handleBarClick}
         />
-      </div>
-    </div>
+      </ColumnDataQualityGraph>
+    </ColumnDataDistributionContainer>
   );
 }

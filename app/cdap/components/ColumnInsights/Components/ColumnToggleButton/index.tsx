@@ -16,12 +16,22 @@
 
 import { Box } from '@material-ui/core';
 import { useStyles } from 'components/ColumnInsights/Components/ColumnToggleButton/styles';
-import { IDataQualityProps } from 'components/ColumnInsights/Components/ColumnToggleButton/types';
-import { PREFIX } from 'components/ColumnInsights/constants';
 import T from 'i18n-react';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ToggleButton from 'components/ColumnInsights/Components/ToggleButton';
+
+const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+interface IDataQualityProps {
+  dataQuality: IDataQuality;
+}
+
+interface IDataQuality {
+  nullValueCount: number;
+  nullValuePercentage: number;
+  emptyValueCount: number;
+  emptyValuePercentage: number;
+}
 
 const StyledDataQualityBox = styled(Box)`
     &&& { 
