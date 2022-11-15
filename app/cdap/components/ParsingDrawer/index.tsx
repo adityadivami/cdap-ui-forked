@@ -82,7 +82,7 @@ const CloseIcon = styled(CloseRoundedIcon)`
   margin: 5px;
 `;
 
-const CustomizedDrawer = styled(Drawer)`
+const StyledDrawer = styled(Drawer)`
   & .MuiDrawer-paper {
     top: 46px;
     height: calc(100vh - 47px);
@@ -90,7 +90,7 @@ const CustomizedDrawer = styled(Drawer)`
   }
 `;
 
-const CustomizedIconButton = styled(IconButton)`
+const StyledIconButton = styled(IconButton)`
   padding: 0px;
 `;
 
@@ -266,7 +266,7 @@ export default function({
 
   return (
     <ParsingDrawerContainer role="presentation">
-      <CustomizedDrawer open={drawerStatus} anchor="right">
+      <StyledDrawer open={drawerStatus} anchor="right">
         <DrawerHeader>
           <TextIconWrapper>
             <DrawerHeaderContainer>
@@ -278,13 +278,13 @@ export default function({
           </TextIconWrapper>
 
           <TextIconWrapper>
-            <CustomizedIconButton
+            <StyledIconButton
               aria-label="close-icon"
               data-testid="drawer-widget-close-round-icon"
               onClick={closeParsingDrawer}
             >
               <CloseIcon color="action" />
-            </CustomizedIconButton>
+            </StyledIconButton>
           </TextIconWrapper>
         </DrawerHeader>
         <ParsingPopUpBodyContainer>
@@ -306,7 +306,7 @@ export default function({
             </Button>
           </ParsingPopUpBottomSection>
         </ParsingPopUpBodyContainer>
-      </CustomizedDrawer>
+      </StyledDrawer>
 
       {errorOnTransformation.open && (
         <PositionedSnackbar
