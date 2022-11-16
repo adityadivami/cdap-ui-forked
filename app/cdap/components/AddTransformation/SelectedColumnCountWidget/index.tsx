@@ -16,12 +16,11 @@
 
 import React from 'react';
 import T from 'i18n-react';
-import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
 import { NormalFont } from 'components/common/TypographyText';
 
-export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
-  
+export default function({ selectedColumnsCount }: {selectedColumnsCount: number}) {
+
   const text = selectedColumnsCount
     ? selectedColumnsCount > 10
       ? selectedColumnsCount
