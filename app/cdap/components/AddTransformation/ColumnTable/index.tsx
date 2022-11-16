@@ -112,7 +112,7 @@ export default function ({
                   <Checkbox
                     color="primary"
                     checked={selectedColumns?.length ? true : false}
-                    onChange={handleChange}
+                    onClick={handleChange}
                     indeterminate={selectedColumns?.length ? true : false}
                   />
                 )}
