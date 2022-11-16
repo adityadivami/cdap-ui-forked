@@ -40,7 +40,7 @@ const getProgressBarWrapperComponent = (dataQualityPercentValue) => {
   return dataQualityPercentValue === 0 ? GreenSemiCircleProgressBar : RedSemiCircleProgressBar;
 };
 
-export default function({ dataQualityPercentValue }: { dataQualityPercentValue: number }) {
+export default function ({ dataQualityPercentValue }: { dataQualityPercentValue: number }) {
   const Wrapper = getProgressBarWrapperComponent(dataQualityPercentValue);
 
   return (

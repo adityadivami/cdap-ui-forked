@@ -42,7 +42,7 @@ const CustomizedSvgIcon = styled(SvgIcon)`
     `}
 `;
 
-export default function({
+export default function ({
   columnType,
   submitMenuOption,
   setShowBreadCrumb,

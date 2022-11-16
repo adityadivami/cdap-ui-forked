@@ -62,7 +62,7 @@ const SelectColumnTableHeadCell = styled(TableCell)`
   }
 `;
 
-export default function({
+export default function ({
   columns,
   transformationDataType,
   onSingleSelection,
@@ -108,14 +108,14 @@ export default function({
             <SelectColumnTableHeadCell>
               {multipleColumnSelected?.filter((option) => option.value === transformationName)
                 .length > 0 && (
-                <Checkbox
-                  color="primary"
-                  checked={selectedColumns?.length ? true : false}
-                  onClick={handleChange}
-                  indeterminate={selectedColumns?.length ? true : false}
-                  data-testid="column-table-check-box"
-                />
-              )}
+                  <Checkbox
+                    color="primary"
+                    checked={selectedColumns?.length ? true : false}
+                    onClick={handleChange}
+                    indeterminate={selectedColumns?.length ? true : false}
+                    data-testid="column-table-check-box"
+                  />
+                )}
             </SelectColumnTableHeadCell>
             <SelectColumnTableHeadCell data-testid="panel-columns">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
