@@ -24,7 +24,7 @@ describe('It should render ', () => {
       <CheckBoxInput
         selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => false}
-        eachColumn={{ label: 'test', type: [''], name: '' }}
+        columnDetail={{ label: 'test', type: [''], name: '' }}
         onMultipleSelection={() => jest.fn()}
       />
     );
@@ -39,7 +39,7 @@ describe('It should render ', () => {
       <CheckBoxInput
         selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => true}
-        eachColumn={{ label: 'test', type: [''], name: '' }}
+        columnDetail={{ label: 'test', type: [''], name: '' }}
         onMultipleSelection={() => jest.fn()}
       />
     );

@@ -35,14 +35,13 @@ import {
 } from 'components/common/BoxContainer';
 import { AddTransformationButton } from 'components/common/ButtonWidget';
 
-export default function ({
+export default function({
   transformationDataType,
   transformationName,
   columnsList,
   missingItemsList,
   onCancel,
 }: IAddTransformationProps) {
-
   const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);

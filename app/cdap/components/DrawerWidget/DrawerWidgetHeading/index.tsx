@@ -25,7 +25,7 @@ const DrawerHeadWrapper = styled(Box)`
   flex-direction: column;
 `;
 
-export default function ({ headingText }: { headingText: string }) {
+export default function({ headingText }: { headingText: string }) {
   return (
     <DrawerHeadWrapper>
       <HeadFont component="p" data-testid="drawer-heading">

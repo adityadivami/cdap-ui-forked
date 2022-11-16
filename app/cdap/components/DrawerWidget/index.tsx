@@ -57,7 +57,7 @@ const DrawerWidgetComponent = styled(Drawer)`
   }
 `;
 
-export default function ({
+export default function({
   headingText,
   openDrawer,
   showDivider,

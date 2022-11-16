@@ -25,7 +25,7 @@ describe('It should render ', () => {
       <RadioInput
         selectedColumns={[{ label: 'test', name: 'test', type: ['test'] }]}
         onSingleSelection={MockOnChange}
-        eachColumn={{ label: 'test', name: 'test', type: ['test'] }}
+        columnDetail={{ label: 'test', name: 'test', type: ['test'] }}
       />
     );
 

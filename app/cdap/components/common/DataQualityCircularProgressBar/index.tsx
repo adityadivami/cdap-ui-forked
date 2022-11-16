@@ -37,26 +37,21 @@ const RedSemiCircleProgressBar = styled(SemiCircularProgressBarWrapper)`
 `;
 
 const getProgressBarWrapperComponent = (dataQualityPercentValue) => {
-    return dataQualityPercentValue === 0
-        ? GreenSemiCircleProgressBar
-        : RedSemiCircleProgressBar;
+  return dataQualityPercentValue === 0 ? GreenSemiCircleProgressBar : RedSemiCircleProgressBar;
 };
 
-export default function ({
-    dataQualityPercentValue
-}: { dataQualityPercentValue: number }) {
+export default function({ dataQualityPercentValue }: { dataQualityPercentValue: number }) {
+  const Wrapper = getProgressBarWrapperComponent(dataQualityPercentValue);
 
-    const Wrapper = getProgressBarWrapperComponent(dataQualityPercentValue);
-
-    return (
-        <Wrapper data-testid="semi-circular-progress-bar-wrapper">
-            <SemiCircleProgressBar
-                strokeWidth="5"
-                diameter="75"
-                percentage={Math.floor(dataQualityPercentValue)}
-                stroke={dataQualityPercentValue === 0 ? '#8BCC74' : '#E97567'}
-                showPercentValue={true}
-            />
-        </Wrapper>
-    );
+  return (
+    <Wrapper data-testid="semi-circular-progress-bar-wrapper">
+      <SemiCircleProgressBar
+        strokeWidth="5"
+        diameter="75"
+        percentage={Math.floor(dataQualityPercentValue)}
+        stroke={dataQualityPercentValue === 0 ? '#8BCC74' : '#E97567'}
+        showPercentValue={true}
+      />
+    </Wrapper>
+  );
 }

@@ -47,7 +47,7 @@ const SelectColumnTableBodyCell = styled(TableCell)`
   }
 `;
 
-export default function ({
+export default function({
   onSingleSelection,
   selectedColumns,
   dataQualityValue,
@@ -75,7 +75,9 @@ export default function ({
       </SelectColumnTableBodyCell>
       <SelectColumnTableBodyCell>
         {dataQualityValue?.length && (
-          <DataQualityCircularProgressBar dataQualityPercentValue={Number(dataQualityValue[columnIndex]?.value)} />
+          <DataQualityCircularProgressBar
+            dataQualityPercentValue={Number(dataQualityValue[columnIndex]?.value)}
+          />
         )}
       </SelectColumnTableBodyCell>
     </SelectColumnTableRow>
