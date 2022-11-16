@@ -17,7 +17,7 @@
 import { TableBody, Checkbox, Divider } from '@material-ui/core';
 import React from 'react';
 import T from 'i18n-react';
-import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
+import TableRowWidget from 'components/AddTransformation/ColumnTable/TableRow';
 import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
