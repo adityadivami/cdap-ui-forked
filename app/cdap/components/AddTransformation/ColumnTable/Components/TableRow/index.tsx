@@ -16,7 +16,7 @@
 
 import React from 'react';
 import InputWidget from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
-import DataQualityProgress from 'components/AddTransformation/CircularProgressBar';
+import DataQualityCircularProgressBar from 'components/common/DataQualityCircularProgressBar';
 import { ITableRowProps } from 'components/AddTransformation/ColumnTable/types';
 import { TableCellText } from 'components/common/TypographyText';
 import { TableRow, TableCell } from '@material-ui/core';
@@ -75,7 +75,7 @@ export default function({
       </SelectColumnTableBodyCell>
       <SelectColumnTableBodyCell>
         {dataQualityValue?.length && (
-          <DataQualityProgress dataQualityPercentValue={Number(dataQualityValue[columnIndex]?.value)} />
+          <DataQualityCircularProgressBar dataQualityPercentValue={Number(dataQualityValue[columnIndex]?.value)} />
         )}
       </SelectColumnTableBodyCell>
     </SelectColumnTableRow>
