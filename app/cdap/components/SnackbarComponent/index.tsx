@@ -18,7 +18,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { useStyles } from './styles';
 import TransitionComponent from './Components/TransitionComponent';
 
-export default function({ message, handleCloseSnackbar, isSuccess }) {
+export default function PositionedSnackbar(props) {
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState(true);
 
@@ -35,7 +35,7 @@ export default function({ message, handleCloseSnackbar, isSuccess }) {
 
   const handleClose = () => {
     setIsOpen(false);
-    handleCloseSnackbar();
+    props.handleCloseError();
   };
 
   return (
@@ -43,14 +43,8 @@ export default function({ message, handleCloseSnackbar, isSuccess }) {
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       open={isOpen}
       onClose={handleClose}
-      TransitionComponent={() => (
-        <TransitionComponent close={() => handleClose()} message={message} isSuccess={isSuccess} />
-      )}
-      className={
-        isSuccess
-          ? `${classes.successDiv} ${classes.snackBarDiv}`
-          : `${classes.failureDiv} ${classes.snackBarDiv}`
-      }
+      TransitionComponent={() => <TransitionComponent close={() => handleClose()} />}
+      className={classes.snackBarDiv}
       data-testid="parent-snackbar-component"
     />
   );

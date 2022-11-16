@@ -14,21 +14,15 @@
  * the License.
  */
 
-import React from 'react';
-import { Radio } from '@material-ui/core';
-import { IRadioInputProps } from 'components/AddTransformation/ColumnTable/types';
-
-export default function({ selectedColumns, onSingleSelection, columnDetail, columnIndex }: IRadioInputProps) {
-  return (
-    <Radio
-      color="primary"
-      onClick={() => onSingleSelection(columnDetail)}
-      checked={
-        selectedColumns?.filter((column) => column.label === columnDetail.label).length
-          ? true
-          : false
-      }
-      data-testid={`radio-input-${columnIndex}`}
-    />
-  );
+export interface ISnackbarProps {
+  handleCloseError: () => void;
+  description?: string;
+  isSuccess?: boolean;
+  actionType?: string;
+  snackbarAction?: string;
+}
+export interface ISnackbar {
+  open: boolean;
+  message?: string;
+  isSuccess?: boolean;
 }

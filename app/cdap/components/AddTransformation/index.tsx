@@ -117,6 +117,7 @@ export default function({
         headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.addTransformation`)}
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
+        dataTestId="add-transformation-drawer"
       >
         <AddTransformationWrapper>
           <AddTransformationBodyWrapper>
@@ -146,6 +147,7 @@ export default function({
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
+        dataTestId="select-column-drawer"
       >
         <AddTransformationWrapper>
           <AddTransformationBodyWrapper>
@@ -162,7 +164,7 @@ export default function({
           <AddTransformationButton
             disabled={enableDoneButton()}
             color="primary"
-            data-testid="button_apply"
+            data-testid="button_done"
             onClick={closeSelectColumnsPopup}
           >
             {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}

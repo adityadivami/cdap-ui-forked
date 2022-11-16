@@ -3496,5 +3496,14 @@ features:
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
+    Snackbar:
+      labels:
+        datasetSuccess: Dataset loaded successfully 
+        failure: Failure
+        retrieveFailure: Failed to retrieve sample data for
+        sampleFailure: Failed to retrieve sample data
+        success: Success
+        undo: Undo
+        workspaceFailure: Failed to create workspace for
 
               

@@ -26,6 +26,7 @@ export default function({
   columnDetail,
   handleDisableCheckbox,
   onMultipleSelection,
+  columnIndex
 }: IInputWidgetProps) {
   return (
     <>
@@ -34,6 +35,7 @@ export default function({
           selectedColumns={selectedColumns}
           onSingleSelection={onSingleSelection}
           columnDetail={columnDetail}
+          columnIndex={columnIndex}
         />
       ) : (
         <CheckboxInput
@@ -41,6 +43,7 @@ export default function({
           columnDetail={columnDetail}
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
+          columnIndex={columnIndex}
         />
       )}
     </>

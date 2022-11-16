@@ -66,10 +66,11 @@ export default function({
   closeClickHandler,
   showBackIcon,
   anchor,
+  dataTestId
 }: IDrawerWidgetProps) {
   return (
     <DrawerWidgetComponent anchor={anchor ? anchor : 'right'} open={openDrawer}>
-      <DrawerContainerBox role="presentation">
+      <DrawerContainerBox role="presentation" data-testid={dataTestId}>
         <DrawerContainerInnerFlex>
           <FlexAlignCenter>
             {showBackIcon && (
