@@ -45,7 +45,7 @@ export interface IMenuItemComponentProps {
   columnType: string;
 }
 
-export default function ({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
+export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
   let menuItemDisableProp;
   menuItemDisableProp = columnType
     ? !(item?.supportedDataType?.includes(columnType) || item?.supportedDataType?.includes('all'))

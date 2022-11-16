@@ -18,7 +18,12 @@ import React from 'react';
 import { Radio } from '@material-ui/core';
 import { IRadioInputProps } from 'components/AddTransformation/ColumnTable/types';
 
-export default function ({ selectedColumns, onSingleSelection, columnDetail, columnIndex }: IRadioInputProps) {
+export default function({
+  selectedColumns,
+  onSingleSelection,
+  columnDetail,
+  columnIndex,
+}: IRadioInputProps) {
   return (
     <Radio
       color="primary"

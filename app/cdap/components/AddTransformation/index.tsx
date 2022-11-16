@@ -35,7 +35,7 @@ import {
 } from 'components/common/BoxContainer';
 import { AddTransformationButton } from 'components/common/ButtonWidget';
 
-export default function ({
+export default function({
   transformationDataType,
   transformationName,
   columnsList,
