@@ -90,7 +90,9 @@ export default function({
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName
     );
-    multiSelect.length && setIsSingleSelection(false);
+    if (multiSelect.length) {
+      setIsSingleSelection(false);
+    }
   }, []);
 
   const columnsAsPerType: IHeaderNamesList[] | string[] =
@@ -116,8 +118,9 @@ export default function({
       const indexOfUnchecked = selectedColumns.findIndex(
         (columnDetail) => columnDetail.label === column.label
       );
-      indexOfUnchecked > -1 &&
+      if (indexOfUnchecked > -1) {
         setSelectedColumns(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
+      }
     }
   };
 
@@ -128,8 +131,10 @@ export default function({
     );
     if (selectedColumns?.length === 0 || selectedColumns?.length < 2) {
       return false;
+    } else if (multiSelect.length) {
+      return false;
     } else {
-      return multiSelect.length ? true : false;
+      return true;
     }
   };
 

@@ -84,7 +84,11 @@ export default function({
       if (selectedColumns.length) {
         setSelectedColumns([]);
       } else {
-        columns?.length > 2 ? setSelectedColumns(columns.slice(0, 2)) : setSelectedColumns(columns);
+        if(columns?.length > 2){
+          setSelectedColumns(columns.slice(0, 2))
+        }else{
+          setSelectedColumns(columns);
+        }
       }
     } else {
       if (selectedColumns?.length) {

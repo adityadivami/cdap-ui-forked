@@ -18,30 +18,31 @@ import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import { ICheckBoxInputProps } from 'components/AddTransformation/ColumnTable/types';
 
-export default function({
+export default function ({
   selectedColumns,
   handleDisableCheckbox,
   columnDetail,
   onMultipleSelection,
   label,
 }: ICheckBoxInputProps) {
+
+  let disabled = selectedColumns?.filter((column) => column.label === columnDetail.label).length ||
+    !handleDisableCheckbox()
+    ? false
+    : true
+
+  let checked = selectedColumns?.length &&
+    selectedColumns?.filter((column) => column.label === columnDetail.label).length
+    ? true
+    : false
+    
   return (
     <FormControlLabel
-      disabled={
-        selectedColumns?.filter((column) => column.label === columnDetail.label).length ||
-        !handleDisableCheckbox()
-          ? false
-          : true
-      }
+      disabled={disabled}
       control={
         <Checkbox
           color="primary"
-          checked={
-            selectedColumns?.length &&
-            selectedColumns?.filter((column) => column.label === columnDetail.label).length
-              ? true
-              : false
-          }
+          checked={checked}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             onMultipleSelection(event, columnDetail)
           }
