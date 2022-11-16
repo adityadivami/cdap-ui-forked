@@ -16,16 +16,17 @@
 
 package io.cdap.cdap.ui.stepsdesign;
 
-import io.cucumber.java.en.Given;
 import io.cdap.cdap.ui.utils.Constants;
-import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
-import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.WaitHelper;
+import io.cdap.e2e.utils.SeleniumDriver;
+import io.cdap.cdap.ui.utils.Helper;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+
 
 public class DirectiveTest {
     @Given("Navigate to the Home page")
