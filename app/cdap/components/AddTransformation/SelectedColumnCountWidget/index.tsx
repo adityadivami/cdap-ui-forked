@@ -21,6 +21,7 @@ import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constant
 import { NormalFont } from 'components/common/TypographyText';
 
 export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
+  
   const text = selectedColumnsCount
     ? selectedColumnsCount > 10
       ? selectedColumnsCount
