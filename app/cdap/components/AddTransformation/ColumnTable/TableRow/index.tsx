@@ -67,6 +67,7 @@ export default function({
           columnDetail={columnDetail}
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
+          columnIndex={columnIndex}
         />
       </SelectColumnTableBodyCell>
       <SelectColumnTableBodyCell>

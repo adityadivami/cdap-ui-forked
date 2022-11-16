@@ -24,6 +24,7 @@ export default function({
   columnDetail,
   onMultipleSelection,
   label,
+  columnIndex
 }: ICheckBoxInputProps) {
   const disabled =
     selectedColumns?.filter((column) => column.label === columnDetail.label).length ||
@@ -47,11 +48,11 @@ export default function({
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             onMultipleSelection(event, columnDetail)
           }
-          data-testid="check-box-input-checkbox"
+          data-testid={`check-box-input-${columnIndex}`}
         />
       }
       label={label}
-      data-testid="form-control-label-parent"
+      data-testid={`form-control-label-parent-${columnIndex}`}
     />
   );
 }
