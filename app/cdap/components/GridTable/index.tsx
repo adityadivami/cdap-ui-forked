@@ -31,7 +31,7 @@ import {
   IParams,
   IRecords,
   IAddTransformationItem,
-  IStatistics
+  IStatistics,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';

@@ -26,10 +26,11 @@ describe('It should render ', () => {
         selectedColumns={[{ label: 'test', name: 'test', type: ['test'] }]}
         onSingleSelection={MockOnChange}
         columnDetail={{ label: 'test', name: 'test', type: ['test'] }}
+        columnIndex={0}
       />
     );
 
-    const radioInputElement = screen.getByTestId(/radio-input-radio/i);
+    const radioInputElement = screen.getByTestId(/radio-input-0/i);
     fireEvent.click(radioInputElement, { target: { checked: true } });
     expect(MockOnChange).toHaveBeenCalled();
   });
