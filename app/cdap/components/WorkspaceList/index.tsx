@@ -38,7 +38,10 @@ export default function() {
           <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
             <Typography className={classes.text}> Home</Typography>
           </Link>
-          <Typography className={classes.text} data-testid="breadcrumb-label-workspaces">
+          <Typography
+            className={`${classes.text} ${classes.textWorkspaces}`}
+            data-testid="breadcrumb-label-workspaces"
+          >
             Workspaces
           </Typography>
         </Breadcrumbs>

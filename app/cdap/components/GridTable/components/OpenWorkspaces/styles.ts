@@ -20,6 +20,9 @@ export const useStyles = makeStyles({
   openWorkspaceWrapper: {
     display: 'flex',
     margin: 'auto 0px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   divider: {
     marginLeft: '22px',

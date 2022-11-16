@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Menu, MenuItem } from '@material-ui/core';
+import { Box, Button, Menu, MenuItem } from '@material-ui/core';
 import { otherIcon } from '../images';
 import { KEBAB_GRID_PAGE_OPTION } from '../../NestedMenu/constants';
 import MenuItemComponent from '../../MenuItemComponent';
@@ -17,7 +17,7 @@ const MoreOptions = ({ setOpenViewSchema }) => {
   };
 
   return (
-    <div>
+    <Box className={classes.breadCrumbRightKebabContainer}>
       <Button
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -34,12 +34,12 @@ const MoreOptions = ({ setOpenViewSchema }) => {
         open={open}
         getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'top',
+          vertical: 'bottom',
           horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'left',
+          horizontal: 'right',
         }}
         onClose={(e: any) => {
           e.preventDefault();
@@ -60,7 +60,7 @@ const MoreOptions = ({ setOpenViewSchema }) => {
           />
         ))}
       </Menu>
-    </div>
+    </Box>
   );
 };
 

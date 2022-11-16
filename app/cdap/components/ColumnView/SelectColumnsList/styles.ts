@@ -25,18 +25,20 @@ export const useStyles = makeStyles(() => {
       marginTop: '40px',
     },
     tableBody: {
-      height: '300px',
+      maxHeight: '300px',
       '& .MuiTableCell-root': {
         color: '#5F6368',
         fontSize: '14px',
       },
     },
     tableRowContainer: {
+      maxHeight: '63px !important',
       '& .MuiTableCell-root': {
         paddingTop: '10px',
         paddingBottom: '10px',
       },
       '&:hover': {
+        cursor: 'pointer',
         boxShadow: '3px 4px 15px rgba(68, 132, 245, 0.15)',
       },
     },

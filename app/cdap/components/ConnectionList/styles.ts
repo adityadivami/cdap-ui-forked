@@ -32,7 +32,7 @@ export const useStyles = makeStyles({
   },
   tabHeaders: {
     backgroundColor: blue[50],
-    width: 299,
+    maxWidth: 299,
     '& .MuiTypography-root': {
       width: 209,
       fontSize: '16px',
@@ -82,11 +82,6 @@ export const useStyles = makeStyles({
       cursor: 'pointer',
     },
   },
-  closeIcon: {
-    '& :hover': {
-      cursor: 'pointer',
-    },
-  },
   tabsContainerWithHeader: {
     display: 'flex',
     flexDirection: 'column',
@@ -116,5 +111,10 @@ export const useStyles = makeStyles({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     pointerEvents: 'none',
+  },
+  settingIcon: {
+    position: 'absolute',
+    left: '1108px',
+    bottom: '80px',
   },
 });

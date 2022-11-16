@@ -18,6 +18,24 @@ import { makeStyles } from '@material-ui/styles';
 import { blue } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
+  breadCrumbRight: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 0,
+  },
+  breadCrumbRightKebabContainer: {
+    '& .MuiButton-root': {
+      minWidth: '24px',
+    },
+    '& .MuiButton-text': {
+      paddingLeft: '8px',
+      paddingRight: '8px',
+      margingLeft: '12px',
+      marginRight: '22px',
+    },
+  },
   breadCombContainer: {
     display: 'flex',
     justifyContent: 'space-between',

@@ -103,7 +103,7 @@ export default function(props) {
   };
 
   return (
-    <section className={classes.columnsCountTextStyles}>
+    <section className={`${classes.columnsCountTextStyles} ${classes.columnContainer}`}>
       <div className={classes.selectColumnsHeaderStyles}>
         <div>
           {selectedColumnsCount
@@ -140,7 +140,11 @@ export default function(props) {
         </Box>
       ) : (
         <TableContainer component={Box}>
-          <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
+          <Table
+            aria-label="recipe steps table"
+            className={classes.tabledisplayStyles}
+            stickyHeader
+          >
             <TableHead>
               <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
                 <TableCell
@@ -164,7 +168,7 @@ export default function(props) {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className={classes.tableBody}>
               {columns.map((eachColumn, index) => {
                 if (directiveFunctionSupportedDataType.includes('all')) {
                   return (

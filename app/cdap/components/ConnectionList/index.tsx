@@ -18,7 +18,7 @@ import { Box, IconButton, styled, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import CloseIcon from '@material-ui/icons/Close';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import { GCSIcon } from 'components/ConnectionList/icons';
+import { GCSIcon, SettingsIcon } from 'components/ConnectionList/icons';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { fetchConnectors } from 'components/Connections/Create/reducer';
@@ -372,6 +372,11 @@ export default function ConnectionList() {
               </Box>
             );
           })}
+        {filteredData.length < 4 && (
+          <Box className={classes.settingIcon}>
+            <Box>{SettingsIcon}</Box>
+          </Box>
+        )}
       </SelectDatasetWrapper>
 
       {loading && (

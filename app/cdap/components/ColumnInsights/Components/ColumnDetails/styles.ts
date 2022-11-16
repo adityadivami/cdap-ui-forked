@@ -7,6 +7,7 @@ export const useStyles = makeStyles(() => {
       borderBottom: '1px solid #E0E0E0',
     },
     columnInsightsColumnName: {
+      display: 'flex',
       fontFamily: 'Noto Sans',
       fontStyle: 'normal',
       fontWeight: 400,
@@ -15,6 +16,7 @@ export const useStyles = makeStyles(() => {
       letterSpacing: '0.15px',
       color: '#212121',
       marginTop: '5px',
+      gap: '12px',
     },
     selectFieldStyles: {
       width: '350px',

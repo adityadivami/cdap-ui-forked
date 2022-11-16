@@ -14,6 +14,7 @@
  *  the License.
  */
 import { makeStyles } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
   wrapper: {
@@ -39,6 +40,9 @@ export const useStyles = makeStyles({
     lineHeight: '21px',
     letterSpacing: '0.15px',
     fontWeight: 400,
+  },
+  textWorkspaces: {
+    color: grey[900],
   },
   loadingContainer: {
     display: 'flex',
