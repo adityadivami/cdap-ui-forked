@@ -28,7 +28,7 @@ export default function({ selectedColumns, onSingleSelection, columnDetail }: IR
           ? true
           : false
       }
-      data-testid="radio-input-radio"
+      data-testid={`radio-input-radio-${columnDetail.label}`}
     />
   );
 }

@@ -108,7 +108,7 @@ export default function({
           <AddTransformationButton
             disabled={enableDoneButton()}
             color="primary"
-            data-testid="button_apply"
+            data-testid="button_done"
             onClick={closeSelectColumnsPopup}
           >
             {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}
