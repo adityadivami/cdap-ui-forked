@@ -72,8 +72,8 @@ export default function({
   columnType,
   onClose,
 }: IColumnInsightsProps) {
-  const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
-  const [columnDetail, setColumnDetail] = useState<IColumnData>(columnData);
+  const [drawerStatus, setDrawerStatus] = useState(true);
+  const [columnDetail, setColumnDetail] = useState(columnData);
 
   useEffect(() => {
     setColumnDetail(columnData);

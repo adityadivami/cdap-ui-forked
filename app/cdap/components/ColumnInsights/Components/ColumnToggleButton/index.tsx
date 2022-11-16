@@ -100,7 +100,7 @@ const getWrapperComponent = (isSelected, position) => {
 };
 
 export default function({ dataQuality }: IDataQualityProps) {
-  const [isSelected, setIsSelected] = useState<number>(0);
+  const [isSelected, setIsSelected] = useState(1);
 
   const LeftWrapperComponent = getWrapperComponent(isSelected, 'left');
   const RightWrapperComponent = getWrapperComponent(isSelected, 'right');
@@ -111,7 +111,7 @@ export default function({ dataQuality }: IDataQualityProps) {
         onClick={() => setIsSelected(1)}
         data-testid={`toggle-button-left`}
       >
-        <RenderLabel fontSize={14}>
+        <RenderLabel fontSize={14} dataTestId="toggle-button-left-label">
           <>
             {T.translate(`${PREFIX}.empty`).toString()}
             {` ${dataQuality.emptyValueCount} (${dataQuality.emptyValuePercentage}%)`}
@@ -123,7 +123,7 @@ export default function({ dataQuality }: IDataQualityProps) {
         onClick={() => setIsSelected(2)}
         data-testid={`toggle-button-right`}
       >
-        <RenderLabel fontSize={14}>
+        <RenderLabel fontSize={14} dataTestId="toggle-button-right-label">
           <>
             {T.translate(`${PREFIX}.null`)}
             {` ${dataQuality?.nullValueCount} (${dataQuality?.nullValuePercentage}%)`}

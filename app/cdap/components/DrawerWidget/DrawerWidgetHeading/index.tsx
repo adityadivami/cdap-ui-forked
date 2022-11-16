@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import React from 'react';
 import { Underline } from 'components/DrawerWidget/DrawerWidgetHeading/IconStore/iconStore';
 import { useStyles } from 'components/DrawerWidget/styles';
@@ -27,7 +27,7 @@ export default function({ headingText }: IDrawerWidgetHeadingProps) {
 
   return (
     <Box className={classes.headingStyles}>
-      <RenderLabel type="simple" fontSize={20}>
+      <RenderLabel fontSize={20}>
         <> {T.translate(`${headingText}`).toString()}</>
       </RenderLabel>
       <Underline />

@@ -20,8 +20,8 @@ import React from 'react';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
 
 const PREFIX = 'features.NewWranglerUI.ColumnInsights';
-describe('It should test Render Label Component', () => {
-  it('should test whether RenderLabelComponent is rendered and in the Document', () => {
+describe('It should test RenderLabel Component', () => {
+  it('should test whether RenderLabel Component is rendered and in the Document', () => {
     render(
       <RenderLabel
         children={<> {T.translate(`${PREFIX}.viewFullChart`).toString()}</>}
@@ -33,7 +33,7 @@ describe('It should test Render Label Component', () => {
     const renderLabel = screen.getByTestId(/render-label-testing/i);
     expect(renderLabel).toBeInTheDocument();
   });
-  it('should test whether RenderLabelComponent is rendered when fontsize and color is not sent as props', () => {
+  it('should test whether RenderLabel Component is rendered when fontsize and color is not sent as props', () => {
     render(
       <RenderLabel
         children={<> {T.translate(`${PREFIX}.viewFullChart`).toString()}</>}

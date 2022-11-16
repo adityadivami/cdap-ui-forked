@@ -30,7 +30,7 @@ describe('It should test DrawerWidgetHeading Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <DrawerWidgetHeading />
+            <DrawerWidgetHeading headingText={'Column Insights'} />
           </Route>
         </Switch>
       </Router>

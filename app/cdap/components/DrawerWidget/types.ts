@@ -14,7 +14,6 @@
  * the License.
  */
 
-import { IRecords } from 'components/GridTable/types';
 export interface IDrawerWidgetProps {
   headingText: string;
   openDrawer: boolean;

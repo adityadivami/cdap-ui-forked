@@ -20,17 +20,20 @@ export interface IParams {
 }
 
 export interface IRecords {
-  [key: string]: string | number | boolean | any;
+  [key: string]: string | boolean | Record<string, IType> | any;
 }
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
+}
+
+interface IType {
+  [key: string]: string | number;
 }
 
 interface ISummary {
   statistics: IRecords;
   validations: IRecords;
 }
-
 export interface IExecuteAPIResponse {
   headers: string[];
   types: IRecords;
@@ -42,40 +45,9 @@ export interface IExecuteAPIResponse {
 export interface IHeaderNamesList {
   name: string;
   label: string;
-  type: Array<string | number | IRecords | boolean>;
+  type: Array<string | boolean | Record<string, IType>>;
 }
 
 export interface IObject {
   [key: string]: string | number | IRecords | boolean;
-}
-
-export interface IToaster {
-  open: boolean;
-  message: string;
-  isSuccess: boolean;
-}
-
-export interface IInsightDrawer {
-  open: boolean;
-  columnName: string;
-  distinctValues: number;
-  characterCount: {
-    min: number;
-    max: number;
-  };
-  dataQuality: {
-    nullValueCount: number;
-    nullValuePercentage: number;
-    emptyValueCount: number;
-    emptyValuePercentage: number;
-  };
-  dataQualityBar: {};
-  dataTypeString: string;
-  dataDistributionGraphData: IdataDistributionGraphData[];
-  columnNamesList: string[];
-}
-
-interface IdataDistributionGraphData {
-  text: string;
-  value: any;
 }

@@ -78,8 +78,8 @@ export default function({
     DATATYPE_OPTIONS?.length &&
     DATATYPE_OPTIONS.filter((each) => each.value === columnType?.toLowerCase());
   const [dataTypeValue, setDataTypeValue] = useState<string>();
-  const [canEdit, setCanEdit] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>(columnName);
+  const [canEdit, setCanEdit] = useState(false);
+  const [inputValue, setInputValue] = useState(columnName);
   const [errorMessage, setErrorMessage] = useState({
     hasError: false,
     message: '',
@@ -148,6 +148,7 @@ export default function({
       setCanEdit(true);
     }
   };
+
   return (
     <ColumnDetailsContainer data-testid="column-details-parent">
       <CustomizedColumnNameEditBox>

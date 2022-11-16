@@ -26,25 +26,26 @@ describe('It should test whether ColumnToggleButton Component.', () => {
     expect(toggleButtonsParent).toBeInTheDocument();
   });
 
-  it('should test whether left toggle button is selected', () => {
+  it('should test onClick functionality of toggle Buttons.', () => {
     render(<ColumnToggleButton dataQuality={mockDataQuality} />);
-    const leftButton = screen.getByTestId(/toggle-button-left/i);
-    fireEvent.click(leftButton);
-    expect(leftButton).toHaveClass(
-      'MuiBox-root MuiBox-root-7 ToggleButton__StyledToggleBox-ghgQNh IkLrO makeStyles-isSelected-5'
-    );
-    const rightButton = screen.getByTestId(/toggle-button-right/i);
-    expect(rightButton).not.toHaveClass(
-      'MuiBox-root MuiBox-root-7 ToggleButton__StyledToggleBox-ghgQNh IkLrO makeStyles-isSelected-5'
-    );
+    const leftToggleButton = screen.getAllByTestId(/toggle-button-left/i)[0];
+    expect(leftToggleButton).toBeInTheDocument();
+    fireEvent.click(leftToggleButton);
+    const rightToggleButton = screen.getAllByTestId(/toggle-button-right/i)[0];
+    expect(rightToggleButton).toBeInTheDocument();
+    fireEvent.click(rightToggleButton);
   });
 
-  it('should test whether right toggle button is selected', () => {
+  it('should test the toggle buttons labels', () => {
     render(<ColumnToggleButton dataQuality={mockDataQuality} />);
-    const rightButton = screen.getByTestId(/toggle-button-right/i);
-    fireEvent.click(rightButton);
-    expect(rightButton).toHaveClass(
-      'MuiBox-root MuiBox-root-12 ToggleButton__StyledToggleBox-ghgQNh byQoWn makeStyles-isSelected-9'
+    const leftToggleButtonLabel = screen.getByTestId('toggle-button-left-label');
+    const rightToggleButtonLabel = screen.getByTestId('toggle-button-right-label');
+
+    expect(leftToggleButtonLabel).toHaveTextContent(
+      'features.NewWranglerUI.ColumnInsights.empty 0 (0%)'
+    );
+    expect(rightToggleButtonLabel).toHaveTextContent(
+      'features.NewWranglerUI.ColumnInsights.null 3 (50%)'
     );
   });
 });

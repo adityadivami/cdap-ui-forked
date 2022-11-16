@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Button, Container, Drawer, IconButton } from '@material-ui/core';
+import { Box, Container, Drawer, IconButton } from '@material-ui/core';
 import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';

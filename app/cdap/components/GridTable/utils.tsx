@@ -51,8 +51,7 @@ export const convertNonNullPercent = (
  */
 
 export const calculateEmptyValueCount = (values: IRecords[], columnName: string) => {
-  const arrayOfColumn =
-    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+  const arrayOfColumn = values && Array.isArray(values) && values.map((el) => el[columnName]);
   let emptyValueCount = 0;
   arrayOfColumn &&
     Array.isArray(arrayOfColumn) &&
@@ -121,8 +120,7 @@ export const checkFrequentlyOccuredValues = (
  */
 
 export const calculateDistinctValues = (values: IRecords[], columnName: string) => {
-  const arrayOfColumn =
-    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+  const arrayOfColumn = values && Array.isArray(values) && values.map((el) => el[columnName]);
   const arr = [...arrayOfColumn];
   let distinctCount: number = 0;
 
@@ -145,8 +143,7 @@ export const calculateDistinctValues = (values: IRecords[], columnName: string) 
 export const characterCount = (values: IRecords[], columnName: string) => {
   let minCount = 0;
   let maxCount = 0;
-  const arrayOfColumn =
-    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+  const arrayOfColumn = values && Array.isArray(values) && values.map((el) => el[columnName]);
 
   arrayOfColumn &&
     Array.isArray(arrayOfColumn) &&
@@ -237,12 +234,11 @@ const isLetter = (str: string) => {
  * @description This function takes column name , rowsDataList and calculate Distribution Graph Data
  * @param  {IRecords} values , this is the rowDataList .
  * @param  {string}  columnName, this is the column Name .
- * @returns  TODO:
+ * @returns Column distribution Data .
  */
 
 export const calculateDistributionGraphData = (values: IRecords[], columnName: string) => {
-  const arrayOfColumn =
-    values && Array.isArray(values) && values?.length && values.map((el) => el[columnName]);
+  const arrayOfColumn = values && Array.isArray(values) && values.map((el) => el[columnName]);
   const map = {};
   for (let i = 0; i < arrayOfColumn.length; i++) {
     map[arrayOfColumn[i]] = (map[arrayOfColumn[i]] || 0) + 1;

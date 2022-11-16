@@ -14,17 +14,17 @@
  * the License.
  */
 
+import { Box } from '@material-ui/core';
+import blue from '@material-ui/core/colors/blue';
+import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
+import T from 'i18n-react';
 import React from 'react';
 import BarChart from 'react-bar-chart';
-import T from 'i18n-react';
 import { NavLink } from 'react-router-dom';
-import { IRecords } from 'components/GridTable/types';
-import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel/index';
 import styled from 'styled-components';
-import blue from '@material-ui/core/colors/blue';
-import { Box } from '@material-ui/core';
 
 export const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+
 interface IColumnDataDistributionProps {
   graphData: IGraphData[];
 }
@@ -67,7 +67,7 @@ export default function({ graphData }: IColumnDataDistributionProps) {
     // TODO
   };
 
-  const spliceData = (data: IRecords) => {
+  const spliceData = (data: IGraphData[]) => {
     if (data && data?.length >= 10) {
       return data.slice(0, 9);
     }
