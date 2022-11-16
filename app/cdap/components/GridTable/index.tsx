@@ -43,6 +43,7 @@ import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import { useStyles } from 'components/GridTable/styles';
+import Snackbar from 'components/Snackbar';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -64,6 +65,11 @@ export default function GridTable() {
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [connectorType, setConnectorType] = useState<string | null>(null);
   const [openDirectivePanel, setDirectivePanel] = useState(true);
+  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [snackbarData, setSnackbarData] = useState({
+    description: '',
+    isSuccess: false
+  })
   const classes = useStyles();
 
   useEffect(() => {
@@ -289,11 +295,21 @@ export default function GridTable() {
             ...gridParams,
           },
         });
+        setOpenSnackbar(true);
+        setSnackbarData({
+          description: 'Directive applied successfully',
+          isSuccess: true
+        })
         setLoading(false);
         setGridData(response);
       },
       (err) => {
         setLoading(false);
+        setOpenSnackbar(true);
+        setSnackbarData({
+          description: 'Directive cannot applied',
+          isSuccess: false
+        })
       }
     );
   };
@@ -360,6 +376,19 @@ export default function GridTable() {
           }}
           onClose={() => setDirectivePanel(false)}
           openDirectivePanel={openDirectivePanel}
+        />
+      )}
+      {openSnackbar && (
+        <Snackbar
+        handleCloseError={()=> {
+          setOpenSnackbar(false);
+          setSnackbarData({
+            description: '',
+            isSuccess: false
+          })
+        }}
+        description={snackbarData.description}
+        isSuccess={snackbarData.isSuccess}
         />
       )}
       {loading && (
