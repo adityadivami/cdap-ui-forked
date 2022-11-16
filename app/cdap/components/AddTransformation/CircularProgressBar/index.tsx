@@ -14,56 +14,48 @@
  * the License.
  */
 
-import { Typography, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import React from 'react';
+import SemiCircleProgressBar from 'react-progressbar-semicircle';
 import styled from 'styled-components';
-import { red, green } from '@material-ui/core/colors';
-import { ErrorFont, SuccessText } from 'components/common/TypographyText';
 
-const ArcContainer = styled(Typography)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 59px;
-  height: 59px;
-  border-radius: 50%;
-  box-sizing: border-box;
-  border: 4px solid #dbdbdb;
-  border-bottom-color: ${({ value }) => (value < 100 ? red[600] : green[600])};
-  border-right-color: ${({ value }) => (value < 100 ? red[600] : green[600])};
-  transform: ${({ value }) => `rotate(${45 + value * 1.8}deg)` || 'rotate(0deg)'};
+const SemiCircularProgressBarWrapper = styled(Box)`
+  width: 75px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0.15px;
 `;
 
-const ProgressBoxWrapper = styled(Box)`
-  position: relative;
-  margin: 4px;
-  float: left;
-  text-align: center;
+const GreenSemiCircleProgressBar = styled(SemiCircularProgressBarWrapper)`
+  color: #8bcc74;
 `;
 
-const ProgressBoxInnerWrapper = styled(Box)`
-  position: relative;
-  overflow: hidden;
-  width: 60px;
-  height: 30px;
-  margin-bottom: -20px !important;
+const RedSemiCircleProgressBar = styled(SemiCircularProgressBarWrapper)`
+  color: #e97567;
 `;
 
-export default function({ value }: { value: number }) {
+const getProgressBarWrapperComponent = (dataQualityPercentValue) => {
+  return dataQualityPercentValue === 0
+    ? GreenSemiCircleProgressBar
+    : RedSemiCircleProgressBar;
+};
+
+export default function({
+  dataQualityPercentValue
+}: {dataQualityPercentValue: number}) {
+  const Wrapper = getProgressBarWrapperComponent(dataQualityPercentValue);
+
   return (
-    <ProgressBoxWrapper>
-      <ProgressBoxInnerWrapper>
-        <ArcContainer value={Math.round(value)} />
-      </ProgressBoxInnerWrapper>
-      {Math.round(value) < 100 ? (
-        <ErrorFont component="div" data-testid="circular-bar-value">
-          {Math.round(value)}%
-        </ErrorFont>
-      ) : (
-        <SuccessText component="div" data-testid="circular-bar-value">
-          {Math.round(value)}%
-        </SuccessText>
-      )}
-    </ProgressBoxWrapper>
+    <Wrapper data-testid="semi-circular-progress-bar-wrapper">
+      <SemiCircleProgressBar
+        strokeWidth="5"
+        diameter="75"
+        percentage={Math.floor(dataQualityPercentValue)}
+        stroke={dataQualityPercentValue === 0 ? '#8BCC74' : '#E97567'}
+        showPercentValue={true}
+      />
+    </Wrapper>
   );
 }

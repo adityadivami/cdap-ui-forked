@@ -75,7 +75,7 @@ export default function({
       </SelectColumnTableBodyCell>
       <SelectColumnTableBodyCell>
         {dataQualityValue?.length && (
-          <DataQualityProgress value={Number(dataQualityValue[columnIndex]?.value)} />
+          <DataQualityProgress dataQualityPercentValue={Number(dataQualityValue[columnIndex]?.value)} />
         )}
       </SelectColumnTableBodyCell>
     </SelectColumnTableRow>
