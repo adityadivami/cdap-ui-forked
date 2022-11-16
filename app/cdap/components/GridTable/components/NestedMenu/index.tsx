@@ -20,7 +20,7 @@ import MenuItemComponent from 'components/GridTable/components/MenuItemComponent
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
 import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
 import { findIndex } from 'lodash';
-import {NestedMenuComponent} from 'components/common/MenuContainer';
+import { NestedMenuComponent } from 'components/common/MenuContainer';
 
 export default function({
   menuOptions,
