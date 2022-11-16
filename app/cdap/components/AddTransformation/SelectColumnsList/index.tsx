@@ -41,6 +41,7 @@ const SelectColumnSearchInput = styled.input`
   margin-right: 5px;
   border: none;
   border-bottom: 1px solid transparent;
+  margin-bottom: 5px;
   &:focus {
     border-bottom: 1px solid ${grey[700]};
     outline: none;
@@ -81,7 +82,7 @@ export default function({
   transformationName,
   selectedColumns,
 }: ISelectColumnsListProps) {
-  
+
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const ref = useRef(null);
