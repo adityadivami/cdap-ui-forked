@@ -14,9 +14,9 @@
  * the License.
  */
 
-import { makeStyles, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { blue, grey } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import Breadcrumb from 'components/GridTable/components/Breadcrumb';
@@ -34,6 +34,15 @@ interface ISubHeader {
 const AddConnectionIcon = styled(AddCircleOutlineOutlinedIcon)`
   font-size: x-large;
   color: ${grey[700]};
+`;
+
+const BreadcrumbContainer = styled(Box)`
+  border-bottom: 1px solid ${grey[300]};
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  align-items: center;
+  padding-right: 30px;
 `;
 
 const CustomizedLink = styled(Link)`
@@ -70,35 +79,12 @@ const TypographyLabel = styled(Typography)`
   line-height: 21px;
 `;
 
-export const useStyles = makeStyles({
-  breadcrumbContainer: {
-    borderBottom: `1px solid ${grey[300]}`,
-    display: 'flex',
-    justifyContent: 'space-between',
-    height: '48px',
-    alignItems: 'center',
-    paddingRight: 30,
-    '& .MuiBreadcrumbs-root': {
-      fontSize: '14px',
-      fontWeight: '400',
-    },
-    '& .MuiTypography-root': {
-      color: '#000000',
-      lineHeight: '21px',
-    },
-    '& a': {
-      color: blue[500],
-      lineHeight: '21px',
-    },
-  },
-});
-
 export default function({ selectedConnection }: ISubHeader) {
-  const classes = useStyles();
   const location = useLocation();
+  console.log(selectedConnection, 'selectedConnection');
 
   return (
-    <Box className={classes.breadcrumbContainer} data-testid="breadcrumb-container-parent">
+    <BreadcrumbContainer data-testid="breadcrumb-container-parent">
       <Breadcrumb
         datasetName={T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
         location={location}
@@ -108,7 +94,7 @@ export default function({ selectedConnection }: ISubHeader) {
           to={{
             pathname: `/ns/${getCurrentNamespace()}/connections/create`,
             state: {
-              from: { addConnectionRequestFromNewUI: 'Select Dataset' },
+              from: { addConnectionRequestFromNewUI: selectedConnection },
             },
           }}
         >
@@ -126,6 +112,6 @@ export default function({ selectedConnection }: ISubHeader) {
           </TypographyLabel>
         </ImportDataContainer>
       </FeaturesContainer>
-    </Box>
+    </BreadcrumbContainer>
   );
 }

@@ -16,10 +16,13 @@
 
 import { Box } from '@material-ui/core';
 import { blue, grey } from '@material-ui/core/colors';
+import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import { IConnectionTabType } from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
 import Header from 'components/ConnectionList/Components/Header';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
 import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
 import { IFilteredData, ITabData, ITabsDataResponse } from 'components/ConnectionList/types';
+import { getDataForTabsHelper, getUpdatedTabsData } from 'components/ConnectionList/utils';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { IRecords } from 'components/GridTable/types';
@@ -32,9 +35,6 @@ import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import styled from 'styled-components';
-import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
-import { getUpdatedTabsData, getDataForTabsHelper } from 'components/ConnectionList/utils';
-import { IConnectionTabType } from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
 
 const PREFIX = 'features.WranglerNewUI';
 

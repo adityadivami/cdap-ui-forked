@@ -18,7 +18,7 @@ import { ChangeEvent, Dispatch, MouseEvent, MutableRefObject, SetStateAction } f
 import {
   IConnectionTabPluginArtifact,
   IConnectionTabType,
-} from './Components/ConnectionTabs/Components/RenderLabel';
+} from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
 
 export interface IFilteredData {
   data: ITabData[];
