@@ -23,7 +23,7 @@ export default function({
   isSingleSelection,
   selectedColumns,
   onSingleSelection,
-  eachColumn,
+  columnDetail,
   handleDisableCheckbox,
   onMultipleSelection,
 }: IInputWidgetProps) {
@@ -33,12 +33,12 @@ export default function({
         <RadioInput
           selectedColumns={selectedColumns}
           onSingleSelection={onSingleSelection}
-          eachColumn={eachColumn}
+          columnDetail={columnDetail}
         />
       ) : (
         <CheckboxInput
           selectedColumns={selectedColumns}
-          eachColumn={eachColumn}
+          columnDetail={columnDetail}
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
         />

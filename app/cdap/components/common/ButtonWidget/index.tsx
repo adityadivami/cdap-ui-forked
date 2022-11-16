@@ -15,7 +15,7 @@
  */
 
 import { Button } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
+import { blue, grey } from '@material-ui/core/colors';
 import styled from 'styled-components';
 
 export const AddTransformationButton = styled(Button)`
@@ -36,5 +36,8 @@ export const AddTransformationButton = styled(Button)`
   margin-right: 8px;
   &:hover {
     background: ${blue[500]};
+  }
+  &.Mui-disabled {
+    background: ${grey[300]};
   }
 `;

@@ -19,21 +19,20 @@ import { IStatistics } from 'components/GridTable/types';
 
 export const getDataQuality = (statistics: IStatistics, columnList: IHeaderNamesList[]) => {
   const dataQuality: IDataQualityItem[] = [];
-  columnList?.length &&
-    columnList?.forEach((columnName: IHeaderNamesList) => {
-      const generalValues: IDataQualityItem = statistics[columnName.name].general;
-      if (generalValues.null) {
-        const nullCount = generalValues.null || 0;
-        dataQuality.push({
-          label: columnName.name,
-          value: nullCount,
-        });
-      } else {
-        dataQuality.push({
-          label: columnName.name,
-          value: '0',
-        });
-      }
-    });
+  columnList?.forEach((columnName: IHeaderNamesList) => {
+    const generalValues: IDataQualityItem = statistics[columnName.name].general;
+    if (generalValues.null) {
+      const nullCount = generalValues.null || 0;
+      dataQuality.push({
+        label: columnName.name,
+        value: nullCount,
+      });
+    } else {
+      dataQuality.push({
+        label: columnName.name,
+        value: '0',
+      });
+    }
+  });
   return dataQuality;
 };

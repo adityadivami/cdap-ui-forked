@@ -18,8 +18,34 @@ import React from 'react';
 import InputWidget from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
 import DataQualityProgress from 'components/AddTransformation/CircularProgressBar';
 import { ITableRowProps } from 'components/AddTransformation/ColumnTable/types';
-import { SelectColumnTableBodyCell, SelectColumnTableRow } from 'components/common/TableContainer';
 import { TableCellText } from 'components/common/TypographyText';
+import { TableRow, TableCell } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import styled from 'styled-components';
+
+const SelectColumnTableRow = styled(TableRow)`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: ${grey[700]};
+  display: grid;
+  grid-template-columns: 10% 45% 45%;
+  align-items: center;
+  height: 100%;
+`;
+
+const SelectColumnTableBodyCell = styled(TableCell)`
+  &.MuiTableCell-body {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.15px;
+    color: ${grey[700]};
+    padding: 5px;
+    height: 64px;
+  }
+`;
 
 export default function({
   onSingleSelection,
@@ -28,28 +54,28 @@ export default function({
   isSingleSelection,
   handleDisableCheckbox,
   onMultipleSelection,
-  index,
-  eachColumn,
+  columnIndex,
+  columnDetail,
 }: ITableRowProps) {
   return (
-    <SelectColumnTableRow key={index}>
+    <SelectColumnTableRow key={`column-${columnIndex}`}>
       <SelectColumnTableBodyCell>
         <InputWidget
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
           onSingleSelection={onSingleSelection}
-          eachColumn={eachColumn}
+          columnDetail={columnDetail}
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
         />
       </SelectColumnTableBodyCell>
       <SelectColumnTableBodyCell>
-        <TableCellText component="div">{eachColumn.label}</TableCellText>
-        <TableCellText component="div">{eachColumn.type}</TableCellText>
+        <TableCellText component="div">{columnDetail.label}</TableCellText>
+        <TableCellText component="div">{columnDetail.type}</TableCellText>
       </SelectColumnTableBodyCell>
       <SelectColumnTableBodyCell>
         {dataQualityValue?.length && (
-          <DataQualityProgress value={Number(dataQualityValue[index]?.value)} />
+          <DataQualityProgress value={Number(dataQualityValue[columnIndex]?.value)} />
         )}
       </SelectColumnTableBodyCell>
     </SelectColumnTableRow>

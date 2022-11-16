@@ -106,7 +106,6 @@ export default function({
             />
           </AddTransformationBodyWrapper>
           <AddTransformationButton
-            variant="contained"
             disabled={enableDoneButton()}
             color="primary"
             data-testid="button_apply"

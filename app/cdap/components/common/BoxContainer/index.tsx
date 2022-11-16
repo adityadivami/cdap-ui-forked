@@ -46,75 +46,13 @@ export const SearchBoxWrapper = styled(Box)`
   min-width: 490px;
 `;
 
-export const ProgressBoxWrapper = styled(Box)`
-  position: relative;
-  margin: 4px;
-  float: left;
-  text-align: center;
-`;
-
-export const ProgressBoxInnerWrapper = styled(Box)`
-  position: relative;
-  overflow: hidden;
-  width: 60px;
-  height: 30px;
-  margin-bottom: -20px !important;
-`;
-
-export const SelectColumnWrapper = styled(Box)`
-  height: 90%;
-`;
-
-export const SelectColumnInnerWrapper = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-`;
-
 export const PointerBox = styled(Box)`
   cursor: pointer;
-`;
-
-export const FlexWrapper = styled(Box)`
-  display: flex;
-`;
-
-export const CenterAlignBox = styled(Box)`
-  text-align: center;
-`;
-
-export const SelectColumnWidgetBox = styled(Box)`
-  padding-top: 5px;
-  padding-bottom: 15px;
 `;
 
 export const FlexAlignCenter = styled(Box)`
   display: flex;
   align-items: center;
-`;
-
-export const DrawerContainerInnerFlex = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 15px;
-`;
-
-export const BackIconBox = styled(Box)`
-  cursor: pointer;
-  margin-right: 10px;
-`;
-
-export const DrawerHeadWrapper = styled(Box)`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const SelectColumnSearchBox = styled(Box)`
-  position: relative;
-  display: flex;
-  margin-right: 10px;
 `;
 
 export const AddTransformationWrapper = styled(Container)`
@@ -127,10 +65,4 @@ export const AddTransformationWrapper = styled(Container)`
 export const AddTransformationBodyWrapper = styled(Box)`
   height: calc(100% - 40px);
   overflow-y: auto;
-`;
-
-export const DrawerContainerBox = styled(Container)`
-  width: 460px;
-  height: 100%;
-  padding-left: 30px;
 `;

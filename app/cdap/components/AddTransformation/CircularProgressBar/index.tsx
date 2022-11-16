@@ -17,10 +17,8 @@
 import { Typography, Box } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
-import { ICircularProgressBarProps } from 'components/AddTransformation/CircularProgressBar/type';
 import { red, green } from '@material-ui/core/colors';
 import { ErrorFont, SuccessText } from 'components/common/TypographyText';
-import { ProgressBoxWrapper, ProgressBoxInnerWrapper } from 'components/common/BoxContainer';
 
 const ArcContainer = styled(Typography)`
   position: absolute;
@@ -36,38 +34,36 @@ const ArcContainer = styled(Typography)`
   transform: ${({ value }) => `rotate(${45 + value * 1.8}deg)` || 'rotate(0deg)'};
 `;
 
-export default function({ value }: ICircularProgressBarProps) {
+const ProgressBoxWrapper = styled(Box)`
+  position: relative;
+  margin: 4px;
+  float: left;
+  text-align: center;
+`;
+
+const ProgressBoxInnerWrapper = styled(Box)`
+  position: relative;
+  overflow: hidden;
+  width: 60px;
+  height: 30px;
+  margin-bottom: -20px !important;
+`;
+
+export default function({ value }: { value: number }) {
   return (
-    <>
-      <ProgressBoxWrapper
-        sx={{
-          position: 'relative',
-          margin: 4,
-          float: 'left',
-          textAlign: 'center',
-        }}
-      >
-        <ProgressBoxInnerWrapper
-          sx={{
-            position: 'relative',
-            overflow: 'hidden',
-            width: 60,
-            height: 30,
-            marginBottom: '-20px !important',
-          }}
-        >
-          <ArcContainer value={Math.round(value)} />
-        </ProgressBoxInnerWrapper>
-        {Math.round(value) < 100 ? (
-          <ErrorFont component="div" dataTestId="circular-bar-value">{`${Math.round(
-            value
-          )}%`}</ErrorFont>
-        ) : (
-          <SuccessText component="div" dataTestId="circular-bar-value">{`${Math.round(
-            value
-          )}%`}</SuccessText>
-        )}
-      </ProgressBoxWrapper>
-    </>
+    <ProgressBoxWrapper>
+      <ProgressBoxInnerWrapper>
+        <ArcContainer value={Math.round(value)} />
+      </ProgressBoxInnerWrapper>
+      {Math.round(value) < 100 ? (
+        <ErrorFont component="div" data-testid="circular-bar-value">
+          {Math.round(value)}%
+        </ErrorFont>
+      ) : (
+        <SuccessText component="div" data-testid="circular-bar-value">
+          {Math.round(value)}%
+        </SuccessText>
+      )}
+    </ProgressBoxWrapper>
   );
 }

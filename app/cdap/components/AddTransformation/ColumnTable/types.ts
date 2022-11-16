@@ -44,21 +44,21 @@ export interface ITableRowProps {
     event: React.ChangeEvent<HTMLInputElement>,
     value: IHeaderNamesList
   ) => void;
-  index: number;
-  eachColumn: IHeaderNamesList;
+  columnIndex: number;
+  columnDetail: IHeaderNamesList;
 }
 
 export interface IRadioInputProps {
   selectedColumns: IHeaderNamesList[];
   onSingleSelection: (value: IHeaderNamesList) => void;
-  eachColumn: IHeaderNamesList;
+  columnDetail: IHeaderNamesList;
 }
 
 export interface IInputWidgetProps {
   isSingleSelection: boolean;
   selectedColumns: IHeaderNamesList[];
   onSingleSelection: (value: IHeaderNamesList) => void;
-  eachColumn: IHeaderNamesList;
+  columnDetail: IHeaderNamesList;
   handleDisableCheckbox: () => boolean;
   onMultipleSelection: (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -69,7 +69,7 @@ export interface IInputWidgetProps {
 export interface ICheckBoxInputProps {
   selectedColumns: IHeaderNamesList[];
   handleDisableCheckbox: () => boolean;
-  eachColumn: IHeaderNamesList;
+  columnDetail: IHeaderNamesList;
   onMultipleSelection: (
     event: React.ChangeEvent<HTMLInputElement>,
     value: IHeaderNamesList

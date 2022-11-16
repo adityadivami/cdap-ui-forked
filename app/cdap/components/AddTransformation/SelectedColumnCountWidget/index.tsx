@@ -19,7 +19,6 @@ import T from 'i18n-react';
 import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
 import { NormalFont } from 'components/common/TypographyText';
-import { SelectColumnWidgetBox } from 'components/common/BoxContainer';
 
 export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
   const text = selectedColumnsCount
@@ -33,10 +32,8 @@ export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProp
       )}`;
 
   return (
-    <SelectColumnWidgetBox>
-      <NormalFont component="p" dataTestId="no-column-title">
-        {text}
-      </NormalFont>
-    </SelectColumnWidgetBox>
+    <NormalFont component="p" data-testid="no-column-title">
+      {text}
+    </NormalFont>
   );
 }
