@@ -127,6 +127,10 @@ export default function() {
   });
   const [showBreadCrumb, setShowBreadCrumb] = useState(true);
   const [openColumnView, setOpenColumnView] = useState(false);
+  const [deleteFromRecipe, setDeleteFromRecipe] = useState({
+    isDelete: false,
+    totalDelete: 0,
+  });
 
   useEffect(() => {
     setIsFirstWrangle(true);
@@ -245,6 +249,10 @@ export default function() {
     setLoading(true);
     setOptionSelected(option);
     setDirectiveFunctionSupportedDataType(supported_dataType);
+    setDeleteFromRecipe({
+      isDelete: false,
+      totalDelete: 0,
+    });
     if (
       (option === 'custom-selection' ||
         optionSelected === 'custom-selection' ||
@@ -307,6 +315,7 @@ export default function() {
   };
 
   const applyDirectiveAPICall = (newDirective, action, removed_arr, from) => {
+    console.log('newDirective, action, removed_arr, from', newDirective, action, removed_arr, from);
     setLoading(true);
     const { dataprep } = DataPrepStore.getState();
     const { workspaceId, workspaceUri, directives, insights } = dataprep;
@@ -493,13 +502,18 @@ export default function() {
   };
 
   const deleteRecipes = (new_arr, remaining_arr) => {
-    applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
+    console.log('new_arr, remaining_arr', new_arr, remaining_arr);
+    setDeleteFromRecipe({
+      isDelete: true,
+      totalDelete: remaining_arr.length,
+    });
     DataPrepStore.dispatch({
       type: DataPrepActions.setUndoDirective,
       payload: {
-        undoDirectives: [],
+        undoDirectives: undoDirectives.concat(remaining_arr),
       },
     });
+    applyDirectiveAPICall(new_arr, 'delete', remaining_arr, 'panel');
   };
 
   // Redux store
@@ -535,30 +549,46 @@ export default function() {
 
   const undoRedoFunction = (option) => {
     if (option === 'undo') {
-      const last_element = directives.slice(-1);
-      const newDirective = directives.slice(0, -1);
-      console.log('last_element', last_element, directives, newDirective);
+      console.log('undoDirectives', undoDirectives);
+      const last_element = deleteFromRecipe.isDelete
+        ? undoDirectives.slice(-deleteFromRecipe.totalDelete)
+        : directives.slice(-1);
+      const newDirective = deleteFromRecipe.isDelete
+        ? undoDirectives.slice(-deleteFromRecipe.totalDelete)
+        : directives.slice(0, -1);
       DataPrepStore.dispatch({
         type: DataPrepActions.setUndoDirective,
         payload: {
-          undoDirectives: undoDirectives.concat(last_element),
+          undoDirectives: deleteFromRecipe.isDelete
+            ? undoDirectives.slice(-deleteFromRecipe.totalDelete)
+            : undoDirectives.concat(last_element),
         },
       });
-      applyDirectiveAPICall(newDirective, '', [], '');
+      deleteFromRecipe.isDelete
+        ? applyDirectiveAPICall(newDirective, 'add', [], '')
+        : applyDirectiveAPICall(newDirective, 'delete', last_element, '');
     } else if (option === 'redo') {
-      const last_element = undoDirectives.slice(-1);
-      const newDirective = directives.concat(last_element);
-      console.log('last_element', last_element, directives, newDirective);
+      const last_element = deleteFromRecipe.isDelete
+        ? directives.slice(-deleteFromRecipe.totalDelete)
+        : undoDirectives.slice(-1);
+      const newDirective = deleteFromRecipe.isDelete
+        ? directives.slice(0, -deleteFromRecipe.totalDelete)
+        : last_element;
+
       DataPrepStore.dispatch({
         type: DataPrepActions.setUndoDirective,
         payload: {
-          undoDirectives: undoDirectives.slice(0, -1),
+          undoDirectives: deleteFromRecipe.isDelete
+            ? undoDirectives.concat(last_element)
+            : undoDirectives.slice(0, -1),
         },
       });
-      applyDirectiveAPICall(newDirective, '', [], '');
+      deleteFromRecipe.isDelete
+        ? applyDirectiveAPICall(newDirective, 'delete', last_element, '')
+        : applyDirectiveAPICall(newDirective, 'add', [], '');
     }
   };
-  console.log('directives', directives, undoDirectives);
+
   return (
     <Box>
       {showBreadCrumb && (
