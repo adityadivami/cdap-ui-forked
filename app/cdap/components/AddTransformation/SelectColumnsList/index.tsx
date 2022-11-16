@@ -15,7 +15,6 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
 import { ISelectColumnsListProps } from 'components/AddTransformation/SelectColumnsList/types';
@@ -25,16 +24,54 @@ import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import {
-  SelectColumnWrapper,
-  SelectColumnInnerWrapper,
-  PointerBox,
-  FlexWrapper,
-  CenterAlignBox,
-  SelectColumnSearchBox,
-} from 'components/common/BoxContainer';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
-import { SelectColumnSearchInput } from 'components/common/InputFieldComponent';
+import { Box, IconButton } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
+
+const SearchIconComponent = styled(SearchIcon)`
+  &.MuiSvgIcon-root {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+const SelectColumnSearchInput = styled.input`
+  margin-right: 5px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 5px;
+  &:focus {
+    border-bottom: 1px solid ${grey[700]};
+    outline: none;
+  }
+`;
+
+const SelectColumnWrapper = styled(Box)`
+  height: 90%;
+`;
+
+const SelectColumnInnerWrapper = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+const FlexWrapper = styled(Box)`
+  display: flex;
+`;
+
+const CenterAlignBox = styled(Box)`
+  text-align: center;
+`;
+
+const SelectColumnSearchBox = styled(Box)`
+  position: relative;
+  display: flex;
+  margin-right: 10px;
+`;
 
 export default function({
   transformationDataType,
@@ -46,7 +83,6 @@ export default function({
   selectedColumns,
 }: ISelectColumnsListProps) {
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
-  const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const ref = useRef(null);
 
@@ -55,6 +91,7 @@ export default function({
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName
     );
+
     if (multiSelect.length) {
       setIsSingleSelection(false);
     }
@@ -110,11 +147,7 @@ export default function({
             columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
           )
         : [];
-      if (columnValue?.length) {
-        setColumns(columnValue);
-      } else {
-        setColumns([]);
-      }
+      columnValue?.length ? setColumns(columnValue) : setColumns([]);
     } else {
       setColumns(columnsList);
     }
@@ -122,34 +155,27 @@ export default function({
 
   const handleFocus = () => {
     ref?.current?.focus();
-    setFocused(true);
   };
 
   return (
-    <SelectColumnWrapper dataTestId="select-column-list-parent">
+    <SelectColumnWrapper data-testid="select-column-list-parent">
       <SelectColumnInnerWrapper>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <SelectColumnSearchBox>
-          <SelectColumnSearchInput
-            data-testid="input_id"
-            onChange={handleSearch}
-            ref={ref}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-          />
-          <PointerBox onClick={handleFocus} data-testid="click-handle-focus">
-            {SearchIcon}
-          </PointerBox>
+          <SelectColumnSearchInput data-testid="input_id" onChange={handleSearch} ref={ref} />
+          <IconButton onClick={handleFocus} data-testid="click-handle-focus">
+            <SearchIconComponent />
+          </IconButton>
         </SelectColumnSearchBox>
       </SelectColumnInnerWrapper>
-      {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
+      {columnsAsPerType.length === 0 ? (
         <FlexWrapper>
           <CenterAlignBox>
             {NoDataSVG}
-            <SubHeadBoldFont component="p" dataTestId="no-column-title">
+            <SubHeadBoldFont component="p" data-testid="no-column-title">
               {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
             </SubHeadBoldFont>
-            <NormalFont component="p" dataTestId="no-column-subTitle">
+            <NormalFont component="p" data-testid="no-column-subTitle">
               {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
             </NormalFont>
           </CenterAlignBox>

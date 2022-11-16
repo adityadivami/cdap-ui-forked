@@ -28,19 +28,12 @@ describe('It should test the SelectColumnsList Component', () => {
           <Route>
             <SelectColumnsList
               selectedColumnsCount={1}
-              // columnsList={[
-              //   { label: 'hello', type: ['a', 'b'], name: 'test' },
-              //   { label: 'hello', type: ['a', 'b'], name: 'test' },
-              // ]}
               setSelectedColumns={() => jest.fn()}
               dataQuality={[]}
               transformationDataType={[]}
               columnsList={[]}
               transformationName={''}
-              selectedColumns={[]} // directiveFunctionSupportedDataType={[]}
-              // columnData={[]}
-              // functionName={''} // transformationDataType={[]}
-              // transformationName={''}
+              selectedColumns={[]}
             />
           </Route>
         </Switch>

@@ -15,13 +15,37 @@
  */
 import React from 'react';
 import T from 'i18n-react';
-import { TickIcon, InfoIcon } from 'components/AddTransformation/iconStore';
-import { IFunctionNameWidgetProps } from 'components/AddTransformation/FunctionNameWidget/types';
+import { TickIcon } from 'components/AddTransformation/IconStore/tickIcon';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
-import { TransformationNameHeadWrapper, TransformationNameTextInfoWrapper, TransformationNameBox, PointerBox } from 'components/common/BoxContainer';
 import { SubHeadNormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import styled from 'styled-components';
+import { blue } from '@material-ui/core/colors';
 
-export default function({ transformationName }: IFunctionNameWidgetProps) {
+const TransformationNameBox = styled.section`
+  padding: 15px 0;
+  border-bottom: 1px solid #DADCE0;
+`;
+
+const TransformationNameHeadWrapper = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const TransformationNameTextInfoWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  padding: 10px 0 0;
+`;
+
+const InfoIconComponent = styled(InfoOutlinedIcon)`
+  margin-left: 5px;
+  color: ${blue[500]};
+  cursor: pointer;
+`
+
+export default function({ transformationName }: {transformationName: string}) {
 
   return (
     <TransformationNameBox>
@@ -36,10 +60,8 @@ export default function({ transformationName }: IFunctionNameWidgetProps) {
         <SubHeadNormalFont
           component="span"
           data-testid="selected-function-name"
-        >{transformationName}</SubHeadNormalFont>&nbsp;
-        <PointerBox>
-          {InfoIcon}
-        </PointerBox>
+        >{transformationName}</SubHeadNormalFont>
+          <InfoIconComponent data-testid="info-link"/>
       </TransformationNameTextInfoWrapper>
     </TransformationNameBox>
   );

@@ -26,7 +26,3 @@ export interface IDrawerWidgetProps {
   showBackIcon?: boolean;
   anchor?: 'bottom' | 'left' | 'right' | 'top';
 }
-
-export interface IDrawerWidgetHeadingProps {
-  headingText?: string;
-}

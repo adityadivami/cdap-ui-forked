@@ -24,7 +24,7 @@ import {
   IMultipleSelectedFunctionDetail,
   IDataQualityItem,
 } from 'components/AddTransformation/types';
-import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
+import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
 import {
   multipleColumnSelected,
   ADD_TRANSFORMATION_PREFIX,
@@ -38,7 +38,12 @@ import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget'
 import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { getDirective } from 'components/AddTransformation/utils';
-import { Divider } from '@material-ui/core';
+import { Box, Divider } from '@material-ui/core';
+import styled from 'styled-components';
+
+const CountWidgetWrapper = styled(Box)`
+  padding: 10px 0;
+`;
 
 export default function({
   transformationDataType,
@@ -115,7 +120,9 @@ export default function({
       >
         <AddTransformationWrapper>
           <AddTransformationBodyWrapper>
-            <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
+            <CountWidgetWrapper>
+              <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
+            </CountWidgetWrapper>
             <Divider />
             <FunctionNameWidget transformationName={transformationName} />
             <SelectColumnsWidget
@@ -153,7 +160,6 @@ export default function({
             />
           </AddTransformationBodyWrapper>
           <AddTransformationButton
-            variant="contained"
             disabled={enableDoneButton()}
             color="primary"
             data-testid="button_apply"

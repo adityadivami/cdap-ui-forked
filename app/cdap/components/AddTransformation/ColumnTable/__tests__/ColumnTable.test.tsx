@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import ColumnTable from 'components/AddTransformation/ColumnTable';
 import T from 'i18n-react';
@@ -23,7 +23,10 @@ describe('It should test FunctionNameWidget Component', () => {
   it('Should render the FunctionNameWidget Component', () => {
     render(
       <ColumnTable
-        columns={[{ name: 'a', type: ['test'], label: 'test' }]}
+        columns={[
+          { name: 'a', type: ['test'], label: 'test' },
+          { name: 'a', type: ['test'], label: 'test' },
+        ]}
         transformationDataType={['all']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
@@ -33,19 +36,61 @@ describe('It should test FunctionNameWidget Component', () => {
         onMultipleSelection={() => jest.fn()}
         totalColumnCount={0}
         setSelectedColumns={() => jest.fn()}
-        transformationName={''}
+        transformationName={'swap-columns'}
       />
     );
+    const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
+    fireEvent.click(checkBoxElement);
+    expect(checkBoxElement).toBeInTheDocument();
     expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
     expect(screen.getByTestId(/panel-columns/i)).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}`
     );
   });
 
-  it('Should render the FunctionNameWidget Component with data tye as test', () => {
+  it('Should render the FunctionNameWidget Component with data type as test', () => {
+    const f = [
+      { name: 'string', label: 'string', type: ['test1', 'mock'] },
+      { name: 'string', label: 'string', type: ['test2', 'mock'] },
+      { name: 'string', label: 'string', type: ['Abhilash', 'IronMan'] },
+    ];
     render(
       <ColumnTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
+        transformationDataType={['test']}
+        onSingleSelection={() => jest.fn()}
+        selectedColumns={f}
+        dataQualityValue={[]}
+        isSingleSelection={false}
+        handleDisableCheckbox={() => false}
+        onMultipleSelection={() => jest.fn()}
+        totalColumnCount={0}
+        setSelectedColumns={() => jest.fn()}
+        transformationName={'swap-columns'}
+      />
+    );
+    const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
+    fireEvent.click(checkBoxElement);
+    expect(screen.getByTestId(/panel-values/i)).toHaveTextContent(
+      `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}`
+    );
+    expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
+  });
+
+  it('Should trigger the checkboxs handleChange when colums length is greater than 2', () => {
+    const f = [
+      { name: 'string', label: 'string', type: ['test1', 'mock'] },
+      { name: 'string', label: 'string', type: ['test2', 'mock'] },
+      { name: 'string', label: 'string', type: ['Abhilash', 'IronMan'] },
+    ];
+    const handleChange = jest.fn();
+    render(
+      <ColumnTable
+        columns={[
+          { name: 'a', type: ['test'], label: 'test' },
+          { name: 'a', type: ['test'], label: 'test' },
+          { name: 'a', type: ['test'], label: 'test' },
+        ]}
         transformationDataType={['test']}
         onSingleSelection={() => jest.fn()}
         selectedColumns={[]}
@@ -55,12 +100,11 @@ describe('It should test FunctionNameWidget Component', () => {
         onMultipleSelection={() => jest.fn()}
         totalColumnCount={0}
         setSelectedColumns={() => jest.fn()}
-        transformationName={''}
+        transformationName={'swap-columns'}
       />
     );
-    expect(screen.getByTestId(/panel-values/i)).toHaveTextContent(
-      `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}`
-    );
-    expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
+    const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
+    fireEvent.click(checkBoxElement);
+    expect(checkBoxElement).toBeInTheDocument();
   });
 });
