@@ -14,6 +14,7 @@
  * the License.
  */
 
+import { Box } from '@material-ui/core';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import TabLabelItem from 'components/ConnectionList/Components/LabelItemCanBrowse';
 import * as React from 'react';
@@ -49,7 +50,9 @@ export default function({ label, count, columnIndex, icon }: ITabLabelCanBrowseP
       key={`tooltip-${columnIndex}`}
       data-testid="connections-tab-ref-label-browse"
     >
-      <TabLabelItem myLabelRef={myLabelRef} icon={icon} label={label} count={count} />
+      <Box>
+        <TabLabelItem myLabelRef={myLabelRef} icon={icon} label={label} count={count} />
+      </Box>
     </CustomTooltip>
   ) : (
     <TabLabelItem
