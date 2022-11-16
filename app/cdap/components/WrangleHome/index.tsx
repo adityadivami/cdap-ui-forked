@@ -44,21 +44,21 @@ export default function() {
       <Box>
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle
-            title={T.translate('features.NewWranglerUI.HomePage.labels.connectorTypes.title')}
+            title={T.translate('features.WranglerNewUI.HomePage.labels.connectorTypes.title')}
           />
           <Box className={classes.viewMore}>
             <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}>
-              {T.translate('features.NewWranglerUI.HomePage.labels.common.viewAll')}
+              {T.translate('features.WranglerNewUI.HomePage.labels.common.viewAll')}
             </Link>
           </Box>
         </Box>
         <WrangleCard />
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle
-            title={T.translate('features.NewWranglerUI.HomePage.labels.workspaces.title')}
+            title={T.translate('features.WranglerNewUI.HomePage.labels.workspaces.title')}
           />
           <Box className={classes.viewMore}>
-            {T.translate('features.NewWranglerUI.HomePage.labels.common.viewAll')}
+            {T.translate('features.WranglerNewUI.HomePage.labels.common.viewAll')}
           </Box>
         </Box>
         <OngoingDataExplorations />

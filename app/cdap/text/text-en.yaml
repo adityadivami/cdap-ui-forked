@@ -3413,7 +3413,7 @@ features:
         title: Configure a pipeline
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
-  NewWranglerUI: 
+  WranglerNewUI: 
     NoRecordScreen:
       gridTable:
         title: No rows left in this sample
@@ -3444,3 +3444,4 @@ features:
       labels:
         loadToGrid: Wrangle
         noConnections: No Connections to show
+        dataConnections: Data Connections

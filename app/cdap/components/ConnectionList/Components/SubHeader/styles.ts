@@ -39,37 +39,9 @@ export const useStyles = makeStyles({
       lineHeight: '21px',
     },
   },
-  subHeaderIcon: {
-    fontSize: 'x-large',
-    color: grey[700],
-  },
   selectPrevPage: {
     display: 'flex',
     gap: '8px',
     alignItems: 'center',
-  },
-  importData: {
-    display: 'flex',
-    gap: '12px',
-    alignItems: 'flex-end',
-    '&:hover': {
-      cursor: 'pointer',
-    },
-  },
-  importDataContainer: {
-    display: 'flex',
-    gap: 30,
-    alignItems: 'flex-end',
-    fontSize: 14,
-  },
-  breadcrumbTyporgraphy: {
-    color: grey[900],
-    fontSize: 14,
-    lineHeight: '21px',
-  },
-  link: {
-    '&:hover': {
-      textDecoration: 'none',
-    },
   },
 });

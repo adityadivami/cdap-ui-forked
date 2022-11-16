@@ -15,13 +15,10 @@
  */
 
 import { Box, Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
-import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
-import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
+import { blue, grey } from '@material-ui/core/colors';
 import Header from 'components/ConnectionList/Components/Header';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
 import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
-import { useStyles } from 'components/ConnectionList/styles';
 import { IFilteredData, ITabData, ITabsDataResponse } from 'components/ConnectionList/types';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
@@ -35,13 +32,34 @@ import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import styled from 'styled-components';
+import ConnectionTabs from './Components/ConnectionTabs';
+import { IConnectorTabType } from './Components/ConnectionTabs/types';
 import { getUpdatedTabsData, setDataForTabsHelper } from './utils';
 
 const PREFIX = 'features.WranglerNewUI';
 
-const SelectDatasetWrapper = styled(Box)({
+const ConnectionsListContainer = styled(Box)`
+  width: 100vw;
+  overflow: scroll;
+  & * {
+    letterspacing: 0.15px;
+  }
+`;
+
+const FlexContainer = styled(Box)`
+  display: flex;
+`;
+
+const InfographicContainer = styled(FlexContainer)`
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 80px;
+  padding-bottom: 80px;
+`;
+
+const SelectDatasetWrapper = styled(FlexContainer)({
   overflowX: 'scroll',
-  display: 'flex',
   borderTop: `1px solid ${grey[300]}`,
 
   height: '100%',
@@ -53,19 +71,37 @@ const SelectDatasetWrapper = styled(Box)({
   },
 });
 
-const InfographicContainer = styled(Box)`
-  display: flex;
-  flex-grow: 1;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding-right: 80px;
-  padding-bottom: 80px;
-`;
-
-const TabsContainerWithHeader = styled(Box)`
-  display: flex;
+const TabsContainerWithHeader = styled(FlexContainer)`
   flex-direction: column;
   border-right: 1px solid ${grey[300]};
+`;
+
+const HeaderContainer = styled(FlexContainer)`
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  padding-left: 38px;
+`;
+
+const TabHeaderContainer = styled(Box)`
+  background-color: ${blue[50]};
+  & .MuiTypography-root{
+    font-size: 16px;
+    color: #000000;
+    },    
+`;
+
+const ContainerForLoader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  opacity: 0.5;
+  background: white;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
 `;
 
 export default function() {
@@ -78,7 +114,6 @@ export default function() {
   const [loading, setLoading] = useState<boolean>(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
   const [tabsLength, setTabsLength] = useState<number>(0);
-  const classes = useStyles();
   const [tabsData, setTabsData] = useState<IFilteredData[]>([
     {
       data: [],
@@ -97,9 +132,11 @@ export default function() {
   const getConnectionsTabData = async () => {
     let connectorTypes: ITabData[] = [];
     let connectorTypesWithSVG: ITabData[] = [];
+
     const connectorTypesWithIcons = (data) => {
       connectorTypesWithSVG = data?.connectorTypes;
     };
+
     // Fetching all the available connectors list with icons
     await getWidgetData(connectorTypesWithIcons);
     connectorTypes = connectorTypesWithSVG;
@@ -255,21 +292,21 @@ export default function() {
 
   const headerForLevelZero = () => {
     return (
-      <Box className={classes.styleForLevelZero}>
+      <HeaderContainer>
         <Typography variant="body2" component="div">
-          Data Connections
+          {T.translate(`${PREFIX}.ConnectionsList.labels.dataConnections`)}
         </Typography>
-      </Box>
+      </HeaderContainer>
     );
   };
 
   let headerContent;
 
   return (
-    <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
+    <ConnectionsListContainer data-testid="data-sets-parent">
       <SubHeader selectedConnection={tabsData[0]?.selectedTab} />
       {tabsData && Array.isArray(tabsData) && tabsData.length && tabsData[0]?.data?.length > 0 ? (
-        <Box className={classes.connectionsWithInfo}>
+        <FlexContainer>
           <SelectDatasetWrapper>
             {filteredData &&
               Array.isArray(filteredData) &&
@@ -303,7 +340,7 @@ export default function() {
                 }
                 return (
                   <TabsContainerWithHeader>
-                    <Box className={classes.tabHeaders}>{headerContent}</Box>
+                    <TabHeaderContainer>{headerContent}</TabHeaderContainer>
                     <ConnectionTabs
                       tabsData={eachFilteredData}
                       handleChange={selectedTabValueHandler}
@@ -324,7 +361,7 @@ export default function() {
               <InfoGraph />
             </InfographicContainer>
           )}
-        </Box>
+        </FlexContainer>
       ) : (
         loading && (
           <NoRecordScreen
@@ -335,14 +372,14 @@ export default function() {
       )}
 
       {loading && (
-        <div className={classes.loadingContainer}>
+        <ContainerForLoader>
           <LoadingSVG />
-        </div>
+        </ContainerForLoader>
       )}
 
       {isErrorOnNoWorkspace && (
         <ErrorSnackbar handleCloseError={() => setIsErrorOnNoWorkSpace(false)} />
       )}
-    </Box>
+    </ConnectionsListContainer>
   );
 }

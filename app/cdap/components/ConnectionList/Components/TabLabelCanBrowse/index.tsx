@@ -16,7 +16,7 @@
 
 import { Box } from '@material-ui/core';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
-import TabLabelItem from 'components/ConnectionList/Components/TabLabelCanBrowse/Components/TabLabelItem';
+import TabLabelItem from 'components/ConnectionList/Components/LabelItemCanBrowse';
 import * as React from 'react';
 import { createRef, Ref, useEffect, useState } from 'react';
 

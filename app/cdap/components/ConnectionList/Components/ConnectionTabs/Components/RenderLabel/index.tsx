@@ -14,10 +14,10 @@
  * the License.
  */
 
-import { IRenderLabelProps } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import TabLabelCanBrowse from 'components/ConnectionList/Components/TabLabelCanBrowse';
 import TabLabelCanSample from 'components/ConnectionList/Components/TabLabelCanSample';
 import React from 'react';
+import { IRenderLabelProps } from 'components/ConnectionList/Components/ConnectionTabs/types';
 
 export default function({
   columnIndex,

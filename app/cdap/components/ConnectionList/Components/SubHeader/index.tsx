@@ -14,8 +14,9 @@
  * the License.
  */
 
+import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { blue, grey } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
@@ -31,6 +32,43 @@ interface ISubHeader {
   selectedConnection: string;
 }
 
+const FlexContainer = styled(Box)`
+  display: flex;
+  align-items: flex-end;
+`;
+const FeaturesContainer = styled(FlexContainer)`
+  gap: 30px;
+  font-size: 14px;
+`;
+
+const ImportDataContainer = styled(FlexContainer)`
+  gap: 12px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const TypographyLabel = styled(Typography)`
+  color: ${grey[900]};
+  font-size: 14px;
+  line-height: 21px;
+`;
+
+const CustomizedLink = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+const AddConnectionIcon = styled(AddCircleOutlineOutlinedIcon)`
+  font-size: x-large;
+  color: ${grey[700]};
+`;
+
+const SaveIcon = styled(SaveAltRoundedIcon)`
+  font-size: x-large;
+  color: ${grey[700]};
+`;
 // const BreadcrumbContainer = styled(Box)`
 //     border-bottom: 1px solid ${grey[300]};
 //     display: flex;
@@ -67,31 +105,30 @@ export default function({ selectedConnection }: ISubHeader) {
       id="breadcrumb-container-parent"
     >
       <Breadcrumb
-        datasetName={T.translate('features.NewWranglerUI.Breadcrumb.labels.connectionsList')}
+        datasetName={T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
         location={location}
       />
 
-      <Box className={classes.importDataContainer}>
-        <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>
-          <Box
+      <FeaturesContainer>
+        <CustomizedLink to={`/ns/${getCurrentNamespace()}/connections/create`}>
+          <ImportDataContainer
             onClick={handleAddConnection}
-            className={classes.importData}
             data-testid="sub-header-handle-add-connection"
             id="sub-header-handle-add-connection"
           >
-            <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
-            <Box className={classes.breadcrumbTyporgraphy}>
-              {T.translate('features.NewWranglerUI.AddConnections.referenceLabel')}
-            </Box>
-          </Box>
-        </Link>
-        <Box className={classes.importData}>
-          <SaveAltRoundedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.NewWranglerUI.ImportData.referenceLabel')}
-          </Box>
-        </Box>
-      </Box>
+            <AddConnectionIcon />
+            <TypographyLabel>
+              {T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}
+            </TypographyLabel>
+          </ImportDataContainer>
+        </CustomizedLink>
+        <ImportDataContainer>
+          <SaveIcon />
+          <TypographyLabel>
+            {T.translate('features.WranglerNewUI.ImportData.referenceLabel')}
+          </TypographyLabel>
+        </ImportDataContainer>
+      </FeaturesContainer>
     </Box>
   );
 }

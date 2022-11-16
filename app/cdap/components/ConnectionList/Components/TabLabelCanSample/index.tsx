@@ -18,7 +18,7 @@ import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
-import TabLabelItem from 'components/ConnectionList/Components/TabLabelCanSample/Components/TabLabelItem';
+import TabLabelItem from 'components/ConnectionList/Components/LabelItemCanSample';
 import { WrangleIcon } from 'components/ConnectionList/IconStore/WrangleIcon';
 import { createWorkspace } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { ConnectionsContext } from 'components/Connections/ConnectionsContext';
@@ -112,7 +112,7 @@ export default function({
       to={{
         pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${workspaceId}`,
         state: {
-          from: T.translate('features.NewWranglerUI.Breadcrumb.labels.connectionsList'),
+          from: T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList'),
           path: requiredPath,
         },
       }}
@@ -130,7 +130,7 @@ export default function({
             <Box className="wranglingHover">
               <WrangleIcon />
               <Typography color="primary" variant="body2" component="span">
-                {T.translate('features.NewWranglerUI.ConnectionsList.labels.loadToGrid')}
+                {T.translate('features.WranglerNewUI.ConnectionsList.labels.loadToGrid')}
               </Typography>
             </Box>
           }
@@ -148,7 +148,7 @@ export default function({
         <Box className="wranglingHover">
           <WrangleIcon />
           <Typography variant="body2" color="primary" component="span">
-            {T.translate('features.NewWranglerUI.ConnectionsList.labels.loadToGrid')}
+            {T.translate('features.WranglerNewUI.ConnectionsList.labels.loadToGrid')}
           </Typography>
         </Box>
       }

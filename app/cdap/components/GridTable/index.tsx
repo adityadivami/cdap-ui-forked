@@ -189,8 +189,8 @@ export default function GridTable() {
       <Breadcrumb datasetName={workspaceName} location={location} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
-          title={T.translate('features.NewWranglerUI.NoRecordScreen.gridTable.title')}
-          subtitle={T.translate('features.NewWranglerUI.NoRecordScreen.gridTable.subtitle')}
+          title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
+          subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
         />
       )}
       <Table aria-label="simple table" className="test" data-testid="grid-table">
