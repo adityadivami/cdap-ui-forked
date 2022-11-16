@@ -26,7 +26,7 @@ import { formatDirectiveUsageData, handlePasteDirective } from 'components/Direc
 import T from 'i18n-react';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { PREFIX } from 'components/DirectiveInput/constants';
+import { PREFIX, multipleColumnDirective } from 'components/DirectiveInput/constants';
 import { grey } from '@material-ui/core/colors';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 
@@ -78,7 +78,7 @@ const CloseIconButton = styled(IconButton)`
   color: #ffffff;
 `;
 
-export default function({
+export default function ({
   columnNamesList,
   onDirectiveInputHandler,
   onClose,
@@ -105,9 +105,16 @@ export default function({
       const directiveSyntax =
         directiveUsage.length > 0 ? directiveUsage[0]?.item?.usage.split(' ') : [];
       const inputSplit = inputBoxValue.replace(/^\s+/g, '').split(' ');
+      console.log('directiveSyntax, inputSplit', directiveSyntax, inputSplit)
       if (event.key === 'Enter' && handlePasteDirective(inputBoxValue, directivesList)) {
         onDirectiveInputHandler(inputBoxValue);
-      } else if (
+      }
+      else if (multipleColumnDirective.includes(inputSplit[0]) && event.key === 'Enter' &&
+        columnSelected &&
+        selectedDirective && (directiveSyntax.length === inputSplit.length || inputSplit.length > directiveSyntax.length || inputSplit.length < directiveSyntax.length)) {
+        onDirectiveInputHandler(inputBoxValue);
+      }
+      else if (
         event.key === 'Enter' &&
         columnSelected &&
         selectedDirective &&

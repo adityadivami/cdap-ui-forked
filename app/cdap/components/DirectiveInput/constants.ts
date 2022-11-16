@@ -142,3 +142,5 @@ export const defaultFuseOptions = {
 };
 
 export const PREFIX = 'features.WranglerNewUI.GridPage.directivePanel';
+
+export const multipleColumnDirective = ['drop', 'keep', 'merge', 'flatten', 'create-record', 'set-headers', 'find-and-replace', 'filter-empty-or-null', 'flatten-record', 'invoke-http']
