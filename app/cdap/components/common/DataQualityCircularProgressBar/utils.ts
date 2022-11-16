@@ -19,7 +19,7 @@ import { IStatistics } from 'components/GridTable/types';
 
 export const getDataQuality = (statistics: IStatistics, columnList: IHeaderNamesList[]) => {
   const dataQuality: IDataQualityItem[] = [];
-  columnList?.forEach((columnName: IHeaderNamesList) => {  
+  columnList?.forEach((columnName: IHeaderNamesList) => {
     const generalValues: IDataQualityItem = statistics[columnName.name].general;
     if (generalValues.null) {
       const nullCount = generalValues.null || 0;
