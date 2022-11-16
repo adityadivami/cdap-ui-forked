@@ -14,12 +14,11 @@
  * the License.
  */
 
-import { Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { grey } from '@material-ui/core/colors';
+import { blue, grey } from '@material-ui/core/colors';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
-import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
 import Breadcrumb from 'components/GridTable/components/Breadcrumb';
 import T from 'i18n-react';
 import React from 'react';
@@ -31,6 +30,17 @@ import styled from 'styled-components';
 interface ISubHeader {
   selectedConnection: string;
 }
+
+const AddConnectionIcon = styled(AddCircleOutlineOutlinedIcon)`
+  font-size: x-large;
+  color: ${grey[700]};
+`;
+
+const CustomizedLink = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
+`;
 
 const FlexContainer = styled(Box)`
   display: flex;
@@ -54,67 +64,55 @@ const TypographyLabel = styled(Typography)`
   line-height: 21px;
 `;
 
-const CustomizedLink = styled(Link)`
-  &:hover {
-    text-decoration: none;
-  }
-`;
-
-const AddConnectionIcon = styled(AddCircleOutlineOutlinedIcon)`
-  font-size: x-large;
-  color: ${grey[700]};
-`;
-
 const SaveIcon = styled(SaveAltRoundedIcon)`
   font-size: x-large;
   color: ${grey[700]};
 `;
-// const BreadcrumbContainer = styled(Box)`
-//     border-bottom: 1px solid ${grey[300]};
-//     display: flex;
-//     justify-content: space-between;
-//     height: 48px;
-//     align-items: center;
-//     padding-right: 30px;
-//     & .MuiBreadcrumbs-root{
-//       font-size: 14px;
-//       font-weight: 400;
-//     },
-//     & .MuiTypography-root'{
-//       color: #000000;
-//       line-height: 21px;
-//     },
-//     & a {
-//       color: ${blue[500]};
-//       line-height: 21px;
-//     },
-// `;
+
+export const useStyles = makeStyles({
+  breadcrumbContainer: {
+    borderBottom: `1px solid ${grey[300]}`,
+    display: 'flex',
+    justifyContent: 'space-between',
+    height: '48px',
+    alignItems: 'center',
+    paddingRight: 30,
+    '& .MuiBreadcrumbs-root': {
+      fontSize: '14px',
+      fontWeight: '400',
+    },
+    '& .MuiTypography-root': {
+      color: '#000000',
+      lineHeight: '21px',
+    },
+    '& a': {
+      color: blue[500],
+      lineHeight: '21px',
+    },
+  },
+});
 
 export default function({ selectedConnection }: ISubHeader) {
   const classes = useStyles();
   const location = useLocation();
 
+  // Local storage will be removed
+  // Need to integrate connector types code to achieve the redirection from add connections page
   const handleAddConnection = () => {
     localStorage.setItem('addConnectionRequestFromNewUI', selectedConnection);
   };
 
   return (
-    <Box
-      className={classes.breadcrumbContainer}
-      data-testid="breadcrumb-container-parent"
-      id="breadcrumb-container-parent"
-    >
+    <Box className={classes.breadcrumbContainer} data-testid="breadcrumb-container-parent">
       <Breadcrumb
         datasetName={T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
         location={location}
       />
-
       <FeaturesContainer>
         <CustomizedLink to={`/ns/${getCurrentNamespace()}/connections/create`}>
           <ImportDataContainer
             onClick={handleAddConnection}
             data-testid="sub-header-handle-add-connection"
-            id="sub-header-handle-add-connection"
           >
             <AddConnectionIcon />
             <TypographyLabel>

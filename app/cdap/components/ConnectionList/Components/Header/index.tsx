@@ -14,13 +14,16 @@
  * the License.
  */
 
-import { Box, IconButton } from '@material-ui/core';
+import { Box, IconButton, Typography } from '@material-ui/core';
 import Close from '@material-ui/icons/Close';
 import SearchRounded from '@material-ui/icons/SearchRounded';
 import HeaderLabelWrapper from 'components/ConnectionList/Components/Header/Components/HeaderLabelWrapper';
 import { IHeaderContentProps } from 'components/ConnectionList/types';
 import React, { ChangeEvent, Fragment, MouseEvent } from 'react';
 import styled from 'styled-components';
+import T from 'i18n-react';
+
+const PREFIX = 'features.WranglerNewUI';
 
 const ConnectionListHeaderWrapper = styled(Box)`
   display: ${(props) => (props.toggleSearch ? 'none' : 'flex')};
@@ -29,6 +32,24 @@ const ConnectionListHeaderWrapper = styled(Box)`
   height: 50px;
   padding-right: 18px;
   padding-left: 30px;
+`;
+
+const ConnectionListSearchWrapper = styled(Box)`
+  display: ${(props) => (props.toggleSearch ? 'flex' : 'none')};
+  background-color: #fff;
+  align-items: center;
+  height: 50px;
+  padding-right: 20px;
+  padding-left: 18px;
+  text-decoration: none;
+`;
+
+const HeaderContainer = styled(Box)`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  padding-left: 38px;
 `;
 
 const RenderInput = styled.input`
@@ -48,17 +69,8 @@ const SearchInput = styled(RenderInput)`
   margin-left: 9px;
 `;
 
-const ConnectionListSearchWrapper = styled(Box)`
-  display: ${(props) => (props.toggleSearch ? 'flex' : 'none')};
-  background-color: #fff;
-  align-items: center;
-  height: 50px;
-  padding-right: 20px;
-  padding-left: 18px;
-  text-decoration: none;
-`;
-
 export default function({
+  levelIndex,
   eachFilteredData,
   headersRefs,
   columnIndex,
@@ -70,8 +82,16 @@ export default function({
   refs,
   handleClearSearch,
 }: IHeaderContentProps) {
-  return (
-    <Fragment>
+  const HeaderForConnectors = (
+    <HeaderContainer>
+      <Typography variant="body2" component="div">
+        {T.translate(`${PREFIX}.ConnectionsList.labels.dataConnections`)}
+      </Typography>
+    </HeaderContainer>
+  );
+
+  const HeaderForDatasets = (
+    <>
       <ConnectionListHeaderWrapper toggleSearch={eachFilteredData.toggleSearch}>
         <HeaderLabelWrapper
           headersRefs={headersRefs}
@@ -104,6 +124,8 @@ export default function({
           <Close />
         </Box>
       </ConnectionListSearchWrapper>
-    </Fragment>
+    </>
   );
+
+  return <Fragment>{levelIndex === 0 ? HeaderForConnectors : HeaderForDatasets}</Fragment>;
 }

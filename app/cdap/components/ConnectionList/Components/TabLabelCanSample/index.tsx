@@ -57,8 +57,9 @@ export default function({
   const [refValue, setRefValue] = useState<boolean>(false);
   const [workspaceId, setWorkspaceId] = useState<string>(null);
   const [currentConnection, setCurrentConnection] = useState<string>(initialConnectionId);
-
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
+  const indexOfSelectedDataset: number = location.pathname.lastIndexOf('/');
+  const requiredPath: string = location.pathname.slice(indexOfSelectedDataset + 1);
 
   useEffect(() => {
     setRefValue(myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth);
@@ -103,9 +104,6 @@ export default function({
         setIsErrorOnNoWorkSpace(true);
       });
   };
-
-  const indexOfSelectedDataset: number = location.pathname.lastIndexOf('/');
-  const requiredPath: string = location.pathname.slice(indexOfSelectedDataset + 1);
 
   return workspaceId ? (
     <Redirect

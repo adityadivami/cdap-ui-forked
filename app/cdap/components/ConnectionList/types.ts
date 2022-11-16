@@ -34,6 +34,7 @@ export interface IHeaderCustomTooltipLabelProps {
 }
 
 export interface IHeaderContentProps extends IHeaderCustomTooltipLabelProps {
+  levelIndex: number;
   eachFilteredData: IFilteredData;
   tabsData: IFilteredData[];
   searchHandler: (index: number) => void;

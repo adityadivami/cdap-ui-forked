@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { blue, grey } from '@material-ui/core/colors';
 import Header from 'components/ConnectionList/Components/Header';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
@@ -44,6 +44,19 @@ const ConnectionsListContainer = styled(Box)`
   & * {
     letterspacing: 0.15px;
   }
+`;
+
+const ContainerForLoader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  opacity: 0.5;
+  background: white;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
 `;
 
 const FlexContainer = styled(Box)`
@@ -76,32 +89,12 @@ const TabsContainerWithHeader = styled(FlexContainer)`
   border-right: 1px solid ${grey[300]};
 `;
 
-const HeaderContainer = styled(FlexContainer)`
-  justify-content: flex-start;
-  align-items: center;
-  height: 50px;
-  padding-left: 38px;
-`;
-
 const TabHeaderContainer = styled(Box)`
   background-color: ${blue[50]};
   & .MuiTypography-root{
     font-size: 16px;
     color: #000000;
     },    
-`;
-
-const ContainerForLoader = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  opacity: 0.5;
-  background: white;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 2000;
 `;
 
 export default function() {
@@ -126,7 +119,6 @@ export default function() {
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
   };
-
   let connectionId;
 
   const getConnectionsTabData = async () => {
@@ -269,6 +261,14 @@ export default function() {
     }
   };
 
+  const getConnectionId = (connections) => {
+    if (connections.data.filter((eachFilterItem: ITabData) => eachFilterItem.connectionId).length) {
+      connectionId = connections.data.filter(
+        (eachFilterItem: ITabData) => eachFilterItem.connectionId
+      )[0].connectionId;
+    }
+  };
+
   useEffect(() => {
     getConnectionsTabData();
   }, []);
@@ -290,18 +290,6 @@ export default function() {
     setTabsLength(tabsData?.length);
   }, [tabsData?.length]);
 
-  const headerForLevelZero = () => {
-    return (
-      <HeaderContainer>
-        <Typography variant="body2" component="div">
-          {T.translate(`${PREFIX}.ConnectionsList.labels.dataConnections`)}
-        </Typography>
-      </HeaderContainer>
-    );
-  };
-
-  let headerContent;
-
   return (
     <ConnectionsListContainer data-testid="data-sets-parent">
       <SubHeader selectedConnection={tabsData[0]?.selectedTab} />
@@ -311,42 +299,30 @@ export default function() {
             {filteredData &&
               Array.isArray(filteredData) &&
               filteredData?.map((eachFilteredData: IFilteredData, index: number) => {
-                if (
-                  eachFilteredData.data.filter(
-                    (eachFilterItem: ITabData) => eachFilterItem.connectionId
-                  ).length
-                ) {
-                  connectionId = eachFilteredData.data.filter(
-                    (eachFilterItem: ITabData) => eachFilterItem.connectionId
-                  )[0].connectionId;
-                }
-                if (index === 0) {
-                  headerContent = headerForLevelZero();
-                } else {
-                  headerContent = (
-                    <Header
-                      eachFilteredData={eachFilteredData}
-                      headersRefs={headersRefs}
-                      columnIndex={index}
-                      tabsData={tabsData}
-                      filteredData={filteredData}
-                      searchHandler={searchHandler}
-                      makeCursorFocused={makeCursorFocused}
-                      handleSearch={handleSearch}
-                      refs={refs}
-                      handleClearSearch={handleClearSearch}
-                    />
-                  );
-                }
+                getConnectionId(eachFilteredData);
                 return (
                   <TabsContainerWithHeader>
-                    <TabHeaderContainer>{headerContent}</TabHeaderContainer>
+                    <TabHeaderContainer>
+                      <Header
+                        levelIndex={index}
+                        eachFilteredData={eachFilteredData}
+                        headersRefs={headersRefs}
+                        columnIndex={index}
+                        tabsData={tabsData}
+                        filteredData={filteredData}
+                        searchHandler={searchHandler}
+                        makeCursorFocused={makeCursorFocused}
+                        handleSearch={handleSearch}
+                        refs={refs}
+                        handleClearSearch={handleClearSearch}
+                      />
+                    </TabHeaderContainer>
                     <ConnectionTabs
                       tabsData={eachFilteredData}
                       handleChange={selectedTabValueHandler}
                       value={eachFilteredData.selectedTab}
                       columnIndex={index}
-                      connectionId={connectionId || ''}
+                      connectionId={connectionId || ' '}
                       toggleLoader={(value: boolean, isError?: boolean) =>
                         toggleLoader(value, isError)
                       }

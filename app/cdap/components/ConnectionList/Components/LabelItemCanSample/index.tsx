@@ -31,6 +31,14 @@ const ContainerForLabelCanSample = styled(Box)`
   },
 `;
 
+const LabelForCanSample = styled(Typography)`
+  max-width: 145px;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  point-erevents: none;
+`;
+
 const WranglingHover = styled.button`
   display: none;
   cursor: pointer;
@@ -50,14 +58,6 @@ const WranglingHover = styled.button`
     gap: 10px;
     background: none;
   }
-`;
-
-const LabelForCanSample = styled(Typography)`
-  max-width: 145px;
-  font-size: 16px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  point-erevents: none;
 `;
 
 export default function({

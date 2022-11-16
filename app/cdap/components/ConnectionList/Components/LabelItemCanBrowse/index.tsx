@@ -32,6 +32,22 @@ export interface ITabLabelProps extends ITabLabelItemProps {
   labelContainerTestId?: string;
 }
 
+const CustomIconContainer = styled(Box)`
+  padding-right: 11px;
+`;
+
+const ChevronIconLarge = styled(ChevronRightRounded)`
+  font-size: large;
+`;
+
+const ChevronIconSelected = styled(ChevronIconLarge)`
+  color: #fff;
+`;
+
+const ChevronIcon = styled(ChevronIconLarge)`
+  color: ${grey[600]};
+`;
+
 const LabelContainerBox = styled(Box)`
   width: 100%;
   display: flex;
@@ -56,22 +72,6 @@ const RenderTabLabel = styled(RenderCount)`
   white-space: nowrap;
   text-overflow: ellipsis;
   pointer-events: none;
-`;
-
-const CustomIconContainer = styled(Box)`
-  padding-right: 11px;
-`;
-
-const LargeChevronIcon = styled(ChevronRightRounded)`
-  font-size: large;
-`;
-
-const ChevronIconSelected = styled(LargeChevronIcon)`
-  color: #fff;
-`;
-
-const ChevronIcon = styled(LargeChevronIcon)`
-  color: ${grey[600]};
 `;
 
 export default function({
