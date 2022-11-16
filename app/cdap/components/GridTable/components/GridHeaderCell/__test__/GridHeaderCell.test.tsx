@@ -22,11 +22,29 @@ import React from 'react';
 describe('To Test Grid Header Cell Component', () => {
   const arr = ['PostgrSQL', 'SQL'];
   it('Should check if the label is displayed as expected', () => {
-    render(<GridHeaderCell label={'abc'} types={arr} />);
+    render(
+      <GridHeaderCell
+        label={'sql_language_conformance'}
+        types={['String']}
+        columnSelected={'sql_language_conformance'}
+        setColumnSelected={jest.fn()}
+        onColumnSelection={jest.fn()}
+        index={0}
+      />
+    );
     const ele = screen.getByTestId(`grid-header-cell-container`);
     expect(ele).toHaveTextContent('abc');
   });
   it('Renders Component with empty types array to trigger Null', () => {
-    render(<GridHeaderCell label={'abc'} types={[]} />);
+    render(
+      <GridHeaderCell
+        label={'sql_language_conformance'}
+        types={['String']}
+        columnSelected={'sql_language_conformance'}
+        setColumnSelected={jest.fn()}
+        onColumnSelection={jest.fn()}
+        index={0}
+      />
+    );
   });
 });
