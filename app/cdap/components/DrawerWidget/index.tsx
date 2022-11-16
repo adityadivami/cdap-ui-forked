@@ -14,16 +14,50 @@
  * the License.
  */
 
-import { Container, Drawer } from '@material-ui/core';
+import { Box, Container, Drawer } from '@material-ui/core';
 import React from 'react';
-import { useStyles } from 'components/DrawerWidget/styles';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
-import { BackIcon } from 'components/DrawerWidget/iconStore';
-import BoxContainer from 'components/common/BoxContainer';
+import { BackIcon } from 'components/DrawerWidget/IconStore/backIcon';
+import { FlexAlignCenter, PointerBox } from 'components/common/BoxContainer';
+import { VerticalDividerBox } from 'components/common/Divider';
+import styled from 'styled-components';
 
-export default function({
+const FlexWrapper = styled(Box)`
+  display: flex;
+`;
+
+const SimpleBox = styled(Box)`
+  display: block;
+`;
+
+const DrawerContainerBox = styled(Container)`
+  width: 460px;
+  height: 100%;
+  padding-left: 30px;
+`;
+
+const DrawerContainerInnerFlex = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+`;
+
+const BackIconBox = styled(Box)`
+  cursor: pointer;
+  margin-right: 10px;
+`;
+
+const DrawerWidgetComponent = styled(Drawer)`
+  & .MuiDrawer-paper {
+    top: 46px;
+    height: calc(100vh - 47px);
+  }
+`;
+
+export default function ({
   headingText,
   openDrawer,
   showDivider,
@@ -33,60 +67,35 @@ export default function({
   showBackIcon,
   anchor,
 }: IDrawerWidgetProps) {
-  const classes = useStyles();
-
   return (
-    <Drawer classes={{ paper: classes.paper }} anchor={anchor ? anchor : 'right'} open={openDrawer}>
-      <Container className={classes.drawerContainerStyles} role="presentation">
-        <BoxContainer
-          type="FlexBox"
-          justifyContent="space-between"
-          alignItems="center"
-          height="60px"
-        >
-          <BoxContainer type="FlexBox" alignItems="center">
+    <DrawerWidgetComponent anchor={anchor ? anchor : 'right'} open={openDrawer}>
+      <DrawerContainerBox role="presentation">
+        <DrawerContainerInnerFlex>
+          <FlexAlignCenter>
             {showBackIcon && (
-              <BoxContainer
-                type="IconBox"
-                onClick={closeClickHandler}
-                dataTestId="box-id"
-                margin="0 10px 0 0 "
-                width="10px"
-                height="20px"
-              >
+              <BackIconBox onClick={closeClickHandler} data-testid="box-id">
                 {BackIcon}
-              </BoxContainer>
+              </BackIconBox>
             )}
             <DrawerWidgetHeading headingText={headingText.toString()} />
-          </BoxContainer>
-          <BoxContainer type="FlexBox" alignItems="center">
+          </FlexAlignCenter>
+          <FlexWrapper>
             {headerActionTemplate && (
-              <BoxContainer type="SimpleBox" dataTestId="header-action-template">
-                {headerActionTemplate}
-              </BoxContainer>
+              <SimpleBox data-testid="header-action-template">{headerActionTemplate}</SimpleBox>
             )}
-            {showDivider && (
-              <BoxContainer
-                type="SimpleBox"
-                alignItems="center"
-                dataTestId="show-divider-box"
-                width="1px"
-                height="28px"
-                backgroundColor="#DADCE0"
-                margin="0 15px"
+            {showDivider && <VerticalDividerBox data-testid="show-divider-box" />}
+            <PointerBox>
+              <CloseRoundedIcon
+                color="action"
+                fontSize="large"
+                onClick={closeClickHandler}
+                data-testid="drawer-widget-close-round-icon"
               />
-            )}
-            <CloseRoundedIcon
-              className={classes.pointerStyles}
-              color="action"
-              fontSize="large"
-              onClick={closeClickHandler}
-              data-testid="drawer-widget-close-round-icon"
-            />
-          </BoxContainer>
-        </BoxContainer>
-        <>{children}</>
-      </Container>
-    </Drawer>
+            </PointerBox>
+          </FlexWrapper>
+        </DrawerContainerInnerFlex>
+        {children}
+      </DrawerContainerBox>
+    </DrawerWidgetComponent>
   );
 }

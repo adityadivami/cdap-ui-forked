@@ -19,11 +19,11 @@ import RadioInput from 'components/AddTransformation/ColumnTable/Components/Radi
 import CheckboxInput from 'components/AddTransformation/ColumnTable/Components/CheckboxInput';
 import { IInputWidgetProps } from 'components/AddTransformation/ColumnTable/types';
 
-export default function({
+export default function ({
   isSingleSelection,
   selectedColumns,
   onSingleSelection,
-  eachColumn,
+  columnDetail,
   handleDisableCheckbox,
   onMultipleSelection,
 }: IInputWidgetProps) {
@@ -33,12 +33,12 @@ export default function({
         <RadioInput
           selectedColumns={selectedColumns}
           onSingleSelection={onSingleSelection}
-          eachColumn={eachColumn}
+          columnDetail={columnDetail}
         />
       ) : (
         <CheckboxInput
           selectedColumns={selectedColumns}
-          eachColumn={eachColumn}
+          columnDetail={columnDetail}
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
         />

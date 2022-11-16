@@ -15,22 +15,25 @@
  */
 
 import React from 'react';
-import { useStyles } from 'components/AddTransformation/SelectedColumnCountWidget/styles';
 import T from 'i18n-react';
-import { ISelectedColumnCountWidgetProps } from 'components/AddTransformation/SelectedColumnCountWidget/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
+import { NormalFont } from 'components/common/TypographyText';
 
-export default function({ selectedColumnsCount }: ISelectedColumnCountWidgetProps) {
-  const classes = useStyles();
+export default function ({ selectedColumnsCount }: { selectedColumnsCount: number }) {
+
+  const text = selectedColumnsCount
+    ? selectedColumnsCount > 10
+      ? selectedColumnsCount
+      : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.zero`)}${selectedColumnsCount} ${T.translate(
+        `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
+      )}`
+    : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)} ${T.translate(
+      `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
+    )}`;
 
   return (
-    <div className={classes.columnsCountTextStyles} data-testid="count-widget-parent">
-      {selectedColumnsCount
-        ? selectedColumnsCount > 10
-          ? selectedColumnsCount
-          : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.zero`)}${selectedColumnsCount}`
-        : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)}`}
-      &nbsp;{T.translate(`${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`)}
-    </div>
+    <NormalFont component="p" data-testid="no-column-title">
+      {text}
+    </NormalFont>
   );
 }

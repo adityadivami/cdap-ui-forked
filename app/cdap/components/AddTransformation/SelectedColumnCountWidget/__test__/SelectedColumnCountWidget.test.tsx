@@ -22,15 +22,15 @@ import T from 'i18n-react';
 describe('It should test the SelectColumnsList Component', () => {
   it('should render the SelectColumnsList Component with selectedColumnsCount>10', () => {
     render(<SelectedColumnCountWidget selectedColumnsCount={20} />);
-    expect(screen.getByTestId(/count-widget-parent/i)).toHaveTextContent('20');
+    expect(screen.getByTestId(/no-column-title/i)).toHaveTextContent('20');
   });
   it('should render the SelectColumnsList Component with selectedColumnsCount<10', () => {
     render(<SelectedColumnCountWidget selectedColumnsCount={1} />);
-    expect(screen.getByTestId(/count-widget-parent/i)).toHaveTextContent('1');
+    expect(screen.getByTestId(/no-column-title/i)).toHaveTextContent('1');
   });
   it('should render the SelectColumnsList Component with no selectedColumnsCount', () => {
     render(<SelectedColumnCountWidget selectedColumnsCount={0} />);
-    expect(screen.getByTestId(/count-widget-parent/i)).toHaveTextContent(
+    expect(screen.getByTestId(/no-column-title/i)).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected')}`
     );
   });

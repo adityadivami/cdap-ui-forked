@@ -18,41 +18,39 @@ import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import { ICheckBoxInputProps } from 'components/AddTransformation/ColumnTable/types';
 
-export default function({
+export default function ({
   selectedColumns,
   handleDisableCheckbox,
-  eachColumn,
+  columnDetail,
   onMultipleSelection,
   label,
 }: ICheckBoxInputProps) {
+
+  let disabled = selectedColumns?.filter((column) => column.label === columnDetail.label).length ||
+    !handleDisableCheckbox()
+    ? false
+    : true
+
+  let checked = selectedColumns?.length &&
+    selectedColumns?.filter((column) => column.label === columnDetail.label).length
+    ? true
+    : false
+
   return (
-    <>
-      <FormControlLabel
-        disabled={
-          selectedColumns?.filter((columnDetail) => columnDetail.label === eachColumn.label)
-            .length || !handleDisableCheckbox()
-            ? false
-            : true
-        }
-        control={
-          <Checkbox
-            color="primary"
-            checked={
-              selectedColumns?.length &&
-              selectedColumns?.filter((columnDetail) => columnDetail.label === eachColumn.label)
-                .length
-                ? true
-                : false
-            }
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              onMultipleSelection(event, eachColumn)
-            }
-            data-testid="check-box-input-checkbox"
-          />
-        }
-        label={label}
-        data-testid="form-control-label-parent"
-      />
-    </>
+    <FormControlLabel
+      disabled={disabled}
+      control={
+        <Checkbox
+          color="primary"
+          checked={checked}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            onMultipleSelection(event, columnDetail)
+          }
+          data-testid="check-box-input-checkbox"
+        />
+      }
+      label={label}
+      data-testid="form-control-label-parent"
+    />
   );
 }

@@ -14,17 +14,15 @@
  * the License.
  */
 
-import { Menu } from '@material-ui/core';
 import React, { useState } from 'react';
 import MenuComponent from 'components/GridTable/components/MenuComponent';
 import MenuItemComponent from 'components/GridTable/components/MenuItemComponent';
 import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
-import { useNestedMenuStyles } from 'components/GridTable/components/NestedMenu/styles';
 import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/types';
-import _ from 'lodash';
-import { reverseArrayWithoutMutating } from 'services/helpers';
+import { findIndex } from 'lodash';
+import { NestedMenuComponent } from 'components/common/MenuContainer';
 
-export default function({
+export default function ({
   menuOptions,
   submitMenuOption,
   columnType,
@@ -34,7 +32,6 @@ export default function({
   handleMenuOpenClose,
 }: INestedMenuProps) {
   const [menuComponentOptions, setMenuComponentOptions] = useState<IMenuItem[][]>([]);
-  const classes = useNestedMenuStyles();
 
   const handleMenuClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
@@ -73,7 +70,7 @@ export default function({
           );
           setAnchorElement(updatedAnchors);
         } else if (anchorElement.includes(event.currentTarget)) {
-          const currentTargetIndex = _.findIndex(
+          const currentTargetIndex = findIndex(
             anchorElement,
             (anchor) => anchor == event.currentTarget
           );
@@ -95,7 +92,7 @@ export default function({
   };
   return (
     <>
-      <Menu
+      <NestedMenuComponent
         id="parent-menu"
         data-testid="nested-menu-parent-root"
         keepMounted
@@ -109,8 +106,6 @@ export default function({
           clickEvent.preventDefault();
           clickEvent.stopPropagation();
         }}
-        className={classes.root}
-        classes={{ paper: classes.popoverPaper }}
       >
         {menuOptions?.map((eachOption, optionsIndex) => {
           return (
@@ -141,7 +136,7 @@ export default function({
               />
             );
           })}
-      </Menu>
+      </NestedMenuComponent>
     </>
   );
 }

@@ -14,35 +14,38 @@
  * the License.
  */
 
-import { Button, Container } from '@material-ui/core';
 import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from 'components/AddTransformation/SelectColumnsList';
-import { useStyles } from 'components/AddTransformation/styles';
 import {
   IAddTransformationProps,
   IHeaderNamesList,
   IMultipleSelectedFunctionDetail,
   IDataQualityItem,
 } from 'components/AddTransformation/types';
-import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
+import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
 import {
   multipleColumnSelected,
   ADD_TRANSFORMATION_PREFIX,
 } from 'components/AddTransformation/constants';
+import {
+  AddTransformationBodyWrapper,
+  AddTransformationWrapper,
+} from 'components/common/BoxContainer';
+import { AddTransformationButton } from 'components/common/ButtonWidget';
 
-export default function({
+export default function ({
   transformationDataType,
   transformationName,
   columnsList,
   missingItemsList,
   onCancel,
 }: IAddTransformationProps) {
+
   const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
-  const classes = useStyles();
 
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
@@ -91,8 +94,8 @@ export default function({
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
       >
-        <Container className={classes.addTransformationBodyStyles}>
-          <div className={classes.addTransformationBodyWrapperStyles}>
+        <AddTransformationWrapper>
+          <AddTransformationBodyWrapper>
             <SelectColumnsList
               columnsList={columnsList}
               selectedColumnsCount={selectedColumns.length}
@@ -102,19 +105,16 @@ export default function({
               transformationName={transformationName}
               selectedColumns={selectedColumns}
             />
-          </div>
-          <Button
-            variant="contained"
+          </AddTransformationBodyWrapper>
+          <AddTransformationButton
             disabled={enableDoneButton()}
             color="primary"
             data-testid="button_apply"
-            classes={{ containedPrimary: classes.buttonStyles }}
-            className={classes.applyStepButtonStyles}
             onClick={closeSelectColumnsPopup}
           >
             {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}
-          </Button>
-        </Container>
+          </AddTransformationButton>
+        </AddTransformationWrapper>
       </DrawerWidget>
     </Fragment>
   );

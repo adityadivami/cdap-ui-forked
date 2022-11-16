@@ -14,23 +14,66 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
-import { useStyles } from 'components/AddTransformation/SelectColumnsList/styles';
-import { SearchIcon } from 'components/AddTransformation/iconStore';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
-import { ISelectColumnListProps } from 'components/AddTransformation/SelectColumnsList/types';
+import { ISelectColumnsListProps } from 'components/AddTransformation/SelectColumnsList/types';
 import { IHeaderNamesList } from 'components/AddTransformation/types';
 import ColumnTable from 'components/AddTransformation/ColumnTable';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
-import TypographyText from 'components/common/TypographyText';
-import BoxContainer from 'components/common/BoxContainer';
+import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
+import { Box, IconButton } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 
-export default function({
+const SearchIconComponent = styled(SearchIcon)`
+  &.MuiSvgIcon-root {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+const SelectColumnSearchInput = styled.input`
+  margin-right: 5px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 5px;
+  &:focus {
+    border-bottom: 1px solid ${grey[700]};
+    outline: none;
+  }
+`;
+
+const SelectColumnWrapper = styled(Box)`
+  height: 90%;
+`;
+
+const SelectColumnInnerWrapper = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const FlexWrapper = styled(Box)`
+  display: flex;
+`;
+
+const CenterAlignBox = styled(Box)`
+  text-align: center;
+`;
+
+const SelectColumnSearchBox = styled(Box)`
+  position: relative;
+  display: flex;
+  margin-right: 10px;
+`;
+
+export default function ({
   transformationDataType,
   selectedColumnsCount,
   columnsList,
@@ -38,11 +81,10 @@ export default function({
   dataQuality,
   transformationName,
   selectedColumns,
-}: ISelectColumnListProps) {
+}: ISelectColumnsListProps) {
+
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
-  const [focused, setFocused] = useState<boolean>(false);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
-  const classes = useStyles();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -50,6 +92,7 @@ export default function({
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName
     );
+
     if (multiSelect.length) {
       setIsSingleSelection(false);
     }
@@ -59,10 +102,10 @@ export default function({
     transformationDataType?.length > 0 && transformationDataType?.includes('all')
       ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
       : columns?.filter((columnDetail: IHeaderNamesList) => {
-          return transformationDataType?.some((dataTypeCollection: string | string[]) => {
-            return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
-          });
+        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
         });
+      });
 
   const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
@@ -102,14 +145,10 @@ export default function({
     if (event.target.value) {
       const columnValue: IHeaderNamesList[] = columnsList.length
         ? columnsList.filter((columnDetail: IHeaderNamesList) =>
-            columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
-          )
+          columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
+        )
         : [];
-      if (columnValue?.length) {
-        setColumns(columnValue);
-      } else {
-        setColumns([]);
-      }
+      columnValue?.length ? setColumns(columnValue) : setColumns([]);
     } else {
       setColumns(columnsList);
     }
@@ -117,53 +156,31 @@ export default function({
 
   const handleFocus = () => {
     ref?.current?.focus();
-    setFocused(true);
   };
 
   return (
-    <BoxContainer type="SimpleBox" dataTestId="select-column-list-parent" height="90%">
-      <BoxContainer type="FlexBox" justifyContent="space-between">
+    <SelectColumnWrapper data-testid="select-column-list-parent">
+      <SelectColumnInnerWrapper>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
-        <div className={classes.searchFormControl}>
-          <input
-            data-testid="input_id"
-            className={focused ? classes.isFocused : classes.isBlurred}
-            onChange={handleSearch}
-            ref={ref}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setFocused(false)}
-          />
-          <Box
-            className={classes.searchInputAdornment}
-            onClick={handleFocus}
-            data-testid="click-handle-focus"
-          >
-            {SearchIcon}
-          </Box>
-        </div>
-      </BoxContainer>
-      {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
-        <BoxContainer type="FlexBox" height="100%" margin="30px 0 0 0">
-          <BoxContainer type="SimpleBox" textAlign="center">
+        <SelectColumnSearchBox>
+          <SelectColumnSearchInput data-testid="input_id" onChange={handleSearch} ref={ref} />
+          <IconButton onClick={handleFocus} data-testid="click-handle-focus">
+            <SearchIconComponent />
+          </IconButton>
+        </SelectColumnSearchBox>
+      </SelectColumnInnerWrapper>
+      {columnsAsPerType.length === 0 ? (
+        <FlexWrapper>
+          <CenterAlignBox>
             {NoDataSVG}
-            <TypographyText
-              type="simpleBold"
-              text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`).toString()}
-              component="p"
-              size="16px"
-              weight={600}
-              dataTestId="no-column-title"
-            />
-            <TypographyText
-              type="simpleBold"
-              text={T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`).toString()}
-              component="p"
-              size="14px"
-              weight={400}
-              dataTestId="no-column-subTitle"
-            />
-          </BoxContainer>
-        </BoxContainer>
+            <SubHeadBoldFont component="p" data-testid="no-column-title">
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
+            </SubHeadBoldFont>
+            <NormalFont component="p" data-testid="no-column-subTitle">
+              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
+            </NormalFont>
+          </CenterAlignBox>
+        </FlexWrapper>
       ) : (
         <ColumnTable
           dataQualityValue={dataQuality}
@@ -179,6 +196,6 @@ export default function({
           transformationName={transformationName}
         />
       )}
-    </BoxContainer>
+    </SelectColumnWrapper>
   );
 }

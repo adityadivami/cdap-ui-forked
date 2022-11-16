@@ -17,7 +17,7 @@
 import React from 'react';
 import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation/types';
 
-export interface ISelectColumnListProps {
+export interface ISelectColumnsListProps {
   transformationDataType: string[];
   selectedColumnsCount: number;
   columnsList: IHeaderNamesList[];

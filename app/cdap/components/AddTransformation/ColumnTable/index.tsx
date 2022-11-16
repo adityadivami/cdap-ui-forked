@@ -14,26 +14,55 @@
  * the License.
  */
 
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Checkbox,
-  Divider,
-} from '@material-ui/core';
-import React, { Fragment } from 'react';
-import { useStyles } from 'components/AddTransformation/ColumnTable/styles';
+import { TableBody, Checkbox, Divider } from '@material-ui/core';
+import React from 'react';
 import T from 'i18n-react';
 import TableRowWidget from 'components/AddTransformation/ColumnTable/Components/TableRow';
 import { IColumnTableProps } from 'components/AddTransformation/ColumnTable/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
+import { TableContainer, Table, TableHead, TableRow, TableCell } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import styled from 'styled-components';
 
-export default function({
+const SelectColumnTableContainer = styled(TableContainer)`
+  height: 100%;
+`;
+
+const SelectColumnTable = styled(Table)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SelectColumnTableHead = styled(TableHead)`
+  height: 54px;
+`;
+
+const SelectColumnTableRow = styled(TableRow)`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: ${grey[700]};
+  display: grid;
+  grid-template-columns: 10% 45% 45%;
+  align-items: center;
+  height: 100%;
+`;
+
+const SelectColumnTableHeadCell = styled(TableCell)`
+  &.MuiTableCell-head {
+    padding: 0;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.15px;
+    color: ${grey[700]};
+    border-bottom: none !important;
+  }
+`;
+
+export default function ({
   columns,
   transformationDataType,
   onSingleSelection,
@@ -46,7 +75,6 @@ export default function({
   setSelectedColumns,
   transformationName,
 }: IColumnTableProps) {
-  const classes = useStyles();
 
   const handleChange = () => {
     if (
@@ -54,10 +82,14 @@ export default function({
         (option) => option.value === transformationName && option.isMoreThanTwo === false
       ).length > 0
     ) {
-      if (selectedColumns?.length) {
+      if (selectedColumns.length) {
         setSelectedColumns([]);
       } else {
-        columns?.length > 2 ? setSelectedColumns(columns.slice(0, 2)) : setSelectedColumns(columns);
+        if (columns?.length > 2) {
+          setSelectedColumns(columns.slice(0, 2))
+        } else {
+          setSelectedColumns(columns);
+        }
       }
     } else {
       if (selectedColumns?.length) {
@@ -69,83 +101,62 @@ export default function({
   };
 
   return (
-    <TableContainer
-      component={Box}
-      data-testid="column-table-parent"
-      classes={{ root: classes.muiTableContainer }}
-    >
-      <Table aria-label="recipe steps table" className={classes.tabledisplayStyles}>
+    <SelectColumnTableContainer data-testid="column-table-parent">
+      <SelectColumnTable aria-label="recipe steps table">
         <Divider />
-        <TableHead classes={{ root: classes.muiTableHeader }}>
-          <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`}>
-            <TableCell
-              classes={{
-                head: `${classes.recipeStepsTableHeadStyles}`,
-              }}
-            >
+        <SelectColumnTableHead>
+          <SelectColumnTableRow>
+            <SelectColumnTableHeadCell>
               {multipleColumnSelected?.filter((option) => option.value === transformationName)
                 .length > 0 && (
-                <Checkbox
-                  color="primary"
-                  checked={selectedColumns?.length ? true : false}
-                  onChange={handleChange}
-                  indeterminate={selectedColumns?.length ? true : false}
-                />
-              )}
-            </TableCell>
-            <TableCell
-              classes={{
-                head: `${classes.recipeStepsTableHeadStyles}`,
-              }}
-              data-testid="panel-columns"
-            >
+                  <Checkbox
+                    color="primary"
+                    checked={selectedColumns?.length ? true : false}
+                    onChange={handleChange}
+                    indeterminate={selectedColumns?.length ? true : false}
+                  />
+                )}
+            </SelectColumnTableHeadCell>
+            <SelectColumnTableHeadCell data-testid="panel-columns">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
               {`(${totalColumnCount})`}
-            </TableCell>
-            <TableCell
-              classes={{
-                head: `${classes.recipeStepsTableHeadStyles}`,
-              }}
-              data-testid="panel-values"
-            >
+            </SelectColumnTableHeadCell>
+            <SelectColumnTableHeadCell data-testid="panel-values">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
-            </TableCell>
-          </TableRow>
-        </TableHead>
+            </SelectColumnTableHeadCell>
+          </SelectColumnTableRow>
+        </SelectColumnTableHead>
         <Divider />
         <TableBody>
-          {columns?.length > 0 &&
-            columns.map((eachColumn, index) => (
-              <>
-                {transformationDataType?.includes('all') ? (
-                  <TableRowWidget
-                    onSingleSelection={onSingleSelection}
-                    selectedColumns={selectedColumns}
-                    dataQualityValue={dataQualityValue}
-                    isSingleSelection={isSingleSelection}
-                    handleDisableCheckbox={handleDisableCheckbox}
-                    onMultipleSelection={onMultipleSelection}
-                    index={index}
-                    eachColumn={eachColumn}
-                  />
-                ) : (
-                  transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase()) && (
-                    <TableRowWidget
-                      onSingleSelection={onSingleSelection}
-                      selectedColumns={selectedColumns}
-                      dataQualityValue={dataQualityValue}
-                      isSingleSelection={isSingleSelection}
-                      handleDisableCheckbox={handleDisableCheckbox}
-                      onMultipleSelection={onMultipleSelection}
-                      index={index}
-                      eachColumn={eachColumn}
-                    />
-                  )
-                )}
-              </>
-            ))}
+          {columns.map((eachColumn, columnIndex) =>
+            transformationDataType?.includes('all') ? (
+              <TableRowWidget
+                onSingleSelection={onSingleSelection}
+                selectedColumns={selectedColumns}
+                dataQualityValue={dataQualityValue}
+                isSingleSelection={isSingleSelection}
+                handleDisableCheckbox={handleDisableCheckbox}
+                onMultipleSelection={onMultipleSelection}
+                columnIndex={columnIndex}
+                columnDetail={eachColumn}
+              />
+            ) : (
+              transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase()) && (
+                <TableRowWidget
+                  onSingleSelection={onSingleSelection}
+                  selectedColumns={selectedColumns}
+                  dataQualityValue={dataQualityValue}
+                  isSingleSelection={isSingleSelection}
+                  handleDisableCheckbox={handleDisableCheckbox}
+                  onMultipleSelection={onMultipleSelection}
+                  columnIndex={columnIndex}
+                  columnDetail={eachColumn}
+                />
+              )
+            )
+          )}
         </TableBody>
-      </Table>
-    </TableContainer>
+      </SelectColumnTable>
+    </SelectColumnTableContainer>
   );
 }

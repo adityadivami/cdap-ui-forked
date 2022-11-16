@@ -15,52 +15,69 @@
  */
 
 import React from 'react';
-import { TableCell, TableRow, Typography } from '@material-ui/core';
-import { useStyles } from 'components/AddTransformation/ColumnTable/Components/TableRow/styles';
 import InputWidget from 'components/AddTransformation/ColumnTable/Components/InputWidgets';
-import DataQualityProgress from 'components/AddTransformation/CircularProgressBar';
+import DataQualityCircularProgressBar from 'components/common/DataQualityCircularProgressBar';
 import { ITableRowProps } from 'components/AddTransformation/ColumnTable/types';
+import { TableCellText } from 'components/common/TypographyText';
+import { TableRow, TableCell } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import styled from 'styled-components';
 
-export default function({
+const SelectColumnTableRow = styled(TableRow)`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: ${grey[700]};
+  display: grid;
+  grid-template-columns: 10% 45% 45%;
+  align-items: center;
+  height: 100%;
+`;
+
+const SelectColumnTableBodyCell = styled(TableCell)`
+  &.MuiTableCell-body {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.15px;
+    color: ${grey[700]};
+    padding: 5px;
+    height: 64px;
+  }
+`;
+
+export default function ({
   onSingleSelection,
   selectedColumns,
   dataQualityValue,
   isSingleSelection,
   handleDisableCheckbox,
   onMultipleSelection,
-  index,
-  eachColumn,
+  columnIndex,
+  columnDetail,
 }: ITableRowProps) {
-  const classes = useStyles();
   return (
-    <TableRow className={`${classes.recipeStepsTableRowStyles} ${classes.rowsOfTable}`} key={index}>
-      <TableCell
-        classes={{
-          body: `${classes.recipeStepsTableRowStyles}`,
-        }}
-      >
+    <SelectColumnTableRow key={`column-${columnIndex}`}>
+      <SelectColumnTableBodyCell>
         <InputWidget
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
           onSingleSelection={onSingleSelection}
-          eachColumn={eachColumn}
+          columnDetail={columnDetail}
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
         />
-      </TableCell>
-      <TableCell classes={{ body: classes.recipeStepsTableRowStyles }}>
-        <Typography component="div" className={classes.recipeStepsActionTypeStyles}>
-          {eachColumn.label}
-        </Typography>
-        <Typography component="div" className={classes.recipeStepsActionTypeStyles}>
-          {eachColumn.type}
-        </Typography>
-      </TableCell>
-      <TableCell className={`${classes.recipeStepsTableRowStyles}`}>
+      </SelectColumnTableBodyCell>
+      <SelectColumnTableBodyCell>
+        <TableCellText component="div">{columnDetail.label}</TableCellText>
+        <TableCellText component="div">{columnDetail.type}</TableCellText>
+      </SelectColumnTableBodyCell>
+      <SelectColumnTableBodyCell>
         {dataQualityValue?.length && (
-          <DataQualityProgress value={Number(dataQualityValue[index]?.value)} />
+          <DataQualityCircularProgressBar dataQualityPercentValue={Number(dataQualityValue[columnIndex]?.value)} />
         )}
-      </TableCell>
-    </TableRow>
+      </SelectColumnTableBodyCell>
+    </SelectColumnTableRow>
   );
 }

@@ -14,139 +14,55 @@
  * the License.
  */
 
-import React from 'react';
-import { Box } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import styled from 'styled-components';
-import { IBoxContainerProps } from 'components/common/BoxContainer/types';
 
-const SimpleBox = styled(Box)`
-  display: block;
-  position: relative;
-  width: ${({ width }) => (width ? width : 'auto')};
-  height: ${({ height }) => (height ? height : 'auto')};
-  box-sizing: border-box;
-  background-color: ${({ backgroundColor }) => (backgroundColor ? backgroundColor : 'transparent')};
-  padding: ${({ padding }) => (padding ? padding : 0)};
-  margin: ${({ margin }) => (margin ? margin : 0)};
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : 0)};
-  border: ${({ border }) => (border ? border : 0)};
-  text-align: ${({ textAlign }) => (textAlign ? textAlign : 'left')};
-`;
-
-const AbsoluteDiv = styled(SimpleBox)`
-  position: absolute;
-  top: ${({ top }) => (top ? top : 0)};
-  left: ${({ left }) => (left ? left : 0)};
-  right: ${({ right }) => (right ? right : 0)};
-  bottom: ${({ bottom }) => (bottom ? bottom : 0)};
-`;
-
-const SimpleFlexBox = styled(SimpleBox)`
+export const FlexJustifyAlignCenter = styled(Box)`
   display: flex;
-  justify-content: ${({ justifyContent }) => (justifyContent ? justifyContent : 'flex-start')};
-  align-items: ${({ alignItem }) => (alignItem ? alignItem : 'flex-start')};
-  flex-direction: ${({ flexDirection }) => (flexDirection ? flexDirection : 'row')};
+  justify-content: center;
+  align-items: center;
 `;
 
-const IconBox = styled(SimpleBox)`
+export const LastDividerBox = styled(Box)`
+  margin: 0px 0px 0px 4px;
+`;
+
+export const DividerBox = styled(Box)`
+  margin: 0px 4px;
+`;
+
+export const FunctionBoxWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: -webkit-fill-available;
+  & .MuiIconButton-root {
+    padding-bottom: 8px;
+  }
+`;
+
+export const SearchBoxWrapper = styled(Box)`
+  min-width: 490px;
+`;
+
+export const PointerBox = styled(Box)`
   cursor: pointer;
 `;
 
-export default function({
-  children,
-  type,
-  padding,
-  margin,
-  backgroundColor,
-  right,
-  left,
-  top,
-  bottom,
-  justifyContent,
-  alignItems,
-  borderRadius,
-  border,
-  width,
-  height,
-  flexDirection,
-  onClick,
-  dataTestId,
-  textAlign,
-}: IBoxContainerProps) {
-  return (
-    <>
-      {type == 'SimpleBox' && (
-        <SimpleBox
-          padding={padding}
-          margin={margin}
-          backgroundColor={backgroundColor}
-          borderRadius={borderRadius}
-          border={border}
-          width={width}
-          height={height}
-          onClick={onClick}
-          dataTestId={dataTestId}
-          textAlign={textAlign}
-        >
-          {children}
-        </SimpleBox>
-      )}
-      {type == 'AbsoluteDiv' && (
-        <AbsoluteDiv
-          padding={padding}
-          margin={margin}
-          backgroundColor={backgroundColor}
-          right={right}
-          left={left}
-          top={top}
-          bottom={bottom}
-          borderRadius={borderRadius}
-          border={border}
-          width={width}
-          height={height}
-          onClick={onClick}
-          dataTestId={dataTestId}
-          textAlign={textAlign}
-        >
-          {children}
-        </AbsoluteDiv>
-      )}
-      {type == 'FlexBox' && (
-        <SimpleFlexBox
-          padding={padding}
-          margin={margin}
-          backgroundColor={backgroundColor}
-          justifyContent={justifyContent}
-          alignItem={alignItems}
-          borderRadius={borderRadius}
-          border={border}
-          width={width}
-          height={height}
-          flexDirection={flexDirection}
-          onClick={onClick}
-          dataTestId={dataTestId}
-          textAlign={textAlign}
-        >
-          {children}
-        </SimpleFlexBox>
-      )}
-      {type == 'IconBox' && (
-        <IconBox
-          padding={padding}
-          margin={margin}
-          backgroundColor={backgroundColor}
-          bottom={bottom}
-          borderRadius={borderRadius}
-          border={border}
-          width={width}
-          height={height}
-          onClick={onClick}
-          dataTestId={dataTestId}
-          textAlign={textAlign}
-        >
-          {children}
-        </IconBox>
-      )}
-    </>
-  );
-}
+export const FlexAlignCenter = styled(Box)`
+  display: flex;
+  align-items: center;
+`;
+
+export const AddTransformationWrapper = styled(Container)`
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+`;
+
+export const AddTransformationBodyWrapper = styled(Box)`
+  height: calc(100% - 40px);
+  overflow-y: auto;
+`;

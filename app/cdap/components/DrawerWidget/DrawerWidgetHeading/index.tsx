@@ -15,25 +15,23 @@
  */
 
 import React from 'react';
-import { useStyles } from 'components/DrawerWidget/styles';
-import { UnderLine } from 'components/DrawerWidget/iconStore';
-import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
-import BoxContainer from 'components/common/BoxContainer';
-import TypographyText from 'components/common/TypographyText';
+import { UnderLine } from 'components/DrawerWidget/IconStore/underline';
+import { HeadFont } from 'components/common/TypographyText';
+import { Box } from '@material-ui/core';
+import styled from 'styled-components';
 
-export default function({ headingText }: IDrawerWidgetHeadingProps) {
-  const classes = useStyles();
+const DrawerHeadWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
 
+export default function ({ headingText }: { headingText: string }) {
   return (
-    <BoxContainer type="FlexBox" flexDirection="column">
-      <TypographyText
-        component="p"
-        size="20px"
-        type="simpleBold"
-        dataTestId="drawer-heading"
-        text={headingText}
-      />
+    <DrawerHeadWrapper>
+      <HeadFont component="p" data-testid="drawer-heading">
+        {headingText}
+      </HeadFont>
       {UnderLine}
-    </BoxContainer>
+    </DrawerHeadWrapper>
   );
 }

@@ -15,29 +15,24 @@
  */
 
 import React from 'react';
-import { Typography, Box } from '@material-ui/core';
-import { useStyles } from 'components/GridTable/components/FunctionNameToggle/styles';
 import T from 'i18n-react';
-import { IFunctionNameToggleProps } from 'components/GridTable/components/FunctionNameToggle/types';
 import SwitchInputComponent from 'components/common/Switch';
+import { NormalFont } from 'components/common/TypographyText';
+import { FlexJustifyAlignCenter } from 'components/common/BoxContainer';
 
 const PREFIX = 'features.WranglerNewUI.GridPage';
 
-export default function({ setShowName, showName }: IFunctionNameToggleProps) {
-  const classes = useStyles();
+interface IFunctionNameToggleProps {
+  setShowName: React.Dispatch<React.SetStateAction<boolean>>;
+  showName: boolean;
+}
+
+export default function ({ setShowName, showName }: IFunctionNameToggleProps) {
   return (
-    <Box
-      className={classes.functionWrapper}
-      data-testid="transformations-toolbar-icons-function-name-toggler"
-    >
-      <Typography
-        className={classes.typoClass}
-        component="div"
-        data-testid="name-toggle-child-label"
-      >
+    <FlexJustifyAlignCenter data-testid="transformations-toolbar-icons-function-name-toggler">
+      <NormalFont component="div" data-testid="name-toggle-child-label">
         {T.translate(`${PREFIX}.toolbarIcons.labels.toggleDescription`)}
-        &nbsp;
-      </Typography>
+      </NormalFont>
       <SwitchInputComponent
         setShow={setShowName}
         show={showName}
@@ -46,6 +41,6 @@ export default function({ setShowName, showName }: IFunctionNameToggleProps) {
           'data-testid': 'transformations-toolbar-icons-function-name-toggler',
         }}
       />
-    </Box>
+    </FlexJustifyAlignCenter>
   );
 }

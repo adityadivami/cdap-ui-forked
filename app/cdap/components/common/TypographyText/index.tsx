@@ -15,52 +15,55 @@
  */
 
 import { Typography } from '@material-ui/core';
-import { grey, red, green } from '@material-ui/core/colors';
-import { ITypographyTextProps } from 'components/common/TypographyText/types';
-import React from 'react';
+import { grey, green, red } from '@material-ui/core/colors';
 import styled from 'styled-components';
 
-const SimpleText = styled(Typography)`
+export const NormalFont = styled(Typography)`
+  color: ${grey[600]};
+  font-size: 14px;
+  font-weight: 400;
+`;
+
+export const SubHeadNormalFont = styled(Typography)`
   color: ${grey[700]};
-  font-size: ${({ size }) => (size ? size : '14px')};
-  font-weight: ${({ weight }) => (weight ? weight : 500)};
+  font-size: 16px;
+  font-weight: 400;
 `;
 
-const ErrorText = styled(SimpleText)`
-  color: ${red[600]};
+export const SubHeadBoldFont = styled(Typography)`
+  color: ${grey[700]};
+  font-size: 16px;
+  font-weight: 600;
 `;
 
-const SuccessText = styled(SimpleText)`
-  color: ${green[600]};
-`;
-
-const SimpleBoldText = styled(SimpleText)`
+export const HeadFont = styled(Typography)`
   color: ${grey[900]};
+  font-size: 20px;
 `;
 
-export default function({ text, type, component, size, weight, dataTestId }: ITypographyTextProps) {
-  return (
-    <>
-      {type === 'simple' && (
-        <SimpleText data-testid={dataTestId} component={component} size={size} weight={weight}>
-          {text}
-        </SimpleText>
-      )}
-      {type === 'error' && (
-        <ErrorText data-testid={dataTestId} component={component} size={size} weight={weight}>
-          {text}
-        </ErrorText>
-      )}
-      {type === 'success' && (
-        <SuccessText data-testid={dataTestId} component={component} size={size} weight={weight}>
-          {text}
-        </SuccessText>
-      )}
-      {type === 'simpleBold' && (
-        <SimpleBoldText data-testid={dataTestId} component={component} size={size} weight={weight}>
-          {text}
-        </SimpleBoldText>
-      )}
-    </>
-  );
-}
+export const ErrorFont = styled(Typography)`
+  color: ${red[600]};
+  font-size: 14px;
+`;
+
+export const SuccessText = styled(Typography)`
+  color: ${green[600]};
+  font-size: 14px;
+`;
+
+export const MenuHeadText = styled(Typography)`
+  color: grey[600];
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0px 20px;
+`;
+
+export const TableCellText = styled(Typography)`
+  font-weight: 400;
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+`;
