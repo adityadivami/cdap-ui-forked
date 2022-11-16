@@ -36,7 +36,7 @@ import {
 import { ToolBarIconWrapper, ToolBarInnerWrapper } from 'components/common/IconContainer';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 
-export default function({
+export default function ({
   columnType,
   submitMenuOption,
   setShowBreadCrumb,

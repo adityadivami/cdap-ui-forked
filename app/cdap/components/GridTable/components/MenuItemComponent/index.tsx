@@ -22,7 +22,7 @@ import T from 'i18n-react';
 import { NormalFont, MenuHeadText } from 'components/common/TypographyText';
 import { ShortDivider } from 'components/common/Divider';
 
-export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
+export default function ({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
   if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.divider')) {
     return <ShortDivider key={index} data-testid="menu-item-divider" />;
   }

@@ -22,7 +22,7 @@ import { INestedMenuProps } from 'components/GridTable/components/NestedMenu/typ
 import { findIndex } from 'lodash';
 import { NestedMenuComponent } from 'components/common/MenuContainer';
 
-export default function({
+export default function ({
   menuOptions,
   submitMenuOption,
   columnType,
