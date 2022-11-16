@@ -24,6 +24,7 @@ export interface IRecords {
   canBrowse?: boolean;
   name?: string;
 }
+
 export interface IHeaderNamesList {
   name: string;
   label: string;

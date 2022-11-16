@@ -92,6 +92,7 @@ export default function({
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName
     );
+
     if (multiSelect.length) {
       setIsSingleSelection(false);
     }
@@ -158,7 +159,7 @@ export default function({
   };
 
   return (
-    <SelectColumnWrapper dataTestId="select-column-list-parent">
+    <SelectColumnWrapper data-testid="select-column-list-parent">
       <SelectColumnInnerWrapper>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <SelectColumnSearchBox>
@@ -168,7 +169,7 @@ export default function({
           </IconButton>
         </SelectColumnSearchBox>
       </SelectColumnInnerWrapper>
-      {Array.isArray(columnsAsPerType) && columnsAsPerType.length === 0 ? (
+      {columnsAsPerType.length === 0 ? (
         <FlexWrapper>
           <CenterAlignBox>
             {NoDataSVG}
