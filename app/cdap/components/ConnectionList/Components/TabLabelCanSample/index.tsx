@@ -16,7 +16,6 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import TabLabelItem from 'components/ConnectionList/Components/LabelItemCanSample';
 import { WrangleIcon } from 'components/ConnectionList/IconStore/WrangleIcon';
@@ -28,19 +27,20 @@ import { Redirect } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
 import { Dispatch, SetStateAction } from 'react';
+import { IConnectionTabType } from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
 
-export interface ITabLabelSampleItemProps {
+export interface ITabLabelCanSampleItemProps {
   label: string;
   myLabelRef: Ref<HTMLSpanElement>;
-  onExplore: (entity: IConnectorTabType) => void;
-  entity: IConnectorTabType;
+  onExplore: (entity: IConnectionTabType) => void;
+  entity: IConnectionTabType;
   buttonTestId: string;
   buttonElement: JSX.Element;
 }
 
 export interface ITabLabelCanSampleProps {
   label: string;
-  entity: IConnectorTabType;
+  entity: IConnectionTabType;
   initialConnectionId: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
@@ -65,7 +65,7 @@ export default function({
     setRefValue(myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth);
   }, []);
 
-  const onExplore = (currentEntity: IConnectorTabType) => {
+  const onExplore = (currentEntity: IConnectionTabType) => {
     const { canBrowse, canSample } = currentEntity;
     if (!canBrowse && canSample) {
       onCreateWorkspace(currentEntity);
@@ -74,7 +74,7 @@ export default function({
     }
   };
 
-  const onCreateWorkspace = (currentEntity: IConnectorTabType) => {
+  const onCreateWorkspace = (currentEntity: IConnectionTabType) => {
     try {
       createWorkspaceInternal(currentEntity);
     } catch (e) {
@@ -82,7 +82,7 @@ export default function({
     }
   };
 
-  const createWorkspaceInternal = (currentEntity: IConnectorTabType) => {
+  const createWorkspaceInternal = (currentEntity: IConnectionTabType) => {
     toggleLoader(true);
     createWorkspace({
       entity: currentEntity,

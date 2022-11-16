@@ -15,15 +15,15 @@
  */
 
 import Box from '@material-ui/core/Box';
+import { blue } from '@material-ui/core/colors';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
-import RenderLabel from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
+import RenderLabel, {
+  IConnectionTabType,
+} from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
 import { IConnectionTabsProps } from 'components/ConnectionList/types';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { IConnectorTabType } from 'components/ConnectionList/Components/ConnectionTabs/types';
-import { makeStyles } from '@material-ui/styles';
-import { blue } from '@material-ui/core/colors';
 
 const ConnectionTabsContainer = styled(Tabs)`
   & .canBrowseHover {
@@ -113,10 +113,8 @@ export default function({
     setConnectionId(connectionId);
   }, []);
 
-  const handleConnectionTabClick = (connectorType: IConnectorTabType, index: number) => {
-    if (index > 1 && !connectorType.canBrowse) {
-      return;
-    } else {
+  const handleConnectionTabClick = (connectorType: IConnectionTabType, index: number) => {
+    if (!(index > 1 && !connectorType.canBrowse)) {
       handleChange(connectorType, index);
     }
   };
@@ -131,26 +129,26 @@ export default function({
             variant="scrollable"
             scrollButtons="auto"
           >
-            {tabsData?.data?.map((connectorType: IConnectorTabType, connectorTypeIndex: number) => (
+            {tabsData?.data?.map((eachTabData: IConnectionTabType, eachTabIndex: number) => (
               <ConnectionTab
                 role="button"
                 data-testid="connections-tab-button"
-                onClick={() => handleConnectionTabClick(connectorType, columnIndex)}
+                onClick={() => handleConnectionTabClick(eachTabData, columnIndex)}
                 label={
                   <RenderLabel
                     columnIndex={columnIndex}
-                    connectorType={connectorType}
+                    connectorType={eachTabData}
                     connectionIdProp={connectionIdProp}
                     toggleLoader={toggleLoader}
                     setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
                   />
                 }
-                value={connectorType.name}
+                value={eachTabData.name}
                 disableTouchRipple
-                key={`${connectorType.name}=${connectorTypeIndex}`}
-                id={connectorType.name}
+                key={`${eachTabData.name}=${eachTabIndex}`}
+                id={eachTabData.name}
                 colIndex={columnIndex}
-                connectorType={connectorType}
+                connectorType={eachTabData}
               />
             ))}
           </ConnectionTabsContainer>

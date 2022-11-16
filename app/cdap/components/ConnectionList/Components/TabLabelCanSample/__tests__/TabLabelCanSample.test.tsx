@@ -19,7 +19,7 @@ import * as apiHelpers from 'components/Connections/Browser/GenericBrowser/apiHe
 import React from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import history from 'services/history';
-import TabLabelCanSample from '../index';
+import TabLabelCanSample from 'components/ConnectionList/Components/TabLabelCanSample';
 
 const mockConnectorTypeData = {
   name: 'File',

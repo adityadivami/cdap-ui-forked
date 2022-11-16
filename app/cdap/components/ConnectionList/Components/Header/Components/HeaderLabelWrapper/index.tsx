@@ -38,16 +38,14 @@ export default function({
   return headersRefs?.current[columnIndex]?.offsetWidth <
     headersRefs?.current[columnIndex]?.scrollWidth ? (
     <CustomTooltip title={tabsData[columnIndex - 1].selectedTab} arrow>
-      <Box>
-        <RenderLabel
-          variant="body2"
-          ref={(element) => {
-            headersRefs.current[columnIndex] = element;
-          }}
-        >
-          {filteredData[columnIndex - 1]?.selectedTab}
-        </RenderLabel>
-      </Box>
+      <RenderLabel
+        variant="body2"
+        ref={(element) => {
+          headersRefs.current[columnIndex] = element;
+        }}
+      >
+        {filteredData[columnIndex - 1]?.selectedTab}
+      </RenderLabel>
     </CustomTooltip>
   ) : (
     <RenderLabel

@@ -32,9 +32,9 @@ import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import styled from 'styled-components';
-import ConnectionTabs from './Components/ConnectionTabs';
-import { IConnectorTabType } from './Components/ConnectionTabs/types';
-import { getUpdatedTabsData, setDataForTabsHelper } from './utils';
+import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import { getUpdatedTabsData, getDataForTabsHelper } from 'components/ConnectionList/utils';
+import { IConnectionTabType } from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
 
 const PREFIX = 'features.WranglerNewUI';
 
@@ -167,7 +167,7 @@ export default function() {
     const categorizedConnections = await getCategorizedConnections();
     const connections: ITabsDataResponse | ITabData[] =
       categorizedConnections.get(selectedValue) || [];
-    setTabsData(setDataForTabsHelper(connections, index, tabsData));
+    setTabsData(getDataForTabsHelper(connections, index, tabsData));
     toggleLoader(false);
   };
 
@@ -186,7 +186,7 @@ export default function() {
     refs.current[index].focus();
   };
 
-  const selectedTabValueHandler = (entity: IConnectorTabType, index: number) => {
+  const selectedTabValueHandler = (entity: IConnectionTabType, index: number) => {
     toggleLoader(true);
     setTabsData((currentData) => {
       let newData: IFilteredData[] = [...currentData];
@@ -216,7 +216,7 @@ export default function() {
     fetchEntities(entityName, path ? path : undefined)
       // NOTE: As the function is returning promise, we are using .then here
       .then((res) => {
-        setTabsData(setDataForTabsHelper(res, index, tabsData));
+        setTabsData(getDataForTabsHelper(res, index, tabsData));
         toggleLoader(false);
       })
       .catch((error) => {

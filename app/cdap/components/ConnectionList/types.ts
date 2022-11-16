@@ -14,11 +14,11 @@
  * the License.
  */
 
-import {
-  IConnectorTabPluginArtifact,
-  IConnectorTabType,
-} from 'components/ConnectionList/Components/ConnectionTabs/types';
 import { ChangeEvent, Dispatch, MouseEvent, MutableRefObject, SetStateAction } from 'react';
+import {
+  IConnectionTabPluginArtifact,
+  IConnectionTabType,
+} from './Components/ConnectionTabs/Components/RenderLabel';
 
 export interface IFilteredData {
   data: ITabData[];
@@ -66,7 +66,7 @@ export interface IHeaderSearchInputFieldProps {
 
 export interface IConnectionTabsProps {
   tabsData: IFilteredData;
-  handleChange: (entity: IConnectorTabType, index: number) => void;
+  handleChange: (entity: IConnectionTabType, index: number) => void;
   value: string;
   columnIndex: number;
   connectionId: string;
@@ -74,9 +74,9 @@ export interface IConnectionTabsProps {
   toggleLoader?: (value: boolean, isError?: boolean) => void;
 }
 
-export interface ITabData extends IConnectorTabType {
+export interface ITabData extends IConnectionTabType {
   SVG: JSX.Element;
-  artifact: IConnectorTabPluginArtifact;
+  artifact: IConnectionTabPluginArtifact;
   category: string;
   count: number;
   displayName: string;
@@ -92,10 +92,12 @@ export interface ITabsDataResponse {
   totalCount: number;
 }
 
+interface IProperties {
+  name: string;
+  description: string;
+}
+
 export interface ITabsDataResponseSampleProperties {
-  properties: {
-    name: string;
-    description: string;
-  };
+  properties: IProperties;
   type: string;
 }

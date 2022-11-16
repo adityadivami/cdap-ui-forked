@@ -116,13 +116,13 @@ export default function({
             refs.current[columnIndex] = e;
           }}
         />
-        <Box
+        <IconButton
           onClick={(e: MouseEvent<HTMLInputElement>) => {
             return handleClearSearch(e, columnIndex);
           }}
         >
           <Close />
-        </Box>
+        </IconButton>
       </ConnectionListSearchWrapper>
     </>
   );

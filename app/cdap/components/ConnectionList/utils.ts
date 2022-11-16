@@ -16,7 +16,7 @@
 
 import { IFilteredData, ITabData, ITabsDataResponse } from 'components/ConnectionList/types';
 
-export const setDataForTabsHelper = (
+export const getDataForTabsHelper = (
   response: ITabsDataResponse | ITabData[],
   index: number,
   existingTabsData: IFilteredData[]

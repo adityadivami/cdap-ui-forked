@@ -28,7 +28,7 @@ export interface ITabLabelCanBrowseProps {
 
 export default function({ label, count, columnIndex, icon }: ITabLabelCanBrowseProps) {
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
-  const [refValue, setRefValue] = useState<boolean>(false);
+  const [refValue, setRefValue] = useState(false);
 
   useEffect(() => {
     /**

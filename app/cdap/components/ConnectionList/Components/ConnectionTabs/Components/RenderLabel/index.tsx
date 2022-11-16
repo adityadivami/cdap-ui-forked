@@ -17,7 +17,59 @@
 import TabLabelCanBrowse from 'components/ConnectionList/Components/TabLabelCanBrowse';
 import TabLabelCanSample from 'components/ConnectionList/Components/TabLabelCanSample';
 import React from 'react';
-import { IRenderLabelProps } from 'components/ConnectionList/Components/ConnectionTabs/types';
+import { Dispatch, SetStateAction } from 'react';
+
+export interface IRenderLabelProps {
+  columnIndex: number;
+  connectorType: IConnectionTabType;
+  connectionIdProp: string;
+  toggleLoader: (value: boolean, isError?: boolean) => void;
+  setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface IConnectionTabType {
+  connectionId?: string;
+  connectionType?: string;
+  createdTimeMillis?: number;
+  description?: string;
+  isDefault?: boolean;
+  name: string;
+  plugin?: IConnectionTabPlugin;
+  preConfigured?: boolean;
+  updatedTimeMillis?: number;
+  canBrowse?: boolean;
+  canSample?: boolean;
+  path?: string;
+  type?: string;
+  properties?: Record<string, string>;
+  count?: number;
+  icon?: JSX.Element;
+  SVG?: JSX.Element;
+}
+
+export interface IConnectionTabPlugin {
+  artifact: IConnectionTabPluginArtifact;
+  category: string;
+  name: string;
+  properties: IConnectionTabPluginProperties;
+  type: string;
+}
+
+export interface IConnectionTabPluginArtifact {
+  scope: string;
+  name: string;
+  version: string;
+}
+
+export interface IConnectionTabPluginProperties {
+  host: string;
+  port: string;
+  jdbcPluginName: string;
+  database: string;
+  connectionArgument: string;
+  password: string;
+  user: string;
+}
 
 export default function({
   columnIndex,

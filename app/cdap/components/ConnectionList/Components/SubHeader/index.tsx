@@ -46,6 +46,7 @@ const FlexContainer = styled(Box)`
   display: flex;
   align-items: flex-end;
 `;
+
 const FeaturesContainer = styled(FlexContainer)`
   gap: 30px;
   font-size: 14px;
@@ -58,15 +59,15 @@ const ImportDataContainer = styled(FlexContainer)`
   }
 `;
 
+const SaveIcon = styled(SaveAltRoundedIcon)`
+  font-size: x-large;
+  color: ${grey[700]};
+`;
+
 const TypographyLabel = styled(Typography)`
   color: ${grey[900]};
   font-size: 14px;
   line-height: 21px;
-`;
-
-const SaveIcon = styled(SaveAltRoundedIcon)`
-  font-size: x-large;
-  color: ${grey[700]};
 `;
 
 export const useStyles = makeStyles({
@@ -96,12 +97,6 @@ export default function({ selectedConnection }: ISubHeader) {
   const classes = useStyles();
   const location = useLocation();
 
-  // Local storage will be removed
-  // Need to integrate connector types code to achieve the redirection from add connections page
-  const handleAddConnection = () => {
-    localStorage.setItem('addConnectionRequestFromNewUI', selectedConnection);
-  };
-
   return (
     <Box className={classes.breadcrumbContainer} data-testid="breadcrumb-container-parent">
       <Breadcrumb
@@ -109,11 +104,15 @@ export default function({ selectedConnection }: ISubHeader) {
         location={location}
       />
       <FeaturesContainer>
-        <CustomizedLink to={`/ns/${getCurrentNamespace()}/connections/create`}>
-          <ImportDataContainer
-            onClick={handleAddConnection}
-            data-testid="sub-header-handle-add-connection"
-          >
+        <CustomizedLink
+          to={{
+            pathname: `/ns/${getCurrentNamespace()}/connections/create`,
+            state: {
+              from: { addConnectionRequestFromNewUI: 'Select Dataset' },
+            },
+          }}
+        >
+          <ImportDataContainer data-testid="sub-header-handle-add-connection">
             <AddConnectionIcon />
             <TypographyLabel>
               {T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}

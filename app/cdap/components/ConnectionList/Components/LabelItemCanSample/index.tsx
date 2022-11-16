@@ -16,7 +16,7 @@
 
 import { Box, Typography } from '@material-ui/core';
 import blue from '@material-ui/core/colors/blue';
-import { ITabLabelSampleItemProps } from 'components/ConnectionList/Components/TabLabelCanSample';
+import { ITabLabelCanSampleItemProps } from 'components/ConnectionList/Components/TabLabelCanSample';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -39,7 +39,7 @@ const LabelForCanSample = styled(Typography)`
   point-erevents: none;
 `;
 
-const WranglingHover = styled.button`
+const WrangleButton = styled.button`
   display: none;
   cursor: pointer;
   text-decoration: none;
@@ -67,15 +67,15 @@ export default function({
   entity,
   buttonTestId,
   buttonElement,
-}: ITabLabelSampleItemProps) {
+}: ITabLabelCanSampleItemProps) {
   return (
     <ContainerForLabelCanSample data-testid="connections-tab-label-simple">
       <LabelForCanSample variant="body2" ref={myLabelRef} component="span">
         {label}
       </LabelForCanSample>
-      <WranglingHover onClick={() => onExplore(entity)} data-testid={buttonTestId}>
+      <WrangleButton onClick={() => onExplore(entity)} data-testid={buttonTestId}>
         {buttonElement}
-      </WranglingHover>
+      </WrangleButton>
     </ContainerForLabelCanSample>
   );
 }

@@ -24,7 +24,7 @@ export const InfoGraph = () => {
       viewBox="0 0 182 146"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      data-test-id="icon-graph"
+      data-test-id="home-infographic-icon"
     >
       <rect
         x="38.2778"
