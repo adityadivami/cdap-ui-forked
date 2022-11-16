@@ -18,30 +18,30 @@ import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const FlexJustifyAlignCenter = styled(Box)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const LastDividerBox = styled(Box)`
-    margin: 0px 0px 0px 4px;
+  margin: 0px 0px 0px 4px;
 `;
 
 export const DividerBox = styled(Box)`
-    margin: 0px 4px;
+  margin: 0px 4px;
 `;
 
 export const FunctionBoxWrapper = styled(Box)`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: -webkit-fill-available;
-    & .MuiIconButton-root{
-        padding-bottom: 8px;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: -webkit-fill-available;
+  & .MuiIconButton-root {
+    padding-bottom: 8px;
+  }
 `;
 
-export const SearchBoxWrapper =  styled(Box)`
-    min-width: 490px;
+export const SearchBoxWrapper = styled(Box)`
+  min-width: 490px;
 `;

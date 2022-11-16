@@ -20,7 +20,7 @@ import { menuArrowIcon } from 'components/GridTable/components/TransformationToo
 import { IMenuItemComponentProps } from 'components/GridTable/components/MenuItemComponent/types';
 import T from 'i18n-react';
 import { NormalFont, MenuHeadText } from 'components/common/TypographyText';
-import {ShortDivider} from 'components/common/Divider';
+import { ShortDivider } from 'components/common/Divider';
 
 export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
   if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.divider')) {
@@ -48,9 +48,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
         data-testid="menu-item-parent"
       >
-        <NormalFont component="div">
-          {item.label}
-        </NormalFont>
+        <NormalFont component="div">{item.label}</NormalFont>
         {item?.options?.length > 0 && menuArrowIcon}
       </MenuItem>
     );
