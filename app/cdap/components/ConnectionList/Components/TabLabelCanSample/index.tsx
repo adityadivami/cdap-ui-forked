@@ -25,6 +25,7 @@ import T from 'i18n-react';
 import React, { createRef, Ref, useContext, useEffect, useState } from 'react';
 import { Redirect } from 'react-router';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import styled from 'styled-components';
 
 import { Dispatch, SetStateAction } from 'react';
 import { IConnectionTabType } from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
@@ -45,6 +46,10 @@ export interface ITabLabelCanSampleProps {
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
 }
+
+const WrangleTypography = styled(Typography)`
+  padding-left: 10px;
+`;
 
 export default function({
   label,
@@ -127,9 +132,9 @@ export default function({
           buttonElement={
             <Box className="wranglingHover">
               <WrangleIcon />
-              <Typography color="primary" variant="body2" component="span">
+              <WrangleTypography color="primary" variant="body2" component="span">
                 {T.translate('features.WranglerNewUI.ConnectionsList.labels.loadToGrid')}
-              </Typography>
+              </WrangleTypography>
             </Box>
           }
         />
@@ -145,9 +150,9 @@ export default function({
       buttonElement={
         <Box className="wranglingHover">
           <WrangleIcon />
-          <Typography variant="body2" color="primary" component="span">
+          <WrangleTypography variant="body2" color="primary" component="span">
             {T.translate('features.WranglerNewUI.ConnectionsList.labels.loadToGrid')}
-          </Typography>
+          </WrangleTypography>
         </Box>
       }
     />

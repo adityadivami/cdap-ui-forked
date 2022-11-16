@@ -22,7 +22,7 @@ import RenderLabel, {
   IConnectionTabType,
 } from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
 import { IConnectionTabsProps } from 'components/ConnectionList/types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const ConnectionTabsContainer = styled(Tabs)`
@@ -119,8 +119,20 @@ export default function({
     }
   };
 
+  const refValue = useRef(null);
+  const scrollToRight = () => {
+    refValue.current.scrollIntoView({
+      behavior: 'auto',
+    });
+  };
+  useEffect(() => {
+    if (refValue.current) {
+      scrollToRight();
+    }
+  }, [refValue]);
+
   return (
-    <Box data-testid="connections-tabs-parent">
+    <Box data-testid="connections-tabs-parent" {...({ ref: refValue } as any)}>
       {tabsData?.showTabs && (
         <TabsInnerContainer data-testid="connection-tabs">
           <ConnectionTabsContainer
