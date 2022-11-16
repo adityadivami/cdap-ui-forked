@@ -92,6 +92,7 @@ export default function({
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
+        dataTestId="select-column-drawer"
       >
         <AddTransformationWrapper>
           <AddTransformationBodyWrapper>
