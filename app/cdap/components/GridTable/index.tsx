@@ -181,6 +181,7 @@ export default function() {
     setColumnSelected((prevColumn) => (prevColumn === columnName ? '' : columnName));
     setColumnType(types[columnName]);
   };
+
   const { types } = dataprep;
 
   const renameColumnNameHandler = (oldColumnName: string, newColumnName: string) => {

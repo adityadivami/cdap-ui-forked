@@ -33,11 +33,6 @@ interface IColumnDataQualityProps {
   };
   columnInfo: any | {}; // Need to fix
 }
-interface IColumnInfo {
-  general: IGeneral;
-  types: ITypes;
-}
-
 interface ITypes {
   [key: string]: number | string;
 }
@@ -84,13 +79,13 @@ export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
         <>{T.translate(`${PREFIX}.quality`).toString()}</>
       </RenderLabel>
       <QualityBarContainer data-testid="quality-bar">
-        <FilledBar component="span" style={{ width: `${filled}%` }} data-testid="filled" />
+        <FilledBar component="span" style={{ width: `${filled}%` }} data-testid="filled-bar" />
         <EmptyBar
           component="span"
           style={{
             width: `${calculatedEmptyValue}%`,
           }}
-          data-testid="empty"
+          data-testid="empty-bar"
         />
       </QualityBarContainer>
       <ToggleButton dataQuality={dataQuality} />

@@ -85,25 +85,17 @@ const SelectedToogleRightButton = styled(StyledToggleRightButton)`
 
 const getWrapperComponent = (isSelected, position) => {
   if (position === 'left') {
-    if (isSelected === 1) {
-      return SelectedToogleLeftButton;
-    } else {
-      return StyledToggleLeftButton;
-    }
+    return isSelected === 1 ? SelectedToogleLeftButton : StyledToggleLeftButton;
   } else {
-    if (isSelected === 2) {
-      return SelectedToogleRightButton;
-    } else {
-      return StyledToggleRightButton;
-    }
+    return isSelected === 2 ? SelectedToogleRightButton : StyledToggleRightButton;
   }
 };
 
 export default function({ dataQuality }: IDataQualityProps) {
   const [isSelected, setIsSelected] = useState(1);
-
   const LeftWrapperComponent = getWrapperComponent(isSelected, 'left');
   const RightWrapperComponent = getWrapperComponent(isSelected, 'right');
+
   return (
     <StyledDataQualityBox data-testid={'data-quality-toggle-parent'}>
       <LeftWrapperComponent

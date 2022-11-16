@@ -41,10 +41,10 @@ describe('It Should test ColumnDatQuality Component.', () => {
     const qualityBar = screen.getByTestId(/quality-bar/i);
     expect(qualityBar).toBeInTheDocument();
 
-    const filledQualityBar = screen.getByTestId(/filled/i);
+    const filledQualityBar = screen.getByTestId(/filled-bar/i);
     expect(filledQualityBar).toHaveStyle('width:40%');
 
-    const emptyQualityBar = screen.getByTestId(/empty/i);
+    const emptyQualityBar = screen.getByTestId(/empty-bar/i);
     expect(emptyQualityBar).toHaveStyle('width:60%');
   });
 
@@ -65,7 +65,7 @@ describe('It Should test ColumnDatQuality Component.', () => {
     const qualityBar = screen.getByTestId(/quality-bar/i);
     expect(qualityBar).toBeInTheDocument();
 
-    const filledQualityBar = screen.getByTestId(/filled/i);
+    const filledQualityBar = screen.getByTestId(/filled-bar/i);
     expect(filledQualityBar).toHaveStyle('width:0%');
   });
 

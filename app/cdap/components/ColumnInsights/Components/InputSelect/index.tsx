@@ -85,8 +85,6 @@ export default function({ options, value, onChange, fullWidth, defaultValue, typ
       data-testid={`input-select-${type}`}
     >
       {options &&
-        Array.isArray(options) &&
-        options?.length &&
         options.map((option: IOption, index: number) => {
           return (
             <MenuItem value={option.value} key={option.value} data-testid={`select-${index}`}>

@@ -63,10 +63,6 @@ export default function({ graphData }: IColumnDataDistributionProps) {
     height: 200,
   };
 
-  const handleBarClick = () => {
-    // TODO
-  };
-
   const spliceData = (data: IGraphData[]) => {
     if (data && data?.length >= 10) {
       return data.slice(0, 9);
@@ -92,7 +88,6 @@ export default function({ graphData }: IColumnDataDistributionProps) {
           ylabel={`${PREFIX}.barChartYLabel`}
           {...barChartProps}
           data={spliceData(graphData)}
-          onBarClick={handleBarClick}
         />
       </ColumnDataQualityGraph>
     </ColumnDataDistributionContainer>
