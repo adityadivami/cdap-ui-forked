@@ -19,7 +19,7 @@ import RadioInput from 'components/AddTransformation/ColumnTable/Components/Radi
 import CheckboxInput from 'components/AddTransformation/ColumnTable/Components/CheckboxInput';
 import { IInputWidgetProps } from 'components/AddTransformation/ColumnTable/types';
 
-export default function({
+export default function ({
   isSingleSelection,
   selectedColumns,
   onSingleSelection,

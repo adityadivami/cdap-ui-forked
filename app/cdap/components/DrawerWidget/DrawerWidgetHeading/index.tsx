@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import { UnderLine } from 'components/DrawerWidget/iconStore';
+import { UnderLine } from 'components/DrawerWidget/IconStore/underline';
 import { HeadFont } from 'components/common/TypographyText';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
@@ -25,7 +25,7 @@ const DrawerHeadWrapper = styled(Box)`
   flex-direction: column;
 `;
 
-export default function({ headingText }: { headingText: string }) {
+export default function ({ headingText }: { headingText: string }) {
   return (
     <DrawerHeadWrapper>
       <HeadFont component="p" data-testid="drawer-heading">

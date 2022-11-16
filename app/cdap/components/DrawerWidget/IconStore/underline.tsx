@@ -15,20 +15,18 @@
  */
 
 import React from 'react';
-import { Radio } from '@material-ui/core';
-import { IRadioInputProps } from 'components/AddTransformation/ColumnTable/types';
+import { blue } from '@material-ui/core/colors';
 
-export default function ({ selectedColumns, onSingleSelection, columnDetail }: IRadioInputProps) {
-  return (
-    <Radio
-      color="primary"
-      onClick={() => onSingleSelection(columnDetail)}
-      checked={
-        selectedColumns?.filter((column) => column.label === columnDetail.label).length
-          ? true
-          : false
-      }
-      data-testid="radio-input-radio"
-    />
-  );
-}
+export const UnderLine = (
+  <svg
+    width="67"
+    height="2"
+    viewBox="0 0 67 2"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    data-testid="underline"
+  >
+    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
+    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
+  </svg>
+);

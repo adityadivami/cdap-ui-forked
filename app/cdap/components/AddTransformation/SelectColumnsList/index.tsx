@@ -73,7 +73,7 @@ const SelectColumnSearchBox = styled(Box)`
   margin-right: 10px;
 `;
 
-export default function({
+export default function ({
   transformationDataType,
   selectedColumnsCount,
   columnsList,
@@ -102,10 +102,10 @@ export default function({
     transformationDataType?.length > 0 && transformationDataType?.includes('all')
       ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
       : columns?.filter((columnDetail: IHeaderNamesList) => {
-          return transformationDataType?.some((dataTypeCollection: string | string[]) => {
-            return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
-          });
+        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
         });
+      });
 
   const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
@@ -145,8 +145,8 @@ export default function({
     if (event.target.value) {
       const columnValue: IHeaderNamesList[] = columnsList.length
         ? columnsList.filter((columnDetail: IHeaderNamesList) =>
-            columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
-          )
+          columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
+        )
         : [];
       columnValue?.length ? setColumns(columnValue) : setColumns([]);
     } else {

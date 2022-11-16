@@ -19,7 +19,7 @@ import React from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
-import { BackIcon } from 'components/DrawerWidget/iconStore';
+import { BackIcon } from 'components/DrawerWidget/IconStore/backIcon';
 import { FlexAlignCenter, PointerBox } from 'components/common/BoxContainer';
 import { VerticalDividerBox } from 'components/common/Divider';
 import styled from 'styled-components';
@@ -57,7 +57,7 @@ const DrawerWidgetComponent = styled(Drawer)`
   }
 `;
 
-export default function({
+export default function ({
   headingText,
   openDrawer,
   showDivider,

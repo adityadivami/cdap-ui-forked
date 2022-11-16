@@ -35,7 +35,7 @@ export default function ({
     selectedColumns?.filter((column) => column.label === columnDetail.label).length
     ? true
     : false
-    
+
   return (
     <FormControlLabel
       disabled={disabled}
