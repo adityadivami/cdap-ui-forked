@@ -15,6 +15,7 @@
  */
 
 import { IMultipleSelectedFunctionDetail } from 'components/AddTransformation/types';
+
 export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
   {
     value: 'join-columns',

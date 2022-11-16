@@ -75,6 +75,7 @@ export default function({
   setSelectedColumns,
   transformationName,
 }: IColumnTableProps) {
+  
   const handleChange = () => {
     if (
       multipleColumnSelected?.filter(
