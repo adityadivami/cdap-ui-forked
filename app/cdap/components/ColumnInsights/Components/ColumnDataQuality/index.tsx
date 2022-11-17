@@ -73,7 +73,7 @@ const EmptyBar = styled(Box)`
 export default function({ dataQuality, columnInfo }: IColumnDataQualityProps) {
   const nonNull = columnInfo?.general['non-null'] || 0;
   const empty = columnInfo?.general?.empty || 0;
-  const filled = nonNull - empty;
+  const filled = (nonNull as number) - (empty as number);
   const calculatedEmptyValue = 100 - filled;
 
   return (
