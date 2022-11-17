@@ -89,7 +89,7 @@ export default function({
 
   const getUsage = () => {
     if (!isDirectiveSet) {
-      // If Directive name is not yet entered in input then the search
+      // If Directive name is not yet entered in input then the search list will be directive list else will be column list
       MyDataPrepApi.getUsage({ context: NamespaceStore.getState().selectedNamespace }).subscribe(
         (res) => {
           setDirectivesList(res.values);
@@ -111,10 +111,10 @@ export default function({
     const directiveInput = document.getElementById('directive-input-search');
     const mousetrap = new Mousetrap(directiveInput);
 
-    mousetrap.bind('up', handleUpArrow);
-    mousetrap.bind('down', handleDownArrow);
-    mousetrap.bind('enter', handleEnterKey);
-    mousetrap.bind('tab', handleTabKey);
+    mousetrap.bind('up', handleUpArrow); // Binding this event for navigating up in the search list
+    mousetrap.bind('down', handleDownArrow); // Binding this event for navigating bottom in the search list
+    mousetrap.bind('enter', handleEnterKey); // Binding this event for selecting item by pressing enter on active item in the search list
+    mousetrap.bind('tab', handleTabKey); // Binding this event for selecting item by pressing enter on active item in the search list
 
     // unbind a keyboard event.
     return () => {
