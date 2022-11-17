@@ -81,7 +81,7 @@ export default function({
   setIsErrorOnNoWorkSpace,
   dataTestID,
 }: IRenderLabelProps) {
-  return [0, 1].includes(columnIndex) || connectorType.canBrowse ? (
+  const LabelCanBrowse = (
     <TabLabelCanBrowse
       label={columnIndex === 0 ? connectorType.displayName : connectorType.name}
       count={columnIndex === 0 ? connectorType.count : undefined}
@@ -89,7 +89,9 @@ export default function({
       icon={connectorType.icon}
       dataTestID={dataTestID}
     />
-  ) : (
+  );
+
+  const LabelCanSample = (
     <TabLabelCanSample
       label={connectorType.name}
       entity={connectorType}
@@ -99,4 +101,6 @@ export default function({
       dataTestID={dataTestID}
     />
   );
+
+  return [0, 1].includes(columnIndex) || connectorType.canBrowse ? LabelCanBrowse : LabelCanSample;
 }

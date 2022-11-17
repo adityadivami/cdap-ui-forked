@@ -19,7 +19,7 @@ import Box from '@material-ui/core/Box';
 import { grey } from '@material-ui/core/colors';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
-import Breadcrumb from 'components/GridTable/components/Breadcrumb';
+import Breadcrumb from 'components/Breadcrumb';
 import T from 'i18n-react';
 import React from 'react';
 import { useLocation } from 'react-router';
@@ -82,11 +82,19 @@ const TypographyLabel = styled(Typography)`
 export default function({ selectedConnection }: ISubHeader) {
   const location = useLocation();
 
+  const CONNECTION_LIST_BREADCRUMB_OPTIONS = [
+    {
+      link: `/ns/${getCurrentNamespace()}/home`,
+      label: T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome').toString(),
+    },
+    {
+      label: T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList').toString(),
+    },
+  ];
+
   return (
     <BreadcrumbContainer data-testid="breadcrumb-container-parent">
-      <Breadcrumb
-        datasetName={T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
-      />
+      <Breadcrumb breadcrumbsList={CONNECTION_LIST_BREADCRUMB_OPTIONS} />
       <FeaturesContainer>
         <CustomizedLink
           to={{

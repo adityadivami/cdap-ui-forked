@@ -121,8 +121,12 @@ export default function({
         },
       }}
     />
-  ) : refValue ? (
-    <CustomTooltip title={label} arrow data-testid="connections-tab-ref-label-simple">
+  ) : (
+    <CustomTooltip
+      title={refValue ? label : ''}
+      arrow
+      data-testid="connections-tab-ref-label-simple"
+    >
       <Box>
         <TabLabelItem
           dataTestID={dataTestID}
@@ -147,27 +151,5 @@ export default function({
         />
       </Box>
     </CustomTooltip>
-  ) : (
-    <TabLabelItem
-      dataTestID={dataTestID}
-      label={label}
-      myLabelRef={myLabelRef}
-      onExplore={onExplore}
-      entity={entity}
-      buttonTestId="connections-tab-explore"
-      buttonElement={
-        <Box className="wranglingHover">
-          <WrangleIcon />
-          <WrangleTypography
-            variant="body2"
-            color="primary"
-            component="span"
-            data-testid={`wrangle-text`}
-          >
-            {T.translate('features.WranglerNewUI.ConnectionsList.labels.loadToGrid')}
-          </WrangleTypography>
-        </Box>
-      }
-    />
   );
 }
