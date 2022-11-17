@@ -88,7 +88,8 @@ export default function({
   const [fuse, setFuse] = useState(new Fuse([], { ...defaultFuseOptions }));
 
   const getUsage = () => {
-    if (!isDirectiveSet) { // If Directive name is not yet entered in input then the search 
+    if (!isDirectiveSet) {
+      // If Directive name is not yet entered in input then the search
       MyDataPrepApi.getUsage({ context: NamespaceStore.getState().selectedNamespace }).subscribe(
         (res) => {
           setDirectivesList(res.values);
