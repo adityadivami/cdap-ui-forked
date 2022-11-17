@@ -19,32 +19,34 @@ import React from 'react';
 import CheckBoxInput from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/CheckboxInput';
 
 describe('It should render ', () => {
-  it('Should render the checkBox component and click the checkbox', () => {
+  it('Should render the checkBox component and click the checkbox with disable check false', () => {
     const container = render(
       <CheckBoxInput
         selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => false}
         columnDetail={{ label: 'test', type: [''], name: '' }}
         onMultipleSelection={() => jest.fn()}
+        columnIndex={0}
       />
     );
 
-    const checkboxInputElement = screen.getByTestId(/check-box-input-checkbox/i);
+    const checkboxInputElement = screen.getByTestId(/check-box-input-0/i);
     fireEvent.click(checkboxInputElement);
     expect(container).toBeDefined();
   });
 
-  it('Should render the checkBox component and click the checkbox', () => {
+  it('Should render the checkBox component and click the checkbox with disable checkbox as true', () => {
     const container = render(
       <CheckBoxInput
         selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => true}
         columnDetail={{ label: 'test', type: [''], name: '' }}
         onMultipleSelection={() => jest.fn()}
+        columnIndex={0}
       />
     );
 
-    const checkboxInputElement = screen.getByTestId(/check-box-input-checkbox/i);
+    const checkboxInputElement = screen.getByTestId(/check-box-input-0/i);
     fireEvent.click(checkboxInputElement);
     expect(container).toBeDefined();
   });

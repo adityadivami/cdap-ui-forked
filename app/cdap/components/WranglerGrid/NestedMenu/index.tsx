@@ -32,7 +32,7 @@ export interface INestedMenuProps {
   menuToggleHandler?: (title?: string) => void;
 }
 
-export default function ({
+export default function({
   menuOptions,
   submitMenuOption,
   columnType,
