@@ -14,5 +14,18 @@
  * the License.
  */
 
-export const MISSING_NULL = 'Missing/Null';
-export const transformationOptions = ['undo', 'redo'];
+import React from 'react';
+import {
+  IHeaderNamesList,
+  IDataQualityItem,
+} from 'components/WranglerGrid/SelectColumnPanel/types';
+
+export interface ISelectColumnsListProps {
+  transformationDataType: string[];
+  selectedColumnsCount: number;
+  columnsList: IHeaderNamesList[];
+  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  dataQuality: IDataQualityItem[];
+  transformationName: string;
+  selectedColumns: IHeaderNamesList[];
+}

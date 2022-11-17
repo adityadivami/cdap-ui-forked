@@ -14,5 +14,23 @@
  * the License.
  */
 
-export const MISSING_NULL = 'Missing/Null';
-export const transformationOptions = ['undo', 'redo'];
+import T from 'i18n-react';
+import { TOOLBAR_ICONS_LABEL_ALL_PREFIX } from 'components/WranglerGrid/TransformationToolbar/constants';
+const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.datatype';
+export const DATATYPE_OPTIONS = [
+  'string',
+  'boolean',
+  'integer',
+  'long',
+  'short',
+  'float',
+  'double',
+  'decimal',
+  'bytes',
+].map((dataType) => {
+  return {
+    value: dataType,
+    label: T.translate(`${PREFIX}.${dataType}`).toString(),
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+  };
+});
