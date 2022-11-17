@@ -59,9 +59,9 @@ export default function({
   setIsErrorOnNoWorkSpace,
 }: ITabLabelCanSampleProps) {
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
-  const [refValue, setRefValue] = useState<boolean>(false);
+  const [refValue, setRefValue] = useState(false);
   const [workspaceId, setWorkspaceId] = useState<string>(null);
-  const [currentConnection, setCurrentConnection] = useState<string>(initialConnectionId);
+  const [currentConnection, setCurrentConnection] = useState(initialConnectionId);
   const { onWorkspaceCreate } = useContext(ConnectionsContext);
   const indexOfSelectedDataset: number = location.pathname.lastIndexOf('/');
   const requiredPath: string = location.pathname.slice(indexOfSelectedDataset + 1);

@@ -81,7 +81,6 @@ const TypographyLabel = styled(Typography)`
 
 export default function({ selectedConnection }: ISubHeader) {
   const location = useLocation();
-  console.log(selectedConnection, 'selectedConnection');
 
   return (
     <BreadcrumbContainer data-testid="breadcrumb-container-parent">
@@ -100,14 +99,14 @@ export default function({ selectedConnection }: ISubHeader) {
         >
           <ImportDataContainer data-testid="sub-header-handle-add-connection">
             <AddConnectionIcon />
-            <TypographyLabel>
+            <TypographyLabel component="span">
               {T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}
             </TypographyLabel>
           </ImportDataContainer>
         </CustomizedLink>
         <ImportDataContainer>
           <SaveIcon />
-          <TypographyLabel>
+          <TypographyLabel component="span">
             {T.translate('features.WranglerNewUI.ImportData.referenceLabel')}
           </TypographyLabel>
         </ImportDataContainer>

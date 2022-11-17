@@ -91,7 +91,7 @@ const ConnectionTab = styled(Tab)`
   }`}
 `;
 
-const TabsInnerContainer = styled(Box)`
+const ConnectionTabsWrapper = styled(Box)`
   z-index: 1;
   height: 100%;
   overflow: scroll;
@@ -107,7 +107,7 @@ export default function({
   setIsErrorOnNoWorkSpace,
   toggleLoader,
 }: IConnectionTabsProps) {
-  const [connectionIdProp, setConnectionId] = useState<string>(connectionId);
+  const [connectionIdProp, setConnectionId] = useState(connectionId);
 
   useEffect(() => {
     setConnectionId(connectionId);
@@ -119,6 +119,7 @@ export default function({
     }
   };
 
+  // code to achieve automatic scroll into view for connection list tabs
   const refValue = useRef(null);
   const scrollToRight = () => {
     refValue.current.scrollIntoView({
@@ -132,9 +133,9 @@ export default function({
   }, [refValue]);
 
   return (
-    <Box data-testid="connections-tabs-parent" {...({ ref: refValue } as any)}>
+    <Box data-testid="connections-tabs-parent" {...{ ref: refValue }}>
       {tabsData?.showTabs && (
-        <TabsInnerContainer data-testid="connection-tabs">
+        <ConnectionTabsWrapper data-testid="connection-tabs">
           <ConnectionTabsContainer
             value={value}
             orientation="vertical"
@@ -164,7 +165,7 @@ export default function({
               />
             ))}
           </ConnectionTabsContainer>
-        </TabsInnerContainer>
+        </ConnectionTabsWrapper>
       )}
     </Box>
   );
