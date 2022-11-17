@@ -31,6 +31,7 @@ import {
   IHeaderNamesList,
   IParams,
   IRecords,
+  IType,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
@@ -355,7 +356,7 @@ export default function GridTable() {
     const getNullValueCount =
       convertNonNullPercentForColumnSelected(
         gridData?.values,
-        gridData?.summary?.statistics?.columnName?.general
+        (gridData?.summary?.statistics?.columnName as Record<string, IType>)?.general
       ) || 0;
     const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
     setInsightDrawer({
