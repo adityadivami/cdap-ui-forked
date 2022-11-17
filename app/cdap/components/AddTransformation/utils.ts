@@ -13,10 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
-export const getDirective = (functionName: string, columnSelected: string) => {
+
+export const getDirective = (functionName: string, selectedColumnName: string) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-    return `set-type :${columnSelected} ${functionName}`;
+    return `set-type :${selectedColumnName} ${functionName}`;
   } else {
     return null;
   }

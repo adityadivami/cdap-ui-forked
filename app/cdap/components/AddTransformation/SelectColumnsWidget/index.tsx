@@ -47,11 +47,11 @@ export default function ({
   handleSelectColumn,
 }: ISelectColumnsWidgetProps) {
 
-  let selectButtonText =           
+  let selectButtonText =
     multipleColumnSelected?.filter((el) => el.value === transformationName).length > 0
       ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`).toString()
       : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString()
-  
+
 
   const singleColumnSelect = (
     <>
@@ -83,7 +83,7 @@ export default function ({
           disabled={false}
           data-testid="select-column-button"
         >
-         {selectButtonText}
+          {selectButtonText}
         </SelectColumnButton>
       )}
     </>

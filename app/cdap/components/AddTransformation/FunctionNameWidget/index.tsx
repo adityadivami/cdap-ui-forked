@@ -45,7 +45,7 @@ const InfoIconComponent = styled(InfoOutlinedIcon)`
   cursor: pointer;
 `
 
-export default function({ transformationName }: {transformationName: string}) {
+export default function ({ transformationName }: { transformationName: string }) {
 
   return (
     <TransformationNameBox>
@@ -61,7 +61,7 @@ export default function({ transformationName }: {transformationName: string}) {
           component="span"
           data-testid="selected-function-name"
         >{transformationName}</SubHeadNormalFont>
-          <InfoIconComponent data-testid="info-link"/>
+        <InfoIconComponent data-testid="info-link" />
       </TransformationNameTextInfoWrapper>
     </TransformationNameBox>
   );
