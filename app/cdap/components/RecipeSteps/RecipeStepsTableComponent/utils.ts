@@ -14,23 +14,19 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+import T from 'i18n-react';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
+export const headerData = [
+  {
+    textId: 'serial-no',
+    text: T.translate('features.WranglerNewRecipeSteps.labels.serialNo'),
   },
-  gridTableWrapper: {
-    height: 'calc(100vh - 232px)',
-    overflowY: 'auto',
+  {
+    textId: 'recipe-steps',
+    text: T.translate('features.WranglerNewRecipeSteps.labels.recipeSteps'),
   },
-});
+  {
+    textId: '',
+    text: '',
+  },
+];
