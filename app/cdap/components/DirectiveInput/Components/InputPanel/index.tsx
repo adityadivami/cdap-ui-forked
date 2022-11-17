@@ -164,7 +164,7 @@ export default function({
 
   const searchMatch = (searchString: string) => {
     let searchList = [];
-    const spaceIndex: boolean = searchString.includes(' '); // As soon as directive is entered, we need column list to appear hence we are checking if space is present in it,
+    const spaceIndex = searchString.includes(' '); // As soon as directive is entered, we need column list to appear hence we are checking if space is present in it,
     if (fuse && searchString.length > 0) {
       if (!isDirectiveSet) {
         searchList = fuse
@@ -198,7 +198,6 @@ export default function({
       getDirectiveSyntax([listItem], true);
     } else {
       const formattedString = getFormattedSyntax(inputText, listItem.item.label);
-      console.log('formattedString', formattedString);
       setInputText(formattedString);
       onSearchItemClick(formattedString);
     }
