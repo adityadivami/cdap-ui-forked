@@ -101,28 +101,7 @@ export default function ({
   }, [inputBoxValue]);
 
   const handleKeyDownEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    {
-      const directiveSyntax =
-        directiveUsage.length > 0 ? directiveUsage[0]?.item?.usage.split(' ') : [];
-      const inputSplit = inputBoxValue.replace(/^\s+/g, '').split(' ');
-      console.log('directiveSyntax, inputSplit', directiveSyntax, inputSplit)
-      if (event.key === 'Enter' && handlePasteDirective(inputBoxValue, directivesList)) {
-        onDirectiveInputHandler(inputBoxValue);
-      }
-      else if (multipleColumnDirective.includes(inputSplit[0]) && event.key === 'Enter' &&
-        columnSelected &&
-        selectedDirective && (directiveSyntax.length === inputSplit.length || inputSplit.length > directiveSyntax.length || inputSplit.length < directiveSyntax.length)) {
-        onDirectiveInputHandler(inputBoxValue);
-      }
-      else if (
-        event.key === 'Enter' &&
-        columnSelected &&
-        selectedDirective &&
-        (directiveSyntax.length === inputSplit.length || inputSplit.length > directiveSyntax.length)
-      ) {
-        onDirectiveInputHandler(inputBoxValue);
-      }
-    }
+
   };
 
   return (

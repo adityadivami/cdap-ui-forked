@@ -139,27 +139,15 @@ export default function({
   };
 
   const handleEnterKey = () => {
-    if (inputText.length > 0) {
-      if (searchResults[selectedIndex]) {
-        handleListItemClick(searchResults[selectedIndex]);
-      } else {
-        onSearchItemClick(inputText);
-      }
-    }
+
   };
 
   const handleTabKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    if (inputText.length === 0 || inputText.split(' ').length !== 1) {
-      return;
-    }
-    handleEnterKey();
+
   };
 
   useEffect(() => {
-    if (selectedDirective) {
-      setFuse(new Fuse(columnNamesList, { ...defaultFuseOptions, keys: ['label'] }));
-    }
+
     searchMatch(inputBoxValue);
     setInputText(inputBoxValue);
   }, [inputBoxValue]);
@@ -188,24 +176,10 @@ export default function({
     setSearchResults(searchList);
     setInputText(searchString);
     setSelectedIndex(searchList.length - 1);
-    if (!selectedDirective) {
-      getDirectiveSyntax(searchList, spaceIndex);
-    }
   };
 
   const handleListItemClick = (listItem) => {
-    if (!selectedDirective) {
-      onSearchItemClick(listItem.item.directive);
-      getDirectiveSyntax([listItem], true);
-    } else {
-      const splitData = inputText.split(/(?=[:])|(?<=[:])/g);
-      const clickedItem: Record<string, IObject> = {
-        target: { value: `${splitData[0]}${splitData[1]}${listItem.item.label}` },
-      };
-      setInputText(`${splitData[0]}${splitData[1]}${listItem.item.label}`);
-      onSearchItemClick(clickedItem.target.value);
-      onColumnSelection(true);
-    }
+
   };
 
   return (
