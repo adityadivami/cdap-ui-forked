@@ -64,8 +64,8 @@ export default function GridTable() {
   const { dataprep } = DataPrepStore.getState();
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [connectorType, setConnectorType] = useState<string | null>(null);
-  const [openDirectivePanel, setDirectivePanel] = useState(true);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [directivePanelIsOpen, setDirectivePanelIsOpen] = useState(true);
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
   const [snackbarData, setSnackbarData] = useState({
     description: '',
     isSuccess: false,
@@ -134,15 +134,6 @@ export default function GridTable() {
         setLoading(false);
         setGridData(response);
       });
-  };
-
-  const updateDataTranformation = (wid: string) => {
-    const payload: IParams = {
-      context: params.namespace as string,
-      workspaceId: wid,
-    };
-    getWorkSpaceData(payload, wid);
-    setIsFirstWrangle(false);
   };
 
   useEffect(() => {
@@ -295,7 +286,7 @@ export default function GridTable() {
             ...gridParams,
           },
         });
-        setOpenSnackbar(true);
+        setSnackbarIsOpen(true);
         setSnackbarData({
           description: 'Directive applied successfully',
           isSuccess: true,
@@ -305,7 +296,7 @@ export default function GridTable() {
       },
       (err) => {
         setLoading(false);
-        setOpenSnackbar(true);
+        setSnackbarIsOpen(true);
         setSnackbarData({
           description: 'Directive cannot applied',
           isSuccess: false,
@@ -367,21 +358,21 @@ export default function GridTable() {
           </TableBody>
         </Table>
       )}
-      {openDirectivePanel && (
+      {directivePanelIsOpen && (
         <DirectiveInput
           columnNamesList={headersNamesList}
           onDirectiveInputHandler={(directive) => {
             addDirectives(directive);
-            setDirectivePanel(false);
+            setDirectivePanelIsOpen(false);
           }}
-          onClose={() => setDirectivePanel(false)}
-          openDirectivePanel={openDirectivePanel}
+          onClose={() => setDirectivePanelIsOpen(false)}
+          openDirectivePanel={directivePanelIsOpen}
         />
       )}
-      {openSnackbar && (
+      {snackbarIsOpen && (
         <Snackbar
           handleCloseError={() => {
-            setOpenSnackbar(false);
+            setSnackbarIsOpen(false);
             setSnackbarData({
               description: '',
               isSuccess: false,

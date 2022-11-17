@@ -34,7 +34,7 @@ import {
 import { grey } from '@material-ui/core/colors';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 
-const SimpleBox = styled(Box)`
+const InputParentWrapper = styled(Box)`
   display: block;
   box-shadow: -3px -4px 15px rgba(68, 132, 245, 0.25);
 `;
@@ -82,7 +82,7 @@ const CloseIconButton = styled(IconButton)`
   color: #ffffff;
 `;
 
-export default function({
+export default function ({
   columnNamesList,
   onDirectiveInputHandler,
   onClose,
@@ -93,7 +93,7 @@ export default function({
   const [appliedDirective, setAppliedDirective] = useState([]);
   const [directiveColumns, setDirectiveColumns] = useState([]);
   const [directiveColumnCount, setDirectiveColumnCount] = useState(1);
-  const [directiveUsage, setDirectiveUsage] = useState<IDirectiveUsage[]>([]);
+  const [directiveUsageList, setDirectiveUsageList] = useState<IDirectiveUsage[]>([]);
   const [directivesList, setDirectivesList] = useState<IDirectivesList[]>([]);
   const [enterCount, setEnterCount] = useState(0);
   const [isDirectivePaste, setIsDirectivePaste] = useState(false);
@@ -130,7 +130,7 @@ export default function({
   };
 
   useEffect(() => {
-    setDirectiveUsage(formatDirectiveUsageData(inputDirective, directivesList));
+    setDirectiveUsageList(formatDirectiveUsageData(inputDirective, directivesList));
   }, [inputDirective]);
 
   const handleKeyDownEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -143,18 +143,18 @@ export default function({
           directiveColumns.length >= 1 &&
           directiveColumnCount === 0 &&
           prev + 1 > directiveColumns.length + appliedDirective.length
-        ) {
+        ) {  // This condition means if we can select multiple column for directive
           onDirectiveInputHandler(inputDirective);
         } else if (
           isDirectiveSet &&
           directiveColumns.length === 2 &&
           directiveColumnCount === 2 &&
           prev + 1 > directiveColumns.length + appliedDirective.length
-        ) {
+        ) { // This condition means if we can select atleast two column for directive
           onDirectiveInputHandler(inputDirective);
-        } else if (prev + 1 > directiveColumns.length + appliedDirective.length) {
+        } else if (prev + 1 > directiveColumns.length + appliedDirective.length) { // This condition means if we can select single column from list and any number of postfix can be entered
           onDirectiveInputHandler(inputDirective);
-        } else if (isDirectivePaste) {
+        } else if (isDirectivePaste) { // If we are copy pasting directive this condition is executed
           onDirectiveInputHandler(inputDirective);
         }
         return prev + 1;
@@ -164,24 +164,22 @@ export default function({
 
   return (
     <DirectiveBox data-testid="directive-input-main-container">
-      {openDirectivePanel && (
-        <SimpleBox data-testid="directive-input-parent">
+        <InputParentWrapper data-testid="directive-input-parent">
           <InputPanel
             inputDirective={inputDirective}
             onSearchItemClick={(value) => handleDirectiveChange(value)}
             setDirectivesList={setDirectivesList}
-            getDirectiveSyntax={(activeResults: IDirectiveUsage[], value) => {
-              setIsDirectiveSet(value);
-              setDirectiveUsage(activeResults);
+            getDirectiveSyntax={(activeResults: IDirectiveUsage[], isDirectiveSelected) => {
+              setIsDirectiveSet(isDirectiveSelected);
+              setDirectiveUsageList(activeResults);
             }}
             isDirectiveSet={isDirectiveSet}
             columnNamesList={columnNamesList}
-            setEnterCount={setEnterCount}
           />
           <DirectiveUsageWrapper>
-            {directiveUsage.length === 1 &&
-              directiveUsage.map((eachDirective: IDirectiveUsage) => (
-                <DirectiveUsage key={eachDirective.uniqueId} directiveUsage={eachDirective} />
+            {directiveUsageList.length === 1 &&
+              directiveUsageList.map((directiveUsage: IDirectiveUsage) => (
+                <DirectiveUsage key={directiveUsage.uniqueId} directiveUsage={directiveUsage} />
               ))}
             <SearchBarWrapper>
               <InputWrapper>
@@ -207,8 +205,7 @@ export default function({
               </CloseIconButton>
             </SearchBarWrapper>
           </DirectiveUsageWrapper>
-        </SimpleBox>
-      )}
+        </InputParentWrapper>
     </DirectiveBox>
   );
 }

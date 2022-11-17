@@ -17,10 +17,16 @@
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
-import { IRecords, IGridParams, IRequestBody, IApiPayload } from 'components/GridTable/types';
+import { IRecords, IGridParams, IRequestBody, IApiPayload, IType } from 'components/GridTable/types';
 import { objectQuery } from 'services/helpers';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
+/**
+ * @param  {IRecords} params
+ * @param  {string|string[]} newDirective directive value
+ * @param  {string} action?
+ * @returns payload which is used for api calls 
+ */
 export const getAPIRequestPayload = (
   params: IRecords,
   newDirective: string | string[],
@@ -54,7 +60,12 @@ export const getAPIRequestPayload = (
   return returnData;
 };
 
-export const applyDirectives = (workspaceId, directives) => {
+/**
+ * @param  {IRecords} workspaceId
+ * @param  {string[]} directives
+ * @return api response 
+ */
+export const applyDirectives = (workspaceId: string | boolean | Record<string, IType>, directives: string[]) => {
   return MyDataPrepApi.getWorkspace({
     context: getCurrentNamespace(),
     workspaceId,

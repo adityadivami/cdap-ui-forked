@@ -38,10 +38,9 @@ interface IInputPanelProps {
   onSearchItemClick: (value: string) => void;
   getDirectiveSyntax: (results: IDirectiveUsage[], value: boolean) => void;
   inputDirective: string;
-  setEnterCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SimpleWrapper = styled(Box)`
+const SearchWrapper = styled(Box)`
   display: block;
 `;
 
@@ -79,7 +78,6 @@ export default function({
   onSearchItemClick,
   getDirectiveSyntax,
   inputDirective,
-  setEnterCount,
 }: IInputPanelProps) {
   const [searchResults, setSearchResults] = useState<IDirectiveUsage[]>([]);
   const [inputText, setInputText] = useState<string>('');
@@ -114,9 +112,9 @@ export default function({
     mousetrap.bind('up', handleUpArrow); // Binding this event for navigating up in the search list
     mousetrap.bind('down', handleDownArrow); // Binding this event for navigating bottom in the search list
     mousetrap.bind('enter', handleEnterKey); // Binding this event for selecting item by pressing enter on active item in the search list
-    mousetrap.bind('tab', handleTabKey); // Binding this event for selecting item by pressing enter on active item in the search list
+    mousetrap.bind('tab', handleTabKey); // Binding this event on tab click so active item on list will be filled on input tag
 
-    // unbind a keyboard event.
+    // Unbinding above events.
     return () => {
       mousetrap.unbind('up');
       mousetrap.unbind('down');
@@ -126,6 +124,7 @@ export default function({
     };
   });
 
+  // Used for navigating above in search list
   const handleUpArrow = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (selectedIndex !== 0) {
@@ -133,6 +132,7 @@ export default function({
     }
   };
 
+  // Used for navigating below in search list
   const handleDownArrow = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (selectedIndex !== searchResults.length - 1) {
@@ -140,6 +140,7 @@ export default function({
     }
   };
 
+  // Used for selecting item in search list
   const handleEnterKey = () => {
     if (inputText.length > 0) {
       if (searchResults[selectedIndex]) {
@@ -150,6 +151,7 @@ export default function({
     }
   };
 
+  // Used for filling input with active item in search list
   const handleTabKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (inputText.length === 0 || inputText.split(' ').length !== 1) {
@@ -163,6 +165,7 @@ export default function({
     setInputText(inputDirective);
   }, [inputDirective]);
 
+  // Function called on every change in input to change search list to most appropriate matched list
   const searchMatch = (searchString: string) => {
     let searchList = [];
     const spaceIndex = searchString.includes(' '); // As soon as directive is entered, we need column list to appear hence we are checking if space is present in it,
@@ -193,6 +196,7 @@ export default function({
     }
   };
 
+  // Function called when item is clicked in search list
   const handleListItemClick = (listItem) => {
     if (!isDirectiveSet) {
       onSearchItemClick(listItem.item.directive);
@@ -205,7 +209,7 @@ export default function({
   };
 
   return (
-    <SimpleWrapper data-testid="input-panel-wraper">
+    <SearchWrapper data-testid="input-panel-wraper">
       {searchResults.map((searchItem, searchItemIndex) =>
         searchItemIndex === selectedIndex ? (
           <ActiveResultRow
@@ -213,14 +217,14 @@ export default function({
             onClick={() => handleListItemClick(searchItem)}
             data-testid={`select-directive-list-option-${searchItemIndex}`}
           >
-            <SimpleWrapper>
+            <SearchWrapper>
               <LargeLabel data-testid="select-directive-list-label" variant="body1">
                 {searchItem?.item?.directive || searchItem?.item?.label}
               </LargeLabel>
               <SmallLabel data-testid="select-directive-list-description" variant="body1">
                 {searchItem?.item?.description}
               </SmallLabel>
-            </SimpleWrapper>
+            </SearchWrapper>
           </ActiveResultRow>
         ) : (
           <ResultRow
@@ -228,17 +232,17 @@ export default function({
             onClick={() => handleListItemClick(searchItem)}
             data-testid={`select-directive-list-option-${searchItemIndex}`}
           >
-            <SimpleWrapper>
+            <SearchWrapper>
               <LargeLabel data-testid="select-directive-list-label" variant="body1">
                 {searchItem?.item?.directive || searchItem?.item?.label}
               </LargeLabel>
               <SmallLabel data-testid="select-directive-list-description" variant="body1">
                 {searchItem?.item?.description}
               </SmallLabel>
-            </SimpleWrapper>
+            </SearchWrapper>
           </ResultRow>
         )
       )}
-    </SimpleWrapper>
+    </SearchWrapper>
   );
 }
