@@ -19,7 +19,6 @@ import grey from '@material-ui/core/colors/grey';
 import red from '@material-ui/core/colors/red';
 import ToggleButton from 'components/ColumnInsights/Components/ColumnToggleButton';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
-import { IType } from 'components/GridTable/types';
 import T from 'i18n-react';
 import React from 'react';
 import styled from 'styled-components';
@@ -32,7 +31,10 @@ interface IColumnDataQualityProps {
     emptyValueCount: number;
     emptyValuePercentage: number;
   };
-  columnInfo: Record<string, IType>;
+  columnInfo: {
+    general: IGeneral;
+    types: ITypes;
+  };
 }
 interface ITypes {
   [key: string]: number | string;
