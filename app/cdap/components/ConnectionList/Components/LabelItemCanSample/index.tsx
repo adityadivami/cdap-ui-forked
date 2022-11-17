@@ -67,11 +67,12 @@ export default function({
   entity,
   buttonTestId,
   buttonElement,
+  dataTestID,
 }: ITabLabelCanSampleItemProps) {
   return (
     <ContainerForLabelCanSample
       onDoubleClick={() => onExplore(entity)}
-      data-testid="connections-tab-label-simple"
+      data-testid={`connections-tab-label-can-simple-${dataTestID}`}
     >
       <LabelForCanSample variant="body2" ref={myLabelRef} component="span">
         {label}

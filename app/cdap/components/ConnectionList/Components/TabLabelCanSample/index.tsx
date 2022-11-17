@@ -37,6 +37,7 @@ export interface ITabLabelCanSampleItemProps {
   entity: IConnectionTabType;
   buttonTestId: string;
   buttonElement: JSX.Element;
+  dataTestID: number;
 }
 
 export interface ITabLabelCanSampleProps {
@@ -45,6 +46,7 @@ export interface ITabLabelCanSampleProps {
   initialConnectionId: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
+  dataTestID: number;
 }
 
 const WrangleTypography = styled(Typography)`
@@ -57,6 +59,7 @@ export default function({
   initialConnectionId,
   toggleLoader,
   setIsErrorOnNoWorkSpace,
+  dataTestID,
 }: ITabLabelCanSampleProps) {
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
@@ -122,6 +125,7 @@ export default function({
     <CustomTooltip title={label} arrow data-testid="connections-tab-ref-label-simple">
       <Box>
         <TabLabelItem
+          dataTestID={dataTestID}
           label={label}
           myLabelRef={myLabelRef}
           onExplore={onExplore}
@@ -140,6 +144,7 @@ export default function({
     </CustomTooltip>
   ) : (
     <TabLabelItem
+      dataTestID={dataTestID}
       label={label}
       myLabelRef={myLabelRef}
       onExplore={onExplore}

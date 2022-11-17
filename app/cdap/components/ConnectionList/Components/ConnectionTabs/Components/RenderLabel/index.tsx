@@ -25,6 +25,7 @@ export interface IRenderLabelProps {
   connectionIdProp: string;
   toggleLoader: (value: boolean, isError?: boolean) => void;
   setIsErrorOnNoWorkSpace: Dispatch<SetStateAction<boolean>>;
+  dataTestID: number;
 }
 
 export interface IConnectionTabType {
@@ -77,6 +78,7 @@ export default function({
   connectionIdProp,
   toggleLoader,
   setIsErrorOnNoWorkSpace,
+  dataTestID,
 }: IRenderLabelProps) {
   return [0, 1].includes(columnIndex) || connectorType.canBrowse ? (
     <TabLabelCanBrowse
@@ -84,6 +86,7 @@ export default function({
       count={columnIndex === 0 ? connectorType.count : undefined}
       columnIndex={columnIndex}
       icon={connectorType.icon}
+      dataTestID={dataTestID}
     />
   ) : (
     <TabLabelCanSample
@@ -92,6 +95,7 @@ export default function({
       initialConnectionId={connectionIdProp}
       toggleLoader={toggleLoader}
       setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+      dataTestID={dataTestID}
     />
   );
 }
