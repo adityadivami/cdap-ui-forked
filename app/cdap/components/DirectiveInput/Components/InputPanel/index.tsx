@@ -30,6 +30,7 @@ import uuidV4 from 'uuid/v4';
 import { grey } from '@material-ui/core/colors';
 import { IHeaderNamesList } from 'components/GridTable/types';
 import { getFormattedSyntax, getLastWordOfSearchItem } from 'components/DirectiveInput/utils';
+import SearchListItem from 'components/DirectiveInput/Components/SearchListItem';
 
 interface IInputPanelProps {
   setDirectivesList: React.Dispatch<React.SetStateAction<[]>>;
@@ -71,7 +72,7 @@ const ActiveResultRow = styled(ResultRow)`
   background-color: #eff0f2;
 `;
 
-export default function({
+export default function ({
   setDirectivesList,
   isDirectiveSet,
   columnNamesList,
@@ -217,14 +218,7 @@ export default function({
             onClick={() => handleListItemClick(searchItem)}
             data-testid={`select-directive-list-option-${searchItemIndex}`}
           >
-            <SearchWrapper>
-              <LargeLabel data-testid="select-directive-list-label" variant="body1">
-                {searchItem?.item?.directive || searchItem?.item?.label}
-              </LargeLabel>
-              <SmallLabel data-testid="select-directive-list-description" variant="body1">
-                {searchItem?.item?.description}
-              </SmallLabel>
-            </SearchWrapper>
+            <SearchListItem searchItem={searchItem} />
           </ActiveResultRow>
         ) : (
           <ResultRow
@@ -232,14 +226,7 @@ export default function({
             onClick={() => handleListItemClick(searchItem)}
             data-testid={`select-directive-list-option-${searchItemIndex}`}
           >
-            <SearchWrapper>
-              <LargeLabel data-testid="select-directive-list-label" variant="body1">
-                {searchItem?.item?.directive || searchItem?.item?.label}
-              </LargeLabel>
-              <SmallLabel data-testid="select-directive-list-description" variant="body1">
-                {searchItem?.item?.description}
-              </SmallLabel>
-            </SearchWrapper>
+            <SearchListItem searchItem={searchItem} />
           </ResultRow>
         )
       )}
