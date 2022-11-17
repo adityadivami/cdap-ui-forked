@@ -22,11 +22,15 @@ import {
   IDirectivesList,
   IDirectiveUsage,
 } from 'components/DirectiveInput/types';
-import { formatDirectiveUsageData, handlePasteDirective } from 'components/DirectiveInput/utils';
+import { formatDirectiveUsageData } from 'components/DirectiveInput/utils';
 import T from 'i18n-react';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { PREFIX, TWO_COLUMN_DIRECTIVE, MULTIPLE_COLUMN_DIRECTIVE } from 'components/DirectiveInput/constants';
+import {
+  PREFIX,
+  TWO_COLUMN_DIRECTIVE,
+  MULTIPLE_COLUMN_DIRECTIVE,
+} from 'components/DirectiveInput/constants';
 import { grey } from '@material-ui/core/colors';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 
@@ -78,7 +82,7 @@ const CloseIconButton = styled(IconButton)`
   color: #ffffff;
 `;
 
-export default function ({
+export default function({
   columnNamesList,
   onDirectiveInputHandler,
   onClose,
@@ -96,24 +100,31 @@ export default function ({
   const directiveRef = useRef();
 
   const handleDirectiveChange = (value: string) => {
-    console.log('trigger')
-    !value && setIsDirectiveSet(false);
-    const inputText = value.split(' ');
-    if(directivesList.filter((el=> el.directive == inputText[0])).length){
-      if(TWO_COLUMN_DIRECTIVE.includes(inputText[0])){
-        setDirectiveColumnCount(2)
-      }else if(MULTIPLE_COLUMN_DIRECTIVE.includes(inputText[0])){
-        setDirectiveColumnCount(0)
-      }
-      setIsDirectiveSet(true)
-      setAppliedDirective([inputText[0]])
+    if (!value) {
+      setIsDirectiveSet(false);
+      setEnterCount(0);
     }
-    if(isDirectiveSet){
-      columnNamesList.forEach((column)=>{
-        if(value.indexOf(column.label) !== -1){
-          setDirectiveColumns((prev) => !prev.includes(column.label) ? [...prev, column.label] : prev)
+    const inputText = value.split(' ');
+    if (directivesList.filter((el) => el.directive == inputText[0]).length) {
+      if (TWO_COLUMN_DIRECTIVE.includes(inputText[0])) {
+        setDirectiveColumnCount(2);
+      } else if (MULTIPLE_COLUMN_DIRECTIVE.includes(inputText[0])) {
+        setDirectiveColumnCount(0);
+      }
+      setIsDirectiveSet(true);
+      setAppliedDirective([inputText[0]]);
+    }
+    if (isDirectiveSet) {
+      columnNamesList.forEach((column) => {
+        if (value.indexOf(column.label) !== -1) {
+          setDirectiveColumns((prev) =>
+            !prev.includes(column.label) ? [...prev, column.label] : prev
+          );
+        } else {
+          setDirectiveColumns((prev) => prev.filter((el) => el != column.label));
+          setEnterCount(appliedDirective.length + directiveColumns.length);
         }
-      })
+      });
     }
     setInputDirective(value);
   };
@@ -121,23 +132,33 @@ export default function ({
   useEffect(() => {
     setDirectiveUsage(formatDirectiveUsageData(inputDirective, directivesList));
   }, [inputDirective]);
-  
+
   const handleKeyDownEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if(event.keyCode === 86){
-      setIsDirectivePaste(true)
-    }else if(event.key === 'Enter'){
+    if (event.keyCode === 86) {
+      setIsDirectivePaste(true);
+    } else if (event.key === 'Enter') {
       setEnterCount((prev) => {
-        if(isDirectiveSet && directiveColumns.length >= 1 && directiveColumnCount === 0 && prev + 1 > (directiveColumns.length + appliedDirective.length)){
+        if (
+          isDirectiveSet &&
+          directiveColumns.length >= 1 &&
+          directiveColumnCount === 0 &&
+          prev + 1 > directiveColumns.length + appliedDirective.length
+        ) {
           onDirectiveInputHandler(inputDirective);
-        }else if(isDirectiveSet && directiveColumns.length === 2 && directiveColumnCount === 2 && prev + 1 > (directiveColumns.length + appliedDirective.length)){
+        } else if (
+          isDirectiveSet &&
+          directiveColumns.length === 2 &&
+          directiveColumnCount === 2 &&
+          prev + 1 > directiveColumns.length + appliedDirective.length
+        ) {
           onDirectiveInputHandler(inputDirective);
-        }else if(prev + 1 > (directiveColumns.length + appliedDirective.length)){
+        } else if (prev + 1 > directiveColumns.length + appliedDirective.length) {
           onDirectiveInputHandler(inputDirective);
-        }else if(isDirectivePaste){
+        } else if (isDirectivePaste) {
           onDirectiveInputHandler(inputDirective);
         }
         return prev + 1;
-      })
+      });
     }
   };
 
@@ -160,7 +181,7 @@ export default function ({
           <DirectiveUsageWrapper>
             {directiveUsage.length === 1 &&
               directiveUsage.map((eachDirective: IDirectiveUsage) => (
-                <DirectiveUsage key={eachDirective.uniqueId} eachDirective={eachDirective} />
+                <DirectiveUsage key={eachDirective.uniqueId} directiveUsage={eachDirective} />
               ))}
             <SearchBarWrapper>
               <InputWrapper>

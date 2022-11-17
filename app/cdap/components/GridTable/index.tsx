@@ -65,11 +65,11 @@ export default function GridTable() {
   const [isFirstWrangle, setIsFirstWrangle] = useState(false);
   const [connectorType, setConnectorType] = useState<string | null>(null);
   const [openDirectivePanel, setDirectivePanel] = useState(true);
-  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarData, setSnackbarData] = useState({
     description: '',
-    isSuccess: false
-  })
+    isSuccess: false,
+  });
   const classes = useStyles();
 
   useEffect(() => {
@@ -298,8 +298,8 @@ export default function GridTable() {
         setOpenSnackbar(true);
         setSnackbarData({
           description: 'Directive applied successfully',
-          isSuccess: true
-        })
+          isSuccess: true,
+        });
         setLoading(false);
         setGridData(response);
       },
@@ -308,8 +308,8 @@ export default function GridTable() {
         setOpenSnackbar(true);
         setSnackbarData({
           description: 'Directive cannot applied',
-          isSuccess: false
-        })
+          isSuccess: false,
+        });
       }
     );
   };
@@ -380,15 +380,15 @@ export default function GridTable() {
       )}
       {openSnackbar && (
         <Snackbar
-        handleCloseError={()=> {
-          setOpenSnackbar(false);
-          setSnackbarData({
-            description: '',
-            isSuccess: false
-          })
-        }}
-        description={snackbarData.description}
-        isSuccess={snackbarData.isSuccess}
+          handleCloseError={() => {
+            setOpenSnackbar(false);
+            setSnackbarData({
+              description: '',
+              isSuccess: false,
+            });
+          }}
+          description={snackbarData.description}
+          isSuccess={snackbarData.isSuccess}
         />
       )}
       {loading && (

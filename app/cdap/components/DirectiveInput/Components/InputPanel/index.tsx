@@ -17,7 +17,7 @@
 import { Box, Typography } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import { defaultFuseOptions } from 'components/DirectiveInput/constants';
-import { IDirectiveUsage, IObject } from 'components/DirectiveInput/types';
+import { IDirectiveUsage } from 'components/DirectiveInput/types';
 import ee from 'event-emitter';
 import Fuse from 'fuse.js';
 import reverse from 'lodash/reverse';
@@ -38,7 +38,7 @@ interface IInputPanelProps {
   onSearchItemClick: (value: string) => void;
   getDirectiveSyntax: (results: IDirectiveUsage[], value: boolean) => void;
   inputDirective: string;
-  setEnterCount: React.Dispatch<React.SetStateAction<number>>
+  setEnterCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const SimpleWrapper = styled(Box)`
@@ -79,7 +79,7 @@ export default function({
   onSearchItemClick,
   getDirectiveSyntax,
   inputDirective,
-  setEnterCount
+  setEnterCount,
 }: IInputPanelProps) {
   const [searchResults, setSearchResults] = useState<IDirectiveUsage[]>([]);
   const [inputText, setInputText] = useState<string>('');
@@ -140,7 +140,6 @@ export default function({
   };
 
   const handleEnterKey = () => {
-    console.log('list enter')
     if (inputText.length > 0) {
       if (searchResults[selectedIndex]) {
         handleListItemClick(searchResults[selectedIndex]);
@@ -159,7 +158,6 @@ export default function({
   };
 
   useEffect(() => {
-
     searchMatch(inputDirective);
     setInputText(inputDirective);
   }, [inputDirective]);
@@ -178,7 +176,7 @@ export default function({
           });
         reverse(searchList);
       } else {
-        const characterToSearch =  getLastWordOfSearchItem(searchString)
+        const characterToSearch = getLastWordOfSearchItem(searchString);
         searchList = fuse.search(characterToSearch).map((searchItem) => {
           searchItem.uniqueId = uuidV4();
           return searchItem;
@@ -189,8 +187,8 @@ export default function({
     setSearchResults(searchList);
     setInputText(searchString);
     setSelectedIndex(searchList.length - 1);
-    if(!isDirectiveSet){
-      getDirectiveSyntax(searchList, spaceIndex)
+    if (!isDirectiveSet) {
+      getDirectiveSyntax(searchList, spaceIndex);
     }
   };
 
@@ -199,8 +197,8 @@ export default function({
       onSearchItemClick(listItem.item.directive);
       getDirectiveSyntax([listItem], true);
     } else {
-      const formattedString = getFormattedSyntax(inputText, listItem.item.label)
-      console.log('formattedString', formattedString)
+      const formattedString = getFormattedSyntax(inputText, listItem.item.label);
+      console.log('formattedString', formattedString);
       setInputText(formattedString);
       onSearchItemClick(formattedString);
     }

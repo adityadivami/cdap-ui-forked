@@ -20,13 +20,9 @@ import DirectiveUsage from 'components/DirectiveInput/Components/DirectiveUsage/
 import T from 'i18n-react';
 import { PREFIX } from 'components/DirectiveInput/constants';
 
-
 describe('Testing Directive Usage Component', () => {
   beforeEach(() => {
-    render(
-      <DirectiveUsage eachDirective={undefined}  
-      />
-    );
+    render(<DirectiveUsage eachDirective={undefined} />);
   });
 
   it('Should check if the parent wrapper is rendered', () => {
@@ -36,7 +32,6 @@ describe('Testing Directive Usage Component', () => {
 
   it('check if the label is rendered as expected', () => {
     const x = screen.getAllByTestId(/directive-usage-text/i);
-    expect(x[0]).toHaveTextContent(`${T.translate(`${PREFIX}.usage`)}`)
-  })
-
+    expect(x[0]).toHaveTextContent(`${T.translate(`${PREFIX}.usage`)}`);
+  });
 });

@@ -23,10 +23,6 @@ export interface IDirectiveInputProps {
   openDirectivePanel: boolean;
 }
 
-export interface IObject {
-  [key: string]: string;
-}
-
 export interface IDirectiveUsage {
   item: IDirectiveUsageItem;
   matches: IDirectiveUsageMatches;
@@ -75,8 +71,4 @@ export interface IDirectivesList {
   excluded: boolean;
   scope: string;
   usage: string;
-}
-
-export interface IDirectiveUsageProps {
-  eachDirective: IDirectiveUsage;
 }
