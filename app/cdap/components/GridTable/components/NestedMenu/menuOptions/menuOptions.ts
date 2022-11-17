@@ -26,4 +26,61 @@ export const MENU_OPTIONS = [
     options: DATATYPE_OPTIONS,
     supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
+  {
+    value: 'set-character-encoding',
+    label: `${T.translate(
+      'features.WranglerNewUI.Transformations.setCharacterEncoding.heading'
+    ).toString()}`,
+    options: [
+      {
+        value: 'character-encoding-utf8',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.utf8'
+        ).toString()}`,
+        supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-8'`,
+      },
+      {
+        value: 'character-encoding-utf16',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.utf16'
+        ).toString()}`,
+        supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16'`,
+      },
+      {
+        value: 'character-encoding-us-ascii',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.usascii'
+        ).toString()}`,
+        supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'us-ascii'`,
+      },
+      {
+        value: 'character-encoding-iso-8859-1',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.iso88591'
+        ).toString()}`,
+        supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'iso-8859-1'`,
+      },
+      {
+        value: 'character-encoding-utf16-be',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.utf16be'
+        ).toString()}`,
+        supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16be'`,
+      },
+      {
+        value: 'character-encoding-utf16-le',
+        label: `${T.translate(
+          'features.WranglerNewUI.Transformations.setCharacterEncoding.options.utf16le'
+        ).toString()}`,
+        supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16le'`,
+      },
+    ],
+    supportedDataType: ['byte'],
+  },
 ];

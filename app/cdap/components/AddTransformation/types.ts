@@ -48,3 +48,10 @@ export interface IMultipleSelectedFunctionDetail {
 export interface IDataQualityItem {
   [key: string]: string | number;
 }
+
+export interface IMenuOption {
+  value: string;
+  label: string;
+  supportedDataType: string[];
+  directive?: (string) => string;
+}

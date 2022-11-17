@@ -14,11 +14,27 @@
  * the License.
  */
 
+import { SET_CHARACTER_ENCODING } from 'components/AddTransformation/constants';
+import { IMenuOption } from 'components/AddTransformation/types';
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { MENU_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/menuOptions';
 
 export const getDirective = (functionName: string, selectedColumnName: string) => {
+  const characterEncodingOptions: IMenuOption[] = [];
+  MENU_OPTIONS.forEach((eachOption) => {
+    if (eachOption.value === SET_CHARACTER_ENCODING) {
+      characterEncodingOptions.push(...eachOption.options);
+    }
+  });
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
+  } else if (characterEncodingOptions.some((eachOption) => eachOption.value === functionName)) {
+    const option: IMenuOption = characterEncodingOptions.find(
+      (eachOption) => eachOption.value === functionName
+    );
+    if (option) {
+      return option.directive(selectedColumnName);
+    }
   } else {
     return null;
   }
