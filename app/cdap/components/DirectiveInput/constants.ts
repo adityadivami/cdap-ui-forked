@@ -143,9 +143,8 @@ export const defaultFuseOptions = {
 
 export const PREFIX = 'features.WranglerNewUI.GridPage.directivePanel';
 
-export const multipleColumnDirective = ['drop', 'keep', 'merge', 'flatten', 'create-record', 'set-headers', 'find-and-replace', 'filter-empty-or-null', 'flatten-record', 'invoke-http']
-
-
+export const TWO_COLUMN_DIRECTIVE = ['merge', 'swap', 'text-metric', 'indexsplit', 'format-as-currency', 'quantize', 'diff-date']
+export const MULTIPLE_COLUMN_DIRECTIVE = ['set-headers', 'create-record', 'keep', 'find-and-replace', 'drop', 'filter-empty-or-null', 'flatten-record', 'invoke-http', 'flatten']
 const data = {
   "message": "Success",
   "count": 84,

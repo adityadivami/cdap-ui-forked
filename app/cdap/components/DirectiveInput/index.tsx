@@ -26,7 +26,7 @@ import { formatDirectiveUsageData, handlePasteDirective } from 'components/Direc
 import T from 'i18n-react';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { PREFIX, multipleColumnDirective } from 'components/DirectiveInput/constants';
+import { PREFIX, TWO_COLUMN_DIRECTIVE, MULTIPLE_COLUMN_DIRECTIVE } from 'components/DirectiveInput/constants';
 import { grey } from '@material-ui/core/colors';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 
@@ -84,24 +84,61 @@ export default function ({
   onClose,
   openDirectivePanel,
 }: IDirectiveInputProps) {
-  const [inputBoxValue, setInputBoxValue] = useState<string>('');
-  const [columnSelected, setColumnSelected] = useState<boolean>(false);
-  const [selectedDirective, setSelectedDirective] = useState<boolean>(false);
+  const [inputDirective, setInputDirective] = useState<string>('');
+  const [isDirectiveSet, setIsDirectiveSet] = useState(false);
+  const [appliedDirective, setAppliedDirective] = useState([]);
+  const [directiveColumns, setDirectiveColumns] = useState([]);
+  const [directiveColumnCount, setDirectiveColumnCount] = useState(1);
   const [directiveUsage, setDirectiveUsage] = useState<IDirectiveUsage[]>([]);
   const [directivesList, setDirectivesList] = useState<IDirectivesList[]>([]);
+  const [enterCount, setEnterCount] = useState(0);
+  const [isDirectivePaste, setIsDirectivePaste] = useState(false);
   const directiveRef = useRef();
 
   const handleDirectiveChange = (value: string) => {
-    !value && setSelectedDirective(false);
-    setInputBoxValue(value);
+    console.log('trigger')
+    !value && setIsDirectiveSet(false);
+    const inputText = value.split(' ');
+    if(directivesList.filter((el=> el.directive == inputText[0])).length){
+      if(TWO_COLUMN_DIRECTIVE.includes(inputText[0])){
+        setDirectiveColumnCount(2)
+      }else if(MULTIPLE_COLUMN_DIRECTIVE.includes(inputText[0])){
+        setDirectiveColumnCount(0)
+      }
+      setIsDirectiveSet(true)
+      setAppliedDirective([inputText[0]])
+    }
+    if(isDirectiveSet){
+      columnNamesList.forEach((column)=>{
+        if(value.indexOf(column.label) !== -1){
+          setDirectiveColumns((prev) => !prev.includes(column.label) ? [...prev, column.label] : prev)
+        }
+      })
+    }
+    setInputDirective(value);
   };
 
   useEffect(() => {
-    setDirectiveUsage(formatDirectiveUsageData(inputBoxValue, directivesList));
-  }, [inputBoxValue]);
-
+    setDirectiveUsage(formatDirectiveUsageData(inputDirective, directivesList));
+  }, [inputDirective]);
+  
   const handleKeyDownEvent = (event: React.KeyboardEvent<HTMLInputElement>) => {
-
+    if(event.keyCode === 86){
+      setIsDirectivePaste(true)
+    }else if(event.key === 'Enter'){
+      setEnterCount((prev) => {
+        if(isDirectiveSet && directiveColumns.length >= 1 && directiveColumnCount === 0 && prev + 1 > (directiveColumns.length + appliedDirective.length)){
+          onDirectiveInputHandler(inputDirective);
+        }else if(isDirectiveSet && directiveColumns.length === 2 && directiveColumnCount === 2 && prev + 1 > (directiveColumns.length + appliedDirective.length)){
+          onDirectiveInputHandler(inputDirective);
+        }else if(prev + 1 > (directiveColumns.length + appliedDirective.length)){
+          onDirectiveInputHandler(inputDirective);
+        }else if(isDirectivePaste){
+          onDirectiveInputHandler(inputDirective);
+        }
+        return prev + 1;
+      })
+    }
   };
 
   return (
@@ -109,18 +146,16 @@ export default function ({
       {openDirectivePanel && (
         <SimpleBox data-testid="directive-input-parent">
           <InputPanel
-            inputBoxValue={inputBoxValue}
+            inputDirective={inputDirective}
             onSearchItemClick={(value) => handleDirectiveChange(value)}
             setDirectivesList={setDirectivesList}
             getDirectiveSyntax={(activeResults: IDirectiveUsage[], value) => {
-              setSelectedDirective(value);
+              setIsDirectiveSet(value);
               setDirectiveUsage(activeResults);
             }}
-            onColumnSelection={() => {
-              setColumnSelected(true);
-            }}
-            selectedDirective={selectedDirective}
+            isDirectiveSet={isDirectiveSet}
             columnNamesList={columnNamesList}
+            setEnterCount={setEnterCount}
           />
           <DirectiveUsageWrapper>
             {directiveUsage.length === 1 &&
@@ -139,7 +174,7 @@ export default function ({
                   id="directive-input-search" // is is needed for catching keyboard events while navigating through search list
                   autoComplete="OFF"
                   placeholder={T.translate(`${PREFIX}.inputDirective`).toString()}
-                  value={inputBoxValue}
+                  value={inputDirective}
                   onChange={(event) => handleDirectiveChange(event.target.value)}
                   ref={directiveRef}
                   onKeyDown={handleKeyDownEvent}

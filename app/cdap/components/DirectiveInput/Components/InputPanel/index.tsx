@@ -29,15 +29,16 @@ import styled from 'styled-components';
 import uuidV4 from 'uuid/v4';
 import { grey } from '@material-ui/core/colors';
 import { IHeaderNamesList } from 'components/GridTable/types';
+import { getFormattedSyntax, getLastWordOfSearchItem } from 'components/DirectiveInput/utils';
 
 interface IInputPanelProps {
   setDirectivesList: React.Dispatch<React.SetStateAction<[]>>;
-  selectedDirective: boolean;
+  isDirectiveSet: boolean;
   columnNamesList: IHeaderNamesList[];
   onSearchItemClick: (value: string) => void;
   getDirectiveSyntax: (results: IDirectiveUsage[], value: boolean) => void;
-  onColumnSelection: (value: boolean) => void;
-  inputBoxValue: string;
+  inputDirective: string;
+  setEnterCount: React.Dispatch<React.SetStateAction<number>>
 }
 
 const SimpleWrapper = styled(Box)`
@@ -73,12 +74,12 @@ const ActiveResultRow = styled(ResultRow)`
 
 export default function({
   setDirectivesList,
-  selectedDirective,
+  isDirectiveSet,
   columnNamesList,
   onSearchItemClick,
   getDirectiveSyntax,
-  onColumnSelection,
-  inputBoxValue,
+  inputDirective,
+  setEnterCount
 }: IInputPanelProps) {
   const [searchResults, setSearchResults] = useState<IDirectiveUsage[]>([]);
   const [inputText, setInputText] = useState<string>('');
@@ -87,7 +88,7 @@ export default function({
   const [fuse, setFuse] = useState(new Fuse([], { ...defaultFuseOptions }));
 
   const getUsage = () => {
-    if (!selectedDirective) {
+    if (!isDirectiveSet) {
       MyDataPrepApi.getUsage({ context: NamespaceStore.getState().selectedNamespace }).subscribe(
         (res) => {
           setDirectivesList(res.values);
@@ -101,7 +102,7 @@ export default function({
 
   useEffect(() => {
     getUsage();
-  }, [selectedDirective]);
+  }, [isDirectiveSet]);
 
   useEffect(() => {
     eventEmitter.on(globalEvents.DIRECTIVEUPLOAD, getUsage);
@@ -139,24 +140,35 @@ export default function({
   };
 
   const handleEnterKey = () => {
-
+    console.log('list enter')
+    if (inputText.length > 0) {
+      if (searchResults[selectedIndex]) {
+        handleListItemClick(searchResults[selectedIndex]);
+      } else {
+        onSearchItemClick(inputText);
+      }
+    }
   };
 
   const handleTabKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-
+    event.preventDefault();
+    if (inputText.length === 0 || inputText.split(' ').length !== 1) {
+      return;
+    }
+    handleEnterKey();
   };
 
   useEffect(() => {
 
-    searchMatch(inputBoxValue);
-    setInputText(inputBoxValue);
-  }, [inputBoxValue]);
+    searchMatch(inputDirective);
+    setInputText(inputDirective);
+  }, [inputDirective]);
 
   const searchMatch = (searchString: string) => {
     let searchList = [];
     const spaceIndex: boolean = searchString.includes(' '); // As soon as directive is entered, we need column list to appear hence we are checking if space is present in it,
     if (fuse && searchString.length > 0) {
-      if (!selectedDirective) {
+      if (!isDirectiveSet) {
         searchList = fuse
           .search(searchString)
           .slice(0, 3)
@@ -166,7 +178,8 @@ export default function({
           });
         reverse(searchList);
       } else {
-        searchList = fuse.search(searchString.split(':')[1]).map((searchItem) => {
+        const characterToSearch =  getLastWordOfSearchItem(searchString)
+        searchList = fuse.search(characterToSearch).map((searchItem) => {
           searchItem.uniqueId = uuidV4();
           return searchItem;
         });
@@ -176,10 +189,21 @@ export default function({
     setSearchResults(searchList);
     setInputText(searchString);
     setSelectedIndex(searchList.length - 1);
+    if(!isDirectiveSet){
+      getDirectiveSyntax(searchList, spaceIndex)
+    }
   };
 
   const handleListItemClick = (listItem) => {
-
+    if (!isDirectiveSet) {
+      onSearchItemClick(listItem.item.directive);
+      getDirectiveSyntax([listItem], true);
+    } else {
+      const formattedString = getFormattedSyntax(inputText, listItem.item.label)
+      console.log('formattedString', formattedString)
+      setInputText(formattedString);
+      onSearchItemClick(formattedString);
+    }
   };
 
   return (

@@ -15,6 +15,7 @@
  */
 
 import Fuse from 'fuse.js';
+import { last } from 'rxjs/operators';
 import uuidV4 from 'uuid/v4';
 import { IDirectivesList } from './types';
 
@@ -55,3 +56,26 @@ export const handlePasteDirective = (directiveInput: string, directivesList: IDi
     inputSplit.length > directiveUsageSplit.length
   );
 };
+
+export const getLastWordOfSearchItem = (searchString: string) => {
+  const lastWord = searchString.split(" ");
+  const characterToSearch =  lastWord[lastWord.length - 1].includes(',') ? lastWord[lastWord.length - 1].slice(-1) : lastWord[lastWord.length - 1].includes(':') ? lastWord[lastWord.length - 1].slice(1) : lastWord[lastWord.length - 1].slice(0);
+  return characterToSearch;
+}
+
+export const getFormattedSyntax = (inputText: string, newString: string) => {
+  const lastWord = inputText.split(" ");
+  if(lastWord[lastWord.length - 1].includes(',')){
+    let newSplit = lastWord[lastWord.length - 1].split(',')
+    let newSplitString = newSplit.slice(0, newSplit.length - 1).concat(`:${newString}`)
+    console.log('newSplitString',newSplitString)
+    let formattedString = inputText.slice(0, (inputText.length - lastWord.slice(-1)[0].length)).concat(`${newSplitString}`)
+    return formattedString;
+  }else if(lastWord[lastWord.length - 1].includes(':')){
+    let formattedString = inputText.slice(0, (inputText.length - lastWord.slice(-1)[0].length)).concat(`:${newString}`)
+    return formattedString;
+  }else{
+    let formattedString = inputText.slice(0, (inputText.length - lastWord.slice(-1)[0].length)).concat(`${newString}`)
+    return formattedString;
+  }
+}
