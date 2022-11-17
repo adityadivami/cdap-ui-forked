@@ -16,16 +16,15 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import LoadingSVG from 'components/shared/LoadingSVG';
-import React, { useState } from 'react';
+import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExploration from './Components/OngoingDataExploration';
 import WrangleCard from './Components/WrangleCard';
 import WrangleHomeTitle from './Components/WrangleHomeTitle';
 import { GradientLine, HeaderImage } from './icons';
 import { useStyles } from './styles';
-import T from 'i18n-react';
-import { Link } from 'react-router-dom';
 
 export default function WranglerHome() {
   const classes = useStyles();

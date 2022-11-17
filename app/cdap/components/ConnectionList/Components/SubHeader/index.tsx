@@ -86,7 +86,6 @@ export default function({ selectedConnection }: ISubHeader) {
     <BreadcrumbContainer data-testid="breadcrumb-container-parent">
       <Breadcrumb
         datasetName={T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
-        location={location}
       />
       <FeaturesContainer>
         <CustomizedLink

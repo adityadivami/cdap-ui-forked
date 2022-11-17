@@ -35,6 +35,7 @@ export interface IConnectionTabType {
   description?: string;
   isDefault?: boolean;
   name: string;
+  displayName?: string;
   plugin?: IConnectionTabPlugin;
   preConfigured?: boolean;
   updatedTimeMillis?: number;
@@ -82,7 +83,7 @@ export default function({
 }: IRenderLabelProps) {
   return [0, 1].includes(columnIndex) || connectorType.canBrowse ? (
     <TabLabelCanBrowse
-      label={connectorType.name}
+      label={columnIndex === 0 ? connectorType.displayName : connectorType.name}
       count={columnIndex === 0 ? connectorType.count : undefined}
       columnIndex={columnIndex}
       icon={connectorType.icon}

@@ -15,6 +15,12 @@
  */
 
 import { IFilteredData, ITabData, ITabsDataResponse } from 'components/ConnectionList/types';
+import {
+  fetchAllConnectorPluginProperties,
+  fetchConnectors,
+  getMapOfConnectorToPluginProperties,
+  getSelectedConnectorDisplayName,
+} from 'components/Connections/Create/reducer';
 
 export const getDataForTabsHelper = (
   response: ITabsDataResponse | ITabData[],
@@ -54,4 +60,29 @@ export const getUpdatedTabsData = (index: number, tabsData) => {
     }
   });
   return tempData;
+};
+
+export const getDisplayNamesForConnectorTypes = async (connectorTypesWithSVG) => {
+  const connectorTypes = await fetchConnectors();
+  const allConnectorsPluginProperties1 = await fetchAllConnectorPluginProperties(connectorTypes);
+
+  const mapOfConnectorPluginProperties = getMapOfConnectorToPluginProperties(
+    allConnectorsPluginProperties1
+  );
+
+  connectorTypes?.forEach((eachConnectorType) => {
+    const displayName = getSelectedConnectorDisplayName(
+      eachConnectorType,
+      mapOfConnectorPluginProperties
+    );
+    const index = connectorTypesWithSVG.findIndex(
+      (eachConnectorDataWithSvgArray) =>
+        eachConnectorDataWithSvgArray.name === eachConnectorType.name
+    );
+
+    if (index >= 0) {
+      connectorTypesWithSVG[index].displayName = displayName;
+    }
+  });
+  return connectorTypesWithSVG;
 };

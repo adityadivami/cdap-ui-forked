@@ -3448,6 +3448,8 @@ features:
         connectionsList: datasources
     AddConnections:
       referenceLabel: Add Connection
+    ImportData:
+      referenceLabel: Import Data
     ConnectionsList:
       labels:
         loadToGrid: Wrangle

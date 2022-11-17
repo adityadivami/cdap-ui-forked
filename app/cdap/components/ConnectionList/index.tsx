@@ -22,14 +22,19 @@ import Header from 'components/ConnectionList/Components/Header';
 import SubHeader from 'components/ConnectionList/Components/SubHeader';
 import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
 import { IFilteredData, ITabData, ITabsDataResponse } from 'components/ConnectionList/types';
-import { getDataForTabsHelper, getUpdatedTabsData } from 'components/ConnectionList/utils';
+import {
+  getDataForTabsHelper,
+  getDisplayNamesForConnectorTypes,
+  getUpdatedTabsData,
+} from 'components/ConnectionList/utils';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
+import DataPrepStore from 'components/DataPrep/store';
 import { IRecords } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import ErrorSnackbar from 'components/SnackbarComponent';
-import { getWidgetData } from 'components/WrangleHome/Components/WrangleCard/services/getWidgetData';
+import { getWidgetData } from 'components/WidgetSVG/utils';
 import T from 'i18n-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
@@ -120,23 +125,35 @@ export default function() {
   const toggleLoader = (value: boolean, isError?: boolean) => {
     setLoading(value);
   };
+  const [fetchedConnectorsData, setFetchedConnectorsData] = useState([]);
   let connectionId;
+
+  useEffect(() => {
+    getWidgetData();
+  }, []);
+
+  DataPrepStore.subscribe(() => {
+    const newState = DataPrepStore.getState();
+    setFetchedConnectorsData(newState.dataprep.connectorsWithIcons);
+  });
 
   const getConnectionsTabData = async () => {
     let connectorTypes: ITabData[] = [];
-    let connectorTypesWithSVG: ITabData[] = [];
-
-    const connectorTypesWithIcons = (data) => {
-      connectorTypesWithSVG = data?.connectorTypes;
-    };
-
-    // Fetching all the available connectors list with icons
-    await getWidgetData(connectorTypesWithIcons);
-    connectorTypes = connectorTypesWithSVG;
+    connectorTypes = fetchedConnectorsData;
     let allConnectionsTotalLength = 0;
-
     // Fetching all the connections list inside each connector type
     const categorizedConnections = await getCategorizedConnections();
+    const connectorTypeWithConnections = [];
+    categorizedConnections?.forEach((itemEach, key) => {
+      connectorTypeWithConnections.push(key);
+    });
+
+    // filtering all the connections which got connections inside them
+    connectorTypes = connectorTypes.filter((obj) =>
+      connectorTypeWithConnections.find((item) => item == obj.name)
+    );
+
+    connectorTypes = [...new Map(connectorTypes.map((item) => [item.name, item])).values()];
     connectorTypes = connectorTypes.filter((eachConnectionType: ITabData) => {
       return [eachConnectionType.name];
     });
@@ -150,6 +167,9 @@ export default function() {
         icon: eachConnectorType.SVG,
       };
     });
+
+    // getting connector's display names
+    connectorTypes = await getDisplayNamesForConnectorTypes(connectorTypes);
 
     // Connector types which has connections inside it
     const firstLevelData: ITabData[] = connectorTypes.filter(
@@ -269,7 +289,7 @@ export default function() {
 
   useEffect(() => {
     getConnectionsTabData();
-  }, []);
+  }, [fetchedConnectorsData]);
 
   useEffect(() => {
     setFilteredData(cloneDeep(tabsData));
