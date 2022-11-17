@@ -14,10 +14,26 @@
  * the License.
  */
 
-import React, { useRef } from 'react';
 import { render, screen } from '@testing-library/react';
-import TabLabelCanBrowse from '../index';
-import { mockConnectorTypeData } from '../mock/mockConnectorTypeData';
+import React from 'react';
+import TabLabelCanBrowse from 'components/ConnectionList/Components/TabLabelCanBrowse';
+import { GCSIcon } from 'components/ConnectionList/IconStore/CGSIcon';
+
+const mockConnectorTypeData = {
+  name: 'File',
+  type: 'connector',
+  category: 'File',
+  description: 'Connection to browse and sample data from the local file system.',
+  className: 'io.cdap.plugin.batch.connector.FileConnector',
+  artifact: {
+    name: 'core-plugins',
+    version: '2.10.0-SNAPSHOT',
+    scope: 'SYSTEM',
+  },
+  canBrowse: true,
+  count: 1,
+  icon: <GCSIcon />,
+};
 
 describe('Test TabLabelCanBrowse Component', () => {
   it('Should render TabLabelCanBrowse Component', () => {
@@ -26,7 +42,7 @@ describe('Test TabLabelCanBrowse Component', () => {
         label={mockConnectorTypeData.name}
         count={mockConnectorTypeData.count}
         icon={mockConnectorTypeData.icon}
-        index={0}
+        columnIndex={0}
       />
     );
     const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
@@ -44,7 +60,7 @@ describe('Test TabLabelCanBrowse Component', () => {
         label={mockConnectorTypeData.name}
         count={mockConnectorTypeData.count}
         icon={mockConnectorTypeData.icon}
-        index={0}
+        columnIndex={0}
       />
     );
   });

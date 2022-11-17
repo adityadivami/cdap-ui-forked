@@ -14,62 +14,103 @@
  * the License.
  */
 
-import { Breadcrumbs, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { getCurrentNamespace } from 'services/NamespaceStore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { grey } from '@material-ui/core/colors';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
+import Breadcrumb from 'components/GridTable/components/Breadcrumb';
 import T from 'i18n-react';
-import { ISubHeader } from './types';
+import React from 'react';
+import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import styled from 'styled-components';
+
+interface ISubHeader {
+  selectedConnection: string;
+}
+
+const AddConnectionIcon = styled(AddCircleOutlineOutlinedIcon)`
+  font-size: x-large;
+  color: ${grey[700]};
+`;
+
+const BreadcrumbContainer = styled(Box)`
+  border-bottom: 1px solid ${grey[300]};
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  align-items: center;
+  padding-right: 30px;
+`;
+
+const CustomizedLink = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+const FlexContainer = styled(Box)`
+  display: flex;
+  align-items: flex-end;
+`;
+
+const FeaturesContainer = styled(FlexContainer)`
+  gap: 30px;
+  font-size: 14px;
+`;
+
+const ImportDataContainer = styled(FlexContainer)`
+  gap: 12px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SaveIcon = styled(SaveAltRoundedIcon)`
+  font-size: x-large;
+  color: ${grey[700]};
+`;
+
+const TypographyLabel = styled(Typography)`
+  color: ${grey[900]};
+  font-size: 14px;
+  line-height: 21px;
+`;
 
 export default function({ selectedConnection }: ISubHeader) {
-  const classes = useStyles();
-  const handleAddConnection = () => {
-    localStorage.setItem('addConnectionRequestFromNewUI', selectedConnection);
-  };
+  const location = useLocation();
 
   return (
-    <Box
-      className={classes.breadCombContainer}
-      data-testid="bread-comb-container-parent"
-      id="bread-comb-container-parent"
-    >
-      <Box>
-        <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-          <Link color="inherit" to={`/ns/${getCurrentNamespace()}/home`}>
-            {T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome')}
-          </Link>
-          <Typography className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.NewWranglerUI.Breadcrumb.labels.connectionsList')}
-          </Typography>
-        </Breadcrumbs>
-      </Box>
-
-      <Box className={classes.importDataContainer}>
-        <Link to={`/ns/${getCurrentNamespace()}/connections/create`} className={classes.link}>
-          <Box
-            onClick={handleAddConnection}
-            className={classes.importData}
-            data-testid="sub-header-handle-add-connection"
-            id="sub-header-handle-add-connection"
-          >
-            <AddCircleOutlineOutlinedIcon className={classes.subHeaderIcon} />
-            <Box className={classes.breadcrumbTyporgraphy}>
-              {T.translate('features.NewWranglerUI.AddConnections.referenceLabel')}
-            </Box>
-          </Box>
-        </Link>
-        <Box className={classes.importData}>
-          <SaveAltRoundedIcon className={classes.subHeaderIcon} />
-          <Box className={classes.breadcrumbTyporgraphy}>
-            {T.translate('features.NewWranglerUI.ImportData.referenceLabel')}
-          </Box>
-        </Box>
-      </Box>
-    </Box>
+    <BreadcrumbContainer data-testid="breadcrumb-container-parent">
+      <Breadcrumb
+        datasetName={T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList')}
+        location={location}
+      />
+      <FeaturesContainer>
+        <CustomizedLink
+          to={{
+            pathname: `/ns/${getCurrentNamespace()}/connections/create`,
+            state: {
+              from: { addConnectionRequestFromNewUI: selectedConnection },
+            },
+          }}
+        >
+          <ImportDataContainer data-testid="sub-header-handle-add-connection">
+            <AddConnectionIcon />
+            <TypographyLabel component="span">
+              {T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}
+            </TypographyLabel>
+          </ImportDataContainer>
+        </CustomizedLink>
+        <ImportDataContainer>
+          <SaveIcon />
+          <TypographyLabel component="span">
+            {T.translate('features.WranglerNewUI.ImportData.referenceLabel')}
+          </TypographyLabel>
+        </ImportDataContainer>
+      </FeaturesContainer>
+    </BreadcrumbContainer>
   );
 }

@@ -14,15 +14,19 @@
  * the License.
  */
 
-import { Box, IconButton, styled, Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
-import CloseIcon from '@material-ui/icons/Close';
-import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
-import { InfoGraph } from 'components/ConnectionList/IconsStore/InfoGraph';
-import { IFilterData } from 'components/ConnectionList/types';
+import { Box } from '@material-ui/core';
+import { blue, grey } from '@material-ui/core/colors';
+import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
+import { IConnectionTabType } from 'components/ConnectionList/Components/ConnectionTabs/Components/RenderLabel';
+import Header from 'components/ConnectionList/Components/Header';
+import SubHeader from 'components/ConnectionList/Components/SubHeader';
+import { InfoGraph } from 'components/ConnectionList/IconStore/InfoGraph';
+import { IFilteredData, ITabData, ITabsDataResponse } from 'components/ConnectionList/types';
+import { getDataForTabsHelper, getUpdatedTabsData } from 'components/ConnectionList/utils';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
 import { IRecords } from 'components/GridTable/types';
+import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import ErrorSnackbar from 'components/SnackbarComponent';
 import { getWidgetData } from 'components/WrangleHome/Components/WrangleCard/services/getWidgetData';
@@ -30,15 +34,46 @@ import T from 'i18n-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import NoConnectionsScreen from '../NoRecordScreen';
-import ConnectionsTabs from './Components/ConnectionTabs';
-import CustomTooltip from './Components/CustomTooltip';
-import SubHeader from './Components/SubHeader';
-import { useStyles } from './styles';
+import { flatMap } from 'rxjs/operators';
+import styled from 'styled-components';
 
-const SelectDatasetWrapper = styled(Box)({
+const PREFIX = 'features.WranglerNewUI';
+
+const ConnectionsListContainer = styled(Box)`
+  width: 100vw;
+  overflow: scroll;
+  & * {
+    letterspacing: 0.15px;
+  }
+`;
+
+const ContainerForLoader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  opacity: 0.5;
+  background: white;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+`;
+
+const FlexContainer = styled(Box)`
+  display: flex;
+`;
+
+const InfographicContainer = styled(FlexContainer)`
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 80px;
+  padding-bottom: 80px;
+`;
+
+const SelectDatasetWrapper = styled(FlexContainer)({
   overflowX: 'scroll',
-  display: 'flex',
   borderTop: `1px solid ${grey[300]}`,
 
   height: '100%',
@@ -50,50 +85,63 @@ const SelectDatasetWrapper = styled(Box)({
   },
 });
 
-export default function ConnectionList() {
-  const { connectorType } = useParams() as IRecords;
+const TabsContainerWithHeader = styled(FlexContainer)`
+  flex-direction: column;
+  border-right: 1px solid ${grey[300]};
+`;
 
-  const refs = useRef([]);
-  const headersRefs = useRef([]);
-  const classes = useStyles();
+const TabHeaderContainer = styled(Box)`
+  background-color: ${blue[50]};
+  & .MuiTypography-root{
+    font-size: 16px;
+    color: #000000;
+    },    
+`;
+
+export default function() {
+  const { connectorType } = useParams() as IRecords;
   const loc = useLocation();
   const queryParams = new URLSearchParams(loc.search);
   const pathFromUrl = queryParams.get('path') || '/';
-  const [loading, setLoading] = useState(true);
+  const refs = useRef([]);
+  const headersRefs = useRef([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [isErrorOnNoWorkspace, setIsErrorOnNoWorkSpace] = useState<boolean>(false);
-  const [tabSize, setTabSize] = useState<number>(0);
-  const toggleLoader = (value: boolean, isError?: boolean) => {
-    setLoading(value);
-  };
-  let connectionId;
-  const [dataForTabs, setDataForTabs] = useState([
+  const [tabsLength, setTabsLength] = useState<number>(0);
+  const [tabsData, setTabsData] = useState<IFilteredData[]>([
     {
       data: [],
       showTabs: true,
       selectedTab: null,
-      isSearching: false,
+      toggleSearch: false,
     },
   ]);
-  const [filteredData, setFilteredData] = useState<IFilterData>(cloneDeep(dataForTabs));
+  const [filteredData, setFilteredData] = useState<IFilteredData>(cloneDeep(tabsData));
+  const toggleLoader = (value: boolean, isError?: boolean) => {
+    setLoading(value);
+  };
+  let connectionId;
 
   const getConnectionsTabData = async () => {
-    let connectorTypes = [];
-    let connectorTypesWithSVG = [];
+    let connectorTypes: ITabData[] = [];
+    let connectorTypesWithSVG: ITabData[] = [];
+
     const connectorTypesWithIcons = (data) => {
       connectorTypesWithSVG = data?.connectorTypes;
     };
-    // Fetching the all available connectors list with icons
+
+    // Fetching all the available connectors list with icons
     await getWidgetData(connectorTypesWithIcons);
     connectorTypes = connectorTypesWithSVG;
     let allConnectionsTotalLength = 0;
 
     // Fetching all the connections list inside each connector type
     const categorizedConnections = await getCategorizedConnections();
-    connectorTypes = connectorTypes.filter((conn) => {
-      return [conn.name];
+    connectorTypes = connectorTypes.filter((eachConnectionType: ITabData) => {
+      return [eachConnectionType.name];
     });
     // Mapping connector types and corresponding connections
-    connectorTypes = connectorTypes?.map((eachConnectorType) => {
+    connectorTypes = connectorTypes?.map((eachConnectorType: ITabData) => {
       const connections = categorizedConnections.get(eachConnectorType.name) || [];
       allConnectionsTotalLength = allConnectionsTotalLength + connections.length;
       return {
@@ -104,153 +152,118 @@ export default function ConnectionList() {
     });
 
     // Connector types which has connections inside it
-    const firstLevelData = connectorTypes.filter((eachConnectorType) => {
-      if (eachConnectorType.count > 0) {
-        return true;
-      }
-    });
+    const firstLevelData: ITabData[] = connectorTypes.filter(
+      (eachConnectorType: ITabData) => eachConnectorType.count > 0
+    );
 
     setLoading(false);
-    setDataForTabs((prev) => {
+    setTabsData((prev: IFilteredData[]) => {
       const tempData = [...prev];
       tempData[0].data = firstLevelData;
       return tempData;
     });
   };
 
-  const setDataForTabsHelper = (res, index) => {
-    setDataForTabs((prev) => {
-      const tempData = [...prev];
-      tempData.push({
-        data: [],
-        showTabs: false,
-        selectedTab: '',
-        isSearching: false,
-      });
-      if (res.entities) {
-        tempData[index + 1][`data`] = res.entities;
-      } else {
-        tempData[index + 1][`data`] = res;
-      }
-      tempData[index + 1][`showTabs`] = true;
-      tempData[index + 1][`selectedTab`] = null;
-      tempData[index + 1][`isSearching`] = false;
-      return tempData.slice(0, index + 2);
-    });
-  };
-
   const getCategorizedConnectionsforSelectedTab = async (selectedValue: string, index: number) => {
     const categorizedConnections = await getCategorizedConnections();
-
-    const connections = categorizedConnections.get(selectedValue) || [];
-    setDataForTabsHelper(connections, index);
+    const connections: ITabsDataResponse | ITabData[] =
+      categorizedConnections.get(selectedValue) || [];
+    setTabsData(getDataForTabsHelper(connections, index, tabsData));
     toggleLoader(false);
   };
 
-  const fetchEntities = async (connectionName, url = pathFromUrl) => {
-    const pathDesired = url ? url : pathFromUrl;
-    const entitiesPromise = exploreConnection({
+  const fetchEntities = async (connectionName: string, url: string = pathFromUrl) => {
+    const pathDesired: string = url ? url : pathFromUrl;
+    const entitiesPromise = await exploreConnection({
       connectionid: connectionName,
       path: pathDesired,
     });
-    return entitiesPromise.then((values) => {
-      return values;
-    });
+    return entitiesPromise;
   };
 
   const makeCursorFocused = (index: number) => {
     refs.current[index].focus();
   };
 
-  const selectedTabValueHandler = (entity: IRecords, index: number) => {
+  const selectedTabValueHandler = (entity: IConnectionTabType, index: number) => {
     toggleLoader(true);
-    setDataForTabs((currentData) => {
-      let newData = [...currentData];
+    setTabsData((currentData) => {
+      let newData: IFilteredData[] = [...currentData];
       newData[index].selectedTab = entity.name;
       newData = newData.map((eachNewData) => {
         return {
           data: eachNewData.data,
           showTabs: eachNewData.showTabs,
           selectedTab: eachNewData.selectedTab,
-          isSearching: false,
+          toggleSearch: false,
         };
       });
       if (index === 0) {
         getCategorizedConnectionsforSelectedTab(entity.name as string, index);
       } else if (index === 1) {
-        fetchEntities(entity.name)
-          .then((res) => {
-            setDataForTabsHelper(res, index);
-            toggleLoader(false);
-          })
-          .catch((error) => {
-            toggleLoader(false);
-            setIsErrorOnNoWorkSpace(true);
-            // TODO : Need to bind the message on Snackbar . The message is in error.message same as the old UI . Remove the console log later
-          });
+        fetchEntitiesData(entity?.name, index);
       } else {
         if (entity.canBrowse) {
-          fetchEntities(dataForTabs[1].selectedTab, entity.path as string)
-            .then((res) => {
-              setDataForTabsHelper(res, index);
-              toggleLoader(false);
-            })
-            .catch((error) => {
-              toggleLoader(false);
-              setIsErrorOnNoWorkSpace(true);
-              // TODO : Need to bind the message on Snackbar. Remove the console log later
-            });
+          fetchEntitiesData(tabsData[1]?.selectedTab, index, entity.path);
         }
       }
       return newData;
     });
   };
 
+  const fetchEntitiesData = async (entityName: string, index: number, path?: string) => {
+    try {
+      const response = await fetchEntities(entityName, path ? path : undefined);
+      if (response) {
+        setTabsData(getDataForTabsHelper(response, index, tabsData));
+        toggleLoader(false);
+      }
+    } catch (error) {
+      toggleLoader(false);
+      setIsErrorOnNoWorkSpace(true);
+    }
+  };
+
   const searchHandler = (index: number) => {
-    setDataForTabs((prev) => {
-      let tempData = [...prev];
-      tempData = tempData.map((eachTempData) => {
-        return {
-          ...eachTempData,
-          isSearching: false,
-        };
-      });
-      tempData[index].isSearching = true;
-      tempData.forEach((eachTempData, innerIndex) => {
-        if (innerIndex === index) {
-          eachTempData.isSearching = true;
-        } else {
-          eachTempData.isSearching = false;
-        }
-      });
-      return tempData;
-    });
+    setTabsData(getUpdatedTabsData(index, tabsData));
     refs.current[index].focus();
   };
 
-  const handleSearch = (e: any, index: number) => {
-    const val = e.target.value.toLowerCase();
-    const newData = cloneDeep(dataForTabs);
-    const newDataToSearch = [...newData[index].data];
-    const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(val));
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const val: string = e.target.value.toLowerCase();
+    const newData: IFilteredData[] = cloneDeep(tabsData);
+    const newDataToSearch: ITabData[] = [...newData[index].data];
+    const tempData: ITabData[] = newDataToSearch.filter((item: ITabData) =>
+      item.name.toLowerCase().includes(val)
+    );
     newData[index].data = [...tempData];
     setFilteredData(cloneDeep(newData));
   };
 
-  const handleClearSearch = (e: any, index: number) => {
+  const handleClearSearch = (e: React.MouseEvent<HTMLInputElement>, index: number) => {
     if (refs.current[index].value === '') {
-      setDataForTabs((prev) => {
-        const tempData = [...prev];
-        tempData[index].isSearching = false;
+      setTabsData((prev) => {
+        const tempData: IFilteredData[] = [...prev];
+        tempData[index].toggleSearch = false;
         return tempData;
       });
     } else {
       refs.current[index].value = '';
-      const newData = cloneDeep(dataForTabs);
-      const newDataToSearch = [...newData[index].data];
-      const tempData = newDataToSearch.filter((item: any) => item.name.toLowerCase().includes(''));
+      const newData: IFilteredData[] = cloneDeep(tabsData);
+      const newDataToSearch: ITabData[] = [...newData[index].data];
+      const tempData: ITabData[] = newDataToSearch.filter((item: ITabData) =>
+        item.name.toLowerCase().includes('')
+      );
       newData[index].data = [...tempData];
       setFilteredData(cloneDeep(newData));
+    }
+  };
+
+  const getConnectionId = (connections) => {
+    if (connections.data.filter((eachFilterItem: ITabData) => eachFilterItem.connectionId).length) {
+      connectionId = connections.data.filter(
+        (eachFilterItem: ITabData) => eachFilterItem.connectionId
+      )[0].connectionId;
     }
   };
 
@@ -259,168 +272,88 @@ export default function ConnectionList() {
   }, []);
 
   useEffect(() => {
-    const newData = cloneDeep(dataForTabs);
-    setFilteredData(newData);
-  }, [dataForTabs]);
+    setFilteredData(cloneDeep(tabsData));
+  }, [tabsData]);
 
   useEffect(() => {
-    setDataForTabs((prev) => {
-      const temp = prev;
-      temp[0].selectedTab = connectorType;
+    setTabsData((prev) => {
+      const temp: IFilteredData[] = prev;
+      temp[0].selectedTab = connectorType as string;
       return temp;
     });
     getCategorizedConnectionsforSelectedTab(connectorType as string, 0);
   }, [connectorType]);
 
-  const headerForLevelZero = () => {
-    return (
-      <Box className={classes.styleForLevelZero}>
-        <Typography variant="body2">Data Connections</Typography>
-      </Box>
-    );
-  };
-
   useEffect(() => {
-    setTabSize(dataForTabs.length);
-  }, [dataForTabs.length]);
-
-  let headerContent;
+    setTabsLength(tabsData?.length);
+  }, [tabsData?.length]);
 
   return (
-    <Box data-testid="data-sets-parent" className={classes.connectionsListContainer}>
-      <SubHeader selectedConnection={dataForTabs[0]?.selectedTab} />
-
-      {dataForTabs &&
-      Array.isArray(dataForTabs) &&
-      dataForTabs.length &&
-      dataForTabs[0]?.data?.length > 0 ? (
-        <Box className={classes.connectionsWithInfo}>
+    <ConnectionsListContainer data-testid="data-sets-parent">
+      <SubHeader selectedConnection={tabsData[0]?.selectedTab} />
+      {tabsData && Array.isArray(tabsData) && tabsData.length && tabsData[0]?.data?.length > 0 ? (
+        <FlexContainer>
           <SelectDatasetWrapper>
             {filteredData &&
               Array.isArray(filteredData) &&
-              filteredData?.map((eachFilteredData, index) => {
-                if (eachFilteredData.data.filter((el) => el.connectionId).length) {
-                  connectionId = eachFilteredData.data.filter((el) => el.connectionId)[0]
-                    .connectionId;
-                }
-                if (index === 0) {
-                  headerContent = headerForLevelZero();
-                } else {
-                  headerContent = (
-                    <>
-                      <Box
-                        className={
-                          eachFilteredData.isSearching
-                            ? classes.hideComponent
-                            : classes.beforeSearchIconClickDisplay
-                        }
-                      >
-                        {headersRefs.current[index]?.offsetWidth <
-                        headersRefs.current[index]?.scrollWidth ? (
-                          <CustomTooltip title={dataForTabs[index - 1].selectedTab} arrow>
-                            <Typography
-                              variant="body2"
-                              ref={(element) => {
-                                headersRefs.current[index] = element;
-                              }}
-                            >
-                              {filteredData[index - 1].selectedTab}
-                            </Typography>
-                          </CustomTooltip>
-                        ) : (
-                          <Typography
-                            variant="body2"
-                            ref={(element) => {
-                              headersRefs.current[index] = element;
-                            }}
-                          >
-                            {filteredData[index - 1].selectedTab}
-                          </Typography>
-                        )}
-
-                        <Box
-                          onClick={() => {
-                            searchHandler(index);
-                          }}
-                        >
-                          <IconButton>
-                            <SearchRoundedIcon />
-                          </IconButton>
-                        </Box>
-                      </Box>
-                      <Box
-                        className={
-                          eachFilteredData.isSearching
-                            ? classes.afterSearchIconClick
-                            : classes.hideComponent
-                        }
-                        onMouseOver={() => makeCursorFocused(index)}
-                      >
-                        <SearchRoundedIcon />
-                        <input
-                          type="text"
-                          className={classes.searchBar}
-                          onChange={(e) => handleSearch(e, index)}
-                          ref={(e) => {
-                            refs.current[index] = e;
-                          }}
-                        />
-                        <Box
-                          className={classes.closeIcon}
-                          onClick={(e) => handleClearSearch(e, index)}
-                        >
-                          <CloseIcon />
-                        </Box>
-                      </Box>
-                    </>
-                  );
-                }
+              filteredData?.map((eachFilteredData: IFilteredData, index: number) => {
+                getConnectionId(eachFilteredData);
                 return (
-                  <Box className={classes.tabsContainerWithHeader}>
-                    <Box className={classes.tabHeaders}>{headerContent}</Box>
-                    <ConnectionsTabs
+                  <TabsContainerWithHeader>
+                    <TabHeaderContainer>
+                      <Header
+                        levelIndex={index}
+                        eachFilteredData={eachFilteredData}
+                        headersRefs={headersRefs}
+                        columnIndex={index}
+                        tabsData={tabsData}
+                        filteredData={filteredData}
+                        searchHandler={searchHandler}
+                        makeCursorFocused={makeCursorFocused}
+                        handleSearch={handleSearch}
+                        refs={refs}
+                        handleClearSearch={handleClearSearch}
+                      />
+                    </TabHeaderContainer>
+                    <ConnectionTabs
                       tabsData={eachFilteredData}
                       handleChange={selectedTabValueHandler}
                       value={eachFilteredData.selectedTab}
-                      index={index}
-                      connectionId={connectionId || ''}
+                      columnIndex={index}
+                      connectionId={connectionId || ' '}
                       toggleLoader={(value: boolean, isError?: boolean) =>
                         toggleLoader(value, isError)
                       }
                       setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
                     />
-                  </Box>
+                  </TabsContainerWithHeader>
                 );
               })}
           </SelectDatasetWrapper>
-          {tabSize < 4 && (
-            <Box className={classes.infographContainer}>
-              <Box className={classes.infograph}>
-                <InfoGraph />
-              </Box>
-            </Box>
+          {tabsLength < 4 && (
+            <InfographicContainer>
+              <InfoGraph />
+            </InfographicContainer>
           )}
-        </Box>
+        </FlexContainer>
       ) : (
-        <>
-          {loading && (
-            <NoConnectionsScreen
-              title={T.translate('features.NewWranglerUI.NoRecordScreen.connectionsList.title')}
-              subtitle={T.translate(
-                'features.NewWranglerUI.NoRecordScreen.connectionsList.subtitle'
-              )}
-            />
-          )}
-        </>
+        loading && (
+          <NoRecordScreen
+            title={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.title`)}
+            subtitle={T.translate(`${PREFIX}.NoRecordScreen.connectionsList.subtitle`)}
+          />
+        )
       )}
+
       {loading && (
-        <div className={classes.loadingContainer}>
+        <ContainerForLoader>
           <LoadingSVG />
-        </div>
+        </ContainerForLoader>
       )}
+
       {isErrorOnNoWorkspace && (
         <ErrorSnackbar handleCloseError={() => setIsErrorOnNoWorkSpace(false)} />
       )}
-    </Box>
+    </ConnectionsListContainer>
   );
 }

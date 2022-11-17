@@ -25,6 +25,7 @@ export const GCSIcon = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      data-test-id="gcs-icon"
     >
       <rect width="30" height="27" fill="url(#pattern0)" />
       <defs>

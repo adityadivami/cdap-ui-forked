@@ -111,8 +111,8 @@ export default function OngoingDataExplorations() {
             to={{
               pathname: `/ns/${getCurrentNamespace()}/wrangler-grid/${`${item[4].workspaceId}`}`,
               state: {
-                from: T.translate('features.NewWranglerUI.Breadcrumb.labels.wrangleHome'),
-                path: T.translate('features.NewWranglerUI.Breadcrumb.params.wrangeHome'),
+                from: T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome'),
+                path: T.translate('features.WranglerNewUI.Breadcrumb.params.wrangeHome'),
               },
             }}
             style={{ textDecoration: 'none' }}
