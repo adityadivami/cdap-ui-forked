@@ -20,10 +20,14 @@ Feature: ConnectionList
   Scenario Outline: Go through the Connection List functionality
     Given Navigate to Home Page
     Then Click on the Connector type card with "<testId>"
-    Then Verify if the Wrangle button is visible
     Then Click on the Add connection button
     Then Click on the Cross icon
     Then Check if the infography is displayed
+    Then Click on Search icon
+    Then Enter file name " Dhanunjay" and verify the result
+    Then Click on clear icon
+    Then Verify if the Wrangle button is visible
+
     Examples:
       | testId |
-      | PostgreSQL |
+      | postgresql |

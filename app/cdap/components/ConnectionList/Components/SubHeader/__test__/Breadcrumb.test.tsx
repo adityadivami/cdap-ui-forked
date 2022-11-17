@@ -35,5 +35,7 @@ test('renders BreadCumb Component', () => {
   expect(ele).toBeInTheDocument();
 
   const clickEle = screen.getByTestId(/sub-header-handle-add-connection/i);
-  expect(clickEle).toHaveTextContent(`${T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}`)
+  expect(clickEle).toHaveTextContent(
+    `${T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}`
+  );
 });

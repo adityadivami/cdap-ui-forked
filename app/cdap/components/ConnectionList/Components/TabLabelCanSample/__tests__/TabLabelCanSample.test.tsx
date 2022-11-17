@@ -55,7 +55,6 @@ describe('Test TabLabelCanSample Component', () => {
       useRef: mUseRef,
     };
   });
- 
 
   it('Should trigger setIsErrorOnNoWorkSpace function ', () => {
     const setIsErrorOnNoWorkSpace = jest.fn();
@@ -68,7 +67,9 @@ describe('Test TabLabelCanSample Component', () => {
               entity={mockConnectorTypeData}
               initialConnectionId={undefined}
               toggleLoader={() => null}
-              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace} dataTestID={0}            />
+              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+              dataTestID={0}
+            />
           </Route>
         </Switch>
       </Router>
@@ -105,7 +106,9 @@ describe('Test TabLabelCanSample Component', () => {
               entity={mockEntityDataForNoWorkspace}
               initialConnectionId="exl"
               toggleLoader={() => null}
-              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace} dataTestID={0}            />
+              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+              dataTestID={0}
+            />
           </Route>
         </Switch>
       </Router>

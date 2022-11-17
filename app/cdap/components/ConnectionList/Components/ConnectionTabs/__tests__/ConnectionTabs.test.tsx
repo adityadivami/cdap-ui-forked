@@ -131,7 +131,8 @@ describe('Test ConnectionsTabs', () => {
         // index={0}
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
-        columnIndex={0}      />
+        columnIndex={0}
+      />
     );
     const ele = screen.getByTestId(/connections-tabs-parent/i);
     expect(ele).toBeInTheDocument();
@@ -145,7 +146,9 @@ describe('Test ConnectionsTabs', () => {
         value="apple"
         // index={1}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
+        setIsErrorOnNoWorkSpace={jest.fn()}
+        columnIndex={0}
+      />
     );
     const ele = screen.getByTestId(/connection-tabs/i);
     expect(ele).toBeInTheDocument();
@@ -159,7 +162,9 @@ describe('Test ConnectionsTabs', () => {
         value="apple"
         // index={0}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
+        setIsErrorOnNoWorkSpace={jest.fn()}
+        columnIndex={0}
+      />
     );
     const ele = screen.getAllByTestId(/connections-tab-can-browse-label-0/i);
     expect(ele[0]).toBeInTheDocument();
@@ -179,7 +184,9 @@ describe('Should test whether handleChange function is triggered or not', () => 
         value="apple"
         // index={1}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
+        setIsErrorOnNoWorkSpace={jest.fn()}
+        columnIndex={0}
+      />
     );
     const ele = screen.getAllByTestId(/connections-tab-button/i);
     fireEvent.click(ele[0]);
@@ -200,7 +207,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
               // index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
-              columnIndex={0} 
+              columnIndex={0}
             />
           </Route>
         </Switch>
@@ -225,7 +232,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
               // index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
-              columnIndex={0} 
+              columnIndex={0}
             />
           </Route>
         </Switch>

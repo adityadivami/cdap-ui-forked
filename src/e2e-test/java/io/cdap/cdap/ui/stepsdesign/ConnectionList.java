@@ -24,6 +24,7 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -38,32 +39,33 @@ public class ConnectionList {
     public void clickOnTheConnectionTypeCard(String testId) {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId(testId + "-connector-type"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("connector-type-" + testId));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
-            Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/datasources/" + testId));
+            Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/datasources/"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
-
     @Then("Verify if the Wrangle button is visible")
     public void clickOnFirstTabOfTheSecondColumn() {
         try {
             for (int i = 1; i <= 10; i++) {
-                WebElement ele = Helper.locateElementByTestId("connection-tab-" + i + "0");
+                WebElement ele = Helper.locateElementByTestId("connections-tab-column" + i + "-item0");
                 if (ElementHelper.isElementDisplayed(ele)) {
                     System.out.println("element found at index = " + i);
-                    WebElement button = Helper.locateElementByTestId("connection-tab-label-" + i + "0");
+//                    WebElement button = Helper.locateElementByTestId("connection-tab-label-" + i + "0");
                     Actions action = new Actions(SeleniumDriver.getDriver());
-                    action.moveToElement(button).build().perform();
-                    if (Helper.isElementExists("connections-tab-explore", button)) {
+                    action.moveToElement(ele).build().perform();
+                    Helper.waitSeconds(10);
+                    if (Helper.isElementExists("connections-tab-label-can-simple-" + i)) {
                         Helper.isElementExists("wrangle-text");
                         System.out.println("wrangle text is visible");
                         break;
                     }
-                } else {
-                    ele.click();
-                    System.out.println("folder clicked");
+                 else {
+                        ele.click();
+                        System.out.println("folder clicked");
+                    }
                 }
             }
         } catch (Exception e) {
@@ -95,9 +97,27 @@ public class ConnectionList {
     public void checkIfTheInfographyIsDisplayed() {
         try {
             WaitHelper.waitForPageToLoad();
-            Assert.assertTrue(Helper.isElementExists("home-infographic-icon"));
+            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("home-infographic-icon")));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
+    }
+    @Then("Click on Search icon")
+    public void clickOnSearchIcon() {
+        WaitHelper.waitForPageToLoad();
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("search-icon-1"));
+    }
+    @Then("Enter file name {string} and verify the result")
+    public void verifyFileResult(String fileName) {
+        WaitHelper.waitForPageToLoad();
+        WebElement ele = Helper.locateElementByTestId("search-field-1");
+        ele.click();
+        ele.sendKeys(fileName);
+        String text = Helper.locateElementByTestId("connections-tab-column1-item0").getText();
+        Assert.assertEquals(fileName, text);
+    }
+    @Then("Click on clear icon")
+    public void clickClearIcon() {
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("clear-search-icon-1"));
     }
 }
