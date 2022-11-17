@@ -134,7 +134,12 @@ export default function({
           buttonElement={
             <Box className="wranglingHover">
               <WrangleIcon />
-              <WrangleTypography color="primary" variant="body2" component="span">
+              <WrangleTypography
+                color="primary"
+                variant="body2"
+                component="span"
+                data-testid={`wrangle-text`}
+              >
                 {T.translate('features.WranglerNewUI.ConnectionsList.labels.loadToGrid')}
               </WrangleTypography>
             </Box>
@@ -153,7 +158,12 @@ export default function({
       buttonElement={
         <Box className="wranglingHover">
           <WrangleIcon />
-          <WrangleTypography variant="body2" color="primary" component="span">
+          <WrangleTypography
+            variant="body2"
+            color="primary"
+            component="span"
+            data-testid={`wrangle-text`}
+          >
             {T.translate('features.WranglerNewUI.ConnectionsList.labels.loadToGrid')}
           </WrangleTypography>
         </Box>

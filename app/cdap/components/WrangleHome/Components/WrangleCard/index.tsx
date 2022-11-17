@@ -58,7 +58,7 @@ export default function() {
                 : `/ns/${getCurrentNamespace()}/datasources/${item.name}`
             }
             style={{ textDecoration: 'none' }}
-            data-testid={'item' + index}
+            data-testid={`connector-type-${index}`}
           >
             <Card className={classes.card}>
               <Box className={classes.cardContent} key={index}>
