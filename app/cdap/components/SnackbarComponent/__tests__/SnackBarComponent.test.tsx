@@ -15,29 +15,28 @@
  */
 
 import React from 'react';
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Route, Router, Switch } from 'react-router';
-import { createBrowserHistory as createHistory } from 'history';
-import PositionedSnackbar from '..';
-import TransitionComponent from '../Components/TransitionComponent';
-
-const history = createHistory({
-  basename: '/',
-});
+import SnackBarComponent from 'components/SnackbarComponent/index';
+import history from 'services/history'
 
 describe('It should test the Snackbar Component', () => {
   it('renders Snackbar Component', () => {
+    jest.useFakeTimers();
+
     const handleCloseError = jest.fn();
     const container = render(
       <Router history={history}>
         <Switch>
           <Route>
-            <PositionedSnackbar handleCloseError={handleCloseError} />
+            <SnackBarComponent handleCloseError={handleCloseError} />
           </Route>
         </Switch>
       </Router>
     );
     const ele = container.getByTestId(/parent-snackbar-component/i);
     expect(ele).toBeInTheDocument();
+    jest.runAllTimers();
+    jest.useRealTimers();
   });
 });
