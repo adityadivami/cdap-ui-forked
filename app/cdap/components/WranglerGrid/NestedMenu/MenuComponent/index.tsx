@@ -29,7 +29,7 @@ interface IMenuComponentProps {
   setMenuComponentOptions: Dispatch<SetStateAction<IMenuItem[][]>>;
 }
 
-export default function ({
+export default function({
   anchorElement,
   menuOptions,
   setAnchorElement,

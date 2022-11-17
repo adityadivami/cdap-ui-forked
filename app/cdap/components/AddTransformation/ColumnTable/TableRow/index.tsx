@@ -47,7 +47,7 @@ const SelectColumnTableBodyCell = styled(TableCell)`
   }
 `;
 
-export default function ({
+export default function({
   onSingleSelection,
   selectedColumns,
   dataQualityValue,
