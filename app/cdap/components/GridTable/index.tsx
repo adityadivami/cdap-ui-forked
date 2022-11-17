@@ -355,7 +355,7 @@ export default function GridTable() {
     const getNullValueCount =
       convertNonNullPercentForColumnSelected(
         gridData?.values,
-        gridData?.summary?.statistics[columnName]?.general
+        gridData?.summary?.statistics?.columnName?.general
       ) || 0;
     const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
     setInsightDrawer({

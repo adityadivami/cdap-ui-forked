@@ -22,6 +22,7 @@ export interface IParams {
 export interface IRecords {
   [key: string]: string | boolean | Record<string, IType> | any;
 }
+
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
 }
@@ -34,7 +35,7 @@ interface ISummary {
 export interface IExecuteAPIResponse {
   headers: string[];
   types: IRecords;
-  values: IRecords[];
+  values: IValues[];
   summary: ISummary;
   message: string;
 }

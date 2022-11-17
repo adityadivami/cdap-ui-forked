@@ -32,8 +32,8 @@ describe('To Test Grid Header Cell Component', () => {
         index={0}
       />
     );
-    const ele = screen.getByTestId(`grid-header-cell-container`);
-    expect(ele).toHaveTextContent('abc');
+    const ele = screen.getByTestId(`grid-header-cell-0`);
+    expect(ele).toHaveTextContent('sql_language_conformanceString');
   });
   it('Renders Component with empty types array to trigger Null', () => {
     render(
