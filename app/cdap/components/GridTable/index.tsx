@@ -43,7 +43,8 @@ import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
-import { transformationOptions } from 'components/GridTable/constants';
+
+const transformationOptions = ['undo', 'redo'];
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
