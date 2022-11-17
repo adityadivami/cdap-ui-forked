@@ -53,10 +53,12 @@ export default function({
   onCancel,
   applyTransformation,
 }: IAddTransformationProps) {
+  
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
+
   const closeClickHandler = () => {
     onCancel();
     setDrawerStatus(false);
