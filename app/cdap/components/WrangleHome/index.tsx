@@ -47,7 +47,11 @@ export default function() {
             title={T.translate('features.WranglerNewUI.HomePage.labels.connectorTypes.title')}
           />
           <Box className={classes.viewMore}>
-            <Link color="inherit" to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}>
+            <Link
+              color="inherit"
+              to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}
+              data-testid={'view-more-link'}
+            >
               {T.translate('features.WranglerNewUI.HomePage.labels.common.viewAll')}
             </Link>
           </Box>

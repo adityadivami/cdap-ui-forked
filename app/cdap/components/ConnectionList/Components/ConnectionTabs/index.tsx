@@ -145,7 +145,7 @@ export default function({
             {tabsData?.data?.map((eachTabData: IConnectionTabType, eachTabIndex: number) => (
               <ConnectionTab
                 role="button"
-                data-testid="connections-tab-button"
+                data-testid={`connections-tab-button-column${columnIndex}-item${eachTabIndex}`}
                 onClick={() => handleConnectionTabClick(eachTabData, columnIndex)}
                 label={
                   <RenderLabel
@@ -154,6 +154,7 @@ export default function({
                     connectionIdProp={connectionIdProp}
                     toggleLoader={toggleLoader}
                     setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
+                    dataTestID={eachTabIndex}
                   />
                 }
                 value={eachTabData.name}

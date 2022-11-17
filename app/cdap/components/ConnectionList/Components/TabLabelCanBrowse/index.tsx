@@ -25,9 +25,10 @@ export interface ITabLabelCanBrowseProps {
   count: number;
   columnIndex: number;
   icon?: JSX.Element;
+  dataTestID: number;
 }
 
-export default function({ label, count, columnIndex, icon }: ITabLabelCanBrowseProps) {
+export default function({ label, count, columnIndex, icon, dataTestID }: ITabLabelCanBrowseProps) {
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
 
@@ -43,25 +44,16 @@ export default function({ label, count, columnIndex, icon }: ITabLabelCanBrowseP
     setRefValue(myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth);
   }, []);
 
-  return refValue ? (
+  return (
     <CustomTooltip
-      title={label}
+      title={refValue ? label : ''}
       arrow
       key={`tooltip-${columnIndex}`}
-      data-testid="connections-tab-ref-label-browse"
+      data-testid={`connections-tab-can-browse-label-${dataTestID}`}
     >
       <Box>
         <TabLabelItem myLabelRef={myLabelRef} icon={icon} label={label} count={count} />
       </Box>
     </CustomTooltip>
-  ) : (
-    <TabLabelItem
-      icon={icon}
-      myLabelRef={myLabelRef}
-      label={label}
-      count={count}
-      labelContainerTestId="connections-tab-label-browse"
-      labelTestId="connections-tab-label-browse-body1"
-    />
   );
 }

@@ -99,7 +99,7 @@ export default function({
           tabsData={tabsData}
           filteredData={filteredData}
         />
-        <IconButton onClick={() => searchHandler(columnIndex)}>
+        <IconButton onClick={() => searchHandler(columnIndex)} data-testid="search-icon">
           <SearchRounded />
         </IconButton>
       </ConnectionListHeaderWrapper>
@@ -115,11 +115,13 @@ export default function({
           ref={(e: HTMLInputElement) => {
             refs.current[columnIndex] = e;
           }}
+          data-testid="search-field"
         />
         <IconButton
           onClick={(e: MouseEvent<HTMLInputElement>) => {
             return handleClearSearch(e, columnIndex);
           }}
+          data-testid="clear-search-icon"
         >
           <Close />
         </IconButton>

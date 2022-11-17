@@ -313,6 +313,7 @@ export default function() {
                         handleSearch={handleSearch}
                         refs={refs}
                         handleClearSearch={handleClearSearch}
+                        data-testid={`header-for-level-${index}`}
                       />
                     </TabHeaderContainer>
                     <ConnectionTabs
