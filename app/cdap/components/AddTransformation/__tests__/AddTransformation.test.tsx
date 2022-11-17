@@ -14,14 +14,14 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import history from 'services/history';
-import React from 'react';
-import { Route, Router, Switch } from 'react-router';
-import AddTransformation from 'components/AddTransformation';
+import { fireEvent, render, screen } from "@testing-library/react";
+import history from "services/history";
+import React from "react";
+import { Route, Router, Switch } from "react-router";
+import AddTransformation from "components/AddTransformation";
 
-describe('It should test the SelectColumnsList Component', () => {
-  it('should render the SelectColumnsList Component and triggers the button and following event', () => {
+describe("It should test the SelectColumnsList Component", () => {
+  it("should render the SelectColumnsList Component and triggers the button and following event", () => {
     const { rerender } = render(
       <Router history={history}>
         <Switch>
@@ -32,24 +32,25 @@ describe('It should test the SelectColumnsList Component', () => {
               columnsList={[]}
               missingItemsList={undefined}
               onCancel={() => jest.fn()}
+              applyTransformation={jest.fn()}
             />
           </Route>
         </Switch>
       </Router>
     );
-    // expect(container).toBeDefined;
-    const boxContainer = screen.getByTestId('button_apply');
+    const boxContainer = screen.getByTestId("apply-step-button");
     fireEvent.click(boxContainer);
     rerender(
       <Router history={history}>
         <Switch>
           <Route>
             <AddTransformation
-              transformationName="null"
               transformationDataType={[]}
               columnsList={[]}
               missingItemsList={undefined}
-              onCancel={() => jest.fn()}
+              onCancel={jest.fn()}
+              applyTransformation={jest.fn()}
+              transformationName={""}
             />
           </Route>
         </Switch>
@@ -58,7 +59,7 @@ describe('It should test the SelectColumnsList Component', () => {
     expect(boxContainer).toBeInTheDocument();
   });
 
-  it('should render the SelectColumnsList Component where transformationName=is parseCSV', () => {
+  it("should render the SelectColumnsList Component where transformationName=is parseCSV", () => {
     const container = render(
       <Router history={history}>
         <Switch>
@@ -69,6 +70,7 @@ describe('It should test the SelectColumnsList Component', () => {
               columnsList={[]}
               missingItemsList={undefined}
               onCancel={() => jest.fn()}
+              applyTransformation={jest.fn()}
             />
           </Route>
         </Switch>

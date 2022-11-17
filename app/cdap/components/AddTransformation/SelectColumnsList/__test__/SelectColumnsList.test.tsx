@@ -156,7 +156,7 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    const radioInputElement = screen.getAllByTestId('transformation-radio-select-columns');
+    const radioInputElement = screen.getAllByTestId('radio-input-0');
     fireEvent.click(radioInputElement[0], { target: { checked: true } });
     expect(radioInputElement[0]).toBeInTheDocument();
   });
@@ -186,7 +186,7 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    const checkboxInputElement = screen.getAllByTestId('check-box-input-checkbox');
+    const checkboxInputElement = screen.getAllByTestId('check-box-input-0');
     fireEvent.click(checkboxInputElement[0], { target: { checked: false } });
     fireEvent.click(checkboxInputElement[0], { target: { checked: true } });
     expect(checkboxInputElement[0]).toBeInTheDocument();
