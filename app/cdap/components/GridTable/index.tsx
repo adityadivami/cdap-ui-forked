@@ -42,7 +42,7 @@ import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
-import AddTransformation from 'components/AddTransformation';
+import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
 import { transformationOptions } from 'components/GridTable/constants';
 
 export default function GridTable() {
@@ -319,7 +319,7 @@ export default function GridTable() {
         </Table>
       )}
       {addTransformationFunction.option && (
-        <AddTransformation
+        <SelectColumnPanel
           transformationName={addTransformationFunction.option}
           transformationDataType={addTransformationFunction.supportedDataType}
           columnsList={headersNamesList}
