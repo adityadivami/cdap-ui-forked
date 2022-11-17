@@ -34,6 +34,7 @@ import T from 'i18n-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
+import { flatMap } from 'rxjs/operators';
 import styled from 'styled-components';
 
 const PREFIX = 'features.WranglerNewUI';
@@ -173,13 +174,11 @@ export default function() {
 
   const fetchEntities = async (connectionName: string, url: string = pathFromUrl) => {
     const pathDesired: string = url ? url : pathFromUrl;
-    const entitiesPromise = exploreConnection({
+    const entitiesPromise = await exploreConnection({
       connectionid: connectionName,
       path: pathDesired,
     });
-    return entitiesPromise.then((values) => {
-      return values;
-    });
+    return entitiesPromise;
   };
 
   const makeCursorFocused = (index: number) => {
@@ -212,18 +211,17 @@ export default function() {
     });
   };
 
-  const fetchEntitiesData = (entityName: string, index: number, path?: string) => {
-    fetchEntities(entityName, path ? path : undefined)
-      // NOTE: As the function is returning promise, we are using .then here
-      .then((res) => {
-        setTabsData(getDataForTabsHelper(res, index, tabsData));
+  const fetchEntitiesData = async (entityName: string, index: number, path?: string) => {
+    try {
+      const response = await fetchEntities(entityName, path ? path : undefined);
+      if (response) {
+        setTabsData(getDataForTabsHelper(response, index, tabsData));
         toggleLoader(false);
-      })
-      .catch((error) => {
-        toggleLoader(false);
-        setIsErrorOnNoWorkSpace(true);
-        // TODO : Need to bind the message on Snackbar. The message is in error.message same as the old UI.
-      });
+      }
+    } catch (error) {
+      toggleLoader(false);
+      setIsErrorOnNoWorkSpace(true);
+    }
   };
 
   const searchHandler = (index: number) => {

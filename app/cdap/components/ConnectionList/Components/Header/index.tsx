@@ -127,5 +127,5 @@ export default function({
     </>
   );
 
-  return <Fragment>{levelIndex === 0 ? HeaderForConnectors : HeaderForDatasets}</Fragment>;
+  return <Fragment>{!!levelIndex ? HeaderForDatasets : HeaderForConnectors}</Fragment>;
 }

@@ -27,6 +27,9 @@ const RenderLabel = styled(Typography)`
   font-size: 16px;
   line-height: 150%;
   color: ${grey[900]};
+  max-width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export default function({
@@ -35,9 +38,11 @@ export default function({
   tabsData,
   filteredData,
 }: IHeaderCustomTooltipProps) {
-  return headersRefs?.current[columnIndex]?.offsetWidth <
-    headersRefs?.current[columnIndex]?.scrollWidth ? (
-    <CustomTooltip title={tabsData[columnIndex - 1].selectedTab} arrow>
+  const tooltipRequired =
+    headersRefs?.current[columnIndex]?.offsetWidth < headersRefs?.current[columnIndex]?.scrollWidth;
+
+  return (
+    <CustomTooltip title={tooltipRequired ? tabsData[columnIndex - 1].selectedTab : ''} arrow>
       <RenderLabel
         variant="body2"
         ref={(element) => {
@@ -47,14 +52,5 @@ export default function({
         {filteredData[columnIndex - 1]?.selectedTab}
       </RenderLabel>
     </CustomTooltip>
-  ) : (
-    <RenderLabel
-      variant="body2"
-      ref={(element) => {
-        headersRefs.current[columnIndex] = element;
-      }}
-    >
-      {filteredData[columnIndex - 1]?.selectedTab}
-    </RenderLabel>
   );
 }

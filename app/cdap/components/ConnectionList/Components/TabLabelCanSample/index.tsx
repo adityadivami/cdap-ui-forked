@@ -87,27 +87,25 @@ export default function({
     }
   };
 
-  const createWorkspaceInternal = (currentEntity: IConnectionTabType) => {
+  const createWorkspaceInternal = async (currentEntity: IConnectionTabType) => {
     toggleLoader(true);
-    createWorkspace({
-      entity: currentEntity,
-      connection: currentConnection,
-      properties: {},
-    })
-      // NOTE: As the function is returning promise, we are using .then here
-      .then((res) => {
-        if (onWorkspaceCreate) {
-          return onWorkspaceCreate(res);
-        }
-        if (res) {
-          setWorkspaceId(res);
-          toggleLoader(false);
-        }
-      })
-      .catch((err) => {
-        toggleLoader(false);
-        setIsErrorOnNoWorkSpace(true);
+    try {
+      const response = await createWorkspace({
+        entity: currentEntity,
+        connection: currentConnection,
+        properties: {},
       });
+      if (onWorkspaceCreate) {
+        return onWorkspaceCreate(response);
+      }
+      if (response) {
+        setWorkspaceId(response);
+        toggleLoader(false);
+      }
+    } catch (error) {
+      toggleLoader(false);
+      setIsErrorOnNoWorkSpace(true);
+    }
   };
 
   return workspaceId ? (
