@@ -16,9 +16,11 @@
 
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import BreadCumb from '../index';
+import BreadCumb from 'components/ConnectionList/Components/SubHeader/index';
 import { Router, Route, Switch } from 'react-router';
 import history from 'services/history';
+import T from 'i18n-react';
+
 test('renders BreadCumb Component', () => {
   render(
     <Router history={history}>
@@ -33,5 +35,5 @@ test('renders BreadCumb Component', () => {
   expect(ele).toBeInTheDocument();
 
   const clickEle = screen.getByTestId(/sub-header-handle-add-connection/i);
-  fireEvent.click(clickEle);
+  expect(clickEle).toHaveTextContent(`${T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}`)
 });

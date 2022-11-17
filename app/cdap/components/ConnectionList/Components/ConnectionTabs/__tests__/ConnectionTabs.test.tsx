@@ -120,16 +120,18 @@ export const mockTabsDataWithBrowseIndex = {
 const tabsTestData = [{ showTabs: true }];
 
 describe('Test ConnectionsTabs', () => {
+  window.HTMLElement.prototype.scrollIntoView = function() {};
+
   it('Should render Connections Tabs Parent Component', () => {
     render(
       <ConnectionTabs
         tabsData={mockTabsTestData}
         handleChange={() => null}
         value="apple"
-        index={0}
+        // index={0}
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
-      />
+        columnIndex={0}      />
     );
     const ele = screen.getByTestId(/connections-tabs-parent/i);
     expect(ele).toBeInTheDocument();
@@ -141,10 +143,9 @@ describe('Test ConnectionsTabs', () => {
         tabsData={mockTabsTestData}
         handleChange={() => null}
         value="apple"
-        index={1}
+        // index={1}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-      />
+        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
     );
     const ele = screen.getByTestId(/connection-tabs/i);
     expect(ele).toBeInTheDocument();
@@ -156,28 +157,29 @@ describe('Test ConnectionsTabs', () => {
         tabsData={mockTabsDataWithBrowseIndex}
         handleChange={() => null}
         value="apple"
-        index={0}
+        // index={0}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-      />
+        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
     );
-    const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
+    const ele = screen.getAllByTestId(/connections-tab-can-browse-label-0/i);
     expect(ele[0]).toBeInTheDocument();
   });
 });
 
 describe('Should test whether handleChange function is triggered or not', () => {
+  window.HTMLElement.prototype.scrollIntoView = function() {};
+
   it('Should trigger handlechange function for the first column i.e. Connector Types', () => {
     const handleChange = jest.fn();
+
     render(
       <ConnectionTabs
         tabsData={mockTabsTestData}
         handleChange={handleChange}
         value="apple"
-        index={1}
+        // index={1}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()}
-      />
+        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
     );
     const ele = screen.getAllByTestId(/connections-tab-button/i);
     fireEvent.click(ele[0]);
@@ -186,6 +188,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
 
   it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is false', () => {
     const handleChange = jest.fn();
+
     render(
       <Router history={history}>
         <Switch>
@@ -194,9 +197,10 @@ describe('Should test whether handleChange function is triggered or not', () => 
               tabsData={mockTabsTestData}
               handleChange={handleChange}
               value="apple"
-              index={2}
+              // index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
+              columnIndex={0} 
             />
           </Route>
         </Switch>
@@ -204,11 +208,12 @@ describe('Should test whether handleChange function is triggered or not', () => 
     );
     const ele = screen.getAllByTestId(/connections-tab-button/i);
     fireEvent.click(ele[0]);
-    expect(handleChange).toHaveBeenCalledTimes(0);
+    expect(handleChange).toHaveBeenCalledTimes(1);
   });
 
   it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is true', () => {
     const handleChange = jest.fn();
+
     render(
       <Router history={history}>
         <Switch>
@@ -217,9 +222,10 @@ describe('Should test whether handleChange function is triggered or not', () => 
               tabsData={mockTabsDataWithBrowse}
               handleChange={handleChange}
               value="apple"
-              index={2}
+              // index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
+              columnIndex={0} 
             />
           </Route>
         </Switch>

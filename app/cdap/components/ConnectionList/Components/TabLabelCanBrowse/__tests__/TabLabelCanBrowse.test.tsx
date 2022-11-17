@@ -42,10 +42,9 @@ describe('Test TabLabelCanBrowse Component', () => {
         label={mockConnectorTypeData.name}
         count={mockConnectorTypeData.count}
         icon={mockConnectorTypeData.icon}
-        columnIndex={0}
-      />
+        columnIndex={0} dataTestID={0}      />
     );
-    const ele = screen.getAllByTestId(/connections-tab-label-browse/i);
+    const ele = screen.getAllByTestId(/connections-tab-can-browse-label-0/i);
     expect(ele[0]).toBeInTheDocument();
   });
   it('Should render TabLabelCanBrowse Component with ref true', () => {
@@ -60,8 +59,7 @@ describe('Test TabLabelCanBrowse Component', () => {
         label={mockConnectorTypeData.name}
         count={mockConnectorTypeData.count}
         icon={mockConnectorTypeData.icon}
-        columnIndex={0}
-      />
+        columnIndex={0} dataTestID={0}      />
     );
   });
 });

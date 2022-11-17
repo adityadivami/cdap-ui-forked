@@ -47,25 +47,15 @@ const mockEntityDataForNoWorkspace = {
   properties: {},
 };
 describe('Test TabLabelCanSample Component', () => {
-  it('Should render TabLabelCanSample Component', () => {
-    render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <TabLabelCanSample
-              label={mockConnectorTypeData.name}
-              entity={mockConnectorTypeData}
-              initialConnectionId={undefined}
-              toggleLoader={() => null}
-              setIsErrorOnNoWorkSpace={jest.fn()}
-            />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    const ele = screen.getByTestId(/connections-tab-label-simple/i);
-    expect(ele).toBeInTheDocument();
+  jest.mock('react', () => {
+    const originReact = jest.requireActual('react');
+    const mUseRef = jest.fn();
+    return {
+      ...originReact,
+      useRef: mUseRef,
+    };
   });
+ 
 
   it('Should trigger setIsErrorOnNoWorkSpace function ', () => {
     const setIsErrorOnNoWorkSpace = jest.fn();
@@ -78,8 +68,7 @@ describe('Test TabLabelCanSample Component', () => {
               entity={mockConnectorTypeData}
               initialConnectionId={undefined}
               toggleLoader={() => null}
-              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-            />
+              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace} dataTestID={0}            />
           </Route>
         </Switch>
       </Router>
@@ -116,8 +105,7 @@ describe('Test TabLabelCanSample Component', () => {
               entity={mockEntityDataForNoWorkspace}
               initialConnectionId="exl"
               toggleLoader={() => null}
-              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-            />
+              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace} dataTestID={0}            />
           </Route>
         </Switch>
       </Router>
