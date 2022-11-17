@@ -19,9 +19,9 @@ package io.cdap.cdap.ui.stepsdesign;
 import io.cdap.cdap.ui.utils.Constants;
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
+import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
-import io.cdap.e2e.utils.SeleniumDriver;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
@@ -40,19 +40,20 @@ public class ConnectorTypes {
             System.out.println("Clicked on " + connectionLabel + " Element");
             WaitHelper.waitForPageToLoad();
             if (connectionLabel.equals("Add Connections")) {
-                String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
-                Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/connections/create");
+                String actualText = SeleniumDriver.getDriver().getCurrentUrl();
+                Assert.assertEquals(actualText, "http://localhost:11011/cdap/ns/default/connections/create");
                 System.out.println("Navigated to " + connectionLabel + " Page - Old UI");
             } else if (connectionLabel.equals("Import Data")) {
-                String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
-                Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/home");
+                String actualText = SeleniumDriver.getDriver().getCurrentUrl();
+                Assert.assertEquals(actualText, "http://localhost:11011/cdap/ns/default/home");
             } else {
-                String ActualText = SeleniumDriver.getDriver().getCurrentUrl();
-                Assert.assertEquals(ActualText, "http://localhost:11011/cdap/ns/default/datasources/" + connectionLabel);
+                String actualText = SeleniumDriver.getDriver().getCurrentUrl();
+                Assert.assertEquals(actualText, "http://localhost:11011/cdap/ns/default/datasources/"
+                        + connectionLabel);
                 System.out.println("Navigated to Data Source page with connection " + connectionLabel + " selected");
             }
         } catch (Exception e) {
-            System.err.println("error: "+e);
+            System.err.println("error: " + e);
         }
     }
 }
