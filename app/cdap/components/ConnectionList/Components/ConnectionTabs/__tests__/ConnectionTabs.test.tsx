@@ -14,98 +14,103 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
-import ConnectionTabs from 'components/ConnectionList/Components/ConnectionTabs';
-import { GCSIcon } from 'components/ConnectionList/IconStore/CGSIcon';
-import React from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
-import history from 'services/history';
+import { fireEvent, render, screen } from "@testing-library/react";
+import ConnectionTabs from "components/ConnectionList/Components/ConnectionTabs";
+import { GCSIcon } from "components/ConnectionList/IconStore/CGSIcon";
+import React from "react";
+import { Route, Router, Switch } from "react-router-dom";
+import history from "services/history";
 
 export const mockTabsTestData = {
   data: [
     {
-      name: 'File',
-      type: 'connector',
-      category: 'File',
-      description: 'Connection to browse and sample data from the local file system.',
-      className: 'io.cdap.plugin.batch.connector.FileConnector',
+      name: "File",
+      type: "connector",
+      category: "File",
+      description:
+        "Connection to browse and sample data from the local file system.",
+      className: "io.cdap.plugin.batch.connector.FileConnector",
       artifact: {
-        name: 'core-plugins',
-        version: '2.10.0-SNAPSHOT',
-        scope: 'SYSTEM',
+        name: "core-plugins",
+        version: "2.10.0-SNAPSHOT",
+        scope: "SYSTEM",
       },
       count: 1,
       icon: <GCSIcon />,
     },
     {
-      name: 'PostgreSQL',
-      type: 'connector',
-      category: 'Database',
-      description: 'Connection to access data in PostgreSQL databases using JDBC.',
-      className: 'io.cdap.plugin.postgres.PostgresConnector',
+      name: "PostgreSQL",
+      type: "connector",
+      category: "Database",
+      description:
+        "Connection to access data in PostgreSQL databases using JDBC.",
+      className: "io.cdap.plugin.postgres.PostgresConnector",
       artifact: {
-        name: 'postgresql-plugin',
-        version: '1.9.0-SNAPSHOT',
-        scope: 'SYSTEM',
+        name: "postgresql-plugin",
+        version: "1.9.0-SNAPSHOT",
+        scope: "SYSTEM",
       },
       count: 1,
       icon: <GCSIcon />,
     },
   ],
   showTabs: true,
-  selectedTab: 'S3',
+  selectedTab: "S3",
   toggleSearch: false,
 };
 
 const mockTabsDataWithBrowse = {
   data: [
     {
-      name: 'File',
-      type: 'connector',
-      category: 'File',
-      description: 'Connection to browse and sample data from the local file system.',
-      className: 'io.cdap.plugin.batch.connector.FileConnector',
+      name: "File",
+      type: "connector",
+      category: "File",
+      description:
+        "Connection to browse and sample data from the local file system.",
+      className: "io.cdap.plugin.batch.connector.FileConnector",
       artifact: {
-        name: 'core-plugins',
-        version: '2.10.0-SNAPSHOT',
-        scope: 'SYSTEM',
+        name: "core-plugins",
+        version: "2.10.0-SNAPSHOT",
+        scope: "SYSTEM",
       },
       canBrowse: true,
       count: 1,
       icon: <GCSIcon />,
     },
     {
-      name: 'PostgreSQL',
-      type: 'connector',
-      category: 'Database',
-      description: 'Connection to access data in PostgreSQL databases using JDBC.',
-      className: 'io.cdap.plugin.postgres.PostgresConnector',
+      name: "PostgreSQL",
+      type: "connector",
+      category: "Database",
+      description:
+        "Connection to access data in PostgreSQL databases using JDBC.",
+      className: "io.cdap.plugin.postgres.PostgresConnector",
       artifact: {
-        name: 'postgresql-plugin',
-        version: '1.9.0-SNAPSHOT',
-        scope: 'SYSTEM',
+        name: "postgresql-plugin",
+        version: "1.9.0-SNAPSHOT",
+        scope: "SYSTEM",
       },
       count: 1,
       icon: <GCSIcon />,
     },
   ],
   showTabs: true,
-  selectedTab: 'S3',
+  selectedTab: "S3",
   toggleSearch: false,
 };
 
 export const mockTabsDataWithBrowseIndex = {
   data: [
     {
-      name: 'File',
-      type: 'connector',
-      category: 'File',
-      description: 'Connection to browse and sample data from the local file system.',
-      className: 'io.cdap.plugin.batch.connector.FileConnector',
+      name: "File",
+      type: "connector",
+      category: "File",
+      description:
+        "Connection to browse and sample data from the local file system.",
+      className: "io.cdap.plugin.batch.connector.FileConnector",
       artifact: {
-        name: 'core-plugins',
-        version: '2.10.0-SNAPSHOT',
-        scope: 'SYSTEM',
+        name: "core-plugins",
+        version: "2.10.0-SNAPSHOT",
+        scope: "SYSTEM",
       },
       canBrowse: true,
       count: 1,
@@ -113,105 +118,65 @@ export const mockTabsDataWithBrowseIndex = {
     },
   ],
   showTabs: true,
-  selectedTab: 'S3',
+  selectedTab: "S3",
   toggleSearch: false,
 };
 
 const tabsTestData = [{ showTabs: true }];
 
-describe('Test ConnectionsTabs', () => {
+describe("Test ConnectionsTabs", () => {
   window.HTMLElement.prototype.scrollIntoView = function() {};
 
-  it('Should render Connections Tabs Parent Component', () => {
+  it("Should render Connections Tabs Parent Component", () => {
     render(
       <ConnectionTabs
         tabsData={mockTabsTestData}
         handleChange={() => null}
         value="apple"
-        // index={0}
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
-        columnIndex={0}      />
+        columnIndex={0}
+      />
     );
-    const ele = screen.getByTestId(/connections-tabs-parent/i);
-    expect(ele).toBeInTheDocument();
+    const parentElement = screen.getByTestId(/connections-tabs-parent/i);
+    expect(parentElement).toBeInTheDocument();
   });
 
-  it('Should render Connections Tabs Component', () => {
+  it("Should render Connections Tabs Component", () => {
     render(
       <ConnectionTabs
         tabsData={mockTabsTestData}
         handleChange={() => null}
         value="apple"
-        // index={1}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
+        setIsErrorOnNoWorkSpace={jest.fn()}
+        columnIndex={0}
+      />
     );
-    const ele = screen.getByTestId(/connection-tabs/i);
-    expect(ele).toBeInTheDocument();
+    const tabsElement = screen.getByTestId(/connection-tabs/i);
+    expect(tabsElement).toBeInTheDocument();
   });
 
-  it('Should render TabLabelCanBrowse with connectorTypes and count', () => {
+  it("Should render TabLabelCanBrowse with connectorTypes and count", () => {
     render(
       <ConnectionTabs
         tabsData={mockTabsDataWithBrowseIndex}
         handleChange={() => null}
         value="apple"
-        // index={0}
         connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
+        setIsErrorOnNoWorkSpace={jest.fn()}
+        columnIndex={0}
+      />
     );
-    const ele = screen.getAllByTestId(/connections-tab-can-browse-label-0/i);
-    expect(ele[0]).toBeInTheDocument();
+    const browseLabelElement = screen.getAllByTestId(/connections-tab-can-browse-label-0/i);
+    expect(browseLabelElement[0]).toBeInTheDocument();
   });
 });
 
-describe('Should test whether handleChange function is triggered or not', () => {
+describe("Should test whether handleChange function is triggered or not", () => {
   window.HTMLElement.prototype.scrollIntoView = function() {};
 
-  it('Should trigger handlechange function for the first column i.e. Connector Types', () => {
-    const handleChange = jest.fn();
-
-    render(
-      <ConnectionTabs
-        tabsData={mockTabsTestData}
-        handleChange={handleChange}
-        value="apple"
-        // index={1}
-        connectionId={undefined}
-        setIsErrorOnNoWorkSpace={jest.fn()} columnIndex={0}      />
-    );
-    const ele = screen.getAllByTestId(/connections-tab-button/i);
-    fireEvent.click(ele[0]);
-    expect(handleChange).toHaveBeenCalled();
-  });
-
-  it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is false', () => {
-    const handleChange = jest.fn();
-
-    render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <ConnectionTabs
-              tabsData={mockTabsTestData}
-              handleChange={handleChange}
-              value="apple"
-              // index={2}
-              connectionId={undefined}
-              setIsErrorOnNoWorkSpace={jest.fn()}
-              columnIndex={0} 
-            />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    const ele = screen.getAllByTestId(/connections-tab-button/i);
-    fireEvent.click(ele[0]);
-    expect(handleChange).toHaveBeenCalledTimes(1);
-  });
-
-  it('Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is true', () => {
+  it("Should not trigger handlechange function when clicked on columns other than first one, and canBrowse is true", () => {
     const handleChange = jest.fn();
 
     render(
@@ -222,17 +187,16 @@ describe('Should test whether handleChange function is triggered or not', () => 
               tabsData={mockTabsDataWithBrowse}
               handleChange={handleChange}
               value="apple"
-              // index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
-              columnIndex={0} 
+              columnIndex={2}
             />
           </Route>
         </Switch>
       </Router>
     );
-    const ele = screen.getAllByTestId(/connections-tab-button/i);
-    fireEvent.click(ele[0]);
+    const columnItemElement = screen.getAllByTestId(/connections-tab-column2-item0/i);
+    fireEvent.click(columnItemElement[0]);
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
 });
