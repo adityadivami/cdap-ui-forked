@@ -14,5 +14,24 @@
  * the License.
  */
 
-export const MISSING_NULL = 'Missing/Null';
-export const transformationOptions = ['undo', 'redo'];
+import React from 'react';
+import { UnderLine } from 'components/DrawerWidget/IconStore/underline';
+import { HeadFont } from 'components/common/TypographyText';
+import { Box } from '@material-ui/core';
+import styled from 'styled-components';
+
+const DrawerHeadWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
+
+export default function({ headingText }: { headingText: string }) {
+  return (
+    <DrawerHeadWrapper>
+      <HeadFont component="p" data-testid="drawer-heading">
+        {headingText}
+      </HeadFont>
+      {UnderLine}
+    </DrawerHeadWrapper>
+  );
+}

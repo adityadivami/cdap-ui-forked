@@ -14,5 +14,16 @@
  * the License.
  */
 
-export const MISSING_NULL = 'Missing/Null';
-export const transformationOptions = ['undo', 'redo'];
+import React from 'react';
+
+export interface IDrawerWidgetProps {
+  headingText?: React.ReactNode;
+  openDrawer: boolean;
+  showDivider?: boolean;
+  headerActionTemplate?: JSX.Element;
+  children?: JSX.Element;
+  closeClickHandler: () => void;
+  showBackIcon?: boolean;
+  anchor?: 'bottom' | 'left' | 'right' | 'top';
+  dataTestId: string;
+}

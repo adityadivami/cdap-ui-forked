@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -14,5 +16,9 @@
  * the License.
  */
 
-export const MISSING_NULL = 'Missing/Null';
-export const transformationOptions = ['undo', 'redo'];
+export interface ITransformationToolBarProps {
+  columnType: string;
+  submitMenuOption: (value: string, dataType: string[]) => void;
+  setShowBreadCrumb: Dispatch<SetStateAction<boolean>>;
+  showBreadCrumb: boolean;
+}
