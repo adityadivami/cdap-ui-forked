@@ -207,7 +207,7 @@ export default function() {
     refs.current[index].focus();
   };
 
-  const selectedTabValueHandler = (entity: IConnectionTabType, index: number) => {
+  const handleSelectedTab = (entity: IConnectionTabType, index: number) => {
     toggleLoader(true);
     setTabsData((currentData) => {
       let newData: IFilteredData[] = [...currentData];
@@ -340,7 +340,7 @@ export default function() {
                     </TabHeaderContainer>
                     <ConnectionTabs
                       tabsData={eachFilteredData}
-                      handleChange={selectedTabValueHandler}
+                      handleChange={handleSelectedTab}
                       value={eachFilteredData.selectedTab}
                       columnIndex={index}
                       connectionId={connectionId || ' '}
