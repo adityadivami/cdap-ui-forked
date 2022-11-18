@@ -15,6 +15,7 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import { IHeaderNamesList } from 'components/WranglerGrid/AddTransformation/types';
 
 export const getDirective = (functionName: string, selectedColumnName: string) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
@@ -22,4 +23,24 @@ export const getDirective = (functionName: string, selectedColumnName: string) =
   } else {
     return null;
   }
+};
+
+export const getColumnsSupportedType = (transformationDataType, columnsList) => {
+  return transformationDataType?.length > 0 && transformationDataType?.includes('all')
+    ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
+    : columnsList?.filter((columnDetail: IHeaderNamesList) => {
+        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+        });
+      });
+};
+
+export const getFilteredColumn = (transformationDataType, columnsList) => {
+  return transformationDataType?.length > 0 && transformationDataType?.includes('all')
+    ? columnsList
+    : columnsList?.filter((columnDetail: IHeaderNamesList) => {
+        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+        });
+      });
 };
