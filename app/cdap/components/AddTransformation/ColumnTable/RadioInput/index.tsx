@@ -17,10 +17,22 @@
 import React from 'react';
 import { Radio } from '@material-ui/core';
 import { IRadioInputProps } from 'components/AddTransformation/ColumnTable/types';
+import styled from 'styled-components';
 
-export default function({ selectedColumns, onSingleSelection, columnDetail, columnIndex }: IRadioInputProps) {
+const RadioInput = styled(Radio)`
+  &.MuiRadio-root {
+    padding: 0;
+  }
+`;
+
+export default function({
+  selectedColumns,
+  onSingleSelection,
+  columnDetail,
+  columnIndex,
+}: IRadioInputProps) {
   return (
-    <Radio
+    <RadioInput
       color="primary"
       onClick={() => onSingleSelection(columnDetail)}
       checked={
