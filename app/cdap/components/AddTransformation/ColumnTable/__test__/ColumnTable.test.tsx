@@ -30,7 +30,7 @@ describe('Should test ColumnTable Component', () => {
             type: ['String'],
           },
         ]}
-        transformationFunctionSupportedDataType={mockDirectiveFunctionSupportedDataType}
+        transformationDataType={mockDirectiveFunctionSupportedDataType}
         onSingleSelection={jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[

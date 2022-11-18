@@ -108,3 +108,7 @@ export interface IAddTransformationItem {
   option: string;
   supportedDataType: string[];
 }
+
+export interface IType {
+  [key: string]: string | number;
+}

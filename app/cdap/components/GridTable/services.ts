@@ -14,23 +14,38 @@
  * the License.
  */
 
+import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
-import { IRecords, IGridParams, IRequestBody, IApiPayload } from 'components/GridTable/types';
-import { gridParamsDefaultValues } from 'components/GridTable/defaultValues';
+import {
+  IRecords,
+  IGridParams,
+  IRequestBody,
+  IApiPayload,
+  IType,
+  IParams,
+} from 'components/GridTable/types';
+import { objectQuery } from 'services/helpers';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
+/**
+ * @param  {IRecords} params
+ * @param  {string|string[]} newDirective directive value
+ * @param  {string} action?
+ * @returns payload which is used for api calls
+ */
 export const getAPIRequestPayload = (
-  params: IRecords,
+  params: IParams,
   newDirective: string | string[],
   action?: string
 ) => {
   const { dataprep } = DataPrepStore.getState();
   const { workspaceId, workspaceUri, directives, insights } = dataprep;
-  let gridParams: IGridParams = gridParamsDefaultValues;
+  let gridParams = {} as IGridParams;
   const updatedDirectives: string[] = directives.concat(newDirective);
   const requestBody: IRequestBody = directiveRequestBodyCreator(updatedDirectives);
   requestBody.insights = insights;
-  const workspaceInfo: IRecords = {
+  const workspaceInfo: IType = {
     properties: insights,
   };
   gridParams = {
@@ -40,7 +55,7 @@ export const getAPIRequestPayload = (
     workspaceInfo,
     insights,
   };
-  const payload: IRecords = {
+  const payload: IType = {
     context: params.namespace,
     workspaceId: params.wid,
   };
@@ -50,4 +65,36 @@ export const getAPIRequestPayload = (
     gridParams,
   };
   return returnData;
+};
+
+/**
+ * @param  {IRecords} workspaceId
+ * @param  {string[]} directives
+ * @return api response
+ */
+export const applyDirectives = (
+  workspaceId: string | boolean | Record<string, IType>,
+  directives: string[]
+) => {
+  return MyDataPrepApi.getWorkspace({
+    context: getCurrentNamespace(),
+    workspaceId,
+  }).mergeMap((res) => {
+    const params = {
+      workspaceId,
+      context: getCurrentNamespace(),
+    };
+    const requestBody = directiveRequestBodyCreator(directives);
+    const sampleSpec = objectQuery(res, 'sampleSpec') || {};
+    const visualization = objectQuery(res, 'insights', 'visualization') || {};
+
+    const insights = {
+      name: sampleSpec.connectionName,
+      workspaceName: res.workspaceName,
+      path: sampleSpec.path,
+      visualization,
+    };
+    requestBody.insights = insights;
+    return MyDataPrepApi.execute(params, requestBody);
+  });
 };
