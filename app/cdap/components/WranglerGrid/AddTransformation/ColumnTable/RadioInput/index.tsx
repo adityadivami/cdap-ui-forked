@@ -17,6 +17,13 @@
 import React from 'react';
 import { Radio } from '@material-ui/core';
 import { IRadioInputProps } from 'components/WranglerGrid/AddTransformation/ColumnTable/types';
+import styled from 'styled-components';
+
+const RadioInput = styled(Radio)`
+  &.MuiRadio-root {
+    padding: 0;
+  }
+`;
 
 export default function({
   selectedColumns,
@@ -25,7 +32,7 @@ export default function({
   columnIndex,
 }: IRadioInputProps) {
   return (
-    <Radio
+    <RadioInput
       color="primary"
       onClick={() => onSingleSelection(columnDetail)}
       checked={
