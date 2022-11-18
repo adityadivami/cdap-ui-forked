@@ -15,39 +15,34 @@
  */
 
 import styled from 'styled-components';
+import { FormControlLabel, FormGroup } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import { Input } from '@material-ui/core';
 
-export const SelectColumnSearchInput = styled.input`
-  margin-right: 5px;
-  border: none;
-  border-bottom: 1px solid transparent;
-  &:focus {
-    border-bottom: 1px solid ${grey[700]};
-    outline: none;
-  }
+export const FormControlLabelComponent = styled(FormControlLabel)`
+  width: calc(100% - 60px);
+  margin-right: 60px;
+  border: 1px solid #DADCE0;
+  height: 40px;
+  padding: 5px 15px;
+  font-size: 14px;
+  background: #FFFFFF;
+  border-radius: 4px;
+  margin-left: 0;
 `;
 
-export const InputComponent = styled(Input)`
-  &.MuiInput-underline {
+export const FormControlLabelRadioComponent = styled(FormControlLabel)`
+    margin-left: -5px;
+    & span:last-child: {
+        font-weight: 400;
+        font-size: 14px;
+        color: ${grey[600]};
+    }
+`;
+
+export const FormGroupComponent = styled(FormGroup)`
+    width: calc(100% - 60px);
+`;
+
+export const FormGroupFullWidthComponent = styled(FormGroup)`
     width: 100%;
-    &:before {
-      border: none;
-    }
-    &:hover:not(.Mui-disabled):before {
-      border: none;
-    }
-    &:after {
-      border: none;
-    }
-    &.MuiInput-underline.Mui-disabled:before {
-      border-bottom-style: unset;
-    }
-  }
-  &.MuiInput-input {
-    width: 100%;
-    &:focus {
-      outline: none;
-    }
-  }
 `;

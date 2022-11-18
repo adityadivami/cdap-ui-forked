@@ -16,6 +16,8 @@ import T from 'i18n-react';
 import { MATH_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/mathOptions';
 import { INestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/types';
 import ReplayIcon from '@material-ui/icons/Replay';
+import { MATH_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/mathOptions';
+import { INestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/types';
 
 export const nestedMenuOptions: INestedMenuOptions[] = [
   {

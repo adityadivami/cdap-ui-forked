@@ -14,7 +14,6 @@
  * the License.
  */
 
-
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
 import { ITransformationComponentValues } from 'components/AddTransformation/types';

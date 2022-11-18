@@ -57,7 +57,6 @@ export default function({
   onCancel,
   applyTransformation,
 }: IAddTransformationProps) {
-  
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
@@ -65,7 +64,6 @@ export default function({
   const [transformationComponentValues, setTransformationComponentsValue] = useState<
     ITransformationComponentValues
   >(transformationComponentDefaultValues);
-
 
   const closeClickHandler = () => {
     onCancel();
@@ -169,7 +167,6 @@ export default function({
           </AddTransformationBodyWrapper>
           <AddTransformationButton
             disabled={selectedColumns?.length ? false : true}
-            color="primary"
             data-testid="apply-step-button"
             onClick={handleApply}
           >
