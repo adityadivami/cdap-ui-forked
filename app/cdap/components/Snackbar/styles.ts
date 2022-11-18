@@ -15,22 +15,32 @@
  */
 
 import { makeStyles } from '@material-ui/core';
-import { red, green } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles({
-  snackBarDiv: {
-    padding: '10px',
+  error: {
+    borderRadius: 4,
+    width: '100%',
+    top: '48px !important',
+    backgroundColor: red[600],
+    padding: '15px 18px 14px 18px',
     display: 'block',
-    boxShadow: '-3px 4px 15px rgba(68, 132, 245, 0.25)',
-    height: '148px',
-    width: '401px',
-    bottom: '10% !important',
-    backgroundColor: '#fff',
+    minHeight: 76,
   },
-  successDiv: {
-    border: `1px solid ${green[600]}`,
+  success: {
+    width: '100%',
+    top: '48px !important',
+    backgroundColor: green[600],
+    padding: '15px 18px 14px 18px',
+    display: 'block',
+    borderRadius: 4,
+    minHeight: 76,
   },
-  failureDiv: {
-    border: `1px solid ${red[600]}`,
+  anchor: {
+    left: 0,
+  },
+  root: {
+    left: 0,
+    zIndex: 9,
   },
 });

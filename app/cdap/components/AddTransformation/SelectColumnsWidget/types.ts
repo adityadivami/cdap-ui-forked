@@ -13,24 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { IHeaderNamesList } from 'components/AddTransformation/types';
 
-import { makeStyles } from '@material-ui/core';
-import { red, green } from '@material-ui/core/colors';
-
-export const useStyles = makeStyles({
-  snackBarDiv: {
-    padding: '10px',
-    display: 'block',
-    boxShadow: '-3px 4px 15px rgba(68, 132, 245, 0.25)',
-    height: '148px',
-    width: '401px',
-    bottom: '10% !important',
-    backgroundColor: '#fff',
-  },
-  successDiv: {
-    border: `1px solid ${green[600]}`,
-  },
-  failureDiv: {
-    border: `1px solid ${red[600]}`,
-  },
-});
+export interface ISelectColumnsWidgetProps {
+  selectedColumns: IHeaderNamesList[];
+  transformationName: string;
+  handleSelectColumn: (value: boolean) => void;
+}

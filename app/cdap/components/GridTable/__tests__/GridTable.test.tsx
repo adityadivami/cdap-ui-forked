@@ -55,7 +55,7 @@ describe('Testing Grid Table Component', () => {
     expect(screen.getByTestId('grid-table')).toBeInTheDocument();
   });
 
-  it('Should check if the component is rendered', () => {
+  it('Should check if the component is rendered and mock MyDataPrepApi', () => {
     jest.spyOn(MyDataPrepApi, 'getWorkspace').mockImplementation(() => {
       return {
         pipe: () => {

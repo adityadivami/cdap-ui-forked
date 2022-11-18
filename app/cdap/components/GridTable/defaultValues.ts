@@ -20,3 +20,11 @@ export const defaultMissingItem = [
     count: '0',
   },
 ];
+
+export const gridParamsDefaultValues = {
+  directives: [],
+  workspaceId: '',
+  workspaceUri: '',
+  workspaceInfo: {},
+  insights: {},
+};

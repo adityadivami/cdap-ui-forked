@@ -13,33 +13,65 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { makeStyles } from '@material-ui/core';
-import { blue } from '@material-ui/core/colors';
-import { grey } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
   warningIcon: {
-    color: '#E97567',
-    fontSize: '20px !important',
+    fontSize: 'xx-large',
+    color: '#ffffff',
+    position: 'relative',
+    bottom: 4,
+    width: 18,
+    marginRight: 13,
   },
-  errorHead: {
-    color: grey[900],
-    fontSize: '20px !important',
+  successIcon: {
+    fontSize: 'xx-large',
+    color: '#ffffff',
+    position: 'relative',
+    bottom: 4,
+    width: 18,
+    marginRight: 13,
+  },
+  successLabel: {
+    color: '#ffffff',
+    lineHeight: '24px',
+    fontWeight: 500,
+    letterSpacing: 0.15,
+    fontSize: 16,
+  },
+  failureLabel: {
+    color: '#ffffff',
+    lineHeight: '24px',
+    fontWeight: 500,
+    letterSpacing: 0.15,
+    fontSize: 16,
   },
   dismissSpan: {
     display: 'block',
-    fontSize: '14px',
-    color: blue[500],
+    color: '#ffffff',
     cursor: 'pointer',
+    lineHeight: '21px',
+    fontWeight: 400,
   },
-  errorMessage: {
-    color: grey[900],
-    fontSize: '14px',
-    padding: '10px',
+  iconText: {
+    display: 'flex',
+  },
+  message: {
+    color: '#ffffff',
+    paddingLeft: 31,
+    fontSize: 14,
   },
   headFlex: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
+  },
+  operations: {
+    display: 'flex',
+    gap: 13,
+  },
+  closeIcon: {
+    color: '#ffffff',
+    cursor: 'pointer',
   },
 }));

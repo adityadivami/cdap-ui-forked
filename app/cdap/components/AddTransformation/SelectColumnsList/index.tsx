@@ -56,7 +56,7 @@ const SelectColumnInnerWrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 10px;
 `;
 
 const FlexWrapper = styled(Box)`
@@ -82,6 +82,7 @@ export default function({
   transformationName,
   selectedColumns,
 }: ISelectColumnsListProps) {
+  
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const ref = useRef(null);

@@ -15,9 +15,12 @@
  */
 
 import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation/types';
-import { IStatistics } from 'components/GridTable/types';
+import { IStatistics, IGeneral } from 'components/GridTable/types';
 
-export const getDataQuality = (statistics: IStatistics, columnList: IHeaderNamesList[]) => {
+export const getDataQuality = (
+  statistics: IStatistics | IGeneral,
+  columnList: IHeaderNamesList[]
+) => {
   const dataQuality: IDataQualityItem[] = [];
   columnList?.forEach((columnName: IHeaderNamesList) => {
     const generalValues: IDataQualityItem = statistics[columnName.name].general;

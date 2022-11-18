@@ -34,6 +34,16 @@ import {
   AddTransformationWrapper,
 } from 'components/common/BoxContainer';
 import { AddTransformationButton } from 'components/common/ButtonWidget';
+import FunctionNameWidget from 'components/AddTransformation/FunctionNameWidget';
+import SelectColumnsWidget from 'components/AddTransformation/SelectColumnsWidget';
+import SelectedColumnCountWidget from 'components/AddTransformation/SelectedColumnCountWidget';
+import { getDirective } from 'components/AddTransformation/utils';
+import { Box, Divider } from '@material-ui/core';
+import styled from 'styled-components';
+
+const CountWidgetWrapper = styled(Box)`
+  padding: 10px 0;
+`;
 
 export default function({
   transformationDataType,
@@ -41,20 +51,38 @@ export default function({
   columnsList,
   missingItemsList,
   onCancel,
+  applyTransformation,
 }: IAddTransformationProps) {
-  const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
+  
+  const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
+  const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
 
+  const closeClickHandler = () => {
+    onCancel();
+    setDrawerStatus(false);
+  };
+
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
-    onCancel();
+    setDrawerStatus(true);
   };
 
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
     setSelectedColumns([]);
-    onCancel();
+    setDrawerStatus(true);
+  };
+
+  const handleSelectColumn = () => {
+    setColumnsPopup(true);
+  };
+
+  const handleApply = () => {
+    const directive: string = getDirective(transformationName, selectedColumns[0].label);
+    applyTransformation(directive);
+    setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
 
   useEffect(() => {
@@ -87,6 +115,35 @@ export default function({
 
   return (
     <Fragment>
+      <DrawerWidget
+        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.addTransformation`)}
+        openDrawer={drawerStatus}
+        closeClickHandler={closeClickHandler}
+        dataTestId="add-transformation-drawer"
+      >
+        <AddTransformationWrapper>
+          <AddTransformationBodyWrapper>
+            <CountWidgetWrapper>
+              <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
+            </CountWidgetWrapper>
+            <Divider />
+            <FunctionNameWidget transformationName={transformationName} />
+            <SelectColumnsWidget
+              handleSelectColumn={handleSelectColumn}
+              selectedColumns={selectedColumns}
+              transformationName={transformationName}
+            />
+          </AddTransformationBodyWrapper>
+          <AddTransformationButton
+            disabled={selectedColumns?.length ? false : true}
+            color="primary"
+            data-testid="apply-step-button"
+            onClick={handleApply}
+          >
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.applyStep`)}
+          </AddTransformationButton>
+        </AddTransformationWrapper>
+      </DrawerWidget>
       <DrawerWidget
         headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
         openDrawer={columnsPopup}

@@ -3478,12 +3478,15 @@ features:
             menu:
               changeDatatype: Change data type
       addTransformationPanel:
+        addTransformation: Add Transformation Step
         applyStep: Apply Step
         columnsSelected: columns selected
         columns: Columns
         dataQuality: Data Quality
         done: Done
+        function: Function
         nullValues: Null Values
+        quickSelect: Quick select by clicking a column on the grid/columns panel
         selectColumnPara: Select column(s) to apply this function
         selectColumn: Select column
         selectMultiColumns: Select columns
@@ -3493,5 +3496,14 @@ features:
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
+    Snackbar:
+      labels:
+        datasetSuccess: Dataset loaded successfully 
+        failure: Failure
+        retrieveFailure: Failed to retrieve sample data for
+        sampleFailure: Failed to retrieve sample data
+        success: Success
+        undo: Undo
+        workspaceFailure: Failed to create workspace for
 
               

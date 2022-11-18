@@ -37,7 +37,29 @@ export const AddTransformationButton = styled(Button)`
   &:hover {
     background: ${blue[500]};
   }
+  &.Mui-disabled{
+    background: ${grey[200]};
+  }
   &.Mui-disabled {
     background: ${grey[300]};
+  }
+`;
+
+export const SelectColumnButton = styled(Button)`
+  width: 162px;
+  height: 36px;
+  background: transparent;
+  box-shadow: 0px 2px 4px rgba(70, 129, 244, 0.15);
+  border: 1px solid ${blue[500]};
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 0.46px;
+  color: ${blue[500]};
+  text-transform: none;
+  margin-top: 20px;
+  &:hover {
+    background: transparent;
   }
 `;

@@ -37,6 +37,7 @@ export interface IAddTransformationProps {
   columnsList: IHeaderNamesList[];
   missingItemsList: IStatistics;
   onCancel: () => void;
+  applyTransformation: (directive: string) => void;
 }
 
 export interface IMultipleSelectedFunctionDetail {

@@ -26,6 +26,7 @@ export default function({
   label,
   columnIndex
 }: ICheckBoxInputProps) {
+  
   const disabled =
     selectedColumns?.filter((column) => column.label === columnDetail.label).length ||
     !handleDisableCheckbox()

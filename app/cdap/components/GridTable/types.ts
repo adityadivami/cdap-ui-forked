@@ -33,10 +33,10 @@ export interface IRecords {
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
 }
-interface IGeneralObjectRecord {
+export interface IGeneralObjectRecord {
   [key: string]: number | string;
 }
-interface IGeneral {
+export interface IGeneral {
   general?: IGeneralObjectRecord;
   types?: IGeneralObjectRecord;
 }
@@ -62,6 +62,39 @@ export interface IHeaderNamesList {
   type: string[];
 }
 
+export interface IDataQuality {
+  [key: string]: string;
+}
+
+export interface IRowData {
+  [key: string]: string;
+}
+
+export interface IMissingListData {
+  name: string;
+  values: Record<string, string>;
+}
+
+export interface IRequestBody {
+  directives: string[];
+  insights?: IRecords;
+  limit: number;
+}
+
+export interface IGridParams {
+  directives: string[];
+  insights: IRecords;
+  workspaceId: string;
+  workspaceInfo: IRecords;
+  workspaceUri: string;
+}
+
+export interface IApiPayload {
+  payload: IRecords;
+  requestBody: IRequestBody;
+  gridParams: IGridParams;
+}
+
 export interface IGridCellData {
   [key: string]: string;
 }
@@ -74,4 +107,8 @@ export interface IMissingList {
 export interface IAddTransformationItem {
   option: string;
   supportedDataType: string[];
+}
+
+export interface IType {
+  [key: string]: string | number;
 }

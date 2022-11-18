@@ -19,16 +19,17 @@ import T from 'i18n-react';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/AddTransformation/constants';
 import { NormalFont } from 'components/common/TypographyText';
 
-export default function({ selectedColumnsCount }: { selectedColumnsCount: number }) {
+export default function ({ selectedColumnsCount }: { selectedColumnsCount: number }) {
+
   const text = selectedColumnsCount
     ? selectedColumnsCount > 10
       ? selectedColumnsCount
       : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.zero`)}${selectedColumnsCount} ${T.translate(
-          `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
-        )}`
-    : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)} ${T.translate(
         `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
-      )}`;
+      )}`
+    : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.no`)} ${T.translate(
+      `${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`
+    )}`;
 
   return (
     <NormalFont component="p" data-testid="no-column-title">

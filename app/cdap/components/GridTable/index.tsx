@@ -38,15 +38,20 @@ import {
   IHeaderNamesList,
   IMissingList,
   IParams,
-  IRecords,
   IGridCellData,
   IStatistics,
   IAddTransformationItem,
+  IGridParams,
+  IApiPayload,
+  IRecords,
 } from 'components/GridTable/types';
 import { convertNonNullPercent } from 'components/GridTable/utils';
 import AddTransformation from 'components/AddTransformation';
 import { defaultMissingItem } from 'components/GridTable/defaultValues';
-import { transformationOptions } from 'components/GridTable/constants';
+import { getAPIRequestPayload, applyDirectives } from 'components/GridTable/services';
+import Snackbar from 'components/Snackbar';
+
+const transformationOptions = ['undo', 'redo'];
 
 export default function GridTable() {
   const params = useParams() as IParams;
@@ -70,6 +75,11 @@ export default function GridTable() {
     supportedDataType: [],
   });
   const [dataQuality, setDataQuality] = useState<IStatistics>();
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+  const [snackbarData, setSnackbarData] = useState({
+    description: '',
+    isSuccess: false,
+  });
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
     setLoading(true);
@@ -211,6 +221,55 @@ export default function GridTable() {
     });
   };
 
+  const addDirectives = (directive: string) => {
+    setLoading(true);
+    if (directive) {
+      const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+      addDirectiveAPICall(apiPayload);
+    }
+  };
+
+  const addDirectiveAPICall = (apiPayload: IApiPayload) => {
+    const gridParams: IGridParams = apiPayload.gridParams;
+    applyDirectives(wid, gridParams.directives).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            values: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setSnackbarIsOpen(true);
+        setSnackbarData({
+          description: 'Directive applied successfully',
+          isSuccess: true,
+        });
+        setLoading(false);
+        setGridData(response);
+        setAddTransformationFunction({
+          option: '',
+          supportedDataType: [],
+        });
+      },
+      (err) => {
+        setLoading(false);
+        setSnackbarIsOpen(true);
+        setSnackbarData({
+          description: 'Directive cannot applied',
+          isSuccess: false,
+        });
+        setAddTransformationFunction({
+          option: '',
+          supportedDataType: [],
+        });
+      }
+    );
+  };
+
   return (
     <Box>
       {showBreadCrumb && <BreadCrumb datasetName={workspaceName} location={location} />}
@@ -283,6 +342,22 @@ export default function GridTable() {
               supportedDataType: [],
             });
           }}
+          applyTransformation={(directive: string) => {
+            addDirectives(directive);
+          }}
+        />
+      )}
+      {snackbarIsOpen && (
+        <Snackbar
+          handleCloseError={() => {
+            setSnackbarIsOpen(false);
+            setSnackbarData({
+              description: '',
+              isSuccess: false,
+            });
+          }}
+          description={snackbarData.description}
+          isSuccess={snackbarData.isSuccess}
         />
       )}
       {loading && (
