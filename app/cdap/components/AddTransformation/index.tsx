@@ -53,7 +53,6 @@ export default function({
   onCancel,
   applyTransformation,
 }: IAddTransformationProps) {
-  
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);

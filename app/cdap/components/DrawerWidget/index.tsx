@@ -66,7 +66,7 @@ export default function({
   closeClickHandler,
   showBackIcon,
   anchor,
-  dataTestId
+  dataTestId,
 }: IDrawerWidgetProps) {
   return (
     <DrawerWidgetComponent anchor={anchor ? anchor : 'right'} open={openDrawer}>
