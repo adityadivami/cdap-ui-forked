@@ -132,6 +132,9 @@ export default function() {
     getWidgetData();
   }, []);
 
+  /**
+   * Here we are fetching connectors with icons from store
+   */
   DataPrepStore.subscribe(() => {
     const newState = DataPrepStore.getState();
     setFetchedConnectorsData(newState.dataprep.connectorsWithIcons);
@@ -152,7 +155,6 @@ export default function() {
     connectorTypes = connectorTypes.filter((obj) =>
       connectorTypeWithConnections.find((item) => item == obj.name)
     );
-
     connectorTypes = [...new Map(connectorTypes.map((item) => [item.name, item])).values()];
     connectorTypes = connectorTypes.filter((eachConnectionType: ITabData) => {
       return [eachConnectionType.name];

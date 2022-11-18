@@ -22,6 +22,14 @@ import {
   getSelectedConnectorDisplayName,
 } from 'components/Connections/Create/reducer';
 
+/**
+ *
+ * @param response categorized connections data
+ * @param index numnber which indicates the level/column in connections list
+ * @param existingTabsData existing tab data to render connection list horizontal component
+ * @returns modified tab data to render connections list
+ */
+
 export const getDataForTabsHelper = (
   response: ITabsDataResponse | ITabData[],
   index: number,
@@ -45,6 +53,13 @@ export const getDataForTabsHelper = (
   return tempData.slice(0, index + 2);
 };
 
+/**
+ *
+ * @param index numnber which indicates the level/column in connections list
+ * @param tabsData data to render connection list horizontal component
+ * @returns data after altering each column's search bar's status
+ */
+
 export const getUpdatedTabsData = (index: number, tabsData) => {
   let tempData: IFilteredData[] = tabsData;
   tempData = tempData.map((eachTempData) => ({
@@ -61,6 +76,12 @@ export const getUpdatedTabsData = (index: number, tabsData) => {
   });
   return tempData;
 };
+
+/**
+ *
+ * @param connectorTypesWithSVG connector types with corresponding icon attached to it
+ * @returns connector types with display name (ex: name: CloudSQLPostgreSQL --> displayName: CloudSQL PostgreSQL)
+ */
 
 export const getDisplayNamesForConnectorTypes = async (connectorTypesWithSVG) => {
   const connectorTypes = await fetchConnectors();
