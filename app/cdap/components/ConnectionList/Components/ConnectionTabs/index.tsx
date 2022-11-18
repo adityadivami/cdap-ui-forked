@@ -107,16 +107,14 @@ export default function({
   setIsErrorOnNoWorkSpace,
   toggleLoader,
 }: IConnectionTabsProps) {
-  const [connectionIdProp, setConnectionId] = useState(connectionId);
+  const [connectionIdProp, setConnectionIdProp] = useState(connectionId);
 
   useEffect(() => {
-    setConnectionId(connectionId);
+    setConnectionIdProp(connectionId);
   }, []);
 
   const handleConnectionTabClick = (connectorType: IConnectionTabType, index: number) => {
-    if (!(index > 1 && !connectorType.canBrowse)) {
-      handleChange(connectorType, index);
-    }
+    !(index > 1 && !connectorType.canBrowse) && handleChange(connectorType, index);
   };
 
   // code to achieve automatic scroll into view for connection list tabs
