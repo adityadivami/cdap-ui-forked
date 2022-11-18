@@ -56,29 +56,6 @@ describe('Test TabLabelCanSample Component', () => {
     };
   });
 
-  it('Should trigger setIsErrorOnNoWorkSpace function ', () => {
-    const setIsErrorOnNoWorkSpace = jest.fn();
-    render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <TabLabelCanSample
-              label={mockConnectorTypeData.name}
-              entity={mockConnectorTypeData}
-              initialConnectionId={undefined}
-              toggleLoader={() => null}
-              setIsErrorOnNoWorkSpace={setIsErrorOnNoWorkSpace}
-              dataTestID={0}
-            />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    const ele = screen.getByTestId(/connections-tab-explore/i);
-    fireEvent.click(ele);
-    expect(setIsErrorOnNoWorkSpace).toHaveBeenCalled();
-  });
-
   it('Should trigger onWorkspaceCreate Function', async () => {
     const setIsErrorOnNoWorkSpace = jest.fn();
 
@@ -114,8 +91,8 @@ describe('Test TabLabelCanSample Component', () => {
       </Router>
     );
 
-    const ele = screen.getByTestId(/connections-tab-explore/i);
-    fireEvent.click(ele);
+    const ele = screen.getByTestId(/connections-tab-label-can-simple-0/i);
+    fireEvent.doubleClick(ele);
     expect(ele).toBeInTheDocument();
   });
 });

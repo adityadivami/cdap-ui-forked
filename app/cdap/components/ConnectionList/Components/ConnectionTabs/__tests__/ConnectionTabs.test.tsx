@@ -182,13 +182,12 @@ describe('Should test whether handleChange function is triggered or not', () => 
         tabsData={mockTabsTestData}
         handleChange={handleChange}
         value="apple"
-        // index={1}
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
         columnIndex={0}
       />
     );
-    const ele = screen.getAllByTestId(/connections-tab-button/i);
+    const ele = screen.getAllByTestId(/connections-tab-column0-item0/i);
     fireEvent.click(ele[0]);
     expect(handleChange).toHaveBeenCalled();
   });
@@ -204,7 +203,6 @@ describe('Should test whether handleChange function is triggered or not', () => 
               tabsData={mockTabsTestData}
               handleChange={handleChange}
               value="apple"
-              // index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
               columnIndex={0}
@@ -213,7 +211,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
         </Switch>
       </Router>
     );
-    const ele = screen.getAllByTestId(/connections-tab-button/i);
+    const ele = screen.getAllByTestId(/connections-tab-column0-item0/i);
     fireEvent.click(ele[0]);
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
@@ -226,19 +224,18 @@ describe('Should test whether handleChange function is triggered or not', () => 
         <Switch>
           <Route>
             <ConnectionTabs
-              tabsData={mockTabsDataWithBrowse}
               handleChange={handleChange}
               value="apple"
-              // index={2}
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
               columnIndex={0}
+              tabsData={mockTabsDataWithBrowse}
             />
           </Route>
         </Switch>
       </Router>
     );
-    const ele = screen.getAllByTestId(/connections-tab-button/i);
+    const ele = screen.getAllByTestId(/connections-tab-column0-item0/i);
     fireEvent.click(ele[0]);
     expect(handleChange).toHaveBeenCalledTimes(1);
   });

@@ -84,10 +84,10 @@ export default function({
   if ([0, 1].includes(columnIndex) || connectorType.canBrowse) {
     return (
       <TabLabelCanBrowse
-        label={columnIndex === 0 ? connectorType.displayName : connectorType.name}
-        count={columnIndex === 0 ? connectorType.count : undefined}
+        label={columnIndex === 0 ? connectorType?.displayName : connectorType?.name}
+        count={columnIndex === 0 ? connectorType?.count : undefined}
         columnIndex={columnIndex}
-        icon={connectorType.icon}
+        icon={connectorType?.icon}
         dataTestID={dataTestID}
       />
     );
