@@ -15,12 +15,17 @@
  */
 
 import React from 'react';
-import { UnderLine } from 'components/DrawerWidget/iconStore';
-import { IDrawerWidgetHeadingProps } from 'components/DrawerWidget/types';
-import { DrawerHeadWrapper } from 'components/common/BoxContainer';
+import { UnderLine } from 'components/DrawerWidget/IconStore/underline';
 import { HeadFont } from 'components/common/TypographyText';
+import { Box } from '@material-ui/core';
+import styled from 'styled-components';
 
-export default function({ headingText }: IDrawerWidgetHeadingProps) {
+const DrawerHeadWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
+
+export default function({ headingText }: { headingText: string }) {
   return (
     <DrawerHeadWrapper>
       <HeadFont component="p" data-testid="drawer-heading">

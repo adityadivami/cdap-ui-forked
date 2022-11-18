@@ -14,22 +14,48 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Container, Drawer } from '@material-ui/core';
 import React from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
 import { IDrawerWidgetProps } from 'components/DrawerWidget/types';
-import { BackIcon } from 'components/DrawerWidget/iconStore';
-import {
-  BackIconBox,
-  DrawerContainerInnerFlex,
-  FlexWrapper,
-  FlexAlignCenter,
-  PointerBox,
-  DrawerContainerBox,
-} from 'components/common/BoxContainer';
+import { BackIcon } from 'components/DrawerWidget/IconStore/backIcon';
+import { FlexAlignCenter, PointerBox } from 'components/common/BoxContainer';
 import { VerticalDividerBox } from 'components/common/Divider';
-import { DrawerWidgetComponent } from 'components/common/Drawer';
+import styled from 'styled-components';
+
+const FlexWrapper = styled(Box)`
+  display: flex;
+`;
+
+const SimpleBox = styled(Box)`
+  display: block;
+`;
+
+const DrawerContainerBox = styled(Container)`
+  width: 460px;
+  height: 100%;
+  padding-left: 30px;
+`;
+
+const DrawerContainerInnerFlex = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+`;
+
+const BackIconBox = styled(Box)`
+  cursor: pointer;
+  margin-right: 10px;
+`;
+
+const DrawerWidgetComponent = styled(Drawer)`
+  & .MuiDrawer-paper {
+    top: 46px;
+    height: calc(100vh - 47px);
+  }
+`;
 
 export default function({
   headingText,
@@ -40,10 +66,11 @@ export default function({
   closeClickHandler,
   showBackIcon,
   anchor,
+  dataTestId,
 }: IDrawerWidgetProps) {
   return (
     <DrawerWidgetComponent anchor={anchor ? anchor : 'right'} open={openDrawer}>
-      <DrawerContainerBox role="presentation">
+      <DrawerContainerBox role="presentation" data-testid={dataTestId}>
         <DrawerContainerInnerFlex>
           <FlexAlignCenter>
             {showBackIcon && (
@@ -55,7 +82,7 @@ export default function({
           </FlexAlignCenter>
           <FlexWrapper>
             {headerActionTemplate && (
-              <Box data-testid="header-action-template">{headerActionTemplate}</Box>
+              <SimpleBox data-testid="header-action-template">{headerActionTemplate}</SimpleBox>
             )}
             {showDivider && <VerticalDividerBox data-testid="show-divider-box" />}
             <PointerBox>

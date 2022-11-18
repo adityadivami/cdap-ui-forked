@@ -25,7 +25,7 @@ import {
   IDataQualityItem,
   ITransformationComponentValues,
 } from 'components/AddTransformation/types';
-import { getDataQuality } from 'components/AddTransformation/CircularProgressBar/utils';
+import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
 import {
   multipleColumnSelected,
   ADD_TRANSFORMATION_PREFIX,
@@ -42,7 +42,12 @@ import { getDirective } from 'components/AddTransformation/utils';
 import { transformationComponentDefaultValues } from 'components/AddTransformation/constants';
 import TransformationContent from 'components/TransformationComponents';
 import { TRANSFORMATION_COMPONENTS } from 'components/TransformationComponents/constants';
-import { Divider } from '@material-ui/core';
+import { Box, Divider } from '@material-ui/core';
+import styled from 'styled-components';
+
+const CountWidgetWrapper = styled(Box)`
+  padding: 10px 0;
+`;
 
 export default function({
   transformationDataType,
@@ -59,6 +64,7 @@ export default function({
   const [transformationComponentValues, setTransformationComponentsValue] = useState<
     ITransformationComponentValues
   >(transformationComponentDefaultValues);
+
 
   const closeClickHandler = () => {
     onCancel();
@@ -128,10 +134,13 @@ export default function({
         headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.addTransformation`)}
         openDrawer={drawerStatus}
         closeClickHandler={closeClickHandler}
+        dataTestId="add-transformation-drawer"
       >
         <AddTransformationWrapper>
           <AddTransformationBodyWrapper>
-            <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
+            <CountWidgetWrapper>
+              <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
+            </CountWidgetWrapper>
             <Divider />
             <FunctionNameWidget transformationName={transformationName} />
             <SelectColumnsWidget
@@ -168,6 +177,7 @@ export default function({
         openDrawer={columnsPopup}
         showBackIcon={true}
         closeClickHandler={closeSelectColumnsPopupWithoutColumn}
+        dataTestId="select-column-drawer"
       >
         <AddTransformationWrapper>
           <AddTransformationBodyWrapper>
@@ -182,10 +192,9 @@ export default function({
             />
           </AddTransformationBodyWrapper>
           <AddTransformationButton
-            variant="contained"
             disabled={enableDoneButton()}
             color="primary"
-            data-testid="button_apply"
+            data-testid="button_done"
             onClick={closeSelectColumnsPopup}
           >
             {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}

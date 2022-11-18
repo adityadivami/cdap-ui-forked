@@ -18,20 +18,41 @@ import T from 'i18n-react';
 import { multipleColumnSelected } from 'components/AddTransformation/constants';
 import { ISelectColumnsWidgetProps } from 'components/AddTransformation/SelectColumnsWidget/types';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/AddTransformation/constants';
-import {
-  TransformationNameTextInfoWrapper,
-  TransformationNameHeadWrapper,
-  TransformationNameBox,
-} from 'components/common/BoxContainer';
 import { SubHeadBoldFont, NormalFont } from 'components/common/TypographyText';
-import { TickIcon } from 'components/AddTransformation/iconStore';
+import { TickIcon } from 'components/AddTransformation/IconStore/tickIcon';
 import { SelectColumnButton } from 'components/common/ButtonWidget';
+import styled from 'styled-components';
 
-export default function({
+const TransformationNameBox = styled.section`
+  padding: 15px 0;
+  border-bottom: 1px solid #DADCE0;
+`;
+
+const TransformationNameHeadWrapper = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const TransformationNameTextInfoWrapper = styled.section`
+  display: flex;
+  align-items: center;
+  padding: 10px 0 0;
+`;
+
+
+export default function ({
   selectedColumns,
   transformationName,
   handleSelectColumn,
 }: ISelectColumnsWidgetProps) {
+
+  let selectButtonText =
+    multipleColumnSelected?.filter((el) => el.value === transformationName).length > 0
+      ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`).toString()
+      : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString()
+
+
   const singleColumnSelect = (
     <>
       <TransformationNameHeadWrapper>
@@ -59,9 +80,7 @@ export default function({
           disabled={false}
           data-testid="select-column-button"
         >
-          {multipleColumnSelected?.filter((el) => el.value === transformationName).length > 0
-            ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`).toString()
-            : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString()}
+          {selectButtonText}
         </SelectColumnButton>
       )}
     </>

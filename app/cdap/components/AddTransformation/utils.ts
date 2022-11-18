@@ -13,20 +13,47 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import { ITransformationComponentValues } from './types';
+import { IHeaderNamesList } from './types';
+
 export const getDirective = (
   functionName: string,
-  columnSelected: string,
+  selectedColumnName: string,
   transformationComponentValues: ITransformationComponentValues
 ) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-    return `set-type :${columnSelected} ${functionName}`;
+    return `set-type :${selectedColumnName} ${functionName}`;
   } else if (functionName === 'customTransform') {
-    return `set-column :${columnSelected} ${transformationComponentValues.customInput}`;
-  } else if (functionName === 'customTransform') {
-    return `set-column :${columnSelected} ${transformationComponentValues.customInput}`;
+    return `set-column :${selectedColumnName} ${transformationComponentValues.customInput}`;
   } else {
     return null;
   }
+};
+
+export const getColumnsSupportedType = (
+  transformationDataType: string[],
+  columnsList: IHeaderNamesList[]
+) => {
+  return transformationDataType?.length > 0 && transformationDataType?.includes('all')
+    ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
+    : columnsList?.filter((columnDetail: IHeaderNamesList) => {
+        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+        });
+      });
+};
+
+export const getFilteredColumn = (
+  transformationDataType: string[],
+  columnsList: IHeaderNamesList[]
+) => {
+  return transformationDataType?.length > 0 && transformationDataType?.includes('all')
+    ? columnsList
+    : columnsList?.filter((columnDetail: IHeaderNamesList) => {
+        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+        });
+      });
 };

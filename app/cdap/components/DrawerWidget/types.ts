@@ -25,8 +25,5 @@ export interface IDrawerWidgetProps {
   closeClickHandler: () => void;
   showBackIcon?: boolean;
   anchor?: 'bottom' | 'left' | 'right' | 'top';
-}
-
-export interface IDrawerWidgetHeadingProps {
-  headingText?: string;
+  dataTestId: string;
 }

@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Divider, Box } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const ShortDivider = styled(Divider)`

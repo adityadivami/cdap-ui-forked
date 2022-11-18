@@ -40,6 +40,9 @@ export const AddTransformationButton = styled(Button)`
   &.Mui-disabled {
     background: ${grey[200]};
   }
+  &.Mui-disabled {
+    background: ${grey[300]};
+  }
 `;
 
 export const SelectColumnButton = styled(Button)`

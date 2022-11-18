@@ -129,3 +129,7 @@ export interface ITransformationComponentType {
   type: string;
   component: (props) => JSX.Element;
 }
+
+export interface IType {
+  [key: string]: string | number;
+}
