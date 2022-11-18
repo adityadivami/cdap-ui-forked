@@ -14,21 +14,19 @@
  * the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import FunctionNameWidget from "../index";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import FunctionNameWidget from '../index';
 
-describe("It should test FunctionNameWidget Component", () => {
-  it("Should render the FunctionNameWidget Component", () => {
-    const container = render(
-      <FunctionNameWidget transformationName={"uppercase"} />
-    );
+describe('It should test FunctionNameWidget Component', () => {
+  it('Should render the FunctionNameWidget Component', () => {
+    const container = render(<FunctionNameWidget transformationName={'uppercase'} />);
     expect(container).toBeDefined();
   });
 
-  it("Should have text content as uppercase", () => {
-    render(<FunctionNameWidget transformationName={"uppercase"} />);
-    const functionNameElement = screen.getByTestId("selected-function-name");
-    expect(functionNameElement).toHaveTextContent("uppercase");
+  it('Should have text content as uppercase', () => {
+    render(<FunctionNameWidget transformationName={'uppercase'} />);
+    const functionNameElement = screen.getByTestId('selected-function-name');
+    expect(functionNameElement).toHaveTextContent('uppercase');
   });
 });
