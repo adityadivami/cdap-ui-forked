@@ -67,7 +67,6 @@ export const useStyles = makeStyles({
     fontStyle: 'normal',
     fontWeight: 400,
     fontSize: 15,
-    lineHeight: 26,
     letterSpacing: 0.46,
     color: '#FFFFFF',
     alignSelf: 'flex-end',
@@ -82,7 +81,7 @@ export const useStyles = makeStyles({
     textAlign: 'right',
   },
   bodyWrapper: {
-    minHeight:433,
+    minHeight: 433,
     paddingTop: 6,
   },
   panelbody: {
