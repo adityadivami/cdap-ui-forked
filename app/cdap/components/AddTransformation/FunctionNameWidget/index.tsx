@@ -50,10 +50,9 @@ export default function ({ transformationName }: { transformationName: string })
   return (
     <TransformationNameBox>
       <TransformationNameHeadWrapper>
-        <SubHeadBoldFont
-          component="p"
-          data-testid="function-name-head"
-        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}</SubHeadBoldFont>
+        <SubHeadBoldFont component="p" data-testid="function-name-head">
+          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.function`)}
+        </SubHeadBoldFont>
         {TickIcon}
       </TransformationNameHeadWrapper>
       <TransformationNameTextInfoWrapper>

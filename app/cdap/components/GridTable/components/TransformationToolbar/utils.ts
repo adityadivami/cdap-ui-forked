@@ -13,7 +13,7 @@ import {
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
 import { TOOLBAR_ICONS_LABEL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 import T from 'i18n-react';
-import ReplayIcon from '@material-ui/icons/Replay';
+import { OTHER_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/otherOptions';
 
 export const nestedMenuOptions = [
   {
@@ -77,7 +77,7 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: [],
+    options: OTHER_OPTIONS,
     icon: OtherIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.otherIcon`).toString(),
     toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.otherIcon`).toString(),

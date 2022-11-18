@@ -15,11 +15,18 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
+import { ITransformationComponentValues } from './types';
 import { IHeaderNamesList } from './types';
 
-export const getDirective = (functionName: string, selectedColumnName: string) => {
+export const getDirective = (
+  functionName: string,
+  selectedColumnName: string,
+  transformationComponentValues: ITransformationComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
+  } else if (functionName === 'customTransform') {
+    return `set-column :${selectedColumnName} ${transformationComponentValues.customInput}`;
   } else {
     return null;
   }

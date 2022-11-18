@@ -14,9 +14,10 @@
  * the License.
  */
 
-export const DATA_TYPE_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels.datatype';
-export const TOOLBAR_ICONS_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels';
-export const OTHER_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels.other';
+import CustomTransform from 'components/TransformationComponents/CustomTransform';
+export const TRANSFORMATION_COMPONENTS = [
+  {
+    type: 'customTransform',
+    component: CustomTransform,
+  },
+];

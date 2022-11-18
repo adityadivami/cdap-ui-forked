@@ -45,3 +45,7 @@ export const multipleColumnSelected: IMultipleSelectedFunctionDetail[] = [
 
 export const SELECT_COLUMN_LIST_PREFIX = 'features.WranglerNewUI.GridPage.selectColumnListPanel';
 export const ADD_TRANSFORMATION_PREFIX = 'features.WranglerNewUI.GridPage.addTransformationPanel';
+
+export const transformationComponentDefaultValues = {
+  customInput: '',
+};

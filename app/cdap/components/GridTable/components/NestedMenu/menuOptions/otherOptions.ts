@@ -14,9 +14,14 @@
  * the License.
  */
 
-export const DATA_TYPE_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels.datatype';
-export const TOOLBAR_ICONS_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels';
-export const OTHER_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels.other';
+import T from 'i18n-react';
+import { OTHER_LABEL_PREFIX } from 'components/GridTable/components/NestedMenu/menuOptions/constants';
+import { TOOLBAR_ICONS_LABEL_ALL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
+
+export const OTHER_OPTIONS = [
+  {
+    value: 'customTransform',
+    label: T.translate(`${OTHER_LABEL_PREFIX}.customTransform`).toString(),
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+  },
+];

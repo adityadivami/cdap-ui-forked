@@ -14,9 +14,29 @@
  * the License.
  */
 
-export const DATA_TYPE_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels.datatype';
-export const TOOLBAR_ICONS_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels';
-export const OTHER_LABEL_PREFIX =
-  'features.WranglerNewUI.GridPage.transformations.options.labels.other';
+import styled from 'styled-components';
+import { Input } from '@material-ui/core';
+
+export const InputComponent = styled(Input)`
+  &.MuiInput-underline {
+    width: 100%;
+    &:before {
+      border: none;
+    }
+    &:hover:not(.Mui-disabled):before {
+      border: none;
+    }
+    &:after {
+      border: none;
+    }
+    &.MuiInput-underline.Mui-disabled:before {
+      border-bottom-style: unset;
+    }
+  }
+  &.MuiInput-input {
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+`;

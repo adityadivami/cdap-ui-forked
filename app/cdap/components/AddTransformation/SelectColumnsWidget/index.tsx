@@ -56,25 +56,22 @@ export default function ({
   const singleColumnSelect = (
     <>
       <TransformationNameHeadWrapper>
-        <SubHeadBoldFont
-          component="p"
-          data-testid="select-column-title"
-        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}</SubHeadBoldFont>
+        <SubHeadBoldFont component="p" data-testid="select-column-title">
+          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
+        </SubHeadBoldFont>
         {selectedColumns.length > 0 && TickIcon}
       </TransformationNameHeadWrapper>
       <TransformationNameTextInfoWrapper padding="10px 0">
-        <NormalFont
-          component="p"
-          data-testid="select-column-subtitle"
-        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}</NormalFont>
+        <NormalFont component="p" data-testid="select-column-subtitle">
+          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}
+        </NormalFont>
       </TransformationNameTextInfoWrapper>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
           <TransformationNameTextInfoWrapper padding="5px 0">
-            <NormalFont
-              component="p"
-              data-testid="selected-function-name"
-            >{`${index + 1}. ${item.label}`}</NormalFont>
+            <NormalFont component="p" data-testid="selected-function-name">{`${index + 1}. ${
+              item.label
+            }`}</NormalFont>
           </TransformationNameTextInfoWrapper>
         ))
       ) : (
