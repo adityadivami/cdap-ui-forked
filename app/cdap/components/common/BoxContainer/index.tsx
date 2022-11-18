@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const FlexJustifyAlignCenter = styled(Box)`
@@ -44,4 +44,25 @@ export const FunctionBoxWrapper = styled(Box)`
 
 export const SearchBoxWrapper = styled(Box)`
   min-width: 490px;
+`;
+
+export const PointerBox = styled(Box)`
+  cursor: pointer;
+`;
+
+export const FlexAlignCenter = styled(Box)`
+  display: flex;
+  align-items: center;
+`;
+
+export const AddTransformationWrapper = styled(Container)`
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+`;
+
+export const AddTransformationBodyWrapper = styled(Box)`
+  height: calc(100% - 40px);
+  overflow-y: auto;
 `;

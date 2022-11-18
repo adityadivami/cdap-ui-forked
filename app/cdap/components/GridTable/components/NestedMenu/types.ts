@@ -25,3 +25,17 @@ export interface INestedMenuProps {
   open?: boolean;
   handleMenuOpenClose?: (title?: string) => void;
 }
+
+interface IOptions {
+  value: string;
+  label: string;
+  options?: IOptions[];
+  supported_dataType: string[];
+}
+
+export interface IMenuOptions {
+  value: string;
+  label: string;
+  options?: IOptions[];
+  supported_dataType: string[];
+}

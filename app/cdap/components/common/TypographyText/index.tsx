@@ -57,3 +57,13 @@ export const MenuHeadText = styled(Typography)`
   font-weight: 600;
   padding: 0px 20px;
 `;
+
+export const TableCellText = styled(Typography)`
+  font-weight: 400;
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+`;

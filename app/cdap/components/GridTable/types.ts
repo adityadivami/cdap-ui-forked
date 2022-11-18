@@ -15,25 +15,42 @@
  */
 
 export interface IParams {
-  context: string | number | IRecords;
+  context: string;
   workspaceId: string;
+  namespace?: string;
+  wid?: string;
+  connectorType?: string;
 }
 
 export interface IRecords {
-  [key: string]: string | number | IRecords | boolean;
+  wid?: string;
+  payload?: IParams;
+  body?: string;
+  path?: string;
+  canBrowse?: boolean;
+  name?: string;
 }
 export interface IPercentOfDataTypeValues {
   [key: string]: number;
 }
-
+interface IGeneralObjectRecord {
+  [key: string]: number | string;
+}
+interface IGeneral {
+  general?: IGeneralObjectRecord;
+  types?: IGeneralObjectRecord;
+}
+export interface IStatistics {
+  [key: string]: IGeneral;
+}
 interface ISummary {
-  statistics: IRecords;
+  statistics: IStatistics;
   validations: IRecords;
 }
 
 export interface IExecuteAPIResponse {
   headers: string[];
-  types: IRecords;
+  types: IGridCellData;
   values: IRecords[];
   summary: ISummary;
   message: string;
@@ -42,9 +59,19 @@ export interface IExecuteAPIResponse {
 export interface IHeaderNamesList {
   name: string;
   label: string;
-  type: Array<string | number | IRecords | boolean>;
+  type: string[];
 }
 
-export interface IObject {
-  [key: string]: string | number | IRecords | boolean;
+export interface IGridCellData {
+  [key: string]: string;
+}
+
+export interface IMissingList {
+  name: string;
+  values: Record<string, string>;
+}
+
+export interface IAddTransformationItem {
+  option: string;
+  supportedDataType: string[];
 }

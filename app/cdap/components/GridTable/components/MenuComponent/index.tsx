@@ -19,7 +19,7 @@ import MenuItemComponent from 'components/GridTable/components/MenuItemComponent
 import { IMenuComponentProps } from 'components/GridTable/components/MenuComponent/types';
 import { MenuComponent } from 'components/common/MenuContainer';
 
-export default function ({
+export default function({
   anchorElement,
   menuOptions,
   setAnchorElement,
