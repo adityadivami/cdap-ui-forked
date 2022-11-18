@@ -83,6 +83,7 @@ describe("It should test the AddTransformatio Component", () => {
       "drawer-widget-close-round-icon"
     )[0];
     fireEvent.click(drawerCloseButton);
+    expect(drawerCloseButton).toBeInTheDocument();
   });
 
   it("Trigger handleApply() , closeSelectColumnsPopupWithoutColumn ", () => {
@@ -103,4 +104,5 @@ describe("It should test the AddTransformatio Component", () => {
     fireEvent.click(doneBtn);
     const applyBtn = screen.getByTestId("apply-step-button");
     fireEvent.click(applyBtn);
+    expect(applyBtn).toBeInTheDocument()
   });
