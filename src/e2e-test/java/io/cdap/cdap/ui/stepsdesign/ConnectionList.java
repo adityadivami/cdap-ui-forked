@@ -24,7 +24,6 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -46,6 +45,7 @@ public class ConnectionList {
             System.err.println("error:" + e);
         }
     }
+
     @Then("Verify if the Wrangle button is visible")
     public void clickOnFirstTabOfTheSecondColumn() {
         try {
@@ -53,7 +53,8 @@ public class ConnectionList {
                 WebElement ele = Helper.locateElementByTestId("connections-tab-column" + i + "-item0");
                 if (ElementHelper.isElementDisplayed(ele)) {
                     System.out.println("element found at index = " + i);
-//                    WebElement button = Helper.locateElementByTestId("connection-tab-label-" + i + "0");
+                    // WebElement button = Helper.locateElementByTestId("connection-tab-label-" + i
+                    // + "0");
                     Actions action = new Actions(SeleniumDriver.getDriver());
                     action.moveToElement(ele).build().perform();
                     Helper.waitSeconds(10);
@@ -61,8 +62,7 @@ public class ConnectionList {
                         Helper.isElementExists("wrangle-text");
                         System.out.println("wrangle text is visible");
                         break;
-                    }
-                 else {
+                    } else {
                         ele.click();
                         System.out.println("folder clicked");
                     }
@@ -102,11 +102,13 @@ public class ConnectionList {
             System.err.println("error:" + e);
         }
     }
+
     @Then("Click on Search icon")
     public void clickOnSearchIcon() {
         WaitHelper.waitForPageToLoad();
         ElementHelper.clickOnElement(Helper.locateElementByTestId("search-icon-1"));
     }
+
     @Then("Enter file name {string} and verify the result")
     public void verifyFileResult(String fileName) {
         WaitHelper.waitForPageToLoad();
@@ -116,6 +118,7 @@ public class ConnectionList {
         String text = Helper.locateElementByTestId("connections-tab-column1-item0").getText();
         Assert.assertEquals(fileName, text);
     }
+
     @Then("Click on clear icon")
     public void clickClearIcon() {
         ElementHelper.clickOnElement(Helper.locateElementByTestId("clear-search-icon-1"));
