@@ -28,6 +28,7 @@ describe('It should render ', () => {
         columnDetail={undefined}
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
+        columnIndex={0}
       />
     );
 
@@ -43,6 +44,7 @@ describe('It should render ', () => {
         columnDetail={undefined}
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
+        columnIndex={0}
       />
     );
 

@@ -38,20 +38,20 @@ import {
   IHeaderNamesList,
   IMissingList,
   IParams,
-  IRecords,
   IGridCellData,
   IStatistics,
   IAddTransformationItem,
   IGridParams,
-  IRequestBody,
   IApiPayload,
+  IRecords,
 } from 'components/GridTable/types';
 import { convertNonNullPercent } from 'components/GridTable/utils';
 import AddTransformation from 'components/AddTransformation';
 import { defaultMissingItem } from 'components/GridTable/defaultValues';
-import { transformationOptions } from 'components/GridTable/constants';
-import { getAPIRequestPayload } from 'components/GridTable/services';
-import PositionedSnackbar from 'components/Snackbar';
+import { getAPIRequestPayload, applyDirectives } from 'components/GridTable/services';
+import Snackbar from 'components/Snackbar';
+
+const transformationOptions = ['undo', 'redo'];
 
 export default function GridTable() {
   const params = useParams() as IParams;
@@ -75,8 +75,8 @@ export default function GridTable() {
     supportedDataType: [],
   });
   const [dataQuality, setDataQuality] = useState<IStatistics>();
-  const [snackbar, setSnackbar] = useState({
-    open: false,
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+  const [snackbarData, setSnackbarData] = useState({
     description: '',
     isSuccess: false,
   });
@@ -221,25 +221,17 @@ export default function GridTable() {
     });
   };
 
-  const applyDirectives = (directive: string) => {
+  const addDirectives = (directive: string) => {
     setLoading(true);
     if (directive) {
       const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
-      executeAPICall(apiPayload);
-    } else {
-      setLoading(false);
-      setAddTransformationFunction({
-        option: '',
-        supportedDataType: [],
-      });
+      addDirectiveAPICall(apiPayload);
     }
   };
 
-  const executeAPICall = (apiPayload: IApiPayload) => {
-    const payload: IRecords = apiPayload.payload;
-    const requestBody: IRequestBody = apiPayload.requestBody;
+  const addDirectiveAPICall = (apiPayload: IApiPayload) => {
     const gridParams: IGridParams = apiPayload.gridParams;
-    MyDataPrepApi.execute(payload, requestBody).subscribe(
+    applyDirectives(wid, gridParams.directives).subscribe(
       (response) => {
         DataPrepStore.dispatch({
           type: DataPrepActions.setWorkspace,
@@ -251,27 +243,19 @@ export default function GridTable() {
             ...gridParams,
           },
         });
-        setLoading(false);
-        setGridData(response);
-        setAddTransformationFunction({
-          option: '',
-          supportedDataType: [],
-        });
-        setSnackbar({
-          open: true,
-          description: 'Transformation applied successfully',
+        setSnackbarIsOpen(true);
+        setSnackbarData({
+          description: 'Directive applied successfully',
           isSuccess: true,
         });
+        setLoading(false);
+        setGridData(response);
       },
       (err) => {
         setLoading(false);
-        setAddTransformationFunction({
-          option: '',
-          supportedDataType: [],
-        });
-        setSnackbar({
-          open: true,
-          description: 'Transformation failed to apply',
+        setSnackbarIsOpen(true);
+        setSnackbarData({
+          description: 'Directive cannot applied',
           isSuccess: false,
         });
       }
@@ -351,21 +335,21 @@ export default function GridTable() {
             });
           }}
           applyTransformation={(directive: string) => {
-            applyDirectives(directive);
+            addDirectives(directive);
           }}
         />
       )}
-      {snackbar.open && (
-        <PositionedSnackbar
-          handleCloseError={() =>
-            setSnackbar({
-              open: false,
+      {snackbarIsOpen && (
+        <Snackbar
+          handleCloseError={() => {
+            setSnackbarIsOpen(false);
+            setSnackbarData({
               description: '',
               isSuccess: false,
-            })
-          }
-          description={snackbar.description}
-          isSuccess={snackbar.isSuccess}
+            });
+          }}
+          description={snackbarData.description}
+          isSuccess={snackbarData.isSuccess}
         />
       )}
       {loading && (
