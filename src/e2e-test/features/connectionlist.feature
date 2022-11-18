@@ -22,12 +22,11 @@ Feature: ConnectionList
     Then Click on the Connector type card with "<testId>"
     Then Click on the Add connection button
     Then Click on the Cross icon
-    Then Check if the infography is displayed
     Then Click on Search icon
-    Then Enter file name " Dhanunjay" and verify the result
+    Then Enter file name " divami " and verify the result
     Then Click on clear icon
     Then Verify if the Wrangle button is visible
 
     Examples:
       | testId |
-      | postgresql |
+      | file |

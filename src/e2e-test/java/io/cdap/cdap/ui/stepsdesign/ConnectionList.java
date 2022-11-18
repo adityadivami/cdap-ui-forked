@@ -24,8 +24,11 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ConnectionList {
     @Given("Navigate to Home Page")
@@ -50,6 +53,9 @@ public class ConnectionList {
     public void clickOnFirstTabOfTheSecondColumn() {
         try {
             for (int i = 1; i <= 10; i++) {
+                WebDriverWait wait= new WebDriverWait(SeleniumDriver.getDriver(),10);
+                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector
+                        ("connections-tab-column" + i + "-item0")));
                 WebElement ele = Helper.locateElementByTestId("connections-tab-column" + i + "-item0");
                 if (ElementHelper.isElementDisplayed(ele)) {
                     System.out.println("element found at index = " + i);
@@ -97,7 +103,8 @@ public class ConnectionList {
     public void checkIfTheInfographyIsDisplayed() {
         try {
             WaitHelper.waitForPageToLoad();
-            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("home-infographic-icon")));
+            Assert.assertTrue(ElementHelper.isElementDisplayed
+                    (Helper.locateElementByTestId("home-infographic-icon")));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -105,22 +112,38 @@ public class ConnectionList {
 
     @Then("Click on Search icon")
     public void clickOnSearchIcon() {
-        WaitHelper.waitForPageToLoad();
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("search-icon-1"));
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("search-icon-1"));
+        } catch (Exception e) {
+            System.err.println("error" + e);
+        }
     }
 
     @Then("Enter file name {string} and verify the result")
     public void verifyFileResult(String fileName) {
-        WaitHelper.waitForPageToLoad();
-        WebElement ele = Helper.locateElementByTestId("search-field-1");
-        ele.click();
-        ele.sendKeys(fileName);
-        String text = Helper.locateElementByTestId("connections-tab-column1-item0").getText();
-        Assert.assertEquals(fileName, text);
+        try {
+            WaitHelper.waitForPageToLoad();
+            WebElement ele = Helper.locateElementByTestId("search-field-1");
+            ele.click();
+            ele.sendKeys(fileName);
+            WebDriverWait wait = new WebDriverWait(SeleniumDriver.getDriver(), 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
+                    ("connections-tab-column1-item0")));
+            String text = Helper.locateElementByTestId("connections-tab-column1-item0").getText();
+            Assert.assertEquals(fileName, text);
+        } catch (Exception e) {
+            System.err.println("error" + e);
+        }
     }
 
     @Then("Click on clear icon")
     public void clickClearIcon() {
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("clear-search-icon-1"));
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("clear-search-icon-1"));
+        } catch (Exception e) {
+            System.err.println("error" + e);
+        }
     }
 }
