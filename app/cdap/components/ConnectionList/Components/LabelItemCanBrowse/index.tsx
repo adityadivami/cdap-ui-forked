@@ -58,7 +58,6 @@ const LabelContainerBox = styled(Box)`
 const LabelConatainer = styled(Box)`
   display: flex;
   align-items: center;
-  gap: 4px;
   height: 24px;
 `;
 
