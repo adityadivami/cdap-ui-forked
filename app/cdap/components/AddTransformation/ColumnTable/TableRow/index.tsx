@@ -47,6 +47,12 @@ const SelectColumnTableBodyCell = styled(TableCell)`
   }
 `;
 
+const SelectColumnInputTableBodyCell = styled(SelectColumnTableBodyCell)`
+  &.MuiTableCell-body {
+    padding-left: 11px;
+  }
+`;
+
 export default function({
   onSingleSelection,
   selectedColumns,
@@ -59,7 +65,7 @@ export default function({
 }: ITableRowProps) {
   return (
     <SelectColumnTableRow key={`column-${columnIndex}`}>
-      <SelectColumnTableBodyCell>
+      <SelectColumnInputTableBodyCell>
         <InputWidget
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
@@ -69,7 +75,7 @@ export default function({
           onMultipleSelection={onMultipleSelection}
           columnIndex={columnIndex}
         />
-      </SelectColumnTableBodyCell>
+      </SelectColumnInputTableBodyCell>
       <SelectColumnTableBodyCell>
         <TableCellText component="div">{columnDetail.label}</TableCellText>
         <TableCellText component="div">{columnDetail.type}</TableCellText>

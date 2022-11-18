@@ -53,11 +53,11 @@ const SelectColumnTableRow = styled(TableRow)`
 const SelectColumnTableHeadCell = styled(TableCell)`
   &.MuiTableCell-head {
     padding: 0;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.15px;
-    color: ${grey[700]};
+    color: ${grey[900]};
     border-bottom: none !important;
   }
 `;
@@ -119,7 +119,7 @@ export default function({
             </SelectColumnTableHeadCell>
             <SelectColumnTableHeadCell data-testid="panel-columns">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
-              {`(${totalColumnCount})`}
+              {` (${columns.length})`}
             </SelectColumnTableHeadCell>
             <SelectColumnTableHeadCell data-testid="panel-values">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}

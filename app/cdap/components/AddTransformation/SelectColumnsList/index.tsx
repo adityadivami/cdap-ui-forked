@@ -29,6 +29,7 @@ import { Box, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import styled from 'styled-components';
 import { grey } from '@material-ui/core/colors';
+import { getColumnsSupportedType, getFilteredColumn } from 'components/AddTransformation/utils';
 
 const SearchIconComponent = styled(SearchIcon)`
   &.MuiSvgIcon-root {
@@ -82,10 +83,12 @@ export default function({
   transformationName,
   selectedColumns,
 }: ISelectColumnsListProps) {
-  
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const ref = useRef(null);
+
+  const columnsAsPerType = getColumnsSupportedType(transformationDataType, columnsList);
+  const filteredColumnsOnType = getFilteredColumn(transformationDataType, columnsList);
 
   useEffect(() => {
     const multiSelect: IMultipleSelectedFunctionDetail[] = multipleColumnSelected?.filter(
@@ -96,16 +99,8 @@ export default function({
     if (multiSelect.length) {
       setIsSingleSelection(false);
     }
+    setColumns(filteredColumnsOnType);
   }, []);
-
-  const columnsAsPerType: IHeaderNamesList[] | string[] =
-    transformationDataType?.length > 0 && transformationDataType?.includes('all')
-      ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
-      : columns?.filter((columnDetail: IHeaderNamesList) => {
-          return transformationDataType?.some((dataTypeCollection: string | string[]) => {
-            return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
-          });
-        });
 
   const onSingleSelection = (column: IHeaderNamesList) => {
     setSelectedColumns([column]);
@@ -143,14 +138,14 @@ export default function({
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue: IHeaderNamesList[] = columnsList.length
-        ? columnsList.filter((columnDetail: IHeaderNamesList) =>
+      const columnValue: IHeaderNamesList[] = filteredColumnsOnType.length
+        ? filteredColumnsOnType.filter((columnDetail: IHeaderNamesList) =>
             columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
           )
         : [];
       columnValue?.length ? setColumns(columnValue) : setColumns([]);
     } else {
-      setColumns(columnsList);
+      setColumns(filteredColumnsOnType);
     }
   };
 
@@ -187,11 +182,11 @@ export default function({
           onSingleSelection={onSingleSelection}
           handleDisableCheckbox={handleDisableCheckbox}
           onMultipleSelection={onMultipleSelection}
-          columns={columns}
+          columns={columnsAsPerType.length === 0 ? [] : columns}
           transformationDataType={transformationDataType}
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
-          totalColumnCount={columnsList?.length}
+          totalColumnCount={columnsAsPerType?.length}
           setSelectedColumns={setSelectedColumns}
           transformationName={transformationName}
         />

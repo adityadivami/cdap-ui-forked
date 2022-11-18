@@ -23,7 +23,11 @@ import T from 'i18n-react';
 import { ICalculateProps } from 'components/TransformationComponents/Calculate/types';
 import NewColumnInput from 'components/common/TransformationInputComponents/NewColumnInput';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
-import { CalculateWrapper, FlexAlignCenter, CalculateSignWrapper } from 'components/common/BoxContainer';
+import {
+  CalculateWrapper,
+  FlexAlignCenter,
+  CalculateSignWrapper,
+} from 'components/common/BoxContainer';
 import { CALCULATE_PREFIX } from 'components/TransformationComponents/constants';
 import { FormGroupFullWidthComponent } from 'components/common/FormComponents';
 
@@ -36,7 +40,7 @@ export default function({
   const [copyToNewColumn, setCopyToNew] = useState<boolean>(false);
   const [column, setColumnName] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
-  const UI_INPUT =
+  const CALCULATE_UI_INPUT =
     CALCULATE_OPTIONS?.length > 0
       ? CALCULATE_OPTIONS.filter((option) => option?.value === transformationName)
       : [];
@@ -59,22 +63,22 @@ export default function({
 
   return (
     <CalculateWrapper>
-        {UI_INPUT?.length > 0 &&
-          UI_INPUT.map((item) =>
-            item.value === 'CHARCOUNT' ? (
-              <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
-            ) : item.inputRequired ? (
+      {CALCULATE_UI_INPUT?.length > 0 &&
+        CALCULATE_UI_INPUT.map((item) =>
+          item.value === 'CHARCOUNT' ? (
+            <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
+          ) : (
+            item.inputRequired && (
               <Box>
                 <SubHeadBoldFont>
-                  {
-                    item?.sign
-                      ? `${T.translate(`${CALCULATE_PREFIX}.enterValueTo`)} ${transformationName}`
-                      : ''
-                  }
+                  {item?.sign &&
+                    `${T.translate(`${CALCULATE_PREFIX}.enterValueTo`)} ${transformationName}`}
                 </SubHeadBoldFont>
                 <FlexAlignCenter>
                   {item?.sign && (
-                      <CalculateSignWrapper><SubHeadBoldFont>{item?.sign}</SubHeadBoldFont></CalculateSignWrapper>
+                    <CalculateSignWrapper>
+                      <SubHeadBoldFont>{item?.sign}</SubHeadBoldFont>
+                    </CalculateSignWrapper>
                   )}
                   <FormGroupFullWidthComponent>
                     <FormInputFieldComponent
@@ -85,16 +89,15 @@ export default function({
                         onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
                           setCustomInput(e.target.value),
                         color: 'primary',
-                        placeholder: 'Enter value, e.g. 3',
+                        placeholder: `${T.translate(`${CALCULATE_PREFIX}.examplePlaceholder`)}`,
                       }}
                     />
                   </FormGroupFullWidthComponent>
                 </FlexAlignCenter>
               </Box>
-            ) : (
-              <></>
             )
-          )}
+          )
+        )}
       {transformationName !== 'CHARCOUNT' && (
         <FormGroup>
           <InputCheckbox

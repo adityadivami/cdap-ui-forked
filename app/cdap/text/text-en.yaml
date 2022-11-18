@@ -3546,6 +3546,7 @@ features:
           destinationColumn: Destination Column
           enterValueTo: Please enter a value to
           nameNewColumn:  Name new column 
+          examplePlaceholder: Enter value, e.g. 3
     Snackbar:
       labels:
         datasetSuccess: Dataset loaded successfully 

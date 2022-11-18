@@ -16,21 +16,25 @@
 
 import { DATATYPE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/datatypeOptions';
 import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
-import { ITransformationComponentValues } from 'components/AddTransformation/types';
+import {
+  IHeaderNamesList,
+  ITransformationComponentValues,
+} from 'components/AddTransformation/types';
+
 export const getDirective = (
   functionName: string,
-  columnSelected: string,
+  selectedColumnName: string,
   directiveComponentValues: ITransformationComponentValues
 ) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-    return `set-type :${columnSelected} ${functionName}`;
+    return `set-type :${selectedColumnName} ${functionName}`;
   } else if (CALCULATE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     const calculateOption = CALCULATE_OPTIONS.filter(
       (eachOption) => eachOption.value === functionName
     );
     if (calculateOption.length) {
       const value = calculateOption[0]?.directive(
-        columnSelected,
+        selectedColumnName,
         directiveComponentValues.customInput,
         directiveComponentValues.copyColumnName,
         directiveComponentValues.copyToNewColumn
@@ -40,4 +44,22 @@ export const getDirective = (
   } else {
     return null;
   }
+};
+
+export const getColumnsSupportedType = (transformationDataType, columnsList) => {
+  return transformationDataType?.length > 0 && transformationDataType?.includes('all')
+    ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
+    : columnsList?.filter((columnDetail: IHeaderNamesList) => {
+        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+        });
+      });
+};
+
+export const getFilteredColumn = (transformationDataType, columnsList) => {
+  return columnsList?.filter((columnDetail: IHeaderNamesList) => {
+    return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+      return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+    });
+  });
 };
