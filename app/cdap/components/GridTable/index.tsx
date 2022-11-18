@@ -250,6 +250,10 @@ export default function GridTable() {
         });
         setLoading(false);
         setGridData(response);
+        setAddTransformationFunction({
+          option: '',
+          supportedDataType: [],
+        });
       },
       (err) => {
         setLoading(false);
@@ -257,6 +261,10 @@ export default function GridTable() {
         setSnackbarData({
           description: 'Directive cannot applied',
           isSuccess: false,
+        });
+        setAddTransformationFunction({
+          option: '',
+          supportedDataType: [],
         });
       }
     );
