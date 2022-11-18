@@ -385,11 +385,11 @@ export default function GridTable() {
           openDirectivePanel={directivePanelIsOpen}
         />
       )}
-      <FooterPanel
-        recipeStepsCount={0}
-        gridMetaInfo={tableMetaInfo}
-        setDirectivePanelIsOpen={setDirectivePanelIsOpen}
-      />
+        <FooterPanel
+          recipeStepsCount={0}
+          gridMetaInfo={tableMetaInfo}
+          setDirectivePanelIsOpen={setDirectivePanelIsOpen}
+        />
       {snackbarIsOpen && (
         <Snackbar
           handleCloseError={() => {

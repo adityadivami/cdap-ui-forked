@@ -58,7 +58,6 @@ const ColumnViewBox = styled(Box)`
 const DirectivesBox = styled(Box)`
   text-align: center;
   gap: 8px;
-  width: 9.5%;
   height: 40px;
   background: linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%);
   border-left: 1px solid rgba(57, 148, 255, 0.4);
@@ -81,7 +80,6 @@ const ReciepeStepsBox = styled(Box)`
   text-align: center;
   padding: 9.5px 12px;
   gap: 8px;
-  width: 13.5%;
   height: 40px;
   background: linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%);
   border-left: 1px solid rgba(57, 148, 255, 0.4);
@@ -92,8 +90,6 @@ const ReciepeStepsBox = styled(Box)`
 `;
 
 const TabsWrapper = styled(Box)`
-  display: flex;
-  flex-direction: row;
   justify-content: flex-start;
   align-items: space-between;
   background-color: #f3f6f9;
@@ -102,6 +98,8 @@ const TabsWrapper = styled(Box)`
   width: 100%;
   position: absolute;
   bottom: 54px;
+  display: grid;
+  grid-template-columns: 7% 57% 10% 10% 15%;
 `;
 
 const TransformatedIconButton = styled(IconButton)`
@@ -113,7 +111,6 @@ const ZoomBox = styled(Box)`
   justify-content: center;
   text-align: center;
   align-items: center;
-  width: 10.5%;
   height: 40px;
   background: linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%);
   border-left: 1px solid rgba(57, 148, 255, 0.4);
@@ -121,7 +118,7 @@ const ZoomBox = styled(Box)`
 `;
 
 const LargeBox = styled(Box)`
-  width: 65%;
+  width: 55%;
   padding: 0px 32px;
 `;
 
