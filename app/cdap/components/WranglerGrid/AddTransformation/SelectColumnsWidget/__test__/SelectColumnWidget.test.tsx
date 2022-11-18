@@ -24,7 +24,7 @@ describe('It should test SelectColumnsWidget Component', () => {
     const container = render(
       <SelectColumnsWidget
         selectedColumns={mockSelectedColumns}
-        functionName={'uppercase'}
+        transformationName={'uppercase'}
         handleSelectColumn={jest.fn()}
       />
     );
@@ -35,7 +35,7 @@ describe('It should test SelectColumnsWidget Component', () => {
     const container = render(
       <SelectColumnsWidget
         selectedColumns={[]}
-        functionName={'uppercase'}
+        transformationName={'uppercase'}
         handleSelectColumn={jest.fn()}
       />
     );
