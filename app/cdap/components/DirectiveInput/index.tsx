@@ -74,7 +74,7 @@ const LabelComponent = styled.label`
 const DirectiveBox = styled(Box)`
   background-color: #ffffff;
   position: fixed;
-  bottom: 50px;
+  bottom: 93px;
   width: 100%;
 `;
 
@@ -82,7 +82,7 @@ const CloseIconButton = styled(IconButton)`
   color: #ffffff;
 `;
 
-export default function ({
+export default function({
   columnNamesList,
   onDirectiveInputHandler,
   onClose,
@@ -143,18 +143,22 @@ export default function ({
           directiveColumns.length >= 1 &&
           directiveColumnCount === 0 &&
           prev + 1 > directiveColumns.length + appliedDirective.length
-        ) {  // This condition means if we can select multiple column for directive
+        ) {
+          // This condition means if we can select multiple column for directive
           onDirectiveInputHandler(inputDirective);
         } else if (
           isDirectiveSet &&
           directiveColumns.length === 2 &&
           directiveColumnCount === 2 &&
           prev + 1 > directiveColumns.length + appliedDirective.length
-        ) { // This condition means if we can select atleast two column for directive
+        ) {
+          // This condition means if we can select atleast two column for directive
           onDirectiveInputHandler(inputDirective);
-        } else if (prev + 1 > directiveColumns.length + appliedDirective.length) { // This condition means if we can select single column from list and any number of postfix can be entered
+        } else if (prev + 1 > directiveColumns.length + appliedDirective.length) {
+          // This condition means if we can select single column from list and any number of postfix can be entered
           onDirectiveInputHandler(inputDirective);
-        } else if (isDirectivePaste) { // If we are copy pasting directive this condition is executed
+        } else if (isDirectivePaste) {
+          // If we are copy pasting directive this condition is executed
           onDirectiveInputHandler(inputDirective);
         }
         return prev + 1;
@@ -164,48 +168,48 @@ export default function ({
 
   return (
     <DirectiveBox data-testid="directive-input-main-container">
-        <InputParentWrapper data-testid="directive-input-parent">
-          <InputPanel
-            inputDirective={inputDirective}
-            onSearchItemClick={(value) => handleDirectiveChange(value)}
-            setDirectivesList={setDirectivesList}
-            getDirectiveSyntax={(activeResults: IDirectiveUsage[], isDirectiveSelected) => {
-              setIsDirectiveSet(isDirectiveSelected);
-              setDirectiveUsageList(activeResults);
-            }}
-            isDirectiveSet={isDirectiveSet}
-            columnNamesList={columnNamesList}
-          />
-          <DirectiveUsageWrapper>
-            {directiveUsageList.length === 1 &&
-              directiveUsageList.map((directiveUsage: IDirectiveUsage) => (
-                <DirectiveUsage key={directiveUsage.uniqueId} directiveUsage={directiveUsage} />
-              ))}
-            <SearchBarWrapper>
-              <InputWrapper>
-                <LabelComponent
-                  htmlFor="directive-input-search"
-                  data-testid="select-directive-input-label"
-                >
-                  $
-                </LabelComponent>
-                <InputComponent
-                  id="directive-input-search" // is is needed for catching keyboard events while navigating through search list
-                  autoComplete="OFF"
-                  placeholder={T.translate(`${PREFIX}.inputDirective`).toString()}
-                  value={inputDirective}
-                  onChange={(event) => handleDirectiveChange(event.target.value)}
-                  ref={directiveRef}
-                  onKeyDown={handleKeyDownEvent}
-                  data-testid="select-directive-input-search"
-                />
-              </InputWrapper>
-              <CloseIconButton data-testid="close-directive-panel" onClick={onClose}>
-                <CloseOutlinedIcon data-testid="close-icon" />
-              </CloseIconButton>
-            </SearchBarWrapper>
-          </DirectiveUsageWrapper>
-        </InputParentWrapper>
+      <InputParentWrapper data-testid="directive-input-parent">
+        <InputPanel
+          inputDirective={inputDirective}
+          onSearchItemClick={(value) => handleDirectiveChange(value)}
+          setDirectivesList={setDirectivesList}
+          getDirectiveSyntax={(activeResults: IDirectiveUsage[], isDirectiveSelected) => {
+            setIsDirectiveSet(isDirectiveSelected);
+            setDirectiveUsageList(activeResults);
+          }}
+          isDirectiveSet={isDirectiveSet}
+          columnNamesList={columnNamesList}
+        />
+        <DirectiveUsageWrapper>
+          {directiveUsageList.length === 1 &&
+            directiveUsageList.map((directiveUsage: IDirectiveUsage) => (
+              <DirectiveUsage key={directiveUsage.uniqueId} directiveUsage={directiveUsage} />
+            ))}
+          <SearchBarWrapper>
+            <InputWrapper>
+              <LabelComponent
+                htmlFor="directive-input-search"
+                data-testid="select-directive-input-label"
+              >
+                $
+              </LabelComponent>
+              <InputComponent
+                id="directive-input-search" // is is needed for catching keyboard events while navigating through search list
+                autoComplete="OFF"
+                placeholder={T.translate(`${PREFIX}.inputDirective`).toString()}
+                value={inputDirective}
+                onChange={(event) => handleDirectiveChange(event.target.value)}
+                ref={directiveRef}
+                onKeyDown={handleKeyDownEvent}
+                data-testid="select-directive-input-search"
+              />
+            </InputWrapper>
+            <CloseIconButton data-testid="close-directive-panel" onClick={onClose}>
+              <CloseOutlinedIcon data-testid="close-icon" />
+            </CloseIconButton>
+          </SearchBarWrapper>
+        </DirectiveUsageWrapper>
+      </InputParentWrapper>
     </DirectiveBox>
   );
 }
