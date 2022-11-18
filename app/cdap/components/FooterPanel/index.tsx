@@ -99,7 +99,7 @@ const TabsWrapper = styled(Box)`
   position: absolute;
   bottom: 54px;
   display: grid;
-  grid-template-columns: 7% 57% 10% 10% 15%;
+  grid-template-columns: 7% 58% 10% 10% 15%;
 `;
 
 const TransformatedIconButton = styled(IconButton)`
