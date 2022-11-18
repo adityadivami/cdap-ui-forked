@@ -32,3 +32,6 @@ Feature: Add Transformations
     Then Click on the Select column button
     Then Click on the Search icon
     Then Enter column name "Body_1" in the field
+    Then Click on the radio button
+    Then Click on the Done button
+    Then Click on the Apply Step button

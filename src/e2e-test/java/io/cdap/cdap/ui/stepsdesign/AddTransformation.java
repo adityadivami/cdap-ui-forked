@@ -124,9 +124,42 @@ public class AddTransformation {
     }
     @Then("Enter column name {string} in the field")
     public void enterNameOfColumn(String columnName) {
-        WebElement ele = Helper.locateElementByTestId("");
-        ele.click();
-        ele.sendKeys(columnName);
+        try {
+            WebElement ele = Helper.locateElementByTestId("input_id");
+            ele.click();
+            ele.sendKeys(columnName);
+        } catch (Exception e) {
+            System.err.println("error" + e);
+        }
+    }
 
+    @Then("Click on the radio button")
+    public void clickOnTheRadioButton() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("radio-input-1"));
+        } catch (Exception e) {
+            System.err.println("error" + e);
+        }
+    }
+
+    @Then("Click on the Done button")
+    public void clickOnTheDoneButton() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("button_done"));
+        } catch (Exception e) {
+            System.err.println("error" + e);
+        }
+    }
+
+    @Then("Click on the Apply Step button")
+    public void clickOnTheApplyStepButton() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
+        } catch (Exception e) {
+            System.err.println("error" + e);
+        }
     }
 }
