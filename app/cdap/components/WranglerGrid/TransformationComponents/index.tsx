@@ -14,9 +14,32 @@
  * the License.
  */
 
-import { ITransformationContentParams } from 'components/GridTable/types';
 import React from 'react';
 import { CALCULATE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/calculateOptions';
+import {
+  IHeaderNamesList,
+  ITransformationComponentValues,
+} from 'components/WranglerGrid/AddTransformation/types';
+import { IStatistics } from 'components/GridTable/types';
+
+export interface ITransformationContentParams {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponent: ITransformationComponentType[];
+  transformationComponentValues: ITransformationComponentValues;
+  transformationName: string;
+  transformationDataType: string[];
+  columnsList: IHeaderNamesList[];
+  missingItemsList: IStatistics;
+  onCancel: () => void;
+  applyTransformation: (directive: string) => void;
+}
+
+export interface ITransformationComponentType {
+  type: string;
+  component: (props) => JSX.Element;
+}
 
 export default function({
   transformationComponent,
@@ -29,6 +52,7 @@ export default function({
   const Component =
     transformationComponent.find((item) => item?.type === type)?.component ||
     CALCULATE_OPTIONS.find((item) => item?.value === transformationName)?.component;
+
   return (
     <Component
       transformationName={transformationName}

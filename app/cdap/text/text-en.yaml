@@ -3538,12 +3538,13 @@ features:
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
       transformationUI:
-        calculate:
-          columnExist: This column name already exist
-          copyToNewColumn: Copy to a new column
-          destinationColumn: Destination Column
-          enterValueTo: Please enter a value to
+        common: 
           nameNewColumn:  Name new column 
+          columnExist: This column name already exist
+          destinationColumn: Destination Column
+        calculate:
+          copyToNewColumn: Copy to a new column
+          enterValueTo: Please enter a value to
           examplePlaceholder: Enter value, e.g. 3
     Snackbar:
       labels:
