@@ -118,9 +118,6 @@ public class ConnectionList {
             WaitHelper.waitForPageToLoad();
             WebElement ele = Helper.locateElementByTestId("search-field-1");
             ele.sendKeys(fileName);
-            // WebDriverWait wait = new WebDriverWait(SeleniumDriver.getDriver(), 10);
-            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
-            // ("connections-tab-column1-item0")));
             String text = Helper.locateElementByTestId("connections-tab-column1-item0").getText();
             Assert.assertEquals(fileName, text);
         } catch (Exception e) {
