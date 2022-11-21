@@ -14,8 +14,6 @@
  * the License.
  */
 
-import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformation/types';
-
 export interface IParams {
   context: string;
   workspaceId: string;

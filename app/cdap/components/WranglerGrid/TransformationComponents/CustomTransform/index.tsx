@@ -18,7 +18,7 @@ import React, { useState, useEffect } from 'react';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import T from 'i18n-react';
 import LabelComponent from 'components/common/TransformationInputComponents/LabelInputComponent';
-import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformation/types';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 
 interface ICustomTransformationProps {
   setTransformationComponentsValue: React.Dispatch<

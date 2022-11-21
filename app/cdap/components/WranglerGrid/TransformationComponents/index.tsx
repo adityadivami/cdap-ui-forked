@@ -19,7 +19,7 @@ import React from 'react';
 import {
   IHeaderNamesList,
   ITransformationComponentValues,
-} from 'components/WranglerGrid/AddTransformation/types';
+} from 'components/WranglerGrid/AddTransformationPanel/types';
 
 export interface ITransformationContentParams {
   setTransformationComponentsValue: React.Dispatch<
