@@ -39,6 +39,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
+import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -56,6 +57,7 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -239,7 +241,16 @@ export default function GridTable() {
 
   return (
     <Box data-testid="grid-table-container">
-      <BreadCrumb datasetName={wid} />
+      {showBreadCrumb && <BreadCrumb datasetName={wid} />}
+      <ToolBarList
+        setShowBreadCrumb={setShowBreadCrumb}
+        showBreadCrumb={showBreadCrumb}
+        columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
+        submitMenuOption={(option, datatype) => {
+          return false;
+          // TODO: will integrate with add transformation panel later
+        }}
+      />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
