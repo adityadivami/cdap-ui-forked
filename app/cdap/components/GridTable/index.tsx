@@ -46,7 +46,7 @@ import { objectQuery } from 'services/helpers';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 import Snackbar from 'components/Snackbar';
 import { applyDirectives, getAPIRequestPayload } from './services';
-import AddTransformation from 'components/WranglerGrid/AddTransformation';
+import AddTransformationPanel from 'components/WranglerGrid/AddTransformationPanel';
 
 const transformationOptions = ['undo', 'redo'];
 
@@ -378,7 +378,7 @@ export default function GridTable() {
         </Table>
       )}
       {addTransformationFunction.option && (
-        <AddTransformation
+        <AddTransformationPanel
           transformationName={addTransformationFunction.option}
           transformationDataType={addTransformationFunction.supportedDataType}
           columnsList={headersNamesList}

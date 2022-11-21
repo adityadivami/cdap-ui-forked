@@ -14,7 +14,7 @@
  * the License.
  */
 
-export interface IParams {
+export interface IParams {components/WranglerGrid/AddTransformationPanel/types
   context: string;
   workspaceId: string;
 }
