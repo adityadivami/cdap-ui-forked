@@ -26,14 +26,14 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
 public class ViewFullChart {
-    @Given("Navigate to Home Page")
-    public void navigateToTheHomePage() {
+    @Given("Navigate to the Home Page")
+    public void navigateToHomePage() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
 
-    @Then("Click on the Data Explorations card")
-    public void clickOnTheDataExplorationCard() {
+    @Then("Click on the Ongoing Data Explorations card")
+    public void clickOnTheDataExplorationsCard() {
         try {
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
@@ -44,8 +44,8 @@ public class ViewFullChart {
         }
     }
 
-    @Then("Click on any column from grid table")
-    public void clickOnAnyColumnFromGridTable() {
+    @Then("Click on any column from the grid table")
+    public void clickOnAnyColumnFromTheGridTable() {
         try {
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("grid-header-cell-1"));

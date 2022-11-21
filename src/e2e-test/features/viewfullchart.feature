@@ -18,10 +18,10 @@
 Feature: ViewFullChart
 
   @ViewFullChart
-  Scenario : Go through the View Full Chart Functionality
-    Given Navigate to Home Page
-    Then Click on the Data Explorations card
-    Then Click on any column from grid table
+  Scenario: Go through the View Full Chart Functionality
+    Given Navigate to the Home Page
+    Then Click on the Ongoing Data Explorations card
+    Then Click on any column from the grid table
     Then Click on the View full chart button
     Then Verify if the user viewing the chart
     Then Click on the Close icon
