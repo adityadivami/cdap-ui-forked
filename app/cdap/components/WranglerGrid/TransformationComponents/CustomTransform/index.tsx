@@ -50,6 +50,9 @@ export default function({
           onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCustomExp(e.target.value),
           color: 'primary',
           placeholder: `${T.translate(`${PREFIX}.exampleCustomExpression`)}`,
+          inputProps: {
+            'data-testid': 'custom-input-value',
+          },
         }}
       />
     </FormGroup>
