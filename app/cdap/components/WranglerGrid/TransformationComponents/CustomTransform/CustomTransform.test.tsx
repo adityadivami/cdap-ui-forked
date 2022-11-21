@@ -15,14 +15,14 @@
  */
 
 import React from 'react';
-import TransformationContent from 'components/WranglerGrid/TransformationComponents';
-import { render, screen } from '@testing-library/react';
+import CustomTransform from 'components/WranglerGrid/TransformationComponents/index';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { TRANSFORMATION_COMPONENTS } from 'components/WranglerGrid/TransformationComponents/constants';
 
-describe('Test TransformationComponents', () => {
-  it('Should render TransformationComponent', () => {
-    const container = render(
-      <TransformationContent
+describe('Test CustomTransform component', () => {
+  it('Should render CustomTransform', () => {
+    render(
+      <CustomTransform
         setTransformationComponentsValue={jest.fn()}
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{ customInput: 'abc' }}
@@ -30,9 +30,20 @@ describe('Test TransformationComponents', () => {
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}
-        onCancel={jest.fn()}
-        applyTransformation={jest.fn()}
+        onCancel={function(): void {
+          throw new Error('Function not implemented.');
+        }}
+        applyTransformation={function(directive: string): void {
+          throw new Error('Function not implemented.');
+        }}
       />
     );
+
+    const parentElement = screen.getByTestId(/form-group-parent/i);
+    expect(parentElement).toBeInTheDocument();
+
+    const inputTextElement = screen.getByTestId(/custom-input-value/i);
+    fireEvent.change(inputTextElement, { target: { value: 'Test' } });
+    expect(inputTextElement).toBeInTheDocument();
   });
 });

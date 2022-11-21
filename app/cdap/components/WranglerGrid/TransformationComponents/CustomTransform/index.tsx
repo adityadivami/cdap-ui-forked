@@ -40,7 +40,7 @@ export default function({
   }, [customExp]);
 
   return (
-    <FormGroup>
+    <FormGroup data-testid="form-group-parent">
       <LabelComponent labelText={`${T.translate(`${PREFIX}.typeCustomExpression`)}`} />
       <FormInputFieldComponent
         formInputValue={customExp}

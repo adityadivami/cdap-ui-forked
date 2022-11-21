@@ -46,5 +46,4 @@ describe('Testing render TransformationToolbar component', () => {
     fireEvent.click(iconButtonElement[0]);
     expect(iconButtonElement[0]).toBeInTheDocument();
   });
-
 });
