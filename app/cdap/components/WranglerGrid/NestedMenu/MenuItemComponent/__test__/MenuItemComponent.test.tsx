@@ -29,7 +29,7 @@ describe('Testing Menu Item Component', () => {
     render(
       <MenuComponent item={dummyItem} index={0} onMenuClick={() => jest.fn()} columnType={'test'} />
     );
-    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    const parentElement = screen.getByTestId(/toolbar-icon-button-string/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
     expect(parentElement).toHaveClass(
@@ -47,9 +47,10 @@ describe('Testing Menu Item Component', () => {
     render(
       <MenuComponent item={dummyItem} index={0} onMenuClick={() => jest.fn()} columnType={''} />
     );
-    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    const parentElement = screen.getByTestId(/toolbar-icon-button-string/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
+
   });
   it('Should render the item list divider element', () => {
     const dummyItem = {
@@ -89,4 +90,5 @@ it('should render the heading element', () => {
 
   const headingElement = screen.getByTestId(/menu-item-heading/i);
   expect(headingElement).toHaveTextContent('test');
+
 });

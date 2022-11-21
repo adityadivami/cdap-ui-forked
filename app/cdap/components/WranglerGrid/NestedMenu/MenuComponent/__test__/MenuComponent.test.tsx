@@ -41,8 +41,5 @@ describe('Testing render FunctionNameToggle component', () => {
     const menuComponentParent = screen.getByTestId(/menu-component-parent/i);
     expect(menuComponentParent).toBeInTheDocument();
 
-    const test = screen.getByTestId(/menu-item-parent/i);
-    fireEvent.click(test);
-    expect(test).toBeInTheDocument();
   });
 });
