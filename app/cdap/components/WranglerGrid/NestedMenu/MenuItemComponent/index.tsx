@@ -70,7 +70,9 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         data-testid={`toolbar-icon-button-${item.value}`}
         id={`${item.value}`}
       >
-        <NormalFont component="div">{item.label}</NormalFont>
+        <NormalFont component="div" data-testid={`toolbar-icon-label-${item.value}`}>
+          {item.label}
+        </NormalFont>
         {item?.options?.length > 0 && menuArrowIcon}
       </MenuItem>
     );
