@@ -132,6 +132,7 @@ describe('Test ConnectionsTabs', () => {
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
         columnIndex={0}
+        index={undefined}
       />
     );
     const ele = screen.getByTestId(/connections-tabs-parent/i);
@@ -148,6 +149,7 @@ describe('Test ConnectionsTabs', () => {
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
         columnIndex={0}
+        index={undefined}
       />
     );
     const ele = screen.getByTestId(/connection-tabs/i);
@@ -164,6 +166,7 @@ describe('Test ConnectionsTabs', () => {
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
         columnIndex={0}
+        index={undefined}
       />
     );
     const ele = screen.getAllByTestId(/connections-tab-can-browse-label-0/i);
@@ -185,6 +188,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
         connectionId={undefined}
         setIsErrorOnNoWorkSpace={jest.fn()}
         columnIndex={0}
+        index={undefined}
       />
     );
     const ele = screen.getAllByTestId(/connections-tab-column0-item0/i);
@@ -206,6 +210,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
               connectionId={undefined}
               setIsErrorOnNoWorkSpace={jest.fn()}
               columnIndex={0}
+              index={undefined}
             />
           </Route>
         </Switch>
@@ -230,6 +235,7 @@ describe('Should test whether handleChange function is triggered or not', () => 
               setIsErrorOnNoWorkSpace={jest.fn()}
               columnIndex={0}
               tabsData={mockTabsDataWithBrowse}
+              index={undefined}
             />
           </Route>
         </Switch>
