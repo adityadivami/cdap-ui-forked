@@ -65,14 +65,11 @@ describe('Testing nested menu component', () => {
 
     const parentElement = screen.getByTestId(/nested-menu-parent-root/i);
     expect(parentElement).toBeInTheDocument();
-    expect(parentElement).toHaveClass(
-      'MuiPopover-root'
-    );
+    expect(parentElement).toHaveClass('MuiPopover-root');
 
-    const menuClickElement = screen.getAllByTestId(/toolbar-icon-button-test/i)
-    fireEvent.click(menuClickElement[0])
-    expect(menuClickElement[0]).toBeInTheDocument()
-
+    const menuClickElement = screen.getAllByTestId(/toolbar-icon-button-test/i);
+    fireEvent.click(menuClickElement[0]);
+    expect(menuClickElement[0]).toBeInTheDocument();
   });
 
   it('should test default render of nested menu with options as empty', () => {

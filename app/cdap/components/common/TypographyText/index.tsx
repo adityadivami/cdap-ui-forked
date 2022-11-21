@@ -22,6 +22,7 @@ export const NormalFont = styled(Typography)`
   color: ${grey[600]};
   font-size: 14px;
   font-weight: 400;
+  width: 100%;
 `;
 
 export const SubHeadNormalFont = styled(Typography)`
