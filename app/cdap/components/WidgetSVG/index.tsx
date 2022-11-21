@@ -14,22 +14,20 @@
  * the License.
  */
 
+import { Avatar } from '@material-ui/core';
+import ImageOutlined from '@material-ui/icons/ImageOutlined';
+import { IWidgetSVGProps } from 'components/WidgetSVG/types';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import WranglerHomeNew from 'components/WrangleHome/index';
-import { Route, Router, Switch } from 'react-router';
-import history from 'services/history';
+import styled from 'styled-components';
 
-test('renders Wrangler-Home-New component', () => {
-  render(
-    <Router history={history}>
-      <Switch>
-        <Route>
-          <WranglerHomeNew />
-        </Route>
-      </Switch>
-    </Router>
+const StyledImageOutlined = styled(ImageOutlined)`
+  font-size: 40px;
+`;
+
+export default function({ imageSource, label }: IWidgetSVGProps) {
+  return imageSource ? (
+    <Avatar src={imageSource} variant="square" data-testid={`widget-api-image-${label}`} />
+  ) : (
+    <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
   );
-  const ele = screen.getByTestId(/wrangler-home-new-parent/i);
-  expect(ele).toBeInTheDocument();
-});
+}

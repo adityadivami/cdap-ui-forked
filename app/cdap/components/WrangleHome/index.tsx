@@ -16,8 +16,10 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import LoadingSVG from 'components/shared/LoadingSVG';
-import React, { useState } from 'react';
+import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExploration from './Components/OngoingDataExploration';
 import WrangleCard from './Components/WrangleCard';
 import WrangleHomeTitle from './Components/WrangleHomeTitle';
@@ -42,12 +44,23 @@ export default function WranglerHome() {
       <Box>
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle title="Start data exploration" />
-          <Box className={classes.viewMore}>View More</Box>
+          <Box className={classes.viewMore}>
+            <Link
+              color="inherit"
+              to={`/ns/${getCurrentNamespace()}/datasources/Select Dataset`}
+              data-testid={'view-more-link'}
+            >
+              {T.translate('features.WranglerNewUI.HomePage.labels.common.viewAll')}
+            </Link>
+          </Box>
         </Box>
         <WrangleCard />
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle title="Continue ongoing data explorations, pick up where you left off" />
-          <Box className={classes.viewMore}>View More</Box>
+          <Box className={classes.viewMore}>
+            {' '}
+            {T.translate('features.WranglerNewUI.HomePage.labels.common.viewAll')}
+          </Box>
         </Box>
         <OngoingDataExploration />
       </Box>
