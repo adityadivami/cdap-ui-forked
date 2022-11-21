@@ -69,7 +69,8 @@ public class ViewFullChart {
     public void verifyIfTheUserViewingTheChart() {
         try {
             WaitHelper.waitForPageToLoad();
-            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("view-full-chart-modal-content")));
+            Assert.assertTrue(ElementHelper.isElementDisplayed
+                    (Helper.locateElementByTestId("view-full-chart-modal-content")));
         } catch (Exception e) {
             System.err.println("error" + e);
         }
