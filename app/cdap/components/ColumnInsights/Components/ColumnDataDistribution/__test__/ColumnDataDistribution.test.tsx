@@ -27,7 +27,11 @@ describe('It Should test Column Data Distribution Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ColumnDataDistribution graphData={mockGraphData} />
+            <ColumnDataDistribution
+              graphData={mockGraphData}
+              columnName={'body_1'}
+              distinctValues={20}
+            />
           </Route>
         </Switch>
       </Router>
@@ -43,7 +47,11 @@ describe('It Should test Column Data Distribution Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ColumnDataDistribution graphData={mockGraphData} />
+            <ColumnDataDistribution
+              graphData={mockGraphData}
+              columnName={'body_1'}
+              distinctValues={20}
+            />
           </Route>
         </Switch>
       </Router>
@@ -59,7 +67,11 @@ describe('It Should test Column Data Distribution Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <ColumnDataDistribution graphData={mockGraphData} />
+            <ColumnDataDistribution
+              graphData={mockGraphData}
+              columnName={'body_1'}
+              distinctValues={20}
+            />
           </Route>
         </Switch>
       </Router>
