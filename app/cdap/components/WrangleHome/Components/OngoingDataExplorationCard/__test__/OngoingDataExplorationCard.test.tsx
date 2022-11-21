@@ -17,7 +17,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import OngoingDataExplorationCard from 'components/WrangleHome/Components/OngoingDataExplorationCard/index';
-import { mockItems, mockItemsWithPercentage, mockItemsPercentageData } from 'components/WrangleHome/Components/OngoingDataExplorationCard/mock/mock';
+import {
+  mockItems,
+  mockItemsWithPercentage,
+  mockItemsPercentageData,
+} from 'components/WrangleHome/Components/OngoingDataExplorationCard/mock/mock';
 
 describe('Test Ongoing Data Explrations Component', () => {
   it('Should render OngoingDataExplorationCard component', () => {
@@ -26,7 +30,7 @@ describe('Test Ongoing Data Explrations Component', () => {
     expect(ele[0]).toBeInTheDocument();
   });
 
-  it('Should check whether percentageStyleRed is applied to ongoing-data-card-percentage ' , () => {
+  it('Should check whether percentageStyleRed is applied to ongoing-data-card-percentage ', () => {
     render(<OngoingDataExplorationCard item={mockItemsWithPercentage} />);
     const ele = screen.getByTestId(/ongoing-data-card-percentage/i);
     expect(ele).toHaveStyle('color: rgb(229, 57, 53)');

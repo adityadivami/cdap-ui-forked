@@ -38,12 +38,9 @@ public class AddTransformation {
         try {
             WaitHelper.waitForPageToLoad();
             WebElement ele = Helper.locateElementByTestId("ongoing-data-explore-card-link-0");
-            String homeText = ele.getText();
-            System.out.println(homeText);
             ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-            System.out.println("The user is on grid page");
         } catch (Exception e) {
             System.err.println("error" + e);
         }
@@ -54,7 +51,6 @@ public class AddTransformation {
         try {
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-button-Structure"));
-            System.out.println("The structure icon clicked");
 
         } catch (Exception e) {
             System.err.println("error" + e);
@@ -65,7 +61,6 @@ public class AddTransformation {
     public void clickOnTheChangeDataType() {
         try {
             ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-changeDatatype"));
-            System.out.println("The changedatatype icon clicked");
         } catch (Exception e) {
             System.err.println("error" + e);
         }
@@ -76,7 +71,6 @@ public class AddTransformation {
         try {
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-string"));
-            System.out.println("The string  clicked");
         } catch (Exception e) {
             System.err.println("error" + e);
         }
@@ -87,7 +81,6 @@ public class AddTransformation {
         try {
             WaitHelper.waitForPageToLoad();
             Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("add-transformation-drawer")));
-            System.out.println("User is on the transformation panel");
         } catch (Exception e) {
             System.err.println("error" + e);
         }
@@ -97,7 +90,7 @@ public class AddTransformation {
     public void clickOnTheCrossIcon() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("drawer-widget-close-round-icon"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("add-transformation-drawer-close"));
         } catch (Exception e) {
             System.err.println("error" + e);
         }
@@ -141,6 +134,14 @@ public class AddTransformation {
         } catch (Exception e) {
             System.err.println("error" + e);
         }
+    }
+    @Then("Click on the cross icon of select column")
+    public void crossIconOfSelectColumn() {
+    try {
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("select-column-drawer-close"));
+    } catch (Exception e) {
+        System.err.println("error" + e);
+    }
     }
 
     @Then("Click on the Done button")
