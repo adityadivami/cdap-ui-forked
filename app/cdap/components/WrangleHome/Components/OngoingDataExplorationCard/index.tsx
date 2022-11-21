@@ -34,7 +34,7 @@ export default function OngoingDataExplorationCard({ item }) {
   });
 
   return (
-    <Grid container className={classes.gridContainer}>
+    <Grid container className={classes.gridContainer} data-testid='wrangler-home-ongoing-data-exploration-card'>
       {item.map((eachItem, index) => {
         switch (eachItem.type) {
           case 'iconWithText':
