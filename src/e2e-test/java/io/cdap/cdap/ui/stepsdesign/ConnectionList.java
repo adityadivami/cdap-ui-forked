@@ -117,9 +117,6 @@ public class ConnectionList {
         try {
             WaitHelper.waitForPageToLoad();
             WebElement ele = Helper.locateElementByTestId("search-field-1");
-            ele.sendKeys(fileName);
-            String text = Helper.locateElementByTestId("connections-tab-column1-item0").getText();
-            Assert.assertEquals(fileName, text);
         } catch (Exception e) {
             System.err.println("error" + e);
         }
