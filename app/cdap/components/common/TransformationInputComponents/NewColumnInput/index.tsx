@@ -20,7 +20,7 @@ import LabelComponent from 'components/common/TransformationInputComponents/Labe
 import T from 'i18n-react';
 import { ErrorFont } from 'components/common/TypographyText';
 import { NewColumnWrapper } from 'components/common/BoxContainer';
-import { CALCULATE_PREFIX } from 'components/TransformationComponents/constants';
+import { CALCULATE_PREFIX } from 'components/WranglerGrid/TransformationComponents/constants';
 import { FormGroupFullWidthComponent } from 'components/common/FormComponents';
 
 interface INewColumnProps {

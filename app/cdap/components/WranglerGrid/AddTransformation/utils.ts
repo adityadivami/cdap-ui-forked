@@ -15,11 +15,34 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
-import { IHeaderNamesList } from 'components/WranglerGrid/AddTransformation/types';
+import {
+  IHeaderNamesList,
+  IMultipleSelectedFunctionDetail,
+  ITransformationComponentValues,
+} from 'components/WranglerGrid/AddTransformation/types';
+import { CALCULATE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/calculateOptions';
+import { multipleColumnSelected } from 'components/WranglerGrid/AddTransformation/constants';
 
-export const getDirective = (functionName: string, selectedColumnName: string) => {
+export const getDirective = (
+  functionName: string,
+  selectedColumnName: string,
+  transformationComponentValues: ITransformationComponentValues
+) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
+  } else if (CALCULATE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
+    const calculateOption = CALCULATE_OPTIONS.filter(
+      (eachOption) => eachOption.value === functionName
+    );
+    if (calculateOption.length) {
+      const value = calculateOption[0]?.directive(
+        selectedColumnName,
+        transformationComponentValues.customInput,
+        transformationComponentValues.copyColumnName,
+        transformationComponentValues.copyToNewColumn
+      );
+      return value;
+    }
   } else {
     return null;
   }
@@ -43,4 +66,27 @@ export const getFilteredColumn = (transformationDataType, columnsList) => {
           return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
         });
       });
+};
+
+export const enableDoneButton = (
+  transformationName: string,
+  selectedColumns: IHeaderNamesList[]
+) => {
+  if (
+    multipleColumnSelected.filter(
+      (functionNameDetail: IMultipleSelectedFunctionDetail) =>
+        functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
+    )?.length
+  ) {
+    return selectedColumns?.length === 2 ? false : true;
+  } else if (
+    multipleColumnSelected.filter(
+      (functionNameDetail: IMultipleSelectedFunctionDetail) =>
+        functionNameDetail.value === transformationName && functionNameDetail.isMoreThanTwo
+    )?.length
+  ) {
+    return selectedColumns?.length >= 1 ? false : true;
+  } else {
+    return selectedColumns?.length >= 1 ? false : true;
+  }
 };

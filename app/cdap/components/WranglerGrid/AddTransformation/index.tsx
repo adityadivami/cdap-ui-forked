@@ -23,6 +23,7 @@ import {
   IHeaderNamesList,
   IMultipleSelectedFunctionDetail,
   IDataQualityItem,
+  ITransformationComponentValues,
 } from 'components/WranglerGrid/AddTransformation/types';
 import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
 import {
@@ -37,9 +38,12 @@ import { AddTransformationButton } from 'components/common/ButtonWidget';
 import FunctionNameWidget from 'components/WranglerGrid/AddTransformation/FunctionNameWidget';
 import SelectColumnsWidget from 'components/WranglerGrid/AddTransformation/SelectColumnsWidget';
 import SelectedColumnCountWidget from 'components/WranglerGrid/AddTransformation/SelectedColumnCountWidget';
-import { getDirective } from 'components/WranglerGrid/AddTransformation/utils';
+import { enableDoneButton, getDirective } from 'components/WranglerGrid/AddTransformation/utils';
 import { Box, Divider } from '@material-ui/core';
 import styled from 'styled-components';
+import TransformationContent from 'components/WranglerGrid/TransformationComponents';
+import { transformationComponentDefaultValues } from 'components/WranglerGrid/AddTransformation/constants';
+import { CALCULATE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/calculateOptions';
 
 const CountWidgetWrapper = styled(Box)`
   padding: 10px 0;
@@ -57,6 +61,9 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
+  const [transformationComponentValues, setTransformationComponentsValue] = useState<
+    ITransformationComponentValues
+  >(transformationComponentDefaultValues);
 
   const closeClickHandler = () => {
     onCancel();
@@ -79,7 +86,11 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive: string = getDirective(transformationName, selectedColumns[0].label);
+    const directive = getDirective(
+      transformationName,
+      selectedColumns[0].label,
+      transformationComponentValues
+    );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
@@ -90,27 +101,15 @@ export default function({
       columnsList
     );
     setDataQualityValue(getPreparedDataQuality);
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      columnNames: columnsList?.length > 0 ? columnsList.map(({ label }) => label) : [],
+    });
   }, []);
 
-  const enableDoneButton = () => {
-    if (
-      multipleColumnSelected.filter(
-        (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
-      )?.length
-    ) {
-      return selectedColumns?.length === 2 ? false : true;
-    } else if (
-      multipleColumnSelected.filter(
-        (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-          functionNameDetail.value === transformationName && functionNameDetail.isMoreThanTwo
-      )?.length
-    ) {
-      return selectedColumns?.length >= 1 ? false : true;
-    } else {
-      return selectedColumns?.length >= 1 ? false : true;
-    }
-  };
+  const isComponentAvailable = CALCULATE_OPTIONS.some(
+    (item) => item?.value?.toLowerCase() === transformationName.toLowerCase()
+  );
 
   return (
     <Fragment>
@@ -132,6 +131,19 @@ export default function({
               selectedColumns={selectedColumns}
               transformationName={transformationName}
             />
+            {isComponentAvailable && (
+              <TransformationContent
+                setTransformationComponentsValue={setTransformationComponentsValue}
+                transformationComponent={[]}
+                transformationComponentValues={transformationComponentValues}
+                transformationName={transformationName}
+                transformationDataType={transformationDataType}
+                columnsList={columnsList}
+                missingItemsList={missingItemsList}
+                onCancel={onCancel}
+                applyTransformation={applyTransformation}
+              />
+            )}
           </AddTransformationBodyWrapper>
           <AddTransformationButton
             disabled={selectedColumns?.length ? false : true}
@@ -163,7 +175,7 @@ export default function({
             />
           </AddTransformationBodyWrapper>
           <AddTransformationButton
-            disabled={enableDoneButton()}
+            disabled={enableDoneButton(transformationName, selectedColumns)}
             color="primary"
             data-testid="button_done"
             onClick={closeSelectColumnsPopup}

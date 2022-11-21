@@ -19,9 +19,7 @@ import { default as React, useState } from 'react';
 import NestedMenu from 'components/WranglerGrid/NestedMenu';
 import { ITransformationToolBarProps } from 'components/WranglerGrid/TransformationToolbar/types';
 import { Divider, LongDivider } from 'components/WranglerGrid/TransformationToolbar/iconStore';
-import FunctionToggle from 'components/WranglerGrid/FunctionNameToggle';
 import { nestedMenuOptions } from 'components/WranglerGrid/TransformationToolbar/utils';
-import ExpandButton from 'components/common/ExpandButton';
 import { NormalFont } from 'components/common/TypographyText';
 import {
   LastDividerBox,
@@ -134,12 +132,6 @@ export default function({
           {/* TODO Search functionality UI component will be added here */}
         </SearchBoxWrapper>
       </ToolBarInnerWrapper>
-      <FunctionToggle setShowName={setShowName} showName={showName} />
-      <ExpandButton
-        open={showBreadCrumb}
-        onClick={() => setShowBreadCrumb(!showBreadCrumb)}
-        dataTestId="toolbar-header-toggler"
-      />
     </ToolBarIconWrapper>
   );
 }

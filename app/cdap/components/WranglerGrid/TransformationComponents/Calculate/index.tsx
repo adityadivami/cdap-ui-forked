@@ -22,7 +22,7 @@ import InputCheckbox from 'components/common/TransformationInputComponents/Input
 import T from 'i18n-react';
 import { ICalculateProps } from 'components/WranglerGrid/TransformationComponents/Calculate/types';
 import NewColumnInput from 'components/common/TransformationInputComponents/NewColumnInput';
-import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
+import { SubHeadBoldFont } from 'components/common/TypographyText';
 import { FlexAlignCenter } from 'components/common/BoxContainer';
 import { CALCULATE_PREFIX } from 'components/WranglerGrid/TransformationComponents/constants';
 import { FormGroupFullWidthComponent } from 'components/common/FormComponents';
