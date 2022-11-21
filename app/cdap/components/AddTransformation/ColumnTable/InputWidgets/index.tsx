@@ -26,7 +26,7 @@ export default function({
   columnDetail,
   handleDisableCheckbox,
   onMultipleSelection,
-  columnIndex
+  columnIndex,
 }: IInputWidgetProps) {
   return (
     <>

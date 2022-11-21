@@ -14,14 +14,14 @@
  * the License.
  */
 
-import {
-  FormControl,
-  Radio,
-  RadioGroup,
-} from '@material-ui/core';
+import { FormControl, Radio, RadioGroup } from '@material-ui/core';
 import React from 'react';
-import {FormControlLabelComponent, FormControlLabelRadioComponent, FormGroupComponent} from 'components/common/FormComponents';
-import {InputComponent} from 'components/common/InputFieldComponent';
+import {
+  FormControlLabelComponent,
+  FormControlLabelRadioComponent,
+  FormGroupComponent,
+} from 'components/common/FormComponents';
+import { InputComponent } from 'components/common/InputFieldComponent';
 
 interface IObject {
   [key: string]: string;
@@ -44,7 +44,6 @@ export default function({
   customInput,
   setCustomInput,
 }: IRadioInputWithCustomComponentProps) {
-
   return (
     <FormGroupComponent>
       <FormControl>

@@ -21,7 +21,7 @@ import T from 'i18n-react';
 import { ErrorFont } from 'components/common/TypographyText';
 import { NewColumnWrapper } from 'components/common/BoxContainer';
 import { CALCULATE_PREFIX } from 'components/TransformationComponents/constants';
-import {FormGroupFullWidthComponent} from 'components/common/FormComponents';
+import { FormGroupFullWidthComponent } from 'components/common/FormComponents';
 
 interface INewColumnProps {
   column: string;
@@ -30,7 +30,6 @@ interface INewColumnProps {
 }
 
 export default function({ column, setColumnName, isError }: INewColumnProps) {
-
   return (
     <NewColumnWrapper>
       <FormGroupFullWidthComponent>
@@ -46,10 +45,9 @@ export default function({ column, setColumnName, isError }: INewColumnProps) {
           }}
         />
         {isError && (
-          <ErrorFont
-            component="p"
-            data-testid="error-text"
-          >{T.translate(`${CALCULATE_PREFIX}.columnExist`)}</ErrorFont>
+          <ErrorFont component="p" data-testid="error-text">
+            {T.translate(`${CALCULATE_PREFIX}.columnExist`)}
+          </ErrorFont>
         )}
       </FormGroupFullWidthComponent>
     </NewColumnWrapper>

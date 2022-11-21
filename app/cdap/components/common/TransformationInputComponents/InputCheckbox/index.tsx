@@ -18,7 +18,7 @@ import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 import { NormalFont } from 'components/common/TypographyText';
 import { LabelWrapper } from 'components/common/BoxContainer';
-import {FormControlLabelComponent} from 'components/common/FormComponents';
+import { FormControlLabelComponent } from 'components/common/FormComponents';
 
 interface IInputCheckboxProps {
   label: string;
@@ -27,7 +27,6 @@ interface IInputCheckboxProps {
 }
 
 export default function({ label, value, onChange }: IInputCheckboxProps) {
-
   return (
     <FormControlLabel
       control={

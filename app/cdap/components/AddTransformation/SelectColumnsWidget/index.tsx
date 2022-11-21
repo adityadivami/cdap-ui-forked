@@ -25,7 +25,7 @@ import styled from 'styled-components';
 
 const TransformationNameBox = styled.section`
   padding: 15px 0;
-  border-bottom: 1px solid #DADCE0;
+  border-bottom: 1px solid #dadce0;
 `;
 
 const TransformationNameHeadWrapper = styled.section`
@@ -40,41 +40,35 @@ const TransformationNameTextInfoWrapper = styled.section`
   padding: 10px 0 0;
 `;
 
-
-export default function ({
+export default function({
   selectedColumns,
   transformationName,
   handleSelectColumn,
 }: ISelectColumnsWidgetProps) {
-
-  let selectButtonText =
+  const selectButtonText =
     multipleColumnSelected?.filter((el) => el.value === transformationName).length > 0
       ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`).toString()
-      : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString()
-
+      : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString();
 
   const singleColumnSelect = (
     <>
       <TransformationNameHeadWrapper>
-        <SubHeadBoldFont
-          component="p"
-          data-testid="select-column-title"
-        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}</SubHeadBoldFont>
+        <SubHeadBoldFont component="p" data-testid="select-column-title">
+          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
+        </SubHeadBoldFont>
         {selectedColumns.length > 0 && TickIcon}
       </TransformationNameHeadWrapper>
       <TransformationNameTextInfoWrapper padding="10px 0">
-        <NormalFont
-          component="p"
-          data-testid="select-column-subtitle"
-        >{T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}</NormalFont>
+        <NormalFont component="p" data-testid="select-column-subtitle">
+          {T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}
+        </NormalFont>
       </TransformationNameTextInfoWrapper>
       {Array.isArray(selectedColumns) && selectedColumns.length ? (
         selectedColumns.map((item, index) => (
           <TransformationNameTextInfoWrapper padding="5px 0">
-            <NormalFont
-              component="p"
-              data-testid="selected-function-name"
-            >{`${index + 1}. ${item.label}`}</NormalFont>
+            <NormalFont component="p" data-testid="selected-function-name">{`${index + 1}. ${
+              item.label
+            }`}</NormalFont>
           </TransformationNameTextInfoWrapper>
         ))
       ) : (
