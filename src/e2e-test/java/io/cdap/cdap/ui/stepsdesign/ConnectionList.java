@@ -52,15 +52,11 @@ public class ConnectionList {
     @Then("Verify if the Wrangle button is visible")
     public void clickOnFirstTabOfTheSecondColumn() {
         try {
+            SeleniumDriver.getDriver().navigate().refresh();
             for (int i = 1; i <= 10; i++) {
-                WebDriverWait wait= new WebDriverWait(SeleniumDriver.getDriver(),10);
-                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector
-                        ("connections-tab-column" + i + "-item0")));
                 WebElement ele = Helper.locateElementByTestId("connections-tab-column" + i + "-item0");
                 if (ElementHelper.isElementDisplayed(ele)) {
                     System.out.println("element found at index = " + i);
-                    // WebElement button = Helper.locateElementByTestId("connection-tab-label-" + i
-                    // + "0");
                     Actions action = new Actions(SeleniumDriver.getDriver());
                     action.moveToElement(ele).build().perform();
                     Helper.waitSeconds(10);
@@ -125,11 +121,10 @@ public class ConnectionList {
         try {
             WaitHelper.waitForPageToLoad();
             WebElement ele = Helper.locateElementByTestId("search-field-1");
-            ele.click();
             ele.sendKeys(fileName);
-            WebDriverWait wait = new WebDriverWait(SeleniumDriver.getDriver(), 10);
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
-                    ("connections-tab-column1-item0")));
+//            WebDriverWait wait = new WebDriverWait(SeleniumDriver.getDriver(), 10);
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector
+//                    ("connections-tab-column1-item0")));
             String text = Helper.locateElementByTestId("connections-tab-column1-item0").getText();
             Assert.assertEquals(fileName, text);
         } catch (Exception e) {
