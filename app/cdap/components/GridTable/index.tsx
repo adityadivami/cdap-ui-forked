@@ -56,6 +56,18 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const [addTransformationFunction, setAddTransformationFunction] = useState<
+  IAddTransformationItem
+>({
+  option: '',
+  supportedDataType: [],
+});
+const [dataQuality, setDataQuality] = useState<IStatistics>();
+const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+const [snackbarData, setSnackbarData] = useState({
+  description: '',
+  isSuccess: false,
+});
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -237,6 +249,63 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+    // ------------@onMenuOptionSelection Function is used to set option selected from toolbar and then calling of execute API
+    const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
+      setAddTransformationFunction({
+        option,
+        supportedDataType,
+      });
+    };
+  
+    const addDirectives = (directive: string) => {
+      setLoading(true);
+      if (directive) {
+        const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+        addDirectiveAPICall(apiPayload);
+      }
+    };
+  
+    const addDirectiveAPICall = (apiPayload: IApiPayload) => {
+      const gridParams: IGridParams = apiPayload.gridParams;
+      applyDirectives(wid, gridParams.directives).subscribe(
+        (response) => {
+          DataPrepStore.dispatch({
+            type: DataPrepActions.setWorkspace,
+            payload: {
+              data: response.values,
+              values: response.values,
+              headers: response.headers,
+              types: response.types,
+              ...gridParams,
+            },
+          });
+          setSnackbarIsOpen(true);
+          setSnackbarData({
+            description: 'Directive applied successfully',
+            isSuccess: true,
+          });
+          setLoading(false);
+          setGridData(response);
+          setAddTransformationFunction({
+            option: '',
+            supportedDataType: [],
+          });
+        },
+        (err) => {
+          setLoading(false);
+          setSnackbarIsOpen(true);
+          setSnackbarData({
+            description: 'Directive cannot applied',
+            isSuccess: false,
+          });
+          setAddTransformationFunction({
+            option: '',
+            supportedDataType: [],
+          });
+        }
+      );
+    };  
+
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
@@ -288,6 +357,36 @@ export default function GridTable() {
               })}
           </TableBody>
         </Table>
+      )}
+      {addTransformationFunction.option && (
+        <AddTransformation
+          transformationName={addTransformationFunction.option}
+          transformationDataType={addTransformationFunction.supportedDataType}
+          columnsList={headersNamesList}
+          missingItemsList={dataQuality}
+          onCancel={() => {
+            setAddTransformationFunction({
+              option: '',
+              supportedDataType: [],
+            });
+          }}
+          applyTransformation={(directive: string) => {
+            addDirectives(directive);
+          }}
+        />
+      )}
+      {snackbarIsOpen && (
+        <Snackbar
+          handleCloseError={() => {
+            setSnackbarIsOpen(false);
+            setSnackbarData({
+              description: '',
+              isSuccess: false,
+            });
+          }}
+          description={snackbarData.description}
+          isSuccess={snackbarData.isSuccess}
+        />
       )}
       {loading && (
         <div className={classes.loadingContainer}>
