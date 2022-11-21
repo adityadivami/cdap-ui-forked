@@ -50,7 +50,6 @@ describe('Testing Menu Item Component', () => {
     const parentElement = screen.getByTestId(/toolbar-icon-button-string/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
-
   });
   it('Should render the item list divider element', () => {
     const dummyItem = {
@@ -90,5 +89,4 @@ it('should render the heading element', () => {
 
   const headingElement = screen.getByTestId(/menu-item-heading/i);
   expect(headingElement).toHaveTextContent('test');
-
 });

@@ -32,7 +32,7 @@ const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.common';
 
 export default function({ column, setColumnName, isError }: INewColumnProps) {
   return (
-    <NewColumnWrapper data-testid='new-column-wrapper-parent'>
+    <NewColumnWrapper data-testid="new-column-wrapper-parent">
       <FormGroupFullWidthComponent>
         <LabelComponent labelText={`${T.translate(`${PREFIX}.nameNewColumn`)}`} />
         <FormInputFieldComponent
