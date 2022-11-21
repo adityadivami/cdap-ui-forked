@@ -67,7 +67,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         disabled={menuItemDisableProp}
         title={item.label}
         onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
-        data-testid={`toolbar-icon-button-${item.value}`}
+        data-testid={`menu-item-button-${item.value}`}
         id={`${item.value}`}
       >
         <NormalFont component="div" data-testid={`toolbar-icon-label-${item.value}`}>
