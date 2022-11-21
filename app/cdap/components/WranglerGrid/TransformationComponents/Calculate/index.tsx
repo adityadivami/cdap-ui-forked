@@ -104,6 +104,9 @@ export default function({
                           setCustomInput(e.target.value),
                         color: 'primary',
                         placeholder: `${T.translate(`${CALCULATE_PREFIX}.examplePlaceholder`)}`,
+                        inputProps: {
+                          'data-testid': `calculate-input-value`,
+                        },
                       }}
                     />
                   </FormGroupFullWidthComponent>
@@ -118,6 +121,9 @@ export default function({
             label={`${T.translate(`${CALCULATE_PREFIX}.copyToNewColumn`)}`}
             value={copyToNewColumn}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCopyToNew(e.target.checked)}
+            inputProps={{
+              'data-testid': `copy-to-new-column`,
+            }}
           />
           {copyToNewColumn && (
             <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />

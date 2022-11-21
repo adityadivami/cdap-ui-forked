@@ -20,13 +20,18 @@ import { NormalFont } from 'components/common/TypographyText';
 import { LabelWrapper } from 'components/common/BoxContainer';
 import { FormControlLabelComponent } from 'components/common/FormComponents';
 
+interface IInputProps {
+  [key: string]: string;
+}
+
 interface IInputCheckboxProps {
   label: string;
   value: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  inputProps?: IInputProps;
 }
 
-export default function({ label, value, onChange }: IInputCheckboxProps) {
+export default function({ label, value, onChange, inputProps }: IInputCheckboxProps) {
   return (
     <FormControlLabel
       control={
@@ -36,6 +41,7 @@ export default function({ label, value, onChange }: IInputCheckboxProps) {
           color="primary"
           data-testid={`input-checkbox-${label}`}
           id={`input-checkbox-${label}`}
+          inputProps={{ ...inputProps }}
         />
       }
       label={

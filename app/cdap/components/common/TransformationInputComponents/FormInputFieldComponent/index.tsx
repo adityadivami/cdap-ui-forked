@@ -18,12 +18,17 @@ import React from 'react';
 import { InputComponent } from 'components/common/InputFieldComponent';
 import { FormControlLabelComponent } from 'components/common/FormComponents';
 
+interface IInputProps {
+  [key: string]: string;
+}
+
 interface IInput {
   type: 'text' | 'number';
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   color: 'primary' | 'secondary';
   placeholder: string;
+  inputProps?: IInputProps;
 }
 
 interface IFormInputFieldComponentProps {

@@ -88,7 +88,7 @@ export default function({
                         submitMenuOption(eachOption.action, eachOption.dataType);
                       }
                     }}
-                    data-testid="toolbar-icon-button"
+                    data-testid={`toolbar-icon-button-${eachOption.title}`}
                   >
                     {eachOption.iconSVG ?? (
                       <CustomizedSvgIcon
