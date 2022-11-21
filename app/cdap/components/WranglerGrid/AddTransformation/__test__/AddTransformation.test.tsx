@@ -77,7 +77,7 @@ describe('It should test the AddTransformatio Component', () => {
   const backIconButton = screen.getAllByTestId('back-icon')[0];
   fireEvent.click(backIconButton);
 
-  const drawerCloseButton = screen.getAllByTestId('drawer-widget-close-round-icon')[0];
+  const drawerCloseButton = screen.getAllByTestId('add-transformation-drawer-close')[0];
   fireEvent.click(drawerCloseButton);
   expect(drawerCloseButton).toBeInTheDocument();
 });
