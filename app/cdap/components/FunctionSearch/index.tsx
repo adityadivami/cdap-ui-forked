@@ -31,18 +31,20 @@ const FunctionSearch = ({ transformationPanel }) => {
   const [textFieldInput, setTextFieldInput] = useState('');
   const [selectedDirective, setSelectedDirective] = useState('');
   const [recentSearches, setRecentSearches] = useState([]);
-  const textInput = React.useRef(null);
+  // const textInput = React.useRef(null);
+  let functionsList;
 
   const GetData = () => {
     const namespace = NamespaceStore.getState().selectedNamespace;
     MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
-      setSeachResults([...res.values]);
+      functionsList = [...res.values];
+      setSeachResults(functionsList);
     });
   };
 
   const handleInputChange = (e) => {
     setTextFieldInput(e.target.value);
-    if (e.target.value == '') {
+    if (e.target.value === '') {
       setDisplayRecentSearches(true);
     } else {
       setDisplayRecentSearches(false);
@@ -58,7 +60,7 @@ const FunctionSearch = ({ transformationPanel }) => {
     if (textFieldInput === '') {
       setDisplayRecentSearches(true);
     }
-  }, []);
+  }, [textFieldInput]);
 
   useEffect(() => {
     if (textFieldInput === '') {
@@ -67,10 +69,6 @@ const FunctionSearch = ({ transformationPanel }) => {
       setDisplayRecentSearches(false);
     }
   }, [textFieldInput]);
-
-  const CustomPaper = (props) => {
-    return <Paper elevation={0} {...props} className={classes.root} />;
-  };
 
   const handleOptionClick = (selectedOption) => {
     setTextFieldInput(null);
@@ -90,13 +88,39 @@ const FunctionSearch = ({ transformationPanel }) => {
     if (textFieldInput === '') {
       setDisplayRecentSearches(false);
     }
-    setSeachResults([]);
+  };
+
+  const clearSearchHandler = () => {
+    // textInput.current.value = '';
+    setTextFieldInput(null);
+    setDisplayRecentSearches(true);
+  };
+
+  console.log(textFieldInput, 'textFieldInput');
+  // console.log(textInput, 'textInput');
+  const CustomPaper = (props) => {
+    return (
+      <Box>
+        {recentSearches.length > 0 && displayRecentSearches && (
+          <Box className={classes.searchResultHeadBox}>
+            <div className={classes.headingTextStyles}>Recent Results</div>
+            <img src="/cdap_assets/img/Underline.svg" alt="header line" />
+          </Box>
+        )}
+        {searchResults.length > 0 && textFieldInput?.length > 0 && (
+          <Box className={classes.searchResultHeadBox}>
+            <div className={classes.headingTextStyles}>Search Results</div>
+            <img src="/cdap_assets/img/Underline.svg" alt="header line" />
+          </Box>
+        )}
+        <Paper elevation={0} {...props} className={classes.root} />
+      </Box>
+    );
   };
 
   return (
     <Box className={classes.main}>
       <Autocomplete
-        id="combo-box-demo"
         options={displayRecentSearches ? recentSearches : searchResults}
         getOptionLabel={(option) =>
           searchResults.length ? option.directive.concat(`(${option.description})`) : ''
@@ -104,6 +128,8 @@ const FunctionSearch = ({ transformationPanel }) => {
         autoHighlight={true}
         PaperComponent={CustomPaper}
         onClose={handleClose}
+        selectOnFocus
+        clearOnBlur
         classes={{
           option: classes.optionInMUIAutocomplete,
           focused: classes.onFocusAutocomplete,
@@ -141,9 +167,8 @@ const FunctionSearch = ({ transformationPanel }) => {
             className={classes.textField}
             onChange={(e) => handleInputChange(e)}
             value={textFieldInput}
-            id="text-input"
             classes={{ root: classes.customTextField }}
-            inputRef={textInput}
+            // inputRef={textInput}
             InputProps={{
               ...params.InputProps,
               startAdornment: (
@@ -159,13 +184,11 @@ const FunctionSearch = ({ transformationPanel }) => {
               endAdornment: (
                 <>
                   <InputAdornment position="end">
-                    {textInput?.current?.value && (
+                    {textFieldInput?.length > 0 && (
                       <div>
                         <ClearOutlinedIcon
                           className={classes.close}
-                          onClick={() => {
-                            textInput.current.value = '';
-                          }}
+                          onClick={() => setTextFieldInput('')}
                         />
                       </div>
                     )}

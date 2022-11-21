@@ -46,7 +46,7 @@ export const useStyles = makeStyles({
       margin: '0px',
       background: 'white',
       borderRadius: '0px',
-      boxShadow: 'inset 3px 4px 15px rgba(68, 132, 245, 0.15);',
+      // boxShadow: 'inset 3px 4px 15px rgba(68, 132, 245, 0.15);',
     },
 
     '& div.MuiAutocomplete-noOptions': {
@@ -147,5 +147,19 @@ export const useStyles = makeStyles({
   },
   onBlurAutocomplete: {
     borderBottom: '0px solid #E0E0E0',
+  },
+  headingTextStyles: {
+    fontFamily: 'Noto Sans',
+    fontStyle: 'normal',
+    fontWeight: 400,
+    fontSize: 20,
+    lineHeight: '150%',
+    letterSpacing: '0.15px',
+    color: '#000000',
+  },
+  searchResultHeadBox: {
+    backgroundColor: '#ffffff',
+    padding: '10px 15px',
+    boxShadow: 'inset 3px 4px 15px rgba(68, 132, 245, 0.15);',
   },
 });
