@@ -20,7 +20,6 @@ import LabelComponent from 'components/common/TransformationInputComponents/Labe
 import T from 'i18n-react';
 import { ErrorFont } from 'components/common/TypographyText';
 import { NewColumnWrapper } from 'components/common/BoxContainer';
-import { CALCULATE_PREFIX } from 'components/WranglerGrid/TransformationComponents/constants';
 import { FormGroupFullWidthComponent } from 'components/common/FormComponents';
 
 interface INewColumnProps {
@@ -29,11 +28,13 @@ interface INewColumnProps {
   isError: boolean;
 }
 
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.common';
+
 export default function({ column, setColumnName, isError }: INewColumnProps) {
   return (
     <NewColumnWrapper>
       <FormGroupFullWidthComponent>
-        <LabelComponent labelText={`${T.translate(`${CALCULATE_PREFIX}.nameNewColumn`)}`} />
+        <LabelComponent labelText={`${T.translate(`${PREFIX}.nameNewColumn`)}`} />
         <FormInputFieldComponent
           formInputValue={column}
           inputProps={{
@@ -41,12 +42,12 @@ export default function({ column, setColumnName, isError }: INewColumnProps) {
             value: column,
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value),
             color: 'primary',
-            placeholder: `${T.translate(`${CALCULATE_PREFIX}.destinationColumn`)}`,
+            placeholder: `${T.translate(`${PREFIX}.destinationColumn`)}`,
           }}
         />
         {isError && (
           <ErrorFont component="p" data-testid="error-text">
-            {T.translate(`${CALCULATE_PREFIX}.columnExist`)}
+            {T.translate(`${PREFIX}.columnExist`)}
           </ErrorFont>
         )}
       </FormGroupFullWidthComponent>

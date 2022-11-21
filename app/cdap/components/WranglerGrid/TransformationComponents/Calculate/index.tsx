@@ -20,13 +20,20 @@ import FormInputFieldComponent from 'components/common/TransformationInputCompon
 import { Box, FormGroup } from '@material-ui/core';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
 import T from 'i18n-react';
-import { ICalculateProps } from 'components/WranglerGrid/TransformationComponents/Calculate/types';
 import NewColumnInput from 'components/common/TransformationInputComponents/NewColumnInput';
 import { SubHeadBoldFont } from 'components/common/TypographyText';
 import { FlexAlignCenter } from 'components/common/BoxContainer';
-import { CALCULATE_PREFIX } from 'components/WranglerGrid/TransformationComponents/constants';
 import { FormGroupFullWidthComponent } from 'components/common/FormComponents';
 import styled from 'styled-components';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformation/types';
+
+interface ICalculateProps {
+  transformationName: string;
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
+}
 
 const CalculateWrapper = styled(Box)`
   margin: 10px 0 0;
@@ -35,6 +42,8 @@ const CalculateWrapper = styled(Box)`
 const CalculateSignWrapper = styled(Box)`
   margin-right: 5px;
 `;
+
+const CALCULATE_PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.calculate';
 
 export default function({
   transformationName,

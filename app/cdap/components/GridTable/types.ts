@@ -14,8 +14,6 @@
  * the License.
  */
 
-import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformation/types';
-
 export interface IParams {
   context: string;
   workspaceId: string;
@@ -112,23 +110,4 @@ export interface IMissingList {
 export interface IAddTransformationItem {
   option: string;
   supportedDataType: string[];
-}
-
-export interface ITransformationContentParams {
-  setTransformationComponentsValue: React.Dispatch<
-    React.SetStateAction<ITransformationComponentValues>
-  >;
-  transformationComponent: ITransformationComponentType[];
-  transformationComponentValues: ITransformationComponentValues;
-  transformationName: string;
-  transformationDataType: string[];
-  columnsList: IHeaderNamesList[];
-  missingItemsList: IStatistics;
-  onCancel: () => void;
-  applyTransformation: (directive: string) => void;
-}
-
-export interface ITransformationComponentType {
-  type: string;
-  component: (props) => JSX.Element;
 }
