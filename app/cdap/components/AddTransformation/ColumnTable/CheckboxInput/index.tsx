@@ -24,9 +24,8 @@ export default function({
   columnDetail,
   onMultipleSelection,
   label,
-  columnIndex
+  columnIndex,
 }: ICheckBoxInputProps) {
-  
   const disabled =
     selectedColumns?.filter((column) => column.label === columnDetail.label).length ||
     !handleDisableCheckbox()

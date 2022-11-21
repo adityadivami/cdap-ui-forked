@@ -25,8 +25,9 @@ describe('Test checkboxInput component', () => {
         selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => false}
         columnDetail={{ label: 'test', type: [''], name: '' }}
-        onMultipleSelection={() => jest.fn()} 
-        columnIndex={0}      />
+        onMultipleSelection={() => jest.fn()}
+        columnIndex={0}
+      />
     );
 
     const checkboxInputElement = screen.getByTestId(/check-box-input-0/i);
@@ -40,8 +41,9 @@ describe('Test checkboxInput component', () => {
         selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => true}
         columnDetail={{ label: 'test', type: [''], name: '' }}
-        onMultipleSelection={() => jest.fn()} 
-        columnIndex={0}      />
+        onMultipleSelection={() => jest.fn()}
+        columnIndex={0}
+      />
     );
 
     const checkboxInputElement = screen.getByTestId(/check-box-input-0/i);

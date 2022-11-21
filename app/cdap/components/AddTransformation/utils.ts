@@ -46,7 +46,10 @@ export const getDirective = (
   }
 };
 
-export const getColumnsSupportedType = (transformationDataType, columnsList) => {
+export const getColumnsSupportedType = (
+  transformationDataType: string[],
+  columnsList: IHeaderNamesList[]
+) => {
   return transformationDataType?.length > 0 && transformationDataType?.includes('all')
     ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
     : columnsList?.filter((columnDetail: IHeaderNamesList) => {
@@ -56,10 +59,15 @@ export const getColumnsSupportedType = (transformationDataType, columnsList) => 
       });
 };
 
-export const getFilteredColumn = (transformationDataType, columnsList) => {
-  return columnsList?.filter((columnDetail: IHeaderNamesList) => {
-    return transformationDataType?.some((dataTypeCollection: string | string[]) => {
-      return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
-    });
-  });
+export const getFilteredColumn = (
+  transformationDataType: string[],
+  columnsList: IHeaderNamesList[]
+) => {
+  return transformationDataType?.length > 0 && transformationDataType?.includes('all')
+    ? columnsList
+    : columnsList?.filter((columnDetail: IHeaderNamesList) => {
+        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
+          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
+        });
+      });
 };

@@ -30,7 +30,7 @@ const SelectColumnTableRow = styled(TableRow)`
   letter-spacing: 0.15px;
   color: ${grey[700]};
   display: grid;
-  grid-template-columns: 10% 45% 45%;
+  grid-template-columns: 8% 45% 45%;
   align-items: center;
   height: 100%;
 `;
