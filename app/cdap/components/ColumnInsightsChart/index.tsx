@@ -26,6 +26,19 @@ import { grey } from '@material-ui/core/colors';
 
 export const PREFIX = 'features.NewWranglerUI.ColumnInsightsChart';
 
+interface IColumnInsightsChartProps {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  graphData: IGraphData[];
+  columnName: string;
+  distinctValues: number;
+}
+
+interface IGraphData {
+  text: string;
+  value: number;
+}
+
 const CustomizedModalContent = styled(Box)`
   position: absolute;
   top: 50%;
@@ -65,7 +78,13 @@ const GraphContainer = styled(Box)`
   }
 `;
 
-export default function({ open, setOpen, graphData, columnName, distinctValues }) {
+export default function({
+  open,
+  setOpen,
+  graphData,
+  columnName,
+  distinctValues,
+}: IColumnInsightsChartProps) {
   const handleClose = () => setOpen(false);
 
   const barChartProps = {
