@@ -14,28 +14,28 @@
  *  the License.
  */
 
-import { render } from "@testing-library/react";
-import React from "react";
-import TransformationComponents from "components/WranglerGrid/TransformationComponents/index";
+import { render } from '@testing-library/react';
+import React from 'react';
+import TransformationComponents from 'components/WranglerGrid/TransformationComponents/index';
 
-describe("Test TransformationComponents", () => {
-    const xyz = () => {
-        return <h2>Hello world</h2>;
-      };
+describe('Test TransformationComponents', () => {
+  const xyz = () => {
+    return <h2>Hello world</h2>;
+  };
 
-  it("Should render TransformationComponent", () => {
+  it('Should render TransformationComponent', () => {
     render(
-        <TransformationComponents
-          setTransformationComponentsValue={jest.fn()}
-          transformationComponent={[{type:'abhilash', component:xyz}]}
-          transformationComponentValues={undefined}
-          transformationName={"SQUARE"}
-          transformationDataType={[]}
-          columnsList={[]}
-          missingItemsList={undefined}
-          onCancel={jest.fn()}
-          applyTransformation={jest.fn()}
-        />
-      );
+      <TransformationComponents
+        setTransformationComponentsValue={jest.fn()}
+        transformationComponent={[{ type: 'abhilash', component: xyz }]}
+        transformationComponentValues={undefined}
+        transformationName={'SQUARE'}
+        transformationDataType={[]}
+        columnsList={[]}
+        missingItemsList={undefined}
+        onCancel={jest.fn()}
+        applyTransformation={jest.fn()}
+      />
+    );
   });
 });

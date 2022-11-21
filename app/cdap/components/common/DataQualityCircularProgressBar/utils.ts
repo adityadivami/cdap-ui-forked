@@ -14,7 +14,10 @@
  * the License.
  */
 
-import { IHeaderNamesList, IDataQualityItem } from 'components/AddTransformation/types';
+import {
+  IHeaderNamesList,
+  IDataQualityItem,
+} from 'components/WranglerGrid/AddTransformation/types';
 import { IStatistics, IGeneral } from 'components/GridTable/types';
 
 export const getDataQuality = (
@@ -23,9 +26,9 @@ export const getDataQuality = (
 ) => {
   const dataQuality: IDataQualityItem[] = [];
   columnList?.forEach((columnName: IHeaderNamesList) => {
-    const generalValues: IDataQualityItem = statistics[columnName.name].general;
-    if (generalValues.null) {
-      const nullCount = generalValues.null || 0;
+    const generalValues: IDataQualityItem = statistics[columnName.name]?.general;
+    if (generalValues?.null) {
+      const nullCount = generalValues?.null || 0;
       dataQuality.push({
         label: columnName.name,
         value: nullCount,
