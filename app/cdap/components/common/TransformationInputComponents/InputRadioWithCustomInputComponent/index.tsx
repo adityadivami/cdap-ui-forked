@@ -70,6 +70,10 @@ export default function({
               value={customInput}
               onChange={(e) => setCustomInput(e.target.value)}
               color="primary"
+              data-testid="custom-input"
+              inputProps={{
+                'data-testid': 'custom-value-input',
+              }}
             />
           }
           label={''}

@@ -40,6 +40,9 @@ export default function({
           ? true
           : false
       }
+      inputProps={{
+        'data-testid': `radio-input-tag-${columnIndex}`,
+      }}
       data-testid={`radio-input-${columnIndex}`}
     />
   );

@@ -43,6 +43,9 @@ export default function({ column, setColumnName, isError }: INewColumnProps) {
             onChange: (e: React.ChangeEvent<HTMLInputElement>) => setColumnName(e.target.value),
             color: 'primary',
             placeholder: `${T.translate(`${PREFIX}.destinationColumn`)}`,
+            inputProps: {
+              'data-testid': `new-column-name-input`,
+            },
           }}
         />
         {isError && (
