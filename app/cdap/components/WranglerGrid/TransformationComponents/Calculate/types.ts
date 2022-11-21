@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { ITransformationComponentValues } from 'components/AddTransformation/types';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformation/types';
 
 export interface ICalculateProps {
   transformationName: string;

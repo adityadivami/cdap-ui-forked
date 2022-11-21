@@ -15,21 +15,26 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import { CALCULATE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/calculateOptions';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import { Box, FormGroup } from '@material-ui/core';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
 import T from 'i18n-react';
-import { ICalculateProps } from 'components/TransformationComponents/Calculate/types';
+import { ICalculateProps } from 'components/WranglerGrid/TransformationComponents/Calculate/types';
 import NewColumnInput from 'components/common/TransformationInputComponents/NewColumnInput';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
-import {
-  CalculateWrapper,
-  FlexAlignCenter,
-  CalculateSignWrapper,
-} from 'components/common/BoxContainer';
-import { CALCULATE_PREFIX } from 'components/TransformationComponents/constants';
+import { FlexAlignCenter } from 'components/common/BoxContainer';
+import { CALCULATE_PREFIX } from 'components/WranglerGrid/TransformationComponents/constants';
 import { FormGroupFullWidthComponent } from 'components/common/FormComponents';
+import styled from 'styled-components';
+
+const CalculateWrapper = styled(Box)`
+  margin: 10px 0 0;
+`;
+
+const CalculateSignWrapper = styled(Box)`
+  margin-right: 5px;
+`;
 
 export default function({
   transformationName,

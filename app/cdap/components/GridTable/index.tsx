@@ -26,10 +26,14 @@ import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
 import {
+  IAddTransformationItem,
+  IApiPayload,
   IExecuteAPIResponse,
+  IGridParams,
   IHeaderNamesList,
   IParams,
   IRecords,
+  IStatistics,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
@@ -39,10 +43,16 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
+import { applyDirectives, getAPIRequestPayload } from 'components/GridTable/services';
+import AddTransformation from 'components/WranglerGrid/AddTransformation';
+import Snackbar from 'components/Snackbar';
+import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
+
+const transformationOptions = ['undo', 'redo'];
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
-  const params = useParams() as IRecords;
+  const params = useParams() as IParams;
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
@@ -68,6 +78,7 @@ export default function GridTable() {
     description: '',
     isSuccess: false,
   });
+  const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -196,7 +207,7 @@ export default function GridTable() {
   };
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
-  const createMissingData = (statistics: IRecords) => {
+  const createMissingData = (statistics: IStatistics) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
@@ -231,6 +242,7 @@ export default function GridTable() {
     setHeadersNamesList(headersData);
     if (rawData && rawData.summary && rawData.summary.statistics) {
       const missingData = createMissingData(gridData?.summary.statistics);
+      setDataQuality(gridData?.summary.statistics);
       setMissingDataList(missingData);
     }
     const rowData =
@@ -309,6 +321,15 @@ export default function GridTable() {
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
+      <ToolBarList
+        setShowBreadCrumb={setShowBreadCrumb}
+        showBreadCrumb={showBreadCrumb}
+        columnType={'int'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
+        submitMenuOption={(option, datatype) => {
+          !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null;
+        }}
+      />
+
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}

@@ -16,7 +16,7 @@
 
 import { ITransformationContentParams } from 'components/GridTable/types';
 import React from 'react';
-import { CALCULATE_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/calculateOptions';
+import { CALCULATE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/calculateOptions';
 
 export default function({
   transformationComponent,

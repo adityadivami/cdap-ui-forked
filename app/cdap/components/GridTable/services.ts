@@ -45,7 +45,7 @@ export const getAPIRequestPayload = (
   const updatedDirectives: string[] = directives.concat(newDirective);
   const requestBody: IRequestBody = directiveRequestBodyCreator(updatedDirectives);
   requestBody.insights = insights;
-  const workspaceInfo: IType = {
+  const workspaceInfo: IRecords = {
     properties: insights,
   };
   gridParams = {
@@ -55,7 +55,7 @@ export const getAPIRequestPayload = (
     workspaceInfo,
     insights,
   };
-  const payload: IType = {
+  const payload: IRecords = {
     context: params.namespace,
     workspaceId: params.wid,
   };
