@@ -29,11 +29,11 @@ describe('Testing Menu Item Component', () => {
     render(
       <MenuComponent item={dummyItem} index={0} onMenuClick={() => jest.fn()} columnType={'test'} />
     );
-    const parentElement = screen.getByTestId(/toolbar-icon-button-string/i);
+    const parentElement = screen.getByTestId(/toolbar-icon-label-string/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
     expect(parentElement).toHaveClass(
-      'MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button'
+      'MuiTypography-root'
     );
   });
 
@@ -47,7 +47,7 @@ describe('Testing Menu Item Component', () => {
     render(
       <MenuComponent item={dummyItem} index={0} onMenuClick={() => jest.fn()} columnType={''} />
     );
-    const parentElement = screen.getByTestId(/toolbar-icon-button-string/i);
+    const parentElement = screen.getByTestId(/toolbar-icon-label-string/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
   });

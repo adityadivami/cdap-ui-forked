@@ -67,7 +67,7 @@ describe('Testing nested menu component', () => {
     expect(parentElement).toBeInTheDocument();
     expect(parentElement).toHaveClass('MuiPopover-root');
 
-    const menuClickElement = screen.getAllByTestId(/toolbar-icon-button-test/i);
+    const menuClickElement = screen.getAllByTestId(/toolbar-icon-label-test/i);
     fireEvent.click(menuClickElement[0]);
     expect(menuClickElement[0]).toBeInTheDocument();
   });
