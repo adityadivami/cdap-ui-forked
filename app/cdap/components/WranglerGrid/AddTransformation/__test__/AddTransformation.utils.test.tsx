@@ -24,4 +24,8 @@ describe('It should test getDirective function', () => {
   it('should call getDirective() when function name is string .', () => {
     expect(getDirective('string', 'body_0')).toStrictEqual(`set-type :body_0 string`);
   });
+
+  it('should call getDirective() when function name is ADD .', () => {
+    expect(getDirective('ADD', 'body_0')).toStrictEqual(`set-column :body_0 body_0 + undefined`);
+  });
 });

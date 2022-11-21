@@ -37,9 +37,9 @@ export const getDirective = (
     if (calculateOption.length) {
       const value = calculateOption[0]?.directive(
         selectedColumnName,
-        transformationComponentValues.customInput,
-        transformationComponentValues.copyColumnName,
-        transformationComponentValues.copyToNewColumn
+        transformationComponentValues?.customInput,
+        transformationComponentValues?.copyColumnName,
+        transformationComponentValues?.copyToNewColumn
       );
       return value;
     }
