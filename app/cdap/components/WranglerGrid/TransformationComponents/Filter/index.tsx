@@ -26,6 +26,8 @@ import {
   FILTER_PLACEHOLDER,
 } from 'components/WranglerGrid/TransformationComponents/Filter/options';
 import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
+import { SubHeadBoldFont } from 'components/common/TypographyText';
+import styled from 'styled-components';
 
 interface IFilterProps {
   setTransformationComponentsValue: React.Dispatch<
@@ -33,6 +35,10 @@ interface IFilterProps {
   >;
   transformationComponentValues: ITransformationComponentValues;
 }
+
+const BoxWrapper = styled(Box)`
+  margin-top: 20px;
+`;
 
 export default function({
   setTransformationComponentsValue,
@@ -77,13 +83,11 @@ export default function({
   }, [ignoreCase]);
 
   return (
-    <Box>
+    <BoxWrapper>
+      <SubHeadBoldFont>
+        {`${T.translate('features.WranglerNewUI.GridPage.transformationUI.filter.selectAction')}`}
+      </SubHeadBoldFont>
       <FormGroup>
-        <LabelComponent
-          labelText={`${T.translate(
-            'features.WranglerNewUI.GridPage.transformationUI.filter.selectAction'
-          )}`}
-        />
         <InputRadioWithCustomInputComponent
           options={FILTER_RADIO_OPTION}
           radioValue={radioOption}
@@ -91,6 +95,9 @@ export default function({
           customInputType="customFormat"
           customInput={customInput}
           setCustomInput={setCustomInput}
+          inputProps={{
+            'data-testid': 'filter-radio-button',
+          }}
         />
       </FormGroup>
       <FormGroup>
@@ -109,8 +116,9 @@ export default function({
           checkboxLabel={`${T.translate(
             'features.WranglerNewUI.GridPage.transformationUI.filter.ignoreCase'
           )}`}
+          transformation="filter"
         />
       </FormGroup>
-    </Box>
+    </BoxWrapper>
   );
 }

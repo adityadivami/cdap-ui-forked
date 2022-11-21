@@ -17,6 +17,8 @@ import React, { useState } from 'react';
 import { MenuItem, FormControl, Select, FormGroup } from '@material-ui/core';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 
 interface ISelectOptions {
   label: string;
@@ -36,7 +38,29 @@ interface ISelectColumnProps {
   checkboxValue: boolean;
   setCheckboxValue: React.Dispatch<React.SetStateAction<boolean>>;
   checkboxLabel: string;
+  transformation?: string;
 }
+
+const SelectFormControlWrapper = styled(FormControl)`
+  width: calc(100% - 60px);
+  margin: 0 60px 5px 0;
+  border: 1px solid #dadce0;
+  height: 40px;
+  padding: 5px 15px;
+  fontsize: 14px;
+  background: #ffffff;
+  border-radius: 4px;
+`;
+
+const SelectInputRoot = styled(Select)`
+  color: ${grey[700]};
+  & .MuiSelect-select:focus {
+    background: transparent;
+  }
+  &:before {
+    border: none;
+  }
+`;
 
 export default function({
   optionSelected,
@@ -48,6 +72,7 @@ export default function({
   checkboxValue,
   setCheckboxValue,
   checkboxLabel,
+  transformation,
 }: ISelectColumnProps) {
   const [inputRequired, setInputRequired] = useState<boolean | undefined>(false);
   const [checkboxRequired, setCheckboxRequired] = useState<boolean | undefined>(false);
@@ -63,16 +88,23 @@ export default function({
 
   return (
     <>
-      <FormControl>
-        <Select value={optionSelected} onChange={handleChange} disableUnderline>
+      <SelectFormControlWrapper>
+        <SelectInputRoot
+          value={optionSelected}
+          onChange={handleChange}
+          disableUnderline
+          inputProps={{
+            'data-testid': 'select-filter-option',
+          }}
+        >
           {options?.length > 0 &&
             options.map((item) => (
               <MenuItem onClick={() => onOptionClick(item)} value={item.value}>
                 {item.label}
               </MenuItem>
             ))}
-        </Select>
-      </FormControl>
+        </SelectInputRoot>
+      </SelectFormControlWrapper>
       {inputRequired && (
         <FormGroup>
           <FormInputFieldComponent
@@ -83,6 +115,9 @@ export default function({
               onChange: (e: React.ChangeEvent<HTMLInputElement>) => setCustomInput(e.target.value),
               color: 'primary',
               placeholder: customInputPlaceHolder,
+              inputProps: {
+                'data-testid': `${transformation}-custom-input`,
+              },
             }}
           />
           {checkboxRequired && (
@@ -92,6 +127,9 @@ export default function({
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setCheckboxValue(e.target.checked)
               }
+              inputProps={{
+                'data-testid': `${transformation}-checkbox`,
+              }}
             />
           )}
         </FormGroup>

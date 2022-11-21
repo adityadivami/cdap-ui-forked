@@ -34,6 +34,7 @@ interface IRadioInputWithCustomComponentProps {
   customInputType: string;
   customInput: string;
   setCustomInput: React.Dispatch<React.SetStateAction<string>>;
+  inputProps?: IObject;
 }
 
 export default function({
@@ -43,6 +44,7 @@ export default function({
   customInputType,
   customInput,
   setCustomInput,
+  inputProps,
 }: IRadioInputWithCustomComponentProps) {
   return (
     <FormGroupComponent>
@@ -55,7 +57,7 @@ export default function({
           {options.map((eachRadio) => (
             <FormControlLabelRadioComponent
               value={eachRadio.value}
-              control={<Radio color="primary" />}
+              control={<Radio color="primary" inputProps={{ ...inputProps }} />}
               label={eachRadio.label}
             />
           ))}
