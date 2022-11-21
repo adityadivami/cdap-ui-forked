@@ -14,22 +14,21 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
-import AddTransformation from "components/AddTransformation";
+import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import AddTransformation from 'components/AddTransformation';
 import {
   mockDirectiveFunctionSupportedDataType,
   mockFunctionName,
   mockColumnData,
   mockMissingDataList,
-} from "components/AddTransformation/mock/mockDataForAddTransformation";
-import * as  dataQualityHelper  from 'components/common/DataQualityCircularProgressBar/utils';
+} from 'components/AddTransformation/mock/mockDataForAddTransformation';
+import * as dataQualityHelper from 'components/common/DataQualityCircularProgressBar/utils';
 
+describe('It should test the AddTransformatio Component', () => {
+  jest.spyOn(dataQualityHelper, 'getDataQuality').mockReturnValue([]);
 
-describe("It should test the AddTransformatio Component", () => {
-  jest.spyOn(dataQualityHelper,'getDataQuality').mockReturnValue([])
-
-  it("Should render the AddTransformation Component", () => {
+  it('Should render the AddTransformation Component', () => {
     const container = render(
       <AddTransformation
         applyTransformation={jest.fn()}
@@ -43,8 +42,7 @@ describe("It should test the AddTransformatio Component", () => {
     expect(container).toBeDefined();
   });
 
-  it("Trigger handleSelectColumn()", () => {
-
+  it('Trigger handleSelectColumn()', () => {
     render(
       <AddTransformation
         applyTransformation={jest.fn()}
@@ -56,53 +54,51 @@ describe("It should test the AddTransformatio Component", () => {
       />
     );
 
-    const selectColumnButton = screen.getByTestId("select-column-button");
+    const selectColumnButton = screen.getByTestId('select-column-button');
     fireEvent.click(selectColumnButton);
     expect(selectColumnButton).toBeInTheDocument();
   });
-  
-    render(
-      <AddTransformation
-        applyTransformation={jest.fn()}
-        transformationDataType={mockDirectiveFunctionSupportedDataType}
-        transformationName={mockFunctionName}
-        columnsList={mockColumnData}
-        missingItemsList={undefined}
-        onCancel={jest.fn()}
-      />
-    );
 
-    const selectColumnButton = screen.getByTestId("select-column-button");
-    fireEvent.click(selectColumnButton);
-    expect(selectColumnButton).toBeInTheDocument();
+  render(
+    <AddTransformation
+      applyTransformation={jest.fn()}
+      transformationDataType={mockDirectiveFunctionSupportedDataType}
+      transformationName={mockFunctionName}
+      columnsList={mockColumnData}
+      missingItemsList={undefined}
+      onCancel={jest.fn()}
+    />
+  );
 
-    const backIconButton = screen.getAllByTestId("back-icon")[0];
-    fireEvent.click(backIconButton);
+  const selectColumnButton = screen.getByTestId('select-column-button');
+  fireEvent.click(selectColumnButton);
+  expect(selectColumnButton).toBeInTheDocument();
 
-    const drawerCloseButton = screen.getAllByTestId(
-      "drawer-widget-close-round-icon"
-    )[0];
-    fireEvent.click(drawerCloseButton);
-    expect(drawerCloseButton).toBeInTheDocument();
-  });
+  const backIconButton = screen.getAllByTestId('back-icon')[0];
+  fireEvent.click(backIconButton);
 
-  it("Trigger handleApply() , closeSelectColumnsPopupWithoutColumn ", () => {
-    render(
-      <AddTransformation
-        applyTransformation={jest.fn()}
-        transformationDataType={mockDirectiveFunctionSupportedDataType}
-        transformationName={mockFunctionName}
-        columnsList={mockColumnData}
-        missingItemsList={undefined}
-        onCancel={jest.fn()}
-      />
-    );
+  const drawerCloseButton = screen.getAllByTestId('drawer-widget-close-round-icon')[0];
+  fireEvent.click(drawerCloseButton);
+  expect(drawerCloseButton).toBeInTheDocument();
+});
 
-    const selectColumnButton = screen.getByTestId("select-column-button");
-    fireEvent.click(selectColumnButton);
-    const doneBtn = screen.getByTestId("button_done");
-    fireEvent.click(doneBtn);
-    const applyBtn = screen.getByTestId("apply-step-button");
-    fireEvent.click(applyBtn);
-    expect(applyBtn).toBeInTheDocument()
-  });
+it('Trigger handleApply() , closeSelectColumnsPopupWithoutColumn ', () => {
+  render(
+    <AddTransformation
+      applyTransformation={jest.fn()}
+      transformationDataType={mockDirectiveFunctionSupportedDataType}
+      transformationName={mockFunctionName}
+      columnsList={mockColumnData}
+      missingItemsList={undefined}
+      onCancel={jest.fn()}
+    />
+  );
+
+  const selectColumnButton = screen.getByTestId('select-column-button');
+  fireEvent.click(selectColumnButton);
+  const doneBtn = screen.getByTestId('button_done');
+  fireEvent.click(doneBtn);
+  const applyBtn = screen.getByTestId('apply-step-button');
+  fireEvent.click(applyBtn);
+  expect(applyBtn).toBeInTheDocument();
+});

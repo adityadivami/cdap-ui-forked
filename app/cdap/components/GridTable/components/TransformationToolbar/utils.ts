@@ -13,9 +13,13 @@ import {
 } from 'components/GridTable/components/TransformationToolbar/iconStore';
 import { TOOLBAR_ICONS_LABEL_PREFIX } from 'components/GridTable/components/TransformationToolbar/constants';
 import T from 'i18n-react';
+import { MATH_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/mathOptions';
+import { INestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/types';
 import ReplayIcon from '@material-ui/icons/Replay';
+import { MATH_OPTIONS } from 'components/GridTable/components/NestedMenu/menuOptions/mathOptions';
+import { INestedMenuOptions } from 'components/GridTable/components/TransformationToolbar/types';
 
-export const nestedMenuOptions = [
+export const nestedMenuOptions: INestedMenuOptions[] = [
   {
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.undoIcon`).toString(),
     action: 'undo',
@@ -63,7 +67,7 @@ export const nestedMenuOptions = [
     open: false,
   },
   {
-    options: [],
+    options: MATH_OPTIONS,
     icon: MathIcon,
     title: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.mathIcon`).toString(),
     toolName: T.translate(`${TOOLBAR_ICONS_LABEL_PREFIX}.mathIcon`).toString(),

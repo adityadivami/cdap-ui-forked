@@ -14,21 +14,29 @@
  * the License.
  */
 
-import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
+import styled from 'styled-components';
+import { Input } from '@material-ui/core';
 
-export interface ITransformationToolBarProps {
-  columnType: string;
-  submitMenuOption: (value: string, dataType: string[]) => void;
-  setShowBreadCrumb: React.Dispatch<React.SetStateAction<boolean>>;
-  showBreadCrumb: boolean;
-}
-
-export interface INestedMenuOptions {
-  title: string;
-  action?: string;
-  dataType?: string[];
-  toolName: string;
-  icon: JSX.Element;
-  options: IMenuItem[] | [];
-  open: boolean;
-}
+export const InputComponent = styled(Input)`
+  &.MuiInput-underline {
+    width: 100%;
+    &:before {
+      border: none;
+    }
+    &:hover:not(.Mui-disabled):before {
+      border: none;
+    }
+    &:after {
+      border: none;
+    }
+    &.MuiInput-underline.Mui-disabled:before {
+      border-bottom-style: unset;
+    }
+  }
+  &.MuiInput-input {
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+`;

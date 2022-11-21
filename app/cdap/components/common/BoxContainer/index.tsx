@@ -66,3 +66,20 @@ export const AddTransformationBodyWrapper = styled(Box)`
   height: calc(100% - 40px);
   overflow-y: auto;
 `;
+
+export const LabelWrapper = styled(Box)`
+  margin: 10px 0;
+`;
+
+export const NewColumnWrapper = styled(Box)`
+  width: 100%;
+  display: flex;
+`;
+
+export const CalculateWrapper = styled(Box)`
+  margin: 10px 0 0;
+`;
+
+export const CalculateSignWrapper = styled(Box)`
+  margin-right: 5px;
+`;

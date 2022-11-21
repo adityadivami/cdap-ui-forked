@@ -14,20 +14,20 @@
  * the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
-import RadioInput from "components/AddTransformation/ColumnTable/RadioInput/index";
+import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import RadioInput from 'components/AddTransformation/ColumnTable/RadioInput/index';
 
-describe("should test radioInput ", () => {
-  it("Should render the radio component and click the radio", () => {
+describe('should test radioInput ', () => {
+  it('Should render the radio component and click the radio', () => {
     render(
       <RadioInput
         selectedColumns={[
-          { name: "Abhilash", label: "string", type: [""] },
-          { name: "Divami", label: "string", type: [""] },
+          { name: 'Abhilash', label: 'string', type: [''] },
+          { name: 'Divami', label: 'string', type: [''] },
         ]}
         onSingleSelection={jest.fn()}
-        columnDetail={{ name: "string", label: "string", type: [""] }}
+        columnDetail={{ name: 'string', label: 'string', type: [''] }}
         columnIndex={0}
       />
     );

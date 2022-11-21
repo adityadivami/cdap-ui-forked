@@ -48,3 +48,10 @@ export interface IMultipleSelectedFunctionDetail {
 export interface IDataQualityItem {
   [key: string]: string | number;
 }
+
+export interface ITransformationComponentValues {
+  copyColumnName: string;
+  customInput: string;
+  copyToNewColumn: boolean;
+  columnNames: string[];
+}

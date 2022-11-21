@@ -14,21 +14,14 @@
  * the License.
  */
 
-import { IMenuItem } from 'components/GridTable/components/MenuItemComponent/types';
+import React from 'react';
+import { NormalFont } from 'components/common/TypographyText';
+import { LabelWrapper } from 'components/common/BoxContainer';
 
-export interface ITransformationToolBarProps {
-  columnType: string;
-  submitMenuOption: (value: string, dataType: string[]) => void;
-  setShowBreadCrumb: React.Dispatch<React.SetStateAction<boolean>>;
-  showBreadCrumb: boolean;
-}
-
-export interface INestedMenuOptions {
-  title: string;
-  action?: string;
-  dataType?: string[];
-  toolName: string;
-  icon: JSX.Element;
-  options: IMenuItem[] | [];
-  open: boolean;
+export default function({ labelText }: { labelText: string }) {
+  return (
+    <LabelWrapper>
+      <NormalFont>{labelText}</NormalFont>
+    </LabelWrapper>
+  );
 }
