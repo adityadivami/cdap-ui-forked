@@ -95,7 +95,7 @@ export default function({
 
   return (
     <Modal open={open} onClose={handleClose} data-testid="view-full-chart-modal">
-      <CustomizedModalContent>
+      <CustomizedModalContent data-testid="view-full-chart-modal-content">
         <ModalHeading>
           <RenderLabel fontSize={20} dataTestId="distribution">
             <>{T.translate(`${PREFIX}.distribution`)}</>
