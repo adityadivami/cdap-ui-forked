@@ -3472,5 +3472,9 @@ features:
       containsLetterLeading: Contains letters and leading spaces
       containsLetterTrailing: Contains letters and trailing spaces
       containsLetterOnly: Contains letters
-      containsNumberOnly: Contains numbers      
+      containsNumberOnly: Contains numbers   
+    ColumnInsightsChart:
+      distribution: Distribution
+      columnName: "Column Name:"
+      distinct: "Distinct:"
 ...

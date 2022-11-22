@@ -106,7 +106,11 @@ export default function({
           dataQuality={columnDetail?.dataQuality}
           columnInfo={columnDetail?.dataQualityBar}
         />
-        <ColumnDataDistribution graphData={columnDetail?.dataDistributionGraphData} />
+        <ColumnDataDistribution
+          graphData={columnDetail?.dataDistributionGraphData}
+          columnName={columnDetail?.columnName}
+          distinctValues={columnDetail?.distinctValues}
+        />
       </ColumnInsightsContainer>
     </DrawerWidget>
   );

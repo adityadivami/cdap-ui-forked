@@ -20,13 +20,15 @@ import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel
 import T from 'i18n-react';
 import React from 'react';
 import BarChart from 'react-bar-chart';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import ColumnInsightsChart from 'components/ColumnInsightsChart';
 
 export const PREFIX = 'features.NewWranglerUI.ColumnInsights';
 
 interface IColumnDataDistributionProps {
   graphData: IGraphData[];
+  columnName: string;
+  distinctValues: number;
 }
 interface IGraphData {
   text: string;
@@ -43,6 +45,7 @@ const ColumnDataDistributionLabel = styled(Box)`
 `;
 
 const ColumnDataQualityGraph = styled(Box)`
+  width: 1000px;
   & .axis {
     display: none;
   }
@@ -56,7 +59,11 @@ const ColumnDataQualityGraph = styled(Box)`
   }
 `;
 
-export default function({ graphData }: IColumnDataDistributionProps) {
+const ViewFullChartContainer = styled(Box)`
+  cursor: pointer;
+`;
+
+export default function({ graphData, columnName, distinctValues }: IColumnDataDistributionProps) {
   const barChartProps = {
     margin: { top: 20, right: 20, bottom: 70, left: 40 },
     width: 400,
@@ -70,17 +77,28 @@ export default function({ graphData }: IColumnDataDistributionProps) {
     return data;
   };
 
+  const handleViewFullChart = () => {
+    setOpen(true);
+  };
+
+  const [open, setOpen] = React.useState(false);
+
   return (
     <ColumnDataDistributionContainer data-testid="column-data-distribution-parent">
       <ColumnDataDistributionLabel>
         <RenderLabel fontSize={16} dataTestId="distribution-text">
           <>{T.translate(`${PREFIX}.distribution`).toString()}</>
         </RenderLabel>
-        <NavLink to="#" data-testid="view-full-chart-link">
+        <ViewFullChartContainer
+          data-testid="view-full-chart-link"
+          onClick={() => {
+            handleViewFullChart();
+          }}
+        >
           <RenderLabel fontSize={14} color={`${blue[500]}`} dataTestId="view-full-chart-text">
             <> {T.translate(`${PREFIX}.viewFullChart`).toString()}</>
           </RenderLabel>
-        </NavLink>
+        </ViewFullChartContainer>
       </ColumnDataDistributionLabel>
 
       <ColumnDataQualityGraph data-testid="data-distribution-graph">
@@ -90,6 +108,13 @@ export default function({ graphData }: IColumnDataDistributionProps) {
           data={spliceData(graphData)}
         />
       </ColumnDataQualityGraph>
+      <ColumnInsightsChart
+        open={open}
+        setOpen={setOpen}
+        graphData={graphData}
+        columnName={columnName}
+        distinctValues={distinctValues}
+      />
     </ColumnDataDistributionContainer>
   );
 }
