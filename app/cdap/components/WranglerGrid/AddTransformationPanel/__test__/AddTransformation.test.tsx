@@ -28,20 +28,6 @@ import * as dataQualityHelper from 'components/common/DataQualityCircularProgres
 describe('It should test the AddTransformatio Component', () => {
   jest.spyOn(dataQualityHelper, 'getDataQuality').mockReturnValue([]);
 
-  xit('Should render the AddTransformation Component', () => {
-    const container = render(
-      <AddTransformation
-        applyTransformation={jest.fn()}
-        transformationDataType={mockDirectiveFunctionSupportedDataType}
-        transformationName={mockFunctionName}
-        columnsList={mockColumnData}
-        missingItemsList={undefined}
-        onCancel={jest.fn()}
-      />
-    );
-    expect(container).toBeDefined();
-  });
-
   it('Trigger handleSelectColumn()', () => {
     render(
       <AddTransformation
@@ -77,7 +63,7 @@ describe('It should test the AddTransformatio Component', () => {
   const backIconButton = screen.getAllByTestId('back-icon')[0];
   fireEvent.click(backIconButton);
 
-  const drawerCloseButton = screen.getAllByTestId('add-transformation-drawer-close')[0];
+  const drawerCloseButton = screen.getAllByTestId('add-transformation-drawer-close-icon')[0];
   fireEvent.click(drawerCloseButton);
   expect(drawerCloseButton).toBeInTheDocument();
 });
