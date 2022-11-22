@@ -16,7 +16,7 @@
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import FunctionNameWidget from '../index';
+import FunctionNameWidget from 'components/WranglerGrid/AddTransformationPanel/FunctionNameWidget';
 
 describe('It should test FunctionNameWidget Component', () => {
   it('Should render the FunctionNameWidget Component', () => {
