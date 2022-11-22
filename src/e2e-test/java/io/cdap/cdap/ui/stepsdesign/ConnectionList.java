@@ -18,14 +18,18 @@ package io.cdap.cdap.ui.stepsdesign;
 
 import io.cdap.cdap.ui.utils.Constants;
 import io.cdap.cdap.ui.utils.Helper;
+
 import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.WaitHelper;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+
 import org.junit.Assert;
-import org.openqa.selenium.WebElement;
+
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WebElement;
 
 public class ConnectionList {
     @Given("Navigate to Home Page")
@@ -33,7 +37,6 @@ public class ConnectionList {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
-
     @Then("Click on the Connector type card with \\\"(.*)\\\"")
     public void clickOnTheConnectionTypeCard(String testId) {
         try {
@@ -45,7 +48,6 @@ public class ConnectionList {
             System.err.println("error:" + e);
         }
     }
-
     @Then("Verify if the Wrangle button is visible")
     public void clickOnFirstTabOfTheSecondColumn() {
         try {
@@ -71,7 +73,6 @@ public class ConnectionList {
             System.err.println("error: " + e);
         }
     }
-
     @Then("Click on the Add connection button")
     public void clickOnTheAddConnectionButton() {
         try {
@@ -81,7 +82,6 @@ public class ConnectionList {
             System.err.println("error:" + e);
         }
     }
-
     @Then("Click on the Cross icon")
     public void clickOnTheCrossIcon() {
         try {
@@ -89,46 +89,6 @@ public class ConnectionList {
             ElementHelper.clickOnElement(Helper.locateElementByTestId("close-icon"));
         } catch (Exception e) {
             System.err.println("error:" + e);
-        }
-    }
-
-    @Then("Check if the infography is displayed")
-    public void checkIfTheInfographyIsDisplayed() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("home-infographic-icon")));
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
-    @Then("Click on Search icon")
-    public void clickOnSearchIcon() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("search-icon-1"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
-
-    @Then("Enter file name {string} and verify the result")
-    public void verifyFileResult(String fileName) {
-        try {
-            WaitHelper.waitForPageToLoad();
-            WebElement ele = Helper.locateElementByTestId("search-field-1");
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
-
-    @Then("Click on clear icon")
-    public void clickClearIcon() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("clear-search-icon-1"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
         }
     }
 }
