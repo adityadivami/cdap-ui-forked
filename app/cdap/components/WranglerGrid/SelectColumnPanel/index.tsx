@@ -18,80 +18,55 @@ import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
 import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/ColumnsList';
 import {
+  IAddTransformationProps,
   IHeaderNamesList,
   IDataQualityItem,
 } from 'components/WranglerGrid/SelectColumnPanel/types';
 import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
-import {
-  ADD_TRANSFORMATION_PREFIX,
-} from 'components/WranglerGrid/SelectColumnPanel/constants';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/WranglerGrid/SelectColumnPanel/constants';
 import {
   AddTransformationBodyWrapper,
   AddTransformationWrapper,
 } from 'components/common/BoxContainer';
 import { AddTransformationButton } from 'components/common/ButtonWidget';
-import FunctionNameWidget from 'components/WranglerGrid/AddTransformationPanel/FunctionNameWidget';
-import SelectColumnsWidget from 'components/WranglerGrid/AddTransformationPanel/SelectColumnsWidget';
-import SelectedColumnCountWidget from 'components/WranglerGrid/SelectColumnPanel/CountWidget';
-import { getDirective } from 'components/WranglerGrid/AddTransformationPanel/utils';
-import { Box, Divider } from '@material-ui/core';
 import styled from 'styled-components';
+import { Container, Drawer } from '@material-ui/core';
 import { enableDoneButton } from 'components/WranglerGrid/SelectColumnPanel/utils';
-import { IStatistics } from 'components/GridTable/types';
 import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/DrawerHeader';
-import { StyledDrawer, DrawerContainerBox } from 'components/WranglerGrid/SelectColumnPanel';
-import AddTransformationDrawerHeader from 'components/WranglerGrid/AddTransformationPanel/DrawerHeader';
 
-const CountWidgetWrapper = styled(Box)`
-  padding: 10px 0;
+export const StyledDrawer = styled(Drawer)`
+  & .MuiDrawer-paper {
+    top: 46px;
+    height: calc(100vh - 47px);
+  }
 `;
 
-interface IAddTransformationProps {
-  transformationDataType: string[];
-  transformationName: string;
-  columnsList: IHeaderNamesList[];
-  missingItemsList: IStatistics;
-  onCancel: () => void;
-  applyTransformation: (directive: string) => void;
-}
+export const DrawerContainerBox = styled(Container)`
+  width: 460px;
+  height: 100%;
+  padding-left: 30px;
+`;
 
-export default function ({
+export default function({
   transformationDataType,
   transformationName,
   columnsList,
   missingItemsList,
   onCancel,
-  applyTransformation,
 }: IAddTransformationProps) {
-  const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
-  const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
+  const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
 
-  const closeClickHandler = () => {
-    onCancel();
-    setDrawerStatus(false);
-  };
-
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
-    setDrawerStatus(true);
+    onCancel();
   };
 
   const closeSelectColumnsPopupWithoutColumn = () => {
     setColumnsPopup(false);
     setSelectedColumns([]);
-    setDrawerStatus(true);
-  };
-
-  const handleSelectColumn = () => {
-    setColumnsPopup(true);
-  };
-
-  const handleApply = () => {
-    const directive: string = getDirective(transformationName, selectedColumns[0].label);
-    applyTransformation(directive);
-    setDrawerStatus(false); // TODO process of sending value || or directive of function selected
+    onCancel();
   };
 
   useEffect(() => {
@@ -103,37 +78,6 @@ export default function ({
   }, []);
 
   return (
-    <Fragment>
-      <StyledDrawer
-        data-testid="add-transformation-drawer" anchor="right"
-        open={drawerStatus}
-      >
-        <DrawerContainerBox role="presentation" data-testid="add-transformation-drawer">
-          <AddTransformationDrawerHeader closeClickHandler={closeClickHandler} />
-          <AddTransformationWrapper>
-            <AddTransformationBodyWrapper>
-              <CountWidgetWrapper>
-                <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
-              </CountWidgetWrapper>
-              <Divider />
-              <FunctionNameWidget transformationName={transformationName} />
-              <SelectColumnsWidget
-                handleSelectColumn={handleSelectColumn}
-                selectedColumns={selectedColumns}
-                transformationName={transformationName}
-              />
-            </AddTransformationBodyWrapper>
-            <AddTransformationButton
-              disabled={selectedColumns?.length ? false : true}
-              color="primary"
-              data-testid="apply-step-button"
-              onClick={handleApply}
-            >
-              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.applyStep`)}
-            </AddTransformationButton>
-          </AddTransformationWrapper>
-        </DrawerContainerBox>
-      </StyledDrawer>
       <StyledDrawer open={columnsPopup} data-testid="select-column-panel" anchor="right">
         <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
           <SelectColumnDrawerHeader closeClickHandler={closeSelectColumnsPopupWithoutColumn} />
@@ -160,6 +104,5 @@ export default function ({
           </AddTransformationWrapper>
         </DrawerContainerBox>
       </StyledDrawer>
-    </Fragment>
   );
 }

@@ -14,12 +14,18 @@
  * the License.
  */
 
-import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import React from 'react';
+import {
+  IHeaderNamesList,
+  IDataQualityItem,
+} from 'components/WranglerGrid/SelectColumnPanel/types';
 
-export const getDirective = (functionName: string, selectedColumnName: string) => {
-  if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-    return `set-type :${selectedColumnName} ${functionName}`;
-  } else {
-    return null;
-  }
-};
+export interface ISelectColumnsListProps {
+  transformationDataType: string[];
+  selectedColumnsCount: number;
+  columnsList: IHeaderNamesList[];
+  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  dataQuality: IDataQualityItem[];
+  transformationName: string;
+  selectedColumns: IHeaderNamesList[];
+}
