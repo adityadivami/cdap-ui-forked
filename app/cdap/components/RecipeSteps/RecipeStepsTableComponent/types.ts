@@ -14,7 +14,7 @@
  * the License.
  */
 
-export interface IRecipeStepTebleProps {
+export interface IRecipeStepTableProps {
   recipeSteps: string[];
   handleDeleteRecipeSteps: (new_arr: string[], remaining_arr: string[]) => void;
 }

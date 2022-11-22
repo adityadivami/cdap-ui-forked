@@ -16,6 +16,7 @@
 
 import {
   Box,
+  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -24,10 +25,11 @@ import {
   TableRow,
 } from '@material-ui/core';
 import React from 'react';
-import { IRecipeStepTebleProps } from 'components/RecipeSteps/RecipeStepsTableComponent/types';
-import { DeleteIcon } from 'components/RecipeSteps/IconStore/DeleteIcon';
+import { IRecipeStepTableProps } from 'components/RecipeSteps/RecipeStepsTableComponent/types';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineRounded';
 import { headerData } from 'components/RecipeSteps/RecipeStepsTableComponent/utils';
 import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 
 const RecipeStepsTableRow = styled(TableRow)`
   font-style: normal;
@@ -60,7 +62,7 @@ const RecipeStepsTableBodyRow = styled(TableRow)`
   }
 `;
 
-const RecipeStepsBodyTableRow = styled(TableCell)`
+const RecipeStepsBodyTableCell = styled(TableCell)`
   &.MuiTableCell-root {
     font-style: normal;
     font-weight: 400;
@@ -72,7 +74,7 @@ const RecipeStepsBodyTableRow = styled(TableCell)`
   }
 `;
 
-const RecipeStepsDeleteStyle = styled(Box)`
+const RecipeStepsDeleteStyle = styled(IconButton)`
   width: 18px;
   height: 20px;
   cursor: pointer;
@@ -89,8 +91,13 @@ const RecipeStepsTableRowStyle = styled(TableCell)`
   visibility: hidden;
 `;
 
-export default function({ recipeSteps, handleDeleteRecipeSteps }: IRecipeStepTebleProps) {
-  const handleDelete = (eachStep, i) => {
+const StyledDeleteOutlineOutlinedIcon = styled(DeleteOutlineOutlinedIcon)`
+  font-size: 24px;
+  color: ${grey[600]};
+`;
+
+export default function({ recipeSteps, handleDeleteRecipeSteps }: IRecipeStepTableProps) {
+  const handleDelete = (i) => {
     handleDeleteRecipeSteps(
       recipeSteps.filter((x, index) => index < i),
       recipeSteps.filter((x, index) => index >= i)
@@ -102,8 +109,10 @@ export default function({ recipeSteps, handleDeleteRecipeSteps }: IRecipeStepTeb
       <Table aria-label="recipe steps table">
         <TableHead>
           <RecipeStepsTableRow>
-            {headerData?.map((i) => (
-              <RecipeStepsTableHead data-testid={i.textId}>{i.text}</RecipeStepsTableHead>
+            {headerData?.map((eachHeaderData) => (
+              <RecipeStepsTableHead data-testid={eachHeaderData.textId}>
+                {eachHeaderData.text}
+              </RecipeStepsTableHead>
             ))}
           </RecipeStepsTableRow>
         </TableHead>
@@ -113,20 +122,20 @@ export default function({ recipeSteps, handleDeleteRecipeSteps }: IRecipeStepTeb
               key={eachStepIndex}
               data-testid={`recipe-step-row-${eachStepIndex}`}
             >
-              <RecipeStepsBodyTableRow
+              <RecipeStepsBodyTableCell
                 data-testid={`recipe-step-row-${eachStepIndex}-number-column`}
               >
-                {eachStepIndex + 1 > 10 ? eachStepIndex + 1 : `0${eachStepIndex + 1}`}
-              </RecipeStepsBodyTableRow>
-              <RecipeStepsBodyTableRow data-testid={`${eachStep}-recipe-step`}>
+                {eachStepIndex + 1 > 10 ? eachStepIndex + 1 : `${eachStepIndex + 1}`}
+              </RecipeStepsBodyTableCell>
+              <RecipeStepsBodyTableCell data-testid={`${eachStep}-recipe-step`}>
                 <span data-testid={'recipe-steps-span' + eachStepIndex}>{eachStep}</span>
-              </RecipeStepsBodyTableRow>
+              </RecipeStepsBodyTableCell>
               <RecipeStepsTableRowStyle data-testid={`recipe-step-row-${eachStepIndex}-delete`}>
                 <RecipeStepsDeleteStyle
-                  onClick={() => handleDelete(eachStep, eachStepIndex)}
+                  onClick={() => handleDelete(eachStepIndex)}
                   data-testid={`recipe-step-${eachStepIndex}-delete`}
                 >
-                  {DeleteIcon}
+                  <StyledDeleteOutlineOutlinedIcon />
                 </RecipeStepsDeleteStyle>
               </RecipeStepsTableRowStyle>
             </RecipeStepsTableBodyRow>
