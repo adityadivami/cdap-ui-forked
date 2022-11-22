@@ -51,7 +51,7 @@ export default function({
   }, [column]);
 
   return (
-    <CopyColumnWrapper>
+    <CopyColumnWrapper data-testid='copy-column-parent-wrapper'>
       <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
     </CopyColumnWrapper>
   );
