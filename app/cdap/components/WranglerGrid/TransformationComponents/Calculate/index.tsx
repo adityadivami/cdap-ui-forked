@@ -25,7 +25,7 @@ import { SubHeadBoldFont } from 'components/common/TypographyText';
 import { FlexAlignCenter } from 'components/common/BoxContainer';
 import { FormGroupFullWidthComponent } from 'components/common/FormComponents';
 import styled from 'styled-components';
-import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformation/types';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 
 interface ICalculateProps {
   transformationName: string;

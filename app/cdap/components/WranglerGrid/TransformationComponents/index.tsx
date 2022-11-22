@@ -19,7 +19,7 @@ import { CALCULATE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOption
 import {
   IHeaderNamesList,
   ITransformationComponentValues,
-} from 'components/WranglerGrid/AddTransformation/types';
+} from 'components/WranglerGrid/AddTransformationPanel/types';
 import { IStatistics } from 'components/GridTable/types';
 
 export interface ITransformationContentParams {
