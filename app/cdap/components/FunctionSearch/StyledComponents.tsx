@@ -30,20 +30,20 @@ export const ArrowIcon = styled(ChevronRightRoundedIcon)`
 `;
 
 export const AutoSearch = styled(Autocomplete)`
-  &.Mui-focused{
-    & .MuiAutocomplete-inputFocused{
+  &.Mui-focused {
+    & .MuiAutocomplete-inputFocused {
       border-bottom: none !important;
-    };
-    outline: 1px solid #DADCE0;
+    }
+    outline: 1px solid #dadce0;
     box-shadow: 3px 4px 15px rgba(68, 132, 245, 0.15);
   }
-  &.MuiAutocomplete-input{
-    border-bottom: 0px solid #E0E0E0;
+  &.MuiAutocomplete-input {
+    border-bottom: 0px solid #e0e0e0;
   }
-  &.MuiAutocomplete-option{
+  &.MuiAutocomplete-option {
     height: 71px;
   }
-`
+`;
 
 export const ClearSearchIcon = styled(CancelIcon)`
   color: ${grey[600]};
@@ -134,9 +134,9 @@ export const SearchResultsHeaderText = styled(Typography)`
 `;
 
 export const SearchBox = styled(Box)`
-& :hover{
-  cursor: pointer;
-};
+  & :hover {
+    cursor: pointer;
+  }
   & .MuiOutlinedInput-root {
     border-radius: 0px;
     &:hover {
@@ -155,10 +155,9 @@ export const SearchResultsHeader = styled(Box)`
   background-color: #ffffff;
   padding: 10px 15px 0px 26px;
   boxshadow: inset 3px 4px 15px rgba(68, 132, 245, 0.15);
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   gap: 0;
-
 `;
 
 export const SearchResultsContainer = styled(Box)`
@@ -169,7 +168,7 @@ export const SearchResultsContainer = styled(Box)`
   height: 71px;
 `;
 
-export const Underline = () => (
+export const Underline = (
   <svg width="67" height="3" viewBox="0 0 67 3" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M-0.00012207 0.530273H49.9999L52.9999 2.5318H2.99988L-0.00012207 0.530273Z"

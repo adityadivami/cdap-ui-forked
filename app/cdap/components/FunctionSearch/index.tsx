@@ -19,7 +19,8 @@ import MyDataPrepApi from 'api/dataprep';
 import {
   ArrowIcon,
   AutoSearch,
-  ClearSearchIcon, DirectiveContainer,
+  ClearSearchIcon,
+  DirectiveContainer,
   DirectiveDescription,
   DirectiveDescriptionContainer,
   DirectiveName,
@@ -27,8 +28,10 @@ import {
   SearchIcon,
   SearchResultsContainer,
   SearchResultsHeader,
-  SearchResultsHeaderText, StyledPaperComponent,
-  StyledTextField, Underline
+  SearchResultsHeaderText,
+  StyledPaperComponent,
+  StyledTextField,
+  Underline,
 } from 'components/FunctionSearch/StyledComponents';
 import T from 'i18n-react';
 import React, { ChangeEvent, useEffect, useState } from 'react';
@@ -67,7 +70,7 @@ export default function({ transformationPanel }) {
     setDisplayRecentSearches(true);
   };
 
-  const handleOptionClick = (selectedOption:ISearchResult) => {
+  const handleOptionClick = (selectedOption: ISearchResult) => {
     setTextFieldInput('');
     setSelectedDirective(selectedOption.directive);
     transformationPanel(selectedOption.directive);
@@ -110,7 +113,7 @@ export default function({ transformationPanel }) {
             <SearchResultsHeaderText component="p">
               {T.translate(`${PREFIX}.toolbarIcons.labels.recentResults`)}
             </SearchResultsHeaderText>
-            <Underline/>
+            {Underline}
           </SearchResultsHeader>
         )}
         {searchResults.length > 0 && textFieldInput?.length > 0 && (
@@ -118,7 +121,7 @@ export default function({ transformationPanel }) {
             <SearchResultsHeaderText component="p">
               {T.translate(`${PREFIX}.toolbarIcons.labels.searchResults`)}
             </SearchResultsHeaderText>
-            <Underline/>
+            {Underline}
           </SearchResultsHeader>
         )}
         <StyledPaperComponent elevation={0} {...props} />
@@ -127,7 +130,7 @@ export default function({ transformationPanel }) {
   };
 
   return (
-    <SearchBox>
+    <SearchBox data-testid="search-box">
       <AutoSearch
         options={displayRecentSearches ? recentSearches : searchResults}
         getOptionLabel={(option) =>
@@ -146,6 +149,7 @@ export default function({ transformationPanel }) {
               key={option.directive}
               onClick={() => handleOptionClick(option)}
               role="button"
+              data-testid={`search-result-${option.directive}`}
             >
               <DirectiveContainer>
                 <DirectiveName variant="body1">{option.directive}</DirectiveName>
@@ -162,10 +166,11 @@ export default function({ transformationPanel }) {
             placeholder={T.translate(`${PREFIX}.toolbarIcons.labels.placeHolder`)}
             {...params}
             variant="outlined"
-            onBlur = {()=>setTextFieldInput('')}
+            onBlur={() => setTextFieldInput('')}
             onChange={(e) => handleInputChange(e)}
             InputProps={{
               ...params.InputProps,
+
               startAdornment: (
                 <>
                   <InputAdornment position="start">
@@ -178,7 +183,10 @@ export default function({ transformationPanel }) {
                 <>
                   <InputAdornment position="end">
                     {textFieldInput?.length > 0 && (
-                      <ClearSearchIcon onClick={() => setTextFieldInput('')} />
+                      <ClearSearchIcon
+                        onClick={() => setTextFieldInput('')}
+                        data-testid="clear-search-icon"
+                      />
                     )}
                   </InputAdornment>
                 </>
