@@ -30,7 +30,7 @@ interface ISelectColumnDrawerHeaderProps {
   closeClickHandler: () => void;
 }
 
-const UnderLine = (
+export const UnderLine = (
   <svg
     width="67"
     height="2"
@@ -67,11 +67,6 @@ const DrawerContainerInnerFlex = styled(Box)`
   align-items: center;
   justify-content: space-between;
   margin-top: 15px;
-`;
-
-const BackIconBox = styled(Box)`
-  cursor: pointer;
-  margin-right: 10px;
 `;
 
 const DrawerHeadWrapper = styled(Box)`

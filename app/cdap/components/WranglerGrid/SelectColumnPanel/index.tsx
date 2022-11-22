@@ -78,7 +78,6 @@ export default function({
   }, []);
 
   return (
-    <Fragment>
       <StyledDrawer open={columnsPopup} data-testid="select-column-panel" anchor="right">
         <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
           <SelectColumnDrawerHeader closeClickHandler={closeSelectColumnsPopupWithoutColumn} />
@@ -105,6 +104,5 @@ export default function({
           </AddTransformationWrapper>
         </DrawerContainerBox>
       </StyledDrawer>
-    </Fragment>
   );
 }
