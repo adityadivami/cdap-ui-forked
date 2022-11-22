@@ -24,6 +24,9 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 public class Filter {
     @Given("Navigate to Home Page")
@@ -35,14 +38,6 @@ public class Filter {
     @Then("Click on the Data Explorations card")
     public void clickOnTheDataExplorationCard() {
         try {
-            boolean flag = true;
-            while (flag == true) {
-                if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
-                    flag = true;
-                } else {
-                    flag = false;
-                }
-            }
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
@@ -56,6 +51,14 @@ public class Filter {
     public void verifyIfTheTransformationToolbarIsDisplayedOnTheGridPage() {
         WaitHelper.waitForPageToLoad();
         try {
+            boolean flag = true;
+            while (flag == true) {
+                if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+                    flag = true;
+                } else {
+                    flag = false;
+                }
+            }
             Assert.assertTrue(
                     Helper.isElementExists(Helper.getCssSelectorByDataTestId("transformations-toolbar-container")));
         } catch (Exception e) {
@@ -67,25 +70,25 @@ public class Filter {
     public void clickOnTheStructureIcon() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-structure"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-button-Structure"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
 
     @Then("Click on the Filter")
-    public void clickOnTheChangeDataType() {
+    public void clickOnTheFilterOption() {
         try {
             WaitHelper.waitForPageToLoad();
-            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-icon-label-filter"));
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-label-filter"));
+            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-icon-button-filter"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-button-filter"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
 
     @Then("Verify if the user is on the Add transformation page")
-    public void verifyIfTheUserIsOnTheSelectColumnPanel() {
+    public void verifyIfTheUserIsOnTheAddTransformationPanel() {
         try {
             WaitHelper.waitForPageToLoad();
             Assert.assertTrue(ElementHelper.isElementDisplayed(
@@ -119,18 +122,10 @@ public class Filter {
     public void clickOnTheDoneButton() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("click-handle-focus"));
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
-
-    @Then("Click on the radio button of keep rows or remove rows")
-    public void clickOnTheRadioButtonOfTheKeepRowsOrRemoveRows() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("radio-option-1"));
+            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='button_done']"));
+            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
+//            ElementHelper.clickOnElement(Helper.locateElementByTestId("button_done"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -140,7 +135,10 @@ public class Filter {
     public void clickOnTheValueInputField() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("select-filter-option"));
+            JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("select-input-root"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("select-input-root"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -160,7 +158,7 @@ public class Filter {
     public void clickOnTheApplyButton() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("select-option-list-0"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }

@@ -28,7 +28,6 @@ Feature: Filter
     Then Click on the Select Column button
     Then Click on the radio button of any column
     Then Click on the Done button
-    Then Click on the radio button of keep rows or remove rows
     Then Click on the value input field
     Then Select any value from the dropdown
     Then Click on the Apply step button
