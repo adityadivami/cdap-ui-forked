@@ -14,7 +14,7 @@
  * the License.
  */
 
-export interface IParams {components/WranglerGrid/AddTransformationPanel/types
+export interface IParams {
   context: string;
   workspaceId: string;
 }
@@ -53,7 +53,7 @@ interface IGeneralObjectRecord {
   [key: string]: number | string;
 }
 
-interface IGeneral {
+export interface IGeneral {
   general?: IGeneralObjectRecord;
   types?: IGeneralObjectRecord;
 }
