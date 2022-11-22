@@ -135,7 +135,7 @@ export default function({
               {isComponentAvailable && (
                 <TransformationContent
                   setTransformationComponentsValue={setTransformationComponentsValue}
-                  transformationComponent={[]}
+                  transformationComponent={TRANSFORMATION_COMPONENTS}
                   transformationComponentValues={transformationComponentValues}
                   transformationName={transformationName}
                   transformationDataType={transformationDataType}
