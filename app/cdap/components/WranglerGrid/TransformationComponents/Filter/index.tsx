@@ -83,8 +83,8 @@ export default function({
   }, [ignoreCase]);
 
   return (
-    <BoxWrapper>
-      <SubHeadBoldFont>
+    <BoxWrapper data-testid="filter-parent-wrapper">
+      <SubHeadBoldFont data-testid="subheader-select-action">
         {`${T.translate('features.WranglerNewUI.GridPage.transformationUI.filter.selectAction')}`}
       </SubHeadBoldFont>
       <FormGroup>
