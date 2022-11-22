@@ -15,9 +15,9 @@
  */
 
 import React from 'react';
-import InputWidget from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/InputWidgets';
+import InputWidget from 'components/WranglerGrid/SelectColumnPanel/DataTable/InputWidgets';
 import DataQualityCircularProgressBar from 'components/common/DataQualityCircularProgressBar';
-import { ITableRowProps } from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/types';
+import { ITableRowProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 import { TableCellText } from 'components/common/TypographyText';
 import { TableRow, TableCell } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';

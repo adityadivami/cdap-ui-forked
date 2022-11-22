@@ -15,9 +15,9 @@
  */
 
 import React from 'react';
-import RadioInput from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/RadioInput';
-import CheckboxInput from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/CheckboxInput';
-import { IInputWidgetProps } from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/types';
+import RadioInput from 'components/WranglerGrid/SelectColumnPanel/DataTable/RadioInput';
+import CheckboxInput from 'components/WranglerGrid/SelectColumnPanel/DataTable/CheckboxInput';
+import { IInputWidgetProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 
 export default function({
   isSingleSelection,

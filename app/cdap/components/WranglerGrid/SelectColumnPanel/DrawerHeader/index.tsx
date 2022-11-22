@@ -14,20 +14,44 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
+import { Box, Container, IconButton } from '@material-ui/core';
 import React from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import styled from 'styled-components';
-import { BackIcon } from 'components/WranglerGrid/SelectColumnPanel/IconStore/backIcon';
-import { UnderLine } from 'components/WranglerGrid/SelectColumnPanel/IconStore/underline';
 import { FlexAlignCenter, PointerBox } from 'components/common/BoxContainer';
 import { HeadFont } from 'components/common/TypographyText';
 import T from 'i18n-react';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/WranglerGrid/SelectColumnPanel/constants';
+import grey from '@material-ui/core/colors/grey';
+import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
+import { blue } from '@material-ui/core/colors';
 
 interface ISelectColumnDrawerHeaderProps {
   closeClickHandler: () => void;
 }
+
+const UnderLine = (
+  <svg
+    width="67"
+    height="2"
+    viewBox="0 0 67 2"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    data-testid="underline"
+  >
+    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
+    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
+  </svg>
+);
+
+const BackIcon = styled(ChevronLeftRoundedIcon)`
+  font-size: 40px;
+  color: ${grey[600]};
+`;
+
+const CustomizedIconButton = styled(IconButton)`
+  padding: 0px;
+`;
 
 const FlexWrapper = styled(Box)`
   display: flex;
@@ -55,14 +79,14 @@ const DrawerHeadWrapper = styled(Box)`
   flex-direction: column;
 `;
 
-export default function({ closeClickHandler }: ISelectColumnDrawerHeaderProps) {
+export default function ({ closeClickHandler }: ISelectColumnDrawerHeaderProps) {
   return (
     <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
       <DrawerContainerInnerFlex>
         <FlexAlignCenter>
-          <BackIconBox onClick={closeClickHandler} data-testid="box-id">
-            {BackIcon}
-          </BackIconBox>
+          <CustomizedIconButton onClick={closeClickHandler} aria-label="back-icon" data-testid="back-icon">
+            <BackIcon />
+          </CustomizedIconButton>
           <DrawerHeadWrapper>
             <HeadFont component="p" data-testid="drawer-heading">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}

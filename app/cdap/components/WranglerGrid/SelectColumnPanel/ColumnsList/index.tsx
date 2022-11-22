@@ -17,11 +17,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
-import { ISelectColumnsListProps } from 'components/WranglerGrid/SelectColumnPanel/SelectColumnsList/types';
+import { ISelectColumnsListProps } from 'components/WranglerGrid/SelectColumnPanel/ColumnsList/types';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
-import ColumnTable from 'components/WranglerGrid/SelectColumnPanel/ColumnTable';
+import ColumnTable from 'components/WranglerGrid/SelectColumnPanel/DataTable';
 import { multipleColumnSelected } from 'components/WranglerGrid/SelectColumnPanel/constants';
-import SelectedColumnCountWidget from 'components/WranglerGrid/SelectColumnPanel/SelectedColumnCountWidget';
+import SelectedColumnCountWidget from 'components/WranglerGrid/SelectColumnPanel/CountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/WranglerGrid/SelectColumnPanel/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/WranglerGrid/SelectColumnPanel/constants';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';

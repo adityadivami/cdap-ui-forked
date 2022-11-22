@@ -16,7 +16,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import CheckBoxInput from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/CheckboxInput';
+import CheckBoxInput from 'components/WranglerGrid/SelectColumnPanel/DataTable/CheckboxInput';
 
 describe('It should render ', () => {
   it('Should render the checkBox component and click the checkbox with disable check false', () => {

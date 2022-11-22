@@ -16,7 +16,7 @@
 
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
-import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/SelectColumnsList';
+import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/ColumnsList';
 import {
   IAddTransformationProps,
   IHeaderNamesList,
@@ -32,7 +32,7 @@ import { AddTransformationButton } from 'components/common/ButtonWidget';
 import styled from 'styled-components';
 import { Container, Drawer } from '@material-ui/core';
 import { enableDoneButton } from 'components/WranglerGrid/SelectColumnPanel/utils';
-import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/SelectColumnDrawerHeader';
+import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/DrawerHeader';
 
 const StyledDrawer = styled(Drawer)`
   & .MuiDrawer-paper {

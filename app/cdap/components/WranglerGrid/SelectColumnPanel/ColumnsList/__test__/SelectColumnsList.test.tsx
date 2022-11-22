@@ -18,7 +18,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import history from 'services/history';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/SelectColumnsList';
+import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/ColumnsList';
 
 describe('It should test the SelectColumnsList Component', () => {
   it('should render the SelectColumnsList Component', () => {

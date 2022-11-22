@@ -16,13 +16,13 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import ColumnTable from 'components/WranglerGrid/SelectColumnPanel/ColumnTable';
+import DataTable from 'components/WranglerGrid/SelectColumnPanel/DataTable';
 import T from 'i18n-react';
 
 describe('It should test FunctionNameWidget Component', () => {
   it('Should render the FunctionNameWidget Component', () => {
     render(
-      <ColumnTable
+      <DataTable
         columns={[
           { name: 'a', type: ['test'], label: 'test' },
           { name: 'a', type: ['test'], label: 'test' },
@@ -55,7 +55,7 @@ describe('It should test FunctionNameWidget Component', () => {
       { name: 'string', label: 'string', type: ['Abhilash', 'IronMan'] },
     ];
     render(
-      <ColumnTable
+      <DataTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
         transformationDataType={['test']}
         onSingleSelection={() => jest.fn()}
@@ -85,7 +85,7 @@ describe('It should test FunctionNameWidget Component', () => {
     ];
     const handleChange = jest.fn();
     render(
-      <ColumnTable
+      <DataTable
         columns={[
           { name: 'a', type: ['test'], label: 'test' },
           { name: 'a', type: ['test'], label: 'test' },

@@ -16,7 +16,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { ChangeEvent } from 'react';
-import RadioInput from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/RadioInput';
+import RadioInput from 'components/WranglerGrid/SelectColumnPanel/DataTable/RadioInput';
 
 describe('It should render ', () => {
   it('Should render RadioInput component and trigger the on click event', () => {

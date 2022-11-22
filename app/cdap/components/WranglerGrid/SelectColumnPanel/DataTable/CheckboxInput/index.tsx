@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
-import { ICheckBoxInputProps } from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/types';
+import { ICheckBoxInputProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 
 export default function({
   selectedColumns,

@@ -16,7 +16,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { ChangeEvent } from 'react';
-import InputWidgets from 'components/WranglerGrid/SelectColumnPanel/ColumnTable/InputWidgets';
+import InputWidgets from 'components/WranglerGrid/SelectColumnPanel/DataTable/InputWidgets';
 
 describe('It should render ', () => {
   it('Should render component with isSingleSelection false', () => {
