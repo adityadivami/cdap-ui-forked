@@ -70,9 +70,9 @@ describe('It should test the AddTransformatio Component', () => {
     />
   );
 
-  const selectColumnButton = screen.getByTestId('select-column-button');
-  fireEvent.click(selectColumnButton);
-  expect(selectColumnButton).toBeInTheDocument();
+  const selectColumnButton = screen.getAllByTestId('select-column-button');
+  fireEvent.click(selectColumnButton[0]);
+  expect(selectColumnButton[0]).toBeInTheDocument();
 
   const backIconButton = screen.getAllByTestId('back-icon')[0];
   fireEvent.click(backIconButton);
@@ -94,8 +94,8 @@ it('Trigger handleApply() , closeSelectColumnsPopupWithoutColumn ', () => {
     />
   );
 
-  const selectColumnButton = screen.getByTestId('select-column-button');
-  fireEvent.click(selectColumnButton);
+  const selectColumnButton = screen.getAllByTestId('select-column-button');
+  fireEvent.click(selectColumnButton[0]);
   const doneBtn = screen.getByTestId('button_done');
   fireEvent.click(doneBtn);
   const applyBtn = screen.getByTestId('apply-step-button');

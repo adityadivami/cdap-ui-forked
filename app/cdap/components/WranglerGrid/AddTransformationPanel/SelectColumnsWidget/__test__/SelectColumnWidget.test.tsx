@@ -39,7 +39,8 @@ describe('It should test SelectColumnsWidget Component', () => {
         handleSelectColumn={jest.fn()}
       />
     );
-    const singleColumnSelectBtn = container.getByTestId('select-column-button');
-    fireEvent.click(singleColumnSelectBtn);
+    const singleColumnSelectBtn = container.getAllByTestId('select-column-button');
+    fireEvent.click(singleColumnSelectBtn[0]);
+    expect(singleColumnSelectBtn[0]).toBeInTheDocument();
   });
 });

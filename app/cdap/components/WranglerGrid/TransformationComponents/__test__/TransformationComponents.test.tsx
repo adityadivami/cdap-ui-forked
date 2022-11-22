@@ -17,22 +17,25 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import TransformationComponents from 'components/WranglerGrid/TransformationComponents/index';
+import { TRANSFORMATION_COMPONENTS } from 'components/WranglerGrid/TransformationComponents/constants';
 
 describe('Test TransformationComponents', () => {
-  const xyz = () => {
-    return <h2>Hello world</h2>;
-  };
-
   it('Should render TransformationComponent', () => {
     render(
       <TransformationComponents
         setTransformationComponentsValue={jest.fn()}
-        transformationComponent={[{ type: 'abhilash', component: xyz }]}
-        transformationComponentValues={undefined}
-        transformationName={'SQUARE'}
+        transformationComponent={TRANSFORMATION_COMPONENTS}
+        transformationComponentValues={{
+          customInput: '',
+          ignoreCase: false,
+          filterOptionSelected: '',
+          filterOptionValue: '',
+          filterRadioOption: '',
+        }}
+        transformationName={'filter'}
         transformationDataType={[]}
         columnsList={[]}
-        missingItemsList={undefined}
+        missingItemsList={{}}
         onCancel={jest.fn()}
         applyTransformation={jest.fn()}
       />
