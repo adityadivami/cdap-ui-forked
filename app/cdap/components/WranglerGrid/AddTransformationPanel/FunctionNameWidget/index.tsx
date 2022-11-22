@@ -45,6 +45,10 @@ const InfoIconComponent = styled(InfoOutlinedIcon)`
   cursor: pointer;
 `;
 
+const TransformationNameText = styled(SubHeadNormalFont)`
+  text-transform: capitalize;
+`;
+
 export default function({ transformationName }: { transformationName: string }) {
   return (
     <TransformationNameBox>
@@ -55,9 +59,9 @@ export default function({ transformationName }: { transformationName: string }) 
         {TickIcon}
       </TransformationNameHeadWrapper>
       <TransformationNameTextInfoWrapper>
-        <SubHeadNormalFont component="span" data-testid="selected-function-name">
+        <TransformationNameText component="span" data-testid="selected-function-name">
           {transformationName}
-        </SubHeadNormalFont>
+        </TransformationNameText>
         <InfoIconComponent data-testid="info-link" />
       </TransformationNameTextInfoWrapper>
     </TransformationNameBox>
