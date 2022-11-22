@@ -56,6 +56,14 @@ public class CustomTransform {
     @Then("Click on the other icon")
     public void clickOnOtherIcon() {
         try {
+            boolean flag = true;
+            while (flag == true) {
+                if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+                    flag = true;
+                } else {
+                    flag = false;
+                }
+            }
             text = Helper.locateElementByTestId("grid-cellData-00").getText();
             WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-icon-button-Other"));
             ElementHelper.clickOnElement(Helper.locateElementByTestId
