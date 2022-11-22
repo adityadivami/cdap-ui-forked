@@ -32,9 +32,7 @@ describe('Testing Menu Item Component', () => {
     const parentElement = screen.getByTestId(/toolbar-icon-label-string/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
-    expect(parentElement).toHaveClass(
-      'MuiTypography-root'
-    );
+    expect(parentElement).toHaveClass('MuiTypography-root');
   });
 
   it('Should render default component in columntype null case', () => {

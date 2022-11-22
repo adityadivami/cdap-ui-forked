@@ -16,11 +16,9 @@
 
 import React from 'react';
 import { CALCULATE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/calculateOptions';
-import {
-  IHeaderNamesList,
-  ITransformationComponentValues,
-} from 'components/WranglerGrid/AddTransformationPanel/types';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 import { IStatistics } from 'components/GridTable/types';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 
 export interface ITransformationContentParams {
   setTransformationComponentsValue: React.Dispatch<

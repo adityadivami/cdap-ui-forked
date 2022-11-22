@@ -15,24 +15,23 @@
  */
 
 import {
-    mockStatistics,
-    mockColumnList,
-    mockUtilsForNullValues,
-    mockColumnListForNullValues,
-  } from 'components/WranglerGrid/AddTransformationPanel/mock/mockDataForAddTransformation';
-  import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
-  
-  describe('It should test prepareDataQualtiy function', () => {
-    it('mock prepareDataQuality function ', () => {
-      expect(getDataQuality(mockStatistics, mockColumnList)).toStrictEqual([
-        { label: 'body_0', value: '0' },
-      ]);
-    });
-  
-    it('mock prepareDataQuality function branching ', () => {
-      expect(getDataQuality(mockUtilsForNullValues, mockColumnListForNullValues)).toStrictEqual([
-        { label: 'body_0', value: 10 },
-      ]);
-    });
+  mockStatistics,
+  mockColumnList,
+  mockUtilsForNullValues,
+  mockColumnListForNullValues,
+} from 'components/WranglerGrid/AddTransformationPanel/mock/mockDataForAddTransformation';
+import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
+
+describe('It should test prepareDataQualtiy function', () => {
+  it('mock prepareDataQuality function ', () => {
+    expect(getDataQuality(mockStatistics, mockColumnList)).toStrictEqual([
+      { label: 'body_0', value: '0' },
+    ]);
   });
-  
+
+  it('mock prepareDataQuality function branching ', () => {
+    expect(getDataQuality(mockUtilsForNullValues, mockColumnListForNullValues)).toStrictEqual([
+      { label: 'body_0', value: 10 },
+    ]);
+  });
+});
