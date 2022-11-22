@@ -44,7 +44,7 @@ import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import { applyDirectives, getAPIRequestPayload } from 'components/GridTable/services';
-import AddTransformation from 'components/WranglerGrid/AddTransformation';
+import AddTransformation from 'components/WranglerGrid/AddTransformationPanel';
 import Snackbar from 'components/Snackbar';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 
