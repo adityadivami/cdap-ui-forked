@@ -15,8 +15,8 @@
  */
 import React from 'react';
 import T from 'i18n-react';
-import { TickIcon } from 'components/WranglerGrid/AddTransformationPanel/IconStore/tickIcon';
-import { ADD_TRANSFORMATION_PREFIX } from 'components/WranglerGrid/AddTransformationPanel/constants';
+import { TickIcon } from 'components/WranglerGrid/AddTransformationPanel/SelectColumnsWidget';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/WranglerGrid/SelectColumnPanel/constants';
 import { SubHeadNormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import styled from 'styled-components';

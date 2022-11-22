@@ -58,13 +58,10 @@ export default function({
               control={
                 <Radio
                   color="primary"
-                  inputProps={
-                    <Input
-                      inputProps={{
-                        'data-testid': `radio-option-${eachRadioIndex}`,
-                      }}
-                    />
-                  }
+                  inputProps={{
+                    'data-testid': `radio-option-${eachRadioIndex}`,
+                  }}
+                  value={eachRadio.value}
                 />
               }
               label={eachRadio.label}

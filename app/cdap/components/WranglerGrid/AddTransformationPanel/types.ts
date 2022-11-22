@@ -14,21 +14,15 @@
  * the License.
  */
 
-import { IStatistics, IParams } from 'components/GridTable/types';
+import { IStatistics } from 'components/GridTable/types';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
-export interface IRecords {
-  wid?: string;
-  payload?: IParams;
-  body?: string;
-  path?: string;
-  canBrowse?: boolean;
-  name?: string;
-}
-
-export interface IHeaderNamesList {
-  name: string;
-  label: string;
-  type: string[];
+export interface ITransformationComponentValues {
+  customInput: string;
+  ignoreCase: boolean;
+  filterOptionSelected: string;
+  filterOptionValue: string;
+  filterRadioOption: string;
 }
 
 export interface IAddTransformationProps {
@@ -38,21 +32,4 @@ export interface IAddTransformationProps {
   missingItemsList: IStatistics;
   onCancel: () => void;
   applyTransformation: (directive: string) => void;
-}
-
-export interface IMultipleSelectedFunctionDetail {
-  value: string;
-  isMoreThanTwo: boolean;
-}
-
-export interface IDataQualityItem {
-  [key: string]: string | number;
-}
-
-export interface ITransformationComponentValues {
-  customInput: string;
-  ignoreCase: boolean;
-  filterOptionSelected: string;
-  filterOptionValue: string;
-  filterRadioOption: string;
 }
