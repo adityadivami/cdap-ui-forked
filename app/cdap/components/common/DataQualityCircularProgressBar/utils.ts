@@ -14,7 +14,10 @@
  * the License.
  */
 
-import { IHeaderNamesList, IDataQualityItem } from 'components/WranglerGrid/SelectColumnPanel/types';
+import {
+  IHeaderNamesList,
+  IDataQualityItem,
+} from 'components/WranglerGrid/SelectColumnPanel/types';
 import { IStatistics } from 'components/GridTable/types';
 
 export const getDataQuality = (statistics: IStatistics, columnList: IHeaderNamesList[]) => {

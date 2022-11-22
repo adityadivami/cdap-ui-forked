@@ -14,7 +14,11 @@
  * the License.
  */
 
-import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
+import {
+  IHeaderNamesList,
+  IMultipleSelectedFunctionDetail,
+} from 'components/WranglerGrid/SelectColumnPanel/types';
+import { multipleColumnSelected } from 'components/WranglerGrid/SelectColumnPanel/constants';
 
 export const getColumnsSupportedType = (
   transformationDataType: string[],
@@ -40,4 +44,24 @@ export const getFilteredColumn = (
           return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
         });
       });
+};
+
+export const enableDoneButton = (transformationName, selectedColumns) => {
+  if (
+    multipleColumnSelected.filter(
+      (functionNameDetail: IMultipleSelectedFunctionDetail) =>
+        functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
+    )?.length
+  ) {
+    return selectedColumns?.length === 2 ? false : true;
+  } else if (
+    multipleColumnSelected.filter(
+      (functionNameDetail: IMultipleSelectedFunctionDetail) =>
+        functionNameDetail.value === transformationName && functionNameDetail.isMoreThanTwo
+    )?.length
+  ) {
+    return selectedColumns?.length >= 1 ? false : true;
+  } else {
+    return selectedColumns?.length >= 1 ? false : true;
+  }
 };

@@ -29,7 +29,10 @@ import { Box, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import styled from 'styled-components';
 import { grey } from '@material-ui/core/colors';
-import { getColumnsSupportedType, getFilteredColumn } from 'components/WranglerGrid/SelectColumnPanel/utils';
+import {
+  getColumnsSupportedType,
+  getFilteredColumn,
+} from 'components/WranglerGrid/SelectColumnPanel/utils';
 
 const SearchIconComponent = styled(SearchIcon)`
   &.MuiSvgIcon-root {
@@ -71,7 +74,10 @@ const CenterAlignBox = styled(Box)`
 const SelectColumnSearchBox = styled(Box)`
   position: relative;
   display: flex;
-  margin-right: 10px;
+`;
+
+const SearchIconButton = styled(IconButton)`
+  padding-right: 0;
 `;
 
 export default function({
@@ -159,9 +165,9 @@ export default function({
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <SelectColumnSearchBox>
           <SelectColumnSearchInput data-testid="input_id" onChange={handleSearch} ref={ref} />
-          <IconButton onClick={handleFocus} data-testid="click-handle-focus">
+          <SearchIconButton onClick={handleFocus} data-testid="click-handle-focus">
             <SearchIconComponent />
-          </IconButton>
+          </SearchIconButton>
         </SelectColumnSearchBox>
       </SelectColumnInnerWrapper>
       {columnsAsPerType.length === 0 ? (
