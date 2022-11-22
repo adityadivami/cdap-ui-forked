@@ -15,6 +15,7 @@
  */
 
 import FilterComponent from 'components/WranglerGrid/TransformationComponents/Filter';
+
 export const TRANSFORMATION_COMPONENTS = [
   {
     type: 'filter',

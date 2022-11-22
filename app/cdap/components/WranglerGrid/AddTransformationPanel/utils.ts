@@ -21,6 +21,10 @@ import {
   ITransformationComponentValues,
 } from 'components/WranglerGrid/AddTransformationPanel/types';
 import { multipleColumnSelected } from 'components/WranglerGrid/AddTransformationPanel/constants';
+import {
+  FILTER_OPTIONS,
+  FILTER_TRANSFORMATIONS_MAP,
+} from 'components/WranglerGrid/TransformationComponents/Filter/options';
 
 export const getDirective = (
   functionName: string,

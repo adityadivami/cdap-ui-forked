@@ -3516,4 +3516,13 @@ features:
       gridTable:
         title: No rows left in this sample
         subtitle: Remove some recipe steps to view some data
+    Snackbar:
+      labels:
+        datasetSuccess: Dataset loaded successfully 
+        failure: Failure
+        retrieveFailure: Failed to retrieve sample data for
+        sampleFailure: Failed to retrieve sample data
+        success: Success
+        undo: Undo
+        workspaceFailure: Failed to create workspace for
 ...
