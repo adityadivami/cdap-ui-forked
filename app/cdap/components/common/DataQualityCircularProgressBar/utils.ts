@@ -17,7 +17,7 @@
 import {
   IHeaderNamesList,
   IDataQualityItem,
-} from 'components/WranglerGrid/AddTransformationPanel/types';
+} from 'components/WranglerGrid/SelectColumnPanel/types';
 import { IStatistics, IGeneral } from 'components/GridTable/types';
 
 export const getDataQuality = (
