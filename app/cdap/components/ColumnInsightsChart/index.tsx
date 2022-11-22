@@ -44,7 +44,7 @@ const CustomizedModalContent = styled(Box)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 1200px;
+  width: 1000px;
   height: 400px;
   background-color: white;
   border-radius: 4px;
@@ -75,6 +75,7 @@ const GraphContainer = styled(Box)`
 
   & .bar {
     fill: ${blue[500]};
+    width: 40px !important;
   }
 `;
 
@@ -88,8 +89,7 @@ export default function({
   const handleClose = () => setOpen(false);
 
   const barChartProps = {
-    margin: { top: 20, right: 20, bottom: 70, left: 20 },
-    width: distinctValues < 50 ? 400 : distinctValues * 12,
+    width: 72 * distinctValues,
     height: 200,
   };
 

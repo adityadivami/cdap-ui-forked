@@ -31,13 +31,16 @@ export const calculateDistinctValues = (values: IValues[], columnName: string) =
   const arr = [...arrayOfColumn];
   let distinctCount: number = 0;
 
+  let isNonNullElement = false;
   arr.forEach((element, index) => {
     if (arr.indexOf(element) === index && element !== undefined) {
       distinctCount += 1;
     }
+    if (element === undefined) {
+      isNonNullElement = true;
+    }
   });
-
-  return distinctCount;
+  return isNonNullElement ? distinctCount + 1 : distinctCount;
 };
 
 /**
