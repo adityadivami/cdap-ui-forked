@@ -19,10 +19,7 @@ import MyDataPrepApi from 'api/dataprep';
 import {
   ArrowIcon,
   AutoSearch,
-  ClearSearchIcon,
-  CustomPaperComponent,
-  CustomTextField,
-  DirectiveContainer,
+  ClearSearchIcon, DirectiveContainer,
   DirectiveDescription,
   DirectiveDescriptionContainer,
   DirectiveName,
@@ -30,9 +27,9 @@ import {
   SearchIcon,
   SearchResultsContainer,
   SearchResultsHeader,
-  SearchResultsHeaderText,
-  Underline
-} from 'components/FunctionSearch/CustomComponents';
+  SearchResultsHeaderText, StyledPaperComponent,
+  StyledTextField, Underline
+} from 'components/FunctionSearch/StyledComponents';
 import T from 'i18n-react';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import NamespaceStore from 'services/NamespaceStore';
@@ -105,7 +102,7 @@ export default function({ transformationPanel }) {
     }
   }, [textFieldInput]);
 
-  const CustomPaper = (props) => {
+  const StyledPaper = (props) => {
     return (
       <Box>
         {recentSearches.length > 0 && displayRecentSearches && (
@@ -124,7 +121,7 @@ export default function({ transformationPanel }) {
             <Underline/>
           </SearchResultsHeader>
         )}
-        <CustomPaperComponent elevation={0} {...props} />
+        <StyledPaperComponent elevation={0} {...props} />
       </Box>
     );
   };
@@ -137,7 +134,7 @@ export default function({ transformationPanel }) {
           searchResults.length ? option.directive.concat(`(${option.description})`) : ''
         }
         autoHighlight={true}
-        PaperComponent={CustomPaper}
+        PaperComponent={StyledPaper}
         onClose={handleClose}
         selectOnFocus
         clearOnBlur={true}
@@ -161,7 +158,7 @@ export default function({ transformationPanel }) {
           </>
         )}
         renderInput={(params) => (
-          <CustomTextField
+          <StyledTextField
             placeholder={T.translate(`${PREFIX}.toolbarIcons.labels.placeHolder`)}
             {...params}
             variant="outlined"

@@ -51,7 +51,7 @@ export const ClearSearchIcon = styled(CancelIcon)`
   cursor: pointer;
 `;
 
-export const CustomPaperComponent = styled(Paper)`
+export const StyledPaperComponent = styled(Paper)`
   margin-top: -1px;
   border: 1px solid #dadce0; // this color not available in MUI colors
   border-top: none;
@@ -73,7 +73,7 @@ export const CustomPaperComponent = styled(Paper)`
   }
 `;
 
-export const CustomTextField = styled(TextField)`
+export const StyledTextField = styled(TextField)`
   outline: none;
   height: 48px;
   width: 490px;
