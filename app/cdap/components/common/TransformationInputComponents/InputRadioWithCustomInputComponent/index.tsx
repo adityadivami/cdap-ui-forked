@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { FormControl, Radio, RadioGroup } from '@material-ui/core';
+import { FormControl, Input, Radio, RadioGroup } from '@material-ui/core';
 import React from 'react';
 import {
   FormControlLabelComponent,
@@ -34,7 +34,6 @@ interface IRadioInputWithCustomComponentProps {
   customInputType: string;
   customInput: string;
   setCustomInput: React.Dispatch<React.SetStateAction<string>>;
-  inputProps?: IObject;
 }
 
 export default function({
@@ -44,7 +43,6 @@ export default function({
   customInputType,
   customInput,
   setCustomInput,
-  inputProps,
 }: IRadioInputWithCustomComponentProps) {
   return (
     <FormGroupComponent>
@@ -54,10 +52,18 @@ export default function({
           value={radioValue}
           onChange={(e) => setRadioValue(e.target.value)}
         >
-          {options.map((eachRadio) => (
+          {options.map((eachRadio, eachRadioIndex) => (
             <FormControlLabelRadioComponent
               value={eachRadio.value}
-              control={<Radio color="primary" inputProps={{ ...inputProps }} />}
+              control={
+                <Radio
+                  color="primary"
+                  inputProps={{
+                    'data-testid': `radio-option-${eachRadioIndex}`,
+                  }}
+                  value={eachRadio.value}
+                />
+              }
               label={eachRadio.label}
             />
           ))}

@@ -15,10 +15,8 @@
  */
 
 import React from 'react';
-import {
-  IHeaderNamesList,
-  ITransformationComponentValues,
-} from 'components/WranglerGrid/AddTransformationPanel/types';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 import { IStatistics } from 'components/GridTable/types';
 
 export interface ITransformationContentParams {

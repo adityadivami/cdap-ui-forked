@@ -15,12 +15,7 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
-import {
-  IHeaderNamesList,
-  IMultipleSelectedFunctionDetail,
-  ITransformationComponentValues,
-} from 'components/WranglerGrid/AddTransformationPanel/types';
-import { multipleColumnSelected } from 'components/WranglerGrid/AddTransformationPanel/constants';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 import {
   FILTER_OPTIONS,
   FILTER_TRANSFORMATIONS_MAP,
@@ -51,48 +46,5 @@ export const getDirective = (
     }
   } else {
     return null;
-  }
-};
-
-export const getColumnsSupportedType = (transformationDataType, columnsList) => {
-  return transformationDataType?.length > 0 && transformationDataType?.includes('all')
-    ? transformationDataType?.filter((supportedType: string) => supportedType === 'all')
-    : columnsList?.filter((columnDetail: IHeaderNamesList) => {
-        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
-          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
-        });
-      });
-};
-
-export const getFilteredColumn = (transformationDataType, columnsList) => {
-  return transformationDataType?.length > 0 && transformationDataType?.includes('all')
-    ? columnsList
-    : columnsList?.filter((columnDetail: IHeaderNamesList) => {
-        return transformationDataType?.some((dataTypeCollection: string | string[]) => {
-          return dataTypeCollection?.includes(columnDetail?.type[0]?.toLowerCase());
-        });
-      });
-};
-
-export const enableDoneButton = (
-  transformationName: string,
-  selectedColumns: IHeaderNamesList[]
-) => {
-  if (
-    multipleColumnSelected.filter(
-      (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-        functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
-    )?.length
-  ) {
-    return selectedColumns?.length === 2 ? false : true;
-  } else if (
-    multipleColumnSelected.filter(
-      (functionNameDetail: IMultipleSelectedFunctionDetail) =>
-        functionNameDetail.value === transformationName && functionNameDetail.isMoreThanTwo
-    )?.length
-  ) {
-    return selectedColumns?.length >= 1 ? false : true;
-  } else {
-    return selectedColumns?.length >= 1 ? false : true;
   }
 };

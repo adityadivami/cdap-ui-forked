@@ -14,22 +14,15 @@
  * the License.
  */
 
-import DrawerWidget from 'components/DrawerWidget';
 import T from 'i18n-react';
 import React, { Fragment, useState, useEffect } from 'react';
-import SelectColumnsList from 'components/WranglerGrid/AddTransformationPanel/SelectColumnsList';
+import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/ColumnsList';
 import {
-  IAddTransformationProps,
   IHeaderNamesList,
-  IMultipleSelectedFunctionDetail,
   IDataQualityItem,
-  ITransformationComponentValues,
-} from 'components/WranglerGrid/AddTransformationPanel/types';
+} from 'components/WranglerGrid/SelectColumnPanel/types';
 import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
-import {
-  multipleColumnSelected,
-  ADD_TRANSFORMATION_PREFIX,
-} from 'components/WranglerGrid/AddTransformationPanel/constants';
+import { ADD_TRANSFORMATION_PREFIX } from 'components/WranglerGrid/SelectColumnPanel/constants';
 import {
   AddTransformationBodyWrapper,
   AddTransformationWrapper,
@@ -37,20 +30,32 @@ import {
 import { AddTransformationButton } from 'components/common/ButtonWidget';
 import FunctionNameWidget from 'components/WranglerGrid/AddTransformationPanel/FunctionNameWidget';
 import SelectColumnsWidget from 'components/WranglerGrid/AddTransformationPanel/SelectColumnsWidget';
-import SelectedColumnCountWidget from 'components/WranglerGrid/AddTransformationPanel/SelectedColumnCountWidget';
-import {
-  enableDoneButton,
-  getDirective,
-} from 'components/WranglerGrid/AddTransformationPanel/utils';
+import SelectedColumnCountWidget from 'components/WranglerGrid/SelectColumnPanel/CountWidget';
+import { getDirective } from 'components/WranglerGrid/AddTransformationPanel/utils';
 import { Box, Divider } from '@material-ui/core';
 import styled from 'styled-components';
+import { enableDoneButton } from 'components/WranglerGrid/SelectColumnPanel/utils';
+import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/DrawerHeader';
+import { StyledDrawer, DrawerContainerBox } from 'components/WranglerGrid/SelectColumnPanel';
+import AddTransformationDrawerHeader from 'components/WranglerGrid/AddTransformationPanel/DrawerHeader';
 import TransformationContent from 'components/WranglerGrid/TransformationComponents';
-import { transformationComponentDefaultValues } from 'components/WranglerGrid/AddTransformationPanel/constants';
+import {
+  IAddTransformationProps,
+  ITransformationComponentValues,
+} from 'components/WranglerGrid/AddTransformationPanel/types';
 import { TRANSFORMATION_COMPONENTS } from 'components/WranglerGrid/TransformationComponents/constants';
 
 const CountWidgetWrapper = styled(Box)`
   padding: 10px 0;
 `;
+
+const transformationComponentDefaultValues = {
+  customInput: '',
+  ignoreCase: false,
+  filterOptionSelected: 'EMPTY',
+  filterOptionValue: '',
+  filterRadioOption: 'KEEP',
+};
 
 export default function({
   transformationDataType,
@@ -112,77 +117,72 @@ export default function({
 
   return (
     <Fragment>
-      <DrawerWidget
-        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.addTransformation`)}
-        openDrawer={drawerStatus}
-        closeClickHandler={closeClickHandler}
-        dataTestId="add-transformation-drawer"
-      >
-        <AddTransformationWrapper>
-          <AddTransformationBodyWrapper>
-            <CountWidgetWrapper>
-              <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
-            </CountWidgetWrapper>
-            <Divider />
-            <FunctionNameWidget transformationName={transformationName} />
-            <SelectColumnsWidget
-              handleSelectColumn={handleSelectColumn}
-              selectedColumns={selectedColumns}
-              transformationName={transformationName}
-            />
-            {isComponentAvailable && (
-              <TransformationContent
-                setTransformationComponentsValue={setTransformationComponentsValue}
-                transformationComponent={TRANSFORMATION_COMPONENTS}
-                transformationComponentValues={transformationComponentValues}
+      <StyledDrawer data-testid="add-transformation-drawer" anchor="right" open={drawerStatus}>
+        <DrawerContainerBox role="presentation" data-testid="add-transformation-drawer">
+          <AddTransformationDrawerHeader closeClickHandler={closeClickHandler} />
+          <AddTransformationWrapper>
+            <AddTransformationBodyWrapper>
+              <CountWidgetWrapper>
+                <SelectedColumnCountWidget selectedColumnsCount={selectedColumns?.length} />
+              </CountWidgetWrapper>
+              <Divider />
+              <FunctionNameWidget transformationName={transformationName} />
+              <SelectColumnsWidget
+                handleSelectColumn={handleSelectColumn}
+                selectedColumns={selectedColumns}
                 transformationName={transformationName}
-                transformationDataType={transformationDataType}
-                columnsList={columnsList}
-                missingItemsList={missingItemsList}
-                onCancel={onCancel}
-                applyTransformation={applyTransformation}
               />
-            )}
-          </AddTransformationBodyWrapper>
-          <AddTransformationButton
-            disabled={selectedColumns?.length ? false : true}
-            color="primary"
-            data-testid="apply-step-button"
-            onClick={handleApply}
-          >
-            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.applyStep`)}
-          </AddTransformationButton>
-        </AddTransformationWrapper>
-      </DrawerWidget>
-      <DrawerWidget
-        headingText={T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
-        openDrawer={columnsPopup}
-        showBackIcon={true}
-        closeClickHandler={closeSelectColumnsPopupWithoutColumn}
-        dataTestId="select-column-drawer"
-      >
-        <AddTransformationWrapper>
-          <AddTransformationBodyWrapper>
-            <SelectColumnsList
-              columnsList={columnsList}
-              selectedColumnsCount={selectedColumns.length}
-              setSelectedColumns={setSelectedColumns}
-              dataQuality={dataQualityValue}
-              transformationDataType={transformationDataType}
-              transformationName={transformationName}
-              selectedColumns={selectedColumns}
-            />
-          </AddTransformationBodyWrapper>
-          <AddTransformationButton
-            disabled={enableDoneButton(transformationName, selectedColumns)}
-            color="primary"
-            data-testid="button_done"
-            onClick={closeSelectColumnsPopup}
-          >
-            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}
-          </AddTransformationButton>
-        </AddTransformationWrapper>
-      </DrawerWidget>
+              {isComponentAvailable && (
+                <TransformationContent
+                  setTransformationComponentsValue={setTransformationComponentsValue}
+                  transformationComponent={TRANSFORMATION_COMPONENTS}
+                  transformationComponentValues={transformationComponentValues}
+                  transformationName={transformationName}
+                  transformationDataType={transformationDataType}
+                  columnsList={columnsList}
+                  missingItemsList={missingItemsList}
+                  onCancel={onCancel}
+                  applyTransformation={applyTransformation}
+                />
+              )}
+            </AddTransformationBodyWrapper>
+            <AddTransformationButton
+              disabled={selectedColumns?.length ? false : true}
+              color="primary"
+              data-testid="apply-step-button"
+              onClick={handleApply}
+            >
+              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.applyStep`)}
+            </AddTransformationButton>
+          </AddTransformationWrapper>
+        </DrawerContainerBox>
+      </StyledDrawer>
+      <StyledDrawer open={columnsPopup} data-testid="select-column-panel" anchor="right">
+        <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
+          <SelectColumnDrawerHeader closeClickHandler={closeSelectColumnsPopupWithoutColumn} />
+          <AddTransformationWrapper>
+            <AddTransformationBodyWrapper>
+              <SelectColumnsList
+                columnsList={columnsList}
+                selectedColumnsCount={selectedColumns.length}
+                setSelectedColumns={setSelectedColumns}
+                dataQuality={dataQualityValue}
+                transformationDataType={transformationDataType}
+                transformationName={transformationName}
+                selectedColumns={selectedColumns}
+              />
+            </AddTransformationBodyWrapper>
+            <AddTransformationButton
+              disabled={enableDoneButton(transformationName, selectedColumns)}
+              color="primary"
+              data-testid="button_done"
+              onClick={closeSelectColumnsPopup}
+            >
+              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.done`)}
+            </AddTransformationButton>
+          </AddTransformationWrapper>
+        </DrawerContainerBox>
+      </StyledDrawer>
     </Fragment>
   );
 }

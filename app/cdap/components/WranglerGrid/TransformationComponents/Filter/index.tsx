@@ -95,9 +95,6 @@ export default function({
           customInputType="customFormat"
           customInput={customInput}
           setCustomInput={setCustomInput}
-          inputProps={{
-            'data-testid': `filter-radio-${radioOption}`,
-          }}
         />
       </FormGroup>
       <FormGroup>

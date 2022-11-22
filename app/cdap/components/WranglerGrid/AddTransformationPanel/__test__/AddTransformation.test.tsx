@@ -28,6 +28,20 @@ import * as dataQualityHelper from 'components/common/DataQualityCircularProgres
 describe('It should test the AddTransformatio Component', () => {
   jest.spyOn(dataQualityHelper, 'getDataQuality').mockReturnValue([]);
 
+  xit('Should render the AddTransformation Component', () => {
+    const container = render(
+      <AddTransformation
+        applyTransformation={jest.fn()}
+        transformationDataType={mockDirectiveFunctionSupportedDataType}
+        transformationName={mockFunctionName}
+        columnsList={mockColumnData}
+        missingItemsList={undefined}
+        onCancel={jest.fn()}
+      />
+    );
+    expect(container).toBeDefined();
+  });
+
   it('Trigger handleSelectColumn()', () => {
     render(
       <AddTransformation
