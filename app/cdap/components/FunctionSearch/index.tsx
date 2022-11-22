@@ -110,7 +110,7 @@ export default function({ transformationPanel }) {
       <Box>
         {recentSearches.length > 0 && displayRecentSearches && (
           <SearchResultsHeader>
-            <SearchResultsHeaderText component="p">
+            <SearchResultsHeaderText component="p" data-testid="functions-search-recent-results">
               {T.translate(`${PREFIX}.toolbarIcons.labels.recentResults`)}
             </SearchResultsHeaderText>
             {Underline}
@@ -118,7 +118,7 @@ export default function({ transformationPanel }) {
         )}
         {searchResults.length > 0 && textFieldInput?.length > 0 && (
           <SearchResultsHeader>
-            <SearchResultsHeaderText component="p">
+            <SearchResultsHeaderText component="p" data-testid="functions-search-recent-results">
               {T.translate(`${PREFIX}.toolbarIcons.labels.searchResults`)}
             </SearchResultsHeaderText>
             {Underline}
@@ -144,22 +144,23 @@ export default function({ transformationPanel }) {
         clearOnEscape={true}
         inputValue={textFieldInput}
         renderOption={(option) => (
-          <>
-            <SearchResultsContainer
-              key={option.directive}
-              onClick={() => handleOptionClick(option)}
-              role="button"
-              data-testid={`search-result-${option.directive}`}
-            >
-              <DirectiveContainer>
-                <DirectiveName variant="body1">{option.directive}</DirectiveName>
-                <DirectiveDescriptionContainer>
-                  <DirectiveDescription variant="body1">{option.description}</DirectiveDescription>
-                  <ArrowIcon />
-                </DirectiveDescriptionContainer>
-              </DirectiveContainer>
-            </SearchResultsContainer>
-          </>
+          <SearchResultsContainer
+            key={option.directive}
+            onClick={() => handleOptionClick(option)}
+            role="button"
+            data-testid={`search-result-${option.directive
+              .toLowerCase()
+              .split(' ')
+              .join('-')}`}
+          >
+            <DirectiveContainer>
+              <DirectiveName variant="body1">{option.directive}</DirectiveName>
+              <DirectiveDescriptionContainer>
+                <DirectiveDescription variant="body1">{option.description}</DirectiveDescription>
+                <ArrowIcon />
+              </DirectiveDescriptionContainer>
+            </DirectiveContainer>
+          </SearchResultsContainer>
         )}
         renderInput={(params) => (
           <StyledTextField
@@ -170,7 +171,7 @@ export default function({ transformationPanel }) {
             onChange={(e) => handleInputChange(e)}
             InputProps={{
               ...params.InputProps,
-
+              'data-testid': 'function-search-input-field',
               startAdornment: (
                 <>
                   <InputAdornment position="start">
