@@ -14,26 +14,22 @@
  *  the License.
  */
 
-import { fireEvent, render, screen } from "@testing-library/react";
-import React from "react";
-import NewColumnInput from "components/common/TransformationInputComponents/NewColumnInput/index";
+import { fireEvent, render, screen } from '@testing-library/react';
+import React from 'react';
+import NewColumnInput from 'components/common/TransformationInputComponents/NewColumnInput/index';
 
-describe("Testing NewColumnInput component", () => {
-  it("Should render NewColumnInput component when  isError is false ", () => {
-    render(
-      <NewColumnInput column={""} setColumnName={jest.fn()} isError={false} />
-    );
+describe('Testing NewColumnInput component', () => {
+  it('Should render NewColumnInput component when  isError is false ', () => {
+    render(<NewColumnInput column={''} setColumnName={jest.fn()} isError={false} />);
 
     const parentElement = screen.getByTestId(/new-column-wrapper-parent/i);
-    expect(parentElement).toBeInTheDocument()
+    expect(parentElement).toBeInTheDocument();
   });
 
-  it("Should render NewColumnInput component when  isError is false ", () => {
-    render(
-      <NewColumnInput column={""} setColumnName={jest.fn()} isError={true} />
-    );
+  it('Should render NewColumnInput component when  isError is false ', () => {
+    render(<NewColumnInput column={''} setColumnName={jest.fn()} isError={true} />);
 
     const parentElement = screen.getByTestId(/new-column-wrapper-parent/i);
-    expect(parentElement).toBeInTheDocument()
+    expect(parentElement).toBeInTheDocument();
   });
 });
