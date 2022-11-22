@@ -29,12 +29,10 @@ describe('Testing Menu Item Component', () => {
     render(
       <MenuComponent item={dummyItem} index={0} onMenuClick={() => jest.fn()} columnType={'test'} />
     );
-    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    const parentElement = screen.getByTestId(/toolbar-icon-label-string/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
-    expect(parentElement).toHaveClass(
-      'MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button'
-    );
+    expect(parentElement).toHaveClass('MuiTypography-root');
   });
 
   it('Should render default component in columntype null case', () => {
@@ -47,7 +45,7 @@ describe('Testing Menu Item Component', () => {
     render(
       <MenuComponent item={dummyItem} index={0} onMenuClick={() => jest.fn()} columnType={''} />
     );
-    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    const parentElement = screen.getByTestId(/toolbar-icon-label-string/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
   });

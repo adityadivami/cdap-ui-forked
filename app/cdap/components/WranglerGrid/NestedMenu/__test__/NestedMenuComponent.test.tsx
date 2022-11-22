@@ -23,7 +23,14 @@ const dummyData1 = [
     label: 'test',
     supportedDataType: ['test'],
     value: 'test',
-    options: [{ label: 'test', supportedDataType: ['test'], value: 'test', options: [] }],
+    options: [
+      {
+        label: 'test',
+        supportedDataType: ['test'],
+        value: 'test',
+        options: [],
+      },
+    ],
   },
 ];
 
@@ -52,14 +59,12 @@ describe('Testing nested menu component', () => {
       />
     );
 
-    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    const parentElement = screen.getByTestId(/toolbar-icon-label-test/i);
     fireEvent.click(parentElement);
     fireEvent.click(screen.getByTestId(/nested-menu-parent-root/i));
     expect(screen.getByTestId(/nested-menu-parent-root/i)).toBeInTheDocument();
     expect(parentElement).toBeInTheDocument();
-    expect(parentElement).toHaveClass(
-      'MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button'
-    );
+    expect(parentElement).toHaveClass('MuiTypography-root');
   });
 
   it('should test default render of nested menu with options as empty', () => {
@@ -78,7 +83,7 @@ describe('Testing nested menu component', () => {
       />
     );
 
-    const parentElement = screen.getByTestId(/menu-item-parent/i);
+    const parentElement = screen.getByTestId(/toolbar-icon-label-test/i);
     fireEvent.click(parentElement);
     expect(parentElement).toBeInTheDocument();
   });
