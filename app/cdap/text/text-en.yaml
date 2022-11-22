@@ -3460,7 +3460,7 @@ features:
           undoIcon: Undo
           recentResults: Recent Results
           searchResults: Search Results
-          placeHolder: Input a function name or description
+          placeHolder: Search for functions
       transformations:
         options:
           labels:

@@ -22,6 +22,7 @@ import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import styled from 'styled-components';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 export const ArrowIcon = styled(ChevronRightRoundedIcon)`
   color: ${grey[700]};
@@ -44,9 +45,9 @@ export const AutoSearch = styled(Autocomplete)`
   }
 `
 
-export const ClearSearchIcon = styled(ClearOutlinedIcon)`
+export const ClearSearchIcon = styled(CancelIcon)`
   color: ${grey[600]};
-  font-size: xx-large;
+  font-size: 25px;
   cursor: pointer;
 `;
 
@@ -133,6 +134,9 @@ export const SearchResultsHeaderText = styled(Typography)`
 `;
 
 export const SearchBox = styled(Box)`
+& :hover{
+  cursor: pointer;
+};
   & .MuiOutlinedInput-root {
     border-radius: 0px;
     &:hover {
@@ -165,7 +169,7 @@ export const SearchResultsContainer = styled(Box)`
   height: 71px;
 `;
 
-export const Underline = ()=> (
+export const Underline = () => (
   <svg width="67" height="3" viewBox="0 0 67 3" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M-0.00012207 0.530273H49.9999L52.9999 2.5318H2.99988L-0.00012207 0.530273Z"
