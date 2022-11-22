@@ -354,7 +354,13 @@ export default function GridTable() {
                 headersNamesList.map((each, index) => {
                   return missingDataList.map((item, itemIndex) => {
                     if (item.name === each.name) {
-                      return <GridKPICell metricData={item} key={item.name} />;
+                      return (
+                        <GridKPICell
+                          metricData={item}
+                          key={item.name}
+                          cellIndex={`${index}${itemIndex}`}
+                        />
+                      );
                     }
                   });
                 })}
@@ -370,6 +376,7 @@ export default function GridTable() {
                         <GridTextCell
                           cellValue={eachRow[eachKey.name] || '--'}
                           key={`${eachKey.name}-${eachIndex}`}
+                          cellIndex={`${rowIndex}${eachIndex}`}
                         />
                       );
                     })}
