@@ -35,6 +35,14 @@ public class Filter {
     @Then("Click on the Data Explorations card")
     public void clickOnTheDataExplorationCard() {
         try {
+            boolean flag = true;
+            while (flag == true) {
+                if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+                    flag = true;
+                } else {
+                    flag = false;
+                }
+            }
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
@@ -48,14 +56,6 @@ public class Filter {
     public void verifyIfTheTransformationToolbarIsDisplayedOnTheGridPage() {
         WaitHelper.waitForPageToLoad();
         try {
-            boolean flag = true;
-            while (flag == true) {
-                if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
-                    flag = true;
-                } else {
-                    flag = false;
-                }
-            }
             Assert.assertTrue(
                     Helper.isElementExists(Helper.getCssSelectorByDataTestId("transformations-toolbar-container")));
         } catch (Exception e) {
