@@ -3458,6 +3458,9 @@ features:
           structureIcon: Structure
           toggleDescription: Function names
           undoIcon: Undo
+          recentResults: Recent Results
+          searchResults: Search Results
+          placeHolder: Input a function name or description
       transformations:
         options:
           labels:

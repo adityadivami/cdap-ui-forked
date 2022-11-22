@@ -14,35 +14,50 @@
  *  the License.
  */
 
-import { Box, InputAdornment, Paper, TextField, Typography } from '@material-ui/core';
+import { Box, InputAdornment } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
-import React, { useEffect, useState } from 'react';
-import { useStyles } from './styles';
+import {
+  ArrowIcon,
+  AutoSearch,
+  ClearSearchIcon,
+  CustomPaperComponent,
+  CustomTextField,
+  DirectiveContainer,
+  DirectiveDescription,
+  DirectiveDescriptionContainer,
+  DirectiveName,
+  SearchBox,
+  SearchIcon,
+  SearchResultsContainer,
+  SearchResultsHeader,
+  SearchResultsHeaderText,
+  Underline
+} from 'components/FunctionSearch/CustomComponents';
+import T from 'i18n-react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import NamespaceStore from 'services/NamespaceStore';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 
-const FunctionSearch = ({ transformationPanel }) => {
-  const classes = useStyles();
-  const [searchResults, setSeachResults] = useState([]);
+const PREFIX = 'features.WranglerNewUI.GridPage';
+interface ISearchResult {
+  description: string;
+  directive: string;
+}
+
+export default function({ transformationPanel }) {
+  const [searchResults, setSeachResults] = useState<ISearchResult[]>([]);
   const [displayRecentSearches, setDisplayRecentSearches] = useState(false);
   const [textFieldInput, setTextFieldInput] = useState('');
   const [selectedDirective, setSelectedDirective] = useState('');
-  const [recentSearches, setRecentSearches] = useState([]);
-  // const textInput = React.useRef(null);
-  let functionsList;
+  const [recentSearches, setRecentSearches] = useState<ISearchResult[]>([]);
 
-  const GetData = () => {
+  const getDirectivesList = () => {
     const namespace = NamespaceStore.getState().selectedNamespace;
     MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
-      functionsList = [...res.values];
-      setSeachResults(functionsList);
+      setSeachResults([...res.values]);
     });
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTextFieldInput(e.target.value);
     if (e.target.value === '') {
       setDisplayRecentSearches(true);
@@ -55,23 +70,8 @@ const FunctionSearch = ({ transformationPanel }) => {
     setDisplayRecentSearches(true);
   };
 
-  useEffect(() => {
-    GetData();
-    if (textFieldInput === '') {
-      setDisplayRecentSearches(true);
-    }
-  }, [textFieldInput]);
-
-  useEffect(() => {
-    if (textFieldInput === '') {
-      setDisplayRecentSearches(true);
-    } else {
-      setDisplayRecentSearches(false);
-    }
-  }, [textFieldInput]);
-
-  const handleOptionClick = (selectedOption) => {
-    setTextFieldInput(null);
+  const handleOptionClick = (selectedOption:ISearchResult) => {
+    setTextFieldInput('');
     setSelectedDirective(selectedOption.directive);
     transformationPanel(selectedOption.directive);
     const currentRecentSearch = selectedOption;
@@ -90,37 +90,48 @@ const FunctionSearch = ({ transformationPanel }) => {
     }
   };
 
-  const clearSearchHandler = () => {
-    // textInput.current.value = '';
-    setTextFieldInput(null);
-    setDisplayRecentSearches(true);
-  };
+  useEffect(() => {
+    getDirectivesList();
+    if (textFieldInput === '') {
+      setDisplayRecentSearches(true);
+    }
+  }, []);
 
-  console.log(textFieldInput, 'textFieldInput');
-  // console.log(textInput, 'textInput');
+  useEffect(() => {
+    if (textFieldInput === '') {
+      setDisplayRecentSearches(true);
+    } else {
+      setDisplayRecentSearches(false);
+    }
+  }, [textFieldInput]);
+
   const CustomPaper = (props) => {
     return (
       <Box>
         {recentSearches.length > 0 && displayRecentSearches && (
-          <Box className={classes.searchResultHeadBox}>
-            <div className={classes.headingTextStyles}>Recent Results</div>
-            <img src="/cdap_assets/img/Underline.svg" alt="header line" />
-          </Box>
+          <SearchResultsHeader>
+            <SearchResultsHeaderText component="p">
+              {T.translate(`${PREFIX}.toolbarIcons.labels.recentResults`)}
+            </SearchResultsHeaderText>
+            <Underline/>
+          </SearchResultsHeader>
         )}
         {searchResults.length > 0 && textFieldInput?.length > 0 && (
-          <Box className={classes.searchResultHeadBox}>
-            <div className={classes.headingTextStyles}>Search Results</div>
-            <img src="/cdap_assets/img/Underline.svg" alt="header line" />
-          </Box>
+          <SearchResultsHeader>
+            <SearchResultsHeaderText component="p">
+              {T.translate(`${PREFIX}.toolbarIcons.labels.searchResults`)}
+            </SearchResultsHeaderText>
+            <Underline/>
+          </SearchResultsHeader>
         )}
-        <Paper elevation={0} {...props} className={classes.root} />
+        <CustomPaperComponent elevation={0} {...props} />
       </Box>
     );
   };
 
   return (
-    <Box className={classes.main}>
-      <Autocomplete
+    <SearchBox>
+      <AutoSearch
         options={displayRecentSearches ? recentSearches : searchResults}
         getOptionLabel={(option) =>
           searchResults.length ? option.directive.concat(`(${option.description})`) : ''
@@ -129,54 +140,39 @@ const FunctionSearch = ({ transformationPanel }) => {
         PaperComponent={CustomPaper}
         onClose={handleClose}
         selectOnFocus
-        clearOnBlur
-        classes={{
-          option: classes.optionInMUIAutocomplete,
-          focused: classes.onFocusAutocomplete,
-          input: classes.onBlurAutocomplete,
-        }}
+        clearOnBlur={true}
+        clearOnEscape={true}
+        inputValue={textFieldInput}
         renderOption={(option) => (
           <>
-            <Box
-              className={classes.suggestions}
+            <SearchResultsContainer
               key={option.directive}
               onClick={() => handleOptionClick(option)}
               role="button"
             >
-              <Box className={classes.content}>
-                <Typography variant="body1" className={classes.directive}>
-                  {option.directive}
-                </Typography>
-                <Box className={classes.navigate}>
-                  <Typography variant="body1" className={classes.description}>
-                    {option.description}
-                  </Typography>
-                  <Box>
-                    <ChevronRightRoundedIcon className={classes.chevron} />
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
+              <DirectiveContainer>
+                <DirectiveName variant="body1">{option.directive}</DirectiveName>
+                <DirectiveDescriptionContainer>
+                  <DirectiveDescription variant="body1">{option.description}</DirectiveDescription>
+                  <ArrowIcon />
+                </DirectiveDescriptionContainer>
+              </DirectiveContainer>
+            </SearchResultsContainer>
           </>
         )}
         renderInput={(params) => (
-          <TextField
-            placeholder="Input a function name or description"
+          <CustomTextField
+            placeholder={T.translate(`${PREFIX}.toolbarIcons.labels.placeHolder`)}
             {...params}
             variant="outlined"
-            className={classes.textField}
+            onBlur = {()=>setTextFieldInput('')}
             onChange={(e) => handleInputChange(e)}
-            value={textFieldInput}
-            classes={{ root: classes.customTextField }}
-            // inputRef={textInput}
             InputProps={{
               ...params.InputProps,
               startAdornment: (
                 <>
                   <InputAdornment position="start">
-                    <div>
-                      <SearchOutlinedIcon className={classes.search} />
-                    </div>
+                    <SearchIcon />
                   </InputAdornment>
                   <></>
                 </>
@@ -185,12 +181,7 @@ const FunctionSearch = ({ transformationPanel }) => {
                 <>
                   <InputAdornment position="end">
                     {textFieldInput?.length > 0 && (
-                      <div>
-                        <ClearOutlinedIcon
-                          className={classes.close}
-                          onClick={() => setTextFieldInput('')}
-                        />
-                      </div>
+                      <ClearSearchIcon onClick={() => setTextFieldInput('')} />
                     )}
                   </InputAdornment>
                 </>
@@ -199,7 +190,6 @@ const FunctionSearch = ({ transformationPanel }) => {
           />
         )}
       />
-    </Box>
+    </SearchBox>
   );
-};
-export default FunctionSearch;
+}
