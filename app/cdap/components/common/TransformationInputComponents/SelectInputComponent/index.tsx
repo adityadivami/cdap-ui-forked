@@ -99,7 +99,11 @@ export default function({
         >
           {options?.length > 0 &&
             options.map((optionItem, optionIndex) => (
-              <MenuItem onClick={() => onOptionClick(optionItem)} value={optionItem.value} data-testid={`select-option-list-${optionIndex}`}>
+              <MenuItem
+                onClick={() => onOptionClick(optionItem)}
+                value={optionItem.value}
+                data-testid={`select-option-list-${optionIndex}`}
+              >
                 {optionItem.label}
               </MenuItem>
             ))}

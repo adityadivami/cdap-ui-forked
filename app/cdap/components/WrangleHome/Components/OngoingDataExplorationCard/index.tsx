@@ -70,14 +70,26 @@ export default function OngoingDataExplorationCard({ item }) {
             );
           case 'text':
             return eachItem.label.includes('Recipe steps') ? (
-              <Grid item xs={3} className={classes.elementStyle} key={index} data-testid={`wrangler-home-ongoing-data-exploration-card-text-${index}`}>
+              <Grid
+                item
+                xs={3}
+                className={classes.elementStyle}
+                key={index}
+                data-testid={`wrangler-home-ongoing-data-exploration-card-text-${index}`}
+              >
                 <Typography variant="body1" className={classes.textWithoutIcon}>
                   {' '}
                   {eachItem.label}
                 </Typography>
               </Grid>
             ) : (
-              <Grid item xs={3} className={classes.elementStyle} key={index} data-testid={`wrangler-home-ongoing-data-exploration-card-text-${index}`}>
+              <Grid
+                item
+                xs={3}
+                className={classes.elementStyle}
+                key={index}
+                data-testid={`wrangler-home-ongoing-data-exploration-card-text-${index}`}
+              >
                 {datasetNameRefValue ? (
                   <CustomTooltip title={eachItem.label} arrow>
                     <Typography
@@ -138,7 +150,11 @@ export default function OngoingDataExplorationCard({ item }) {
                 </Box>
               </Grid>
             ) : (
-              <Grid item xs={3} data-testid={`wrangler-home-ongoing-data-exploration-card-text-${index}`}></Grid>
+              <Grid
+                item
+                xs={3}
+                data-testid={`wrangler-home-ongoing-data-exploration-card-text-${index}`}
+              ></Grid>
             );
           }
 
