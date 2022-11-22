@@ -14,31 +14,18 @@
  * the License.
  */
 
+import React from 'react';
 import {
   IHeaderNamesList,
   IDataQualityItem,
 } from 'components/WranglerGrid/AddTransformationPanel/types';
-import { IStatistics, IGeneral } from 'components/GridTable/types';
 
-export const getDataQuality = (
-  statistics: IStatistics | IGeneral,
-  columnList: IHeaderNamesList[]
-) => {
-  const dataQuality: IDataQualityItem[] = [];
-  columnList?.forEach((columnName: IHeaderNamesList) => {
-    const generalValues: IDataQualityItem = statistics[columnName.name]?.general;
-    if (generalValues?.null) {
-      const nullCount = generalValues?.null || 0;
-      dataQuality.push({
-        label: columnName.name,
-        value: nullCount,
-      });
-    } else {
-      dataQuality.push({
-        label: columnName.name,
-        value: '0',
-      });
-    }
-  });
-  return dataQuality;
-};
+export interface ISelectColumnsListProps {
+  transformationDataType: string[];
+  selectedColumnsCount: number;
+  columnsList: IHeaderNamesList[];
+  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  dataQuality: IDataQualityItem[];
+  transformationName: string;
+  selectedColumns: IHeaderNamesList[];
+}

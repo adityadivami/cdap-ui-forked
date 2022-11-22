@@ -19,7 +19,7 @@ import {
     mockColumnList,
     mockUtilsForNullValues,
     mockColumnListForNullValues,
-  } from 'components/WranglerGrid/AddTransformation/mock/mockDataForAddTransformation';
+  } from 'components/WranglerGrid/AddTransformationPanel/mock/mockDataForAddTransformation';
   import { getDataQuality } from 'components/common/DataQualityCircularProgressBar/utils';
   
   describe('It should test prepareDataQualtiy function', () => {
