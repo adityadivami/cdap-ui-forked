@@ -110,7 +110,7 @@ export default function({ transformationPanel }) {
       <Box>
         {recentSearches.length > 0 && displayRecentSearches && (
           <SearchResultsHeader>
-            <SearchResultsHeaderText component="p" data-testid="recent-results">
+            <SearchResultsHeaderText component="p" data-testid="functions-search-recent-results">
               {T.translate(`${PREFIX}.toolbarIcons.labels.recentResults`)}
             </SearchResultsHeaderText>
             {Underline}
@@ -118,7 +118,7 @@ export default function({ transformationPanel }) {
         )}
         {searchResults.length > 0 && textFieldInput?.length > 0 && (
           <SearchResultsHeader>
-            <SearchResultsHeaderText component="p" data-testid="search-results">
+            <SearchResultsHeaderText component="p" data-testid="functions-search-recent-results">
               {T.translate(`${PREFIX}.toolbarIcons.labels.searchResults`)}
             </SearchResultsHeaderText>
             {Underline}
