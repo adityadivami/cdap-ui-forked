@@ -96,7 +96,7 @@ export default function({
           customInput={customInput}
           setCustomInput={setCustomInput}
           inputProps={{
-            'data-testid': 'filter-radio-button',
+            'data-testid': `filter-radio-${radioOption}`,
           }}
         />
       </FormGroup>

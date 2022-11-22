@@ -98,9 +98,9 @@ export default function({
           }}
         >
           {options?.length > 0 &&
-            options.map((item) => (
-              <MenuItem onClick={() => onOptionClick(item)} value={item.value}>
-                {item.label}
+            options.map((optionItem, optionIndex) => (
+              <MenuItem onClick={() => onOptionClick(optionItem)} value={optionItem.value} data-testid={`select-option-list-${optionIndex}`}>
+                {optionItem.label}
               </MenuItem>
             ))}
         </SelectInputRoot>
