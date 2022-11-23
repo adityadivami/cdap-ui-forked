@@ -41,4 +41,9 @@ export const FORMAT_OPTIONS = [
     label: T.translate(`${PREFIX}.${'uppercase'}`).toString(),
     supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
   },
+  {
+    value: 'lowercase',
+    label: T.translate(`${PREFIX}.${'lowercase'}`).toString(),
+    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+  },
 ];

@@ -3494,5 +3494,6 @@ features:
               decimal: decimal
               bytes: bytes
               uppercase: uppercase
+              lowercase: lowercase
             menu:
               changeDatatype: Change data type
