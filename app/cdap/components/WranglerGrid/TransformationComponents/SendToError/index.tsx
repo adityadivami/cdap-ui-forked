@@ -71,7 +71,7 @@ export default function({
   }, [ignoreCase]);
 
   return (
-    <SendToErrorWrapper>
+    <SendToErrorWrapper data-testid="send-to-error-wrapper">
       <FormGroupWrapper>
         <LabelComponent labelText={`${T.translate(`${PREFIX}.if`)}`} />
         <SelectInput
