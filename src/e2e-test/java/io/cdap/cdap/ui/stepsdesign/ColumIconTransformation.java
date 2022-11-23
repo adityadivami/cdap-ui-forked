@@ -111,7 +111,7 @@ public class ColumIconTransformation {
             try {
                 WaitHelper.waitForPageToLoad();
                 Assert.assertTrue(ElementHelper.isElementDisplayed(
-                        Helper.locateElementByTestId("add-transformation-drawer")));
+                        Helper.locateElementByTestId("form-input-new-column-name-input")));
             } catch (Exception e) {
                 System.err.println("error:" + e);
             }
@@ -180,9 +180,10 @@ public class ColumIconTransformation {
                 WaitHelper.waitForPageToLoad();
                 JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
                 js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-                WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("new-column-name-input"));
-                WebElement ele = Helper.locateElementByTestId("new-column-name-input");
-                ele.click();
+                WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("form-input-new-column-name-input"));
+                WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='form-input-new-column-name-input']"));
+                JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+                executor.executeScript("arguments[0].click();", ele);
                 ele.sendKeys("newColumn");
             } catch (Exception e) {
                 System.err.println("error:" + e);
