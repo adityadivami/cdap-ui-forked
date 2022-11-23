@@ -40,6 +40,7 @@ export const MENU_OPTIONS: IMenuItem[] = [
           'features.WranglerNewUI.GridPage.transformations.options.labels.setCharacterEncodingOptions.UTF8'
         ).toString(),
         supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-8'`,
       },
       {
         value: 'character-encoding-utf16',
@@ -47,6 +48,7 @@ export const MENU_OPTIONS: IMenuItem[] = [
           'features.WranglerNewUI.GridPage.transformations.options.labels.setCharacterEncodingOptions.UTF16'
         ).toString(),
         supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16'`,
       },
       {
         value: 'character-encoding-us-ascii',
@@ -54,6 +56,7 @@ export const MENU_OPTIONS: IMenuItem[] = [
           'features.WranglerNewUI.GridPage.transformations.options.labels.setCharacterEncodingOptions.USASCII'
         ).toString(),
         supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'us-ascii'`,
       },
       {
         value: 'character-encoding-iso-8859-1',
@@ -61,6 +64,7 @@ export const MENU_OPTIONS: IMenuItem[] = [
           'features.WranglerNewUI.GridPage.transformations.options.labels.setCharacterEncodingOptions.ISO88591'
         ).toString(),
         supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'iso-8859-1'`,
       },
       {
         value: 'character-encoding-utf16-be',
@@ -68,6 +72,7 @@ export const MENU_OPTIONS: IMenuItem[] = [
           'features.WranglerNewUI.GridPage.transformations.options.labels.setCharacterEncodingOptions.UTF16BE'
         ).toString(),
         supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16be'`,
       },
       {
         value: 'character-encoding-utf16-le',
@@ -75,6 +80,7 @@ export const MENU_OPTIONS: IMenuItem[] = [
           'features.WranglerNewUI.GridPage.transformations.options.labels.setCharacterEncodingOptions.UTF16LE'
         ).toString(),
         supportedDataType: ['byte'],
+        directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16le'`,
       },
     ],
     supportedDataType: ['byte'],

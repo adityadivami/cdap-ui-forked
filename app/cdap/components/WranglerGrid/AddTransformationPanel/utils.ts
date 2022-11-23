@@ -14,11 +14,28 @@
  * the License.
  */
 
+import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import { MENU_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/menuOptions';
 
 export const getDirective = (functionName: string, selectedColumnName: string) => {
+  const characterEncodingOptions: IMenuItem[] = [];
+  MENU_OPTIONS.forEach((eachOption: IMenuItem) => {
+    if (eachOption.value === 'set-character-encoding') {
+      characterEncodingOptions.push(...eachOption.options);
+    }
+  });
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
+  } else if (
+    characterEncodingOptions.some((eachOption: IMenuItem) => eachOption.value === functionName)
+  ) {
+    const option: IMenuItem = characterEncodingOptions.find(
+      (eachOption: IMenuItem) => eachOption.value === functionName
+    );
+    if (option) {
+      return option.directive(selectedColumnName);
+    }
   } else {
     return null;
   }
