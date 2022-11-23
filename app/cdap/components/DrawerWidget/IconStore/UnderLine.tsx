@@ -14,23 +14,12 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+import React from 'react';
+import { blue } from '@material-ui/core/colors';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  gridTableWrapper: {
-    height: 'calc(100vh - 232px)',
-    overflowY: 'auto',
-  },
-});
+export const UnderLine = (
+  <svg width="67" height="2" viewBox="0 0 67 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
+    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
+  </svg>
+);

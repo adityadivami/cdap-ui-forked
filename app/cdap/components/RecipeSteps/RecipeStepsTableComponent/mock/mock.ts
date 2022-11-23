@@ -14,23 +14,16 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
-
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  gridTableWrapper: {
-    height: 'calc(100vh - 232px)',
-    overflowY: 'auto',
-  },
-});
+export const mockRecipe = [
+  'a-column',
+  'b-column',
+  'c-column',
+  'd-column',
+  'e-column',
+  'f-column',
+  'g-column',
+  'h-column',
+  'i-column',
+  'j-column',
+  'j-column',
+];
