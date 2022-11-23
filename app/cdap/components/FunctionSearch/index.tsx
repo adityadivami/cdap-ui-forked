@@ -165,6 +165,7 @@ export default function({ transformationPanel }) {
             placeholder={T.translate(`${PREFIX}.toolbarIcons.labels.placeHolder`)}
             {...params}
             variant="outlined"
+            data-testid="test-styled-text-field"
             onBlur={() => setTextFieldInput('')}
             onChange={(e) => handleInputChange(e)}
             InputProps={{

@@ -51,7 +51,8 @@ export const ClearSearchIcon = styled(CancelIcon)`
 `;
 
 export const StyledPaperComponent = styled(Paper)`
-  margin-top: -1px;
+  margin-top: -2px;
+  margin-right: -2px;
   border: 1px solid #dadce0; // this color not available in MUI colors
   border-top: none;
   border-radius: 0;
@@ -128,7 +129,6 @@ export const SearchResultsHeaderText = styled(Typography)`
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
-  // line-height: 150%;
   letter-spacing: 0.15px;
   color: #000000;
 `;
@@ -149,12 +149,16 @@ export const SearchBox = styled(Box)`
 `;
 
 export const SearchResultsHeader = styled(Box)`
+  margin-top: -2px;
+  margin-right: -2px;
   background-color: #ffffff;
   padding: 10px 15px 0px 26px;
   boxshadow: inset 3px 4px 15px rgba(68, 132, 245, 0.15);
   display: flex;
   flex-direction: column;
   gap: 0;
+  border-left: 1px solid #dadce0;
+  border-right: 1px solid #dadce0;
 `;
 
 export const SearchResultsContainer = styled(Box)`
