@@ -17,8 +17,8 @@
 @Integration_Tests
 Feature: Send to error
 
-  @Filter
-  Scenario: Go through the Filter functionality
+  @SendToError
+  Scenario: Go through the send to error functionality
     Given Navigate to Home Page
     Then Click on the Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page

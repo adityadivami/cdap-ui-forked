@@ -28,9 +28,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class SendToError {
         @Given("Navigate to Home Page")
         public void navigateToTheHomePage() {
@@ -42,7 +39,7 @@ public class SendToError {
         public void clickOnTheDataExplorationCard() {
             try {
                 WaitHelper.waitForPageToLoad();
-                ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
+                ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-exploration-card-1  "));
                 String url = SeleniumDriver.getDriver().getCurrentUrl();
                 Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
             } catch (Exception e) {
@@ -84,7 +81,9 @@ public class SendToError {
             try {
                 WaitHelper.waitForPageToLoad();
                 WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-icon-button-send-to-error"));
-                ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-button-send-to-error"));
+                WebElement ele=Helper.locateElementByTestId("toolbar-icon-button-send-to-error");
+                JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+                executor.executeScript("arguments[0].click();", ele);
             } catch (Exception e) {
                 System.err.println("error:" + e);
             }
@@ -152,8 +151,9 @@ public class SendToError {
             JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
             js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
             WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("form-input-send-to-error-custom-input"));
-            WebElement ele = Helper.locateElementByTestId("form-input-send-to-error-custom-input");
-            ele.click();
+            WebElement ele = Helper.locateElementByTestId("send-to-error-custom-input");
+            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
             ele.sendKeys("Jarred");
         } catch (Exception e) {
             System.err.println("error:" + e);
