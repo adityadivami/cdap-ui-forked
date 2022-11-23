@@ -24,6 +24,7 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 public class FunctionsSearch {
@@ -67,10 +68,13 @@ public class FunctionsSearch {
     public void clickOnTheSearchField() {
         try {
 
-            WebElement element = Helper.locateElementByTestId("function-search-input-field");
+            WebElement element = Helper.locateElementByTestId("search-box");
             WaitHelper.waitForPageToLoad();
-            element.click();
+            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", element);
             element.sendKeys("lowercase");
+            String text = element.getText();
+            System.out.println(text);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
