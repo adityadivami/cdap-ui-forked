@@ -13,7 +13,16 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  dataTestId: string;
+
+export interface ISnackbarProps {
+  handleCloseError: () => void;
+  description?: string;
+  isSuccess?: boolean;
+  actionType?: string;
+  snackbarAction?: string;
+}
+export interface ISnackbar {
+  open: boolean;
+  message?: string;
+  isSuccess?: boolean;
 }

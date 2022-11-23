@@ -13,7 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  dataTestId: string;
+
+export interface ITransitionProps {
+  handleClose: () => void;
+  isSuccess: boolean;
+  transitionAction: string;
+  messageToDisplay?: string;
 }
