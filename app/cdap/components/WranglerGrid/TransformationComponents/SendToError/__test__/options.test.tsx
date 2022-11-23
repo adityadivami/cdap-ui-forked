@@ -132,21 +132,21 @@ describe('It should test option.ts file.', () => {
   it('should test SEND_TO_ERROR_OPTIONS[16].directive function when value is ISDATEFORMAT and ISNOTDATEFORMAT.', () => {
     expect(
       SEND_TO_ERROR_OPTIONS[16].directive('send-to-error', 'body_1', false, '', 'ISDATEFORMAT')
-    ).toStrictEqual('send-to-error dq:isDate(body_1)');
+    ).toStrictEqual('send-to-error dq:isDate(body_1, "")');
 
     expect(
       SEND_TO_ERROR_OPTIONS[16].directive('send-to-error', 'body_1', false, '', 'ISNOTDATEFORMAT')
-    ).toStrictEqual('send-to-error !dq:isDate(body_1)');
+    ).toStrictEqual('send-to-error !dq:isDate(body_1, "")');
   });
 
   it('should test SEND_TO_ERROR_OPTIONS[17].directive function when value is ISNOTDATEFORMAT and ISDATEFORMAT.', () => {
     expect(
       SEND_TO_ERROR_OPTIONS[17].directive('send-to-error', 'body_1', false, '', 'ISNOTDATEFORMAT')
-    ).toStrictEqual('send-to-error !dq:isDate(body_1)');
+    ).toStrictEqual('send-to-error !dq:isDate(body_1, "")');
 
     expect(
       SEND_TO_ERROR_OPTIONS[17].directive('send-to-error', 'body_1', false, '', 'ISDATEFORMAT')
-    ).toStrictEqual('send-to-error dq:isDate(body_1)');
+    ).toStrictEqual('send-to-error dq:isDate(body_1, "")');
   });
 
   it('should test SEND_TO_ERROR_OPTIONS[18].directive function when value is ISTIME.', () => {
