@@ -51,6 +51,7 @@ export default function({
           name="actions"
           value={radioValue}
           onChange={(e) => setRadioValue(e.target.value)}
+          data-testid='transformation-custom-radio-group'
         >
           {options.map((eachRadio, eachRadioIndex) => (
             <FormControlLabelRadioComponent

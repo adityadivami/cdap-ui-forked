@@ -27,12 +27,9 @@ describe('Test TransformationComponents', () => {
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{
           customInput: '',
-          ignoreCase: false,
-          filterOptionSelected: '',
-          filterOptionValue: '',
-          filterRadioOption: '',
+          radioOption:''
         }}
-        transformationName={'filter'}
+        transformationName={'delimited-text'}
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}
