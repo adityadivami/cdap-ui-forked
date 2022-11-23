@@ -76,6 +76,8 @@ export const SEND_TO_ERROR_PLACEHOLDER = {
   TEXTENDSWITH: `${T.translate(`${PREFIX}.optionPlaceHolder.textEndWith`)}`,
   TEXTREGEX: `${T.translate(`${PREFIX}.optionPlaceHolder.textRegex`)}`,
   CUSTOMCONDITION: `${T.translate(`${PREFIX}.optionPlaceHolder.customCondition`)}`,
+  ISDATEFORMAT: `${T.translate(`${PREFIX}.optionPlaceHolder.textDate`)}`,
+  ISNOTDATEFORMAT: `${T.translate(`${PREFIX}.optionPlaceHolder.textDate`)}`,
 };
 
 export const SEND_TO_ERROR_OPTIONS = [
@@ -324,7 +326,7 @@ export const SEND_TO_ERROR_OPTIONS = [
   {
     label: `${T.translate(`${PREFIX}.optionLabels.isDateFormat`)}`,
     value: `ISDATEFORMAT`,
-    isInputRequired: false,
+    isInputRequired: true,
     isCheckboxRequired: false,
     directive: (
       directive: string,
@@ -333,7 +335,7 @@ export const SEND_TO_ERROR_OPTIONS = [
       inputValue: string,
       filterAction?: string
     ) => {
-      let condition = `dq:${getDQFunction(filterAction)}(${column})`;
+      let condition = `dq:${getDQFunction(filterAction)}(${column}, "${inputValue}")`;
       if (filterAction.indexOf(`NOT`) !== -1) {
         condition = `!${condition}`;
       }
@@ -343,7 +345,7 @@ export const SEND_TO_ERROR_OPTIONS = [
   {
     label: `${T.translate(`${PREFIX}.optionLabels.isNotDateFormat`)}`,
     value: `ISNOTDATEFORMAT`,
-    isInputRequired: false,
+    isInputRequired: true,
     isCheckboxRequired: false,
     directive: (
       directive: string,
@@ -352,7 +354,7 @@ export const SEND_TO_ERROR_OPTIONS = [
       inputValue: string,
       filterAction?: string
     ) => {
-      let condition = `dq:${getDQFunction(filterAction)}(${column})`;
+      let condition = `dq:${getDQFunction(filterAction)}(${column}, "${inputValue}")`;
       if (filterAction.indexOf(`NOT`) !== -1) {
         condition = `!${condition}`;
       }
