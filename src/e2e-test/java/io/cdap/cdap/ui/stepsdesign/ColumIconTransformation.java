@@ -74,7 +74,7 @@ public class ColumIconTransformation {
                 WaitHelper.waitForPageToLoad();
                 WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-icon-label-copyColumn"));
                 WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='toolbar-icon-label-copyColumn']"));
-                JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+                JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
                 executor.executeScript("arguments[0].click();", ele);
             } catch (Exception e) {
                 System.err.println("error:" + e);
@@ -86,7 +86,7 @@ public class ColumIconTransformation {
             WaitHelper.waitForPageToLoad();
             WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-icon-label-keep"));
             WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='toolbar-icon-label-keep']"));
-            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
             System.err.println("error:" + e);
@@ -98,7 +98,7 @@ public class ColumIconTransformation {
             WaitHelper.waitForPageToLoad();
             WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-icon-label-delete"));
             WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='toolbar-icon-label-delete']"));
-            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
 
         } catch (Exception e) {
@@ -166,7 +166,7 @@ public class ColumIconTransformation {
             try {
                 WaitHelper.waitForPageToLoad();
                 WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='button_done']"));
-                JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+                JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
                 executor.executeScript("arguments[0].click();", ele);
 //            ElementHelper.clickOnElement(Helper.locateElementByTestId("button_done"));
             } catch (Exception e) {
@@ -182,7 +182,7 @@ public class ColumIconTransformation {
                 js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
                 WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("form-input-new-column-name-input"));
                 WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='form-input-new-column-name-input']"));
-                JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+                JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
                 executor.executeScript("arguments[0].click();", ele);
                 ele.sendKeys("newColumn");
             } catch (Exception e) {
