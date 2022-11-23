@@ -85,9 +85,7 @@ export default function({ transformationPanel }) {
     } else {
       setRecentSearches([currentRecentSearch, ...filterredSearchResults]);
     }
-    if (textFieldInput === '') {
-      setDisplayRecentSearches(false);
-    }
+    setDisplayRecentSearches(false);
   };
 
   useEffect(() => {
