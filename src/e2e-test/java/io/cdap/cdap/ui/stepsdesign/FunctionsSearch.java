@@ -24,6 +24,7 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 public class FunctionsSearch {
     @Given("Navigate to the Home Page")
@@ -62,55 +63,59 @@ public class FunctionsSearch {
         }
     }
 
-    @Then("Click on the Search field")
+    @Then("Click on the Search field and send the values")
     public void clickOnTheSearchField() {
         try {
+
+            WebElement element = Helper.locateElementByTestId("function-search-input-field");
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("function-search-input-field"));
+            element.click();
+            element.sendKeys("lowercase");
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
 
-    @Then("Enter name of the transformation in the search field and check the search results")
-    public void enterNameOfAnyColumnFromTheList() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            Helper.locateElementByTestId("function-search-input-field").sendKeys("lowercase");
-            Assert.assertTrue(ElementHelper.isElementDisplayed
-                    (Helper.locateElementByTestId("functions-search-recent-results")));
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
+//    @Then("Enter name of the transformation in the search field and check the search results")
+//    public void enterNameOfAnyColumnFromTheList() {
+//        try {
+//            WaitHelper.waitForPageToLoad();
+//            Helper.locateElementByTestId("function-search-input-field").sendKeys("lowercase");
+//            Assert.assertTrue(ElementHelper.isElementDisplayed
+//                    (Helper.locateElementByTestId("functions-search-recent-results")));
+//        } catch (Exception e) {
+//            System.err.println("error:" + e);
+//        }
+//    }
 
-    @Then("Click on the transformation from results")
-    public void clickOnTheTransformationFromResults() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("search-result-lowercase"));
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
+//    @Then("Click on the transformation from results")
+//    public void clickOnTheTransformationFromResults() {
+//        try {
+//            WaitHelper.waitForPageToLoad();
+//            ElementHelper.clickOnElement(Helper.locateElementByTestId("search-result-lowercase"));
+//        } catch (Exception e) {
+//            System.err.println("error:" + e);
+//        }
+//    }
 
-    @Then("Click on the Search field and check the recent history")
-    public void clickOnTheSearchFieldAndCheckTheRecentHistory() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("function-search-input-field"));
-            Assert.assertTrue(ElementHelper.isElementDisplayed
-                    (Helper.locateElementByTestId("function-search-recent-results")));
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
+//    @Then("Click on the Search field and check the recent history")
+//    public void clickOnTheSearchFieldAndCheckTheRecentHistory() {
+//        try {
+//            WaitHelper.waitForPageToLoad();
+//            ElementHelper.clickOnElement(Helper.locateElementByTestId("function-search-input-field"));
+//            Assert.assertTrue(ElementHelper.isElementDisplayed
+//                    (Helper.locateElementByTestId("function-search-recent-results")));
+//        } catch (Exception e) {
+//            System.err.println("error:" + e);
+//        }
+//    }
 
     @Then("Click on the Clear icon")
     public void clickOnTheCloseIcon() {
         try {
+            WebElement element = Helper.locateElementByTestId("clear-search-icon");
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("clear-search-icon"));
+            element.click();
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
