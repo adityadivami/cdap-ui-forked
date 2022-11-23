@@ -20,18 +20,20 @@ import { MENU_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/men
 
 export const getDirective = (functionName: string, selectedColumnName: string) => {
   const characterEncodingOptions: IMenuItem[] = [];
-  MENU_OPTIONS.forEach((eachOption: IMenuItem) => {
-    if (eachOption.value === 'set-character-encoding') {
-      characterEncodingOptions.push(...eachOption.options);
+  MENU_OPTIONS.forEach((eachMenuOption: IMenuItem) => {
+    if (eachMenuOption.value === 'set-character-encoding') {
+      characterEncodingOptions.push(...eachMenuOption.options);
     }
   });
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
   } else if (
-    characterEncodingOptions.some((eachOption: IMenuItem) => eachOption.value === functionName)
+    characterEncodingOptions.some(
+      (eachCharacterEncodingOption: IMenuItem) => eachCharacterEncodingOption.value === functionName
+    )
   ) {
     const option: IMenuItem = characterEncodingOptions.find(
-      (eachOption: IMenuItem) => eachOption.value === functionName
+      (eachCharacterEncodingOption: IMenuItem) => eachCharacterEncodingOption.value === functionName
     );
     if (option) {
       return option.directive(selectedColumnName);
