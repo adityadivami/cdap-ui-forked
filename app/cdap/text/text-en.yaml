@@ -3571,6 +3571,7 @@ features:
               textStartWith: Enter prefix
               textEndWith: Enter suffix
               textRegex: Enter regex
+              textDate: 'Eg: MM/DD/YYYY'
     Snackbar:
       labels:
         datasetSuccess: Dataset loaded successfully 
