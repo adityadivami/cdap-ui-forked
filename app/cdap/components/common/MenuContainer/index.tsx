@@ -33,7 +33,7 @@ export const MenuComponent = styled(Menu)`
     height: 33px;
   }
   & .MuiMenu-paper {
-    width: 199px;
+    width: 225px;
     max-height: 70% !important;
   }
   & .MuiMenu-list {
@@ -65,7 +65,7 @@ export const NestedMenuComponent = styled(Menu)`
     height: 33px;
   }
   & .MuiMenu-paper {
-    width: 199px;
+    width: 225px;
     max-height: 70% !important;
     top: 145px !important;
   }
