@@ -113,7 +113,7 @@ public class RecipeStep {
             WebElement ele = Helper.locateElementByTestId("recipe-step-row-" + stepId);
             Actions action = new Actions(SeleniumDriver.getDriver());
             action.moveToElement(ele).perform();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-step-1-delete"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-step-" + stepId +"-delete"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -121,7 +121,7 @@ public class RecipeStep {
     @Then("Verify if user clicks on download icon of recipe panel")
     public void clickOnDownloadIcon() {
         try {
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("download-icon"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("header-action-download-icon"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }

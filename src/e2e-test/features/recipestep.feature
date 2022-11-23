@@ -18,7 +18,7 @@
 Feature: Directives
 
   @RecipeStep
-  Scenario Outline: Go through the directives functionality
+  Scenario Outline: Go through the recipe functionality
     Given Navigate to the Home page
     Then Click on the Data explorations card
     Then Verify if user is on the wrangle page
@@ -33,4 +33,21 @@ Feature: Directives
     Then verify if recipe step is Deleted with "<stepId>"
   Examples:
       | stepId |
-      | 1 |
+      | 0 |
+
+
+  Scenario Outline: Go through the recipe with multiple steps functionality
+    Given Navigate to the Home page
+    Then Click on the Data explorations card
+    Then Verify if user is on the wrangle page
+    Then Verify if the directive panel is displayed
+    Then Enter command in the panel with the data "uppercase:body_2"
+    Then Enter command in the panel with the data "lowercase:body_3"
+    Then Enter command in the panel with the data "trim:body_4"
+    Then Enter command in the panel with the data "trim:body_5"
+    Then Click on 'Recipe steps' button
+    Then Verify if recipe panel is displayed
+    Then Click on delete icon of any step with "<stepId>"
+    Examples:
+      | stepId |
+      | 3 |
