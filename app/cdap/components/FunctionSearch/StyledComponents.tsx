@@ -16,8 +16,8 @@
 
 import { Box, Paper, TextField, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import CancelIcon from '@material-ui/icons/Cancel';
 import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import ClearRoundedIcon from '@material-ui/icons/ClearRounded';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
@@ -44,7 +44,7 @@ export const AutoSearch = styled(Autocomplete)`
   }
 `;
 
-export const ClearSearchIcon = styled(CancelIcon)`
+export const ClearSearchIcon = styled(ClearRoundedIcon)`
   color: ${grey[600]};
   font-size: 25px;
   cursor: pointer;

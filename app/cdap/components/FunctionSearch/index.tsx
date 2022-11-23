@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { Box, InputAdornment } from '@material-ui/core';
+import { Box, IconButton, InputAdornment } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import {
   ArrowIcon,
@@ -165,31 +165,24 @@ export default function({ transformationPanel }) {
             placeholder={T.translate(`${PREFIX}.toolbarIcons.labels.placeHolder`)}
             {...params}
             variant="outlined"
-            data-testid="test-styled-text-field"
             onBlur={() => setTextFieldInput('')}
             onChange={(e) => handleInputChange(e)}
             InputProps={{
               ...params.InputProps,
-              'data-testid': 'function-search-input-field',
               startAdornment: (
-                <>
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                  <></>
-                </>
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
               ),
+
               endAdornment: (
-                <>
-                  <InputAdornment position="end">
-                    {textFieldInput?.length > 0 && (
-                      <ClearSearchIcon
-                        onClick={() => setTextFieldInput('')}
-                        data-testid="clear-search-icon"
-                      />
-                    )}
-                  </InputAdornment>
-                </>
+                <InputAdornment position="end">
+                  {textFieldInput?.length > 0 && (
+                    <IconButton onClick={() => setTextFieldInput('')}>
+                      <ClearSearchIcon data-testid="clear-search-icon" />
+                    </IconButton>
+                  )}
+                </InputAdornment>
               ),
             }}
           />
