@@ -16,9 +16,6 @@
 
 package io.cdap.cdap.ui.stepsdesign;
 
-import org.junit.Assert;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import io.cdap.cdap.ui.utils.Constants;
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
@@ -26,6 +23,9 @@ import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.Assert;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
 
