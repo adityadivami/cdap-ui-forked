@@ -14,17 +14,17 @@
  * the License.
  */
 
-import { Divider } from '@material-ui/core';
-import styled from 'styled-components';
+import {
+  DATATYPE_OPTIONS,
+  FORMAT_OPTIONS,
+} from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
 
-export const ShortDivider = styled(Divider)`
-  width: 159px;
-  background: #dadce0;
-`;
-
-export const VerticalDividerBox = styled(Divider)`
-  width: 1px;
-  height: 28px;
-  background-color: #dadce0;
-  margin: 0 15px;
-`;
+export const getDirective = (functionName: string, selectedColumnName: string) => {
+  if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
+    return `set-type :${selectedColumnName} ${functionName}`;
+  } else if (FORMAT_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
+    return `${functionName} :${selectedColumnName}`;
+  } else {
+    return null;
+  }
+};

@@ -13,18 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+import { IHeaderNamesList } from 'components/WranglerGrid/AddTransformationPanel/types';
 
-import { Divider } from '@material-ui/core';
-import styled from 'styled-components';
-
-export const ShortDivider = styled(Divider)`
-  width: 159px;
-  background: #dadce0;
-`;
-
-export const VerticalDividerBox = styled(Divider)`
-  width: 1px;
-  height: 28px;
-  background-color: #dadce0;
-  margin: 0 15px;
-`;
+export interface ISelectColumnsWidgetProps {
+  selectedColumns: IHeaderNamesList[];
+  transformationName: string;
+  handleSelectColumn: (value: boolean) => void;
+}

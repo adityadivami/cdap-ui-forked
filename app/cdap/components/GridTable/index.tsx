@@ -26,20 +26,29 @@ import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
 import {
+  IAddTransformationItem,
+  IApiPayload,
   IExecuteAPIResponse,
+  IGridParams,
   IHeaderNamesList,
   IParams,
   IRecords,
+  IStatistics,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
+import Snackbar from 'components/Snackbar';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import AddTransformationPanel from 'components/WranglerGrid/AddTransformationPanel';
+import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
+import { applyDirectives, getAPIRequestPayload } from './services';
+
+const transformationOptions = ['undo', 'redo'];
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -58,6 +67,18 @@ export default function GridTable() {
     },
   ]);
   const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
+  const [addTransformationFunction, setAddTransformationFunction] = useState<
+    IAddTransformationItem
+  >({
+    option: '',
+    supportedDataType: [],
+  });
+  const [dataQuality, setDataQuality] = useState<IStatistics>();
+  const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
+  const [snackbarData, setSnackbarData] = useState({
+    description: '',
+    isSuccess: false,
+  });
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -186,7 +207,7 @@ export default function GridTable() {
   };
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
-  const createMissingData = (statistics: IRecords) => {
+  const createMissingData = (statistics: IStatistics) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
@@ -222,6 +243,7 @@ export default function GridTable() {
     if (rawData && rawData.summary && rawData.summary.statistics) {
       const missingData = createMissingData(gridData?.summary.statistics);
       setMissingDataList(missingData);
+      setDataQuality(gridData?.summary?.statistics);
     }
     const rowData =
       rawData &&
@@ -239,17 +261,72 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
+    setAddTransformationFunction({
+      option,
+      supportedDataType,
+    });
+  };
+
+  const addDirectives = (directive: string) => {
+    setLoading(true);
+    if (directive) {
+      const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+      console.log(apiPayload, 'apiPayload');
+      addDirectiveAPICall(apiPayload);
+    }
+  };
+
+  const addDirectiveAPICall = (apiPayload: IApiPayload) => {
+    const gridParams: IGridParams = apiPayload.gridParams;
+    applyDirectives(wid, gridParams.directives).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            values: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setSnackbarIsOpen(true);
+        setSnackbarData({
+          description: 'Transformation applied successfully',
+          isSuccess: true,
+        });
+        setLoading(false);
+        setGridData(response);
+        setAddTransformationFunction({
+          option: '',
+          supportedDataType: [],
+        });
+      },
+      (err) => {
+        setLoading(false);
+        setSnackbarIsOpen(true);
+        setSnackbarData({
+          description: 'Transformation cannot applied',
+          isSuccess: false,
+        });
+        setAddTransformationFunction({
+          option: '',
+          supportedDataType: [],
+        });
+      }
+    );
+  };
+
   return (
     <Box data-testid="grid-table-container">
-      {showBreadCrumb && <BreadCrumb datasetName={wid} />}
+      <BreadCrumb datasetName={wid} />
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
-          console.log(option, 'option', datatype, 'datatype');
-          return false;
-          // TODO: will integrate with add transformation panel later
+          !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null;
         }}
       />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
@@ -300,6 +377,36 @@ export default function GridTable() {
               })}
           </TableBody>
         </Table>
+      )}
+      {addTransformationFunction.option && (
+        <AddTransformationPanel
+          transformationName={addTransformationFunction.option}
+          transformationDataType={addTransformationFunction.supportedDataType}
+          columnsList={headersNamesList}
+          missingItemsList={dataQuality}
+          onCancel={() => {
+            setAddTransformationFunction({
+              option: '',
+              supportedDataType: [],
+            });
+          }}
+          applyTransformation={(directive: string) => {
+            addDirectives(directive);
+          }}
+        />
+      )}
+      {snackbarIsOpen && (
+        <Snackbar
+          handleCloseError={() => {
+            setSnackbarIsOpen(false);
+            setSnackbarData({
+              description: '',
+              isSuccess: false,
+            });
+          }}
+          description={snackbarData.description}
+          isSuccess={snackbarData.isSuccess}
+        />
       )}
       {loading && (
         <div className={classes.loadingContainer}>

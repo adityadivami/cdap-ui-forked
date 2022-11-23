@@ -14,17 +14,18 @@
  * the License.
  */
 
-import { Divider } from '@material-ui/core';
-import styled from 'styled-components';
+import React from 'react';
+import {
+  IHeaderNamesList,
+  IDataQualityItem,
+} from 'components/WranglerGrid/SelectColumnPanel/types';
 
-export const ShortDivider = styled(Divider)`
-  width: 159px;
-  background: #dadce0;
-`;
-
-export const VerticalDividerBox = styled(Divider)`
-  width: 1px;
-  height: 28px;
-  background-color: #dadce0;
-  margin: 0 15px;
-`;
+export interface ISelectColumnsListProps {
+  transformationDataType: string[];
+  selectedColumnsCount: number;
+  columnsList: IHeaderNamesList[];
+  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  dataQuality: IDataQualityItem[];
+  transformationName: string;
+  selectedColumns: IHeaderNamesList[];
+}

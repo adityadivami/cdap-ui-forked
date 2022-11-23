@@ -3437,6 +3437,25 @@ features:
         title: No rows left in this sample
         subtitle: Remove some recipe steps to view some data
     GridPage:
+      addTransformationPanel:
+        addTransformation: Add Transformation Step
+        applyStep: Apply Step
+        columnsSelected: columns selected
+        columns: Columns
+        dataQuality: Data Quality
+        done: Done
+        function: Function
+        nullValues: Null Values
+        quickSelect: Quick select by clicking a column on the grid/columns panel
+        selectColumnPara: Select column(s) to apply this function
+        selectColumn: Select column
+        selectMultiColumns: Select columns
+      selectColumnListPanel:
+        columnsSelected: column selected
+        no: No
+        noColumns: No columns to show
+        noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
+        zero: '0'
       menuItems:
         divider: divider
         heading: heading
@@ -3474,5 +3493,6 @@ features:
               double: double
               decimal: decimal
               bytes: bytes
+              uppercase: uppercase
             menu:
               changeDatatype: Change data type
