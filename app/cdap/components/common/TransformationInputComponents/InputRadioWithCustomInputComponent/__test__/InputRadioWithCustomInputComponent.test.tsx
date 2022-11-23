@@ -35,9 +35,5 @@ describe("Test InputRadioWithCustomInputComponent Component", () => {
     fireEvent.change(inputElement.firstChild, {target: {value: 'Abhilash'}})
     expect(inputElement.firstChild).toBeInTheDocument()
 
-    const x = screen.getByTestId(/transformation-custom-radio-group/i)
-    fireEvent.click(x)
-    fireEvent.change(x)
-
 });
 });
