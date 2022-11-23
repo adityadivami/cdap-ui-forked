@@ -14,15 +14,14 @@
  *  the License.
  */
 
-import React from 'react';
 import { Box, Paper, TextField, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
-import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
-import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import styled from 'styled-components';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import CancelIcon from '@material-ui/icons/Cancel';
+import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
+import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import React from 'react';
+import styled from 'styled-components';
 
 export const ArrowIcon = styled(ChevronRightRoundedIcon)`
   color: ${grey[700]};
@@ -122,6 +121,7 @@ export const DirectiveDescription = styled(Typography)`
 export const SearchIcon = styled(SearchOutlinedIcon)`
   color: ${grey[600]};
   font-size: xx-large;
+  cursor: pointer;
 `;
 
 export const SearchResultsHeaderText = styled(Typography)`
@@ -134,9 +134,6 @@ export const SearchResultsHeaderText = styled(Typography)`
 `;
 
 export const SearchBox = styled(Box)`
-  & :hover {
-    cursor: pointer;
-  }
   & .MuiOutlinedInput-root {
     border-radius: 0px;
     &:hover {

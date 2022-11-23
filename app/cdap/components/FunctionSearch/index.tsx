@@ -79,15 +79,13 @@ export default function({ transformationPanel }) {
     const filterredSearchResults = array.filter(
       (item) => item.directive !== currentRecentSearch.directive
     );
-    if (recentSearches.length > 4) {
+    if (recentSearches.length >= 4) {
       array.splice(-1);
       setRecentSearches([currentRecentSearch, ...filterredSearchResults]);
     } else {
       setRecentSearches([currentRecentSearch, ...filterredSearchResults]);
     }
-    if (textFieldInput === '') {
-      setDisplayRecentSearches(false);
-    }
+    setDisplayRecentSearches(false);
   };
 
   useEffect(() => {
