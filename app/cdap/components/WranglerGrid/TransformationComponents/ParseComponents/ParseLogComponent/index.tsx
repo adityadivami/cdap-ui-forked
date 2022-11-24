@@ -20,19 +20,22 @@ import { ISetTransformationValues } from 'components/WranglerGrid/Transformation
 import { PLEASE_SELECT_THE_LOGS_FORMAT } from 'components/WranglerGrid/TransformationComponents/ParseComponents/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setTransformationComponentsValue }: ISetTransformationValues) {
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: ISetTransformationValues) {
   const [selectedParseType, setSelectedParseType] = useState<string>('');
   const [delimiter, setDelimiter] = useState<string>('');
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({
-      ...prevState,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       radioOption: selectedParseType,
-    }));
+    });
   }, [selectedParseType]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, customInput: delimiter }));
+    setTransformationComponentsValue({ ...transformationComponentValues, customInput: delimiter });
   }, [delimiter]);
 
   return (

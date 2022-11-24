@@ -17,6 +17,7 @@
 import React from 'react';
 import { InputComponent } from 'components/common/InputFieldComponent';
 import { FormControlLabelComponent } from 'components/common/FormComponents';
+import { string } from 'prop-types';
 
 interface IInputProps {
   [key: string]: string;

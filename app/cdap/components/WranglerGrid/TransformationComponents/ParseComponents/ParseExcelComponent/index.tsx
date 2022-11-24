@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { FormGroup } from '@material-ui/core';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import { PARSE_EXCEL_OPTIONS } from 'components/WranglerGrid/TransformationComponents/ParseComponents/options';
@@ -28,25 +29,28 @@ import InputCheckbox from 'components/common/TransformationInputComponents/Input
 import React, { useEffect, useState } from 'react';
 import InputRadioWithCustomInputComponent from 'components/common/TransformationInputComponents/InputRadioWithCustomInputComponent';
 
-export default function({ setTransformationComponentsValue }: ISetTransformationValues) {
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: ISetTransformationValues) {
   const [sheetRadioType, setSheetRadioType] = useState<string>('sheetNumber');
   const [sheetValue, setSheetValue] = useState<string>('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
   const [customInput, setCustomInput] = useState<string>('');
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({
-      ...prevState,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       radioOption: sheetRadioType,
-    }));
+    });
   }, [sheetRadioType]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, sheetValue }));
+    setTransformationComponentsValue({ ...transformationComponentValues, sheetValue });
   }, [sheetValue]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, firstRowAsHeader }));
+    setTransformationComponentsValue({ ...transformationComponentValues, firstRowAsHeader });
   }, [firstRowAsHeader]);
 
   return (

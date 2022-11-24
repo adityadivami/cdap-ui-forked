@@ -27,19 +27,25 @@ import {
 import React, { useEffect, useState } from 'react';
 import { SubHeadNormalFont } from 'components/common/TypographyText';
 
-export default function({ setTransformationComponentsValue }: IParseCSVProps) {
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: IParseCSVProps) {
   const [columnWidths, setColumnWidths] = useState<string>('');
   const [padding, setPadding] = useState<string>('');
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, columnWidths }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      columnWidths,
+    });
   }, [columnWidths]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({
-      ...prevState,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       optionPaddingParam: padding,
-    }));
+    });
   }, [padding]);
 
   return (

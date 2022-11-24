@@ -14,12 +14,27 @@
  *  the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import ParseExcelComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseExcelComponent/index';
 
 describe('It should test ParseExcelComponent', () => {
   it('Should render ParseExcelComponent', () => {
-    render(<ParseExcelComponent setTransformationComponentsValue={jest.fn()} />);
+    render(
+      <ParseExcelComponent
+        setTransformationComponentsValue={jest.fn(([]) => null)}
+        transformationComponentValues={{
+          radioOption: 'string',
+          copyColumnName: 'string',
+          customInput: 'string',
+          copyToNewColumn: true,
+          sheetValue: 'string',
+          firstRowAsHeader: true,
+          depth: 0,
+          columnWidths: 'string',
+          optionPaddingParam: 'string',
+        }}
+      />
+    );
   });
 });

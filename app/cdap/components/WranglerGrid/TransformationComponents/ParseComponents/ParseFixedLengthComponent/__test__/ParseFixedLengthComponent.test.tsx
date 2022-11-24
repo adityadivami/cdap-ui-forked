@@ -26,5 +26,8 @@ describe('It should test ParseFixedLengthComponent', () => {
         setTransformationComponentsValue={jest.fn()}
       />
     );
+
+    const parentElement = screen.getByTestId(/parse-component-parent/i);
+    expect(parentElement).toBeInTheDocument();
   });
 });

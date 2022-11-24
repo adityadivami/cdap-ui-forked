@@ -25,24 +25,33 @@ import {
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setTransformationComponentsValue }: ISetTransformationValues) {
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: ISetTransformationValues) {
   const [selectedParseType, setSelectedParseType] = useState<string>('');
   const [firstRowAsHeader, setFirstRowAsHeader] = useState<boolean>(false);
   const [delimiter, setDelimiter] = useState<string>('');
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({
-      ...prevState,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       radioOption: selectedParseType,
-    }));
+    });
   }, [selectedParseType]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, customInput: delimiter }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      customInput: delimiter,
+    });
   }, [delimiter]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, firstRowAsHeader }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      firstRowAsHeader,
+    });
   }, [firstRowAsHeader]);
 
   return (

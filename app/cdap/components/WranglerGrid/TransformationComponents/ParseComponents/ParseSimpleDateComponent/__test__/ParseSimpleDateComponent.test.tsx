@@ -20,6 +20,13 @@ import ParseSimpleDateComponent from 'components/WranglerGrid/TransformationComp
 
 describe('It should test ParseSimpleDateComponent', () => {
   it('Should render ParseSimpleDateComponent', () => {
-    render(<ParseSimpleDateComponent setTransformationComponentsValue={jest.fn()} />);
+    render(
+      <ParseSimpleDateComponent
+        setTransformationComponentsValue={jest.fn()}
+        transformationComponentValues={undefined}
+      />
+    );
+    const parentElement = screen.getByTestId(/parse-component-parent/i);
+    expect(parentElement).toBeInTheDocument();
   });
 });

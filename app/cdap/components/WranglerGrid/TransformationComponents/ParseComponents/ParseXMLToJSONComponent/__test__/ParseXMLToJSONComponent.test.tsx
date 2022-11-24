@@ -14,14 +14,19 @@
  *  the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import ParseXMLToJSONComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseXMLToJSONComponent/index';
 
 describe('It should test ParseComponents', () => {
   it('Should render ParseComponents', () => {
-    render(<ParseXMLToJSONComponent setTransformationComponentsValue={jest.fn()} />);
-
-    // const inputElement = screen.getByTestId(/form-input-field-component/i)
+    render(
+      <ParseXMLToJSONComponent
+        setTransformationComponentsValue={jest.fn()}
+        transformationComponentValues={undefined}
+      />
+    );
+    const parentElement = screen.getByTestId(/parse-component-parent/i);
+    expect(parentElement).toBeInTheDocument();
   });
 });

@@ -20,6 +20,24 @@ import ParseDateTimeComponent from 'components/WranglerGrid/TransformationCompon
 
 describe('It should test ParseDateTimeComponent', () => {
   it('Should render ParseDateTimeComponent', () => {
-    render(<ParseDateTimeComponent setTransformationComponentsValue={jest.fn()} />);
+    render(
+      <ParseDateTimeComponent
+        setTransformationComponentsValue={jest.fn()}
+        transformationComponentValues={{
+          radioOption: 'string',
+          copyColumnName: 'string',
+          customInput: 'string',
+          copyToNewColumn: true,
+          sheetValue: 'string',
+          firstRowAsHeader: true,
+          depth: 0,
+          columnWidths: 'string',
+          optionPaddingParam: 'string',
+        }}
+      />
+    );
+
+    const parentElement = screen.getByTestId(/parse-component-parent/i);
+    expect(parentElement).toBeInTheDocument();
   });
 });
