@@ -26,13 +26,17 @@ describe('Test TransformationComponents', () => {
         setTransformationComponentsValue={jest.fn()}
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{
+          columnWidths: '',
+          copyColumnName: '',
+          copyToNewColumn: false,
           customInput: '',
-          ignoreCase: false,
-          filterOptionSelected: '',
-          filterOptionValue: '',
-          filterRadioOption: '',
+          depth: 1,
+          firstRowAsHeader: false,
+          optionPaddingParam: '',
+          radioOption: '',
+          sheetValue: '',
         }}
-        transformationName={'filter'}
+        transformationName={'parseCSV'}
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}
