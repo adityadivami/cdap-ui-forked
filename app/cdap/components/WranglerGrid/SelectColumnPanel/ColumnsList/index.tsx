@@ -164,7 +164,11 @@ export default function({
       <SelectColumnInnerWrapper>
         <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
         <SelectColumnSearchBox>
-          <SelectColumnSearchInput data-testid="input_id" onChange={handleSearch} ref={ref} />
+          <SelectColumnSearchInput
+            data-testid="input-search-id"
+            onChange={handleSearch}
+            ref={ref}
+          />
           <SearchIconButton onClick={handleFocus} data-testid="click-handle-focus">
             <SearchIconComponent />
           </SearchIconButton>
