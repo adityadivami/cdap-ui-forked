@@ -262,6 +262,7 @@ export default function GridTable() {
   }, [gridData]);
 
   const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
+    console.log(option, supportedDataType, 'supportedDataType');
     setAddTransformationFunction({
       option,
       supportedDataType,
@@ -326,6 +327,7 @@ export default function GridTable() {
         showBreadCrumb={showBreadCrumb}
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
+          console.log(option, datatype, 'option, datatype');
           !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null;
         }}
       />

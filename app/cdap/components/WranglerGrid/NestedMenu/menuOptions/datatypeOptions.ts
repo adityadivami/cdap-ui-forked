@@ -32,18 +32,26 @@ export const DATATYPE_OPTIONS = [
     value: dataType,
     label: T.translate(`${PREFIX}.${dataType}`).toString(),
     supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    infoLink: 'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382042346/Set+Type+directive',
+    description: `Changes the column values to ${dataType} type`,
   };
 });
 
 export const FORMAT_OPTIONS = [
   {
     value: 'uppercase',
-    label: T.translate(`${PREFIX}.${'uppercase'}`).toString(),
-    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    description: 'Changes the column values to uppercase.',
+    label: 'Uppercase',
+    infoLink: 'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382074887/Change+Case+directive',
+    supportedDataType: ['all'],
   },
   {
     value: 'lowercase',
-    label: T.translate(`${PREFIX}.${'lowercase'}`).toString(),
-    supportedDataType: [T.translate(`${TOOLBAR_ICONS_LABEL_ALL_PREFIX}`).toString()],
+    description: 'Changes the column values to lowercase.',
+    label: 'Lowercase',
+    infoLink: 'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382074887/Change+Case+directive',
+    supportedDataType: ['all'],
   },
 ];
+
+export const FUNCTIONS_LIST = [...DATATYPE_OPTIONS, ...FORMAT_OPTIONS];

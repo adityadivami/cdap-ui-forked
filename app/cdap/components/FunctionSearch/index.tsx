@@ -15,7 +15,6 @@
  */
 
 import { Box, IconButton, InputAdornment } from '@material-ui/core';
-import MyDataPrepApi from 'api/dataprep';
 import {
   ArrowIcon,
   AutoSearch,
@@ -33,28 +32,28 @@ import {
   StyledTextField,
   Underline,
 } from 'components/FunctionSearch/StyledComponents';
+import { FUNCTIONS_LIST } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
 import T from 'i18n-react';
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import NamespaceStore from 'services/NamespaceStore';
 
 const PREFIX = 'features.WranglerNewUI.GridPage';
 interface ISearchResult {
   description: string;
-  directive: string;
+  value: string;
+  label: string;
+  supportedDataType: string;
+  infoLink: string;
 }
 
 export default function({ transformationPanel }) {
-  const [searchResults, setSeachResults] = useState<ISearchResult[]>([]);
+  const [searchResults, setSeachResults] = useState([]);
   const [displayRecentSearches, setDisplayRecentSearches] = useState(false);
   const [textFieldInput, setTextFieldInput] = useState('');
   const [selectedDirective, setSelectedDirective] = useState('');
-  const [recentSearches, setRecentSearches] = useState<ISearchResult[]>([]);
+  const [recentSearches, setRecentSearches] = useState([]);
 
   const getDirectivesList = () => {
-    const namespace = NamespaceStore.getState().selectedNamespace;
-    MyDataPrepApi.getUsage({ context: namespace }).subscribe((res) => {
-      setSeachResults([...res.values]);
-    });
+    setSeachResults([...FUNCTIONS_LIST]);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -71,14 +70,13 @@ export default function({ transformationPanel }) {
   };
 
   const handleOptionClick = (selectedOption: ISearchResult) => {
+    console.log(selectedOption, 'selectedOption');
     setTextFieldInput('');
-    setSelectedDirective(selectedOption.directive);
-    transformationPanel(selectedOption.directive);
+    setSelectedDirective(selectedOption.value);
+    transformationPanel(selectedOption.value, selectedOption.supportedDataType);
     const currentRecentSearch = selectedOption;
     const array = [...recentSearches];
-    const filterredSearchResults = array.filter(
-      (item) => item.directive !== currentRecentSearch.directive
-    );
+    const filterredSearchResults = array.filter((item) => item.label !== currentRecentSearch.label);
     if (recentSearches.length >= 4) {
       array.splice(-1);
       setRecentSearches([currentRecentSearch, ...filterredSearchResults]);
@@ -132,7 +130,7 @@ export default function({ transformationPanel }) {
       <AutoSearch
         options={displayRecentSearches ? recentSearches : searchResults}
         getOptionLabel={(option) =>
-          searchResults.length ? option.directive.concat(`(${option.description})`) : ''
+          searchResults.length ? option.label.concat(`(${option.description})`) : ''
         }
         autoHighlight={true}
         PaperComponent={StyledPaper}
@@ -146,13 +144,13 @@ export default function({ transformationPanel }) {
             key={option.directive}
             onClick={() => handleOptionClick(option)}
             role="button"
-            data-testid={`search-result-${option.directive
+            data-testid={`search-result-${option.label
               .toLowerCase()
               .split(' ')
               .join('-')}`}
           >
             <DirectiveContainer>
-              <DirectiveName variant="body1">{option.directive}</DirectiveName>
+              <DirectiveName variant="body1">{option.label}</DirectiveName>
               <DirectiveDescriptionContainer>
                 <DirectiveDescription variant="body1">{option.description}</DirectiveDescription>
                 <ArrowIcon />
