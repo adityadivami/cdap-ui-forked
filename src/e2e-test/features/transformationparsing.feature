@@ -28,7 +28,7 @@ Feature: TransformationParsing
     Then Verify if the user is on the Add transformation step panel
     Then Click on the Select Column button
     Then Click on the radio button of any column
-    Then Click on the Checkbox
     Then Click on the Done button
     Then Select any radio button from the delimiter list
+    Then Click on the Checkbox
     Then Click on the Apply step button

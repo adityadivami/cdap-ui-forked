@@ -39,7 +39,7 @@ public class TransformationParsing {
     public void clickOnTheDataExplorationCard() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         } catch (Exception e) {
@@ -132,16 +132,6 @@ public class TransformationParsing {
         }
     }
 
-    @Then("Click on the Checkbox")
-    public void clickOnTheCheckbox() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("id"));
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
     @Then("Click on the Done button")
     public void clickOnTheDoneButton() {
         try {
@@ -159,10 +149,20 @@ public class TransformationParsing {
     public void selectAnyRadioButtonFromTheDelimiterList() {
         try {
             WaitHelper.waitForPageToLoad();
-            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("radio-option-2"));
-            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='radio-option-2']"));
+            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("form-control-label-radio-option-2"));
+            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='form-control-label-radio-option-2']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
+
+    @Then("Click on the Checkbox")
+    public void clickOnTheCheckbox() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("checkbox-parse-input-checkbox"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
