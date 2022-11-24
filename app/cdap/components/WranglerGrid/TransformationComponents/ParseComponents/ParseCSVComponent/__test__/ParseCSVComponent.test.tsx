@@ -14,12 +14,18 @@
  *  the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import ParseCSVComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseCSVComponent/index';
 
 describe('It should test ParseCSVComponent', () => {
   it('Should render ParseCSVComponent', () => {
     render(<ParseCSVComponent setTransformationComponentsValue={jest.fn()} />);
+  });
+
+  it('should test `set first row as header` checkbox', () => {
+    render(<ParseCSVComponent setTransformationComponentsValue={jest.fn()} />);
+    const setFirstRowHeaderChecbox = screen.getByRole('checkbox');
+    fireEvent.click(setFirstRowHeaderChecbox);
   });
 });
