@@ -34,9 +34,9 @@ const FuntionSectionWrapperStyles = styled(Box)`
 `;
 export default function({ sectionHeading, children }: IParseComponentProps) {
   return (
-    <SectionWrapper>
+    <SectionWrapper data-testid="parse-component-parent">
       <FuntionSectionWrapperStyles>
-        <SubHeadBoldFont>{sectionHeading}</SubHeadBoldFont>
+        <SubHeadBoldFont data-testid="section-heading">{sectionHeading}</SubHeadBoldFont>
         <Box>{TickIcon}</Box>
       </FuntionSectionWrapperStyles>
       {children}

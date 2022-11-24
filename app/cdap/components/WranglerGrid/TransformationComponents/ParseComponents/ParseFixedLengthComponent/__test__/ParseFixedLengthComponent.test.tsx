@@ -14,12 +14,12 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import ParseFixedLengthComponent from "..";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import ParseFixedLengthComponent from '..';
 
-describe("It should test ParseFixedLengthComponent", () => {
-  it("Should render ParseFixedLengthComponent", () => {
+describe('It should test ParseFixedLengthComponent', () => {
+  it('Should render ParseFixedLengthComponent', () => {
     render(
       <ParseFixedLengthComponent
         transformationComponentValues={undefined}
