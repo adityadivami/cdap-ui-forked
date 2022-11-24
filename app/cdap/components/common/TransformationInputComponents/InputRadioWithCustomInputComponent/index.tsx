@@ -51,7 +51,7 @@ export default function({
           name="actions"
           value={radioValue}
           onChange={(e) => setRadioValue(e.target.value)}
-          data-testid='transformation-custom-radio-group'
+          data-testid="transformation-custom-radio-group"
         >
           {options.map((eachRadio, eachRadioIndex) => (
             <FormControlLabelRadioComponent
@@ -59,6 +59,7 @@ export default function({
               control={
                 <Radio
                   color="primary"
+                  data-testid={`form-input-radio-option-${eachRadioIndex}`}
                   inputProps={{
                     'data-testid': `radio-option-${eachRadioIndex}`,
                   }}

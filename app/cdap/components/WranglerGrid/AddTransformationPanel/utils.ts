@@ -27,11 +27,13 @@ export const getDirective = (
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
   } else if (functionName === 'delimited-text') {
-    return transformationComponentValues.radioOption === 'customDelimiter' ? `split-to-rows :${selectedColumnName} ${transformationComponentValues.customInput}` : `split-to-rows :${selectedColumnName} ${transformationComponentValues.radioOption}`;
-  } else if(functionName === 'array-flattening' ){
+    return transformationComponentValues.radioOption === 'customDelimiter'
+      ? `split-to-rows :${selectedColumnName} ${transformationComponentValues.customInput}`
+      : `split-to-rows :${selectedColumnName} ${transformationComponentValues.radioOption}`;
+  } else if (functionName === 'array-flattening') {
     const transformationSyntax = getDirectiveForKeepOrDrop('flatten', selectedColumns);
     return transformationSyntax;
-  } else if(functionName === 'record-flattening') {
+  } else if (functionName === 'record-flattening') {
     const transformationSyntax = getDirectiveForKeepOrDrop('flatten-record', selectedColumns);
     return transformationSyntax;
   } else {
