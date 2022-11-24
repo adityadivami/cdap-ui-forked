@@ -28,7 +28,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-
 public class TransformationToolbar {
     @Given("Navigate to Home Page")
     public void navigateToTheHomePage() {
