@@ -150,7 +150,7 @@ public class TransformationExplode {
     public void selectAnyRadioButtonFromTheDelimiterList() {
         try {
             WaitHelper.waitForPageToLoad(10);
-            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='radio-option-2']"));
+            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='form-input-radio-option-2']"));
             JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
             js.executeScript("arguments[0].scrollIntoView();",ele );
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
