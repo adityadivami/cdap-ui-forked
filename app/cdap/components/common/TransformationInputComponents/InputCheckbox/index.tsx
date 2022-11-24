@@ -42,6 +42,7 @@ export default function({ label, value, onChange, inputProps }: IInputCheckboxPr
           inputProps={{
             ...inputProps,
           }}
+          data-testid={`checkbox-${inputProps['data-testid']}`}
         />
       }
       label={

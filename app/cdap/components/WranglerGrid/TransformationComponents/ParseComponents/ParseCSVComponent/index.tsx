@@ -71,6 +71,9 @@ export default function({
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFirstRowAsHeader(e.target.checked)
           }
+          inputProps={{
+            'data-testid': 'parse-input-checkbox',
+          }}
         />
       </>
     </ParseComponent>

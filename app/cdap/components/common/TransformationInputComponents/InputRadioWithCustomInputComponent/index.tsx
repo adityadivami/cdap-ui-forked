@@ -57,9 +57,11 @@ export default function({
           {options.map((eachRadio, eachRadioIndex) => (
             <FormControlLabelRadioComponent
               value={eachRadio.value}
+              data-testid={`form-control-label-radio-${eachRadioIndex}`}
               control={
                 <Radio
                   color="primary"
+                  data-testid={`form-control-label-radio-option-${eachRadioIndex}`}
                   inputProps={{
                     'data-testid': `radio-option-${eachRadioIndex}`,
                   }}
