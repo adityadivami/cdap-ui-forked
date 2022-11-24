@@ -32,7 +32,7 @@ describe('Test TransformationComponents', () => {
           filterOptionValue: '',
           filterRadioOption: '',
         }}
-        transformationName={'filter'}
+        transformationName={'send-to-error'}
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}
