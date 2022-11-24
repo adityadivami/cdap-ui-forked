@@ -14,12 +14,21 @@
  *  the License.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ParseComponents from 'components/WranglerGrid/TransformationComponents/ParseComponents/index';
 
 describe('It should test ParseComponents', () => {
-  it('Should render ParseComponents', () => {
-    render(<ParseComponents sectionHeading={''} children={undefined} />);
+  it('Should render ParseComponents.', () => {
+    render(<ParseComponents sectionHeading={''} children={<>Hello</>} />);
+    const parseComponent = screen.getByTestId(/parse-component-parent/i);
+    expect(parseComponent).toBeInTheDocument();
+  });
+
+  it('Should test whether Section Heading is as expected.', () => {
+    render(<ParseComponents sectionHeading={'Parsing'} children={<>Hello</>} />);
+    const sectionHeading = screen.getByTestId(/section-heading/i);
+    expect(sectionHeading).toBeInTheDocument();
+    expect(sectionHeading).toHaveTextContent('Parsing');
   });
 });

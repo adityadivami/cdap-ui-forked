@@ -14,16 +14,12 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import ParseCSVComponent from "components/WranglerGrid/TransformationComponents/ParseComponents/ParseCSVComponent/index";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import ParseCSVComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseCSVComponent/index';
 
-describe("It should test ParseCSVComponent", () => {
-  it("Should render ParseCSVComponent", () => {
-    render(
-      <ParseCSVComponent
-        setTransformationComponentsValue={jest.fn()}
-      />
-    );
+describe('It should test ParseCSVComponent', () => {
+  it('Should render ParseCSVComponent', () => {
+    render(<ParseCSVComponent setTransformationComponentsValue={jest.fn()} />);
   });
 });

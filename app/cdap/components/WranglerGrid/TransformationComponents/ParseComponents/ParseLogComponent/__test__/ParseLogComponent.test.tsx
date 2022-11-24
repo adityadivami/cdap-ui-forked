@@ -14,16 +14,12 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import ParseLogComponent from "components/WranglerGrid/TransformationComponents/ParseComponents/ParseLogComponent/index";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import ParseLogComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseLogComponent/index';
 
-describe("It should test ParseLogComponent", () => {
-  it("Should render ParseLogComponent", () => {
-    render(
-      <ParseLogComponent
-        setTransformationComponentsValue={jest.fn()}
-      />
-    );
+describe('It should test ParseLogComponent', () => {
+  it('Should render ParseLogComponent', () => {
+    render(<ParseLogComponent setTransformationComponentsValue={jest.fn()} />);
   });
 });

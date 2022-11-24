@@ -14,16 +14,12 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import ParseSimpleDateComponent from "components/WranglerGrid/TransformationComponents/ParseComponents/ParseSimpleDateComponent/index";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import ParseSimpleDateComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseSimpleDateComponent/index';
 
-describe("It should test ParseSimpleDateComponent", () => {
-  it("Should render ParseSimpleDateComponent", () => {
-    render(
-      <ParseSimpleDateComponent
-        setTransformationComponentsValue={jest.fn()}
-      />
-    );
+describe('It should test ParseSimpleDateComponent', () => {
+  it('Should render ParseSimpleDateComponent', () => {
+    render(<ParseSimpleDateComponent setTransformationComponentsValue={jest.fn()} />);
   });
 });

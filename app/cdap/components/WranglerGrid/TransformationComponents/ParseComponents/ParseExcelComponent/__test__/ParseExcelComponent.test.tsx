@@ -14,16 +14,12 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import ParseExcelComponent from "components/WranglerGrid/TransformationComponents/ParseComponents/ParseExcelComponent/index";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import ParseExcelComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseExcelComponent/index';
 
-describe("It should test ParseExcelComponent", () => {
-  it("Should render ParseExcelComponent", () => {
-    render(
-      <ParseExcelComponent
-        setTransformationComponentsValue={jest.fn()}
-      />
-    );
+describe('It should test ParseExcelComponent', () => {
+  it('Should render ParseExcelComponent', () => {
+    render(<ParseExcelComponent setTransformationComponentsValue={jest.fn()} />);
   });
 });
