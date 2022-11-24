@@ -14,22 +14,24 @@
  *  the License.
  */
 
-import { render, screen } from "@testing-library/react";
-import React from "react";
-import CopyColumn from "components/WranglerGrid/TransformationComponents/CopyColumn/index";
+import { render, screen } from '@testing-library/react';
+import React from 'react';
+import CopyColumn from 'components/WranglerGrid/TransformationComponents/CopyColumn/index';
 
-describe("Test CopyColumn Component", () => {
-  it("Should render CopyColumn", () => {
+describe('Test CopyColumn Component', () => {
+  it('Should render CopyColumn', () => {
     render(
       <CopyColumn
-        transformationName={""}
+        transformationName={''}
         setTransformationComponentsValue={jest.fn()}
-        transformationComponentValues={{ copyColumnName: "body_0", columnNames: ['body_0', 'body_1', 'body_2'] }}
+        transformationComponentValues={{
+          copyColumnName: 'body_0',
+          columnNames: ['body_0', 'body_1', 'body_2'],
+        }}
       />
     );
 
-    const parentWrapper = screen.getByTestId(/copy-column-parent-wrapper/i)
-    expect(parentWrapper).toBeInTheDocument()
-
+    const parentWrapper = screen.getByTestId(/copy-column-parent-wrapper/i);
+    expect(parentWrapper).toBeInTheDocument();
   });
 });
