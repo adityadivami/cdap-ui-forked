@@ -116,7 +116,7 @@ export default function({ transformationPanel }) {
         )}
         {searchResults.length > 0 && textFieldInput?.length > 0 && (
           <SearchResultsHeader>
-            <SearchResultsHeaderText component="p" data-testid="functions-search-recent-results">
+            <SearchResultsHeaderText component="p" data-testid="functions-search-results">
               {T.translate(`${PREFIX}.toolbarIcons.labels.searchResults`)}
             </SearchResultsHeaderText>
             {Underline}

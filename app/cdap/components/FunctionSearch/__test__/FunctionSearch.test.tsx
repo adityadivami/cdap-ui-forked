@@ -17,7 +17,20 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import FunctionSearch from 'components/FunctionSearch';
+import MyDataPrepApi from 'api/dataprep';
+import { mockData } from 'components/FunctionSearch/mock/mockData';
+
 describe('It Should test FunctionSeach Component.', () => {
+  beforeEach(() => {
+    jest.spyOn(MyDataPrepApi, 'getUsage').mockImplementation(() => {
+      return {
+        subscribe: (callback) => {
+          callback(mockData);
+        },
+      };
+    });
+  });
+
   it('Should test whether FunctionSearch Component is rendered .', () => {
     render(<FunctionSearch transformationPanel={jest.fn()} />);
     const searchBox = screen.getByTestId(/search-box/i);
@@ -28,6 +41,7 @@ describe('It Should test FunctionSeach Component.', () => {
     const { container } = render(<FunctionSearch transformationPanel={jest.fn()} />);
     const searchInputField = container.querySelector('input');
     expect(searchInputField).toBeInTheDocument();
+
     fireEvent.change(searchInputField, { target: { value: 'uppercase' } });
     expect(searchInputField).toHaveValue('uppercase');
 
@@ -44,5 +58,30 @@ describe('It Should test FunctionSeach Component.', () => {
 
     const clearIcon = screen.getByTestId(/clear-search-icon/i);
     fireEvent.click(clearIcon);
+
+    expect(searchInputField).toHaveValue('');
+  });
+
+  it('It should search and click on directive option', () => {
+    const { container } = render(<FunctionSearch transformationPanel={jest.fn()} />);
+    const searchInputField = container.querySelector('input');
+
+    fireEvent.change(searchInputField, { target: { value: 'uppercase' } });
+    expect(searchInputField).toHaveValue('uppercase');
+
+    const uppercaseOption = screen.getByTestId(/search-result-uppercase/i);
+    fireEvent.click(uppercaseOption);
+
+    fireEvent.change(searchInputField, { target: { value: 'trim' } });
+    const trimOption = screen.getByTestId(/search-result-trim/i);
+    fireEvent.click(trimOption);
+
+    fireEvent.change(searchInputField, { target: { value: 'encode' } });
+    const encodeOption = screen.getByTestId(/search-result-encode/i);
+    fireEvent.click(encodeOption);
+
+    fireEvent.change(searchInputField, { target: { value: 'decode' } });
+    const decodeOption = screen.getByTestId(/search-result-decode/i);
+    fireEvent.click(decodeOption);
   });
 });

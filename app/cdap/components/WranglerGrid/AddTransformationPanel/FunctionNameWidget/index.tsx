@@ -47,7 +47,7 @@ const InfoIconComponent = styled(InfoOutlinedIcon)`
 
 const TransformationNameText = styled(SubHeadNormalFont)`
   text-transform: capitalize;
-`
+`;
 
 export default function({ transformationName }: { transformationName: string }) {
   return (
