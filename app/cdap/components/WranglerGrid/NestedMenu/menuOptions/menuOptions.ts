@@ -27,9 +27,4 @@ export const MENU_OPTIONS: IMenuItem[] = [
     options: DATATYPE_OPTIONS,
     supportedDataType: ['all'],
   },
-  {
-    value: 'filter',
-    label: T.translate(`${PREFIX}.menu.filter`).toString(),
-    supportedDataType: ['all'],
-  },
 ];

@@ -51,7 +51,7 @@ const CountWidgetWrapper = styled(Box)`
 
 const transformationComponentDefaultValues = {
   customInput: '',
-  radioOption: ''
+  radioOption: '',
 };
 
 export default function({
