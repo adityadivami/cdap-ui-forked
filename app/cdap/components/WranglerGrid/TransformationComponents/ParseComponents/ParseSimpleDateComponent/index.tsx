@@ -20,19 +20,25 @@ import { ISetTransformationValues } from 'components/WranglerGrid/Transformation
 import { PLEASE_SELECT_THE_DATE_FORMAT } from 'components/WranglerGrid/TransformationComponents/ParseComponents/constants';
 import React, { useEffect, useState } from 'react';
 
-export default function({ setTransformationComponentsValue }: ISetTransformationValues) {
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: ISetTransformationValues) {
   const [customFormat, setCustomFormat] = useState<string>('');
   const [selectedParseType, setSelectedParseType] = useState<string>('');
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({
-      ...prevState,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       radioOption: selectedParseType,
-    }));
+    });
   }, [selectedParseType]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, customInput: customFormat }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      customInput: customFormat,
+    });
   }, [customFormat]);
 
   return (

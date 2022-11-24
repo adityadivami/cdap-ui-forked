@@ -38,4 +38,5 @@ export interface ISetTransformationValues {
   setTransformationComponentsValue: React.Dispatch<
     React.SetStateAction<ITransformationComponentValues>
   >;
+  transformationComponentValues: ITransformationComponentValues;
 }

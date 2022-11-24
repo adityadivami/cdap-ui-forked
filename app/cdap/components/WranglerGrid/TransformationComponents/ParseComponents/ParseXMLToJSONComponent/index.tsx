@@ -25,11 +25,14 @@ import {
 import React, { useEffect, useState } from 'react';
 import { SubHeadNormalFont } from 'components/common/TypographyText';
 
-export default function({ setTransformationComponentsValue }: ISetTransformationValues) {
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: ISetTransformationValues) {
   const [depth, setDepth] = useState<number>(1);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, depth }));
+    setTransformationComponentsValue({ ...transformationComponentValues, depth });
   }, [depth]);
 
   return (
@@ -45,7 +48,6 @@ export default function({ setTransformationComponentsValue }: ISetTransformation
             color: 'primary',
             placeholder: DEPTH_PLACEHOLDER,
           }}
-          data-testid="form-input-field-component"
         />
       </FormGroup>
     </ParseComponent>

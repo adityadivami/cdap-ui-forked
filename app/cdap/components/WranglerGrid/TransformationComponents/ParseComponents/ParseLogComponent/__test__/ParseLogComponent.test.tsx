@@ -20,6 +20,13 @@ import ParseLogComponent from 'components/WranglerGrid/TransformationComponents/
 
 describe('It should test ParseLogComponent', () => {
   it('Should render ParseLogComponent', () => {
-    render(<ParseLogComponent setTransformationComponentsValue={jest.fn()} />);
+    render(
+      <ParseLogComponent
+        setTransformationComponentsValue={jest.fn()}
+        transformationComponentValues={undefined}
+      />
+    );
+    const parentElement = screen.getByTestId(/parse-component-parent/i);
+    expect(parentElement).toBeInTheDocument();
   });
 });
