@@ -125,7 +125,9 @@ public class TransformationExplode {
     public void clickOnTheRadioButtonOfAnyColumn() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("form-input-radio-option-2"));
+            WebElement ele = Helper.locateElementByTestId("radio-input-2");
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -147,9 +149,10 @@ public class TransformationExplode {
     @Then("Select any radio button from the delimiter list")
     public void selectAnyRadioButtonFromTheDelimiterList() {
         try {
-            WaitHelper.waitForPageToLoad();
-            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("radio-option-2"));
+            WaitHelper.waitForPageToLoad(10);
             WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='radio-option-2']"));
+            JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
+            js.executeScript("arguments[0].scrollIntoView();",ele );
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
@@ -161,7 +164,9 @@ public class TransformationExplode {
     public void clickOnTheApplyButton() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
+            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='apply-step-button']"));
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
