@@ -99,6 +99,12 @@ export default function({
     }
   };
 
+  const columnsToDisplay = transformationDataType?.includes('all')
+    ? columns
+    : columns.filter((eachColumn) =>
+        transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase())
+      );
+
   return (
     <SelectColumnTableContainer data-testid="column-table-parent">
       <SelectColumnTable aria-label="recipe steps table">
@@ -128,33 +134,18 @@ export default function({
         </SelectColumnTableHead>
         <Divider />
         <TableBody>
-          {columns.map((eachColumn, columnIndex) =>
-            transformationDataType?.includes('all') ? (
-              <TableRowWidget
-                onSingleSelection={onSingleSelection}
-                selectedColumns={selectedColumns}
-                dataQualityValue={dataQualityValue}
-                isSingleSelection={isSingleSelection}
-                handleDisableCheckbox={handleDisableCheckbox}
-                onMultipleSelection={onMultipleSelection}
-                columnIndex={columnIndex}
-                columnDetail={eachColumn}
-              />
-            ) : (
-              transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase()) && (
-                <TableRowWidget
-                  onSingleSelection={onSingleSelection}
-                  selectedColumns={selectedColumns}
-                  dataQualityValue={dataQualityValue}
-                  isSingleSelection={isSingleSelection}
-                  handleDisableCheckbox={handleDisableCheckbox}
-                  onMultipleSelection={onMultipleSelection}
-                  columnIndex={columnIndex}
-                  columnDetail={eachColumn}
-                />
-              )
-            )
-          )}
+          {columnsToDisplay.map((eachColumn, columnIndex) => (
+            <TableRowWidget
+              onSingleSelection={onSingleSelection}
+              selectedColumns={selectedColumns}
+              dataQualityValue={dataQualityValue}
+              isSingleSelection={isSingleSelection}
+              handleDisableCheckbox={handleDisableCheckbox}
+              onMultipleSelection={onMultipleSelection}
+              columnIndex={columnIndex}
+              columnDetail={eachColumn}
+            />
+          ))}
         </TableBody>
       </SelectColumnTable>
     </SelectColumnTableContainer>
