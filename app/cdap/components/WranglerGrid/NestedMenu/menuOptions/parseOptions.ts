@@ -18,12 +18,12 @@ import { ITransformationComponentValues } from 'components/WranglerGrid/AddTrans
 import { PARSE_CSV_OPTIONS } from 'components/WranglerGrid/TransformationComponents/ParseComponents/options';
 import T from 'i18n-react';
 
+const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.parse';
+
 export const PARSE_OPTIONS = [
   {
     value: 'parseCSV',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseCSV'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseCSV`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) => {
       return `parse-as-csv :${selectedColumn} '${
@@ -37,44 +37,34 @@ export const PARSE_OPTIONS = [
   },
   {
     value: 'parseAvro',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseAvro'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseAvro`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string) => `parse-as-avro-file :${selectedColumn}`,
   },
   {
     value: 'parseExcel',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseExcel'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseExcel`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) =>
       `parse-as-excel :${selectedColumn} '${transformationValues.sheetValue}' ${transformationValues.firstRowAsHeader}`,
   },
   {
     value: 'parseJSON',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseJSON'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseJSON`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) =>
       `parse-as-json :${selectedColumn} ${transformationValues.depth}`,
   },
   {
     value: 'parseXML',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseXML'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseXML`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) =>
       `parse-xml-to-json :${selectedColumn} ${transformationValues.depth}`,
   },
   {
     value: 'parseLog',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseLog'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseLog`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) => {
       return `parse-as-log :${selectedColumn} '${
@@ -86,9 +76,7 @@ export const PARSE_OPTIONS = [
   },
   {
     value: 'parseSimpleDate',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseSimpleDate'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseSimpleDate`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) => {
       return `parse-as-simple-date  :${selectedColumn} ${
@@ -100,9 +88,7 @@ export const PARSE_OPTIONS = [
   },
   {
     value: 'parseDateTime',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseDateTime'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseDateTime`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) => {
       return `parse-as-datetime  :${selectedColumn} \"${
@@ -114,18 +100,14 @@ export const PARSE_OPTIONS = [
   },
   {
     value: 'parseFixedLength',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseFixedLength'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseFixedLength`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) =>
       `parse-as-fixed-length :${selectedColumn} ${transformationValues.columnWidths} ${transformationValues.optionPaddingParam}`,
   },
   {
     value: 'parseHL7',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseHL7'
-    ).toString(),
+    label: T.translate(`${PREFIX}.parseHL7`).toString(),
     supportedDataType: ['all'],
     directive: (selectedColumn: string) => `parse-as-hl7 :${selectedColumn}`,
   },
