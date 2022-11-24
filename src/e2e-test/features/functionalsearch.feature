@@ -19,7 +19,7 @@ Feature: Functions_Search
 
   @Functions_Search
   Scenario: Go through the Functions Search functionality
-    Given Navigate to the Home Page
+    Given Navigate to the Home Page of application
     Then Click on the Ongoing Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
     Then Click on the Search field and send the values
@@ -30,4 +30,4 @@ Feature: Functions_Search
     Then Click on the Ongoing Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
     Then Click on the Search field and send the values
-#    Then Click on the transformation from results
+    Then Click on the transformation from results

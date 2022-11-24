@@ -1,4 +1,22 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+
 package io.cdap.cdap.ui.stepsdesign;
+
 import io.cdap.cdap.ui.utils.Constants;
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
@@ -12,8 +30,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 public class FunctionalSearch {
-       @Given("Navigate to the Home Page")
-        public void navigateToTheHomePage() {
+       @Given("Navigate to the Home Page of application")
+        public void navigateToHomePage() {
             SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
             WaitHelper.waitForPageToLoad();
         }
@@ -52,19 +70,27 @@ public class FunctionalSearch {
         public void clickOnTheSearchField() {
             try {
 
-                WebElement element = Helper.locateElementByTestId("function-search-input-field");
+//                WebElement element = Helper.locateElementByTestId("function-search-input-field");
                 WebElement inputElement = SeleniumDriver.getDriver().findElement(By.xpath
                         ("//*[@data-testid='function-search-input-field']/input[@placeholder='Search for functions']"));
                 Assert.assertTrue(ElementHelper.isElementDisplayed(inputElement));
                 JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
                 executor.executeScript("arguments[0].click();", inputElement);
                 inputElement.sendKeys("lowercase");
-                String text = element.getText();
-                System.out.println(text);
             } catch (Exception e) {
                 System.err.println("error:" + e);
             }
         }
+    @Then("Click on the transformation from results")
+    public void clickOnTheTransformationFromResults() {
+        try {
+            WebElement ele = Helper.locateElementByTestId("functions-search-recent-results");
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("search-result-lowercase"));
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
 
         @Then("Click on the Clear icon")
         public void clickOnTheCloseIcon() {
