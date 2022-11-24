@@ -14,6 +14,8 @@
  * the License.
  */
 
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
+import { PARSE_CSV_OPTIONS } from 'components/WranglerGrid/TransformationComponents/ParseComponents/options';
 import T from 'i18n-react';
 
 export const PARSE_OPTIONS = [
@@ -23,6 +25,15 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseCSV'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) => {
+      return `parse-as-csv :${selectedColumn} '${
+        transformationValues.radioOption === 'customDelimiter'
+          ? transformationValues.customInput
+          : PARSE_CSV_OPTIONS.find(
+              (eachOption) => eachOption.value === transformationValues.radioOption
+            )?.directiveExpression
+      }' ${transformationValues.firstRowAsHeader}`;
+    },
   },
   {
     value: 'parseAvro',
@@ -30,6 +41,7 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseAvro'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string) => `parse-as-avro-file :${selectedColumn}`,
   },
   {
     value: 'parseExcel',
@@ -37,6 +49,8 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseExcel'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) =>
+      `parse-as-excel :${selectedColumn} '${transformationValues.sheetValue}' ${transformationValues.firstRowAsHeader}`,
   },
   {
     value: 'parseJSON',
@@ -44,6 +58,8 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseJSON'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) =>
+      `parse-as-json :${selectedColumn} ${transformationValues.depth}`,
   },
   {
     value: 'parseXML',
@@ -51,6 +67,8 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseXML'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) =>
+      `parse-xml-to-json :${selectedColumn} ${transformationValues.depth}`,
   },
   {
     value: 'parseLog',
@@ -58,6 +76,13 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseLog'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) => {
+      return `parse-as-log :${selectedColumn} '${
+        transformationValues.radioOption === 'custom'
+          ? transformationValues.customInput
+          : transformationValues.radioOption
+      }'`;
+    },
   },
   {
     value: 'parseSimpleDate',
@@ -65,6 +90,13 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseSimpleDate'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) => {
+      return `parse-as-simple-date  :${selectedColumn} ${
+        transformationValues.radioOption === 'customFormat'
+          ? transformationValues.customInput
+          : transformationValues.radioOption
+      }`;
+    },
   },
   {
     value: 'parseDateTime',
@@ -72,6 +104,13 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseDateTime'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) => {
+      return `parse-as-datetime  :${selectedColumn} \"${
+        transformationValues.radioOption === 'customFormat'
+          ? transformationValues.customInput
+          : transformationValues.radioOption
+      }\"`;
+    },
   },
   {
     value: 'parseFixedLength',
@@ -79,6 +118,8 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseFixedLength'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string, transformationValues: ITransformationComponentValues) =>
+      `parse-as-fixed-length :${selectedColumn} ${transformationValues.columnWidths} ${transformationValues.optionPaddingParam}`,
   },
   {
     value: 'parseHL7',
@@ -86,5 +127,6 @@ export const PARSE_OPTIONS = [
       'features.WranglerNewUI.GridPage.transformations.options.labels.parse.parseHL7'
     ).toString(),
     supportedDataType: ['all'],
+    directive: (selectedColumn: string) => `parse-as-hl7 :${selectedColumn}`,
   },
 ];

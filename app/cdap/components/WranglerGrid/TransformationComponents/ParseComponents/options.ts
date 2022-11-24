@@ -21,49 +21,49 @@ export const PARSE_CSV_OPTIONS: IParseOptions[] = [
   {
     value: 'comma',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.csv.options.comma'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.csv.options.comma'
     ).toString()}`,
     directiveExpression: ',',
   },
   {
     value: 'tab',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.csv.options.tab'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.csv.options.tab'
     ).toString()}`,
     directiveExpression: '\\t',
   },
   {
     value: 'space',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.csv.options.space'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.csv.options.space'
     ).toString()}`,
     directiveExpression: ' ',
   },
   {
     value: 'pipe',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.csv.options.pipe'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.csv.options.pipe'
     ).toString()}`,
     directiveExpression: '\\|',
   },
   {
     value: 'capA',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.csv.options.capA'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.csv.options.capA'
     ).toString()}`,
     directiveExpression: '\\u0001',
   },
   {
     value: 'capD',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.csv.options.capD'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.csv.options.capD'
     ).toString()}`,
     directiveExpression: '\\u0004',
   },
   {
     value: 'customDelimiter',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.csv.options.customDelimiter'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.csv.options.customDelimiter'
     ).toString()}`,
   },
 ];
@@ -72,37 +72,37 @@ export const PARSE_LOG_OPTIONS: IParseOptions[] = [
   {
     value: 'common',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.log.options.common'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.log.options.common'
     ).toString()}`,
   },
   {
     value: 'combined',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.log.options.combined'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.log.options.combined'
     ).toString()}`,
   },
   {
     value: 'combinedio',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.log.options.combinedio'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.log.options.combinedio'
     ).toString()}`,
   },
   {
     value: 'referer',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.log.options.referer'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.log.options.referer'
     ).toString()}`,
   },
   {
     value: 'agent',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.log.options.agent'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.log.options.agent'
     ).toString()}`,
   },
   {
     value: 'custom',
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.log.options.custom'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.log.options.custom'
     ).toString()}`,
   },
 ];
@@ -110,91 +110,91 @@ export const PARSE_LOG_OPTIONS: IParseOptions[] = [
 export const PARSE_SIMPLE_DATE_OPTIONS: IParseOptions[] = [
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.MMddyyyy'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.MMddyyyy'
     ).toString()}`,
     value: 'MM/dd/yyyy',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.ddMMyyyy'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.ddMMyyyy'
     ).toString()}`,
     value: 'dd/MM/yyyy',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.MMddyyyyFormat'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.MMddyyyyFormat'
     ).toString()}`,
     value: 'MM-dd-yyyy',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.MMddyy'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.MMddyy'
     ).toString()}`,
     value: 'MM-dd-yy',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.yyyyMMdd'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.yyyyMMdd'
     ).toString()}`,
     value: 'yyyy-MM-dd',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.yyyyMMddHHmmss'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.yyyyMMddHHmmss'
     ).toString()}`,
     value: 'yyyy-MM-dd HH:mm:ss',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.MMddyyyyatHHmmssz'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.MMddyyyyatHHmmssz'
     ).toString()}`,
     value: "MM-dd-yyyy 'at' HH:mm:ss z",
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.ddMMyyHHmmss'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.ddMMyyHHmmss'
     ).toString()}`,
     value: 'dd/MM/yy HH:mm:ss',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.yyyyMMddTHHmmssSSSWithRFCTimezone'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.yyyyMMddTHHmmssSSSWithRFCTimezone'
     ).toString()}`,
     value: "yyyy,MM.dd'T'HH:mm:ss.SSSZ",
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.MMddyyyyHHmmssSSS'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.MMddyyyyHHmmssSSS'
     ).toString()}`,
     value: 'MM.dd.yyyy HH:mm:ss.SSS',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.EEEdMMMyyyyHHmmss'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.EEEdMMMyyyyHHmmss'
     ).toString()}`,
     value: 'EEE, d MMM yyyy HH:mm:ss',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.EEEMMMdyy'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.EEEMMMdyy'
     ).toString()}`,
     value: "EEE, MMM d, ''yy",
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.hmma'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.hmma'
     ).toString()}`,
     value: 'h:mm a',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.simpleDate.options.Hmmaz'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.Hmmaz'
     ).toString()}`,
     value: 'H:mm a, z',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.customFormat'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.customFormat'
     ).toString()}`,
     value: 'customFormat',
   },
@@ -203,43 +203,43 @@ export const PARSE_SIMPLE_DATE_OPTIONS: IParseOptions[] = [
 export const PARSE_DATE_TIME_OPTIONS: IParseOptions[] = [
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.yyyyMMddHHmmss'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.yyyyMMddHHmmss'
     ).toString()}`,
     value: 'yyyy-MM-dd HH:mm:ss',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.dateTime.options.MMddyyyyAtHHmmssWithTimezone'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.dateTime.options.MMddyyyyAtHHmmssWithTimezone'
     ).toString()}`,
     value: "MM-dd-yyyy 'at' HH:mm:ss z",
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.ddMMyyHHmmss'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.ddMMyyHHmmss'
     ).toString()}`,
     value: 'dd/MM/yy HH:mm:ss',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.yyyyMMddTHHmmssSSSWithRFCTimezone'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.yyyyMMddTHHmmssSSSWithRFCTimezone'
     ).toString()}`,
     value: "yyyy,MM.dd'T'HH:mm:ss.SSSZ",
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.MMddyyyyHHmmssSSS'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.MMddyyyyHHmmssSSS'
     ).toString()}`,
     value: 'MM.dd.yyyy HH:mm:ss.SSS',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.EEEdMMMyyyyHHmmss'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.EEEdMMMyyyyHHmmss'
     ).toString()}`,
     value: 'EEE, d MMM yyyy HH:mm:ss',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.common.customFormat'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.customFormat'
     ).toString()}`,
     value: 'customFormat',
   },
@@ -248,13 +248,13 @@ export const PARSE_DATE_TIME_OPTIONS: IParseOptions[] = [
 export const PARSE_EXCEL_OPTIONS: IParseOptions[] = [
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.excel.options.sheetNumber'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.excel.options.sheetNumber'
     ).toString()}`,
     value: 'sheetNumber',
   },
   {
     label: `${T.translate(
-      'features.WranglerNewUI.Transformations.parse.options.excel.options.sheetName'
+      'features.WranglerNewUI.GridPage.transformationUI.parse.options.excel.options.sheetName'
     ).toString()}`,
     value: 'sheetName',
   },
