@@ -24,6 +24,7 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
@@ -68,51 +69,31 @@ public class FunctionsSearch {
     public void clickOnTheSearchField() {
         try {
 
-            WebElement element = Helper.locateElementByTestId("search-box");
-            WaitHelper.waitForPageToLoad();
+            WebElement element = Helper.locateElementByTestId("function-search-input-field");
+            WebElement inputElement = SeleniumDriver.getDriver().findElement(By.xpath
+                    ("//*[@data-testid='function-search-input-field']/input[@placeholder='Search for functions']"));
+            Assert.assertTrue(ElementHelper.isElementDisplayed(inputElement));
+            System.out.println("Element Displayed");
             JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", element);
-            element.sendKeys("lowercase");
-            String text = element.getText();
-            System.out.println(text);
+            executor.executeScript("arguments[0].click();", inputElement);
+            inputElement.sendKeys("lowercase");
+            Assert.assertTrue(ElementHelper.isElementDisplayed
+                    (Helper.locateElementByTestId("functions-search-recent-results")));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
 
-//    @Then("Enter name of the transformation in the search field and check the search results")
-//    public void enterNameOfAnyColumnFromTheList() {
-//        try {
-//            WaitHelper.waitForPageToLoad();
-//            Helper.locateElementByTestId("function-search-input-field").sendKeys("lowercase");
-//            Assert.assertTrue(ElementHelper.isElementDisplayed
-//                    (Helper.locateElementByTestId("functions-search-recent-results")));
-//        } catch (Exception e) {
-//            System.err.println("error:" + e);
-//        }
-//    }
-
-//    @Then("Click on the transformation from results")
-//    public void clickOnTheTransformationFromResults() {
-//        try {
-//            WaitHelper.waitForPageToLoad();
-//            ElementHelper.clickOnElement(Helper.locateElementByTestId("search-result-lowercase"));
-//        } catch (Exception e) {
-//            System.err.println("error:" + e);
-//        }
-//    }
-
-//    @Then("Click on the Search field and check the recent history")
-//    public void clickOnTheSearchFieldAndCheckTheRecentHistory() {
-//        try {
-//            WaitHelper.waitForPageToLoad();
-//            ElementHelper.clickOnElement(Helper.locateElementByTestId("function-search-input-field"));
-//            Assert.assertTrue(ElementHelper.isElementDisplayed
-//                    (Helper.locateElementByTestId("function-search-recent-results")));
-//        } catch (Exception e) {
-//            System.err.println("error:" + e);
-//        }
-//    }
+    @Then("Click on the transformation from results")
+    public void clickOnTheTransformationFromResults() {
+        try {
+            WebElement ele = Helper.locateElementByTestId("functions-search-recent-results");
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("search-result-lowercase"));
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
 
     @Then("Click on the Clear icon")
     public void clickOnTheCloseIcon() {
