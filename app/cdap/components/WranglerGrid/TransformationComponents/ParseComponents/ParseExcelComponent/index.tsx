@@ -77,6 +77,9 @@ export default function({ setTransformationComponentsValue }: ISetTransformation
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFirstRowAsHeader(e.target.checked)
           }
+          inputProps={{
+            'data-testid': 'parse-input-checkbox',
+          }}
         />
       </FormGroup>
     </ParseComponent>
