@@ -45,6 +45,7 @@ export default function({ setTransformationComponentsValue }: ISetTransformation
             color: 'primary',
             placeholder: DEPTH_PLACEHOLDER,
           }}
+          data-testid='form-input-field-component'
         />
       </FormGroup>
     </ParseComponent>
