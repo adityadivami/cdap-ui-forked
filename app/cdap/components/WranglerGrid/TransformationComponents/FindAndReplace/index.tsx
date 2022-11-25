@@ -17,6 +17,7 @@ import { Box, FormGroup } from '@material-ui/core';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
 import { NormalFont } from 'components/common/TypographyText';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -29,7 +30,17 @@ const CustomizedLabel = styled(NormalFont)`
   margin-bottom: 10px;
 `;
 
-const FindAndReplace = ({ setTransformationComponentsValue, transformationComponentValues }) => {
+interface IFindAndReplaceProps {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
+}
+
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: IFindAndReplaceProps) {
   const [oldValue, setOldValue] = useState('');
   const [ignoreCase, setIgnoreCase] = useState(false);
   const [exactMatch, setExactMatch] = useState(false);
@@ -133,6 +144,4 @@ const FindAndReplace = ({ setTransformationComponentsValue, transformationCompon
       </FormGroup>
     </Box>
   );
-};
-
-export default FindAndReplace;
+}
