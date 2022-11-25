@@ -50,11 +50,10 @@ const CountWidgetWrapper = styled(Box)`
 `;
 
 const transformationComponentDefaultValues = {
-  customInput: '',
+  exactMatch: false,
+  findPreviousValue: '',
+  findReplaceValue: ' ',
   ignoreCase: false,
-  filterOptionSelected: 'EMPTY',
-  filterOptionValue: '',
-  filterRadioOption: 'KEEP',
 };
 
 export default function({
@@ -69,9 +68,9 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
-  const [transformationComponentValues, setTransformationComponentsValue] = useState<
-    ITransformationComponentValues
-  >(transformationComponentDefaultValues);
+  const [transformationComponentValues, setTransformationComponentsValue] = useState<any>(
+    transformationComponentDefaultValues
+  );
 
   const closeClickHandler = () => {
     onCancel();

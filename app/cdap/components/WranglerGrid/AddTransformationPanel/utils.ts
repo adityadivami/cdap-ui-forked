@@ -15,30 +15,23 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
-import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
-import { SEND_TO_ERROR_OPTIONS } from 'components/WranglerGrid/TransformationComponents/SendToError/options';
 
 export const getDirective = (
   functionName: string,
   selectedColumnName: string,
-  transformationComponentValues: ITransformationComponentValues
+  transformationComponentValues: any
 ) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
-  } else if (functionName === 'send-to-error') {
-    const option = SEND_TO_ERROR_OPTIONS?.filter(
-      (eachOption) => eachOption?.value === transformationComponentValues?.filterOptionSelected
-    );
-    if (option?.length) {
-      const value = option[0].directive(
-        'send-to-error',
-        selectedColumnName,
-        transformationComponentValues.ignoreCase,
-        transformationComponentValues.filterOptionValue,
-        transformationComponentValues.filterOptionSelected
-      );
-      return value;
-    }
+  } else if (functionName === 'find-and-replace') {
+    const makeOldValue = transformationComponentValues.exactMatch
+      ? `^${transformationComponentValues.findPreviousValue}$`
+      : transformationComponentValues.findPreviousValue;
+    const finalValue = transformationComponentValues.ignoreCase
+      ? `s/${makeOldValue}/${transformationComponentValues.findReplaceValue}/Ig`
+      : `s/${makeOldValue}/${transformationComponentValues.findReplaceValue}/g`;
+
+    return `find-and-replace :${selectedColumnName} ${finalValue}`;
   } else {
     return null;
   }

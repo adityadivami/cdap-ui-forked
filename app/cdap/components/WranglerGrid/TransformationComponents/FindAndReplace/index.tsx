@@ -13,88 +13,110 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { FormGroup } from '@material-ui/core';
+import { Box, FormGroup } from '@material-ui/core';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
 import React, { useState, useEffect } from 'react';
-import {
-  FIND,
-  OLD_VALUE,
-  IGNORE_CASE,
-  EXACT_MATCH,
-  REPLACE_WITH,
-  NEW_VALUE,
-} from 'components/WranglerGrid/TransformationComponents/constants';
+import T from 'i18n-react';
 
-const FindAndReplace = ({ setDirectiveComponentsValue, directiveComponentValues }) => {
+const FindAndReplace = ({ setTransformationComponentsValue, transformationComponentValues }) => {
   const [oldValue, setOldValue] = useState('');
   const [ignoreCase, setIgnoreCase] = useState(false);
   const [exactMatch, setExactMatch] = useState(false);
   const [newValue, setNewValue] = useState('');
 
   useEffect(() => {
-    setDirectiveComponentsValue({
-      ...directiveComponentValues,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       findPreviousValue: oldValue,
     });
   }, [oldValue]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, ignoreCase });
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      ignoreCase,
+    });
   }, [ignoreCase]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, exactMatch });
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      exactMatch,
+    });
   }, [exactMatch]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({
-      ...directiveComponentValues,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       findReplaceValue: newValue,
     });
   }, [newValue]);
 
   return (
-    <div>
+    <Box>
       <FormGroup>
-        <div>{FIND}</div>
+        <Box>
+          {T.translate(`features.WranglerNewUI.GridPage.transformationUI.findAndReplace.find`)}
+        </Box>
         <FormInputFieldComponent
           formInputValue={oldValue}
           inputProps={{
             type: 'text',
             value: oldValue,
-
             onChange: (e) => setOldValue(e.target.value),
             color: 'primary',
-            placeholder: OLD_VALUE,
+            placeholder: T.translate(
+              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.oldValue`
+            ),
           }}
         />
         <InputCheckbox
-          label={IGNORE_CASE}
+          label={
+            T.translate(
+              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.ignoreCase`
+            ) as string
+          }
           value={ignoreCase}
           onChange={(e) => setIgnoreCase(e.target.checked)}
+          inputProps={{
+            'data-testid': 'ignore-case-input-checkbox',
+          }}
         />
         <InputCheckbox
-          label={EXACT_MATCH}
+          label={
+            T.translate(
+              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.exactMatch`
+            ) as string
+          }
           value={exactMatch}
           onChange={(e) => setExactMatch(e.target.checked)}
+          inputProps={{
+            'data-testid': 'exact-match-input-checkbox',
+          }}
         />
       </FormGroup>
       <FormGroup>
-        <div>{REPLACE_WITH}</div>
+        <Box>
+          {T.translate(
+            `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.replaceWith`
+          )}
+        </Box>
         <FormInputFieldComponent
           formInputValue={newValue}
           inputProps={{
             type: 'text',
             value: newValue,
-
             onChange: (e) => setNewValue(e.target.value),
             color: 'primary',
-            placeholder: NEW_VALUE,
+            placeholder: T.translate(
+              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.newValue`
+            ),
+            'data-testid': 'new-value-input-form',
           }}
         />
       </FormGroup>
-    </div>
+    </Box>
   );
 };
 
