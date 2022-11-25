@@ -72,16 +72,5 @@ describe('It Should test FunctionSeach Component.', () => {
     const uppercaseOption = screen.getByTestId(/search-result-uppercase/i);
     fireEvent.click(uppercaseOption);
 
-    fireEvent.change(searchInputField, { target: { value: 'trim' } });
-    const trimOption = screen.getByTestId(/search-result-trim/i);
-    fireEvent.click(trimOption);
-
-    fireEvent.change(searchInputField, { target: { value: 'encode' } });
-    const encodeOption = screen.getByTestId(/search-result-encode/i);
-    fireEvent.click(encodeOption);
-
-    fireEvent.change(searchInputField, { target: { value: 'decode' } });
-    const decodeOption = screen.getByTestId(/search-result-decode/i);
-    fireEvent.click(decodeOption);
   });
 });
