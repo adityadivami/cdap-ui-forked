@@ -47,7 +47,7 @@ export default function ({
 
     return (
         <Wrapper>
-            <SubHeadBoldFont>{T.translate(`${PREFIX}.fillNullEmpty`)}</SubHeadBoldFont>
+            <SubHeadBoldFont data-testid='null-empty-sub-header'>{T.translate(`${PREFIX}.fillNullEmpty`)}</SubHeadBoldFont>
             <FormInputFieldComponent
                 formInputValue={replaceValue}
                 inputProps={{
