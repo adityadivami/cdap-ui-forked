@@ -14,9 +14,11 @@
  * the License.
  */
 
-import { IType } from 'components/GridTable/types';
-
 export interface IGridHeaderCellProps {
   label: string;
-  types: Array<string | boolean | Record<string, IType>>;
+  types: string[];
+  columnSelected: string;
+  setColumnSelected: (columnName: string) => void;
+  onColumnSelection: (columnName: string) => void;
+  index: number;
 }
