@@ -167,6 +167,7 @@ export default function({ transformationPanel }) {
             onChange={(e) => handleInputChange(e)}
             InputProps={{
               ...params.InputProps,
+              'data-testid': 'function-search-input-field',
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchIcon />
