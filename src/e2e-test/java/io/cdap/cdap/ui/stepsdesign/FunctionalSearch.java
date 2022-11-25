@@ -84,7 +84,7 @@ public class FunctionalSearch {
     @Then("Click on the transformation from results")
     public void clickOnTheTransformationFromResults() {
         try {
-            WebElement ele = Helper.locateElementByTestId("functions-search-recent-results");
+//            WebElement ele = Helper.locateElementByTestId("functions-search-recent-results");
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("search-result-lowercase"));
         } catch (Exception e) {
@@ -102,5 +102,57 @@ public class FunctionalSearch {
                 System.err.println("error:" + e);
             }
         }
+
+    @Then("Verify if the user is on the Add transformation page")
+    public void verifyIfTheUserIsOnTheAddTransformationPanel() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            Assert.assertTrue(ElementHelper.isElementDisplayed(
+                    Helper.locateElementByTestId("add-transformation-drawer")));
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
     }
+
+    @Then("Click on the Select Column button")
+    public void clickOnTheSelectColumnButton() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("select-column-button"));
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
+
+    @Then("Click on the radio button of any column")
+    public void clickOnTheRadioButtonOfAnyColumn() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("radio-input-0"));
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
+
+    @Then("Click on the Done button")
+    public void clickOnTheDoneButton() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='button_done']"));
+            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
+    @Then("Click on the Apply step button")
+    public void clickOnTheApplyButton() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
+}
 

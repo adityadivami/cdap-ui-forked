@@ -31,3 +31,9 @@ Feature: Functions_Search
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
     Then Click on the Search field and send the values
     Then Click on the transformation from results
+    Then Verify if the user is on the Add transformation page
+    Then Click on the Select Column button
+    Then Click on the radio button of any column
+    Then Click on the Done button
+    Then Click on the Apply step button
+
