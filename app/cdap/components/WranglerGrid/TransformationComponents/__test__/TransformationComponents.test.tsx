@@ -14,25 +14,21 @@
  *  the License.
  */
 
-import { render } from '@testing-library/react';
-import React from 'react';
-import TransformationComponents from 'components/WranglerGrid/TransformationComponents/index';
-import { TRANSFORMATION_COMPONENTS } from 'components/WranglerGrid/TransformationComponents/constants';
+import { render } from "@testing-library/react";
+import React from "react";
+import TransformationComponents from "components/WranglerGrid/TransformationComponents/index";
+import { TRANSFORMATION_COMPONENTS } from "components/WranglerGrid/TransformationComponents/constants";
 
-describe('Test TransformationComponents', () => {
-  it('Should render TransformationComponent', () => {
+describe("Test TransformationComponents", () => {
+  it("Should render TransformationComponent", () => {
     render(
       <TransformationComponents
         setTransformationComponentsValue={jest.fn()}
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{
-          customInput: '',
-          ignoreCase: false,
-          filterOptionSelected: '',
-          filterOptionValue: '',
-          filterRadioOption: '',
+          customInput: "",
         }}
-        transformationName={'filter'}
+        transformationName={"replace-null-missing"}
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}
