@@ -94,7 +94,7 @@ const SearchFormControl = styled(Box)`
 `;
 
 const SearchIconStyle = styled(Typography)`
-  margin-top: 3px;
+  margin-top: 5px;
   cursor: pointer;
 `;
 
