@@ -37,6 +37,7 @@ import T from 'i18n-react';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
 const PREFIX = 'features.WranglerNewUI.GridPage';
+
 interface ISearchResult {
   description: string;
   value: string;

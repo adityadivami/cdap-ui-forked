@@ -385,6 +385,7 @@ export default function GridTable() {
         <AddTransformationPanel
           transformationName={addTransformationFunction.option}
           transformationDataType={addTransformationFunction.supportedDataType}
+          transformationLink={addTransformationFunction.infoLink}
           columnsList={headersNamesList}
           missingItemsList={dataQuality}
           onCancel={() => {
