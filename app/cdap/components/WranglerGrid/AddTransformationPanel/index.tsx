@@ -61,11 +61,11 @@ export default function({
   onCancel,
   applyTransformation,
 }: IAddTransformationProps) {
-  const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
-  const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
+  const [drawerStatus, setDrawerStatus] = useState(true);
+  const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
-  const [transformationComponentValues, setTransformationComponentsValue] = useState<any>(
+  const [transformationComponentValues, setTransformationComponentsValue] = useState(
     transformationComponentDefaultValues
   );
 
