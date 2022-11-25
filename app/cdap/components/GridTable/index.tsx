@@ -243,6 +243,7 @@ export default function GridTable() {
     if (rawData && rawData.summary && rawData.summary.statistics) {
       const missingData = createMissingData(gridData?.summary.statistics);
       setDataQuality(gridData?.summary.statistics);
+      setMissingDataList(missingData);
     }
     const rowData =
       rawData &&
