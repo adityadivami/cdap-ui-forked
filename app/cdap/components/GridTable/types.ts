@@ -45,7 +45,7 @@ export interface IExecuteAPIResponse {
 export interface IHeaderNamesList {
   name: string;
   label: string;
-  type: Array<string | boolean | Record<string, IType>>;
+  type: string[];
 }
 
 export interface IType {

@@ -18,11 +18,10 @@ import { IStatistics } from 'components/GridTable/types';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 export interface ITransformationComponentValues {
-  customInput: string;
+  exactMatch: boolean;
+  findPreviousValue: string;
+  findReplaceValue: string;
   ignoreCase: boolean;
-  filterOptionSelected: string;
-  filterOptionValue: string;
-  filterRadioOption: string;
 }
 
 export interface IAddTransformationProps {

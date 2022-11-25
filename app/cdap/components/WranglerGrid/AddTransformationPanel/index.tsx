@@ -39,10 +39,7 @@ import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/
 import { StyledDrawer, DrawerContainerBox } from 'components/WranglerGrid/SelectColumnPanel';
 import AddTransformationDrawerHeader from 'components/WranglerGrid/AddTransformationPanel/DrawerHeader';
 import TransformationContent from 'components/WranglerGrid/TransformationComponents';
-import {
-  IAddTransformationProps,
-  ITransformationComponentValues,
-} from 'components/WranglerGrid/AddTransformationPanel/types';
+import { IAddTransformationProps } from 'components/WranglerGrid/AddTransformationPanel/types';
 import { TRANSFORMATION_COMPONENTS } from 'components/WranglerGrid/TransformationComponents/constants';
 
 const CountWidgetWrapper = styled(Box)`

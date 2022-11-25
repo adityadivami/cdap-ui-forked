@@ -13,11 +13,36 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { Box, FormGroup } from '@material-ui/core';
+import { Box, FormGroup, Typography } from '@material-ui/core';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
 import React, { useState, useEffect } from 'react';
 import T from 'i18n-react';
+import styled from 'styled-components';
+import CheckBox from '@material-ui/icons/CheckBox';
+
+const StyledLabel = styled(Typography)`
+  color: #5f6368;
+  font-size: 14px;
+  font-style: normal;
+  margin-top: 10px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  margin-bottom: 10px;
+`;
+
+const CustomizedFormInputFieldComponent = styled(FormInputFieldComponent)`
+  width: calc(100% - 60px);
+  margin-right: 60px;
+  border: 1px solid #dadce0;
+  height: 40px;
+  padding: 5px 15px;
+  font-size: 14px;
+  background: #ffffff;
+  borderradius: 4px;
+  marginleft: 0;
+`;
 
 const FindAndReplace = ({ setTransformationComponentsValue, transformationComponentValues }) => {
   const [oldValue, setOldValue] = useState('');
@@ -57,9 +82,11 @@ const FindAndReplace = ({ setTransformationComponentsValue, transformationCompon
     <Box>
       <FormGroup>
         <Box>
-          {T.translate(`features.WranglerNewUI.GridPage.transformationUI.findAndReplace.find`)}
+          <StyledLabel>
+            {T.translate(`features.WranglerNewUI.GridPage.transformationUI.findAndReplace.find`)}
+          </StyledLabel>
         </Box>
-        <FormInputFieldComponent
+        <CustomizedFormInputFieldComponent
           formInputValue={oldValue}
           inputProps={{
             type: 'text',
@@ -98,11 +125,13 @@ const FindAndReplace = ({ setTransformationComponentsValue, transformationCompon
       </FormGroup>
       <FormGroup>
         <Box>
-          {T.translate(
-            `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.replaceWith`
-          )}
+          <StyledLabel>
+            {T.translate(
+              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.replaceWith`
+            )}
+          </StyledLabel>
         </Box>
-        <FormInputFieldComponent
+        <CustomizedFormInputFieldComponent
           formInputValue={newValue}
           inputProps={{
             type: 'text',
