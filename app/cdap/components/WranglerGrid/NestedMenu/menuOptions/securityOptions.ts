@@ -30,6 +30,7 @@ export const SECURITY_OPTIONS = [
         supportedDataType: [
           T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
         ],
+        directive: (selectedColumn: string) => `encode base64 :${selectedColumn}`,
       },
       {
         value: 'encode-base32',
@@ -39,6 +40,7 @@ export const SECURITY_OPTIONS = [
         supportedDataType: [
           T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
         ],
+        directive: (selectedColumn: string) => `encode base32 :${selectedColumn}`,
       },
       {
         value: 'encode-hex',
@@ -48,6 +50,7 @@ export const SECURITY_OPTIONS = [
         supportedDataType: [
           T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
         ],
+        directive: (selectedColumn: string) => `encode hex :${selectedColumn}`,
       },
       {
         value: 'encode-url',
@@ -57,6 +60,7 @@ export const SECURITY_OPTIONS = [
         supportedDataType: [
           T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
         ],
+        directive: (selectedColumn: string) => `url-encode :${selectedColumn}`,
       },
     ],
     supportedDataType: [
@@ -77,6 +81,7 @@ export const SECURITY_OPTIONS = [
         supportedDataType: [
           T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
         ],
+        directive: (selectedColumn: string) => `decode base64 :${selectedColumn}`,
       },
       {
         value: 'decode-base32',
@@ -86,6 +91,7 @@ export const SECURITY_OPTIONS = [
         supportedDataType: [
           T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
         ],
+        directive: (selectedColumn: string) => `decode base32 :${selectedColumn}`,
       },
       {
         value: 'decode-hex',
@@ -95,6 +101,7 @@ export const SECURITY_OPTIONS = [
         supportedDataType: [
           T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
         ],
+        directive: (selectedColumn: string) => `decode hex :${selectedColumn}`,
       },
       {
         value: 'decode-url',
@@ -104,6 +111,7 @@ export const SECURITY_OPTIONS = [
         supportedDataType: [
           T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all').toString(),
         ],
+        directive: (selectedColumn: string) => `url-decode :${selectedColumn}`,
       },
     ],
     supportedDataType: [
