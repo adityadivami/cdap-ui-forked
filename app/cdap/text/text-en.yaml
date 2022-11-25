@@ -3460,7 +3460,6 @@ features:
   WranglerNewRecipeSteps:
     labels:
        recipe: Recipe
-       serialNo: S.No.
        recipeSteps: Recipe steps
        recipeCount: Recipe count
     startWrangleTitle: Start Wrangling your data

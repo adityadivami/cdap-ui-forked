@@ -19,7 +19,7 @@ import T from 'i18n-react';
 export const headerData = [
   {
     textId: 'serial-no',
-    text: T.translate('features.WranglerNewRecipeSteps.labels.serialNo'),
+    text: '#',
   },
   {
     textId: 'recipe-steps',
