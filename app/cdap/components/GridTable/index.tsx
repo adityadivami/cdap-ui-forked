@@ -327,7 +327,7 @@ export default function GridTable() {
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
         columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
-        submitMenuOption={(option, datatype,infolink) => {
+        submitMenuOption={(option, datatype, infolink) => {
           console.log(option, datatype, 'option, datatype');
           !transformationOptions.includes(option)
             ? onMenuOptionSelection(option, datatype, infolink)
