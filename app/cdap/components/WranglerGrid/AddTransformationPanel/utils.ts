@@ -52,3 +52,31 @@ const getDirectiveForKeepOrDrop = (functionName: string, columnList: IHeaderName
   });
   return initialValue;
 };
+
+export const applyButtonEnabled = (
+  functionName: string,
+  transformationComponentValues: ITransformationComponentValues,
+  selectedColumns: IHeaderNamesList[]
+) => {
+  if (functionName === 'delimited-text') {
+    if (
+      transformationComponentValues.radioOption !== 'customDelimiter' &&
+      transformationComponentValues.radioOption == ''
+    ) {
+      return true;
+    } else if (
+      transformationComponentValues.radioOption === 'customDelimiter' &&
+      transformationComponentValues.customInput === ''
+    ) {
+      return true;
+    } else if (selectedColumns.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (selectedColumns.length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
