@@ -27,4 +27,9 @@ export const MENU_OPTIONS: IMenuItem[] = [
     options: DATATYPE_OPTIONS,
     supportedDataType: ['all'],
   },
+  {
+    value: 'findAndReplace',
+    label: 'Find and replace',
+    supportedDataType: ['all'],
+  },
 ];
