@@ -26,8 +26,8 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
 public class ColumnInsightsInlay {
-    @Given("Navigate to the Home Page")
-    public void navigateToTheHomePage() {
+    @Given("User navigate to the Home Page")
+    public void userOnHomePage() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
