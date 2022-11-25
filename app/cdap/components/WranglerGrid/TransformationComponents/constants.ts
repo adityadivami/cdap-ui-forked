@@ -14,11 +14,11 @@
  * the License.
  */
 
-import FilterComponent from 'components/WranglerGrid/TransformationComponents/Filter';
+import FillNullOrEmpty from 'components/WranglerGrid/TransformationComponents/FillNullOrEmpty';
 
 export const TRANSFORMATION_COMPONENTS = [
   {
-    type: 'filter',
-    component: FilterComponent,
+    type: 'replace-null-missing',
+    component: FillNullOrEmpty,
   },
 ];

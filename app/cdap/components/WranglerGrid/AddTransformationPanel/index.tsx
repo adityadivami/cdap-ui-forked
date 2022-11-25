@@ -51,10 +51,6 @@ const CountWidgetWrapper = styled(Box)`
 
 const transformationComponentDefaultValues = {
   customInput: '',
-  ignoreCase: false,
-  filterOptionSelected: 'EMPTY',
-  filterOptionValue: '',
-  filterRadioOption: 'KEEP',
 };
 
 export default function({

@@ -19,10 +19,6 @@ import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/type
 
 export interface ITransformationComponentValues {
   customInput: string;
-  ignoreCase: boolean;
-  filterOptionSelected: string;
-  filterOptionValue: string;
-  filterRadioOption: string;
 }
 
 export interface IAddTransformationProps {

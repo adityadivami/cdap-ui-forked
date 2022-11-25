@@ -21,28 +21,28 @@ export const NULL_MISSING_OPTIONS = [
     value: 'heading',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.remove'
-    ),
+    ).toString(),
   },
   {
     value: 'remove-null-missing',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.missingAndNull'
-    ),
-    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
+    ).toString(),
+    supportedDataType: ['all'],
   },
   {
     value: 'remove-missing',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.onlyMissing'
-    ),
-    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
+    ).toString(),
+    supportedDataType: ['all'],
   },
   {
     value: 'remove-null',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.onlyNull'
-    ),
-    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
+    ).toString(),
+    supportedDataType: ['all'],
   },
   {
     value: 'divider',
@@ -51,27 +51,13 @@ export const NULL_MISSING_OPTIONS = [
     value: 'heading',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.replace'
-    ),
+    ).toString(),
   },
   {
     value: 'replace-null-missing',
     label: T.translate(
       'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.missingAndNull'
-    ),
-    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
-  },
-  {
-    value: 'replace-missing',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.onlyMissing'
-    ),
-    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
-  },
-  {
-    value: 'replace-null',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.nullMissing.onlyNull'
-    ),
-    supported_dataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
+    ).toString(),
+    supportedDataType: ['all'],
   },
 ];

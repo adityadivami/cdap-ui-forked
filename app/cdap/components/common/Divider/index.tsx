@@ -18,7 +18,7 @@ import { Divider } from '@material-ui/core';
 import styled from 'styled-components';
 
 export const ShortDivider = styled(Divider)`
-  width: 159px;
+  width: 100%;
   background: #dadce0;
 `;
 

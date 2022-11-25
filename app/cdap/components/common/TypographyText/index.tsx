@@ -52,10 +52,10 @@ export const SuccessText = styled(Typography)`
 `;
 
 export const MenuHeadText = styled(Typography)`
-  color: grey[600];
+  color: ${grey[600]};
   font-size: 14px;
   font-weight: 600;
-  padding: 0px 20px;
+  padding: 10px 20px;
 `;
 
 export const TableCellText = styled(Typography)`
