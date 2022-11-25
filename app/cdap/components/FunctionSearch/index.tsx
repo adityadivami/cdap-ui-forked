@@ -70,10 +70,13 @@ export default function({ transformationPanel }) {
   };
 
   const handleOptionClick = (selectedOption: ISearchResult) => {
-    console.log(selectedOption, 'selectedOption');
     setTextFieldInput('');
     setSelectedDirective(selectedOption.value);
-    transformationPanel(selectedOption.value, selectedOption.supportedDataType);
+    transformationPanel(
+      selectedOption.value,
+      selectedOption.supportedDataType,
+      selectedOption.infoLink
+    );
     const currentRecentSearch = selectedOption;
     const array = [...recentSearches];
     const filterredSearchResults = array.filter((item) => item.label !== currentRecentSearch.label);
