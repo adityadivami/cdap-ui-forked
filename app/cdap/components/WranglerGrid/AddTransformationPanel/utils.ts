@@ -15,23 +15,24 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 
 export const getDirective = (
   functionName: string,
   selectedColumnName: string,
-  transformationComponentValues: any
+  transformationComponentValues: ITransformationComponentValues
 ) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
   } else if (functionName === 'find-and-replace') {
-    const makeOldValue = transformationComponentValues.exactMatch
+    const previousValue = transformationComponentValues.exactMatch
       ? `^${transformationComponentValues.findPreviousValue}$`
       : transformationComponentValues.findPreviousValue;
-    const finalValue = transformationComponentValues.ignoreCase
-      ? `s/${makeOldValue}/${transformationComponentValues.findReplaceValue}/Ig`
-      : `s/${makeOldValue}/${transformationComponentValues.findReplaceValue}/g`;
+    const updatedNewValue = transformationComponentValues.ignoreCase
+      ? `s/${previousValue}/${transformationComponentValues.findReplaceValue}/Ig`
+      : `s/${previousValue}/${transformationComponentValues.findReplaceValue}/g`;
 
-    return `find-and-replace :${selectedColumnName} ${finalValue}`;
+    return `find-and-replace :${selectedColumnName} ${updatedNewValue}`;
   } else {
     return null;
   }
