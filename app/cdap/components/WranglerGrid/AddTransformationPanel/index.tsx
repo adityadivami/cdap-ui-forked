@@ -51,6 +51,7 @@ interface IAddTransformationProps {
   missingItemsList: IStatistics;
   onCancel: () => void;
   applyTransformation: (directive: string) => void;
+  transformationLink: string;
 }
 
 export default function({
@@ -60,6 +61,7 @@ export default function({
   missingItemsList,
   onCancel,
   applyTransformation,
+  transformationLink,
 }: IAddTransformationProps) {
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
