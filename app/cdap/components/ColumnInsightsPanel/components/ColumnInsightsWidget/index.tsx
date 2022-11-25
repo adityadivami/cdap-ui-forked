@@ -48,7 +48,7 @@ const HeaderTextWithBackIcon = styled.div`
 const HeaderRightIconWrapper = styled(Box)`
   display: flex;
   align-items: center;
-  padding-right: 24px;
+  padding-right: 8px;
 `;
 
 const CloseButtonStyle = styled(IconButton)`
@@ -72,7 +72,7 @@ export default function({ children, closeClickHandler }) {
             aria-label="close-icon"
             onClick={closeClickHandler}
           >
-            <CloseRoundedIcon color="action" fontSize="large" />
+            <CloseRoundedIcon color="action" />
           </CloseButtonStyle>
         </HeaderRightIconWrapper>
       </HeaderStyle>
