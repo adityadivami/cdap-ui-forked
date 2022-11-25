@@ -15,27 +15,40 @@
  */
 
 import React from 'react';
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, IconButton } from '@material-ui/core';
 import DataPrepStore from 'components/DataPrep/store';
-import { DownloadIcon } from 'components/RecipeSteps/IconStore/DownloadIcon';
 import fileDownload from 'js-file-download';
 import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
 import styled from 'styled-components';
 import grey from '@material-ui/core/colors/grey';
+import SaveAltOutlinedIcon from '@material-ui/icons/SaveAltOutlined';
 
 const DownloadMenuActionWrapper = styled(Box)`
   display: flex;
 `;
 
-const DownloadIconStyle = styled(IconButton)`
+const DownloadButtonStyle = styled(IconButton)`
   cursor: pointer;
+  &.MuiIconButton-root {
+    padding: 10px;
+  }
 `;
 
-const KebabMenuStyle = styled(IconButton)`
-  cursor: pointer;
+const DownloadIconStyle = styled(SaveAltOutlinedIcon)`
+  width: 20px;
+  height: 20px;
 `;
 
-const CustomizedMoreVertOutlinedIcon = styled(MoreVertOutlinedIcon)`
+const KebabMenuButtonStyle = styled(IconButton)`
+  cursor: pointer;
+  &.MuiIconButton-root {
+    padding: 10px;
+  }
+`;
+
+const KebabMenuIconStyle = styled(MoreVertOutlinedIcon)`
+  width: 20px;
+  height: 20px;
   font-size: 26px;
   color: ${grey[600]};
 `;
@@ -54,13 +67,12 @@ export default function() {
 
   return (
     <DownloadMenuActionWrapper data-testid="header-action-template-parent">
-      <DownloadIconStyle data-testid="header-action-download-icon" onClick={handleDownload}>
-        <Typography data-testid="download-icon" component="span"></Typography>
-        {DownloadIcon}
-      </DownloadIconStyle>
-      <KebabMenuStyle data-testid="header-action-kebab-icon">
-        <CustomizedMoreVertOutlinedIcon />
-      </KebabMenuStyle>
+      <DownloadButtonStyle data-testid="header-action-download-icon" onClick={handleDownload}>
+        <DownloadIconStyle data-testid="download-icon" />
+      </DownloadButtonStyle>
+      <KebabMenuButtonStyle data-testid="header-action-kebab-icon">
+        <KebabMenuIconStyle />
+      </KebabMenuButtonStyle>
     </DownloadMenuActionWrapper>
   );
 }

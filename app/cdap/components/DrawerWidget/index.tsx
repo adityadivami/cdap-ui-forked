@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
+import { Box, Container, Drawer, IconButton } from '@material-ui/core';
 import React, { Fragment } from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from 'components/DrawerWidget/DrawerWidgetHeading';
@@ -25,7 +25,8 @@ import styled from 'styled-components';
 const DrawerContainer = styled(Container)`
   width: 460px;
   height: 100%;
-  padding-left: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const Header = styled.header`
@@ -55,11 +56,10 @@ const Divider = styled.div`
   width: 1px;
   height: 28px;
   background-color: #dadce0;
-  margin: 0 15px;
-`;
-
-const CloseIcon = styled(CloseRoundedIcon)`
-  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 `;
 
 const PaperDrawer = styled(Drawer)`
@@ -69,11 +69,15 @@ const PaperDrawer = styled(Drawer)`
   }
 `;
 
-const StyledDrawer = styled(Drawer)`
-  & .MuiDrawer-paper {
-    top: 46px;
-    height: calc(100vh - 47px);
-    width: 500px;
+const CloseButtonStyle = styled(IconButton)`
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end !important;
+  &.MuiIconButton-root {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 10px;
+    padding-right: 0px;
   }
 `;
 
@@ -103,12 +107,13 @@ export default function({
           <HeaderIconWrapper>
             {headerActionTemplate && <div>{headerActionTemplate}</div>}
             {showDivider && <Divider />}
-            <CloseIcon
-              color="action"
-              fontSize="large"
-              onClick={closeClickHandler}
+            <CloseButtonStyle
               data-testid="drawer-widget-close-round-icon"
-            />
+              aria-label="close-icon"
+              onClick={closeClickHandler}
+            >
+              <CloseRoundedIcon color="action" />
+            </CloseButtonStyle>
           </HeaderIconWrapper>
         </Header>
         <Fragment>{children}</Fragment>
