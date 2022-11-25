@@ -16,37 +16,29 @@
 
 import T from 'i18n-react';
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels'
+const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels';
 
 export const FRAGMENT_OPTIONS = [
-    {
-        value: 'explode',
-        label: T.translate(
-            `${PREFIX}.fragment.explode`
-        ).toString(),
-        options: [
-            {
-                value: 'delimited-text',
-                label: T.translate(
-                    `${PREFIX}.explodeOptions.delimitedText`
-                ).toString(),
-                supportedDataType: ['all']
-            },
-            {
-                value: 'array-flattening',
-                label: T.translate(
-                    `${PREFIX}.explodeOptions.arrayByFlattening`
-                ).toString(),
-                supportedDataType: ['all']
-            },
-            {
-                value: 'record-flattening',
-                label: T.translate(
-                    `${PREFIX}.explodeOptions.recordByFlattening`
-                ).toString(),
-                supportedDataType: ['all']
-            },
-        ],
-        supportedDataType: ['all']
-    },
+  {
+    value: 'explode',
+    label: T.translate(`${PREFIX}.fragment.explode`).toString(),
+    options: [
+      {
+        value: 'delimited-text',
+        label: T.translate(`${PREFIX}.explodeOptions.delimitedText`).toString(),
+        supportedDataType: ['all'],
+      },
+      {
+        value: 'array-flattening',
+        label: T.translate(`${PREFIX}.explodeOptions.arrayByFlattening`).toString(),
+        supportedDataType: ['all'],
+      },
+      {
+        value: 'record-flattening',
+        label: T.translate(`${PREFIX}.explodeOptions.recordByFlattening`).toString(),
+        supportedDataType: ['all'],
+      },
+    ],
+    supportedDataType: ['all'],
+  },
 ];

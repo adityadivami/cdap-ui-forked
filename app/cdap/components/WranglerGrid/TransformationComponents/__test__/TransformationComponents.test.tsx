@@ -27,7 +27,7 @@ describe('Test TransformationComponents', () => {
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{
           customInput: '',
-          radioOption:''
+          radioOption: '',
         }}
         transformationName={'delimited-text'}
         transformationDataType={[]}
