@@ -83,7 +83,7 @@ export default function({
                         clickEvent.stopPropagation();
                         setAnchorElement([clickEvent.currentTarget]);
                       } else {
-                        submitMenuOption(eachOption.action, eachOption.dataType);
+                        submitMenuOption(eachOption.action, eachOption.dataType, '');
                       }
                     }}
                     data-testid="toolbar-icon-button"
