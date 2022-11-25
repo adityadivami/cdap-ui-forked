@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -13,12 +15,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  maskSelection?: boolean;
-  rowNumber: number;
-  columnSelected?: string;
-  applyTransformation?: (value?: string) => void;
-  cancelTransformation?: () => void;
-  optionSelected?: string;
+
+export interface ITransformationToolBarProps {
+  columnType: string;
+  submitMenuOption: (value: string, dataType: string[], infoLink: string) => void;
+  setShowBreadCrumb: Dispatch<SetStateAction<boolean>>;
+  showBreadCrumb: boolean;
 }

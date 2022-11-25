@@ -13,12 +13,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  maskSelection?: boolean;
-  rowNumber: number;
-  columnSelected?: string;
-  applyTransformation?: (value?: string) => void;
-  cancelTransformation?: () => void;
-  optionSelected?: string;
+import { IHeaderNamesList } from 'components/WranglerGrid/AddTransformationPanel/types';
+
+export interface ISelectColumnsWidgetProps {
+  selectedColumns: IHeaderNamesList[];
+  transformationName: string;
+  handleSelectColumn: (value: boolean) => void;
 }

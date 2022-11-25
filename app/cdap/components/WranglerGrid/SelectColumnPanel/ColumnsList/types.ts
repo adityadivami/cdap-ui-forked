@@ -13,12 +13,19 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  maskSelection?: boolean;
-  rowNumber: number;
-  columnSelected?: string;
-  applyTransformation?: (value?: string) => void;
-  cancelTransformation?: () => void;
-  optionSelected?: string;
+
+import React from 'react';
+import {
+  IHeaderNamesList,
+  IDataQualityItem,
+} from 'components/WranglerGrid/SelectColumnPanel/types';
+
+export interface ISelectColumnsListProps {
+  transformationDataType: string[];
+  selectedColumnsCount: number;
+  columnsList: IHeaderNamesList[];
+  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  dataQuality: IDataQualityItem[];
+  transformationName: string;
+  selectedColumns: IHeaderNamesList[];
 }

@@ -13,12 +13,6 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  maskSelection?: boolean;
-  rowNumber: number;
-  columnSelected?: string;
-  applyTransformation?: (value?: string) => void;
-  cancelTransformation?: () => void;
-  optionSelected?: string;
-}
+
+export const addActionType = 'add';
+export const PREFIX = 'features.WranglerNewUI.Snackbar.labels';

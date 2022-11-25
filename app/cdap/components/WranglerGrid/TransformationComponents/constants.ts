@@ -13,12 +13,12 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-export interface IGridTextCellProps {
-  cellValue: string;
-  maskSelection?: boolean;
-  rowNumber: number;
-  columnSelected?: string;
-  applyTransformation?: (value?: string) => void;
-  cancelTransformation?: () => void;
-  optionSelected?: string;
-}
+
+import FilterComponent from 'components/WranglerGrid/TransformationComponents/Filter';
+
+export const TRANSFORMATION_COMPONENTS = [
+  {
+    type: 'filter',
+    component: FilterComponent,
+  },
+];
