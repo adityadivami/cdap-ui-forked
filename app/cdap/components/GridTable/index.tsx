@@ -429,6 +429,29 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  const handleColumnViewClose = () => {
+    setOpenColumnView(false);
+    if (insightDrawer.open) {
+      setInsightDrawer({
+        open: false,
+        columnName: '',
+        distinctValues: 0,
+        characterCount: { min: 0, max: 0 },
+        dataQuality: {
+          nullValueCount: 0,
+          nullValuePercentage: 0,
+          emptyValueCount: 0,
+          emptyValuePercentage: 0,
+        },
+        dataQualityBar: {},
+        dataTypeString: '',
+        dataDistributionGraphData: [],
+        columnNamesList: [],
+      });
+      setColumnSelected('');
+    }
+  };
+
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
@@ -438,7 +461,7 @@ export default function GridTable() {
             <ColumnViewPanel
               columnData={headersNamesList}
               dataQuality={dataQuality}
-              closeClickHandler={() => setOpenColumnView(false)}
+              closeClickHandler={() => handleColumnViewClose()}
               setColumnSelected={handleColumnSelect}
               onColumnSelection={(column) => onColumnSelection(column)}
               selectedColumn={columnSelected}
