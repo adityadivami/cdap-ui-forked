@@ -31,7 +31,10 @@ import { AddTransformationButton } from 'components/common/ButtonWidget';
 import FunctionNameWidget from 'components/WranglerGrid/AddTransformationPanel/FunctionNameWidget';
 import SelectColumnsWidget from 'components/WranglerGrid/AddTransformationPanel/SelectColumnsWidget';
 import SelectedColumnCountWidget from 'components/WranglerGrid/SelectColumnPanel/CountWidget';
-import { getDirective } from 'components/WranglerGrid/AddTransformationPanel/utils';
+import {
+  applyButtonEnabled,
+  getDirective,
+} from 'components/WranglerGrid/AddTransformationPanel/utils';
 import { Box, Divider } from '@material-ui/core';
 import styled from 'styled-components';
 import { enableDoneButton } from 'components/WranglerGrid/SelectColumnPanel/utils';
@@ -143,7 +146,11 @@ export default function({
               )}
             </AddTransformationBodyWrapper>
             <AddTransformationButton
-              disabled={selectedColumns?.length ? false : true}
+              disabled={applyButtonEnabled(
+                transformationName,
+                transformationComponentValues,
+                selectedColumns
+              )}
               color="primary"
               data-testid="apply-step-button"
               onClick={handleApply}

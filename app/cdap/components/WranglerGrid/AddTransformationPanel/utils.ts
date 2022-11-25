@@ -16,6 +16,7 @@
 
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
 import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 export const getDirective = (
   functionName: string,
@@ -35,5 +36,25 @@ export const getDirective = (
     return `find-and-replace :${selectedColumnName} ${updatedNewValue}`;
   } else {
     return null;
+  }
+};
+
+export const applyButtonEnabled = (
+  functionName: string,
+  transformationComponentValues: ITransformationComponentValues,
+  selectedColumns: IHeaderNamesList[]
+) => {
+  if (functionName === 'find-and-replace') {
+    if (transformationComponentValues.findPreviousValue === '') {
+      return true;
+    } else if (selectedColumns.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (selectedColumns.length === 0) {
+    return true;
+  } else {
+    return false;
   }
 };
