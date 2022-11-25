@@ -16,6 +16,7 @@
 
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import { getWidgetData } from 'components/WidgetSVG/utils';
 import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -26,9 +27,15 @@ import WrangleHomeTitle from './Components/WrangleHomeTitle';
 import { GradientLine, HeaderImage } from './icons';
 import { useStyles } from './styles';
 
-export default function WranglerHome() {
+export default function() {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
+
+  const [viewAllLink, toggleViewAllLink] = useState<boolean>(false);
+
+  useEffect(() => {
+    getWidgetData();
+  }, []);
 
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
@@ -54,7 +61,7 @@ export default function WranglerHome() {
             </Link>
           </Box>
         </Box>
-        <WrangleCard />
+        <WrangleCard toggleViewAllLink={toggleViewAllLink} />
         <Box className={classes.headerTitle}>
           <WrangleHomeTitle title="Continue ongoing data explorations, pick up where you left off" />
           <Box className={classes.viewMore}>
