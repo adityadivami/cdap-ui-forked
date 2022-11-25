@@ -29,11 +29,12 @@ interface IInput {
   color: 'primary' | 'secondary';
   placeholder: string;
   inputProps?: IInputProps;
+  'data-testid': string;
 }
 
 interface IFormInputFieldComponentProps {
   formInputValue: string;
-  inputProps: any;
+  inputProps: IInput;
 }
 
 export default function({ formInputValue, inputProps }: IFormInputFieldComponentProps) {

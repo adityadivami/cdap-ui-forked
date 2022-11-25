@@ -26,11 +26,10 @@ describe('Test TransformationComponents', () => {
         setTransformationComponentsValue={jest.fn()}
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{
-          customInput: '',
+          exactMatch: false,
+          findPreviousValue: '',
+          findReplaceValue: '',
           ignoreCase: false,
-          filterOptionSelected: '',
-          filterOptionValue: '',
-          filterRadioOption: '',
         }}
         transformationName={'find-and-replace'}
         transformationDataType={[]}

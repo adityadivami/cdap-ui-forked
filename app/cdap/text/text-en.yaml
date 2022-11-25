@@ -3513,12 +3513,12 @@ features:
           columnExist: This column name already exist
           destinationColumn: Destination Column
         findAndReplace: 
-          find: Find
-          oldValue: Old Value
-          ignoreCase: Ignore case
           exactMatch: Exact Match
-          replaceWith: Replace with
+          find: Find
+          ignoreCase: Ignore case
           newValue: New value
+          oldValue: Old Value
+          replaceWith: Replace with
     HomePage:
       labels:
         common:
