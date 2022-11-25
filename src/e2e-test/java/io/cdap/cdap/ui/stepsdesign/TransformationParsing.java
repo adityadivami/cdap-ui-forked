@@ -132,6 +132,20 @@ public class TransformationParsing {
         }
     }
 
+    @Then("Click on the Checkbox")
+    public void clickOnTheCheckbox() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='parse-input-checkbox']"));
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
+
     @Then("Click on the Done button")
     public void clickOnTheDoneButton() {
         try {
@@ -149,20 +163,11 @@ public class TransformationParsing {
     public void selectAnyRadioButtonFromTheDelimiterList() {
         try {
             WaitHelper.waitForPageToLoad();
-            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("form-control-label-radio-option-2"));
-            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='form-control-label-radio-option-2']"));
+            JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='radio-option-2']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
-    @Then("Click on the Checkbox")
-    public void clickOnTheCheckbox() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("checkbox-parse-input-checkbox"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
