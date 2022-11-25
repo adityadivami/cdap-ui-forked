@@ -56,8 +56,6 @@ public class SelectColumnPanel {
                     flag = false;
                 }
             }
-            // boolean toolbar =
-            // Helper.isElementExists(Helper.getCssSelectorByDataTestId("transformations-toolbar-container"));
             Assert.assertTrue(
                     Helper.isElementExists(Helper.getCssSelectorByDataTestId("transformations-toolbar-container")));
         } catch (Exception e) {
@@ -74,7 +72,6 @@ public class SelectColumnPanel {
             System.err.println("error:" + e);
         }
     }
-
     @Then("Click on the change data type")
     public void clickOnTheChangeDataType() {
         try {
@@ -119,7 +116,7 @@ public class SelectColumnPanel {
     public void clickOnTheCrossIcon() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("drawer-widget-close-round-icon"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("select-column-drawer-close-icon"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -139,7 +136,7 @@ public class SelectColumnPanel {
     public void enterNameOfAnyColumnFromTheList() {
         try {
             WaitHelper.waitForPageToLoad();
-            Helper.locateElementByTestId("input_id").sendKeys("Body_0");
+            Helper.locateElementByTestId("input-search-id").sendKeys("Body_0");
             Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("radio-input-0")));
         } catch (Exception e) {
             System.err.println("error:" + e);
