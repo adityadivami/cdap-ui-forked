@@ -71,6 +71,5 @@ describe('It Should test FunctionSeach Component.', () => {
 
     const uppercaseOption = screen.getByTestId(/search-result-uppercase/i);
     fireEvent.click(uppercaseOption);
-
   });
 });
