@@ -21,18 +21,20 @@ import { SECURITY_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions
 
 export const getDirective = (functionName: string, selectedColumnName: string) => {
   const encodeDecodeOptions: IMenuItem[] = [];
-  SECURITY_OPTIONS.forEach((eachOption) => {
-    if (eachOption.value === ENCODE || eachOption.value === DECODE) {
-      encodeDecodeOptions.push(...eachOption.options);
+  SECURITY_OPTIONS.forEach((eachSecurityOption: IMenuItem) => {
+    if (eachSecurityOption.value === ENCODE || eachSecurityOption.value === DECODE) {
+      encodeDecodeOptions.push(...eachSecurityOption.options);
     }
   });
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
   } else if (
-    encodeDecodeOptions.some((eachOption: IMenuItem) => eachOption.value === functionName)
+    encodeDecodeOptions.some(
+      (eachEncodeDecodeOption: IMenuItem) => eachEncodeDecodeOption.value === functionName
+    )
   ) {
     const option: IMenuItem = encodeDecodeOptions.find(
-      (eachOption: IMenuItem) => eachOption.value === functionName
+      (eachEncodeDecodeOption: IMenuItem) => eachEncodeDecodeOption.value === functionName
     );
     if (option) {
       return option.directive(selectedColumnName);
