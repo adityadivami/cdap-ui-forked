@@ -3484,12 +3484,6 @@ features:
               long: long
               string: string
               short: short
-            explodeOptions: 
-              arrayByFlattening: Array By Flattening
-              delimitedText: Delimited Text
-              recordByFlattening: Record By Flattening
-            fragment:
-              explode: Explode
             menu:
               changeDatatype: Change data type
             fragment:

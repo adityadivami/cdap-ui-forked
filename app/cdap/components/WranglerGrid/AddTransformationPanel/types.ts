@@ -18,12 +18,12 @@ import { IStatistics } from 'components/GridTable/types';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 export interface ITransformationComponentValues {
-    radioOption: string;
-    customInput: string;
-    startValue: string;
-    endValue: string;
-    nDigit: string;
-    extractOptionSelected: string;
+  radioOption: string;
+  customInput: string;
+  startValue: string;
+  endValue: string;
+  nDigit: string;
+  extractOptionSelected: string;
 }
 
 export interface IAddTransformationProps {
