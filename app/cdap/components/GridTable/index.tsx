@@ -79,6 +79,8 @@ export default function GridTable() {
     isSuccess: false,
   });
   const [showBreadCrumb, setShowBreadCrumb] = useState<boolean>(true);
+  const [columnSelected, setColumnSelected] = useState<string>('');
+  const [maskSelection, setMaskSelection] = useState(true);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -293,7 +295,7 @@ export default function GridTable() {
         });
         setSnackbarIsOpen(true);
         setSnackbarData({
-          description: 'Directive applied successfully',
+          description: 'Transformation applied successfully',
           isSuccess: true,
         });
         setLoading(false);
@@ -303,11 +305,11 @@ export default function GridTable() {
           supportedDataType: [],
         });
       },
-      (err) => {
+      (error) => {
         setLoading(false);
         setSnackbarIsOpen(true);
         setSnackbarData({
-          description: 'Directive cannot applied',
+          description: error.message,
           isSuccess: false,
         });
         setAddTransformationFunction({
@@ -324,7 +326,7 @@ export default function GridTable() {
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
-        columnType={'int'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
+        columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
         submitMenuOption={(option, datatype) => {
           !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null;
         }}
@@ -370,6 +372,21 @@ export default function GridTable() {
                         <GridTextCell
                           cellValue={eachRow[eachKey.name] || '--'}
                           key={`${eachKey.name}-${eachIndex}`}
+                          maskSelection={eachKey.name === columnSelected ? maskSelection : false}
+                          rowNumber={rowIndex}
+                          columnSelected={columnSelected}
+                          optionSelected={addTransformationFunction.option}
+                          applyTransformation={(value) => {
+                            addDirectives(value);
+                          }}
+                          cancelTransformation={() => {
+                            setColumnSelected('');
+                            setAddTransformationFunction({
+                              option: '',
+                              supportedDataType: [],
+                            });
+                            setMaskSelection(false);
+                          }}
                         />
                       );
                     })}
@@ -394,6 +411,11 @@ export default function GridTable() {
           applyTransformation={(directive: string) => {
             addDirectives(directive);
           }}
+          onCustomSelection={(column) => {
+            setMaskSelection(true);
+            setColumnSelected(column);
+          }}
+          transformationLink=""
         />
       )}
       {snackbarIsOpen && (
