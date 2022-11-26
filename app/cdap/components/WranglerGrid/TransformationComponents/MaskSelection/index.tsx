@@ -14,12 +14,11 @@
  * the License.
  */
 
-import { Typography, Popover, Button, Box } from '@material-ui/core';
+import { Popover, Button, Box } from '@material-ui/core';
 import React from 'react';
 import T from 'i18n-react';
 import styled from 'styled-components';
 import { HeadFont, NormalFont } from 'components/common/TypographyText';
-import DataPrepStore from 'components/DataPrep/store';
 import { blue } from '@material-ui/core/colors';
 
 const MaskWrapper = styled(Box)`
