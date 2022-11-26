@@ -27,4 +27,9 @@ export const MENU_OPTIONS: IMenuItem[] = [
     options: DATATYPE_OPTIONS,
     supportedDataType: ['all'],
   },
+  {
+    value: 'hash',
+    label: T.translate(`${PREFIX}.menu.hash`).toString(),
+    supportedDataType: ['all'],
+  },
 ];

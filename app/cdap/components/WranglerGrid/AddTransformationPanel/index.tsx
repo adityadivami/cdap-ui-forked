@@ -50,11 +50,9 @@ const CountWidgetWrapper = styled(Box)`
 `;
 
 const transformationComponentDefaultValues = {
-  customInput: '',
+  hashValue: '',
   ignoreCase: false,
-  filterOptionSelected: 'EMPTY',
-  filterOptionValue: '',
-  filterRadioOption: 'KEEP',
+  encode: false,
 };
 
 export default function({
