@@ -191,7 +191,6 @@ public class FindAndReplace {
     public void clickOnTheApplyButton() {
         try {
             WaitHelper.waitForPageToLoad();
-//            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
             WebElement element = Helper.locateElementByTestId("apply-step-button");
             JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", element);
