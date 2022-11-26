@@ -45,7 +45,7 @@ describe("Testing PositionExtract component", () => {
     const buttonElement = screen.getByTestId(/apply-mask-button/i);
     fireEvent.click(buttonElement);
     expect(buttonElement).toBeInTheDocument();
-    expect(buttonElement).toHaveTextContent(T.translate(`${PREFIX}.applyMask`))
+    expect(buttonElement).toHaveTextContent(`${T.translate(`${PREFIX}.applyMask`)}`)
   });
 
   it("should test default render of PositionExtract and trigger onChange on input", () => {
