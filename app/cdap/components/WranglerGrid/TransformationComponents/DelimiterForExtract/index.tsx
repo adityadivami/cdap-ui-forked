@@ -32,27 +32,27 @@ const FormGroupWrapper = styled(FormGroup)`
   margin-top: 20px;
 `;
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.explode';
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.extract';
 const DELIMITER_OPTION_EXPLODE = [
   {
     value: ',',
-    label: `${T.translate(`${PREFIX}.explodeDelimiterOptions.comma`)}`,
+    label: `${T.translate(`${PREFIX}.extractDelimiterOptions.comma`)}`,
   },
   {
     value: '\\t',
-    label: `${T.translate(`${PREFIX}.explodeDelimiterOptions.tab`)}`,
+    label: `${T.translate(`${PREFIX}.extractDelimiterOptions.tab`)}`,
   },
   {
     value: '\\s+',
-    label: `${T.translate(`${PREFIX}.explodeDelimiterOptions.whitespace`)}`,
+    label: `${T.translate(`${PREFIX}.extractDelimiterOptions.whitespace`)}`,
   },
   {
     value: '\\|',
-    label: `${T.translate(`${PREFIX}.explodeDelimiterOptions.pipe`)}`,
+    label: `${T.translate(`${PREFIX}.extractDelimiterOptions.pipe`)}`,
   },
   {
     value: 'customDelimiter',
-    label: `${T.translate(`${PREFIX}.explodeDelimiterOptions.customDelimiter`)}`,
+    label: `${T.translate(`${PREFIX}.extractDelimiterOptions.customDelimiter`)}`,
   },
 ];
 
