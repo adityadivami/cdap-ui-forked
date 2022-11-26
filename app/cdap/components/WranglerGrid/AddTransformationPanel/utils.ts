@@ -15,10 +15,30 @@
  */
 
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import { USING_PATTERN_OPTIONS } from 'components/WranglerGrid/TransformationComponents/PatternExtract/options';
 
-export const getDirective = (functionName: string, selectedColumnName: string) => {
+export const getDirective = (functionName: string, selectedColumnName: string, transformationComponentValues) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
+  } else if (functionName === 'extract-using-delimiters') {
+    return `split-to-columns :${selectedColumnName} ${
+      transformationComponentValues.customInput
+        ? transformationComponentValues.customInput
+        : transformationComponentValues.radioOption
+    }`;
+  } else if (functionName === 'extract-using-patterns') {
+    const option = USING_PATTERN_OPTIONS?.filter(
+      (el) => el.value === transformationComponentValues.extractOptionSelected
+    );
+    if (option?.length) {
+      return option[0].extractDirective(
+        selectedColumnName,
+        transformationComponentValues.customInput,
+        transformationComponentValues.startValue,
+        transformationComponentValues.endValue,
+        transformationComponentValues.nDigit
+      );
+    }
   } else {
     return null;
   }
