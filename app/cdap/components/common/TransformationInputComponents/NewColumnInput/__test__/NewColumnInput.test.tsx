@@ -45,8 +45,8 @@ describe('Testing NewColumnInput component', () => {
     const parentElement = screen.getByTestId(/new-column-wrapper-parent/i);
     expect(parentElement).toBeInTheDocument();
 
-    const inputTextElement = screen.getByTestId(/new-column-name-input/i);
-    fireEvent.change(inputTextElement, { target: { value: 'test' } });
-    expect(inputTextElement).toBeInTheDocument();
+    const inputTextElement = screen.getAllByTestId(/new-column-name-input/i);
+    fireEvent.change(inputTextElement[0].firstChild, { target: { value: 'test' } });
+    expect(inputTextElement[0]).toBeInTheDocument();
   });
 });
