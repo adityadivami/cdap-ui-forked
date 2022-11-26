@@ -15,14 +15,12 @@
  */
 
 import React from 'react';
-import FormInputFieldComponent from 'components/GridTable/components/TransformationComponents/InputComponents/FormInputFieldComponent';
-import LabelComponent from 'components/GridTable/components/TransformationComponents/InputComponents/LabelInputComponent';
+import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
+import LabelComponent from 'components/common/TransformationInputComponents/LabelInputComponent';
 import { FormGroup } from '@material-ui/core';
 import T from 'i18n-react';
-import { useStyles } from 'components/GridTable/components/TransformationComponents/styles';
 
 export default function({ customInput, setCustomInput }) {
-  const classes = useStyles();
   return (
     <FormGroup>
       <LabelComponent
@@ -32,14 +30,17 @@ export default function({ customInput, setCustomInput }) {
       />
       <FormInputFieldComponent
         formInputValue={customInput}
-        classnames={classes.formFieldStyles}
         inputProps={{
-          classes: { underline: classes.underlineStyles, input: classes.inputStyles },
           type: 'text',
           value: customInput,
           onChange: (e) => setCustomInput(e.target.value),
           color: 'primary',
-          placeholder: 'E.g. [^(]+(([0-9]{4})).* ',
+          placeholder: `${T.translate(
+            'features.WranglerNewUI.GridPage.transformationUI.extract.customPlaceholder'
+          )}`,
+          inputProps: {
+            'data-testid': 'custom-input-regex',
+          },
         }}
         label={''}
       />

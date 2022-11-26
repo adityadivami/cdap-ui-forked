@@ -35,7 +35,12 @@ export default function({ setStartValue, setEndValue, endValue, startValue }) {
           value: startValue,
           onChange: (e) => setStartValue(e.target.value),
           color: 'primary',
-          placeholder: 'E.g. <',
+          placeholder: `${T.translate(
+            'features.WranglerNewUI.GridPage.transformationUI.extract.startPlaceholder'
+          )}`,
+          inputProps: {
+            'data-testid': 'custom-input-start-value',
+          },
         }}
       />
       <LabelComponent
@@ -50,7 +55,12 @@ export default function({ setStartValue, setEndValue, endValue, startValue }) {
           value: endValue,
           onChange: (e) => setEndValue(e.target.value),
           color: 'primary',
-          placeholder: 'E.g. >',
+          placeholder: `${T.translate(
+            'features.WranglerNewUI.GridPage.transformationUI.extract.endPlaceholder'
+          )}`,
+          inputProps: {
+            'data-testid': 'custom-input-end-value',
+          },
         }}
       />
     </FormGroup>

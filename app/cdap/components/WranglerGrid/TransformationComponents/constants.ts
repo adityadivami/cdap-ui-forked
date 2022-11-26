@@ -14,11 +14,16 @@
  * the License.
  */
 
-import SendToError from 'components/WranglerGrid/TransformationComponents/SendToError';
+import DelimiterForExtract from 'components/WranglerGrid/TransformationComponents/DelimiterForExtract';
+import PatternExtract from 'components/WranglerGrid/TransformationComponents/PatternExtract';
 
 export const TRANSFORMATION_COMPONENTS = [
   {
-    type: 'send-to-error',
-    component: SendToError,
+    type: 'extract-using-delimiters',
+    component: DelimiterForExtract,
+  },
+  {
+    type: 'extract-using-patterns',
+    component: PatternExtract,
   },
 ];

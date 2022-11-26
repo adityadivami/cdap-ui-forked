@@ -38,7 +38,11 @@ const SubTitleWrapper = styled(Box)`
   margin: 10px 0;
 `;
 
-export default function GridTextCell({
+const PositionWrapper = styled(Box)`
+  padding: 10px;
+`;
+
+export default function({
   anchorEl,
   setAnchorEl,
   textSelectionRange,
@@ -82,14 +86,14 @@ export default function GridTextCell({
         horizontal: 'left',
       }}
     >
-      <HeadFont>{T.translate(`${PREFIX}.extractPosition`)}</HeadFont>
-      <SubTitleWrapper>
-        {`${T.translate(`${PREFIX}.extractCharacter`)} ${textSelectionRange.start}-${
-          textSelectionRange.end
-        } ${T.translate(`${PREFIX}.fromThisColumnToNew`)}`}
-      </SubTitleWrapper>
-      <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
-      <Box>
+      <PositionWrapper>
+        <HeadFont>{T.translate(`${PREFIX}.extractPosition`)}</HeadFont>
+        <SubTitleWrapper>
+          {`${T.translate(`${PREFIX}.extractCharacter`)} ${textSelectionRange.start}-${
+            textSelectionRange.end
+          } ${T.translate(`${PREFIX}.fromThisColumnToNew`)}`}
+        </SubTitleWrapper>
+        <NewColumnInput column={column} setColumnName={setColumnName} isError={isError} />
         <ApplyButtonWidget
           onClick={applyMaskTransformation}
           variant="contained"
@@ -106,7 +110,7 @@ export default function GridTextCell({
         >
           {T.translate(`${PREFIX}.exitMaskMode`)}
         </ExitModeButton>
-      </Box>
+      </PositionWrapper>
     </Popover>
   );
 }

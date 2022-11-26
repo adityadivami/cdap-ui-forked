@@ -89,7 +89,10 @@ export default function GridTextCell({
           className={maskSelection ? `${classes.root} ${classes.highlightedColumn}` : classes.root}
           variant="outlined"
         >
-          <Typography className={classes.cell} data-testid={`grid-text-cell-${cellValue}`}>
+          <Typography
+            className={maskSelection ? classes.highlightCell : classes.cell}
+            data-testid={`grid-text-cell-${cellValue}`}
+          >
             {cellValue}
           </Typography>
         </Card>
@@ -100,12 +103,9 @@ export default function GridTextCell({
           anchorEl={anchorEl}
           handleClose={handleClose}
           setAnchorEl={setAnchorEl}
-          setTextSelectionRange={setTextSelectionRange}
           textSelectionRange={textSelectionRange}
           columnSelected={columnSelected}
           applyTransformation={applyTransformation}
-          cancelTransformation={cancelTransformation}
-          optionSelected={optionSelected}
           headers={headers}
         />
       )}

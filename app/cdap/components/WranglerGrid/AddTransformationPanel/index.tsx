@@ -91,7 +91,10 @@ export default function({
   };
 
   const closeSelectColumnsPopup = () => {
-    if (transformationName === 'mask-data-custom-selection') {
+    if (
+      transformationName === 'mask-data-custom-selection' ||
+      transformationName === 'extract-using-positions'
+    ) {
       setColumnsPopup(false);
       setDrawerStatus(false);
       onCustomSelection(selectedColumns[0].label);

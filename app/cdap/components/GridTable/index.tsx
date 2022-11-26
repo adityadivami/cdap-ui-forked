@@ -387,6 +387,7 @@ export default function GridTable() {
                             });
                             setMaskSelection(false);
                           }}
+                          headers={headersNamesList.map(({ label }) => label)}
                         />
                       );
                     })}

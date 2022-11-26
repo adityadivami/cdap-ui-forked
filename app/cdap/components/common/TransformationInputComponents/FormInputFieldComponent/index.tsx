@@ -42,10 +42,7 @@ export default function({ formInputValue, inputProps }: IFormInputFieldComponent
     <FormControlLabelComponent
       value={formInputValue}
       control={
-        <InputComponent
-          data-testid={`form-input-${inputProps.inputProps['data-testid']}`}
-          {...inputProps}
-        />
+        <InputComponent data-testid={`form-input-${inputProps['data-testid']}`} {...inputProps} />
       }
       label={''}
     />

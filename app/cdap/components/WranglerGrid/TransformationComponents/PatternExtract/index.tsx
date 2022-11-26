@@ -16,7 +16,7 @@
 
 import { FormControl, FormGroup, MenuItem } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
-import { USING_PATTERN_OPTIONS } from './options';
+import { USING_PATTERN_OPTIONS } from 'components/WranglerGrid/TransformationComponents/PatternExtract/options';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import SelectInputComponent from 'components/common/TransformationInputComponents/SelectInputComponent';
 import LabelComponent from 'components/common/TransformationInputComponents/LabelInputComponent';
@@ -94,7 +94,12 @@ export default function({ setTransformationComponentsValue, transformationCompon
               value: nDigit,
               onChange: (e) => setNDigit(e.target.value),
               color: 'primary',
-              placeholder: 'E.g. 3',
+              placeholder: `${T.translate(
+                'features.WranglerNewUI.GridPage.transformationUI.extract.examplePatternPlaceholder'
+              )}`,
+              inputProps: {
+                'data-testid': 'custom-pattern-regex',
+              },
             }}
             label={`${T.translate(
               'features.WranglerNewUI.GridPage.transformationUI.extract.digits'

@@ -3545,14 +3545,18 @@ features:
             usZipCode: U.S. zip codes
             custom: Custom
           extractUsingPosition:
-            apply: Apply
-            fromThisColumnToNew: from this column to a new column
+            applyMask: Apply
             extractPosition: Extract using postion
             extractCharacter: Extract characters
-            exitMode: Exit 'Extract' mode
+            exitMaskMode: Exit 'Extract' mode
+            fromThisColumnToNew: from this column to a new column
+          startPlaceholder: E.g. <
+          endPlaceholder: E.g. >
+          customRegexPlaceholder: E.g. [^(]+(([0-9]{4})).* 
           selectDelimiter: Please select a delimiter
           selectPattern: Select a pattern to extract from the column
           writeYourRegex: Write your own Regex
+          examplePatternPlaceholder: E.g. 3
     HomePage:
       labels:
         common:

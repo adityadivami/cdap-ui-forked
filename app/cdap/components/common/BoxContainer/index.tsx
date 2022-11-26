@@ -67,6 +67,10 @@ export const AddTransformationBodyWrapper = styled(Box)`
   overflow-y: auto;
 `;
 
+export const LabelWrapper = styled(Box)`
+  margin: 10px 0;
+`;
+
 export const NewColumnWrapper = styled(Box)`
   width: 100%;
   display: flex;
