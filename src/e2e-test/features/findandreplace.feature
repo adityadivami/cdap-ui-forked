@@ -15,10 +15,10 @@
 #
 
 @Integration_Tests
-Feature: TransformationParsing
+Feature: Find and Replace
 
-  @TransformationParsing
-  Scenario: Go through the Transformation Parsing functionality
+  @FindAndReplace
+  Scenario: Go through the find and replace functionality
     Given Navigate to Home Page of Wrangle
     Then Click on the Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
