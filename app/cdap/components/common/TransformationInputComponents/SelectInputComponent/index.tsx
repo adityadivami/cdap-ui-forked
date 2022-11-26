@@ -47,7 +47,7 @@ const SelectFormControlWrapper = styled(FormControl)`
   border: 1px solid #dadce0;
   height: 40px;
   padding: 5px 15px;
-  fontsize: 14px;
+  font-size: 14px;
   background: #ffffff;
   border-radius: 4px;
 `;

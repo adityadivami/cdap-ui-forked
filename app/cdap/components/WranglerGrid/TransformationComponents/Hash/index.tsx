@@ -42,10 +42,6 @@ const CustomizedLabel = styled(NormalFont)`
   margin-bottom: 10px;
 `;
 
-const CustomizedCheckbox = styled(InputCheckbox)`
-  margin-left: 12px;
-`;
-
 export default function({ setTransformationComponentsValue, functionName }: IParseCSVProps) {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>(
     HASH_ALGORITHM_OPTIONS[0].value
@@ -84,7 +80,7 @@ export default function({ setTransformationComponentsValue, functionName }: IPar
         checkboxLabel={T.translate(`${PREFIX}.encode`).toString()}
         transformation={functionName}
       />
-      <CustomizedCheckbox
+      <InputCheckbox
         label={T.translate(`${PREFIX}.encode`).toString()}
         value={encode}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEncode(e.target.checked)}
