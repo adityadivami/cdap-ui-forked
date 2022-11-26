@@ -20,6 +20,7 @@ import T from 'i18n-react';
 import styled from 'styled-components';
 import { HeadFont, NormalFont } from 'components/common/TypographyText';
 import DataPrepStore from 'components/DataPrep/store';
+import { blue } from '@material-ui/core/colors';
 
 const MaskWrapper = styled(Box)`
     display: block;
@@ -27,12 +28,18 @@ const MaskWrapper = styled(Box)`
 `
 
 const ApplyButtonWidget = styled(Button)`
-
+    background: ${blue[500]};
+    color: #FFFFFF;
+    margin-right: 10px;
 `;
 
 const ExitModeButton = styled(Button)`
-
+    font-weight: 700;
 `;
+
+const SubTitleWrapper = styled(Box)`
+    margin: 10px 0;
+`
 
 const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.mask';
 
@@ -87,7 +94,10 @@ export default function GridTextCell({
         >
             <MaskWrapper>
                 <HeadFont>{T.translate(`${PREFIX}.maskHead`)}</HeadFont>
-                <NormalFont>{T.translate(`${PREFIX}.maskAcrossRow`)}</NormalFont>
+                <SubTitleWrapper>
+                    <NormalFont>{T.translate(`${PREFIX}.maskAcrossRow`)}</NormalFont>
+                </SubTitleWrapper>
+                
                 <ApplyButtonWidget
                     onClick={applyMaskTransformation}
                     variant="contained"
