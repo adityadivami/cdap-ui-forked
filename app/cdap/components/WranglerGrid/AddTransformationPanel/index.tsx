@@ -39,10 +39,20 @@ import { IStatistics } from 'components/GridTable/types';
 import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/DrawerHeader';
 import { StyledDrawer, DrawerContainerBox } from 'components/WranglerGrid/SelectColumnPanel';
 import AddTransformationDrawerHeader from 'components/WranglerGrid/AddTransformationPanel/DrawerHeader';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 
 const CountWidgetWrapper = styled(Box)`
   padding: 10px 0;
 `;
+
+const transformationComponentDefaultValues = {
+  radioOption: '',
+  customInput: '',
+  startValue: '',
+  endValue: '',
+  nDigit: '',
+  extractOptionSelected: '',
+};
 
 interface IAddTransformationProps {
   transformationDataType: string[];
@@ -69,6 +79,9 @@ export default function({
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
+  const [transformationComponentValues, setTransformationComponentsValue] = useState<
+    ITransformationComponentValues
+  >(transformationComponentDefaultValues);
 
   const closeClickHandler = () => {
     onCancel();
@@ -97,7 +110,11 @@ export default function({
   };
 
   const handleApply = () => {
-    const directive: string = getDirective(transformationName, selectedColumns[0].label);
+    const directive: string = getDirective(
+      transformationName,
+      selectedColumns[0].label,
+      transformationComponentValues
+    );
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
