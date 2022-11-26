@@ -53,7 +53,7 @@ export const MenuComponent = styled(Menu)`
   & .MuiPaper-root {
     box-shadow: 3px 4px 15px rgba(68, 132, 245, 0.15);
   }
-  & .MuiPopover-paper{
+  & .MuiPopover-paper {
     max-width: 100% !important;
   }
 `;
@@ -89,7 +89,7 @@ export const NestedMenuComponent = styled(Menu)`
   & .MuiPaper-root {
     box-shadow: 3px 4px 15px rgba(68, 132, 245, 0.15);
   }
-  & .MuiPopover-paper{
+  & .MuiPopover-paper {
     max-width: 100% !important;
   }
 `;

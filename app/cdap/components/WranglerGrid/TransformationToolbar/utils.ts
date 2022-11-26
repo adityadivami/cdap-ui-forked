@@ -13,7 +13,7 @@ import ReplayIcon from '@material-ui/icons/Replay';
 import { TOOLBAR_ICONS_LABEL_PREFIX } from 'components/WranglerGrid/TransformationToolbar/constants';
 import T from 'i18n-react';
 import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
-import {SECURITY_OPTIONS} from 'components/WranglerGrid/NestedMenu/menuOptions/securityOptions.ts';
+import { SECURITY_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/securityOptions.ts';
 
 export const nestedMenuOptions: IMenuItem[] = [
   {

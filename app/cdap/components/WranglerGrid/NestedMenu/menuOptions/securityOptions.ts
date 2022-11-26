@@ -25,30 +25,22 @@ export const SECURITY_OPTIONS = [
     options: [
       {
         value: 'mask-data-last-4-digit',
-        label: T.translate(
-          `${PREFIX}.last4`
-        ).toString(),
+        label: T.translate(`${PREFIX}.last4`).toString(),
         supportedDataType: ['string'],
       },
       {
         value: 'mask-data-last-2-digit',
-        label: T.translate(
-          `${PREFIX}.last2`
-        ).toString(),
+        label: T.translate(`${PREFIX}.last2`).toString(),
         supportedDataType: ['string'],
       },
       {
         value: 'mask-data-custom-selection',
-        label: T.translate(
-          `${PREFIX}.customSelection`
-        ).toString(),
+        label: T.translate(`${PREFIX}.customSelection`).toString(),
         supportedDataType: ['string'],
       },
       {
         value: 'mask-data-shuffle',
-        label: T.translate(
-          `${PREFIX}.shuffle`
-        ).toString(),
+        label: T.translate(`${PREFIX}.shuffle`).toString(),
         supportedDataType: ['string'],
       },
     ],

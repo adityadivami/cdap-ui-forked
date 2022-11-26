@@ -29,7 +29,6 @@ export default function GridTextCell({
   cancelTransformation,
   optionSelected,
 }: IGridTextCellProps) {
-
   const classes = useGridTextCellStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [textSelectionRange, setTextSelectionRange] = useState({
@@ -88,7 +87,10 @@ export default function GridTextCell({
           className={maskSelection ? `${classes.root} ${classes.highlightedColumn}` : classes.root}
           variant="outlined"
         >
-          <Typography className={maskSelection ? classes.highlightCell: classes.cell} data-testid={`grid-text-cell-${cellValue}`}>
+          <Typography
+            className={maskSelection ? classes.highlightCell : classes.cell}
+            data-testid={`grid-text-cell-${cellValue}`}
+          >
             {cellValue}
           </Typography>
         </Card>

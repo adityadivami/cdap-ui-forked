@@ -25,7 +25,7 @@ export const getDirective = (functionName: string, selectedColumnName: string) =
     return maskLast2Digits(selectedColumnName);
   } else if (functionName === 'mask-data-shuffle') {
     return maskByShuffling(selectedColumnName);
-  }  else {
+  } else {
     return null;
   }
 };

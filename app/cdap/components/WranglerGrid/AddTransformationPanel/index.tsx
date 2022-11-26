@@ -52,7 +52,7 @@ interface IAddTransformationProps {
   onCancel: () => void;
   applyTransformation: (directive: string) => void;
   transformationLink: string;
-  onCustomSelection?: (column: string)=> void;
+  onCustomSelection?: (column: string) => void;
 }
 
 export default function({
@@ -63,7 +63,7 @@ export default function({
   onCancel,
   applyTransformation,
   transformationLink,
-  onCustomSelection
+  onCustomSelection,
 }: IAddTransformationProps) {
   const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
   const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
@@ -76,11 +76,11 @@ export default function({
   };
 
   const closeSelectColumnsPopup = () => {
-    if(transformationName === 'mask-data-custom-selection'){
+    if (transformationName === 'mask-data-custom-selection') {
       setColumnsPopup(false);
       setDrawerStatus(false);
-      onCustomSelection(selectedColumns[0].label)
-    }else{
+      onCustomSelection(selectedColumns[0].label);
+    } else {
       setColumnsPopup(false);
       setDrawerStatus(true);
     }

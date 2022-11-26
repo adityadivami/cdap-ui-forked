@@ -14,11 +14,22 @@
  * the License.
  */
 
-import FilterComponent from 'components/WranglerGrid/TransformationComponents/Filter';
+import { IStatistics } from 'components/GridTable/types';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
-export const TRANSFORMATION_COMPONENTS = [
-  {
-    type: 'filter',
-    component: FilterComponent,
-  },
-];
+export interface ITransformationComponentValues {
+  customInput: string;
+  ignoreCase: boolean;
+  filterOptionSelected: string;
+  filterOptionValue: string;
+  filterRadioOption: string;
+}
+
+export interface IAddTransformationProps {
+  transformationDataType: string[];
+  transformationName: string;
+  columnsList: IHeaderNamesList[];
+  missingItemsList: IStatistics;
+  onCancel: () => void;
+  applyTransformation: (directive: string) => void;
+}

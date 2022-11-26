@@ -372,9 +372,7 @@ export default function GridTable() {
                         <GridTextCell
                           cellValue={eachRow[eachKey.name] || '--'}
                           key={`${eachKey.name}-${eachIndex}`}
-                          maskSelection={
-                            eachKey.name === columnSelected ? maskSelection : false
-                          }
+                          maskSelection={eachKey.name === columnSelected ? maskSelection : false}
                           rowNumber={rowIndex}
                           columnSelected={columnSelected}
                           optionSelected={addTransformationFunction.option}
@@ -385,7 +383,7 @@ export default function GridTable() {
                             setColumnSelected('');
                             setAddTransformationFunction({
                               option: '',
-                              supportedDataType: []
+                              supportedDataType: [],
                             });
                             setMaskSelection(false);
                           }}
@@ -413,11 +411,11 @@ export default function GridTable() {
           applyTransformation={(directive: string) => {
             addDirectives(directive);
           }}
-          onCustomSelection={(column)=>{
-            setMaskSelection(true)
-            setColumnSelected(column)
+          onCustomSelection={(column) => {
+            setMaskSelection(true);
+            setColumnSelected(column);
           }}
-          transformationLink= ''
+          transformationLink=""
         />
       )}
       {snackbarIsOpen && (
