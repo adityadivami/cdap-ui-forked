@@ -13,14 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import T from 'i18n-react';
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.other';
-
-export const OTHER_OPTIONS = [
+export const SECURITY_OPTIONS = [
   {
-    value: 'send-to-error',
-    label: T.translate(`${PREFIX}.sendToError`),
-    supportedDataType: ['all'],
+    value: 'hash',
+    label: T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.security.hash'
+    ).toString(),
+    supportedDataType: ['string'],
   },
 ];

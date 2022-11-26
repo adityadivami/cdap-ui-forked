@@ -3486,8 +3486,8 @@ features:
               bytes: bytes
             menu:
               changeDatatype: Change data type
-            other:
-              sendToError: Send to error
+            security:
+              hash: Hash
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step
@@ -3512,13 +3512,9 @@ features:
           nameNewColumn:  Name new column 
           columnExist: This column name already exist
           destinationColumn: Destination Column
-        findAndReplace: 
-          exactMatch: Exact Match
-          find: Find
-          ignoreCase: Ignore case
-          newValue: New value
-          oldValue: Old Value
-          replaceWith: Replace with
+        hash: 
+          selectHashAlgorithm: Select hash algorithm
+          encode: Encode
     HomePage:
       labels:
         common:

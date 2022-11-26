@@ -15,11 +15,13 @@
  */
 
 import { hashAlgorithmOptions } from '../options';
-import { FormGroup, MenuItem } from '@material-ui/core';
+import { Box, FormGroup, MenuItem } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
-import { SELECT_HASH_ALGO, ENCODE } from '../constants';
 import SelectOptionComponent from './SelectComponent';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
+import T from 'i18n-react';
+
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.hash';
 
 export default function({ setDirectiveComponentsValue, directiveComponentValues }) {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState(hashAlgorithmOptions[0]);
@@ -39,7 +41,8 @@ export default function({ setDirectiveComponentsValue, directiveComponentValues 
 
   return (
     <FormGroup>
-      <div>{SELECT_HASH_ALGO}</div>
+      <Box>{T.translate(`${PREFIX}.selectHashAlgorithm`)}</Box>
+
       <SelectOptionComponent
         formInputValue={selectedAlgorithm}
         inputProps={{
@@ -53,7 +56,11 @@ export default function({ setDirectiveComponentsValue, directiveComponentValues 
           <MenuItem value={algo}>{algo}</MenuItem>
         ))}
       </SelectOptionComponent>
-      <InputCheckbox label={ENCODE} value={encode} onChange={(e) => setEncode(e.target.checked)} />
+      <InputCheckbox
+        label={T.translate(`${PREFIX}.selectHashAlgorithm`) as string}
+        value={encode}
+        onChange={(e) => setEncode(e.target.checked)}
+      />
     </FormGroup>
   );
 }

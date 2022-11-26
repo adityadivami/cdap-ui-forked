@@ -14,11 +14,11 @@
  * the License.
  */
 
-import SendToError from 'components/WranglerGrid/TransformationComponents/SendToError';
+import Hash from 'components/WranglerGrid/TransformationComponents/Hash/';
 
 export const TRANSFORMATION_COMPONENTS = [
   {
-    type: 'send-to-error',
-    component: SendToError,
+    type: 'hash',
+    component: Hash,
   },
 ];
