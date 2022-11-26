@@ -14,9 +14,10 @@
  * the License.
  */
 
-import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
-import T from 'i18n-react';
 import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
+import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import { FORMAT_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/formatOptions';
+import T from 'i18n-react';
 
 export const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels';
 
@@ -26,5 +27,11 @@ export const MENU_OPTIONS: IMenuItem[] = [
     label: T.translate(`${PREFIX}.menu.changeDatatype`).toString(),
     options: DATATYPE_OPTIONS,
     supportedDataType: ['all'],
+  },
+  {
+    value: 'text',
+    label: `${T.translate('features.DataPrep.Directives.Format.title').toString()}`,
+    options: FORMAT_OPTIONS,
+    supportedDataType: ['string'],
   },
 ];

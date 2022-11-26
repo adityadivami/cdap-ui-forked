@@ -14,12 +14,10 @@
  * the License.
  */
 
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
+import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
-import {
-  ITransformationComponentValues,
-  IMenuOption,
-} from 'components/WranglerGrid/AddTransformationPanel/types';
-import { PARSE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/parseOptions';
+import { FORMAT_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/formatOptions';
 
 export const getDirective = (
   functionName: string,
@@ -28,13 +26,11 @@ export const getDirective = (
 ) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
-  } else if (PARSE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-    const option: IMenuOption = PARSE_OPTIONS.find(
+  } else if (FORMAT_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
+    const option: IMenuItem = FORMAT_OPTIONS.find(
       (eachOption) => eachOption.value === functionName
     );
-    if (option) {
-      return option.directive(selectedColumnName, transformationComponentValues);
-    }
+    return option.directive(selectedColumnName, transformationComponentValues);
   } else {
     return null;
   }
