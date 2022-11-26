@@ -19,7 +19,7 @@ Feature: TransformationParsing
 
   @TransformationParsing
   Scenario: Go through the Transformation Parsing functionality
-    Given Navigate to Home Page
+    Given Navigate to Home Page of Wrangle
     Then Click on the Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
     Then Click on the Structure icon

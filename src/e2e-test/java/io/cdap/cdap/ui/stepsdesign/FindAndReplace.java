@@ -29,7 +29,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 public class FindAndReplace {
-    @Given("Navigate to Home Page")
+    @Given("Navigate to Home Page of Wrangle")
     public void navigateToTheHomePage() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
@@ -137,14 +137,14 @@ public class FindAndReplace {
     @Then("Click on the Find field and enter text")
     public void clickOnTheFieldAndEnterText() {
         try {
+            JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
             WaitHelper.waitForPageToLoad();
-            WebElement element = Helper.locateElementByTestId("old-value-input-form");
-            Assert.assertTrue(ElementHelper.isElementDisplayed(element));
+            WebElement old = SeleniumDriver.getDriver().findElement(By.xpath
+                    ("//div[@data-testid='old-value-input-form']/input[@placeholder='Old Value']"));
             JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", element);
-            element.sendKeys("Lias");
-            String text = element.getText();
-            System.out.println(text);
+            executor.executeScript("arguments[0].click();", old);
+            old.sendKeys("NCMD");
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -173,14 +173,15 @@ public class FindAndReplace {
     @Then("Click on the Replace field and enter text")
     public void clickOnTheReplaceFieldAndEnterText() {
         try {
+            JavascriptExecutor js = (JavascriptExecutor) SeleniumDriver.getDriver();
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
             WaitHelper.waitForPageToLoad();
-            WebElement element = Helper.locateElementByTestId("new-value-input-form");
-            Assert.assertTrue(ElementHelper.isElementDisplayed(element));
+            WebElement replace = SeleniumDriver.getDriver().findElement(By.xpath
+                    ("//div[@data-testid='new-value-input-form']/input[@placeholder='New value']"));
+            Assert.assertTrue(ElementHelper.isElementDisplayed(replace));
             JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", element);
-            element.sendKeys("Dhanu");
-            String text = element.getText();
-            System.out.println(text);
+            executor.executeScript("arguments[0].click();", replace);
+            replace.sendKeys("Dhanu");
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -190,7 +191,10 @@ public class FindAndReplace {
     public void clickOnTheApplyButton() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
+//            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
+            WebElement element = Helper.locateElementByTestId("apply-step-button");
+            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", element);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
