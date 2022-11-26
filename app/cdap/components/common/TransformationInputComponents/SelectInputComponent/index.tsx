@@ -32,9 +32,9 @@ interface ISelectColumnProps {
   optionSelected: string;
   setOptionSelected: React.Dispatch<React.SetStateAction<string>>;
   options: ISelectOptions[];
-  customInput: string;
-  setCustomInput: React.Dispatch<React.SetStateAction<string>>;
-  customInputPlaceHolder: string;
+  customInput?: string;
+  setCustomInput?: React.Dispatch<React.SetStateAction<string>>;
+  customInputPlaceHolder?: string;
   checkboxValue: boolean;
   setCheckboxValue: React.Dispatch<React.SetStateAction<boolean>>;
   checkboxLabel: string;

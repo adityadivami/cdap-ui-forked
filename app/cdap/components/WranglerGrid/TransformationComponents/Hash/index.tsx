@@ -14,52 +14,83 @@
  * the License.
  */
 
-import { hashAlgorithmOptions } from '../options';
-import { Box, FormGroup, MenuItem } from '@material-ui/core';
-import React, { useState, useEffect } from 'react';
-import SelectOptionComponent from './SelectComponent';
-import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
+import { Box, FormGroup } from '@material-ui/core';
+import SelectInputComponent from 'components/common/TransformationInputComponents/SelectInputComponent';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
+import { HASH_ALGORITHM_OPTIONS } from 'components/WranglerGrid/TransformationComponents/Hash/options';
+import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
+import styled from 'styled-components';
+import { NormalFont } from 'components/common/TypographyText';
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.hash';
+const PREFIX = `features.WranglerNewUI.GridPage.transformationUI.hash`;
 
-export default function({ setDirectiveComponentsValue, directiveComponentValues }) {
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState(hashAlgorithmOptions[0]);
-  const [encode, setEncode] = useState(false);
+interface IParseCSVProps {
+  directiveComponentValues: ITransformationComponentValues;
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  functionName: string;
+}
+
+const CustomizedLabel = styled(NormalFont)`
+  font-style: normal;
+  margin-top: 10px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  margin-bottom: 10px;
+`;
+
+const CustomizedCheckbox = styled(InputCheckbox)`
+  margin-left: 12px;
+`;
+
+export default function({ setTransformationComponentsValue, functionName }: IParseCSVProps) {
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>(
+    HASH_ALGORITHM_OPTIONS[0].value
+  );
+  const [encode, setEncode] = useState<boolean>(false);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, hashValue: selectedAlgorithm });
+    setTransformationComponentsValue((prevState) => ({
+      ...prevState,
+      hashValue: selectedAlgorithm,
+    }));
   }, []);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, hashValue: selectedAlgorithm });
+    setTransformationComponentsValue((prevState) => ({
+      ...prevState,
+      hashValue: selectedAlgorithm,
+    }));
   }, [selectedAlgorithm]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, encode });
+    setTransformationComponentsValue((prevState) => ({ ...prevState, encode }));
   }, [encode]);
 
   return (
     <FormGroup>
-      <Box>{T.translate(`${PREFIX}.selectHashAlgorithm`)}</Box>
-
-      <SelectOptionComponent
-        formInputValue={selectedAlgorithm}
-        inputProps={{
-          value: selectedAlgorithm,
-          onChange: (e) => setSelectedAlgorithm(e.target.value),
-          color: 'primary',
-          placeholder: '',
-        }}
-      >
-        {hashAlgorithmOptions.map((algo) => (
-          <MenuItem value={algo}>{algo}</MenuItem>
-        ))}
-      </SelectOptionComponent>
-      <InputCheckbox
-        label={T.translate(`${PREFIX}.selectHashAlgorithm`) as string}
+      <Box>
+        <CustomizedLabel>{T.translate(`${PREFIX}.selectHashAlgorithm`)}</CustomizedLabel>
+      </Box>
+      <SelectInputComponent
+        optionSelected={selectedAlgorithm}
+        setOptionSelected={setSelectedAlgorithm}
+        options={HASH_ALGORITHM_OPTIONS}
+        checkboxValue={encode}
+        setCheckboxValue={setEncode}
+        checkboxLabel={T.translate(`${PREFIX}.encode`).toString()}
+        transformation={functionName}
+      />
+      <CustomizedCheckbox
+        label={T.translate(`${PREFIX}.encode`).toString()}
         value={encode}
-        onChange={(e) => setEncode(e.target.checked)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEncode(e.target.checked)}
+        inputProps={{
+          'data-testid': `hash-encode-checkbox`,
+        }}
       />
     </FormGroup>
   );
