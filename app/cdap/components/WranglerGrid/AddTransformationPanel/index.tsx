@@ -119,7 +119,7 @@ export default function({
 
   return (
     <Fragment>
-      <StyledDrawer data-testid="add-transformation-drawer" anchor="right" open={drawerStatus}>
+      <StyledDrawer data-testid="add-transformation-panel" anchor="right" open={drawerStatus}>
         <DrawerContainerBox role="presentation" data-testid="add-transformation-drawer">
           <AddTransformationDrawerHeader closeClickHandler={closeClickHandler} />
           <AddTransformationWrapper>
