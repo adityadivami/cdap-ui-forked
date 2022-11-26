@@ -45,6 +45,6 @@ export const FRAGMENT_OPTIONS = [
         supportedDataType: ['all'],
       },
     ],
-    supportedDataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
+    supportedDataType: ['all'],
   },
 ];
