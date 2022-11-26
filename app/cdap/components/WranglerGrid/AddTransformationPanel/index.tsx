@@ -40,6 +40,8 @@ import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/
 import { StyledDrawer, DrawerContainerBox } from 'components/WranglerGrid/SelectColumnPanel';
 import AddTransformationDrawerHeader from 'components/WranglerGrid/AddTransformationPanel/DrawerHeader';
 import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
+import { TRANSFORMATION_COMPONENTS } from 'components/WranglerGrid/TransformationComponents/constants';
+import TransformationContent from 'components/WranglerGrid/TransformationComponents';
 
 const CountWidgetWrapper = styled(Box)`
   padding: 10px 0;
@@ -127,6 +129,10 @@ export default function({
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
+  const isComponentAvailable = TRANSFORMATION_COMPONENTS.some(
+    (item) => item.type === transformationName
+  );
+
   return (
     <Fragment>
       <StyledDrawer data-testid="add-transformation-drawer" anchor="right" open={drawerStatus}>
@@ -147,6 +153,19 @@ export default function({
                 selectedColumns={selectedColumns}
                 transformationName={transformationName}
               />
+              {isComponentAvailable && (
+                <TransformationContent
+                  setTransformationComponentsValue={setTransformationComponentsValue}
+                  transformationComponent={TRANSFORMATION_COMPONENTS}
+                  transformationComponentValues={transformationComponentValues}
+                  transformationName={transformationName}
+                  transformationDataType={transformationDataType}
+                  columnsList={columnsList}
+                  missingItemsList={missingItemsList}
+                  onCancel={onCancel}
+                  applyTransformation={applyTransformation}
+                />
+              )}
             </AddTransformationBodyWrapper>
             <AddTransformationButton
               disabled={selectedColumns?.length ? false : true}

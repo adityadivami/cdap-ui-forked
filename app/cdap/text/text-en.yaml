@@ -3492,6 +3492,11 @@ features:
               explode: Explode
             menu:
               changeDatatype: Change data type
+            fragment:
+              extract: Extract
+              usingPatterns: Using Patterns
+              usingDelimiters: Using Delimiters
+              usingPositions: Using Positions
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step
