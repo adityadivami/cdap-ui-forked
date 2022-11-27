@@ -16,6 +16,7 @@
 
 package io.cdap.cdap.ui.stepsdesign;
 
+import com.google.cloud.FieldSelector;
 import io.cdap.cdap.ui.utils.Constants;
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
@@ -26,6 +27,7 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 public class MaskData {
@@ -39,7 +41,7 @@ public class MaskData {
     public void clickOnTheDataExplorationCard() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-0"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-1"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         } catch (Exception e) {
@@ -108,7 +110,7 @@ public class MaskData {
         }
     }
 
-    @Then("Click on the Show two four characters only")
+    @Then("Click on the Show two characters only")
     public void clickOnTheShowLastTwoCharactersOnly() {
         try {
             WaitHelper.waitForPageToLoad();
@@ -122,19 +124,19 @@ public class MaskData {
         }
     }
 
-//    @Then("Click on the Custom selection")
-//    public void clickOnTheCustomSelection() {
-//        try {
-//            WaitHelper.waitForPageToLoad();
-//            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("menu-item-mask-data-custom-selection"));
-//            WebElement ele = SeleniumDriver.getDriver()
-//                    .findElement(By.xpath("//*[@data-testid='menu-item-mask-data-custom-selection']"));
-//            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-//            executor.executeScript("arguments[0].click();", ele);
-//        } catch (Exception e) {
-//            System.err.println("error:" + e);
-//        }
-//    }
+    @Then("Click on the Custom selection")
+    public void clickOnTheCustomSelection() {
+        try {
+            WaitHelper.waitForPageToLoad();
+            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("menu-item-mask-data-custom-selection"));
+            WebElement ele = SeleniumDriver.getDriver()
+                    .findElement(By.xpath("//*[@data-testid='menu-item-mask-data-custom-selection']"));
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
 
     @Then("Click on the By Shuffling")
     public void clickOnTheByShuffling() {
@@ -171,11 +173,11 @@ public class MaskData {
         }
     }
 
-    @Then("Click on the radio button of any column")
-    public void clickOnTheRadioButtonOfAnyColumn() {
+    @Then("Click on the radio button of any column with {string}")
+    public void clickOnTheRadioButtonOfAnyColumn(String Id) {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("radio-input-2"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("radio-input-" + Id));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -204,5 +206,16 @@ public class MaskData {
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
+    }
+    @Then("Click on the Apply mask button")
+    public void clickOnApplyMask() {
+        WebElement ele = Helper.locateElementByTestId("");
+        ele.sendKeys(Keys.CONTROL);
+        ele.sendKeys("A");
+        Assert.assertTrue(ElementHelper.isElementDisplayed
+                (Helper.locateElementByTestId("mask-selection-parent")));
+        WebElement element = Helper.locateElementByTestId("apply-mask-button");
+        JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+        executor.executeScript("arguments[0].click();", element);
     }
 }
