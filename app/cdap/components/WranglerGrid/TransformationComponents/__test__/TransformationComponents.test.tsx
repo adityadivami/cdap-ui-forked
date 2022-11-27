@@ -26,13 +26,14 @@ describe('Test TransformationComponents', () => {
         setTransformationComponentsValue={jest.fn()}
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{
-          customInput: '',
-          ignoreCase: false,
-          filterOptionSelected: '',
-          filterOptionValue: '',
-          filterRadioOption: '',
+          radioOption: 'string',
+          customInput: 'string',
+          startValue: 'string',
+          endValue: 'string',
+          nDigit: 'string',
+          extractOptionSelected: 'string'
         }}
-        transformationName={'send-to-error'}
+        transformationName={'extract-using-delimiters'}
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}

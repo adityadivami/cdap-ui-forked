@@ -16,11 +16,13 @@
 
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
 import { USING_PATTERN_OPTIONS } from 'components/WranglerGrid/TransformationComponents/PatternExtract/options';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 
 export const getDirective = (
   functionName: string,
   selectedColumnName: string,
-  transformationComponentValues
+  transformationComponentValues: ITransformationComponentValues
 ) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
@@ -45,5 +47,56 @@ export const getDirective = (
     }
   } else {
     return null;
+  }
+};
+
+export const applyButtonEnabled = (
+  functionName: string,
+  transformationComponentValues: ITransformationComponentValues,
+  selectedColumns: IHeaderNamesList[]
+) => {
+  if (functionName === 'extract-using-delimiters') {
+    if (
+      transformationComponentValues.radioOption !== 'customDelimiter' &&
+      transformationComponentValues.radioOption == ''
+    ) {
+      return true;
+    } else if (
+      transformationComponentValues.radioOption === 'customDelimiter' &&
+      transformationComponentValues.customInput === ''
+    ) {
+      return true;
+    } else if (selectedColumns.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if(functionName === 'extract-using-patterns'){
+    if (transformationComponentValues.extractOptionSelected == '') {
+      return true;
+    } else if (
+      transformationComponentValues.extractOptionSelected === 'ndigitnumber' &&
+      transformationComponentValues.nDigit === ''
+    ) {
+      return true;
+    }  else if (
+      transformationComponentValues.extractOptionSelected === 'startend' &&
+      (transformationComponentValues.startValue === '' || transformationComponentValues.endValue === '')
+    ) {
+      return true;
+    } else if (
+      transformationComponentValues.extractOptionSelected === 'custom' &&
+      transformationComponentValues.customInput === ''
+    ) {
+      return true;
+    } else if (selectedColumns.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (selectedColumns.length === 0) {
+    return true;
+  } else {
+    return false;
   }
 };

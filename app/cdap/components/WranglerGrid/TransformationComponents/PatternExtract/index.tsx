@@ -62,7 +62,7 @@ export default function({ setTransformationComponentsValue, transformationCompon
 
   return (
     <>
-      <FormGroupWrapper>
+      <FormGroupWrapper data-testid='pattern-extract-wrapper'>
         <LabelComponent
           labelText={`${T.translate(
             'features.WranglerNewUI.GridPage.transformationUI.extract.selectPattern'
