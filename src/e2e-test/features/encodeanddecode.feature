@@ -1,19 +1,29 @@
 @Integration_Tests
-Feature: Find and Replace
+Feature: Encode and Decode functionality
 
-  @FindAndReplace
-Scenario: Go through the find and replace functionality
-Given Navigate to Home Page of Wrangle
-Then Click on the Data Explorations card
-Then Verify if the Transformation Toolbar is displayed on the Grid Page
-Then Click on the Structure icon
-Then Click on the Find and Replace
-Then Verify if the user is on the Add transformation step panel
-Then Click on the Select Column button
-Then Click on the radio button of any column
-Then Click on the Done button
-Then Click on the Find field and enter text
-Then Click on the Replace field and enter text
-Then Click on the Checkbox Ignore Case
-Then Click on the Checkbox Extract Match
-Then Click on the Apply Step button
+@Encode_Decode
+Scenario: Go through the encode functionality
+  Given Navigate to Home Page of Wrangle
+  Then Click on the Data Explorations card
+  Then Verify if the Transformation Toolbar is displayed on the Grid Page
+  Then Click on the Security icon
+  Then Click on the encode
+  Then Click on the encode base64
+  Then Verify if the user is on the Add transformation step panel
+  Then Click on the Select Column button
+  Then Click on the radio button of any column
+  Then Click on the Done button
+  Then Click on the Apply Step button
+
+  Scenario: Go through the encode functionality
+    Given Navigate to Home Page of Wrangle
+    Then Click on the Data Explorations card
+    Then Verify if the Transformation Toolbar is displayed on the Grid Page
+    Then Click on the Security icon
+    Then Click on the Decode
+    Then Click on the decode base64
+    Then Verify if the user is on the Add transformation step panel
+    Then Click on the Select Column button
+    Then Click on the radio button of any column
+    Then Click on the Done button
+    Then Click on the Apply Step button
