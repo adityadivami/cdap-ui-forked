@@ -371,6 +371,7 @@ export default function GridTable() {
                       return (
                         <GridTextCell
                           cellValue={eachRow[eachKey.name] || '--'}
+                          cellIndex={`${rowIndex}${eachIndex}`}
                           key={`${eachKey.name}-${eachIndex}`}
                           maskSelection={eachKey.name === columnSelected ? maskSelection : false}
                           rowNumber={rowIndex}

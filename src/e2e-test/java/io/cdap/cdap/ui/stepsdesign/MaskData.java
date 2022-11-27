@@ -209,13 +209,20 @@ public class MaskData {
     }
     @Then("Click on the Apply mask button")
     public void clickOnApplyMask() {
-        WebElement ele = Helper.locateElementByTestId("");
-        ele.sendKeys(Keys.CONTROL);
-        ele.sendKeys("A");
+        try{
+        WebElement ele =SeleniumDriver.getDriver().findElement
+                (By.xpath("//table//td//p[@data-testid ='grid-text-cell-12']"));
+        JavascriptExecutor exe = (JavascriptExecutor)SeleniumDriver.getDriver();
+        exe.executeScript("arguments[0].setAttribute('style', 'background: blue;');", ele);
+     ele.sendKeys(Keys.CONTROL + "a");
+////        ele.sendKeys("A");
         Assert.assertTrue(ElementHelper.isElementDisplayed
                 (Helper.locateElementByTestId("mask-selection-parent")));
         WebElement element = Helper.locateElementByTestId("apply-mask-button");
         JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
         executor.executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
     }
 }

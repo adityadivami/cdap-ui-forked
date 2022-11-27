@@ -22,6 +22,7 @@ import MaskDataCustomSelection from 'components/WranglerGrid/TransformationCompo
 
 export default function GridTextCell({
   cellValue,
+  cellIndex,
   maskSelection,
   rowNumber,
   columnSelected,
@@ -82,6 +83,7 @@ export default function GridTextCell({
             : classes.tableRowCell
         }
         onMouseUp={mouseUpHandler}
+        data-testid={`grid-cellData-${cellIndex}`}
       >
         <Card
           className={maskSelection ? `${classes.root} ${classes.highlightedColumn}` : classes.root}
@@ -89,7 +91,7 @@ export default function GridTextCell({
         >
           <Typography
             className={maskSelection ? classes.highlightCell : classes.cell}
-            data-testid={`grid-text-cell-${cellValue}`}
+            data-testid={`grid-text-cell-${cellIndex}`}
           >
             {cellValue}
           </Typography>
