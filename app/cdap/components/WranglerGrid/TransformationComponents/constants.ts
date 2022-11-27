@@ -14,7 +14,7 @@
  * the License.
  */
 
-import FindAndReplace from './FindAndReplace';
+import FindAndReplace from 'components/WranglerGrid/TransformationComponents/FindAndReplace';
 
 export const TRANSFORMATION_COMPONENTS = [
   {
