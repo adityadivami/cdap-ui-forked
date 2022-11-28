@@ -27,13 +27,13 @@ import SelectInputComponent from 'components/common/TransformationInputComponent
 const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.defineVariable';
 
 interface IDefineVariableProps {
-  setDirectiveComponentsValue: any;
-  directiveComponentValues: any;
+  setTransformationComponentsValue: any;
+  transformationComponentValues: any;
 }
 
 export default function({
-  setDirectiveComponentsValue,
-  directiveComponentValues,
+  setTransformationComponentsValue,
+  transformationComponentValues,
 }: IDefineVariableProps) {
   const [filterCondition, setFilterCondition] = useState('TEXTEXACTLY');
   const [variableName, setVariableName] = useState('');
@@ -41,34 +41,34 @@ export default function({
   const [customInput, setCustomInput] = useState('');
 
   useEffect(() => {
-    setDirectiveComponentsValue({
-      ...directiveComponentValues,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       filterCondition,
-      selectedColumnForDefineVariable: directiveComponentValues.selectedColumn,
+      selectedColumnForDefineVariable: transformationComponentValues.selectedColumn,
     });
-    setColumnSelected(directiveComponentValues.selectedColumn);
-  }, [directiveComponentValues.selectedColumn]);
+    setColumnSelected(transformationComponentValues.selectedColumn);
+  }, [setTransformationComponentsValue?.selectedColumn]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({
-      ...directiveComponentValues,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       filterCondition,
     });
   }, [filterCondition]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, variableName });
+    setTransformationComponentsValue({ ...transformationComponentValues, variableName });
   }, [variableName]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({
-      ...directiveComponentValues,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       selectedColumnForDefineVariable: columnSelected,
     });
   }, [columnSelected]);
 
   useEffect(() => {
-    setDirectiveComponentsValue({ ...directiveComponentValues, customInput });
+    setTransformationComponentsValue({ ...transformationComponentValues, customInput });
   }, [customInput]);
 
   return (
@@ -124,8 +124,8 @@ export default function({
           />
         </FormControl>
       </FormGroup>
-      {columnSelected && directiveComponentValues.selectedColumn && (
-        <Typography variant="body1">{`Summary: you defined the variable "${variableName}" for the cell in column ${columnSelected} in the row which value starts with fdg in column "${directiveComponentValues.selectedColumn}"`}</Typography>
+      {columnSelected && transformationComponentValues.selectedColumn && (
+        <Typography variant="body1">{`Summary: you defined the variable "${variableName}" for the cell in column ${columnSelected} in the row which value starts with fdg in column "${transformationComponentValues.selectedColumn}"`}</Typography>
       )}
     </div>
   );
