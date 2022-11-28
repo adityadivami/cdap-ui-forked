@@ -1,0 +1,153 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+import {
+  FormControl,
+  FormGroup,
+  Typography,
+  MenuItem,
+} from "@material-ui/core";
+import FormInputFieldComponent from "components/common/TransformationInputComponents/FormInputFieldComponent";
+import React, { useState, useEffect } from "react";
+import T from "i18n-react";
+import { DEFINE_VARIABLE_OPTIONS, FILTER_PLACEHOLDER } from "components/WranglerGrid/TransformationComponents/DefineVariable/options"
+
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.defineVariable'
+
+interface IDefineVariableProps {
+  setDirectiveComponentsValue: any;
+  directiveComponentValues: any;
+}
+
+export default function({
+  setDirectiveComponentsValue,
+  directiveComponentValues,
+}: IDefineVariableProps) {
+  const [filterCondition, setFilterCondition] = useState("TEXTEXACTLY");
+  const [variableName, setVariableName] = useState("");
+  const [columnSelected, setColumnSelected] = useState("");
+  const [customInput, setCustomInput] = useState("");
+
+  useEffect(() => {
+    setDirectiveComponentsValue({
+      ...directiveComponentValues,
+      filterCondition,
+      selectedColumnForDefineVariable: directiveComponentValues.selectedColumn,
+    });
+    setColumnSelected(directiveComponentValues.selectedColumn);
+  }, [directiveComponentValues.selectedColumn]);
+
+  useEffect(() => {
+    setDirectiveComponentsValue({
+      ...directiveComponentValues,
+      filterCondition,
+    });
+  }, [filterCondition]);
+
+  useEffect(() => {
+    setDirectiveComponentsValue({ ...directiveComponentValues, variableName });
+  }, [variableName]);
+
+  useEffect(() => {
+    setDirectiveComponentsValue({
+      ...directiveComponentValues,
+      selectedColumnForDefineVariable: columnSelected,
+    });
+  }, [columnSelected]);
+
+  useEffect(() => {
+    setDirectiveComponentsValue({ ...directiveComponentValues, customInput });
+  }, [customInput]);
+
+  return (
+    <div>
+      <FormGroup>
+        <div>{<Typography>{T.translate(`${PREFIX}.setVariableName`)}</Typography>}</div>
+        <FormInputFieldComponent
+          formInputValue={variableName}
+         
+          inputProps={{
+            type: "text",
+            value: variableName,
+            onChange: (e) => setVariableName(e.target.value),
+            color: "primary",
+            placeholder: "Enter variable name",
+          }}
+        />
+      </FormGroup>
+      <FormGroup>
+        <div><Typography>{T.translate(`${PREFIX}.selectRowWhere`)}</Typography></div>
+        <FormControl>
+          <SelectOptionComponent
+            formInputValue={filterCondition}
+            inputProps={{
+              value: filterCondition,
+              onChange: (e) => setFilterCondition(e.target.value),
+              color: "primary",
+              placeholder: "",
+            }}
+            label=""
+          >
+            {DEFINE_VARIABLE_OPTIONS.map((filter) => (
+              <MenuItem value={filter.value}>{filter.label}</MenuItem>
+            ))}
+          </SelectOptionComponent>
+        </FormControl>
+        <FormInputFieldComponent
+          formInputValue={customInput}
+          inputProps={{
+            type: "text",
+            value: customInput,
+            onChange: (e) => setCustomInput(e.target.value),
+            color: "primary",
+            placeholder: FILTER_PLACEHOLDER[filterCondition],
+          }}
+        />
+      </FormGroup>
+      <FormGroup>
+        <div>
+          <Typography>
+
+          
+          {T.translate(`${PREFIX}.selectColumnSelectedRow`)}
+          </Typography>
+        </div>
+        <FormControl>
+          <SelectOptionComponent
+            formInputValue={columnSelected}
+            inputProps={{
+              value: columnSelected,
+              onChange: (e) => setColumnSelected(e.target.value),
+              color: "primary",
+              placeholder: "",
+            }}
+            label=""
+          >
+            {directiveComponentValues.columnNames.map((column) => (
+              <MenuItem value={column}>{column}</MenuItem>
+            ))}
+          </SelectOptionComponent>
+        </FormControl>
+      </FormGroup>
+      {columnSelected && directiveComponentValues.selectedColumn && (
+        <Typography
+          variant="body1"
+          
+        >{`Summary: you defined the variable "${variableName}" for the cell in column ${columnSelected} in the row which value starts with fdg in column "${directiveComponentValues.selectedColumn}"`}</Typography>
+      )}
+    </div>
+  );
+}

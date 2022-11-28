@@ -14,11 +14,11 @@
  * the License.
  */
 
-import SendToError from 'components/WranglerGrid/TransformationComponents/SendToError';
+import DefineVariable from "components/WranglerGrid/TransformationComponents/DefineVariable/";
 
 export const TRANSFORMATION_COMPONENTS = [
   {
-    type: 'send-to-error',
-    component: SendToError,
+    type: 'define-variable',
+    component: DefineVariable,
   },
 ];
