@@ -22,6 +22,7 @@ import { SubHeadNormalFont, SubHeadBoldFont } from 'components/common/Typography
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import styled from 'styled-components';
 import { blue } from '@material-ui/core/colors';
+import { Link } from '@material-ui/core';
 
 const TransformationNameBox = styled.section`
   padding: 15px 0;
@@ -63,7 +64,13 @@ export default function({ transformationName }: { transformationName: string }) 
         <TransformationNameText component="span" data-testid="selected-function-name">
           {transformationName}
         </TransformationNameText>
-        <InfoIconComponent data-testid="info-link" />
+        <Link
+          href="https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382107767/Increment+variable+directive"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <InfoIconComponent />
+        </Link>
       </TransformationNameTextInfoWrapper>
     </TransformationNameBox>
   );
