@@ -30,6 +30,5 @@ Feature: SetCounter
     Then Click on the Done button
     Then Click on the Select action dropdown
     Then Select value from the dropdown
-    Then Click on the Increment count by field
     Then Click on the Name this counter and enter counter name
     Then Click on the Apply Step button

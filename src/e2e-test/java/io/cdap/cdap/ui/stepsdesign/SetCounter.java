@@ -95,7 +95,7 @@ public class SetCounter {
         try {
             WaitHelper.waitForPageToLoad();
             Assert.assertTrue(ElementHelper.isElementDisplayed(
-                    Helper.locateElementByTestId("add-transformation-drawer")));
+                    Helper.locateElementByTestId("add-transformation-panel")));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -162,27 +162,14 @@ public class SetCounter {
         }
     }
 
-    @Then("Click on the Increment count by field")
-    public void clickOnTheIncrementCountByField() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            WebElement value = SeleniumDriver.getDriver()
-                    .findElement(By.cssSelector("//div[@data-testid='set-counter-input']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", value);
-            value.clear();
-            value.sendKeys("1");
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
+
 
     @Then("Click on the Name this counter and enter counter name")
     public void clickOnTheNameThisCounterAndEnterCounterName() {
         try {
             WaitHelper.waitForPageToLoad();
             WebElement name = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div[@data-testid='set-counter-input-two']"));
+                    .findElement(By.xpath("//input[@placeholder='Enter counter name']"));
             Assert.assertTrue(ElementHelper.isElementDisplayed(name));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", name);
