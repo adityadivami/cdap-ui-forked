@@ -75,8 +75,10 @@ export default function({
   }, [delimiter]);
 
   return (
-    <FormGroupWrapper data-testid='delimiter-extract-parent-wrapper'>
-      <SubHeadBoldFont data-testid='delimiter-sub-head'>{T.translate(`${PREFIX}.selectDelimiter`)}</SubHeadBoldFont>
+    <FormGroupWrapper data-testid="delimiter-extract-parent-wrapper">
+      <SubHeadBoldFont data-testid="delimiter-sub-head">
+        {T.translate(`${PREFIX}.selectDelimiter`)}
+      </SubHeadBoldFont>
       <InputRadioWithCustomInputComponent
         options={DELIMITER_OPTION_EXPLODE}
         radioValue={selectedParseType}
