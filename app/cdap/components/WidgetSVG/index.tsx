@@ -14,19 +14,20 @@
  * the License.
  */
 
-import T from 'i18n-react';
+import { Avatar } from '@material-ui/core';
+import ImageOutlined from '@material-ui/icons/ImageOutlined';
+import { IWidgetSVGProps } from 'components/WidgetSVG/types';
+import React from 'react';
+import styled from 'styled-components';
 
-export const headerData = [
-  {
-    textId: 'serial-no',
-    text: '#',
-  },
-  {
-    textId: 'recipe-steps',
-    text: T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.labels.recipeSteps'),
-  },
-  {
-    textId: '',
-    text: '',
-  },
-];
+const StyledImageOutlined = styled(ImageOutlined)`
+  font-size: 40px;
+`;
+
+export default function({ imageSource, label }: IWidgetSVGProps) {
+  return imageSource ? (
+    <Avatar src={imageSource} variant="square" data-testid={`widget-api-image-${label}`} />
+  ) : (
+    <StyledImageOutlined data-testid={`default-widget-image-${label}`} />
+  );
+}

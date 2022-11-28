@@ -33,7 +33,9 @@ describe('It should test DrawerWidget Component', () => {
         <Switch>
           <Route>
             <DrawerWidget
-              headingText={T.translate('features.WranglerParsingPanelDrawerWidget.labels.parsing')}
+              headingText={T.translate(
+                'features.WranglerNewUI.WranglerParsingPanelDrawerWidget.labels.parsing'
+              )}
               openDrawer={true}
               showDivider={true}
               headerActionTemplate={<RecipeHeaderActionTemplate />}

@@ -37,12 +37,12 @@ describe('It should test the RecipeStepsEmptyScreen Component', () => {
 
     const headingElement = screen.getByTestId(/start-wrangle-title/i);
     expect(headingElement).toHaveTextContent(
-      `${T.translate('features.WranglerNewRecipeSteps.startWrangleTitle')}`
+      `${T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.startWrangleTitle')}`
     );
 
     const subHeadingElement = screen.getByTestId(/start-wrangle-sub-title/i);
     expect(subHeadingElement).toHaveTextContent(
-      `${T.translate('features.WranglerNewRecipeSteps.startWrangleSubTitle')}`
+      `${T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.startWrangleSubTitle')}`
     );
   });
 });

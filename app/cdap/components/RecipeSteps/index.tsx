@@ -49,7 +49,7 @@ export default function({ setShowRecipePanel, showRecipePanel, deleteRecipes }: 
 
   return (
     <DrawerWidget
-      headingText={T.translate('features.WranglerNewRecipeSteps.labels.recipe')}
+      headingText={T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.labels.recipe')}
       openDrawer={showRecipePanel}
       showDivider={true}
       headerActionTemplate={<RecipeHeaderActionTemplate />}

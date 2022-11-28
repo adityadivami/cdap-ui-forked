@@ -52,10 +52,10 @@ export default function() {
     <EmptyScreenContainer data-testid="recipe-steps-empty-screen-parent">
       {InfoGraphicData}
       <EmptyScreenText data-testid="start-wrangle-title">
-        {T.translate('features.WranglerNewRecipeSteps.startWrangleTitle')}
+        {T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.startWrangleTitle')}
       </EmptyScreenText>
       <EmptyScreenInfoText data-testid="start-wrangle-sub-title">
-        {T.translate('features.WranglerNewRecipeSteps.startWrangleSubTitle')}
+        {T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.startWrangleSubTitle')}
       </EmptyScreenInfoText>
     </EmptyScreenContainer>
   );
