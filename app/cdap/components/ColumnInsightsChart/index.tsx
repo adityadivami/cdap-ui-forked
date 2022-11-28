@@ -69,6 +69,7 @@ const DistributionData = styled(Box)`
 `;
 
 const GraphContainer = styled(Box)`
+  height: 225px;
   overflow-x: scroll;
   & .y-axis {
     margin-top: 0 !important;
