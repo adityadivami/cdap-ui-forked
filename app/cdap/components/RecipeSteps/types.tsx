@@ -14,23 +14,10 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+export interface IRecipeStepsProps {
+  setShowRecipePanel: React.Dispatch<React.SetStateAction<boolean>>;
+  showRecipePanel: boolean;
+  deleteRecipes: (new_arr: string[], remaining_arr: string[]) => void;
+}
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  gridTableWrapper: {
-    height: 'calc(100vh - 232px)',
-    overflowY: 'auto',
-  },
-});
+export interface IRecipeSteps {}
