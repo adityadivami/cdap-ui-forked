@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import T from 'i18n-react';
 
 const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.other'; // fix
@@ -20,7 +21,7 @@ const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.o
 export const OTHER_OPTIONS = [
   {
     value: 'define-variable',
-    label: T.translate(`${PREFIX}.defineVarible`),
+    label: T.translate(`${PREFIX}.defineVarible`).toString(),
     supportedDataType: ['all'],
   },
 ];
