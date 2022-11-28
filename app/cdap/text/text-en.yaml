@@ -3478,7 +3478,7 @@ features:
             menu:
               changeDatatype: Change data type
             other:
-              sendToError: Send to error
+              defineVarible: Define Variable
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step

@@ -97,9 +97,12 @@ export default function({
             options={DEFINE_VARIABLE_OPTIONS}
             checkboxLabel={T.translate(`${PREFIX}.encode`).toString()}
             transformation={'define-varibale'}
+            customInput={customInput}
+            setCustomInput={setCustomInput}
+            customInputPlaceholder={FILTER_PLACEHOLDER[filterCondition]}
           />
         </FormControl>
-        <FormInputFieldComponent
+        {/* <FormInputFieldComponent
           formInputValue={customInput}
           inputProps={{
             type: 'text',
@@ -108,7 +111,7 @@ export default function({
             color: 'primary',
             placeholder: FILTER_PLACEHOLDER[filterCondition],
           }}
-        />
+        /> */}
       </FormGroup>
       <FormGroup>
         <div>
