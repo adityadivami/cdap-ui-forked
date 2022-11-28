@@ -81,7 +81,6 @@ export default function({
               type: 'text',
               value: stringValue,
               onChange: (e: React.ChangeEvent<HTMLInputElement>) => setStringValue(e.target.value),
-
               color: 'primary',
               placeholder: ENTER_STRING,
             }}
