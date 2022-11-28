@@ -34,25 +34,40 @@ import {
   CustomizedFormLabel,
 } from 'components/WranglerGrid/TransformationComponents/Concatenate/styles';
 
-export default function({ setTransformationComponentsValue }: ISetTransformationValues) {
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: ISetTransformationValues) {
   const [placement, setPlacement] = useState<string>('');
   const [stringValue, setStringValue] = useState<string>('');
   const [copy, setCopy] = useState<boolean>(false);
   const [columnName, setColumnName] = useState<string>('');
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, radioOption: placement }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      radioOption: placement,
+    });
   }, [placement]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, customInput: stringValue }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      customInput: stringValue,
+    });
   }, [stringValue]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, copyToNewColumn: copy }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      copyToNewColumn: copy,
+    });
   }, [copy]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, copyColumnName: columnName }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      copyColumnName: columnName,
+    });
   }, [columnName]);
 
   return (
@@ -75,6 +90,7 @@ export default function({ setTransformationComponentsValue }: ISetTransformation
             name="actions"
             value={placement}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPlacement(e.target.value)}
+            data-testid="concentrate-radio-group"
           >
             {CONCATENATE_OPTIONS.map((eachRadio: ISubMenuOption) => (
               <CustomizedFormControlRadio
