@@ -293,7 +293,7 @@ export default function GridTable() {
         });
         setSnackbarIsOpen(true);
         setSnackbarData({
-          description: 'Directive applied successfully',
+          description: 'Transformation applied successfully',
           isSuccess: true,
         });
         setLoading(false);

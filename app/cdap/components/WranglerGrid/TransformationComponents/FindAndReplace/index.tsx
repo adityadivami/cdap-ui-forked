@@ -23,6 +23,8 @@ import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.findAndReplace';
+
 const CustomizedLabel = styled(NormalFont)`
   font-style: normal;
   margin-top: 10px;
@@ -79,9 +81,7 @@ export default function({
     <Box>
       <FormGroup>
         <Box>
-          <CustomizedLabel>
-            {T.translate(`features.WranglerNewUI.GridPage.transformationUI.findAndReplace.find`)}
-          </CustomizedLabel>
+          <CustomizedLabel>{T.translate(`${PREFIX}.find`)}</CustomizedLabel>
         </Box>
         <FormInputFieldComponent
           formInputValue={oldValue}
@@ -90,18 +90,12 @@ export default function({
             value: oldValue,
             onChange: (e) => setOldValue(e.target.value),
             color: 'primary',
-            placeholder: T.translate(
-              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.oldValue`
-            ) as string,
+            placeholder: T.translate(`.oldValue`) as string,
             'data-testid': 'old-value-input-form',
           }}
         />
         <InputCheckbox
-          label={
-            T.translate(
-              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.ignoreCase`
-            ) as string
-          }
+          label={T.translate(`${PREFIX}.ignoreCase`) as string}
           value={ignoreCase}
           onChange={(e) => setIgnoreCase(e.target.checked)}
           inputProps={{
@@ -109,11 +103,7 @@ export default function({
           }}
         />
         <InputCheckbox
-          label={
-            T.translate(
-              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.exactMatch`
-            ) as string
-          }
+          label={T.translate(`${PREFIX}.exactMatch`) as string}
           value={exactMatch}
           onChange={(e) => setExactMatch(e.target.checked)}
           inputProps={{
@@ -123,11 +113,7 @@ export default function({
       </FormGroup>
       <FormGroup>
         <Box>
-          <CustomizedLabel>
-            {T.translate(
-              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.replaceWith`
-            )}
-          </CustomizedLabel>
+          <CustomizedLabel>{T.translate(`${PREFIX}.replaceWith`)}</CustomizedLabel>
         </Box>
         <FormInputFieldComponent
           formInputValue={newValue}
@@ -136,9 +122,7 @@ export default function({
             value: newValue,
             onChange: (e) => setNewValue(e.target.value),
             color: 'primary',
-            placeholder: T.translate(
-              `features.WranglerNewUI.GridPage.transformationUI.findAndReplace.newValue`
-            ) as string,
+            placeholder: T.translate(`${PREFIX}.newValue`) as string,
             'data-testid': 'new-value-input-form',
           }}
         />

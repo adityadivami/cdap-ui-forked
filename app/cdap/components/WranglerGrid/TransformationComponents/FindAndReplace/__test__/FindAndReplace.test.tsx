@@ -69,8 +69,8 @@ describe('It should test Find And Replace Component', () => {
         transformationComponentValues={mockTransformationComponentValues}
       />
     );
-    const ignoreCaseCheckbox = screen.getByTestId(/ignore-case-input-checkbox/i);
-    fireEvent.click(ignoreCaseCheckbox);
+    const ignoreCaseCheckbox = screen.getAllByTestId(/ignore-case-input-checkbox/i);
+    fireEvent.click(ignoreCaseCheckbox[0]);
   });
 
   it('should test Ignore Case Checkbox', () => {
@@ -80,7 +80,7 @@ describe('It should test Find And Replace Component', () => {
         transformationComponentValues={mockTransformationComponentValues}
       />
     );
-    const exactMatchInputCheckbox = screen.getByTestId(/exact-match-input-checkbox/i);
-    fireEvent.click(exactMatchInputCheckbox);
+    const exactMatchInputCheckbox = screen.getAllByTestId(/exact-match-input-checkbox/i);
+    fireEvent.click(exactMatchInputCheckbox[0]);
   });
 });
