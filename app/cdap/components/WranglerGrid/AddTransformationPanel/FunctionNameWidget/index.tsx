@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import T from 'i18n-react';
 import { TickIcon } from 'components/WranglerGrid/AddTransformationPanel/SelectColumnsWidget';
 import { ADD_TRANSFORMATION_PREFIX } from 'components/WranglerGrid/SelectColumnPanel/constants';
@@ -50,6 +50,16 @@ const TransformationNameText = styled(SubHeadNormalFont)`
 `;
 
 export default function({ transformationName }: { transformationName: string }) {
+  const [transformedFunctionName, setTransformedFunctionName] = useState('');
+  const getTransformedName = (transformationName: string) => {
+    const finalName = transformationName.split('-').join(' ');
+    setTransformedFunctionName(finalName);
+  };
+
+  useEffect(() => {
+    getTransformedName(transformationName);
+  }, []);
+
   return (
     <TransformationNameBox>
       <TransformationNameHeadWrapper>
@@ -60,7 +70,7 @@ export default function({ transformationName }: { transformationName: string }) 
       </TransformationNameHeadWrapper>
       <TransformationNameTextInfoWrapper>
         <TransformationNameText component="span" data-testid="selected-function-name">
-          {transformationName}
+          {transformedFunctionName}
         </TransformationNameText>
         <InfoIconComponent data-testid="info-link" />
       </TransformationNameTextInfoWrapper>

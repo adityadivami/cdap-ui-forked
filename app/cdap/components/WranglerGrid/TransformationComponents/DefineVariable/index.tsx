@@ -14,17 +14,19 @@
  * the License.
  */
 
-import { FormControl, FormGroup, Typography, MenuItem } from '@material-ui/core';
+import { Box, FormControl, FormGroup } from '@material-ui/core';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
-import React, { useState, useEffect } from 'react';
-import T from 'i18n-react';
+import SelectInputComponent from 'components/common/TransformationInputComponents/SelectInputComponent';
+import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 import {
   DEFINE_VARIABLE_OPTIONS,
   FILTER_PLACEHOLDER,
 } from 'components/WranglerGrid/TransformationComponents/DefineVariable/options';
-import SelectInputComponent from 'components/common/TransformationInputComponents/SelectInputComponent';
-import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
-import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
+import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.defineVariable';
 
@@ -40,6 +42,10 @@ interface INewColumnList {
   label: string;
   value: string;
 }
+
+const CustomizedBox = styled(Box)`
+  margin-bottom: 10px;
+`;
 
 export default function({
   setTransformationComponentsValue,
@@ -80,7 +86,10 @@ export default function({
   }, [filterCondition]);
 
   useEffect(() => {
-    setTransformationComponentsValue({ ...transformationComponentValues, variableName });
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      variableName,
+    });
   }, [variableName]);
 
   useEffect(() => {
@@ -91,15 +100,18 @@ export default function({
   }, [columnSelected]);
 
   useEffect(() => {
-    setTransformationComponentsValue({ ...transformationComponentValues, customInput });
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      customInput,
+    });
   }, [customInput]);
 
   return (
     <div>
       <FormGroup>
-        <div>
-          <Typography>{T.translate(`${PREFIX}.setVariableName`)}</Typography>
-        </div>
+        <CustomizedBox>
+          <SubHeadBoldFont>{T.translate(`${PREFIX}.setVariableName`)}</SubHeadBoldFont>
+        </CustomizedBox>
         <FormInputFieldComponent
           formInputValue={variableName}
           inputProps={{
@@ -112,9 +124,9 @@ export default function({
         />
       </FormGroup>
       <FormGroup>
-        <div>
-          <Typography>{T.translate(`${PREFIX}.selectRowWhere`)}</Typography>
-        </div>
+        <CustomizedBox>
+          <SubHeadBoldFont>{T.translate(`${PREFIX}.selectRowWhere`)}</SubHeadBoldFont>
+        </CustomizedBox>
         <FormControl>
           <SelectInputComponent
             optionSelected={filterCondition}
@@ -136,12 +148,12 @@ export default function({
         />
       </FormGroup>
       <FormGroup>
-        <div>
-          <Typography>{T.translate(`${PREFIX}.selectColumnSelectedRow`)}</Typography>
-        </div>
+        <CustomizedBox>
+          <SubHeadBoldFont>{T.translate(`${PREFIX}.selectColumnSelectedRow`)}</SubHeadBoldFont>
+        </CustomizedBox>
         <FormControl>
           <SelectInputComponent
-            optionSelected={columnSelected}
+            optionSelected={columnsList[0].label}
             setOptionSelected={setColumnSelected}
             options={newColumnList}
             checkboxLabel={T.translate(`${PREFIX}.encode`).toString()}
@@ -149,9 +161,14 @@ export default function({
           />
         </FormControl>
       </FormGroup>
-      {columnSelected && transformationComponentValues.selectedColumn && (
-        <Typography variant="body1">{`Summary: you defined the variable "${variableName}" for the cell in column ${columnSelected} in the row which value starts with fdg in column "${transformationComponentValues.selectedColumn}"`}</Typography>
-      )}
+      {columnSelected &&
+        transformationComponentValues.selectedColumn &&
+        customInput &&
+        variableName && (
+          <CustomizedBox>
+            <NormalFont>{`Summary: you defined the variable "${variableName}" for the cell in column ${columnSelected} in the row which ${filterCondition} ${customInput} in column "${transformationComponentValues.selectedColumn}"`}</NormalFont>
+          </CustomizedBox>
+        )}
     </div>
   );
 }

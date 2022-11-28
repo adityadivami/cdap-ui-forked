@@ -24,7 +24,7 @@ export const DEFINE_VARIABLE_OPTIONS = [
     value: 'TEXTEXACTLY',
   },
   {
-    label: T.translate(`${PREFIX}.valuevalueStartsWithIs`).toString(),
+    label: T.translate(`${PREFIX}.valuevalueStartsWith`).toString(),
     value: 'TEXTSTARTSWITH',
   },
   {
