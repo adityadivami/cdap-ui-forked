@@ -87,16 +87,24 @@ export default function({
   }, [filterValue]);
 
   useEffect(() => {
-    setTransformationComponentsValue({ ...transformationComponentValues, counter });
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      counter,
+    });
   }, [counter]);
 
   useEffect(() => {
-    setTransformationComponentsValue({ ...transformationComponentValues, counterName });
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      counterName,
+    });
   }, [counterName]);
 
   return (
     <div>
-      <SubHeadBoldFont>{T.translate(`${PREFIX}.selectActionToTake`)}</SubHeadBoldFont>
+      <SubHeadBoldFont data-testid="set-counter-sub-head">
+        {T.translate(`${PREFIX}.selectActionToTake`)}
+      </SubHeadBoldFont>
       <SelectInputComponent
         optionSelected={filterCondition}
         setOptionSelected={setFilterCondition}
@@ -110,7 +118,9 @@ export default function({
         customInputPlaceHolder={T.translate(`${PREFIX}.customPlaceholder`).toString()}
       />
       <FormGroup>
-        <SubHeadBoldFont>{T.translate(`${PREFIX}.incrementCountBy`)}</SubHeadBoldFont>
+        <SubHeadBoldFont data-testid="set-counter-sub-head-two">
+          {T.translate(`${PREFIX}.incrementCountBy`)}
+        </SubHeadBoldFont>
         <FormInputFieldComponent
           formInputValue={counter}
           inputProps={{
@@ -119,6 +129,7 @@ export default function({
             onChange: (e) => setCounter(Number(e.target.value)),
             color: 'primary',
             placeholder: '',
+            'data-testid': 'set-counter-input',
           }}
         />
       </FormGroup>
@@ -132,6 +143,7 @@ export default function({
             onChange: (e) => setCounterName(e.target.value),
             color: 'primary',
             placeholder: T.translate(`${PREFIX}.enterCounterNamePlaceholder`).toString(),
+            'data-testid': 'set-counter-input-two',
           }}
         />
       </FormGroup>
