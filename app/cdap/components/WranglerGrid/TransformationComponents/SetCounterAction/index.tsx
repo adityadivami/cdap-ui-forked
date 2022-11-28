@@ -13,12 +13,22 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import { FormGroup } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import SelectInputComponent from 'components/common/TransformationInputComponents/SelectInputComponent';
 import { SubHeadBoldFont } from 'components/common/TypographyText';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 import T from 'i18n-react';
+
+interface ISetCounterActionProps {
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
+  transformationName: string;
+}
 
 const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.setCounter';
 
@@ -34,16 +44,15 @@ const SET_COUNTER_OPTION = [
   },
 ];
 
-export default function(props) {
-  const {
-    setTransformationComponentsValue,
-    transformationComponentValues,
-    transformationName,
-  } = props;
-  const [filterCondition, setFilterCondition] = useState('always');
-  const [filterValue, setFilterValue] = useState('');
-  const [counter, setCounter] = useState(1);
-  const [counterName, setCounterName] = useState('');
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+  transformationName,
+}: ISetCounterActionProps) {
+  const [filterCondition, setFilterCondition] = useState<string>('always');
+  const [filterValue, setFilterValue] = useState<string>('');
+  const [counter, setCounter] = useState<number>(1);
+  const [counterName, setCounterName] = useState<string>('');
 
   useEffect(() => {
     setTransformationComponentsValue({
@@ -122,7 +131,7 @@ export default function(props) {
             value: counterName,
             onChange: (e) => setCounterName(e.target.value),
             color: 'primary',
-            placeholder: 'Enter counter name',
+            placeholder: T.translate(`${PREFIX}.enterCounterNamePlaceholder`).toString(),
           }}
         />
       </FormGroup>

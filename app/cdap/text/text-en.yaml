@@ -3526,9 +3526,10 @@ features:
       transformationUI:
         setCounter:
           selectActionToTake: Select action to take
-          incrementCountBy: increment count by
-          nameThisCounter: name this counter
           customPlaceholder: Enter JEXL Condition
+          enterCounterNamePlaceholder: Enter counter name
+          incrementCountBy: Increment count by
+          nameThisCounter: Name this counter
     Snackbar:
       labels:
         datasetSuccess: Dataset loaded successfully 
