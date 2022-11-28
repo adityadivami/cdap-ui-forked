@@ -14,23 +14,16 @@
  * the License.
  */
 
-import { makeStyles } from '@material-ui/core';
+import React from 'react';
 
-export const useStyles = makeStyles({
-  loadingContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    opacity: 0.5,
-    background: 'white',
-    position: 'absolute',
-    top: 0,
-    width: '100%',
-    zIndex: 2000,
-  },
-  gridTableWrapper: {
-    height: 'calc(100vh - 232px)',
-    overflowY: 'auto',
-  },
-});
+export const BackIcon = (
+  <svg width="13" height="23" viewBox="0 0 13 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M11.2303 1.19922L1 11.429L11.2303 21.1992"
+      stroke="#757575"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
