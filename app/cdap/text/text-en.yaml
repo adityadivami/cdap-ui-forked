@@ -3437,10 +3437,10 @@ features:
     Breadcrumb:
       labels:
         connectionsList: Data Sources
-        wrangleHome: Home
+        wranglerHome: Home
       params:
         connectionsList: datasources
-        wrangleHome: home
+        wranglerHome: home
     ConnectionsList:
       labels:
         loadToGrid: Wrangle
