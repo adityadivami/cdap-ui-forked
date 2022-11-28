@@ -18,7 +18,7 @@
 Feature: HashTransformation
 
   @HashTransformation
-  Scenario: Go through the Hash Transformation functionality
+  Scenario Outline: Go through the Hash Transformation functionality
     Given Navigate to Home Page
     Then Click on the Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
@@ -28,7 +28,12 @@ Feature: HashTransformation
     Then Click on the Select Column button
     Then Click on the radio button of any column
     Then Click on the Done button
-    Then Click on Hash algorithm form dropdown
-    Then Select value from the Hash algorithm
+    Then Click on Hash algorithm dropdown
+    Then Select value from the Hash algorithm "<testId>"
     Then Click on the Checkbox Encode
     Then Click on the Apply Step button
+    Examples:
+    | testId |
+    | 2      |
+    | 5      |
+    | 12     |

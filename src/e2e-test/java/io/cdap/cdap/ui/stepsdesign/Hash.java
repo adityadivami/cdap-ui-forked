@@ -135,30 +135,26 @@ public class Hash {
         }
     }
 
-    @Then("Click on Hash algorithm form dropdown")
+    @Then("Click on Hash algorithm dropdown")
     public void clickOnHashAlgorithmFromDropdown() {
         try {
             WaitHelper.waitForPageToLoad();
             Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("hash-container")));
             WebElement element = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div//input[@data-testid='select-filter-option']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", element);
+                    .findElement(By.xpath("//*[@data-testid='select-input-root']"));
+            ElementHelper.clickOnElement(element);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
     }
 
-    @Then("Select value from the Hash algorithm")
-    public void selectValueFromTheHashAlgorithm() {
+    @Then("Select value from the Hash algorithm \\\"(.*)\\\"")
+    public void selectValueFromTheHashAlgorithm(int testId) {
         try {
             WaitHelper.waitForPageToLoad();
-//            Assert.assertTrue(ElementHelper.isElementDisplayed(
-//                    Helper.locateElementByXPath("//div[@data-testid='select-filter-paper']")));
-            WebElement element = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div//li[@data-testid='select-option-list-5']"));
-//            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-//            executor.executeScript("arguments[0].click();", element);
+            Assert.assertTrue(ElementHelper.isElementDisplayed(
+                    Helper.locateElementByXPath("//div[@data-testid='select-filter-paper']")));
+            WebElement element = Helper.locateElementByTestId("select-option-list-" + testId);
             ElementHelper.clickOnElement(element);
         } catch (Exception e) {
             System.err.println("error:" + e);
