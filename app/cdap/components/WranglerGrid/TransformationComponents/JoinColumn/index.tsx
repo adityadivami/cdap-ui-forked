@@ -31,6 +31,8 @@ const SwapIconWrapper = styled(Box)`
   cursor: pointer;
   text-align: center;
   width: calc(100% - 60px);
+  margin-bottom: 10px;
+  margin-top: 5px;
 `;
 
 const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.joinColumn';
