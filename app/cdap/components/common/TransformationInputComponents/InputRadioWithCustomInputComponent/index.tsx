@@ -22,14 +22,14 @@ import {
   FormGroupComponent,
 } from 'components/common/FormComponents';
 import { InputComponent } from 'components/common/InputFieldComponent';
-import { IParseOptions } from 'components/WranglerGrid/TransformationComponents/ParseComponents/types';
+import { ISubMenuOption } from 'components/WranglerGrid/TransformationComponents/ParseComponents/types';
 
 interface IObject {
   [key: string]: string;
 }
 
 interface IRadioInputWithCustomComponentProps {
-  options: IParseOptions[];
+  options: ISubMenuOption[];
   radioValue: string;
   setRadioValue: React.Dispatch<React.SetStateAction<string>>;
   customInputType: string;

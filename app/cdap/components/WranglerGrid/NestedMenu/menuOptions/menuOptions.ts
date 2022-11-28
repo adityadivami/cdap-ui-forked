@@ -30,7 +30,7 @@ export const MENU_OPTIONS: IMenuItem[] = [
   },
   {
     value: 'text',
-    label: `${T.translate('features.DataPrep.Directives.Format.title').toString()}`,
+    label: T.translate(`${PREFIX}.menu.format`).toString(),
     options: FORMAT_OPTIONS,
     supportedDataType: ['string'],
   },

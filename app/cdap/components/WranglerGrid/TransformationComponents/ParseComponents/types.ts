@@ -23,7 +23,7 @@ export interface IParseCSVProps {
   >;
 }
 
-export interface IParseOptions {
+export interface ISubMenuOption {
   value: string;
   label: string;
   directiveExpression?: string;
@@ -38,5 +38,5 @@ export interface ISetTransformationValues {
   setTransformationComponentsValue: React.Dispatch<
     React.SetStateAction<ITransformationComponentValues>
   >;
-  transformationComponentValues: ITransformationComponentValues;
+  transformationComponentValues?: ITransformationComponentValues;
 }

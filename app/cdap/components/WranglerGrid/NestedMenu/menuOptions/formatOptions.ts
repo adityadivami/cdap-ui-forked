@@ -21,26 +21,32 @@ import T from 'i18n-react';
 export const FORMAT_OPTIONS: IMenuItem[] = [
   {
     value: 'uppercase',
-    label: `${T.translate('features.DataPrep.Directives.Format.Formats.UPPERCASE').toString()}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.uppercase'
+    ).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `uppercase :${selectedColumn}`,
   },
   {
     value: 'lowercase',
-    label: `${T.translate('features.DataPrep.Directives.Format.Formats.LOWERCASE').toString()}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.lowercase'
+    ).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `lowercase :${selectedColumn}`,
   },
   {
     value: 'titlecase',
-    label: `${T.translate('features.DataPrep.Directives.Format.Formats.TITLECASE').toString()}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.titlecase'
+    ).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `titlecase :${selectedColumn}`,
   },
   {
     value: 'concatenate',
     label: `${T.translate(
-      'features.DataPrep.Directives.Format.Formats.CONCATENATE.label'
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.concatenate'
     ).toString()}`,
     supportedDataType: ['string'],
     directive: (
@@ -65,7 +71,7 @@ export const FORMAT_OPTIONS: IMenuItem[] = [
   {
     value: 'trim',
     label: `${T.translate(
-      'features.DataPrep.Directives.Format.Formats.TRIM_WHITESPACE'
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.trim'
     ).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `trim :${selectedColumn}`,
@@ -73,7 +79,7 @@ export const FORMAT_OPTIONS: IMenuItem[] = [
   {
     value: 'ltrim',
     label: `${T.translate(
-      'features.DataPrep.Directives.Format.Formats.TRIM_LEADING_WHITESPACE'
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.ltrim'
     ).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `ltrim :${selectedColumn}`,
@@ -81,14 +87,16 @@ export const FORMAT_OPTIONS: IMenuItem[] = [
   {
     value: 'rtrim',
     label: `${T.translate(
-      'features.DataPrep.Directives.Format.Formats.TRIM_TRAILING_WHITESPACE'
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.rtrim'
     ).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `rtrim :${selectedColumn}`,
   },
   {
     value: 'dateTime',
-    label: `${T.translate('features.DataPrep.Directives.Format.Formats.DATE_TIME').toString()}`,
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.dateTime'
+    ).toString()}`,
     supportedDataType: ['string'],
     directive: (
       selectedColumn: string,
@@ -104,7 +112,7 @@ export const FORMAT_OPTIONS: IMenuItem[] = [
   {
     value: 'dateTimeAsString',
     label: `${T.translate(
-      'features.DataPrep.Directives.Format.Formats.DATETIME_AS_STRING'
+      'features.WranglerNewUI.GridPage.transformations.options.labels.format.dateTimeAsString'
     ).toString()}`,
     supportedDataType: ['string'],
     directive: (

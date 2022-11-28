@@ -3498,6 +3498,7 @@ features:
               bytes: bytes
             menu:
               changeDatatype: Change data type
+              format: Format
             fragment:
               parse: Parse
             parse:
@@ -3511,6 +3512,16 @@ features:
               parseDateTime: Datetime
               parseFixedLength: Fixed Length
               parseHL7: HL7
+            format:
+              uppercase: UPPERCASE
+              lowercase: Lowercase
+              titlecase: Title Case
+              concatenate: Concatenate
+              trim: White spaces
+              ltrim: Leading white spaces
+              rtrim: Trailing White spaces
+              dateTime: Date time
+              dateTimeAsString: Date time as string
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step
@@ -3535,6 +3546,18 @@ features:
           nameNewColumn:  Name new column 
           columnExist: This column name already exist
           destinationColumn: Destination Column
+        format:
+          options:
+            concatenate:
+              heading: Concatenate
+              labels:
+                add: Add
+                enterString: Enter string
+                copyToNewColumn: Copy to a new column
+                destinationColumn: Destination column
+              options:
+                atTheBegining: at the beginning of the content of each row
+                atTheEnd: at the end of the content of each row
         parse:
           options:
             common:

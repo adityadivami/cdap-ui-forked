@@ -14,6 +14,7 @@
  * the License.
  */
 
+import Concatenate from 'components/WranglerGrid/TransformationComponents/Concatenate';
 import ParseCSVComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseCSVComponent';
 import ParseDateTimeComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseDateTimeComponent';
 import ParseExcelComponent from 'components/WranglerGrid/TransformationComponents/ParseComponents/ParseExcelComponent';
@@ -54,5 +55,17 @@ export const TRANSFORMATION_COMPONENTS = [
   {
     type: 'parseExcel',
     component: ParseExcelComponent,
+  },
+  {
+    type: 'concatenate',
+    component: Concatenate,
+  },
+  {
+    type: 'dateTime',
+    component: ParseSimpleDateComponent,
+  },
+  {
+    type: 'dateTimeAsString',
+    component: ParseDateTimeComponent,
   },
 ];

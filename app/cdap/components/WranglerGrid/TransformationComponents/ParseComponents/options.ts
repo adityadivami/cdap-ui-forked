@@ -14,10 +14,10 @@
  * the License.
  */
 
-import { IParseOptions } from 'components/WranglerGrid/TransformationComponents/ParseComponents/types';
+import { ISubMenuOption } from 'components/WranglerGrid/TransformationComponents/ParseComponents/types';
 import T from 'i18n-react';
 
-export const PARSE_CSV_OPTIONS: IParseOptions[] = [
+export const PARSE_CSV_OPTIONS: ISubMenuOption[] = [
   {
     value: 'comma',
     label: `${T.translate(
@@ -68,7 +68,7 @@ export const PARSE_CSV_OPTIONS: IParseOptions[] = [
   },
 ];
 
-export const PARSE_LOG_OPTIONS: IParseOptions[] = [
+export const PARSE_LOG_OPTIONS: ISubMenuOption[] = [
   {
     value: 'common',
     label: `${T.translate(
@@ -107,7 +107,7 @@ export const PARSE_LOG_OPTIONS: IParseOptions[] = [
   },
 ];
 
-export const PARSE_SIMPLE_DATE_OPTIONS: IParseOptions[] = [
+export const PARSE_SIMPLE_DATE_OPTIONS: ISubMenuOption[] = [
   {
     label: `${T.translate(
       'features.WranglerNewUI.GridPage.transformationUI.parse.options.simpleDate.options.MMddyyyy'
@@ -200,7 +200,7 @@ export const PARSE_SIMPLE_DATE_OPTIONS: IParseOptions[] = [
   },
 ];
 
-export const PARSE_DATE_TIME_OPTIONS: IParseOptions[] = [
+export const PARSE_DATE_TIME_OPTIONS: ISubMenuOption[] = [
   {
     label: `${T.translate(
       'features.WranglerNewUI.GridPage.transformationUI.parse.options.common.yyyyMMddHHmmss'
@@ -245,7 +245,7 @@ export const PARSE_DATE_TIME_OPTIONS: IParseOptions[] = [
   },
 ];
 
-export const PARSE_EXCEL_OPTIONS: IParseOptions[] = [
+export const PARSE_EXCEL_OPTIONS: ISubMenuOption[] = [
   {
     label: `${T.translate(
       'features.WranglerNewUI.GridPage.transformationUI.parse.options.excel.options.sheetNumber'
@@ -257,5 +257,20 @@ export const PARSE_EXCEL_OPTIONS: IParseOptions[] = [
       'features.WranglerNewUI.GridPage.transformationUI.parse.options.excel.options.sheetName'
     ).toString()}`,
     value: 'sheetName',
+  },
+];
+
+export const CONCATENATE_OPTIONS: ISubMenuOption[] = [
+  {
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.format.options.concatenate.options.atTheBegining'
+    ).toString()}`,
+    value: 'BEGINNING',
+  },
+  {
+    label: `${T.translate(
+      'features.WranglerNewUI.GridPage.transformationUI.format.options.concatenate.options.atTheEnd'
+    ).toString()}`,
+    value: 'END',
   },
 ];
