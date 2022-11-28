@@ -23,12 +23,22 @@ import {
   FILTER_PLACEHOLDER,
 } from 'components/WranglerGrid/TransformationComponents/DefineVariable/options';
 import SelectInputComponent from 'components/common/TransformationInputComponents/SelectInputComponent';
+import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.defineVariable';
 
 interface IDefineVariableProps {
-  setTransformationComponentsValue: any;
-  transformationComponentValues: any;
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
+  columnsList: IHeaderNamesList[];
+}
+
+interface INewColumnList {
+  label: string;
+  value: string;
 }
 
 export default function({
@@ -40,7 +50,7 @@ export default function({
   const [variableName, setVariableName] = useState('');
   const [columnSelected, setColumnSelected] = useState('');
   const [customInput, setCustomInput] = useState('');
-  const [newColumnList, setNewColumnList] = useState([]);
+  const [newColumnList, setNewColumnList] = useState<INewColumnList[]>([]);
 
   useEffect(() => {
     const updatedColumnList = [];

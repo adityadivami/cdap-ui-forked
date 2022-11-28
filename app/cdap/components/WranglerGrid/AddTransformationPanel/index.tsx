@@ -104,8 +104,6 @@ export default function({
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
 
-  console.log('triggered', columnsList, transformationComponentValues);
-
   useEffect(() => {
     setTransformationComponentsValue({
       ...transformationComponentValues,
