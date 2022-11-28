@@ -139,10 +139,11 @@ public class Hash {
     public void clickOnHashAlgorithmFromDropdown() {
         try {
             WaitHelper.waitForPageToLoad();
-            WebElement ele = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div[@data-testid='select-input-root']"));
+            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("hash-container")));
+            WebElement element = SeleniumDriver.getDriver()
+                    .findElement(By.xpath("//div//input[@data-testid='select-filter-option']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", ele);
+            executor.executeScript("arguments[0].click();", element);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -152,12 +153,13 @@ public class Hash {
     public void selectValueFromTheHashAlgorithm() {
         try {
             WaitHelper.waitForPageToLoad();
-            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("select-filter-paper"));
+//            Assert.assertTrue(ElementHelper.isElementDisplayed(
+//                    Helper.locateElementByXPath("//div[@data-testid='select-filter-paper']")));
             WebElement element = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div//li[@data-testid='select-option-list-17']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", element);
-            // ElementHelper.clickOnElement(Helper.locateElementByTestId("select-option-list-17"));
+                    .findElement(By.xpath("//div//li[@data-testid='select-option-list-5']"));
+//            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+//            executor.executeScript("arguments[0].click();", element);
+            ElementHelper.clickOnElement(element);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
