@@ -42,7 +42,7 @@ export default function() {
   return (
     <Box className={classes.wrapper} data-testid="wrangler-home-new-parent">
       <Box className={classes.subHeader}>
-        <Typography className={classes.welcomeCard}>
+        <Typography className={classes.welcomeCard} id="wranglehome-1">
           Hello! <br />
           Welcome to Wrangler
         </Typography>
