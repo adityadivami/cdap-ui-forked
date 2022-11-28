@@ -15,34 +15,35 @@
  */
 
 export const DEFINE_VARIABLE_OPTIONS = [
-    {
-      label: 'value is',
-      value: 'TEXTEXACTLY',
-    },
-    {
-      label: 'value starts with',
-      value: 'TEXTSTARTSWITH',
-    },
-    {
-      label: 'value ends with',
-      value: 'TEXTENDSWITH',
-    },
-    {
-      label: 'value contains regex',
-      value: 'TEXTREGEX',
-    },
-    {
-      label: 'custom condition',
-      value: 'CUSTOMCONDITION',
-    },
-  ];
+  {
+    label: 'value is',
+    value: 'TEXTEXACTLY',
+  },
+  {
+    label: 'value starts with',
+    value: 'TEXTSTARTSWITH',
+  },
+  {
+    label: 'value ends with',
+    value: 'TEXTENDSWITH',
+  },
+  {
+    label: 'value contains regex',
+    value: 'TEXTREGEX',
+  },
+  {
+    label: 'custom condition',
+    value: 'CUSTOMCONDITION',
+    isInputRequired: true,
+  },
+];
 
-  export const FILTER_PLACEHOLDER = {
-    EMPTY: '',
-    TEXTEXACTLY: 'Enter value',
-    TEXTCONTAINS: 'Enter contained value',
-    TEXTSTARTSWITH: 'Enter prefix',
-    TEXTENDSWITH: 'Enter suffix',
-    TEXTREGEX: 'Enter regex',
-    CUSTOMCONDITION: 'E.g. < 30 || gender == "Male"',
-  };
+export const FILTER_PLACEHOLDER = {
+  EMPTY: '',
+  TEXTEXACTLY: 'Enter value',
+  TEXTCONTAINS: 'Enter contained value',
+  TEXTSTARTSWITH: 'Enter prefix',
+  TEXTENDSWITH: 'Enter suffix',
+  TEXTREGEX: 'Enter regex',
+  CUSTOMCONDITION: 'E.g. < 30 || gender == "Male"',
+};

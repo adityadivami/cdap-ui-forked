@@ -14,7 +14,7 @@
  * the License.
  */
 
-import DefineVariable from "components/WranglerGrid/TransformationComponents/DefineVariable/";
+import DefineVariable from 'components/WranglerGrid/TransformationComponents/DefineVariable/';
 
 export const TRANSFORMATION_COMPONENTS = [
   {
