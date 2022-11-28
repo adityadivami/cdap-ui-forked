@@ -95,9 +95,7 @@ export default function({ toggleViewAllLink }: IWrangleCard) {
               <Box className={classes.cardContent} key={index}>
                 {item.SVG}
                 <Typography className={classes.cardText} data-testid="wranglecard-typography-1">
-                  
                   {item.displayName ?? item.name}
-                
                 </Typography>
               </Box>
             </Card>

@@ -25,11 +25,6 @@ import { Link } from 'react-router-dom';
 import { forkJoin } from 'rxjs/observable/forkJoin';
 import { switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import OngoingDataExplorationCard from '../OngoingDataExplorationCard';
-import { switchMap } from 'rxjs/operators';
-import { forkJoin } from 'rxjs/observable/forkJoin';
-import { IResponseData } from './types';
-import T from 'i18n-react';
 
 export default function OngoingDataExploration() {
   const [ongoingExpDatas, setOngoingExpDatas] = useState([]);
