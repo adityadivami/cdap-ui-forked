@@ -97,10 +97,10 @@ export default function({
           inputProps={{
             'data-testid': 'select-filter-option',
           }}
-          MenuProps = {{
+          MenuProps={{
             PaperProps: {
-              'data-testid' : 'select-input-paper-props'
-            }
+              'data-testid': 'select-input-paper-props',
+            },
           }}
         >
           {options?.length > 0 &&

@@ -32,6 +32,10 @@ Feature: ExtractFields
     Then Click on the Select a Pattern input field
     Then Select any value from the list
     Then Click on the Apply step button
+
+  Scenario: Go through the Extract Fields functionality
+    Given Navigate to Wrangle Home Page
+    Then Click on the Data Explorations card
     Then Click on the Fragment icon
     Then Click on the Extract
     Then Click on the Using Delimiters
@@ -41,6 +45,10 @@ Feature: ExtractFields
     Then Click on the Done button
     Then Select any radio button from the delimiter list
     Then Click on the Apply step button
+
+  Scenario: Go through the Extract Fields functionality
+    Given Navigate to Wrangle Home Page
+    Then Click on the Data Explorations card
     Then Click on the Fragment icon
     Then Click on the Extract
     Then Click on the Using Positions
@@ -48,4 +56,4 @@ Feature: ExtractFields
     Then Click on the Select Column button
     Then Click on the radio button of any column
     Then Click on the Done button
-    Then Click on the Apply step button
+    Then Select the text and click on apply

@@ -28,6 +28,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+
 
 public class ExtractFields {
     @Given("Navigate to Wrangle Home Page")
@@ -40,7 +42,7 @@ public class ExtractFields {
     public void clickOnTheDataExplorationCard() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-0"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-1"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         } catch (Exception e) {
@@ -151,9 +153,11 @@ public class ExtractFields {
         try {
             WaitHelper.waitForPageToLoad();
             WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("select-input-root"));
-            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='select-input-root']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", ele);
+            WebElement ele = SeleniumDriver.getDriver().
+                    findElement(By.xpath("//div[@data-testid='select-input-root']"));
+            ElementHelper.clickOnElement(ele);
+            Assert.assertTrue(ElementHelper.isElementDisplayed
+                    (Helper.locateElementByTestId("select-input-paper-props")));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -163,9 +167,9 @@ public class ExtractFields {
     public void selectAnyValueFromTheList() {
         try {
             WaitHelper.waitForPageToLoad();
-            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("select-option-list-5"));
+            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("select-option-list-3"));
             WebElement ele = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//*[@data-testid='select-option-list-5']"));
+                    .findElement(By.xpath("//div//ul//li[@data-testid='select-option-list-3']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
@@ -177,7 +181,9 @@ public class ExtractFields {
     public void clickOnTheApplyStepButton() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
+          WebElement ele = Helper.locateElementByTestId("apply-step-button");
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -187,9 +193,8 @@ public class ExtractFields {
     public void selectAnyRadioButtonFromTheDelimiterList() {
         try {
             WaitHelper.waitForPageToLoad();
-            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("form-control-label-radio-option-2"));
             WebElement ele = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//*[@data-testid='form-control-label-radio-option-2']"));
+                    .findElement(By.xpath("//*[@data-testid='radio-option-2']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
@@ -219,14 +224,24 @@ public class ExtractFields {
         }
     }
 
-    @Then("Click on the Apply mask button")
+    @Then("Select the text and click on apply")
     public void clickOnApplyMask() {
-        WebElement ele = Helper.locateElementByTestId("id");
-        ele.sendKeys(Keys.CONTROL);
-        ele.sendKeys("A");
-        Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("mask-selection-parent")));
-        WebElement element = Helper.locateElementByTestId("apply-mask-button");
-        JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-        executor.executeScript("arguments[0].click();", element);
+        try {
+            WaitHelper.waitForPageToLoad();
+            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath
+                    ("//div//td[@data-testid='grid-cellData-12']//p[@data-testid='grid-text-cell-12']"));
+            Actions act = new Actions(SeleniumDriver.getDriver());
+            act.moveToElement(ele).sendKeys(Keys.CONTROL).sendKeys("a");
+            Assert.assertTrue(ElementHelper.isElementDisplayed
+                    (Helper.locateElementByTestId("position-extract-wrapper")));
+            WebElement name = Helper.locateElementByTestId("form-input-undefined");
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", name);
+            name.sendKeys("tester");
+            WebElement element = Helper.locateElementByTestId("apply-mask-button");
+            executor.executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
     }
 }
