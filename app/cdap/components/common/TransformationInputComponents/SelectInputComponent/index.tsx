@@ -93,7 +93,7 @@ export default function({
           value={optionSelected}
           onChange={handleChange}
           disableUnderline
-          data-testid="select-input-root"
+          data-testid={`select-input-root-${transformation}`}
           inputProps={{
             'data-testid': 'select-filter-option',
           }}
