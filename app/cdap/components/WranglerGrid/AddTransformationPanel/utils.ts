@@ -30,7 +30,7 @@ export const getDirective = (
       transformationComponentValues.customInput,
       transformationComponentValues.selectedColumnForDefineVariable,
       transformationComponentValues.filterCondition,
-      transformationComponentValues[0].label
+      selectedColumnName
     );
 
     return defineVaribaleDirective;

@@ -44,6 +44,7 @@ export default function({
   transformationName,
   transformationComponentValues,
   setTransformationComponentsValue,
+  columnsList,
   ...props
 }: ITransformationContentParams) {
   const Component = transformationComponent.find((item) => item?.type === type)?.component;
@@ -53,6 +54,7 @@ export default function({
       transformationName={transformationName}
       transformationComponentValues={transformationComponentValues}
       setTransformationComponentsValue={setTransformationComponentsValue}
+      columnsList={columnsList}
       {...props}
     />
   );

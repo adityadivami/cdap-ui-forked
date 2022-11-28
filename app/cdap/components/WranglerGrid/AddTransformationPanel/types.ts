@@ -22,11 +22,8 @@ export interface ITransformationComponentValues {
   customInput: string;
   selectedColumnForDefineVariable: string;
   filterCondition: string;
-  selectedColumn: {
-    name: string;
-    label: string;
-    type: string[];
-  };
+  selectedColumn: string;
+  columnList;
 }
 
 export interface IAddTransformationProps {

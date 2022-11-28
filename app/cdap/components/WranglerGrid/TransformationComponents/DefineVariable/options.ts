@@ -34,7 +34,6 @@ export const DEFINE_VARIABLE_OPTIONS = [
   {
     label: 'custom condition',
     value: 'CUSTOMCONDITION',
-    isInputRequired: true,
   },
 ];
 

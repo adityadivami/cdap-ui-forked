@@ -53,12 +53,9 @@ const transformationComponentDefaultValues = {
   variableName: '',
   customInput: '',
   selectedColumnForDefineVariable: '',
-  filterCondition: '',
-  selectedColumn: {
-    name: '',
-    label: '',
-    type: ['String'],
-  },
+  filterCondition: 'TEXTEXACTLY',
+  selectedColumn: '',
+  columnList: [],
 };
 
 export default function({
@@ -106,6 +103,15 @@ export default function({
     applyTransformation(directive);
     setDrawerStatus(false); // TODO process of sending value || or directive of function selected
   };
+
+  console.log('triggered', columnsList, transformationComponentValues);
+
+  useEffect(() => {
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      selectedColumn: selectedColumns.length > 0 ? selectedColumns[0].label : '',
+    });
+  }, [selectedColumns.length]);
 
   useEffect(() => {
     const getPreparedDataQuality: IDataQualityItem[] = getDataQuality(

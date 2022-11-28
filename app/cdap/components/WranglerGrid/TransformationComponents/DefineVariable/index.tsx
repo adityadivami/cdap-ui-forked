@@ -34,11 +34,24 @@ interface IDefineVariableProps {
 export default function({
   setTransformationComponentsValue,
   transformationComponentValues,
+  columnsList,
 }: IDefineVariableProps) {
   const [filterCondition, setFilterCondition] = useState('TEXTEXACTLY');
   const [variableName, setVariableName] = useState('');
   const [columnSelected, setColumnSelected] = useState('');
   const [customInput, setCustomInput] = useState('');
+  const [newColumnList, setNewColumnList] = useState([]);
+
+  useEffect(() => {
+    const updatedColumnList = [];
+    columnsList.map(({ label }) => {
+      updatedColumnList.push({
+        label,
+        value: label,
+      });
+    });
+    setNewColumnList(updatedColumnList);
+  }, []);
 
   useEffect(() => {
     setTransformationComponentsValue({
@@ -47,7 +60,7 @@ export default function({
       selectedColumnForDefineVariable: transformationComponentValues.selectedColumn,
     });
     setColumnSelected(transformationComponentValues.selectedColumn);
-  }, [setTransformationComponentsValue?.selectedColumn]);
+  }, [transformationComponentValues?.selectedColumn]);
 
   useEffect(() => {
     setTransformationComponentsValue({
@@ -92,17 +105,14 @@ export default function({
         </div>
         <FormControl>
           <SelectInputComponent
-            optionSelected={columnSelected}
-            setOptionSelected={setCustomInput}
+            optionSelected={filterCondition}
+            setOptionSelected={setFilterCondition}
             options={DEFINE_VARIABLE_OPTIONS}
             checkboxLabel={T.translate(`${PREFIX}.encode`).toString()}
             transformation={'define-varibale'}
-            customInput={customInput}
-            setCustomInput={setCustomInput}
-            customInputPlaceholder={FILTER_PLACEHOLDER[filterCondition]}
           />
         </FormControl>
-        {/* <FormInputFieldComponent
+        <FormInputFieldComponent
           formInputValue={customInput}
           inputProps={{
             type: 'text',
@@ -111,7 +121,7 @@ export default function({
             color: 'primary',
             placeholder: FILTER_PLACEHOLDER[filterCondition],
           }}
-        /> */}
+        />
       </FormGroup>
       <FormGroup>
         <div>
@@ -119,11 +129,11 @@ export default function({
         </div>
         <FormControl>
           <SelectInputComponent
-            optionSelected={filterCondition}
-            setOptionSelected={setFilterCondition}
-            options={DEFINE_VARIABLE_OPTIONS}
+            optionSelected={columnSelected}
+            setOptionSelected={setColumnSelected}
+            options={newColumnList}
             checkboxLabel={T.translate(`${PREFIX}.encode`).toString()}
-            transformation={'define-varibale'}
+            transformation={'define-varibale-columnlist'}
           />
         </FormControl>
       </FormGroup>
