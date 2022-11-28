@@ -86,8 +86,8 @@ export default function({
         horizontal: 'left',
       }}
     >
-      <PositionWrapper>
-        <HeadFont>{T.translate(`${PREFIX}.extractPosition`)}</HeadFont>
+      <PositionWrapper data-testid='position-extract-wrapper'>
+        <HeadFont data-testid='position-extract-head-font'>{T.translate(`${PREFIX}.extractPosition`)}</HeadFont>
         <SubTitleWrapper>
           {`${T.translate(`${PREFIX}.extractCharacter`)} ${textSelectionRange.start}-${
             textSelectionRange.end
