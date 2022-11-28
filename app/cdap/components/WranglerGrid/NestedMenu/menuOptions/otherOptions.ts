@@ -15,12 +15,12 @@
  */
 import T from 'i18n-react';
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.other';
+const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.other'; // fix
 
 export const OTHER_OPTIONS = [
   {
-    value: 'send-to-error',
-    label: T.translate(`${PREFIX}.sendToError`),
+    value: 'define-variable',
+    label: T.translate(`${PREFIX}.defineVarible`),
     supportedDataType: ['all'],
   },
 ];
