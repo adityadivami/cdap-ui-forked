@@ -31,7 +31,7 @@ describe('Test TransformationComponents', () => {
           startValue: 'string',
           endValue: 'string',
           nDigit: 'string',
-          extractOptionSelected: 'string'
+          extractOptionSelected: 'string',
         }}
         transformationName={'extract-using-delimiters'}
         transformationDataType={[]}

@@ -22,7 +22,7 @@ import T from 'i18n-react';
 
 export default function({ customInput, setCustomInput }) {
   return (
-    <FormGroup data-testid='custom-pattern-wrapper'>
+    <FormGroup data-testid="custom-pattern-wrapper">
       <LabelComponent
         labelText={`${T.translate(
           'features.WranglerNewUI.GridPage.transformationUI.extract.writeYourRegex'
