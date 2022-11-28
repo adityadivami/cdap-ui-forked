@@ -14,11 +14,16 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
 import { Box } from '@material-ui/core/';
-import { generateDataForExplorationCard } from './utils';
 import MyDataPrepApi from 'api/dataprep';
+import { IResponseData } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import { generateDataForExplorationCard } from 'components/WrangleHome/Components/OngoingDataExploration/utils';
+import OngoingDataExplorationCard from 'components/WrangleHome/Components/OngoingDataExplorationCard';
+import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { switchMap } from 'rxjs/operators';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExplorationCard from '../OngoingDataExplorationCard';
 import { switchMap } from 'rxjs/operators';
