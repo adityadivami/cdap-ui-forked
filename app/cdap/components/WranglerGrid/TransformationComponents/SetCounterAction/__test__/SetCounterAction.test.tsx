@@ -59,11 +59,11 @@ describe('Test SetCounter Component', () => {
   });
 
   it('Should trigger handleChange function in 2nd input', () => {
-    const inputElement = screen.getByTestId(/set-counter-input-two/i);
-    expect(inputElement).toBeInTheDocument();
-    fireEvent.change(inputElement.firstChild, {
+    const inputElement = screen.getAllByTestId(/set-counter-input-two/i);
+    expect(inputElement[0]).toBeInTheDocument();
+    fireEvent.change(inputElement[0].firstChild, {
       target: { value: 'abhilash' },
     });
-    expect(inputElement.firstChild).toHaveValue('abhilash');
+    expect(inputElement[0].firstChild).toHaveValue('abhilash');
   });
 });
