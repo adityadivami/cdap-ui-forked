@@ -13,16 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import T from 'i18n-react';
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.other';
+const PREFIX = 'features.WranglerNewUI.GridPage';
 
 export const OTHER_OPTIONS = [
   {
     value: 'set-counter',
-    label: T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.other.setCounter'
-    ).toString(),
-    supportedDataType: [T.translate('features.WranglerNewUI.GridPage.toolbarIcons.labels.all')],
+    label: T.translate(`${PREFIX}.transformations.options.labels.other.setCounter`).toString(),
+    supportedDataType: [T.translate(`${PREFIX}.toolbarIcons.labels.all`)],
   },
 ];
