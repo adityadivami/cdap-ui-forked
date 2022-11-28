@@ -3487,7 +3487,7 @@ features:
             menu:
               changeDatatype: Change data type
             other:
-              defineVaribale: Define Variable
+              defineVariable: Define Variable
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step
@@ -3501,7 +3501,7 @@ features:
         selectColumnPara: Select column(s) to apply this function
         selectColumn: Select column
         selectMultiColumns: Select columns
-      selectColumnListPanel: 
+      selectColumnListPanel:
         columnsSelected: column selected
         no: No
         noColumns: No columns to show
@@ -3517,13 +3517,12 @@ features:
           selectRowWhere: Select row where
           selectColumnSelectedRow: Select column in selected row 
           defineVariableOptions: 
-          
             valueIs: value is
             valueStartsWith: value starts with
             valueEndsWith: value ends with
             valueContainsRegex: value contains regex
             customCondition: custom condition
-	  HomePage:
+    HomePage:
       labels:
         common:
           viewAll: View All
@@ -3547,4 +3546,4 @@ features:
         sampleFailure: Failed to retrieve sample data
         success: Success
         undo: Undo
-        workspaceFailure: Failed to create workspace for       
+        workspaceFailure: Failed to create workspace for

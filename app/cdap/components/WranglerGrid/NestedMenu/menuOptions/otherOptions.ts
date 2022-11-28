@@ -21,7 +21,7 @@ const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.o
 export const OTHER_OPTIONS = [
   {
     value: 'define-variable',
-    label: T.translate(`${PREFIX}.defineVarible`).toString(),
+    label: T.translate(`${PREFIX}.defineVariable`).toString(),
     supportedDataType: ['all'],
   },
 ];
