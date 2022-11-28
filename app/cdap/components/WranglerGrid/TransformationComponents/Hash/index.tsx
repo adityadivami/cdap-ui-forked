@@ -22,19 +22,19 @@ import React, { useEffect, useState } from 'react';
 import { HASH_ALGORITHM_OPTIONS } from 'components/WranglerGrid/TransformationComponents/Hash/options';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
 import styled from 'styled-components';
-import { NormalFont } from 'components/common/TypographyText';
+import { SubHeadBoldFont } from 'components/common/TypographyText';
 
 const PREFIX = `features.WranglerNewUI.GridPage.transformationUI.hash`;
 
-interface IParseCSVProps {
-  directiveComponentValues: ITransformationComponentValues;
+interface IHashProps {
+  transformationComponentValues: ITransformationComponentValues;
   setTransformationComponentsValue: React.Dispatch<
     React.SetStateAction<ITransformationComponentValues>
   >;
   functionName: string;
 }
 
-const CustomizedLabel = styled(NormalFont)`
+const CustomizedLabel = styled(SubHeadBoldFont)`
   font-style: normal;
   margin-top: 10px;
   line-height: 150%;
@@ -42,32 +42,36 @@ const CustomizedLabel = styled(NormalFont)`
   margin-bottom: 10px;
 `;
 
-export default function({ setTransformationComponentsValue, functionName }: IParseCSVProps) {
+export default function({
+  setTransformationComponentsValue,
+  functionName,
+  transformationComponentValues,
+}: IHashProps) {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>(
     HASH_ALGORITHM_OPTIONS[0].value
   );
   const [encode, setEncode] = useState<boolean>(false);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({
-      ...prevState,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       hashValue: selectedAlgorithm,
-    }));
+    });
   }, []);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({
-      ...prevState,
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
       hashValue: selectedAlgorithm,
-    }));
+    });
   }, [selectedAlgorithm]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, encode }));
+    setTransformationComponentsValue({ ...transformationComponentValues, encode });
   }, [encode]);
 
   return (
-    <FormGroup>
+    <FormGroup data-testid="hash-container">
       <Box>
         <CustomizedLabel>{T.translate(`${PREFIX}.selectHashAlgorithm`)}</CustomizedLabel>
       </Box>

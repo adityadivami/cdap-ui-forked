@@ -23,12 +23,30 @@ describe('It Should test Hash Component', () => {
       <Hash
         setTransformationComponentsValue={jest.fn()}
         functionName={'hash'}
-        directiveComponentValues={{
+        transformationComponentValues={{
           hashValue: '',
           ignoreCase: false,
           encode: false,
         }}
       />
     );
+    const hashContainer = screen.getByTestId(/hash-container/i);
+    expect(hashContainer).toBeInTheDocument();
+  });
+  it('Should test whether hash-encode-checkbox is checked', () => {
+    render(
+      <Hash
+        setTransformationComponentsValue={jest.fn()}
+        functionName={'hash'}
+        transformationComponentValues={{
+          hashValue: '',
+          ignoreCase: false,
+          encode: false,
+        }}
+      />
+    );
+    const hashEncodeCheckbox = screen.getByTestId(/hash-encode-checkbox/i);
+    fireEvent.click(hashEncodeCheckbox);
+    expect(hashEncodeCheckbox).toBeChecked();
   });
 });
