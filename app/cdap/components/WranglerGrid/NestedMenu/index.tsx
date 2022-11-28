@@ -63,8 +63,8 @@ export default function({
     } else {
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
         let referenceIndex = -1;
-        menuComponentOptions.forEach((menuOptions, menuOptionsIndex) => {
-          menuOptions.forEach((eachOption, optionsIndex) => {
+        menuComponentOptions.forEach((eachMenuOptions, menuOptionsIndex) => {
+          eachMenuOptions.forEach((eachOption, optionsIndex) => {
             if (eachOption.value === menuItem.value) {
               referenceIndex = menuOptionsIndex;
             }
@@ -82,7 +82,7 @@ export default function({
         } else if (anchorElement.includes(event.currentTarget)) {
           const currentTargetIndex = findIndex(
             anchorElement,
-            (anchor) => anchor == event.currentTarget
+            (anchor) => anchor === event.currentTarget
           );
           menuComponentOptions.splice(currentTargetIndex, 0, menuItem?.options);
           setAnchorElement((prev) => prev.slice(0, currentTargetIndex + 1));

@@ -18,85 +18,66 @@ import { ITransformationComponentValues } from 'components/WranglerGrid/AddTrans
 import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 import T from 'i18n-react';
 
+const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels.format';
+
 export const FORMAT_OPTIONS: IMenuItem[] = [
   {
     value: 'uppercase',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.uppercase'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.uppercase`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `uppercase :${selectedColumn}`,
   },
   {
     value: 'lowercase',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.lowercase'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.lowercase`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `lowercase :${selectedColumn}`,
   },
   {
     value: 'titlecase',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.titlecase'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.titlecase`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `titlecase :${selectedColumn}`,
   },
   {
     value: 'concatenate',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.concatenate'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.concatenate`).toString()}`,
     supportedDataType: ['string'],
     directive: (
       selectedColumn: string,
       transformationComponentValues: ITransformationComponentValues
     ) => {
-      if (transformationComponentValues.copyToNewColumn) {
-        const value =
-          transformationComponentValues.radioOption === 'END'
-            ? `${selectedColumn} + '${transformationComponentValues.customInput}'`
-            : `'${transformationComponentValues.customInput}' + ${selectedColumn}`;
-        return `set-column :${transformationComponentValues.copyColumnName} ${value}`;
-      } else {
-        const value =
-          transformationComponentValues.radioOption === 'END'
-            ? `${selectedColumn} + '${transformationComponentValues.customInput}'`
-            : `'${transformationComponentValues.customInput}' + ${selectedColumn}`;
-        return `set-column :${selectedColumn} ${value}`;
-      }
+      const value =
+        transformationComponentValues.radioOption === 'END'
+          ? `${selectedColumn} + '${transformationComponentValues.customInput}'`
+          : `'${transformationComponentValues.customInput}' + ${selectedColumn}`;
+
+      return transformationComponentValues.copyToNewColumn
+        ? `set-column :${transformationComponentValues.copyColumnName} ${value}`
+        : `set-column :${selectedColumn} ${value}`;
     },
   },
   {
     value: 'trim',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.trim'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.trim`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `trim :${selectedColumn}`,
   },
   {
     value: 'ltrim',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.ltrim'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.ltrim`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `ltrim :${selectedColumn}`,
   },
   {
     value: 'rtrim',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.rtrim'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.rtrim`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `rtrim :${selectedColumn}`,
   },
   {
     value: 'dateTime',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.dateTime'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.dateTime`).toString()}`,
     supportedDataType: ['string'],
     directive: (
       selectedColumn: string,
@@ -111,9 +92,7 @@ export const FORMAT_OPTIONS: IMenuItem[] = [
   },
   {
     value: 'dateTimeAsString',
-    label: `${T.translate(
-      'features.WranglerNewUI.GridPage.transformations.options.labels.format.dateTimeAsString'
-    ).toString()}`,
+    label: `${T.translate(`${PREFIX}.dateTimeAsString`).toString()}`,
     supportedDataType: ['string'],
     directive: (
       selectedColumn: string,

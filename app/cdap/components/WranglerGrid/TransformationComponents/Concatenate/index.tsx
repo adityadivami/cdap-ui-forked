@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import {
   FormControl,
   FormControlLabel,
@@ -20,6 +21,7 @@ import {
   Input,
   Radio,
   RadioGroup,
+  Typography,
 } from '@material-ui/core';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import InputCheckbox from 'components/common/TransformationInputComponents/InputCheckbox';
@@ -36,6 +38,18 @@ import {
 } from 'components/WranglerGrid/TransformationComponents/ParseComponents/types';
 import { useStyles } from 'components/WranglerGrid/TransformationComponents/styles';
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
+const FormLabel = styled(Typography)`
+  color: #5f6368;
+  font-size: 14px;
+  font-style: normal;
+  margin-top: 10px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  margin-bottom: 10px;
+`;
 
 export default function({ setTransformationComponentsValue }: ISetTransformationValues) {
   const [placement, setPlacement] = useState<string>('');
@@ -60,9 +74,9 @@ export default function({ setTransformationComponentsValue }: ISetTransformation
   }, [columnName]);
 
   return (
-    <div>
+    <>
       <FormGroup>
-        <div className={classes.formLabelStyles}>{ADD}</div>
+        <FormLabel>{ADD}</FormLabel>
         <FormControl>
           <FormControlLabel
             value={stringValue}
@@ -125,6 +139,6 @@ export default function({ setTransformationComponentsValue }: ISetTransformation
           />
         </FormGroup>
       )}
-    </div>
+    </>
   );
 }
