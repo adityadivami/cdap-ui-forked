@@ -32,4 +32,3 @@ Feature: HashTransformation
     Then Select value from the Hash algorithm
     Then Click on the Checkbox Encode
     Then Click on the Apply Step button
-
