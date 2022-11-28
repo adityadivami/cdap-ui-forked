@@ -19,7 +19,7 @@ Feature: SetCounter
 
   @SetCounter
   Scenario: Go through the Set Counter functionality
-    Given Navigate to Home Page of Wrangle
+    Given Navigate to Home Page of Wrangle for Define
     Then Click on the Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
     Then Click on the Other icon
@@ -29,9 +29,5 @@ Feature: SetCounter
     Then Click on the radio button of any column
     Then Click on the Done button
     Then Click on the Set variable Name and enter the name
-    Then Click on the Select row where dropdown
-    Then Select the value from the dropdown
-    Then Click and Enter the name in the enter value field
-    Then Click on the Select column in selected row dropdown
-    Then Select row from the dropdown
+    Then Click and Enter the name in the enter value field "helllo."
     Then Click on the Apply Step button

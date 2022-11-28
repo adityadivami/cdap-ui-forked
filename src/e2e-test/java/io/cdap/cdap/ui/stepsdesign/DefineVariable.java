@@ -29,8 +29,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 public class DefineVariable {
-    @Given("Navigate to Home Page of Wrangle")
-    public void navigateToTheHomePage() {
+    @Given("Navigate to Home Page of Wrangle for Define")
+    public void navigateToTheHomePageDefine() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
@@ -140,7 +140,8 @@ public class DefineVariable {
         try {
             WaitHelper.waitForPageToLoad();
             WebElement value = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div[@data-testid='variable-name-input']"));
+                    .findElement(By.xpath
+            ("//div[@data-testid='variable-name-input']//input[@placeholder='Enter variable name']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             value.click();
             value.sendKeys("hang");
@@ -149,68 +150,15 @@ public class DefineVariable {
         }
     }
 
-    @Then("Click on the Select row where dropdown")
-    public void clickOnTheSelectRowWhereDropdown() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            WebElement value = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div//li[@data-testid='select-input-root-define-variable']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", value);
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
-    @Then("Select the value from the dropdown")
-    public void SelectTheValueFromDropdown() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            WebElement value = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div//li[@data-testid='select-option-list-1']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", value);
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
-    @Then("Click and Enter the name in the enter value field")
-    public void clickAndEnterTheNameInTheEnterValueField() {
+    @Then("Click and Enter the name in the enter value field {string}")
+    public void clickAndEnterTheNameInTheEnterValueField(String value) {
         try {
             WaitHelper.waitForPageToLoad();
             WebElement name = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div[@data-testid='custom-input']"));
-            Assert.assertTrue(ElementHelper.isElementDisplayed(name));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", name);
-            name.sendKeys("x");
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
-    @Then("Click on the Select column in selected row dropdown")
-    public void clickOnTheSelectColumnInSelectedRowDropdown() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            WebElement value = SeleniumDriver.getDriver()
-                    .findElement(By.cssSelector("//div[@data-testid='select-input-root-define-varibale-columnlist']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", value);
-        } catch (Exception e) {
-            System.err.println("error:" + e);
-        }
-    }
-
-    @Then("Select row from the dropdown")
-    public void selectRowFromTheDropdown() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            WebElement value = SeleniumDriver.getDriver()
-                    .findElement(By.cssSelector("//div//li[@data-testid='sselect-option-list-2']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", value);
+                    .findElement(By.xpath
+                   ("//div[@data-testid='custom-input']//input[@placeholder='Enter value']"));
+            ElementHelper.clickOnElement(name);
+            name.sendKeys(value);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
