@@ -27,12 +27,13 @@ describe('Test TransformationComponents', () => {
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{
           customInput: '',
-          ignoreCase: false,
-          filterOptionSelected: '',
-          filterOptionValue: '',
-          filterRadioOption: '',
+          radioOption: 'string',
+          columnNames: [],
+          firstColumn: 'string',
+          secondColumn: 'string',
+          copyColumnName: 'string',
         }}
-        transformationName={'filter'}
+        transformationName={'join-columns'}
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}

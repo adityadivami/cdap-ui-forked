@@ -138,7 +138,9 @@ export default function({ setTransformationComponentsValue, transformationCompon
 
   return (
     <Wrapper>
-      <SubHeadBoldFont>{T.translate(`${PREFIX}.setOrder`)}</SubHeadBoldFont>
+      <SubHeadBoldFont data-testid="join-column-head-font">
+        {T.translate(`${PREFIX}.setOrder`)}
+      </SubHeadBoldFont>
       <FormInputFieldComponent
         formInputValue={firstColumn}
         inputProps={{
@@ -149,7 +151,7 @@ export default function({ setTransformationComponentsValue, transformationCompon
           disabled: true,
         }}
       />
-      <SwapIconWrapper onClick={handleChange}>
+      <SwapIconWrapper onClick={handleChange} data-testid="join-column-swap-icon-wrapper">
         <SwapVertIcon />
       </SwapIconWrapper>
       <FormInputFieldComponent
@@ -163,7 +165,9 @@ export default function({ setTransformationComponentsValue, transformationCompon
         }}
       />
       <Wrapper>
-        <SubHeadBoldFont>{T.translate(`${PREFIX}.chooseDelimiter`)}</SubHeadBoldFont>
+        <SubHeadBoldFont data-testid="join-column-sub-head">
+          {T.translate(`${PREFIX}.chooseDelimiter`)}
+        </SubHeadBoldFont>
         <InputRadioWithCustomInputComponent
           options={JOIN_COLUMN_OPTIONS}
           radioValue={selectedParseType}
