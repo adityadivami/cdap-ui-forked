@@ -29,6 +29,7 @@ interface IInput {
   color: 'primary' | 'secondary';
   placeholder: string;
   inputProps?: IInputProps;
+  'data-testid': string;
 }
 
 interface IFormInputFieldComponentProps {

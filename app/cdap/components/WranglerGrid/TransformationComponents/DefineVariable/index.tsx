@@ -54,7 +54,7 @@ export default function({
 }: IDefineVariableProps) {
   const [filterCondition, setFilterCondition] = useState(DEFINE_VARIABLE_OPTIONS[0].value);
   const [variableName, setVariableName] = useState('');
-  const [columnSelected, setColumnSelected] = useState('');
+  const [columnSelected, setColumnSelected] = useState(columnsList[0].label);
   const [customInput, setCustomInput] = useState('');
   const [newColumnList, setNewColumnList] = useState<INewColumnList[]>([]);
   const [valueLabel, setValueLabel] = useState(DEFINE_VARIABLE_OPTIONS[0].label);
@@ -124,6 +124,7 @@ export default function({
             onChange: (e) => setVariableName(e.target.value),
             color: 'primary',
             placeholder: 'Enter variable name',
+            'data-testid': 'variable-name-input',
           }}
         />
       </FormGroup>
@@ -137,7 +138,7 @@ export default function({
             setOptionSelected={setFilterCondition}
             options={DEFINE_VARIABLE_OPTIONS}
             checkboxLabel={T.translate(`${PREFIX}.encode`).toString()}
-            transformation={'define-varibale'}
+            transformation={'define-variable'}
           />
         </FormControl>
         <FormInputFieldComponent
@@ -148,6 +149,7 @@ export default function({
             onChange: (e) => setCustomInput(e.target.value),
             color: 'primary',
             placeholder: FILTER_PLACEHOLDER[filterCondition],
+            'data-testid': 'custom-input',
           }}
         />
       </FormGroup>
