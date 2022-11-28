@@ -293,7 +293,9 @@ export default function GridTable() {
         });
         setSnackbarIsOpen(true);
         setSnackbarData({
-          description: 'Directive applied successfully',
+          description: T.translate(
+            'features.WranglerNewUI.GridPage.addTransformationPanel.directiveSuccessSnackbarDescription'
+          ).toString(),
           isSuccess: true,
         });
         setLoading(false);
@@ -307,7 +309,9 @@ export default function GridTable() {
         setLoading(false);
         setSnackbarIsOpen(true);
         setSnackbarData({
-          description: 'Directive cannot applied',
+          description: T.translate(
+            'features.WranglerNewUI.GridPage.addTransformationPanel.directiveFailureSnackbarDescription'
+          ).toString(),
           isSuccess: false,
         });
         setAddTransformationFunction({

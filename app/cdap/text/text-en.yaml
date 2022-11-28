@@ -3517,6 +3517,8 @@ features:
         selectColumnPara: Select column(s) to apply this function
         selectColumn: Select column
         selectMultiColumns: Select columns
+        directiveSuccessSnackbarDescription: Directive applied successfully
+        directiveFailureSnackbarDescription: Directive cannot applied
       selectColumnListPanel:
         columnsSelected: column selected
         no: No
