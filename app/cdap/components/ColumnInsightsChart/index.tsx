@@ -18,7 +18,8 @@ import { Box, IconButton, Modal } from '@material-ui/core';
 import * as React from 'react';
 import styled from 'styled-components';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
-import BarChart from 'react-bar-chart';
+// import BarChart from 'react-bar-chart';
+import BarChart from 'react-easy-bar-chart';
 import blue from '@material-ui/core/colors/blue';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import T from 'i18n-react';
@@ -69,12 +70,21 @@ const DistributionData = styled(Box)`
 
 const GraphContainer = styled(Box)`
   overflow-x: scroll;
-  & .axis {
-    display: none;
+  & .y-axis {
+    margin-top: 0 !important;
+    display: block;
+    float: inherit;
   }
-
+  & .bar-list {
+    margin-bottom: 0 !important;
+    border-bottom: none;
+    border-left: none;
+  }
+  & .bar:hover .bar-hovertext {
+    display: none !important;
+  }
   & .bar {
-    fill: ${blue[500]};
+    background: ${blue[500]};
     width: 40px !important;
   }
 `;
@@ -89,8 +99,8 @@ export default function({
   const handleClose = () => setOpen(false);
 
   const barChartProps = {
-    width: 72 * distinctValues,
-    height: 200,
+    width: distinctValues,
+    height: 150,
   };
 
   return (
@@ -116,7 +126,14 @@ export default function({
           </RenderLabel>
         </DistributionData>
         <GraphContainer>
-          <BarChart ylabel={`${PREFIX}.barChartYLabel`} {...barChartProps} data={graphData} />
+          {/* <BarChart ylabel={`${PREFIX}.barChartYLabel`} data={graphData} {...barChartProps} /> */}
+          <BarChart
+            yAxis={`${T.translate(`${PREFIX}.barChartYLabel`)}`}
+            // height={400}
+            // width={800}
+            data={graphData}
+            {...barChartProps}
+          />
         </GraphContainer>
       </CustomizedModalContent>
     </Modal>

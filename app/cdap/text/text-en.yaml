@@ -3477,4 +3477,5 @@ features:
       distribution: Distribution
       columnName: "Column Name:"
       distinct: "Distinct:"
+      barChartYLabel: Quantity
 ...
