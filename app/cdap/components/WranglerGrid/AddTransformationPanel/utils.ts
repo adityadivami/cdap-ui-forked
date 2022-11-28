@@ -71,7 +71,7 @@ export const applyButtonEnabled = (
     } else {
       return false;
     }
-  } else if(functionName === 'extract-using-patterns'){
+  } else if (functionName === 'extract-using-patterns') {
     if (transformationComponentValues.extractOptionSelected == '') {
       return true;
     } else if (
@@ -79,9 +79,10 @@ export const applyButtonEnabled = (
       transformationComponentValues.nDigit === ''
     ) {
       return true;
-    }  else if (
+    } else if (
       transformationComponentValues.extractOptionSelected === 'startend' &&
-      (transformationComponentValues.startValue === '' || transformationComponentValues.endValue === '')
+      (transformationComponentValues.startValue === '' ||
+        transformationComponentValues.endValue === '')
     ) {
       return true;
     } else if (
