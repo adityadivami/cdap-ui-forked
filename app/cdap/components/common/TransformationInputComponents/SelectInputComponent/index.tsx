@@ -43,7 +43,7 @@ interface ISelectColumnProps {
 
 const SelectFormControlWrapper = styled(FormControl)`
   width: calc(100% - 60px);
-  margin: 0 60px 5px 0;
+  margin: 0 60px 14px 0;
   border: 1px solid #dadce0;
   height: 40px;
   padding: 5px 15px;

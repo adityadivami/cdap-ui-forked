@@ -19,6 +19,7 @@ import React, { useState, useEffect } from 'react';
 import FormInputFieldComponent from 'components/common/TransformationInputComponents/FormInputFieldComponent';
 import SelectInputComponent from 'components/common/TransformationInputComponents/SelectInputComponent';
 import { SubHeadBoldFont } from 'components/common/TypographyText';
+import styled from 'styled-components';
 import { ITransformationComponentValues } from 'components/WranglerGrid/AddTransformationPanel/types';
 import T from 'i18n-react';
 
@@ -43,6 +44,10 @@ const SET_COUNTER_OPTION = [
     isInputRequired: true,
   },
 ];
+
+const TransformationActionFieldWrapper = styled.div`
+  padding-top: 15px;
+`;
 
 export default function({
   setTransformationComponentsValue,
@@ -101,7 +106,7 @@ export default function({
   }, [counterName]);
 
   return (
-    <div>
+    <TransformationActionFieldWrapper>
       <SubHeadBoldFont data-testid="set-counter-sub-head">
         {T.translate(`${PREFIX}.selectActionToTake`)}
       </SubHeadBoldFont>
@@ -147,6 +152,6 @@ export default function({
           }}
         />
       </FormGroup>
-    </div>
+    </TransformationActionFieldWrapper>
   );
 }
