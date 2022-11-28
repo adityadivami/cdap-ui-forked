@@ -25,13 +25,7 @@ describe('Test TransformationComponents', () => {
       <TransformationComponents
         setTransformationComponentsValue={jest.fn()}
         transformationComponent={TRANSFORMATION_COMPONENTS}
-        transformationComponentValues={{
-          customInput: '',
-          ignoreCase: false,
-          filterOptionSelected: '',
-          filterOptionValue: '',
-          filterRadioOption: '',
-        }}
+        transformationComponentValues={{}}
         transformationName={'send-to-error'}
         transformationDataType={[]}
         columnsList={[]}

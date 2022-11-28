@@ -17,7 +17,17 @@
 import { IStatistics } from 'components/GridTable/types';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
-export interface ITransformationComponentValues {}
+export interface ITransformationComponentValues {
+  variableName: string;
+  customInput: string;
+  selectedColumnForDefineVariable: string;
+  filterCondition: string;
+  selectedColumn: {
+    name: string;
+    label: string;
+    type: string[];
+  };
+}
 
 export interface IAddTransformationProps {
   transformationDataType: string[];

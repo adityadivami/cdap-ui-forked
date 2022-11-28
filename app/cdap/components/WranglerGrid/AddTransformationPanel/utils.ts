@@ -24,8 +24,55 @@ export const getDirective = (
 ) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
-  } // fix
-  else {
+  } else if (functionName === 'define-variable') {
+    const defineVaribaleDirective = prepareDirectiveForDefineVariable(
+      transformationComponentValues.variableName,
+      transformationComponentValues.customInput,
+      transformationComponentValues.selectedColumnForDefineVariable,
+      transformationComponentValues.filterCondition,
+      transformationComponentValues[0].label
+    );
+
+    return defineVaribaleDirective;
+  } else {
     return null;
   }
+};
+
+export const prepareDirectiveForDefineVariable = (
+  variableValue,
+  customInput,
+  selectedColumnForDefineVariable,
+  selectedAction,
+  columnSelected
+) => {
+  const condition = 'set-variable';
+  const column = columnSelected;
+  const textValue = customInput;
+  const variableName = variableValue;
+  const selectedColumn = selectedColumnForDefineVariable;
+  let directive;
+  const selectedCondition = selectedAction;
+  if (!textValue || !variableName) {
+    return;
+  }
+
+  switch (selectedCondition) {
+    case 'TEXTSTARTSWITH':
+      directive = `${condition} ${variableName} ${column} =^ "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTENDSWITH':
+      directive = `${condition} ${variableName} ${column} =$ "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTEXACTLY':
+      directive = `${condition} ${variableName} ${column} == "${textValue}" ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'TEXTREGEX':
+      directive = `${condition} ${variableName} ${column} =~ ${textValue} ? ${selectedColumn} : ${variableName}`;
+      break;
+    case 'CUSTOMCONDITION':
+      directive = `${condition} ${variableName} ${textValue} ? ${selectedColumn} : ${variableName}`;
+      break;
+  }
+  return directive;
 };
