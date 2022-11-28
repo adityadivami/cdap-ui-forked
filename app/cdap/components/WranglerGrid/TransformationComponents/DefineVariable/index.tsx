@@ -52,11 +52,12 @@ export default function({
   transformationComponentValues,
   columnsList,
 }: IDefineVariableProps) {
-  const [filterCondition, setFilterCondition] = useState('TEXTEXACTLY');
+  const [filterCondition, setFilterCondition] = useState(DEFINE_VARIABLE_OPTIONS[0].value);
   const [variableName, setVariableName] = useState('');
   const [columnSelected, setColumnSelected] = useState('');
   const [customInput, setCustomInput] = useState('');
   const [newColumnList, setNewColumnList] = useState<INewColumnList[]>([]);
+  const [valueLabel, setValueLabel] = useState(DEFINE_VARIABLE_OPTIONS[0].label);
 
   useEffect(() => {
     const updatedColumnList = [];
@@ -83,6 +84,9 @@ export default function({
       ...transformationComponentValues,
       filterCondition,
     });
+
+    const value = DEFINE_VARIABLE_OPTIONS.filter((element) => element.value === filterCondition);
+    setValueLabel(value[0]?.label);
   }, [filterCondition]);
 
   useEffect(() => {
@@ -153,7 +157,7 @@ export default function({
         </CustomizedBox>
         <FormControl>
           <SelectInputComponent
-            optionSelected={columnsList[0].label}
+            optionSelected={columnSelected}
             setOptionSelected={setColumnSelected}
             options={newColumnList}
             checkboxLabel={T.translate(`${PREFIX}.encode`).toString()}
@@ -166,7 +170,7 @@ export default function({
         customInput &&
         variableName && (
           <CustomizedBox>
-            <NormalFont>{`Summary: you defined the variable "${variableName}" for the cell in column ${columnSelected} in the row which ${filterCondition} ${customInput} in column "${transformationComponentValues.selectedColumn}"`}</NormalFont>
+            <NormalFont>{`Summary: you defined the variable "${variableName}" for the cell in column ${columnSelected} in the row which ${valueLabel} ${customInput} in column "${transformationComponentValues.selectedColumn}"`}</NormalFont>
           </CustomizedBox>
         )}
     </div>
