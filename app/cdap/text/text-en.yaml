@@ -3517,8 +3517,13 @@ features:
           selectRowWhere: Select row where
           selectColumnSelectedRow: Select column in selected row 
           defineVariableOptions: 
-	            valueIs:  
-    HomePage:
+          
+            valueIs: value is
+            valueStartsWith: value starts with
+            valueEndsWith: value ends with
+            valueContainsRegex: value contains regex
+            customCondition: custom condition
+	  HomePage:
       labels:
         common:
           viewAll: View All

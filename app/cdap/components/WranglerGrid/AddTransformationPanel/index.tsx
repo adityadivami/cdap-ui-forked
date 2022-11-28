@@ -55,7 +55,6 @@ const transformationComponentDefaultValues = {
   selectedColumnForDefineVariable: '',
   filterCondition: 'TEXTEXACTLY',
   selectedColumn: '',
-  columnList: [],
 };
 
 export default function({

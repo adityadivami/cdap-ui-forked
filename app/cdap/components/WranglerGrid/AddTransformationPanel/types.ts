@@ -23,7 +23,6 @@ export interface ITransformationComponentValues {
   selectedColumnForDefineVariable: string;
   filterCondition: string;
   selectedColumn: string;
-  columnList;
 }
 
 export interface IAddTransformationProps {

@@ -97,7 +97,9 @@ export default function({
   return (
     <div>
       <FormGroup>
-        <div>{<Typography>{T.translate(`${PREFIX}.setVariableName`)}</Typography>}</div>
+        <div>
+          <Typography>{T.translate(`${PREFIX}.setVariableName`)}</Typography>
+        </div>
         <FormInputFieldComponent
           formInputValue={variableName}
           inputProps={{

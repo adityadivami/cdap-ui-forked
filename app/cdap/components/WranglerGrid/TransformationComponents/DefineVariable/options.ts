@@ -14,25 +14,29 @@
  * the License.
  */
 
+const PREFIX =
+  'features.WranglerNewUI.GridPage.transformationUI.defineVariable.defineVariableOptions';
+import T from 'i18n-react';
+
 export const DEFINE_VARIABLE_OPTIONS = [
   {
-    label: 'value is',
+    label: T.translate(`${PREFIX}.valueIs`).toString(),
     value: 'TEXTEXACTLY',
   },
   {
-    label: 'value starts with',
+    label: T.translate(`${PREFIX}.valuevalueStartsWithIs`).toString(),
     value: 'TEXTSTARTSWITH',
   },
   {
-    label: 'value ends with',
+    label: T.translate(`${PREFIX}.valueEndsWith`).toString(),
     value: 'TEXTENDSWITH',
   },
   {
-    label: 'value contains regex',
+    label: T.translate(`${PREFIX}.valueContainsRegex`).toString(),
     value: 'TEXTREGEX',
   },
   {
-    label: 'custom condition',
+    label: T.translate(`${PREFIX}.customCondition`).toString(),
     value: 'CUSTOMCONDITION',
   },
 ];

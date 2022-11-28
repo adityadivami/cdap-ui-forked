@@ -25,8 +25,14 @@ describe('Test TransformationComponents', () => {
       <TransformationComponents
         setTransformationComponentsValue={jest.fn()}
         transformationComponent={TRANSFORMATION_COMPONENTS}
-        transformationComponentValues={{}}
-        transformationName={'send-to-error'}
+        transformationComponentValues={{
+          variableName: '',
+          customInput: '',
+          selectedColumnForDefineVariable: '',
+          filterCondition: 'TEXTEXACTLY',
+          selectedColumn: '',
+        }}
+        transformationName={'define-variable'}
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}
