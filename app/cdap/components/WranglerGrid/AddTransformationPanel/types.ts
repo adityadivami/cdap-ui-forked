@@ -42,5 +42,5 @@ export interface IMenuOption {
   value: string;
   label: string;
   supportedDataType: string[]; // TODO: As supported_dataType is used in multiple places, we should change it to supportedDataType(camelcase) in transformation toolbox feature
-  directive?: (stringValue, ITransformationComponentValues) => string;
+  directive?: (string, ITransformationComponentValues) => string;
 }

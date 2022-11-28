@@ -36,7 +36,7 @@ export interface IMenuItem {
   icon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
   toolName?: string;
   open?: boolean;
-  directive?: (stringValue, ITransformationComponentValues?) => string;
+  directive?: (string, ITransformationComponentValues?) => string;
 }
 
 export interface IMenuItemComponentProps {

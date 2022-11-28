@@ -39,17 +39,6 @@ export const useStyles = makeStyles(() => {
       width: '100%',
       marginBottom: 0,
     },
-    formFieldStyles: {
-      width: 'calc(100% - 60px)',
-      marginRight: '60px',
-      border: '1px solid #DADCE0',
-      height: '40px',
-      padding: '5px 15px',
-      fontSize: '14px',
-      background: '#FFFFFF',
-      borderRadius: '4px',
-      marginLeft: 0,
-    },
     underlineStyles: {
       width: '100%',
       '&:before': {
@@ -73,16 +62,6 @@ export const useStyles = makeStyles(() => {
     },
     formGroupStyles: {
       width: 'calc(100% - 60px)',
-    },
-    formLabelStyles: {
-      color: '#5F6368',
-      fontSize: '14px',
-      fontStyle: 'normal',
-      marginTop: '10px',
-      fontWeight: 400,
-      lineHeight: '150%',
-      letterSpacing: '0.15px',
-      marginBottom: '10px',
     },
     selectBootstrapInput: {
       width: '87%',
