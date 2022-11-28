@@ -18,7 +18,6 @@ import { Box, IconButton, Modal } from '@material-ui/core';
 import * as React from 'react';
 import styled from 'styled-components';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
-// import BarChart from 'react-bar-chart';
 import BarChart from 'react-easy-bar-chart';
 import blue from '@material-ui/core/colors/blue';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
@@ -127,11 +126,8 @@ export default function({
           </RenderLabel>
         </DistributionData>
         <GraphContainer>
-          {/* <BarChart ylabel={`${PREFIX}.barChartYLabel`} data={graphData} {...barChartProps} /> */}
           <BarChart
             yAxis={`${T.translate(`${PREFIX}.barChartYLabel`)}`}
-            // height={400}
-            // width={800}
             data={graphData}
             {...barChartProps}
           />
