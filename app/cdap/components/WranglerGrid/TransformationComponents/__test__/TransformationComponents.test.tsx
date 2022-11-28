@@ -26,13 +26,12 @@ describe('Test TransformationComponents', () => {
         setTransformationComponentsValue={jest.fn()}
         transformationComponent={TRANSFORMATION_COMPONENTS}
         transformationComponentValues={{
-          customInput: '',
-          ignoreCase: false,
-          filterOptionSelected: '',
-          filterOptionValue: '',
-          filterRadioOption: '',
+          filterConditionValue: 'string',
+          filterCondition: 'string',
+          counterName: 'string',
+          counter: 'string',
         }}
-        transformationName={'send-to-error'}
+        transformationName={'set-counter'}
         transformationDataType={[]}
         columnsList={[]}
         missingItemsList={{}}
