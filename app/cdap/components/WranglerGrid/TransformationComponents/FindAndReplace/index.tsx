@@ -90,7 +90,7 @@ export default function({
             value: oldValue,
             onChange: (e) => setOldValue(e.target.value),
             color: 'primary',
-            placeholder: T.translate(`.oldValue`) as string,
+            placeholder: T.translate(`${PREFIX}.oldValue`) as string,
             'data-testid': 'old-value-input-form',
           }}
         />
