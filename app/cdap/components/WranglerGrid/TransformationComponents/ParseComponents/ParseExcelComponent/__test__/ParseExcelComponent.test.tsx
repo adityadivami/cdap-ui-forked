@@ -22,7 +22,7 @@ describe('It should test ParseExcelComponent', () => {
   it('Should render ParseExcelComponent', () => {
     render(
       <ParseExcelComponent
-        setTransformationComponentsValue={jest.fn(([]) => null)}
+        setTransformationComponentsValue={jest.fn(() => null)}
         transformationComponentValues={{
           radioOption: 'string',
           copyColumnName: 'string',

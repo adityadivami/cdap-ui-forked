@@ -51,32 +51,47 @@ const FormLabel = styled(Typography)`
   margin-bottom: 10px;
 `;
 
-export default function({ setTransformationComponentsValue }: ISetTransformationValues) {
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
+}: ISetTransformationValues) {
   const [placement, setPlacement] = useState<string>('');
   const [stringValue, setStringValue] = useState<string>('');
   const [copy, setCopy] = useState<boolean>(false);
   const [columnName, setColumnName] = useState<string>('');
   const classes = useStyles();
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, radioOption: placement }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      radioOption: placement,
+    });
   }, [placement]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, customInput: stringValue }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      customInput: stringValue,
+    });
   }, [stringValue]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, copyToNewColumn: copy }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      copyToNewColumn: copy,
+    });
   }, [copy]);
 
   useEffect(() => {
-    setTransformationComponentsValue((prevState) => ({ ...prevState, copyColumnName: columnName }));
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      copyColumnName: columnName,
+    });
   }, [columnName]);
 
   return (
     <>
       <FormGroup>
-        <FormLabel>{ADD}</FormLabel>
+        <FormLabel data-testid="concentrate-form-label">{ADD}</FormLabel>
         <FormControl>
           <FormControlLabel
             value={stringValue}
@@ -94,6 +109,7 @@ export default function({ setTransformationComponentsValue }: ISetTransformation
                 }
                 color="primary"
                 placeholder={ENTER_STRING}
+                data-testid="concentrate-input-text"
               />
             }
             label={''}
@@ -102,6 +118,7 @@ export default function({ setTransformationComponentsValue }: ISetTransformation
             name="actions"
             value={placement}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPlacement(e.target.value)}
+            data-testid="concentrate-radio-group"
           >
             {CONCATENATE_OPTIONS.map((eachRadio: ISubMenuOption) => (
               <FormControlLabel
