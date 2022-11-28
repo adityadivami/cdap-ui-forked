@@ -28,7 +28,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
-
 public class Hash {
     @Given("Navigate to Home Page")
     public void navigateToHomePage() {
@@ -67,7 +66,6 @@ public class Hash {
         }
     }
 
-
     @Then("Click on Security icon")
     public void clickOnSecurityIcon() {
         try {
@@ -96,7 +94,8 @@ public class Hash {
     public void verifyIfTheUserIsOnTheAddTransformationStepPanel() {
         try {
             WaitHelper.waitForPageToLoad();
-            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("add-transformation-drawer")));
+            Assert.assertTrue(
+                    ElementHelper.isElementDisplayed(Helper.locateElementByTestId("add-transformation-drawer")));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -127,7 +126,8 @@ public class Hash {
         try {
             WaitHelper.waitForPageToLoad();
             WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("button_done"));
-            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath("//*[@data-testid='button_done']"));
+            WebElement ele = SeleniumDriver.getDriver().findElement(
+                    By.xpath("//*[@data-testid='button_done']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
@@ -139,9 +139,9 @@ public class Hash {
     public void clickOnHashAlgorithmFromDropdown() {
         try {
             WaitHelper.waitForPageToLoad();
-            WebElement ele = SeleniumDriver.getDriver().findElement(By.xpath
-                    ("//div[@data-testid='select-input-root']"));
-            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            WebElement ele = SeleniumDriver.getDriver()
+                    .findElement(By.xpath("//div[@data-testid='select-input-root']"));
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
             System.err.println("error:" + e);
@@ -152,9 +152,9 @@ public class Hash {
     public void selectValueFromTheHashAlgorithm() {
         try {
             WaitHelper.waitForPageToLoad();
-            WebElement element = SeleniumDriver.getDriver().findElement(By.xpath
-                    ("//div[@data-testid='select-option-list-21']"));
-            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            WebElement element = SeleniumDriver.getDriver()
+                    .findElement(By.xpath("//div[@data-testid='select-option-list-21']"));
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", element);
         } catch (Exception e) {
             System.err.println("error:" + e);
@@ -176,7 +176,7 @@ public class Hash {
         try {
             WaitHelper.waitForPageToLoad();
             WebElement element = Helper.locateElementByTestId("apply-step-button");
-            JavascriptExecutor executor = (JavascriptExecutor)SeleniumDriver.getDriver();
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", element);
         } catch (Exception e) {
             System.err.println("error:" + e);
