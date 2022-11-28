@@ -29,8 +29,8 @@ export default function GridTextCell({
   cancelTransformation,
   optionSelected,
   headers,
+  cellIndex,
 }: IGridTextCellProps) {
-  console.log('maskSelection', maskSelection);
   const classes = useGridTextCellStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [textSelectionRange, setTextSelectionRange] = useState({
@@ -84,6 +84,7 @@ export default function GridTextCell({
             : classes.tableRowCell
         }
         onMouseUp={mouseUpHandler}
+        data-testid={`grid-cellData-${cellIndex}`}
       >
         <Card
           className={maskSelection ? `${classes.root} ${classes.highlightedColumn}` : classes.root}
@@ -91,7 +92,7 @@ export default function GridTextCell({
         >
           <Typography
             className={maskSelection ? classes.highlightCell : classes.cell}
-            data-testid={`grid-text-cell-${cellValue}`}
+            data-testid={`grid-text-cell-${cellIndex}`}
           >
             {cellValue}
           </Typography>

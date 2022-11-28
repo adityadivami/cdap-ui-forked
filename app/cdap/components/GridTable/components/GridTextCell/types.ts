@@ -23,4 +23,5 @@ export interface IGridTextCellProps {
   cancelTransformation?: () => void;
   optionSelected?: string;
   headers: string[];
+  cellIndex: string | number;
 }

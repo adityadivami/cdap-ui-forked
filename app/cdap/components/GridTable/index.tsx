@@ -388,6 +388,7 @@ export default function GridTable() {
                             setMaskSelection(false);
                           }}
                           headers={headersNamesList.map(({ label }) => label)}
+                          cellIndex={`${rowIndex}${eachIndex}`}
                         />
                       );
                     })}
