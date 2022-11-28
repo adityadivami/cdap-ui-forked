@@ -39,7 +39,7 @@ public class Hash {
     public void dataExplorationsCard() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-exploration-card-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         } catch (Exception e) {
@@ -152,10 +152,12 @@ public class Hash {
     public void selectValueFromTheHashAlgorithm() {
         try {
             WaitHelper.waitForPageToLoad();
+            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("select-filter-paper"));
             WebElement element = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//div[@data-testid='select-option-list-21']"));
+                    .findElement(By.xpath("//div//li[@data-testid='select-option-list-17']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", element);
+            // ElementHelper.clickOnElement(Helper.locateElementByTestId("select-option-list-17"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
