@@ -97,6 +97,12 @@ export default function({
           inputProps={{
             'data-testid': 'select-filter-option',
           }}
+          MenuProps={{
+            'data-testid': 'select-filter-pop-up',
+            PaperProps: {
+              'data-testid': 'select-filter-paper',
+            },
+          }}
         >
           {options?.length > 0 &&
             options.map((optionItem, optionIndex) => (
