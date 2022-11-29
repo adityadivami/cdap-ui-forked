@@ -74,14 +74,17 @@ const GraphContainer = styled(Box)`
   overflow-x: scroll;
   padding-left: 10px;
   & .bar {
+    fill: ${blue[500]} !important;
     background: ${blue[500]} !important;
     width: 40px !important;
   }
   &:hover .bar {
+    fill: ${blue[500]} !important;
     background: ${blue[500]} !important;
     opacity: 0.5 !important;
   }
   & .bar:hover {
+    fill: ${blue[500]} !important;
     background: ${blue[500]} !important;
     opacity: 1 !important;
   }
