@@ -21,7 +21,9 @@ import styled from 'styled-components';
 
 const PopoverComponent = styled(Popover)`
   & .MuiPopover-paper {
-    width: 150px;
+    width: 10%;
+    border: 1px solid #e0e0e0;
+    box-shadow: 3px 4px 15px rgba(33, 150, 243, 0.15);
   }
 `;
 
@@ -70,7 +72,7 @@ export default function({ open, setZoomPercent, anchorEl }) {
         horizontal: 'left',
       }}
     >
-      {ZOOM_OPTIONS.map((eachOption, optionIndex) => {
+      {ZOOM_OPTIONS.reverse().map((eachOption, optionIndex) => {
         return (
           <MenuItem value={eachOption.value} onClick={() => setZoomPercent(eachOption.value)}>
             {eachOption.label}
