@@ -51,8 +51,8 @@ describe('It Should test ColumnInsightsChart Component', () => {
         distinctValues={5}
       />
     );
-    const viewFullChartModal = screen.getByTestId(/view-full-chart-modal/i);
-    expect(viewFullChartModal).toBeInTheDocument();
+    const viewFullChartModal = screen.getAllByTestId(/view-full-chart-modal/i);
+    expect(viewFullChartModal[0]).toBeInTheDocument();
   });
 
   it('should test whether the distribution Label is as expected', () => {
@@ -100,9 +100,10 @@ describe('It Should test ColumnInsightsChart Component', () => {
         distinctValues={5}
       />
     );
-    const viewFullChartModal = screen.getByTestId(/view-full-chart-modal/i);
-    expect(viewFullChartModal).toBeInTheDocument();
+    const viewFullChartModal = screen.getAllByTestId(/view-full-chart-modal/i);
+    expect(viewFullChartModal[0]).toBeInTheDocument();
     const closeIcon = screen.getByTestId(/close-icon-button/i);
     fireEvent.click(closeIcon);
+    expect(closeIcon).toBeInTheDocument()
   });
 });
