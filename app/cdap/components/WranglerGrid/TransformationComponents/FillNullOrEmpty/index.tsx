@@ -22,42 +22,50 @@ import styled from 'styled-components';
 import T from 'i18n-react';
 
 const Wrapper = styled(Box)`
-    margin-top: 20px;
+  margin-top: 20px;
 `;
 
 interface IFillNullOrEmptyProps {
-    setTransformationComponentsValue: React.Dispatch<
-        React.SetStateAction<ITransformationComponentValues>
-    >;
-    transformationComponentValues: ITransformationComponentValues;
+  setTransformationComponentsValue: React.Dispatch<
+    React.SetStateAction<ITransformationComponentValues>
+  >;
+  transformationComponentValues: ITransformationComponentValues;
 }
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.fillNullOrEmpty'
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.fillNullOrEmpty';
 
-export default function ({
-    setTransformationComponentsValue,
-    transformationComponentValues
+export default function({
+  setTransformationComponentsValue,
+  transformationComponentValues,
 }: IFillNullOrEmptyProps) {
+  const [replaceValue, setReplaceValue] = useState('');
 
-    const [replaceValue, setReplaceValue] = useState('');
+  useEffect(() => {
+    setTransformationComponentsValue({
+      ...transformationComponentValues,
+      customInput: replaceValue,
+    });
+  }, [replaceValue]);
 
-    useEffect(() => {
-        setTransformationComponentsValue({ ...transformationComponentValues, customInput: replaceValue });
-    }, [replaceValue]);
-
-    return (
-        <Wrapper>
-            <SubHeadBoldFont data-testid='null-empty-sub-header'>{T.translate(`${PREFIX}.fillNullEmpty`)}</SubHeadBoldFont>
-            <FormInputFieldComponent
-                formInputValue={replaceValue}
-                inputProps={{
-                    type: 'text',
-                    value: replaceValue,
-                    onChange: (e) => setReplaceValue(e.target.value),
-                    color: 'primary',
-                    placeholder: `${T.translate(`${PREFIX}.fillInputPlaceholder`)}`,
-                }}
-            />
-        </Wrapper>
-    );
-};
+  return (
+    <Wrapper>
+      <SubHeadBoldFont data-testid="null-empty-sub-header">
+        {T.translate(`${PREFIX}.fillNullEmpty`)}
+      </SubHeadBoldFont>
+      <FormInputFieldComponent
+        formInputValue={replaceValue}
+        inputProps={{
+          type: 'text',
+          value: replaceValue,
+          onChange: (e) => setReplaceValue(e.target.value),
+          color: 'primary',
+          placeholder: `${T.translate(`${PREFIX}.fillInputPlaceholder`)}`,
+          'data-testid': 'form-input-fill-null-empty-input',
+          inputProps: {
+            'data-testid': 'fill-null-empty-input',
+          },
+        }}
+      />
+    </Wrapper>
+  );
+}

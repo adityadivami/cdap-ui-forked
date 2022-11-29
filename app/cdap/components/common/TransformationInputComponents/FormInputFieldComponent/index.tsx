@@ -29,6 +29,7 @@ interface IInput {
   color: 'primary' | 'secondary';
   placeholder: string;
   inputProps?: IInputProps;
+  'data-testid': string;
 }
 
 interface IFormInputFieldComponentProps {
@@ -40,7 +41,9 @@ export default function({ formInputValue, inputProps }: IFormInputFieldComponent
   return (
     <FormControlLabelComponent
       value={formInputValue}
-      control={<InputComponent {...inputProps} />}
+      control={
+        <InputComponent data-testid={`form-input-${inputProps['data-testid']}`} {...inputProps} />
+      }
       label={''}
     />
   );
