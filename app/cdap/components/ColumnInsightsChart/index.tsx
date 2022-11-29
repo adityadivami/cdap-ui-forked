@@ -78,7 +78,7 @@ const GraphContainer = styled(Box)`
     width: 40px !important;
   }
   &:hover .bar {
-    background: ${blue[500]};
+    background: ${blue[500]} !important;
     opacity: 0.5 !important;
   }
   & .bar:hover {
