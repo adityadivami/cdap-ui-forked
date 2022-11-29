@@ -18,7 +18,7 @@
 Feature: OpenWorkspacesList
 
   @OpenWorkspacesList
-  Scenario: Go through the Transformations SetCharacter Encoding functionality
+  Scenario: Go through the Open Workspace List functionality
     Given Navigate to Home Page of Wrangle for Open Workspaces List
     Then Click on the Data Explorations card
     Then Click on the open workspaces list
