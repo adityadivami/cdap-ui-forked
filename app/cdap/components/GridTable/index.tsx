@@ -48,6 +48,12 @@ export const TableWrapper = styled(Box)`
   overflow-x: auto;
 `;
 
+const GridTableWrapper = styled(Box)`
+  max-width: 100%;
+  overflow-x: auto;
+  max-height: 76vh;
+`;
+
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
@@ -248,8 +254,8 @@ export default function GridTable() {
   }, [gridData]);
 
   return (
-    <Box data-testid="grid-table-container">
-      {showBreadCrumb && <BreadCrumb datasetName={wid} />}
+  <>
+   {showBreadCrumb && <BreadCrumb datasetName={wid} />}
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
@@ -259,6 +265,7 @@ export default function GridTable() {
           // TODO: will integrate with add transformation panel later
         }}
       />
+    <GridTableWrapper data-testid="grid-table-container">
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
@@ -315,6 +322,7 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
-    </Box>
-  );
+    </GridTableWrapper>
+ </>
+    );
 }
