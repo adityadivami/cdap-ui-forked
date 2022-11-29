@@ -2803,6 +2803,7 @@ features:
       triggerNameExists: "Trigger Name already exists"
       triggerNameRequired: "Trigger Name is required"
       triggerNameLengthLimit: "Trigger Name should not be longer than 50 characters"
+      emptyCompositeTriggerError: "Please select upstream pipelines for this trigger"
       selectPipelineInstruction: "Select the pipelines you want to add to the trigger: "
       triggerAndType: "Wait for all events (AND)"
       triggerOrType: "Trigger on any selected event (OR)"
@@ -3432,23 +3433,29 @@ features:
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
   WranglerNewUI:
-    NoRecordScreen:
-      gridTable:
-        title: No rows left in this sample
-        subtitle: Remove some recipe steps to view some data
-  NewWranglerUI:
+    AddConnections:
+      referenceLabel: Add Connection
+    Breadcrumb:
+      labels:
+        connectionsList: Data Sources
+        wrangleHome: Home
+      params:
+        connectionsList: datasources
+        wrangeHome: home
     ColumnInsights: 
-      distribution: Distribution
-      viewFullChart: View Full Chart
-      columnInsightsHeadingText: Column Insights
-      quality: Quality
-      containsLetter: Contains Letter
-      characterCount: Character count
-      distinct: Distinct
-      null : "Null"
       barChartYLabel: Quantity
-      unknown: unknown
+      characterCount: Character count
+      containsLetter: Contains Letter
+      columnInsightsHeadingText: Column Insights
+      distribution: Distribution
+      distinct: Distinct
       empty: Empty
+      error: 
+        invalidError: The name you have entered is invalid. It must contain only letters, numbers, and
+            underscores (_). Pick a new name.
+        matchedColumnError: The name you have entered already exists.Please pick a new name. 
+      viewFullChart: View Full Chart
+      null : "Null"
       options:
         labelString: String
         labelBoolean: Boolean
@@ -3459,10 +3466,17 @@ features:
         labelDouble: Double
         labelDecimal: Decimal
         labelBytes: Bytes
-      error: 
-        invalidError: The name you have entered is invalid. It must contain only letters, numbers, and
-            underscores (_). Pick a new name.
-        matchedColumnError: The name you have entered already exists.Please pick a new name. 
+      quality: Quality
+      unknown: unknown
+    ColumnInsightsChart:
+      distribution: Distribution
+      columnName: "Column Name:"
+      distinct: "Distinct:"
+      barChartYLabel: Quantity
+    ConnectionsList:
+      labels:
+        loadToGrid: Wrangle
+        noConnections: No Connections to show
     GridTable:
       unknown: unknown
       missingNull: Missing/Null
@@ -3473,9 +3487,20 @@ features:
       containsLetterTrailing: Contains letters and trailing spaces
       containsLetterOnly: Contains letters
       containsNumberOnly: Contains numbers   
-    ColumnInsightsChart:
-      distribution: Distribution
-      columnName: "Column Name:"
-      distinct: "Distinct:"
-      barChartYLabel: Quantity
+    HomePage:
+      labels:
+        common:
+          viewAll: View All
+          addConnection: Add Connection
+          importData: Import Data
+        connectorTypes:
+          title: Start data exploration
+        workspaces:
+          title: Continue ongoing data explorations, pick up where you left off
+    ImportData:
+      referenceLabel: Import Data
+    NoRecordScreen:
+      gridTable:
+        title: No rows left in this sample
+        subtitle: Remove some recipe steps to view some data  
 ...
