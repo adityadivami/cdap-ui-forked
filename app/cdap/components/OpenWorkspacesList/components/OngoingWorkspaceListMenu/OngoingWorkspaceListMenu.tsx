@@ -14,16 +14,30 @@
  * the License.
  */
 
-import React from 'react';
-import T from 'i18n-react';
-import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import React from "react";
+import T from "i18n-react";
+import CustomTooltip from "components/ConnectionList/Components/CustomTooltip";
 import {
   StyledMenuItem,
   WorkspaceListTypography,
-} from 'components/OpenWorkspacesList/StyledComponents';
-import { createRef, Ref, useEffect, useState } from 'react';
+} from "components/OpenWorkspacesList/StyledComponents";
+import { createRef, Ref, useEffect, useState } from "react";
+import { IWorkspaceList } from "components/OpenWorkspacesList/";
 
-export default function({ workspace, index, handleMenuClick }) {
+interface IOngoingWorkspaceListMenuProps {
+  workspace: IWorkspaceList;
+  index: number;
+  handleMenuClick: (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    currentWorkspaceId: string
+  ) => void;
+}
+
+export default function({
+  workspace,
+  index,
+  handleMenuClick,
+}: IOngoingWorkspaceListMenuProps) {
   const myLabelRef: Ref<HTMLSpanElement> = createRef();
   const [refValue, setRefValue] = useState(false);
 
@@ -36,7 +50,9 @@ export default function({ workspace, index, handleMenuClick }) {
      * width of the wrapping element or not. if the size is greater then it sets true for custom tooltip
      * otherwise it sets false.
      */
-    setRefValue(myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth);
+    setRefValue(
+      myLabelRef?.current?.offsetWidth < myLabelRef?.current?.scrollWidth
+    );
   }, []);
 
   return (
