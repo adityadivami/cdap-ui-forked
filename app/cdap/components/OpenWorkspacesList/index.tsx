@@ -59,9 +59,12 @@ export default function() {
   const getWorkspaceList = () => {
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
-    }).subscribe((res) => {
-      setWorkspaceCount(res.count);
-      res.values.forEach((workspace) => {
+    }).subscribe((response) => {
+      setWorkspaceCount(response.count);
+      let updatedValues = [];
+      updatedValues = response?.values ?? [];
+      updatedValues.sort((a, b) => b.createdTimeMillis - a.createdTimeMillis);
+      updatedValues.forEach((workspace) => {
         setWorkspaceList((prev) => [
           ...prev,
           {
