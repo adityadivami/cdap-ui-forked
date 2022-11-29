@@ -28,8 +28,6 @@ import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.defineVariable';
-
 interface IDefineVariableProps {
   setTransformationComponentsValue: React.Dispatch<
     React.SetStateAction<ITransformationComponentValues>
@@ -46,6 +44,8 @@ interface INewColumnList {
 const CustomizedBox = styled(Box)`
   margin-bottom: 10px;
 `;
+
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.defineVariable';
 
 export default function({
   setTransformationComponentsValue,
