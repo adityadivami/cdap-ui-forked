@@ -30,6 +30,7 @@ import {
   IHeaderNamesList,
   IParams,
   IRecords,
+  IType,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
@@ -39,6 +40,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
+import {
+  calculateDistinctValues,
+  calculateDistributionGraphData,
+  calculateEmptyValueCount,
+  characterCount,
+  checkAlphaNumericAndSpaces,
+  convertNonNullPercentForColumnSelected,
+  getColumnNames,
+} from './utils';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -56,6 +66,45 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+
+  const calculateMetaData = (columnName: string) => {
+    console.log(columnName, 'columnName');
+    const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
+    console.log(getDistinctValue, 'getDistinctValue');
+    const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
+    console.log(getCharacterCountOfCell, 'getCharacterCountOfCell');
+    const getNullValueCount =
+      convertNonNullPercentForColumnSelected(
+        gridData?.values,
+        (gridData?.summary?.statistics?.columnName as Record<string, IType>)?.general
+      ) || 0;
+    const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
+    const insightDrawerData = {
+      open: true,
+      columnName,
+      distinctValues: getDistinctValue,
+      characterCount: getCharacterCountOfCell,
+      dataQuality: {
+        nullValueCount: Number(getNullValueCount),
+        nullValuePercentage: Number(
+          ((Number(Number(getNullValueCount).toFixed(0)) / rowsDataList?.length) * 100).toFixed(0)
+        ),
+        emptyValueCount: calculateEmptyValueCount(rowsDataList, columnName),
+        emptyValuePercentage: Number(
+          (
+            (Number(Number(calculateEmptyValueCount(rowsDataList, columnName)).toFixed(0)) /
+              rowsDataList?.length) *
+            100
+          ).toFixed(0)
+        ),
+      },
+      dataQualityBar: gridData?.summary?.statistics[columnName],
+      dataTypeString: getDataTypeString,
+      dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
+      columnNamesList: getColumnNames(rowsDataList),
+    };
+    return insightDrawerData;
+  };
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -185,29 +234,36 @@ export default function GridTable() {
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
   const createMissingData = (statistics: IRecords) => {
+    console.log(statistics, 'statistics');
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
+
+    // statisticObjectToArray.forEach(([key, value]) => {
+    //   const headerKeyTypeArray = Object.entries(value);
+    //   const arrayForMissingValue = [];
+    //   headerKeyTypeArray.forEach(([vKey, vValue]) => {
+    //     if (vKey !== 'types') {
+    //       arrayForMissingValue.push({
+    //         label:
+    //           convertNonNullPercent(vValue) === 0
+    //             ? checkFrequentlyOccuredValues(key).name
+    //             : 'Missing/Null',
+    //         count:
+    //           convertNonNullPercent(vValue) === 0
+    //             ? checkFrequentlyOccuredValues(key).count
+    //             : convertNonNullPercent(vValue),
+    //       });
+    //     }
+    //   }),
+    //     metricArray.push({
+    //       name: key,
+    //       values: arrayForMissingValue.concat(invalidCountArray),
+    //     });
+    // });
     statisticObjectToArray.forEach(([key, value]) => {
-      const headerKeyTypeArray = Object.entries(value);
-      const arrayForMissingValue = [];
-      headerKeyTypeArray.forEach(([vKey, vValue]) => {
-        if (vKey !== 'types') {
-          arrayForMissingValue.push({
-            label:
-              convertNonNullPercent(vValue) === 0
-                ? checkFrequentlyOccuredValues(key).name
-                : 'Missing/Null',
-            count:
-              convertNonNullPercent(vValue) === 0
-                ? checkFrequentlyOccuredValues(key).count
-                : convertNonNullPercent(vValue),
-          });
-        }
-      }),
-        metricArray.push({
-          name: key,
-          values: arrayForMissingValue.concat(invalidCountArray),
-        });
+      console.log(key, value, 'statisticObjectToArray');
+      const calculatedMetaData = calculateMetaData(key);
+      console.log('calculateMetaData', calculatedMetaData);
     });
     return metricArray;
   };
@@ -217,10 +273,7 @@ export default function GridTable() {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData.headers, rawData.types);
     setHeadersNamesList(headersData);
-    if (rawData && rawData.summary && rawData.summary.statistics) {
-      const missingData = createMissingData(gridData?.summary.statistics);
-      setMissingDataList(missingData);
-    }
+
     const rowData =
       rawData &&
       rawData.values &&
@@ -231,6 +284,9 @@ export default function GridTable() {
       });
 
     setRowsDataList(rowData);
+
+    const missingData = createMissingData(gridData?.summary.statistics);
+    setMissingDataList(missingData);
   };
 
   useEffect(() => {
