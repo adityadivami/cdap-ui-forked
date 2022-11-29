@@ -72,7 +72,11 @@ export default function({ open, setZoomPercent, anchorEl }) {
     >
       {ZOOM_OPTIONS.map((eachOption, optionIndex) => {
         return (
-          <MenuItem value={eachOption.value} onClick={() => setZoomPercent(eachOption.value)} data-testid='zoom-list-menu-item'>
+          <MenuItem
+            value={eachOption.value}
+            onClick={() => setZoomPercent(eachOption.value)}
+            data-testid={`zoom-list-menu-item-${optionIndex}`}
+          >
             {eachOption.label}
           </MenuItem>
         );

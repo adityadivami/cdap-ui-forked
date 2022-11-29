@@ -14,23 +14,17 @@
  *  the License.
  */
 
-import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
-import ZoomList from "components/FooterPanel/ZoomList/index";
+import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import ZoomList from 'components/FooterPanel/ZoomList/index';
 
-describe("Testing ZoomList Component", () => {
-  it("Should render ZoomList", () => {
-    render(
-      <ZoomList
-        open={true}
-        setZoomPercent={jest.fn()}
-        anchorEl={null}
-      />
-    );
+describe('Testing ZoomList Component', () => {
+  it('Should render ZoomList', () => {
+    render(<ZoomList open={true} setZoomPercent={jest.fn()} anchorEl={null} />);
 
-    const menuElement = screen.getAllByTestId(/zoom-list-menu-item/i)
-    expect(menuElement[0]).toBeInTheDocument()
-    fireEvent.click(menuElement[0])
-    expect(menuElement[0]).toHaveTextContent('50%')
+    const menuElement = screen.getByTestId(/zoom-list-menu-item-0/i);
+    expect(menuElement).toBeInTheDocument();
+    fireEvent.click(menuElement);
+    expect(menuElement).toHaveTextContent('50%');
   });
 });
