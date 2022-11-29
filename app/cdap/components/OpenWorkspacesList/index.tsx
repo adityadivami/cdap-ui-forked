@@ -120,6 +120,8 @@ export default function() {
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
+          role="button"
+          data-testid="open-workspaces-list-label"
         >
           {T.translate(`${PREFIX}.workspacesOpen`, { workspaceCount })}
         </WorkspaceOpenTypography>
@@ -132,15 +134,17 @@ export default function() {
                 transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
               }}
             >
-              <StyledPaper>
+              <StyledPaper data-testid="open-workspaces-list">
                 <ClickAwayListener onClickAway={handleCloseOnAway}>
                   <StyledMenuList autoFocusItem={open} id="menu-list-grow">
                     {workspaceList.map((workspace, index) => {
                       if (index < maxWorkspaceListCount) {
                         return (
                           <StyledMenuItem
+                            role="button"
                             onClick={(e) => handleMenuClick(e, workspace.workspaceId)}
                             key={index}
+                            data-testid={`open-workspace-list-item-${index}`}
                           >
                             <WorkspaceListTypography>
                               {T.translate(workspace.workspaceName)}
@@ -149,7 +153,11 @@ export default function() {
                         );
                       }
                     })}
-                    <StyledMenuItem onClick={onViewAllClick}>
+                    <StyledMenuItem
+                      onClick={onViewAllClick}
+                      role="button"
+                      data-testid="view-all-ongoing-workspaces"
+                    >
                       <ViewAllTypography>
                         {T.translate(`${PREFIX}.viewAllOngoingWorkspaces`)}
                       </ViewAllTypography>
