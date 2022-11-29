@@ -30,7 +30,7 @@ export interface IPercentOfDataTypeValues {
 }
 
 interface ISummary {
-  statistics: IRecords;
+  statistics: IStatistics;
   validations: IRecords;
 }
 
