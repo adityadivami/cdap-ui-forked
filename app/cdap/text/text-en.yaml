@@ -3461,4 +3461,6 @@ features:
       labels:
         loadToGrid: Wrangle
         noConnections: No Connections to show
-...
+    OpenWorkspacesList: 
+      viewAllOngoingWorkspaces: View all ongoing workspaces
+... 
