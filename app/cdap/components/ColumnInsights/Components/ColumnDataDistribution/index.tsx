@@ -45,7 +45,6 @@ const ColumnDataDistributionLabel = styled(Box)`
 `;
 
 const ColumnDataQualityGraph = styled(Box)`
-  width: 1000px;
   & .axis {
     display: none;
   }

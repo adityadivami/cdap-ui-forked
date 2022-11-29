@@ -26,8 +26,8 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
 public class ViewFullChart {
-    @Given("Navigate to the Home Page")
-    public void navigateToHomePage() {
+    @Given("Navigate to the Wrangle Home Page")
+    public void navigateToWrangleHomePage() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }

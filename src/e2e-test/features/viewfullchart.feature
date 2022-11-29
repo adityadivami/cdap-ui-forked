@@ -19,7 +19,7 @@ Feature: ViewFullChart
 
   @ViewFullChart
   Scenario: Go through the View Full Chart Functionality
-    Given Navigate to the Home Page
+    Given Navigate to the Wrangle Home Page
     Then Click on the Ongoing Data Explorations card
     Then Click on any column from the grid table
     Then Click on the View full chart button

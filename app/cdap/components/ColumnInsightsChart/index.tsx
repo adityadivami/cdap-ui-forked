@@ -15,14 +15,15 @@
  */
 
 import { Box, IconButton, Modal } from '@material-ui/core';
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import RenderLabel from 'components/ColumnInsights/Components/common/RenderLabel';
-import BarChart from 'react-easy-bar-chart';
+import { BarChart } from 'react-easy-chart';
 import blue from '@material-ui/core/colors/blue';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import T from 'i18n-react';
 import { grey } from '@material-ui/core/colors';
+import { useEffect, useState } from 'react';
 
 export const PREFIX = 'features.WranglerNewUI.ColumnInsightsChart';
 
@@ -68,26 +69,38 @@ const DistributionData = styled(Box)`
 `;
 
 const GraphContainer = styled(Box)`
+  position: relative;
   height: 225px;
   overflow-x: scroll;
   padding-left: 10px;
-  & .y-axis {
-    margin-top: 0 !important;
-    display: block;
-    float: inherit;
-  }
-  & .bar-list {
-    margin-bottom: 0 !important;
-    border-bottom: none;
-    border-left: none;
-  }
-  & .bar:hover .bar-hovertext {
-    display: none !important;
-  }
   & .bar {
-    background: ${blue[500]};
+    fill: ${blue[500]} !important;
+    background: ${blue[500]} !important;
     width: 40px !important;
   }
+  &:hover .bar {
+    fill: ${blue[500]} !important;
+    background: ${blue[500]} !important;
+    opacity: 0.5 !important;
+  }
+  & .bar:hover {
+    fill: ${blue[500]} !important;
+    background: ${blue[500]} !important;
+    opacity: 1 !important;
+  }
+`;
+
+const ToolTipDiv = styled(Box)`
+  background: #ffffff;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2), 0px 9px 10px rgba(0, 0, 0, 0.14),
+    0px 5px 14px rgba(0, 0, 0, 0.12);
+  font-size: 12px;
+  line-height: 150%;
+  color: ${grey[900]};
+  top: ${({ top }) => (top ? top : '0')};
+  left: ${({ left }) => (left ? left : '0')};
+  position: absolute;
+  padding: 10px;
 `;
 
 export default function({
@@ -98,11 +111,59 @@ export default function({
   distinctValues,
 }: IColumnInsightsChartProps) {
   const handleClose = () => setOpen(false);
+  const [barData, setBarData] = useState([]);
+  const [toolTipData, setToolTipData] = useState({
+    showToolTip: false,
+    top: '',
+    left: '',
+    y: '',
+    x: '',
+  });
 
+  useEffect(() => {
+    const updatedBarData = [];
+    graphData?.map((item) => {
+      updatedBarData.push({
+        x: item.text,
+        y: item.value,
+      });
+    });
+    setBarData(updatedBarData);
+  }, []);
   const barChartProps = {
     width: distinctValues,
     height: 150,
   };
+  const mouseOverHandler = (d, e) => {
+    console.log('d, e', d, e);
+    setToolTipData({
+      showToolTip: true,
+      top: `${e.offsetY - 10}px`,
+      left: `${e.offsetX + 10}px`,
+      y: d.y,
+      x: d.x,
+    });
+  };
+  const mouseMoveHandler = (e) => {
+    // setToolTipData({
+    //   showToolTip: false,
+    //   top: ``,
+    //   left: ``,
+    //   y: '',
+    //   x: ''
+    // })
+  };
+  const mouseOutHandler = () => {
+    setToolTipData({
+      showToolTip: false,
+      top: ``,
+      left: ``,
+      y: '',
+      x: '',
+    });
+  };
+
+  console.log('graphData', graphData, toolTipData);
 
   return (
     <Modal open={open} onClose={handleClose} data-testid="view-full-chart-modal">
@@ -128,10 +189,20 @@ export default function({
         </DistributionData>
         <GraphContainer>
           <BarChart
-            yAxis={`${T.translate(`${PREFIX}.barChartYLabel`)}`}
-            data={graphData}
-            {...barChartProps}
+            height={150}
+            width={50 * distinctValues}
+            axisLabels={{ x: '', y: `${T.translate(`${PREFIX}.barChartYLabel`)}` }}
+            // yAxis={`${T.translate(`${PREFIX}.barChartYLabel`)}`}
+            data={barData}
+            mouseOverHandler={mouseOverHandler}
+            mouseOutHandler={mouseOutHandler}
           />
+          {toolTipData.showToolTip && (
+            <ToolTipDiv
+              top={toolTipData.top}
+              left={toolTipData.left}
+            >{`${toolTipData.x} : ${toolTipData.y}`}</ToolTipDiv>
+          )}
         </GraphContainer>
       </CustomizedModalContent>
     </Modal>
