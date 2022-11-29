@@ -34,6 +34,12 @@ import { IExecuteAPIResponse, IRecords, IParams, IHeaderNamesList } from './type
 import NoRecordScreen from 'components/NoRecordScreen';
 import T from 'i18n-react';
 import { IWorkspace } from 'components/WrangleHome/Components/OngoingDataExplorations/types';
+import styled from 'styled-components';
+import OpenWorkspaces from 'components/OpenWorkspacesList';
+
+const CustomizedBox = styled(Box)`
+  display: flex;
+`;
 
 export default function GridTable() {
   const { wid } = useParams<IParams>();
@@ -234,7 +240,10 @@ export default function GridTable() {
 
   return (
     <Box>
-      <Breadcrumb workspaceName={wid} location={location} />
+      <CustomizedBox>
+        <Breadcrumb workspaceName={wid} location={location} />
+        <OpenWorkspaces />
+      </CustomizedBox>
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
