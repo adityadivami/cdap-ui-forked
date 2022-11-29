@@ -3509,19 +3509,27 @@ features:
         zero: '0' 
       transformationUI:
         common: 
-          nameNewColumn:  Name new column 
           columnExist: This column name already exist
           destinationColumn: Destination Column
+          nameNewColumn:  Name new column 
         defineVariable:
-          setVariableName: Set variable name
-          selectRowWhere: Select row where
           selectColumnSelectedRow: Select column in selected row 
+          selectRowWhere: Select row where
+          setVariableName: Set variable name
           defineVariableOptions: 
+            customCondition: custom condition
+            valueContainsRegex: value contains regex
+            valueEndsWith: value ends with
             valueIs: value is
             valueStartsWith: value starts with
-            valueEndsWith: value ends with
-            valueContainsRegex: value contains regex
-            customCondition: custom condition
+          filterPlaceholders:
+            customCondition: E.g. < 30 || gender == "Male"
+            empty: ""
+            enterContainedValue: Enter contained value
+            enterPrefix: Enter prefix
+            enterRegex: Enter regex
+            enterSuffix: Enter suffix
+            enterValue: Enter value
     HomePage:
       labels:
         common:

@@ -14,39 +14,38 @@
  * the License.
  */
 
-const PREFIX =
-  'features.WranglerNewUI.GridPage.transformationUI.defineVariable.defineVariableOptions';
+const PREFIX = 'features.WranglerNewUI.GridPage.transformationUI.defineVariable';
 import T from 'i18n-react';
 
 export const DEFINE_VARIABLE_OPTIONS = [
   {
-    label: T.translate(`${PREFIX}.valueIs`).toString(),
+    label: T.translate(`${PREFIX}.defineVariableOptions.valueIs`).toString(),
     value: 'TEXTEXACTLY',
   },
   {
-    label: T.translate(`${PREFIX}.valueStartsWith`).toString(),
+    label: T.translate(`${PREFIX}.defineVariableOptions.valueStartsWith`).toString(),
     value: 'TEXTSTARTSWITH',
   },
   {
-    label: T.translate(`${PREFIX}.valueEndsWith`).toString(),
+    label: T.translate(`${PREFIX}.defineVariableOptions.valueEndsWith`).toString(),
     value: 'TEXTENDSWITH',
   },
   {
-    label: T.translate(`${PREFIX}.valueContainsRegex`).toString(),
+    label: T.translate(`${PREFIX}.defineVariableOptions.valueContainsRegex`).toString(),
     value: 'TEXTREGEX',
   },
   {
-    label: T.translate(`${PREFIX}.customCondition`).toString(),
+    label: T.translate(`${PREFIX}.defineVariableOptions.customCondition`).toString(),
     value: 'CUSTOMCONDITION',
   },
 ];
 
 export const FILTER_PLACEHOLDER = {
-  EMPTY: '',
-  TEXTEXACTLY: 'Enter value',
-  TEXTCONTAINS: 'Enter contained value',
-  TEXTSTARTSWITH: 'Enter prefix',
-  TEXTENDSWITH: 'Enter suffix',
-  TEXTREGEX: 'Enter regex',
-  CUSTOMCONDITION: 'E.g. < 30 || gender == "Male"',
+  EMPTY: T.translate(`${PREFIX}.filterPlaceholders.empty.empty`).toString(),
+  TEXTEXACTLY: T.translate(`${PREFIX}.filterPlaceholders.enterValue`).toString(),
+  TEXTCONTAINS: T.translate(`${PREFIX}.filterPlaceholders.enterContainedValue`).toString(),
+  TEXTSTARTSWITH: T.translate(`${PREFIX}.filterPlaceholders.enterPrefix`).toString(),
+  TEXTENDSWITH: T.translate(`${PREFIX}.filterPlaceholders.enterSuffix`).toString(),
+  TEXTREGEX: T.translate(`${PREFIX}.filterPlaceholders.enterRegex`).toString(),
+  CUSTOMCONDITION: T.translate(`${PREFIX}.filterPlaceholders.customCondition`).toString(),
 };

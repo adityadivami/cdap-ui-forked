@@ -54,7 +54,7 @@ export default function({
 }: IDefineVariableProps) {
   const [filterCondition, setFilterCondition] = useState(DEFINE_VARIABLE_OPTIONS[0].value);
   const [variableName, setVariableName] = useState('');
-  const [columnSelected, setColumnSelected] = useState(columnsList[0].label);
+  const [columnSelected, setColumnSelected] = useState('');
   const [customInput, setCustomInput] = useState('');
   const [newColumnList, setNewColumnList] = useState<INewColumnList[]>([]);
   const [valueLabel, setValueLabel] = useState(DEFINE_VARIABLE_OPTIONS[0].label);
@@ -111,7 +111,7 @@ export default function({
   }, [customInput]);
 
   return (
-    <div>
+    <div data-testid="define-variable-container">
       <FormGroup>
         <CustomizedBox>
           <SubHeadBoldFont>{T.translate(`${PREFIX}.setVariableName`)}</SubHeadBoldFont>
@@ -171,7 +171,7 @@ export default function({
         transformationComponentValues.selectedColumn &&
         customInput &&
         variableName && (
-          <CustomizedBox>
+          <CustomizedBox data-testid="define-variable-summary">
             <NormalFont>{`Summary: you defined the variable "${variableName}" for the cell in column ${columnSelected} in the row which ${valueLabel} ${customInput} in column "${transformationComponentValues.selectedColumn}"`}</NormalFont>
           </CustomizedBox>
         )}
