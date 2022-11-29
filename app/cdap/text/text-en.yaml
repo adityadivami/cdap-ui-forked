@@ -3515,11 +3515,11 @@ features:
             format:
               uppercase: UPPERCASE
               lowercase: Lowercase
-              titlecase: Title Case
+              titlecase: TitleCase
               concatenate: Concatenate
-              trim: White spaces
-              ltrim: Leading white spaces
-              rtrim: Trailing White spaces
+              trim: Trim whitespace
+              ltrim: Trim leading whitespace
+              rtrim: Trim trailing whitespace
               dateTime: Date time
               dateTimeAsString: Date time as string
       addTransformationPanel:

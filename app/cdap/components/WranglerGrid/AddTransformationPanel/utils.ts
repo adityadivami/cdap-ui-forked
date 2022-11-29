@@ -26,9 +26,11 @@ export const getDirective = (
 ) => {
   if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
     return `set-type :${selectedColumnName} ${functionName}`;
-  } else if (FORMAT_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
+  } else if (
+    FORMAT_OPTIONS.some((eachFormatOption: IMenuItem) => eachFormatOption.value === functionName)
+  ) {
     const option: IMenuItem = FORMAT_OPTIONS.find(
-      (eachOption) => eachOption.value === functionName
+      (eachFormatOption: IMenuItem) => eachFormatOption.value === functionName
     );
     return option.directive(selectedColumnName, transformationComponentValues);
   } else {

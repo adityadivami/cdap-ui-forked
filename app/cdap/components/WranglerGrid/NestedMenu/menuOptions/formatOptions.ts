@@ -58,19 +58,19 @@ export const FORMAT_OPTIONS: IMenuItem[] = [
     },
   },
   {
-    value: 'trim',
+    value: 'trim-whitespace',
     label: `${T.translate(`${PREFIX}.trim`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `trim :${selectedColumn}`,
   },
   {
-    value: 'ltrim',
+    value: 'trim-leading-whitespace',
     label: `${T.translate(`${PREFIX}.ltrim`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `ltrim :${selectedColumn}`,
   },
   {
-    value: 'rtrim',
+    value: 'trim-trailing-whitespace',
     label: `${T.translate(`${PREFIX}.rtrim`).toString()}`,
     supportedDataType: ['string'],
     directive: (selectedColumn: string) => `rtrim :${selectedColumn}`,
@@ -78,7 +78,7 @@ export const FORMAT_OPTIONS: IMenuItem[] = [
   {
     value: 'dateTime',
     label: `${T.translate(`${PREFIX}.dateTime`).toString()}`,
-    supportedDataType: ['string'],
+    supportedDataType: ['date'],
     directive: (
       selectedColumn: string,
       transformationComponentValues: ITransformationComponentValues
@@ -93,7 +93,7 @@ export const FORMAT_OPTIONS: IMenuItem[] = [
   {
     value: 'dateTimeAsString',
     label: `${T.translate(`${PREFIX}.dateTimeAsString`).toString()}`,
-    supportedDataType: ['string'],
+    supportedDataType: ['datetime'],
     directive: (
       selectedColumn: string,
       transformationComponentValues: ITransformationComponentValues
