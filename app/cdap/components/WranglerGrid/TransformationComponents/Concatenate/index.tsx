@@ -73,7 +73,7 @@ export default function({
   return (
     <>
       <FormGroup>
-        <CustomizedFormLabel>{ADD}</CustomizedFormLabel>
+        <CustomizedFormLabel data-testid='concentrate-form-label'>{ADD}</CustomizedFormLabel>
         <FormControl>
           <FormInputFieldComponent
             formInputValue={stringValue}
@@ -83,6 +83,7 @@ export default function({
               onChange: (e: React.ChangeEvent<HTMLInputElement>) => setStringValue(e.target.value),
               color: 'primary',
               placeholder: ENTER_STRING,
+              'data-testid':'concentrate-input-text'
             }}
           />
           <RadioGroup
