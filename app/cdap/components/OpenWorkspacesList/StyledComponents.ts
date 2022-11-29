@@ -33,6 +33,10 @@ export const ViewAllTypography = styled(CustomizedTypography)`
 export const WorkspaceListTypography = styled(CustomizedTypography)`
   color: #616161;
   font-weight: 400;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 201px;
 `;
 
 export const WorkspaceOpenTypography = styled(CustomizedTypography)`

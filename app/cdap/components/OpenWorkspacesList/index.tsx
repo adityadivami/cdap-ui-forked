@@ -17,7 +17,7 @@
 import { Box, ClickAwayListener, Grow, Popper } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import T from 'i18n-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createRef, Ref, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import {
@@ -30,6 +30,7 @@ import {
   StyledMenuList,
   WorkspaceOpenTypography,
 } from 'components/OpenWorkspacesList/StyledComponents';
+import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 
 const PREFIX = 'features.WranglerNewUI.OpenWorkspacesList';
 
@@ -51,6 +52,7 @@ export default function() {
   const [workspaceCount, setWorkspaceCount] = useState<number>();
   const maxWorkspaceListCount = 4;
   const history = useHistory();
+  const myLabelRef: Ref<HTMLSpanElement> = createRef();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -139,14 +141,34 @@ export default function() {
                   <StyledMenuList autoFocusItem={open} id="menu-list-grow">
                     {workspaceList.map((workspace, index) => {
                       if (index < maxWorkspaceListCount) {
-                        return (
+                        console.log(
+                          myLabelRef?.current?.offsetWidth,
+                          myLabelRef?.current?.scrollWidth,
+                          index
+                        );
+
+                        return myLabelRef?.current?.offsetWidth <
+                          myLabelRef?.current?.scrollWidth ? (
+                          <CustomTooltip title={`${workspace.workspaceName}`}>
+                            <StyledMenuItem
+                              role="button"
+                              onClick={(e) => handleMenuClick(e, workspace.workspaceId)}
+                              key={index}
+                              data-testid={`open-workspace-list-item-${index}`}
+                            >
+                              <WorkspaceListTypography ref={myLabelRef}>
+                                {T.translate(workspace.workspaceName)}
+                              </WorkspaceListTypography>
+                            </StyledMenuItem>
+                          </CustomTooltip>
+                        ) : (
                           <StyledMenuItem
                             role="button"
                             onClick={(e) => handleMenuClick(e, workspace.workspaceId)}
                             key={index}
                             data-testid={`open-workspace-list-item-${index}`}
                           >
-                            <WorkspaceListTypography>
+                            <WorkspaceListTypography ref={myLabelRef}>
                               {T.translate(workspace.workspaceName)}
                             </WorkspaceListTypography>
                           </StyledMenuItem>
