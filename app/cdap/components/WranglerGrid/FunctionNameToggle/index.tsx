@@ -18,7 +18,12 @@ import React from 'react';
 import T from 'i18n-react';
 import SwitchInputComponent from 'components/common/Switch';
 import { NormalFont } from 'components/common/TypographyText';
-import { FlexJustifyAlignCenter } from 'components/common/BoxContainer';
+import {
+  DividerBox,
+  DividerBoxToggler,
+  FlexJustifyAlignCenter,
+} from 'components/common/BoxContainer';
+import { Divider } from 'components/WranglerGrid/TransformationToolbar/iconStore';
 
 const PREFIX = 'features.WranglerNewUI.GridPage';
 
@@ -41,6 +46,7 @@ export default function({ setShowName, showName }: IFunctionNameToggleProps) {
           'data-testid': 'transformations-toolbar-icons-function-name-toggler',
         }}
       />
+      <DividerBoxToggler> {Divider}</DividerBoxToggler>
     </FlexJustifyAlignCenter>
   );
 }

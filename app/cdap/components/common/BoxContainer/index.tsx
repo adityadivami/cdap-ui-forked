@@ -21,7 +21,7 @@ export const FlexJustifyAlignCenter = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 9px;
 `;
 
 export const LastDividerBox = styled(Box)`
@@ -30,6 +30,10 @@ export const LastDividerBox = styled(Box)`
 
 export const DividerBox = styled(Box)`
   margin: 0px 4px;
+`;
+
+export const DividerBoxToggler = styled(Box)`
+  margin: 0px 16px;
 `;
 
 export const FunctionBoxWrapper = styled(Box)`
@@ -41,6 +45,11 @@ export const FunctionBoxWrapper = styled(Box)`
   & .MuiIconButton-root {
     padding-bottom: 8px;
   }
+`;
+
+export const ExpandAndFunctionToggleContainer = styled(Box)`
+  display: flex;
+  justify-content: center;
 `;
 
 export const SearchBoxWrapper = styled(Box)`

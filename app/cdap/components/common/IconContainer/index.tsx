@@ -24,7 +24,7 @@ export const ToolBarIconWrapper = styled(Box)`
   border: 1px solid ${grey[300]};
   margin-top: 0;
   padding-left: 18px;
-  padding-right: 15px;
+  padding-right: 18px;
 `;
 
 export const ToolBarInnerWrapper = styled(Box)`

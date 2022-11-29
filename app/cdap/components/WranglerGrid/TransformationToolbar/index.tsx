@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { IconButton, SvgIcon } from '@material-ui/core';
+import { Box, IconButton, SvgIcon } from '@material-ui/core';
 import { default as React, useState } from 'react';
 import NestedMenu from 'components/WranglerGrid/NestedMenu';
 import { ITransformationToolBarProps } from 'components/WranglerGrid/TransformationToolbar/types';
@@ -28,6 +28,7 @@ import {
   DividerBox,
   FunctionBoxWrapper,
   SearchBoxWrapper,
+  ExpandAndFunctionToggleContainer,
 } from 'components/common/BoxContainer';
 import { ToolBarIconWrapper, ToolBarInnerWrapper } from 'components/common/IconContainer';
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
@@ -134,12 +135,14 @@ export default function({
           {/* TODO Search functionality UI component will be added here */}
         </SearchBoxWrapper>
       </ToolBarInnerWrapper>
-      <FunctionToggle setShowName={setShowName} showName={showName} />
-      <ExpandButton
-        open={showBreadCrumb}
-        onClick={() => setShowBreadCrumb(!showBreadCrumb)}
-        dataTestId="toolbar-header-toggler"
-      />
+      <ExpandAndFunctionToggleContainer>
+        <FunctionToggle setShowName={setShowName} showName={showName} />
+        <ExpandButton
+          open={showBreadCrumb}
+          onClick={() => setShowBreadCrumb(!showBreadCrumb)}
+          dataTestId="toolbar-header-toggler"
+        />
+      </ExpandAndFunctionToggleContainer>
     </ToolBarIconWrapper>
   );
 }
