@@ -24,7 +24,7 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import T from 'i18n-react';
 import { grey } from '@material-ui/core/colors';
 
-export const PREFIX = 'features.NewWranglerUI.ColumnInsightsChart';
+export const PREFIX = 'features.WranglerNewUI.ColumnInsightsChart';
 
 interface IColumnInsightsChartProps {
   open: boolean;

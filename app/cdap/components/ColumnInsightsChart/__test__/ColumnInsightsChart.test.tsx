@@ -67,7 +67,7 @@ describe('It Should test ColumnInsightsChart Component', () => {
     );
     const distributionLabel = screen.getByTestId(/distribution/i);
     expect(distributionLabel).toHaveTextContent(
-      'features.NewWranglerUI.ColumnInsightsChart.distribution'
+      'features.WranglerNewUI.ColumnInsightsChart.distribution'
     );
   });
   it('should test whether the column Name and distinct values are as expected', () => {
@@ -82,11 +82,11 @@ describe('It Should test ColumnInsightsChart Component', () => {
     );
     const columnName = screen.getByTestId(/column-name/i);
     expect(columnName).toHaveTextContent(
-      'features.NewWranglerUI.ColumnInsightsChart.columnNamebody_2'
+      'features.WranglerNewUI.ColumnInsightsChart.columnNamebody_2'
     );
     const distinctValues = screen.getByTestId(/distinct-values/i);
     expect(distinctValues).toHaveTextContent(
-      'features.NewWranglerUI.ColumnInsightsChart.distinct100'
+      'features.WranglerNewUI.ColumnInsightsChart.distinct100'
     );
   });
 

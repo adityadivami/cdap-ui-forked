@@ -23,7 +23,7 @@ import BarChart from 'react-bar-chart';
 import styled from 'styled-components';
 import ColumnInsightsChart from 'components/ColumnInsightsChart';
 
-export const PREFIX = 'features.NewWranglerUI.ColumnInsights';
+export const PREFIX = 'features.WranglerNewUI.ColumnInsights';
 
 interface IColumnDataDistributionProps {
   graphData: IGraphData[];
