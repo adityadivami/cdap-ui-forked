@@ -25,6 +25,8 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -38,7 +40,7 @@ public class TransformationToolbar {
     public void clickOnTheDataExplorationCard() {
         try {
             WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card"));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-exploration-card-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
         } catch (Exception e) {
@@ -96,11 +98,11 @@ public class TransformationToolbar {
     public void clickOnTheUpAndDownArrowButton() {
         try {
             WaitHelper.waitForPageToLoad();
-            WebElement ele = Helper.locateElementByXPath("//*[@data-testid='toggle-toolbar-header']");
-            Actions action = new Actions(SeleniumDriver.getDriver());
-            WaitHelper.waitForPageToLoad();
-            action.moveToElement(ele).perform();
-            ele.click();
+            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-header-toggler"));
+            WebElement ele = SeleniumDriver.getDriver().findElement(
+                    By.xpath("//*[@data-testid='toolbar-header-toggler']"));
+            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
+            executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
