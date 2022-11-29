@@ -14,55 +14,43 @@
  * the License.
  */
 
-import {
-  Box,
-  ClickAwayListener,
-  Grow,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
-  Typography,
-} from '@material-ui/core';
+import { Box, ClickAwayListener, Grow, Popper } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
-import React, { useEffect, useRef, useState } from 'react';
-import { Divider } from './iconStore';
-import { useStyles } from './styles';
 import T from 'i18n-react';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import {
+  OpenWorkspaceContainer,
+  DividerContainer,
+  StyledPaper,
+  StyledMenuItem,
+  WorkspaceListTypography,
+  ViewAllTypography,
+  StyledMenuList,
+  WorkspaceOpenTypography,
+} from 'components/OpenWorkspacesList/StyledComponents';
 
 const PREFIX = 'features.WranglerNewUI.OpenWorkspacesList';
 
-const CustomizedTypography = styled(Typography)`
-  font-style: normal;
+const Divider = (
+  <svg width="2" height="21" viewBox="0 0 2 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0.511963 0.501953V20.502" stroke="#DADCE0" strokeLinecap="round" />
+  </svg>
+);
 
-  font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0.15px;
-`;
-const ViewAllTypography = styled(CustomizedTypography)`
-  color: #2196f3;
-  font-weight: 400;
-`;
-
-const WorkspaceListTypography = styled(CustomizedTypography)`
-  color: #616161;
-  font-weight: 400;
-`;
-
-const WorkspaceOpenTypography = styled(CustomizedTypography)`
-  font-weight: 500;
-  color: #2196f3;
-`;
+interface IWorkspaceList {
+  workspaceId: string;
+  workspaceName: string;
+}
 
 export default function() {
-  const classes = useStyles();
-  const [workspaceId, setWorkspaceId] = useState('');
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
-  const [workspaceList, setWorkspaceList] = useState([]);
+  const [workspaceList, setWorkspaceList] = useState<IWorkspaceList[]>([]);
   const [workspaceCount, setWorkspaceCount] = useState<number>();
   const maxWorkspaceListCount = 4;
+  const history = useHistory();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -72,7 +60,6 @@ export default function() {
     MyDataPrepApi.getWorkspaceList({
       context: 'default',
     }).subscribe((res) => {
-      console.log('res', res);
       setWorkspaceCount(res.count);
       res.values.forEach((workspace) => {
         setWorkspaceList((prev) => [
@@ -86,15 +73,19 @@ export default function() {
     });
   };
 
-  const handleClose = (
+  const handleMenuClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     currentWorkspaceId: string
   ) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-    setWorkspaceId(currentWorkspaceId);
+    history.push(`/ns/${getCurrentNamespace()}/wrangler-grid/${currentWorkspaceId}`);
     setOpen(false);
+  };
+
+  const onViewAllClick = () => {
+    // TODO: Navigate to View All Ongoing Workspace List Page
   };
 
   const handleCloseOnAway = (event: React.MouseEvent<Document, MouseEvent>) => {
@@ -104,47 +95,33 @@ export default function() {
     setOpen(false);
   };
 
-  const handleListKeyDown = (event) => {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
-    }
-  };
-
-  // return focus to the button when we transitioned from !open -> open
   const prevOpen = useRef(open);
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
     prevOpen.current = open;
   }, [open]);
+
   useEffect(() => {
     getWorkspaceList();
   }, []);
 
   return (
-    <Box className={classes.openWorkspaceWrapper}>
-      <Box className={classes.divider}>{Divider}</Box>
+    <OpenWorkspaceContainer>
+      <DividerContainer>{Divider}</DividerContainer>
       <Box>
         <WorkspaceOpenTypography
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-          className={classes.workspace}
         >
-          {workspaceCount} workspaces open
+          {T.translate(`${PREFIX}.workspacesOpen`, { workspaceCount })}
         </WorkspaceOpenTypography>
 
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          transition
-          disablePortal
-          className={classes.menuWrapper}
-        >
+        <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
@@ -152,45 +129,35 @@ export default function() {
                 transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
               }}
             >
-              <Paper className={classes.menu}>
+              <StyledPaper>
                 <ClickAwayListener onClickAway={handleCloseOnAway}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="menu-list-grow"
-                    onKeyDown={handleListKeyDown}
-                    className={classes.menuList}
-                  >
+                  <StyledMenuList autoFocusItem={open} id="menu-list-grow">
                     {workspaceList.map((workspace, index) => {
                       if (index < maxWorkspaceListCount) {
                         return (
-                          <MenuItem
-                            onClick={(e) => handleClose(e, workspace.workspaceId)}
-                            className={classes.menuItem}
+                          <StyledMenuItem
+                            onClick={(e) => handleMenuClick(e, workspace.workspaceId)}
                             key={index}
                           >
                             <WorkspaceListTypography>
-                              {workspace.workspaceName}
+                              {T.translate(workspace.workspaceName)}
                             </WorkspaceListTypography>
-                          </MenuItem>
+                          </StyledMenuItem>
                         );
                       }
                     })}
-
-                    <MenuItem
-                      onClick={(e) => handleClose(e, 'openAllWorkspace')}
-                      className={classes.viewAll}
-                    >
+                    <StyledMenuItem onClick={onViewAllClick}>
                       <ViewAllTypography>
                         {T.translate(`${PREFIX}.viewAllOngoingWorkspaces`)}
                       </ViewAllTypography>
-                    </MenuItem>
-                  </MenuList>
+                    </StyledMenuItem>
+                  </StyledMenuList>
                 </ClickAwayListener>
-              </Paper>
+              </StyledPaper>
             </Grow>
           )}
         </Popper>
       </Box>
-    </Box>
+    </OpenWorkspaceContainer>
   );
 }
