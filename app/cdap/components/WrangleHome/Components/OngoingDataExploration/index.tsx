@@ -115,6 +115,7 @@ export default function OngoingDataExploration() {
                 path: T.translate('features.WranglerNewUI.Breadcrumb.params.wrangeHome'),
               },
             }}
+            data-testid={`ongoing-data-exploration-card-${index}`}
             style={{ textDecoration: 'none' }}
           >
             {index <= 1 && <OngoingDataExplorationCard item={item} key={index} />}
