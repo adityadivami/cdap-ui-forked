@@ -16,21 +16,20 @@
 
 import { Box, ClickAwayListener, Grow, Popper } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
+import OngoingWorkSpaceListMenu from 'components/OpenWorkspacesList/components/OngoingWorkspaceListMenu/OngoingWorkspaceListMenu';
+import {
+  DividerContainer,
+  OpenWorkspaceContainer,
+  StyledMenuItem,
+  StyledMenuList,
+  StyledPaper,
+  ViewAllTypography,
+  WorkspaceOpenTypography,
+} from 'components/OpenWorkspacesList/StyledComponents';
 import T from 'i18n-react';
 import React, { createRef, Ref, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import {
-  OpenWorkspaceContainer,
-  DividerContainer,
-  StyledPaper,
-  StyledMenuItem,
-  WorkspaceListTypography,
-  ViewAllTypography,
-  StyledMenuList,
-  WorkspaceOpenTypography,
-} from 'components/OpenWorkspacesList/StyledComponents';
-import OngoingWorkSpaceListMenu from 'components/OpenWorkspacesList/OngoingWorkSpaceListMenu';
 
 const PREFIX = 'features.WranglerNewUI.OpenWorkspacesList';
 
@@ -40,7 +39,7 @@ const Divider = (
   </svg>
 );
 
-interface IWorkspaceList {
+export interface IWorkspaceList {
   workspaceId: string;
   workspaceName: string;
 }
