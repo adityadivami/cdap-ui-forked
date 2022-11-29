@@ -320,6 +320,7 @@ export default function GridTable() {
         recipeStepsCount={0}
         gridMetaInfo={tableMetaInfo}
         setZoomPercent={setZoomPercent}
+        zoomPercent={zoomPercent}
       />
 
       {loading && (

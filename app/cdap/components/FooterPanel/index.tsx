@@ -54,6 +54,7 @@ interface IFooterPanelProps {
   recipeStepsCount: number;
   gridMetaInfo: IGridMetaInfo;
   setZoomPercent: React.Dispatch<React.SetStateAction<number>>;
+  zoomPercent: number;
 }
 
 const ColumnViewBox = styled(Box)`
@@ -149,7 +150,12 @@ export interface IRecipeStepsTabProps {
   recipeStepsCount: number;
 }
 
-export default function({ recipeStepsCount, gridMetaInfo, setZoomPercent }: IFooterPanelProps) {
+export default function({
+  recipeStepsCount,
+  gridMetaInfo,
+  setZoomPercent,
+  zoomPercent,
+}: IFooterPanelProps) {
   const { rowCount, columnCount } = gridMetaInfo;
   const [openZoomOption, setOpenZoomOption] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -183,7 +189,7 @@ export default function({ recipeStepsCount, gridMetaInfo, setZoomPercent }: IFoo
           <ZoomList open={openZoomOption} setZoomPercent={setZoomPercent} anchorEl={anchorEl} />
         )}
         <Label data-testid="footerpanel-simple-label">
-          <>{`${T.translate(`${PREFIX}.zoomPercent100`)}`}</>
+          <>{`${zoomPercent}%`}</>
         </Label>
         <TransformatedIconButton aria-label="arrow">
           <ArrowRightIcon />
