@@ -303,11 +303,11 @@ export default function GridTable() {
           supportedDataType: [],
         });
       },
-      (err) => {
+      (error) => {
         setLoading(false);
         setSnackbarIsOpen(true);
         setSnackbarData({
-          description: 'Transformation cannot be applied',
+          description: error.message,
           isSuccess: false,
         });
         setAddTransformationFunction({
