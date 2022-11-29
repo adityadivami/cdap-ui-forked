@@ -30,7 +30,7 @@ import {
   StyledMenuList,
   WorkspaceOpenTypography,
 } from 'components/OpenWorkspacesList/StyledComponents';
-import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
+import OngoingWorkSpaceListMenu from 'components/OpenWorkspacesList/OngoingWorkSpaceListMenu';
 
 const PREFIX = 'features.WranglerNewUI.OpenWorkspacesList';
 
@@ -141,37 +141,12 @@ export default function() {
                   <StyledMenuList autoFocusItem={open} id="menu-list-grow">
                     {workspaceList.map((workspace, index) => {
                       if (index < maxWorkspaceListCount) {
-                        console.log(
-                          myLabelRef?.current?.offsetWidth,
-                          myLabelRef?.current?.scrollWidth,
-                          index
-                        );
-
-                        return myLabelRef?.current?.offsetWidth <
-                          myLabelRef?.current?.scrollWidth ? (
-                          <CustomTooltip title={`${workspace.workspaceName}`}>
-                            <StyledMenuItem
-                              role="button"
-                              onClick={(e) => handleMenuClick(e, workspace.workspaceId)}
-                              key={index}
-                              data-testid={`open-workspace-list-item-${index}`}
-                            >
-                              <WorkspaceListTypography ref={myLabelRef}>
-                                {T.translate(workspace.workspaceName)}
-                              </WorkspaceListTypography>
-                            </StyledMenuItem>
-                          </CustomTooltip>
-                        ) : (
-                          <StyledMenuItem
-                            role="button"
-                            onClick={(e) => handleMenuClick(e, workspace.workspaceId)}
-                            key={index}
-                            data-testid={`open-workspace-list-item-${index}`}
-                          >
-                            <WorkspaceListTypography ref={myLabelRef}>
-                              {T.translate(workspace.workspaceName)}
-                            </WorkspaceListTypography>
-                          </StyledMenuItem>
+                        return (
+                          <OngoingWorkSpaceListMenu
+                            workspace={workspace}
+                            index={index}
+                            handleMenuClick={handleMenuClick}
+                          />
                         );
                       }
                     })}
