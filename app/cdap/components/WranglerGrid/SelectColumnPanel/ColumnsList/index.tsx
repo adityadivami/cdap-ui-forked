@@ -79,7 +79,13 @@ const SelectColumnSearchBox = styled(Box)`
 `;
 
 const SearchIconButton = styled(IconButton)`
-  padding-right: 0;
+  padding: 5px;
+  &.MuiIconButton-root:hover {
+    background-color: transparent;
+  }
+  & .MuiTouchRipple-root {
+    display: none;
+  }
 `;
 
 export default function({
