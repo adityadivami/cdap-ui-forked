@@ -74,10 +74,7 @@ const CloseButtonStyle = styled(IconButton)`
   display: flex;
   justify-content: flex-end !important;
   &.MuiIconButton-root {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    padding-left: 10px;
-    padding-right: 0px;
+    padding: 12px;
   }
 `;
 
