@@ -3441,6 +3441,7 @@ features:
         connectionsList: Data Source
         loadToGrid: Wrangle
         wrangleHome: Home
+        createPipeline: Create a Pipeline
       params:
         connectionsList: datasources
         wrangleHome: home

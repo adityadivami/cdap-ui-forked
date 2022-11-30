@@ -40,6 +40,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
+import SubHeader from './components/SubHeader';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -243,7 +244,9 @@ export default function GridTable() {
 
   return (
     <Box data-testid="grid-table-container">
-      <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
+      <SubHeader>
+        <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
+      </SubHeader>
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
