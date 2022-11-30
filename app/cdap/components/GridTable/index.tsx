@@ -50,14 +50,10 @@ import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import {
-  calculateDistinctValues,
-  calculateDistributionGraphData,
   calculateEmptyValueCount,
-  characterCount,
-  checkAlphaNumericAndSpaces,
   convertNonNullPercentForColumnSelected,
-  getColumnNames,
-} from './utils';
+  checkFrequentlyOccuredValues,
+} from 'components/GridTable/utils';
 import styled from 'styled-components';
 import { grey, red } from '@material-ui/core/colors';
 
@@ -85,48 +81,6 @@ export default function GridTable() {
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
-  const [invalidCountArray, setInvalidCountArray] = useState([
-    {
-      label: 'Invalid',
-      count: '0',
-    },
-  ]);
-
-  const calculateMetaData = (columnName: string) => {
-    const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
-    const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
-    const getNullValueCount =
-      convertNonNullPercentForColumnSelected(
-        gridData?.values,
-        (gridData?.summary?.statistics[columnName] as Record<string, IType>)?.general
-      ) || 0;
-    const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
-    const insightDrawerData = {
-      open: true,
-      columnName,
-      distinctValues: getDistinctValue,
-      characterCount: getCharacterCountOfCell,
-      dataQuality: {
-        nullValueCount: Number(getNullValueCount),
-        nullValuePercentage: Number(
-          ((Number(Number(getNullValueCount).toFixed(0)) / rowsDataList?.length) * 100).toFixed(0)
-        ),
-        emptyValueCount: calculateEmptyValueCount(rowsDataList, columnName),
-        emptyValuePercentage: Number(
-          (
-            (Number(Number(calculateEmptyValueCount(rowsDataList, columnName)).toFixed(0)) /
-              rowsDataList?.length) *
-            100
-          ).toFixed(0)
-        ),
-      },
-      dataQualityBar: gridData?.summary?.statistics[columnName],
-      dataTypeString: getDataTypeString,
-      dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
-      columnNamesList: getColumnNames(rowsDataList),
-    };
-    return insightDrawerData;
-  };
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -214,20 +168,21 @@ export default function GridTable() {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
-      const calculatedMetaData = calculateMetaData(key);
-      const emptyValueCount = calculatedMetaData.dataQuality.emptyValueCount;
-      const nullValueCount = calculatedMetaData.dataQuality.nullValueCount;
+      const emptyValueCount = calculateEmptyValueCount(rowsDataList, key);
+      const nullValueCount = convertNonNullPercentForColumnSelected(rowsDataList, value);
+      const frequentItem = checkFrequentlyOccuredValues(rowsDataList, key);
+      const emptyNullCheck = emptyValueCount === 0 && nullValueCount === '0';
       const emptyData = {
-        label: 'Empty',
-        count: emptyValueCount,
+        label: emptyNullCheck && frequentItem.length ? frequentItem[0]?.name : 'Empty',
+        count: emptyNullCheck && frequentItem.length ? frequentItem[0]?.count : emptyValueCount,
       };
       const nullData = {
-        label: 'Null',
-        count: nullValueCount,
+        label: emptyNullCheck && frequentItem.length > 1 ? frequentItem[1]?.name : 'Null',
+        count: emptyNullCheck && frequentItem.length > 1 ? frequentItem[1]?.count : nullValueCount,
       };
 
       const metricData = {
-        name: calculatedMetaData.columnName,
+        name: key,
         data: [emptyData, nullData],
       };
 
@@ -314,10 +269,10 @@ export default function GridTable() {
             <TableRow>
               {missingDataList?.length &&
                 headersNamesList.length &&
-                headersNamesList.map((each, index) => {
-                  return missingDataList.map((item, itemIndex) => {
+                headersNamesList.map((item, itemIndex) => {
+                  return missingDataList.map((each, index) => {
                     if (item.name === each.name) {
-                      return <GridKPICell metricData={item.data} key={item.name} />;
+                      return <GridKPICell metricData={each.data} key={each.name} />;
                     }
                   });
                 })}

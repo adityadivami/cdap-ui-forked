@@ -16,6 +16,7 @@
 
 import { IValues } from 'components/GridTable/types';
 import T from 'i18n-react';
+import _ from 'lodash';
 
 const PREFIX = 'features.WranglerNewUI.GridTable';
 
@@ -214,8 +215,30 @@ export const convertNonNullPercentForColumnSelected = (values: IValues[], nonNul
   const lengthOfData: number = values?.length || 0;
   let nullValueCount: number = 0;
   if (lengthOfData) {
-    nullValueCount =
-      (((nonNullValue?.null || 0) + (nonNullValue?.empty || 0)) / 100) * lengthOfData || 0;
+    nullValueCount = ((nonNullValue?.general?.null || 0) / 100) * lengthOfData || 0;
   }
   return nullValueCount.toFixed(0);
+};
+
+/**
+ *
+ * @description This function takes API response of execute api and column name to calculate top two most occured value
+ * @param {IValues[]} values This is the execute API Response rows
+ * @param {string} key This is the column name
+ * @returns {array} This is the array of objects (Top two most occurred values with their count)
+ */
+
+export const checkFrequentlyOccuredValues = (values: IValues[], key: string) => {
+  const valueOfKey = values?.map((el) => el[key]);
+  const columnValuesCount = _.values(_.groupBy(valueOfKey)).map((d) => ({
+    name: d[0],
+    count: d.length,
+  }));
+  const firstFrequentItem = _.maxBy(columnValuesCount, 'count');
+  const indexOfFirstLargest = columnValuesCount.findIndex(
+    (el) => el.name === firstFrequentItem.name
+  );
+  columnValuesCount.splice(indexOfFirstLargest, 1);
+  const secondFrequentItem = _.maxBy(columnValuesCount, 'count');
+  return [firstFrequentItem, secondFrequentItem];
 };
