@@ -14,17 +14,17 @@
  * the License.
  */
 
-import { render, screen, fireEvent } from "@testing-library/react";
-import React from "react";
-import OngoingWorkspaceListMenu from "components/OpenWorkspacesList/components/OngoingWorkspaceListMenu/OngoingWorkspaceListMenu";
+import { render, screen, fireEvent } from '@testing-library/react';
+import React from 'react';
+import OngoingWorkspaceListMenu from 'components/OpenWorkspacesList/components/OngoingWorkspaceListMenu/OngoingWorkspaceListMenu';
 
-describe("It should test OngoingWorkspaceListMenu Component", () => {
+describe('It should test OngoingWorkspaceListMenu Component', () => {
   beforeEach(() => {
     render(
       <OngoingWorkspaceListMenu
         workspace={{
-          workspaceId: "96d6923c-3b21-4dc8-9d66-9befa00bb91c",
-          workspaceName: "information_schema_catalog_name",
+          workspaceId: '96d6923c-3b21-4dc8-9d66-9befa00bb91c',
+          workspaceName: 'information_schema_catalog_name_information_testing',
         }}
         index={0}
         handleMenuClick={jest.fn()}
@@ -32,9 +32,14 @@ describe("It should test OngoingWorkspaceListMenu Component", () => {
     );
   });
 
-  it("should trigger onChange event in list item", () => {
-    const listItemElement = screen.getByTestId(/open-workspace-list-item-0/i)
-    fireEvent.click(listItemElement)
-    expect(listItemElement).toBeInTheDocument()
+  it('should trigger onChange event in list item', () => {
+    const listItemElement = screen.getByTestId(/open-workspace-list-item-0/i);
+    fireEvent.click(listItemElement);
+    expect(listItemElement).toBeInTheDocument();
+  });
+
+  it('should test the workspace Name', () => {
+    const workspaceName = screen.getByTestId(/workspace-name/i);
+    expect(workspaceName).toHaveTextContent('information_schema_catalog_name_information_testing');
   });
 });

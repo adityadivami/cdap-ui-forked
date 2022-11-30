@@ -27,7 +27,7 @@ import {
   WorkspaceOpenTypography,
 } from 'components/OpenWorkspacesList/StyledComponents';
 import T from 'i18n-react';
-import React, { createRef, Ref, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
@@ -51,7 +51,6 @@ export default function() {
   const [workspaceCount, setWorkspaceCount] = useState<number>();
   const maxWorkspaceListCount = 4;
   const history = useHistory();
-  const myLabelRef: Ref<HTMLSpanElement> = createRef();
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
