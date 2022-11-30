@@ -24,6 +24,8 @@ import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -40,12 +42,12 @@ public class Breadcrumb {
     public void clickOnTheConnectorType(String connectionLabel, String connectionTestId) {
         try {
             WaitHelper.waitForElementToBeEnabled(
-                    Helper.locateElementByTestId("connector-type-" + connectionTestId));
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("connector-type-" + connectionTestId));
+                    Helper.locateElementByTestId("wrangle-card-" + connectionTestId));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangle-card-" + connectionTestId));
             System.out.println("Clicked on " + connectionLabel + " Element");
             WaitHelper.waitForPageToLoad();
             if (connectionLabel.equals("Add Connections")) {
-                ElementHelper.clickOnElement(Helper.locateElementByTestId("connector-type-" + connectionTestId));
+                ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangle-card-" + connectionTestId));
                 System.out.println("Clicked on " + connectionLabel + " Element");
                 WaitHelper.waitForPageToLoad();
                 String actualText = SeleniumDriver.getDriver().getCurrentUrl();
@@ -66,10 +68,10 @@ public class Breadcrumb {
     @Then("Click on the Home link button")
     public void clickOnTheHomeLinkButton() {
         try {
-        WaitHelper.waitForPageToLoad();
-        SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-Home"));
-        System.out.println("clicked on home link from Data source page");
+            WaitHelper.waitForPageToLoad();
+            SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-Home"));
+            System.out.println("clicked on home link from Data source page");
         } catch (Exception e) {
             System.out.println("error:" + e);
         }
@@ -78,38 +80,38 @@ public class Breadcrumb {
     @Then("Click on the Exploration card with \\\"(.*)\\\"")
     public void clickOnTheExplorationCard(int testId) {
         try {
-        WaitHelper.waitForPageToLoad();
-        SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explorations-" + testId));
-        System.out.println("clicked on exploration card");
-    } catch (Exception e) {
-        System.out.println("error:" + e);
+            WaitHelper.waitForPageToLoad();
+            SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explorations-" + testId));
+            System.out.println("clicked on exploration card");
+        } catch (Exception e) {
+            System.out.println("error:" + e);
+        }
     }
-}
 
     @Then("Click on the Home link of wrangle page")
     public void clickOnTheHomeLink() {
         try {
-        System.out.println("inside the function");
-        SeleniumDriver.getDriver().manage().window().maximize();
-        SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
-        String url = SeleniumDriver.getDriver().getCurrentUrl();
-        Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-        System.out.println(url);
-        boolean flag = true;
-        for (int i = 0; flag == true; i++) {
-            if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
-                flag = true;
-            } else {
-                flag = false;
+            System.out.println("inside the function");
+            SeleniumDriver.getDriver().manage().window().maximize();
+            SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+            String url = SeleniumDriver.getDriver().getCurrentUrl();
+            Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
+            System.out.println(url);
+            boolean flag = true;
+            for (int i = 0; flag == true; i++) {
+                if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+                    flag = true;
+                } else {
+                    flag = false;
+                }
             }
+            WebElement ele = Helper.locateElementByTestId("breadcrumb-home-Home");
+            Actions action = new Actions(SeleniumDriver.getDriver());
+            action.moveToElement(ele).perform();
+            ele.click();
+        } catch (Exception e) {
+            System.out.println("error:" + e);
         }
-        WebElement ele = Helper.locateElementByTestId("breadcrumb-home-Home");
-        Actions action = new Actions(SeleniumDriver.getDriver());
-        action.moveToElement(ele).perform();
-        ele.click();
-    } catch (Exception e) {
-        System.out.println("error:" + e);
     }
-}
 }

@@ -18,7 +18,7 @@
 Feature: Breadcrumb - Navigate to the application
 
   @Breadcrumb
-  Scenario Outline: Navigate to the Data Source
+  Scenario Outline: Go through the Breadcrumb functionality
     Given Navigate to the home page
     Then  Click on the Connector type with "<connectionLabel>" and "<connectionTestId>"
     Then Click on the Home link button
@@ -26,4 +26,4 @@ Feature: Breadcrumb - Navigate to the application
     Then Click on the Home link of wrangle page
     Examples:
          | connectionLabel | connectionTestId |testId|
-         | PostgreSQL | postgresql | 0 |
+         | File | file | 0 |
