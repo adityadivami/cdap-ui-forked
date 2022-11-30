@@ -56,6 +56,21 @@ import {
   convertNonNullPercentForColumnSelected,
   getColumnNames,
 } from './utils';
+import styled from 'styled-components';
+import { grey, red } from '@material-ui/core/colors';
+
+const ProgressBarTableCell = styled(TableCell)`
+  padding: 0px;
+`;
+
+const StyledLinearProgress = styled(LinearProgress)`
+  background-color: ${red.A100};
+  height: 6px;
+
+  & .MuiLinearProgress-barColorPrimary {
+    background-color: ${grey[300]};
+  }
+`;
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -228,12 +243,12 @@ export default function GridTable() {
     const progressValues = [];
     for (const title in gridData.summary.statistics) {
       const { general } = gridData.summary.statistics[title] || {};
-      const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
-      const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
-      progressValues.push({ value: nonNull, key: title });
+      const empty = general.empty || 0;
+      const nonNull = general['non-null'] || 0;
+      const filled = nonNull - empty;
+      progressValues.push({ value: filled, key: title });
     }
     setProgress(progressValues);
-
     const rowData =
       rawData &&
       rawData.values &&
@@ -280,22 +295,17 @@ export default function GridTable() {
             <TableRow>
               {headersNamesList?.length &&
                 headersNamesList.map((item, index) => (
-                  <TableCell className={classes.progressBarRoot}>
-                    <LinearProgress
+                  <ProgressBarTableCell>
+                    <StyledLinearProgress
                       variant="determinate"
                       value={
-                        progress.filter((each) => {
-                          return each.key === item.name;
+                        progress.filter((progressItem) => {
+                          return progressItem.key === item.name;
                         })[0]?.value
                       }
                       key={index}
-                      classes={{
-                        root: classes.MUILinearRoot,
-                        barColorPrimary: classes.MUIBarColor,
-                      }}
-                      className={classes.linearProgressBarStyle}
                     />
-                  </TableCell>
+                  </ProgressBarTableCell>
                 ))}
             </TableRow>
             <TableRow>
