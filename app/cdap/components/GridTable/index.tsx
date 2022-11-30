@@ -34,9 +34,11 @@ import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
+  IGeneral,
   IHeaderNamesList,
   IParams,
   IRecords,
+  IStatistics,
   IType,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
@@ -50,6 +52,7 @@ import { objectQuery } from 'services/helpers';
 import {
   calculateEmptyValueCount,
   convertNonNullPercentForColumnSelected,
+  checkFrequentlyOccuredValues,
 } from 'components/GridTable/utils';
 import styled from 'styled-components';
 import { grey, red } from '@material-ui/core/colors';
@@ -161,19 +164,21 @@ export default function GridTable() {
   };
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
-  const createMissingData = (statistics: IRecords) => {
+  const createMissingData = (statistics: IStatistics | IGeneral) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
       const emptyValueCount = calculateEmptyValueCount(rowsDataList, key);
       const nullValueCount = convertNonNullPercentForColumnSelected(rowsDataList, value);
+      const frequentItem = checkFrequentlyOccuredValues(rowsDataList, key);
+      const emptyNullCheck = emptyValueCount === 0 && nullValueCount === '0';
       const emptyData = {
-        label: 'Empty',
-        count: emptyValueCount,
+        label: emptyNullCheck && frequentItem.length ? frequentItem[0]?.name : 'Empty',
+        count: emptyNullCheck && frequentItem.length ? frequentItem[0]?.count : emptyValueCount,
       };
       const nullData = {
-        label: 'Null',
-        count: nullValueCount,
+        label: emptyNullCheck && frequentItem.length > 1 ? frequentItem[1]?.name : 'Null',
+        count: emptyNullCheck && frequentItem.length > 1 ? frequentItem[1]?.count : nullValueCount,
       };
 
       const metricData = {
@@ -193,9 +198,10 @@ export default function GridTable() {
     setHeadersNamesList(headersData);
 
     const progressValues = [];
-    for (const title in gridData.summary.statistics) {
-      const { general } = gridData.summary.statistics[title] || {};
-      const empty = general.empty || 0;
+    const updatedStatistics = gridData?.summary?.statistics;
+    for (const title in gridData?.summary?.statistics) {
+      const { general } = updatedStatistics[title] || {};
+      const empty = general?.empty || 0;
       const nonNull = general['non-null'] || 0;
       const filled = nonNull - empty;
       progressValues.push({ value: filled, key: title });

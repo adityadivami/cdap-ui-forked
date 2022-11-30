@@ -235,6 +235,11 @@ export const checkFrequentlyOccuredValues = (values: IValues[], key: string) => 
     name: d[0],
     count: d.length,
   }));
-  const frequentItem = _.maxBy(columnValuesCount, 'count');
-  return frequentItem;
+  const firstFrequentItem = _.maxBy(columnValuesCount, 'count');
+  const indexOfFirstLargest = columnValuesCount.findIndex(
+    (el) => el.name === firstFrequentItem.name
+  );
+  columnValuesCount.splice(indexOfFirstLargest, 1);
+  const secondFrequentItem = _.maxBy(columnValuesCount, 'count');
+  return [firstFrequentItem, secondFrequentItem];
 };
