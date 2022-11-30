@@ -17,6 +17,7 @@
 import React from 'react';
 import DirectiveInput from 'components/DirectiveInput/index';
 import { fireEvent, render, screen } from '@testing-library/react';
+import { getFormattedSyntax } from 'components/DirectiveInput/utils';
 
 describe('Testing Directive Input Component', () => {
   beforeEach(() => {
@@ -37,9 +38,16 @@ describe('Testing Directive Input Component', () => {
 
   it('Should check if the input element is working as expected with test as input', () => {
     const inputElement = screen.getByTestId(/select-directive-input-search/i);
+    getFormattedSyntax('test: apple', 'test : test');
     expect(inputElement).toBeInTheDocument();
-    fireEvent.change(inputElement, { target: { value: '' } });
-    fireEvent.keyDown(inputElement, { key: 'Enter', code: 'Enter', charCode: 13 });
-    expect(inputElement).toHaveAttribute('value', '');
+    fireEvent.change(inputElement, { target: { value: 'test' } });
+    fireEvent.keyDown(inputElement, { charCode: 13 });
+    expect(inputElement).toHaveAttribute('value', 'test');
+  });
+
+  it('Should check cross icon is functioning as expected ', () => {
+    const closeIconElement = screen.getByTestId(/close-directive-panel/i);
+    fireEvent.click(closeIconElement);
+    expect(closeIconElement).toBeInTheDocument();
   });
 });

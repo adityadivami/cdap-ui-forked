@@ -22,7 +22,7 @@ import { PREFIX } from 'components/DirectiveInput/constants';
 
 describe('Testing Directive Usage Component', () => {
   beforeEach(() => {
-    render(<DirectiveUsage eachDirective={undefined} />);
+    render(<DirectiveUsage directiveUsage={undefined} />);
   });
 
   it('Should check if the parent wrapper is rendered', () => {

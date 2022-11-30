@@ -17,7 +17,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import InputPanel from 'components/DirectiveInput/Components/InputPanel/index';
-import MyDataPrepApi from 'api/dataprep';
 
 describe('Testing Input Panel Component', () => {
   const dummy = [
@@ -56,12 +55,11 @@ describe('Testing Input Panel Component', () => {
     render(
       <InputPanel
         setDirectivesList={jest.fn()}
-        selectedDirective={true}
+        isDirectiveSet={true}
         columnNamesList={dummy}
         onSearchItemClick={jest.fn()}
         getDirectiveSyntax={jest.fn()}
-        onColumnSelection={jest.fn()}
-        inputBoxValue={'test'}
+        inputDirective={'test'}
       />
     );
     const parentElement = screen.getByTestId(/input-panel-wraper/i);
@@ -72,12 +70,11 @@ describe('Testing Input Panel Component', () => {
     render(
       <InputPanel
         setDirectivesList={jest.fn()}
-        selectedDirective={false}
+        isDirectiveSet={false}
         columnNamesList={dummy}
         onSearchItemClick={jest.fn()}
         getDirectiveSyntax={jest.fn()}
-        onColumnSelection={jest.fn()}
-        inputBoxValue={'test'}
+        inputDirective={'test'}
       />
     );
     const parentElement = screen.getByTestId(/input-panel-wraper/i);

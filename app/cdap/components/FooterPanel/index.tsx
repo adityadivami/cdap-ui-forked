@@ -35,6 +35,7 @@ interface IFooterPanelProps {
   recipeStepsCount: number;
   gridMetaInfo: IGridMetaInfo;
   handleShowRecipePanelHandler: () => void;
+  setDirectivePanelIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ColumnViewBox = styled(Box)`
@@ -133,6 +134,7 @@ export default function({
   recipeStepsCount,
   gridMetaInfo,
   handleShowRecipePanelHandler,
+  setDirectivePanelIsOpen,
 }: IFooterPanelProps) {
   const { rowCount, columnCount } = gridMetaInfo;
 
@@ -157,7 +159,10 @@ export default function({
           <ArrowRightIcon />
         </TransformatedIconButton>
       </ZoomBox>
-      <DirectivesBox data-testid="footer-panel-directives-tab">
+      <DirectivesBox
+        data-testid="footer-panel-directives-tab"
+        onClick={() => setDirectivePanelIsOpen(true)}
+      >
         <Label data-testid="footerpanel-simple-directives-label">
           <>{`${T.translate(`${PREFIX}.directives`)}`}</>
         </Label>

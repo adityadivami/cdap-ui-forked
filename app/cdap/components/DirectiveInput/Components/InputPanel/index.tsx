@@ -17,7 +17,7 @@
 import { Box, Typography } from '@material-ui/core';
 import MyDataPrepApi from 'api/dataprep';
 import { defaultFuseOptions } from 'components/DirectiveInput/constants';
-import { IDirectiveUsage, IObject } from 'components/DirectiveInput/types';
+import { IDirectiveUsage } from 'components/DirectiveInput/types';
 import ee from 'event-emitter';
 import Fuse from 'fuse.js';
 import reverse from 'lodash/reverse';
@@ -29,32 +29,20 @@ import styled from 'styled-components';
 import uuidV4 from 'uuid/v4';
 import { grey } from '@material-ui/core/colors';
 import { IHeaderNamesList } from 'components/GridTable/types';
+import { getFormattedSyntax, getLastWordOfSearchItem } from 'components/DirectiveInput/utils';
+import SearchListItem from 'components/DirectiveInput/Components/SearchListItem';
 
 interface IInputPanelProps {
   setDirectivesList: React.Dispatch<React.SetStateAction<[]>>;
-  selectedDirective: boolean;
+  isDirectiveSet: boolean;
   columnNamesList: IHeaderNamesList[];
   onSearchItemClick: (value: string) => void;
   getDirectiveSyntax: (results: IDirectiveUsage[], value: boolean) => void;
-  onColumnSelection: (value: boolean) => void;
-  inputBoxValue: string;
+  inputDirective: string;
 }
 
-const SimpleWrapper = styled(Box)`
+const SearchWrapper = styled(Box)`
   display: block;
-`;
-
-const SmallLabel = styled(Typography)`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.15;
-  color: ${grey[700]};
-`;
-
-const LargeLabel = styled(SmallLabel)`
-  font-weight: 600;
-  font-size: 16px;
 `;
 
 const ResultRow = styled(Box)`
@@ -73,12 +61,11 @@ const ActiveResultRow = styled(ResultRow)`
 
 export default function({
   setDirectivesList,
-  selectedDirective,
+  isDirectiveSet,
   columnNamesList,
   onSearchItemClick,
   getDirectiveSyntax,
-  onColumnSelection,
-  inputBoxValue,
+  inputDirective,
 }: IInputPanelProps) {
   const [searchResults, setSearchResults] = useState<IDirectiveUsage[]>([]);
   const [inputText, setInputText] = useState<string>('');
@@ -87,7 +74,8 @@ export default function({
   const [fuse, setFuse] = useState(new Fuse([], { ...defaultFuseOptions }));
 
   const getUsage = () => {
-    if (!selectedDirective) {
+    if (!isDirectiveSet) {
+      // If Directive name is not yet entered in input then the search list will be directive list else will be column list
       MyDataPrepApi.getUsage({ context: NamespaceStore.getState().selectedNamespace }).subscribe(
         (res) => {
           setDirectivesList(res.values);
@@ -101,7 +89,7 @@ export default function({
 
   useEffect(() => {
     getUsage();
-  }, [selectedDirective]);
+  }, [isDirectiveSet]);
 
   useEffect(() => {
     eventEmitter.on(globalEvents.DIRECTIVEUPLOAD, getUsage);
@@ -109,12 +97,12 @@ export default function({
     const directiveInput = document.getElementById('directive-input-search');
     const mousetrap = new Mousetrap(directiveInput);
 
-    mousetrap.bind('up', handleUpArrow);
-    mousetrap.bind('down', handleDownArrow);
-    mousetrap.bind('enter', handleEnterKey);
-    mousetrap.bind('tab', handleTabKey);
+    mousetrap.bind('up', handleUpArrow); // Binding this event for navigating up in the search list
+    mousetrap.bind('down', handleDownArrow); // Binding this event for navigating bottom in the search list
+    mousetrap.bind('enter', handleEnterKey); // Binding this event for selecting item by pressing enter on active item in the search list
+    mousetrap.bind('tab', handleTabKey); // Binding this event on tab click so active item on list will be filled on input tag
 
-    // unbind a keyboard event.
+    // Unbinding above events.
     return () => {
       mousetrap.unbind('up');
       mousetrap.unbind('down');
@@ -124,6 +112,7 @@ export default function({
     };
   });
 
+  // Used for navigating above in search list
   const handleUpArrow = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (selectedIndex !== 0) {
@@ -131,6 +120,7 @@ export default function({
     }
   };
 
+  // Used for navigating below in search list
   const handleDownArrow = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (selectedIndex !== searchResults.length - 1) {
@@ -138,6 +128,7 @@ export default function({
     }
   };
 
+  // Used for selecting item in search list
   const handleEnterKey = () => {
     if (inputText.length > 0) {
       if (searchResults[selectedIndex]) {
@@ -148,6 +139,7 @@ export default function({
     }
   };
 
+  // Used for filling input with active item in search list
   const handleTabKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (inputText.length === 0 || inputText.split(' ').length !== 1) {
@@ -157,18 +149,16 @@ export default function({
   };
 
   useEffect(() => {
-    if (selectedDirective) {
-      setFuse(new Fuse(columnNamesList, { ...defaultFuseOptions, keys: ['label'] }));
-    }
-    searchMatch(inputBoxValue);
-    setInputText(inputBoxValue);
-  }, [inputBoxValue]);
+    searchMatch(inputDirective);
+    setInputText(inputDirective);
+  }, [inputDirective]);
 
+  // Function called on every change in input to change search list to most appropriate matched list
   const searchMatch = (searchString: string) => {
     let searchList = [];
-    const spaceIndex: boolean = searchString.includes(' '); // As soon as directive is entered, we need column list to appear hence we are checking if space is present in it,
+    const spaceIndex = searchString.includes(' '); // As soon as directive is entered, we need column list to appear hence we are checking if space is present in it,
     if (fuse && searchString.length > 0) {
-      if (!selectedDirective) {
+      if (!isDirectiveSet) {
         searchList = fuse
           .search(searchString)
           .slice(0, 3)
@@ -178,7 +168,8 @@ export default function({
           });
         reverse(searchList);
       } else {
-        searchList = fuse.search(searchString.split(':')[1]).map((searchItem) => {
+        const characterToSearch = getLastWordOfSearchItem(searchString);
+        searchList = fuse.search(characterToSearch).map((searchItem) => {
           searchItem.uniqueId = uuidV4();
           return searchItem;
         });
@@ -188,28 +179,25 @@ export default function({
     setSearchResults(searchList);
     setInputText(searchString);
     setSelectedIndex(searchList.length - 1);
-    if (!selectedDirective) {
+    if (!isDirectiveSet) {
       getDirectiveSyntax(searchList, spaceIndex);
     }
   };
 
+  // Function called when item is clicked in search list
   const handleListItemClick = (listItem) => {
-    if (!selectedDirective) {
+    if (!isDirectiveSet) {
       onSearchItemClick(listItem.item.directive);
       getDirectiveSyntax([listItem], true);
     } else {
-      const splitData = inputText.split(/(?=[:])|(?<=[:])/g);
-      const clickedItem: Record<string, IObject> = {
-        target: { value: `${splitData[0]}${splitData[1]}${listItem.item.label}` },
-      };
-      setInputText(`${splitData[0]}${splitData[1]}${listItem.item.label}`);
-      onSearchItemClick(clickedItem.target.value);
-      onColumnSelection(true);
+      const formattedString = getFormattedSyntax(inputText, listItem.item.label);
+      setInputText(formattedString);
+      onSearchItemClick(formattedString);
     }
   };
 
   return (
-    <SimpleWrapper data-testid="input-panel-wraper">
+    <SearchWrapper data-testid="input-panel-wraper">
       {searchResults.map((searchItem, searchItemIndex) =>
         searchItemIndex === selectedIndex ? (
           <ActiveResultRow
@@ -217,14 +205,7 @@ export default function({
             onClick={() => handleListItemClick(searchItem)}
             data-testid={`select-directive-list-option-${searchItemIndex}`}
           >
-            <SimpleWrapper>
-              <LargeLabel data-testid="select-directive-list-label" variant="body1">
-                {searchItem?.item?.directive || searchItem?.item?.label}
-              </LargeLabel>
-              <SmallLabel data-testid="select-directive-list-description" variant="body1">
-                {searchItem?.item?.description}
-              </SmallLabel>
-            </SimpleWrapper>
+            <SearchListItem searchItem={searchItem} />
           </ActiveResultRow>
         ) : (
           <ResultRow
@@ -232,17 +213,10 @@ export default function({
             onClick={() => handleListItemClick(searchItem)}
             data-testid={`select-directive-list-option-${searchItemIndex}`}
           >
-            <SimpleWrapper>
-              <LargeLabel data-testid="select-directive-list-label" variant="body1">
-                {searchItem?.item?.directive || searchItem?.item?.label}
-              </LargeLabel>
-              <SmallLabel data-testid="select-directive-list-description" variant="body1">
-                {searchItem?.item?.description}
-              </SmallLabel>
-            </SimpleWrapper>
+            <SearchListItem searchItem={searchItem} />
           </ResultRow>
         )
       )}
-    </SimpleWrapper>
+    </SearchWrapper>
   );
 }
