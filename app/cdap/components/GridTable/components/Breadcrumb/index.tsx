@@ -14,42 +14,13 @@
  * the License.
  */
 
-import { Box, Typography, Button, IconButton } from '@material-ui/core';
+import { Box, Typography } from '@material-ui/core';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import { blue } from '@material-ui/core/colors';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import { useStyles } from './styles';
-import T from 'i18n-react';
-import styled from 'styled-components';
-import { HelpIcon } from 'components/GridTable/IconStore/HelpIcon';
-import IngestViewSchemaDropDown from './IngestViewSchemaDropDown';
-
-const CreatePipelineButton = styled(Button)`
-  width: 162px;
-  height: 36px;
-  background-color: ${blue[500]};
-  box-shadow: 0px 2px 4px rgba(70, 129, 244, 0.15);
-  border-radius: 4px;
-  font-weight: 400;
-  font-size: 15px;
-  color: #ffffff;
-  text-align: center;
-  padding-top: 6px;
-  margin-right: 0;
-  text-transform: none;
-  &:hover {
-    background-color: ${blue[500]};
-    box-shadow: none;
-    color: #ffffff;
-  }
-  &:active {
-    box-shadow: none;
-    background-color: ${blue[500]};
-  }
-`;
 
 export default function BreadCrumb({ datasetName }) {
   const classes = useStyles();
@@ -71,17 +42,6 @@ export default function BreadCrumb({ datasetName }) {
           Data Sources
         </Link>
         <Typography color="textPrimary">{datasetName}</Typography>
-      </Breadcrumbs>
-      <Breadcrumbs separator="">
-        <IconButton>
-          <a href="https://cdap.atlassian.net/wiki/spaces/DOCS/overview" target="_blank">
-            {HelpIcon}
-          </a>
-        </IconButton>
-        <IngestViewSchemaDropDown />
-        <CreatePipelineButton disabled data-testid="create-pipeline-button">
-          {T.translate('features.WranglerNewUI.Breadcrumb.labels.createPipeline')}
-        </CreatePipelineButton>
       </Breadcrumbs>
     </Box>
   );
