@@ -220,14 +220,13 @@ export const convertNonNullPercentForColumnSelected = (values: IValues[], nonNul
   return nullValueCount.toFixed(0);
 };
 
-export const convertEmptyPercentCountForColumnSelected = (values: IValues[], nonNullValue: any) => {
-  const lengthOfData: number = values?.length || 0;
-  let emptyValueCount: number = 0;
-  if (lengthOfData) {
-    emptyValueCount = ((nonNullValue?.general?.empty || 0) / 100) * lengthOfData || 0;
-  }
-  return emptyValueCount.toFixed(0);
-};
+/**
+ *
+ * @description This function takes API response of execute api and column name to calculate top two most occured value
+ * @param {IValues[]} values This is the execute API Response rows
+ * @param {string} key This is the column name
+ * @returns {array} This is the array of objects (Top two most occurred values with their count)
+ */
 
 export const checkFrequentlyOccuredValues = (values: IValues[], key: string) => {
   const valueOfKey = values?.map((el) => el[key]);
