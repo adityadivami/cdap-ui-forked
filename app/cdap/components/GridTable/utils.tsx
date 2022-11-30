@@ -27,7 +27,6 @@ const PREFIX = 'features.WranglerNewUI.GridTable';
  */
 
 export const calculateDistinctValues = (values: IValues[], columnName: string) => {
-  console.log('calculateDistinctValues', values, 'values', columnName, 'columnName');
   const arrayOfColumn = values && Array.isArray(values) && values.map((el) => el[columnName]);
   const arr = [...arrayOfColumn];
   let distinctCount: number = 0;

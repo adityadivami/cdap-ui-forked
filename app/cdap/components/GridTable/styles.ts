@@ -29,4 +29,16 @@ export const useStyles = makeStyles({
     width: '100%',
     zIndex: 2000,
   },
+  progressBarRoot: {
+    padding: '0px',
+  },
+  MUILinearRoot: {
+    height: '6px',
+  },
+  linearProgressBarStyle: {
+    backgroundColor: '#FF8A80',
+  },
+  MUIBarColor: {
+    backgroundColor: '#9CCC65',
+  },
 });

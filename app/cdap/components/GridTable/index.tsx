@@ -14,7 +14,14 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import {
+  LinearProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
@@ -56,6 +63,7 @@ export default function GridTable() {
   const classes = useStyles();
 
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState([]);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
@@ -68,11 +76,8 @@ export default function GridTable() {
   ]);
 
   const calculateMetaData = (columnName: string) => {
-    console.log(columnName, 'columnName');
     const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
-    console.log(getDistinctValue, 'getDistinctValue');
     const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
-    console.log(getCharacterCountOfCell, 'getCharacterCountOfCell');
     const getNullValueCount =
       convertNonNullPercentForColumnSelected(
         gridData?.values,
@@ -187,82 +192,29 @@ export default function GridTable() {
     }
   };
 
-  // ------------@convertNonNullPercent Function is used for calculation of Missing/Null value
-  const convertNonNullPercent = (nonNullValue) => {
-    const lengthOfData: number = gridData?.values.length;
-    let count: number = 0;
-    let emptyCount: number = 0;
-    let nullValueCount: number = 0;
-    if (lengthOfData) {
-      nullValueCount = nonNullValue.null ? (nonNullValue.null / 100) * lengthOfData : 0;
-      emptyCount = nonNullValue.empty ? (nonNullValue.empty / 100) * lengthOfData : 0;
-      count = parseInt(nullValueCount.toFixed(0) + emptyCount.toFixed(0), 2);
-    }
-    return count;
-  };
-
-  // ------------@checkFrequentlyOccuredValues Function is used for checking which value appears maximum time in a column if that column doesn't have missing/null value
-  const checkFrequentlyOccuredValues = (key) => {
-    const valueOfKey = gridData.values.map((el) => el[key]);
-    let mostFrequentItem: number = 1;
-    let mostFrequentItemCount: number = 0;
-    let mostFrequentItemValue: string = '';
-    const mostFrequentDataItem = {
-      name: '',
-      count: 0,
-    };
-    if (Array.isArray(valueOfKey) && valueOfKey.length) {
-      valueOfKey.map((item, index) => {
-        valueOfKey.map((value, valueIndex) => {
-          if (item === value) {
-            mostFrequentItemCount++;
-          }
-          if (mostFrequentItem < mostFrequentItemCount) {
-            mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item as string;
-          }
-        });
-        mostFrequentItemCount = 0;
-        mostFrequentItemValue =
-          mostFrequentItemValue === '' ? (item as string) : mostFrequentItemValue;
-      });
-    }
-    mostFrequentDataItem.name = mostFrequentItemValue;
-    mostFrequentDataItem.count = mostFrequentItemCount;
-    return mostFrequentDataItem;
-  };
-
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
   const createMissingData = (statistics: IRecords) => {
-    console.log(statistics, 'statistics');
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
-
-    // statisticObjectToArray.forEach(([key, value]) => {
-    //   const headerKeyTypeArray = Object.entries(value);
-    //   const arrayForMissingValue = [];
-    //   headerKeyTypeArray.forEach(([vKey, vValue]) => {
-    //     if (vKey !== 'types') {
-    //       arrayForMissingValue.push({
-    //         label:
-    //           convertNonNullPercent(vValue) === 0
-    //             ? checkFrequentlyOccuredValues(key).name
-    //             : 'Missing/Null',
-    //         count:
-    //           convertNonNullPercent(vValue) === 0
-    //             ? checkFrequentlyOccuredValues(key).count
-    //             : convertNonNullPercent(vValue),
-    //       });
-    //     }
-    //   }),
-    //     metricArray.push({
-    //       name: key,
-    //       values: arrayForMissingValue.concat(invalidCountArray),
-    //     });
-    // });
     statisticObjectToArray.forEach(([key, value]) => {
       const calculatedMetaData = calculateMetaData(key);
-      metricArray.push(calculatedMetaData);
+      const emptyValueCount = calculatedMetaData.dataQuality.emptyValueCount;
+      const nullValueCount = calculatedMetaData.dataQuality.nullValueCount;
+      const emptyData = {
+        label: 'Empty',
+        count: emptyValueCount,
+      };
+      const nullData = {
+        label: 'Null',
+        count: nullValueCount,
+      };
+
+      const metricData = {
+        name: calculatedMetaData.columnName,
+        data: [emptyData, nullData],
+      };
+
+      metricArray.push(metricData);
     });
     return metricArray;
   };
@@ -272,6 +224,15 @@ export default function GridTable() {
     const rawData: IExecuteAPIResponse = gridData;
     const headersData = createHeadersData(rawData.headers, rawData.types);
     setHeadersNamesList(headersData);
+
+    const progressValues = [];
+    for (const title in gridData.summary.statistics) {
+      const { general } = gridData.summary.statistics[title] || {};
+      const { empty: empty = 0, 'non-null': nonEmpty = 100 } = general;
+      const nonNull = Math.floor((nonEmpty - empty) * 10) / 10;
+      progressValues.push({ value: nonNull, key: title });
+    }
+    setProgress(progressValues);
 
     const rowData =
       rawData &&
@@ -295,10 +256,6 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  useEffect(() => {
-    console.log(missingDataList, 'missingDataList');
-  }, [missingDataList]);
-
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
@@ -321,12 +278,33 @@ export default function GridTable() {
                 ))}
             </TableRow>
             <TableRow>
+              {headersNamesList?.length &&
+                headersNamesList.map((item, index) => (
+                  <TableCell className={classes.progressBarRoot}>
+                    <LinearProgress
+                      variant="determinate"
+                      value={
+                        progress.filter((each) => {
+                          return each.key === item.name;
+                        })[0]?.value
+                      }
+                      key={index}
+                      classes={{
+                        root: classes.MUILinearRoot,
+                        barColorPrimary: classes.MUIBarColor,
+                      }}
+                      className={classes.linearProgressBarStyle}
+                    />
+                  </TableCell>
+                ))}
+            </TableRow>
+            <TableRow>
               {missingDataList?.length &&
                 headersNamesList.length &&
                 headersNamesList.map((each, index) => {
                   return missingDataList.map((item, itemIndex) => {
                     if (item.name === each.name) {
-                      return <GridKPICell metricData={item} key={item.name} />;
+                      return <GridKPICell metricData={item.data} key={item.name} />;
                     }
                   });
                 })}
