@@ -34,9 +34,11 @@ import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
+  IGeneral,
   IHeaderNamesList,
   IParams,
   IRecords,
+  IStatistics,
   IType,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
@@ -96,7 +98,7 @@ export default function GridTable() {
     const getNullValueCount =
       convertNonNullPercentForColumnSelected(
         gridData?.values,
-        (gridData?.summary?.statistics?.columnName as Record<string, IType>)?.general
+        (gridData?.summary?.statistics[columnName] as Record<string, IType>)?.general
       ) || 0;
     const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
     const insightDrawerData = {
@@ -208,7 +210,7 @@ export default function GridTable() {
   };
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
-  const createMissingData = (statistics: IRecords) => {
+  const createMissingData = (statistics: IStatistics | IGeneral) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
@@ -241,9 +243,10 @@ export default function GridTable() {
     setHeadersNamesList(headersData);
 
     const progressValues = [];
-    for (const title in gridData.summary.statistics) {
-      const { general } = gridData.summary.statistics[title] || {};
-      const empty = general.empty || 0;
+    const updatedStatistics = gridData?.summary?.statistics;
+    for (const title in gridData?.summary?.statistics) {
+      const { general } = updatedStatistics[title] || {};
+      const empty = general?.empty || 0;
       const nonNull = general['non-null'] || 0;
       const filled = nonNull - empty;
       progressValues.push({ value: filled, key: title });
