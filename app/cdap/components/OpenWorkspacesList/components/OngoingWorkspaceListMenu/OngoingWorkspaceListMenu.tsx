@@ -71,7 +71,7 @@ export default function({ workspace, index, handleMenuClick }: IOngoingWorkspace
           key={index}
           data-testid={`open-workspace-list-item-${index}`}
         >
-          <WorkspaceListTypography ref={myLabelRef}>
+          <WorkspaceListTypography ref={myLabelRef} data-testid="workspace-name">
             {T.translate(workspace.workspaceName)}
           </WorkspaceListTypography>
         </StyledMenuItem>
