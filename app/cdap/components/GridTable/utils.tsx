@@ -16,6 +16,7 @@
 
 import { IValues } from 'components/GridTable/types';
 import T from 'i18n-react';
+import _ from 'lodash';
 
 const PREFIX = 'features.WranglerNewUI.GridTable';
 
@@ -214,8 +215,26 @@ export const convertNonNullPercentForColumnSelected = (values: IValues[], nonNul
   const lengthOfData: number = values?.length || 0;
   let nullValueCount: number = 0;
   if (lengthOfData) {
-    nullValueCount =
-      (((nonNullValue?.null || 0) + (nonNullValue?.empty || 0)) / 100) * lengthOfData || 0;
+    nullValueCount = ((nonNullValue?.general?.null || 0) / 100) * lengthOfData || 0;
   }
   return nullValueCount.toFixed(0);
+};
+
+export const convertEmptyPercentCountForColumnSelected = (values: IValues[], nonNullValue: any) => {
+  const lengthOfData: number = values?.length || 0;
+  let emptyValueCount: number = 0;
+  if (lengthOfData) {
+    emptyValueCount = ((nonNullValue?.general?.empty || 0) / 100) * lengthOfData || 0;
+  }
+  return emptyValueCount.toFixed(0);
+};
+
+export const checkFrequentlyOccuredValues = (values: IValues[], key: string) => {
+  const valueOfKey = values?.map((el) => el[key]);
+  const columnValuesCount = _.values(_.groupBy(valueOfKey)).map((d) => ({
+    name: d[0],
+    count: d.length,
+  }));
+  const frequentItem = _.maxBy(columnValuesCount, 'count');
+  return frequentItem;
 };
