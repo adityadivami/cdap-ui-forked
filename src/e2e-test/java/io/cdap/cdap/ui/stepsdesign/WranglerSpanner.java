@@ -16,7 +16,6 @@
 
 package io.cdap.cdap.ui.stepsdesign;
 
-
 import io.cdap.cdap.ui.utils.Commands;
 import io.cdap.cdap.ui.utils.Constants;
 import io.cdap.cdap.ui.utils.Helper;
@@ -98,8 +97,8 @@ public class WranglerSpanner {
     @Then("Check Connection {string} details: Instance, Database, Table")
     public static void checkConnectionDetails(String connectionName) {
         ElementHelper.clickOnElement(
-                 Helper.locateElementByXPath(
-                         "//div[@data-testid='connection-browser']//*[text()='" + DEFAULT_SPANNER_INSTANCE + "']"),
+                Helper.locateElementByXPath(
+                        "//div[@data-testid='connection-browser']//*[text()='" + DEFAULT_SPANNER_INSTANCE + "']"),
                 1000);
         ElementHelper.clickOnElement(
                 Helper.locateElementByXPath(
@@ -135,12 +134,16 @@ public class WranglerSpanner {
     }
 
     @Then("Confirm that the connection {string} is deleted")
-    public static void confirmConnectionDelete(String connectionName) {
-        String connectionLocatorName = "connection-" + TYPE_SPANNER + "-" + connectionName;
-        WaitHelper.waitForElementToBeHidden(
-                By.xpath("//*[@data-testid='" + connectionLocatorName + "']"), 200);
-        boolean isConnectionExists = Helper.isElementExists(
-                Helper.getCssSelectorByDataTestId(connectionLocatorName));
-        Assert.assertFalse(isConnectionExists);
+    public static void confirmConnectionDelete(String connectionName) throws Exception {
+        try {
+            String connectionLocatorName = "connection-" + TYPE_SPANNER + "-" + connectionName;
+            WaitHelper.waitForElementToBeHidden(
+                    By.xpath("//*[@data-testid='" + connectionLocatorName + "']"), 200);
+            boolean isConnectionExists = Helper.isElementExists(
+                    Helper.getCssSelectorByDataTestId(connectionLocatorName));
+            Assert.assertFalse(isConnectionExists);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 }
