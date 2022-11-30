@@ -39,7 +39,7 @@ public class FooterPanel {
             ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-            System.out.println("Clicked the data exploration card");
+//            System.out.println("Clicked the data exploration card");
         } catch (Exception e) {
             System.err.println("error" + e);
         }
