@@ -261,9 +261,8 @@ export default function GridTable() {
     //     });
     // });
     statisticObjectToArray.forEach(([key, value]) => {
-      console.log(key, value, 'statisticObjectToArray');
       const calculatedMetaData = calculateMetaData(key);
-      console.log('calculateMetaData', calculatedMetaData);
+      metricArray.push(calculatedMetaData);
     });
     return metricArray;
   };
@@ -284,14 +283,21 @@ export default function GridTable() {
       });
 
     setRowsDataList(rowData);
-
-    const missingData = createMissingData(gridData?.summary.statistics);
-    setMissingDataList(missingData);
   };
+
+  useEffect(() => {
+    const missingData =
+      gridData?.summary?.statistics && createMissingData(gridData?.summary?.statistics);
+    setMissingDataList(missingData);
+  }, [rowsDataList]);
 
   useEffect(() => {
     getGridTableData();
   }, [gridData]);
+
+  useEffect(() => {
+    console.log(missingDataList, 'missingDataList');
+  }, [missingDataList]);
 
   return (
     <Box data-testid="grid-table-container">
