@@ -51,6 +51,7 @@ import {
 import styled from 'styled-components';
 import FooterPanel from 'components/FooterPanel';
 import { reducer, initialGridTableState } from 'components/GridTable/reducer';
+import useSnackbar from 'components/Snackbar/useSnackbar';
 
 const RecipeStepsButton = styled(Button)`
   margin-left: 30px;
@@ -103,6 +104,7 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const [snackbarState, setSnackbar] = useSnackbar();
 
   useEffect(() => {
     dispatch({
@@ -243,6 +245,13 @@ export default function GridTable() {
         });
         setLoading(false);
         setGridData(response);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: T.translate(
+            `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
+          ).toString(),
+        });
       });
   };
 
@@ -559,9 +568,10 @@ export default function GridTable() {
       )}
       {toaster.open && (
         <Snackbar
-          handleCloseError={handleCloseSnackbar}
-          description={toaster.message}
+          handleClose={handleCloseSnackbar}
+          message={toaster.message}
           isSuccess={toaster.isSuccess}
+          open={toaster.open}
         />
       )}
       {loading && (

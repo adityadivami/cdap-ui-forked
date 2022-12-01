@@ -3468,29 +3468,32 @@ features:
     WranglerParsingPanelDrawerWidget:
       labels:
         parsing: Parsing
+    AddConnections:
+      referenceLabel: Add Connection
     Breadcrumb:
       labels:
         connectionsList: Data Sources
-        wrangleHome: Home
+        wranglerHome: Home
       params:
-        wrangeHome: home
         connectionsList: datasources
-    AddConnections:
-      referenceLabel: Add Connection
-    ImportData:
-      referenceLabel: Import Data
-    HomePage:
-      labels:
-        common:
-          viewAll: View All
-          addConnection: Add Connection
-          importData: Import Data
-        connectorTypes:
-          title: Start data exploration
-        workspaces:
-          title: Continue ongoing data explorations, pick up where you left off
+        wranglerHome: home
     ConnectionsList:
       labels:
         loadToGrid: Wrangle
         noConnections: No Connections to show
+    GridTable:
+      snackbarLabels:
+        datasetSuccess: Dataset loaded successfully 
+    HomePage:
+      labels:
+        common:
+          addConnection: Add Connection
+          importData: Import Data
+          viewAll: View All
+        connectorTypes:
+          title: Start data exploration
+        workspaces:
+          title: Continue ongoing data explorations, pick up where you left off
+    ImportData:
+      referenceLabel: Import Data
 ...
