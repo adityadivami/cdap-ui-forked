@@ -34,12 +34,8 @@ import java.time.Duration;
 public class Breadcrumb {
     @Given("Navigate to the home page to test breadcrumb")
     public void navigateToTheHomePageBreadcrumb() throws Exception {
-        try {
-            SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
-            WaitHelper.waitForPageToLoad();
-        } catch (Exception e) {
-            System.err.println(e);
-        }
+        SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
+        WaitHelper.waitForPageToLoad();
     }
 
     @Then("Click on the Connector type with \\\"(.*)\\\" and \\\"(.*)\\\"")
@@ -103,7 +99,11 @@ public class Breadcrumb {
                     flag = false;
                 }
             }
+            WebElement closeIcon = Helper.locateElementByTestId("snackbar-close-icon");
+            closeIcon.click();
+
             WebElement ele = Helper.locateElementByTestId("breadcrumb-home-Home");
+
             Actions action = new Actions(SeleniumDriver.getDriver());
             action.moveToElement(ele).perform();
             ele.click();
