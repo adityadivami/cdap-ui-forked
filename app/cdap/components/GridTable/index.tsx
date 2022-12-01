@@ -53,6 +53,7 @@ import {
   calculateEmptyValueCount,
   convertNonNullPercentForColumnSelected,
   checkFrequentlyOccuredValues,
+  calculatedColumnMetaData,
 } from 'components/GridTable/utils';
 import styled from 'styled-components';
 import { grey, red } from '@material-ui/core/colors';
@@ -272,7 +273,17 @@ export default function GridTable() {
                 headersNamesList.map((item, itemIndex) => {
                   return missingDataList.map((each, index) => {
                     if (item.name === each.name) {
-                      return <GridKPICell metricData={each.data} key={each.name} />;
+                      return (
+                        <GridKPICell
+                          metricData={each.data}
+                          key={each.name}
+                          dataVisualization={calculatedColumnMetaData(
+                            rowsDataList,
+                            gridData?.summary?.statistics,
+                            item.name
+                          )}
+                        />
+                      );
                     }
                   });
                 })}

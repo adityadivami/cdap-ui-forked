@@ -18,10 +18,11 @@ import { Box, Card, TableCell, Typography } from '@material-ui/core';
 import React from 'react';
 import { useGridKPICellStyles } from './styles';
 
-export default function GridKPICell({ metricData }) {
+export default function GridKPICell({ metricData, dataVisualization }) {
   const classes = useGridKPICellStyles();
 
   const metricValue = metricData;
+  console.log('dataVisualization', dataVisualization);
 
   return (
     <TableCell className={classes.tableHeaderCell}>

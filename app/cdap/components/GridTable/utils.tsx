@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { IValues } from 'components/GridTable/types';
+import { IGeneral, IStatistics, IType, IValues } from 'components/GridTable/types';
 import T from 'i18n-react';
 import _ from 'lodash';
 
@@ -241,4 +241,41 @@ export const checkFrequentlyOccuredValues = (values: IValues[], key: string) => 
   columnValuesCount.splice(indexOfFirstLargest, 1);
   const secondFrequentItem = _.maxBy(columnValuesCount, 'count');
   return [firstFrequentItem, secondFrequentItem];
+};
+
+export const calculatedColumnMetaData = (
+  rowsDataList: IValues[],
+  statistics: IStatistics | IGeneral,
+  columnName: string
+) => {
+  const getDistinctValue = calculateDistinctValues(rowsDataList, columnName);
+  const getCharacterCountOfCell = characterCount(rowsDataList, columnName);
+  const getNullValueCount =
+    convertNonNullPercentForColumnSelected(
+      rowsDataList,
+      statistics[columnName] as Record<string, IType>
+    ) || 0;
+  const getDataTypeString = checkAlphaNumericAndSpaces(rowsDataList, columnName);
+  const dataVisualization = {
+    distinctValues: getDistinctValue,
+    characterCount: getCharacterCountOfCell,
+    dataQuality: {
+      nullValueCount: Number(getNullValueCount),
+      nullValuePercentage: Number(
+        ((Number(Number(getNullValueCount).toFixed(0)) / rowsDataList?.length) * 100).toFixed(0)
+      ),
+      emptyValueCount: calculateEmptyValueCount(rowsDataList, columnName),
+      emptyValuePercentage: Number(
+        (
+          (Number(Number(calculateEmptyValueCount(rowsDataList, columnName)).toFixed(0)) /
+            rowsDataList?.length) *
+          100
+        ).toFixed(0)
+      ),
+    },
+    dataQualityBar: statistics[columnName],
+    dataTypeString: getDataTypeString,
+    dataDistributionGraphData: calculateDistributionGraphData(rowsDataList, columnName),
+  };
+  return dataVisualization;
 };
