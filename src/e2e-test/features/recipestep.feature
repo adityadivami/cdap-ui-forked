@@ -22,6 +22,7 @@ Feature: Directives
     Given Navigate to the Home page
     Then Click on the Data explorations card
     Then Verify if user is on the wrangle page
+    Then Click on Directive button
     Then Verify if the directive panel is displayed
     Then Enter command in the panel with the data "uppercase:body_2"
     Then Click on 'Recipe steps' button
@@ -40,10 +41,14 @@ Feature: Directives
     Given Navigate to the Home page
     Then Click on the Data explorations card
     Then Verify if user is on the wrangle page
+    Then Click on Directive button
     Then Verify if the directive panel is displayed
     Then Enter command in the panel with the data "uppercase:body_2"
+    Then Click on Directive button
     Then Enter command in the panel with the data "lowercase:body_3"
+    Then Click on Directive button
     Then Enter command in the panel with the data "trim:body_4"
+    Then Click on Directive button
     Then Enter command in the panel with the data "trim:body_5"
     Then Click on 'Recipe steps' button
     Then Verify if recipe panel is displayed

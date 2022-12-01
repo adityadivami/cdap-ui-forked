@@ -53,11 +53,27 @@ public class RecipeStep {
         String url = SeleniumDriver.getDriver().getCurrentUrl();
         Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
     }
+    @Then("Click on Directive button")
+    public void clickOnDirectiveButton() {
+        try {
+            boolean flag = true;
+            while (flag == true) {
+                flag = Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"));
+            }
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("footer-panel-directives-tab"));
+        }catch (Exception e) {
+            System.err.println("error:" + e);
+        }
+    }
 
     @Then("Verify if the directive panel is displayed")
     public void directivePanelIsDisplayed() {
         try {
-            WebElement panel = Helper.locateElementByTestId("directive-input-parent");
+            boolean flag = true;
+            while (flag == true) {
+                flag = Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"));
+            }
+            WebElement panel = Helper.locateElementByTestId("select-directive-input-search");
             Assert.assertTrue(ElementHelper.isElementDisplayed(panel));
         } catch (Exception e) {
             System.err.println("error:" + e);
@@ -92,7 +108,11 @@ public class RecipeStep {
     @Then("Click on 'Recipe steps' button")
     public void clickOnRecipeStepButton() {
         try {
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("footerpanel-recipe-steps-label"));
+            boolean flag = true;
+            while (flag == true) {
+                flag = Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"));
+            }
+            ElementHelper.clickOnElement(Helper.locateElementByTestId("footer-panel-recipe-steps-tab"));
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
@@ -101,6 +121,10 @@ public class RecipeStep {
     @Then("Verify if recipe panel is displayed")
     public void recipePanelIsDisplayed() {
         try {
+            boolean flag = true;
+            while (flag == true) {
+                flag = Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"));
+            }
         Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("parsing-drawer-container")));
     } catch (Exception e) {
             System.err.println("error:" + e);
@@ -110,7 +134,7 @@ public class RecipeStep {
     @Then("Click on delete icon of any step with \\\"(.,*)\\\"")
     public void verifyByClickingOnDeleteIcon(int stepId) {
         try {
-            WebElement ele = Helper.locateElementByTestId("recipe-step-row-" + stepId);
+            WebElement ele = Helper.locateElementByTestId("recipe-step-row-" + stepId +"-delete");
             Actions action = new Actions(SeleniumDriver.getDriver());
             action.moveToElement(ele).perform();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-step-" + stepId +"-delete"));
