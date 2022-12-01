@@ -26,8 +26,8 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
 public class FooterPanel {
-    @Given("Navigate to Home Page")
-    public void navigateToHomePage() {
+    @Given("Navigate to Home Page to test footer")
+    public void navigateToHomePageFooter() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }

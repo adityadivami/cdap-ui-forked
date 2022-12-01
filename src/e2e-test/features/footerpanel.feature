@@ -20,7 +20,7 @@ Feature: FooterPanel
 
   @FooterPanel
   Scenario: Checking the footer panel is on the grid table
-    Given Navigate to Home Page
+    Given Navigate to Home Page to test footer
     Then Click on the Data Explorations card
     Then Verify if the Footer Panel is displayed
     Then Verify if the elements on the Footer Panel are displayed
