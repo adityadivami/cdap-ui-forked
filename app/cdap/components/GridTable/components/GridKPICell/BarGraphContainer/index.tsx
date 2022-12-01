@@ -17,7 +17,7 @@
 import React, { useEffect, useState } from 'react';
 import { BarChart } from 'react-easy-chart';
 import styled from 'styled-components';
-import { Box, IconButton, Modal } from '@material-ui/core';
+import { Box} from '@material-ui/core';
 import { grey, blue } from '@material-ui/core/colors';
 
 const ToolTipDiv = styled(Box)`
@@ -25,12 +25,15 @@ const ToolTipDiv = styled(Box)`
   box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2), 0px 9px 10px rgba(0, 0, 0, 0.14),
     0px 5px 14px rgba(0, 0, 0, 0.12);
   font-size: 12px;
-  line-height: 150%;
   color: ${grey[900]};
-  top: ${({ top }) => (top ? top : '0')};
-  left: ${({ left }) => (left ? left : '0')};
+  left: 0;
+  right: 0;
+  bottom: 0;
   position: absolute;
   padding: 10px;
+  z-index: 10;
+  height: 30px;
+  width: fit-content;
 `;
 
 const GraphContainer = styled(Box)`
