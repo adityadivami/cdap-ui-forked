@@ -19,7 +19,7 @@ Feature: Breadcrumb - Navigate to the application
 
   @Breadcrumb
   Scenario Outline: Go through the Breadcrumb functionality
-    Given Navigate to the home page
+    Given Navigate to the home page to test breadcrumb
     Then  Click on the Connector type with "<connectionLabel>" and "<connectionTestId>"
     Then Click on the Home link button
     Then Click on the Exploration card with "<testId>"

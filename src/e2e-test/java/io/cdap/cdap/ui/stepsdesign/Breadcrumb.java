@@ -32,8 +32,8 @@ import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 
 public class Breadcrumb {
-    @Given("Navigate to the home page")
-    public void navigateToTheHomePage() {
+    @Given("Navigate to the home page to test breadcrumb")
+    public void navigateToTheHomePageBreadcrumb() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
@@ -44,24 +44,20 @@ public class Breadcrumb {
             WaitHelper.waitForElementToBeEnabled(
                     Helper.locateElementByTestId("wrangle-card-" + connectionTestId));
             ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangle-card-" + connectionTestId));
-            System.out.println("Clicked on " + connectionLabel + " Element");
             WaitHelper.waitForPageToLoad();
             if (connectionLabel.equals("Add Connections")) {
                 ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangle-card-" + connectionTestId));
-                System.out.println("Clicked on " + connectionLabel + " Element");
                 WaitHelper.waitForPageToLoad();
                 String actualText = SeleniumDriver.getDriver().getCurrentUrl();
                 Assert.assertEquals(actualText, "http://localhost:11011/cdap/ns/default/connections/create");
-                System.out.println("Navigated to " + connectionLabel + " Page - Old UI");
             } else {
                 WaitHelper.waitForPageToLoad();
                 String actualText = SeleniumDriver.getDriver().getCurrentUrl();
                 Assert.assertEquals(actualText,
                         "http://localhost:11011/cdap/ns/default/datasources/" + connectionLabel);
-                System.out.println("Navigated to Data Source page with connection " + connectionLabel + " selected");
             }
         } catch (Exception e) {
-            System.out.println(connectionLabel + " Element does not exist");
+            System.err.println("error:" + e);
         }
     }
 
@@ -69,11 +65,11 @@ public class Breadcrumb {
     public void clickOnTheHomeLinkButton() {
         try {
             WaitHelper.waitForPageToLoad();
-            SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            Helper.waitSeconds(30);
             ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-Home"));
-            System.out.println("clicked on home link from Data source page");
+
         } catch (Exception e) {
-            System.out.println("error:" + e);
+            System.err.println("error:" + e);
         }
     }
 
@@ -81,23 +77,20 @@ public class Breadcrumb {
     public void clickOnTheExplorationCard(int testId) {
         try {
             WaitHelper.waitForPageToLoad();
-            SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+            Helper.waitSeconds(30);
             ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explorations-" + testId));
-            System.out.println("clicked on exploration card");
         } catch (Exception e) {
-            System.out.println("error:" + e);
+            System.err.println("error:" + e);
         }
     }
 
     @Then("Click on the Home link of wrangle page")
     public void clickOnTheHomeLink() {
         try {
-            System.out.println("inside the function");
             SeleniumDriver.getDriver().manage().window().maximize();
-            SeleniumDriver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
+            Helper.waitSeconds(50);
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-            System.out.println(url);
             boolean flag = true;
             for (int i = 0; flag == true; i++) {
                 if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
@@ -111,7 +104,7 @@ public class Breadcrumb {
             action.moveToElement(ele).perform();
             ele.click();
         } catch (Exception e) {
-            System.out.println("error:" + e);
+            System.err.println("error:" + e);
         }
     }
 }
