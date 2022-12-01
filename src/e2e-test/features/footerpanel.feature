@@ -14,11 +14,13 @@
 # the License.
 #
 
-@Integration_Tests
-Feature: Snackbar
 
-  @Snackbar
-  Scenario: Check the Snackbar in the Wrangle Page
-    Given Navigate to Home Page to test snackbar
-    Then Click on the data exploration card
-    Then Click on the Snackbar close icon
+@Integration_Tests
+Feature: FooterPanel
+
+  @FooterPanel
+  Scenario: Checking the footer panel is on the grid table
+    Given Navigate to Home Page to test footer
+    Then Click on the Data Explorations card
+    Then Verify if the Footer Panel is displayed
+    Then Verify if the elements on the Footer Panel are displayed
