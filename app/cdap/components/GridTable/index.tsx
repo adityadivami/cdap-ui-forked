@@ -52,6 +52,8 @@ const GridTableWrapper = styled(Box)`
   overflow-x: auto;
   max-height: 76vh;
 `;
+import Snackbar from 'components/Snackbar';
+import useSnackbar from 'components/Snackbar/useSnackbar';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -70,6 +72,7 @@ export default function GridTable() {
       count: '0',
     },
   ]);
+  const [snackbarState, setSnackbar] = useSnackbar();
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -128,6 +131,13 @@ export default function GridTable() {
         });
         setLoading(false);
         setGridData(response);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: T.translate(
+            `features.WranglerNewUI.Snackbar.snackbarLabels.datasetSuccess`
+          ).toString(),
+        });
       });
   };
 
@@ -322,6 +332,16 @@ export default function GridTable() {
           </div>
         )}
       </GridTableWrapper>
+      <Snackbar // TODO: This snackbar is just for the feature demo purpose. Will be removed in the further development.
+        handleClose={() =>
+          setSnackbar(() => ({
+            open: false,
+          }))
+        }
+        open={snackbarState.open}
+        message={snackbarState.message}
+        isSuccess={snackbarState.isSuccess}
+      />
     </>
   );
 }
