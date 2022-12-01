@@ -33,9 +33,13 @@ import java.time.Duration;
 
 public class Breadcrumb {
     @Given("Navigate to the home page to test breadcrumb")
-    public void navigateToTheHomePageBreadcrumb() {
-        SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
-        WaitHelper.waitForPageToLoad();
+    public void navigateToTheHomePageBreadcrumb() throws Exception {
+        try {
+            SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
+            WaitHelper.waitForPageToLoad();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
     @Then("Click on the Connector type with \\\"(.*)\\\" and \\\"(.*)\\\"")

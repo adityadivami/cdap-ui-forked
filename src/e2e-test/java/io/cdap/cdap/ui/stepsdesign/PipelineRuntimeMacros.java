@@ -52,37 +52,34 @@ public class PipelineRuntimeMacros {
   @Then("Preview runtime arguments dialog is shown")
   public void runtimeArgumentsDialogIsShown() {
     Assert.assertTrue(ElementHelper.isElementDisplayed(
-      By.cssSelector(Helper.getCssSelectorByDataTestId("runtimeargs-preview")),
-      2));
+        By.cssSelector(Helper.getCssSelectorByDataTestId("runtimeargs-preview")),
+        2));
   }
 
   @Then("Preview runtime argument row {string} key is disabled")
   public void runtimeArgumentRowIntKeyIsDisabled(String index) {
     WebElement rowKeyElement = Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) +  " input"
-    );
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input");
     Assert.assertFalse(rowKeyElement.isEnabled());
   }
 
   @Then("Preview runtime argument row {string} key field is {string}")
   public void runtimeArgumentRowIntKeyFieldIsString(String index, String fieldValue) {
     WebElement keyFieldElement = Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input"
-    );
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input");
     Assert.assertEquals(fieldValue, ElementHelper.getElementAttribute(keyFieldElement, "value"));
   }
 
   @Then("Preview runtime argument row {string} value field is {string}")
   public void runtimeArgumentRowIntValueFieldIsString(String index, String fieldValue) {
     WebElement valueFieldElement = Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_VALUE_SELECTOR) + " textarea"
-    );
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_VALUE_SELECTOR) + " textarea");
     Assert.assertEquals(fieldValue, ElementHelper.getElementAttribute(valueFieldElement, "value"));
   }
 
@@ -90,9 +87,9 @@ public class PipelineRuntimeMacros {
   public void runtimeArgumentRowIntDoesNotExist(String index) {
     try {
       WebElement rowEl = Helper.locateElementByCssSelector(
-        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
-        Helper.getCssSelectorByDataTestId(index) + " " +
-        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR));
+          Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
+              Helper.getCssSelectorByDataTestId(index) + " " +
+              Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR));
       Assert.assertFalse(ElementHelper.isElementDisplayed(rowEl));
     } catch (NoSuchElementException e) {
       // Do nothing; this is the expected outcome
@@ -102,35 +99,35 @@ public class PipelineRuntimeMacros {
   @When("Add a preview runtime argument from row {string}")
   public void addARuntimeArgumentFromRowInt(String index) {
     ElementHelper.clickOnElement(Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId("add-row")
-    ));
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId("add-row")));
   }
 
   @When("Enter preview runtime argument key {string} in row {string}")
   public void enterRuntimeArgumentKeyStringInRowInt(String key, String index) {
     ElementHelper.sendKeys(Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input"), key);
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input"),
+        key);
   }
 
   @When("Delete preview runtime argument row {string}")
   public void deleteRuntimeArgumentRowInt(String index) {
     ElementHelper.clickOnElement(Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId("remove-row")
-    ));
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId("remove-row")));
   }
 
   @When("Enter preview runtime argument value {string} in row {string}")
   public void enterRuntimeArgumentValueStringInRowInt(String value, String index) {
     ElementHelper.sendKeys(Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_VALUE_SELECTOR) + " textarea"), value);
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_PREVIEW_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_VALUE_SELECTOR) + " textarea"),
+        value);
   }
 
   @When("Click run button from preview runtime arguments")
@@ -140,23 +137,27 @@ public class PipelineRuntimeMacros {
 
   @Then("Pipeline banner is shown with message {string}")
   public void pipelineBannerIsShownWithMessage(String message) {
-    WaitHelper.waitForElementToBePresent(By.cssSelector(Helper.getCssSelectorByDataTestId("valium-banner-hydrator")));
-    Assert.assertTrue(
-      ElementHelper.getElementText(Helper.locateElementByTestId("valium-banner-hydrator")).contains(message));
+    try {
+      WaitHelper.waitForElementToBePresent(By.cssSelector(Helper.getCssSelectorByDataTestId("valium-banner-hydrator")));
+      Assert.assertTrue(
+          ElementHelper.getElementText(Helper.locateElementByTestId("valium-banner-hydrator")).contains(message));
+    } catch (Exception e) {
+      System.err.println(e);
+    }
   }
 
   @Then("Deployed runtime arguments dialog is shown")
   public void deployedRuntimeArgumentsDialogIsShown() {
     Assert.assertTrue(ElementHelper.isElementDisplayed(
-      By.cssSelector(Helper.getCssSelectorByDataTestId("runtime-args-modeless")),
-      2));
+        By.cssSelector(Helper.getCssSelectorByDataTestId("runtime-args-modeless")),
+        2));
   }
 
   @When("Run down arrow is clicked")
   public void runDownArrowIsClicked() {
     ElementHelper.clickOnElement(Helper.locateElementByTestId("arrow-btn-container"));
     WaitHelper.waitForElementToBePresent(
-      By.cssSelector(Helper.getCssSelectorByDataTestId("runtime-args-modeless")));
+        By.cssSelector(Helper.getCssSelectorByDataTestId("runtime-args-modeless")));
   }
 
   @When("Deployed run button is clicked")
@@ -167,7 +168,7 @@ public class PipelineRuntimeMacros {
   @Then("Deployed pipeline status is {string}")
   public void deployedPipelineStatusIsString(String status) {
     WaitHelper.waitForElementToBePresent(
-      By.cssSelector(Helper.getCssSelectorByDataTestId(status)));
+        By.cssSelector(Helper.getCssSelectorByDataTestId(status)));
   }
 
   @When("Close the runtime argument dialog")
@@ -191,30 +192,27 @@ public class PipelineRuntimeMacros {
   @Then("Deployed runtime argument row {string} key is disabled")
   public void deployedRuntimeArgumentRowIntKeyIsDisabled(String index) {
     WebElement rowKeyElement = Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) +  " input"
-    );
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input");
     Assert.assertFalse(rowKeyElement.isEnabled());
   }
 
   @Then("Deployed runtime argument row {string} key field is {string}")
   public void deployedRuntimeArgumentRowIntKeyFieldIsString(String index, String fieldValue) {
     WebElement keyFieldElement = Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input"
-    );
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input");
     Assert.assertEquals(fieldValue, keyFieldElement.getAttribute("value"));
   }
 
   @Then("Deployed runtime argument row {string} value field is {string}")
   public void deployedRuntimeArgumentRowIntValueFieldIsString(String index, String fieldValue) {
     WebElement valueFieldElement = Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_VALUE_SELECTOR) + " textarea"
-    );
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_VALUE_SELECTOR) + " textarea");
     Assert.assertEquals(fieldValue, ElementHelper.getElementText(valueFieldElement));
   }
 
@@ -222,9 +220,9 @@ public class PipelineRuntimeMacros {
   public void deployedRuntimeArgumentRowIntDoesNotExist(String index) {
     try {
       WebElement rowEl = Helper.locateElementByCssSelector(
-        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
-        Helper.getCssSelectorByDataTestId(index) + " " +
-        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR));
+          Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
+              Helper.getCssSelectorByDataTestId(index) + " " +
+              Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR));
       Assert.assertFalse(ElementHelper.isElementDisplayed(rowEl));
     } catch (NoSuchElementException e) {
       // Do nothing; this is the expected outcome
@@ -234,36 +232,36 @@ public class PipelineRuntimeMacros {
   @When("Add a deployed runtime argument from row {string}")
   public void addADeployedRuntimeArgumentFromRowInt(String index) {
     ElementHelper.clickOnElement(Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId("add-row")
-    ));
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId("add-row")));
   }
 
   @When("Enter deployed runtime argument key {string} in row {string}")
   public void enterDeployedRuntimeArgumentKeyStringInRowInt(String key, String index) {
     ElementHelper.sendKeys(Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input"), key);
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_KEY_SELECTOR) + " input"),
+        key);
   }
 
   @When("Delete deployed runtime argument row {string}")
   public void deleteDeployedRuntimeArgumentRowInt(String index) {
     ElementHelper.clickOnElement(Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId("remove-row")
-    ));
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId("remove-row")));
     Helper.waitSeconds(1);
   }
 
   @When("Enter deployed runtime argument value {string} in row {string}")
   public void enterDeployedRuntimeArgumentValueStringInRowInt(String value, String index) {
     ElementHelper.sendKeys(Helper.locateElementByCssSelector(
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
-      Helper.getCssSelectorByDataTestId(index) + " " +
-      Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_VALUE_SELECTOR) + " textarea"), value);
+        Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_DEPLOYED_SELECTOR) + " " +
+            Helper.getCssSelectorByDataTestId(index) + " " +
+            Helper.getCssSelectorByDataTestId(Constants.RUNTIME_ARGS_VALUE_SELECTOR) + " textarea"),
+        value);
   }
 
   @When("Save deployed arguments button is clicked")
@@ -285,6 +283,6 @@ public class PipelineRuntimeMacros {
   @Then("Deployed runtime arguments dialog shows message {string}")
   public void deployedRuntimeArgumentsDialogShowsMessageString(String message) {
     Assert.assertTrue(
-      ElementHelper.getElementText(Helper.locateElementByTestId("pipeline-runtime-args-error")).contains(message));
+        ElementHelper.getElementText(Helper.locateElementByTestId("pipeline-runtime-args-error")).contains(message));
   }
 }

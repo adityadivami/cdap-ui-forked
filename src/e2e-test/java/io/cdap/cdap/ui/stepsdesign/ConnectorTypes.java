@@ -27,9 +27,13 @@ import org.junit.Assert;
 
 public class ConnectorTypes {
     @Given("Navigate to the Home Page")
-    public void navigateToTheHomePage() {
-        SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
-        WaitHelper.waitForPageToLoad();
+    public void navigateToTheHomePage() throws Exception {
+        try {
+            SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
+            WaitHelper.waitForPageToLoad();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
     @Then("Click on the \\\"(.*)\\\" connection with test id \\\"(.*)\\\"")
@@ -42,7 +46,6 @@ public class ConnectorTypes {
             if (connectionLabel.equals("Add Connections")) {
                 String actualText = SeleniumDriver.getDriver().getCurrentUrl();
                 Assert.assertEquals(actualText, "http://localhost:11011/cdap/ns/default/connections/create");
-                System.out.println("Navigated to " + connectionLabel + " Page - Old UI");
             } else if (connectionLabel.equals("Import Data")) {
                 String actualText = SeleniumDriver.getDriver().getCurrentUrl();
                 Assert.assertEquals(actualText, "http://localhost:11011/cdap/ns/default/wrangle");
@@ -50,7 +53,6 @@ public class ConnectorTypes {
                 String actualText = SeleniumDriver.getDriver().getCurrentUrl();
                 Assert.assertEquals(actualText, "http://localhost:11011/cdap/ns/default/datasources/"
                         + connectionLabel);
-                System.out.println("Navigated to Data Source page with connection " + connectionLabel + " selected");
             }
         } catch (Exception e) {
             System.err.println("error: " + e);
