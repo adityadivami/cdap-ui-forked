@@ -49,7 +49,7 @@ export const calculateDistinctValues = (values: IValues[], columnName: string) =
  */
 
 export const characterCount = (values: IValues[], columnName: string) => {
-  let minCount = 0;
+  let minCount = Number.MAX_VALUE;
   let maxCount = 0;
   const arrayOfColumn = values && Array.isArray(values) && values.map((el) => el[columnName]);
 
@@ -65,7 +65,7 @@ export const characterCount = (values: IValues[], columnName: string) => {
         }
       }
     });
-  return { min: minCount || 0, max: maxCount || 0 };
+  return { min: minCount || 0, max: maxCount };
 };
 
 /**
