@@ -17,35 +17,62 @@
 import { Box, Card, TableCell, Typography } from '@material-ui/core';
 import React from 'react';
 import { useGridKPICellStyles } from './styles';
+import BarGraphContainer from 'components/GridTable/components/GridKPICell/BarGraphContainer';
+import DataCellContainer from 'components/GridTable/components/GridKPICell/DataCell';
 
-export default function GridKPICell({ metricData, dataVisualization }) {
+export default function GridKPICell({ metricData, dataVisualization, columnDataType }) {
   const classes = useGridKPICellStyles();
-
   const metricValue = metricData;
-  console.log('dataVisualization', dataVisualization);
+  const FinalizedDistinctConstant = 15;
+  const isShowBarChart = dataVisualization.distinctValues < FinalizedDistinctConstant
 
+  const BarGraphDisplay = (
+    <BarGraphContainer graphData={dataVisualization.dataDistributionGraphData}
+      distinctValues={dataVisualization.distinctValues} />
+  )
+
+  const displayTextCount = metricValue?.map((eachValue: { label: string; count: number }) => {
+    return (<>
+      {
+        columnDataType.includes("Boolean") && BarGraphDisplay
+      }
+      {
+        columnDataType.includes("String") && <DataCellContainer eachValue={eachValue} />
+      }
+      {
+        (columnDataType.includes("Int") || columnDataType.includes("Short") || columnDataType.includes("Long")) && <DataCellContainer eachValue={eachValue} />
+      }
+      {
+        (columnDataType.includes("Float") || columnDataType.includes("Decimal") || columnDataType.includes("Double")) && <DataCellContainer eachValue={eachValue} />
+      }
+      {
+        columnDataType.includes("Bytes") && <DataCellContainer eachValue={eachValue} />
+      }</>
+    )
+  }
+  )
   return (
-    <TableCell className={classes.tableHeaderCell}>
-      <Card className={classes.root} variant="outlined">
-        {metricValue &&
-          Array.isArray(metricValue) &&
-          metricValue.length &&
-          metricValue.map((eachValue: { label: string; count: number }) => (
-            <Box className={classes.KPICell} key={eachValue.label}>
-              <Typography className={classes.label}>{eachValue.label}</Typography>
-              <Typography
-                className={
-                  eachValue.label === 'Empty' || 'Null'
-                    ? `${classes.missingClass} ${classes.count}`
-                    : `${classes.generalClass} ${classes.count}`
-                }
-                data-testid={`grid-kpi-metric-value-${eachValue.label}`}
-              >
-                {eachValue.count}
-              </Typography>
-            </Box>
-          ))}
-      </Card>
-    </TableCell>
+    <>
+      <TableCell className={classes.tableHeaderCell}>
+        <Card className={classes.root} variant="outlined">
+          <>
+            {
+              columnDataType.includes("Boolean") && BarGraphDisplay
+            }
+            {
+              columnDataType.includes("String") && (isShowBarChart ? BarGraphDisplay : displayTextCount)
+            }
+            {
+              (columnDataType.includes("Int") || columnDataType.includes("Short") || columnDataType.includes("Long")) && (isShowBarChart ? BarGraphDisplay : displayTextCount)
+            }
+            {
+              (columnDataType.includes("Float") || columnDataType.includes("Decimal") || columnDataType.includes("Double")) && (isShowBarChart ? BarGraphDisplay : displayTextCount)
+            }
+            {
+              columnDataType.includes("Bytes") && (isShowBarChart ? BarGraphDisplay : displayTextCount)
+            }</>
+        </Card>
+      </TableCell>
+    </>
   );
 }

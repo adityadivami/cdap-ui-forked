@@ -168,10 +168,10 @@ export default function GridTable() {
   const createMissingData = (statistics: IStatistics | IGeneral) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
-    statisticObjectToArray.forEach(([key, value]) => {
-      const emptyValueCount = calculateEmptyValueCount(rowsDataList, key);
-      const nullValueCount = convertNonNullPercentForColumnSelected(rowsDataList, value);
-      const frequentItem = checkFrequentlyOccuredValues(rowsDataList, key);
+    headersNamesList.forEach((columnDetails) => {
+      const emptyValueCount = calculateEmptyValueCount(rowsDataList, columnDetails.name);
+      const nullValueCount = convertNonNullPercentForColumnSelected(rowsDataList, statistics[columnDetails.name]);
+      const frequentItem = checkFrequentlyOccuredValues(rowsDataList, columnDetails.name);
       const emptyNullCheck = emptyValueCount === 0 && nullValueCount === '0';
       const emptyData = {
         label: emptyNullCheck && frequentItem.length ? frequentItem[0]?.name : 'Empty',
@@ -183,7 +183,7 @@ export default function GridTable() {
       };
 
       const metricData = {
-        name: key,
+        name: columnDetails.name,
         data: [emptyData, nullData],
       };
 
@@ -282,6 +282,7 @@ export default function GridTable() {
                             gridData?.summary?.statistics,
                             item.name
                           )}
+                          columnDataType={item.type}
                         />
                       );
                     }

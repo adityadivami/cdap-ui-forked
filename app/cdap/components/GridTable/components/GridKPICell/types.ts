@@ -19,6 +19,6 @@ export interface IGridKPICellProps {
     name: string;
     metricData: Array<{ label: string; count: number }>;
     dataVisualization;
+    columnDataType: string;
   };
-  dataVisualization;
 }
