@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { render,screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import MyDataPrepApi from 'api/dataprep';
 import GridTable from 'components/GridTable/index';
 import React from 'react';
@@ -49,7 +49,7 @@ describe('Testing Grid Table Component', () => {
         </Switch>
       </Router>
     );
-    
+
     expect(screen.getByTestId('grid-table-container')).toBeInTheDocument();
   });
 });
