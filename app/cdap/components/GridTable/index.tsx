@@ -65,7 +65,7 @@ const TablePanelContainer = styled(Box)`
 
 const RecipeStepPanel = styled(Box)`
   max-height: calc(100vh - 190px);
-  box-shadow: -3px 4px 15px #43ff6440;
+  box-shadow: -3px 4px 15px rgba(68, 132, 245, 0.25);
 `;
 
 export default function GridTable() {
