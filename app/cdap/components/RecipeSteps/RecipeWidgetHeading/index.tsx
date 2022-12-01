@@ -16,8 +16,8 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { UnderLine } from 'components/DrawerWidget/IconStore/UnderLine';
-import { IDrawerWidgetHeadinProps } from 'components/DrawerWidget/DrawerWidgetHeading/types';
+import { UnderLine } from 'components/RecipeSteps/IconStore/Underline';
+import { IDrawerWidgetHeadingProps } from 'components/RecipeSteps/RecipeWidgetHeading/types';
 import styled from 'styled-components';
 
 const DrawerWidgetTitleIconWrapper = styled(Box)`
@@ -35,7 +35,7 @@ const DrawerWidgetTitleLabel = styled(Typography)`
   color: grey[900];
 `;
 
-export default function({ headingText }: IDrawerWidgetHeadinProps) {
+export default function({ headingText }: IDrawerWidgetHeadingProps) {
   return (
     <DrawerWidgetTitleIconWrapper>
       <DrawerWidgetTitleLabel data-testid="drawer-widget-heading">

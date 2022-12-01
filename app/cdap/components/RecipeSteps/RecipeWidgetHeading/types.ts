@@ -16,6 +16,6 @@
 
 import React from 'react';
 
-export interface IDrawerWidgetHeadinProps {
+export interface IDrawerWidgetHeadingProps {
   headingText: React.ReactNode;
 }

@@ -23,6 +23,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@material-ui/core';
 import React from 'react';
 import { IRecipeStepTableProps } from 'components/RecipeSteps/RecipeStepsTableComponent/types';
@@ -96,6 +97,16 @@ const StyledDeleteOutlineOutlinedIcon = styled(DeleteOutlineOutlinedIcon)`
   color: ${grey[600]};
 `;
 
+const RecipeStepLabel = styled(Typography)`
+  word-break: break-all;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: #616161;
+`;
+
 export default function({ recipeSteps, handleDeleteRecipeSteps }: IRecipeStepTableProps) {
   const handleDelete = (i) => {
     handleDeleteRecipeSteps(
@@ -128,7 +139,9 @@ export default function({ recipeSteps, handleDeleteRecipeSteps }: IRecipeStepTab
                 {eachStepIndex + 1 > 10 ? eachStepIndex + 1 : `${eachStepIndex + 1}`}
               </RecipeStepsBodyTableCell>
               <RecipeStepsBodyTableCell data-testid={`${eachStep}-recipe-step`}>
-                <span data-testid={'recipe-steps-span' + eachStepIndex}>{eachStep}</span>
+                <RecipeStepLabel data-testid={'recipe-steps-span' + eachStepIndex}>
+                  {eachStep}
+                </RecipeStepLabel>
               </RecipeStepsBodyTableCell>
               <RecipeStepsTableRowStyle data-testid={`recipe-step-row-${eachStepIndex}-delete`}>
                 <RecipeStepsDeleteStyle

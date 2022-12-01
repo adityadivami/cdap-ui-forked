@@ -16,13 +16,13 @@
 
 import { Container } from '@material-ui/core';
 import DataPrepStore from 'components/DataPrep/store';
-import DrawerWidget from 'components/DrawerWidget';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import RecipeHeaderActionTemplate from 'components/RecipeSteps/RecipeHeaderActionTemplate';
 import RecipeStepsEmptyScreen from 'components/RecipeSteps/RecipeStepsEmptyScreen';
 import RecipeStepsTableComponent from 'components/RecipeSteps/RecipeStepsTableComponent';
 import T from 'i18n-react';
 import { IRecipeStepsProps } from 'components/RecipeSteps/types';
+import RecipeStepWidget from 'components/RecipeSteps/RecipeStepWidget';
 import styled from 'styled-components';
 
 const RecipeStepsBody = styled(Container)`
@@ -30,7 +30,7 @@ const RecipeStepsBody = styled(Container)`
   padding: 0px;
 `;
 
-export default function({ setShowRecipePanel, showRecipePanel, deleteRecipes }: IRecipeStepsProps) {
+export default function({ setShowRecipePanel, deleteRecipes }: IRecipeStepsProps) {
   const [recipeSteps, setRecipeSteps] = useState<string[]>([]);
 
   const { dataprep } = DataPrepStore.getState();
@@ -48,23 +48,26 @@ export default function({ setShowRecipePanel, showRecipePanel, deleteRecipes }: 
   };
 
   return (
-    <DrawerWidget
-      headingText={T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.labels.recipe')}
-      openDrawer={showRecipePanel}
-      showDivider={true}
-      headerActionTemplate={<RecipeHeaderActionTemplate />}
-      closeClickHandler={closeClickHandler}
-    >
-      <RecipeStepsBody>
-        {Array.isArray(recipeSteps) && recipeSteps.length ? (
-          <RecipeStepsTableComponent
-            recipeSteps={recipeSteps}
-            handleDeleteRecipeSteps={handleDeleteRecipeSteps}
-          />
-        ) : (
-          <RecipeStepsEmptyScreen />
-        )}
-      </RecipeStepsBody>
-    </DrawerWidget>
+    <Fragment>
+      <RecipeStepWidget
+        headingText={T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.labels.recipe')}
+        onClose={closeClickHandler}
+        showDivider={true}
+        headerActionTemplate={<RecipeHeaderActionTemplate />}
+      >
+        <RecipeStepsBody>
+          {Array.isArray(recipeSteps) && recipeSteps.length ? (
+            <>
+              <RecipeStepsTableComponent
+                recipeSteps={recipeSteps}
+                handleDeleteRecipeSteps={handleDeleteRecipeSteps}
+              />
+            </>
+          ) : (
+            <RecipeStepsEmptyScreen />
+          )}
+        </RecipeStepsBody>
+      </RecipeStepWidget>
+    </Fragment>
   );
 }

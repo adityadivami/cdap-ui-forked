@@ -17,7 +17,7 @@
 import { green, red } from '@material-ui/core/colors';
 import Snackbar, { SnackbarProps } from '@material-ui/core/Snackbar';
 import Transition from 'components/Snackbar/Components/Transition';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 export interface ISnackbarProps extends SnackbarProps {
@@ -51,6 +51,15 @@ export default function({
   open,
   handleClose,
 }: ISnackbarProps) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleClose();
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <CustomizedSnackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
