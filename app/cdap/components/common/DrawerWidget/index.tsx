@@ -18,7 +18,7 @@ import { Box, Container, Drawer, DrawerProps, IconButton, Typography } from '@ma
 import grey from '@material-ui/core/colors/grey';
 import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import { Underline } from 'components/common/DrawerWidget/IconStore/Underline';
+import { Underline } from 'styles/img/Underline';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 
