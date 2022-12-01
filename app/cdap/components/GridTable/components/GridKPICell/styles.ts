@@ -22,7 +22,7 @@ export const useGridKPICellStyles = makeStyles({
   root: {
     minWidth: '216px',
     backgroundColor: '#fff',
-    padding: '10px 10px 0px 30px',
+    padding: '10px 30px 0px 30px',
     borderRadius: '0px',
     border: 'none',
     display: 'flex',
