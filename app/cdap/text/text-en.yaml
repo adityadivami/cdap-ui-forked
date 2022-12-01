@@ -3448,6 +3448,9 @@ features:
       labels:
         loadToGrid: Wrangle
         noConnections: No Connections to show
+    GridTable:
+      snackbarLabels:
+        datasetSuccess: Dataset loaded successfully 
     FooterPanel:
       labels:
         columns: columns
@@ -3473,4 +3476,10 @@ features:
       gridTable:
         subtitle: Remove some recipe steps to view some data
         title: No rows left in this sample
+    Snackbar:
+      labels:
+        failure: Failure
+        success: Success
+        undo: Undo
+    
 ...
