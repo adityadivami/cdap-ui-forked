@@ -19,7 +19,7 @@ import T from 'i18n-react';
 
 export const CONNECTION_LIST_BREADCRUMB_OPTIONS = [
   {
-    link: `/ns/${getCurrentNamespace()}/home`,
+    link: `/ns/${getCurrentNamespace()}/wrangle`,
     label: T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome').toString(),
   },
   {

@@ -33,7 +33,7 @@ export default function() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        data-testid='ingest-view-drop-button'
+        data-testid="ingest-view-drop-button"
       >
         <KebabIcon />
       </Button>
@@ -57,7 +57,7 @@ export default function() {
         }}
       >
         {options.map((item, index) => (
-          <MenuItem key={index} onClick={handleClose} data-testid='ingest-view-menu-item'>
+          <MenuItem key={index} onClick={handleClose} data-testid="ingest-view-menu-item">
             {item}
           </MenuItem>
         ))}

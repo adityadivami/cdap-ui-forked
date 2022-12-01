@@ -22,7 +22,7 @@ const PREFIX = 'features.WranglerNewUI.Breadcrumb';
 export const getWrangleGridBreadcrumbOptions = (workspaceName, location) => {
   const finalBreadcrumbList: IBreadcrumbItemProps[] = [
     {
-      link: `/ns/${getCurrentNamespace()}/home`,
+      link: `/ns/${getCurrentNamespace()}/wrangle`,
       label: T.translate(`${PREFIX}.labels.wrangleHome`).toString(),
     },
   ];
