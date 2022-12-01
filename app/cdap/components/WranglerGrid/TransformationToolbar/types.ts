@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 /*
  * Copyright © 2022 Cask Data, Inc.
  *
@@ -13,12 +15,10 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-import { IType } from 'components/GridTable/types';
-
-export interface IGridHeaderCellProps {
-  label: string;
-  types: Array<string | boolean | Record<string, IType>>;
-  columnSelected: string;
-  setColumnSelected: (value: string) => void;
+export interface ITransformationToolBarProps {
+  columnType: string;
+  submitMenuOption: (value: string, dataType: string[]) => void;
+  setShowBreadCrumb: Dispatch<SetStateAction<boolean>>;
+  showBreadCrumb: boolean;
+  disableToolbarIcon: boolean;
 }

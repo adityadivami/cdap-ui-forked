@@ -14,11 +14,25 @@
  * the License.
  */
 
-import { IType } from 'components/GridTable/types';
+import { Box } from '@material-ui/core';
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 
-export interface IGridHeaderCellProps {
-  label: string;
-  types: Array<string | boolean | Record<string, IType>>;
-  columnSelected: string;
-  setColumnSelected: (value: string) => void;
-}
+export const ToolBarIconWrapper = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid ${grey[300]};
+  margin-top: 0;
+  padding-left: 18px;
+  padding-right: 18px;
+`;
+
+export const ToolBarInnerWrapper = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 0;
+  margin-right: 0;
+  width: 80%;
+`;
