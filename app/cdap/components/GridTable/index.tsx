@@ -73,6 +73,8 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
+  const [columnType, setColumnType] = useState('');
+  const [selectedColumn, setSelectedColumn] = useState('');
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -262,17 +264,23 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  const handleColumnSelect = (columnName) => {
+    setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
+    setColumnType(gridData?.types[columnName]);
+  };
+
   return (
     <>
       {showBreadCrumb && <BreadCrumb datasetName={wid} />}
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
-        columnType={'string'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
+        columnType={columnType}
         submitMenuOption={(option, datatype) => {
           return false;
           // TODO: will integrate with add transformation panel later
         }}
+        disableToolbarIcon={gridData?.headers?.length > 0 ? false : true}
       />
       <GridTableWrapper data-testid="grid-table-container">
         {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
@@ -291,6 +299,8 @@ export default function GridTable() {
                         label={eachHeader.label}
                         types={eachHeader.type}
                         key={eachHeader.name}
+                        columnSelected={selectedColumn}
+                        setColumnSelected={handleColumnSelect}
                       />
                     ))}
                 </TableRow>

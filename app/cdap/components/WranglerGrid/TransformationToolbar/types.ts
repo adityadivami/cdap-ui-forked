@@ -20,4 +20,5 @@ export interface ITransformationToolBarProps {
   submitMenuOption: (value: string, dataType: string[]) => void;
   setShowBreadCrumb: Dispatch<SetStateAction<boolean>>;
   showBreadCrumb: boolean;
+  disableToolbarIcon: boolean;
 }
