@@ -13,7 +13,8 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-import { IHeaderNamesList } from 'components/WranglerGrid/AddTransformationPanel/types';
+
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 export interface ISelectColumnsWidgetProps {
   selectedColumns: IHeaderNamesList[];

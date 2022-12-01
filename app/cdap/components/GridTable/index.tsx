@@ -72,6 +72,7 @@ export default function GridTable() {
   >({
     option: '',
     supportedDataType: [],
+    infoLink: '',
   });
   const [dataQuality, setDataQuality] = useState<IStatistics>();
   const [snackbarIsOpen, setSnackbarIsOpen] = useState(false);
@@ -261,10 +262,11 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
+  const onMenuOptionSelection = (option: string, supportedDataType: string[], infoLink: string) => {
     setAddTransformationFunction({
       option,
       supportedDataType,
+      infoLink,
     });
   };
 
@@ -300,6 +302,7 @@ export default function GridTable() {
         setAddTransformationFunction({
           option: '',
           supportedDataType: [],
+          infoLink: '',
         });
       },
       (err) => {
@@ -312,6 +315,7 @@ export default function GridTable() {
         setAddTransformationFunction({
           option: '',
           supportedDataType: [],
+          infoLink: '',
         });
       }
     );
@@ -324,9 +328,12 @@ export default function GridTable() {
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
         columnType={'byte'} // TODO: column type needs to be send dynamically after integrating with transfomations branch
-        submitMenuOption={(option, datatype) => {
-          !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null;
+        submitMenuOption={(option, datatype, infoLink) => {
+          !transformationOptions.includes(option)
+            ? onMenuOptionSelection(option, datatype, infoLink)
+            : null;
         }}
+        disableToolbarIcon={gridData?.headers?.length === 0 ? true : false}
       />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen
@@ -387,11 +394,13 @@ export default function GridTable() {
             setAddTransformationFunction({
               option: '',
               supportedDataType: [],
+              infoLink: '',
             });
           }}
           applyTransformation={(directive: string) => {
             addDirectives(directive);
           }}
+          transformationLink={addTransformationFunction.infoLink}
         />
       )}
       {snackbarIsOpen && (

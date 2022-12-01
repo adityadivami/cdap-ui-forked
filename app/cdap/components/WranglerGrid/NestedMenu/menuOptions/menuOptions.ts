@@ -41,6 +41,8 @@ export const MENU_OPTIONS: IMenuItem[] = [
         ).toString(),
         supportedDataType: ['byte'],
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-8'`,
+        infoLink:
+          'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382107924/Set+Charset+directive',
       },
       {
         value: 'character-encoding-utf16',
@@ -49,6 +51,8 @@ export const MENU_OPTIONS: IMenuItem[] = [
         ).toString(),
         supportedDataType: ['byte'],
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16'`,
+        infoLink:
+          'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382107924/Set+Charset+directive',
       },
       {
         value: 'character-encoding-us-ascii',
@@ -57,6 +61,8 @@ export const MENU_OPTIONS: IMenuItem[] = [
         ).toString(),
         supportedDataType: ['byte'],
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'us-ascii'`,
+        infoLink:
+          'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382107924/Set+Charset+directive',
       },
       {
         value: 'character-encoding-iso-8859-1',
@@ -65,6 +71,8 @@ export const MENU_OPTIONS: IMenuItem[] = [
         ).toString(),
         supportedDataType: ['byte'],
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'iso-8859-1'`,
+        infoLink:
+          'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382107924/Set+Charset+directive',
       },
       {
         value: 'character-encoding-utf16-be',
@@ -73,6 +81,8 @@ export const MENU_OPTIONS: IMenuItem[] = [
         ).toString(),
         supportedDataType: ['byte'],
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16be'`,
+        infoLink:
+          'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382107924/Set+Charset+directive',
       },
       {
         value: 'character-encoding-utf16-le',
@@ -81,6 +91,8 @@ export const MENU_OPTIONS: IMenuItem[] = [
         ).toString(),
         supportedDataType: ['byte'],
         directive: (selectedColumn: string) => `set-charset :${selectedColumn} 'utf-16le'`,
+        infoLink:
+          'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382107924/Set+Charset+directive',
       },
     ],
     supportedDataType: ['byte'],

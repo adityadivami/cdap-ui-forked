@@ -22,6 +22,9 @@ describe('It should test getDirective function', () => {
   });
 
   it('should call getDirective() when function name is string .', () => {
-    expect(getDirective('string', 'body_0')).toStrictEqual(`set-type :body_0 string`);
+    expect(getDirective('string', 'body_0')).toStrictEqual('set-type :body_0 string');
+  });
+  it('should call getDirective() when function name is  set-charset :body_0.', () => {
+    expect(getDirective("set-charset :body_0 'utf-8'", 'body_0')).toStrictEqual(null);
   });
 });
