@@ -39,7 +39,7 @@ const ToolTipDiv = styled(Box)`
 const GraphContainer = styled(Box)`
   position: relative;
   padding-top: 10px;
-  padding-left: 30px;
+  // padding-left: 10px;
   padding-bottom: 10px;
   & .bar {
     fill: ${blue[500]} !important;
