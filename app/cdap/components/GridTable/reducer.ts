@@ -15,14 +15,7 @@
  */
 
 export const initialGridTableState = {
-  isFirstWrangle: false,
-  connectorType: null,
   directivePanelIsOpen: false,
-  snackbarIsOpen: false,
-  snackbarData: {
-    description: '',
-    isSuccess: false,
-  },
   tableMetaInfo: {
     columnCount: 0,
     rowCount: 0,
@@ -30,40 +23,16 @@ export const initialGridTableState = {
 };
 
 enum IGridTableActions {
-  IS_FIRST_WRANGLE,
-  CONNECTOR_TYPE,
   IS_DIRECTIVE_PANEL_OPEN,
-  IS_SNACKBAR_OPEN,
-  SNACKBAR_DATA,
   TABLE_META_INFO,
 }
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case IGridTableActions.IS_FIRST_WRANGLE:
-      return {
-        ...state,
-        isFirstWrangle: action.payload,
-      };
-    case IGridTableActions.CONNECTOR_TYPE:
-      return {
-        ...state,
-        connectorType: action.payload,
-      };
     case IGridTableActions.IS_DIRECTIVE_PANEL_OPEN:
       return {
         ...state,
         directivePanelIsOpen: action.payload,
-      };
-    case IGridTableActions.IS_SNACKBAR_OPEN:
-      return {
-        ...state,
-        snackbarIsOpen: action.payload,
-      };
-    case IGridTableActions.SNACKBAR_DATA:
-      return {
-        ...state,
-        snackbarData: action.payload,
       };
     case IGridTableActions.TABLE_META_INFO:
       return {

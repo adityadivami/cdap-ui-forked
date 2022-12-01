@@ -74,28 +74,12 @@ export default function GridTable() {
   const classes = useStyles();
   const { dataprep } = DataPrepStore.getState();
   enum IGridTableActions {
-    IS_FIRST_WRANGLE,
-    CONNECTOR_TYPE,
     IS_DIRECTIVE_PANEL_OPEN,
-    IS_SNACKBAR_OPEN,
-    SNACKBAR_DATA,
     TABLE_META_INFO,
   }
 
   const [gridTableState, dispatch] = useReducer(reducer, initialGridTableState);
-  const {
-    isFirstWrangle,
-    connectorType,
-    directivePanelIsOpen,
-    snackbarIsOpen,
-    snackbarData,
-    tableMetaInfo,
-  } = gridTableState;
-  const [toaster, setToaster] = useState({
-    open: false,
-    message: '',
-    isSuccess: false,
-  });
+  const { directivePanelIsOpen, tableMetaInfo } = gridTableState;
 
   const [loading, setLoading] = useState<boolean>(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
@@ -111,16 +95,7 @@ export default function GridTable() {
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
 
-  useEffect(() => {
-    dispatch({
-      type: IGridTableActions.IS_FIRST_WRANGLE,
-      payload: true,
-    });
-    dispatch({
-      type: IGridTableActions.CONNECTOR_TYPE,
-      payload: dataprep.connectorType,
-    });
-  }, []);
+  useEffect(() => {}, []);
 
   const { directives } = dataprep;
   const addDirectives = (directive: string) => {
@@ -145,50 +120,29 @@ export default function GridTable() {
             ...gridParams,
           },
         });
-        dispatch({
-          type: IGridTableActions.IS_SNACKBAR_OPEN,
-          payload: true,
-        });
-        dispatch({
-          type: IGridTableActions.SNACKBAR_DATA,
-          payload: {
-            description: 'Directive applied successfully',
-            isSuccess: true,
-          },
-        });
+
         setLoading(false);
         setGridData(response);
         dispatch({
           type: IGridTableActions.IS_DIRECTIVE_PANEL_OPEN,
           payload: false,
         });
-        setToaster({
+        setSnackbar({
           open: true,
-          message: `Transformation successfully added`,
           isSuccess: true,
+          message: T.translate(`Transformation successfully added`).toString(),
         });
       },
       (err) => {
         setLoading(false);
         dispatch({
-          type: IGridTableActions.IS_SNACKBAR_OPEN,
-          payload: true,
-        });
-        dispatch({
-          type: IGridTableActions.SNACKBAR_DATA,
-          payload: {
-            description: 'Directive cannot applied',
-            isSuccess: false,
-          },
-        });
-        dispatch({
           type: IGridTableActions.IS_DIRECTIVE_PANEL_OPEN,
           payload: false,
         });
-        setToaster({
+        setSnackbar({
           open: true,
-          message: `Failed to add transformation`,
           isSuccess: false,
+          message: `Failed to add transformation`,
         });
       }
     );
@@ -426,8 +380,9 @@ export default function GridTable() {
         setLoading(false);
         setGridData(response);
         setShowRecipePanel(false);
-        setToaster({
+        setSnackbar({
           open: true,
+          isSuccess: true,
           message:
             action === 'add'
               ? `Transformation ${arr} successfully added`
@@ -436,21 +391,20 @@ export default function GridTable() {
               : `${removed_arr?.length} transformation successfully deleted from ${
                   arr[arr.length - 1]
                 }`,
-          isSuccess: true,
         });
         setTimeout(() => {
-          setToaster({
+          setSnackbar({
             open: false,
-            message: ``,
             isSuccess: false,
+            message: ``,
           });
         }, 5000);
       },
       (err) => {
-        setToaster({
+        setSnackbar({
           open: true,
-          message: `Failed to transform ${newDirective}`,
           isSuccess: false,
+          message: `Failed to transform ${newDirective}`,
         });
         setLoading(false);
         setShowRecipePanel(false);
@@ -473,22 +427,9 @@ export default function GridTable() {
   }, [gridData]);
 
   const handleCloseSnackbar = () => {
-    setToaster({
+    setSnackbar(() => ({
       open: false,
-      message: '',
-      isSuccess: false,
-    });
-    dispatch({
-      type: IGridTableActions.IS_SNACKBAR_OPEN,
-      payload: false,
-    });
-    dispatch({
-      type: IGridTableActions.SNACKBAR_DATA,
-      payload: {
-        description: '',
-        isSuccess: false,
-      },
-    });
+    }));
   };
 
   return (
@@ -571,12 +512,12 @@ export default function GridTable() {
           openDirectivePanel={directivePanelIsOpen}
         />
       )}
-      {toaster.open && (
+      {snackbarState.open && (
         <Snackbar
           handleClose={handleCloseSnackbar}
-          message={toaster.message}
-          isSuccess={toaster.isSuccess}
-          open={toaster.open}
+          message={snackbarState.message}
+          isSuccess={snackbarState.isSuccess}
+          open={snackbarState.open}
         />
       )}
       {loading && (
@@ -588,12 +529,12 @@ export default function GridTable() {
         recipeStepsCount={directives?.length}
         gridMetaInfo={tableMetaInfo}
         handleShowRecipePanelHandler={showRecipePanelHandler}
-        setDirectivePanelIsOpen={(boolean_value) =>
+        setDirectivePanelIsOpen={(boolean_value) => {
           dispatch({
             type: IGridTableActions.IS_DIRECTIVE_PANEL_OPEN,
             payload: boolean_value,
-          })
-        }
+          });
+        }}
       />
     </Box>
   );
