@@ -25,7 +25,6 @@ export const useStyles = makeStyles({
     height: '48px',
     alignItems: 'center',
     marginRight: 30,
-    marginLeft: 34,
     zIndex: 9,
     '& .MuiBreadcrumbs-root': {
       fontSize: '14px',
