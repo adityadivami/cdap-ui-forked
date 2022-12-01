@@ -19,8 +19,8 @@ import { useStyles } from 'components/ConnectionList/Components/SubHeader/styles
 import React from 'react';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
-import Breadcrumb from 'components/GridTable/components/Breadcrumb';
 import { CONNECTION_LIST_BREADCRUMB_OPTIONS } from 'components/ConnectionList/Components/SubHeader/constants';
+import Breadcrumb from 'components/Breadcrumb';
 
 export default function SubHeader() {
   const classes = useStyles();

@@ -16,7 +16,7 @@
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import IngestViewSchemaDropDown from 'components/GridTable/components/Breadcrumb/IngestViewSchemaDropDown/index';
+import IngestViewSchemaDropDown from 'components/GridTable/components/IngestViewSchemaDropDown/index';
 
 describe('Test IngestViewSchemaDropDown Component', () => {
   beforeEach(() => {

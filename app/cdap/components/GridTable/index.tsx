@@ -20,7 +20,6 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
-import Breadcrumb from 'components/GridTable/components/Breadcrumb';
 import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
@@ -43,6 +42,7 @@ import { objectQuery } from 'services/helpers';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import SubHeader from './components/SubHeader';
+import Breadcrumb from 'components/Breadcrumb';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;

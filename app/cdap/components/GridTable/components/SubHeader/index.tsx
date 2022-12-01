@@ -19,7 +19,7 @@ import { blue } from '@material-ui/core/colors';
 import T from 'i18n-react';
 import React from 'react';
 import styled from 'styled-components';
-import IngestViewSchemaDropDown from 'components/GridTable/components/Breadcrumb/IngestViewSchemaDropDown';
+import IngestViewSchemaDropDown from 'components/GridTable/components/IngestViewSchemaDropDown';
 import { HelpIcon } from 'styles/img/HelpIcon';
 
 const CreatePipelineButton = styled(Button)`

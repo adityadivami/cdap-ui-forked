@@ -16,7 +16,7 @@
 
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import T from 'i18n-react';
-import { IBreadcrumbItemProps } from 'components/GridTable/components/Breadcrumb/types';
+import { IBreadcrumbItemProps } from 'components/Breadcrumb';
 const PREFIX = 'features.WranglerNewUI.Breadcrumb';
 
 export const getWrangleGridBreadcrumbOptions = (workspaceName, location) => {
