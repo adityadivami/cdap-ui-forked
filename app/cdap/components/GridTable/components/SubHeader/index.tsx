@@ -20,7 +20,6 @@ import T from 'i18n-react';
 import React from 'react';
 import styled from 'styled-components';
 import IngestViewSchemaDropDown from 'components/GridTable/components/IngestViewSchemaDropDown';
-import { HelpIcon } from 'styles/img/HelpIcon';
 
 const CreatePipelineButton = styled(Button)`
   width: 162px;
@@ -60,7 +59,7 @@ export default function({ children }) {
       <Breadcrumbs separator="">
         <IconButton>
           <a href="https://cdap.atlassian.net/wiki/spaces/DOCS/overview" target="_blank">
-            {HelpIcon}
+            <img src="/cdap_assets/img/helpIcon.svg" />
           </a>
         </IconButton>
         <IngestViewSchemaDropDown />
