@@ -26,26 +26,25 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
 public class FooterPanel {
-    @Given("Navigate to Home Page to test footer")
+  @Given("Navigate to Home Page to test footer")
     public void navigateToHomePageFooter() {
         SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
         WaitHelper.waitForPageToLoad();
     }
 
-    @Then("Click on the Data Explorations card")
+  @Then("Click on the Data Explorations card")
     public void clickOnTheDataExplorationCard() {
         try {
             WaitHelper.waitForPageToLoad();
             ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
             String url = SeleniumDriver.getDriver().getCurrentUrl();
             Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-//            System.out.println("Clicked the data exploration card");
         } catch (Exception e) {
             System.err.println("error" + e);
         }
     }
 
-    @Then("Verify if the Footer Panel is displayed")
+  @Then("Verify if the Footer Panel is displayed")
     public void verifyIfTheFooterPanelIsDisplayed() {
         try {
             Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-wrapper")));
@@ -54,7 +53,7 @@ public class FooterPanel {
         }
     }
 
-    @Then("Verify if the elements on the Footer Panel are displayed")
+  @Then("Verify if the elements on the Footer Panel are displayed")
     public void verifyIfTheElementsOnTheFooterPanelAreDisplayed() {
         try {
             WaitHelper.waitForPageToLoad();
