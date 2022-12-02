@@ -31,11 +31,18 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
 public class SnackBar {
     @Given("Navigate to Home Page")
     public void navigateToHomePage() {
-        SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
-        WaitHelper.waitForPageToLoad();
+        try {
+            SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
+            WaitHelper.waitForPageToLoad();
+        } catch (Exception e) {
+            System.err.println("error:" + e);
+        }
     }
 
     @Then("Click on the data exploration card")
@@ -66,8 +73,8 @@ public class SnackBar {
                     flag = false;
                 }
             }
-            WebElement ele = SeleniumDriver.getDriver()
-                    .findElement(By.xpath("//*[@data-testid = 'snackbar-close-icon']"));
+            WebElement ele = SeleniumDriver.getDriver().findElement
+                    (By.xpath("//*[@data-testid = 'snackbar-close-icon']"));
             JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
             executor.executeScript("arguments[0].click();", ele);
         } catch (Exception e) {
