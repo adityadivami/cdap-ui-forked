@@ -17,7 +17,7 @@
 import React from 'react';
 import { IconButton } from '@material-ui/core';
 import styled from 'styled-components';
-import { Expand } from 'components/WranglerGrid/TransformationToolbar/iconStore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 interface IExpandButtonProps {
   open: boolean;
@@ -29,10 +29,14 @@ const ExpandButton = styled(IconButton)`
   transform: ${({ open }) => (!open ? 'rotate(180deg)' : 'rotate(0deg)')};
   cursor: pointer;
 `;
+
+const CustomizedExpandLessIcon = styled(ExpandLessIcon)`
+  font-size: 24px;
+`;
 export default function({ open, onClick, dataTestId }: IExpandButtonProps) {
   return (
     <ExpandButton open={open} onClick={onClick} data-testid={dataTestId}>
-      {Expand}
+      <CustomizedExpandLessIcon />
     </ExpandButton>
   );
 }

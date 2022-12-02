@@ -64,14 +64,11 @@ export default function({
     } else {
       // When submenu item is clicked and if it has further options we show it's item next to submenu list
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
-        let referenceIndex = -1;
-        menuComponentOptions.forEach((menuOptions, menuOptionsIndex) => {
-          menuOptions.forEach((eachOption, optionsIndex) => {
-            if (eachOption.value === menuItem.value) {
-              referenceIndex = menuOptionsIndex; // Getting index of one level higher
-            }
-          });
+        const referenceIndex = menuComponentOptions.findIndex((menuOptions) => {
+          const index = menuOptions.findIndex((eachOption) => (eachOption.value = menuItem.value));
+          return index >= 0 ? true : false;
         });
+
         if (referenceIndex >= 0 && !anchorElement.includes(event.currentTarget)) {
           // if array of anchor element does not have the current item clicked then we will insert it
           const insertPosition = referenceIndex + 2; // +2 because 0, when clicked on icon, 1 when clicked on parent menu item, it means now whatever will come at position 2

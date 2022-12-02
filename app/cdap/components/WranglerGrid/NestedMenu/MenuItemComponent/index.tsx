@@ -16,13 +16,18 @@
 
 import { MenuItem } from '@material-ui/core';
 import React from 'react';
-import { menuArrowIcon } from 'components/WranglerGrid/TransformationToolbar/iconStore';
+import ChevronRightRoundedIcon from '@material-ui/icons/ChevronRightRounded';
 import T from 'i18n-react';
 import { NormalFont, MenuHeadText } from 'components/common/TypographyText';
 import { ShortDivider } from 'components/common/Divider';
 import { SvgIconTypeMap } from '@material-ui/core';
 import { OverridableComponent } from '@material-ui/core/OverridableComponent';
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import styled from 'styled-components';
+
+const StyledChevronRightRoundedIcon = styled(ChevronRightRoundedIcon)`
+  font-size: 24px;
+`;
 
 export interface IMenuItem {
   label?: string;
@@ -32,7 +37,7 @@ export interface IMenuItem {
   title?: string;
   action?: string;
   dataType?: string[];
-  iconSVG?: JSX.Element;
+  iconSVG?: JSX.Element | OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
   icon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
   toolName?: string;
   open?: boolean;
@@ -48,7 +53,14 @@ export interface IMenuItemComponentProps {
 export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
   let menuItemDisableProp;
   menuItemDisableProp = columnType
-    ? !(item?.supportedDataType?.includes(columnType) || item?.supportedDataType?.includes('all')) || DATATYPE_OPTIONS.filter(el=> (el.value === item.value && item.value === columnType.toLowerCase()) || (item.value === 'integer' && columnType.toLowerCase() === 'int')).length
+    ? !(
+        item?.supportedDataType?.includes(columnType) || item?.supportedDataType?.includes('all')
+      ) ||
+      DATATYPE_OPTIONS.filter(
+        (el) =>
+          (el.value === item.value && item.value === columnType.toLowerCase()) ||
+          (item.value === 'integer' && columnType.toLowerCase() === 'int')
+      ).length
     : (menuItemDisableProp = false);
 
   if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.divider')) {
@@ -70,7 +82,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         data-testid="menu-item-parent"
       >
         <NormalFont component="div">{item.label}</NormalFont>
-        {item?.options?.length > 0 && menuArrowIcon}
+        {item?.options?.length > 0 && <StyledChevronRightRoundedIcon />}
       </MenuItem>
     );
   }

@@ -56,7 +56,7 @@ export default function({
   submitMenuOption,
   setShowBreadCrumb,
   showBreadCrumb,
-  disableToolbarIcon
+  disableToolbarIcon,
 }: ITransformationToolBarProps) {
   const [showName, setShowName] = useState<boolean>(false);
   const [anchorElement, setAnchorElement] = useState<HTMLElement[]>(null);
@@ -101,7 +101,7 @@ export default function({
                     }}
                     data-testid="toolbar-icon-button"
                   >
-                    {eachOption.iconSVG ?? (
+                    {eachOption?.iconSVG ?? (
                       <CustomizedSvgIcon
                         component={eachOption.icon}
                         flipped={eachOption.action === 'redo'}

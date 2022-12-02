@@ -3461,7 +3461,7 @@ features:
           invalidIcon: Invalid
           mathIcon: Math
           nullIcon: 'Null'
-          otherIcon: Other
+          moreHorizIcon: Other
           redoIcon: Redo
           securityIcon: Security
           structureIcon: Structure
