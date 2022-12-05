@@ -51,22 +51,28 @@ export interface IMenuItemComponentProps {
 }
 
 export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
-  let menuItemDisableProp;
-  menuItemDisableProp = columnType
-    ? !(
-        item?.supportedDataType?.includes(columnType) || item?.supportedDataType?.includes('all')
-      ) ||
-      DATATYPE_OPTIONS.filter(
-        (el) =>
-          (el.value === item.value && item.value === columnType.toLowerCase()) ||
-          (item.value === 'integer' && columnType.toLowerCase() === 'int')
-      ).length
-    : (menuItemDisableProp = false);
+  const includesCheck = !(
+    item?.supportedDataType?.includes(columnType) || item?.supportedDataType?.includes('all')
+  );
+  const filteredDataOptionCheck = DATATYPE_OPTIONS.filter(
+    (el) =>
+      (el.value === item.value && item.value === columnType.toLowerCase()) ||
+      (item.value === 'integer' && columnType.toLowerCase() === 'int')
+  ).length;
 
-  if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.divider')) {
+  const getMenuItemDisablProp = () => {
+    if (columnType) {
+      return includesCheck || filteredDataOptionCheck;
+    }
+    return false;
+  };
+
+  const menuItemDisableProp = getMenuItemDisablProp();
+
+  if (item?.value === 'divider') {
     return <ShortDivider key={index} data-testid="menu-item-divider" />;
   }
-  if (item?.value === T.translate('features.WranglerNewUI.GridPage.menuItems.heading')) {
+  if (item?.value === 'heading') {
     return (
       <MenuHeadText key={index} data-testid="menu-item-heading">
         {item.label}
@@ -76,7 +82,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
     return (
       <MenuItem
         key={index}
-        disabled={menuItemDisableProp}
+        disabled={menuItemDisableProp as boolean}
         title={item.label}
         onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
         data-testid="menu-item-parent"
