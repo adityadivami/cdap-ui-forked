@@ -68,12 +68,13 @@ export default function({
   };
 
   return (
-    <ToolBarIconWrapper data-testid="transformations-toolbar-container">
+    <ToolBarIconWrapper data-testid="transformations-toolbar-container" showName={showName}>
       <ToolBarInnerWrapper data-testid="nested-menu-container">
         {nestedMenuOptions?.map((eachOption, optionIndex) => {
           return (
             <>
               <FunctionBoxWrapper
+                showName={showName}
                 data-testid={`toolbar-icon-${eachOption.title
                   .toLowerCase()
                   .split(' ')

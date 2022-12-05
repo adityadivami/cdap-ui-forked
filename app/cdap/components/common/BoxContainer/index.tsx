@@ -41,9 +41,14 @@ export const FunctionBoxWrapper = styled(Box)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-left: ${(props) => (props.showName ? 12 : 0)}px;
+  padding-right: ${(props) => (props.showName ? 12 : 0)}px;
+  padding-bottom: 4px;
   width: -webkit-fill-available;
   & .MuiIconButton-root {
-    padding-bottom: 8px;
+    padding: 5px;
+    display: flex;
+    margin: auto;
   }
 `;
 
