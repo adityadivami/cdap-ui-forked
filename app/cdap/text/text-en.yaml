@@ -3433,6 +3433,19 @@ features:
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
   WranglerNewUI:
+    AddConnections:
+      referenceLabel: Add Connection
+    Breadcrumb:
+      labels:
+        connectionsList: Data Sources
+        wranglerHome: Home
+      params:
+        connectionsList: datasources
+        wranglerHome: home
+    ConnectionsList:
+      labels:
+        loadToGrid: Wrangle
+        noConnections: No Connections to show
     GridPage:
       addTransformationPanel:
         applyStep: Apply Step
@@ -3469,30 +3482,17 @@ features:
         options:
           labels:
             datatype:
-              string: string
               boolean: boolean
+              bytes: bytes
+              decimal: decimal
+              double: double
+              float: float
               integer: integer
               long: long
+              string: string
               short: short
-              float: float
-              double: double
-              decimal: decimal
-              bytes: bytes
             menu:
               changeDatatype: Change data type
-    AddConnections:
-      referenceLabel: Add Connection
-    Breadcrumb:
-      labels:
-        connectionsList: Data Sources
-        wranglerHome: Home
-      params:
-        connectionsList: datasources
-        wranglerHome: home
-    ConnectionsList:
-      labels:
-        loadToGrid: Wrangle
-        noConnections: No Connections to show
     GridTable:
       snackbarLabels:
         datasetSuccess: Dataset loaded successfully 
