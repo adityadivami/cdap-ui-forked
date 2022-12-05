@@ -43,6 +43,8 @@ import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
+import Snackbar from 'components/Snackbar';
+import useSnackbar from 'components/Snackbar/useSnackbar';
 
 const transformationOptions = ['undo', 'redo'];
 
@@ -70,6 +72,7 @@ export default function GridTable() {
     supportedDataType: [],
   });
   const [dataQuality, setDataQuality] = useState<IStatistics>();
+  const [snackbarState, setSnackbar] = useSnackbar();
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -127,6 +130,13 @@ export default function GridTable() {
         });
         setLoading(false);
         setGridData(response);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: T.translate(
+            `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
+          ).toString(),
+        });
       });
   };
 
@@ -338,6 +348,16 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
+      <Snackbar // TODO: This snackbar is just for the feature demo purpose. Will be removed in the further development.
+        handleClose={() =>
+          setSnackbar(() => ({
+            open: false,
+          }))
+        }
+        open={snackbarState.open}
+        message={snackbarState.message}
+        isSuccess={snackbarState.isSuccess}
+      />
     </Box>
   );
 }
