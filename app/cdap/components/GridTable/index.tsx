@@ -279,6 +279,7 @@ export default function GridTable() {
         submitMenuOption={(option, datatype) => {
           !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null;
         }}
+        disableToolbarIcon={gridData?.headers?.length === 0 ? true : false}
       />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen

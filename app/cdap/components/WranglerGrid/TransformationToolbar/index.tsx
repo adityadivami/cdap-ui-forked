@@ -14,7 +14,7 @@
  *  the License.
  */
 
-import { IconButton, SvgIcon } from '@material-ui/core';
+import { Box, IconButton, SvgIcon } from '@material-ui/core';
 import { default as React, useState } from 'react';
 import NestedMenu from 'components/WranglerGrid/NestedMenu';
 import { ITransformationToolBarProps } from 'components/WranglerGrid/TransformationToolbar/types';
@@ -42,11 +42,18 @@ const CustomizedSvgIcon = styled(SvgIcon)`
     `}
 `;
 
+const IconCustommizedButton = styled(IconButton)`
+  &.MuiButtonBase-root.Mui-disabled {
+    opacity: 0.5;
+  }
+`;
+
 export default function({
   columnType,
   submitMenuOption,
   setShowBreadCrumb,
   showBreadCrumb,
+  disableToolbarIcon,
 }: ITransformationToolBarProps) {
   const [showName, setShowName] = useState<boolean>(false);
   const [anchorElement, setAnchorElement] = useState<HTMLElement[]>(null);
@@ -58,12 +65,13 @@ export default function({
   };
 
   return (
-    <ToolBarIconWrapper data-testid="transformations-toolbar-container">
+    <ToolBarIconWrapper data-testid="transformations-toolbar-container" showName={showName}>
       <ToolBarInnerWrapper data-testid="nested-menu-container">
         {nestedMenuOptions?.map((eachOption, optionIndex) => {
           return (
             <>
               <FunctionBoxWrapper
+                showName={showName}
                 data-testid={`toolbar-icon-${eachOption.title
                   .toLowerCase()
                   .split(' ')
@@ -77,7 +85,8 @@ export default function({
                     .split(' ')
                     .join('-')}`}
                 >
-                  <IconButton
+                  <IconCustommizedButton
+                    disabled={disableToolbarIcon}
                     onClick={(clickEvent) => {
                       if (eachOption.options?.length) {
                         clickEvent.preventDefault();
@@ -88,15 +97,15 @@ export default function({
                         submitMenuOption(eachOption.action, eachOption.dataType);
                       }
                     }}
-                    data-testid={`toolbar-icon-button-${eachOption.title}`}
+                    data-testid="toolbar-icon-button"
                   >
-                    {eachOption.iconSVG ?? (
+                    {eachOption?.iconSVG ?? (
                       <CustomizedSvgIcon
                         component={eachOption.icon}
                         flipped={eachOption.action === 'redo'}
                       />
                     )}
-                  </IconButton>
+                  </IconCustommizedButton>
                 </CustomTooltip>
                 {eachOption.options?.length > 0 && (
                   <NestedMenu

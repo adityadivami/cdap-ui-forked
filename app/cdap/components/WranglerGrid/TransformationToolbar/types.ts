@@ -15,10 +15,10 @@ import { Dispatch, SetStateAction } from 'react';
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
 export interface ITransformationToolBarProps {
   columnType: string;
   submitMenuOption: (value: string, dataType: string[]) => void;
   setShowBreadCrumb: Dispatch<SetStateAction<boolean>>;
   showBreadCrumb: boolean;
+  disableToolbarIcon: boolean;
 }
