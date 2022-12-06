@@ -35,6 +35,10 @@ public class FooterPanel {
   @Then("Click on the Data Explorations card")
   public void clickOnTheDataExplorationCard() {
     try {
+      boolean flag = true;
+      while (flag == true) {
+        flag = Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"));
+      }
       WaitHelper.waitForPageToLoad();
       ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-1"));
       String url = SeleniumDriver.getDriver().getCurrentUrl();
@@ -47,6 +51,10 @@ public class FooterPanel {
   @Then("Verify if the Footer Panel is displayed")
   public void verifyIfTheFooterPanelIsDisplayed() {
     try {
+      boolean flag = true;
+      while (flag == true) {
+        flag = Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"));
+      }
       Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-wrapper")));
     } catch (Exception e) {
       System.err.println("error" + e);
