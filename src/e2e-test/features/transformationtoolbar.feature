@@ -19,9 +19,10 @@ Feature: TransformationToolbar
 
   @TransformationToolbar
   Scenario Outline: Go through the Transformation Toolbar
-    Given Navigate to Home Page
+    Given Navigate to Home Page to test toolbar
     Then Click on the Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
+    Then Verify snackbar
     Then Verify if all icons are displayed on Toolbar with "<testId>"
     Then Click on the function names toggle with testId as "<testId>" and "<iconLabelName>"
     Then Verify by Clicking on the Up and Down arrow icon
@@ -36,4 +37,3 @@ Feature: TransformationToolbar
       | math     | Math     |
       | security | Security |
       | other | Other |
-      | grid | Grid |

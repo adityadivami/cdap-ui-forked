@@ -31,8 +31,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 public class TransformationToolbar {
-  @Given("Navigate to Home Page")
-  public void navigateToTheHomePage() {
+  @Given("Navigate to Home Page to test toolbar")
+  public void navigateToTheHomePageToToolBar() {
     SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
     WaitHelper.waitForPageToLoad();
   }
@@ -75,10 +75,21 @@ public class TransformationToolbar {
       System.err.println("error:" + e);
     }
   }
+  @Then("Verify snackbar")
+  public void snackBar() {
+    try {
+      WaitHelper.waitForPageToLoad();
+      Helper.locateElementByTestId("transformations-toolbar-icons-function-name-toggler");
+      Helper.locateElementByTestId("snackbar-close-icon").click();
+    } catch (Exception e) {
+      System.err.println("error: " + e);
+    }
+  }
   @Then("Click on the function names toggle with testId as \\\"(.*)\\\" and \\\"(.*)\\\"")
   public void clickOnTheSliderButton(String testId, String iconLabelName) {
     try {
-      WaitHelper.waitForPageToLoad();
+      WebElement toggle = Helper.locateElementByTestId("transformations-toolbar-icons-function-name-toggler");
+      WaitHelper.waitForElementToBeDisplayed(toggle);
       WebElement ele = Helper.locateElementByXPath
         ("//input[@data-testid='transformations-toolbar-icons-function-name-toggler']");
       Actions action = new Actions(SeleniumDriver.getDriver());
