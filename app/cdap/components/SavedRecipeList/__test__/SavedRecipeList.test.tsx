@@ -21,7 +21,6 @@ import React from 'react';
 
 describe('Test SavedRecipeList Component', () => {
   it('should render the SavedRecipeList Component ', () => {
-    
     render(<SavedRecipeList onRecipeClick={jest.fn()} />);
 
     const recipeRowElement = screen.getByTestId(/recipe-box-0/i);
