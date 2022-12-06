@@ -47,8 +47,11 @@ public class FooterPanel {
   @Then("Verify if the Footer Panel is displayed")
   public void verifyIfTheFooterPanelIsDisplayed() {
     try {
-      WaitHelper.waitForPageToLoad();
-      Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-wrapper")));
+      WaitHelper.waitForElementToBeDisplayed(
+              Helper.locateElementByCssSelector(Helper.getCssSelectorByDataTestId("footer-panel-wrapper")));
+//      WaitHelper.waitForPageToLoad();
+//      Helper.isElementExists(Helper.getCssSelectorByDataTestId())
+//      Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-wrapper")));
     } catch (Exception e) {
       System.err.println("error" + e);
     }
