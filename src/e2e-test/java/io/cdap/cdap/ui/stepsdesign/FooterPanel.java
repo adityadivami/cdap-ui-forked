@@ -28,19 +28,15 @@ import org.junit.Assert;
 public class FooterPanel {
   @Given("Navigate to Home Page to test footer")
   public void navigateToHomePageFooter() {
-    SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
     WaitHelper.waitForPageToLoad();
+    SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
   }
 
   @Then("Click on the Data Explorations card")
   public void clickOnTheDataExplorationCard() {
     try {
-      boolean flag = true;
-      while (flag == true) {
-        flag = Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"));
-      }
       WaitHelper.waitForPageToLoad();
-      ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-1"));
+      ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
       String url = SeleniumDriver.getDriver().getCurrentUrl();
       Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
     } catch (Exception e) {
@@ -51,10 +47,7 @@ public class FooterPanel {
   @Then("Verify if the Footer Panel is displayed")
   public void verifyIfTheFooterPanelIsDisplayed() {
     try {
-      boolean flag = true;
-      while (flag == true) {
-        flag = Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"));
-      }
+      WaitHelper.waitForPageToLoad();
       Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-wrapper")));
     } catch (Exception e) {
       System.err.println("error" + e);
