@@ -45,12 +45,15 @@ public class FooterPanel {
 
   @Then("Validate the current URL")
   public void validateURL() {
-    try {
-      String url = SeleniumDriver.getDriver().getCurrentUrl();
-      Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-    } catch (Exception e) {
-      System.err.println("error" + e);
-    }
+    String url = SeleniumDriver.getDriver().getCurrentUrl();
+    System.out.println("The page URL is:" + url);
+    Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
+
+//    try {
+//
+//    } catch (Exception e) {
+//      System.err.println("error" + e);
+//    }
   }
 
   @Then("Verify if the Footer Panel is displayed")
