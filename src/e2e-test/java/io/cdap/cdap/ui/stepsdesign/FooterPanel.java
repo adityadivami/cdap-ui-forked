@@ -60,7 +60,7 @@ public class FooterPanel {
   @Then("Verify if the elements on the Footer Panel are displayed")
   public void verifyIfTheElementsOnTheFooterPanelAreDisplayed() {
     try {
-      WaitHelper.waitForPageToLoad();
+//      WaitHelper.waitForPageToLoad();
       Assert.assertTrue(
       Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-column-view-panel-tab")));
       Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-meta-info-tab")));
