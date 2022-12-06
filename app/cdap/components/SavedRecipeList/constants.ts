@@ -16,31 +16,24 @@
 import React from 'react';
 
 export const SAVED_RECIPE_LIST = [
-    {
-        name: "recipe-1",
-        description: "A recipe for order management 1",
-        directives: [
-            "fill-null-or-empty :email 'test'",
-            "drop :id",
-            "drop :id"
-        ]
-    },
-    {
-        name: "recipe-2",
-        description: "A recipe for order management 2",
-        directives: [
-            "fill-null-or-empty :email 'test'",
-            "drop :id"
-        ]
-    },
-    {
-        name: "recipe-3",
-        description: "A recipe for order management 3",
-        directives: [
-            "fill-null-or-empty :email 'test'",
-            "drop :id",
-            "fill-null-or-empty :email 'test'",
-            "fill-null-or-empty :email 'test'"
-        ]
-    },
-]
+  {
+    name: 'recipe-1',
+    description: 'A recipe for order management 1',
+    directives: ["fill-null-or-empty :email 'test'", 'drop :id', 'drop :id'],
+  },
+  {
+    name: 'recipe-2',
+    description: 'A recipe for order management 2',
+    directives: ["fill-null-or-empty :email 'test'", 'drop :id'],
+  },
+  {
+    name: 'recipe-3',
+    description: 'A recipe for order management 3',
+    directives: [
+      "fill-null-or-empty :email 'test'",
+      'drop :id',
+      "fill-null-or-empty :email 'test'",
+      "fill-null-or-empty :email 'test'",
+    ],
+  },
+];

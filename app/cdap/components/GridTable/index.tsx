@@ -42,6 +42,7 @@ import { objectQuery } from 'services/helpers';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import SavedRecipeList from 'components/SavedRecipeList';
+import RecipeDetails from 'components/RecipeDetails';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -60,6 +61,8 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
+  const [recipeDetails, setRecipeDetails] = useState({});
+  const [recipeDetailIsOpen, setRecipeDetailsIsOpen] = useState(false);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -248,11 +251,18 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  const onRecipeClick = (recipeItem) => {};
+  const onRecipeClick = (recipeItem) => {
+    setRecipeDetails(recipeItem);
+    setRecipeDetailsIsOpen(true);
+  };
+  const onCloseDetail = () => setRecipeDetailsIsOpen(false);
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
       <SavedRecipeList onRecipeClick={(recipeItem) => onRecipeClick(recipeItem)} />
+      {recipeDetailIsOpen && (
+        <RecipeDetails recipeDetails={recipeDetails} onCloseDetail={onCloseDetail} />
+      )}
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}

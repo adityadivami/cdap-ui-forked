@@ -16,7 +16,12 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Container, Drawer } from '@material-ui/core';
+import { Box, Container, Divider, Drawer, Typography } from '@material-ui/core';
+import DrawerHeader from 'components/RecipeDetails/DrawerHeader';
+import { grey } from '@material-ui/core/colors';
+import T from 'i18n-react';
+
+const PREFIX = 'features.WranglerNewUI.RecipeDetails';
 
 const StyledDrawer = styled(Drawer)`
   & .MuiDrawer-paper {
@@ -31,13 +36,95 @@ const DrawerContainerBox = styled(Container)`
   padding-left: 30px;
 `;
 
-export default function({}) {
+const RecipeDetailWrapper = styled(Box)`
+  margin-top: 20px;
+`;
+
+const RecipeName = styled(Typography)`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: ${grey[700]};
+  text-transform: capitalize;
+`;
+
+const StepDetail = styled(Box)`
+  margin: 10px 0;
+`;
+
+const DescriptionDetail = styled(Box)`
+  margin: 20px 0;
+`;
+
+const RecipeDetailText = styled(Typography)`
+  color: ${grey[700]};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+`;
+
+const StepsGridWrapper = styled(Box)`
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-items: center;
+  padding: 10px;
+`;
+
+const StepsGridHead = styled(Typography)`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: ${grey[700]};
+`;
+
+const HeadDivider = styled(Box)`
+  width: 100%;
+  border-bottom: 1px solid ${grey[700]};
+  opacity: 0.6;
+`;
+
+const CellDivider = styled(Box)`
+  width: 100%;
+  border-bottom: 1px solid ${grey[300]};
+`;
+
+export default function({ recipeDetails, onCloseDetail }) {
   return (
     <StyledDrawer open={true} data-testid="select-column-panel" anchor="right">
-      <DrawerContainerBox
-        role="presentation"
-        data-testid="select-column-drawer"
-      ></DrawerContainerBox>
+      <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
+        <DrawerHeader onCloseDetail={onCloseDetail} />
+        <RecipeDetailWrapper>
+          <RecipeName>{recipeDetails.name}</RecipeName>
+          <StepDetail>
+            <RecipeDetailText>
+              {`${recipeDetails.directives.length} ${T.translate(
+                `${PREFIX}.recipeStepsTableHead.recipeStep`
+              )}`}
+            </RecipeDetailText>
+          </StepDetail>
+          <DescriptionDetail>
+            <RecipeDetailText>{recipeDetails.description}</RecipeDetailText>
+          </DescriptionDetail>
+          <StepsGridWrapper>
+            <StepsGridHead>{T.translate(`${PREFIX}.recipeStepsTableHead.serialNo`)}</StepsGridHead>
+            <StepsGridHead>
+              {T.translate(`${PREFIX}.recipeStepsTableHead.recipeStep`)}
+            </StepsGridHead>
+          </StepsGridWrapper>
+          <HeadDivider />
+          {recipeDetails.directives.map((recipeStep, recipeStepIndex) => (
+            <>
+              <StepsGridWrapper>
+                <RecipeDetailText>
+                  {recipeStepIndex < 10 ? `0${recipeStepIndex + 1}` : recipeStepIndex + 1}
+                </RecipeDetailText>
+                <RecipeDetailText>{recipeStep}</RecipeDetailText>
+              </StepsGridWrapper>
+              {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
+            </>
+          ))}
+        </RecipeDetailWrapper>
+      </DrawerContainerBox>
     </StyledDrawer>
   );
 }
