@@ -21,6 +21,7 @@ import styled from 'styled-components';
 import { ReactNode } from 'react';
 import RecipeWidgetHeading from 'components/RecipeSteps/RecipeWidgetHeading';
 import ArrowBackIosOutlinedIcon from '@material-ui/icons/ArrowBackIosOutlined';
+import T from 'i18n-react';
 
 export interface IColumnViewWidget {
   headingText: ReactNode;
@@ -96,7 +97,13 @@ export default function({
           </BackButtonStyle>
         )}
         <HeaderTextWithBackIcon>
-          <RecipeWidgetHeading headingText={headingText} />
+          {showRecipeSaveForm ? (
+            <RecipeWidgetHeading
+              headingText={T.translate('features.WranglerNewUI.RecipeForm.labels.saveRecipe')}
+            />
+          ) : (
+            <RecipeWidgetHeading headingText={headingText} />
+          )}
         </HeaderTextWithBackIcon>
         <HeaderIconWrapper>
           {headerActionTemplate && <Typography component="div">{headerActionTemplate}</Typography>}

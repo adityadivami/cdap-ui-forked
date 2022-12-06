@@ -54,6 +54,8 @@ const RecipeStepInfo = styled(Typography)`
   line-height: 150%;
   letter-spacing: 0.15px;
   color: #616161;
+  padding-left: 20px;
+  padding-right: 25px;
 `;
 
 export default function({
@@ -94,7 +96,7 @@ export default function({
         {showRecipeSaveForm && (
           <>
             <RecipeStepInfo component="div">
-              {T.translate('features.WranglerNewUI.RecipeForm.labels.nameErrorMessage')}
+              {T.translate('features.WranglerNewUI.RecipeForm.labels.recipeFormInfo')}
             </RecipeStepInfo>
             <CreateRecipe
               recipeData={recipeData}

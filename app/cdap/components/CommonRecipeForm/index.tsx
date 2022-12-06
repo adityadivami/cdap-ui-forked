@@ -130,6 +130,7 @@ export default function({
             data-cy="secure-key-name"
             inputRef={RecipeNameElement}
             data-testid="recipe-name-field"
+            placeholder="Input a name to identify it later"
           />
         </FormFieldWrapper>
         <FormFieldWrapper>
@@ -140,7 +141,7 @@ export default function({
             <DescriptionTextFieldStyle
               required
               variant="outlined"
-              placeholder="Minimum 3 rows"
+              placeholder="Input a description to identify it later"
               defaultValue={recipeData.description}
               inputRef={RecipeDescriptionElement}
               fullWidth

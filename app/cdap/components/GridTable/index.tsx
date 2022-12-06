@@ -371,7 +371,12 @@ export default function GridTable() {
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
-      <Button onClick={onEdit} data-tsetid="recipe-form-edit-button">
+      <Button
+        onClick={onEdit}
+        data-tsetid="recipe-form-edit-button"
+        variant="outlined"
+        color="primary"
+      >
         {T.translate('features.WranglerNewUI.RecipeForm.labels.edit')}
       </Button>
       <TablePanelContainer>
