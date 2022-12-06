@@ -23,20 +23,29 @@ import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 public class FooterPanel {
-  @Given("Navigate to Home Page to test footer")
+  @When("Navigate to Home Page to test footer")
   public void navigateToHomePageFooter() {
-    WaitHelper.waitForPageToLoad();
     SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
+    WaitHelper.waitForPageToLoad();
   }
 
   @Then("Click on the Data Explorations card")
   public void clickOnTheDataExplorationCard() {
     try {
-      WaitHelper.waitForPageToLoad();
       ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
+      waitForLoading();
+    } catch (Exception e) {
+      System.err.println("error" + e);
+    }
+  }
+
+  @Then("Validate the current URL")
+  public void validateURL() {
+    try {
       String url = SeleniumDriver.getDriver().getCurrentUrl();
       Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
     } catch (Exception e) {
@@ -60,7 +69,6 @@ public class FooterPanel {
   @Then("Verify if the elements on the Footer Panel are displayed")
   public void verifyIfTheElementsOnTheFooterPanelAreDisplayed() {
     try {
-//      WaitHelper.waitForPageToLoad();
       Assert.assertTrue(
       Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-column-view-panel-tab")));
       Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-meta-info-tab")));
@@ -70,6 +78,14 @@ public class FooterPanel {
       Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-recipe-steps-tab")));
     } catch (Exception e) {
       System.err.println("error" + e);
+    }
+  }
+
+  public void waitForLoading() {
+    if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
+      WaitHelper.waitForElementToBeHidden(
+              Helper.locateElementByCssSelector(Helper.getCssSelectorByDataTestId("loading-indicator"))
+      );
     }
   }
 }
