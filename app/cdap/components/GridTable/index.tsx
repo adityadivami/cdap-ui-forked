@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Table, TableBody, TableHead, TableRow, Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
@@ -35,17 +35,47 @@ import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import T from 'i18n-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
+import RecipeSteps from 'components/RecipeSteps';
+import FooterPanel from 'components/FooterPanel';
+import { reducer, initialGridTableState } from 'components/GridTable/reducer';
+import styled from 'styled-components';
+import EditRecipe from 'components/EditRecipe';
+import { current } from '@reduxjs/toolkit';
+
+const TableWrapper = styled(Box)`
+  height: calc(100vh - 193px);
+  overflow-y: auto;
+`;
+
+const TablePanelContainer = styled(Box)`
+  display: flex;
+  font-family: Roboto;
+`;
+
+const RecipeStepPanel = styled(Box)`
+  max-height: calc(100vh - 190px);
+  box-shadow: -3px 4px 15px rgba(68, 132, 245, 0.25);
+`;
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
+
+  const { dataprep } = DataPrepStore.getState();
+
+  // useEffect(() => {
+  //   setRecipeSteps(dataprep.directives);
+  // }, [dataprep]);
+
+  const [gridTableState, dispatch] = useReducer(reducer, initialGridTableState);
+  const { directivePanelIsOpen, tableMetaInfo } = gridTableState;
 
   const [loading, setLoading] = useState(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
@@ -59,6 +89,31 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
+  const [showRecipePanel, setShowRecipePanel] = useState<boolean>(false);
+  const [showEditFormPanel, setShowEditFormPanel] = useState<boolean>(false);
+  const [showRecipeSaveForm, setShowRecipeSaveForm] = useState<boolean>(false);
+  const [recipeData, setRecipeData] = useState([]);
+  const [isNameError, setIsNameError] = useState(false);
+  const recipe_steps = [
+    'uppercase: body1',
+    'titlecase: body2',
+    // 'uppercase: body3',
+    // 'titlecase: body4',
+  ];
+  const sampleRecipedata = [
+    {
+      name: 'name1',
+      description: 'description1',
+      directives: [],
+      id: 1,
+    },
+    {
+      name: 'name2',
+      description: 'description2',
+      directives: [],
+      id: 2,
+    },
+  ];
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -116,13 +171,13 @@ export default function GridTable() {
         });
         setLoading(false);
         setGridData(response);
-        setSnackbar({
-          open: true,
-          isSuccess: true,
-          message: T.translate(
-            `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
-          ).toString(),
-        });
+        // setSnackbar({
+        //   open: true,
+        //   isSuccess: true,
+        //   message: T.translate(
+        //     `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
+        //   ).toString(),
+        // });
       });
   };
 
@@ -243,66 +298,163 @@ export default function GridTable() {
     setRowsDataList(rowData);
   };
 
+  const showRecipePanelHandler = () => {
+    setShowRecipePanel((prev) => !prev);
+  };
+
   useEffect(() => {
     getGridTableData();
   }, [gridData]);
 
+  const onRecipeDataSave = (data) => {
+    data.directives = recipe_steps;
+    const error = recipeData?.some((elem) => elem.name === data.name);
+    if (showEditFormPanel) {
+      if (error) {
+        setIsNameError(error);
+      } else {
+        setRecipeData((current) =>
+          current.map((i) => {
+            if (i.id === 1) {
+              return {
+                ...i,
+                name: data.name,
+                description: data.description,
+                directives: data.directives,
+              };
+            }
+            i.directives = data.directives;
+            return i;
+          })
+        );
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: `2 Steps successfully saved as a recipe!`,
+        });
+        setIsNameError(false);
+        setShowEditFormPanel(false);
+        setShowRecipeSaveForm(false);
+      }
+    } else {
+      if (error) {
+        setIsNameError(error);
+      } else {
+        setRecipeData((current) => [...current, data]);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: `2 Steps successfully saved as a recipe!`,
+        });
+        setIsNameError(false);
+        setShowRecipeSaveForm(false);
+      }
+    }
+  };
+
+  const onRecipeFormCancel = () => {
+    setShowRecipeSaveForm(false);
+    setShowEditFormPanel(false);
+    setIsNameError(false);
+  };
+
+  const onEdit = () => {
+    setShowEditFormPanel(true);
+    setRecipeData([...sampleRecipedata]);
+  };
+
+  const closeClickHandler = () => {
+    setShowEditFormPanel(false);
+    setRecipeData([]);
+  };
+
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
-      {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
-        <NoRecordScreen
-          title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
-          subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
-        />
-      ) : (
-        <Table aria-label="simple table" className="test">
-          <TableHead>
-            <TableRow>
-              {headersNamesList?.length &&
-                headersNamesList.map((eachHeader) => (
-                  <GridHeaderCell
-                    label={eachHeader.label}
-                    types={eachHeader.type}
-                    key={eachHeader.name}
-                  />
-                ))}
-            </TableRow>
-            <TableRow>
-              {missingDataList?.length &&
-                headersNamesList.length &&
-                headersNamesList.map((each, index) => {
-                  return missingDataList.map((item, itemIndex) => {
-                    if (item.name === each.name) {
-                      return <GridKPICell metricData={item} key={item.name} />;
-                    }
-                  });
-                })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rowsDataList?.length &&
-              rowsDataList.map((eachRow, rowIndex) => {
-                return (
-                  <TableRow key={`row-${rowIndex}`}>
-                    {headersNamesList.map((eachKey, eachIndex) => {
-                      return (
-                        <GridTextCell
-                          cellValue={eachRow[eachKey.name] || '--'}
-                          key={`${eachKey.name}-${eachIndex}`}
-                        />
-                      );
+      <Button onClick={onEdit} data-tsetid="recipe-form-edit-button">
+        {T.translate('features.WranglerNewUI.RecipeForm.labels.edit')}
+      </Button>
+      <TablePanelContainer>
+        {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+          <TableWrapper>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  {headersNamesList?.length &&
+                    headersNamesList.map((eachHeader) => (
+                      <GridHeaderCell
+                        label={eachHeader.label}
+                        types={eachHeader.type}
+                        key={eachHeader.name}
+                      />
+                    ))}
+                </TableRow>
+                <TableRow>
+                  {missingDataList?.length &&
+                    headersNamesList.length &&
+                    headersNamesList.map((each, index) => {
+                      return missingDataList.map((item, itemIndex) => {
+                        if (item.name === each.name) {
+                          return <GridKPICell metricData={item} key={item.name} />;
+                        }
+                      });
                     })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      )}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rowsDataList?.length &&
+                  rowsDataList.map((eachRow, rowIndex) => {
+                    return (
+                      <TableRow key={`row-${rowIndex}`}>
+                        {headersNamesList.map((eachKey, eachIndex) => {
+                          return (
+                            <GridTextCell
+                              cellValue={eachRow[eachKey.name] || '--'}
+                              key={`${eachKey.name}-${eachIndex}`}
+                            />
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableWrapper>
+        ) : (
+          <NoRecordScreen
+            title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
+            subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
+          />
+        )}
+        {showRecipePanel && (
+          <RecipeStepPanel>
+            <RecipeSteps
+              setShowRecipePanel={setShowRecipePanel}
+              setShowRecipeSaveForm={setShowRecipeSaveForm}
+              showRecipeSaveForm={showRecipeSaveForm}
+              recipeData={{ name: '', description: '', directives: [] }}
+              onRecipeDataSave={onRecipeDataSave}
+              onCancel={onRecipeFormCancel}
+              isNameError={isNameError}
+            />
+          </RecipeStepPanel>
+        )}
+      </TablePanelContainer>
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
         </div>
+      )}
+      {showEditFormPanel && (
+        <EditRecipe
+          openDrawer={showEditFormPanel}
+          headingText={T.translate('features.WranglerNewUI.RecipeForm.labels.editFormTitle')}
+          closeClickHandler={closeClickHandler}
+          recipeData={recipeData[0]}
+          onCancel={onRecipeFormCancel}
+          onRecipeDataSave={onRecipeDataSave}
+          isNameError={isNameError}
+        />
       )}
       <Snackbar // TODO: This snackbar is just for the feature demo purpose. Will be removed in the further development.
         handleClose={() =>
@@ -313,6 +465,11 @@ export default function GridTable() {
         open={snackbarState.open}
         message={snackbarState.message}
         isSuccess={snackbarState.isSuccess}
+      />
+      <FooterPanel
+        recipeStepsCount={0}
+        gridMetaInfo={tableMetaInfo}
+        handleShowRecipePanelHandler={showRecipePanelHandler}
       />
     </Box>
   );
