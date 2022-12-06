@@ -41,6 +41,7 @@ import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
+import SavedRecipeList from 'components/SavedRecipeList';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -247,9 +248,11 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
+  const onRecipeClick = (recipeItem) => {};
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
+      <SavedRecipeList onRecipeClick={(recipeItem) => onRecipeClick(recipeItem)} />
       {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
