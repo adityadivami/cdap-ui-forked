@@ -24,6 +24,10 @@ import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import { Box, Typography } from '@material-ui/core';
 import T from 'i18n-react';
 
+interface IDrawerHeaderProps {
+  onCloseDetail: () => void;
+}
+
 const UnderLine = (
   <svg
     width="67"
@@ -56,7 +60,9 @@ const RecipeHead = styled(Typography)`
   color: ${grey[900]};
 `;
 
-const IconsWrapper = styled(Box)``;
+const IconsWrapper = styled(Box)`
+  display: flex;
+`;
 
 const CustomizedEditIcon = styled(EditIcon)`
   fill: ${grey[600]};
@@ -92,10 +98,11 @@ const CustomizedCloseIcon = styled(CloseIcon)`
 const VerticalDivider = styled(Box)`
   width: 1px;
   height: 25px;
-  border: 1px solid ${grey[300]};
+  border-left: 1px solid ${grey[300]};
+  margin: 0 5px;
 `;
 
-export default function({ onCloseDetail }) {
+export default function({ onCloseDetail }: IDrawerHeaderProps) {
   return (
     <MainHeadWrapper>
       <HeadWrapper>

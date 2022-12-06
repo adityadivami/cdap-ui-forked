@@ -43,6 +43,7 @@ import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import SavedRecipeList from 'components/SavedRecipeList';
 import RecipeDetails from 'components/RecipeDetails';
+import { IRecipeItem } from 'components/SavedRecipeList';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -61,7 +62,7 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [recipeDetails, setRecipeDetails] = useState({});
+  const [recipeDetails, setRecipeDetails] = useState<IRecipeItem>();
   const [recipeDetailIsOpen, setRecipeDetailsIsOpen] = useState(false);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
@@ -251,7 +252,7 @@ export default function GridTable() {
     getGridTableData();
   }, [gridData]);
 
-  const onRecipeClick = (recipeItem) => {
+  const onRecipeClick = (recipeItem: IRecipeItem) => {
     setRecipeDetails(recipeItem);
     setRecipeDetailsIsOpen(true);
   };
@@ -259,7 +260,7 @@ export default function GridTable() {
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
-      <SavedRecipeList onRecipeClick={(recipeItem) => onRecipeClick(recipeItem)} />
+      <SavedRecipeList onRecipeClick={(recipeItem: IRecipeItem) => onRecipeClick(recipeItem)} />
       {recipeDetailIsOpen && (
         <RecipeDetails recipeDetails={recipeDetails} onCloseDetail={onCloseDetail} />
       )}

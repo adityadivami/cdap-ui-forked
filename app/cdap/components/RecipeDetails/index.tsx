@@ -20,6 +20,12 @@ import { Box, Container, Divider, Drawer, Typography } from '@material-ui/core';
 import DrawerHeader from 'components/RecipeDetails/DrawerHeader';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
+import { IRecipeItem } from 'components/SavedRecipeList';
+
+interface IRecipeDetailsProps {
+  recipeDetails: IRecipeItem;
+  onCloseDetail: () => void;
+}
 
 const PREFIX = 'features.WranglerNewUI.RecipeDetails';
 
@@ -88,7 +94,7 @@ const CellDivider = styled(Box)`
   border-bottom: 1px solid ${grey[300]};
 `;
 
-export default function({ recipeDetails, onCloseDetail }) {
+export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
   return (
     <StyledDrawer open={true} data-testid="select-column-panel" anchor="right">
       <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
@@ -112,17 +118,20 @@ export default function({ recipeDetails, onCloseDetail }) {
             </StepsGridHead>
           </StepsGridWrapper>
           <HeadDivider />
-          {recipeDetails.directives.map((recipeStep, recipeStepIndex) => (
-            <>
-              <StepsGridWrapper>
-                <RecipeDetailText>
-                  {recipeStepIndex < 10 ? `0${recipeStepIndex + 1}` : recipeStepIndex + 1}
-                </RecipeDetailText>
-                <RecipeDetailText>{recipeStep}</RecipeDetailText>
-              </StepsGridWrapper>
-              {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
-            </>
-          ))}
+          {recipeDetails.directives.length > 0 &&
+            recipeDetails.directives.map((recipeStep, recipeStepIndex) => {
+              return (
+                <>
+                  <StepsGridWrapper>
+                    <RecipeDetailText>
+                      {recipeStepIndex < 10 ? `0${recipeStepIndex + 1}` : recipeStepIndex + 1}
+                    </RecipeDetailText>
+                    <RecipeDetailText>{recipeStep}</RecipeDetailText>
+                  </StepsGridWrapper>
+                  {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
+                </>
+              );
+            })}
         </RecipeDetailWrapper>
       </DrawerContainerBox>
     </StyledDrawer>

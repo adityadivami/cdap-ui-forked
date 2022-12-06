@@ -17,8 +17,10 @@
 import React from 'react';
 import { SAVED_RECIPE_LIST } from 'components/SavedRecipeList/constants';
 import { Box } from '@material-ui/core';
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 
-interface IRecipeItem {
+export interface IRecipeItem {
   name: string;
   description: string;
   directives: string[];
@@ -28,14 +30,27 @@ interface ISavedRecipeListProps {
   onRecipeClick: (recipeItem: IRecipeItem) => void;
 }
 
+const RecipeNameBox = styled(Box)`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: ${grey[700]};
+  padding: 10px;
+  border-bottom: 1px solid ${grey[300]};
+  cursor: pointer;
+`;
+
 export default function({ onRecipeClick }: ISavedRecipeListProps) {
   return (
     <>
       {SAVED_RECIPE_LIST.map((recipeItem, recipeIndex) => {
         return (
-          <Box data-testid={`recipe-box-${recipeIndex}`} onClick={() => onRecipeClick(recipeItem)}>
+          <RecipeNameBox
+            data-testid={`recipe-box-${recipeIndex}`}
+            onClick={() => onRecipeClick(recipeItem)}
+          >
             {recipeItem.name}
-          </Box>
+          </RecipeNameBox>
         );
       })}
     </>
