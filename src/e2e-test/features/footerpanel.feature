@@ -16,12 +16,10 @@
 
 
 @Integration_Tests
-Feature: FooterPanel
-
-  @FooterPanel
-  Scenario: Checking the footer panel is on the grid table
+  Feature: FooterPanel
+    @FooterPanel
+    Scenario: Checking the footer panel is on the grid table
     When Navigate to Home Page to test footer
     Then Click on the Data Explorations card
-#    Then Validate the current URL
     Then Verify if the Footer Panel is displayed
     Then Verify if the elements on the Footer Panel are displayed
