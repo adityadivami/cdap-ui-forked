@@ -28,12 +28,6 @@ import org.junit.Assert;
 public class FooterPanel {
   String url;
 
-  @When("Navigate to Home Page to test footer")
-  public void navigateToHomePageFooter() {
-    SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
-    WaitHelper.waitForPageToLoad();
-  }
-
   @Then("Click on the Data Explorations card")
   public void clickOnTheDataExplorationCard() {
     try {
