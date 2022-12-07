@@ -27,6 +27,7 @@ import org.junit.Assert;
 
 public class FooterPanel {
   String url;
+
   @When("Navigate to Home Page to test footer")
   public void navigateToHomePageFooter() {
     SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
@@ -54,16 +55,16 @@ public class FooterPanel {
   public void verifyIfTheFooterPanelIsDisplayed() {
     try {
       System.out.println(url);
-      if (url.contains("cdap/ns/default/wrangler-grid")){
+      if (url.contains("cdap/ns/default/wrangler-grid")) {
         System.out.println("if triggered");
         Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("footer-panel-wrapper")));
         Assert.assertTrue(
-                Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-column-view-panel-tab")));
+            Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-column-view-panel-tab")));
         Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-meta-info-tab")));
         Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-zoom-tab")));
         Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-directives-tab")));
         Assert.assertTrue(
-                Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-recipe-steps-tab")));
+            Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-recipe-steps-tab")));
       } else {
         System.out.println("Element is not Displayed");
       }
@@ -77,12 +78,12 @@ public class FooterPanel {
     try {
       if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-wrapper"))) {
         Assert.assertTrue(
-                Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-column-view-panel-tab")));
+            Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-column-view-panel-tab")));
         Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-meta-info-tab")));
         Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-zoom-tab")));
         Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-directives-tab")));
         Assert.assertTrue(
-                Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-recipe-steps-tab")));
+            Helper.isElementExists(Helper.getCssSelectorByDataTestId("footer-panel-recipe-steps-tab")));
       } else {
         System.out.println("Footer panel is not displayed");
       }
@@ -94,8 +95,7 @@ public class FooterPanel {
   public void waitForLoading() {
     if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
       WaitHelper.waitForElementToBeHidden(
-              Helper.locateElementByCssSelector(Helper.getCssSelectorByDataTestId("loading-indicator"))
-      );
+          Helper.locateElementByCssSelector(Helper.getCssSelectorByDataTestId("loading-indicator")));
     }
   }
 }
