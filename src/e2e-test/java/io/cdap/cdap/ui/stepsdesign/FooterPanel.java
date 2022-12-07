@@ -35,11 +35,11 @@ public class FooterPanel {
 
   @Then("Click on the Data Explorations card")
   public void clickOnTheDataExplorationCard() {
-//    try {
+    try {
       if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("ongoing-data-explore-parent"))){
         System.out.println("Element is displayed");
-//        ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
-//        System.out.println("Exploration Card is Clicked");
+        ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-0"));
+        System.out.println("Exploration Card is Clicked");
       } else {
         System.out.println("Element is not displayed");
       }
@@ -47,9 +47,9 @@ public class FooterPanel {
       String url = SeleniumDriver.getDriver().getCurrentUrl();
       System.out.println("The page URL is:" + url);
       Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-//    } catch (Exception e) {
-//      System.err.println("error" + e);
-//    }
+    } catch (Exception e) {
+      System.err.println("error" + e);
+    }
   }
 
 //  @Then("Validate the current URL")
