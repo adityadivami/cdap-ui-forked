@@ -51,7 +51,7 @@ public class Constants {
   public static final String DEFAULT_GCS_FILE = "purchase_bad.csv";
 
   public static final String DEFAULT_BIGQUERY_CONNECTION_NAME = "bigquery_" +
-      String.valueOf(getRandomArbitrary(1, 10000));
+    String.valueOf(getRandomArbitrary(1, 10000));
   public static final String DEFAULT_BIGQUERY_DATASET = "cdap_gcp_ui_test";
   public static final String DEFAULT_BIGQUERY_TABLE = "users";
 
@@ -59,7 +59,7 @@ public class Constants {
   public static final String DEFAULT_SPANNER_DATABASE = "test";
   public static final String DEFAULT_SPANNER_TABLE = "users";
   public static final String DEFAULT_SPANNER_CONNECTION_NAME = "spanner_" +
-      String.valueOf(getRandomArbitrary(1, 10000));
+    String.valueOf(getRandomArbitrary(1, 10000));
 
   public static final String RUNTIME_ARGS_PREVIEW_SELECTOR = "runtimeargs-preview";
   public static final String RUNTIME_ARGS_DEPLOYED_SELECTOR = "runtimeargs-deployed";
