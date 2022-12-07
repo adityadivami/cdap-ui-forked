@@ -20,11 +20,13 @@ export const SAVED_RECIPE_LIST = [
     name: 'recipe-1',
     description: 'A recipe for order management 1',
     directives: ["fill-null-or-empty :email 'test'", 'drop :id', 'drop :id'],
+    date: '12 Oct, 4:30PM',
   },
   {
     name: 'recipe-2',
     description: 'A recipe for order management 2',
     directives: ["fill-null-or-empty :email 'test'", 'drop :id'],
+    date: '12 Oct, 4:30PM',
   },
   {
     name: 'recipe-3',
@@ -35,5 +37,6 @@ export const SAVED_RECIPE_LIST = [
       "fill-null-or-empty :email 'test'",
       "fill-null-or-empty :email 'test'",
     ],
+    date: '12 Oct, 4:30PM',
   },
 ];

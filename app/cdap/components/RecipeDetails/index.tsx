@@ -67,6 +67,8 @@ const RecipeDetailText = styled(Typography)`
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
+  display: flex;
+  align-items: center;
 `;
 
 const StepsGridWrapper = styled(Box)`
@@ -94,6 +96,13 @@ const CellDivider = styled(Box)`
   border-bottom: 1px solid ${grey[300]};
 `;
 
+const VerticalDivider = styled(Box)`
+  width: 1px;
+  height: 25px;
+  border-left: 1px solid ${grey[300]};
+  margin: 0 10px;
+`;
+
 export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
   return (
     <StyledDrawer open={true} data-testid="select-column-panel" anchor="right">
@@ -106,6 +115,8 @@ export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
               {`${recipeDetails.directives.length} ${T.translate(
                 `${PREFIX}.recipeStepsTableHead.recipeStep`
               )}`}
+              <VerticalDivider />
+              {` ${recipeDetails?.date}`}
             </RecipeDetailText>
           </StepDetail>
           <DescriptionDetail>

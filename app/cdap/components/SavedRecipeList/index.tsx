@@ -24,6 +24,7 @@ export interface IRecipeItem {
   name: string;
   description: string;
   directives: string[];
+  date: string;
 }
 
 interface ISavedRecipeListProps {
