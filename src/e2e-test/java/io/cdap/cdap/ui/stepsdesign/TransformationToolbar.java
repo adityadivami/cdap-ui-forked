@@ -80,7 +80,6 @@ public class TransformationToolbar {
     try {
       WaitHelper.waitForPageToLoad();
       Helper.locateElementByTestId("transformations-toolbar-icons-function-name-toggler");
-//      Helper.locateElementByTestId("snackbar-close-icon").click();
     } catch (Exception e) {
       System.err.println("error: " + e);
     }
