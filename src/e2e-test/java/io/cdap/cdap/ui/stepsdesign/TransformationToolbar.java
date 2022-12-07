@@ -80,7 +80,7 @@ public class TransformationToolbar {
     try {
       WaitHelper.waitForPageToLoad();
       Helper.locateElementByTestId("transformations-toolbar-icons-function-name-toggler");
-      Helper.locateElementByTestId("snackbar-close-icon").click();
+//      Helper.locateElementByTestId("snackbar-close-icon").click();
     } catch (Exception e) {
       System.err.println("error: " + e);
     }
@@ -88,6 +88,8 @@ public class TransformationToolbar {
   @Then("Click on the function names toggle with testId as \\\"(.*)\\\" and \\\"(.*)\\\"")
   public void clickOnTheSliderButton(String testId, String iconLabelName) {
     try {
+      WaitHelper.waitForElementToBeEnabled
+              (Helper.locateElementByTestId("transformations-toolbar-icons-function-name-toggler"));
       WebElement toggle = Helper.locateElementByTestId("transformations-toolbar-icons-function-name-toggler");
       WaitHelper.waitForElementToBeDisplayed(toggle);
       WebElement ele = Helper.locateElementByXPath
