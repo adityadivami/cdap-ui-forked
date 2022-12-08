@@ -65,18 +65,11 @@ public class SnackBar {
     public void verifyTheSnackbarPopUpIsComingOrNot() {
         try {
             WaitHelper.waitForPageToLoad();
-            boolean flag = true;
-            while (flag == true) {
-                if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
-                    flag = true;
-                } else {
-                    flag = false;
-                }
-            }
+            WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("snackbar-alert"));
+            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("snackbar-alert")));
             WebElement ele = SeleniumDriver.getDriver().findElement
                     (By.xpath("//*[@data-testid = 'snackbar-close-icon']"));
-            JavascriptExecutor executor = (JavascriptExecutor) SeleniumDriver.getDriver();
-            executor.executeScript("arguments[0].click();", ele);
+           ElementHelper.clickOnElement(ele);
         } catch (Exception e) {
             System.err.println("error:" + e);
         }
