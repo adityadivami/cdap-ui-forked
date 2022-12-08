@@ -20,6 +20,15 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import FooterPanel from 'components/FooterPanel';
+import NoRecordScreen from 'components/NoRecordScreen';
+import LoadingSVG from 'components/shared/LoadingSVG';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { flatMap } from 'rxjs/operators';
+import { objectQuery } from 'services/helpers';
 import BreadCrumb from 'components/GridTable/components/Breadcrumb';
 import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
@@ -31,14 +40,6 @@ import {
   IParams,
   IRecords,
 } from 'components/GridTable/types';
-import NoRecordScreen from 'components/NoRecordScreen';
-import LoadingSVG from 'components/shared/LoadingSVG';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
-import T from 'i18n-react';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { flatMap } from 'rxjs/operators';
-import { objectQuery } from 'services/helpers';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 
 import styled from 'styled-components';
@@ -59,6 +60,10 @@ export default function GridTable() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
+  const [tableMetaInfo, setTableMetaInfo] = useState({
+    columnCount: 0,
+    rowCount: 0,
+  });
 
   const [loading, setLoading] = useState(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
@@ -149,7 +154,7 @@ export default function GridTable() {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload as IParams, wid as string);
+    getWorkSpaceData(payload, wid);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -159,7 +164,7 @@ export default function GridTable() {
         return {
           name: eachColumnName,
           label: eachColumnName,
-          type: [columnTypesList[eachColumnName]] as string[],
+          type: [columnTypesList[eachColumnName]],
         };
       });
     }
@@ -197,12 +202,11 @@ export default function GridTable() {
           }
           if (mostFrequentItem < mostFrequentItemCount) {
             mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item as string;
+            mostFrequentItemValue = item;
           }
         });
         mostFrequentItemCount = 0;
-        mostFrequentItemValue =
-          mostFrequentItemValue === '' ? (item as string) : mostFrequentItemValue;
+        mostFrequentItemValue = mostFrequentItemValue === '' ? item : mostFrequentItemValue;
       });
     }
     mostFrequentDataItem.name = mostFrequentItemValue;
@@ -257,6 +261,10 @@ export default function GridTable() {
         return rest;
       });
 
+    setTableMetaInfo({
+      columnCount: rawData.headers?.length,
+      rowCount: rawData.values?.length - 1,
+    });
     setRowsDataList(rowData);
   };
 
@@ -283,59 +291,59 @@ export default function GridTable() {
         disableToolbarIcon={gridData?.headers?.length > 0 ? false : true}
       />
       <GridTableWrapper data-testid="grid-table-container">
-        {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 ? (
+        {Array.isArray(gridData?.headers) && gridData?.headers.length === 0 && (
           <NoRecordScreen
             title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
             subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
           />
-        ) : (
-          <TableWrapper>
-            <Table aria-label="simple table" className="test">
-              <TableHead>
-                <TableRow>
-                  {headersNamesList?.length &&
-                    headersNamesList.map((eachHeader) => (
-                      <GridHeaderCell
-                        label={eachHeader.label}
-                        types={eachHeader.type}
-                        key={eachHeader.name}
-                        columnSelected={selectedColumn}
-                        setColumnSelected={handleColumnSelect}
-                      />
-                    ))}
-                </TableRow>
-                <TableRow>
-                  {missingDataList?.length &&
-                    headersNamesList.length &&
-                    headersNamesList.map((each, index) => {
-                      return missingDataList.map((item, itemIndex) => {
-                        if (item.name === each.name) {
-                          return <GridKPICell metricData={item} key={item.name} />;
-                        }
-                      });
-                    })}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rowsDataList?.length &&
-                  rowsDataList.map((eachRow, rowIndex) => {
-                    return (
-                      <TableRow key={`row-${rowIndex}`}>
-                        {headersNamesList.map((eachKey, eachIndex) => {
-                          return (
-                            <GridTextCell
-                              cellValue={eachRow[eachKey.name] || '--'}
-                              key={`${eachKey.name}-${eachIndex}`}
-                            />
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableWrapper>
         )}
+        <TableWrapper>
+          <Table aria-label="simple table" className="test">
+            <TableHead>
+              <TableRow>
+                {headersNamesList?.length &&
+                  headersNamesList.map((eachHeader) => (
+                    <GridHeaderCell
+                      label={eachHeader.label}
+                      types={eachHeader.type}
+                      key={eachHeader.name}
+                      columnSelected={selectedColumn}
+                      setColumnSelected={handleColumnSelect}
+                    />
+                  ))}
+              </TableRow>
+              <TableRow>
+                {missingDataList?.length &&
+                  headersNamesList.length &&
+                  headersNamesList.map((each, index) => {
+                    return missingDataList.map((item, itemIndex) => {
+                      if (item.name === each.name) {
+                        return <GridKPICell metricData={item} key={item.name} />;
+                      }
+                    });
+                  })}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rowsDataList?.length &&
+                rowsDataList.map((eachRow, rowIndex) => {
+                  return (
+                    <TableRow key={`row-${rowIndex}`}>
+                      {headersNamesList.map((eachKey, eachIndex) => {
+                        return (
+                          <GridTextCell
+                            cellValue={eachRow[eachKey.name] || '--'}
+                            key={`${eachKey.name}-${eachIndex}`}
+                          />
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableWrapper>
+        <FooterPanel recipeStepsCount={0} gridMetaInfo={tableMetaInfo} />
         {loading && (
           <div className={classes.loadingContainer}>
             <LoadingSVG />
