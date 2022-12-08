@@ -32,4 +32,9 @@ describe('Test Create Recipe Component', () => {
       />
     );
   });
+
+  it('should render the component as expected', () => {
+    const parentElement = screen.getByTestId(/edit-recipe-drawer-widget-parent/i);
+    expect(parentElement).toBeInTheDocument();
+  });
 });

@@ -80,7 +80,7 @@ export default function({
   isNameError,
 }: IDrawerWidgetProps) {
   return (
-    <PaperStyle anchor="right" open={openDrawer} data-testid="drawer-widget-parent">
+    <PaperStyle anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
       <DrawerContainerStyle role="presentation">
         <HeaderStyle>
           <HeaderTextBackIconWrapper>

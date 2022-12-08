@@ -22,33 +22,16 @@ import { mockRecipe } from 'components/RecipeSteps/RecipeStepsTableComponent/moc
 import history from 'services/history';
 
 describe('It should test the Recipe Component', () => {
-  it('renders Recipe Component and triggers button and following functionality', () => {
+  it('check if the html inside is same as expected', () => {
     render(
       <Router history={history}>
         <Switch>
           <Route>
-            <RecipeStepsTableComponent recipeSteps={mockRecipe} onDeleteRecipeSteps={undefined} />
+            <RecipeStepsTableComponent recipeSteps={mockRecipe} />
           </Route>
         </Switch>
       </Router>
     );
-    const recipeStepsSpan = screen.getByTestId(/recipe-steps-span0/i);
-    expect(recipeStepsSpan).toContainHTML('a-column');
-  });
-
-  it('renders Recipe Component and triggers button and following functionality', () => {
-    render(
-      <Router history={history}>
-        <Switch>
-          <Route>
-            <RecipeStepsTableComponent recipeSteps={mockRecipe} onDeleteRecipeSteps={jest.fn()} />
-          </Route>
-        </Switch>
-      </Router>
-    );
-    const deleteElement = screen.getAllByTestId(/recipe-step-0-delete/i);
-    fireEvent.click(deleteElement[0]);
-    expect(deleteElement[0]).toBeInTheDocument();
     const recipeStepsSpan = screen.getByTestId(/recipe-steps-span0/i);
     expect(recipeStepsSpan).toContainHTML('a-column');
   });
