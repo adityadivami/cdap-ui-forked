@@ -75,7 +75,7 @@ public class TransformationToolbar {
       System.err.println("error:" + e);
     }
   }
-  @Then("Verify snackbar")
+  @Then("Verify Snackbar")
   public void snackBar() {
     try {
       WaitHelper.waitForPageToLoad();
