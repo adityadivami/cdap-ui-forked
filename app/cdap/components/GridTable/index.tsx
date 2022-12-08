@@ -20,17 +20,7 @@ import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
-import BreadCrumb from 'components/GridTable/components/Breadcrumb';
-import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
-import GridKPICell from 'components/GridTable/components/GridKPICell';
-import GridTextCell from 'components/GridTable/components/GridTextCell';
-import { useStyles } from 'components/GridTable/styles';
-import {
-  IExecuteAPIResponse,
-  IHeaderNamesList,
-  IParams,
-  IRecords,
-} from 'components/GridTable/types';
+import FooterPanel from 'components/FooterPanel';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
@@ -41,12 +31,23 @@ import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
+import BreadCrumb from 'components/GridTable/components/Breadcrumb';
+import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
+import GridKPICell from 'components/GridTable/components/GridKPICell';
+import GridTextCell from 'components/GridTable/components/GridTextCell';
+import { useStyles } from 'components/GridTable/styles';
+import {
+  IExecuteAPIResponse,
+  IHeaderNamesList,
+  IParams,
+  IRecords,
+  IType,
+} from 'components/GridTable/types';
 import RecipeSteps from 'components/RecipeSteps';
-import FooterPanel from 'components/FooterPanel';
 import { reducer, initialGridTableState } from 'components/GridTable/reducer';
 import styled from 'styled-components';
 import EditRecipe from 'components/EditRecipe';
-import { current } from '@reduxjs/toolkit';
+import { IGridTableActions } from 'components/GridTable/reducer';
 
 const TableWrapper = styled(Box)`
   height: calc(100vh - 193px);
@@ -69,10 +70,6 @@ export default function GridTable() {
   const classes = useStyles();
 
   const { dataprep } = DataPrepStore.getState();
-
-  // useEffect(() => {
-  //   setRecipeSteps(dataprep.directives);
-  // }, [dataprep]);
 
   const [gridTableState, dispatch] = useReducer(reducer, initialGridTableState);
   const { directivePanelIsOpen, tableMetaInfo } = gridTableState;
@@ -171,13 +168,6 @@ export default function GridTable() {
         });
         setLoading(false);
         setGridData(response);
-        // setSnackbar({
-        //   open: true,
-        //   isSuccess: true,
-        //   message: T.translate(
-        //     `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
-        //   ).toString(),
-        // });
       });
   };
 
@@ -187,7 +177,7 @@ export default function GridTable() {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload as IParams, wid as string);
+    getWorkSpaceData(payload, wid);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -197,7 +187,7 @@ export default function GridTable() {
         return {
           name: eachColumnName,
           label: eachColumnName,
-          type: [columnTypesList[eachColumnName]] as string[],
+          type: [columnTypesList[eachColumnName]],
         };
       });
     }
@@ -222,7 +212,7 @@ export default function GridTable() {
     const valueOfKey = gridData.values.map((el) => el[key]);
     let mostFrequentItem: number = 1;
     let mostFrequentItemCount: number = 0;
-    let mostFrequentItemValue: string = '';
+    let mostFrequentItemValue: string | boolean | Record<string, IType> = '';
     const mostFrequentDataItem = {
       name: '',
       count: 0,
@@ -235,12 +225,11 @@ export default function GridTable() {
           }
           if (mostFrequentItem < mostFrequentItemCount) {
             mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item as string;
+            mostFrequentItemValue = item;
           }
         });
         mostFrequentItemCount = 0;
-        mostFrequentItemValue =
-          mostFrequentItemValue === '' ? (item as string) : mostFrequentItemValue;
+        mostFrequentItemValue = mostFrequentItemValue === '' ? item : mostFrequentItemValue;
       });
     }
     mostFrequentDataItem.name = mostFrequentItemValue;
@@ -294,8 +283,18 @@ export default function GridTable() {
         const { body, ...rest } = eachRow;
         return rest;
       });
-
-    setRowsDataList(rowData);
+    dispatch({
+      type: IGridTableActions.TABLE_META_INFO,
+      payload: {
+        columnCount: rawData?.headers?.length,
+        rowCount: rawData?.values?.length - 1,
+      },
+    }),
+      // setTableMetaInfo({
+      //   columnCount: rawData.headers?.length,
+      //   rowCount: rawData.values?.length - 1,
+      // });
+      setRowsDataList(rowData);
   };
 
   const showRecipePanelHandler = () => {

@@ -22,7 +22,7 @@ export const initialGridTableState = {
   },
 };
 
-enum IGridTableActions {
+export enum IGridTableActions {
   IS_DIRECTIVE_PANEL_OPEN,
   TABLE_META_INFO,
 }
