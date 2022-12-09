@@ -61,6 +61,8 @@ public class Breadcrumb {
     try {
       WaitHelper.waitForPageToLoad();
       Helper.waitSeconds(30);
+      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-Home"));
+      WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("breadcrumb-home-Home"));
       ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-Home"));
     } catch (Exception e) {
       System.err.println("error:" + e);
