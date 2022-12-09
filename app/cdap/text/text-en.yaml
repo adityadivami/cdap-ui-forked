@@ -3448,6 +3448,16 @@ features:
       labels:
         loadToGrid: Wrangle
         noConnections: No Connections to show
+    FooterPanel:
+      labels:
+        columns: columns
+        message: Current data - {rowCount} rows and {columnCount} columns
+        columnViewPanel: Column View Panel
+        currentData: Current data
+        directives: Directives
+        recipeSteps: Recipe Steps
+        rows: rows
+        zoomPercent100: 100%
     GridPage:
       addTransformationPanel:
         applyStep: Apply Step
@@ -3499,16 +3509,6 @@ features:
     GridTable:
       snackbarLabels:
         datasetSuccess: Dataset loaded successfully 
-    FooterPanel:
-      labels:
-        columns: columns
-        message: Current data - {rowCount} rows and {columnCount} columns
-        columnViewPanel: Column View Panel
-        currentData: Current data
-        directives: Directives
-        recipeSteps: Recipe Steps
-        rows: rows
-        zoomPercent100: 100%
     HomePage:
       labels:
         common:
