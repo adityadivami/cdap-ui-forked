@@ -16,10 +16,20 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
-import CreateRecipe from 'components/CreateRecipe';
 import T from 'i18n-react';
+import CommonRecipeForm from 'components/CommonRecipeForm/index';
 
 describe('Test Common Recipe Component', () => {
+  beforeEach(() => {
+    render(
+      <CommonRecipeForm
+        recipeData={{ name: '', description: '', directives: [] }}
+        onRecipeDataSave={jest.fn()}
+        onCancel={jest.fn()}
+        isNameError={false}
+      />
+    );
+  });
   it('should render component', () => {
     const parentElement = screen.getByTestId(/recipe-form-parent/i);
     expect(parentElement).toBeInTheDocument();

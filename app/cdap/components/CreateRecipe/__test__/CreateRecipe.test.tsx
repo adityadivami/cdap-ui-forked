@@ -30,4 +30,9 @@ describe('Test Create Recipe Component', () => {
       />
     );
   });
+
+  it('sould render the component', () => {
+    const parentElement = screen.getByTestId(/recipe-form-parent/i);
+    expect(parentElement).toBeInTheDocument();
+  });
 });
