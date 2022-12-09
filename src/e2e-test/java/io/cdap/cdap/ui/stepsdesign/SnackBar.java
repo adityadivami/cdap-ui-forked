@@ -61,6 +61,7 @@ public class SnackBar {
     try {
       WaitHelper.waitForPageToLoad();
       WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("snackbar-close-icon"));
+      WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("snackbar-close-icon"));
       WebElement ele = SeleniumDriver.getDriver().findElement
               (By.xpath("//*[@data-testid = 'snackbar-close-icon']"));
       ElementHelper.clickOnElement(ele);

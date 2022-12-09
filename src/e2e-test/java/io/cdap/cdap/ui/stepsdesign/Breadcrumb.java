@@ -61,7 +61,9 @@ public class Breadcrumb {
     try {
       WaitHelper.waitForPageToLoad();
       Helper.waitSeconds(30);
-      ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-Home"));
+      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-home"));
+      WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("breadcrumb-home-home"));
+      ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-home"));
     } catch (Exception e) {
       System.err.println("error:" + e);
     }
@@ -85,9 +87,10 @@ public class Breadcrumb {
     SeleniumDriver.getDriver().manage().window().maximize();
     Helper.waitSeconds(50);
     String url = SeleniumDriver.getDriver().getCurrentUrl();
-    Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-    WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-Home"));
-    WebElement ele = Helper.locateElementByTestId("breadcrumb-home-Home");
+    Assert.assertTrue(url.contains("cdap/ns/default/wrangler-grid"));
+    WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-home"));
+    WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("breadcrumb-home-home"));
+    WebElement ele = Helper.locateElementByTestId("breadcrumb-home-home");
     ElementHelper.clickOnElement(ele);
     } catch (Exception e) {
       System.err.println("error:" + e);
