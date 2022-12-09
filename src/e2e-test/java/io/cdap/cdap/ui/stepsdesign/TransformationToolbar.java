@@ -42,7 +42,7 @@ public class TransformationToolbar {
       WaitHelper.waitForPageToLoad();
       ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-exploration-card-0"));
       String url = SeleniumDriver.getDriver().getCurrentUrl();
-      Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
+      Assert.assertTrue(url.contains("cdap/ns/default/wrangler-grid"));
     } catch (Exception e) {
       System.err.println("error:" + e);
     }
@@ -51,14 +51,7 @@ public class TransformationToolbar {
   public void verifyIfTheTransformationToolbarIsDisplayedOnTheGridPage() {
     try {
       WaitHelper.waitForPageToLoad();
-      boolean flag = true;
-      while (flag == true) {
-        if (Helper.isElementExists(Helper.getCssSelectorByDataTestId("loading-indicator"))) {
-            flag = true;
-        } else {
-          flag = false;
-        }
-      }
+      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("transformations-toolbar-container"));
       Assert.assertTrue(Helper.isElementExists
       (Helper.getCssSelectorByDataTestId("transformations-toolbar-container")));
     } catch (Exception e) {
