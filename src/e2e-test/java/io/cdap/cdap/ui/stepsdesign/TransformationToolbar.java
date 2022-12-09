@@ -62,6 +62,8 @@ public class TransformationToolbar {
   public void verifyAllTheIconsAreDisplayedOnToolbar(String testId) {
     try {
       WaitHelper.waitForPageToLoad();
+      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("toolbar-icon-"
+              + testId));
       Assert.assertTrue(Helper.isElementExists(Helper.getCssSelectorByDataTestId("toolbar-icon-"
                     + testId)));
     } catch (Exception e) {
@@ -72,6 +74,8 @@ public class TransformationToolbar {
   public void snackBar() {
     try {
       WaitHelper.waitForPageToLoad();
+      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId
+              ("transformations-toolbar-icons-function-name-toggler"));
       Helper.locateElementByTestId("transformations-toolbar-icons-function-name-toggler");
     } catch (Exception e) {
       System.err.println("error: " + e);
