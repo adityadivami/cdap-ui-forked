@@ -19,7 +19,6 @@ import Box from '@material-ui/core/Box';
 import { useHistory } from 'react-router-dom';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
-import { createRecipe } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import FooterPanel from 'components/FooterPanel';
@@ -50,6 +49,8 @@ import { reducer, initialGridTableState } from 'components/GridTable/reducer';
 import styled from 'styled-components';
 import EditRecipe from 'components/EditRecipe';
 import { IGridTableActions } from 'components/GridTable/reducer';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import { setError } from 'components/DataPrep/store/DataPrepActionCreator';
 
 const TableWrapper = styled(Box)`
   height: calc(100vh - 193px);
@@ -289,34 +290,39 @@ export default function GridTable() {
   }, [gridData]);
 
   const saveRecipeData = (data) => {
-    createRecipe();
-    const body = {
-      name: data.name,
+    const params = {
+      context: getCurrentNamespace(),
+    };
+    const requestBody = {
+      recipeName: data.recipeName,
       description: data.description,
       directives: recipe_steps,
-      id: recipeList.length + 1,
     };
-    DataPrepStore.dispatch({
-      type: DataPrepActions.setRecipeList,
-      payload: [...recipeList, body],
-    });
+    MyDataPrepApi.createRecipe(params, requestBody).subscribe(
+      (res) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setRecipeList,
+          payload: [...recipeList, res],
+        });
+        setIsNameError(false);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: `${recipe_steps.length} Steps successfully saved as a recipe!`,
+        });
+        setShowRecipeSaveForm(false);
+      },
+      (err) => {
+        if (err) {
+          setIsNameError(true);
+        }
+      }
+    );
   };
 
   const onRecipeDataSave = (data) => {
-    data.directives = recipe_steps;
-    const error = recipeList?.some((elem) => elem.name === data.name);
-    if (error) {
-      setIsNameError(error);
-    } else {
-      saveRecipeData(data);
-      setSnackbar({
-        open: true,
-        isSuccess: true,
-        message: `${data.directives} Steps successfully saved as a recipe!`,
-      });
-      setIsNameError(false);
-      setShowRecipeSaveForm(false);
-    }
+    setIsNameError(false);
+    saveRecipeData(data);
   };
 
   const onRecipeFormCancel = () => {
@@ -327,16 +333,6 @@ export default function GridTable() {
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
-      <Button
-        onClick={() => history.push(`/ns/default/saved-recipe-list`)}
-        data-tsetid="recipe-form-edit-button"
-        variant="outlined"
-        color="primary"
-      >
-        {/* {T.translate('features.WranglerNewUI.RecipeForm.labels.edit')} */}
-        Saved Recipe List
-      </Button>
-
       <TablePanelContainer>
         {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
           <TableWrapper>
@@ -399,6 +395,7 @@ export default function GridTable() {
               onRecipeDataSave={onRecipeDataSave}
               onCancel={onRecipeFormCancel}
               isNameError={isNameError}
+              setIsNameError={setIsNameError}
             />
           </RecipeStepPanel>
         )}

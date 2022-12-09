@@ -42,27 +42,22 @@ export default function BasicTable() {
   const classes = useStyles();
   const [showEditFormPanel, setShowEditFormPanel] = useState<boolean>(false);
   const [editRecipeData, setEditRecipeData] = useState({
-    name: '',
+    recipeName: '',
     description: '',
     directives: [],
-    id: undefined,
+    recipeId: undefined,
   });
   const [snackbarState, setSnackbar] = useSnackbar();
   const [isNameError, setIsNameError] = useState(false);
-  const recipe_steps = [
-    'uppercase: body1',
-    'titlecase: body2',
-    // 'uppercase: body3',
-    // 'titlecase: body4',
-  ];
+  const recipe_steps = ['uppercase: body1', 'titlecase: body2'];
 
   const closeClickHandler = () => {
     setShowEditFormPanel(false);
     setEditRecipeData({
-      name: '',
+      recipeName: '',
       description: '',
       directives: [],
-      id: undefined,
+      recipeId: undefined,
     });
   };
 
@@ -73,7 +68,7 @@ export default function BasicTable() {
 
   const saveRecipeData = (data) => {
     const editData = recipeList.map((i) => {
-      if (i.id === editRecipeData.id) {
+      if (i.recipeId === editRecipeData.recipeId) {
         return {
           name: data.name,
           description: data.description,
@@ -149,7 +144,6 @@ export default function BasicTable() {
           openDrawer={showEditFormPanel}
           headingText={T.translate('features.WranglerNewUI.RecipeForm.labels.editFormTitle')}
           closeClickHandler={closeClickHandler}
-          // recipeData={editRecipeData}
           onCancel={onRecipeFormCancel}
           onRecipeDataSave={onRecipeDataSave}
           isNameError={isNameError}

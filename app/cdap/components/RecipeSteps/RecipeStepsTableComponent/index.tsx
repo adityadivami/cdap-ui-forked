@@ -127,8 +127,7 @@ const RecipeStepWrapper = styled(TableContainer)`
     width: 100%;
     overflow-x: auto;
     overflow-y: scroll;
-    max-height: 192px;
-    height: calc(100% - 10px);
+    max-height: 141px;
   }
 `;
 
