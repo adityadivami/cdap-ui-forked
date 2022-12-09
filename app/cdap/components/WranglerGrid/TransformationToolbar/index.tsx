@@ -35,7 +35,7 @@ import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import styled, { css } from 'styled-components';
 import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 
-const CustomizedSvgIcon = styled(SvgIcon)`
+const StyledSvgIcon = styled(SvgIcon)`
   font-size: 28px;
   ${(props) =>
     props.flipped &&
@@ -45,7 +45,7 @@ const CustomizedSvgIcon = styled(SvgIcon)`
     `}
 `;
 
-const IconCustommizedButton = styled(IconButton)`
+const StyledIconButton = styled(IconButton)`
   &.MuiButtonBase-root.Mui-disabled {
     opacity: 0.5;
   }
@@ -88,7 +88,7 @@ export default function({
                     .split(' ')
                     .join('-')}`}
                 >
-                  <IconCustommizedButton
+                  <StyledIconButton
                     disabled={disableToolbarIcon}
                     onClick={(clickEvent) => {
                       if (eachOption.options?.length) {
@@ -103,12 +103,12 @@ export default function({
                     data-testid="toolbar-icon-button"
                   >
                     {eachOption?.iconSVG ?? (
-                      <CustomizedSvgIcon
+                      <StyledSvgIcon
                         component={eachOption.icon}
                         flipped={eachOption.action === 'redo'}
                       />
                     )}
-                  </IconCustommizedButton>
+                  </StyledIconButton>
                 </CustomTooltip>
                 {eachOption.options?.length > 0 && (
                   <NestedMenu

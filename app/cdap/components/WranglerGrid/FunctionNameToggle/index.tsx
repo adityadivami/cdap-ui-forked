@@ -18,11 +18,7 @@ import React from 'react';
 import T from 'i18n-react';
 import SwitchInputComponent from 'components/common/Switch';
 import { NormalFont } from 'components/common/TypographyText';
-import {
-  DividerBox,
-  DividerBoxToggler,
-  FlexJustifyAlignCenter,
-} from 'components/common/BoxContainer';
+import { DividerBoxToggler, FlexJustifyAlignCenter } from 'components/common/BoxContainer';
 import { Divider } from 'components/WranglerGrid/TransformationToolbar/iconStore';
 
 const PREFIX = 'features.WranglerNewUI.GridPage';
