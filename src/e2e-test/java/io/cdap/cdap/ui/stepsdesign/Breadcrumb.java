@@ -87,6 +87,7 @@ public class Breadcrumb {
     String url = SeleniumDriver.getDriver().getCurrentUrl();
     Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
     WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-Home"));
+    WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("breadcrumb-home-Home"));
     WebElement ele = Helper.locateElementByTestId("breadcrumb-home-Home");
     ElementHelper.clickOnElement(ele);
     } catch (Exception e) {
