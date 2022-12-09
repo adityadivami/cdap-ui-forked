@@ -56,7 +56,7 @@ Feature: Wrangler BigQuery Connection Tests and test transformation toolbar
   @TransformationToolbar
   Scenario Outline: Go through the Transformation Toolbar
     Given Navigate to Home Page to test toolbar
-    Then Click on the Data Explorations card
+    Then Click on the Ongoing Data Explorations card for tool bar
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
     Then Verify Snackbar
     Then Verify if all icons are displayed on Toolbar with "<testId>"

@@ -36,8 +36,8 @@ public class TransformationToolbar {
     SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
     WaitHelper.waitForPageToLoad();
   }
-  @Then("Click on the Data Explorations card")
-  public void clickOnTheDataExplorationCard() {
+  @Then("Click on the Ongoing Data Explorations card for tool bar")
+  public void clickOnTheOngoingDataExplorationCardForToolBar() {
     try {
       WaitHelper.waitForPageToLoad();
       ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-exploration-card-0"));
@@ -120,4 +120,3 @@ public class TransformationToolbar {
     }
   }
 }
-
