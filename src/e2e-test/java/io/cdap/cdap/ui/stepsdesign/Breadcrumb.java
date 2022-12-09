@@ -61,9 +61,9 @@ public class Breadcrumb {
     try {
       WaitHelper.waitForPageToLoad();
       Helper.waitSeconds(30);
-      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-Home"));
-      WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("breadcrumb-home-Home"));
-      ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-Home"));
+      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-home"));
+      WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("breadcrumb-home-home"));
+      ElementHelper.clickOnElement(Helper.locateElementByTestId("breadcrumb-home-home"));
     } catch (Exception e) {
       System.err.println("error:" + e);
     }
@@ -88,9 +88,9 @@ public class Breadcrumb {
     Helper.waitSeconds(50);
     String url = SeleniumDriver.getDriver().getCurrentUrl();
     Assert.assertTrue(url.contains("cdap/ns/default/wrangler-grid"));
-    WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-Home"));
-    WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("breadcrumb-home-Home"));
-    WebElement ele = Helper.locateElementByTestId("breadcrumb-home-Home");
+    WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("breadcrumb-home-home"));
+    WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("breadcrumb-home-home"));
+    WebElement ele = Helper.locateElementByTestId("breadcrumb-home-home");
     ElementHelper.clickOnElement(ele);
     } catch (Exception e) {
       System.err.println("error:" + e);
