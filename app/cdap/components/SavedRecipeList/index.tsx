@@ -14,21 +14,33 @@
  * the License.
  */
 
-import React from 'react';
-import { SAVED_RECIPE_LIST } from 'components/SavedRecipeList/constants';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 import { grey } from '@material-ui/core/colors';
+import MyDataPrepApi from 'api/dataprep';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+
+interface IRecipeId {
+  namespace: {
+    name: string;
+    generation: number;
+  };
+  recipeId: string;
+}
 
 export interface IRecipeItem {
-  name: string;
+  recipeId: IRecipeId;
+  recipeName: string;
   description: string;
   directives: string[];
-  date: string;
+  createdTimeMillis: number;
+  updatedTimeMillis: number;
+  recipeStepsCount: number;
 }
 
 interface ISavedRecipeListProps {
-  onRecipeClick: (recipeItem: IRecipeItem) => void;
+  onRecipeClick: (recipeId: string) => void;
 }
 
 const RecipeNameBox = styled(Box)`
@@ -42,15 +54,33 @@ const RecipeNameBox = styled(Box)`
 `;
 
 export default function({ onRecipeClick }: ISavedRecipeListProps) {
+  const [recipeList, setRecipeList] = useState([]);
+  const params = {
+    context: getCurrentNamespace(),
+  };
+  const getAllRecipeList = () => {
+    MyDataPrepApi.getRecipeList(params).subscribe((res) => {
+      setRecipeList(res.values);
+    });
+  };
+
+  useEffect(() => {
+    getAllRecipeList();
+  }, []);
+
+  const recipeItemClicked = (recipeItem: IRecipeItem) => {
+    onRecipeClick(recipeItem.recipeId.recipeId);
+  };
+
   return (
     <>
-      {SAVED_RECIPE_LIST.map((recipeItem, recipeIndex) => {
+      {recipeList.map((recipeItem: IRecipeItem, recipeIndex) => {
         return (
           <RecipeNameBox
             data-testid={`recipe-box-${recipeIndex}`}
-            onClick={() => onRecipeClick(recipeItem)}
+            onClick={() => recipeItemClicked(recipeItem)}
           >
-            {recipeItem.name}
+            {recipeItem.recipeName}
           </RecipeNameBox>
         );
       })}

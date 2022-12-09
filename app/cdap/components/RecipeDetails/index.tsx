@@ -21,6 +21,7 @@ import DrawerHeader from 'components/RecipeDetails/DrawerHeader';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
 import { IRecipeItem } from 'components/SavedRecipeList';
+import { dateFormatting } from 'components/RecipeDetails/utils';
 
 interface IRecipeDetailsProps {
   recipeDetails: IRecipeItem;
@@ -109,14 +110,13 @@ export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
       <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
         <DrawerHeader onCloseDetail={onCloseDetail} />
         <RecipeDetailWrapper>
-          <RecipeName>{recipeDetails.name}</RecipeName>
+          <RecipeName>{recipeDetails.recipeName}</RecipeName>
           <StepDetail>
             <RecipeDetailText>
               {`${recipeDetails.directives.length} ${T.translate(
                 `${PREFIX}.recipeStepsTableHead.recipeStep`
               )}`}
-              <VerticalDivider />
-              {` ${recipeDetails?.date}`}
+              <VerticalDivider /> {dateFormatting(recipeDetails.createdTimeMillis)}
             </RecipeDetailText>
           </StepDetail>
           <DescriptionDetail>

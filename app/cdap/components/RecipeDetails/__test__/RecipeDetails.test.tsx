@@ -20,9 +20,19 @@ import RecipeDetails from 'components/RecipeDetails';
 import React from 'react';
 
 const mockData = {
-  name: 'recipe-2',
-  description: 'A recipe for order management 2',
-  directives: ["fill-null-or-empty :email 'test'", 'drop :id'],
+  recipeId: {
+    namespace: {
+      name: 'default',
+      generation: 0,
+    },
+    recipeId: 'c5e51202-808e-4ead-b61f-83f280f3fdac',
+  },
+  recipeName: 'RecipeABC101',
+  description: 'Recipe for cleansing empolyee information',
+  directives: ['set-column :body_2_copy body_2 + \u0027text\u0027', 'trim :body_2'],
+  createdTimeMillis: 1670584496578,
+  updatedTimeMillis: 1670584496578,
+  recipeStepsCount: 2,
 };
 
 describe('Test RecipeDetails Component', () => {
