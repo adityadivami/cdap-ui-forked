@@ -30,7 +30,7 @@ export interface IRecipeData {
   name: string;
   description: string;
   directives: string[];
-  id?: number;
+  id: number;
 }
 
 const FormFieldWrapper = styled(Box)`

@@ -67,7 +67,12 @@ export default function({
   onCancel,
   isNameError,
 }: IRecipeStepsProps) {
-  const recipe_steps = ['uppercase: body1', 'titlecase: body2'];
+  const recipe_steps = [
+    'uppercase: body1',
+    'titlecase: body2',
+    'uppercase: body3',
+    'titlecase: body4',
+  ];
 
   const closeClickHandler = () => {
     setShowRecipePanel(false);
@@ -92,7 +97,7 @@ export default function({
         <RecipeStepsTableBodyWrapper>
           <RecipeStepsTableComponent recipeSteps={recipe_steps} />
         </RecipeStepsTableBodyWrapper>
-        <Divider />
+        {/* <Divider /> */}
         {showRecipeSaveForm && (
           <>
             <RecipeStepInfo component="div">

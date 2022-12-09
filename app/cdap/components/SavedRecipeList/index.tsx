@@ -1,0 +1,161 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import DataPrepStore from 'components/DataPrep/store';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
+import EditRecipe from 'components/EditRecipe';
+import Snackbar from 'components/Snackbar';
+import T from 'i18n-react';
+import useSnackbar from 'components/Snackbar/useSnackbar';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
+
+export default function BasicTable() {
+  const { dataprep } = DataPrepStore.getState();
+  const { recipeList } = dataprep;
+  const classes = useStyles();
+  const [showEditFormPanel, setShowEditFormPanel] = useState<boolean>(false);
+  const [editRecipeData, setEditRecipeData] = useState({
+    name: '',
+    description: '',
+    directives: [],
+    id: undefined,
+  });
+  const [snackbarState, setSnackbar] = useSnackbar();
+  const [isNameError, setIsNameError] = useState(false);
+  const recipe_steps = [
+    'uppercase: body1',
+    'titlecase: body2',
+    // 'uppercase: body3',
+    // 'titlecase: body4',
+  ];
+
+  const closeClickHandler = () => {
+    setShowEditFormPanel(false);
+    setEditRecipeData({
+      name: '',
+      description: '',
+      directives: [],
+      id: undefined,
+    });
+  };
+
+  const onRecipeFormCancel = () => {
+    setShowEditFormPanel(false);
+    setIsNameError(false);
+  };
+
+  const saveRecipeData = (data) => {
+    const editData = recipeList.map((i) => {
+      if (i.id === editRecipeData.id) {
+        return {
+          name: data.name,
+          description: data.description,
+          directives: data.directives,
+          id: i.id,
+        };
+      }
+      return i;
+    });
+    DataPrepStore.dispatch({
+      type: DataPrepActions.setRecipeList,
+      payload: editData,
+    });
+    setSnackbar({
+      open: true,
+      isSuccess: true,
+      message: `${data.directives} Steps successfully saved as a recipe!`,
+    });
+  };
+
+  const onRecipeDataSave = (data) => {
+    data.directives = recipe_steps;
+    const error = recipeList?.some((elem) => elem.name === data.name);
+    if (showEditFormPanel) {
+      if (error) {
+        setIsNameError(error);
+      } else {
+        saveRecipeData(data);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: `2 Steps successfully saved/updated as a recipe!`,
+        });
+        setIsNameError(false);
+        setShowEditFormPanel(false);
+      }
+    }
+  };
+
+  const onEdit = (row) => {
+    recipeList?.map((i) => {
+      if (i.id === row.id) {
+        setEditRecipeData(i);
+        setShowEditFormPanel(true);
+      }
+    });
+  };
+
+  return (
+    <>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Description</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {recipeList.map((row) => (
+              <TableRow key={row.name} onClick={() => onEdit(row)}>
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.description}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {showEditFormPanel && (
+        <EditRecipe
+          openDrawer={showEditFormPanel}
+          headingText={T.translate('features.WranglerNewUI.RecipeForm.labels.editFormTitle')}
+          closeClickHandler={closeClickHandler}
+          // recipeData={editRecipeData}
+          onCancel={onRecipeFormCancel}
+          onRecipeDataSave={onRecipeDataSave}
+          isNameError={isNameError}
+          recipeData={editRecipeData}
+        />
+      )}
+    </>
+  );
+}

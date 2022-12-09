@@ -61,6 +61,24 @@ export function createWorkspace({ entity, connection, limit = 1000, properties =
     });
 }
 
+export function createRecipe() {
+  const body = {
+    name: 'recipe-1',
+    description: 'Recipe for cleansing empolyee information',
+    directives: ['lowercase: body_1'],
+  };
+  return DataprepApi.createRecipe(
+    {
+      context: 'default',
+    },
+    body
+  )
+    .toPromise()
+    .catch((e) => {
+      throw getApiErrorMessage(e);
+    });
+}
+
 export function getPluginSpec(entity, connection, plugin = null) {
   const { path } = entity;
   const params = {
