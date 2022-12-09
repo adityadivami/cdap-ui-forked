@@ -55,7 +55,7 @@ describe('Testing Menu Item Component', () => {
     const dummyItem = {
       label: 'test',
       supportedDataType: ['all'],
-      value: "divider",
+      value: 'divider',
       options: ['all'],
     };
     render(
