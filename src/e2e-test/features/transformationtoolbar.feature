@@ -15,7 +15,7 @@
 #
 
 @Integration_Tests
-Feature: Wrangler BigQuery Connection Tests and test transformation toolbar
+Feature: Wrangler BigQuery Connection Tests
 
   @WRANGLER_BIGQUERY_CONNECTION_TEST
   Scenario: Should successfully test BIGQUERY connection
