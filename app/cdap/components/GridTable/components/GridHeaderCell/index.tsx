@@ -24,7 +24,7 @@ const StringIndicatorBox = styled(Box)({
   display: 'flex',
 });
 
-export default function GridHeaderCell({ label, types }: IGridHeaderCellProps) {
+export default function GridHeaderCell({ label, types, index }: IGridHeaderCellProps) {
   const classes = useGridHeaderCellStyles();
 
   const [data, setData] = useState<Record<string, string>>({
@@ -33,9 +33,15 @@ export default function GridHeaderCell({ label, types }: IGridHeaderCellProps) {
   });
 
   return (
-    <TableCell className={classes.tableHeaderCell} data-testid="grid-header-cell-container">
+    <TableCell
+      className={classes.tableHeaderCell}
+      data-testid={`grid-header-cell-container-${label}`}
+    >
       <Card className={classes.root} variant="outlined">
-        <Typography className={classes.columnHeader} data-testid={`grid-header-cell-${label}`}>
+        <Typography
+          className={classes.columnHeader}
+          data-testid={`grid-header-cell-${index}-label`}
+        >
           {label}
         </Typography>
         <StringIndicatorBox>
