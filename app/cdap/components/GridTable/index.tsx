@@ -281,7 +281,7 @@ export default function GridTable() {
       setRowsDataList(rowData);
   };
 
-  const showRecipePanelHandler = () => {
+  const onShowRecipePanelButtonClick = () => {
     setShowRecipePanel((prev) => !prev);
   };
 
@@ -308,13 +308,20 @@ export default function GridTable() {
         setSnackbar({
           open: true,
           isSuccess: true,
-          message: `${recipe_steps.length} Steps successfully saved as a recipe!`,
+          message: T.translate('features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'),
         });
         setShowRecipeSaveForm(false);
       },
       (err) => {
-        if (err) {
+        if (err.response.message) {
           setIsNameError(true);
+        } else {
+          setSnackbar({
+            open: true,
+            isSuccess: false,
+            message: T.translate('features.WranglerNewUI.RecipeForm.labels.errorMessage'),
+          });
+          setShowRecipeSaveForm(false);
         }
       }
     );
@@ -418,7 +425,7 @@ export default function GridTable() {
       <FooterPanel
         recipeStepsCount={0}
         gridMetaInfo={tableMetaInfo}
-        handleShowRecipePanelHandler={showRecipePanelHandler}
+        onRecipePanelButtonClick={onShowRecipePanelButtonClick}
       />
     </Box>
   );

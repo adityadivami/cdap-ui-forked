@@ -76,26 +76,34 @@ const FormStyle = styled.form`
 
 const RecipeNameTextFieldStyle = styled(TextField)`
   width: 350px;
+  &.MuiOutlinedInput-root:focus-visible {
+    outline: unset !important;
+  }
+  &.MuiOutlinedInput-notchedOutline:focus-visible {
+    outline: unset !important;
+    border-color: #e0e0e0 !important;
+  }
 `;
 
-const DescriptionTextFieldStyle = styled(TextareaAutosize)`
+const DescriptionTextAreaStyle = styled(TextareaAutosize)`
   width: 350px;
   border-color: #e0e0e0;
   border-radius: 4px;
   height: 100px !important;
   padding: 18.5px 14px;
-  color: #e0e0e0;
+
   & .MuiInputBase-root {
     height: 100px !important;
     border-color: #e0e0e0;
     padding: 18.5px 14px;
-    color: #e0e0e0;
   }
   & .textarea {
     border-color: #e0e0e0;
     height: 100px !important;
     padding: 18.5px 14px;
-    color: #e0e0e0;
+  }
+  &.textarea:focus-visible {
+    outline: unset !important;
   }
 `;
 
@@ -126,25 +134,21 @@ export default function({
   setIsNameError,
 }: ICommonRecipeFormProps) {
   const LabelStyle = getLabelStyle(isNameError);
-  const [formdata, setRecipeFormData] = useState({
+  const [recipeFormData, setRecipeFormData] = useState({
     recipeName: '',
     description: '',
+    directives: [],
   });
 
   useEffect(() => {
-    if (formdata.recipeName && formdata.description) {
+    if (recipeFormData.recipeName && recipeFormData.description) {
       setIsNameError(false);
     }
-  }, [formdata]);
+  }, [recipeFormData]);
 
   const onFormHandle = (e) => {
     e.preventDefault();
-    const data = {
-      recipeName: formdata.recipeName,
-      description: formdata.description,
-      directives: [],
-    };
-    onRecipeDataSave(data);
+    onRecipeDataSave(recipeFormData);
   };
 
   return (
@@ -152,7 +156,7 @@ export default function({
       <FormStyle onSubmit={(event) => onFormHandle(event)} data-testid="recipe-form-parent">
         <FormFieldWrapper>
           <LabelStyle data-testid="recipe-name-label">
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}:
+            {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
           </LabelStyle>
           <RecipeNameTextFieldStyle
             required
@@ -161,15 +165,17 @@ export default function({
             error={isNameError}
             id="outlined-error-helper-text"
             helperText={
-              isNameError ? 'Another recipe with same name exists. Please input another name' : ''
+              isNameError
+                ? T.translate('features.WranglerNewUI.RecipeForm.labels.nameErrorMessage')
+                : ''
             }
             fullWidth
             data-cy="secure-key-name"
             onChange={(event) =>
-              setRecipeFormData({ ...formdata, ['recipeName']: event.target.value })
+              setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value })
             }
             data-testid="recipe-name-field"
-            placeholder="Input a name to identify it later"
+            placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
           />
         </FormFieldWrapper>
         <FormFieldWrapper>
@@ -178,15 +184,14 @@ export default function({
               {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
             </NormalLabelStyle>
 
-            <DescriptionTextFieldStyle
+            <DescriptionTextAreaStyle
               required
               aria-label="minimum height"
               minRows={3}
-              placeholder="Input a description to identify it later"
               data-testid="recipe-description-field"
               defaultValue={recipeData.description}
               onChange={(event) =>
-                setRecipeFormData({ ...formdata, ['description']: event.target.value })
+                setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
               }
             />
           </FormControl>

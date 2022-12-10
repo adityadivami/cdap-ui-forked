@@ -71,10 +71,8 @@ const RecipeStepsTableHead = styled(TableCell)`
 
 const RecipeStepsTableBodyRow = styled(TableRow)`
   &.MuiTableRow-root {
+    cursor: pointer;
     border-bottom: 1px solid rgba(224, 224, 224, 1);
-    &:hover {
-      background: #eff0f2;
-    }
   }
 `;
 
