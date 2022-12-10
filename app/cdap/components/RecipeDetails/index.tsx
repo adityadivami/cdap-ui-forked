@@ -104,45 +104,52 @@ const VerticalDivider = styled(Box)`
   margin: 0 10px;
 `;
 
+const getSerialNumber = (recipeStepIndex: number) => {
+  if (recipeStepIndex < 10) {
+    return `0${recipeStepIndex + 1}`;
+  } else {
+    return `${recipeStepIndex + 1}`;
+  }
+};
+
 export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
   return (
     <StyledDrawer open={true} data-testid="select-column-panel" anchor="right">
       <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
         <DrawerHeader onCloseDetail={onCloseDetail} />
         <RecipeDetailWrapper>
-          <RecipeName>{recipeDetails.recipeName}</RecipeName>
+          <RecipeName component="h5" data-testid="recipe-name">
+            {recipeDetails.recipeName}
+          </RecipeName>
           <StepDetail>
-            <RecipeDetailText>
+            <RecipeDetailText component="div" data-testid="recipe-count-and-date">
               {`${recipeDetails.directives.length} ${T.translate(
-                `${PREFIX}.recipeStepsTableHead.recipeStep`
+                `${PREFIX}.tableHeaders.recipeStep`
               )}`}
               <VerticalDivider /> {dateFormatting(recipeDetails.createdTimeMillis)}
             </RecipeDetailText>
           </StepDetail>
           <DescriptionDetail>
-            <RecipeDetailText>{recipeDetails.description}</RecipeDetailText>
+            <RecipeDetailText data-testid="recipe-decription">
+              {recipeDetails.description}
+            </RecipeDetailText>
           </DescriptionDetail>
           <StepsGridWrapper>
-            <StepsGridHead>{T.translate(`${PREFIX}.recipeStepsTableHead.serialNo`)}</StepsGridHead>
-            <StepsGridHead>
-              {T.translate(`${PREFIX}.recipeStepsTableHead.recipeStep`)}
-            </StepsGridHead>
+            <StepsGridHead>{T.translate(`${PREFIX}.tableHeaders.serialNo`)}</StepsGridHead>
+            <StepsGridHead>{T.translate(`${PREFIX}.tableHeaders.recipeStep`)}</StepsGridHead>
           </StepsGridWrapper>
           <HeadDivider />
-          {recipeDetails.directives.length > 0 &&
-            recipeDetails.directives.map((recipeStep, recipeStepIndex) => {
-              return (
-                <>
-                  <StepsGridWrapper>
-                    <RecipeDetailText>
-                      {recipeStepIndex < 10 ? `0${recipeStepIndex + 1}` : recipeStepIndex + 1}
-                    </RecipeDetailText>
-                    <RecipeDetailText>{recipeStep}</RecipeDetailText>
-                  </StepsGridWrapper>
-                  {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
-                </>
-              );
-            })}
+          {recipeDetails.directives.map((recipeStep, recipeStepIndex) => {
+            return (
+              <>
+                <StepsGridWrapper>
+                  <RecipeDetailText>{getSerialNumber(recipeStepIndex)}</RecipeDetailText>
+                  <RecipeDetailText>{recipeStep}</RecipeDetailText>
+                </StepsGridWrapper>
+                {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
+              </>
+            );
+          })}
         </RecipeDetailWrapper>
       </DrawerContainerBox>
     </StyledDrawer>

@@ -19,7 +19,7 @@ import { fireEvent, render } from '@testing-library/react';
 import RecipeDetails from 'components/RecipeDetails';
 import React from 'react';
 
-const mockData = {
+const recipeDetailsMockData = {
   recipeId: {
     namespace: {
       name: 'default',
@@ -37,6 +37,9 @@ const mockData = {
 
 describe('Test RecipeDetails Component', () => {
   it('should render the RecipeDetails Component ', () => {
-    render(<RecipeDetails recipeDetails={mockData} onCloseDetail={jest.fn()} />);
+    render(<RecipeDetails recipeDetails={recipeDetailsMockData} onCloseDetail={jest.fn()} />);
+    expect(screen.getByTestId('recipe-name')).toBeInTheDocument();
+    expect(screen.getByTestId('recipe-count-and-date')).toBeInTheDocument();
+    expect(screen.getByTestId('recipe-decription')).toBeInTheDocument();
   });
 });

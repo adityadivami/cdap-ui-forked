@@ -21,26 +21,13 @@ import CloseIcon from '@material-ui/icons/Close';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import { Box, Typography } from '@material-ui/core';
+import { Box, IconButton, Typography } from '@material-ui/core';
 import T from 'i18n-react';
+import { UnderlineIcon } from 'components/RecipeDetails/IconStore/UnderlineSVG';
 
 interface IDrawerHeaderProps {
   onCloseDetail: () => void;
 }
-
-const UnderLine = (
-  <svg
-    width="67"
-    height="2"
-    viewBox="0 0 67 2"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    data-testid="underline"
-  >
-    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
-    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
-  </svg>
-);
 
 const MainHeadWrapper = styled(Box)`
   margin-top: 30px;
@@ -51,9 +38,7 @@ const HeadWrapper = styled(Box)`
   justify-content: space-between;
 `;
 
-const HeadingBox = styled(Box)``;
-
-const RecipeHead = styled(Typography)`
+const RecipeHeaderLabel = styled(Typography)`
   font-weight: 400;
   font-size: 20px;
   line-height: 150%;
@@ -62,35 +47,33 @@ const RecipeHead = styled(Typography)`
 
 const IconsWrapper = styled(Box)`
   display: flex;
+  align-items: center;
 `;
 
-const CustomizedEditIcon = styled(EditIcon)`
+const StyledCommonIconButton = styled(IconButton)`
+  padding: 12px;
+`;
+
+const StyledEditIcon = styled(EditIcon)`
   fill: ${grey[600]};
-  cursor: pointer;
-  margin-right: 5px;
   width: 25px;
   height: 25px;
 `;
 
-const CustomizedSaveIcon = styled(SaveAltIcon)`
+const StyledSaveIcon = styled(SaveAltIcon)`
   fill: ${grey[600]};
-  cursor: pointer;
-  margin-right: 5px;
   width: 25px;
   height: 25px;
 `;
 
-const CustomizedDeleteIcon = styled(DeleteOutlineIcon)`
+const StyledDeleteIcon = styled(DeleteOutlineIcon)`
   fill: ${grey[600]};
-  cursor: pointer;
-  margin-right: 5px;
   width: 25px;
   height: 25px;
 `;
 
-const CustomizedCloseIcon = styled(CloseIcon)`
+const StyledCloseIcon = styled(CloseIcon)`
   fill: ${grey[600]};
-  cursor: pointer;
   width: 25px;
   height: 25px;
 `;
@@ -106,18 +89,26 @@ export default function({ onCloseDetail }: IDrawerHeaderProps) {
   return (
     <MainHeadWrapper>
       <HeadWrapper>
-        <HeadingBox>
-          <RecipeHead>
-            {T.translate('features.WranglerNewUI.RecipeDetails.recipeDetailHead')}
-          </RecipeHead>
-          {UnderLine}
-        </HeadingBox>
+        <Box>
+          <RecipeHeaderLabel>
+            {T.translate('features.WranglerNewUI.RecipeDetails.drawerHeader')}
+          </RecipeHeaderLabel>
+          <UnderlineIcon />
+        </Box>
         <IconsWrapper>
-          <CustomizedEditIcon />
-          <CustomizedDeleteIcon />
-          <CustomizedSaveIcon />
+          <StyledCommonIconButton>
+            <StyledEditIcon />
+          </StyledCommonIconButton>
+          <StyledCommonIconButton>
+            <StyledDeleteIcon />
+          </StyledCommonIconButton>
+          <StyledCommonIconButton>
+            <StyledSaveIcon />
+          </StyledCommonIconButton>
           <VerticalDivider />
-          <CustomizedCloseIcon data-testid="close-recipe-detail" onClick={onCloseDetail} />
+          <StyledCommonIconButton data-testid="close-detail-icon-button" onClick={onCloseDetail}>
+            <StyledCloseIcon data-testid="close-recipe-detail" />
+          </StyledCommonIconButton>
         </IconsWrapper>
       </HeadWrapper>
     </MainHeadWrapper>

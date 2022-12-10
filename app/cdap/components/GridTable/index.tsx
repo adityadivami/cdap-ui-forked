@@ -264,7 +264,7 @@ export default function GridTable() {
   const onRecipeClick = (recipeId: string) => {
     setLoading(true);
     const payload = { context: getCurrentNamespace(), recipeId };
-    MyDataPrepApi.getRecipeDetail(payload).subscribe(
+    MyDataPrepApi.getRecipe(payload).subscribe(
       (res) => {
         setRecipeDetails(res);
         setRecipeDetailsIsOpen(true);

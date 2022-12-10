@@ -20,7 +20,7 @@ import MyDataPrepApi from 'api/dataprep';
 import SavedRecipeList from 'components/SavedRecipeList';
 import React from 'react';
 
-const mockData = {
+const getRecipeListMock = {
   nextPageToken: '',
   message: 'Success',
   count: 5,
@@ -105,14 +105,12 @@ const mockData = {
 };
 
 describe('Test SavedRecipeList Component', () => {
-  it('Should mock API forRecipe lists', () => {
-    jest.spyOn(MyDataPrepApi, 'getRecipeList').mockImplementation(() => {
-      return {
-        subscribe: (callback) => {
-          callback(mockData);
-        },
-      };
-    });
+  jest.spyOn(MyDataPrepApi, 'getRecipeList').mockImplementation(() => {
+    return {
+      subscribe: (callback) => {
+        callback(getRecipeListMock);
+      },
+    };
   });
 
   it('should render the SavedRecipeList Component ', () => {

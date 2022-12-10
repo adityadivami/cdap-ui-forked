@@ -58,6 +58,7 @@ export default function({ onRecipeClick }: ISavedRecipeListProps) {
   const params = {
     context: getCurrentNamespace(),
   };
+
   const getAllRecipeList = () => {
     MyDataPrepApi.getRecipeList(params).subscribe((res) => {
       setRecipeList(res.values);
@@ -77,8 +78,10 @@ export default function({ onRecipeClick }: ISavedRecipeListProps) {
       {recipeList.map((recipeItem: IRecipeItem, recipeIndex) => {
         return (
           <RecipeNameBox
+            role="button"
             data-testid={`recipe-box-${recipeIndex}`}
             onClick={() => recipeItemClicked(recipeItem)}
+            tabIndex="0"
           >
             {recipeItem.recipeName}
           </RecipeNameBox>

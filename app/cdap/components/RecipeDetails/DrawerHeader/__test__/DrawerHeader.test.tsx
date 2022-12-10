@@ -23,7 +23,7 @@ describe('Test RecipeDrawerHeader Component', () => {
   it('should render the RecipeDrawerHeader Component ', () => {
     render(<RecipeDrawerHeader onCloseDetail={jest.fn()} />);
 
-    const closePanel = screen.getByTestId(/close-recipe-detail/i);
+    const closePanel = screen.getByTestId(/close-detail-icon-button/i);
     fireEvent.click(closePanel);
     expect(closePanel).toBeInTheDocument();
   });
