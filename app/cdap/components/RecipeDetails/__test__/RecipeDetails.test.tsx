@@ -66,18 +66,24 @@ describe('Test RecipeDetails Component', () => {
   it('should check if the recipe serial number is as expected', () => {
     const recipeSerialNumberElement = screen.getByTestId(/recipe-step-serial-number-column-head/i);
     expect(recipeSerialNumberElement).toBeInTheDocument();
-    expect(recipeSerialNumberElement).toHaveTextContent(`${T.translate(`${PREFIX}.tableHeaders.serialNo`)}`);
+    expect(recipeSerialNumberElement).toHaveTextContent(
+      `${T.translate(`${PREFIX}.tableHeaders.serialNo`)}`
+    );
   });
 
   it('should check if the recipe steps column head is as expected', () => {
     const recipeStepHeadElement = screen.getByTestId(/recipe-step-text-column-head/i);
     expect(recipeStepHeadElement).toBeInTheDocument();
-    expect(recipeStepHeadElement).toHaveTextContent(`${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`);
+    expect(recipeStepHeadElement).toHaveTextContent(
+      `${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`
+    );
   });
 
   it('should check if the recipe steps text is as expected', () => {
     const recipeStepTextElement = screen.getByTestId(/recipe-step-text/i);
     expect(recipeStepTextElement).toBeInTheDocument();
-    expect(recipeStepTextElement).toHaveTextContent(`set-column :body_2_copy body_2 + \u0027text\u0027`);
+    expect(recipeStepTextElement).toHaveTextContent(
+      `set-column :body_2_copy body_2 + \u0027text\u0027`
+    );
   });
 });
