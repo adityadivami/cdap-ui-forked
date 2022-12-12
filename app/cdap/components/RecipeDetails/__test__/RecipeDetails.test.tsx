@@ -76,8 +76,8 @@ describe('Test RecipeDetails Component', () => {
   });
 
   it('should check if the recipe steps text is as expected', () => {
-    const recipeStepHeadElement = screen.getByTestId(/recipe-step-text/i);
-    expect(recipeStepHeadElement).toBeInTheDocument();
-    expect(recipeStepHeadElement).toHaveTextContent(`set-column :body_2_copy body_2 + \u0027text\u0027`);
+    const recipeStepTextElement = screen.getByTestId(/recipe-step-text/i);
+    expect(recipeStepTextElement).toBeInTheDocument();
+    expect(recipeStepTextElement).toHaveTextContent(`set-column :body_2_copy body_2 + \u0027text\u0027`);
   });
 });
