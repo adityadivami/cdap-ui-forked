@@ -135,16 +135,24 @@ export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
             </RecipeDetailText>
           </DescriptionDetail>
           <StepsGridWrapper>
-            <StepsGridHead data-testid="recipe-step-serial-number-column-head">{T.translate(`${PREFIX}.tableHeaders.serialNo`)}</StepsGridHead>
-            <StepsGridHead data-testid="recipe-step-text-column-head">{T.translate(`${PREFIX}.tableHeaders.recipeStep`)}</StepsGridHead>
+            <StepsGridHead data-testid="recipe-step-serial-number-column-head">
+              {T.translate(`${PREFIX}.tableHeaders.serialNo`)}
+            </StepsGridHead>
+            <StepsGridHead data-testid="recipe-step-text-column-head">
+              {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
+            </StepsGridHead>
           </StepsGridWrapper>
           <HeadDivider />
           {recipeDetails.directives.map((recipeStep, recipeStepIndex) => {
             return (
               <>
                 <StepsGridWrapper>
-                  <RecipeDetailText data-testid="recipe-step-index">{getSerialNumber(recipeStepIndex)}</RecipeDetailText>
-                  <RecipeDetailText data-testid="recipe-step-text">{recipeStep}</RecipeDetailText>
+                  <RecipeDetailText data-testid="recipe-step-index">
+                    {getSerialNumber(recipeStepIndex)}
+                  </RecipeDetailText>
+                  <RecipeDetailText data-testid={`recipe-step-text-${recipeStepIndex}`}>
+                    {recipeStep}
+                  </RecipeDetailText>
                 </StepsGridWrapper>
                 {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
               </>

@@ -113,12 +113,12 @@ describe('Test SavedRecipeList Component', () => {
     };
   });
 
-  it('should render the SavedRecipeList Component ', () => {
-    const recipeItemClicked = jest.fn();
-    render(<SavedRecipeList onRecipeClick={jest.fn()} />);
+  it('should render the SavedRecipeList Component and trigger the click event expecting onRecipeClick to be called once', () => {
+    const mockFn = jest.fn();
+    render(<SavedRecipeList onRecipeClick={mockFn} />);
     const recipeRowElement = screen.getByTestId(/recipe-box-0/i);
     fireEvent.click(recipeRowElement);
-    expect(recipeItemClicked).toHaveBeenCalled();
-    // expect(recipeRowElement).toBeInTheDocument();
+    expect(recipeRowElement).toBeInTheDocument();
+    expect(mockFn).toHaveBeenCalled();
   });
 });
