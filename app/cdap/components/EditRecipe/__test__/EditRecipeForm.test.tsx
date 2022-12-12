@@ -17,18 +17,26 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import EditRecipe from 'components/EditRecipe';
+import { ISnackbar } from 'components/Snackbar';
 
 describe('Test Create Recipe Component', () => {
   beforeEach(() => {
     render(
       <EditRecipe
-        recipeData={{ name: 'lakshmi', description: '', directives: [] }}
+        recipeData={{ recipeName: 'recipeName', description: '', directives: [] }}
         onRecipeDataSave={jest.fn()}
         onCancel={jest.fn()}
         isNameError={false}
         headingText={''}
         openDrawer={true}
-        closeClickHandler={undefined}
+        closeClickHandler={jest.fn()}
+        setIsNameError={jest.fn()}
+        setSnackbar={jest.fn()}
+        snackbarState={{
+          open: true,
+          message: '',
+          isSuccess: false,
+        }}
       />
     );
   });
