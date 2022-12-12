@@ -22,11 +22,9 @@ import history from 'services/history';
 import T from 'i18n-react';
 
 describe('It should test the Recipe Component', () => {
-  const closeMockFunction = jest.fn()
-
+  const closeMockFunction = jest.fn();
 
   beforeEach(() => {
-
     render(
       <Router history={history}>
         <Switch>
@@ -45,7 +43,7 @@ describe('It should test the Recipe Component', () => {
         </Switch>
       </Router>
     );
-  })
+  });
   it('should check if step info is as expected', () => {
     const recipeStepInfoElement = screen.getByTestId(/recipe-step-info/i);
     expect(recipeStepInfoElement).toHaveTextContent(
@@ -54,8 +52,8 @@ describe('It should test the Recipe Component', () => {
   });
 
   it('should trigger handleClose function upon closing the element', () => {
-    const closeButtonElement = screen.getByTestId(/drawer-widget-close-round-icon/i)
-    fireEvent.click(closeButtonElement)
-    expect(closeMockFunction).toBeCalled()
+    const closeButtonElement = screen.getByTestId(/drawer-widget-close-round-icon/i);
+    fireEvent.click(closeButtonElement);
+    expect(closeMockFunction).toBeCalled();
   });
 });

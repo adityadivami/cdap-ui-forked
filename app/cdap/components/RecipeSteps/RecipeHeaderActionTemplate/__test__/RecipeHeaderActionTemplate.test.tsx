@@ -21,7 +21,9 @@ import RecipeHeaderActionTemplate from 'components/RecipeSteps/RecipeHeaderActio
 import history from 'services/history';
 
 describe('It should test the RecipeHeaderActionTemplate Component', () => {
-  it('renders RecipeHeaderActionTemplate component and triggers handleDownload', () => {
+  const mockSaveFunction = jest.fn();
+
+  beforeEach(() => {
     jest.mock('js-file-download', () => {
       return {
         __esModule: true,
@@ -34,15 +36,23 @@ describe('It should test the RecipeHeaderActionTemplate Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <RecipeHeaderActionTemplate setShowRecipeSaveForm={jest.fn()} />
+            <RecipeHeaderActionTemplate setShowRecipeSaveForm={mockSaveFunction} />
           </Route>
         </Switch>
       </Router>
     );
+  });
+  it('renders RecipeHeaderActionTemplate component and triggers handleDownload', () => {
     const recipeHeaderActionParent = screen.getByTestId(/header-action-template-parent/i);
     expect(recipeHeaderActionParent).toBeInTheDocument();
     const downloadComponent = screen.getByTestId(/header-action-download-icon/i);
     fireEvent.click(downloadComponent);
     expect(downloadComponent).toBeInTheDocument();
+  });
+
+  it('should trigger onSaveIconClick function as expected', () => {
+    const saveButtonElement = screen.getByTestId(/header-action-save-icon/i);
+    fireEvent.click(saveButtonElement);
+    expect(mockSaveFunction).toBeCalled();
   });
 });

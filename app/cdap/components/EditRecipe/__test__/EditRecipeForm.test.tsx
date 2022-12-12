@@ -20,6 +20,7 @@ import EditRecipe from 'components/EditRecipe';
 import { ISnackbar } from 'components/Snackbar';
 
 describe('Test Create Recipe Component', () => {
+  const mockSetSnackbar = jest.fn()
   beforeEach(() => {
     render(
       <EditRecipe
@@ -31,7 +32,7 @@ describe('Test Create Recipe Component', () => {
         openDrawer={true}
         onCloseClick={jest.fn()}
         setIsNameError={jest.fn()}
-        setSnackbar={jest.fn()}
+        setSnackbar={mockSetSnackbar}
         snackbarState={{
           open: true,
           message: '',
@@ -44,5 +45,11 @@ describe('Test Create Recipe Component', () => {
   it('should render the component as expected', () => {
     const parentElement = screen.getByTestId(/edit-recipe-drawer-widget-parent/i);
     expect(parentElement).toBeInTheDocument();
+  });
+
+  it('should trigger handleClose function', () => {
+    const closeIconElement = screen.getByTestId(/snackbar-close-icon/i)
+    fireEvent.click(closeIconElement)
+    expect(mockSetSnackbar).toBeCalled()
   });
 });
