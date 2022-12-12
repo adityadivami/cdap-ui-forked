@@ -26,7 +26,7 @@ import Snackbar, { ISnackbar } from 'components/Snackbar';
 interface IDrawerWidgetProps {
   headingText: React.ReactNode;
   openDrawer: boolean;
-  closeClickHandler: () => void;
+  onCloseClick: () => void;
   recipeData: IRecipeData;
   onCancel: () => void;
   onRecipeDataSave: (data: IRecipeData) => void;
@@ -77,7 +77,7 @@ const PaperStyle = styled(Drawer)`
 export default function({
   headingText,
   openDrawer,
-  closeClickHandler,
+  onCloseClick,
   recipeData,
   onCancel,
   onRecipeDataSave,
@@ -98,7 +98,7 @@ export default function({
             <CloseIconWrapper>
               <CloseIconStyle
                 color="action"
-                onClick={closeClickHandler}
+                onClick={onCloseClick}
                 data-testid="drawer-widget-close-round-icon"
               />
             </CloseIconWrapper>

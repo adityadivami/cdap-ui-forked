@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { Route, Router, Switch } from 'react-router';
 import RecipeSteps from 'components/RecipeSteps/index';
@@ -22,27 +22,40 @@ import history from 'services/history';
 import T from 'i18n-react';
 
 describe('It should test the Recipe Component', () => {
-  it('renders Recipe Component and check if step info is as expected', () => {
+  const closeMockFunction = jest.fn()
+
+
+  beforeEach(() => {
+
     render(
       <Router history={history}>
         <Switch>
           <Route>
             <RecipeSteps
-              setShowRecipePanel={jest.fn()}
+              setShowRecipePanel={closeMockFunction}
               setShowRecipeSaveForm={jest.fn()}
               showRecipeSaveForm={true}
               recipeData={{ name: '', description: '', directives: [] }}
               onRecipeDataSave={jest.fn()}
               onCancel={jest.fn()}
               isNameError={false}
+              setIsNameError={jest.fn()}
             />
           </Route>
         </Switch>
       </Router>
     );
+  })
+  it('should check if step info is as expected', () => {
     const recipeStepInfoElement = screen.getByTestId(/recipe-step-info/i);
     expect(recipeStepInfoElement).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.RecipeForm.labels.recipeFormInfo')}`
     );
+  });
+
+  it('should trigger handleClose function upon closing the element', () => {
+    const closeButtonElement = screen.getByTestId(/drawer-widget-close-round-icon/i)
+    fireEvent.click(closeButtonElement)
+    expect(closeMockFunction).toBeCalled()
   });
 });

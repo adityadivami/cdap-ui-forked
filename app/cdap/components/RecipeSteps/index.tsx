@@ -76,7 +76,7 @@ export default function({
     'titlecase: body4',
   ];
 
-  const closeClickHandler = () => {
+  const onCloseClick = () => {
     setShowRecipePanel(false);
   };
 
@@ -88,7 +88,7 @@ export default function({
     <>
       <RecipeStepWidget
         headingText={T.translate('features.WranglerNewUI.WranglerNewRecipeSteps.labels.recipe')}
-        onClose={closeClickHandler}
+        onClose={onCloseClick}
         showDivider={true}
         headerActionTemplate={
           <RecipeHeaderActionTemplate setShowRecipeSaveForm={setShowRecipeSaveForm} />
