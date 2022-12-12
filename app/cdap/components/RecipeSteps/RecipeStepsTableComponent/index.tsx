@@ -71,10 +71,8 @@ const RecipeStepsTableHead = styled(TableCell)`
 
 const RecipeStepsTableBodyRow = styled(TableRow)`
   &.MuiTableRow-root {
+    cursor: pointer;
     border-bottom: 1px solid rgba(224, 224, 224, 1);
-    &:hover {
-      background: #eff0f2;
-    }
   }
 `;
 
@@ -127,8 +125,7 @@ const RecipeStepWrapper = styled(TableContainer)`
     width: 100%;
     overflow-x: auto;
     overflow-y: scroll;
-    max-height: 192px;
-    height: calc(100% - 10px);
+    max-height: 141px;
   }
 `;
 

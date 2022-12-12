@@ -19,7 +19,6 @@ import Box from '@material-ui/core/Box';
 import { useHistory } from 'react-router-dom';
 import MyDataPrepApi from 'api/dataprep';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
-import { createRecipe } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import FooterPanel from 'components/FooterPanel';
@@ -48,8 +47,8 @@ import {
 import RecipeSteps from 'components/RecipeSteps';
 import { reducer, initialGridTableState } from 'components/GridTable/reducer';
 import styled from 'styled-components';
-import EditRecipe from 'components/EditRecipe';
 import { IGridTableActions } from 'components/GridTable/reducer';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
 const TableWrapper = styled(Box)`
   height: calc(100vh - 193px);
@@ -72,7 +71,7 @@ export default function GridTable() {
   const classes = useStyles();
 
   const { dataprep } = DataPrepStore.getState();
-  const { recipeList } = dataprep;
+  const { recipe } = dataprep;
   const history = useHistory();
   const [gridTableState, dispatch] = useReducer(reducer, initialGridTableState);
   const { tableMetaInfo } = gridTableState;
@@ -98,6 +97,18 @@ export default function GridTable() {
     'uppercase: body3',
     'titlecase: body4',
   ];
+
+  useEffect(() => {
+    if (snackbarState.open) {
+      setTimeout(() => {
+        setSnackbar({
+          open: false,
+          isSuccess: false,
+          message: ``,
+        });
+      }, 5000);
+    }
+  }, [snackbarState]);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -280,7 +291,7 @@ export default function GridTable() {
       setRowsDataList(rowData);
   };
 
-  const showRecipePanelHandler = () => {
+  const onShowRecipePanelButtonClick = () => {
     setShowRecipePanel((prev) => !prev);
   };
 
@@ -289,34 +300,42 @@ export default function GridTable() {
   }, [gridData]);
 
   const saveRecipeData = (data) => {
-    createRecipe();
-    const body = {
-      name: data.name,
+    const params = {
+      context: getCurrentNamespace(),
+    };
+    const requestBody = {
+      recipeName: data.recipeName,
       description: data.description,
       directives: recipe_steps,
-      id: recipeList.length + 1,
     };
-    DataPrepStore.dispatch({
-      type: DataPrepActions.setRecipeList,
-      payload: [...recipeList, body],
-    });
+    MyDataPrepApi.createRecipe(params, requestBody).subscribe(
+      () => {
+        setIsNameError(false);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: T.translate('features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'),
+        });
+        setShowRecipeSaveForm(false);
+      },
+      (err) => {
+        if (err.response.message) {
+          setIsNameError(true);
+        } else {
+          setSnackbar({
+            open: true,
+            isSuccess: false,
+            message: T.translate('features.WranglerNewUI.RecipeForm.labels.errorMessage'),
+          });
+          setShowRecipeSaveForm(false);
+        }
+      }
+    );
   };
 
   const onRecipeDataSave = (data) => {
-    data.directives = recipe_steps;
-    const error = recipeList?.some((elem) => elem.name === data.name);
-    if (error) {
-      setIsNameError(error);
-    } else {
-      saveRecipeData(data);
-      setSnackbar({
-        open: true,
-        isSuccess: true,
-        message: `${data.directives} Steps successfully saved as a recipe!`,
-      });
-      setIsNameError(false);
-      setShowRecipeSaveForm(false);
-    }
+    setIsNameError(false);
+    saveRecipeData(data);
   };
 
   const onRecipeFormCancel = () => {
@@ -333,10 +352,8 @@ export default function GridTable() {
         variant="outlined"
         color="primary"
       >
-        {/* {T.translate('features.WranglerNewUI.RecipeForm.labels.edit')} */}
         Saved Recipe List
       </Button>
-
       <TablePanelContainer>
         {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
           <TableWrapper>
@@ -395,10 +412,11 @@ export default function GridTable() {
               setShowRecipePanel={setShowRecipePanel}
               setShowRecipeSaveForm={setShowRecipeSaveForm}
               showRecipeSaveForm={showRecipeSaveForm}
-              recipeData={recipeList}
+              recipeData={recipe}
               onRecipeDataSave={onRecipeDataSave}
               onCancel={onRecipeFormCancel}
               isNameError={isNameError}
+              setIsNameError={setIsNameError}
             />
           </RecipeStepPanel>
         )}
@@ -408,7 +426,7 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
-      <Snackbar // TODO: This snackbar is just for the feature demo purpose. Will be removed in the further development.
+      <Snackbar
         handleClose={() =>
           setSnackbar(() => ({
             open: false,
@@ -421,7 +439,7 @@ export default function GridTable() {
       <FooterPanel
         recipeStepsCount={0}
         gridMetaInfo={tableMetaInfo}
-        handleShowRecipePanelHandler={showRecipePanelHandler}
+        onRecipePanelButtonClick={onShowRecipePanelButtonClick}
       />
     </Box>
   );

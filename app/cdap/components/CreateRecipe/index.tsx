@@ -23,6 +23,7 @@ export default function({
   onRecipeDataSave,
   onCancel,
   isNameError,
+  setIsNameError,
 }: ICommonRecipeFormProps) {
   return (
     <CommonRecipeForm
@@ -30,6 +31,7 @@ export default function({
       onRecipeDataSave={onRecipeDataSave}
       onCancel={onCancel}
       isNameError={isNameError}
+      setIsNameError={setIsNameError}
     />
   );
 }

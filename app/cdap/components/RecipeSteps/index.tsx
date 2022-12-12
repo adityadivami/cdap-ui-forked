@@ -32,10 +32,11 @@ export interface IRecipeStepsProps {
   recipeData: IRecipeData;
   onCancel: () => void;
   isNameError: boolean;
+  setIsNameError: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IRecipeData {
-  name: string;
+  recipeName: string;
   description: string;
   directives: string[];
   id?: number;
@@ -66,6 +67,7 @@ export default function({
   onRecipeDataSave,
   onCancel,
   isNameError,
+  setIsNameError,
 }: IRecipeStepsProps) {
   const recipe_steps = [
     'uppercase: body1',
@@ -97,7 +99,7 @@ export default function({
         <RecipeStepsTableBodyWrapper>
           <RecipeStepsTableComponent recipeSteps={recipe_steps} />
         </RecipeStepsTableBodyWrapper>
-        {/* <Divider /> */}
+        <Divider />
         {showRecipeSaveForm && (
           <>
             <RecipeStepInfo component="div">
@@ -108,6 +110,7 @@ export default function({
               onRecipeDataSave={onRecipeDataSave}
               onCancel={onCancel}
               isNameError={isNameError}
+              setIsNameError={setIsNameError}
             />
           </>
         )}
