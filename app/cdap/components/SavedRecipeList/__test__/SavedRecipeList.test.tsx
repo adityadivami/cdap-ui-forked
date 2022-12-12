@@ -114,10 +114,11 @@ describe('Test SavedRecipeList Component', () => {
   });
 
   it('should render the SavedRecipeList Component ', () => {
+    const recipeItemClicked = jest.fn();
     render(<SavedRecipeList onRecipeClick={jest.fn()} />);
-
     const recipeRowElement = screen.getByTestId(/recipe-box-0/i);
     fireEvent.click(recipeRowElement);
-    expect(recipeRowElement).toBeInTheDocument();
+    expect(recipeItemClicked).toHaveBeenCalled();
+    // expect(recipeRowElement).toBeInTheDocument();
   });
 });

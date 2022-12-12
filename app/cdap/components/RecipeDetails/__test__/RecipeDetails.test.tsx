@@ -18,6 +18,7 @@ import { screen } from '@testing-library/dom';
 import { fireEvent, render } from '@testing-library/react';
 import RecipeDetails from 'components/RecipeDetails';
 import React from 'react';
+import T from 'i18n-react';
 
 const recipeDetailsMockData = {
   recipeId: {
@@ -36,10 +37,28 @@ const recipeDetailsMockData = {
 };
 
 describe('Test RecipeDetails Component', () => {
-  it('should render the RecipeDetails Component ', () => {
+  const PREFIX = 'features.WranglerNewUI.RecipeDetails';
+
+  beforeEach(() => {
     render(<RecipeDetails recipeDetails={recipeDetailsMockData} onCloseDetail={jest.fn()} />);
+  });
+  it('should render the RecipeDetails Component ', () => {
     expect(screen.getByTestId('recipe-name')).toBeInTheDocument();
     expect(screen.getByTestId('recipe-count-and-date')).toBeInTheDocument();
     expect(screen.getByTestId('recipe-decription')).toBeInTheDocument();
+  });
+
+  it('should check if the recipe-name is as expected', () => {
+    const recipeNameElement = screen.getByTestId(/recipe-name/i);
+    expect(recipeNameElement).toBeInTheDocument();
+    expect(recipeNameElement).toHaveTextContent('RecipeABC101');
+  });
+
+  it('should check if the recipe count and date is as expected', () => {
+    const recipeCountDateElement = screen.getByTestId(/recipe-count-and-date/i);
+    expect(recipeCountDateElement).toBeInTheDocument();
+    expect(recipeCountDateElement).toHaveTextContent(
+      `2 ${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`
+    );
   });
 });
