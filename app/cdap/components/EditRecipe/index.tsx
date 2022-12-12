@@ -21,6 +21,7 @@ import DrawerWidgetHeading from './DrawerWidgetHeading';
 import CommonRecipeForm from 'components/CommonRecipeForm';
 import { IRecipeData } from 'components/CommonRecipeForm';
 import styled from 'styled-components';
+import Snackbar, { ISnackbar } from 'components/Snackbar';
 
 interface IDrawerWidgetProps {
   headingText: React.ReactNode;
@@ -30,6 +31,9 @@ interface IDrawerWidgetProps {
   onCancel: () => void;
   onRecipeDataSave: (data: IRecipeData) => void;
   isNameError: boolean;
+  setIsNameError: React.Dispatch<React.SetStateAction<boolean>>;
+  setSnackbar: (value: ISnackbar) => void;
+  snackbarState: ISnackbar;
 }
 
 const DrawerContainerStyle = styled(Container)`
@@ -78,30 +82,42 @@ export default function({
   onCancel,
   onRecipeDataSave,
   isNameError,
+  setIsNameError,
+  snackbarState,
+  setSnackbar,
 }: IDrawerWidgetProps) {
   return (
-    <PaperStyle anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
-      <DrawerContainerStyle role="presentation">
-        <HeaderStyle>
-          <HeaderTextBackIconWrapper>
-            <DrawerWidgetHeading headingText={headingText} />
-          </HeaderTextBackIconWrapper>
+    <>
+      <PaperStyle anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
+        <DrawerContainerStyle role="presentation">
+          <HeaderStyle>
+            <HeaderTextBackIconWrapper>
+              <DrawerWidgetHeading headingText={headingText} />
+            </HeaderTextBackIconWrapper>
 
-          <CloseIconWrapper>
-            <CloseIconStyle
-              color="action"
-              onClick={closeClickHandler}
-              data-testid="drawer-widget-close-round-icon"
-            />
-          </CloseIconWrapper>
-        </HeaderStyle>
-        <CommonRecipeForm
-          recipeData={recipeData}
-          onRecipeDataSave={onRecipeDataSave}
-          onCancel={onCancel}
-          isNameError={isNameError}
+            <CloseIconWrapper>
+              <CloseIconStyle
+                color="action"
+                onClick={closeClickHandler}
+                data-testid="drawer-widget-close-round-icon"
+              />
+            </CloseIconWrapper>
+          </HeaderStyle>
+          <CommonRecipeForm
+            recipeData={recipeData}
+            onRecipeDataSave={onRecipeDataSave}
+            onCancel={onCancel}
+            isNameError={isNameError}
+            setIsNameError={setIsNameError}
+          />
+        </DrawerContainerStyle>
+        <Snackbar
+          handleClose={() => setSnackbar({ open: false })}
+          open={snackbarState.open}
+          message={snackbarState.message}
+          isSuccess={snackbarState.isSuccess}
         />
-      </DrawerContainerStyle>
-    </PaperStyle>
+      </PaperStyle>
+    </>
   );
 }

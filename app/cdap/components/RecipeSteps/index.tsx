@@ -36,7 +36,7 @@ export interface IRecipeStepsProps {
 }
 
 export interface IRecipeData {
-  name: string;
+  recipeName: string;
   description: string;
   directives: string[];
   id?: number;

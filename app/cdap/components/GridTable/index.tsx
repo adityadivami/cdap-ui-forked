@@ -47,10 +47,8 @@ import {
 import RecipeSteps from 'components/RecipeSteps';
 import { reducer, initialGridTableState } from 'components/GridTable/reducer';
 import styled from 'styled-components';
-import EditRecipe from 'components/EditRecipe';
 import { IGridTableActions } from 'components/GridTable/reducer';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { setError } from 'components/DataPrep/store/DataPrepActionCreator';
 
 const TableWrapper = styled(Box)`
   height: calc(100vh - 193px);
@@ -73,7 +71,7 @@ export default function GridTable() {
   const classes = useStyles();
 
   const { dataprep } = DataPrepStore.getState();
-  const { recipeList } = dataprep;
+  const { recipe } = dataprep;
   const history = useHistory();
   const [gridTableState, dispatch] = useReducer(reducer, initialGridTableState);
   const { tableMetaInfo } = gridTableState;
@@ -99,6 +97,18 @@ export default function GridTable() {
     'uppercase: body3',
     'titlecase: body4',
   ];
+
+  useEffect(() => {
+    if (snackbarState.open) {
+      setTimeout(() => {
+        setSnackbar({
+          open: false,
+          isSuccess: false,
+          message: ``,
+        });
+      }, 5000);
+    }
+  }, [snackbarState]);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -299,11 +309,7 @@ export default function GridTable() {
       directives: recipe_steps,
     };
     MyDataPrepApi.createRecipe(params, requestBody).subscribe(
-      (res) => {
-        DataPrepStore.dispatch({
-          type: DataPrepActions.setRecipeList,
-          payload: [...recipeList, res],
-        });
+      () => {
         setIsNameError(false);
         setSnackbar({
           open: true,
@@ -340,6 +346,14 @@ export default function GridTable() {
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb datasetName={wid} />
+      <Button
+        onClick={() => history.push(`/ns/default/saved-recipe-list`)}
+        data-tsetid="recipe-form-edit-button"
+        variant="outlined"
+        color="primary"
+      >
+        Saved Recipe List
+      </Button>
       <TablePanelContainer>
         {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
           <TableWrapper>
@@ -398,7 +412,7 @@ export default function GridTable() {
               setShowRecipePanel={setShowRecipePanel}
               setShowRecipeSaveForm={setShowRecipeSaveForm}
               showRecipeSaveForm={showRecipeSaveForm}
-              recipeData={recipeList}
+              recipeData={recipe}
               onRecipeDataSave={onRecipeDataSave}
               onCancel={onRecipeFormCancel}
               isNameError={isNameError}
@@ -412,7 +426,7 @@ export default function GridTable() {
           <LoadingSVG />
         </div>
       )}
-      <Snackbar // TODO: This snackbar is just for the feature demo purpose. Will be removed in the further development.
+      <Snackbar
         handleClose={() =>
           setSnackbar(() => ({
             open: false,
