@@ -43,6 +43,7 @@ const RecipeHeaderLabel = styled(Typography)`
   font-size: 20px;
   margin-bottom: 6px;
   color: ${grey[900]};
+  padding: 1px;
 `;
 
 const IconsWrapper = styled(Box)`

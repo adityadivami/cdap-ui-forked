@@ -88,6 +88,10 @@ const StepsGridWrapper = styled(Box)`
   padding: 15px 10px;
 `;
 
+const StepsGridWrapperHead = styled(StepsGridWrapper)`
+  padding: 9px 10px;
+`;
+
 const StepsGridHead = styled(Typography)`
   font-weight: 600;
   font-size: 16px;
@@ -143,14 +147,14 @@ export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
               {recipeDetails.description}
             </RecipeDetailText>
           </DescriptionDetail>
-          <StepsGridWrapper>
+          <StepsGridWrapperHead>
             <StepsGridHead component="body1" data-testid="recipe-step-serial-number-column-head">
               {T.translate(`${PREFIX}.tableHeaders.serialNo`)}
             </StepsGridHead>
             <StepsGridHead component="body1" data-testid="recipe-step-text-column-head">
               {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
             </StepsGridHead>
-          </StepsGridWrapper>
+          </StepsGridWrapperHead>
           <HeadDivider />
           {recipeDetails.directives.map((recipeStep, recipeStepIndex) => {
             return (
