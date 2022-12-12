@@ -42,13 +42,8 @@ describe('Test RecipeDetails Component', () => {
   beforeEach(() => {
     render(<RecipeDetails recipeDetails={recipeDetailsMockData} onCloseDetail={jest.fn()} />);
   });
-  it('should render the RecipeDetails Component ', () => {
-    expect(screen.getByTestId('recipe-name')).toBeInTheDocument();
-    expect(screen.getByTestId('recipe-count-and-date')).toBeInTheDocument();
-    expect(screen.getByTestId('recipe-decription')).toBeInTheDocument();
-  });
 
-  it('should check if the recipe-name is as expected', () => {
+  it('should check if the recipe name is as expected', () => {
     const recipeNameElement = screen.getByTestId(/recipe-name/i);
     expect(recipeNameElement).toBeInTheDocument();
     expect(recipeNameElement).toHaveTextContent('RecipeABC101');
@@ -60,5 +55,29 @@ describe('Test RecipeDetails Component', () => {
     expect(recipeCountDateElement).toHaveTextContent(
       `2 ${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`
     );
+  });
+
+  it('should check if the recipe description is as expected', () => {
+    const recipeDescriptionElement = screen.getByTestId(/recipe-decription/i);
+    expect(recipeDescriptionElement).toBeInTheDocument();
+    expect(recipeDescriptionElement).toHaveTextContent('Recipe for cleansing empolyee information');
+  });
+
+  it('should check if the recipe serial number is as expected', () => {
+    const recipeSerialNumberElement = screen.getByTestId(/recipe-step-serial-number-column-head/i);
+    expect(recipeSerialNumberElement).toBeInTheDocument();
+    expect(recipeSerialNumberElement).toHaveTextContent(`${T.translate(`${PREFIX}.tableHeaders.serialNo`)}`);
+  });
+
+  it('should check if the recipe steps column head is as expected', () => {
+    const recipeStepHeadElement = screen.getByTestId(/recipe-step-text-column-head/i);
+    expect(recipeStepHeadElement).toBeInTheDocument();
+    expect(recipeStepHeadElement).toHaveTextContent(`${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`);
+  });
+
+  it('should check if the recipe steps text is as expected', () => {
+    const recipeStepTextElement = screen.getByTestId(/recipe-step-text/i);
+    expect(recipeStepTextElement).toBeInTheDocument();
+    expect(recipeStepTextElement).toHaveTextContent(`set-column :body_2_copy body_2 + \u0027text\u0027`);
   });
 });
