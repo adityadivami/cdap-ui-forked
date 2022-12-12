@@ -102,7 +102,7 @@ export default function({
         <Divider />
         {showRecipeSaveForm && (
           <>
-            <RecipeStepInfo component="div">
+            <RecipeStepInfo component="div" data-testid="recipe-step-info">
               {T.translate('features.WranglerNewUI.RecipeForm.labels.recipeFormInfo')}
             </RecipeStepInfo>
             <CreateRecipe
