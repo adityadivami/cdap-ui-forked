@@ -76,25 +76,16 @@ const FormStyle = styled.form`
 
 const RecipeNameTextFieldStyle = styled(TextField)`
   width: 350px;
-
-  & .MuiOutlinedInput-root:focus-visible {
-    outline: unset !important;
-    offset: unset !important;
-    border-color: #e0e0e0 !important;
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #e0e0e0;
   }
-  & .MuiOutlinedInput-input {
-    outline: unset !important;
-    offset: unset !important;
-    border-color: #e0e0e0 !important;
+  ::placeholder {
+    color: #757575;
   }
-  & .Mui-focused {
-    outline: unset !important;
-    offset: unset !important;
-    border-color: #e0e0e0 !important;
-  }
-  & .MuiOutlinedInput-notchedOutline:focus-visible {
-    outline: unset !important;
-    border-color: #e0e0e0 !important;
+  input {
+    ::placeholder {
+      color: #757575;
+    }
   }
 `;
 
@@ -104,14 +95,12 @@ const DescriptionTextAreaStyle = styled(TextareaAutosize)`
   border-radius: 4px;
   height: 100px !important;
   padding: 18.5px 14px;
-
-  & .MuiInputBase-root& .textarea {
-    height: 100px !important;
-    border-color: #e0e0e0;
-    padding: 18.5px 14px;
-  }
-  &.textarea:focus-visible {
+  :focus-visible {
     outline: unset !important;
+    border: 1px solid #e0e0e0;
+  }
+  ::placeholder {
+    color: #757575;
   }
 `;
 
