@@ -14,28 +14,77 @@
  * the License.
  */
 
-import React from 'react';
-import { SAVED_RECIPE_LIST } from 'components/SavedRecipeList/constants';
+import React, { useEffect, useState } from 'react';
 import { Box } from '@material-ui/core';
+import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
+import MyDataPrepApi from 'api/dataprep';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 
-interface IRecipeItem {
-  name: string;
+interface IRecipeId {
+  namespace: {
+    name: string;
+    generation: number;
+  };
+  recipeId: string;
+}
+
+export interface IRecipeItem {
+  recipeId: IRecipeId;
+  recipeName: string;
   description: string;
   directives: string[];
+  createdTimeMillis: number;
+  updatedTimeMillis: number;
+  recipeStepsCount: number;
 }
 
 interface ISavedRecipeListProps {
-  onRecipeClick: (recipeItem: IRecipeItem) => void;
+  onRecipeClick: (recipeId: string) => void;
 }
 
+const RecipeNameBox = styled(Box)`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: ${grey[700]};
+  padding: 10px;
+  border-bottom: 1px solid ${grey[300]};
+  cursor: pointer;
+`;
+
 export default function({ onRecipeClick }: ISavedRecipeListProps) {
+  const [recipeList, setRecipeList] = useState([]);
+  const params = {
+    context: getCurrentNamespace(),
+  };
+
+  const getAllRecipeList = () => {
+    MyDataPrepApi.getRecipeList(params).subscribe((res) => {
+      setRecipeList(res.values);
+    });
+  };
+
+  useEffect(() => {
+    getAllRecipeList();
+  }, []);
+
+  const recipeItemClicked = (recipeItem: IRecipeItem) => {
+    onRecipeClick(recipeItem.recipeId.recipeId);
+  };
+
   return (
     <>
-      {SAVED_RECIPE_LIST.map((recipeItem, recipeIndex) => {
+      {recipeList.map((recipeItem: IRecipeItem, recipeIndex) => {
         return (
-          <Box data-testid={`recipe-box-${recipeIndex}`} onClick={() => onRecipeClick(recipeItem)}>
-            {recipeItem.name}
-          </Box>
+          <RecipeNameBox
+            role="button"
+            data-testid={`recipe-box-${recipeIndex}`}
+            onClick={() => recipeItemClicked(recipeItem)}
+            tabIndex="0"
+          >
+            {recipeItem.recipeName}
+          </RecipeNameBox>
         );
       })}
     </>
