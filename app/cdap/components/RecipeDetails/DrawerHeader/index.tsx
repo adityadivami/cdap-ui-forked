@@ -30,7 +30,7 @@ interface IDrawerHeaderProps {
 }
 
 const MainHeadWrapper = styled(Box)`
-  margin-top: 30px;
+  margin-top: 20px;
 `;
 
 const HeadWrapper = styled(Box)`
@@ -41,7 +41,7 @@ const HeadWrapper = styled(Box)`
 const RecipeHeaderLabel = styled(Typography)`
   font-weight: 400;
   font-size: 20px;
-  line-height: 150%;
+  margin-bottom: 6px;
   color: ${grey[900]};
 `;
 
@@ -85,16 +85,21 @@ const VerticalDivider = styled(Box)`
   margin: 0 5px;
 `;
 
+const HeaderWithUnderline = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
+
 export default function({ onCloseDetail }: IDrawerHeaderProps) {
   return (
     <MainHeadWrapper>
       <HeadWrapper>
-        <Box>
+        <HeaderWithUnderline>
           <RecipeHeaderLabel>
             {T.translate('features.WranglerNewUI.RecipeDetails.drawerHeader')}
           </RecipeHeaderLabel>
           <UnderlineIcon />
-        </Box>
+        </HeaderWithUnderline>
         <IconsWrapper>
           <StyledCommonIconButton>
             <StyledEditIcon />

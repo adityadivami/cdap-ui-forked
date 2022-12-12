@@ -44,7 +44,7 @@ const DrawerContainerBox = styled(Container)`
 `;
 
 const RecipeDetailWrapper = styled(Box)`
-  margin-top: 20px;
+  margin-top: 19px;
 `;
 
 const RecipeName = styled(Typography)`
@@ -72,11 +72,20 @@ const RecipeDetailText = styled(Typography)`
   align-items: center;
 `;
 
+const RecipeStepText = styled(Typography)`
+  color: ${grey[700]};
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  display: flex;
+  align-items: center;
+`;
+
 const StepsGridWrapper = styled(Box)`
   display: grid;
   grid-template-columns: 20% 80%;
   align-items: center;
-  padding: 10px;
+  padding: 15px 10px;
 `;
 
 const StepsGridHead = styled(Typography)`
@@ -135,10 +144,10 @@ export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
             </RecipeDetailText>
           </DescriptionDetail>
           <StepsGridWrapper>
-            <StepsGridHead data-testid="recipe-step-serial-number-column-head">
+            <StepsGridHead component="body1" data-testid="recipe-step-serial-number-column-head">
               {T.translate(`${PREFIX}.tableHeaders.serialNo`)}
             </StepsGridHead>
-            <StepsGridHead data-testid="recipe-step-text-column-head">
+            <StepsGridHead component="body1" data-testid="recipe-step-text-column-head">
               {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
             </StepsGridHead>
           </StepsGridWrapper>
@@ -147,12 +156,12 @@ export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
             return (
               <>
                 <StepsGridWrapper>
-                  <RecipeDetailText data-testid="recipe-step-index">
+                  <RecipeStepText data-testid="recipe-step-index">
                     {getSerialNumber(recipeStepIndex)}
-                  </RecipeDetailText>
-                  <RecipeDetailText data-testid={`recipe-step-text-${recipeStepIndex}`}>
+                  </RecipeStepText>
+                  <RecipeStepText data-testid={`recipe-step-text-${recipeStepIndex}`}>
                     {recipeStep}
-                  </RecipeDetailText>
+                  </RecipeStepText>
                 </StepsGridWrapper>
                 {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
               </>
