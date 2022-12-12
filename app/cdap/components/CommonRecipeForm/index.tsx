@@ -76,10 +76,23 @@ const FormStyle = styled.form`
 
 const RecipeNameTextFieldStyle = styled(TextField)`
   width: 350px;
-  &.MuiOutlinedInput-root:focus-visible {
+
+  & .MuiOutlinedInput-root:focus-visible {
     outline: unset !important;
+    offset: unset !important;
+    border-color: #e0e0e0 !important;
   }
-  &.MuiOutlinedInput-notchedOutline:focus-visible {
+  & .MuiOutlinedInput-input {
+    outline: unset !important;
+    offset: unset !important;
+    border-color: #e0e0e0 !important;
+  }
+  & .Mui-focused {
+    outline: unset !important;
+    offset: unset !important;
+    border-color: #e0e0e0 !important;
+  }
+  & .MuiOutlinedInput-notchedOutline:focus-visible {
     outline: unset !important;
     border-color: #e0e0e0 !important;
   }
@@ -92,14 +105,9 @@ const DescriptionTextAreaStyle = styled(TextareaAutosize)`
   height: 100px !important;
   padding: 18.5px 14px;
 
-  & .MuiInputBase-root {
+  & .MuiInputBase-root& .textarea {
     height: 100px !important;
     border-color: #e0e0e0;
-    padding: 18.5px 14px;
-  }
-  & .textarea {
-    border-color: #e0e0e0;
-    height: 100px !important;
     padding: 18.5px 14px;
   }
   &.textarea:focus-visible {
@@ -193,6 +201,7 @@ export default function({
               onChange={(event) =>
                 setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
               }
+              placeholder="Input a description to identify it later"
             />
           </FormControl>
         </FormFieldWrapper>

@@ -30,10 +30,11 @@ describe('It should test the Recipe Component', () => {
               setShowRecipePanel={jest.fn()}
               setShowRecipeSaveForm={jest.fn()}
               showRecipeSaveForm={false}
-              recipeData={{ name: '', description: '', directives: [] }}
+              recipeData={{ recipeName: '', description: '', directives: [] }}
               onRecipeDataSave={jest.fn()}
               onCancel={jest.fn()}
               isNameError={false}
+              setIsNameError={jest.fn()}
             />
           </Route>
         </Switch>
