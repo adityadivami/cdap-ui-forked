@@ -77,7 +77,7 @@ export default function BasicTable() {
     }
   }, [snackbarState]);
 
-  const closeClickHandler = () => {
+  const onCloseClick = () => {
     setShowEditFormPanel(false);
     setEditRecipeData({
       recipeName: '',
@@ -161,7 +161,7 @@ export default function BasicTable() {
         <EditRecipe
           openDrawer={showEditFormPanel}
           headingText={T.translate('features.WranglerNewUI.RecipeForm.labels.editFormTitle')}
-          closeClickHandler={closeClickHandler}
+          onCloseClick={onCloseClick}
           onCancel={onRecipeFormCancel}
           onRecipeDataSave={onRecipeDataSave}
           isNameError={isNameError}
