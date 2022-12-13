@@ -28,27 +28,33 @@ const FormFieldWrapper = styled(Box)`
   margin-top: 15px;
 `;
 
-const CommonLabelStyle = styled(Typography)`
+const Label = styled(Typography)`
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  letter-spacing: 0.15;
+  letter-spacing: 0.15px;
 `;
 
-const LabelErrorStyle = styled(CommonLabelStyle)`
+const ErrorLabel = styled(Label)`
   color: #e05243;
 `;
-const NormalLabelStyle = styled(CommonLabelStyle)`
+const NormalLabel = styled(Label)`
   color: #5f6368;
 `;
 
-const FormStyle = styled.form`
+const StyledForm = styled.form`
   padding-left: 20px;
 `;
 
 const RecipeNameTextFieldStyle = styled(TextField)`
   width: 350px;
+  .MuiOutlinedInput-input {
+    padding: 12px 14px;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.15px;
+  }
   .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border: 1px solid #000000;
   }
@@ -61,10 +67,13 @@ const RecipeNameTextFieldStyle = styled(TextField)`
 
 const DescriptionTextAreaStyle = styled(TextareaAutosize)`
   width: 350px;
+  font-size: 14px;
   border-color: #e0e0e0;
   border-radius: 4px;
   height: 100px !important;
-  padding: 18.5px 14px;
+  padding: 10.5px 14px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
   :focus-visible {
     outline: unset !important;
     border: 1px solid #000000;
@@ -81,21 +90,33 @@ const CancelButtonStyle = styled(Button)`
   width: 162px;
   height: 36px;
   margin-right: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: #2196f3;
+  text-transform: none;
 `;
 
 const SaveButtonStyle = styled(Button)`
   width: 162px;
   height: 36px;
+  text-transform: none;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  background: #2196f3;
 `;
 
 const FormButtonWrapperStyle = styled.div`
   float: right;
-  padding-top: 85px;
+  padding-top: 63px;
   padding-bottom: 20px;
 `;
 
 const getLabelStyle = (isNameError) => {
-  return isNameError ? LabelErrorStyle : NormalLabelStyle;
+  return isNameError ? ErrorLabel : NormalLabel;
 };
 
 export default function({
@@ -105,7 +126,7 @@ export default function({
   isNameError,
   setIsNameError,
 }: ICommonRecipeFormProps) {
-  const LabelStyle = getLabelStyle(isNameError);
+  const StyledLabel = getLabelStyle(isNameError);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
     description: '',
@@ -145,11 +166,11 @@ export default function({
 
   return (
     <>
-      <FormStyle onSubmit={(event) => onFormHandle(event)} data-testid="recipe-form-parent">
+      <StyledForm onSubmit={(event) => onFormHandle(event)} data-testid="recipe-form-parent">
         <FormFieldWrapper>
-          <LabelStyle data-testid="recipe-name-label">
+          <StyledLabel data-testid="recipe-name-label">
             {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
-          </LabelStyle>
+          </StyledLabel>
           <RecipeNameTextFieldStyle
             required
             variant="outlined"
@@ -171,9 +192,9 @@ export default function({
         </FormFieldWrapper>
         <FormFieldWrapper>
           <FormControl variant="outlined">
-            <NormalLabelStyle data-testid="recipe-description-label">
+            <NormalLabel data-testid="recipe-description-label">
               {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
-            </NormalLabelStyle>
+            </NormalLabel>
             <DescriptionTextAreaStyle
               required
               aria-label="minimum height"
@@ -208,7 +229,7 @@ export default function({
             {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
           </SaveButtonStyle>
         </FormButtonWrapperStyle>
-      </FormStyle>
+      </StyledForm>
     </>
   );
 }
