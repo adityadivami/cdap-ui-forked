@@ -94,7 +94,7 @@ export default function GridTable() {
   const [snackbarState, setSnackbar] = useSnackbar();
   const [showRecipePanel, setShowRecipePanel] = useState<boolean>(false);
   const [showRecipeSaveForm, setShowRecipeSaveForm] = useState<boolean>(false);
-  const [isNameError, setIsNameError] = useState(false);
+  const [isNameError, setIsNameError] = useState<boolean>(false);
   const recipeSteps = [
     'uppercase: body1',
     'titlecase: body2',
