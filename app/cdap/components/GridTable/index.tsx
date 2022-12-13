@@ -265,14 +265,10 @@ export default function GridTable() {
     setShowGridTable(Array.isArray(gridData?.headers) && gridData?.headers.length !== 0);
   }, [gridData]);
 
-  const onCreateRecipeButtonClick = () => {
-    setRecipeFormOpen(true);
-  };
-
   return (
     <Box data-testid="grid-table-container">
       <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
-      <Button variant="contained" color="primary" onClick={() => onCreateRecipeButtonClick()}>
+      <Button variant="contained" color="primary" onClick={() => setRecipeFormOpen(true)}>
         Create Recipe
       </Button>
       {!showGridTable && (

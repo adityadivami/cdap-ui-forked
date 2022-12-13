@@ -14,32 +14,19 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
+import { Box, Container, Drawer, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import styled from 'styled-components';
-import Snackbar, { ISnackbar } from 'components/Snackbar';
-import useSnackbar from 'components/Snackbar/useSnackbar';
+import { ISnackbar } from 'components/Snackbar';
 import CommonRecipeForm from 'components/CreateEditRecipeForm';
 import DataPrepStore from 'components/DataPrep/store';
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import T from 'i18n-react';
+import { grey } from '@material-ui/core/colors';
 
-// interface IDrawerWidgetProps {
-//   headingText: React.ReactNode;
-//   openDrawer: boolean;
-//   onCloseClick: () => void;
-//   recipeData: IRecipeData;
-//   onCancel: () => void;
-//   onRecipeDataSave: (data: IRecipeData) => void;
-//   isNameError: boolean;
-//   setIsNameError: React.Dispatch<React.SetStateAction<boolean>>;
-//   setSnackbar: (value: ISnackbar) => void;
-//   snackbarState: ISnackbar;
-// }
-
-const DrawerContainerStyle = styled(Container)`
+const StyledDrawerContainer = styled(Container)`
   width: 460px;
   height: calc(100vh - 225px);
   height: 100%;
@@ -48,7 +35,7 @@ const DrawerContainerStyle = styled(Container)`
   overflow-y: scroll;
 `;
 
-const HeaderStyle = styled.header`
+const StyledHeader = styled.header`
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -57,26 +44,30 @@ const HeaderStyle = styled.header`
   padding-right: 0px;
 `;
 
-const HeaderTextBackIconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 const CloseIconWrapper = styled(Box)`
   display: flex;
   align-items: center;
 `;
 
-const CloseIconStyle = styled(CloseRoundedIcon)`
+const StyledCloseIcon = styled(CloseRoundedIcon)`
   cursor: pointer;
 `;
 
-const PaperStyle = styled(Drawer)`
+const StyledPaper = styled(Drawer)`
   & .MuiDrawer-paper {
     top: 46px;
     height: calc(100vh - 47px);
     width: 500px;
   }
+`;
+
+const StyledHeadingTitle = styled(Typography)`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: ${grey[900]};
 `;
 
 interface ICreateRecipeProps {
@@ -152,21 +143,21 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
   };
 
   return (
-    <PaperStyle anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
-      <DrawerContainerStyle role="presentation">
-        <HeaderStyle>
-          <HeaderTextBackIconWrapper>
+    <StyledPaper anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
+      <StyledDrawerContainer role="presentation">
+        <StyledHeader>
+          <StyledHeadingTitle data-testid="drawer-widget-heading">
             {T.translate('features.WranglerNewUI.RecipeForm.labels.saveRecipe')}
-          </HeaderTextBackIconWrapper>
+          </StyledHeadingTitle>
 
           <CloseIconWrapper>
-            <CloseIconStyle
+            <StyledCloseIcon
               color="action"
               onClick={onCloseClick}
               data-testid="drawer-widget-close-round-icon"
             />
           </CloseIconWrapper>
-        </HeaderStyle>
+        </StyledHeader>
         <CommonRecipeForm
           recipeData={recipe}
           onRecipeDataSave={onRecipeDataSave}
@@ -174,7 +165,7 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
           isNameError={isNameError}
           setIsNameError={setIsNameError}
         />
-      </DrawerContainerStyle>
-    </PaperStyle>
+      </StyledDrawerContainer>
+    </StyledPaper>
   );
 }

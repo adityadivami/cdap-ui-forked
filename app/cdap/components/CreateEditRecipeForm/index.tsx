@@ -15,105 +15,20 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { FormControl, TextField, Typography, Box, Button } from '@material-ui/core';
-import styled from 'styled-components';
+import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
-import { TextareaAutosize } from '@material-ui/core';
 import { ICommonRecipeFormProps, IRecipeData } from 'components/CreateEditRecipeForm/types';
-
-const FormFieldWrapper = styled(Box)`
-  width: calc(100% - 60px);
-  margin-right: 60px;
-  margin-bottom: 15px;
-  margin-top: 15px;
-`;
-
-const Label = styled(Typography)`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-`;
-
-const ErrorLabel = styled(Label)`
-  color: #e05243;
-`;
-const NormalLabel = styled(Label)`
-  color: #5f6368;
-`;
-
-const StyledForm = styled.form`
-  padding-left: 20px;
-`;
-
-const StyledRecipeNameTextField = styled(TextField)`
-  width: 350px;
-  .MuiOutlinedInput-input {
-    padding: 12px 14px;
-    font-size: 14px;
-    line-height: 150%;
-    letter-spacing: 0.15px;
-  }
-  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #000000;
-  }
-  input::placeholder {
-      color: #757575;
-      opacity: 1;
-    }
-  }
-`;
-
-const StyledDescriptionTextArea = styled(TextareaAutosize)`
-  width: 350px;
-  font-size: 14px;
-  border-color: #e0e0e0;
-  border-radius: 4px;
-  height: 100px !important;
-  padding: 10.5px 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-  :focus-visible {
-    outline: unset !important;
-    border: 1px solid #000000;
-  }
-  ::placeholder {
-    color: #757575;
-  }
-  :hover {
-    border: 1px solid #000000;
-  }
-`;
-
-const StyledButton = styled(Button)`
-  width: 162px;
-  height: 36px;
-  text-transform: none;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-`;
-
-const StyledCancelButton = styled(StyledButton)`
-  margin-right: 20px;
-  color: #2196f3;
-`;
-
-const StyledSaveButton = styled(StyledButton)`
-  background: #2196f3;
-`;
-
-const StyledFormButtonWrapper = styled.div`
-  float: right;
-  padding-top: 63px;
-  padding-bottom: 20px;
-`;
-
-const getLabelStyle = (isNameError) => {
-  return isNameError ? ErrorLabel : NormalLabel;
-};
+import {
+  FormFieldWrapper,
+  NormalLabel,
+  StyledForm,
+  StyledRecipeNameTextField,
+  StyledDescriptionTextArea,
+  StyledCancelButton,
+  StyledSaveButton,
+  StyledFormButtonWrapper,
+  getLabelStyle,
+} from 'components/CreateEditRecipeForm/styles';
 
 export default function({
   recipeData,
@@ -155,8 +70,8 @@ export default function({
     }
   }, [recipeFormData]);
 
-  const onFormHandle = (e) => {
-    e.preventDefault();
+  const onFormHandle = (event) => {
+    event.preventDefault();
     onRecipeDataSave(recipeFormData);
   };
 
