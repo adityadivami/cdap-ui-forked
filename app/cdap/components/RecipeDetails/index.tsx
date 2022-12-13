@@ -16,7 +16,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Container, Divider, Drawer, Typography } from '@material-ui/core';
+import { Box, Container, Drawer, Typography } from '@material-ui/core';
 import DrawerHeader from 'components/RecipeDetails/DrawerHeader';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
@@ -160,10 +160,10 @@ export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
             return (
               <>
                 <StepsGridWrapper>
-                  <RecipeStepText data-testid="recipe-step-index">
+                  <RecipeStepText component="body1" data-testid="recipe-step-index">
                     {getSerialNumber(recipeStepIndex)}
                   </RecipeStepText>
-                  <RecipeStepText data-testid={`recipe-step-text-${recipeStepIndex}`}>
+                  <RecipeStepText component="body1" data-testid={`recipe-step-text-${recipeStepIndex}`}>
                     {recipeStep}
                   </RecipeStepText>
                 </StepsGridWrapper>
