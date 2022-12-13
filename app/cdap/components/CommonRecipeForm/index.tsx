@@ -52,12 +52,9 @@ const RecipeNameTextFieldStyle = styled(TextField)`
   .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border: 1px solid #000000;
   }
-  ::placeholder {
-    color: #757575;
-  }
-  input {
-    ::placeholder {
+  input::placeholder {
       color: #757575;
+      opacity: 1;
     }
   }
 `;
