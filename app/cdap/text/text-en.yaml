@@ -3472,6 +3472,8 @@ features:
           viewAll: View All
         connectorTypes:
           title: Start data exploration
+        savedRecipeList:
+          title: Saved recipes 
         workspaces:
           title: Continue ongoing data explorations, pick up where you left off
     ImportData:

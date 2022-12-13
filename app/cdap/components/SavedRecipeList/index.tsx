@@ -14,8 +14,7 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -25,120 +24,36 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
-import EditRecipe from 'components/EditRecipe';
-import Snackbar from 'components/Snackbar';
 import T from 'i18n-react';
-import useSnackbar from 'components/Snackbar/useSnackbar';
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
-export default function BasicTable() {
+export default function({setLoading}) {
   const { dataprep } = DataPrepStore.getState();
   const { recipeList } = dataprep;
-  const classes = useStyles();
-  const [showEditFormPanel, setShowEditFormPanel] = useState<boolean>(false);
-  const [editRecipeData, setEditRecipeData] = useState({
-    recipeName: '',
-    description: '',
-    directives: [],
-    recipeId: undefined,
-  });
-  const [snackbarState, setSnackbar] = useSnackbar();
-  const [isNameError, setIsNameError] = useState(false);
-  const recipe_steps = ['uppercase: body1', 'titlecase: body2'];
 
   useEffect(() => {
     const params = {
       context: getCurrentNamespace(),
     };
+    getRecipeList(params)
+  }, []);
+
+  const getRecipeList = (params) => {
+    setLoading(true)
     MyDataPrepApi.getRecipeList(params).subscribe((res) => {
       DataPrepStore.dispatch({
         type: DataPrepActions.setRecipeList,
         payload: res.values,
       });
+      setLoading(false)
     });
-  }, []);
-
-  useEffect(() => {
-    if (snackbarState.open) {
-      setTimeout(() => {
-        setSnackbar({
-          open: false,
-          isSuccess: false,
-          message: ``,
-        });
-      }, 5000);
-    }
-  }, [snackbarState]);
-
-  const onCloseClick = () => {
-    setShowEditFormPanel(false);
-    setEditRecipeData({
-      recipeName: '',
-      description: '',
-      directives: [],
-      recipeId: undefined,
-    });
-  };
-
-  const onRecipeFormCancel = () => {
-    setShowEditFormPanel(false);
-    setIsNameError(false);
-  };
-
-  const onRecipeDataSave = (data) => {
-    const params = {
-      context: getCurrentNamespace(),
-      recipe_id: editRecipeData.recipeId.recipeId,
-    };
-    const payload = {
-      name: data.recipeName,
-      description: data.description,
-    };
-    MyDataPrepApi.updateRecipe(params, payload).subscribe(
-      (res) => {
-        setSnackbar({
-          open: true,
-          isSuccess: true,
-          message: `steps successfully saved/updated as a recipe!`,
-        });
-        setIsNameError(false);
-        setShowEditFormPanel(false);
-      },
-      (err) => {
-        if (err.response.message) {
-          setIsNameError(err);
-        } else {
-          setSnackbar({
-            open: true,
-            isSuccess: false,
-            message: T.translate('features.WranglerNewUI.RecipeForm.labels.errorMessage'),
-          });
-          setShowEditFormPanel(true);
-        }
-      }
-    );
-  };
-
-  const onEdit = (row) => {
-    recipeList?.map((i) => {
-      if (i.recipeId.recipeId === row.recipeId.recipeId) {
-        setEditRecipeData(i);
-        setShowEditFormPanel(true);
-      }
-    });
-  };
+  }
 
   return (
     <>
       <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
@@ -146,8 +61,8 @@ export default function BasicTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {recipeList?.map((row) => (
-              <TableRow key={row.recipeId} onClick={() => onEdit(row)}>
+            {recipeList.map((row) => (
+              <TableRow key={row.recipeId}>
                 <TableCell component="th" scope="row">
                   {row.recipeName}
                 </TableCell>
@@ -157,20 +72,6 @@ export default function BasicTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      {showEditFormPanel && (
-        <EditRecipe
-          openDrawer={showEditFormPanel}
-          headingText={T.translate('features.WranglerNewUI.RecipeForm.labels.editFormTitle')}
-          onCloseClick={onCloseClick}
-          onCancel={onRecipeFormCancel}
-          onRecipeDataSave={onRecipeDataSave}
-          isNameError={isNameError}
-          setIsNameError={setIsNameError}
-          snackbarState={snackbarState}
-          recipeData={editRecipeData}
-          setSnackbar={(value) => setSnackbar(() => value)}
-        />
-      )}
     </>
   );
 }

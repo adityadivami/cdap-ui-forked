@@ -26,6 +26,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExploration';
+import SavedRecipeList from 'components/SavedRecipeList';
 
 export default function() {
   const classes = useStyles();
@@ -75,6 +76,15 @@ export default function() {
           </Box>
         </Box>
         <OngoingDataExploration />
+        <Box className={classes.headerTitle}>
+          <WrangleHomeTitle
+            title={T.translate('features.WranglerNewUI.HomePage.labels.savedRecipeList.title')}
+          />
+          <Box className={classes.viewMore}>
+            {T.translate('features.WranglerNewUI.HomePage.labels.common.viewAll')}
+          </Box>
+        </Box>
+        <SavedRecipeList setLoading={setLoading}/>
       </Box>
     </Box>
   );
