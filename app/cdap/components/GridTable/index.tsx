@@ -483,13 +483,6 @@ export default function GridTable() {
                 isSuccess: false,
               },
             });
-            dispatch({
-              type: IGridTableActions.SNACKBAR_DATA,
-              payload: {
-                description: '',
-                isSuccess: false,
-              },
-            });
           }}
           open={snackbarIsOpen}
           message={snackbarData.description}
