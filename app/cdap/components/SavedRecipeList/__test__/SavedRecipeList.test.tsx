@@ -208,55 +208,29 @@ describe('Test SavedRecipeList Component', () => {
     };
   });
 
-  beforeEach(() => {
-    render(<SavedRecipeList setLoading={jest.fn()} />);
-  });
-
-  it('should check if the recipe item name is as expected', () => {
-    const recipeNameElement = screen.getByTestId(/recipe-name-0/i);
-    expect(recipeNameElement).toBeInTheDocument();
-    expect(recipeNameElement).toHaveTextContent('recipe501');
-  });
-
-  it('should check if the recipe item count is as expected', () => {
-    const recipeCountDateElement = screen.getByTestId(/recipe-count-0/i);
-    expect(recipeCountDateElement).toBeInTheDocument();
-    expect(recipeCountDateElement).toHaveTextContent('4');
-  });
-
-  it('should check if the recipe item description is as expected', () => {
-    const recipeDescriptionElement = screen.getByTestId(/recipe-description-0/i);
-    expect(recipeDescriptionElement).toBeInTheDocument();
-    expect(recipeDescriptionElement).toHaveTextContent('desc401');
-  });
-
-  it('should check if the recipe item date is as expected', () => {
-    const recipeSerialNumberElement = screen.getByTestId(/recipe-date-0/i);
-    expect(recipeSerialNumberElement).toBeInTheDocument();
-    expect(recipeSerialNumberElement).toHaveTextContent(
-      `${dateFormatting(recipeDetailsMockData.updatedTimeMillis)}`
-    );
-  });
-
   it('should check if the recipe item name head is as expected', () => {
+    render(<SavedRecipeList setLoading={jest.fn()} />);
     const recipeNameElement = screen.getByTestId(/recipe-name-head/i);
     expect(recipeNameElement).toBeInTheDocument();
     expect(recipeNameElement).toHaveTextContent(`${T.translate(`${PREFIX}.recipeName`)}`);
   });
 
   it('should check if the recipe item count head is as expected', () => {
+    render(<SavedRecipeList setLoading={jest.fn()} />);
     const recipeCountDateElement = screen.getByTestId(/recipe-steps-head/i);
     expect(recipeCountDateElement).toBeInTheDocument();
     expect(recipeCountDateElement).toHaveTextContent(`${T.translate(`${PREFIX}.steps`)}`);
   });
 
   it('should check if the recipe item description head is as expected', () => {
+    render(<SavedRecipeList setLoading={jest.fn()} />);
     const recipeDescriptionElement = screen.getByTestId(/recipe-description-head/i);
     expect(recipeDescriptionElement).toBeInTheDocument();
     expect(recipeDescriptionElement).toHaveTextContent(`${T.translate(`${PREFIX}.description`)}`);
   });
 
   it('should check if the recipe item date head is as expected', () => {
+    render(<SavedRecipeList setLoading={jest.fn()} />);
     const recipeSerialNumberElement = screen.getByTestId(/recipe-last-updated-head/i);
     expect(recipeSerialNumberElement).toBeInTheDocument();
     expect(recipeSerialNumberElement).toHaveTextContent(`${T.translate(`${PREFIX}.lastUpdated`)}`);
