@@ -47,7 +47,7 @@ const StyledForm = styled.form`
   padding-left: 20px;
 `;
 
-const RecipeNameTextFieldStyle = styled(TextField)`
+const StyledRecipeNameTextField = styled(TextField)`
   width: 350px;
   .MuiOutlinedInput-input {
     padding: 12px 14px;
@@ -65,7 +65,7 @@ const RecipeNameTextFieldStyle = styled(TextField)`
   }
 `;
 
-const DescriptionTextAreaStyle = styled(TextareaAutosize)`
+const StyledDescriptionTextArea = styled(TextareaAutosize)`
   width: 350px;
   font-size: 14px;
   border-color: #e0e0e0;
@@ -86,30 +86,26 @@ const DescriptionTextAreaStyle = styled(TextareaAutosize)`
   }
 `;
 
-const CancelButtonStyle = styled(Button)`
+const StyledButton = styled(Button)`
   width: 162px;
   height: 36px;
-  margin-right: 20px;
+  text-transform: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
   letter-spacing: 0.15px;
-  color: #2196f3;
-  text-transform: none;
 `;
 
-const SaveButtonStyle = styled(Button)`
-  width: 162px;
-  height: 36px;
-  text-transform: none;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
+const StyledCancelButton = styled(StyledButton)`
+  margin-right: 20px;
+  color: #2196f3;
+`;
+
+const StyledSaveButton = styled(StyledButton)`
   background: #2196f3;
 `;
 
-const FormButtonWrapperStyle = styled.div`
+const StyledFormButtonWrapper = styled.div`
   float: right;
   padding-top: 63px;
   padding-bottom: 20px;
@@ -171,7 +167,7 @@ export default function({
           <StyledLabel data-testid="recipe-name-label">
             {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
           </StyledLabel>
-          <RecipeNameTextFieldStyle
+          <StyledRecipeNameTextField
             required
             variant="outlined"
             defaultValue={recipeData.recipeName}
@@ -195,7 +191,7 @@ export default function({
             <NormalLabel data-testid="recipe-description-label">
               {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
             </NormalLabel>
-            <DescriptionTextAreaStyle
+            <StyledDescriptionTextArea
               required
               aria-label="minimum height"
               minRows={3}
@@ -210,16 +206,16 @@ export default function({
             />
           </FormControl>
         </FormFieldWrapper>
-        <FormButtonWrapperStyle>
-          <CancelButtonStyle
+        <StyledFormButtonWrapper>
+          <StyledCancelButton
             variant="outlined"
             color="primary"
             onClick={() => onCancel()}
             data-testid="common-recipe-cancel-button"
           >
             {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
-          </CancelButtonStyle>
-          <SaveButtonStyle
+          </StyledCancelButton>
+          <StyledSaveButton
             variant="contained"
             type="submit"
             color="primary"
@@ -227,8 +223,8 @@ export default function({
             disabled={isSaveDisable}
           >
             {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
-          </SaveButtonStyle>
-        </FormButtonWrapperStyle>
+          </StyledSaveButton>
+        </StyledFormButtonWrapper>
       </StyledForm>
     </>
   );
