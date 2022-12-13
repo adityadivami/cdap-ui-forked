@@ -18,6 +18,7 @@ import { Table, TableBody, TableHead, TableRow, Button } from '@material-ui/core
 import Box from '@material-ui/core/Box';
 import { useHistory } from 'react-router-dom';
 import MyDataPrepApi from 'api/dataprep';
+import Breadcrumb from 'components/Breadcrumb';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
@@ -27,7 +28,6 @@ import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import T from 'i18n-react';
 import React, { useEffect, useState, useReducer } from 'react';
-import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
 import Snackbar from 'components/Snackbar';
@@ -49,6 +49,8 @@ import { reducer, initialGridTableState } from 'components/GridTable/reducer';
 import styled from 'styled-components';
 import { IGridTableActions } from 'components/GridTable/reducer';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
+import { useLocation, useParams } from 'react-router';
 
 const TableWrapper = styled(Box)`
   height: calc(100vh - 193px);
@@ -75,12 +77,15 @@ export default function GridTable() {
   const history = useHistory();
   const [gridTableState, dispatch] = useReducer(reducer, initialGridTableState);
   const { tableMetaInfo } = gridTableState;
+  const location = useLocation();
 
+  const [workspaceName, setWorkspaceName] = useState('');
   const [loading, setLoading] = useState(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
   const [rowsDataList, setRowsDataList] = useState([]);
   const [gridData, setGridData] = useState({} as IExecuteAPIResponse);
   const [missingDataList, setMissingDataList] = useState([]);
+  const [showGridTable, setShowGridTable] = useState(false);
   const [invalidCountArray, setInvalidCountArray] = useState([
     {
       label: 'Invalid',
@@ -91,7 +96,7 @@ export default function GridTable() {
   const [showRecipePanel, setShowRecipePanel] = useState<boolean>(false);
   const [showRecipeSaveForm, setShowRecipeSaveForm] = useState<boolean>(false);
   const [isNameError, setIsNameError] = useState(false);
-  const recipe_steps = [
+  const recipeSteps = [
     'uppercase: body1',
     'titlecase: body2',
     'uppercase: body3',
@@ -124,6 +129,7 @@ export default function GridTable() {
       .pipe(
         flatMap((res: IValues) => {
           const { dataprep } = DataPrepStore.getState();
+          setWorkspaceName(res?.workspaceName);
           if (dataprep.workspaceId !== workspaceId) {
             return;
           }
@@ -175,7 +181,7 @@ export default function GridTable() {
       context: params.namespace,
       workspaceId: params.wid,
     };
-    getWorkSpaceData(payload, wid);
+    getWorkSpaceData(payload as IParams, wid as string);
   }, [wid]);
 
   // ------------@createHeadersData Function is used for creating data of Table Header
@@ -185,7 +191,7 @@ export default function GridTable() {
         return {
           name: eachColumnName,
           label: eachColumnName,
-          type: [columnTypesList[eachColumnName]],
+          type: [columnTypesList[eachColumnName]] as string[],
         };
       });
     }
@@ -223,11 +229,12 @@ export default function GridTable() {
           }
           if (mostFrequentItem < mostFrequentItemCount) {
             mostFrequentItem = mostFrequentItemCount;
-            mostFrequentItemValue = item;
+            mostFrequentItemValue = item as string;
           }
         });
         mostFrequentItemCount = 0;
-        mostFrequentItemValue = mostFrequentItemValue === '' ? item : mostFrequentItemValue;
+        mostFrequentItemValue =
+          mostFrequentItemValue === '' ? (item as string) : mostFrequentItemValue;
       });
     }
     mostFrequentDataItem.name = mostFrequentItemValue;
@@ -297,6 +304,7 @@ export default function GridTable() {
 
   useEffect(() => {
     getGridTableData();
+    setShowGridTable(Array.isArray(gridData?.headers) && gridData?.headers.length !== 0);
   }, [gridData]);
 
   const saveRecipeData = (data) => {
@@ -306,7 +314,7 @@ export default function GridTable() {
     const requestBody = {
       recipeName: data.recipeName,
       description: data.description,
-      directives: recipe_steps,
+      directives: recipeSteps,
     };
     MyDataPrepApi.createRecipe(params, requestBody).subscribe(
       () => {
@@ -314,7 +322,9 @@ export default function GridTable() {
         setSnackbar({
           open: true,
           isSuccess: true,
-          message: T.translate('features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'),
+          message: `${recipeSteps.length} ${T.translate(
+            'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
+          )}`,
         });
         setShowRecipeSaveForm(false);
       },
@@ -345,7 +355,7 @@ export default function GridTable() {
 
   return (
     <Box data-testid="grid-table-container">
-      <BreadCrumb datasetName={wid} />
+      <BreadCrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
       {/* here this button is used only for demo purpose will be removed later */}
       <Button
         onClick={() => history.push(`/ns/default/saved-recipe-list`)}
@@ -356,7 +366,13 @@ export default function GridTable() {
         Saved Recipe List
       </Button>
       <TablePanelContainer>
-        {Array.isArray(gridData?.headers) && gridData?.headers.length > 0 ? (
+        {!showGridTable && (
+          <NoRecordScreen
+            title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
+            subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
+          />
+        )}
+        {showGridTable && (
           <TableWrapper>
             <Table aria-label="simple table">
               <TableHead>
@@ -401,11 +417,6 @@ export default function GridTable() {
               </TableBody>
             </Table>
           </TableWrapper>
-        ) : (
-          <NoRecordScreen
-            title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
-            subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
-          />
         )}
         {showRecipePanel && (
           <RecipeStepPanel>

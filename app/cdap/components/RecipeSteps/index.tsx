@@ -68,7 +68,7 @@ export default function({
   isNameError,
   setIsNameError,
 }: IRecipeStepsProps) {
-  const recipe_steps = [
+  const recipeSteps = [
     'uppercase: body1',
     'titlecase: body2',
     'uppercase: body3',
@@ -79,7 +79,7 @@ export default function({
     setShowRecipePanel(false);
   };
 
-  if (!(Array.isArray(recipe_steps) && recipe_steps.length)) {
+  if (!(Array.isArray(recipeSteps) && recipeSteps.length)) {
     return <RecipeStepsEmptyScreen />;
   }
 
@@ -96,12 +96,13 @@ export default function({
         showRecipeSaveForm={showRecipeSaveForm}
       >
         <RecipeStepsTableBodyWrapper>
-          <RecipeStepsTableComponent recipeSteps={recipe_steps} />
+          <RecipeStepsTableComponent recipeSteps={recipeSteps} />
         </RecipeStepsTableBodyWrapper>
         <Divider />
         {showRecipeSaveForm && (
           <>
             <RecipeStepInfo component="div" data-testid="recipe-step-info">
+              {recipeSteps.length}
               {T.translate('features.WranglerNewUI.RecipeForm.labels.recipeFormInfo')}
             </RecipeStepInfo>
             <CreateRecipe

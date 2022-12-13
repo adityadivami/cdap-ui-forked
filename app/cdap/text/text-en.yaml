@@ -2803,7 +2803,6 @@ features:
       triggerNameExists: "Trigger Name already exists"
       triggerNameRequired: "Trigger Name is required"
       triggerNameLengthLimit: "Trigger Name should not be longer than 50 characters"
-      emptyCompositeTriggerError: "Please select upstream pipelines for this trigger"
       selectPipelineInstruction: "Select the pipelines you want to add to the trigger: "
       triggerAndType: "Wait for all events (AND)"
       triggerOrType: "Trigger on any selected event (OR)"
@@ -3438,10 +3437,14 @@ features:
     Breadcrumb:
       labels:
         connectionsList: Data Sources
-        wranglerHome: Home
+        loadToGrid: Wrangle
+        wrangleHome: Home
+        createPipeline: Create a Pipeline
       params:
         connectionsList: datasources
-        wranglerHome: home
+        wrangleHome: home
+      ariaLabels:
+        breadcrumb: breadcrumb
     common:
       and: and
     ConnectionsList:
@@ -3501,7 +3504,7 @@ features:
         saveRecipe: Save a recipe
         namePlaceholder: Input a name to identify it later
         descriptionPlaceholder: Input a description to identify it later
-        recipeFormInfo: 2 steps will be saved as a recpe. You can access this saved recipe from the recipes section on Wrangler Home page.
+        recipeFormInfo: steps will be saved as a recpe. You can access this saved recipe from the recipes section on Wrangler Home page.
         recipeSaveSuccessMessage: Steps successfully saved as a recipe!
         errorMessage: Something went wrong!
 ...
