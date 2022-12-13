@@ -14,14 +14,23 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Table, TableBody, TableHead, TableRow, Button } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
+import { useHistory } from 'react-router-dom';
 import MyDataPrepApi from 'api/dataprep';
-import Breadcrumb from 'components/Breadcrumb';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import FooterPanel from 'components/FooterPanel';
+import NoRecordScreen from 'components/NoRecordScreen';
+import LoadingSVG from 'components/shared/LoadingSVG';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
+import T from 'i18n-react';
+import React, { useEffect, useState, useReducer } from 'react';
+import { flatMap } from 'rxjs/operators';
+import { objectQuery } from 'services/helpers';
+import Snackbar from 'components/Snackbar';
+import useSnackbar from 'components/Snackbar/useSnackbar';
 import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
@@ -31,28 +40,43 @@ import {
   IHeaderNamesList,
   IParams,
   IRecords,
+  IType,
 } from 'components/GridTable/types';
+import { reducer, initialGridTableState } from 'components/GridTable/reducer';
+import styled from 'styled-components';
+import { IGridTableActions } from 'components/GridTable/reducer';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
-import NoRecordScreen from 'components/NoRecordScreen';
-import LoadingSVG from 'components/shared/LoadingSVG';
-import Snackbar from 'components/Snackbar';
-import useSnackbar from 'components/Snackbar/useSnackbar';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
-import T from 'i18n-react';
-import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import { flatMap } from 'rxjs/operators';
-import { objectQuery } from 'services/helpers';
+import BreadCrumb from 'components/Breadcrumb';
+import RecipeSteps from 'components/RecipeSteps';
+
+const TableWrapper = styled(Box)`
+  height: calc(100vh - 193px);
+  overflow-y: auto;
+`;
+
+const TablePanelContainer = styled(Box)`
+  display: flex;
+  font-family: Roboto;
+`;
+
+const RecipeStepPanel = styled(Box)`
+  max-height: calc(100vh - 190px);
+  box-shadow: -3px 4px 15px rgba(68, 132, 245, 0.25);
+`;
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
+
+  const { dataprep } = DataPrepStore.getState();
+  const { recipe } = dataprep;
+  const history = useHistory();
+  const [gridTableState, dispatch] = useReducer(reducer, initialGridTableState);
+  const { tableMetaInfo } = gridTableState;
   const location = useLocation();
-  const [tableMetaInfo, setTableMetaInfo] = useState({
-    columnCount: 0,
-    rowCount: 0,
-  });
 
   const [workspaceName, setWorkspaceName] = useState('');
   const [loading, setLoading] = useState(false);
@@ -68,6 +92,27 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
+  const [showRecipePanel, setShowRecipePanel] = useState<boolean>(false);
+  const [showRecipeSaveForm, setShowRecipeSaveForm] = useState<boolean>(false);
+  const [isNameError, setIsNameError] = useState(false);
+  const recipeSteps = [
+    'uppercase: body1',
+    'titlecase: body2',
+    'uppercase: body3',
+    'titlecase: body4',
+  ];
+
+  useEffect(() => {
+    if (snackbarState.open) {
+      setTimeout(() => {
+        setSnackbar({
+          open: false,
+          isSuccess: false,
+          message: ``,
+        });
+      }, 5000);
+    }
+  }, [snackbarState]);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -126,13 +171,6 @@ export default function GridTable() {
         });
         setLoading(false);
         setGridData(response);
-        setSnackbar({
-          open: true,
-          isSuccess: true,
-          message: T.translate(
-            `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
-          ).toString(),
-        });
       });
   };
 
@@ -177,7 +215,7 @@ export default function GridTable() {
     const valueOfKey = gridData.values.map((el) => el[key]);
     let mostFrequentItem: number = 1;
     let mostFrequentItemCount: number = 0;
-    let mostFrequentItemValue: string = '';
+    let mostFrequentItemValue: string | boolean | Record<string, IType> = '';
     const mostFrequentDataItem = {
       name: '',
       count: 0,
@@ -249,12 +287,18 @@ export default function GridTable() {
         const { body, ...rest } = eachRow;
         return rest;
       });
+    dispatch({
+      type: IGridTableActions.TABLE_META_INFO,
+      payload: {
+        columnCount: rawData?.headers?.length,
+        rowCount: rawData?.values?.length - 1,
+      },
+    }),
+      setRowsDataList(rowData);
+  };
 
-    setTableMetaInfo({
-      columnCount: rawData.headers?.length,
-      rowCount: rawData.values?.length - 1,
-    });
-    setRowsDataList(rowData);
+  const onShowRecipePanelButtonClick = () => {
+    setShowRecipePanel((prev) => !prev);
   };
 
   useEffect(() => {
@@ -262,66 +306,138 @@ export default function GridTable() {
     setShowGridTable(Array.isArray(gridData?.headers) && gridData?.headers.length !== 0);
   }, [gridData]);
 
+  const saveRecipeData = (data) => {
+    const params = {
+      context: getCurrentNamespace(),
+    };
+    const requestBody = {
+      recipeName: data.recipeName,
+      description: data.description,
+      directives: recipeSteps,
+    };
+    MyDataPrepApi.createRecipe(params, requestBody).subscribe(
+      () => {
+        setIsNameError(false);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: `${recipeSteps.length} ${T.translate(
+            'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
+          )}`,
+        });
+        setShowRecipeSaveForm(false);
+      },
+      (err) => {
+        if (err.response.message) {
+          setIsNameError(true);
+        } else {
+          setSnackbar({
+            open: true,
+            isSuccess: false,
+            message: T.translate('features.WranglerNewUI.RecipeForm.labels.errorMessage'),
+          });
+          setShowRecipeSaveForm(false);
+        }
+      }
+    );
+  };
+
+  const onRecipeDataSave = (data) => {
+    setIsNameError(false);
+    saveRecipeData(data);
+  };
+
+  const onRecipeFormCancel = () => {
+    setShowRecipeSaveForm(false);
+    setIsNameError(false);
+  };
+
   return (
     <Box data-testid="grid-table-container">
-      <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
-      {!showGridTable && (
-        <NoRecordScreen
-          title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
-          subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
-        />
-      )}
-      {showGridTable && (
-        <Table aria-label="simple table" className="test">
-          <TableHead>
-            <TableRow>
-              {headersNamesList?.length &&
-                headersNamesList.map((eachHeader) => (
-                  <GridHeaderCell
-                    label={eachHeader.label}
-                    types={eachHeader.type}
-                    key={eachHeader.name}
-                  />
-                ))}
-            </TableRow>
-            <TableRow>
-              {missingDataList?.length &&
-                headersNamesList.length &&
-                headersNamesList.map((each, index) => {
-                  return missingDataList.map((item, itemIndex) => {
-                    if (item.name === each.name) {
-                      return <GridKPICell metricData={item} key={item.name} />;
-                    }
-                  });
-                })}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rowsDataList?.length &&
-              rowsDataList.map((eachRow, rowIndex) => {
-                return (
-                  <TableRow key={`row-${rowIndex}`}>
-                    {headersNamesList.map((eachKey, eachIndex) => {
-                      return (
-                        <GridTextCell
-                          cellValue={eachRow[eachKey.name] || '--'}
-                          key={`${eachKey.name}-${eachIndex}`}
-                        />
-                      );
+      <BreadCrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
+      {/* here this button is used only for demo purpose will be removed later */}
+      <Button
+        onClick={() => history.push(`/ns/default/saved-recipe-list`)}
+        data-tsetid="recipe-form-edit-button"
+        variant="outlined"
+        color="primary"
+      >
+        Saved Recipe List
+      </Button>
+      <TablePanelContainer>
+        {!showGridTable && (
+          <NoRecordScreen
+            title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
+            subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
+          />
+        )}
+        {showGridTable && (
+          <TableWrapper>
+            <Table aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  {headersNamesList?.length &&
+                    headersNamesList.map((eachHeader) => (
+                      <GridHeaderCell
+                        label={eachHeader.label}
+                        types={eachHeader.type}
+                        key={eachHeader.name}
+                      />
+                    ))}
+                </TableRow>
+                <TableRow>
+                  {missingDataList?.length &&
+                    headersNamesList.length &&
+                    headersNamesList.map((each, index) => {
+                      return missingDataList.map((item, itemIndex) => {
+                        if (item.name === each.name) {
+                          return <GridKPICell metricData={item} key={item.name} />;
+                        }
+                      });
                     })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      )}
-      <FooterPanel recipeStepsCount={0} gridMetaInfo={tableMetaInfo} />
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rowsDataList?.length &&
+                  rowsDataList.map((eachRow, rowIndex) => {
+                    return (
+                      <TableRow key={`row-${rowIndex}`}>
+                        {headersNamesList.map((eachKey, eachIndex) => {
+                          return (
+                            <GridTextCell
+                              cellValue={eachRow[eachKey.name] || '--'}
+                              key={`${eachKey.name}-${eachIndex}`}
+                            />
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableWrapper>
+        )}
+        {showRecipePanel && (
+          <RecipeStepPanel>
+            <RecipeSteps
+              setShowRecipePanel={setShowRecipePanel}
+              setShowRecipeSaveForm={setShowRecipeSaveForm}
+              showRecipeSaveForm={showRecipeSaveForm}
+              recipeData={recipe}
+              onRecipeDataSave={onRecipeDataSave}
+              onCancel={onRecipeFormCancel}
+              isNameError={isNameError}
+              setIsNameError={setIsNameError}
+            />
+          </RecipeStepPanel>
+        )}
+      </TablePanelContainer>
       {loading && (
         <div className={classes.loadingContainer}>
           <LoadingSVG />
         </div>
       )}
-      <Snackbar // TODO: This snackbar is just for the feature demo purpose. Will be removed in the further development.
+      <Snackbar
         handleClose={() =>
           setSnackbar(() => ({
             open: false,
@@ -330,6 +446,11 @@ export default function GridTable() {
         open={snackbarState.open}
         message={snackbarState.message}
         isSuccess={snackbarState.isSuccess}
+      />
+      <FooterPanel
+        recipeStepsCount={0}
+        gridMetaInfo={tableMetaInfo}
+        onRecipePanelButtonClick={onShowRecipePanelButtonClick}
       />
     </Box>
   );
