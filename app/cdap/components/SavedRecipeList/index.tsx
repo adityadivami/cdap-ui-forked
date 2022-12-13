@@ -27,8 +27,55 @@ import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import T from 'i18n-react';
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import styled from 'styled-components';
+import { Box, Typography } from '@material-ui/core';
+import { dateFormatting } from 'components/SavedRecipeList/utils';
+import { grey } from '@material-ui/core/colors';
 
-export default function({setLoading}) {
+const Wrapper = styled(Box)`
+`;
+
+const GridWrapper = styled(Box)`
+  display: grid;
+  grid-template-columns: 25% 15% 40% 20%;
+  align-items: center;
+  padding: 20px 10px;
+`;
+
+const GridHeadWrapper = styled(GridWrapper)`
+  padding: 10px;
+`;
+
+const HeadDivider = styled(Box)`
+width: 100%;
+opacity: 0.6;
+border-bottom: 1px solid ${grey[700]};
+`;
+
+const CellDivider = styled(Box)`
+width: 100%;
+border-bottom: 1px solid ${grey[300]};
+`;
+
+const GridHead = styled(Typography)`
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: ${grey[700]};
+`;
+
+const GridCellText = styled(Typography)`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: ${grey[700]};
+`;
+
+const PREFIX = 'features.WranglerNewUI.SavedRecipeList';
+
+export default function ({ setLoading }) {
   const { dataprep } = DataPrepStore.getState();
   const { recipeList } = dataprep;
 
@@ -51,27 +98,24 @@ export default function({setLoading}) {
   }
 
   return (
-    <>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Description</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {recipeList.map((row) => (
-              <TableRow key={row.recipeId}>
-                <TableCell component="th" scope="row">
-                  {row.recipeName}
-                </TableCell>
-                <TableCell align="right">{row.description}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
+    <Wrapper data-testid="saved-recipe-list-wrapper">
+      <GridHeadWrapper>
+        <GridHead component="body1" data-testid="recipe-name-head">{T.translate(`${PREFIX}.recipeName`)}</GridHead>
+        <GridHead component="body1" data-testid="recipe-steps-head">{T.translate(`${PREFIX}.steps`)}</GridHead>
+        <GridHead component="body1" data-testid="recipe-description-head">{T.translate(`${PREFIX}.description`)}</GridHead>
+        <GridHead component="body1" data-testid="recipe-last-updated-head">{T.translate(`${PREFIX}.lastUpdated`)}</GridHead>
+      </GridHeadWrapper>
+      <HeadDivider/>
+      {recipeList.reverse().slice(0, 2).map((recipeItem, recipeIndex) => (<>
+        <GridWrapper key={recipeItem.recipeId}>
+          <GridCellText component="body1" data-testid={`recipe-name-${recipeIndex}`}>{recipeItem.recipeName}</GridCellText>
+          <GridCellText component="body1" data-testid={`recipe-count-${recipeIndex}`}>{recipeItem.recipeStepsCount}</GridCellText>
+          <GridCellText component="body1" data-testid={`recipe-description-${recipeIndex}`}>{recipeItem.description}</GridCellText>
+          <GridCellText component="body1" data-testid={`recipe-date-${recipeIndex}`}>{dateFormatting(recipeItem.updatedTimeMillis)}</GridCellText>
+        </GridWrapper>
+        {(recipeIndex !== recipeItem.length - 1) && <CellDivider/>}
+        </>
+      ))}
+    </Wrapper>
   );
 }
