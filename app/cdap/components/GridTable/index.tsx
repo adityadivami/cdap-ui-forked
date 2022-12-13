@@ -14,10 +14,11 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Button, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import Breadcrumb from 'components/Breadcrumb';
+import CreateRecipe from 'components/CreateRecipe';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
@@ -34,6 +35,7 @@ import {
 } from 'components/GridTable/types';
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen';
+import { setStateFromCron } from 'components/PipelineScheduler/Store/ActionCreator';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
@@ -68,6 +70,7 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
+  const [recipeFormOpen, setRecipeFormOpen] = useState(false);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -262,9 +265,16 @@ export default function GridTable() {
     setShowGridTable(Array.isArray(gridData?.headers) && gridData?.headers.length !== 0);
   }, [gridData]);
 
+  const onCreateRecipeButtonClick = () => {
+    setRecipeFormOpen(true);
+  };
+
   return (
     <Box data-testid="grid-table-container">
       <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
+      <Button variant="contained" color="primary" onClick={() => onCreateRecipeButtonClick()}>
+        Create Recipe
+      </Button>
       {!showGridTable && (
         <NoRecordScreen
           title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
@@ -331,6 +341,13 @@ export default function GridTable() {
         message={snackbarState.message}
         isSuccess={snackbarState.isSuccess}
       />
+      {recipeFormOpen && (
+        <CreateRecipe
+          openDrawer={true}
+          setRecipeFormOpen={setRecipeFormOpen}
+          setSnackbar={setSnackbar}
+        />
+      )}
     </Box>
   );
 }
