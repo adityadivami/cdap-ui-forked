@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function BasicTable() {
+export default function() {
   const { dataprep } = DataPrepStore.getState();
   const { recipeList } = dataprep;
   const classes = useStyles();
@@ -51,7 +51,6 @@ export default function BasicTable() {
   });
   const [snackbarState, setSnackbar] = useSnackbar();
   const [isNameError, setIsNameError] = useState(false);
-  const recipe_steps = ['uppercase: body1', 'titlecase: body2'];
 
   useEffect(() => {
     const params = {
@@ -127,9 +126,9 @@ export default function BasicTable() {
   };
 
   const onEdit = (row) => {
-    recipeList?.map((i) => {
-      if (i.recipeId.recipeId === row.recipeId.recipeId) {
-        setEditRecipeData(i);
+    recipeList?.map((eachRecipe) => {
+      if (eachRecipe.recipeId.recipeId === row.recipeId.recipeId) {
+        setEditRecipeData(eachRecipe);
         setShowEditFormPanel(true);
       }
     });

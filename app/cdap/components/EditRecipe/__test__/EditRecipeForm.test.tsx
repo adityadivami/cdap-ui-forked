@@ -20,7 +20,7 @@ import EditRecipe from 'components/EditRecipe';
 import { ISnackbar } from 'components/Snackbar';
 
 describe('Test Create Recipe Component', () => {
-  const mockSetSnackbar = jest.fn()
+  const mockSetSnackbar = jest.fn();
   beforeEach(() => {
     render(
       <EditRecipe
@@ -48,8 +48,8 @@ describe('Test Create Recipe Component', () => {
   });
 
   it('should trigger handleClose function', () => {
-    const closeIconElement = screen.getByTestId(/snackbar-close-icon/i)
-    fireEvent.click(closeIconElement)
-    expect(mockSetSnackbar).toBeCalled()
+    const closeIconElement = screen.getByTestId(/snackbar-close-icon/i);
+    fireEvent.click(closeIconElement);
+    expect(mockSetSnackbar).toBeCalled();
   });
 });

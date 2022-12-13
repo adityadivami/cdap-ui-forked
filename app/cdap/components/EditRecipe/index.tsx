@@ -19,7 +19,7 @@ import React from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from './DrawerWidgetHeading';
 import CommonRecipeForm from 'components/CommonRecipeForm';
-import { IRecipeData } from 'components/CommonRecipeForm';
+import { IRecipeData } from 'components/CommonRecipeForm/types';
 import styled from 'styled-components';
 import Snackbar, { ISnackbar } from 'components/Snackbar';
 

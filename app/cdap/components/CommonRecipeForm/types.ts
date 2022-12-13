@@ -14,24 +14,30 @@
  * the License.
  */
 
-import CommonRecipeForm from 'components/CommonRecipeForm';
-import React from 'react';
-import { ICommonRecipeFormProps } from 'components/CommonRecipeForm/types';
+export interface ICommonRecipeFormProps {
+  recipeData: IRecipeData;
+  onRecipeDataSave: (data: IRecipeData) => void;
+  onCancel: () => void;
+  isNameError: boolean;
+  setIsNameError: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export default function({
-  recipeData,
-  onRecipeDataSave,
-  onCancel,
-  isNameError,
-  setIsNameError,
-}: ICommonRecipeFormProps) {
-  return (
-    <CommonRecipeForm
-      recipeData={recipeData}
-      onRecipeDataSave={onRecipeDataSave}
-      onCancel={onCancel}
-      isNameError={isNameError}
-      setIsNameError={setIsNameError}
-    />
-  );
+export interface IRecipeData {
+  recipeName: string;
+  description: string;
+  directives: string[];
+  createdTimeMillis?: number;
+  recipeStepsCount?: number;
+  updatedTimeMillis?: number;
+  recipeId?: IRecipeId;
+}
+
+export interface IRecipeId {
+  recipeId: string;
+  namespace: INameSpace;
+}
+
+export interface INameSpace {
+  name: string;
+  generation: number;
 }

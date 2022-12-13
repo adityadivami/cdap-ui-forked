@@ -19,34 +19,7 @@ import { FormControl, TextField, Typography, Box, Button } from '@material-ui/co
 import styled from 'styled-components';
 import T from 'i18n-react';
 import { TextareaAutosize } from '@material-ui/core';
-
-export interface ICommonRecipeFormProps {
-  recipeData: IRecipeData;
-  onRecipeDataSave: (data: IRecipeData) => void;
-  onCancel: () => void;
-  isNameError: boolean;
-  setIsNameError: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface IRecipeData {
-  recipeName: string;
-  description: string;
-  directives: string[];
-  createdTimeMillis?: number;
-  recipeStepsCount?: number;
-  updatedTimeMillis?: number;
-  recipeId?: IRecipeId;
-}
-
-export interface IRecipeId {
-  recipeId: string;
-  namespace: INameSpace;
-}
-
-export interface INameSpace {
-  name: string;
-  generation: number;
-}
+import { ICommonRecipeFormProps, IRecipeData } from 'components/CommonRecipeForm/types';
 
 const FormFieldWrapper = styled(Box)`
   width: calc(100% - 60px);
@@ -131,15 +104,35 @@ export default function({
   setIsNameError,
 }: ICommonRecipeFormProps) {
   const LabelStyle = getLabelStyle(isNameError);
-  const [recipeFormData, setRecipeFormData] = useState({
+  const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
     description: '',
     directives: [],
   });
 
+  const [isSaveDisable, setIsSaveDisable] = useState<boolean>(true);
+
   useEffect(() => {
-    if (recipeFormData.recipeName && recipeFormData.description) {
+    if (isNameError) {
+      setIsSaveDisable(true);
+    }
+  }, [isNameError]);
+
+  useEffect(() => {
+    setRecipeFormData(recipeData);
+  }, [recipeData]);
+
+  useEffect(() => {
+    if (
+      recipeFormData.recipeName === '' ||
+      recipeFormData.description === '' ||
+      recipeFormData.recipeName.trim().length === 0 ||
+      recipeFormData.description.trim().length === 0
+    ) {
+      setIsSaveDisable(true);
+    } else {
       setIsNameError(false);
+      setIsSaveDisable(false);
     }
   }, [recipeFormData]);
 
@@ -167,7 +160,6 @@ export default function({
                 : ''
             }
             fullWidth
-            data-cy="secure-key-name"
             onChange={(event) =>
               setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value })
             }
@@ -180,7 +172,6 @@ export default function({
             <NormalLabelStyle data-testid="recipe-description-label">
               {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
             </NormalLabelStyle>
-
             <DescriptionTextAreaStyle
               required
               aria-label="minimum height"
@@ -190,7 +181,9 @@ export default function({
               onChange={(event) =>
                 setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
               }
-              placeholder="Input a description to identify it later"
+              placeholder={T.translate(
+                'features.WranglerNewUI.RecipeForm.labels.descriptionPlaceholder'
+              )}
             />
           </FormControl>
         </FormFieldWrapper>
@@ -208,7 +201,7 @@ export default function({
             type="submit"
             color="primary"
             data-testid="common-recipe-save-button"
-            disabled={isNameError}
+            disabled={isSaveDisable}
           >
             {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
           </SaveButtonStyle>
