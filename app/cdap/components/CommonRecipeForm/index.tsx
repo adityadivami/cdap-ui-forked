@@ -50,7 +50,7 @@ const FormStyle = styled.form`
 const RecipeNameTextFieldStyle = styled(TextField)`
   width: 350px;
   .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #000000;
   }
   ::placeholder {
     color: #757575;
@@ -70,10 +70,13 @@ const DescriptionTextAreaStyle = styled(TextareaAutosize)`
   padding: 18.5px 14px;
   :focus-visible {
     outline: unset !important;
-    border: 1px solid #e0e0e0;
+    border: 1px solid #000000;
   }
   ::placeholder {
     color: #757575;
+  }
+  :hover {
+    border: 1px solid #000000;
   }
 `;
 
@@ -126,8 +129,8 @@ export default function({
     if (
       recipeFormData.recipeName === '' ||
       recipeFormData.description === '' ||
-      recipeFormData.recipeName.trim().length === 0 ||
-      recipeFormData.description.trim().length === 0
+      recipeFormData.recipeName?.trim().length === 0 ||
+      recipeFormData.description?.trim().length === 0
     ) {
       setIsSaveDisable(true);
     } else {
