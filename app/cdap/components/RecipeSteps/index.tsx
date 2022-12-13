@@ -105,13 +105,13 @@ export default function({
               {recipeSteps.length}
               {T.translate('features.WranglerNewUI.RecipeForm.labels.recipeFormInfo')}
             </RecipeStepInfo>
-             <CommonRecipeForm
-      recipeData={recipeData}
-      onRecipeDataSave={onRecipeDataSave}
-      onCancel={onCancel}
-      isNameError={isNameError}
-      setIsNameError={setIsNameError}
-    />
+            <CommonRecipeForm
+              recipeData={recipeData}
+              onRecipeDataSave={onRecipeDataSave}
+              onCancel={onCancel}
+              isNameError={isNameError}
+              setIsNameError={setIsNameError}
+            />
           </>
         )}
       </RecipeStepWidget>

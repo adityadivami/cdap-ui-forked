@@ -355,15 +355,6 @@ export default function GridTable() {
   return (
     <Box data-testid="grid-table-container">
       <BreadCrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
-      {/* here this button is used only for demo purpose will be removed later */}
-      <Button
-        onClick={() => history.push(`/ns/default/saved-recipe-list`)}
-        data-tsetid="recipe-form-edit-button"
-        variant="outlined"
-        color="primary"
-      >
-        Saved Recipe List
-      </Button>
       <TablePanelContainer>
         {!showGridTable && (
           <NoRecordScreen
