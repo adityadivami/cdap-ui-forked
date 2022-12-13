@@ -38,9 +38,11 @@ interface IDrawerWidgetProps {
 
 const DrawerContainerStyle = styled(Container)`
   width: 460px;
+  height: calc(100vh - 225px);
   height: 100%;
   padding-left: 0px;
   padding-right: 0px;
+  overflow-y: scroll;
 `;
 
 const HeaderStyle = styled.header`

@@ -93,6 +93,8 @@ const SaveButtonStyle = styled(Button)`
 
 const FormButtonWrapperStyle = styled.div`
   float: right;
+  padding-top: 85px;
+  padding-bottom: 20px;
 `;
 
 const getLabelStyle = (isNameError) => {

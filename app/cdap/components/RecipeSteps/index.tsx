@@ -43,7 +43,6 @@ export interface IRecipeData {
 }
 
 const RecipeStepsTableBodyWrapper = styled(Container)`
-  max-height: calc(100% - 456px);
   padding: 0px;
 `;
 
