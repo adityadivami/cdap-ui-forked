@@ -67,6 +67,26 @@ export interface IConnectorsWithIcons {
   SVG: JSX.Element;
 }
 
+export interface IRecipeData {
+  recipeName: string;
+  description: string;
+  directives: string[];
+  createdTimeMillis?: number;
+  recipeStepsCount?: number;
+  updatedTimeMillis?: number;
+  recipeId?: IRecipeId;
+}
+
+export interface IRecipeId {
+  recipeId: string;
+  namespace: INameSpace;
+}
+
+export interface INameSpace {
+  name: string;
+  generation: number;
+}
+
 // TODO Replace 'any' types with concrete ones
 export interface IDataPrepState {
   initialized?: boolean;
@@ -89,6 +109,7 @@ export interface IDataPrepState {
   targetDataModel?: IDataModel;
   targetModel?: IModel;
   connectorsWithIcons?: any;
+  recipe: IRecipeData;
 }
 
 const defaultInitialState: IDataPrepState = {
@@ -115,6 +136,11 @@ const defaultInitialState: IDataPrepState = {
   targetDataModel: null,
   targetModel: null,
   connectorsWithIcons: [],
+  recipe: {
+    recipeName: null,
+    description: '',
+    directives: [],
+  },
 };
 
 const errorInitialState = {
@@ -271,6 +297,11 @@ const dataprep = (state = defaultInitialState, action = defaultAction) => {
     case DataPrepActions.setTargetModel:
       stateCopy = Object.assign({}, state, {
         targetModel: action.payload.targetModel,
+      });
+      break;
+    case DataPrepActions.setRecipe:
+      stateCopy = Object.assign({}, state, {
+        recipe: action.payload,
       });
       break;
     default:
