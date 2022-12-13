@@ -20,16 +20,21 @@ import T from 'i18n-react';
 import CommonRecipeForm from 'components/CreateEditRecipeForm/index';
 
 describe('Test Common Recipe Component', () => {
+
+  const mockIsNameErrorFunction = jest.fn();
+  const mockCancel = jest.fn();
+
   beforeEach(() => {
     render(
       <CommonRecipeForm
-        recipeData={{ name: '', description: '', directives: [] }}
+        recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
         onRecipeDataSave={jest.fn()}
-        onCancel={jest.fn()}
-        isNameError={false}
-      />
+        onCancel={mockCancel}
+        isNameError={false} 
+        setIsNameError={mockIsNameErrorFunction}      />
     );
   });
+
   it('should render component', () => {
     const parentElement = screen.getByTestId(/recipe-form-parent/i);
     expect(parentElement).toBeInTheDocument();
@@ -51,25 +56,40 @@ describe('Test Common Recipe Component', () => {
     );
   });
 
-  it('should render Recipe Name Field', () => {
+  it('should render Recipe Name Field and trigger the change event as expected', () => {
     const RecipeNameElement = screen.getByTestId(/recipe-name-field/i);
+    fireEvent.change(RecipeNameElement.firstChild.firstChild, { target: { value: 'test' } });
     expect(RecipeNameElement).toBeInTheDocument();
   });
 
   it('should render Recipe Description Field', () => {
     const RecipeDescriptionElement = screen.getByTestId(/recipe-description-field/i);
-    expect(RecipeDescriptionElement).toBeInTheDocument();
+    fireEvent.change(RecipeDescriptionElement, { target: { value: 'test' } });
+    expect(RecipeDescriptionElement).toHaveValue('test')
   });
 
   it('should trigger onCancel event in recipe', () => {
     const cancelButtonElement = screen.getByTestId(/common-recipe-cancel-button/i);
     fireEvent.click(cancelButtonElement);
-    expect(cancelButtonElement).toBeInTheDocument();
+    expect(mockCancel).toBeCalled();
   });
 
   it('should trigger onSave event in common recipe', () => {
     const saveButtonElement = screen.getByTestId(/common-recipe-save-button/i);
     fireEvent.click(saveButtonElement);
     expect(saveButtonElement).toBeInTheDocument();
+  });
+
+  it('should render Recipe component with isNameError as true', () => {
+    render(
+      <CommonRecipeForm
+        recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
+        onRecipeDataSave={jest.fn()}
+        onCancel={jest.fn()}
+        isNameError={true} 
+        setIsNameError={mockIsNameErrorFunction}      />
+    );
+    const parentElement = screen.getAllByTestId(/recipe-form-parent/i);
+    expect(parentElement[0]).toBeInTheDocument();
   });
 });
