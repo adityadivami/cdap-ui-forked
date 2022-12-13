@@ -99,7 +99,7 @@ public class Directives {
     }
   }
 
-  @Then("click on close icon")
+  @Then("Click on Close icon")
   public void closeIcon() {
     try {
       ElementHelper.clickOnElement(Helper.locateElementByTestId("close-directive-panel"));

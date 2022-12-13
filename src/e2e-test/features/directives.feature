@@ -23,7 +23,7 @@ Feature: Directives
     Then Click on the Data explorations card with index "<index>"
     Then Verify if user is on the wrangle page
     Then Click on the Directives button
-    Then click on close icon
+    Then Click on Close icon
     Then Click on the Directives button
     Then Verify and Click the directive panel
     Then Enter command in the panel with the data "<id>"
