@@ -17,7 +17,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import T from 'i18n-react';
-import CommonRecipeForm from 'components/CommonRecipeForm/index';
+import CommonRecipeForm from 'components/CreateEditRecipeForm/index';
 
 describe('Test Common Recipe Component', () => {
   beforeEach(() => {

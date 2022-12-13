@@ -20,7 +20,7 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import styled from 'styled-components';
 import Snackbar, { ISnackbar } from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
-import CommonRecipeForm from 'components/CommonRecipeForm';
+import CommonRecipeForm from 'components/CreateEditRecipeForm';
 import DataPrepStore from 'components/DataPrep/store';
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
@@ -155,10 +155,7 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
     <PaperStyle anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
       <DrawerContainerStyle role="presentation">
         <HeaderStyle>
-          <HeaderTextBackIconWrapper>
-            {/* <DrawerWidgetHeading headingText={headingText} /> */}
-            Save Recipe
-          </HeaderTextBackIconWrapper>
+          <HeaderTextBackIconWrapper>Save Recipe</HeaderTextBackIconWrapper>
 
           <CloseIconWrapper>
             <CloseIconStyle
@@ -176,13 +173,6 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
           setIsNameError={setIsNameError}
         />
       </DrawerContainerStyle>
-
-      {/* <Snackbar
-        handleClose={() => setSnackbar({ open: false })}
-        open={snackbarState.open}
-        message={snackbarState.message}
-        isSuccess={snackbarState.isSuccess}
-      /> */}
     </PaperStyle>
   );
 }

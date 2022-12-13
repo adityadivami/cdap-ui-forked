@@ -19,7 +19,7 @@ import { FormControl, TextField, Typography, Box, Button } from '@material-ui/co
 import styled from 'styled-components';
 import T from 'i18n-react';
 import { TextareaAutosize } from '@material-ui/core';
-import { ICommonRecipeFormProps, IRecipeData } from 'components/CommonRecipeForm/types';
+import { ICommonRecipeFormProps, IRecipeData } from 'components/CreateEditRecipeForm/types';
 
 const FormFieldWrapper = styled(Box)`
   width: calc(100% - 60px);
