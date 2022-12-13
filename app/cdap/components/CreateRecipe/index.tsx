@@ -155,7 +155,9 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
     <PaperStyle anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
       <DrawerContainerStyle role="presentation">
         <HeaderStyle>
-          <HeaderTextBackIconWrapper>Save Recipe</HeaderTextBackIconWrapper>
+          <HeaderTextBackIconWrapper>
+            {T.translate('features.WranglerNewUI.RecipeForm.labels.saveRecipe')}
+          </HeaderTextBackIconWrapper>
 
           <CloseIconWrapper>
             <CloseIconStyle
