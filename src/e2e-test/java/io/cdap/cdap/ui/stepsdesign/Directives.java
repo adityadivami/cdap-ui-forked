@@ -38,7 +38,7 @@ public class Directives {
   public void clickOnTheDataExplorationsCard(int index) {
     try {
       WaitHelper.waitForPageToLoad();
-      ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-" + index));
+      ElementHelper.clickOnElement(Helper.locateElementByTestId("wrangler-home-ongoing-data-exploration-card-" + index));
     } catch (Exception e) {
       System.err.println("error:" + e);
     }
