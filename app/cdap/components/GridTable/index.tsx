@@ -14,10 +14,11 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { Button, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import Breadcrumb from 'components/Breadcrumb';
+import CreateRecipe from 'components/CreateRecipe';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
@@ -33,6 +34,7 @@ import {
   IRecords,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
+import { setStateFromCron } from 'components/PipelineScheduler/Store/ActionCreator';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
@@ -84,6 +86,7 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
+  const [recipeFormOpen, setRecipeFormOpen] = useState(false);
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
 
@@ -283,7 +286,7 @@ export default function GridTable() {
 
   const handleColumnSelect = (columnName) => {
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
-    setColumnType(gridData?.types[columnName]);
+    setColumnType(gridData?.types[columnName] as string);
   };
 
   useEffect(() => {
@@ -301,6 +304,9 @@ export default function GridTable() {
       {showBreadCrumb && (
         <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
       )}
+      <Button variant="contained" color="primary" onClick={() => setRecipeFormOpen(true)}>
+        Create Recipe
+      </Button>
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
@@ -390,6 +396,14 @@ export default function GridTable() {
           isSuccess={snackbarState.isSuccess}
         />
       }
+      {recipeFormOpen && (
+        <CreateRecipe
+          openDrawer={true}
+          setRecipeFormOpen={setRecipeFormOpen}
+          setSnackbar={setSnackbar}
+        />
+      )}
     </>
   );
 }
+
