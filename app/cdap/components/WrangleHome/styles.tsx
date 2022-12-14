@@ -63,4 +63,17 @@ export const useStyles = makeStyles({
     top: 0,
     width: '100%',
   },
+  viewMoreBox: {
+    margin: 'auto 0px',
+    paddingTop: '26px',
+    paddingLeft: '16px',
+  },
+  viewAllText: {
+    fontSize: '14px',
+    lineHeight: '21px',
+    letterSpacing: '0.15px',
+    color: blue[500],
+    cursor: 'pointer',
+    width: 50
+  }
 });

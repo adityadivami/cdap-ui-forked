@@ -60,3 +60,7 @@ export const ExpandAndFunctionToggleContainer = styled(Box)`
 export const SearchBoxWrapper = styled(Box)`
   min-width: 490px;
 `;
+
+export const SavedRecipeHomeHeader = styled(Box)`
+  display: flex;
+`;
