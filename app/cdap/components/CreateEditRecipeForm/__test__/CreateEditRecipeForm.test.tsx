@@ -94,3 +94,4 @@ describe('Test Common Recipe Component', () => {
     expect(parentElement[0]).toBeInTheDocument();
   });
 });
+
