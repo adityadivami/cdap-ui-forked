@@ -20,8 +20,9 @@ export const initialGridTableState = {
   directivePanelIsOpen: false,
   snackbarIsOpen: false,
   snackbarData: {
-    description: '',
+    open: false,
     isSuccess: false,
+    message: ''
   },
   tableMetaInfo: {
     columnCount: 0,
