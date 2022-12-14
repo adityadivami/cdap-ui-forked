@@ -41,9 +41,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-
 import styled from 'styled-components';
-
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
@@ -58,10 +56,6 @@ const GridTableWrapper = styled(Box)`
   overflow-x: auto;
   max-height: 76vh;
 `;
-import SavedRecipeList from 'components/SavedRecipeList';
-import RecipeDetails from 'components/RecipeDetails';
-import { IRecipeItem } from 'components/SavedRecipeList';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export default function GridTable() {
   const { wid } = useParams() as IRecords;
@@ -287,23 +281,6 @@ export default function GridTable() {
     setShowGridTable(Array.isArray(gridData?.headers) && gridData?.headers.length !== 0);
   }, [gridData]);
 
-  const onRecipeClick = (recipeId: string) => {
-    setLoading(true);
-    const payload = { context: getCurrentNamespace(), recipeId };
-    MyDataPrepApi.getRecipe(payload).subscribe(
-      (res) => {
-        setRecipeDetails(res);
-        setRecipeDetailsIsOpen(true);
-        setLoading(false);
-      },
-      (err) => {
-        setLoading(false);
-      }
-    );
-  };
-
-  const onCloseDetail = () => setRecipeDetailsIsOpen(false);
-
   const handleColumnSelect = (columnName) => {
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
     setColumnType(gridData?.types[columnName]);
@@ -323,10 +300,6 @@ export default function GridTable() {
     <>
       {showBreadCrumb && (
         <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
-      )}
-      <SavedRecipeList onRecipeClick={(recipeId: string) => onRecipeClick(recipeId)} />
-      {recipeDetailIsOpen && (
-        <RecipeDetails recipeDetails={recipeDetails} onCloseDetail={onCloseDetail} />
       )}
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}

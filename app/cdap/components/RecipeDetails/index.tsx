@@ -20,8 +20,25 @@ import { Box, Container, Drawer, Typography } from '@material-ui/core';
 import DrawerHeader from 'components/RecipeDetails/DrawerHeader';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
-import { IRecipeItem } from 'components/SavedRecipeList';
 import { dateFormatting } from 'components/RecipeDetails/utils';
+
+interface IRecipeId {
+  namespace: {
+    name: string;
+    generation: number;
+  };
+  recipeId: string;
+}
+
+interface IRecipeItem {
+  recipeId: IRecipeId;
+  recipeName: string;
+  description: string;
+  directives: string[];
+  createdTimeMillis: number;
+  updatedTimeMillis: number;
+  recipeStepsCount: number;
+}
 
 interface IRecipeDetailsProps {
   recipeDetails: IRecipeItem;
