@@ -25,6 +25,7 @@ import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import T from 'i18n-react';
 import { grey } from '@material-ui/core/colors';
+import { IRecipeData } from 'components/CreateEditRecipeForm/types';
 
 const StyledDrawerContainer = styled(Container)`
   width: 460px;
@@ -93,13 +94,13 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
     setRecipeFormOpen(false);
   };
 
-  const saveRecipeData = (data) => {
+  const saveRecipeData = (recipeFormData: IRecipeData) => {
     const params = {
       context: getCurrentNamespace(),
     };
     const requestBody = {
-      recipeName: data.recipeName,
-      description: data.description,
+      recipeName: recipeFormData.recipeName,
+      description: recipeFormData.description,
       directives: recipeSteps,
     };
     MyDataPrepApi.createRecipe(params, requestBody).subscribe(
@@ -137,9 +138,9 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
     setIsNameError(false);
   };
 
-  const onRecipeDataSave = (data) => {
+  const onRecipeDataSave = (recipeFormData: IRecipeData) => {
     setIsNameError(false);
-    saveRecipeData(data);
+    saveRecipeData(recipeFormData);
   };
 
   return (
@@ -169,4 +170,3 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
     </StyledPaper>
   );
 }
-

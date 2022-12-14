@@ -20,7 +20,6 @@ import T from 'i18n-react';
 import CommonRecipeForm from 'components/CreateEditRecipeForm/index';
 
 describe('Test Common Recipe Component', () => {
-
   const mockIsNameErrorFunction = jest.fn();
   const mockCancel = jest.fn();
 
@@ -30,8 +29,9 @@ describe('Test Common Recipe Component', () => {
         recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
         onRecipeDataSave={jest.fn()}
         onCancel={mockCancel}
-        isNameError={false} 
-        setIsNameError={mockIsNameErrorFunction}      />
+        isNameError={false}
+        setIsNameError={mockIsNameErrorFunction}
+      />
     );
   });
 
@@ -65,7 +65,7 @@ describe('Test Common Recipe Component', () => {
   it('should render Recipe Description Field', () => {
     const RecipeDescriptionElement = screen.getByTestId(/recipe-description-field/i);
     fireEvent.change(RecipeDescriptionElement, { target: { value: 'test' } });
-    expect(RecipeDescriptionElement).toHaveValue('test')
+    expect(RecipeDescriptionElement).toHaveValue('test');
   });
 
   it('should trigger onCancel event in recipe', () => {
@@ -86,11 +86,11 @@ describe('Test Common Recipe Component', () => {
         recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
         onRecipeDataSave={jest.fn()}
         onCancel={jest.fn()}
-        isNameError={true} 
-        setIsNameError={mockIsNameErrorFunction}      />
+        isNameError={true}
+        setIsNameError={mockIsNameErrorFunction}
+      />
     );
     const parentElement = screen.getAllByTestId(/recipe-form-parent/i);
     expect(parentElement[0]).toBeInTheDocument();
   });
 });
-

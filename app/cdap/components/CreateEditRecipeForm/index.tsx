@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
 import { ICommonRecipeFormProps, IRecipeData } from 'components/CreateEditRecipeForm/types';
@@ -70,14 +70,17 @@ export default function({
     }
   }, [recipeFormData]);
 
-  const onFormHandle = (event) => {
+  const onFormHandle = (event: FormEvent) => {
     event.preventDefault();
     onRecipeDataSave(recipeFormData);
   };
 
   return (
     <>
-      <StyledForm onSubmit={(event) => onFormHandle(event)} data-testid="recipe-form-parent">
+      <StyledForm
+        onSubmit={(event: FormEvent) => onFormHandle(event)}
+        data-testid="recipe-form-parent"
+      >
         <FormFieldWrapper>
           <StyledLabel data-testid="recipe-name-label">
             {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
@@ -144,4 +147,3 @@ export default function({
     </>
   );
 }
-

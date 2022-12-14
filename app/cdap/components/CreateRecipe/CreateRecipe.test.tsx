@@ -19,14 +19,9 @@ import React from 'react';
 import CreateRecipe from 'components/CreateRecipe';
 
 describe('Test Create Recipe Component', () => {
-
   beforeEach(() => {
     render(
-      <CreateRecipe 
-        openDrawer={true} 
-        setRecipeFormOpen={jest.fn()} 
-        setSnackbar={jest.fn()}    
-      />
+      <CreateRecipe openDrawer={true} setRecipeFormOpen={jest.fn()} setSnackbar={jest.fn()} />
     );
   });
 
@@ -36,17 +31,14 @@ describe('Test Create Recipe Component', () => {
   });
 
   it('should trigger close function on close button click', () => {
-    
-    const closeButtonElement = screen.getByTestId(/drawer-widget-close-round-icon/i)
-    fireEvent.click(closeButtonElement)
-    expect(closeButtonElement).toBeInTheDocument()
-
+    const closeButtonElement = screen.getByTestId(/drawer-widget-close-round-icon/i);
+    fireEvent.click(closeButtonElement);
+    expect(closeButtonElement).toBeInTheDocument();
   });
 
   it('should trigger the cancel widget button function ', () => {
-    const cancelButtonElement = screen.getByTestId(/common-recipe-cancel-button/i)
-    fireEvent.click(cancelButtonElement)
-    expect(cancelButtonElement).toBeInTheDocument()
+    const cancelButtonElement = screen.getByTestId(/common-recipe-cancel-button/i);
+    fireEvent.click(cancelButtonElement);
+    expect(cancelButtonElement).toBeInTheDocument();
   });
 });
-

@@ -16,7 +16,7 @@
 
 export interface ICommonRecipeFormProps {
   recipeData: IRecipeData;
-  onRecipeDataSave: (data: IRecipeData) => void;
+  onRecipeDataSave: (recipeFormData: IRecipeData) => void;
   onCancel: () => void;
   isNameError: boolean;
   setIsNameError: React.Dispatch<React.SetStateAction<boolean>>;
@@ -41,4 +41,3 @@ export interface INameSpace {
   name: string;
   generation: number;
 }
-
