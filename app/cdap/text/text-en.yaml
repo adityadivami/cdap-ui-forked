@@ -3432,6 +3432,35 @@ features:
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
   WranglerNewUI:
+    AddConnections:
+      referenceLabel: Add Connection
+    Breadcrumb:
+      labels:
+        connectionsList: Data Sources
+        loadToGrid: Wrangle
+        wrangleHome: Home
+        createPipeline: Create a Pipeline
+      params:
+        connectionsList: datasources
+        wrangleHome: home
+      ariaLabels:
+        breadcrumb: breadcrumb
+    common:
+      and: and
+    ConnectionsList:
+      labels:
+        loadToGrid: Wrangle
+        noConnections: No Connections to show
+    FooterPanel:
+      labels:
+        columns: columns
+        message: Current data - {rowCount} rows and {columnCount} columns
+        columnViewPanel: Column View Panel
+        currentData: Current data
+        directives: Directives
+        recipeSteps: Recipe Steps
+        rows: rows
+        zoomPercent100: 100%
     GridPage:
       addTransformationPanel:
         applyStep: Apply Step
@@ -3440,9 +3469,15 @@ features:
         dataQuality: Data Quality
         done: Done
         nullValues: Null Values
-        selectColumnPara: Select column(s) to apply this function
+        selectColumnPara: Select Column(s) to Apply This Function
         selectColumn: Select column
         selectMultiColumns: Select columns
+      gridHeader:
+        ariaLabels:
+          functionsName: Functions Name Switch
+      menuItems:
+        divider: divider
+        heading: heading
       selectColumnListPanel:
         columnsSelected: column selected
         no: No
@@ -3458,7 +3493,7 @@ features:
           invalidIcon: Invalid
           mathIcon: Math
           nullIcon: 'Null'
-          otherIcon: Other
+          moreHorizIcon: Other
           redoIcon: Redo
           securityIcon: Security
           structureIcon: Structure
@@ -3479,33 +3514,28 @@ features:
               bytes: bytes
             menu:
               changeDatatype: Change data type
-    NoRecordScreen:
-      gridTable:
-        title: No rows left in this sample
-        subtitle: Remove some recipe steps to view some data
-    Breadcrumb:
-      labels:
-        connectionsList: Data Sources
-        wrangleHome: Home
-      params:
-        wrangeHome: home
-        connectionsList: datasources
-    AddConnections:
-      referenceLabel: Add Connection
-    ImportData:
-      referenceLabel: Import Data
+    GridTable:
+      snackbarLabels:
+        datasetSuccess: Dataset loaded successfully 
     HomePage:
       labels:
         common:
-          viewAll: View All
           addConnection: Add Connection
           importData: Import Data
+          viewAll: View All
         connectorTypes:
           title: Start data exploration
         workspaces:
           title: Continue ongoing data explorations, pick up where you left off
-    ConnectionsList:
+    ImportData:
+      referenceLabel: Import Data
+    NoRecordScreen:
+      gridTable:
+        subtitle: Remove some recipe steps to view some data
+        title: No rows left in this sample
+    Snackbar:
       labels:
-        loadToGrid: Wrangle
-        noConnections: No Connections to show
+        failure: Failure
+        success: Success
+        undo: Undo
 ...

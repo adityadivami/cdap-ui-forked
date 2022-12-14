@@ -34,15 +34,15 @@ import { Container, Drawer } from '@material-ui/core';
 import { enableDoneButton } from 'components/WranglerGrid/SelectColumnPanel/utils';
 import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/DrawerHeader';
 
-const StyledDrawer = styled(Drawer)`
+export const StyledDrawer = styled(Drawer)`
   & .MuiDrawer-paper {
     top: 46px;
     height: calc(100vh - 47px);
   }
 `;
 
-const DrawerContainerBox = styled(Container)`
-  width: 460px;
+export const DrawerContainerBox = styled(Container)`
+  width: 500px;
   height: 100%;
   padding-left: 30px;
 `;
