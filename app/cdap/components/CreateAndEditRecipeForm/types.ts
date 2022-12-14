@@ -14,7 +14,7 @@
  * the License.
  */
 
-export interface ICommonRecipeFormProps {
+export interface ICreateAndEditRecipeFormProps {
   recipeData: IRecipeData;
   onRecipeDataSave: (recipeFormData: IRecipeData) => void;
   onCancel: () => void;

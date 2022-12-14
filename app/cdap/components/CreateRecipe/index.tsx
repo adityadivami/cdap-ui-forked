@@ -19,13 +19,13 @@ import React, { useState } from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import styled from 'styled-components';
 import { ISnackbar } from 'components/Snackbar';
-import CommonRecipeForm from 'components/CreateEditRecipeForm';
+import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm';
 import DataPrepStore from 'components/DataPrep/store';
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import T from 'i18n-react';
 import { grey } from '@material-ui/core/colors';
-import { IRecipeData } from 'components/CreateEditRecipeForm/types';
+import { IRecipeData } from 'components/CreateAndEditRecipeForm/types';
 
 const StyledDrawerContainer = styled(Container)`
   width: 460px;
@@ -159,7 +159,7 @@ export default function({ openDrawer, setRecipeFormOpen, setSnackbar }: ICreateR
             />
           </CloseIconWrapper>
         </StyledHeader>
-        <CommonRecipeForm
+        <CreateAndEditRecipeForm
           recipeData={recipe}
           onRecipeDataSave={onRecipeDataSave}
           onCancel={onRecipeFormCancel}

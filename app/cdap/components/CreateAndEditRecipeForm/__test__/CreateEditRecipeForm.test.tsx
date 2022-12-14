@@ -17,15 +17,15 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import T from 'i18n-react';
-import CommonRecipeForm from 'components/CreateEditRecipeForm/index';
+import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm/index';
 
-describe('Test Common Recipe Component', () => {
+describe('Test Create and Edit Recipe Component', () => {
   const mockIsNameErrorFunction = jest.fn();
   const mockCancel = jest.fn();
 
   beforeEach(() => {
     render(
-      <CommonRecipeForm
+      <CreateAndEditRecipeForm
         recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
         onRecipeDataSave={jest.fn()}
         onCancel={mockCancel}
@@ -69,20 +69,20 @@ describe('Test Common Recipe Component', () => {
   });
 
   it('should trigger onCancel event in recipe', () => {
-    const cancelButtonElement = screen.getByTestId(/common-recipe-cancel-button/i);
+    const cancelButtonElement = screen.getByTestId(/recipe-cancel-button/i);
     fireEvent.click(cancelButtonElement);
     expect(mockCancel).toBeCalled();
   });
 
-  it('should trigger onSave event in common recipe', () => {
-    const saveButtonElement = screen.getByTestId(/common-recipe-save-button/i);
+  it('should trigger onSave event in recipe', () => {
+    const saveButtonElement = screen.getByTestId(/recipe-save-button/i);
     fireEvent.click(saveButtonElement);
     expect(saveButtonElement).toBeInTheDocument();
   });
 
   it('should render Recipe component with isNameError as true', () => {
     render(
-      <CommonRecipeForm
+      <CreateAndEditRecipeForm
         recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
         onRecipeDataSave={jest.fn()}
         onCancel={jest.fn()}

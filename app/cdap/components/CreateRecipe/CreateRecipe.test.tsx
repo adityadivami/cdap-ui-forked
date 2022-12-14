@@ -37,7 +37,7 @@ describe('Test Create Recipe Component', () => {
   });
 
   it('should trigger the cancel widget button function ', () => {
-    const cancelButtonElement = screen.getByTestId(/common-recipe-cancel-button/i);
+    const cancelButtonElement = screen.getByTestId(/recipe-cancel-button/i);
     fireEvent.click(cancelButtonElement);
     expect(cancelButtonElement).toBeInTheDocument();
   });

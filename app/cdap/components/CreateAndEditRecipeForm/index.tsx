@@ -17,7 +17,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
-import { ICommonRecipeFormProps, IRecipeData } from 'components/CreateEditRecipeForm/types';
+import { ICreateAndEditRecipeFormProps, IRecipeData } from 'components/CreateAndEditRecipeForm/types';
 import {
   FormFieldWrapper,
   NormalLabel,
@@ -28,7 +28,7 @@ import {
   StyledSaveButton,
   StyledFormButtonWrapper,
   getLabelStyle,
-} from 'components/CreateEditRecipeForm/styledComponents';
+} from 'components/CreateAndEditRecipeForm/styledComponents';
 
 export default function({
   recipeData,
@@ -36,7 +36,7 @@ export default function({
   onCancel,
   isNameError,
   setIsNameError,
-}: ICommonRecipeFormProps) {
+}: ICreateAndEditRecipeFormProps) {
   const StyledLabel = getLabelStyle(isNameError);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
@@ -128,7 +128,7 @@ export default function({
           variant="outlined"
           color="primary"
           onClick={() => onCancel()}
-          data-testid="common-recipe-cancel-button"
+          data-testid="recipe-cancel-button"
         >
           {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
         </StyledCancelButton>
@@ -136,7 +136,7 @@ export default function({
           variant="contained"
           type="submit"
           color="primary"
-          data-testid="common-recipe-save-button"
+          data-testid="recipe-save-button"
           disabled={isSaveDisable}
         >
           {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
