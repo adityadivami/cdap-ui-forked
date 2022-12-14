@@ -14,4 +14,14 @@
  * the License.
  */
 
-export const MISSING_NULL = 'Missing/Null';
+import { Dispatch, SetStateAction } from 'react';
+
+interface IInputProps {
+  [key: string]: string;
+}
+
+export interface ISwitchProps {
+  setShow: Dispatch<SetStateAction<boolean>>;
+  show: boolean;
+  inputProps?: IInputProps;
+}

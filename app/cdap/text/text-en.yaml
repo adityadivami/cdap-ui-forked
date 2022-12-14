@@ -2803,7 +2803,6 @@ features:
       triggerNameExists: "Trigger Name already exists"
       triggerNameRequired: "Trigger Name is required"
       triggerNameLengthLimit: "Trigger Name should not be longer than 50 characters"
-      emptyCompositeTriggerError: "Please select upstream pipelines for this trigger"
       selectPipelineInstruction: "Select the pipelines you want to add to the trigger: "
       triggerAndType: "Wait for all events (AND)"
       triggerOrType: "Trigger on any selected event (OR)"
@@ -3438,10 +3437,14 @@ features:
     Breadcrumb:
       labels:
         connectionsList: Data Sources
-        wranglerHome: Home
+        loadToGrid: Wrangle
+        wrangleHome: Home
+        createPipeline: Create a Pipeline
       params:
         connectionsList: datasources
-        wranglerHome: home
+        wrangleHome: home
+      ariaLabels:
+        breadcrumb: breadcrumb
     common:
       and: and
     ConnectionsList:
@@ -3469,6 +3472,12 @@ features:
         selectColumnPara: Select column(s) to apply this function
         selectColumn: Select column
         selectMultiColumns: Select columns
+      gridHeader:
+        ariaLabels:
+          functionsName: Functions Name Switch
+      menuItems:
+        divider: divider
+        heading: heading
       selectColumnListPanel:
         columnsSelected: column selected
         no: No
@@ -3483,9 +3492,8 @@ features:
           gridIcon: Grid
           invalidIcon: Invalid
           mathIcon: Math
-          moreHorizIcon: Other
           nullIcon: 'Null'
-          otherIcon: Other
+          moreHorizIcon: Other
           redoIcon: Redo
           securityIcon: Security
           structureIcon: Structure
@@ -3495,15 +3503,15 @@ features:
         options:
           labels:
             datatype:
+              string: string
               boolean: boolean
-              bytes: bytes
-              decimal: decimal
-              double: double
-              float: float
               integer: integer
               long: long
-              string: string
               short: short
+              float: float
+              double: double
+              decimal: decimal
+              bytes: bytes
             menu:
               changeDatatype: Change data type
     GridTable:
@@ -3530,5 +3538,4 @@ features:
         failure: Failure
         success: Success
         undo: Undo
-    
 ...
