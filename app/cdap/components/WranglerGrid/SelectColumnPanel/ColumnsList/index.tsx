@@ -79,7 +79,8 @@ const SelectColumnSearchBox = styled(Box)`
 `;
 
 const SearchIconButton = styled(IconButton)`
-  padding: 5px;
+  padding: 5px 0px 5px 5px;
+
   &.MuiIconButton-root:hover {
     background-color: transparent;
   }

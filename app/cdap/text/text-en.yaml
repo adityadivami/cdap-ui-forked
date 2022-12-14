@@ -3469,7 +3469,7 @@ features:
         dataQuality: Data Quality
         done: Done
         nullValues: Null Values
-        selectColumnPara: Select column(s) to apply this function
+        selectColumnPara: Select Column(s) to Apply This Function
         selectColumn: Select column
         selectMultiColumns: Select columns
       gridHeader:

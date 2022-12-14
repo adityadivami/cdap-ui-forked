@@ -37,6 +37,6 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined();
+    expect(container).toBeDefined;
   });
 });
