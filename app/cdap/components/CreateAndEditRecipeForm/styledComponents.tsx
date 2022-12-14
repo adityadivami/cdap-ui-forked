@@ -83,6 +83,7 @@ export const StyledDescriptionTextArea = styled(TextareaAutosize)`
   :hover {
     border: 1px solid #000000;
   }
+  resize: none;
 `;
 
 export const StyledButton = styled(Button)`
@@ -113,4 +114,3 @@ export const StyledFormButtonWrapper = styled.div`
 export const getLabelStyle = (isNameError) => {
   return isNameError ? ErrorLabel : NormalLabel;
 };
-
