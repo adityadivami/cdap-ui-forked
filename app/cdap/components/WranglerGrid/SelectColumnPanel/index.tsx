@@ -15,7 +15,7 @@
  */
 
 import T from 'i18n-react';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/ColumnsList';
 import {
   IAddTransformationProps,

@@ -49,7 +49,7 @@ const BackIcon = styled(ChevronLeftRoundedIcon)`
   color: ${grey[600]};
 `;
 
-const CustomizedIconButton = styled(IconButton)`
+const StyledIconButton = styled(IconButton)`
   padding: 0px;
   width: 26px;
   justify-content: end;
@@ -87,13 +87,13 @@ export default function({ closeClickHandler }: IDrawerHeaderProps) {
     <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
       <DrawerContainerInnerFlex>
         <FlexAlignCenter>
-          <CustomizedIconButton
+          <StyledIconButton
             onClick={closeClickHandler}
             aria-label="back-icon"
             data-testid="back-icon"
           >
             <BackIcon />
-          </CustomizedIconButton>
+          </StyledIconButton>
           <DrawerHeadWrapper>
             <HeadFont component="p" data-testid="drawer-heading">
               {T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
