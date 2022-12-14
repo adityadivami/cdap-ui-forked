@@ -28,7 +28,7 @@ import {
   StyledSaveButton,
   StyledFormButtonWrapper,
   getLabelStyle,
-} from 'components/CreateEditRecipeForm/styles';
+} from 'components/CreateEditRecipeForm/styledComponents';
 
 export default function({
   recipeData,
