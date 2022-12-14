@@ -76,74 +76,72 @@ export default function({
   };
 
   return (
-    <>
-      <StyledForm
-        onSubmit={(event: FormEvent) => onFormHandle(event)}
-        data-testid="recipe-form-parent"
-      >
-        <FormFieldWrapper>
-          <StyledLabel data-testid="recipe-name-label">
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
-          </StyledLabel>
-          <StyledRecipeNameTextField
+    <StyledForm
+      onSubmit={(event: FormEvent) => onFormHandle(event)}
+      data-testid="recipe-form-parent"
+    >
+      <FormFieldWrapper>
+        <StyledLabel data-testid="recipe-name-label">
+          {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
+        </StyledLabel>
+        <StyledRecipeNameTextField
+          required
+          variant="outlined"
+          defaultValue={recipeData.recipeName}
+          error={isNameError}
+          id="outlined-error-helper-text"
+          helperText={
+            isNameError
+              ? T.translate('features.WranglerNewUI.RecipeForm.labels.nameErrorMessage')
+              : ''
+          }
+          fullWidth
+          onChange={(event) =>
+            setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value })
+          }
+          data-testid="recipe-name-field"
+          placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
+        />
+      </FormFieldWrapper>
+      <FormFieldWrapper>
+        <FormControl variant="outlined">
+          <NormalLabel data-testid="recipe-description-label">
+            {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
+          </NormalLabel>
+          <StyledDescriptionTextArea
             required
-            variant="outlined"
-            defaultValue={recipeData.recipeName}
-            error={isNameError}
-            id="outlined-error-helper-text"
-            helperText={
-              isNameError
-                ? T.translate('features.WranglerNewUI.RecipeForm.labels.nameErrorMessage')
-                : ''
-            }
-            fullWidth
+            aria-label="minimum height"
+            minRows={3}
+            data-testid="recipe-description-field"
+            defaultValue={recipeData.description}
             onChange={(event) =>
-              setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value })
+              setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
             }
-            data-testid="recipe-name-field"
-            placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
+            placeholder={T.translate(
+              'features.WranglerNewUI.RecipeForm.labels.descriptionPlaceholder'
+            )}
           />
-        </FormFieldWrapper>
-        <FormFieldWrapper>
-          <FormControl variant="outlined">
-            <NormalLabel data-testid="recipe-description-label">
-              {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
-            </NormalLabel>
-            <StyledDescriptionTextArea
-              required
-              aria-label="minimum height"
-              minRows={3}
-              data-testid="recipe-description-field"
-              defaultValue={recipeData.description}
-              onChange={(event) =>
-                setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
-              }
-              placeholder={T.translate(
-                'features.WranglerNewUI.RecipeForm.labels.descriptionPlaceholder'
-              )}
-            />
-          </FormControl>
-        </FormFieldWrapper>
-        <StyledFormButtonWrapper>
-          <StyledCancelButton
-            variant="outlined"
-            color="primary"
-            onClick={() => onCancel()}
-            data-testid="common-recipe-cancel-button"
-          >
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
-          </StyledCancelButton>
-          <StyledSaveButton
-            variant="contained"
-            type="submit"
-            color="primary"
-            data-testid="common-recipe-save-button"
-            disabled={isSaveDisable}
-          >
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
-          </StyledSaveButton>
-        </StyledFormButtonWrapper>
-      </StyledForm>
-    </>
+        </FormControl>
+      </FormFieldWrapper>
+      <StyledFormButtonWrapper>
+        <StyledCancelButton
+          variant="outlined"
+          color="primary"
+          onClick={() => onCancel()}
+          data-testid="common-recipe-cancel-button"
+        >
+          {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
+        </StyledCancelButton>
+        <StyledSaveButton
+          variant="contained"
+          type="submit"
+          color="primary"
+          data-testid="common-recipe-save-button"
+          disabled={isSaveDisable}
+        >
+          {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
+        </StyledSaveButton>
+      </StyledFormButtonWrapper>
+    </StyledForm>
   );
 }
