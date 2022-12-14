@@ -95,7 +95,7 @@ public class SelectColumnPanel {
     }
   }
 
-  @Then("Enter name of any column from the list")
+  @Then("Enter name of any column from the List")
   public void enterNameOfAnyColumnFromTheList() {
     try {
       WaitHelper.waitForPageToLoad();
