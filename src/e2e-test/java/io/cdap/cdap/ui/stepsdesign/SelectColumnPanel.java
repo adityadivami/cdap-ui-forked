@@ -46,7 +46,7 @@ public class SelectColumnPanel {
   }
 
   @Then("Select the data type")
-  public void SelectTheDataType() {
+  public void selectTheDataType() {
     try {
       WaitHelper.waitForPageToLoad();
       ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-string"));
