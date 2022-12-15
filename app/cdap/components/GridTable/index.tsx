@@ -49,7 +49,6 @@ import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import { useLocation } from 'react-router';
-import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
@@ -396,14 +395,6 @@ export default function GridTable() {
           isSuccess={snackbarState.isSuccess}
         />
       }
-      {recipeFormOpen && (
-        <CreateAndEditRecipeForm
-          recipeData={recipe}
-          setIsCreateAndEditRecipeFormOpen={setRecipeFormOpen}
-          setSnackbar={setSnackbar}
-          recipeFormAction="createRecipe"
-        />
-      )}
     </>
   );
 }
