@@ -54,8 +54,6 @@ export default function({
   const recipeSteps = [
     'uppercase: body1',
     'titlecase: body2',
-    'uppercase: body3',
-    'titlecase: body4',
   ];
 
   useEffect(() => {
@@ -92,7 +90,7 @@ export default function({
     onRecipeDataSave(recipeFormData);
   };
 
-  const onRecipeDataSave = (recipeFormData) => {
+  const onRecipeDataSave = (recipeFormData:IRecipeData) => {
     if (recipeFormAction === 'createRecipe') {
       const params = {
         context: getCurrentNamespace(),
