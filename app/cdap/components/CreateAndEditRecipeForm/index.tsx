@@ -41,6 +41,7 @@ export default function({
   setSnackbar,
   recipeFormAction,
 }: ICreateAndEditRecipeFormProps) {
+  const CreateRecipeFormAction = 'createRecipe';
   const [isNameError, setIsNameError] = useState(false);
   const StyledLabel = getLabelStyle(isNameError);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
@@ -91,7 +92,7 @@ export default function({
   };
 
   const onRecipeDataSave = (recipeFormData:IRecipeData) => {
-    if (recipeFormAction === 'createRecipe') {
+    if (recipeFormAction === CreateRecipeFormAction) {
       const params = {
         context: getCurrentNamespace(),
       };

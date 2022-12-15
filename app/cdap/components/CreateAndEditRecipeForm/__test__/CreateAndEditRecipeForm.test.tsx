@@ -18,20 +18,26 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import T from 'i18n-react';
 import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm/index';
+import MyDataPrepApi from 'api/dataprep';
 
 describe('Test Create and Edit Recipe Component', () => {
-  const mockIsNameErrorFunction = jest.fn();
-  const mockCancel = jest.fn();
+  const mockCreateAndEditRecipe = jest.fn();
+
+  jest.spyOn(MyDataPrepApi, 'createRecipe').mockImplementation(() => {
+    return {
+          subscribe: (callback) => {
+            callback();
+          },
+    };
+  });
 
   beforeEach(() => {
     render(
       <CreateAndEditRecipeForm
         recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
-        onRecipeDataSave={jest.fn()}
-        onCancel={mockCancel}
-        isNameError={false}
-        setIsNameError={mockIsNameErrorFunction}
-      />
+        setIsCreateAndEditRecipeFormOpen={mockCreateAndEditRecipe}
+        recipeFormAction={'createRecipe'}
+        setSnackbar={jest.fn()}      />
     );
   });
 
@@ -71,7 +77,7 @@ describe('Test Create and Edit Recipe Component', () => {
   it('should trigger onCancel event in recipe', () => {
     const cancelButtonElement = screen.getByTestId(/recipe-cancel-button/i);
     fireEvent.click(cancelButtonElement);
-    expect(mockCancel).toBeCalled();
+    expect(mockCreateAndEditRecipe).toBeCalled();
   });
 
   it('should trigger onSave event in recipe', () => {
@@ -84,10 +90,9 @@ describe('Test Create and Edit Recipe Component', () => {
     render(
       <CreateAndEditRecipeForm
         recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
-        onRecipeDataSave={jest.fn()}
-        onCancel={jest.fn()}
-        isNameError={true}
-        setIsNameError={mockIsNameErrorFunction}
+        setIsCreateAndEditRecipeFormOpen={jest.fn()}
+        recipeFormAction={''}
+        setSnackbar={jest.fn()}
       />
     );
     const parentElement = screen.getAllByTestId(/recipe-form-parent/i);
