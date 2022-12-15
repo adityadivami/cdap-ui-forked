@@ -41,7 +41,7 @@ describe('Test Create and Edit Recipe Component', () => {
     );
   });
 
-  it('should render component', () => {
+  it('should render create and edit recipe form component', () => {
     const parentElement = screen.getByTestId(/recipe-form-parent/i);
     expect(parentElement).toBeInTheDocument();
   });
@@ -84,19 +84,6 @@ describe('Test Create and Edit Recipe Component', () => {
     const saveButtonElement = screen.getByTestId(/recipe-save-button/i);
     fireEvent.click(saveButtonElement);
     expect(saveButtonElement).toBeInTheDocument();
-  });
-
-  it('should render Recipe component with isNameError as true', () => {
-    render(
-      <CreateAndEditRecipeForm
-        recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
-        setIsCreateAndEditRecipeFormOpen={jest.fn()}
-        recipeFormAction={''}
-        setSnackbar={jest.fn()}
-      />
-    );
-    const parentElement = screen.getAllByTestId(/recipe-form-parent/i);
-    expect(parentElement[0]).toBeInTheDocument();
   });
 });
 
