@@ -3517,11 +3517,28 @@ features:
       gridTable:
         subtitle: Remove some recipe steps to view some data
         title: No rows left in this sample
+    RecipeDetails:
+      drawerHeader: Recipe details
+      tableHeaders:
+        recipeStep: Recipe steps 
+        serialNo: S.No.
     Snackbar:
       labels:
         failure: Failure
         success: Success
         undo: Undo
+    SavedRecipeList:
+      description: Description
+      lastUpdated: Last Updated
+      recipeName: Recipe Name
+      steps : Steps
+    WranglerNewRecipeSteps:
+      labels:
+        recipe: Recipe
+        recipeSteps: Recipe steps
+        recipeCount: Recipe count
+      startWrangleTitle: Start Wrangling your data
+      startWrangleSubTitle: Select a column or function to add your first recipe step
 
     
 ...

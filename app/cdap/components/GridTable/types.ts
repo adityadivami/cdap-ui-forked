@@ -48,3 +48,12 @@ export interface IHeaderNamesList {
 export interface IType {
   [key: string]: string | number;
 }
+
+export interface IRowData {
+  [key: string]: string;
+}
+
+export interface IMissingListData {
+  name: string;
+  values: Record<string, string>;
+}

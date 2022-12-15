@@ -47,15 +47,23 @@ import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import { useLocation } from 'react-router';
 import ImportRecipeStepper from 'components/ImportRecipeStepper';
+import GridTableContainer from './components/GridTableContainer';
 
 export const TableWrapper = styled(Box)`
+  height: calc(100vh - 193px);
+  overflow-y: auto;
   width: 100%;
+`;
+
+const TablePanelContainer = styled(Box)`
+  display: flex;
+  font-family: Roboto;
 `;
 
 const GridTableWrapper = styled(Box)`
   max-width: 100%;
   overflow-x: auto;
-  max-height: 76vh;
+  max-height: 70vh;
 `;
 
 export default function GridTable() {
@@ -85,6 +93,7 @@ export default function GridTable() {
   const [snackbarState, setSnackbar] = useSnackbar();
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
+  const [showRecipePanel, setShowRecipePanel] = useState<boolean>(false);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -295,12 +304,15 @@ export default function GridTable() {
     }
   }, [snackbarState.open]);
 
+  const showRecipePanelHandler = () => {
+    setShowRecipePanel((prev) => !prev);
+  };
+
   return (
     <>
       {showBreadCrumb && (
         <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
       )}
-      <ImportRecipeStepper/>
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
@@ -317,61 +329,28 @@ export default function GridTable() {
         disableToolbarIcon={gridData?.headers?.length > 0 ? false : true}
       />
       <GridTableWrapper data-testid="grid-table-container">
-        {!showGridTable && (
-          <NoRecordScreen
-            title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
-            subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
-          />
-        )}
-        {showGridTable && (
-          <TableWrapper>
-            <Table aria-label="simple table" className="test">
-              <TableHead>
-                <TableRow>
-                  {headersNamesList?.length &&
-                    headersNamesList.map((eachHeader) => (
-                      <GridHeaderCell
-                        label={eachHeader.label}
-                        types={eachHeader.type}
-                        key={eachHeader.name}
-                        columnSelected={selectedColumn}
-                        setColumnSelected={handleColumnSelect}
-                      />
-                    ))}
-                </TableRow>
-                <TableRow>
-                  {missingDataList?.length &&
-                    headersNamesList.length &&
-                    headersNamesList.map((each, index) => {
-                      return missingDataList.map((item, itemIndex) => {
-                        if (item.name === each.name) {
-                          return <GridKPICell metricData={item} key={item.name} />;
-                        }
-                      });
-                    })}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rowsDataList?.length &&
-                  rowsDataList.map((eachRow, rowIndex) => {
-                    return (
-                      <TableRow key={`row-${rowIndex}`}>
-                        {headersNamesList.map((eachKey, eachIndex) => {
-                          return (
-                            <GridTextCell
-                              cellValue={eachRow[eachKey.name] || '--'}
-                              key={`${eachKey.name}-${eachIndex}`}
-                            />
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableWrapper>
-        )}
-        <FooterPanel recipeStepsCount={0} gridMetaInfo={tableMetaInfo} />
+        <TablePanelContainer>
+          {!showGridTable && (
+            <NoRecordScreen
+              title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
+              subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
+            />
+          )}
+          {showGridTable && (
+            <GridTableContainer
+              headersNamesList={headersNamesList}
+              missingDataList={missingDataList}
+              rowsDataList={rowsDataList}
+              setColumnSelected={setSelectedColumn}
+            />
+          )}
+          {showRecipePanel && <ImportRecipeStepper setShowRecipePanel={setShowRecipePanel} />}
+        </TablePanelContainer>
+        <FooterPanel
+          recipeStepsCount={0}
+          gridMetaInfo={tableMetaInfo}
+          handleShowRecipePanelHandler={showRecipePanelHandler}
+        />
         {loading && (
           <div className={classes.loadingContainer}>
             <LoadingSVG />
