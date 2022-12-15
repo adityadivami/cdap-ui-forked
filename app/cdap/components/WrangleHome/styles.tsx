@@ -74,6 +74,5 @@ export const useStyles = makeStyles({
     letterSpacing: '0.15px',
     color: blue[500],
     cursor: 'pointer',
-    width: 50
-  }
+  },
 });

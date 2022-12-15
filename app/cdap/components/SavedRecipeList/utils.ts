@@ -15,10 +15,10 @@
  */
 
 export const dateFormatting = (millisecondsTime) => {
-    const normalDateString = new Date(millisecondsTime);
-    const splitTime = normalDateString.toLocaleTimeString('en-US').split(':');
-    const timeFormat = `${splitTime[0]}:${splitTime[1]}${splitTime[2].split(' ')[1]}`;
-    const getMonthName = normalDateString.toLocaleString('default', { month: 'long' });
-    const finalFormat = `${normalDateString.getDate()} ${getMonthName}, ${timeFormat}`;
-    return finalFormat;
+  const normalDateString = new Date(millisecondsTime);
+  const splitTime = normalDateString.toLocaleTimeString('en-US').split(':');
+  const timeFormat = `${splitTime[0]}:${splitTime[1]}${splitTime[2].split(' ')[1]}`;
+  const getMonthName = normalDateString.toLocaleString('default', { month: 'long' });
+  const finalFormat = `${normalDateString.getDate()} ${getMonthName}, ${timeFormat}`;
+  return finalFormat;
 };

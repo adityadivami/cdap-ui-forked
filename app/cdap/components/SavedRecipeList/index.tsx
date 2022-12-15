@@ -32,8 +32,7 @@ import { Box, Typography } from '@material-ui/core';
 import { dateFormatting } from 'components/SavedRecipeList/utils';
 import { grey } from '@material-ui/core/colors';
 
-const Wrapper = styled(Box)`
-`;
+const Wrapper = styled(Box)``;
 
 const GridWrapper = styled(Box)`
   display: grid;
@@ -47,14 +46,14 @@ const GridHeadWrapper = styled(GridWrapper)`
 `;
 
 const HeadDivider = styled(Box)`
-width: 100%;
-opacity: 0.6;
-border-bottom: 1px solid ${grey[700]};
+  width: 100%;
+  opacity: 0.6;
+  border-bottom: 1px solid ${grey[700]};
 `;
 
 const CellDivider = styled(Box)`
-width: 100%;
-border-bottom: 1px solid ${grey[300]};
+  width: 100%;
+  border-bottom: 1px solid ${grey[300]};
 `;
 
 const GridHead = styled(Typography)`
@@ -75,7 +74,7 @@ const GridCellText = styled(Typography)`
 
 const PREFIX = 'features.WranglerNewUI.SavedRecipeList';
 
-export default function ({ setLoading }) {
+export default function({ setLoading }) {
   const { dataprep } = DataPrepStore.getState();
   const { recipeList } = dataprep;
 
@@ -83,39 +82,59 @@ export default function ({ setLoading }) {
     const params = {
       context: getCurrentNamespace(),
     };
-    getRecipeList(params)
+    getRecipeList(params);
   }, []);
 
   const getRecipeList = (params) => {
-    setLoading(true)
+    setLoading(true);
     MyDataPrepApi.getRecipeList(params).subscribe((res) => {
       DataPrepStore.dispatch({
         type: DataPrepActions.setRecipeList,
         payload: res.values,
       });
-      setLoading(false)
+      setLoading(false);
     });
-  }
+  };
 
   return (
     <Wrapper data-testid="saved-recipe-list-wrapper">
       <GridHeadWrapper>
-        <GridHead component="body1" data-testid="recipe-name-head">{T.translate(`${PREFIX}.recipeName`)}</GridHead>
-        <GridHead component="body1" data-testid="recipe-steps-head">{T.translate(`${PREFIX}.steps`)}</GridHead>
-        <GridHead component="body1" data-testid="recipe-description-head">{T.translate(`${PREFIX}.description`)}</GridHead>
-        <GridHead component="body1" data-testid="recipe-last-updated-head">{T.translate(`${PREFIX}.lastUpdated`)}</GridHead>
+        <GridHead component="body1" data-testid="recipe-name-head">
+          {T.translate(`${PREFIX}.recipeName`)}
+        </GridHead>
+        <GridHead component="body1" data-testid="recipe-steps-head">
+          {T.translate(`${PREFIX}.steps`)}
+        </GridHead>
+        <GridHead component="body1" data-testid="recipe-description-head">
+          {T.translate(`${PREFIX}.description`)}
+        </GridHead>
+        <GridHead component="body1" data-testid="recipe-last-updated-head">
+          {T.translate(`${PREFIX}.lastUpdated`)}
+        </GridHead>
       </GridHeadWrapper>
-      <HeadDivider/>
-      {recipeList.reverse().slice(0, 2).map((recipeItem, recipeIndex) => (<>
-        <GridWrapper key={recipeItem.recipeId}>
-          <GridCellText component="body1" data-testid={`recipe-name-${recipeIndex}`}>{recipeItem.recipeName}</GridCellText>
-          <GridCellText component="body1" data-testid={`recipe-count-${recipeIndex}`}>{recipeItem.recipeStepsCount}</GridCellText>
-          <GridCellText component="body1" data-testid={`recipe-description-${recipeIndex}`}>{recipeItem.description}</GridCellText>
-          <GridCellText component="body1" data-testid={`recipe-date-${recipeIndex}`}>{dateFormatting(recipeItem.updatedTimeMillis)}</GridCellText>
-        </GridWrapper>
-        {(recipeIndex !== recipeItem.length - 1) && <CellDivider/>}
-        </>
-      ))}
+      <HeadDivider />
+      {recipeList
+        .reverse()
+        .slice(0, 2)
+        .map((recipeItem, recipeIndex) => (
+          <>
+            <GridWrapper key={recipeItem.recipeId}>
+              <GridCellText component="body1" data-testid={`recipe-name-${recipeIndex}`}>
+                {recipeItem.recipeName}
+              </GridCellText>
+              <GridCellText component="body1" data-testid={`recipe-count-${recipeIndex}`}>
+                {recipeItem.recipeStepsCount}
+              </GridCellText>
+              <GridCellText component="body1" data-testid={`recipe-description-${recipeIndex}`}>
+                {recipeItem.description}
+              </GridCellText>
+              <GridCellText component="body1" data-testid={`recipe-date-${recipeIndex}`}>
+                {dateFormatting(recipeItem.updatedTimeMillis)}
+              </GridCellText>
+            </GridWrapper>
+            {recipeIndex !== recipeItem.length - 1 && <CellDivider />}
+          </>
+        ))}
     </Wrapper>
   );
 }

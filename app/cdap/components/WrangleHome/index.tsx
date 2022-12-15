@@ -27,7 +27,7 @@ import { Link } from 'react-router-dom';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import OngoingDataExploration from 'components/WrangleHome/Components/OngoingDataExploration';
 import SavedRecipeList from 'components/SavedRecipeList';
-import {SavedRecipeHomeHeader} from 'components/common/BoxContainer';
+import { SavedRecipeHomeHeader } from 'components/common/BoxContainer';
 
 export default function() {
   const classes = useStyles();
@@ -82,11 +82,12 @@ export default function() {
             title={T.translate('features.WranglerNewUI.HomePage.labels.savedRecipeList.title')}
           />
           <Box className={classes.viewMoreBox}>
-            <Typography className={classes.viewAllText}>{T.translate('features.WranglerNewUI.HomePage.labels.common.viewAll')}</Typography>
-            
+            <Typography className={classes.viewAllText}>
+              {T.translate('features.WranglerNewUI.HomePage.labels.common.viewAll')}
+            </Typography>
           </Box>
         </SavedRecipeHomeHeader>
-        <SavedRecipeList setLoading={setLoading}/>
+        <SavedRecipeList setLoading={setLoading} />
       </Box>
     </Box>
   );
