@@ -17,7 +17,10 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
-import { ICreateAndEditRecipeFormProps, IRecipeData } from 'components/CreateAndEditRecipeForm/types';
+import {
+  ICreateAndEditRecipeFormProps,
+  IRecipeData,
+} from 'components/CreateAndEditRecipeForm/types';
 import {
   FormFieldWrapper,
   NormalLabel,
@@ -29,14 +32,16 @@ import {
   StyledFormButtonWrapper,
   getLabelStyle,
 } from 'components/CreateAndEditRecipeForm/styledComponents';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import MyDataPrepApi from 'api/dataprep';
 
 export default function({
   recipeData,
-  onRecipeDataSave,
-  onCancel,
-  isNameError,
-  setIsNameError,
+  setIsCreateAndEditRecipeFormOpen,
+  setSnackbar,
+  recipeFormAction,
 }: ICreateAndEditRecipeFormProps) {
+  const [isNameError, setIsNameError] = useState(false);
   const StyledLabel = getLabelStyle(isNameError);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
@@ -45,6 +50,13 @@ export default function({
   });
 
   const [isSaveDisable, setIsSaveDisable] = useState<boolean>(true);
+
+  const recipeSteps = [
+    'uppercase: body1',
+    'titlecase: body2',
+    'uppercase: body3',
+    'titlecase: body4',
+  ];
 
   useEffect(() => {
     if (isNameError) {
@@ -70,9 +82,54 @@ export default function({
     }
   }, [recipeFormData]);
 
+  const onCancel = () => {
+    setIsCreateAndEditRecipeFormOpen(false);
+    setIsNameError(false);
+  };
+
   const onFormHandle = (event: FormEvent) => {
     event.preventDefault();
     onRecipeDataSave(recipeFormData);
+  };
+
+  const onRecipeDataSave = (recipeFormData) => {
+    if (recipeFormAction === 'createRecipe') {
+      const params = {
+        context: getCurrentNamespace(),
+      };
+      const requestBody = {
+        recipeName: recipeFormData.recipeName,
+        description: recipeFormData.description,
+        directives: recipeSteps,
+      };
+      MyDataPrepApi.createRecipe(params, requestBody).subscribe(
+        () => {
+          setIsNameError(false);
+          setIsCreateAndEditRecipeFormOpen(false);
+          setSnackbar({
+            open: true,
+            isSuccess: true,
+            message: `${recipeSteps.length} ${T.translate(
+              'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
+            )}`,
+          });
+        },
+        (err) => {
+          if (err.response.message) {
+            setIsNameError(true);
+          } else {
+            setIsCreateAndEditRecipeFormOpen(false);
+            setSnackbar({
+              open: true,
+              isSuccess: false,
+              message: T.translate(
+                'features.WranglerNewUI.RecipeForm.labels.errorMessage'
+              ).toString(),
+            });
+          }
+        }
+      );
+    }
   };
 
   return (

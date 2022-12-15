@@ -14,12 +14,13 @@
  * the License.
  */
 
+import { ISnackbar } from 'components/Snackbar';
+
 export interface ICreateAndEditRecipeFormProps {
   recipeData: IRecipeData;
-  onRecipeDataSave: (recipeFormData: IRecipeData) => void;
-  onCancel: () => void;
-  isNameError: boolean;
-  setIsNameError: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCreateAndEditRecipeFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSnackbar: React.Dispatch<React.SetStateAction<ISnackbar>>;
+  recipeFormAction: string;
 }
 
 export interface IRecipeData {

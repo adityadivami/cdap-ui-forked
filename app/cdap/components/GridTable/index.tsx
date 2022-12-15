@@ -18,7 +18,6 @@ import { Button, Table, TableBody, TableHead, TableRow } from '@material-ui/core
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import Breadcrumb from 'components/Breadcrumb';
-import CreateRecipe from 'components/CreateRecipe';
 import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
@@ -50,6 +49,7 @@ import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import { useLocation } from 'react-router';
+import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
@@ -71,6 +71,9 @@ export default function GridTable() {
     rowCount: 0,
   });
 
+  const { dataprep } = DataPrepStore.getState();
+  const { recipe } = dataprep;
+
   const [workspaceName, setWorkspaceName] = useState('');
   const [loading, setLoading] = useState(false);
   const [headersNamesList, setHeadersNamesList] = useState<IHeaderNamesList[]>([]);
@@ -86,7 +89,7 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [recipeFormOpen, setRecipeFormOpen] = useState(false);
+  const [recipeFormOpen, setRecipeFormOpen] = useState(true);
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
 
@@ -304,9 +307,6 @@ export default function GridTable() {
       {showBreadCrumb && (
         <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
       )}
-      <Button variant="contained" color="primary" onClick={() => setRecipeFormOpen(true)}>
-        Create Recipe
-      </Button>
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
@@ -397,13 +397,13 @@ export default function GridTable() {
         />
       }
       {recipeFormOpen && (
-        <CreateRecipe
-          openDrawer={true}
-          setRecipeFormOpen={setRecipeFormOpen}
+        <CreateAndEditRecipeForm
+          recipeData={recipe}
+          setIsCreateAndEditRecipeFormOpen={setRecipeFormOpen}
           setSnackbar={setSnackbar}
+          recipeFormAction="createRecipe"
         />
       )}
     </>
   );
 }
-
