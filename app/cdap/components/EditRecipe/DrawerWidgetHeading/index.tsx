@@ -16,16 +16,22 @@
 
 import { Box, Typography } from '@material-ui/core';
 import React from 'react';
-import { UnderLine } from 'components/EditRecipe/IconStore/UnderLine';
 import styled from 'styled-components';
-import { grey } from '@material-ui/core/colors';
+import { grey, blue } from '@material-ui/core/colors';
 
 interface IDrawerWidgetHeadingProps {
   headingText: React.ReactNode;
 }
 
+const UnderLine = (
+  <svg width="67" height="2" viewBox="0 0 67 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
+    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
+  </svg>
+);
+
 export default function({ headingText }: IDrawerWidgetHeadingProps) {
-  const StyledHeadingWrapper = styled(Box)`
+  const StyledHeadingIconWrapper = styled(Box)`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -41,9 +47,9 @@ export default function({ headingText }: IDrawerWidgetHeadingProps) {
   `;
 
   return (
-    <StyledHeadingWrapper>
+    <StyledHeadingIconWrapper>
       <StyledHeadingText data-testid="drawer-widget-heading">{headingText}</StyledHeadingText>
       {UnderLine}
-    </StyledHeadingWrapper>
+    </StyledHeadingIconWrapper>
   );
 }
