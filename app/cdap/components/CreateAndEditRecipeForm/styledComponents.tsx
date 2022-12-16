@@ -107,8 +107,8 @@ export const StyledSaveButton = styled(StyledButton)`
 
 export const StyledFormButtonWrapper = styled.div`
   float: right;
-  padding-top: 63px;
   padding-bottom: 20px;
+  margin-top: 315px;
 `;
 
 export const getLabelStyle = (isNameError) => {
