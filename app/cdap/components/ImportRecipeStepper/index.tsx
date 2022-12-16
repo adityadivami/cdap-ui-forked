@@ -49,19 +49,14 @@ export default function({ setShowRecipePanel }) {
           <RecipeSteps
             setShowRecipePanel={setShowRecipePanel}
             onDeleteRecipeSteps={() => console.log()}
-            nextStep={() => nextStep()}
+            nextStep={nextStep}
           />
         </RecipeStepPanel>
       ),
     },
     {
       value: 2,
-      content: (
-        <RecipeImportList
-          nextStep={(componentData) => nextStep(componentData)}
-          previousStep={() => previousStep()}
-        />
-      ),
+      content: <RecipeImportList nextStep={nextStep} previousStep={previousStep} />,
     },
     {
       value: 3,
@@ -69,7 +64,7 @@ export default function({ setShowRecipePanel }) {
         <RecipeDetail
           nextStep={(componentData) => setCurrentStep(0)}
           recipeDetails={componentData}
-          previousStep={() => previousStep()}
+          previousStep={previousStep}
         />
       ),
     },
