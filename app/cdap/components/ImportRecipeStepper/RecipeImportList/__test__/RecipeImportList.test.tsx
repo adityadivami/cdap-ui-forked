@@ -57,4 +57,10 @@ describe('Test RecipeImportList Component', () => {
     expect(recipeSerialNumberElement).toBeInTheDocument();
     expect(recipeSerialNumberElement).toHaveTextContent(`${T.translate(`${PREFIX}.lastUpdated`)}`);
   });
+
+  it('should test when recipe item is clicked', () => {
+    render(<RecipeImportList previousStep={jest.fn()} nextStep={jest.fn()} />);
+    const recipeSerialNumberElement = screen.getByTestId(/recipe-item-0/i);
+    fireEvent.click(recipeSerialNumberElement);
+  });
 });

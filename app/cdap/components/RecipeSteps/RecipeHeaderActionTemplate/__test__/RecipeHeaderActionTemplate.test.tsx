@@ -34,7 +34,7 @@ describe('It should test the RecipeHeaderActionTemplate Component', () => {
       <Router history={history}>
         <Switch>
           <Route>
-            <RecipeHeaderActionTemplate />
+            <RecipeHeaderActionTemplate nextStep={jest.fn()} />
           </Route>
         </Switch>
       </Router>
@@ -44,5 +44,19 @@ describe('It should test the RecipeHeaderActionTemplate Component', () => {
     const downloadComponent = screen.getByTestId(/header-action-download-icon/i);
     fireEvent.click(downloadComponent);
     expect(downloadComponent).toBeInTheDocument();
+  });
+
+  it('renders RecipeHeaderActionTemplate component and triggers nextStep()', () => {
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route>
+            <RecipeHeaderActionTemplate nextStep={jest.fn()} />
+          </Route>
+        </Switch>
+      </Router>
+    );
+    const headerActionImportIcon = screen.getByTestId(/header-action-import-icon/i);
+    fireEvent.click(headerActionImportIcon);
   });
 });

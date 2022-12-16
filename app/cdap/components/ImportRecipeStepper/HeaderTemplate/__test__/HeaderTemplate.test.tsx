@@ -20,14 +20,12 @@ import ImportRecipeStepper from 'components/ImportRecipeStepper/HeaderTemplate';
 
 describe('Test Import Recipe Stepper', () => {
   it('Should render Import Recipe Stepper', () => {
-    render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
+    render(<ImportRecipeStepper headingText={'Import Recipe'} previousStep={jest.fn()} />);
     const wrapper = screen.getByTestId(/import-recipe-header/i);
     const backIcon = screen.getByTestId(/back-icon-step/i);
     const closeIcon = screen.getByTestId(/close-icon-step/i);
     fireEvent.click(backIcon);
     fireEvent.click(closeIcon);
-    expect(backIcon).toHaveBeenCalled();
-    expect(closeIcon).toHaveBeenCalled();
     expect(wrapper).toBeInTheDocument();
   });
 });
