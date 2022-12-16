@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Container, Drawer } from '@material-ui/core';
+import { Container, Drawer, IconButton } from '@material-ui/core';
 import React, { useState } from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from './DrawerWidgetHeading';
@@ -22,8 +22,6 @@ import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm';
 import { IRecipeData } from 'components/CreateAndEditRecipeForm/types';
 import styled from 'styled-components';
 import Snackbar, { ISnackbar } from 'components/Snackbar';
-import MyDataPrepApi from 'api/dataprep';
-import DataPrepStore from 'components/DataPrep/store';
 
 interface IDrawerWidgetProps {
   headingText: React.ReactNode;
@@ -35,7 +33,7 @@ interface IDrawerWidgetProps {
   snackbarState: ISnackbar;
 }
 
-const DrawerContainerStyle = styled(Container)`
+const StyledDrawerContainer = styled(Container)`
   width: 460px;
   height: calc(100vh - 225px);
   height: 100%;
@@ -44,7 +42,7 @@ const DrawerContainerStyle = styled(Container)`
   overflow-y: scroll;
 `;
 
-const HeaderStyle = styled.header`
+const StyledHeader = styled.header`
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -53,21 +51,16 @@ const HeaderStyle = styled.header`
   padding-right: 0px;
 `;
 
-const HeaderTextBackIconWrapper = styled.div`
+const CloseIconButton = styled(IconButton)`
   display: flex;
   align-items: center;
 `;
 
-const CloseIconWrapper = styled(Box)`
-  display: flex;
-  align-items: center;
-`;
-
-const CloseIconStyle = styled(CloseRoundedIcon)`
+const StyledCloseIcon = styled(CloseRoundedIcon)`
   cursor: pointer;
 `;
 
-const PaperStyle = styled(Drawer)`
+const StyledPaper = styled(Drawer)`
   & .MuiDrawer-paper {
     top: 46px;
     height: calc(100vh - 47px);
@@ -87,35 +80,28 @@ export default function({
 
   return (
     <>
-      <PaperStyle anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
-        <DrawerContainerStyle role="presentation">
-          <HeaderStyle>
-            <HeaderTextBackIconWrapper>
-              <DrawerWidgetHeading headingText={headingText} />
-            </HeaderTextBackIconWrapper>
-
-            <CloseIconWrapper>
-              <CloseIconStyle
-                color="action"
-                onClick={onCloseClick}
-                data-testid="drawer-widget-close-round-icon"
-              />
-            </CloseIconWrapper>
-          </HeaderStyle>
+      <StyledPaper anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
+        <StyledDrawerContainer role="presentation">
+          <StyledHeader>
+            <DrawerWidgetHeading headingText={headingText} />
+            <CloseIconButton onClick={onCloseClick}>
+              <StyledCloseIcon color="action" data-testid="drawer-widget-close-round-icon" />
+            </CloseIconButton>
+          </StyledHeader>
           <CreateAndEditRecipeForm
             recipeData={recipeData}
             setIsCreateAndEditRecipeFormOpen={setRecipeFormOpen}
             recipeFormAction="editRecipe"
             setSnackbar={setSnackbar}
           />
-        </DrawerContainerStyle>
+        </StyledDrawerContainer>
         <Snackbar
           handleClose={() => setSnackbar({ open: false })}
           open={snackbarState.open}
           message={snackbarState.message}
           isSuccess={snackbarState.isSuccess}
         />
-      </PaperStyle>
+      </StyledPaper>
     </>
   );
 }

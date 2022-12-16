@@ -41,7 +41,6 @@ export default function({
   setSnackbar,
   recipeFormAction,
 }: ICreateAndEditRecipeFormProps) {
-  const CreateRecipeFormAction = 'createRecipe';
   const EditRecipeFormAction = 'editRecipe';
   const [isNameError, setIsNameError] = useState(false);
   const StyledLabel = getLabelStyle(isNameError);
@@ -90,43 +89,7 @@ export default function({
   };
 
   const onRecipeDataSave = (recipeFormData: IRecipeData) => {
-    if (recipeFormAction === CreateRecipeFormAction) {
-      const params = {
-        context: getCurrentNamespace(),
-      };
-      const requestBody = {
-        recipeName: recipeFormData.recipeName,
-        description: recipeFormData.description,
-        directives: recipeSteps,
-      };
-      MyDataPrepApi.createRecipe(params, requestBody).subscribe(
-        () => {
-          setIsNameError(false);
-          setIsCreateAndEditRecipeFormOpen(false);
-          setSnackbar({
-            open: true,
-            isSuccess: true,
-            message: `${recipeSteps.length} ${T.translate(
-              'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
-            )}`,
-          });
-        },
-        (err) => {
-          if (err.response.message) {
-            setIsNameError(true);
-          } else {
-            setIsCreateAndEditRecipeFormOpen(false);
-            setSnackbar({
-              open: true,
-              isSuccess: false,
-              message: T.translate(
-                'features.WranglerNewUI.RecipeForm.labels.errorMessage'
-              ).toString(),
-            });
-          }
-        }
-      );
-    } else if (recipeFormAction === EditRecipeFormAction) {
+    if (recipeFormAction === EditRecipeFormAction) {
       const params = {
         context: getCurrentNamespace(),
         recipe_id: recipeData.recipeId.recipeId,
@@ -136,22 +99,21 @@ export default function({
         description: recipeFormData.description,
         directives: recipeFormData.directives,
       };
-      MyDataPrepApi.updateRecipe(params, payload).subscribe(
-        (res) => {
-          setSnackbar({
-            open: true,
-            isSuccess: true,
-            message: `${recipeSteps.length} ${T.translate(
-              'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
-            )}`,
-          });
-          setIsNameError(false);
-          setIsCreateAndEditRecipeFormOpen(false);
-        },
+      MyDataPrepApi.updateRecipe(params, payload).subscribe((res) => {
+        setIsNameError(false);
+        setIsCreateAndEditRecipeFormOpen(false);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: `${recipeSteps.length} ${T.translate(
+            'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
+          )}`,
+        });
         (err) => {
           if (err.response.message) {
-            setIsNameError(err);
+            setIsNameError(true);
           } else {
+            setIsCreateAndEditRecipeFormOpen(true);
             setSnackbar({
               open: true,
               isSuccess: false,
@@ -159,10 +121,9 @@ export default function({
                 'features.WranglerNewUI.RecipeForm.labels.errorMessage'
               ).toString(),
             });
-            setIsCreateAndEditRecipeFormOpen(true);
           }
-        }
-      );
+        };
+      });
     }
   };
 

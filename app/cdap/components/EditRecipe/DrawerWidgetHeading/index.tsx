@@ -18,31 +18,32 @@ import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import { UnderLine } from 'components/EditRecipe/IconStore/UnderLine';
 import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 
 interface IDrawerWidgetHeadingProps {
   headingText: React.ReactNode;
 }
 
 export default function({ headingText }: IDrawerWidgetHeadingProps) {
-  const HeadingWrapperStyle = styled(Box)`
+  const StyledHeadingWrapper = styled(Box)`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   `;
 
-  const HeadingTextStyle = styled(Typography)`
+  const StyledHeadingText = styled(Typography)`
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 150%;
-    letter-spacing: 0.15;
-    color: grey[900];
+    letter-spacing: 0.15px;
+    color: ${grey[900]};
   `;
 
   return (
-    <HeadingWrapperStyle>
-      <HeadingTextStyle data-testid="drawer-widget-heading">{headingText}</HeadingTextStyle>
+    <StyledHeadingWrapper>
+      <StyledHeadingText data-testid="drawer-widget-heading">{headingText}</StyledHeadingText>
       {UnderLine}
-    </HeadingWrapperStyle>
+    </StyledHeadingWrapper>
   );
 }
