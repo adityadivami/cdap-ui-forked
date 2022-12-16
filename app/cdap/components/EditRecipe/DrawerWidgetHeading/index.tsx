@@ -44,6 +44,7 @@ export default function({ headingText }: IDrawerWidgetHeadingProps) {
     line-height: 150%;
     letter-spacing: 0.15px;
     color: ${grey[900]};
+    margin-bottom: 5px;
   `;
 
   return (

@@ -34,20 +34,20 @@ interface IDrawerWidgetProps {
 
 const StyledDrawerContainer = styled(Container)`
   width: 460px;
-  height: calc(100vh - 225px);
   height: 100%;
   padding-left: 0px;
   padding-right: 0px;
   overflow-y: scroll;
+  margin-left: 31px;
 `;
 
 const StyledHeader = styled.header`
-  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 0px;
   padding-right: 0px;
+  margin-top: 16px;
 `;
 
 const CloseIconButton = styled(IconButton)`
@@ -65,6 +65,10 @@ const StyledPaper = styled(Drawer)`
     height: calc(100vh - 47px);
     width: 500px;
   }
+`;
+
+const StyledEditFormWrapper = styled.div`
+  margin-top: 30px;
 `;
 
 export default function({
@@ -85,12 +89,14 @@ export default function({
               <StyledCloseIcon color="action" data-testid="drawer-widget-close-round-icon" />
             </CloseIconButton>
           </StyledHeader>
-          <CreateAndEditRecipeForm
-            recipeData={recipeData}
-            setIsCreateAndEditRecipeFormOpen={setRecipeFormOpen}
-            recipeFormAction="editRecipe"
-            setSnackbar={setSnackbar}
-          />
+          <StyledEditFormWrapper>
+            <CreateAndEditRecipeForm
+              recipeData={recipeData}
+              setIsCreateAndEditRecipeFormOpen={setRecipeFormOpen}
+              recipeFormAction="editRecipe"
+              setSnackbar={setSnackbar}
+            />
+          </StyledEditFormWrapper>
         </StyledDrawerContainer>
       </StyledPaper>
     </>
