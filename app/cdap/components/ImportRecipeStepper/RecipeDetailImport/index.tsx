@@ -115,6 +115,10 @@ const ImportStepsButton = styled(Button)`
   box-shadow: 0px 2px 4px rgba(70, 129, 244, 0.15);
   border-radius: 4px;
   color: #ffffff;
+  &:hover {
+    background: #2196f3;
+    color: #ffffff;
+  }
 `;
 
 const CancelButton = styled(Button)`
@@ -123,6 +127,11 @@ const CancelButton = styled(Button)`
   border-color: #2196f3;
   border-radius: 4px;
   color: #2196f3;
+  &:hover {
+    border-color: #2196f3;
+    background: #ffffff;
+    color: #2196f3;
+  }
 `;
 
 const getSerialNumber = (recipeStepIndex: number) => {
