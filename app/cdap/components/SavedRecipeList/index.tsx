@@ -23,8 +23,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import DataPrepStore from 'components/DataPrep/store';
-import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import EditRecipe from 'components/EditRecipe';
 import Snackbar from 'components/Snackbar';
 import T from 'i18n-react';
@@ -40,7 +38,7 @@ const useStyles = makeStyles({
 
 export default function() {
   const classes = useStyles();
-  const [showEditFormPanel, setShowEditFormPanel] = useState<boolean>(false);
+  const [showEditFormPanel, setShowEditFormPanel] = useState(false);
   const [recipeList, setRecipeList] = useState([]);
   const [editRecipeData, setEditRecipeData] = useState({
     recipeName: '',
@@ -49,19 +47,15 @@ export default function() {
     recipeId: undefined,
   });
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [isNameError, setIsNameError] = useState(false);
 
   useEffect(() => {
     const params = {
       context: getCurrentNamespace(),
     };
     MyDataPrepApi.getRecipeList(params).subscribe((res) => {
-      console.log(res, res.values);
       setRecipeList(res.values);
     });
   }, []);
-
-  console.log(recipeList, 'recipeList');
 
   useEffect(() => {
     if (snackbarState.open) {
@@ -83,11 +77,6 @@ export default function() {
       directives: [],
       recipeId: undefined,
     });
-  };
-
-  const onRecipeFormCancel = () => {
-    setShowEditFormPanel(false);
-    setIsNameError(false);
   };
 
   const onEdit = (row) => {
@@ -126,12 +115,17 @@ export default function() {
           openDrawer={showEditFormPanel}
           headingText={T.translate('features.WranglerNewUI.RecipeForm.labels.editFormTitle')}
           onCloseClick={onCloseClick}
-          onCancel={onRecipeFormCancel}
-          snackbarState={snackbarState}
           recipeData={editRecipeData}
           setSnackbar={(value) => setSnackbar(() => value)}
+          setRecipeFormOpen={setShowEditFormPanel}
         />
       )}
+      <Snackbar
+        handleClose={() => setSnackbar({ open: false })}
+        open={snackbarState.open}
+        message={snackbarState.message}
+        isSuccess={snackbarState.isSuccess}
+      />
     </>
   );
 }

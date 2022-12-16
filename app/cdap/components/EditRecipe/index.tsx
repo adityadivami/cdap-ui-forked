@@ -15,22 +15,21 @@
  */
 
 import { Container, Drawer, IconButton } from '@material-ui/core';
-import React, { useState } from 'react';
+import React from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import DrawerWidgetHeading from './DrawerWidgetHeading';
 import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm';
 import { IRecipeData } from 'components/CreateAndEditRecipeForm/types';
 import styled from 'styled-components';
-import Snackbar, { ISnackbar } from 'components/Snackbar';
+import { ISnackbar } from 'components/Snackbar';
 
 interface IDrawerWidgetProps {
   headingText: React.ReactNode;
   openDrawer: boolean;
   onCloseClick: () => void;
   recipeData: IRecipeData;
-  onCancel: () => void;
   setSnackbar: (value: ISnackbar) => void;
-  snackbarState: ISnackbar;
+  setRecipeFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const StyledDrawerContainer = styled(Container)`
@@ -73,11 +72,9 @@ export default function({
   openDrawer,
   onCloseClick,
   recipeData,
-  snackbarState,
   setSnackbar,
+  setRecipeFormOpen,
 }: IDrawerWidgetProps) {
-  const [recipeFormOpen, setRecipeFormOpen] = useState(true);
-
   return (
     <>
       <StyledPaper anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
@@ -95,12 +92,6 @@ export default function({
             setSnackbar={setSnackbar}
           />
         </StyledDrawerContainer>
-        <Snackbar
-          handleClose={() => setSnackbar({ open: false })}
-          open={snackbarState.open}
-          message={snackbarState.message}
-          isSuccess={snackbarState.isSuccess}
-        />
       </StyledPaper>
     </>
   );
