@@ -13,3 +13,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
+import { getByTestId, render, screen } from '@testing-library/react';
+import React from 'react';
+import ImportRecipeStepper from 'components/ImportRecipeStepper';
+
+describe('Test Import Recipe Stepper', () => {
+  it('Should render Import Recipe Stepper', () => {
+    render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
+    const wrapper = screen.getByTestId(/step-wrapper/i);
+    expect(wrapper).toBeInTheDocument();
+  });
+});

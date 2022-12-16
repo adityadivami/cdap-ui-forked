@@ -62,7 +62,7 @@ const StyledIconButton = styled(IconButton)`
 
 export default function({ headingText, previousStep }) {
   return (
-    <HeaderWrapper>
+    <HeaderWrapper data-testid="import-recipe-header">
       <DrawerWidgetTitleIconWrapper>
         <StyledIconButton data-testid="back-icon-step" onClick={() => previousStep()}>
           <BackIcon />
