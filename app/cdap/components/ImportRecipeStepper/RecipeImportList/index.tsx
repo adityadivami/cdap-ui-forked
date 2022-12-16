@@ -14,8 +14,7 @@
  * the License.
  */
 
-import { Box, Button, Container, Drawer, Typography } from '@material-ui/core';
-import ArrowBackIosOutlined from '@material-ui/icons/ArrowBackIosOutlined';
+import { Box, Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import HeaderTemplate from 'components/ImportRecipeStepper/HeaderTemplate';
@@ -189,8 +188,14 @@ export default function({ previousStep, nextStep }) {
   const recipeList = getRecipeListMock.values;
   return (
     <DrawerContainerStyle>
-      <HeaderTemplate headingText={'Import steps from a recipe'} previousStep={previousStep} />
-      <RecipeImportSubText>Select a recipe to import its steps</RecipeImportSubText>
+      <HeaderTemplate
+        headingText={`${T.translate('features.WranglerNewUI.ImportRecipe.title')}`}
+        previousStep={previousStep}
+      />
+      <RecipeImportSubText>
+        {T.translate('features.WranglerNewUI.ImportRecipe.subTitle')}
+      </RecipeImportSubText>
+      {/* --------------- WRAPPER will be replaced by Saved Recipe List component ---------------- */}
       <Wrapper data-testid="saved-recipe-list-wrapper">
         <GridHeadWrapper>
           <GridHead component="body1" data-testid="recipe-name-head">

@@ -13,8 +13,3 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-
-export interface IRecipeStepTableProps {
-  recipeSteps: string[];
-  onDeleteRecipeSteps: (newRecipeStepList: string[], removedRecipeStepList: string[]) => void;
-}

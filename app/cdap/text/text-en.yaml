@@ -3513,6 +3513,11 @@ features:
           title: Continue ongoing data explorations, pick up where you left off
     ImportData:
       referenceLabel: Import Data
+    ImportRecipe:
+      title: Import steps from a recipe
+      subTitle: Select a recipe to import its steps
+      cancel: Cancel
+      importSteps: Import Steps
     NoRecordScreen:
       gridTable:
         subtitle: Remove some recipe steps to view some data

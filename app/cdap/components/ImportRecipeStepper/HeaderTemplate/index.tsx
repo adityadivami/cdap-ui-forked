@@ -17,7 +17,6 @@
 import { Box, IconButton, Typography } from '@material-ui/core';
 import React from 'react';
 import { UnderLine } from 'components/RecipeSteps/IconStore/Underline';
-import { IDrawerWidgetHeadingProps } from 'components/RecipeSteps/RecipeWidgetHeading/types';
 import styled from 'styled-components';
 import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import { grey } from '@material-ui/core/colors';
@@ -65,17 +64,15 @@ export default function({ headingText, previousStep }) {
   return (
     <HeaderWrapper>
       <DrawerWidgetTitleIconWrapper>
-        <StyledIconButton onClick={() => previousStep()}>
+        <StyledIconButton data-testid="back-icon-step" onClick={() => previousStep()}>
           <BackIcon />
         </StyledIconButton>
         <Box>
-          <DrawerWidgetTitleLabel data-testid="drawer-widget-heading">
-            {headingText}
-          </DrawerWidgetTitleLabel>
+          <DrawerWidgetTitleLabel>{headingText}</DrawerWidgetTitleLabel>
           {UnderLine}
         </Box>
       </DrawerWidgetTitleIconWrapper>
-      <StyledIconButton>
+      <StyledIconButton data-testid="close-icon-step" onClick={() => previousStep()}>
         <CloseIcon />
       </StyledIconButton>
     </HeaderWrapper>

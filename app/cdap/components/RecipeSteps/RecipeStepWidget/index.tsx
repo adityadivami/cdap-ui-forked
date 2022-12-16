@@ -95,4 +95,3 @@ export default function({ headingText, onClose, showDivider, headerActionTemplat
     </DrawerContainerStyle>
   );
 }
-

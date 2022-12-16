@@ -16,7 +16,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Button, Container, Drawer, Typography } from '@material-ui/core';
+import { Box, Button, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
 import {
@@ -121,9 +121,8 @@ const CancelButton = styled(Button)`
   width: 162px;
   height: 36px;
   border-color: #2196f3;
-  box-shadow: 0px 2px 4px rgba(70, 129, 244, 0.15);
   border-radius: 4px;
-  color: ${grey[700]};
+  color: #2196f3;
 `;
 
 const getSerialNumber = (recipeStepIndex: number) => {
@@ -137,7 +136,11 @@ const getSerialNumber = (recipeStepIndex: number) => {
 export default function({ recipeDetails, previousStep, nextStep }) {
   return (
     <DrawerContainerStyle>
-      <HeaderTemplate headingText={'Import steps from a recipe'} previousStep={previousStep} />
+      <HeaderTemplate
+        headingText={`${T.translate('features.WranglerNewUI.ImportRecipe.title')}`}
+        previousStep={previousStep}
+      />
+      {/* --------------- RECIPE DETAIL WRAPPER will be replaced by RecipeDetail component ---------------- */}
       <RecipeDetailWrapper>
         <RecipeName component="h5" data-testid="recipe-name">
           {recipeDetails.recipeName}
@@ -184,8 +187,12 @@ export default function({ recipeDetails, previousStep, nextStep }) {
         })}
       </RecipeDetailWrapper>
       <ButtonWrapper>
-        <CancelButton variant="outlined">Cancel</CancelButton>
-        <ImportStepsButton variant="contained">Import Steps</ImportStepsButton>
+        <CancelButton variant="outlined">
+          {T.translate('features.WranglerNewUI.ImportRecipe.cancel')}
+        </CancelButton>
+        <ImportStepsButton variant="contained">
+          {T.translate('features.WranglerNewUI.ImportRecipe.importSteps')}
+        </ImportStepsButton>
       </ButtonWrapper>
     </DrawerContainerStyle>
   );

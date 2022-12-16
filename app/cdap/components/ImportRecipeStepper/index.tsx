@@ -16,7 +16,7 @@
 
 import React, { useState, useEffect } from 'react';
 import RecipeImportList from 'components/ImportRecipeStepper/RecipeImportList';
-import RecipeDetail from 'components/ImportRecipeStepper/RecipeDetail';
+import RecipeDetail from 'components/ImportRecipeStepper/RecipeDetailImport';
 import RecipeSteps from 'components/RecipeSteps';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
@@ -76,10 +76,10 @@ export default function({ setShowRecipePanel }) {
   ];
 
   return (
-    <div className="Max-Width-Container">
+    <Box data-testid="step-wrapper">
       {steps.map((item) => {
         return item.value === current && item.content;
       })}
-    </div>
+    </Box>
   );
 }
