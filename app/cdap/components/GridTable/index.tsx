@@ -71,6 +71,7 @@ export default function GridTable() {
   const params = useParams() as IRecords;
   const classes = useStyles();
   const location = useLocation();
+  const { dataprep } = DataPrepStore.getState();
   const [tableMetaInfo, setTableMetaInfo] = useState({
     columnCount: 0,
     rowCount: 0,
@@ -94,6 +95,7 @@ export default function GridTable() {
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
   const [showRecipePanel, setShowRecipePanel] = useState<boolean>(false);
+  const { directives } = dataprep;
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -347,7 +349,7 @@ export default function GridTable() {
           {showRecipePanel && <ImportRecipeStepper setShowRecipePanel={setShowRecipePanel} />}
         </TablePanelContainer>
         <FooterPanel
-          recipeStepsCount={0}
+          recipeStepsCount={directives?.length}
           gridMetaInfo={tableMetaInfo}
           handleShowRecipePanelHandler={showRecipePanelHandler}
         />
