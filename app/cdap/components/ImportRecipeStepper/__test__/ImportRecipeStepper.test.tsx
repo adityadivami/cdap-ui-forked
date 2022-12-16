@@ -16,7 +16,7 @@
 
 import { getByTestId, render, screen } from '@testing-library/react';
 import React from 'react';
-import ImportRecipeStepper from 'components/ImportRecipeStepper';
+import ImportRecipeStepper from 'components/ImportRecipeStepper/index';
 
 describe('Test Import Recipe Stepper', () => {
   it('Should render Import Recipe Stepper', () => {

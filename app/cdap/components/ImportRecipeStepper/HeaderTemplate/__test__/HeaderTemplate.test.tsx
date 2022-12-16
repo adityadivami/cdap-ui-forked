@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { getByTestId, render, screen } from '@testing-library/react';
+import { getByTestId, render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import ImportRecipeStepper from 'components/ImportRecipeStepper/HeaderTemplate';
 
@@ -23,8 +23,10 @@ describe('Test Import Recipe Stepper', () => {
     render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
     const wrapper = screen.getByTestId(/import-recipe-header/i);
     const backIcon = screen.getByTestId(/back-icon-step/i);
-    expect(backIcon).toHaveBeenCalled();
     const closeIcon = screen.getByTestId(/close-icon-step/i);
+    fireEvent.click(backIcon);
+    fireEvent.click(closeIcon);
+    expect(backIcon).toHaveBeenCalled();
     expect(closeIcon).toHaveBeenCalled();
     expect(wrapper).toBeInTheDocument();
   });

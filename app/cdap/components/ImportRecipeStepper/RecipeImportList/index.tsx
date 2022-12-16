@@ -214,7 +214,11 @@ export default function({ previousStep, nextStep }) {
         <HeadDivider />
         {recipeList.map((recipeItem, recipeIndex) => (
           <>
-            <GridWrapper key={recipeItem.recipeId} onClick={() => nextStep(recipeItem)}>
+            <GridWrapper
+              data-testid={`recipe-item-${recipeIndex}`}
+              key={recipeItem.recipeId}
+              onClick={() => nextStep(recipeItem)}
+            >
               <GridCellText component="body1" data-testid={`recipe-name-${recipeIndex}`}>
                 {recipeItem.recipeName}
               </GridCellText>
