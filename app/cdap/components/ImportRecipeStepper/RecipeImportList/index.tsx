@@ -180,7 +180,7 @@ const RecipeImportSubText = styled(Typography)`
   font-size: 14px;
   color: ${grey[700]};
   margin-top: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding-left: 25px;
 `;
 

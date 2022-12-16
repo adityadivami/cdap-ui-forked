@@ -35,6 +35,7 @@ const DrawerWidgetTitleLabel = styled(Typography)`
   line-height: 150%;
   letter-spacing: 0.15;
   color: ${grey[900]};
+  margin-bottom: 6px;
 `;
 
 const HeaderWrapper = styled(Box)`
@@ -60,6 +61,11 @@ const StyledIconButton = styled(IconButton)`
   }
 `;
 
+const TitleUnderLineWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
+
 export default function({ headingText, previousStep }) {
   return (
     <HeaderWrapper data-testid="import-recipe-header">
@@ -67,10 +73,10 @@ export default function({ headingText, previousStep }) {
         <StyledIconButton data-testid="back-icon-step" onClick={() => previousStep()}>
           <BackIcon />
         </StyledIconButton>
-        <Box>
+        <TitleUnderLineWrapper>
           <DrawerWidgetTitleLabel>{headingText}</DrawerWidgetTitleLabel>
           {UnderLine}
-        </Box>
+        </TitleUnderLineWrapper>
       </DrawerWidgetTitleIconWrapper>
       <StyledIconButton data-testid="close-icon-step" onClick={() => previousStep()}>
         <CloseIcon />

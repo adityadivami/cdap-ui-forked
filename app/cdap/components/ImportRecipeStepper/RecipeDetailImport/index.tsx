@@ -28,7 +28,7 @@ import HeaderTemplate from 'components/ImportRecipeStepper/HeaderTemplate';
 const PREFIX = 'features.WranglerNewUI.RecipeDetails';
 
 const RecipeDetailWrapper = styled(Box)`
-  margin-top: 19px;
+  margin-top: 30px;
   padding-left: 30px;
   height: 70%;
 `;
