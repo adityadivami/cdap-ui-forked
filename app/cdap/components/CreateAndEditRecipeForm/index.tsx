@@ -99,16 +99,18 @@ export default function({
         description: recipeFormData.description,
         directives: recipeFormData.directives,
       };
-      MyDataPrepApi.updateRecipe(params, payload).subscribe((res) => {
-        setIsNameError(false);
-        setIsCreateAndEditRecipeFormOpen(false);
-        setSnackbar({
-          open: true,
-          isSuccess: true,
-          message: `${recipeSteps.length} ${T.translate(
-            'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
-          )}`,
-        });
+      MyDataPrepApi.updateRecipe(params, payload).subscribe(
+        () => {
+          setIsNameError(false);
+          setIsCreateAndEditRecipeFormOpen(false);
+          setSnackbar({
+            open: true,
+            isSuccess: true,
+            message: `${recipeSteps.length} ${T.translate(
+              'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
+            )}`,
+          });
+        },
         (err) => {
           if (err.response.message) {
             setIsNameError(true);
@@ -122,8 +124,8 @@ export default function({
               ).toString(),
             });
           }
-        };
-      });
+        }
+      );
     }
   };
 
