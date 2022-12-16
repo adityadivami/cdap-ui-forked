@@ -24,4 +24,28 @@ describe('Test Import Recipe Stepper', () => {
     const wrapper = screen.getByTestId(/step-wrapper/i);
     expect(wrapper).toBeInTheDocument();
   });
+
+  it('Should render Import Recipe Stepper and trigger nextStep function.', () => {
+    render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
+    const wrapper = screen.getByTestId(/step-wrapper/i);
+    const headerActionImportIcon = screen.getByTestId(/header-action-import-icon/i); // added ***
+    fireEvent.click(headerActionImportIcon);
+    expect(wrapper).toBeInTheDocument();
+  });
+
+  it('Should render Import Recipe Stepper and trigger nextStep function when data is given.', () => {
+    render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
+    const headerActionImportIcon = screen.getByTestId(/header-action-import-icon/i); // added ***
+    fireEvent.click(headerActionImportIcon);
+    const recipeItem = screen.getByTestId(/recipe-item-0/i);
+    fireEvent.click(recipeItem);
+  });
+
+  it('Should render Import Recipe Stepper and trigger previous previousStep function.', () => {
+    render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
+    const headerActionImportIcon = screen.getByTestId(/header-action-import-icon/i); // added ***
+    fireEvent.click(headerActionImportIcon);
+    const backIconStep = screen.getByTestId(/back-icon-step/i);
+    fireEvent.click(backIconStep);
+  });
 });
