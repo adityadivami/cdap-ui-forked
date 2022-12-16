@@ -23,7 +23,7 @@ import MyDataPrepApi from 'api/dataprep';
 describe('Test Create and Edit Recipe Component', () => {
   const mockCreateAndEditRecipe = jest.fn();
 
-  jest.spyOn(MyDataPrepApi, 'createRecipe').mockImplementation(() => {
+  jest.spyOn(MyDataPrepApi, 'updateRecipe').mockImplementation(() => {
     return {
       subscribe: (callback) => {
         callback();
@@ -34,9 +34,14 @@ describe('Test Create and Edit Recipe Component', () => {
   beforeEach(() => {
     render(
       <CreateAndEditRecipeForm
-        recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
+        recipeData={{
+          recipeName: 'Abhilash',
+          description: 'Batman',
+          directives: [],
+          recipeId: { recipeId: '420', namespace: { name: 'test', generation: 69 } },
+        }}
         setIsCreateAndEditRecipeFormOpen={mockCreateAndEditRecipe}
-        recipeFormAction={'createRecipe'}
+        recipeFormAction={'editRecipe'}
         setSnackbar={jest.fn()}
       />
     );

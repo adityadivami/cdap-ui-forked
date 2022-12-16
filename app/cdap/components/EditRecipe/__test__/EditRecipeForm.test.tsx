@@ -25,19 +25,11 @@ describe('Test Create Recipe Component', () => {
     render(
       <EditRecipe
         recipeData={{ recipeName: 'recipeName', description: '', directives: [] }}
-        onRecipeDataSave={jest.fn()}
-        onCancel={jest.fn()}
-        isNameError={false}
         headingText={''}
         openDrawer={true}
         onCloseClick={jest.fn()}
-        setIsNameError={jest.fn()}
         setSnackbar={mockSetSnackbar}
-        snackbarState={{
-          open: true,
-          message: '',
-          isSuccess: false,
-        }}
+        setRecipeFormOpen={mockSetSnackbar}
       />
     );
   });
@@ -45,11 +37,5 @@ describe('Test Create Recipe Component', () => {
   it('should render the component as expected', () => {
     const parentElement = screen.getByTestId(/edit-recipe-drawer-widget-parent/i);
     expect(parentElement).toBeInTheDocument();
-  });
-
-  it('should trigger handleClose function', () => {
-    const closeIconElement = screen.getByTestId(/snackbar-close-icon/i);
-    fireEvent.click(closeIconElement);
-    expect(mockSetSnackbar).toBeCalled();
   });
 });
