@@ -262,8 +262,6 @@ const MyDataPrepApi = {
   listConnectionTypes: apiCreator(dataSrc, 'GET', 'REQUEST', connectionTypesPath),
 
   // Recipe Management
-  createRecipe: apiCreator(dataSrc, 'POST', 'REQUEST', `${contextPathV2}/recipes`),
-  getRecipeList: apiCreator(dataSrc, 'GET', 'REQUEST', `${contextPathV2}/recipes`),
   updateRecipe: apiCreator(dataSrc, 'PUT', 'REQUEST', `${contextPathV2}/recipes/id/:recipe_id`),
 };
 

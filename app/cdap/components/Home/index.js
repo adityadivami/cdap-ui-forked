@@ -44,10 +44,7 @@ const WrangleGrid = Loadable({
   loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/GridTable'),
   loading: LoadingSVGCentered,
 });
-const SavedRecipeList = Loadable({
-  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/SavedRecipeList'),
-  loading: LoadingSVGCentered,
-});
+
 const Connections = Loadable({
   loader: () => import(/* webpackChunkName: "Connections" */ 'components/Connections'),
   loading: LoadingSVGCentered,
@@ -163,7 +160,6 @@ export default class Home extends Component {
             component={ConnectionList}
           />
           <Route exact path="/ns/:namespace/wrangler-grid/:wid" component={WrangleGrid} />
-          <Route exact path="/ns/:namespace/saved-recipe-list" component={SavedRecipeList} />
           <Route exact path="/ns/:namespace/control" component={EntityListView} />
           <Route
             exact
