@@ -3522,6 +3522,18 @@ features:
         failure: Failure
         success: Success
         undo: Undo
-
+    RecipeForm:
+      labels:
+        name: Name of  new recipe
+        description: Description of recipe
+        nameErrorMessage: Another recipe with same name exists. Please input another name
+        cancel: Cancel
+        save: Save
+        editFormTitle: Edit Recipe
+        edit: Edit
+        namePlaceholder: Input a name to identify it later
+        descriptionPlaceholder: Input a description to identify it later
+        recipeSaveSuccessMessage: Steps successfully saved as a recipe!
+        errorMessage: Something went wrong!
     
 ...
