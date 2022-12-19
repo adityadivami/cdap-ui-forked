@@ -17,7 +17,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Box, Button, Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import { blue, grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
 import {
   dateFormatting,
@@ -111,12 +111,12 @@ const ImportStepsButton = styled(Button)`
   width: 162px;
   height: 36px;
   margin-left: 10px;
-  background: #2196f3;
+  background: ${blue[500]};
   box-shadow: 0px 2px 4px rgba(70, 129, 244, 0.15);
   border-radius: 4px;
   color: #ffffff;
   &:hover {
-    background: #2196f3;
+    background: ${blue[500]};
     color: #ffffff;
   }
 `;
@@ -124,13 +124,13 @@ const ImportStepsButton = styled(Button)`
 const CancelButton = styled(Button)`
   width: 162px;
   height: 36px;
-  border-color: #2196f3;
+  border-color: ${blue[500]};
   border-radius: 4px;
-  color: #2196f3;
+  color: ${blue[500]};
   &:hover {
-    border-color: #2196f3;
+    border-color: ${blue[500]};
     background: #ffffff;
-    color: #2196f3;
+    color: ${blue[500]};
   }
 `;
 

@@ -21,6 +21,8 @@ import HeaderTemplate from 'components/ImportRecipeStepper/HeaderTemplate';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
 
+const PREFIX = 'features.WranglerNewUI.SavedRecipeList';
+
 export const dateFormatting = (millisecondsTime) => {
   const normalDateString = new Date(millisecondsTime);
   const splitTime = normalDateString.toLocaleTimeString('en-US').split(':');
@@ -81,7 +83,22 @@ const GridCellText = styled(Typography)`
   color: ${grey[700]};
 `;
 
-const PREFIX = 'features.WranglerNewUI.SavedRecipeList';
+export const DrawerContainerStyle = styled(Box)`
+  width: 1010px;
+  height: calc(100vh - 190px);
+  border-right: 1px solid ${grey[300]};
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
+const RecipeImportSubText = styled(Typography)`
+  font-weight: 400;
+  font-size: 14px;
+  color: ${grey[700]};
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-left: 25px;
+`;
 
 const getRecipeListMock = {
   nextPageToken: 'recipe6601',
@@ -166,23 +183,6 @@ const getRecipeListMock = {
   ],
   truncated: 'false',
 };
-
-export const DrawerContainerStyle = styled(Box)`
-  width: 1010px;
-  height: calc(100vh - 190px);
-  border-right: 1px solid #e0e0e0;
-  padding-left: 20px;
-  padding-right: 20px;
-`;
-
-const RecipeImportSubText = styled(Typography)`
-  font-weight: 400;
-  font-size: 14px;
-  color: ${grey[700]};
-  margin-top: 30px;
-  margin-bottom: 10px;
-  padding-left: 25px;
-`;
 
 export default function({ previousStep, nextStep }) {
   const recipeList = getRecipeListMock.values;
