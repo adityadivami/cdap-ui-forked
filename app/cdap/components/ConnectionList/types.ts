@@ -104,12 +104,12 @@ export interface IRenderLabelProps {
 }
 
 export interface IConnectionTabType {
+  name: string;
   connectionId?: string;
   connectionType?: string;
   createdTimeMillis?: number;
   description?: string;
   isDefault?: boolean;
-  name: string;
   displayName?: string;
   plugin?: IConnectionTabPlugin;
   preConfigured?: boolean;

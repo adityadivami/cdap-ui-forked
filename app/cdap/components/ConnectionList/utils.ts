@@ -23,7 +23,9 @@ import {
 } from 'components/Connections/Create/reducer';
 
 /**
- *
+ * This function gets triggered whenever user clicks on any tab in connection list page.
+ * It pushes all the required data to render the tabs in the next level & also hides the search bar in current level
+ * 
  * @param response categorized connections data
  * @param index numnber which indicates the level/column in connections list
  * @param existingTabsData existing tab data to render connection list horizontal component
@@ -55,7 +57,10 @@ export const getDataForTabsHelper = (
 };
 
 /**
- *
+ * This function gets triggered whenever user click on search icon.
+ * Here we are actually finding on which level or which column the search icon gets clicked & 
+ * enabling the search functionality in that particular column/ level and hiding the search functionality in other columns
+ * 
  * @param index numnber which indicates the level/column in connections list
  * @param tabsData data to render connection list horizontal component
  * @returns data after altering each column's search bar's status
@@ -79,6 +84,7 @@ export const getUpdatedTabsData = (index: number, tabsData) => {
 };
 
 /**
+ * This function takes connector type names & returns the display names for each connector type
  *
  * @param connectorTypesWithSVG connector types with corresponding icon attached to it
  * @returns connector types with display name (ex: name: CloudSQLPostgreSQL --> displayName: CloudSQL PostgreSQL)

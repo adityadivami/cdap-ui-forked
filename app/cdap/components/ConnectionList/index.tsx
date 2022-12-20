@@ -24,12 +24,12 @@ import {
   IConnectionTabType,
   IFilteredData,
   ITabData,
-  ITabsDataResponse,
+  ITabsDataResponse
 } from 'components/ConnectionList/types';
 import {
   getDataForTabsHelper,
   getDisplayNamesForConnectorTypes,
-  getUpdatedTabsData,
+  getUpdatedTabsData
 } from 'components/ConnectionList/utils';
 import { exploreConnection } from 'components/Connections/Browser/GenericBrowser/apiHelpers';
 import { getCategorizedConnections } from 'components/Connections/Browser/SidePanel/apiHelpers';
@@ -43,7 +43,6 @@ import T from 'i18n-react';
 import cloneDeep from 'lodash/cloneDeep';
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router';
-import { flatMap } from 'rxjs/operators';
 import styled from 'styled-components';
 
 const PREFIX = 'features.WranglerNewUI';
@@ -134,15 +133,17 @@ export default function() {
 
   useEffect(() => {
     getWidgetData();
-  }, []);
-
-  /**
+    /**
    * Here we are fetching connectors with icons from store
    */
-  DataPrepStore.subscribe(() => {
-    const newState = DataPrepStore.getState();
-    setFetchedConnectorsData(newState.dataprep.connectorsWithIcons);
-  });
+    DataPrepStore.subscribe(() => {
+      const newState = DataPrepStore.getState();
+      setFetchedConnectorsData(newState.dataprep.connectorsWithIcons);
+    });
+  }, []);
+
+  
+  
 
   const getConnectionsTabData = async () => {
     let connectorTypes: ITabData[] = fetchedConnectorsData;
