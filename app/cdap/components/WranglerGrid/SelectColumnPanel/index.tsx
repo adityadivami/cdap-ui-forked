@@ -80,7 +80,10 @@ export default function({
   return (
     <StyledDrawer open={columnsPopup} data-testid="select-column-panel" anchor="right">
       <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
-        <SelectColumnDrawerHeader closeClickHandler={closeSelectColumnsPopupWithoutColumn} />
+        <SelectColumnDrawerHeader
+          closeClickHandler={closeSelectColumnsPopupWithoutColumn}
+          transformationName={transformationName}
+        />
         <AddTransformationWrapper>
           <AddTransformationBodyWrapper>
             <SelectColumnsList
