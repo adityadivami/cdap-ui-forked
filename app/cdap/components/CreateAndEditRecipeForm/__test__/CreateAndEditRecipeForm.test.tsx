@@ -37,7 +37,7 @@ describe('Test Create and Edit Recipe Component', () => {
         recipeData={{
           recipeName: 'Abhilash',
           description: 'Batman',
-          directives: [],
+          directives: ['uppercase: body1', 'titlecase: body2'],
           recipeId: { recipeId: '420', namespace: { name: 'test', generation: 69 } },
         }}
         setIsCreateAndEditRecipeFormOpen={mockCreateAndEditRecipe}
@@ -72,6 +72,7 @@ describe('Test Create and Edit Recipe Component', () => {
     const RecipeNameElement = screen.getByTestId(/recipe-name-field/i);
     fireEvent.change(RecipeNameElement.firstChild.firstChild, { target: { value: 'test' } });
     expect(RecipeNameElement).toBeInTheDocument();
+    expect(RecipeNameElement.firstChild.firstChild).toHaveValue('test')
   });
 
   it('should render Recipe Description Field', () => {
@@ -83,6 +84,7 @@ describe('Test Create and Edit Recipe Component', () => {
   it('should trigger onCancel event in recipe', () => {
     const cancelButtonElement = screen.getByTestId(/recipe-cancel-button/i);
     fireEvent.click(cancelButtonElement);
+    expect(cancelButtonElement).toBeInTheDocument();
     expect(mockCreateAndEditRecipe).toBeCalled();
   });
 
@@ -90,6 +92,7 @@ describe('Test Create and Edit Recipe Component', () => {
     const saveButtonElement = screen.getByTestId(/recipe-save-button/i);
     fireEvent.click(saveButtonElement);
     expect(saveButtonElement).toBeInTheDocument();
+    expect(MyDataPrepApi.updateRecipe).toBeCalled()
   });
 });
 
