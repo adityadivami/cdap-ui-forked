@@ -24,8 +24,8 @@ describe('Test Create Recipe Component', () => {
   beforeEach(() => {
     render(
       <EditRecipe
-        recipeData={{ recipeName: 'recipeName', description: '', directives: [] }}
-        headingText={''}
+        recipeData={{ recipeName: 'recipeName', description: '', directives: ['uppercase: body1', 'titlecase: body2'] }}
+        headingText={'Divami'}
         openDrawer={true}
         onCloseClick={jest.fn()}
         setSnackbar={mockSetSnackbar}
