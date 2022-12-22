@@ -71,7 +71,7 @@ const CancelButton = styled(Button)`
 
 export default function({ recipeDetails, previousStep, nextStep }: IRecipeDetailImportProps) {
   return (
-    <DrawerContainerStyle>
+    <DrawerContainerStyle data-testid="recipe-detail-import-container">
       <HeaderTemplate
         headingText={`${T.translate(`${PREFIX}.title`)}`}
         previousStep={previousStep}
@@ -80,8 +80,10 @@ export default function({ recipeDetails, previousStep, nextStep }: IRecipeDetail
         <RecipeDetails recipeDetails={recipeDetails} />
       </RecipeDetailWrapper>
       <ButtonWrapper>
-        <CancelButton variant="outlined">{T.translate(`${PREFIX}.cancel`)}</CancelButton>
-        <ImportStepsButton variant="contained">
+        <CancelButton variant="outlined" data-testid="recipe-detail-import-cancel-button">
+          {T.translate(`${PREFIX}.cancel`)}
+        </CancelButton>
+        <ImportStepsButton variant="contained" data-testid="recipe-detail-import-steps-button">
           {T.translate(`${PREFIX}.importSteps`)}
         </ImportStepsButton>
       </ButtonWrapper>

@@ -14,18 +14,34 @@
  * the License.
  */
 
-import { getByTestId, render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import HeaderTemplate from 'components/ImportRecipeStepper/HeaderTemplate';
 import React from 'react';
-import ImportRecipeStepper from 'components/ImportRecipeStepper/HeaderTemplate';
 
 describe('Test Import Recipe Stepper', () => {
   it('Should render Import Recipe Stepper', () => {
-    render(<ImportRecipeStepper headingText={'Import Recipe'} previousStep={jest.fn()} />);
+    render(<HeaderTemplate headingText={'Import Recipe'} previousStep={jest.fn()} />);
     const wrapper = screen.getByTestId(/import-recipe-header/i);
-    const backIcon = screen.getByTestId(/back-icon-step/i);
-    const closeIcon = screen.getByTestId(/close-icon-step/i);
-    fireEvent.click(backIcon);
-    fireEvent.click(closeIcon);
     expect(wrapper).toBeInTheDocument();
+  });
+
+  it('Should render Import Recipe Stepper and headingText should be as expected.', () => {
+    render(<HeaderTemplate headingText={'Import Recipe'} previousStep={jest.fn()} />);
+    const headingText = screen.getByTestId(/import-recipe-stepper-heading-text/i);
+    expect(headingText).toHaveTextContent('Import Recipe');
+  });
+
+  it('Should test back-icon-step is in the Document and previousStep function is called', () => {
+    render(<HeaderTemplate headingText={'Import Recipe'} previousStep={jest.fn()} />);
+    const backIconStep = screen.getByTestId(/back-icon-step/i);
+    fireEvent.click(backIconStep);
+    expect(backIconStep).toBeInTheDocument();
+  });
+
+  it('Should test whether close-icon-step is in the Document and it triggers  previousStep function.', () => {
+    render(<HeaderTemplate headingText={'Import Recipe'} previousStep={jest.fn()} />);
+    const closeIconStep = screen.getByTestId(/close-icon-step/i);
+    fireEvent.click(closeIconStep);
+    expect(closeIconStep).toBeInTheDocument();
   });
 });

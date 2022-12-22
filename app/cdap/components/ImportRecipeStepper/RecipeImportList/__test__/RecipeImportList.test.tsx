@@ -20,47 +20,18 @@ import RecipeImportList from 'components/ImportRecipeStepper/RecipeImportList';
 import React from 'react';
 import T from 'i18n-react';
 
-const PREFIX = 'features.WranglerNewUI.SavedRecipeList';
+const PREFIX = 'features.WranglerNewUI.ImportRecipe';
 
 describe('Test RecipeImportList Component', () => {
-  it('should check if the onClick triggered is as expected', () => {
+  it('Should render RecipeImportList Component', () => {
     render(<RecipeImportList previousStep={jest.fn()} nextStep={jest.fn()} />);
-    const recipeRowElement = screen.getByTestId(/recipe-item-0/i);
-    expect(recipeRowElement).toBeInTheDocument();
-    fireEvent.click(recipeRowElement);
+    const recipeImportContainer = screen.getByTestId(/recipe-import-list-container/i);
+    expect(recipeImportContainer).toBeInTheDocument();
   });
 
-  it('should check if the recipe item name head is as expected', () => {
+  it('Should render RecipeImportList Component and recipeImportSubText should be as expected.', () => {
     render(<RecipeImportList previousStep={jest.fn()} nextStep={jest.fn()} />);
-    const recipeNameElement = screen.getByTestId(/recipe-name-head/i);
-    expect(recipeNameElement).toBeInTheDocument();
-    expect(recipeNameElement).toHaveTextContent(`${T.translate(`${PREFIX}.recipeName`)}`);
-  });
-
-  it('should check if the recipe item count head is as expected', () => {
-    render(<RecipeImportList previousStep={jest.fn()} nextStep={jest.fn()} />);
-    const recipeCountDateElement = screen.getByTestId(/recipe-steps-head/i);
-    expect(recipeCountDateElement).toBeInTheDocument();
-    expect(recipeCountDateElement).toHaveTextContent(`${T.translate(`${PREFIX}.steps`)}`);
-  });
-
-  it('should check if the recipe item description head is as expected', () => {
-    render(<RecipeImportList previousStep={jest.fn()} nextStep={jest.fn()} />);
-    const recipeDescriptionElement = screen.getByTestId(/recipe-description-head/i);
-    expect(recipeDescriptionElement).toBeInTheDocument();
-    expect(recipeDescriptionElement).toHaveTextContent(`${T.translate(`${PREFIX}.description`)}`);
-  });
-
-  it('should check if the recipe item date head is as expected', () => {
-    render(<RecipeImportList previousStep={jest.fn()} nextStep={jest.fn()} />);
-    const recipeSerialNumberElement = screen.getByTestId(/recipe-last-updated-head/i);
-    expect(recipeSerialNumberElement).toBeInTheDocument();
-    expect(recipeSerialNumberElement).toHaveTextContent(`${T.translate(`${PREFIX}.lastUpdated`)}`);
-  });
-
-  it('should test when recipe item is clicked', () => {
-    render(<RecipeImportList previousStep={jest.fn()} nextStep={jest.fn()} />);
-    const recipeSerialNumberElement = screen.getByTestId(/recipe-item-0/i);
-    fireEvent.click(recipeSerialNumberElement);
+    const recipeImportSubText = screen.getByTestId(/recipe-import-sub-text/i);
+    expect(recipeImportSubText).toHaveTextContent(T.translate(`${PREFIX}.subTitle`).toString());
   });
 });

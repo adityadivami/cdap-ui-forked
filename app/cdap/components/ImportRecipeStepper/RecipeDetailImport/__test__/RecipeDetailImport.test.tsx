@@ -15,10 +15,12 @@
  */
 
 import { screen } from '@testing-library/dom';
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import RecipeDetailImport from 'components/ImportRecipeStepper/RecipeDetailImport';
 import React from 'react';
 import T from 'i18n-react';
+
+const PREFIX = 'features.WranglerNewUI.ImportRecipe';
 
 const recipeDetailsMockData = {
   recipeId: {
@@ -36,39 +38,8 @@ const recipeDetailsMockData = {
   recipeStepsCount: 2,
 };
 
-const recipeDetailsMockData2 = {
-  recipeId: {
-    namespace: {
-      name: 'default',
-      generation: 0,
-    },
-    recipeId: 'c5e51202-808e-4ead-b61f-83f280f3fdac',
-  },
-  recipeName: 'RecipeABC101',
-  description: 'Recipe for cleansing empolyee information',
-  directives: [
-    'set-column :body_2_copy body_2 + \u0027text\u0027',
-    'trim :body_2',
-    'set-column :body_2_copy body_2 + \u0027text\u0027',
-    'trim :body_2',
-    'set-column :body_2_copy body_2 + \u0027text\u0027',
-    'trim :body_2',
-    'set-column :body_2_copy body_2 + \u0027text\u0027',
-    'trim :body_2',
-    'set-column :body_2_copy body_2 + \u0027text\u0027',
-    'trim :body_2',
-    'set-column :body_2_copy body_2 + \u0027text\u0027',
-    'trim :body_2',
-  ],
-  createdTimeMillis: 1670584496578,
-  updatedTimeMillis: 1670584496578,
-  recipeStepsCount: 2,
-};
-
 describe('Test RecipeDetailsImport Component', () => {
-  const PREFIX = 'features.WranglerNewUI.RecipeDetails';
-
-  it('should check if the recipe name is as expected', () => {
+  it('Should render RecipeDetailImport Component.', () => {
     render(
       <RecipeDetailImport
         nextStep={jest.fn()}
@@ -76,12 +47,11 @@ describe('Test RecipeDetailsImport Component', () => {
         previousStep={jest.fn()}
       />
     );
-    const recipeNameElement = screen.getByTestId(/recipe-name/i);
-    expect(recipeNameElement).toBeInTheDocument();
-    expect(recipeNameElement).toHaveTextContent('RecipeABC101');
+    const recipeDetailContainer = screen.getByTestId(/recipe-detail-import-container/i);
+    expect(recipeDetailContainer).toBeInTheDocument();
   });
 
-  it('should check if the recipe count and date is as expected', () => {
+  it('Should test Cancel Button.', () => {
     render(
       <RecipeDetailImport
         nextStep={jest.fn()}
@@ -89,14 +59,12 @@ describe('Test RecipeDetailsImport Component', () => {
         previousStep={jest.fn()}
       />
     );
-    const recipeCountDateElement = screen.getByTestId(/recipe-count-and-date/i);
-    expect(recipeCountDateElement).toBeInTheDocument();
-    expect(recipeCountDateElement).toHaveTextContent(
-      `2 ${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`
-    );
+    const cancelButton = screen.getByTestId(/recipe-detail-import-cancel-button/i);
+    expect(cancelButton).toHaveTextContent(T.translate(`${PREFIX}.cancel`).toString());
+    expect(cancelButton).toBeInTheDocument();
   });
 
-  it('should check if the recipe description is as expected', () => {
+  it('Should test Import Steps Button.', () => {
     render(
       <RecipeDetailImport
         nextStep={jest.fn()}
@@ -104,68 +72,8 @@ describe('Test RecipeDetailsImport Component', () => {
         previousStep={jest.fn()}
       />
     );
-    const recipeDescriptionElement = screen.getByTestId(/recipe-decription/i);
-    expect(recipeDescriptionElement).toBeInTheDocument();
-    expect(recipeDescriptionElement).toHaveTextContent('Recipe for cleansing empolyee information');
-  });
-
-  it('should check if the recipe serial number is as expected', () => {
-    render(
-      <RecipeDetailImport
-        nextStep={jest.fn()}
-        recipeDetails={recipeDetailsMockData}
-        previousStep={jest.fn()}
-      />
-    );
-    const recipeSerialNumberElement = screen.getByTestId(/recipe-step-serial-number-column-head/i);
-    expect(recipeSerialNumberElement).toBeInTheDocument();
-    expect(recipeSerialNumberElement).toHaveTextContent(
-      `${T.translate(`${PREFIX}.tableHeaders.serialNo`)}`
-    );
-  });
-
-  it('should check if the recipe steps column head is as expected', () => {
-    render(
-      <RecipeDetailImport
-        nextStep={jest.fn()}
-        recipeDetails={recipeDetailsMockData}
-        previousStep={jest.fn()}
-      />
-    );
-    const recipeStepHeadElement = screen.getByTestId(/recipe-step-text-column-head/i);
-    expect(recipeStepHeadElement).toBeInTheDocument();
-    expect(recipeStepHeadElement).toHaveTextContent(
-      `${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`
-    );
-  });
-
-  it('should check if the recipe steps text is as expected', () => {
-    render(
-      <RecipeDetailImport
-        nextStep={jest.fn()}
-        recipeDetails={recipeDetailsMockData}
-        previousStep={jest.fn()}
-      />
-    );
-    const recipeStepTextElement = screen.getByTestId(/recipe-step-text-0/i);
-    expect(recipeStepTextElement).toBeInTheDocument();
-    expect(recipeStepTextElement).toHaveTextContent(
-      `set-column :body_2_copy body_2 + \u0027text\u0027`
-    );
-  });
-
-  it('should check if the recipe steps text is as expected when directives are more than 10.', () => {
-    render(
-      <RecipeDetailImport
-        nextStep={jest.fn()}
-        recipeDetails={recipeDetailsMockData2}
-        previousStep={jest.fn()}
-      />
-    );
-    const recipeStepTextElement = screen.getByTestId(/recipe-step-text-0/i);
-    expect(recipeStepTextElement).toBeInTheDocument();
-    expect(recipeStepTextElement).toHaveTextContent(
-      `set-column :body_2_copy body_2 + \u0027text\u0027`
-    );
+    const importStepsButton = screen.getByTestId(/recipe-detail-import-steps-button/i);
+    expect(importStepsButton).toHaveTextContent(T.translate(`${PREFIX}.importSteps`).toString());
+    expect(importStepsButton).toBeInTheDocument();
   });
 });
