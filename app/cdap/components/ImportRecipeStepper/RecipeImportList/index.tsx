@@ -15,74 +15,28 @@
  */
 
 import { Box, Typography } from '@material-ui/core';
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import HeaderTemplate from 'components/ImportRecipeStepper/HeaderTemplate';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
-import { PrimaryTextLowercaseButton } from 'components/shared/Buttons/PrimaryTextLowercaseButton';
 import RecipeList from 'components/RecipeList';
-import IconSVG from 'components/shared/IconSVG';
 import { SortBy, SortOrder } from 'components/RecipeList/types';
 
-export const dateFormatting = (millisecondsTime) => {
-  const normalDateString = new Date(millisecondsTime);
-  const splitTime = normalDateString.toLocaleTimeString('en-US').split(':');
-  const timeFormat = `${splitTime[0]}:${splitTime[1]}${splitTime[2].split(' ')[1]}`;
-  const getMonthName = normalDateString.toLocaleString('default', { month: 'long' });
-  const finalFormat = `${normalDateString.getDate()} ${getMonthName}, ${timeFormat}`;
-  return finalFormat;
-};
+interface IRecipeImportListProps {
+  previousStep: () => void;
+  nextStep: (data?) => void;
+}
 
-const Wrapper = styled(Box)`
-  padding-left: 25px;
-`;
+const PREFIX = 'features.WranglerNewUI.ImportRecipe';
 
-const GridWrapper = styled(Box)`
-  display: grid;
-  grid-template-columns: 25% 15% 40% 20%;
-  align-items: center;
-  padding: 20px 10px;
-  &:hover {
-    background: ${grey[300]};
-    cursor: pointer;
-  }
-`;
-
-const GridHeadWrapper = styled(GridWrapper)`
-  padding: 10px;
-  &:hover {
-    background: transparent;
-    cursor: unset;
-  }
-  cursor: unset;
-`;
-
-const HeadDivider = styled(Box)`
-  width: 100%;
-  opacity: 0.6;
-  border-bottom: 1px solid ${grey[700]};
-`;
-
-const CellDivider = styled(Box)`
-  width: 100%;
-  border-bottom: 1px solid ${grey[300]};
-`;
-
-const GridHead = styled(Typography)`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-  color: ${grey[700]};
-`;
-
-const GridCellText = styled(Typography)`
+const RecipeImportSubText = styled(Typography)`
   font-weight: 400;
   font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
   color: ${grey[700]};
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-left: 25px;
 `;
 
 export const DrawerContainerStyle = styled(Box)`
@@ -93,28 +47,31 @@ export const DrawerContainerStyle = styled(Box)`
   padding-right: 20px;
 `;
 
-const PREFIX = 'features.WranglerNewUI.Recipe';
-export default function({ previousStep, nextStep }) {
+export default function({ previousStep, nextStep }: IRecipeImportListProps) {
   const handleSelectRecipe = (selectedObject: any) => {
-    console.log('selectedObject', selectedObject);
     nextStep(selectedObject);
-    // alert(`Selected Recipe to apply : ${JSON.stringify(selectedObject)}`);
-    // To do : Implement apply functionality from here
   };
 
   return (
-    <Box m={2}>
-      <RecipeList
-        isOpen={true}
-        showAllColumns={false}
-        showActions={false}
-        selectHandler={handleSelectRecipe}
-        sortBy={SortBy.UPDATED}
-        sortOrder={SortOrder.DESCENDING}
-        pageSize={6}
-        showPagination={true}
-        enableSorting={true}
+    <DrawerContainerStyle>
+      <HeaderTemplate
+        headingText={`${T.translate(`${PREFIX}.title`)}`}
+        previousStep={previousStep}
       />
-    </Box>
+      <RecipeImportSubText>{T.translate(`${PREFIX}.subTitle`)}</RecipeImportSubText>
+      <Box m={2}>
+        <RecipeList
+          isOpen={true}
+          showAllColumns={false}
+          showActions={false}
+          selectHandler={handleSelectRecipe}
+          sortBy={SortBy.UPDATED}
+          sortOrder={SortOrder.DESCENDING}
+          pageSize={6}
+          showPagination={true}
+          enableSorting={true}
+        />
+      </Box>
+    </DrawerContainerStyle>
   );
 }

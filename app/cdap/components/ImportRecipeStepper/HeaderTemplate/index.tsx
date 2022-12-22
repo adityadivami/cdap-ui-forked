@@ -66,7 +66,12 @@ const TitleUnderLineWrapper = styled(Box)`
   flex-direction: column;
 `;
 
-export default function({ headingText, previousStep }) {
+interface IHeaderTemplateProps {
+  headingText: string;
+  previousStep: () => void;
+}
+
+export default function({ headingText, previousStep }: IHeaderTemplateProps) {
   return (
     <HeaderWrapper data-testid="import-recipe-header">
       <DrawerWidgetTitleIconWrapper>

@@ -30,6 +30,7 @@ import { getTransformedTableData } from 'components/Administration/TetheringTabC
 const RecipeStepsBody = styled(Container)`
   height: calc(100% - 100px);
   padding: 0px;
+  overflow-y: auto;
 `;
 
 export default function({ setShowRecipePanel, onDeleteRecipeSteps, nextStep }: IRecipeStepsProps) {

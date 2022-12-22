@@ -16,91 +16,26 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Button, Typography } from '@material-ui/core';
-import { blue, grey } from '@material-ui/core/colors';
+import { Box, Button } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
 import T from 'i18n-react';
-import {
-  dateFormatting,
-  DrawerContainerStyle,
-} from 'components/ImportRecipeStepper/RecipeImportList';
+import { DrawerContainerStyle } from 'components/ImportRecipeStepper/RecipeImportList';
 import HeaderTemplate from 'components/ImportRecipeStepper/HeaderTemplate';
+import RecipeDetails from 'components/RecipeDetails/DetailContainer';
+import { IRecipeItem } from 'components/RecipeDetails';
 
-const PREFIX = 'features.WranglerNewUI.RecipeDetails';
+interface IRecipeDetailImportProps {
+  recipeDetails: IRecipeItem;
+  previousStep: () => void;
+  nextStep: (data?) => void;
+}
+
+const PREFIX = 'features.WranglerNewUI.ImportRecipe';
 
 const RecipeDetailWrapper = styled(Box)`
   margin-top: 30px;
   padding-left: 30px;
   height: 70%;
-`;
-
-const RecipeName = styled(Typography)`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
-  color: ${grey[700]};
-  text-transform: capitalize;
-`;
-
-const StepDetail = styled(Box)`
-  margin: 10px 0;
-`;
-
-const DescriptionDetail = styled(Box)`
-  margin: 20px 0;
-`;
-
-const RecipeDetailText = styled(Typography)`
-  color: ${grey[700]};
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  display: flex;
-  align-items: center;
-`;
-
-const RecipeStepText = styled(Typography)`
-  color: ${grey[700]};
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-  display: flex;
-  align-items: center;
-`;
-
-const StepsGridWrapper = styled(Box)`
-  display: grid;
-  grid-template-columns: 20% 80%;
-  align-items: center;
-  padding: 15px 10px;
-`;
-
-const StepsGridWrapperHead = styled(StepsGridWrapper)`
-  padding: 9px 10px;
-`;
-
-const StepsGridHead = styled(Typography)`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
-  color: ${grey[700]};
-`;
-
-const HeadDivider = styled(Box)`
-  width: 100%;
-  border-bottom: 1px solid ${grey[700]};
-  opacity: 0.6;
-`;
-
-const CellDivider = styled(Box)`
-  width: 100%;
-  border-bottom: 1px solid ${grey[300]};
-`;
-
-const VerticalDivider = styled(Box)`
-  width: 1px;
-  height: 25px;
-  border-left: 1px solid ${grey[300]};
-  margin: 0 10px;
 `;
 
 const ButtonWrapper = styled(Box)`
@@ -134,73 +69,20 @@ const CancelButton = styled(Button)`
   }
 `;
 
-const getSerialNumber = (recipeStepIndex: number) => {
-  if (recipeStepIndex < 10) {
-    return `0${recipeStepIndex + 1}`;
-  } else {
-    return `${recipeStepIndex + 1}`;
-  }
-};
-
-export default function({ recipeDetails, previousStep, nextStep }) {
+export default function({ recipeDetails, previousStep, nextStep }: IRecipeDetailImportProps) {
   return (
     <DrawerContainerStyle>
       <HeaderTemplate
-        headingText={`${T.translate('features.WranglerNewUI.ImportRecipe.title')}`}
+        headingText={`${T.translate(`${PREFIX}.title`)}`}
         previousStep={previousStep}
       />
-      {/* --------------- RECIPE DETAIL WRAPPER will be replaced by RecipeDetail component ---------------- */}
       <RecipeDetailWrapper>
-        <RecipeName component="h5" data-testid="recipe-name">
-          {recipeDetails.recipeName}
-        </RecipeName>
-        <StepDetail>
-          <RecipeDetailText component="div" data-testid="recipe-count-and-date">
-            {`${recipeDetails.directives.length} ${T.translate(
-              `${PREFIX}.tableHeaders.recipeStep`
-            )}`}
-            <VerticalDivider /> {dateFormatting(recipeDetails.createdTimeMillis)}
-          </RecipeDetailText>
-        </StepDetail>
-        <DescriptionDetail>
-          <RecipeDetailText data-testid="recipe-decription">
-            {recipeDetails.description}
-          </RecipeDetailText>
-        </DescriptionDetail>
-        <StepsGridWrapperHead>
-          <StepsGridHead component="body1" data-testid="recipe-step-serial-number-column-head">
-            {T.translate(`${PREFIX}.tableHeaders.serialNo`)}
-          </StepsGridHead>
-          <StepsGridHead component="body1" data-testid="recipe-step-text-column-head">
-            {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
-          </StepsGridHead>
-        </StepsGridWrapperHead>
-        <HeadDivider />
-        {recipeDetails.directives.map((recipeStep, recipeStepIndex) => {
-          return (
-            <>
-              <StepsGridWrapper>
-                <RecipeStepText component="body1" data-testid="recipe-step-index">
-                  {getSerialNumber(recipeStepIndex)}
-                </RecipeStepText>
-                <RecipeStepText
-                  component="body1"
-                  data-testid={`recipe-step-text-${recipeStepIndex}`}
-                >
-                  {recipeStep}
-                </RecipeStepText>
-              </StepsGridWrapper>
-              {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
-            </>
-          );
-        })}
+        <RecipeDetails recipeDetails={recipeDetails} />
       </RecipeDetailWrapper>
       <ButtonWrapper>
-        <CancelButton variant="outlined">
-          {T.translate('features.WranglerNewUI.ImportRecipe.cancel')}
-        </CancelButton>
+        <CancelButton variant="outlined">{T.translate(`${PREFIX}.cancel`)}</CancelButton>
         <ImportStepsButton variant="contained">
-          {T.translate('features.WranglerNewUI.ImportRecipe.importSteps')}
+          {T.translate(`${PREFIX}.importSteps`)}
         </ImportStepsButton>
       </ButtonWrapper>
     </DrawerContainerStyle>

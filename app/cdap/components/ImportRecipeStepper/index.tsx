@@ -14,13 +14,13 @@
  * the License.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import RecipeImportList from 'components/ImportRecipeStepper/RecipeImportList';
 import RecipeDetail from 'components/ImportRecipeStepper/RecipeDetailImport';
 import RecipeSteps from 'components/RecipeSteps';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
-import { RecipeImportButton } from 'components/RecipeManagement/RecipeImportButton';
+import { IRecipeItem } from 'components/RecipeDetails';
 
 const RecipeStepPanel = styled(Box)`
   max-height: calc(100vh - 190px);
@@ -29,7 +29,7 @@ const RecipeStepPanel = styled(Box)`
 
 export default function({ setShowRecipePanel }) {
   const [current, setCurrentStep] = useState(1);
-  const [componentData, setComponentData] = useState({});
+  const [componentData, setComponentData] = useState<IRecipeItem>();
 
   const nextStep = (data?) => {
     if (data) {
@@ -63,7 +63,7 @@ export default function({ setShowRecipePanel }) {
       value: 3,
       content: (
         <RecipeDetail
-          nextStep={(componentData) => setCurrentStep(0)}
+          nextStep={() => setCurrentStep(0)}
           recipeDetails={componentData}
           previousStep={previousStep}
         />
