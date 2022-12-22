@@ -15,13 +15,15 @@
  */
 
 import { Box, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import HeaderTemplate from 'components/ImportRecipeStepper/HeaderTemplate';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
-
-const PREFIX = 'features.WranglerNewUI.SavedRecipeList';
+import { PrimaryTextLowercaseButton } from 'components/shared/Buttons/PrimaryTextLowercaseButton';
+import RecipeList from 'components/RecipeList';
+import IconSVG from 'components/shared/IconSVG';
+import { SortBy, SortOrder } from 'components/RecipeList/types';
 
 export const dateFormatting = (millisecondsTime) => {
   const normalDateString = new Date(millisecondsTime);
@@ -91,151 +93,28 @@ export const DrawerContainerStyle = styled(Box)`
   padding-right: 20px;
 `;
 
-const RecipeImportSubText = styled(Typography)`
-  font-weight: 400;
-  font-size: 14px;
-  color: ${grey[700]};
-  margin-top: 30px;
-  margin-bottom: 10px;
-  padding-left: 25px;
-`;
-
-const getRecipeListMock = {
-  nextPageToken: 'recipe6601',
-  message: 'Success',
-  count: 10,
-  values: [
-    {
-      recipeId: {
-        namespace: {
-          name: 'default',
-          generation: 0,
-        },
-        recipeId: 'f9b4b5ae-8bc8-4896-9bb2-a2a831a6d522',
-      },
-      recipeName: 'RecipeABC1',
-      description: 'Recipe for cleansing empolyee information',
-      directives: ['uppercase: body_1', 'titlecase: body_5'],
-      createdTimeMillis: 1670584163250,
-      updatedTimeMillis: 1670584163250,
-      recipeStepsCount: 2,
-    },
-    {
-      recipeId: {
-        namespace: {
-          name: 'default',
-          generation: 0,
-        },
-        recipeId: 'c5e51202-808e-4ead-b61f-83f280f3fdac',
-      },
-      recipeName: 'RecipeABC101',
-      description: 'Recipe for cleansing empolyee information',
-      directives: ['set-column :body_2_copy body_2 + \u0027text\u0027', 'trim :body_2'],
-      createdTimeMillis: 1670584496578,
-      updatedTimeMillis: 1670584496578,
-      recipeStepsCount: 2,
-    },
-    {
-      recipeId: {
-        namespace: {
-          name: 'default',
-          generation: 0,
-        },
-        recipeId: '16b8551f-72a7-4b71-b867-1c8cbc0995a4',
-      },
-      recipeName: 'RecipeABC2',
-      description: 'Recipe for cleansing empolyee information',
-      directives: ['uppercase: body_1', 'titlecase: body_5'],
-      createdTimeMillis: 1670584245491,
-      updatedTimeMillis: 1670584245491,
-      recipeStepsCount: 2,
-    },
-    {
-      recipeId: {
-        namespace: {
-          name: 'default',
-          generation: 0,
-        },
-        recipeId: '8fc8da7b-f109-4771-80d3-c02ec4dd5259',
-      },
-      recipeName: 'RecipeABC3',
-      description: 'Recipe for cleansing empolyee information',
-      directives: ['uppercase: body_3', 'titlecase: body_4'],
-      createdTimeMillis: 1670584286877,
-      updatedTimeMillis: 1670584286877,
-      recipeStepsCount: 2,
-    },
-    {
-      recipeId: {
-        namespace: {
-          name: 'default',
-          generation: 0,
-        },
-        recipeId: '7e0ce92d-ae9a-4630-8af7-ec4eec745ccf',
-      },
-      recipeName: 'RecipeABC4',
-      description: 'Recipe for cleansing empolyee information',
-      directives: ['uppercase: body_3', 'titlecase: body_4'],
-      createdTimeMillis: 1670584303120,
-      updatedTimeMillis: 1670584303120,
-      recipeStepsCount: 2,
-    },
-  ],
-  truncated: 'false',
-};
-
+const PREFIX = 'features.WranglerNewUI.Recipe';
 export default function({ previousStep, nextStep }) {
-  const recipeList = getRecipeListMock.values;
+  const handleSelectRecipe = (selectedObject: any) => {
+    console.log('selectedObject', selectedObject);
+    nextStep(selectedObject);
+    // alert(`Selected Recipe to apply : ${JSON.stringify(selectedObject)}`);
+    // To do : Implement apply functionality from here
+  };
+
   return (
-    <DrawerContainerStyle>
-      <HeaderTemplate
-        headingText={`${T.translate('features.WranglerNewUI.ImportRecipe.title')}`}
-        previousStep={previousStep}
+    <Box m={2}>
+      <RecipeList
+        isOpen={true}
+        showAllColumns={false}
+        showActions={false}
+        selectHandler={handleSelectRecipe}
+        sortBy={SortBy.UPDATED}
+        sortOrder={SortOrder.DESCENDING}
+        pageSize={6}
+        showPagination={true}
+        enableSorting={true}
       />
-      <RecipeImportSubText>
-        {T.translate('features.WranglerNewUI.ImportRecipe.subTitle')}
-      </RecipeImportSubText>
-      {/* --------------- WRAPPER will be replaced by Saved Recipe List component ---------------- */}
-      <Wrapper data-testid="saved-recipe-list-wrapper">
-        <GridHeadWrapper>
-          <GridHead component="body1" data-testid="recipe-name-head">
-            {T.translate(`${PREFIX}.recipeName`)}
-          </GridHead>
-          <GridHead component="body1" data-testid="recipe-steps-head">
-            {T.translate(`${PREFIX}.steps`)}
-          </GridHead>
-          <GridHead component="body1" data-testid="recipe-description-head">
-            {T.translate(`${PREFIX}.description`)}
-          </GridHead>
-          <GridHead component="body1" data-testid="recipe-last-updated-head">
-            {T.translate(`${PREFIX}.lastUpdated`)}
-          </GridHead>
-        </GridHeadWrapper>
-        <HeadDivider />
-        {recipeList.map((recipeItem, recipeIndex) => (
-          <>
-            <GridWrapper
-              data-testid={`recipe-item-${recipeIndex}`}
-              key={recipeItem.recipeId}
-              onClick={() => nextStep(recipeItem)}
-            >
-              <GridCellText component="body1" data-testid={`recipe-name-${recipeIndex}`}>
-                {recipeItem.recipeName}
-              </GridCellText>
-              <GridCellText component="body1" data-testid={`recipe-count-${recipeIndex}`}>
-                {recipeItem.recipeStepsCount}
-              </GridCellText>
-              <GridCellText component="body1" data-testid={`recipe-description-${recipeIndex}`}>
-                {recipeItem.description}
-              </GridCellText>
-              <GridCellText component="body1" data-testid={`recipe-date-${recipeIndex}`}>
-                {dateFormatting(recipeItem.updatedTimeMillis)}
-              </GridCellText>
-            </GridWrapper>
-            {recipeIndex !== recipeList.length - 1 && <CellDivider />}
-          </>
-        ))}
-      </Wrapper>
-    </DrawerContainerStyle>
+    </Box>
   );
 }

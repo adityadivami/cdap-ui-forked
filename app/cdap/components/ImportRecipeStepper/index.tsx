@@ -20,6 +20,7 @@ import RecipeDetail from 'components/ImportRecipeStepper/RecipeDetailImport';
 import RecipeSteps from 'components/RecipeSteps';
 import styled from 'styled-components';
 import { Box } from '@material-ui/core';
+import { RecipeImportButton } from 'components/RecipeManagement/RecipeImportButton';
 
 const RecipeStepPanel = styled(Box)`
   max-height: calc(100vh - 190px);
