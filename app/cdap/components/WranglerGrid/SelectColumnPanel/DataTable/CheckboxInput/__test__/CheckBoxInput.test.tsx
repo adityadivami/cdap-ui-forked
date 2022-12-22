@@ -19,20 +19,22 @@ import React from 'react';
 import CheckBoxInput from 'components/WranglerGrid/SelectColumnPanel/DataTable/CheckboxInput';
 
 describe('It should render ', () => {
+
+  const mockMultipleSelect = jest.fn()
   it('Should render the checkBox component and click the checkbox with disable check false', () => {
-    const container = render(
+    render(
       <CheckBoxInput
         selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => false}
         columnDetail={{ label: 'test', type: [''], name: '' }}
-        onMultipleSelection={() => jest.fn()}
+        onMultipleSelection={mockMultipleSelect}
         columnIndex={0}
       />
     );
 
     const checkboxInputElement = screen.getByTestId(/check-box-input-0/i);
     fireEvent.click(checkboxInputElement);
-    expect(container).toBeDefined();
+    expect(mockMultipleSelect).toBeCalled()
   });
 
   it('Should render the checkBox component and click the checkbox with disable checkbox as true', () => {
@@ -41,13 +43,13 @@ describe('It should render ', () => {
         selectedColumns={[{ label: 'test', type: [''], name: '' }]}
         handleDisableCheckbox={() => true}
         columnDetail={{ label: 'test', type: [''], name: '' }}
-        onMultipleSelection={() => jest.fn()}
+        onMultipleSelection={mockMultipleSelect}
         columnIndex={0}
       />
     );
 
     const checkboxInputElement = screen.getByTestId(/check-box-input-0/i);
     fireEvent.click(checkboxInputElement);
-    expect(container).toBeDefined();
+    expect(mockMultipleSelect).toBeCalled()
   });
 });

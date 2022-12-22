@@ -20,6 +20,9 @@ import DataTable from 'components/WranglerGrid/SelectColumnPanel/DataTable';
 import T from 'i18n-react';
 
 describe('It should test FunctionNameWidget Component', () => {
+
+  const mockSetSelected = jest.fn();
+
   it('Should render the FunctionNameWidget Component', () => {
     render(
       <DataTable
@@ -35,14 +38,13 @@ describe('It should test FunctionNameWidget Component', () => {
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
         totalColumnCount={0}
-        setSelectedColumns={() => jest.fn()}
+        setSelectedColumns={mockSetSelected}
         transformationName={'swap-columns'}
       />
     );
     const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
     fireEvent.click(checkBoxElement);
-    expect(checkBoxElement).toBeInTheDocument();
-    expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
+    expect(mockSetSelected).toBeCalled()
     expect(screen.getByTestId(/panel-columns/i)).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}`
     );
@@ -65,16 +67,16 @@ describe('It should test FunctionNameWidget Component', () => {
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
         totalColumnCount={0}
-        setSelectedColumns={() => jest.fn()}
+        setSelectedColumns={mockSetSelected}
         transformationName={'swap-columns'}
       />
     );
     const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
     fireEvent.click(checkBoxElement);
+    expect(mockSetSelected).toBeCalled()
     expect(screen.getByTestId(/panel-values/i)).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}`
     );
-    expect(screen.getByTestId(/column-table-parent/i)).toBeInTheDocument();
   });
 
   it('Should trigger the checkboxs handleChange when colums length is greater than 2', () => {
@@ -83,7 +85,6 @@ describe('It should test FunctionNameWidget Component', () => {
       { name: 'string', label: 'string', type: ['test2', 'mock'] },
       { name: 'string', label: 'string', type: ['Abhilash', 'IronMan'] },
     ];
-    const handleChange = jest.fn();
     render(
       <DataTable
         columns={[
@@ -99,12 +100,12 @@ describe('It should test FunctionNameWidget Component', () => {
         handleDisableCheckbox={() => false}
         onMultipleSelection={() => jest.fn()}
         totalColumnCount={0}
-        setSelectedColumns={() => jest.fn()}
+        setSelectedColumns={mockSetSelected}
         transformationName={'swap-columns'}
       />
     );
     const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
     fireEvent.click(checkBoxElement);
-    expect(checkBoxElement).toBeInTheDocument();
+    expect(mockSetSelected).toBeCalled()
   });
 });

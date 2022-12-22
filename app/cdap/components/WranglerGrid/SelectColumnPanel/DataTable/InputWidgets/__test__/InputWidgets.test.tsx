@@ -20,7 +20,7 @@ import InputWidgets from 'components/WranglerGrid/SelectColumnPanel/DataTable/In
 
 describe('It should render ', () => {
   it('Should render component with isSingleSelection false', () => {
-    const container = render(
+    render(
       <InputWidgets
         isSingleSelection={false}
         selectedColumns={[]}
@@ -32,11 +32,11 @@ describe('It should render ', () => {
       />
     );
 
-    expect(container).toBeDefined();
+    expect(screen.getByTestId(/form-control-label-parent-0/i)).toBeInTheDocument()
   });
 
   it('Should render component with isSingleSelection true', () => {
-    const container = render(
+    render(
       <InputWidgets
         isSingleSelection={true}
         selectedColumns={[]}
@@ -48,6 +48,7 @@ describe('It should render ', () => {
       />
     );
 
-    expect(container).toBeDefined();
+    expect(screen.getByTestId(/radio-input-0/i)).toBeInTheDocument()
+
   });
 });
