@@ -26,12 +26,14 @@ describe('It should test the SelectColumnsList Component', () => {
   });
   it('should render the SelectColumnsList Component with selectedColumnsCount<10', () => {
     render(<CountWidget selectedColumnsCount={1} />);
-    expect(screen.getByTestId(/no-column-title/i)).toHaveTextContent('1');
+    expect(screen.getByTestId(/no-column-title/i)).toHaveTextContent(
+      'features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected'
+    );
   });
   it('should render the SelectColumnsList Component with no selectedColumnsCount', () => {
     render(<CountWidget selectedColumnsCount={0} />);
     expect(screen.getByTestId(/no-column-title/i)).toHaveTextContent(
-      `${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.columnsSelected')}`
+      `${T.translate('features.WranglerNewUI.GridPage.selectColumnListPanel.noColumnSelected')}`
     );
   });
 });

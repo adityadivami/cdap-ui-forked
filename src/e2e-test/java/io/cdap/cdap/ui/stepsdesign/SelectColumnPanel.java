@@ -46,7 +46,7 @@ public class SelectColumnPanel {
   }
 
   @Then("Select the data type")
-  public void SelectTheDataType() {
+  public void selectTheDataType() {
     try {
       WaitHelper.waitForPageToLoad();
       ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-string"));
@@ -95,7 +95,7 @@ public class SelectColumnPanel {
     }
   }
 
-  @Then("Enter name of any column from the list")
+  @Then("Enter name of any column from the List")
   public void enterNameOfAnyColumnFromTheList() {
     try {
       WaitHelper.waitForPageToLoad();

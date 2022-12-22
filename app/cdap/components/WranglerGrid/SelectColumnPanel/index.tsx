@@ -15,7 +15,7 @@
  */
 
 import T from 'i18n-react';
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/ColumnsList';
 import {
   IAddTransformationProps,
@@ -80,7 +80,10 @@ export default function({
   return (
     <StyledDrawer open={columnsPopup} data-testid="select-column-panel" anchor="right">
       <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
-        <SelectColumnDrawerHeader closeClickHandler={closeSelectColumnsPopupWithoutColumn} />
+        <SelectColumnDrawerHeader
+          closeClickHandler={closeSelectColumnsPopupWithoutColumn}
+          transformationName={transformationName}
+        />
         <AddTransformationWrapper>
           <AddTransformationBodyWrapper>
             <SelectColumnsList

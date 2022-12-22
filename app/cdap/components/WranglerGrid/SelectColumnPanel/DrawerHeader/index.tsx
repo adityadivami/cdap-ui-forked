@@ -15,19 +15,24 @@
  */
 
 import { Box, Container, IconButton } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import styled from 'styled-components';
 import { FlexAlignCenter, PointerBox } from 'components/common/BoxContainer';
 import { HeadFont } from 'components/common/TypographyText';
 import T from 'i18n-react';
-import { ADD_TRANSFORMATION_PREFIX } from 'components/WranglerGrid/SelectColumnPanel/constants';
+import {
+  ADD_TRANSFORMATION_PREFIX,
+  MULTI_SELECTION_COLUMN,
+} from 'components/WranglerGrid/SelectColumnPanel/constants';
 import grey from '@material-ui/core/colors/grey';
 import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import { blue } from '@material-ui/core/colors';
+import { IMultipleSelectedFunctionDetail } from '../types';
 
 interface IDrawerHeaderProps {
   closeClickHandler: () => void;
+  transformationName: string;
 }
 
 export const UnderLine = (
@@ -49,7 +54,7 @@ const BackIcon = styled(ChevronLeftRoundedIcon)`
   color: ${grey[600]};
 `;
 
-const CustomizedIconButton = styled(IconButton)`
+const StyledIconButton = styled(IconButton)`
   padding: 0px;
   width: 26px;
   justify-content: end;
@@ -82,21 +87,35 @@ const DrawerHeadWrapper = styled(Box)`
   flex-direction: column;
 `;
 
-export default function({ closeClickHandler }: IDrawerHeaderProps) {
+export default function({ closeClickHandler, transformationName }: IDrawerHeaderProps) {
+  const [isSingleSelection, setIsSingleSelection] = useState(true);
+
+  useEffect(() => {
+    const multiSelect: IMultipleSelectedFunctionDetail[] = MULTI_SELECTION_COLUMN?.filter(
+      (functionDetail: IMultipleSelectedFunctionDetail) =>
+        functionDetail.value.toLowerCase() === transformationName.toLowerCase()
+    );
+    if (multiSelect.length) {
+      setIsSingleSelection(false);
+    }
+  }, []);
+
   return (
     <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
       <DrawerContainerInnerFlex>
         <FlexAlignCenter>
-          <CustomizedIconButton
+          <StyledIconButton
             onClick={closeClickHandler}
             aria-label="back-icon"
             data-testid="back-icon"
           >
             <BackIcon />
-          </CustomizedIconButton>
+          </StyledIconButton>
           <DrawerHeadWrapper>
             <HeadFont component="p" data-testid="drawer-heading">
-              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnPara`)}
+              {isSingleSelection
+                ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnHeading`)
+                : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumnsHeading`)}
             </HeadFont>
             {UnderLine}
           </DrawerHeadWrapper>

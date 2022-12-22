@@ -3464,12 +3464,13 @@ features:
     GridPage:
       addTransformationPanel:
         applyStep: Apply Step
-        columnsSelected: columns selected
+        columnsSelected: column selected
         columns: Columns
         dataQuality: Data Quality
         done: Done
         nullValues: Null Values
-        selectColumnPara: Select Column(s) to Apply This Function
+        selectColumnHeading: Select Column
+        selectMultiColumnsHeading: Select Columns
         selectColumn: Select column
         selectMultiColumns: Select columns
       gridHeader:
@@ -3479,8 +3480,8 @@ features:
         divider: divider
         heading: heading
       selectColumnListPanel:
-        columnsSelected: column selected
-        no: No
+        columnsSelected: "{selectedColumnsCount} column selected"
+        noColumnSelected: No column selected
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
