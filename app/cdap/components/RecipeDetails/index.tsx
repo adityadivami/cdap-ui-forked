@@ -28,7 +28,7 @@ interface IRecipeId {
   recipeId: string;
 }
 
-interface IRecipeItem {
+export interface IRecipeItem {
   recipeId: IRecipeId;
   recipeName: string;
   description: string;

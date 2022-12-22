@@ -42,9 +42,10 @@ const MyDataPrepApi = {
   setWorkspace: apiCreator(dataSrc, 'POST', 'REQUEST', `${basepathV2}`),
   getWorkspace: apiCreator(dataSrc, 'GET', 'REQUEST', `${basepathV2}`),
   getWorkspaceList: apiCreator(dataSrc, 'GET', 'REQUEST', `${contextPathV2}/workspaces`),
-  createRecipe: apiCreator(dataSrc, 'POST', 'REQUEST', `${contextPathV2}/recipes`),
   getRecipeList: apiCreator(dataSrc, 'GET', 'REQUEST', `${contextPathV2}/recipes`),
-  getRecipe: apiCreator(dataSrc, 'GET', 'REQUEST', `${contextPathV2}/recipes/id/:recipeId`),
+  getRecipeById: apiCreator(dataSrc, 'GET', 'REQUEST', `${contextPathV2}/recipes/id/:recipeId`),
+  deleteRecipe: apiCreator(dataSrc, 'DELETE', 'REQUEST', `${contextPathV2}/recipes/id/:recipeId`),
+  createRecipe: apiCreator(dataSrc, 'POST', 'REQUEST', `${contextPathV2}/recipes`),
 
   // Wrangler Data Model
   attachDataModel: apiCreator(dataSrc, 'POST', 'REQUEST', `${basepath}/datamodels`),
