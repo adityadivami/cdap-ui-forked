@@ -25,9 +25,9 @@ describe('Test Create and Edit Recipe Component', () => {
 
   jest.spyOn(MyDataPrepApi, 'createRecipe').mockImplementation(() => {
     return {
-          subscribe: (callback) => {
-            callback();
-          },
+      subscribe: (callback) => {
+        callback();
+      },
     };
   });
 
@@ -37,7 +37,8 @@ describe('Test Create and Edit Recipe Component', () => {
         recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: [] }}
         setIsCreateAndEditRecipeFormOpen={mockCreateAndEditRecipe}
         recipeFormAction={'createRecipe'}
-        setSnackbar={jest.fn()}      />
+        setSnackbar={jest.fn()}
+      />
     );
   });
 

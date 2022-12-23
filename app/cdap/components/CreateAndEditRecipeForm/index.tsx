@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState, useRef } from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
 import {
@@ -34,6 +34,7 @@ import {
 } from 'components/CreateAndEditRecipeForm/styledComponents';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import MyDataPrepApi from 'api/dataprep';
+import { debounce } from 'lodash';
 
 export default function({
   recipeData,
@@ -52,14 +53,13 @@ export default function({
 
   const [isSaveDisable, setIsSaveDisable] = useState<boolean>(true);
 
-  const recipeSteps = [
-    'uppercase: body1',
-    'titlecase: body2',
-  ];
+  const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   useEffect(() => {
     if (isNameError) {
       setIsSaveDisable(true);
+    } else {
+      setIsSaveDisable(false);
     }
   }, [isNameError]);
 
@@ -72,11 +72,11 @@ export default function({
       recipeFormData.recipeName === '' ||
       recipeFormData.description === '' ||
       recipeFormData.recipeName?.trim().length === 0 ||
-      recipeFormData.description?.trim().length === 0
+      recipeFormData.description?.trim().length === 0 ||
+      isNameError
     ) {
       setIsSaveDisable(true);
     } else {
-      setIsNameError(false);
       setIsSaveDisable(false);
     }
   }, [recipeFormData]);
@@ -91,7 +91,7 @@ export default function({
     onRecipeDataSave(recipeFormData);
   };
 
-  const onRecipeDataSave = (recipeFormData:IRecipeData) => {
+  const onRecipeDataSave = (recipeFormData: IRecipeData) => {
     if (recipeFormAction === CreateRecipeFormAction) {
       const params = {
         context: getCurrentNamespace(),
@@ -131,6 +131,35 @@ export default function({
     }
   };
 
+  const validateRecipeNameExists = useRef(
+    debounce((value) => {
+      if (value) {
+        const params = {
+          context: getCurrentNamespace(),
+          recipeName: value,
+        };
+        MyDataPrepApi.getRecipeByName(params).subscribe(
+          (res) => {
+            setIsNameError(true);
+          },
+          (err) => {
+            if (
+              err.statusCode === 404 &&
+              err.message === `recipe with name ${value} does not exist`
+            ) {
+              setIsNameError(false);
+            }
+          }
+        );
+      }
+    }, 500)
+  );
+
+  const onRecipeNameChange = (event) => {
+    setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
+    validateRecipeNameExists.current(event.target.value);
+  };
+
   return (
     <StyledForm
       onSubmit={(event: FormEvent) => onFormHandle(event)}
@@ -152,9 +181,7 @@ export default function({
               : ''
           }
           fullWidth
-          onChange={(event) =>
-            setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value })
-          }
+          onChange={(event) => onRecipeNameChange(event)}
           data-testid="recipe-name-field"
           placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
         />
@@ -201,4 +228,3 @@ export default function({
     </StyledForm>
   );
 }
-
