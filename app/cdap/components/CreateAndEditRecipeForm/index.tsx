@@ -145,7 +145,7 @@ export default function({
           (err) => {
             if (
               err.statusCode === 404 &&
-              err.message === `recipe with name ${value} does not exist`
+              err.message === `recipe with name '${value}' does not exist`
             ) {
               setIsNameError(false);
             }
