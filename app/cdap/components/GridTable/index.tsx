@@ -14,7 +14,6 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import Breadcrumb from 'components/Breadcrumb';
@@ -22,9 +21,6 @@ import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import FooterPanel from 'components/FooterPanel';
-import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
-import GridKPICell from 'components/GridTable/components/GridKPICell';
-import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
@@ -50,7 +46,7 @@ import ImportRecipeStepper from 'components/ImportRecipeStepper';
 import GridTableContainer from './components/GridTableContainer';
 
 export const TableWrapper = styled(Box)`
-  height: calc(100vh - 193px);
+  height: calc(100vh - 240px);
   overflow-y: auto;
   width: 100%;
 `;
@@ -63,7 +59,7 @@ const TablePanelContainer = styled(Box)`
 const GridTableWrapper = styled(Box)`
   max-width: 100%;
   overflow-x: auto;
-  max-height: 70vh;
+  max-height: 76vh;
 `;
 
 export default function GridTable() {

@@ -23,7 +23,6 @@ import { Box } from '@material-ui/core';
 import { IRecipeItem } from 'components/RecipeDetails';
 
 const RecipeStepPanel = styled(Box)`
-  max-height: calc(100vh - 190px);
   box-shadow: -3px 4px 15px rgba(68, 132, 245, 0.25);
 `;
 

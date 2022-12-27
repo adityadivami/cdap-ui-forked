@@ -24,11 +24,8 @@ import T from 'i18n-react';
 import { IRecipeStepsProps } from 'components/RecipeSteps/types';
 import RecipeStepWidget from 'components/RecipeSteps/RecipeStepWidget';
 import styled from 'styled-components';
-import { getTableDisplayName } from 'components/Replicator/utilities';
-import { getTransformedTableData } from 'components/Administration/TetheringTabContent/TetheringTable/utils';
 
 const RecipeStepsBody = styled(Container)`
-  height: calc(100% - 100px);
   padding: 0px;
   overflow-y: auto;
 `;
