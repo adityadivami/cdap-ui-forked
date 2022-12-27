@@ -114,4 +114,3 @@ export const StyledFormButtonWrapper = styled.div`
 export const getLabelStyle = (isNameError) => {
   return isNameError ? ErrorLabel : NormalLabel;
 };
-

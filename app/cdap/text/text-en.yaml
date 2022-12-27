@@ -3526,7 +3526,8 @@ features:
       labels:
         name: Name of  new recipe
         description: Description of recipe
-        nameErrorMessage: Another recipe with same name exists. Please input another name
+        sameNameErrorMessage: Another recipe with same name exists. Please input another name
+        validationErrorMessage: Recipe name should contain only alphanumeric characters or spaces
         cancel: Cancel
         save: Save
         saveRecipe: Save as recipe

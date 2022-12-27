@@ -45,6 +45,7 @@ export default function({
   const CreateRecipeFormAction = 'createRecipe';
   const [isNameError, setIsNameError] = useState(false);
   const StyledLabel = getLabelStyle(isNameError);
+  const [recipeNameError, setRecipeNameError] = useState('');
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
     description: '',
@@ -133,6 +134,11 @@ export default function({
         MyDataPrepApi.getRecipeByName(params).subscribe(
           (res) => {
             setIsNameError(true);
+            setRecipeNameError(
+              T.translate(
+                'features.WranglerNewUI.RecipeForm.labels.sameNameErrorMessage'
+              ).toString()
+            );
           },
           (err) => {
             if (
@@ -149,7 +155,16 @@ export default function({
 
   const onRecipeNameChange = (event) => {
     setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
-    validateRecipeNameExists.current(event.target.value);
+    const recipeNameRegEx = /^[a-z\d\s]+$/i;
+
+    if (event.target.value && !recipeNameRegEx.test(event.target.value)) {
+      setRecipeNameError(
+        T.translate('features.WranglerNewUI.RecipeForm.labels.validationErrorMessage').toString()
+      );
+      setIsNameError(true);
+    } else {
+      validateRecipeNameExists.current(event.target.value);
+    }
   };
 
   return (
@@ -167,11 +182,7 @@ export default function({
           defaultValue={recipeData.recipeName}
           error={isNameError}
           id="outlined-error-helper-text"
-          helperText={
-            isNameError
-              ? T.translate('features.WranglerNewUI.RecipeForm.labels.nameErrorMessage')
-              : ''
-          }
+          helperText={isNameError ? recipeNameError : ''}
           fullWidth
           onChange={(event) => onRecipeNameChange(event)}
           data-testid="recipe-name-field"
