@@ -29,8 +29,7 @@ import {
   FormButtonWrapper,
   ErrorLabel,
 } from 'components/RecipeForm/styledComponents';
-import { getCurrentNamespace } from 'services/NamespaceStore';
-import MyDataPrepApi from 'api/dataprep';
+import { getRecipeByName, createRecipe } from 'components/RecipeForm/services';
 import { debounce } from 'lodash';
 import { IRecipeData } from 'components/DataPrep/store';
 
@@ -84,71 +83,60 @@ export default function({
     onRecipeDataSave(recipeFormData);
   };
 
+  const createRecipeResponseHandler = () => {
+    setIsNameError(false);
+    setShowRecipeForm(false);
+    setSnackbar({
+      open: true,
+      isSuccess: true,
+      message: `${recipeSteps.length} ${T.translate(
+        'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
+      )}`,
+    });
+  };
+
+  const createRecipeErrorHandler = (err) => {
+    if (err.response.message) {
+      setIsNameError(true);
+    } else {
+      setShowRecipeForm(false);
+      setSnackbar({
+        open: true,
+        isSuccess: false,
+        message: T.translate('features.WranglerNewUI.RecipeForm.labels.errorMessage').toString(),
+      });
+    }
+  };
+
   const onRecipeDataSave = (recipeFormData: IRecipeData) => {
     if (recipeFormAction === CREATE_RECIPE_FORM_ACTION) {
-      const params = {
-        context: getCurrentNamespace(),
-      };
       const requestBody = {
         recipeName: recipeFormData.recipeName,
         description: recipeFormData.description,
         directives: recipeSteps,
       };
-      MyDataPrepApi.createRecipe(params, requestBody).subscribe(
-        () => {
-          setIsNameError(false);
-          setShowRecipeForm(false);
-          setSnackbar({
-            open: true,
-            isSuccess: true,
-            message: `${recipeSteps.length} ${T.translate(
-              'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
-            )}`,
-          });
-        },
-        (err) => {
-          if (err.response.message) {
-            setIsNameError(true);
-          } else {
-            setShowRecipeForm(false);
-            setSnackbar({
-              open: true,
-              isSuccess: false,
-              message: T.translate(
-                'features.WranglerNewUI.RecipeForm.labels.errorMessage'
-              ).toString(),
-            });
-          }
-        }
-      );
+      createRecipe(requestBody, createRecipeResponseHandler, createRecipeErrorHandler);
+    }
+  };
+
+  const getRecipeByNameResponseHandler = () => {
+    setIsNameError(true);
+    setRecipeNameError(
+      T.translate('features.WranglerNewUI.RecipeForm.labels.sameNameErrorMessage').toString()
+    );
+  };
+
+  const getRecipeByNameErrorHandler = (err, value) => {
+    console.log(recipeFormData, 'recipeFormData.recipeName');
+    if (err.statusCode === 404 && err.message === `recipe with name '${value}' does not exist`) {
+      setIsNameError(false);
     }
   };
 
   const validateRecipeNameExists = useRef(
     debounce((value) => {
       if (value) {
-        const params = {
-          context: getCurrentNamespace(),
-          recipeName: value,
-        };
-        MyDataPrepApi.getRecipeByName(params).subscribe(
-          (res) => {
-            setIsNameError(true);
-            setRecipeNameError(
-              T.translate(
-                'features.WranglerNewUI.RecipeForm.labels.sameNameErrorMessage'
-              ).toString()
-            );
-          },
-          (err) => {
-            if (
-              err.statusCode === 404 &&
-              err.message === `recipe with name '${value}' does not exist`
-            ) {
-              setIsNameError(false);
-            }
-          }
-        );
+        getRecipeByName(value, getRecipeByNameResponseHandler, getRecipeByNameErrorHandler);
       }
     }, 500)
   );
@@ -156,7 +144,6 @@ export default function({
   const onRecipeNameChange = (event) => {
     setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
     const recipeNameRegEx = /^[a-z\d\s]+$/i;
-
     if (event.target.value && !recipeNameRegEx.test(event.target.value)) {
       setRecipeNameError(
         T.translate('features.WranglerNewUI.RecipeForm.labels.validationErrorMessage').toString()
