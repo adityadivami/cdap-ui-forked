@@ -27,140 +27,87 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 public class AddTransformation {
-    @Given("Navigate to the home page")
-    public void navigateToTheHomePage() {
-        SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
-        WaitHelper.waitForPageToLoad();
-    }
+  @Given("Navigate to the home page")
+  public void navigateToTheHomePage() {
+    SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
+    WaitHelper.waitForPageToLoad();
+  }
 
-    @Then("Click on the Data Exploration card")
-    public void clickOnTheDataExploration() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            WebElement ele = Helper.locateElementByTestId("ongoing-data-explore-card-link-0");
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-0"));
-            String url = SeleniumDriver.getDriver().getCurrentUrl();
-            Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Click on the Data Exploration card")
+  public void clickOnTheDataExploration() {
+    WaitHelper.waitForPageToLoad();
+    WebElement ele = Helper.locateElementByTestId("ongoing-data-explore-card-link-0");
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("ongoing-data-explore-card-link-0"));
+    String url = SeleniumDriver.getDriver().getCurrentUrl();
+    Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
+  }
 
-    @Then("Click on the Structure icon")
-    public void clickOnTheStructureIcon() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-button-Structure"));
+  @Then("Click on the Structure icon")
+  public void clickOnTheStructureIcon() {
+    WaitHelper.waitForPageToLoad();
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-button-Structure"));
+  }
 
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Click on the Change data type")
+  public void clickOnTheChangeDataType() {
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-changeDatatype"));
+  }
 
-    @Then("Click on the Change data type")
-    public void clickOnTheChangeDataType() {
-        try {
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-changeDatatype"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Select the data type")
+  public void selectTheDataType() {
+    WaitHelper.waitForPageToLoad();
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-string"));
+  }
 
-    @Then("Select the data type")
-    public void selectTheDataType() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-string"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Verify if the user is on the Add transformation panel")
+  public void verifyIfTheUserIsOnTheAddTransformationScreen() {
+    WaitHelper.waitForPageToLoad();
+    Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("add-transformation-drawer")));
+  }
 
-    @Then("Verify if the user is on the Add transformation panel")
-    public void verifyIfTheUserIsOnTheAddTransformationScreen() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("add-transformation-drawer")));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Click on the Cross icon")
+  public void clickOnTheCrossIcon() {
+    WaitHelper.waitForPageToLoad();
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("add-transformation-drawer-close"));
+  }
 
-    @Then("Click on the Cross icon")
-    public void clickOnTheCrossIcon() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("add-transformation-drawer-close"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Click on the Select column button")
+  public void clickOnTheSelectColumnButton() {
+    WaitHelper.waitForPageToLoad();
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("select-column-button"));
+  }
 
-    @Then("Click on the Select column button")
-    public void clickOnTheSelectColumnButton() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("select-column-button"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Click on the Search icon")
+  public void clickOnTheSearchIcon() {
+    WaitHelper.waitForPageToLoad();
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("click-handle-focus"));
+  }
+  @Then("Enter column name {string} in the field")
+  public void enterNameOfColumn(String columnName) {
+    WebElement ele = Helper.locateElementByTestId("input_id");
+    ele.click();
+    ele.sendKeys(columnName);
+  }
 
-    @Then("Click on the Search icon")
-    public void clickOnTheSearchIcon() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("click-handle-focus"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
-    @Then("Enter column name {string} in the field")
-    public void enterNameOfColumn(String columnName) {
-        try {
-            WebElement ele = Helper.locateElementByTestId("input_id");
-            ele.click();
-            ele.sendKeys(columnName);
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Click on the radio button")
+  public void clickOnTheRadioButton() {
+    WaitHelper.waitForPageToLoad();
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("radio-input-1"));
+  }
+  @Then("Click on the cross icon of select column")
+  public void crossIconOfSelectColumn() {
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("select-column-drawer-close"));
+  }
 
-    @Then("Click on the radio button")
-    public void clickOnTheRadioButton() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("radio-input-1"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
-    @Then("Click on the cross icon of select column")
-    public void crossIconOfSelectColumn() {
-    try {
-        ElementHelper.clickOnElement(Helper.locateElementByTestId("select-column-drawer-close"));
-    } catch (Exception e) {
-        System.err.println("error" + e);
-    }
-    }
+  @Then("Click on the Done button")
+  public void clickOnTheDoneButton() {
+    WaitHelper.waitForPageToLoad();
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("button_done"));
+  }
 
-    @Then("Click on the Done button")
-    public void clickOnTheDoneButton() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("button_done"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
-
-    @Then("Click on the Apply Step button")
-    public void clickOnTheApplyStepButton() {
-        try {
-            WaitHelper.waitForPageToLoad();
-            ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
-        } catch (Exception e) {
-            System.err.println("error" + e);
-        }
-    }
+  @Then("Click on the Apply Step button")
+  public void clickOnTheApplyStepButton() {
+    WaitHelper.waitForPageToLoad();
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("apply-step-button"));
+  }
 }
