@@ -20,25 +20,25 @@ Feature: RecipeStepPanel
   @RecipeStep
   Scenario Outline: Go through the recipe functionality
     Given Navigate to Home Page
-    Then Click on the Data explorations card
+    Then Click on the Exploration card with "<testId>"
     Then Verify if user is on the wrangle page
     Then Click on Directive button
     Then Verify if the directive panel is displayed
     Then Enter command in the panel with the data "uppercase:body_2"
     Then Click on 'Recipe steps' button
     Then Verify if recipe panel is displayed
-    Then Verify if clicking on close icon of panel
+    Then Verify if clicking on close icon of recipe panel
     Then Click on 'Recipe steps' button
     Then Verify if user clicks on download icon of recipe panel
     Then Click on delete icon of any step with "<stepId>"
     Then verify if recipe step is Deleted with "<stepId>"
   Examples:
-      | stepId |
-      | 0 |
+      | stepId | testId |
+      | 0 | 0           |
 
   Scenario Outline: Go through the recipe with multiple steps functionality
     Given Navigate to Home Page
-    Then Click on the Data explorations card
+    Then Click on the Exploration card with "<testId>"
     Then Verify if user is on the wrangle page
     Then Click on Directive button
     Then Verify if the directive panel is displayed
@@ -53,5 +53,5 @@ Feature: RecipeStepPanel
     Then Verify if recipe panel is displayed
     Then Click on delete icon of any step with "<stepId>"
     Examples:
-      | stepId |
-      | 2 |
+      | stepId | testId |
+      | 2 | 0           |

@@ -32,12 +32,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RecipeStep {
-  @Then("Click on the Data explorations card")
-  public void clickOnTheDataExplorationsCard() {
-      WaitHelper.waitForPageToLoad();
-      ElementHelper.clickOnElement(Helper.locateElementByTestId
-      ("wrangler-home-ongoing-data-exploration-card-0"));
-  }
 
   @Then("Verify if user is on the wrangle page")
   public void verifyIfUserIsOnTheWranglePage() {
@@ -102,7 +96,7 @@ public class RecipeStep {
       ElementHelper.clickOnElement(Helper.locateElementByTestId("header-action-download-icon"));
   }
 
-  @Then("Verify if clicking on close icon of panel")
+  @Then("Verify if clicking on close icon of recipe panel")
   public void verifyByClickingOnCloseIcon() {
       WebDriverWait ele = new WebDriverWait(SeleniumDriver.getDriver(), 20);
       ele.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("drawer-widget-close-round-icon")));
