@@ -56,14 +56,6 @@ export default function({
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   useEffect(() => {
-    if (isNameError) {
-      setIsSaveDisable(true);
-    } else {
-      setIsSaveDisable(false);
-    }
-  }, [isNameError]);
-
-  useEffect(() => {
     setRecipeFormData(recipeData);
   }, [recipeData]);
 
@@ -79,7 +71,7 @@ export default function({
     } else {
       setIsSaveDisable(false);
     }
-  }, [recipeFormData]);
+  }, [recipeFormData, isNameError]);
 
   const onCancel = () => {
     setIsCreateAndEditRecipeFormOpen(false);
@@ -145,7 +137,7 @@ export default function({
           (err) => {
             if (
               err.statusCode === 404 &&
-              err.message === `recipe with name ${value} does not exist`
+              err.message === `recipe with name '${value}' does not exist`
             ) {
               setIsNameError(false);
             }
