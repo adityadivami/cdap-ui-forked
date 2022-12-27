@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { FormEvent, useEffect, useState, useRef } from 'react';
+import React, { FormEvent, ChangeEvent, useEffect, useState, useRef } from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
 import { IRecipeFormProps } from 'components/RecipeForm/types';
@@ -42,15 +42,14 @@ export default function({
   recipeFormAction,
 }: IRecipeFormProps) {
   const [isNameError, setIsNameError] = useState(false);
-  const StyledLabel = isNameError ? ErrorLabel : Label;
   const [recipeNameError, setRecipeNameError] = useState('');
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
     description: '',
     directives: [],
   });
-
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
+  const StyledLabel = isNameError ? ErrorLabel : Label;
 
   // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
@@ -126,22 +125,21 @@ export default function({
     );
   };
 
-  const getRecipeByNameErrorHandler = (err, value) => {
-    console.log(recipeFormData, 'recipeFormData.recipeName');
+  const getRecipeByNameErrorHandler = (err, value: string) => {
     if (err.statusCode === 404 && err.message === `recipe with name '${value}' does not exist`) {
       setIsNameError(false);
     }
   };
 
   const validateRecipeNameExists = useRef(
-    debounce((value) => {
+    debounce((value: string) => {
       if (value) {
         getRecipeByName(value, getRecipeByNameResponseHandler, getRecipeByNameErrorHandler);
       }
     }, 500)
   );
 
-  const onRecipeNameChange = (event) => {
+  const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
     const recipeNameRegEx = /^[a-z\d\s]+$/i;
     if (event.target.value && !recipeNameRegEx.test(event.target.value)) {
@@ -150,6 +148,7 @@ export default function({
       );
       setIsNameError(true);
     } else {
+      setIsNameError(false);
       validateRecipeNameExists.current(event.target.value);
     }
   };
@@ -172,7 +171,7 @@ export default function({
             id="outlined-error-helper-text"
             helperText={isNameError ? recipeNameError : ''}
             fullWidth
-            onChange={(event) => onRecipeNameChange(event)}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => onRecipeNameChange(event)}
             data-testid="recipe-name-field"
             placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
           />
@@ -188,7 +187,7 @@ export default function({
               minRows={3}
               data-testid="recipe-description-field"
               defaultValue={recipeData.description}
-              onChange={(event) =>
+              onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
                 setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
               }
               placeholder={T.translate(
