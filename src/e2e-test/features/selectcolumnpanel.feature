@@ -19,7 +19,7 @@ Feature: SelectColumnPanel
 
   @SelectColumnPanel
   Scenario: Go through the SelectColumn Panel functionality
-    Given Navigate to Home Page
+    Given Navigate to the Wrangle home page
     Then Click on the Data Explorations card
     Then Verify if the Transformation Toolbar is displayed on the Grid Page
     Then Click on the Structure icon
