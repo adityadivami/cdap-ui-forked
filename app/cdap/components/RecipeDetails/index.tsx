@@ -58,8 +58,8 @@ const DrawerContainerBox = styled(Container)`
 
 export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
   return (
-    <StyledDrawer open={true} data-testid="select-column-panel" anchor="right">
-      <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
+    <StyledDrawer open={true} data-testid="recipe-detail-panel" anchor="right">
+      <DrawerContainerBox role="presentation" data-testid="recipe-detail-drawer">
         <DrawerHeader onCloseDetail={onCloseDetail} />
         <RecipeDetailContainer recipeDetails={recipeDetails} />
       </DrawerContainerBox>

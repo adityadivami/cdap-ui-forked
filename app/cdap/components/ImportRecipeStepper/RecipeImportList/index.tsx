@@ -53,12 +53,14 @@ export default function({ previousStep, nextStep }: IRecipeImportListProps) {
   };
 
   return (
-    <DrawerContainerStyle>
+    <DrawerContainerStyle data-testid="recipe-import-list-container">
       <HeaderTemplate
         headingText={`${T.translate(`${PREFIX}.title`)}`}
         previousStep={previousStep}
       />
-      <RecipeImportSubText>{T.translate(`${PREFIX}.subTitle`)}</RecipeImportSubText>
+      <RecipeImportSubText data-testid="recipe-import-sub-text">
+        {T.translate(`${PREFIX}.subTitle`)}
+      </RecipeImportSubText>
       <Box m={2}>
         <RecipeList
           isOpen={true}

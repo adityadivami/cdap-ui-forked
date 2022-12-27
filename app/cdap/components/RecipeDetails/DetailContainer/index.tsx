@@ -127,7 +127,7 @@ const getSerialNumber = (recipeStepIndex: number) => {
   }
 };
 
-export default function ({ recipeDetails }: IRecipeDetailsProps) {
+export default function({ recipeDetails }: IRecipeDetailsProps) {
   return (
     <RecipeDetailWrapper>
       <RecipeName component="h5" data-testid="recipe-name">
@@ -135,9 +135,7 @@ export default function ({ recipeDetails }: IRecipeDetailsProps) {
       </RecipeName>
       <StepDetail>
         <RecipeDetailText component="div" data-testid="recipe-count-and-date">
-          {`${recipeDetails.directives.length} ${T.translate(
-            `${PREFIX}.tableHeaders.recipeStep`
-          )}`}
+          {`${recipeDetails.directives.length} ${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`}
           <VerticalDivider /> {dateFormatting(recipeDetails.createdTimeMillis)}
         </RecipeDetailText>
       </StepDetail>
@@ -159,7 +157,10 @@ export default function ({ recipeDetails }: IRecipeDetailsProps) {
         return (
           <>
             <StepsGridWrapper>
-              <RecipeStepText component="body1" data-testid="recipe-step-index">
+              <RecipeStepText
+                component="body1"
+                data-testid={`recipe-step-index-${recipeStepIndex}`}
+              >
                 {getSerialNumber(recipeStepIndex)}
               </RecipeStepText>
               <RecipeStepText component="body1" data-testid={`recipe-step-text-${recipeStepIndex}`}>

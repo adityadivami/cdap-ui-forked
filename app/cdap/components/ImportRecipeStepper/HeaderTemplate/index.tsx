@@ -79,7 +79,9 @@ export default function({ headingText, previousStep }: IHeaderTemplateProps) {
           <BackIcon />
         </StyledIconButton>
         <TitleUnderLineWrapper>
-          <DrawerWidgetTitleLabel>{headingText}</DrawerWidgetTitleLabel>
+          <DrawerWidgetTitleLabel data-testid="import-recipe-stepper-heading-text">
+            {headingText}
+          </DrawerWidgetTitleLabel>
           {UnderLine}
         </TitleUnderLineWrapper>
       </DrawerWidgetTitleIconWrapper>
