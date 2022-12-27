@@ -39,11 +39,11 @@ export const ErrorLabel = styled(Label)`
   color: #e05243;
 `;
 
-export const StyledForm = styled.form`
+export const Form = styled.form`
   padding-left: 20px;
 `;
 
-export const StyledRecipeNameTextField = styled(TextField)`
+export const StyledTextField = styled(TextField)`
   width: 350px;
   .MuiOutlinedInput-input {
     padding: 12px 14px;
@@ -61,7 +61,7 @@ export const StyledRecipeNameTextField = styled(TextField)`
   }
 `;
 
-export const StyledDescriptionTextArea = styled(TextareaAutosize)`
+export const StyledTextAreaAutosize = styled(TextareaAutosize)`
   width: 350px;
   font-size: 14px;
   border-color: ${grey[300]};
@@ -93,12 +93,12 @@ export const StyledButton = styled(Button)`
   letter-spacing: 0.15px;
 `;
 
-export const StyledCancelButton = styled(StyledButton)`
+export const CancelButton = styled(StyledButton)`
   margin-right: 20px;
   color: ${blue[500]};
 `;
 
-export const StyledSaveButton = styled(StyledButton)`
+export const SaveButton = styled(StyledButton)`
   background: ${blue[500]};
 `;
 

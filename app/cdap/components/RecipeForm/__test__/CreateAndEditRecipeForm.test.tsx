@@ -17,7 +17,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import T from 'i18n-react';
-import RecipeForm from 'components/RecipeForm/index';
+import RecipeForm from 'components/RecipeForm';
 import MyDataPrepApi from 'api/dataprep';
 
 describe('Test Create and Edit Recipe Component', () => {

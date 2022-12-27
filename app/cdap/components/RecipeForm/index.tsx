@@ -21,11 +21,11 @@ import { IRecipeFormProps } from 'components/RecipeForm/types';
 import {
   FormFieldWrapper,
   Label,
-  StyledForm,
-  StyledRecipeNameTextField,
-  StyledDescriptionTextArea,
-  StyledCancelButton,
-  StyledSaveButton,
+  Form,
+  StyledTextField,
+  StyledTextAreaAutosize,
+  CancelButton,
+  SaveButton,
   FormButtonWrapper,
   ErrorLabel,
 } from 'components/RecipeForm/styledComponents';
@@ -169,7 +169,7 @@ export default function({
 
   return (
     <>
-      <StyledForm
+      <Form
         onSubmit={(event: FormEvent<HTMLFormElement>) => onFormSubmit(event)}
         data-testid="recipe-form-parent"
       >
@@ -177,7 +177,7 @@ export default function({
           <StyledLabel data-testid="recipe-name-label">
             {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
           </StyledLabel>
-          <StyledRecipeNameTextField
+          <StyledTextField
             required
             variant="outlined"
             defaultValue={recipeData.recipeName}
@@ -195,7 +195,7 @@ export default function({
             <Label data-testid="recipe-description-label">
               {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
             </Label>
-            <StyledDescriptionTextArea
+            <StyledTextAreaAutosize
               required
               aria-label="minimum height"
               minRows={3}
@@ -211,15 +211,15 @@ export default function({
           </FormControl>
         </FormFieldWrapper>
         <FormButtonWrapper>
-          <StyledCancelButton
+          <CancelButton
             variant="outlined"
             color="primary"
             onClick={() => onCancel()}
             data-testid="recipe-cancel-button"
           >
             {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
-          </StyledCancelButton>
-          <StyledSaveButton
+          </CancelButton>
+          <SaveButton
             variant="contained"
             type="submit"
             color="primary"
@@ -227,9 +227,9 @@ export default function({
             disabled={isSaveDisabled}
           >
             {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
-          </StyledSaveButton>
+          </SaveButton>
         </FormButtonWrapper>
-      </StyledForm>
+      </Form>
     </>
   );
 }
