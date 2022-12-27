@@ -14,13 +14,13 @@
  * the License.
  */
 
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { ISnackbar } from 'components/Snackbar';
 import { IRecipeData } from 'components/DataPrep/store';
 
 export interface IRecipeFormProps {
   recipeData: IRecipeData;
-  setShowRecipeForm: React.Dispatch<React.SetStateAction<boolean>>;
-  setSnackbar: React.Dispatch<React.SetStateAction<ISnackbar>>;
+  setShowRecipeForm: Dispatch<SetStateAction<boolean>>;
+  setSnackbar: Dispatch<SetStateAction<ISnackbar>>;
   recipeFormAction: string;
 }
