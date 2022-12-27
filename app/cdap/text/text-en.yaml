@@ -17,6 +17,7 @@ commons:
   DSVEditor:
     placeholder: value
   dataset: Dataset
+  download: Download
   edit: Edit
   entity:
     application:
@@ -94,6 +95,7 @@ commons:
   then: Then
   tracker: Cask Tracker
   typeLabel: Type
+  view: View
   when: When
   wrangler: Cask Wrangler
   yesLabel: Yes
@@ -2803,7 +2805,6 @@ features:
       triggerNameExists: "Trigger Name already exists"
       triggerNameRequired: "Trigger Name is required"
       triggerNameLengthLimit: "Trigger Name should not be longer than 50 characters"
-      emptyCompositeTriggerError: "Please select upstream pipelines for this trigger"
       selectPipelineInstruction: "Select the pipelines you want to add to the trigger: "
       triggerAndType: "Wait for all events (AND)"
       triggerOrType: "Trigger on any selected event (OR)"
@@ -3438,10 +3439,14 @@ features:
     Breadcrumb:
       labels:
         connectionsList: Data Sources
-        wranglerHome: Home
+        loadToGrid: Wrangle
+        wrangleHome: Home
+        createPipeline: Create a Pipeline
       params:
         connectionsList: datasources
-        wranglerHome: home
+        wrangleHome: home
+      ariaLabels:
+        breadcrumb: breadcrumb
     common:
       and: and
     ConnectionsList:
@@ -3458,11 +3463,7 @@ features:
         recipeSteps: Recipe Steps
         rows: rows
         zoomPercent100: 100%
-    GridTable:
-      snackbarLabels:
-        datasetSuccess: Dataset loaded successfully 
-        wrangeHome: home
-    GridPage :
+    GridPage:
       addTransformationPanel:
         addTransformation: Add Transformation Step
         applyStep: Apply Step
@@ -3482,6 +3483,12 @@ features:
         noColumns: No columns to show
         noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
         zero: '0' 
+      menuItems:
+        divider: divider
+        heading: heading
+      gridHeader:
+        ariaLabels:
+          functionsName: Functions Name Switch
       toolbarIcons:
         labels:
           all: all
@@ -3490,9 +3497,8 @@ features:
           gridIcon: Grid
           invalidIcon: Invalid
           mathIcon: Math
-          moreHorizIcon: Other
           nullIcon: 'Null'
-          otherIcon: Other
+          moreHorizIcon: Other
           redoIcon: Redo
           securityIcon: Security
           structureIcon: Structure
@@ -3502,17 +3508,20 @@ features:
         options:
           labels:
             datatype:
-              bytes: bytes
+              string: string
               boolean: boolean
-              double: double
-              decimal: decimal
-              float: float
               integer: integer
               long: long
               short: short
-              string: string
+              float: float
+              double: double
+              decimal: decimal
+              bytes: bytes
             menu:
               changeDatatype: Change data type
+    GridTable:
+      snackbarLabels:
+        datasetSuccess: Dataset loaded successfully 
     HomePage:
       labels:
         common:
@@ -3523,16 +3532,37 @@ features:
           title: Start data exploration
         workspaces:
           title: Continue ongoing data explorations, pick up where you left off
+        recipes:
+          title: Saved recipes
     ImportData:
       referenceLabel: Import Data
     NoRecordScreen:
       gridTable:
         subtitle: Remove some recipe steps to view some data
         title: No rows left in this sample
+    Recipe:
+        description: Description
+        common:
+          deleteConfirmation: Are you sure you want to delete the recipe *_{recipeName}_*?
+          deleteError: There was a problem deleting the recipe
+          deleteTitle: Delete recipe
+        createdDate: Created date
+        emptyListMessage: No Recipes created in this namespace
+        home: Home        
+        import: Import
+        list: Recipe list
+        name: Recipe name 
+        savedRecipes: Saved Recipes    
+        steps: Steps
+        updated: Last updated
+        view: View
+        viewAll: View All     
     Snackbar:
       labels:
         failure: Failure
         success: Success
         undo: Undo
+   
+
     
 ...

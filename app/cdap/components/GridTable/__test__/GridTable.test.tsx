@@ -14,12 +14,14 @@
  *  the License.
  */
 
-import React from 'react';
+import { render } from '@testing-library/react';
+import MyDataPrepApi from 'api/dataprep';
 import GridTable from 'components/GridTable/index';
 import { render, screen } from '@testing-library/react';
 import { Route, Router, Switch } from 'react-router';
 import MyDataPrepApi from 'api/dataprep';
 import rxjs from 'rxjs/operators';
+import history from 'services/history';
 import { mockForFlatMap, mockForGetWorkspace } from '../mock/mockDataForGrid';
 import history from 'services/history';
 import { getAPIRequestPayload, applyDirectives } from '../services';
