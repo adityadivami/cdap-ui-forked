@@ -17,34 +17,33 @@
 import React, { FormEvent, useEffect, useState, useRef } from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
-import {
-  ICreateAndEditRecipeFormProps,
-  IRecipeData,
-} from 'components/CreateAndEditRecipeForm/types';
+import { IRecipeFormProps } from 'components/RecipeForm/types';
 import {
   FormFieldWrapper,
-  NormalLabel,
+  Label,
   StyledForm,
   StyledRecipeNameTextField,
   StyledDescriptionTextArea,
   StyledCancelButton,
   StyledSaveButton,
-  StyledFormButtonWrapper,
-  getLabelStyle,
-} from 'components/CreateAndEditRecipeForm/styledComponents';
+  FormButtonWrapper,
+  ErrorLabel,
+} from 'components/RecipeForm/styledComponents';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import MyDataPrepApi from 'api/dataprep';
 import { debounce } from 'lodash';
+import { IRecipeData } from 'components/DataPrep/store';
+
+const CREATE_RECIPE_FORM_ACTION = 'createRecipe';
 
 export default function({
   recipeData,
-  setIsCreateAndEditRecipeFormOpen,
+  setShowRecipeForm,
   setSnackbar,
   recipeFormAction,
-}: ICreateAndEditRecipeFormProps) {
-  const CreateRecipeFormAction = 'createRecipe';
+}: IRecipeFormProps) {
   const [isNameError, setIsNameError] = useState(false);
-  const StyledLabel = getLabelStyle(isNameError);
+  const StyledLabel = isNameError ? ErrorLabel : Label;
   const [recipeNameError, setRecipeNameError] = useState('');
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
@@ -52,8 +51,9 @@ export default function({
     directives: [],
   });
 
-  const [isSaveDisable, setIsSaveDisable] = useState<boolean>(true);
+  const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
 
+  // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   useEffect(() => {
@@ -68,24 +68,24 @@ export default function({
       recipeFormData.description?.trim().length === 0 ||
       isNameError
     ) {
-      setIsSaveDisable(true);
+      setIsSaveDisabled(true);
     } else {
-      setIsSaveDisable(false);
+      setIsSaveDisabled(false);
     }
   }, [recipeFormData, isNameError]);
 
   const onCancel = () => {
-    setIsCreateAndEditRecipeFormOpen(false);
+    setShowRecipeForm(false);
     setIsNameError(false);
   };
 
-  const onFormHandle = (event: FormEvent) => {
+  const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onRecipeDataSave(recipeFormData);
   };
 
   const onRecipeDataSave = (recipeFormData: IRecipeData) => {
-    if (recipeFormAction === CreateRecipeFormAction) {
+    if (recipeFormAction === CREATE_RECIPE_FORM_ACTION) {
       const params = {
         context: getCurrentNamespace(),
       };
@@ -97,7 +97,7 @@ export default function({
       MyDataPrepApi.createRecipe(params, requestBody).subscribe(
         () => {
           setIsNameError(false);
-          setIsCreateAndEditRecipeFormOpen(false);
+          setShowRecipeForm(false);
           setSnackbar({
             open: true,
             isSuccess: true,
@@ -110,7 +110,7 @@ export default function({
           if (err.response.message) {
             setIsNameError(true);
           } else {
-            setIsCreateAndEditRecipeFormOpen(false);
+            setShowRecipeForm(false);
             setSnackbar({
               open: true,
               isSuccess: false,
@@ -168,66 +168,68 @@ export default function({
   };
 
   return (
-    <StyledForm
-      onSubmit={(event: FormEvent) => onFormHandle(event)}
-      data-testid="recipe-form-parent"
-    >
-      <FormFieldWrapper>
-        <StyledLabel data-testid="recipe-name-label">
-          {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
-        </StyledLabel>
-        <StyledRecipeNameTextField
-          required
-          variant="outlined"
-          defaultValue={recipeData.recipeName}
-          error={isNameError}
-          id="outlined-error-helper-text"
-          helperText={isNameError ? recipeNameError : ''}
-          fullWidth
-          onChange={(event) => onRecipeNameChange(event)}
-          data-testid="recipe-name-field"
-          placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
-        />
-      </FormFieldWrapper>
-      <FormFieldWrapper>
-        <FormControl variant="outlined">
-          <NormalLabel data-testid="recipe-description-label">
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
-          </NormalLabel>
-          <StyledDescriptionTextArea
+    <>
+      <StyledForm
+        onSubmit={(event: FormEvent<HTMLFormElement>) => onFormSubmit(event)}
+        data-testid="recipe-form-parent"
+      >
+        <FormFieldWrapper>
+          <StyledLabel data-testid="recipe-name-label">
+            {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
+          </StyledLabel>
+          <StyledRecipeNameTextField
             required
-            aria-label="minimum height"
-            minRows={3}
-            data-testid="recipe-description-field"
-            defaultValue={recipeData.description}
-            onChange={(event) =>
-              setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
-            }
-            placeholder={T.translate(
-              'features.WranglerNewUI.RecipeForm.labels.descriptionPlaceholder'
-            )}
+            variant="outlined"
+            defaultValue={recipeData.recipeName}
+            error={isNameError}
+            id="outlined-error-helper-text"
+            helperText={isNameError ? recipeNameError : ''}
+            fullWidth
+            onChange={(event) => onRecipeNameChange(event)}
+            data-testid="recipe-name-field"
+            placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
           />
-        </FormControl>
-      </FormFieldWrapper>
-      <StyledFormButtonWrapper>
-        <StyledCancelButton
-          variant="outlined"
-          color="primary"
-          onClick={() => onCancel()}
-          data-testid="recipe-cancel-button"
-        >
-          {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
-        </StyledCancelButton>
-        <StyledSaveButton
-          variant="contained"
-          type="submit"
-          color="primary"
-          data-testid="recipe-save-button"
-          disabled={isSaveDisable}
-        >
-          {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
-        </StyledSaveButton>
-      </StyledFormButtonWrapper>
-    </StyledForm>
+        </FormFieldWrapper>
+        <FormFieldWrapper>
+          <FormControl variant="outlined">
+            <Label data-testid="recipe-description-label">
+              {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
+            </Label>
+            <StyledDescriptionTextArea
+              required
+              aria-label="minimum height"
+              minRows={3}
+              data-testid="recipe-description-field"
+              defaultValue={recipeData.description}
+              onChange={(event) =>
+                setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
+              }
+              placeholder={T.translate(
+                'features.WranglerNewUI.RecipeForm.labels.descriptionPlaceholder'
+              )}
+            />
+          </FormControl>
+        </FormFieldWrapper>
+        <FormButtonWrapper>
+          <StyledCancelButton
+            variant="outlined"
+            color="primary"
+            onClick={() => onCancel()}
+            data-testid="recipe-cancel-button"
+          >
+            {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
+          </StyledCancelButton>
+          <StyledSaveButton
+            variant="contained"
+            type="submit"
+            color="primary"
+            data-testid="recipe-save-button"
+            disabled={isSaveDisabled}
+          >
+            {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
+          </StyledSaveButton>
+        </FormButtonWrapper>
+      </StyledForm>
+    </>
   );
 }

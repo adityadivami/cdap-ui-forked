@@ -49,7 +49,7 @@ import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import { useLocation } from 'react-router';
-import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm';
+import RecipeForm from 'components/RecipeForm';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
@@ -89,10 +89,9 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [recipeFormOpen, setRecipeFormOpen] = useState(true);
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
-  const [isCreateAndEditRecipeFormOpen, setIsCreateAndEditRecipeFormOpen] = useState(true);
+  const [showRecipeForm, setShowRecipeForm] = useState(true);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -314,10 +313,10 @@ export default function GridTable() {
       {showBreadCrumb && (
         <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
       )}
-      {isCreateAndEditRecipeFormOpen && (
-        <CreateAndEditRecipeForm
+      {showRecipeForm && (
+        <RecipeForm
           recipeData={recipeFormData}
-          setIsCreateAndEditRecipeFormOpen={setIsCreateAndEditRecipeFormOpen}
+          setShowRecipeForm={setShowRecipeForm}
           setSnackbar={setSnackbar}
           recipeFormAction={'createRecipe'}
         />

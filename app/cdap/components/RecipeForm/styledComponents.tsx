@@ -32,14 +32,11 @@ export const Label = styled(Typography)`
   font-size: 14px;
   line-height: 150%;
   letter-spacing: 0.15px;
+  color: #5f6368;
 `;
 
 export const ErrorLabel = styled(Label)`
   color: #e05243;
-`;
-
-export const NormalLabel = styled(Label)`
-  color: #5f6368;
 `;
 
 export const StyledForm = styled.form`
@@ -105,12 +102,8 @@ export const StyledSaveButton = styled(StyledButton)`
   background: ${blue[500]};
 `;
 
-export const StyledFormButtonWrapper = styled.div`
+export const FormButtonWrapper = styled.div`
   float: right;
   padding-top: 63px;
   padding-bottom: 20px;
 `;
-
-export const getLabelStyle = (isNameError) => {
-  return isNameError ? ErrorLabel : NormalLabel;
-};

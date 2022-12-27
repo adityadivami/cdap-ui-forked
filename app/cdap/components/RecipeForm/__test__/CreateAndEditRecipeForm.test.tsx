@@ -17,7 +17,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import T from 'i18n-react';
-import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm/index';
+import RecipeForm from 'components/RecipeForm/index';
 import MyDataPrepApi from 'api/dataprep';
 
 describe('Test Create and Edit Recipe Component', () => {
@@ -33,13 +33,13 @@ describe('Test Create and Edit Recipe Component', () => {
 
   beforeEach(() => {
     render(
-      <CreateAndEditRecipeForm
+      <RecipeForm
         recipeData={{
           recipeName: 'Abhilash',
           description: 'Batman',
           directives: ['uppercase: body1', 'titlecase: body2'],
         }}
-        setIsCreateAndEditRecipeFormOpen={mockCreateAndEditRecipe}
+        setShowRecipeForm={mockCreateAndEditRecipe}
         recipeFormAction={'createRecipe'}
         setSnackbar={jest.fn()}
       />

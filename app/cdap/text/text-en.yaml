@@ -3529,17 +3529,17 @@ features:
     RecipeForm:
       labels:
         name: Name of  new recipe
-        description: Description of recipe
-        sameNameErrorMessage: Another recipe with same name exists. Please input another name
-        validationErrorMessage: Recipe name should contain only alphanumeric characters or spaces
         cancel: Cancel
-        save: Save
-        saveRecipe: Save as recipe
-        namePlaceholder: Input a name to identify it later
+        description: Description of recipe
         descriptionPlaceholder: Input a description to identify it later
+        errorMessage: Something went wrong!
+        namePlaceholder: Input a name to identify it later
         recipeFormInfo: steps will be saved as a recpe. You can access this saved recipe from the recipes section on Wrangler Home page.
         recipeSaveSuccessMessage: Steps successfully saved as a recipe!
-        errorMessage: Something went wrong!
+        save: Save
+        saveRecipe: Save as recipe
+        sameNameErrorMessage: Another recipe with same name exists. Please input another name
+        validationErrorMessage: Recipe name should contain only alphanumeric characters or spaces
     Recipe:
         description: Description
         common:
