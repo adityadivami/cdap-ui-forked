@@ -20,15 +20,17 @@ import { Container, Drawer } from '@material-ui/core';
 import DrawerHeader from 'components/RecipeDetails/DrawerHeader';
 import RecipeDetailContainer from 'components/RecipeDetails/DetailContainer';
 
+interface INameSpace {
+  name: string;
+  generation: number;
+}
+
 interface IRecipeId {
-  namespace: {
-    name: string;
-    generation: number;
-  };
+  namespace: INameSpace;
   recipeId: string;
 }
 
-export interface IRecipeItem {
+export interface IRecipeData {
   recipeId: IRecipeId;
   recipeName: string;
   description: string;
@@ -39,7 +41,7 @@ export interface IRecipeItem {
 }
 
 interface IRecipeDetailsProps {
-  recipeDetails: IRecipeItem;
+  recipe: IRecipeData;
   onCloseDetail: () => void;
 }
 
@@ -50,19 +52,19 @@ const StyledDrawer = styled(Drawer)`
   }
 `;
 
-const DrawerContainerBox = styled(Container)`
+const DrawerContainer = styled(Container)`
   width: 460px;
   height: 100%;
   padding-left: 30px;
 `;
 
-export default function({ recipeDetails, onCloseDetail }: IRecipeDetailsProps) {
+export default function({ recipe, onCloseDetail }: IRecipeDetailsProps) {
   return (
     <StyledDrawer open={true} data-testid="select-column-panel" anchor="right">
-      <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
+      <DrawerContainer role="presentation" data-testid="select-column-drawer">
         <DrawerHeader onCloseDetail={onCloseDetail} />
-        <RecipeDetailContainer recipeDetails={recipeDetails} />
-      </DrawerContainerBox>
+        <RecipeDetailContainer recipe={recipe} />
+      </DrawerContainer>
     </StyledDrawer>
   );
 }

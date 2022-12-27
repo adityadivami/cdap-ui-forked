@@ -20,27 +20,10 @@ import { Box, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
 import { dateFormatting } from 'components/RecipeDetails/utils';
-
-interface IRecipeId {
-  namespace: {
-    name: string;
-    generation: number;
-  };
-  recipeId: string;
-}
-
-interface IRecipeItem {
-  recipeId: IRecipeId;
-  recipeName: string;
-  description: string;
-  directives: string[];
-  createdTimeMillis: number;
-  updatedTimeMillis: number;
-  recipeStepsCount: number;
-}
+import { IRecipeData } from 'components/RecipeDetails';
 
 interface IRecipeDetailsProps {
-  recipeDetails: IRecipeItem;
+  recipe: IRecipeData;
 }
 
 const PREFIX = 'features.WranglerNewUI.RecipeDetails';
@@ -49,11 +32,14 @@ const RecipeDetailWrapper = styled(Box)`
   margin-top: 19px;
 `;
 
-const RecipeName = styled(Typography)`
+const StepsGridHead = styled(Typography)`
   font-weight: 600;
   font-size: 16px;
   line-height: 150%;
   color: ${grey[700]};
+`;
+
+const RecipeName = styled(StepsGridHead)`
   text-transform: capitalize;
 `;
 
@@ -74,13 +60,8 @@ const RecipeDetailText = styled(Typography)`
   align-items: center;
 `;
 
-const RecipeStepText = styled(Typography)`
-  color: ${grey[700]};
-  font-weight: 400;
+const RecipeStepText = styled(RecipeDetailText)`
   font-size: 16px;
-  line-height: 150%;
-  display: flex;
-  align-items: center;
 `;
 
 const StepsGridWrapper = styled(Box)`
@@ -92,13 +73,6 @@ const StepsGridWrapper = styled(Box)`
 
 const StepsGridWrapperHead = styled(StepsGridWrapper)`
   padding: 9px 10px;
-`;
-
-const StepsGridHead = styled(Typography)`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
-  color: ${grey[700]};
 `;
 
 const HeadDivider = styled(Box)`
@@ -127,49 +101,47 @@ const getSerialNumber = (recipeStepIndex: number) => {
   }
 };
 
-export default function({ recipeDetails }: IRecipeDetailsProps) {
+export default function({ recipe }: IRecipeDetailsProps) {
   return (
-        <RecipeDetailWrapper>
-          <RecipeName component="h5" data-testid="recipe-name">
-            {recipeDetails.recipeName}
-          </RecipeName>
-          <StepDetail>
-            <RecipeDetailText component="div" data-testid="recipe-count-and-date">
-              {`${recipeDetails.directives.length} ${T.translate(
-                `${PREFIX}.tableHeaders.recipeStep`
-              )}`}
-              <VerticalDivider /> {dateFormatting(recipeDetails.createdTimeMillis)}
-            </RecipeDetailText>
-          </StepDetail>
-          <DescriptionDetail>
-            <RecipeDetailText data-testid="recipe-decription">
-              {recipeDetails.description}
-            </RecipeDetailText>
-          </DescriptionDetail>
-          <StepsGridWrapperHead>
-            <StepsGridHead component="body1" data-testid="recipe-step-serial-number-column-head">
-              {T.translate(`${PREFIX}.tableHeaders.serialNo`)}
-            </StepsGridHead>
-            <StepsGridHead component="body1" data-testid="recipe-step-text-column-head">
-              {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
-            </StepsGridHead>
-          </StepsGridWrapperHead>
-          <HeadDivider />
-          {recipeDetails.directives.map((recipeStep, recipeStepIndex) => {
-            return (
-              <>
-                <StepsGridWrapper>
-                  <RecipeStepText component="body1" data-testid="recipe-step-index">
-                    {getSerialNumber(recipeStepIndex)}
-                  </RecipeStepText>
-                  <RecipeStepText component="body1" data-testid={`recipe-step-text-${recipeStepIndex}`}>
-                    {recipeStep}
-                  </RecipeStepText>
-                </StepsGridWrapper>
-                {recipeStepIndex !== recipeDetails.directives.length - 1 && <CellDivider />}
-              </>
-            );
-          })}
-        </RecipeDetailWrapper>
+    <RecipeDetailWrapper>
+      <RecipeName component="h5" data-testid="recipe-name">
+        {recipe.recipeName}
+      </RecipeName>
+      <StepDetail>
+        <RecipeDetailText component="div" data-testid="recipe-count-and-date">
+          {`${recipe.directives.length} ${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`}
+          <VerticalDivider /> {dateFormatting(recipe.createdTimeMillis)}
+        </RecipeDetailText>
+      </StepDetail>
+      <DescriptionDetail>
+        <RecipeDetailText component="p" data-testid="recipe-decription">
+          {recipe.description}
+        </RecipeDetailText>
+      </DescriptionDetail>
+      <StepsGridWrapperHead>
+        <StepsGridHead component="span" data-testid="recipe-step-serial-number-column-head">
+          {T.translate(`${PREFIX}.tableHeaders.serialNo`)}
+        </StepsGridHead>
+        <StepsGridHead component="span" data-testid="recipe-step-text-column-head">
+          {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
+        </StepsGridHead>
+      </StepsGridWrapperHead>
+      <HeadDivider />
+      {recipe.directives.map((recipeStep, recipeStepIndex) => {
+        return (
+          <>
+            <StepsGridWrapper>
+              <RecipeStepText component="span" data-testid="recipe-step-index">
+                {getSerialNumber(recipeStepIndex)}
+              </RecipeStepText>
+              <RecipeStepText component="span" data-testid={`recipe-step-text-${recipeStepIndex}`}>
+                {recipeStep}
+              </RecipeStepText>
+            </StepsGridWrapper>
+            {recipeStepIndex !== recipe.directives.length - 1 && <CellDivider />}
+          </>
+        );
+      })}
+    </RecipeDetailWrapper>
   );
 }

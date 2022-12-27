@@ -24,18 +24,18 @@ import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import RecipeDetails from 'components/RecipeDetails';
-import { IRecipeItem } from 'components/RecipeDetails';
+import { IRecipeData } from 'components/RecipeDetails';
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
 const ViewAllRecipies = () => {
-  const [showRecipeDetails, setShowRecipedetails] = useState(false);
-  const [recipeDetails, setRecipeDetails] = useState<IRecipeItem>();
+  const [showRecipesDrawer, setShowRecipesDrawer] = useState(false);
+  const [recipe, setRecipe] = useState<IRecipeData>();
   const viewRecipeHandler = (selectedObject: any) => {
-    setRecipeDetails(selectedObject);
-    setShowRecipedetails(true);
+    setRecipe(selectedObject);
+    setShowRecipesDrawer(true);
   };
 
   const handleEditRecipe = (selectedObject: any) => {
@@ -44,11 +44,8 @@ const ViewAllRecipies = () => {
 
   return (
     <>
-      {showRecipeDetails && (
-        <RecipeDetails
-          recipeDetails={recipeDetails}
-          onCloseDetail={() => setShowRecipedetails(false)}
-        />
+      {showRecipesDrawer && (
+        <RecipeDetails recipe={recipe} onCloseDetail={() => setShowRecipesDrawer(false)} />
       )}
       <Box ml={4} m={2}>
         <Breadcrumbs separator="›" aria-label="breadcrumb">

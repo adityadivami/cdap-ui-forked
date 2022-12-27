@@ -82,8 +82,6 @@ export default function GridTable() {
     },
   ]);
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [recipeDetails, setRecipeDetails] = useState<IRecipeItem>();
-  const [recipeDetailIsOpen, setRecipeDetailsIsOpen] = useState(false);
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
 
