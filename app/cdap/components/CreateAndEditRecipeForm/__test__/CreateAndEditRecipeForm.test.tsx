@@ -34,7 +34,11 @@ describe('Test Create and Edit Recipe Component', () => {
   beforeEach(() => {
     render(
       <CreateAndEditRecipeForm
-        recipeData={{ recipeName: 'Abhilash', description: 'Batman', directives: ['uppercase: body1', 'titlecase: body2'] }}
+        recipeData={{
+          recipeName: 'Abhilash',
+          description: 'Batman',
+          directives: ['uppercase: body1', 'titlecase: body2'],
+        }}
         setIsCreateAndEditRecipeFormOpen={mockCreateAndEditRecipe}
         recipeFormAction={'createRecipe'}
         setSnackbar={jest.fn()}
@@ -67,7 +71,7 @@ describe('Test Create and Edit Recipe Component', () => {
     const RecipeNameElement = screen.getByTestId(/recipe-name-field/i);
     fireEvent.change(RecipeNameElement.firstChild.firstChild, { target: { value: 'test' } });
     expect(RecipeNameElement).toBeInTheDocument();
-    expect(RecipeNameElement.firstChild.firstChild).toHaveValue('test')
+    expect(RecipeNameElement.firstChild.firstChild).toHaveValue('test');
   });
 
   it('should render Recipe Description Field', () => {
@@ -87,7 +91,6 @@ describe('Test Create and Edit Recipe Component', () => {
     const saveButtonElement = screen.getByTestId(/recipe-save-button/i);
     fireEvent.click(saveButtonElement);
     expect(saveButtonElement).toBeInTheDocument();
-    expect(MyDataPrepApi.createRecipe).toBeCalled()
+    expect(MyDataPrepApi.createRecipe).toBeCalled();
   });
 });
-
