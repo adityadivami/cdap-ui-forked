@@ -13,6 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
+
 import React from 'react';
 import T from 'i18n-react';
 import {
@@ -78,8 +79,9 @@ export default function({
   transformationName,
   handleSelectColumn,
 }: ISelectColumnsWidgetProps) {
+
   const selectButtonText =
-    MULTI_SELECTION_COLUMN?.filter((el) => el.value === transformationName).length > 0
+    MULTI_SELECTION_COLUMN?.findIndex((el) => el.value === transformationName) > -1
       ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`).toString()
       : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString();
 
@@ -91,14 +93,14 @@ export default function({
         </SubHeadBoldFont>
         {selectedColumns.length > 0 && TickIcon}
       </TransformationNameHeadWrapper>
-      <TransformationNameTextInfoWrapper padding="10px 0">
+      <TransformationNameTextInfoWrapper>
         <NormalFont component="p" data-testid="select-column-subtitle">
           {T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}
         </NormalFont>
       </TransformationNameTextInfoWrapper>
-      {Array.isArray(selectedColumns) && selectedColumns.length ? (
+      {selectedColumns.length ? (
         selectedColumns.map((item, index) => (
-          <TransformationNameTextInfoWrapper padding="5px 0">
+          <TransformationNameTextInfoWrapper>
             <NormalFont component="p" data-testid="selected-function-name">{`${index + 1}. ${
               item.label
             }`}</NormalFont>

@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, Container, IconButton } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import React from 'react';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import styled from 'styled-components';

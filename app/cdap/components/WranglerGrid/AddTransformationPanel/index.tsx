@@ -91,7 +91,7 @@ export default function({
   const handleApply = () => {
     const directive: string = getDirective(transformationName, selectedColumns[0].label);
     applyTransformation(directive);
-    setDrawerStatus(false); // TODO process of sending value || or directive of function selected
+    setDrawerStatus(false); 
   };
 
   useEffect(() => {
