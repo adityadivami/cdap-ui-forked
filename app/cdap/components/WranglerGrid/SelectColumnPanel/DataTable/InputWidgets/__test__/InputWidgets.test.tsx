@@ -32,7 +32,7 @@ describe('It should render ', () => {
       />
     );
 
-    expect(screen.getByTestId(/form-control-label-parent-0/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/form-control-label-parent-0/i)).toBeInTheDocument();
   });
 
   it('Should render component with isSingleSelection true', () => {
@@ -48,7 +48,6 @@ describe('It should render ', () => {
       />
     );
 
-    expect(screen.getByTestId(/radio-input-0/i)).toBeInTheDocument()
-
+    expect(screen.getByTestId(/radio-input-0/i)).toBeInTheDocument();
   });
 });

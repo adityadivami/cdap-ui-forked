@@ -19,8 +19,7 @@ import React from 'react';
 import CheckBoxInput from 'components/WranglerGrid/SelectColumnPanel/DataTable/CheckboxInput';
 
 describe('It should render ', () => {
-
-  const mockMultipleSelect = jest.fn()
+  const mockMultipleSelect = jest.fn();
   it('Should render the checkBox component and click the checkbox with disable check false', () => {
     render(
       <CheckBoxInput
@@ -34,7 +33,7 @@ describe('It should render ', () => {
 
     const checkboxInputElement = screen.getByTestId(/check-box-input-0/i);
     fireEvent.click(checkboxInputElement);
-    expect(mockMultipleSelect).toBeCalled()
+    expect(mockMultipleSelect).toBeCalled();
   });
 
   it('Should render the checkBox component and click the checkbox with disable checkbox as true', () => {
@@ -50,6 +49,6 @@ describe('It should render ', () => {
 
     const checkboxInputElement = screen.getByTestId(/check-box-input-0/i);
     fireEvent.click(checkboxInputElement);
-    expect(mockMultipleSelect).toBeCalled()
+    expect(mockMultipleSelect).toBeCalled();
   });
 });

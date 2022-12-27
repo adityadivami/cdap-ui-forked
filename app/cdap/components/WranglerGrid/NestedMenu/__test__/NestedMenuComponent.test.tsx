@@ -36,10 +36,9 @@ const dummyData2 = [
 ];
 
 describe('Testing nested menu component', () => {
-
-  const mockAnchorFunction = jest.fn()
-  const mockToggleFunction = jest.fn()
-  const mockMenuFunction = jest.fn()
+  const mockAnchorFunction = jest.fn();
+  const mockToggleFunction = jest.fn();
+  const mockMenuFunction = jest.fn();
 
   it('should test default render of nested menu', () => {
     render(
@@ -60,8 +59,8 @@ describe('Testing nested menu component', () => {
     fireEvent.click(screen.getByTestId(/nested-menu-parent-root/i));
     expect(parentElement).toHaveClass(
       'MuiButtonBase-root MuiListItem-root MuiMenuItem-root MuiMenuItem-gutters MuiListItem-gutters MuiListItem-button'
-      );
-    expect(mockAnchorFunction).toBeCalled()
+    );
+    expect(mockAnchorFunction).toBeCalled();
   });
 
   it('should test default render of nested menu with options as empty', () => {
@@ -80,7 +79,6 @@ describe('Testing nested menu component', () => {
 
     const parentElement = screen.getByTestId(/menu-item-test/i);
     fireEvent.click(parentElement);
-    expect(mockMenuFunction).toBeCalled()
-
+    expect(mockMenuFunction).toBeCalled();
   });
 });

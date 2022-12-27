@@ -20,7 +20,6 @@ import DataTable from 'components/WranglerGrid/SelectColumnPanel/DataTable';
 import T from 'i18n-react';
 
 describe('It should test FunctionNameWidget Component', () => {
-
   const mockSetSelected = jest.fn();
 
   it('Should render the FunctionNameWidget Component', () => {
@@ -44,7 +43,7 @@ describe('It should test FunctionNameWidget Component', () => {
     );
     const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
     fireEvent.click(checkBoxElement);
-    expect(mockSetSelected).toBeCalled()
+    expect(mockSetSelected).toBeCalled();
     expect(screen.getByTestId(/panel-columns/i)).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.columns')}`
     );
@@ -73,7 +72,7 @@ describe('It should test FunctionNameWidget Component', () => {
     );
     const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
     fireEvent.click(checkBoxElement);
-    expect(mockSetSelected).toBeCalled()
+    expect(mockSetSelected).toBeCalled();
     expect(screen.getByTestId(/panel-values/i)).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.GridPage.addTransformationPanel.nullValues')}`
     );
@@ -106,6 +105,6 @@ describe('It should test FunctionNameWidget Component', () => {
     );
     const checkBoxElement = screen.getByTestId(/column-table-check-box/i);
     fireEvent.click(checkBoxElement);
-    expect(mockSetSelected).toBeCalled()
+    expect(mockSetSelected).toBeCalled();
   });
 });

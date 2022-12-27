@@ -37,6 +37,6 @@ describe('It should test the SelectColumnsList Component', () => {
         </Switch>
       </Router>
     );
-    expect(screen.getByTestId(/select-column-panel/i)).toBeInTheDocument()
+    expect(screen.getByTestId(/select-column-panel/i)).toBeInTheDocument();
   });
 });

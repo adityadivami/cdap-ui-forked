@@ -21,7 +21,6 @@ import { Route, Router, Switch } from 'react-router';
 import SelectColumnsList from 'components/WranglerGrid/SelectColumnPanel/ColumnsList';
 
 describe('It should test the SelectColumnsList Component', () => {
-
   it('should render the SelectColumnsList Component', () => {
     render(
       <Router history={history}>
@@ -43,7 +42,7 @@ describe('It should test the SelectColumnsList Component', () => {
     expect(screen.getByTestId(/select-column-list-parent/i)).toBeInTheDocument();
   });
   it('should render the SelectColumnsList Component with some input value along with label and null and trigger input ', () => {
-    const mockSetSelected = jest.fn()
+    const mockSetSelected = jest.fn();
     render(
       <Router history={history}>
         <Switch>
@@ -70,9 +69,9 @@ describe('It should test the SelectColumnsList Component', () => {
     const inputSearchElement = screen.getByTestId('input-search-id');
     fireEvent.change(inputSearchElement, { target: { value: null } });
     fireEvent.change(inputSearchElement, { target: { value: '123' } });
-    expect(inputSearchElement).toHaveValue('123')
+    expect(inputSearchElement).toHaveValue('123');
     fireEvent.change(inputSearchElement, { target: { value: 'hello' } });
-    expect(inputSearchElement).toHaveValue('hello')
+    expect(inputSearchElement).toHaveValue('hello');
   });
 
   it('should render the SelectColumnsList Component with some input value along with label and null and trigger searchIconClick', () => {
@@ -102,9 +101,9 @@ describe('It should test the SelectColumnsList Component', () => {
     const inputSearchElement = screen.getByTestId('input-search-id');
     fireEvent.change(inputSearchElement, { target: { value: null } });
     fireEvent.change(inputSearchElement, { target: { value: '123' } });
-    expect(inputSearchElement).toHaveValue('123')
+    expect(inputSearchElement).toHaveValue('123');
     fireEvent.change(inputSearchElement, { target: { value: 'hello' } });
-    expect(inputSearchElement).toHaveValue('hello')
+    expect(inputSearchElement).toHaveValue('hello');
   });
 
   it('should render the SelectColumnsList Component while changing text input with some input value along with label and null', () => {
@@ -161,7 +160,7 @@ describe('It should test the SelectColumnsList Component', () => {
     );
     const radioInputElement = screen.getAllByTestId('radio-input-0');
     fireEvent.click(radioInputElement[0], { target: { checked: true } });
-    expect(mockSetSelected).toBeCalled()
+    expect(mockSetSelected).toBeCalled();
   });
 
   it('should render the SelectColumnsList Component with selectedColumnsCount is 0 and data quality array and trigger the multiple selection function', () => {
@@ -193,6 +192,6 @@ describe('It should test the SelectColumnsList Component', () => {
     fireEvent.click(checkboxInputElement[0], { target: { checked: false } });
     fireEvent.click(checkboxInputElement[0], { target: { checked: true } });
     expect(checkboxInputElement[0]).toBeInTheDocument();
-    expect(mockSetSelected).toBeCalled()
+    expect(mockSetSelected).toBeCalled();
   });
 });
