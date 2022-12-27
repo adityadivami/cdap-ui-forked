@@ -17,35 +17,31 @@
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
-export const getRecipeByName = (value, responseHandler, errorHandler) => {
+export const getRecipeByName = (value, onGetRecipeByNameResponse, onGetRecipeByNameError) => {
   const params = {
     context: getCurrentNamespace(),
     recipeName: value,
   };
   MyDataPrepApi.getRecipeByName(params).subscribe(
     () => {
-      responseHandler();
+      onGetRecipeByNameResponse();
     },
     (err) => {
-      errorHandler(err, value);
+      onGetRecipeByNameError(err, value);
     }
   );
 };
 
-export const createRecipe = (
-  requestBody,
-  createRecipeResponseHandler,
-  createRecipeErrorHandler
-) => {
+export const createRecipe = (requestBody, onCreateRecipeResponse, onCreateRecipeError) => {
   const params = {
     context: getCurrentNamespace(),
   };
   MyDataPrepApi.createRecipe(params, requestBody).subscribe(
     () => {
-      createRecipeResponseHandler();
+      onCreateRecipeResponse();
     },
     (err) => {
-      createRecipeErrorHandler(err);
+      onCreateRecipeError(err);
     }
   );
 };

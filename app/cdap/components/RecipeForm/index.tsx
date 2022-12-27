@@ -82,7 +82,7 @@ export default function({
     onRecipeDataSave(recipeFormData);
   };
 
-  const createRecipeResponseHandler = () => {
+  const onCreateRecipeResponse = () => {
     setIsNameError(false);
     setShowRecipeForm(false);
     setSnackbar({
@@ -94,7 +94,7 @@ export default function({
     });
   };
 
-  const createRecipeErrorHandler = (err) => {
+  const onCreateRecipeError = (err) => {
     if (err.response.message) {
       setIsNameError(true);
     } else {
@@ -114,18 +114,18 @@ export default function({
         description: recipeFormData.description,
         directives: recipeSteps,
       };
-      createRecipe(requestBody, createRecipeResponseHandler, createRecipeErrorHandler);
+      createRecipe(requestBody, onCreateRecipeResponse, onCreateRecipeError);
     }
   };
 
-  const getRecipeByNameResponseHandler = () => {
+  const onGetRecipeByNameResponse = () => {
     setIsNameError(true);
     setRecipeNameError(
       T.translate('features.WranglerNewUI.RecipeForm.labels.sameNameErrorMessage').toString()
     );
   };
 
-  const getRecipeByNameErrorHandler = (err, value: string) => {
+  const onGetRecipeByNameError = (err, value: string) => {
     if (err.statusCode === 404 && err.message === `recipe with name '${value}' does not exist`) {
       setIsNameError(false);
     }
@@ -134,7 +134,7 @@ export default function({
   const validateRecipeNameExists = useRef(
     debounce((value: string) => {
       if (value) {
-        getRecipeByName(value, getRecipeByNameResponseHandler, getRecipeByNameErrorHandler);
+        getRecipeByName(value, onGetRecipeByNameResponse, onGetRecipeByNameError);
       }
     }, 500)
   );
