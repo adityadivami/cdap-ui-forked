@@ -82,12 +82,12 @@ const CenterAlignWrapper = styled(Box)`
 export default function ({
   columns,
   transformationDataType,
-  onSingleSelection,
+  handleSingleSelection,
   selectedColumns,
   dataQualityValue,
   isSingleSelection,
   handleDisableCheckbox,
-  onMultipleSelection,
+  handleMultipleSelection,
   setSelectedColumns,
   transformationName,
 }: IColumnTableProps) {
@@ -161,12 +161,12 @@ export default function ({
         <TableBody>
           {columnsToDisplay.map((eachColumn, columnIndex) => (
             <TableRowWidget
-              onSingleSelection={onSingleSelection}
+            handleSingleSelection={handleSingleSelection}
               selectedColumns={selectedColumns}
               dataQualityValue={dataQualityValue}
               isSingleSelection={isSingleSelection}
               handleDisableCheckbox={handleDisableCheckbox}
-              onMultipleSelection={onMultipleSelection}
+              handleMultipleSelection={handleMultipleSelection}
               columnIndex={columnIndex}
               columnDetail={eachColumn}
             />

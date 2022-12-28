@@ -54,7 +54,7 @@ export default function ({
     setColumns(filteredColumnsOnType);
   }, []);
 
-  const onMultipleSelection = (
+  const handleMultipleSelection = (
     event: ChangeEvent<HTMLInputElement>,
     column: IHeaderNamesList
   ) => {
@@ -127,9 +127,9 @@ export default function ({
           </ColumnInnerWrapper>
           <DataTable
             dataQualityValue={dataQuality}
-            onSingleSelection={(column)=> setSelectedColumns([column])}
+            handleSingleSelection={(column)=> setSelectedColumns([column])}
             handleDisableCheckbox={handleDisableCheckbox}
-            onMultipleSelection={onMultipleSelection}
+            handleMultipleSelection={handleMultipleSelection}
             columns={columnsAsPerType.length === 0 ? [] : columns}
             transformationDataType={transformationDataType}
             isSingleSelection={isSingleSelection}

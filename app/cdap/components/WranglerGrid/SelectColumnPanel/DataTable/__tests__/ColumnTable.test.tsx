@@ -30,12 +30,12 @@ describe('It should test FunctionNameWidget Component', () => {
           { name: 'a', type: ['test'], label: 'test' },
         ]}
         transformationDataType={['all']}
-        onSingleSelection={() => jest.fn()}
+        handleSingleSelection={() => jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[]}
         isSingleSelection={false}
         handleDisableCheckbox={() => false}
-        onMultipleSelection={() => jest.fn()}
+        handleMultipleSelection={() => jest.fn()}
         totalColumnCount={0}
         setSelectedColumns={mockSetSelected}
         transformationName={'swap-columns'}
@@ -59,12 +59,12 @@ describe('It should test FunctionNameWidget Component', () => {
       <DataTable
         columns={[{ name: 'a', type: ['test'], label: 'test' }]}
         transformationDataType={['test']}
-        onSingleSelection={() => jest.fn()}
+        handleSingleSelection={() => jest.fn()}
         selectedColumns={f}
         dataQualityValue={[]}
         isSingleSelection={false}
         handleDisableCheckbox={() => false}
-        onMultipleSelection={() => jest.fn()}
+        handleMultipleSelection={() => jest.fn()}
         totalColumnCount={0}
         setSelectedColumns={mockSetSelected}
         transformationName={'swap-columns'}
@@ -92,12 +92,12 @@ describe('It should test FunctionNameWidget Component', () => {
           { name: 'a', type: ['test'], label: 'test' },
         ]}
         transformationDataType={['test']}
-        onSingleSelection={() => jest.fn()}
+        handleSingleSelection={() => jest.fn()}
         selectedColumns={[]}
         dataQualityValue={[]}
         isSingleSelection={false}
         handleDisableCheckbox={() => false}
-        onMultipleSelection={() => jest.fn()}
+        handleMultipleSelection={() => jest.fn()}
         totalColumnCount={0}
         setSelectedColumns={mockSetSelected}
         transformationName={'swap-columns'}

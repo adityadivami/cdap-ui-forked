@@ -28,10 +28,10 @@ const RadioInput = styled(Radio)`
 export default function ({
   isSingleSelection,
   selectedColumns,
-  onSingleSelection,
+  handleSingleSelection,
   columnDetail,
   handleDisableCheckbox,
-  onMultipleSelection,
+  handleMultipleSelection,
   columnIndex,
 }: IInputWidgetProps) {
 
@@ -56,7 +56,7 @@ export default function ({
         color="primary"
         checked={checkedInputElement}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          onMultipleSelection(event, columnDetail)
+          handleMultipleSelection(event, columnDetail)
         }
         data-testid={`check-box-input-${columnIndex}`}
       />
@@ -67,7 +67,7 @@ export default function ({
 
   const renderRadioInput = () => <RadioInput
     color="primary"
-    onClick={() => onSingleSelection(columnDetail)}
+    onClick={() => handleSingleSelection(columnDetail)}
     checked={checkedInputElement}
     data-testid={`radio-input-${columnIndex}`}
   />

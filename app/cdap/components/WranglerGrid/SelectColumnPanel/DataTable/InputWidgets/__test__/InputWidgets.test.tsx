@@ -24,10 +24,10 @@ describe('It should render ', () => {
       <InputWidgets
         isSingleSelection={false}
         selectedColumns={[]}
-        onSingleSelection={() => jest.fn()}
+        handleSingleSelection={() => jest.fn()}
         columnDetail={undefined}
         handleDisableCheckbox={() => false}
-        onMultipleSelection={() => jest.fn()}
+        handleMultipleSelection={() => jest.fn()}
         columnIndex={0}
       />
     );
@@ -40,10 +40,10 @@ describe('It should render ', () => {
       <InputWidgets
         isSingleSelection={true}
         selectedColumns={[]}
-        onSingleSelection={() => jest.fn()}
+        handleSingleSelection={() => jest.fn()}
         columnDetail={undefined}
         handleDisableCheckbox={() => false}
-        onMultipleSelection={() => jest.fn()}
+        handleMultipleSelection={() => jest.fn()}
         columnIndex={0}
       />
     );

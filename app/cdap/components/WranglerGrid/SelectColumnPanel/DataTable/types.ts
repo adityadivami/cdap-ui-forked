@@ -22,9 +22,9 @@ import {
 import {Dispatch,SetStateAction} from "react";
 
 interface ICommonInputProps{
-  onSingleSelection: (value: IHeaderNamesList) => void;
+  handleSingleSelection: (value: IHeaderNamesList) => void;
   handleDisableCheckbox: () => boolean;
-  onMultipleSelection: (
+  handleMultipleSelection: (
     event: ChangeEvent<HTMLInputElement>,
     value: IHeaderNamesList
   ) => void;
