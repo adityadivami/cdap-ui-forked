@@ -17,7 +17,7 @@
 import React, { FormEvent, ChangeEvent, useEffect, useState, useRef } from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
-import { IRecipeFormProps, FormAction } from 'components/RecipeForm/types';
+import { IRecipeFormProps, FormAction } from 'components/RecipeManagement/RecipeForm/types';
 import {
   FormFieldWrapper,
   Label,
@@ -28,8 +28,8 @@ import {
   SaveButton,
   FormButtonWrapper,
   ErrorLabel,
-} from 'components/RecipeForm/styles';
-import { getRecipeByName, createRecipe } from 'components/RecipeForm/services';
+} from 'components/RecipeManagement/RecipeForm/styles';
+import { getRecipeByName, createRecipe } from 'components/RecipeManagement/RecipeForm/services';
 import { debounce } from 'lodash';
 import { IRecipeData } from 'components/DataPrep/store';
 
