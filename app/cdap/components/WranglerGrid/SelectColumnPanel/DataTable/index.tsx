@@ -31,6 +31,32 @@ import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
+const CellFontCSS = css`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+`;
+
+const CenterAlignWrapper = styled(Box)`
+  text-align: center;
+`;
+
+const FlexWrapper = styled(Box)`
+  display: flex;
+  height: 100%;
+  align-items: center;
+`;
+
+export const StyledTableRow = styled(TableRow)`
+  ${CellFontCSS}
+  color: ${grey[700]};
+  display: grid;
+  grid-template-columns: 8% 45% 45%;
+  align-items: center;
+  height: 100%;
+`;
+
 const StyledTableContainer = styled(TableContainer)`
   height: 100%;
 `;
@@ -44,22 +70,6 @@ const StyledTableHead = styled(TableHead)`
   height: 54px;
 `;
 
-const CellFontCSS = css`
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-`;
-
-export const StyledTableRow = styled(TableRow)`
-  ${CellFontCSS}
-  color: ${grey[700]};
-  display: grid;
-  grid-template-columns: 8% 45% 45%;
-  align-items: center;
-  height: 100%;
-`;
-
 const StyledTableHeadCell = styled(TableCell)`
   &.MuiTableCell-head {
     ${CellFontCSS}
@@ -69,15 +79,6 @@ const StyledTableHeadCell = styled(TableCell)`
   }
 `;
 
-const FlexWrapper = styled(Box)`
-  display: flex;
-  height: 100%;
-  align-items: center;
-`;
-
-const CenterAlignWrapper = styled(Box)`
-  text-align: center;
-`;
 
 export default function ({
   columns,
@@ -142,7 +143,7 @@ export default function ({
                   <Checkbox
                     color="primary"
                     checked={selectedColumns?.length ? true : false}
-                    onClick={handleChange}
+                    onChange={handleChange}
                     indeterminate={selectedColumns?.length ? true : false}
                     data-testid="column-table-check-box"
                   />

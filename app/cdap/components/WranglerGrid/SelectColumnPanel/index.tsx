@@ -34,17 +34,17 @@ import { Container, Drawer } from '@material-ui/core';
 import { enableDoneButton, getColumnsSupportedType, getFilteredColumn } from 'components/WranglerGrid/SelectColumnPanel/utils';
 import DrawerHeader from 'components/WranglerGrid/SelectColumnPanel/DrawerHeader';
 
+export const DrawerContainer = styled(Container)`
+  width: 500px;
+  height: 100%;
+  padding-left: 30px;
+`;
+
 export const StyledDrawer = styled(Drawer)`
   & .MuiDrawer-paper {
     top: 46px;
     height: calc(100vh - 47px);
   }
-`;
-
-export const DrawerContainer = styled(Container)`
-  width: 500px;
-  height: 100%;
-  padding-left: 30px;
 `;
 
 export default function({

@@ -19,24 +19,6 @@ import { grey } from '@material-ui/core/colors';
 import { Box, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-export const StyledSearchIcon = styled(SearchIcon)`
-  &.MuiSvgIcon-root {
-    width: 24px;
-    height: 24px;
-  }
-`;
-
-export const SearchInputField = styled.input`
-  margin-right: 5px;
-  border: none;
-  border-bottom: 1px solid transparent;
-  margin-bottom: 5px;
-  &:focus {
-    border-bottom: 1px solid ${grey[700]};
-    outline: none;
-  }
-`;
-
 export const ColumnWrapper = styled(Box)`
   height: 90%;
 `;
@@ -48,14 +30,14 @@ export const ColumnInnerWrapper = styled(Box)`
   margin-top: 10px;
 `;
 
+export const CenterAlignBox = styled(Box)`
+  text-align: center;
+`;
+
 export const FlexWrapper = styled(Box)`
   display: flex;
   height: 100%;
   align-items: center;
-`;
-
-export const CenterAlignBox = styled(Box)`
-  text-align: center;
 `;
 
 export const SearchWrapper = styled(Box)`
@@ -71,5 +53,23 @@ export const SearchIconButton = styled(IconButton)`
   }
   & .MuiTouchRipple-root {
     display: none;
+  }
+`;
+
+export const StyledSearchIcon = styled(SearchIcon)`
+  &.MuiSvgIcon-root {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+export const SearchInputField = styled.input`
+  margin-right: 5px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 5px;
+  &:focus {
+    border-bottom: 1px solid ${grey[700]};
+    outline: none;
   }
 `;

@@ -54,6 +54,22 @@ const BackIcon = styled(ChevronLeftRoundedIcon)`
   color: ${grey[600]};
 `;
 
+const DrawerContainerInnerFlex = styled(Box)`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+`;
+
+const DrawerHeadWrapper = styled(Box)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const FlexWrapper = styled(Box)`
+  display: flex;
+`;
+
 const StyledIconButton = styled(IconButton)`
   padding: 0px;
   width: 26px;
@@ -66,26 +82,11 @@ const StyledIconButton = styled(IconButton)`
   }
 `;
 
-const FlexWrapper = styled(Box)`
-  display: flex;
-`;
-
 const Wrapper = styled(Container)`
   padding-left: 0;
   padding-right: 0;
 `;
 
-const DrawerContainerInnerFlex = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 15px;
-`;
-
-const DrawerHeadWrapper = styled(Box)`
-  display: flex;
-  flex-direction: column;
-`;
 
 export default function({ closeClickHandler, transformationName }: IDrawerHeaderProps) {
   const [isSingleSelection, setIsSingleSelection] = useState(true);

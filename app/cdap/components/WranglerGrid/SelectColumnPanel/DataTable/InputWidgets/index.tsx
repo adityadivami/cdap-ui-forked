@@ -53,11 +53,11 @@ export default function ({
     <>
       {isSingleSelection && <RadioInput
         color="primary"
-        onClick={() => handleSingleSelection(columnDetail)}
+        onChange={() => handleSingleSelection(columnDetail)}
         checked={checkedInputElement}
         data-testid={`radio-input-${columnIndex}`}
       />}
-      
+
       {!isSingleSelection && <FormControlLabel
         disabled={disabledInputElement}
         control={
