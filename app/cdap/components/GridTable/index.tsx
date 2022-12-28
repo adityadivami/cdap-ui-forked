@@ -25,19 +25,9 @@ import FooterPanel from 'components/FooterPanel';
 import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
+import { NO_INPUT_REQUIRED_TRANSFORMATION } from 'components/GridTable/constants';
+import { applyDirectives, getAPIRequestPayload } from 'components/GridTable/services';
 import { useStyles } from 'components/GridTable/styles';
-import NoRecordScreen from 'components/NoRecordScreen';
-import LoadingSVG from 'components/shared/LoadingSVG';
-import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
-import T from 'i18n-react';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { flatMap } from 'rxjs/operators';
-import { objectQuery } from 'services/helpers';
-import styled from 'styled-components';
-import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
-import Snackbar from 'components/Snackbar';
-import useSnackbar from 'components/Snackbar/useSnackbar';
 import {
   IAddTransformationItem,
   IApiPayload,
@@ -48,12 +38,21 @@ import {
   IRecords,
   IStatistics,
 } from 'components/GridTable/types';
-import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
-import { applyDirectives, getAPIRequestPayload } from './services';
+import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
+import NoRecordScreen from 'components/NoRecordScreen';
+import LoadingSVG from 'components/shared/LoadingSVG';
+import Snackbar from 'components/Snackbar';
+import useSnackbar from 'components/Snackbar/useSnackbar';
+import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import AddTransformationPanel from 'components/WranglerGrid/AddTransformationPanel';
-import { NO_INPUT_REQUIRED_TRANSFORMATION } from 'components/GridTable/constants';
 import { getDirective } from 'components/WranglerGrid/AddTransformationPanel/utils';
-import { useLocation } from 'react-router';
+import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
+import T from 'i18n-react';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router';
+import { flatMap } from 'rxjs/operators';
+import { objectQuery } from 'services/helpers';
+import styled from 'styled-components';
 
 const transformationOptions = ['undo', 'redo'];
 

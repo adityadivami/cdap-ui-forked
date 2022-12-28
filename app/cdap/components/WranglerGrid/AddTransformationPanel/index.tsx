@@ -40,10 +40,6 @@ import SelectColumnDrawerHeader from 'components/WranglerGrid/SelectColumnPanel/
 import { StyledDrawer, DrawerContainerBox } from 'components/WranglerGrid/SelectColumnPanel';
 import AddTransformationDrawerHeader from 'components/WranglerGrid/AddTransformationPanel/DrawerHeader';
 
-const CountWidgetWrapper = styled(Box)`
-  padding: 10px 0;
-`;
-
 interface IAddTransformationProps {
   transformationDataType: string[];
   transformationName: string;
@@ -54,6 +50,10 @@ interface IAddTransformationProps {
   transformationLink: string;
 }
 
+const CountWidgetWrapper = styled(Box)`
+  padding: 10px 0;
+`;
+
 export default function({
   transformationDataType,
   transformationName,
@@ -63,8 +63,8 @@ export default function({
   applyTransformation,
   transformationLink,
 }: IAddTransformationProps) {
-  const [drawerStatus, setDrawerStatus] = useState<boolean>(true);
-  const [columnsPopup, setColumnsPopup] = useState<boolean>(false);
+  const [drawerStatus, setDrawerStatus] = useState(true);
+  const [columnsPopup, setColumnsPopup] = useState(false);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
 
@@ -91,7 +91,7 @@ export default function({
   const handleApply = () => {
     const directive: string = getDirective(transformationName, selectedColumns[0].label);
     applyTransformation(directive);
-    setDrawerStatus(false); 
+    setDrawerStatus(false);
   };
 
   useEffect(() => {

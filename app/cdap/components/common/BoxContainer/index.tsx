@@ -17,7 +17,6 @@
 import { Box, Container } from '@material-ui/core';
 import styled from 'styled-components';
 
-
 export const PointerBox = styled(Box)`
   cursor: pointer;
 `;

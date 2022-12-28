@@ -30,20 +30,6 @@ interface IDrawerHeaderProps {
   closeClickHandler: () => void;
 }
 
-export const UnderLine = (
-  <svg
-    width="67"
-    height="2"
-    viewBox="0 0 67 2"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    data-testid="underline"
-  >
-    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
-    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
-  </svg>
-);
-
 const BackIcon = styled(ChevronLeftRoundedIcon)`
   font-size: 40px;
   color: ${grey[600]};
@@ -59,10 +45,6 @@ const CustomizedIconButton = styled(IconButton)`
   & .MuiTouchRipple-root {
     display: none;
   }
-`;
-
-const FlexWrapper = styled(Box)`
-  display: flex;
 `;
 
 const DrawerContainerBox = styled(Container)`
@@ -81,6 +63,24 @@ const DrawerHeadWrapper = styled(Box)`
   display: flex;
   flex-direction: column;
 `;
+
+const FlexWrapper = styled(Box)`
+  display: flex;
+`;
+
+export const UnderLine = (
+  <svg
+    width="67"
+    height="2"
+    viewBox="0 0 67 2"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    data-testid="underline"
+  >
+    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
+    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
+  </svg>
+);
 
 export default function({ closeClickHandler }: IDrawerHeaderProps) {
   return (

@@ -16,7 +16,7 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import OngoingDataExplorationCard from 'components/WrangleHome/Components/OngoingDataExplorationCard/index';
+import OngoingDataExplorationCard from 'components/WrangleHome/Components/OngoingDataExplorationCard';
 import {
   mockItems,
   mockItemsWithPercentage,

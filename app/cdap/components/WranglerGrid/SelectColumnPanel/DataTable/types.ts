@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import {
   IHeaderNamesList,
   IDataQualityItem,
@@ -28,12 +28,9 @@ export interface IColumnTableProps {
   dataQualityValue: IDataQualityItem[];
   isSingleSelection: boolean;
   handleDisableCheckbox: () => boolean;
-  onMultipleSelection: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    value: IHeaderNamesList
-  ) => void;
+  onMultipleSelection: (event: ChangeEvent<HTMLInputElement>, value: IHeaderNamesList) => void;
   totalColumnCount: number;
-  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  setSelectedColumns: Dispatch<SetStateAction<IHeaderNamesList[]>>;
   transformationName: string;
 }
 
@@ -43,10 +40,7 @@ export interface ITableRowProps {
   dataQualityValue: IDataQualityItem[];
   isSingleSelection: boolean;
   handleDisableCheckbox: () => boolean;
-  onMultipleSelection: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    value: IHeaderNamesList
-  ) => void;
+  onMultipleSelection: (event: ChangeEvent<HTMLInputElement>, value: IHeaderNamesList) => void;
   columnIndex: number;
   columnDetail: IHeaderNamesList;
 }
@@ -64,10 +58,7 @@ export interface IInputWidgetProps {
   onSingleSelection: (value: IHeaderNamesList) => void;
   columnDetail: IHeaderNamesList;
   handleDisableCheckbox: () => boolean;
-  onMultipleSelection: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    value: IHeaderNamesList
-  ) => void;
+  onMultipleSelection: (event: ChangeEvent<HTMLInputElement>, value: IHeaderNamesList) => void;
   columnIndex: number;
 }
 
@@ -75,10 +66,7 @@ export interface ICheckBoxInputProps {
   selectedColumns: IHeaderNamesList[];
   handleDisableCheckbox: () => boolean;
   columnDetail: IHeaderNamesList;
-  onMultipleSelection: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    value: IHeaderNamesList
-  ) => void;
+  onMultipleSelection: (event: ChangeEvent<HTMLInputElement>, value: IHeaderNamesList) => void;
   label?: string;
   columnIndex: number;
 }

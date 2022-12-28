@@ -79,12 +79,28 @@ export default function({
   transformationName,
   handleSelectColumn,
 }: ISelectColumnsWidgetProps) {
-
   const selectButtonText =
     MULTI_SELECTION_COLUMN?.findIndex((el) => el.value === transformationName) > -1
       ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumns`).toString()
       : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumn`).toString();
 
+  const TransformationNameTextInfo = selectedColumns.map((item, index) => (
+    <TransformationNameTextInfoWrapper>
+      <NormalFont component="p" data-testid="selected-function-name">{`${index + 1}. ${
+        item.label
+      }`}</NormalFont>
+    </TransformationNameTextInfoWrapper>
+  ));
+
+  const SelectColumnButtonElement = (
+    <SelectColumnButton
+      onClick={() => handleSelectColumn(false)}
+      disabled={false}
+      data-testid="select-column-button"
+    >
+      {selectButtonText}
+    </SelectColumnButton>
+  );
   const singleColumnSelect = (
     <>
       <TransformationNameHeadWrapper>
@@ -98,23 +114,7 @@ export default function({
           {T.translate(`${ADD_TRANSFORMATION_PREFIX}.quickSelect`)}
         </NormalFont>
       </TransformationNameTextInfoWrapper>
-      {selectedColumns.length ? (
-        selectedColumns.map((item, index) => (
-          <TransformationNameTextInfoWrapper>
-            <NormalFont component="p" data-testid="selected-function-name">{`${index + 1}. ${
-              item.label
-            }`}</NormalFont>
-          </TransformationNameTextInfoWrapper>
-        ))
-      ) : (
-        <SelectColumnButton
-          onClick={() => handleSelectColumn(false)}
-          disabled={false}
-          data-testid="select-column-button"
-        >
-          {selectButtonText}
-        </SelectColumnButton>
-      )}
+      {selectedColumns.length ? TransformationNameTextInfo : SelectColumnButtonElement}
     </>
   );
 

@@ -118,65 +118,68 @@ export default function({
     : columns.filter((eachColumn) =>
         transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase())
       );
+  const NoColumnTitle = (
+    <FlexWrapper>
+      <CenterAlignBox>
+        {NoDataSVG}
+        <SubHeadBoldFont component="p" data-testid="no-column-title">
+          {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
+        </SubHeadBoldFont>
+        <NormalFont component="p" data-testid="no-column-subTitle">
+          {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
+        </NormalFont>
+      </CenterAlignBox>
+    </FlexWrapper>
+  );
+
+  const SelectColumnsTable = (
+    <SelectColumnTable aria-label="recipe steps table">
+      <Divider />
+      <SelectColumnTableHead>
+        <SelectColumnTableRow>
+          <SelectColumnTableHeadCell>
+            {MULTI_SELECTION_COLUMN?.filter((option) => option.value === transformationName)
+              .length > 0 && (
+              <Checkbox
+                color="primary"
+                checked={selectedColumns?.length ? true : false}
+                onClick={handleChange}
+                indeterminate={selectedColumns?.length ? true : false}
+                data-testid="column-table-check-box"
+              />
+            )}
+          </SelectColumnTableHeadCell>
+          <SelectColumnTableHeadCell data-testid="panel-columns">
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
+            {` (${columns.length})`}
+          </SelectColumnTableHeadCell>
+          <SelectColumnTableHeadCell data-testid="panel-values">
+            {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
+          </SelectColumnTableHeadCell>
+        </SelectColumnTableRow>
+      </SelectColumnTableHead>
+      <Divider />
+
+      <TableBody>
+        {columnsToDisplay.map((eachColumn, columnIndex) => (
+          <TableRowWidget
+            onSingleSelection={onSingleSelection}
+            selectedColumns={selectedColumns}
+            dataQualityValue={dataQualityValue}
+            isSingleSelection={isSingleSelection}
+            handleDisableCheckbox={handleDisableCheckbox}
+            onMultipleSelection={onMultipleSelection}
+            columnIndex={columnIndex}
+            columnDetail={eachColumn}
+          />
+        ))}
+      </TableBody>
+    </SelectColumnTable>
+  );
 
   return (
     <SelectColumnTableContainer data-testid="column-table-parent">
-      {columnsToDisplay.length === 0 ? (
-        <FlexWrapper>
-          <CenterAlignBox>
-            {NoDataSVG}
-            <SubHeadBoldFont component="p" data-testid="no-column-title">
-              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
-            </SubHeadBoldFont>
-            <NormalFont component="p" data-testid="no-column-subTitle">
-              {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
-            </NormalFont>
-          </CenterAlignBox>
-        </FlexWrapper>
-      ) : (
-        <SelectColumnTable aria-label="recipe steps table">
-          <Divider />
-          <SelectColumnTableHead>
-            <SelectColumnTableRow>
-              <SelectColumnTableHeadCell>
-                {MULTI_SELECTION_COLUMN?.filter((option) => option.value === transformationName)
-                  .length > 0 && (
-                  <Checkbox
-                    color="primary"
-                    checked={selectedColumns?.length ? true : false}
-                    onClick={handleChange}
-                    indeterminate={selectedColumns?.length ? true : false}
-                    data-testid="column-table-check-box"
-                  />
-                )}
-              </SelectColumnTableHeadCell>
-              <SelectColumnTableHeadCell data-testid="panel-columns">
-                {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
-                {` (${columns.length})`}
-              </SelectColumnTableHeadCell>
-              <SelectColumnTableHeadCell data-testid="panel-values">
-                {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
-              </SelectColumnTableHeadCell>
-            </SelectColumnTableRow>
-          </SelectColumnTableHead>
-          <Divider />
-
-          <TableBody>
-            {columnsToDisplay.map((eachColumn, columnIndex) => (
-              <TableRowWidget
-                onSingleSelection={onSingleSelection}
-                selectedColumns={selectedColumns}
-                dataQualityValue={dataQualityValue}
-                isSingleSelection={isSingleSelection}
-                handleDisableCheckbox={handleDisableCheckbox}
-                onMultipleSelection={onMultipleSelection}
-                columnIndex={columnIndex}
-                columnDetail={eachColumn}
-              />
-            ))}
-          </TableBody>
-        </SelectColumnTable>
-      )}
+      {columnsToDisplay.length === 0 ? NoColumnTitle : SelectColumnsTable}
     </SelectColumnTableContainer>
   );
 }

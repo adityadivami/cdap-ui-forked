@@ -14,17 +14,15 @@
  *  the License.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import MyDataPrepApi from 'api/dataprep';
 import GridTable from 'components/GridTable/index';
-import { render, screen } from '@testing-library/react';
+import { mockForFlatMap, mockForGetWorkspace } from 'components/GridTable/mock/mockDataForGrid';
+import { getAPIRequestPayload } from 'components/GridTable/services';
+import React from 'react';
 import { Route, Router, Switch } from 'react-router';
-import MyDataPrepApi from 'api/dataprep';
 import rxjs from 'rxjs/operators';
 import history from 'services/history';
-import { mockForFlatMap, mockForGetWorkspace } from '../mock/mockDataForGrid';
-import history from 'services/history';
-import { getAPIRequestPayload, applyDirectives } from '../services';
 
 describe('Testing Grid Table Component', () => {
   jest.spyOn(rxjs, 'flatMap' as any).mockImplementation((callback: any) => {
