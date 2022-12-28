@@ -19,77 +19,15 @@ import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
 import { ISelectColumnsListProps } from 'components/WranglerGrid/SelectColumnPanel/ColumnsList/types';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
-import ColumnTable from 'components/WranglerGrid/SelectColumnPanel/DataTable';
+import DataTable from 'components/WranglerGrid/SelectColumnPanel/DataTable';
 import { MULTI_SELECTION_COLUMN } from 'components/WranglerGrid/SelectColumnPanel/constants';
-import SelectedColumnCountWidget from 'components/WranglerGrid/SelectColumnPanel/CountWidget';
+import CountWidget from 'components/WranglerGrid/SelectColumnPanel/CountWidget';
 import { IMultipleSelectedFunctionDetail } from 'components/WranglerGrid/SelectColumnPanel/types';
 import { SELECT_COLUMN_LIST_PREFIX } from 'components/WranglerGrid/SelectColumnPanel/constants';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
-import { Box, IconButton } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
-import styled from 'styled-components';
-import { grey } from '@material-ui/core/colors';
-import {
-  getColumnsSupportedType,
-  getFilteredColumn,
-} from 'components/WranglerGrid/SelectColumnPanel/utils';
+import {ColumnWrapper, CenterAlignBox, FlexWrapper, ColumnInnerWrapper, SearchWrapper, StyledSearchIcon, SearchInputField, SearchIconButton } from 'components/WranglerGrid/SelectColumnPanel/ColumnsList/styles'
 
-const SearchIconComponent = styled(SearchIcon)`
-  &.MuiSvgIcon-root {
-    width: 24px;
-    height: 24px;
-  }
-`;
-
-const SelectColumnSearchInput = styled.input`
-  margin-right: 5px;
-  border: none;
-  border-bottom: 1px solid transparent;
-  margin-bottom: 5px;
-  &:focus {
-    border-bottom: 1px solid ${grey[700]};
-    outline: none;
-  }
-`;
-
-const SelectColumnWrapper = styled(Box)`
-  height: 90%;
-`;
-
-const SelectColumnInnerWrapper = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-`;
-
-const FlexWrapper = styled(Box)`
-  display: flex;
-  height: 100%;
-  align-items: center;
-`;
-
-const CenterAlignBox = styled(Box)`
-  text-align: center;
-`;
-
-const SelectColumnSearchBox = styled(Box)`
-  position: relative;
-  display: flex;
-`;
-
-const SearchIconButton = styled(IconButton)`
-  padding: 5px 0px 5px 5px;
-
-  &.MuiIconButton-root:hover {
-    background-color: transparent;
-  }
-  & .MuiTouchRipple-root {
-    display: none;
-  }
-`;
-
-export default function({
+export default function ({
   transformationDataType,
   selectedColumnsCount,
   columnsList,
@@ -97,21 +35,20 @@ export default function({
   dataQuality,
   transformationName,
   selectedColumns,
+  columnsAsPerType,
+  filteredColumnsOnType
 }: ISelectColumnsListProps) {
   const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
   const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
   const ref = useRef(null);
 
-  const columnsAsPerType = getColumnsSupportedType(transformationDataType, columnsList);
-  const filteredColumnsOnType = getFilteredColumn(transformationDataType, columnsList);
-
   useEffect(() => {
-    const multiSelect: IMultipleSelectedFunctionDetail[] = MULTI_SELECTION_COLUMN?.filter(
+    const multiSelect = MULTI_SELECTION_COLUMN?.findIndex(
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName
     );
 
-    if (multiSelect.length) {
+    if (multiSelect > -1) {
       setIsSingleSelection(false);
     }
     setColumns(filteredColumnsOnType);
@@ -131,34 +68,28 @@ export default function({
       const indexOfUnchecked = selectedColumns.findIndex(
         (columnDetail) => columnDetail.label === column.label
       );
-      if (indexOfUnchecked > -1) {
-        setSelectedColumns(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
-      }
+      indexOfUnchecked > -1 && setSelectedColumns(() => selectedColumns.filter((_, index) => index !== indexOfUnchecked));
     }
   };
 
   const handleDisableCheckbox = () => {
-    const multiSelect: IMultipleSelectedFunctionDetail[] = MULTI_SELECTION_COLUMN.filter(
+    const multiSelect = MULTI_SELECTION_COLUMN.findIndex(
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName && functionDetail.isMoreThanTwo
     );
-    if (selectedColumns?.length === 0 || selectedColumns?.length < 2) {
-      return false;
-    } else if (multiSelect.length) {
-      return false;
-    } else {
-      return true;
-    }
+    if (selectedColumns?.length === 0 || selectedColumns?.length < 2 || multiSelect > -1) return false;
+    return true;
   };
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      const columnValue: IHeaderNamesList[] = filteredColumnsOnType.length
-        ? filteredColumnsOnType.filter((columnDetail: IHeaderNamesList) =>
-            columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
-          )
-        : [];
-      columnValue?.length ? setColumns(columnValue) : setColumns([]);
+      let columnValue: IHeaderNamesList[] = []
+      if (filteredColumnsOnType.length) {
+        columnValue = filteredColumnsOnType.filter((columnDetail: IHeaderNamesList) =>
+          columnDetail.label.toLowerCase().includes(event.target.value.toLowerCase())
+        )
+      }
+      columnValue.length ? setColumns(columnValue) : setColumns([]);
     } else {
       setColumns(filteredColumnsOnType);
     }
@@ -169,7 +100,7 @@ export default function({
   };
 
   return (
-    <SelectColumnWrapper data-testid="select-column-list-parent">
+    <ColumnWrapper data-testid="select-column-list-parent">
       {columnsAsPerType.length === 0 && (
         <FlexWrapper>
           <CenterAlignBox>
@@ -185,20 +116,20 @@ export default function({
       )}
       {columnsAsPerType.length > 0 && (
         <>
-          <SelectColumnInnerWrapper>
-            <SelectedColumnCountWidget selectedColumnsCount={selectedColumnsCount} />
-            <SelectColumnSearchBox>
-              <SelectColumnSearchInput
+          <ColumnInnerWrapper>
+            <CountWidget selectedColumnsCount={selectedColumnsCount} />
+            <SearchWrapper>
+              <SearchInputField
                 data-testid="input-search-id"
                 onChange={handleSearch}
                 ref={ref}
               />
               <SearchIconButton onClick={handleFocus} data-testid="click-handle-focus">
-                <SearchIconComponent />
+                <StyledSearchIcon />
               </SearchIconButton>
-            </SelectColumnSearchBox>
-          </SelectColumnInnerWrapper>
-          <ColumnTable
+            </SearchWrapper>
+          </ColumnInnerWrapper>
+          <DataTable
             dataQualityValue={dataQuality}
             onSingleSelection={onSingleSelection}
             handleDisableCheckbox={handleDisableCheckbox}
@@ -213,6 +144,6 @@ export default function({
           />
         </>
       )}
-    </SelectColumnWrapper>
+    </ColumnWrapper>
   );
 }

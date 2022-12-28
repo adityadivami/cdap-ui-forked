@@ -26,28 +26,32 @@ import {
 import { MULTI_SELECTION_COLUMN } from 'components/WranglerGrid/SelectColumnPanel/constants';
 import { TableContainer, Table, TableHead, TableRow, TableCell } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 
-const SelectColumnTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer)`
   height: 100%;
 `;
 
-const SelectColumnTable = styled(Table)`
+const StyledTable = styled(Table)`
   display: flex;
   flex-direction: column;
 `;
 
-const SelectColumnTableHead = styled(TableHead)`
+const StyledTableHead = styled(TableHead)`
   height: 54px;
 `;
 
-const SelectColumnTableRow = styled(TableRow)`
+const CellFontCSS = css`
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
   letter-spacing: 0.15px;
+`;
+
+export const StyledTableRow = styled(TableRow)`
+  ${CellFontCSS}
   color: ${grey[700]};
   display: grid;
   grid-template-columns: 8% 45% 45%;
@@ -55,13 +59,10 @@ const SelectColumnTableRow = styled(TableRow)`
   height: 100%;
 `;
 
-const SelectColumnTableHeadCell = styled(TableCell)`
+const StyledTableHeadCell = styled(TableCell)`
   &.MuiTableCell-head {
+    ${CellFontCSS}
     padding: 0;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
-    letter-spacing: 0.15px;
     color: ${grey[900]};
     border-bottom: none !important;
   }
@@ -73,11 +74,11 @@ const FlexWrapper = styled(Box)`
   align-items: center;
 `;
 
-const CenterAlignBox = styled(Box)`
+const CenterAlignWrapper = styled(Box)`
   text-align: center;
 `;
 
-export default function({
+export default function ({
   columns,
   transformationDataType,
   onSingleSelection,
@@ -89,41 +90,37 @@ export default function({
   setSelectedColumns,
   transformationName,
 }: IColumnTableProps) {
+
+  const indexOfMultiSelectOption = MULTI_SELECTION_COLUMN?.findIndex(
+    (option) => option.value === transformationName && option.isMoreThanTwo === false
+  )
+
   const handleChange = () => {
-    if (
-      MULTI_SELECTION_COLUMN?.filter(
-        (option) => option.value === transformationName && option.isMoreThanTwo === false
-      ).length > 0
-    ) {
+    if (indexOfMultiSelectOption > -1) {
       if (selectedColumns.length) {
         setSelectedColumns([]);
       } else {
-        if (columns?.length > 2) {
-          setSelectedColumns(columns.slice(0, 2));
-        } else {
-          setSelectedColumns(columns);
-        }
+        columns?.length > 2 ? setSelectedColumns(columns.slice(0, 2)) : setSelectedColumns(columns);
       }
     } else {
-      if (selectedColumns?.length) {
-        setSelectedColumns([]);
-      } else {
-        setSelectedColumns(columns);
-      }
+      selectedColumns?.length ? setSelectedColumns([]) :  setSelectedColumns(columns);
     }
   };
 
-  const columnsToDisplay = transformationDataType?.includes('all')
-    ? columns
-    : columns.filter((eachColumn) =>
-        transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase())
-      );
+  const getColumnsToDisplay = () => {
+    if (transformationDataType?.includes('all')) return columns;
+    return columns.filter((eachColumn) =>
+      transformationDataType?.includes(eachColumn?.type[0]?.toLowerCase())
+    );
+  }
+
+  const columnsToDisplay = getColumnsToDisplay()
 
   return (
-    <SelectColumnTableContainer data-testid="column-table-parent">
-      {columnsToDisplay.length === 0 ? (
+    <StyledTableContainer data-testid="column-table-parent">
+      {columnsToDisplay.length === 0 && (
         <FlexWrapper>
-          <CenterAlignBox>
+          <CenterAlignWrapper>
             {NoDataSVG}
             <SubHeadBoldFont component="p" data-testid="no-column-title">
               {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumns`)}
@@ -131,16 +128,16 @@ export default function({
             <NormalFont component="p" data-testid="no-column-subTitle">
               {T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noMatchColumnDatatype`)}
             </NormalFont>
-          </CenterAlignBox>
+          </CenterAlignWrapper>
         </FlexWrapper>
-      ) : (
-        <SelectColumnTable aria-label="recipe steps table">
-          <Divider />
-          <SelectColumnTableHead>
-            <SelectColumnTableRow>
-              <SelectColumnTableHeadCell>
-                {MULTI_SELECTION_COLUMN?.filter((option) => option.value === transformationName)
-                  .length > 0 && (
+      )}
+      {columnsToDisplay.length > 0 && <StyledTable aria-label="recipe steps table">
+        <Divider />
+        <StyledTableHead>
+          <StyledTableRow>
+            <StyledTableHeadCell>
+              {MULTI_SELECTION_COLUMN?.findIndex((option) => option.value === transformationName)
+                > -1 && (
                   <Checkbox
                     color="primary"
                     checked={selectedColumns?.length ? true : false}
@@ -149,34 +146,33 @@ export default function({
                     data-testid="column-table-check-box"
                   />
                 )}
-              </SelectColumnTableHeadCell>
-              <SelectColumnTableHeadCell data-testid="panel-columns">
-                {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
-                {` (${columns.length})`}
-              </SelectColumnTableHeadCell>
-              <SelectColumnTableHeadCell data-testid="panel-values">
-                {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
-              </SelectColumnTableHeadCell>
-            </SelectColumnTableRow>
-          </SelectColumnTableHead>
-          <Divider />
-
-          <TableBody>
-            {columnsToDisplay.map((eachColumn, columnIndex) => (
-              <TableRowWidget
-                onSingleSelection={onSingleSelection}
-                selectedColumns={selectedColumns}
-                dataQualityValue={dataQualityValue}
-                isSingleSelection={isSingleSelection}
-                handleDisableCheckbox={handleDisableCheckbox}
-                onMultipleSelection={onMultipleSelection}
-                columnIndex={columnIndex}
-                columnDetail={eachColumn}
-              />
-            ))}
-          </TableBody>
-        </SelectColumnTable>
-      )}
-    </SelectColumnTableContainer>
+            </StyledTableHeadCell>
+            <StyledTableHeadCell data-testid="panel-columns">
+              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.columns`)}
+              {` (${columns.length})`}
+            </StyledTableHeadCell>
+            <StyledTableHeadCell data-testid="panel-values">
+              {T.translate(`${ADD_TRANSFORMATION_PREFIX}.nullValues`)}
+            </StyledTableHeadCell>
+          </StyledTableRow>
+        </StyledTableHead>
+        <Divider />
+        <TableBody>
+          {columnsToDisplay.map((eachColumn, columnIndex) => (
+            <TableRowWidget
+              onSingleSelection={onSingleSelection}
+              selectedColumns={selectedColumns}
+              dataQualityValue={dataQualityValue}
+              isSingleSelection={isSingleSelection}
+              handleDisableCheckbox={handleDisableCheckbox}
+              onMultipleSelection={onMultipleSelection}
+              columnIndex={columnIndex}
+              columnDetail={eachColumn}
+            />
+          ))}
+        </TableBody>
+      </StyledTable>
+      }
+    </StyledTableContainer>
   );
 }

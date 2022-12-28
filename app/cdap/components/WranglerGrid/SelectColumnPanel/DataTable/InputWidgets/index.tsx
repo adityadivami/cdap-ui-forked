@@ -15,11 +15,17 @@
  */
 
 import React from 'react';
-import RadioInput from 'components/WranglerGrid/SelectColumnPanel/DataTable/RadioInput';
-import CheckboxInput from 'components/WranglerGrid/SelectColumnPanel/DataTable/CheckboxInput';
 import { IInputWidgetProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
+import { Checkbox, FormControlLabel, Radio } from '@material-ui/core';
+import styled from 'styled-components';
 
-export default function({
+const RadioInput = styled(Radio)`
+  &.MuiRadio-root {
+    padding: 0;
+  }
+`;
+
+export default function ({
   isSingleSelection,
   selectedColumns,
   onSingleSelection,
@@ -28,24 +34,47 @@ export default function({
   onMultipleSelection,
   columnIndex,
 }: IInputWidgetProps) {
+
+  const getDisableAttributeValue = () => {
+    if (selectedColumns?.findIndex((column) => column.label === columnDetail.label) > -1 || !handleDisableCheckbox()) return false
+    return true
+  }
+
+  const getCheckedAttributeValue = () => {
+    if (selectedColumns?.length && selectedColumns?.findIndex((column) => column.label === columnDetail.label) > -1) return true
+    return false
+  }
+
+  const disabled = getDisableAttributeValue();
+
+  const checked = getCheckedAttributeValue();
+
+  const renderCheckBoxInput = () => <FormControlLabel
+    disabled={disabled}
+    control={
+      <Checkbox
+        color="primary"
+        checked={checked}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          onMultipleSelection(event, columnDetail)
+        }
+        data-testid={`check-box-input-${columnIndex}`}
+      />
+    }
+    label={''}
+    data-testid={`form-control-label-parent-${columnIndex}`}
+  />
+
+  const renderRadioInput = () => <RadioInput
+    color="primary"
+    onClick={() => onSingleSelection(columnDetail)}
+    checked={checked}
+    data-testid={`radio-input-${columnIndex}`}
+  />
+
   return (
     <>
-      {isSingleSelection ? (
-        <RadioInput
-          selectedColumns={selectedColumns}
-          onSingleSelection={onSingleSelection}
-          columnDetail={columnDetail}
-          columnIndex={columnIndex}
-        />
-      ) : (
-        <CheckboxInput
-          selectedColumns={selectedColumns}
-          columnDetail={columnDetail}
-          handleDisableCheckbox={handleDisableCheckbox}
-          onMultipleSelection={onMultipleSelection}
-          columnIndex={columnIndex}
-        />
-      )}
+      {isSingleSelection ? renderRadioInput() : renderCheckBoxInput()}
     </>
   );
 }

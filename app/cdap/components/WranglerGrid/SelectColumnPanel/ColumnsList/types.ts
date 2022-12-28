@@ -19,13 +19,16 @@ import {
   IHeaderNamesList,
   IDataQualityItem,
 } from 'components/WranglerGrid/SelectColumnPanel/types';
+import {Dispatch,SetStateAction} from "react";
 
 export interface ISelectColumnsListProps {
   transformationDataType: string[];
   selectedColumnsCount: number;
   columnsList: IHeaderNamesList[];
-  setSelectedColumns: React.Dispatch<React.SetStateAction<IHeaderNamesList[]>>;
+  setSelectedColumns: Dispatch<SetStateAction<IHeaderNamesList[]>>;
   dataQuality: IDataQualityItem[];
   transformationName: string;
   selectedColumns: IHeaderNamesList[];
+  columnsAsPerType: string[] | IHeaderNamesList[];
+  filteredColumnsOnType: IHeaderNamesList[];
 }

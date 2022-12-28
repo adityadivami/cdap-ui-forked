@@ -70,7 +70,7 @@ const FlexWrapper = styled(Box)`
   display: flex;
 `;
 
-const DrawerContainerBox = styled(Container)`
+const Wrapper = styled(Container)`
   padding-left: 0;
   padding-right: 0;
 `;
@@ -91,17 +91,15 @@ export default function({ closeClickHandler, transformationName }: IDrawerHeader
   const [isSingleSelection, setIsSingleSelection] = useState(true);
 
   useEffect(() => {
-    const multiSelect: IMultipleSelectedFunctionDetail[] = MULTI_SELECTION_COLUMN?.filter(
+    const multiSelect = MULTI_SELECTION_COLUMN?.findIndex(
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value.toLowerCase() === transformationName.toLowerCase()
     );
-    if (multiSelect.length) {
-      setIsSingleSelection(false);
-    }
+    multiSelect > -1 && setIsSingleSelection(false);
   }, []);
 
   return (
-    <DrawerContainerBox role="presentation" data-testid="select-column-drawer">
+    <Wrapper data-testid="select-column-drawer">
       <DrawerContainerInnerFlex>
         <FlexAlignCenter>
           <StyledIconButton
@@ -113,9 +111,8 @@ export default function({ closeClickHandler, transformationName }: IDrawerHeader
           </StyledIconButton>
           <DrawerHeadWrapper>
             <HeadFont component="p" data-testid="drawer-heading">
-              {isSingleSelection
-                ? T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnHeading`)
-                : T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumnsHeading`)}
+              {isSingleSelection && T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectColumnHeading`)}
+              {!isSingleSelection &&  T.translate(`${ADD_TRANSFORMATION_PREFIX}.selectMultiColumnsHeading`)}
             </HeadFont>
             {UnderLine}
           </DrawerHeadWrapper>
@@ -131,6 +128,6 @@ export default function({ closeClickHandler, transformationName }: IDrawerHeader
           </PointerBox>
         </FlexWrapper>
       </DrawerContainerInnerFlex>
-    </DrawerContainerBox>
+    </Wrapper>
   );
 }

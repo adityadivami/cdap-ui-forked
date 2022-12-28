@@ -22,20 +22,9 @@ import { TableCellText } from 'components/common/TypographyText';
 import { TableRow, TableCell } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import styled from 'styled-components';
+import { StyledTableRow } from 'components/WranglerGrid/SelectColumnPanel/DataTable';
 
-const SelectColumnTableRow = styled(TableRow)`
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-  color: ${grey[700]};
-  display: grid;
-  grid-template-columns: 8% 45% 45%;
-  align-items: center;
-  height: 100%;
-`;
-
-const SelectColumnTableBodyCell = styled(TableCell)`
+const StyledTableBodyCell = styled(TableCell)`
   &.MuiTableCell-body {
     font-weight: 400;
     font-size: 16px;
@@ -47,7 +36,7 @@ const SelectColumnTableBodyCell = styled(TableCell)`
   }
 `;
 
-const SelectColumnInputTableBodyCell = styled(SelectColumnTableBodyCell)`
+const StyledInputTableBodyCell = styled(StyledTableBodyCell)`
   &.MuiTableCell-body {
     padding-left: 11px;
   }
@@ -64,8 +53,8 @@ export default function({
   columnDetail,
 }: ITableRowProps) {
   return (
-    <SelectColumnTableRow key={`column-${columnIndex}`}>
-      <SelectColumnInputTableBodyCell>
+    <StyledTableRow key={`column-${columnIndex}`}>
+      <StyledInputTableBodyCell>
         <InputWidget
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
@@ -75,18 +64,18 @@ export default function({
           onMultipleSelection={onMultipleSelection}
           columnIndex={columnIndex}
         />
-      </SelectColumnInputTableBodyCell>
-      <SelectColumnTableBodyCell>
+      </StyledInputTableBodyCell>
+      <StyledTableBodyCell>
         <TableCellText component="div">{columnDetail.label}</TableCellText>
         <TableCellText component="div">{columnDetail.type}</TableCellText>
-      </SelectColumnTableBodyCell>
-      <SelectColumnTableBodyCell>
+      </StyledTableBodyCell>
+      <StyledTableBodyCell>
         {dataQualityValue?.length && (
           <DataQualityCircularProgressBar
-            dataQualityPercentValue={Number(dataQualityValue[columnIndex]?.value)}
+            dataQualityPercentValue={Number(dataQualityValue[columnIndex].value)}
           />
         )}
-      </SelectColumnTableBodyCell>
-    </SelectColumnTableRow>
+      </StyledTableBodyCell>
+    </StyledTableRow>
   );
 }

@@ -20,13 +20,14 @@ import { SELECT_COLUMN_LIST_PREFIX } from 'components/WranglerGrid/SelectColumnP
 import { NormalFont } from 'components/common/TypographyText';
 
 export default function({ selectedColumnsCount }: { selectedColumnsCount: number }) {
-  const text = selectedColumnsCount
-    ? selectedColumnsCount > 10
-      ? selectedColumnsCount
-      : T.translate(`${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`, {
-          selectedColumnsCount,
-        })
-    : `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumnSelected`)}`;
+
+  const getDisplayText = () => {
+    if(selectedColumnsCount > 0) return T.translate(`${SELECT_COLUMN_LIST_PREFIX}.columnsSelected`, {
+      selectedColumnsCount,
+    })
+    return `${T.translate(`${SELECT_COLUMN_LIST_PREFIX}.noColumnSelected`)}`;
+  }
+  const text = getDisplayText()
 
   return (
     <NormalFont component="p" data-testid="no-column-title">
