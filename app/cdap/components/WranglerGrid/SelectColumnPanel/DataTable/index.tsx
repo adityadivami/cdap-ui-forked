@@ -29,6 +29,7 @@ import { grey } from '@material-ui/core/colors';
 import styled, {css} from 'styled-components';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 import { NoDataSVG } from 'components/GridTable/iconStore';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 const StyledTableContainer = styled(TableContainer)`
   height: 100%;
@@ -114,7 +115,7 @@ export default function ({
     );
   }
 
-  const columnsToDisplay = getColumnsToDisplay()
+  const columnsToDisplay: IHeaderNamesList[] = getColumnsToDisplay()
 
   return (
     <StyledTableContainer data-testid="column-table-parent">

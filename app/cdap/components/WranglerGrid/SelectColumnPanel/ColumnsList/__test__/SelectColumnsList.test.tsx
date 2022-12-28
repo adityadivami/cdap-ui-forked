@@ -33,8 +33,7 @@ describe('It should test the SelectColumnsList Component', () => {
               transformationDataType={[]}
               columnsList={[]}
               transformationName={''}
-              selectedColumns={[]}
-            />
+              selectedColumns={[]} columnsAsPerType={[]} filteredColumnsOnType={[]}            />
           </Route>
         </Switch>
       </Router>
@@ -57,8 +56,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['all', 'test']}
               transformationName={''}
-              selectedColumns={[]}
-            />
+              selectedColumns={[]} columnsAsPerType={[]} filteredColumnsOnType={[]}            />
           </Route>
         </Switch>
       </Router>
@@ -89,8 +87,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['test']}
               transformationName={'join-columns'}
-              selectedColumns={[]}
-            />
+              selectedColumns={[]} columnsAsPerType={[]} filteredColumnsOnType={[]}            />
           </Route>
         </Switch>
       </Router>
@@ -122,8 +119,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['all', 'test']}
               transformationName={''}
-              selectedColumns={[]}
-            />
+              selectedColumns={[]} columnsAsPerType={[]} filteredColumnsOnType={[]}            />
           </Route>
         </Switch>
       </Router>
@@ -152,8 +148,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['TEST', 'all']}
               transformationName={''}
-              selectedColumns={[]}
-            />
+              selectedColumns={[]} columnsAsPerType={[]} filteredColumnsOnType={[]}            />
           </Route>
         </Switch>
       </Router>
@@ -182,8 +177,7 @@ describe('It should test the SelectColumnsList Component', () => {
               ]}
               transformationDataType={['TEST', 'all']}
               transformationName={'join-columns'}
-              selectedColumns={[]}
-            />
+              selectedColumns={[]} columnsAsPerType={[]} filteredColumnsOnType={[]}            />
           </Route>
         </Switch>
       </Router>

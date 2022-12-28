@@ -3437,16 +3437,16 @@ features:
     AddConnections:
       referenceLabel: Add Connection
     Breadcrumb:
+      ariaLabels:
+        breadcrumb: breadcrumb
       labels:
         connectionsList: Data Sources
+        createPipeline: Create a Pipeline
         loadToGrid: Wrangle
         wrangleHome: Home
-        createPipeline: Create a Pipeline
       params:
         connectionsList: datasources
         wrangleHome: home
-      ariaLabels:
-        breadcrumb: breadcrumb
     common:
       and: and
     ConnectionsList:
@@ -3456,10 +3456,10 @@ features:
     FooterPanel:
       labels:
         columns: columns
-        message: Current data - {rowCount} rows and {columnCount} columns
         columnViewPanel: Column View Panel
         currentData: Current data
         directives: Directives
+        message: Current data - {rowCount} rows and {columnCount} columns
         recipeSteps: Recipe Steps
         rows: rows
         zoomPercent100: 100%
@@ -3506,15 +3506,15 @@ features:
         options:
           labels:
             datatype:
-              string: string
               boolean: boolean
+              bytes: bytes
+              double: double
+              decimal: decimal
+              float: float
               integer: integer
               long: long
               short: short
-              float: float
-              double: double
-              decimal: decimal
-              bytes: bytes
+              string: string
             menu:
               changeDatatype: Change data type
     GridTable:
@@ -3528,28 +3528,23 @@ features:
           viewAll: View All
         connectorTypes:
           title: Start data exploration
-        workspaces:
-          title: Continue ongoing data explorations, pick up where you left off
         recipes:
           title: Saved recipes
+        workspaces:
+          title: Continue ongoing data explorations, pick up where you left off
     ImportData:
       referenceLabel: Import Data
     NoRecordScreen:
       gridTable:
         subtitle: Remove some recipe steps to view some data
         title: No rows left in this sample
-    Snackbar:
-      labels:
-        failure: Failure
-        success: Success
-        undo: Undo
     Recipe:
-        description: Description
         common:
           deleteConfirmation: Are you sure you want to delete the recipe *_{recipeName}_*?
           deleteError: There was a problem deleting the recipe
           deleteTitle: Delete recipe
         createdDate: Created date
+        description: Description
         emptyListMessage: No Recipes created in this namespace
         home: Home        
         import: Import
@@ -3559,7 +3554,10 @@ features:
         steps: Steps
         updated: Last updated
         view: View
-        viewAll: View All        
+        viewAll: View All      
+    Snackbar:
+      labels:
+        failure: Failure
+        success: Success
+        undo: Undo
 
-    
-...

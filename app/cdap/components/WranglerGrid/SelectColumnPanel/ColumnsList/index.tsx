@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
 import { ISelectColumnsListProps } from 'components/WranglerGrid/SelectColumnPanel/ColumnsList/types';
@@ -38,8 +38,8 @@ export default function ({
   columnsAsPerType,
   filteredColumnsOnType
 }: ISelectColumnsListProps) {
-  const [columns, setColumns] = useState<IHeaderNamesList[]>(columnsList);
-  const [isSingleSelection, setIsSingleSelection] = useState<boolean>(true);
+  const [columns, setColumns] = useState(columnsList);
+  const [isSingleSelection, setIsSingleSelection] = useState(true);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function ({
   }, []);
 
   const onMultipleSelection = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
     column: IHeaderNamesList
   ) => {
     if (event.target.checked) {
@@ -77,7 +77,7 @@ export default function ({
     return true;
   };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
       let columnValue: IHeaderNamesList[] = []
       if (filteredColumnsOnType.length) {

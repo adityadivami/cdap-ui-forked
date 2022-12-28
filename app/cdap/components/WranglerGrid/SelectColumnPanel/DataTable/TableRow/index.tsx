@@ -19,7 +19,7 @@ import InputWidget from 'components/WranglerGrid/SelectColumnPanel/DataTable/Inp
 import DataQualityCircularProgressBar from 'components/common/DataQualityCircularProgressBar';
 import { ITableRowProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 import { TableCellText } from 'components/common/TypographyText';
-import { TableRow, TableCell } from '@material-ui/core';
+import { TableCell } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import styled from 'styled-components';
 import { StyledTableRow } from 'components/WranglerGrid/SelectColumnPanel/DataTable';

@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { IInputWidgetProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 import { Checkbox, FormControlLabel, Radio } from '@material-ui/core';
 import styled from 'styled-components';
@@ -45,17 +45,17 @@ export default function ({
     return false
   }
 
-  const disabled = getDisableAttributeValue();
+  const disabledInputElement = getDisableAttributeValue();
 
-  const checked = getCheckedAttributeValue();
+  const checkedInputElement = getCheckedAttributeValue();
 
   const renderCheckBoxInput = () => <FormControlLabel
-    disabled={disabled}
+    disabled={disabledInputElement}
     control={
       <Checkbox
         color="primary"
-        checked={checked}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+        checked={checkedInputElement}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
           onMultipleSelection(event, columnDetail)
         }
         data-testid={`check-box-input-${columnIndex}`}
@@ -68,7 +68,7 @@ export default function ({
   const renderRadioInput = () => <RadioInput
     color="primary"
     onClick={() => onSingleSelection(columnDetail)}
-    checked={checked}
+    checked={checkedInputElement}
     data-testid={`radio-input-${columnIndex}`}
   />
 

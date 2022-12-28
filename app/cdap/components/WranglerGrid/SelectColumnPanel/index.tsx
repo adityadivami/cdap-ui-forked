@@ -54,12 +54,12 @@ export default function({
   missingItemsList,
   onCancel,
 }: IAddTransformationProps) {
-  const [columnsPopup, setColumnsPopup] = useState<boolean>(true);
+  const [columnsPopup, setColumnsPopup] = useState(true);
   const [selectedColumns, setSelectedColumns] = useState<IHeaderNamesList[]>([]);
   const [dataQualityValue, setDataQualityValue] = useState<IDataQualityItem[]>([]);
 
-  const columnsAsPerType = getColumnsSupportedType(transformationDataType, columnsList);
-  const filteredColumnsOnType = getFilteredColumn(transformationDataType, columnsList);
+  const columnsAsPerType: string[] | IHeaderNamesList[] = getColumnsSupportedType(transformationDataType, columnsList);
+  const filteredColumnsOnType: IHeaderNamesList[] = getFilteredColumn(transformationDataType, columnsList);
 
   const closeSelectColumnsPopup = () => {
     setColumnsPopup(false);
