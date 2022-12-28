@@ -41,11 +41,7 @@ export default function({
 }: IRecipeFormProps) {
   const [isNameError, setIsNameError] = useState(false);
   const [recipeNameError, setRecipeNameError] = useState('');
-  const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
-    recipeName: '',
-    description: '',
-    directives: [],
-  });
+  const [recipeFormData, setRecipeFormData] = useState<IRecipeData>(recipeData);
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
   const StyledLabel = isNameError ? ErrorLabel : Label;
 
@@ -123,7 +119,7 @@ export default function({
     );
   };
 
-  const onGetRecipeByNameError = (err, value: string) => {
+  const onGetRecipeByNameError = (err, value) => {
     if (err.statusCode === 404 && err.message === `recipe with name '${value}' does not exist`) {
       setIsNameError(false);
     }
