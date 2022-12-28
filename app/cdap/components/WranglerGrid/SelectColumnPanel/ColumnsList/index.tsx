@@ -54,6 +54,7 @@ export default function ({
     setColumns(filteredColumnsOnType);
   }, []);
 
+  // This function is used to handle multiple column selection 
   const handleMultipleSelection = (
     event: ChangeEvent<HTMLInputElement>,
     column: IHeaderNamesList
@@ -68,6 +69,7 @@ export default function ({
     }
   };
 
+  // This function is used to disable checkbox when the selection limit is reached for e.g. in join ans swap we can select only two column
   const handleDisableCheckbox = () => {
     const multiSelect = MULTI_SELECTION_COLUMN.findIndex(
       (functionDetail: IMultipleSelectedFunctionDetail) =>
@@ -77,6 +79,7 @@ export default function ({
     return true;
   };
 
+  // This function is used to search a column by it's name from the column list
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
       let columnValue: IHeaderNamesList[] = []
@@ -91,6 +94,7 @@ export default function ({
     }
   };
 
+  // This function is used to focus input field when a search icon is clicked
   const handleFocus = () => {
     ref?.current?.focus();
   };

@@ -97,6 +97,7 @@ export default function ({
     (option) => option.value === transformationName && option.isMoreThanTwo === false
   )
 
+  // This function is used to either select all checkbox or uncheck the selected once 
   const handleChange = () => {
     if (indexOfMultiSelectOption > -1) {
       if (selectedColumns.length) {
@@ -109,6 +110,7 @@ export default function ({
     }
   };
 
+  // This function is used to filter column based on their datatype which matches with the supported types of transformation to be applied
   const getColumnsToDisplay = () => {
     if (transformationDataType?.includes('all')) return columns;
     return columns.filter((eachColumn) =>
