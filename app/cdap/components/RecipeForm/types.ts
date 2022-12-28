@@ -18,6 +18,11 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { ISnackbar } from 'components/Snackbar';
 import { IRecipeData } from 'components/DataPrep/store';
 
+export enum FormAction {
+  CREATE_RECIPE_FORM_ACTION = 'createRecipe',
+  EDIT_RECIPE_FORM_ACTION = 'editRecipe',
+}
+
 export interface IRecipeFormProps {
   recipeData: IRecipeData;
   setShowRecipeForm: Dispatch<SetStateAction<boolean>>;

@@ -14,10 +14,12 @@
  * the License.
  */
 
-import styled from 'styled-components';
-import { TextField, Typography, Box, Button } from '@material-ui/core';
+import styled, { css } from 'styled-components';
+import { TextField, Typography, Box } from '@material-ui/core';
 import { TextareaAutosize } from '@material-ui/core';
 import { grey, blue } from '@material-ui/core/colors';
+import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
+import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';
 
 export const FormFieldWrapper = styled(Box)`
   width: calc(100% - 60px);
@@ -83,7 +85,7 @@ export const StyledTextAreaAutosize = styled(TextareaAutosize)`
   resize: none;
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = css`
   width: 162px;
   height: 36px;
   text-transform: none;
@@ -93,12 +95,14 @@ export const StyledButton = styled(Button)`
   letter-spacing: 0.15px;
 `;
 
-export const CancelButton = styled(StyledButton)`
+export const CancelButton = styled(PrimaryOutlinedButton)`
+  ${StyledButton}
   margin-right: 20px;
   color: ${blue[500]};
 `;
 
-export const SaveButton = styled(StyledButton)`
+export const SaveButton = styled(PrimaryContainedButton)`
+  ${StyledButton}
   background: ${blue[500]};
 `;
 

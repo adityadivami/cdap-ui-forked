@@ -17,7 +17,7 @@
 import React, { FormEvent, ChangeEvent, useEffect, useState, useRef } from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
-import { IRecipeFormProps } from 'components/RecipeForm/types';
+import { IRecipeFormProps, FormAction } from 'components/RecipeForm/types';
 import {
   FormFieldWrapper,
   Label,
@@ -28,12 +28,10 @@ import {
   SaveButton,
   FormButtonWrapper,
   ErrorLabel,
-} from 'components/RecipeForm/styledComponents';
+} from 'components/RecipeForm/styles';
 import { getRecipeByName, createRecipe } from 'components/RecipeForm/services';
 import { debounce } from 'lodash';
 import { IRecipeData } from 'components/DataPrep/store';
-
-const CREATE_RECIPE_FORM_ACTION = 'createRecipe';
 
 export default function({
   recipeData,
@@ -108,7 +106,7 @@ export default function({
   };
 
   const onRecipeDataSave = (recipeFormData: IRecipeData) => {
-    if (recipeFormAction === CREATE_RECIPE_FORM_ACTION) {
+    if (recipeFormAction === FormAction.CREATE_RECIPE_FORM_ACTION) {
       const requestBody = {
         recipeName: recipeFormData.recipeName,
         description: recipeFormData.description,
