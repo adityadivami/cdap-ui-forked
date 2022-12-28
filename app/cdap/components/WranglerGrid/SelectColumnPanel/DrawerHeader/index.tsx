@@ -28,7 +28,7 @@ import {
 import grey from '@material-ui/core/colors/grey';
 import ChevronLeftRoundedIcon from '@material-ui/icons/ChevronLeftRounded';
 import { blue } from '@material-ui/core/colors';
-import { IMultipleSelectedFunctionDetail } from '../types';
+import { IMultipleSelectedFunctionDetail } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 interface IDrawerHeaderProps {
   closeClickHandler: () => void;

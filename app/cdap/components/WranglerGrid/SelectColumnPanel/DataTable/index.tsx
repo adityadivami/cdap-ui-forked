@@ -17,7 +17,7 @@
 import { TableBody, Checkbox, Divider, Box } from '@material-ui/core';
 import React from 'react';
 import T from 'i18n-react';
-import TableRowWidget from 'components/WranglerGrid/SelectColumnPanel/DataTable/TableRow';
+import TableRowWidget from 'components/WranglerGrid/SelectColumnPanel/DataTable/TableRowWidget';
 import { IColumnTableProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 import {
   ADD_TRANSFORMATION_PREFIX,

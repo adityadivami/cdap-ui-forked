@@ -14,7 +14,6 @@
  * the License.
  */
 
-import React from 'react';
 import {
   IHeaderNamesList,
   IDataQualityItem,
