@@ -54,10 +54,6 @@ export default function ({
     setColumns(filteredColumnsOnType);
   }, []);
 
-  const onSingleSelection = (column: IHeaderNamesList) => {
-    setSelectedColumns([column]);
-  };
-
   const onMultipleSelection = (
     event: React.ChangeEvent<HTMLInputElement>,
     column: IHeaderNamesList
@@ -131,7 +127,7 @@ export default function ({
           </ColumnInnerWrapper>
           <DataTable
             dataQualityValue={dataQuality}
-            onSingleSelection={onSingleSelection}
+            onSingleSelection={(column)=> setSelectedColumns([column])}
             handleDisableCheckbox={handleDisableCheckbox}
             onMultipleSelection={onMultipleSelection}
             columns={columnsAsPerType.length === 0 ? [] : columns}
