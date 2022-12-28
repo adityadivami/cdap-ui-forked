@@ -51,7 +51,7 @@ public class Constants {
   public static final String DEFAULT_GCS_FILE = "purchase_bad.csv";
 
   public static final String DEFAULT_BIGQUERY_CONNECTION_NAME = "bigquery_" +
-    String.valueOf(getRandomArbitrary(1, 10000));
+      String.valueOf(getRandomArbitrary(1, 10000));
   public static final String DEFAULT_BIGQUERY_DATASET = "cdap_gcp_ui_test";
   public static final String DEFAULT_BIGQUERY_TABLE = "users";
 
@@ -59,7 +59,7 @@ public class Constants {
   public static final String DEFAULT_SPANNER_DATABASE = "test";
   public static final String DEFAULT_SPANNER_TABLE = "users";
   public static final String DEFAULT_SPANNER_CONNECTION_NAME = "spanner_" +
-    String.valueOf(getRandomArbitrary(1, 10000));
+      String.valueOf(getRandomArbitrary(1, 10000));
 
   public static final String RUNTIME_ARGS_PREVIEW_SELECTOR = "runtimeargs-preview";
   public static final String RUNTIME_ARGS_DEPLOYED_SELECTOR = "runtimeargs-deployed";
@@ -73,15 +73,7 @@ public class Constants {
   public static final String DEFAULT_GCP_PROJECTID = System.getenv("GCP_PROJECTID");
   public static final String DEFAULT_GCP_SERVICEACCOUNT_PATH = System.getenv("GCP_SERVICE_ACCOUNT_PATH");
 
+  //Wrangle New UI
   public static final String SINK_PATH_VAL = "/tmp/cdap-ui-integration-fixtures";
   public static final String SOURCE_PATH_VAL = "file:/tmp/cdap-ui-integration-fixtures/airports.csv";
-
-  public static final String SOURCE_PLUGINS_GROUP_LOCATOR_TEXT = "Source";
-  public static final String SINK_PLUGINS_GROUP_LOCATOR_TEXT = "Sink";
-  public static final String TRANSFORM_PLUGINS_GROUP_LOCATOR_TEXT = "Transform";
-  public static final String ANALYTICS_PLUGINS_GROUP_LOCATOR_TEXT = "Analytics";
-  public static final String CONDITIONS_AND_ACTIONS_PLUGINS_GROUP_LOCATOR_TEXT = "Conditions and Actions";
-  public static final String ERROR_HANDLERS_AND_ALERTS_PLUGINS_GROUP_LOCATOR_TEXT = "Error Handlers and Alerts";
-  
-  public static final String PIPELINE_TYPE = "cdap-data-pipeline";
 }

@@ -292,7 +292,7 @@ export const renderTable = ({
               </GridCellContainer>
               <GridCellContainer item xs={2} container direction="row">
                 <GridCell item xs={3}>
-                  <NoPaddingSpanLeft> {row.sourceType.toLowerCase()}</NoPaddingSpanLeft>
+                  <NoPaddingSpanLeft> {row.type.toLowerCase()}</NoPaddingSpanLeft>
                 </GridCell>
                 <Grid item xs={5}>
                   <span></span>

@@ -530,8 +530,6 @@ class HydratorPlusPlusTopPanelCtrl {
     );
     let exportConfig = this.HydratorPlusPlusConfigStore.getConfigForExport();
     delete exportConfig.__ui__;
-    delete exportConfig.$promise;
-    delete exportConfig.$resolved;
     // Only show export modal with pipeline JSON when running e2e tests
     if (window.Cypress) {
       this.myPipelineExportModalService.show(config, exportConfig);
@@ -546,8 +544,6 @@ class HydratorPlusPlusTopPanelCtrl {
     );
     let exportConfig = this.HydratorPlusPlusConfigStore.getConfigForExport();
     delete exportConfig.__ui__;
-    delete exportConfig.$promise;
-    delete exportConfig.$resolved;
     if (window.Cypress) {
       this.myPipelineExportModalService.show(config, exportConfig);
     } else {
@@ -1454,12 +1450,12 @@ class HydratorPlusPlusTopPanelCtrl {
     }
 
     let uploadedFile = files[0];
-    this.HydratorUpgradeService.validateAndUpgradeConfigFile(uploadedFile, this.getParentVersion());
+    this.HydratorUpgradeService.validateAndUpgradeConfigFile(uploadedFile);
   }
 
   _checkAndShowConfirmationModalOnDirtyState(proceedCb) {
     let goTonextStep = true;
-    let isStoreDirty = this.HydratorPlusPlusConfigStore.getIsStateDirty() && !this.isEdit;
+    let isStoreDirty = this.HydratorPlusPlusConfigStore.getIsStateDirty();
     if (isStoreDirty) {
       return this.$uibModal
         .open({

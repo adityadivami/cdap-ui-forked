@@ -20,7 +20,6 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import T from 'i18n-react';
 import { getHydratorUrl } from 'services/UiUtils/UrlGenerator';
 import { PrimaryTextLowercaseButton } from 'components/shared/Buttons/PrimaryTextLowercaseButton';
-import { SNAPSHOT_VERSION } from 'services/global-constants';
 import styled from 'styled-components';
 
 interface IPipelineHistoryTableRowProps {
@@ -122,27 +121,23 @@ export const PipelineHistoryTableRow = ({
           )}
         </div>
         <div>{description}</div>
-        {appVersion !== SNAPSHOT_VERSION && (
-          <>
-            <PrimaryTextLowercaseButton
-              textColor="#0000EE"
-              onClick={() => {
-                viewVersion();
-              }}
-            >
-              {T.translate(`${PREFIX}.view`)}
-            </PrimaryTextLowercaseButton>
-            {appVersion !== latestVersion && (
-              <PrimaryTextLowercaseButton
-                textColor="#0000EE"
-                onClick={() => {
-                  restoreVersion();
-                }}
-              >
-                {T.translate(`${PREFIX}.restore`)}
-              </PrimaryTextLowercaseButton>
-            )}
-          </>
+        <PrimaryTextLowercaseButton
+          textColor="#0000EE"
+          onClick={() => {
+            viewVersion();
+          }}
+        >
+          {T.translate(`${PREFIX}.view`)}
+        </PrimaryTextLowercaseButton>
+        {appVersion !== latestVersion && (
+          <PrimaryTextLowercaseButton
+            textColor="#0000EE"
+            onClick={() => {
+              restoreVersion();
+            }}
+          >
+            {T.translate(`${PREFIX}.restore`)}
+          </PrimaryTextLowercaseButton>
         )}
       </div>
     </>

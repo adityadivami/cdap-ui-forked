@@ -19,25 +19,25 @@ Feature: Wrangler BigQuery Connection Tests
 
   @WRANGLER_BIGQUERY_CONNECTION_TEST
   Scenario: Should successfully test BIGQUERY connection
-    When Open Connections Page
+    When Open Connections page for BigQuery connection test
     Then Test BigQuery connection with name "bigquery_randomtest2"
     Then Verify for successful BigQuery test connection and message
 
   @WRANGLER_BIGQUERY_CONNECTION_TEST
   Scenario: Should show appropriate message when BigQuery connection fails
-    When Open Connections Page
+    When Open Connections page
     Then Test BigQuery connection with "unknown_bigquery_connection_name", "unknown_project", "unknown_path"
     Then Verify BigQuery test connection failure and message
 
   @WRANGLER_BIGQUERY_CONNECTION_TEST
   Scenario: Should create BIGQUERY connection
-    When Open Connections Page
+    When Open Connections page
     Then Create BigQuery connection with name "bigquery_randomtest2"
     Then Verify navigation to created BigQuery connection "bigquery_randomtest2"
 
   @WRANGLER_BIGQUERY_CONNECTION_TEST
   Scenario: Should show proper error message when trying to create existing BigQuery connection
-    When Open Connections Page
+    When Open Connections page
     Then Create BigQuery connection with name "bigquery_randomtest2"
     Then Check for the BigQuery connection already exists error for "bigquery_randomtest2"
 
@@ -48,14 +48,14 @@ Feature: Wrangler BigQuery Connection Tests
 
   @WRANGLER_BIGQUERY_CONNECTION_TEST
   Scenario: Should be able navigate inside BIGQUERY connection & create workspace
-    When Open Connections Page
+    When Open Connections page
     Then Select BigQuery connection "bigquery_randomtest2"
     Then Check BigQuery connection "bigquery_randomtest2" details: Instance, Database, Table
     Then Verify URL navigation for BigQuery connection
 
   @FooterPanel
     Scenario: Checking the footer panel is on the grid table
-    When Navigate to Home Page
+    When Navigate to the Wrangler Home page
     Then Click on the Data Explorations card
     Then Verify if the Footer Panel is displayed
     Then Verify if the elements on the Footer Panel are displayed
