@@ -43,12 +43,12 @@ const StyledInputTableBodyCell = styled(StyledTableBodyCell)`
 `;
 
 export default function({
-  onSingleSelection,
+  handleSingleSelection,
   selectedColumns,
   dataQualityValue,
   isSingleSelection,
   handleDisableCheckbox,
-  onMultipleSelection,
+  handleMultipleSelection,
   columnIndex,
   columnDetail,
 }: ITableRowProps) {
@@ -58,10 +58,10 @@ export default function({
         <InputWidget
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
-          onSingleSelection={onSingleSelection}
+          handleSingleSelection={handleSingleSelection}
           columnDetail={columnDetail}
           handleDisableCheckbox={handleDisableCheckbox}
-          onMultipleSelection={onMultipleSelection}
+          handleMultipleSelection={handleMultipleSelection}
           columnIndex={columnIndex}
         />
       </StyledInputTableBodyCell>

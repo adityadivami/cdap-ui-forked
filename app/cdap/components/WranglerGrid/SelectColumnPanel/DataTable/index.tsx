@@ -26,7 +26,7 @@ import {
 import { MULTI_SELECTION_COLUMN } from 'components/WranglerGrid/SelectColumnPanel/constants';
 import { TableContainer, Table, TableHead, TableRow, TableCell } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import { NormalFont, SubHeadBoldFont } from 'components/common/TypographyText';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
@@ -104,7 +104,7 @@ export default function ({
         columns?.length > 2 ? setSelectedColumns(columns.slice(0, 2)) : setSelectedColumns(columns);
       }
     } else {
-      selectedColumns?.length ? setSelectedColumns([]) :  setSelectedColumns(columns);
+      selectedColumns?.length ? setSelectedColumns([]) : setSelectedColumns(columns);
     }
   };
 
@@ -161,7 +161,7 @@ export default function ({
         <TableBody>
           {columnsToDisplay.map((eachColumn, columnIndex) => (
             <TableRowWidget
-            handleSingleSelection={handleSingleSelection}
+              handleSingleSelection={handleSingleSelection}
               selectedColumns={selectedColumns}
               dataQualityValue={dataQualityValue}
               isSingleSelection={isSingleSelection}
