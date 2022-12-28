@@ -17,7 +17,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { NoDataSVG } from 'components/GridTable/iconStore';
 import T from 'i18n-react';
-import { ISelectColumnsListProps } from 'components/WranglerGrid/SelectColumnPanel/ColumnsList/types';
+import { IColumnsListProps } from 'components/WranglerGrid/SelectColumnPanel/ColumnsList/types';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 import DataTable from 'components/WranglerGrid/SelectColumnPanel/DataTable';
 import { MULTI_SELECTION_COLUMN } from 'components/WranglerGrid/SelectColumnPanel/constants';
@@ -37,7 +37,7 @@ export default function ({
   selectedColumns,
   columnsAsPerType,
   filteredColumnsOnType
-}: ISelectColumnsListProps) {
+}: IColumnsListProps) {
   const [columns, setColumns] = useState(columnsList);
   const [isSingleSelection, setIsSingleSelection] = useState(true);
   const ref = useRef(null);

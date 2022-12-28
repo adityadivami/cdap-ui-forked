@@ -18,7 +18,7 @@ import { TableBody, Checkbox, Divider, Box } from '@material-ui/core';
 import React from 'react';
 import T from 'i18n-react';
 import TableRowWidget from 'components/WranglerGrid/SelectColumnPanel/DataTable/TableRowWidget';
-import { IColumnTableProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
+import { IDataTableProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 import {
   ADD_TRANSFORMATION_PREFIX,
   SELECT_COLUMN_LIST_PREFIX,
@@ -90,7 +90,7 @@ export default function ({
   handleMultipleSelection,
   setSelectedColumns,
   transformationName,
-}: IColumnTableProps) {
+}: IDataTableProps) {
 
   const indexOfMultiSelectOption = MULTI_SELECTION_COLUMN?.findIndex(
     (option) => option.value === transformationName && option.isMoreThanTwo === false

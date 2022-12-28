@@ -20,7 +20,7 @@ import {
 } from 'components/WranglerGrid/SelectColumnPanel/types';
 import {Dispatch,SetStateAction} from "react";
 
-export interface ISelectColumnsListProps {
+export interface IColumnsListProps {
   transformationDataType: string[];
   selectedColumnsCount: number;
   columnsList: IHeaderNamesList[];

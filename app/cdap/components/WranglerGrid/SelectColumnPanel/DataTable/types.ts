@@ -32,7 +32,7 @@ interface ICommonInputProps{
   selectedColumns: IHeaderNamesList[];
 }
 
-export interface IColumnTableProps extends ICommonInputProps {
+export interface IDataTableProps extends ICommonInputProps {
   columns: IHeaderNamesList[];
   transformationDataType: string[];
   dataQualityValue: IDataQualityItem[];
@@ -41,13 +41,13 @@ export interface IColumnTableProps extends ICommonInputProps {
   transformationName: string;
 }
 
-export interface ITableRowProps extends ICommonInputProps  {
+export interface ITableRowWidgetProps extends ICommonInputProps  {
   dataQualityValue: IDataQualityItem[];
   columnIndex: number;
   columnDetail: IHeaderNamesList;
 }
 
-export interface IInputWidgetProps extends ICommonInputProps {
+export interface IInputWidgetsProps extends ICommonInputProps {
   columnDetail: IHeaderNamesList;
   columnIndex: number;
 }

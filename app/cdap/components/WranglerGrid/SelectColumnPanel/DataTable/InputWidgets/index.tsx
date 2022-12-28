@@ -15,7 +15,7 @@
  */
 
 import React, { ChangeEvent } from 'react';
-import { IInputWidgetProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
+import { IInputWidgetsProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 import { Checkbox, FormControlLabel, Radio } from '@material-ui/core';
 import styled from 'styled-components';
 
@@ -33,7 +33,7 @@ export default function ({
   handleDisableCheckbox,
   handleMultipleSelection,
   columnIndex,
-}: IInputWidgetProps) {
+}: IInputWidgetsProps) {
 
   const getDisableAttributeValue = () => {
     if (selectedColumns?.findIndex((column) => column.label === columnDetail.label) > -1 || !handleDisableCheckbox()) return false
@@ -49,32 +49,30 @@ export default function ({
 
   const checkedInputElement = getCheckedAttributeValue();
 
-  const renderCheckBoxInput = () => <FormControlLabel
-    disabled={disabledInputElement}
-    control={
-      <Checkbox
-        color="primary"
-        checked={checkedInputElement}
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
-          handleMultipleSelection(event, columnDetail)
-        }
-        data-testid={`check-box-input-${columnIndex}`}
-      />
-    }
-    label={''}
-    data-testid={`form-control-label-parent-${columnIndex}`}
-  />
-
-  const renderRadioInput = () => <RadioInput
-    color="primary"
-    onClick={() => handleSingleSelection(columnDetail)}
-    checked={checkedInputElement}
-    data-testid={`radio-input-${columnIndex}`}
-  />
-
   return (
     <>
-      {isSingleSelection ? renderRadioInput() : renderCheckBoxInput()}
+      {isSingleSelection && <RadioInput
+        color="primary"
+        onClick={() => handleSingleSelection(columnDetail)}
+        checked={checkedInputElement}
+        data-testid={`radio-input-${columnIndex}`}
+      />}
+      
+      {!isSingleSelection && <FormControlLabel
+        disabled={disabledInputElement}
+        control={
+          <Checkbox
+            color="primary"
+            checked={checkedInputElement}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              handleMultipleSelection(event, columnDetail)
+            }
+            data-testid={`check-box-input-${columnIndex}`}
+          />
+        }
+        label={''}
+        data-testid={`form-control-label-parent-${columnIndex}`}
+      />}
     </>
   );
 }

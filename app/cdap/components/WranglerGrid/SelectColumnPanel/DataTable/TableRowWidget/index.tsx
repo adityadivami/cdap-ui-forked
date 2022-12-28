@@ -15,9 +15,9 @@
  */
 
 import React from 'react';
-import InputWidget from 'components/WranglerGrid/SelectColumnPanel/DataTable/InputWidgets';
+import InputWidgets from 'components/WranglerGrid/SelectColumnPanel/DataTable/InputWidgets';
 import DataQualityCircularProgressBar from 'components/common/DataQualityCircularProgressBar';
-import { ITableRowProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
+import { ITableRowWidgetProps } from 'components/WranglerGrid/SelectColumnPanel/DataTable/types';
 import { TableCellText } from 'components/common/TypographyText';
 import { TableCell } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
@@ -51,11 +51,11 @@ export default function({
   handleMultipleSelection,
   columnIndex,
   columnDetail,
-}: ITableRowProps) {
+}: ITableRowWidgetProps) {
   return (
     <StyledTableRow key={`column-${columnIndex}`}>
       <StyledInputTableBodyCell>
-        <InputWidget
+        <InputWidgets
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}
           handleSingleSelection={handleSingleSelection}
@@ -72,7 +72,7 @@ export default function({
       <StyledTableBodyCell>
         {dataQualityValue?.length && (
           <DataQualityCircularProgressBar
-            dataQualityPercentValue={Number(dataQualityValue[columnIndex].value)}
+            dataQualityPercentValue={parseInt((dataQualityValue[columnIndex].value).toString())}
           />
         )}
       </StyledTableBodyCell>
