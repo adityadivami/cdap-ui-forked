@@ -35,7 +35,7 @@ Feature: RecipeStepPanel
     Then verify if recipe step is Deleted with "<stepId>"
   Examples:
       | stepId | testId | id | command |
-      | 0 | 0           | 1  | uppercase: |
+      | 0 | 0           | 1  | uppercase : |
 
   Scenario Outline: Go through the recipe with multiple steps functionality
     Given Navigate to Home Page
@@ -44,16 +44,16 @@ Feature: RecipeStepPanel
     Then Click on Directive button
     Then Verify if the directive panel is displayed
     Then read the column elements with "<id>"
-    Then Enter command in the panel with the data "uppercase:"
+    Then Enter command in the panel with the data "uppercase :"
     Then Click on Directive button
     Then read the column elements with "<nextId>"
-    Then Enter command in the panel with the data "lowercase:"
+    Then Enter command in the panel with the data "lowercase :"
     Then Click on Directive button
     Then read the column elements with "<trimId>"
-    Then Enter command in the panel with the data "trim:"
+    Then Enter command in the panel with the data "trim :"
     Then Click on Directive button
     Then read the column elements with "<rTrimId>"
-    Then Enter command in the panel with the data "rtrim:"
+    Then Enter command in the panel with the data "rtrim :"
     Then Click on 'Recipe steps' button
     Then Verify if recipe panel is displayed
     Then Click on delete icon of any step with "<stepId>"
