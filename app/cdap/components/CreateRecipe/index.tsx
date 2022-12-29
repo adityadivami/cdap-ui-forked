@@ -26,7 +26,7 @@ import React, {
 import T from 'i18n-react';
 import { getRecipeByName, createRecipe } from 'components/CreateRecipe/services';
 import { debounce } from 'lodash';
-import { IRecipeData } from 'components/DataPrep/store';
+import { IRecipeFormData } from 'components/RecipeManagement/types';
 import RecipeForm from 'components/RecipeManagement/RecipeForm';
 import { ISnackbar } from 'components/Snackbar';
 
@@ -36,7 +36,7 @@ export interface ICreateRecipeProps {
 }
 
 export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) {
-  const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
+  const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
     recipeName: '',
     description: '',
     directives: [],
@@ -68,7 +68,7 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
     onRecipeDataSave(recipeFormData);
   };
 
-  const onRecipeDataSave = (recipeFormData: IRecipeData) => {
+  const onRecipeDataSave = (recipeFormData: IRecipeFormData) => {
     const requestBody = {
       recipeName: recipeFormData.recipeName,
       description: recipeFormData.description,

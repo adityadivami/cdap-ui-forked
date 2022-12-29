@@ -15,15 +15,20 @@
  */
 
 import React, { Dispatch, ChangeEvent, FormEvent } from 'react';
-import { IRecipeData } from 'components/DataPrep/store';
 
 export interface IRecipeFormProps {
-  recipeFormData: IRecipeData;
+  recipeFormData: IRecipeFormData;
   isNameError: boolean;
   recipeNameError: string;
   onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  setRecipeFormData: Dispatch<React.SetStateAction<IRecipeData>>;
+  setRecipeFormData: Dispatch<React.SetStateAction<IRecipeFormData>>;
   onCancel: () => void;
   isSaveDisabled: boolean;
+}
+
+export interface IRecipeFormData {
+  recipeName: string;
+  description: string;
+  directives: string[];
 }
