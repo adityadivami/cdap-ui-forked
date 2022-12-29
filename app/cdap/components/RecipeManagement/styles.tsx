@@ -53,13 +53,22 @@ export const StyledTextField = styled(TextField)`
     line-height: 150%;
     letter-spacing: 0.15px;
   }
-  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #000000;
-  }
   input::placeholder {
       color: ${grey[600]};
       opacity: 1;
     }
+  }
+`;
+
+export const ErrorTextField = styled(StyledTextField)`
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #ff8a80;
+  }
+`;
+
+export const NormalTextField = styled(StyledTextField)`
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #000000;
   }
 `;
 

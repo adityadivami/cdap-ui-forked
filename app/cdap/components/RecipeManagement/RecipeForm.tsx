@@ -22,7 +22,8 @@ import {
   FormFieldWrapper,
   Label,
   Form,
-  StyledTextField,
+  ErrorTextField,
+  NormalTextField,
   StyledTextAreaAutosize,
   CancelButton,
   SaveButton,
@@ -41,6 +42,7 @@ export default function({
   isSaveDisabled,
 }: IRecipeFormProps) {
   const StyledLabel = isNameError ? ErrorLabel : Label;
+  const StyledTextField = isNameError ? ErrorTextField : NormalTextField;
 
   return (
     <>
@@ -63,6 +65,7 @@ export default function({
             onChange={(event: ChangeEvent<HTMLInputElement>) => onRecipeNameChange(event)}
             data-testid="recipe-name-field"
             placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
+            autoFocus={true}
           />
         </FormFieldWrapper>
         <FormFieldWrapper>

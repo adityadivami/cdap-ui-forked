@@ -103,8 +103,8 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
   };
 
   const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
     const recipeNameRegEx = /^[a-z\d\s]+$/i;
+    setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
     if (event.target.value && !recipeNameRegEx.test(event.target.value)) {
       setRecipeNameError(
         T.translate('features.WranglerNewUI.RecipeForm.labels.validationErrorMessage').toString()
