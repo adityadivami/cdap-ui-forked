@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import T from 'i18n-react';
 import RecipeList from 'components/RecipeList';
 
@@ -24,18 +24,49 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import EditRecipe from 'components/EditRecipe';
+import Snackbar from 'components/Snackbar';
+import useSnackbar from 'components/Snackbar/useSnackbar';
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
 const ViewAllRecipies = () => {
+  const [showEditRecipePanel, setShowEditRecipePanel] = useState(false);
+  const [snackbarState, setSnackbar] = useSnackbar();
+  const [recipeData, setRecipeData] = useState({
+    recipeName: '',
+    description: '',
+    directives: [],
+  });
+
+  useEffect(() => {
+    if (snackbarState.open) {
+      setTimeout(() => {
+        setSnackbar(() => ({
+          open: false,
+        }));
+      }, 5000);
+    }
+  }, [snackbarState.open]);
+
   const viewRecipeHandler = (selectedObject: any) => {
     // To do : Integrate view recipe details panel
   };
 
   const handleEditRecipe = (selectedObject: any) => {
     // To do : Integrate Edit recipe details panel
+    setRecipeData(selectedObject);
+    setShowEditRecipePanel(true);
+  };
+
+  const onCloseClick = () => {
+    setShowEditRecipePanel(false);
+  };
+
+  const onCancel = () => {
+    setShowEditRecipePanel(false);
   };
 
   return (
@@ -69,6 +100,24 @@ const ViewAllRecipies = () => {
           enableSorting={true}
         />
       </Box>
+      <EditRecipe
+        openDrawer={showEditRecipePanel}
+        onCloseClick={onCloseClick}
+        onCancel={onCancel}
+        recipeData={recipeData}
+        setRecipeFormOpen={setShowEditRecipePanel}
+        setSnackbar={setSnackbar}
+      />
+      <Snackbar
+        handleClose={() =>
+          setSnackbar(() => ({
+            open: false,
+          }))
+        }
+        open={snackbarState.open}
+        message={snackbarState.message}
+        isSuccess={snackbarState.isSuccess}
+      />
     </>
   );
 };
