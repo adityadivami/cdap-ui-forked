@@ -3534,11 +3534,12 @@ features:
         edit: Edit
         editFormTitle: Edit Recipe
         errorMessage: Something went wrong!
-        name: Name of  new recipe
-        nameErrorMessage: Another recipe with same name exists. Please input another name
+        name: Name of new recipe
         namePlaceholder: Input a name to identify it later
         recipeSaveSuccessMessage: Steps successfully saved as a recipe!
+        sameNameErrorMessage: Another recipe with same name exists. Please input another name
         save: Save
+        validationErrorMessage: Recipe name should contain only alphanumeric characters or spaces
     Recipe:
         description: Description
         common:
