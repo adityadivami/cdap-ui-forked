@@ -14,18 +14,16 @@
  * the License.
  */
 
-import React, { Dispatch, SetStateAction } from 'react';
-import { ISnackbar } from 'components/Snackbar';
+import React, { Dispatch, ChangeEvent, FormEvent } from 'react';
 import { IRecipeData } from 'components/DataPrep/store';
 
-export enum FormAction {
-  CREATE_RECIPE_FORM_ACTION = 'createRecipe',
-  EDIT_RECIPE_FORM_ACTION = 'editRecipe',
-}
-
 export interface IRecipeFormProps {
-  recipeData: IRecipeData;
-  setShowRecipeForm: Dispatch<SetStateAction<boolean>>;
-  setSnackbar: Dispatch<SetStateAction<ISnackbar>>;
-  recipeFormAction: string;
+  recipeFormData: IRecipeData;
+  isNameError: boolean;
+  recipeNameError: string;
+  onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  setRecipeFormData: Dispatch<React.SetStateAction<IRecipeData>>;
+  onCancel: () => void;
+  isSaveDisabled: boolean;
 }
