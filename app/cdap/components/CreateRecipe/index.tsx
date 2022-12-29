@@ -44,7 +44,7 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
 
   const [recipeNameError, setRecipeNameError] = useState('');
   const [isNameError, setIsNameError] = useState(false);
-  const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
