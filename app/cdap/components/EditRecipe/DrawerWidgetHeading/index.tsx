@@ -54,4 +54,3 @@ export default function({ headingText }: IDrawerWidgetHeadingProps) {
     </StyledHeadingIconWrapper>
   );
 }
-

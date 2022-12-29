@@ -14,10 +14,12 @@
  * the License.
  */
 
-import styled from 'styled-components';
-import { TextField, Typography, Box, Button } from '@material-ui/core';
+import styled, { css } from 'styled-components';
+import { TextField, Typography, Box } from '@material-ui/core';
 import { TextareaAutosize } from '@material-ui/core';
 import { grey, blue } from '@material-ui/core/colors';
+import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
+import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';
 
 export const FormFieldWrapper = styled(Box)`
   width: calc(100% - 60px);
@@ -32,30 +34,24 @@ export const Label = styled(Typography)`
   font-size: 14px;
   line-height: 150%;
   letter-spacing: 0.15px;
+  color: #5f6368;
 `;
 
 export const ErrorLabel = styled(Label)`
   color: #e05243;
 `;
 
-export const NormalLabel = styled(Label)`
-  color: #5f6368;
-`;
-
-export const StyledForm = styled.form`
+export const Form = styled.form`
   padding-left: 20px;
 `;
 
-export const StyledRecipeNameTextField = styled(TextField)`
+export const StyledTextField = styled(TextField)`
   width: 350px;
   .MuiOutlinedInput-input {
     padding: 12px 14px;
     font-size: 14px;
     line-height: 150%;
     letter-spacing: 0.15px;
-  }
-  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #000000;
   }
   input::placeholder {
       color: ${grey[600]};
@@ -64,7 +60,19 @@ export const StyledRecipeNameTextField = styled(TextField)`
   }
 `;
 
-export const StyledDescriptionTextArea = styled(TextareaAutosize)`
+export const ErrorTextField = styled(StyledTextField)`
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #ff8a80;
+  }
+`;
+
+export const NormalTextField = styled(StyledTextField)`
+  .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #000000;
+  }
+`;
+
+export const StyledTextAreaAutosize = styled(TextareaAutosize)`
   width: 350px;
   font-size: 14px;
   border-color: ${grey[300]};
@@ -86,7 +94,7 @@ export const StyledDescriptionTextArea = styled(TextareaAutosize)`
   resize: none;
 `;
 
-export const StyledButton = styled(Button)`
+export const StyledButton = css`
   width: 162px;
   height: 36px;
   text-transform: none;
@@ -96,21 +104,19 @@ export const StyledButton = styled(Button)`
   letter-spacing: 0.15px;
 `;
 
-export const StyledCancelButton = styled(StyledButton)`
+export const CancelButton = styled(PrimaryOutlinedButton)`
+  ${StyledButton}
   margin-right: 20px;
   color: ${blue[500]};
 `;
 
-export const StyledSaveButton = styled(StyledButton)`
+export const SaveButton = styled(PrimaryContainedButton)`
+  ${StyledButton}
   background: ${blue[500]};
 `;
 
-export const StyledFormButtonWrapper = styled.div`
+export const FormButtonWrapper = styled.div`
   float: right;
+  padding-top: 63px;
   padding-bottom: 20px;
-  margin-top: 315px;
 `;
-
-export const getLabelStyle = (isNameError) => {
-  return isNameError ? ErrorLabel : NormalLabel;
-};

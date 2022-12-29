@@ -24,7 +24,11 @@ describe('Test Create Recipe Component', () => {
   beforeEach(() => {
     render(
       <EditRecipe
-        recipeData={{ recipeName: 'recipeName', description: '', directives: ['uppercase: body1', 'titlecase: body2'] }}
+        recipeData={{
+          recipeName: 'recipeName',
+          description: '',
+          directives: ['uppercase: body1', 'titlecase: body2'],
+        }}
         headingText={'Divami'}
         openDrawer={true}
         onCloseClick={jest.fn()}
@@ -39,4 +43,3 @@ describe('Test Create Recipe Component', () => {
     expect(parentElement).toBeInTheDocument();
   });
 });
-

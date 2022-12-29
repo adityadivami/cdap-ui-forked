@@ -14,31 +14,21 @@
  * the License.
  */
 
-import { ISnackbar } from 'components/Snackbar';
+import React, { Dispatch, ChangeEvent, FormEvent } from 'react';
 
-export interface ICreateAndEditRecipeFormProps {
-  recipeData: IRecipeData;
-  setIsCreateAndEditRecipeFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setSnackbar: React.Dispatch<React.SetStateAction<ISnackbar>>;
-  recipeFormAction: string;
+export interface IRecipeFormProps {
+  recipeFormData: IRecipeFormData;
+  isNameError: boolean;
+  recipeNameError: string;
+  onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  setRecipeFormData: Dispatch<React.SetStateAction<IRecipeFormData>>;
+  onCancel: () => void;
+  isSaveDisabled: boolean;
 }
 
-export interface IRecipeData {
+export interface IRecipeFormData {
   recipeName: string;
   description: string;
   directives: string[];
-  createdTimeMillis?: number;
-  recipeStepsCount?: number;
-  updatedTimeMillis?: number;
-  recipeId?: IRecipeId;
-}
-
-export interface IRecipeId {
-  recipeId: string;
-  namespace: INameSpace;
-}
-
-export interface INameSpace {
-  name: string;
-  generation: number;
 }
