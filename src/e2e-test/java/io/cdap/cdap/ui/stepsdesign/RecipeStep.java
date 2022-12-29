@@ -16,12 +16,10 @@
 
 package io.cdap.cdap.ui.stepsdesign;
 
-import io.cdap.cdap.ui.utils.Constants;
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.WaitHelper;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -30,6 +28,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class RecipeStep {
 
@@ -53,12 +53,20 @@ public class RecipeStep {
     WebElement panel = Helper.locateElementByTestId("select-directive-input-search");
     Assert.assertTrue(panel.isDisplayed());
   }
+  String columnName;
+
+  @Then("read the column elements with \\\"(.,*)\\\"")
+  public void readColumnText(int i) {
+    List<WebElement> allProductsName = SeleniumDriver.getDriver().findElements(
+            By.xpath("//*[starts-with(@data-testid,'grid-header-cell-')]"));
+    columnName = allProductsName.get(i).getText();
+  }
 
   @Then("Enter command in the panel with the data {string}")
   public void checkCommandFunction(String command) {
     WebElement panel = Helper.locateElementByTestId("select-directive-input-search");
     panel.click();
-    panel.sendKeys(command);
+    panel.sendKeys(command + columnName);
     String check = panel.getText();
     panel.sendKeys(Keys.ENTER);
     Helper.reloadPage();

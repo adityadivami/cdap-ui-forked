@@ -24,7 +24,8 @@ Feature: RecipeStepPanel
     Then Verify if user is on the wrangle page
     Then Click on Directive button
     Then Verify if the directive panel is displayed
-    Then Enter command in the panel with the data "uppercase:body_2"
+    Then read the column elements with "<id>"
+    Then Enter command in the panel with the data "<command>"
     Then Click on 'Recipe steps' button
     Then Verify if recipe panel is displayed
     Then Verify if clicking on close icon of recipe panel
@@ -33,8 +34,8 @@ Feature: RecipeStepPanel
     Then Click on delete icon of any step with "<stepId>"
     Then verify if recipe step is Deleted with "<stepId>"
   Examples:
-      | stepId | testId |
-      | 0 | 0           |
+      | stepId | testId | id | command |
+      | 0 | 0           | 1  | uppercase: |
 
   Scenario Outline: Go through the recipe with multiple steps functionality
     Given Navigate to Home Page
@@ -42,16 +43,20 @@ Feature: RecipeStepPanel
     Then Verify if user is on the wrangle page
     Then Click on Directive button
     Then Verify if the directive panel is displayed
-    Then Enter command in the panel with the data "uppercase:body_2"
+    Then read the column elements with "<id>"
+    Then Enter command in the panel with the data "uppercase:"
     Then Click on Directive button
-    Then Enter command in the panel with the data "lowercase:body_3"
+    Then read the column elements with "<nextId>"
+    Then Enter command in the panel with the data "lowercase:"
     Then Click on Directive button
-    Then Enter command in the panel with the data "trim:body_4"
+    Then read the column elements with "<trimId>"
+    Then Enter command in the panel with the data "trim:"
     Then Click on Directive button
-    Then Enter command in the panel with the data "trim:body_5"
+    Then read the column elements with "<rTrimId>"
+    Then Enter command in the panel with the data "rtrim:"
     Then Click on 'Recipe steps' button
     Then Verify if recipe panel is displayed
     Then Click on delete icon of any step with "<stepId>"
     Examples:
-      | stepId | testId |
-      | 2 | 0           |
+      | stepId | testId | id | nextId | trimId | rTrimId |
+      | 2 | 0           | 1  |    3 | 1    | 1       |
