@@ -15,10 +15,18 @@
 #
 
 @Integration_Tests
-Feature: Snackbar
+Feature: Directives
 
-  @Snackbar
-  Scenario: Check the Snackbar in the Wrangle Page
+  @Directives
+  Scenario Outline: Go through the directives functionality
     Given Navigate to the Wrangler Home page
-    Then Click on the data exploration card
-    Then Click on the Snackbar close icon
+    Then Click on the Exploration card with "<testId>"
+    Then Verify if user is on the wrangle page
+    Then Click on the Directives button
+    Then Click on Close icon of directive panel
+    Then Click on the Directives button
+    Then Verify and Click the directive panel
+    Then Enter command in the panel with the data "<id>"
+    Examples:
+      | id | testId |
+      | 11 | 0     |
