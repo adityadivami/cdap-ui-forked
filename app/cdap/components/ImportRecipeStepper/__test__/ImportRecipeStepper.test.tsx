@@ -1,0 +1,43 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+import { fireEvent, getByTestId, render, screen } from '@testing-library/react';
+import React from 'react';
+import ImportRecipeStepper from 'components/ImportRecipeStepper/index';
+
+describe('Test Import Recipe Stepper', () => {
+  it('Should render Import Recipe Stepper', () => {
+    render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
+    const wrapper = screen.getByTestId(/step-wrapper/i);
+    expect(wrapper).toBeInTheDocument();
+  });
+
+  it('Should render Import Recipe Stepper and trigger nextStep function.', () => {
+    render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
+    const wrapper = screen.getByTestId(/step-wrapper/i);
+    const headerActionImportIcon = screen.getByTestId(/header-action-import-icon/i);
+    fireEvent.click(headerActionImportIcon);
+    expect(wrapper).toBeInTheDocument();
+  });
+
+  it('Should render Import Recipe Stepper and trigger previousStep function.', () => {
+    render(<ImportRecipeStepper setShowRecipePanel={jest.fn()} />);
+    const headerActionImportIcon = screen.getByTestId(/header-action-import-icon/i);
+    fireEvent.click(headerActionImportIcon);
+    const backIconStep = screen.getByTestId(/back-icon-step/i);
+    fireEvent.click(backIconStep);
+  });
+});

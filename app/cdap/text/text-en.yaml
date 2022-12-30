@@ -3517,15 +3517,15 @@ features:
           title: Saved recipes
     ImportData:
       referenceLabel: Import Data
+    ImportRecipe:
+      title: Import steps from a recipe
+      subTitle: Select a recipe to import its steps
+      cancel: Cancel
+      importSteps: Import Steps
     NoRecordScreen:
       gridTable:
         subtitle: Remove some recipe steps to view some data
         title: No rows left in this sample
-    Snackbar:
-      labels:
-        failure: Failure
-        success: Success
-        undo: Undo
     Recipe:
         description: Description
         common:
@@ -3542,7 +3542,30 @@ features:
         steps: Steps
         updated: Last updated
         view: View
-        viewAll: View All        
+        viewAll: View All       
+    RecipeDetails:
+      drawerHeader: Recipe details
+      tableHeaders:
+        recipeStep: Recipe steps 
+        serialNo: S.No.
+    Snackbar:
+      labels:
+        failure: Failure
+        success: Success
+        undo: Undo
+    SavedRecipeList:
+      description: Description
+      lastUpdated: Last Updated
+      recipeName: Recipe Name
+      steps : Steps
+    WranglerNewRecipeSteps:
+      labels:
+        recipe: Recipe
+        recipeSteps: Recipe steps
+        recipeCount: Recipe count
+      startWrangleTitle: Start Wrangling your data
+      startWrangleSubTitle: Select a column or function to add your first recipe step
+ 
 
     
 ...

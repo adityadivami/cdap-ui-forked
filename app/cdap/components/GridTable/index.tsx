@@ -14,7 +14,6 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import Breadcrumb from 'components/Breadcrumb';
@@ -22,9 +21,6 @@ import { directiveRequestBodyCreator } from 'components/DataPrep/helper';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import FooterPanel from 'components/FooterPanel';
-import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
-import GridKPICell from 'components/GridTable/components/GridKPICell';
-import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
@@ -41,16 +37,23 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-
 import styled from 'styled-components';
-
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import { useLocation } from 'react-router';
+import ImportRecipeStepper from 'components/ImportRecipeStepper';
+import GridTableContainer from './components/GridTableContainer';
 
 export const TableWrapper = styled(Box)`
+  height: calc(100vh - 240px);
+  overflow-y: auto;
   width: 100%;
+`;
+
+const TablePanelContainer = styled(Box)`
+  display: flex;
+  font-family: Roboto;
 `;
 
 const GridTableWrapper = styled(Box)`
@@ -64,6 +67,7 @@ export default function GridTable() {
   const params = useParams() as IRecords;
   const classes = useStyles();
   const location = useLocation();
+  const { dataprep } = DataPrepStore.getState();
   const [tableMetaInfo, setTableMetaInfo] = useState({
     columnCount: 0,
     rowCount: 0,
@@ -86,6 +90,8 @@ export default function GridTable() {
   const [snackbarState, setSnackbar] = useSnackbar();
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
+  const [showRecipePanel, setShowRecipePanel] = useState<boolean>(false);
+  const { directives } = dataprep;
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -296,6 +302,10 @@ export default function GridTable() {
     }
   }, [snackbarState.open]);
 
+  const showRecipePanelHandler = () => {
+    setShowRecipePanel((prev) => !prev);
+  };
+
   return (
     <>
       {showBreadCrumb && (
@@ -317,61 +327,28 @@ export default function GridTable() {
         disableToolbarIcon={gridData?.headers?.length > 0 ? false : true}
       />
       <GridTableWrapper data-testid="grid-table-container">
-        {!showGridTable && (
-          <NoRecordScreen
-            title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
-            subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
-          />
-        )}
-        {showGridTable && (
-          <TableWrapper>
-            <Table aria-label="simple table" className="test">
-              <TableHead>
-                <TableRow>
-                  {headersNamesList?.length &&
-                    headersNamesList.map((eachHeader) => (
-                      <GridHeaderCell
-                        label={eachHeader.label}
-                        types={eachHeader.type}
-                        key={eachHeader.name}
-                        columnSelected={selectedColumn}
-                        setColumnSelected={handleColumnSelect}
-                      />
-                    ))}
-                </TableRow>
-                <TableRow>
-                  {missingDataList?.length &&
-                    headersNamesList.length &&
-                    headersNamesList.map((each, index) => {
-                      return missingDataList.map((item, itemIndex) => {
-                        if (item.name === each.name) {
-                          return <GridKPICell metricData={item} key={item.name} />;
-                        }
-                      });
-                    })}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rowsDataList?.length &&
-                  rowsDataList.map((eachRow, rowIndex) => {
-                    return (
-                      <TableRow key={`row-${rowIndex}`}>
-                        {headersNamesList.map((eachKey, eachIndex) => {
-                          return (
-                            <GridTextCell
-                              cellValue={eachRow[eachKey.name] || '--'}
-                              key={`${eachKey.name}-${eachIndex}`}
-                            />
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableWrapper>
-        )}
-        <FooterPanel recipeStepsCount={0} gridMetaInfo={tableMetaInfo} />
+        <TablePanelContainer>
+          {!showGridTable && (
+            <NoRecordScreen
+              title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
+              subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
+            />
+          )}
+          {showGridTable && (
+            <GridTableContainer
+              headersNamesList={headersNamesList}
+              missingDataList={missingDataList}
+              rowsDataList={rowsDataList}
+              setColumnSelected={setSelectedColumn}
+            />
+          )}
+          {showRecipePanel && <ImportRecipeStepper setShowRecipePanel={setShowRecipePanel} />}
+        </TablePanelContainer>
+        <FooterPanel
+          recipeStepsCount={directives?.length}
+          gridMetaInfo={tableMetaInfo}
+          handleShowRecipePanelHandler={showRecipePanelHandler}
+        />
         {loading && (
           <div className={classes.loadingContainer}>
             <LoadingSVG />
