@@ -42,9 +42,9 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
     directives: [],
   });
 
-  const [recipeNameError, setRecipeNameError] = useState('');
-  const [isNameError, setIsNameError] = useState(false);
-  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const [recipeNameErrorMessage, setRecipeNameErrorMessage] = useState<string>('');
+  const [isRecipeNameError, setIsRecipeNameError] = useState<boolean>(false);
+  const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
 
   // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
@@ -55,13 +55,13 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
       recipeFormData.description === '' ||
       recipeFormData.recipeName?.trim().length === 0 ||
       recipeFormData.description?.trim().length === 0 ||
-      isNameError
+      isRecipeNameError
     ) {
       setIsSaveDisabled(true);
     } else {
       setIsSaveDisabled(false);
     }
-  }, [recipeFormData, isNameError]);
+  }, [recipeFormData, isRecipeNameError]);
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -78,7 +78,7 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
   };
 
   const onCreateRecipeResponse = () => {
-    setIsNameError(false);
+    setIsRecipeNameError(false);
     setShowRecipeForm(false);
     setSnackbar({
       open: true,
@@ -91,7 +91,7 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
 
   const onCreateRecipeError = (err) => {
     if (err.response.message) {
-      setIsNameError(true);
+      setIsRecipeNameError(true);
     } else {
       setShowRecipeForm(false);
       setSnackbar({
@@ -106,24 +106,24 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
     const recipeNameRegEx = /^[a-z\d\s]+$/i;
     setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
     if (event.target.value && !recipeNameRegEx.test(event.target.value)) {
-      setRecipeNameError(
+      setRecipeNameErrorMessage(
         T.translate('features.WranglerNewUI.RecipeForm.labels.validationErrorMessage').toString()
       );
-      setIsNameError(true);
+      setIsRecipeNameError(true);
     } else {
-      setIsNameError(false);
+      setIsRecipeNameError(false);
       validateRecipeNameExists.current(event.target.value);
     }
   };
 
   const onCancel = () => {
     setShowRecipeForm(false);
-    setIsNameError(false);
+    setIsRecipeNameError(false);
   };
 
   const onGetRecipeByNameError = (err, value) => {
     if (err.statusCode === 404 && err.message === `recipe with name '${value}' does not exist`) {
-      setIsNameError(false);
+      setIsRecipeNameError(false);
     }
   };
 
@@ -136,8 +136,8 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
   );
 
   const onGetRecipeByNameResponse = () => {
-    setIsNameError(true);
-    setRecipeNameError(
+    setIsRecipeNameError(true);
+    setRecipeNameErrorMessage(
       T.translate('features.WranglerNewUI.RecipeForm.labels.sameNameErrorMessage').toString()
     );
   };
@@ -146,8 +146,8 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
     <>
       <RecipeForm
         recipeFormData={recipeFormData}
-        isNameError={isNameError}
-        recipeNameError={recipeNameError}
+        isRecipeNameError={isRecipeNameError}
+        recipeNameErrorMessage={recipeNameErrorMessage}
         onRecipeNameChange={onRecipeNameChange}
         onFormSubmit={onFormSubmit}
         setRecipeFormData={setRecipeFormData}

@@ -18,8 +18,8 @@ import React, { Dispatch, ChangeEvent, FormEvent } from 'react';
 
 export interface IRecipeFormProps {
   recipeFormData: IRecipeFormData;
-  isNameError: boolean;
-  recipeNameError: string;
+  isRecipeNameError: boolean;
+  recipeNameErrorMessage: string;
   onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
   setRecipeFormData: Dispatch<React.SetStateAction<IRecipeFormData>>;

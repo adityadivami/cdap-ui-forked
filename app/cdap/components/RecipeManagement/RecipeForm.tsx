@@ -33,16 +33,16 @@ import {
 
 export default function({
   recipeFormData,
-  isNameError,
-  recipeNameError,
+  isRecipeNameError,
+  recipeNameErrorMessage,
   onRecipeNameChange,
   onFormSubmit,
   setRecipeFormData,
   onCancel,
   isSaveDisabled,
 }: IRecipeFormProps) {
-  const StyledLabel = isNameError ? ErrorLabel : Label;
-  const StyledTextField = isNameError ? ErrorTextField : NormalTextField;
+  const StyledLabel = isRecipeNameError ? ErrorLabel : Label;
+  const StyledTextField = isRecipeNameError ? ErrorTextField : NormalTextField;
 
   return (
     <>
@@ -58,9 +58,9 @@ export default function({
             required
             variant="outlined"
             defaultValue={recipeFormData.recipeName}
-            error={isNameError}
+            error={isRecipeNameError}
             id="outlined-error-helper-text"
-            helperText={isNameError ? recipeNameError : ''}
+            helperText={isRecipeNameError ? recipeNameErrorMessage : ''}
             fullWidth
             onChange={(event: ChangeEvent<HTMLInputElement>) => onRecipeNameChange(event)}
             data-testid="recipe-name-field"
