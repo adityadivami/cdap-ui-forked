@@ -31,10 +31,10 @@ export const FormFieldWrapper = styled(Box)`
 export const Label = styled(Typography)`
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-  color: #5f6368;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  color: ${grey[700]};
 `;
 
 export const ErrorLabel = styled(Label)`
@@ -99,11 +99,12 @@ export const StyledButton = css`
   font-size: 14px;
   line-height: 150%;
   letter-spacing: 0.15px;
+  margin-top: ;
 `;
 
 export const CancelButton = styled(PrimaryOutlinedButton)`
   ${StyledButton}
-  color: ${blue[500]};
+  color: #3367D6;
   width: 92px;
 `;
 
@@ -114,8 +115,15 @@ export const SaveButton = styled(PrimaryContainedButton)`
   width: 70px;
 `;
 
-export const FormButtonWrapper = styled.div`
-  float: right;
-  padding-top: 63px;
+export const StyledFormButtonWrapper = styled.div`
+  float: left;
   padding-bottom: 20px;
+`;
+
+export const CreateRecipeFormButtonWrapper = styled(StyledFormButtonWrapper)`
+  margin-top: 100px;
+`;
+
+export const EditRecipeFormButtonWrapper = styled(StyledFormButtonWrapper)`
+  margin-top: 348px;
 `;

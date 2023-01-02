@@ -25,6 +25,7 @@ export interface IRecipeFormProps {
   setRecipeFormData: Dispatch<React.SetStateAction<IRecipeFormData>>;
   onCancel: () => void;
   isSaveDisabled: boolean;
+  from: string;
 }
 
 export interface IRecipeFormData {

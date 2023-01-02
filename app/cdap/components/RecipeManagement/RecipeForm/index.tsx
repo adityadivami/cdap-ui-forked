@@ -27,9 +27,12 @@ import {
   StyledTextAreaAutosize,
   CancelButton,
   SaveButton,
-  FormButtonWrapper,
   ErrorLabel,
+  CreateRecipeFormButtonWrapper,
+  EditRecipeFormButtonWrapper,
 } from 'components/RecipeManagement/RecipeForm/styles';
+
+export const CREATE_RECIPE = 'createRecipe';
 
 export default function({
   recipeFormData,
@@ -40,9 +43,12 @@ export default function({
   setRecipeFormData,
   onCancel,
   isSaveDisabled,
+  from,
 }: IRecipeFormProps) {
   const StyledLabel = isRecipeNameError ? ErrorLabel : Label;
   const StyledTextField = isRecipeNameError ? ErrorTextField : NormalTextField;
+  const StyledFormButtonWrapper =
+    from === CREATE_RECIPE ? CreateRecipeFormButtonWrapper : EditRecipeFormButtonWrapper;
 
   return (
     <>
@@ -88,7 +94,7 @@ export default function({
             />
           </FormControl>
         </FormFieldWrapper>
-        <FormButtonWrapper>
+        <StyledFormButtonWrapper>
           <SaveButton
             variant="contained"
             type="submit"
@@ -106,7 +112,7 @@ export default function({
           >
             {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
           </CancelButton>
-        </FormButtonWrapper>
+        </StyledFormButtonWrapper>
       </Form>
     </>
   );

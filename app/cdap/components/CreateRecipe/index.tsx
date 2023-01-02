@@ -27,7 +27,7 @@ import T from 'i18n-react';
 import { getRecipeByName, createRecipe } from 'components/CreateRecipe/services';
 import { debounce } from 'lodash';
 import { IRecipeFormData } from 'components/RecipeManagement/types';
-import RecipeForm from 'components/RecipeManagement/RecipeForm';
+import RecipeForm, { CREATE_RECIPE } from 'components/RecipeManagement/RecipeForm';
 import { ISnackbar } from 'components/Snackbar';
 
 export interface ICreateRecipeProps {
@@ -153,6 +153,7 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
         setRecipeFormData={setRecipeFormData}
         onCancel={onCancel}
         isSaveDisabled={isSaveDisabled}
+        from={CREATE_RECIPE}
       />
     </>
   );
