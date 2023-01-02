@@ -89,14 +89,6 @@ export default function({
           </FormControl>
         </FormFieldWrapper>
         <FormButtonWrapper>
-          <CancelButton
-            variant="outlined"
-            color="primary"
-            onClick={() => onCancel()}
-            data-testid="recipe-cancel-button"
-          >
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
-          </CancelButton>
           <SaveButton
             variant="contained"
             type="submit"
@@ -106,6 +98,14 @@ export default function({
           >
             {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
           </SaveButton>
+          <CancelButton
+            variant="outlined"
+            color="primary"
+            onClick={() => onCancel()}
+            data-testid="recipe-cancel-button"
+          >
+            {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
+          </CancelButton>
         </FormButtonWrapper>
       </Form>
     </>

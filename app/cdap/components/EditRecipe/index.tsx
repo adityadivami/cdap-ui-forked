@@ -43,7 +43,6 @@ const StyledDrawerContainer = styled(Container)`
   padding-left: 0px;
   padding-right: 0px;
   overflow-y: scroll;
-  margin-left: 31px;
 `;
 
 const StyledHeader = styled.header`
@@ -53,6 +52,7 @@ const StyledHeader = styled.header`
   padding-left: 0px;
   padding-right: 0px;
   margin-top: 16px;
+  margin-left: 20px;
 `;
 
 const CloseIconButton = styled(IconButton)`

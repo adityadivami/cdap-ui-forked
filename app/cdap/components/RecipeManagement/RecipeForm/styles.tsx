@@ -46,7 +46,7 @@ export const Form = styled.form`
 `;
 
 export const StyledTextField = styled(TextField)`
-  width: 350px;
+  width: 460px;
   .MuiOutlinedInput-input {
     padding: 12px 14px;
     font-size: 14px;
@@ -73,7 +73,7 @@ export const NormalTextField = styled(StyledTextField)`
 `;
 
 export const StyledTextAreaAutosize = styled(TextareaAutosize)`
-  width: 350px;
+  width: 460px;
   font-size: 14px;
   border-color: ${grey[300]};
   border-radius: 4px;
@@ -95,9 +95,6 @@ export const StyledTextAreaAutosize = styled(TextareaAutosize)`
 `;
 
 export const StyledButton = css`
-  width: 162px;
-  height: 36px;
-  text-transform: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -106,17 +103,19 @@ export const StyledButton = css`
 
 export const CancelButton = styled(PrimaryOutlinedButton)`
   ${StyledButton}
-  margin-right: 20px;
   color: ${blue[500]};
+  width: 92px;
 `;
 
 export const SaveButton = styled(PrimaryContainedButton)`
   ${StyledButton}
-  background: ${blue[500]};
+  margin-right: 20px;
+  background-color: #3367d6;
+  width: 70px;
 `;
 
 export const FormButtonWrapper = styled.div`
-  float: right;
+  float: left;
   padding-top: 63px;
   padding-bottom: 20px;
 `;
