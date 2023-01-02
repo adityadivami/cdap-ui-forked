@@ -29,7 +29,7 @@ import {
   SaveButton,
   FormButtonWrapper,
   ErrorLabel,
-} from 'components/RecipeManagement/styles';
+} from 'components/RecipeManagement/RecipeForm/styles';
 
 export default function({
   recipeFormData,
