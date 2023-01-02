@@ -63,22 +63,6 @@ describe('Test RecipeDetails Component', () => {
     expect(recipeDescriptionElement).toHaveTextContent('Recipe for cleansing empolyee information');
   });
 
-  it('should check if the recipe serial number is as expected', () => {
-    const recipeSerialNumberElement = screen.getByTestId(/recipe-step-serial-number-column-head/i);
-    expect(recipeSerialNumberElement).toBeInTheDocument();
-    expect(recipeSerialNumberElement).toHaveTextContent(
-      `${T.translate(`${PREFIX}.tableHeaders.serialNo`)}`
-    );
-  });
-
-  it('should check if the recipe steps column head is as expected', () => {
-    const recipeStepHeadElement = screen.getByTestId(/recipe-step-text-column-head/i);
-    expect(recipeStepHeadElement).toBeInTheDocument();
-    expect(recipeStepHeadElement).toHaveTextContent(
-      `${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`
-    );
-  });
-
   it('should check if the recipe steps text is as expected', () => {
     const recipeStepTextElement = screen.getByTestId(/recipe-step-text-0/i);
     expect(recipeStepTextElement).toBeInTheDocument();

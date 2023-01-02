@@ -15,14 +15,16 @@
  */
 
 import { blue, grey } from '@material-ui/core/colors';
-import React from 'react';
+import React, { useState, MouseEvent } from 'react';
 import styled, { css } from 'styled-components';
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, Button, IconButton, MenuItem, Popover, Typography } from '@material-ui/core';
 import T from 'i18n-react';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 
 interface IDrawerHeaderProps {
   onCloseDetail: () => void;
@@ -35,12 +37,12 @@ const MainHeadWrapper = styled(Box)`
 const HeadWrapper = styled(Box)`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const RecipeHeaderLabel = styled(Typography)`
   font-weight: 400;
   font-size: 20px;
-  margin-bottom: 6px;
   color: ${grey[900]};
   padding: 1px;
 `;
@@ -60,18 +62,6 @@ const CommonIcons = css`
   height: 25px;
 `;
 
-const StyledEditIcon = styled(EditIcon)`
-  ${CommonIcons}
-`;
-
-const StyledSaveIcon = styled(SaveAltIcon)`
-  ${CommonIcons}
-`;
-
-const StyledDeleteIcon = styled(DeleteOutlineIcon)`
-  ${CommonIcons}
-`;
-
 const StyledCloseIcon = styled(CloseIcon)`
   ${CommonIcons}
 `;
@@ -88,40 +78,49 @@ const HeaderWithUnderline = styled(Box)`
   flex-direction: column;
 `;
 
-export const UnderlineIcon = () => (
-  <svg
-    width="67"
-    height="2"
-    viewBox="0 0 67 2"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    data-testid="underline"
-  >
-    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
-    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
-  </svg>
-);
+const StyledActionButton = styled(Button)`
+  color: ${grey[700]};
+  font-weight: 500;
+`;
 
-export default function({ onCloseDetail }: IDrawerHeaderProps) {
+const PREFIX = 'features.WranglerNewUI.RecipeDetails'
+
+export default function ({ onCloseDetail }: IDrawerHeaderProps) {
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const handleActions = (event: MouseEvent<HTMLButtonElement>) => setAnchorEl(event.currentTarget)
+  const handleClose = () => setAnchorEl(null)
+
   return (
     <MainHeadWrapper>
       <HeadWrapper>
         <HeaderWithUnderline>
           <RecipeHeaderLabel>
-            {T.translate('features.WranglerNewUI.RecipeDetails.drawerHeader')}
+            {T.translate(`${PREFIX}.drawerHeader`)}
           </RecipeHeaderLabel>
-          <UnderlineIcon />
         </HeaderWithUnderline>
         <IconsWrapper>
-          <StyledCommonIconButton>
-            <StyledEditIcon />
-          </StyledCommonIconButton>
-          <StyledCommonIconButton>
-            <StyledDeleteIcon />
-          </StyledCommonIconButton>
-          <StyledCommonIconButton>
-            <StyledSaveIcon />
-          </StyledCommonIconButton>
+          <StyledActionButton data-testid="actions-applied-button" aria-describedby={id} variant="text" onClick={handleActions}>
+            {T.translate(`${PREFIX}.actions`)}
+            {anchorEl && <ArrowDropUpIcon/>}
+            {anchorEl === null && <ArrowDropDownIcon/>}
+          </StyledActionButton>
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+          >
+            <MenuItem>{T.translate(`${PREFIX}.edit`)}</MenuItem>
+            <MenuItem>{T.translate(`${PREFIX}.download`)}</MenuItem>
+            <MenuItem>{T.translate(`${PREFIX}.delete`)}</MenuItem>
+          </Popover>
           <VerticalDivider />
           <StyledCommonIconButton data-testid="close-detail-icon-button" onClick={onCloseDetail}>
             <StyledCloseIcon data-testid="close-recipe-detail" />
