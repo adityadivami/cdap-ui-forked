@@ -153,7 +153,7 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
         setRecipeFormData={setRecipeFormData}
         onCancel={onCancel}
         isSaveDisabled={isSaveDisabled}
-        from={CREATE_RECIPE}
+        recipeFormAction={CREATE_RECIPE}
       />
     </>
   );

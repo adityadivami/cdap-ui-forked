@@ -43,12 +43,14 @@ export default function({
   setRecipeFormData,
   onCancel,
   isSaveDisabled,
-  from,
+  recipeFormAction,
 }: IRecipeFormProps) {
   const StyledLabel = isRecipeNameError ? ErrorLabel : Label;
   const StyledTextField = isRecipeNameError ? ErrorTextField : NormalTextField;
   const StyledFormButtonWrapper =
-    from === CREATE_RECIPE ? CreateRecipeFormButtonWrapper : EditRecipeFormButtonWrapper;
+    recipeFormAction === CREATE_RECIPE
+      ? CreateRecipeFormButtonWrapper
+      : EditRecipeFormButtonWrapper;
 
   return (
     <>
@@ -58,7 +60,9 @@ export default function({
       >
         <FormFieldWrapper>
           <StyledLabel data-testid="recipe-name-label">
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.name')}
+            {recipeFormAction === CREATE_RECIPE
+              ? T.translate('features.WranglerNewUI.RecipeForm.labels.createRecipeNameLabel')
+              : T.translate('features.WranglerNewUI.RecipeForm.labels.editRecipeNameLabel')}
           </StyledLabel>
           <StyledTextField
             required
