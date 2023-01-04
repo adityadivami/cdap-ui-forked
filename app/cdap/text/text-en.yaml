@@ -3529,10 +3529,10 @@ features:
     RecipeForm:
       labels:
         cancel: Cancel
+        createRecipeNameLabel: Name of new recipe
         description: Description of recipe
         descriptionPlaceholder: Input a description to identify it later
         errorMessage: Something went wrong!
-        createRecipeNameLabel: Name of new recipe
         editRecipeNameLabel: Name of recipe
         namePlaceholder: Input a name to identify it later
         recipeFormInfo: steps will be saved as a recpe. You can access this saved recipe from the recipes section on Wrangler Home page.
