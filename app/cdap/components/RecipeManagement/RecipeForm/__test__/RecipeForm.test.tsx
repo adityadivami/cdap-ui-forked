@@ -50,6 +50,7 @@ describe('Test Recipe Form Component', () => {
       `${T.translate('features.WranglerNewUI.RecipeForm.labels.createRecipeNameLabel')}`
     );
   });
+
   it('should render Recipe Description Label', () => {
     const RecipeDescriptionLabelElement = screen.getByTestId(/recipe-description-label/i);
     expect(RecipeDescriptionLabelElement).toBeInTheDocument();
@@ -57,16 +58,19 @@ describe('Test Recipe Form Component', () => {
       `${T.translate('features.WranglerNewUI.RecipeForm.labels.description')}`
     );
   });
+
   it('should render Recipe Name Field and trigger the change event as expected', () => {
     const RecipeNameElement = screen.getByTestId(/recipe-name-field/i);
     fireEvent.change(RecipeNameElement.firstChild.firstChild, { target: { value: 'test' } });
     expect(RecipeNameElement.firstChild.firstChild).toHaveValue('test');
   });
+
   it('should render Recipe Description Field', () => {
     const RecipeDescriptionElement = screen.getByTestId(/recipe-description-field/i);
     fireEvent.change(RecipeDescriptionElement, { target: { value: 'test' } });
     expect(RecipeDescriptionElement).toHaveValue('test');
   });
+
   it('should trigger onCancel event in recipe', () => {
     const cancelButtonElement = screen.getByTestId(/recipe-cancel-button/i);
     fireEvent.click(cancelButtonElement);
