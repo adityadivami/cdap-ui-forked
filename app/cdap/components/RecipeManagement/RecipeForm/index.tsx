@@ -34,7 +34,7 @@ import {
 
 export const CREATE_RECIPE = 'createRecipe';
 
-export default function({
+export default function RecipeForm({
   recipeFormData,
   isRecipeNameError,
   recipeNameErrorMessage,

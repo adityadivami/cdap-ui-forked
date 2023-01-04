@@ -22,7 +22,7 @@ import { IRecipeFormData } from 'components/RecipeManagement/types';
 import RecipeForm, { CREATE_RECIPE } from 'components/RecipeManagement/RecipeForm';
 import { ICreateRecipeProps } from 'components/RecipeManagement/types';
 
-export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) {
+export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) {
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
     recipeName: '',
     description: '',
