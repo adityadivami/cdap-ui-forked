@@ -15,16 +15,11 @@
  */
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import DrawerWidget from 'components/common/DrawerWidget';
 import React from 'react';
-import { Route, Router, Switch } from 'react-router';
-import history from 'services/history';
 import RecipeForm from 'components/RecipeManagement/RecipeForm';
-import { IRecipeFormData } from 'components/RecipeManagement/types';
 import T from 'i18n-react';
 
 describe('Test Recipe Form Component', () => {
-  const mockOnRecipeNameChangeRecipe = jest.fn();
   const mockOnFormSubmit = jest.fn();
   const mockOnCancel = jest.fn();
 
@@ -38,7 +33,7 @@ describe('Test Recipe Form Component', () => {
         }}
         isRecipeNameError={false}
         recipeNameErrorMessage={'error message'}
-        onRecipeNameChange={mockOnRecipeNameChangeRecipe}
+        onRecipeNameChange={jest.fn()}
         onFormSubmit={mockOnFormSubmit}
         setRecipeFormData={jest.fn()}
         onCancel={mockOnCancel}
@@ -62,12 +57,11 @@ describe('Test Recipe Form Component', () => {
       `${T.translate('features.WranglerNewUI.RecipeForm.labels.description')}`
     );
   });
-  // it('should render Recipe Name Field and trigger the change event as expected', () => {
-  //   const RecipeNameElement = screen.getByTestId(/recipe-name-field/i);
-  //   fireEvent.change(RecipeNameElement.firstChild.firstChild, { target: { value: 'test' } });
-  //   expect(RecipeNameElement.firstChild.firstChild).toHaveValue('test');
-  //   expect(mockOnRecipeNameChangeRecipe).toBeCalled();
-  // });
+  it('should render Recipe Name Field and trigger the change event as expected', () => {
+    const RecipeNameElement = screen.getByTestId(/recipe-name-field/i);
+    fireEvent.change(RecipeNameElement.firstChild.firstChild, { target: { value: 'test' } });
+    expect(RecipeNameElement.firstChild.firstChild).toHaveValue('test');
+  });
   it('should render Recipe Description Field', () => {
     const RecipeDescriptionElement = screen.getByTestId(/recipe-description-field/i);
     fireEvent.change(RecipeDescriptionElement, { target: { value: 'test' } });
