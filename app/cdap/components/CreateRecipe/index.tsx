@@ -14,26 +14,13 @@
  * the License.
  */
 
-import React, {
-  FormEvent,
-  ChangeEvent,
-  useEffect,
-  useState,
-  useRef,
-  SetStateAction,
-  Dispatch,
-} from 'react';
+import React, { FormEvent, ChangeEvent, useEffect, useState, useRef } from 'react';
 import T from 'i18n-react';
 import { getRecipeByName, createRecipe } from 'components/CreateRecipe/services';
 import { debounce } from 'lodash';
 import { IRecipeFormData } from 'components/RecipeManagement/types';
 import RecipeForm, { CREATE_RECIPE } from 'components/RecipeManagement/RecipeForm';
-import { ISnackbar } from 'components/Snackbar';
-
-export interface ICreateRecipeProps {
-  setShowRecipeForm: Dispatch<SetStateAction<boolean>>;
-  setSnackbar: Dispatch<SetStateAction<ISnackbar>>;
-}
+import { ICreateRecipeProps } from 'components/RecipeManagement/types';
 
 export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) {
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({

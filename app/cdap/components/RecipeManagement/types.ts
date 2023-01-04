@@ -14,7 +14,8 @@
  * the License.
  */
 
-import React, { Dispatch, ChangeEvent, FormEvent } from 'react';
+import React, { Dispatch, ChangeEvent, FormEvent, SetStateAction } from 'react';
+import { ISnackbar } from 'components/Snackbar';
 
 export interface IRecipeFormProps {
   recipeFormData: IRecipeFormData;
@@ -32,4 +33,9 @@ export interface IRecipeFormData {
   recipeName: string;
   description: string;
   directives: string[];
+}
+
+export interface ICreateRecipeProps {
+  setShowRecipeForm: Dispatch<SetStateAction<boolean>>;
+  setSnackbar: Dispatch<SetStateAction<ISnackbar>>;
 }
