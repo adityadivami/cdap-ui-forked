@@ -17,7 +17,7 @@
 import styled, { css } from 'styled-components';
 import { TextField, Typography, Box } from '@material-ui/core';
 import { TextareaAutosize } from '@material-ui/core';
-import { grey, blue } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
 import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';
 

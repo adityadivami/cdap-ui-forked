@@ -59,7 +59,7 @@ export default function({
         data-testid="recipe-form-parent"
       >
         <FormFieldWrapper>
-          <StyledLabel data-testid="recipe-name-label">
+          <StyledLabel data-testid="recipe-name-label" component="span">
             {recipeFormAction === CREATE_RECIPE
               ? T.translate('features.WranglerNewUI.RecipeForm.labels.createRecipeNameLabel')
               : T.translate('features.WranglerNewUI.RecipeForm.labels.editRecipeNameLabel')}
@@ -80,7 +80,7 @@ export default function({
         </FormFieldWrapper>
         <FormFieldWrapper>
           <FormControl variant="outlined">
-            <Label data-testid="recipe-description-label">
+            <Label data-testid="recipe-description-label" component="span">
               {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
             </Label>
             <StyledTextAreaAutosize
