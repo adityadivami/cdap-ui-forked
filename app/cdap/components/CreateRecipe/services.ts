@@ -17,17 +17,17 @@
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 
-export const getRecipeByName = (value, onGetRecipeByNameResponse, onGetRecipeByNameError) => {
+export const getRecipeByName = (recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError) => {
   const params = {
     context: getCurrentNamespace(),
-    recipeName: value,
+    recipeName,
   };
   MyDataPrepApi.getRecipeByName(params).subscribe(
     () => {
       onGetRecipeByNameResponse();
     },
     (err) => {
-      onGetRecipeByNameError(err, value);
+      onGetRecipeByNameError(err, recipeName);
     }
   );
 };

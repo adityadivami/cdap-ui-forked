@@ -108,16 +108,19 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
     setIsRecipeNameError(false);
   };
 
-  const onGetRecipeByNameError = (err, value) => {
-    if (err.statusCode === 404 && err.message === `recipe with name '${value}' does not exist`) {
+  const onGetRecipeByNameError = (err, recipeName) => {
+    if (
+      err.statusCode === 404 &&
+      err.message === `recipe with name '${recipeName}' does not exist`
+    ) {
       setIsRecipeNameError(false);
     }
   };
 
   const validateRecipeNameExists = useRef(
-    debounce((value: string) => {
-      if (value) {
-        getRecipeByName(value, onGetRecipeByNameResponse, onGetRecipeByNameError);
+    debounce((recipeName: string) => {
+      if (recipeName) {
+        getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError);
       }
     }, 500)
   );
@@ -145,4 +148,3 @@ export default function({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) 
     </>
   );
 }
-

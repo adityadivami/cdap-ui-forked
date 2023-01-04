@@ -115,15 +115,12 @@ export const SaveButton = styled(PrimaryContainedButton)`
   width: 70px;
 `;
 
-export const StyledFormButtonWrapper = styled.div`
+export const CreateRecipeFormButtonWrapper = styled.div`
   float: left;
   padding-bottom: 20px;
-`;
-
-export const CreateRecipeFormButtonWrapper = styled(StyledFormButtonWrapper)`
   margin-top: 100px;
 `;
 
-export const EditRecipeFormButtonWrapper = styled(StyledFormButtonWrapper)`
+export const EditRecipeFormButtonWrapper = styled(CreateRecipeFormButtonWrapper)`
   margin-top: 348px;
 `;
