@@ -19,17 +19,17 @@ import styled from 'styled-components';
 import { Box, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
-import { IRecipeData } from 'components/RecipeDetails';
+import { IRecipe } from 'components/RecipeList/types';
 import { format, TYPES } from 'services/DataFormatter';
-import DirectiveTable from 'components/RecipeDetails/DirectivesTable';
+import DirectiveTable from 'components/RecipeManagement/RecipeDetails/DirectivesTable';
 
 interface IRecipeDetailsProps {
-  recipe: IRecipeData;
+  selectedRecipe: IRecipe;
 }
 
 const PREFIX = 'features.WranglerNewUI.RecipeDetails';
 
-const RecipeDetailWrapper = styled(Box)`
+const DetailsWrapper = styled(Box)`
   margin-top: 19px;
 `;
 
@@ -48,14 +48,14 @@ const StyledRecipeName = styled(StepsGridHead)`
 `;
 
 const StepDetail = styled(Box)`
-  margin: 10px 0;
+  margin: 20px 0 10px;
 `;
 
 const DescriptionDetail = styled(Box)`
-  margin: 20px 0;
+  margin: 20px 0 10px;
 `;
 
-const RecipeDetailText = styled(Typography)`
+const DetailsText = styled(Typography)`
   color: ${grey[700]};
   font-weight: 400;
   font-size: 14px;
@@ -71,24 +71,26 @@ const VerticalDivider = styled(Box)`
   margin: 0 10px;
 `;
 
-export default function({ recipe }: IRecipeDetailsProps) {
+export default function DetailContainer({ selectedRecipe }: IRecipeDetailsProps) {
   return (
-    <RecipeDetailWrapper>
+    <DetailsWrapper>
       <StyledRecipeName component="h5" data-testid="recipe-name">
-        {recipe.recipeName}
+        {selectedRecipe.recipeName}
       </StyledRecipeName>
       <StepDetail>
-        <RecipeDetailText component="div" data-testid="recipe-count-and-date">
-          {`${recipe.directives.length} ${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`}
-          <VerticalDivider /> {format(recipe.updatedTimeMillis, TYPES.TIMESTAMP_MILLIS)}
-        </RecipeDetailText>
+        <DetailsText component="div" data-testid="recipe-count-and-date">
+          {`${selectedRecipe.directives.length} ${T.translate(
+            `${PREFIX}.tableHeaders.recipeStep`
+          )}`}
+          <VerticalDivider /> {format(selectedRecipe.updatedTimeMillis, TYPES.TIMESTAMP_MILLIS)}
+        </DetailsText>
       </StepDetail>
       <DescriptionDetail>
-        <RecipeDetailText component="p" data-testid="recipe-decription">
-          {recipe.description}
-        </RecipeDetailText>
+        <DetailsText component="p" data-testid="recipe-decription">
+          {selectedRecipe.description}
+        </DetailsText>
       </DescriptionDetail>
-      <DirectiveTable directives={recipe.directives}/>
-    </RecipeDetailWrapper>
+      <DirectiveTable directives={selectedRecipe.directives} />
+    </DetailsWrapper>
   );
 }

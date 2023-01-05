@@ -15,8 +15,8 @@
  */
 
 import { screen } from '@testing-library/dom';
-import { fireEvent, render } from '@testing-library/react';
-import RecipeDetails from 'components/RecipeDetails';
+import { render } from '@testing-library/react';
+import RecipeDetails from 'components/RecipeManagement/RecipeDetails';
 import React from 'react';
 import T from 'i18n-react';
 
@@ -24,7 +24,7 @@ const recipeDetailsMockData = {
   recipeId: {
     namespace: {
       name: 'default',
-      generation: 0,
+      generation: '0',
     },
     recipeId: 'c5e51202-808e-4ead-b61f-83f280f3fdac',
   },

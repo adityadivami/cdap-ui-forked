@@ -16,16 +16,16 @@
 
 import { screen } from '@testing-library/dom';
 import { fireEvent, render } from '@testing-library/react';
-import RecipeDrawerHeader from 'components/RecipeDetails/DrawerHeader';
+import RecipeDrawerHeader from 'components/RecipeManagement/RecipeDetails/DrawerHeader';
 import React from 'react';
 
 describe('Test RecipeDrawerHeader Component', () => {
   it('should render the RecipeDrawerHeader Component ', () => {
-    const mockCloseFunction = jest.fn()
+    const mockCloseFunction = jest.fn();
     render(<RecipeDrawerHeader onCloseDetail={mockCloseFunction} />);
     const closePanel = screen.getByTestId(/close-detail-icon-button/i);
     fireEvent.click(closePanel);
     expect(closePanel).toBeInTheDocument();
-    expect(mockCloseFunction).toBeCalled()
+    expect(mockCloseFunction).toBeCalled();
   });
 });

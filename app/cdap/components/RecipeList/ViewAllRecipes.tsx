@@ -23,8 +23,8 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import RecipeDetails from 'components/RecipeDetails';
-import { IRecipeData } from 'components/RecipeDetails';
+import RecipeDetails from 'components/RecipeManagement/RecipeDetails';
+import { IRecipe } from 'components/RecipeList/types';
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
@@ -32,7 +32,7 @@ const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
 const ViewAllRecipies = () => {
   const [showRecipesDrawer, setShowRecipesDrawer] = useState(false);
-  const [recipe, setRecipe] = useState<IRecipeData>();
+  const [recipe, setRecipe] = useState<IRecipe>();
   const viewRecipeHandler = (selectedObject: any) => {
     setRecipe(selectedObject);
     setShowRecipesDrawer(true);
