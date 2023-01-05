@@ -45,7 +45,10 @@ const ViewAllRecipies = () => {
   return (
     <>
       {showRecipesDrawer && (
-        <RecipeDetails recipe={recipe} onCloseDetail={() => setShowRecipesDrawer(false)} />
+        <RecipeDetails
+          selectedRecipe={recipe}
+          onCloseDetailDrawer={() => setShowRecipesDrawer(false)}
+        />
       )}
       <Box ml={4} m={2}>
         <Breadcrumbs separator="›" aria-label="breadcrumb">

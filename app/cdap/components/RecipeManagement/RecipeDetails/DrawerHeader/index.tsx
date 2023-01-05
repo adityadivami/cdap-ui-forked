@@ -22,10 +22,7 @@ import { Box, Button, IconButton, MenuItem, Popover, Typography } from '@materia
 import T from 'i18n-react';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-
-interface IDrawerHeaderProps {
-  onCloseDetail: () => void;
-}
+import { IDrawerHeaderProps } from 'components/RecipeManagement/types';
 
 const MainHeadWrapper = styled(Box)`
   margin-top: 20px;
@@ -44,12 +41,12 @@ const RecipeHeaderLabel = styled(Typography)`
   padding: 1px;
 `;
 
-const IconsWrapper = styled(Box)`
+const ActionsWrapper = styled(Box)`
   display: flex;
   align-items: center;
 `;
 
-const StyledCommonIconButton = styled(IconButton)`
+const StyledCloseButton = styled(IconButton)`
   padding: 12px;
 `;
 
@@ -75,7 +72,7 @@ const HeaderWithUnderline = styled(Box)`
   flex-direction: column;
 `;
 
-const StyledActionButton = styled(Button)`
+const StyledButton = styled(Button)`
   color: ${grey[600]};
   font-weight: 500;
   font-size: 14px;
@@ -98,7 +95,7 @@ const StyledMenuItem = styled(MenuItem)`
 
 const PREFIX = 'features.WranglerNewUI.RecipeDetails';
 
-export default function DrawerHeader({ onCloseDetail }: IDrawerHeaderProps) {
+const DrawerHeader = ({ onCloseDetailDrawer }: IDrawerHeaderProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -112,8 +109,8 @@ export default function DrawerHeader({ onCloseDetail }: IDrawerHeaderProps) {
         <HeaderWithUnderline>
           <RecipeHeaderLabel>{T.translate(`${PREFIX}.drawerHeader`)}</RecipeHeaderLabel>
         </HeaderWithUnderline>
-        <IconsWrapper>
-          <StyledActionButton
+        <ActionsWrapper>
+          <StyledButton
             data-testid="actions-applied-button"
             aria-describedby={id}
             variant="text"
@@ -122,7 +119,7 @@ export default function DrawerHeader({ onCloseDetail }: IDrawerHeaderProps) {
             {T.translate(`${PREFIX}.actions`)}
             {anchorEl && <ArrowDropUpIcon />}
             {anchorEl === null && <ArrowDropDownIcon />}
-          </StyledActionButton>
+          </StyledButton>
           <StyledPopover
             id={id}
             open={open}
@@ -138,11 +135,13 @@ export default function DrawerHeader({ onCloseDetail }: IDrawerHeaderProps) {
             <StyledMenuItem>{T.translate(`${PREFIX}.delete`)}</StyledMenuItem>
           </StyledPopover>
           <VerticalDivider />
-          <StyledCommonIconButton data-testid="close-detail-icon-button" onClick={onCloseDetail}>
+          <StyledCloseButton data-testid="close-detail-icon-button" onClick={onCloseDetailDrawer}>
             <StyledCloseIcon data-testid="close-recipe-detail" />
-          </StyledCommonIconButton>
-        </IconsWrapper>
+          </StyledCloseButton>
+        </ActionsWrapper>
       </HeadWrapper>
     </MainHeadWrapper>
   );
-}
+};
+
+export default DrawerHeader;

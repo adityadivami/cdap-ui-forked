@@ -22,7 +22,7 @@ import React from 'react';
 describe('Test RecipeDrawerHeader Component', () => {
   it('should render the RecipeDrawerHeader Component ', () => {
     const mockCloseFunction = jest.fn();
-    render(<RecipeDrawerHeader onCloseDetail={mockCloseFunction} />);
+    render(<RecipeDrawerHeader onCloseDetailDrawer={mockCloseFunction} />);
     const closePanel = screen.getByTestId(/close-detail-icon-button/i);
     fireEvent.click(closePanel);
     expect(closePanel).toBeInTheDocument();

@@ -19,12 +19,7 @@ import styled from 'styled-components';
 import { Container, Drawer } from '@material-ui/core';
 import DrawerHeader from 'components/RecipeManagement/RecipeDetails/DrawerHeader';
 import DetailContainer from 'components/RecipeManagement/RecipeDetails/DetailContainer';
-import { IRecipe } from 'components/RecipeList/types';
-
-interface IRecipeDetailsProps {
-  recipe: IRecipe;
-  onCloseDetail: () => void;
-}
+import { IRecipeDetailsProps } from 'components/RecipeManagement/types';
 
 const StyledDrawer = styled(Drawer)`
   & .MuiDrawer-paper {
@@ -39,13 +34,15 @@ const DrawerContainer = styled(Container)`
   padding-left: 30px;
 `;
 
-export default function RecipeDetails({ recipe, onCloseDetail }: IRecipeDetailsProps) {
+const RecipeDetails = ({ selectedRecipe, onCloseDetailDrawer }: IRecipeDetailsProps) => {
   return (
-    <StyledDrawer open={true} data-testid="select-column-panel" anchor="right">
-      <DrawerContainer role="presentation" data-testid="select-column-drawer">
-        <DrawerHeader onCloseDetail={onCloseDetail} />
-        <DetailContainer selectedRecipe={recipe} />
+    <StyledDrawer open={true} data-testid="selected-recipe-detail-drawer" anchor="right">
+      <DrawerContainer data-testid="selected-recipe-detail-container">
+        <DrawerHeader onCloseDetailDrawer={onCloseDetailDrawer} />
+        <DetailContainer selectedRecipe={selectedRecipe} />
       </DrawerContainer>
     </StyledDrawer>
   );
-}
+};
+
+export default RecipeDetails;

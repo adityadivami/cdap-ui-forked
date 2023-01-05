@@ -19,13 +19,9 @@ import styled from 'styled-components';
 import { Box, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
-import { IRecipe } from 'components/RecipeList/types';
 import { format, TYPES } from 'services/DataFormatter';
 import DirectiveTable from 'components/RecipeManagement/RecipeDetails/DirectivesTable';
-
-interface IRecipeDetailsProps {
-  selectedRecipe: IRecipe;
-}
+import { IRecipeDetailsProps } from 'components/RecipeManagement/types';
 
 const PREFIX = 'features.WranglerNewUI.RecipeDetails';
 
@@ -33,25 +29,14 @@ const DetailsWrapper = styled(Box)`
   margin-top: 19px;
 `;
 
-const StepsGridHead = styled(Typography)`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 150%;
-  color: ${grey[700]};
-`;
-
-const StyledRecipeName = styled(StepsGridHead)`
+const RecipeNameLabel = styled(Typography)`
   text-transform: capitalize;
   color: ${grey[900]};
   font-size: 16px;
   font-weight: 400;
 `;
 
-const StepDetail = styled(Box)`
-  margin: 20px 0 10px;
-`;
-
-const DescriptionDetail = styled(Box)`
+const DescriptionWrapper = styled(Box)`
   margin: 20px 0 10px;
 `;
 
@@ -71,26 +56,28 @@ const VerticalDivider = styled(Box)`
   margin: 0 10px;
 `;
 
-export default function DetailContainer({ selectedRecipe }: IRecipeDetailsProps) {
+const DetailContainer = ({ selectedRecipe }: IRecipeDetailsProps) => {
   return (
     <DetailsWrapper>
-      <StyledRecipeName component="h5" data-testid="recipe-name">
+      <RecipeNameLabel component="h5" data-testid="recipe-name">
         {selectedRecipe.recipeName}
-      </StyledRecipeName>
-      <StepDetail>
+      </RecipeNameLabel>
+      <DescriptionWrapper>
         <DetailsText component="div" data-testid="recipe-count-and-date">
           {`${selectedRecipe.directives.length} ${T.translate(
             `${PREFIX}.tableHeaders.recipeStep`
           )}`}
           <VerticalDivider /> {format(selectedRecipe.updatedTimeMillis, TYPES.TIMESTAMP_MILLIS)}
         </DetailsText>
-      </StepDetail>
-      <DescriptionDetail>
+      </DescriptionWrapper>
+      <DescriptionWrapper>
         <DetailsText component="p" data-testid="recipe-decription">
           {selectedRecipe.description}
         </DetailsText>
-      </DescriptionDetail>
+      </DescriptionWrapper>
       <DirectiveTable directives={selectedRecipe.directives} />
     </DetailsWrapper>
   );
-}
+};
+
+export default DetailContainer;

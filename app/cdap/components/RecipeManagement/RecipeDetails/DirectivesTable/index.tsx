@@ -36,8 +36,7 @@ const StyledTableHeader = styled(TableHeader)`
 
 const StyledTableHeadRow = styled(TableRow)`
   ${styledTableRowCSS}
-  background: #F5F5F5;
-  box-shadow: inset 0px -1px 0px rgb(0 0 0 / 12%);
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.12);
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 `;
@@ -63,13 +62,12 @@ const StyledTableBodyCell = styled(TableCell)`
 
 const PREFIX = 'features.WranglerNewUI.RecipeDetails';
 
-export default function DirecctivesTable({ directives }: { directives: string[] }) {
+const DirectivesTable = ({ directives }: { directives: string[] }) => {
   const getSerialNumber = (recipeStepIndex: number) => {
     if (recipeStepIndex < 10) {
       return `0${recipeStepIndex + 1}`;
-    } else {
-      return `${recipeStepIndex + 1}`;
     }
+    return `${recipeStepIndex + 1}`;
   };
 
   return (
@@ -98,4 +96,6 @@ export default function DirecctivesTable({ directives }: { directives: string[] 
       </TableBody>
     </Table>
   );
-}
+};
+
+export default DirectivesTable;
