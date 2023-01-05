@@ -82,19 +82,12 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   const onCreateRecipeError = (err) => {
-    if (err.response.message) {
-      setRecipeNameErrorData({
-        isRecipeNameError: true,
-        recipeNameErrorMessage: '',
-      });
-    } else {
-      setShowRecipeForm(false);
-      setSnackbar({
-        open: true,
-        isSuccess: false,
-        message: T.translate(`${PREFIX}.errorMessage`).toString(),
-      });
-    }
+    setShowRecipeForm(false);
+    setSnackbar({
+      open: true,
+      isSuccess: false,
+      message: err.response.message,
+    });
   };
 
   const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
