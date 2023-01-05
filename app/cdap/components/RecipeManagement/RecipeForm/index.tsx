@@ -34,6 +34,8 @@ import {
 
 export const CREATE_RECIPE = 'createRecipe';
 
+const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
+
 export default function RecipeForm({
   recipeFormData,
   isRecipeNameError,
@@ -61,8 +63,8 @@ export default function RecipeForm({
         <FormFieldWrapper>
           <StyledLabel data-testid="recipe-name-label" component="span">
             {recipeFormAction === CREATE_RECIPE
-              ? T.translate('features.WranglerNewUI.RecipeForm.labels.createRecipeNameLabel')
-              : T.translate('features.WranglerNewUI.RecipeForm.labels.editRecipeNameLabel')}
+              ? T.translate(`${PREFIX}.createRecipeNameLabel`)
+              : T.translate(`${PREFIX}.editRecipeNameLabel`)}
           </StyledLabel>
           <StyledTextField
             required
@@ -74,14 +76,14 @@ export default function RecipeForm({
             fullWidth
             onChange={(event: ChangeEvent<HTMLInputElement>) => onRecipeNameChange(event)}
             data-testid="recipe-name-field"
-            placeholder={T.translate('features.WranglerNewUI.RecipeForm.labels.namePlaceholder')}
+            placeholder={T.translate(`${PREFIX}.namePlaceholder`)}
             autoFocus={true}
           />
         </FormFieldWrapper>
         <FormFieldWrapper>
           <FormControl variant="outlined">
             <Label data-testid="recipe-description-label" component="span">
-              {T.translate('features.WranglerNewUI.RecipeForm.labels.description')}
+              {T.translate(`${PREFIX}.description`)}
             </Label>
             <StyledTextAreaAutosize
               required
@@ -92,9 +94,7 @@ export default function RecipeForm({
               onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
                 setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
               }
-              placeholder={T.translate(
-                'features.WranglerNewUI.RecipeForm.labels.descriptionPlaceholder'
-              )}
+              placeholder={T.translate(`${PREFIX}.descriptionPlaceholder`)}
             />
           </FormControl>
         </FormFieldWrapper>
@@ -106,7 +106,7 @@ export default function RecipeForm({
             data-testid="recipe-save-button"
             disabled={isSaveDisabled}
           >
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.save')}
+            {T.translate(`${PREFIX}.save`)}
           </SaveButton>
           <CancelButton
             variant="outlined"
@@ -114,7 +114,7 @@ export default function RecipeForm({
             onClick={() => onCancel()}
             data-testid="recipe-cancel-button"
           >
-            {T.translate('features.WranglerNewUI.RecipeForm.labels.cancel')}
+            {T.translate(`${PREFIX}.cancel`)}
           </CancelButton>
         </StyledFormButtonWrapper>
       </Form>
