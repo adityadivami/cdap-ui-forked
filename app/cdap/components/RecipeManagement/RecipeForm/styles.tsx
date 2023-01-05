@@ -54,9 +54,8 @@ export const StyledTextField = styled(TextField)`
     letter-spacing: 0.15px;
   }
   input::placeholder {
-      color: ${grey[600]};
-      opacity: 1;
-    }
+    color: ${grey[600]};
+    opacity: 1;
   }
 `;
 

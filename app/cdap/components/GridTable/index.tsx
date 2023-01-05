@@ -33,7 +33,6 @@ import {
   IRecords,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
-import { setStateFromCron } from 'components/PipelineScheduler/Store/ActionCreator';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
@@ -282,7 +281,7 @@ export default function GridTable() {
 
   const handleColumnSelect = (columnName) => {
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
-    setColumnType(gridData?.types[columnName] as string);
+    setColumnType(gridData?.types[columnName]);
   };
 
   useEffect(() => {

@@ -22,6 +22,8 @@ import { IRecipeFormData } from 'components/RecipeManagement/types';
 import RecipeForm, { CREATE_RECIPE } from 'components/RecipeManagement/RecipeForm';
 import { ICreateRecipeProps } from 'components/RecipeManagement/types';
 
+const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
+
 export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) {
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
     recipeName: '',
@@ -29,9 +31,11 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     directives: [],
   });
 
-  const [recipeNameErrorMessage, setRecipeNameErrorMessage] = useState<string>('');
-  const [isRecipeNameError, setIsRecipeNameError] = useState<boolean>(false);
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
+  const [recipeNameErrorData, setRecipeNameErrorData] = useState({
+    isRecipeNameError: false,
+    recipeNameErrorMessage: '',
+  });
 
   // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
@@ -42,13 +46,13 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       recipeFormData.description === '' ||
       recipeFormData.recipeName?.trim().length === 0 ||
       recipeFormData.description?.trim().length === 0 ||
-      isRecipeNameError
+      recipeNameErrorData.isRecipeNameError
     ) {
       setIsSaveDisabled(true);
     } else {
       setIsSaveDisabled(false);
     }
-  }, [recipeFormData, isRecipeNameError]);
+  }, [recipeFormData, recipeNameErrorData.isRecipeNameError]);
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,26 +69,30 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   const onCreateRecipeResponse = () => {
-    setIsRecipeNameError(false);
+    setRecipeNameErrorData({
+      isRecipeNameError: false,
+      recipeNameErrorMessage: '',
+    });
     setShowRecipeForm(false);
     setSnackbar({
       open: true,
       isSuccess: true,
-      message: `${recipeSteps.length} ${T.translate(
-        'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
-      )}`,
+      message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeSaveSuccessMessage`)}`,
     });
   };
 
   const onCreateRecipeError = (err) => {
     if (err.response.message) {
-      setIsRecipeNameError(true);
+      setRecipeNameErrorData({
+        isRecipeNameError: true,
+        recipeNameErrorMessage: '',
+      });
     } else {
       setShowRecipeForm(false);
       setSnackbar({
         open: true,
         isSuccess: false,
-        message: T.translate('features.WranglerNewUI.RecipeForm.labels.errorMessage').toString(),
+        message: T.translate(`${PREFIX}.errorMessage`).toString(),
       });
     }
   };
@@ -93,19 +101,25 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     const recipeNameRegEx = /^[a-z\d\s]+$/i;
     setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
     if (event.target.value && !recipeNameRegEx.test(event.target.value)) {
-      setRecipeNameErrorMessage(
-        T.translate('features.WranglerNewUI.RecipeForm.labels.validationErrorMessage').toString()
-      );
-      setIsRecipeNameError(true);
+      setRecipeNameErrorData({
+        isRecipeNameError: true,
+        recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
+      });
     } else {
-      setIsRecipeNameError(false);
+      setRecipeNameErrorData({
+        isRecipeNameError: false,
+        recipeNameErrorMessage: '',
+      });
       validateRecipeNameExists.current(event.target.value);
     }
   };
 
   const onCancel = () => {
     setShowRecipeForm(false);
-    setIsRecipeNameError(false);
+    setRecipeNameErrorData({
+      isRecipeNameError: false,
+      recipeNameErrorMessage: '',
+    });
   };
 
   const onGetRecipeByNameError = (err, recipeName) => {
@@ -113,7 +127,10 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       err.statusCode === 404 &&
       err.message === `recipe with name '${recipeName}' does not exist`
     ) {
-      setIsRecipeNameError(false);
+      setRecipeNameErrorData({
+        isRecipeNameError: false,
+        recipeNameErrorMessage: '',
+      });
     }
   };
 
@@ -126,18 +143,18 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   );
 
   const onGetRecipeByNameResponse = () => {
-    setIsRecipeNameError(true);
-    setRecipeNameErrorMessage(
-      T.translate('features.WranglerNewUI.RecipeForm.labels.sameNameErrorMessage').toString()
-    );
+    setRecipeNameErrorData({
+      isRecipeNameError: true,
+      recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+    });
   };
 
   return (
     <>
       <RecipeForm
         recipeFormData={recipeFormData}
-        isRecipeNameError={isRecipeNameError}
-        recipeNameErrorMessage={recipeNameErrorMessage}
+        isRecipeNameError={recipeNameErrorData.isRecipeNameError}
+        recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
         onRecipeNameChange={onRecipeNameChange}
         onFormSubmit={onFormSubmit}
         setRecipeFormData={setRecipeFormData}
