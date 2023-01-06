@@ -13,6 +13,7 @@
  *  License for the specific language governing permissions and limitations under
  *  the License.
  */
+
 /**
  * @param  {string} millisecondsTime
  * @return {string} This function is used convert milliseconds to 12 October, 4:30PM date format

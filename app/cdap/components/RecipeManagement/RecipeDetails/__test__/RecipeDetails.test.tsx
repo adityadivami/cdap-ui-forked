@@ -40,9 +40,7 @@ describe('Test RecipeDetails Component', () => {
   const PREFIX = 'features.WranglerNewUI.RecipeDetails';
 
   beforeEach(() => {
-    render(
-      <RecipeDetails selectedRecipe={recipeDetailsMockData} onCloseDetailDrawer={jest.fn()} />
-    );
+    render(<RecipeDetails selectedRecipe={recipeDetailsMockData} />);
   });
 
   it('should check if the recipe name is as expected', () => {

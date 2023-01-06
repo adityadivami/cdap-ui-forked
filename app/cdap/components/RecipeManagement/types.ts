@@ -18,9 +18,4 @@ import { IRecipe } from 'components/RecipeList/types';
 
 export interface IRecipeDetailsProps {
   selectedRecipe: IRecipe;
-  onCloseDetailDrawer?: () => void;
-}
-
-export interface IDrawerHeaderProps {
-  onCloseDetailDrawer: () => void;
 }

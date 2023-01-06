@@ -62,7 +62,8 @@ const Divider = styled.div`
 
 const DrawerContainer = styled(Container)`
   height: 100%;
-  padding: 0px 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const DrawerHeader = styled.header`
@@ -70,8 +71,8 @@ const DrawerHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 15px;
-  padding-right: 18px;
+  padding-left: 20px;
+  padding-right: 20px;
 `;
 
 const HeaderActions = styled(Box)`
@@ -118,7 +119,6 @@ export default function({
             <Label data-testid="widget-heading-text" component="span">
               {headingText}
             </Label>
-            <img src="/cdap_assets/img/underline" />
           </LabelContainer>
         </HeaderActions>
         <HeaderActions>

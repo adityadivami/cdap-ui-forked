@@ -25,31 +25,56 @@ import Typography from '@material-ui/core/Typography';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import RecipeDetails from 'components/RecipeManagement/RecipeDetails';
 import { IRecipe } from 'components/RecipeList/types';
+import DrawerWidget from 'components/common/DrawerWidget';
+import RecipeHeaderActionTemplate from 'components/RecipeManagement/RecipeDetails/HeaderActionTemplate';
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
+const VIEW_RECIPE = 'viewRecipe';
+
 const ViewAllRecipies = () => {
-  const [showRecipesDrawer, setShowRecipesDrawer] = useState(false);
+  const [actionType, setActionType] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
   const viewRecipeHandler = (selectedObject: any) => {
+    toggleOpen();
     setRecipe(selectedObject);
-    setShowRecipesDrawer(true);
+    setActionType(VIEW_RECIPE);
   };
 
   const handleEditRecipe = (selectedObject: any) => {
     // To do : Integrate Edit recipe details panel
   };
 
+  const toggleOpen = () => setIsOpen(!isOpen);
+
+  const renderRecipeDetailComponent = () => <RecipeDetails selectedRecipe={recipe} />;
+  const renderRecipeDetailHeaderActionTemplate = () => <RecipeHeaderActionTemplate />;
+  const renderEditRecipeComponent = () => <></>;
+
   return (
     <>
-      {showRecipesDrawer && (
-        <RecipeDetails
-          selectedRecipe={recipe}
-          onCloseDetailDrawer={() => setShowRecipesDrawer(false)}
-        />
-      )}
+      <DrawerWidget
+        anchor="right"
+        closeClickHandler={toggleOpen}
+        headingText={
+          actionType === VIEW_RECIPE
+            ? T.translate(`${PREFIX}.recipeDetails`)
+            : T.translate(`${PREFIX}.editRecipe`)
+        }
+        showBackIcon={actionType === VIEW_RECIPE ? false : true}
+        showDivider={true}
+        open={isOpen}
+        headerActionTemplate={
+          actionType === VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
+        }
+        dataTestId={'apply-recipe-drawer-widget'}
+        children={
+          actionType === VIEW_RECIPE ? renderRecipeDetailComponent() : renderEditRecipeComponent()
+        }
+      />
       <Box ml={4} m={2}>
         <Breadcrumbs separator="›" aria-label="breadcrumb">
           <Link underline="hover" key="2" color="inherit" to={redirectToObj}>

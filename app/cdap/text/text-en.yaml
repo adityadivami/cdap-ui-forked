@@ -3521,15 +3521,6 @@ features:
       gridTable:
         subtitle: Remove some recipe steps to view some data
         title: No rows left in this sample
-    RecipeDetails:
-      actions: Actions
-      delete: Delete
-      download: Download
-      drawerHeader: Recipe details
-      edit: Edit
-      tableHeaders:
-        recipeStep: Recipe steps 
-        serialNo: S.No.
     Snackbar:
       labels:
         failure: Failure
@@ -3541,6 +3532,9 @@ features:
           deleteConfirmation: Are you sure you want to delete the recipe *_{recipeName}_*?
           deleteError: There was a problem deleting the recipe
           deleteTitle: Delete recipe
+          tableHeaders:
+            recipeStep: Recipe steps 
+            serialNo: S.No.    
         createdDate: Created date
         emptyListMessage: No Recipes created in this namespace
         home: Home        
@@ -3551,7 +3545,13 @@ features:
         steps: Steps
         updated: Last updated
         view: View
-        viewAll: View All        
+        viewAll: View All    
+        actions: Actions
+        delete: Delete
+        download: Download
+        recipeDetails: Recipe details
+        edit: Edit
+
 
     
 ...

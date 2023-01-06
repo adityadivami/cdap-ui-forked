@@ -60,7 +60,7 @@ const StyledTableBodyCell = styled(TableCell)`
   line-height: 24px;
 `;
 
-const PREFIX = 'features.WranglerNewUI.RecipeDetails';
+const PREFIX = 'features.WranglerNewUI.Recipe.common';
 
 const DirectivesTable = ({ directives }: { directives: string[] }) => {
   const getSerialNumber = (recipeStepIndex: number) => {
