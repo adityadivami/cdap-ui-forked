@@ -14,7 +14,15 @@
  * the License.
  */
 
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  Drawer,
+  Typography,
+  Container,
+} from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import MyDataPrepApi from 'api/dataprep';
 import Breadcrumb from 'components/Breadcrumb';
@@ -33,6 +41,7 @@ import {
   IRecords,
 } from 'components/GridTable/types';
 import NoRecordScreen from 'components/NoRecordScreen';
+import { setStateFromCron } from 'components/PipelineScheduler/Store/ActionCreator';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import { IValues } from 'components/WrangleHome/Components/OngoingDataExploration/types';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
@@ -41,13 +50,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { flatMap } from 'rxjs/operators';
 import { objectQuery } from 'services/helpers';
-
 import styled from 'styled-components';
-
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import { useLocation } from 'react-router';
+import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import { grey } from '@material-ui/core/colors';
+import CreateRecipe from 'components/RecipeManagement/CreateRecipe';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
@@ -57,6 +67,50 @@ const GridTableWrapper = styled(Box)`
   max-width: 100%;
   overflow-x: auto;
   max-height: 76vh;
+`;
+
+const StyledPaper = styled(Drawer)`
+  & .MuiDrawer-paper {
+    top: 46px;
+    height: calc(100vh - 47px);
+    width: 500px;
+  }
+`;
+
+const StyledHeadingTitle = styled(Typography)`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+  color: ${grey[900]};
+`;
+
+const StyledHeader = styled.header`
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0px;
+  padding-right: 0px;
+`;
+
+const CloseIconWrapper = styled(Box)`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledCloseIcon = styled(CloseRoundedIcon)`
+  cursor: pointer;
+`;
+
+const StyledDrawerContainer = styled(Container)`
+  width: 460px;
+  height: calc(100vh - 225px);
+  height: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  overflow-y: scroll;
 `;
 
 export default function GridTable() {
@@ -86,6 +140,7 @@ export default function GridTable() {
   const [snackbarState, setSnackbar] = useSnackbar();
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
+  const [showRecipeForm, setShowRecipeForm] = useState(true);
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -283,7 +338,7 @@ export default function GridTable() {
 
   const handleColumnSelect = (columnName) => {
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
-    setColumnType(gridData?.types[columnName]);
+    setColumnType(gridData?.types[columnName] as string);
   };
 
   useEffect(() => {
@@ -322,6 +377,28 @@ export default function GridTable() {
             title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
             subtitle={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.subtitle')}
           />
+        )}
+        {showRecipeForm && (
+          <>
+            <StyledPaper
+              anchor="right"
+              open={showRecipeForm}
+              data-testid="edit-recipe-drawer-widget-parent"
+            >
+              <StyledDrawerContainer role="presentation">
+                <StyledHeader>
+                  <StyledHeadingTitle data-testid="drawer-widget-heading">
+                    {T.translate('features.WranglerNewUI.RecipeForm.labels.saveRecipe')}
+                  </StyledHeadingTitle>
+
+                  <CloseIconWrapper>
+                    <StyledCloseIcon color="action" data-testid="drawer-widget-close-round-icon" />
+                  </CloseIconWrapper>
+                </StyledHeader>
+                <CreateRecipe setShowRecipeForm={setShowRecipeForm} setSnackbar={setSnackbar} />
+              </StyledDrawerContainer>
+            </StyledPaper>
+          </>
         )}
         {showGridTable && (
           <TableWrapper>

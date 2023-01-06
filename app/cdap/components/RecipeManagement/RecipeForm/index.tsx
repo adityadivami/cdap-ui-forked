@@ -57,7 +57,9 @@ export default function RecipeForm({
       : EditRecipeFormButtonWrapper;
 
   const handleNameFieldKeyPress = (event) => {
-    !recipeNameRegEx.test(event.target.value) && event.preventDefault();
+    console.log(event.srcElememt.value);
+    const newchar = String.fromCharCode(event.charCode || event.keyCode);
+    !recipeNameRegEx.test(newchar) && event.preventDefault();
   };
   return (
     <>
