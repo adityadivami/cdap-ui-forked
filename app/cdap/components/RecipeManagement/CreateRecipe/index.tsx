@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { FormEvent, ChangeEvent, useEffect, useState, useRef } from 'react';
+import React, { FormEvent, ChangeEvent, useEffect, useState, useRef, useCallback } from 'react';
 import T from 'i18n-react';
 import { getRecipeByName, createRecipe } from 'components/RecipeManagement/CreateRecipe/services';
 import { debounce } from 'lodash';
@@ -23,6 +23,7 @@ import RecipeForm, { CREATE_RECIPE } from 'components/RecipeManagement/RecipeFor
 import { ICreateRecipeProps } from 'components/RecipeManagement/types';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
+const recipeNameRegEx = /^[a-z\d\s]+$/i;
 
 export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) {
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
@@ -91,20 +92,8 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const recipeNameRegEx = /^[a-z\d\s]+$/i;
     setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
-    if (event.target.value && !recipeNameRegEx.test(event.target.value)) {
-      setRecipeNameErrorData({
-        isRecipeNameError: true,
-        recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
-      });
-    } else {
-      setRecipeNameErrorData({
-        isRecipeNameError: false,
-        recipeNameErrorMessage: '',
-      });
-      validateRecipeNameExists.current(event.target.value);
-    }
+    validateRecipeNameExists.current(event.target.value);
   };
 
   const onCancel = () => {
@@ -129,8 +118,19 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
 
   const validateRecipeNameExists = useRef(
     debounce((recipeName: string) => {
-      if (recipeName) {
-        getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError);
+      if (recipeName && !recipeNameRegEx.test(recipeName)) {
+        setRecipeNameErrorData({
+          isRecipeNameError: true,
+          recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
+        });
+      } else {
+        setRecipeNameErrorData({
+          isRecipeNameError: false,
+          recipeNameErrorMessage: '',
+        });
+        if (recipeName) {
+          getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError);
+        }
       }
     }, 500)
   );
