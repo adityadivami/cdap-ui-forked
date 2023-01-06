@@ -14,18 +14,20 @@
  * the License.
  */
 
+import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import React from 'react';
+import { grey } from '@material-ui/core/colors';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import SaveAltRoundedIcon from '@material-ui/icons/SaveAltRounded';
 import Breadcrumb from 'components/Breadcrumb';
-import styled from 'styled-components';
-import { grey } from '@material-ui/core/colors';
-import { Typography } from '@material-ui/core';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import T from 'i18n-react';
+import React from 'react';
+import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import styled from 'styled-components';
 
-export const CONNECTION_LIST_BREADCRUMB_OPTIONS = [
+const CONNECTION_LIST_BREADCRUMB_OPTIONS = [
   {
     link: `/ns/${getCurrentNamespace()}/wrangle`,
     label: T.translate('features.WranglerNewUI.Breadcrumb.labels.wrangleHome').toString(),
@@ -34,6 +36,10 @@ export const CONNECTION_LIST_BREADCRUMB_OPTIONS = [
     label: T.translate('features.WranglerNewUI.Breadcrumb.labels.connectionsList').toString(),
   },
 ];
+
+interface ISubHeader {
+  selectedConnection: string;
+}
 
 const AddConnectionIcon = styled(AddCircleOutlineOutlinedIcon)`
   font-size: x-large;
@@ -47,6 +53,12 @@ const BreadcrumbContainer = styled(Box)`
   height: 48px;
   align-items: center;
   padding-right: 30px;
+`;
+
+const CustomizedLink = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 const FlexContainer = styled(Box)`
@@ -77,19 +89,28 @@ const TypographyLabel = styled(Typography)`
   line-height: 21px;
 `;
 
-export default function SubHeader() {
+export default function SubHeader({ selectedConnection }: ISubHeader) {
+  const location = useLocation();
+
   return (
     <BreadcrumbContainer data-testid="breadcrumb-container-parent">
-      <Box>
-        <Breadcrumb breadcrumbsList={CONNECTION_LIST_BREADCRUMB_OPTIONS} />
-      </Box>
+      <Breadcrumb breadcrumbsList={CONNECTION_LIST_BREADCRUMB_OPTIONS} />
       <FeaturesContainer>
-        <ImportDataContainer>
-          <AddConnectionIcon />
-          <TypographyLabel component="span">
-            {T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}
-          </TypographyLabel>
-        </ImportDataContainer>
+        <CustomizedLink
+          to={{
+            pathname: `/ns/${getCurrentNamespace()}/connections/create`,
+            state: {
+              from: { addConnectionRequestFromNewUI: selectedConnection },
+            },
+          }}
+        >
+          <ImportDataContainer data-testid="sub-header-handle-add-connection">
+            <AddConnectionIcon />
+            <TypographyLabel component="span">
+              {T.translate('features.WranglerNewUI.AddConnections.referenceLabel')}
+            </TypographyLabel>
+          </ImportDataContainer>
+        </CustomizedLink>
         <ImportDataContainer>
           <SaveIcon />
           <TypographyLabel component="span">

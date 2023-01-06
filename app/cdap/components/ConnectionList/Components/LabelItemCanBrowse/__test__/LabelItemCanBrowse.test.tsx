@@ -14,23 +14,24 @@
  * the License.
  */
 
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Breadcrumb from 'components/ConnectionList/Components/SubHeader';
-import history from 'services/history';
-import { Router, Route } from 'react-router';
+import LabelItemCanBrowse from 'components/ConnectionList/Components/LabelItemCanBrowse/index';
 
-describe('renders Breadcrumb Component', () => {
-  render(
-    <Router history={history}>
-      <Route>
-        <Breadcrumb />
-      </Route>
-    </Router>
-  );
+describe('Test TabLabelCanBrowse Component', () => {
+  it('Should render TabLabelCanBrowse Component', () => {
+    render(
+      <LabelItemCanBrowse
+        icon={undefined}
+        myLabelRef={jest.fn()}
+        label={''}
+        count={0}
+        labelContainerTestId="test"
+        labelTestId="label-test"
+      />
+    );
 
-  it('should render the Breadcrumb component', () => {
-    const ele = screen.getByTestId('breadcrumb-container-parent');
-    expect(ele).toBeInTheDocument();
+    const labelContainerElement = screen.getAllByTestId(/test/i);
+    expect(labelContainerElement[0]).toBeInTheDocument();
   });
 });
