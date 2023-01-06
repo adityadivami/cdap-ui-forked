@@ -37,7 +37,7 @@ const recipeDetailsMockData = {
 };
 
 describe('Test RecipeDetails Component', () => {
-  const PREFIX = 'features.WranglerNewUI.RecipeDetails';
+  const PREFIX = 'features.WranglerNewUI.Recipe';
 
   beforeEach(() => {
     render(<RecipeDetails selectedRecipe={recipeDetailsMockData} />);
@@ -53,7 +53,7 @@ describe('Test RecipeDetails Component', () => {
     const recipeCountDateElement = screen.getByTestId(/recipe-count-and-date/i);
     expect(recipeCountDateElement).toBeInTheDocument();
     expect(recipeCountDateElement).toHaveTextContent(
-      `2 ${T.translate(`${PREFIX}.tableHeaders.recipeStep`)}`
+      `2 ${T.translate(`${PREFIX}.common.tableHeaders.recipeStep`)}`
     );
   });
 
