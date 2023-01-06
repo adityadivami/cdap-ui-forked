@@ -136,10 +136,9 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
           recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
         });
       } else {
-        setRecipeNameErrorData(noErrorState);
-        if (recipeName) {
-          getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError);
-        }
+        recipeName
+          ? getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError)
+          : setRecipeNameErrorData(noErrorState);
       }
     }, 500)
   );
