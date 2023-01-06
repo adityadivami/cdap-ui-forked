@@ -41,19 +41,43 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
-  useEffect(() => {
+  const handleSaveButtonMode = (formData = recipeFormData) => {
     if (
-      recipeFormData.recipeName === '' ||
-      recipeFormData.description === '' ||
-      recipeFormData.recipeName?.trim().length === 0 ||
-      recipeFormData.description?.trim().length === 0 ||
+      formData.recipeName === '' ||
+      formData.description === '' ||
+      formData.recipeName?.trim().length === 0 ||
+      formData.description?.trim().length === 0 ||
       recipeNameErrorData.isRecipeNameError
     ) {
       setIsSaveDisabled(true);
     } else {
       setIsSaveDisabled(false);
     }
-  }, [recipeFormData, recipeNameErrorData.isRecipeNameError]);
+  };
+
+  const handleRecipeFormData = (formData) => {
+    setRecipeFormData(formData);
+    handleSaveButtonMode(formData);
+  };
+
+  useEffect(() => {
+    handleSaveButtonMode();
+  }, [recipeNameErrorData.isRecipeNameError]);
+
+  const onRecipeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleRecipeFormData({
+      ...recipeFormData,
+      recipeName: event.target.value,
+    });
+    validateRecipeNameExists.current(event.target.value);
+  };
+
+  const onRecipeDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleRecipeFormData({
+      ...recipeFormData,
+      description: event.target.value,
+    });
+  };
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -89,11 +113,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       isSuccess: false,
       message: err.response.message,
     });
-  };
-
-  const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
-    validateRecipeNameExists.current(event.target.value);
   };
 
   const onCancel = () => {
@@ -154,6 +173,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         onCancel={onCancel}
         isSaveDisabled={isSaveDisabled}
         recipeFormAction={CREATE_RECIPE}
+        onRecipeDescriptionChange={onRecipeDescriptionChange}
       />
     </>
   );
