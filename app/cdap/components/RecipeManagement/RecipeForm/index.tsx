@@ -33,6 +33,7 @@ import {
 } from 'components/RecipeManagement/RecipeForm/styles';
 
 export const CREATE_RECIPE = 'createRecipe';
+const recipeNameRegEx = /^[a-z\d\s]+$/i;
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 
@@ -55,6 +56,9 @@ export default function RecipeForm({
       ? CreateRecipeFormButtonWrapper
       : EditRecipeFormButtonWrapper;
 
+  const handleNameFieldKeyPress = (event) => {
+    !recipeNameRegEx.test(event.target.value) && event.preventDefault();
+  };
   return (
     <>
       <Form
@@ -79,6 +83,7 @@ export default function RecipeForm({
             data-testid="recipe-name-field"
             placeholder={T.translate(`${PREFIX}.namePlaceholder`)}
             autoFocus={true}
+            onKeyDown={handleNameFieldKeyPress}
           />
         </FormFieldWrapper>
         <FormFieldWrapper>
