@@ -56,11 +56,10 @@ export default function RecipeForm({
       ? CreateRecipeFormButtonWrapper
       : EditRecipeFormButtonWrapper;
 
-  const handleNameFieldKeyPress = (event) => {
-    console.log(event.srcElememt.value);
-    const newchar = String.fromCharCode(event.charCode || event.keyCode);
-    !recipeNameRegEx.test(newchar) && event.preventDefault();
-  };
+  // const handleNameFieldKeyPress = (event) => {
+  //   const newchar = String.fromCharCode(event.charCode || event.keyCode);
+  //   !recipeNameRegEx.test(newchar) && event.preventDefault();
+  // };
   return (
     <>
       <Form
@@ -85,7 +84,7 @@ export default function RecipeForm({
             data-testid="recipe-name-field"
             placeholder={T.translate(`${PREFIX}.namePlaceholder`)}
             autoFocus={true}
-            onKeyDown={handleNameFieldKeyPress}
+            // onKeyDown={handleNameFieldKeyPress}
           />
         </FormFieldWrapper>
         <FormFieldWrapper>
