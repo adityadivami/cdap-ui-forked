@@ -33,7 +33,6 @@ import {
 } from 'components/RecipeManagement/RecipeForm/styles';
 
 export const CREATE_RECIPE = 'createRecipe';
-
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 
 export default function RecipeForm({
@@ -42,10 +41,10 @@ export default function RecipeForm({
   recipeNameErrorMessage,
   onRecipeNameChange,
   onFormSubmit,
-  setRecipeFormData,
   onCancel,
   isSaveDisabled,
   recipeFormAction,
+  onRecipeDescriptionChange,
 }: IRecipeFormProps) {
   const StyledLabel = isRecipeNameError ? ErrorLabel : Label;
   const StyledTextField = isRecipeNameError ? ErrorTextField : NormalTextField;
@@ -91,9 +90,9 @@ export default function RecipeForm({
               minRows={3}
               data-testid="recipe-description-field"
               defaultValue={recipeFormData.description}
-              onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
-                setRecipeFormData({ ...recipeFormData, ['description']: event.target.value })
-              }
+              onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
+                onRecipeDescriptionChange(event);
+              }}
               placeholder={T.translate(`${PREFIX}.descriptionPlaceholder`)}
             />
           </FormControl>

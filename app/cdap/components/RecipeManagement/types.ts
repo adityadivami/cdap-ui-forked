@@ -27,6 +27,7 @@ export interface IRecipeFormProps {
   onCancel: () => void;
   isSaveDisabled: boolean;
   recipeFormAction: string;
+  onRecipeDescriptionChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export interface IRecipeFormData {

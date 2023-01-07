@@ -39,7 +39,8 @@ describe('Test Recipe Form Component', () => {
         onCancel={mockOnCancel}
         isSaveDisabled={false}
         recipeFormAction={'createRecipe'}
-      />
+        onRecipeDescriptionChange={jest.fn()}  
+       />
     );
   });
 

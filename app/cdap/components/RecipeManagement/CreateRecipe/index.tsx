@@ -25,6 +25,11 @@ import { ICreateRecipeProps } from 'components/RecipeManagement/types';
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
 
+const noErrorState = {
+  isRecipeNameError: false,
+  recipeNameErrorMessage: '',
+};
+
 export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) {
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
     recipeName: '',
@@ -33,27 +38,48 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   });
 
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
-  const [recipeNameErrorData, setRecipeNameErrorData] = useState({
-    isRecipeNameError: false,
-    recipeNameErrorMessage: '',
-  });
+  const [recipeNameErrorData, setRecipeNameErrorData] = useState(noErrorState);
 
   // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
-  useEffect(() => {
+  const handleSaveButtonMode = (formData = recipeFormData) => {
     if (
-      recipeFormData.recipeName === '' ||
-      recipeFormData.description === '' ||
-      recipeFormData.recipeName?.trim().length === 0 ||
-      recipeFormData.description?.trim().length === 0 ||
+      formData.recipeName === '' ||
+      formData.description === '' ||
+      formData.recipeName?.trim().length === 0 ||
+      formData.description?.trim().length === 0 ||
       recipeNameErrorData.isRecipeNameError
     ) {
       setIsSaveDisabled(true);
     } else {
       setIsSaveDisabled(false);
     }
-  }, [recipeFormData, recipeNameErrorData.isRecipeNameError]);
+  };
+
+  const handleRecipeFormData = (formData) => {
+    setRecipeFormData(formData);
+    handleSaveButtonMode(formData);
+  };
+
+  useEffect(() => {
+    handleSaveButtonMode();
+  }, [recipeNameErrorData.isRecipeNameError]);
+
+  const onRecipeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleRecipeFormData({
+      ...recipeFormData,
+      recipeName: event.target.value,
+    });
+    validateRecipeNameExists.current(event.target.value);
+  };
+
+  const onRecipeDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleRecipeFormData({
+      ...recipeFormData,
+      description: event.target.value,
+    });
+  };
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -70,10 +96,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   const onCreateRecipeResponse = () => {
-    setRecipeNameErrorData({
-      isRecipeNameError: false,
-      recipeNameErrorMessage: '',
-    });
     setShowRecipeForm(false);
     setSnackbar({
       open: true,
@@ -91,17 +113,8 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     });
   };
 
-  const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
-    validateRecipeNameExists.current(event.target.value);
-  };
-
   const onCancel = () => {
     setShowRecipeForm(false);
-    setRecipeNameErrorData({
-      isRecipeNameError: false,
-      recipeNameErrorMessage: '',
-    });
   };
 
   const onGetRecipeByNameError = (err, recipeName) => {
@@ -109,10 +122,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       err.statusCode === 404 &&
       err.message === `recipe with name '${recipeName}' does not exist`
     ) {
-      setRecipeNameErrorData({
-        isRecipeNameError: false,
-        recipeNameErrorMessage: '',
-      });
+      setRecipeNameErrorData(noErrorState);
     }
   };
 
@@ -124,22 +134,19 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
           recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
         });
       } else {
-        setRecipeNameErrorData({
-          isRecipeNameError: false,
-          recipeNameErrorMessage: '',
-        });
-        if (recipeName) {
-          getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError);
-        }
+        recipeName
+          ? getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError)
+          : setRecipeNameErrorData(noErrorState);
       }
     }, 500)
   );
 
   const onGetRecipeByNameResponse = () => {
-    setRecipeNameErrorData({
-      isRecipeNameError: true,
-      recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
-    });
+    !recipeNameErrorData.isRecipeNameError &&
+      setRecipeNameErrorData({
+        isRecipeNameError: true,
+        recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+      });
   };
 
   return (
@@ -154,6 +161,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         onCancel={onCancel}
         isSaveDisabled={isSaveDisabled}
         recipeFormAction={CREATE_RECIPE}
+        onRecipeDescriptionChange={onRecipeDescriptionChange}
       />
     </>
   );
