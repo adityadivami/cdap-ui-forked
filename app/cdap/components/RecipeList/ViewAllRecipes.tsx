@@ -61,7 +61,7 @@ const ViewAllRecipies = () => {
     setShowEditRecipePanel(true);
   };
 
-  const onCloseClick = () => {
+  const onClose = () => {
     setShowEditRecipePanel(false);
   };
 
@@ -102,8 +102,8 @@ const ViewAllRecipies = () => {
       </Box>
       <EditRecipe
         openDrawer={showEditRecipePanel}
-        onCloseClick={onCloseClick}
-        onCancel={onCancel}
+        onCloseClick={onClose}
+        onCancelClick={onCancel}
         recipeData={recipeData}
         setRecipeFormOpen={setShowEditRecipePanel}
         setSnackbar={setSnackbar}

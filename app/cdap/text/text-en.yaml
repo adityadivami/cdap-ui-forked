@@ -3533,8 +3533,8 @@ features:
         descriptionPlaceholder: Input a description to identify it later
         edit: Edit
         editFormTitle: Edit Recipe
+        editRecipeNameLabel: Name of recipe
         errorMessage: Something went wrong!
-        name: Name of new recipe
         namePlaceholder: Input a name to identify it later
         recipeSaveSuccessMessage: Steps successfully saved as a recipe!
         sameNameErrorMessage: Another recipe with same name exists. Please input another name

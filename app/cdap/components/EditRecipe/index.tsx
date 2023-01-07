@@ -76,10 +76,19 @@ const StyledEditFormWrapper = styled.div`
   margin-top: 30px;
 `;
 
+const recipeNameRegEx = /^[a-z\d\s]+$/i;
+const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
+export const EDIT_RECIPE = 'editRecipe';
+
+const noErrorState = {
+  isRecipeNameError: false,
+  recipeNameErrorMessage: '',
+};
+
 export default function({
   openDrawer,
   onCloseClick,
-  onCancel,
+  onCancelClick,
   recipeData,
   setSnackbar,
   setRecipeFormOpen,
@@ -89,62 +98,88 @@ export default function({
     description: '',
     directives: [],
   });
-  const [isNameError, setIsNameError] = useState(false);
 
-  const [recipeNameError, setRecipeNameError] = useState('');
-  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
+  const [recipeNameErrorData, setRecipeNameErrorData] = useState(noErrorState);
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   useEffect(() => {
     setRecipeFormData(recipeData);
   }, [recipeData]);
 
-  useEffect(() => {
+  const handleSaveButtonMode = (formData = recipeFormData) => {
     if (
-      recipeFormData.recipeName === '' ||
-      recipeFormData.description === '' ||
-      recipeFormData.recipeName?.trim().length === 0 ||
-      recipeFormData.description?.trim().length === 0 ||
-      isNameError
+      formData.recipeName === '' ||
+      formData.description === '' ||
+      formData.recipeName?.trim().length === 0 ||
+      formData.description?.trim().length === 0 ||
+      recipeNameErrorData.isRecipeNameError
     ) {
       setIsSaveDisabled(true);
     } else {
       setIsSaveDisabled(false);
     }
-  }, [recipeFormData, isNameError]);
-
-  const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const recipeNameRegEx = /^[a-z\d\s]+$/i;
-    setRecipeFormData({ ...recipeFormData, ['recipeName']: event.target.value });
-    if (event.target.value && !recipeNameRegEx.test(event.target.value)) {
-      setRecipeNameError(
-        T.translate('features.WranglerNewUI.RecipeForm.labels.validationErrorMessage').toString()
-      );
-      setIsNameError(true);
-    } else {
-      setIsNameError(false);
-      validateRecipeNameExists.current(event.target.value);
-    }
   };
 
+  useEffect(() => {
+    handleSaveButtonMode();
+  }, [recipeNameErrorData.isRecipeNameError]);
+
+  const handleRecipeFormData = (formData) => {
+    setRecipeFormData(formData);
+    handleSaveButtonMode(formData);
+  };
+
+  const onCancel = () => {
+    onCancelClick();
+    setRecipeNameErrorData(noErrorState); // TODO: do we need this line??
+  };
+
+
+  const onClose = () => {
+    onCloseClick();
+    setRecipeNameErrorData(noErrorState); 
+  }
+
+  const onRecipeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleRecipeFormData({
+      ...recipeFormData,
+      recipeName: event.target.value,
+    });
+    validateRecipeNameExists.current(event.target.value);
+  };
+
+
   const validateRecipeNameExists = useRef(
-    debounce((value: string) => {
-      if (value) {
-        getRecipeByName(value, onGetRecipeByNameResponse, onGetRecipeByNameError);
+    debounce((recipeName: string) => {
+      if (recipeName && !recipeNameRegEx.test(recipeName)) {
+        setRecipeNameErrorData({
+          isRecipeNameError: true,
+          recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
+        });
+      } else {
+        recipeName
+          ? getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError)
+          : setRecipeNameErrorData(noErrorState);
       }
     }, 500)
   );
 
   const onGetRecipeByNameResponse = () => {
-    setIsNameError(true);
-    setRecipeNameError(
-      T.translate('features.WranglerNewUI.RecipeForm.labels.sameNameErrorMessage').toString()
-    );
+    !recipeNameErrorData.isRecipeNameError &&
+      setRecipeNameErrorData({
+        isRecipeNameError: true,
+        recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+      });
   };
 
-  const onGetRecipeByNameError = (err, value) => {
-    if (err.statusCode === 404 && err.message === `recipe with name '${value}' does not exist`) {
-      setIsNameError(false);
+
+  const onGetRecipeByNameError = (err, recipeName) => {
+    if (
+      err.statusCode === 404 &&
+      err.message === `recipe with name '${recipeName}' does not exist`
+    ) {
+      setRecipeNameErrorData(noErrorState);
     }
   };
 
@@ -154,7 +189,7 @@ export default function({
   };
 
   const onUpdateRecipeResponse = () => {
-    setIsNameError(false);
+    setRecipeNameErrorData(noErrorState);
     setRecipeFormOpen(false);
     setSnackbar({
       open: true,
@@ -165,17 +200,14 @@ export default function({
     });
   };
 
+
   const onUpdateRecipeError = (err) => {
-    if (err.response.message) {
-      setIsNameError(true);
-    } else {
-      setRecipeFormOpen(true);
-      setSnackbar({
-        open: true,
-        isSuccess: false,
-        message: T.translate('features.WranglerNewUI.RecipeForm.labels.errorMessage').toString(),
-      });
-    }
+    setRecipeFormOpen(false);
+    setSnackbar({
+      open: true,
+      isSuccess: false,
+      message: err.response.message,
+    });
   };
 
   const onRecipeDataSave = (recipeFormData: IRecipeData) => {
@@ -192,26 +224,35 @@ export default function({
     );
   };
 
+  const onRecipeDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    handleRecipeFormData({
+      ...recipeFormData,
+      description: event.target.value,
+    });
+  };
+
   return (
     <>
       <StyledPaper anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
         <StyledDrawerContainer role="presentation">
           <StyledHeader>
             <DrawerWidgetHeading headingText="Edit Recipe" />
-            <CloseIconButton onClick={onCloseClick}>
+            <CloseIconButton onClick={onClose}>
               <StyledCloseIcon color="action" data-testid="drawer-widget-close-round-icon" />
             </CloseIconButton>
           </StyledHeader>
           <StyledEditFormWrapper>
             <RecipeForm
               recipeFormData={recipeFormData}
-              isNameError={isNameError}
-              recipeNameError={recipeNameError}
+              isRecipeNameError={recipeNameErrorData.isRecipeNameError}
+              recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
               onRecipeNameChange={onRecipeNameChange}
               onFormSubmit={onFormSubmit}
               setRecipeFormData={setRecipeFormData}
               onCancel={onCancel}
               isSaveDisabled={isSaveDisabled}
+              recipeFormAction={EDIT_RECIPE}
+              onRecipeDescriptionChange={onRecipeDescriptionChange}
             />
           </StyledEditFormWrapper>
         </StyledDrawerContainer>

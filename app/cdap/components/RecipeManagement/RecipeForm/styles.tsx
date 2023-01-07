@@ -17,7 +17,7 @@
 import styled, { css } from 'styled-components';
 import { TextField, Typography, Box } from '@material-ui/core';
 import { TextareaAutosize } from '@material-ui/core';
-import { grey, blue } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
 import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';
 
@@ -31,10 +31,10 @@ export const FormFieldWrapper = styled(Box)`
 export const Label = styled(Typography)`
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-  color: #5f6368;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  color: ${grey[700]};
 `;
 
 export const ErrorLabel = styled(Label)`
@@ -54,9 +54,8 @@ export const StyledTextField = styled(TextField)`
     letter-spacing: 0.15px;
   }
   input::placeholder {
-      color: ${grey[600]};
-      opacity: 1;
-    }
+    color: ${grey[600]};
+    opacity: 1;
   }
 `;
 
@@ -103,19 +102,23 @@ export const StyledButton = css`
 
 export const CancelButton = styled(PrimaryOutlinedButton)`
   ${StyledButton}
-  color: ${blue[500]};
+  color: #3367D6;
   width: 92px;
 `;
 
 export const SaveButton = styled(PrimaryContainedButton)`
   ${StyledButton}
   margin-right: 20px;
-  background-color: #3367d6;
+  background: #3367d6;
   width: 70px;
 `;
 
-export const FormButtonWrapper = styled.div`
+export const CreateRecipeFormButtonWrapper = styled.div`
   float: left;
-  padding-top: 63px;
   padding-bottom: 20px;
+  margin-top: 100px;
+`;
+
+export const EditRecipeFormButtonWrapper = styled(CreateRecipeFormButtonWrapper)`
+  margin-top: 348px;
 `;
