@@ -73,7 +73,7 @@ export default function RecipeForm({
             id="outlined-error-helper-text"
             helperText={isRecipeNameError ? recipeNameErrorMessage : ''}
             fullWidth
-            onChange={(event: ChangeEvent<HTMLInputElement>) => onRecipeNameChange(event)}
+            onChange={onRecipeNameChange}
             data-testid="recipe-name-field"
             placeholder={T.translate(`${PREFIX}.namePlaceholder`)}
             autoFocus={true}
@@ -90,9 +90,7 @@ export default function RecipeForm({
               minRows={3}
               data-testid="recipe-description-field"
               defaultValue={recipeFormData.description}
-              onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
-                onRecipeDescriptionChange(event);
-              }}
+              onChange={onRecipeDescriptionChange}
               placeholder={T.translate(`${PREFIX}.descriptionPlaceholder`)}
             />
           </FormControl>
