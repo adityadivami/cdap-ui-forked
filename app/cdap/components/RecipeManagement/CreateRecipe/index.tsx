@@ -43,6 +43,10 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
+  useEffect(() => {
+    handleSaveButtonMode();
+  }, [recipeNameErrorData.isRecipeNameError]);
+
   const handleSaveButtonMode = (formData = recipeFormData) => {
     if (
       formData.recipeName === '' ||
@@ -61,10 +65,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     setRecipeFormData(formData);
     handleSaveButtonMode(formData);
   };
-
-  useEffect(() => {
-    handleSaveButtonMode();
-  }, [recipeNameErrorData.isRecipeNameError]);
 
   const onRecipeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleRecipeFormData({
