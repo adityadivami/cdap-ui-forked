@@ -23,6 +23,7 @@ import styled from 'styled-components';
 
 interface IRecipeStepWidgetProps extends PropsWithChildren<unknown> {
   actionsOptions: IActionsOptions[];
+  enableActions: boolean;
   headingText: string;
   onClose: () => void;
   position: 'left' | 'right';
@@ -35,6 +36,7 @@ const Container = styled(Box)`
   padding-left: 20px;
   padding-right: 10px;
   overflow: scroll;
+  position: relative;
   border-left: 1px solid ${grey[300]};
 `;
 
@@ -98,18 +100,20 @@ export const getTestIdString = (label: string) =>
 
 /**
  *
+ * @param actionsOptions - the options to be rendered inside the actions dropdown, an array of objects
+ * @param children - the child component to be rendered as body in this panel
+ * @param enableActions - boolean value to enable or disable the Actions button in panel header
  * @param headingText - text to be displayed as header of the panel
  * @param onClose - handles event triggered when close icon is clicked
- * @param showDivider - when set to true, displays a divider to the left side of the close icon, generally used to separate close icon from other action icons
- * @param children - the child component to be rendered as body in this panel
- * @param actionsOptions - the options to be rendered inside the actions dropdown, an array of objects
  * @param position - the position of the panel, either left or right, based on how components are positioned in parent. by default position is right
+ * @param showDivider - when set to true, displays a divider to the left side of the close icon, generally used to separate close icon from other action icons
  * @returns InlayDrawerWidget component
  */
 
 export default function InlayDrawerWidget({
   actionsOptions,
   children,
+  enableActions,
   headingText,
   onClose,
   position = 'right',
@@ -124,7 +128,9 @@ export default function InlayDrawerWidget({
           {headingText}
         </DrawerWidgetTitleLabel>
         <HeaderIconWrapper>
-          {actionsOptions.length && <Menu dropdownOptions={actionsOptions} />}
+          {actionsOptions.length && (
+            <Menu dropdownOptions={actionsOptions} canPerformActions={enableActions} />
+          )}
           {showDivider && <Divider />}
           <StyledIconButton
             data-testid="drawer-widget-close-round-icon"

@@ -56,7 +56,12 @@ const StyledMenuItem = styled(MenuItem)`
   }
 `;
 
-export default function Menu({ dropdownOptions }: Record<string, IActionsOptions[]>) {
+interface IMenuProps {
+  dropdownOptions: IActionsOptions[];
+  canPerformActions: boolean;
+}
+
+export default function Menu({ dropdownOptions, canPerformActions }: IMenuProps) {
   const [open, setOpen] = useState(false);
 
   const anchorRef = useRef<HTMLButtonElement>(null);
@@ -99,6 +104,7 @@ export default function Menu({ dropdownOptions }: Record<string, IActionsOptions
         onClick={handleToggle}
         endIcon={<ArrowDropDownIcon />}
         data-testid="inlay-drawer-actions-menu"
+        disabled={!canPerformActions}
       >
         {T.translate(`${PREFIX}.buttonLabels.actions`)}
       </ActionButton>

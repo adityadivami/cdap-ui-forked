@@ -66,6 +66,7 @@ storiesOf('InlayDrawerWidget', module).add(
       open && (
         <InlayDrawerWidget
           actionsOptions={actionsOptions}
+          enableActions
           headingText={T.translate(`${PREFIX}.labels.headerText`).toString()}
           onClose={handleDrawerCloseIconClick}
           position={'left'}
