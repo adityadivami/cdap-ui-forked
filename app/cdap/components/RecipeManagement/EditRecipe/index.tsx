@@ -41,7 +41,7 @@ export default function({
   onCancelClick,
   setSnackbar,
   setRecipeFormOpen,
-  setUpdateRecipeList,
+  setRecipeListUpdated,
 }: IEditRecipeProps) {
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
     recipeName: '',
@@ -54,7 +54,7 @@ export default function({
 
   useEffect(() => {
     return () => {
-      setUpdateRecipeList(false);
+      setRecipeListUpdated(false);
     };
   }, []);
 
@@ -90,9 +90,6 @@ export default function({
     handleSaveButtonMode(formData);
   };
 
-  const onCancel = () => {
-    onCancelClick();
-  };
 
   const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleRecipeFormData({
@@ -147,7 +144,7 @@ export default function({
       isSuccess: true,
       message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeUpdateSuccessMessage`)}`,
     });
-    setUpdateRecipeList(true);
+    setRecipeListUpdated(true);
   };
 
   const onUpdateRecipeError = (err) => {
@@ -191,7 +188,7 @@ export default function({
             onRecipeNameChange={onRecipeNameChange}
             onFormSubmit={onFormSubmit}
             setRecipeFormData={setRecipeFormData}
-            onCancel={onCancel}
+            onCancel={onCancelClick}
             isSaveDisabled={isSaveDisabled}
             recipeFormAction={EDIT_RECIPE}
             onRecipeDescriptionChange={onRecipeDescriptionChange}

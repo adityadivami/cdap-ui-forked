@@ -42,5 +42,5 @@ export interface IEditRecipeProps {
   onCancelClick: () => void;
   setSnackbar: (value: ISnackbar) => void;
   setRecipeFormOpen: Dispatch<SetStateAction<boolean>>;
-  setUpdateRecipeList: Dispatch<SetStateAction<boolean>>;
+  setRecipeListUpdated: Dispatch<SetStateAction<boolean>>;
 }

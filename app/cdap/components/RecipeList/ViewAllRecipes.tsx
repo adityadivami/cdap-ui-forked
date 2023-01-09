@@ -42,7 +42,7 @@ const ViewAllRecipies = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [updateRecipeList, setUpdateRecipeList] = useState(false);
+ const [isRecipeListUpdated, setRecipeListUpdated] = useState(false);
 
   useEffect(() => {
     if (snackbarState.open) {
@@ -81,7 +81,7 @@ const ViewAllRecipies = () => {
         setRecipeFormOpen={toggleOpen}
         setSnackbar={setSnackbar}
         selectedRecipe={recipe}
-        setUpdateRecipeList={setUpdateRecipeList}
+        setRecipeListUpdated={setRecipeListUpdated}
       />
     );
 
@@ -136,7 +136,7 @@ const ViewAllRecipies = () => {
           sortOrder={SortOrder.DESCENDING}
           showPagination={true}
           enableSorting={true}
-          updateRecipeList={updateRecipeList}
+          isRecipeListUpdated={isRecipeListUpdated}
         />
       </Box>
       <Snackbar
