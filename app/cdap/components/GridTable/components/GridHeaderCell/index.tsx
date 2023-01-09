@@ -15,7 +15,7 @@
  */
 
 import { Box, Card, TableCell, Typography } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TypographyComponent from '../Typography';
 import { useGridHeaderCellStyles } from './styles';
 import { IGridHeaderCellProps } from './types';
@@ -42,6 +42,13 @@ export default function GridHeaderCell({
     datatype1: types.length > 0 ? (types[0] as string) : null,
     datatype2: types.length > 1 ? (types[1] as string) : null,
   });
+
+  useEffect(() => {
+    setData({
+      datatype1: types.length > 0 ? (types[0] as string) : null,
+      datatype2: types.length > 1 ? (types[1] as string) : null,
+    });
+  }, [types]);
 
   return (
     <TableCell

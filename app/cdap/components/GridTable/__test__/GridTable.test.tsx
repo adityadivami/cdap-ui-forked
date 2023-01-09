@@ -23,6 +23,7 @@ import rxjs from 'rxjs/operators';
 import history from 'services/history';
 import { mockForFlatMap, mockForGetWorkspace } from '../mock/mockDataForGrid';
 import * as BreadcrumbOptions from 'components/GridTable/utils';
+import { getAPIRequestPayload, applyDirectives } from '../services';
 
 describe('Testing Grid Table Component', () => {
   jest.spyOn(rxjs, 'flatMap' as any).mockImplementation((callback: any) => {
@@ -54,7 +55,8 @@ describe('Testing Grid Table Component', () => {
         </Switch>
       </Router>
     );
-    expect(container).toBeDefined();
-    expect(container.getByTestId('grid-table-container')).toBeInTheDocument();
+    getAPIRequestPayload('test', 'test');
+    const parentWrapper = screen.getByTestId(/grid-table-container/i);
+    expect(parentWrapper).toBeInTheDocument();
   });
 });

@@ -3454,6 +3454,29 @@ features:
         loadToGrid: Wrangle
         noConnections: No Connections to show
     GridPage:
+      addTransformationPanel:
+        addTransformation: Add Transformation Step
+        applyStep: Apply Step
+        columnsSelected: columns selected
+        columns: Columns
+        dataQuality: Data Quality
+        done: Done
+        function: Function
+        nullValues: Null Values
+        quickSelect: Quick select by clicking a column on the grid/columns panel
+        selectColumnHeading: Select Column to Apply This Function
+        selectMultiColumnsHeading: Select Column(s) to Apply This Function
+        selectColumn: Select column
+        selectMultiColumns: Select columns
+      selectColumnListPanel:
+        selectedColumnsCount:
+          0: "No columns selected"
+          1: "{context} column selected"
+          _: "{context} columns selected" 
+        no: No
+        noColumns: No columns to show
+        noMatchColumnDatatype: Selected directive supported datatype does not match which the column's datatype
+        zero: '0' 
       menuItems:
         divider: divider
         heading: heading
@@ -3490,9 +3513,6 @@ features:
               bytes: bytes
             menu:
               changeDatatype: Change data type
-    GridTable:
-      snackbarLabels:
-        datasetSuccess: Dataset loaded successfully 
     FooterPanel:
       labels:
         columns: columns
@@ -3503,6 +3523,10 @@ features:
         recipeSteps: Recipe Steps
         rows: rows
         zoomPercent100: 100%
+    GridTable:
+      snackbarLabels:
+        datasetSuccess: Dataset loaded successfully 
+        wrangeHome: home
     HomePage:
       labels:
         common:

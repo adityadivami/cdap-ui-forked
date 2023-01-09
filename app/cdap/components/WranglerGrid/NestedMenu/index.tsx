@@ -22,7 +22,7 @@ import { NestedMenuComponent } from 'components/common/MenuContainer';
 
 import { Dispatch, SetStateAction } from 'react';
 export interface INestedMenuProps {
-  submitMenuOption: (value: string, dataType: string[]) => void;
+  submitMenuOption: (value: string, dataType: string[], infoLink?: string) => void;
   columnType: string;
   menuOptions: IMenuItem[];
   title: string;
@@ -57,7 +57,7 @@ export default function({
         setAnchorElement((prev) => anchorElement);
         setMenuComponentOptions([menuItem?.options]);
       } else {
-        submitMenuOption(menuItem.value, menuItem.supportedDataType); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality
+        submitMenuOption(menuItem.value, menuItem.supportedDataType, menuItem.infoLink); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality
         setAnchorElement(null);
         menuToggleHandler(title);
       }
@@ -95,7 +95,7 @@ export default function({
           );
         }
       } else {
-        submitMenuOption(menuItem.value, menuItem.supportedDataType);
+        submitMenuOption(menuItem.value, menuItem.supportedDataType, menuItem.infoLink);
         setAnchorElement(null);
         menuToggleHandler(title);
       }

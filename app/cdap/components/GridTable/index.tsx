@@ -27,7 +27,11 @@ import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
 import {
+  IAddTransformationItem,
+  IApiPayload,
   IExecuteAPIResponse,
+  IGeneralStatistics,
+  IGridParams,
   IHeaderNamesList,
   IParams,
   IRecords,
@@ -48,6 +52,12 @@ import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import { useLocation } from 'react-router';
+import { NO_INPUT_REQUIRED_TRANSFORMATION } from './constants';
+import { getDirective } from 'components/WranglerGrid/AddTransformationPanel/utils';
+import { applyDirectives, getAPIRequestPayload } from './services';
+import AddTransformationPanel from 'components/WranglerGrid/AddTransformationPanel';
+
+const transformationOptions = ['undo', 'redo'];
 
 export const TableWrapper = styled(Box)`
   width: 100%;
@@ -83,9 +93,17 @@ export default function GridTable() {
       count: '0',
     },
   ]);
-  const [snackbarState, setSnackbar] = useSnackbar();
+  const [addTransformationFunction, setAddTransformationFunction] = useState<
+    IAddTransformationItem
+  >({
+    option: '',
+    supportedDataType: [],
+    infoLink: '',
+  });
+  const [dataQuality, setDataQuality] = useState<Record<string, IGeneralStatistics>>();
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
+  const [snackbarState, setSnackbar] = useSnackbar();
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -223,7 +241,7 @@ export default function GridTable() {
   };
 
   // ------------@createMissingData Function is used for preparing data for second row of Table which shows Missing/Null Value
-  const createMissingData = (statistics: IRecords) => {
+  const createMissingData = (statistics: Record<string, IGeneralStatistics>) => {
     const statisticObjectToArray = Object.entries(statistics);
     const metricArray = [];
     statisticObjectToArray.forEach(([key, value]) => {
@@ -259,6 +277,7 @@ export default function GridTable() {
     if (rawData && rawData.summary && rawData.summary.statistics) {
       const missingData = createMissingData(gridData?.summary.statistics);
       setMissingDataList(missingData);
+      setDataQuality(gridData?.summary?.statistics);
     }
     const rowData =
       rawData &&
@@ -280,6 +299,76 @@ export default function GridTable() {
     getGridTableData();
     setShowGridTable(Array.isArray(gridData?.headers) && gridData?.headers.length !== 0);
   }, [gridData]);
+
+  const onMenuOptionSelection = (option: string, supportedDataType: string[], infoLink: string) => {
+    if (selectedColumn) {
+      if (NO_INPUT_REQUIRED_TRANSFORMATION.includes(option)) {
+        const directive = getDirective(option, selectedColumn);
+        addDirectives(directive);
+      }
+    } else {
+      setAddTransformationFunction({
+        option,
+        supportedDataType,
+        infoLink,
+      });
+    }
+  };
+
+  const addDirectives = (directive: string) => {
+    setLoading(true);
+    if (directive) {
+      const apiPayload: IApiPayload = getAPIRequestPayload(params, directive, '');
+      addDirectiveAPICall(apiPayload);
+    }
+  };
+
+  const addDirectiveAPICall = (apiPayload: IApiPayload) => {
+    const gridParams: IGridParams = apiPayload.gridParams;
+    applyDirectives(wid, gridParams.directives).subscribe(
+      (response) => {
+        DataPrepStore.dispatch({
+          type: DataPrepActions.setWorkspace,
+          payload: {
+            data: response.values,
+            values: response.values,
+            headers: response.headers,
+            types: response.types,
+            ...gridParams,
+          },
+        });
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: T.translate(
+            `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
+          ).toString(),
+        });
+        setLoading(false);
+        setGridData(response);
+        setAddTransformationFunction({
+          option: '',
+          supportedDataType: [],
+        });
+        setSelectedColumn('');
+        setColumnType('');
+      },
+      (error) => {
+        setLoading(false);
+        setSnackbar({
+          open: true,
+          isSuccess: false,
+          message: error.message,
+        });
+        setAddTransformationFunction({
+          option: '',
+          supportedDataType: [],
+        });
+        setSelectedColumn('');
+        setColumnType('');
+      }
+    );
+  };
 
   const handleColumnSelect = (columnName) => {
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
@@ -305,14 +394,10 @@ export default function GridTable() {
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
         columnType={columnType}
-        submitMenuOption={(option, datatype) => {
-          setSnackbar(() => ({
-            open: true,
-            isSuccess: true,
-            message: 'Function Selected',
-          }));
-          return false;
-          // TODO: will integrate with add transformation panel later
+        submitMenuOption={(option, datatype, infoLink) => {
+          !transformationOptions.includes(option)
+            ? onMenuOptionSelection(option, datatype, infoLink)
+            : null;
         }}
         disableToolbarIcon={gridData?.headers?.length > 0 ? false : true}
       />
@@ -371,25 +456,42 @@ export default function GridTable() {
             </Table>
           </TableWrapper>
         )}
-        <FooterPanel recipeStepsCount={0} gridMetaInfo={tableMetaInfo} />
-        {loading && (
-          <div className={classes.loadingContainer}>
-            <LoadingSVG />
-          </div>
-        )}
       </GridTableWrapper>
-      {
-        <Snackbar
-          handleClose={() =>
-            setSnackbar(() => ({
-              open: false,
-            }))
-          }
-          open={snackbarState.open}
-          message={snackbarState.message}
-          isSuccess={snackbarState.isSuccess}
+      <FooterPanel recipeStepsCount={0} gridMetaInfo={tableMetaInfo} />
+
+      {addTransformationFunction.option && (
+        <AddTransformationPanel
+          transformationName={addTransformationFunction.option}
+          transformationLink={addTransformationFunction.infoLink}
+          transformationDataType={addTransformationFunction.supportedDataType}
+          columnsList={headersNamesList}
+          missingItemsList={dataQuality}
+          onCancel={() => {
+            setAddTransformationFunction({
+              option: '',
+              supportedDataType: [],
+            });
+          }}
+          applyTransformation={(directive: string) => {
+            addDirectives(directive);
+          }}
         />
-      }
+      )}
+      {loading && (
+        <div className={classes.loadingContainer}>
+          <LoadingSVG />
+        </div>
+      )}
+      <Snackbar // TODO: This snackbar is just for the feature demo purpose. Will be removed in the further development.
+        handleClose={() =>
+          setSnackbar(() => ({
+            open: false,
+          }))
+        }
+        open={snackbarState.open}
+        message={snackbarState.message}
+        isSuccess={snackbarState.isSuccess}
+      />
     </>
   );
 }
