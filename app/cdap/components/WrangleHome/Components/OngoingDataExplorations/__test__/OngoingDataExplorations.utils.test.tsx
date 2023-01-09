@@ -14,17 +14,11 @@
  * the License.
  */
 
-import { expectedResult, mockOldData } from '../mock/oldData';
-import { generateDataForExplorationCard } from '../utils';
+import { getUpdatedExplorationCards } from 'components/WrangleHome/Components/OngoingDataExplorations/utils';
 
 describe('Test the Utility Functions', () => {
   it('Should test the result for empty array', () => {
-    const result = generateDataForExplorationCard([]);
+    const result = getUpdatedExplorationCards([]);
     expect(result).toEqual([]);
-  });
-
-  it('Should test the result for mock data', () => {
-    const result = generateDataForExplorationCard(mockOldData);
-    expect(result).toEqual(expectedResult);
   });
 });

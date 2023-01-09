@@ -15,18 +15,21 @@
  */
 
 import React from 'react';
-import { render } from '@testing-library/react';
-import OngoingDataExploration from '../index';
+import { render, screen } from '@testing-library/react';
 import MyDataPrepApi from 'api/dataprep';
 import operators from 'rxjs/operators';
-import { createBrowserHistory as createHistory } from 'history';
 import { Route, Router, Switch } from 'react-router';
-import { screen } from '@testing-library/react';
-import { switchMapCallbackMock, getWorkspaceListSubscribeMock } from '../mock/oldData';
-
-const history = createHistory({
-  basename: '/',
-});
+import {
+  switchMapCallbackMock,
+  getWorkspaceListSubscribeMock,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mockoldData';
+import history from 'services/history';
+import {
+  connectionListDummyResPostGresSql,
+  connectionListDummyResFile,
+} from 'components/WrangleHome/Components/OngoingDataExplorations/mock/mock';
+import * as apiHelpers from 'components/Connections/Browser/SidePanel/apiHelpers';
+import OngoingDataExplorations from 'components/WrangleHome/Components/OngoingDataExplorations';
 
 const testObj = {
   connectionName: 'Upload',
@@ -36,11 +39,13 @@ const testObj = {
 };
 
 test('renders Ongoing Data Exploration component', async () => {
-  jest
-    .spyOn(operators as any, 'switchMap')
-    .mockImplementation((callback: (...args: unknown[]) => unknown) => {
-      callback(switchMapCallbackMock);
-    });
+  const dummyRes = new Map();
+  dummyRes.set('PostgreSql', connectionListDummyResPostGresSql);
+  dummyRes.set('File', connectionListDummyResFile);
+  jest.spyOn(apiHelpers, 'getCategorizedConnections').mockReturnValue(Promise.resolve(dummyRes));
+  jest.spyOn(operators as any, 'switchMap').mockImplementation((callback: Function) => {
+    callback(switchMapCallbackMock);
+  });
   jest.spyOn(MyDataPrepApi, 'getWorkspaceList').mockImplementation(() => {
     return {
       pipe: () => {
@@ -56,7 +61,7 @@ test('renders Ongoing Data Exploration component', async () => {
     <Router history={history}>
       <Switch>
         <Route>
-          <OngoingDataExploration />
+          <OngoingDataExplorations />
         </Route>
       </Switch>
     </Router>

@@ -3442,9 +3442,11 @@ features:
         loadToGrid: Wrangle
         wrangleHome: Home
         createPipeline: Create a Pipeline
+        workSpaces: 'Workspaces'
       params:
         connectionsList: datasources
         wrangleHome: home
+        workSpaces: 'workspace-list'
       ariaLabels:
         breadcrumb: breadcrumb
     common:
@@ -3453,6 +3455,13 @@ features:
       labels:
         loadToGrid: Wrangle
         noConnections: No Connections to show
+    ColumnViewPanel:
+      columns: 'Columns'
+      nullValues: 'Null Values'
+      columnView: 'Column View'
+      noRecordScreen: 
+        title: No Columns Found
+        subtitle: Search for another column to view some data
     GridPage:
       menuItems:
         divider: divider
@@ -3496,10 +3505,10 @@ features:
     FooterPanel:
       labels:
         columns: columns
-        message: Current data - {rowCount} rows and {columnCount} columns
         columnViewPanel: Column View Panel
         currentData: Current data
         directives: Directives
+        message: Current data - {rowCount} rows and {columnCount} columns 
         recipeSteps: Recipe Steps
         rows: rows
         zoomPercent100: 100%
@@ -3510,7 +3519,7 @@ features:
           importData: Import Data
           viewAll: View All
         connectorTypes:
-          title: Start data exploration
+          title: 'Start data exploration'
         workspaces:
           title: Continue ongoing data explorations, pick up where you left off
         recipes:
@@ -3519,8 +3528,27 @@ features:
       referenceLabel: Import Data
     NoRecordScreen:
       gridTable:
-        subtitle: Remove some recipe steps to view some data
         title: No rows left in this sample
+        subtitle: Remove some recipe steps to view some data
+      workspacesList:
+        subtitle: 'Please start data exploration to view ongoing workspaces'
+        title: 'No ongoing workspaces to display'
+    OnGoingDataExplorations:
+      labels:
+       connectorType: connectorType
+       connectionName: connectionName
+       count: count
+       dataQuality: dataQuality
+       icon: icon
+       iconWithText: iconWithText
+       importedDataset: Imported Dataset
+       nullValues: Null values
+       percentageWithText: percentageWithText
+       recipeSteps: Recipe steps
+       recipeStepsKey: recipeSteps
+       text: text
+       workspaceId: workspaceId
+       workspaceName: workspaceName
     Snackbar:
       labels:
         failure: Failure
@@ -3551,5 +3579,3 @@ features:
         view: View
         viewAll: View All        
 
-    
-...
