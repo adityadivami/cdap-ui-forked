@@ -41,7 +41,7 @@ export default function({
   onCancelClick,
   setSnackbar,
   setRecipeFormOpen,
-  setRecipeListUpdated,
+  setIsRecipeListUpdated,
 }: IEditRecipeProps) {
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
     recipeName: '',
@@ -54,7 +54,7 @@ export default function({
 
   useEffect(() => {
     return () => {
-      setRecipeListUpdated(false);
+      setIsRecipeListUpdated(false);
     };
   }, []);
 
@@ -144,7 +144,7 @@ export default function({
       isSuccess: true,
       message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeUpdateSuccessMessage`)}`,
     });
-    setRecipeListUpdated(true);
+    setIsRecipeListUpdated(true);
   };
 
   const onUpdateRecipeError = (err) => {

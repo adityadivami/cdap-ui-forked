@@ -37,7 +37,7 @@ describe('Test Create Recipe Component', () => {
         onCancelClick={jest.fn()}
         setSnackbar={jest.fn()}
         setRecipeFormOpen={jest.fn()}
-        setRecipeListUpdated={jest.fn()}
+        setIsRecipeListUpdated={jest.fn()}
       />
     );
   });
