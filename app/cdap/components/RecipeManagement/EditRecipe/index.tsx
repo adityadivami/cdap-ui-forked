@@ -90,7 +90,6 @@ export default function({
     handleSaveButtonMode(formData);
   };
 
-
   const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleRecipeFormData({
       ...recipeFormData,

@@ -42,7 +42,7 @@ const ViewAllRecipies = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
   const [snackbarState, setSnackbar] = useSnackbar();
- const [isRecipeListUpdated, setIsRecipeListUpdated] = useState(false);
+  const [isRecipeListUpdated, setIsRecipeListUpdated] = useState(false);
 
   useEffect(() => {
     if (snackbarState.open) {
@@ -99,7 +99,7 @@ const ViewAllRecipies = () => {
             : T.translate(`${PREFIX}.editRecipe`)
         }
         showBackIcon={actionType === EDIT_RECIPE ? false : true}
-        showDivider={true}
+        showDivider={actionType === VIEW_RECIPE ? true : false}
         open={isOpen}
         headerActionTemplate={
           actionType === VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()

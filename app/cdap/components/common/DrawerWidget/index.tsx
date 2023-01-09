@@ -29,7 +29,6 @@ export interface IDrawerWidgetProps extends DrawerProps {
   showBackIcon?: boolean;
   onBackIconClick?: () => void;
   dataTestId: string;
-  showHeaderSeparator?: boolean;
 }
 
 const BackIcon = styled(ChevronLeftRoundedIcon)`
@@ -108,7 +107,6 @@ export default function({
   onBackIconClick,
   anchor = 'right',
   dataTestId,
-  showHeaderSeparator = true,
 }: IDrawerWidgetProps) {
   return (
     <CustomizedDrawer anchor={anchor} open={open} data-testid={dataTestId}>
@@ -127,7 +125,6 @@ export default function({
             <Label data-testid="widget-heading-text" component="span">
               {headingText}
             </Label>
-            {showHeaderSeparator && <img src="/cdap_assets/img/underline.svg" />}
           </LabelContainer>
         </HeaderActions>
         <HeaderActions>
