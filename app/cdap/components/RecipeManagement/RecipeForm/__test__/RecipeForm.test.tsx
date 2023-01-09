@@ -26,21 +26,21 @@ describe('Test Recipe Form Component', () => {
   beforeEach(() => {
     render(
       <RecipeForm
-            recipeFormData={{
-                recipeName: 'test',
-                description: 'abc desc',
-                directives: ['uppercase: body1', 'titlecase: body2'],
-            }}
-            isRecipeNameError={false}
-            recipeNameErrorMessage={'error message'}
-            onRecipeNameChange={jest.fn()}
-            onFormSubmit={mockOnFormSubmit}
-            setRecipeFormData={jest.fn()}
-            onCancel={mockOnCancel}
-            isSaveDisabled={false}
-            recipeFormAction={'createRecipe'}
-            onRecipeDescriptionChange={jest.fn()} 
-         />
+        recipeFormData={{
+          recipeName: 'test',
+          description: 'abc desc',
+          directives: ['uppercase: body1', 'titlecase: body2'],
+        }}
+        isRecipeNameError={false}
+        recipeNameErrorMessage={'error message'}
+        onRecipeNameChange={jest.fn()}
+        onFormSubmit={mockOnFormSubmit}
+        setRecipeFormData={jest.fn()}
+        onCancel={mockOnCancel}
+        isSaveDisabled={false}
+        recipeFormAction={'createRecipe'}
+        onRecipeDescriptionChange={jest.fn()}
+      />
     );
   });
 

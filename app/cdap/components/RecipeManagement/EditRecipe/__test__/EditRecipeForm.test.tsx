@@ -16,24 +16,28 @@
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
-import EditRecipe from 'components/EditRecipe';
-import { ISnackbar } from 'components/Snackbar';
+import EditRecipe from 'components/RecipeManagement/EditRecipe';
 
 describe('Test Create Recipe Component', () => {
-  const mockSetSnackbar = jest.fn();
   beforeEach(() => {
     render(
       <EditRecipe
-        recipeData={{
+        selectedRecipe={{
+          recipeId: {
+            namespace: { name: 'default', generation: '0' },
+            recipeId: 'd428d827-e25d-45bb-83d6-7f24d9af9bfe',
+          },
           recipeName: 'recipeName',
-          description: '',
+          description: 'recipe description',
           directives: ['uppercase: body1', 'titlecase: body2'],
+          recipeStepsCount: 2,
+          createdTimeMillis: 1672837524405,
+          updatedTimeMillis: 1673259206448,
         }}
-        headingText={'Divami'}
-        openDrawer={true}
-        onCloseClick={jest.fn()}
-        setSnackbar={mockSetSnackbar}
-        setRecipeFormOpen={mockSetSnackbar}
+        onCancelClick={jest.fn()}
+        setSnackbar={jest.fn()}
+        setRecipeFormOpen={jest.fn()}
+        setUpdateRecipeList={jest.fn()}
       />
     );
   });

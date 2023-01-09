@@ -39,8 +39,6 @@ export const updateRecipe = (recipeId, payload, onUpdateRecipeResponse, onUpdate
   };
   MyDataPrepApi.updateRecipe(params, payload).subscribe(
     () => {
-      console.log('in response block');
-
       onUpdateRecipeResponse();
     },
     (err) => {

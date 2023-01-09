@@ -24,22 +24,25 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import EditRecipe from 'components/EditRecipe';
+import { IRecipe } from 'components/RecipeList/types';
+import DrawerWidget from 'components/common/DrawerWidget';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
+import EditRecipe from 'components/RecipeManagement/EditRecipe';
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
+export const EDIT_RECIPE = 'editRecipe';
+const VIEW_RECIPE = 'viewRecipe';
+
 const ViewAllRecipies = () => {
-  const [showEditRecipePanel, setShowEditRecipePanel] = useState(false);
+  const [actionType, setActionType] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [recipe, setRecipe] = useState<IRecipe>();
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [recipeData, setRecipeData] = useState({
-    recipeName: '',
-    description: '',
-    directives: [],
-  });
+  const [updateRecipeList, setUpdateRecipeList] = useState(false);
 
   useEffect(() => {
     if (snackbarState.open) {
@@ -51,26 +54,61 @@ const ViewAllRecipies = () => {
     }
   }, [snackbarState.open]);
 
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+    setRecipe(null);
+  };
+
   const viewRecipeHandler = (selectedObject: any) => {
     // To do : Integrate view recipe details panel
   };
 
   const handleEditRecipe = (selectedObject: any) => {
-    // To do : Integrate Edit recipe details panel
-    setRecipeData(selectedObject);
-    setShowEditRecipePanel(true);
-  };
-
-  const onClose = () => {
-    setShowEditRecipePanel(false);
+    toggleOpen();
+    setRecipe(selectedObject);
+    setActionType(EDIT_RECIPE);
   };
 
   const onCancel = () => {
-    setShowEditRecipePanel(false);
+    toggleOpen();
+    setRecipe(null);
   };
+
+  const renderEditRecipeComponent = () =>
+    recipe?.recipeId?.recipeId && (
+      <EditRecipe
+        onCancelClick={onCancel}
+        setRecipeFormOpen={toggleOpen}
+        setSnackbar={setSnackbar}
+        selectedRecipe={recipe}
+        setUpdateRecipeList={setUpdateRecipeList}
+      />
+    );
+
+  const renderRecipeDetailComponent = () => <></>;
+  const renderRecipeDetailHeaderActionTemplate = () => <></>;
 
   return (
     <>
+      <DrawerWidget
+        anchor="right"
+        closeClickHandler={toggleOpen}
+        headingText={
+          actionType === VIEW_RECIPE
+            ? T.translate(`${PREFIX}.recipeDetails`)
+            : T.translate(`${PREFIX}.editRecipe`)
+        }
+        showBackIcon={actionType === EDIT_RECIPE ? false : true}
+        showDivider={true}
+        open={isOpen}
+        headerActionTemplate={
+          actionType === VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
+        }
+        dataTestId={'apply-recipe-drawer-widget'}
+        children={
+          actionType === VIEW_RECIPE ? renderRecipeDetailComponent() : renderEditRecipeComponent()
+        }
+      />
       <Box ml={4} m={2}>
         <Breadcrumbs separator="›" aria-label="breadcrumb">
           <Link underline="hover" key="2" color="inherit" to={redirectToObj}>
@@ -98,16 +136,9 @@ const ViewAllRecipies = () => {
           sortOrder={SortOrder.DESCENDING}
           showPagination={true}
           enableSorting={true}
+          updateRecipeList={updateRecipeList}
         />
       </Box>
-      <EditRecipe
-        openDrawer={showEditRecipePanel}
-        onCloseClick={onClose}
-        onCancelClick={onCancel}
-        recipeData={recipeData}
-        setRecipeFormOpen={setShowEditRecipePanel}
-        setSnackbar={setSnackbar}
-      />
       <Snackbar
         handleClose={() =>
           setSnackbar(() => ({

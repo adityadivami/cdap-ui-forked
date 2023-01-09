@@ -14,63 +14,15 @@
  * the License.
  */
 
-import { Container, Drawer, IconButton } from '@material-ui/core';
 import React, { useState, ChangeEvent, useRef, FormEvent, useEffect } from 'react';
-import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import DrawerWidgetHeading from './DrawerWidgetHeading';
-import CreateAndEditRecipeForm from 'components/CreateAndEditRecipeForm';
-import { IRecipeData } from 'components/CreateAndEditRecipeForm/types';
 import styled from 'styled-components';
-import { ISnackbar } from 'components/Snackbar';
 import RecipeForm from 'components/RecipeManagement/RecipeForm';
-import { IRecipeFormData } from 'components/RecipeManagement/types';
+import { IRecipeFormData, IEditRecipeProps } from 'components/RecipeManagement/types';
 import { debounce } from 'lodash';
-import { getRecipeByName, updateRecipe } from 'components/EditRecipe/services';
+import { getRecipeByName, updateRecipe } from 'components/RecipeManagement/EditRecipe/services';
 import T from 'i18n-react';
 
-interface IDrawerWidgetProps {
-  headingText: React.ReactNode;
-  openDrawer: boolean;
-  onCloseClick: () => void;
-  recipeData: IRecipeData;
-  setSnackbar: (value: ISnackbar) => void;
-  setRecipeFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const StyledDrawerContainer = styled(Container)`
-  width: 460px;
-  height: 100%;
-  padding-left: 0px;
-  padding-right: 0px;
-  overflow-y: scroll;
-`;
-
-const StyledHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 0px;
-  padding-right: 0px;
-  margin-top: 16px;
-  margin-left: 20px;
-`;
-
-const CloseIconButton = styled(IconButton)`
-  display: flex;
-  align-items: center;
-`;
-
-const StyledCloseIcon = styled(CloseRoundedIcon)`
-  cursor: pointer;
-`;
-
-const StyledPaper = styled(Drawer)`
-  & .MuiDrawer-paper {
-    top: 46px;
-    height: calc(100vh - 47px);
-    width: 500px;
-  }
-`;
+import { EDIT_RECIPE } from 'components/RecipeList/ViewAllRecipes';
 
 const StyledEditFormWrapper = styled.div`
   margin-top: 30px;
@@ -78,7 +30,6 @@ const StyledEditFormWrapper = styled.div`
 
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
-export const EDIT_RECIPE = 'editRecipe';
 
 const noErrorState = {
   isRecipeNameError: false,
@@ -86,26 +37,39 @@ const noErrorState = {
 };
 
 export default function({
-  openDrawer,
-  onCloseClick,
+  selectedRecipe,
   onCancelClick,
-  recipeData,
   setSnackbar,
   setRecipeFormOpen,
-}) {
+  setUpdateRecipeList,
+}: IEditRecipeProps) {
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
     recipeName: '',
     description: '',
     directives: [],
   });
-
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
   const [recipeNameErrorData, setRecipeNameErrorData] = useState(noErrorState);
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   useEffect(() => {
-    setRecipeFormData(recipeData);
-  }, [recipeData]);
+    return () => {
+      setUpdateRecipeList(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (selectedRecipe) {
+      recipeFormData.recipeName = selectedRecipe.recipeName;
+      recipeFormData.description = selectedRecipe.description;
+      recipeFormData.directives = selectedRecipe.directives;
+      setRecipeFormData(recipeFormData);
+    }
+  }, [selectedRecipe]);
+
+  useEffect(() => {
+    handleSaveButtonMode();
+  }, [recipeNameErrorData.isRecipeNameError]);
 
   const handleSaveButtonMode = (formData = recipeFormData) => {
     if (
@@ -121,10 +85,6 @@ export default function({
     }
   };
 
-  useEffect(() => {
-    handleSaveButtonMode();
-  }, [recipeNameErrorData.isRecipeNameError]);
-
   const handleRecipeFormData = (formData) => {
     setRecipeFormData(formData);
     handleSaveButtonMode(formData);
@@ -132,23 +92,15 @@ export default function({
 
   const onCancel = () => {
     onCancelClick();
-    setRecipeNameErrorData(noErrorState); // TODO: do we need this line??
   };
 
-
-  const onClose = () => {
-    onCloseClick();
-    setRecipeNameErrorData(noErrorState); 
-  }
-
-  const onRecipeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleRecipeFormData({
       ...recipeFormData,
       recipeName: event.target.value,
     });
     validateRecipeNameExists.current(event.target.value);
   };
-
 
   const validateRecipeNameExists = useRef(
     debounce((recipeName: string) => {
@@ -173,7 +125,6 @@ export default function({
       });
   };
 
-
   const onGetRecipeByNameError = (err, recipeName) => {
     if (
       err.statusCode === 404 &&
@@ -194,12 +145,10 @@ export default function({
     setSnackbar({
       open: true,
       isSuccess: true,
-      message: `${recipeSteps.length} ${T.translate(
-        'features.WranglerNewUI.RecipeForm.labels.recipeSaveSuccessMessage'
-      )}`,
+      message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeUpdateSuccessMessage`)}`,
     });
+    setUpdateRecipeList(true);
   };
-
 
   const onUpdateRecipeError = (err) => {
     setRecipeFormOpen(false);
@@ -210,21 +159,21 @@ export default function({
     });
   };
 
-  const onRecipeDataSave = (recipeFormData: IRecipeData) => {
+  const onRecipeDataSave = (recipeFormData) => {
     const payload = {
       recipeName: recipeFormData.recipeName,
       description: recipeFormData.description,
       directives: recipeSteps,
     };
     updateRecipe(
-      recipeData.recipeId.recipeId,
+      selectedRecipe.recipeId.recipeId,
       payload,
       onUpdateRecipeResponse,
       onUpdateRecipeError
     );
   };
 
-  const onRecipeDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onRecipeDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     handleRecipeFormData({
       ...recipeFormData,
       description: event.target.value,
@@ -233,30 +182,22 @@ export default function({
 
   return (
     <>
-      <StyledPaper anchor="right" open={openDrawer} data-testid="edit-recipe-drawer-widget-parent">
-        <StyledDrawerContainer role="presentation">
-          <StyledHeader>
-            <DrawerWidgetHeading headingText="Edit Recipe" />
-            <CloseIconButton onClick={onClose}>
-              <StyledCloseIcon color="action" data-testid="drawer-widget-close-round-icon" />
-            </CloseIconButton>
-          </StyledHeader>
-          <StyledEditFormWrapper>
-            <RecipeForm
-              recipeFormData={recipeFormData}
-              isRecipeNameError={recipeNameErrorData.isRecipeNameError}
-              recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
-              onRecipeNameChange={onRecipeNameChange}
-              onFormSubmit={onFormSubmit}
-              setRecipeFormData={setRecipeFormData}
-              onCancel={onCancel}
-              isSaveDisabled={isSaveDisabled}
-              recipeFormAction={EDIT_RECIPE}
-              onRecipeDescriptionChange={onRecipeDescriptionChange}
-            />
-          </StyledEditFormWrapper>
-        </StyledDrawerContainer>
-      </StyledPaper>
+      <StyledEditFormWrapper>
+        {recipeFormData && (
+          <RecipeForm
+            recipeFormData={recipeFormData}
+            isRecipeNameError={recipeNameErrorData.isRecipeNameError}
+            recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
+            onRecipeNameChange={onRecipeNameChange}
+            onFormSubmit={onFormSubmit}
+            setRecipeFormData={setRecipeFormData}
+            onCancel={onCancel}
+            isSaveDisabled={isSaveDisabled}
+            recipeFormAction={EDIT_RECIPE}
+            onRecipeDescriptionChange={onRecipeDescriptionChange}
+          />
+        )}
+      </StyledEditFormWrapper>
     </>
   );
 }
