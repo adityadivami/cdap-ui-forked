@@ -28,7 +28,7 @@ describe('Test Recipe Form Component', () => {
       <RecipeForm
         recipeFormData={{
           recipeName: 'test',
-          description: 'abc desc',
+          description: 'test',
           directives: ['uppercase: body1', 'titlecase: body2'],
         }}
         isRecipeNameError={false}
