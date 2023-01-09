@@ -41,10 +41,6 @@ export const ErrorLabel = styled(Label)`
   color: #e05243;
 `;
 
-export const Form = styled.form`
-  padding-left: 20px;
-`;
-
 export const StyledTextField = styled(TextField)`
   width: 460px;
   .MuiOutlinedInput-input {

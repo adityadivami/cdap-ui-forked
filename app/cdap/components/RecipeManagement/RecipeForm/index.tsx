@@ -21,7 +21,6 @@ import { IRecipeFormProps } from 'components/RecipeManagement/types';
 import {
   FormFieldWrapper,
   Label,
-  Form,
   ErrorTextField,
   NormalTextField,
   StyledTextAreaAutosize,
@@ -55,7 +54,7 @@ export default function RecipeForm({
 
   return (
     <>
-      <Form
+      <form
         onSubmit={(event: FormEvent<HTMLFormElement>) => onFormSubmit(event)}
         data-testid="recipe-form-parent"
       >
@@ -69,6 +68,7 @@ export default function RecipeForm({
             required
             variant="outlined"
             defaultValue={recipeFormData.recipeName}
+            value={recipeFormData.recipeName}
             error={isRecipeNameError}
             id="outlined-error-helper-text"
             helperText={isRecipeNameError ? recipeNameErrorMessage : ''}
@@ -90,6 +90,7 @@ export default function RecipeForm({
               minRows={3}
               data-testid="recipe-description-field"
               defaultValue={recipeFormData.description}
+              value={recipeFormData.description}
               onChange={onRecipeDescriptionChange}
               placeholder={T.translate(`${PREFIX}.descriptionPlaceholder`)}
             />
@@ -114,7 +115,7 @@ export default function RecipeForm({
             {T.translate(`${PREFIX}.cancel`)}
           </CancelButton>
         </StyledFormButtonWrapper>
-      </Form>
+      </form>
     </>
   );
 }
