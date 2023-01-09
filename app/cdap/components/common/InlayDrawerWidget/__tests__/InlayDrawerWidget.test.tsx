@@ -47,11 +47,12 @@ let container;
 beforeEach(() => {
   container = render(
     <InlayDrawerWidget
+      actionsOptions={actionsOptions}
+      enableActions
       headingText={'Inlay Drawer'}
       onClose={handleDrawerCloseIconClick}
-      showDivider={true}
       position={'left'}
-      actionsOptions={actionsOptions}
+      showDivider={true}
     >
       <div>Child Component</div>
     </InlayDrawerWidget>
