@@ -57,11 +57,11 @@ const StyledMenuItem = styled(MenuItem)`
 `;
 
 interface IMenuProps {
-  dropdownOptions: IMenuItemProps[];
-  canPerformActions: boolean;
+  menuItems: IMenuItemProps[];
+  enableMenuButton: boolean;
 }
 
-export default function Menu({ dropdownOptions, canPerformActions }: IMenuProps) {
+export default function Menu({ menuItems, enableMenuButton }: IMenuProps) {
   const [open, setOpen] = useState(false);
 
   const anchorRef = useRef<HTMLButtonElement>(null);
@@ -104,7 +104,7 @@ export default function Menu({ dropdownOptions, canPerformActions }: IMenuProps)
         onClick={handleToggle}
         endIcon={<ArrowDropDownIcon />}
         data-testid="inlay-drawer-actions-menu"
-        disabled={!canPerformActions}
+        disabled={!enableMenuButton}
       >
         {T.translate(`${PREFIX}.buttonLabels.actions`)}
       </ActionButton>
@@ -114,7 +114,7 @@ export default function Menu({ dropdownOptions, canPerformActions }: IMenuProps)
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                  {dropdownOptions.map((eachOption) => {
+                  {menuItems.map((eachOption) => {
                     const testId = getTestIdString(eachOption.label);
                     return (
                       <StyledMenuItem

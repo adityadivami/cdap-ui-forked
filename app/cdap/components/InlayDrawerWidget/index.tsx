@@ -129,7 +129,7 @@ export default function InlayDrawerWidget({
         </DrawerWidgetTitleLabel>
         <HeaderIconWrapper>
           {actionsOptions.length && (
-            <Menu dropdownOptions={actionsOptions} canPerformActions={enableActions} />
+            <Menu menuItems={actionsOptions} enableMenuButton={enableActions} />
           )}
           {showDivider && <Divider />}
           <StyledIconButton

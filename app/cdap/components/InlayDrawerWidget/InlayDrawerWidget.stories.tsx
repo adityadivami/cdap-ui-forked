@@ -17,7 +17,7 @@
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import InlayDrawerWidget from 'components/InlayDrawerWidget';
-import { IActionsOptions } from 'components/InlayDrawerWidget/Menu';
+import { IMenuItemProps } from 'components/InlayDrawerWidget/Menu';
 import T from 'i18n-react';
 import React, { useState } from 'react';
 
@@ -44,7 +44,7 @@ storiesOf('InlayDrawerWidget', module).add(
       // do nothing - TODO: event handler for download button click
     };
 
-    const actionsOptions: IActionsOptions[] = [
+    const actionsOptions: IMenuItemProps[] = [
       {
         label: T.translate(`${PREFIX}.buttonLabels.save`).toString(),
         value: 'save',
@@ -70,7 +70,7 @@ storiesOf('InlayDrawerWidget', module).add(
           headingText={T.translate(`${PREFIX}.labels.headerText`).toString()}
           onClose={handleDrawerCloseIconClick}
           position={'left'}
-          showDivider={true}
+          showDivider
         >
           <div>{T.translate(`${PREFIX}.messages.childComponentMessage`)}</div>
         </InlayDrawerWidget>
