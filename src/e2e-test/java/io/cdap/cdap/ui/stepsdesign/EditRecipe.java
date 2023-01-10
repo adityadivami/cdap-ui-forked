@@ -29,9 +29,19 @@
 
 
 // public class EditRecipe {
-//     @Then("Click on the Edit")
-//     public void clickOnTheStructureIcon() {
-//       ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-structure"));
-//       ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-changeDatatype"));
-//       ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-string"));
+//     @Then("Click on View All Button")
+//     public void clickOnTheViewAllButton() {
+//       ElementHelper.clickOnElement(Helper.locateElementByTestId("view-all-recipes"));
 // }
+
+// @Then("Verify if the Saved RecipeList table is loaded")
+//   public void verifyIfTheUserIsOnTheSavedRecipeListPage() {
+//     WaitHelper.waitForPageToLoad();
+//     Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-table-container")));
+//   }
+
+// @Then("Click on the Kebab icon on each row")
+//   public void clickOnTheKebabIcon() {
+//     ElementHelper.clickOnElement(Helper.locateElementByTestId(""));
+//   }
+

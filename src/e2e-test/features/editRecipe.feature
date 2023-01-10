@@ -19,17 +19,16 @@ Feature: EditRecipe
 
   @EditRecipe
   Scenario: Go through the Edit Recipe functionality
-    Given Navigate to the Wrangle home page
+    Given Navigate to the Home Page
     Then Click on View All Button
     Then Verify if the Saved RecipeList table is loaded
     Then Click on the Kebab icon on each row
     Then Click on the Edit
     Then Verify if the user is on the Edit Recipe panel
-    Then Verify if Edit Recipe panel has Recipe Name TextField
-    Then Verify if Edit Recipe panel has Description TextArea
+    Then Verify if Edit Recipe panel has Recipe Name TextField and Description TextArea
     Then Verify if Edit Recipe panel has Save and is disabeld
     Then Verify if Edit Recipe panel has Cancel
-    Then Enter RecipeName in the TextField
+    Then Enter RecipeName and Description in the TextFields
     Then Enter Description in the TextArea
     Then Check Save Button is Enabled
     Then Click on Save Button
