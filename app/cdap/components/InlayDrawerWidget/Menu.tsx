@@ -28,7 +28,7 @@ import T from 'i18n-react';
 import React, { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-export interface IActionsOptions {
+export interface IMenuItemProps {
   label: string;
   value: string;
   clickHandler: () => void;
@@ -57,7 +57,7 @@ const StyledMenuItem = styled(MenuItem)`
 `;
 
 interface IMenuProps {
-  dropdownOptions: IActionsOptions[];
+  dropdownOptions: IMenuItemProps[];
   canPerformActions: boolean;
 }
 

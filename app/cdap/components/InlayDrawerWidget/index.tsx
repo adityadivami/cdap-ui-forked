@@ -17,12 +17,12 @@
 import { Box, IconButton, Typography } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import Menu, { IActionsOptions } from 'components/InlayDrawerWidget/Menu';
+import Menu, { IMenuItemProps } from 'components/InlayDrawerWidget/Menu';
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 interface IRecipeStepWidgetProps {
-  actionsOptions: IActionsOptions[];
+  actionsOptions: IMenuItemProps[];
   enableActions: boolean;
   headingText: string;
   onClose: () => void;
