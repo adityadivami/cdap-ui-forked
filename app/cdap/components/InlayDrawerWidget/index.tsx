@@ -18,15 +18,15 @@ import { Box, Button, IconButton, Menu, MenuItem, Typography } from '@material-u
 import grey from '@material-ui/core/colors/grey';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
+import { PREFIX } from 'components/InlayDrawerWidget/InlayDrawerWidget.stories';
 import T from 'i18n-react';
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
-import { PREFIX } from './InlayDrawerWidget.stories';
 
 export interface IMenuItem {
+  clickHandler: () => void;
   label: string;
   value: string;
-  clickHandler: () => void;
 }
 
 interface IRecipeStepWidgetProps {
@@ -58,7 +58,7 @@ const Divider = styled.div`
   width: 1px;
 `;
 
-const DrawerWidgetTitleLabel = styled(Typography)`
+const Label = styled(Typography)`
   &.MuiTypography-body1 {
     color: ${grey[900]};
     font-style: normal;
@@ -70,12 +70,12 @@ const DrawerWidgetTitleLabel = styled(Typography)`
   }
 `;
 
-const HeaderIconWrapper = styled(Box)`
+const IconWrapper = styled(Box)`
   align-items: center;
   display: flex;
 `;
 
-const HeaderStyle = styled.header`
+const StyledHeader = styled.header`
   align-items: center;
   display: flex;
   height: 60px;
@@ -167,11 +167,9 @@ export default function InlayDrawerWidget({
 
   return (
     <PanelContainer data-testid="inlay-drawer-widget-parent" role="presentation">
-      <HeaderStyle>
-        <DrawerWidgetTitleLabel data-testid="drawer-widget-heading">
-          {headingText}
-        </DrawerWidgetTitleLabel>
-        <HeaderIconWrapper>
+      <StyledHeader>
+        <Label data-testid="drawer-widget-heading">{headingText}</Label>
+        <IconWrapper>
           {actionsOptions.length && (
             <div>
               <MenuButton
@@ -217,8 +215,8 @@ export default function InlayDrawerWidget({
           >
             <CloseRoundedIcon color="action" />
           </StyledIconButton>
-        </HeaderIconWrapper>
-      </HeaderStyle>
+        </IconWrapper>
+      </StyledHeader>
       {children}
     </PanelContainer>
   );
