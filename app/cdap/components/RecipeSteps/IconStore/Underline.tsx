@@ -14,12 +14,12 @@
  * the License.
  */
 
-import { Dispatch, SetStateAction } from 'react';
+import React from 'react';
+import { blue } from '@material-ui/core/colors';
 
-export interface ITransformationToolBarProps {
-  columnType: string;
-  submitMenuOption: (value: string, dataType: string[]) => void;
-  setShowBreadCrumb: (isBreadCrumbOpen: boolean) => void;
-  showBreadCrumb: boolean;
-  disableToolbarIcon: boolean;
-}
+export const UnderLine = (
+  <svg width="67" height="2" viewBox="0 0 67 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0H50L53 2H3L0 0Z" fill={blue[500]} />
+    <path d="M54 0H63.5L66.5 2H57L54 0Z" fill={blue[500]} />
+  </svg>
+);

@@ -14,12 +14,7 @@
  * the License.
  */
 
-import { Dispatch, SetStateAction } from 'react';
-
-export interface ITransformationToolBarProps {
-  columnType: string;
-  submitMenuOption: (value: string, dataType: string[]) => void;
-  setShowBreadCrumb: (isBreadCrumbOpen: boolean) => void;
-  showBreadCrumb: boolean;
-  disableToolbarIcon: boolean;
+export interface IRecipeStepTableProps {
+  recipeSteps: string[];
+  onDeleteRecipeSteps: (newRecipeStepList: string[], removedRecipeStepList: string[]) => void;
 }

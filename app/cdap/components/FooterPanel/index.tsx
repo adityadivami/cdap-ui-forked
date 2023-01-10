@@ -30,7 +30,7 @@ import {
   ZoomBox,
 } from 'components/FooterPanel/styles';
 import T from 'i18n-react';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 export const PREFIX = 'features.WranglerNewUI.FooterPanel.labels';
 
@@ -61,6 +61,9 @@ interface IGridMetaInfo {
 interface IFooterPanelProps {
   recipeStepsCount: number;
   gridMetaInfo: IGridMetaInfo;
+  onRecipePanelButtonClick: () => void;
+  setDirectivePanelIsOpen: Dispatch<SetStateAction<boolean>>;
+  directivePanelIsOpen: boolean;
 }
 
 export interface ITableMetaInfoTabProps {
@@ -72,7 +75,13 @@ export interface IRecipeStepsTabProps {
   recipeStepsCount: number;
 }
 
-export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
+export default function({
+  recipeStepsCount,
+  gridMetaInfo,
+  onRecipePanelButtonClick,
+  setDirectivePanelIsOpen,
+  directivePanelIsOpen,
+}: IFooterPanelProps) {
   const { rowCount, columnCount } = gridMetaInfo;
 
   return (
@@ -96,13 +105,19 @@ export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
           <ArrowRightIcon />
         </TransformatedIconButton>
       </ZoomBox>
-      <DirectivesBox data-testid="footer-panel-directives-tab">
-        <Label data-testid="footerpanel-simple-label">
+      <DirectivesBox
+        data-testid="footer-panel-directives-tab"
+        onClick={() => setDirectivePanelIsOpen(!directivePanelIsOpen)}
+      >
+        <Label data-testid="footerpanel-simple-directives-label">
           <>{`${T.translate(`${PREFIX}.directives`)}`}</>
         </Label>
       </DirectivesBox>
-      <ReciepeStepsBox data-testid="footer-panel-recipe-steps-tab">
-        <Label data-testid="footerpanel-simple-label">
+      <ReciepeStepsBox
+        data-testid="footer-panel-recipe-steps-tab"
+        onClick={onRecipePanelButtonClick}
+      >
+        <Label data-testid="footerpanel-recipe-steps-label">
           <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>
         </Label>
         <OutlinedLabel data-testid="footerpanel-outlined-label">

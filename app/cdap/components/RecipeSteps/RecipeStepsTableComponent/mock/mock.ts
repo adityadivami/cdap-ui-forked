@@ -14,12 +14,16 @@
  * the License.
  */
 
-import { Dispatch, SetStateAction } from 'react';
-
-export interface ITransformationToolBarProps {
-  columnType: string;
-  submitMenuOption: (value: string, dataType: string[]) => void;
-  setShowBreadCrumb: (isBreadCrumbOpen: boolean) => void;
-  showBreadCrumb: boolean;
-  disableToolbarIcon: boolean;
-}
+export const mockRecipe = [
+  'a-column',
+  'b-column',
+  'c-column',
+  'd-column',
+  'e-column',
+  'f-column',
+  'g-column',
+  'h-column',
+  'i-column',
+  'j-column',
+  'j-column',
+];
