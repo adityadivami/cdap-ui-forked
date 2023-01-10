@@ -34,7 +34,12 @@ export interface IMenuItemProps {
   clickHandler: () => void;
 }
 
-const ActionButton = styled(Button)`
+interface IMenuProps {
+  menuItems: IMenuItemProps[];
+  enableMenuButton: boolean;
+}
+
+const MenuButton = styled(Button)`
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
@@ -55,11 +60,6 @@ const StyledMenuItem = styled(MenuItem)`
     text-align: left;
   }
 `;
-
-interface IMenuProps {
-  menuItems: IMenuItemProps[];
-  enableMenuButton: boolean;
-}
 
 export default function Menu({ menuItems, enableMenuButton }: IMenuProps) {
   const [open, setOpen] = useState(false);
@@ -97,7 +97,7 @@ export default function Menu({ menuItems, enableMenuButton }: IMenuProps) {
 
   return (
     <FlexContainer>
-      <ActionButton
+      <MenuButton
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
@@ -107,7 +107,7 @@ export default function Menu({ menuItems, enableMenuButton }: IMenuProps) {
         disabled={!enableMenuButton}
       >
         {T.translate(`${PREFIX}.buttonLabels.actions`)}
-      </ActionButton>
+      </MenuButton>
       <Popper open={open} anchorEl={anchorRef.current} transition disablePortal>
         {({ TransitionProps }) => (
           <Grow {...TransitionProps}>
