@@ -26,10 +26,9 @@ Feature: EditRecipe
     Then Click on the Edit
     Then Verify if the user is on the Edit Recipe panel
     Then Verify if Edit Recipe panel has Recipe Name TextField and Description TextArea
-    Then Verify if Edit Recipe panel has Save and is disabeld
+    Then Verify if Edit Recipe panel has Save Button and it is disabled
     Then Verify if Edit Recipe panel has Cancel
-    Then Enter RecipeName and Description in the TextFields
-    Then Enter Description in the TextArea
+    Then Enter RecipeName in the TextField and Description in the TextArea
     Then Check Save Button is Enabled
     Then Click on Save Button
     Then Verify if the Edit Recipe panel is closed

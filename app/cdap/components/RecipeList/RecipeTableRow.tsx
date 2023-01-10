@@ -168,7 +168,7 @@ export const RecipeTableRow = ({
       <div
         className="grid-row"
         onClick={!showAllColumns ? selectRecipeHandler : undefined}
-        data-testid={`${recipe.recipeName}-row`}
+        data-testid={`${recipe.recipeName}-recipe-row`}
       >
         <div>{recipe.recipeName}</div>
         <div>{recipe.recipeStepsCount}</div>
