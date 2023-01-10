@@ -58,8 +58,8 @@ beforeEach(() => {
   );
 });
 
-describe('Test Inlay Drawer Component', () => {
-  test('Should trigger onSaveButtonClick function', () => {
+describe('Test the Inlay Drawer Widget Component', () => {
+  test('Should trigger the onSaveButtonClick function', () => {
     const menuButton = container.getByRole('button', { name: /actions/i });
     fireEvent.click(menuButton);
 
@@ -69,7 +69,7 @@ describe('Test Inlay Drawer Component', () => {
     expect(onSaveButtonClick).toHaveBeenCalled();
   });
 
-  test('Should trigger onApplyButtonClick function', () => {
+  test('Should trigger the onApplyButtonClick function', () => {
     const menuButton = container.getByRole('button', { name: /actions/i });
     fireEvent.click(menuButton);
 
@@ -79,7 +79,7 @@ describe('Test Inlay Drawer Component', () => {
     expect(onApplyButtonClick).toHaveBeenCalled();
   });
 
-  test('Should trigger onDownloadButtonClick function', () => {
+  test('Should trigger the onDownloadButtonClick function', () => {
     const menuButton = container.getByRole('button', { name: /actions/i });
     fireEvent.click(menuButton);
 
