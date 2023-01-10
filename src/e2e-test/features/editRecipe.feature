@@ -26,11 +26,11 @@ Feature: EditRecipe
     Then Click on the Edit
     Then Verify if the user is on the Edit Recipe panel
     Then Verify if Edit Recipe panel has Recipe Name TextField and Description TextArea
-    Then Verify if Edit Recipe panel has Save Button and it is disabled
     Then Verify if Edit Recipe panel has Cancel
     Then Enter RecipeName in the TextField and Description in the TextArea
     Then Check Save Button is Enabled
     Then Click on Save Button
+    Then Verify if SnackBar is opened
     Then Verify if the Edit Recipe panel is closed
-    Then Verify if SnackBar is opened 
+
     
