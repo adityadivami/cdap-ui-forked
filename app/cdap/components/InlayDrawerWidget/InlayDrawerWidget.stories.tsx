@@ -16,8 +16,8 @@
 
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import InlayDrawerWidget from 'components/common/InlayDrawerWidget';
-import { IActionsOptions } from 'components/common/InlayDrawerWidget/Menu';
+import InlayDrawerWidget from 'components/InlayDrawerWidget';
+import { IActionsOptions } from 'components/InlayDrawerWidget/Menu';
 import T from 'i18n-react';
 import React, { useState } from 'react';
 
