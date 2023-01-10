@@ -165,13 +165,17 @@ export const RecipeTableRow = ({
 
   return (
     <>
-      <div className="grid-row" onClick={!showAllColumns ? selectRecipeHandler : undefined}>
+      <div
+        className="grid-row"
+        onClick={!showAllColumns ? selectRecipeHandler : undefined}
+        data-testid={`${recipe.recipeName}-recipe-row`}
+      >
         <div>{recipe.recipeName}</div>
         <div>{recipe.recipeStepsCount}</div>
         {showAllColumns && <div>{recipe.description}</div>}
         <div>{format(recipe.updatedTimeMillis, TYPES.TIMESTAMP_MILLIS)}</div>
         {showActions && (
-          <span onClick={handleActionsClick}>
+          <span onClick={handleActionsClick} data-testId={`${recipe.recipeName}-kebab-icon`}>
             <ActionsPopover
               actions={actions}
               showPopover={showPopover}
