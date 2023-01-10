@@ -16,7 +16,7 @@
 
 import { cleanup, fireEvent, render } from '@testing-library/react';
 import InlayDrawerWidget from 'components/InlayDrawerWidget';
-import { IMenuItemProps } from 'components/InlayDrawerWidget/Menu';
+import { IMenuItem } from 'components/InlayDrawerWidget/Menu';
 import React from 'react';
 
 const handleDrawerCloseIconClick = jest.fn();
@@ -24,7 +24,7 @@ const onSaveButtonClick = jest.fn();
 const onApplyButtonClick = jest.fn();
 const onDownloadClick = jest.fn();
 
-const actionsOptions: IMenuItemProps[] = [
+const actionsOptions: IMenuItem[] = [
   {
     label: 'Save',
     value: 'save',

@@ -17,7 +17,7 @@
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import InlayDrawerWidget from 'components/InlayDrawerWidget';
-import { IMenuItemProps } from 'components/InlayDrawerWidget/Menu';
+import { IMenuItem } from 'components/InlayDrawerWidget/Menu';
 import T from 'i18n-react';
 import React, { useState } from 'react';
 
@@ -44,7 +44,7 @@ storiesOf('InlayDrawerWidget', module).add(
       // do nothing - TODO: event handler for download button click
     };
 
-    const actionsOptions: IMenuItemProps[] = [
+    const actionsOptions: IMenuItem[] = [
       {
         label: T.translate(`${PREFIX}.buttonLabels.save`).toString(),
         value: 'save',

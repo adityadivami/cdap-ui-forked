@@ -28,14 +28,14 @@ import T from 'i18n-react';
 import React, { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-export interface IMenuItemProps {
+export interface IMenuItem {
   label: string;
   value: string;
   clickHandler: () => void;
 }
 
 interface IMenuProps {
-  menuItems: IMenuItemProps[];
+  menuItems: IMenuItem[];
   enableMenuButton: boolean;
 }
 
