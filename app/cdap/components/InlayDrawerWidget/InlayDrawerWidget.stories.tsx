@@ -39,7 +39,7 @@ storiesOf('InlayDrawerWidget', module).add(
     const onApplyButtonClick = () => {
       // do nothing - TODO: event handler for apply button click
     };
-    const onDownloadClick = () => {
+    const onDownloadButtonClick = () => {
       // do nothing - TODO: event handler for download button click
     };
 
@@ -57,7 +57,7 @@ storiesOf('InlayDrawerWidget', module).add(
       {
         label: T.translate(`${PREFIX}.buttonLabels.download`).toString(),
         value: 'download',
-        clickHandler: onDownloadClick,
+        clickHandler: onDownloadButtonClick,
       },
     ];
 

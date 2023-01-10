@@ -21,7 +21,7 @@ import React from 'react';
 const handleDrawerCloseIconClick = jest.fn();
 const onSaveButtonClick = jest.fn();
 const onApplyButtonClick = jest.fn();
-const onDownloadClick = jest.fn();
+const onDownloadButtonClick = jest.fn();
 
 const actionsOptions: IMenuItem[] = [
   {
@@ -37,7 +37,7 @@ const actionsOptions: IMenuItem[] = [
   {
     label: 'Download',
     value: 'download',
-    clickHandler: onDownloadClick,
+    clickHandler: onDownloadButtonClick,
   },
 ];
 
@@ -79,14 +79,14 @@ describe('Test Inlay Drawer Component', () => {
     expect(onApplyButtonClick).toHaveBeenCalled();
   });
 
-  test('Should trigger onDownloadClick function', () => {
+  test('Should trigger onDownloadButtonClick function', () => {
     const menuButton = container.getByRole('button', { name: /actions/i });
     fireEvent.click(menuButton);
 
     const downloadButton = container.getByRole('menuitem', { name: /download/i });
     fireEvent.click(downloadButton);
 
-    expect(onDownloadClick).toHaveBeenCalled();
+    expect(onDownloadButtonClick).toHaveBeenCalled();
   });
 });
 
