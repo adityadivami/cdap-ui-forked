@@ -21,7 +21,7 @@ import Menu, { IActionsOptions } from 'components/common/InlayDrawerWidget/Menu'
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-interface IRecipeStepWidgetProps extends PropsWithChildren<unknown> {
+interface IRecipeStepWidgetProps {
   actionsOptions: IActionsOptions[];
   enableActions: boolean;
   headingText: string;
@@ -118,7 +118,7 @@ export default function InlayDrawerWidget({
   onClose,
   position = 'right',
   showDivider,
-}: IRecipeStepWidgetProps) {
+}: PropsWithChildren<IRecipeStepWidgetProps>) {
   const PanelContainer = getContainerComponent(position);
 
   return (
