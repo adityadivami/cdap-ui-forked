@@ -15,8 +15,7 @@
  */
 
 import { cleanup, fireEvent, render } from '@testing-library/react';
-import InlayDrawerWidget from 'components/InlayDrawerWidget';
-import { IMenuItem } from 'components/InlayDrawerWidget/Menu';
+import InlayDrawerWidget, { IMenuItem } from 'components/InlayDrawerWidget';
 import React from 'react';
 
 const handleDrawerCloseIconClick = jest.fn();

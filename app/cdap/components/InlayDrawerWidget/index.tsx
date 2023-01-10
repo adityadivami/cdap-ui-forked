@@ -14,12 +14,20 @@
  * the License.
  */
 
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, Button, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import Menu, { IMenuItem } from 'components/InlayDrawerWidget/Menu';
+import T from 'i18n-react';
 import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
+import { PREFIX } from './InlayDrawerWidget.stories';
+
+export interface IMenuItem {
+  label: string;
+  value: string;
+  clickHandler: () => void;
+}
 
 interface IRecipeStepWidgetProps {
   actionsOptions: IMenuItem[];
@@ -31,46 +39,47 @@ interface IRecipeStepWidgetProps {
 }
 
 const Container = styled(Box)`
-  width: 500px;
+  border-left: 1px solid ${grey[300]};
   height: calc(100vh - 232px);
+  overflow: scroll;
   padding-left: 20px;
   padding-right: 10px;
-  overflow: scroll;
   position: relative;
-  border-left: 1px solid ${grey[300]};
+  width: 500px;
 `;
 
 const Divider = styled.div`
-  width: 1px;
-  height: 28px;
   background-color: ${grey[300]};
+  height: 28px;
+  margin-bottom: 0px;
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 0px;
-  margin-bottom: 0px;
+  width: 1px;
 `;
 
 const DrawerWidgetTitleLabel = styled(Typography)`
   &.MuiTypography-body1 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 150%;
-    letter-spacing: 0.15;
     color: ${grey[900]};
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0.25px;
+    line-height: 32px;
+    text-align: left;
   }
 `;
 
 const HeaderIconWrapper = styled(Box)`
-  display: flex;
   align-items: center;
+  display: flex;
 `;
 
 const HeaderStyle = styled.header`
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
 `;
 
 const LeftContainer = styled(Container)`
@@ -78,10 +87,30 @@ const LeftContainer = styled(Container)`
   border-right: 1px solid ${grey[300]};
 `;
 
+const MenuButton = styled(Button)`
+  &.MuiButton-root {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.25px;
+    line-height: 24px;
+    text-align: center;
+  }
+`;
+
 const StyledIconButton = styled(IconButton)`
   cursor: pointer;
   display: flex;
   justify-content: flex-end;
+`;
+
+const StyledMenuItem = styled(MenuItem)`
+  &.MuiMenuItem-root {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-align: left;
+  }
 `;
 
 const getContainerComponent = (position: 'left' | 'right') => {
@@ -91,6 +120,11 @@ const getContainerComponent = (position: 'left' | 'right') => {
   return Container;
 };
 
+/**
+ *
+ * @param label - any space-separated string
+ * @returns - an hyphen-separated string, spaces in the received string are replaced by hyphens
+ */
 export const getTestIdString = (label: string) =>
   label
     .trim()
@@ -121,20 +155,64 @@ export default function InlayDrawerWidget({
 }: PropsWithChildren<IRecipeStepWidgetProps>) {
   const PanelContainer = getContainerComponent(position);
 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <PanelContainer role="presentation" data-testid="column-view-panel-parent">
+    <PanelContainer data-testid="inlay-drawer-widget-parent" role="presentation">
       <HeaderStyle>
         <DrawerWidgetTitleLabel data-testid="drawer-widget-heading">
           {headingText}
         </DrawerWidgetTitleLabel>
         <HeaderIconWrapper>
           {actionsOptions.length && (
-            <Menu menuItems={actionsOptions} enableMenuButton={enableActions} />
+            <div>
+              <MenuButton
+                aria-controls="inlay-drawer-widget-menu"
+                aria-haspopup="true"
+                data-testid="inlay-drawer-actions-menu"
+                disabled={!enableActions}
+                endIcon={<ArrowDropDownIcon />}
+                onClick={handleClick}
+              >
+                {T.translate(`${PREFIX}.buttonLabels.actions`)}
+              </MenuButton>
+              <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+                getContentAnchorEl={null}
+                id="inlay-drawer-widget-menu"
+                keepMounted
+                onClose={handleClose}
+                open={Boolean(anchorEl)}
+                transformOrigin={{ horizontal: 'center', vertical: 'top' }}
+              >
+                {actionsOptions.map((eachOption) => {
+                  const testId = getTestIdString(eachOption.label);
+                  return (
+                    <StyledMenuItem
+                      data-testid={`menu-item-${testId}`}
+                      key={`menu-item-${testId}`}
+                      onClick={eachOption.clickHandler}
+                    >
+                      {eachOption.label}
+                    </StyledMenuItem>
+                  );
+                })}
+              </Menu>
+            </div>
           )}
           {showDivider && <Divider />}
           <StyledIconButton
-            data-testid="drawer-widget-close-round-icon"
-            aria-label="close-icon"
+            aria-label="inlay drawer widget close icon"
+            data-testid="inlay-drawer-widget-close-icon"
             onClick={onClose}
           >
             <CloseRoundedIcon color="action" />
