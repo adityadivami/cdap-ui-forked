@@ -47,7 +47,6 @@ beforeEach(() => {
   container = render(
     <InlayDrawerWidget
       actionsOptions={actionsOptions}
-      enableActions
       headingText={'Inlay Drawer'}
       onClose={handleDrawerCloseIconClick}
       position={'left'}

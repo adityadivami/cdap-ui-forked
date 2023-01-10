@@ -31,11 +31,11 @@ export interface IMenuItem {
 
 interface IRecipeStepWidgetProps {
   actionsOptions: IMenuItem[];
-  enableActions: boolean;
   headingText: string;
   onClose: () => void;
   position: 'left' | 'right';
-  showDivider: boolean;
+  disableActionsButton?: boolean;
+  showDivider?: boolean;
 }
 
 const Container = styled(Box)`
@@ -136,7 +136,7 @@ export const getTestIdString = (label: string) =>
  *
  * @param actionsOptions - the options to be rendered inside the actions dropdown, an array of objects
  * @param children - the child component to be rendered as body in this panel
- * @param enableActions - boolean value to enable or disable the Actions button in panel header
+ * @param disableActionsButton - boolean value to disable the Actions button in panel header when set to true
  * @param headingText - text to be displayed as header of the panel
  * @param onClose - handles event triggered when close icon is clicked
  * @param position - the position of the panel, either left or right, based on how components are positioned in parent. by default position is right
@@ -147,7 +147,7 @@ export const getTestIdString = (label: string) =>
 export default function InlayDrawerWidget({
   actionsOptions,
   children,
-  enableActions,
+  disableActionsButton,
   headingText,
   onClose,
   position = 'right',
@@ -170,13 +170,13 @@ export default function InlayDrawerWidget({
       <StyledHeader>
         <Label data-testid="drawer-widget-heading">{headingText}</Label>
         <IconWrapper>
-          {actionsOptions.length && (
+          {Boolean(actionsOptions.length) && (
             <div>
               <MenuButton
                 aria-controls="inlay-drawer-widget-menu"
                 aria-haspopup="true"
                 data-testid="inlay-drawer-actions-menu"
-                disabled={!enableActions}
+                disabled={disableActionsButton}
                 endIcon={<ArrowDropDownIcon />}
                 onClick={handleClick}
               >
