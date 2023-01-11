@@ -44,13 +44,13 @@ describe('Test RecipeDetails Component', () => {
   });
 
   it('should check if the recipe name is as expected', () => {
-    const recipeNameElement = screen.getByTestId(/recipe-name/i);
+    const recipeNameElement = screen.getByTestId(/selected-recipe-name/i);
     expect(recipeNameElement).toBeInTheDocument();
     expect(recipeNameElement).toHaveTextContent('RecipeABC101');
   });
 
   it('should check if the recipe count and date is as expected', () => {
-    const recipeCountDateElement = screen.getByTestId(/recipe-count-and-date/i);
+    const recipeCountDateElement = screen.getByTestId(/selected-recipe-count-and-date/i);
     expect(recipeCountDateElement).toBeInTheDocument();
     expect(recipeCountDateElement).toHaveTextContent(
       `2 ${T.translate(`${PREFIX}.common.tableHeaders.recipeStep`)}`
@@ -58,13 +58,13 @@ describe('Test RecipeDetails Component', () => {
   });
 
   it('should check if the recipe description is as expected', () => {
-    const recipeDescriptionElement = screen.getByTestId(/recipe-decription/i);
+    const recipeDescriptionElement = screen.getByTestId(/selected-recipe-description/i);
     expect(recipeDescriptionElement).toBeInTheDocument();
     expect(recipeDescriptionElement).toHaveTextContent('Recipe for cleansing empolyee information');
   });
 
   it('should check if the recipe steps text is as expected', () => {
-    const recipeStepTextElement = screen.getByTestId(/recipe-step-text-0/i);
+    const recipeStepTextElement = screen.getByTestId(/selected-recipe-step-text-0/i);
     expect(recipeStepTextElement).toBeInTheDocument();
     expect(recipeStepTextElement).toHaveTextContent(
       `set-column :body_2_copy body_2 + \u0027text\u0027`

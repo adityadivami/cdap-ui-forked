@@ -84,10 +84,10 @@ const DirectivesTable = ({ directives }: { directives: string[] }) => {
         {directives.map((recipeStep, recipeStepIndex) => {
           return (
             <StyledTableBodyRow>
-              <StyledTableBodyCell data-testid={`recipe-step-index-${recipeStepIndex}`}>
+              <StyledTableBodyCell data-testid={`selected-recipe-step-index-${recipeStepIndex}`}>
                 {getSerialNumber(recipeStepIndex)}
               </StyledTableBodyCell>
-              <StyledTableBodyCell data-testid={`recipe-step-text-${recipeStepIndex}`}>
+              <StyledTableBodyCell data-testid={`selected-recipe-step-text-${recipeStepIndex}`}>
                 {recipeStep}
               </StyledTableBodyCell>
             </StyledTableBodyRow>

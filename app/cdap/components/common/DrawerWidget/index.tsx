@@ -107,6 +107,7 @@ export default function({
   showBackIcon,
   onBackIconClick,
   anchor = 'right',
+  showHeaderSeparator = true,
   dataTestId,
 }: IDrawerWidgetProps) {
   return (
@@ -126,6 +127,7 @@ export default function({
             <Label data-testid="widget-heading-text" component="span">
               {headingText}
             </Label>
+            {showHeaderSeparator && <img src="/cdap_assets/img/underline" />}
           </LabelContainer>
         </HeaderActions>
         <HeaderActions>

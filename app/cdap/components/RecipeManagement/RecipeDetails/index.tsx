@@ -25,7 +25,7 @@ import { IRecipeDetailsProps } from 'components/RecipeManagement/types';
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
-const DetailsWrapper = styled(Box)`
+const MainContainer = styled(Box)`
   margin-top: 19px;
 `;
 
@@ -36,7 +36,7 @@ const RecipeNameLabel = styled(Typography)`
   font-weight: 400;
 `;
 
-const DescriptionWrapper = styled(Box)`
+const SubContainer = styled(Box)`
   margin: 20px 0 10px;
 `;
 
@@ -58,25 +58,25 @@ const VerticalDivider = styled(Box)`
 
 const RecipeDetails = ({ selectedRecipe }: IRecipeDetailsProps) => {
   return (
-    <DetailsWrapper>
-      <RecipeNameLabel component="h5" data-testid="recipe-name">
+    <MainContainer>
+      <RecipeNameLabel component="h5" data-testid="selected-recipe-name">
         {selectedRecipe.recipeName}
       </RecipeNameLabel>
-      <DescriptionWrapper>
-        <DetailsText component="div" data-testid="recipe-count-and-date">
+      <SubContainer>
+        <DetailsText component="div" data-testid="selected-recipe-count-and-date">
           {`${selectedRecipe.directives.length} ${T.translate(
             `${PREFIX}.common.tableHeaders.recipeStep`
           )}`}
           <VerticalDivider /> {format(selectedRecipe.updatedTimeMillis, TYPES.TIMESTAMP_MILLIS)}
         </DetailsText>
-      </DescriptionWrapper>
-      <DescriptionWrapper>
-        <DetailsText component="p" data-testid="recipe-decription">
+      </SubContainer>
+      <SubContainer>
+        <DetailsText component="p" data-testid="selected-recipe-description">
           {selectedRecipe.description}
         </DetailsText>
-      </DescriptionWrapper>
+      </SubContainer>
       <DirectiveTable directives={selectedRecipe.directives} />
-    </DetailsWrapper>
+    </MainContainer>
   );
 };
 
