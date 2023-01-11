@@ -73,11 +73,11 @@ public void verifyIfTheEditRecipePanelHasCancelButton() {
 
 @Then("Enter RecipeName in the TextField and Description in the TextArea")
 public void enterRecipeNameAndDescription() {
-  WebElement recipeName= Helper.locateElementByTestId("recipe-name-input");
+  WebElement recipeName = Helper.locateElementByTestId("recipe-name-input");
   recipeName.click();
   recipeName.clear();
   recipeName.sendKeys("lavanya");
-  WebElement description= Helper.locateElementByTestId("recipe-description-field");
+  WebElement description = Helper.locateElementByTestId("recipe-description-field");
   description.click();
   description.sendKeys("updated");
   Assert.assertTrue((Helper.locateElementByTestId("recipe-cancel-button").isEnabled()));
@@ -90,12 +90,13 @@ public void verifyIfTheSaveButtonIsEnabled() {
 
 @Then("Click on Save Button")
 public void clickOnSaveButton() {
-  ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-save-button"));
+      
+      ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-save-button"));
 }
 
 @Then("Verify if the Edit Recipe panel is closed")
 public void verifyEditRecipePanelClosed() {
-  Assert.assertFalse(Helper.isElementExists("EDIT_RECIPE-drawer-widget"));
+      Assert.assertFalse(Helper.isElementExists("EDIT_RECIPE-drawer-widget"));
 }
 
 @Then("Verify if SnackBar is opened")
