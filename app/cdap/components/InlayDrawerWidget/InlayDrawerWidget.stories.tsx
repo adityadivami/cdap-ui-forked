@@ -17,6 +17,7 @@
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import InlayDrawerWidget, { IMenuItem } from 'components/InlayDrawerWidget';
+import CustomDataGrid, { dataGridColumns, dataGridRows } from 'components/WranglerV2/DataTable';
 import T from 'i18n-react';
 import React, { useState } from 'react';
 
@@ -70,7 +71,7 @@ storiesOf('InlayDrawerWidget', module).add(
           position={'left'}
           showDivider
         >
-          <div>{T.translate(`${PREFIX}.messages.childComponentMessage`)}</div>
+          <CustomDataGrid columns={dataGridColumns} data={dataGridRows} />
         </InlayDrawerWidget>
       )
     );
