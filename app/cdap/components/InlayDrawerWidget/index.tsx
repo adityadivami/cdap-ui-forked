@@ -55,7 +55,7 @@ const getContainerComponent = (position: 'left' | 'right') => {
 /**
  *
  * @param label - any space-separated string
- * @returns - a hyphenated string, spaces in the received string are replaced by hyphens
+ * @returns - a hyphenated string
  */
 export const getTestIdString = (label: string) =>
   label
