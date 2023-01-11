@@ -14,14 +14,21 @@
  * the License.
  */
 
-import { Box, Button, IconButton, Menu, MenuItem, Typography } from '@material-ui/core';
-import grey from '@material-ui/core/colors/grey';
+import { Container, Divider, Menu } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { PREFIX } from 'components/InlayDrawerWidget/InlayDrawerWidget.stories';
+import {
+  IconWrapper,
+  Label,
+  LeftContainer,
+  MenuButton,
+  StyledHeader,
+  StyledIconButton,
+  StyledMenuItem,
+} from 'components/InlayDrawerWidget/styles';
 import T from 'i18n-react';
 import React, { PropsWithChildren } from 'react';
-import styled from 'styled-components';
 
 export interface IMenuItem {
   clickHandler: () => void;
@@ -38,81 +45,6 @@ interface IRecipeStepWidgetProps {
   showDivider?: boolean;
 }
 
-const Container = styled(Box)`
-  border-left: 1px solid ${grey[300]};
-  height: calc(100vh - 232px);
-  overflow: scroll;
-  padding-left: 20px;
-  padding-right: 10px;
-  position: relative;
-  width: 500px;
-`;
-
-const Divider = styled.div`
-  background-color: ${grey[300]};
-  height: 28px;
-  margin-bottom: 0px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 0px;
-  width: 1px;
-`;
-
-const Label = styled(Typography)`
-  &.MuiTypography-body1 {
-    color: ${grey[900]};
-    font-style: normal;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0.25px;
-    line-height: 32px;
-    text-align: left;
-  }
-`;
-
-const IconWrapper = styled(Box)`
-  align-items: center;
-  display: flex;
-`;
-
-const StyledHeader = styled.header`
-  align-items: center;
-  display: flex;
-  height: 60px;
-  justify-content: space-between;
-`;
-
-const LeftContainer = styled(Container)`
-  border-left: none;
-  border-right: 1px solid ${grey[300]};
-`;
-
-const MenuButton = styled(Button)`
-  &.MuiButton-root {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 1.25px;
-    line-height: 24px;
-    text-align: center;
-  }
-`;
-
-const StyledIconButton = styled(IconButton)`
-  cursor: pointer;
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const StyledMenuItem = styled(MenuItem)`
-  &.MuiMenuItem-root {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: 0.5px;
-    text-align: left;
-  }
-`;
-
 const getContainerComponent = (position: 'left' | 'right') => {
   if (position === 'left') {
     return LeftContainer;
@@ -123,7 +55,7 @@ const getContainerComponent = (position: 'left' | 'right') => {
 /**
  *
  * @param label - any space-separated string
- * @returns - an hyphen-separated string, spaces in the received string are replaced by hyphens
+ * @returns - a hyphenated string, spaces in the received string are replaced by hyphens
  */
 export const getTestIdString = (label: string) =>
   label
@@ -135,7 +67,6 @@ export const getTestIdString = (label: string) =>
 /**
  *
  * @param actionsOptions - the options to be rendered inside the actions dropdown, an array of objects
- * @param children - the child component to be rendered as body in this panel
  * @param disableActionsButton - boolean value to disable the Actions button in panel header when set to true
  * @param headingText - text to be displayed as header of the panel
  * @param onClose - handles event triggered when close icon is clicked
