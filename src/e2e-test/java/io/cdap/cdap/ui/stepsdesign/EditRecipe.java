@@ -47,8 +47,7 @@ public class EditRecipe {
     WebElement ele = allRecipesName.get(0);
     ele.click();
   }
-
-
+  
 @Then("Click on the Edit")
   public void clickOnTheEditIcon() {
     ElementHelper.clickOnElement(Helper.locateElementByTestId("Edit-on-popover"));
@@ -90,7 +89,7 @@ public void verifyIfTheSaveButtonIsEnabled() {
 
 @Then("Click on Save Button")
 public void clickOnSaveButton() {
-      
+
       ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-save-button"));
 }
 
