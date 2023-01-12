@@ -31,6 +31,7 @@ Feature: SelectColumnPanel
     Then Click on the ChangeDataType
     Then Click on the Search icon
     Then Enter name of any column from the List
+    Then Click on close icon of search
     Then Click on the radio button of any column
     Then Click on the Done button
     Then Verify if the select column panel is closed

@@ -16,13 +16,9 @@
 
 package io.cdap.cdap.ui.stepsdesign;
 
-import io.cdap.cdap.ui.utils.Constants;
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
-import io.cdap.e2e.utils.SeleniumDriver;
-import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 public class FooterPanel {
