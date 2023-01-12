@@ -50,11 +50,16 @@ interface ISelectColumnPanelProps {
  * so this function will return only those columns whose dataype is either int, float or double
  */
 export const getFilteredColumn = (
+  transformationName: string,
   transformationDataType: string[],
   columnsList: IHeaderNamesList[]
 ) => {
   if (transformationDataType.length && transformationDataType.includes('all')) {
-    return columnsList;
+    return columnsList.filter((eachColumn) => {
+      const lowercaseTypes = eachColumn.type.map((eachType) => eachType.toLowerCase());
+
+      return !lowercaseTypes.includes(transformationName.toLowerCase());
+    });
   }
 
   return columnsList.filter((columnDetail: IHeaderNamesList) =>
@@ -83,7 +88,7 @@ export const enableDoneButton = (
   if (isTwoColumnSelectionMode) {
     return selectedColumns.length !== 2; // implies that the button should be enabled on when two columns are selected
   }
-  return !(selectedColumns.length >= 1); // in any case, atleast one column must be selected
+  return !selectedColumns.length; // in any case, atleast one column must be selected
 };
 
 /**
@@ -110,6 +115,7 @@ export default function SelectColumnPanel({
   );
 
   const filteredColumnsOnTransformationType: IHeaderNamesList[] = getFilteredColumn(
+    transformationName,
     transformationDataType,
     columnsList
   );

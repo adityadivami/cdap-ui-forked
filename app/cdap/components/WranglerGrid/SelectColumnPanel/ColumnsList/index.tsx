@@ -61,6 +61,7 @@ export default function ColumnsList({
 }: IColumnsListProps) {
   const [columns, setColumns] = useState(filteredColumnsOnTransformationType);
   const [isFocused, setIsFocused] = useState(false);
+
   const inputRef = useRef(null);
 
   // handle multiple column selection
@@ -156,7 +157,7 @@ export default function ColumnsList({
           handleSingleSelection={(column) => setSelectedColumns([column])}
           isCheckboxDisabled={isCheckboxDisabled}
           handleMultipleSelection={handleMultipleSelection}
-          columns={filteredColumnsOnTransformationType.length === 0 ? [] : columns}
+          columns={columns}
           transformationDataType={transformationDataType}
           isSingleSelection={isSingleSelection}
           selectedColumns={selectedColumns}

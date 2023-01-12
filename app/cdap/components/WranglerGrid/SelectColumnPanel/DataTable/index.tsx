@@ -14,18 +14,19 @@
  * the License.
  */
 
-import { Checkbox, Divider, TableBody } from '@material-ui/core';
+import { Divider, TableBody } from '@material-ui/core';
 import NoRecordScreen from 'components/NoRecordScreen';
 import {
   MULTI_SELECTION_COLUMN,
   PREFIX,
 } from 'components/WranglerGrid/SelectColumnPanel/constants';
 import {
-  FlexWrapper,
-  StyledCheckbox,
-  CheckboxCheckedIcon,
   CheckboxBlankIcon,
+  CheckboxCheckedIcon,
   CheckboxIndeterminateIcon,
+  FlexWrapper,
+  MultiSelectionCheckbox,
+  StyledCheckbox,
   StyledInputTableBodyCell,
   StyledRadio,
   StyledTable,
@@ -34,7 +35,6 @@ import {
   StyledTableHead,
   StyledTableHeadCell,
   StyledTableRow,
-  MultiSelectionCheckbox,
 } from 'components/WranglerGrid/SelectColumnPanel/styles';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 import DataQualityCircularProgressBar from 'components/WranglerV2/DataQualityCircularProgressBar';
@@ -100,11 +100,7 @@ export default function DataTable({
   // This function is used to filter column based on their datatype which matches with the supported types of transformation to be applied
   const getColumnsToDisplay = () => {
     if (transformationDataType.includes('all')) {
-      return columns.filter((eachColumn) => {
-        const lowercaseTypes = eachColumn.type.map((eachType) => eachType.toLowerCase());
-
-        return !lowercaseTypes.includes(transformationName.toLowerCase());
-      });
+      return columns;
     }
     return columns.filter((column) =>
       transformationDataType.includes(column.type[0].toLowerCase())
@@ -119,7 +115,7 @@ export default function DataTable({
         <FlexWrapper>
           <NoRecordScreen
             title={T.translate(`${PREFIX}.noColumns`)}
-            subtitle={T.translate(`${PREFIX}.noMatchColumnDatatype`)}
+            subtitle={T.translate(`${PREFIX}.noMatchInSearchMode`)}
           />
         </FlexWrapper>
       )}
