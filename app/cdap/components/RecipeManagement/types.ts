@@ -23,7 +23,6 @@ export interface IRecipeFormProps {
   recipeNameErrorMessage: string;
   onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  setRecipeFormData: Dispatch<React.SetStateAction<IRecipeFormData>>;
   onCancel: () => void;
   isSaveDisabled: boolean;
   recipeFormAction: string;

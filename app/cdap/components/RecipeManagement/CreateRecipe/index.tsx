@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { FormEvent, ChangeEvent, useEffect, useState, useRef, useCallback } from 'react';
+import React, { FormEvent, ChangeEvent, useState, useRef } from 'react';
 import T from 'i18n-react';
 import { getRecipeByName, createRecipe } from 'components/RecipeManagement/CreateRecipe/services';
 import { debounce } from 'lodash';
@@ -38,22 +38,23 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   });
 
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
-  const [recipeNameErrorData, setRecipeNameErrorData] = useState(noErrorState);
+  const [recipeNameErrorData, setRecipeNameErrorDataState] = useState(noErrorState);
+
+  const setRecipeNameErrorData = (recipeNameError, formData = recipeFormData) => {
+    setRecipeNameErrorDataState(recipeNameError);
+    handleSaveButtonMode(formData, recipeNameError);
+  };
 
   // This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
-  useEffect(() => {
-    handleSaveButtonMode();
-  }, [recipeNameErrorData.isRecipeNameError]);
-
-  const handleSaveButtonMode = (formData = recipeFormData) => {
+  const handleSaveButtonMode = (formData = recipeFormData, nameErrorData = recipeNameErrorData) => {
     if (
       formData.recipeName === '' ||
       formData.description === '' ||
       formData.recipeName?.trim().length === 0 ||
       formData.description?.trim().length === 0 ||
-      recipeNameErrorData.isRecipeNameError
+      nameErrorData.isRecipeNameError
     ) {
       setIsSaveDisabled(true);
     } else {
@@ -71,7 +72,11 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       ...recipeFormData,
       recipeName: event.target.value,
     });
-    validateRecipeNameExists.current(event.target.value);
+    validateRecipeNameExists.current({
+      recipeName: event.target.value,
+      description: recipeFormData.description,
+      directives: [],
+    });
   };
 
   const onRecipeDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -117,37 +122,40 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     setShowRecipeForm(false);
   };
 
-  const onGetRecipeByNameError = (err, recipeName) => {
+  const onGetRecipeByNameError = (err, formData) => {
     if (
       err.statusCode === 404 &&
-      err.message === `recipe with name '${recipeName}' does not exist`
+      err.message === `recipe with name '${formData.recipeName}' does not exist`
     ) {
-      setRecipeNameErrorData(noErrorState);
+      setRecipeNameErrorData(noErrorState, formData);
     }
   };
 
+  const onGetRecipeByNameResponse = (formData) => {
+    !recipeNameErrorData.isRecipeNameError &&
+      setRecipeNameErrorData(
+        {
+          isRecipeNameError: true,
+          recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+        },
+        formData
+      );
+  };
+
   const validateRecipeNameExists = useRef(
-    debounce((recipeName: string) => {
-      if (recipeName && !recipeNameRegEx.test(recipeName)) {
+    debounce((formData) => {
+      if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
         setRecipeNameErrorData({
           isRecipeNameError: true,
           recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
         });
       } else {
-        recipeName
-          ? getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError)
+        formData.recipeName
+          ? getRecipeByName(formData, onGetRecipeByNameResponse, onGetRecipeByNameError)
           : setRecipeNameErrorData(noErrorState);
       }
     }, 500)
   );
-
-  const onGetRecipeByNameResponse = () => {
-    !recipeNameErrorData.isRecipeNameError &&
-      setRecipeNameErrorData({
-        isRecipeNameError: true,
-        recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
-      });
-  };
 
   return (
     <>
@@ -157,7 +165,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
         onRecipeNameChange={onRecipeNameChange}
         onFormSubmit={onFormSubmit}
-        setRecipeFormData={setRecipeFormData}
         onCancel={onCancel}
         isSaveDisabled={isSaveDisabled}
         recipeFormAction={CREATE_RECIPE}
