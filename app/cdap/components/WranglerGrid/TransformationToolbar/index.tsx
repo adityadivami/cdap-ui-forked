@@ -133,7 +133,7 @@ export default function({
                   </NormalFont>
                 )}
               </FunctionBoxWrapper>
-              {(optionIndex === 3 || optionIndex === 1 || optionIndex === 8) && (
+              {(optionIndex === 3 || optionIndex === 1) && (
                 <DividerBox> {showName ? LongDivider : Divider}</DividerBox>
               )}
             </>
