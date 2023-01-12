@@ -115,12 +115,12 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     });
   };
 
-  const onCreateRecipeError = (err) => {
+  const onCreateRecipeError = (err: Record<string, unknown>) => {
     setShowRecipeForm(false);
     setSnackbar({
       open: true,
       isSuccess: false,
-      message: err.response.message,
+      message: err.response['message'],
     });
   };
 
@@ -128,7 +128,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     setShowRecipeForm(false);
   };
 
-  const onGetRecipeByNameError = (err, formData: IRecipeFormData) => {
+  const onGetRecipeByNameError = (err: Record<string, unknown>, formData: IRecipeFormData) => {
     if (err.statusCode === 404) {
       setRecipeNameErrorData(noErrorState, formData);
     }
