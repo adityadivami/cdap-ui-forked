@@ -19,7 +19,6 @@ package io.cdap.cdap.ui.stepsdesign;
 import io.cdap.cdap.ui.utils.Helper;
 import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.SeleniumDriver;
-import io.cdap.e2e.utils.WaitHelper;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -32,7 +31,7 @@ public class SelectColumnPanel {
   public void clickOnTheStructureIcon() {
     ElementHelper.clickOnElement(Helper.locateElementByTestId("toolbar-icon-structure"));
     ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-changeDatatype"));
-    ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-string"));
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("menu-item-boolean"));
   }
   @Then("Verify if the user is on the select column panel")
   public void verifyIfTheUserIsOnTheSelectColumnPanel() {
@@ -61,6 +60,10 @@ public class SelectColumnPanel {
     String columnName = allProductsName.get(1).getText();
     Helper.locateElementByTestId("input-search-id").sendKeys(columnName);
     Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("radio-input-0")));
+  }
+  @Then("Click on close icon of search")
+  public void clickOnCloseOfSearch() {
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("click-handle-blur"));
   }
 
   @Then("Click on the radio button of any column")
