@@ -18,7 +18,7 @@ import React, { Dispatch, ChangeEvent, FormEvent, SetStateAction } from 'react';
 import { ISnackbar } from 'components/Snackbar';
 
 export interface IRecipeFormProps {
-  recipeFormData: IRecipeFormData;
+  recipeFormData: IRecipeFormData | IRecipeData;
   isRecipeNameError: boolean;
   recipeNameErrorMessage: string;
   onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -32,10 +32,30 @@ export interface IRecipeFormProps {
 export interface IRecipeFormData {
   recipeName: string;
   description: string;
+}
+
+export interface IRecipeData extends IRecipeFormData {
   directives: string[];
 }
 
 export interface ICreateRecipeProps {
   setShowRecipeForm: Dispatch<SetStateAction<boolean>>;
   setSnackbar: Dispatch<SetStateAction<ISnackbar>>;
+}
+
+export interface IRecipeNameErrorData {
+  isRecipeNameError: boolean;
+  recipeNameErrorMessage: string;
+}
+
+export interface IGetRecipeByName {
+  formData: IRecipeFormData;
+  onGetRecipeByNameResponse: (formData: IRecipeFormData) => void;
+  onGetRecipeByNameError: (err, formData: IRecipeFormData) => void;
+}
+
+export interface ICreateRecipe {
+  requestBody: IRecipeData;
+  onCreateRecipeResponse: () => void;
+  onCreateRecipeError: (err) => void;
 }

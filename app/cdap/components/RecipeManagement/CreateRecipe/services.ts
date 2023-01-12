@@ -16,8 +16,13 @@
 
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import { IGetRecipeByName, ICreateRecipe } from 'components/RecipeManagement/types';
 
-export const getRecipeByName = (formData, onGetRecipeByNameResponse, onGetRecipeByNameError) => {
+export const getRecipeByName = ({
+  formData,
+  onGetRecipeByNameResponse,
+  onGetRecipeByNameError,
+}: IGetRecipeByName) => {
   const params = {
     context: getCurrentNamespace(),
     recipeName: formData.recipeName,
@@ -32,7 +37,11 @@ export const getRecipeByName = (formData, onGetRecipeByNameResponse, onGetRecipe
   );
 };
 
-export const createRecipe = (requestBody, onCreateRecipeResponse, onCreateRecipeError) => {
+export const createRecipe = ({
+  requestBody,
+  onCreateRecipeResponse,
+  onCreateRecipeError,
+}: ICreateRecipe) => {
   const params = {
     context: getCurrentNamespace(),
   };
