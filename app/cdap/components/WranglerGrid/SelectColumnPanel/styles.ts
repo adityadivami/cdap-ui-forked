@@ -161,10 +161,6 @@ export const Wrapper = styled(Box)`
 export const StyledTable = styled(Table)`
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 1px 1px rgb(0 0 0 / 20%), 0px 2px 2px rgb(0 0 0 / 14%),
-    0px 1px 5px rgb(0 0 0 / 12%);
-  border-radius: 4px;
-  border: 1px solid #e0e0e0;
 `;
 
 export const StyledTableContainer = styled(TableContainer)`
@@ -173,6 +169,11 @@ export const StyledTableContainer = styled(TableContainer)`
   margin-top: 10px;
   padding-bottom: 10px;
   width: 460px;
+
+  box-shadow: 0px 1px 1px rgb(0 0 0 / 20%), 0px 2px 2px rgb(0 0 0 / 14%),
+    0px 1px 5px rgb(0 0 0 / 12%);
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
 `;
 
 export const StyledTableHead = styled(TableHead)`
