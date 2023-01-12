@@ -22,19 +22,19 @@ import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedBu
 import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';
 
 export const FormFieldWrapper = styled(Box)`
-  width: calc(100% - 60px);
-  margin-right: 60px;
   margin-bottom: 15px;
+  margin-right: 60px;
   margin-top: 15px;
+  width: calc(100% - 60px);
 `;
 
 export const Label = styled(Typography)`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 20px;
-  letter-spacing: 0.4px;
   color: ${grey[700]};
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  line-height: 20px;
 `;
 
 export const ErrorLabel = styled(Label)`
@@ -42,20 +42,28 @@ export const ErrorLabel = styled(Label)`
 `;
 
 export const StyledTextField = styled(TextField)`
-  width: 460px;
+  input::placeholder {
+    color: ${grey[600]};
+    opacity: 1;
+  }
+  .MuiFormHelperText-root.Mui-error {
+    color: #e05243;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
   .MuiOutlinedInput-input {
     padding: 12px 14px;
     font-size: 14px;
     line-height: 150%;
     letter-spacing: 0.15px;
   }
-  input::placeholder {
-    color: ${grey[600]};
-    opacity: 1;
-  }
+  width: 460px;
 `;
 
 export const ErrorTextField = styled(StyledTextField)`
+  .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border: 1px solid #ff8a80;
+  }
   .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border: 1px solid #ff8a80;
   }
@@ -68,25 +76,29 @@ export const NormalTextField = styled(StyledTextField)`
 `;
 
 export const StyledTextAreaAutosize = styled(TextareaAutosize)`
-  width: 460px;
-  font-size: 14px;
   border-color: ${grey[300]};
   border-radius: 4px;
-  height: 100px !important;
-  padding: 10.5px 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
   :focus-visible {
     outline: unset !important;
     border: 1px solid #000000;
   }
-  ::placeholder {
-    color: ${grey[600]};
+  :focus-visible {
+    outline: unset !important;
+    border: 1px solid #000000;
   }
+  font-size: 14px;
+  height: 100px !important;
   :hover {
     border: 1px solid #000000;
   }
+  letter-spacing: 0.15px;
+  line-height: 150%;
+  padding: 10.5px 14px;
   resize: none;
+  width: 460px;
+  ::placeholder {
+    color: ${grey[600]};
+  }
 `;
 
 export const StyledButton = css`
@@ -94,7 +106,6 @@ export const StyledButton = css`
   font-size: 14px;
   line-height: 150%;
   letter-spacing: 0.15px;
-  margin-top: ;
 `;
 
 export const CancelButton = styled(PrimaryOutlinedButton)`
@@ -105,15 +116,15 @@ export const CancelButton = styled(PrimaryOutlinedButton)`
 
 export const SaveButton = styled(PrimaryContainedButton)`
   ${StyledButton}
-  margin-right: 20px;
   background: #3367d6;
+  margin-right: 20px;
   width: 70px;
 `;
 
 export const CreateRecipeFormButtonWrapper = styled.div`
   float: left;
-  padding-bottom: 20px;
   margin-top: 100px;
+  padding-bottom: 20px;
 `;
 
 export const EditRecipeFormButtonWrapper = styled(CreateRecipeFormButtonWrapper)`

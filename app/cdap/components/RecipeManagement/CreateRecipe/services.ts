@@ -15,14 +15,14 @@
  */
 
 import MyDataPrepApi from 'api/dataprep';
+import { ICreateRecipeService, IGetRecipeByNameService } from 'components/RecipeManagement/types';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { IGetRecipeByName, ICreateRecipe } from 'components/RecipeManagement/types';
 
-export const getRecipeByName = ({
+export const getRecipeByNameService = ({
   formData,
   onGetRecipeByNameResponse,
   onGetRecipeByNameError,
-}: IGetRecipeByName) => {
+}: IGetRecipeByNameService) => {
   const params = {
     context: getCurrentNamespace(),
     recipeName: formData.recipeName,
@@ -31,17 +31,17 @@ export const getRecipeByName = ({
     () => {
       onGetRecipeByNameResponse(formData);
     },
-    (err) => {
+    (err: Record<string, unknown>) => {
       onGetRecipeByNameError(err, formData);
     }
   );
 };
 
-export const createRecipe = ({
+export const createRecipeService = ({
   requestBody,
   onCreateRecipeResponse,
   onCreateRecipeError,
-}: ICreateRecipe) => {
+}: ICreateRecipeService) => {
   const params = {
     context: getCurrentNamespace(),
   };
@@ -49,7 +49,7 @@ export const createRecipe = ({
     () => {
       onCreateRecipeResponse();
     },
-    (err) => {
+    (err: Record<string, unknown>) => {
       onCreateRecipeError(err);
     }
   );

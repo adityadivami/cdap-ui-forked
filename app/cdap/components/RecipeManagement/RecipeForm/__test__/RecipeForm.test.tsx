@@ -45,7 +45,7 @@ describe('Test Recipe Form Component', () => {
   });
 
   it('should render Recipe Name Label', () => {
-    const RecipeNameLabelElement = screen.getByTestId(/recipe-name-label/i);
+    const RecipeNameLabelElement = screen.getByTestId(/recipe-form-name-label/i);
     expect(RecipeNameLabelElement).toBeInTheDocument();
     expect(RecipeNameLabelElement).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.RecipeForm.labels.createRecipeNameLabel')}`
@@ -53,7 +53,7 @@ describe('Test Recipe Form Component', () => {
   });
 
   it('should render Recipe Description Label', () => {
-    const RecipeDescriptionLabelElement = screen.getByTestId(/recipe-description-label/i);
+    const RecipeDescriptionLabelElement = screen.getByTestId(/recipe-form-description-label/i);
     expect(RecipeDescriptionLabelElement).toBeInTheDocument();
     expect(RecipeDescriptionLabelElement).toHaveTextContent(
       `${T.translate('features.WranglerNewUI.RecipeForm.labels.description')}`
@@ -61,25 +61,25 @@ describe('Test Recipe Form Component', () => {
   });
 
   it('should render Recipe Name Field and trigger the change event as expected', () => {
-    const RecipeNameElement = screen.getByTestId(/recipe-name-field/i);
+    const RecipeNameElement = screen.getByTestId(/recipe-form-name-field/i);
     fireEvent.change(RecipeNameElement.firstChild.firstChild, { target: { value: 'test' } });
     expect(RecipeNameElement.firstChild.firstChild).toHaveValue('test');
   });
 
   it('should render Recipe Description Field', () => {
-    const RecipeDescriptionElement = screen.getByTestId(/recipe-description-field/i);
+    const RecipeDescriptionElement = screen.getByTestId(/recipe-form-description-field/i);
     fireEvent.change(RecipeDescriptionElement, { target: { value: 'test' } });
     expect(RecipeDescriptionElement).toHaveValue('test');
   });
 
   it('should trigger onCancel event in recipe', () => {
-    const cancelButtonElement = screen.getByTestId(/recipe-cancel-button/i);
+    const cancelButtonElement = screen.getByTestId(/recipe-form-cancel-button/i);
     fireEvent.click(cancelButtonElement);
     expect(mockOnCancel).toBeCalled();
   });
 
   it('should trigger onSave event in recipe', () => {
-    const saveButtonElement = screen.getByTestId(/recipe-save-button/i);
+    const saveButtonElement = screen.getByTestId(/recipe-form-save-button/i);
     fireEvent.click(saveButtonElement);
     expect(mockOnFormSubmit).toBeCalled();
   });

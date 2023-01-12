@@ -14,19 +14,19 @@
  * the License.
  */
 
-import React, { Dispatch, ChangeEvent, FormEvent, SetStateAction } from 'react';
 import { ISnackbar } from 'components/Snackbar';
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
 
 export interface IRecipeFormProps {
-  recipeFormData: IRecipeFormData | IRecipeData;
   isRecipeNameError: boolean;
-  recipeNameErrorMessage: string;
-  onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  onCancel: () => void;
   isSaveDisabled: boolean;
-  recipeFormAction: string;
+  onCancel: () => void;
+  onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onRecipeDescriptionChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  recipeFormAction: string;
+  recipeFormData: IRecipeFormData | IRecipeData;
+  recipeNameErrorMessage: string;
 }
 
 export interface IRecipeFormData {
@@ -48,14 +48,14 @@ export interface IRecipeNameErrorData {
   recipeNameErrorMessage: string;
 }
 
-export interface IGetRecipeByName {
+export interface IGetRecipeByNameService {
   formData: IRecipeFormData;
+  onGetRecipeByNameError: (err: Record<string, unknown>, formData: IRecipeFormData) => void;
   onGetRecipeByNameResponse: (formData: IRecipeFormData) => void;
-  onGetRecipeByNameError: (err, formData: IRecipeFormData) => void;
 }
 
-export interface ICreateRecipe {
+export interface ICreateRecipeService {
   requestBody: IRecipeData;
+  onCreateRecipeError: (err: Record<string, unknown>) => void;
   onCreateRecipeResponse: () => void;
-  onCreateRecipeError: (err) => void;
 }

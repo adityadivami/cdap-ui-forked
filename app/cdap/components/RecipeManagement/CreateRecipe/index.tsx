@@ -14,13 +14,19 @@
  * the License.
  */
 
-import React, { FormEvent, ChangeEvent, useState, useRef } from 'react';
-import T from 'i18n-react';
-import { getRecipeByName, createRecipe } from 'components/RecipeManagement/CreateRecipe/services';
-import { debounce } from 'lodash';
-import { IRecipeFormData, IRecipeNameErrorData } from 'components/RecipeManagement/types';
+import {
+  createRecipeService,
+  getRecipeByNameService,
+} from 'components/RecipeManagement/CreateRecipe/services';
 import RecipeForm, { CREATE_RECIPE } from 'components/RecipeManagement/RecipeForm';
-import { ICreateRecipeProps } from 'components/RecipeManagement/types';
+import {
+  ICreateRecipeProps,
+  IRecipeFormData,
+  IRecipeNameErrorData,
+} from 'components/RecipeManagement/types';
+import T from 'i18n-react';
+import { debounce } from 'lodash';
+import React, { FormEvent, useRef, useState } from 'react';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
@@ -103,7 +109,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       description: recipeFormData.description,
       directives: recipeSteps,
     };
-    createRecipe({ requestBody, onCreateRecipeResponse, onCreateRecipeError });
+    createRecipeService({ requestBody, onCreateRecipeResponse, onCreateRecipeError });
   };
 
   const onCreateRecipeResponse = () => {
@@ -120,7 +126,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     setSnackbar({
       open: true,
       isSuccess: false,
-      message: err.response['message'],
+      message: (err.response as Record<string, string>).message,
     });
   };
 
@@ -153,26 +159,26 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
           recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
         });
       } else {
-        formData.recipeName
-          ? getRecipeByName({ formData, onGetRecipeByNameResponse, onGetRecipeByNameError })
-          : setRecipeNameErrorData(noErrorState);
+        if (formData.recipeName) {
+          getRecipeByNameService({ formData, onGetRecipeByNameResponse, onGetRecipeByNameError });
+        } else {
+          setRecipeNameErrorData(noErrorState);
+        }
       }
     }, 500)
   );
 
   return (
-    <>
-      <RecipeForm
-        recipeFormData={recipeFormData}
-        isRecipeNameError={recipeNameErrorData.isRecipeNameError}
-        recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
-        onRecipeNameChange={onRecipeNameChange}
-        onFormSubmit={onFormSubmit}
-        onCancel={onCancel}
-        isSaveDisabled={isSaveDisabled}
-        recipeFormAction={CREATE_RECIPE}
-        onRecipeDescriptionChange={onRecipeDescriptionChange}
-      />
-    </>
+    <RecipeForm
+      recipeFormData={recipeFormData}
+      isRecipeNameError={recipeNameErrorData.isRecipeNameError}
+      recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
+      onRecipeNameChange={onRecipeNameChange}
+      onFormSubmit={onFormSubmit}
+      onCancel={onCancel}
+      isSaveDisabled={isSaveDisabled}
+      recipeFormAction={CREATE_RECIPE}
+      onRecipeDescriptionChange={onRecipeDescriptionChange}
+    />
   );
 }
