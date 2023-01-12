@@ -100,7 +100,11 @@ export default function DataTable({
   // This function is used to filter column based on their datatype which matches with the supported types of transformation to be applied
   const getColumnsToDisplay = () => {
     if (transformationDataType.includes('all')) {
-      return columns;
+      return columns.filter((eachColumn) => {
+        const lowercaseTypes = eachColumn.type.map((eachType) => eachType.toLowerCase());
+
+        return !lowercaseTypes.includes(transformationName.toLowerCase());
+      });
     }
     return columns.filter((column) =>
       transformationDataType.includes(column.type[0].toLowerCase())
