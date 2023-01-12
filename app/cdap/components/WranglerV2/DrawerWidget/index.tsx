@@ -39,6 +39,7 @@ const BackIcon = styled(ChevronLeftRoundedIcon)`
 
 const CustomizedIconButton = styled(IconButton)`
   padding: 0px;
+  margin-left: -1px;
 `;
 
 const CloseIcon = styled(CloseRoundedIcon)`
