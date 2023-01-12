@@ -129,10 +129,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   const onGetRecipeByNameError = (err, formData: IRecipeFormData) => {
-    if (
-      err.statusCode === 404 &&
-      err.message === `recipe with name '${formData.recipeName}' does not exist`
-    ) {
+    if (err.statusCode === 404) {
       setRecipeNameErrorData(noErrorState, formData);
     }
   };
