@@ -71,13 +71,13 @@ export default function DataTable({
   setSelectedColumns,
   transformationName,
 }: IDataTableProps) {
-  const indexOfMultiSelectOption = MULTI_SELECTION_COLUMN.findIndex(
+  const isMultiSelectMode = MULTI_SELECTION_COLUMN.some(
     (option) => option.value === transformationName && option.isMoreThanTwo === false
   );
 
   // This function is used to either select all checkbox or uncheck the selected once
   const handleChange = () => {
-    if (indexOfMultiSelectOption > -1) {
+    if (isMultiSelectMode) {
       // If only two column selection is possible
       if (selectedColumns.length) {
         setSelectedColumns([]); // If columns are already selected then those all will be unchecked

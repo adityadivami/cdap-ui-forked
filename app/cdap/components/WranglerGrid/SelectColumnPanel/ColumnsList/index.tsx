@@ -71,10 +71,10 @@ export default function ColumnsList({
     if (event.target.checked) {
       setSelectedColumns([...selectedColumns, column]);
     } else {
-      const indexOfUnchecked = selectedColumns.findIndex(
-        (columnDetail) => columnDetail.label === column.label
-      );
-      if (indexOfUnchecked > -1) {
+      if (selectedColumns.some((columnDetail) => columnDetail.label === column.label)) {
+        const indexOfUnchecked = selectedColumns.findIndex(
+          (columnDetail) => columnDetail.label === column.label
+        );
         setSelectedColumns(selectedColumns.filter((_, index) => index !== indexOfUnchecked));
       }
     }
@@ -82,11 +82,11 @@ export default function ColumnsList({
 
   // disable checkbox when the selection limit is reached for e.g. in join and swap we can select only two column
   const isCheckboxDisabled = () => {
-    const multiSelect = MULTI_SELECTION_COLUMN.findIndex(
+    const isMultiSelect = MULTI_SELECTION_COLUMN.some(
       (functionDetail: IMultipleSelectedFunctionDetail) =>
         functionDetail.value === transformationName && functionDetail.isMoreThanTwo
     );
-    return !(selectedColumns.length < 2 || multiSelect > -1);
+    return !(selectedColumns.length < 2 || isMultiSelect);
   };
 
   // search a column by it's name from the column list

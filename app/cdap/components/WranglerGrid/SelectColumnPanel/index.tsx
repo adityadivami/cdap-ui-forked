@@ -76,11 +76,11 @@ export const enableDoneButton = (
   transformationName: string,
   selectedColumns: IHeaderNamesList[]
 ) => {
-  const indexForTwoColumnSelection = MULTI_SELECTION_COLUMN.findIndex(
+  const isTwoColumnSelectionMode = MULTI_SELECTION_COLUMN.some(
     (functionNameDetail: IMultipleSelectedFunctionDetail) =>
       functionNameDetail.value === transformationName && !functionNameDetail.isMoreThanTwo
   );
-  if (indexForTwoColumnSelection > -1) {
+  if (isTwoColumnSelectionMode) {
     return selectedColumns.length !== 2; // implies that the button should be enabled on when two columns are selected
   }
   return !(selectedColumns.length >= 1); // in any case, atleast one column must be selected
