@@ -78,6 +78,9 @@ export default function RecipeForm({
             data-testid="recipe-name-field"
             placeholder={T.translate(`${PREFIX}.namePlaceholder`)}
             autoFocus={true}
+            inputProps={{
+              'data-testid': 'recipe-name-input',
+            }}
           />
         </FormFieldWrapper>
         <FormFieldWrapper>
