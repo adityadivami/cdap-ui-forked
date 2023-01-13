@@ -17,7 +17,6 @@
 import { Divider, Menu } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import { PREFIX } from 'components/InlayDrawerWidget/InlayDrawerWidget.stories';
 import {
   Container,
   IconWrapper,
@@ -64,6 +63,8 @@ export const getTestIdString = (label: string) =>
     .split(' ')
     .join('-')
     .toLowerCase();
+
+export const PREFIX = 'features.WranglerNewUI.Drawer';
 
 export default function InlayDrawerWidget({
   actionsOptions,
