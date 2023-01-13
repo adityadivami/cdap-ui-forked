@@ -14,25 +14,24 @@
  * the License.
  */
 
-import React, { FormEvent, ChangeEvent } from 'react';
 import { FormControl } from '@material-ui/core';
-import T from 'i18n-react';
-import { IRecipeFormProps } from 'components/RecipeManagement/types';
 import {
-  FormFieldWrapper,
-  Label,
-  ErrorTextField,
-  NormalTextField,
-  StyledTextAreaAutosize,
   CancelButton,
-  SaveButton,
-  ErrorLabel,
   CreateRecipeFormButtonWrapper,
   EditRecipeFormButtonWrapper,
+  ErrorLabel,
+  ErrorTextField,
+  FormFieldWrapper,
+  Label,
+  NormalTextField,
+  SaveButton,
+  StyledTextAreaAutosize,
 } from 'components/RecipeManagement/RecipeForm/styles';
+import { IRecipeFormProps } from 'components/RecipeManagement/types';
+import T from 'i18n-react';
+import React, { FormEvent } from 'react';
 
 export const CREATE_RECIPE = 'createRecipe';
-
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 
 export default function RecipeForm({
@@ -60,24 +59,23 @@ export default function RecipeForm({
         data-testid="recipe-form-parent"
       >
         <FormFieldWrapper>
-          <StyledLabel data-testid="recipe-name-label" component="span">
-            {recipeFormAction === CREATE_RECIPE
-              ? T.translate(`${PREFIX}.createRecipeNameLabel`)
-              : T.translate(`${PREFIX}.editRecipeNameLabel`)}
+          <StyledLabel data-testid="recipe-form-name-label" component="span">
+            {recipeFormAction === CREATE_RECIPE && T.translate(`${PREFIX}.createRecipeNameLabel`)}
+            {!(recipeFormAction === CREATE_RECIPE) && T.translate(`${PREFIX}.editRecipeNameLabel`)}
           </StyledLabel>
           <StyledTextField
-            required
-            variant="outlined"
-            defaultValue={recipeFormData.recipeName}
-            value={recipeFormData.recipeName}
-            error={isRecipeNameError}
-            id="outlined-error-helper-text"
-            helperText={isRecipeNameError ? recipeNameErrorMessage : ''}
-            fullWidth
-            onChange={(event: ChangeEvent<HTMLInputElement>) => onRecipeNameChange(event)}
-            data-testid="recipe-name-field"
-            placeholder={T.translate(`${PREFIX}.namePlaceholder`)}
             autoFocus={true}
+            aria-label="recipe form recipe name textfield"
+            data-testid="recipe-form-name-field"
+            defaultValue={recipeFormData.recipeName}
+            error={isRecipeNameError}
+            fullWidth
+            helperText={isRecipeNameError ? recipeNameErrorMessage : ''}
+            onChange={onRecipeNameChange}
+            placeholder={T.translate(`${PREFIX}.namePlaceholder`)}
+            required
+            value={recipeFormData.recipeName}
+            variant="outlined"
             inputProps={{
               'data-testid': 'recipe-name-input',
             }}
@@ -85,20 +83,18 @@ export default function RecipeForm({
         </FormFieldWrapper>
         <FormFieldWrapper>
           <FormControl variant="outlined">
-            <Label data-testid="recipe-description-label" component="span">
+            <Label data-testid="recipe-form-description-label" component="span">
               {T.translate(`${PREFIX}.description`)}
             </Label>
             <StyledTextAreaAutosize
-              required
-              aria-label="minimum height"
-              minRows={3}
-              data-testid="recipe-description-field"
+              aria-label="recipe form description textarea"
+              data-testid="recipe-form-description-field"
               defaultValue={recipeFormData.description}
-              value={recipeFormData.description}
-              onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
-                onRecipeDescriptionChange(event);
-              }}
+              minRows={3}
+              onChange={onRecipeDescriptionChange}
               placeholder={T.translate(`${PREFIX}.descriptionPlaceholder`)}
+              required
+              value={recipeFormData.description}
             />
           </FormControl>
         </FormFieldWrapper>
@@ -106,8 +102,7 @@ export default function RecipeForm({
           <SaveButton
             variant="contained"
             type="submit"
-            color="primary"
-            data-testid="recipe-save-button"
+            data-testid="recipe-form-save-button"
             disabled={isSaveDisabled}
           >
             {T.translate(`${PREFIX}.save`)}
@@ -116,7 +111,7 @@ export default function RecipeForm({
             variant="outlined"
             color="primary"
             onClick={() => onCancel()}
-            data-testid="recipe-cancel-button"
+            data-testid="recipe-form-cancel-button"
           >
             {T.translate(`${PREFIX}.cancel`)}
           </CancelButton>
