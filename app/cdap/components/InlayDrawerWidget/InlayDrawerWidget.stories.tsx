@@ -14,66 +14,53 @@
  * the License.
  */
 
-import { withInfo } from '@storybook/addon-info';
-import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 import InlayDrawerWidget, { IMenuItem } from 'components/InlayDrawerWidget';
-import CustomDataGrid, { dataGridColumns, dataGridRows } from 'components/WranglerV2/DataTable';
-import T from 'i18n-react';
-import React, { useState } from 'react';
+import React from 'react';
 
-export const PREFIX = 'features.WranglerNewUI.Drawer';
+export default {
+  title: 'InlayDrawerWidget',
+  component: InlayDrawerWidget,
+  argTypes: {
+    onClose: { control: { type: 'radio' } },
+  },
+};
 
-storiesOf('InlayDrawerWidget', module).add(
-  'Default Inlay Drawer',
-  withInfo({
-    text: 'Default Drawer',
-  })(() => {
-    const [open, setOpen] = useState(true);
+const handleDrawerCloseIconClick = () => action('clicked')('Drawer Closed');
+const onSaveButtonClick = () => action('clicked')('Save Button Clicked');
+const onApplyButtonClick = () => action('clicked')('Apply Button Clicked');
+const onDownloadButtonClick = () => action('clicked')('Download Button Clicked');
 
-    const handleDrawerCloseIconClick = () => {
-      setOpen(false);
-    };
+const actionsOptions: IMenuItem[] = [
+  {
+    label: 'Save',
+    value: 'save',
+    clickHandler: onSaveButtonClick,
+  },
+  {
+    label: 'Apply',
+    value: 'apply',
+    clickHandler: onApplyButtonClick,
+  },
+  {
+    label: 'Download',
+    value: 'download',
+    clickHandler: onDownloadButtonClick,
+  },
+];
 
-    const onSaveButtonClick = () => {
-      // do nothing - TODO: event handler for save button click
-    };
-    const onApplyButtonClick = () => {
-      // do nothing - TODO: event handler for apply button click
-    };
-    const onDownloadButtonClick = () => {
-      // do nothing - TODO: event handler for download button click
-    };
+export function Default(args) {
+  if (open) {
+    return <InlayDrawerWidget {...args} />;
+  }
+  return <></>;
+}
 
-    const actionsOptions: IMenuItem[] = [
-      {
-        label: T.translate(`${PREFIX}.buttonLabels.save`).toString(),
-        value: 'save',
-        clickHandler: onSaveButtonClick,
-      },
-      {
-        label: T.translate(`${PREFIX}.buttonLabels.apply`).toString(),
-        value: 'apply',
-        clickHandler: onApplyButtonClick,
-      },
-      {
-        label: T.translate(`${PREFIX}.buttonLabels.download`).toString(),
-        value: 'download',
-        clickHandler: onDownloadButtonClick,
-      },
-    ];
-
-    return (
-      open && (
-        <InlayDrawerWidget
-          actionsOptions={actionsOptions}
-          headingText={T.translate(`${PREFIX}.labels.headerText`).toString()}
-          onClose={handleDrawerCloseIconClick}
-          position={'left'}
-          showDivider
-        >
-          <CustomDataGrid columns={dataGridColumns} data={dataGridRows} />
-        </InlayDrawerWidget>
-      )
-    );
-  })
-);
+Default.args = {
+  actionsOptions,
+  headingText: 'Header Text',
+  onClose: handleDrawerCloseIconClick,
+  position: 'left',
+  showDivider: true,
+  disableActionsButton: true,
+};

@@ -14,11 +14,11 @@
  * the License.
  */
 
-import { Container, Divider, Menu } from '@material-ui/core';
+import { Divider, Menu } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import { PREFIX } from 'components/InlayDrawerWidget/InlayDrawerWidget.stories';
 import {
+  Container,
   IconWrapper,
   Label,
   LeftContainer,
@@ -64,16 +64,7 @@ export const getTestIdString = (label: string) =>
     .join('-')
     .toLowerCase();
 
-/**
- *
- * @param actionsOptions - the options to be rendered inside the actions dropdown, an array of objects
- * @param disableActionsButton - boolean value to disable the Actions button in panel header when set to true
- * @param headingText - text to be displayed as header of the panel
- * @param onClose - handles event triggered when close icon is clicked
- * @param position - the position of the panel, either left or right, based on how components are positioned in parent. by default position is right
- * @param showDivider - when set to true, displays a divider to the left side of the close icon, generally used to separate close icon from other action icons
- * @returns InlayDrawerWidget component
- */
+export const PREFIX = 'features.WranglerNewUI.Drawer';
 
 export default function InlayDrawerWidget({
   actionsOptions,
