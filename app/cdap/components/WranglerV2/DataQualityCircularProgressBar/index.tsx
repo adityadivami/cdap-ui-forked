@@ -44,7 +44,7 @@ const GreenPercentageLabel = styled(Typography)`
   line-height: 22px;
   letter-spacing: 0.1px;
   color: ${GREEN_COLOR};
-  margin-left: 10px;
+  margin-left: 9px;
 `;
 
 const RedPercentageLabel = styled(GreenPercentageLabel)`
