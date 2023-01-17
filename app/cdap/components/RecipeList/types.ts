@@ -44,7 +44,7 @@ export enum SortOrder {
   DESCENDING = 'desc',
 }
 
-export enum RecipeAction {
+export enum ActionType {
   EDIT_RECIPE = 'editRecipe',
   VIEW_RECIPE = 'viewRecipe',
   CREATE_RECIPE = 'createRecipe',

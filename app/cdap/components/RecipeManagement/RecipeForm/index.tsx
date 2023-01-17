@@ -30,7 +30,7 @@ import {
 import { IRecipeFormProps } from 'components/RecipeManagement/types';
 import T from 'i18n-react';
 import React, { FormEvent } from 'react';
-import { RecipeAction } from 'components/RecipeList/types';
+import { ActionType } from 'components/RecipeList/types';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 
@@ -48,7 +48,7 @@ export default function RecipeForm({
   const StyledLabel = isRecipeNameError ? ErrorLabel : Label;
   const StyledTextField = isRecipeNameError ? ErrorTextField : NormalTextField;
   const StyledFormButtonWrapper =
-    recipeFormAction === RecipeAction.CREATE_RECIPE
+    recipeFormAction === ActionType.CREATE_RECIPE
       ? CreateRecipeFormButtonWrapper
       : EditRecipeFormButtonWrapper;
 
@@ -60,9 +60,9 @@ export default function RecipeForm({
       >
         <FormFieldWrapper>
           <StyledLabel data-testid="recipe-form-name-label" component="span">
-            {recipeFormAction === RecipeAction.CREATE_RECIPE &&
+            {recipeFormAction === ActionType.CREATE_RECIPE &&
               T.translate(`${PREFIX}.createRecipeNameLabel`)}
-            {!(recipeFormAction === RecipeAction.CREATE_RECIPE) &&
+            {!(recipeFormAction === ActionType.CREATE_RECIPE) &&
               T.translate(`${PREFIX}.editRecipeNameLabel`)}
           </StyledLabel>
           <StyledTextField

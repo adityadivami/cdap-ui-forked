@@ -24,7 +24,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { IRecipe, RecipeAction } from 'components/RecipeList/types';
+import { IRecipe, ActionType } from 'components/RecipeList/types';
 import DrawerWidget from 'components/common/DrawerWidget';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
@@ -67,7 +67,7 @@ const ViewAllRecipies = () => {
   const handleEditRecipe = (selectedObject: any) => {
     toggleOpen();
     setRecipe(selectedObject);
-    setActionType(RecipeAction.EDIT_RECIPE);
+    setActionType(ActionType.EDIT_RECIPE);
   };
 
   const onCancel = () => {
@@ -95,19 +95,19 @@ const ViewAllRecipies = () => {
         anchor="right"
         closeClickHandler={toggleOpen}
         headingText={
-          actionType === RecipeAction.VIEW_RECIPE
+          actionType === ActionType.VIEW_RECIPE
             ? T.translate(`${PREFIX}.recipeDetails`)
             : T.translate(`${PREFIX}.editRecipe`)
         }
-        showBackIcon={actionType === RecipeAction.EDIT_RECIPE ? false : true}
-        showDivider={actionType === RecipeAction.VIEW_RECIPE ? true : false}
+        showBackIcon={actionType === ActionType.EDIT_RECIPE ? false : true}
+        showDivider={actionType === ActionType.VIEW_RECIPE ? true : false}
         open={isOpen}
         headerActionTemplate={
-          actionType === RecipeAction.VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
+          actionType === ActionType.VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
         }
         dataTestId={`${actionType}-drawer-widget`}
         children={
-          actionType === RecipeAction.VIEW_RECIPE
+          actionType === ActionType.VIEW_RECIPE
             ? renderRecipeDetailComponent()
             : renderEditRecipeComponent()
         }
