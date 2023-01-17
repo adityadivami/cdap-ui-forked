@@ -51,23 +51,22 @@ export const Label = styled(Typography)`
 `;
 
 export const ReciepeStepsBox = styled(Button)`
-  text-align: center;
-  padding: 9.5px 32px;
-  gap: 8px;
-  width: 13.5%;
-  height: 40px;
+  align-items: center;
   background: linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%);
   border-left: 1px solid rgba(57, 148, 255, 0.4);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border-radius: 0px;
+  display: flex;
   font-size: 14px;
   font-weight: 400;
+  gap: 8px;
+  height: 40px;
+  justify-content: space-between;
   letter-spacing: 0.15px;
   line-height: 21px;
+  padding: 9.5px 32px;
+  text-align: center;
   text-transform: none;
+  width: 13.5%;
 `;
 
 export const TabsWrapper = styled(Box)`
