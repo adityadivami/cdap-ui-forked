@@ -19,6 +19,7 @@ import InlayDrawerWidget, { IMenuItem } from 'components/InlayDrawerWidget';
 import RecipeStepsTable, {
   dataGridColumns,
   dataGridRows,
+  IRecipeStepsRows,
 } from 'components/WranglerV2/RecipeStepsTable';
 import React from 'react';
 
@@ -69,13 +70,17 @@ Default.args = {
   disableActionsButton: true,
 };
 
+// Recipe Steps Panel with Recipe Steps Table
+const handleDeleteIconClick = (row: IRecipeStepsRows) =>
+  action('clicked')(`Delete Icon Button Clicked with id = ${row.id}`);
+
 export function RecipeStepsPanel(args) {
-  const { columns, rows, ...rest } = args;
+  const { columns, rows, onDeleteIconClick, ...rest } = args;
 
   if (open) {
     return (
       <InlayDrawerWidget {...rest}>
-        <RecipeStepsTable columns={columns} rows={rows} />
+        <RecipeStepsTable columns={columns} rows={rows} handleDeleteIconClick={onDeleteIconClick} />
       </InlayDrawerWidget>
     );
   }
@@ -87,6 +92,7 @@ RecipeStepsPanel.args = {
   columns: dataGridColumns,
   headingText: 'Recipe Steps',
   onClose: handleDrawerCloseIconClick,
+  onDeleteIconClick: handleDeleteIconClick,
   position: 'right',
   rows: dataGridRows,
 };
