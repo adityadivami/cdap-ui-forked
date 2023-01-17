@@ -32,6 +32,7 @@ export const Container = styled(Box)`
   padding-top: 20px;
   padding-bottom: 20px;
 `;
+
 export const Divider = styled.div`
   background-color: ${grey[300]};
   height: 28px;
