@@ -23,12 +23,12 @@ export const Container = styled(Box)`
   border-left: 1px solid ${grey[300]};
   height: calc(100vh - 232px);
   overflow: scroll;
+  padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 20px;
   position: relative;
   width: 500px;
-  padding-top: 20px;
-  padding-bottom: 20px;
 `;
 export const Divider = styled.div`
   background-color: ${grey[300]};
@@ -43,8 +43,8 @@ export const Divider = styled.div`
 export const Label = styled(Typography)`
   &.MuiTypography-body1 {
     color: ${grey[900]};
-    font-style: normal;
     font-size: 20px;
+    font-style: normal;
     font-weight: 400;
     letter-spacing: 0.25px;
     line-height: 32px;
@@ -57,8 +57,8 @@ export const IconWrapper = styled(Box)`
   display: flex;
 
   .MuiIconButton-root {
-    padding: 0px;
     margin-left: 12px;
+    padding: 0px;
   }
 `;
 
@@ -86,7 +86,6 @@ export const MenuButton = styled(Button)`
 `;
 
 export const StyledIconButton = styled(IconButton)`
-  cursor: pointer;
   display: flex;
   justify-content: flex-end;
 `;
@@ -95,8 +94,8 @@ export const StyledMenuItem = styled(MenuItem)`
   &.MuiMenuItem-root {
     font-size: 16px;
     font-weight: 400;
-    line-height: 24px;
     letter-spacing: 0.5px;
+    line-height: 24px;
     text-align: left;
   }
 `;
