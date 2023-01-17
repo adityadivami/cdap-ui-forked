@@ -85,8 +85,8 @@ const ViewAllRecipies = () => {
             ? T.translate(`${PREFIX}.recipeDetails`)
             : T.translate(`${PREFIX}.editRecipe`)
         }
-        showBackIcon={actionType === ActionType.EDIT_RECIPE ? false : true}
-        showDivider={actionType === ActionType.VIEW_RECIPE ? true : false}
+        showBackIcon={Boolean(actionType !== ActionType.EDIT_RECIPE)}
+        showDivider={Boolean(actionType === ActionType.VIEW_RECIPE)}
         open={isOpen}
         headerActionTemplate={actionType === ActionType.VIEW_RECIPE && <></>}
         dataTestId={`${actionType}-drawer-widget`}
