@@ -19,13 +19,16 @@ import grey from '@material-ui/core/colors/grey';
 import styled from 'styled-components';
 
 export const Container = styled(Box)`
+  background-color: #fff;
   border-left: 1px solid ${grey[300]};
   height: calc(100vh - 232px);
   overflow: scroll;
   padding-left: 20px;
-  padding-right: 10px;
+  padding-right: 20px;
   position: relative;
   width: 500px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 `;
 export const Divider = styled.div`
   background-color: ${grey[300]};
@@ -62,8 +65,9 @@ export const IconWrapper = styled(Box)`
 export const StyledHeader = styled.header`
   align-items: center;
   display: flex;
-  height: 60px;
+  height: 30px;
   justify-content: space-between;
+  margin-bottom: 30px;
 `;
 
 export const LeftContainer = styled(Container)`
