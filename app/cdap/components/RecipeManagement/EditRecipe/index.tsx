@@ -23,10 +23,7 @@ import {
   IRecipeNameErrorData,
 } from 'components/RecipeManagement/types';
 import { debounce } from 'lodash';
-import {
-  getRecipeByNameService,
-  updateRecipeService,
-} from 'components/RecipeManagement/EditRecipe/services';
+import { getRecipeByNameService, updateRecipeService } from 'components/RecipeManagement/services';
 import T from 'i18n-react';
 import { ActionType } from 'components/RecipeList/types';
 
