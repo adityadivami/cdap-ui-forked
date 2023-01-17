@@ -76,7 +76,7 @@ public void enterRecipeNameAndDescription() {
   recipeName.click();
   recipeName.clear();
   recipeName.sendKeys("lavanya");
-  WebElement description = Helper.locateElementByTestId("recipe-description-field");
+  WebElement description = Helper.locateElementByTestId("recipe-form-description-field");
   description.click();
   description.sendKeys("updated");
   Assert.assertTrue((Helper.locateElementByTestId("recipe-form-cancel-button").isEnabled()));
