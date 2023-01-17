@@ -26,9 +26,6 @@ import React from 'react';
 export default {
   title: 'InlayDrawerWidget',
   component: InlayDrawerWidget,
-  argTypes: {
-    onClose: { control: { type: 'radio' } },
-  },
 };
 
 const handleDrawerCloseIconClick = () => action('clicked')('Drawer Closed');
