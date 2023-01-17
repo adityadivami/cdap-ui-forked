@@ -79,7 +79,7 @@ const handleDeleteIconClick = (row: IRecipeStepsRows) =>
 export function RecipeStepsPanel(args) {
   const { columns, rows, onDeleteIconClick, ...rest } = args;
 
-  if (open) {
+  if (args.open) {
     return (
       <InlayDrawerWidget {...rest}>
         <RecipeStepsTable columns={columns} rows={rows} handleDeleteIconClick={onDeleteIconClick} />
@@ -93,6 +93,7 @@ RecipeStepsPanel.args = {
   actionsOptions: [],
   columns: dataGridColumns,
   headingText: 'Recipe Steps',
+  open,
   onClose: handleDrawerCloseIconClick,
   onDeleteIconClick: handleDeleteIconClick,
   position: 'right',
