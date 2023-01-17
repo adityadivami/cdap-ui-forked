@@ -1,61 +1,30 @@
-import { DataGrid } from '@material-ui/data-grid';
+import { IconButton, Typography } from '@material-ui/core';
+import grey from '@material-ui/core/colors/grey';
+import { DataGrid, GridCellProps } from '@material-ui/data-grid';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import React from 'react';
 import styled from 'styled-components';
-import grey from '@material-ui/core/colors/grey';
-import { Button, Fade, IconButton, Paper, Popper, Typography } from '@material-ui/core';
-import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
-const Wrapper = styled.div`
-  align-items: center;
-  display: flex;
-  width: 100%;
-
-  .MuiButtonBase-root {
-    display: none;
-  }
-`;
-
-const StyledDataGrid = styled(DataGrid)`
-  &&& {
-    .MuiDataGrid-columnHeaderWrapper {
-      justify-content: space-evenly;
-      background-color: ${grey[100]};
-    }
-    .MuiDataGrid-columnSeparator {
-      display: none;
-    }
-    .MuiDataGrid-row:hover {
-      background-color: ${grey[300]};
-
-      .MuiTypography-root {
-        width: 334px;
-      }
-      .MuiButtonBase-root {
-        display: block;
-      }
-    }
-    .MuiTypography-body1 {
-      white-space: break-spaces;
-    }
-  }
-`;
-
-export default function CustomDataGrid(props) {
-  const { data, columns } = props;
-
-  return (
-    <StyledDataGrid
-      autoHeight
-      columns={columns}
-      disableColumnMenu
-      headerHeight={48}
-      hideFooter
-      rows={data}
-    />
-  );
+interface RecipeStepsTableProps {
+  columns: IRecipeStepsColumns[];
+  rows: IRecipeStepsRows[];
 }
 
-export const dataGridColumns = [
+interface IRecipeStepsColumns {
+  field: string;
+  headerName: string;
+  width: number;
+  sortable: boolean;
+  renderCell?: (params: GridCellProps) => JSX.Element;
+}
+
+interface IRecipeStepsRows {
+  id: number;
+  srn: string;
+  step: string;
+}
+
+export const dataGridColumns: IRecipeStepsColumns[] = [
   {
     field: 'srn',
     headerName: '#',
@@ -67,22 +36,11 @@ export const dataGridColumns = [
     headerName: 'Recipe Steps',
     width: 396,
     sortable: false,
-    renderCell: (params) => {
-      return (
-        <Wrapper>
-          <Typography component="div" variant="body1">
-            {params.value}
-          </Typography>
-          <IconButton>
-            <DeleteOutlinedIcon />
-          </IconButton>
-        </Wrapper>
-      );
-    },
+    renderCell: RecipeStepsCellRenderer,
   },
 ];
 
-export const dataGridRows = [
+export const dataGridRows: IRecipeStepsRows[] = [
   {
     id: 1,
     srn: '01',
@@ -90,3 +48,82 @@ export const dataGridRows = [
   },
   { id: 2, srn: '02', step: "Delete Column 'body'" },
 ];
+
+const Wrapper = styled.div`
+  align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .MuiButtonBase-root {
+    display: none;
+  }
+`;
+
+const StyledDataGrid = styled(DataGrid)`
+  &&& {
+    .MuiDataGrid-columnHeader {
+      padding-left: 16px;
+    }
+
+    .MuiDataGrid-cell {
+      padding-left: 10px;
+      padding-right: 16px;
+    }
+
+    .MuiDataGrid-columnHeaderWrapper {
+      justify-content: space-evenly;
+      background-color: ${grey[100]};
+    }
+
+    .MuiDataGrid-columnSeparator {
+      display: none;
+    }
+
+    .MuiDataGrid-row:hover {
+      background-color: ${grey[300]};
+
+      .MuiTypography-root {
+        width: 328px;
+      }
+      .MuiButtonBase-root {
+        display: block;
+      }
+    }
+
+    .MuiTypography-body1 {
+      white-space: break-spaces;
+    }
+
+    .MuiIconButton-root {
+      padding: 0px;
+      align-self: flex-start;
+    }
+  }
+`;
+
+function RecipeStepsCellRenderer(params: GridCellProps) {
+  return (
+    <Wrapper>
+      <Typography component="div" variant="body1">
+        {params.value}
+      </Typography>
+      <IconButton>
+        <DeleteOutlinedIcon />
+      </IconButton>
+    </Wrapper>
+  );
+}
+
+export default function RecipeStepsTable({ rows, columns }: RecipeStepsTableProps) {
+  return (
+    <StyledDataGrid
+      autoHeight
+      columns={columns}
+      disableColumnMenu
+      headerHeight={48}
+      hideFooter
+      rows={rows}
+    />
+  );
+}

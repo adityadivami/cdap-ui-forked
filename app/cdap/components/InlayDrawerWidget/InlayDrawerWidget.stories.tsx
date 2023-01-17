@@ -73,7 +73,7 @@ export function RecipeStepsPanel(args) {
   if (open) {
     return (
       <InlayDrawerWidget {...args}>
-        <RecipeStepsTable columns={dataGridColumns} data={dataGridRows} />
+        <RecipeStepsTable columns={dataGridColumns} rows={dataGridRows} />
       </InlayDrawerWidget>
     );
   }
