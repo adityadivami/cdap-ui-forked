@@ -70,10 +70,12 @@ Default.args = {
 };
 
 export function RecipeStepsPanel(args) {
+  const { columns, rows, ...rest } = args;
+
   if (open) {
     return (
-      <InlayDrawerWidget {...args}>
-        <RecipeStepsTable columns={dataGridColumns} rows={dataGridRows} />
+      <InlayDrawerWidget {...rest}>
+        <RecipeStepsTable columns={columns} rows={rows} />
       </InlayDrawerWidget>
     );
   }
@@ -82,7 +84,9 @@ export function RecipeStepsPanel(args) {
 
 RecipeStepsPanel.args = {
   actionsOptions: [],
+  columns: dataGridColumns,
   headingText: 'Recipe Steps',
   onClose: handleDrawerCloseIconClick,
   position: 'right',
+  rows: dataGridRows,
 };

@@ -132,6 +132,8 @@ function RecipeStepsCellRenderer(params: GridCellProps) {
 }
 
 export default function RecipeStepsTable({ rows, columns }: RecipeStepsTableProps) {
+  console.log(columns, 'columns');
+  console.log(rows, 'rows');
   return (
     <StyledDataGrid
       autoHeight
