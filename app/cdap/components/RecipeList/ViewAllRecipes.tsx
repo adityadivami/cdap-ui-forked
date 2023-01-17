@@ -75,7 +75,7 @@ const ViewAllRecipies = () => {
   };
 
   const renderEditRecipeComponent = () =>
-    recipe?.recipeId?.recipeId && (
+    recipe && (
       <EditRecipe
         onCancelClick={onCancel}
         setRecipeFormOpen={toggleOpen}

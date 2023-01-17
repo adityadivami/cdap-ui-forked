@@ -17,9 +17,16 @@
 import React, { useState, ChangeEvent, useRef, FormEvent, useEffect } from 'react';
 import styled from 'styled-components';
 import RecipeForm from 'components/RecipeManagement/RecipeForm';
-import { IRecipeFormData, IEditRecipeProps } from 'components/RecipeManagement/types';
+import {
+  IEditRecipeProps,
+  IRecipeData,
+  IRecipeNameErrorData,
+} from 'components/RecipeManagement/types';
 import { debounce } from 'lodash';
-import { getRecipeByName, updateRecipe } from 'components/RecipeManagement/EditRecipe/services';
+import {
+  getRecipeByNameService,
+  updateRecipeService,
+} from 'components/RecipeManagement/EditRecipe/services';
 import T from 'i18n-react';
 
 import { EDIT_RECIPE } from 'components/RecipeList/ViewAllRecipes';
@@ -31,7 +38,7 @@ const StyledEditFormWrapper = styled.div`
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 
-const noErrorState = {
+const noErrorState: IRecipeNameErrorData = {
   isRecipeNameError: false,
   recipeNameErrorMessage: '',
 };
@@ -43,41 +50,45 @@ export default function({
   setRecipeFormOpen,
   setIsRecipeListUpdated,
 }: IEditRecipeProps) {
-  const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
+  const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
     description: '',
     directives: [],
   });
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
-  const [recipeNameErrorData, setRecipeNameErrorData] = useState(noErrorState);
-  const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
+  const [recipeNameErrorData, setRecipeNameErrorDataState] = useState<IRecipeNameErrorData>(
+    noErrorState
+  );
 
-  useEffect(() => {
-    return () => {
-      setIsRecipeListUpdated(false);
-    };
-  }, []);
+  const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   useEffect(() => {
     if (selectedRecipe) {
       recipeFormData.recipeName = selectedRecipe.recipeName;
       recipeFormData.description = selectedRecipe.description;
       recipeFormData.directives = selectedRecipe.directives;
-      setRecipeFormData(recipeFormData);
+      setRecipeFormData((prevState) => ({ ...prevState, recipeFormData }));
     }
   }, [selectedRecipe]);
 
-  useEffect(() => {
-    handleSaveButtonMode();
-  }, [recipeNameErrorData.isRecipeNameError]);
+  const setRecipeNameErrorData = (
+    recipeNameError: IRecipeNameErrorData,
+    formData: IRecipeData = recipeFormData
+  ) => {
+    setRecipeNameErrorDataState(recipeNameError);
+    handleSaveButtonMode(formData, recipeNameError);
+  };
 
-  const handleSaveButtonMode = (formData = recipeFormData) => {
+  const handleSaveButtonMode = (
+    formData: IRecipeData,
+    nameErrorData: IRecipeNameErrorData = recipeNameErrorData
+  ) => {
     if (
       formData.recipeName === '' ||
       formData.description === '' ||
       formData.recipeName?.trim().length === 0 ||
       formData.description?.trim().length === 0 ||
-      recipeNameErrorData.isRecipeNameError
+      nameErrorData.isRecipeNameError
     ) {
       setIsSaveDisabled(true);
     } else {
@@ -85,7 +96,7 @@ export default function({
     }
   };
 
-  const handleRecipeFormData = (formData) => {
+  const handleRecipeFormData = (formData: IRecipeData) => {
     setRecipeFormData(formData);
     handleSaveButtonMode(formData);
   };
@@ -95,38 +106,46 @@ export default function({
       ...recipeFormData,
       recipeName: event.target.value,
     });
-    validateRecipeNameExists.current(event.target.value);
+    validateRecipeNameExists.current({
+      recipeName: event.target.value,
+      description: recipeFormData.description,
+    });
   };
 
   const validateRecipeNameExists = useRef(
-    debounce((recipeName: string) => {
-      if (recipeName && !recipeNameRegEx.test(recipeName)) {
-        setRecipeNameErrorData({
-          isRecipeNameError: true,
-          recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
-        });
+    debounce((formData: IRecipeData) => {
+      if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
+        setRecipeNameErrorData(
+          {
+            isRecipeNameError: true,
+            recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
+          },
+          formData
+        );
       } else {
-        recipeName
-          ? getRecipeByName(recipeName, onGetRecipeByNameResponse, onGetRecipeByNameError)
-          : setRecipeNameErrorData(noErrorState);
+        if (formData.recipeName) {
+          getRecipeByNameService({ formData, onGetRecipeByNameResponse, onGetRecipeByNameError });
+        } else {
+          setRecipeNameErrorData(noErrorState, formData);
+        }
       }
     }, 500)
   );
 
-  const onGetRecipeByNameResponse = () => {
+  const onGetRecipeByNameResponse = (formData: IRecipeData) => {
     !recipeNameErrorData.isRecipeNameError &&
-      setRecipeNameErrorData({
-        isRecipeNameError: true,
-        recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
-      });
+      setRecipeNameErrorData(
+        {
+          isRecipeNameError: true,
+          recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+        },
+        formData
+      );
   };
 
-  const onGetRecipeByNameError = (err, recipeName) => {
-    if (
-      err.statusCode === 404 &&
-      err.message === `recipe with name '${recipeName}' does not exist`
-    ) {
-      setRecipeNameErrorData(noErrorState);
+  const onGetRecipeByNameError = (err: Record<string, unknown>, formData) => {
+    if (err.statusCode === 404) {
+      setRecipeNameErrorData(noErrorState, formData);
     }
   };
 
@@ -146,27 +165,27 @@ export default function({
     setIsRecipeListUpdated(true);
   };
 
-  const onUpdateRecipeError = (err) => {
+  const onUpdateRecipeError = (err: Record<string, unknown>) => {
     setRecipeFormOpen(false);
     setSnackbar({
       open: true,
       isSuccess: false,
-      message: err.response.message,
+      message: (err.response as Record<string, string>).message,
     });
   };
 
-  const onRecipeDataSave = (recipeFormData) => {
+  const onRecipeDataSave = (recipeFormData: IRecipeData) => {
     const payload = {
       recipeName: recipeFormData.recipeName,
       description: recipeFormData.description,
-      directives: recipeSteps,
+      directives: recipeFormData.directives,
     };
-    updateRecipe(
-      selectedRecipe.recipeId.recipeId,
+    updateRecipeService({
+      selectedRecipe,
       payload,
       onUpdateRecipeResponse,
-      onUpdateRecipeError
-    );
+      onUpdateRecipeError,
+    });
   };
 
   const onRecipeDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -177,23 +196,20 @@ export default function({
   };
 
   return (
-    <>
-      <StyledEditFormWrapper>
-        {recipeFormData && (
-          <RecipeForm
-            recipeFormData={recipeFormData}
-            isRecipeNameError={recipeNameErrorData.isRecipeNameError}
-            recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
-            onRecipeNameChange={onRecipeNameChange}
-            onFormSubmit={onFormSubmit}
-            setRecipeFormData={setRecipeFormData}
-            onCancel={onCancelClick}
-            isSaveDisabled={isSaveDisabled}
-            recipeFormAction={EDIT_RECIPE}
-            onRecipeDescriptionChange={onRecipeDescriptionChange}
-          />
-        )}
-      </StyledEditFormWrapper>
-    </>
+    <StyledEditFormWrapper>
+      {recipeFormData && (
+        <RecipeForm
+          recipeFormData={recipeFormData}
+          isRecipeNameError={recipeNameErrorData.isRecipeNameError}
+          recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
+          onRecipeNameChange={onRecipeNameChange}
+          onFormSubmit={onFormSubmit}
+          onCancel={onCancelClick}
+          isSaveDisabled={isSaveDisabled}
+          recipeFormAction={EDIT_RECIPE}
+          onRecipeDescriptionChange={onRecipeDescriptionChange}
+        />
+      )}
+    </StyledEditFormWrapper>
   );
 }

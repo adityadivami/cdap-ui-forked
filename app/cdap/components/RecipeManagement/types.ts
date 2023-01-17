@@ -14,26 +14,28 @@
  * the License.
  */
 
-import React, { Dispatch, SetStateAction, ChangeEvent, FormEvent } from 'react';
-import { IRecipe } from 'components/RecipeList/types';
 import { ISnackbar } from 'components/Snackbar';
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
+import { IRecipe } from 'components/RecipeList/types';
 
 export interface IRecipeFormProps {
-  recipeFormData: IRecipeFormData;
   isRecipeNameError: boolean;
-  recipeNameErrorMessage: string;
-  onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  setRecipeFormData: Dispatch<React.SetStateAction<IRecipeFormData>>;
-  onCancel: () => void;
   isSaveDisabled: boolean;
-  recipeFormAction: string;
+  onCancel: () => void;
+  onFormSubmit: (event: FormEvent<HTMLFormElement>) => void;
   onRecipeDescriptionChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onRecipeNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  recipeFormAction: string;
+  recipeFormData: IRecipeFormData | IRecipeData;
+  recipeNameErrorMessage: string;
 }
 
 export interface IRecipeFormData {
   recipeName: string;
   description: string;
+}
+
+export interface IRecipeData extends IRecipeFormData {
   directives: string[];
 }
 
@@ -43,4 +45,22 @@ export interface IEditRecipeProps {
   setSnackbar: (value: ISnackbar) => void;
   setRecipeFormOpen: Dispatch<SetStateAction<boolean>>;
   setIsRecipeListUpdated: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface IRecipeNameErrorData {
+  isRecipeNameError: boolean;
+  recipeNameErrorMessage: string;
+}
+
+export interface IGetRecipeByNameService {
+  formData: IRecipeFormData;
+  onGetRecipeByNameError: (err: Record<string, unknown>, formData: IRecipeFormData) => void;
+  onGetRecipeByNameResponse: (formData: IRecipeFormData) => void;
+}
+
+export interface IEditRecipeService {
+  selectedRecipe: IRecipe;
+  payload: IRecipeData;
+  onUpdateRecipeResponse: () => void;
+  onUpdateRecipeError: (err: Record<string, unknown>) => void;
 }

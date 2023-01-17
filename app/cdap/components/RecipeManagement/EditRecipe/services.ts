@@ -16,26 +16,36 @@
 
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import { IEditRecipeService, IGetRecipeByNameService } from 'components/RecipeManagement/types';
 
-export const getRecipeByName = (value, onGetRecipeByNameResponse, onGetRecipeByNameError) => {
+export const getRecipeByNameService = ({
+  formData,
+  onGetRecipeByNameResponse,
+  onGetRecipeByNameError,
+}: IGetRecipeByNameService) => {
   const params = {
     context: getCurrentNamespace(),
-    recipeName: value,
+    recipeName: formData.recipeName,
   };
   MyDataPrepApi.getRecipeByName(params).subscribe(
     () => {
-      onGetRecipeByNameResponse();
+      onGetRecipeByNameResponse(formData);
     },
-    (err) => {
-      onGetRecipeByNameError(err, value);
+    (err: Record<string, unknown>) => {
+      onGetRecipeByNameError(err, formData);
     }
   );
 };
 
-export const updateRecipe = (recipeId, payload, onUpdateRecipeResponse, onUpdateRecipeError) => {
+export const updateRecipeService = ({
+  selectedRecipe,
+  payload,
+  onUpdateRecipeResponse,
+  onUpdateRecipeError,
+}: IEditRecipeService) => {
   const params = {
     context: getCurrentNamespace(),
-    recipe_id: recipeId,
+    recipe_id: selectedRecipe.recipeId.recipeId,
   };
   MyDataPrepApi.updateRecipe(params, payload).subscribe(
     () => {

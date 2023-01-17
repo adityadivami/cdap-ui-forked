@@ -82,20 +82,19 @@ export const StyledTextAreaAutosize = styled(TextareaAutosize)`
     outline: unset !important;
     border: 1px solid #000000;
   }
-  width: 460px;
   font-size: 14px;
   height: 100px !important;
-  padding: 10.5px 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-
-  ::placeholder {
-    color: ${grey[600]};
-  }
   :hover {
     border: 1px solid #000000;
   }
+  letter-spacing: 0.15px;
+  line-height: 150%;
+  padding: 10.5px 14px;
   resize: none;
+  width: 460px;
+  ::placeholder {
+    color: ${grey[600]};
+  }
 `;
 
 export const StyledButton = css`
@@ -113,15 +112,15 @@ export const CancelButton = styled(PrimaryOutlinedButton)`
 
 export const SaveButton = styled(PrimaryContainedButton)`
   ${StyledButton}
-  margin-right: 20px;
   background: #3367d6;
+  margin-right: 20px;
   width: 70px;
 `;
 
 export const CreateRecipeFormButtonWrapper = styled.div`
   float: left;
-  padding-bottom: 20px;
   margin-top: 100px;
+  padding-bottom: 20px;
 `;
 
 export const EditRecipeFormButtonWrapper = styled(CreateRecipeFormButtonWrapper)`
