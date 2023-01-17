@@ -50,10 +50,6 @@ const ViewAllRecipies = () => {
 
   const toggleOpen = () => setIsOpen(!isOpen);
 
-  const renderRecipeDetailComponent = () => <RecipeDetails selectedRecipe={recipe} />;
-  const renderRecipeDetailHeaderActionTemplate = () => <RecipeHeaderActionTemplate />;
-  const renderEditRecipeComponent = () => <></>;
-
   return (
     <>
       <DrawerWidget
@@ -67,13 +63,9 @@ const ViewAllRecipies = () => {
         showBackIcon={false}
         showDivider={actionType === VIEW_RECIPE ? true : false}
         open={isOpen}
-        headerActionTemplate={
-          actionType === VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
-        }
+        headerActionTemplate={actionType === VIEW_RECIPE && <RecipeHeaderActionTemplate />}
         dataTestId={`${actionType}-drawer-widget`}
-        children={
-          actionType === VIEW_RECIPE ? renderRecipeDetailComponent() : renderEditRecipeComponent()
-        }
+        children={actionType === VIEW_RECIPE ? <RecipeDetails selectedRecipe={recipe} /> : <></>}
       />
       <Box ml={4} m={2}>
         <Breadcrumbs separator="›" aria-label="breadcrumb">
