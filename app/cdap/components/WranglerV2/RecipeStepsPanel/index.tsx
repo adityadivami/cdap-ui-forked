@@ -21,7 +21,7 @@ import RecipeStepsTable, {
 } from 'components/WranglerV2/RecipeStepsTable/index';
 import React from 'react';
 
-const recipeStepsTableRows: IRecipeStepsColumns[] = [
+const recipeStepsTableColumns: IRecipeStepsColumns[] = [
   {
     field: 'srn',
     headerName: '#',
@@ -61,7 +61,7 @@ export default function RecipeStepsPanel({ onRecipeStepsPanelClose, directives }
       position="right"
     >
       <RecipeStepsTable
-        columns={recipeStepsTableRows}
+        columns={recipeStepsTableColumns}
         rows={getRecipeStepsRows(directives)}
         handleDeleteIconClick={handleDeleteIconClick}
       />
