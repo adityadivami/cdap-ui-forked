@@ -24,7 +24,7 @@ import {
   Label,
   LargeBox,
   OutlinedLabel,
-  ReciepeStepsBox,
+  ReciepeStepsTabButton,
   TabsWrapper,
   TransformatedIconButton,
   ZoomBox,
@@ -61,6 +61,7 @@ interface IGridMetaInfo {
 interface IFooterPanelProps {
   recipeStepsCount: number;
   gridMetaInfo: IGridMetaInfo;
+  onRecipeStepsFooterTabClick: () => void;
 }
 
 export interface ITableMetaInfoTabProps {
@@ -72,7 +73,11 @@ export interface IRecipeStepsTabProps {
   recipeStepsCount: number;
 }
 
-export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
+export default function FooterPanel({
+  recipeStepsCount,
+  gridMetaInfo,
+  onRecipeStepsFooterTabClick,
+}: IFooterPanelProps) {
   const { rowCount, columnCount } = gridMetaInfo;
 
   return (
@@ -101,14 +106,15 @@ export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
           <>{`${T.translate(`${PREFIX}.directives`)}`}</>
         </Label>
       </DirectivesBox>
-      <ReciepeStepsBox data-testid="footer-panel-recipe-steps-tab">
+      <ReciepeStepsTabButton
+        data-testid="footer-panel-recipe-steps-tab"
+        onClick={onRecipeStepsFooterTabClick}
+      >
         <Label data-testid="footerpanel-simple-label">
-          <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>
+          {`${T.translate(`${PREFIX}.recipeSteps`)}`}
         </Label>
-        <OutlinedLabel data-testid="footerpanel-outlined-label">
-          <>{recipeStepsCount}</>
-        </OutlinedLabel>
-      </ReciepeStepsBox>
+        <OutlinedLabel data-testid="footerpanel-outlined-label">{recipeStepsCount}</OutlinedLabel>
+      </ReciepeStepsTabButton>
     </TabsWrapper>
   );
 }

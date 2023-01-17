@@ -25,7 +25,7 @@ import FooterPanel from 'components/FooterPanel';
 import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
-import { useStyles } from 'components/GridTable/styles';
+import { FlexWrapper, useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
   IHeaderNamesList,
@@ -47,10 +47,18 @@ import styled from 'styled-components';
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
+import RecipeStepsPanel from 'components/WranglerV2/RecipeStepsPanel';
 import { useLocation } from 'react-router';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
+  height: calc(100vh - 240px);
+  width: 100vw;
+  overflow: scroll;
+`;
+
+const OpenPanelTableWrapper = styled(TableWrapper)`
+  width: calc(100vw - 500px);
 `;
 
 const GridTableWrapper = styled(Box)`
@@ -86,6 +94,10 @@ export default function GridTable() {
   const [snackbarState, setSnackbar] = useSnackbar();
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
+
+  const [recipeStepsPanelMode, setRecipeStepsPanelMode] = useState(false);
+
+  const { dataprep } = DataPrepStore.getState();
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -296,6 +308,8 @@ export default function GridTable() {
     }
   }, [snackbarState.open]);
 
+  const StyledTableWrapper = recipeStepsPanelMode ? OpenPanelTableWrapper : TableWrapper;
+
   return (
     <>
       {showBreadCrumb && (
@@ -324,54 +338,66 @@ export default function GridTable() {
           />
         )}
         {showGridTable && (
-          <TableWrapper>
-            <Table aria-label="simple table" className="test">
-              <TableHead>
-                <TableRow>
-                  {headersNamesList?.length &&
-                    headersNamesList.map((eachHeader) => (
-                      <GridHeaderCell
-                        label={eachHeader.label}
-                        types={eachHeader.type}
-                        key={eachHeader.name}
-                        columnSelected={selectedColumn}
-                        setColumnSelected={handleColumnSelect}
-                      />
-                    ))}
-                </TableRow>
-                <TableRow>
-                  {missingDataList?.length &&
-                    headersNamesList.length &&
-                    headersNamesList.map((each, index) => {
-                      return missingDataList.map((item, itemIndex) => {
-                        if (item.name === each.name) {
-                          return <GridKPICell metricData={item} key={item.name} />;
-                        }
-                      });
+          <FlexWrapper>
+            <StyledTableWrapper>
+              <Table aria-label="simple table" className="test">
+                <TableHead>
+                  <TableRow>
+                    {headersNamesList?.length &&
+                      headersNamesList.map((eachHeader) => (
+                        <GridHeaderCell
+                          label={eachHeader.label}
+                          types={eachHeader.type}
+                          key={eachHeader.name}
+                          columnSelected={selectedColumn}
+                          setColumnSelected={handleColumnSelect}
+                        />
+                      ))}
+                  </TableRow>
+                  <TableRow>
+                    {missingDataList?.length &&
+                      headersNamesList.length &&
+                      headersNamesList.map((each, index) => {
+                        return missingDataList.map((item, itemIndex) => {
+                          if (item.name === each.name) {
+                            return <GridKPICell metricData={item} key={item.name} />;
+                          }
+                        });
+                      })}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rowsDataList?.length &&
+                    rowsDataList.map((eachRow, rowIndex) => {
+                      return (
+                        <TableRow key={`row-${rowIndex}`}>
+                          {headersNamesList.map((eachKey, eachIndex) => {
+                            return (
+                              <GridTextCell
+                                cellValue={eachRow[eachKey.name] || '--'}
+                                key={`${eachKey.name}-${eachIndex}`}
+                              />
+                            );
+                          })}
+                        </TableRow>
+                      );
                     })}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rowsDataList?.length &&
-                  rowsDataList.map((eachRow, rowIndex) => {
-                    return (
-                      <TableRow key={`row-${rowIndex}`}>
-                        {headersNamesList.map((eachKey, eachIndex) => {
-                          return (
-                            <GridTextCell
-                              cellValue={eachRow[eachKey.name] || '--'}
-                              key={`${eachKey.name}-${eachIndex}`}
-                            />
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableWrapper>
+                </TableBody>
+              </Table>
+            </StyledTableWrapper>
+            {recipeStepsPanelMode && (
+              <RecipeStepsPanel
+                onRecipeStepsPanelClose={() => setRecipeStepsPanelMode(!recipeStepsPanelMode)}
+                directives={dataprep.directives}
+              />
+            )}
+          </FlexWrapper>
         )}
-        <FooterPanel recipeStepsCount={0} gridMetaInfo={tableMetaInfo} />
+        <FooterPanel
+          recipeStepsCount={dataprep.directives.length}
+          gridMetaInfo={tableMetaInfo}
+          onRecipeStepsFooterTabClick={() => setRecipeStepsPanelMode(!recipeStepsPanelMode)}
+        />
         {loading && (
           <div className={classes.loadingContainer}>
             <LoadingSVG />

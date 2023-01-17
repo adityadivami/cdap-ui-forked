@@ -14,7 +14,7 @@
  * the License.
  */
 
-import { Box, IconButton, Typography } from '@material-ui/core';
+import { Box, Button, IconButton, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import styled from 'styled-components';
 
@@ -50,18 +50,22 @@ export const Label = styled(Typography)`
   line-height: 40px;
 `;
 
-export const ReciepeStepsBox = styled(Box)`
-  text-align: center;
-  padding: 9.5px 12px;
-  gap: 8px;
-  width: 13.5%;
-  height: 40px;
+export const ReciepeStepsTabButton = styled(Button)`
+  align-items: center;
   background: linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%);
   border-left: 1px solid rgba(57, 148, 255, 0.4);
-  cursor: pointer;
+  border-radius: 0px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  height: 40px;
+  justify-content: space-between;
+  letter-spacing: 0.15px;
+  line-height: 21px;
+  padding: 9.5px 32px;
+  text-align: center;
+  text-transform: none;
+  width: 13.5%;
 `;
 
 export const TabsWrapper = styled(Box)`
