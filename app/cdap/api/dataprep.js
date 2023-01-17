@@ -45,7 +45,6 @@ const MyDataPrepApi = {
   getRecipeList: apiCreator(dataSrc, 'GET', 'REQUEST', `${contextPathV2}/recipes`),
   getRecipeById: apiCreator(dataSrc, 'GET', 'REQUEST', `${contextPathV2}/recipes/id/:recipeId`),
   deleteRecipe: apiCreator(dataSrc, 'DELETE', 'REQUEST', `${contextPathV2}/recipes/id/:recipeId`),
-  createRecipe: apiCreator(dataSrc, 'POST', 'REQUEST', `${contextPathV2}/recipes`),
   applyRecipe: apiCreator(
     dataSrc,
     'POST',
