@@ -27,6 +27,8 @@ export const Container = styled(Box)`
   padding-right: 20px;
   position: relative;
   width: 500px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 `;
 export const Divider = styled.div`
   background-color: ${grey[300]};
@@ -63,8 +65,9 @@ export const IconWrapper = styled(Box)`
 export const StyledHeader = styled.header`
   align-items: center;
   display: flex;
-  height: 60px;
+  height: 30px;
   justify-content: space-between;
+  margin-bottom: 30px;
 `;
 
 export const LeftContainer = styled(Container)`
