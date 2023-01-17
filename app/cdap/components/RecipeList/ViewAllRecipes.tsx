@@ -37,9 +37,9 @@ const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 const ViewAllRecipies = () => {
   const [actionType, setActionType] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isRecipeListUpdated, setIsRecipeListUpdated] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [isRecipeListUpdated, setIsRecipeListUpdated] = useState(false);
 
   useEffect(() => {
     if (snackbarState.open) {
@@ -79,10 +79,10 @@ const ViewAllRecipies = () => {
     recipe && (
       <EditRecipe
         onCancelClick={onCancel}
-        setRecipeFormOpen={toggleOpen}
-        setSnackbar={setSnackbar}
         selectedRecipe={recipe}
         setIsRecipeListUpdated={setIsRecipeListUpdated}
+        setRecipeFormOpen={toggleOpen}
+        setSnackbar={setSnackbar}
       />
     );
 

@@ -49,12 +49,12 @@ export default function({
   setRecipeFormOpen,
   setIsRecipeListUpdated,
 }: IEditRecipeProps) {
+  const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
     description: '',
     directives: [],
   });
-  const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
   const [recipeNameErrorData, setRecipeNameErrorDataState] = useState<IRecipeNameErrorData>(
     noErrorState
   );
@@ -198,15 +198,15 @@ export default function({
     <StyledEditFormWrapper>
       {recipeFormData && (
         <RecipeForm
-          recipeFormData={recipeFormData}
           isRecipeNameError={recipeNameErrorData.isRecipeNameError}
-          recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
-          onRecipeNameChange={onRecipeNameChange}
-          onFormSubmit={onFormSubmit}
-          onCancel={onCancelClick}
           isSaveDisabled={isSaveDisabled}
-          recipeFormAction={ActionType.EDIT_RECIPE}
+          onCancel={onCancelClick}
+          onFormSubmit={onFormSubmit}
           onRecipeDescriptionChange={onRecipeDescriptionChange}
+          onRecipeNameChange={onRecipeNameChange}
+          recipeFormData={recipeFormData}
+          recipeFormAction={ActionType.EDIT_RECIPE}
+          recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
         />
       )}
     </StyledEditFormWrapper>
