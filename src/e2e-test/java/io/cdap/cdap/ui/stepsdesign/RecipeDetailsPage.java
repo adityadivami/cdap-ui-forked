@@ -31,52 +31,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeDetailsPage {
-  @Given("Navigate to home page to test Recipe details page")
-  public void navigateToHomePageToTestRecipeDetails() {
-    try {
-      SeleniumDriver.openPage(Constants.WRANGLE_HOME_URL);
-      WaitHelper.waitForPageToLoad();
-    } catch (Exception e) {
-      System.err.println("error:" + e);
-    }
+  @Then("Click on View All Button")
+  public void clickOnTheViewAllButton() {
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("view-all-recipes"));
   }
 
-  @Then("Click on ongoing data exploration for recipe details")
-  public void clickOnTheDataExplorationCardForRecipeDetails() {
-    try {
-      WaitHelper.waitForPageToLoad();
-      List<String> productName = new ArrayList<String>();
-      List<WebElement> allProductsName = SeleniumDriver.getDriver().findElements(
-       By.xpath(".//*[@data-testid='wrangler-home-ongoing-data-exploration-card']"));
-      ElementHelper.clickOnElement(allProductsName.get(0));
-      String url = SeleniumDriver.getDriver().getCurrentUrl();
-      Assert.assertTrue(url.contains("http://localhost:11011/cdap/ns/default/wrangler-grid"));
-    } catch (Exception e) {
-      System.err.println("error:" + e);
-    }
+  @Then("Verify if the Saved RecipeList table is loaded")
+  public void verifyIfTheUserIsOnTheSavedRecipeListPage() {
+    WaitHelper.waitForPageToLoad();
+    Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-table-container")));
   }
 
-  @Then("Click on recipe name on grid page")
-  public void clickOnRecipeName() {
-    try {
-      WaitHelper.waitForPageToLoad();
-      Helper.waitSeconds(5);
-      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("recipe-box-0"));
-      WaitHelper.waitForElementToBeClickable(Helper.locateElementByTestId("recipe-box-0"));
-      ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-box-0"));
-    } catch (Exception e) {
-      System.err.println("error:" + e);
-    }
+  @Then("Click on the Kebab icon on each row")
+  public void clickOnTheKebabIcon() {
+    List<WebElement> allRecipesName = SeleniumDriver.getDriver().findElements(
+            By.xpath("//*[starts-with(@data-testid,'kebab-icon-')]"));
+    WebElement ele = allRecipesName.get(0);
+    ele.click();
   }
 
-  @Then("Verify if Recipe details page is displayed")
-  public void verifyRecipeDetailsPanel() {
-    try {
-      WaitHelper.waitForElementToBeDisplayed(Helper.locateElementByTestId("select-column-drawer"));
-      Assert.assertTrue(ElementHelper.isElementDisplayed
-              (Helper.locateElementByTestId("select-column-drawer")));
-  } catch (Exception e) {
-      System.err.println("error:" + e);
-    }
+  @Then("Click on the View")
+  public void clickOnTheEditIcon() {
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("View-on-popover"));
+  }
+
+  @Then("Verify if the user is on the Recipe details panel")
+  public void verifyIfTheUserIsOnTheEditRecipePanel() {
+    Assert.assertTrue(Helper.locateElementByTestId("viewRecipe-drawer-widget").isDisplayed());
+  }
+  @Then("Click on close icon")
+  public void clickOnCloseIcon() {
+    ElementHelper.clickOnElement(Helper.locateElementByTestId("close-icon"));
+  }
+  @Then("Verify if the Recipe details panel is closed")
+  public void verifyIfTheRecipePanelClosed() {
+    Assert.assertFalse(Helper.locateElementByTestId("viewRecipe-drawer-widget").isDisplayed());
   }
 }
