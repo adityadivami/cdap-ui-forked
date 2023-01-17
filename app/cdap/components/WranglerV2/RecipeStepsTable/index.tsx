@@ -2,10 +2,17 @@ import { DataGrid } from '@material-ui/data-grid';
 import React from 'react';
 import styled from 'styled-components';
 import grey from '@material-ui/core/colors/grey';
-import { Typography } from '@material-ui/core';
+import { Button, Fade, IconButton, Paper, Popper, Typography } from '@material-ui/core';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 
 const Wrapper = styled.div`
+  align-items: center;
+  display: flex;
   width: 100%;
+
+  .MuiButtonBase-root {
+    display: none;
+  }
 `;
 
 const StyledDataGrid = styled(DataGrid)`
@@ -19,6 +26,13 @@ const StyledDataGrid = styled(DataGrid)`
     }
     .MuiDataGrid-row:hover {
       background-color: ${grey[300]};
+
+      .MuiTypography-root {
+        width: 334px;
+      }
+      .MuiButtonBase-root {
+        display: block;
+      }
     }
     .MuiTypography-body1 {
       white-space: break-spaces;
@@ -31,12 +45,12 @@ export default function CustomDataGrid(props) {
 
   return (
     <StyledDataGrid
-      rows={data}
-      columns={columns}
       autoHeight
+      columns={columns}
       disableColumnMenu
-      hideFooter
       headerHeight={48}
+      hideFooter
+      rows={data}
     />
   );
 }
@@ -59,6 +73,9 @@ export const dataGridColumns = [
           <Typography component="div" variant="body1">
             {params.value}
           </Typography>
+          <IconButton>
+            <DeleteOutlinedIcon />
+          </IconButton>
         </Wrapper>
       );
     },
