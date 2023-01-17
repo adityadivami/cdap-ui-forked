@@ -47,10 +47,8 @@ import styled from 'styled-components';
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
-import { useLocation } from 'react-router';
-import InlayDrawerWidget from 'components/InlayDrawerWidget';
-import RecipeStepsTable from 'components/WranglerV2/RecipeStepsTable';
 import RecipeStepsPanel from 'components/WranglerV2/RecipeStepsPanel';
+import { useLocation } from 'react-router';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
