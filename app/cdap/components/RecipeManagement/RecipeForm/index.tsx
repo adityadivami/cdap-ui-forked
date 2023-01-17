@@ -30,8 +30,8 @@ import {
 import { IRecipeFormProps } from 'components/RecipeManagement/types';
 import T from 'i18n-react';
 import React, { FormEvent } from 'react';
+import { RecipeAction } from 'components/RecipeList/types';
 
-export const CREATE_RECIPE = 'createRecipe';
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 
 export default function RecipeForm({
@@ -48,7 +48,7 @@ export default function RecipeForm({
   const StyledLabel = isRecipeNameError ? ErrorLabel : Label;
   const StyledTextField = isRecipeNameError ? ErrorTextField : NormalTextField;
   const StyledFormButtonWrapper =
-    recipeFormAction === CREATE_RECIPE
+    recipeFormAction === RecipeAction.CREATE_RECIPE
       ? CreateRecipeFormButtonWrapper
       : EditRecipeFormButtonWrapper;
 
@@ -60,8 +60,10 @@ export default function RecipeForm({
       >
         <FormFieldWrapper>
           <StyledLabel data-testid="recipe-form-name-label" component="span">
-            {recipeFormAction === CREATE_RECIPE && T.translate(`${PREFIX}.createRecipeNameLabel`)}
-            {!(recipeFormAction === CREATE_RECIPE) && T.translate(`${PREFIX}.editRecipeNameLabel`)}
+            {recipeFormAction === RecipeAction.CREATE_RECIPE &&
+              T.translate(`${PREFIX}.createRecipeNameLabel`)}
+            {!(recipeFormAction === RecipeAction.CREATE_RECIPE) &&
+              T.translate(`${PREFIX}.editRecipeNameLabel`)}
           </StyledLabel>
           <StyledTextField
             autoFocus={true}

@@ -24,7 +24,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import { IRecipe } from 'components/RecipeList/types';
+import { IRecipe, RecipeAction } from 'components/RecipeList/types';
 import DrawerWidget from 'components/common/DrawerWidget';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
@@ -33,11 +33,6 @@ import EditRecipe from 'components/RecipeManagement/EditRecipe';
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
-
-export enum RecipeAction {
-  EDIT_RECIPE = 'editRecipe',
-  VIEW_RECIPE = 'viewRecipe',
-}
 
 const ViewAllRecipies = () => {
   const [actionType, setActionType] = useState('');

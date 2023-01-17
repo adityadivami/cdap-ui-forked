@@ -28,8 +28,7 @@ import {
   updateRecipeService,
 } from 'components/RecipeManagement/EditRecipe/services';
 import T from 'i18n-react';
-
-import { RecipeAction } from 'components/RecipeList/ViewAllRecipes';
+import { RecipeAction } from 'components/RecipeList/types';
 
 const StyledEditFormWrapper = styled.div`
   margin-top: 30px;
