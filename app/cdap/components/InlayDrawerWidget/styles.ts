@@ -52,6 +52,11 @@ export const Label = styled(Typography)`
 export const IconWrapper = styled(Box)`
   align-items: center;
   display: flex;
+
+  .MuiIconButton-root {
+    padding: 0px;
+    margin-left: 12px;
+  }
 `;
 
 export const StyledHeader = styled.header`
