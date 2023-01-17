@@ -61,13 +61,13 @@ public class EditRecipe {
 @Then("Verify if Edit Recipe panel has Recipe Name TextField and Description TextArea")
 public void verifyIfTheEditRecipePanelHasForm() {
   Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-form-parent")));
-  Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-name-field")));
-  Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-description-field")));
+  Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-form-name-field")));
+  Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-form-description-field")));
 }
 
 @Then("Verify if Edit Recipe panel has Cancel")
 public void verifyIfTheEditRecipePanelHasCancelButton() {
-  Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-cancel-button")));
+  Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-form-cancel-button")));
 }
 
 @Then("Enter RecipeName in the TextField and Description in the TextArea")
@@ -79,18 +79,18 @@ public void enterRecipeNameAndDescription() {
   WebElement description = Helper.locateElementByTestId("recipe-description-field");
   description.click();
   description.sendKeys("updated");
-  Assert.assertTrue((Helper.locateElementByTestId("recipe-cancel-button").isEnabled()));
+  Assert.assertTrue((Helper.locateElementByTestId("recipe-form-cancel-button").isEnabled()));
 }
 
 @Then("Check Save Button is Enabled")
 public void verifyIfTheSaveButtonIsEnabled() {
-  Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-save-button")));
+  Assert.assertTrue(ElementHelper.isElementDisplayed(Helper.locateElementByTestId("recipe-form-save-button")));
 }
 
 @Then("Click on Save Button")
 public void clickOnSaveButton() {
 
-      ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-save-button"));
+      ElementHelper.clickOnElement(Helper.locateElementByTestId("recipe-form-save-button"));
 }
 
 @Then("Verify if the Edit Recipe panel is closed")
