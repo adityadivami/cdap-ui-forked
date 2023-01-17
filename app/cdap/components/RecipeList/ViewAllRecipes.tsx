@@ -34,8 +34,10 @@ const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
-export const EDIT_RECIPE = 'editRecipe';
-const VIEW_RECIPE = 'viewRecipe';
+export enum RecipeAction {
+  EDIT_RECIPE = 'editRecipe',
+  VIEW_RECIPE = 'viewRecipe',
+}
 
 const ViewAllRecipies = () => {
   const [actionType, setActionType] = useState('');
@@ -46,11 +48,15 @@ const ViewAllRecipies = () => {
 
   useEffect(() => {
     if (snackbarState.open) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setSnackbar(() => ({
           open: false,
         }));
       }, 5000);
+      return () => {
+        clearTimeout(timer);
+        setIsRecipeListUpdated(false);
+      };
     }
   }, [snackbarState.open]);
 
@@ -66,7 +72,7 @@ const ViewAllRecipies = () => {
   const handleEditRecipe = (selectedObject: any) => {
     toggleOpen();
     setRecipe(selectedObject);
-    setActionType(EDIT_RECIPE);
+    setActionType(RecipeAction.EDIT_RECIPE);
   };
 
   const onCancel = () => {
@@ -94,19 +100,21 @@ const ViewAllRecipies = () => {
         anchor="right"
         closeClickHandler={toggleOpen}
         headingText={
-          actionType === VIEW_RECIPE
+          actionType === RecipeAction.VIEW_RECIPE
             ? T.translate(`${PREFIX}.recipeDetails`)
             : T.translate(`${PREFIX}.editRecipe`)
         }
-        showBackIcon={actionType === EDIT_RECIPE ? false : true}
-        showDivider={actionType === VIEW_RECIPE ? true : false}
+        showBackIcon={actionType === RecipeAction.EDIT_RECIPE ? false : true}
+        showDivider={actionType === RecipeAction.VIEW_RECIPE ? true : false}
         open={isOpen}
         headerActionTemplate={
-          actionType === VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
+          actionType === RecipeAction.VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
         }
         dataTestId={`${actionType}-drawer-widget`}
         children={
-          actionType === VIEW_RECIPE ? renderRecipeDetailComponent() : renderEditRecipeComponent()
+          actionType === RecipeAction.VIEW_RECIPE
+            ? renderRecipeDetailComponent()
+            : renderEditRecipeComponent()
         }
       />
       <Box ml={4} m={2}>

@@ -29,7 +29,7 @@ import {
 } from 'components/RecipeManagement/EditRecipe/services';
 import T from 'i18n-react';
 
-import { EDIT_RECIPE } from 'components/RecipeList/ViewAllRecipes';
+import { RecipeAction } from 'components/RecipeList/ViewAllRecipes';
 
 const StyledEditFormWrapper = styled.div`
   margin-top: 30px;
@@ -206,7 +206,7 @@ export default function({
           onFormSubmit={onFormSubmit}
           onCancel={onCancelClick}
           isSaveDisabled={isSaveDisabled}
-          recipeFormAction={EDIT_RECIPE}
+          recipeFormAction={RecipeAction.EDIT_RECIPE}
           onRecipeDescriptionChange={onRecipeDescriptionChange}
         />
       )}
