@@ -85,7 +85,7 @@ const ViewAllRecipies = () => {
             ? T.translate(`${PREFIX}.recipeDetails`)
             : T.translate(`${PREFIX}.editRecipe`)
         }
-        showBackIcon={Boolean(actionType !== ActionType.EDIT_RECIPE)}
+        showBackIcon={false}
         showDivider={Boolean(actionType === ActionType.VIEW_RECIPE)}
         open={isOpen}
         headerActionTemplate={actionType === ActionType.VIEW_RECIPE && <></>}
