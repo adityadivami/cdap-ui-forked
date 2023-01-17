@@ -25,6 +25,7 @@ export const StyledDataGrid = styled(DataGrid)`
     .MuiDataGrid-cell {
       padding-left: 16px;
       padding-right: 16px;
+      outline: none;
     }
 
     .MuiDataGrid-columnHeader {
@@ -42,6 +43,10 @@ export const StyledDataGrid = styled(DataGrid)`
 
     .MuiDataGrid-columnSeparator {
       display: none;
+    }
+
+    .MuiDataGrid-row {
+      width: 460px;
     }
 
     .MuiDataGrid-row:hover {
