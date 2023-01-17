@@ -81,9 +81,8 @@ export function RecipeStepsPanel(args) {
 }
 
 RecipeStepsPanel.args = {
-  actionsOptions,
+  actionsOptions: [],
   headingText: 'Recipe Steps',
   onClose: handleDrawerCloseIconClick,
-  position: 'left',
-  showDivider: true,
+  position: 'right',
 };
