@@ -16,6 +16,10 @@
 
 import { action } from '@storybook/addon-actions';
 import InlayDrawerWidget, { IMenuItem } from 'components/InlayDrawerWidget';
+import RecipeStepsTable, {
+  dataGridColumns,
+  dataGridRows,
+} from 'components/WranglerV2/RecipeStepsTable';
 import React from 'react';
 
 export default {
@@ -63,4 +67,23 @@ Default.args = {
   position: 'left',
   showDivider: true,
   disableActionsButton: true,
+};
+
+export function RecipeStepsPanel(args) {
+  if (open) {
+    return (
+      <InlayDrawerWidget {...args}>
+        <RecipeStepsTable columns={dataGridColumns} data={dataGridRows} />
+      </InlayDrawerWidget>
+    );
+  }
+  return <></>;
+}
+
+RecipeStepsPanel.args = {
+  actionsOptions,
+  headingText: 'Recipe Steps',
+  onClose: handleDrawerCloseIconClick,
+  position: 'left',
+  showDivider: true,
 };

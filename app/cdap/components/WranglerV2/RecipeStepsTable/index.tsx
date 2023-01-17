@@ -45,16 +45,15 @@ export const dataGridColumns = [
   {
     field: 'srn',
     headerName: '#',
-    width: 134,
+    width: 71,
     sortable: false,
   },
   {
     field: 'step',
     headerName: 'Recipe Steps',
-    width: 326.5,
+    width: 396,
     sortable: false,
     renderCell: (params) => {
-      console.log(params.value, '*** params.value');
       return (
         <Wrapper>
           <Typography component="div" variant="body1">
