@@ -68,6 +68,8 @@ export const StyledHeader = styled.header`
   height: 30px;
   justify-content: space-between;
   margin-bottom: 30px;
+  padding-bottom: 20px;
+  padding-top: 20px;
 `;
 
 export const LeftContainer = styled(Container)`
