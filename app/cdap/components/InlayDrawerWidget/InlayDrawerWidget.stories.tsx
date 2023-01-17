@@ -17,8 +17,7 @@
 import { action } from '@storybook/addon-actions';
 import InlayDrawerWidget, { IMenuItem } from 'components/InlayDrawerWidget';
 import RecipeStepsTable, {
-  dataGridColumns,
-  dataGridRows,
+  IRecipeStepsColumns,
   IRecipeStepsRows,
 } from 'components/WranglerV2/RecipeStepsTable';
 import React from 'react';
@@ -73,6 +72,30 @@ Default.args = {
 // Recipe Steps Panel with Recipe Steps Table
 const handleDeleteIconClick = (row: IRecipeStepsRows) =>
   action('clicked')(`Delete Icon Button Clicked with id = ${row.id}`);
+
+const dataGridColumns: IRecipeStepsColumns[] = [
+  {
+    field: 'srn',
+    headerName: '#',
+    sortable: false,
+    width: 71,
+  },
+  {
+    field: 'step',
+    headerName: 'Recipe Steps',
+    sortable: false,
+    width: 396,
+  },
+];
+
+const dataGridRows: IRecipeStepsRows[] = [
+  {
+    id: 1,
+    step: "Parse Column 'Body' with delimiter 'comma' and set 'first row as header' ",
+    srn: '01',
+  },
+  { id: 2, step: "Delete Column 'body'", srn: '02' },
+];
 
 export function RecipeStepsPanel(args) {
   const { columns, rows, onDeleteIconClick, ...rest } = args;
