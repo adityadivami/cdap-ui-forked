@@ -28,7 +28,11 @@ export default {
   component: InlayDrawerWidget,
 };
 
-const handleDrawerCloseIconClick = () => action('clicked')('Drawer Closed');
+const open = true;
+
+const handleDrawerCloseIconClick = () => {
+  action('clicked')('Drawer Closed');
+};
 const onSaveButtonClick = () => action('clicked')('Save Button Clicked');
 const onApplyButtonClick = () => action('clicked')('Apply Button Clicked');
 const onDownloadButtonClick = () => action('clicked')('Download Button Clicked');
@@ -52,7 +56,7 @@ const actionsOptions: IMenuItem[] = [
 ];
 
 export function Default(args) {
-  if (open) {
+  if (args.open) {
     return <InlayDrawerWidget {...args} />;
   }
   return <></>;
@@ -62,6 +66,7 @@ Default.args = {
   actionsOptions,
   headingText: 'Header Text',
   onClose: handleDrawerCloseIconClick,
+  open,
   position: 'left',
   showDivider: true,
   disableActionsButton: true,
