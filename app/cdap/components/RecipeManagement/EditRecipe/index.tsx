@@ -142,7 +142,7 @@ export default function({
       );
   };
 
-  const onGetRecipeByNameError = (err: Record<string, unknown>, formData) => {
+  const onGetRecipeByNameError = (err: Record<string, unknown>, formData: IRecipeData) => {
     if (err.statusCode === 404) {
       setRecipeNameErrorData(noErrorState, formData);
     }

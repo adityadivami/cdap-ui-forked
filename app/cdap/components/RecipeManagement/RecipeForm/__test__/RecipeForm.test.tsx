@@ -72,13 +72,13 @@ describe('Test Recipe Form Component', () => {
   });
 
   it('should trigger onCancel event in recipe', () => {
-    const cancelButtonElement = screen.getByTestId(/recipe-cancel-button/i);
+    const cancelButtonElement = screen.getByTestId(/recipe-form-cancel-button/i);
     fireEvent.click(cancelButtonElement);
     expect(mockOnCancel).toBeCalled();
   });
 
   it('should trigger onSave event in recipe', () => {
-    const saveButtonElement = screen.getByTestId(/recipe-save-button/i);
+    const saveButtonElement = screen.getByTestId(/recipe-form-save-button/i);
     fireEvent.click(saveButtonElement);
     expect(mockOnFormSubmit).toBeCalled();
   });

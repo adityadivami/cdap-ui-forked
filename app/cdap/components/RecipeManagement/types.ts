@@ -58,7 +58,7 @@ export interface IGetRecipeByNameService {
   onGetRecipeByNameResponse: (formData: IRecipeFormData) => void;
 }
 
-export interface IEditRecipeService {
+export interface IUpdateRecipeService {
   selectedRecipe: IRecipe;
   payload: IRecipeData;
   onUpdateRecipeResponse: () => void;
