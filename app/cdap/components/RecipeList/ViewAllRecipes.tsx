@@ -75,6 +75,23 @@ const ViewAllRecipies = () => {
     setRecipe(null);
   };
 
+  const getChildComponent = () => {
+    if (actionType === ActionType.VIEW_RECIPE) {
+      return <></>;
+    }
+    if (recipe) {
+      return (
+        <EditRecipe
+          onCancelClick={onCancel}
+          selectedRecipe={recipe}
+          setIsRecipeListUpdated={setIsRecipeListUpdated}
+          setRecipeFormOpen={toggleOpen}
+          setSnackbar={setSnackbar}
+        />
+      );
+    }
+  };
+
   return (
     <>
       <DrawerWidget
@@ -90,21 +107,7 @@ const ViewAllRecipies = () => {
         open={isOpen}
         headerActionTemplate={actionType === ActionType.VIEW_RECIPE && <></>}
         dataTestId={`${actionType}-drawer-widget`}
-        children={
-          actionType === ActionType.VIEW_RECIPE ? (
-            <></>
-          ) : (
-            recipe && (
-              <EditRecipe
-                onCancelClick={onCancel}
-                selectedRecipe={recipe}
-                setIsRecipeListUpdated={setIsRecipeListUpdated}
-                setRecipeFormOpen={toggleOpen}
-                setSnackbar={setSnackbar}
-              />
-            )
-          )
-        }
+        children={getChildComponent()}
       />
       <Box ml={4} m={2}>
         <Breadcrumbs separator="›" aria-label="breadcrumb">
