@@ -29,8 +29,6 @@ export const Container = styled(Box)`
   padding-top: 20px;
   position: relative;
   width: 500px;
-  padding-top: 20px;
-  padding-bottom: 20px;
 `;
 
 export const Divider = styled.div`
