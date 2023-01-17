@@ -24,7 +24,7 @@ import {
   Label,
   LargeBox,
   OutlinedLabel,
-  ReciepeStepsBox,
+  ReciepeStepsTabButton,
   TabsWrapper,
   TransformatedIconButton,
   ZoomBox,
@@ -106,7 +106,7 @@ export default function({
           <>{`${T.translate(`${PREFIX}.directives`)}`}</>
         </Label>
       </DirectivesBox>
-      <ReciepeStepsBox
+      <ReciepeStepsTabButton
         data-testid="footer-panel-recipe-steps-tab"
         onClick={onRecipeStepsFooterTabClick}
       >
@@ -116,7 +116,7 @@ export default function({
         <OutlinedLabel data-testid="footerpanel-outlined-label">
           <>{recipeStepsCount}</>
         </OutlinedLabel>
-      </ReciepeStepsBox>
+      </ReciepeStepsTabButton>
     </TabsWrapper>
   );
 }

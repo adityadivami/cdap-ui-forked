@@ -50,7 +50,7 @@ export const Label = styled(Typography)`
   line-height: 40px;
 `;
 
-export const ReciepeStepsBox = styled(Button)`
+export const ReciepeStepsTabButton = styled(Button)`
   align-items: center;
   background: linear-gradient(180deg, #4681f400 0.85%, #4681f433 118.78%);
   border-left: 1px solid rgba(57, 148, 255, 0.4);
