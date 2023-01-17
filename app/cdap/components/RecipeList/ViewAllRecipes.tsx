@@ -75,20 +75,6 @@ const ViewAllRecipies = () => {
     setRecipe(null);
   };
 
-  const renderEditRecipeComponent = () =>
-    recipe && (
-      <EditRecipe
-        onCancelClick={onCancel}
-        selectedRecipe={recipe}
-        setIsRecipeListUpdated={setIsRecipeListUpdated}
-        setRecipeFormOpen={toggleOpen}
-        setSnackbar={setSnackbar}
-      />
-    );
-
-  const renderRecipeDetailComponent = () => <></>;
-  const renderRecipeDetailHeaderActionTemplate = () => <></>;
-
   return (
     <>
       <DrawerWidget
@@ -102,14 +88,22 @@ const ViewAllRecipies = () => {
         showBackIcon={actionType === ActionType.EDIT_RECIPE ? false : true}
         showDivider={actionType === ActionType.VIEW_RECIPE ? true : false}
         open={isOpen}
-        headerActionTemplate={
-          actionType === ActionType.VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
-        }
+        headerActionTemplate={actionType === ActionType.VIEW_RECIPE && <></>}
         dataTestId={`${actionType}-drawer-widget`}
         children={
-          actionType === ActionType.VIEW_RECIPE
-            ? renderRecipeDetailComponent()
-            : renderEditRecipeComponent()
+          actionType === ActionType.VIEW_RECIPE ? (
+            <></>
+          ) : (
+            recipe && (
+              <EditRecipe
+                onCancelClick={onCancel}
+                selectedRecipe={recipe}
+                setIsRecipeListUpdated={setIsRecipeListUpdated}
+                setRecipeFormOpen={toggleOpen}
+                setSnackbar={setSnackbar}
+              />
+            )
+          )
         }
       />
       <Box ml={4} m={2}>
