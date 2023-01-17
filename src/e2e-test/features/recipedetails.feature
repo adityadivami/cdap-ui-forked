@@ -16,9 +16,11 @@
 
 @Integration_Tests
 Feature: recipe details page
-  @RecipeDetails_Test
   Scenario: Should open recipe details page
-    Given Navigate to home page to test Recipe details page
-    Then Click on ongoing data exploration for recipe details
-    Then Click on recipe name on grid page
-    Then Verify if Recipe details page is displayed
+    Given Navigate to Home Page
+    Then Click on View All Button
+    Then Verify if the Saved RecipeList table is loaded
+    Then Click on the Kebab icon on each row
+    Then Click on the View
+    Then Verify if the user is on the Recipe details panel
+    Then Click on close icon
