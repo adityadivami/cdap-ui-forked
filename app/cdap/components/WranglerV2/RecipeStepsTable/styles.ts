@@ -44,6 +44,10 @@ export const StyledDataGrid = styled(DataGrid)`
       display: none;
     }
 
+    .MuiDataGrid-row {
+      width: 460px;
+    }
+
     .MuiDataGrid-row:hover {
       background-color: ${grey[300]};
 

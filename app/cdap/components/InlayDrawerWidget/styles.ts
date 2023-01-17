@@ -19,11 +19,12 @@ import grey from '@material-ui/core/colors/grey';
 import styled from 'styled-components';
 
 export const Container = styled(Box)`
+  background-color: #fff;
   border-left: 1px solid ${grey[300]};
   height: calc(100vh - 232px);
   overflow: scroll;
   padding-left: 20px;
-  padding-right: 10px;
+  padding-right: 20px;
   position: relative;
   width: 500px;
 `;
