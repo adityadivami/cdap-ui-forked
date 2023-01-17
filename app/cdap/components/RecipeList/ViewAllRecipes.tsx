@@ -70,7 +70,6 @@ const ViewAllRecipies = () => {
         headerActionTemplate={
           actionType === VIEW_RECIPE && renderRecipeDetailHeaderActionTemplate()
         }
-        showHeaderSeparator={false}
         dataTestId={`${actionType}-drawer-widget`}
         children={
           actionType === VIEW_RECIPE ? renderRecipeDetailComponent() : renderEditRecipeComponent()
