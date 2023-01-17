@@ -35,7 +35,6 @@ describe('Test Recipe Form Component', () => {
         recipeNameErrorMessage={'error message'}
         onRecipeNameChange={jest.fn()}
         onFormSubmit={mockOnFormSubmit}
-        setRecipeFormData={jest.fn()}
         onCancel={mockOnCancel}
         isSaveDisabled={false}
         recipeFormAction={'createRecipe'}

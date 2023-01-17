@@ -14,11 +14,8 @@
  * the License.
  */
 
-import {
-  createRecipeService,
-  getRecipeByNameService,
-} from 'components/RecipeManagement/CreateRecipe/services';
-import RecipeForm, { CREATE_RECIPE } from 'components/RecipeManagement/RecipeForm';
+import { createRecipeService, getRecipeByNameService } from 'components/RecipeManagement/services';
+import RecipeForm from 'components/RecipeManagement/RecipeForm';
 import {
   ICreateRecipeProps,
   IRecipeFormData,
@@ -27,6 +24,7 @@ import {
 import T from 'i18n-react';
 import { debounce } from 'lodash';
 import React, { FormEvent, useRef, useState } from 'react';
+import { ActionType } from 'components/RecipeList/types';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
@@ -177,7 +175,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       onFormSubmit={onFormSubmit}
       onCancel={onCancel}
       isSaveDisabled={isSaveDisabled}
-      recipeFormAction={CREATE_RECIPE}
+      recipeFormAction={ActionType.CREATE_RECIPE}
       onRecipeDescriptionChange={onRecipeDescriptionChange}
     />
   );
