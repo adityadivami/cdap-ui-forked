@@ -175,7 +175,7 @@ export const RecipeTableRow = ({
         {showAllColumns && <div>{recipe.description}</div>}
         <div>{format(recipe.updatedTimeMillis, TYPES.TIMESTAMP_MILLIS)}</div>
         {showActions && (
-          <span onClick={handleActionsClick} data-testId={`${recipe.recipeName}-kebab-icon`}>
+          <span onClick={handleActionsClick} data-testId={`kebab-icon-${recipe.recipeName}`}>
             <ActionsPopover
               actions={actions}
               showPopover={showPopover}
