@@ -30,9 +30,7 @@ export default {
 
 const open = true;
 
-const handleDrawerCloseIconClick = () => {
-  action('clicked')('Drawer Closed');
-};
+const handleDrawerCloseIconClick = () => action('clicked')('Drawer Closed');
 const onSaveButtonClick = () => action('clicked')('Save Button Clicked');
 const onApplyButtonClick = () => action('clicked')('Apply Button Clicked');
 const onDownloadButtonClick = () => action('clicked')('Download Button Clicked');
