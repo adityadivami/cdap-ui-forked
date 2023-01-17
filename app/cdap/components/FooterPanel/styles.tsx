@@ -58,7 +58,6 @@ export const ReciepeStepsTabButton = styled(Button)`
   display: flex;
   font-size: 14px;
   font-weight: 400;
-  gap: 8px;
   height: 40px;
   justify-content: space-between;
   letter-spacing: 0.15px;

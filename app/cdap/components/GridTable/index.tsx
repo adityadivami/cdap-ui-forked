@@ -25,7 +25,7 @@ import FooterPanel from 'components/FooterPanel';
 import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
-import { useStyles } from 'components/GridTable/styles';
+import { FlexWrapper, useStyles } from 'components/GridTable/styles';
 import {
   IExecuteAPIResponse,
   IHeaderNamesList,
@@ -54,6 +54,13 @@ import RecipeStepsPanel from 'components/WranglerV2/RecipeStepsPanel';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
+  height: calc(100vh - 240px);
+  width: 100vw;
+  overflow: scroll;
+`;
+
+const OpenPanelTableWrapper = styled(TableWrapper)`
+  width: calc(100vw - 500px);
 `;
 
 const GridTableWrapper = styled(Box)`
@@ -303,6 +310,8 @@ export default function GridTable() {
     }
   }, [snackbarState.open]);
 
+  const StyledTableWrapper = recipeStepsPanelMode ? OpenPanelTableWrapper : TableWrapper;
+
   return (
     <>
       {showBreadCrumb && (
@@ -331,14 +340,8 @@ export default function GridTable() {
           />
         )}
         {showGridTable && (
-          <div style={{ display: 'flex' }}>
-            <TableWrapper
-              style={{
-                height: 'calc(100vh - 240px)',
-                width: recipeStepsPanelMode ? 'calc(100vw - 500px)' : '100vw',
-                overflow: 'scroll',
-              }}
-            >
+          <FlexWrapper>
+            <StyledTableWrapper>
               <Table aria-label="simple table" className="test">
                 <TableHead>
                   <TableRow>
@@ -383,14 +386,14 @@ export default function GridTable() {
                     })}
                 </TableBody>
               </Table>
-            </TableWrapper>
+            </StyledTableWrapper>
             {recipeStepsPanelMode && (
               <RecipeStepsPanel
                 onRecipeStepsPanelClose={() => setRecipeStepsPanelMode(!recipeStepsPanelMode)}
                 directives={dataprep.directives}
               />
             )}
-          </div>
+          </FlexWrapper>
         )}
         <FooterPanel
           recipeStepsCount={dataprep.directives.length}

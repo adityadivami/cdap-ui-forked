@@ -15,6 +15,11 @@
  */
 
 import { makeStyles } from '@material-ui/core';
+import styled from 'styled-components';
+
+export const FlexWrapper = styled.div`
+  display: flex;
+`;
 
 export const useStyles = makeStyles({
   loadingContainer: {

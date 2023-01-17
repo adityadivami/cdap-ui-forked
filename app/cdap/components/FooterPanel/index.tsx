@@ -73,7 +73,7 @@ export interface IRecipeStepsTabProps {
   recipeStepsCount: number;
 }
 
-export default function({
+export default function FooterPanel({
   recipeStepsCount,
   gridMetaInfo,
   onRecipeStepsFooterTabClick,
@@ -111,11 +111,9 @@ export default function({
         onClick={onRecipeStepsFooterTabClick}
       >
         <Label data-testid="footerpanel-simple-label">
-          <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>
+          {`${T.translate(`${PREFIX}.recipeSteps`)}`}
         </Label>
-        <OutlinedLabel data-testid="footerpanel-outlined-label">
-          <>{recipeStepsCount}</>
-        </OutlinedLabel>
+        <OutlinedLabel data-testid="footerpanel-outlined-label">{recipeStepsCount}</OutlinedLabel>
       </ReciepeStepsTabButton>
     </TabsWrapper>
   );
