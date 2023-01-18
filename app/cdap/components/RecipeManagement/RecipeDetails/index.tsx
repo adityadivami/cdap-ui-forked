@@ -26,7 +26,7 @@ import { IRecipeDetailsProps } from 'components/RecipeManagement/types';
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const MainContainer = styled(Box)`
-  margin-top: 19px;
+  margin-top: 24px;
 `;
 
 const RecipeNameLabel = styled(Typography)`
