@@ -77,7 +77,7 @@ const ViewAllRecipies = () => {
 
   const getChildComponent = () => {
     if (actionType === ActionType.VIEW_RECIPE) {
-      return <></>;
+      return <></>; /// TODO: Here we will render Recipe Detail component once we integrate Recipe Detail
     }
     if (recipe) {
       return (
