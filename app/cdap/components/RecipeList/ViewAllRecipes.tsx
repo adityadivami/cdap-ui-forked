@@ -36,7 +36,7 @@ const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
 const ViewAllRecipies = () => {
   const [actionType, setActionType] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isRecipeListUpdated, setIsRecipeListUpdated] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
   const [snackbarState, setSnackbar] = useSnackbar();
@@ -56,7 +56,7 @@ const ViewAllRecipies = () => {
   }, [snackbarState.open]);
 
   const toggleOpen = () => {
-    setIsOpen(!isOpen);
+    setIsPanelOpen(!isPanelOpen);
     setRecipe(null);
   };
 
@@ -104,7 +104,7 @@ const ViewAllRecipies = () => {
         }
         showBackIcon={false}
         showDivider={Boolean(actionType === ActionType.VIEW_RECIPE)}
-        open={isOpen}
+        open={isPanelOpen}
         headerActionTemplate={actionType === ActionType.VIEW_RECIPE && <></>}
         dataTestId={`${actionType}-drawer-widget`}
         children={getChildComponent()}
