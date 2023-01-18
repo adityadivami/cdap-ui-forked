@@ -27,7 +27,7 @@ const ActionsWrapper = styled(Box)`
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
-const HeaderActionTemplate = () => {
+export default function HeaderActionTemplate() {
   const [showPopover, setShowPopover] = useState(false);
 
   const togglePopover = () => {
@@ -51,6 +51,4 @@ const HeaderActionTemplate = () => {
       <ActionsPopover actions={actions} showPopover={showPopover} togglePopover={togglePopover} />
     </ActionsWrapper>
   );
-};
-
-export default HeaderActionTemplate;
+}

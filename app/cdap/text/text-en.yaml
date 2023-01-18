@@ -3527,6 +3527,7 @@ features:
         success: Success
         undo: Undo
     Recipe:
+        actions: Actions
         applyRecipe: Apply        
         applyRecipeHeading: Apply steps from a Recipe
         applyRecipeSuccess: Recipe steps applied successfully
@@ -3540,7 +3541,10 @@ features:
             recipeStep: Recipe steps 
             serialNo: S.No.    
         createdDate: Created date
+        delete: Delete
         description: Description
+        download: Download
+        edit: Edit
         emptyListMessage: No Recipes created in this namespace
         home: Home        
         import: Import
@@ -3550,14 +3554,10 @@ features:
         savedRecipes: Saved Recipes  
         selectRecipeToApply: Select a recipe to apply its steps  
         steps: Steps
+        recipeDetails: Recipe details
         updated: Last updated
         view: View
         viewAll: View All    
-        actions: Actions
-        delete: Delete
-        download: Download
-        recipeDetails: Recipe details
-        edit: Edit
 
 
     

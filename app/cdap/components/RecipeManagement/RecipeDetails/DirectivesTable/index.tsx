@@ -26,8 +26,8 @@ import { grey } from '@material-ui/core/colors';
 
 const styledTableRowCSS = css`
   border: 1px solid rgb(0 0 0 / 12%);
-  padding: 10px 16px;
   border-bottom: none;
+  padding: 10px 16px;
 `;
 
 const StyledTableHeader = styled(TableHeader)`
@@ -36,9 +36,9 @@ const StyledTableHeader = styled(TableHeader)`
 
 const StyledTableHeadRow = styled(TableRow)`
   ${styledTableRowCSS}
-  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.12);
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.12);
 `;
 
 const StyledTableBodyRow = styled(TableRow)`
@@ -49,20 +49,20 @@ const StyledTableBodyRow = styled(TableRow)`
 
 const StyledTableHeaderCell = styled(TableCell)`
   color: ${grey[600]};
-  font-weight: 700;
   font-size: 12px;
+  font-weight: 700;
 `;
 
 const StyledTableBodyCell = styled(TableCell)`
   color: ${grey[700]};
-  font-weight: 400;
   font-size: 16px;
+  font-weight: 400;
   line-height: 24px;
 `;
 
 const PREFIX = 'features.WranglerNewUI.Recipe.common';
 
-const DirectivesTable = ({ directives }: { directives: string[] }) => {
+export default function DirectivesTable({ directives }: { directives: string[] }) {
   const getSerialNumber = (recipeStepIndex: number) => {
     if (recipeStepIndex < 10) {
       return `0${recipeStepIndex + 1}`;
@@ -96,6 +96,4 @@ const DirectivesTable = ({ directives }: { directives: string[] }) => {
       </TableBody>
     </Table>
   );
-};
-
-export default DirectivesTable;
+}

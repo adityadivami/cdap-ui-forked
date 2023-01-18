@@ -56,7 +56,7 @@ const VerticalDivider = styled(Box)`
   margin: 0 10px;
 `;
 
-const RecipeDetails = ({ selectedRecipe }: IRecipeDetailsProps) => {
+export default function RecipeDetails({ selectedRecipe }: IRecipeDetailsProps) {
   return (
     <MainContainer>
       <RecipeNameLabel component="h5" data-testid="selected-recipe-name">
@@ -78,6 +78,4 @@ const RecipeDetails = ({ selectedRecipe }: IRecipeDetailsProps) => {
       <DirectiveTable directives={selectedRecipe.directives} />
     </MainContainer>
   );
-};
-
-export default RecipeDetails;
+}
