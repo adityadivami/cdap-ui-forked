@@ -68,7 +68,7 @@ const DrawerContainer = styled(Container)`
 `;
 
 const DrawerHeader = styled.header`
-  height: 60px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
