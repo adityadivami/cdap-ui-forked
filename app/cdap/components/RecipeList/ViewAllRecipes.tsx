@@ -34,7 +34,7 @@ const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
 const ViewAllRecipies = () => {
   const [actionType, setActionType] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
   const viewRecipeHandler = (selectedObject: any) => {
     toggleOpen();
@@ -46,7 +46,7 @@ const ViewAllRecipies = () => {
     // To do : Integrate Edit recipe details panel
   };
 
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const toggleOpen = () => setIsPanelOpen(!isPanelOpen);
 
   const getChildComponent = () => {
     if (actionType === ActionType.VIEW_RECIPE) {
@@ -69,7 +69,7 @@ const ViewAllRecipies = () => {
         }
         showBackIcon={false}
         showDivider={Boolean(actionType === ActionType.VIEW_RECIPE)}
-        open={isOpen}
+        open={isPanelOpen}
         headerActionTemplate={
           actionType === ActionType.VIEW_RECIPE && <RecipeHeaderActionTemplate />
         }
