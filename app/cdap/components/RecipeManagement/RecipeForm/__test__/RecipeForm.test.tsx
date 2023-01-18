@@ -67,8 +67,8 @@ describe('Test Recipe Form Component', () => {
 
   it('should render Recipe Description Field', () => {
     const RecipeDescriptionElement = screen.getByTestId(/recipe-form-description-field/i);
-    fireEvent.change(RecipeDescriptionElement, { target: { value: 'test' } });
-    expect(RecipeDescriptionElement).toHaveValue('test');
+    fireEvent.change(RecipeDescriptionElement, { target: { value: 'abc desc' } });
+    expect(RecipeDescriptionElement).toHaveValue('abc desc');
   });
 
   it('should trigger onCancel event in recipe', () => {
