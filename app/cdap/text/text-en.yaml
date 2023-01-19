@@ -17,6 +17,7 @@ commons:
   DSVEditor:
     placeholder: value
   dataset: Dataset
+  download: Download
   edit: Edit
   entity:
     application:
@@ -94,6 +95,7 @@ commons:
   then: Then
   tracker: Cask Tracker
   typeLabel: Type
+  view: View
   when: When
   wrangler: Cask Wrangler
   yesLabel: Yes
@@ -2088,7 +2090,6 @@ features:
         distributed: Distributed
         localSandbox: Local Sandbox
     rulesmgmt: Rules
-
   NUX:
     ControlCenter:
       text: "{featureName} allows you to create, manage, operate, and monitor datasets and applications."
@@ -3432,4 +3433,141 @@ features:
         title: Configure a pipeline
       success: You have successfully created the pipeline "{pipelineName}".
     Skip: Skipped
+  WranglerNewUI:
+    AddConnections:
+      referenceLabel: Add Connection
+    Breadcrumb:
+      ariaLabels:
+        breadcrumb: breadcrumb
+      labels:
+        connectionsList: Data Sources
+        createPipeline: Create a Pipeline
+        loadToGrid: Wrangle
+        wrangleHome: Home
+      params:
+        connectionsList: datasources
+        wrangleHome: home
+    common:
+      and: and
+    ConnectionsList:
+      labels:
+        loadToGrid: Wrangle
+        noConnections: No Connections to show
+    FooterPanel:
+      labels:
+        columns: columns
+        columnViewPanel: Column View Panel
+        currentData: Current data
+        directives: Directives
+        message: Current data - {rowCount} rows and {columnCount} columns
+        recipeSteps: Recipe Steps
+        rows: rows
+        zoomPercent100: 100%
+    GridPage:
+      gridHeader:
+        ariaLabels:
+          functionsName: Functions Name Switch
+      menuItems:
+        divider: divider
+        heading: heading
+      selectColumnListPanel:
+        applyStep: Apply Step
+        columnsSelected: column selected
+        columnType: Column Type
+        columns: Columns
+        dataQuality: Data Quality
+        done: Done
+        nullValues: Null Values
+        selectColumnHeading: Select Column to Apply This Function
+        selectMultiColumnsHeading: Select Column(s) to Apply This Function
+        selectColumn: Select column
+        selectMultiColumns: Select columns
+        selectedColumnsCount:
+          0: "No columns selected"
+          1: "{context} column selected"
+          _: "{context} columns selected" 
+        noColumns: No columns to show
+        noMatchColumnDatatype: Selected directive supported datatype does not match with the column's datatype
+        noMatchInSearchMode: No columns match the specified search term
+        zero: '0'
+      toolbarIcons:
+        labels:
+          all: all
+          columnIcon: Column
+          fragmentIcon: Fragment
+          gridIcon: Grid
+          invalidIcon: Invalid
+          mathIcon: Math
+          nullIcon: 'Null'
+          moreHorizIcon: Other
+          redoIcon: Redo
+          securityIcon: Security
+          structureIcon: Structure
+          toggleDescription: Function names
+          undoIcon: Undo
+      transformations:
+        options:
+          labels:
+            datatype:
+              boolean: boolean
+              bytes: bytes
+              double: double
+              decimal: decimal
+              float: float
+              integer: integer
+              long: long
+              short: short
+              string: string
+            menu:
+              changeDatatype: Change data type
+    GridTable:
+      snackbarLabels:
+        datasetSuccess: Dataset loaded successfully 
+    HomePage:
+      labels:
+        common:
+          addConnection: Add Connection
+          importData: Import Data
+          viewAll: View All
+        connectorTypes:
+          title: Start data exploration
+        recipes:
+          title: Saved recipes
+        workspaces:
+          title: Continue ongoing data explorations, pick up where you left off
+    ImportData:
+      referenceLabel: Import Data
+    NoRecordScreen:
+      gridTable:
+        subtitle: Remove some recipe steps to view some data
+        title: No rows left in this sample
+    Recipe:
+        applyRecipe: Apply        
+        applyRecipeHeading: Apply steps from a Recipe
+        applyRecipeSuccess: Recipe steps applied successfully
+        applyRecipeFailed: Failed to apply recipe steps - {errorDetails}
+        cancel: Cancel
+        common:
+          deleteConfirmation: Are you sure you want to delete the recipe *_{recipeName}_*?
+          deleteError: There was a problem deleting the recipe
+          deleteTitle: Delete recipe
+        createdDate: Created date
+        description: Description
+        emptyListMessage: No Recipes created in this namespace
+        home: Home        
+        import: Import
+        list: Recipe list
+        name: Recipe name 
+        recipeSteps: Recipe steps
+        savedRecipes: Saved Recipes  
+        selectRecipeToApply: Select a recipe to apply its steps  
+        steps: Steps
+        updated: Last updated
+        view: View
+        viewAll: View All      
+    Snackbar:
+      labels:
+        failure: Failure
+        success: Success
+        undo: Undo
 ...

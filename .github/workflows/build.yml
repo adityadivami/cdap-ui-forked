@@ -28,11 +28,6 @@ jobs:
 
     if: ${{ github.event.workflow_run.conclusion != 'skipped' }}
 
-    # Cancel ongoing runs
-    concurrency: 
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
-
     steps:
     # Pinned 1.0.0 version
     - uses: haya14busa/action-workflow_run-status@967ed83efa565c257675ed70cfe5231f062ddd94
@@ -85,7 +80,7 @@ jobs:
         yarn run cdap-full-build-more-memory # Build UI
         yarn start &
         yarn run test:unit
-        mvn clean verify -P e2e-tests
+        mvn clean verify -P e2e-tests -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
     - name: Archive build artifacts
       uses: actions/upload-artifact@v2.2.2

@@ -207,8 +207,11 @@ class HydratorUpgradeService {
         }
 
         // This is to check whether the version of the imported pipeline exist or not
-        let existingVersion = pluginsMap[stageKey].artifactVersionMap[stageArtifact.version];
-        if (existingVersion && existingVersion.indexOf(stageArtifact.scope) !== -1) {
+        const existingVersion = pluginsMap[stageKey].allArtifacts.find(
+          (ver) => (ver.version === stageArtifact.version && ver.scope === stageArtifact.scope)
+        );
+
+        if (existingVersion) {
           data.error = 'CAN_UPGRADE';
         }
       } else if (pluginsMap[stageKey].highestVersion.scope.indexOf(stageArtifact.scope) < 0) {
@@ -250,7 +253,7 @@ class HydratorUpgradeService {
     return configClone;
   }
 
-  validateAndUpgradeConfigFile(configFile) {
+  validateAndUpgradeConfigFile(configFile, parentVersion = null) {
     if (configFile.type !== 'application/json') {
       this.myAlertOnValium.show({
         type: 'danger',
@@ -275,11 +278,11 @@ class HydratorUpgradeService {
       }
 
       fileDataString = this.NonStorePipelineErrorFactory.adjustConfigNode(fileDataString);
-      this.openUpgradeModal(fileDataString);
+      this.openUpgradeModal(fileDataString, true, parentVersion);
     };
   }
 
-  openUpgradeModal(jsonData, isImport = true) {
+  openUpgradeModal(jsonData, isImport = true, parentVersion = null) {
     if (typeof jsonData === 'string') {
       try {
         jsonData = JSON.parse(jsonData);
@@ -287,6 +290,23 @@ class HydratorUpgradeService {
         return;
       }
     }
+
+    /**
+     * We allow import for edit flow, import during edit should only take json with same artifact type,
+     * pipeline name should not be changed
+     */
+    if (this.$state.params.isEdit === 'true') {
+      if (this.$state.params.artifactType !== jsonData.artifact.name) {
+        this.myAlertOnValium.show({
+          type: 'danger',
+          content: 'Imported pipeline\'s artifact type does not match the one you are currently editing.'
+        });
+        return;
+      }
+      jsonData.name = this.$state.params.cloneId;
+      jsonData.parentVersion = parentVersion;
+    }
+
     /**
      * This exists because we could easily have users import nodes with
      * name that has spaces and other special characters. Space and `/` are

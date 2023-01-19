@@ -32,6 +32,18 @@ const EntityListView = Loadable({
   loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/EntityListView'),
   loading: LoadingSVGCentered,
 });
+const WrangleHome = Loadable({
+  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/WrangleHome'),
+  loading: LoadingSVGCentered,
+});
+const ConnectionList = Loadable({
+  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/ConnectionList'),
+  loading: LoadingSVGCentered,
+});
+const WrangleGrid = Loadable({
+  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/GridTable'),
+  loading: LoadingSVGCentered,
+});
 const Connections = Loadable({
   loader: () => import(/* webpackChunkName: "Connections" */ 'components/Connections'),
   loading: LoadingSVGCentered,
@@ -121,6 +133,11 @@ const Metadata = Loadable({
   loader: () => import(/* webpackChunkMame: "Metadata" */ 'components/Metadata'),
   loading: LoadingSVGCentered,
 });
+const ViewAllRecipes = Loadable({
+  loader: () =>
+    import(/* webpackChunkName: "ViewAllRecipes" */ 'components/RecipeList/ViewAllRecipes'),
+  loading: LoadingSVGCentered,
+});
 
 export default class Home extends Component {
   constructor(props) {
@@ -140,6 +157,13 @@ export default class Home extends Component {
       <div>
         <Switch>
           <Route exact path="/ns/:namespace" component={HomeActions} />
+          <Route exact path="/ns/:namespace/wrangle" component={WrangleHome} />
+          <Route
+            exact
+            path="/ns/:namespace/datasources/:connectorType"
+            component={ConnectionList}
+          />
+          <Route exact path="/ns/:namespace/wrangler-grid/:wid" component={WrangleGrid} />
           <Route exact path="/ns/:namespace/control" component={EntityListView} />
           <Route
             exact
@@ -177,6 +201,7 @@ export default class Home extends Component {
           <Route path="/ns/:namespace/securekeys" component={SecureKeys} />
           <Route path="/ns/:namespace/kitchen" component={ConfigurationGroupKitchenSync} />
           <Route path="/ns/:namespace/replication" component={Replicator} />
+          <Route path="/ns/:namespace/recipes" component={ViewAllRecipes} />
           <Route
             exact
             path="/ns/:namespace/vs"

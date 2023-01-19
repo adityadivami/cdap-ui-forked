@@ -162,7 +162,7 @@ export const SidePanel = ({
 
   useEffect(() => {
     setPluginGroups(organizePlugins(pluginGroups, availablePlugins));
-  }, [numberOfPlugins]);
+  }, [numberOfPlugins, JSON.stringify(groups)]);
 
   const handleSetSearch = debounce((text) => {
     // open all accordions when searching (then filtered closes them if no plugins)
@@ -208,6 +208,7 @@ export const SidePanel = ({
     return plugins.map((plugin) => {
       const id = `plugin-${plugin.name}-${plugin.type}`;
       const label = plugin.displayName || plugin.name;
+      const createOrEditLabel = plugin.pluginTemplate ? 'Edit' : 'Create';
       const handleClickShowDetails = handlePopperButtonClick(id);
       const ToolTipContent = (
         <TooltipContentBox>
@@ -218,12 +219,12 @@ export const SidePanel = ({
               component="span"
               onClick={(e) => {
                 e.stopPropagation();
-                createPluginTemplate(plugin, 'create');
+                createPluginTemplate(plugin, createOrEditLabel.toLowerCase() as 'edit' | 'create');
                 handlePopoverClose();
               }}
             >
               <ToolTipButtonContainer>
-                <AddCircle /> Create Template
+                <AddCircle /> {`${createOrEditLabel} Template`}
               </ToolTipButtonContainer>
             </Button>
             {plugin.pluginTemplate && (
@@ -349,7 +350,10 @@ export const SidePanel = ({
             <Chip label={plugins.length} size="small" />
             <StyledGroupName>{group.name}</StyledGroupName>
           </StyledAccordionSummary>
-          <StyledAccordionDetails className="item">
+          <StyledAccordionDetails
+            className="item"
+            data-testid={`plugin-${group.name}-group-details`}
+          >
             <ItemBodyWrapper className="item-body-wrapper">
               <div
                 className={`item-body ${sidePanelViewType === 'icon' ? 'view-icon' : 'view-list'}`}
