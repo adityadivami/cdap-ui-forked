@@ -83,7 +83,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       ...recipeFormData,
       recipeName: event.target.value,
     });
-    validateRecipeNameExists.current({
+    validateIfRecipeNameExists.current({
       recipeName: event.target.value,
       description: recipeFormData.description,
     });
@@ -149,7 +149,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       );
   };
 
-  const validateRecipeNameExists = useRef(
+  const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeFormData) => {
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
         setRecipeNameErrorData({
