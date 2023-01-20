@@ -31,6 +31,7 @@ import {
 } from 'components/WranglerGrid/SelectColumnPanel/types';
 import { getDataQuality } from 'components/WranglerV2/DataQualityCircularProgressBar';
 import DrawerWidget from 'components/WranglerV2/DrawerWidget';
+import SectionWrapper from 'components/WranglerV2/SectionWrapper';
 import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 
@@ -170,6 +171,11 @@ export default function SelectColumnPanel({
             isSingleSelection={isSingleSelection}
           />
         </Wrapper>
+        <SectionWrapper
+          transformationName={transformationName}
+          transformationInfoLink="https://mui.com/material-ui/material-icons/"
+          columnSelected=""
+        />
         <StyledButton
           disabled={enableDoneButton(transformationName, selectedColumns)}
           color="primary"

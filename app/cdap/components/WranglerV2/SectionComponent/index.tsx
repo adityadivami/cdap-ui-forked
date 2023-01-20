@@ -1,0 +1,69 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import { grey, lightGreen } from '@material-ui/core/colors';
+import styled from 'styled-components';
+import React, { ReactNode } from 'react';
+import { Typography, Divider } from '@material-ui/core';
+
+export interface ISectionComponentProps {
+  children: ReactNode | JSX.Element;
+  showDivider: boolean;
+  showTickIcon: boolean;
+  title: string;
+}
+
+const SectionTitle = styled(Typography)`
+  color: ${grey[700]};
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.25px;
+  line-height: 36px;
+  margin-top: 20px;
+  text-transform: uppercase;
+`;
+
+const TitleTextIconWrapper = styled.section`
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const TickIcon = styled(CheckCircleOutlinedIcon)`
+  color: ${lightGreen[400]};
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+`;
+
+export default function SectionComponent({
+  children,
+  showDivider,
+  showTickIcon,
+  title,
+}: ISectionComponentProps) {
+  return (
+    <>
+      <TitleTextIconWrapper>
+        <SectionTitle component="p">{title}</SectionTitle>
+        {showTickIcon && <TickIcon />}
+      </TitleTextIconWrapper>
+      {children}
+      {showDivider && <Divider />}
+    </>
+  );
+}
