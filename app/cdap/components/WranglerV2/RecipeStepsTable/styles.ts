@@ -8,7 +8,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * distributed under the License is distributed on an "AS IS" BASIS, WITH`OUT`
  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
  * License for the specific language governing permissions and limitations under
  * the License.
@@ -21,14 +21,17 @@ import styled from 'styled-components';
 export const StyledDataGrid = styled(DataGrid)`
   &&& {
     width: 460px;
+    box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.12);
 
     .MuiDataGrid-cell {
       padding-left: 16px;
       padding-right: 16px;
+      outline: none;
     }
 
     .MuiDataGrid-columnHeader {
       padding-left: 16px;
+      outline: none;
     }
 
     .MuiDataGrid-columnHeaderTitleContainer {

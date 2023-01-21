@@ -59,14 +59,5 @@ export default function RecipeStepsTable({
   // 1 is the index of the cell in RecipeStepsTable that needs custom render component
   columns[1].renderCell = CustomRenderCell;
 
-  return (
-    <StyledDataGrid
-      autoHeight
-      columns={columns}
-      disableColumnMenu
-      headerHeight={48}
-      hideFooter
-      rows={rows}
-    />
-  );
+  return <StyledDataGrid autoHeight columns={columns} disableColumnMenu hideFooter rows={rows} />;
 }
