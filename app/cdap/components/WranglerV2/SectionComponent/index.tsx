@@ -28,19 +28,23 @@ export interface ISectionComponentProps {
 }
 
 const SectionTitle = styled(Typography)`
-  color: ${grey[700]};
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 1.25px;
-  line-height: 36px;
-  margin-top: 20px;
-  text-transform: uppercase;
+  &&& {
+    color: ${grey[700]};
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1.25px;
+    line-height: 36px;
+    text-transform: uppercase;
+  }
 `;
 
 const TitleTextIconWrapper = styled.section`
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
+  &&& {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
 `;
 
 const TickIcon = styled(CheckCircleOutlinedIcon)`
@@ -48,6 +52,12 @@ const TickIcon = styled(CheckCircleOutlinedIcon)`
   font-size: 20px;
   height: 20px;
   width: 20px;
+`;
+
+const Flexcontainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
 `;
 
 export default function SectionComponent({
@@ -59,11 +69,13 @@ export default function SectionComponent({
   return (
     <>
       <TitleTextIconWrapper>
-        <SectionTitle component="p">{title}</SectionTitle>
+        <SectionTitle component="h4">{title}</SectionTitle>
         {showTickIcon && <TickIcon />}
       </TitleTextIconWrapper>
-      {children}
-      {showDivider && <Divider />}
+      <Flexcontainer>
+        {children}
+        {showDivider && <Divider />}
+      </Flexcontainer>
     </>
   );
 }

@@ -3439,6 +3439,7 @@ features:
     AddTransformationStepPanel:
       applyStep: Apply Step
       change: change
+      columnsSelected: column selected
       function: Function
       noColumnsSelected: No columns selected
       selectColumns: Select columns

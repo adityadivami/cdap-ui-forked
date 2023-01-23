@@ -21,32 +21,43 @@ import SectionComponent from 'components/WranglerV2/SectionComponent';
 import styled from 'styled-components';
 import T from 'i18n-react';
 import { Typography, Button, Divider } from '@material-ui/core';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 export interface ISectionWrapperComponentProps {
-  columnSelected: string;
+  columnsSelected: IHeaderNamesList[];
   transformationName: string;
   transformationInfoLink: string;
 }
 
+interface IColumnSelected {
+  label: string;
+  name: string;
+  type: ['Boolean'];
+}
+
 const SubTitle = styled(Typography)`
-  color: ${grey[700]};
-  font-weight: 400;
-  font-size: 14px;
-  letter-spacing: 0.25px;
-  line-height: 20px;
+  &&& {
+    color: ${grey[700]};
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+    line-height: 20px;
+  }
 `;
 
 const StyledButton = styled(Button)`
-  color: #3367d6;
-  float: left;
-  font-size: 15px;
-  font-weight: 400;
-  letter-spacing: 0.46px;
-  line-height: 26px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-transform: none;
-  width: 162px;
+  &&& {
+    color: #3367d6;
+    float: left;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.46px;
+    line-height: 26px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-transform: none;
+    width: 162px;
+  }
 `;
 
 const InfoIconComponent = styled(InfoOutlinedIcon)`
@@ -62,31 +73,43 @@ const InfoIconComponent = styled(InfoOutlinedIcon)`
 const TextInfoIconWrapper = styled.section`
   align-items: center;
   display: flex;
-  margin-bottom: 20px;
   padding: 0px;
+  margin-bottom: 20px;
 `;
 
 const SectionBodyText = styled(Typography)`
-  color: ${grey[700]};
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  line-height: 24px;
-  margin-top: 10px;
+  &&& {
+    color: ${grey[700]};
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+    margin-top: 10px;
+  }
 `;
 
 const StyledDivider = styled(Divider)`
-  margin-top: 16px;
+  &&& {
+    margin-top: 16px;
+  }
 `;
 
-const ColumnName = styled(SectionBodyText)`
-  margin-bottom: 20px;
+const ColumnName = styled(Typography)`
+  &&& {
+    color: ${grey[700]};
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const PREFIX = 'features.WranglerNewUI.AddTransformationStepPanel';
 
 export default function SectionWrapper({
-  columnSelected,
+  columnsSelected,
   transformationName,
   transformationInfoLink,
 }: ISectionWrapperComponentProps) {
@@ -105,15 +128,18 @@ export default function SectionWrapper({
       <SectionComponent
         title={T.translate(`${PREFIX}.selectColumnTitle`).toString()}
         showDivider={true}
-        showTickIcon={Boolean(columnSelected)}
+        showTickIcon={Boolean(columnsSelected.length)}
       >
         <SubTitle>{T.translate(`${PREFIX}.selectColumnSubTitle`)}</SubTitle>
-        {!columnSelected && (
+        {Boolean(columnsSelected.length) &&
+          columnsSelected.map((i, index) => {
+            return <ColumnName component="span">{`${index + 1}. ${i.label}`}</ColumnName>;
+          })}
+        {!Boolean(columnsSelected.length) && (
           <StyledButton color="primary" variant="outlined">
             {T.translate(`${PREFIX}.selectColumns`)}
           </StyledButton>
         )}
-        {columnSelected && <ColumnName component="span">{columnSelected}</ColumnName>}
       </SectionComponent>
     </>
   );

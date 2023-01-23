@@ -24,7 +24,7 @@ export default {
 
 const transformationName: string = 'string';
 const transformationInfoLink: string = 'https://mui.com/material-ui/material-icons/';
-const columnSelected: string = 'Region';
+const columnsSelected = [{ name: 'body_0', label: 'body_0', type: ['Boolean'] }];
 
 export function AddTransformationStepPanel(args) {
   return <SectionWrapper {...args} />;
@@ -33,5 +33,5 @@ export function AddTransformationStepPanel(args) {
 AddTransformationStepPanel.args = {
   transformationName,
   transformationInfoLink,
-  columnSelected,
+  columnsSelected,
 };
