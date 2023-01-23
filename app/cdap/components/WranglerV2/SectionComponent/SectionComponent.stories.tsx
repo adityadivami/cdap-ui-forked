@@ -14,25 +14,55 @@
  * the License.
  */
 
+// import { Typography } from '@material-ui/core';
+// import SectionComponent from 'components/WranglerV2/SectionComponent';
+// import React from 'react';
+
+// export default {
+//   title: 'SectionComponent',
+//   component: SectionComponent,
+// };
+
+// const title: string = 'Function';
+// const showDivider: boolean = true;
+// const showTickIcon: boolean = true;
+// // const children =
+// // <SectionBodyText component="span">{transformationName}</SectionBodyText>
+// // <a href="https://mui.com/material-ui/material-icons/">icon</a>;
+
+// export function AddTransformationStep(args) {
+//   const { children } = args;
+//   return <SectionComponent {...args}>{children}</SectionComponent>;
+// }
+
+// AddTransformationStep.args = {
+//   title,
+//   showDivider,
+//   showTickIcon,
+//   children: (
+//     <>
+//       <Typography component="span">String</Typography>
+//       <a href="https://mui.com/material-ui/material-icons/">icon</a>
+//     </>
+//   ),
+// };
+
+import { Typography } from '@material-ui/core';
 import SectionComponent from 'components/WranglerV2/SectionComponent';
 import React from 'react';
 
 export default {
-  title: 'SectionComponent',
   component: SectionComponent,
+  title: 'SectionComponent',
 };
 
-const title: string = 'string';
-const showDivider: boolean = true;
-const showTickIcon: boolean = true;
-
-export function AddTransformationStepPanel(args) {
-  const { children } = args;
-  return <SectionComponent {...args}>{children}</SectionComponent>;
-}
-
-AddTransformationStepPanel.args = {
-  title,
-  showDivider,
-  showTickIcon,
-};
+export const Function = () => (
+  <SectionComponent title="Function" showDivider={true} showTickIcon={true}>
+    Transformation Name and Icon
+  </SectionComponent>
+);
+export const Select = () => (
+  <SectionComponent title="Select" showDivider={true} showTickIcon={true}>
+    Select Columns Button
+  </SectionComponent>
+);
