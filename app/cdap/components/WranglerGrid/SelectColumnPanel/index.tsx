@@ -171,11 +171,6 @@ export default function SelectColumnPanel({
             isSingleSelection={isSingleSelection}
           />
         </Wrapper>
-        <SectionWrapper
-          transformationName={transformationName}
-          transformationInfoLink="https://mui.com/material-ui/material-icons/"
-          columnsSelected={selectedColumns}
-        />
         <StyledButton
           disabled={enableDoneButton(transformationName, selectedColumns)}
           color="primary"

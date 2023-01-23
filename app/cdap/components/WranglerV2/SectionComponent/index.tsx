@@ -54,7 +54,7 @@ const TickIcon = styled(CheckCircleOutlinedIcon)`
   width: 20px;
 `;
 
-const Flexcontainer = styled.div`
+const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -72,10 +72,10 @@ export default function SectionComponent({
         <SectionTitle component="h4">{title}</SectionTitle>
         {showTickIcon && <TickIcon />}
       </TitleTextIconWrapper>
-      <Flexcontainer>
+      <FlexContainer>
         {children}
         {showDivider && <Divider />}
-      </Flexcontainer>
+      </FlexContainer>
     </>
   );
 }

@@ -29,12 +29,6 @@ export interface ISectionWrapperComponentProps {
   transformationInfoLink: string;
 }
 
-interface IColumnSelected {
-  label: string;
-  name: string;
-  type: ['Boolean'];
-}
-
 const SubTitle = styled(Typography)`
   &&& {
     color: ${grey[700]};
@@ -115,7 +109,11 @@ export default function SectionWrapper({
 }: ISectionWrapperComponentProps) {
   return (
     <>
-      <SubTitle>{T.translate(`${PREFIX}.noColumnsSelected`)}</SubTitle>
+      <SubTitle>
+        {!Boolean(columnsSelected.length) && T.translate(`${PREFIX}.noColumnsSelected`)}
+        {Boolean(columnsSelected.length) &&
+          `${columnsSelected.length}  ${T.translate(`${PREFIX}.columnsSelected`)}`}
+      </SubTitle>
       <StyledDivider />
       <SectionComponent title="Function" showDivider={true} showTickIcon={true}>
         <TextInfoIconWrapper>
@@ -132,8 +130,10 @@ export default function SectionWrapper({
       >
         <SubTitle>{T.translate(`${PREFIX}.selectColumnSubTitle`)}</SubTitle>
         {Boolean(columnsSelected.length) &&
-          columnsSelected.map((i, index) => {
-            return <ColumnName component="span">{`${index + 1}. ${i.label}`}</ColumnName>;
+          columnsSelected.map((selectedColumn, index) => {
+            return (
+              <ColumnName component="span">{`${index + 1}. ${selectedColumn.label}`}</ColumnName>
+            );
           })}
         {!Boolean(columnsSelected.length) && (
           <StyledButton color="primary" variant="outlined">
