@@ -34,8 +34,8 @@ const SubTitle = styled(Typography)`
     color: ${grey[700]};
     font-weight: 400;
     font-size: 14px;
-    letter-spacing: 0.25px;
-    line-height: 20px;
+    letter-spacing: 0.1px;
+    line-height: 22px;
   }
 `;
 
@@ -84,7 +84,7 @@ const SectionBodyText = styled(Typography)`
 
 const StyledDivider = styled(Divider)`
   &&& {
-    margin-top: 16px;
+    margin-top: 10px;
   }
 `;
 
