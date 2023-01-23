@@ -31,7 +31,6 @@ import {
 } from 'components/WranglerGrid/SelectColumnPanel/types';
 import { getDataQuality } from 'components/WranglerV2/DataQualityCircularProgressBar';
 import DrawerWidget from 'components/WranglerV2/DrawerWidget';
-import SectionWrapper from 'components/WranglerV2/SectionWrapper';
 import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
 
