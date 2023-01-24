@@ -16,6 +16,7 @@
 
 import SectionWrapper from 'components/WranglerV2/SectionWrapper';
 import React from 'react';
+import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 export default {
   title: 'SectionWrapper',
@@ -24,7 +25,7 @@ export default {
 
 const transformationName: string = 'string';
 const transformationInfoLink: string = 'https://mui.com/material-ui/material-icons/';
-const columnsSelected = [];
+const columnsSelected: IHeaderNamesList[] = [];
 
 export function AddTransformationStepPanel(args) {
   return <SectionWrapper {...args} />;
