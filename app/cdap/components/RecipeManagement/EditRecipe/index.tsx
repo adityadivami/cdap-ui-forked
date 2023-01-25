@@ -111,7 +111,11 @@ export default function({
     });
   };
 
-  // In this function we are validating recipe name input filed (whether recipe name already exists or not and recipe name without alphanumeric characters) based on the result we are showing the helper text
+  /*
+  In this function we are validating recipe name input filed
+  (whether recipe name already exists or not and recipe name without alphanumeric characters)
+   based on the result we are showing the helper text
+  */
   const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeData) => {
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
