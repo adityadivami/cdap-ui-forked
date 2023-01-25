@@ -22,6 +22,11 @@ export const StyledDataGrid = styled(DataGrid)`
   &&& {
     width: 460px;
 
+    & .MuiDataGrid-cell {
+      width: auto !important;
+      padding: 14px 16px;
+    }
+
     .MuiDataGrid-cell {
       font-size: 16px;
       font-weight: 400;
@@ -29,6 +34,9 @@ export const StyledDataGrid = styled(DataGrid)`
       outline: none;
       padding-left: 16px;
       padding-right: 16px;
+
+      max-height: unset !important;
+      min-height: auto !important;
     }
 
     .MuiDataGrid-columnHeader {
@@ -69,11 +77,28 @@ export const StyledDataGrid = styled(DataGrid)`
     .MuiIconButton-root {
       padding: 0px;
       align-self: flex-start;
+      max-height: unset !important;
+      min-height: auto !important;
     }
 
     .MuiTypography-body1 {
       white-space: break-spaces;
       font-size: 16px;
+    }
+
+    .MuiDataGrid-row {
+      max-height: unset !important;
+      min-height: auto !important;
+    }
+
+    .MuiDataGrid-viewport {
+      max-height: unset !important;
+      min-height: auto !important;
+    }
+
+    .MuiDataGrid-renderingZone {
+      max-height: unset !important;
+      min-height: auto !important;
     }
   }
 `;
