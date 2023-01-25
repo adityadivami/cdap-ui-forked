@@ -23,6 +23,9 @@ export const StyledDataGrid = styled(DataGrid)`
     width: 460px;
 
     .MuiDataGrid-cell {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
       outline: none;
       padding-left: 16px;
       padding-right: 16px;
@@ -31,6 +34,11 @@ export const StyledDataGrid = styled(DataGrid)`
     .MuiDataGrid-columnHeader {
       outline: none;
       padding-left: 16px;
+    }
+
+    .MuiDataGrid-columnHeaderTitle {
+      font-weight: 700;
+      font-size: 12px;
     }
 
     .MuiDataGrid-columnHeaderTitleContainer {
@@ -65,6 +73,7 @@ export const StyledDataGrid = styled(DataGrid)`
 
     .MuiTypography-body1 {
       white-space: break-spaces;
+      font-size: 16px;
     }
   }
 `;
