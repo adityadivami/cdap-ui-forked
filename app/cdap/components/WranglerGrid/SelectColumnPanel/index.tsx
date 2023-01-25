@@ -33,6 +33,7 @@ import { getDataQuality } from 'components/WranglerV2/DataQualityCircularProgres
 import DrawerWidget from 'components/WranglerV2/DrawerWidget';
 import T from 'i18n-react';
 import React, { useEffect, useState } from 'react';
+import Dropdown from 'components/WranglerV2/Dropdown';
 
 interface ISelectColumnPanelProps {
   transformationDataType: string[];
@@ -145,6 +146,25 @@ export default function SelectColumnPanel({
     setDataQualityValue(getPreparedDataQuality);
   }, []);
 
+  const list = [
+    {
+      value: 'a',
+      label: 'a',
+    },
+    {
+      value: 'b',
+      label: 'b',
+    },
+    {
+      value: 'c',
+      label: 'c',
+    },
+    {
+      value: 'd',
+      label: 'd',
+    },
+  ];
+
   return (
     <DrawerWidget
       anchor="right"
@@ -170,6 +190,8 @@ export default function SelectColumnPanel({
             isSingleSelection={isSingleSelection}
           />
         </Wrapper>
+        <Dropdown label="Format" menuList={list} />
+        <Dropdown label="Encoding" menuList={list} />
         <StyledButton
           disabled={enableDoneButton(transformationName, selectedColumns)}
           color="primary"
