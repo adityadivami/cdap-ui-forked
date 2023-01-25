@@ -55,7 +55,11 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     handleSaveButtonMode(formData, recipeNameError);
   };
 
-  // TODO: This static data has to be removed when we have actual API data, then directly we will get that data from store as directives
+  /*
+  TODO: This static data has to be removed when we have actual API data,
+  then directly we will get that data from store as directives
+  */
+
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   const handleSaveButtonMode = (
@@ -151,7 +155,12 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       );
   };
 
-  // In this function we are validating recipe name input filed (whether recipe name already exists or not and recipe name without alphanumeric characters) based on the result we are showing the helper text
+  /*
+  In this function we are validating recipe name input filed 
+  (whether recipe name already exists or not and recipe name without alphanumeric characters) 
+  based on the result we are showing the helper text
+  */
+
   const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeFormData) => {
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {

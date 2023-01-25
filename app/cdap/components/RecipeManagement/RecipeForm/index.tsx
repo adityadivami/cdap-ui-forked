@@ -59,7 +59,7 @@ export default function RecipeForm({
         data-testid="recipe-form-parent"
       >
         <FormFieldWrapper>
-          <StyledLabel data-testid="recipe-form-name-label" component="span">
+          <StyledLabel data-testid="recipe-form-name-label" component="label">
             {recipeFormAction === ActionType.CREATE_RECIPE &&
               T.translate(`${PREFIX}.createRecipeNameLabel`)}
             {!(recipeFormAction === ActionType.CREATE_RECIPE) &&
@@ -82,7 +82,7 @@ export default function RecipeForm({
         </FormFieldWrapper>
         <FormFieldWrapper>
           <FormControl variant="outlined">
-            <Label data-testid="recipe-form-description-label" component="span">
+            <Label data-testid="recipe-form-description-label" component="label">
               {T.translate(`${PREFIX}.description`)}
             </Label>
             <StyledTextAreaAutosize
