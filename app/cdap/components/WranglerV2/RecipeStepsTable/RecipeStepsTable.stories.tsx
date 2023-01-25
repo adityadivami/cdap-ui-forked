@@ -41,7 +41,7 @@ const dataGridColumns: IRecipeStepsColumns[] = [
     field: 'step',
     headerName: 'Recipe Steps',
     sortable: false,
-    width: 396,
+    width: 389,
   },
 ];
 

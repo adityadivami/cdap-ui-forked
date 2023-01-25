@@ -23,11 +23,13 @@ export const StyledDataGrid = styled(DataGrid)`
     width: 460px;
 
     .MuiDataGrid-cell {
+      outline: none;
       padding-left: 16px;
       padding-right: 16px;
     }
 
     .MuiDataGrid-columnHeader {
+      outline: none;
       padding-left: 16px;
     }
 
