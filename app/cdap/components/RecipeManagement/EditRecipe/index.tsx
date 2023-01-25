@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { useState, ChangeEvent, useRef, FormEvent, useEffect } from 'react';
+import React, { useState, ChangeEvent, useRef, FormEvent, useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 import RecipeForm from 'components/RecipeManagement/RecipeForm';
 import {
@@ -26,6 +26,12 @@ import { debounce } from 'lodash';
 import { getRecipeByNameService, updateRecipeService } from 'components/RecipeManagement/services';
 import T from 'i18n-react';
 import { ActionType } from 'components/RecipeList/types';
+import {
+  reducer,
+  defaultInitialState,
+  Actions,
+  noErrorState,
+} from 'components/RecipeManagement/reducer';
 
 const StyledEditFormWrapper = styled.div`
   margin-top: 30px;
@@ -34,11 +40,6 @@ const StyledEditFormWrapper = styled.div`
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 
-const noErrorState: IRecipeNameErrorData = {
-  isRecipeNameError: false,
-  recipeNameErrorMessage: '',
-};
-
 export default function({
   selectedRecipe,
   onCancelClick,
@@ -46,15 +47,14 @@ export default function({
   setRecipeFormOpen,
   setIsRecipeListUpdated,
 }: IEditRecipeProps) {
+  const [editRecipeState, dispatch] = useReducer(reducer, defaultInitialState);
+
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
     description: '',
     directives: [],
   });
-  const [recipeNameErrorData, setRecipeNameErrorDataState] = useState<IRecipeNameErrorData>(
-    noErrorState
-  );
 
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
@@ -71,13 +71,16 @@ export default function({
     recipeNameError: IRecipeNameErrorData,
     formData: IRecipeData = recipeFormData
   ) => {
-    setRecipeNameErrorDataState(recipeNameError);
+    dispatch({
+      type: Actions.SET_RECIPE_NAME_ERROR_STATE,
+      payload: recipeNameError,
+    });
     handleSaveButtonMode(formData, recipeNameError);
   };
 
   const handleSaveButtonMode = (
     formData: IRecipeData,
-    nameErrorData: IRecipeNameErrorData = recipeNameErrorData
+    nameErrorData: IRecipeNameErrorData = editRecipeState.recipeNameErrorData
   ) => {
     if (
       formData.recipeName === '' ||
@@ -102,13 +105,14 @@ export default function({
       ...recipeFormData,
       recipeName: event.target.value,
     });
-    validateRecipeNameExists.current({
+    validateIfRecipeNameExists.current({
       recipeName: event.target.value,
       description: recipeFormData.description,
     });
   };
 
-  const validateRecipeNameExists = useRef(
+  // In this function we are validating recipe name input filed (whether recipe name already exists or not and recipe name without alphanumeric characters) based on the result we are showing the helper text
+  const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeData) => {
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
         setRecipeNameErrorData(
@@ -129,7 +133,7 @@ export default function({
   );
 
   const onGetRecipeByNameResponse = (formData: IRecipeData) => {
-    !recipeNameErrorData.isRecipeNameError &&
+    !editRecipeState.recipeNameErrorData.isRecipeNameError &&
       setRecipeNameErrorData(
         {
           isRecipeNameError: true,
@@ -195,7 +199,7 @@ export default function({
     <StyledEditFormWrapper>
       {recipeFormData && (
         <RecipeForm
-          isRecipeNameError={recipeNameErrorData.isRecipeNameError}
+          isRecipeNameError={editRecipeState.recipeNameErrorData.isRecipeNameError}
           isSaveDisabled={isSaveDisabled}
           onCancel={onCancelClick}
           onFormSubmit={onFormSubmit}
@@ -203,7 +207,7 @@ export default function({
           onRecipeNameChange={onRecipeNameChange}
           recipeFormData={recipeFormData}
           recipeFormAction={ActionType.EDIT_RECIPE}
-          recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
+          recipeNameErrorMessage={editRecipeState.recipeNameErrorData.recipeNameErrorMessage}
         />
       )}
     </StyledEditFormWrapper>
