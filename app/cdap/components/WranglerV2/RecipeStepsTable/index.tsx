@@ -30,7 +30,7 @@ export interface IRecipeStepsColumns {
 
 export interface IRecipeStepsRows {
   id: number;
-  srn: string;
+  serialNumber: string;
   step: string;
 }
 

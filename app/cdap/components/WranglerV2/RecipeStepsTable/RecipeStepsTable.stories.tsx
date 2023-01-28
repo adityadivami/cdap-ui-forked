@@ -32,7 +32,7 @@ const handleDeleteIconClick = (row: IRecipeStepsRows) =>
 
 const dataGridColumns: IRecipeStepsColumns[] = [
   {
-    field: 'srn',
+    field: 'serialNumber',
     headerName: '#',
     sortable: false,
     width: 71,
@@ -49,9 +49,9 @@ const dataGridRows: IRecipeStepsRows[] = [
   {
     id: 1,
     step: "Parse Column 'Body' with delimiter 'comma' and set 'first row as header' ",
-    srn: '01',
+    serialNumber: '01',
   },
-  { id: 2, step: "Delete Column 'body'", srn: '02' },
+  { id: 2, step: "Delete Column 'body'", serialNumber: '02' },
 ];
 
 export function RecipeStepsPanel(args) {
