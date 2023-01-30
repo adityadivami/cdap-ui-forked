@@ -36,12 +36,14 @@ const dataGridColumns: IRecipeStepsColumns[] = [
     headerName: '#',
     sortable: false,
     width: 71,
+    showDeleteButton: false,
   },
   {
     field: 'step',
     headerName: 'Recipe Steps',
     sortable: false,
     width: 389,
+    showDeleteButton: true,
   },
 ];
 

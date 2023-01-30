@@ -30,6 +30,7 @@ export interface IRecipeStepsColumns {
   width: number;
   sortable: boolean;
   renderCell?: (params: GridRowData) => JSX.Element;
+  showDeleteButton: boolean;
 }
 
 export interface IRecipeStepsRows {
@@ -54,14 +55,16 @@ export default function RecipeStepsTable({
       <Typography component="div" variant="body1">
         {params.value}
       </Typography>
-      <IconButton onClick={(event) => onDeleteIconClick(params.row)}>
-        <DeleteOutlinedIcon />
-      </IconButton>
+      {params.colDef.showDeleteButton && (
+        <IconButton onClick={(event) => onDeleteIconClick(params.row)}>
+          <DeleteOutlinedIcon />
+        </IconButton>
+      )}
     </Wrapper>
   );
 
   // 1 is the index of the cell in RecipeStepsTable that needs custom render component
-  columns[1].renderCell = CustomRenderCell;
+  columns.forEach((eachColumn) => (eachColumn.renderCell = CustomRenderCell));
 
   return (
     <GridContainer>

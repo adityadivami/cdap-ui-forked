@@ -22,6 +22,7 @@ export const GridContainer = styled.div`
   height: 188px;
 `;
 
+// the !important is used where higher specificity is not working due to pre-defined inline styles on the components
 export const StyledDataGrid = styled(DataGrid)`
   &&& {
     width: 460px;
