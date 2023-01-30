@@ -18,6 +18,10 @@ import grey from '@material-ui/core/colors/grey';
 import { DataGrid } from '@material-ui/data-grid';
 import styled from 'styled-components';
 
+export const GridContainer = styled.div`
+  height: 188px;
+`;
+
 export const StyledDataGrid = styled(DataGrid)`
   &&& {
     width: 460px;
@@ -25,18 +29,15 @@ export const StyledDataGrid = styled(DataGrid)`
     & .MuiDataGrid-cell {
       width: auto !important;
       padding: 14px 16px;
-    }
-
-    .MuiDataGrid-cell {
       font-size: 16px;
       font-weight: 400;
-      line-height: 24px;
       outline: none;
       padding-left: 16px;
       padding-right: 16px;
 
-      max-height: unset !important;
+      max-height: none !important;
       min-height: auto !important;
+      line-height: unset !important;
     }
 
     .MuiDataGrid-columnHeader {
@@ -77,7 +78,7 @@ export const StyledDataGrid = styled(DataGrid)`
     .MuiIconButton-root {
       padding: 0px;
       align-self: flex-start;
-      max-height: unset !important;
+      max-height: none !important;
       min-height: auto !important;
     }
 
@@ -87,12 +88,12 @@ export const StyledDataGrid = styled(DataGrid)`
     }
 
     .MuiDataGrid-row {
-      max-height: unset !important;
+      max-height: none !important;
       min-height: auto !important;
     }
 
     .MuiDataGrid-viewport {
-      max-height: unset !important;
+      max-height: none !important;
       min-height: auto !important;
     }
 

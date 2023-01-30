@@ -17,7 +17,11 @@
 import { IconButton, Typography } from '@material-ui/core';
 import { GridRowData } from '@material-ui/data-grid';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import { StyledDataGrid, Wrapper } from 'components/WranglerV2/RecipeStepsTable/styles';
+import {
+  GridContainer,
+  StyledDataGrid,
+  Wrapper,
+} from 'components/WranglerV2/RecipeStepsTable/styles';
 import React from 'react';
 
 export interface IRecipeStepsColumns {
@@ -37,20 +41,20 @@ export interface IRecipeStepsRows {
 interface RecipeStepsTableProps {
   columns: IRecipeStepsColumns[];
   rows: IRecipeStepsRows[];
-  handleDeleteIconClick: (row: IRecipeStepsRows) => void;
+  onDeleteIconClick: (row: IRecipeStepsRows) => void;
 }
 
 export default function RecipeStepsTable({
   rows,
   columns,
-  handleDeleteIconClick,
+  onDeleteIconClick,
 }: RecipeStepsTableProps) {
   const CustomRenderCell = (params: GridRowData) => (
     <Wrapper>
       <Typography component="div" variant="body1">
         {params.value}
       </Typography>
-      <IconButton onClick={(event) => handleDeleteIconClick(params.row)}>
+      <IconButton onClick={(event) => onDeleteIconClick(params.row)}>
         <DeleteOutlinedIcon />
       </IconButton>
     </Wrapper>
@@ -59,5 +63,9 @@ export default function RecipeStepsTable({
   // 1 is the index of the cell in RecipeStepsTable that needs custom render component
   columns[1].renderCell = CustomRenderCell;
 
-  return <StyledDataGrid autoHeight columns={columns} disableColumnMenu hideFooter rows={rows} />;
+  return (
+    <GridContainer>
+      <StyledDataGrid columns={columns} disableColumnMenu hideFooter rows={rows} />
+    </GridContainer>
+  );
 }
