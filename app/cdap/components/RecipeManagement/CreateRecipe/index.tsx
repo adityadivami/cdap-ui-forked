@@ -14,15 +14,9 @@
  * the License.
  */
 
-import React, { FormEvent, useRef, useState, useReducer } from 'react';
+import React, { FormEvent, useRef, useState } from 'react';
 import { debounce } from 'lodash';
 import T from 'i18n-react';
-import {
-  reducer,
-  defaultInitialState,
-  Actions,
-  noErrorState,
-} from 'components/RecipeManagement/reducer';
 import { createRecipeService, getRecipeByNameService } from 'components/RecipeManagement/services';
 import { ActionType } from 'components/RecipeList/types';
 import {
@@ -34,13 +28,17 @@ import RecipeForm from 'components/RecipeManagement/RecipeForm';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
+export const noErrorState: IRecipeNameErrorData = {
+  isRecipeNameError: false,
+  recipeNameErrorMessage: '',
+};
 
 export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreateRecipeProps) {
-  const [createRecipeState, dispatch] = useReducer(reducer, defaultInitialState);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeFormData>({
     recipeName: '',
     description: '',
   });
+  const [recipeNameErrorData, setRecipeNameErrorDataState] = useState(noErrorState);
 
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
 
@@ -48,10 +46,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     recipeNameError: IRecipeNameErrorData,
     formData: IRecipeFormData = recipeFormData
   ) => {
-    dispatch({
-      type: Actions.SET_RECIPE_NAME_ERROR_STATE,
-      payload: recipeNameError,
-    });
+    setRecipeNameErrorDataState(recipeNameError);
     handleSaveButtonMode(formData, recipeNameError);
   };
 
@@ -64,7 +59,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
 
   const handleSaveButtonMode = (
     formData: IRecipeFormData = recipeFormData,
-    nameErrorData: IRecipeNameErrorData = createRecipeState.recipeNameErrorData
+    nameErrorData: IRecipeNameErrorData = recipeNameErrorData
   ) => {
     const shouldDisableSaveButton =
       formData.recipeName === '' ||
@@ -141,7 +136,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   const onGetRecipeByNameResponse = (formData: IRecipeFormData) => {
-    !createRecipeState.recipeNameErrorData.isRecipeNameError &&
+    !recipeNameErrorData.isRecipeNameError &&
       setRecipeNameErrorData(
         {
           isRecipeNameError: true,
@@ -177,8 +172,8 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   return (
     <RecipeForm
       recipeFormData={recipeFormData}
-      isRecipeNameError={createRecipeState.recipeNameErrorData.isRecipeNameError}
-      recipeNameErrorMessage={createRecipeState.recipeNameErrorData.recipeNameErrorMessage}
+      isRecipeNameError={recipeNameErrorData.isRecipeNameError}
+      recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
       onRecipeNameChange={onRecipeNameChange}
       onFormSubmit={onFormSubmit}
       onCancel={onCancel}
