@@ -40,8 +40,12 @@ const ConnectionList = Loadable({
   loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/ConnectionList'),
   loading: LoadingSVGCentered,
 });
+// const WrangleGrid = Loadable({
+//   loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/GridTable'),
+//   loading: LoadingSVGCentered,
+// });
 const WrangleGrid = Loadable({
-  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/GridTable'),
+  loader: () => import(/* webpackChunkName: "EntityListView" */ 'components/GridContainer'),
   loading: LoadingSVGCentered,
 });
 const Connections = Loadable({

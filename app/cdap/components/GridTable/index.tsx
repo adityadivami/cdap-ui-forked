@@ -64,7 +64,7 @@ const GridTableWrapper = styled(Box)`
 `;
 const transformationOptions = ['undo', 'redo'];
 
-export default function GridTable() {
+export default function GridTable({ handleTransformationUpload, handleAPIData }) {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const classes = useStyles();
@@ -97,6 +97,27 @@ export default function GridTable() {
   const [snackbarState, setSnackbar] = useSnackbar();
   const [columnType, setColumnType] = useState('');
   const [selectedColumn, setSelectedColumn] = useState('');
+
+  const handleAPIData = (action) => {
+    if (action === 'response') {
+      setSnackbar({
+        open: true,
+        isSuccess: true,
+        message: T.translate(
+          `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
+        ).toString(),
+      });
+      // setLoading(false);
+      setGridData(response);
+      //   setAddTransformationFunction({
+      //     option: '',
+      //     supportedDataType: [],
+      //   });
+      // setSelectedColumn('');
+      // setColumnType('');
+    } else {
+    }
+  };
 
   const getWorkSpaceData = (payload: IParams, workspaceId: string) => {
     let gridParams = {};
@@ -290,13 +311,15 @@ export default function GridTable() {
   const handleColumnSelect = (columnName) => {
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
     setColumnType(gridData?.types[columnName]);
+    handleTransformationUpload('column', columnName);
   };
 
   const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
-    setAddTransformationFunction({
-      option,
-      supportedDataType,
-    });
+    // setAddTransformationFunction({
+    //   option,
+    //   supportedDataType,
+    // });
+    handleTransformationUpload('function', { option, supportedDataType });
   };
 
   useEffect(() => {
