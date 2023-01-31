@@ -14,23 +14,23 @@
  * the License.
  */
 
-import { createRecipeService, getRecipeByNameService } from 'components/RecipeManagement/services';
-import RecipeForm from 'components/RecipeManagement/RecipeForm';
-import {
-  ICreateRecipeProps,
-  IRecipeFormData,
-  IRecipeNameErrorData,
-} from 'components/RecipeManagement/types';
-import T from 'i18n-react';
-import { debounce } from 'lodash';
 import React, { FormEvent, useRef, useState, useReducer } from 'react';
-import { ActionType } from 'components/RecipeList/types';
+import { debounce } from 'lodash';
+import T from 'i18n-react';
 import {
   reducer,
   defaultInitialState,
   Actions,
   noErrorState,
 } from 'components/RecipeManagement/reducer';
+import { createRecipeService, getRecipeByNameService } from 'components/RecipeManagement/services';
+import { ActionType } from 'components/RecipeList/types';
+import {
+  ICreateRecipeProps,
+  IRecipeFormData,
+  IRecipeNameErrorData,
+} from 'components/RecipeManagement/types';
+import RecipeForm from 'components/RecipeManagement/RecipeForm';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
@@ -56,9 +56,9 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   /*
-  TODO: This static data has to be removed when we have actual API data,
-  then directly we will get that data from store as directives
-  */
+   * TODO: This static data has to be removed when we have actual API data,
+   * then directly we will get that data from store as directives
+   */
 
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
@@ -66,17 +66,13 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     formData: IRecipeFormData = recipeFormData,
     nameErrorData: IRecipeNameErrorData = createRecipeState.recipeNameErrorData
   ) => {
-    if (
+    const shouldDisableSaveButton =
       formData.recipeName === '' ||
       formData.description === '' ||
       formData.recipeName?.trim().length === 0 ||
       formData.description?.trim().length === 0 ||
-      nameErrorData.isRecipeNameError
-    ) {
-      setIsSaveDisabled(true);
-    } else {
-      setIsSaveDisabled(false);
-    }
+      nameErrorData.isRecipeNameError;
+    setIsSaveDisabled(shouldDisableSaveButton);
   };
 
   const handleRecipeFormData = (formData: IRecipeFormData) => {
@@ -156,10 +152,10 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   /*
-  In this function we are validating recipe name input filed 
-  (whether recipe name already exists or not and recipe name without alphanumeric characters) 
-  based on the result we are showing the helper text
-  */
+   * In this function we are validating recipe name input filed
+   * (whether recipe name already exists or not and recipe name without alphanumeric characters)
+   * based on the result we are showing the helper text
+   */
 
   const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeFormData) => {

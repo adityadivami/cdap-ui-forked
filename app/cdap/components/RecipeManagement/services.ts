@@ -14,9 +14,9 @@
  * the License.
  */
 
+import { getCurrentNamespace } from 'services/NamespaceStore';
 import MyDataPrepApi from 'api/dataprep';
 import { ICreateRecipeService, IGetRecipeByNameService } from 'components/RecipeManagement/types';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 
 export const getRecipeByNameService = ({
   formData,

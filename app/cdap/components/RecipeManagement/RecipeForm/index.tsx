@@ -14,7 +14,9 @@
  * the License.
  */
 
+import React, { FormEvent } from 'react';
 import { FormControl } from '@material-ui/core';
+import T from 'i18n-react';
 import {
   CancelButton,
   CreateRecipeFormButtonWrapper,
@@ -28,8 +30,6 @@ import {
   StyledTextAreaAutosize,
 } from 'components/RecipeManagement/RecipeForm/styles';
 import { IRecipeFormProps } from 'components/RecipeManagement/types';
-import T from 'i18n-react';
-import React, { FormEvent } from 'react';
 import { ActionType } from 'components/RecipeList/types';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
@@ -47,10 +47,10 @@ export default function RecipeForm({
 }: IRecipeFormProps) {
   const StyledLabel = isRecipeNameError ? ErrorLabel : Label;
   const StyledTextField = isRecipeNameError ? ErrorTextField : NormalTextField;
-  const StyledFormButtonWrapper =
-    recipeFormAction === ActionType.CREATE_RECIPE
-      ? CreateRecipeFormButtonWrapper
-      : EditRecipeFormButtonWrapper;
+  const isCreateRecipeAction = recipeFormAction === ActionType.CREATE_RECIPE;
+  const StyledFormButtonWrapper = isCreateRecipeAction
+    ? CreateRecipeFormButtonWrapper
+    : EditRecipeFormButtonWrapper;
 
   return (
     <>
@@ -60,10 +60,8 @@ export default function RecipeForm({
       >
         <FormFieldWrapper>
           <StyledLabel data-testid="recipe-form-name-label" component="label">
-            {recipeFormAction === ActionType.CREATE_RECIPE &&
-              T.translate(`${PREFIX}.createRecipeNameLabel`)}
-            {!(recipeFormAction === ActionType.CREATE_RECIPE) &&
-              T.translate(`${PREFIX}.editRecipeNameLabel`)}
+            {isCreateRecipeAction && T.translate(`${PREFIX}.createRecipeNameLabel`)}
+            {!isCreateRecipeAction && T.translate(`${PREFIX}.editRecipeNameLabel`)}
           </StyledLabel>
           <StyledTextField
             autoFocus={true}

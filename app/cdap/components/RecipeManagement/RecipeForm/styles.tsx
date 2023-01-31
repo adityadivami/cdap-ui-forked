@@ -15,8 +15,7 @@
  */
 
 import styled, { css } from 'styled-components';
-import { TextField, Typography, Box } from '@material-ui/core';
-import { TextareaAutosize } from '@material-ui/core';
+import { TextField, Typography, Box, TextareaAutosize } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
 import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';
@@ -97,7 +96,7 @@ export const StyledTextAreaAutosize = styled(TextareaAutosize)`
   }
 `;
 
-export const StyledButton = css`
+export const buttonStyles = css`
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -105,13 +104,13 @@ export const StyledButton = css`
 `;
 
 export const CancelButton = styled(PrimaryOutlinedButton)`
-  ${StyledButton}
+  ${buttonStyles}
   color: #3367D6;
   width: 92px;
 `;
 
 export const SaveButton = styled(PrimaryContainedButton)`
-  ${StyledButton}
+  ${buttonStyles}
   background: #3367d6;
   margin-right: 20px;
   width: 70px;

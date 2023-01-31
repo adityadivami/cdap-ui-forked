@@ -14,8 +14,8 @@
  * the License.
  */
 
-import { ISnackbar } from 'components/Snackbar';
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
+import { ISnackbar } from 'components/Snackbar';
 
 export interface IRecipeFormProps {
   isRecipeNameError: boolean;
