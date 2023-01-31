@@ -59,13 +59,18 @@ export default function RecipeForm({
         data-testid="recipe-form-parent"
       >
         <FormFieldWrapper>
-          <StyledLabel data-testid="recipe-form-name-label" component="label">
+          <StyledLabel
+            data-testid="recipe-form-name-label"
+            component="label"
+            for="recipe-form-name-field"
+          >
             {isCreateRecipeAction && T.translate(`${PREFIX}.createRecipeNameLabel`)}
             {!isCreateRecipeAction && T.translate(`${PREFIX}.editRecipeNameLabel`)}
           </StyledLabel>
           <StyledTextField
+            id="recipe-form-name-field"
             autoFocus={true}
-            aria-label="recipe form recipe name textfield"
+            aria-label="Recipe Name"
             data-testid="recipe-form-name-field"
             defaultValue={recipeFormData.recipeName}
             error={isRecipeNameError}
@@ -80,11 +85,16 @@ export default function RecipeForm({
         </FormFieldWrapper>
         <FormFieldWrapper>
           <FormControl variant="outlined">
-            <Label data-testid="recipe-form-description-label" component="label">
+            <Label
+              data-testid="recipe-form-description-label"
+              component="label"
+              for="recipe-form-description-field"
+            >
               {T.translate(`${PREFIX}.description`)}
             </Label>
             <StyledTextAreaAutosize
-              aria-label="recipe form description textarea"
+              id="recipe-form-description-field"
+              aria-label="Recipe Description"
               data-testid="recipe-form-description-field"
               defaultValue={recipeFormData.description}
               minRows={3}
