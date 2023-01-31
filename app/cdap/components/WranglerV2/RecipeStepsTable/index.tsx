@@ -63,8 +63,7 @@ export default function RecipeStepsTable({
     </Wrapper>
   );
 
-  // 1 is the index of the cell in RecipeStepsTable that needs custom render component
-  columns.forEach((eachColumn) => (eachColumn.renderCell = CustomRenderCell));
+  columns.forEach((column) => (column.renderCell = CustomRenderCell));
 
   return (
     <GridContainer>
