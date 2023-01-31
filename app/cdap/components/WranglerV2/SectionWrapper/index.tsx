@@ -84,7 +84,7 @@ const SectionBodyText = styled(Typography)`
 
 const StyledDivider = styled(Divider)`
   &&& {
-    margin-top: 10px;
+    margin-top: 16px;
   }
 `;
 
