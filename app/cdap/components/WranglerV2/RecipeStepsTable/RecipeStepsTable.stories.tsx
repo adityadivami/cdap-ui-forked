@@ -16,11 +16,11 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import RecipeStepsTable, {
   IRecipeStepsColumns,
   IRecipeStepsRows,
 } from 'components/WranglerV2/RecipeStepsTable';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
   title: 'RecipeStepsTable',
