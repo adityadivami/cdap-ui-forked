@@ -14,12 +14,12 @@
  * the License.
  */
 
+import React from 'react';
 import { action } from '@storybook/addon-actions';
 import RecipeStepsTable, {
   IRecipeStepsColumns,
   IRecipeStepsRows,
 } from 'components/WranglerV2/RecipeStepsTable';
-import React from 'react';
 
 export default {
   title: 'RecipeStepsTable',

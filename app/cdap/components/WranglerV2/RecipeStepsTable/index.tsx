@@ -14,6 +14,7 @@
  * the License.
  */
 
+import React from 'react';
 import { IconButton, Typography } from '@material-ui/core';
 import { GridRowData } from '@material-ui/data-grid';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
@@ -22,7 +23,6 @@ import {
   StyledDataGrid,
   Wrapper,
 } from 'components/WranglerV2/RecipeStepsTable/styles';
-import React from 'react';
 
 export interface IRecipeStepsColumns {
   field: string;
