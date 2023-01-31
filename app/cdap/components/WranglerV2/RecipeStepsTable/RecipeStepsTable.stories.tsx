@@ -20,11 +20,12 @@ import RecipeStepsTable, {
   IRecipeStepsColumns,
   IRecipeStepsRows,
 } from 'components/WranglerV2/RecipeStepsTable';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 export default {
   title: 'RecipeStepsTable',
   component: RecipeStepsTable,
-};
+} as ComponentMeta<typeof RecipeStepsTable>;
 
 // Recipe Steps Panel with Recipe Steps Table
 const handleDeleteIconClick = (row: IRecipeStepsRows) =>
@@ -56,9 +57,9 @@ const dataGridRows: IRecipeStepsRows[] = [
   { id: 2, step: "Delete Column 'body'", serialNumber: '02' },
 ];
 
-export function RecipeStepsPanel(args) {
-  return <RecipeStepsTable {...args} />;
-}
+const Template: ComponentStory<typeof RecipeStepsTable> = (args) => <RecipeStepsTable {...args} />;
+
+export const RecipeStepsPanel = Template.bind({});
 
 RecipeStepsPanel.args = {
   columns: dataGridColumns,
