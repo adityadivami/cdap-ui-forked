@@ -15,9 +15,9 @@
  */
 
 import React, { FormEvent, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 import T from 'i18n-react';
-import { createRecipeService, getRecipeByNameService } from 'components/RecipeManagement/services';
 import { ActionType } from 'components/RecipeList/types';
 import {
   ICreateRecipeProps,
@@ -25,9 +25,13 @@ import {
   IRecipeNameErrorData,
 } from 'components/RecipeManagement/types';
 import RecipeForm from 'components/RecipeManagement/RecipeForm';
+import MyDataPrepApi from 'api/dataprep';
+import { getCurrentNamespace } from 'services/NamespaceStore';
+import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
+const dispatch = useDispatch();
 export const noErrorState: IRecipeNameErrorData = {
   isRecipeNameError: false,
   recipeNameErrorMessage: '',
@@ -38,17 +42,21 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     recipeName: '',
     description: '',
   });
-  const [recipeNameErrorData, setRecipeNameErrorDataState] = useState(noErrorState);
+  const [recipeNameErrorDataState, setRecipeNameErrorDataState] = useState(noErrorState);
+
+  const data = useSelector((state) => console.log(state));
+
+  console.log(data, 'data');
 
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
 
-  const setRecipeNameErrorData = (
-    recipeNameError: IRecipeNameErrorData,
-    formData: IRecipeFormData = recipeFormData
-  ) => {
-    setRecipeNameErrorDataState(recipeNameError);
-    handleSaveButtonMode(formData, recipeNameError);
-  };
+  // const setRecipeNameErrorData = (
+  //   recipeNameError: IRecipeNameErrorData,
+  //   formData: IRecipeFormData = recipeFormData
+  // ) => {
+  //   setRecipeNameErrorDataState(recipeNameError);
+  //   handleSaveButtonMode(formData, recipeNameError);
+  // };
 
   /*
    * TODO: This static data has to be removed when we have actual API data,
@@ -59,7 +67,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
 
   const handleSaveButtonMode = (
     formData: IRecipeFormData = recipeFormData,
-    nameErrorData: IRecipeNameErrorData = recipeNameErrorData
+    nameErrorData: IRecipeNameErrorData = recipeNameErrorDataState
   ) => {
     const shouldDisableSaveButton =
       formData.recipeName === '' ||
@@ -104,46 +112,31 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       description: recipeFormData.description,
       directives: recipeSteps,
     };
-    createRecipeService({ requestBody, onCreateRecipeResponse, onCreateRecipeError });
-  };
-
-  const onCreateRecipeResponse = () => {
-    setShowRecipeForm(false);
-    setSnackbar({
-      open: true,
-      isSuccess: true,
-      message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeSaveSuccessMessage`)}`,
-    });
-  };
-
-  const onCreateRecipeError = (err: Record<string, unknown>) => {
-    setShowRecipeForm(false);
-    setSnackbar({
-      open: true,
-      isSuccess: false,
-      message: (err.response as Record<string, string>).message,
-    });
+    const params = {
+      context: getCurrentNamespace(),
+    };
+    MyDataPrepApi.createRecipe(params, requestBody).subscribe(
+      () => {
+        setShowRecipeForm(false);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeSaveSuccessMessage`)}`,
+        });
+      },
+      (err: Record<string, unknown>) => {
+        setShowRecipeForm(false);
+        setSnackbar({
+          open: true,
+          isSuccess: false,
+          message: (err.response as Record<string, string>).message,
+        });
+      }
+    );
   };
 
   const onCancel = () => {
     setShowRecipeForm(false);
-  };
-
-  const onGetRecipeByNameError = (err: Record<string, unknown>, formData: IRecipeFormData) => {
-    if (err.statusCode === 404) {
-      setRecipeNameErrorData(noErrorState, formData);
-    }
-  };
-
-  const onGetRecipeByNameResponse = (formData: IRecipeFormData) => {
-    !recipeNameErrorData.isRecipeNameError &&
-      setRecipeNameErrorData(
-        {
-          isRecipeNameError: true,
-          recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
-        },
-        formData
-      );
   };
 
   /*
@@ -154,16 +147,90 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
 
   const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeFormData) => {
+      // handleRecipeFormData({
+      //       ...recipeFormData,
+      //       recipeName: event.target.value,
+      //     });
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
-        setRecipeNameErrorData({
-          isRecipeNameError: true,
-          recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
+        // setRecipeNameErrorData({
+        //   isRecipeNameError: true,
+        //   recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
+        // });
+        dispatch({
+          type: DataPrepActions.setRecipeNameErrorData,
+          payload: {
+            isRecipeNameError: true,
+            recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
+          },
+          // });
         });
       } else {
         if (formData.recipeName) {
-          getRecipeByNameService({ formData, onGetRecipeByNameResponse, onGetRecipeByNameError });
+          const params = {
+            context: getCurrentNamespace(),
+            recipeName: formData.recipeName,
+          };
+          MyDataPrepApi.getRecipeByName(params).subscribe(
+            () => {
+              !recipeNameErrorDataState.isRecipeNameError &&
+                // setRecipeNameErrorData(
+                //   {
+                //     isRecipeNameError: true,
+                //     recipeNameErrorMessage: T.translate(
+                //       `${PREFIX}.sameNameErrorMessage`
+                //     ).toString(),
+                //   },
+                //   formData
+                // );
+                // setRecipeNameErrorDataState({
+                //   isRecipeNameError: true,
+                //   recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+                // });
+
+                dispatch({
+                  type: DataPrepActions.setRecipeNameErrorData,
+                  payload: {
+                    isRecipeNameError: true,
+                    recipeNameErrorMessage: T.translate(
+                      `${PREFIX}.sameNameErrorMessage`
+                    ).toString(),
+                  },
+                  // });
+                });
+              handleSaveButtonMode(formData, {
+                isRecipeNameError: true,
+                recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+              });
+            },
+            (err: Record<string, unknown>) => {
+              if (err.statusCode === 404) {
+                // setRecipeNameErrorData(noErrorState, formData);
+                dispatch({
+                  type: DataPrepActions.setRecipeNameErrorData,
+                  payload: noErrorState,
+                  // });
+                });
+                handleSaveButtonMode(formData, noErrorState);
+              }
+            }
+          );
+          // dispatch({
+          //   type: ,
+          //   payload:
+          // });
+          // dispatch({
+          //   type: PipelineConfigurationsActions.SET_PUSHDOWN_CONFIG,
+          //   payload: { pushdownEnabled, transformationPushdown },
+          // });
         } else {
-          setRecipeNameErrorData(noErrorState);
+          // setRecipeNameErrorData(noErrorState);
+          dispatch({
+            type: DataPrepActions.setRecipeNameErrorData,
+            payload: noErrorState,
+            // });
+          });
+
+          handleSaveButtonMode(formData, noErrorState);
         }
       }
     }, 500)
@@ -172,8 +239,8 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   return (
     <RecipeForm
       recipeFormData={recipeFormData}
-      isRecipeNameError={recipeNameErrorData.isRecipeNameError}
-      recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
+      isRecipeNameError={recipeNameErrorDataState.isRecipeNameError}
+      recipeNameErrorMessage={recipeNameErrorDataState.recipeNameErrorMessage}
       onRecipeNameChange={onRecipeNameChange}
       onFormSubmit={onFormSubmit}
       onCancel={onCancel}
