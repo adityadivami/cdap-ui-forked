@@ -30,7 +30,7 @@ const styledTableRowCSS = css`
   padding: 10px 16px;
 `;
 
-const StyledTableHeader = styled(TableHeader)`
+const DirectivesTableHeader = styled(TableHeader)`
   background-color: transparent;
 `;
 
@@ -72,14 +72,14 @@ export default function DirectivesTable({ directives }: { directives: string[] }
 
   return (
     <Table columnTemplate="0.5fr 2fr">
-      <StyledTableHeader>
+      <DirectivesTableHeader>
         <StyledTableHeadRow>
           <StyledTableHeaderCell>#</StyledTableHeaderCell>
           <StyledTableHeaderCell>
             {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
           </StyledTableHeaderCell>
         </StyledTableHeadRow>
-      </StyledTableHeader>
+      </DirectivesTableHeader>
       <TableBody>
         {directives.map((recipeStep, recipeStepIndex) => {
           return (

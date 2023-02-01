@@ -63,8 +63,7 @@ const Divider = styled.div`
 
 const DrawerContainer = styled(Container)`
   height: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
 `;
 
 const DrawerHeader = styled.header`
@@ -72,8 +71,7 @@ const DrawerHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
 `;
 
 const HeaderActions = styled(Box)`
