@@ -3453,6 +3453,9 @@ features:
       labels:
         loadToGrid: Wrangle
         noConnections: No Connections to show
+    DirectivePanel:
+      moreInfoOnDirective: More info about this directive
+      usage: Usage
     FooterPanel:
       labels:
         columns: columns
