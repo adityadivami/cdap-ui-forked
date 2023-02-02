@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ * Copyright © 2023 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,13 +17,14 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 
 export interface ISearchResultListItemProps {
-  primaryText: string;
+  primaryText?: string;
   secondaryText: string;
   icon: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const SearchBarWrapper = styled(Box)`
@@ -32,7 +33,7 @@ const SearchBarWrapper = styled(Box)`
   padding: 15px;
   align-items: flex-end;
   cursor: pointer;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid ${grey[300]};
   '& :hover': {
     backgroundColor: #EFF0F2,
   },

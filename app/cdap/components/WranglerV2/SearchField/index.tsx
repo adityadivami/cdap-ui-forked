@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ * Copyright © 2023 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -27,13 +27,13 @@ export interface IDirectiveSuggestionProps {
   usage: string;
 }
 
-interface ISearchFieldProps {
+export interface ISearchFieldProps {
   onPostfixIconClick: () => void;
   inputProps: InputProps;
   directiveSuggestion: IDirectiveSuggestionProps;
 }
 
-export const StyledInput = styled(Input)`
+export const InputWrapper = styled(Input)`
   &&& {
     width: 100%;
     margin: 0px 5px;
@@ -148,7 +148,7 @@ export default function SearchField({
       )}
       <SearchFieldWrapper>
         <PrefixIconWrapper>$</PrefixIconWrapper>
-        <StyledInput {...inputProps} disableUnderline={true} />
+        <InputWrapper {...inputProps} disableUnderline={true} />
         <PostfixIconWrapper onClick={onPostfixIconClick} />
       </SearchFieldWrapper>
     </DirectiveFieldWrapper>

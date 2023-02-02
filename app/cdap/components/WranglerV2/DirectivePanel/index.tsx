@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ * Copyright © 2023 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 import SearchField, { IDirectiveSuggestionProps } from 'components/WranglerV2/SearchField';
@@ -40,16 +40,24 @@ export default function DirectivePanel({
 }: IDirectivePanelProps) {
   const [searchValue, setSearchValue] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
-  const handleSearch = (event) => {
+  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
     setAnchorEl(event.target);
   };
+
+  const handleApplyDirective = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.keyCode === 13) {
+      applyDirective(searchValue);
+    }
+  };
+
   return (
     <DirectiveWrapper>
       <SearchField
         inputProps={{
           value: searchValue,
           onChange: handleSearch,
+          onKeyDown: handleApplyDirective,
         }}
         onPostfixIconClick={() => setSearchValue('')}
         directiveSuggestion={directiveSuggestion}
