@@ -14,8 +14,8 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
 import React from 'react';
+import { Box } from '@material-ui/core';
 import styled from 'styled-components';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 

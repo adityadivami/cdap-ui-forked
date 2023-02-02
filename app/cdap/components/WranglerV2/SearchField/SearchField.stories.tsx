@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions';
 import React from 'react';
-import SearchField from '.';
+import { action } from '@storybook/addon-actions';
+import SearchField from 'components/WranglerV2/SearchField';
 
 export default {
   title: 'SearchField',
@@ -23,6 +23,6 @@ Default.args = {
   },
   directiveSuggestion: {
     usage: 'parse-as-log :column format',
-    link: 'https://cdap.atlassian.net/wiki/spaces/DOCS/pages/382042182/Encode',
+    link: 'https://cdap.atlassian.net/wiki/spaces/DOCS/overview',
   },
 };

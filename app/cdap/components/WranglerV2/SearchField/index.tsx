@@ -34,16 +34,18 @@ interface ISearchFieldProps {
 }
 
 export const StyledInput = styled(Input)`
-  width: 100%;
-  margin: 0px 5px;
-  outline: 0;
-  background: transparent;
-  color: #ffffff;
-  & .MuiInputBase-input {
-    padding: 0px;
-    height: 12px;
-    color: #ffffff !important;
-    font-size: 14px;
+  &&& {
+    width: 100%;
+    margin: 0px 5px;
+    outline: 0;
+    background: transparent;
+    color: #ffffff;
+    & .MuiInputBase-input {
+      padding: 0px;
+      height: 12px;
+      color: #ffffff;
+      font-size: 14px;
+    }
   }
 `;
 
@@ -105,7 +107,7 @@ const DirectivesUsageText = styled(Typography)`
 
 const DirectiveFieldWrapper = styled(Box)`
   &&& {
-    background: #616161;
+    background: ${grey[700]};
     padding: 20px;
     color: #ffffff;
     min-height: 82px;

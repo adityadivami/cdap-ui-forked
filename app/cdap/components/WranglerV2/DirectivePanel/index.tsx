@@ -14,12 +14,12 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
 import React, { useState } from 'react';
-import SearchField, { IDirectiveSuggestionProps } from '../SearchField';
+import { Box } from '@material-ui/core';
 import styled from 'styled-components';
-import SearchResultsList from '../SearchResultsList';
-import { ISearchResultListItemProps } from '../SearchResultsListItem';
+import SearchField, { IDirectiveSuggestionProps } from 'components/WranglerV2/SearchField';
+import SearchResultsList from 'components/WranglerV2/SearchResultsList';
+import { ISearchResultListItemProps } from 'components/WranglerV2/SearchResultsListItem';
 
 export interface IDirectivePanelProps {
   directiveSuggestion: IDirectiveSuggestionProps;

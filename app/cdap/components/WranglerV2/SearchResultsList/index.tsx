@@ -14,10 +14,12 @@
  * the License.
  */
 
-import { Box } from '@material-ui/core';
 import React from 'react';
+import { Box } from '@material-ui/core';
 import styled from 'styled-components';
-import SearchResultsListItem, { ISearchResultListItemProps } from '../SearchResultsListItem';
+import SearchResultsListItem, {
+  ISearchResultListItemProps,
+} from 'components/WranglerV2/SearchResultsListItem';
 
 export interface ISearchResultListProps {
   resultsList: ISearchResultListItemProps[];
