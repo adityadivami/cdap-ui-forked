@@ -124,6 +124,20 @@ const RecipeStepsTableContainer = styled(DataTableContainer)`
   }
 `;
 
+const mockRecipe = [
+  'a-column',
+  'b-column',
+  'c-column',
+  'd-column',
+  'e-column',
+  'f-column',
+  'g-column',
+  'h-column',
+  'i-column',
+  'j-column',
+  'j-column',
+];
+
 const Template: ComponentStory<typeof DataTable> = (args) => <DataTable {...args} />;
 
 export const RecipeStepsPanel = Template.bind({});
