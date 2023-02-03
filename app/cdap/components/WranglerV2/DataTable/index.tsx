@@ -14,6 +14,8 @@
  * the License.
  */
 
+import React from 'react';
+
 import {
   Paper,
   Table,
@@ -23,10 +25,14 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import React from 'react';
 import styled from 'styled-components';
 
 export const DataTableContainer = styled(TableContainer)`
+  &&& {
+    max-height: 100%;
+    max-width: 100%;
+    overflow: auto;
+  }
   .MuiTableCell-root {
     padding: 14px 16px;
   }
@@ -62,15 +68,20 @@ export const DataTableContainer = styled(TableContainer)`
   }
 `;
 
-export default function DataTable({ rows, columns, TableContainer }) {
+export default function DataTable({ rows, columns, TableContainer, getTableHeaderCell }) {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             {columns.map((column) => {
-              const { headerText, name } = column;
-              return <TableCell key={`data-table-head-cell-${name}`}>{headerText}</TableCell>;
+              const { value, name } = column;
+              const HeaderCell = getTableHeaderCell(value);
+              return (
+                <TableCell key={`data-table-head-cell-${name}`}>
+                  <HeaderCell />
+                </TableCell>
+              );
             })}
           </TableRow>
         </TableHead>
@@ -78,8 +89,14 @@ export default function DataTable({ rows, columns, TableContainer }) {
           {rows.map((row, rowIndex) => (
             <TableRow key={`data-table-body-row-${rowIndex}`}>
               {columns.map((column) => {
-                const { name } = column;
-                return <TableCell key={`data-table-body-cell-${name}`}>{row[name]}</TableCell>;
+                const { name, getCellRenderer } = column;
+                const value = row[name];
+                const BodyCell = getCellRenderer({ value });
+                return (
+                  <TableCell key={`data-table-body-cell-${name}`}>
+                    <BodyCell />
+                  </TableCell>
+                );
               })}
             </TableRow>
           ))}

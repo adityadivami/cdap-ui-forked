@@ -14,136 +14,91 @@
  * the License.
  */
 
-import { IconButton, Typography } from '@material-ui/core';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import DataTable, { DataTableContainer } from '.';
+
+import { IconButton, Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import styled from 'styled-components';
 import { action } from '@storybook/addon-actions';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import styled from 'styled-components';
+
+import DataTable from 'components/WranglerV2/DataTable';
+import {
+  RecipeStepCellWrapper,
+  RecipeStepsTableContainer,
+} from 'components/WranglerV2/RecipeStepsTable';
 
 export default {
   title: 'DataTable',
   component: DataTable,
 } as ComponentMeta<typeof DataTable>;
 
-interface IColumns {
-  name: string;
-  headerText?: JSX.Element;
-}
+const handleDeleteIconClick = () => action('clicked')('Delete Icon Clicked');
 
-const getTableBodyCellLabel = (label: string) => (
+const getTableBodyCell = ({ value }) => () => (
   <Typography component="span" variant="body2">
-    {label}
+    {value}
   </Typography>
 );
 
-const getTableHeadCellLabel = (label: string) => (
+const getTableHeaderCell = (label: string) => () => (
   <Typography component="span" variant="body1">
     {label}
   </Typography>
 );
 
-const handleDeleteIconClick = () => action('clicked')('Delete Icon Clicked');
+const getRecipeStepCell = ({ value }) => () => {
+  const prefix = value.split("'")[0];
+  const suffix = value.substr(prefix.length);
 
-const getRecipeStepCellRenderer = (transformationName: string, directive: string) => {
+  const BodyCell = getTableBodyCell({ value: suffix });
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <RecipeStepCellWrapper>
       <div className="cell-content-div">
         <Typography component="span" variant="body1">
-          {transformationName}
+          {prefix}
         </Typography>
         &nbsp;
-        {getTableBodyCellLabel(directive)}
+        <BodyCell />
       </div>
-      <div>
-        <IconButton onClick={handleDeleteIconClick}>
-          <DeleteOutlineIcon />
-        </IconButton>
-      </div>
-    </div>
+      <IconButton onClick={handleDeleteIconClick}>
+        <DeleteOutlineIcon />
+      </IconButton>
+    </RecipeStepCellWrapper>
   );
 };
 
-const columns: IColumns[] = [
+const columns = [
   {
     name: 'serialNumber',
-    headerText: getTableHeadCellLabel('#'),
+    value: '#',
+    getCellRenderer: getTableBodyCell,
   },
   {
     name: 'recipeStep',
-    headerText: getTableHeadCellLabel('Recipe Steps'),
+    value: 'Recipe Steps',
+    getCellRenderer: getRecipeStepCell,
   },
 ];
 
 const rows = [
   {
-    serialNumber: getTableBodyCellLabel('01'),
-    recipeStep: getRecipeStepCellRenderer(
-      'Parse Column',
-      "'body_01' with delimiter 'comma' and set 'first row as header'"
-    ),
+    serialNumber: '01',
+    recipeStep: "Parse Column 'body_01' with delimiter 'comma' and set 'first row as header'",
   },
   {
-    serialNumber: getTableBodyCellLabel('02'),
-    recipeStep: getRecipeStepCellRenderer('Delete Column', "'body_01'"),
+    serialNumber: '02',
+    recipeStep: "Delete Column 'body_01'",
   },
-];
-
-const RecipeStepsTableContainer = styled(DataTableContainer)`
-  &&& {
-    width: 460px;
-  }
-  .MuiTableCell-root:first-child {
-    width: 64px;
-  }
-  .MuiTableCell-root:last-child {
-    width: 396px;
-  }
-  .MuiTableCell-root:has(.MuiIconButton-root) {
-    vertical-align: text-top;
-  }
-  .MuiTableBody-root {
-    .MuiIconButton-root {
-      display: none;
-      padding: 0;
-      margin-top: 4px;
-      margin-right: 9px;
-    }
-    .MuiTableRow-root:hover {
-      .MuiIconButton-root {
-        display: block;
-      }
-
-      &:has(.MuiIconButton-root) {
-        .cell-content-div {
-          width: 80%;
-        }
-      }
-    }
-  }
-`;
-
-const mockRecipe = [
-  'a-column',
-  'b-column',
-  'c-column',
-  'd-column',
-  'e-column',
-  'f-column',
-  'g-column',
-  'h-column',
-  'i-column',
-  'j-column',
-  'j-column',
 ];
 
 const Template: ComponentStory<typeof DataTable> = (args) => <DataTable {...args} />;
 
-export const RecipeStepsPanel = Template.bind({});
+export const Default = Template.bind({});
 
-RecipeStepsPanel.args = {
+Default.args = {
   rows,
   columns,
   TableContainer: RecipeStepsTableContainer,
+  getTableHeaderCell,
 };
