@@ -17,8 +17,9 @@
 import { IconButton, Typography } from '@material-ui/core';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import DataTable from '.';
+import DataTable, { DataTableContainer } from '.';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import styled from 'styled-components';
 
 export default {
   title: 'DataTable',
@@ -87,10 +88,45 @@ const rows = [
   },
 ];
 
-const Template: ComponentStory<typeof DataTable> = (args) => (
-  <DataTable rows={rows} columns={columns} />
-);
+const RecipeStepsTableContainer = styled(DataTableContainer)`
+  &&& {
+    width: 460px;
+  }
+  .MuiTableCell-root:first-child {
+    width: 64px;
+  }
+  .MuiTableCell-root:last-child {
+    width: 396px;
+  }
+  .MuiTableCell-root:has(.MuiIconButton-root) {
+    vertical-align: text-top;
+  }
+  .MuiTableBody-root {
+    .MuiIconButton-root {
+      display: none;
+      padding: 0;
+      margin-top: 4px;
+    }
+    .MuiTableRow-root:hover {
+      .MuiIconButton-root {
+        display: block;
+      }
+
+      &:has(.MuiIconButton-root) {
+        .cell-content-div {
+          width: 80%;
+        }
+      }
+    }
+  }
+`;
+
+const Template: ComponentStory<typeof DataTable> = (args) => <DataTable {...args} />;
 
 export const RecipeStepsPanel = Template.bind({});
 
-RecipeStepsPanel.args = {};
+RecipeStepsPanel.args = {
+  rows,
+  columns,
+  TableContainer: RecipeStepsTableContainer,
+};

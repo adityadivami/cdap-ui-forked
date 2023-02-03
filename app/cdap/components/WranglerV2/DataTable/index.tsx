@@ -26,16 +26,9 @@ import {
 import React from 'react';
 import styled from 'styled-components';
 
-const DataTableContainer = styled(TableContainer)`
-  &&& {
-    width: 460px;
-  }
+export const DataTableContainer = styled(TableContainer)`
   .MuiTableCell-root {
     padding: 14px 16px;
-  }
-
-  .MuiTableCell-root:has(.MuiIconButton-root) {
-    vertical-align: text-top;
   }
 
   .MuiTableHead-root {
@@ -45,34 +38,19 @@ const DataTableContainer = styled(TableContainer)`
       font-size: 12px;
       font-weight: 700;
       line-height: 20px;
-      letter-spacing: 0.4000000059604645px;
+      letter-spacing: 0.4px;
       text-align: left;
     }
   }
   .MuiTableBody-root {
-    .MuiIconButton-root {
-      display: none;
-      padding: 0;
-      margin-top: 4px;
-    }
     .MuiTableRow-root:hover {
       background-color: #e0e0e0;
-
-      .MuiIconButton-root {
-        display: block;
-      }
-
-      &:has(.MuiIconButton-root) {
-        .cell-content-div {
-          width: 80%;
-        }
-      }
     }
     .MuiTypography-body1 {
       font-size: 16px;
       font-weight: 600;
       line-height: 24px;
-      letter-spacing: 0.15000000596046448px;
+      letter-spacing: 0.15px;
       text-align: left;
     }
     .MuiTypography-body2 {
@@ -85,9 +63,9 @@ const DataTableContainer = styled(TableContainer)`
   }
 `;
 
-export default function DataTable({ rows, columns }) {
+export default function DataTable({ rows, columns, TableContainer }) {
   return (
-    <DataTableContainer component={Paper}>
+    <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -108,6 +86,6 @@ export default function DataTable({ rows, columns }) {
           ))}
         </TableBody>
       </Table>
-    </DataTableContainer>
+    </TableContainer>
   );
 }
