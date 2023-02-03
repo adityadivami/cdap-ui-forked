@@ -26,7 +26,7 @@ export default {
 const mockRecipe = [
   "Delete Column 'body1'",
   "Parse Column 'body2' with delimiter 'comma' and set first row as header",
-  "Parse Column 'body2' with set first row as header",
+  "Change data type 'body2' to string",
   "Parse Column 'body2' with delimiter 'comma'",
 ];
 

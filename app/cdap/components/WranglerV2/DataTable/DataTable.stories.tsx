@@ -20,10 +20,11 @@ import { IconButton, Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import styled from 'styled-components';
 
 import DataTable from 'components/WranglerV2/DataTable';
 import {
+  getTableBodyCell,
+  getTableHeaderCell,
   RecipeStepCellWrapper,
   RecipeStepsTableContainer,
 } from 'components/WranglerV2/RecipeStepsTable';
@@ -34,18 +35,6 @@ export default {
 } as ComponentMeta<typeof DataTable>;
 
 const handleDeleteIconClick = () => action('clicked')('Delete Icon Clicked');
-
-const getTableBodyCell = ({ value }) => () => (
-  <Typography component="span" variant="body2">
-    {value}
-  </Typography>
-);
-
-const getTableHeaderCell = (label: string) => () => (
-  <Typography component="span" variant="body1">
-    {label}
-  </Typography>
-);
 
 const getRecipeStepCell = ({ value }) => () => {
   const prefix = value.split("'")[0];

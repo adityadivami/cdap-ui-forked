@@ -62,6 +62,18 @@ export const RecipeStepsTableContainer = styled(DataTableContainer)`
   }
 `;
 
+export const getTableBodyCell = ({ value }) => () => (
+  <Typography component="span" variant="body2">
+    {value}
+  </Typography>
+);
+
+export const getTableHeaderCell = (label: string) => () => (
+  <Typography component="span" variant="body1">
+    {label}
+  </Typography>
+);
+
 export default function RecipeStepsTable({ recipeSteps }) {
   const [rows, setRows] = useState([]);
 
@@ -73,18 +85,6 @@ export default function RecipeStepsTable({ recipeSteps }) {
 
     setRows(updatedSteps);
   }, []);
-
-  const getTableBodyCell = ({ value }) => () => (
-    <Typography component="span" variant="body2">
-      {value}
-    </Typography>
-  );
-
-  const getTableHeaderCell = (label: string) => () => (
-    <Typography component="span" variant="body1">
-      {label}
-    </Typography>
-  );
 
   const handleDeleteIconClick = () => {
     // do nothing
