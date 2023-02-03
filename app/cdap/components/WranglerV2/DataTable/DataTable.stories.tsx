@@ -28,7 +28,6 @@ export default {
 interface IColumns {
   name: string;
   headerText?: JSX.Element;
-  iconRenderer?: JSX.Element;
 }
 
 const getTableBodyCellLabel = (label: string) => (
@@ -45,13 +44,20 @@ const getTableHeadCellLabel = (label: string) => (
 
 const getRecipeStepCellRenderer = (transformationName: string, directive: string) => {
   return (
-    <>
-      <Typography component="span" variant="body1">
-        {transformationName}
-      </Typography>
-      &nbsp;
-      {getTableBodyCellLabel(directive)}
-    </>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div className="cell-content-div">
+        <Typography component="span" variant="body1">
+          {transformationName}
+        </Typography>
+        &nbsp;
+        {getTableBodyCellLabel(directive)}
+      </div>
+      <div>
+        <IconButton>
+          <DeleteOutlineIcon />
+        </IconButton>
+      </div>
+    </div>
   );
 };
 
@@ -64,9 +70,6 @@ const columns: IColumns[] = [
     name: 'recipeStep',
     headerText: getTableHeadCellLabel('Recipe Steps'),
   },
-  {
-    name: 'icon',
-  },
 ];
 
 const rows = [
@@ -76,21 +79,11 @@ const rows = [
       'Parse Column',
       "'body_01' with delimiter 'comma' and set 'first row as header'"
     ),
-    icon: (
-      <IconButton>
-        <DeleteOutlineIcon />
-      </IconButton>
-    ),
   },
   ,
   {
     serialNumber: getTableBodyCellLabel('02'),
     recipeStep: getRecipeStepCellRenderer('Delete Column', "'body_01'"),
-    icon: (
-      <IconButton>
-        <DeleteOutlineIcon />
-      </IconButton>
-    ),
   },
 ];
 

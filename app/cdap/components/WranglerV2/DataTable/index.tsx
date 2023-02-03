@@ -15,8 +15,6 @@
  */
 
 import {
-  Box,
-  IconButton,
   Paper,
   Table,
   TableBody,
@@ -25,11 +23,13 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import React from 'react';
 import styled from 'styled-components';
 
 const DataTableContainer = styled(TableContainer)`
+  &&& {
+    width: 460px;
+  }
   .MuiTableCell-root {
     padding: 14px 16px;
   }
@@ -61,6 +61,12 @@ const DataTableContainer = styled(TableContainer)`
       .MuiIconButton-root {
         display: block;
       }
+
+      &:has(.MuiIconButton-root) {
+        .cell-content-div {
+          width: 80%;
+        }
+      }
     }
     .MuiTypography-body1 {
       font-size: 16px;
@@ -81,22 +87,22 @@ const DataTableContainer = styled(TableContainer)`
 
 export default function DataTable({ rows, columns }) {
   return (
-    <DataTableContainer component={Paper} style={{ width: 460 }}>
+    <DataTableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
             {columns.map((column) => {
-              const { headerText } = column;
-              return <TableCell>{headerText}</TableCell>;
+              const { headerText, name } = column;
+              return <TableCell key={`data-table-head-cell-${name}`}>{headerText}</TableCell>;
             })}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow>
+          {rows.map((row, rowIndex) => (
+            <TableRow key={`data-table-body-row-${rowIndex}`}>
               {columns.map((column) => {
                 const { name } = column;
-                return <TableCell>{row[name]}</TableCell>;
+                return <TableCell key={`data-table-body-cell-${name}`}>{row[name]}</TableCell>;
               })}
             </TableRow>
           ))}
