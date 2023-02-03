@@ -30,39 +30,30 @@ const handleSearchResultClick = () => action('clicked')('handleSearchResultClick
 
 const resultsList = [
   {
-    primaryText: 'Alpha',
-    secondaryText:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    primaryText: 'parse-as-fixed-length',
+    secondaryText: 'Parses fixed-length records using the specified widths and padding-character',
     icon: true,
   },
   {
-    primaryText: 'Bravo',
-    secondaryText:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    primaryText: 'parse-as-log',
+    secondaryText: 'Parses Apache HTTPD and NGINX logs',
     icon: true,
   },
   {
-    primaryText: 'Charlie',
-    secondaryText:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    primaryText: 'parse-xml-to-json',
+    secondaryText: 'Parses a XML document to JSON representation',
     icon: true,
   },
   {
-    primaryText: 'Delta',
-    secondaryText:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    secondaryText: 'Customer Name',
     icon: true,
   },
   {
-    primaryText: 'Echo',
-    secondaryText:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    secondaryText: 'Credit card number',
     icon: true,
   },
   {
-    primaryText: 'Foxtrot',
-    secondaryText:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    secondaryText: 'Purchase date',
     icon: true,
   },
 ];
@@ -72,13 +63,15 @@ const DirectiveWrapper = styled(Box)`
   margin-top: 400px;
 `;
 
-export const Default: ComponentStory<typeof DirectivePanel> = (args) => {
+const Template: ComponentStory<typeof DirectivePanel> = (args) => {
   return (
     <DirectiveWrapper>
       <DirectivePanel {...args} />
     </DirectiveWrapper>
   );
 };
+
+export const Default = Template.bind({});
 
 Default.args = {
   directiveSuggestion: {

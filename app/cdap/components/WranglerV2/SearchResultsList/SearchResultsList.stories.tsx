@@ -28,28 +28,39 @@ const handleClick = (data) => action('clicked')(data);
 
 const resultsList = [
   {
-    primaryText: 'test-1',
-    secondaryText: 'alpha bravo charlie',
+    primaryText: 'parse-as-fixed-length',
+    secondaryText: 'Parses fixed-length records using the specified widths and padding-character',
     icon: true,
   },
   {
-    primaryText: 'test-2',
-    secondaryText: 'alpha bravo charlie',
+    primaryText: 'parse-as-log',
+    secondaryText: 'Parses Apache HTTPD and NGINX logs',
     icon: true,
   },
   {
-    secondaryText: 'alpha bravo charlie',
+    primaryText: 'parse-xml-to-json',
+    secondaryText: 'Parses a XML document to JSON representation',
     icon: true,
   },
   {
-    secondaryText: 'alpha bravo charlie',
+    secondaryText: 'Customer Name',
+    icon: true,
+  },
+  {
+    secondaryText: 'Credit card number',
+    icon: true,
+  },
+  {
+    secondaryText: 'Purchase date',
     icon: true,
   },
 ];
 
-export const Default: ComponentStory<typeof SearchResultList> = (args) => {
+export const Template: ComponentStory<typeof SearchResultList> = (args) => {
   return <SearchResultList {...args} />;
 };
+
+export const Default = Template.bind({});
 
 Default.args = {
   resultsList,

@@ -26,9 +26,11 @@ export default {
 
 const handleClick = () => action('clicked')('Search item clicked');
 
-export const Default: ComponentStory<typeof SearchResultListItem> = (args) => {
+export const Template: ComponentStory<typeof SearchResultListItem> = (args) => {
   return <SearchResultListItem {...args} />;
 };
+
+export const Default = Template.bind({});
 
 Default.args = {
   primaryText: 'parse-as-log',
