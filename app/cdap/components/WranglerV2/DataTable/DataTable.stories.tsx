@@ -84,7 +84,6 @@ const rows = [
       "'body_01' with delimiter 'comma' and set 'first row as header'"
     ),
   },
-  ,
   {
     serialNumber: getTableBodyCellLabel('02'),
     recipeStep: getRecipeStepCellRenderer('Delete Column', "'body_01'"),
@@ -109,6 +108,7 @@ const RecipeStepsTableContainer = styled(DataTableContainer)`
       display: none;
       padding: 0;
       margin-top: 4px;
+      margin-right: 9px;
     }
     .MuiTableRow-root:hover {
       .MuiIconButton-root {
