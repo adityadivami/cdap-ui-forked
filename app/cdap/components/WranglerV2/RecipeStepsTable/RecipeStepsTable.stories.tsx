@@ -51,7 +51,7 @@ const dataGridColumns: IRecipeStepsColumns[] = [
 const dataGridRows: IRecipeStepsRows[] = [
   {
     id: 1,
-    step: "Parse Column 'Body' with delimiter 'comma' and set 'first row as header' ",
+    step: "Parse Column 'Body' with delimiter 'comma' and set 'first row as header'",
     serialNumber: '01',
   },
   { id: 2, step: "Delete Column 'body'", serialNumber: '02' },
