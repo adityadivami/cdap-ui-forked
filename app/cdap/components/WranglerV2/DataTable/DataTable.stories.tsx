@@ -20,6 +20,7 @@ import React from 'react';
 import DataTable, { DataTableContainer } from '.';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styled from 'styled-components';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'DataTable',
@@ -43,6 +44,8 @@ const getTableHeadCellLabel = (label: string) => (
   </Typography>
 );
 
+const handleDeleteIconClick = () => action('clicked')('Delete Icon Clicked');
+
 const getRecipeStepCellRenderer = (transformationName: string, directive: string) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -54,7 +57,7 @@ const getRecipeStepCellRenderer = (transformationName: string, directive: string
         {getTableBodyCellLabel(directive)}
       </div>
       <div>
-        <IconButton>
+        <IconButton onClick={handleDeleteIconClick}>
           <DeleteOutlineIcon />
         </IconButton>
       </div>

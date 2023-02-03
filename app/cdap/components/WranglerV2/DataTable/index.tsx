@@ -30,10 +30,8 @@ export const DataTableContainer = styled(TableContainer)`
   .MuiTableCell-root {
     padding: 14px 16px;
   }
-
   .MuiTableHead-root {
     background-color: #f5f5f5;
-
     .MuiTypography-body1 {
       font-size: 12px;
       font-weight: 700;
@@ -42,6 +40,7 @@ export const DataTableContainer = styled(TableContainer)`
       text-align: left;
     }
   }
+
   .MuiTableBody-root {
     .MuiTableRow-root:hover {
       background-color: #e0e0e0;
