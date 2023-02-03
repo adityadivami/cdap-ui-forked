@@ -2541,16 +2541,6 @@
     react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
 
-"@material-ui/data-grid@^4.0.0-alpha.37":
-  version "4.0.0-alpha.37"
-  resolved "https://registry.yarnpkg.com/@material-ui/data-grid/-/data-grid-4.0.0-alpha.37.tgz#89d907c4e94e6a0db4e89e4f59160f7811546ca2"
-  integrity sha512-3T2AG31aad/lWLMLwn1XUP4mUf3H9YZES17dGuYByzkRLCXbBZHBTPEnCctWukajzwm+v0KGg3QpwitGoiDAjA==
-  dependencies:
-    "@material-ui/utils" "^5.0.0-alpha.14"
-    clsx "^1.0.4"
-    prop-types "^15.7.2"
-    reselect "^4.0.0"
-
 "@material-ui/icons@^4.9.1":
   version "4.11.2"
   resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz#b3a7353266519cd743b6461ae9fdfcb1b25eb4c5"
@@ -2614,17 +2604,6 @@
     "@babel/runtime" "^7.4.4"
     prop-types "^15.7.2"
     react-is "^16.8.0 || ^17.0.0"
-
-"@material-ui/utils@^5.0.0-alpha.14":
-  version "5.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-5.0.0-beta.5.tgz#de492037e1f1f0910fda32e6f11b66dfcde2a1c2"
-  integrity sha512-wtJ3ovXWZdTAz5eLBqvMpYH/IBJb3qMQbGCyL1i00+sf7AUlAuv4QLx+QtX/siA6L7IpxUQVfqpoCpQH1eYRpQ==
-  dependencies:
-    "@babel/runtime" "^7.14.8"
-    "@types/prop-types" "^15.7.4"
-    "@types/react-is" "^16.7.1 || ^17.0.0"
-    prop-types "^15.7.2"
-    react-is "^17.0.2"
 
 "@mdx-js/loader@^1.6.22":
   version "1.6.22"
@@ -4225,11 +4204,6 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/prop-types@^15.7.4":
-  version "15.7.5"
-  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
-  integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
-
 "@types/q@^1.5.1":
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
@@ -4290,13 +4264,6 @@
   version "0.0.35"
   resolved "https://registry.yarnpkg.com/@types/react-input-calendar/-/react-input-calendar-0.0.35.tgz#4c1a1dace48253385052e903fbc3354a5d8bdcb5"
   integrity sha512-AFiQOcwghMH3WHGvblpZU1gIREnEca4l7sWfKx/ObLqlqxmmYZ5jOZ0Y3oKpCfAIN1XZM+RBHnCQGo2Ms5AaIw==
-  dependencies:
-    "@types/react" "*"
-
-"@types/react-is@^16.7.1 || ^17.0.0":
-  version "17.0.3"
-  resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-17.0.3.tgz#2d855ba575f2fc8d17ef9861f084acc4b90a137a"
-  integrity sha512-aBTIWg1emtu95bLTLx0cpkxwGW3ueZv71nE2YFBpL8k/z5czEW8yYpOo8Dp+UUAFAtKwNaOsh/ioSeQnWlZcfw==
   dependencies:
     "@types/react" "*"
 
@@ -18940,11 +18907,6 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
-
-reselect@^4.0.0:
-  version "4.1.7"
-  resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.1.7.tgz#56480d9ff3d3188970ee2b76527bd94a95567a42"
-  integrity sha512-Zu1xbUt3/OPwsXL46hvOOoQrap2azE7ZQbokq61BQfiXvhewsKDwhMeZjTX9sX0nvw1t/U5Audyn1I9P/m9z0A==
 
 reselect@^4.1.5:
   version "4.1.5"
