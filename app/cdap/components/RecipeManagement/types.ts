@@ -39,8 +39,8 @@ export interface IRecipeData extends IRecipeFormData {
 }
 
 export interface ICreateRecipeProps {
-  setShowRecipeForm: Dispatch<SetStateAction<boolean>>;
-  setSnackbar: Dispatch<SetStateAction<ISnackbar>>;
+  setShowRecipeForm?: Dispatch<SetStateAction<boolean>>;
+  setSnackbar?: Dispatch<SetStateAction<ISnackbar>>;
 }
 
 export interface IRecipeNameErrorData {
