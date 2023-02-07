@@ -21,7 +21,7 @@ import { grey } from '@material-ui/core/colors';
 import T from 'i18n-react';
 import { format, TYPES } from 'services/DataFormatter';
 import DirectiveTable from 'components/RecipeManagement/RecipeDetails/DirectivesTable';
-import { IRecipeDetailsProps } from 'components/RecipeManagement/types';
+import { IRecipe } from 'components/RecipeList/types';
 
 export const PREFIX = 'features.WranglerNewUI.Recipe';
 
@@ -55,6 +55,10 @@ const VerticalDivider = styled(Box)`
   border-left: 1px solid ${grey[300]};
   margin: 0 10px;
 `;
+
+export interface IRecipeDetailsProps {
+  selectedRecipe: IRecipe;
+}
 
 export default function RecipeDetails({ selectedRecipe }: IRecipeDetailsProps) {
   return (

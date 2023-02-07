@@ -34,7 +34,7 @@ const DirectivesTableHeader = styled(TableHeader)`
   background-color: transparent;
 `;
 
-const StyledTableHeadRow = styled(TableRow)`
+const DirectivesTableHeadRow = styled(TableRow)`
   ${styledTableRowCSS}
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -73,12 +73,12 @@ export default function DirectivesTable({ directives }: { directives: string[] }
   return (
     <Table columnTemplate="0.5fr 2fr">
       <DirectivesTableHeader>
-        <StyledTableHeadRow>
+        <DirectivesTableHeadRow>
           <StyledTableHeaderCell>#</StyledTableHeaderCell>
           <StyledTableHeaderCell>
             {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
           </StyledTableHeaderCell>
-        </StyledTableHeadRow>
+        </DirectivesTableHeadRow>
       </DirectivesTableHeader>
       <TableBody>
         {directives.map((recipeStep, recipeStepIndex) => {
