@@ -97,7 +97,7 @@ export default function RecipeForm({
               aria-label="Recipe Description"
               data-testid="recipe-form-description-field"
               defaultValue={recipeFormData.description}
-              minRows={3}
+              minRows={4}
               onChange={onRecipeDescriptionChange}
               placeholder={T.translate(`${PREFIX}.descriptionPlaceholder`)}
               required

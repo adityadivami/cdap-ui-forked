@@ -78,11 +78,11 @@ export const StyledTextAreaAutosize = styled(TextareaAutosize)`
   border-color: ${grey[300]};
   border-radius: 4px;
   :focus-visible {
-    outline: unset !important;
+    outline: unset;
     border: 1px solid #000000;
   }
   font-size: 14px;
-  height: 100px !important;
+  height: 100px;
   :hover {
     border: 1px solid #000000;
   }
