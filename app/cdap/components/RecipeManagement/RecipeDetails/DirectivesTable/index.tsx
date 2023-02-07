@@ -15,14 +15,14 @@
  */
 
 import React from 'react';
+import T from 'i18n-react';
+import styled, { css } from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 import Table from 'components/shared/Table';
 import TableHeader from 'components/shared/Table/TableHeader';
 import TableRow from 'components/shared/Table/TableRow';
 import TableCell from 'components/shared/Table/TableCell';
 import TableBody from 'components/shared/Table/TableBody';
-import T from 'i18n-react';
-import styled, { css } from 'styled-components';
-import { grey } from '@material-ui/core/colors';
 
 const styledTableRowCSS = css`
   border: 1px solid rgb(0 0 0 / 12%);

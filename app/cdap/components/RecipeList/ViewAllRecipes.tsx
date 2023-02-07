@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ * Copyright © 2023 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -16,13 +16,13 @@
 
 import React, { useState } from 'react';
 import T from 'i18n-react';
-import RecipeList from 'components/RecipeList';
-import Box from '@material-ui/core/Box';
-import { SortBy, SortOrder } from './types';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import { Link } from 'react-router-dom';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import RecipeList from 'components/RecipeList';
+import { SortBy, SortOrder } from 'components/RecipeList/types';
 import RecipeDetails from 'components/RecipeManagement/RecipeDetails';
 import { IRecipe, ActionType } from 'components/RecipeList/types';
 import DrawerWidget from 'components/common/DrawerWidget';
@@ -68,12 +68,15 @@ const ViewAllRecipies = () => {
             : T.translate(`${PREFIX}.editRecipe`)
         }
         showBackIcon={false}
-        showDivider={Boolean(actionType === ActionType.VIEW_RECIPE)}
+        showDivider={actionType === ActionType.VIEW_RECIPE}
         open={isPanelOpen}
         headerActionTemplate={
           actionType === ActionType.VIEW_RECIPE && <RecipeHeaderActionTemplate />
         }
-        dataTestId={`${actionType}-drawer-widget`}
+        dataTestId={`${actionType
+          .toLowerCase()
+          .split(' ')
+          .join('-')}-drawer-widget`}
         children={getChildComponent()}
       />
       <Box ml={4} m={2}>

@@ -1,5 +1,5 @@
 /*
- *  Copyright © 2022 Cask Data, Inc.
+ *  Copyright © 2023 Cask Data, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
  *  use this file except in compliance with the License. You may obtain a copy of
@@ -23,7 +23,7 @@ import { format, TYPES } from 'services/DataFormatter';
 import DirectiveTable from 'components/RecipeManagement/RecipeDetails/DirectivesTable';
 import { IRecipeDetailsProps } from 'components/RecipeManagement/types';
 
-const PREFIX = 'features.WranglerNewUI.Recipe';
+export const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const MainContainer = styled(Box)`
   margin-top: 24px;

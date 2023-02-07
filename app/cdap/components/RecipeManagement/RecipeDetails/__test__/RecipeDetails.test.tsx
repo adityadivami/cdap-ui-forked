@@ -14,11 +14,11 @@
  *  the License.
  */
 
-import { screen } from '@testing-library/dom';
-import { render } from '@testing-library/react';
-import RecipeDetails from 'components/RecipeManagement/RecipeDetails';
 import React from 'react';
 import T from 'i18n-react';
+import { render } from '@testing-library/react';
+import { screen } from '@testing-library/dom';
+import RecipeDetails, { PREFIX } from 'components/RecipeManagement/RecipeDetails';
 
 const recipeDetailsMockData = {
   recipeId: {
@@ -37,8 +37,6 @@ const recipeDetailsMockData = {
 };
 
 describe('Test RecipeDetails Component', () => {
-  const PREFIX = 'features.WranglerNewUI.Recipe';
-
   beforeEach(() => {
     render(<RecipeDetails selectedRecipe={recipeDetailsMockData} />);
   });
