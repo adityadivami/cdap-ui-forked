@@ -81,18 +81,16 @@ export default function DirectivesTable({ directives }: { directives: string[] }
         </DirectivesTableHeadRow>
       </DirectivesTableHeader>
       <TableBody>
-        {directives.map((recipeStep, recipeStepIndex) => {
-          return (
-            <StyledTableBodyRow>
-              <StyledTableBodyCell data-testid={`selected-recipe-step-index-${recipeStepIndex}`}>
-                {getSerialNumber(recipeStepIndex)}
-              </StyledTableBodyCell>
-              <StyledTableBodyCell data-testid={`selected-recipe-step-text-${recipeStepIndex}`}>
-                {recipeStep}
-              </StyledTableBodyCell>
-            </StyledTableBodyRow>
-          );
-        })}
+        {directives.map((recipeStep, recipeStepIndex) => (
+          <StyledTableBodyRow>
+            <StyledTableBodyCell data-testid={`selected-recipe-step-index-${recipeStepIndex}`}>
+              {getSerialNumber(recipeStepIndex)}
+            </StyledTableBodyCell>
+            <StyledTableBodyCell data-testid={`selected-recipe-step-text-${recipeStepIndex}`}>
+              {recipeStep}
+            </StyledTableBodyCell>
+          </StyledTableBodyRow>
+        ))}
       </TableBody>
     </Table>
   );

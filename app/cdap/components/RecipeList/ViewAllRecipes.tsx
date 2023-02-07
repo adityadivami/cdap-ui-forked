@@ -16,6 +16,7 @@
 
 import React, { useState } from 'react';
 import T from 'i18n-react';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
@@ -26,20 +27,41 @@ import { SortBy, SortOrder } from 'components/RecipeList/types';
 import RecipeDetails from 'components/RecipeManagement/RecipeDetails';
 import { IRecipe, ActionType } from 'components/RecipeList/types';
 import DrawerWidget from 'components/common/DrawerWidget';
-import RecipeHeaderActionTemplate from 'components/RecipeManagement/RecipeDetails/HeaderActionTemplate';
+import ActionsPopover, { IAction } from 'components/shared/ActionsPopover';
+
+const ActionsWrapper = styled(Box)`
+  display: flex;
+  align-items: center;
+`;
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
+const actions: IAction[] = [
+  {
+    label: T.translate(`${PREFIX}.edit`),
+  },
+  {
+    label: T.translate(`${PREFIX}.download`),
+  },
+  {
+    label: T.translate(`${PREFIX}.delete`),
+  },
+];
 
 const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
-const ViewAllRecipies = () => {
+export default function ViewAllRecipies() {
   const [actionType, setActionType] = useState('');
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [showPopover, setShowPopover] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
   const viewRecipeHandler = (selectedObject: any) => {
     toggleOpen();
     setRecipe(selectedObject);
     setActionType(ActionType.VIEW_RECIPE);
+  };
+
+  const togglePopover = () => {
+    setShowPopover(!showPopover);
   };
 
   const handleEditRecipe = (selectedObject: any) => {
@@ -53,7 +75,8 @@ const ViewAllRecipies = () => {
       return <RecipeDetails selectedRecipe={recipe} />;
     }
     if (recipe) {
-      return <></>; // TODO: Here we will render Edit Recipe component once we integrate edit recipe
+      // TODO: Here we will render Edit Recipe component once we integrate edit recipe
+      return <></>;
     }
   };
 
@@ -71,7 +94,15 @@ const ViewAllRecipies = () => {
         showDivider={actionType === ActionType.VIEW_RECIPE}
         open={isPanelOpen}
         headerActionTemplate={
-          actionType === ActionType.VIEW_RECIPE && <RecipeHeaderActionTemplate />
+          actionType === ActionType.VIEW_RECIPE && (
+            <ActionsWrapper>
+              <ActionsPopover
+                actions={actions}
+                showPopover={showPopover}
+                togglePopover={togglePopover}
+              />
+            </ActionsWrapper>
+          )
         }
         dataTestId={`${actionType
           .toLowerCase()
@@ -110,6 +141,4 @@ const ViewAllRecipies = () => {
       </Box>
     </>
   );
-};
-
-export default ViewAllRecipies;
+}
