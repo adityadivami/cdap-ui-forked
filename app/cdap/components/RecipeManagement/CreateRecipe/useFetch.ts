@@ -6,6 +6,8 @@ export default function useFetch(service, params) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setResponse(null);
+    setError(null);
     if (service === 'getRecipeByName') {
       MyDataPrepApi.getRecipeByName(params).subscribe(
         (res) => {
