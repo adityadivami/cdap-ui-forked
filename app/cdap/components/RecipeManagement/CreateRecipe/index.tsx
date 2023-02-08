@@ -167,14 +167,13 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
 
   useEffect(() => {
     if (response) {
-      !recipeNameErrorData.isRecipeNameError &&
-        setRecipeNameErrorData(
-          {
-            isRecipeNameError: true,
-            recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
-          },
-          recipeFormData
-        );
+      setRecipeNameErrorData(
+        {
+          isRecipeNameError: true,
+          recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+        },
+        recipeFormData
+      );
     } else if (error) {
       if (error.statusCode === 404) {
         setRecipeNameErrorData(noErrorState, recipeFormData);
