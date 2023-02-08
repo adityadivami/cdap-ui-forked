@@ -1,5 +1,5 @@
 /*
- *  Copyright © 2022 Cask Data, Inc.
+ *  Copyright © 2023 Cask Data, Inc.
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not
  *  use this file except in compliance with the License. You may obtain a copy of
@@ -25,7 +25,7 @@ import TableCell from 'components/shared/Table/TableCell';
 import TableBody from 'components/shared/Table/TableBody';
 
 const styledTableRowCSS = css`
-  border: 1px solid rgb(0 0 0 / 12%);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-bottom: none;
   padding: 10px 16px;
 `;
@@ -43,7 +43,7 @@ const DirectivesTableHeadRow = styled(TableRow)`
 
 const StyledTableBodyRow = styled(TableRow)`
   ${styledTableRowCSS}
-  background: #FFFFFF;
+  background: ${grey[50]};
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.12);
 `;
 
