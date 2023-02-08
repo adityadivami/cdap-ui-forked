@@ -163,7 +163,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     }, 500)
   );
 
-  const [response, error] = useFetch(params.recipeName ? 'getRecipeByName' : null, params);
+  const [response, error] = useFetch(MyDataPrepApi.getRecipeByName, params);
 
   useEffect(() => {
     if (response) {
