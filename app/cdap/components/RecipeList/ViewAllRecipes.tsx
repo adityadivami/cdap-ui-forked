@@ -54,6 +54,7 @@ export default function ViewAllRecipies() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
+  const isViewRecipeAction = actionType === ActionType.VIEW_RECIPE;
   const viewRecipeHandler = (selectedObject: any) => {
     toggleOpen();
     setRecipe(selectedObject);
@@ -71,7 +72,7 @@ export default function ViewAllRecipies() {
   const toggleOpen = () => setIsPanelOpen(!isPanelOpen);
 
   const getChildComponent = () => {
-    if (actionType === ActionType.VIEW_RECIPE) {
+    if (isViewRecipeAction) {
       return <RecipeDetails selectedRecipe={recipe} />;
     }
     if (recipe) {
@@ -86,15 +87,15 @@ export default function ViewAllRecipies() {
         anchor="right"
         closeClickHandler={toggleOpen}
         headingText={
-          actionType === ActionType.VIEW_RECIPE
+          isViewRecipeAction
             ? T.translate(`${PREFIX}.recipeDetails`)
             : T.translate(`${PREFIX}.editRecipe`)
         }
         showBackIcon={false}
-        showDivider={actionType === ActionType.VIEW_RECIPE}
+        showDivider={isViewRecipeAction}
         open={isPanelOpen}
         headerActionTemplate={
-          actionType === ActionType.VIEW_RECIPE && (
+          isViewRecipeAction && (
             <ActionsWrapper>
               <ActionsPopover
                 actions={actions}
