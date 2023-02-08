@@ -56,7 +56,7 @@ const resultsList = [
   },
 ];
 
-export const Template: ComponentStory<typeof SearchResultList> = (args) => {
+const Template: ComponentStory<typeof SearchResultList> = (args) => {
   return <SearchResultList {...args} />;
 };
 

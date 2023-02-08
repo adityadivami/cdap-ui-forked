@@ -26,7 +26,7 @@ export default {
 
 const handleClick = () => action('clicked')('Search item clicked');
 
-export const Template: ComponentStory<typeof SearchResultListItem> = (args) => {
+const Template: ComponentStory<typeof SearchResultListItem> = (args) => {
   return <SearchResultListItem {...args} />;
 };
 

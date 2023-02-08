@@ -17,6 +17,7 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
+import { grey } from '@material-ui/core/colors';
 import SearchResultsListItem, {
   ISearchResultListItemProps,
 } from 'components/WranglerV2/SearchResultsListItem';
@@ -36,7 +37,7 @@ const SearchListWrapper = styled(Box)`
   box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   bottom: 120px;
-  background: #ffffff;
+  background: ${grey[50]};
 `;
 
 export default function SearchResultsList({

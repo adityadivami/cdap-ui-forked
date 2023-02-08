@@ -16,11 +16,11 @@
 
 import React from 'react';
 import { Box, Divider, Input, InputProps, Link, Typography } from '@material-ui/core';
+import { grey, lightGreen, blue } from '@material-ui/core/colors';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import T from 'i18n-react';
 import styled from 'styled-components';
-import { grey } from '@material-ui/core/colors';
 
 export interface IDirectiveSuggestionProps {
   link: string;
@@ -39,18 +39,18 @@ export const InputWrapper = styled(Input)`
     margin: 0px 5px;
     outline: 0;
     background: transparent;
-    color: #ffffff;
+    color: ${grey[50]};
     & .MuiInputBase-input {
       padding: 0px;
       height: 12px;
-      color: #ffffff;
+      color: ${grey[50]};
       font-size: 14px;
     }
   }
 `;
 
 const PrefixIconWrapper = styled(Box)`
-  color: #94ec98;
+  color: ${lightGreen[400]};
 `;
 
 const PostfixIconWrapper = styled(CloseOutlinedIcon)`
@@ -74,7 +74,7 @@ const InfoLink = styled(Link)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #a1c2fa;
+    color: ${blue.A100};
     font-size: 14px;
     text-decoration: none;
     margin-left: 35px;
@@ -85,7 +85,7 @@ const InfoLink = styled(Link)`
 
 const StyledInfoOutlinedIcon = styled(InfoOutlinedIcon)`
   &&& {
-    color: #a1c2fa;
+    color: ${blue.A100};
     width: 20px;
     height: 20px;
   }
@@ -97,7 +97,7 @@ const DirectivesUsageText = styled(Typography)`
     font-weight: 400;
     font-size: 14px;
     letter-spacing: 0.15;
-    color: #ffffff;
+    color: ${grey[50]};
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -109,7 +109,7 @@ const DirectiveFieldWrapper = styled(Box)`
   &&& {
     background: ${grey[700]};
     padding: 20px;
-    color: #ffffff;
+    color: ${grey[50]};
     min-height: 82px;
   }
 `;

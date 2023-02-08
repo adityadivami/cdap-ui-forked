@@ -34,9 +34,6 @@ const SearchBarWrapper = styled(Box)`
   align-items: flex-end;
   cursor: pointer;
   border-bottom: 1px solid ${grey[300]};
-  '& :hover': {
-    backgroundColor: #EFF0F2,
-  },
 `;
 
 const SearchBarTextWrapper = styled(Box)`
