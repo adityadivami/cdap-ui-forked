@@ -8,16 +8,18 @@ export default function useFetch(service, params) {
   useEffect(() => {
     setResponse(null);
     setError(null);
-    if (service === 'getRecipeByName') {
-      MyDataPrepApi.getRecipeByName(params).subscribe(
-        (res) => {
-          setResponse(res);
-        },
-        (err: Record<string, unknown>) => {
-          setError(err);
-        }
-      );
-    }
+    console.log(MyDataPrepApi.getRecipeByName, 'this is MyDataPrepApi.getRecipeByName');
+    console.log(service, 'this is service');
+    service(params).subscribe(
+      (res) => {
+        console.log(res, 'this is res');
+        setResponse(res);
+      },
+      (err: Record<string, unknown>) => {
+        console.log(err, 'this is error');
+        setError(err);
+      }
+    );
   }, [params]);
 
   return [response, error];
