@@ -23,6 +23,7 @@ import TableHeader from 'components/shared/Table/TableHeader';
 import TableRow from 'components/shared/Table/TableRow';
 import TableCell from 'components/shared/Table/TableCell';
 import TableBody from 'components/shared/Table/TableBody';
+import PREFIX from 'components/RecipeManagement/RecipeDetails';
 
 const styledTableRowCSS = css`
   border: 1px solid rgba(0, 0, 0, 0.12);
@@ -60,8 +61,6 @@ const StyledTableBodyCell = styled(TableCell)`
   line-height: 24px;
 `;
 
-const PREFIX = 'features.WranglerNewUI.Recipe.common';
-
 export default function DirectivesTable({ directives }: { directives: string[] }) {
   const getSerialNumber = (recipeStepIndex: number) => {
     if (recipeStepIndex < 10) {
@@ -76,7 +75,7 @@ export default function DirectivesTable({ directives }: { directives: string[] }
         <DirectivesTableHeadRow>
           <StyledTableHeaderCell>#</StyledTableHeaderCell>
           <StyledTableHeaderCell>
-            {T.translate(`${PREFIX}.tableHeaders.recipeStep`)}
+            {T.translate(`${PREFIX}.common.tableHeaders.recipeStep`)}
           </StyledTableHeaderCell>
         </DirectivesTableHeadRow>
       </DirectivesTableHeader>
