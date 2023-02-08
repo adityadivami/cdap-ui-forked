@@ -108,8 +108,9 @@ export default function ViewAllRecipies() {
           .toLowerCase()
           .split(' ')
           .join('-')}-drawer-widget`}
-        children={getChildComponent()}
-      />
+      >
+        {getChildComponent()}
+      </DrawerWidget>
       <Box ml={4} m={2}>
         <Breadcrumbs separator="›" aria-label="breadcrumb">
           <Link underline="hover" key="2" color="inherit" to={redirectToObj}>
