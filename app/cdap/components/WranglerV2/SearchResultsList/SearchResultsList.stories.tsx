@@ -26,7 +26,7 @@ export default {
 
 const handleClick = (data) => action('clicked')(data);
 
-const resultsList = [
+const resultList = [
   {
     primaryText: 'parse-as-fixed-length',
     secondaryText: 'Parses fixed-length records using the specified widths and padding-character',
@@ -63,7 +63,7 @@ const Template: ComponentStory<typeof SearchResultList> = (args) => {
 export const Default = Template.bind({});
 
 Default.args = {
-  resultsList,
+  resultList,
   showIcon: false,
   handleClick,
 };

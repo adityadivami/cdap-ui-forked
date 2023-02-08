@@ -23,7 +23,7 @@ import SearchResultsListItem, {
 } from 'components/WranglerV2/SearchResultsListItem';
 
 export interface ISearchResultListProps {
-  resultsList: ISearchResultListItemProps[];
+  resultList: ISearchResultListItemProps[];
   showIcon: boolean;
   handleClick: (value: ISearchResultListItemProps) => void;
   anchorEl: Element;
@@ -41,7 +41,7 @@ const SearchListWrapper = styled(Box)`
 `;
 
 export default function SearchResultsList({
-  resultsList = [],
+  resultList = [],
   showIcon,
   handleClick,
   anchorEl,
@@ -49,7 +49,7 @@ export default function SearchResultsList({
 }: ISearchResultListProps) {
   return (
     <SearchListWrapper>
-      {resultsList.map((eachResult, index) => (
+      {resultList.map((eachResult, index) => (
         <SearchResultsListItem
           key={index}
           icon={showIcon}

@@ -21,9 +21,9 @@ import { grey } from '@material-ui/core/colors';
 import ArrowForwardIosOutlinedIcon from '@material-ui/icons/ArrowForwardIosOutlined';
 
 export interface ISearchResultListItemProps {
-  primaryText?: string;
   secondaryText: string;
   icon: boolean;
+  primaryText?: string;
   onClick?: () => void;
 }
 

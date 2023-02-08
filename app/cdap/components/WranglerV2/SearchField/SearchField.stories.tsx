@@ -25,7 +25,7 @@ export default {
 } as ComponentMeta<typeof SearchField>;
 
 const handleInputChangeClick = () => action('clicked')('onChange');
-const handleonPostfixIconClick = () => action('clicked')('prefix clicked');
+const handleOnPostfixIconClick = () => action('clicked')('prefix clicked');
 
 const Template: ComponentStory<typeof SearchField> = (args) => {
   return <SearchField {...args} />;
@@ -34,7 +34,7 @@ const Template: ComponentStory<typeof SearchField> = (args) => {
 export const Default = Template.bind({});
 
 Default.args = {
-  onPostfixIconClick: handleonPostfixIconClick,
+  onPostfixIconClick: handleOnPostfixIconClick,
   inputProps: {
     value: 'test',
     onChange: handleInputChangeClick,

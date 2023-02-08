@@ -17,14 +17,14 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { Box } from '@material-ui/core';
 import styled from 'styled-components';
-import SearchField, { IDirectiveSuggestionProps } from 'components/WranglerV2/SearchField';
+import SearchField, { IDirectiveSuggestion } from 'components/WranglerV2/SearchField';
 import SearchResultsList from 'components/WranglerV2/SearchResultsList';
 import { ISearchResultListItemProps } from 'components/WranglerV2/SearchResultsListItem';
 
 export interface IDirectivePanelProps {
-  directiveSuggestion: IDirectiveSuggestionProps;
+  directiveSuggestion: IDirectiveSuggestion;
   applyDirective: (value: string) => void;
-  resultsList: ISearchResultListItemProps[];
+  resultList: ISearchResultListItemProps[];
   handleSearchResultClick: () => void;
 }
 
@@ -34,12 +34,12 @@ const DirectiveWrapper = styled(Box)`
 
 export default function DirectivePanel({
   directiveSuggestion,
-  resultsList,
+  resultList,
   handleSearchResultClick,
   applyDirective,
 }: IDirectivePanelProps) {
   const [searchValue, setSearchValue] = useState('');
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
     setAnchorEl(event.target);
@@ -63,7 +63,7 @@ export default function DirectivePanel({
         directiveSuggestion={directiveSuggestion}
       />
       <SearchResultsList
-        resultsList={resultsList}
+        resultList={resultList}
         handleClick={handleSearchResultClick}
         showIcon={false}
         anchorEl={anchorEl}

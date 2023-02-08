@@ -28,7 +28,7 @@ export default {
 
 const handleSearchResultClick = () => action('clicked')('handleSearchResultClick');
 
-const resultsList = [
+const resultList = [
   {
     primaryText: 'parse-as-fixed-length',
     secondaryText: 'Parses fixed-length records using the specified widths and padding-character',
@@ -78,6 +78,6 @@ Default.args = {
     usage: 'parse-as-log :column format',
     link: 'https://cdap.atlassian.net/wiki/spaces/DOCS/overview',
   },
-  resultsList,
+  resultList,
   handleSearchResultClick,
 };

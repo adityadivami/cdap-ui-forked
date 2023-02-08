@@ -22,7 +22,7 @@ import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import T from 'i18n-react';
 import styled from 'styled-components';
 
-export interface IDirectiveSuggestionProps {
+export interface IDirectiveSuggestion {
   link: string;
   usage: string;
 }
@@ -30,7 +30,7 @@ export interface IDirectiveSuggestionProps {
 export interface ISearchFieldProps {
   onPostfixIconClick: () => void;
   inputProps: InputProps;
-  directiveSuggestion: IDirectiveSuggestionProps;
+  directiveSuggestion: IDirectiveSuggestion;
 }
 
 export const InputWrapper = styled(Input)`
@@ -82,7 +82,7 @@ const InfoLink = styled(Link)`
   }
 `;
 
-const StyledInfoOutlinedIcon = styled(InfoOutlinedIcon)`
+const DirectiveInfoOutlinedIcon = styled(InfoOutlinedIcon)`
   &&& {
     color: ${blue.A100};
     width: 20px;
@@ -137,7 +137,7 @@ export default function SearchField({
             {directiveSuggestion.usage}
             {directiveSuggestion.link && (
               <InfoLink data-testid="info-link" href={directiveSuggestion.link} target="_blank">
-                <StyledInfoOutlinedIcon data-testid="info-icon" />
+                <DirectiveInfoOutlinedIcon data-testid="info-icon" />
                 {T.translate(`${PREFIX}.moreInfoOnDirective`)}
               </InfoLink>
             )}
