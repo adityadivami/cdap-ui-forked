@@ -42,7 +42,6 @@ export const InputWrapper = styled(Input)`
     color: ${grey[50]};
     & .MuiInputBase-input {
       padding: 0px;
-      height: 12px;
       color: ${grey[50]};
       font-size: 14px;
     }
