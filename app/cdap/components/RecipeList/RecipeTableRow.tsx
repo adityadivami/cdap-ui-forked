@@ -15,12 +15,12 @@
  */
 
 import React, { useState } from 'react';
-import T from 'i18n-react';
-import { IRecipe } from './types';
-import ActionsPopover, { IAction } from 'components/shared/ActionsPopover';
 import fileDownload from 'js-file-download';
+import T from 'i18n-react';
+import ActionsPopover, { IAction } from 'components/shared/ActionsPopover';
 import ConfirmationModal from 'components/shared/ConfirmationModal';
-import { IState, reset, getRecipeDetailsById, deleteRecipe } from './reducer';
+import { IRecipe } from 'components/RecipeList/types';
+import { IState, reset, getRecipeDetailsById, deleteRecipe } from 'components/RecipeList/reducer';
 import { format, TYPES } from 'services/DataFormatter';
 
 interface IRecipeTableRowProps {
