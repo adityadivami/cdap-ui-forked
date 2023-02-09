@@ -26,12 +26,15 @@ import { debounce } from 'lodash';
 import { getRecipeByNameService, updateRecipeService } from 'components/RecipeManagement/services';
 import T from 'i18n-react';
 import { ActionType } from 'components/RecipeList/types';
+import MyDataPrepApi from 'api/dataprep';
+import { getCurrentNamespace } from 'services/NamespaceStore';
 import {
   reducer,
   defaultInitialState,
   Actions,
-  noErrorState,
+  // noErrorState,
 } from 'components/RecipeManagement/reducer';
+import useFetch from 'components/RecipeManagement/EditRecipe/useFetch';
 
 const StyledEditFormWrapper = styled.div`
   margin-top: 30px;
@@ -47,7 +50,17 @@ export default function({
   setRecipeFormOpen,
   setIsRecipeListUpdated,
 }: IEditRecipeProps) {
-  const [editRecipeState, dispatch] = useReducer(reducer, defaultInitialState);
+  // const [editRecipeState, dispatch] = useReducer(reducer, defaultInitialState);
+  const [apiParams, setApiParams] = useState({
+    getRecipeByNameParams: {
+      context: '',
+      recipeName: '',
+    },
+    updateRecipeParams: {
+      context: '',
+      recipe_id: '',
+    },
+  });
 
   const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
@@ -57,6 +70,69 @@ export default function({
   });
 
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
+
+  const noErrorState: IRecipeNameErrorData = {
+    isRecipeNameError: false,
+    recipeNameErrorMessage: '',
+  };
+
+  const [recipeNameErrorData, setRecipeNameErrorDataState] = useState(noErrorState);
+
+  const { response: recipeByNameResponse, error: recipeByNameError } = useFetch(
+    MyDataPrepApi.getRecipeByName,
+    apiParams.getRecipeByNameParams,
+    '',
+    'getRecipeByName'
+  );
+
+  const { response: updateRecipeResponse, error: updateRecipeError } = useFetch(
+    MyDataPrepApi.updateRecipe,
+    apiParams.updateRecipeParams,
+    '',
+    'updateRecipe'
+  );
+
+  useEffect(() => {
+    if (recipeByNameResponse) {
+      setRecipeNameErrorData(
+        {
+          isRecipeNameError: true,
+          recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+        },
+        recipeFormData
+      );
+    } else if (recipeByNameError) {
+      if (recipeByNameError.statusCode === 404) {
+        setRecipeNameErrorData(noErrorState, recipeFormData);
+      } else {
+        setSnackbar({
+          open: true,
+          isSuccess: false,
+          message: (recipeByNameError.response as Record<string, string>).message,
+        });
+      }
+    }
+  }, [recipeByNameResponse, recipeByNameError]);
+
+  useEffect(() => {
+    if (updateRecipeResponse) {
+      setRecipeNameErrorData(noErrorState);
+      setRecipeFormOpen(false);
+      setSnackbar({
+        open: true,
+        isSuccess: true,
+        message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeUpdateSuccessMessage`)}`,
+      });
+      setIsRecipeListUpdated(true);
+    } else if (updateRecipeError) {
+      setRecipeFormOpen(false);
+      setSnackbar({
+        open: true,
+        isSuccess: false,
+        message: (updateRecipeError as Record<string, string>).message,
+      });
+    }
+  }, [updateRecipeResponse, updateRecipeError]);
 
   useEffect(() => {
     if (selectedRecipe) {
@@ -71,16 +147,13 @@ export default function({
     recipeNameError: IRecipeNameErrorData,
     formData: IRecipeData = recipeFormData
   ) => {
-    dispatch({
-      type: Actions.SET_RECIPE_NAME_ERROR_STATE,
-      payload: recipeNameError,
-    });
+    setRecipeNameErrorDataState(recipeNameError);
     handleSaveButtonMode(formData, recipeNameError);
   };
 
   const handleSaveButtonMode = (
     formData: IRecipeData,
-    nameErrorData: IRecipeNameErrorData = editRecipeState.recipeNameErrorData
+    nameErrorData: IRecipeNameErrorData = recipeNameErrorData
   ) => {
     if (
       formData.recipeName === '' ||
@@ -119,39 +192,25 @@ export default function({
   const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeData) => {
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
-        setRecipeNameErrorData(
-          {
-            isRecipeNameError: true,
-            recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
-          },
-          formData
-        );
+        setRecipeNameErrorData({
+          isRecipeNameError: true,
+          recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
+        });
       } else {
         if (formData.recipeName) {
-          getRecipeByNameService({ formData, onGetRecipeByNameResponse, onGetRecipeByNameError });
+          setApiParams({
+            ...apiParams,
+            getRecipeByNameParams: {
+              context: getCurrentNamespace(),
+              recipeName: formData.recipeName,
+            },
+          });
         } else {
           setRecipeNameErrorData(noErrorState, formData);
         }
       }
     }, 500)
   );
-
-  const onGetRecipeByNameResponse = (formData: IRecipeData) => {
-    !editRecipeState.recipeNameErrorData.isRecipeNameError &&
-      setRecipeNameErrorData(
-        {
-          isRecipeNameError: true,
-          recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
-        },
-        formData
-      );
-  };
-
-  const onGetRecipeByNameError = (err: Record<string, unknown>, formData: IRecipeData) => {
-    if (err.statusCode === 404) {
-      setRecipeNameErrorData(noErrorState, formData);
-    }
-  };
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -184,11 +243,18 @@ export default function({
       description: recipeFormData.description,
       directives: recipeFormData.directives,
     };
-    updateRecipeService({
-      selectedRecipe,
-      payload,
-      onUpdateRecipeResponse,
-      onUpdateRecipeError,
+    // updateRecipeService({
+    //   selectedRecipe,
+    //   payload,
+    //   onUpdateRecipeResponse,
+    //   onUpdateRecipeError,
+    // });
+    setApiParams({
+      ...apiParams,
+      updateRecipeParams: {
+        context: getCurrentNamespace(),
+        recipe_id: selectedRecipe.recipeId.recipeId,
+      },
     });
   };
 
@@ -203,7 +269,7 @@ export default function({
     <StyledEditFormWrapper>
       {recipeFormData && (
         <RecipeForm
-          isRecipeNameError={editRecipeState.recipeNameErrorData.isRecipeNameError}
+          isRecipeNameError={recipeNameErrorData.isRecipeNameError}
           isSaveDisabled={isSaveDisabled}
           onCancel={onCancelClick}
           onFormSubmit={onFormSubmit}
@@ -211,7 +277,7 @@ export default function({
           onRecipeNameChange={onRecipeNameChange}
           recipeFormData={recipeFormData}
           recipeFormAction={ActionType.EDIT_RECIPE}
-          recipeNameErrorMessage={editRecipeState.recipeNameErrorData.recipeNameErrorMessage}
+          recipeNameErrorMessage={recipeNameErrorData.recipeNameErrorMessage}
         />
       )}
     </StyledEditFormWrapper>
