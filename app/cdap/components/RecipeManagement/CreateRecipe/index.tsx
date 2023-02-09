@@ -63,18 +63,17 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   const { response: recipeByNameResponse, error: recipeByNameError } = useFetch(
     MyDataPrepApi.getRecipeByName,
     apiParams.getRecipeByNameParams,
-    '',
     'getRecipeByName'
   );
   const { response: createRecipeResponse, error: createRecipeError } = useFetch(
     MyDataPrepApi.createRecipe,
     apiParams.createRecipeParams,
+    'createRecipe',
     {
       recipeName: recipeFormData.recipeName,
       description: recipeFormData.description,
       directives: recipeSteps,
-    },
-    'createRecipe'
+    }
   );
 
   useEffect(() => {
@@ -86,7 +85,8 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         },
         recipeFormData
       );
-    } else if (recipeByNameError) {
+    }
+    if (recipeByNameError) {
       if (recipeByNameError.statusCode === 404) {
         setRecipeNameErrorData(noErrorState, recipeFormData);
       } else {
@@ -107,7 +107,8 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         isSuccess: true,
         message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeSaveSuccessMessage`)}`,
       });
-    } else if (createRecipeError) {
+    }
+    if (createRecipeError) {
       setShowRecipeForm(false);
       setSnackbar({
         open: true,

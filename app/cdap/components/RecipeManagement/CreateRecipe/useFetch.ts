@@ -16,7 +16,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-export default function useFetch(service, params, requestBody, serviceName) {
+export default function useFetch(service, params, serviceName, requestBody?) {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const isFirstRender = useRef(true);
@@ -28,7 +28,7 @@ export default function useFetch(service, params, requestBody, serviceName) {
     }
     setResponse(null);
     setError(null);
-    service(params, requestBody).subscribe(
+    service(params, requestBody ?? {}).subscribe(
       (res) => {
         setResponse(res);
       },
