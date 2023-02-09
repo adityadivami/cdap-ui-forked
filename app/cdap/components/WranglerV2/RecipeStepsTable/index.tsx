@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { IconButton, Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
@@ -75,16 +75,10 @@ export const getTableHeaderCell = (label: string) => () => (
 );
 
 export default function RecipeStepsTable({ recipeSteps }) {
-  const [rows, setRows] = useState([]);
-
-  useEffect(() => {
-    const updatedSteps = recipeSteps.map((recipeStep: string, index: number) => ({
-      serialNumber: String(index),
-      recipeStep,
-    }));
-
-    setRows(updatedSteps);
-  }, []);
+  const rows = recipeSteps.map((recipeStep: string, index: number) => ({
+    serialNumber: String(index),
+    recipeStep,
+  }));
 
   const handleDeleteIconClick = () => {
     // do nothing
