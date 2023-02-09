@@ -22,6 +22,7 @@ export default function useFetch(service, params, serviceName, requestBody?) {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
+    // add comment
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;

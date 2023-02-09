@@ -26,7 +26,7 @@ import {
 import RecipeForm from 'components/RecipeManagement/RecipeForm';
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import useFetch from 'components/RecipeManagement/CreateRecipe/useFetch';
+import useFetch from 'services/react/customHooks/useFetch';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
