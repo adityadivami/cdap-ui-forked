@@ -23,7 +23,7 @@ import TableHeader from 'components/shared/Table/TableHeader';
 import TableRow from 'components/shared/Table/TableRow';
 import TableCell from 'components/shared/Table/TableCell';
 import TableBody from 'components/shared/Table/TableBody';
-import PREFIX from 'components/RecipeManagement/RecipeDetails';
+import { PREFIX } from 'components/RecipeManagement/RecipeDetails';
 
 const styledTableRowCSS = css`
   border: 1px solid rgba(0, 0, 0, 0.12);
