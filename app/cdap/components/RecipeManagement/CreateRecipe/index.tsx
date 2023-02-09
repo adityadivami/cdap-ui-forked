@@ -53,6 +53,70 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     },
   });
 
+  /*
+   * TODO: This static data has to be removed when we have actual API data,
+   * then directly we will get that data from store as directives
+   */
+
+  const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
+
+  const { response: recipeByNameResponse, error: recipeByNameError } = useFetch(
+    MyDataPrepApi.getRecipeByName,
+    apiParams.getRecipeByNameParams,
+    '',
+    'getRecipeByName'
+  );
+  const { response: createRecipeResponse, error: createRecipeError } = useFetch(
+    MyDataPrepApi.createRecipe,
+    apiParams.createRecipeParams,
+    {
+      recipeName: recipeFormData.recipeName,
+      description: recipeFormData.description,
+      directives: recipeSteps,
+    },
+    'createRecipe'
+  );
+
+  useEffect(() => {
+    if (recipeByNameResponse) {
+      setRecipeNameErrorData(
+        {
+          isRecipeNameError: true,
+          recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
+        },
+        recipeFormData
+      );
+    } else if (recipeByNameError) {
+      if (recipeByNameError.statusCode === 404) {
+        setRecipeNameErrorData(noErrorState, recipeFormData);
+      } else {
+        setSnackbar({
+          open: true,
+          isSuccess: false,
+          message: (recipeByNameError.response as Record<string, string>).message,
+        });
+      }
+    }
+  }, [recipeByNameResponse, recipeByNameError]);
+
+  useEffect(() => {
+    if (createRecipeResponse) {
+      setShowRecipeForm(false);
+      setSnackbar({
+        open: true,
+        isSuccess: true,
+        message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeSaveSuccessMessage`)}`,
+      });
+    } else if (createRecipeError) {
+      setShowRecipeForm(false);
+      setSnackbar({
+        open: true,
+        isSuccess: false,
+        message: (createRecipeError.response as Record<string, string>).message,
+      });
+    }
+  }, [createRecipeResponse, createRecipeError]);
+
   const setRecipeNameErrorData = (
     recipeNameError: IRecipeNameErrorData,
     formData: IRecipeFormData = recipeFormData
@@ -60,13 +124,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     setRecipeNameErrorDataState(recipeNameError);
     handleSaveButtonMode(formData, recipeNameError);
   };
-
-  /*
-   * TODO: This static data has to be removed when we have actual API data,
-   * then directly we will get that data from store as directives
-   */
-
-  const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   const handleSaveButtonMode = (
     formData: IRecipeFormData = recipeFormData,
@@ -106,10 +163,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
 
   const onFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onRecipeDataSave(recipeFormData);
-  };
-
-  const onRecipeDataSave = (recipeFormData: IRecipeFormData) => {
     setApiParams({
       ...apiParams,
       createRecipeParams: {
@@ -150,57 +203,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       }
     }, 500)
   );
-
-  const { response: recipeByNameResponse, error: recipeByNameError } = useFetch(
-    MyDataPrepApi.getRecipeByName,
-    apiParams.getRecipeByNameParams,
-    '',
-    'getRecipeByName'
-  );
-  const { response: createRecipeResponse, error: createRecipeError } = useFetch(
-    MyDataPrepApi.createRecipe,
-    apiParams.createRecipeParams,
-    {
-      recipeName: recipeFormData.recipeName,
-      description: recipeFormData.description,
-      directives: recipeSteps,
-    },
-    'createRecipe'
-  );
-
-  useEffect(() => {
-    if (recipeByNameResponse) {
-      setRecipeNameErrorData(
-        {
-          isRecipeNameError: true,
-          recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
-        },
-        recipeFormData
-      );
-    } else if (recipeByNameError) {
-      if (recipeByNameError.statusCode === 404) {
-        setRecipeNameErrorData(noErrorState, recipeFormData);
-      }
-    }
-  }, [recipeByNameResponse, recipeByNameError]);
-
-  useEffect(() => {
-    if (createRecipeResponse) {
-      setShowRecipeForm(false);
-      setSnackbar({
-        open: true,
-        isSuccess: true,
-        message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeSaveSuccessMessage`)}`,
-      });
-    } else if (createRecipeError) {
-      setShowRecipeForm(false);
-      setSnackbar({
-        open: true,
-        isSuccess: false,
-        message: (recipeByNameError.response as Record<string, string>).message,
-      });
-    }
-  }, [createRecipeResponse, createRecipeError]);
 
   return (
     <RecipeForm
