@@ -50,6 +50,7 @@ import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 import { useLocation } from 'react-router';
 import { FlexWrapper } from 'components/WranglerGrid/SelectColumnPanel/styles';
+import CreateRecipe from 'components/RecipeManagement/CreateRecipe';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
@@ -319,6 +320,7 @@ export default function GridTable() {
       {showBreadCrumb && (
         <Breadcrumb breadcrumbsList={getWrangleGridBreadcrumbOptions(workspaceName, location)} />
       )}
+      <CreateRecipe />
       <ToolBarList
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}

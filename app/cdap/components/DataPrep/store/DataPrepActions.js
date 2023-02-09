@@ -39,6 +39,7 @@ const DataPrepActions = {
   setTargetDataModel: 'DATAPREP_SET_TARGET_DATA_MODEL',
   setTargetModel: 'DATAPREP_SET_TARGET_MODEL',
   setConnectorIcons: 'DATAPREP_SET_CONNECTOR_ICONS',
+  setRecipeNameErrorData: 'DATAPREP_SET_RECIPE_NAME_ERROR_DATA',
 };
 
 export default DataPrepActions;

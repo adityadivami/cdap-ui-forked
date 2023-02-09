@@ -89,6 +89,7 @@ export interface IDataPrepState {
   targetDataModel?: IDataModel;
   targetModel?: IModel;
   connectorsWithIcons?: any;
+  recipeNameErrorData?: any;
 }
 
 const defaultInitialState: IDataPrepState = {
@@ -115,6 +116,7 @@ const defaultInitialState: IDataPrepState = {
   targetDataModel: null,
   targetModel: null,
   connectorsWithIcons: [],
+  recipeNameErrorData: null,
 };
 
 const errorInitialState = {
@@ -273,6 +275,10 @@ const dataprep = (state = defaultInitialState, action = defaultAction) => {
         targetModel: action.payload.targetModel,
       });
       break;
+    case DataPrepActions.setRecipeNameErrorData:
+      stateCopy = Object.assign({}, state, {
+        recipeNameErrorData: action.payload,
+      });
     default:
       return state;
   }
