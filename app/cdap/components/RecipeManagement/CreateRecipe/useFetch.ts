@@ -1,26 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import MyDataPrepApi from 'api/dataprep';
+/*
+ * Copyright © 2023 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 
-export default function useFetch(service, params) {
+import { useState, useEffect, useRef } from 'react';
+
+export default function useFetch(service, params, requestBody, serviceName) {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     setResponse(null);
     setError(null);
-    console.log(MyDataPrepApi.getRecipeByName, 'this is MyDataPrepApi.getRecipeByName');
-    console.log(service, 'this is service');
-    service(params).subscribe(
+    service(params, requestBody).subscribe(
       (res) => {
-        console.log(res, 'this is res');
         setResponse(res);
       },
       (err: Record<string, unknown>) => {
-        console.log(err, 'this is error');
         setError(err);
       }
     );
-  }, [params]);
+  }, [params, serviceName]);
 
-  return [response, error];
+  return { response, error };
 }
