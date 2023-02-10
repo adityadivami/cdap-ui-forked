@@ -15,16 +15,18 @@
  */
 
 import React, { FormEvent, useEffect, useRef, useState } from 'react';
-import { debounce } from 'lodash';
+
 import T from 'i18n-react';
+import { debounce } from 'lodash';
+
+import MyDataPrepApi from 'api/dataprep';
 import { ActionType } from 'components/RecipeList/types';
+import RecipeForm from 'components/RecipeManagement/RecipeForm';
 import {
   ICreateRecipeProps,
   IRecipeFormData,
-  IRecipeNameErrorData,
+  IRecipeNameErrorData
 } from 'components/RecipeManagement/types';
-import RecipeForm from 'components/RecipeManagement/RecipeForm';
-import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import useFetch from 'services/react/customHooks/useFetch';
 
@@ -65,6 +67,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     apiParams.getRecipeByNameParams,
     'getRecipeByName'
   );
+
   const { response: createRecipeResponse, error: createRecipeError } = useFetch(
     MyDataPrepApi.createRecipe,
     apiParams.createRecipeParams,
@@ -80,7 +83,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
 
   useEffect(() => {
     if (recipeByNameResponse) {
-      setRecipeNameErrorData(
+      updateRecipeNameErrorData(
         {
           isRecipeNameError: true,
           recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
@@ -88,9 +91,13 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         recipeFormData
       );
     }
+   
+  }, [recipeByNameResponse]);
+
+  useEffect(()=>{
     if (recipeByNameError) {
       if (recipeByNameError.statusCode === 404) {
-        setRecipeNameErrorData(noErrorState, recipeFormData);
+        updateRecipeNameErrorData(noErrorState, recipeFormData);
       } else {
         setSnackbar({
           open: true,
@@ -99,7 +106,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         });
       }
     }
-  }, [recipeByNameResponse, recipeByNameError]);
+  }, [recipeByNameError])
 
   // This useEffect is for handling createRecipe API call response and error
 
@@ -110,19 +117,22 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         open: true,
         isSuccess: true,
         message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeSaveSuccessMessage`)}`,
-      });
+      })
     }
+  }, [createRecipeResponse]);
+
+  useEffect(() => {
     if (createRecipeError) {
       setShowRecipeForm(false);
       setSnackbar({
         open: true,
         isSuccess: false,
         message: (createRecipeError.response as Record<string, string>).message,
-      });
+      })
     }
-  }, [createRecipeResponse, createRecipeError]);
+  }, [createRecipeError]);
 
-  const setRecipeNameErrorData = (
+  const updateRecipeNameErrorData = (
     recipeNameError: IRecipeNameErrorData,
     formData: IRecipeFormData = recipeFormData
   ) => {
@@ -191,7 +201,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeFormData) => {
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
-        setRecipeNameErrorData({
+        updateRecipeNameErrorData({
           isRecipeNameError: true,
           recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
         });
@@ -205,7 +215,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
             },
           });
         } else {
-          setRecipeNameErrorData(noErrorState);
+          updateRecipeNameErrorData(noErrorState);
         }
       }
     }, 500)
