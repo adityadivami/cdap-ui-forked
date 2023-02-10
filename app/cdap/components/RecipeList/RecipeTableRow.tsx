@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ * Copyright © 2023 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,8 +18,6 @@ import React, { useState } from 'react';
 import T from 'i18n-react';
 import { IRecipe } from './types';
 import ActionsPopover, { IAction } from 'components/shared/ActionsPopover';
-import MyDataPrepApi from 'api/dataprep';
-import { getCurrentNamespace } from 'services/NamespaceStore';
 import fileDownload from 'js-file-download';
 import ConfirmationModal from 'components/shared/ConfirmationModal';
 import { IState, reset, getRecipeDetailsById, deleteRecipe } from './reducer';

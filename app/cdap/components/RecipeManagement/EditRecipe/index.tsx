@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ * Copyright © 2023 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,27 +14,21 @@
  * the License.
  */
 
-import React, { useState, ChangeEvent, useRef, FormEvent, useEffect, useReducer } from 'react';
+import React, { useState, ChangeEvent, useRef, FormEvent, useEffect } from 'react';
 import styled from 'styled-components';
+import { debounce } from 'lodash';
+import T from 'i18n-react';
+
 import RecipeForm from 'components/RecipeManagement/RecipeForm';
 import {
   IEditRecipeProps,
   IRecipeData,
   IRecipeNameErrorData,
 } from 'components/RecipeManagement/types';
-import { debounce } from 'lodash';
-import { getRecipeByNameService, updateRecipeService } from 'components/RecipeManagement/services';
-import T from 'i18n-react';
 import { ActionType } from 'components/RecipeList/types';
 import MyDataPrepApi from 'api/dataprep';
 import { getCurrentNamespace } from 'services/NamespaceStore';
-import {
-  reducer,
-  defaultInitialState,
-  Actions,
-  // noErrorState,
-} from 'components/RecipeManagement/reducer';
-import useFetch from 'components/RecipeManagement/EditRecipe/useFetch';
+import useFetch from 'services/react/customHooks/useFetch';
 
 const StyledEditFormWrapper = styled.div`
   margin-top: 30px;
@@ -42,6 +36,10 @@ const StyledEditFormWrapper = styled.div`
 
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
+const noErrorState: IRecipeNameErrorData = {
+  isRecipeNameError: false,
+  recipeNameErrorMessage: '',
+};
 
 export default function({
   selectedRecipe,
@@ -50,7 +48,6 @@ export default function({
   setRecipeFormOpen,
   setIsRecipeListUpdated,
 }: IEditRecipeProps) {
-  // const [editRecipeState, dispatch] = useReducer(reducer, defaultInitialState);
   const [apiParams, setApiParams] = useState({
     getRecipeByNameParams: {
       context: '',
@@ -62,48 +59,47 @@ export default function({
     },
   });
 
-  const [isSaveDisabled, setIsSaveDisabled] = useState<boolean>(true);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [recipeFormData, setRecipeFormData] = useState<IRecipeData>({
     recipeName: '',
     description: '',
     directives: [],
   });
+  const [recipeNameErrorData, setRecipeNameErrorDataState] = useState(noErrorState);
 
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
-  const noErrorState: IRecipeNameErrorData = {
-    isRecipeNameError: false,
-    recipeNameErrorMessage: '',
-  };
-
-  const [recipeNameErrorData, setRecipeNameErrorDataState] = useState(noErrorState);
-
   const { response: recipeByNameResponse, error: recipeByNameError } = useFetch(
     MyDataPrepApi.getRecipeByName,
-    apiParams.getRecipeByNameParams,
-    '',
-    'getRecipeByName'
+    apiParams.getRecipeByNameParams
   );
 
   const { response: updateRecipeResponse, error: updateRecipeError } = useFetch(
     MyDataPrepApi.updateRecipe,
     apiParams.updateRecipeParams,
-    '',
-    'updateRecipe'
+    {
+      recipeName: recipeFormData.recipeName,
+      description: recipeFormData.description,
+      directives: recipeFormData.directives,
+    }
   );
 
   useEffect(() => {
     if (recipeByNameResponse) {
-      setRecipeNameErrorData(
+      updateRecipeNameErrorData(
         {
           isRecipeNameError: true,
           recipeNameErrorMessage: T.translate(`${PREFIX}.sameNameErrorMessage`).toString(),
         },
         recipeFormData
       );
-    } else if (recipeByNameError) {
+    }
+  }, [recipeByNameResponse]);
+
+  useEffect(() => {
+    if (recipeByNameError) {
       if (recipeByNameError.statusCode === 404) {
-        setRecipeNameErrorData(noErrorState, recipeFormData);
+        updateRecipeNameErrorData(noErrorState, recipeFormData);
       } else {
         setSnackbar({
           open: true,
@@ -112,11 +108,11 @@ export default function({
         });
       }
     }
-  }, [recipeByNameResponse, recipeByNameError]);
+  }, [recipeByNameError]);
 
   useEffect(() => {
     if (updateRecipeResponse) {
-      setRecipeNameErrorData(noErrorState);
+      updateRecipeNameErrorData(noErrorState);
       setRecipeFormOpen(false);
       setSnackbar({
         open: true,
@@ -124,7 +120,11 @@ export default function({
         message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeUpdateSuccessMessage`)}`,
       });
       setIsRecipeListUpdated(true);
-    } else if (updateRecipeError) {
+    }
+  }, [updateRecipeResponse]);
+
+  useEffect(() => {
+    if (updateRecipeError) {
       setRecipeFormOpen(false);
       setSnackbar({
         open: true,
@@ -132,7 +132,7 @@ export default function({
         message: (updateRecipeError as Record<string, string>).message,
       });
     }
-  }, [updateRecipeResponse, updateRecipeError]);
+  }, [updateRecipeError]);
 
   useEffect(() => {
     if (selectedRecipe) {
@@ -143,7 +143,7 @@ export default function({
     }
   }, [selectedRecipe]);
 
-  const setRecipeNameErrorData = (
+  const updateRecipeNameErrorData = (
     recipeNameError: IRecipeNameErrorData,
     formData: IRecipeData = recipeFormData
   ) => {
@@ -185,14 +185,17 @@ export default function({
   };
 
   /*
-  In this function we are validating recipe name input filed
-  (whether recipe name already exists or not and recipe name without alphanumeric characters)
-   based on the result we are showing the helper text
-  */
+   * In this function we are validating recipe name input field by storing
+   * debounce function in a ref so that it can persist across renders
+   * and not get recreated on each render
+   * (whether recipe name already exists or not and recipe name without alphanumeric characters)
+   * and based on the result we are showing the helper text
+   */
+
   const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeData) => {
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
-        setRecipeNameErrorData({
+        updateRecipeNameErrorData({
           isRecipeNameError: true,
           recipeNameErrorMessage: T.translate(`${PREFIX}.validationErrorMessage`).toString(),
         });
@@ -206,7 +209,7 @@ export default function({
             },
           });
         } else {
-          setRecipeNameErrorData(noErrorState, formData);
+          updateRecipeNameErrorData(noErrorState, formData);
         }
       }
     }, 500)
@@ -217,45 +220,44 @@ export default function({
     onRecipeDataSave(recipeFormData);
   };
 
-  const onUpdateRecipeResponse = () => {
-    setRecipeNameErrorData(noErrorState);
-    setRecipeFormOpen(false);
-    setSnackbar({
-      open: true,
-      isSuccess: true,
-      message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeUpdateSuccessMessage`)}`,
-    });
-    setIsRecipeListUpdated(true);
-  };
-
-  const onUpdateRecipeError = (err: Record<string, unknown>) => {
-    setRecipeFormOpen(false);
-    setSnackbar({
-      open: true,
-      isSuccess: false,
-      message: (err.response as Record<string, string>).message,
-    });
-  };
-
   const onRecipeDataSave = (recipeFormData: IRecipeData) => {
     const payload = {
       recipeName: recipeFormData.recipeName,
       description: recipeFormData.description,
       directives: recipeFormData.directives,
     };
-    // updateRecipeService({
-    //   selectedRecipe,
-    //   payload,
-    //   onUpdateRecipeResponse,
-    //   onUpdateRecipeError,
-    // });
-    setApiParams({
-      ...apiParams,
-      updateRecipeParams: {
-        context: getCurrentNamespace(),
-        recipe_id: selectedRecipe.recipeId.recipeId,
+    const params = {
+      context: getCurrentNamespace(),
+      recipe_id: selectedRecipe.recipeId.recipeId,
+    };
+    // this API call will be removed from here and will be using it from useFetch later
+    MyDataPrepApi.updateRecipe(params, payload).subscribe(
+      () => {
+        updateRecipeNameErrorData(noErrorState);
+        setRecipeFormOpen(false);
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeUpdateSuccessMessage`)}`,
+        });
+        setIsRecipeListUpdated(true);
       },
-    });
+      (err: Record<string, unknown>) => {
+        setRecipeFormOpen(false);
+        setSnackbar({
+          open: true,
+          isSuccess: false,
+          message: (err.response as Record<string, string>).message,
+        });
+      }
+    );
+    // setApiParams({
+    //   ...apiParams,
+    //   updateRecipeParams: {
+    //     context: getCurrentNamespace(),
+    //     recipe_id: selectedRecipe.recipeId.recipeId,
+    //   },
+    // });
   };
 
   const onRecipeDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>) => {

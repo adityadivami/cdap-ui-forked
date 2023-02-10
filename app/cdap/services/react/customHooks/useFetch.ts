@@ -16,19 +16,26 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-export default function useFetch(service, params, requestBody, serviceName) {
+export default function useFetch(service, params, requestBody?) {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
+    /*
+     * here to avoid the API calling for the first time when useEffect is called
+     * we are using a ref with default value true
+     * and when this useEffect is called for the first time we are making this value false
+     * and returning without calling an API so that unnecessary API call will not happen for the first time
+     */
+
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
     setResponse(null);
     setError(null);
-    service(params, requestBody).subscribe(
+    service(params, requestBody ?? {}).subscribe(
       (res) => {
         setResponse(res);
       },
@@ -36,7 +43,7 @@ export default function useFetch(service, params, requestBody, serviceName) {
         setError(err);
       }
     );
-  }, [params, serviceName]);
+  }, [params]);
 
   return { response, error };
 }
