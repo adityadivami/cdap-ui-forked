@@ -25,12 +25,17 @@ import RecipeForm from 'components/RecipeManagement/RecipeForm';
 import {
   ICreateRecipeProps,
   IRecipeFormData,
-  IRecipeNameErrorData
+  IRecipeNameErrorData,
 } from 'components/RecipeManagement/types';
 import { getCurrentNamespace } from 'services/NamespaceStore';
 import useFetch from 'services/react/customHooks/useFetch';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
+/*
+ * This is a regular expression which validates the recipe name
+ * should only allow alpha numeric and should not allow special characters
+ * for example: recipe1 - will be allowed , recipe@ - will not be allowed
+ */
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
 export const noErrorState: IRecipeNameErrorData = {
   isRecipeNameError: false,
@@ -64,14 +69,12 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
 
   const { response: recipeByNameResponse, error: recipeByNameError } = useFetch(
     MyDataPrepApi.getRecipeByName,
-    apiParams.getRecipeByNameParams,
-    'getRecipeByName'
+    apiParams.getRecipeByNameParams
   );
 
   const { response: createRecipeResponse, error: createRecipeError } = useFetch(
     MyDataPrepApi.createRecipe,
     apiParams.createRecipeParams,
-    'createRecipe',
     {
       recipeName: recipeFormData.recipeName,
       description: recipeFormData.description,
@@ -91,10 +94,9 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         recipeFormData
       );
     }
-   
   }, [recipeByNameResponse]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (recipeByNameError) {
       if (recipeByNameError.statusCode === 404) {
         updateRecipeNameErrorData(noErrorState, recipeFormData);
@@ -106,7 +108,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         });
       }
     }
-  }, [recipeByNameError])
+  }, [recipeByNameError]);
 
   // This useEffect is for handling createRecipe API call response and error
 
@@ -117,7 +119,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         open: true,
         isSuccess: true,
         message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeSaveSuccessMessage`)}`,
-      })
+      });
     }
   }, [createRecipeResponse]);
 
@@ -128,7 +130,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
         open: true,
         isSuccess: false,
         message: (createRecipeError.response as Record<string, string>).message,
-      })
+      });
     }
   }, [createRecipeError]);
 

@@ -16,7 +16,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-export default function useFetch(service, params, serviceName, requestBody?) {
+export default function useFetch(service, params, requestBody?) {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
   const isFirstRender = useRef(true);
@@ -43,7 +43,7 @@ export default function useFetch(service, params, serviceName, requestBody?) {
         setError(err);
       }
     );
-  }, [params, serviceName]);
+  }, [params]);
 
   return { response, error };
 }
