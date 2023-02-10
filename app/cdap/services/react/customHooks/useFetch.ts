@@ -22,7 +22,13 @@ export default function useFetch(service, params, serviceName, requestBody?) {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    // add comment
+    /*
+     * here to avoid the API calling for the first time when useEffect is called
+     * we are using a ref with default value true
+     * and when this useEffect is called for the first time we are making this value false
+     * and returning without calling an API so that unnecessary API call will not happen for the first time
+     */
+
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;

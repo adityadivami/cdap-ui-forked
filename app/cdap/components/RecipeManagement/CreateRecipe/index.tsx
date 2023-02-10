@@ -76,6 +76,8 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     }
   );
 
+  // This useEffect is for handling getRecipeByName API call response and error
+
   useEffect(() => {
     if (recipeByNameResponse) {
       setRecipeNameErrorData(
@@ -98,6 +100,8 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
       }
     }
   }, [recipeByNameResponse, recipeByNameError]);
+
+  // This useEffect is for handling createRecipe API call response and error
 
   useEffect(() => {
     if (createRecipeResponse) {
@@ -177,9 +181,11 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
   };
 
   /*
-   * In this function we are validating recipe name input filed
+   * In this function we are validating recipe name input field by storing
+   * debounce function in a ref so that it can persist across renders
+   * and not get recreated on each render
    * (whether recipe name already exists or not and recipe name without alphanumeric characters)
-   * based on the result we are showing the helper text
+   * and based on the result we are showing the helper text
    */
 
   const validateIfRecipeNameExists = useRef(
