@@ -27,6 +27,24 @@ import {
 } from '@material-ui/core';
 import styled from 'styled-components';
 
+interface IDataTableProps {
+  rows: IRow[];
+  columns: IColumn[];
+  Container: any;
+  getTableHeaderCell: (label: string) => () => JSX.Element;
+}
+
+export interface IRow {
+  serialNumber: string;
+  recipeStep: string;
+}
+
+export interface IColumn {
+  name: string;
+  value: string;
+  getCellRenderer: ({ value, row }: { value: string; row?: IRow }) => () => JSX.Element;
+}
+
 export const DataTableContainer = styled(TableContainer)`
   &&& {
     max-height: 100%;
@@ -68,9 +86,14 @@ export const DataTableContainer = styled(TableContainer)`
   }
 `;
 
-export default function DataTable({ rows, columns, TableContainer, getTableHeaderCell }) {
+export default function DataTable({
+  rows,
+  columns,
+  Container,
+  getTableHeaderCell,
+}: IDataTableProps) {
   return (
-    <TableContainer component={Paper}>
+    <Container component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
@@ -91,7 +114,7 @@ export default function DataTable({ rows, columns, TableContainer, getTableHeade
               {columns.map((column) => {
                 const { name, getCellRenderer } = column;
                 const value = row[name];
-                const BodyCell = getCellRenderer({ row, value });
+                const BodyCell = getCellRenderer({ value, row });
                 return (
                   <TableCell key={`data-table-body-cell-${name}`}>
                     <BodyCell />
@@ -102,6 +125,6 @@ export default function DataTable({ rows, columns, TableContainer, getTableHeade
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </Container>
   );
 }

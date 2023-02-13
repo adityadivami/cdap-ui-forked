@@ -20,7 +20,7 @@ import { IconButton, Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styled from 'styled-components';
 
-import DataTable, { DataTableContainer } from 'components/WranglerV2/DataTable';
+import DataTable, { DataTableContainer, IColumn, IRow } from 'components/WranglerV2/DataTable';
 
 interface IRecipeStepsTableProps {
   recipeSteps: string[];
@@ -30,11 +30,6 @@ interface IRecipeStepsColumnCellProps {
   BodyCell: () => JSX.Element;
   prefix: string;
   handleClick: () => void;
-}
-
-interface IRow {
-  serialNumber: string;
-  recipeStep: string;
 }
 
 export const RecipeStepCellWrapper = styled.div`
@@ -105,7 +100,7 @@ const RecipeStepsColumnCell = ({ BodyCell, prefix, handleClick }: IRecipeStepsCo
 );
 
 export default function RecipeStepsTable({ recipeSteps }: IRecipeStepsTableProps) {
-  const rows = recipeSteps.map((recipeStep: string, index: number) => ({
+  const rows: IRow[] = recipeSteps.map((recipeStep: string, index: number) => ({
     serialNumber: String(index + 1).padStart(2, '0'),
     recipeStep,
   }));
@@ -114,7 +109,7 @@ export default function RecipeStepsTable({ recipeSteps }: IRecipeStepsTableProps
     // do nothing
   };
 
-  const getRecipeStepCell = ({ row, value }: { row: IRow; value: string }) => () => {
+  const getRecipeStepCell = ({ value, row }: { value: string; row: IRow }) => () => {
     const prefix = value.split("'")[0];
     const suffix = value.substr(prefix.length);
     const BodyCell = getTableBodyCell({ value: suffix });
@@ -128,7 +123,7 @@ export default function RecipeStepsTable({ recipeSteps }: IRecipeStepsTableProps
     );
   };
 
-  const columns = [
+  const columns: IColumn[] = [
     {
       name: 'serialNumber',
       value: '#',
@@ -145,7 +140,7 @@ export default function RecipeStepsTable({ recipeSteps }: IRecipeStepsTableProps
     <DataTable
       rows={rows}
       columns={columns}
-      TableContainer={RecipeStepsTableContainer}
+      Container={RecipeStepsTableContainer}
       getTableHeaderCell={getTableHeaderCell}
     />
   );
