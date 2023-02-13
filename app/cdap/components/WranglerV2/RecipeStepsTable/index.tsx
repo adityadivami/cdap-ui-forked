@@ -22,6 +22,21 @@ import styled from 'styled-components';
 
 import DataTable, { DataTableContainer } from 'components/WranglerV2/DataTable';
 
+interface IRecipeStepsTableProps {
+  recipeSteps: string[];
+}
+
+interface IRecipeStepsColumnCellProps {
+  BodyCell: () => JSX.Element;
+  prefix: string;
+  handleClick: () => void;
+}
+
+interface IRow {
+  serialNumber: string;
+  recipeStep: string;
+}
+
 export const RecipeStepCellWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -62,7 +77,7 @@ export const RecipeStepsTableContainer = styled(DataTableContainer)`
   }
 `;
 
-export const getTableBodyCell = ({ value }) => () => (
+export const getTableBodyCell = ({ value }: { value: string }) => () => (
   <Typography component="span" variant="body2">
     {value}
   </Typography>
@@ -74,34 +89,42 @@ export const getTableHeaderCell = (label: string) => () => (
   </Typography>
 );
 
-export default function RecipeStepsTable({ recipeSteps }) {
+const RecipeStepsColumnCell = ({ BodyCell, prefix, handleClick }: IRecipeStepsColumnCellProps) => (
+  <RecipeStepCellWrapper>
+    <div className="cell-content-div">
+      <Typography component="span" variant="body1">
+        {prefix}
+      </Typography>
+      &nbsp;
+      <BodyCell />
+    </div>
+    <IconButton onClick={handleClick}>
+      <DeleteOutlineIcon />
+    </IconButton>
+  </RecipeStepCellWrapper>
+);
+
+export default function RecipeStepsTable({ recipeSteps }: IRecipeStepsTableProps) {
   const rows = recipeSteps.map((recipeStep: string, index: number) => ({
-    serialNumber: String(index),
+    serialNumber: String(index + 1).padStart(2, '0'),
     recipeStep,
   }));
 
-  const handleDeleteIconClick = () => {
+  const handleDeleteIconClick = (row: IRow) => {
     // do nothing
   };
 
-  const getRecipeStepCell = ({ value }) => () => {
+  const getRecipeStepCell = ({ row, value }: { row: IRow; value: string }) => () => {
     const prefix = value.split("'")[0];
     const suffix = value.substr(prefix.length);
-
     const BodyCell = getTableBodyCell({ value: suffix });
+
     return (
-      <RecipeStepCellWrapper>
-        <div className="cell-content-div">
-          <Typography component="span" variant="body1">
-            {prefix}
-          </Typography>
-          &nbsp;
-          <BodyCell />
-        </div>
-        <IconButton onClick={handleDeleteIconClick}>
-          <DeleteOutlineIcon />
-        </IconButton>
-      </RecipeStepCellWrapper>
+      <RecipeStepsColumnCell
+        BodyCell={BodyCell}
+        prefix={prefix}
+        handleClick={() => handleDeleteIconClick(row)}
+      />
     );
   };
 

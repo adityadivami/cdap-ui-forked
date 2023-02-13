@@ -91,7 +91,7 @@ export default function DataTable({ rows, columns, TableContainer, getTableHeade
               {columns.map((column) => {
                 const { name, getCellRenderer } = column;
                 const value = row[name];
-                const BodyCell = getCellRenderer({ value });
+                const BodyCell = getCellRenderer({ row, value });
                 return (
                   <TableCell key={`data-table-body-cell-${name}`}>
                     <BodyCell />
