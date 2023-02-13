@@ -35,6 +35,13 @@ interface IRecipeTableRowProps {
   dispatch: (action: any) => void;
 }
 
+export const getTestIdString = (label: string) => {
+  return label
+    .toLowerCase()
+    .split(' ')
+    .join('-');
+};
+
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
 export const RecipeTableRow = ({
@@ -166,10 +173,7 @@ export const RecipeTableRow = ({
       <div
         className="grid-row"
         onClick={!showAllColumns && selectRecipeHandler}
-        data-testid={`${recipe.recipeName
-          .toLowerCase()
-          .split(' ')
-          .join('-')}-recipe-row`}
+        data-testid={`${getTestIdString(recipe.recipeName)}-recipe-row`}
       >
         <div>{recipe.recipeName}</div>
         <div>{recipe.recipeStepsCount}</div>
@@ -178,10 +182,7 @@ export const RecipeTableRow = ({
         {showActions && (
           <span
             onClick={handleActionsClick}
-            data-testId={`kebab-icon-${recipe.recipeName
-              .toLowerCase()
-              .split(' ')
-              .join('-')}`}
+            data-testid={`kebab-icon-${getTestIdString(recipe.recipeName)}`}
           >
             <ActionsPopover
               actions={actions}

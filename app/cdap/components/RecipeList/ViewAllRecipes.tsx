@@ -75,10 +75,9 @@ export default function ViewAllRecipies() {
     if (isViewRecipeAction) {
       return <RecipeDetails selectedRecipe={recipe} />;
     }
-    if (recipe) {
-      // TODO: Here we will render Edit Recipe component once we integrate edit recipe
-      return <></>;
-    }
+
+    // TODO: Here we will render Edit Recipe Component once we integrate edit recipe
+    return null;
   };
 
   return (
