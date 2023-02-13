@@ -16,15 +16,11 @@
 
 import React from 'react';
 
-import { IconButton, Typography } from '@material-ui/core';
+import { IconButton, TableContainer, Typography } from '@material-ui/core';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import styled from 'styled-components';
+import styled, { StyledComponent } from 'styled-components';
 
 import DataTable, { DataTableContainer, IColumn, IRow } from 'components/WranglerV2/DataTable';
-
-interface IRecipeStepsTableProps {
-  recipeSteps: string[];
-}
 
 interface IRecipeStepsColumnCellProps {
   BodyCell: () => JSX.Element;
@@ -32,12 +28,18 @@ interface IRecipeStepsColumnCellProps {
   handleClick: () => void;
 }
 
+interface IRecipeStepsTableProps {
+  recipeSteps: string[];
+}
+
 export const RecipeStepCellWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-export const RecipeStepsTableContainer = styled(DataTableContainer)`
+export const RecipeStepsTableContainer: StyledComponent<typeof TableContainer, {}> = styled(
+  DataTableContainer
+)`
   &&& {
     width: 460px;
   }

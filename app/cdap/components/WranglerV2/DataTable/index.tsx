@@ -25,12 +25,18 @@ import {
   TableHead,
   TableRow,
 } from '@material-ui/core';
-import styled from 'styled-components';
+import styled, { StyledComponent } from 'styled-components';
+
+export interface IColumn {
+  name: string;
+  value: string;
+  getCellRenderer: ({ value, row }: { value: string; row?: IRow }) => () => JSX.Element;
+}
 
 interface IDataTableProps {
   rows: IRow[];
   columns: IColumn[];
-  Container: any;
+  Container: StyledComponent<typeof TableContainer, {}>;
   getTableHeaderCell: (label: string) => () => JSX.Element;
 }
 
@@ -39,13 +45,9 @@ export interface IRow {
   recipeStep: string;
 }
 
-export interface IColumn {
-  name: string;
-  value: string;
-  getCellRenderer: ({ value, row }: { value: string; row?: IRow }) => () => JSX.Element;
-}
-
-export const DataTableContainer = styled(TableContainer)`
+export const DataTableContainer: StyledComponent<typeof TableContainer, {}> = styled(
+  TableContainer
+)`
   &&& {
     max-height: 100%;
     max-width: 100%;

@@ -88,6 +88,6 @@ export const Default = Template.bind({});
 Default.args = {
   rows,
   columns,
-  TableContainer: RecipeStepsTableContainer,
+  Container: RecipeStepsTableContainer,
   getTableHeaderCell,
 };
