@@ -66,8 +66,13 @@ export const DataTableContainer: StyledComponent<typeof TableContainer, {}> = st
       text-align: left;
     }
   }
-
   .MuiTableBody-root {
+    .MuiIconButton-root {
+      padding: 0;
+      margin-top: 4px;
+      margin-right: 9px;
+      align-self: flex-start;
+    }
     .MuiTableRow-root:hover {
       background-color: #e0e0e0;
     }

@@ -55,16 +55,11 @@ export const RecipeStepsTableContainer: StyledComponent<typeof TableContainer, {
   .MuiTableBody-root {
     .MuiIconButton-root {
       display: none;
-      padding: 0;
-      margin-top: 4px;
-      margin-right: 9px;
-      align-self: flex-start;
     }
     .MuiTableRow-root:hover {
       .MuiIconButton-root {
         display: block;
       }
-
       &:has(.MuiIconButton-root) {
         .cell-content-div {
           width: 80%;

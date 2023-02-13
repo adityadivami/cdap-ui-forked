@@ -21,12 +21,11 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import DataTable from 'components/WranglerV2/DataTable';
+import DataTable, { DataTableContainer } from 'components/WranglerV2/DataTable';
 import {
   getTableBodyCell,
   getTableHeaderCell,
   RecipeStepCellWrapper,
-  RecipeStepsTableContainer,
 } from 'components/WranglerV2/RecipeStepsTable';
 
 export default {
@@ -88,6 +87,6 @@ export const Default = Template.bind({});
 Default.args = {
   rows,
   columns,
-  Container: RecipeStepsTableContainer,
+  Container: DataTableContainer,
   getTableHeaderCell,
 };
