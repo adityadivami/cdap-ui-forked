@@ -99,7 +99,6 @@ export const StyledTextAreaAutosize = styled(TextareaAutosize)`
   :hover {
     border: 1px solid #000000;
   }
-
   ::placeholder {
     color: ${grey[600]};
   }
