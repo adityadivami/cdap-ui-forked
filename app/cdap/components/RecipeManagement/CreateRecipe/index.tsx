@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
 import T from 'i18n-react';
 import { debounce } from 'lodash';
@@ -31,11 +31,13 @@ import { getCurrentNamespace } from 'services/NamespaceStore';
 import useFetch from 'services/react/customHooks/useFetch';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
+
 /*
  * This is a regular expression which validates the recipe name
  * should only allow alpha numeric and should not allow special characters
  * for example: recipe1 - will be allowed , recipe@ - will not be allowed
  */
+
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
 export const noErrorState: IRecipeNameErrorData = {
   isRecipeNameError: false,
@@ -160,7 +162,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     handleSaveButtonMode(formData);
   };
 
-  const onRecipeNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onRecipeNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     handleRecipeFormData({
       ...recipeFormData,
       recipeName: event.target.value,
@@ -171,7 +173,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     });
   };
 
-  const onRecipeDescriptionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onRecipeDescriptionChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     handleRecipeFormData({
       ...recipeFormData,
       description: event.target.value,

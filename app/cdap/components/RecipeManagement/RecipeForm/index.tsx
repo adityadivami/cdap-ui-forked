@@ -59,7 +59,7 @@ export default function RecipeForm({
           <StyledLabel
             data-testid="recipe-form-name-label"
             component="label"
-            for="recipe-form-name-field"
+            htmlFor="recipe-form-name-field"
           >
             {isCreateRecipeAction && T.translate(`${PREFIX}.createRecipeNameLabel`)}
             {!isCreateRecipeAction && T.translate(`${PREFIX}.editRecipeNameLabel`)}
@@ -85,7 +85,7 @@ export default function RecipeForm({
             <Label
               data-testid="recipe-form-description-label"
               component="label"
-              for="recipe-form-description-field"
+              htmlFor="recipe-form-description-field"
             >
               {T.translate(`${PREFIX}.description`)}
             </Label>
