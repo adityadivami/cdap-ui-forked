@@ -59,6 +59,7 @@ export const RecipeStepsTableContainer: StyledComponent<typeof TableContainer, {
 
       .MuiSvgIcon-root {
         color: ${grey[600]};
+        transform: scale(1.325);
       }
     }
     .MuiTableRow-root:hover {
@@ -96,7 +97,7 @@ const RecipeStepsColumnCell = ({ BodyCell, prefix, handleClick }: IRecipeStepsCo
       <BodyCell />
     </div>
     <IconButton onClick={handleClick}>
-      <DeleteOutlineIcon />
+      <DeleteOutlineIcon fontSize='medium' />
     </IconButton>
   </RecipeStepCellWrapper>
 );
