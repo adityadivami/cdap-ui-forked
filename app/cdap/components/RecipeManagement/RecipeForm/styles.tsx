@@ -14,10 +14,9 @@
  * the License.
  */
 
-import styled, { css } from 'styled-components';
-import { TextField, Typography, Box } from '@material-ui/core';
-import { TextareaAutosize } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
+import { TextField, Typography, Box, TextareaAutosize } from '@material-ui/core';
+import styled, { css } from 'styled-components';
 import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
 import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';
 
@@ -42,6 +41,7 @@ export const ErrorLabel = styled(Label)`
 `;
 
 export const StyledTextField = styled(TextField)`
+  width: 460px;
   input::placeholder {
     color: ${grey[600]};
     opacity: 1;
@@ -57,7 +57,6 @@ export const StyledTextField = styled(TextField)`
     line-height: 150%;
     letter-spacing: 0.15px;
   }
-  width: 460px;
 `;
 
 export const ErrorTextField = styled(StyledTextField)`
@@ -78,20 +77,20 @@ export const NormalTextField = styled(StyledTextField)`
 export const StyledTextAreaAutosize = styled(TextareaAutosize)`
   border-color: ${grey[300]};
   border-radius: 4px;
-  :focus-visible {
-    outline: unset !important;
-    border: 1px solid #000000;
-  }
   font-size: 14px;
-  height: 100px !important;
-  :hover {
-    border: 1px solid #000000;
-  }
+  height: 100px;
   letter-spacing: 0.15px;
   line-height: 150%;
   padding: 10.5px 14px;
   resize: none;
   width: 460px;
+  :focus-visible {
+    outline: unset;
+    border: 1px solid #000000;
+  }
+  :hover {
+    border: 1px solid #000000;
+  }
   ::placeholder {
     color: ${grey[600]};
   }

@@ -15,8 +15,8 @@
  */
 
 import React, { useState, ChangeEvent, useRef, FormEvent, useEffect } from 'react';
-import styled from 'styled-components';
 import { debounce } from 'lodash';
+import styled from 'styled-components';
 import T from 'i18n-react';
 
 import RecipeForm from 'components/RecipeManagement/RecipeForm';

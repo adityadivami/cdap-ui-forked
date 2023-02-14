@@ -54,18 +54,20 @@ export default function RecipeForm({
 
   return (
     <>
-      <form
-        onSubmit={(event: FormEvent<HTMLFormElement>) => onFormSubmit(event)}
-        data-testid="recipe-form-parent"
-      >
+      <form onSubmit={onFormSubmit} data-testid="recipe-form-parent">
         <FormFieldWrapper>
-          <StyledLabel data-testid="recipe-form-name-label" component="label">
+          <StyledLabel
+            data-testid="recipe-form-name-label"
+            component="label"
+            htmlFor="recipe-form-name-field"
+          >
             {recipeFormAction === ActionType.CREATE_RECIPE &&
               T.translate(`${PREFIX}.createRecipeNameLabel`)}
             {!(recipeFormAction === ActionType.CREATE_RECIPE) &&
               T.translate(`${PREFIX}.editRecipeNameLabel`)}
           </StyledLabel>
           <StyledTextField
+            id="recipe-form-name-field"
             autoFocus={true}
             aria-label="recipe form recipe name textfield"
             data-testid="recipe-form-name-field"
@@ -85,10 +87,15 @@ export default function RecipeForm({
         </FormFieldWrapper>
         <FormFieldWrapper>
           <FormControl variant="outlined">
-            <Label data-testid="recipe-form-description-label" component="label">
+            <Label
+              data-testid="recipe-form-description-label"
+              component="label"
+              htmlFor="recipe-form-description-field"
+            >
               {T.translate(`${PREFIX}.description`)}
             </Label>
             <StyledTextAreaAutosize
+              id="recipe-form-description-field"
               aria-label="recipe form description textarea"
               data-testid="recipe-form-description-field"
               defaultValue={recipeFormData.description}
