@@ -14,7 +14,7 @@
  * the License.
  */
 
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { FormControl } from '@material-ui/core';
 import T from 'i18n-react';
 import {
@@ -113,7 +113,7 @@ export default function RecipeForm({
           </SaveButton>
           <CancelButton
             variant="outlined"
-            onClick={() => onCancel()}
+            onClick={onCancel}
             data-testid="recipe-form-cancel-button"
           >
             {T.translate(`${PREFIX}.cancel`)}
