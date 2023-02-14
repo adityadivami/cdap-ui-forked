@@ -18,12 +18,12 @@ import { useState, useEffect, useRef } from 'react';
 
 interface ApiResponse<T> {
   response: T;
-  error: Record<string, unknown> | null;
+  error: Record<string, unknown>;
 }
 
 export default function useFetch<T>(service, params, requestBody?): ApiResponse<T> {
-  const [response, setResponse] = useState<T | null>(null);
-  const [error, setError] = useState<Record<string, unknown> | null>(null);
+  const [response, setResponse] = useState<T>(null);
+  const [error, setError] = useState<Record<string, unknown>>(null);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
@@ -41,7 +41,8 @@ export default function useFetch<T>(service, params, requestBody?): ApiResponse<
     setError(null);
     service(params, requestBody ?? {}).subscribe(
       (res) => {
-        setResponse(res);
+        const apiResponse = res || true;
+        setResponse(apiResponse);
       },
       (err: Record<string, unknown>) => {
         setError(err);
