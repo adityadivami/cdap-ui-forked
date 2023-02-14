@@ -14,11 +14,18 @@
  * the License.
  */
 
-import { grey } from '@material-ui/core/colors';
+import { grey, red } from '@material-ui/core/colors';
 import { TextField, Typography, Box, TextareaAutosize } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
 import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';
+
+export const buttonStyles = css`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 0.15px;
+`;
 
 export const FormFieldWrapper = styled(Box)`
   margin-bottom: 15px;
@@ -61,10 +68,10 @@ export const StyledTextField = styled(TextField)`
 
 export const ErrorTextField = styled(StyledTextField)`
   .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #ff8a80;
+    border: 1px solid ${red.A100};
   }
   .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #ff8a80;
+    border: 1px solid ${red.A100};
   }
 `;
 
@@ -96,21 +103,14 @@ export const StyledTextAreaAutosize = styled(TextareaAutosize)`
   }
 `;
 
-export const StyledButton = css`
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 150%;
-  letter-spacing: 0.15px;
-`;
-
 export const CancelButton = styled(PrimaryOutlinedButton)`
-  ${StyledButton}
+  ${buttonStyles}
   color: #3367D6;
   width: 92px;
 `;
 
 export const SaveButton = styled(PrimaryContainedButton)`
-  ${StyledButton}
+  ${buttonStyles}
   background: #3367d6;
   margin-right: 20px;
   width: 70px;

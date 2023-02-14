@@ -45,7 +45,7 @@ export enum SortOrder {
 }
 
 export enum ActionType {
-  CREATE_RECIPE = 'createRecipe',
-  EDIT_RECIPE = 'editRecipe',
-  VIEW_RECIPE = 'viewRecipe',
+  CREATE_RECIPE = 'create recipe',
+  EDIT_RECIPE = 'edit recipe',
+  VIEW_RECIPE = 'view recipe',
 }

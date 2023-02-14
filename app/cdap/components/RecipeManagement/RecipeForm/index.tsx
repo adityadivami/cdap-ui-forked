@@ -14,6 +14,8 @@
  * the License.
  */
 
+import React from 'react';
+import T from 'i18n-react';
 import { FormControl } from '@material-ui/core';
 import {
   CancelButton,
@@ -28,8 +30,6 @@ import {
   StyledTextAreaAutosize,
 } from 'components/RecipeManagement/RecipeForm/styles';
 import { IRecipeFormProps } from 'components/RecipeManagement/types';
-import T from 'i18n-react';
-import React, { FormEvent } from 'react';
 import { ActionType } from 'components/RecipeList/types';
 
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
@@ -47,10 +47,10 @@ export default function RecipeForm({
 }: IRecipeFormProps) {
   const StyledLabel = isRecipeNameError ? ErrorLabel : Label;
   const StyledTextField = isRecipeNameError ? ErrorTextField : NormalTextField;
-  const StyledFormButtonWrapper =
-    recipeFormAction === ActionType.CREATE_RECIPE
-      ? CreateRecipeFormButtonWrapper
-      : EditRecipeFormButtonWrapper;
+  const isCreateRecipeAction = recipeFormAction === ActionType.CREATE_RECIPE;
+  const StyledFormButtonWrapper = isCreateRecipeAction
+    ? CreateRecipeFormButtonWrapper
+    : EditRecipeFormButtonWrapper;
 
   return (
     <>
@@ -61,15 +61,13 @@ export default function RecipeForm({
             component="label"
             htmlFor="recipe-form-name-field"
           >
-            {recipeFormAction === ActionType.CREATE_RECIPE &&
-              T.translate(`${PREFIX}.createRecipeNameLabel`)}
-            {!(recipeFormAction === ActionType.CREATE_RECIPE) &&
-              T.translate(`${PREFIX}.editRecipeNameLabel`)}
+            {isCreateRecipeAction && T.translate(`${PREFIX}.createRecipeNameLabel`)}
+            {!isCreateRecipeAction && T.translate(`${PREFIX}.editRecipeNameLabel`)}
           </StyledLabel>
           <StyledTextField
             id="recipe-form-name-field"
             autoFocus={true}
-            aria-label="recipe form recipe name textfield"
+            aria-label="Recipe Name"
             data-testid="recipe-form-name-field"
             defaultValue={recipeFormData.recipeName}
             error={isRecipeNameError}
@@ -96,10 +94,10 @@ export default function RecipeForm({
             </Label>
             <StyledTextAreaAutosize
               id="recipe-form-description-field"
-              aria-label="recipe form description textarea"
+              aria-label="Recipe Description"
               data-testid="recipe-form-description-field"
               defaultValue={recipeFormData.description}
-              minRows={3}
+              minRows={4}
               onChange={onRecipeDescriptionChange}
               placeholder={T.translate(`${PREFIX}.descriptionPlaceholder`)}
               required
@@ -119,7 +117,7 @@ export default function RecipeForm({
           <CancelButton
             variant="outlined"
             color="primary"
-            onClick={() => onCancel()}
+            onClick={onCancel}
             data-testid="recipe-form-cancel-button"
           >
             {T.translate(`${PREFIX}.cancel`)}
