@@ -54,10 +54,7 @@ export default function RecipeForm({
 
   return (
     <>
-      <form
-        onSubmit={(event: FormEvent<HTMLFormElement>) => onFormSubmit(event)}
-        data-testid="recipe-form-parent"
-      >
+      <form onSubmit={onFormSubmit} data-testid="recipe-form-parent">
         <FormFieldWrapper>
           <StyledLabel
             data-testid="recipe-form-name-label"
