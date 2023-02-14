@@ -16,9 +16,14 @@
 
 import { useState, useEffect, useRef } from 'react';
 
-export default function useFetch(service, params, requestBody?) {
-  const [response, setResponse] = useState(null);
-  const [error, setError] = useState(null);
+interface ApiResponse<T> {
+  response: T;
+  error: Record<string, unknown> | null;
+}
+
+export default function useFetch<T>(service, params, requestBody?): ApiResponse<T> {
+  const [response, setResponse] = useState<T | null>(null);
+  const [error, setError] = useState<Record<string, unknown> | null>(null);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
@@ -28,7 +33,6 @@ export default function useFetch(service, params, requestBody?) {
      * and when this useEffect is called for the first time we are making this value false
      * and returning without calling an API so that unnecessary API call will not happen for the first time
      */
-
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;

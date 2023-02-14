@@ -33,9 +33,9 @@ import useFetch from 'services/react/customHooks/useFetch';
 const PREFIX = 'features.WranglerNewUI.RecipeForm.labels';
 
 /*
- * This is a regular expression which validates the recipe name
+ * This regular expression which validates the recipe name
  * should only allow alpha numeric and should not allow special characters
- * for example: recipe1 - will be allowed , recipe@ - will not be allowed
+ * for e.g. recipe1 - will be allowed , recipe@ - will not be allowed
  */
 
 const recipeNameRegEx = /^[a-z\d\s]+$/i;
@@ -66,7 +66,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
    * TODO: This static data has to be removed when we have actual API data,
    * then directly we will get that data from store as directives
    */
-
   const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
 
   const { response: recipeByNameResponse, error: recipeByNameError } = useFetch(
@@ -84,8 +83,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     }
   );
 
-  // This useEffect is for handling getRecipeByName API call response and error
-
+  // This useEffect is for handling getRecipeByName API call response
   useEffect(() => {
     if (recipeByNameResponse) {
       updateRecipeNameErrorData(
@@ -98,6 +96,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     }
   }, [recipeByNameResponse]);
 
+  // This useEffect is for handling getRecipeByName API call error
   useEffect(() => {
     if (recipeByNameError) {
       if (recipeByNameError.statusCode === 404) {
@@ -112,8 +111,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     }
   }, [recipeByNameError]);
 
-  // This useEffect is for handling createRecipe API call response and error
-
+  // This useEffect is for handling createRecipe API call response
   useEffect(() => {
     if (createRecipeResponse) {
       setShowRecipeForm(false);
@@ -125,6 +123,7 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
     }
   }, [createRecipeResponse]);
 
+  // This useEffect is for handling createRecipe API call error
   useEffect(() => {
     if (createRecipeError) {
       setShowRecipeForm(false);
@@ -201,7 +200,6 @@ export default function CreateRecipe({ setShowRecipeForm, setSnackbar }: ICreate
    * (whether recipe name already exists or not and recipe name without alphanumeric characters)
    * and based on the result we are showing the helper text
    */
-
   const validateIfRecipeNameExists = useRef(
     debounce((formData: IRecipeFormData) => {
       if (formData.recipeName && !recipeNameRegEx.test(formData.recipeName)) {
