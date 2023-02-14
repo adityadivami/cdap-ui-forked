@@ -63,10 +63,7 @@ const StyledTableBodyCell = styled(TableCell)`
 
 export default function DirectivesTable({ directives }: { directives: string[] }) {
   const getSerialNumber = (recipeStepIndex: number) => {
-    if (recipeStepIndex < 10) {
-      return `0${recipeStepIndex + 1}`;
-    }
-    return `${recipeStepIndex + 1}`;
+    return String(recipeStepIndex + 1).padStart(2, '0');
   };
 
   return (
@@ -81,7 +78,7 @@ export default function DirectivesTable({ directives }: { directives: string[] }
       </DirectivesTableHeader>
       <TableBody>
         {directives.map((recipeStep, recipeStepIndex) => (
-          <StyledTableBodyRow>
+          <StyledTableBodyRow key={`${recipeStepIndex}+${recipeStep}`}>
             <StyledTableBodyCell data-testid={`selected-recipe-step-index-${recipeStepIndex}`}>
               {getSerialNumber(recipeStepIndex)}
             </StyledTableBodyCell>
