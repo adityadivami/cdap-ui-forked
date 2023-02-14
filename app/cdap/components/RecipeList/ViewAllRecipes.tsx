@@ -20,26 +20,27 @@ import Box from '@material-ui/core/Box';
 import { Link } from 'react-router-dom';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
-import RecipeList from 'components/RecipeList';
 
-import { SortBy, SortOrder } from './types';
 import { getCurrentNamespace } from 'services/NamespaceStore';
+import { SortBy, SortOrder } from 'components/RecipeList/types';
 import { IRecipe, ActionType } from 'components/RecipeList/types';
 import DrawerWidget from 'components/common/DrawerWidget';
+import EditRecipe from 'components/RecipeManagement/EditRecipe';
+import RecipeList from 'components/RecipeList';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
-import EditRecipe from 'components/RecipeManagement/EditRecipe';
 
 const PREFIX = 'features.WranglerNewUI.Recipe';
 
 const redirectToObj = `/ns/${getCurrentNamespace()}/wrangle`;
 
-const ViewAllRecipies = () => {
+export default function ViewAllRecipies() {
   const [actionType, setActionType] = useState('');
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isRecipeListUpdated, setIsRecipeListUpdated] = useState(false);
   const [recipe, setRecipe] = useState<IRecipe>();
   const [snackbarState, setSnackbar] = useSnackbar();
+  const isViewRecipeAction = actionType === ActionType.VIEW_RECIPE;
 
   useEffect(() => {
     if (snackbarState.open) {
@@ -76,9 +77,6 @@ const ViewAllRecipies = () => {
   };
 
   const getChildComponent = () => {
-    if (actionType === ActionType.VIEW_RECIPE) {
-      return <></>; /// TODO: Here we will render Recipe Detail component once we integrate Recipe Detail
-    }
     if (recipe) {
       return (
         <EditRecipe
@@ -90,6 +88,8 @@ const ViewAllRecipies = () => {
         />
       );
     }
+    // TODO: Here we will render Recipe Detail component once we integrate Recipe Detail
+    return null;
   };
 
   return (
@@ -98,17 +98,21 @@ const ViewAllRecipies = () => {
         anchor="right"
         closeClickHandler={toggleOpen}
         headingText={
-          actionType === ActionType.VIEW_RECIPE
+          isViewRecipeAction
             ? T.translate(`${PREFIX}.recipeDetails`)
             : T.translate(`${PREFIX}.editRecipe`)
         }
         showBackIcon={false}
-        showDivider={Boolean(actionType === ActionType.VIEW_RECIPE)}
+        showDivider={isViewRecipeAction}
         open={isPanelOpen}
-        headerActionTemplate={actionType === ActionType.VIEW_RECIPE && <></>}
-        dataTestId={`${actionType}-drawer-widget`}
-        children={getChildComponent()}
-      />
+        headerActionTemplate={isViewRecipeAction && <></>}
+        dataTestId={`${actionType
+          .toLowerCase()
+          .split(' ')
+          .join('-')}-drawer-widget`}
+      >
+        {getChildComponent()}
+      </DrawerWidget>
       <Box ml={4} m={2}>
         <Breadcrumbs separator="›" aria-label="breadcrumb">
           <Link underline="hover" key="2" color="inherit" to={redirectToObj}>
@@ -151,6 +155,4 @@ const ViewAllRecipies = () => {
       />
     </>
   );
-};
-
-export default ViewAllRecipies;
+}
