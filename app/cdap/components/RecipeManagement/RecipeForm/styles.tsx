@@ -15,7 +15,7 @@
  */
 
 import { Box, TextareaAutosize, TextField, Typography } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
+import { grey, red } from '@material-ui/core/colors';
 import styled, { css } from 'styled-components';
 
 import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
@@ -62,10 +62,10 @@ export const StyledTextField = styled(TextField)`
 
 export const ErrorTextField = styled(StyledTextField)`
   .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #ff8a80;
+    border: 1px solid ${red.A100};
   }
   .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-    border: 1px solid #ff8a80;
+    border: 1px solid ${red.A100};
   }
 `;
 
