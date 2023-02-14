@@ -23,9 +23,10 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow
 } from '@material-ui/core';
-import styled, { StyledComponent } from 'styled-components';
+import grey from '@material-ui/core/colors/grey';
+import styled, { css, StyledComponent } from 'styled-components';
 
 export interface IColumn {
   name: string;
@@ -45,6 +46,13 @@ export interface IRow {
   recipeStep: string;
 }
 
+const typographyBodyVariantStyles = css`
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  text-align: left;
+`;
+
 export const DataTableContainer: StyledComponent<typeof TableContainer, {}> = styled(
   TableContainer
 )`
@@ -57,7 +65,7 @@ export const DataTableContainer: StyledComponent<typeof TableContainer, {}> = st
     padding: 14px 16px;
   }
   .MuiTableHead-root {
-    background-color: #f5f5f5;
+    background-color: ${grey[100]};
     .MuiTypography-body1 {
       font-size: 12px;
       font-weight: 700;
@@ -74,21 +82,15 @@ export const DataTableContainer: StyledComponent<typeof TableContainer, {}> = st
       align-self: flex-start;
     }
     .MuiTableRow-root:hover {
-      background-color: #e0e0e0;
+      background-color: ${grey[300]};
     }
     .MuiTypography-body1 {
-      font-size: 16px;
       font-weight: 600;
-      line-height: 24px;
-      letter-spacing: 0.15px;
-      text-align: left;
+      ${typographyBodyVariantStyles}
     }
     .MuiTypography-body2 {
-      font-size: 16px;
       font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0.25px;
-      text-align: left;
+      ${typographyBodyVariantStyles}
     }
   }
 `;
