@@ -17,6 +17,7 @@
 import React from 'react';
 
 import { IconButton, TableContainer, Typography } from '@material-ui/core';
+import grey from '@material-ui/core/colors/grey';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styled, { StyledComponent } from 'styled-components';
 
@@ -55,6 +56,10 @@ export const RecipeStepsTableContainer: StyledComponent<typeof TableContainer, {
   .MuiTableBody-root {
     .MuiIconButton-root {
       display: none;
+
+      .MuiSvgIcon-root {
+        color: ${grey[600]};
+      }
     }
     .MuiTableRow-root:hover {
       .MuiIconButton-root {
@@ -128,7 +133,7 @@ export default function RecipeStepsTable({ recipeSteps }: IRecipeStepsTableProps
     },
     {
       name: 'recipeStep',
-      value: 'Recipe Steps',
+      value: 'Recipe steps',
       getCellRenderer: getRecipeStepCell,
     },
   ];

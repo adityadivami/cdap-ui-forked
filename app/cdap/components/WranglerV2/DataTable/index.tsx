@@ -84,7 +84,7 @@ export const DataTableContainer: StyledComponent<typeof TableContainer, {}> = st
       text-align: left;
     }
     .MuiTypography-body2 {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 400;
       line-height: 20px;
       letter-spacing: 0.25px;
