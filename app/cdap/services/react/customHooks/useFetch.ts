@@ -42,7 +42,8 @@ export default function useFetch<T>(service, params, requestBody?): ApiResponse<
     setError(null);
     service(params, requestBody ?? {}).subscribe(
       (res) => {
-        setResponse(res);
+        const apiResponse = res || true;
+        setResponse(apiResponse);
       },
       (err: Record<string, unknown>) => {
         setError(err);
