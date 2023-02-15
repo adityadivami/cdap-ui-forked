@@ -129,7 +129,7 @@ export default function SectionWrapper({
         showTickIcon={Boolean(columnsSelected.length)}
       >
         <SubTitle>{T.translate(`${PREFIX}.selectColumnSubTitle`)}</SubTitle>
-        {columnsSelected.length &&
+        {Boolean(columnsSelected.length) &&
           columnsSelected.map((selectedColumn, index) => {
             return (
               <ColumnName component="span">{`${index + 1}. ${selectedColumn.label}`}</ColumnName>
