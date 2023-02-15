@@ -14,22 +14,25 @@
  * the License.
  */
 
-import SectionWrapper from 'components/WranglerV2/SectionWrapper';
 import React from 'react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
+import SectionWrapper from 'components/WranglerV2/SectionWrapper';
 
 export default {
   title: 'SectionWrapper',
   component: SectionWrapper,
-};
+} as ComponentMeta<typeof SectionWrapper>;
 
 const transformationName = 'string';
 const transformationInfoLink = 'https://mui.com/material-ui/material-icons/';
 const columnsSelected: IHeaderNamesList[] = [];
 
-export function AddTransformationStepPanel(args) {
+const Template: ComponentStory<typeof SectionWrapper> = (args) => {
   return <SectionWrapper {...args} />;
-}
+};
+
+export const AddTransformationStepPanel = Template.bind({});
 
 AddTransformationStepPanel.args = {
   transformationName,
