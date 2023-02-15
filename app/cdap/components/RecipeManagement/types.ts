@@ -47,15 +47,3 @@ export interface IRecipeNameErrorData {
   isRecipeNameError: boolean;
   recipeNameErrorMessage: string;
 }
-
-export interface IGetRecipeByNameService {
-  formData: IRecipeFormData;
-  onGetRecipeByNameError: (err: Record<string, unknown>, formData: IRecipeFormData) => void;
-  onGetRecipeByNameResponse: (formData: IRecipeFormData) => void;
-}
-
-export interface ICreateRecipeService {
-  requestBody: IRecipeData;
-  onCreateRecipeError: (err: Record<string, unknown>) => void;
-  onCreateRecipeResponse: () => void;
-}
