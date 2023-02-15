@@ -14,13 +14,13 @@
  * the License.
  */
 
-import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import { grey } from '@material-ui/core/colors';
 import React from 'react';
-import SectionComponent from 'components/WranglerV2/SectionComponent';
+import { grey } from '@material-ui/core/colors';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import styled from 'styled-components';
-import T from 'i18n-react';
 import { Typography, Button, Divider } from '@material-ui/core';
+import T from 'i18n-react';
+import SectionComponent from 'components/WranglerV2/SectionComponent';
 import { IHeaderNamesList } from 'components/WranglerGrid/SelectColumnPanel/types';
 
 export interface ISectionWrapperProps {
