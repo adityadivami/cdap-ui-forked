@@ -16,15 +16,15 @@
 
 import React, { PropsWithChildren } from 'react';
 
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import { Divider, Typography } from '@material-ui/core';
 import { grey, lightGreen } from '@material-ui/core/colors';
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import styled from 'styled-components';
 
 export interface ISectionComponentProps {
-  showDivider: boolean;
   showTickIcon: boolean;
   title: string;
+  showDivider?: boolean;
 }
 
 const SectionTitle = styled(Typography)`

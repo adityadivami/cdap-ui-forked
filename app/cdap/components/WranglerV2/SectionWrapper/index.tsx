@@ -115,7 +115,7 @@ export default function SectionWrapper({
           `${columnsSelected.length}  ${T.translate(`${PREFIX}.columnsSelected`)}`}
       </SubTitle>
       <StyledDivider />
-      <SectionComponent title="Function" showDivider={true} showTickIcon={true}>
+      <SectionComponent title="Function" showDivider showTickIcon={true}>
         <TextInfoIconWrapper>
           <SectionBodyText component="span">{transformationName}</SectionBodyText>
           <a href={transformationInfoLink}>
@@ -125,7 +125,7 @@ export default function SectionWrapper({
       </SectionComponent>
       <SectionComponent
         title={T.translate(`${PREFIX}.selectColumnTitle`).toString()}
-        showDivider={true}
+        showDivider
         showTickIcon={Boolean(columnsSelected.length)}
       >
         <SubTitle>{T.translate(`${PREFIX}.selectColumnSubTitle`)}</SubTitle>
