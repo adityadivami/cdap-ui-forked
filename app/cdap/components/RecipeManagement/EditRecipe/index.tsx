@@ -74,8 +74,6 @@ export default function({
   });
   const [recipeNameErrorData, setRecipeNameErrorDataState] = useState(noErrorState);
 
-  const recipeSteps = ['uppercase: body1', 'titlecase: body2'];
-
   const { response: recipeByNameResponse, error: recipeByNameError } = useFetch(
     MyDataPrepApi.getRecipeByName,
     apiParams.getRecipeByNameParams
@@ -127,7 +125,9 @@ export default function({
       setSnackbar({
         open: true,
         isSuccess: true,
-        message: `${recipeSteps.length} ${T.translate(`${PREFIX}.recipeUpdateSuccessMessage`)}`,
+        message: `${recipeFormData.directives.length} ${T.translate(
+          `${PREFIX}.recipeUpdateSuccessMessage`
+        )}`,
       });
       setIsRecipeListUpdated(true);
     }

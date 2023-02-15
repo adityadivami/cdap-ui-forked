@@ -14,8 +14,8 @@
  * the License.
  */
 
-import { ISnackbar } from 'components/Snackbar';
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
+import { ISnackbar } from 'components/Snackbar';
 import { IRecipe } from 'components/RecipeList/types';
 
 export interface IRecipeFormProps {
@@ -50,17 +50,4 @@ export interface IEditRecipeProps {
 export interface IRecipeNameErrorData {
   isRecipeNameError: boolean;
   recipeNameErrorMessage: string;
-}
-
-export interface IGetRecipeByNameService {
-  formData: IRecipeFormData;
-  onGetRecipeByNameError: (err: Record<string, unknown>, formData: IRecipeFormData) => void;
-  onGetRecipeByNameResponse: (formData: IRecipeFormData) => void;
-}
-
-export interface IUpdateRecipeService {
-  selectedRecipe: IRecipe;
-  payload: IRecipeData;
-  onUpdateRecipeResponse: () => void;
-  onUpdateRecipeError: (err: Record<string, unknown>) => void;
 }

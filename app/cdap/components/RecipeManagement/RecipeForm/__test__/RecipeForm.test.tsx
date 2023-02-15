@@ -14,10 +14,10 @@
  *  the License.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import RecipeForm from 'components/RecipeManagement/RecipeForm';
+import { fireEvent, render, screen } from '@testing-library/react';
 import T from 'i18n-react';
+import RecipeForm from 'components/RecipeManagement/RecipeForm';
 
 describe('Test Recipe Form Component', () => {
   const mockOnFormSubmit = jest.fn();

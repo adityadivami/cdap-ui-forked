@@ -14,8 +14,8 @@
  * the License.
  */
 
+import { Box, TextField, Typography, TextareaAutosize } from '@material-ui/core';
 import { grey, red } from '@material-ui/core/colors';
-import { TextField, Typography, Box, TextareaAutosize } from '@material-ui/core';
 import styled, { css } from 'styled-components';
 import PrimaryContainedButton from 'components/shared/Buttons/PrimaryContainedButton';
 import PrimaryOutlinedButton from 'components/shared/Buttons/PrimaryOutlinedButton';

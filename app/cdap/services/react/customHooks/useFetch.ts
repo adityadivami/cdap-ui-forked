@@ -33,7 +33,6 @@ export default function useFetch<T>(service, params, requestBody?): ApiResponse<
      * and when this useEffect is called for the first time we are making this value false
      * and returning without calling an API so that unnecessary API call will not happen for the first time
      */
-
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;

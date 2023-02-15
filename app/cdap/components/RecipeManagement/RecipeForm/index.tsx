@@ -15,8 +15,8 @@
  */
 
 import React from 'react';
-import T from 'i18n-react';
 import { FormControl } from '@material-ui/core';
+import T from 'i18n-react';
 import {
   CancelButton,
   CreateRecipeFormButtonWrapper,
@@ -78,9 +78,6 @@ export default function RecipeForm({
             required
             value={recipeFormData.recipeName}
             variant="outlined"
-            inputProps={{
-              'data-testid': 'recipe-name-input',
-            }}
           />
         </FormFieldWrapper>
         <FormFieldWrapper>
@@ -116,7 +113,6 @@ export default function RecipeForm({
           </SaveButton>
           <CancelButton
             variant="outlined"
-            color="primary"
             onClick={onCancel}
             data-testid="recipe-form-cancel-button"
           >
