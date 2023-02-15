@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 Cask Data, Inc.
+ * Copyright © 2023 Cask Data, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -14,14 +14,14 @@
  * the License.
  */
 
-import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
+import React, { PropsWithChildren } from 'react';
+
+import { Divider, Typography } from '@material-ui/core';
 import { grey, lightGreen } from '@material-ui/core/colors';
+import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined';
 import styled from 'styled-components';
-import React, { ReactNode } from 'react';
-import { Typography, Divider } from '@material-ui/core';
 
 export interface ISectionComponentProps {
-  children: ReactNode | JSX.Element;
   showDivider: boolean;
   showTickIcon: boolean;
   title: string;
@@ -65,7 +65,7 @@ export default function SectionComponent({
   showDivider,
   showTickIcon,
   title,
-}: ISectionComponentProps) {
+}: PropsWithChildren<ISectionComponentProps>) {
   return (
     <>
       <TitleTextIconWrapper>
