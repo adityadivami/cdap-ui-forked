@@ -109,7 +109,7 @@ export default function SectionWrapper({
 }: ISectionWrapperProps) {
   return (
     <>
-      <SubTitle>
+      <SubTitle component="span">
         {!Boolean(columnsSelected.length) && T.translate(`${PREFIX}.noColumnsSelected`)}
         {Boolean(columnsSelected.length) &&
           `${columnsSelected.length}  ${T.translate(`${PREFIX}.columnsSelected`)}`}
