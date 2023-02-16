@@ -26,7 +26,7 @@ export interface IPercentOfDataTypeValues {
   [key: string]: number;
 }
 
-interface ISummary {
+export interface ISummary {
   statistics: Record<string, IGeneralStatistics>;
   validations: IRecords;
 }

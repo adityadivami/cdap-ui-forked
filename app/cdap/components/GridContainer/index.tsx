@@ -23,8 +23,10 @@ import { IRecords, IApiPayload, IGridParams } from 'components/GridTable/types';
 import DataPrepStore from 'components/DataPrep/store';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import T from 'i18n-react';
+import { execute } from 'components/DataPrep/store/DataPrepActionCreator';
+import { connect, Provider } from 'react-redux';
 
-export default function GridContainer() {
+function GridContainerComponent({ storeData }) {
   const { wid } = useParams() as IRecords;
   const params = useParams() as IRecords;
   const [transformationPayload, setTransformationPayload] = useState<
@@ -50,8 +52,18 @@ export default function GridContainer() {
     ) {
       // if yes, then do applyDirective
       const directive = getDirective(newValue.option, transformationPayload.column);
-      addDirectives(directive);
       // addDirectives()
+      execute([directive]).subscribe(
+        () => {},
+        (error) => {
+          DataPrepStore.dispatch({
+            type: DataPrepActions.setError,
+            payload: {
+              message: error.message || error.response.message,
+            },
+          });
+        }
+      );
     }
     // if no then return, do nothing
   };
@@ -144,33 +156,22 @@ export default function GridContainer() {
       }
     );
   };
-
-  //   const handleAPIData = (action) => {
-  //     if (action === 'response') {
-  //       setSnackbar({
-  //         open: true,
-  //         isSuccess: true,
-  //         message: T.translate(
-  //           `features.WranglerNewUI.GridTable.snackbarLabels.datasetSuccess`
-  //         ).toString(),
-  //       });
-  //       // setLoading(false);
-  //       setGridData(response);
-  //       //   setAddTransformationFunction({
-  //       //     option: '',
-  //       //     supportedDataType: [],
-  //       //   });
-  //       // setSelectedColumn('');
-  //       // setColumnType('');
-  //     } else {
-  //     }
-  //   };
-
   return (
     <div>
       <p>grid component</p>
-      {/* <GridTable handleTransformationUpload={handleTransformationUpload} /> */}
-      <GridTable handleTransformationUpload={handleTransformationUpload} />
+      <Provider store={DataPrepStore}>
+        <GridTable handleTransformationUpload={handleTransformationUpload} storeData={storeData} />
+      </Provider>
     </div>
+  );
+}
+
+const ConnectedGridContainer = connect((state) => ({ storeData: state }))(GridContainerComponent);
+
+export default function GridContainer() {
+  return (
+    <Provider store={DataPrepStore}>
+      <ConnectedGridContainer />
+    </Provider>
   );
 }
