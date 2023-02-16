@@ -3436,6 +3436,15 @@ features:
   WranglerNewUI:
     AddConnections:
       referenceLabel: Add Connection
+    AddTransformationStepPanel:
+      applyStep: Apply Step
+      change: change
+      columnsSelected: columns selected
+      function: Function
+      noColumnsSelected: No columns selected
+      selectColumns: Select columns
+      selectColumnSubTitle: Quick select by clicking a column on the grid/columns panel
+      selectColumnTitle: Select column(s) to apply this function
     Breadcrumb:
       ariaLabels:
         breadcrumb: breadcrumb
