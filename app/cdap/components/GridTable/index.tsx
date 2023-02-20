@@ -14,34 +14,31 @@
  * the License.
  */
 
+import React, { useEffect, useState } from 'react';
+import T from 'i18n-react';
+import { useLocation, useParams } from 'react-router';
+import styled from 'styled-components';
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Breadcrumb from 'components/Breadcrumb';
+import { setWorkspace } from 'components/DataPrep/store/DataPrepActionCreator';
 import FooterPanel from 'components/FooterPanel';
 import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
 import {
-  IParams,
-  IRecords,
   IAddTransformationItem,
-  IGeneralStatistics,
+  IGeneralStatistics, IRecords
 } from 'components/GridTable/types';
-import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
-import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
+import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import T from 'i18n-react';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import styled from 'styled-components';
-import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
-import { useLocation } from 'react-router';
+import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
 import { FlexWrapper } from 'components/WranglerGrid/SelectColumnPanel/styles';
-import { setWorkspace } from 'components/DataPrep/store/DataPrepActionCreator';
+import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
