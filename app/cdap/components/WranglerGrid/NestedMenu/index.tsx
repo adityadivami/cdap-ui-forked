@@ -51,6 +51,7 @@ export default function({
     event.preventDefault();
     event.stopPropagation();
     if (origin === 'parentMenu') {
+      console.log(menuItem, 'menuItem');
       // When icon is clicked from toolbar the list appears is parent menu
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
         const updatedAnchors = anchorElement.splice(1, 0, event.currentTarget); // When item from parent menu list is clicked it's option needs to set next to it
