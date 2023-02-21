@@ -102,6 +102,8 @@ export default function({
       }
     }
   };
+
+  console.log(menuComponentOptions, 'menuComponentOptions');
   return (
     <>
       <NestedMenuComponent
