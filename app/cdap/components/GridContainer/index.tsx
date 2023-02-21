@@ -23,7 +23,6 @@ import GridTable from 'components/GridTable';
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
 
 function GridContainerComponent({ storeData }) {
-
   const [transformationPayload, setTransformationPayload] = useState<
     Record<string, string | boolean>
   >({
@@ -46,6 +45,7 @@ function GridContainerComponent({ storeData }) {
     ) {
       // if yes, then do applyDirective
       const directive = getDirective(newValue.option, transformationPayload.column);
+      console.log(typeof directive, directive, 'directive');
       // addDirectives()
       execute([directive]).subscribe(
         () => {},
@@ -62,16 +62,14 @@ function GridContainerComponent({ storeData }) {
     // if no then return, do nothing
   };
 
-  const getDirective = (functionName: string, selectedColumnName: string | boolean) => {
-    if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-      return `set-type :${selectedColumnName} ${functionName}`;
-    }
+  const getDirective = (functionName: any, selectedColumnName: string | boolean) => {
+    return functionName.getUsage({ selectedColumnName, functionName });
   };
 
   return (
-      <Provider store={DataPrepStore}>
-        <GridTable handleTransformationUpload={handleTransformationUpload} storeData={storeData} />
-      </Provider>
+    <Provider store={DataPrepStore}>
+      <GridTable handleTransformationUpload={handleTransformationUpload} storeData={storeData} />
+    </Provider>
   );
 }
 

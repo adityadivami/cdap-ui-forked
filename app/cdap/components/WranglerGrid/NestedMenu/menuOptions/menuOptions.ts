@@ -21,11 +21,41 @@ import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent'
 
 export const PREFIX = 'features.WranglerNewUI.GridPage.transformations.options.labels';
 
+export const FORMAT_OPTIONS: IMenuItem[] = [
+  {
+    value: 'uppercase',
+    label: `${T.translate(`${PREFIX}.uppercase`).toString()}`,
+    supportedDataType: ['string'],
+  },
+  {
+    value: 'lowercase',
+    label: `${T.translate(`${PREFIX}.lowercase`).toString()}`,
+    supportedDataType: ['string'],
+  },
+  {
+    value: 'titlecase',
+    label: `${T.translate(`${PREFIX}.titlecase`).toString()}`,
+    supportedDataType: ['string'],
+  },
+];
+
 export const MENU_OPTIONS: IMenuItem[] = [
   {
     value: 'changeDatatype',
     label: T.translate(`${PREFIX}.menu.changeDatatype`).toString(),
     options: DATATYPE_OPTIONS,
     supportedDataType: ['all'],
+    getUsage: ({ selectedColumnName, functionName }) => {
+      return `set-type :${selectedColumnName} ${functionName.value}`;
+    },
+  },
+  {
+    value: 'text',
+    label: T.translate(`${PREFIX}.menu.format`).toString(),
+    options: FORMAT_OPTIONS,
+    supportedDataType: ['string'],
+    getUsage: ({ selectedColumnName, functionName }) => {
+      return `${functionName.value} :${selectedColumnName}`;
+    },
   },
 ];

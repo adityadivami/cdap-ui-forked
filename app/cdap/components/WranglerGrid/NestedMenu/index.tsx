@@ -22,7 +22,7 @@ import { NestedMenuComponent } from 'components/WranglerV2/MenuContainer';
 
 import { Dispatch, SetStateAction } from 'react';
 export interface INestedMenuProps {
-  submitMenuOption: (value: string, dataType: string[]) => void;
+  submitMenuOption: (value: any, dataType: string[]) => void;
   columnType: string;
   menuOptions: IMenuItem[];
   title: string;
@@ -55,9 +55,12 @@ export default function({
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
         const updatedAnchors = anchorElement.splice(1, 0, event.currentTarget); // When item from parent menu list is clicked it's option needs to set next to it
         setAnchorElement((prev) => anchorElement);
+        menuItem.options.map((i) => {
+          return (i.getUsage = menuItem.getUsage);
+        });
         setMenuComponentOptions([menuItem?.options]);
       } else {
-        submitMenuOption(menuItem.value, menuItem.supportedDataType); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality
+        submitMenuOption(menuItem, menuItem.supportedDataType); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality
         setAnchorElement(null);
         menuToggleHandler(title);
       }
@@ -95,7 +98,7 @@ export default function({
           );
         }
       } else {
-        submitMenuOption(menuItem.value, menuItem.supportedDataType);
+        submitMenuOption(menuItem, menuItem.supportedDataType);
         setAnchorElement(null);
         menuToggleHandler(title);
       }
@@ -122,11 +125,11 @@ export default function({
           return (
             <MenuItemComponent
               item={eachOption}
-              columnType={columnType.toLowerCase()}
+              columnType={columnType?.toLowerCase()}
               index={optionsIndex}
-              onMenuClick={(onClickEvent, clickedItem) =>
-                handleMenuClick(onClickEvent, clickedItem, 'parentMenu')
-              }
+              onMenuClick={(onClickEvent, clickedItem) => {
+                handleMenuClick(onClickEvent, clickedItem, 'parentMenu');
+              }}
             />
           );
         })}
@@ -135,7 +138,7 @@ export default function({
             return (
               <MenuComponent
                 anchorElement={anchorElement?.length > 1 ? anchorElement[optionsIndex + 1] : null}
-                columnType={columnType.toLowerCase()}
+                columnType={columnType?.toLowerCase()}
                 menuOptions={eachOption}
                 setAnchorElement={setAnchorElement}
                 setMenuComponentOptions={setMenuComponentOptions}

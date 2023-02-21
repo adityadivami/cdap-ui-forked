@@ -27,10 +27,7 @@ import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
-import {
-  IAddTransformationItem,
-  IGeneralStatistics, IRecords
-} from 'components/GridTable/types';
+import { IAddTransformationItem, IGeneralStatistics, IRecords } from 'components/GridTable/types';
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
@@ -173,7 +170,7 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
     handleTransformationUpload('column', columnName);
   };
 
-  const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
+  const onMenuOptionSelection = (option: any, supportedDataType: string[]) => {
     handleTransformationUpload('function', { option, supportedDataType });
   };
 
@@ -206,9 +203,12 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
         columnType={dataprep.types[selectedColumn]}
-        submitMenuOption={(option, datatype) =>
-          !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null
-        }
+        submitMenuOption={(option, datatype) => {
+          console.log(option, 'option type');
+          !transformationOptions.includes(option.value)
+            ? onMenuOptionSelection(option, datatype)
+            : null;
+        }}
         disableToolbarIcon={!Boolean(dataprep?.headers?.length)}
       />
       <GridTableWrapper data-testid="grid-table-container">

@@ -40,6 +40,7 @@ export interface IMenuItem {
   icon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
   toolName?: string;
   open?: boolean;
+  getUsage?: any;
 }
 
 export interface IMenuItemComponentProps {
@@ -55,8 +56,8 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
   );
   const filteredDataOptionCheck = DATATYPE_OPTIONS.filter(
     (el) =>
-      (el.value === item.value && item.value === columnType.toLowerCase()) ||
-      (item.value === 'integer' && columnType.toLowerCase() === 'int')
+      (el.value === item.value && item.value === columnType?.toLowerCase()) ||
+      (item.value === 'integer' && columnType?.toLowerCase() === 'int')
   ).length;
 
   const getMenuItemDisablProp = () => {
