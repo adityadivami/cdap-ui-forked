@@ -81,6 +81,7 @@ export default function({
           );
           setAnchorElement(updatedAnchors);
         } else if (anchorElement.includes(event.currentTarget)) {
+          console.log('added ');
           // if array of anchor element have current item then we have to remove it and reposition it to it's parent
           const currentTargetIndex = findIndex(
             anchorElement,
