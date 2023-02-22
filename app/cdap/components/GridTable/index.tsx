@@ -27,10 +27,7 @@ import GridHeaderCell from 'components/GridTable/components/GridHeaderCell';
 import GridKPICell from 'components/GridTable/components/GridKPICell';
 import GridTextCell from 'components/GridTable/components/GridTextCell';
 import { useStyles } from 'components/GridTable/styles';
-import {
-  IAddTransformationItem,
-  IGeneralStatistics, IRecords
-} from 'components/GridTable/types';
+import { IAddTransformationItem, IGeneralStatistics, IRecords } from 'components/GridTable/types';
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';

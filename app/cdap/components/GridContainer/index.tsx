@@ -23,7 +23,6 @@ import GridTable from 'components/GridTable';
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
 
 function GridContainerComponent({ storeData }) {
-
   const [transformationPayload, setTransformationPayload] = useState<
     Record<string, string | boolean>
   >({
@@ -69,9 +68,9 @@ function GridContainerComponent({ storeData }) {
   };
 
   return (
-      <Provider store={DataPrepStore}>
-        <GridTable handleTransformationUpload={handleTransformationUpload} storeData={storeData} />
-      </Provider>
+    <Provider store={DataPrepStore}>
+      <GridTable handleTransformationUpload={handleTransformationUpload} storeData={storeData} />
+    </Provider>
   );
 }
 
