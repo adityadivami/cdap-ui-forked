@@ -40,7 +40,12 @@ export interface IMenuItem {
   icon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
   toolName?: string;
   open?: boolean;
-  getUsage?: any;
+  getUsage?: ({ selectedColumnName, functionName }: IGetUsageParams) => string;
+}
+
+export interface IGetUsageParams {
+  selectedColumnName: string | boolean;
+  functionName: IMenuItem;
 }
 
 export interface IMenuItemComponentProps {

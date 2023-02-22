@@ -22,7 +22,7 @@ import { NestedMenuComponent } from 'components/WranglerV2/MenuContainer';
 
 import { Dispatch, SetStateAction } from 'react';
 export interface INestedMenuProps {
-  submitMenuOption: (value: any, dataType: string[]) => void;
+  submitMenuOption: (value: IMenuItem | string, dataType: string[]) => void;
   columnType: string;
   menuOptions: IMenuItem[];
   title: string;
@@ -50,14 +50,14 @@ export default function({
   ) => {
     event.preventDefault();
     event.stopPropagation();
+    menuItem?.options?.map((i) => {
+      return (i.getUsage = menuItem.getUsage);
+    });
     if (origin === 'parentMenu') {
       // When icon is clicked from toolbar the list appears is parent menu
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
         const updatedAnchors = anchorElement.splice(1, 0, event.currentTarget); // When item from parent menu list is clicked it's option needs to set next to it
         setAnchorElement((prev) => anchorElement);
-        menuItem.options.map((i) => {
-          return (i.getUsage = menuItem.getUsage);
-        });
         setMenuComponentOptions([menuItem?.options]);
       } else {
         submitMenuOption(menuItem, menuItem.supportedDataType); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality

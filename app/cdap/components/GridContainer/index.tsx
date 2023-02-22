@@ -21,6 +21,7 @@ import { execute } from 'components/DataPrep/store/DataPrepActionCreator';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import GridTable from 'components/GridTable';
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 
 function GridContainerComponent({ storeData }) {
   const [transformationPayload, setTransformationPayload] = useState<
@@ -45,7 +46,6 @@ function GridContainerComponent({ storeData }) {
     ) {
       // if yes, then do applyDirective
       const directive = getDirective(newValue.option, transformationPayload.column);
-      console.log(typeof directive, directive, 'directive');
       // addDirectives()
       execute([directive]).subscribe(
         () => {},
@@ -62,7 +62,7 @@ function GridContainerComponent({ storeData }) {
     // if no then return, do nothing
   };
 
-  const getDirective = (functionName: any, selectedColumnName: string | boolean) => {
+  const getDirective = (functionName: IMenuItem, selectedColumnName: string | boolean) => {
     return functionName.getUsage({ selectedColumnName, functionName });
   };
 

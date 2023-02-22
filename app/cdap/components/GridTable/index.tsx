@@ -36,6 +36,7 @@ import useSnackbar from 'components/Snackbar/useSnackbar';
 import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
 import { FlexWrapper } from 'components/WranglerGrid/SelectColumnPanel/styles';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
+import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
@@ -170,7 +171,7 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
     handleTransformationUpload('column', columnName);
   };
 
-  const onMenuOptionSelection = (option: any, supportedDataType: string[]) => {
+  const onMenuOptionSelection = (option: IMenuItem | string, supportedDataType: string[]) => {
     handleTransformationUpload('function', { option, supportedDataType });
   };
 
@@ -204,8 +205,7 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
         showBreadCrumb={showBreadCrumb}
         columnType={dataprep.types[selectedColumn]}
         submitMenuOption={(option, datatype) => {
-          console.log(option, 'option type');
-          !transformationOptions.includes(option.value)
+          !transformationOptions.includes(typeof option === 'object' ? option.value : option)
             ? onMenuOptionSelection(option, datatype)
             : null;
         }}
