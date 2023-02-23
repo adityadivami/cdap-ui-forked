@@ -62,8 +62,8 @@ function GridContainerComponent({ storeData }) {
     // if no then return, do nothing
   };
 
-  const getDirective = (functionName: IMenuItem, selectedColumnName: string | boolean) => {
-    return functionName.getUsage({ selectedColumnName, functionName });
+  const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string | boolean) => {
+    return selectedFunction.getUsage({ selectedColumnName, selectedFunction });
   };
 
   return (
