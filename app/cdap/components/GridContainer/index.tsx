@@ -24,6 +24,7 @@ import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions
 import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 
 function GridContainerComponent({ storeData }) {
+  const [selectedColumn, setSelectedColumn] = useState('');
   const [transformationPayload, setTransformationPayload] = useState<
     Record<string, string | boolean>
   >({
@@ -48,7 +49,13 @@ function GridContainerComponent({ storeData }) {
       const directive = getDirective(newValue.option, transformationPayload.column);
       // addDirectives()
       execute([directive]).subscribe(
-        () => {},
+        () => {
+          setSelectedColumn('');
+          setTransformationPayload({
+            function: false,
+            column: false,
+          });
+        },
         (error) => {
           DataPrepStore.dispatch({
             type: DataPrepActions.setError,
@@ -68,7 +75,12 @@ function GridContainerComponent({ storeData }) {
 
   return (
     <Provider store={DataPrepStore}>
-      <GridTable handleTransformationUpload={handleTransformationUpload} storeData={storeData} />
+      <GridTable
+        handleTransformationUpload={handleTransformationUpload}
+        storeData={storeData}
+        setSelectedColumn={setSelectedColumn}
+        selectedColumn={selectedColumn}
+      />
     </Provider>
   );
 }

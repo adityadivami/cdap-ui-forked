@@ -51,7 +51,12 @@ const GridTableWrapper = styled(Box)`
 `;
 const transformationOptions = ['undo', 'redo'];
 
-export default function GridTable({ handleTransformationUpload, storeData }) {
+export default function GridTable({
+  handleTransformationUpload,
+  storeData,
+  setSelectedColumn,
+  selectedColumn,
+}) {
   const { dataprep, columnsInformation } = storeData;
   const { wid } = useParams() as IRecords;
   const classes = useStyles();
@@ -64,7 +69,6 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
     supportedDataType: [],
   });
   const [snackbarState, setSnackbar] = useSnackbar();
-  const [selectedColumn, setSelectedColumn] = useState('');
 
   useEffect(() => {
     // Get DATA from URL paramteres to get data of workspace
