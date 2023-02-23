@@ -57,6 +57,8 @@ export default function({
   setShowBreadCrumb,
   showBreadCrumb,
   disableToolbarIcon,
+  hasSimilarType,
+  allColumnsType,
 }: ITransformationToolBarProps) {
   const [showName, setShowName] = useState<boolean>(false);
   const [anchorElement, setAnchorElement] = useState<HTMLElement[]>(null);
@@ -119,6 +121,8 @@ export default function({
                     setAnchorElement={setAnchorElement}
                     anchorElement={anchorElement}
                     menuToggleHandler={toggleMenu}
+                    hasSimilarType={hasSimilarType}
+                    allColumnsType={allColumnsType}
                   />
                 )}
                 {showName && (

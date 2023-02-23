@@ -53,9 +53,18 @@ export interface IMenuItemComponentProps {
   index: number;
   onMenuClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
+  hasSimilarType?: boolean;
+  allColumnsType: string;
 }
 
-export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
+export default function({
+  item,
+  index,
+  onMenuClick,
+  columnType,
+  hasSimilarType,
+  allColumnsType,
+}: IMenuItemComponentProps) {
   const includesCheck = !(
     item?.supportedDataType?.includes(columnType) || item?.supportedDataType?.includes('all')
   );
@@ -68,6 +77,9 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
   const getMenuItemDisablProp = () => {
     if (columnType) {
       return includesCheck || filteredDataOptionCheck;
+    }
+    if (allColumnsType.toLowerCase() === item.label) {
+      return hasSimilarType;
     }
     return false;
   };
