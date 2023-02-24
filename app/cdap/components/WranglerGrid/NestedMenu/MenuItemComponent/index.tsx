@@ -51,7 +51,7 @@ export interface IGetUsageParams {
 export interface IMenuItemComponentProps {
   item: IMenuItem;
   index: number;
-  onMenuClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
+  onMenuOptionClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
   hasSimilarType?: boolean;
   allColumnsType: string;
@@ -60,7 +60,7 @@ export interface IMenuItemComponentProps {
 export default function({
   item,
   index,
-  onMenuClick,
+  onMenuOptionClick,
   columnType,
   hasSimilarType,
   allColumnsType,
@@ -101,7 +101,7 @@ export default function({
         key={index}
         disabled={menuItemDisableProp as boolean}
         title={item.label}
-        onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
+        onClick={(onClickEvent) => onMenuOptionClick(onClickEvent, item)}
         data-testid={`menu-item-${item.value}`}
       >
         <NormalFont component="div">{item.label}</NormalFont>

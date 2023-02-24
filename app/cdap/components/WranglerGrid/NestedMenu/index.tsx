@@ -131,7 +131,7 @@ export default function({
               item={eachOption}
               columnType={columnType?.toLowerCase()}
               index={optionsIndex}
-              onMenuClick={(onClickEvent, clickedItem) => {
+              onMenuOptionClick={(onClickEvent, clickedItem) => {
                 handleMenuClick(onClickEvent, clickedItem, 'parentMenu');
               }}
               hasSimilarType={hasSimilarType}
@@ -148,7 +148,7 @@ export default function({
                 menuOptions={eachOption}
                 setAnchorElement={setAnchorElement}
                 setMenuComponentOptions={setMenuComponentOptions}
-                submitOption={(onClickEvent, clickedItem) => {
+                onMenuOptionClick={(onClickEvent, clickedItem) => {
                   onClickEvent.preventDefault();
                   onClickEvent.stopPropagation();
                   handleMenuClick(onClickEvent, clickedItem);

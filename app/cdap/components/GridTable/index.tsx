@@ -208,7 +208,7 @@ export default function GridTable({
           } else {
             value = option.value;
           }
-          !transformationOptions.includes(value) ? onMenuOptionSelection(option, datatype) : null;
+          !transformationOptions.includes(value) && onMenuOptionSelection(option, datatype);
         }}
         disableToolbarIcon={!Boolean(dataprep?.headers?.length)}
       />
