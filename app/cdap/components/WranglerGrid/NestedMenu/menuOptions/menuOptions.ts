@@ -27,8 +27,7 @@ export const MENU_OPTIONS: IMenuItem[] = [
     label: T.translate(`${PREFIX}.menu.changeDatatype`).toString(),
     options: DATATYPE_OPTIONS,
     supportedDataType: ['all'],
-    getUsage: ({ selectedColumnName, selectedFunction }) => {
-      return `set-type :${selectedColumnName} ${selectedFunction.value}`;
-    },
+    getUsage: ({ selectedColumnName, selectedFunction }) =>
+      `set-type :${selectedColumnName} ${selectedFunction.value}`,
   },
 ];
