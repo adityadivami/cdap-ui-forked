@@ -24,6 +24,10 @@ import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent'
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 
+const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string | boolean) => {
+  return selectedFunction.getUsage({ selectedColumnName, selectedFunction });
+};
+
 function GridContainerComponent({ storeData }) {
   const [selectedColumn, setSelectedColumn] = useState('');
   const [transformationPayload, setTransformationPayload] = useState<
@@ -46,7 +50,7 @@ function GridContainerComponent({ storeData }) {
   }, [snackbarState.open]);
 
   // whether i should apply transformation now or should pass data to add transformation step
-  const handleTransformationUpload = (valueToUpdate: string, newValue) => {
+  const handleShouldApplyTransformation = (valueToUpdate: string, newValue) => {
     // valueToUpdate; // 'function', 'column'
 
     setTransformationPayload((prev) => ({
@@ -69,6 +73,11 @@ function GridContainerComponent({ storeData }) {
             function: false,
             column: false,
           });
+          setSnackbar({
+            open: true,
+            isSuccess: true,
+            message: 'Transformation Successfully Applied',
+          });
         },
         (error) => {
           DataPrepStore.dispatch({
@@ -83,14 +92,10 @@ function GridContainerComponent({ storeData }) {
     // if no then return, do nothing
   };
 
-  const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string | boolean) => {
-    return selectedFunction.getUsage({ selectedColumnName, selectedFunction });
-  };
-
   return (
     <Provider store={DataPrepStore}>
       <GridTable
-        handleTransformationUpload={handleTransformationUpload}
+        handleShouldApplyTransformation={handleShouldApplyTransformation}
         storeData={storeData}
         setSelectedColumn={setSelectedColumn}
         selectedColumn={selectedColumn}
