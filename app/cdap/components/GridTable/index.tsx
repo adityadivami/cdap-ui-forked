@@ -31,8 +31,6 @@ import { IAddTransformationItem, IGeneralStatistics, IRecords } from 'components
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import Snackbar from 'components/Snackbar';
-import useSnackbar from 'components/Snackbar/useSnackbar';
 import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
 import { FlexWrapper } from 'components/WranglerGrid/SelectColumnPanel/styles';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
@@ -56,6 +54,7 @@ export default function GridTable({
   storeData,
   setSelectedColumn,
   selectedColumn,
+  setSnackbar,
 }) {
   const { dataprep, columnsInformation } = storeData;
   const { wid } = useParams() as IRecords;
@@ -68,7 +67,6 @@ export default function GridTable({
     option: '',
     supportedDataType: [],
   });
-  const [snackbarState, setSnackbar] = useSnackbar();
 
   useEffect(() => {
     // Get DATA from URL paramteres to get data of workspace
@@ -179,16 +177,6 @@ export default function GridTable({
     handleTransformationUpload('function', { option, supportedDataType });
   };
 
-  useEffect(() => {
-    if (snackbarState.open) {
-      setTimeout(() => {
-        setSnackbar(() => ({
-          open: false,
-        }));
-      }, 5000);
-    }
-  }, [snackbarState.open]);
-
   const tableMetaInfo = {
     columnCount: dataprep.headers.length,
     rowCount: dataprep.data.length,
@@ -298,18 +286,6 @@ export default function GridTable({
           </div>
         )}
       </GridTableWrapper>
-      {
-        <Snackbar
-          handleClose={() =>
-            setSnackbar(() => ({
-              open: false,
-            }))
-          }
-          open={snackbarState.open}
-          message={snackbarState.message}
-          isSuccess={snackbarState.isSuccess}
-        />
-      }
     </>
   );
 }

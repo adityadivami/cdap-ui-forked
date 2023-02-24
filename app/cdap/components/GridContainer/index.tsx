@@ -14,14 +14,15 @@
  * the License.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, Provider } from 'react-redux';
 import DataPrepStore from 'components/DataPrep/store';
 import { execute } from 'components/DataPrep/store/DataPrepActionCreator';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import GridTable from 'components/GridTable';
-import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
 import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
+import Snackbar from 'components/Snackbar';
+import useSnackbar from 'components/Snackbar/useSnackbar';
 
 function GridContainerComponent({ storeData }) {
   const [selectedColumn, setSelectedColumn] = useState('');
@@ -30,8 +31,21 @@ function GridContainerComponent({ storeData }) {
   >({
     function: false,
     column: false,
-  }); // whether i should apply transformation now or should pass data to add transformation step
+  });
 
+  const [snackbarState, setSnackbar] = useSnackbar();
+
+  useEffect(() => {
+    if (snackbarState.open) {
+      setTimeout(() => {
+        setSnackbar(() => ({
+          open: false,
+        }));
+      }, 5000);
+    }
+  }, [snackbarState.open]);
+
+  // whether i should apply transformation now or should pass data to add transformation step
   const handleTransformationUpload = (valueToUpdate: string, newValue) => {
     // valueToUpdate; // 'function', 'column'
 
@@ -80,7 +94,20 @@ function GridContainerComponent({ storeData }) {
         storeData={storeData}
         setSelectedColumn={setSelectedColumn}
         selectedColumn={selectedColumn}
+        setSnackbar={setSnackbar}
       />
+      {
+        <Snackbar
+          handleClose={() =>
+            setSnackbar(() => ({
+              open: false,
+            }))
+          }
+          open={snackbarState.open}
+          message={snackbarState.message}
+          isSuccess={snackbarState.isSuccess}
+        />
+      }
     </Provider>
   );
 }
