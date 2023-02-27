@@ -182,7 +182,17 @@ export default function GridTable({
     rowCount: dataprep.data.length,
   };
 
-  const checkAllColumnsHasSimilarType = (dataTypeList) =>
+  const handleMenuItemClick = (option, datatype) => {
+    let value;
+    if (typeof option === 'string') {
+      value = option;
+    } else {
+      value = option.value;
+    }
+    !transformationOptions.includes(value) && onMenuOptionSelection(option, datatype);
+  };
+
+  const checkAllColumnsHasSameType = (dataTypeList) =>
     dataTypeList.every((eachDataType) => eachDataType === dataTypeList[0]);
 
   return (
@@ -199,17 +209,9 @@ export default function GridTable({
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
         columnType={dataprep.types[selectedColumn]}
-        hasSimilarType={checkAllColumnsHasSimilarType(Object.values(dataprep.types))}
+        hasSimilarType={checkAllColumnsHasSameType(Object.values(dataprep.types))}
         allColumnsType={Object.values(dataprep.types)[0] as string}
-        submitMenuOption={(option, datatype) => {
-          let value;
-          if (typeof option === 'string') {
-            value = option;
-          } else {
-            value = option.value;
-          }
-          !transformationOptions.includes(value) && onMenuOptionSelection(option, datatype);
-        }}
+        submitMenuOption={handleMenuItemClick}
         disableToolbarIcon={!Boolean(dataprep?.headers?.length)}
       />
       <GridTableWrapper data-testid="grid-table-container">
