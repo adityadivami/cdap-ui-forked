@@ -89,22 +89,13 @@ function GridContainerComponent({ storeData }) {
      */
   }, [selectedFunction, selectedColumn]);
 
-  const handleSelectedFunctionColumnState = (valueToUpdate: string, newValue) => {
-    if (valueToUpdate === 'function') {
-      setSelectedFunction(newValue);
-    } else if (valueToUpdate === 'column') {
-      setSelectedFunction(null);
-      setSelectedColumn(newValue);
-    }
-  };
-
   return (
     <Provider store={DataPrepStore}>
       <GridTable
-        handleSelectedFunctionColumnState={handleSelectedFunctionColumnState}
         storeData={storeData}
         setSelectedColumn={setSelectedColumn}
         selectedColumn={selectedColumn}
+        setSelectedFunction={setSelectedFunction}
         setSnackbar={setSnackbar}
       />
       {

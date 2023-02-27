@@ -50,11 +50,11 @@ const GridTableWrapper = styled(Box)`
 const transformationOptions = ['undo', 'redo'];
 
 export default function GridTable({
-  handleSelectedFunctionColumnState,
   storeData,
   setSelectedColumn,
   selectedColumn,
   setSnackbar,
+  setSelectedFunction,
 }) {
   const { dataprep, columnsInformation } = storeData;
   const { wid } = useParams() as IRecords;
@@ -169,12 +169,8 @@ export default function GridTable({
   };
 
   const handleColumnSelect = (columnName) => {
+    setSelectedFunction(null);
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
-    handleSelectedFunctionColumnState('column', columnName);
-  };
-
-  const onMenuOptionSelection = (option: IMenuItem | string, supportedDataType: string[]) => {
-    handleSelectedFunctionColumnState('function', { option, supportedDataType });
   };
 
   const tableMetaInfo = {
@@ -189,7 +185,7 @@ export default function GridTable({
     } else {
       value = option.value;
     }
-    !transformationOptions.includes(value) && onMenuOptionSelection(option, datatype);
+    !transformationOptions.includes(value) && setSelectedFunction({ option, datatype });
   };
 
   const checkAllColumnsHasSameType = (dataTypeList) =>
