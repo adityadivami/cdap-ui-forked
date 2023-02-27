@@ -54,13 +54,15 @@ function GridContainerComponent({ storeData }) {
   }, [snackbarState.open]);
 
   /*
-   * In this useEffect we are handling apply transformation based on conditions
-   * whether to apply transformation directly without add transformation panel open
-   * or should pass data to add transformation step panel
+   * In the useEffect we are handling 2 cases
+   * 1. If extra input is not required for the selected transformation, and if the column is selected,
+   * then we will directly apply the transformation on the grid data
+   * 2. If the extra input is needed, then we will open the add transformation step panel
+   * where we can continue further steps to apply the transformation
    */
+
   useEffect(() => {
     if (selectedColumn && selectedFunction) {
-      // If both function and column are selected, then apply transformation
       const directive = getDirective(selectedFunction.option, selectedColumn);
       execute([directive]).subscribe(
         () => {
@@ -80,9 +82,11 @@ function GridContainerComponent({ storeData }) {
           });
         }
       );
-    } else {
-      // If selectedColumn is not selected then open add transformation panel and apply transformation
     }
+    /*
+     * TODO: If selected function need any additional input then open add transformation panel
+     * where we can continue further steps to apply the transformation
+     */
   }, [selectedFunction, selectedColumn]);
 
   const handleSelectedFunctionColumnState = (valueToUpdate: string, newValue) => {
