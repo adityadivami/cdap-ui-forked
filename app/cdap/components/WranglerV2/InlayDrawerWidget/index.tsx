@@ -14,11 +14,8 @@
  * the License.
  */
 
-import React, { PropsWithChildren } from 'react';
-import { Menu } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
-import T from 'i18n-react';
 import {
   Container,
   Divider,
@@ -28,8 +25,11 @@ import {
   MenuButton,
   StyledHeader,
   StyledIconButton,
+  StyledMenu,
   StyledMenuItem,
 } from 'components/WranglerV2/InlayDrawerWidget/styles';
+import T from 'i18n-react';
+import React, { PropsWithChildren } from 'react';
 
 export interface IMenuItem {
   clickHandler: () => void;
@@ -105,9 +105,9 @@ export default function InlayDrawerWidget({
               >
                 {T.translate(`${PREFIX}.buttonLabels.actions`)}
               </MenuButton>
-              <Menu
+              <StyledMenu
                 anchorEl={anchorEl}
-                anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+                anchorOrigin={{ horizontal: 20, vertical: 32 }}
                 getContentAnchorEl={null}
                 id="inlay-drawer-widget-menu"
                 keepMounted
@@ -121,13 +121,16 @@ export default function InlayDrawerWidget({
                     <StyledMenuItem
                       data-testid={`menu-item-${testId}`}
                       key={`menu-item-${testId}`}
-                      onClick={eachOption.clickHandler}
+                      onClick={() => {
+                        eachOption.clickHandler();
+                        handleClose();
+                      }}
                     >
                       {eachOption.label}
                     </StyledMenuItem>
                   );
                 })}
-              </Menu>
+              </StyledMenu>
             </div>
           )}
           {showDivider && <Divider />}

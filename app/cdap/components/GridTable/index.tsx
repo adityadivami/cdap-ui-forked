@@ -15,11 +15,12 @@
  */
 
 import React, { useEffect, useState } from 'react';
+
+import { Box, Table, TableBody, TableHead, TableRow } from '@material-ui/core';
 import T from 'i18n-react';
 import { useLocation, useParams } from 'react-router';
 import styled from 'styled-components';
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+
 import Breadcrumb from 'components/Breadcrumb';
 import { setWorkspace } from 'components/DataPrep/store/DataPrepActionCreator';
 import FooterPanel from 'components/FooterPanel';
@@ -30,6 +31,7 @@ import { useStyles } from 'components/GridTable/styles';
 import { IAddTransformationItem, IGeneralStatistics, IRecords } from 'components/GridTable/types';
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen';
+import RecipeStepsPanel from 'components/RecipeStepsPanel';
 import LoadingSVG from 'components/shared/LoadingSVG';
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
@@ -37,18 +39,37 @@ import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
 import { FlexWrapper } from 'components/WranglerGrid/SelectColumnPanel/styles';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
 
+export const RecipeStepsPanelContainer = styled(RecipeStepsPanel)`
+  width: 500px;
+`;
+
+export const TableGridContainer = styled.div`
+  display: flex;
+  height: 100%;
+  overflow: scroll;
+`;
+
 export const TableWrapper = styled(Box)`
   width: 100%;
 `;
 
+export const TableWrapperWithOpenPanel = styled.div`
+  width: calc(100% - 500px);
+  overflow: scroll;
+`;
+
 const GridTableWrapper = styled(Box)`
-  height: calc(100% - 115px);
+  height: calc(100% - 139px);
   max-height: 76vh;
   max-width: 100%;
   overflow-x: auto;
   width: 100%;
 `;
 const transformationOptions = ['undo', 'redo'];
+
+const GridTableWrapperWithoutBreadcrumb = styled(GridTableWrapper)`
+  height: calc(100% - 90px);
+`;
 
 export default function GridTable({ handleTransformationUpload, storeData }) {
   const { dataprep, columnsInformation } = storeData;
@@ -64,6 +85,7 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
   });
   const [snackbarState, setSnackbar] = useSnackbar();
   const [selectedColumn, setSelectedColumn] = useState('');
+  const [showRecipePanel, setShowRecipePanel] = useState(false);
 
   useEffect(() => {
     // Get DATA from URL paramteres to get data of workspace
@@ -184,6 +206,9 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
     }
   }, [snackbarState.open]);
 
+  const TableWrapperContainer = showRecipePanel ? TableWrapperWithOpenPanel : TableWrapper;
+  const GridWrapper = showBreadCrumb ? GridTableWrapper : GridTableWrapperWithoutBreadcrumb;
+
   const tableMetaInfo = {
     columnCount: dataprep.headers.length,
     rowCount: dataprep.data.length,
@@ -208,51 +233,8 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
         }
         disableToolbarIcon={!Boolean(dataprep?.headers?.length)}
       />
-      <GridTableWrapper data-testid="grid-table-container">
-        {dataprep.headers.length ? (
-          <TableWrapper>
-            <Table aria-label="simple table" className="test">
-              <TableHead>
-                <TableRow>
-                  {dataprep.headers.map((eachHeader) => (
-                    <GridHeaderCell
-                      label={eachHeader}
-                      type={dataprep.types[eachHeader]}
-                      key={eachHeader}
-                      columnSelected={selectedColumn}
-                      setColumnSelected={handleColumnSelect}
-                    />
-                  ))}
-                </TableRow>
-                <TableRow>
-                  {dataprep.headers.map((each) => {
-                    return createMissingData(columnsInformation.columns).map((item) => {
-                      if (item.name === each) {
-                        return <GridKPICell metricData={item} key={item.name} />;
-                      }
-                    });
-                  })}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {dataprep.data.map((eachRow, rowIndex) => {
-                  return (
-                    <TableRow key={`row-${rowIndex}`}>
-                      {dataprep.headers.map((eachKey, eachIndex) => {
-                        return (
-                          <GridTextCell
-                            cellValue={eachRow[eachKey] || '--'}
-                            key={`${eachKey}-${eachIndex}`}
-                          />
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
-          </TableWrapper>
-        ) : (
+      <GridWrapper data-testid="grid-table-container">
+        {!dataprep.headers.length && (
           <FlexWrapper>
             <NoRecordScreen
               title={T.translate('features.WranglerNewUI.NoRecordScreen.gridTable.title')}
@@ -260,7 +242,64 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
             />
           </FlexWrapper>
         )}
-        <FooterPanel recipeStepsCount={0} gridMetaInfo={tableMetaInfo} />
+
+        {dataprep.headers.length && (
+          <TableGridContainer>
+            <TableWrapperContainer>
+              <Table aria-label="simple table" className="test">
+                <TableHead>
+                  <TableRow>
+                    {dataprep.headers.map((eachHeader) => (
+                      <GridHeaderCell
+                        label={eachHeader}
+                        type={dataprep.types[eachHeader]}
+                        key={eachHeader}
+                        columnSelected={selectedColumn}
+                        setColumnSelected={handleColumnSelect}
+                      />
+                    ))}
+                  </TableRow>
+                  <TableRow>
+                    {dataprep.headers.map((each) => {
+                      return createMissingData(columnsInformation.columns).map((item) => {
+                        if (item.name === each) {
+                          return <GridKPICell metricData={item} key={item.name} />;
+                        }
+                      });
+                    })}
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {dataprep.data.map((eachRow, rowIndex) => {
+                    return (
+                      <TableRow key={`row-${rowIndex}`}>
+                        {dataprep.headers.map((eachKey, eachIndex) => {
+                          return (
+                            <GridTextCell
+                              cellValue={eachRow[eachKey] || '--'}
+                              key={`${eachKey}-${eachIndex}`}
+                            />
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableWrapperContainer>
+            {showRecipePanel && (
+              <RecipeStepsPanel
+                onDrawerCloseIconClick={() => setShowRecipePanel(false)}
+                setSnackbar={setSnackbar}
+              />
+            )}
+          </TableGridContainer>
+        )}
+
+        <FooterPanel
+          gridMetaInfo={tableMetaInfo}
+          onRecipeStepsButtonClick={() => setShowRecipePanel(!showRecipePanel)}
+        />
         {addTransformationFunction.option && (
           <SelectColumnPanel
             transformationName={addTransformationFunction.option}
@@ -280,7 +319,7 @@ export default function GridTable({ handleTransformationUpload, storeData }) {
             <LoadingSVG />
           </div>
         )}
-      </GridTableWrapper>
+      </GridWrapper>
       {
         <Snackbar
           handleClose={() =>

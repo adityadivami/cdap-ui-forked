@@ -19,8 +19,13 @@ import React from 'react';
 import { IconButton, TableContainer, Typography } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import T from 'i18n-react';
+import { useSelector } from 'react-redux';
 import styled, { StyledComponent } from 'styled-components';
 
+import { execute } from 'components/DataPrep/store/DataPrepActionCreator';
+import { PREFIX } from 'components/RecipeStepsPanel';
+import { ISnackbar } from 'components/Snackbar';
 import DataTable, { DataTableContainer, IColumn, IRow } from 'components/WranglerV2/DataTable';
 
 interface IRecipeStepsColumnCellProps {
@@ -32,6 +37,7 @@ interface IRecipeStepsColumnCellProps {
 interface IRecipeStepsTableProps {
   recipeSteps: string[];
   Container: StyledComponent<typeof TableContainer, {}>;
+  setSnackbar: (value: ISnackbar) => void;
 }
 
 export const RecipeStepCellWrapper = styled.div`
@@ -44,6 +50,7 @@ export const RecipeStepsTableContainer: StyledComponent<typeof TableContainer, {
 )`
   &&& {
     width: 460px;
+    border-collapse: collapse;
   }
   .MuiTableCell-root:first-child {
     width: 64px;
@@ -74,6 +81,11 @@ export const RecipeStepsTableContainer: StyledComponent<typeof TableContainer, {
       }
     }
   }
+  .MuiTableHead-root {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
 `;
 
 export const getTableBodyCell = ({ value }: { value: string }) => () => (
@@ -103,14 +115,43 @@ const RecipeStepsColumnCell = ({ BodyCell, prefix, handleClick }: IRecipeStepsCo
   </RecipeStepCellWrapper>
 );
 
-export default function RecipeStepsTable({ recipeSteps, Container }: IRecipeStepsTableProps) {
+export default function RecipeStepsTable({
+  recipeSteps,
+  Container,
+  setSnackbar,
+}: IRecipeStepsTableProps) {
+  const directives = useSelector((state) => state.dataprep.directives);
+
   const rows: IRow[] = recipeSteps.map((recipeStep: string, index: number) => ({
     serialNumber: String(index + 1).padStart(2, '0'),
     recipeStep,
   }));
 
   const handleDeleteIconClick = (row: IRow) => {
-    // do nothing
+    const matchingIndex = directives.findIndex((directive) => row.recipeStep === directive);
+    const newDirectives = directives.slice(0, matchingIndex);
+
+    execute(newDirectives, true).subscribe(
+      () => {
+        setSnackbar({
+          open: true,
+          isSuccess: true,
+          message: T.translate(`${PREFIX}.deleteDirectiveSuccess`, {
+            recipeStep: row.recipeStep,
+          }).toString(),
+        });
+      },
+      (err) => {
+        // Should not ever come to this.. this is only if backend fails somehow
+        setSnackbar({
+          open: true,
+          isSuccess: false,
+          message: T.translate(`${PREFIX}.deleteDirectiveFailure`, {
+            recipeStep: row.recipeStep,
+          }).toString(),
+        });
+      }
+    );
   };
 
   const getRecipeStepCell = ({ value, row }: { value: string; row: IRow }) => () => {

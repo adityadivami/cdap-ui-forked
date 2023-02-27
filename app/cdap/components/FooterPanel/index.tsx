@@ -14,23 +14,26 @@
  * the License.
  */
 
+import React from 'react';
+
 import { IconButton } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ZoomInIcon from '@material-ui/icons/ZoomIn';
+import T from 'i18n-react';
+import { useSelector } from 'react-redux';
+
 import CustomTooltip from 'components/ConnectionList/Components/CustomTooltip';
 import {
   ColumnViewBox,
+  ContainedLabel,
   DirectivesBox,
   Label,
   LargeBox,
-  OutlinedLabel,
-  ReciepeStepsBox,
+  ReciepeStepsButton,
   TabsWrapper,
   TransformatedIconButton,
   ZoomBox,
 } from 'components/FooterPanel/styles';
-import T from 'i18n-react';
-import React from 'react';
 
 export const PREFIX = 'features.WranglerNewUI.FooterPanel.labels';
 
@@ -59,8 +62,8 @@ interface IGridMetaInfo {
 }
 
 interface IFooterPanelProps {
-  recipeStepsCount: number;
   gridMetaInfo: IGridMetaInfo;
+  onRecipeStepsButtonClick: () => void;
 }
 
 export interface ITableMetaInfoTabProps {
@@ -72,8 +75,10 @@ export interface IRecipeStepsTabProps {
   recipeStepsCount: number;
 }
 
-export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
+export default function FooterPanel({ gridMetaInfo, onRecipeStepsButtonClick }: IFooterPanelProps) {
   const { rowCount, columnCount } = gridMetaInfo;
+
+  const directives = useSelector((state) => state.dataprep.directives);
 
   return (
     <TabsWrapper data-testid="footer-panel-wrapper">
@@ -101,14 +106,18 @@ export default function({ recipeStepsCount, gridMetaInfo }: IFooterPanelProps) {
           <>{`${T.translate(`${PREFIX}.directives`)}`}</>
         </Label>
       </DirectivesBox>
-      <ReciepeStepsBox data-testid="footer-panel-recipe-steps-tab">
+      <ReciepeStepsButton
+        data-testid="footer-panel-recipe-steps-tab-button"
+        onClick={onRecipeStepsButtonClick}
+        disableRipple
+      >
         <Label data-testid="footerpanel-simple-label">
-          <>{`${T.translate(`${PREFIX}.recipeSteps`)}`}</>
+          {`${T.translate(`${PREFIX}.recipeSteps`)}`}
         </Label>
-        <OutlinedLabel data-testid="footerpanel-outlined-label">
-          <>{recipeStepsCount}</>
-        </OutlinedLabel>
-      </ReciepeStepsBox>
+        <ContainedLabel data-testid="footerpanel-outlined-label">
+          {directives.length}
+        </ContainedLabel>
+      </ReciepeStepsButton>
     </TabsWrapper>
   );
 }
