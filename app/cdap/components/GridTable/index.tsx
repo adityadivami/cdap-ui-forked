@@ -191,6 +191,8 @@ export default function GridTable({
   const checkAllColumnsHasSameType = (dataTypeList) =>
     dataTypeList.every((eachDataType) => eachDataType === dataTypeList[0]);
 
+    console.log("console added for commit test")
+
   return (
     <>
       {showBreadCrumb && (
