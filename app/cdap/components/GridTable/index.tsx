@@ -50,7 +50,7 @@ const GridTableWrapper = styled(Box)`
 const transformationOptions = ['undo', 'redo'];
 
 export default function GridTable({
-  handleShouldApplyTransformation,
+  handleFunctionColumnState,
   storeData,
   setSelectedColumn,
   selectedColumn,
@@ -170,11 +170,11 @@ export default function GridTable({
 
   const handleColumnSelect = (columnName) => {
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
-    handleShouldApplyTransformation('column', columnName);
+    handleFunctionColumnState('column', columnName);
   };
 
   const onMenuOptionSelection = (option: IMenuItem | string, supportedDataType: string[]) => {
-    handleShouldApplyTransformation('function', { option, supportedDataType });
+    handleFunctionColumnState('function', { option, supportedDataType });
   };
 
   const tableMetaInfo = {

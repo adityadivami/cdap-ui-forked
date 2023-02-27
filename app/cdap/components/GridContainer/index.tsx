@@ -29,13 +29,18 @@ const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string | 
 };
 
 function GridContainerComponent({ storeData }) {
-  const [selectedColumn, setSelectedColumn] = useState('');
-  const [transformationPayload, setTransformationPayload] = useState<
-    Record<string, string | boolean>
-  >({
-    function: false,
-    column: false,
+  const [selectedFunction, setSelectedFunction] = useState({
+    option: {
+      getUsage({}) {
+        return '';
+      },
+      label: '',
+      supportedDataType: [''],
+      value: '',
+    },
+    supportedType: [''],
   });
+  const [selectedColumn, setSelectedColumn] = useState(false);
 
   const [snackbarState, setSnackbar] = useSnackbar();
 
@@ -49,29 +54,29 @@ function GridContainerComponent({ storeData }) {
     }
   }, [snackbarState.open]);
 
-  // whether i should apply transformation now or should pass data to add transformation step
-  const handleShouldApplyTransformation = (valueToUpdate: string, newValue) => {
-    // valueToUpdate; // 'function', 'column'
-
-    setTransformationPayload((prev) => ({
-      function: valueToUpdate === 'function' ? newValue : prev.function,
-      column: valueToUpdate === 'column' ? newValue : prev.column,
-    }));
-
-    // check if both function and column are selected
-    if (
-      (valueToUpdate == 'function' && transformationPayload.column) ||
-      (valueToUpdate == 'column' && transformationPayload.function)
-    ) {
-      // if yes, then do applyDirective
-      const directive = getDirective(newValue.option, transformationPayload.column);
-      // addDirectives()
+  /*
+   * In this useEffect we are handling apply transformation based on conditions
+   * whether to apply transformation directly without add transformation panel open
+   * or should pass data to add transformation step panel
+   */
+  useEffect(() => {
+    // checks if both function and column are selected
+    if (selectedColumn && selectedFunction) {
+      // If yes, then applyDirective
+      const directive = getDirective(selectedFunction.option, selectedColumn);
       execute([directive]).subscribe(
         () => {
-          setSelectedColumn('');
-          setTransformationPayload({
-            function: false,
-            column: false,
+          setSelectedColumn(false);
+          setSelectedFunction({
+            option: {
+              getUsage({}) {
+                return '';
+              },
+              label: '',
+              supportedDataType: [''],
+              value: '',
+            },
+            supportedType: [''],
           });
           setSnackbar({
             open: true,
@@ -88,14 +93,34 @@ function GridContainerComponent({ storeData }) {
           });
         }
       );
+    } else {
+      // If no then open add transformation panel open
     }
-    // if no then return, do nothing
+  }, [selectedFunction, selectedColumn]);
+
+  const handleFunctionColumnState = (valueToUpdate: string, newValue) => {
+    if (valueToUpdate === 'function') {
+      setSelectedFunction(newValue);
+    } else if (valueToUpdate === 'column') {
+      setSelectedFunction({
+        option: {
+          getUsage({}) {
+            return '';
+          },
+          label: '',
+          supportedDataType: [''],
+          value: '',
+        },
+        supportedType: [''],
+      });
+      setSelectedColumn(newValue);
+    }
   };
 
   return (
     <Provider store={DataPrepStore}>
       <GridTable
-        handleShouldApplyTransformation={handleShouldApplyTransformation}
+        handleFunctionColumnState={handleFunctionColumnState}
         storeData={storeData}
         setSelectedColumn={setSelectedColumn}
         selectedColumn={selectedColumn}
