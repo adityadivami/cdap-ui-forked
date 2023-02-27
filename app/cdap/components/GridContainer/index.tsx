@@ -18,7 +18,6 @@ import React, { useState, useEffect } from 'react';
 import { connect, Provider } from 'react-redux';
 import DataPrepStore from 'components/DataPrep/store';
 import { execute } from 'components/DataPrep/store/DataPrepActionCreator';
-import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import GridTable from 'components/GridTable';
 import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 import Snackbar from 'components/Snackbar';
@@ -62,7 +61,7 @@ function GridContainerComponent({ storeData }) {
   useEffect(() => {
     // checks if both function and column are selected
     if (selectedColumn && selectedFunction) {
-      // If yes, then applyDirective
+      // If both function and column are selected, then apply transformation
       const directive = getDirective(selectedFunction.option, selectedColumn);
       execute([directive]).subscribe(
         () => {
@@ -85,34 +84,23 @@ function GridContainerComponent({ storeData }) {
           });
         },
         (error) => {
-          DataPrepStore.dispatch({
-            type: DataPrepActions.setError,
-            payload: {
-              message: error.message || error.response.message,
-            },
+          setSnackbar({
+            open: true,
+            isSuccess: false,
+            message: error.message || error.response.message,
           });
         }
       );
     } else {
-      // If no then open add transformation panel open
+      // If selectedColumn is not selected then open add transformation panel and apply transformation
     }
   }, [selectedFunction, selectedColumn]);
 
-  const handleFunctionColumnState = (valueToUpdate: string, newValue) => {
+  const handleSelectedFunctionColumnState = (valueToUpdate: string, newValue) => {
     if (valueToUpdate === 'function') {
       setSelectedFunction(newValue);
     } else if (valueToUpdate === 'column') {
-      setSelectedFunction({
-        option: {
-          getUsage({}) {
-            return '';
-          },
-          label: '',
-          supportedDataType: [''],
-          value: '',
-        },
-        supportedType: [''],
-      });
+      setSelectedFunction(null);
       setSelectedColumn(newValue);
     }
   };
@@ -120,7 +108,7 @@ function GridContainerComponent({ storeData }) {
   return (
     <Provider store={DataPrepStore}>
       <GridTable
-        handleFunctionColumnState={handleFunctionColumnState}
+        handleSelectedFunctionColumnState={handleSelectedFunctionColumnState}
         storeData={storeData}
         setSelectedColumn={setSelectedColumn}
         selectedColumn={selectedColumn}
