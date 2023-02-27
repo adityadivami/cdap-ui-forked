@@ -23,7 +23,7 @@ import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent'
 import Snackbar from 'components/Snackbar';
 import useSnackbar from 'components/Snackbar/useSnackbar';
 
-const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string | boolean) => {
+const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string) => {
   return selectedFunction.getUsage({ selectedColumnName, selectedFunction });
 };
 
@@ -39,7 +39,7 @@ function GridContainerComponent({ storeData }) {
     },
     supportedType: [''],
   });
-  const [selectedColumn, setSelectedColumn] = useState(false);
+  const [selectedColumn, setSelectedColumn] = useState('');
 
   const [snackbarState, setSnackbar] = useSnackbar();
 
@@ -59,24 +59,13 @@ function GridContainerComponent({ storeData }) {
    * or should pass data to add transformation step panel
    */
   useEffect(() => {
-    // checks if both function and column are selected
     if (selectedColumn && selectedFunction) {
       // If both function and column are selected, then apply transformation
       const directive = getDirective(selectedFunction.option, selectedColumn);
       execute([directive]).subscribe(
         () => {
-          setSelectedColumn(false);
-          setSelectedFunction({
-            option: {
-              getUsage({}) {
-                return '';
-              },
-              label: '',
-              supportedDataType: [''],
-              value: '',
-            },
-            supportedType: [''],
-          });
+          setSelectedColumn('');
+          setSelectedFunction(null);
           setSnackbar({
             open: true,
             isSuccess: true,
