@@ -15,7 +15,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import DataPrepStore from 'components/DataPrep/store';
 import { execute } from 'components/DataPrep/store/DataPrepActionCreator';
 import GridTable from 'components/GridTable';
@@ -27,7 +27,7 @@ const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string) =
   return selectedFunction.getUsage({ selectedColumnName, selectedFunction });
 };
 
-function GridContainerComponent({ storeData }) {
+const GridContainerComponent = () => {
   const [selectedFunction, setSelectedFunction] = useState({
     option: {
       getUsage: ({}) => '',
@@ -88,9 +88,8 @@ function GridContainerComponent({ storeData }) {
   }, [selectedFunction, selectedColumn]);
 
   return (
-    <Provider store={DataPrepStore}>
+    <>
       <GridTable
-        storeData={storeData}
         setSelectedColumn={setSelectedColumn}
         selectedColumn={selectedColumn}
         setSelectedFunction={setSelectedFunction}
@@ -108,16 +107,14 @@ function GridContainerComponent({ storeData }) {
           isSuccess={snackbarState.isSuccess}
         />
       }
-    </Provider>
+    </>
   );
-}
-
-const ConnectedGridContainer = connect((state) => ({ storeData: state }))(GridContainerComponent);
+};
 
 export default function GridContainer() {
   return (
     <Provider store={DataPrepStore}>
-      <ConnectedGridContainer />
+      <GridContainerComponent />
     </Provider>
   );
 }

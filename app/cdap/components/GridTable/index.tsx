@@ -16,6 +16,7 @@
 
 import React, { useEffect, useState } from 'react';
 import T from 'i18n-react';
+import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import styled from 'styled-components';
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
@@ -34,7 +35,6 @@ import LoadingSVG from 'components/shared/LoadingSVG';
 import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
 import { FlexWrapper } from 'components/WranglerGrid/SelectColumnPanel/styles';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
-import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 
 export const TableWrapper = styled(Box)`
   width: 100%;
@@ -50,13 +50,12 @@ const GridTableWrapper = styled(Box)`
 const transformationOptions = ['undo', 'redo'];
 
 export default function GridTable({
-  storeData,
   setSelectedColumn,
   selectedColumn,
   setSnackbar,
   setSelectedFunction,
 }) {
-  const { dataprep, columnsInformation } = storeData;
+  const { dataprep, columnsInformation } = useSelector((state) => state);
   const { wid } = useParams() as IRecords;
   const classes = useStyles();
   const location = useLocation();
