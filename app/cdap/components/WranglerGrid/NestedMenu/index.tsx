@@ -129,7 +129,7 @@ export default function({
               item={eachOption}
               columnType={columnType?.toLowerCase()}
               index={optionsIndex}
-              onMenuOptionClick={(onClickEvent, clickedItem) => {
+              onMenuItemClick={(onClickEvent, clickedItem) => {
                 handleMenuClick(onClickEvent, clickedItem, 'parentMenu');
               }}
               allColumnsType={allColumnsType}
@@ -145,7 +145,7 @@ export default function({
                 menuOptions={eachOption}
                 setAnchorElement={setAnchorElement}
                 setMenuComponentOptions={setMenuComponentOptions}
-                onMenuOptionClick={(onClickEvent, clickedItem) => {
+                onMenuItemClick={(onClickEvent, clickedItem) => {
                   onClickEvent.preventDefault();
                   onClickEvent.stopPropagation();
                   handleMenuClick(onClickEvent, clickedItem);

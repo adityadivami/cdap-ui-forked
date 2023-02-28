@@ -51,7 +51,7 @@ export interface IGetUsageParams {
 export interface IMenuItemComponentProps {
   item: IMenuItem;
   index: number;
-  onMenuOptionClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
+  onMenuItemClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
   allColumnsType: string | boolean;
 }
@@ -59,7 +59,7 @@ export interface IMenuItemComponentProps {
 export default function({
   item,
   index,
-  onMenuOptionClick,
+  onMenuItemClick,
   columnType,
   allColumnsType,
 }: IMenuItemComponentProps) {
@@ -102,7 +102,7 @@ export default function({
         key={index}
         disabled={menuItemDisableProp as boolean}
         title={item.label}
-        onClick={(onClickEvent) => onMenuOptionClick(onClickEvent, item)}
+        onClick={(onClickEvent) => onMenuItemClick(onClickEvent, item)}
         data-testid={`menu-item-${item.value}`}
       >
         <NormalFont component="div">{item.label}</NormalFont>
