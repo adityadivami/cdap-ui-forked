@@ -40,28 +40,47 @@ export interface IMenuItem {
   icon?: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>;
   toolName?: string;
   open?: boolean;
+  getUsage?: ({ selectedColumnName, selectedFunction }: IGetUsageParams) => string;
+}
+
+export interface IGetUsageParams {
+  selectedColumnName: string | boolean;
+  selectedFunction: IMenuItem;
 }
 
 export interface IMenuItemComponentProps {
   item: IMenuItem;
   index: number;
-  onMenuClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
+  onMenuItemClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
+  allColumnsType: string | boolean;
 }
 
-export default function({ item, index, onMenuClick, columnType }: IMenuItemComponentProps) {
+export default function({
+  item,
+  index,
+  onMenuItemClick,
+  columnType,
+  allColumnsType,
+}: IMenuItemComponentProps) {
   const includesCheck = !(
     item?.supportedDataType?.includes(columnType) || item?.supportedDataType?.includes('all')
   );
   const filteredDataOptionCheck = DATATYPE_OPTIONS.filter(
     (el) =>
-      (el.value === item.value && item.value === columnType.toLowerCase()) ||
-      (item.value === 'integer' && columnType.toLowerCase() === 'int')
+      (el.value === item.value && item.value === columnType?.toLowerCase()) ||
+      (item.value === 'integer' && columnType?.toLowerCase() === 'int')
   ).length;
 
   const getMenuItemDisablProp = () => {
     if (columnType) {
       return includesCheck || filteredDataOptionCheck;
+    }
+    if (typeof allColumnsType === 'boolean') {
+      return false;
+    }
+    if (allColumnsType.toLowerCase() === item.label) {
+      return true;
     }
     return false;
   };
@@ -83,7 +102,7 @@ export default function({ item, index, onMenuClick, columnType }: IMenuItemCompo
         key={index}
         disabled={menuItemDisableProp as boolean}
         title={item.label}
-        onClick={(onClickEvent) => onMenuClick(onClickEvent, item)}
+        onClick={(onClickEvent) => onMenuItemClick(onClickEvent, item)}
         data-testid={`menu-item-${item.value}`}
       >
         <NormalFont component="div">{item.label}</NormalFont>

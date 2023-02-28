@@ -53,10 +53,11 @@ const StyledIconButton = styled(IconButton)`
 
 export default function({
   columnType,
-  submitMenuOption,
+  onMenuItemClick,
   setShowBreadCrumb,
   showBreadCrumb,
   disableToolbarIcon,
+  allColumnsType,
 }: ITransformationToolBarProps) {
   const [showName, setShowName] = useState<boolean>(false);
   const [anchorElement, setAnchorElement] = useState<HTMLElement[]>(null);
@@ -97,7 +98,7 @@ export default function({
                         setSelectedMenuOptions(eachOption.options);
                         setAnchorElement([clickEvent.currentTarget]);
                       } else {
-                        submitMenuOption(eachOption.action, eachOption.dataType);
+                        onMenuItemClick(eachOption.action, eachOption.dataType);
                       }
                     }}
                     data-testid="toolbar-icon-button"
@@ -114,11 +115,12 @@ export default function({
                   <NestedMenu
                     menuOptions={selectedMenuOptions}
                     columnType={columnType}
-                    submitMenuOption={submitMenuOption}
+                    onMenuItemClick={onMenuItemClick}
                     title={eachOption.title}
                     setAnchorElement={setAnchorElement}
                     anchorElement={anchorElement}
                     menuToggleHandler={toggleMenu}
+                    allColumnsType={allColumnsType}
                   />
                 )}
                 {showName && (

@@ -15,11 +15,13 @@
  */
 
 import { Dispatch, SetStateAction } from 'react';
+import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
 
 export interface ITransformationToolBarProps {
   columnType: string;
-  submitMenuOption: (value: string, dataType: string[]) => void;
+  onMenuItemClick: (value: IMenuItem | string, dataType: string[]) => void;
   setShowBreadCrumb: Dispatch<SetStateAction<boolean>>;
   showBreadCrumb: boolean;
   disableToolbarIcon: boolean;
+  allColumnsType?: string | boolean;
 }
