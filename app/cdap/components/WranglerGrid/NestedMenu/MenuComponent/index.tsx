@@ -23,18 +23,20 @@ interface IMenuComponentProps {
   anchorElement: Element;
   menuOptions: IMenuItem[];
   setAnchorElement: Dispatch<SetStateAction<Element[]>>;
-  submitOption: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
+  onMenuItemClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
   setMenuComponentOptions: Dispatch<SetStateAction<IMenuItem[][]>>;
+  allColumnsType: string | boolean;
 }
 
 export default function({
   anchorElement,
   menuOptions,
   setAnchorElement,
-  submitOption,
+  onMenuItemClick,
   columnType,
   setMenuComponentOptions,
+  allColumnsType,
 }: IMenuComponentProps) {
   return (
     <StyledMenuComponent
@@ -63,7 +65,8 @@ export default function({
           columnType={columnType}
           item={eachOption}
           index={optionsIndex}
-          onMenuClick={submitOption}
+          onMenuItemClick={onMenuItemClick}
+          allColumnsType={allColumnsType}
         />
       ))}
     </StyledMenuComponent>

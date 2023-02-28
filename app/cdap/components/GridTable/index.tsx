@@ -32,8 +32,6 @@ import { IAddTransformationItem, IGeneralStatistics, IRecords } from 'components
 import { getWrangleGridBreadcrumbOptions } from 'components/GridTable/utils';
 import NoRecordScreen from 'components/NoRecordScreen';
 import LoadingSVG from 'components/shared/LoadingSVG';
-import Snackbar from 'components/Snackbar';
-import useSnackbar from 'components/Snackbar/useSnackbar';
 import SelectColumnPanel from 'components/WranglerGrid/SelectColumnPanel';
 import { FlexWrapper } from 'components/WranglerGrid/SelectColumnPanel/styles';
 import ToolBarList from 'components/WranglerGrid/TransformationToolbar';
@@ -51,7 +49,12 @@ const GridTableWrapper = styled(Box)`
 `;
 const transformationOptions = ['undo', 'redo'];
 
-export default function GridTable({ handleTransformationUpload }) {
+export default function GridTable({
+  setSelectedColumn,
+  selectedColumn,
+  setSnackbar,
+  setSelectedFunction,
+}) {
   const { dataprep, columnsInformation } = useSelector((state) => state);
   const { wid } = useParams() as IRecords;
   const classes = useStyles();
@@ -63,8 +66,6 @@ export default function GridTable({ handleTransformationUpload }) {
     option: '',
     supportedDataType: [],
   });
-  const [snackbarState, setSnackbar] = useSnackbar();
-  const [selectedColumn, setSelectedColumn] = useState('');
 
   useEffect(() => {
     // Get DATA from URL paramteres to get data of workspace
@@ -167,27 +168,32 @@ export default function GridTable({ handleTransformationUpload }) {
   };
 
   const handleColumnSelect = (columnName) => {
+    setSelectedFunction(null);
     setSelectedColumn((prevColumn) => (prevColumn === columnName ? '' : columnName));
-    handleTransformationUpload('column', columnName);
   };
-
-  const onMenuOptionSelection = (option: string, supportedDataType: string[]) => {
-    handleTransformationUpload('function', { option, supportedDataType });
-  };
-
-  useEffect(() => {
-    if (snackbarState.open) {
-      setTimeout(() => {
-        setSnackbar(() => ({
-          open: false,
-        }));
-      }, 5000);
-    }
-  }, [snackbarState.open]);
 
   const tableMetaInfo = {
     columnCount: dataprep.headers.length,
     rowCount: dataprep.data.length,
+  };
+
+  const handleMenuItemClick = (option, datatype) => {
+    let value;
+    if (typeof option === 'string') {
+      value = option;
+    } else {
+      value = option.value;
+    }
+    !transformationOptions.includes(value) && setSelectedFunction({ option, datatype });
+  };
+
+  const getAllColumnsType = (dataTypeList) => {
+    const hasSameType = dataTypeList.every((eachDataType) => eachDataType === dataTypeList[0]);
+    if (hasSameType) {
+      return Object.values(dataprep.types)[0] as string;
+    } else {
+      return false;
+    }
   };
 
   return (
@@ -204,9 +210,8 @@ export default function GridTable({ handleTransformationUpload }) {
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
         columnType={dataprep.types[selectedColumn]}
-        submitMenuOption={(option, datatype) =>
-          !transformationOptions.includes(option) ? onMenuOptionSelection(option, datatype) : null
-        }
+        allColumnsType={getAllColumnsType(Object.values(dataprep.types))}
+        onMenuItemClick={handleMenuItemClick}
         disableToolbarIcon={!Boolean(dataprep?.headers?.length)}
       />
       <GridTableWrapper data-testid="grid-table-container">
@@ -282,18 +287,6 @@ export default function GridTable({ handleTransformationUpload }) {
           </div>
         )}
       </GridTableWrapper>
-      {
-        <Snackbar
-          handleClose={() =>
-            setSnackbar(() => ({
-              open: false,
-            }))
-          }
-          open={snackbarState.open}
-          message={snackbarState.message}
-          isSuccess={snackbarState.isSuccess}
-        />
-      }
     </>
   );
 }

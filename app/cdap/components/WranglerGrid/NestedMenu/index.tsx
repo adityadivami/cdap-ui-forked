@@ -22,7 +22,7 @@ import { NestedMenuComponent } from 'components/WranglerV2/MenuContainer';
 
 import { Dispatch, SetStateAction } from 'react';
 export interface INestedMenuProps {
-  submitMenuOption: (value: string, dataType: string[]) => void;
+  onMenuItemClick: (value: IMenuItem | string, dataType: string[]) => void;
   columnType: string;
   menuOptions: IMenuItem[];
   title: string;
@@ -30,16 +30,18 @@ export interface INestedMenuProps {
   setAnchorElement: Dispatch<SetStateAction<Element[]>>;
   open?: boolean;
   menuToggleHandler?: (title?: string) => void;
+  allColumnsType: string | boolean;
 }
 
 export default function({
   menuOptions,
-  submitMenuOption,
+  onMenuItemClick,
   columnType,
   title,
   anchorElement,
   setAnchorElement,
   menuToggleHandler,
+  allColumnsType,
 }: INestedMenuProps) {
   const [menuComponentOptions, setMenuComponentOptions] = useState<IMenuItem[][]>([]);
 
@@ -50,6 +52,9 @@ export default function({
   ) => {
     event.preventDefault();
     event.stopPropagation();
+    menuItem?.options?.map((i) => {
+      return (i.getUsage = menuItem.getUsage);
+    });
     if (origin === 'parentMenu') {
       // When icon is clicked from toolbar the list appears is parent menu
       if (menuItem.hasOwnProperty('options') && menuItem?.options?.length > 0) {
@@ -57,7 +62,7 @@ export default function({
         setAnchorElement((prev) => anchorElement);
         setMenuComponentOptions([menuItem?.options]);
       } else {
-        submitMenuOption(menuItem.value, menuItem.supportedDataType); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality
+        onMenuItemClick(menuItem, menuItem.supportedDataType); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality
         setAnchorElement(null);
         menuToggleHandler(title);
       }
@@ -95,7 +100,7 @@ export default function({
           );
         }
       } else {
-        submitMenuOption(menuItem.value, menuItem.supportedDataType);
+        onMenuItemClick(menuItem, menuItem.supportedDataType);
         setAnchorElement(null);
         menuToggleHandler(title);
       }
@@ -122,11 +127,12 @@ export default function({
           return (
             <MenuItemComponent
               item={eachOption}
-              columnType={columnType.toLowerCase()}
+              columnType={columnType?.toLowerCase()}
               index={optionsIndex}
-              onMenuClick={(onClickEvent, clickedItem) =>
-                handleMenuClick(onClickEvent, clickedItem, 'parentMenu')
-              }
+              onMenuItemClick={(onClickEvent, clickedItem) => {
+                handleMenuClick(onClickEvent, clickedItem, 'parentMenu');
+              }}
+              allColumnsType={allColumnsType}
             />
           );
         })}
@@ -135,15 +141,16 @@ export default function({
             return (
               <MenuComponent
                 anchorElement={anchorElement?.length > 1 ? anchorElement[optionsIndex + 1] : null}
-                columnType={columnType.toLowerCase()}
+                columnType={columnType?.toLowerCase()}
                 menuOptions={eachOption}
                 setAnchorElement={setAnchorElement}
                 setMenuComponentOptions={setMenuComponentOptions}
-                submitOption={(onClickEvent, clickedItem) => {
+                onMenuItemClick={(onClickEvent, clickedItem) => {
                   onClickEvent.preventDefault();
                   onClickEvent.stopPropagation();
                   handleMenuClick(onClickEvent, clickedItem);
                 }}
+                allColumnsType={allColumnsType}
               />
             );
           })}

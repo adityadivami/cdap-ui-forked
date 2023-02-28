@@ -14,60 +14,101 @@
  * the License.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import DataPrepStore from 'components/DataPrep/store';
 import { execute } from 'components/DataPrep/store/DataPrepActionCreator';
-import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import GridTable from 'components/GridTable';
-import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
+import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent';
+import Snackbar from 'components/Snackbar';
+import useSnackbar from 'components/Snackbar/useSnackbar';
+
+const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string) => {
+  return selectedFunction.getUsage({ selectedColumnName, selectedFunction });
+};
 
 const GridContainerComponent = () => {
-  const [transformationPayload, setTransformationPayload] = useState<
-    Record<string, string | boolean>
-  >({
-    function: false,
-    column: false,
-  }); // whether i should apply transformation now or should pass data to add transformation step
+  const [selectedFunction, setSelectedFunction] = useState({
+    option: {
+      getUsage: ({}) => '',
+      label: '',
+      supportedDataType: [''],
+      value: '',
+    },
+    supportedType: [''],
+  });
+  const [selectedColumn, setSelectedColumn] = useState('');
 
-  const handleTransformationUpload = (valueToUpdate: string, newValue) => {
-    // valueToUpdate; // 'function', 'column'
+  const [snackbarState, setSnackbar] = useSnackbar();
 
-    setTransformationPayload((prev) => ({
-      function: valueToUpdate === 'function' ? newValue : prev.function,
-      column: valueToUpdate === 'column' ? newValue : prev.column,
-    }));
+  useEffect(() => {
+    if (snackbarState.open) {
+      setTimeout(() => {
+        setSnackbar(() => ({
+          open: false,
+        }));
+      }, 5000);
+    }
+  }, [snackbarState.open]);
 
-    // check if both function and column are selected
-    if (
-      (valueToUpdate == 'function' && transformationPayload.column) ||
-      (valueToUpdate == 'column' && transformationPayload.function)
-    ) {
-      // if yes, then do applyDirective
-      const directive = getDirective(newValue.option, transformationPayload.column);
-      // addDirectives()
+  /*
+   * In the useEffect we are handling 2 cases
+   * 1. If extra input is not required for the selected transformation, and if the column is selected,
+   * then we will directly apply the transformation on the grid data
+   * 2. If the extra input is needed, then we will open the add transformation step panel
+   * where we can continue further steps to apply the transformation
+   */
+
+  useEffect(() => {
+    if (selectedColumn && selectedFunction) {
+      const directive = getDirective(selectedFunction.option, selectedColumn);
       execute([directive]).subscribe(
-        () => {},
+        () => {
+          setSelectedColumn('');
+          setSelectedFunction(null);
+          setSnackbar({
+            open: true,
+            isSuccess: true,
+            message: 'Transformation Successfully Applied',
+          });
+        },
         (error) => {
-          DataPrepStore.dispatch({
-            type: DataPrepActions.setError,
-            payload: {
-              message: error.message || error.response.message,
-            },
+          setSnackbar({
+            open: true,
+            isSuccess: false,
+            message: error.message || error.response.message,
           });
         }
       );
     }
-    // if no then return, do nothing
-  };
+    /*
+     * TODO: If selected function need any additional input then open add transformation panel
+     * where we can continue further steps to apply the transformation
+     */
+  }, [selectedFunction, selectedColumn]);
 
-  const getDirective = (functionName: string, selectedColumnName: string | boolean) => {
-    if (DATATYPE_OPTIONS.some((eachOption) => eachOption.value === functionName)) {
-      return `set-type :${selectedColumnName} ${functionName}`;
-    }
-  };
-
-  return <GridTable handleTransformationUpload={handleTransformationUpload} />;
+  return (
+    <>
+      <GridTable
+        setSelectedColumn={setSelectedColumn}
+        selectedColumn={selectedColumn}
+        setSelectedFunction={setSelectedFunction}
+        setSnackbar={setSnackbar}
+      />
+      {
+        <Snackbar
+          handleClose={() =>
+            setSnackbar(() => ({
+              open: false,
+            }))
+          }
+          open={snackbarState.open}
+          message={snackbarState.message}
+          isSuccess={snackbarState.isSuccess}
+        />
+      }
+    </>
+  );
 };
 
 export default function GridContainer() {
