@@ -53,8 +53,7 @@ export interface IMenuItemComponentProps {
   index: number;
   onMenuOptionClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
-  hasSimilarType?: boolean;
-  allColumnsType: string;
+  allColumnsType: string | boolean;
 }
 
 export default function({
@@ -62,7 +61,6 @@ export default function({
   index,
   onMenuOptionClick,
   columnType,
-  hasSimilarType,
   allColumnsType,
 }: IMenuItemComponentProps) {
   const includesCheck = !(
@@ -78,8 +76,11 @@ export default function({
     if (columnType) {
       return includesCheck || filteredDataOptionCheck;
     }
+    if (typeof allColumnsType === 'boolean') {
+      return false;
+    }
     if (allColumnsType.toLowerCase() === item.label) {
-      return hasSimilarType;
+      return true;
     }
     return false;
   };

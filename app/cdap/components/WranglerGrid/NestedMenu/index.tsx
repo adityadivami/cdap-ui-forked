@@ -30,8 +30,7 @@ export interface INestedMenuProps {
   setAnchorElement: Dispatch<SetStateAction<Element[]>>;
   open?: boolean;
   menuToggleHandler?: (title?: string) => void;
-  hasSimilarType: boolean;
-  allColumnsType: string;
+  allColumnsType: string | boolean;
 }
 
 export default function({
@@ -42,7 +41,6 @@ export default function({
   anchorElement,
   setAnchorElement,
   menuToggleHandler,
-  hasSimilarType,
   allColumnsType,
 }: INestedMenuProps) {
   const [menuComponentOptions, setMenuComponentOptions] = useState<IMenuItem[][]>([]);
@@ -134,7 +132,6 @@ export default function({
               onMenuOptionClick={(onClickEvent, clickedItem) => {
                 handleMenuClick(onClickEvent, clickedItem, 'parentMenu');
               }}
-              hasSimilarType={hasSimilarType}
               allColumnsType={allColumnsType}
             />
           );
@@ -153,7 +150,6 @@ export default function({
                   onClickEvent.stopPropagation();
                   handleMenuClick(onClickEvent, clickedItem);
                 }}
-                hasSimilarType={hasSimilarType}
                 allColumnsType={allColumnsType}
               />
             );

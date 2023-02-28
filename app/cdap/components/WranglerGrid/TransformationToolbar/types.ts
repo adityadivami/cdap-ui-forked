@@ -23,6 +23,5 @@ export interface ITransformationToolBarProps {
   setShowBreadCrumb: Dispatch<SetStateAction<boolean>>;
   showBreadCrumb: boolean;
   disableToolbarIcon: boolean;
-  hasSimilarType: boolean;
-  allColumnsType?: string;
+  allColumnsType?: string | boolean;
 }

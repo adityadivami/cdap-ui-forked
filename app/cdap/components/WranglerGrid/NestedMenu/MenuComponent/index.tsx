@@ -26,8 +26,7 @@ interface IMenuComponentProps {
   onMenuOptionClick: (e: React.MouseEvent<Element, MouseEvent>, item: IMenuItem) => void;
   columnType: string;
   setMenuComponentOptions: Dispatch<SetStateAction<IMenuItem[][]>>;
-  hasSimilarType: boolean;
-  allColumnsType: string;
+  allColumnsType: string | boolean;
 }
 
 export default function({
@@ -37,7 +36,6 @@ export default function({
   onMenuOptionClick,
   columnType,
   setMenuComponentOptions,
-  hasSimilarType,
   allColumnsType,
 }: IMenuComponentProps) {
   return (
@@ -68,7 +66,6 @@ export default function({
           item={eachOption}
           index={optionsIndex}
           onMenuOptionClick={onMenuOptionClick}
-          hasSimilarType={hasSimilarType}
           allColumnsType={allColumnsType}
         />
       ))}

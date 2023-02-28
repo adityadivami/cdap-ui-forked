@@ -188,10 +188,14 @@ export default function GridTable({
     !transformationOptions.includes(value) && setSelectedFunction({ option, datatype });
   };
 
-  const checkAllColumnsHasSameType = (dataTypeList) =>
-    dataTypeList.every((eachDataType) => eachDataType === dataTypeList[0]);
-
-    console.log("console added for commit test")
+  const getAllColumnsType = (dataTypeList) => {
+    const hasSameType = dataTypeList.every((eachDataType) => eachDataType === dataTypeList[0]);
+    if (hasSameType) {
+      return Object.values(dataprep.types)[0] as string;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <>
@@ -207,8 +211,7 @@ export default function GridTable({
         setShowBreadCrumb={setShowBreadCrumb}
         showBreadCrumb={showBreadCrumb}
         columnType={dataprep.types[selectedColumn]}
-        hasSimilarType={checkAllColumnsHasSameType(Object.values(dataprep.types))}
-        allColumnsType={Object.values(dataprep.types)[0] as string}
+        allColumnsType={getAllColumnsType(Object.values(dataprep.types))}
         submitMenuOption={handleMenuItemClick}
         disableToolbarIcon={!Boolean(dataprep?.headers?.length)}
       />
