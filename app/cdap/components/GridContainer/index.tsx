@@ -15,14 +15,14 @@
  */
 
 import React, { useState } from 'react';
-import { connect, Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import DataPrepStore from 'components/DataPrep/store';
 import { execute } from 'components/DataPrep/store/DataPrepActionCreator';
 import DataPrepActions from 'components/DataPrep/store/DataPrepActions';
 import GridTable from 'components/GridTable';
 import { DATATYPE_OPTIONS } from 'components/WranglerGrid/NestedMenu/menuOptions/datatypeOptions';
 
-function GridContainerComponent({ storeData }) {
+const GridContainerComponent = () => {
   const [transformationPayload, setTransformationPayload] = useState<
     Record<string, string | boolean>
   >({
@@ -67,19 +67,13 @@ function GridContainerComponent({ storeData }) {
     }
   };
 
-  return (
-    <Provider store={DataPrepStore}>
-      <GridTable handleTransformationUpload={handleTransformationUpload} storeData={storeData} />
-    </Provider>
-  );
-}
-
-const ConnectedGridContainer = connect((state) => ({ storeData: state }))(GridContainerComponent);
+  return <GridTable handleTransformationUpload={handleTransformationUpload} />;
+};
 
 export default function GridContainer() {
   return (
     <Provider store={DataPrepStore}>
-      <ConnectedGridContainer />
+      <GridContainerComponent />
     </Provider>
   );
 }

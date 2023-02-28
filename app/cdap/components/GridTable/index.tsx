@@ -16,6 +16,7 @@
 
 import React, { useEffect, useState } from 'react';
 import T from 'i18n-react';
+import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import styled from 'styled-components';
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
@@ -50,8 +51,8 @@ const GridTableWrapper = styled(Box)`
 `;
 const transformationOptions = ['undo', 'redo'];
 
-export default function GridTable({ handleTransformationUpload, storeData }) {
-  const { dataprep, columnsInformation } = storeData;
+export default function GridTable({ handleTransformationUpload }) {
+  const { dataprep, columnsInformation } = useSelector((state) => state);
   const { wid } = useParams() as IRecords;
   const classes = useStyles();
   const location = useLocation();
