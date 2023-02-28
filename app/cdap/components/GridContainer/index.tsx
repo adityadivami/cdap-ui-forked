@@ -30,9 +30,7 @@ const getDirective = (selectedFunction: IMenuItem, selectedColumnName: string) =
 function GridContainerComponent({ storeData }) {
   const [selectedFunction, setSelectedFunction] = useState({
     option: {
-      getUsage({}) {
-        return '';
-      },
+      getUsage: ({}) => '',
       label: '',
       supportedDataType: [''],
       value: '',
