@@ -22,7 +22,7 @@ import { NestedMenuComponent } from 'components/WranglerV2/MenuContainer';
 
 import { Dispatch, SetStateAction } from 'react';
 export interface INestedMenuProps {
-  submitMenuOption: (value: IMenuItem | string, dataType: string[]) => void;
+  onMenuItemClick: (value: IMenuItem | string, dataType: string[]) => void;
   columnType: string;
   menuOptions: IMenuItem[];
   title: string;
@@ -35,7 +35,7 @@ export interface INestedMenuProps {
 
 export default function({
   menuOptions,
-  submitMenuOption,
+  onMenuItemClick,
   columnType,
   title,
   anchorElement,
@@ -62,7 +62,7 @@ export default function({
         setAnchorElement((prev) => anchorElement);
         setMenuComponentOptions([menuItem?.options]);
       } else {
-        submitMenuOption(menuItem, menuItem.supportedDataType); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality
+        onMenuItemClick(menuItem, menuItem.supportedDataType); // When item from parent menu list is clicked and it does not have further options then we proceed with closing menu and next functionality
         setAnchorElement(null);
         menuToggleHandler(title);
       }
@@ -100,7 +100,7 @@ export default function({
           );
         }
       } else {
-        submitMenuOption(menuItem, menuItem.supportedDataType);
+        onMenuItemClick(menuItem, menuItem.supportedDataType);
         setAnchorElement(null);
         menuToggleHandler(title);
       }

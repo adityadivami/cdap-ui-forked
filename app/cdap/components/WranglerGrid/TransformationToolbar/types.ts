@@ -19,7 +19,7 @@ import { IMenuItem } from 'components/WranglerGrid/NestedMenu/MenuItemComponent'
 
 export interface ITransformationToolBarProps {
   columnType: string;
-  submitMenuOption: (value: IMenuItem | string, dataType: string[]) => void;
+  onMenuItemClick: (value: IMenuItem | string, dataType: string[]) => void;
   setShowBreadCrumb: Dispatch<SetStateAction<boolean>>;
   showBreadCrumb: boolean;
   disableToolbarIcon: boolean;

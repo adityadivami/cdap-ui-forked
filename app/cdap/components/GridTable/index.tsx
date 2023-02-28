@@ -211,7 +211,7 @@ export default function GridTable({
         showBreadCrumb={showBreadCrumb}
         columnType={dataprep.types[selectedColumn]}
         allColumnsType={getAllColumnsType(Object.values(dataprep.types))}
-        submitMenuOption={handleMenuItemClick}
+        onMenuItemClick={handleMenuItemClick}
         disableToolbarIcon={!Boolean(dataprep?.headers?.length)}
       />
       <GridTableWrapper data-testid="grid-table-container">
