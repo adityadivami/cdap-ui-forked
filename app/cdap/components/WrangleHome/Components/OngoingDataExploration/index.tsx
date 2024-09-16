@@ -129,7 +129,7 @@ export default function OngoingDataExploration({ cardCount, fromAddress }: ICard
             }}
             style={{ textDecoration: 'none' }}
           >
-            <OngoingDataExplorationCard item={item} key={index} />
+            <OngoingDataExplorationCard item={item} key={index} fromAddress={fromAddress} />
           </Link>
         );
       })}

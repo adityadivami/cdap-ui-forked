@@ -339,7 +339,6 @@ export default function() {
             applyDirective(optionSelected, selectedColumn, value);
           }}
           callBack={(response) => {
-            setGridData(response);
             setColumnSelected('');
             setDirectiveFunction('');
           }}
