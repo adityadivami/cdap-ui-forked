@@ -1,3 +1,19 @@
+/*
+ * Copyright © 2022 Cask Data, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
 import { DIRECTIVES_MAP } from './ActionsWidget/Components/FilterAction/constants';
 
 export const prepareDirectiveForFilter = (
@@ -92,4 +108,141 @@ export const prepareDirectiveForDefineVariable = (
       break;
   }
   return directive;
+};
+
+const conditionToFnMap = {
+  ISNUMBER: 'isNumber',
+  ISINTEGER: 'isInteger',
+  ISDOUBLE: 'isDouble',
+  ISBOOLEAN: 'isBoolean',
+  ISDATE: 'isDate',
+  ISTIME: 'isTime',
+  ISDATEFORMAT: 'isDate',
+  ISIP: 'isIP',
+  ISIPV4: 'isIPv4',
+  ISIPV6: 'isIPv6',
+  ISEMAIL: 'isEmail',
+  ISURL: 'isUrl',
+  ISDOMAINNAME: 'isDomainName',
+  ISDOMAINTLD: 'isDomainTld',
+  ISGENERICTLD: 'isGenericTld',
+  ISCOUNTRYTLD: 'isCountryTld',
+  ISISBN: 'isISBN',
+  ISISBN10: 'isISBN10',
+  ISISBN13: 'isISBN13',
+  ISCREDITCARD: 'isCreditCard',
+  ISAMEXCARD: 'isAmex',
+  ISVISACARD: 'isVisa',
+  ISMASTERCARD: 'isMaster',
+  ISDINERCARD: 'isDiner',
+  ISVPAYCARD: 'isVPay',
+};
+
+const getDQFunction = (condition) => {
+  const c = condition.replace('NOT', '');
+  return conditionToFnMap[c];
+};
+
+const dqFunctions = Object.keys(conditionToFnMap).reduce((prev, curr) => {
+  const condition = curr.replace(/IS|ISNOT/, '');
+  return [...prev, `IS${condition}`, `ISNOT${condition}`];
+}, []);
+
+export const prepareDirectiveForSendToError = (
+  selectedColumn,
+  textValue,
+  ignoreCase,
+  filterAction
+) => {
+  const directive = 'send-to-error';
+  const column = selectedColumn;
+  let equalityOperator = '==';
+  let finalExpression;
+  let condition;
+
+  switch (filterAction) {
+    case 'EMPTY':
+      finalExpression = `${directive} empty(${column})`;
+      break;
+
+    case 'TEXTCONTAINS':
+      if (textValue === '') {
+        // if we get no textValue
+        return '';
+      }
+
+      if (ignoreCase) {
+        textValue = `(?i).*${textValue}`;
+      } else {
+        textValue = `.*${textValue}`;
+      }
+      finalExpression = `${directive} ${column} =~ "${textValue}.*"`;
+      break;
+
+    case 'TEXTSTARTSWITH':
+      if (textValue === '') {
+        return '';
+      }
+      equalityOperator = '=^';
+      if (ignoreCase) {
+        textValue = `(?i)^${textValue}.*`;
+        equalityOperator = '=~';
+      }
+      finalExpression = `${directive} ${column} ${equalityOperator} "${textValue}"`;
+      break;
+
+    case 'TEXTENDSWITH':
+      if (textValue === '') {
+        return '';
+      }
+      equalityOperator = '=$';
+      if (ignoreCase) {
+        textValue = `(?i).*${textValue}$`;
+        equalityOperator = '=~';
+      }
+      finalExpression = `${directive} ${column} ${equalityOperator} "${textValue}"`;
+      break;
+    case 'TEXTEXACTLY':
+      if (textValue === '') {
+        return '';
+      }
+      if (ignoreCase) {
+        textValue = `(?i)${textValue}`;
+        equalityOperator = `=~`;
+      }
+      finalExpression = `${directive} ${column} ${equalityOperator} "${textValue}"`;
+      break;
+    case 'TEXTREGEX':
+      if (textValue === '') {
+        return '';
+      }
+      finalExpression = `${directive} ${column} =~ "${textValue}"`;
+      break;
+
+    case 'CUSTOMCONDITION':
+      if (textValue === '') {
+        return '';
+      }
+      finalExpression = `${directive} ${textValue}`;
+      break;
+    case 'ISDATEFORMAT':
+    case 'ISNOTDATEFORMAT':
+      condition = `dq:${getDQFunction(filterAction)}(${column})`;
+      if (filterAction.indexOf('NOT') !== -1) {
+        condition = `!${condition}`;
+      }
+      finalExpression = `${directive} ${condition}`;
+      break;
+    default:
+      if (dqFunctions.indexOf(filterAction) !== -1) {
+        condition = `dq:${getDQFunction(filterAction)}(${column})`;
+        if (filterAction.indexOf('NOT') !== -1) {
+          condition = `!${condition}`;
+        }
+        finalExpression = `${directive} ${condition}`;
+      }
+      break;
+  }
+
+  return finalExpression;
 };
